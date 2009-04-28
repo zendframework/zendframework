@@ -60,7 +60,7 @@ require_once 'Zend/View.php';
  * $viewHelper->setNoController(true);
  *
  * // Specify a different script to render:
- * $this->_helper->view('form');
+ * $this->_helper->viewRenderer('form');
  *
  * </code>
  *
@@ -194,7 +194,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             $this->_setOptions($options);
         }
     }
-    
+
     /**
      * Clone - also make sure the view is cloned.
      *
@@ -204,7 +204,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     {
         if (isset($this->view) && $this->view instanceof Zend_View_Interface) {
             $this->view = clone $this->view;
-            
+
         }
     }
 
@@ -222,7 +222,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Get current module name
-     * 
+     *
      * @return string
      */
     public function getModule()
@@ -259,7 +259,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Get inflector
-     * 
+     *
      * @return Zend_Filter_Inflector
      */
     public function getInflector()
@@ -296,8 +296,8 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Set inflector
-     * 
-     * @param  Zend_Filter_Inflector $inflector 
+     *
+     * @param  Zend_Filter_Inflector $inflector
      * @param  boolean               $reference Whether the moduleDir, target, and suffix should be set as references to ViewRenderer properties
      * @return Zend_Controller_Action_Helper_ViewRenderer Provides a fluent interface
      */
@@ -314,8 +314,8 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Set inflector target
-     * 
-     * @param  string $target 
+     *
+     * @param  string $target
      * @return void
      */
     protected function _setInflectorTarget($target)
@@ -325,8 +325,8 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Set internal module directory representation
-     * 
-     * @param  string $dir 
+     *
+     * @param  string $dir
      * @return void
      */
     protected function _setModuleDir($dir)
@@ -336,7 +336,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Get internal module directory representation
-     * 
+     *
      * @return string
      */
     protected function _getModuleDir()
@@ -385,7 +385,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
         $inflector = $this->getInflector();
         $this->_setInflectorTarget($this->getViewBasePathSpec());
-        
+
         $dispatcher = $this->_frontController->getDispatcher();
         $request = $this->getRequest();
 
@@ -965,7 +965,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
 
     /**
      * Should the ViewRenderer render a view script?
-     * 
+     *
      * @return boolean
      */
     protected function _shouldRender()

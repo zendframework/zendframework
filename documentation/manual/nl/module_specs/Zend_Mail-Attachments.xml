@@ -1,0 +1,42 @@
+<sect1 id="zend.mail.attachments">
+    <title>Bijlagen</title>
+    <para>
+        Je kan bestanden aan e-mail bijvoegen door de <code>addAttachment()</code> methode te gebruiken. Het
+        standaard gedrag van <code>Zend_Mail</code> neemt aan dat de bijlage een binair object is
+        (application/octet-stream), het zou moeten gezonden worden met 64base encoding en als een
+        bijlage moet worden behandeld. Deze veronderstellingen kunnen overschreven worden door meer parameters aan
+        <code>addAttachment()</code> door te geven:
+    </para>
+    <example>
+        <title>E-mails met bijlagen</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// bericht maken...
+$mail->addAttachment($someBinaryString);
+$mail->addAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_8BIT);
+?>]]>   </programlisting>
+    </example>
+    <para>
+        Als je meer controle wil over het MIME deel dat voor deze bijlage word gemaakt kan je de waarde die
+        door <code>addAttachment()</code> wordt teruggegeven gebruiken om zijn attributen te veranderen. De
+        <code>addAttachment</code> geeft een <code>Zend_Mime_Part</code> object terug:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+
+$at = $mail->addAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->send();
+?>]]></programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

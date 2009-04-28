@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.db.profiler.profilers.firebug">
+    <title>Profilen mit Firebug</title>
+
+    <para>
+        <classname>Zend_Db_Profiler_Firebug</classname> sendet Profilinginformationen an die
+        <ulink url="http://www.getfirebug.com/">Firebug</ulink>
+        <ulink url="http://getfirebug.com/logging.html">Console</ulink>.
+    </para>
+
+    <para>
+        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname> Komponente gesendet welche
+        HTTP Header verwendet um sicherzustellen das der Seiteninhalt nicht gestört wird. Das Debuggen von
+        AJAX Anfragen die klare JSON und XML Antworten benötigen ist mit diesem Weg möglich.
+    </para>
+
+    <para>
+        Notwendigkeiten:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            Ein Firefox Browser idealerweise Version 3 aber auch Version 2 wird unterstützt.
+        </para></listitem>
+
+        <listitem> <para>
+            Die Firebug Firefox Erweiterung welche unter
+            <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+            heruntergeladen werden kann.
+        </para></listitem>
+
+        <listitem><para>
+            Die FirePHP Filefox Erweiterung welche unter
+            <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+            heruntergeladen werden kann.
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
+        <title>DB Profiling mit <classname>Zend_Controller_Front</classname></title>
+
+        <programlisting role="php"><![CDATA[
+// In der Bootstrap Datei
+
+$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+$profiler->setEnabled(true);
+
+// Den Profiler an den DB Adapter anfügen
+$db->setProfiler($profiler);
+
+// Den Frontcontroller ausführen
+
+// Alle DB Abfragen im Modell, View und Controller Dateien
+// werden nun profiled und an Firebug gesendet
+]]>
+        </programlisting>
+    </example>
+
+    <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
+        <title>DB Profiling ohne <classname>Zend_Controller_Front</classname></title>
+
+        <programlisting role="php"><![CDATA[
+$profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
+$profiler->setEnabled(true);
+
+// Den Profiler an den DB Adapter anfügen
+$db->setProfiler($profiler);
+
+$request  = new Zend_Controller_Request_Http();
+$response = new Zend_Controller_Response_Http();
+$channel  = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+$channel->setRequest($request);
+$channel->setResponse($response);
+
+// Ausgabe buffering starten
+ob_start();
+
+// Jetzt können DB Abfragen durchgeführt werden die auch profiled werden
+
+// Die Profilingdaten an den Browser senden
+$channel->flush();
+$response->sendHeaders();
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,16 @@
+<appendix id="copyrights">
+    <title>Informaţii privind drepturile de autor</title>
+
+    <para>
+        Următoarele drepturi de autor se aplică unor porţiuni din Zend Framework.
+    </para>
+
+    <para>
+        Drepturi de autor &#169; pe 2005-<?dbtimestamp format="Y"?> aparţin Zend Technologies Inc.
+        (<ulink url="http://www.zend.com" />)
+    </para>
+
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

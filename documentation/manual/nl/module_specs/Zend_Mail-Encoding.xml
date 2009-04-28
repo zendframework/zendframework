@@ -1,0 +1,16 @@
+<sect1 id="zend.mail.encoding">
+    <title>Encoding</title>
+    <para>
+        Tekst en HTML berichtinhoud word standaard met het quotedprintable mechanisme geëncodeerd. Alle
+        andere bijlagen worden via base64 geëncodeerd indien geen andere encoding wordt opgegeven in
+        de <code>addAttachment()</code> oproep of later aan het MIME deel object wordt toegewezen.
+        7Bit and 8Bit encoding geven op dit moment alleen de binaire inhoud door.
+    </para>
+    <para>
+        <code>Zend_Mail_Transport_Smtp</code> encodeert regels die met één of twee punten starten zodat
+        het bericht het SMTP protocol volgt.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

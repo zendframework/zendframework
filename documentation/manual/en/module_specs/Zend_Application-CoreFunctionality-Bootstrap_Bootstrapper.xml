@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
+    <title>Zend_Application_Bootstrap_Bootstrapper</title>
+
+    <para>
+        <classname>Zend_Application_Bootstrap_Bootstrapper</classname> is the base interface
+        all bootstrap classes must implement. The base functionality is aimed at
+        configuration, identifying resources, bootstrapping (either individual
+        resources or the entire application), and dispatching the application.
+    </para>
+
+    <para>
+        The following methods make up the definition of the interface.
+    </para>
+
+    <table id="zend.application.core-functionality.bootstrap-bootstrapper.methods-table">
+        <title>Zend_Application_Bootstrap_Bootstrapper Interface</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Return Value</entry>
+                    <entry>Parameters</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($application)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$application</code>: <emphasis>required</emphasis>.
+                            Should accept a <classname>Zend_Application</classname> or a
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                            object as the sole argument.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Constructor. Accepts a single argument, which should be a
+                        <classname>Zend_Application</classname> object, or another bootstrap
+                        object.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>required</emphasis>.
+                            Array of options to set.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Typically, any option that has a matching setter will
+                        invoke that setter; otherwise, the option will simply be
+                        stored for later retrieval.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getApplication()</code></entry>
+                    <entry><classname>Zend_Application | Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the application/bootstrap object passed via the
+                        constructor.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getEnvironment()</code></entry>
+                    <entry><code>string</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the environment string registered with the
+                        parent application/bootstrap object.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getClassResources()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve a list of available resource initializer names
+                        as defined in the class. This may be implementation
+                        specific.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>bootstrap($resource = null)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>optional</emphasis>.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        If <code>$resource</code> is empty, execute all
+                        bootstrap resources. If a string, execute that single
+                        resource; if an array, execute each resource in the
+                        array.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>run()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Defines what application logic to run after
+                        bootstrapping.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

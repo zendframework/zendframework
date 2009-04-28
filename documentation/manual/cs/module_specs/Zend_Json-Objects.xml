@@ -1,0 +1,43 @@
+<sect1 id="zend.json.objects">
+    <title>JSON Objekty</title>
+    <para>
+        Při převádění PHP objektů do JSON, budou veškere vlastnosti označené
+        jako public převedeny do JSON objektu.
+    </para>
+    <para>
+        JSON nedovoluje reference na objekt, takže je třeba dávat pozor a
+        nepřevádět objekty s rekurzivními referencemi. Pokud máte problémy
+        s rekurzemi, <code>Zend_Json::encode()</code> a
+        <code>Zend_Json_Encoder::encode()</code> umožňují volitelný druhý
+        parametr, zda se mají kontrolovat rekurze; pokud je objekt serializován
+        dvakrát, bude vyhozena výjimka.
+    </para>
+    <para>
+        Dekódování JSON objektů je komplikovanější, nicméně Javascriptové
+        objekty jsou nejvíce podobné asociativním polím v PHP. Někteří lidé
+        navrhují předávání identifikátoru třídy a naplnění instance objektu
+        daty ve formátu klíč/hodnota z JSON objektu; jiní si myslí, že by to
+        způsobilo značné bezpečnostní riziko.
+    </para>
+    <para>
+        Defaultně, <code>Zend_Json</code> dekóduje JSON objekty jako asociativní
+        pole. Nicméně, pokud vyžadujete vrácení objektu, můžete to určit takto:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+// Dekódovat JSON objekty jako PHP objekty
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);]]>
+    </programlisting>
+    <para>
+        Jakýkoliv objekt takto převedený je typu <code>StdClass</code>
+        s vlastnostmi odpovídajícími dvojicím klíč/hodnota z JSON zápisu.
+    </para>
+    <para>
+        Doporučení Zend Frameworku je, že každý vývojář by se měl rozhodnout
+        jak dekódovat JSON objekty. Pokud je potřeba vytvořit objekt daného
+        typu, tak může být vytvořen vlastním kódem a naplněn hodnotami
+        získanými dekódováním pomocí <code>Zend_Json</code>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

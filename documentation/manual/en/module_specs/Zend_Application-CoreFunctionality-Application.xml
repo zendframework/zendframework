@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.application">
+    <title>Zend_Application</title>
+
+    <para>
+        <classname>Zend_Application</classname> provides the base functionality of the
+        component, and the entry point to your Zend Framework application. It's
+        purpose is two-fold: to setup the PHP environment (including
+        autoloading), and to execute your application bootstrap.
+    </para>
+
+    <para>
+        Typically, you will pass all configuration to the
+        <classname>Zend_Application</classname> constructor, but you can also configure
+        the object entirely using its own methods. This reference is intended to
+        illustrate both use cases.
+    </para>
+
+    <table id="zend.application.core-functionality.application.api.options">
+        <title>Zend_Application options</title>
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Option</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>phpSettings</code></entry>
+                    <entry><para>
+                        Array of php.ini settings to use. Keys should be the php.ini
+                        keys.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>includePaths</code></entry>
+                    <entry><para>
+                        Additional paths to prepend to the
+                        <code>include_path</code>. Should be an array of paths.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>autoloaderNamespaces</code></entry>
+                    <entry><para>
+                        Array of additional namespaces to register with the
+                        <code>Zend_Loader_Autoloader</code> instance.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>bootstrap</code></entry>
+                    <entry><para>
+                        Either the string path to the bootstrap class, or an array
+                        with elements for the 'path' and 'class' for the application
+                        bootstrap.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+
+    <note>
+        <title>Option names</title>
+
+        <para>
+            Please note that option names are case insensitive.
+        </para>
+    </note>
+
+    <table id="zend.application.core-functionality.application.api.table">
+        <title>Zend_Application Methods</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Return Value</entry>
+                    <entry>Parameters</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($environment, $options = null)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$environment</code>: <emphasis>required</emphasis>,.
+                                String representing the current application
+                                environment. Typical strings might include
+                                "development", "testing", "qa", or
+                                "production", but will be defined by your
+                                organizational requirements.
+                            </para></listitem>
+
+                            <listitem>
+                            <para>
+                                <code>$options</code>: <emphasis>optional</emphasis>.
+                                Argument may be one of the following values:
+                            </para>
+                            <itemizedlist>
+                                <listitem><para>
+                                    <emphasis>String</emphasis>: path to
+                                    a <classname>Zend_Config</classname> file to load
+                                    as configuration for your application.
+                                    <code>$environment</code> will be used
+                                    to determine what section of the
+                                    configuration to pull.
+                                </para></listitem>
+
+                                <listitem><para>
+                                    <emphasis>Array</emphasis>: associative
+                                    array of configuration data for your
+                                    application.
+                                </para></listitem>
+
+                                <listitem><para>
+                                    <emphasis>Zend_Config</emphasis>:
+                                    configuration object instance.
+                                </para></listitem>
+                            </itemizedlist>
+                        </listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Constructor. Arguments are as described, and will be
+                        used to set initial object state. An instance of
+                        <classname>Zend_Loader_Autoloader</classname> is registered
+                        during instantiation. Options passed to the
+                        constructor are passed to <code>setOptions()</code>.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getEnvironment()</code></entry>
+                    <entry><code>string</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the environment string passed to the
+                        constructor.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getAutoloader()</code></entry>
+                    <entry><classname>Zend_Loader_Autoloader</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the <classname>Zend_Loader_Autoloader</classname>
+                        instance registered during instantiation.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>required</emphasis>.
+                            An array of application options.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        All options are stored internally, and calling the
+                        method multiple times will merge options. Options
+                        matching the various setter methods will be passed
+                        to those methods. As an example, the option
+                        "phpSettings" will then be passed to
+                        <code>setPhpSettings()</code>. (Option names are
+                        case insensitive.)
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOptions()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve all options used to initialize the object;
+                        could be used to cache <classname>Zend_Config</classname>
+                        options to a serialized format between requests.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>hasOption($key)</code></entry>
+                    <entry><code>boolean</code></entry>
+                    <entry>
+                    <itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: String option key to lookup
+                        </para></listitem>
+                    </itemizedlist>
+                    </entry>
+                    <entry><para>
+                        Determine whether or not an option with the
+                        specified key has been registered. Keys are case
+                        insensitive.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOption($key)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: String option key to lookup
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Retrieve the option value of a given key. Returns
+                        null if the key does not exist.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setPhpSettings(array $settings, $prefix = '')</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$settings</code>: <emphasis>required</emphasis>.
+                            Associative array of PHP INI settings.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$prefix</code>: <emphasis>optional</emphasis>.
+                            String prefix with which to prepend option keys.
+                            Used internally to allow mapping nested arrays
+                            to dot-separated php.ini keys. In normal usage,
+                            this argument should never be passed by a user.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Set run-time php.ini settings. Dot-separated
+                        settings may be nested hierarchically (which may
+                        occur with INI <classname>Zend_Config</classname> files) via
+                        an array-of-arrays, and will still resolve
+                        correctly.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setAutoloaderNamespaces(array $namespaces)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$namespaces</code>: <emphasis>required</emphasis>.
+                            Array of strings representing the namespaces to
+                            register with the <classname>Zend_Loader_Autoloader</classname>
+                            instance.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Register namespaces with the <classname>Zend_Loader_Autoloader</classname>
+                        instance.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setBootstrap($path, $class = null)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$path</code>: <emphasis>required</emphasis>.
+                            May be either a <classname>Zend_Application_Bootstrap_Bootstrapper
+                            </classname> instance, a string path to the bootstrap class,
+                            an associative array of classname =&gt;
+                            filename, or an associative array with the keys
+                            'class' and 'path'.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$class</code>: <emphasis>optional</emphasis>.
+                            If <code>$path</code> is a string,
+                            <code>$class</code> may be specified, and should
+                            be a string class name of the class contained in
+                            the file represented by path.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                </row>
+
+                <row>
+                    <entry><code>getBootstrap()</code></entry>
+                    <entry><code>null | Zend_Application_Bootstrap_Bootstrapper</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the registered bootstrap instance.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>bootstrap()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Call the bootstrap's <code>bootstrap()</code>
+                        method to bootstrap the application.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>run()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Call the bootstrap's <code>run()</code>
+                        method to dispatch the application.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

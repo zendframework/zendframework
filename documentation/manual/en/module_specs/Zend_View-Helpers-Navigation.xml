@@ -1,0 +1,2170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.navigation">
+    <title>Navigation Helpers</title>
+
+    <para>
+        The navigation helpers are used for rendering navigational elements
+        from <link linkend="zend.navigation.containers">Zend_Navigation_Container</link>
+        instances.
+    </para>
+
+    <para>
+        There are 5 built-in helpers:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                    used for rendering the path to the currently active page.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
+                    used for rendering navigational head links (e.g.
+                    <code>&lt;link rel="next" href="..." /&gt;</code>)
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
+                    used for rendering menus.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
+                    used for rendering sitemaps conforming to the
+                    <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                    used for proxying calls to other navigational helpers.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        All built-in helpers extend
+        <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, which
+        adds integration with <link linkend="zend.acl">ACL</link> and
+        <link linkend="zend.translate">translation</link>. The abstract class
+        implements the interface
+        <classname>Zend_View_Helper_Navigation_Helper</classname>, which
+        defines the following methods:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>{get|set}Container()</code> gets/sets the navigation
+                    container the helper should operate on by default, and
+                    <code>hasContainer()</code> checks if the helper
+                    has container registered.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}Translator()</code> gets/sets the
+                    translator used for translating labels and titles, and
+                    <code>{get|set}UseTranslator()</code> controls whether
+                    the translator should be enabled. The method
+                    <code>hasTranslator()</code> checks if the helper has
+                    a translator registered.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
+                    gets/sets ACL (<classname>Zend_Acl</classname>) instance and
+                    role (<code>string</code> or
+                    <classname>Zend_Acl_Role_Interface</classname>) used for
+                    filtering out pages when rendering, and
+                    <code>{get|set}UseAcl()</code> controls whether ACL should
+                    be enabled. The methods <code>hasAcl()</code> and
+                    <code>hasRole()</code> checks if the helper has an ACL
+                    instance or a role registered.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>__toString()</code>, magic method to ensure that
+                    helpers can be rendered by <code>echo</code>ing the
+                    helper instance directly.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>render()</code>, must be implemented by concrete
+                    helpers to do the actual rendering.
+                </para>
+            </listitem>
+         </itemizedlist>
+
+         In addition to the method stubs from the interface, the abstract
+         class also implements the following methods:
+
+         <itemizedlist>
+            <listitem>
+                <para>
+                    <code>{get|set}Indent()</code> gets/set indentation. The
+                    setter accepts a <code>string</code> or an <code>int</code>.
+                    In the case of an <code>int</code>, the helper will use
+                    the given number of spaces for indentation. I.e.,
+                    <code>setIndent(4)</code> means 4 initial spaces of
+                    indentation. Indentation can be specified for all helpers
+                    except the Sitemap helper.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}MinDepth()</code> gets/set the minimum depth
+                    a page must have to be included by the helper. Setting
+                    <code>null</code> means no minimum depth.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}MaxDepth()</code> gets/set the maximum depth
+                    a page can have to be included by the helper. Setting
+                    <code>null</code> means no maximum depth.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>__call()</code> is used for proxying calls to the
+                    container registered in the helper, which means you can
+                    call methods on a helper as if it was a container. See
+                    <link linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
+                    below.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>findActive($container, $minDepth, $maxDepth)</code>
+                    is used for finding the deepest active page in the given
+                    container. If depths are not given, the method will use
+                    the values retrieved from <code>getMinDepth()</code> and
+                    <code>getMaxDepth()</code>. The deepest active page must
+                    be between <code>$minDepth</code> and <code>$axnDepth</code>
+                    inclusively. Returns an array containing a reference to the
+                    found page instance and the depth at which the page was
+                    found.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>htmlify()</code> renders an <code>a</code> HTML
+                    element from a <classname>Zend_Navigation_Page</classname>
+                    instance.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>accept()</code> is used for determining if a page
+                    should be accepted when iterating containers. This method
+                    checks for page visibility and verifies that the helper's
+                    role is allowed access to the page's resource/privilege.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>static setDefaultAcl()</code> is used for setting
+                    a defualt ACL object that will be used by helpers.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>static setDefaultRole()</code> is used for setting
+                    a default ACL that will be used by helpers
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        If a navigation container is not explicitly set in a helper using
+        <code>$helper->setContainer($nav)</code>, the helper will look
+        for a container instance with the key <classname>Zend_Navigation</classname> in
+        <link linkend="zend.registry">the registry</link>.
+        If a container is not explicitly set or found in the registry, the
+        helper will create an empty <classname>Zend_Navigation</classname>
+        container when calling <code>$helper->getContainer()</code>.
+    </para>
+
+    <example id="zend.view.helpers.initial.navigation.proxy.example">
+        <title>Proxying calls to the navigation container</title>
+
+        <para>
+            Navigation view helpers use the magic method <code>__call()</code>
+            to proxy method calls to the navigation container that is
+            registered in the view helper.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->navigation()->addPage(array(
+    'type' => 'uri',
+    'label' => 'New page'));
+]]></programlisting>
+
+        <para>
+            The call above will add a page to the container in the
+            <classname>Navigation</classname> helper.
+        </para>
+    </example>
+
+    <sect4 id="zend.view.helpers.initial.navigation.i18n">
+        <title>Translation of labels and titles</title>
+
+        <para>
+            The navigation helpers support translation of page labels and titles.
+            You can set a translator of type <classname>Zend_Translate</classname>
+            or <classname>Zend_Translate_Adapter</classname> in the helper using
+            <code>$helper->setTranslator($translator)</code>, or like with other
+            I18n-enabled components; by adding the translator to
+            <link linkend="zend.registry">the registry</link> by using the key
+            <classname>Zend_Translate</classname>.
+        </para>
+
+        <para>
+            If you want to disable translation, use <code>$helper->setUseTranslator(false)</code>.
+        </para>
+
+        <para>
+            The
+            <link linkend="zend.view.helpers.initial.navigation.navigation">proxy
+            helper</link> will inject its own translator to the helper it
+            proxies to if the proxied helper doesn't already have a translator.
+        </para>
+
+        <para>
+            <note>
+                <para>
+                    There is no translation in the sitemap helper, since there
+                    are no page labels or titles involved in an XML sitemap.
+                </para>
+            </note>
+        </para>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.acl">
+        <title>Integration with ACL</title>
+
+        <para>
+            All navigational view helpers support ACL inherently from the
+            class <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>.
+            A <classname>Zend_Acl</classname> object can be assigned to
+            a helper instance with <code>$helper->setAcl($acl)</code>, and role
+            with <code>$helper->setRole('member')</code> or
+            <code>$helper->setRole(new Zend_Acl_Role('member'))</code> . If ACL
+            is used in the helper, the role in the helper must be allowed by
+            the ACL to access a page's <code>resource</code> and/or have the
+            page's <code>privilege</code> for the page to be included when
+            rendering.
+        </para>
+
+        <para>
+            If a page is not accepted by ACL, any descendant page will also
+            be excluded from rendering.
+        </para>
+
+        <para>
+            The
+            <link linkend="zend.view.helpers.initial.navigation.navigation">proxy
+            helper</link> will inject its own ACL and role to the helper it
+            proxies to if the proxied helper doesn't already have any.
+        </para>
+
+        <para>
+            The examples below all show how ACL affects rendering.
+        </para>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.setup">
+        <title>Navigation setup used in examples</title>
+
+        <para>
+            This example shows the setup of a navigation container for a
+            fictional software company.
+        </para>
+
+        <para>
+            Notes on the setup:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        The domain for the site is <code>www.example.com</code>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Interesting page properties are marked with a comment.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Unless otherwise is stated in other examples, the user
+                        is requesting the URL
+                        <code>http://www.example.com/products/server/faq/</code>,
+                        which translates to the page labeled <code>FAQ</code>
+                        under <code>Foo Server</code>.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        The assumed ACL and router setup is shown below the
+                        container setup.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/*
+ * Navigation container (config/array)
+
+ * Each element in the array will be passed to
+ * Zend_Navigation_Page::factory() when constructing
+ * the navigation container below.
+ */
+$pages = array(
+    array(
+        'label'      => 'Home',
+        'title'      => 'Go Home',
+        'module'     => 'default',
+        'controller' => 'index',
+        'action'     => 'index',
+        'order'      => -100 // make sure home is the first page
+    ),
+    array(
+        'label'      => 'Special offer this week only!',
+        'module'     => 'store',
+        'controller' => 'offer',
+        'action'     => 'amazing',
+        'visible'    => false // not visible
+    ),
+    array(
+        'label'      => 'Products',
+        'module'     => 'products',
+        'controller' => 'index',
+        'action'     => 'index',
+        'pages'      => array(
+            array(
+                'label'      => 'Foo Server',
+                'module'     => 'products',
+                'controller' => 'server',
+                'action'     => 'index',
+                'pages'      => array(
+                    array(
+                        'label'      => 'FAQ',
+                        'module'     => 'products',
+                        'controller' => 'server',
+                        'action'     => 'faq',
+                        'rel'        => array(
+                            'canonical' => 'http://www.example.com/?page=faq',
+                            'alternate' => array(
+                                'module'     => 'products',
+                                'controller' => 'server',
+                                'action'     => 'faq',
+                                'params'     => array('format' => 'xml')
+                            )
+                        )
+                    ),
+                    array(
+                        'label'      => 'Editions',
+                        'module'     => 'products',
+                        'controller' => 'server',
+                        'action'     => 'editions'
+                    ),
+                    array(
+                        'label'      => 'System Requirements',
+                        'module'     => 'products',
+                        'controller' => 'server',
+                        'action'     => 'requirements'
+                    )
+                )
+            ),
+            array(
+                'label'      => 'Foo Studio',
+                'module'     => 'products',
+                'controller' => 'studio',
+                'action'     => 'index',
+                'pages'      => array(
+                    array(
+                        'label'      => 'Customer Stories',
+                        'module'     => 'products',
+                        'controller' => 'studio',
+                        'action'     => 'customers'
+                    ),
+                    array(
+                        'label'      => 'Support',
+                        'module'     => 'prodcts',
+                        'controller' => 'studio',
+                        'action'     => 'support'
+                    )
+                )
+            )
+        )
+    ),
+    array(
+        'label'      => 'Company',
+        'title'      => 'About us',
+        'module'     => 'company',
+        'controller' => 'about',
+        'action'     => 'index',
+        'pages'      => array(
+            array(
+                'label'      => 'Investor Relations',
+                'module'     => 'company',
+                'controller' => 'about',
+                'action'     => 'investors'
+            ),
+            array(
+                'label'      => 'News',
+                'class'      => 'rss', // class
+                'module'     => 'company',
+                'controller' => 'news',
+                'action'     => 'index',
+                'pages'      => array(
+                    array(
+                        'label'      => 'Press Releases',
+                        'module'     => 'company',
+                        'controller' => 'news',
+                        'action'     => 'press'
+                    ),
+                    array(
+                        'label'      => 'Archive',
+                        'route'      => 'archive', // route
+                        'module'     => 'company',
+                        'controller' => 'news',
+                        'action'     => 'archive'
+                    )
+                )
+            )
+        )
+    ),
+    array(
+        'label'      => 'Community',
+        'module'     => 'community',
+        'controller' => 'index',
+        'action'     => 'index',
+        'pages'      => array(
+            array(
+                'label'      => 'My Account',
+                'module'     => 'community',
+                'controller' => 'account',
+                'action'     => 'index',
+                'resource'   => 'mvc:community.account' // resource
+            ),
+            array(
+                'label' => 'Forums',
+                'uri'   => 'http://forums.example.com/',
+                'class' => 'external' // class
+            )
+        )
+    ),
+    array(
+        'label'      => 'Administration',
+        'module'     => 'admin',
+        'controller' => 'index',
+        'action'     => 'index',
+        'resource'   => 'mvc:admin', // resource
+        'pages'      => array(
+            array(
+                'label'      => 'Write new article',
+                'module'     => 'admin',
+                'controller' => 'post',
+                'aciton'     => 'write'
+            )
+        )
+    )
+);
+
+// Create container from array
+$container = new Zend_Navigation($pages);
+
+// Store the container in the proxy helper:
+$view->getHelper('navigation')->setContainer($container);
+
+// ...or simply:
+$view->navigation($container);
+
+// ...or store it in the reigstry:
+Zend_Registry::set('Zend_Navigation', $container);
+]]></programlisting>
+
+        <para>
+            In addition to the container above, the following setup is assumed:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Setup router (default routes and 'archive' route):
+$front = Zend_Controller_Front::getInstance();
+$router = $front->getRouter();
+$router->addDefaultRoutes();
+$router->addRoute(
+    'archive',
+    new Zend_Controller_Router_Route(
+        '/archive/:year',
+        array(
+            'module'     => 'company',
+            'controller' => 'news',
+            'action'     => 'archive',
+            'year'       => (int) date('Y') - 1
+        ),
+        array('year' => '\d+')
+    )
+);
+
+// Setup ACL:
+$acl = new Zend_Acl();
+$acl->addRole(new Zend_Acl_Role('member'));
+$acl->addRole(new Zend_Acl_Role('admin'));
+$acl->add(new Zend_Acl_Resource('mvc:admin'));
+$acl->add(new Zend_Acl_Resource('mvc:community.account'));
+$acl->allow('member', 'mvc:community.account');
+$acl->allow('admin', null);
+
+// Store ACL and role in the proxy helper:
+$view->navigation()->setAcl($acl)->setRole('member');
+
+// ...or set default ACL and role statically:
+Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
+Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
+]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.breadcrumbs">
+        <title>Breadcrumbs Helper</title>
+
+        <para>
+            Breadcrumbs are used for indicating where in a sitemap
+            a user is currently browsing, and are typically rendered
+            like this: "You are here: Home > Products > FantasticProduct 1.0".
+            The breadcrumbs helper follows the guidelines from
+            <ulink url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs Pattern - Yahoo! Design Pattern Library</ulink>,
+            and allows simple customization (minimum/maximum depth, indentation,
+            separator, and whether the last element should be linked), or
+            rendering using a partial view script.
+        </para>
+
+        <para>
+            The Breadcrumbs helper works like this; it finds the deepest active
+            page in a navigation container, and renders an upwards path to
+            the root. For MVC pages, the "activeness" of a page is
+            determined by inspecting the request object, as stated in the
+            section on <link linkend="zend.navigation.pages.mvc">Zend_Navigation_Page_Mvc</link>.
+        </para>
+
+        <para>
+            The helper sets the <code>minDepth</code> property to 1 by default,
+            meaning breadcrumbs will not be rendered if the deepest active page
+            is a root page. If <code>maxDepth</code> is specified, the helper
+            will stop rendering when at the specified depth (e.g. stop at level
+            2 even if the deepest active page is on level 3).
+        </para>
+
+        <para>
+            Methods in the breadcrumbs helper:
+        </para>
+
+        <itemizedlist>
+           <listitem>
+               <para>
+                   <code>{get|set}Separator()</code> gets/sets separator
+                   string that is used between breadcrumbs. Defualt is
+                   <code>' &amp;gt; '</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}LinkLast()</code> gets/sets whether the
+                   last breadcrumb should be rendered as an anchor or not.
+                   Default is <code>false</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}Partial()</code> gets/sets a partial view
+                   script that should be used for rendering breadcrumbs.
+                   If a partial view script is set, the helper's
+                   <code>render()</code> method will use the
+                   <code>renderPartial()</code> method. If no partial is
+                   set, the <code>renderStraight()</code> method is used.
+                   The helper expects the partial to be a <code>string</code>
+                   or an <code>array</code> with two elements. If the partial
+                   is a <code>string</code>, it denotes the name of the partial
+                   script to use. If it is an <code>array</code>, the first
+                   element will be used as the name of the partial view
+                   script, and the second element is the module where the
+                   script is found.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>renderStraight()</code> is the default render
+                   method.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>renderPartial()</code> is used for rendering
+                   using a partial view script.
+               </para>
+           </listitem>
+       </itemizedlist>
+
+        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example1">
+            <title>Rendering breadcrumbs</title>
+
+            <para>
+                This example shows how to render breadcrumbs with default
+                settings.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+In a view script or layout:
+<?php echo $this->navigation()->breadcrumbs(); ?>
+
+or if short tags are enabled:
+<?= $this->navigation()->breadcrumbs(); ?>
+
+The two calls above take advantage of the magic __toString() method,
+and are equivalent to:
+<?php echo $this->navigation()->breadcrumbs()->render(); ?>
+
+Output:
+<a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example2">
+            <title>Specifying indentation</title>
+
+            <para>
+                This example shows how to render breadcrumbs with initial
+                indentation.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Rendering with 8 spaces indentation:
+<?php echo $this->navigation()->breadcrumbs()->setIndent(8);?>
+
+Output:
+        <a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example3">
+            <title>Customize breadcrumbs output</title>
+
+            <para>
+                This example shows how to customze breadcrumbs output by
+                specifying various options.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+In a view script or layout:
+
+<?php
+echo $this->navigation()
+          ->breadcrumbs()
+          ->setLinkLast(true)                   // link last page
+          ->setMaxDepth(1)                      // stop at level 1
+          ->setSeparator(' &#9654;' . PHP_EOL); // cool separator with newline
+?>
+
+Output:
+<a href="/products">Products</a> &#9654;
+<a href="/products/server">Foo Server</a>
+
+/////////////////////////////////////////////////////
+
+Setting minimum depth required to render breadcrumbs:
+
+<?php
+$this->navigation()->breadcrumbs()->setMinDepth(10);
+echo $this->navigation()->breadcrumbs();
+?>
+
+Output:
+Nothing, because the deepest active page is not at level 10 or deeper.
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.breadcrumbs.example4">
+            <title>Rendering breadcrumbs using a partial view script</title>
+
+            <para>
+                This example shows how to render customized breadcrumbs using
+                a partial vew script. By calling <code>setPartial()</code>,
+                you can specify a partial view script that will be used
+                when calling <code>render()</code>. When a partial is specified,
+                the <code>renderPartial()</code> method will be called. This
+                method will find the deepest active page and pass an array
+                of pages that leads to the active page to the partial view
+                script.
+            </para>
+
+            <para>
+                In a layout:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$partial = ;
+echo $this->navigation()->breadcrumbs()
+                        ->setPartial(array('breadcrumbs.phtml', 'default'));
+]]></programlisting>
+
+            <para>
+                Contents of
+                <code>application/modules/default/views/breadcrumbs.phtml</code>:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+echo implode(', ', array_map(
+        create_function('$a', 'return $a->getLabel();'),
+        $this->pages));
+]]></programlisting>
+
+            <para>
+                Output:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Products, Foo Server, FAQ
+]]></programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.links">
+        <title>Links Helper</title>
+
+        <para>
+            The links helper is used for rendering HTML <code>LINK</code>
+            elements. Links are used for describing document relationships
+            of the currently active page. Read more about links and link
+            types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document relationships: the LINK element (HTML4 W3C Rec.)</ulink>
+            and <ulink url="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C Rec.)</ulink>
+            in the HTML4 W3C Recommendation.
+        </para>
+
+        <para>
+            There are two types of relations; forward and reverse, indicated
+            by the keyords <code>'rel'</code> and <code>'rev'</code>. Most
+            methods in the helper will take a <code>$rel</code> param, which
+            must be either <code>'rel'</code> or <code>'rev'</code>. Most
+            methods also take a <code>$type</code> param, which is used
+            for specifying the link type (e.g. alternate, start, next, prev,
+            chapter, etc).
+        </para>
+
+        <para>
+            Relationships can be added to page objects manually, or found
+            by traversing the container registered in the helper. The method
+            <code>findRelation($page, $rel, $type)</code> will first try
+            to find the given <code>$rel</code> of <code>$type</code> from
+            the <code>$page</code> by calling <code>$page->findRel($type)</code>
+            or <code>$page->findRel($type)</code>. If the <code>$page</code>
+            has a relation that can be converted to a page instance, that
+            relation will be used. If the <code>$page</code> instance doesn't
+            have the specified <code>$type</code>, the helper will look for
+            a method in the helper named <code>search$rel$type</code> (e.g.
+            <code>searchRelNext()</code> or <code>searchRevAlternate()</code>).
+            If such a method exists, it will be used for determining the
+            <code>$page</code>'s relation by traversing the container.
+        </para>
+
+        <para>
+            Not all relations can be determined by traversing the container.
+            These are the relations that will be found by searching:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>searchRelStart()</code>, forward 'start'
+                        relation: the first page in the container.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRelNext()</code>, forward 'next'
+                        relation; finds the next page in the container, i.e.
+                        the page after the active page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRelPrev()</code>, forward 'prev'
+                        relation; finds the previous page, i.e. the page before
+                        the active page.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRelChapter()</code>, forward 'chapter'
+                        relations; finds all pages on level 0 except the 'start'
+                        relation or the active page if it's on level 0.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRelSection()</code>, forward 'section'
+                        relations; finds all child pages of the active page if
+                        the active page is on level 0 (a 'chapter').
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRelSubsection()</code>, forward 'subsection'
+                        relations; finds all child pages of the active page if
+                        the active pages is on level 1 (a 'section').
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRevSection()</code>, reverse 'section'
+                        relation; finds the parent of the active page if the
+                        active page is on level 1 (a 'section').
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>searchRevSubsection()</code>, reverse 'subsection'
+                        relation; finds the parent of the active page if the
+                        active page is on level 2 (a 'subsection').
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <note>
+            <para>
+                When looking for relations in the the page instance
+                (<code>$page->getRel($type)</code> or
+                <code>$page->getRev($type)</code>), the helper accepts the
+                values of type <code>string</code>, <code>array</code>,
+                <classname>Zend_Config</classname>, or
+                <classname>Zend_Navigation_Page</classname>. If a string
+                is found, it will be converted to a
+                <classname>Zend_Navigation_Page_Uri</classname>. If an array
+                or a config is found, it will be converted to one or several
+                page instances. If the first key of the array/config is numeric,
+                it will be considered to contain several pages, and each
+                element will be passed to the
+                <link linkend="zend.navigation.pages.factory">page factory</link>.
+                If the first key is not numeric, the array/config will be
+                passed to the page factory directly, and a single page will
+                be returned.
+            </para>
+        </note>
+
+        <para>
+            The helper also supports magic methods for finding relations.
+            E.g. to find forward alternate relations, call
+            <code>$helper->findRelAlternate($page)</code>, and to find
+            reverse section relations, call
+            <code>$helper->findRevSection($page)</code>. Those calls correspond
+            to <code>$helper->findRelation($page, 'rel', 'alternate');</code>
+            and <code>$helper->findRelation($page, 'rev', 'section');</code>
+            respectively.
+        </para>
+
+        <para>
+            To customize which relations should be rendered, the helper
+            uses a render flag. The render flag is an integer value, and will be
+            used in a
+            <ulink url="http://php.net/manual/en/language.operators.bitwise.php">bitwse
+            <code>and</code> (<code>&amp;</code>) operation</ulink> against the
+            helper's render constants to determine if the relation that belongs
+            to the render constant should be rendered.
+        </para>
+        <para>
+            See the
+            <link linkend="zend.view.helpers.initial.navigation.links.example3">example
+            below</link> for more information.
+        </para>
+
+        <para>
+            <itemizedlist>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname></para>
+                </listitem>
+                <listitem>
+                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname></para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            The constants from <code>RENDER_ALTERNATE</code> to
+            <code>RENDER_BOOKMARK</code> denote standard HTML link types.
+            <code>RENDER_CUSTOM</code> denotes non-standard relations that
+            specified in pages. <code>RENDER_ALL</code> denotes standard and
+            non-standard relations.
+        </para>
+
+        <para>
+            Methods in the links helper:
+        </para>
+
+        <itemizedlist>
+           <listitem>
+               <para>
+                   <code>{get|set}RenderFlag()</code> gets/sets the render
+                   flag. Default is <code>RENDER_ALL</code>. See examples
+                   below on how to set the render flag.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>findAllRelations()</code> finds all relations of
+                   all types for a given page.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>findRelation()</code> finds all relations of a given
+                   type from a given page.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
+                   traverses a container to find forward relations to
+                   the start page, the next page, the previous page,
+                   chapters, sections, and subsections.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>searchRev{Section|Subsection}()</code> traverses
+                   a container to find reverse relations to sections or
+                   subsections.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>renderLink()</code> renders a single <code>link</code>
+                   element.
+               </para>
+           </listitem>
+       </itemizedlist>
+
+        <example id="zend.view.helpers.initial.navigation.links.example1">
+            <title>Specify relations in pages</title>
+
+            <para>
+                This example shows how to specify relations in pages.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$container = new Zend_Navigation(array(
+    array(
+        'label' => 'Relations using strings',
+        'rel'   => array(
+            'alternate' => 'http://www.example.org/'
+        ),
+        'rev'   => array(
+            'alternate' => 'http://www.example.net/'
+        )
+    ),
+    array(
+        'label' => 'Relations using arrays',
+        'rel'   => array(
+            'alternate' => array(
+                'label' => 'Example.org',
+                'uri'   => 'http://www.example.org/'
+            )
+        )
+    ),
+    array(
+        'label' => 'Relations using configs',
+        'rel'   => array(
+            'alternate' => new Zend_Config(array(
+                'label' => 'Example.org',
+                'uri'   => 'http://www.example.org/'
+            ))
+        )
+    ),
+    array(
+        'label' => 'Relations using pages instance',
+        'rel'   => array(
+            'alternate' => Zend_Navigation_Page::factory(array(
+                'label' => 'Example.org',
+                'uri'   => 'http://www.example.org/'
+            ))
+        )
+    )
+));
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.links.example2">
+            <title>Default rendering of links</title>
+
+            <para>
+                This example shows how to render a menu from a container
+                registered/found in the view helper.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+In a view script or layout:
+<?php echo $this->view->navigation()->links(); ?>
+
+Output:
+<link rel="alternate" href="/products/server/faq/format/xml">
+<link rel="start" href="/" title="Home">
+<link rel="next" href="/products/server/editions" title="Editions">
+<link rel="prev" href="/products/server" title="Foo Server">
+<link rel="chapter" href="/products" title="Products">
+<link rel="chapter" href="/company/about" title="Company">
+<link rel="chapter" href="/community" title="Community">
+<link rel="canonical" href="http://www.example.com/?page=server-faq">
+<link rev="subsection" href="/products/server" title="Foo Server">
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.links.example3">
+            <title>Specify which relations to render</title>
+
+            <para>
+                This example shows how to specify which relations to find
+                and render.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Render only start, next, and prev:
+$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_START |
+                       Zend_View_Helper_Navigation_Links::RENDER_NEXT |
+                       Zend_View_Helper_Navigation_Links::RENDER_PREV);
+
+Output:
+<link rel="start" href="/" title="Home">
+<link rel="next" href="/products/server/editions" title="Editions">
+<link rel="prev" href="/products/server" title="Foo Server">
+]]></programlisting>
+
+            <programlisting role="php"><![CDATA[
+Render only native link types:
+$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
+                       Zend_View_Helper_Navigation_Links::RENDER_CUSTOM);
+
+Output:
+<link rel="alternate" href="/products/server/faq/format/xml">
+<link rel="start" href="/" title="Home">
+<link rel="next" href="/products/server/editions" title="Editions">
+<link rel="prev" href="/products/server" title="Foo Server">
+<link rel="chapter" href="/products" title="Products">
+<link rel="chapter" href="/company/about" title="Company">
+<link rel="chapter" href="/community" title="Community">
+<link rev="subsection" href="/products/server" title="Foo Server">
+]]></programlisting>
+
+            <programlisting role="php"><![CDATA[
+Render all but chapter:
+$helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
+                       Zend_View_Helper_Navigation_Links::RENDER_CHAPTER);
+
+Output:
+<link rel="alternate" href="/products/server/faq/format/xml">
+<link rel="start" href="/" title="Home">
+<link rel="next" href="/products/server/editions" title="Editions">
+<link rel="prev" href="/products/server" title="Foo Server">
+<link rel="canonical" href="http://www.example.com/?page=server-faq">
+<link rev="subsection" href="/products/server" title="Foo Server">
+]]></programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.menu">
+        <title>Menu Helper</title>
+
+        <para>
+            The Menu helper is used for rendering menus from navigation
+            containers. By default, the menu will be rendered using
+            HTML <code>UL</code> and <code>LI</code> tags, but the helper also
+            allows using a partial view script.
+        </para>
+
+        <para>
+            Methods in the Menu helper:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>{get|set}UlClass()</code> gets/sets the CSS class
+                    used in <code>renderMenu()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}OnlyActiveBranch()</code> gets/sets a flag
+                    specifying whether only the active branch of a container
+                    should be rendered.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}RenderParents()</code> gets/sets a flag
+                    specifying whether parents should be rendered when only
+                    rendering active branch of a container. If set to
+                    <code>false</code>, only the deepest active menu will be
+                    rendered.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>{get|set}Partial()</code> gets/sets a partial view
+                    script that should be used for rendering menu.
+                    If a partial view script is set, the helper's
+                    <code>render()</code> method will use the
+                    <code>renderPartial()</code> method. If no partial is
+                    set, the <code>renderMenu()</code> method is used.
+                    The helper expects the partial to be a <code>string</code>
+                    or an <code>array</code> with two elements. If the partial
+                    is a <code>string</code>, it denotes the name of the partial
+                    script to use. If it is an <code>array</code>, the first
+                    element will be used as the name of the partial view
+                    script, and the second element is the module where the
+                    script is found.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>htmlify()</code> overrides the method from the
+                    abstract class to return <code>span</code> elements
+                    if the page has no <code>href</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>renderMenu($container = null, $options = array())</code>
+                    is the default render method, and will render a container as
+                    a HTML <code>UL</code> list.
+                </para>
+                <para>
+                    If <code>$container</code> is not given, the container
+                    registered in the helper will be rendered.
+                </para>
+                <para>
+                    <code>$options</code> is used for overriding options
+                    specified temporarily without rsetting the values in the
+                    helper instance. It is an associative array where each key
+                    corresponds to an option in the helper.
+                </para>
+                <para>
+                    Recognized options:
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <code>indent</code>; indentation. Expects a
+                                <code>string</code> or an <code>int</code>
+                                value.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <code>minDepth</code>; minimum depth. Expcects
+                                an <code>int</code> or <code>null</code> (no
+                                minimum depth).
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <code>maxDepth</code>; maximum depth. Expcects
+                                an <code>int</code> or <code>null</code> (no
+                                maximum depth).
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <code>ulClass</code>; CSS class for
+                                <code>ul</code> element. Expects a
+                                <code>string</code>.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <code>onlyActiveBranch</code>; whether only
+                                active branch should be rendered. Expects
+                                a <code>boolean</code> value.
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                                <code>renderParents</code>; whether parents
+                                should be rendered if only rendering active
+                                branch. Expects a <code>boolean</code> value.
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <para>
+                    If an option is not given, the value set in the helper
+                    will be used.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>renderPartial()</code> is used for rendering the menu
+                    using a partial view script.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>renderSubMenu()</code> renders the deepest menu level
+                    of a container's active branch.
+                </para>
+            </listitem>
+       </itemizedlist>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example1">
+            <title>Rendering a menu</title>
+
+            <para>
+                This example shows how to render a menu from a container
+                registered/found in the view helper. Notice how pages
+                are filtered out based on visibility and ACL.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+In a view script or layout:
+<?php echo $this->navigation()->menu()->render() ?>
+
+Or simply:
+<?php echo $this->navigation()->menu() ?>
+
+Or if short tags are enabled:
+<?= $this->navigation()->menu() ?>
+
+Output:
+<ul class="navigation">
+    <li>
+        <a title="Go Home" href="/">Home</a>
+    </li>
+    <li class="active">
+        <a href="/products">Products</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server">Foo Server</a>
+                <ul>
+                    <li class="active">
+                        <a href="/products/server/faq">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="/products/server/editions">Editions</a>
+                    </li>
+                    <li>
+                        <a href="/products/server/requirements">System Requirements</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/products/studio">Foo Studio</a>
+                <ul>
+                    <li>
+                        <a href="/products/studio/customers">Customer Stories</a>
+                    </li>
+                    <li>
+                        <a href="/prodcts/studio/support">Support</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a title="About us" href="/company/about">Company</a>
+        <ul>
+            <li>
+                <a href="/company/about/investors">Investor Relations</a>
+            </li>
+            <li>
+                <a class="rss" href="/company/news">News</a>
+                <ul>
+                    <li>
+                        <a href="/company/news/press">Press Releases</a>
+                    </li>
+                    <li>
+                        <a href="/archive">Archive</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/community">Community</a>
+        <ul>
+            <li>
+                <a href="/community/account">My Account</a>
+            </li>
+            <li>
+                <a class="external" href="http://forums.example.com/">Forums</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example2">
+            <title>Calling renderMenu() directly</title>
+
+            <para>
+                This example shows how to render a menu that is not
+                registered in the view helper by calling the
+                <code>renderMenu()</code> directly and specifying a few
+                options.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<?php
+// render only the 'Community' menu
+$community = $this->navigation()->findOneByLabel('Community');
+$options = array(
+    'indent'  => 16,
+    'ulClass' => 'community'
+);
+echo $this->navigation()
+          ->menu()
+          ->renderMenu($community, $options);
+?>
+Output:
+                <ul class="community">
+                    <li>
+                        <a href="/community/account">My Account</a>
+                    </li>
+                    <li>
+                        <a class="external" href="http://forums.example.com/">Forums</a>
+                    </li>
+                </ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example3">
+            <title>Rendering the deepest active menu</title>
+
+            <para>
+                This example shows how the <code>renderSubMenu()</code>
+                will render the deepest sub menu of the active branch.
+            </para>
+
+            <para>
+                Calling <code>renderSubMenu($container, $ulClass, $indent)</code>
+                is equivalent to calling <code>renderMenu($container, $options)</code>
+                with the following options:
+<code>array(
+    'ulClass'          => $ulClass,
+    'indent'           => $indent,
+    'minDepth'         => null,
+    'maxDepth'         => null,
+    'onlyActiveBranch' => true,
+    'renderParents'    => false
+)</code>
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->renderSubMenu(null, 'sidebar', 4);
+?>
+
+The output will be the same if 'FAQ' or 'Foo Server' is active:
+    <ul class="sidebar">
+        <li class="active">
+            <a href="/products/server/faq">FAQ</a>
+        </li>
+        <li>
+            <a href="/products/server/editions">Editions</a>
+        </li>
+        <li>
+            <a href="/products/server/requirements">System Requirements</a>
+        </li>
+    </ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example4">
+            <title>Rendering a menu with maximum depth</title>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setMaxDepth(1);
+?>
+
+Output:
+<ul class="navigation">
+    <li>
+        <a title="Go Home" href="/">Home</a>
+    </li>
+    <li class="active">
+        <a href="/products">Products</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server">Foo Server</a>
+            </li>
+            <li>
+                <a href="/products/studio">Foo Studio</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a title="About us" href="/company/about">Company</a>
+        <ul>
+            <li>
+                <a href="/company/about/investors">Investor Relations</a>
+            </li>
+            <li>
+                <a class="rss" href="/company/news">News</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/community">Community</a>
+        <ul>
+            <li>
+                <a href="/community/account">My Account</a>
+            </li>
+            <li>
+                <a class="external" href="http://forums.example.com/">Forums</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example5">
+            <title>Rendering a menu with minimum depth</title>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setMinDepth(1);
+?>
+
+Output:
+<ul class="navigation">
+    <li class="active">
+        <a href="/products/server">Foo Server</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server/faq">FAQ</a>
+            </li>
+            <li>
+                <a href="/products/server/editions">Editions</a>
+            </li>
+            <li>
+                <a href="/products/server/requirements">System Requirements</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/products/studio">Foo Studio</a>
+        <ul>
+            <li>
+                <a href="/products/studio/customers">Customer Stories</a>
+            </li>
+            <li>
+                <a href="/prodcts/studio/support">Support</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/company/about/investors">Investor Relations</a>
+    </li>
+    <li>
+        <a class="rss" href="/company/news">News</a>
+        <ul>
+            <li>
+                <a href="/company/news/press">Press Releases</a>
+            </li>
+            <li>
+                <a href="/archive">Archive</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/community/account">My Account</a>
+    </li>
+    <li>
+        <a class="external" href="http://forums.example.com/">Forums</a>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example6">
+            <title>Rendering only the active branch of a menu</title>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setOnlyActiveBranch(true);
+?>
+
+Output:
+<ul class="navigation">
+    <li class="active">
+        <a href="/products">Products</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server">Foo Server</a>
+                <ul>
+                    <li class="active">
+                        <a href="/products/server/faq">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="/products/server/editions">Editions</a>
+                    </li>
+                    <li>
+                        <a href="/products/server/requirements">System Requirements</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example7">
+            <title>
+                Rendering only the active branch of a menu with minimum depth
+            </title>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setOnlyActiveBranch(true)
+          ->setMinDepth(1);
+?>
+
+Output:
+<ul class="navigation">
+    <li class="active">
+        <a href="/products/server">Foo Server</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server/faq">FAQ</a>
+            </li>
+            <li>
+                <a href="/products/server/editions">Editions</a>
+            </li>
+            <li>
+                <a href="/products/server/requirements">System Requirements</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example8">
+            <title>
+                Rendering only the active branch of a menu with maximum depth
+            </title>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setOnlyActiveBranch(true)
+          ->setMaxDepth(1);
+?>
+
+Output:
+<ul class="navigation">
+    <li class="active">
+        <a href="/products">Products</a>
+        <ul>
+            <li class="active">
+                <a href="/products/server">Foo Server</a>
+            </li>
+            <li>
+                <a href="/products/studio">Foo Studio</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example9">
+            <title>
+                Rendering only the active branch of a menu with maximum depth
+                and no parents
+            </title>
+
+            <para>
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<?php
+echo $this->navigation()
+          ->menu()
+          ->setOnlyActiveBranch(true)
+          ->setRenderParents(false)
+          ->setMaxDepth(1);
+?>
+
+Output:
+<ul class="navigation">
+    <li class="active">
+        <a href="/products/server">Foo Server</a>
+    </li>
+    <li>
+        <a href="/products/studio">Foo Studio</a>
+    </li>
+</ul>
+]]></programlisting>
+        </example>
+
+        <example id="zend.view.helpers.initial.navigation.menu.example10">
+            <title>Rendering a custom menu using a partial view script</title>
+
+            <para>
+                This example shows how to render a custom menu using
+                a partial vew script. By calling <code>setPartial()</code>,
+                you can specify a partial view script that will be used
+                when calling <code>render()</code>. When a partial is specified,
+                the <code>renderPartial()</code> method will be called. This
+                method will assign the container to the view with the key
+                <code>container</code>.
+            </para>
+
+            <para>In a layout:</para>
+
+            <programlisting role="php"><![CDATA[
+$partial = array('menu.phtml', 'default');
+$this->navigation()->menu()->setPartial($partial);
+echo $this->navigation()->menu()->render();
+]]></programlisting>
+
+            <para>In application/modules/default/views/menu.phtml:</para>
+
+            <programlisting role="php"><![CDATA[
+foreach ($this->container as $page) {
+    echo $this->menu()->htmlify($page), PHP_EOL;
+}
+]]></programlisting>
+
+            <para>Output:</para>
+
+            <programlisting role="php"><![CDATA[
+<a title="Go Home" href="/">Home</a>
+<a href="/products">Products</a>
+<a title="About us" href="/company/about">Company</a>
+<a href="/community">Community</a>
+]]></programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.sitemap">
+        <title>Sitemap Helper</title>
+
+        <para>
+            The Sitemap helper is used for generating XML sitemaps, as
+            defined by the <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+            Read more about <ulink url="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps
+            on Wikpedia</ulink>.
+        </para>
+
+        <para>
+            By default, the sitemap helper uses
+            <link linkend="zend.validate.sitemap">sitemap validators</link>
+            to validate each element that is rendered. This can be disabled by
+            calling <code>$helper->setUseSitemapValidators(false)</code>.
+
+            <note>
+                <para>
+                    If you disable sitemap validators, the custom properties (see table)
+                    are not validated at all.
+                </para>
+            </note>
+        </para>
+
+        <para>
+            The sitemap helper also supports
+            <ulink url="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD Schema</ulink>
+            validation of the generated sitemap. This is disabled by default,
+            since it will require a request to the Schema file. It can be
+            enabled with
+            <code>$helper->setUseSchemaValidation(true)</code>.
+        </para>
+
+        <table id="zend.view.helpers.initial.navigation.sitemap.elements">
+            <title>Sitemap XML elements</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Element</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>loc</code></entry>
+                        <entry>
+                            Absolute URL to page. An absolute URL will
+                            be generated by the helper.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><code>lastmod</code></entry>
+                        <entry>
+                            <para>
+                                The date of last modification of the file,
+                                in <ulink url="http://www.w3.org/TR/NOTE-datetime">W3C Datetime</ulink> format.
+                                This time portion can be omitted if desired, and only use YYYY-MM-DD.
+                            </para>
+                            <para>
+                                The helper will try to retrieve the
+                                <code>lastmod</code> value from the page's
+                                custom property <code>lastmod</code> if it
+                                is set in the page. If the value is not a
+                                valid date, it is ignored.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><code>changefreq</code></entry>
+                        <entry>
+                            <para>
+                                How frequently the page is likely to change.
+                                This value provides general information to
+                                search engines and may not correlate exactly
+                                to how often they crawl the page. Valid
+                                values are:
+                                <itemizedlist>
+                                    <listitem><para>always</para></listitem>
+                                    <listitem><para>hourly</para></listitem>
+                                    <listitem><para>daily</para></listitem>
+                                    <listitem><para>weekly</para></listitem>
+                                    <listitem><para>monthly</para></listitem>
+                                    <listitem><para>yearly</para></listitem>
+                                    <listitem><para>never</para></listitem>
+                                </itemizedlist>
+                            </para>
+                            <para>
+                                The helper will try to retrieve the
+                                <code>changefreq</code> value from the page's
+                                custom property <code>changefreq</code> if it
+                                is set in the page. If the value is not
+                                valid, it is ignored.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry><code>priority</code></entry>
+                        <entry>
+                            <para>
+                                The priority of this URL relative to other
+                                URLs on your site. Valid values range from
+                                0.0 to 1.0.
+                            </para>
+                            <para>
+                                The helper will try to retrieve the
+                                <code>priority</code> value from the page's
+                                custom property <code>priority</code> if it
+                                is set in the page. If the value is not
+                                valid, it is ignored.
+                            </para>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Methods in the sitemap helper:
+        </para>
+
+        <itemizedlist>
+           <listitem>
+                <para>
+                    <code>{get|set}FormatOutput()</code> gets/sets a flag
+                    indicating whether XML output should be formatted. This
+                    corresponds to the <code>formatOutput</code> property
+                    of the native <classname>DOMDocument</classname> class.
+                    Read more at
+                    <ulink url="http://php.net/domdocument">PHP: DOMDocument - Manual</ulink>.
+                    Default is <code>false</code>.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>{get|set}UseXmlDeclaration()</code> gets/sets a
+                    flag indicating whether the XML declaration should be
+                    included when rendering. Default is <code>true</code>.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>{get|set}UseSitemapValidators()</code> gets/sets a
+                    flag indicating whether sitemap validators should be
+                    used when generating the DOM sitemap. Default is
+                    <code>true</code>.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>{get|set}UseSchemaValidation()</code> gets/sets a
+                    flag indicating whether the helper should use XML Schema
+                    validation when generating the DOM sitemap. Default is
+                    <code>false</code>. If <code>true</code>.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>{get|set}ServerUrl()</code> gets/sets server URL
+                    that will be prepended to non-absolute URLs in the
+                    <code>url()</code> method. If no server URL is specified,
+                    it will be determined by the helper.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>url()</code> is used to generate absolute URLs to
+                    pages.
+                </para>
+           </listitem>
+           <listitem>
+                <para>
+                    <code>getDomSitemap()</code> generates a DOMDocument
+                    from a given container.
+                </para>
+           </listitem>
+       </itemizedlist>
+
+        <example id="zend.view.helpers.initial.navigation.sitemap.example">
+            <title>Rendering an XML sitemap</title>
+
+            <para>
+                This example shows how to render an XML sitemap based
+                on the setup we did further up.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// In a view script or layout:
+
+// format output
+$this->navigation()
+      ->sitemap()
+      ->setFormatOutput(true); // default is false
+
+// other possible methods:
+// ->setUseXmlDeclaration(false); // default is true
+// ->setServerUrl('http://my.otherhost.com');
+// default is to detect automatically
+
+// print sitemap
+echo $this->navigation()->sitemap();
+]]></programlisting>
+
+            <para>
+                Notice how pages that are invisible or pages with
+                ACL roles incompatible with the view helper are filtered
+                out:
+            </para>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://www.example.com/</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/faq</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/editions</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/requirements</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/studio</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/studio/customers</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/prodcts/studio/support</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about/investors</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/news</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/news/press</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/archive</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/community</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/community/account</loc>
+  </url>
+  <url>
+    <loc>http://forums.example.com/</loc>
+  </url>
+</urlset>
+]]></programlisting>
+
+            <para>
+                Render the sitemap using no ACL role (should filter out
+                /community/account):
+            </para>
+
+            <programlisting role="php"><![CDATA[
+echo $this->navigation()
+          ->sitemap()
+          ->setFormatOutput(true)
+          ->setRole();
+]]></programlisting>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://www.example.com/</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/faq</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/editions</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server/requirements</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/studio</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/studio/customers</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/prodcts/studio/support</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about/investors</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/news</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/news/press</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/archive</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/community</loc>
+  </url>
+  <url>
+    <loc>http://forums.example.com/</loc>
+  </url>
+</urlset>
+]]></programlisting>
+
+            <para>
+                Render the sitemap using a maximum depth of 1.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+echo $this->navigation()
+          ->sitemap()
+          ->setFormatOutput(true)
+          ->setMaxDepth(1);
+]]></programlisting>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://www.example.com/</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/server</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/products/studio</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/about/investors</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/company/news</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/community</loc>
+  </url>
+  <url>
+    <loc>http://www.example.com/community/account</loc>
+  </url>
+  <url>
+    <loc>http://forums.example.com/</loc>
+  </url>
+</urlset>
+]]></programlisting>
+        </example>
+
+    </sect4>
+
+    <sect4 id="zend.view.helpers.initial.navigation.navigation">
+        <title>Navigation Helper</title>
+
+        <para>
+            The Navigation helper is a proxy helper
+            that relays calls to other navigational helpers. It can be
+            considered an entry point to all navigation-related view tasks.
+            The aforementioned navigational helpers are in the namespace
+            <classname>Zend_View_Helper_Navigation</classname>, and would thus require
+            the path <code>Zend/View/Helper/Navigation</code> to be added as
+            a helper path to the view. With the proxy helper residing in the
+            <classname>Zend_View_Helper</classname> namespace, it will always be
+            available, without the need to add any helper paths to the view.
+        </para>
+
+        <para>
+            The Navigation helper finds other helpers that implement the
+            <classname>Zend_View_Helper_Navigation_Helper</classname>
+            interface, which means custom view helpers can also be proxied.
+            This would, however, require that the custom helper path is added
+            to the view.
+        </para>
+
+        <para>
+            When proxying to other helpers, the Navigation helper can inject
+            its container, ACL/role, and translator. This means that you
+            won't have to explicitly set all three in all navigational
+            helpers, nor resort to injecting by means of
+            <classname>Zend_Registry</classname> or static methods.
+        </para>
+
+        <itemizedlist>
+           <listitem>
+               <para>
+                   <code>findHelper()</code> finds the given helper,
+                   verifies that it is a navigational helper, and injects
+                   container, ACL/role and translator.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}InjectContainer()</code> gets/sets a flag
+                   indicating whether the container should be injected to
+                   proxied helpers. Default is <code>true</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}InjectAcl()</code> gets/sets a flag
+                   indicating whether the ACL/role should be injected to
+                   proxied helpers. Default is <code>true</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}InjectTranslator()</code> gets/sets a flag
+                   indicating whether the translator should be injected to
+                   proxied helpers. Default is <code>true</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>{get|set}DefaultProxy()</code> gets/sets the default
+                   proxy. Default is <code>'menu'</code>.
+               </para>
+           </listitem>
+           <listitem>
+               <para>
+                   <code>render()</code> proxies to the render method of
+                   the default proxy.
+               </para>
+           </listitem>
+       </itemizedlist>
+    </sect4>
+</sect3>

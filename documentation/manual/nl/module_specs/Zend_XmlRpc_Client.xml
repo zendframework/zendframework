@@ -1,0 +1,314 @@
+<sect1 id="zend.xmlrpc.client">
+    <title>Zend_XmlRpc_Client</title>
+    <sect2 id="zend.xmlrpc.client.introduction">
+        <title>Inleiding</title>
+        <para>
+            Het gebruik van de <code>Zend_XmlRpc_Client</code> komt erg overeen met het gebruik van <code>SoapClient</code> objecten (<ulink url="http://www.php.net/soap">SOAP web service extensie</ulink>).
+            Je kan gewoonweg de XML-RPC service procedures aanroepen als  <code>Zend_XmlRpc_Client</code> methodes.
+            Specificeer het volledige adres van de service in de <code>Zend_XmlRpc_Client</code> constructor.
+        </para>
+        <example>
+            <title>Een basis XML-RPC verzoek</title>
+            <programlisting role="php"><![CDATA[<?php
+/**
+* Maak verbinding met de framework.zend.com server en krijg een array met de beschikbare methodes.
+*/
+require_once 'Zend/XmlRpc/Client.php';
+
+$server = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
+
+print_r( $server->system->listMethods() );
+?>]]>
+                </programlisting>
+            </example>
+            <para>
+                <note>
+                    <para>De <code>Zend_XmlRpc_Client</code> probeert het op afstand aanroepen van methodes
+                    zoveel mogelijk als PHP-eigen methodes te laten lijken. Als een remote methode namespaces bevat
+                    zoals <code>system.listMethods()</code> hierboven, word de aanroep via "object chaining" gemaakt
+                    in PHP: <code>$server->system->listMethods()</code>.</para>
+                </note>
+            </para>
+        </sect2>
+        <sect2 id="zend.xmlrpc.client.parameters">
+            <title>Parameters gebruiken</title>
+            <para>
+                Sommige XML-RPC service procedures vereisen parameters. De benodigde parameters worden als parameters voor
+                de <code>Zend_XmlRpc-Client</code> methode doorgegeven.
+                Parameters voor een XML-RPC procedure moeten van een bepaald XML-RPC type zijn.
+                Parameters kunnen op 2 manieren worden doorgegeven: als PHP-eigen variabelen of <code>Zend_XmlRpc_Value</code>
+                objecten die XML-RPC types voorstellen.
+            </para>
+            <sect3 id='zend.xmlrpc.client.parameters.php_native'>
+                <title>PHP-eigen variabelen als parameters doorgeven</title>
+                <para>
+                    Parameters zoals een string, integer, float, boolean, array of object worden beschouwd als PHP-eigen variabelen
+                    en zullen ook zo worden doorgegeven.
+                    In dit geval zal elk PHP-eigen type automatisch worden herkend en geconverteerd in een van de overeenkomstige
+                    XML-RPC types aan de hand van de volgende tabel:
+                </para>
+                <table>
+                    <title>PHP en XML-RPC type omzetting</title>
+                    <tgroup cols="2">
+                        <thead>
+                            <row>
+                                <entry>PHP Native type</entry>
+                                <entry>XML-RPC type</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>integer</entry>
+                                <entry>int</entry>
+                            </row>
+                            <row>
+                                <entry>double</entry>
+                                <entry>double</entry>
+                            </row>
+                            <row>
+                                <entry>boolean</entry>
+                                <entry>boolean</entry>
+                            </row>
+                            <row>
+                                <entry>string</entry>
+                                <entry>string</entry>
+                            </row>
+                            <row>
+                                <entry>array</entry>
+                                <entry>array</entry>
+                            </row>
+                            <row>
+                                <entry>associative array</entry>
+                                <entry>struct</entry>
+                            </row>
+                            <row>
+                                <entry>object</entry>
+                                <entry>array</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <programlisting role="php"><![CDATA[<?php
+
+/** 2 parameters worden in deze procedure doorgegeven
+ *    - De eerste parameter is een string die automatisch zal worden omgezet in een XML-RPC string type
+ *    - De tweede parameter is een associatieve array die zal worden omgezet in een XML-RPC struct
+ */
+
+$p1 = 'parameter 1';
+$p2 = array('name' => 'Joe', 'age' => 30);
+
+$service->serviceProcedure($p1, $p2);
+
+?>]]>
+                </programlisting>
+            </sect3>
+            <sect3 id='zend.xmlrpc.client.parameters.xmlrpc_value'>
+                <title><code>Zend_XmlRpc_Value</code> objecten als parameters doorgeven</title>
+                <para>
+                    Je kan één van de volgende <code>Zend_XmlRpc_Value</code> instanties aanmaken om het preciese XML-RPC type
+                    van je parameters aan te geven.
+                    De hoofdredenen om expliciet het type van de doorgegeven parameters aan te duiden zijn de volgende:
+                    <itemizedlist>
+                        <listitem>
+                            <para>Wanneer je er zeker van wil zijn dat het juiste parameter type aan de procedure wordt doorgegevn (b.v.: de procedure eist een integer en het is mogelijk dat de parameter via de $_GET array als een string krijgt)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Indien de procedure een base64 of datetime.iso8601 type vereist (die bestaan niet als PHP-eigen types)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Als auto-conversie zou kunnen falen (b.v.: je wil een lege XML-RPC struct als parameter doorgeven. Lege structs worden als lege arrays voorgesteld in PHP. Indien je een lege array als parameter doorgeeft zal die
+                            worden omgezet in een XML-RPC array vermits het geen associatieve array is)</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <para>
+                    Er zijn 2 manieren waarop je een <code>Zend_XmlRpc_Value</code> object kan maken: expliciet (de constructor van het object
+                    aanroepen) of door de statische functie <code>Zend_XmlRpc_Value::getXmlRpcValue()</code> met de vereiste XML-RPC type constante aan te roepen.
+                </para>
+                <table>
+                    <title><code>Zend_XmlRpc_Value</code> objecten die de XML-RPC types voorstelt</title>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>XML-RPC type</entry>
+                                <entry>Overeenkomstige <code>Zend_XmlRpc_Value</code> constante</entry>
+                                <entry><code>Zend_XmlRpc_Value</code> object</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>int</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Integer</code></entry>
+                            </row>
+                            <row>
+                                <entry>double</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Double</code></entry>
+                            </row>
+                            <row>
+                                <entry>boolean</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Boolean</code></entry>
+                            </row>
+                            <row>
+                                <entry>string</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_String</code></entry>
+                            </row>
+                            <row>
+                                <entry>base64</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Base64</code></entry>
+                            </row>
+                            <row>
+                                <entry>dateTime.iso8601</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_DateTime</code></entry>
+                            </row>
+                            <row>
+                                <entry>array</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Array</code></entry>
+                            </row>
+                            <row>
+                                <entry>struct</entry>
+                                <entry><code>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</code></entry>
+                                <entry><code>Zend_XmlRpc_Value_Struct</code></entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <programlisting role="php"><![CDATA[<?php
+
+/** 2 parameters worden aan deze procedure doorgegeven
+ *    - De eerste parameter is een XML-RPC base64 type dat werd gemaakt door de statische functie Zend_XmlRpc_Value::getXmlRpcValue() aan te roepen
+ *    - De tweede parameter is een XML-RPC structuur die expliciet werd gemaakt
+ */
+
+$p1 = Zend_XmlRpc_Value::getXmlRpcValue('encoded string', Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64);
+$p2 = new Zend_XmlRpc_Value_Struct(array('name' => 'Joe', 'age' => 30));
+
+$service->serviceProcedure($p1, $p2);
+
+?>]]>
+                </programlisting>
+                <para>
+                    <note>
+                        <para>De waarde van de parameter word nog steeds als een PHP variabele gegeven maar zal worden omgezet naar het gespecifieerde type door de PHP conversietechnieken te gebruiken (b.v.: als een string als waarde aan het <code>Zend_XmlRpc_Value_Integer</code> object wordt gegeven zal het worden omgezet door <code>(int)$value</code>) toe te passen).</para>
+                    </note>
+                </para>
+            </sect3>
+            <sect3 id='zend.xmlrpc.client.parameters.as_xml'>
+                <title>Een XML string in een XML-RPC parameter "parsen"</title>
+                <para>
+                    Deze methode van parameters doorgeven word intern in het <code>Zend_XmlRpc</code> pakket gebruikt en word niet aangeraden.
+                </para>
+                <para>
+                    Indien je toch deze methode moet gebruiken zou je de statische functie <code>Zend_XmlRpc_Value::getXmlRpcValue()</code> moeten gebruiken om een string in een <code>Zend_XmlRpc_Value</code> object te gieten die het overeenkomstige XML-RPC type voorstelt. Je zou 2 parameters aan de <code>Zend_XmlRpc_Value::getXmlRpcValue()</code> functie moeten doorgeven: de XML string en de <code>Zend_XmlRpc_Value::XML_STRING</code> constante.
+                </para>
+            </sect3>
+        </sect2>
+        <sect2 id="zend.xmlrpc.client.wsdl">
+            <title>Hints geven voor parameter types</title>
+            <para>
+                Het voornaamste verschil tussen XML-RPC en SOAP web services is het WDSL bestand. Het SOAP protocol heeft meestal een WDSL bestand dat de interface van de web service beschrijft. Aan de hand van deze interface weet de SOAP client welke de benodigde parameter types zijn die naar de server moeten worden gestuurd en wat het type is van de teruggegeven waarde.
+                Zonder het WDSL bestand zou de gebruiker een probleem kunnen hebben de types te kennen.
+            </para>
+            <para>
+                De oplossing van het XML-RPC protocol is het gebruik van een speciale procedure van de service die <code>system.methodSignature</code> word genoemd. Deze procedure krijgt een procedurenaam als parameter aangegeven en geeft dan de handtekening van de gegeven procedure terug. De handtekening bevat het nodige type van de parameters en de waarde die wordt teruggegeven door de procedure.
+            </para>
+            <note>
+                <para>Niet alle XML-RPC server verstaan de speciale <code>system.methodSignature</code> procedure. Servers die dit niet verstaan bieden geen support voor het geven van hints voor types.</para>
+            </note>
+            <para>
+                <code>Zend_XmlRpc_Client</code> implementeert een soort van 'WSDL' type bestand voor XML-RPC server die de <code>system.methodSignature</code> procedure gebruiken.
+                Indien gevraagd zal <code>Zend_XmlRpc_Client</code> een lijst van alle procedures van een XML-RPC server aanvragen en alle handtekeningen van die procedures en zal die data opslaan in een XML bestand (gelijk aan het SOAP WSDL bestand).
+                Als je dan dezelfde XML-RPC server opnieuw gebruikt kan je het XML bestand doorgeven en <code>Zend_XmlRpc_Client</code> zal hints geven voor het type van alle parameters voor de aangevraagde procedure aan de hand van de handtekening ervan.
+            </para>
+            <para>
+                Het XML bestand met de procedurehandtekeningen wordt gemaakt door de <code>Zend_XmlRpc_Client::__getMethodsXml()</code> functie aan te roepen. Die geeft een XML string terug die alle data van de handtekening bevat.
+                Om een bestaand handtekening XML bestand aan te duiden kan de gebruiker de XML data als parameter aan de contructor van <code>Zend_XmlRpc_Client</code> doorgeven of de <code>Zend_XmlRpc_Client::__setMethodsXml()</code> functie aanroepen.
+            </para>
+            <example>
+                <title>Een XML-RPC service aanroepen met type hints</title>
+                <programlisting role="php"><![CDATA[<?php
+
+/**
+ * Verbinden met een XML-RPC server, en zijn handtekening bestand opslaan (het equivalent
+ * van een SOAP WSDL bestand)
+ */
+require_once 'Zend/XmlRpc/Client.php';
+
+$service = new Zend_XmlRpc_Client('http://www.example.org/xmlrpc');
+
+file_put_contents('/tmp/xmlrpc-signatures/example.xml', $service->__getMethodsXml());
+
+/* Het $service object bevat alle handtekeningen van de XML-RPC server. Wanneer de serviceProcedure word opgeroepen zal zijn parameter ($param) naar het juiste type worden omgezet aan de hand van de handtekening van de procedure.
+*/
+$service->serviceProcedure($param);
+
+?>]]>
+                    </programlisting>
+                    <programlisting role="php"><![CDATA[<?php
+
+/**
+ * Verbinden met een XML-RPC server, gebruik makend van een bestaand handtekeningbestand. Zo verzekeren
+ * we ons ervan dat de doorgegeven parameters van het juiste type zijn.
+ */
+require_once 'Zend/XmlRpc/Client.php';
+
+$signature_file_xml = file_get_contents('/tmp/xmlrpc-signatures/example.xml');
+$service = new Zend_XmlRpc_Client('http://www.example.org/xmlrpc', 'namespace', $signature_file_xml);
+
+/* Het $service object bevat alle handtekeningen van de XML-RPC server. Wanneer de serviceProcedure word opgeroepen zal zijn parameter ($param) naar het juiste type worden omgezet aan de hand van de handtekening van de procedure.
+*/
+$service->serviceProcedure($param);
+
+?>]]>
+                        </programlisting>
+                    </example>
+                </sect2>
+                <sect2 id="zend.xmlrpc.client.response">
+                    <title>Het antwoord terugkrijgen</title>
+                    <para>
+                        De XML-RPC procedure geeft een waarde terug met een XML-RPC type.
+                        De <code>Zend_XmlRpc_Client</code> methode die een XML-RPC procedure aanroept geeft een waarde terug met een PHP-eigen type die werd verkregen vanaf het teruggegeven XML-RPC type.
+                    </para>
+                    <para>
+                        Je kan de <code>Zend_XmlRpc_Client::__getResponse()</code> functie gebruiken om de teruggegeven waarde te verkrijgen van de aangevraagde procedure.
+                        De <code>__getResponse()</code> functie krijgt een parameter die het type van de teruggegeven waarde aanduidt.
+                        De antwoordopties zijn:
+                        <itemizedlist>
+                            <listitem>
+                                <para><code>Zend_XmlRpc_Client::RESPONSE_PHP_NATIVE</code> - Geef de terugegeven waarde van de procedure als een PHP-eigen waarde terug (zet het XML-RPC type om naar een PHP type).</para>
+                            </listitem>
+                            <listitem>
+                                <para><code>Zend_XmlRpc_Client::RESPONSE_XML_STRING</code> - Geef de XML string voorstelling van het XML-RPC antwoord terug.</para>
+                            </listitem>
+                            <listitem>
+                                <para><code>Zend_XmlRpc_Client::RESPONSE_ZXMLRPC_OBJECT</code> - Geef een <code>Zend_XmlRpc_Value</code> object terug die het teruggegeven XML-RPC type voorstelt.</para>
+                            </listitem>
+                        </itemizedlist>
+                    </para>
+                    <programlisting role="php"><![CDATA[<?php
+
+$service->serviceProcedure();
+
+$response = $service->__getResponse();
+// $response is de PHP variabele omgezet van het type van de teruggegeven XML-RPC waarde
+
+$response = $service->__getResponse(ZXmlRpcClient::RESPONSE_XML_STRING);
+// $response is een string die de XML bevat die de door de procedure teruggegeven waarde voorstelt
+
+$response = $service->__getResponse(ZXmlRpcClient::RESPONSE_ZXMLRPC_OBJECT);
+// $response is een Zend_XmlRpc_Value instantie die de door de procedure teruggegeven waarde voorstelt
+
+?>]]>
+                    </programlisting>
+                </sect2>
+            </sect1>
+            <!--
+                vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,397 @@
+<!-- EN-Revision: 14091 -->
+<sect1 id="zend.file.transfer.introduction">
+    <title>Zend_File_Transfer</title>
+
+    <para><classname>Zend_File_Transfer</classname> permet aux développeurs de contrôler l'upload de fichiers mais aussi le
+    téléchargement. Il vous permet d'utiliser les validateurs incorporés pour le traitement de fichier et même la
+    possibilité de changer les fichiers avec des filtres. <classname>Zend_File_Transfer</classname> fonctionne avec des
+    adaptateurs ce qui vous permet d'utiliser la même API pour différents protocoles de transfert HTTP, FTP, WEBDAV et
+    plus encore.</para>
+
+    <note>
+        <title>Limitation</title>
+
+        <para>L'implémentation actuelle de <classname>Zend_File_Transfer</classname> est limitée aux
+        uploads de type HTTP Post. Le téléchargement de fichiers et les autres adaptateurs seront ajoutés dans les
+        prochaines versions. Les méthodes non implémentées pour le moment lèveront une exception. Donc réellement vous
+        devriez directement utiliser une instance de <classname>Zend_File_Transfer_Adapter_Http</classname>. Ceci changera dans le
+        futur, dès qu'il existera des adaptateurs disponibles.</para>
+    </note>
+
+    <note>
+        <title>Formulaires</title>
+
+        <para>Quand vous utilisez <classname>Zend_Form</classname> vous devriez lire et suivre les exemples décrits dans le
+        chapitre <classname>Zend_Form</classname> et ne pas utiliser manuellement <classname>Zend_File_Transfer</classname>. Mais les
+        informations que vous pourrez lire dans le présent chapitre vous seront malgré tout utile, même si vous ne
+        l'utilisez pas directement. Toutes les considérations, descriptions et solutions sont les mêmes quand vous
+        utilisez <classname>Zend_File_Transfer</classname> au travers de <classname>Zend_Form</classname>.</para>
+    </note>
+
+    <para>L'utilisation de <classname>Zend_File_Transfer</classname> est assez simple. Il consiste en deux parties. Le formulaire
+    HTTP qui réalise l'upload, et la gestion des fichiers uploadés avec <classname>Zend_File_Transfer</classname>. Regardez
+    l'exemple suivant :</para>
+
+    <example id="zend.file.transfer.introduction.example">
+        <title>Formulaire simple d'upload de fichier</title>
+
+        <para>Cet exemple illustre un upload de fichier basique avec <classname>Zend_File_Transfer</classname>. La première partie
+        est le formulaire. Dans notre exemple, il n'y a qu'un seul fichier que nous souhaitons uploadé.</para>
+
+        <programlisting><![CDATA[
+<form enctype="multipart/form-data" action="/file/upload" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+        Choose a file to upload:
+        <input name="uploadedfile" type="file" />
+        <br />
+    <input type="submit" value="Upload File" />
+</form>
+]]></programlisting>
+
+        <para>Notez que vous devriez utiliser <link
+        linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> par simplicité plutôt que de créer le
+        HTML manuellement.</para>
+
+        <para>L'étape suivante est de créer le récepteur de l'upload. Dans notre exemple le récepteur est
+        "<code>/file/upload</code>". Donc nous créons le contrôleur <code>file</code> avec l'action
+        <code>upload</code>.</para>
+
+        <programlisting role="php"><![CDATA[
+$adapter = new Zend_File_Transfer_Adapter_Http();
+
+$adapter->setDestination('C:\temp');
+
+if (!$adapter->receive()) {
+    $messages = $adapter->getMessages();
+    echo implode("\n", $messages);
+}
+]]></programlisting>
+
+        <para>Comme vous le voyez, l'utilisation la plus simple est de définir une destination avec la méthode
+        <code>setDestination</code> et d'appeler la méthode <code>receive()</code>. S'il apparaît des erreurs au cours
+        de l'upload, alors vous les récupérerez grâce à une exception qui sera retournée.</para>
+    </example>
+
+    <note>
+        <title>Attention</title>
+
+        <para>Maintenez à l'esprit qu'il s'agit de l'utilisation la plus simple. Vous <emphasis>ne devez
+        jamais</emphasis> utiliser cet exemple en environnement de production car il causerait de graves problèmes de
+        sécurité. Vous devez toujours utiliser des validateurs pour accroître la sécurité.</para>
+    </note>
+
+    <sect2 id="zend.file.transfer.introduction.adapters">
+        <title>Adaptateurs supportés par Zend_File_Transfer</title>
+
+        <para><classname>Zend_File_Transfer</classname> est construit pur supporter différents adaptateurs et différentes
+        directions. Il est conçu pour permettre l'upload, le téléchargement et même l'envoi bidirectionnel (upload avec
+        un adaptateur et télécharge avec un autre adaptateur en même temps) de fichiers. Cependant avec la version 1.6
+        de Zend Framework, il n'y a qu'un seul adaptateur disponible, l'adaptateur HTTP.</para>
+
+        <para>Puisqu'il n'y a qu'un seul adaptateur disponible pour le moment, la classe principale n'est pas prête à
+        l'utilisation. Si vous souhaitez utiliser <classname>Zend_File_Transfer</classname>, vous devez utiliser l'adaptateur
+        directement.</para>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.options">
+        <title>Options de Zend_File_Transfer</title>
+
+        <para><classname>Zend_File_Transfer</classname> et ses adaptateurs supportent plusieurs options. Vous pouvez paramétrer
+        toutes les options soit en les fournissant au constructeur, ou en utilisant <code>setOptions($options)</code>.
+        <code>getOptions()</code> retournera les options actuellement paramétrées. Ci-dessous, vous trouverez la liste
+        des options supportées :</para>
+
+        <itemizedlist>
+            <listitem>
+                <para><code>ignoreNoFile</code> : si cette option vaut <code>true</code>, tous les validateurs
+                ignoreront le fait que le fichier à été uploadé ou non par le formulaire. Cette option vaut par défaut
+                <code>false</code>, ce qui lance une erreur indiquant que le fichier n'a pas été fourni.</para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.checking">
+        <title>Vérification des fichiers</title>
+
+        <para><classname>Zend_File_Transfer</classname> possède plusieurs méthodes qui permettent de vérifier suivant différentes
+        considérations. Ceci est particulièrement utile quand vous devez travailler avec des fichiers qui ont été
+        uploadés.</para>
+
+        <itemizedlist>
+            <listitem>
+                <para><code>isValid($files = null)</code> : cette méthode vérifie si le(s) fichier(s) est(sont)
+                valide(s), en se basant sur les validateurs affectés à chacun de ces fichiers. Si aucun fichier n'est
+                fourni, tous les fichiers seront vérifiés. Notez que cette méthode sera appelée en dernier quand les
+                fichiers seront reçus.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>isUploaded($files = null)</code> : cette méthode vérifie si le(s) fichier(s) fourni(s) a
+                (ont) été uploadé(s) par l'utilisateur. Ceci est utile si vous avez défini que certains fichiers sont
+                optionnels. Si aucun fichier n'est fourni, tous les fichiers seront vérifiés.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>isReceived($files = null)</code> : cette méthode vérifie si le(s) fichier(s) fourni(s) a
+                (ont) bien été reçu(s). Si aucun fichier n'est fourni, tous les fichiers seront vérifiés.</para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.file.transfer.introduction.checking.example">
+            <title>Vérification de fichiers</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+
+// Retourne toutes les informations connues sur le fichier
+$files = $upload->getFileInfo();
+
+foreach ($files as $file => $info) {
+    // Fichier uploadé ?
+    if (!$upload->isUploaded($file)) {
+        print "Pourquoi n'avez-vous pas uploadé ce fichier ?";
+        continue;
+    }
+
+    // Les validateurs sont-ils OK ?
+    if (!$upload->isValid($file)) {
+        print "Désolé mais $file ne correspond à ce que nous attendons";
+        continue;
+    }
+}
+
+$upload->receive();
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.informations">
+        <title>Informations complémentaires sur les fichiers</title>
+
+        <para><classname>Zend_File_Transfer</classname> peut fournir de multiples informations complémentaires sur les fichiers.
+        Les méthodes suivantes sont disponibles :</para>
+
+        <itemizedlist>
+            <listitem>
+                <para><code>getFileName($file = null, $path = true)</code> : cette méthode retourne le vrai nom de
+                fichier d'un fichier transféré.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>getFileInfo($file = null)</code> : cette méthode retourne tous les informations internes
+                concernant un fichier transféré donné.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>getFileSize($file = null) </code>: cette méthode retourne la taille réelle d'un fichier
+                transféré donné.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>getHash($hash = 'crc32', $files = null) </code>: cette méthode retourne la valeur de hachage
+                du contenu d'un fichier transféré donné.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>getMimeType($files = null)</code> : cette méthode retourne le type MIME d'un fichier
+                transféré donné.</para>
+            </listitem>
+        </itemizedlist>
+
+        <para><code>getFileName()</code> accepte le nom d'un élément entant que premier paramètre. Si aucun n'est
+        fourni, tous les fichiers connus seront retournées sous la forme d'un tableau. Si le fichier est un "multifile",
+        vous le récupérerez aussi sous la forme d'un tableau. S'il n'y a qu'un seul fichier alors une chaîne sera
+        retournée.</para>
+
+        <para>Par défaut les noms de fichier sont retournés avec leur chemin d'accès complet. Si vous souhaitez
+        seulement le nom de fichier sans le chemin, vous pouvez paramétrer le second paramètre <code>$path</code> à
+        <code>false</code> ce qui tronquera le chemin.</para>
+
+        <example id="zend.file.transfer.introduction.informations.example1">
+            <title>Récupération du nom de fichier</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// Retourne le nom de fichier pour tous les fichiers
+$names = $upload->getFileName();
+
+// Retourne le nom de fichier de l'élément de formulaire "foo"
+$names = $upload->getFileName('foo');
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>Notez que le nom de fichier peut changer quand vous recevez le fichier. Ceci est du au fait qu'après
+            la réception, tous les filtres sot appliqués. Donc vous ne devriez appeler <code>getFileName()</code>
+            qu'après avoir reçu les fichiers.</para>
+        </note>
+
+        <para><code>getFileSize()</code> retourne par défaut la taille réelle d'un fichier en notation SI ce qui
+        signifie que vous récupérerez <code>2kB</code> au lieu de <code>2048</code>. Si vous voulez la taille brute,
+        utilisez l'option <code>useByteString</code> à <code>false</code>.</para>
+
+        <example id="zend.file.transfer.introduction.informations.example.getfilesize">
+            <title>Récupération de la taille de fichier</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// Retourne les tailles de tous les fichiers sous la forme
+// d'un tableau si plus d'un fichier a été uploadé
+$size = $upload->getFileSize();
+
+// Bascule de la notation SI vers une taille brute
+$upload->setOption(array('useByteString' => false));
+$size = $upload->getFileSize();
+]]></programlisting>
+        </example>
+
+        <para><code>getHash()</code> accepte le nom de l'algorithme de hachage en tant que premier paramètre. Pour avoir
+        une liste des algorithmes connus, regardez <ulink url="http://php.net/manual/fr/function.hash-algos.php">la
+        méthode hash_algos de PHP</ulink>. Si vous ne fournissez aucun algorithme, celui par défaut sera
+        <code>crc32</code>.</para>
+
+        <example id="zend.file.transfer.introduction.informations.example2">
+            <title>Récupération d'un hash de fichier</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// Retourne le hachage de fichier pour tous les fichiers sous la forme
+// d'un tableau si plusieurs fichiers sont fournis
+$hash = $upload->getHash('md5');
+
+// Retourne le hachage de l'élément de formulaire "foo"
+$names = $upload->getHash('crc32', 'foo');
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>Notez que si un fichier ou un élément de formulaire donné contient plus d'un fichier, la valeur
+            retournée sera un tableau.</para>
+        </note>
+
+        <para><code>getMimeType()</code> retourne le type MIME d'un fichier. Si plus d'un fichier a été uploadé, elle
+        retourne un tableau, sinon c'est une chaîne.</para>
+
+        <example id="zend.file.transfer.introduction.informations.getmimetype">
+            <title>Récupération du type MIME de fichier</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+$mime = $upload->getMimeType();
+
+// Retourne le type MIME pour l'élément de formulaire "foo"
+$names = $upload->getMimeType('foo');
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>Notez que cette méthode utilise l'extension fileinfo si elle est disponible. Si elle n'est pas trouvé,
+            elle utilise l'extension mimemagic. Quand aucune extension n'est fournie, elle utilise le type MIME donné
+            par le serveur quand le fichier a été uploadé.</para>
+        </note>
+    </sect2>
+    <sect2 id="zend.file.transfer.introduction.uploadprogress">
+
+        <title>Progress for file uploads</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname> can give you the actual state of a fileupload in progress. To use
+            this feature you need either the <code>APC</code> extension which is provided with most default
+            PHP installations, or the <code>uploadprogress</code> extension. Both extensions are detected
+            and used automatically. To be able to get the progress you need to meet some prerequisites.
+        </para>
+
+        <para>
+            First, you need to have either <code>APC</code> or <code>uploadprogress</code> to be enabled.
+            Note that you can disable this feature of <code>APC</code> within your php.ini.
+        </para>
+
+        <para>
+            Second, you need to have the proper hidden fields added in the form which sends the files. When you
+            use <classname>Zend_Form_Element_File</classname> this hidden fields are automatically added by
+            <classname>Zend_Form</classname>.
+        </para>
+
+        <para>
+            When the above two points are provided then you are able to get the actual progress of the
+            file upload by using the <code>getProgress</code> method.
+        </para>
+
+        <example id="zend.file.transfer.introduction.uploadprogress.fetching">
+            <title>Retrieve the actual progress of the file upload</title>
+
+            <para>
+                Let's expect that you have already created and submitted your form, and the file upload
+                is actually in progress.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$upload = Zend_File_Transfer_Adapter_Http::getProgress();
+
+$upload = null;
+while (empty($upload['message'])) {
+    $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
+    // do something with the returned data
+}
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            Based on the used extension the returned data differs in detail. But both extensions return their
+            informations within an array which provides the following keys:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="strong">total</emphasis>: The total filesize of the uploaded files in bytes
+                    as integer.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">current</emphasis>: The current uploaded filesize in bytes
+                    as integer.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">rate</emphasis>: The average upload speed in bytes per second
+                    as integer.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">id</emphasis>: The id is the reference to the upload itself. When
+                    multiple users upload a file, each upload gets it's own id. The actual id of this request
+                    will be returned when you call <code>getProgress()</code> the first time.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">message</emphasis>: A helpful message in the case of a problem.
+                    Problems could be, that there is no upload in progress, that there was a failure while
+                    retrieving the data for the progress, or that the upload has been canceled.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            All other returned keys are provided directly from the extensions and not checked.
+        </para>
+    </sect2>
+</sect1>

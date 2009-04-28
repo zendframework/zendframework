@@ -1,0 +1,236 @@
+body {
+  background-color: #fff;
+  color: #232323;
+  font-family: Arial, sans-serif;
+  font-size: small;
+  margin: 8px;
+  margin-top: 3px;
+}
+
+/* TODO jhartman --> swap out with css from app engine apps
+*/
+
+
+img {
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0;
+  vertical-align: top;
+  text-align: left;
+}
+
+a:link {
+  color: #0000cc;
+}
+
+a:active {
+  color: #cc0000;
+}
+
+a:visited {
+  color: #551a8b;
+}
+
+h1 {
+  font-size: x-large;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: large;
+}
+
+h3 {
+  font-size: medium;
+}
+
+h4 {
+  font-size: small;
+}
+
+form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.25em;
+}
+
+pre, code {
+  color: #007000;
+  font-family: "bogus font here", monospace;
+  font-size: 100%;
+}
+
+pre {
+  border: 1px solid silver;
+  background-color: #f5f5f5;
+  padding: 0.5em;
+  overflow: auto;
+  margin: 2em;
+}
+
+pre ins {
+  color: #cc0000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* forms */
+textarea {
+    width: 600px;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.submit {
+    border: 1px solid #ddd;
+}
+
+input, select{
+    border: 1px solid #ddd;
+    margin-bottom: 2px;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+/* "Selected" links */
+a.selected, .selected a, .selected {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.selected:visited, .selected a:visited {
+  color: black;
+}
+
+p.videoDescription {
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  font-size: small;
+}
+
+p.videoCategory {
+  margin: 0;
+  padding: 0;
+  /* overflow: scroll; */
+  font-size: x-small;
+}
+
+p.videoTags {
+  margin: 0;
+  padding: 0;
+  /* overflow: scroll; */
+  font-size: x-small;
+}
+
+p.edit {
+  font-size: small;
+}
+
+.note {
+  padding: 2px;
+  background-color: yellow;
+  color: #000;
+}
+
+#editForm {
+  font-size: small;
+}
+
+table.videoList {
+  width: 100%;
+}
+
+.videoList td {
+  padding: 10px 0px 5px 5px;
+  border-bottom: 1px solid silver;
+}
+
+#titleBar {
+  border: 1px solid silver;
+  background-color: #e5ecf9;
+  margin: 0;
+  padding: 0;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+#titleText {
+  float: left;
+}
+
+#searchBox {
+  float: right;
+}
+
+#authStatus {
+  border-bottom: 1px solid #ddd;
+  padding: 2px;
+  margin-bottom: 10px;
+  
+}
+
+#main {
+  margin: 10px;
+}
+
+#mainSessions {
+  background-color: #ddd;
+  padding: 10px;
+}
+
+#searchResults {
+  width: 100%;
+  background-color: silver;
+}
+
+#searchResultsListColumn {
+  float: left;
+  width: 47%;
+  margin-bottom: 20px;
+  padding-right: 2px;
+}
+
+#searchResultsVideoColumn {
+  float: right;
+  width: 47%;
+  padding-left: 5px;
+  border-left: 1px solid #ddd;
+
+}
+
+#sessionVariable {
+  font-family: Courier, monospace;
+  background-color: #fff;
+  padding: 10px;
+  width: 80%;
+  overflow: scroll;
+}
+
+.thumbnail {
+  padding: 0px 0px 0px 2px;
+}
+
+#imageLoadThumbnail {
+  padding: 4px;
+  background-color: #333;
+}

@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.input">
+    <title>Zend_Filter_Input</title>
+
+    <para>
+        Zend_Filter_Input bietet ein ausgezeichnetes Interfave um mehrere Filter und Prüfer zu assoziieren, Sie
+        Kollektionen von Daten hinzuzufügen, und Eingabewerte zu empfangen nachdem diese durch die Filter und
+        Prüfer bearbeitet wurden. Werte werden standardmäßig in kommentiertem Format zurückgegeben für sichere
+        HTML Ausgabe.
+    </para>
+
+    <para>
+        Angenommen das diese Klasse ein Käfig für externe Daten ist. Daten betreten die Anwendung von externen
+        Quellen, wie HTTP Anfrageparameter, HTTP Header, ein Web Service, oder sogar durch Lesen von eine Datenbank
+        oder anderen Dateien. Daten werden zuerst in den Käfig gesperrt, und die Anwendung kann diese Daten nur dann
+        Stück für Stück empfangen wenn dem Käfig gesagt wird, was diese Daten sein sollten und wie geplant ist diese
+        zu verwenden. Der Käfig inspiziert die Daten auf Gültigkeit. Es kann passieren das er die Datenwerte
+        kommentiert für den entsprechenden Kontext. Der Käfig entlässt die Daten nur wen diese alle
+        Notwendigkeiten komplett erfüllen. Mit einem einzigen und bequemen Interface, wird gutes
+        Programmierverhalten ermöglicht und es lässt Entwickler darüber nachdenken wie die Daten verwendet werden.
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis role="strong">Filter</emphasis> wandeln Eingabewerte um, inden Sie Zeichen in dem Wert
+                entfernen oder Ändern. Das Ziel ist es Eingabewerte zu "normalisieren" bis diese einem
+                erwarteten Format entsprechen. Zum Beispiel, wenn ein String von nummerischen Zeichen benötigt wird,
+                und der Eingabewert "abc123" ist dann könnte eine erwartete Umwandlung die Änderung des Wertes in
+                den String "123" sein.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">Prüfer</emphasis> prüfen Eingabewerte gegenüber Kriterien und melden ob
+                diese den Test bestanden haben oder nicht. Der Wert wird nicht geändert, aber die Prüfung kann
+                fehlschlagen. Zum Beispiel, wenn ein String wie eine Email Adresse aussehen muß, und der Eingabewert
+                "abc123" ist, dann wird der Wert als nicht gültig angenommen.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">Auskommentierer</emphasis> wandeln einen Wert um indem Sie magisches
+                Verhalten von bestimmten Zeichen entfernen. In einigen Ausgabekontexten haben speziellen Zeichen
+                eine Bedeutung. Zum Beispiel das Zeichen '&lt;' und '&gt;' begrenzen HTML Tags, und wenn ein String
+                diese Zeichen enthält und in einem HTML Kontext ausgegeben wird, könnte der Inhalt zwischen Ihnen
+                die Ausgabe oder Funktionalität der HTML Präsentation beeinflussen. Das auskommentieren der Zeichen
+                entfernt die spezielle Bedeutung, damit Sie als literale Zeichen ausgegeben werden.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Um Zend_Filter_Input zu verwenden, müssen die folgenden Schritte unternommen werden:
+    </para>
+
+    <orderedlist numeration="arabic">
+        <listitem>
+            <para>
+                Filter und Prüfregeln deklarieren
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Filter und Prüfbearbeiter erstellen
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Eingabedaten bereitstellen
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Geprüfte Felder und andere Reports erhalten
+            </para>
+        </listitem>
+    </orderedlist>
+
+    <para>
+        Die folgenden Sektionen beschreiben die Schritte für die Verwendung dieser Klasse.
+    </para>
+
+    <sect2 id="zend.filter.input.declaring">
+
+        <title>Filter und Prüfregeln deklarieren</title>
+
+        <para>
+            Vor der Erstellung einer Instanz von Zend_Filter_Input, muß ein Array von Filterregeln deklariert werden
+            und auch ein Array von Prüfregeln. Dieses assoziative Array verbindet einen Regelnamen mit einem Filter
+            oder Prüfer oder einer Kette von Filtern oder Prüfern.
+        </para>
+
+        <para>
+            Das folgende Beispiel eines Sets von Filterregeln deklariert, daß das Feld 'month' von Zend_Filter_Digits
+            gefiltert wird, und das Feld 'account' von Zend_Filter_StringTrim gefiltert wird. Anschließend wird
+            ein Set von Prüfregeln deklariert welches prüft das das Feld 'account' nur dann gültig ist wenn es
+            nur alphabetische Zeichen enthält.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$filters = array(
+    'month'   => 'Digits',
+    'account' => 'StringTrim'
+);
+
+$validators = array(
+    'account' => 'Alpha'
+);
+]]>
+        </programlisting>
+
+        <para>
+            Jeder Schlüssel im obigen <code>$filters</code> Array ist der Name einer Regel die auf einen Filter
+            für ein spezielles Datenfeld angewendet wird. Standardmäßig, ist der Name der Regel auch der Name des
+            Feldes der Eingabedaten auf die die Regel angewendet werden soll.
+        </para>
+
+        <para>
+            Eine Regel kann in verschiedenen Formaten deklariert werden:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Ein einfacher skalarer String, der einem Klassennamen entspricht:
+                    <programlisting role="php"><![CDATA[
+$validators = array(
+    'month'   => 'Digits',
+);
+]]>
+                    </programlisting>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Die Instanz eines Objektes einer der Klassen die Zend_Filter_Interface oder
+                    Zend_Validate_Interface implementieren.
+                    <programlisting role="php"><![CDATA[
+$digits = new Zend_Validate_Digits();
+
+$validators = array(
+    'month'   => $digits
+);
+]]>
+                    </programlisting>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Ein Array um eine Kette von Filtern oder Prüfern zu deklarieren. Die Elemente dieses Arrays
+                    können Strings sein die Klassennamen entsprechen oder Filter/Prüfobjekte, wie in den oben
+                    beschriebenen Fällen. Zusätzlich kann eine dritte Wahl verwendet werden: Ein Array das
+                    einen String enthält der dem Klassennamen entspricht gefolgt von Argumenten die dessen
+                    Konstruktor übergeben werden.
+
+                    <programlisting role="php"><![CDATA[
+$validators = array(
+    'month'   => array(
+        'Digits',                // String
+        new Zend_Validate_Int(), // Objekt Instanz
+        array('Between', 1, 12)  // String mit Konstruktor Argumenten
+    )
+);
+]]>
+                    </programlisting>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>
+                Wenn ein Filter oder Prüfer mit Konstruktor Argumenten in einem Array deklariert wird, muß ein Array
+                für die Regel erstellt werden, selbst wenn die Regel nur einen Filter oder Prüfer enthält.
+            </para>
+        </note>
+
+        <para>
+            Es kann ein spezieller "Wildcard" Regelschlüssel <code>'*'</code>, entweder im Array des Filters oder im
+            Array des Prüfers, verwendet werden. Das bedeutet das der Filter oder Prüfer der in dieser Regel
+            deklariert wird allen Feldern der Eingabedaten zugewiesen wird. Es gilt zu beachten das die Reihenfolge
+            der Einträge im Array des Filters oder im Array des Prüfers bedeutend ist; die Regeln werden in der
+            gleichen Reihenfolge zugewiesen in dem diese deklariert wurden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$filters = array(
+    '*'     => 'StringTrim',
+    'month' => 'Digits'
+);
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.filter.input.running">
+
+        <title>Filter und Prüfbearbeiter erstellen</title>
+
+        <para>
+            Nachdem die Filter und Prüfarrays deklariert wurden, können diese als Argumente im Konstruktor von
+            Zend_Filter_Input verwendet werden. Das gibt ein Objekt zurück welches alle Filter- und Prüfregeln
+            kennt, und das verwendet werden kann um ein oder mehrere Sets von Eingabedaten zu bearbeiten.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$input = new Zend_Filter_Input($filters, $validators);
+]]>
+        </programlisting>
+
+        <para>
+            Man kann Eingabedaten als drittes Argument im Konstruktor spezifizieren. Die Datenstruktur ist ein
+            assoziatives Array. Die superglobalen Standardvariablen in PHP, <code>$_GET</code> und
+            <code>$_POST</code>, sind Beispiele für dieses Format. Man kann jede dieser Variablen als Eingabedaten
+            für Zend_Filter_Input verwenden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$data = $_GET;
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+]]>
+        </programlisting>
+
+        <para>
+            Alternativ kann die <code>setData()</code> Methode verwendet werden, indem ein assoziatives Array von
+            Schlüssel/Werte Paaren, im selben Format wie oben beschrieben, übergeben wird.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$input = new Zend_Filter_Input($filters, $validators);
+$input->setData($newData);
+]]>
+        </programlisting>
+
+        <para>
+            Die <code>setData()</code> Methode definiert Daten nocheinmal, in einem existierenden Zend_Filter_Input
+            Objekt ohne die Filter- und Prüfregeln zu verändern. Wenn diese Methode verwendet wird können die selben
+            Regeln, an anderen Sets von Eingabedaten, wieder verwendet werden.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.filter.input.results">
+
+        <title>Geprüfte Felder und andere Reporte empfangen</title>
+
+        <para>
+            Nachdem Filter und Prüfer deklariert wurden und der Eingabeprozessor erstellt wurde, können Reporte von
+            fehlenden, unbekannten und ungültigen Feldern empfangen werden. Man kann auch die Werte der Felder
+            erhalten, nachdem die Filter angewendet wurden.
+        </para>
+
+        <sect3 id="zend.filter.input.results.isvalid">
+
+            <title>Abfragen ob die Eingabe gültig ist</title>
+
+            <para>
+                Wenn alle Eingabedaten die Prüfregeln bestanden haben, gibt die <code>isValid()</code> Methode
+                <code>true</code> zurück. Wenn irgendein Feld ungültig ist oder ein benötigtes Feld fehlt, gibt die
+                <code>isValid()</code> Methode <code>false</code> zurück.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+if ($input->isValid()) {
+  echo "OK\n";
+}
+]]>
+            </programlisting>
+
+            <para>
+                Diese Methode akzeptiert ein optionales String Argument, das ein individuelles Feld benennt.
+                Wenn das spezifizierte Feld die Prüfung passiert und bereit ist um abgeholt zu werden, gibt
+                <code>isValid('fieldName')</code> den Wert <code>true</code> zurück.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+if ($input->isValid('month')) {
+  echo "Feld 'month' ist OK\n";
+}
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.results.reports">
+
+            <title>Ungültige, fehlende oder unbekannte Felder erhalten</title>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Ungültige</emphasis> Felder sind jene, die einen oder mehrere Ihrer
+                        Prüfungen nicht bestehen.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Fehlende</emphasis> Felder sind jene die nicht in den
+                        Eingabedaten vorhanden sind, aber im Metakommando <code>'presence'=>'required'</code>
+                        (Siehe die <link linkend="zend.filter.input.metacommands.presence">spätere Sektion</link>
+                        über Metakommandos) deklariert wurden.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Unbekannte</emphasis> Felder sind jene die in keiner einzigen Regel,
+                        im Array der Prüfer, deklariert wurden, aber in den Eingabedaten vorkommen.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <programlisting role="php"><![CDATA[
+if ($input->hasInvalid() || $input->hasMissing()) {
+  $messages = $input->getMessages();
+}
+
+// getMessages() gibt einfach die Zusammenfassung von getInvalid()
+// und getMissing() zurück
+
+if ($input->hasInvalid()) {
+  $invalidFields = $input->getInvalid();
+}
+
+if ($input->hasMissing()) {
+  $missingFields = $input->getMissing();
+}
+
+if ($input->hasUnknown()) {
+  $unknownFields = $input->getUnknown();
+}
+]]>
+            </programlisting>
+
+            <para>
+                Das Ergebnis der <code>getMessages()</code> Methode ist ein assoziatives Array, das die Regelnamen
+                einem Array von Fehlermeldungen, relativ zu diesen Regeln, zuordnet. Es ist anzumerken das der Index
+                dieses Arrays der Name der Regel ist die in der Regeldeklaration verwendet wird, und welche
+                von den Namen der Felder, die von der Regel geprüft werden, unterschiedlich sein kann.
+            </para>
+
+            <para>
+                Die <code>getMessages()</code> Methode gibt eine Zusammenfassung der Arrays zurück die von
+                <code>getInvalid()</code> und <code>getMissing()</code> retourniert werden. Diese Methoden geben
+                Subsets der Nachrichten zurück, relativ zu den Prüffehlern, oder Felder die als benötigt deklariert
+                wurden aber in der Eingabe fehlen.
+            </para>
+
+            <para>
+                Die <code>getErrors()</code> Methode gibt ein assoziatives Array zurück, in dem die Regelnamen einem
+                Array von Fehler Identifizierern entsprechen. Fehler Identifizierer sind fixe Strings, um Gründe für
+                eine fehlgeschlagene Prüfung, zu identifizieren, wobei Nachrichten selbst geändert werden können.
+                Siehe <xref linkend="zend.validate.introduction.using" /> für mehr Informationen.
+            </para>
+
+            <para>
+                Die Nachricht die von <code>getMissing()</code> zurückgegeben wird kann als Argument beim
+                Zend_Filter_Input Konstruktor, oder durch verwenden der <code>setOptions()</code> Methode,
+                spezifiziert werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$options = array(
+    'missingMessage' => "Feld '%field%' wird benötigt"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+
+// alternative Methode:
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setOptions($options);
+]]>
+            </programlisting>
+
+            <para>
+                Das Ergebnis der <code>getUnknown()</code> Methode ist ein assoziatives Array, in dem die Feldnamen
+                den Feldwerten zugeordnet werden. Feldnamen werden in diesem Fall als Arrayschlüssel verwendet, statt
+                als Regelnamen, weil keine Regel die Feld erwähnt die unbekannte Felder sind.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.results.escaping">
+
+            <title>Gültige Felder bekommen</title>
+
+            <para>
+                Alle Felder die entweder ungültig, fehlend oder unbekannt sind, werden als gültig angenommen. Man
+                kann Werte für diese Felder erhalten indem ein magischer Accessor verwendet wird. Es gibt auch die
+                nicht-magische Accessor Methoden <code>getEscaped()</code> und <code>getUnescaped()</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$m = $input->month;                 // Ausgabe vom magischen Accessor kommentieren
+$m = $input->getEscaped('month');   // Ausgabe kommentieren
+$m = $input->getUnescaped('month'); // nicht kommentieren
+]]>
+            </programlisting>
+
+            <para>
+                Standardmäßig, wenn ein Wert empfangen wird, wird er mit Zend_Filter_HtmlEntities gefiltert. Das ist
+                der Standard weil angenommen wird, das die am meisten übliche Verwendung, die Ausgabe von Werten von
+                einem Feld in HTML ist. Der HtmlEntities Filter hilft ungewollten Ausgaben von Code vorzubeugen,
+                welche zu Sicherheitsproblemen führen könnten.
+            </para>
+
+            <note>
+                <para>
+                    Wie oben gezeigt, kann man unkommentierte Werte erhalten undem die <code>getUnescaped()</code>
+                    Methode verwendet wird, aber man muß dafür Code schreiben um die Werte sicher zu verwendetn, und
+                    Sicherheitsprobleme, wie Verletzbarkeit für Seitenübergreifende Skript Attacken zu vermeiden.
+                </para>
+            </note>
+
+            <para>
+                Es kann ein anderer Filter für das auskommentieren von Werten definiert werden, durch seine
+                Spezifikation im Array der Optionen des Konstruktors:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$options = array('escapeFilter' => 'StringTrim');
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]>
+            </programlisting>
+
+            <para>
+                Alternativ kann die <code>setDefaultEscapeFilter()</code> Methode verwendet werden:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
+]]>
+            </programlisting>
+
+            <para>
+                Bei jeder Verwendung, kann der Kommentarfilter als String Basisname der Filterklasse, oder als
+                Objektinstanz einer Filterklasse, spezifiziert werden. Der Kommentarfilter kann eine Instanz einer
+                Filterkette, oder ein Objekt der Zend_Filter Klasse sein.
+            </para>
+
+            <para>
+                Filter die Ausgaben kommentieren sollen auf diesen Weg ausgeführt werden, um sicherzustellen das
+                Sie nach der Prüfung ausgeführt werden. Andere Filter, die im Array der Filterregeln deklariert
+                werden, werden bei den Eingabedaten angewendet bevor diese Daten geprüft werden. Wenn
+                Kommentarfilter vor der Prüfung ausgeführt werden, würde der Prozess der Prüfung viel komplexer sein
+                um sowohl kommentierte als auch unkommentierte Versionen der Daten anzubieten. Deswegen wird
+                empfohlen, Filter die Ausgaben mit <code>setDefaultEscapeFilter()</code> kommentieren, nicht im
+                <code>$filters</code> Array zu deklarieren.
+            </para>
+
+            <para>
+                Es gibt nur eine <code>getEscaped()</code> Methode, und deswegen kann nur ein Filter für das
+                kommentieren spezifiziert werden (trotzdem kann dieser Filter eine Filterkette sein). Wenn eine
+                einzelne Instanz von Zend_Filter_Input benötigt wird, um kommentierte Ausgaben zu erhalten, und
+                mehr als eine Filtermethode angewendet werden soll, sollte Zend_Filter_Input erweitert werden und
+                neue Methoden in der Subklasse implementiert werden um Wert auf unterschiedlichen Wegen zu erhalten.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.filter.input.metacommands">
+
+        <title>Metakommandos verwenden um Filter oder Prüfregeln zu kontrollieren</title>
+
+        <para>
+            Zusätzlich zum deklarieren der Übereinstimmungen von Feldern zu Filtern oder Prüfer, können einige
+            "Metakommandos" in der Array Deklaration spezifiziert werden um einige optionale Verhaltensweisen von
+            Zend_Filter_Input zu kontrollieren. Metakommandos treten als String-indizierte Einträge in einem
+            gegebenen Filter- oder Prüfarray Wert auf.
+        </para>
+
+        <sect3 id="zend.filter.input.metacommands.fields">
+
+            <title>Das <code>FIELDS</code> Metakommando</title>
+
+            <para>
+                Wenn der Name der Regel für einen Filter oder Prüfer anders lautet als das Feld in welchem er
+                angewendet werden soll, kann der Feldname mit dem 'fields' Metakommando spezifiziert werden.
+            </para>
+
+            <para>
+                Dieses Metakommando kann durch Verwendung der Klassenkonstanten <classname>Zend_Filter_Input::FIELDS</classname>
+                statt der Angabe eines Strings spezifiziert werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$filters = array(
+    'month' => array(
+        'Digits',        // Namen als Integer Index [0] filtern
+        'fields' => 'mo' // Namen als String Index ['fields'] filtern
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Im obigen Beispiel wendet die Filterregel den 'digits' Filter am Eingabefeld, das 'mo' heißt, an.
+                Der String 'month' wird einfach ein mnemonischer Schlüsselfür diese Filterregel; er wird nicht als
+                Filtername verwendet wenn der Filter mit dem 'fields' Metakommando spezifiziert wird, aber er wird
+                als Regelname verwendet.
+            </para>
+
+            <para>
+                Der Standardwert des 'fields' Metakommandos ist der Index der aktuellen Regel. Im obigen Beispiel
+                wird die Regel, wenn das 'fields' Metakommando nicht spezifiziert wird, auf das Eingabefeld das
+                'month' heißt, angewendet.
+            </para>
+
+            <para>
+                Eine weitere Verwendung des 'fields' Metakommandos ist es Felder für Filter oder Prüfer zu
+                spezifizieren die mehrere Felder als Eingabe benötigen. Wenn das 'fields' Metakommando ein Array ist,
+                ist das Argument des korrespondierenden Filters oder Prüfers ein Array mit den Werten dieser Felder.
+                Zum Beispiel ist es für Benutzer üblich einen Passwort String in zwei Feldern zu spezifizieren, und
+                diese müssen den selben String in beide Felder eingeben. Man kann zum Beispiel eine Prüfklasse
+                implmentieren die ein Array Argument annimmt, und <code>true</code> zurückgibt wenn alle Werte im
+                Array identisch zum jeweils anderen sind.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'password' => array(
+        'StringEquals',
+        'fields' => array('password1', 'password2')
+    )
+);
+//  Inkludiert die hypotetische Klasse Zend_Validate_StringEquals,
+// übergibt dieser ein Array Argument das den Wert der beiden Eingabe
+// Datenfelder enthält die 'password1' und 'password2' heißen.
+]]>
+            </programlisting>
+
+            <para>
+                Wenn die Prüfung dieser Regel fehlschlägt wird der Schlüssel der Regel (<code>'password'</code>)
+                im Rückgabewert von <code>getInvalid()</code> verwendet und nicht eine der benannten Felder im
+                'fields' Metakommando.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.presence">
+
+            <title>Das <code>PRESENCE</code> Metakommando</title>
+
+            <para>
+                Jeder Eintrag im Prüfarray kann ein Metakommando haben das 'presence' heißt. Wenn der Wert dieses
+                Metakommandos 'required' ist muß dieses Feld in den Eingabedaten existieren, andernfalls wird es
+                als fehlendes Feld gemeldet.
+            </para>
+
+            <para>
+                Das Metakommando kann auch spezifiziert werden indem die Klassenkonstante
+                <classname>Zend_Filter_Input::PRESENCE</classname> statt dem String verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'digits',
+        'presence' => 'required'
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Der Standardwert dieses Metakommandos ist 'optional'.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.default">
+
+            <title>Das <code>DEFAULT_VALUE</code> Metakommando</title>
+
+            <para>
+                Wenn ein Feld, für das ein Wert mit dem 'default' Metakommando für diese Regel, in den Eigabedaten
+                vorhanden ist, nimmt das Feld den Wert dieses Metakommandos.
+            </para>
+
+            <para>
+                Dieses Metakommando kann auch spezifiziert werden indem die Klassenkonstante
+                <classname>Zend_Filter_Input::DEFAULT_VALUE</classname> statt einem String verwendet wird.
+            </para>
+
+            <para>
+                Der Standardwert wird dem Feld zugeordnet bevor irgendeiner der Prüfungen stattfindet. Der
+                Standardwert wird dem Feld nur für die aktuelle Regel zugeordnet; wenn das selbe Weld in einer
+                folgenden Regel referenziert wird, hat dieses Feld keinen Wert wenn diese Regel evaluiert wird.
+                Deshalb können verschiedene Regeln auch verschiedene Standardwerte für ein gegebenes Feld
+                deklarieren.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'digits',
+        'default' => '1'
+    )
+);
+
+// kein Wert für das 'month' Feld
+$data = array();
+
+$input = new Zend_Filter_Input(null, $validators, $data);
+echo $input->month; // gibt 1 aus
+]]>
+            </programlisting>
+
+            <para>
+                Wenn eine Regel das <code>FIELDS</code> Metakommando verwendet um ein Array mit mehrfachen Feldern
+                zu definieren, kann ein Array für das <code>DEFAULT_VALUE</code> Metakommando definiert werden
+                und der Standard der korrespondierenden Schlüssel wird für alle fehlenden Felder verwendet.
+                Wenn <code>FIELDS</code> mehrfache Felder definiert aber <code>DEFAULT_VALUE</code> nur ein
+                skalarer Wert ist, dann wird dieser Standardwert als Wert für alle fehlenden Feldern im Array
+                verwendet.
+            </para>
+
+            <para>
+                Es gibt keinen Standardwert für dieses Metakommando.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.allow-empty">
+
+            <title>Das <code>ALLOW_EMPTY</code> Metakommando</title>
+
+            <para>
+                Standardmäßig, wenn ein Feld in den Eingabedaten existiert, wird Ihm der Prüfer zugeordnet selbst
+                wenn der Wert des Feldes ein leerer String ist (<code>''</code>). Das kann zu einem Fehler in der
+                Prüfung führen. Zum Beispiel, wenn ein Prüfer auf Ziffern prüft und es keine gibt weil ein leerer
+                String keine Zeichen hat, weil der Prüfer dann die Daten als fehlerhaft meldet.
+            </para>
+
+            <para>
+                Wenn, in eigenen Fällen, ein leerer String als gültig angenommen werden soll, kann das
+                Metakommando 'allowEmpty' auf <code>true</code> gesetzt werden. Dann passieren die Eingabedaten die
+                Prüfung wenn sie in den Eingabedaten vorhanden sind, aber der Wert ein leerer String ist.
+            </para>
+
+            <para>
+                Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
+                <classname>Zend_Filter_Input::ALLOW_EMPTY</classname> statt einem String verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'address2' => array(
+        'Alnum',
+        'allowEmpty' => true
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Der Standardwert dieses Metakommandos ist <code>false</code>.
+            </para>
+
+            <para>
+                Im unüblichen Fall das eine Prüfregel mit keinem Prüfer definiert wird, aber das
+                'allowEmpty' Metakommando <code>false</code> ist (das bedeutet, das das Feld als ungültig angenommen
+                wird wenn es leer ist), gibt Zend_Filter_Input eine Standard Fehlermeldung zurück die mit
+                <code>getMessages()</code> empfangen werden kann. Diese Meldung kann spezifiziert werden indem die
+                'notEmptyMessage' als Argument für den Zend_Filter_Input Kontruktor verwendet wird oder indem die
+                <code>setOptions()</code> Methode verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$options = array(
+    'notEmptyMessage' => "Ein nicht-leerer Wert wird für das Feld '%field%' benötigt"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+
+// alternative Methode:
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setOptions($options);
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.break-chain">
+
+            <title>Das <code>BREAK_CHAIN</code> Metakommando</title>
+
+            <para>
+                Standardmäßig, wenn eine Regel mehr als einen Prüfer hat werden alle Prüfer auf die Eingabe
+                angewendet, und die resultierende Nachricht enthält alle Fehlermeldungen die durch die Eingabe
+                verursacht wurden.
+            </para>
+
+            <para>
+                Alternativ, wenn der Wert des 'breakChainOnFailure' Metakommandos <code>true</code> ist, terminiert
+                die Prüfkette nachdem der erste Prüfer fehlschlägt. Die Eingabedaten werden nicht gegen nachfolgende
+                Prüfer in der Kette geprüft. Sie können also weitere Fehlschläge verursachen selbst wenn der eine,
+                der gemeldet wurde, korrigiert wird.
+            </para>
+
+            <para>
+                Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
+                <classname>Zend_Filter_Input::BREAK_CHAIN</classname> statt einem String verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'Digits',
+        new Zend_Validate_Between(1,12),
+        new Zend_Validate_GreaterThan(0),
+        'breakChainOnFailure' => true
+    )
+);
+$input = new Zend_Filter_Input(null, $validators);
+]]>
+            </programlisting>
+
+            <para>
+                Der Standardwert dieses Metakommandos ist <code>false</code>.
+            </para>
+
+            <para>
+                Die Klasse der Prüfketten, Zend_Validate, ist flexibler was das Durchbrechen von ausgeführten
+                Ketten betrifft als Zend_Filter_Input. Mit der ersten Klasse, kann eine Option gesetzt werden um
+                die Kette, für jeden Prüfer in der Kette, bei Fehlern unabhängig von jedem anderen Prüfer
+                abzubrechen. Mit der anderen Klasse wird der definierte Wert des 'breakChainOnFailure'
+                Metakommandos für eine Regel, einheitlich für alle Regeln in der Regel, angewendet. Wenn
+                eine flexiblere Verwendung benötigt wird, sollte die Prüfkette selbst erstellt werden und diese als
+                Objekt in der Definition der Prüfregel verwendet werden:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Prüfkette mit nicht einheitlichen breakChainOnFailure Attributen
+// erstellen
+$chain = new Zend_Validate();
+$chain->addValidator(new Zend_Validate_Digits(), true);
+$chain->addValidator(new Zend_Validate_Between(1,12), false);
+$chain->addValidator(new Zend_Validate_GreaterThan(0), true);
+
+// Prüfregeln deklarieren die die oben definierte Kette verwenden
+$validators = array(
+    'month' => $chain
+);
+$input = new Zend_Filter_Input(null, $validators);
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.messages">
+
+            <title>Das <code>MESSAGES</code> Metakommando</title>
+
+            <para>
+                Man kann Fehlermeldungen für jeden Prüfer in einer Regel spezifizieren indem das 'messages'
+                Metakommando verwendet wird. Der Wert dieses Metakommandos variiert, je nachdem ob man mehrere
+                Prüfer in der Regel hat, oder ob man die Nachricht für eine spezielles Fehlerereignis in einem
+                angegebenen Prüfer setzen will.
+            </para>
+
+            <para>
+                Dieses Metakommando kann spezifiziert werden indem die Klassenkonstante
+                <classname>Zend_Filter_Input::MESSAGES</classname> statt einem String verwendet wird.
+            </para>
+
+            <para>
+                Anbei ist ein einfaches Beispiel wie eine Standard fehlermeldung für einen einzelnen Prüfer
+                gesetzt wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'digits',
+        'messages' => 'Ein Monat darf nur aus Ziffern bestehen'
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Wenn mehrere Prüfer vorhanden sind für die eine Fehlermeldung gesetzt werden soll, sollte ein
+                Array für dem Wert des 'messages' Metakommandos verwendet werden.
+            </para>
+
+            <para>
+                Jedes Element dieses Array wird dem Prüfer an der gleichen Indexposition zugeordnet. Man kann
+                eine Nachricht für die Prüfung an der Position <emphasis>n</emphasis> spezifizieren indem der
+                Wert von <emphasis>n</emphasis> als Array Index verwendet wird. So kann einigen Prüfern erlaubt
+                werden Ihre eigenen Standardnachrichten zu verwenden, wärend die Nachricht für einen nachfolgenden
+                Prüfer in der Kette gesetzt wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'digits',
+        new Zend_Validate_Between(1, 12),
+        'messages' => array(
+            // Standardnachricht für Prüfer [0] verwenden
+            // Neue Nachricht für Prüfer [1] setzen
+            1 => 'Der Wert für Monat muß zwischen 1 und 12 sein'
+        )
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Wenn einer der Prüfer mehrere Fehlermeldungen besitzt, werden diese durch Nachrichten Schlüssel
+                identifiziert. Es gibt verschiedene Schlüssel in jeder Prüfklasse, welche als Identifizierer
+                für Fehlernachrichten fungieren, die die entsprechende Prüfklasse erstellen kann. Jede Prüfklasse
+                definiert Konstanten für Ihre Nachrichtenschlüssel. Diese Schlüssel können im 'messages'
+                Metakommando verwendet werden indem Sie als assoziatives Array übergeben werden statt als String.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        'digits', new Zend_Validate_Between(1, 12),
+        'messages' => array(
+            'Ein Monat darf nur aus Ziffern bestehen',
+            array(
+                Zend_Validate_Between::NOT_BETWEEN =>
+                    'Der Wert %value% vom Monat sollte zwischen ' .
+                    '%min% und %max% sein',
+                Zend_Validate_Between::NOT_BETWEEN_STRICT =>
+                    'Der Wert %value% vom Monat darf nur zwischen ' .
+                    '%min% und %max% sein'
+            )
+        )
+    )
+);
+]]>
+            </programlisting>
+
+            <para>
+                Es sollte für jede Prüfklasse in die Dokumentation gesehen werden, um zu wissen ob diese mehrere
+                Fehlernachrichten hat, welche Schlüssel die Nachrichten haben und welche Token im
+                Nachrichtentemplate verwendet werden können.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.filter.input.metacommands.global">
+
+            <title>Verwenden von Optionen um Metakommandos für alle Regeln zu setzen</title>
+
+            <para>
+                Der Standardwert für die 'allowEmpty', 'breakChainOnFailure', und 'presence' Metakommandos kann für
+                alle Regeln gesetzt werden indem das <code>$options</code> Argument für den Konstruktor von
+                Zend_Filter_Input verwendet wird. Das erlaubt das Setzen des Standardwertes für alle Regeln, ohne
+                das das Metakommando für jede Regel gesetzt werden muß.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Der Standard wird bei allen Feldern gesetzt und erlaubt einen leeren String.
+$options = array('allowEmpty' => true);
+
+// Diese Regeldefinition kann überschrieben werden, wenn ein Feld keinen leeren
+// String akzeptieren soll
+$validators = array(
+    'month' => array(
+        'Digits',
+        'allowEmpty' => false
+    )
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]>
+            </programlisting>
+
+            <para>
+                Die 'fields', 'messages', und 'default' Metakommandos können nicht mit dieser Technik gesetzt werden.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.filter.input.namespaces">
+
+        <title>Namensräume für Filterklassen hinzufügen</title>
+
+        <para>
+            Standardmäßig, wenn ein Filter oder Prüfer als String deklariert wird, sucht Zend_Filter_Input nach der
+            korrespondierenden Klasse unter dem Zend_Filter oder Zend_Validate Namensraum. Ein Filter der zum
+            Beispiel nach dem String 'digits' benannt ist wird in der Klasse Zend_Filter_Digits gefunden.
+        </para>
+
+        <para>
+            Wenn eigene Filter oder Prüfklassen geschrieben werden, oder Filter oder Prüfer von Drittanbietern
+            verwendet werden, können diese Klassen in einem anderen Namensraum als Zend_Filter oder Zend_Validate
+            existieren. Zend_Filter_Input kann mitgeteilt werden, das in zusätzlichen Namensräumen gesucht werden
+            soll. Namensräume können in den Konstruktor Optionen spezifiziert werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$options = array('filterNamespace' => 'My_Namespace_Filter',
+                 'validatorNamespace' => 'My_Namespace_Validate');
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]>
+        </programlisting>
+
+        <para>
+            Alternatic kann die <code>addValidatorPrefixPath($prefix, $path)</code> oder die
+            <code>addFilterPrefixPath($prefix, $path)</code> Methoden verwendet werden, welche direkt
+            auf den Plugin Lader verweisen der von Zend_Filter_Input verwendet wird:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$input->addValidatorPrefixPath('Other_Namespace', 'Other/Namespace');
+$input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
+
+// Die Suchrichtung für die Prüfungen ist jetzt:
+// 1. My_Namespace_Validate
+// 1. My_Namespace
+// 3. Zend_Validate
+
+// Die Suchrichtung für die Filter ist jetzt:
+// 1. My_Namespace_Filter
+// 2. Foo_Namespace
+// 3. Zend_Filter
+]]>
+        </programlisting>
+
+        <para>
+            Zend_Filter und Zend_Validate können als Namensraum nicht entfernt werden, es können nur Namensräume
+            hinzugefügt werden. Benutzerdefinierte Namensräume werden zuerst durchsucht, Zend Namensräume werden
+            zuletzt durchsucht.
+        </para>
+
+        <note>
+            <para>
+                Ab der Version 1.5 sollte die Funktion <code>addNamespace($namespace)</code> nicht mehr
+                verwendet werden und wurde durch den Plugin Lader getauscht. Und <code>addFilterPrefixPath</code>
+                sowie <code>addValidatorPrefixPath</code> wurden hinzugefügt. Auch die Konstante
+                <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname> sollte jetzt nicht mehr verwendet werden.
+                Die Konstanten <classname>Zend_Filter_Input::VALIDATOR_NAMESPACE</classname> und
+                <classname>Zend_Filter_Input::FILTER_NAMESPACE</classname> sind seit den Releases nach 1.7.0 vorhanden.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                Seit Version 1.0.4 wurde <classname>Zend_Filter_Input::NAMESPACE</classname>, der den Wert
+                <code>namespace</code> hatte, auf <classname>Zend_Filter_Input::INPUT_NAMESPACE</classname>,
+                mit dem Wert <code>inputNamespace</code> geändert, um der Reservierung des
+                Schlüsselwortes <code>namespace</code> ab PHP 5.3 gerecht zu werden.
+            </para>
+        </note>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

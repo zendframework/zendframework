@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.character-sets">
+    <title>Character Sets</title>
+    <para>
+        <classname>Zend_Mail</classname> does not check for the correct character set of the mail parts. When
+        instantiating <classname>Zend_Mail</classname>, a charset for the e-mail itself may be given. It defaults to
+        <code>iso-8859-1</code>. The application has to make sure that all parts added to that mail object
+        have their content encoded in the correct character set. When creating a new mail part, a different
+        charset can be given for each part.
+    </para>
+    <note>
+        <title>Only in text format</title>
+        <para>
+            Character sets are only applicable for message parts in text format.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

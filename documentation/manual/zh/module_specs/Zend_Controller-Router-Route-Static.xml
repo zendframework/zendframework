@@ -1,0 +1,24 @@
+<sect3 id="zend.controller.router.routes.static">
+    <title>Zend_Controller_Router_Route_Static</title>
+
+    <para>
+        上面的例子都使用动态路由－－包含模型来匹配的路由。然而有时候，特定的路由被设定成型，启动正则表达式引擎将有过渡的杀伤力。对这种情形的答案是使用静态路由：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Static(
+    'login',
+    array('controller' => 'auth', 'action' => 'login')
+);
+$router->addRoute('login', $route);
+]]>
+    </programlisting>
+
+    <para>
+        上面的路由将匹配<code>http://domain.com/login</code>的URL，并分派到 <code>AuthController::loginAction()</code>.
+    </para>
+
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

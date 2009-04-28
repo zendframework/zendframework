@@ -1,0 +1,85 @@
+<sect1 id="zend.mime.part">
+    <title>Zend_Mime_Part</title>
+
+    <sect2 id="zend.mime.part.introduction">
+      <title>Inleiding</title>
+
+      <para>Deze klasse stelt een enkel deel van een MIME bericht voor. Het
+      bevat de inhoud van het berichtdeel, plus informatie over de
+      encodering, inhoudstype en oorspronkelijke bestandsnaam ervan. Het
+      biedt een methode om een string te genereren vanaf opgeslagen data.
+      <code>Zend_Mime_Part</code> objecten kunnen aan <link
+      linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
+      worden toegevoegd om een compleet mulitpart bericht te assembleren.</para>
+    </sect2>
+
+  <sect2 id="zend.mime.part.instantiation">
+    <title>Instantiëring</title>
+
+    <para><code>Zend_Mime_Part</code> word geïnstantieert met een string die
+    de inhoud van het nieuwe deel bevat. Het wordt aangenomen dat het type
+    van de inhoud OCTET-STREAM is, geëncodeerd op 8bits. Na het instantiëren
+    van een <code>Zend_Mime_Part</code> kan je meta informatie zetten door
+    onmiddellijk de attributen aan te spreken:</para>
+
+    <programlisting role="php"><![CDATA[<?php
+public $type = ZMime::TYPE_OCTETSTREAM;
+public $encoding = ZMime::ENCODING_8BIT;
+public $id;
+public $disposition;
+public $filename;
+public $description;
+public $charset;
+?>]]></programlisting>
+    </sect2>
+
+  <sect2 id="zend.mime.part.methods">
+    <title>Methodes om een berichtdeel naar een string te schrijven</title>
+
+    <para><code>-&gt;getContent()</code> geeft de geëncodeerde inhoud van
+    de Mime_Part als een string weer, geëncodeert volgens de in het attribuut
+    $encoding gespecificeerde encodage. Toegestane waarden zijn
+    Zend_Mime::ENCODING_* karakterset. Er worden geen conversies uitgevoerd.</para>
+
+    <para><code>-&gt;getHeaders()</code>  geeft de Mime-Headers terug voor een Mime_Part
+    zoals die werden gegenereerd vanaf de informatie in de publiekelijk toegankelijke
+    attributen. De attributen van het object dienen op gepaste wijze te zijn gezet voor
+    deze methode voor aangeroepen. <itemizedlist>
+        <listitem>
+          <para>
+          <code>$charset</code>
+           moet naar dezelfde charset worden gezet als de inhoud indien dat een text type is (Text of HTML).
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+          <code>$id</code>
+           mag worden gezet om inline beelden in een HTML mail met een ID te identifiëren.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+           <code>$filename</code>
+           bevat de bestandsnaam dat het bestand zal krijgen indien het gedownload wordt.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+          <code>$disposition</code>
+           definieert indien het bestand moet worden beschouwd als een bijvoegsel of indien het wordt
+           gebruikt binnenin een (HTML-) mail (inline).
+           </para>
+        </listitem>
+        <listitem>
+          <para>
+          <code>$description</code>
+           word alleen voor informatiueve doeleinden gebruikt.
+          </para>
+        </listitem>
+      </itemizedlist></para>
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

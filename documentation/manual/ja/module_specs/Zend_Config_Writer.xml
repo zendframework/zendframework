@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.config.writer.introduction">
+    <title>Zend_Config_Writer</title>
+    <para>
+        <classname>Zend_Config_Writer</classname> は、設定ファイルに
+        <classname>Zend_Config</classname> オブジェクトを書き出します。
+        アダプタなしでも動作するので、使用するのも簡単です。
+        デフォルトでは <classname>Zend_Config_Writer</classname>
+        には 3 種類のアダプタが同梱されており、どれも同じように動作します。
+        まず、<code>filename</code> や <code>config</code>
+        のオプションを指定してライターのインスタンスを作成します。
+        それからライターの <code>write()</code> メソッドをコールすると、
+        設定ファイルが作成されます。<code>$filename</code> や
+        <code>$config</code> を、直接 <code>write()</code>
+        メソッドで設定することもできます。現在は、次のライターが
+        <classname>Zend_Config_Writer</classname> に同梱されています。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>Zend_Config_Writer_Array</classname>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Config_Writer_Ini</classname>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Config_Writer_Xml</classname>
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        例外的に、<classname>Zend_Config_Writer_Ini</classname> にはオプションのパラメータ
+        <code>nestSeparator</code> が用意されています。
+        これは、ノードを区切る文字を定義します。デフォルトはドットひとつで、
+        これは <classname>Zend_Config_Ini</classname> のデフォルトと同じです。
+    </para>
+
+    <para>
+        <classname>Zend_Config</classname> オブジェクトを変更したり作成したりする際には、
+        知っておくべきことがあります。値を作成したり変更したりするには、
+        パラメータのアクセサ (<code>-&gt;</code>) で <classname>Zend_Config</classname>
+        オブジェクトのパラメータを設定します。
+        ルート内のセクションやブランチを作成するには、新規配列を作成します
+        (<code>$config-&gt;branch = array();</code>)。
+        セクションの継承関係を定義するには、ルート
+        <classname>Zend_Config</classname> オブジェクトの
+        <code>setExtend()</code> メソッドをコールします。
+    </para>
+
+    <example id="zend.config.writer.example.using">
+        <title><classname>Zend_Config_Writer</classname> の使用法</title>
+        <para>
+            この例では、<classname>Zend_Config_Writer_Xml</classname>
+            で新しい設定ファイルを作成する方法を説明します。
+        </para>
+        <programlisting role="php"><![CDATA[
+// config オブジェクトを作成します
+$config = new Zend_Config(array(), true);
+$config->production = array();
+$config->staging    = array();
+
+$config->setExtend('staging', 'production');
+
+$config->production->db = array();
+$config->production->db->hostname = 'localhost';
+$config->production->db->username = 'production';
+
+$config->staging->db = array();
+$config->staging->db->username = 'staging';
+
+// 次のいずれかの方法で設定ファイルを書き出します
+// a)
+$writer = new Zend_Config_Writer_Xml(array('config'   => $config,
+                                           'filename' => 'config.xml'));
+$writer->write();
+
+// b)
+$writer = new Zend_Config_Writer_Xml();
+$writer->setConfig($config)
+       ->setFilename('config.xml')
+       ->write();
+
+// c)
+$writer = new Zend_Config_Writer_Xml();
+$writer->write('config.xml', $config);
+]]>
+        </programlisting>
+        <para>
+            これは、production と staging というセクションを持つ XML
+            設定ファイルを作成します。staging は production を継承しています。
+        </para>
+    </example>
+
+    <example id="zend.config.writer.modifying">
+        <title>既存の設定の変更</title>
+        <para>
+            この例では、既存の設定ファイルを編集する方法を説明します。
+        </para>
+        <programlisting role="php"><![CDATA[
+// すべてのセクションを既存の設定ファイルから読み込みますが継承は読み飛ばします
+$config = new Zend_Config_Ini('config.ini',
+                              null,
+                              array('skipExtends'        => true,
+                                    'allowModifications' => true));
+
+// 値を変更します
+$config->production->hostname = 'foobar';
+
+// 設定ファイルを書き出します
+$writer = new Zend_Config_Writer_Ini(array('config'   => $config,
+                                           'filename' => 'config.ini'));
+$writer->write();
+]]>
+        </programlisting>
+    </example>
+
+    <note>
+        <title>設定ファイルの読み込み</title>
+        <para>
+            既存の設定ファイルを読み込んで変更をする場合は、
+            すべてのセクションを読み込んで継承を読み飛ばすことが大切です。
+            そうすることで、値がマージされてしまうことがなくなります。
+            そのために、コンストラクタで
+            <code>skipExtends</code> オプションを指定します。
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

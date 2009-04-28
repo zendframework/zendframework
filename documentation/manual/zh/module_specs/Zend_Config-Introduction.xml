@@ -1,0 +1,86 @@
+<sect1 id="zend.config.introduction">
+    <title>简介</title>
+    <para>
+        <code>Zend_Config</code>被设计在应用程序中简化访问和使用配置数据。它为在应用程序代码中访问这样的配置数据提供了一个基于用户接口的嵌入式对象属性。配置数据可能来自于各种支持等级结构数据存储的媒体。当前<code>Zend_Config</code>为存储在<link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> 和<link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>的文本文件中的配置数据提供了适配器。
+    </para>
+    <example id="zend.config.introduction.example.using">
+        <title>使用 Zend_Config 本身 </title>
+        <para>
+            通常用户可以使用象<link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link> 或 <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>适配器类的其中之一，但如果配置数据在PHP数组里可用，为了使用一个简单的面向对象的接口，可以简单地传递数据到<code>Zend_Config</code>构造器：
+        </para>
+        <programlisting role="php"><![CDATA[
+// 给出一个配置数据的数组
+$configArray = array(
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
+        )
+    )
+);
+
+// 基于配置数据创建面向对象的 wrapper
+$config = new Zend_Config($configArray);
+
+// 输出配置数据 (结果在'www.example.com'中)
+echo $config->webhost;
+
+// 使用配置数据来连接数据库
+$db = Zend_Db::factory($config->database->adapter,
+                       $config->database->params->toArray());
+
+// 另外的用法：简单地传递 Zend_Config 对象。
+// Zend_Db factory 知道如何翻译它。
+$db = Zend_Db::factory($config->database);
+]]>
+        </programlisting>
+    </example>
+    <para>
+        如上例所示，<code>Zend_Config</code> 提供嵌套的对象属性语句来访问传递给它的构造器的配置数据。
+    </para>
+    <para>
+        连同面向对象访问数据值，<code>Zend_Config</code>也有<code>get()</code>方法，如果数据元素不存在，它将返回提供的缺省值，例如：
+    </para>
+    <programlisting role="php"><![CDATA[
+$host = $config->database->get('host', 'localhost');
+]]>
+    </programlisting>
+    <example id="zend.config.introduction.example.file.php">
+        <title>Using Zend_Config with a PHP Configuration File</title>
+        <para>
+            It is often desirable to use a pure PHP-based configuration file. The following code illustrates how easily
+            this can be accomplished:
+        </para>
+        <programlisting role="php"><![CDATA[
+// config.php
+return array(
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
+        )
+    )
+);
+]]>
+        </programlisting>
+        <programlisting role="php"><![CDATA[
+// Configuration consumption
+$config = new Zend_Config(require 'config.php');
+
+// Print a configuration datum (results in 'www.example.com')
+echo $config->webhost;
+]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

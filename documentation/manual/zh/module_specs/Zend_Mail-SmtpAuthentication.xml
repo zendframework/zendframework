@@ -1,0 +1,41 @@
+<!-- EN-Revision: 3803 Maintainer: mikespook Status: ready -->
+<sect1 id="zend.mail.smtp-authentication">
+    <title>SMTP 身份验证</title>
+
+    <para>
+        <code>Zend_Mail</code> 支持使用 SMTP 身份验证，通过配置数组传递“auth”参数到 <code>Zend_Mail_Transport_Smtp</code> 的构造函数中。可用的内建身份验证方法为 PLAIN，LOGIN 和 CRAM-MD5，这些都需要在配置数组中设置“username”和“password”。
+    </para>
+    <example id="zend.mail.smtp-authentication.example-1">
+        <title>在 Zend_Mail_Transport_Smtp 中使用身份验证</title>
+
+        <programlisting role="php"><![CDATA[<?php
+
+            require_once 'Zend/Mail.php';
+            require_once 'Zend/Mail/Transport/Smtp.php';
+
+            $config = array('auth' => 'login',
+            'username' => 'myusername',
+            'password' => 'password');
+
+            $transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
+
+            $mail = new Zend_Mail();
+            $mail->setBodyText('This is the text of the mail.');
+            $mail->setFrom('sender@test.com', 'Some Sender');
+            $mail->addTo('recipient@test.com', 'Some Recipient');
+            $mail->setSubject('TestSubject');
+            $mail->send($transport);]]>
+        </programlisting>
+    </example>
+
+    <note>
+        <title>身份验证类型</title>
+
+        <para>
+            身份验证的类型是大小写不敏感的，但是不能有标点符号。例如，使用 CRAM-MD5 类型，则应当传递 'auth' => 'crammd5' 到 <code>Zend_Mail_Transport_Smtp</code> 的构造函数中。
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

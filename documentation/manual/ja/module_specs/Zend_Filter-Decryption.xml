@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect2 id="zend.filter.set.decrypt">
+    <title>Decrypt</title>
+    <para>
+        このフィルタは、指定した文字列を指定した設定で復号します。
+        復号の際に、アダプタを使用します。実際には、PHP の
+        <code>Mcrypt</code> および <code>OpenSSL</code>
+        拡張モジュール用のアダプタを使用します。
+    </para>
+
+    <para>
+        コンテンツの暗号化方法の詳細については <code>Encrypt</code> フィルタを参照ください。
+        基本的な内容は <code>Encrypt</code> フィルタで網羅されているので、
+        ここでは追加のメソッドや復号時に固有のことなどについてのみ説明します。
+    </para>
+
+    <sect3 id="zend.filter.set.decrypt.mcrypt">
+        <title>Mcrypt の復号</title>
+        <para>
+            <code>Mcrypt</code> で暗号化したコンテンツを復号するには、
+            暗号化を行った際に指定したオプションが必要です。
+        </para>
+
+        <para>
+            ここでひとつ暗号化時との大きな違いがあります。
+            暗号化の際にベクトルを指定しなかった場合は、コンテンツを暗号化した後で
+            フィルタの <code>getVector()</code> メソッドを使用してベクトルを取得する必要があります。
+            正しいベクトルがなければ、コンテンツを復号することはできません。
+        </para>
+
+        <para>
+            オプションを指定しさえすれば、復号は暗号化と同じくらい単純なことです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// デフォルト設定の blowfish を使用します
+$filter = new Zend_Filter_Decrypt('myencryptionkey');
+
+// コンテンツの暗号化用ベクトルを設定します
+$filter->setVector('myvector');
+
+$decrypted = $filter->filter('encoded_text_normally_unreadable');
+print $decrypted;
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                mcrypt 拡張モジュールが使用できない場合は例外が発生することに注意しましょう。
+            </para>
+        </note>
+
+        <note>
+            <para>
+                また、インスタンス作成時あるいは setEncryption()
+                をコールした際にすべての設定がチェックされることにも注意しましょう。
+                設定内容に問題があることを mcrypt が検知すると、例外がスローされます。
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.filter.set.decrypt.openssl">
+        <title>OpenSSL の復号</title>
+        <para>
+            <code>OpenSSL</code> での復号は、暗号化と同様にシンプルです。
+            しかし、コンテンツを暗号化した人からすべてのデータを受け取る必要があります。
+        </para>
+
+        <para>
+            <code>OpenSSL</code> の復号には、以下が必要となります。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>private</emphasis>: コンテンツの復号に使用する秘密鍵。
+                    鍵ファイルのパスとファイル名を指定するか、
+                    あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>envelope</emphasis>: コンテンツを暗号化した人から受け取った、
+                    暗号化されたエンベロープ鍵。
+                    鍵ファイルのパスとファイル名を指定するか、
+                    あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時にエンベロープ鍵を指定することもできます
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                <code>OpenSSL</code> アダプタは、正しい鍵を渡さないと動作しないことに注意しましょう。
+            </para>
+        </note>
+
+        <para>
+            オプションで、パスフレーズを渡さなければ鍵を復号できないようにすることもできます。
+            そのために使用するのが <code>setPassphrase()</code> メソッドです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時にエンベロープ鍵を指定することもできます
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+]]>
+        </programlisting>
+
+        <para>
+            最後に、コンテンツを復号します。
+            暗号化したコンテンツの復号を行う完全な例は、このようになります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Decrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時にエンベロープ鍵を指定することもできます
+$filter->setEnvelopeKey(array(
+    '/key/from/encoder/first.pem',
+    '/key/from/encoder/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+
+$decrypted = $filter->filter('encoded_text_normally_unreadable');
+print $decrypted;
+]]>
+        </programlisting>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,34 @@
+<sect1 id="zend.config.theory_of_operation">
+    <title>操作理论</title>
+    <para>
+        配置数据在<code>Zend_Config</code>构造器通过关联数组(associative arrary)可访问，为了支持从通用到特殊组织数据，它可以是多维的。具体的适配器类函数为<code>Zend_Config</code>的构造器从存储到处理关联数组来适应配置数据。用户脚本可以直接提供这样的数组给<code>Zend_Config</code>构造器，不需要使用适配器类，因为它可以很好地工作在特定的情形下。
+    </para>
+    <para>
+        为了很容易简单地访问配置数据，<code>Zend_Config</code>实现了<code>Countable</code> 和 <code>Iterator</code> 接口。这样，可以基于<code>Zend_Config</code>对象使用<ulink url="http://php.net/count"><code>count()</code></ulink>函数和PHP语句如<ulink url="http://php.net/foreach"><code>foreach</code></ulink>。
+    </para>
+    <para>
+        缺省地，配置数据通过<code>Zend_Config</code>可用是只读的，并且赋值（例如，<code>
+$config->database->host = 'example.com'</code>）导致抛出异常。这个缺省的行为可以通过构造器重载，然而，需要允许修改数据值。并且，当修改被允许时，<code>Zend_Config</code>支持未设定的值（例如 <code>
+unset($config->database->host);</code>）。
+        <note>
+            <para>
+                不要混淆如在内存中更改和保存配置数据到指定的存储媒体很重要。创建和更改配置数据给不同的存储媒体的工具超出了<code>Zend_Config</code>的范围。为创建和更改配置数据给不同的存储媒体的第三方开源方案很容易实现。
+            </para>
+        </note>
+    </para>
+    <para>
+        适配器类从<code>Zend_Config</code>类继承，因为它们使用它的函数。
+    </para>
+    <para>
+        <code>Zend_Config</code>函数家族把配置数据组织成节（section）。<code>Zend_Config</code>适配器对象可以带一个指定的节加载，或者带有多个指定的节，或者所有节（如果没有指定）。
+    </para>
+    <para>
+        <code>Zend_Config</code>适配器类支持单继承模型，它允许配置数据从一个节到另一个节被继承，这是为了为不同目的而减少或消除复制配置数据而提供的。一个继承的节也可以重写从父节继承过来的值。象PHP类继承，一个节可以从一个父节继承，这个父节可能是从祖父节继承的，等等，但是多重继承（例如，节C直接从父节A和B继承）不被支持。
+    </para>
+    <para>
+        如果你有两个<code>Zend_Config</code>对象，你可以用<code>merge()</code>函数把它们合并成一个单个的对象。例如，对<code>$config</code>和<code>$localConfig</code>，使用<code>$config->merge($localConfig);</code>，你可以把数据从<code>$localConfig</code>合并到<code>$config</code>。在<code>$localConfig</code>中的条目将覆盖在<code>$config</code>中同名的条目。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

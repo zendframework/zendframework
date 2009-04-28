@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 14811 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Aides de vue</title>
+
+    <para>Dans vos scripts de vue, il est souvent nécessaire d'effectuer certaines actions complexes encore et encore :
+    par exemple, formater une date, générer des éléments de formulaire, afficher des liens d'action. Vous pouvez
+    utiliser des classes d'aide pour effectuer ce genre de tâches.</para>
+
+    <para>Une aide est simplement une classe. Par exemple, nous voulons une aide nommée "foobar". Par défaut, la classe
+    est préfixée avec <code>"Zend_View_Helper_"</code> (vous pouvez spécifier un préfixe personnalisé en paramétrant
+    votre chemin d'aide), et le dernier segment du nom de classe est le nom de l'aide ; ce segment peut être avec des
+    CaracteresMajuscules ; le nom complet de la classe est alors : <classname>Zend_View_Helper_FooBar</classname>. Cette classe
+    doit contenir au moins une méthode, nommée comme l'aide avec la notationCamel : <code>fooBar()</code>.</para>
+
+    <note>
+        <title>Surveillez la casse</title>
+
+        <para>Les noms des aides sont toujours en notationCamel, c'est-à-dire qu'ils ne commencent pas avec un caractère
+        majuscule. Le nom de classe elle-même peut être en casseMélangée, mais la méthode qui est exécutée est en
+        notationCamel.</para>
+    </note>
+
+    <para>Pour utiliser une aide dans votre script de vue, appelez la en utilisant <code>$this-&gt;nomAide()</code>.
+    Dans les coulisses, <classname>Zend_View</classname> va charger la classe <classname>Zend_View_Helper_NomAide</classname>, créer une
+    instance de cet objet, et appeler sa méthode <code>nomAide()</code>. L'instance de l'objet est persistante dans
+    l'instance de <classname>Zend_View</classname>, et est réutilisée pour tous les appels futurs à
+    <code>$this-&gt;nomAide()</code>.</para>
+
+    <sect2 id="zend.view.helpers.initial">
+        <title>Aides initiales</title>
+
+        <para><classname>Zend_View</classname> fournit avec un jeu initial de classes d'aides, la plupart est liée à la génération
+        d'éléments de formulaire. Chacune affiche et échappe l'élément automatiquement. De plus, il existe des aides
+        pour créer des URLs sur la base de routes et des listes HTML, de la même manière que l'on déclarerait des
+        variables. Les aides actuellement incluses sont :</para>
+
+        <itemizedlist>
+            <listitem>
+                <para><code>declareVars()</code> : initialement prévu pour être utilisé avec <code>strictVars()</code>,
+                cette aide peut être utilisée pour déclarer les variables de modèle ("template") qui sont (ou pas) déjà
+                déclarées dans l'objet de vue, ou pour gérer des valeurs par défaut. Les tableaux passés comme arguments
+                à la méthode seront utilisés pour paramétrer des valeurs par défaut ; sinon, si la variable n'existe
+                pas, on lui affecte une chaîne vide.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>fieldset($name, $content, $attribs)</code> : crée un ensemble de champs XHTML. Si
+                <code>$attribs</code> contient une clé "legend", cette valeur sera utilisée comme légende du fieldset.
+                Le fieldset entourera le contenu <code>$content</code> tel qu'il aura été fourni à l'aide.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>form($name, $attribs, $content)</code> : génère un formulaire XHTML. Tous les éléments
+                <code>$attribs</code> sont échappés et rendus sous la forme d'attributs de la balise "form". Si
+                <code>$content</code> est présent et n'est pas un booléen valant <code>false</code>, alors ce contenu
+                est rendu à l'intérieur des balises "form" ; si <code>$content</code> est un booléen valant
+                <code>false</code> (par défaut), seul la balise ouvrante "form" est générée.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formButton($name, $value, $attribs)</code> : crée un élément &lt;button /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formCheckbox($name, $value, $attribs, $options):</code> crée un élément &lt;input
+                type="checkbox" /&gt;.</para>
+
+                <para>Par défaut, quand aucune <code>$value</code> n'est fournie et qu'aucune <code>$options</code>
+                n'est présente, alors "0" est considéré comme la valeur non cochée et "1" comme la valeur cochée. Si une
+                <code>$value</code> est fournie, mais qu'aucune <code>$options</code> n'est présente, l'état coché est
+                considéré égal à la <code>$value</code> fournie.</para>
+
+                <para><code>$options</code> devrait être un tableau. Si ce tableau est indexé, la première valeur est la
+                valeur cochée, la seconde est la valeur non cochée ; et tout autre valeur est ignorée. Vous pouvez aussi
+                passer un tableau associatif avec les clés "<code>checked</code>" et "<code>unChecked</code>".</para>
+
+                <para>Si <code>$options</code> est fourni, et que <code>$value</code> correspond à la valeur cochée,
+                alors l'élément sera marqué comme coché. Vous pouvez aussi marquer l'élément comme coché ou décoché en
+                passant une valeur booléenne à l'attribut "<code>checked</code>".</para>
+
+                <para>Ceci pourra sûrement être plus explicite avec quelques exemples :</para>
+
+                <programlisting role="php"><![CDATA[
+// "1" et "0" en tant qu'options cochée/décochée ; cochée
+echo $this->formCheckbox('foo');
+
+// "1" et "0" en tant qu'options cochée/décochée ; cochée
+echo $this->formCheckbox('foo', null, array('checked' => true));
+
+// "bar" et "0" en tant qu'options cochée/décochée ; décochée
+echo $this->formCheckbox('foo', 'bar');
+
+// "bar" et "0" en tant qu'options cochée/décochée ; cochée
+echo $this->formCheckbox('foo', 'bar', array('checked' => true));
+
+// "bar" et "baz" en tant qu'options cochée/décochée ; décochée
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz');
+
+// "bar" et "baz" en tant qu'options cochée/décochée ; décochée
+echo $this->formCheckbox('foo', null, null, array(
+    'checked' => 'bar',
+    'unChecked' => 'baz'
+));
+
+// "bar" et "baz" en tant qu'options cochée/décochée ; cochée
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz');
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => true),
+                         array('bar', 'baz');
+
+// "bar" et "baz" en tant qu'options cochée/décochée ; décochée
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz');
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => false),
+                         array('bar', 'baz');
+]]></programlisting>
+
+                <para>Dans tous les cas, la balise est précédée d'un élément masqué ("hidden") avec la valeur de l'état
+                décoché ; ainsi, si la valeur est décochée, vous aurez toujours une valeur valide retournée par votre
+                formulaire.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formErrors($errors, $options)</code> : génère une liste non ordonnée XHTML pour montrer des
+                erreurs. <code>$errors</code> peut être une chaîne de caractères ou un tableau de chaînes ;
+                <code>$options</code> peut être tout attribut que vous pourriez vouloir placer dans la balise ouvrante
+                de la liste.</para>
+
+                <para>Vous pouvez spécifier des éléments ouvrants, fermants et des séparateurs de contenu alternatifs
+                lors du rendu des erreurs en appelant les différentes méthodes suivantes de l'aide :</para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para><code>setElementStart($string)</code> ; par défaut vaut "&lt;ul
+                        class="errors"%s"&gt;&lt;li&gt;", où <code>%s</code> est remplacé avec les attributs spécifiés
+                        dans <code>$options</code>.</para>
+                    </listitem>
+
+                    <listitem>
+                        <para><code>setElementSeparator($string)</code> ; par défaut vaut
+                        "&lt;/li&gt;&lt;li&gt;".</para>
+                    </listitem>
+
+                    <listitem>
+                        <para><code>setElementEnd($string)</code> ; par défaut vaut "&lt;/li&gt;&lt;/ul&gt;".</para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para><code>formFile($name, $attribs)</code>: crée un élément &lt;input type="file"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formHidden($name, $value, $attribs)</code> : crée un élément &lt;input type="hidden"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formLabel($name, $value, $attribs)</code> : crée un élément &lt;label&gt;, en réglant
+                l'attribut <code>for</code> avec <code>$name</code>, et le texte du label avec <code>$value</code>. Si
+                <code>disable</code> est fourni via <code>attribs</code>, rien n'est retourné.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formMultiCheckbox($name, $value, $attribs, $options, $listsep)</code> : crée une liste de
+                cases à cocher. <code>$options</code> devrait être un tableau associatif, avec une profondeur
+                arbitraire. <code>$value</code> peut être une valeur unique ou un tableau de valeurs sélectionnées qui
+                correspondent aux clés du tableau <code>$options</code>. <code>$listsep</code> est un séparateur HTML
+                ("&lt;br /&gt;") par défaut. Par défaut, cet élément est traité comme un tableau ; toutes les cases à
+                cocher partagent le même nom, et sont soumises sous la forme d'un tableau.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formPassword($name, $value, $attribs)</code> : crée un élément &lt;input type="password"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formRadio($name, $value, $attribs, $options)</code> : crée une série d'éléments &lt;input
+                type="button" /&gt;, un pour chaque élément <code>$options</code>. Dans le tableau
+                <code>$options</code>, la clé de l'élément est la valeur du radio, et la valeur de l'élément est
+                l'étiquette du radio. La radio <code>$value</code> sera précochée pour vous.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formReset($name, $value, $attribs)</code> : crée un élément &lt;input type="reset"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formSelect($name, $value, $attribs, $options)</code> : crée un bloc
+                &lt;select&gt;...&lt;/select&gt;, avec une &lt;option&gt; pour chaque élément <code>$options</code>.
+                Dans le tableau <code>$options</code>, la clé de l'élément est la valeur de l'option, et la valeur de
+                l'élément est son étiquette optionnelle. L'option (ou les options) <code>$value</code> sera (ou seront)
+                présélectionnée(s) pour vous.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formSubmit($name, $value, $attribs)</code> : crée un élément &lt;input type="submit"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formText($name, $value, $attribs)</code> : crée un élément &lt;input type="text"
+                /&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>formTextarea($name, $value, $attribs)</code> : crée un bloc
+                &lt;textarea&gt;...&lt;/textarea&gt;.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>url($urlOptions, $name, $reset)</code> : crée un URL basé sur une route nommée.
+                <code>$urlOptions</code> doit être un tableau associatif avec des paires de clés/valeurs utilisées par
+                une route particulière.</para>
+            </listitem>
+
+            <listitem>
+                <para><code>htmlList($items, $ordered, $attribs, $escape)</code> : génère des listes ordonnées ou non
+                basées sur les <code>$items</code> qui lui sont fournis. Si <code>$items</code> est un tableau
+                multidimensionnel, une liste imbriquée sera construite. Si le paramètre <code>$escape</code> vaut
+                <code>true</code> (valeur par défaut), chaque élément sera échappé en utilisant le mécanisme
+                d'échappement enregistré dans les objets de vue ; fournissez une valeur <code>false</code> si vous
+                voulez autoriser du balisage dans vos listes.</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>Les utiliser dans vos script de vue est très simple, voici un exemple. Notez que tout ce dont vous avez
+        besoin, c'est de les appeler; elles vont se charger et s'instancier elle-même si besoin est.</para>
+
+        <programlisting role="php"><![CDATA[
+<!--
+Dans votre script de vue, $this se réfère à l'instance de Zend_View.
+Partons du principe que vous avez déjà assigné une série d'options
+de sélection dans un tableau $pays =
+array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
+-->
+<form action="action.php" method="post">
+    <p><label>Votre email :
+        <?php echo $this->formText('email',
+                                   'vous@exemple.fr',
+                                   array('size' => 32)) ?>
+    </label></p>
+    <p><label>Votre pays :
+        <?php echo $this->formSelect('country',
+                                     'us',
+                                     null,
+                                     $this->pays) ?>
+    </label></p>
+    <p><label>??? Would you like to opt in ???
+        <?php echo $this->formCheckbox('opt_in',
+                                       'oui',
+                                       null,
+                                       array('oui', 'non')) ?>
+    </label></p>
+</form>
+]]></programlisting>
+
+        <para>La sortie résultante du script de vue ressemblera à ceci :</para>
+
+        <programlisting role="php"><![CDATA[
+<form action="action.php" method="post">
+    <p><label>Votre email :
+        <input type="text" name="email"
+               value="vous@exemple.fr" size="32" />
+    </label></p>
+    <p><label>Votre pays :
+        <select name="country">
+            <option value="us" selected="selected">Etats-Unis</option>
+            <option value="fr">France</option>
+            <option value="de">Allemagne</option>
+        </select>
+    </label></p>
+    <p><label>??? Would you like to opt in ???
+        <input type="hidden" name="opt_in" value="non" />
+        <input type="checkbox" name="opt_in"
+               value="oui" checked="checked" />
+    </label></p>
+</form>
+]]></programlisting>
+
+        <xi:include href="Zend_View-Helpers-Action.xml" />
+        <xi:include href="Zend_View-Helpers-Cycle.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_View-Helpers-Partial.xml" />
+        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
+        <xi:include href="Zend_View-Helpers-Doctype.xml" />
+        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
+        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
+        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
+        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
+        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
+        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
+        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
+        <xi:include href="Zend_View-Helpers-Json.xml" />
+        <xi:include href="Zend_View-Helpers-Navigation.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Navigation.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_View-Helpers-Translate.xml" />
+    </sect2>
+
+    <sect2 id="zend.view.helpers.paths">
+        <title>Chemin des aides</title>
+
+        <para>Comme pour les scripts de vue, votre contrôleur peut spécifier une pile de chemins dans lesquels
+        <classname>Zend_View</classname> cherchera les classes d'aides. Par défaut, <classname>Zend_View</classname> cherche dans
+        "Zend/View/Helper/*". Vous pouvez dire à <classname>Zend_View</classname> de regarder dans d'autres chemins en utilisant
+        les méthodes <code>setHelperPath()</code> et <code>addHelperPath()</code>. De plus, vous pouvez indiquer un
+        préfixe de classe pour utiliser les aides dans le répertoire fourni, et permettre de donner des espaces de noms
+        à vos classes d'aide. Par défaut, si aucun préfixe n'est fourni, "Zend_View_Helper_" est utilisé.</para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->setHelperPath('/chemin/vers/plus/de/classes/d-aides',
+                     'Ma_View_Helper');
+]]></programlisting>
+
+        <para>En fait, vous pouvez "empiler" les chemins en utilisant la méthode <code>addHelperPath()</code>. Comme
+        vous ajoutez des chemins dans la pile, <classname>Zend_View</classname> va regarder dans le chemin le plus récemment
+        ajouté, pour inclure la classe d'aide. Cela vous permet d'ajouter (ou bien de redéfinir) la distribution
+        initiale des aides, avec vos propres aides personnalisées.</para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+
+// Ajoute /chemin/vers/des/aides avec le préfixe
+// de classe 'Ma_View_Helper'
+$view->addHelperPath('/chemin/vers/des/aides',
+                     'Ma_View_Helper');
+// Ajoute /autre/chemin/vers/des/aides avec le préfixe
+// de classe 'Votre_View_Helper'
+$view->addHelperPath('/autre/chemin/vers/des/aides',
+                     'Votre_View_Helper');
+
+// maintenant, lorsque vous appelerez $this->helperName(), Zend_View
+// va rechercher en premier /autre/chemin/vers/des/aides/HelperName.php
+// en utilisant la classe "Votre_View_Helper_HelperName", et ensuite
+// dans /chemin/vers/des/aides/HelperName.php en utilisant la classe
+// "Ma_View_Helper_HelperName", et finalement dans
+// Zend/View/Helpers/HelperName.php en utilisant la classe
+// "Zend_View_Helper_HelperName"
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.view.helpers.custom">
+        <title>Écrire des aides personnalisées</title>
+
+        <para>Écrire des aides personnalisées est facile, vous devez juste suivre ces règles :</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Bien qu'il ne soit pas strictement nécessaire, il est recommandé soit d'implémenter
+                <classname>Zend_View_Helper_Interface</classname> ou d'étendre <classname>Zend_View_Helper_Abstract</classname> quand vous
+                créez vos aides. Introduit en 1.6.0, ceux-ci définissent la méthode <code>setView()</code> ; cependant,
+                dans les prochaines releases, nous prévoyons d'implémenter un motif de conception Stratégie qui
+                permettra de simplifier en grande partie le schéma de nomination détaillé ci-dessous. Contruire sur ces
+                bases à partir de maintenant vous aidera pour vos codes futurs.</para>
+            </listitem>
+
+            <listitem>
+                <para>Le nom de la classe doit, au minimum, se terminer avec le nom de l'aide en utilisant une notation
+                en casseMélangée. Par exemple, si vous écrivez une aide appelée "actionSpeciale", le nom de la classe
+                doit être au minimum "ActionSpeciale". Vous devriez donner au nom de la classe un préfixe, et il est
+                recommandé d'utiliser "Ma_View_Helper" comme partie de ce préfixe : "Ma_View_Helper_ActionSpeciale".
+                (Vous devez alors fournir le préfixe, avec ou sans le tiret bas, à <code>addHelperPath()</code> ou à
+                <code>setHelperPath()</code>).</para>
+            </listitem>
+
+            <listitem>
+                <para>La classe doit avoir une méthode publique dont le nom correspond au nom de l'aide ; c'est la
+                méthode qui sera appelée quand votre template appellera <code>$this-&gt;actionSpeciale()</code>. Dans
+                notre exemple <code>$this-&gt;actionSpeciale()</code>, la déclaration de méthode requise serait
+                <code>public function actionSpeciale()</code>.</para>
+            </listitem>
+
+            <listitem>
+                <para>En général, la classe ne devrait pas afficher directement les données (via <code>echo</code> ou
+                <code>print</code>). Elle devrait retourner les valeurs pour être ensuite affichées. Les valeurs
+                retournées devrait être échappées de façon appropriées.</para>
+            </listitem>
+
+            <listitem>
+                <para>La classe doit être dans un fichier ayant le même nom que la méthode d'aide. Si on utilise la
+                méthode <code>actionSpeciale()</code>, le fichier devra être nommé "ActionSpeciale.php"</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>Placez le fichier de classe d'aide quelque part dans la pile des chemins d'aide, et <classname>Zend_View</classname>
+        le chargera, l'instanciera, le rendra persistant, et l'exécutera automatiquement pour vous.</para>
+
+        <para>Voici un exemple de fichier "ActionSpeciale.php" :</para>
+
+        <programlisting role="php"><![CDATA[
+class Ma_View_Helper_ActionSpeciale
+{
+    protected $_count = 0;
+    public function actionSpeciale()
+    {
+        $this->_count++;
+        $output = "J'ai vu 'The Big Lebowsky' {$this->_count} fois.";
+        return htmlspecialchars($output);
+    }
+}
+]]></programlisting>
+
+        <para>Ensuite, dans un script de vue, vous pouvez appeler l'aide <code>ActionSpeciale</code> autant de fois que
+        vous le souhaitez ; elle sera instanciée une fois, et rendue persistante pendant toute la vie de l'instance de
+        <classname>Zend_View</classname>.</para>
+
+        <programlisting role="php"><![CDATA[
+// rappelez vous, $this se réfère à l'instance de Zend_View
+echo $this->actionSpeciale();
+echo $this->actionSpeciale();
+echo $this->actionSpeciale();
+]]></programlisting>
+
+        <para>La sortie pourrait alors ressembler à ceci :</para>
+
+        <programlisting role="php"><![CDATA[
+J'ai vu 'The Big Lebowsky' 1 fois.
+J'ai vu 'The Big Lebowsky' 2 fois.
+J'ai vu 'The Big Lebowsky' 3 fois.
+]]></programlisting>
+
+        <para>Quelquefois vous devez accéder à l'objet <classname>Zend_View</classname> appelant - par exemple, si vous devez
+        utiliser l'encodage enregistré ou voulez effectuer le rendu d'un autre script de vue comme une sous partie de
+        votre aide. Pour avoir accès à votre objet de vue, votre classe d'aide doit avoir une méthode
+        <code>setView($view)</code>, comme ceci :</para>
+
+        <programlisting role="php"><![CDATA[
+class Ma_View_Helper_ScriptPath
+{
+    public $view;
+
+    public function setView(Zend_View_Interface $view)
+    {
+        $this->view = $view;
+    }
+
+    public function scriptPath($script)
+    {
+        return $this->view->getScriptPath($script);
+    }
+}
+]]></programlisting>
+
+        <para>Si votre classe d'aide a une méthode <code>setView()</code>, elle sera appelée quand votre classe sera
+        instanciée la première fois et fournira l'objet de la vue courante. Il est de votre responsabilité de maintenir
+        la persistance de l'objet dans votre classe, de même que de déterminer la façon dont il peut être
+        accéder.</para>
+    </sect2>
+</sect1>

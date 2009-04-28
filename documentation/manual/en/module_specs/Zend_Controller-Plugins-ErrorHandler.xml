@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.plugins.standard.errorhandler">
+    <title>Zend_Controller_Plugin_ErrorHandler</title>
+
+    <para>
+        <classname>Zend_Controller_Plugin_ErrorHandler</classname> provides a drop-in
+        plugin for handling exceptions thrown by your application, including
+        those resulting from missing controllers or actions; it is an
+        alternative to the methods listed in the <link
+            linkend="zend.controller.exceptions">MVC Exceptions section</link>.
+    </para>
+
+    <para>
+        The primary targets of the plugin are:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>Intercept exceptions raised due to missing controllers or
+                action methods</para>
+        </listitem>
+
+        <listitem>
+            <para>Intercept exceptions raised within action controllers</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        In other words, the <code>ErrorHandler</code> plugin is designed to
+        handle HTTP 404-type errors (page missing) and 500-type errors (internal
+        error). It is not intended to catch exceptions raised in other plugins
+        or routing.
+    </para>
+
+    <para>
+        By default, <classname>Zend_Controller_Plugin_ErrorHandler</classname> will
+        forward to <code>ErrorController::errorAction()</code> in the default
+        module. You may set alternate values for these by using the various
+        accessors available to the plugin:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>setErrorHandlerModule()</code> sets the controller module
+                to use.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerController()</code> sets the controller
+                to use.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerAction()</code> sets the controller action
+                to use.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandler()</code> takes an associative array, which
+                may contain any of the keys 'module', 'controller', or 'action',
+                with which it will set the appropriate values.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Additionally, you may pass an optional associative array to the
+        constructor, which will then proxy to <code>setErrorHandler()</code>.
+    </para>
+
+    <para>
+        <classname>Zend_Controller_Plugin_ErrorHandler</classname> registers a
+        <code>postDispatch()</code> hook and checks for exceptions registered in
+        <link linkend="zend.controller.response">the response object</link>. If
+        any are found, it attempts to forward to the registered error handler
+        action.
+    </para>
+
+    <para>
+        If an exception occurs dispatching the error handler, the plugin will
+        tell the front controller to throw exceptions, and rethrow the last
+        exception registered with the response object.
+    </para>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
+        <title>Using the ErrorHandler as a 404 Handler</title>
+
+        <para>
+            Since the <code>ErrorHandler</code> plugin captures not only
+            application errors, but also errors in the controller chain arising
+            from missing controller classes and/or action methods, it can be
+            used as a 404 handler. To do so, you will need to have your error
+            controller check the exception type.
+        </para>
+
+        <para>
+            Exceptions captured are logged in an object registered in the
+            request. To retrieve it, use
+            <classname>Zend_Controller_Action::_getParam('error_handler')</classname>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+    }
+}
+]]></programlisting>
+
+        <para>
+            Once you have the error object, you can get the type via
+            <code>$errors->type</code>. It will be one of the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</classname>,
+                    indicating the controller was not found.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</classname>,
+                    indicating the requested action was not found.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</classname>,
+                    indicating other exceptions.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            You can then test for either of the first two types, and, if so,
+            indicate a 404 page:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... get some output to display...
+                break;
+            default:
+                // application error; display error page, but don't
+                // change status code
+                break;
+        }
+    }
+}
+]]></programlisting>
+
+        <para>
+            Finally, you can retrieve the exception that triggered the error
+            handler by grabbing the <code>exception</code> property of the
+            <code>error_handler</code> object:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+public function errorAction()
+{
+        $errors = $this->_getParam('error_handler');
+
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... get some output to display...
+                break;
+            default:
+                // application error; display error page, but don't change
+                // status code
+
+                // ...
+
+                // Log the exception:
+                $exception = $errors->exception;
+                $log = new Zend_Log(
+                    new Zend_Log_Writer_Stream(
+                        '/tmp/applicationException.log'
+                    )
+                );
+                $log->debug($exception->getMessage() . "\n" .
+                            $exception->getTraceAsString());
+                break;
+        }
+}
+]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
+        <title>Handling Previously Rendered Output</title>
+
+        <para>
+            If you dispatch multiple actions in a request, or if your action
+            makes multiple calls to <code>render()</code>, it's possible that the
+            response object already has content stored within it. This can lead
+            to rendering a mixture of expected content and error content.
+        </para>
+
+        <para>
+            If you wish to render errors inline in such pages, no changes will
+            be necessary. If you do not wish to render such content, you should
+            clear the response body prior to rendering any views:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->getResponse()->clearBody();
+]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
+        <title>Plugin Usage Examples</title>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
+            <title>Standard Usage</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+]]></programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
+            <title>Setting a Different Error Handler</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+    'module'     => 'mystuff',
+    'controller' => 'static',
+    'action'     => 'error'
+)));
+]]></programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
+            <title>Using Accessors</title>
+            <programlisting role="php"><![CDATA[
+$plugin = new Zend_Controller_Plugin_ErrorHandler();
+$plugin->setErrorHandlerModule('mystuff')
+       ->setErrorHandlerController('static')
+       ->setErrorHandlerAction('error');
+
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin($plugin);
+]]></programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
+        <title>Error Controller Example</title>
+
+        <para>
+            In order to use the Error Handler plugin, you need an error
+            controller. Below is a simple example.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>The page you requested was not found.</p>
+EOH;
+                break;
+            default:
+                // application error
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>An unexpected error occurred. Please try again later.</p>
+EOH;
+                break;
+        }
+
+        // Clear previous content
+        $this->getResponse()->clearBody();
+
+        $this->view->content = $content;
+    }
+}
+]]></programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

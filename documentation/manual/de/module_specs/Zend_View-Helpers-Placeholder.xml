@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.placeholder">
+    <title>Platzhalter (PlaceHolder) Helfer</title>
+
+    <para>
+        Der <code>Placeholder</code> View Helfer wird verwendet um Inhalte zwischen View Skripten und View
+        Instanzen persistent zu machen. Er bietet auch einige nützliche Features wie Inhalte zu vereinigen,
+        Inhalte von View Skripten zu erfassen und Vor- sowie Nach-Texte zu Inhalten hinzuzufügen (und eigene
+        Separatoren für vereinigte Inhalte).
+    </para>
+
+    <example id="zend.view.helpers.initial.placeholder.usage">
+        <title>Grundsätzliche Verwendung von Platzhaltern</title>
+
+        <para>
+            Die grundsätzliche Verwendung von Platzhaltern ist die persistenz von View Daten. Jeder Aufruf des
+            <code>Placeholder</code> Helfers erwartet einen Platzhalter Namen; der Helfer gibt dann ein
+            Platzhalter Container Objekt zurück das entweder manipuliert oder einfach ausgegeben werden kann.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->set("Ein Text für später") ?>
+
+<?php
+    echo $this->placeholder('foo');
+    // Ausgabe "Ein Text für später"
+?>
+]]>
+        </programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.aggregation">
+        <title>Platzhalter verwenden um Inhalt zu vereinigen</title>
+
+        <para>
+            Inhalt über Platzhalter zu vereinigen kann zeitweise auch sehr nützlich sein. Zum Beispiel kann ein
+            View Skript ein variables Array besitzen von dem Nachrichten empfangen werden sollen um diese
+            später darzustellen; ein späteres View Skript kann diese dann eruieren wie diese dargestellt werden
+            sollen.
+        </para>
+
+        <para>
+            Der <code>Placeholder</code> View Helfer verwendet Container die <code>ArrayObject</code> erweitern,
+            und ein reichhaltiges Set von Features für die Manipulation von Arrays bieten. Zusätzlich bietet es
+            eine Anzahl von Methoden für die Formatierung des Inhalts der im Container gespeichert ist:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setPrefix($prefix)</code> setzt Text der dem Inhalt vorgesetzt wird.
+                    <code>getPrefix()</code> kann verwendet werden um jederzeit festzustellen wie die aktuellen
+                    Einstellungen sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setPostfix($prefix)</code> setzt Text der dem Inhalt angehängt wird.
+                    <code>getPostfix()</code> kann verwendet werden um jederzeit festzustellen wie die
+                    aktuellen Einstellungen sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setSeparator($prefix)</code> setzt Text mit dem zusammengefügte Inhalte seperiert
+                    werden. <code>getSeparator()</code> kann verwendet werden um jederzeit festzustellen wie die
+                    aktuellen Einstellungen sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setIndent($prefix)</code> kann verwendet werden um einen Markierungswert für
+                    den Inhalt zu setzen. Wenn ein Integer übergeben wird, wird diese Anzahl an Leerzeichen
+                    verwendet; wenn ein String übergeben wird, wird dieser String verwendet.
+                    <code>getIndent()</code> kann verwendet werden um jederzeit festzustellen wie die
+                    aktuellen Einstellungen sind.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- Erstes View Skript -->
+<?php $this->placeholder('foo')->exchangeArray($this->data) ?>
+]]>
+        </programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- Späteres View Skript -->
+<?php
+$this->placeholder('foo')->setPrefix("<ul>\n    <li>")
+                         ->setSeparator("</li><li>\n")
+                         ->setIndent(4)
+                         ->setPostfix("</li></ul>\n");
+?>
+
+<?php
+    echo $this->placeholder('foo');
+    // Ausgabe als unsortierte Liste mit schöner Einrückung
+?>
+]]>
+        </programlisting>
+
+        <para>
+            Weil die <code>Placeholder</code> Container Objekte <code>ArrayObject</code> erweitern, können
+            Inhalte einem speziellen Schlüssel im Container sehr einfach zugeordnet werden, statt diese einfach
+            an den Container anzufügen. Auf Schlüssel kann entweder als Objekt Eigenschaften oder als Array
+            Schlüssel zugegriffen werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->bar = $this->data ?>
+<?php echo $this->placeholder('foo')->bar ?>
+
+<?php
+$foo = $this->placeholder('foo');
+echo $foo['bar'];
+?>
+]]>
+        </programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.capture">
+        <title>Verwenden von Platzhaltern um Inhalt zu erfassen</title>
+
+        <para>
+            Gelegentlich will man Inhalte für einen Platzhalter in einem View Skript haben die einfachst als
+            Vorlage zu verwenden sind; der <code>Placeholder</code> View Helfer erlaubt es willkürliche
+            Inhalte zu erfassen um diese später durch Verwendung der folgenden API darstellen zu können.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>captureStart($type, $key)</code> beginnt die Erfassung der Inhalte.
+                </para>
+
+                <para>
+                    <code>$type</code> sollte eine der <code>Placeholder</code> Konstanten <code>APPEND</code>
+                    oder <code>SET</code> sein. <code>APPEND</code> fügt erfasste Inhalte der Liste der aktuellen
+                    Inhalte im Placeholder an; <code>SET</code> verwendet erfasste Inhalte als einzigen Wert
+                    für den Platzhalter (überschreibt potentiell alle vorherigen Inhalte). Standardmäßig ist
+                    <code>$type</code> <code>APPEND</code>.
+                </para>
+
+                <para>
+                    <code>$key</code> kann verwendet werden um einen speziellen Schlüssel im Placeholder Container
+                    zu spezifizieren an dem der Inhalt erfasst werden soll.
+                </para>
+
+                <para>
+                    <code>captureStart()</code> sperrt die Erfassung bis <code>captureEnd()</code> aufgerufen
+                    wurde; Erfassungen können nicht mit dem selben Placeholder Container verschachtelt werden.
+                    Das führt zu einer Ausnahme.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>captureEnd()</code> stoppt die Erfassung von Inhalten, und platziert Ihn im
+                    Container Objekt anhängig davon wie <code>captureStart()</code> aufgerufen wurde.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- Standarderfassung: anhängen -->
+<?php $this->placeholder('foo')->captureStart();
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+<?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo') ?>
+]]>
+        </programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- Erfassung zum Schlüssel -->
+<?php $this->placeholder('foo')->captureStart('SET', 'data');
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+<?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo')->data ?>
+]]>
+        </programlisting>
+    </example>
+
+    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
+        <title>Konkrete Platzhalter Implementationen</title>
+
+        <para>
+            Zend Framework kommt mit einer Anzahl an "konkreten" Platzhalter Implementationen. Diese sind für
+            üblich verwendete Platzhalter: Doctype, Seitentitel, und verschiedene &lt;head&gt; Elemente. In allen
+            Fällen gibt der Aufruf des Platzhalters ohne Argumente das Element selbst zurück.
+        </para>
+
+        <para>
+            Die Dokumentation für jedes Element wird separat behandelt, wie anbei beschrieben:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.doctype">Doctype</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headmeta">HeadMeta</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

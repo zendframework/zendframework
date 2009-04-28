@@ -1,0 +1,42 @@
+<sect1 id="zend.mail.introduction">
+    <title>Inleiding</title>
+    <para>
+        <code>Zend_Mail</code> verstrekt globale functionaliteit om zowel tekst als MIME-compliant multipart
+        e-mails te sturen. Mail kan gestuurd worden met <code>Zend_Mail</code> via de ingebouwde PHP functie
+        <ulink url="http://php.net/mail"><code>mail()</code></ulink> of via een directe SMTP verbinding.
+    </para>
+    <example>
+        <title>Eenvoudige E-mail met Zend_Mail</title>
+        <para>
+            Een eenvoudige e-mail bestaat uit enkele geadresseerden, een onderwerp, een inhoud en een afzender. Om zo'n mail te sturen met de PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink> functie doe je het volgende:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setBodyText('Dit is de inhoud van de mail.');
+$mail->setFrom('somebody@example.com', 'Een afzender');
+$mail->addTo('somebody_else@example.com', 'Een geadresseerde');
+$mail->setSubject('TestOnderwerp');
+$mail->send();
+?>]]>   </programlisting>
+    </example>
+    <note>
+      <para>
+        Om een mail te sturen met <code>Zend_Mail</code> moet je op zijn minst één geadresseerde, een
+        afzender (bijvoorbeeld met <code>setFrom()</code>) en een inhoud (tekst of HTML) ingeven.
+      </para>
+    </note>
+    <para>
+        Voor de meeste mail attributen zijn er "get" methodes om de informatie die in het mail object is
+        opgeslaan te lezen. Voor meer detail kan je terecht bij de API documentatie. Een speciale methode is
+        <code>getRecipients()</code>. Deze methode stuurt een array terug van alle geadresseerden die
+        werden toegevoegd voor de roep aan de methode.
+    </para>
+    <para>
+        Om veiligheidsredenen filtert <code>Zend_Mail</code> alle headervelden om header injectie te voorkomen
+        met behulp van newline (<code>\n</code>) tekens.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

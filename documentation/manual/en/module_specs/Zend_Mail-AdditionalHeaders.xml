@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.additional-headers">
+    <title>Additional Headers</title>
+    <para>
+        Arbitrary mail headers can be set by using the <code>addHeader()</code> method. It requires two
+        parameters containing the name and the value of the header field. A third optional parameter determines
+        if the header should have only one or multiple values:
+    </para>
+    <example id="zend.mail.additional-headers.example-1">
+        <title>Adding E-Mail Message Headers</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
+$mail->addHeader('X-greetingsTo', 'Dad', true);
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

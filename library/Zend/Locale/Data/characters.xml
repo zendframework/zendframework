@@ -1,0 +1,1888 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE supplementalData SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldmlSupplemental.dtd">
+
+<supplementalData>
+	<version number="$Revision: 1.15 $"/>
+	<generation date="$Date: 2008/06/12 17:39:05 $"/>
+	<characters>
+		<character-fallback>
+			<character value = " ">
+				<substitute> </substitute>
+			</character>
+			<character value = "©">
+				<substitute>(C)</substitute>
+			</character>
+			<character value = "«">
+				<substitute>&lt;&lt;</substitute>
+			</character>
+			<character value = "­">
+				<substitute>-</substitute>
+			</character>
+			<character value = "®">
+				<substitute>(R)</substitute>
+			</character>
+			<character value = "µ">
+				<substitute>μ</substitute>
+			</character>
+			<character value = "»">
+				<substitute>&gt;&gt;</substitute>
+			</character>
+			<character value = "¼">
+				<substitute> 1/4</substitute>
+			</character>
+			<character value = "½">
+				<substitute> 1/2</substitute>
+			</character>
+			<character value = "¾">
+				<substitute> 3/4</substitute>
+			</character>
+			<character value = "Æ">
+				<substitute>AE</substitute>
+			</character>
+			<character value = "ß">
+				<substitute>ss</substitute>
+			</character>
+			<character value = "æ">
+				<substitute>ae</substitute>
+			</character>
+			<character value = "Ĳ">
+				<substitute>IJ</substitute>
+			</character>
+			<character value = "ĳ">
+				<substitute>ij</substitute>
+			</character>
+			<character value = "ŉ">
+				<substitute>&apos;n</substitute>
+			</character>
+			<character value = "Œ">
+				<substitute>OE</substitute>
+			</character>
+			<character value = "œ">
+				<substitute>oe</substitute>
+			</character>
+			<character value = "ſ">
+				<substitute>s</substitute>
+			</character>
+			<character value = "Ǆ">
+				<substitute>DŽ</substitute>
+			</character>
+			<character value = "ǅ">
+				<substitute>Dž</substitute>
+			</character>
+			<character value = "ǆ">
+				<substitute>dž</substitute>
+			</character>
+			<character value = "Ǉ">
+				<substitute>LJ</substitute>
+			</character>
+			<character value = "ǈ">
+				<substitute>Lj</substitute>
+			</character>
+			<character value = "ǉ">
+				<substitute>lj</substitute>
+			</character>
+			<character value = "Ǌ">
+				<substitute>NJ</substitute>
+			</character>
+			<character value = "ǋ">
+				<substitute>Nj</substitute>
+			</character>
+			<character value = "ǌ">
+				<substitute>nj</substitute>
+			</character>
+			<character value = "Ǳ">
+				<substitute>DZ</substitute>
+			</character>
+			<character value = "ǲ">
+				<substitute>Dz</substitute>
+			</character>
+			<character value = "ǳ">
+				<substitute>dz</substitute>
+			</character>
+			<character value = "Ș">
+				<substitute>Ş</substitute>
+			</character>
+			<character value = "ș">
+				<substitute>ş</substitute>
+			</character>
+			<character value = "Ț">
+				<substitute>Ţ</substitute>
+			</character>
+			<character value = "ț">
+				<substitute>ţ</substitute>
+			</character>
+			<character value="־">
+				<substitute>‐</substitute>
+				<substitute>-</substitute>
+			</character>
+			<character value = "٫">
+				<substitute>,</substitute>
+			</character>
+			<character value = "٬">
+				<substitute>&apos;</substitute>
+			</character>
+			<character value = ";">
+				<substitute>;</substitute>
+			</character>
+			<character value = "‐">
+				<substitute>-</substitute>
+			</character>
+			<character value = "–">
+				<substitute>-</substitute>
+			</character>
+			<character value = "—">
+				<substitute>-</substitute>
+			</character>
+			<character value = "―">
+				<substitute>—</substitute>
+				<substitute>-</substitute>
+			</character>
+			<character value = "‘">
+				<substitute>&apos;</substitute>
+			</character>
+			<character value = "’">
+				<substitute>&apos;</substitute>
+			</character>
+			<character value = "“">
+				<substitute>&quot;</substitute>
+			</character>
+			<character value = "”">
+				<substitute>&quot;</substitute>
+			</character>
+			<character value = "․">
+				<substitute>.</substitute>
+			</character>
+			<character value = "‥">
+				<substitute>..</substitute>
+			</character>
+			<character value = "…">
+				<substitute>...</substitute>
+			</character>
+			<character value = "‼">
+				<substitute>!!</substitute>
+			</character>
+			<character value = "⁄">
+				<substitute>/</substitute>
+			</character>
+			<character value = "⁇">
+				<substitute>??</substitute>
+			</character>
+			<character value = "⁈">
+				<substitute>?!</substitute>
+			</character>
+			<character value = "⁉">
+				<substitute>!?</substitute>
+			</character>
+			<character value = "₠">
+				<substitute>CE</substitute>
+			</character>
+			<character value = "₢">
+				<substitute>Cr</substitute>
+			</character>
+			<character value = "₣">
+				<substitute>Fr.</substitute>
+			</character>
+			<character value = "₤">
+				<substitute>L.</substitute>
+				<substitute>£</substitute>
+			</character>
+			<character value = "₦">
+				<substitute>NGN</substitute>
+			</character>
+			<character value = "₧">
+				<substitute>Pts</substitute>
+			</character>
+			<character value = "₨">
+				<substitute>Rs</substitute>
+			</character>
+			<character value = "₩">
+				<substitute>KRW</substitute>
+			</character>
+			<character value = "₪">
+				<substitute>שח</substitute>
+				<substitute>ILS</substitute>
+			</character>
+			<character value = "₫">
+				<substitute>đ</substitute>
+				<substitute>VND</substitute>
+			</character>
+			<character value = "€">
+				<substitute>EUR</substitute>
+			</character>
+			<character value = "₭">
+				<substitute>LAK</substitute>
+			</character>
+			<character value = "₮">
+				<substitute>MNT</substitute>
+			</character>
+			<character value = "₯">
+				<substitute>GRD</substitute>
+			</character>
+			<character value = "₱">
+				<substitute>PHP</substitute>
+			</character>
+			<character value = "₲">
+				<substitute>PYG</substitute>
+			</character>
+			<character value = "₵">
+				<substitute>Ȼ</substitute>
+				<substitute>GHS</substitute>
+			</character>
+			<character value = "℀">
+				<substitute>a/c</substitute>
+			</character>
+			<character value = "℁">
+				<substitute>a/s</substitute>
+			</character>
+			<character value = "℃">
+				<substitute>°C</substitute>
+			</character>
+			<character value = "℅">
+				<substitute>c/o</substitute>
+			</character>
+			<character value = "℆">
+				<substitute>c/u</substitute>
+			</character>
+			<character value = "℉">
+				<substitute>°F</substitute>
+			</character>
+			<character value = "№">
+				<substitute>No</substitute>
+			</character>
+			<character value = "℞">
+				<substitute>Rx</substitute>
+			</character>
+			<character value = "℠">
+				<substitute>SM</substitute>
+			</character>
+			<character value = "℡">
+				<substitute>TEL</substitute>
+			</character>
+			<character value = "™">
+				<substitute>TM</substitute>
+			</character>
+			<character value = "Ω">
+				<substitute>Ω</substitute>
+			</character>
+			<character value = "K">
+				<substitute>K</substitute>
+			</character>
+			<character value = "Å">
+				<substitute>Å</substitute>
+			</character>
+			<character value = "℻">
+				<substitute>FAX</substitute>
+			</character>
+			<character value = "⅓">
+				<substitute> 1/3</substitute>
+			</character>
+			<character value = "⅔">
+				<substitute> 2/3</substitute>
+			</character>
+			<character value = "⅕">
+				<substitute> 1/5</substitute>
+			</character>
+			<character value = "⅖">
+				<substitute> 2/5</substitute>
+			</character>
+			<character value = "⅗">
+				<substitute> 3/5</substitute>
+			</character>
+			<character value = "⅘">
+				<substitute> 4/5</substitute>
+			</character>
+			<character value = "⅙">
+				<substitute> 1/6</substitute>
+			</character>
+			<character value = "⅚">
+				<substitute> 5/6</substitute>
+			</character>
+			<character value = "⅛">
+				<substitute> 1/8</substitute>
+			</character>
+			<character value = "⅜">
+				<substitute> 3/8</substitute>
+			</character>
+			<character value = "⅝">
+				<substitute> 5/8</substitute>
+			</character>
+			<character value = "⅞">
+				<substitute> 7/8</substitute>
+			</character>
+			<character value = "⅟">
+				<substitute> 1/</substitute>
+			</character>
+			<character value = "Ⅰ">
+				<substitute>I</substitute>
+			</character>
+			<character value = "Ⅱ">
+				<substitute>II</substitute>
+			</character>
+			<character value = "Ⅲ">
+				<substitute>III</substitute>
+			</character>
+			<character value = "Ⅳ">
+				<substitute>IV</substitute>
+			</character>
+			<character value = "Ⅴ">
+				<substitute>V</substitute>
+			</character>
+			<character value = "Ⅵ">
+				<substitute>VI</substitute>
+			</character>
+			<character value = "Ⅶ">
+				<substitute>VII</substitute>
+			</character>
+			<character value = "Ⅷ">
+				<substitute>VIII</substitute>
+			</character>
+			<character value = "Ⅸ">
+				<substitute>IX</substitute>
+			</character>
+			<character value = "Ⅹ">
+				<substitute>X</substitute>
+			</character>
+			<character value = "Ⅺ">
+				<substitute>XI</substitute>
+			</character>
+			<character value = "Ⅻ">
+				<substitute>XII</substitute>
+			</character>
+			<character value = "Ⅼ">
+				<substitute>L</substitute>
+			</character>
+			<character value = "Ⅽ">
+				<substitute>C</substitute>
+			</character>
+			<character value = "Ⅾ">
+				<substitute>D</substitute>
+			</character>
+			<character value = "Ⅿ">
+				<substitute>M</substitute>
+			</character>
+			<character value = "ⅰ">
+				<substitute>i</substitute>
+			</character>
+			<character value = "ⅱ">
+				<substitute>ii</substitute>
+			</character>
+			<character value = "ⅲ">
+				<substitute>iii</substitute>
+			</character>
+			<character value = "ⅳ">
+				<substitute>iv</substitute>
+			</character>
+			<character value = "ⅴ">
+				<substitute>v</substitute>
+			</character>
+			<character value = "ⅵ">
+				<substitute>vi</substitute>
+			</character>
+			<character value = "ⅶ">
+				<substitute>vii</substitute>
+			</character>
+			<character value = "ⅷ">
+				<substitute>viii</substitute>
+			</character>
+			<character value = "ⅸ">
+				<substitute>ix</substitute>
+			</character>
+			<character value = "ⅹ">
+				<substitute>x</substitute>
+			</character>
+			<character value = "ⅺ">
+				<substitute>xi</substitute>
+			</character>
+			<character value = "ⅻ">
+				<substitute>xii</substitute>
+			</character>
+			<character value = "ⅼ">
+				<substitute>l</substitute>
+			</character>
+			<character value = "ⅽ">
+				<substitute>c</substitute>
+			</character>
+			<character value = "ⅾ">
+				<substitute>d</substitute>
+			</character>
+			<character value = "ⅿ">
+				<substitute>m</substitute>
+			</character>
+			<character value = "∏">
+				<substitute>Π</substitute>
+			</character>
+			<character value = "∑">
+				<substitute>Σ</substitute>
+			</character>
+			<character value = "−">
+				<substitute>-</substitute>
+			</character>
+			<character value = "∕">
+				<substitute>/</substitute>
+			</character>
+			<character value = "∖">
+				<substitute>\</substitute>
+			</character>
+			<character value = "∣">
+				<substitute>|</substitute>
+			</character>
+			<character value = "∥">
+				<substitute>‖</substitute>
+				<substitute>||</substitute>
+			</character>
+			<character value = "⑴">
+				<substitute>(1)</substitute>
+			</character>
+			<character value = "⑵">
+				<substitute>(2)</substitute>
+			</character>
+			<character value = "⑶">
+				<substitute>(3)</substitute>
+			</character>
+			<character value = "⑷">
+				<substitute>(4)</substitute>
+			</character>
+			<character value = "⑸">
+				<substitute>(5)</substitute>
+			</character>
+			<character value = "⑹">
+				<substitute>(6)</substitute>
+			</character>
+			<character value = "⑺">
+				<substitute>(7)</substitute>
+			</character>
+			<character value = "⑻">
+				<substitute>(8)</substitute>
+			</character>
+			<character value = "⑼">
+				<substitute>(9)</substitute>
+			</character>
+			<character value = "⑽">
+				<substitute>(10)</substitute>
+			</character>
+			<character value = "⑾">
+				<substitute>(11)</substitute>
+			</character>
+			<character value = "⑿">
+				<substitute>(12)</substitute>
+			</character>
+			<character value = "⒀">
+				<substitute>(13)</substitute>
+			</character>
+			<character value = "⒁">
+				<substitute>(14)</substitute>
+			</character>
+			<character value = "⒂">
+				<substitute>(15)</substitute>
+			</character>
+			<character value = "⒃">
+				<substitute>(16)</substitute>
+			</character>
+			<character value = "⒄">
+				<substitute>(17)</substitute>
+			</character>
+			<character value = "⒅">
+				<substitute>(18)</substitute>
+			</character>
+			<character value = "⒆">
+				<substitute>(19)</substitute>
+			</character>
+			<character value = "⒇">
+				<substitute>(20)</substitute>
+			</character>
+			<character value = "⒈">
+				<substitute>1.</substitute>
+			</character>
+			<character value = "⒉">
+				<substitute>2.</substitute>
+			</character>
+			<character value = "⒊">
+				<substitute>3.</substitute>
+			</character>
+			<character value = "⒋">
+				<substitute>4.</substitute>
+			</character>
+			<character value = "⒌">
+				<substitute>5.</substitute>
+			</character>
+			<character value = "⒍">
+				<substitute>6.</substitute>
+			</character>
+			<character value = "⒎">
+				<substitute>7.</substitute>
+			</character>
+			<character value = "⒏">
+				<substitute>8.</substitute>
+			</character>
+			<character value = "⒐">
+				<substitute>9.</substitute>
+			</character>
+			<character value = "⒑">
+				<substitute>10.</substitute>
+			</character>
+			<character value = "⒒">
+				<substitute>11.</substitute>
+			</character>
+			<character value = "⒓">
+				<substitute>12.</substitute>
+			</character>
+			<character value = "⒔">
+				<substitute>13.</substitute>
+			</character>
+			<character value = "⒕">
+				<substitute>14.</substitute>
+			</character>
+			<character value = "⒖">
+				<substitute>15.</substitute>
+			</character>
+			<character value = "⒗">
+				<substitute>16.</substitute>
+			</character>
+			<character value = "⒘">
+				<substitute>17.</substitute>
+			</character>
+			<character value = "⒙">
+				<substitute>18.</substitute>
+			</character>
+			<character value = "⒚">
+				<substitute>19.</substitute>
+			</character>
+			<character value = "⒛">
+				<substitute>20.</substitute>
+			</character>
+			<character value = "⒜">
+				<substitute>(a)</substitute>
+			</character>
+			<character value = "⒝">
+				<substitute>(b)</substitute>
+			</character>
+			<character value = "⒞">
+				<substitute>(c)</substitute>
+			</character>
+			<character value = "⒟">
+				<substitute>(d)</substitute>
+			</character>
+			<character value = "⒠">
+				<substitute>(e)</substitute>
+			</character>
+			<character value = "⒡">
+				<substitute>(f)</substitute>
+			</character>
+			<character value = "⒢">
+				<substitute>(g)</substitute>
+			</character>
+			<character value = "⒣">
+				<substitute>(h)</substitute>
+			</character>
+			<character value = "⒤">
+				<substitute>(i)</substitute>
+			</character>
+			<character value = "⒥">
+				<substitute>(j)</substitute>
+			</character>
+			<character value = "⒦">
+				<substitute>(k)</substitute>
+			</character>
+			<character value = "⒧">
+				<substitute>(l)</substitute>
+			</character>
+			<character value = "⒨">
+				<substitute>(m)</substitute>
+			</character>
+			<character value = "⒩">
+				<substitute>(n)</substitute>
+			</character>
+			<character value = "⒪">
+				<substitute>(o)</substitute>
+			</character>
+			<character value = "⒫">
+				<substitute>(p)</substitute>
+			</character>
+			<character value = "⒬">
+				<substitute>(q)</substitute>
+			</character>
+			<character value = "⒭">
+				<substitute>(r)</substitute>
+			</character>
+			<character value = "⒮">
+				<substitute>(s)</substitute>
+			</character>
+			<character value = "⒯">
+				<substitute>(t)</substitute>
+			</character>
+			<character value = "⒰">
+				<substitute>(u)</substitute>
+			</character>
+			<character value = "⒱">
+				<substitute>(v)</substitute>
+			</character>
+			<character value = "⒲">
+				<substitute>(w)</substitute>
+			</character>
+			<character value = "⒳">
+				<substitute>(x)</substitute>
+			</character>
+			<character value = "⒴">
+				<substitute>(y)</substitute>
+			</character>
+			<character value = "⒵">
+				<substitute>(z)</substitute>
+			</character>
+			<character value = "㋀">
+				<substitute>1月</substitute>
+			</character>
+			<character value = "㋁">
+				<substitute>2月</substitute>
+			</character>
+			<character value = "㋂">
+				<substitute>3月</substitute>
+			</character>
+			<character value = "㋃">
+				<substitute>4月</substitute>
+			</character>
+			<character value = "㋄">
+				<substitute>5月</substitute>
+			</character>
+			<character value = "㋅">
+				<substitute>6月</substitute>
+			</character>
+			<character value = "㋆">
+				<substitute>7月</substitute>
+			</character>
+			<character value = "㋇">
+				<substitute>8月</substitute>
+			</character>
+			<character value = "㋈">
+				<substitute>9月</substitute>
+			</character>
+			<character value = "㋉">
+				<substitute>10月</substitute>
+			</character>
+			<character value = "㋊">
+				<substitute>11月</substitute>
+			</character>
+			<character value = "㋋">
+				<substitute>12月</substitute>
+			</character>
+			<character value = "㋌">
+				<substitute>Hg</substitute>
+			</character>
+			<character value = "㋍">
+				<substitute>erg</substitute>
+			</character>
+			<character value = "㋎">
+				<substitute>eV</substitute>
+			</character>
+			<character value = "㋏">
+				<substitute>LTD</substitute>
+			</character>
+			<character value = "㍘">
+				<substitute>0点</substitute>
+			</character>
+			<character value = "㍙">
+				<substitute>1点</substitute>
+			</character>
+			<character value = "㍚">
+				<substitute>2点</substitute>
+			</character>
+			<character value = "㍛">
+				<substitute>3点</substitute>
+			</character>
+			<character value = "㍜">
+				<substitute>4点</substitute>
+			</character>
+			<character value = "㍝">
+				<substitute>5点</substitute>
+			</character>
+			<character value = "㍞">
+				<substitute>6点</substitute>
+			</character>
+			<character value = "㍟">
+				<substitute>7点</substitute>
+			</character>
+			<character value = "㍠">
+				<substitute>8点</substitute>
+			</character>
+			<character value = "㍡">
+				<substitute>9点</substitute>
+			</character>
+			<character value = "㍢">
+				<substitute>10点</substitute>
+			</character>
+			<character value = "㍣">
+				<substitute>11点</substitute>
+			</character>
+			<character value = "㍤">
+				<substitute>12点</substitute>
+			</character>
+			<character value = "㍥">
+				<substitute>13点</substitute>
+			</character>
+			<character value = "㍦">
+				<substitute>14点</substitute>
+			</character>
+			<character value = "㍧">
+				<substitute>15点</substitute>
+			</character>
+			<character value = "㍨">
+				<substitute>16点</substitute>
+			</character>
+			<character value = "㍩">
+				<substitute>17点</substitute>
+			</character>
+			<character value = "㍪">
+				<substitute>18点</substitute>
+			</character>
+			<character value = "㍫">
+				<substitute>19点</substitute>
+			</character>
+			<character value = "㍬">
+				<substitute>20点</substitute>
+			</character>
+			<character value = "㍭">
+				<substitute>21点</substitute>
+			</character>
+			<character value = "㍮">
+				<substitute>22点</substitute>
+			</character>
+			<character value = "㍯">
+				<substitute>23点</substitute>
+			</character>
+			<character value = "㍰">
+				<substitute>24点</substitute>
+			</character>
+			<character value = "㍱">
+				<substitute>hPa</substitute>
+			</character>
+			<character value = "㍲">
+				<substitute>da</substitute>
+			</character>
+			<character value = "㍳">
+				<substitute>AU</substitute>
+			</character>
+			<character value = "㍴">
+				<substitute>bar</substitute>
+			</character>
+			<character value = "㍵">
+				<substitute>oV</substitute>
+			</character>
+			<character value = "㍶">
+				<substitute>pc</substitute>
+			</character>
+			<character value = "㍷">
+				<substitute>dm</substitute>
+			</character>
+			<character value = "㍸">
+				<substitute>dm²</substitute>
+			</character>
+			<character value = "㍹">
+				<substitute>dm³</substitute>
+			</character>
+			<character value = "㍺">
+				<substitute>IU</substitute>
+			</character>
+			<character value = "㎀">
+				<substitute>pA</substitute>
+			</character>
+			<character value = "㎁">
+				<substitute>nA</substitute>
+			</character>
+			<character value = "㎂">
+				<substitute>μA</substitute>
+			</character>
+			<character value = "㎃">
+				<substitute>mA</substitute>
+			</character>
+			<character value = "㎄">
+				<substitute>kA</substitute>
+			</character>
+			<character value = "㎅">
+				<substitute>KB</substitute>
+			</character>
+			<character value = "㎆">
+				<substitute>MB</substitute>
+			</character>
+			<character value = "㎇">
+				<substitute>GB</substitute>
+			</character>
+			<character value = "㎈">
+				<substitute>cal</substitute>
+			</character>
+			<character value = "㎉">
+				<substitute>kcal</substitute>
+			</character>
+			<character value = "㎊">
+				<substitute>pF</substitute>
+			</character>
+			<character value = "㎋">
+				<substitute>nF</substitute>
+			</character>
+			<character value = "㎌">
+				<substitute>μF</substitute>
+			</character>
+			<character value = "㎍">
+				<substitute>μg</substitute>
+			</character>
+			<character value = "㎎">
+				<substitute>mg</substitute>
+			</character>
+			<character value = "㎏">
+				<substitute>kg</substitute>
+			</character>
+			<character value = "㎐">
+				<substitute>Hz</substitute>
+			</character>
+			<character value = "㎑">
+				<substitute>kHz</substitute>
+			</character>
+			<character value = "㎒">
+				<substitute>MHz</substitute>
+			</character>
+			<character value = "㎓">
+				<substitute>GHz</substitute>
+			</character>
+			<character value = "㎔">
+				<substitute>THz</substitute>
+			</character>
+			<character value = "㎕">
+				<substitute>μℓ</substitute>
+				<substitute>μl</substitute>
+			</character>
+			<character value = "㎖">
+				<substitute>mℓ</substitute>
+				<substitute>ml</substitute>
+			</character>
+			<character value = "㎗">
+				<substitute>dℓ</substitute>
+				<substitute>dl</substitute>
+			</character>
+			<character value = "㎘">
+				<substitute>kℓ</substitute>
+				<substitute>kl</substitute>
+			</character>
+			<character value = "㎙">
+				<substitute>fm</substitute>
+			</character>
+			<character value = "㎚">
+				<substitute>nm</substitute>
+			</character>
+			<character value = "㎛">
+				<substitute>μm</substitute>
+			</character>
+			<character value = "㎜">
+				<substitute>mm</substitute>
+			</character>
+			<character value = "㎝">
+				<substitute>cm</substitute>
+			</character>
+			<character value = "㎞">
+				<substitute>km</substitute>
+			</character>
+			<character value = "㎟">
+				<substitute>mm²</substitute>
+			</character>
+			<character value = "㎠">
+				<substitute>cm²</substitute>
+			</character>
+			<character value = "㎡">
+				<substitute>m²</substitute>
+			</character>
+			<character value = "㎢">
+				<substitute>km²</substitute>
+			</character>
+			<character value = "㎣">
+				<substitute>mm³</substitute>
+			</character>
+			<character value = "㎤">
+				<substitute>cm³</substitute>
+			</character>
+			<character value = "㎥">
+				<substitute>m³</substitute>
+			</character>
+			<character value = "㎦">
+				<substitute>km³</substitute>
+			</character>
+			<character value = "㎧">
+				<substitute>m∕s</substitute>
+				<substitute>m/s</substitute>
+			</character>
+			<character value = "㎨">
+				<substitute>m∕s²</substitute>
+				<substitute>m/s²</substitute>
+			</character>
+			<character value = "㎩">
+				<substitute>Pa</substitute>
+			</character>
+			<character value = "㎪">
+				<substitute>kPa</substitute>
+			</character>
+			<character value = "㎫">
+				<substitute>MPa</substitute>
+			</character>
+			<character value = "㎬">
+				<substitute>GPa</substitute>
+			</character>
+			<character value = "㎭">
+				<substitute>rad</substitute>
+			</character>
+			<character value = "㎮">
+				<substitute>rad∕s</substitute>
+				<substitute>rad/s</substitute>
+			</character>
+			<character value = "㎯">
+				<substitute>rad∕s²</substitute>
+				<substitute>rad/s²</substitute>
+			</character>
+			<character value = "㎰">
+				<substitute>ps</substitute>
+			</character>
+			<character value = "㎱">
+				<substitute>ns</substitute>
+			</character>
+			<character value = "㎲">
+				<substitute>μs</substitute>
+			</character>
+			<character value = "㎳">
+				<substitute>ms</substitute>
+			</character>
+			<character value = "㎴">
+				<substitute>pV</substitute>
+			</character>
+			<character value = "㎵">
+				<substitute>nV</substitute>
+			</character>
+			<character value = "㎶">
+				<substitute>μV</substitute>
+			</character>
+			<character value = "㎷">
+				<substitute>mV</substitute>
+			</character>
+			<character value = "㎸">
+				<substitute>kV</substitute>
+			</character>
+			<character value = "㎹">
+				<substitute>MV</substitute>
+			</character>
+			<character value = "㎺">
+				<substitute>pW</substitute>
+			</character>
+			<character value = "㎻">
+				<substitute>nW</substitute>
+			</character>
+			<character value = "㎼">
+				<substitute>μW</substitute>
+			</character>
+			<character value = "㎽">
+				<substitute>mW</substitute>
+			</character>
+			<character value = "㎾">
+				<substitute>kW</substitute>
+			</character>
+			<character value = "㎿">
+				<substitute>MW</substitute>
+			</character>
+			<character value = "㏀">
+				<substitute>kΩ</substitute>
+			</character>
+			<character value = "㏁">
+				<substitute>MΩ</substitute>
+			</character>
+			<character value = "㏂">
+				<substitute>a.m.</substitute>
+			</character>
+			<character value = "㏃">
+				<substitute>Bq</substitute>
+			</character>
+			<character value = "㏄">
+				<substitute>CC</substitute>
+			</character>
+			<character value = "㏅">
+				<substitute>cd</substitute>
+			</character>
+			<character value = "㏆">
+				<substitute>C∕kg</substitute>
+				<substitute>C/kg</substitute>
+			</character>
+			<character value = "㏇">
+				<substitute>Co.</substitute>
+			</character>
+			<character value = "㏈">
+				<substitute>dB</substitute>
+			</character>
+			<character value = "㏉">
+				<substitute>Gy</substitute>
+			</character>
+			<character value = "㏊">
+				<substitute>ha</substitute>
+			</character>
+			<character value = "㏋">
+				<substitute>HP</substitute>
+			</character>
+			<character value = "㏌">
+				<substitute>in</substitute>
+			</character>
+			<character value = "㏍">
+				<substitute>KK</substitute>
+			</character>
+			<character value = "㏎">
+				<substitute>KM</substitute>
+			</character>
+			<character value = "㏏">
+				<substitute>kt</substitute>
+			</character>
+			<character value = "㏐">
+				<substitute>lm</substitute>
+			</character>
+			<character value = "㏑">
+				<substitute>ln</substitute>
+			</character>
+			<character value = "㏒">
+				<substitute>log</substitute>
+			</character>
+			<character value = "㏓">
+				<substitute>lx</substitute>
+			</character>
+			<character value = "㏔">
+				<substitute>mb</substitute>
+			</character>
+			<character value = "㏕">
+				<substitute>mil</substitute>
+			</character>
+			<character value = "㏖">
+				<substitute>mol</substitute>
+			</character>
+			<character value = "㏗">
+				<substitute>pH</substitute>
+			</character>
+			<character value = "㏘">
+				<substitute>p.m.</substitute>
+			</character>
+			<character value = "㏙">
+				<substitute>PPM</substitute>
+			</character>
+			<character value = "㏚">
+				<substitute>PR</substitute>
+			</character>
+			<character value = "㏛">
+				<substitute>sr</substitute>
+			</character>
+			<character value = "㏜">
+				<substitute>Sv</substitute>
+			</character>
+			<character value = "㏝">
+				<substitute>Wb</substitute>
+			</character>
+			<character value = "㏞">
+				<substitute>V∕m</substitute>
+				<substitute>V/m</substitute>
+			</character>
+			<character value = "㏟">
+				<substitute>A∕m</substitute>
+				<substitute>A/m</substitute>
+			</character>
+			<character value = "㏠">
+				<substitute>1日</substitute>
+			</character>
+			<character value = "㏡">
+				<substitute>2日</substitute>
+			</character>
+			<character value = "㏢">
+				<substitute>3日</substitute>
+			</character>
+			<character value = "㏣">
+				<substitute>4日</substitute>
+			</character>
+			<character value = "㏤">
+				<substitute>5日</substitute>
+			</character>
+			<character value = "㏥">
+				<substitute>6日</substitute>
+			</character>
+			<character value = "㏦">
+				<substitute>7日</substitute>
+			</character>
+			<character value = "㏧">
+				<substitute>8日</substitute>
+			</character>
+			<character value = "㏨">
+				<substitute>9日</substitute>
+			</character>
+			<character value = "㏩">
+				<substitute>10日</substitute>
+			</character>
+			<character value = "㏪">
+				<substitute>11日</substitute>
+			</character>
+			<character value = "㏫">
+				<substitute>12日</substitute>
+			</character>
+			<character value = "㏬">
+				<substitute>13日</substitute>
+			</character>
+			<character value = "㏭">
+				<substitute>14日</substitute>
+			</character>
+			<character value = "㏮">
+				<substitute>15日</substitute>
+			</character>
+			<character value = "㏯">
+				<substitute>16日</substitute>
+			</character>
+			<character value = "㏰">
+				<substitute>17日</substitute>
+			</character>
+			<character value = "㏱">
+				<substitute>18日</substitute>
+			</character>
+			<character value = "㏲">
+				<substitute>19日</substitute>
+			</character>
+			<character value = "㏳">
+				<substitute>20日</substitute>
+			</character>
+			<character value = "㏴">
+				<substitute>21日</substitute>
+			</character>
+			<character value = "㏵">
+				<substitute>22日</substitute>
+			</character>
+			<character value = "㏶">
+				<substitute>23日</substitute>
+			</character>
+			<character value = "㏷">
+				<substitute>24日</substitute>
+			</character>
+			<character value = "㏸">
+				<substitute>25日</substitute>
+			</character>
+			<character value = "㏹">
+				<substitute>26日</substitute>
+			</character>
+			<character value = "㏺">
+				<substitute>27日</substitute>
+			</character>
+			<character value = "㏻">
+				<substitute>28日</substitute>
+			</character>
+			<character value = "㏼">
+				<substitute>29日</substitute>
+			</character>
+			<character value = "㏽">
+				<substitute>30日</substitute>
+			</character>
+			<character value = "㏾">
+				<substitute>31日</substitute>
+			</character>
+			<character value = "㏿">
+				<substitute>gal</substitute>
+			</character>
+			<character value = "ﬀ">
+				<substitute>ff</substitute>
+			</character>
+			<character value = "ﬁ">
+				<substitute>fi</substitute>
+			</character>
+			<character value = "ﬂ">
+				<substitute>fl</substitute>
+			</character>
+			<character value = "ﬃ">
+				<substitute>ffi</substitute>
+			</character>
+			<character value = "ﬄ">
+				<substitute>ffl</substitute>
+			</character>
+			<character value = "ﬅ">
+				<substitute>ſt</substitute>
+			</character>
+			<character value = "ﬆ">
+				<substitute>st</substitute>
+			</character>
+			<character value = "！">
+				<substitute>!</substitute>
+			</character>
+			<character value = "＂">
+				<substitute>&quot;</substitute>
+			</character>
+			<character value = "＃">
+				<substitute>#</substitute>
+			</character>
+			<character value = "＄">
+				<substitute>$</substitute>
+			</character>
+			<character value = "％">
+				<substitute>%</substitute>
+			</character>
+			<character value = "＆">
+				<substitute>&amp;</substitute>
+			</character>
+			<character value = "＇">
+				<substitute>&apos;</substitute>
+			</character>
+			<character value = "（">
+				<substitute>(</substitute>
+			</character>
+			<character value = "）">
+				<substitute>)</substitute>
+			</character>
+			<character value = "＊">
+				<substitute>*</substitute>
+			</character>
+			<character value = "＋">
+				<substitute>+</substitute>
+			</character>
+			<character value = "，">
+				<substitute>,</substitute>
+			</character>
+			<character value = "－">
+				<substitute>-</substitute>
+			</character>
+			<character value = "．">
+				<substitute>.</substitute>
+			</character>
+			<character value = "／">
+				<substitute>/</substitute>
+			</character>
+			<character value = "０">
+				<substitute>0</substitute>
+			</character>
+			<character value = "１">
+				<substitute>1</substitute>
+			</character>
+			<character value = "２">
+				<substitute>2</substitute>
+			</character>
+			<character value = "３">
+				<substitute>3</substitute>
+			</character>
+			<character value = "４">
+				<substitute>4</substitute>
+			</character>
+			<character value = "５">
+				<substitute>5</substitute>
+			</character>
+			<character value = "６">
+				<substitute>6</substitute>
+			</character>
+			<character value = "７">
+				<substitute>7</substitute>
+			</character>
+			<character value = "８">
+				<substitute>8</substitute>
+			</character>
+			<character value = "９">
+				<substitute>9</substitute>
+			</character>
+			<character value = "：">
+				<substitute>:</substitute>
+			</character>
+			<character value = "；">
+				<substitute>;</substitute>
+			</character>
+			<character value = "＜">
+				<substitute>&lt;</substitute>
+			</character>
+			<character value = "＝">
+				<substitute>=</substitute>
+			</character>
+			<character value = "＞">
+				<substitute>&gt;</substitute>
+			</character>
+			<character value = "？">
+				<substitute>?</substitute>
+			</character>
+			<character value = "＠">
+				<substitute>@</substitute>
+			</character>
+			<character value = "Ａ">
+				<substitute>A</substitute>
+			</character>
+			<character value = "Ｂ">
+				<substitute>B</substitute>
+			</character>
+			<character value = "Ｃ">
+				<substitute>C</substitute>
+			</character>
+			<character value = "Ｄ">
+				<substitute>D</substitute>
+			</character>
+			<character value = "Ｅ">
+				<substitute>E</substitute>
+			</character>
+			<character value = "Ｆ">
+				<substitute>F</substitute>
+			</character>
+			<character value = "Ｇ">
+				<substitute>G</substitute>
+			</character>
+			<character value = "Ｈ">
+				<substitute>H</substitute>
+			</character>
+			<character value = "Ｉ">
+				<substitute>I</substitute>
+			</character>
+			<character value = "Ｊ">
+				<substitute>J</substitute>
+			</character>
+			<character value = "Ｋ">
+				<substitute>K</substitute>
+			</character>
+			<character value = "Ｌ">
+				<substitute>L</substitute>
+			</character>
+			<character value = "Ｍ">
+				<substitute>M</substitute>
+			</character>
+			<character value = "Ｎ">
+				<substitute>N</substitute>
+			</character>
+			<character value = "Ｏ">
+				<substitute>O</substitute>
+			</character>
+			<character value = "Ｐ">
+				<substitute>P</substitute>
+			</character>
+			<character value = "Ｑ">
+				<substitute>Q</substitute>
+			</character>
+			<character value = "Ｒ">
+				<substitute>R</substitute>
+			</character>
+			<character value = "Ｓ">
+				<substitute>S</substitute>
+			</character>
+			<character value = "Ｔ">
+				<substitute>T</substitute>
+			</character>
+			<character value = "Ｕ">
+				<substitute>U</substitute>
+			</character>
+			<character value = "Ｖ">
+				<substitute>V</substitute>
+			</character>
+			<character value = "Ｗ">
+				<substitute>W</substitute>
+			</character>
+			<character value = "Ｘ">
+				<substitute>X</substitute>
+			</character>
+			<character value = "Ｙ">
+				<substitute>Y</substitute>
+			</character>
+			<character value = "Ｚ">
+				<substitute>Z</substitute>
+			</character>
+			<character value = "［">
+				<substitute>[</substitute>
+			</character>
+			<character value = "＼">
+				<substitute>\</substitute>
+			</character>
+			<character value = "］">
+				<substitute>]</substitute>
+			</character>
+			<character value = "＾">
+				<substitute>^</substitute>
+			</character>
+			<character value = "＿">
+				<substitute>_</substitute>
+			</character>
+			<character value = "｀">
+				<substitute>`</substitute>
+			</character>
+			<character value = "ａ">
+				<substitute>a</substitute>
+			</character>
+			<character value = "ｂ">
+				<substitute>b</substitute>
+			</character>
+			<character value = "ｃ">
+				<substitute>c</substitute>
+			</character>
+			<character value = "ｄ">
+				<substitute>d</substitute>
+			</character>
+			<character value = "ｅ">
+				<substitute>e</substitute>
+			</character>
+			<character value = "ｆ">
+				<substitute>f</substitute>
+			</character>
+			<character value = "ｇ">
+				<substitute>g</substitute>
+			</character>
+			<character value = "ｈ">
+				<substitute>h</substitute>
+			</character>
+			<character value = "ｉ">
+				<substitute>i</substitute>
+			</character>
+			<character value = "ｊ">
+				<substitute>j</substitute>
+			</character>
+			<character value = "ｋ">
+				<substitute>k</substitute>
+			</character>
+			<character value = "ｌ">
+				<substitute>l</substitute>
+			</character>
+			<character value = "ｍ">
+				<substitute>m</substitute>
+			</character>
+			<character value = "ｎ">
+				<substitute>n</substitute>
+			</character>
+			<character value = "ｏ">
+				<substitute>o</substitute>
+			</character>
+			<character value = "ｐ">
+				<substitute>p</substitute>
+			</character>
+			<character value = "ｑ">
+				<substitute>q</substitute>
+			</character>
+			<character value = "ｒ">
+				<substitute>r</substitute>
+			</character>
+			<character value = "ｓ">
+				<substitute>s</substitute>
+			</character>
+			<character value = "ｔ">
+				<substitute>t</substitute>
+			</character>
+			<character value = "ｕ">
+				<substitute>u</substitute>
+			</character>
+			<character value = "ｖ">
+				<substitute>v</substitute>
+			</character>
+			<character value = "ｗ">
+				<substitute>w</substitute>
+			</character>
+			<character value = "ｘ">
+				<substitute>x</substitute>
+			</character>
+			<character value = "ｙ">
+				<substitute>y</substitute>
+			</character>
+			<character value = "ｚ">
+				<substitute>z</substitute>
+			</character>
+			<character value = "｛">
+				<substitute>{</substitute>
+			</character>
+			<character value = "｜">
+				<substitute>|</substitute>
+			</character>
+			<character value = "｝">
+				<substitute>}</substitute>
+			</character>
+			<character value = "～">
+				<substitute>~</substitute>
+			</character>
+			<character value = "｟">
+				<substitute>⦅</substitute>
+				<substitute>((</substitute>
+			</character>
+			<character value = "｠">
+				<substitute>⦆</substitute>
+				<substitute>))</substitute>
+			</character>
+			<character value = "｡">
+				<substitute>。</substitute>
+			</character>
+			<character value = "｢">
+				<substitute>「</substitute>
+			</character>
+			<character value = "｣">
+				<substitute>」</substitute>
+			</character>
+			<character value = "､">
+				<substitute>、</substitute>
+			</character>
+			<character value = "･">
+				<substitute>・</substitute>
+			</character>
+			<character value = "ｦ">
+				<substitute>ヲ</substitute>
+			</character>
+			<character value = "ｧ">
+				<substitute>ァ</substitute>
+			</character>
+			<character value = "ｨ">
+				<substitute>ィ</substitute>
+			</character>
+			<character value = "ｩ">
+				<substitute>ゥ</substitute>
+			</character>
+			<character value = "ｪ">
+				<substitute>ェ</substitute>
+			</character>
+			<character value = "ｫ">
+				<substitute>ォ</substitute>
+			</character>
+			<character value = "ｬ">
+				<substitute>ャ</substitute>
+			</character>
+			<character value = "ｭ">
+				<substitute>ュ</substitute>
+			</character>
+			<character value = "ｮ">
+				<substitute>ョ</substitute>
+			</character>
+			<character value = "ｯ">
+				<substitute>ッ</substitute>
+			</character>
+			<character value = "ｰ">
+				<substitute>ー</substitute>
+			</character>
+			<character value = "ｱ">
+				<substitute>ア</substitute>
+			</character>
+			<character value = "ｲ">
+				<substitute>イ</substitute>
+			</character>
+			<character value = "ｳ">
+				<substitute>ウ</substitute>
+			</character>
+			<character value = "ｴ">
+				<substitute>エ</substitute>
+			</character>
+			<character value = "ｵ">
+				<substitute>オ</substitute>
+			</character>
+			<character value = "ｶ">
+				<substitute>カ</substitute>
+			</character>
+			<character value = "ｷ">
+				<substitute>キ</substitute>
+			</character>
+			<character value = "ｸ">
+				<substitute>ク</substitute>
+			</character>
+			<character value = "ｹ">
+				<substitute>ケ</substitute>
+			</character>
+			<character value = "ｺ">
+				<substitute>コ</substitute>
+			</character>
+			<character value = "ｻ">
+				<substitute>サ</substitute>
+			</character>
+			<character value = "ｼ">
+				<substitute>シ</substitute>
+			</character>
+			<character value = "ｽ">
+				<substitute>ス</substitute>
+			</character>
+			<character value = "ｾ">
+				<substitute>セ</substitute>
+			</character>
+			<character value = "ｿ">
+				<substitute>ソ</substitute>
+			</character>
+			<character value = "ﾀ">
+				<substitute>タ</substitute>
+			</character>
+			<character value = "ﾁ">
+				<substitute>チ</substitute>
+			</character>
+			<character value = "ﾂ">
+				<substitute>ツ</substitute>
+			</character>
+			<character value = "ﾃ">
+				<substitute>テ</substitute>
+			</character>
+			<character value = "ﾄ">
+				<substitute>ト</substitute>
+			</character>
+			<character value = "ﾅ">
+				<substitute>ナ</substitute>
+			</character>
+			<character value = "ﾆ">
+				<substitute>ニ</substitute>
+			</character>
+			<character value = "ﾇ">
+				<substitute>ヌ</substitute>
+			</character>
+			<character value = "ﾈ">
+				<substitute>ネ</substitute>
+			</character>
+			<character value = "ﾉ">
+				<substitute>ノ</substitute>
+			</character>
+			<character value = "ﾊ">
+				<substitute>ハ</substitute>
+			</character>
+			<character value = "ﾋ">
+				<substitute>ヒ</substitute>
+			</character>
+			<character value = "ﾌ">
+				<substitute>フ</substitute>
+			</character>
+			<character value = "ﾍ">
+				<substitute>ヘ</substitute>
+			</character>
+			<character value = "ﾎ">
+				<substitute>ホ</substitute>
+			</character>
+			<character value = "ﾏ">
+				<substitute>マ</substitute>
+			</character>
+			<character value = "ﾐ">
+				<substitute>ミ</substitute>
+			</character>
+			<character value = "ﾑ">
+				<substitute>ム</substitute>
+			</character>
+			<character value = "ﾒ">
+				<substitute>メ</substitute>
+			</character>
+			<character value = "ﾓ">
+				<substitute>モ</substitute>
+			</character>
+			<character value = "ﾔ">
+				<substitute>ヤ</substitute>
+			</character>
+			<character value = "ﾕ">
+				<substitute>ユ</substitute>
+			</character>
+			<character value = "ﾖ">
+				<substitute>ヨ</substitute>
+			</character>
+			<character value = "ﾗ">
+				<substitute>ラ</substitute>
+			</character>
+			<character value = "ﾘ">
+				<substitute>リ</substitute>
+			</character>
+			<character value = "ﾙ">
+				<substitute>ル</substitute>
+			</character>
+			<character value = "ﾚ">
+				<substitute>レ</substitute>
+			</character>
+			<character value = "ﾛ">
+				<substitute>ロ</substitute>
+			</character>
+			<character value = "ﾜ">
+				<substitute>ワ</substitute>
+			</character>
+			<character value = "ﾝ">
+				<substitute>ン</substitute>
+			</character>
+			<character value = "ﾞ">
+				<substitute>゛</substitute>
+			</character>
+			<character value = "ﾟ">
+				<substitute>゜</substitute>
+			</character>
+			<character value = "ﾠ">
+				<substitute>ㅤ</substitute>
+			</character>
+			<character value = "ﾡ">
+				<substitute>ㄱ</substitute>
+			</character>
+			<character value = "ﾢ">
+				<substitute>ㄲ</substitute>
+			</character>
+			<character value = "ﾣ">
+				<substitute>ㄳ</substitute>
+			</character>
+			<character value = "ﾤ">
+				<substitute>ㄴ</substitute>
+			</character>
+			<character value = "ﾥ">
+				<substitute>ㄵ</substitute>
+			</character>
+			<character value = "ﾦ">
+				<substitute>ㄶ</substitute>
+			</character>
+			<character value = "ﾧ">
+				<substitute>ㄷ</substitute>
+			</character>
+			<character value = "ﾨ">
+				<substitute>ㄸ</substitute>
+			</character>
+			<character value = "ﾩ">
+				<substitute>ㄹ</substitute>
+			</character>
+			<character value = "ﾪ">
+				<substitute>ㄺ</substitute>
+			</character>
+			<character value = "ﾫ">
+				<substitute>ㄻ</substitute>
+			</character>
+			<character value = "ﾬ">
+				<substitute>ㄼ</substitute>
+			</character>
+			<character value = "ﾭ">
+				<substitute>ㄽ</substitute>
+			</character>
+			<character value = "ﾮ">
+				<substitute>ㄾ</substitute>
+			</character>
+			<character value = "ﾯ">
+				<substitute>ㄿ</substitute>
+			</character>
+			<character value = "ﾰ">
+				<substitute>ㅀ</substitute>
+			</character>
+			<character value = "ﾱ">
+				<substitute>ㅁ</substitute>
+			</character>
+			<character value = "ﾲ">
+				<substitute>ㅂ</substitute>
+			</character>
+			<character value = "ﾳ">
+				<substitute>ㅃ</substitute>
+			</character>
+			<character value = "ﾴ">
+				<substitute>ㅄ</substitute>
+			</character>
+			<character value = "ﾵ">
+				<substitute>ㅅ</substitute>
+			</character>
+			<character value = "ﾶ">
+				<substitute>ㅆ</substitute>
+			</character>
+			<character value = "ﾷ">
+				<substitute>ㅇ</substitute>
+			</character>
+			<character value = "ﾸ">
+				<substitute>ㅈ</substitute>
+			</character>
+			<character value = "ﾹ">
+				<substitute>ㅉ</substitute>
+			</character>
+			<character value = "ﾺ">
+				<substitute>ㅊ</substitute>
+			</character>
+			<character value = "ﾻ">
+				<substitute>ㅋ</substitute>
+			</character>
+			<character value = "ﾼ">
+				<substitute>ㅌ</substitute>
+			</character>
+			<character value = "ﾽ">
+				<substitute>ㅍ</substitute>
+			</character>
+			<character value = "ﾾ">
+				<substitute>ㅎ</substitute>
+			</character>
+			<character value = "ￂ">
+				<substitute>ㅏ</substitute>
+			</character>
+			<character value = "ￃ">
+				<substitute>ㅐ</substitute>
+			</character>
+			<character value = "ￄ">
+				<substitute>ㅑ</substitute>
+			</character>
+			<character value = "ￅ">
+				<substitute>ㅒ</substitute>
+			</character>
+			<character value = "ￆ">
+				<substitute>ㅓ</substitute>
+			</character>
+			<character value = "ￇ">
+				<substitute>ㅔ</substitute>
+			</character>
+			<character value = "ￊ">
+				<substitute>ㅕ</substitute>
+			</character>
+			<character value = "ￋ">
+				<substitute>ㅖ</substitute>
+			</character>
+			<character value = "ￌ">
+				<substitute>ㅗ</substitute>
+			</character>
+			<character value = "ￍ">
+				<substitute>ㅘ</substitute>
+			</character>
+			<character value = "ￎ">
+				<substitute>ㅙ</substitute>
+			</character>
+			<character value = "ￏ">
+				<substitute>ㅚ</substitute>
+			</character>
+			<character value = "ￒ">
+				<substitute>ㅛ</substitute>
+			</character>
+			<character value = "ￓ">
+				<substitute>ㅜ</substitute>
+			</character>
+			<character value = "ￔ">
+				<substitute>ㅝ</substitute>
+			</character>
+			<character value = "ￕ">
+				<substitute>ㅞ</substitute>
+			</character>
+			<character value = "ￖ">
+				<substitute>ㅟ</substitute>
+			</character>
+			<character value = "ￗ">
+				<substitute>ㅠ</substitute>
+			</character>
+			<character value = "ￚ">
+				<substitute>ㅡ</substitute>
+			</character>
+			<character value = "ￛ">
+				<substitute>ㅢ</substitute>
+			</character>
+			<character value = "ￜ">
+				<substitute>ㅣ</substitute>
+			</character>
+			<character value = "￠">
+				<substitute>¢</substitute>
+			</character>
+			<character value = "￡">
+				<substitute>£</substitute>
+			</character>
+			<character value = "￢">
+				<substitute>¬</substitute>
+			</character>
+			<character value = "￣">
+				<substitute>¯</substitute>
+			</character>
+			<character value = "￤">
+				<substitute>¦</substitute>
+			</character>
+			<character value = "￥">
+				<substitute>¥</substitute>
+			</character>
+			<character value = "￦">
+				<substitute>₩</substitute>
+			</character>
+			<character value = "￨">
+				<substitute>│</substitute>
+			</character>
+			<character value = "￩">
+				<substitute>←</substitute>
+			</character>
+			<character value = "￪">
+				<substitute>↑</substitute>
+			</character>
+			<character value = "￫">
+				<substitute>→</substitute>
+			</character>
+			<character value = "￬">
+				<substitute>↓</substitute>
+			</character>
+			<character value = "￭">
+				<substitute>■</substitute>
+			</character>
+			<character value = "￮">
+				<substitute>○</substitute>
+			</character>
+			<character value = "₵">
+				<substitute>¢</substitute>
+			</character>
+			<character value = "₲">
+				<substitute>G</substitute>
+			</character>
+			<character value = "₡">
+				<substitute>C</substitute>
+			</character>
+		</character-fallback>
+	</characters>
+</supplementalData>

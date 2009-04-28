@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.chain">
+    <title>Zend_Controller_Router_Route_Chain</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Chain</classname> is a route which allows
+        to chain multiple routes together. This allows you to chain
+        hostname-routes and path routes, or multiple path routes for example.
+        Chaining can be done either programatically or within a configuration
+        file.
+    </para>
+
+    <note>
+        <title>Parameter Priority</title>
+        <para>
+            When chaining routes  together, the parameters of the outer route
+            have a higher priority than the parameters of the inner route. Thus
+            if you define a controller in the outer and in the inner route,
+            the controller of the outer route will be selected.
+        </para>
+    </note>
+
+    <para>
+        When chaining programatically, there are two ways to archive this. The
+        first one is to create a new
+        <classname>Zend_Controller_Router_Route_Chain</classname> instance and then
+        calling the <code>chain</code> method multiple times with all routes
+        which should be chained together. The other way is to take the first
+        route, e.g. a hostname route, and calling the <code>chain</code>
+        method on it with the route which should be appended to it. This
+        will not modify the hostname route, but return a new instance of
+        <classname>Zend_Controller_Router_Route_Chain</classname>, which then has both
+        routes chained together:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Create two routes
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
+$pathRoute     = new Zend_Controller_Router_Route(...);
+
+// First way, chain them via the chain route
+$chainedRoute = new Zend_Controller_Router_Route_Chain();
+$chainedRoute->chain($hostnameRoute)
+             ->chain($pathRoute);
+
+// Second way, chain them directly
+$chainedRoute = $hostnameRoute->chain($pathRoute);
+]]></programlisting>
+
+    <para>
+        When chaining routes together, their default separator is a slash
+        by default. There may be cases when you want to have a different
+        separator:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Create two routes
+$firstRoute  = new Zend_Controller_Router_Route('foo');
+$secondRoute = new Zend_Controller_Router_Route('bar');
+
+// Chain them together with a different separator
+$chainedRoute = $firstRoute->chain($secondRoute, '-');
+
+// Assemble the route: "foo-bar"
+echo $chainedRoute->assemble();
+]]></programlisting>
+
+    <sect4 id="zend.controller.router.routes.chain.config">
+        <title>Chain Routes via Zend_Config</title>
+
+        <para>
+            To chain routes together in a config file, there are  additional
+            parameters for the configuration of those. The simpler approach is
+            to use the <code>chains</code> parameters. This one is simply a list
+            of routes, which will be chained with the parent route. Neither the
+            parent- nor the child-route will be added directly to the router but
+            only the resulting chained route. The name of the chained route in
+            the router will be the parent route name and the child route name
+            concatenated with a dash (-). A simple config in XML would look
+            like this:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <language type="Zend_Controller_Router_Route">
+                <route>:language</route>
+                <reqs language="[a-z]{2}">
+                <chains>
+                    <index type="Zend_Controller_Router_Route_Static">
+                        <route></route>
+                        <defaults module="default" controller="index" action="index" />
+                    </index>
+                    <imprint type="Zend_Controller_Router_Route_Static">
+                        <route>imprint</route>
+                        <defaults module="default" controller="index" action="index" />
+                    </imprint>
+                </chains>
+            </language>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]></programlisting>
+
+        <para>
+            This will result in the three routes <code>www-language-index</code>,
+            <code>www-language-imprint</code> and
+            <code>users-language-profile</code> which will only match based on
+            the hostname and the route <code>misc</code>, which will match with
+            any hostname.
+        </para>
+
+        <para>
+            The alternative way of creating a chained route is via the
+            <code>chain</code> parameter, which can only be used with the
+            chain-route type directly, and also just works in the root level:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Chain">
+        <route>www.example.com</route>
+    </www>
+    <language type="Zend_Controller_Router_Route">
+        <route>:language</route>
+        <reqs language="[a-z]{2}">
+    </language>
+    <index type="Zend_Controller_Router_Route_Static">
+        <route></route>
+        <defaults module="default" controller="index" action="index" />
+    </index>
+    <imprint type="Zend_Controller_Router_Route_Static">
+        <route>imprint</route>
+        <defaults module="default" controller="index" action="index" />
+    </imprint>
+
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+
+        <para>
+            You can also give the <code>chain</code> parameter as array instead
+            of separating the routes with a comma:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>imprint</chain>
+    </www-imprint>
+</routes>
+]]></programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

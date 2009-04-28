@@ -1,0 +1,11 @@
+<sect1 id="zend.dom.introduction">
+    <title>הקדמה</title>
+
+    <para>
+    	<code>Zend_Dom</code> מספק כלים לעבודה עם מסמכי DOM.
+		נכון לרגע זה אנחנו מספקים את השימוש ב <code>Zend_Dom_Query</code>, אשר מאפשרת ביצוע עיבוד מסמכי DOM ושימוש גם ב XPath ו CSS Selectors.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

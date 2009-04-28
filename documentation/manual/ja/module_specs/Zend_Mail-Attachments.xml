@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.mail.attachments">
+    <title>ファイルの添付</title>
+    <para>
+        メールにファイルを添付するには <code>createAttachment()</code> メソッドを使用します。
+        <classname>Zend_Mail</classname> のデフォルト設定では、添付ファイルは
+        base64 エンコードされたバイナリオブジェクト (application/octet-stream)
+        として添付されます。この挙動を変更するには、
+        <code>createAttachment()</code> に追加のパラメータを指定します。
+    </para>
+    <example id="zend.mail.attachments.example-1">
+        <title>ファイルを添付したメール</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+// メッセージを作成します...
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage,
+                        'image/gif',
+                        Zend_Mime::DISPOSITION_INLINE,
+                        Zend_Mime::ENCODING_8BIT);
+]]>
+        </programlisting>
+    </example>
+    <para>
+        添付ファイル用の MIME パートを細かく制御するには、
+        <code>createAttachment()</code> の返す値を使用してその属性を変更します。
+        <code>createAttachment()</code> メソッドの返す値は
+        <classname>Zend_Mime_Part</classname> オブジェクトです。
+    </para>
+    <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+
+$at = $mail->createAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->send();
+]]>
+    </programlisting>
+    <para>
+        もうひとつの方法は、<classname>Zend_Mime_Part</classname> のインスタンスを作成して
+        それを <code>addAttachment()</code> で追加するものです。
+    </para>
+    <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+
+$at = new Zend_Mime_Part($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->addAttachment($at);
+
+$mail->send();
+]]>
+    </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

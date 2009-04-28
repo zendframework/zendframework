@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.43 $"/>
+		<generation date="$Date: 2008/05/28 15:49:39 $"/>
+		<language type="zh"/>
+		<territory type="MO"/>
+	</identity>
+	<alias source="zh_Hant_MO" path="//ldml"/>
+</ldml>

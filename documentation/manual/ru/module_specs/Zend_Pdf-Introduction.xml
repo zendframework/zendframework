@@ -1,0 +1,105 @@
+<sect1 id="zend.pdf.introduction">
+    <!-- @todo review and revise upon completion of refactoring -->
+    <title>Введение</title>
+    <para>
+    Модуль Zend_Pdf является механизмом для работы с PDF (Portable Document
+    Format — переносимый формат документов), который написан целиком на PHP 5.
+    Он может загружать существующие документы, создавать новые, модифицировать
+    и сохранять модифицированные документы. Таким образом, он может помочь любым
+    основанным на PHP приложениям динамически подготавливать докуметы на PDF
+    посредством изменения существующего шаблона или генерировать документ с нуля.
+
+    Модуль Zend_Pdf поддерживает следующие возможности:
+<!--
+    Zend_Pdf module is a PDF (Portable Document Format) manipulation engine written entirely in PHP 5.
+    It can load existing documents, create new, modify and save modified documents.
+    Thus it can help any PHP-driven application dynamically prepare documents in a PDF by modifying existing template
+    or generating document from a scratch.
+
+    Zend_Pdf module supports the following features:
+-->
+    <itemizedlist>
+        <listitem>
+            <para>
+            Создание нового документа или загрузка существующего
+            <!-- Create new document or load existing one. -->
+            <footnote>
+                <para>
+                Документы PDF версии V1.4 (Acrobat 5) сейчас поддерживаются для загрузки.
+                <!-- PDF V1.4 (Acrobat 5) documents are supported for loading now. -->
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Извлечение определенной версии документа
+            <!-- Retrieving specified revision of the document. -->
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Управление страницами в документе. Изменение порядка страниц, добавление
+            новых страниц, удаление страниц из документа.
+            <!--
+            Manipulate pages within document. Changing page order, adding new pages, removing pages
+            from a document.
+            -->
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Рисование различных примитивов (линий, прямоугольников, многоугольников,
+            окружностей, эллипсов и секторов)
+            <!--
+            Different drawing primitives (lines, rectangles, polygons, circles, ellipses and sectors).
+            -->
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Рисование текста с использованием одного из 14 стандартных шрифтов.
+            <!--
+            Text drawing by using one of 14 standard fonts.
+            -->
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Повороты
+            <!--
+            Rotations.
+            -->
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Рисование изображений
+            <!--
+            Image drawing.
+            -->
+            <footnote>
+                <para>
+                Поддерживаются изображения JPG, PNG [выше 8bit+Alpha] и TIFF.
+                <!--
+                JPG, PNG [Up to 8bit+Alpha] and TIFF images are supported.
+                -->
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Поэтапное обновление файла PDF
+            <!--
+            Incremental PDF file update.
+            -->
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

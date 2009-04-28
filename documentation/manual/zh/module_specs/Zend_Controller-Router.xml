@@ -1,0 +1,339 @@
+<sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>标准路由器</title>
+    <sect2 id="zend.controller.router.introduction">
+        <title>简介</title>
+        <para>
+            <code>Zend_Controller_Router_Rewrite</code>是标准的框架路由器。路由是个过程，在这个过程中它取出URI的端点（跟着基本URL的URI的那部分）并把它分解成参数来决定哪个模块、哪个控制器和控制器中的哪个动作应该接受请求。模块、控制器、动作和其它参数被打包到<code>Zend_Controller_Request_Http</code>对象，接着这个对象由<code>Zend_Controller_Dispatcher_Standard</code>来处理。路由只发生一次：当请求最初被接收和第一个控制器被派遣之前。
+        </para>
+
+        <para>
+            <code>Zend_Controller_Router_Rewrite</code>被设计来考虑使用纯php结构时mod_rewrite-like的功能性。它非常宽松地基于Ruby on Rails并且不要求任何先前的web服务器URL rewriting的知识。它被设计来和单个Apache的 mod_rewrite规则（其中之一）一起工作：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+]]>
+        </programlisting>
+
+        <para>
+            或者：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1
+]]>
+        </programlisting>
+
+        <para>
+            如果<ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>已经用下列的rewrite规则被安装为一个Isapi扩展， rewrite路由器也可以和IIS web服务器一起使用：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css)$)[\w\%]*$)? /index.php [I]
+]]>
+        </programlisting>
+
+        <note>
+            <title>IIS Isapi_Rewrite</title>
+            <para>
+                当使用IIS，<code>$_SERVER['REQUEST_URI']</code>将要么不存在，要么被设置成一个空串。在这个例子中，<code>Zend_Controller_Request_Http</code>将企图使用被Isapi_Rewrite扩展设置的<code>$_SERVER['HTTP_X_REWRITE_URL']</code>的值。
+            </para>
+        </note>
+
+        <para>
+            如果使用 Lighttpd，下面的 rewrite 规则有效：
+        </para>
+
+        <programlisting role="lighttpd"><![CDATA[
+url.rewrite-once = (
+    ".*\?(.*)$" => "/index.php?$1",
+    ".*\.(js|ico|gif|jpg|png|css)$" => "$0",
+    "" => "/index.php"
+)
+]]>
+</programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.router.usage">
+        <title>使用路由器</title>
+
+        <para>
+            为正确使用rewrite路由器你必须初始化它，添加一些用户定义的路由并注入到控制器。下面的代码示例这个过程：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Create a router
+
+$router = $ctrl->getRouter(); // returns a rewrite router by default
+$router->addRoute(
+    'user',
+    new Zend_Controller_Router_Route('user/:username',
+                                     array('controller' => 'user',
+                                           'action' => 'info'))
+);
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.router.basic">
+        <title>基本的Rewrite路由器操作</title>
+
+        <para>
+            RewriteRouter的核心是用户定义路由的定义。路由通过调用RewriteRouter的addRoute方法和传递一个由类实现的<code>Zend_Controller_Router_Route_Interface</code>的新的实例被添加。例如：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$router->addRoute('user',
+                  new Zend_Controller_Router_Route('user/:username'));
+]]>
+        </programlisting>
+
+        <para>
+            Rewrite 路由器带有四个基本类型的路由（其中一个是特殊的）：
+        </para>
+
+        <itemizedlist mark="opencircle">
+            <listitem><para><xref linkend="zend.controller.router.routes.standard" /></para></listitem>
+            <listitem><para><xref linkend="zend.controller.router.routes.static" /></para></listitem>
+            <listitem><para><xref linkend="zend.controller.router.routes.regex" /></para></listitem>
+            <listitem><para><xref linkend="zend.controller.router.default-routes" /> *</para></listitem>
+        </itemizedlist>
+
+        <para>
+            路由可以被使用无数次来创建链或用户定义的应用程序路由计划。你可以在任何配置中使用任何数量的路由，除了模块路由以外，它最好被用一次并作为通用路由（例如，作为缺省的）。每个路由将在稍后详细描述。
+        </para>
+
+        <para>
+            addRoute的第一个参数是路由名。它用来作为权柄从路由器中取得路由（例如，for URL generation purposes）。第二个参数是路由自己。
+        </para>
+
+        <note>
+            <para>
+                路由名最普通的用法是通过Zend_View_url助手的方法：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+"<?= $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
+]]>
+            </programlisting>
+
+            <para>
+                它将导致在 href： <code>user/martel</code>.
+            </para>
+        </note>
+
+        <para>
+            路由是一个简单的过程，这个过程通过所有提供的路由和匹配它的当前请求的URI定义来迭代。当一个正匹配被发现，变量值从路由实例返回并注入到<code>Zend_Controller_Request</code>对象以备将来在派遣器和用户创建的控制器中使用。如果是负匹配，在链中的下个路由被检查。
+        </para>
+
+        <note>
+            <title>倒序匹配</title>
+            <para>
+                用倒序来匹配路由确保最通用的路由被首先定义。
+            </para>
+        </note>
+
+        <note>
+            <title>返回的值</title>
+            <para>
+                从路由返回的值来自于URL参数或用于定义的缺省值。这些变量以后可通过<code>Zend_Controller_Request::getParam()</code> 或 <code>Zend_Controller_Action::_getParam()</code> 方法来访问。
+            </para>
+        </note>
+
+        <para>
+            有三个特殊的变量可用于你的路由－'module'、 'controller' 和 'action'。这些特殊的变量被Zend_Controller_Dispatcher用来找出控制器和动作然后派遣过去。
+        </para>
+
+        <note>
+            <title>特殊变量</title>
+            <para>
+                如果你选择通过 <code>setControllerKey</code> 和 <code>setActionKey</code>方法的方式来改变缺省值，这些特殊变量的名字可能会不同。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.controller.router.default-routes">
+        <title>缺省路由</title>
+
+        <para>
+            Zend_Controller_Router_Rewrite 和缺省路由一起预先配置，它将以<code>controller/action</code>的形式匹配URIs。另外，模块名可以被指定作为第一个路径参数，允许这种<code>module/controller/action</code>形式的URIs。最后，它也将缺省地匹配任何另外的追加到URI的参数－<code>controller/action/var1/value1/var2/value2</code>。
+        </para>
+
+        <para>
+            一些路由如何匹配的例子：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Assuming the following:
+$ctrl->setControllerDirectory(
+    array(
+        'default' => '/path/to/default/controllers',
+        'news'    => '/path/to/news/controllers',
+        'blog'    => '/path/to/blog/controllers'
+    )
+);
+
+Module only:
+http://example/news
+    module == news
+
+Invalid module maps to controller name:
+http://example/foo
+    controller == foo
+
+Module + controller:
+http://example/blog/archive
+    module     == blog
+    controller == archive
+
+Module + controller + action:
+http://example/blog/archive/list
+    module     == blog
+    controller == archive
+    action     == list
+
+Module + controller + action + params:
+http://example/blog/archive/list/sort/alpha/date/desc
+    module     == blog
+    controller == archive
+    action     == list
+    sort       == alpha
+    date       == desc
+]]>
+        </programlisting>
+
+        <para>
+            缺省路由是存储在RewriteRouter名（index）为'default'的简单的<code>Zend_Controller_Router_Route_Module</code>对象。它被创建多多少少象下面这样：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$compat = new Zend_Controller_Router_Route_Module(array(),
+                                                  $dispatcher,
+                                                  $request);
+$this->addRoute('default', $compat);
+]]>
+        </programlisting>
+
+        <para>
+            如果你不想这个特别的缺省路由在你的路由计划中，你可以重写你自己的‘缺省’路由（例如，把它存储在'default'名下）或用<code>removeDefaultRoutes()</code>完全清除它：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Remove any default routes
+$router->removeDefaultRoutes();
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.controller.router.rewritebase">
+        <title>基本 URL 和子目录</title>
+
+        <para>
+            rewrite路由器可以被用在子目录（例如，<code>http://domain.com/~user/application-root/</code>），在此例中，应用程序 (<code>/~user/application-root</code>)的基本URL应该能自动被<code>Zend_Controller_Request_Http</code>检测到并使用。
+        </para>
+
+        <para>
+            如果基本URL被误删除，你可以通过<code>Zend_Controller_Request_Http</code> 和调用 <code>setBaseUrl()</code> 方法（参见<xref linkend="zend.controller.request.http.baseurl" />）用你自己的基本路径重写它。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$request->setBaseUrl('/~user/application-root/');
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.controller.router.routes">
+        <title>Route Types</title>
+        <xi:include href="Zend_Controller-Router-Route.xml" />
+        <xi:include href="Zend_Controller-Router-Route-Static.xml" />
+        <xi:include href="Zend_Controller-Router-Route-Regex.xml" />
+    </sect2>
+
+    <sect2 id="zend.controller.router.add-config">
+        <title>使用 Zend_Config with the RewriteRouter</title>
+
+        <para>
+            有时候，用新路由更新配置文件比修改代码更方便。这个可能通过<code>addConfig()</code>方法来做。基本上，你创建一个Zend_Config-compatible配置，并在你的代码中读入然后传递给RewriteRouter。
+        </para>
+
+        <para>
+            作为例子，考虑下面的 INI 文件：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+[production]
+routes.archive.route = "archive/:year/*"
+routes.archive.defaults.controller = archive
+routes.archive.defaults.action = show
+routes.archive.defaults.year = 2000
+routes.archive.reqs.year = "\d+"
+
+routes.news.type = "Zend_Controller_Router_Route_Static"
+routes.news.route = "news"
+routes.news.defaults.controller = "news"
+routes.news.defaults.action = "list"
+
+routes.archive.type = "Zend_Controller_Router_Route_Regex"
+routes.archive.route = "archive/(\d+)"
+routes.archive.defaults.controller = "archive"
+routes.archive.defaults.action = "show"
+routes.archive.map.1 = "year"
+; OR: routes.archive.map.year = 1
+]]>
+        </programlisting>
+
+        <para>
+            上述的INI文件可以被读进<code>Zend_Config</code>对象：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('/path/to/config.ini', 'production');
+$router = new Zend_Controller_Router_Rewrite();
+$router->addConfig($config, 'routes');
+]]>
+        </programlisting>
+
+        <para>
+            在上面的例子中，我们告诉路由器去使用INI文件'routes'一节给它的路由。每个在这个节下的顶级键将用来定义路由名；上述例子定义了路由'archive'和'news'。每个路由接着要求，至少，一个'route'条目和一个或更多'defaults'条目；可选地，一个或更多'reqs'（'required'的简写）可能要求提供。总之，这些相对应的三个参数提供给<code>Zend_Controller_Router_Route_Interface</code>对象。一个选项键，'type'，可用来指定路由类的类型给特殊的路由；缺省地，它使用<code>Zend_Controller_Router_Route</code>。在上述例子中，'news'路由被定义来使用<code>Zend_Controller_Router_Route_Static</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.router.subclassing">
+        <title>Subclassing the Router</title>
+
+        <para>
+            标准的rewrite路由器应当最大限度提供你所需的功能；大多时候，为了通过已知的路由提供新的或修改的功能，你将只需要创建一个新的路由类型
+        </para>
+
+        <para>
+            那就是说，你可能想要用不同的路由范例。接口<code>Zend_Controller_Router_Interface</code>提供了需要最少的信息来创建路由器，并包含一个单个的方法。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+interface Zend_Controller_Router_Interface
+{
+  /**
+   * @param  Zend_Controller_Request_Abstract $request
+   * @throws Zend_Controller_Router_Exception
+   * @return Zend_Controller_Request_Abstract
+   */
+  public function route(Zend_Controller_Request_Abstract $request);
+}
+]]>
+        </programlisting>
+
+        <para>
+            路由只发生一次：当请求第一次接收到系统。路由器的意图是基于请求的环境决定控制器、动作和可选的参数，并把它们发给请求。请求对象接着传递给派遣器。如果不可能映射一个路由到一个派遣令牌，路由器对请求对象就什么也不做。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

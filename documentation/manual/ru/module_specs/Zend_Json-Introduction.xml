@@ -1,0 +1,31 @@
+<sect1 id="zend.json.introduction">
+    <title>Введение</title>
+    <para>
+        <code>Zend_Json</code> предоставляет удобные методы для
+        преобразования кода PHP в JSON и декодирования JSON в код PHP.
+        Для более подробной информации о JSON можно
+        <ulink url="http://www.json.org/">посетить сайт проекта JSON</ulink>.
+<!--
+        <code>Zend_Json</code> provides convenience methods for serializing
+        native PHP to JSON and decoding JSON to native PHP. For more information
+        on JSON, <ulink url="http://www.json.org/">visit the JSON project
+        site</ulink>.
+-->
+    </para>
+    <para>
+        JSON (JavaScript Object Notation) может использоваться для обмена
+        данными между JavaScript и другими языками программирования.
+        Так как JSON может вычисляться непосредственно JavaScript,
+        это более эффективный и легковесный формат для обмена данными
+        с клиентами JavaScript, чем XML.
+<!--
+        JSON, JavaScript Object Notation, can be used for data
+        interchange between JavaScript and other languages. Since JSON can be
+        directly evaluated by JavaScript, it is a more efficient and lightweight
+        format than XML for exchanging data with JavaScript clients.
+-->
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

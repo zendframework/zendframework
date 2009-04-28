@@ -1,0 +1,128 @@
+<sect1 id="zend.filter.set">
+
+    <title>Standardowe klasy filtrów</title>
+
+    <para>
+        Zend Framework posiada standardowy zestaw gotowych do użycia filtrów..
+    </para>
+
+    <sect2 id="zend.filter.set.alnum">
+        <title>Alnum</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
+            oprócz znaków alfabetu oraz cyfr. Filtr posiada także opcję,
+            służącą do zezwolenia na wystąpienie białych znaków.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.alpha">
+        <title>Alpha</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
+            oprócz znaków alfabetu. Filtr posiada także opcję, służącą do
+            zezwolenia na wystąpienie białych znaków.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.basename">
+        <title>BaseName</title>
+        <para>
+            Gdy podamy łańcuch znaków zawierający ścieżkę do pliku, to filtr
+            zwróci bazową nazwę pliku.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.digits">
+        <title>Digits</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, usuwając wszystkie znaki
+            oprócz cyfr.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.dir">
+        <title>Dir</title>
+        <para>
+            Zwraca nazwę katalogu gdy podamy ścieżkę do pliku lub katalogu.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.htmlentities">
+        <title>HtmlEntities</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, zamieniając znaki na ich odpowiadające
+            encje HTML, jeśli istnieją.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.int">
+        <title>Int</title>
+        <para>
+            Zwraca wartość całkowitą (int) <code>$value</code>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>StripNewlines</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code> bez znaków nowej linii.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.realpath">
+        <title>RealPath</title>
+        <para>
+            Rozwiązauje wszystkie dowiązania symboliczne oraz odniesienia do
+            elementów '/./', '/../' oraz '/' w podanej ścieżce i zwraca
+            absolutną nazwę ścieżki. Zwrócona ścieżka nie będzie posiadała
+            dowiązań symbolicznych, a także elementów '/./' czy '/../'.
+        </para>
+        <para>
+            <code>Zend_Filter_RealPath</code> zwróci wartość logiczną <code>FALSE</code>
+            gdy się to nie uda, np. jeśli plik nie istnieje. W systemach BSD filtr
+            <code>Zend_Filter_RealPath</code> nie zwróci wartośći <code>FALSE</code>
+            jeśli tylko ostatnia część ścieżki nie istnieje, a w pozostałych systemach
+            zwróci wartość <code>FALSE</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtolower">
+        <title>StringToLower</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na małe.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtoupper">
+        <title>StringToUpper</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code>, zamieniając wszystkie litery na wielkie.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtrim">
+        <title>StringTrim</title>
+        <para>
+            Zwraca łańcuch znaków <code>$value</code> usuwając znaki na początku
+            oraz na końcu łańcucha.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.striptags">
+        <title>StripTags</title>
+        <para>
+            Filtr zwraca łańcuch znaków z usuniętymi wszystkimi znacznikami
+            HTML oraz PHP, z wyjątkiem tych, których wystąpienie zostało
+            dozwolone. Oprócz możliwości określenia które znaczniki są dozwolone,
+            programiści mają także możliwość określenia atrybutów dozwolonych
+            dla wszystkich znaczników, a także atrybutów dozwolonych dla
+            konkretnych znaczników. Dodatkowo ten filtr pozwala także na
+            kontrolowanie, czy komentarze (np., <code>&lt;!-- ... --&gt;</code>)
+            mają być usuwane, czy są dozwolone.
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

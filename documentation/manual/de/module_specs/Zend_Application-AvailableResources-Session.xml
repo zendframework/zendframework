@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.session">
+    <title>Zend_Application_Resource_Session</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Session</classname> erlaubt es <classname>Zend_Session</classname> zu
+        konfigurieren, sowie optional einen Session SaveHandler zu initialisieren.
+    </para>
+
+    <para>
+        Um einen Session Save Handler zu setzen, muß einfach der Optionsschlüssel
+        <code>saveHandler</code> (Groß-/Kleinschreibung beachten) an die Ressource übergeben
+        werden. Der Wert dieser Option kann einer der folgenden sein:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <code>string</code>: Ein String der eine Klasse benennt die
+            <classname>Zend_Session_SaveHandler_Interface</classname> implementiert und initiiert werden
+            soll.
+        </para></listitem>
+
+        <listitem><para>
+            <code>array</code>: Ein Array mit den Schlüsseln "class", und optional "options", das
+            eine Klasse benennt die <classname>Zend_Session_SaveHandler_Interface</classname> implementiert
+            und iniiert werden, und ein Array von Optionen die an dessen Contructor übergeben
+            werden soll.
+        </para></listitem>
+
+        <listitem><para>
+            <classname>Zend_Session_SaveHandler_Interface</classname>: Ein Objekt das dieses Interface
+            implementiert.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Jeder andere übergebene Optionsschlüssel wird an <classname>Zend_Session::setOptions()</classname>
+        übergeben um <classname>Zend_Session</classname> zu konfigurieren.
+    </para>
+
+    <example id="zend.application.available-resources.session.configExample">
+        <title>Beispiel der Konfiguration einer Session Ressource</title>
+
+        <para>
+            Anbei ist das Beispiel eines INI Abschnitts der zeigt wie die Session Ressource
+            konfiguriert werden kann. Er setzt verschiedene <classname>Zend_Session</classname> Optionen,
+            und konfiguriert eine <classname>Zend_Session_SaveHandler_Db</classname> Instanz.
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+resources.session.save_path = APPLICATION_PATH "/../data/session"
+resources.session.use_only_cookies = true
+resources.session.remember_me_seconds = 864000
+resources.session.saveHandler.class = "Zend_Session_SaveHandler_Db"
+resources.session.saveHandler.options.name = "session"
+resources.session.saveHandler.options.primary.session_id = "session_id"
+resources.session.saveHandler.options.primary.save_path = "save_path"
+resources.session.saveHandler.options.primary.name = "name"
+resources.session.saveHandler.options.primaryAssignment.sessionId = "sessionId"
+resources.session.saveHandler.options.primaryAssignment.sessionSavePath = "sessionSavePath"
+resources.session.saveHandler.options.primaryAssignment.sessionName = "sessionName"
+resources.session.saveHandler.options.modifiedColumn = "modified"
+resources.session.saveHandler.options.dataColumn = "session_data"
+resources.session.saveHandler.options.lifetimeColumn = "lifetime"
+]]></programlisting>
+    </example>
+</sect2>

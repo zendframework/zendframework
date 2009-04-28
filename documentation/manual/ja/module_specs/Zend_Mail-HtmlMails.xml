@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="zend.mail.html-mails">
+    <title>HTML メール</title>
+    <para>
+        HTML 形式のメールを送信するには、本文を作成する際に
+        <code>setBodyText()</code> ではなく <code>setBodyHTML()</code> を使用します。
+        すると、MIME content type が自動的に <code>text/html</code> に設定されます。
+        HTML とプレーンテキストの両方を使用した場合は、
+        multipart/alternative な MIME メッセージが自動的に生成されます。
+    </para>
+    <example id="zend.mail.html-mails.example-1">
+        <title>HTML メールの送信</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('My Nice Test Text');
+$mail->setBodyHtml('My Nice <b>Test</b> Text');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

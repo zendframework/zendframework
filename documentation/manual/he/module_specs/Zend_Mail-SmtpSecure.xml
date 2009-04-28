@@ -1,0 +1,32 @@
+<sect1 id="zend.mail.smtp-secure">
+  <title>אבטחת שליחת SMTP</title>
+
+  <para>
+  	<code>Zend_Mail</code> מאפשר גם תמיכה בשימוש ב TLS או SSL כדי לאבטח את שליחת וחיבור ה STMP. 
+	ניתן להפעיל את המנגנון על ידי העברת הערך 'ssl' כפרמטר למערך הההגדרות במתודה של <code>Zend_Mail_Transport_Smtp</code> ברגע שיוצרים את האובייקט.
+	ניתן להעביר ערך של 'ssl' או 'tls' בהתאם. 
+	ניתן גם להגדיר פורט שימוש, אחרת כברירת מחדל זה ישתמש ב 25 ל TLS או 465 ל SSL/
+  </para>
+
+  <example id="zend.mail.smtp-secure.example-1">
+    <title>הפעלת חיבור מאובטח בעזרת  <code>Zend_Mail_Transport_Smtp</code></title>
+
+    <programlisting role="php"><![CDATA[
+$config = array('ssl' => 'tls',
+                'port' => 25); // Optional port number supplied
+
+$transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('sender@test.com', 'Some Sender');
+$mail->addTo('recipient@test.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send($transport);
+]]>
+    </programlisting>
+  </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

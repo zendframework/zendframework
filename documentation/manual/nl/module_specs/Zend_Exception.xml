@@ -1,0 +1,33 @@
+<sect1 id="zend.exception.using">
+
+    <title>Uitzonderingen gebruiken</title>
+
+    <para>
+        Alle uitzonderingen gegooid door een Zend Framework klasse zouden
+        een uitzondering moeten gooien die afstamt van de basis klasse Zend_Exception.
+    </para>
+
+    <example id="zend.exception.using.example">
+        <title>Voorbeeld van het vangen van een uitzondering</title>
+        <programlisting role="php"><![CDATA[<?php
+
+try {
+    Zend_Loader::loadClass('nietbestaandeklasse');
+} catch (Zend_Exception $e) {
+    echo "Gevangen uitzondering: " . get_class($e) . "\n";
+    echo "Bericht: " . $e->getMessage() . "\n";
+    // andere code om the herstellen van deze fout
+}]]></programlisting>
+    </example>
+
+    <para>
+        Zie de documentatie van elk Zend Framework component voor
+        meer specifieke informatie over welke methodes uitzonderingen
+        gooien, de omstandigheden van de uitzondering en welke
+        uitzondering klasse afstamt van Zend_Exception.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

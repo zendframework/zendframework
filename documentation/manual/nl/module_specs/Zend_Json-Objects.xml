@@ -1,0 +1,38 @@
+<sect1 id="zend.json.objects">
+    <title>JSON Objecten</title>
+    <para>
+        Wanneer je PHP objecten als JSON encodeerd zullen alle publieke
+        eigenschappen van dat object naar JSON objecten worden gecodeerd.
+    </para>
+    <para>
+        Het decoderen van JSON objecten houdt weliswaar een klein probleempje in,
+        omdat Javascript objecten heel dicht tegen PHP associatieve arrays
+        aanleunen. Sommigen suggereren dat een klasse identificator doorgegeven zou moeten
+        worden, en een object instantie van die klasse zou moeten
+        worden gebouwd en bevolkt met de key/waarde-paren van het JSON object;
+        anderen denken dat dit een potentieel groot veiligheidsrisico inhoudt.
+    </para>
+    <para>
+        <code>Zend_Json</code> zal JSON objecten standaard als associatieve arrays
+        decoderen. Als je liever een object terugkrijgt, kan je dit zo opvragen:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+// Decodeer objecten als objecten
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
+?>]]></programlisting>
+    <para>
+        Alle zo gedecodeerde objecten worden teruggestuurd als <code>StdClass</code>
+        objecten met eigenschappen die overeenkomen met de key/waarde-paren in de JSON
+        notatie.
+    </para>
+    <para>
+        De aanbeveling van het Zend Framework is dat de ontwikkelaar individueel
+        zou moeten beslissen hoe hij JSON objecten gedecodeerd wil hebben.
+        Indien een object van een bepaald type zou moeten worden gemaakt, kan dat
+        worden gemaakt in de code van de ontwikkelaar en bevolkt worden met de
+        waarden die <code>Zend_Json</code> heeft gedecodeerd.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

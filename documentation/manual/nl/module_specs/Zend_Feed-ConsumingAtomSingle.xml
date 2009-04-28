@@ -1,0 +1,46 @@
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>Een enkele Atom entry lezen</title>
+
+    <para>
+        Een Atom <code>&lt;entry&gt;</code> element is ook alleenstaand geldig. Gewoonlijk is de URL van
+        een entry gelijk aan de URL van de feed gevolgd door <code>&lt;entryId&gt;</code> zoals
+        <code>http://atom.example.com/feed/1</code>, het voorbeeld van hierboven volgend.
+    </para>
+
+    <para>
+        Als je een enkele entry leest zal je nog altijd een <code>Zend_Feed_Atom</code> object hebben maar
+        het zal automatisch een "anonieme" feed aanmaken om de entry in te kapselen.
+    </para>
+
+    <example>
+        <title>Een alleenstaande entry van een Atom Feed lezen</title>
+        <programlisting role="php"><![CDATA[
+<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+echo 'De feed heeft: ' . $feed->count() . ' entry.';
+
+$entry = $feed->current();
+
+?>]]>   </programlisting>
+    </example>
+
+    <para>
+        Op een andere manier zou je het entry objekt direct kunnen instantiëren indien je weet dat je
+        een document opent dat alleen <code>&lt;entry&gt;</code> elementen bevat:
+    </para>
+
+    <example>
+        <title>Het Entry Object Direct gebruiken voor een Single-Entry Atom Feed</title>
+        <programlisting role="php"><![CDATA[
+<?php
+
+$entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
+echo $entry->title();
+
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

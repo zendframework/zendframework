@@ -1,0 +1,1103 @@
+<sect2 id="zend.dojo.form.elements">
+    <title>Dijit-Specific 表单元素</title>
+
+    <para>
+        每个被提供视图助手的 dijit 表单都有相应的<code>Zend_Form</code>元素。它们都有下列方法来处理 dijit 参数：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <code>setDijitParam($key, $value)</code>: 设置一单个的 dijit 参数。
+                如果 dijit 参数已经存在，则覆盖它。
+        </para></listitem>
+
+        <listitem><para>
+                <code>setDijitParams(array $params)</code>: 一次设置若干 dijit 参数。
+                同样，已经存在的参数被覆盖。
+        </para></listitem>
+
+        <listitem><para>
+                <code>hasDijitParam($key)</code>: 是否有个给定的 dijit 参数被定义和存在。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getDijitParam($key)</code>: 获取给定 $key 的 dijit 参数，如果不可用，则返回 null。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getDijitParams()</code>: 获取所有的 dijit 参数。
+        </para></listitem>
+
+        <listitem><para>
+                <code>removeDijitParam($key)</code>: 删除给定 $key 的 dijit 参数。
+        </para></listitem>
+
+        <listitem><para>
+                <code>clearDijitParams()</code>: 清除所有当前定义的 dijit 参数。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Dijit 参数存储在 <code>dijitParams</code> 公共属性里。这样，你可以
+        通过设置这个元素的属性来 dijit-enable 一个存在的表单元素。 你将不会有
+        上述访问器来简化处理这些参数。
+    </para>
+
+    <para>
+        另外，dijit-specific 元素实现一个不同的装饰器列表，相应如下：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$element->addDecorator('DijitElement')
+        ->addDecorator('Errors')
+        ->addDecorator('HtmlTag', array('tag' => 'dd'))
+        ->addDecorator('Label', array('tag' => 'dt'));
+]]></programlisting>
+
+    <para>
+        实际上，DijitElement 装饰器用来替换标准的 ViewHelper 装饰器。
+    </para>
+
+    <para>
+        最后，基本的 Dijit 元素确保在视图中设置 Dojo 视图助手路径。
+    </para>
+
+    <para>
+        一个提供 <code>多重</code> 摘要表单元素的功能的 DijitElement 的变量 DijitMulti
+        让开发者指定 'multiOptions' － 一般是 select 选项或 radio 选项。
+    </para>
+
+    <para>
+        下列 dijit 元素随标准的 Zend Framework 版本发行。
+    </para>
+
+    <sect3 id="zend.dojo.form.elements.button">
+        <title>按钮</title>
+
+        <para>
+            虽然不是从 <link linkend="zend.form.standardElements.button">标准 Button 元素</link>中派生，
+            它确实实现了相同的功能，并可以随时替换它。展示一下下列函数：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getLabel()</code> 如果没有提供名字，将使用元素名作为按钮标签。另外，
+                如果翻译适配器有匹配的翻译信息，它将翻译这个名字。
+            </para></listitem>
+
+            <listitem><para>
+                <code>isChecked()</code> 确定是否提交的值和标签（label）匹配，如果匹配，返回true。
+                这对于当提交表单时确定用了那个按钮很有用。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            另外，只有 <code>DijitElement</code> 和 <code>DtDdWrapper</code> 装饰器用于按钮元素。
+        </para>
+
+        <example id="zend.dojo.form.elements.button.example">
+            <title> 按钮 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'Button',
+    'foo',
+    array(
+        'label' => 'Button Label',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.checkBox">
+        <title>检查框</title>
+
+        <para>
+            虽然不是从 <link linkend="zend.form.standardElements.checkbox"> 标准检查框元素 </link> 里派生，
+            但它确实实现了相同的功能。展示一下下列函数：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setCheckedValue($value)</code>: 设置一个值，当元素被选就用这个值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getCheckedValue()</code>: 获取当元素被时选使用的值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setUncheckedValue($value)</code>: 设置一个值，当元素不被选中就用这个值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getUncheckedValue()</code>: 获取当元素不被选中时使用的值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setChecked($flag)</code>: 标记元素为选中或未选中。
+            </para></listitem>
+
+            <listitem><para>
+                <code>isChecked()</code>: 确定元素是否被选中。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.checkBox.example">
+            <title> 检查框 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'CheckBox',
+    'foo',
+    array(
+        'label'          => 'A check box',
+        'checkedValue'   => 'foo',
+        'uncheckedValue' => 'bar',
+        'checked'        => true,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.comboBox">
+        <title> 组合框（ComboBox）和 FilteringSelect</title>
+
+        <para>
+            正如在组合框 <link linkend="zend.dojo.view.dijit.form">dijit 视图助手文档 </link> 里的注释，
+            组合框是介于选择和文本输入之间的混合体，可以从列表中选择也可以输入内容到列表里。
+            FilteringSelect 也一样，但不允许任意输入。
+        </para>
+
+        <note>
+            <title>组合框（ComboBoxes） 返回标签值</title>
+
+            <para>
+                组合框返回标签值而不是选项值，它可期望导致分离（disconnect）。
+                由于这个原因，组合框不自动注册一个 <code>InArray</code> 校验器（而 FilteringSelects 会）。
+            </para>
+        </note>
+
+        <para>
+            组合框和 FilteringSelect 表单元素提供访问器和增变器来检查和设置选择选项和指定 dojo.data 数据存储（如果使用的话）。
+            它们从 DijitMulti 继承，允许你通过 <code>setMultiOptions()</code> 和 <code>setMultiOption()</code> 方法指定选择选项。
+            另外，下列方法可用：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getStoreInfo()</code>: 获取当前设置的所有数据存储信息，如果没有，返回一个空的数组。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreId($identifier)</code>: 设置存储标识符变量（在 Dojo 里通常由属性 'jsId' 指定）。
+                这个应当是有效的 javascript 变量名。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreId()</code>: 获取存储标识符变量名。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreType($dojoType)</code>: 设置数据存储类，例如"dojo.data.ItemFileReadStore"。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreType()</code>: 获取 dojo 数据存储类。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStoreParams(array $params)</code>: 设置任何用于配置数据存储对象的参数。
+                例如，dojo.data.ItemFileReadStore 期望一个'url'参数指向一个能返回 dojo.data 对象的位置。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStoreParams()</code>: 获取任何当前设置的数据存储参数，如果没有，返回一个空数组。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setAutocomplete($flag)</code>: 标识当用户离开元素时，是否选择的条目将被使用。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getAutocomplete()</code>: 获取自动完成标志的值。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            缺省地，如果没有 dojo.data 存储和元素一起注册，该元素就注册
+            一个 <code>InArray</code> 校验器，它依靠注册的选项的数组键来校验。
+            你可以通过调用 <code>setRegisterInArrayValidator(false)</code> 或
+            传递一个 false 值给 <code>registerInArrayValidator</code> 配置键
+            来禁止该行为。
+        </para>
+
+        <example id="zend.dojo.form.elements.comboBox.selectExample">
+            <title> 使用组合框 dijit 元素做选择输入的范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'ComboBox',
+    'foo',
+    array(
+        'label'        => 'ComboBox (select)',
+        'value'        => 'blue',
+        'autocomplete' => false,
+        'multiOptions' => array(
+            'red'    => 'Rouge',
+            'blue'   => 'Bleu',
+            'white'  => 'Blanc',
+            'orange' => 'Orange',
+            'black'  => 'Noir',
+            'green'  => 'Vert',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+
+        <example id="zend.dojo.form.elements.comboBox.datastoreExample">
+            <title> 带数据存储的组合框 dijit 元素用法范例</title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'ComboBox',
+    'foo',
+    array(
+        'label'       => 'ComboBox (datastore)',
+        'storeId'     => 'stateStore',
+        'storeType'   => 'dojo.data.ItemFileReadStore',
+        'storeParams' => array(
+            'url' => '/js/states.txt',
+        ),
+        'dijitParams' => array(
+            'searchAttr' => 'name',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+
+        <para>
+            上述例子也可以使用 <code>FilteringSelect</code> 来代替 <code>ComboBox</code>。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.currencyTextBox">
+        <title> 货币文字框 </title>
+
+        <para>
+            货币文字框主要用来支持货币输入。货币可以是本地化的，并且支持带小数的和不带小数的数值。
+        </para>
+
+        <para>
+            在内部，货币文字框由 <link
+                linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>、
+            <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生，
+            所有对这些类可用的方法也对它可用。另外，也可用下列约束方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setCurrency($currency)</code>: 设置要使用的货币类型；
+                遵循 <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink> 规范。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getCurrency()</code>: 获取当前货币类型。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSymbol($symbol)</code>: 设置 3-letter <ulink
+                    url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink> 货币符号。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getSymbol()</code>: 获取当前货币符号。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFractional($flag)</code>: 设置是否支持小数值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getFractional()</code>: 获取小数标记的状态。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.currencyTextBox.example">
+            <title> 货币文字框 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'CurrencyTextBox',
+    'foo',
+    array(
+        'label'          => 'Currency:',
+        'required'       => true,
+        'currency'       => 'USD',
+        'invalidMessage' => 'Invalid amount. Include dollar sign, commas, and cents.',
+        'fractional'     => false,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.dateTextBox">
+        <title> 日期文字框 </title>
+
+        <para>
+            日期文字框提供一个下拉式日历用来选择日期，也有一个客户端的日期校验和格式化。
+        </para>
+
+        <para>
+            在内部，日期文字框从 <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生，
+            所有对这些类可用的方法也对它可用。另外，下列方法也可以独立使用：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setAmPm($flag)</code> 和 <code>getAmPm()</code>: 是否在时间上使用 AM/PM。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStrict($flag)</code> 和 <code>getStrict()</code>:
+                是否用严格的正则表达式校验输入。如果是缺省的 false，则对空白字符和一些缩写不严格检查。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setLocale($locale)</code> 和 <code>getLocale()</code>:
+                设置和获取用于特定元素的地方。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setDatePattern($pattern)</code> 和
+                <code>getDatePattern()</code>: 提供和读取 <ulink
+                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
+                    日期格式模型 </ulink> 来格式化日期。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFormatLength($formatLength)</code> 和
+                <code>getFormatLength()</code>: 提供和读取格式长度类型，是 "long"、 "short"、 "medium"
+                或 "full" 其中之一。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSelector($selector)</code> 和
+                <code>getSelector()</code>: 提供和读取选择器的风格， "date" 或 "time"。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.dateTextBox.example">
+            <title> 日期文字框 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'DateTextBox',
+    'foo',
+    array(
+        'label'          => 'Date:',
+        'required'       => true,
+        'invalidMessage' => 'Invalid date specified.',
+        'formatLength'   => 'long',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.horizontalSlider">
+        <title> 水平滑尺（HorizontalSlider）</title>
+
+        <para>
+            水平滑尺提供了一个滑尺 UI 小部件用来在一个范围内选择数值。
+            在内部，它设置一个隐藏元素的值然后由表单提交。
+        </para>
+
+        <para>
+            水平滑尺从 <link
+                linkend="zend.dojo.form.elements.slider">abstract Slider dijit
+                element</link> 派生。另外，有许多方法用来设置和配置滑尺刻度和刻度标签。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setTopDecorationDijit($dijit)</code> 和
+                    <code>setBottomDecorationDijit($dijit)</code>:
+                    设置 dijit 的名字用于滑尺的顶或底。这个不包括"dijit.form."前缀，
+                    已经是最终的名字 － "HorizontalRule" 或 "HorizontalRuleLabels"。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationContainer($container)</code> 和
+                    <code>setBottomDecorationContainer($container)</code>:
+                    指定用于刻度的容器元素的名字，如：'topRule'、 'topContainer'等。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationLabels(array $labels)</code> 和
+                    <code>setBottomDecorationLabels(array $labels)</code>:
+                    设置标签用于 RuleLabels dijit 类型之一，这些是索引数组；
+                    指定一个空间来跳过给定的标签位置（如开头或结尾）。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationParams(array $params)</code> 和
+                    <code>setBottomDecorationParams(array $params)</code>:
+                    配置给定的刻度或刻度标签 dijit 的 dijit 参数。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setTopDecorationAttribs(array $attribs)</code> 和
+                    <code>setBottomDecorationAttribs(array $attribs)</code>:
+                    指定给定的刻度或刻度标签 HTML 元素容器的 HTML 属性。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getTopDecoration()</code> 和
+                    <code>getBottomDecoration()</code>:
+                    获取所有由上述增变器给定规则或 RuleLabels 定义的元数据。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.horizontalSlider.example">
+            <title> 水平滑尺 dijit 元素用法范例 </title>
+
+            <para>
+                下面创建一个整数范围为 -10到10的水平滑尺。顶上有 20%、 40%、 60% 和 80%标记。
+                底下有 0 、50% 和 100%。每次改变，隐藏元素的值就更新一次。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'HorizontalSlider',
+    'horizontal',
+    array(
+        'label'                     => 'HorizontalSlider',
+        'value'                     => 5,
+        'minimum'                   => -10,
+        'maximum'                   => 10,
+        'discreteValues'            => 11,
+        'intermediateChanges'       => true,
+        'showButtons'               => true,
+        'topDecorationDijit'        => 'HorizontalRuleLabels',
+        'topDecorationContainer'    => 'topContainer',
+        'topDecorationLabels'       => array(
+                ' ',
+                '20%',
+                '40%',
+                '60%',
+                '80%',
+                ' ',
+        ),
+        'topDecorationParams'      => array(
+            'container' => array(
+                'style' => 'height:1.2em; font-size=75%;color:gray;',
+            ),
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
+            ),
+        ),
+        'bottomDecorationDijit'     => 'HorizontalRule',
+        'bottomDecorationContainer' => 'bottomContainer',
+        'bottomDecorationLabels'    => array(
+                '0%',
+                '50%',
+                '100%',
+        ),
+        'bottomDecorationParams'   => array(
+            'list' => array(
+                'style' => 'height:1em; font-size=75%;color:gray;',
+            ),
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.numberSpinner">
+        <title> 数字微调控制器（NumberSpinner）</title>
+
+        <para>
+            数字微调控制器是一个文本元素用来输入数字值；它也包括用于增加和减少一定值的元素。
+        </para>
+
+        <para>
+            可用方法如下：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setDefaultTimeout($timeout)</code> 和
+                <code>getDefaultTimeout()</code>: 设置和获取缺省超时值，以毫秒为单位，
+                当按住按钮时，数值就发生变化。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setTimeoutChangeRate($rate)</code> 和
+                <code>getTimeoutChangeRate()</code>: 设置和获取比率，以毫秒为单位，
+                就是当按住按钮时，数值的变化率。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setLargeDelta($delta)</code> 和
+                <code>getLargeDelta()</code>: 设置和读取当按钮被按住数字应当改变的值的大小。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSmallDelta($delta)</code> 和
+                <code>getSmallDelta()</code>: 设置和读取当按钮被按住一次数字的变化量。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setIntermediateChanges($flag)</code> 和
+                <code>getIntermediateChanges()</code>: 设置和读取当按钮被按住时是否显示数值的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setRangeMessage($message)</code> 和
+                <code>getRangeMessage()</code>: 设置和读取指示可用数值范围的信息。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMin($value)</code> 和 <code>getMin()</code>:
+                设置和获取最小可能值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMax($value)</code> 和 <code>getMax()</code>:
+                设置和获取最大可能值。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.numberSpinner.example">
+            <title> 数字微调控制器 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'NumberSpinner',
+    'foo',
+    array(
+        'value'             => '7',
+        'label'             => 'NumberSpinner',
+        'smallDelta'        => 5,
+        'largeDelta'        => 25,
+        'defaultTimeout'    => 500,
+        'timeoutChangeRate' => 100,
+        'min'               => 9,
+        'max'               => 1550,
+        'places'            => 0,
+        'maxlength'         => 20,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.numberTextBox">
+        <title> 数字框 </title>
+
+        <para>
+            数字框是一个文本元素用来输入数字值，不象数字增变器，数字框用手工输入。
+            校验和限制可以使数值在一定的范围并符合一定的格式。
+        </para>
+
+        <para>
+            在内部，数字框从 <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link>派生；
+            所有对这些类可用的方法都可用，另外，下列方法可以独立使用：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setLocale($locale)</code> 和 <code>getLocale()</code>:
+                指定和获取一个特定或预备的地方来使用 dijit。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPattern($pattern)</code> 和
+                <code>getPattern()</code>: 设置和获取一个 <ulink
+                    url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">数字模型格式
+                    </ulink> 来格式化数字。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setType($type)</code> 和 <code>getType()</code>:
+                设置和获取数字格式类型（应当为 'decimal'、'percent' 或 'currency'其中之一 ）。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPlaces($places)</code> 和 <code>getPlaces()</code>:设置和获取有多少小数位。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setStrict($flag)</code> 和 <code>getStrict()</code>:
+                设置和读取严格标志的值，它用来指示对空白字符和非数字字符控制的严格程度。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.numberTextBox.example">
+            <title> 数字框 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'NumberTextBox',
+    'elevation',
+    array(
+        'label'          => 'NumberTextBox',
+        'required'       => true,
+        'invalidMessage' => 'Invalid elevation.',
+        'places'         => 0,
+        'constraints'    => array(
+            'min'    => -20000,
+            'max'    => 20000,
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.passwordTextBox">
+        <title>密码框</title>
+
+        <para>
+            密码框是个 ValidationTextBox，它和密码输入有联系；它唯一的意图是允许
+            dijit-themed 文本输入密码并提供客户端校验。
+        </para>
+
+        <para>
+            在内部，密码框从 <link
+                linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            和 <link linkend="zend.dojo.form.elements.textBox">TextBox</link> 派生；
+            所有对这些类可用的方法都可用。
+        </para>
+
+        <example id="zend.dojo.form.elements.passwordTextBox.example">
+            <title>密码框 dijit 元素用法范例</title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'PasswordTextBox',
+    'password',
+    array(
+        'label'          => 'Password',
+        'required'       => true,
+        'trim'           => true,
+        'lowercase'      => true,
+        'regExp'         => '^[a-z0-9]{6,}$',
+        'invalidMessage' => 'Invalid password; must be at least 6 alphanumeric characters',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.radioButton">
+        <title>单选按钮</title>
+
+        <para>
+            单选按钮封装了标准单选输入元素来提供一个和其它 dojo dijits 一致的外观。
+            （因为英文为 radio button，单选按钮在过去也被翻译为无线电按钮，但从功能上讲，单选按钮更准确 Jason Qi注）
+        </para>
+
+        <para>
+            单选按钮从 DijitMulti 继承，它让你通过 <code>setMultiOptions()</code> 和 <code>setMultiOption()</code> 方法来指定选择选项。
+        </para>
+
+        <para>
+            缺省地，该元素注册一个 <code>InArray</code> 校验器，它依靠注册的选项的数组键来校验。
+            你可以通过调用 <code>setRegisterInArrayValidator(false)</code> 或传递一个 false 值给
+            <code>registerInArrayValidator</code>配置键来禁止该行为。
+        </para>
+
+        <example id="zend.dojo.form.elements.radioButton.example">
+            <title> 单选按钮 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'RadioButton',
+    'foo',
+    array(
+        'label' => 'RadioButton',
+        'multiOptions'  => array(
+            'foo' => 'Foo',
+            'bar' => 'Bar',
+            'baz' => 'Baz',
+        ),
+        'value' => 'bar',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.slider">
+        <title>滑尺摘要元素</title>
+
+        <para>
+            <link linkend="zend.dojo.form.elements.horizontalSlider">水平滑尺</link> 和
+            <link linkend="zend.dojo.form.elements.verticalSlider">垂直滑尺</link>
+            都是从滑尺摘要元素派生而来的。它包含了许多通用的方法来配置你的滑尺，包括：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setClickSelect($flag)</code> 和
+                <code>getClickSelect()</code>:
+                设置和获取确定是否点击滑尺来可以修改数值的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setIntermediateChanges($flag)</code> 和
+                <code>getIntermediateChanges()</code>:
+                设置和获取是否对每个滑尺修改时间发送通知的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setShowButtons($flag)</code> 和
+                <code>getShowButtons()</code>:
+                设置和获取是否在两端显示按钮的标志。如果有的话，客户可以通过点击按钮来修改滑尺的值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setDiscreteValues($value)</code> 和
+                <code>getDiscreteValues()</code>:
+                设置和获取滑尺的不连续的数值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMaximum($value)</code> 和 <code>getMaximum()</code>:设置滑尺的最大值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMinimum($value)</code> and <code>getMinimum()</code>:设置滑尺的最小值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPageIncrement($value)</code> 和
+                <code>getPageIncrement()</code>: 设置滑尺在键盘事件上修改的数量。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            范例在每个具体的继承类里提供。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.submitButton">
+        <title>提交按钮</title>
+
+        <para>
+            虽然没有叫提交按钮的 Dijit，但我们还是在此提供一个按钮 dijit 用来提交
+            表单而不需请求任何另外的 javascript 绑定。它的工作方式和
+            <link linkend="zend.dojo.form.elements.button">按钮 dijit</link> 一模一样。
+        </para>
+
+        <example id="zend.dojo.form.elements.submitButton.example">
+            <title>Example SubmitButton dijit element usage</title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'SubmitButton',
+    'foo',
+    array(
+        'required'   => false,
+        'ignore'     => true,
+        'label'      => 'Submit Button!',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.textBox">
+        <title>文字框</title>
+
+        <para>
+            文字框用来输入文字，在外观上和其它 dijit 保持一致。然而，它有一些过滤和校验的功能，详见下列方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setLowercase($flag)</code> 和
+                <code>getLowercase()</code>: 设置和获取是否把输入转为小写的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPropercase($flag)</code> 和
+                <code>getPropercase()</code>: 设置和获取是否把输入转换为适当的大小写的标志。
+                Case.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setUppercase($flag)</code> 和 <code>getUppercase()</code>: 设置和获取是否把输入转为大写的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setTrim($flag)</code> 和 <code>getTrim()</code>: 设置和获取是否把引导和拖尾的空白字符去掉的标志。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setMaxLength($length)</code> 和
+                <code>getMaxLength()</code>: 设置和获取输入的最大长度。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.textBox.example">
+            <title> 文字框 dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'TextBox',
+    'foo',
+    array(
+        'value'      => 'some text',
+        'label'      => 'TextBox',
+        'trim'       => true,
+        'propercase' => true,
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.textarea">
+        <title>Textarea</title>
+
+        <para>
+            Textarea 就像标准的 HTML textarea一样。然而，它不支持行列的设置。
+            作为替代，textarea 宽度可以用标准的 CSS 来设置，行就完全忽略了。当输入字符增加时，textarea 就垂直增长。
+        </para>
+
+        <example id="zend.dojo.form.elements.textarea.example">
+            <title> Textarea dijit 元素用法范例 </title>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'Textarea',
+    'textarea',
+    array(
+        'label'    => 'Textarea',
+        'required' => true,
+        'style'    => 'width: 200px;',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.timeTextBox">
+        <title> 时间文字框 </title>
+
+        <para>
+            时间文字框是提供下拉式选择时间的文字输入框。下拉框可配置为显示一特定的时间窗口，带有特定的增量。
+        </para>
+
+        <para>
+            在内部，时间文字框从 <link
+                linkend="zend.dojo.form.elements.dateTextBox">日期文字框</link>、
+            <link
+                linkend="zend.dojo.form.elements.validationTextBox">校验文字框</link>
+            和 <link linkend="zend.dojo.form.elements.textBox">文字框</link> 派生。
+            所有对这些类可用的方法都可用。另外，下列方法可以独立使用：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setTimePattern($pattern)</code> 和
+                <code>getTimePattern()</code>: 设置和获取 <ulink
+                    url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">unicode
+                    时间格式模型</ulink> 来格式化时间。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setClickableIncrement($format)</code> 和
+                <code>getClickableIncrement()</code>: 设置 <ulink
+                    url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink> 字符串，来表示
+                    每个在时间 picker increses 的可点击的元素的数量。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setVisibleIncrement($format)</code> 和
+                <code>getVisibleIncrement()</code>: 在时间选择器中设置增量的可见性，必须遵循 ISO-8601格式。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setVisibleRange($format)</code> 和
+                <code>getVisibleRange()</code>:
+                在时间选择器中在给定的时刻，设置和获取可见时间的范围，必须遵循 ISO-8601格式。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.timeTextBox.example">
+            <title> 时间文字框 dijit 元素用法范例 </title>
+
+            <para>
+                下面讲生成一个时间文字框，每次显示 2 小时，增量是 10 分钟。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'TimeTextBox',
+    'foo',
+    array(
+        'label'              => 'TimeTextBox',
+        'required'           => true,
+        'visibleRange'       => 'T04:00:00',
+        'visibleIncrement'   => 'T00:10:00',
+        'clickableIncrement' => 'T00:10:00',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.validationTextBox">
+        <title>校验文字框</title>
+
+        <para>
+            校验文字框添加校验和限制给文字输入。
+            在内部，它从 <link linkend="zend.dojo.form.elements.textBox">文字框</link> 派生，
+            并增加了下列访问器和增变器来处理 dijit 参数：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setInvalidMessage($message)</code> 和
+                <code>getInvalidMessage()</code>: 设置和获取工具提示消息来显示什么时候值没有通过校验。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPromptMessage($message)</code> 和
+                <code>getPromptMessage()</code>: 设置和获取工具提示消息来显示元素用法。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setRegExp($regexp)</code> 和 <code>getRegExp()</code>:
+                设置和获取用于校验元素的正则表达式。正则表达式不需要边界（不象 PHP 的 preg* 函数家族）。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setConstraint($key, $value)</code> 和
+                <code>getConstraint($key)</code>:
+                设置和获取另外的限制，用于校验元素；使用子类。限制存储在 dijit 参数数组中，键值为 'constraints'。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setConstraints(array $constraints)</code> 和
+                <code>getConstraints()</code>:
+                设置和获取独立的限制，用于校验元素，是哟功能子类。
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasConstraint($key)</code>: 测试是否有给定的限制存在。
+            </para></listitem>
+
+            <listitem><para>
+                <code>removeConstraint($key)</code> 和
+                <code>clearConstraints()</code>: 删除元素中一个或所有的限制。
+            </para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.elements.validationTextBox.example">
+            <title> 校验文字框 dijit 元素用法范例 </title>
+
+            <para>
+                下面生成一个校验文字框，要求只包含字符的单个字符串（例如，没有空格，大部分标点符号无效）。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'ValidationTextBox',
+    'foo',
+    array(
+        'label'          => 'ValidationTextBox',
+        'required'       => true,
+        'regExp'         => '[\w]+',
+        'invalidMessage' => 'Invalid non-space text.',
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.elements.verticalSlider">
+        <title>垂直滑尺（VerticalSlider）</title>
+
+        <para>
+            垂直滑尺是<link linkend="zend.dojo.form.elements.horizontalSlider">水平滑尺</link>的兄弟，
+            操作基本相同。唯一的区别是，对垂直滑尺来说使用了 'left*' 和 'right*' 替换了
+            在水平滑尺中的 'top*' 和 'bottom*'，并且使用 VerticalRule 和 VerticalRuleLabels
+            分别替代了 HorizontalRule 和 HorizontalRuleLabels。
+        </para>
+
+        <example id="zend.dojo.form.elements.verticalSlider.example">
+            <title> 垂直 dijit 元素使用范例 </title>
+
+            <para>
+                下面创建一个整数范围为 -10到10的垂直滑尺。左边有 20%、 40%、 60% 和 80%标记。
+                右边有 0 、50% 和 100%。每次改变，隐藏元素的值就更新一次。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$form->addElement(
+    'VerticalSlider',
+    'foo',
+    array(
+        'label'                    => 'VerticalSlider',
+        'value'                    => 5,
+        'style'                    => 'height: 200px; width: 3em;',
+        'minimum'                  => -10,
+        'maximum'                  => 10,
+        'discreteValues'           => 11,
+        'intermediateChanges'      => true,
+        'showButtons'              => true,
+        'leftDecorationDijit'      => 'VerticalRuleLabels',
+        'leftDecorationContainer'  => 'leftContainer',
+        'leftDecorationLabels'     => array(
+                ' ',
+                '20%',
+                '40%',
+                '60%',
+                '80%',
+                ' ',
+        ),
+        'rightDecorationDijit' => 'VerticalRule',
+        'rightDecorationContainer' => 'rightContainer',
+        'rightDecorationLabels' => array(
+                '0%',
+                '50%',
+                '100%',
+        ),
+    )
+);
+]]></programlisting>
+        </example>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

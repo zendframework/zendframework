@@ -1,0 +1,11 @@
+# Comment
+# A csv files contains all informations for one language
+# MessageID;Translation
+Message 1;Message 1 (en)
+Message 2;Message 2 (en)
+Message 3;Message 3 (en)
+Message 4;Message 4 (en)
+# Comment
+Message 5;Message 5 (en)
+"Message 6";"Message 6;"" (en)"
+"Message ;"" 7";"Message 7 (en)"

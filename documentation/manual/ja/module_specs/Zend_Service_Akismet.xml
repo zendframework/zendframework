@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.akismet">
+    <title>Zend_Service_Akismet</title>
+
+    <sect2 id="zend.service.akismet.introduction">
+        <title>導入</title>
+
+        <para>
+            <classname>Zend_Service_Akismet</classname> は、
+            <ulink url="http://akismet.com/development/api/">Akismet API</ulink>
+            のクライアント機能を提供します。Akismet サービスは、
+            入力データがスパムかどうかを判定するために用いられます。
+            また、あるデータを「スパムである」とか「無実である (ハム)」
+            などと登録するためのメソッドも公開しています。
+            もともとは Wordpress 向けのスパムを識別するために作られたものですが、
+            あらゆる型のデータに対して使用できます。
+        </para>
+
+        <para>
+            Akismet を使用するには API キーが必要です。
+            キーを取得するには <ulink url="http://wordpress.com/">WordPress.com</ulink>
+            でアカウントを作成します。blog を作成する必要はありません。
+            単にアカウントを作成するだけで API キーが使用できます。
+        </para>
+
+        <para>
+            さらに、Akismet を使用する場合は、
+            フィルタリングしたいデータを指す URL を指定してリクエストする必要があります。
+            Akismet は WordPress 向けに作られたものであることから、
+            これは blog url と呼ばれます。
+            これは、コンストラクタの二番目の引数として渡さなければなりません。
+            ただ、いつでも <code>setBlogUrl()</code> で変更することができますし、
+            その他のメソッドコールの際に 'blog' キーを指定して上書きすることもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.verifykey">
+        <title>API キーの検証</title>
+
+        <para>
+            <classname>Zend_Service_Akismet::verifyKey($key)</classname>
+            を使用して、Akismet API キーが有効かどうかを検証します。
+            たいていの場合は特に検証する必要もないでしょうが、
+            改ざんされていないかどうか調べたり、
+            新しく取得したキーが実際に使用可能かどうかを調べたり
+            といった場合にこのメソッドを使用します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// API キー、そしてアプリケーションやリソースへの URL
+// を指定してインスタンスを作成します
+$akismet = new Zend_Service_Akismet($apiKey,
+                                    'http://framework.zend.com/wiki/');
+if ($akismet->verifyKey($apiKey) {
+    echo "このキーは有効です。\n";
+} else {
+    echo "このキーは無効です。\n";
+}
+]]>
+        </programlisting>
+
+        <para>
+            引数を指定せずにコールすると、<code>verifyKey()</code>
+            はコンストラクタで指定した API キーを使用します。
+        </para>
+
+        <para>
+            <code>verifyKey()</code> は、Akismet の
+            <code>verify-key</code> REST メソッドを実装したものです。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.isspam">
+        <title>スパムのチェック</title>
+
+        <para>
+            <classname>Zend_Service_Akismet::isSpam($data)</classname>
+            を使用して、Akismet がそのデータをスパムとみなすかどうかを調べます。
+            引数はひとつで、ここに連想配列を指定することができます。
+            この配列には、次のキーを設定しなければなりません。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>user_ip</code> は、データを送信したユーザの
+                    IP アドレスです (あなたの IP アドレスではなく、
+                    あなたのサイトを使用しているユーザの IP アドレスです)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>user_agent</code> は、データを送信したユーザの
+                    UserAgent 文字列 (ブラウザおよびバージョン) です。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            以下のキーも、API 側で認識されます。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>blog</code> は、リソースやアプリケーションを指す
+                    完全な URL です。指定しなかった場合は、
+                    コンストラクタに渡した URL を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>referrer</code> は、送信時の
+                    HTTP_REFERER ヘッダの内容です
+                    (スペルに注意しましょう。ヘッダの名前とは異なります)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>permalink</code> は、送信するデータの永続的な場所
+                    (もしあれば) です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_type</code> は、データの形式です。
+                    ここで指定する値は API で定義されており、
+                    'comment'、'trackback'、'pingback' およｂ
+                    空の文字列 ('') などがあります。しかし、
+                    任意の値を指定することができます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author</code> は、データの送信者の名前です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author_email</code> は、
+                    データの送信者のメールアドレスです。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author_url</code> は、
+                    データの送信者の URL あるいはホームページです。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_content</code> は、
+                    実際に送信されたデータの内容です。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            その他の環境変数の内容を送信し、
+            そのデータがスパムであるかどうかの判断材料とさせることもできます。
+            Akismet は、$_SERVER 配列の中身をすべて送信することを推奨しています。
+        </para>
+
+        <para>
+            <code>isSpam()</code> メソッドは true あるいは false を返します。
+            API キーが無効な場合は例外をスローします。
+        </para>
+
+        <example id="zend.service.akismet.isspam.example-1">
+            <title>isSpam() の使用法</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
+                              '5.2; en-GB; rv:1.8.1) Gecko/20061010 ' .
+                              'Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => '誰かさん',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "スパマーじゃないもん。信じて!"
+);
+if ($akismet->isSpam($data)) {
+    echo "悪いけど、たぶんあなたはスパマーでしょう。";
+} else {
+    echo "私たちのサイトへようこそ!";
+}
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            <code>isSpam()</code> は、Akismet API のメソッド
+            <code>comment-check</code> を実装したものです。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.submitspam">
+        <title>既知のスパムの送信</title>
+
+        <para>
+            時には、スパムがフィルタを通過してしまうこともあります。
+            フィルタを通過したデータの中に、もし「これはスパムだろう」
+            というものが見つかったら、それを Akismet
+            に送信しましょう。それにより、フィルタの性能が向上します。
+        </para>
+
+        <para>
+            <classname>Zend_Service_Akismet::submitSpam()</classname> に指定する配列は、
+            <code>isSpam()</code> に渡すものと同じ形式です。
+            しかし、このメソッドは値を返しません。
+            API キーが無効な場合は例外が発生します。
+        </para>
+
+        <example id="zend.service.akismet.submitspam.example-1">
+            <title>submitSpam() の使用法</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+                              'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => '誰かさん',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "スパマーじゃないもん。信じて!"
+);
+$akismet->submitSpam($data));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            <code>submitSpam()</code> は、Akismet API のメソッド
+            <code>submit-spam</code> を実装したものです。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.submitham">
+        <title>無実のデータ (ハム) の送信</title>
+
+        <para>
+            時には、Akismet が間違ってスパムと判定してしまうこともあります。
+            そのため、Akismet がスパムと判断したデータのログを定期的にチェックする必要があります。
+            このような現象を発見したら、そのデータを Akismet に「ハム」
+            あるいは無実のデータとして送信しましょう
+            (ハムは善玉、スパムは悪玉です)。
+        </para>
+
+        <para>
+            <classname>Zend_Service_Akismet::submitHam()</classname> に指定する配列は、
+            <code>isSpam()</code> や <code>submitSpam()</code>
+            に渡すものと同じ形式です。また、
+            <code>submitSpam()</code> と同様、値を返しません。
+            API キーが無効な場合は例外が発生します。
+        </para>
+
+        <example id="zend.service.akismet.submitham.example-1">
+            <title>submitHam() の使用法</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+                              'en-GB; rv:1.8.1) Gecko/20061010 Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => '誰かさん',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "スパマーじゃないもん。信じて!"
+);
+$akismet->submitHam($data));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            <code>submitHam()</code> は、Akismet API のメソッド
+            <code>submit-ham</code> を実装したものです。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.accessors">
+        <title>Zend 固有のアクセス用メソッド</title>
+
+        <para>
+            Akismet API では四つのメソッドしか定義されていませんが、
+            <classname>Zend_Service_Akismet</classname> では
+            それ以外のアクセス用メソッドも用意しています。
+            これらを使用して、内部のプロパティを変更します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getBlogUrl()</code> および <code>setBlogUrl()</code>
+                    は、リクエストで使用する blog URL を取得したり変更したりします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getApiKey()</code> および <code>setApiKey()</code>
+                    は、リクエストで使用する API キーを取得したり変更したりします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCharset()</code> および <code>setCharset()</code>
+                    は、リクエストで使用する文字セットを取得したり変更したりします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getPort()</code> および <code>setPort()</code>
+                    は、リクエストで使用する TCP ポートを取得したり変更したりします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getUserAgent()</code> および <code>setUserAgent()</code>
+                    は、リクエストで使用する HTTP ユーザエージェントを
+                    取得したり変更したりします。
+                    注意: これは、サービスに送信するデータの user_agent
+                    ではありません。サービスへのリクエストを作成する際に
+                    HTTP User-Agent ヘッダで指定する内容となります。
+                </para>
+
+                <para>
+                    ユーザエージェントに設定する値は
+                    <code>some user agent/version | Akismet/version</code>
+                    形式でなければなりません。デフォルトは
+                    <code>Zend Framework/ZF-VERSION | Akismet/1.11</code>
+                    です。<code>ZF-VERSION</code> の部分には現在の
+                    Zend Framework のバージョン、つまり定数
+                    <classname>Zend_Framework::VERSION</classname>
+                    の値があてはまります。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

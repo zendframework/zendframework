@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.multiple-emails">
+    <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
+
+    <para>
+        Standardmäßig erstelle ein einzelner SMTP Transport eine einzelne Verbindung und verwendet Sie wieder
+        wärend der Laufzeit der Skriptausführung. Es können mehrere E-Mails über diese SMTP Verbindung gesendet
+        werden. Ein RSET Kommando wird vor jeder Ausführung angewendet um sicherzustellen das der korrekte
+        SMTP Handschlag folgt.
+    </para>
+
+    <example id="zend.mail.multiple-emails.example-1">
+
+        <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
+
+        <programlisting role="php"><![CDATA[
+// Transport erstellen
+$transport = new Zend_Mail_Transport_Smtp('localhost');
+
+// Durch die Nachrichten gehen
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - mit einer SMTP Verbindung mehrfache E-Mails senden'
+    );
+    $mail->setBodyText('...Hier die Nachricht...');
+    $mail->send($transport);
+}
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Wenn man eine separate Verbindung für jeden Mailtransport haben will, muß der Transport vor und nach
+        jedem Aufruf der <function>send()</function> Methode erstellt und gelöscht werden. Oder alternativ kann
+        die Verbindung zwischen jedem Transport, durch Zugriff auf das Protokoll Objekt des Transportes,
+        manipuliert werden.
+    </para>
+
+    <example id="zend.mail.multiple-emails.example-2">
+
+        <title>Die Transportverbindung manuell kontrollieren</title>
+
+        <programlisting role="php"><![CDATA[
+// Transport erstellen
+$transport = new Zend_Mail_Transport_Smtp();
+
+$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol->connect();
+$protocol->helo('localhost');
+
+$transport->setConnection($protocol);
+
+// Durch die Nachrichten gehen
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - mit einer SMTP Verbindung mehrfache E-Mails senden'
+    );
+    $mail->setBodyText('...Hier die Nachricht...');
+
+    // Die Verbindung manuell kontrollieren
+    $protocol->rset();
+    $mail->send($transport);
+}
+
+$protocol->quit();
+$protocol->disconnect();
+]]>
+        </programlisting>
+
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

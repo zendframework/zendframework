@@ -1,0 +1,23 @@
+<sect1 id="zend.json.basics">
+    <title>Основы применения</title>
+    <para>
+        Использование <code>Zend_Json</code> включает в себя применение двух
+        публичных статических (public static) методов:
+        <code>Zend_Json::encode()</code> и <code>Zend_Json::decode()</code>.
+<!--
+        Usage of <code>Zend_Json</code> involves using the two public static
+        methods available: <code>Zend_Json::encode()</code> and
+        <code>Zend_Json::decode()</code>.
+-->
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+// Получение значения:
+$phpNative = Zend_Json::decode($encodedValue);
+
+// Преобразование для возвращения клиенту:
+$json = Zend_Json::encode($phpNative);
+?>]]></programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

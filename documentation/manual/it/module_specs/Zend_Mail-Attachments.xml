@@ -1,0 +1,54 @@
+<sect1 id="zend.mail.attachments">
+    <title>Allegati</title>
+    <para>
+        Si possono allegare file ad un'e-mail utilizzando il metodo <code>createAttachment()</code>.
+        Per impostazione predefinita, <code>Zend_Mail</code> assume che l'allegato corrisponda ad un oggetto binario (application/octet-stream), adotta una codifica base64 per il trasferimento e gestisce l'oggetto come allegato.
+        Queste convenzioni possono essere sovrascritte passando uno o più parametri al metodo <code>createAttachment()</code>:
+    </para>
+    <example id="zend.mail.attachments.example-1">
+        <title>Messaggi e-mail con allegati</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// crea il messaggio...
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_8BIT);]]>
+        </programlisting>
+    </example>
+    <para>
+        Se si desidera maggiore controllo sul formato MIME generato per un singolo allegato è possibile utilizzare il valore di ritorno di <code>createAttachment()</code> per modificarne gli attributi.
+        Il metodo <code>createAttachment()</code> restituisce un oggetto <code>Zend_Mime_Part</code>:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+
+$at = $mail->createAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->send();]]>
+    </programlisting>
+    <para>
+        Un'alternativa consiste nel creare un'istanza di Zend_Mime_Part ed aggiungere l'allegato con <code>addAttachment()</code>:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+
+$at = new Zend_Mime_Part($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->addAttachment($at);
+
+$mail->send();]]>
+    </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

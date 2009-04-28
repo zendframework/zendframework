@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.log.writers.firebug">
+    <title>Writing to Firebug</title>
+    <para>
+      <classname>Zend_Log_Writer_Firebug</classname> sends log
+      data to the <ulink url="http://www.getfirebug.com/">Firebug</ulink>
+      <ulink url="http://getfirebug.com/logging.html">Console</ulink>.
+    </para>
+    <para>
+      <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100" width="310" />
+    </para>
+    <para>
+      All data is sent via the <classname>Zend_Wildfire_Channel_HttpHeaders</classname> component
+      which uses HTTP headers to ensure the page content is not disturbed.
+      Debugging AJAX requests that require clean JSON and XML responses is possible with this approach.
+    </para>
+    <para>
+      Requirements:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Firefox Browser ideally version 3 but version 2 is also supported.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Firebug Firefox Extension which you can download from
+          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          FirePHP Firefox Extension which you can download from
+          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <example id="zend.log.writers.firebug.example.with_front_controller">
+      <title>Logging with Zend_Controller_Front</title>
+
+      <programlisting role="php"><![CDATA[
+// Place this in your bootstrap file before dispatching your front controller
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+// Use this in your model, view and controller files
+$logger->log('This is a log message!', Zend_Log::INFO);
+]]></programlisting>
+    </example>
+
+    <example id="zend.log.writers.firebug.example.without_front_controller">
+      <title>Logging without Zend_Controller_Front</title>
+
+      <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+$request = new Zend_Controller_Request_Http();
+$response = new Zend_Controller_Response_Http();
+$channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+$channel->setRequest($request);
+$channel->setResponse($response);
+
+// Start output buffering
+ob_start();
+
+// Now you can make calls to the logger
+
+$logger->log('This is a log message!', Zend_Log::INFO);
+
+// Flush log data to browser
+$channel->flush();
+$response->sendHeaders();
+]]></programlisting>
+    </example>
+
+    <sect3 id="zend.log.writers.firebug.priority-styles">
+
+      <title>Setting Styles for Priorities</title>
+
+      <para>
+        Built-in and user-defined priorities can be styled with the <code>setPriorityStyle()</code> method.
+      </para>
+      <programlisting role="php"><![CDATA[
+$logger->addPriority('FOO', 8);
+$writer->setPriorityStyle(8, 'TRACE');
+$logger->foo('Foo Message');
+]]></programlisting>
+      <para>
+        The default style for user-defined priorities can be set with the <code>setDefaultPriorityStyle()</code> method.
+      </para>
+      <programlisting role="php"><![CDATA[
+$writer->setDefaultPriorityStyle('TRACE');
+]]></programlisting>
+      <para>
+        The supported styles are as follows:
+        <table id="zend.log.writers.firebug.priority-styles.table">
+            <title>Firebug Logging Styles</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Style</entry>
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>LOG</code></entry>
+                        <entry>Displays a plain log message</entry>
+                    </row>
+                    <row>
+                        <entry><code>INFO</code></entry>
+                        <entry>Displays an info log message</entry>
+                    </row>
+                    <row>
+                        <entry><code>WARN</code></entry>
+                        <entry>Displays a warning log message</entry>
+                    </row>
+                    <row>
+                        <entry><code>ERROR</code></entry>
+                        <entry>Displays an error log message that increments Firebug's error count</entry>
+                    </row>
+                    <row>
+                        <entry><code>TRACE</code></entry>
+                        <entry>Displays a log message with an expandable stack trace</entry>
+                    </row>
+                    <row>
+                        <entry><code>EXCEPTION</code></entry>
+                        <entry>Displays an error long message with an expandable stack trace</entry>
+                    </row>
+                    <row>
+                        <entry><code>TABLE</code></entry>
+                        <entry>Displays a log message with an expandable table</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data">
+
+      <title>Preparing data for Logging</title>
+
+      <para>
+        While any PHP variable can be logged with the built-in priorities, some special formatting
+        is required if using some of the more specialized log styles.
+      </para>
+      <para>
+        The <code>LOG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>
+        and <code>TRACE</code> styles require no special formatting.
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.exception">
+
+      <title>Exception Logging</title>
+
+      <para>
+        To log a <classname>Zend_Exception</classname> simply pass the exception object to the logger.
+        It does not matter which priority or style you have set as the exception is automatically
+        recognized.
+      </para>
+      <programlisting role="php"><![CDATA[
+$exception = new Zend_Exception('Test exception');
+$logger->err($exception);
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.table">
+
+      <title>Table Logging</title>
+
+      <para>
+        You can also log data and format it in a table style. Columns are automatically recognized and
+        the first row of data automatically becomes the header.
+      </para>
+      <programlisting role="php"><![CDATA[
+$writer->setPriorityStyle(8, 'TABLE');
+$logger->addPriority('TABLE', 8);
+
+$table = array('Summary line for the table',
+             array(
+                 array('Column 1', 'Column 2'),
+                 array('Row 1 c 1',' Row 1 c 2'),
+                 array('Row 2 c 1',' Row 2 c 2')
+             )
+            );
+$logger->table($table);
+]]></programlisting>
+    </sect3>
+</sect2>

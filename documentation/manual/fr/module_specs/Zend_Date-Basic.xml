@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.date.basic">
+    <title>Méthodes de base</title>
+
+    <para>
+        Les sections qui suivent montrent l'utilisation de base de
+        <classname>Zend_Date</classname> au travers d'exemples. Dans ce manuel, une "date"
+        représente toujours une date calendaire et un temps, même lorsque cela n'est pas mentionné
+        spécifiquement. La partie (date calendaire, ou temps) non spécifiée prend la valeur par
+        défaut "zéro". Ainsi additionner une date ayant une date calendaire mais pas de temps, à un
+        temps "12 heures" n'ayant pas de date calendaire, résultera en la combinaison des
+        deux&#160;: la date calendaire connue avec une partie temps de 12 heures, soit midi.
+    </para>
+
+    <para>
+        Paramétrer une date sans temps implique un temps par défaut de 00:00:00. Inversement
+        paramétrer un temps mais sans date calendaire lui verra affectée la valeur de 01.01.1970
+        plus le temps. La plupart des ordinateurs entendent la date "nulle" comme étant la première
+        seconde de l'année 1970. La notion de timestamp est un nombre de secondes depuis cette date
+        dite "EPOCH".
+    </para>
+
+    <sect2 id="zend.date.basic.creation">
+        <title>La date courante</title>
+
+        <para>
+            Sans argument, construire un objet correspond à la date courante du système
+            d'exploitation telle que retournée par la fonction PHP <code>time()</code>, pour
+            obtenir un  <ulink url="http://en.wikipedia.org/wiki/Unix_Time">timestamp UNIX</ulink>
+            pour l'objet. Prenez garde à la locale et au
+            <link linkend="zend.date.setdefaulttimezone">fuseau horaire (timezone) par
+            défaut</link>.
+        </para>
+
+        <example id="zend.date.basic.creation.example-1">
+            <title>Créer la date courante</title>
+
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Affiche le timestamp actuel
+print $date;
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.date.basic.functions">
+        <title>Zend_Date&#160;: exemples</title>
+
+        <para>
+            Les exemples sont le meilleur moyen de prendre en main
+            <classname>Zend_Date</classname>, particulièrement pour les personnes non habituées à
+            la notion de date dans d'autres langages ou frameworks.
+        </para>
+
+        <sect3 id="zend.date.simple.functions.get">
+            <title>Afficher une date</title>
+
+            <para>
+                La date contenue dans l'objet <classname>Zend_Date</classname> est obtenue en
+                tant qu'entier ou chaîne de caractères localisée, grâce à la méthode
+                <code>get()</code>. Il y a des options disponibles, nous les détaillerons
+                ultérieurement.
+            </para>
+
+            <example id="zend.date.simple.functions.get.example-1">
+                <title>get() - affiche une date</title>
+
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Affiche la date désirée
+print $date->get();
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.set">
+            <title>Spécifier une date</title>
+
+            <para>
+                La méthode <code>set()</code> modifie la date dans l'objet et retourne la
+                date affectée comme un timestamp (et non un objet). Là aussi des options sont
+                disponibles, nous y reviendrons.
+            </para>
+
+            <example id="zend.date.simple.functions.set.example-1">
+                <title>set() - affecte une date</title>
+
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Affecter une nouvelle date
+$date->set('13:00:00',Zend_Date::TIMES);
+print $date->get(Zend_Date::W3C);
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.add">
+            <title>Ajouter et soustraire des dates</title>
+
+            <para>
+                Ajouter deux dates avec <code>add()</code> signifie souvent ajouter une date
+                réelle plus un timestamp artificiel représentant une partie de date, comme 12
+                heures par exemple. <code>add()</code> et <code>sub()</code> utilisent les mêmes
+                paramètres que <code>set()</code>, sur lesquels nous reviendrons plus tard.
+            </para>
+
+            <example id="zend.date.simple.functions.add.example-1">
+                <title>add() - ajouter des dates</title>
+
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// modifie $date en ajoutant 12 heures
+$date->add('12:00:00', Zend_Date::TIMES);
+
+echo "Date via get() = ", $date->get(Zend_Date::W3C), "\n";
+
+// utilise __toString()
+echo "Date via toString() = ", $date, "\n";
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.compare">
+            <title>Comparaison de dates</title>
+
+            <para>
+                Toutes les méthodes basiques de <classname>Zend_Date</classname> peuvent
+                opérer sur des dates complètes, ou des parties de dates. Par exemple, comparer la
+                date dans l'objet à une certaines valeur de minutes, peut être effectué grâce à la
+                méthode <code>compare()</code>.
+            </para>
+
+            <example id="zend.date.simple.functions.compare.example-1">
+                <title>compare() - comparer des dates</title>
+
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date(); // date actuelle
+
+// Comparaison des 2 temps
+if ($date->compare(10, Zend_Date::MINUTE) == -1) {
+    print "Cette heure n'a pas encore dépassé 10 minutes";
+} else {
+    print "Cette heure a au plus dépassé les 10 minutes";
+}
+]]></programlisting>
+            </example>
+
+            <para>
+                Pour demander une simple égalité, utilisez <code>equals()</code>, qui
+                retourne un booléen.
+            </para>
+
+            <example id="zend.date.simple.functions.compare.example-2">
+                <title>equals() - identifie une date ou partie de date</title>
+
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date(); // date actuelle
+
+// Identification, demande d'égalité
+if ($date->equals(10, Zend_Date::HOUR)) {
+    print "Il est 10 heures.";
+} else {
+    print "Il n'est pas 10 heures.";
+}
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+</sect1>

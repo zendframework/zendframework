@@ -1,0 +1,66 @@
+<sect1 id="zend.server.reflection">
+    <title>Zend_Server_Reflection</title>
+
+    <sect2 id="zend.server.reflection.introduction">
+        <title>Wprowadzenie</title>
+
+        <para>
+            Klasa Zend_Server_Reflection zapewnia standardowy mechanizm dla
+            przeprowadzania introspekcji funkcji i klas dla potrzeb klas
+            serwerów. Jest oparta na API Reflection PHP5 i rozszerza je aby
+            zapewnić metody pobierania typów parametrów jakie przyjmuje funkcja,
+            typów zwracanych wartości oraz opisów, pełnej listy prototypów
+            funkcji i metod (np. wszystkie możliwe poprawne kombinacje
+            wywołania), oraz opisów funkcji/metod.
+        </para>
+        <para>
+            Typowo ta funkcjonalność będzie używana przez programistów klas
+            serwerów dla frameworka.
+        </para>
+    </sect2>
+    <sect2 id="zend.server.reflection.usage">
+        <title>Użycie</title>
+
+        <para>
+            Podstawowe użycie jest proste:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$class    = Zend_Server_Reflection::reflectClass('My_Class');
+$function = Zend_Server_Reflection::reflectFunction('my_function');
+
+// Pobierz prototypy
+$prototypes = $reflection->getPrototypes();
+
+// Przechodzimy pętlą przez wszystkie prototypy funkcji
+foreach ($prototypes as $prototype) {
+
+    // Pobierz typ zwracanej wartości prototypu
+    echo "Zwracany typ: ", $prototype->getReturnType(), "\n";
+
+    // Pobierz parametry prototypu
+    $parameters = $prototype->getParameters();
+
+    echo "Parametry: \n";
+    foreach ($parameters as $parameter) {
+        // Pobierz typ prototypu
+        echo "    ", $parameter->getType(), "\n";
+    }
+}
+
+// Pobierz przestrzeń nazw dla klasy, funkcji lub metody
+// Przestrzenie nazw mogą być ustawione podczas tworzenia instancji
+// lub przez użycie metody setNamespace()
+$reflection->getNamespace();
+]]>
+        </programlisting>
+
+        <para>
+            <code>reflectFunction()</code> zwraca obiekt
+            <code>Zend_Server_Reflection_Function</code>;
+            <code>reflectClass</code> zwraca obiekt
+            <code>Zend_Server_Reflection_Class</code>. Proszę sprawdź
+            dokumentację API aby dowiedzieć się jakie metody ma każdy z nich.
+        </para>
+    </sect2>
+</sect1>

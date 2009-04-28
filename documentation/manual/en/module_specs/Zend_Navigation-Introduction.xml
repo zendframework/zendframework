@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.navigation.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <classname>Zend_Navigation</classname> is a component for managing
+        trees of pointers to web pages.
+        Simply put: It can be used for creating menus, breadcrumbs, links, and
+        sitemaps, or serve as a model for other navigation related purposes.
+    </para>
+
+    <sect2 id="zend.navigation.introduction.concepts">
+        <title>Pages and Containers</title>
+
+        <para>
+            There are two main concepts in <classname>Zend_Navigation</classname>:
+        </para>
+
+        <sect3 id="zend.navigation.introduction.pages">
+            <title>Pages</title>
+            <para>
+                A page (<classname>Zend_Navigation_Page</classname>) in
+                <classname>Zend_Navigation</classname> –
+                in its most basic form – is an object that holds a pointer
+                to a web page. In addition to the pointer itself, the page
+                object contains a number of other properties that are
+                typically relevant for navigation, such as <code>label</code>,
+                <code>title</code>, etc.
+            </para>
+
+            <para>
+                Read more about pages in the
+                <link linkend="zend.navigation.pages">pages</link>
+                section.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.navigation.introduction.containers">
+            <title>Containers</title>
+            <para>
+                A navigation container
+                (<classname>Zend_Navigation_Container</classname>) is a
+                container class for pages. It has methods for
+                adding, retrieving, deleting and iterating pages.
+                It implements the <ulink url="http://php.net/spl">SPL</ulink>
+                interfaces <classname>RecursiveIterator</classname> and
+                <classname>Countable</classname>, and can thus be iterated
+                with SPL iterators such as
+                <classname>RecursiveIteratorIterator</classname>.
+            </para>
+
+            <para>
+                Read more about containers in the
+                <link linkend="zend.navigation.containers">containers</link>
+                section.
+            </para>
+
+            <note>
+                <para>
+                    <classname>Zend_Navigation_Page</classname> extends
+                    <classname>Zend_Navigation_Container</classname>, which
+                    means that a page can have sub pages.
+                </para>
+            </note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.navigation.introduction.separation">
+        <title>Separation of data (model) and rendering (view)</title>
+
+        <para>
+            Classes in the <classname>Zend_Navigation</classname>
+            namespace do not deal with rendering of navigational elements.
+            Rendering is done with navigational view helpers. However,
+            pages contain information that is used by view helpers
+            when rendering, such as; label, CSS class, title,
+            <code>lastmod</code> and <code>priority</code> properties for
+            sitemaps, etc.
+        </para>
+
+        <para>
+            Read more about rendering navigational elements in
+            the manual section on
+            <link linkend="zend.view.helpers.initial.navigation">navigation
+            helpers</link>.
+        </para>
+    </sect2>
+</sect1>

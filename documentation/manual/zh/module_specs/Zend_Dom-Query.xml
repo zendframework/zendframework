@@ -1,0 +1,222 @@
+<sect1 id="zend.dom.query">
+    <title>Zend_Dom_Query</title>
+
+    <para>
+        <code>Zend_Dom_Query</code> 为利用 XPath 或 CSS 选择器来查询 XML 和
+        (X)HTML 文档提供了机制。
+        它为帮助 MVC 应用的功能测试而开发，但也用于 screen scrapers 的快速开发。
+    </para>
+
+    <para>
+        当用 XML 结构查询文档时，对于 web 开发者来说，CSS 选择器符号简单而熟悉。
+        对开发过 Cascading Style Sheets  或用过提供使用 CSS 选择器
+        （<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype's
+            $$()</ulink> 和
+        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo's
+            dojo.query</ulink> 都是组件的灵魂）选择节点的功能的 Javascript 工具箱的开发者来说，符号应当很熟悉。
+    </para>
+
+    <sect2 id="zend.dom.query.operation">
+        <title> 操作理论 </title>
+
+        <para>
+            要使用 <code>Zend_Dom_Query</code>，你需要初始化一个
+            <code>Zend_Dom_Query</code> 对象，并可选地传递一个文档到查询（一字符串）。
+            一旦你有一个文档，可以使用 <code>query()</code> 或 <code>queryXpath()</code> 方法；
+            每个方法将返回带有任何匹配节点的 <code>Zend_Dom_Query_Result</code> 对象。
+        </para>
+
+        <para>
+            <code>Zend_Dom_Query</code> 和使用 DOMDocument + DOMXPath 的主要不同之处是可以依靠 CSS 选择器来选择。
+            你可以使用下列的任何组合：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <emphasis>element types</emphasis>: 提供一个元素类型来匹配：
+                'div'、 'a'、 'span'、 'h2' 等。
+            </para></listitem>
+
+            <listitem><para>
+                <emphasis>style attributes</emphasis>:
+                匹配 '.error'、 'div.error'、 'label.required' 等的 CSS 风格属性。
+                如果任何元素定义了超过一个风格，只要命名的风格出现在风格声明的任何地方，它将匹配。
+            </para></listitem>
+
+            <listitem><para>
+                <emphasis>id attributes</emphasis>:
+                匹配 '#content'、 'div#nav' 等的元素 ID 属性。
+            </para></listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>arbitrary attributes</emphasis>: 用于匹配的属性元素的属性。
+                    有三个不同的匹配类型：
+                </para>
+
+                <itemizedlist>
+                    <listitem><para>
+                        <emphasis>exact match</emphasis>: 属性和字符串精确地匹配：
+                        'div[bar="baz"]' 表示带有 "bar" 属性的 div 元素精确地匹配值 "baz"。
+                    </para></listitem>
+
+                    <listitem><para>
+                        <emphasis>word match</emphasis>: 包含匹配字符串 'div[bar~="baz"]' 的字符的
+                        属性将匹配一个带有包含 "baz"字符的 "bar"属性的 div 元素。
+                        '&lt;div bar="foo baz"&gt;' 匹配，而'&lt;div bar="foo bazbat"&gt;'不匹配。
+                    </para></listitem>
+
+                    <listitem><para>
+                        <emphasis>substring match</emphasis>:
+                        包含 'div[bar*="baz"]' 字符串的属性将匹配一个带有在它内部
+                        任何地方包含字符串 "baz" 的 "bar" 属性的 div 元素。
+                    </para></listitem>
+                </itemizedlist>
+             </listitem>
+
+                <listitem><para>
+                    <emphasis>direct descendents</emphasis>:
+                    利用在选择器之间的 '&gt;'表示直接的子孙。'div > span'将只选择 'div'直接的子孙 'span' 元素。
+                    它可用于任何上述的选择器。
+                </para></listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>descendents</emphasis>:
+                        把多个选择器集中成一字符串来表示一个搜索的层次。
+                        'div .foo span #one' 选择一个 id 'one' 的元素，它是在 'span' 元素下任意深度的子孙，
+                        它也是 'foo' 类下面任意深度的子孙，而 'foo' 元素是 'div' 元素下任意深度的子孙。
+                        例如，在下面列表中，它将匹配带有 'One' 字符的链接：
+                    </para>
+
+                    <programlisting role="html"><![CDATA[
+<div>
+    <table>
+        <tr>
+            <td class="foo">
+                <div>
+                    Lorem ipsum <span class="bar">
+                        <a href="/foo/bar" id="one">One</a>
+                        <a href="/foo/baz" id="two">Two</a>
+                        <a href="/foo/bat" id="three">Three</a>
+                        <a href="/foo/bla" id="four">Four</a>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+]]>
+</programlisting>
+          </listitem>
+        </itemizedlist>
+
+        <para>
+            一旦你执行了查询，你可以使用结果对象来确定节点的信息，同时，你也可以
+            把它们和/或它们的内容拿出来检查和处理。
+            <code>Zend_Dom_Query_Result</code> 实现 <code>Countable</code>
+            和 <code>Iterator</code> 并在内部存储结果为
+            DOMNodes/DOMElements。
+            作为例子，考虑下列的调用，它依靠上述的 HTML 来选择：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$dom = new Zend_Dom_Query($html);
+$results = $dom->query('.foo .bar a');
+
+$count = count($results); // get number of matches: 4
+foreach ($results as $result) {
+    // $result is a DOMElement
+}
+]]>
+        </programlisting>
+
+        <para>
+            <code>Zend_Dom_Query</code> 也允许利用 <code>queryXpath()</code> method 直接 XPath 查询；
+            你可以传递任何有效的 XPath 查询给这个方法，它将返回一个
+            <code>Zend_Dom_Query_Result</code> 对象。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.dom.query.methods">
+        <title> 可用方法 </title>
+
+        <para>
+            <code>Zend_Dom_Query</code> 类家族有下列方法可用。
+        </para>
+
+        <sect3 id="zend.dom.query.methods.zenddomquery">
+            <title>Zend_Dom_Query</title>
+
+            <para>
+                下列方法对 <code>Zend_Dom_Query</code> 可用:
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>setDocumentXml($document)</code>: 指定一个查询使用的 XML 字符串。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocumentXhtml($document)</code>: 指定一个查询使用的 XHTML 字符串。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocumentHtml($document)</code>: 指定一个查询使用的 HTML 字符串。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocument($document)</code>: 指定一个查询使用的字符串；
+                    <code>Zend_Dom_Query</code> 将尝试自动检查文档类型。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocument()</code>: 获取提供给对象的原始文档字符串。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocumentType()</code>: 获取提供给对象的文档的类型；是
+                    <code>DOC_XML</code>、 <code>DOC_XHTML</code> 或
+                    <code>DOC_HTML</code> 类常量其中之一。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>query($query)</code>: 使用 CSS 选择器符号查询文档。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>queryXpath($xPathQuery)</code>: 使用 XPath 符号查询文档。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
+            <title>Zend_Dom_Query_Result</title>
+
+            <para>
+                如前所述，<code>Zend_Dom_Query_Result</code>
+                实现 <code>Iterator</code> 和 <code>Countable</code>，
+                可用于 <code>foreach</code> 循环和 <code>count()</code> 函数。
+                另外，它有下列方法：
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>getCssQuery()</code>: 返回用于处理结果（如果有的话）的 CSS 选择器查询。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getXpathQuery()</code>: 返回用于处理结果的 XPath 查询。
+                    在内部，<code>Zend_Dom_Query</code> 转换 CSS 选择器查选为 XPath，所以这个值将永远被组装。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocument()</code>: 获取选择使用的文档。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

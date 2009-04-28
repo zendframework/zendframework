@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:gml='http://www.opengis.net/gml'
+xmlns:georss='http://www.georss.org/georss'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
+gd:etag='W/"CEQGQno4fCp7ImA9WxRaFEg."'>
+<id>
+tag:youtube.com,2008:playlist:4E6265CEF8BAA793:579617126485907C</id>
+<updated>2008-12-16T18:32:03.434Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='dynamite' />
+<category scheme='http://gdata.youtube.com/schemas/2007/categories.cat'
+term='News' label='News &amp; Politics' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#playlist' />
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='police' />
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='paris' />
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='explosives' />
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='find' />
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+term='france' />
+<title>Paris Police Find Dynamite in Department Store</title>
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/watch?v=Lur391T5ApY' />
+<link rel='http://gdata.youtube.com/schemas/2007#video.responses'
+type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY/responses?v=2' />
+<link rel='http://gdata.youtube.com/schemas/2007#video.related'
+type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY/related?v=2' />
+<link rel='http://gdata.youtube.com/schemas/2007#mobile'
+type='text/html'
+href='http://m.youtube.com/details?v=Lur391T5ApY' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY?v=2' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/playlists/4E6265CEF8BAA793/579617126485907C?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<media:group>
+<media:title type='plain'>Paris Police Find</media:title>
+<media:description type='plain'>French police found.</media:description>
+<media:keywords>department, dynamite, explosives, find</media:keywords>
+<yt:duration seconds='67' />
+<yt:videoid>Lur391T5ApY</yt:videoid>
+<yt:uploaded>2008-12-16T17:01:42.000Z</yt:uploaded>
+<media:player url='http://www.youtube.com/watch?v=Lur391T5ApY' />
+<media:credit role='uploader' scheme='urn:youtube'
+yt:type='partner'>AssociatedPress</media:credit>
+<media:category label='News &amp; Politics'
+scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>
+News</media:category>
+<media:content url='http://www.youtube.com/v/Lur391T5ApY&amp;f=gdata_playlists'
+type='application/x-shockwave-flash' medium='video'
+isDefault='true' expression='full' duration='67' yt:format='5' />
+<media:content url='rtsp://rtsp2.youtube.com/CisLENy73wIaIgmWAvlU9_fqLhMYDSANFEgGUg9nZGF0YV9wbGF5bGlzdHMM/0/0/0/video.3gp'
+type='video/3gpp' medium='video' expression='full' duration='67'
+yt:format='1' />
+<media:content url='rtsp://rtsp2.youtube.com/CisLENy73wIaIgmWAvlU9_fqLhMYESARFEgGUg9nZGF0YV9wbGF5bGlzdHMM/0/0/0/video.3gp'
+type='video/3gpp' medium='video' expression='full' duration='67'
+yt:format='6' />
+<media:thumbnail url='http://i.ytimg.com/vi/Lur391T5ApY/2.jpg'
+height='97' width='130' time='00:00:33.500' />
+<media:thumbnail url='http://i.ytimg.com/vi/Lur391T5ApY/1.jpg'
+height='97' width='130' time='00:00:16.750' />
+<media:thumbnail url='http://i.ytimg.com/vi/Lur391T5ApY/3.jpg'
+height='97' width='130' time='00:00:50.250' />
+<media:thumbnail url='http://i.ytimg.com/vi/Lur391T5ApY/hqdefault.jpg'
+height='360' width='480' />
+</media:group>
+<yt:statistics viewCount='271' favoriteCount='1' />
+<gd:rating min='1' max='5' numRaters='5' average='4.20' />
+<yt:location>New York, NY</yt:location>
+<yt:recorded>2008-12-16</yt:recorded>
+<gd:comments>
+<gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/Lur391T5ApY/comments?v=2'
+countHint='4' />
+</gd:comments>
+<yt:position>1</yt:position>
+</entry>

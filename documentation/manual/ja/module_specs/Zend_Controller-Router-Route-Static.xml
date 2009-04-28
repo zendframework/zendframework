@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.controller.router.routes.static">
+    <title>Zend_Controller_Router_Route_Static</title>
+
+    <para>
+        これまでの例では、すべて動的なルートを使用していました。
+        つまり、特定のパターンにマッチするものについてのルートです。
+        しかし、時には特定のルートを固定してしまい、
+        わざわざ正規表現エンジンを動かしたくない場合もあるでしょう。
+        そんなときには静的なルートを使用します。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Static(
+    'login',
+    array('controller' => 'auth', 'action' => 'login')
+);
+$router->addRoute('login', $route);
+]]>
+    </programlisting>
+
+    <para>
+        上のルートは <code>http://domain.com/login</code> という URL
+        にマッチし、<code>AuthController::loginAction()</code> にディスパッチされます。
+    </para>
+
+    <note id="zend.controller.router.routes.static.warning">
+        <title>警告: 静的なルートにはまともなデフォルトが必須</title>
+
+        <para>
+            静的なルートは、URL の一部をリクエストオブジェクトへのパラメータとして渡すことはありません。
+            したがって、リクエストのディスパッチに必要なパラメータは
+            すべてデフォルトでルートに渡すようにしておかなければなりません。
+            "controller" や "action" のデフォルト値を省略してしまうと予期せぬ結果を引き起こし、
+            リクエストがディスパッチ不能になってしまうでしょう。
+        </para>
+
+        <para>
+            一般に、以下のデフォルト値は常に渡すようにしておきましょう。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>controller</para></listitem>
+            <listitem><para>action</para></listitem>
+            <listitem><para>module (デフォルト以外の場合)</para></listitem>
+        </itemizedlist>
+
+        <para>
+            オプションで、起動時に "useDefaultControllerAlways"
+            パラメータをフロントコントローラに渡すこともできます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+]]></programlisting>
+
+        <para>
+            しかし、これはあくまでも次善策であり、
+            デフォルトを明記しておくほうがおすすめです。
+        </para>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,26 @@
+<sect1 id="zend.mail.sending">
+    <title>Wysyłanie przez SMTP</title>
+    <para>
+        Aby wysłać mail przez SMTP, obiekt <code>Zend_Mail_Transport_Smtp</code>
+        musi być utworzony i zarejestrowany w obiekcie <code>Zend_Mail</code>
+        zanim zostanie wywołana metoda <code>send()</code>. Dla kolejnych wywołań
+        <code>Zend_Mail::send()</code> w tym skrypcie będzie także użyty transport SMTP:
+    </para>
+    <example id="zend.mail.sending.example-1">
+        <title>Wysyłanie e-maila przez SMTP</title>
+        <programlisting role="php"><![CDATA[
+$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
+Zend_Mail::setDefaultTransport($tr);
+]]>
+        </programlisting>
+    </example>
+    <para>
+        Metoda <code>setDefaultTransport()</code> oraz konstruktor <code>Zend_Mail_Transport_Smtp</code>
+        nie są czasochłonne. Te dwie linie mogą być wykonane w czasie przygotowania
+        skryptu (np. w pliku config.inc czy w podobnym) w celu skonfigurowania zachowania
+        klasy <code>Zend_Mail</code> w reszcie skryptu. To utrzymuje informacje
+        konfiguracyjne poza logiką aplikacji - to czy wiadomości mają być wysyłane
+        przez SMTP czy przez funkcję PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink>,
+        jaki serwer poczty ma być użyty itp.
+    </para>
+</sect1>

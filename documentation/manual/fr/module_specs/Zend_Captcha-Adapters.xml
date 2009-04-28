@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.captcha.adapters">
+    <title>Adaptateurs CAPTCHA</title>
+
+    <para>Les adaptateurs suivants sont fournis dans Zend Framework par défaut.</para>
+
+    <sect2 id="zend.captcha.adapters.word">
+        <title>Zend_Captcha_Word</title>
+
+        <para>
+            <classname>Zend_Captcha_Word</classname> est un adaptateur abstrait qui sert de classe
+            de base pour les autres adaptateurs CAPTCHA. Il fournit des mutateurs permettant de
+            spécifier la taille du mot le TTL de session, l'objet namespace de session à utiliser
+            pour la persistance. Aussi, il encapsule toute la logique de validation.
+        </para>
+
+        <para>
+            Par défaut la taille du mot est de 8 caractères, le timeout de session est de 5
+            minutes et l'objet d'espace de nom de session utilisé est
+            <classname>Zend_Session_Namespace</classname> (avec l'espace de nom
+            ("<classname>Zend_Form_Captcha_&lt;captcha ID&gt;</classname>").
+        </para>
+
+        <para>
+            En plus des méthodes standards fournies par
+            <classname>Zend_Captcha_Adapter</classname>, <classname>Zend_Captcha_Word</classname>
+            propose les méthodes suivantes&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setWordLen($length)</code> et <code>getWordLen()</code> vous
+                    permettent de piloter la taille du "mot" généré, en caractères.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setTimeout($ttl)</code> et <code>getTimeout()</code> vous donnent
+                    la main sur le temps-de-vie (TTL) du jeton de session. <code>$ttl</code> est
+                    exprimé en secondes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setSessionClass($class)</code> et <code>getSessionClass()</code>
+                    vous permettent de piloter la classe de session, si vous désirez utiliser une
+                    alternative à <classname>Zend_Session_Namespace</classname>, ceci dans le but
+                    de faire persister le jeton captcha en session.
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>getId()</code> retourne l'identifiant du jeton actuel.</para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getWord()</code> retourne le mot généré utilisé avec le CAPTCHA. Il
+                    sera généré pour vous si aucun n'existe déjà.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setSession(Zend_Session_Namespace $session)</code> permet
+                    d'injecter un objet de session qui sera utilisé pour faire persister le jeton
+                    de CAPTCHA. <code>getSession()</code> retourne l'objet de session actuellement
+                    utilisé.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Tous les captcha Word vous autorisent à passer un tableau d'options au
+            constructeur, ou à <code>setOptions()</code> (un objet
+            <classname>Zend_Config</classname> peut être utilisé avec <code>setConfig()</code>).
+            Par défaut, les clés <code>timeout</code> <code>wordLen</code> et
+            <code>sessionClass</code> seront utilisées.
+        </para>
+
+        <note>
+            <para>Word est une classe abstraite et ne peut être utilisée directement.</para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.dumb">
+        <title>Zend_Captcha_Dumb</title>
+
+        <para>
+            L'adaptateur "Dumb" propose une chaine aléatoire qui doit être ressaisie, mais
+            inversée. Ce n'est pas une solution CAPTCHA idéale (un robot peut la détourner), il
+            devrait être utilisé comme solution de remplacement extrême, ou pour les tests. Il
+            étend <classname>Zend_Captcha_Word</classname>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.figlet">
+        <title>Zend_Captcha_Figlet</title>
+
+        <para>
+            L'adaptateur Figlet utilise
+            <link linkend="zend.text.figlet">Zend_Text_Figlet</link> pour présenter un captcha.
+            Seuls les caractères alphabétiques sont utilisables.
+        </para>
+
+        <para>
+            Les options passées au constructeur le seront pour l'objet
+            <link linkend="zend.text.figlet">Zend_Text_Figlet</link> que l'adaptateur va utiliser.
+            Voyez sa documentation pour plus d'informations.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.image">
+        <title>Zend_Captcha_Image</title>
+
+        <para>
+            L'adaptateur Image prend le mot généré et le transforme en image difficile à
+            analyser pour un programme informatique (robot). Pour cela, il nécessite l'
+            <ulink url="http://php.net/gd">extension GD</ulink> de PHP, compilée avec le support
+            TrueType et Freetype. Actuellement, l'adaptateur ne génère que des images PNG.
+        </para>
+
+        <para>
+            <classname>Zend_Captcha_Image</classname> étend
+            <classname>Zend_Captcha_Word</classname>, et propose les méthodes additionnelles
+            suivantes&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setExpiration($expiration)</code> et <code>getExpiration()</code>
+                    vous autorisent à manipuler le temps maximum que l'image CAPTCHA doit rester
+                    sur le disque. En général, il s'agit d'un temps supérieur à celui de la
+                    session. Un ramasse-miettes passe régulièrement à chaque instanciation de
+                    l'objet captcha Image : il détruit les images arrivées à expiration. La période
+                    d'expiration doit être exprimée en secondes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setGcFreq($gcFreq)</code> et <code>getGcFreg()</code> vous
+                    permettent de manipuler la fréquence de collecte du ramasse-miettes des images.
+                    Le ramasse-miettes passera à une fréquence de <code>1/$gcFreq</code>. Par
+                    défaut 1/100, soit toutes les 100 requêtes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setFont($font)</code> et <code>getFont()</code> vous donnent le
+                    moyen de manipuler la police que vous souhaitez utiliser. <code>$font</code>
+                    doit indiquer le chemin complet vers la police à utiliser. Une exception sera
+                    levée si vous ne spécifiez pas ce paramètre.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setFontSize($fsize)</code> et <code>getFontSize()</code> servent
+                    pour spécifier et récupérer la taille de la police à utiliser (en pixels). Par
+                    défaut : 24px.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setHeight($height)</code> et <code>getHeight()</code> servent pour
+                    spécifier et récupérer la hauteur de la police à utiliser (en pixels). Par
+                    défaut : 50px.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setWidth($width)</code> and <code>getWidth()</code> servent pour
+                    spécifier et récupérer la largeur de la police à utiliser (en pixels). Par
+                    défaut : 200px.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setImgDir($imgDir)</code> et <code>getImgDir()</code> vous
+                    permettent de manipuler le dossier dans lequel les images captcha générées
+                    seront stockées. Par défaut, il s'agit de "./images/captcha/", qui devrait être
+                    pris relativement au fichier de bootstrap du site.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setImgUrl($imgUrl)</code> et <code>getImgUrl()</code> vous donnent
+                    le moyen de manipuler le chemin relatif à utiliser pour la balise HTML servant
+                    à afficher l'image du captcha. Par défaut, il s'agit de
+                    "/images/captcha/".
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setSuffix($suffix)</code> et <code>getSuffix()</code> vous donnent
+                    la main sur le suffixe à utiliser pour le nom du fichier de l'image générée par
+                    le captcha. Il s'agit par défaut de ".png". Note : changer ceci ne changera pas
+                    le type de l'image générée.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Toutes les options ci-dessus peuvent aussi être passées en constructeur.
+            Supprimer la partie "set" de leur méthodes, et passez leur première lettre en minuscule
+            pour avoir les clés du tableau d'options que le constructeur utilise. ("suffix",
+            "height", "imgUrl", etc...).
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.recaptcha">
+        <title>Zend_Captcha_ReCaptcha</title>
+
+        <para>
+            L'adaptateur ReCaptcha utilise
+            <link linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link> pour générer des
+            CAPTCHA. Les méthodes suivantes lui sont propres&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setPrivKey($key)</code> et <code>getPrivKey()</code> vous
+                    permettent de gérer la clé privée utilisée avec le service ReCaptcha. Cette clé
+                    doit être spécifiée en constructeur, mais peut être ensuite modifiée.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setPubKey($key)</code> et <code>getPubKey()</code> vous permettent
+                    de gérer la clé publique utilisée avec le service ReCaptcha. Cette clé doit
+                    être spécifiée en constructeur, mais peut être ensuite modifiée.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setService(Zend_Service_ReCaptcha $service)</code> et
+                    <code>getService()</code> vous permettent d'interagir directement avec l'objet
+                    service ReCaptcha utilisé par l'adaptateur.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

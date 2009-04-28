@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.custom-feed">
+    <title>Eigene Klassen für Feeds und Einträge</title>
+
+    <para>
+        Schließlich kannst du die <classname>Zend_Feed</classname> Klasse erweitern, wenn du dein eigenes
+        Format oder Feinheiten wie die automatische Verarbeitung von Elementen, die in deinen
+        eigenen Namensraum enthalten sein sollen, bereit stellen möchtest
+    </para>
+
+    <para>
+        Hier ist ein Beispiel einer eigenen Klasse für Atom Einträge, die ihre eigenen Elemente für
+        den <code>myns:</code> Namensraum verwendet. Beachte, dass sie auch den
+        <code>registerNamespace()</code> Aufruf für dich durchführt, so dass sich der Endbenutzer
+        nicht um Namensräume kümmern muss.
+    </para>
+
+    <example id="zend.feed.custom-feed.example.extending">
+        <title>Die Klasse für Atom Einträge mit einem eigenen Namensraum erweitern</title>
+        <programlisting role="php"><![CDATA[
+/**
+ * Die eigene Klasse für Einträge kennt automatisch die Feed URI (optional)
+ * und kann automatisch weitere Namensräume hinzufügen
+ */
+class MyEntry extends Zend_Feed_Entry_Atom
+{
+
+    public function __construct($uri = 'http://www.example.com/myfeed/',
+                                $xml = null)
+    {
+        parent::__construct($uri, $xml);
+
+        Zend_Feed::registerNamespace('myns',
+                                     'http://www.example.com/myns/1.0');
+    }
+
+    public function __get($var)
+    {
+        switch ($var) {
+            case 'myUpdated':
+                // Übersetze myUpdated nach myns:updated.
+                return parent::__get('myns:updated');
+
+            default:
+                return parent::__get($var);
+            }
+    }
+
+    public function __set($var, $value)
+    {
+        switch ($var) {
+            case 'myUpdated':
+                // Übersetze myUpdated nach myns:updated.
+                parent::__set('myns:updated', $value);
+                break;
+
+            default:
+                parent::__set($var, $value);
+        }
+    }
+
+    public function __call($var, $unused)
+    {
+        switch ($var) {
+            case 'myUpdated':
+                // Übersetze myUpdated zu myns:updated.
+                return parent::__call('myns:updated', $unused);
+
+            default:
+                return parent::__call($var, $unused);
+        }
+    }
+}
+]]>
+        </programlisting>
+        <para>
+            Um diese Klasse zu verwenden, musst du sie nur direkt instanziieren und die
+            <code>myUpdated</code> Eigenschaft setzen.
+        </para>
+        <programlisting role="php"><![CDATA[
+$entry = new MyEntry();
+$entry->myUpdated = '2005-04-19T15:30';
+
+// Methoden-Stil Aufruf wird von der _call Methode gehandhabt
+$entry->myUpdated();
+// Eigenschaften-Stil Aufruf wurd von der __get Methode gehandhabt
+$entry->myUpdated;
+]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

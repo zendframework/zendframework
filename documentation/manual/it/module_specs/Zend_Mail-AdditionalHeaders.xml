@@ -1,0 +1,20 @@
+<sect1 id="zend.mail.additional-headers">
+    <title>Intestazioni aggiuntive</title>
+    <para>
+        E' possibile impostare intestazioni e-mail arbitrarie utilizzando il metodo <code>addHeader()</code>.
+        Richiede due parametri: il nome dell'intestazione ed il suo valore. Un terzo parametro opzionale determina se l'intestazione debba avere uno o più valori:
+    </para>
+    <example id="zend.mail.additional-headers.example-1">
+        <title>Aggiunta di intestazioni al messaggio e-mail</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-salutiA', 'Mom', true); // valori multipli
+$mail->addHeader('X-salutiA', 'Dad', true);]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

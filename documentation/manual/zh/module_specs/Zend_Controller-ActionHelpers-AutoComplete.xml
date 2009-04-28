@@ -1,0 +1,277 @@
+<sect3 id="zend.controller.actionhelpers.autocomplete">
+    <title>AutoComplete</title>
+
+    <para>
+        许多 AJAX javascript 函数库提供了以潜在地匹配结果的选择列表作为用户类别显示的自动完成。<code>AutoComplete</code> 助手简化返回可接受的响应给这样的方法。
+    </para>
+
+    <para>
+        因为并非所有的 JS 库用同样的方法实现自动完成，<code>AutoComplete</code> 助手提供了一些必要的基本的摘要函数给这些库并对个别库提供了具体实现。返回类型一般是 JSON 字符串数组、JSON 数组的数组 （每个成员的数组是一个用于创建选择列表的元数据（metadata）的关联数组） 或 HTML。
+    </para>
+
+    <para>
+        每个实现的基本用法都一样：
+    </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Perform some logic...
+
+        // Encode and send response;
+        $this->_helper->autoCompleteDojo($data);
+
+        // Or explicitly:
+        $response = $this->_helper->autoCompleteDojo
+                                  ->sendAutoCompletion($data);
+
+        // Or simply prepare autocompletion response:
+        $response = $this->_helper->autoCompleteDojo
+                                  ->prepareAutoCompletion($data);
+    }
+}
+]]>
+        </programlisting>
+
+    <para>
+        缺省地，自动完成做这些工作：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                关闭布局（layouts）和视图解析器（ViewRenderer）。
+        </para></listitem>
+
+        <listitem><para>
+                设置合适的响应头。
+        </para></listitem>
+
+        <listitem><para>
+                用编码的/格式化的自动完成数据设置响应体。
+        </para></listitem>
+
+        <listitem><para>
+                发送响应。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        可用的助手方法包括：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <code>disableLayouts()</code> 用来关闭布局和视图解析器。一般地，在 <code>prepareAutoCompletion()</code> 里调用它。
+        </para></listitem>
+
+        <listitem><para>
+                <code>encodeJson($data, $keepLayouts = false)</code> 给 JSON 编码，可选打开或关闭布局。一般地，在 <code>prepareAutoCompletion()</code> 里调用它。
+        </para></listitem>
+
+        <listitem><para>
+                <code>prepareAutoCompletion($data, $keepLayouts = false)</code> 用来为具体实现以响应格式准备数据，可选地打开或关闭布局，返回值因不同的实现而不同。
+        </para></listitem>
+
+        <listitem><para>
+                <code>sendAutoCompletion($data, $keepLayouts = false)</code> 用来为具体实现发送响应格式的数据，它调用 <code>prepareAutoCompletion()</code>，然后发送响应。
+        </para></listitem>
+
+        <listitem><para>
+                当把助手作为助手代理的方法来调用，使用 <code>direct($data, $sendNow = true, $keepLayouts = false)</code> 。The <code>$sendNow</code> flag 用来决定是否分别调用 <code>sendAutoCompletion()</code> 或 <code>prepareAutoCompletion()</code>。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        目前 <code>AutoComplete</code> 支持 Dojo 和 Scriptaculous AJAX 库。
+    </para>
+
+    <sect4 id="zend.controller.actionhelpers.autocomplete.dojo">
+        <title>AutoCompletion with Dojo</title>
+
+        <para>
+            Dojo 本身没有 AutoCompletion 小部件，但有两个小部件可以执行 AutoCompletion：ComboBox 和 FilteringSelect。对于这两者，都要求实现 QueryReadStore 的数据存储，关于这话题的更多信息参见 <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink> 文档。
+        </para>
+
+        <para>
+            在 Zend Framework 中，可以传递简单的索引的数组给 AutoCompleteDojo 助手，它将返回一个适合和这样一个存储一起使用的 JSON 响应：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// within a controller action:
+$this->_helper->autoCompleteDojo($data);
+]]>
+        </programlisting>
+
+        <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
+            <title>AutoCompletion with Dojo Using Zend MVC</title>
+
+            <para>
+                AutoCompletion with Dojo 通过 Zend MVC 需要若干事项：为你想要 AutoCompletion 的 ComboBox 生成一个表单对象，服务于 AutoCompletion 结果的控制器动作，生成定制的 QueryReadStore 来连接到 AutoCompletion 动作和 javascript 的生成用于在服务器端初始化 AutoCompletion。
+             </para>
+
+            <para>
+                首先，看一下必需的 javascript 。Dojo 为生成 OOP javascript 提供一个完整的框架，很像 Zend Framework 对于 PHP。它的部分功能是使用目录等级结构生成假的命名空间（pseudo-namespaces ）。 我们将在和 Dojo 同一级目录创建一个 'custom' 目录，那是 Dojo 发行的一部分。 在目录里面，我们将创建 javascript 文件，TestNameReadStore.js  带有以下内容：
+            </para>
+
+            <programlisting role="javascript"><![CDATA[
+dojo.provide("custom.TestNameReadStore");
+dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
+    fetch:function (request) {
+        request.serverQuery = { test:request.query.name };
+        return this.inherited("fetch", arguments);
+    }
+});
+]]>
+</programlisting>
+
+            <para>
+                该类是 Dojo 自己的 QueryReadStore 的扩展，QueryReadStore 是一个抽象类。我们简单地通过请求定义一个方法，并把它分配给 'test' 元素。
+            </para>
+
+            <para>
+                下一步，为我们想要的 AutoCompletion 生成表单元素：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class TestController extends Zend_Controller_Action
+{
+    protected $_form;
+
+    public function getForm()
+    {
+        if (null === $this->_form) {
+            $this->_form = new Zend_Form();
+            $this->_form->setMethod('get')
+                ->setAction(
+                    $this->getRequest()->getBaseUrl() . '/test/process'
+                )
+                ->addElements(array(
+                    'test' => array('type' => 'text', 'options' => array(
+                        'filters'        => array('StringTrim'),
+                        'dojoType'       => array('dijit.form.ComboBox'),
+                        'store'          => 'testStore',
+                        'autoComplete'   => 'false',
+                        'hasDownArrow'   => 'true',
+                        'label' => 'Your input:',
+                    )),
+                    'go' => array('type' => 'submit',
+                                  'options' => array('label' => 'Go!'))
+                ));
+        }
+        return $this->_form;
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                这里，我们用 'test' 和 'go' 方法生成表单。'test' 方法添加若干特别的 Dojo 专用的属性：dojoType、 store、 autoComplete 和 hasDownArrow。dojoType 用来指示我们在生成 comboBox，并且我们将把它链接到 'testStore' 的数据存储（键 'store'）－－ 稍后还有更多。指定 'autoComplete' 作为 false 告诉 Dojo 不要自动选择第一个匹配，但是要显示一个匹配列表。最后，'hasDownArrow' 生成和选择 box 类似的向下箭头，这样我们可以显示和隐藏匹配。
+            </para>
+
+            <para>
+                让我们添加一个方法来显示表单，和处理 AutoCompletion 的结束点：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class TestController extends Zend_Controller_Action
+{
+    // ...
+
+    /**
+     * Landing page
+     */
+    public function indexAction()
+    {
+        $this->view->form = $this->getForm();
+    }
+
+    public function autocompleteAction()
+    {
+        if ('ajax' != $this->_getParam('format', false)) {
+            return $this->_helper->redirector('index');
+        }
+        if ($this->getRequest()->isPost()) {
+            return $this->_helper->redirector('index');
+        }
+
+        $match = trim($this->getRequest()->getQuery('test', ''));
+
+        $matches = array();
+        foreach ($this->getData() as $datum) {
+            if (0 === strpos($datum, $match)) {
+                $matches[] = $datum;
+            }
+        }
+        $this->_helper->autoCompleteDojo($matches);
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                在 <code>autocompleteAction()</code> 中我们做许多事情。首先，我们注意确保我们有个 post 请求，并且有个 'format' 参数的值为 'ajax'；这样减少欺骗查询给动作。接着，我们检查 'test' 参数，并和我们的数据比较。（我在这里故意忽略了 <code>getData()</code> 的实现 －－ 它可以是任何数据源）。最后，发送匹配给 AutoCompletion 助手。
+            </para>
+
+            <para>
+                既然我们在后台有了所有的东西，来看一下在视图脚本中对于 landing 页面我们需要提交什么。 首先，我们需要设置数据存储，然后解析表单，最后确保合适的 Dojo 库被加载 －－包括定制的数据存储。来看看视图脚本，步骤在注释里：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<? // setup our data store: ?>
+<div dojoType="custom.TestNameReadStore" jsId="testStore"
+    url="<?= $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"
+    requestMethod="get"></div>
+
+<? // render our form: ?>
+<?= $this->form ?>
+
+<? // setup Dojo-related CSS to load in HTML head: ?>
+<? $this->headStyle()->captureStart() ?>
+@import "<?= $this->baseUrl() ?>/javascript/dijit/themes/tundra/tundra.css";
+@import "<?= $this->baseUrl() ?>/javascript/dojo/resources/dojo.css";
+<? $this->headStyle()->captureEnd() ?>
+
+<? // setup javascript to load in HTML head, including all required
+   // Dojo libraries: ?>
+<? $this->headScript()
+        ->setAllowArbitraryAttributes(true)
+        ->appendFile($this->baseUrl() . '/javascript/dojo/dojo.js',
+            'text/javascript',
+            array('djConfig' => 'parseOnLoad: true'))
+        ->captureStart() ?>
+djConfig.usePlainJson=true;
+dojo.registerModulePath("custom","../custom");
+dojo.require("dojo.parser");
+dojo.require("dojox.data.QueryReadStore");
+dojo.require("dijit.form.ComboBox");
+dojo.require("custom.TestNameReadStore");
+<? $this->headScript()->captureEnd() ?>
+]]>
+            </programlisting>
+
+            <para>
+                注意对视图助手的调用如 headStyle 和 headScript，它们是占位符，我们可以在布局视图脚本的 HTML 头中解析。
+            </para>
+
+            <para>
+                现在所有的 Dojo AutoCompletion 开始工作了。
+            </para>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
+        <title>AutoCompletion with Scriptaculous</title>
+        <para>
+            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink> 需要一个特定格式的 HTML 响应。
+        </para>
+
+        <para>
+            和这个库一起使用的助手是 'AutoCompleteScriptaculous'，给它提供一个数据数组，这个助手将生成兼容于 Ajax.Autocompleter  的 HTML 响应。
+        </para>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

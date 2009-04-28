@@ -1,0 +1,70 @@
+<sect3 id="zend.view.helpers.initial.headlink">
+    <title>HeadLink 助手</title>
+
+    <para>
+        HTML的 <code>&lt;link&gt;</code> 标签越来越多地用于为你的站点链接不同资源：stylesheet, feed, favicon, trackback等。<code>HeadLink</code> 助手提供了一个简单的接口用来创建和聚合这些元素以供稍后在你的布局脚本里获取和输出。
+    </para>
+
+    <para>
+        <code>HeadLink</code> 助手有以下特殊的方法用来添加 stylesheet 链接：
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>prependStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>setStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>$media</code> 值缺省为 'screen'，但可以为任何有效的媒体(media)值。<code>$conditionalStylesheet</code> 是布尔值，将用于解析时来决定是否有特殊的注释应该被包括以防止在特定的平台上加载stylesheet。
+    </para>
+
+    <para>
+        另外，<code>HeadLink</code> 助手有特殊的方法用来添加 'alternate' 链接到它的堆栈：
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendAlternate($href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>offsetSetAlternate($index, $href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>prependAlternate($href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>setAlternate($href, $type,
+                    $title)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>headLink()</code> 助手方法允许指定所有的必要的属性给 <code>&lt;link&gt;</code> 元素， 也允许指定替代 － 是否新元素替换所有其他的，前置（栈顶），或追加（栈底）。
+    </para>
+
+    <para>
+        <code>HeadLink</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link>的一个具体实现。
+    </para>
+
+    <example id="zend.view.helpers.initial.headlink.basicusage">
+        <title>HeadLink 助手的基本用法</title>
+
+        <para>
+            任何时候可以指定<code>headLink</code>，典型地，将在布局脚本里指定全局链接，并在应用程序视图脚本里指定特定的链接。在布局脚本里的 &lt;head&gt; 部份，用echo来输出。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // 在视图脚本中设置链接：
+$this->headLink()->appendStylesheet('/styles/basic.css')
+                 ->headLink(array('rel' => 'favicon', 'href' => '/img/favicon.ico'), 'PREPEND')
+                 ->prependStylesheet('/styles/moz.css', 'screen', true);
+?>
+<?php // 解析链接：?>
+<?= $this->headLink() ?>
+]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.encrypt">
+    <title>Encrypt</title>
+    <para>
+        This filter will encrypt any given string with the provided setting. Therefor it makes use of
+        Adapters. Actually there are adapters for the <code>Mcrypt</code> and <code>OpenSSL</code>
+        extensions from php.
+    </para>
+
+    <para>
+        As these two encryption methodologies work completly different, also the usage of the adapters
+        differ. You have to select the adapter you want to use when initiating the filter.
+    </para>
+
+    <para>
+        As these two encryption methodologies work completly different, also the usage of the adapters
+        differ. You have to select the adapter you want to use when initiating the filter.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Use the Mcrypt adapter
+$filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
+
+// Use the OpenSSL adapter
+$filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
+]]></programlisting>
+
+    <para>
+        To set another adapter you can also use <code>setAdapter()</code>, and the <code>getAdapter()</code>
+        method to receive the actual set adapter.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Use the Mcrypt adapter
+$filter = new Zend_Filter_Encrypt();
+$filter->setAdapter('openssl');
+]]></programlisting>
+
+    <note>
+        <para>
+            When you do not supply the <code>adapter</code> option or do not use setAdapter, then the
+            <code>Mcrypt</code> adapter will be used per default.
+        </para>
+    </note>
+
+    <sect3 id="zend.filter.set.encrypt.mcrypt">
+        <title>Encryption with Mcrypt</title>
+        <para>
+            When you have installed the <code>Mcrypt</code> extension you can use the
+            <code>Mcrypt</code> adapter. This adapter supports the following options at initiation:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>key</emphasis>: The encryption key with which the input will be encrypted.
+                    You need the same key for decryption.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>algorithm</emphasis>: The algorithm which has to be used. It should be one of
+                    the algorithm ciphers which can be found under
+                    <ulink url="http://php.net/mcrypt">PHP's mcrypt ciphers</ulink>. If not set it defaults to
+                    <code>blowfish</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>algorithm_directory</emphasis>: The directory where the algorithm can be found.
+                    If not set it defaults to the path set within the mcrypt extension.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mode</emphasis>: The encryption mode which has to be used. It should be one of
+                    the modes which can be found under
+                    <ulink url="http://php.net/mcrypt">PHP's mcrypt modes</ulink>. If not set it defaults to
+                    <code>cbc</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mode_directory</emphasis>: The directory where the mode can be found. If not set
+                    it defaults to the path set within the <code>mcrypt</code> extension.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>vector</emphasis>: The initialization vector which shall be used. If not set
+                    it will be a random vector.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>salt</emphasis>: If the key should be used as salt value. The key used for
+                    encryption will then itself also be encrypted. Default is false.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            If you give a string instead of an array, this string will be used as key.
+        </para>
+
+        <para>
+            You can get/set the encryption values also afterwards with the <code>getEncryption()</code>
+            and <code>setEncryption()</code> methods.
+        </para>
+
+        <note>
+            <para>
+                Note that you will get an exception if the mcrypt extension is not available in your environment.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                You should also note that all settings which be checked when you create the instance or when
+                you call setEncryption(). If mcrypt detects problem with your settings an exception will be
+                thrown.
+            </para>
+        </note>
+
+        <para>
+            You can get/set the encryption vector by calling <code>getVector()</code> and <code>setVector()</code>.
+            A given string will be truncated or padded to the needed vector size of the used algorithm.
+        </para>
+
+        <note>
+            <para>
+                Note that when you are not using an own vector, you must get the vector and store it. Otherwise
+                you will not be able to decode the encoded string.
+            </para>
+        </note>
+
+        <programlisting role="php"><![CDATA[
+// Use the default blowfish settings
+$filter = new Zend_Filter_Encrypt('myencryptionkey');
+
+// Set a own vector, otherwise you must call getVector()
+// and store this vector for later decryption
+$filter->setVector('myvector');
+// $filter->getVector();
+
+$encrypted = $filter->filter('text_to_be_encoded');
+print $encrypted;
+
+// For decryption look at the Decrypt filter
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.filter.set.encrypt.openssl">
+        <title>Encryption with OpenSSL</title>
+        <para>
+            When you have installed the <code>OpenSSL</code> extension you can use the
+            <code>OpenSSL</code> adapter. This adapter supports the following options at initiation:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>public</emphasis>: The public key of the user whom you want to provide the
+                    encrpted content. You can give multiple public keys by using an array. You can eigther
+                    provide the path and filename of the key file, or just the content of the key file
+                    itself.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>private</emphasis>: Your private key which will be used for encrypting the
+                    content. Also the private key can be eighter a filename with path of the key file, or
+                    just the content of the key file itself.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            You can get/set the public keys also afterwards with the <code>getPublicKey()</code>
+            and <code>setPublicKey()</code> methods. The private key can also be get and set with the related
+            <code>getPrivateKey()</code> and <code>setPrivateKey()</code> methods.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Use openssl and provide a private key
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// of course you can also give the public keys at initiation
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+]]></programlisting>
+
+        <note>
+            <para>
+                Note that the <code>OpenSSL</code> adapter will not work when you do not provide valid keys.
+            </para>
+        </note>
+
+        <para>
+            When you want to encode also the keys, then you have to provide a passphrase with the
+            <code>setPassphrase()</code> method. When you want to decode content which was encoded with
+            a passphrase you will not only need the public key, but also the passphrase to decode the
+            encrypted key.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Use openssl and provide a private key
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// of course you can also give the public keys at initiation
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+]]></programlisting>
+
+        <para>
+            At last, when you use OpenSSL you need to give the receiver the encrypted content, the passphrase
+            when have provided one, and the envelope keys for decryption.
+        </para>
+
+        <para>
+            This means for you, that you have to get the envelope keys after the encryption with the
+            <code>getEnvelopeKey()</code> method.
+        </para>
+
+        <para>
+            So our complete example for encrypting content with <code>OpenSSL</code> look like this.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Use openssl and provide a private key
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// of course you can also give the public keys at initiation
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+
+$encrypted = $filter->filter('text_to_be_encoded');
+$envelope  = $filter->getEnvelopeKey();
+print $encrypted;
+
+// For decryption look at the Decrypt filter
+]]></programlisting>
+    </sect3>
+</sect2>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

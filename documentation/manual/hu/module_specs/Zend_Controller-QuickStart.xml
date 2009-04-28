@@ -1,0 +1,280 @@
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller gyorstalpaló</title>
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>Bevezetés</title>
+        <para>
+            A
+            <code>Zend_Controller</code>
+            a Zend Framework MNV rendszerének lelke. Az MNV, azaz
+            <ulink url="http://hu.wikipedia.org/wiki/Modell-nézet-vezérlő">Modell-Nézet-Vezérlő</ulink>
+            (Model-View-Controller, MVC), egy tervezési minta, melynek célja az alkalmazási logika elválasztása a megjelenítési logikától. A
+            <code>Zend_Controller_Front</code>
+            egy
+            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Elülső Vezérlő</ulink>
+            (Front Controller) mintát valósít meg, melyben az elülső vezérlő minden kérést elfog, és a kért URL alapján kézbesít az önálló Műveletvezérlőknek (Action Controllers).
+        </para>
+        <para>
+            A
+            <code>Zend_Controller</code>
+            rendszer építésekor mindvégig szem elött tartottuk a kiterjeszthetőséget, történjék az a meglévő osztályok származtatásával, olyan új osztályok írásával, melyek megvalósítják az osztályok vezérlő családjának alapját képező különféle felületeket és elvont osztályokat, vagy bővítmények, illetve művelet segédek írásával, növelendő vagy befolyásolandó a rendszer funkcionalitását.
+        </para>
+    </sect2>
+    <sect2 id="zend.controller.quickstart.go">
+        <title>Gyorstalpaló</title>
+        <para>
+            Ha bővebb információra van szükséged, lásd a következő fejezeteket. Ha csak gyorsan meg akarsz lenni és indulni, olvass tovább.
+        </para>
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>Az állományaid elrendezése</title>
+            <para>
+                Az első lépés, hogy elrendezd az állományaid. A jellemző elrendezés a következő:
+            </para>
+            <programlisting role="php">
+                <![CDATA[application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php]]>
+            </programlisting>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>A gyökérkönyvtárad beállítása</title>
+            <para>
+                A webkiszolgálódban állítsd a gyökérkönyvtárad a fenti elrendezés
+                <code>html/</code>
+                könyvtárára.
+            </para>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>Készítsd el az átírási szabályaid</title>
+            <para>
+                Szerkeszd a fenti <code>html/.htaccess</code> állományt, hogy a következőképpen fessen:
+            </para>
+            <programlisting role="php">
+                <![CDATA[RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php]]>
+            </programlisting>
+            <para>
+                A fenti szabályok minden nem-erőforrás (képek, stíluslapok) kérést az elülső vezérlőhöz fog irányítani. Ha vannak más kiterjesztések, amiket el akarsz zárni az elülső vezérlőtől (PDF-ek, szöveges állományok stb.), add a kiterjesztésüket a választóhoz, vagy készítsd el a saját átírási szabályaidat.
+            </para>
+            <note>
+                <para>
+                    A fenti átírási szabályok Apache-ra vonatkoznak; más webkiszolgálókra vonatkozó átírási szabályokra az
+                    <link linkend="zend.controller.router.introduction">útválasztó leírásában</link>
+                    találsz példát.
+                </para>
+            </note>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>Készítsd el a rendszertöltő állományod</title>
+            <para>
+                A rendszertöltő állomány az az oldal, amin az összes kérés át van vezetve – a
+                <code>html/index.php</code>,
+                ebben az esetben. Nyisd meg a
+                <code>html/index.php</code>
+                -t az általad választott szerkesztőben, és add hozzá a következőt:
+            </para>
+            <programlisting role="php">
+                <![CDATA[<?php
+require_once 'Zend/Controller/Front.php';
+Zend_Controller_Front::run('/eléresi/út/a/vezérlőkhöz');]]>
+            </programlisting>
+            <para>
+                Ez példányosítani fogja az elülső vezérlőt, ami majd elirányítja a kéréseket a műveletvezérlőkhöz.
+            </para>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>Készítsd el az alapértelmezett műveletvezérlőd</title>
+            <para>
+                Mielőtt a műveletvezérlőket tárgyalnánk, először meg kell értened, hogyan vannak a kérések irányítva a Zend Frameworkben. Alapból egy URL elérési út első része egy vezérlőre, a második pedig egy műveletre van leképezve. Például a
+                <code>http://framework.zend.com/roadmap/components</code>
+                URL esetén az elérési út a
+                <code>/roadmap/components</code>,
+                ami a
+                <code>roadmap</code>
+                vezérlőre és a
+                <code>components</code>
+                műveletre lesz leképezve. Ha nincs művelet megadva, az
+                <code>index</code>
+                művelet lesz feltételezve, ha nincs vezérlő megadva, akkor pedig az
+                <code>index</code>
+                vezérlő (követve az Apache egyezményt, ami egy
+                <code>DirectoryIndexre</code>
+                mutat automatikusan).
+            </para>
+            <para>
+                Ezután a
+                <code>Zend_Controller</code>
+                kézbesítője veszi a vezérlő nevet és egy leképezi egy osztályra. Alapból nagykezdőbetűzi a vezérlő nevét és hozzáfűzi a
+                <code>Controller</code>
+                szót. Ilymódon, a fenti példánkban a
+                <code>roadmap</code>
+                vezérlő a
+                <code>RoadmapController</code>
+                osztályra lesz leképezve.
+            </para>
+            <para>
+                Hasonlóan, a művelet név a vezérlő osztály egy tagfüggvényére lesz leképezve. Alapból a név kisbetűs, és az
+                <code>Action</code>
+                szó van hozzáfűzve. Tehát, a fenti példánkban a
+                <code>components</code>
+                műveletből
+                <code>componentsAction</code>
+                lesz, és végül a tagfüggvény neve
+                <code>RoadmapController::componentsAction()</code>.
+            </para>
+            <para>
+                Továbblépve tehát, csináljunk egy alapértelmezett műveletvezérlőt és művelet tagfüggvényt. Ahogy azt korábban megjegyeztük, az alapértelmezett vezérlő és művelet neve is
+                <code>index</code>.
+                Nyisd meg az
+                <code>application/controllers/IndexController.php</code>
+                állományt, és írd a következőt:
+            </para>
+            <programlisting role="php">
+                <![CDATA[<?php
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}]]>
+            </programlisting>
+            <para>
+                Alapból a
+                <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                műveletsegéd engedélyezve van. Ez azt jelenti, hogy egyszerűen megadva egy művelet tagfüggvényt és egy vonatkozó nézet szkriptet, a tartalmad azonnal megjelenik. Alapból a
+                <code>Zend_View</code>
+                lesz az MNV Nézet rétegeként használva. A
+                <code>ViewRenderer</code>
+                varázsol kicsit, és a vezérlő (pl.
+                <code>index</code>)
+                 és az aktuális művelet (pl.
+                <code>index</code>)
+                nevét használja, hogy megállípítsa melyik sablont szolgálja ki. Alapbeállítás szerint a sablonok a
+                <code>.phtml</code>
+                kiterjesztésre végződnek, tehát ezek szerint a fenti példában az
+                <code>index/index.phtml</code>
+                sablon lesz megjelenítve. Ezenfelül a
+                <code>ViewRenderer</code>
+                magától feltételezi, hogy a vezérlő könyvtárral egy szinten lévő
+                <code>views</code>
+                könyvtár lesz az alap nézet könyvtár, és hogy a nézet szkriptek a
+                <code>views/scripts</code>
+                alkönyvtárban helyezkednek el. Ebből következően a megjelenített sablon az
+                <code>application/views/scripts/index/index.phtml</code>.
+            </para>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>Készítsd el a nézet szkripted</title>
+            <para>
+                Ahogy azt az
+                <link linkend="zend.controller.quickstart.go.controller">előző részben</link>
+                említettük, a nézet szkripteket az
+                <code>application/views/scripts/</code>-ben
+                találjuk; a nézet szkript az alapbeállítású vezérlőhöz és művelethez az
+                <code>application/views/scripts/index/index.phtml</code>.
+                Hozd létre ezt az állományt és írj bele némi HTML-t:
+            </para>
+            <programlisting role="php"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+    lang="hu"
+    xml:lang="hu"
+    xmlns="http://www.w3.org/1999/xhtml"
+</html>
+    <head>
+        <meta
+            content="text/html; charset=utf-8"
+            http-equiv="Content-Type"
+        />
+        <title>Első Zend Framework alkalmazásom</title>
+    </head>
+    <body>
+        <h1>Helló, világ!</h1>
+    </body>
+</html>]]>
+            </programlisting>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>Készítsd el a hibakezelő vezérlőd</title>
+            <para>
+                Alapbeállítás szerint a
+                <link linkend="zend.controller.plugins.standard.errorhandler">hibakezelő bővítmény</link>
+                be van jegyezve. Ez az bővítmény azt várja, hogy létezik egy vezérlő, ami kezeli a hibákat. Feltételez egy
+                <code>ErrorControllert</code>
+                az alapértelmezett modulban, egy
+                <code>errorAction()</code>
+                tagfüggvénnyel:
+            </para>
+            <programlisting role="php">
+                <![CDATA[<?php
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}]]>
+            </programlisting>
+            <para>
+                Feltételezve a már tárgyalt könyvtárelrendezést, ez az állomány az
+                <code>application/controllers/ErrorController.php</code>
+                helyre kerül. Szükséged lesz egy nézet szkriptre is az
+                <code>application/views/scripts/error/error.phtml</code>-ben;
+                a tartalomra egy lehetséges példa:
+            </para>
+            <programlisting role="php"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+    lang="hu"
+    xml:lang="hu"
+    xmlns="http://www.w3.org/1999/xhtml"
+</html>
+    <head>
+        <meta
+            content="text/html; charset=utf-8"
+            http-equiv="Content-Type"
+        />
+        <title>Hiba</title>
+    </head>
+    <body>
+        <h1>Hiba merült fel/h1>
+        <p>Hiba merült fel; kérjük próbáld újra később.</p>
+    </body>
+</html>]]>
+            </programlisting>
+        </sect3>
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>Nézd meg az oldalt!</title>
+            <para>
+                Első vezérlőddel és nézeteddel felszerelkezve most beizzíthatod a böngésződ és az oldalra navigálhatsz. Feltételezve, hogy a tartományneved
+                <code>valami.hu</code>,
+                a következő URL-ek bármelyike behozza a most elkészült oldalt:
+            </para>
+            <itemizedlist>
+                <listitem><para><code>http://valami.hu/</code></para></listitem>
+                <listitem><para><code>http://valami.hu/index</code></para></listitem>
+                <listitem><para><code>http://valami.hu/index/index</code></para></listitem>
+            </itemizedlist>
+            <para>
+                Mostmár nekiláthatsz új vezérlők és műveletek készítésének. Gratulálunk!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

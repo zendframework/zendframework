@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>標準のフィルタクラス群</title>
+
+    <para>
+        Zend Framework には、すぐに使える標準のフィルタ群が同梱されています。
+    </para>
+
+    <sect2 id="zend.filter.set.alnum">
+        <title>Alnum</title>
+        <para>
+            文字列 <code>$value</code>
+            から、アルファベットおよび数字以外を取り除いたものを返します。
+            このフィルタでは、オプションとして空白文字を認めることもできます。
+        </para>
+
+        <note>
+            <para>
+             アルファベットとは各言語で単語を構成する文字を意味します。
+             ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
+             言語はZend_Localeで指定されます。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.filter.set.alpha">
+        <title>Alpha</title>
+        <para>
+            文字列 <code>$value</code>
+            から、アルファベット以外を取り除いたものを返します。
+            このフィルタでは、オプションとして空白文字を認めることもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.basename">
+        <title>BaseName</title>
+        <para>
+            ファイルへのパスを含む文字列を受け取り、
+            ファイルのベース名の部分のみを返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Callback.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Callback.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Filter-Decryption.xml" />
+
+    <sect2 id="zend.filter.set.digits">
+        <title>Digits</title>
+        <para>
+            文字列 <code>$value</code>
+            から、数字以外を取り除いたものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.dir">
+        <title>Dir</title>
+        <para>
+            パス文字列からディレクトリ名を返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Encryption.xml" />
+
+    <sect2 id="zend.filter.set.htmlentities">
+        <title>HtmlEntities</title>
+        <para>
+            文字列 <code>$value</code> について、
+            HTML エンティティが存在するものについてはそのエンティティに変換したものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.int">
+        <title>Int</title>
+        <para>
+            (int) <code>$value</code> を返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-LocalizedToNormalized.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-LocalizedToNormalized.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Filter-NormalizedToLocalized.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-NormalizedToLocalized.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>StripNewlines</title>
+        <para>
+            文字列 <code>$value</code> から一切の改行制御文字を取り除いたものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.realpath">
+        <title>RealPath</title>
+        <para>
+            入力されたパスのすべてのシンボリックリンクを展開し、'/./'、'/../'
+            や余分な '/' の参照を解決して正規化された絶対パスを返します。
+            この結果、パスにはシンボリックリンクや
+            '/./' あるいは '/../' が含まれなくなります。
+        </para>
+        <para>
+            <classname>Zend_Filter_RealPath</classname> は、
+            ファイルが存在しないなどで失敗した場合に <code>FALSE</code> を返します。
+            BSD システムでは、パスの最後の部分だけが存在しない場合には
+            <classname>Zend_Filter_RealPath</classname> は失敗しません。しかし他のシステムではこのような場合も
+            <code>FALSE</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtolower">
+        <title>StringToLower</title>
+        <para>
+            文字列 <code>$value</code>
+            の英字を小文字に変換したものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtoupper">
+        <title>StringToUpper</title>
+        <para>
+            文字列 <code>$value</code>
+            の英字を大文字に変換したものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtrim">
+        <title>StringTrim</title>
+        <para>
+            文字列 <code>$value</code>
+            の先頭と末尾から文字を取り除いたものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.striptags">
+        <title>StripTags</title>
+        <para>
+            入力文字列からすべての HTML タグおよび PHP タグを取り除いた結果を返します。
+            ただし明示的に許可したタグは取り除きません。
+            どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
+            特定のタグだけで許可する属性は何かなども指定できます。
+            また、コメント (<code>&lt;!-- ... --&gt;</code>)
+            を除去するかそのまま残すかも指定できます。
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

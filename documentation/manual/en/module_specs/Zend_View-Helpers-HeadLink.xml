@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.headlink">
+    <title>HeadLink Helper</title>
+
+    <para>
+        The HTML <code>&lt;link&gt;</code> element is increasingly used for
+        linking a variety of resources for your site: stylesheets, feeds,
+        favicons, trackbacks, and more. The <code>HeadLink</code> helper
+        provides a simple interface for creating and aggregating these elements
+        for later retrieval and output in your layout script.
+    </para>
+
+    <para>
+        The <code>HeadLink</code> helper has special methods for adding
+        stylesheet links to its stack:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>prependStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>setStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        The <code>$media</code> value defaults to 'screen', but may be any valid
+        media value. <code>$conditionalStylesheet</code> is a string or boolean false,
+        and will be used at rendering time to determine if special comments should be
+        included to prevent loading of the stylesheet on certain platforms.
+        <code>$extras</code> is an array of any extra values that you want to be added
+        to the tag.
+    </para>
+
+    <para>
+        Additionally, the <code>HeadLink</code> helper has special methods for
+        adding 'alternate' links to its stack:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>offsetSetAlternate($index, $href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>prependAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>setAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        The <code>headLink()</code> helper method allows specifying all
+        attributes necessary for a <code>&lt;link&gt;</code> element, and allows
+        you to also specify placement -- whether the new element replaces all
+        others, prepends (top of stack), or appends (end of stack).
+    </para>
+
+    <para>
+        The <code>HeadLink</code> helper is a concrete implementation of the
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+            helper</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headlink.basicusage">
+        <title>HeadLink Helper Basic Usage</title>
+
+        <para>
+            You may specify a <code>headLink</code> at any time. Typically, you
+            will specify global links in your layout script, and application
+            specific links in your application view scripts. In your layout
+            script, in the &lt;head&gt; section, you will then echo the helper
+            to output it.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // setting links in a view script:
+$this->headLink()->appendStylesheet('/styles/basic.css')
+                 ->headLink(array('rel' => 'favicon',
+                                  'href' => '/img/favicon.ico'),
+                                  'PREPEND')
+                 ->prependStylesheet('/styles/moz.css',
+                                     'screen',
+                                     true,
+                                     array('id' => 'my_stylesheet'));
+?>
+<?php // rendering the links: ?>
+<?php echo $this->headLink() ?>
+]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

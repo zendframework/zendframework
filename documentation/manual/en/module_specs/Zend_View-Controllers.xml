@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.view.controllers">
+    <title>Controller Scripts</title>
+
+    <para>
+        The controller is where you instantiate and configure <classname>Zend_View</classname>.
+        You then assign variables to the view, and tell the view to
+        render output using a particular script.
+    </para>
+
+    <sect2 id="zend.view.controllers.assign">
+
+        <title>Assigning Variables</title>
+
+        <para>
+            Your controller script should assign necessary variables to the view
+            before it hands over control to the view script. Normally, you
+            can do assignments one at a time by assigning to property names
+            of the view instance:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->a = "Hay";
+$view->b = "Bee";
+$view->c = "Sea";
+]]></programlisting>
+
+        <para>
+            However, this can be tedious when you have already collected the
+            values to be assigned into an array or object.
+        </para>
+
+        <para>
+            The assign() method lets you assign from an array or object "in
+            bulk."  The following examples have the same effect as the above
+            one-by-one property assignments.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+
+// assign an array of key-value pairs, where the
+// key is the variable name, and the value is
+// the assigned value.
+$array = array(
+    'a' => "Hay",
+    'b' => "Bee",
+    'c' => "Sea",
+);
+$view->assign($array);
+
+// do the same with an object's public properties;
+// note how we cast it to an array when assigning.
+$obj = new StdClass;
+$obj->a = "Hay";
+$obj->b = "Bee";
+$obj->c = "Sea";
+$view->assign((array) $obj);
+]]></programlisting>
+
+        <para>
+            Alternatively, you can use the assign method to assign
+            one-by-one by passing a string variable name, and then the
+            variable value.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->assign('a', "Hay");
+$view->assign('b', "Bee");
+$view->assign('c', "Sea");
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.controllers.render">
+
+        <title>Rendering a View Script</title>
+
+        <para>
+            Once you have assigned all needed variables, the controller
+            should tell <classname>Zend_View</classname> to render a particular view script.
+            Do so by calling the render() method. Note that the method will
+            return the rendered view, not print it, so you need to print or
+            echo it yourself at the appropriate time.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->a = "Hay";
+$view->b = "Bee";
+$view->c = "Sea";
+echo $view->render('someView.php');
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.controllers.script-paths">
+
+        <title>View Script Paths</title>
+
+        <para>
+            By default, <classname>Zend_View</classname> expects your view scripts to be relative to
+            your calling script. For example, if your controller script is at
+            "/path/to/app/controllers" and it calls
+            $view->render('someView.php'), <classname>Zend_View</classname> will look for
+            "/path/to/app/controllers/someView.php".
+        </para>
+
+        <para>
+            Obviously, your view scripts are probably located elsewhere. To
+            tell <classname>Zend_View</classname> where it should look for view scripts, use the
+            setScriptPath() method.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->setScriptPath('/path/to/app/views');
+]]></programlisting>
+
+        <para>
+            Now when you call $view->render('someView.php'), it will look
+            for "/path/to/app/views/someView.php".
+        </para>
+
+        <para>
+            In fact, you can "stack" paths using the addScriptPath()
+            method. As you add paths to the stack, <classname>Zend_View</classname> will look
+            at the most-recently-added path for the requested view
+            script. This allows you override default views with custom
+            views so that you may create custom "themes" or "skins" for
+            some views, while leaving others alone.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+$view->addScriptPath('/path/to/app/views');
+$view->addScriptPath('/path/to/custom/');
+
+// now when you call $view->render('booklist.php'), Zend_View will
+// look first for "/path/to/custom/booklist.php", then for
+// "/path/to/app/views/booklist.php", and finally in the current
+// directory for "booklist.php".
+]]></programlisting>
+
+        <note>
+            <title>Never use user input to set script paths</title>
+
+            <para>
+                <classname>Zend_View</classname> uses script paths to lookup and render
+                view scripts. As such, these directories should be known
+                before-hand, and under your control. <emphasis>Never</emphasis>
+                set view script paths based on user input, as you can
+                potentially open yourself up to Local File Inclusion
+                vulnerability if the specified path includes parent directory
+                traversals. For example, the following input could trigger the
+                issue:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// $_GET['foo'] == '../../../etc'
+$view->addScriptPath($_GET['foo']);
+$view->render('passwd');
+]]></programlisting>
+
+            <para>
+                While this example is contrived, it does clearly show the
+                potential issue. If you <emphasis>must</emphasis> rely on user
+                input to set your script path, properly filter the input and
+                check to ensure it exists under paths controlled by your
+                application.
+            </para>
+        </note>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

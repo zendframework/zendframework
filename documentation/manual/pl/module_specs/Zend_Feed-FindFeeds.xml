@@ -1,0 +1,21 @@
+<sect1 id="zend.feed.findFeeds">
+    <title>Odbieranie kanałów informacyjnych ze stron internetowych</title>
+    <para>
+        Strony internetowe często zawierają tagi <code>&lt;link&gt;</code>, które
+        odwołują się do kanałów informacyjnych odpowiadających danej stronie.
+        <code>Zend_Feed</code> pozwala odebrać wszystkie kanały informacyjne
+        do których odwołuje się dana strona za pomocą wywołania prostej metody:
+    </para>
+    <programlisting role="php"><![CDATA[
+$feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
+]]>
+    </programlisting>
+    <para>
+        Tutaj metoda <code>findFeeds()</code> zwraca tablicę obiektów <code>Zend_Feed_Abstract</code>
+        do których na stronie news.html są odniesienia w postaci <code>&lt;link&gt;</code>. Zależenie
+        od typu każdego z kanałów, każdy z wpisów w tablicy <code>$feedArray</code> może być
+        instancją obiektu <code>Zend_Feed_Rss</code> lub <code>Zend_Feed_Atom</code>. <code>Zend_Feed</code> wyrzucu
+        wyjątek <code>Zend_Feed_Exception</code> w razie niepowodzenia, na przykład gdy otrzyma
+        w odpowiedzi kod HTTP 404 lub gdy dane kanału będą nieprawidłowe.
+    </para>
+</sect1>

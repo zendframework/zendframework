@@ -1,0 +1,33 @@
+<sect1 id="zend.version.reading">
+
+    <title>Získání informací o verzi Zend Frameworku</title>
+
+    <para>
+        Hodnotou konstanty <code>Zend_Version::VERSION</code> je
+        řetězec označující aktuální číslo verze, např. "0.9.0beta".
+    </para>
+
+    <para>
+        Statická metoda <code>Zend_Version::compareVersion($version)</code>
+        pracuje s funkcí
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Tato metoda vrací -1 v případě, že parametr <code>$version</code> udává starší
+        verzi, než je aktuální verze Zend Frameworku, 0 pokud je verze stejná
+        a +1 v případě, že parametr <code>$version</code> označuje novější verzi
+        Zend Frameworku.
+    </para>
+
+   <example id="zend.version.reading.example">
+        <title>Příklad využití metody compareVersion()</title>
+        <programlisting role="php"><![CDATA[<?php
+
+// vrací -1, 0, nebo 1
+$cmp = Zend_Version::compareVersion('1.0.0');
+
+?>]]></programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

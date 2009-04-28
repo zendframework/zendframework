@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.service.twitter.search">
+    <title>Zend_Service_Twitter_Search</title>
+
+    <sect3 id="zend.service.twitter.search.introduction">
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Service_Twitter_Search</classname> provides a client for the <ulink
+                url="http://apiwiki.twitter.com/Search+API+Documentation">Twitter Search API</ulink>.
+            The Twitter Search service is use to search Twitter. Currently it only
+            returns data in Atom or JSON format but a full REST service is in the future
+            which will support XML responses.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.service.twitter.search.trends">
+        <title>Twitter Trends</title>
+
+        <para>
+            Returns the top ten queries that are currently trending on Twitter.
+            The response includes the time of the request, the name of each trending topic,
+            and the url to the Twitter Search results page for that topic.
+            Currently the search API for trends only supports a JSON return so the function returns
+            an array.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$twitter_search = new Zend_Service_Twitter_Search();
+$twitter_trends = $twitter_search->trends();
+
+foreach($twitter_trends as $trend) {
+    print $trend['name'] . ' - ' . $trend['url'] . PHP_EOL
+}
+]]></programlisting>
+
+        <para>
+            The return array has two values in it:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>name</code>, the name of trend.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>url</code>, the url to see the tweets
+                    for that trend.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.service.twitter.search.search">
+        <title>Searching Twitter</title>
+
+        <para>
+            Using the search method returns tweets that match a specific query.
+            There are a number of <ulink
+                url="http://search.twitter.com/operators">Search Operators</ulink> that you
+            can use to query with.
+        </para>
+
+        <para>
+            The search method can accept six different optional URL parameters passed in as an array:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>lang</code>, restricts the tweets to a given language, lang must
+                    be given by an <ulink url="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1 code</ulink>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>rpp</code>, the number of tweets to return per page,
+                    up to a max of 100.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>page</code>, the page number to return, up to a max of
+                    roughly 1500 results (based on rpp * page)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>since_id</code>, returns tweets with status ids
+                    greater than the given id.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>show_user</code>, when "true", adds "&gt;user&lt;:"
+                    to the beginning of the tweet. This is useful for readers
+                    that do not display Atom's author field. The default is "false"
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>geocode</code>, returns tweets by users located within a given radius of the given
+                    latitude/longitude, where the user's location is taken from their Twitter profile. The
+                    parameter value is specified by "latitude,longitude,radius", where radius units must
+                    be specified as either "mi" (miles) or "km" (kilometers).
+                </para>
+            </listitem>
+        </itemizedlist>
+        <example id="zend.service.twitter.search.search.json">
+            <title>JSON Search Example</title>
+            <para>
+                The following code sample will return an array with the values search results
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$twitter_search = new Zend_Service_Twitter_Search('json');
+$search_results = $twitter_search->search('zend', array('lang' => 'en'));
+]]></programlisting>
+        </example>
+
+        <example id="zend.service.twitter.search.search.atom">
+            <title>ATOM Search Example</title>
+            <para>
+                The following code sample will return a <classname>Zend_Feed_Atom</classname> object.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$twitter_search = new Zend_Service_Twitter_Search('atom');
+$search_results = $twitter_search->search('zend', array('lang' => 'en'));
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.service.twitter.search.accessors">
+        <title>Zend-specific Accessor Methods</title>
+
+        <para>
+            While the Twitter Search API only specifies two methods,
+            <classname>Zend_Service_Twitter_Search</classname> has additional accessors
+            that may be used for modifying internal properties.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getResponseType()</code> and <code>setResponseType()</code>
+                    allow you to retrieve and modify the response type of the search
+                    between JSON and ATOM.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

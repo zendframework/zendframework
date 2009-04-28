@@ -1,0 +1,12 @@
+<sect1 id="zend.server.introduction">
+    <title> 简介 </title>
+    <para>
+        <code>Zend_Server</code> 类家族为各种各样的服务器类提供功能，包括 <code>Zend_XmlRpc_Server</code>、 <code>Zend_Rest_Server</code>、<code>Zend_Json_Server</code> 和 <code>Zend_Soap_Wsdl</code>。<code>Zend_Server_Interface</code> 提供了一个模仿 PHP 5 的 <code>SoapServer</code> 类的接口；为了提供标准的服务器 API，所有的服务器类应该实现这个接口。
+    </para>
+    <para>
+        <code>Zend_Server_Reflection</code> 树提供了一个标准机制，在这个机制下，执行函数和类子定义（ introspection )被用做和服务器类一起的回调（callback）；也提供了适合与 <code>Zend_Server_Interface</code> 的 <code>getFunctions()</code> 和 <code>loadFunctions()</code> 方法一起使用的数据。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

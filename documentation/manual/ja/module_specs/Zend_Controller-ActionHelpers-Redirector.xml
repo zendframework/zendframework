@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.actionhelpers.redirector">
+    <title>Redirector</title>
+
+    <sect4 id="zend.controller.actionhelper.redirector.introduction">
+        <title>導入</title>
+
+        <para>
+            <code>Redirector</code> ヘルパーは、
+            アプリケーション内で必要となるリダイレクト処理用のオブジェクトとして使用します。
+            <code>_redirect()</code> メソッドと比べた場合の利点としては、
+            サイト全体で使用する設定を事前に組み込んでおけることがあります。また、
+            <classname>Zend_Controller_Action::_forward()</classname>
+            の場合と同様に、組み込みのインターフェイス
+            <code>gotoSimple($action, $controller, $module, $params)</code>
+            が使用できることも利点となります。
+        </para>
+
+        <para>
+            <code>Redirector</code> では、
+            リダイレクトの設定を行うメソッドとして次のようなものが用意されています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setCode()</code> を使用して、
+                    リダイレクトの際に使用する HTTP レスポンスコードを設定します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setExit()</code> を使用して、
+                    リダイレクトの後で強制的に <code>exit()</code> を実行させるようにします。
+                    デフォルトは true です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoSimple()</code> を使用して、<code>gotoSimple()</code>
+                    に何も渡されなかったときのデフォルトの URL を設定します。
+                    <classname>Zend_Controller_Action::_forward()</classname> の API である
+                    setGotoSimple($action, $controller = null, $module = null, array
+                    $params = array()); を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoRoute()</code> を使用して、
+                    登録済みのルートにもとづいた URL を設定します。
+                    キー/値 のペアの配列とルート名を渡し、
+                    それをもとにルートの型と定義から URL を作成します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoUrl()</code> を使用して、<code>gotoUrl()</code>
+                    に何も渡されなかったときのデフォルトの URL を設定します。
+                    URL を表す文字列を受け取ります。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setPrependBase()</code> を使用して、
+                    <code>setGotoUrl()</code>、<code>gotoUrl()</code>
+                    あるいは <code>gotoUrlAndExit()</code>
+                    で指定した URL の前にリクエストのベース URL を追加します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setUseAbsoluteUri()</code> を使用すると、
+                    <code>Redirector</code> がリダイレクトの際に絶対
+                    URL を使用するようになります。
+                    このオプションを設定すると、
+                    <code>$_SERVER['HTTP_HOST']</code> や
+                    <code>$_SERVER['SERVER_PORT']</code>、そして
+                    <code>$_SERVER['HTTPS']</code> の内容をもとにして
+                    リダイレクト用の完全な URL を作成します。
+                    このオプションのデフォルト値はオフですが、
+                    将来のリリースではデフォルトで有効になるかもしれません。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            さらに、実際のリダイレクトを行うためのメソッドとして以下のものが用意されています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>gotoSimple()</code> は、<code>setGotoSimple()</code>
+                    (<code>_forward() 風の API</code>) を用いて作成した URL
+                    にリダイレクトします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoRoute()</code> は、<code>setGotoRoute()</code>
+                    (<code>ルートの作成</code>) を用いて作成した URL
+                    にリダイレクトします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoUrl()</code> は <code>setGotoUrl()</code>
+                    (<code>URL 文字列の指定</code>) を用いて作成した URL
+                    にリダイレクトします。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            リダイレクト先の URL を知るには
+            <code>getRedirectUrl()</code> を使用します。
+            これはいつでも使用できます。
+        </para>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
+        <title>基本的な使用例</title>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
+            <title>オプションの設定</title>
+
+            <para>
+                この例ではデフォルトのオプションを少し変更します。
+                HTTP ステータスコードを 303 にし、リダイレクト後に
+                exit() しないようにして、そしてリダイレクトの際のデフォルト
+                URL を指定しています。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+
+        // リダイレクタのデフォルトのオプションを設定します
+        // このオブジェクトはヘルパーブローカに登録されるので、
+        // これ以降のすべてのアクションで有効となります
+        $this->_redirector->setCode(303)
+                          ->setExit(false)
+                          ->setGotoSimple("this-action",
+                                          "some-controller");
+    }
+
+    public function myAction()
+    {
+        /* 何かを行います */
+
+        // 先ほど登録した URL にリダイレクトし、その後で
+        // exit() します
+        $this->_redirector->redirectAndExit();
+        return; // 決してここには到達しません
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
+            <title>デフォルト設定の使用</title>
+
+            <para>
+                この例ではデフォルト設定を使用しています。
+                つまり、リダイレクトするとすぐに
+                <code>exit()</code> が実行されるということです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// 別の例
+class AlternativeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* 何かを行います */
+
+        $this->_redirector
+            ->gotoUrl('/my-controller/my-action/param1/test/param2/test2');
+        return; // リダイレクト後に自動的に exit() されるので、決してここには到達しません
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
+            <title>goto() での _forward() API の使用</title>
+
+            <para>
+                <code>gotoSimple()</code> の API は、
+                <classname>Zend_Controller_Action::_forward()</classname>
+                と同じ形式です。違う点は、このメソッドは渡されたパラメータから URL
+                を作成し、デフォルトルータのデフォルトフォーマットである
+                <code>:module/:controller/:action/*</code> を使用するということです。
+                また、アクションチェインではなくリダイレクトを行います。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ForwardController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* 何かを行います */
+
+        // 現在のモジュールの 'my-controller' コントローラの
+        // 'my-action' アクションにリダイレクトします。
+        // パラメータは param1 => test、param2 => test2 となります。
+        $this->_redirector->gotoSimple('my-action',
+                                       'my-controller',
+                                       null,
+                                       array('param1' => 'test',
+                                             'param2' => 'test2'
+                                             )
+                                       );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
+            <title>gotoRoute() でのルートアセンブリの使用</title>
+
+            <para>
+                次の例は、<link
+                    linkend="zend.controller.router">ルータ</link>
+                の <code>assemble()</code> メソッドを使用して、
+                パラメータで指定した連想配列に基づく URL を作成しています。
+                次のようなルートが登録されているものと仮定します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'blog/:year/:month/:day/:id',
+    array('controller' => 'archive',
+          'module' => 'blog',
+          'action' => 'view')
+);
+$router->addRoute('blogArchive', $route);
+]]>
+            </programlisting>
+
+            <para>
+                year を 2006、month を 4、day を 24、そして ID を 42
+                として配列を渡すと、結果の URL は
+                <code>/blog/2006/4/24/42</code> となります。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class BlogAdminController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function returnAction()
+    {
+        /* 何かを行います */
+
+        // blog の過去記事にリダイレクトします。URL は
+        // /blog/2006/4/24/42 になります。
+        $this->_redirector->gotoRoute(
+            array('year' => 2006,
+                  'month' => 4,
+                  'day' => 24,
+                  'id' => 42),
+            'blogArchive'
+        );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

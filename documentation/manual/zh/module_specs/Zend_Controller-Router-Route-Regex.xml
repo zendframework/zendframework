@@ -1,0 +1,217 @@
+<sect3 id="zend.controller.router.routes.regex">
+    <title>Zend_Controller_Router_Route_Regex</title>
+
+    <para>
+        除了缺省的和静态的路由类型外，正则表达式路由类型也可用。这个路由比其它路由更强更灵活，只是稍微有点复杂。同时，它应该比标准路由快。
+    </para>
+
+    <para>
+        象标准路由一样，这个路由必须用路由定义和一些缺省条件来初始化。让我们创建一个archive路由作为例子，和先前定义的类似，这次只是用了Regex：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array(
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        每个定义的regex子模式将被注入到请求对象里。同上述的例子，再成功匹配<code>http://domain.com/archive/2006</code>之后，结果值的数组看起来象这样：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    1            => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            在匹配之前，开头和结尾的斜杠从路由器里的URL中去除掉了。结果，匹配<code>http://domain.com/foo/bar/</code>，需要<code>foo/bar</code>这样的regex，而不是<code>/foo/bar</code>。
+        </para>
+    </note>
+
+    <note>
+        <para>
+            行开头和行结尾符号（分别为'^' 和 '$'）被自动预先追加到所有表达式。这样，你不需要在你的正则表达式里用它们，你应该匹配整个字符串。
+        </para>
+    </note>
+
+    <note>
+        <para>
+            这个路由类使用<code>#</code>符作为分隔符。这意味着你将需要避免哈希符（'#'）但不是正斜杠（'/'）在你的路由定义里。因为'#'符（名称为锚）很少被传给webserver，你将几乎不需要在你的regex里使用它。
+        </para>
+    </note>
+
+    <para>
+        你可以用通常的办法获得已定义的子模式的内容：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+public function showAction()
+{
+    $request = $this->getRequest();
+    $year    = $request->getParam(1); // $year = '2006';
+}
+]]>
+    </programlisting>
+
+    <note>
+        <para>注意这个键是整数(1) 而不是字符串('1')。</para>
+    </note>
+
+    <para>
+        因为'year'的缺省没有设置，这个路由将和它的标准路由副本不是非常精确地相同。即使我们为'year'声明一个缺省并使子模式可选，也不清楚是否会在拖尾斜杠(trailing slash)上还将有问题。方案是使整个'year'部分和斜杠一起可选但只抓取数字部分：（这段比较绕口，请校对者仔细看看，谢谢 Jason Qi）
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive(?:/(\d+))?',
+    array(
+        1            => '2006',
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        让我们看看你可能注意到的问题。 给参数使用基于整数的键不是容易管理的办法，今后可能会有问题。这就是为什么有第三个参数。这是个联合数组表示一个regex子模式到参数名键的映射。我们来看看一个简单的例子：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array(
+        'controller' => 'archive',
+        'action' => 'show'
+    ),
+    array(
+        1 => 'year'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        这将导致下面的值被注入到请求：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'year'       => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <para>
+        这个映射被任何目录来定义使它能工作于任何环境。键可以包含变量名或子模式索引：
+    </para>
+
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array(1 => 'year')
+);
+
+// OR
+
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array('year' => 1)
+);
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            子模式键必须用整数表示。
+        </para>
+    </note>
+
+    <para>
+        注意在请求值中的数字索引不见了，代替的是一个名字变量。当然如果你愿意可以把数字和名字变量混合使用：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)/page/(\d+)',
+    array( ... ),
+    array('year' => 1)
+);
+]]>
+    </programlisting>
+
+    <para>
+        这将导致在请求中有混合的值可用。例如：URL<code>http://domain.com/archive/2006/page/10</code>将在下列结果中：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'year'       => '2006',
+    2            => 10,
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <para>
+        因为regex模型不容易颠倒，如果你想用URL助手或这个类中的 assemble方法，你需要准备一个颠倒的URL。这个颠倒的路径用可由sprintf()解析的字符串来表示并定义为第四个构造参数：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array('year' => 1),
+    'archive/%s'
+);
+]]>
+    </programlisting>
+
+    <para>
+        所有这些都已经可能由标准路由对象完成，那么使用Regex路由的好处在哪里？首先，它允许你不受限制地描述任何类型的URL。想象一下你有一个博客并希望创建象<code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>这样的URLs，还有把解析它路径元素中的最后部分，<code>01-Using_the_Regex_Router.html</code>，到一个文章的ID和文章的标题/描述；这不可能由标准路由完成。用Regex路由，你可以做象下面的方案：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'blog/archive/(\d+)-(.+)\.html',
+    array(
+        'controller' => 'blog',
+        'action'     => 'view'
+    ),
+    array(
+        1 => 'id',
+        2 => 'description'
+    ),
+    'blog/archive/%d-%s.html'
+);
+$router->addRoute('blogArchive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        正如你所看到的，这个在标准路由上添加了巨大的灵活性。
+    </para>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

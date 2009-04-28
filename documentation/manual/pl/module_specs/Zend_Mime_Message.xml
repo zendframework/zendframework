@@ -1,0 +1,84 @@
+<sect1 id="zend.mime.message">
+    <title>Zend_Mime_Message</title>
+
+    <sect2 id="zend.mime.message.introduction">
+      <title>Wprowadzenie</title>
+
+      <para><code>Zend_Mime_Message</code> reprezetuje wiadomość zgodną z MIME,
+      która zawiera jedną lub więcej odrębnych części (Reprezentowanych przez obiekty
+      <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>). Klasa
+      <code>Zend_Mime_Message</code>, może wygenerować wieloczęściowe wiadomości
+      zgodne z MIME z obiektów <code>Zend_Mime_Part</code>. Kodowanie i obsługa
+      pól rozgraniczających są obsługiwane przez samą klasę. Obiekty <code>Zend_Mime_Message</code>
+      mogą być także zrekonstruowane z podanych łańcuchów znaków (eksperymentalne).
+      Klasa używana jest przez <link linkend="zend.mail"><code>Zend_Mail</code></link>.
+      </para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.instantiation">
+        <title>Tworzenie instancji</title>
+        <para>
+            <code>Zend_Mime_Message</code> nie posiada konstruktora.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.addparts">
+        <title>Dodawanie części MIME</title>
+
+        <para>Obiekty <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
+        mogą być dodane poprzez ich przekazanie do obiektu <code>Zend_Mime_Message</code>
+        za pomocą metody <code>-&gt;addPart($part)</code></para>
+
+        <para>Tablica z wszystkimi obiektami <link linkend="zend.mime.part">
+        <code>Zend_Mime_Part</code></link> z wiadomości <code>Zend_Mime_Message</code>
+        jest zwraca za pomocą metody <code>-&gt;getParts()</code>. Obiekty Zend_Mime_Part
+        mogą być wtedy zmienione ponieważ są one przechowywane w tablicy jako referencje.
+        Jeśli jakieś części są dodane do tablicy lub zmieniona jest ich kolejność,
+        konieczne jest przekazanie tablicy spowrotem do <link linkend="zend.mime.part">
+        <code>Zend_Mime_Part</code></link> poprzez wywolanie <code>-&gt;setParts($partsArray)</code>.</para>
+
+        <para>Funkcja <code>-&gt;isMultiPart()</code> zwróci wartość true jeśli
+        w obiekcie <code>Zend_Mime_Message</code> zarejestrowanych jest więcej
+        części niż jedna. Wtedy gdy obiekt będzie generował wyjściową wiadomość,
+        wygeneruje ją jako wieloczęściową wiadomość MIME.</para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.bondary">
+        <title>Obsługa pola rozgraniczającego (boundary)</title>
+
+        <para><code>Zend_Mime_Message</code> zazwyczaj tworzy obiekt <code>Zend_Mime</code>
+        i używa go do tworzenia pola rozgraniczającego. Jeśli chcesz zdefiniować
+        pole samodzielnie lub chcesz zmienić zachowanie obiektu <code>Zend_Mime</code>
+        używanego przez <code>Zend_Mime_Message</code>, możesz utworzyć instancję
+        obiektu <code>Zend_Mime</code> samodzielnie i potem zarejestrować ją do obiekcie
+        <code>Zend_Mime_Message</code>. Zazwyczaj jednak nie jest to potrzebne.
+        <code>-&gt;setMime(Zend_Mime $mime)</code> ustawia specjalną instancję
+        <code>Zend_Mime</code> która ma być używana przez obiekt <code>Zend_Mime_Message</code></para>
+
+        <para><code>-&gt;getMime()</code> zwraca instancję <code>Zend_Mime</code>
+        która będzie użyta do renderowania wiadomości przez wywołanie metody
+        <code>generateMessage()</code>.</para>
+
+        <para><code>-&gt;generateMessage()</code> renderuje wiadomość
+        <code>Zend_Mime_Message</code> do postaci łańcuchu znaków.</para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.parse">
+        <title>Tworzenie obiektu Zend_Mime_Message z łańcucha znaków.
+        (eksperymentalne)</title>
+
+        <para>Wiadomość zgodna z MIME zapisana w postaci łańcucha znaków może
+        być użyta do zrekonstruowania obiektu <code>Zend_Mime_Message</code>.
+        <code>Zend_Mime_Message</code> ma statyczną fabrykę przetwarzającą podany
+        łańcuch znaków i następnie zwracającą obiekt <code>Zend_Mime_Message</code>.
+        </para>
+
+        <para><code>Zend_Mime_Message::createFromMessage($str, $boundary)</code>
+        dekoduje podany łańcuch znaków i zwraca obiekt <code>Zend_Mime_Message</code>.
+        Jego poprawność może być następnie sprawdzona przez użycie metody
+        <code>-&gt;getParts()</code></para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,115 @@
+<sect1 id="zend.json.xml2json">
+    <title>Převod XML do JSON</title>
+    <para>
+        <code>Zend_Json</code> poskytuje metodu pro převod dat formátovaných
+        pomocí XML do JSON formátu. Tato vlastnost je inspirována
+        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+        článkem na IBM developerWorks</ulink>.
+    </para>
+
+    <para>
+        <code>Zend_Json</code> zahrnuje statickou metodu
+        <code>Zend_Json::fromXml()</code>. Tato funkce generuje JSON ze vstupu
+        ve formátu XML. Tato funkce přijímá jako vstupní parametr jakýkoliv XML
+        řetězec. Také přijímá druhý, volitelný parametr zda ignorovat XML
+        atributy během převodu. Pokud není tento volitelný parametr zadán,
+        defaultní chování je ignorování XML atributů. Volání této funkce je
+        naznačeno níže:
+    </para>
+    <programlisting role="php"><![CDATA[
+        // Funkce fromXml jednoduše přijme String obsahující XML data jak vstup.
+        $jsonContents = Zend_Json::fromXml($xmlStringContents, true);?>]]>
+    </programlisting>
+
+    <para>
+        Funkce <code>Zend_Json::fromXml()</code> provádí konverzi vstupního XML
+        řetězce a vrací odpovídající zápis ve formátu JSON. V případě chyby v
+        XML nebo chyby při převodu, tato funkce vyhazuje výjimku. Tato konverze
+        také využívá rekurzivitu při procházení XML stromu. Podporuje zanoření
+        do 25 úrovní. Za touto hloubkou vyhodí <code>Zend_Json_Exception</code>.
+        V adresáři tests Zend Frameworku je několik XML souborů s různým stupněm
+        komplexity pro otestování funkčnosti funkce xml2json.
+    </para>
+
+    <para>
+        Následující jednoduchý příklad ukazuje jak předaný XML vstup tak JSON
+        výstup z funkce <code>Zend_Json::fromXml()</code>. Tento příklad využívá
+        volitelného parametru pro neignorování XML atributů během převodu.
+        Proto vrácený JSON řetězec obsahuje reprezentaci XML atributů přítomných
+        ve vstupním XML řetězci.
+    </para>
+
+    <para>
+        XML řetězec předaný funkci <code>Zend_Json::fromXml()</code>:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+    <book id="1">
+        <title>Code Generation in Action</title>
+        <author><first>Jack</first><last>Herrington</last></author>
+        <publisher>Manning</publisher>
+    </book>
+
+    <book id="2">
+        <title>PHP Hacks</title>
+        <author><first>Jack</first><last>Herrington</last></author>
+        <publisher>O'Reilly</publisher>
+    </book>
+
+    <book id="3">
+        <title>Podcasting Hacks</title>
+        <author><first>Jack</first><last>Herrington</last></author>
+        <publisher>O'Reilly</publisher>
+    </book>
+</books> ?>]]>
+    </programlisting>
+
+    <para>
+        JSON výstup vrácený z funkce <code>Zend_Json::fromXml()</code>:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+{
+   "books" : {
+      "book" : [ {
+         "@attributes" : {
+            "id" : "1"
+         },
+         "title" : "Code Generation in Action",
+         "author" : {
+            "first" : "Jack", "last" : "Herrington"
+         },
+         "publisher" : "Manning"
+      }, {
+         "@attributes" : {
+            "id" : "2"
+         },
+         "title" : "PHP Hacks", "author" : {
+            "first" : "Jack", "last" : "Herrington"
+         },
+         "publisher" : "O'Reilly"
+      }, {
+         "@attributes" : {
+            "id" : "3"
+         },
+         "title" : "Podcasting Hacks", "author" : {
+            "first" : "Jack", "last" : "Herrington"
+         },
+         "publisher" : "O'Reilly"
+      }
+   ]}
+}  ?>]]>
+    </programlisting>
+
+    <para>
+        Více podrobností o funkci xml2json můžete najít v původním návrhu.
+        Podívejte se na
+        <ulink url="http://tinyurl.com/2tfa8z">návrh Zend_xml2json</ulink>.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

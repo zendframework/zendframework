@@ -1,0 +1,99 @@
+<sect3 id="zend.controller.actionhelpers.actionstack">
+    <title>ActionStack</title>
+
+    <para>
+        Помощник <code>ActionStack</code> позволяет помещать в стек запросы к
+        плагину
+        <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
+        фронт-контроллера, помогая эффективно создавать очереди действий,
+        выполняемых в течение запроса. Этот помощник позволяет добавлять
+        действия посредством установки новых объектов запросов или наборов
+        действие/контроллер/модуль.
+    </para>
+
+    <note>
+        <title>Вызов помощника ActionStack инициализирует плагин ActionStack</title>
+
+        <para>
+            При вызове помощника <code>ActionStack</code> неявным образом
+            регистрируется плагин <code>ActionStack</code>. Это значит, что нет
+            необходимости явным образом регистрировать плагин
+            <code>ActionStack</code> для того, чтобы использовать его
+            функционал.
+        </para>
+    </note>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple">
+        <title>Добавление задачи с использованием имен действия, контроллера и модуля</title>
+
+        <para>
+            Зачастую наиболее простым способом будет указание действия,
+            контроллера и модуля (и необязательных параметров запроса), почти
+            так же, как если бы вы вызывали
+            <code>Zend_Controller_Action::_forward()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Добавление двух действий в стек
+        // Добавление вызова к /foo/baz/bar/baz
+        // (FooController::bazAction() с переменной запроса bar == baz)
+        $this->_helper->actionStack('baz',
+                                    'foo',
+                                    'default',
+                                    array('bar' => 'baz'));
+
+        // Добавление вызова к /bar/bat
+        // (BarController::batAction())
+        $this->_helper->actionStack('bat', 'bar');
+    }
+}
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple2">
+        <title>Добавление задачи с использованием объекта запроса</title>
+
+        <para>
+            Иногда имеет смысл использовать объект запроса, что более
+            соответствует духу ООП. Объект запроса тоже можно передавать
+            помощнику <code>ActionStack</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Добавление двух действий в стек
+        // Добавление вызова к /foo/baz/bar/baz
+        // (FooController::bazAction() с переменной запроса bar == baz)
+        $request = clone $this->getRequest();
+        // Не устанавливайте контроллер и модуль;
+        // используются текущие значения
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
+
+        // Add call to /bar/bat
+        // (BarController::batAction())
+        $request = clone $this->getRequest();
+        // Не устанавливайте модуль;
+        // используется текущиее значение
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
+    }
+}
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

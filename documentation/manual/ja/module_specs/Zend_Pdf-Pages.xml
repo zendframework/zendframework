@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.pdf.pages">
+    <title>ページの操作</title>
+    <sect2 id="zend.pdf.pages.creation">
+        <title>ページの作成</title>
+        <para>
+            PDF ドキュメントのページは、<classname>Zend_Pdf</classname> の
+            <classname>Zend_Pdf_Page</classname> クラスで表されます。
+        </para>
+
+        <para>
+            PDF ページは既存の PDF から読み込むこともできますし、
+            新しく作成することもできます。
+        </para>
+
+        <para>
+            新しいページを取得するには、直接 <classname>Zend_Pdf_Page</classname>
+            オブジェクトを作成するか、<classname>Zend_Pdf::newPage()</classname>
+            メソッドをコールします。このメソッドは <classname>Zend_Pdf_Page</classname>
+            オブジェクトを返します。<classname>Zend_Pdf::newPage()</classname>
+            の場合は、すでにドキュメントにアタッチされているページを作成するという点が異なります。
+            こうするとそのページを複数の PDF ドキュメントで使いまわすことができませんが、
+            多少高速になります
+            <footnote>
+                <para>
+                これは現在のバージョンの ZF の制限事項であり、
+                将来のバージョンではなくなる予定です。
+                しかし、ドキュメント間でページを共有するには、
+                アタッチされていないページのほうが常によい結果となるでしょう。
+                </para>
+            </footnote>。どちらの手法を使用するかはあなたしだいです。
+        </para>
+
+        <para>
+        <classname>Zend_Pdf::newPage()</classname> メソッドおよび <classname>Zend_Pdf_Page</classname>
+        のコンストラクタは、どちらも同じ形式のパラメータを受け取ります。
+        ページサイズを ($x, $y) 形式のポイント数 (1/72 インチ)
+        で表したものか、定義済みの定数のうちのいずれかになります。
+        以下の定数が定義されています。
+            <itemizedlist>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            ドキュメントのページは、<classname>Zend_Pdf</classname> クラスの public メンバである
+            <code>$pages</code> に保存されます。これは <classname>Zend_Pdf_Page</classname>
+            オブジェクトの配列です。これによってページの並び順も定義され、
+            一般的な配列と同じように操作することができます。
+        </para>
+
+        <example id="zend.pdf.pages.example-1">
+            <title>PDF ドキュメントのページの操作</title>
+            <programlisting role="php"><![CDATA[
+...
+// ページの並び順を反転します
+$pdf->pages = array_reverse($pdf->pages);
+...
+// 新しいページを追加します
+$pdf->pages[] = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+// 新しいページを追加します
+$pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+
+// 指定したページを削除します
+unset($pdf->pages[$id]);
+
+...
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.pdf.pages.cloning">
+        <title>ページの複製</title>
+        <para>
+            既存の PDF ページを複製するには、新しい <classname>Zend_Pdf_Page</classname>
+            オブジェクトを作成する際に既存のページをパラメータとして指定します。
+        </para>
+
+        <example id="zend.pdf.pages.example-2">
+            <title>既存のページの複製</title>
+            <programlisting role="php"><![CDATA[
+...
+// テンプレートページを別の変数に格納します
+$template = $pdf->pages[$templatePageIndex];
+...
+// 新しいページを追加します
+$page1 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page1;
+...
+
+// 別のページを追加します
+$page2 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page2;
+...
+
+// テンプレートページをドキュメントから削除します
+unset($pdf->pages[$templatePageIndex]);
+
+...
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            これは、ひとつのテンプレートから複数のページを作成したい場合に便利です。
+        </para>
+
+        <caution>
+            <para>
+                注意! 複製されたページは、テンプレートページと同じ
+                PDF リソースを共有します。つまり、
+                テンプレートページと同じドキュメントしか使用することができません。
+                ドキュメントを修正したら、新しいページとして保存することができます。
+            </para>
+        </caution>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

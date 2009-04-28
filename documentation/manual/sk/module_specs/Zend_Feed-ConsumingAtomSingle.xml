@@ -1,0 +1,45 @@
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>Získanie jednej položky z Atom</title>
+
+    <para>
+        Jednotlivé položky Atom (<code>&lt;entry&gt;</code>) sú validné aj samé o sebe.
+        Zvyčajne je URL týchto položiek nasledované <code>/&lt;entryId&gt;</code>,
+        ako napríklad URL <code>http://atom.example.com/feed/1</code>, ktoré sa bude
+        ďalej používať v príkladoch.
+    </para>
+
+    <para>
+        Ak získate jednu položku, stále budete mať <code>Zend_Feed_Atom</code> objekt, ale
+        automaticky bude vytvorený &quot;anonymný&quot; zdroj, ktorý bude obsahovať
+        túto položku.
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.atom">
+        <title>Získanie jednej položky z Atom</title>
+        <programlisting role="php"><![CDATA[<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+echo 'The feed has: ' . $feed->count() . ' entry.';
+
+$entry = $feed->current();
+
+?>]]>   </programlisting>
+    </example>
+
+    <para>
+        Eventuálne je možné vytvoriť inštanciu objektu položky priamo ak je známe,
+        že sa pristupuje k jednopoložkovému dokumentu:
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
+        <title>Použitie objektu položky pre získanie položky z Atom zdroja</title>
+        <programlisting role="php"><![CDATA[<?phpi
+$entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
+echo $entry->title();
+
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

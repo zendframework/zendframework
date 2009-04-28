@@ -1,0 +1,780 @@
+<appendix id="coding-standard">
+  <title>Est�ndares de c�digo Zend Framework para PHP</title>
+    <sect1 id="coding-standard.overview">
+        <title>Introducci�n</title>
+
+        <sect2 id="coding-standard.overview.scope">
+            <title>Alcance</title>
+
+            <para>
+                Este documento provee las pautas para el formato del c�digo y la documentaci�n a personas y equipos que contribuyan con Zend Framework. Muchos de los desarrolladores que usan Zend Framework han encontrado �tiles estos est�ndares debido a que el estilo de su c�digo permanece consistente con otros c�digos fuente basados en Zend Framework. Tambi�n debe resaltarse que especificar completamente los est�ndares de c�digo requiere un esfuerzo significativo.
+
+                Nota: A veces, los desarrolladores consideran el establecimiento de est�ndares m�s importante que lo que el est�ndar sugiere realmente al nivel m�s detallado de dise�o. Estas pautas en los est�ndares de c�digo de Zend Framework han demostrado funcionar bien en otros projectos ZF. Puede modificar estos est�ndares o usarlos en consonancia con los t�rminos de nuestra <ulink url="http://framework.zend.com/license">licencia</ulink>
+            </para>
+            <para>
+                Temas incluidos en los est�ndares de c�digo ZF:
+
+                <itemizedlist>
+                    <listitem>
+                        <para>Dar formato a archivos PHP</para>
+                    </listitem>
+
+                    <listitem>
+                        <para>Convenciones de nombrado</para>
+                    </listitem>
+
+                    <listitem>
+                        <para>Estilo de c�digo</para>
+                    </listitem>
+
+                    <listitem>
+                        <para>Documentaci�n integrada</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.overview.goals">
+            <title>Objetivos</title>
+
+            <para>
+                Los est�ndares de c�digo resultan importantes en cualquier proyecto de desarrollo, pero son
+                especialmente importantes cuando muchos desarrolladores trabajan en el mismo proyecto. Los
+                est�ndares de c�digo ayudan a asegurar que el c�digo tenga una alta calidad, menos errores,
+                y pueda ser mantenido f�cilmente.
+            </para>
+        </sect2>
+    </sect1>
+
+    <sect1 id="coding-standard.php-file-formatting">
+        <title>Formato de archivos PHP</title>
+
+        <sect2 id="coding-standard.php-file-formatting.general">
+            <title>General</title>
+
+            <para>
+                Para archivos que contengan �nicamente c�digo PHP, la etiqueta de cierre ("?>") no est� permitida.  No es requerida por PHP, y omitirla evita la inyecci�n de espacios en blanco en la respuesta.
+            </para>
+
+            <para>
+                <emphasis>IMPORTANTE:</emphasis> La inclusi�n de datos binarios arbitrarios permitidos por <code>__HALT_COMPILER()</code>
+                est� prohibida en los archivos PHP de Zend Framework, as� como en cualquier fichero derivado. El uso de esta caracter�stica s�lo est� permitido en algunos scripts de instalaci�n.
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.php-file-formatting.indentation">
+            <title>Identaci�n</title>
+
+            <para>La identaci�n suele est�r compuesta por 4 espacios. Las tabulaciones no est�n permitidas.</para>
+        </sect2>
+
+        <sect2 id="coding-standard.php-file-formatting.max-line-length">
+            <title>Tama�o m�ximo de l�nea</title>
+
+            <para>
+                La longitud recomendable para una l�nea de c�digo es de 80 caracteres. Esto significa que los desarrolladores de Zend deber�an intentar mantener cada l�nea de su c�digo por debajo de los 80 caracteres, siempre que sea posible. No obstante, l�neas m�s largas pueden ser aceptables en algunas situaciones. El tama�o m�ximo de cualquier l�nea de c�digo PHP es de 120 caracteres.
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.php-file-formatting.line-termination">
+            <title>Final de l�nea</title>
+
+            <para>
+                El Final de L�nea sigue la convenci�n de archivos de texto Unix. Las l�neas deben acabar con un car�cter linefeed (LF). Los caracteres Linefeed est�n representados con el n�mero 10 ordinal, o el n�mero 0x0A hexadecimal.
+            </para>
+
+            <para>
+                Nota: No use retornos de carro (carriage returns, CR) como en las fuentes de Apple (0x0D) o la combinaci�n de retorno de carro/linefeed (CRLF) est�ndar para sistemas operativos Windows (0x0D, 0x0A).
+            </para>
+        </sect2>
+    </sect1>
+
+    <sect1 id="coding-standard.naming-conventions">
+        <title>Convenciones de nombrado</title>
+
+        <sect2 id="coding-standard.naming-conventions.classes">
+            <title>Clases</title>
+
+            <para>
+                Zend Framework se estandariza en una convenci�n de nombrado de clases donde los
+                nombres de las clases apuntan directamente a las carpetas en las que est�n contenidas.
+                La carpeta ra�z de la librer�a est�ndar de ZF es la carpeta "Zend/", mientras que la carpeta ra�z de las
+                librer�as extra de ZF es la carpeta "ZendX/". Todas las clases Zend Framework est�n almacenadas
+                jer�rquicamente bajo estas carpetas ra�z.
+            </para>
+
+            <para>
+                Los nombres de clase pueden contener s�lo caracteres alfanum�ricos. Los n�meros est�n permitidos en los nombres de clase, pero desaconsejados en la mayor�a de casos. Las barras bajas (_) est�n permitidas s�lo como separador de ruta (el archivo  "Zend/Db/Table.php" debe apuntar al nombre de clase "Zend_Db_Table").
+            </para>
+
+            <para>
+                Si el nombre de una clase est� compuesto por m�s de una palabra, la primera letra de
+                cada palabra debe aparecer en may�sculas. Poner en may�sculas las letras siguientes no est� permitido,
+                ej: "Zend_PDF" no est� permitido, mientras que "Zend_Pdf" es admisible.
+            </para>
+
+            <para>
+                Estas convenciones definen un mecanismo de pseudo-espacio de nombres para Zend Framework. Zend Framework adoptar� la funcionalidad PHP de espacio de nombres cuando est� disponible y sea factible su uso en las aplicaciones de nuestros desarrolladores.
+            </para>
+
+            <para>
+                Vea los nombres de clase en las librer�as estandar y adicionales (extras) como ejemplos de esta convenci�n de nombres.
+
+                <emphasis>IMPORTANTE:</emphasis> El c�digo que deba distribuirse junto a las librer�as ZF, pero no forma parte de las librer�as est�ndar o extras de Zend (e.g.: c�digo o librer�as que no est�n distribu�das por Zend) no puede empezar nunca por "Zend_" o "ZendX_".
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.filenames">
+            <title>Nombres de archivo</title>
+
+            <para>
+                Para cualquier otro archivo, s�lo caracteres alfanum�ricos, barras bajas (_) y guiones (-) est�n permitidos. Los espacios en blanco est�n estrictamente prohibidos.
+            </para>
+
+            <para>
+                Cualquier archivo que contenga c�digo PHP debe terminar con la extensi�n ".php", con la excepci�n de los scripts de vista. Los siguientes ejemplos muestran nombres de archivo admisibles para clases de Zend Framework..:
+
+                <programlisting role="php"><![CDATA[
+Zend/Db.php
+
+Zend/Controller/Front.php
+
+Zend/View/Helper/FormRadio.php
+]]>
+                </programlisting>
+
+                Los nombres de archivo deben apuntar a nombres de clases como se describe arriba.
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.functions-and-methods">
+            <title>Funciones y M�todos</title>
+
+            <para>
+                Los nombres de funciones pueden contener �nicamente caracteres alfanum�ricos. Las barras bajas (_)
+                no est�n permitidas.
+                Los n�meros est�n permitidos en los nombres de funci�n pero no se aconseja en la
+                mayor�a de casos.
+            </para>
+
+            <para>
+                Los nombres de funciones deben empezar siempre con una letra min�scula. Cuando un nombre de funci�n consiste en
+                m�s de una palabra, la primera letra de cada nueva palabra debe estar en may�sculas. Esto es llamado com�nmente como formato "camelCase".
+            </para>
+
+            <para>
+                Por norma general, se recomienda la elocuencia. Los nombres de funci�n deben ser lo suficientemente elocuentes como para describir su prop�sito y comportamiento.
+            </para>
+
+            <para>
+                Estos son ejemplos de nombres de funciones admisibles:
+
+                <programlisting role="php"><![CDATA[
+filterInput()
+
+getElementById()
+
+widgetFactory()
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Para programaci�n orientada a objetos, los accesores para instancia o variables est�ticas deben ir antepuestos con un
+                "get" o un "set". Al implementar patrones de dise�o, tales como el patr�n singleton o el patr�n factory, el nombre del m�todo debe contener en la pr�ctica el nombre del patr�n para describir su comportamiento de form�s m�s completa.
+            </para>
+
+            <para>
+                Para m�todos en objetos que son declarados con el modificador "private" o "protected",
+                el primer car�cter del nombre de la variable debe ser una barra baja (_). �ste es el �nico
+                uso admisible de una barra baja en un nombre de m�todo. Los m�todos declarados como p�blicos
+                no deber�an contener nunca una barra baja.
+            </para>
+
+            <para>
+                Las funciones de alcance global (tambi�n llamadas "funciones flotantes") est�n permitidas pero desaconsejadas en la mayor�a de casos.
+                Considere envolver esas funciones en una clase est�tica.
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.variables">
+            <title>Variables</title>
+
+            <para>
+                Los nombres de variables pueden contener caracteres alfanum�ricos. Las barras bajas (_)
+                no est�n permitidas.
+                Los n�meros est�n permitidos en los nombres de variable pero no se aconseja en la
+                mayor�a de casos.
+            </para>
+
+            <para>
+                Para las variables de instancia que son declaradas con el modificador "private" o "protected",
+                el primer car�cter de la variable debe ser una �nica barra baja (_). �ste es el �nico caso admisible de una barra baja en el nombre de una variable. Las variables declaradas como "public" no pueden empezar nunca por barra baja.
+            </para>
+
+            <para>
+                Al igual que los nombres de funciones (ver secci�n 3.3), los nombres de variables deben empezar siempre con una letra en min�scula y seguir la convenci�n "camelCaps".
+            </para>
+
+            <para>
+                Por norma general, se recomienda la elocuencia. Las variables deber�an ser siempre tan elocuentes como pr�cticas para describir los datos que el desarrollador pretende almacenar en ellas. Variables escuetas como "$i" y "$n" est�n desaconsejadas, salvo para el contexto de los bucles m�s peque�os. Si un bucle contiene m�s de 20 l�neas de c�digo, las variables de �ndice deber�an tener nombres m�s descriptivos.
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.naming-conventions.constants">
+            <title>Constantes</title>
+
+            <para>
+                Las constantes pueden contener tanto caracteres alfanum�ricos como barras bajas (_). Los n�meros est�n permitidos.
+            </para>
+
+            <para>
+                Todos las letras pertenecientes al nombre de una constante deben aparecer en may�sculas.
+            </para>
+
+            <para>
+                Las palabras dentro del nombre de una constante deben separarse por barras bajas (_). Por ejemplo, <code>EMBED_SUPPRESS_EMBED_EXCEPTION</code> est� permitido, pero
+                <code>EMBED_SUPPRESSEMBEDEXCEPTION</code> no.
+            </para>
+
+            <para>
+                Las constantes deben ser definidas como miembros de clase con el modificador "const". Definir constantes en el alcance global con la funci�n "define" est� permitido pero no recomendado.
+            </para>
+        </sect2>
+    </sect1>
+
+    <sect1 id="coding-standard.coding-style">
+        <title>Estilo de c�digo</title>
+
+        <sect2 id="coding-standard.coding-style.php-code-demarcation">
+            <title>Demarcaci�n de c�digo PHP</title>
+
+            <para>
+                El c�digo PHP debe estar delimitado siempre por la forma completa de las etiquetas PHP est�ndar:
+
+                <programlisting role="php"><![CDATA[
+<?php
+
+?>
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Las etiquetas cortas (short tags) no se permiten nunca. Para archivos que contengan �nicamente c�digo PHP, la etiqueta de cierrre debe omitirse siempre (Ver <xref linkend="coding-standard.php-file-formatting.general" />).
+            </para>
+        </sect2>
+
+        <sect2 id="coding-standard.coding-style.strings">
+            <title>Cadenas</title>
+
+            <sect3 id="coding-standard.coding-style.strings.literals">
+                <title>Literales cadena</title>
+
+                <para>
+                    Cuando una cadena es literal (no contiene sustituci�n de variables), el ap�strofo o "comilla"
+                    deber�a ser usado siempre para delimitar la cadena:
+
+                    <programlisting role="php"><![CDATA[
+$a = 'Example String';
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
+                <title>Literales Cadena que Contengan Ap�strofos</title>
+
+                <para>
+                    Cuando el propio literal cadena contega ap�strofos, es permitido delimitar la cadena
+                    con "dobles comillas". Esto es especialmente �til para sentencias SQL:
+
+                    <programlisting role="php"><![CDATA[
+$sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";
+]]>
+                    </programlisting>
+
+                    Esta sint�xis es preferible a escapar ap�strofes, ya ques mucho m�s f�cil de leer.
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.strings.variable-substitution">
+                <title>Sustituci�n de Variables</title>
+
+                <para>
+                    La sustituci�n de variables est� permitida en cualquiera de estas formas:
+
+                    <programlisting role="php"><![CDATA[
+$greeting = "Hello $name, welcome back!";
+
+$greeting = "Hello {$name}, welcome back!";
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    Por consistencia, esta forma no est� permitida:
+
+                    <programlisting role="php"><![CDATA[
+$greeting = "Hello ${name}, welcome back!";
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.strings.string-concatenation">
+                <title>Concatenaci�n de cadenas</title>
+
+                <para>
+                    Las cadenas deben ser concatenadas usando el operador punto ("."). Un espacio debe a�adirse
+                    siempre antes y despu�s del operador "." para mejorar la legibilidad:
+
+                    <programlisting role="php"><![CDATA[
+$company = 'Zend' . ' ' . 'Technologies';
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    Al concatenar cadenas con el operador ".", se recomienda partir la sentencia en
+                    m�ltiples l�neas para mejorar la legibilidad. En estos casos, cada linea sucesiva
+                    debe llevar un margen de espacios en blanco de forma que el operador
+                    "." est� alineado bajo el operador "=":
+
+                    <programlisting role="php"><![CDATA[
+$sql = "SELECT `id`, `name` FROM `people` "
+     . "WHERE `name` = 'Susan' "
+     . "ORDER BY `name` ASC ";
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+
+        <sect2 id="coding-standard.coding-style.arrays">
+            <title>Arrays</title>
+
+            <sect3 id="coding-standard.coding-style.arrays.numerically-indexed">
+                <title>Arrays Indexados Num�ricamente</title>
+
+                <para>No est�n permitidos n�meros negativos como �ndices.</para>
+
+                <para>
+                    Un array indexado puede empezar por cualquier valor no negativo, sin embargo, no se recomiendan �ndices base distintos a 0.
+                </para>
+
+                <para>
+                    Al declarar arrays indexados con la funci�n <code>array</code>, un espacio de separaci�n deben a�adirse despu�s de cada delimitador coma para mejorar la legibilidad:
+
+                    <programlisting role="php"><![CDATA[
+$sampleArray = array(1, 2, 3, 'Zend', 'Studio');
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    Se permite declarar arrays indexados multil�nea usando la construcci�n "array".
+                    En este caso, cada l�nea sucesiva debe ser tabulada con cuatro espacios de forma que el principio de cada l�nea est� alineado:
+
+                    <programlisting role="php"><![CDATA[
+$sampleArray = array(1, 2, 3, 'Zend', 'Studio',
+                     $a, $b, $c,
+                     56.44, $d, 500);
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.arrays.associative">
+                <title>Arrays Asociativos</title>
+
+                <para>
+                    Al declarar arrays asociativos con la construcci�n <code>array</code>, se recomienda partir la declaraci�n en m�ltiples l�neas. En este caso, cada l�nea sucesiva debe ser tabulada con cuatro espacios de forma que tanto las llaves como los valores est�n alineados:
+
+                    <programlisting role="php"><![CDATA[
+$sampleArray = array('firstKey'  => 'firstValue',
+                     'secondKey' => 'secondValue');
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+
+        <sect2 id="coding-standard.coding-style.classes">
+            <title>Clases</title>
+
+            <sect3 id="coding-standard.coding-style.classes.declaration">
+                <title>Declaraci�n de clases</title>
+
+                <para>
+                    Las Clases deben ser nombradas de acuerdo a las convenciones de nombrado de Zend Framework.
+                </para><para>
+                    La llave "{" deber� escribirse siempre en la l�nea debajo del nombre de la clase ("one true brace").
+                </para><para>
+                    Cada clase debe contener un bloque de documentaci�n acorde con el est�ndar de PHPDocumentor.
+                </para><para>
+                    Todo el c�digo contenido en una clase debe ser separado con cuatro espacios.
+                </para><para>
+                    �nicamente una clase est� permitida en cada archivo PHP.
+                </para><para>
+                    Incluir c�digo adicional en archivos de clase est� permitido pero desaconsejado.
+                    En archivos de ese tipo, dos l�neas en blanco deben separar la clase de cualquier c�digo PHP adicional en el archivo de clase.
+                </para><para>
+                    A continuaci�n se muestra un ejemplo de una declaraci�n de clase admisible:
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Bloque de Documentaci�n aqu�
+ */
+class SampleClass
+{
+    // el contenido de la clase
+    // debe separarse con cuatro espacios
+}
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.classes.member-variables">
+                <title>Variables de miembros de clase</title>
+
+                <para>
+                    Las variables de miembros de clase deben ser nombradas de acuerdo con las conveciones de nombrado de variables de Zend Framework.
+                </para>
+                <para>
+                    Cualquier variable declarada en una clase debe ser listada en la parte superior de la clase, por encima de las declaraciones de cualquier m�todo.
+                </para>
+                <para>
+                    La construcci�n <code>var</code> no est� permitido. Las variables de miembro siempre declaran su visibilidad usando uno los modificadores <code>private</code>, <code>protected</code>,
+                    o <code>public</code>. Dar acceso a las variables de miembro declar�ndolas directamente como public est� permitido pero no se aconseja en favor de accesor methods (set/get).
+                </para>
+            </sect3>
+        </sect2>
+
+        <sect2 id="coding-standard.coding-style.functions-and-methods">
+            <title>Funciones y M�todos</title>
+
+            <sect3 id="coding-standard.coding-style.functions-and-methods.declaration">
+                <title>Declaraci�n de Funciones y M�todos</title>
+
+                <para>
+                    Las Funciones deben ser nombradas de acuerdo a las convenciones de nombrado de Zend Framework.
+                </para>
+                <para>
+                    Los m�todos dentro de clases deben declarar siempre su visibilidad usando un modificador <code>private</code>, <code>protected</code>,
+                    o <code>public</code>.
+                </para>
+                <para>
+                    Como en las clases, la llave "{" debe ser escrita en la l�nea siguiente al nombre de la funci�n ("one true brace" form).
+
+                    No est� permitido un espacio entre el nombre de la funci�n y el par�ntesis de apertura para los argumentos.
+                </para>
+                <para>
+                    Las funciones de alcance global no est�n permitidas.
+                </para>
+                <para>
+                    Lo siguiente es un ejemplo de una declaraci�n admisible de una funci�n en una clase:
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Bloque de Documentaci�n aqu�
+ */
+class Foo
+{
+    /**
+     * Bloque de Documentaci�n aqu�
+     */
+    public function bar()
+    {
+        // el contenido de la funci�n
+        // debe separarse con cuatro espacios
+    }
+}
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    <emphasis>NOTA:</emphasis> El paso por referencia es el �nico mecanismo de paso de par�metros permitido en una declaraci�n de m�todo.
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Bloque de Documentaci�n aqu�
+ */
+class Foo
+{
+    /**
+     * Bloque de Documentaci�n aqu�
+     */
+    public function bar(&$baz)
+    {}
+}
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    La llamada por referencia est� estrictamente prohibida.
+                </para>
+
+
+                <para>
+                    El valor de retorno no debe estar indicado entre par�ntesis. Esto podr�a afectar a la legibilidad, adem�s
+                    de romper el c�digo si un m�todo se modifica posteriormente para que devuelva por referencia.
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Bloque de Documentaci�n aqu�
+ */
+class Foo
+{
+    /**
+     * INCORRECTO
+     */
+    public function bar()
+    {
+        return($this->bar);
+    }
+
+    /**
+     * CORRECTO
+     */
+    public function bar()
+    {
+        return $this->bar;
+    }
+}
+]]>
+                    </programlisting>
+                </para>
+
+            </sect3>
+
+            <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
+                <title>Uso de Funciones y M�todos</title>
+
+                <para>
+                    Los argumentos de la funci�n tendr�an que estar separados por un �nico espacio posterior despu�s del delimitador coma.
+                    A continuaci�n se muestra un ejemplo de una invocaci�n admisible de una funci�n que recibe tres argumentos:
+
+                    <programlisting role="php"><![CDATA[
+threeArguments(1, 2, 3);
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    La llamada por referencia est� estrictamente prohibida. Vea la secci�n de declaraciones de funciones para el m�todo correcto de pasar argumentos por referencia.
+                </para>
+                <para>
+                    Al pasar arrays como argumentos a una funci�n, la llamada a la funci�n puede incluir el indicador "hint" y puede separarse en m�ltiples l�neas para aumentar la legibilidad. En esos casos, se aplican las pautas normales para escribir arrays:
+
+                    <programlisting role="php"><![CDATA[
+threeArguments(array(1, 2, 3), 2, 3);
+
+threeArguments(array(1, 2, 3, 'Zend', 'Studio',
+                     $a, $b, $c,
+                     56.44, $d, 500), 2, 3);
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+
+        <sect2 id="coding-standard.coding-style.control-statements">
+            <title>Sentencias de Control</title>
+
+            <sect3 id="coding-standard.coding-style.control-statements.if-else-elseif">
+                <title>If/Else/Elseif</title>
+
+                <para>
+                    Las sentencias de control basadas en las construcciones <code>if</code> y <code>elseif</code>
+                    deben tener un solo espacio en blanco antes del par�ntesis de apertura del condicional y un solo espacio en blanco despu�s del par�ntesis de cierre.
+                </para>
+
+                <para>
+                    Dentro de las sentencias condicionales entre par�ntesis, los operadores deben separarse con espacios, por legibilidad. Se aconseja el uso de par�ntesis internos para mejorar la agrupaci�n l�gica en expresiones condicionales m�s largas.
+                </para>
+
+                <para>
+                    La llave de apertura "{" se escribe en la misma l�nea que la sentencia condicional. La llave de cierre "}" se escribe siempre en su propia l�nea. Cualquier contenido dentro de las llaves debe separarse con cuatro espacios en blanco.
+
+                    <programlisting role="php"><![CDATA[
+if ($a != 2) {
+    $a = 2;
+}
+]]>
+                    </programlisting>
+                </para>
+
+                <para>
+                    Para las declaraciones "if" que incluyan "elseif" o "else", las convenciones de formato son similares a la construcci�n "if". Los ejemplos siguientes demuestran el formato correcto para declaraciones "if" con construcciones "else" y/o "elseif":
+
+                    <programlisting role="php"><![CDATA[
+if ($a != 2) {
+    $a = 2;
+} else {
+    $a = 7;
+}
+
+if ($a != 2) {
+    $a = 2;
+} elseif ($a == 3) {
+    $a = 4;
+} else {
+    $a = 7;
+}
+]]>
+                    </programlisting>
+                    PHP permite escribir sentencias sin llaves -{}- en algunas circunstancias.
+                    Este est�ndar de c�digo no hace ninguna diferenciaci�n- toda sentencia "if",
+                    "elseif" o "else" debe usar llaves.
+                </para>
+
+                <para>
+                    El uso de la construcci�n "elseif" est� permitido pero no se aconseja, en favor de
+                    la combinaci�n "else if".
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standards.coding-style.control-statements.switch">
+                <title>Switch</title>
+
+                <para>
+                    Las declaraciones de control escritas con la declaraci�n "switch" deben tener un �nico espacio en blanco antes del par�ntesis de apertura del condicional y despu�s del par�ntesis de cierre.
+                </para>
+
+                <para>
+                    Todo contenido dentro de una declaraci�n "switch" debe separarse usando cuatro espacios. El contenido dentro de cada declaraci�n "case" debe separarse usando cuatro espacios adicionales.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+switch ($numPeople) {
+    case 1:
+        break;
+
+    case 2:
+        break;
+
+    default:
+        break;
+}
+]]>
+                </programlisting>
+
+                <para>
+                    La construcci�n <code>default</code> no debe omitirse nunca en una declaraci�n <code>switch</code>.
+                </para>
+
+                <para>
+                    <emphasis>NOTA:</emphasis> En ocasiones, resulta �til escribir una declaraci�n <code>case</code> que salta al
+                    siguiente case al no incluir un <code>break</code> o <code>return</code> dentro de ese case. Para distinguir
+                    estos casos de posibles errores, cualquier declaraci�n donde <code>break</code> o <code>return</code> sean
+                    omitidos deber�n contener un comentario indicando que se omitieron intencionadamente.
+                </para>
+            </sect3>
+        </sect2>
+
+        <sect2 id="coding-standards.inline-documentation">
+            <title>Documentaci�n integrada</title>
+
+            <sect3 id="coding-standards.inline-documentation.documentation-format">
+                <title>Formato de documentaci�n</title>
+
+                <para>
+                    Todos los bloques de documentaci�n ("docblocks") deben ser compatibles con el formato de phpDocumentor.
+                    Describir el formato de phpDocumentor est� fuera del alcance de este documento.
+                    Para m�s informaci�n, visite: <ulink url="http://phpdoc.org/">http://phpdoc.org/</ulink>
+                </para>
+
+                <para>
+                    Todos los archivos de clase deben contener un bloque de documentaci�n "a nivel de archivo" al principio de cada archivo y un bloque de documentaci�n "a nivel de clase" inmediatamente antes de cada clase. Ejemplo de estos bloques de documentaci�n pueden encontrarse debajo.
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standards.inline-documentation.files">
+                <title>Archivo</title>
+
+                <para>
+                    Cada archivo que contenga c�digo PHP debe tener un bloque de documentaci�n al principio del archivo que contenga como m�nimo las siguientes etiquetas phpDocumentor:
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Descripci�n corta del fichero
+ *
+ * Descripci�n larga del fichero (si la hubiera)...
+ *
+ * LICENSE: Informaci�n sobre la licencia
+ *
+ * @copyright  2008 Zend Technologies
+ * @license    http://framework.zend.com/license   BSD License
+ * @version    $Id:$
+ * @link       http://framework.zend.com/package/PackageName
+ * @since      File available since Release 1.5.0
+*/
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standards.inline-documentation.classes">
+                <title>Clases</title>
+
+                <para>
+                    Cada clase debe contener un bloque de documentaci�n que contenga como m�nimo las siguientes etiquetas phpDocumentor:
+
+                    <programlisting role="php"><![CDATA[
+/**
+ * Descripci�n corta de la clase
+ *
+ * Descripci�n larga de la clase (si la hubiera)...
+ *
+ * @copyright  2008 Zend Technologies
+ * @license    http://framework.zend.com/license   BSD License
+ * @version    Release: @package_version@
+ * @link       http://framework.zend.com/package/PackageName
+ * @since      Class available since Release 1.5.0
+ * @deprecated Class deprecated in Release 2.0.0
+ */
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+
+            <sect3 id="coding-standards.inline-documentation.functions">
+                <title>Funciones</title>
+
+                <para>
+                Cada funci�n, incluyendo m�todos de objeto, debe contener un bloque de documentaci�n que contenga como m�nimo:
+
+                    <itemizedlist>
+                        <listitem><para>Una descripci�n de la funci�n</para></listitem>
+                        <listitem><para>Todos los argumentos</para></listitem>
+                        <listitem><para>Todos los posibles valores de retorno</para></listitem>
+                    </itemizedlist>
+                </para>
+
+                <para>
+                    No es necesario incluir la etiqueta "@access" si el nivel de acceso es
+                    conocido de antemano por el modificador "public", "private", o "protected"
+                    usado para declarar la funci�n.
+                </para>
+
+                <para>
+                    Si una funci�n/m�todo puede lanzar una excepci�n, utilice @throws para todos los tipos
+                    de excepciones conocidas:
+
+                    <programlisting role="php"><![CDATA[
+@throws exceptionclass [description]
+]]>
+                    </programlisting>
+                </para>
+            </sect3>
+        </sect2>
+    </sect1>
+
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

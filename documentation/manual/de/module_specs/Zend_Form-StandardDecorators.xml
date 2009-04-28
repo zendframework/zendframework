@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.form.standardDecorators">
+    <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
+
+    <para>
+        <classname>Zend_Form</classname> wird mit verschiedenen Standard Dekoratoren ausgeliefert. Für
+        weitere Informationen über die generelle Verwendung von Dekoratoren, siehe das
+        <link linkend="zend.form.decorators">Kapitel über Dekoratoren</link>.
+    </para>
+
+    <sect2 id="zend.form.standardDecorators.callback">
+        <title>Zend_Form_Decorator_Callback</title>
+
+        <para>
+            Der Callback Dekorator kann einen gewünschten Callback ausführen, um Inhalte
+            darzustellen. Callbacks sollten über die 'callback' Option spezifiziert werden, die
+            dem Dekorator in der Konfiguration übergeben wird, und die jeder gültige PHP Callback
+            Typ sein kann. Callbacks sollten drei Argumente akzeptieren, <code>$content</code>
+            (den originalen Inhalt der dem Dekorator übergeben wird), <code>$element</code> (das
+            Element das dekoriert werden soll), und ein Array von <code>$options</code>. Ein
+            Beispiel Callback:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class Util
+{
+    public static function label($content, $element, array $options)
+    {
+        return '<span class="label">' . $element->getLabel() . '</span>';
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Dieser Callback kann mit <code>array('Util', 'label')</code> spezifiziert werden, und
+            würde einige (falsche) HTML Markups für das Label erzeugen. Der Callback Dekorator würde
+            entweder ersetzen, voranstellen, oder dem originalen Inhalt den zurückgegebenen Wert
+            anhängen.
+        </para>
+
+        <para>
+            Der Callback Dekorator erlaubt es, einen Null Wert für die 'placement' Option zu
+            spezifizieren, welche den originalen Inhalt, mit dem, vom Callback zurückgegebenen Wert,
+            ersetzt; 'prepend' und 'append' sind genauso gültig.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.captcha">
+        <title>Zend_Form_Decorator_Captcha</title>
+
+        <para>
+            Der Captcha Dekorator ist für die Verwendung mit dem
+            <link linkend="zend.form.standardElements.captcha">CAPTCHA Formularelement</link>. Es verwendet
+            die <code>render()</code> Methode des CAPTCHA Adapters um die Ausgabe zu erzeugen.
+        </para>
+
+        <para>
+            Eine Variante des Captcha Dekorators, 'Captcha_Word', wird auch üblicherweise verwendet, und
+            erstellt zwei Elemente, eine Id und eine Eingabe. Die Id zeigt den Identifikator der Session
+            gegen den verglichen wird, und die Eingabe ist für die Benutzerverifikation des CAPTCHA.
+            Beide werden als einzelnes Element geprüft.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.description">
+        <title>Zend_Form_Decorator_Description</title>
+
+        <para>
+            Der Description Dekorator kann verwendet werden, um eine Beschreibung in einem
+            <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>, oder
+            <classname>Zend_Form_DisplayGroup</classname> Element anzuzeigen; es holt die Beschreibung,
+            indem es die <code>getDescription()</code> Methode des Objektes verwendet.
+            Übliche Anwendungsfälle sind das Anbieten von UI Hinweisen für Elemente.
+        </para>
+
+        <para>
+            Standardmäßig, wenn keine Beschreibung vorhanden ist, wird keine Ausgabe erzeugt.
+            Wenn die Beschreibung vorhanden ist, wird sie standardmäßig in ein HTML <code>&lt;p&gt;</code>
+            Tag eingebunden, es kann aber ein Tag durch die Übergabe einer <code>tag</code>
+            Option spezifiziert werden, bei der Erstellung des Dekorators, oder durch Aufruf von
+            <code>setTag()</code>. Zusätzlich kann eine Klasse für das Tag spezifiziert werden,
+            indem die <code>class</code> Option verwendet wird, oder durch den Aufruf von
+            <code>setClass()</code>; standardmäßig wird die Klasse 'hint' verwendet.
+        </para>
+
+        <para>
+            Die Beschreibung wird escaped, indem der Escaping Mechanismus vom View Objekt
+            standardmäßig verwendet wird. Das kann, durch die Übergabe eines <code>false</code>
+            an die 'escape' Option des Dekorators, ausgeschaltet werden, oder durch die
+            <code>setEscape()</code> Methode.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.dtDdWrapper">
+        <title>Zend_Form_Decorator_DtDdWrapper</title>
+
+        <para>
+            Der Standarddekorator verwendet Definitionslisten (<code>&lt;dl&gt;</code>) um
+            Formularelemente darzustellen. Da Formularelemente in jeder Reihenfolge vorkommen können,
+            werden Gruppen und Unterformulare angezeigt und können mit anderen Formularelementen
+            interagieren. Um diese speziellen Elementtypen in der Definitionsliste zu behalten,
+            erstellt der DtDdWrapper einen neuen, leeren Definitionsausdruck (<code>&lt;dt&gt;</code>) und
+            bettet dessen Inhalt in ein neues Definitionsdatum (<code>&lt;dd&gt;</code>) ein. Die Ausgabe
+            sieht dann wie folgt aus:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<dt></dt>
+<dd><fieldset id="subform">
+    <legend>Benutzer Information</legend>
+    ...
+</fieldset></dd>
+]]>
+        </programlisting>
+
+        <para>
+            Dieser Dekorator ersetzt den, ihm angebotenen, Inhalt durch dessen Einbettung in das
+            <code>&lt;dd&gt;</code> Element.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.errors">
+        <title>Zend_Form_Decorator_Errors</title>
+
+        <para>
+            Element Fehler erhalten ihren eigenen Dekorator mit dem Errors Dekorator. Dieser
+            Dekorator ruft den FormErrors View Helfer auf, welcher Fehlermeldungen in einer,
+            ungeordneten, Liste (<code>&lt;ul&gt;</code>) als Listenelement darstellt. Das
+            <code>&lt;ul&gt;</code> Element empfängt eine Klasse von "errors".
+        </para>
+
+        <para>
+            Der Errors Dekorator kann entwedet vorangestellt oder dem Kontext, der Ihm übergeben
+            wurde, angehängt werden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.fieldset">
+        <title>Zend_Form_Decorator_Fieldset</title>
+
+        <para>
+            Anzeigegruppen und Unterformulare zeigen ihren Inhalt standardmäßig in einem Fieldset an.
+            Der Fieldset Dekorator prüft, ob entweder eine 'legend' Option oder eine
+            <code>getLegend()</code> Methode in dem registrierten Element vorhanden ist, und
+            verwendet dieses als Legende, wenn es nicht leer ist. Jeder Inhalt der übergeben wird,
+            wird in ein HTML Fieldset eingebettet, wobei der originale Inhalt ersetzt wird. Alle
+            Attribute die in den angezeigten Elementen gesetzt sind, werden dem Fieldset als HTML
+            Attribute übergeben.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.file">
+        <title>Zend_Form_Decorator_File</title>
+
+        <para>
+            File Elemente haben eine spezielle Schreibweise wenn man mehrere File Elemente oder Unterformulare
+            verwendet. Der File Decorator wird von <classname>Zend_Form_Element_File</classname> verwendet und erlaubt
+            es mehrere File Elemente, mit einem einzelnen Methodenaufruf, zu setzen. Er wird automatisch
+            verwendet und bestimmt den Namen des Elements.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.form">
+        <title>Zend_Form_Decorator_Form</title>
+
+        <para>
+            <classname>Zend_Form</classname> Objekte müssen typischerweise ein HTML <code>&lt;form&gt;</code> Tag
+            darstellen. Der Formular Dekorator verweist auf den Formular View Helfer. Er bettet jeden
+            angebotenen Inhalt in ein HTML Formular Element ein, indem die Aktionen und Methoden des
+            <classname>Zend_Form</classname> Objektes verwendet werden, und jedes Attribut als HTML Attribut.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.formElements">
+        <title>Zend_Form_Decorator_FormElements</title>
+
+        <para>
+            Formulare, Anzeigegruppen, und Unterformulare sind Sammlungen von Elementen. Um diese
+            Elemente darzustellen, verwenden sie den FormElements Dekorator, welche durch alle
+            Elemente iteriert, <code>render()</code> auf jedem aufruft und diese mit dem
+            registrierten Trennzeichen verbindet. Es kann an Ihm übergebenen Inhalt entweder
+            anhängen oder voranstellen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.formErrors">
+        <title>Zend_Form_Decorator_FormErrors</title>
+
+        <para>
+            Einige Entwickler und Designer bevorzugen es, alle Fehlermeldungen am Beginn des Formulars zu
+            gruppieren. Der FormErrors Dekorator erlaubt dies zu tun.
+        </para>
+
+        <para>
+            Standardmäßig hat die erzeugte Liste von Fehlern das folgende Markup:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<ul class="form-errors>
+    <li><b>[Element Überschrift oder Name]</b><ul>
+            <li>[Fehlermeldung]</li>
+            <li>[Fehlermeldung]</li>
+        </ul>
+    </li>
+    <li><ul>
+        <li><b>[Label oder Name des Unterformular-Elements</b><ul>
+                <li>[Fehlermeldung]</li>
+                <li>[Fehlermeldung]</li>
+            </ul>
+        </li>
+    </ul></li>
+</ul>
+]]></programlisting>
+
+        <para>
+            Man kann eine Vielzahl von Optionen übergeben, um die erzeugte Ausgabe zu konfigurieren:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet werden soll
+                oder nicht. Standardwert: false (erlaubt Rekursion).
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupElementLabelEnd</code>: Markup der der Elementüberschrift angehängt wird.
+                Standardwert: '&lt;/b&gt;'
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupElementLabelStart</code>: Markup der der Elementüberschrift vorangestellt wird.
+                Standardwert: '&lt;b&gt;'
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupListEnd</code>: Markup der der Nachrichtenliste angehängt wird. Standardwert:
+                '&lt;/ul&gt;'.
+            </para></listitem>
+            <listitem><para>
+                <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen angehängt wird.
+                Standardwert: '&lt;/li&gt;'
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen vorangestellt wird.
+                Standardwert: '&lt;li&gt;'
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupListStart</code>: Markup der der Nachrichtenliste vorangestellt wird. Standardwert:
+                '&lt;ul class="form-errors"&gt;'
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Der FormErrors Dekorator kann entweder angehängt oder dem Inhalt, dem er angehört, vorangestellt werden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.htmlTag">
+        <title>Zend_Form_Decorator_HtmlTag</title>
+
+        <para>
+            Der HtmlTag Dekorator erlaubt es HTML Tags anzupassen, um Inhalt zu dekorieren; das
+            angepasste Tag wird in der 'tag' Option übergeben, und jede andere Option wird als
+            HTML Attribut für dieses Tag verwendet. Das Tag nimmt standardmäßig an, dass es
+            Blocklevel ist, und ersetzt den Inhalt durch dessen Einbettung in das gegebene Tag.
+            Trotzdem kann eine Platzierung spezifiziert werden um das Tag genauso anzuhängen
+            oder voranzustellen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.image">
+        <title>Zend_Form_Decorator_Image</title>
+
+        <para>
+            Der Image Dekorator erlaubt es eine HTML Bildeingabe
+            (<code>&lt;input type="image" ... /&gt;</code>) zu erstellen, und es optional in einem
+            anderen HTML Tag darzustellen.
+        </para>
+
+        <para>
+            Standardmäßig verwendet der Dekorator die 'src' Eigenschaft des Elements als Bildquelle,
+            welche mit der <code>setImage()</code> Methode als Bildquelle gesetzt werden kann.
+            Zusätzlich wird das Label des Elements als 'alt' Attribute verwendet, und
+            <code>imageValue</code> (welches mit den <code>setImageValue()</code> und
+            <code>getImageValue()</code> Zugriffsmethoden des Bildes manipuliert werden kann)
+            wird für den Wert verwendet.
+        </para>
+
+        <para>
+            Um ein HTML Tag zu spezifizieren, dass das Element einbetten soll, kann entweder die
+            'tag' Option an den Dekorator übergeben, oder explizit <code>setTag()</code>
+            aufgerufen werden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.label">
+        <title>Zend_Form_Decorator_Label</title>
+
+        <para>
+            Formularlemente haben tyischerweise ein Label und der Label Dekorator wird verwendet,
+            um diese Labels darzustellen. Er ruft den FormLabel View Helfer auf und holt das Label
+            des Elements, indem die <code>getLabel()</code> Methode des Elements verwendet wird.
+            Wenn kein Label vorhanden ist, wird es auch nicht darstellt. Standardmäßig werden
+            Labels übersetzt, wenn ein Übersetzungsadapter existiert und eine Übersetzung für das
+            Label existiert.
+        </para>
+
+        <para>
+            Optional kann die 'tag' Option spezifiziert werden; wenn vorhanden, bettet sie das
+            Label in das Block-Level Tag ein. Wenn die 'tag' Option aber kein Label vorhanden ist,
+            wird das Tag ohne Inhalt dargestellt. Es kann definiert werden, dass die Klasse das
+            Tag mit der 'class' Option verwendet, oder durch Aufruf von <code>setClass()</code>.
+        </para>
+
+        <para>
+            Zusätzlich können Präfixe und Suffixe für die Verwendung spezifiziert werden, wenn
+            die Elemente angezeigt werden, basierend darauf, ob das Label für ein optionales oder
+            benötigtes Element ist. Übliche Verwendungszwecke würden sein, ein ':' dem Label
+            anzufügen, oder ein '*' um anzuzeigen, dass das Element benötigt wird. Das kann mit
+            den folgenden Optionen und Methoden gemacht werden:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>optionalPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
+                    wenn das Element optional ist. Kann mit den Zugriffsmethoden
+                    <code>setOptionalPrefix()</code> und <code>getOptionalPrefix()</code>
+                    manipuliert werden.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>optionalSuffix</code>: Setzt den Text, der dem Label angehängt wird,
+                    wenn das Element optional ist. Kann mit den Zugriffsmethoden
+                    <code>setOptionalSuffix()</code> und <code>getOptionalSuffix()</code>
+                    manipuliert werden.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>requiredPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
+                    wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
+                    <code>setRequiredPrefix()</code> und <code>getRequiredPrefix()</code>
+                    manipuliert werden.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>requiredSuffix</code>: Setzt den Text, der dem Label angehängt wird,
+                    wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
+                    <code>setRequiredSuffix()</code> und <code>getRequiredSuffix()</code>
+                    manipuliert werden.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Standardmäßig stellt der Label Dekorator, dem angegebenen Inhalt, voran; es kann die
+            'placement' Option mit 'append' spezifiziert werden, um es nach dem Inhalt zu
+            platzieren.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.prepareElements">
+        <title>Zend_Form_Decorator_PrepareElements</title>
+
+        <para>
+            Formulare, Anzeigegruppen, und Unterformulare sind Kollektionen von Elementen. Wenn der
+            <link linkend="zend.form.standardDecorators.viewScript">ViewScript Dekorator</link> verwendet
+            wird, ist es nützlich die Möglichkeit zu haben, das View Objekt, die Übersetzung, und alle komplett
+            qualifizierten Namen (wie sie von der Array Schreibweise der Unterformulare erkannt werden),
+            rekursiv setzen zu können. Der 'PrepareElements' Dekorator kann das für einen erledigen.
+            Typischerweise setzt man ihn als ersten Dekorator in der Liste.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$form->setDecorators(array(
+    'PrepareElements',
+    array('ViewScript', array('viewScript' => 'form.phtml')),
+));
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.viewHelper">
+        <title>Zend_Form_Decorator_ViewHelper</title>
+
+        <para>
+            Die meisten Elemente verwenden <classname>Zend_View</classname> Helfer für die Darstellung und
+            das wird mit dem View Helfer Dekorator getan. Mit ihm kann ein 'helper' Tag spezifiziert
+            werden der explizit den View Helfer setzt, der anzupassen ist; wenn keiner angegeben
+            wird, verwendet er das letzte Segment des Klassennamens des Elements um den Helfer
+            zu ermitteln, und stellt den String 'form' voran: z.B. 'Zend_Form_Element_Text' würde
+            nach einem View Helfer 'formText' schauen.
+        </para>
+
+        <para>
+            Alle Attribute des angegebenen Elements werden dem View Helfer als Attribute des
+            Elements übergeben.
+        </para>
+
+        <para>
+            Standardmäßig fügt dieser Dekorator Inhalt hinten an; es kann die 'placement' Option
+            verwendet werden um eine alternative Platzierung zu spezifizieren.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardDecorators.viewScript">
+        <title>Zend_Form_Decorator_ViewScript</title>
+
+        <para>
+            Manchmal ist es gewünscht, ein View Skript für die Erstellung eigener Elemente zu
+            verwenden; auf diesem Weg hat man eine sehr detailierte Kontrolle über die Elemente,
+            und wandelt das View Skript zu einem Designer um, oder erstellt einfach einen Weg, um
+            Einstellungen zu überladen, die auf Modulen basieren (jedes Modul könnte optional die
+            View Skripte des Elements überladen um seinen eigenen Zwecken zu entsprechen). Der
+            ViewScript Dekorator löst dieses Problem.
+        </para>
+
+        <para>
+            Der ViewScript Dekorator benötigt eine 'viewScript' Option, entweder angeboten vom
+            Dekorator, oder als Attribut des Elements. Er stellt dann das View Skript als
+            teilweises Skript, was bedeutet, dass jeder Aufruf von ihm, seinen eigenen
+            Geltungsbereich der Variablen hat; keine Variablen von der View werden im Element
+            enthalten sein, ausser denen des Elements selbst. Verschiedene Variablen werden dann
+            bekannt gegeben:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>element</code>: Das Element, welches dekoriert wird
+            </para></listitem>
+
+            <listitem><para>
+                    <code>content</code>: Der Inhalt, der an den Dekorator übergeben wird
+            </para></listitem>
+
+            <listitem><para>
+                    <code>decorator</code>: Das Dekorator Objekt selbst
+            </para></listitem>
+
+            <listitem><para>
+                    Zusätzlich werden, alle Optionen, die an den Dekorator mit
+                    <code>setOptions()</code> übergeben und nicht intern verwendet werden, an das
+                    View Skript als View Variablen übergeben.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Als Beispiel, kann das folgende Element hergenommen werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Setzt den Dekorator für das Element zu einem einzelnen, ViewScript,
+// Dekorator spezifiziert das viewScript als Option, und einige extra
+// Optionen:
+$element->setDecorators(array(array('ViewScript', array(
+    'viewScript' => '_element.phtml',
+    'class'      => 'form element'
+))));
+
+// ODER das viewScript als Attribut des Elements spezifizieren:
+$element->viewScript = '_element.phtml';
+$element->setDecorators(array(array('ViewScript',
+                                    array('class' => 'form element'))));
+]]>
+        </programlisting>
+
+        <para>
+            Dann könne ein View Skript die das folgende existieren:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<div class="<?php echo $this->class ?>">
+    <?php echo $this->formLabel($this->element->getName(),
+                         $this->element->getLabel()) ?>
+    <?php echo $this->{$this->element->helper}(
+        $this->element->getName(),
+        $this->element->getValue(),
+        $this->element->getAttribs()
+    ) ?>
+    <?php echo $this->formErrors($this->element->getMessages()) ?>
+    <div class="hint"><?php echo $this->element->getDescription() ?></div>
+</div>
+]]>
+        </programlisting>
+
+        <note>
+            <title>Inhalte mit einem View Skript ersetzen</title>
+
+            <para>
+                Es kann für das View Skript nützlich sein, den Inhalt der dem Dekorator angeboten
+                wird, zu ersetzen -- zum Beispiel wenn man ihn umschliessen will. Das kann man
+                erreichen, indem ein <code>false</code> für die 'placement' Option des Dekorators
+                spezifiziert wird:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bei Erstellung des Dekorators:
+$element->addDecorator('ViewScript', array('placement' => false));
+
+// Zu einer existierenden Dekorator Instanz hinzufügen:
+$decorator->setOption('placement', false);
+
+// Zu einem Dekorator hinzufügen, der bereits bei einem Element hinzugefügt ist:
+$element->getDecorator('ViewScript')->setOption('placement', false);
+
+// In einem View Skript, das von einem Dekorator verwendet wird:
+$this->decorator->setOption('placement', false);
+]]>
+            </programlisting>
+        </note>
+
+        <para>
+            Die Verwendung des ViewScript Dekorators wird empfohlen, wenn man eine sehr feinkörnige
+            Kontrolle darüber benötigt, wie Elemente dargestellt werden.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 tw=80 et:
+-->
+

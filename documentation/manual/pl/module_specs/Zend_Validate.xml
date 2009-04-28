@@ -1,0 +1,255 @@
+<sect1 id="zend.validate.introduction">
+
+    <title>Wprowadzenie</title>
+
+    <para>
+        Komponent Zend_Validate zapewnia zestaw najczęściej potrzebnych
+        weryfikatorów. Zapewnia też prosty mechanizm łańcuchowego wywoływania
+        weryfikatorów, dzięki ktoremu wiele filtrów może być dodanych do jednej
+        danej w kolejności zdefiniowanej przez programistę.
+    </para>
+
+    <sect2 id="zend.validate.introduction.definition">
+
+        <title>Czym jest weryfikator?</title>
+
+        <para>
+            Weryfikator bada dane wejściowe w oparciu o pewne wymagania i tworzy
+            wynik w postaci wartości logicznej - wartość ta mówi czy dane
+            wejściowe spełniają te wymagania. Jeśli dane wejściowe nie spełniają
+            wymagań, weryfikator może dodatkowo przekazać informacje o tym, które
+            z wymagań nie zostały spełnione.
+        </para>
+
+        <para>
+            Na przykład, aplikacja web może wymagać, aby długość nazwy użytkownika
+            mieściła się pomiędzy sześcioma a dwunastoma znakami, a znaki te były
+            jedynie z grupy znaków alfanumerycznych. Weryfikator może być użyty do
+            sprawdzenia czy nazwa użytkownika spełnia te wymagania. Jeśli wybrana
+            nazwa użytkownika nie spełni jednego lub obu tych wymagań, użytecznie
+            by było wiedzieć, które z wymagań nie zostało spełnione.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.validate.introduction.using">
+
+        <title>Podstawowe użycie weryfikatorów</title>
+
+        <para>
+            Mająć ustaloną w ten sposób definicję weryfikacji, możemy zapewnić
+            podstawę dla interfejsu <code>Zend_Validate_Interface</code>, który
+            wymaga zaimplementowania przez klasę weryfikatora dwóch metod,
+            <code>isValid()</code> oraz <code>getMessages()</code>. Metoda
+            <code>isValid()</code> przeprowadza weryfikację podanej wartości,
+            zwracając <code>true</code> wtedy i tylko wtedy, gdy wartość
+            spełnia kryteria weryfikacji.
+        </para>
+
+        <para>
+            Jeśli metoda <code>isValid()</code> zwróci <code>false</code>, za
+            pomocą metody <code>getMessages()</code> można pobrać tablicę
+            wiadomości wyjaśniających powody niepowodzenia weryfikacji.
+            Klucze elementów tablicy są krótkimi łańcuchami znaków, które
+            identyfikują powody nieudanej weryfikacji, a wartości elementów
+            odpowiadają pełnym treściom komunikatów. Klucze i wartości są
+            zależne od klasy; każda klasa weryfikatora definiuje własny zestaw
+            komunikatów o nieudanej weryfikacji, a także klucze identyfikujące je.
+            Każda klasa posiada także definicje stałych <code>const</code>, które
+            odpowiadają identyfikatorom komunikatów o nieudanej weryfikacji.
+        </para>
+
+        <note>
+            <para>
+                Metoda <code>getMessages()</code>
+                zwracaja informacje o nieudanej weryfikacji tylko dla ostatniego
+                wywołania metody <code>isValid()</code>. Każde wywołanie metody
+                <code>isValid()</code> czyści wszystkie komunikaty i błędy,
+                które wystąpiły podczas poprzedniego wywołania metody
+                <code>isValid()</code>, ponieważ najczęściej jest tak, że każde
+                wywołanie metody <code>isValid()</code> występuje dla innej
+                wartości danych przychodzących.
+            </para>
+        </note>
+
+        <para>
+            Poniższy przykład pokazuje weryfikację adresu e-mail:
+
+            <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+
+if ($validator->isValid($email)) {
+    // adres email jest prawidłowy
+} else {
+    // adres email jest nieprawidłowy; wyświetlamy komunikat
+    foreach ($validator->getMessages() as $messageId => $message) {
+        echo "Weryfikacja nieudana '$messageId': $message\n";
+    }
+}
+]]>
+            </programlisting>
+
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.validate.introduction.messages">
+
+        <title>Własne komunikaty</title>
+
+        <para>
+            Klasy weryfikatorów zapewniają metodę <code>setMessage()</code> za
+            pomocą które możesz określić format komunikatu zwracanego przez
+            metodę <code>getMessages()</code> w przypadku nieudanej weryfikacji.
+            Pierwszy argument tej metody jest łańcuchem znaków zawierającym
+            treść komunikatu błędu. W tym łańcuchu znaków możesz użyć
+            identyfikatorów, które zostaną zastąpione odpowiednimi danymi
+            pochodzącymi z weryfikatora. Identyfikator <code>%value%</code> jest
+            obsługiwany przez wszystkie weryfikatory; będzie on zastąpiony
+            wartością, która została przekazana do metody <code>isValid()</code>.
+            Inne identyfikatory mogą być obsługiwane indywidualnie w każdej
+            klasie weryfikatora. Na przykład identyfikator <code>%max%</code> jest
+            obsługiwany przez klasę <code>Zend_Validate_LessThan</code>.
+            Metoda <code>getMessageVariables()</code> zwraca tablicę
+            identyfikatorów obsługiwanych przez weryfikator.
+        </para>
+
+        <para>
+            Drugi opcjonalny argument jest łańcuchem znaków, który identyfikuje
+            szablon komunikatu który chcesz ustawić, co jest przydatne gdy
+            klasa definiuje więcej niż jeden komunikatów o błędach.
+            Jeśli pominiesz drugi argument, metoda <code>setMessage()</code>
+            założy, że komunikat, który określisz powinien być użyty dla
+            pierwszego szablonu komunikatu zadeklarowanego w klasie weryfikatora.
+            Wiele klas weryfikatorów posiada tylko jeden szablon komunikatu błędu,
+            więc nie ma potrzeby dokładnego określania szablonu komunikatu, który
+            chcesz nadpisać.
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_StringLength(8);
+
+$validator->setMessage(
+    'Łańcuch znaków \'%value%\' jest za krotki; ' .
+    'musi składać się z przynajmniej %min% znaków',
+    Zend_Validate_StringLength::TOO_SHORT);
+
+if (!$validator->isValid('word')) {
+    $messages = $validator->getMessages();
+    echo current($messages);
+
+    // "Łańcuch znaków 'word' jest za krotki;
+    // musi składać się z przynajmniej 8 znaków"
+}
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Możesz ustawić wiele komunikatów na raz używając metody
+            <code>setMessages()</code>. Jej argumentem jest tablica zawierająca
+            pary klucz/komunikat.
+
+            <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_StringLength(8, 12);
+
+$validator->setMessages( array(
+    Zend_Validate_StringLength::TOO_SHORT =>
+        'Łańcuch znaków \'%value%\' jest za krótki',
+    Zend_Validate_StringLength::TOO_LONG  =>
+        'Łańcuch znaków \'%value%\' jest za długi'
+));
+]]>
+            </programlisting>
+
+        </para>
+
+        <para>
+            Jeśli twoja aplikacja wymaga większej elastyczności w związku z
+            raportowaniem nieudanej weryfikacji, możesz uzyskać dostęp do
+            właściwości używając tych samych nazw, co identyfikatory komunikatów
+            używane przez daną klasę weryfikatora. Właściwość <code>value</code>
+            jest zawsze dostępna w weryfikatorze; jest to wartość, która została
+            podana jako argument metody <code>isValid()</code>. Inne właściwości
+            mogą być obsługiwane indywidualnie w każdej klasie weryfikatora.
+
+            <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_StringLength(8, 12);
+
+if (!validator->isValid('word')) {
+    echo 'Słowo niepoprawne: '
+        . $validator->value
+        . '; długość nie jest pomiędzy '
+        . $validator->min
+        . ' i '
+        . $validator->max
+        . "\n";
+}
+]]>
+            </programlisting>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.validate.introduction.static">
+
+        <title>Użycie statycznej metody <code>is()</code></title>
+
+        <para>
+            Jeśli niewygodne jest ładowanie danej klasy weryfikatora i tworzenie
+            instancji weryfikatora, możesz użyć statycznej metody
+            <code>Zend_Validate::is()</code> jako alternatywnego sposobu
+            wywołania. Pierwszym argumentem tej metody są dane wejściowe, które
+            chcesz przekazać do metody <code>isValid()</code>. Drugi argument
+            jest łańcuchem znaków, który odpowiada, bazowej nazwie klasy
+            weryfikatora, relatywnie do przestrzeni nazw <code>Zend_Validate</code>.
+            Metoda <code>is()</code> automatycznie ładuje klasę, tworzy instancję
+            i wywołuje metodę <code>isValid()</code> na danych wejściowych.
+
+            <programlisting role="php"><![CDATA[
+if (Zend_Validate::is($email, 'EmailAddress')) {
+    // Tak, adres email jest poprawny
+}
+]]>
+            </programlisting>
+
+        </para>
+
+        <para>
+            Możesz także przekazać tablicę argumentów konstruktora, jeśli są
+            one potrzebne w klasie weryfikatora.
+
+            <programlisting role="php"><![CDATA[
+if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+    // Tak, wartość $value jest pomiędzy 1 i 12
+}
+]]>
+            </programlisting>
+
+        </para>
+
+        <para>
+            Metoda <code>is()</code> zwraca wartość logiczną, taką samą jak
+            metoda <code>isValid()</code>. Gdy używana jest metoda statyczna
+            <code>is()</code>, komunikaty o nieudanej weryfikacji są niedostępne.
+        </para>
+
+        <para>
+            Użycie statyczne może być wygodne dla jednorazowego wywołania
+            weryfikatora, ale jeśli musisz wywołać weryfikator dla większej ilości
+            danych, bardziej efektywne jest wykorzystanie rozwiązania
+            niestatycznego, czyli utworzenie instancji obiektu weryfikatora
+            i wywołanie metody <code>isValid()</code>.
+        </para>
+
+        <para>
+            Dodatkowo klasa <code>Zend_Filter_Input</code> pozwala na utworzenie
+            instancji i wywołanie większej ilości klas filtrów i weryfikatorów w
+            celu przetworzenia zestawu danych wejściowych. Zobacz
+            <xref linkend="zend.filter.input" />.
+        </para>
+
+    </sect2>
+
+</sect1>

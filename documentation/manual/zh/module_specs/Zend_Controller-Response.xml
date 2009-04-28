@@ -1,0 +1,382 @@
+<sect1 id="zend.controller.response">
+    <title>响应对象</title>
+
+    <sect2 id="zend.controller.response.usage">
+        <title>用法</title>
+
+        <para>
+            响应对象逻辑上是<link linkend="zend.controller.request">请求对象</link>的搭档.目的在于收集消息体和/或消息头，因而可能返回大批的结果。另外前端控制器可能传递任何异常到响应对象，允许开发人员优美的处理异常。可以通过设置            <code>Zend_Controller_Front::throwExceptions(true)</code>覆盖这项功能：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+]]>
+        </programlisting>
+
+        <para>
+            如果要发送响应输出包括消息头，使用<code>sendResponse()</code>。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->sendResponse();
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                        默认地，前端控制器完成分发请求后调用<code>sendResponse()</code>；一般地，你不需要调用它。但是，如果你想处理响应或者用它来测试你可以使用<code>Zend_Controller_Front::returnResponse(true)</code>设置<code>returnResponse</code> 标志覆盖默认行为：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// do some more processing, such as logging...
+// and then send the output:
+$response->sendResponse();
+]]>
+            </programlisting>
+        </note>
+
+        <para>
+                  开发人员可以在动作控制器中使用响应对象。把结果写进响应对象，而不是直接渲染输出和发送消息头：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Within an action controller action:
+// Set a header
+$this->getResponse()
+    ->setHeader('Content-Type', 'text/html')
+    ->appendBody($content);
+]]>
+        </programlisting>
+
+        <para>
+            这样做，可以在显示内容之前，将所有消息头一次发送。
+        </para>
+
+        <note>
+            <para>
+                如果使用动作控制器的 <link linkend="zend.controller.action.viewintegration">视图集成(view integration)</link>，你不需要在相应对象中设置渲染的视图脚本，因为<code>Zend_Controller_Action::render()</code> 默认完成了这些。
+            </para>
+        </note>
+
+        <para>
+                  如果程序中发生了异常，检查响应对象的<code>isException()</code> 标志，使用<code>getException()</code>获取异常。此外，可以创建定制的响应对象重定向到错误页面，记录异常消息，漂亮的格式化异常消息等。
+        </para>
+
+        <para>
+                  在前端控制器执行dispatch()后可以获得响应对象，或者请求前端控制器返回响应对象代替渲染输出。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// retrieve post-dispatch:
+$front->dispatch();
+$response = $front->getResponse();
+if ($response->isException()) {
+    // log, mail, etc...
+}
+
+// Or, have the front controller dispatch() process return it
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// do some processing...
+
+// finally, echo the response
+$response->sendResponse();
+]]>
+        </programlisting>
+
+        <para>
+                  默认地，异常消息是不显示的。可以通过调用<code>renderExceptions()</code>覆盖默认设置。或者启用前端控制器的throwExceptions():
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->renderExceptions(true);
+$front->dispatch($request, $response);
+
+// or:
+$front->returnResponse(true);
+$response = $front->dispatch();
+$response->renderExceptions();
+$response->sendResponse();
+
+// or:
+$front->throwExceptions(true);
+$front->dispatch();
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.response.headers">
+        <title>处理消息头</title>
+
+        <para>
+                  如上文所述，响应对象的一项重要职责是收集和发出HTTP响应消息头，相应地存在大量的方法:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>canSendHeaders()</code> 用来判别消息头是否已发送，该方法带有一个可选的标志指示消息头已发出时是否抛出异常。可以通过设置<code>headersSentThrowsException</code> 属性为<code>false</code>来覆盖默认设置。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($name, $value, $replace = false)</code>用来设置单独的消息头。默认的不会替换已经存在的同名消息头，但可以设置<code>$replace</code> 为true强制替换.
+                </para>
+
+                <para>
+                              设置消息头前，该方法先检查<code>canSendHeaders()</code>看操作是否允许，并请求抛出异常。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRedirect($url, $code = 302)</code> 设置HTTP定位消息头准备重定向，如果提供HTTP状态码，重定向将会使用该状态码。
+                </para>
+
+                <para>
+                              其内部调用<code>setHeader()</code>并使<code>$replace</code> 标志呈打开状态确保只发送一次定位消息头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeaders()</code> 返回一个消息头数组，每个元素都是一个带有'name'和'value'键的数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders()</code> 清除所有注册的键值消息头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRawHeader()</code> 设置没有键值对的原始消息头，比如HTTP状态消息头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getRawHeaders()</code> 返回所有注册的原始消息头。
+                     </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearRawHeaders()</code>清除所有的原始消息头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearAllHeaders()</code> 清除所有的消息头，包括原始消息头和键值消息头。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+                  除了上述方法，还有获取和设置当前请求HTTP响应码的访问器，            <code>setHttpResponseCode()</code> 和            <code>getHttpResponseCode()</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.response.namedsegments">
+        <title>命名片段</title>
+
+        <para>
+                  相应对象支持“命名片段”。允许你将消息体分割成不同的片段，并呈一定顺序排列。因此输出的是以特定次序返回的。在其内部，主体内容被存储为一个数组，大量的访问器方法可以用来指示数组内位置和名称。
+        </para>
+
+        <para>
+                  举例来说，你可以使用<code>preDispatch()</code> 钩子来向响应对象中加入页头，然后在动作控制器中加入主体内容，最后在<code>postDispatch()</code>钩子中加入页脚。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Assume that this plugin class is registered with the front controller
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->prepend('header', $view->render('header.phtml'));
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->append('footer', $view->render('footer.phtml'));
+    }
+}
+
+// a sample action controller
+class MyController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+                  上面的例子中，调用<code>/my/foo</code>会使得最终响应对象中的内容呈现下面的结构：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+array(
+    'header'  => ..., // header content
+    'default' => ..., // body content from MyController::fooAction()
+    'footer'  => ...  // footer content
+);
+]]>
+        </programlisting>
+
+        <para>
+            渲染响应时，会按照数组中元素顺序来渲染。
+        </para>
+
+        <para>
+            大量的方法可以用来处理命名片段：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setBody()</code> 和 <code>appendBody()</code> 都允许传入一个<code>$name</code>参数，指示一个命名片段。如果提供了这个参数，将会覆盖指定的命名片段，如果该片段不存在就创建一个。如果没有传入<code>$name</code>参数到<code>setBody()</code>，将会重置整个主体内容。如果没有传入<code>$name</code>参数到<code>appendBody()</code>，内容被附加到'default'命名片段。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>prepend($name, $content)</code> 将创建一个<code>$name</code>命名片段并放置在数组的开始位置。如果该片段存在，将首先移除。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>append($name, $content)</code> 将创建一个<code>$name</code>命名片段，并放置在数组的结尾位置。 如果该片段存在，将首先移除。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>insert($name, $content, $parent = null, $before = false)</code> 将创建一个<code>$name</code>命名片段。如果提供<code>$parent</code>参数，新的片段视<code>$before</code>的值决定放置在	<code>$parent</code>的前面或者后面。如果该片段存在，将首先移除。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearBody($name = null)</code> 如果<code>$name</code>参数提供，将删除该片段，否则删除全部。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getBody($spec = false)</code> 如果<code>$spec</code>参数为一个片段名称，将可以获取到该字段。若<code>$spec</code>参数为false，将返回字符串格式的命名片段顺序链。如果<code>$spec</code>参数为true,返回主体内容数组。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.exceptions">
+        <title>在响应对象中测试异常</title>
+
+        <para>
+                  如上文所述，默认的，分发过程中的异常发生会在响应对象中注册。异常会注册在一个堆中，允许你抛出所有异常--程序异常，分发异常，插件异常等。如果你要检查或者记录特定的异常，你可能想要使用响应对象的异常API：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setException(Exception $e)</code> 注册一个异常。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>isException()</code> 判断该异常是否注册。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getException()</code> 返回整个异常堆。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfType($type)</code> 判断特定类的异常是否在堆中。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfMessage($message)</code> 判断带有指定消息的异常是否在堆中。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfCode($code)</code> 判断带有指定代码的异常是否在堆中。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByType($type)</code> 获取堆中特定类的所有异常。如果没有则返回false，否则返回数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByMessage($message)</code> 获取堆中带有特定消息的所有异常。如果没有则返回false，否则返回数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByCode($code)</code> 获取堆中带有特定编码的所有异常。如果没有则返回false，否则返回数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderExceptions($flag)</code> 设置标志指示当发送响应时是否发送其中的异常。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.subclassing">
+        <title>子类化响应对象</title>
+
+        <para>
+                  响应对象的目的首先在于从大量的动作和插件中收集消息头和内容，然后返回到客户端；其次，响应对象也收集发生的任何异常，以处理或者返回这些异常，再或者对终端用户隐藏它们。
+        </para>
+
+        <para>
+                  响应的基类是<code>Zend_Controller_Response_Abstract</code>，创建的任何子类必须继承这个类或它的衍生类。前面的章节中已经列出了大量可用的方法。
+        </para>
+
+        <para>
+                  子类化响应对象的原因包括基于请求环境修改返回的内容的输出方式（例如：在CLI和PHP-GTK请求中不发送消息头）增加返回存储在命名片段中内容的最终视图的功能等等。
+        </para>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

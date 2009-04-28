@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>Zend_Db_Profiler</title>
+
+    <sect2 id="zend.db.profiler.introduction">
+
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Db_Profiler</classname> can be enabled to allow profiling of
+            queries. Profiles include the queries processed by the adapter as
+            well as elapsed time to run the queries, allowing inspection of the
+            queries that have been performed without needing to add extra
+            debugging code to classes. Advanced usage also allows the
+            developer to filter which queries are profiled.
+        </para>
+
+        <para>
+            Enable the profiler by either passing a directive to the adapter
+            constructor, or by asking the adapter to enable it later.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$params = array(
+    'host'     => '127.0.0.1',
+    'username' => 'webuser',
+    'password' => 'xxxxxxxx',
+    'dbname'   => 'test'
+    'profiler' => true  // turn on profiler
+                        // set to false to disable (disabled by default)
+);
+
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+
+// turn off profiler:
+$db->getProfiler()->setEnabled(false);
+
+// turn on profiler:
+$db->getProfiler()->setEnabled(true);
+]]></programlisting>
+
+        <para>
+            The value of the '<code>profiler</code>' option is flexible. It is interpreted differently depending on its
+            type. Most often, you should use a simple boolean value, but other types enable you to customize the
+            profiler behavior.
+        </para>
+
+        <para>
+            A boolean argument sets the profiler to enabled if it is a <code>true</code> value, or disabled if
+            <code>false</code>. The profiler class is the adapter's default profiler class,
+            <classname>Zend_Db_Profiler</classname>.
+            <programlisting role="php"><![CDATA[
+$params['profiler'] = true;
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+]]></programlisting>
+        </para>
+
+        <para>
+            An instance of a profiler object makes the adapter use that object. The object type must be
+            <classname>Zend_Db_Profiler</classname> or a subclass thereof. Enabling the profiler is done separately.
+            <programlisting role="php"><![CDATA[
+$profiler = MyProject_Db_Profiler();
+$profiler->setEnabled(true);
+$params['profiler'] = $profiler;
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+]]></programlisting>
+        </para>
+
+        <para>
+            The argument can be an associative array containing any or all of the keys '<code>enabled</code>',
+            '<code>instance</code>', and '<code>class</code>'. The '<code>enabled</code>' and '<code>instance</code>'
+            keys correspond to the boolean and instance types documented above. The '<code>class</code>' key is used
+            to name a class to use for a custom profiler. The class must be <classname>Zend_Db_Profiler</classname> or a
+            subclass. The class is instantiated with no constructor arguments. The '<code>class</code>' option is
+            ignored when the '<code>instance</code>' option is supplied.
+            <programlisting role="php"><![CDATA[
+$params['profiler'] = array(
+    'enabled' => true,
+    'class'   => 'MyProject_Db_Profiler'
+);
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+]]></programlisting>
+        </para>
+
+        <para>
+            Finally, the argument can be an object of type <classname>Zend_Config</classname> containing properties, which are treated as the array keys described above. For example, a file "config.ini" might contain the following data:
+            <programlisting role="ini"><![CDATA[
+[main]
+db.profiler.class   = "MyProject_Db_Profiler"
+db.profiler.enabled = true
+]]></programlisting>
+
+            This configuration can be applied by the following PHP code:
+
+            <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('config.ini', 'main');
+$params['profiler'] = $config->db->profiler;
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+]]></programlisting>
+
+            The '<code>instance</code>' property may be used as in the following:
+            <programlisting role="php"><![CDATA[
+$profiler = new MyProject_Db_Profiler();
+$profiler->setEnabled(true);
+$configData = array(
+    'instance' => $profiler
+    );
+$config = new Zend_Config($configData);
+$params['profiler'] = $config;
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+]]></programlisting>
+
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.profiler.using">
+
+        <title>Using the Profiler</title>
+
+        <para>
+            At any point, grab the profiler using the adapter's
+            <code>getProfiler()</code> method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$profiler = $db->getProfiler();
+]]></programlisting>
+
+        <para>
+            This returns a <classname>Zend_Db_Profiler</classname> object instance. With
+            that instance, the developer can examine your queries using a
+            variety of methods:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getTotalNumQueries()</code> returns the total number
+                    of queries that have been profiled.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getTotalElapsedSecs()</code> returns the total
+                    number of seconds elapsed for all profiled queries.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getQueryProfiles()</code> returns an array of all
+                    query profiles.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getLastQueryProfile()</code> returns the last (most
+                    recent) query profile, regardless of whether or not the query
+                    has finished (if it hasn't, the end time will be null)
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>clear()</code> clears any past query profiles
+                    from the stack.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The return value of <code>getLastQueryProfile()</code> and the
+            individual elements of <code>getQueryProfiles()</code> are
+            <classname>Zend_Db_Profiler_Query</classname> objects, which provide the
+            ability to inspect the individual queries themselves:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getQuery()</code> returns the SQL text of the query.
+                    The SQL text of a prepared statement with parameters is the
+                    text at the time the query was prepared, so it contains
+                    parameter placeholders, not the values used when the
+                    statement is executed.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getQueryParams()</code> returns an array of
+                    parameter values used when executing a prepared query.
+                    This includes both bound parameters and arguments to the
+                    statement's <code>execute()</code> method. The keys of
+                    the array are the positional (1-based) or named (string)
+                    parameter indices.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getElapsedSecs()</code> returns the number of
+                    seconds the query ran.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The information <classname>Zend_Db_Profiler</classname> provides is useful for
+            profiling bottlenecks in applications, and for debugging queries
+            that have been run. For instance, to see the exact query that was
+            last run:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$query = $profiler->getLastQueryProfile();
+
+echo $query->getQuery();
+]]></programlisting>
+
+        <para>
+            Perhaps a page is generating slowly; use the profiler to determine
+            first the total number of seconds of all queries, and then step
+            through the queries to find the one that ran longest:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$totalTime    = $profiler->getTotalElapsedSecs();
+$queryCount   = $profiler->getTotalNumQueries();
+$longestTime  = 0;
+$longestQuery = null;
+
+foreach ($profiler->getQueryProfiles() as $query) {
+    if ($query->getElapsedSecs() > $longestTime) {
+        $longestTime  = $query->getElapsedSecs();
+        $longestQuery = $query->getQuery();
+    }
+}
+
+echo 'Executed ' . $queryCount . ' queries in ' . $totalTime .
+     ' seconds' . "\n";
+echo 'Average query length: ' . $totalTime / $queryCount .
+     ' seconds' . "\n";
+echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
+echo 'Longest query length: ' . $longestTime . "\n";
+echo "Longest query: \n" . $longestQuery . "\n";
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.db.profiler.advanced">
+
+        <title>Advanced Profiler Usage</title>
+
+        <para>
+            In addition to query inspection, the profiler also allows the
+            developer to filter which queries get profiled. The following
+            methods operate on a <classname>Zend_Db_Profiler</classname> instance:
+        </para>
+
+        <sect3 id="zend.db.profiler.advanced.filtertime">
+            <title>Filter by query elapsed time</title>
+
+            <para>
+                <code>setFilterElapsedSecs()</code> allows the developer to set
+                a minimum query time before a query is profiled. To remove the
+                filter, pass the method a null value.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Only profile queries that take at least 5 seconds:
+$profiler->setFilterElapsedSecs(5);
+
+// Profile all queries regardless of length:
+$profiler->setFilterElapsedSecs(null);
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.db.profiler.advanced.filtertype">
+            <title>Filter by query type</title>
+
+            <para>
+                <code>setFilterQueryType()</code> allows the developer to set
+                which types of queries should be profiled; to profile multiple
+                types, logical OR them. Query types are defined as the following
+                <classname>Zend_Db_Profiler</classname> constants:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::CONNECT</classname>: connection
+                        operations, or selecting a database.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::QUERY</classname>: general database
+                        queries that do not match other types.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::INSERT</classname>: any query that
+                        adds new data to the database, generally SQL INSERT.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::UPDATE</classname>: any query that
+                        updates existing data, usually SQL UPDATE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::DELETE</classname>: any query that
+                        deletes existing data, usually SQL DELETE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::SELECT</classname>: any query that
+                        retrieves existing data, usually SQL SELECT.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Profiler::TRANSACTION</classname>: any
+                        transactional operation, such as start transaction, commit,
+                        or rollback.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                As with <code>setFilterElapsedSecs()</code>, you can remove any
+                existing filters by passing <code>null</code> as the sole
+                argument.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// profile only SELECT queries
+$profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
+
+// profile SELECT, INSERT, and UPDATE queries
+$profiler->setFilterQueryType(Zend_Db_Profiler::SELECT |
+                              Zend_Db_Profiler::INSERT |
+                              Zend_Db_Profiler::UPDATE);
+
+// profile DELETE queries
+$profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
+
+// Remove all filters
+$profiler->setFilterQueryType(null);
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.db.profiler.advanced.getbytype">
+            <title>Retrieve profiles by query type</title>
+
+            <para>
+                Using <code>setFilterQueryType()</code> can cut down on the
+                profiles generated. However, sometimes it can be more useful to
+                keep all profiles, but view only those you need at a given
+                moment. Another feature of <code>getQueryProfiles()</code> is
+                that it can do this filtering on-the-fly, by passing a query
+                type (or logical combination of query types) as its first
+                argument; see <xref linkend="zend.db.profiler.advanced.filtertype" />
+                for a list of the query type constants.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Retrieve only SELECT query profiles
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
+
+// Retrieve only SELECT, INSERT, and UPDATE query profiles
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
+                                        Zend_Db_Profiler::INSERT |
+                                        Zend_Db_Profiler::UPDATE);
+
+// Retrieve DELETE query profiles
+$profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.profiler.profilers">
+        <title>Specialized Profilers</title>
+
+        <para>
+            A Specialized Profiler is an object that inherits from
+            <classname>Zend_Db_Profiler</classname>. Specialized Profilers treat
+            profiling information in specific ways.
+        </para>
+
+        <xi:include href="Zend_Db_Profiler-Firebug.xml" />
+
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

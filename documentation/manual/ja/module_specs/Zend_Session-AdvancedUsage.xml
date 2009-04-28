@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.session.advanced_usage">
+
+    <title>高度な使用法</title>
+
+    <para>
+        基本的な使用法の例で Zend Framework のセッションを完全に使用することができますが、
+        よりよい方法もあります。ここでは、セッションの処理方法や
+        Zend_Session コンポーネントのより行動な使用法を説明します。
+    </para>
+
+    <sect2 id="zend.session.advanced_usage.starting_a_session">
+
+        <title>セッションの開始</title>
+
+        <para>
+            すべてのリクエストで Zend_Session の機能を使用してセッション管理したい場合は、
+            起動ファイルでセッションを開始します。
+        </para>
+
+        <example id="zend.session.advanced_usage.starting_a_session.example">
+
+            <title>グローバルセッションの開始</title>
+
+            <programlisting role="php"><![CDATA[
+Zend_Session::start();
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            起動ファイルでセッションを開始する際には、
+            ヘッダがブラウザに送信される前に確実にセッションが始まるようにします。
+            そうしないと例外が発生してしまい、おそらくユーザが見るページは崩れてしまうでしょう。
+            さまざまな高度な機能を使用するには、まず <classname>Zend_Session::start()</classname>
+            が必要です (高度な機能の詳細については後で説明します)。
+        </para>
+
+        <para>
+            Zend_Session を使用してセッションを開始する方法は四通りありますが、
+            そのうち二つは間違った方法です。
+        </para>
+
+        <orderedlist>
+            <listitem>
+                <para>
+                    間違い: PHP の
+                    <ulink url="http://www.php.net/manual/ja/ref.session.php#ini.session.auto-start"><code>session.auto_start</code>
+                    </ulink> を有効にしてはいけません。
+                    もし mod_php (やそれと同等のもの) を使用しており、
+                    <code>php.ini</code> でこの設定が有効になっている、かつそれを無効にすることができない
+                    という場合は、<code>.htaccess</code> ファイル (通常は HTML のドキュメントルートにあります)
+                    に以下の内容を追加します。
+                    <programlisting role="httpd.conf"><![CDATA[
+php_value session.auto_start 0
+]]>
+</programlisting>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    間違い: PHP の
+                    <ulink url="http://www.php.net/session_start"><code>session_start()</code></ulink>
+                    関数を直接使用してはいけません。
+                    <code>session_start()</code> を直接使用した後で <classname>Zend_Session_Namespace</classname> を使用した場合は、
+                    <classname>Zend_Session::start()</classname> が例外 ("session has already been started")
+                    をスローします。<classname>Zend_Session_Namespace</classname> を使用するか
+                    明示的に <classname>Zend_Session::start()</classname> で開始した後で
+                    <code>session_start()</code> をコールすると、<code>E_NOTICE</code>
+                    が発生し、そのコールは無視されます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    正解: <classname>Zend_Session::start()</classname> を使用します。
+                    すべてのリクエストでセッションを使用したい場合は、
+                    この関数コールを起動コードの最初のほうで無条件に記述します。
+                    セッションにはある程度のオーバーヘッドがあります。
+                    セッションを使用したいリクエストとそうでないリクエストがある場合は、
+                </para>
+                <itemizedlist mark="opencircle">
+                    <listitem>
+                        <para>
+                            起動コード内で、<classname>Zend_Session::setOptions()</classname> を使用して
+                            無条件にオプション <code>strict</code> を <code>true</code> にします。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            セッションを必要とするリクエスト内で、
+                            <classname>Zend_Session_Namespace</classname> のインスタンスを作成する前に
+                            <classname>Zend_Session::start()</classname> をコールします。
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            通常どおり、必要に応じて "<code>new Zend_Session_Namespace()</code>"
+                            を使用します。事前に <classname>Zend_Session::start()</classname>
+                            がコールされていることを確認しておきましょう。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+                <para>
+                    <code>strict</code> オプションにより、<code>new Zend_Session_Namespace()</code>
+                    が自動的に <classname>Zend_Session::start()</classname> でセッションを開始することがなくなります。
+                    したがって、このオプションを使用すると、アプリケーションの開発者が
+                    特定のリクエストにはセッションを使用しないという設計をおこなうことができます。
+                    このオプションを使用すると、明示的に
+                    <classname>Zend_Session::start()</classname> をコールする前に Zend_Session_Namespace
+                    のインスタンスを作成しようとしたときに例外がスローされます。
+                    開発者は、<classname>Zend_Session::setOptions()</classname>
+                    の使用がユーザにどれだけの影響を与えるかを注意するようにしましょう。
+                    これらのオプションは
+                    (もととなる ext/session のオプションと同様)、
+                    全体に副作用を及ぼすからです。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    正解: 必要に応じて <classname>Zend_Session_Namespace</classname> のインスタンスを作成します。
+                    PHP のセッションは、自動的に開始されます。
+                    これはもっともシンプルな使用法で、たいていの場合にうまく動作します。
+                    しかし、デフォルトであるクッキーベースのセッション (強く推奨します)
+                    を使用している場合には、PHP がクライアントに何らかの出力
+                    (<ulink url="http://www.php.net/headers_sent">HTTP ヘッダ</ulink> など)
+                    をする <emphasis role="strong">前に</emphasis>、確実に
+                    最初の <code>new Zend_Session_Namespace()</code> をコールしなければなりません。
+                    詳細は <xref linkend="zend.session.global_session_management.headers_sent" />
+                    を参照ください。
+                </para>
+            </listitem>
+        </orderedlist>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.locking">
+
+        <title>セッション名前空間のロック</title>
+
+        <para>
+            セッション名前空間をロックし、
+            それ以降その名前空間のデータに手を加えられないようにすることができます。
+            特定の名前空間を読み取り専用にするには
+            <code>lock()</code> を、そして
+            読み取り専用の名前空間を読み書きできるようにするには <code>unLock()</code>
+            を使用します。<code>isLocked()</code> を使用すると、
+            その名前空間がロックされているかどうかを調べることができます。
+            このロックは一時的なものであり、そのリクエスト内でのみ有効となります。
+            名前空間をロックしても、その名前空間に保存されているオブジェクトの
+            セッターメソッドには何の影響も及ぼしません。
+            しかし、名前空間自体のセッターメソッドは使用できず、
+            名前空間に直接格納されたオブジェクトの削除や置換ができなくなります。同様に、
+            <classname>Zend_Session_Namespace</classname> のインスタンスをロックしたとしても、
+            同じデータをさすシンボルテーブルの使用をとめることはできません
+            (<ulink url="http://www.php.net/references">PHP
+            のリファレンスについての説明</ulink>も参照ください)。
+        </para>
+
+        <example id="zend.session.advanced_usage.locking.example.basic">
+
+            <title>セッション名前空間のロック</title>
+
+            <programlisting role="php"><![CDATA[
+$userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
+
+// このセッションに読み取り専用ロックをかけます
+$userProfileNamespace->lock();
+
+// 読み取り専用ロックを解除します
+if ($userProfileNamespace->isLocked()) {
+    $userProfileNamespace->unLock();
+}
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.expiration">
+
+        <title>名前空間の有効期限</title>
+
+        <para>
+            名前空間およびその中の個々のキーについて、その寿命を制限することができます。
+            これは、たとえばリクエスト間で一時的な情報を渡す際に使用します。
+            これにより、認証内容などの機密情報へアクセスできないようにし、
+            セキュリティリスクを下げます。有効期限の設定は経過秒数によって決めることもできますし、
+            "ホップ" 数によって決めることもできます。ホップ数とは、
+            一連のリクエストの回数を表します。
+        </para>
+
+        <example id="zend.session.advanced_usage.expiration.example">
+
+            <title>有効期限切れの例</title>
+
+            <programlisting role="php"><![CDATA[
+$s = new Zend_Session_Namespace('expireAll');
+$s->a = 'apple';
+$s->p = 'pear';
+$s->o = 'orange';
+
+$s->setExpirationSeconds(5, 'a'); // キー "a" だけは 5 秒で有効期限切れとなります
+
+// 名前空間全体は、5 "ホップ" で有効期限切れとなります
+$s->setExpirationHops(5);
+
+$s->setExpirationSeconds(60);
+// "expireAll" 名前空間は、60 秒が経過するか
+// 5 ホップに達するかのどちらかが発生した時点で
+// "有効期限切れ" となります
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            現在のリクエストで期限切れになったデータを扱うにあたり、
+            データを取得する際には注意が必要です。
+            データは参照で返されますが、それを変更したとしても
+            期限切れのデータを現在のリクエストから持ち越すことはできません。
+            有効期限を "リセット" するには、取得したデータをいったん一時変数に格納し、
+            名前空間上の内容を削除し、あらためて適切なキーで再設定します。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.controllers">
+
+        <title>コントローラでのセッションのカプセル化</title>
+
+        <para>
+            名前空間を使用すると、コントローラによるセッションへのアクセスの際に
+            変数の汚染を防ぐこともできます。
+            たとえば、認証コントローラでは、セキュリティの観点から
+            そのセッション状態データを他のコントローラとは別に管理することになるでしょう。
+        </para>
+
+        <example id="zend.session.advanced_usage.controllers.example">
+
+            <title>コントローラでの名前空間つきセッションによる有効期限の管理</title>
+
+            <para>
+                次のコードは、質問を表示するコントローラの一部です。
+                ここでは論理型の変数を用意して、質問に対する回答を受け付けるかどうかを表しています。
+                この場合は、表示されている質問に 300 秒以内に答えることになります。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// ...
+// 質問を表示するコントローラ
+$testSpace = new Zend_Session_Namespace('testSpace');
+// この変数にだけ有効期限を設定します
+$testSpace->setExpirationSeconds(300, 'accept_answer');
+$testSpace->accept_answer = true;
+//...
+]]>
+            </programlisting>
+
+            <para>
+                次に、回答を処理するコントローラを示します。
+                時間内に回答したかどうかをもとにして、回答を受け付けるかどうかを判断しています。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// ...
+// 回答を処理するコントローラ
+$testSpace = new Zend_Session_Namespace('testSpace');
+if ($testSpace->accept_answer === true) {
+    // 時間内
+}
+else {
+    // 時間切れ
+}
+// ...
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.single_instance">
+
+        <title>名前空間内あたりのインスタンス数をひとつに絞り込む</title>
+
+        <para>
+            <link linkend="zend.session.advanced_usage.locking">セッションのロック</link>
+            を利用すれば、名前空間つきセッションデータを予期せず使用してしまうことはある程度防げます。
+            しかし、<classname>Zend_Session_Namespace</classname> には、
+            単一の名前空間内で複数のインスタンスを作成することを防ぐ機能もあります。
+        </para>
+
+        <para>
+            この機能を有効にするには、<classname>Zend_Session_Namespace</classname>
+            のインスタンスを作成する際に、コンストラクタの第二引数に <code>true</code>
+            を渡します。それ以降は、同一名前空間でインスタンスを作成しようとすると例外がスローされます。
+        </para>
+
+        <example id="zend.session.advanced_usage.single_instance.example">
+
+            <title>セッション名前空間へのアクセスを単一のインスタンスに制限する</title>
+
+            <programlisting role="php"><![CDATA[
+// 名前空間のインスタンスを作成します
+$authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
+
+// 同じ名前空間で別のインスタンスを作成します。
+// しかし今後はインスタンスを作成できないようにします
+$authSpaceAccessor2 = new Zend_Session_Namespace('Zend_Auth', true);
+
+// 参照をすることは可能です
+$authSpaceAccessor3 = $authSpaceAccessor2;
+
+$authSpaceAccessor1->foo = 'bar';
+
+assert($authSpaceAccessor2->foo, 'bar');
+
+try {
+    $aNamespaceObject = new Zend_Session_Namespace('Zend_Auth');
+} catch (Zend_Session_Exception $e) {
+    echo 'この名前空間ではインスタンスを作成できません。すでに ' .
+         '$authSpaceAccessor2 があるからです\n';
+}
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            上の例では、コンストラクタの第二引数を用いて
+            "<classname>Zend_Auth</classname>" 名前空間では今後インスタンスを作成させないよう
+            <classname>Zend_Session_Namespace</classname> に指示しています。
+            インスタンスを作成しようとすると、コンストラクタから例外がスローされます。
+            したがって、このセッション名前空間へのアクセスが必要となった場合は、
+            今後は現在あるインスタンス (上の例の場合なら <code>$authSpaceAccessor1</code>、
+            <code>$authSpaceAccessor2</code> あるいは <code>$authSpaceAccessor3</code>)
+            のどれかを使うことになるわけです。
+            たとえば、名前空間への参照を静的変数に格納したり、
+            <ulink url="http://www.martinfowler.com/eaaCatalog/registry.html">レジストリ</ulink>
+            (<xref linkend="zend.registry" /> を参照ください) に格納したり、
+            あるいは名前空間へのアクセスを必要とするその他のメソッドで使用したりします。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.arrays">
+
+        <title>配列の使用</title>
+
+        <para>
+            PHP のマジックメソッドの実装上の理由で、バージョン 5.2.1 より前の PHP
+            では名前空間内の配列の修正ができません。
+            もし PHP 5.2.1 以降を使っている場合は、<link
+            linkend="zend.session.advanced_usage.objects">このセクションは読み飛ばしてください</link>。
+        </para>
+
+        <example id="zend.session.advanced_usage.arrays.example.modifying">
+
+            <title>セッション名前空間内での配列データの修正</title>
+
+            <para>
+                問題の再現手順は、このようになります。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$sessionNamespace = new Zend_Session_Namespace();
+$sessionNamespace->array = array();
+
+// PHP 5.2.1 より前のバージョンでは、期待通りに動作しません
+$sessionNamespace->array['testKey'] = 1;
+echo $sessionNamespace->array['testKey'];
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.session.advanced_usage.arrays.example.building_prior">
+
+            <title>セッションに保存する前に配列を作成する</title>
+
+            <para>
+                可能なら、先に配列のすべての値を設定してからセッションに格納するようにすればこの問題を回避できます。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$sessionNamespace = new Zend_Session_Namespace('Foo');
+$sessionNamespace->array = array('a', 'b', 'c');
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            この問題の影響を受けるバージョンの PHP を使っている場合で、
+            セッション名前空間に代入した後に配列を修正したい場合は、
+            以下の回避策のうちのいずれかを使用します。
+        </para>
+
+        <example id="zend.session.advanced_usage.arrays.example.workaround.reassign">
+
+            <title>回避策: 修正した配列を再度代入する</title>
+
+            <para>
+                以下のコードでは、保存されている配列のコピーを作成してそれを修正し、
+                修正したコピーを再度代入してもとの配列を上書きします。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$sessionNamespace = new Zend_Session_Namespace();
+
+// 配列を代入します
+$sessionNamespace->array = array('tree' => 'apple');
+
+// そのコピーを作成します
+$tmp = $sessionNamespace->array;
+
+// コピーのほうを修正します
+$tmp['fruit'] = 'peach';
+
+// 修正したコピーをセッション名前空間に書き戻します
+$sessionNamespace->array = $tmp;
+
+echo $sessionNamespace->array['fruit']; // prints "peach"
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.session.advanced_usage.arrays.example.workaround.reference">
+
+            <title>回避策: 参照を含む配列を格納する</title>
+
+            <para>
+                あるいは、実際の配列への参照を含む配列を格納しておき、
+                間接的にアクセスするようにします。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$myNamespace = new Zend_Session_Namespace('myNamespace');
+$a = array(1, 2, 3);
+$myNamespace->someArray = array( &$a );
+$a['foo'] = 'bar';
+echo $myNamespace->someArray['foo']; // "bar" と表示されます
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.objects">
+
+        <title>セッションでのオブジェクトの使用</title>
+
+        <para>
+            オブジェクトを PHP セッション内で持続的に使用したい場合は、
+            <ulink url="http://www.php.net/manual/ja/language.oop.serialization.php">シリアライズ</ulink>
+            を使用します。したがって、PHP セッションから永続オブジェクトを取得したら、
+            そのシリアライズを解除しなければなりません。
+            ということは、永続オブジェクトをセッションから読み出す前に、
+            そのオブジェクトのクラスが定義されていなければならないということです。
+            クラスが定義されていない場合は、<code>stdClass</code>
+            のオブジェクトとして復元されます。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.session.advanced_usage.testing">
+
+        <title>ユニットテストでのセッションの使用</title>
+
+        <para>
+            Zend Framework 自体のテストには PHPUnit を使用しています。
+            多くの開発者は、このテストスイートを拡張して自分のアプリケーションのコードをテストしています。
+            ユニットテスト中で、セッションの終了後に書き込み関連のメソッドを使用すると
+            "<emphasis role="strong">Zend_Session is currently marked as read-only</emphasis>"
+            という例外がスローされます。しかし、Zend_Session を使用するユニットテストには要注意です。
+            セッションを閉じたり (<classname>Zend_Session::writeClose()</classname>)
+            破棄したり (<classname>Zend_Session::destroy()</classname>) したら、
+            それ以降は <classname>Zend_Session_Namespace</classname> のインスタンスへのキーの設定や削除ができなくなります。
+            これは、ext/session や、PHP の
+            PHP <code>session_destroy()</code> および <code>session_write_close()</code>
+            の仕様によるものです, これらには、ユニットテストの setup/teardown
+            時に使用できるような、いわゆる "undo" 機能が備わっていないのです。
+        </para>
+
+        <para>
+            この問題の回避策は、
+            <code>SessionTest.php</code> および <code>SessionTestHelper.php</code>
+            (どちらも <code>tests/Zend/Session</code> にあります)
+            のユニットテストテスト <code>testSetExpirationSeconds()</code> を参照ください。
+            これは、PHP の <code>exec()</code> によって別プロセスを起動しています。
+            新しいプロセスが、ブラウザからの二番目以降のリクエストをシミュレートします。
+            この別プロセスの開始時にはセッションを "初期化" します。
+            ちょうど、ふつうの PHP スクリプトがウェブリクエストを実行する場合と同じような動作です。
+            また、呼び出し元のプロセスで <code>$_SESSION</code> を変更すると、
+            子プロセスでそれが反映されます。親側では
+            <code>exec()</code> を使用する前にセッションを閉じています。
+        </para>
+
+        <example id="zend.session.advanced_usage.testing.example">
+
+            <title>PHPUnit で Zend_Session を使用したコードをテストする例</title>
+
+            <programlisting role="php"><![CDATA[
+// testing setExpirationSeconds()
+$script = 'SessionTestHelper.php';
+$s = new Zend_Session_Namespace('space');
+$s->a = 'apple';
+$s->o = 'orange';
+$s->setExpirationSeconds(5);
+
+Zend_Session::regenerateId();
+$id = Zend_Session::getId();
+session_write_close(); // release session so process below can use it
+sleep(4); // not long enough for things to expire
+exec($script . "expireAll $id expireAll", $result);
+$result = $this->sortResult($result);
+$expect = ';a === apple;o === orange;p === pear';
+$this->assertTrue($result === $expect,
+    "iteration over default Zend_Session namespace failed; " .
+    "expecting result === '$expect', but got '$result'");
+
+sleep(2); // long enough for things to expire (total of 6 seconds
+          // waiting, but expires in 5)
+exec($script . "expireAll $id expireAll", $result);
+$result = array_pop($result);
+$this->assertTrue($result === '',
+    "iteration over default Zend_Session namespace failed; " .
+    "expecting result === '', but got '$result')");
+session_start(); // resume artificially suspended session
+
+// We could split this into a separate test, but actually, if anything
+// leftover from above contaminates the tests below, that is also a
+// bug that we want to know about.
+$s = new Zend_Session_Namespace('expireGuava');
+$s->setExpirationSeconds(5, 'g'); // now try to expire only 1 of the
+                                  // keys in the namespace
+$s->g = 'guava';
+$s->p = 'peach';
+$s->p = 'plum';
+
+session_write_close(); // release session so process below can use it
+sleep(6); // not long enough for things to expire
+exec($script . "expireAll $id expireGuava", $result);
+$result = $this->sortResult($result);
+session_start(); // resume artificially suspended session
+$this->assertTrue($result === ';p === plum',
+    "iteration over named Zend_Session namespace failed (result=$result)");
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+</sect1>

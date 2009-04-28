@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Error response returned for a Blogposttags request
+    http://api.technorati.com/blogposttags?key=VALID_API_KEY
+
+-->
+<!-- generator="Technorati API version 1.0 /bloginfo" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <error>Invalid request: url is required</error>
+        </result>
+    </document>
+</tapi>

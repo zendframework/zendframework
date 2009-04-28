@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.filter_chains">
+
+    <title>Filter Chains</title>
+
+    <para>
+        Often multiple filters should be applied to some value in a particular order. For example, a
+        login form accepts a username that should be only lowercase, alphabetic characters.
+        <classname>Zend_Filter</classname> provides a simple method by which filters may be chained together. The
+        following code illustrates how to chain together two filters for the submitted username:
+
+        <programlisting role="php"><![CDATA[
+<// Create a filter chain and add filters to the chain
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new Zend_Filter_Alpha())
+            ->addFilter(new Zend_Filter_StringToLower());
+
+// Filter the username
+$username = $filterChain->filter($_POST['username']);
+]]></programlisting>
+
+        Filters are run in the order they were added to <classname>Zend_Filter</classname>. In the above example, the
+        username is first removed of any non-alphabetic characters, and then any uppercase characters are
+        converted to lowercase.
+
+    </para>
+
+    <para>
+        Any object that implements <classname>Zend_Filter_Interface</classname> may be used in a filter chain.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

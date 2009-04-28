@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.test.phpunit.testing">
+    <title>Testen eigener Kontroller und MVC Anwendungen</title>
+
+    <para>
+        Sobald man sein Bootstrap hat, kann man mit dem Testen beginnen. Testen funktioniert grundsätzlich wie
+        man es in einer PHPUnit Test Suite erwarten würde, mit ein paar kleinen Unterschieden.
+    </para>
+
+    <para>
+        Zuerst muß man eine URL die getestet werden soll ausführen, indem die <code>dispatch()</code> Methode
+        des TestCases ausgeführt wird:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testHomePage()
+    {
+        $this->dispatch('/');
+        // ...
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Es gibt trotzdem Zeiten, , in denen man zusätzliche Informationen angeben muß -- GET und POST Variablen,
+        COOKIE Informationen, usw. Man kann die Anfrage mit diesen Informationen ausstatten:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testBarActionShouldReceiveAllParameters()
+    {
+        // Setzt GET Variablen:
+        $this->request->setQuery(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+
+        // Setzt POST Variablen:
+        $this->request->setPost(array(
+            'baz'  => 'bat',
+            'lame' => 'bogus',
+        ));
+
+        // Setzt einen Cookie Wert:
+        $this->request->setCookie('user', 'matthew');
+        // or many:
+        $this->request->setCookies(array(
+            'timestamp' => time(),
+            'host'      => 'foobar',
+        ));
+
+        // Setzt sogar Header:
+        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+
+        // Setzt die Anfrage Methode:
+        $this->request->setMethod('POST');
+
+        // Ausführung:
+        $this->dispatch('/foo/bar');
+
+        // ...
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Jetzt wurde die Anfrage durchgeführt, es ist also Zeit Ausnahmen zu prüfen.
+    </para>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

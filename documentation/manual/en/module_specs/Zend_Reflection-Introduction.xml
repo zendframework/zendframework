@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.reflection.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <classname>Zend_Reflection</classname> is a drop-in extension to PHP's own <ulink
+            url="http://php.net/reflection">Reflection API</ulink>, providing
+        several additional features:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            Ability to retrieve return values types.
+        </para></listitem>
+
+        <listitem><para>
+            Ability to retrieve method and function parameter types.
+        </para></listitem>
+
+        <listitem><para>
+            Ability to retrieve class property types.
+        </para></listitem>
+
+        <listitem><para>
+            DocBlocks gain a Reflection class, allowing introspection of
+            docblocks. This provides the ability to determine what annotation
+            tags have been defined as well as to retrieve their values, and the
+            ability to retrieve the short and long descriptions.
+        </para></listitem>
+
+        <listitem><para>
+            Files gain a Reflection class, allowing introspection of PHP files.
+            This provides the ability to determine what functions and classes
+            are defined in a given file, as well as to instrospect them.
+        </para></listitem>
+
+        <listitem><para>
+            Ability to override any Reflection class with your own variant, for
+            the entire reflection tree you create.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        In general, <classname>Zend_Reflection</classname> works just like the standard
+        Reflection API, but provides a few additional methods for retrieving
+        artifacts not defined in the Reflection API.
+    </para>
+</sect1>

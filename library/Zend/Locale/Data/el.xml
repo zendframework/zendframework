@@ -1,0 +1,2642 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.95 $"/>
+		<generation date="$Date: 2008/06/26 03:47:57 $"/>
+		<language type="el"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="af">Αφρικάανς</language>
+			<language type="afa">Αφροασιατική Γλώσσα</language>
+			<language type="am">Αμαρικά</language>
+			<language type="ang">Παλαιά Αγγλικά</language>
+			<language type="apa">Γλώσσα Απάτσι</language>
+			<language type="ar">Αραβικά</language>
+			<language type="arc">Αραμαϊκά</language>
+			<language type="arp">Αράπαχο</language>
+			<language type="art">Τεχνητή Γλώσσα</language>
+			<language type="as">Ασαμέζικα</language>
+			<language type="aus">Αυστραλιανή Γλώσσα</language>
+			<language type="ay">Αϊμάρα</language>
+			<language type="az">Αζερμπαϊτζανικά</language>
+			<language type="bat">Βαλτική Γλώσσα</language>
+			<language type="be">Λευκορωσικά</language>
+			<language type="bg">Βουλγαρικά</language>
+			<language type="bh">Μπιχάρι</language>
+			<language type="bn">Μπενγκάλι</language>
+			<language type="bo">Θιβετιανά</language>
+			<language type="br">Βρετονικά</language>
+			<language type="bs">Βοσνιακά</language>
+			<language type="ca">Καταλανικά</language>
+			<language type="cai">Ινδιανική Γλώσσα Κεντρικής Αμερικής</language>
+			<language type="cau">Καυκάσια Γλώσσα</language>
+			<language type="cel">Κελτική Γλώσσα</language>
+			<language type="co">Κορσικανικά</language>
+			<language type="cop">Κοπτικά</language>
+			<language type="crh">Τουρκικά Κριμαίας</language>
+			<language type="cs">Τσεχικά</language>
+			<language type="cy">Ουαλικά</language>
+			<language type="da">Δανικά</language>
+			<language type="de">Γερμανικά</language>
+			<language type="de_AT">Γερμανικά Αυστρίας</language>
+			<language type="de_CH">Γερμανικά Ελβετίας</language>
+			<language type="dum">Μέσα Ολλανδικά</language>
+			<language type="egy">Αρχαία Αιγυπτιακά</language>
+			<language type="el">Ελληνικά</language>
+			<language type="en">Αγγλικά</language>
+			<language type="en_AU">Αγγλικά Αυστραλίας</language>
+			<language type="en_CA">Αγγλικά Καναδά</language>
+			<language type="en_GB">Αγγλικά Ηνωμένου Βασιλείου</language>
+			<language type="en_US">Αγγλικά Ηνωμένων Πολιτειών</language>
+			<language type="enm">Μέσα Αγγλικά</language>
+			<language type="eo">Εσπεράντο</language>
+			<language type="es">Ισπανικά</language>
+			<language type="es_419">Ισπανικά Λατινικής Αμερικής</language>
+			<language type="es_ES">Ισπανικά Ιβηρικής</language>
+			<language type="et">Εσθονικά</language>
+			<language type="eu">Βασκικά</language>
+			<language type="fa">Περσικά</language>
+			<language type="fi">Φινλανδικά</language>
+			<language type="fil">Φιλιππινέζικα</language>
+			<language type="fo">Φαρόε</language>
+			<language type="fr">Γαλλικά</language>
+			<language type="fr_CA">Γαλλικά Καναδά</language>
+			<language type="fr_CH">Γαλλικά Ελβετίας</language>
+			<language type="frm">Μέσα Γαλλικά</language>
+			<language type="fro">Παλαιά Γαλλικά</language>
+			<language type="fy">Φριζιανά</language>
+			<language type="ga">Ιρλανδικά</language>
+			<language type="gd">Σκωτικά Κελτικά</language>
+			<language type="gl">Γαλικιανά</language>
+			<language type="gmh">Μέσα Άνω Γερμανικά</language>
+			<language type="gn">Γκουαράνι</language>
+			<language type="goh">Παλαιά Άνω Γερμανικά</language>
+			<language type="got">Γοτθικά</language>
+			<language type="grc">Αρχαία Ελληνικά</language>
+			<language type="gu">Γκουγιαράτι</language>
+			<language type="haw">Χαβανέζικα</language>
+			<language type="he">Εβραϊκά</language>
+			<language type="hi">Χίντι</language>
+			<language type="hr">Κροατικά</language>
+			<language type="hu">Ουγγρικά</language>
+			<language type="hy">Αρμενικά</language>
+			<language type="ia">Ιντερλίνγκουα</language>
+			<language type="id">Ινδονησιακά</language>
+			<language type="ie">Ιντερλίνγκουε</language>
+			<language type="ine">Ινδοευρωπαϊκά (¨Αλλη)</language>
+			<language type="ira">ιρανικά</language>
+			<language type="is">Ισλανδικά</language>
+			<language type="it">Ιταλικά</language>
+			<language type="ja">Ιαπωνικά</language>
+			<language type="jpr">Ιουδαϊκά-Περσικά</language>
+			<language type="jrb">Ιουδαϊκά-Αραβικά</language>
+			<language type="jv">Ιαβανέζικα</language>
+			<language type="ka">Γεωργιανά</language>
+			<language type="km">Καμποτζιανά</language>
+			<language type="kn">Κανάντα</language>
+			<language type="ko">Κορεατικά</language>
+			<language type="ks">Κασμίρι</language>
+			<language type="ku">Κουρδικά</language>
+			<language type="ky">Κυργιζικά</language>
+			<language type="la">Λατινικά</language>
+			<language type="lb">Λουξεμβουργικά</language>
+			<language type="ln">Λινγκάλα</language>
+			<language type="lo">Λαοθιανά</language>
+			<language type="lt">Λιθουανικά</language>
+			<language type="lv">Λετονικά</language>
+			<language type="mga">Μέσα Ιρλανδικά</language>
+			<language type="mis">Διάφορες Γλώσσες</language>
+			<language type="mk">Σλαβομακεδονικά</language>
+			<language type="ml">Μαλαγιαλάμ</language>
+			<language type="mn">Μογγολικά</language>
+			<language type="mo">Μολδαβικά</language>
+			<language type="mr">Μαράθι</language>
+			<language type="ms">Μαλάι</language>
+			<language type="mt">Μαλτέζικα</language>
+			<language type="mul">Πολλαπλές Γλώσσες</language>
+			<language type="my">Βιρμανικά</language>
+			<language type="nai">Ινδιανικά Βόρειας Αμερικής (Άλλα)</language>
+			<language type="ne">Νεπάλι</language>
+			<language type="nl">Ολλανδικά</language>
+			<language type="nl_BE">Φλαμανδικά</language>
+			<language type="nn">Νορβηγικά Νινόρσκ</language>
+			<language type="no">Νορβηγικά</language>
+			<language type="non">Παλαιά Νορβηγικά</language>
+			<language type="oc">Οκσιτανικά</language>
+			<language type="or">Ορίγια</language>
+			<language type="ota">Τουρκικά Οθωμανικά</language>
+			<language type="pa">Παντζαπικά</language>
+			<language type="peo">Αρχαία Περσικά</language>
+			<language type="phi">Φιλιππινέζικα (Άλλα)</language>
+			<language type="phn">Φοινικικά</language>
+			<language type="pl">Πολωνικά</language>
+			<language type="ps">Πάστο</language>
+			<language type="pt">Πορτογαλικά</language>
+			<language type="pt_BR">Πορτογαλικά Βραζιλίας</language>
+			<language type="pt_PT">Πορτογαλικά Ιβηρικής</language>
+			<language type="ro">Ρουμανικά</language>
+			<language type="rom">Ρωμανικά</language>
+			<language type="ru">Ρωσικά</language>
+			<language type="sa">Σανσκριτικά</language>
+			<language type="sai">Ινδιανική Γλώσσα Νοτίου Αμερικής</language>
+			<language type="sd">Σίντι</language>
+			<language type="sem">Σημιτικά (Άλλα)</language>
+			<language type="sga">Παλαιά Ιρλανδικά</language>
+			<language type="sh">Σερβοκροατικά</language>
+			<language type="si">Σινχαλέζικα</language>
+			<language type="sit">Σινοθιβετιανή Γλώσσα</language>
+			<language type="sk">Σλοβακικά</language>
+			<language type="sl">Σλοβενικά</language>
+			<language type="sla">Σλαβικά (Άλλα)</language>
+			<language type="so">Σομάλι</language>
+			<language type="sq">Αλβανικά</language>
+			<language type="sr">Σερβικά</language>
+			<language type="su">Σουδανικά</language>
+			<language type="sv">Σουηδικά</language>
+			<language type="sw">Σουαχίλι</language>
+			<language type="syr">Συριακά</language>
+			<language type="ta">Ταμίλ</language>
+			<language type="te">Τελούγκου</language>
+			<language type="th">Ταϊλανδικά</language>
+			<language type="ti">Τιγκρίνυα</language>
+			<language type="tk">Τουρκμενικά</language>
+			<language type="tlh">Κλίνγκον</language>
+			<language type="tr">Τουρκικά</language>
+			<language type="tw">Τούι</language>
+			<language type="ug">Ουιγουρικά</language>
+			<language type="uk">Ουκρανικά</language>
+			<language type="und">Άγνωστη ή Ακατάλληλη Γλώσσα</language>
+			<language type="ur">Ουρντού</language>
+			<language type="uz">Ουζμπεκικά</language>
+			<language type="vi">Βιετναμέζικα</language>
+			<language type="wo">Γουόλοφ</language>
+			<language type="xh">Ζόσα</language>
+			<language type="yi">Ιουδαϊκά</language>
+			<language type="zh">Κινεζικά</language>
+			<language type="zh_Hans">Κινεζικά Απλοποιημένα</language>
+			<language type="zh_Hant">Κινεζικά Παραδοσιακά</language>
+			<language type="zu">Ζουλού</language>
+			<language type="zxx">Χωρίς γλωσσολογικό περιεχόμενο</language>
+		</languages>
+		<scripts>
+			<script type="Arab">Αραβικό</script>
+			<script type="Armn">Αρμενικό</script>
+			<script type="Beng">Μπενγκάλι</script>
+			<script type="Brai">Μπράιγ</script>
+			<script type="Copt">Κοπτικό</script>
+			<script type="Cprt">Κυπριακό</script>
+			<script type="Cyrl">Κυριλλικό</script>
+			<script type="Cyrs">Παλαιό Εκκλησιαστικό Σλαβικό Κυριλλικό</script>
+			<script type="Egyd">Αιγυπτιακό Λαϊκό</script>
+			<script type="Egyh">Αιγυπτιακό Ιερατικό</script>
+			<script type="Egyp">Αιγυπτιακά Ιερογλυφικά</script>
+			<script type="Ethi">Αιθιοπικό</script>
+			<script type="Geor">Γεωργιανό</script>
+			<script type="Goth">Γοτθικό</script>
+			<script type="Grek">Ελληνικό</script>
+			<script type="Gujr">Γκουγιαράτι</script>
+			<script type="Hans">Κινεζικό Απλοποιημένο</script>
+			<script type="Hant">Κινεζικό Παραδοσιακό</script>
+			<script type="Hebr">Εβραϊκό</script>
+			<script type="Hung">Παλαιό Ουγγρικό</script>
+			<script type="Ital">Παλαιό Ιταλικό</script>
+			<script type="Java">Ιαβανέζικο</script>
+			<script type="Jpan">Ιαπωνικό</script>
+			<script type="Knda">Καναντικό</script>
+			<script type="Latn">Λατινικό</script>
+			<script type="Lina">Γραμμική Α</script>
+			<script type="Linb">Γραμμική Β</script>
+			<script type="Mlym">Μαλαϊκό</script>
+			<script type="Mong">Μογγολικό</script>
+			<script type="Perm">Παλαιό Περμικό</script>
+			<script type="Phnx">Φοινικικό</script>
+			<script type="Syrc">Συριακό</script>
+			<script type="Syrn">Συριακό Ανατολικό</script>
+			<script type="Thai">Ταϊλανδικό</script>
+			<script type="Tibt">Θιβετιανό</script>
+			<script type="Xpeo">Παλαιό Περσικό</script>
+			<script type="Zxxx">Zxxx</script>
+			<script type="Zyyy">Κοινό</script>
+			<script type="Zzzz">Άγνωστη ή Ακατάλληλη Γραφή</script>
+		</scripts>
+		<territories>
+			<territory type="001">Κόσμος</territory>
+			<territory type="002">Αφρική</territory>
+			<territory type="003">Βόρεια Αμερική</territory>
+			<territory type="005">Νότια Αμερική</territory>
+			<territory type="009">Ωκεανία</territory>
+			<territory type="011">Δυτική Αφρική</territory>
+			<territory type="013">Κεντρική Αμερική</territory>
+			<territory type="014">Ανατολική Αφρική</territory>
+			<territory type="015">Βόρεια Αφρική</territory>
+			<territory type="017">Μέση Αφρική</territory>
+			<territory type="018">Νότια Αφρική [018]</territory>
+			<territory type="019">Αμερική</territory>
+			<territory type="021">Βόρειος Αμερική</territory>
+			<territory type="029">Καραϊβική</territory>
+			<territory type="030">Ανατολική Ασία</territory>
+			<territory type="034">Νότια Ασία</territory>
+			<territory type="035">Νοτιοανατολική Ασία</territory>
+			<territory type="039">Νότια Ευρώπη</territory>
+			<territory type="053">Αυστραλία και Νέα Ζηλανδία</territory>
+			<territory type="054">Μελανησία</territory>
+			<territory type="057">Περιοχή Μικρονησίας</territory>
+			<territory type="061">Πολυνησία</territory>
+			<territory type="062">Νότια Κεντρική Ασία</territory>
+			<territory type="142">Ασία</territory>
+			<territory type="143">Κεντρική Ασία</territory>
+			<territory type="145">Δυτική Ασία</territory>
+			<territory type="150">Ευρώπη</territory>
+			<territory type="151">Ανατολική Ευρώπη</territory>
+			<territory type="154">Βόρεια Ευρώπη</territory>
+			<territory type="155">Δυτική Ευρώπη</territory>
+			<territory type="172">Κοινοπολιτεία Ανεξαρτήτων Πολιτειών</territory>
+			<territory type="419">Λατινική Αμερική και Καραϊβική</territory>
+			<territory type="830">Νήσοι Καναλιού</territory>
+			<territory type="AD">Ανδόρα</territory>
+			<territory type="AE">Ηνωμένα Αραβικά Εμιράτα</territory>
+			<territory type="AF">Αφγανιστάν</territory>
+			<territory type="AG">Αντίγκουα και Μπαρμπούντα</territory>
+			<territory type="AI">Ανγκουίλα</territory>
+			<territory type="AL">Αλβανία</territory>
+			<territory type="AM">Αρμενία</territory>
+			<territory type="AN">Ολλανδικές Αντίλλες</territory>
+			<territory type="AO">Ανγκόλα</territory>
+			<territory type="AQ">Ανταρκτική</territory>
+			<territory type="AR">Αργεντινή</territory>
+			<territory type="AS">Αμερικανική Σαμόα</territory>
+			<territory type="AT">Αυστρία</territory>
+			<territory type="AU">Αυστραλία</territory>
+			<territory type="AW">Αρούμπα</territory>
+			<territory type="AX">Νήσοι Άλαντ</territory>
+			<territory type="AZ">Αζερμπαϊτζάν</territory>
+			<territory type="BA">Βοσνία - Ερζεγοβίνη</territory>
+			<territory type="BB">Μπαρμπάντος</territory>
+			<territory type="BD">Μπανγκλαντές</territory>
+			<territory type="BE">Βέλγιο</territory>
+			<territory type="BF">Μπουρκίνα Φάσο</territory>
+			<territory type="BG">Βουλγαρία</territory>
+			<territory type="BH">Μπαχρέιν</territory>
+			<territory type="BI">Μπουρούντι</territory>
+			<territory type="BJ">Μπένιν</territory>
+			<territory type="BL">Άγιος Βαρθολομαίος</territory>
+			<territory type="BM">Βερμούδες</territory>
+			<territory type="BN">Μπρουνέι Νταρουσαλάμ</territory>
+			<territory type="BO">Βολιβία</territory>
+			<territory type="BR">Βραζιλία</territory>
+			<territory type="BS">Μπαχάμες</territory>
+			<territory type="BT">Μπουτάν</territory>
+			<territory type="BV">Νήσος Μπουβέ</territory>
+			<territory type="BW">Μποτσουάνα</territory>
+			<territory type="BY">Λευκορωσία</territory>
+			<territory type="BZ">Μπελίζ</territory>
+			<territory type="CA">Καναδάς</territory>
+			<territory type="CC">Νήσοι Κόκος</territory>
+			<territory type="CD">Κονγκό - Κινσάσα</territory>
+			<territory type="CF">Κεντροαφρικανική Δημοκρατία</territory>
+			<territory type="CG">Κονγκό</territory>
+			<territory type="CH">Ελβετία</territory>
+			<territory type="CI">Ακτή Ελεφαντοστού</territory>
+			<territory type="CK">Νήσοι Κουκ</territory>
+			<territory type="CL">Χιλή</territory>
+			<territory type="CM">Καμερούν</territory>
+			<territory type="CN">Κίνα</territory>
+			<territory type="CO">Κολομβία</territory>
+			<territory type="CR">Κόστα Ρίκα</territory>
+			<territory type="CS">Σερβία και Μαυροβούνιο</territory>
+			<territory type="CU">Κούβα</territory>
+			<territory type="CV">Πράσινο Ακρωτήριο</territory>
+			<territory type="CX">Νήσος Χριστουγέννων</territory>
+			<territory type="CY">Κύπρος</territory>
+			<territory type="CZ">Τσεχία</territory>
+			<territory type="DE">Γερμανία</territory>
+			<territory type="DJ">Τζιμπουτί</territory>
+			<territory type="DK">Δανία</territory>
+			<territory type="DM">Ντομίνικα</territory>
+			<territory type="DO">Δομινικανή Δημοκρατία</territory>
+			<territory type="DZ">Αλγερία</territory>
+			<territory type="EC">Ισημερινός</territory>
+			<territory type="EE">Εσθονία</territory>
+			<territory type="EG">Αίγυπτος</territory>
+			<territory type="EH">Δυτική Σαχάρα</territory>
+			<territory type="ER">Ερυθραία</territory>
+			<territory type="ES">Ισπανία</territory>
+			<territory type="ET">Αιθιοπία</territory>
+			<territory type="FI">Φινλανδία</territory>
+			<territory type="FJ">Φίτζι</territory>
+			<territory type="FK">Νήσοι Φώκλαντ</territory>
+			<territory type="FM">Μικρονησία</territory>
+			<territory type="FO">Νήσοι Φερόες</territory>
+			<territory type="FR">Γαλλία</territory>
+			<territory type="GA">Γκαμπόν</territory>
+			<territory type="GB">Ηνωμένο Βασίλειο</territory>
+			<territory type="GD">Γρενάδα</territory>
+			<territory type="GE">Γεωργία</territory>
+			<territory type="GF">Γαλλική Γουιάνα</territory>
+			<territory type="GG">Γκερνσέι</territory>
+			<territory type="GH">Γκάνα</territory>
+			<territory type="GI">Γιβραλτάρ</territory>
+			<territory type="GL">Γροιλανδία</territory>
+			<territory type="GM">Γκάμπια</territory>
+			<territory type="GN">Γουινέα</territory>
+			<territory type="GP">Γουαδελούπη</territory>
+			<territory type="GQ">Ισημερινή Γουινέα</territory>
+			<territory type="GR">Ελλάδα</territory>
+			<territory type="GS">Νότια Γεωργία και Νότιες Νήσοι Σάντουιτς</territory>
+			<territory type="GT">Γουατεμάλα</territory>
+			<territory type="GU">Γκουάμ</territory>
+			<territory type="GW">Γουινέα-Μπισάου</territory>
+			<territory type="GY">Γουιάνα</territory>
+			<territory type="HK">Χονγκ Κονγκ</territory>
+			<territory type="HM">Νήσοι Χερντ και Μακντόναλντ</territory>
+			<territory type="HN">Ονδούρα</territory>
+			<territory type="HR">Κροατία</territory>
+			<territory type="HT">Αϊτή</territory>
+			<territory type="HU">Ουγγαρία</territory>
+			<territory type="ID">Ινδονησία</territory>
+			<territory type="IE">Ιρλανδία</territory>
+			<territory type="IL">Ισραήλ</territory>
+			<territory type="IM">Νήσος Μαν</territory>
+			<territory type="IN">Ινδία</territory>
+			<territory type="IO">Βρετανικά Έδάφη Ινδικού Ωκεανού</territory>
+			<territory type="IQ">Ιράκ</territory>
+			<territory type="IR">Ιράν</territory>
+			<territory type="IS">Ισλανδία</territory>
+			<territory type="IT">Ιταλία</territory>
+			<territory type="JE">Υερσέη</territory>
+			<territory type="JM">Τζαμάικα</territory>
+			<territory type="JO">Ιορδανία</territory>
+			<territory type="JP">Ιαπωνία</territory>
+			<territory type="KE">Κένυα</territory>
+			<territory type="KG">Κιργιζία</territory>
+			<territory type="KH">Καμπότζη</territory>
+			<territory type="KI">Κιριμπάτι</territory>
+			<territory type="KM">Κομόρες</territory>
+			<territory type="KN">Σαιντ Κιτς και Νέβις</territory>
+			<territory type="KP">Βόρεια Κορέα</territory>
+			<territory type="KR">Νότια Κορέα</territory>
+			<territory type="KW">Κουβέιτ</territory>
+			<territory type="KY">Νήσοι Κέιμαν</territory>
+			<territory type="KZ">Καζακστάν</territory>
+			<territory type="LA">Λάος</territory>
+			<territory type="LB">Λίβανος</territory>
+			<territory type="LC">Αγία Λουκία</territory>
+			<territory type="LI">Λιχτενστάιν</territory>
+			<territory type="LK">Σρι Λάνκα</territory>
+			<territory type="LR">Λιβερία</territory>
+			<territory type="LS">Λεσότο</territory>
+			<territory type="LT">Λιθουανία</territory>
+			<territory type="LU">Λουξεμβούργο</territory>
+			<territory type="LV">Λετονία</territory>
+			<territory type="LY">Λιβύη</territory>
+			<territory type="MA">Μαρόκο</territory>
+			<territory type="MC">Μονακό</territory>
+			<territory type="MD">Μολδαβία</territory>
+			<territory type="ME">Μαυροβούνιο</territory>
+			<territory type="MF">Άγιος Μαρτίνος</territory>
+			<territory type="MG">Μαδαγασκάρη</territory>
+			<territory type="MH">Νήσοι Μάρσαλ</territory>
+			<territory type="MK">ΠΓΔ Μακεδονίας</territory>
+			<territory type="ML">Μάλι</territory>
+			<territory type="MM">Μιανμάρ</territory>
+			<territory type="MN">Μογγολία</territory>
+			<territory type="MO">Μακάο</territory>
+			<territory type="MP">Νήσοι Βόρειες Μαριάνες</territory>
+			<territory type="MQ">Μαρτινίκα</territory>
+			<territory type="MR">Μαυριτανία</territory>
+			<territory type="MS">Μονσεράτ</territory>
+			<territory type="MT">Μάλτα</territory>
+			<territory type="MU">Μαυρίκιος</territory>
+			<territory type="MV">Μαλδίβες</territory>
+			<territory type="MW">Μαλάουι</territory>
+			<territory type="MX">Μεξικό</territory>
+			<territory type="MY">Μαλαισία</territory>
+			<territory type="MZ">Μοζαμβίκη</territory>
+			<territory type="NA">Ναμίμπια</territory>
+			<territory type="NC">Νέα Καληδονία</territory>
+			<territory type="NE">Νίγηρ</territory>
+			<territory type="NF">Νήσος Νόρφολκ</territory>
+			<territory type="NG">Νιγηρία</territory>
+			<territory type="NI">Νικαράγουα</territory>
+			<territory type="NL">Ολλανδία</territory>
+			<territory type="NO">Νορβηγία</territory>
+			<territory type="NP">Νεπάλ</territory>
+			<territory type="NR">Ναούρου</territory>
+			<territory type="NU">Νιούε</territory>
+			<territory type="NZ">Νέα Ζηλανδία</territory>
+			<territory type="OM">Ομάν</territory>
+			<territory type="PA">Παναμάς</territory>
+			<territory type="PE">Περού</territory>
+			<territory type="PF">Γαλλική Πολυνησία</territory>
+			<territory type="PG">Παπούα - Νέα Γουινέα</territory>
+			<territory type="PH">Φιλιππίνες</territory>
+			<territory type="PK">Πακιστάν</territory>
+			<territory type="PL">Πολωνία</territory>
+			<territory type="PM">Σαιντ Πιέρ και Μικελόν</territory>
+			<territory type="PN">Πίτκερν</territory>
+			<territory type="PR">Πουέρτο Ρίκο</territory>
+			<territory type="PS">Παλαιστινιακά Εδάφη</territory>
+			<territory type="PT">Πορτογαλία</territory>
+			<territory type="PW">Παλάου</territory>
+			<territory type="PY">Παραγουάη</territory>
+			<territory type="QA">Κατάρ</territory>
+			<territory type="QO">Περιφερειακή Ωκεανία</territory>
+			<territory type="QU">Ευρωπαϊκή Ένωση</territory>
+			<territory type="RE">Ρεϋνιόν</territory>
+			<territory type="RO">Ρουμανία</territory>
+			<territory type="RS">Σερβία</territory>
+			<territory type="RU">Ρωσία</territory>
+			<territory type="RW">Ρουάντα</territory>
+			<territory type="SA">Σαουδική Αραβία</territory>
+			<territory type="SB">Νήσοι Σολομώντος</territory>
+			<territory type="SC">Σεϋχέλλες</territory>
+			<territory type="SD">Σουδάν</territory>
+			<territory type="SE">Σουηδία</territory>
+			<territory type="SG">Σιγκαπούρη</territory>
+			<territory type="SH">Αγία Ελένη</territory>
+			<territory type="SI">Σλοβενία</territory>
+			<territory type="SJ">Σβαλμπάρντ και Γιαν Μαγιέν</territory>
+			<territory type="SK">Σλοβακία</territory>
+			<territory type="SL">Σιέρα Λεόνε</territory>
+			<territory type="SM">Άγιος Μαρίνος</territory>
+			<territory type="SN">Σενεγάλη</territory>
+			<territory type="SO">Σομαλία</territory>
+			<territory type="SR">Σουρινάμ</territory>
+			<territory type="ST">Σάο Τομέ και Πρίνσιπε</territory>
+			<territory type="SV">Ελ Σαλβαδόρ</territory>
+			<territory type="SY">Συρία</territory>
+			<territory type="SZ">Ζουαζηλάνδη</territory>
+			<territory type="TC">Νήσοι Τερκς και Κάικος</territory>
+			<territory type="TD">Τσαντ</territory>
+			<territory type="TF">Γαλλικά Νότια Εδάφη</territory>
+			<territory type="TG">Τόγκο</territory>
+			<territory type="TH">Ταϊλάνδη</territory>
+			<territory type="TJ">Τατζικιστάν</territory>
+			<territory type="TK">Τοκελάου</territory>
+			<territory type="TL">Ανατολικό Τιμόρ</territory>
+			<territory type="TM">Τουρκμενιστάν</territory>
+			<territory type="TN">Τυνησία</territory>
+			<territory type="TO">Τόνγκα</territory>
+			<territory type="TR">Τουρκία</territory>
+			<territory type="TT">Τρινιδάδ και Τομπάγκο</territory>
+			<territory type="TV">Τουβαλού</territory>
+			<territory type="TW">Ταϊβάν</territory>
+			<territory type="TZ">Τανζανία</territory>
+			<territory type="UA">Ουκρανία</territory>
+			<territory type="UG">Ουγκάντα</territory>
+			<territory type="UM">Απομακρυσμένες Νησίδες των Ηνωμένων Πολιτειών</territory>
+			<territory type="US">Ηνωμένες Πολιτείες</territory>
+			<territory type="UY">Ουρουγουάη</territory>
+			<territory type="UZ">Ουζμπεκιστάν</territory>
+			<territory type="VA">Βατικανό</territory>
+			<territory type="VC">Άγιος Βικέντιος και Γρεναδίνες</territory>
+			<territory type="VE">Βενεζουέλα</territory>
+			<territory type="VG">Βρετανικές Παρθένοι Νήσοι</territory>
+			<territory type="VI">Αμερικανικές Παρθένοι Νήσοι</territory>
+			<territory type="VN">Βιετνάμ</territory>
+			<territory type="VU">Βανουάτου</territory>
+			<territory type="WF">Νήσοι Ουαλλίς και Φουτουνά</territory>
+			<territory type="WS">Σαμόα</territory>
+			<territory type="YE">Υεμένη</territory>
+			<territory type="YT">Μαγιότ</territory>
+			<territory type="ZA">Νότια Αφρική</territory>
+			<territory type="ZM">Ζάμπια</territory>
+			<territory type="ZW">Ζιμπάμπουε</territory>
+			<territory type="ZZ">Άγνωστη ή Άκυρη Περιοχή</territory>
+		</territories>
+		<variants>
+			<variant type="1901">Παραδοσιακή Γερμανική Ορθογραφία</variant>
+			<variant type="1996">Γερμανική Ορθογραφία του 1996</variant>
+			<variant type="MONOTON">Μονοτονικό</variant>
+			<variant type="POLYTON">Πολυτονικό</variant>
+			<variant type="REVISED">Αναθεωρημένη Ορθογραφία</variant>
+		</variants>
+		<keys>
+			<key type="calendar">Ημερολόγιο</key>
+			<key type="collation">Τακτοποίηση</key>
+			<key type="currency">Νόμισμα</key>
+		</keys>
+		<types>
+			<type type="big5han" key="collation">Κινεζική Παραδοσιακή Σειρά - Big5</type>
+			<type type="buddhist" key="calendar">Βουδιστικό Ημερολόγιο</type>
+			<type type="chinese" key="calendar">Κινέζικο Ημερολόγιο</type>
+			<type type="direct" key="collation">Άμεση σειρά ταξινόμησης</type>
+			<type type="gb2312han" key="collation">Κινεζική Απλουστευμένη Σειρά - GB2312</type>
+			<type type="gregorian" key="calendar">Γρηγοριανό Ημερολόγιο</type>
+			<type type="hebrew" key="calendar">Εβραϊκό Ημερολόγιο</type>
+			<type type="indian" key="calendar">Ινδικό Εθνικό Ημερολόγιο</type>
+			<type type="islamic" key="calendar">Ισλαμικό Ημερολόγιο</type>
+			<type type="islamic-civil" key="calendar">Ισλαμικό-Αστικό Ημερολόγιο</type>
+			<type type="japanese" key="calendar">Ιαπωνικό Ημερολόγιο</type>
+			<type type="phonebook" key="collation">Σειρά Τηλεφωνικού Καταλόγου</type>
+			<type type="pinyin" key="collation">Σειρά Pinyin</type>
+			<type type="stroke" key="collation">Σειρά Stroke</type>
+			<type type="traditional" key="collation">Παραδοσιακή Σειρά</type>
+		</types>
+		<measurementSystemNames>
+			<measurementSystemName type="US">Αγγλοσαξωνικό</measurementSystemName>
+			<measurementSystemName type="metric">Μετρικό</measurementSystemName>
+		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">Γλώσσα: {0}</codePattern>
+			<codePattern type="script">Σύστημα Γραφής: {0}</codePattern>
+			<codePattern type="territory">Περιοχή: {0}</codePattern>
+		</codePatterns>
+	</localeDisplayNames>
+	<layout>
+		<inText type="languages">lowercase-words</inText>
+	</layout>
+	<characters>
+		<exemplarCharacters>[α ά β-ε έ ζ η ή θ ι ί ϊ ΐ κ-ο ό π ρ σ ς τ υ ύ ϋ ΰ φ-ω ώ]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>‘</quotationStart>
+		<quotationEnd>’</quotationEnd>
+		<alternateQuotationStart>“</alternateQuotationStart>
+		<alternateQuotationEnd>”</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">Ιαν</month>
+							<month type="2">Φεβ</month>
+							<month type="3">Μαρ</month>
+							<month type="4">Απρ</month>
+							<month type="5">Μαϊ</month>
+							<month type="6">Ιουν</month>
+							<month type="7">Ιουλ</month>
+							<month type="8">Αυγ</month>
+							<month type="9">Σεπ</month>
+							<month type="10">Οκτ</month>
+							<month type="11">Νοε</month>
+							<month type="12">Δεκ</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">Ιανουαρίου</month>
+							<month type="2">Φεβρουαρίου</month>
+							<month type="3">Μαρτίου</month>
+							<month type="4">Απριλίου</month>
+							<month type="5">Μαΐου</month>
+							<month type="6">Ιουνίου</month>
+							<month type="7">Ιουλίου</month>
+							<month type="8">Αυγούστου</month>
+							<month type="9">Σεπτεμβρίου</month>
+							<month type="10">Οκτωβρίου</month>
+							<month type="11">Νοεμβρίου</month>
+							<month type="12">Δεκεμβρίου</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">Ι</month>
+							<month type="2">Φ</month>
+							<month type="3">Μ</month>
+							<month type="4">Α</month>
+							<month type="5">Μ</month>
+							<month type="6">Ι</month>
+							<month type="7">Ι</month>
+							<month type="8">Α</month>
+							<month type="9">Σ</month>
+							<month type="10">Ο</month>
+							<month type="11">Ν</month>
+							<month type="12">Δ</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">Ιανουάριος</month>
+							<month type="2">Φεβρουάριος</month>
+							<month type="3">Μάρτιος</month>
+							<month type="4">Απρίλιος</month>
+							<month type="5">Μάιος</month>
+							<month type="6">Ιούνιος</month>
+							<month type="7">Ιούλιος</month>
+							<month type="8">Αύγουστος</month>
+							<month type="9">Σεπτέμβριος</month>
+							<month type="10">Οκτώβριος</month>
+							<month type="11">Νοέμβριος</month>
+							<month type="12">Δεκέμβριος</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">Κυρ</day>
+							<day type="mon">Δευ</day>
+							<day type="tue">Τρι</day>
+							<day type="wed">Τετ</day>
+							<day type="thu">Πεμ</day>
+							<day type="fri">Παρ</day>
+							<day type="sat">Σαβ</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">Κυριακή</day>
+							<day type="mon">Δευτέρα</day>
+							<day type="tue">Τρίτη</day>
+							<day type="wed">Τετάρτη</day>
+							<day type="thu">Πέμπτη</day>
+							<day type="fri">Παρασκευή</day>
+							<day type="sat">Σάββατο</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">Κ</day>
+							<day type="mon">Δ</day>
+							<day type="tue">Τ</day>
+							<day type="wed">Τ</day>
+							<day type="thu">Π</day>
+							<day type="fri">Π</day>
+							<day type="sat">Σ</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">Τ1</quarter>
+							<quarter type="2">Τ2</quarter>
+							<quarter type="3">Τ3</quarter>
+							<quarter type="4">Τ4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">1ο τρίμηνο</quarter>
+							<quarter type="2">2ο τρίμηνο</quarter>
+							<quarter type="3">3ο τρίμηνο</quarter>
+							<quarter type="4">4ο τρίμηνο</quarter>
+						</quarterWidth>
+					</quarterContext>
+					<quarterContext type="stand-alone">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">Τ1</quarter>
+							<quarter type="2">Τ2</quarter>
+							<quarter type="3">Τ3</quarter>
+							<quarter type="4">Τ4</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<am>π.μ.</am>
+				<pm>μ.μ.</pm>
+				<eras>
+					<eraNames>
+						<era type="0">π.Χ.</era>
+						<era type="1">μ.Χ.</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">π.Χ.</era>
+						<era type="1">μ.Χ.</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, dd MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>dd MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>dd MMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>dd/MM/yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>h:mm:ss a v</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>h:mm:ss a z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>h:mm:ss a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>h:mm a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<dateTimeFormatLength>
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<availableFormats>
+						<dateFormatItem id="Ed">E d</dateFormatItem>
+						<dateFormatItem id="H">H</dateFormatItem>
+						<dateFormatItem id="HHmm">HH:mm</dateFormatItem>
+						<dateFormatItem id="HHmmss">HH:mm:ss</dateFormatItem>
+						<dateFormatItem id="MEd">E, d-M</dateFormatItem>
+						<dateFormatItem id="MMMEd">E d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMEd">E d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMMdd">dd MMMM</dateFormatItem>
+						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
+						<dateFormatItem id="MMdd">dd/MM</dateFormatItem>
+						<dateFormatItem id="Md">d/M</dateFormatItem>
+						<dateFormatItem id="mmss">mm:ss</dateFormatItem>
+						<dateFormatItem id="yMEd">EEE, d-M-yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMMEd">EEE, d MMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMMM">LLLL yyyy</dateFormatItem>
+						<dateFormatItem id="yyMM">MM/yy</dateFormatItem>
+						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
+						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+						<dateFormatItem id="yyQQQQ">QQQQ yy</dateFormatItem>
+						<dateFormatItem id="yyyy">yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMM">MM/yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+					</availableFormats>
+					<intervalFormats>
+						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="M">E, dd/MM - E, dd/MM</greatestDifference>
+							<greatestDifference id="d">E, dd/MM - E, dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">LLL-LLL</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="M">E, dd MMM - E, dd MMM</greatestDifference>
+							<greatestDifference id="d">E, dd - E, dd MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="M">dd MMM - dd MMM</greatestDifference>
+							<greatestDifference id="d">dd-dd MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="M">dd/MM - dd/MM</greatestDifference>
+							<greatestDifference id="d">dd/MM - dd/MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d-d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="h">
+							<greatestDifference id="a">h a - h a</greatestDifference>
+							<greatestDifference id="h">h-h a</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hm">
+							<greatestDifference id="a">h:mm a - h:mm a</greatestDifference>
+							<greatestDifference id="h">h:mm-h:mm a</greatestDifference>
+							<greatestDifference id="m">h:mm-h:mm a</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hmv">
+							<greatestDifference id="a">h:mm a - h:mm a v</greatestDifference>
+							<greatestDifference id="h">h:mm-h:mm a v</greatestDifference>
+							<greatestDifference id="m">h:mm-h:mm a v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hv">
+							<greatestDifference id="a">h a - h a v</greatestDifference>
+							<greatestDifference id="h">h-h a v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y-y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yM">
+							<greatestDifference id="M">MM/yyyy - MM/yyyy</greatestDifference>
+							<greatestDifference id="y">MM/yyyy - MM/yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMEd">
+							<greatestDifference id="M">E, dd/MM/yyyy - E, dd/MM/yyyy</greatestDifference>
+							<greatestDifference id="d">E, dd/MM/yyyy - E, dd/MM/yyyy</greatestDifference>
+							<greatestDifference id="y">E, dd/MM/yyyy - E, dd/MM/yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMM">
+							<greatestDifference id="M">LLL-LLL yyyy</greatestDifference>
+							<greatestDifference id="y">LLL yyyy - LLL yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMEd">
+							<greatestDifference id="M">E, dd MMM - E, dd MMM yyyy</greatestDifference>
+							<greatestDifference id="d">E, dd - E, dd MMM yyyy</greatestDifference>
+							<greatestDifference id="y">E, dd MMM yyyy - E, dd MMM yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="M">dd MMM - dd MMM yyyy</greatestDifference>
+							<greatestDifference id="d">dd-dd MMM yyyy</greatestDifference>
+							<greatestDifference id="y">dd MMM yyyy - dd MMM yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="M">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
+							<greatestDifference id="d">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
+							<greatestDifference id="y">dd/MM/yyyy - dd/MM/yyyy</greatestDifference>
+						</intervalFormatItem>
+					</intervalFormats>
+				</dateTimeFormats>
+				<fields>
+					<field type="era">
+						<displayName>Περίοδος</displayName>
+					</field>
+					<field type="year">
+						<displayName>Έτος</displayName>
+					</field>
+					<field type="month">
+						<displayName>Μήνας</displayName>
+					</field>
+					<field type="week">
+						<displayName>Εβδομάδα</displayName>
+					</field>
+					<field type="day">
+						<displayName>Ημέρα</displayName>
+						<relative type="0">Σήμερα</relative>
+						<relative type="1">Αύριο</relative>
+						<relative type="2">Μεθαύριο</relative>
+						<relative type="3">Σε τρεις ημέρες από τώρα</relative>
+						<relative type="-1">Εχθές</relative>
+						<relative type="-2">Προχθές</relative>
+						<relative type="-3">Πριν από τρεις ημέρες</relative>
+					</field>
+					<field type="weekday">
+						<displayName>Ημέρα Εβδομάδας</displayName>
+					</field>
+					<field type="dayperiod">
+						<displayName>ΠΜ/ΜΜ</displayName>
+					</field>
+					<field type="hour">
+						<displayName>Ώρα</displayName>
+					</field>
+					<field type="minute">
+						<displayName>Λεπτό</displayName>
+					</field>
+					<field type="second">
+						<displayName>Δευτερόλεπτο</displayName>
+					</field>
+					<field type="zone">
+						<displayName>Ζώνη</displayName>
+					</field>
+				</fields>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HHmm;-HHmm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>{0}</regionFormat>
+			<zone type="Etc/Unknown">
+				<exemplarCity>Άγνωστη</exemplarCity>
+			</zone>
+			<zone type="Europe/Andorra">
+				<exemplarCity>Ανδόρα</exemplarCity>
+			</zone>
+			<zone type="Asia/Dubai">
+				<exemplarCity>Ντουμπάι</exemplarCity>
+			</zone>
+			<zone type="Asia/Kabul">
+				<exemplarCity>Καμπούλ</exemplarCity>
+			</zone>
+			<zone type="America/Antigua">
+				<exemplarCity>Αντίγκουα</exemplarCity>
+			</zone>
+			<zone type="America/Anguilla">
+				<exemplarCity>Ανγκουίλλα</exemplarCity>
+			</zone>
+			<zone type="Europe/Tirane">
+				<exemplarCity>Τίρανα</exemplarCity>
+			</zone>
+			<zone type="Asia/Yerevan">
+				<exemplarCity>Γερεβάν</exemplarCity>
+			</zone>
+			<zone type="America/Curacao">
+				<exemplarCity>Κουρακάο</exemplarCity>
+			</zone>
+			<zone type="Africa/Luanda">
+				<exemplarCity>Αγκόλα</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Rothera">
+				<exemplarCity>Ροθέρα</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Palmer">
+				<exemplarCity>Πάλμερ</exemplarCity>
+			</zone>
+			<zone type="Antarctica/South_Pole">
+				<exemplarCity>Νότιος Πόλος</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Syowa">
+				<exemplarCity>Σύοβα</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Mawson">
+				<exemplarCity>Μόουσον</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Davis">
+				<exemplarCity>Ντέιβις</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Vostok">
+				<exemplarCity>Βόστοκ</exemplarCity>
+			</zone>
+			<zone type="Antarctica/Casey">
+				<exemplarCity>Κάσεϊ</exemplarCity>
+			</zone>
+			<zone type="Antarctica/DumontDUrville">
+				<exemplarCity>Ντυμόντ Ντερβίλ</exemplarCity>
+			</zone>
+			<zone type="Antarctica/McMurdo">
+				<exemplarCity>ΜακΜέρντο</exemplarCity>
+			</zone>
+			<zone type="America/Buenos_Aires">
+				<exemplarCity>Μπουένος Άιρες</exemplarCity>
+			</zone>
+			<zone type="Pacific/Pago_Pago">
+				<exemplarCity>Πάγκο Πάγκο</exemplarCity>
+			</zone>
+			<zone type="Europe/Vienna">
+				<exemplarCity>Βιέννη</exemplarCity>
+			</zone>
+			<zone type="Australia/Adelaide">
+				<exemplarCity>Αδελαΐδα</exemplarCity>
+			</zone>
+			<zone type="Australia/Melbourne">
+				<exemplarCity>Μελβούρνη</exemplarCity>
+			</zone>
+			<zone type="Australia/Sydney">
+				<exemplarCity>Σύδνεϊ</exemplarCity>
+			</zone>
+			<zone type="America/Aruba">
+				<exemplarCity>Αρούμπα</exemplarCity>
+			</zone>
+			<zone type="Asia/Baku">
+				<exemplarCity>Μπακού</exemplarCity>
+			</zone>
+			<zone type="America/Barbados">
+				<exemplarCity>Μπαρμπέιντος</exemplarCity>
+			</zone>
+			<zone type="Asia/Dhaka">
+				<exemplarCity>Ντάκα</exemplarCity>
+			</zone>
+			<zone type="Europe/Brussels">
+				<exemplarCity>Βρυξέλλες</exemplarCity>
+			</zone>
+			<zone type="Africa/Ouagadougou">
+				<exemplarCity>Μπουρκίνα Φάσο</exemplarCity>
+			</zone>
+			<zone type="Europe/Sofia">
+				<exemplarCity>Σόφια</exemplarCity>
+			</zone>
+			<zone type="Asia/Bahrain">
+				<exemplarCity>Μπαχρέιν</exemplarCity>
+			</zone>
+			<zone type="Africa/Bujumbura">
+				<exemplarCity>Μπουρούντι</exemplarCity>
+			</zone>
+			<zone type="Africa/Porto-Novo">
+				<exemplarCity>Μπενίν</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Bermuda">
+				<exemplarCity>Βερμούδα</exemplarCity>
+			</zone>
+			<zone type="Asia/Brunei">
+				<exemplarCity>Μπρούνεϊ</exemplarCity>
+			</zone>
+			<zone type="America/La_Paz">
+				<exemplarCity>Λα Παζ</exemplarCity>
+			</zone>
+			<zone type="America/Rio_Branco">
+				<exemplarCity>Ρίο Μπράνκο</exemplarCity>
+			</zone>
+			<zone type="America/Porto_Velho">
+				<exemplarCity>Πόρτο Βέλο</exemplarCity>
+			</zone>
+			<zone type="America/Boa_Vista">
+				<exemplarCity>Μπόα Βίστα</exemplarCity>
+			</zone>
+			<zone type="America/Manaus">
+				<exemplarCity>Μανάος</exemplarCity>
+			</zone>
+			<zone type="America/Cuiaba">
+				<exemplarCity>Κουϊάμπα</exemplarCity>
+			</zone>
+			<zone type="America/Campo_Grande">
+				<exemplarCity>Κάμπο Γκράντε</exemplarCity>
+			</zone>
+			<zone type="America/Belem">
+				<exemplarCity>Μπέλεμ</exemplarCity>
+			</zone>
+			<zone type="America/Araguaina">
+				<exemplarCity>Αραγκουάινα</exemplarCity>
+			</zone>
+			<zone type="America/Sao_Paulo">
+				<exemplarCity>Σάο Πάολο</exemplarCity>
+			</zone>
+			<zone type="America/Bahia">
+				<exemplarCity>Μπάχια</exemplarCity>
+			</zone>
+			<zone type="America/Fortaleza">
+				<exemplarCity>Φορταλέζα</exemplarCity>
+			</zone>
+			<zone type="America/Maceio">
+				<exemplarCity>Μασέιο</exemplarCity>
+			</zone>
+			<zone type="America/Recife">
+				<exemplarCity>Ρεσίφε</exemplarCity>
+			</zone>
+			<zone type="America/Noronha">
+				<exemplarCity>Νορόνχα</exemplarCity>
+			</zone>
+			<zone type="America/Nassau">
+				<exemplarCity>Νασάου</exemplarCity>
+			</zone>
+			<zone type="Asia/Thimphu">
+				<exemplarCity>Τρίμφου</exemplarCity>
+			</zone>
+			<zone type="Africa/Gaborone">
+				<exemplarCity>Γκαμπορόνε</exemplarCity>
+			</zone>
+			<zone type="Europe/Minsk">
+				<exemplarCity>Μινσκ</exemplarCity>
+			</zone>
+			<zone type="America/Belize">
+				<exemplarCity>Μπελίζ</exemplarCity>
+			</zone>
+			<zone type="America/Vancouver">
+				<exemplarCity>Βανκούβερ</exemplarCity>
+			</zone>
+			<zone type="America/Toronto">
+				<exemplarCity>Τορόντο</exemplarCity>
+			</zone>
+			<zone type="America/Montreal">
+				<exemplarCity>Μόντρεαλ</exemplarCity>
+			</zone>
+			<zone type="Indian/Cocos">
+				<exemplarCity>Κόκος</exemplarCity>
+			</zone>
+			<zone type="Africa/Kinshasa">
+				<exemplarCity>Κινσάσα</exemplarCity>
+			</zone>
+			<zone type="Africa/Lubumbashi">
+				<exemplarCity>Λουμπουμπάσι</exemplarCity>
+			</zone>
+			<zone type="Africa/Bangui">
+				<exemplarCity>Κεντροαφρικανική Δημοκρατία</exemplarCity>
+			</zone>
+			<zone type="Africa/Brazzaville">
+				<exemplarCity>Μπράζαβιλ</exemplarCity>
+			</zone>
+			<zone type="Europe/Zurich">
+				<exemplarCity>Ζυρίχη</exemplarCity>
+			</zone>
+			<zone type="Africa/Abidjan">
+				<exemplarCity>Ακτή Ελεφαντοστού</exemplarCity>
+			</zone>
+			<zone type="Pacific/Rarotonga">
+				<exemplarCity>Ραροτόνγκα</exemplarCity>
+			</zone>
+			<zone type="Pacific/Easter">
+				<exemplarCity>Ανατολική Νήσος</exemplarCity>
+			</zone>
+			<zone type="America/Santiago">
+				<exemplarCity>Σαντιάγκο</exemplarCity>
+			</zone>
+			<zone type="Africa/Douala">
+				<exemplarCity>Καμερούν</exemplarCity>
+			</zone>
+			<zone type="Asia/Shanghai">
+				<exemplarCity>Σανγκάη</exemplarCity>
+			</zone>
+			<zone type="America/Bogota">
+				<exemplarCity>Μπογκοτά</exemplarCity>
+			</zone>
+			<zone type="America/Costa_Rica">
+				<exemplarCity>Κόστα Ρίκα</exemplarCity>
+			</zone>
+			<zone type="America/Havana">
+				<exemplarCity>Αβάνα</exemplarCity>
+			</zone>
+			<zone type="Indian/Christmas">
+				<exemplarCity>Νήσοι Χριστουγέννων</exemplarCity>
+			</zone>
+			<zone type="Asia/Nicosia">
+				<exemplarCity>Λευκωσία</exemplarCity>
+			</zone>
+			<zone type="Europe/Berlin">
+				<exemplarCity>Βερολίνο</exemplarCity>
+			</zone>
+			<zone type="Africa/Djibouti">
+				<exemplarCity>Τζιμπουτί</exemplarCity>
+			</zone>
+			<zone type="Europe/Copenhagen">
+				<exemplarCity>Κοπεγχάγη</exemplarCity>
+			</zone>
+			<zone type="America/Dominica">
+				<exemplarCity>Δομινίκα</exemplarCity>
+			</zone>
+			<zone type="America/Santo_Domingo">
+				<exemplarCity>Σάντο Ντομίνγκο</exemplarCity>
+			</zone>
+			<zone type="Africa/Algiers">
+				<exemplarCity>Αλγέρι</exemplarCity>
+			</zone>
+			<zone type="Pacific/Galapagos">
+				<exemplarCity>Γκαλαπάγκος</exemplarCity>
+			</zone>
+			<zone type="America/Guayaquil">
+				<exemplarCity>Γκουαγιακύλ</exemplarCity>
+			</zone>
+			<zone type="Europe/Tallinn">
+				<exemplarCity>Ταλίν</exemplarCity>
+			</zone>
+			<zone type="Africa/Cairo">
+				<exemplarCity>Αίγυπτος</exemplarCity>
+			</zone>
+			<zone type="Africa/El_Aaiun">
+				<exemplarCity>Δυτική Σαχάρα</exemplarCity>
+			</zone>
+			<zone type="Africa/Asmera">
+				<exemplarCity>Ασμέρα</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Canary">
+				<exemplarCity>Κανάρια</exemplarCity>
+			</zone>
+			<zone type="Africa/Ceuta">
+				<exemplarCity>Κέουτα</exemplarCity>
+			</zone>
+			<zone type="Europe/Madrid">
+				<exemplarCity>Μαδρίτη</exemplarCity>
+			</zone>
+			<zone type="Africa/Addis_Ababa">
+				<exemplarCity>Αιθιοπία</exemplarCity>
+			</zone>
+			<zone type="Europe/Helsinki">
+				<exemplarCity>Ελσίνκι</exemplarCity>
+			</zone>
+			<zone type="Pacific/Fiji">
+				<exemplarCity>Φίτζι</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Stanley">
+				<exemplarCity>Στάνλεϋ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Truk">
+				<exemplarCity>Τρουκ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Ponape">
+				<exemplarCity>Πονάπε</exemplarCity>
+			</zone>
+			<zone type="Pacific/Kosrae">
+				<exemplarCity>Κοσράη</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Faeroe">
+				<exemplarCity>Φερόες</exemplarCity>
+			</zone>
+			<zone type="Europe/Paris">
+				<exemplarCity>Παρίσι</exemplarCity>
+			</zone>
+			<zone type="Africa/Libreville">
+				<exemplarCity>Γκαμπόν</exemplarCity>
+			</zone>
+			<zone type="Europe/London">
+				<exemplarCity>Λονδίνο</exemplarCity>
+			</zone>
+			<zone type="America/Grenada">
+				<exemplarCity>Γρενάδα</exemplarCity>
+			</zone>
+			<zone type="Asia/Tbilisi">
+				<exemplarCity>Τμπιλίσι</exemplarCity>
+			</zone>
+			<zone type="America/Cayenne">
+				<exemplarCity>Καγιένε</exemplarCity>
+			</zone>
+			<zone type="Africa/Accra">
+				<exemplarCity>Άκκρα</exemplarCity>
+			</zone>
+			<zone type="Europe/Gibraltar">
+				<exemplarCity>Γιβραλτάρ</exemplarCity>
+			</zone>
+			<zone type="America/Thule">
+				<exemplarCity>Τούλε</exemplarCity>
+			</zone>
+			<zone type="America/Godthab">
+				<exemplarCity>Γκόνθαμπ</exemplarCity>
+			</zone>
+			<zone type="America/Scoresbysund">
+				<exemplarCity>Σκορεσμπίσουντ</exemplarCity>
+			</zone>
+			<zone type="America/Danmarkshavn">
+				<exemplarCity>Ντανμαρκσάβν</exemplarCity>
+			</zone>
+			<zone type="Africa/Banjul">
+				<exemplarCity>Γκάμπια</exemplarCity>
+			</zone>
+			<zone type="Africa/Conakry">
+				<exemplarCity>Γουινέα</exemplarCity>
+			</zone>
+			<zone type="America/Guadeloupe">
+				<exemplarCity>Γουαδελούπη</exemplarCity>
+			</zone>
+			<zone type="Africa/Malabo">
+				<exemplarCity>Ισημερινή Γουινέα</exemplarCity>
+			</zone>
+			<zone type="Europe/Athens">
+				<exemplarCity>Αθήνα</exemplarCity>
+			</zone>
+			<zone type="Atlantic/South_Georgia">
+				<exemplarCity>Νότια Γεωργία</exemplarCity>
+			</zone>
+			<zone type="America/Guatemala">
+				<exemplarCity>Γουατεμάλα</exemplarCity>
+			</zone>
+			<zone type="Pacific/Guam">
+				<exemplarCity>Γκουάμ</exemplarCity>
+			</zone>
+			<zone type="Africa/Bissau">
+				<exemplarCity>Γουινέα Μπισσάου</exemplarCity>
+			</zone>
+			<zone type="America/Guyana">
+				<exemplarCity>Γουιάνα</exemplarCity>
+			</zone>
+			<zone type="Asia/Hong_Kong">
+				<exemplarCity>Χονγκ Κονγκ</exemplarCity>
+			</zone>
+			<zone type="America/Port-au-Prince">
+				<exemplarCity>Πορτ-Ο-Πρενς</exemplarCity>
+			</zone>
+			<zone type="Europe/Budapest">
+				<exemplarCity>Βουδαπέστη</exemplarCity>
+			</zone>
+			<zone type="Asia/Jakarta">
+				<exemplarCity>Τζακάρτα</exemplarCity>
+			</zone>
+			<zone type="Asia/Makassar">
+				<exemplarCity>Μακασάρ</exemplarCity>
+			</zone>
+			<zone type="Asia/Jayapura">
+				<exemplarCity>Χαγιαπούρα</exemplarCity>
+			</zone>
+			<zone type="Europe/Dublin">
+				<exemplarCity>Δουβλίνο</exemplarCity>
+			</zone>
+			<zone type="Asia/Jerusalem">
+				<exemplarCity>Ιερουσαλήμ</exemplarCity>
+			</zone>
+			<zone type="Indian/Chagos">
+				<exemplarCity>Τσάγκος</exemplarCity>
+			</zone>
+			<zone type="Asia/Baghdad">
+				<exemplarCity>Βαγδάτη</exemplarCity>
+			</zone>
+			<zone type="Asia/Tehran">
+				<exemplarCity>Τεχεράνη</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Reykjavik">
+				<exemplarCity>Ρέυκιαβικ</exemplarCity>
+			</zone>
+			<zone type="Europe/Rome">
+				<exemplarCity>Ρώμη</exemplarCity>
+			</zone>
+			<zone type="America/Jamaica">
+				<exemplarCity>Τζαμάικα</exemplarCity>
+			</zone>
+			<zone type="Asia/Amman">
+				<exemplarCity>Αμάν</exemplarCity>
+			</zone>
+			<zone type="Asia/Tokyo">
+				<exemplarCity>Τόκυο</exemplarCity>
+			</zone>
+			<zone type="Africa/Nairobi">
+				<exemplarCity>Κένυα</exemplarCity>
+			</zone>
+			<zone type="Asia/Bishkek">
+				<exemplarCity>Μπισχέκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Phnom_Penh">
+				<exemplarCity>Πιόμ Πενχ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Enderbury">
+				<exemplarCity>Εντερμπέρυ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Kiritimati">
+				<exemplarCity>Κιριτιμάτι</exemplarCity>
+			</zone>
+			<zone type="Pacific/Tarawa">
+				<exemplarCity>Ταράουα</exemplarCity>
+			</zone>
+			<zone type="Indian/Comoro">
+				<exemplarCity>Κομόρο</exemplarCity>
+			</zone>
+			<zone type="America/St_Kitts">
+				<exemplarCity>Σαιν Κιττς</exemplarCity>
+			</zone>
+			<zone type="Asia/Pyongyang">
+				<exemplarCity>Πυόνγκ Γιάνγκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Seoul">
+				<exemplarCity>Σεούλ</exemplarCity>
+			</zone>
+			<zone type="America/Cayman">
+				<exemplarCity>Κέυμαν</exemplarCity>
+			</zone>
+			<zone type="Asia/Aqtau">
+				<exemplarCity>Ακτάου</exemplarCity>
+			</zone>
+			<zone type="Asia/Aqtobe">
+				<exemplarCity>Ακτόμπε</exemplarCity>
+			</zone>
+			<zone type="Asia/Almaty">
+				<exemplarCity>Αλμάτυ</exemplarCity>
+			</zone>
+			<zone type="Asia/Vientiane">
+				<exemplarCity>Βιεντιάνε</exemplarCity>
+			</zone>
+			<zone type="Asia/Beirut">
+				<exemplarCity>Βηρυτός</exemplarCity>
+			</zone>
+			<zone type="America/St_Lucia">
+				<exemplarCity>Αγ. Λουκία</exemplarCity>
+			</zone>
+			<zone type="Europe/Vaduz">
+				<exemplarCity>Βαντούζ</exemplarCity>
+			</zone>
+			<zone type="Asia/Colombo">
+				<exemplarCity>Κολόμπο</exemplarCity>
+			</zone>
+			<zone type="Africa/Monrovia">
+				<exemplarCity>Λιβερία</exemplarCity>
+			</zone>
+			<zone type="Africa/Maseru">
+				<exemplarCity>Λεσόθο</exemplarCity>
+			</zone>
+			<zone type="Europe/Vilnius">
+				<exemplarCity>Βίλνιους</exemplarCity>
+			</zone>
+			<zone type="Europe/Luxembourg">
+				<exemplarCity>Λουξεμβούργο</exemplarCity>
+			</zone>
+			<zone type="Europe/Riga">
+				<exemplarCity>Ρίγα</exemplarCity>
+			</zone>
+			<zone type="Africa/Tripoli">
+				<exemplarCity>Λιβύη</exemplarCity>
+			</zone>
+			<zone type="Africa/Casablanca">
+				<exemplarCity>Καζαμπλάνκα</exemplarCity>
+			</zone>
+			<zone type="Europe/Monaco">
+				<exemplarCity>Μονακό</exemplarCity>
+			</zone>
+			<zone type="Europe/Chisinau">
+				<exemplarCity>Τσισινάου</exemplarCity>
+			</zone>
+			<zone type="Indian/Antananarivo">
+				<exemplarCity>Ανταναναρίβο</exemplarCity>
+			</zone>
+			<zone type="Pacific/Majuro">
+				<exemplarCity>Μαχούρο</exemplarCity>
+			</zone>
+			<zone type="Africa/Bamako">
+				<exemplarCity>Μπαμάκο</exemplarCity>
+			</zone>
+			<zone type="Asia/Rangoon">
+				<exemplarCity>Ρανγκούν</exemplarCity>
+			</zone>
+			<zone type="Asia/Hovd">
+				<exemplarCity>Χοβντ</exemplarCity>
+			</zone>
+			<zone type="Asia/Ulaanbaatar">
+				<exemplarCity>Ουλάν Μπατόρ</exemplarCity>
+			</zone>
+			<zone type="Asia/Choibalsan">
+				<exemplarCity>Χόιμπαλσαν</exemplarCity>
+			</zone>
+			<zone type="Asia/Macau">
+				<exemplarCity>Μακάο</exemplarCity>
+			</zone>
+			<zone type="Pacific/Saipan">
+				<exemplarCity>Σάιπαν</exemplarCity>
+			</zone>
+			<zone type="America/Martinique">
+				<exemplarCity>Μαρτινίκα</exemplarCity>
+			</zone>
+			<zone type="Africa/Nouakchott">
+				<exemplarCity>Μαυριτανία</exemplarCity>
+			</zone>
+			<zone type="America/Montserrat">
+				<exemplarCity>Μονσεράτ</exemplarCity>
+			</zone>
+			<zone type="Europe/Malta">
+				<exemplarCity>Μάλτα</exemplarCity>
+			</zone>
+			<zone type="Indian/Mauritius">
+				<exemplarCity>Μαυρίκιος</exemplarCity>
+			</zone>
+			<zone type="Indian/Maldives">
+				<exemplarCity>Μαλδίβες</exemplarCity>
+			</zone>
+			<zone type="Africa/Blantyre">
+				<exemplarCity>Μαλάουι</exemplarCity>
+			</zone>
+			<zone type="America/Tijuana">
+				<exemplarCity>Τιχουάνα</exemplarCity>
+			</zone>
+			<zone type="America/Mexico_City">
+				<exemplarCity>Πόλη του Μεξικού</exemplarCity>
+			</zone>
+			<zone type="America/Cancun">
+				<exemplarCity>Κανκούν</exemplarCity>
+			</zone>
+			<zone type="Asia/Kuala_Lumpur">
+				<exemplarCity>Κουάλα Λουμπούρ</exemplarCity>
+			</zone>
+			<zone type="Africa/Maputo">
+				<exemplarCity>Μαπούτο</exemplarCity>
+			</zone>
+			<zone type="Africa/Windhoek">
+				<exemplarCity>Γουιντχόεκ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Noumea">
+				<exemplarCity>Νουμέα</exemplarCity>
+			</zone>
+			<zone type="Africa/Niamey">
+				<exemplarCity>Νιαμέυ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Norfolk">
+				<exemplarCity>Νόρφολκ</exemplarCity>
+			</zone>
+			<zone type="Africa/Lagos">
+				<exemplarCity>Λάγος</exemplarCity>
+			</zone>
+			<zone type="America/Managua">
+				<exemplarCity>Μανάγκουα</exemplarCity>
+			</zone>
+			<zone type="Europe/Amsterdam">
+				<exemplarCity>Άμστερνταμ</exemplarCity>
+			</zone>
+			<zone type="Europe/Oslo">
+				<exemplarCity>Όσλο</exemplarCity>
+			</zone>
+			<zone type="Asia/Katmandu">
+				<exemplarCity>Κατμαντού</exemplarCity>
+			</zone>
+			<zone type="Pacific/Nauru">
+				<exemplarCity>Ναούρου</exemplarCity>
+			</zone>
+			<zone type="Pacific/Niue">
+				<exemplarCity>Νιούε</exemplarCity>
+			</zone>
+			<zone type="Pacific/Auckland">
+				<exemplarCity>Όκλαντ</exemplarCity>
+			</zone>
+			<zone type="Asia/Muscat">
+				<exemplarCity>Μουσκάτ</exemplarCity>
+			</zone>
+			<zone type="America/Panama">
+				<exemplarCity>Παναμάς</exemplarCity>
+			</zone>
+			<zone type="America/Lima">
+				<exemplarCity>Λίμα</exemplarCity>
+			</zone>
+			<zone type="Pacific/Tahiti">
+				<exemplarCity>Αϊτή</exemplarCity>
+			</zone>
+			<zone type="Pacific/Marquesas">
+				<exemplarCity>Μαρκέσας</exemplarCity>
+			</zone>
+			<zone type="Pacific/Gambier">
+				<exemplarCity>Γκάμπιερ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Port_Moresby">
+				<exemplarCity>Πορτ Μόρεσμπυ</exemplarCity>
+			</zone>
+			<zone type="Asia/Manila">
+				<exemplarCity>Μανίλα</exemplarCity>
+			</zone>
+			<zone type="Asia/Karachi">
+				<exemplarCity>Καράτσι</exemplarCity>
+			</zone>
+			<zone type="Europe/Warsaw">
+				<exemplarCity>Βαρσοβία</exemplarCity>
+			</zone>
+			<zone type="America/Miquelon">
+				<exemplarCity>Μικελόν</exemplarCity>
+			</zone>
+			<zone type="Pacific/Pitcairn">
+				<exemplarCity>Πιτκέιρν</exemplarCity>
+			</zone>
+			<zone type="America/Puerto_Rico">
+				<exemplarCity>Πουέρτο Ρίκο</exemplarCity>
+			</zone>
+			<zone type="Asia/Gaza">
+				<exemplarCity>Γάζα</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Azores">
+				<exemplarCity>Αζόρες</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Madeira">
+				<exemplarCity>Μαδέρα</exemplarCity>
+			</zone>
+			<zone type="Europe/Lisbon">
+				<exemplarCity>Λισσαβώνα</exemplarCity>
+			</zone>
+			<zone type="Pacific/Palau">
+				<exemplarCity>Παλάου</exemplarCity>
+			</zone>
+			<zone type="America/Asuncion">
+				<exemplarCity>Ασουνσιόν</exemplarCity>
+			</zone>
+			<zone type="Asia/Qatar">
+				<exemplarCity>Κατάρ</exemplarCity>
+			</zone>
+			<zone type="Indian/Reunion">
+				<exemplarCity>Ρεϋνιόν</exemplarCity>
+			</zone>
+			<zone type="Europe/Bucharest">
+				<exemplarCity>Βουκουρέστι</exemplarCity>
+			</zone>
+			<zone type="Europe/Kaliningrad">
+				<exemplarCity>Καλλίπολη</exemplarCity>
+			</zone>
+			<zone type="Europe/Moscow">
+				<exemplarCity>Μόσχα</exemplarCity>
+			</zone>
+			<zone type="Europe/Samara">
+				<exemplarCity>Σαμάρα</exemplarCity>
+			</zone>
+			<zone type="Asia/Yekaterinburg">
+				<exemplarCity>Αικατερινούπολη</exemplarCity>
+			</zone>
+			<zone type="Asia/Omsk">
+				<exemplarCity>Ομσκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Novosibirsk">
+				<exemplarCity>Νοβοσιμπίρσκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Irkutsk">
+				<exemplarCity>Ιρκούτσκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Vladivostok">
+				<exemplarCity>Βλαδιβοστόκ</exemplarCity>
+			</zone>
+			<zone type="Africa/Kigali">
+				<exemplarCity>Κιγκάλι</exemplarCity>
+			</zone>
+			<zone type="Asia/Riyadh">
+				<exemplarCity>Ριάντ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Guadalcanal">
+				<exemplarCity>Γκουανταλκανάλ</exemplarCity>
+			</zone>
+			<zone type="Indian/Mahe">
+				<exemplarCity>Μάχε</exemplarCity>
+			</zone>
+			<zone type="Africa/Khartoum">
+				<exemplarCity>Σουδάν</exemplarCity>
+			</zone>
+			<zone type="Europe/Stockholm">
+				<exemplarCity>Στοκχόλμη</exemplarCity>
+			</zone>
+			<zone type="Asia/Singapore">
+				<exemplarCity>Σιγκαπούρη</exemplarCity>
+			</zone>
+			<zone type="Atlantic/St_Helena">
+				<exemplarCity>Αγ. Ελένη</exemplarCity>
+			</zone>
+			<zone type="Africa/Freetown">
+				<exemplarCity>Σιέρα Λεόνε</exemplarCity>
+			</zone>
+			<zone type="Africa/Dakar">
+				<exemplarCity>Ντακάρ</exemplarCity>
+			</zone>
+			<zone type="Africa/Mogadishu">
+				<exemplarCity>Μογκαντίσου</exemplarCity>
+			</zone>
+			<zone type="America/Paramaribo">
+				<exemplarCity>Παραμαρίνμπο</exemplarCity>
+			</zone>
+			<zone type="Africa/Sao_Tome">
+				<exemplarCity>Σάο Τόμε</exemplarCity>
+			</zone>
+			<zone type="America/El_Salvador">
+				<exemplarCity>Σαλβαδόρ</exemplarCity>
+			</zone>
+			<zone type="Asia/Damascus">
+				<exemplarCity>Δαμασκός</exemplarCity>
+			</zone>
+			<zone type="Africa/Mbabane">
+				<exemplarCity>Ζουαζιλάνδη</exemplarCity>
+			</zone>
+			<zone type="America/Grand_Turk">
+				<exemplarCity>Γραντ Τουρκ</exemplarCity>
+			</zone>
+			<zone type="Africa/Ndjamena">
+				<exemplarCity>Ντζαμένα</exemplarCity>
+			</zone>
+			<zone type="Indian/Kerguelen">
+				<exemplarCity>Κέργκουελεν</exemplarCity>
+			</zone>
+			<zone type="Africa/Lome">
+				<exemplarCity>Λόμε</exemplarCity>
+			</zone>
+			<zone type="Asia/Bangkok">
+				<exemplarCity>Μπανγκόκ</exemplarCity>
+			</zone>
+			<zone type="Asia/Dushanbe">
+				<exemplarCity>Ντουσχάνμπη</exemplarCity>
+			</zone>
+			<zone type="Pacific/Fakaofo">
+				<exemplarCity>Φακαόφο</exemplarCity>
+			</zone>
+			<zone type="Asia/Dili">
+				<exemplarCity>Ντίλι</exemplarCity>
+			</zone>
+			<zone type="Asia/Ashgabat">
+				<exemplarCity>Ασγκάμπατ</exemplarCity>
+			</zone>
+			<zone type="Africa/Tunis">
+				<exemplarCity>Τυνησία</exemplarCity>
+			</zone>
+			<zone type="Pacific/Tongatapu">
+				<exemplarCity>Τονγκατάπου</exemplarCity>
+			</zone>
+			<zone type="Europe/Istanbul">
+				<exemplarCity>Κωνσταντινούπολη</exemplarCity>
+			</zone>
+			<zone type="America/Port_of_Spain">
+				<exemplarCity>Πορτ-Οφ-Σπέιν</exemplarCity>
+			</zone>
+			<zone type="Pacific/Funafuti">
+				<exemplarCity>Φουναφούτι</exemplarCity>
+			</zone>
+			<zone type="Asia/Taipei">
+				<exemplarCity>Ταϊπέι</exemplarCity>
+			</zone>
+			<zone type="Africa/Dar_es_Salaam">
+				<exemplarCity>Νταρ Ες Σαλάμ</exemplarCity>
+			</zone>
+			<zone type="Europe/Kiev">
+				<exemplarCity>Κίεβο</exemplarCity>
+			</zone>
+			<zone type="Africa/Kampala">
+				<exemplarCity>Καμπάλα</exemplarCity>
+			</zone>
+			<zone type="Pacific/Midway">
+				<exemplarCity>Μίντγουεϊ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Johnston">
+				<exemplarCity>Τζόνστον</exemplarCity>
+			</zone>
+			<zone type="Pacific/Wake">
+				<exemplarCity>Γουέικ</exemplarCity>
+			</zone>
+			<zone type="Pacific/Honolulu">
+				<exemplarCity>Χονολουλού</exemplarCity>
+			</zone>
+			<zone type="America/Anchorage">
+				<exemplarCity>Άνκορατζ</exemplarCity>
+			</zone>
+			<zone type="America/Los_Angeles">
+				<exemplarCity>Λος Άντζελες</exemplarCity>
+			</zone>
+			<zone type="America/Phoenix">
+				<exemplarCity>Φοίνιξ</exemplarCity>
+			</zone>
+			<zone type="America/Denver">
+				<exemplarCity>Ντένβερ</exemplarCity>
+			</zone>
+			<zone type="America/Chicago">
+				<exemplarCity>Σικάγο</exemplarCity>
+			</zone>
+			<zone type="America/Indianapolis">
+				<exemplarCity>Ινδιανάπολη</exemplarCity>
+			</zone>
+			<zone type="America/Detroit">
+				<exemplarCity>Ντητρόιτ</exemplarCity>
+			</zone>
+			<zone type="America/New_York">
+				<exemplarCity>Νέα Υόρκη</exemplarCity>
+			</zone>
+			<zone type="America/Montevideo">
+				<exemplarCity>Μοντεβίδεο</exemplarCity>
+			</zone>
+			<zone type="Asia/Samarkand">
+				<exemplarCity>Σαμαρκάνδη</exemplarCity>
+			</zone>
+			<zone type="Asia/Tashkent">
+				<exemplarCity>Τασκένδη</exemplarCity>
+			</zone>
+			<zone type="America/St_Vincent">
+				<exemplarCity>Αγ. Βικέντιος</exemplarCity>
+			</zone>
+			<zone type="America/Caracas">
+				<exemplarCity>Καράκας</exemplarCity>
+			</zone>
+			<zone type="America/Tortola">
+				<exemplarCity>Τορτόλα</exemplarCity>
+			</zone>
+			<zone type="America/St_Thomas">
+				<exemplarCity>Σαιντ Τόμας</exemplarCity>
+			</zone>
+			<zone type="Asia/Saigon">
+				<exemplarCity>Σαϊγκόν</exemplarCity>
+			</zone>
+			<zone type="Pacific/Efate">
+				<exemplarCity>Εφάτε</exemplarCity>
+			</zone>
+			<zone type="Pacific/Wallis">
+				<exemplarCity>Γουόλις</exemplarCity>
+			</zone>
+			<zone type="Pacific/Apia">
+				<exemplarCity>Άπια</exemplarCity>
+			</zone>
+			<zone type="Asia/Aden">
+				<exemplarCity>Έιντεν</exemplarCity>
+			</zone>
+			<zone type="Indian/Mayotte">
+				<exemplarCity>Μαγιότε</exemplarCity>
+			</zone>
+			<zone type="Africa/Johannesburg">
+				<exemplarCity>Γιοχάνεσμπουργκ</exemplarCity>
+			</zone>
+			<zone type="Africa/Lusaka">
+				<exemplarCity>Ζάμπια</exemplarCity>
+			</zone>
+			<zone type="Africa/Harare">
+				<exemplarCity>Ζιμπάμπουε</exemplarCity>
+			</zone>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<symbols>
+			<decimal>,</decimal>
+			<group>.</group>
+		</symbols>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>#,##0.00 ¤;-#,##0.00 ¤</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+		<currencies>
+			<currency type="ADP">
+				<displayName>Πεσέτα Ανδόρας</displayName>
+			</currency>
+			<currency type="AED">
+				<displayName>Ντιράμ Ηνωμένων Αραβικών Εμιράτων</displayName>
+			</currency>
+			<currency type="ALL">
+				<displayName>Λεκ Αλβανίας</displayName>
+				<symbol>lek</symbol>
+			</currency>
+			<currency type="AMD">
+				<displayName>Ντραμ Αρμενίας</displayName>
+				<symbol>dram</symbol>
+			</currency>
+			<currency type="ANG">
+				<displayName>Γκίλντα Ολλανδικών Αντιλλών</displayName>
+				<symbol>NA f.</symbol>
+			</currency>
+			<currency type="AOA">
+				<displayName>Kwanza Ανγκόλας</displayName>
+			</currency>
+			<currency type="AOK">
+				<displayName>Kwanza Ανγκόλας (1977-1990)</displayName>
+			</currency>
+			<currency type="AON">
+				<displayName>Νέα Kwanza Ανγκόλας (1990-2000)</displayName>
+			</currency>
+			<currency type="AOR">
+				<displayName>Kwanza Reajustado Ανγκόλας (1995-1999)</displayName>
+			</currency>
+			<currency type="ARA">
+				<displayName>Austral Αργεντινής</displayName>
+			</currency>
+			<currency type="ARP">
+				<displayName>Πέσο Αργεντινής (1983-1985)</displayName>
+			</currency>
+			<currency type="ARS">
+				<displayName>Πέσο Αργεντινής</displayName>
+				<symbol>Arg$</symbol>
+			</currency>
+			<currency type="ATS">
+				<displayName>Σελίνι Αυστρίας</displayName>
+			</currency>
+			<currency type="AUD">
+				<displayName>Δολάριο Αυστραλίας</displayName>
+				<symbol>$A</symbol>
+			</currency>
+			<currency type="AWG">
+				<displayName>Γκίλντα Αρούμπα</displayName>
+			</currency>
+			<currency type="AZM">
+				<displayName>Μανάτ Αζερμπαϊτζάν</displayName>
+			</currency>
+			<currency type="BAD">
+				<displayName>Δηνάριο Βοσνίας-Ερζεγοβίνης</displayName>
+			</currency>
+			<currency type="BAM">
+				<displayName>Μάρκο Βοσνίας-Ερζεγοβίνης</displayName>
+				<symbol>KM</symbol>
+			</currency>
+			<currency type="BBD">
+				<displayName>Δολάριο Μπαρμπάντος</displayName>
+				<symbol>BDS$</symbol>
+			</currency>
+			<currency type="BDT">
+				<displayName>Τάκα Μπαγκλαντές</displayName>
+				<symbol>Tk</symbol>
+			</currency>
+			<currency type="BEC">
+				<displayName>Φράγκο Βελγίου (μετατρέψιμο)</displayName>
+			</currency>
+			<currency type="BEF">
+				<displayName>Φράγκο Βελγίου</displayName>
+				<symbol>BF</symbol>
+			</currency>
+			<currency type="BEL">
+				<displayName>Φράγκο Βελγίου (οικονομικό)</displayName>
+			</currency>
+			<currency type="BGL">
+				<displayName>Μεταλλικό Λεβ Βουλγαρίας</displayName>
+				<symbol>lev</symbol>
+			</currency>
+			<currency type="BGN">
+				<displayName>Νέο Λεβ Βουλγαρίας</displayName>
+			</currency>
+			<currency type="BHD">
+				<displayName>Δηνάριο Μπαχρέιν</displayName>
+				<symbol>BD</symbol>
+			</currency>
+			<currency type="BIF">
+				<displayName>Φράγκο Μπουρούντι</displayName>
+				<symbol>Fbu</symbol>
+			</currency>
+			<currency type="BMD">
+				<displayName>Δολάριο Βερμούδων</displayName>
+				<symbol>Ber$</symbol>
+			</currency>
+			<currency type="BND">
+				<displayName>Δολάριο Μπρουνέι</displayName>
+			</currency>
+			<currency type="BOB">
+				<displayName>Μπολιβιάνο Βολιβίας</displayName>
+			</currency>
+			<currency type="BOP">
+				<displayName>Πέσο Βολιβίας</displayName>
+			</currency>
+			<currency type="BOV">
+				<displayName>Mvdol Βολιβίας</displayName>
+			</currency>
+			<currency type="BRB">
+				<displayName>Νέο Cruzeiro Βραζιλίας (1967-1986)</displayName>
+			</currency>
+			<currency type="BRC">
+				<displayName>Cruzado Βραζιλίας</displayName>
+			</currency>
+			<currency type="BRE">
+				<displayName>Cruzeiro Βραζιλίας (1990-1993)</displayName>
+			</currency>
+			<currency type="BRL">
+				<displayName>Ρεάλ Βραζιλίας</displayName>
+			</currency>
+			<currency type="BRN">
+				<displayName>Νέο Cruzado Βραζιλίας</displayName>
+			</currency>
+			<currency type="BRR">
+				<displayName>Cruzeiro Βραζιλίας</displayName>
+			</currency>
+			<currency type="BSD">
+				<displayName>Δολάριο Μπαχάμες</displayName>
+			</currency>
+			<currency type="BTN">
+				<displayName>Νγκούλτρουμ Μπουτάν</displayName>
+				<symbol>Nu</symbol>
+			</currency>
+			<currency type="BUK">
+				<displayName>Kyat Βιρμανίας</displayName>
+			</currency>
+			<currency type="BWP">
+				<displayName>Πούλα Μποτσουάνας</displayName>
+			</currency>
+			<currency type="BYB">
+				<displayName>Νέο Ρούβλι Λευκορωσίας (1994-1999)</displayName>
+			</currency>
+			<currency type="BYR">
+				<displayName>Ρούβλι Λευκορωσίας</displayName>
+				<symbol>Rbl</symbol>
+			</currency>
+			<currency type="BZD">
+				<displayName>Δολάριο Μπελίζ</displayName>
+				<symbol>BZ$</symbol>
+			</currency>
+			<currency type="CAD">
+				<displayName>Δολάριο Καναδά</displayName>
+				<symbol>Can$</symbol>
+			</currency>
+			<currency type="CDF">
+				<displayName>Φράγκο Κονγκό</displayName>
+			</currency>
+			<currency type="CHF">
+				<displayName>Φράγκο Ελβετίας</displayName>
+				<symbol>SwF</symbol>
+			</currency>
+			<currency type="CLF">
+				<displayName>Unidades de Fomento Χιλής</displayName>
+			</currency>
+			<currency type="CLP">
+				<displayName>Πέσο Χιλής</displayName>
+				<symbol>Ch$</symbol>
+			</currency>
+			<currency type="CNY">
+				<displayName>Γιουάν Ρενμίμπι Κίνας</displayName>
+				<symbol>Y</symbol>
+			</currency>
+			<currency type="COP">
+				<displayName>Πέσο Κολομβίας</displayName>
+				<symbol>Col$</symbol>
+			</currency>
+			<currency type="CRC">
+				<displayName>Κολόν Κόστα Ρίκα</displayName>
+				<symbol>C</symbol>
+			</currency>
+			<currency type="CSK">
+				<displayName>Σκληρή Κορόνα Τσεχοσλοβακίας</displayName>
+			</currency>
+			<currency type="CUP">
+				<displayName>Πέσο Κούβας</displayName>
+			</currency>
+			<currency type="CVE">
+				<displayName>Εσκούδο Πράσινου Ακρωτηρίου</displayName>
+				<symbol>CVEsc</symbol>
+			</currency>
+			<currency type="CYP">
+				<displayName>Λίρα Κύπρου</displayName>
+				<symbol>Κυπριακή Λίρα</symbol>
+			</currency>
+			<currency type="CZK">
+				<displayName>Κορόνα Τσέχικης Δημοκρατίας</displayName>
+			</currency>
+			<currency type="DDM">
+				<displayName>Ostmark Ανατολικής Γερμανίας</displayName>
+			</currency>
+			<currency type="DEM">
+				<displayName>Μάρκο Γερμανίας</displayName>
+			</currency>
+			<currency type="DJF">
+				<displayName>Φράγκο Τζιμπουτί</displayName>
+				<symbol>DF</symbol>
+			</currency>
+			<currency type="DKK">
+				<displayName>Κορόνα Δανίας</displayName>
+				<symbol>DKr</symbol>
+			</currency>
+			<currency type="DOP">
+				<displayName>Πέσο Δομίνικου</displayName>
+				<symbol>RD$</symbol>
+			</currency>
+			<currency type="DZD">
+				<displayName>Δηνάριο Αλγερίας</displayName>
+				<symbol>DA</symbol>
+			</currency>
+			<currency type="ECS">
+				<displayName>Σούκρε Εκουαδόρ</displayName>
+			</currency>
+			<currency type="ECV">
+				<displayName>Unidad de Valor Constante (UVC) Ισημερινού</displayName>
+			</currency>
+			<currency type="EEK">
+				<displayName>Κορόνα Εσθονίας</displayName>
+			</currency>
+			<currency type="EGP">
+				<displayName>Λίρα Αιγύπτου</displayName>
+			</currency>
+			<currency type="ERN">
+				<displayName>Νάκφα Ερυθραίας</displayName>
+			</currency>
+			<currency type="ESP">
+				<displayName>Πεσέτα Ισπανίας</displayName>
+			</currency>
+			<currency type="ETB">
+				<displayName>Μπιρ Αιθιοπίας</displayName>
+				<symbol>Br</symbol>
+			</currency>
+			<currency type="EUR">
+				<displayName>Ευρώ</displayName>
+			</currency>
+			<currency type="FIM">
+				<displayName>Μάρκο Φινλανδίας</displayName>
+			</currency>
+			<currency type="FJD">
+				<displayName>Δολάριο Φίτζι</displayName>
+				<symbol>F$</symbol>
+			</currency>
+			<currency type="FKP">
+				<displayName>Λίρα Νησιών Φώλκλαντ</displayName>
+			</currency>
+			<currency type="FRF">
+				<displayName>Φράγκο Γαλλίας</displayName>
+			</currency>
+			<currency type="GBP">
+				<displayName>Λίρα Στερλίνα Βρετανίας</displayName>
+				<symbol>GBP</symbol>
+			</currency>
+			<currency type="GEK">
+				<displayName>Κούπον Λάρι Γεωργίας</displayName>
+			</currency>
+			<currency type="GEL">
+				<displayName>Λάρι Γεωργίας</displayName>
+				<symbol>lari</symbol>
+			</currency>
+			<currency type="GHC">
+				<displayName>Σέντι Γκάνας</displayName>
+			</currency>
+			<currency type="GIP">
+				<displayName>Λίρα Γιβραλτάρ</displayName>
+			</currency>
+			<currency type="GMD">
+				<displayName>Νταλάσι Γκάμπιας</displayName>
+			</currency>
+			<currency type="GNF">
+				<displayName>Φράγκο Γουινέας</displayName>
+				<symbol>GF</symbol>
+			</currency>
+			<currency type="GNS">
+				<displayName>Syli Γουινέας</displayName>
+			</currency>
+			<currency type="GQE">
+				<displayName>Ekwele Guineana Ισημερινής Γουινέας</displayName>
+			</currency>
+			<currency type="GRD">
+				<pattern>#,##0.00 ¤;-#,##0.00 ¤</pattern>
+				<displayName>Δραχμή Ελλάδας</displayName>
+				<symbol>Δρχ</symbol>
+				<decimal>,</decimal>
+				<group>.</group>
+			</currency>
+			<currency type="GTQ">
+				<displayName>Κουετσάλ Γουατεμάλας</displayName>
+				<symbol>Q</symbol>
+			</currency>
+			<currency type="GWE">
+				<displayName>Γκινέα Εσκούδο Πορτογαλίας</displayName>
+			</currency>
+			<currency type="GWP">
+				<displayName>Πέσο Guinea-Bissau</displayName>
+			</currency>
+			<currency type="GYD">
+				<displayName>Δολάριο Γουιάνας</displayName>
+				<symbol>G$</symbol>
+			</currency>
+			<currency type="HKD">
+				<displayName>Δολάριο Χονγκ Κονγκ</displayName>
+				<symbol>HK$</symbol>
+			</currency>
+			<currency type="HRD">
+				<displayName>Δηνάριο Κροατίας</displayName>
+			</currency>
+			<currency type="HRK">
+				<displayName>Κούνα Κροατίας</displayName>
+			</currency>
+			<currency type="HTG">
+				<displayName>Γκουρντ Αϊτής</displayName>
+			</currency>
+			<currency type="HUF">
+				<displayName>Φιορίνι Ουγγαρίας</displayName>
+				<symbol>Ft</symbol>
+			</currency>
+			<currency type="IDR">
+				<displayName>Ρούπια Ινδονησίας</displayName>
+				<symbol>Rp</symbol>
+			</currency>
+			<currency type="IEP">
+				<displayName>Λίρα Ιρλανδίας</displayName>
+				<symbol>IR£</symbol>
+			</currency>
+			<currency type="ILP">
+				<displayName>Λίρα Ισραήλ</displayName>
+			</currency>
+			<currency type="ILS">
+				<displayName>Νέο Σέκελ Ισραήλ</displayName>
+			</currency>
+			<currency type="INR">
+				<displayName>Ρούπια Ινδίας</displayName>
+				<symbol>INR</symbol>
+			</currency>
+			<currency type="IQD">
+				<displayName>Δηνάριο Ιράκ</displayName>
+				<symbol>ID</symbol>
+			</currency>
+			<currency type="IRR">
+				<displayName>Ριάλ Ιράν</displayName>
+				<symbol>RI</symbol>
+			</currency>
+			<currency type="ISK">
+				<displayName>Κορόνα Ισλανδίας</displayName>
+			</currency>
+			<currency type="ITL">
+				<displayName>Λιρέτα Ιταλίας</displayName>
+			</currency>
+			<currency type="JMD">
+				<displayName>Δολάριο Τζαμάικας</displayName>
+				<symbol>J$</symbol>
+			</currency>
+			<currency type="JOD">
+				<displayName>Δηνάριο Ιορδανίας</displayName>
+				<symbol>JD</symbol>
+			</currency>
+			<currency type="JPY">
+				<displayName>Γιεν Ιαπωνίας</displayName>
+			</currency>
+			<currency type="KES">
+				<displayName>Σελίνι Κένυας</displayName>
+				<symbol>K Sh</symbol>
+			</currency>
+			<currency type="KHR">
+				<displayName>Ρίελ Καμπότζης</displayName>
+				<symbol>CR</symbol>
+			</currency>
+			<currency type="KMF">
+				<displayName>Φράγκο Comoro</displayName>
+				<symbol>CF</symbol>
+			</currency>
+			<currency type="KPW">
+				<displayName>Won Βόρειας Κορέας</displayName>
+			</currency>
+			<currency type="KRW">
+				<displayName>Won Νότιας Κορέας</displayName>
+			</currency>
+			<currency type="KWD">
+				<displayName>Δηνάριο Κουβέιτ</displayName>
+				<symbol>KD</symbol>
+			</currency>
+			<currency type="KYD">
+				<displayName>Δολάριο Νήσων Κάιμαν</displayName>
+			</currency>
+			<currency type="KZT">
+				<displayName>Τένγκε Καζακστάν</displayName>
+				<symbol>T</symbol>
+			</currency>
+			<currency type="LAK">
+				<displayName>Κιπ Λάος</displayName>
+			</currency>
+			<currency type="LBP">
+				<displayName>Λίρα Λιβάνου</displayName>
+				<symbol>LL</symbol>
+			</currency>
+			<currency type="LKR">
+				<displayName>Ρούπια Σρι Λάνκα</displayName>
+				<symbol>SL Re</symbol>
+			</currency>
+			<currency type="LRD">
+				<displayName>Δολάριο Λιβερίας</displayName>
+			</currency>
+			<currency type="LTL">
+				<displayName>Λίτα Λιθουανίας</displayName>
+			</currency>
+			<currency type="LTT">
+				<displayName>Talonas Λιθουανίας</displayName>
+			</currency>
+			<currency type="LUF">
+				<displayName>Φράγκο Λουξεμβούργου</displayName>
+			</currency>
+			<currency type="LVL">
+				<displayName>Lats Λετονίας</displayName>
+			</currency>
+			<currency type="LVR">
+				<displayName>Ρούβλι Λετονίας</displayName>
+			</currency>
+			<currency type="LYD">
+				<displayName>Δηνάριο Λιβύης</displayName>
+				<symbol>LD</symbol>
+			</currency>
+			<currency type="MAD">
+				<displayName>Ντιράμ Μαρόκου</displayName>
+			</currency>
+			<currency type="MAF">
+				<displayName>Φράγκο Μαρόκου</displayName>
+			</currency>
+			<currency type="MDL">
+				<displayName>Λέι Μολδαβίας</displayName>
+			</currency>
+			<currency type="MGA">
+				<displayName>Ariary Μαδαγασκάρης</displayName>
+			</currency>
+			<currency type="MGF">
+				<displayName>Φράγκο Μαδαγασκάρης</displayName>
+			</currency>
+			<currency type="MKD">
+				<displayName>Δηνάριο Π.Γ.Δ.Μ.</displayName>
+				<symbol>MDen</symbol>
+			</currency>
+			<currency type="MLF">
+				<displayName>Φράγκο Μαλί</displayName>
+			</currency>
+			<currency type="MMK">
+				<displayName>Κυάτ Μιανμάρ</displayName>
+			</currency>
+			<currency type="MNT">
+				<displayName>Τουγκρίκ Μογγολίας</displayName>
+				<symbol>Tug</symbol>
+			</currency>
+			<currency type="MOP">
+				<displayName>Πατάκα Μακάο</displayName>
+			</currency>
+			<currency type="MRO">
+				<displayName>Ουγκουίγκα Μαυριτανίας</displayName>
+				<symbol>UM</symbol>
+			</currency>
+			<currency type="MTL">
+				<displayName>Λιρέτα Μάλτας</displayName>
+				<symbol>Lm</symbol>
+			</currency>
+			<currency type="MTP">
+				<displayName>Λίρα Μάλτας</displayName>
+			</currency>
+			<currency type="MUR">
+				<displayName>Ρούπια Μαυρικίου</displayName>
+			</currency>
+			<currency type="MVR">
+				<displayName>Ρουφίγια Νήσων Μαλδίβων</displayName>
+			</currency>
+			<currency type="MWK">
+				<displayName>Κουάτσα Μαλάουι</displayName>
+				<symbol>MK</symbol>
+			</currency>
+			<currency type="MXN">
+				<displayName>Πέσο Μεξικού</displayName>
+				<symbol>MEX$</symbol>
+			</currency>
+			<currency type="MXP">
+				<displayName>Ασημένιο Πέσο Μεξικού (1861-1992)</displayName>
+			</currency>
+			<currency type="MXV">
+				<displayName>Unidad de Inversion (UDI) Μεξικού</displayName>
+			</currency>
+			<currency type="MYR">
+				<displayName>Ρινγκίτ Μαλαισίας</displayName>
+				<symbol>RM</symbol>
+			</currency>
+			<currency type="MZE">
+				<displayName>Εσκούδο Μοζαμβίκης</displayName>
+			</currency>
+			<currency type="MZM">
+				<displayName>Μετικάλ Μοζαμβίκης</displayName>
+				<symbol>Mt</symbol>
+			</currency>
+			<currency type="NAD">
+				<displayName>Δολάριο Ναμίμπια</displayName>
+				<symbol>N$</symbol>
+			</currency>
+			<currency type="NGN">
+				<displayName>Νάιρα Νιγηρίας</displayName>
+			</currency>
+			<currency type="NIC">
+				<displayName>Κόρδοβα Νικαράγουας</displayName>
+			</currency>
+			<currency type="NIO">
+				<displayName>Χρυσή Κόρδοβα Νικαράγουας</displayName>
+			</currency>
+			<currency type="NLG">
+				<displayName>Γκίλντα Ολλανδίας</displayName>
+			</currency>
+			<currency type="NOK">
+				<displayName>Κορόνα Νορβηγίας</displayName>
+				<symbol>NKr</symbol>
+			</currency>
+			<currency type="NPR">
+				<displayName>Ρούπια Νεπάλ</displayName>
+				<symbol>Nrs</symbol>
+			</currency>
+			<currency type="NZD">
+				<displayName>Δολάριο Νέας Ζηλανδίας</displayName>
+				<symbol>$NZ</symbol>
+			</currency>
+			<currency type="OMR">
+				<displayName>Ριάλ Ομάν</displayName>
+				<symbol>RO</symbol>
+			</currency>
+			<currency type="PAB">
+				<displayName>Μπαλμπόα Παναμά</displayName>
+			</currency>
+			<currency type="PEI">
+				<displayName>Inti Περού</displayName>
+			</currency>
+			<currency type="PEN">
+				<displayName>Νέο Σολ Περού</displayName>
+			</currency>
+			<currency type="PES">
+				<displayName>Σολ Περού</displayName>
+			</currency>
+			<currency type="PGK">
+				<displayName>Kina Παπούα Νέα Γουινέα</displayName>
+			</currency>
+			<currency type="PHP">
+				<displayName>Πέσο Φιλιππίνων</displayName>
+			</currency>
+			<currency type="PKR">
+				<displayName>Ρούπια Πακιστάν</displayName>
+				<symbol>Pra</symbol>
+			</currency>
+			<currency type="PLN">
+				<displayName>Ζλότυ Πολωνίας</displayName>
+				<symbol>Zl</symbol>
+			</currency>
+			<currency type="PLZ">
+				<displayName>Ζλότυ Πολωνίας (1950-1995)</displayName>
+			</currency>
+			<currency type="PTE">
+				<displayName>Εσκούδο Πορτογαλίας</displayName>
+			</currency>
+			<currency type="PYG">
+				<displayName>Γκουαρανί Παραγουάης</displayName>
+			</currency>
+			<currency type="QAR">
+				<displayName>Rial Κατάρ</displayName>
+				<symbol>QR</symbol>
+			</currency>
+			<currency type="ROL">
+				<displayName>Λέι Ρουμανίας</displayName>
+				<symbol>leu</symbol>
+			</currency>
+			<currency type="RON">
+				<displayName>Λεβ Ρουμανίας</displayName>
+			</currency>
+			<currency type="RSD">
+				<displayName>Δηνάριο Σερβίας</displayName>
+			</currency>
+			<currency type="RUB">
+				<displayName>Ρούβλι Ρωσίας</displayName>
+			</currency>
+			<currency type="RUR">
+				<displayName>Ρούβλι Ρωσίας (1991-1998)</displayName>
+			</currency>
+			<currency type="RWF">
+				<displayName>Φράγκο Ρουάντας</displayName>
+			</currency>
+			<currency type="SAR">
+				<displayName>Ριάλ Σαουδικής Αραβίας</displayName>
+			</currency>
+			<currency type="SBD">
+				<displayName>Δολάριο Νήσων Σολομώντος</displayName>
+				<symbol>SI$</symbol>
+			</currency>
+			<currency type="SCR">
+				<displayName>Ρούπια Σεϋχέλες</displayName>
+				<symbol>SR</symbol>
+			</currency>
+			<currency type="SDD">
+				<displayName>Δηνάριο Σουδάν</displayName>
+			</currency>
+			<currency type="SDP">
+				<displayName>Λίρα Σουδάν</displayName>
+			</currency>
+			<currency type="SEK">
+				<displayName>Κορόνα Σουηδίας</displayName>
+				<symbol>SKr</symbol>
+			</currency>
+			<currency type="SGD">
+				<displayName>Δολάριο Σιγκαπούρης</displayName>
+				<symbol>S$</symbol>
+			</currency>
+			<currency type="SHP">
+				<displayName>Λίρα Αγίας Ελένης</displayName>
+			</currency>
+			<currency type="SIT">
+				<displayName>Τόλαρ Σλοβενίας</displayName>
+			</currency>
+			<currency type="SKK">
+				<displayName>Κορόνα Σλοβενίας</displayName>
+				<symbol>Sk</symbol>
+			</currency>
+			<currency type="SLL">
+				<displayName>Λεόνε της Σιέρα Λεόνε</displayName>
+			</currency>
+			<currency type="SOS">
+				<displayName>Σελίνι Σομαλίας</displayName>
+				<symbol>Sh.</symbol>
+			</currency>
+			<currency type="SRG">
+				<displayName>Γκίλντα Σουρινάμ</displayName>
+				<symbol>Sf</symbol>
+			</currency>
+			<currency type="SUR">
+				<displayName>Σοβιετικό Ρούβλι</displayName>
+			</currency>
+			<currency type="SVC">
+				<displayName>Κολόν Ελ Σαλβαδόρ</displayName>
+			</currency>
+			<currency type="SYP">
+				<displayName>Λίρα Συρίας</displayName>
+				<symbol>LS</symbol>
+			</currency>
+			<currency type="SZL">
+				<displayName>Λιλανγκένι Σουαζιλάνδη</displayName>
+				<symbol>E</symbol>
+			</currency>
+			<currency type="THB">
+				<displayName>Μπατ Ταϊλάνδης</displayName>
+			</currency>
+			<currency type="TJR">
+				<displayName>Ρούβλι Τατζικιστάν</displayName>
+			</currency>
+			<currency type="TJS">
+				<displayName>Σομόν Τατζικιστάν</displayName>
+			</currency>
+			<currency type="TMM">
+				<displayName>Μανάτ Τουρκμενιστάν</displayName>
+			</currency>
+			<currency type="TND">
+				<displayName>Δηνάριο Τυνησίας</displayName>
+			</currency>
+			<currency type="TPE">
+				<displayName>Εσκούδο Τιμόρ</displayName>
+			</currency>
+			<currency type="TRL">
+				<displayName>Λίρα Τουρκίας</displayName>
+				<symbol>TL</symbol>
+			</currency>
+			<currency type="TRY">
+				<displayName>Νέα Τουρκική Λίρα</displayName>
+			</currency>
+			<currency type="TTD">
+				<displayName>Δολάριο Τρινιδάδ και Τομπάγκο</displayName>
+				<symbol>TT$</symbol>
+			</currency>
+			<currency type="TWD">
+				<displayName>Νέο Δολάριο Ταϊβάν</displayName>
+				<symbol>NT$</symbol>
+			</currency>
+			<currency type="TZS">
+				<displayName>Σελίνι Τανζανίας</displayName>
+				<symbol>T Sh</symbol>
+			</currency>
+			<currency type="UAH">
+				<displayName>Χρίφνα Ουκρανίας</displayName>
+			</currency>
+			<currency type="UAK">
+				<displayName>Karbovanetz Ουκρανίας</displayName>
+			</currency>
+			<currency type="UGS">
+				<displayName>Σελίνι Ουγκάντας (1966-1987)</displayName>
+			</currency>
+			<currency type="UGX">
+				<displayName>Σελίνι Ουγκάντας</displayName>
+				<symbol>U Sh</symbol>
+			</currency>
+			<currency type="USD">
+				<displayName>Δολάριο ΗΠΑ</displayName>
+			</currency>
+			<currency type="USN">
+				<displayName>Δολάριο ΗΠΑ (Επόμενη Ημέρα)</displayName>
+			</currency>
+			<currency type="USS">
+				<displayName>Δολάριο ΗΠΑ (Ίδια Ημέρα)</displayName>
+			</currency>
+			<currency type="UYP">
+				<displayName>Πέσο Ουρουγουάης (1975-1993)</displayName>
+			</currency>
+			<currency type="UYU">
+				<displayName>Πέσο Uruguayo Ουρουγουάης</displayName>
+				<symbol>Ur$</symbol>
+			</currency>
+			<currency type="UZS">
+				<displayName>Sum Ουζμπεκιστάν</displayName>
+			</currency>
+			<currency type="VEB">
+				<displayName>Μπολιβάρ Βενεζουέλας</displayName>
+				<symbol>Be</symbol>
+			</currency>
+			<currency type="VND">
+				<displayName>Dong Βιετνάμ</displayName>
+			</currency>
+			<currency type="WST">
+				<displayName>Tala Δυτικής Σαμόα</displayName>
+			</currency>
+			<currency type="XAF">
+				<displayName>Φράγκο BEAC CFA</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>Χρυσός</displayName>
+			</currency>
+			<currency type="XBA">
+				<displayName>Ευρωπαϊκή Σύνθετη Μονάδα</displayName>
+			</currency>
+			<currency type="XBB">
+				<displayName>Ευρωπαϊκή Νομισματική Μονάδα</displayName>
+			</currency>
+			<currency type="XBC">
+				<displayName>Ευρωπαϊκή Μονάδα Λογαριασμού (XBC)</displayName>
+			</currency>
+			<currency type="XBD">
+				<displayName>Ευρωπαϊκή Μονάδα Λογαριασμού (XBD)</displayName>
+			</currency>
+			<currency type="XCD">
+				<displayName>Δολάριο Ανατολικής Καραϊβικής</displayName>
+				<symbol>EC$</symbol>
+			</currency>
+			<currency type="XDR">
+				<displayName>Ειδικά Δικαιώματα Ανάληψης</displayName>
+			</currency>
+			<currency type="XEU">
+				<displayName>Ευρωπαϊκή Συναλλαγματική Μονάδα</displayName>
+			</currency>
+			<currency type="XFO">
+				<displayName>Χρυσό Φράγκο Γαλλίας</displayName>
+			</currency>
+			<currency type="XFU">
+				<displayName>UIC-Φράγκο Γαλλίας</displayName>
+			</currency>
+			<currency type="XOF">
+				<displayName>Φράγκο BCEAO CFA</displayName>
+			</currency>
+			<currency type="XPF">
+				<displayName>Φράγκο CFP</displayName>
+				<symbol>CFPF</symbol>
+			</currency>
+			<currency type="XXX">
+				<displayName>Άγνωστο ή Ακατάλληλο Νόμισμα</displayName>
+				<displayName count="other">Άγνωστο ή Ακατάλληλο Νόμισμα</displayName>
+				<symbol>XXX</symbol>
+			</currency>
+			<currency type="YDD">
+				<displayName>Δηνάριο Υεμένης</displayName>
+			</currency>
+			<currency type="YER">
+				<displayName>Rial Υεμένης</displayName>
+				<symbol>YRl</symbol>
+			</currency>
+			<currency type="YUD">
+				<displayName>Μεταλλικό Δηνάριο Γιουγκοσλαβίας</displayName>
+			</currency>
+			<currency type="YUM">
+				<displayName>Νέο Δηνάριο Γιουγκοσλαβίας</displayName>
+			</currency>
+			<currency type="YUN">
+				<displayName>Μετατρέψιμο Δηνάριο Γιουγκοσλαβίας</displayName>
+			</currency>
+			<currency type="ZAL">
+				<displayName>Ραντ Νότιας Αφρικής (οικονομικό)</displayName>
+			</currency>
+			<currency type="ZAR">
+				<displayName>Ραντ Νότιας Αφρικής</displayName>
+				<symbol>R</symbol>
+			</currency>
+			<currency type="ZMK">
+				<displayName>Kwacha Ζάμπιας</displayName>
+			</currency>
+			<currency type="ZRN">
+				<displayName>Νέο Zaire Ζαΐρ</displayName>
+			</currency>
+			<currency type="ZRZ">
+				<displayName>Zaire Ζαΐρ</displayName>
+			</currency>
+			<currency type="ZWD">
+				<displayName>Δολάριο Ζιμπάμπουε</displayName>
+				<symbol>Z$</symbol>
+			</currency>
+		</currencies>
+	</numbers>
+	<units>
+		<unit type="day">
+			<unitPattern count="one">{0} ημέρα</unitPattern>
+			<unitPattern count="other">{0} ημέρες</unitPattern>
+		</unit>
+		<unit type="hour">
+			<unitPattern count="one">{0} ώρα</unitPattern>
+			<unitPattern count="other">{0} ώρες</unitPattern>
+		</unit>
+		<unit type="minute">
+			<unitPattern count="one">{0} λεπτό</unitPattern>
+			<unitPattern count="other">{0} λεπτά</unitPattern>
+		</unit>
+		<unit type="month">
+			<unitPattern count="one">{0} μήνας</unitPattern>
+			<unitPattern count="other">{0} μήνες</unitPattern>
+		</unit>
+		<unit type="second">
+			<unitPattern count="one">{0} δευτερόλεπτο</unitPattern>
+			<unitPattern count="other">{0} δευτερόλεπτα</unitPattern>
+		</unit>
+		<unit type="week">
+			<unitPattern count="one">{0} εβδομάδα</unitPattern>
+			<unitPattern count="other">{0} εβδομάδες</unitPattern>
+		</unit>
+		<unit type="year">
+			<unitPattern count="one">{0} έτος</unitPattern>
+			<unitPattern count="other">{0} έτη</unitPattern>
+		</unit>
+	</units>
+	<posix>
+		<messages>
+			<yesstr>ναι:ν</yesstr>
+			<nostr>οχι:όχι:ο:ό</nostr>
+		</messages>
+	</posix>
+</ldml>

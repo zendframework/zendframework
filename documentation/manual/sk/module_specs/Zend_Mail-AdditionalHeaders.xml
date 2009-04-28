@@ -1,0 +1,22 @@
+<sect1 id="zend.mail.additional-headers">
+    <title>Iné e-mail hlavičky</title>
+    <para>
+        Iné e-mail hlavičky je možné pridať pomocou metódy <code>addHeader()</code>. Prvý parameter obsahuje
+        meno hlavičky a druhý jej hodnotu. Tretí parameter je nepovinný a určuje či daná hlavička môže mať
+        jednu, alebo viac hodnôt:
+    </para>
+    <example>
+        <title>Pridavanie iných e-mail hlavičiek</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
+$mail->addHeader('X-greetingsTo', 'Dad', true);
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

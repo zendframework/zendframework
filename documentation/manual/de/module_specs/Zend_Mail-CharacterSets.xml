@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.character-sets">
+    <title>Zeichensätze</title>
+    <para>
+        <classname>Zend_Mail</classname> prüft nicht auf die richtigen Zeichensätze für die Mailbestandteile.
+        Wenn <classname>Zend_Mail</classname> instanziiert wird, kann ein Zeichensatz für die Mail selbst
+        angegeben werden. Der Standardwert ist <code>iso-8859-1</code>. Die Anwendung muss
+        sicherstellen, dass die Inhalte aller Bestandteile des Mailobjektes im richtigen
+        Zeichensatz codiert sind. Wenn ein neuer Mailbestandteil erstellt wird, kann für jeden
+        Bestandteil ein anderer Zeichensatz angegeben werden.
+    </para>
+    <note>
+        <title>Nur im Textformat</title>
+        <para>
+            Zeichensätze sind nur auf Mailbestandteile im Textformat anwendbar.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

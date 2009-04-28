@@ -1,0 +1,309 @@
+<sect1 id="zend.uri.chapter">
+  <title>Zend_Uri</title>
+
+  <sect2 id="zend.uri.overview">
+    <title>Обзор<!--Overview--></title>
+
+    <para>
+      <code>Zend_Uri</code> является компонентой, которая призвана облегчить
+      работу с URI (<ulink url="http://www.w3.org/Addressing/">Uniform Resource
+      Identifiers</ulink>) и их валидацию. <code>Zend_Uri</code> был создан для
+      обслуживания других компонент, таких, как <code>Zend_Http_Client</code>,
+      но полезен и как отдельная утилита.
+<!--
+      <code>Zend_Uri</code> is a component that aids in manipulating and
+      validating <ulink url="http://www.w3.org/Addressing/">Uniform Resource
+      Identifiers</ulink> (URIs). <code>Zend_Uri</code> exists primarily to
+      service other components such as <code>Zend_Http_Client</code> but is
+      also useful as a standalone utility.
+-->
+    </para>
+
+    <para>
+      URI всегда начинаются со схемы, после которой следует двоеточие. Структура
+      для разных схем может сильно отличаться. Класс <code>Zend_Uri</code>
+      предоставляет фабрику (паттерн factory), которая возвращает его подклассы,
+      специализирующиеся в различных схемах. Подклассы называются
+      <code>Zend_Uri_&lt;scheme&gt;</code>, где <code>&lt;scheme&gt;</code> -
+      схема в нижнем регистре, с прописной первой буквой. Исключением из этого
+      правила является HTTPS, который обрабатывается подклассом
+      <code>Zend_Uri_Http</code>.
+<!--
+      URIs always begin with a scheme, followed by a colon. The construction
+      of the many different schemes varies significantly.  The
+      <code>Zend_Uri</code> class provides a factory that returns a subclass of
+      itself which specializes in each scheme.  The subclass
+      will be named <code>Zend_Uri_&lt;scheme&gt;</code>, where
+      <code>&lt;scheme&gt;</code> is the scheme lowercased with the first
+      letter capitalized. An exception to this rule is HTTPS, which is also
+      handled by <code>Zend_Uri_Http</code>.
+-->
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.creation">
+    <title>Создание нового URI<!--Creating a New URI--></title>
+
+    <para>
+      <code>Zend_Uri</code> будет строить с нуля новый URI, если
+      <code>Zend_Uri::factory()</code> была передана только схема.
+<!--
+      <code>Zend_Uri</code> will build a new URI from scratch if only a scheme
+      is passed to <code>Zend_Uri::factory()</code>.
+-->
+    </para>
+
+    <example>
+      <title>Создание нового URI с <code>Zend_Uri::factory()</code><!--Creating a New URI with <code>Zend_Uri::factory()</code>--></title>
+
+      <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// Для того, чтобы создать с нуля новый URI, передайте только схему.
+$uri = Zend_Uri::factory('http');
+
+// $uri является экземпляром Zend_Uri_Http
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      Для того, чтобы создать с нуля новый URI, передайте
+      <code>Zend_Uri::factory()</code> только схему. <footnote><para>На момент
+      написания этой документации Zend_Uri поддерживает только схемы HTTP и
+      HTTPS.</para></footnote>. При передаче не поддерживаемой схемы
+      генерируется исключение <code>Zend_Uri_Exception</code>.
+<!--
+      To create a new URI from scratch, pass only the scheme to
+      <code>Zend_Uri::factory()</code><footnote><para>At the time of writing,
+      Zend_Uri only supports the HTTP and HTTPS schemes.</para></footnote> .
+      If an unsupported scheme is passed, a <code>Zend_Uri_Exception</code>
+      will be thrown.
+-->
+    </para>
+
+    <para>
+      Если переданные схема или URI поддерживаются, то
+      <code>Zend_Uri::factory()</code> вернет свой подкласс, который
+      специализируется на данной схеме.
+<!--
+      If the scheme or URI passed is supported,
+      <code>Zend_Uri::factory()</code> will return a subclass of itself that
+      specializes in the scheme to be created.
+-->
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.manipulation">
+    <title>Работа с существующим URI<!--Manipulating an Existing URI--></title>
+
+    <para>
+      Для того, чтобы работать с существующим URI, передайте его весь целиком
+      <code>Zend_Uri::factory()</code>.
+<!--
+      To manipulate an existing URI, pass the entire URI to
+      <code>Zend_Uri::factory()</code>.
+-->
+    </para>
+
+    <example>
+      <title>Работа с существующим URI с <code>Zend_Uri::factory()</code><!--Manipulating an Existing URI with <code>Zend_Uri::factory()</code>--></title>
+
+    <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// Чтобы работать с существующим URI, передайте его как параметр
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+// $uri является экземпляром Zend_Uri_Http
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      URI будет распарсен и проверен на валидность. Если он оказался невалидным,
+      то сразу же будет сгенерировано исключение
+      <code>Zend_Uri_Exception</code>. Иначе <code>Zend_Uri::factory()</code>
+      вернет свой подкласс, который специализируется на данной схеме.
+<!--
+      The URI will be parsed and validated. If it is found to be invalid, a
+      <code>Zend_Uri_Exception</code> will be thrown immediately. Otherwise,
+      <code>Zend_Uri::factory()</code> will return a subclass of itself that
+      specializes in the scheme to be manipulated.
+-->
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.validation">
+    <title>Проверка URI<!--URI Validation--></title>
+
+    <para>
+      Функция <code>Zend_Uri::check()</code> может использоваться в том случае,
+      когда нужна только проверка существующего URI.
+<!--
+      The <code>Zend_Uri::check()</code> function can be used if only
+      validation of an existing URI is needed.
+-->
+    </para>
+
+    <example>
+      <title>Проверка URI с помощью <code>Zend_Uri::check()</code><!--URI Validation with <code>Zend_Uri::check()</code>--></title>
+
+    <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// Проверка, является ли данный URI синтаксически корректным
+$valid = Zend_Uri::check('http://uri.in.question');
+
+// $valid равен TRUE при валидном URI, иначе FALSE
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      <code>Zend_Uri::check()</code> возвращает булево значение, использование
+      этой функции более удобно, чем вызов <code>Zend_Uri::factory()</code> и
+      отлов исключения.
+<!--
+      <code>Zend_Uri::check()</code> returns a boolean,
+      which is more convenient than using <code>Zend_Uri::factory()</code>
+      and catching the exception.
+-->
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.instance-methods">
+    <title>Общие методы<!--Common Instance Methods--></title>
+
+    <para>
+      Каждый экземпляр подкласса <code>Zend_Uri</code> (т.е.
+      <code>Zend_Uri_Http</code>) имеет несколько методов экземпляров, которые
+      полезны для работы с любыми видами URI.
+<!--
+      Every instance of a <code>Zend_Uri</code> subclass (e.g.
+      <code>Zend_Uri_Http</code>) has several instance methods that are useful
+      for working with any kind of URI.
+-->
+    </para>
+
+    <sect3 id="zend.uri.instance-methods.getscheme">
+      <title>Получение схемы URI<!--Getting the Scheme of the URI--></title>
+
+      <para>
+        Схема URI – часть URI, завершающаяся двоеточием. Например, схемой в
+        <code>http://www.zend.com</code> является <code>http</code>.
+<!--
+        The scheme of the URI is the part of the URI that precedes the colon.  For example,
+        the scheme of <code>http://www.zend.com</code> is <code>http</code>.
+-->
+      </para>
+
+      <example>
+        <title>Получение схемы из объекта <code>Zend_Uri_*</code><!--Getting the Scheme from a <code>Zend_Uri_*</code> Object--></title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$scheme = $uri->getScheme();  // "http"
+
+?>]]></programlisting>
+    </example>
+
+      <para>
+        Метод экземпляра <code>getScheme()</code> возвращает схему из URI.
+<!--
+        The <code>getScheme()</code> instance method returns only the scheme part of
+        the URI object.
+-->
+      </para>
+
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.geturi">
+      <title>Получение всего URI<!--Getting the Entire URI--></title>
+
+      <example>
+        <title>Получение всего URI из объекта <code>Zend_Uri_*</code><!--Getting the Entire URI from a <code>Zend_Uri_*</code> Object--></title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+echo $uri->getUri();  // "http://www.zend.com"
+
+?>]]></programlisting>
+      </example>
+
+      <para>
+        Метод <code>getUri()</code> возвращает строковое представление всего
+        URI.
+<!--
+        The <code>getUri()</code> method returns the string representation
+        of the entire URI.
+-->
+      </para>
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.valid">
+      <title>Проверка URI на валидность<!--Validating the URI--></title>
+
+      <para>
+        <code>Zend_Uri::factory()</code> всегда производит синтаксическую
+        проверку переданных ему URI и не будет создавать новый экземпляр
+        подкласса <code>Zend_Uri</code>, если данный URI не прошел проверку.
+        Тем не менее, после того, как был инстанцирован подкласс
+        <code>Zend_Uri</code> для нового URI или на основе уже существующего,
+        в результате манипуляций с ним этот URI может стать невалидным.
+<!--
+        <code>Zend_Uri::factory()</code> will always validate any URI passed
+        to it and will not instantiate a new <code>Zend_Uri</code> subclass
+        if the given URI is found to be invalid. However, after the
+        <code>Zend_Uri</code> subclass is instantiated for a new URI or a
+        valid existing one, it is possible that the URI can then later become
+        invalid after it is manipulated.
+-->
+      </para>
+
+      <example>
+        <title>Проверка объекта <code>Zend_Uri_*</code><!--Validating a <code>Zend_Uri_*</code> Object--></title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$isValid = $uri->valid();  // TRUE
+
+?>]]></programlisting>
+      </example>
+
+      <para>
+        Метод <code>valid()</code> дает возможность проверить, является ли URI
+        по-прежнему валидным.
+<!--
+        The <code>valid()</code> instance method provides a means to check that the
+        URI object is still valid.
+-->
+      </para>
+    </sect3>
+
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

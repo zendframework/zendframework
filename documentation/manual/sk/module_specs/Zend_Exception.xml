@@ -1,0 +1,34 @@
+<sect1 id="zend.exception.using">
+    <title>Používanie výnimiek</title>
+
+    <para>
+        Všetky výnimky generované triedami Zend Framework mali by byť
+        odvodené od základnej triedy Zend_Exception.
+    </para>
+
+    <example id="zend.exception.using.example">
+        <title>Príklad odchytenia výnimky</title>
+        <programlisting role="php"><![CDATA[<?php
+
+try {
+    Zend_Loader::loadClass('nonexistantclass');
+} catch (Zend_Exception $e) {
+    echo "Caught exception: " . get_class($e) . "\n";
+    echo "Message: " . $e->getMessage() . "\n";
+    // pokračovanie kódu pre zotavenie sa z chyby
+}
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+        Ku každej časti Zend Framework sú v dokumentácii uvedené
+        informácie o metódach ktoré používajú výnimky, informácie
+        o dôvodoch generovania výnimiek a názvy tried ktoré sú
+        odvodené od Zend_Exception.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

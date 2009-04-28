@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.debug.dumping">
+
+    <title>変数の出力</title>
+
+    <para>
+        静的メソッド <classname>Zend_Debug::dump()</classname> は、
+        式の内容を表示したり返したりします。
+        この単純なデバッグ手法は、一般的によく用いられています。
+        というのも、簡単に使用することができ、事前準備や特別なツール、
+        デバッグ用環境などが不要だからです。
+    </para>
+
+    <example id="zend.debug.dumping.example">
+        <title>dump() メソッドの例</title>
+        <programlisting role="php"><![CDATA[
+
+Zend_Debug::dump($var, $label=null, $echo=true);
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        引数 <code>$var</code> で指定した式や変数についての情報を
+        <classname>Zend_Debug::dump()</classname> メソッドが出力します。
+    </para>
+
+    <para>
+        引数 <code>$label</code> は、<classname>Zend_Debug::dump()</classname>
+        の出力の前に出力される文字列です。
+        これは、たとえば複数の変数の内容を出力する際に便利です。
+    </para>
+
+    <para>
+        論理型の <code>$echo</code> で、<code>Zend::dump()</code> の結果を
+        echo するかどうかを指定します。<code>TRUE</code> の場合は出力が
+        echo されます。<code>$echo</code> の設定にかかわらず、
+        出力結果は常にメソッドの返り値となります。
+    </para>
+
+    <para>
+        内部構造を知っておくと、挙動が理解しやすくなります。
+        <classname>Zend_Debug::dump()</classname> メソッドは、PHP の関数
+        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>
+        をラップしたものです。出力ストリームがウェブに渡された場合、
+        <code>var_dump()</code> の出力は
+        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        でエスケープされ、(X)HTML の <code>&lt;pre&gt;</code> タグで囲まれます。
+    </para>
+
+    <tip>
+        <title>Zend_Log を使用したデバッグ</title>
+        <para>
+            <classname>Zend_Debug::dump()</classname> は、ソフトウェアの開発中の
+            ちょっとしたデバッグには最適です。
+            変数の中身を見るメソッドを追加したり削除したりするのが手っ取り早くできます。
+        </para>
+        <para>
+            その場限りのコードではなくずっと使用し続けるデバッグコードを書くのなら、
+            <link linkend="zend.log.overview">Zend_Log</link>
+            の使用を検討してください。たとえば、ログレベルを
+            <code>DEBUG</code> にして Stream ログライターを使用すると、
+            <classname>Zend_Debug::dump()</classname> が返す文字列を出力することができます。
+        </para>
+    </tip>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

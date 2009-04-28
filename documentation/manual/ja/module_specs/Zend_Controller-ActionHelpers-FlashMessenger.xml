@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>導入</title>
+        <para>
+            <code>FlashMessenger</code> ヘルパーは、
+            次のリクエストの際にユーザに見せる必要のあるメッセージを渡すためのものです。
+            この機能を実現するため、<code>FlashMessenger</code> は
+            <classname>Zend_Session_Namespace</classname> を使用してメッセージを保管しています。
+            <classname>Zend_Session</classname> や
+            <classname>Zend_Session_Namespace</classname> を使用する際には、起動ファイル中で
+            <classname>Zend_Session::start()</classname> を実行するようにしましょう
+            (詳細な使用例は <link linkend="zend.session.advanced_usage.starting_a_session">Zend Session</link>
+            のドキュメントを参照ください)。
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>基本的な使用例</title>
+        <para>
+            以下の使用例は、もっとも基本的なフラッシュメッセンジャーの使用法を示すものです。
+            アクション <code>/some/my</code> がコールされると、フラッシュメッセージに
+            "Record Saved!" が保存されます。そして、その次のアクション
+            <code>/some/my-next-request</code> へのリクエストの際にそれを取得
+            (そして削除) します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+    public function init()
+    {
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * Zend_Controller_Action_Helper_FlashMessenger
+         * のインスタンスを必要に応じて取得するための
+         * デフォルトメソッド
+         */
+        $this->_flashMessenger->addMessage('Record Saved!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.doctype">
+    <title>Doctype Helfer</title>
+
+    <para>
+        Gültige HTML und XHTML Dokumente sollten eine <code>DOCTYPE</code> Deklaration enthalten. Neben der
+        Schwierigkeit sich diese zu merken, können Sie auch beeinflussen wie bestimmte Elemente im Dokument
+        dargestellt werden sollen (zum Beispiel, CDATA Kommentierung in <code>&lt;script&gt;</code> und
+        <code>&lt;style&gt;</code> Elementen.
+    </para>
+
+    <para>
+        Der <code>Doctype</code> Helfer erlaubt die Spezifikation von einem der folgenden Typen:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>XHTML11</code></para></listitem>
+        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
+        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
+        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
+        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
+        <listitem><para><code>HTML4_STRICT</code></para></listitem>
+        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
+        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
+        <listitem><para><code>HTML5</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Es kann auch ein eigener DocType spezifiziert werden solange dieser richtig formatiert ist.
+    </para>
+
+    <para>
+        Der <code>Doctype</code> Helfer ist eine konkrete Implementation des
+        <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.doctype.basicusage">
+        <title>Grundsätzliche Verwendung des Doctype Helfers</title>
+
+        <para>
+            Der Doctype kann jederzeit spezifiziert werden. Trotzdem werden Helfer die vom Doctype
+            abhängen, diesen erst erkennen wenn er gesetzt wurde, sodas der einfachste Weg darin
+            besteht Ihn in der Bootstrap zu spezifizieren:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$doctypeHelper = new Zend_View_Helper_Doctype();
+$doctypeHelper->doctype('XHTML1_STRICT');
+]]>
+        </programlisting>
+
+        <para>
+            Und Ihn dann am Beginn des Layout Scripts ausgeben:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->doctype() ?>
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.view.helpers.initial.doctype.retrieving">
+        <title>Empfangen des Doctypes</title>
+
+        <para>
+            Wenn man den Doctype wissen will, kann einfach <code>getDoctype()</code> auf dem Objekt
+            aufgerufen werden, welches vom aufgerufenen Helfer zurückgegeben wird.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$doctype = $view->doctype()->getDoctype();
+]]>
+        </programlisting>
+
+        <para>
+            Typischerweise wird man einfach wissen wollen, ob der Doctype XHTML ist oder nicht; hierfür ist
+            die <code>isXhtml()</code> Methode ausreichend:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+if ($view->doctype()->isXhtml()) {
+    // etwas anderes machen
+}
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

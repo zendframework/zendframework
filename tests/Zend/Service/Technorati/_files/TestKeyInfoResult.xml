@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a KeyInfo request
+    http://api.technorati.com/keyinfo?key=VALID_API_KEY
+
+-->
+<!-- generator="Technorati API version 1.0 /keyinfo" -->
+<tapi version="1.0">
+    <document>
+        <result>
+            <apiqueries>27</apiqueries>
+            <maxqueries>1500</maxqueries>
+        </result>
+    </document>
+</tapi>

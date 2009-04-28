@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>Introduction</title>
+        <para>
+            The <code>FlashMessenger</code> helper allows you to pass messages
+            that the user may need to see on the next request. To accomplish
+            this, <code>FlashMessenger</code> uses
+            <classname>Zend_Session_Namespace</classname> to store messages for future or
+            next request retrieval. It is generally a good idea that if you
+            plan on using <classname>Zend_Session</classname> or
+            <classname>Zend_Session_Namespace</classname>, that you initialize with
+            <classname>Zend_Session::start()</classname> in your bootstrap file. (See the
+            <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
+            documentation for more details on its usage.)
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>Basic Usage Example</title>
+        <para>
+            The usage example below shows the use of the flash messenger at its
+            most basic. When the action <code>/some/my</code> is called, it adds
+            the flash message "Record Saved!" A subsequent request to the action
+            <code>/some/my-next-request</code> will retrieve it (and thus delete
+            it as well).
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+    public function init()
+    {
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * default method of getting
+         * Zend_Controller_Action_Helper_FlashMessenger instance
+         * on-demand
+         */
+        $this->_flashMessenger->addMessage('Record Saved!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]></programlisting>
+    </sect4>
+</sect3>

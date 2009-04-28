@@ -1,0 +1,141 @@
+<sect1 id="zend.search.lucene.index-creation">
+    <title>Indexes Bouwen</title>
+
+    <sect2 id="zend.search.lucene.index-creation.creating">
+        <title>Een Nieuwe Index Maken</title>
+
+        <para>
+            De mogelijkheid om nieuwe Indexes te maken en ze up te daten is geïmplementeerd in de Zend_Search_Lucene
+            module en Java Lucene.
+            Je kan beide mogelijkheden gebruiken.
+        </para>
+
+        <para>
+            Het volgende PHP code voorbeeld geeft een voorbeeld van hoe een bestand
+            kan worden geïndexeerd door de Zend_Search_Lucene indexing API te gebruiken:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+// Het tweede argument naar TRUE zetten maakt een nieuwe index
+$index = new Zend_Search_Lucene('/data/mijn-index', true);
+
+$doc = new Zend_Search_Lucene_Document();
+
+// De document URL opslaan om het in het zoekresultaat te identificeren.
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+
+// Documentinhoud indexeren
+$doc->addField(Zend_Search_Lucene_Field::UnStored('inhoud', $docContent));
+
+// Een document aan de index toevoegen.
+$index->addDocument($doc);
+
+// De veranderingen naar de index schrijven.
+$index->commit();
+?>]]></programlisting>
+
+        <para>
+            Nieuw toegevoegde documenten kunnen na de commit operatie van de index worden
+            verkregen.
+        </para>
+        <para>
+            <code>Zend_Search_Lucene::commit()</code> wordt automatisch opgeroepen aan het einde
+            van de script uitvoering en vòòr elke zoekopdracht.
+        </para>
+        <para>
+            Elke oproep van commit() genereert een nieuw index segment.
+            <footnote>
+            <para>
+            Lucene index segment bestanden zijn niet updatebaar. Segment update noodzaakt een volledige
+            segment reorganisatie. Zie de Lucene index bestandsformaten voor details
+            (<ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>).
+            Het aantal segmenten opvoeren verlaagt de kwaliteit van de index, maar index optimalisatie herstelt dit.
+            Optimalisatie beperkt zich tot het bijeen voegen van verscheidene segmenten in één enkel segment. Dit
+            proces doet geen update van de segmenten. Het genereert een nieuw groot segment, een nieuwe segmentenlijst
+            ('segments.new' bestand) dat het nieuwe segment bevat in plaats van de lijst van oude segmenten, en hernoemt
+            dan het bestand 'segments.new' naar 'segments'.
+            </para>
+            <para>
+            Optimalisatie is een iteratief proces. Vele kleine segmenten (die bijvoorbeeld werden gegenereerd door het
+            toevoegen van een document) worden in een groter samengevoegd en zo verder. Optimalisatie kan met een segment
+            stream werken en verbruikt niet veel geheugen. Samengevat: optimalisatie verbruikt weinig middelen, doet geen
+            lock op de index voor het zoeken, updaten of samenvoegen van andere segmenten.
+            </para>
+            </footnote>
+            Het moet dus zo weinig mogelijk worden gebruikt.
+            Aan de andere hand, het comitten van een groot aantal documenten in één keer verbruikt meer geheugen.
+        </para>
+        <para>
+            Automatisch segment management optimalisatie is onderdeel van de toekomstige Zend_Search_Lucene
+            verbeteringen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.updating">
+        <title>Index Updaten</title>
+
+        <para>
+            Dezelfde procedure wordt gebruikt om een bestaande index up te daten. Het enige verschil is dat de index
+            zou moeten worden geopend zonder tweede parameter:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+// Een bestaande index openen
+$index = new Zend_Search_Lucene('/data/mijn-index');
+
+$doc = new Zend_Search_Lucene_Document();
+
+// Het document URL opslaan om het in het zoekresultaat te identificeren.
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+
+// Documentinhoud indexeren
+$doc->addField(Zend_Search_Lucene_Field::UnStored('inhoud', $docContent));
+
+// Een document aan de index toevoegen.
+$index->addDocument($doc);
+
+// De veranderingen naar de index schrijven.
+$index->commit();
+?>]]></programlisting>
+
+        <para>
+            Elke oproep (impliciet of expliciet) aan commit() genereert een nieuw index segment.
+        </para>
+        <para>
+            Zend_Search_Lucene beheert segmenten niet automatisch. Je moet dus rekening houden met segmentgroottes.
+            Een groot segment is meer optimaal, maar heeft meer geheugen nodig tijdens zijn creatie.
+        </para>
+        <para>
+            Lucene Java en Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+            kunnen worden geraadpleegd om indexes te optimaliseren met deze versie van Zend_Search_Lucene.
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.index-creation.document-updating">
+        <title>Documenten updaten</title>
+
+        <para>
+            Het Lucene index bestandformaat ondersteund het updaten van documenten niet. Documenten zouden moeten worden
+            verwijderd en opnieuw toegevoegd worden om de index up te daten.
+        </para>
+
+        <para>
+            De <code>Zend_Search_Lucene::delete()</code> methode werkt met een intern document id index. Deze kan worden
+            bekomen via een query hit per 'id' eigenschap:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$removePath = ...;
+$hits = $index->find('path:' . $removePath);
+foreach ($hits as $hit) {
+    $index->delete($hit->id);
+}
+$index->commit();
+?>]]></programlisting>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

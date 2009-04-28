@@ -1,0 +1,152 @@
+<sect1 id="zend.loader.pluginloader">
+    <title> 加载插件 </title>
+
+    <para>
+        很多 Zend Framework 组件支持插件，允许通过指定类的前缀和到类的文件（不需要在 <code>include_path</code> 或不需要遵循传统命名约定的文件）的路径动态加载函数。<code>Zend_Loader_PluginLoader</code> 提供了普通的函数来完成这个工作。
+    </para>
+
+    <para>
+        <code>PluginLoader</code> 的基本用法遵循 Zend Framework 的命名约定（一个文件一个类），解析路径时，使用下划线作为路径分隔符。当决定是否加载特别的插件类，允许传递可选的类前缀来预处理。另外，路径按 LIFO 顺序来搜索。由于 LIFO 搜索和类的前缀，允许命名空间给插件，这样可以从早期注册的路径来覆盖插件。
+    </para>
+
+    <sect2 id="zend.loader.pluginloader.usage">
+        <title> 基本用例 </title>
+
+        <para>
+            首先，假定下面的目录结构和类文件，并且根（toplevel）目录和库目录在 include_path 中：
+        </para>
+
+        <programlisting role="txt"><![CDATA[
+application/
+    modules/
+        foo/
+            views/
+                helpers/
+                    FormLabel.php
+                    FormSubmit.php
+        bar/
+            views/
+                helpers/
+                    FormSubmit.php
+library/
+    Zend/
+        View/
+            Helper/
+                FormLabel.php
+                FormSubmit.php
+                FormText.php
+]]></programlisting>
+
+        <para>
+            现在，创建一个插件加载器来使各种各样的视图助手仓库可用：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$loader = new Zend_Loader_PluginLoader();
+$loader->addPrefixPath('Zend_View_Helper', 'Zend/View/Helper/')
+       ->addPrefixPath('Foo_View_Helper', 'application/modules/foo/views/helpers')
+       ->addPrefixPath('Bar_View_Helper', 'application/modules/bar/views/helpers');
+?>]]></programlisting>
+
+        <para>
+            接着用类名中添加路径时定义的前缀后面的部分来加载一个给定的视图助手：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// load 'FormText' helper:
+$formTextClass = $loader->load('FormText'); // 'Zend_View_Helper_FormText';
+
+// load 'FormLabel' helper:
+$formLabelClass = $loader->load('FormLabel'); // 'Foo_View_Helper_FormLabel'
+
+// load 'FormSubmit' helper:
+$formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
+?>]]></programlisting>
+
+        <para>
+            类加载后，就可以实例化了。
+        </para>
+
+        <note>
+            <title> 为一个前缀注册多个路径 </title>
+
+            <para>
+                有时候，多个路径使用相同的前缀，<code>Zend_Loader_PluginLoader</code> 实际上为每个给定的前缀注册一个路径数组；最后注册的被首先检查，当你使用孵化器里的组件时，这相当有用。
+            </para>
+        </note>
+
+        <note>
+            <title> 实例化时定义路径 </title>
+
+            <para>
+                你可以提供给构造器一个可选的“前缀/路径”对（或“前缀/多个路径”）数组参数：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$loader = new Zend_Loader_PluginLoader(array(
+    'Zend_View_Helper' => 'Zend/View/Helper/',
+    'Foo_View_Helper'  => 'application/modules/foo/views/helpers',
+    'Bar_View_Helper'  => 'application/modules/bar/views/helpers'
+));
+?>]]></programlisting>
+        </note>
+
+        <para>
+            <code>Zend_Loader_PluginLoader</code> 在不需要使用单态实例的情况下，也可选地允许共享插件，这是通过静态注册表来完成的，在实例化时需要注册表名作为构造器的第二个参数：
+
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Store plugins in static registry 'foobar':
+$loader = new Zend_Loader_PluginLoader(array(), 'foobar');
+?>]]></programlisting>
+
+        <para>
+            其它使用同名注册表来实例化 <code>PluginLoader</code> 的组件将可以访问已经加载的路径和插件。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.loader.pluginloader.paths">
+        <title> 处理插件路径 </title>
+
+        <para>
+            上节的例子示例如何给插件加载器添加路径，那么如何确定已经加载的路径或删除他们呢？
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    如果没有提供 <code>$prefix</code>，<code>getPaths($prefix = null)</code> 以“前缀/路径”对返回所有的路径；或者如果提供了 <code>$prefix</code>，<code>getPaths($prefix = null)</code> 返回为给定的前缀注册的路径。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>clearPaths($prefix = null)</code> 将缺省地清除所有的已注册路径，或者如果提供了 <code>$prefix</code> 并放在堆栈里，只清除和那些和给定前缀关联的路径。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>removePrefixPath($prefix, $path = null)</code> 允许有选择地清除和给定前缀相关的特定的路径。如果没有提供 <code>$path</code> ，所有的和前缀相关的路径被清除，如果提供了 <code>$path</code> 并且相应的前缀存在，只有这个相关的路径被清除。
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.loader.pluginloader.checks">
+        <title> 测试插件和获取类的名字 </title>
+
+        <para>
+            有时候你想确定在执行一个动作之前是否插件类已经加载，<code>isLoaded()</code> 返回插件名的状态。
+        </para>
+
+        <para>
+            <code>PluginLoader</code> 的另一个普通用例是确定已加载类的完全合格的插件类名，<code>getClassName()</code> 提供该功能。一般地，这个和 <code>isLoaded()</code> 联合使用：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+if ($loader->isLoaded('Adapter')) {
+    $class   = $loader->getClassName('Adapter');
+    $adapter = call_user_func(array($class, 'getInstance'));
+}
+?>]]></programlisting>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

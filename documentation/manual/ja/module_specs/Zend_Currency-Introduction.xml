@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.currency.introduction">
+
+    <title>Zend_Currency について</title>
+
+    <para>
+        <classname>Zend_Currency</classname> は、Zend_Framework の I18n 機能の中核となるものです。
+        通貨や金額の表現方法や書式についてのすべての問題を取り扱います。
+        また、その他の情報を取得するメソッドもあります。
+        たとえば各地域の通貨に関する情報や、
+        どの地域でどの通貨が使われているといった情報を得ることができます。
+    </para>
+
+    <sect2 id="zend.currency.introduction.list">
+
+        <title><classname>Zend_Currency</classname> を使うべき理由は?</title>
+
+        <para>
+            <classname>Zend_Currency</classname> は、通貨や金額に関する作業を行うために以下のような機能を提供しています。
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">完全なロケールのサポート</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> はあらゆるロケールに対応しており、
+                    100 を超える地域の通貨情報を扱うことができます。
+                    たとえば、通貨単位の名称や略称、通貨記号などの情報が含まれます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">再利用可能な通貨定義</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> は通貨の値を含んでいません。そのため、この機能は
+                    <classname>Zend_Locale_Format</classname> に含まれていません。
+                    しかしこれには、すでに定義されている通貨表現を再利用できるという利点もあります。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">流れるようなインターフェイス</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> は、可能な限り「流れるような」インターフェイスを採用しています。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">追加情報の取得用メソッド</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> にはさまざまなメソッドが含まれており、
+                    「ある通貨がどの地域で使われているか」「ある地域でどの通貨が使われているか」
+                    などといった情報を取得することができます。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+</sect1>

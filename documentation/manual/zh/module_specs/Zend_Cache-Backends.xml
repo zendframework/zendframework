@@ -1,0 +1,279 @@
+<sect1 id="zend.cache.backends">
+    <title>Zend_Cache后端</title>
+
+    <sect2 id="zend.cache.backends.file">
+        <title>Zend_Cache_Backend_File</title>
+        <para>
+            此后端把缓存纪录存储到文件中去(在一个选定的目录中).
+        </para>
+        <para>
+            可用的选项有 :
+        </para>
+        <table id="zend.cache.backends.file.table">
+            <title>文件后端选项</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>选项</entry>
+                        <entry>数据类型</entry>
+                        <entry>默认值</entry>
+                        <entry>描述</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_dir</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'/tmp/'</code></entry>
+                          <entry>
+                              存放缓存文件的目录
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_locking</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            启用/禁用文件锁定 :
+                            在比较坏的情况下,能够避免缓存中断,但在多线程Web服务器或者NFS文件系统中没有任何帮助.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            启用/禁用读控制:
+                            如果启用,控制键被嵌入到缓存文件中,并且这个键将与读取后计算出的值进行比较.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control_type</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'crc32'</code></entry>
+                          <entry>
+                            读控制类型 (仅在读控制启用时). 可用的值有: 'md5' (最好但最慢),
+                            'crc32' (安全性稍差,但更快,更好的选择),
+                            'adler32' (新选择，比 crc32 快),
+                            'strlen' for a length only test (最快).
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_level</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0</code></entry>
+                          <entry>
+                            Hash目录结构层次: 0 表示"不使用hash的目录结构", 1 表示"一级目录结构"
+                            , 2表示"二级目录"...
+                            次选项在你有成千上万的缓存文件是能够加速缓存.只有相关的基准测试才能帮助你选择合适的值.也许1或2是一个好的开始.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_umask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                              目录结构的Unix 掩码
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_name_prefix</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'zend_cache'</code></entry>
+                          <entry>
+                              缓存文件前缀;小心使用此选项,因为当清除缓存时,在系统缓存目录(像 /tmp)中一个太generic的值将导致灾难.
+                        </entry>
+                      </row>
+                        <row>
+                          <entry><code>cache_file_umask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                              缓存文件掩码
+                          </entry>
+                      </row>
+                       <row>
+                          <entry><code>metatadatas_array_max_size</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>100</code></entry>
+                          <entry>
+                              metadatas 数组的内部最大尺寸（除非你知道你在做什么，不要更改这个值）
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.sqlite">
+        <title>Zend_Cache_Backend_Sqlite</title>
+        <para>
+            此后端把缓存纪录存储到SQLite数据库中.
+        </para>
+        <para>
+            可用的选项有:
+        </para>
+        <table id="zend.cache.backends.sqlite.table">
+            <title>Sqlite 后端选项</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                           <entry>选项</entry>
+                        <entry>数据类型</entry>
+                        <entry>默认值</entry>
+                        <entry>描述</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_db_complete_path (mandatory)</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              SQLite数据库的完整和路径(包括文件名)
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>automatic_vacuum_factor</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>10</code></entry>
+                          <entry>
+                              禁用 / 调整自动清理过程. 自动清理过程将对数据库文件进行碎片整理(and make
+                            it smaller) 当clean() 或则 delete() 被调用时 : 0
+                            表示不自动清理; 1 表示自动清理(当调用 delete() 或者 clean()
+                            方法时) ; x (整数) > 1 => 当调用 delete() 或者 clean()
+                            方法时随机清理1到x次.
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.memcached">
+        <title>Zend_Cache_Backend_Memcached</title>
+        <para>
+            本后端把缓存纪录存储到memcached服务器. <ulink url="http://www.danga.com/memcached/">memcached</ulink>
+            是一个高性能的,分布式内存对象缓存系统.要使用此后端,你需要一个memecached守护进程(daemon)和
+             <ulink url="http://pecl.php.net/package/memcache">memcache PECL 扩展</ulink>.
+        </para>
+        <para>
+            注意 : 使用此后端当设置"doNotTestCacheValidity=true"参数时,不支持"tags"
+        </para>
+        <para>
+            可用的选项有:
+        </para>
+        <table id="zend.cache.backends.memcached.table">
+            <title>Memcached 后端选项</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>选项</entry>
+                        <entry>数据类型</entry>
+                        <entry>默认值</entry>
+                        <entry>描述</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>servers</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array(array('host' => 'localhost','port' => 11211, 'persistent' => true))</code></entry>
+                          <entry>
+                               一个memcached服务器数组;其中每个memcached服务器描述为一个关联数组:
+                            'host' => (string) : memcached服务器的名称, 'port'
+                            => (int) : memcached服务器端口, 'persistent' =>
+                            (bool) : 是否使用到memcached服务器的持久连接
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compression</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                             如果你想使用数据压缩,设置为true
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.apc">
+        <title>Zend_Cache_Backend_Apc</title>
+        <para>
+            此后端通过
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink>
+            (Alternative PHP Cache) 扩展把缓存纪录存储于共享内存中 (当然为使用此后端,APC是需要的).
+        </para>
+        <para>
+            注意 : 使用此后端当设置"doNotTestCacheValidity=true"参数时,不支持"tags"
+        </para>
+        <para>
+            此后端没有选项.
+        </para>
+    </sect2>
+        <sect2 id="zend.cache.backends.xcache">
+        <title>Zend_Cache_Backend_Xcache</title>
+        <para>
+            整个后端通过 <ulink url="http://xcache.lighttpd.net/">XCache</ulink> 扩展（它当然需要使用这个后端）
+            在共享内存里存储了缓存记录。
+        </para>
+        <para>
+            小心：用这个后端，目前不支持 ”tags“，因为 "doNotTestCacheValidity=true" 参数。
+        </para>
+        <para>
+            可用的选项如下：
+        </para>
+        <table id="zend.cache.backends.xcache.table">
+            <title>Xcache backend 选项</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>选项</entry>
+                        <entry>数据类型</entry>
+                        <entry>缺省值</entry>
+                        <entry>描述</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>user</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.user, necessary for the clean() method
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>password</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.pass (in clear form, not MD5), necessary for the clean() method
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.platform">
+        <title>Zend_Cache_Backend_ZendPlatform</title>
+        <para>
+            本后端使用 <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>产品的内容缓存API. 要使用此后端必须安装Zend Platform.
+        </para>
+        <para>
+    本后端支持标记(tags),但不支持 <code>CLEANING_MODE_NOT_MATCHING_TAG</code>清除模式.
+        </para>
+        <para>
+            当使用<code>Zend_Cache::factory()</code>方法时,在字 'Zend' 和 'Platform'之间使用字分隔符-- '-', '.', ' ', or '_'指定此后端:
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend Platform');
+]]>
+        </programlisting>
+        <para>
+            此后端没有选项.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

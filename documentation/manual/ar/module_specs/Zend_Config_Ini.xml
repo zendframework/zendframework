@@ -1,0 +1,67 @@
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        يوفر <code>Zend_Config_Ini</code> للمبرمج امكانية حفظ البيانات الخاصة بإعدادات البرنامج ,
+        و ذلك بصيغة الـ INI المألوفة , ثم تمكنه من قرائه هذه البيانات داخل برنامجه بيسر من خلال
+         استخدامه لنفس القواعد النحوية التى يستخمدها عند قرائته لقيمة محفوظة فى property داخل كائن PHP عادى.
+    </para>
+
+    <para>
+        صيغة الـ INI  توفر أمكانية إنشاء بيانات مرتبة على شكل هرمى و امكانية التوارث بين أقسام البيانات ,
+        حفظ البيانات بشكل هرمى مدعوم حالياً عن طريق الفصل بين اسماء المفاتيح "Keys" بإستخدام نقطة (<code>.</code>),
+        و يمكن لأى قسم من أقسام البيانات أن يرث من قسم بيانات أخر عن طريق إلحاق أسم القسم بنقطة مزدوجة (<code>:</code>)
+        ثم إلحاقها بأسم القسم الذى سيتم الوراثة منه.
+    </para>
+    <note>
+        <title>parse_ini_file</title>
+        <para>
+            تستخدم <code>Zend_Config_Ini</code> دالة PHP تسمى
+            <ulink url="http://php.net/parse_ini_file"><code>()parse_ini_file</code></ulink> ,
+            يرجى أن تقوم بمراجعة دليل المبرمج الخاص بلغة PHP لتتعرف على سلوك هذه الدالة, و الذى ينطبق على
+            <code>Zend_Config_Ini</code> , مثل كيف يتم التعامل مع القيم الخاصة
+            <code>true</code> و <code>false</code> و
+            <code>yes</code> و <code>no</code> و
+            <code>null</code> .
+        </para>
+    </note>
+    <example>
+        <title>إستخدام Zend_Config_Ini</title>
+        <para>
+            هذا المثال يوضح إستخدام بسيط لـ <code>Zend_Config_Ini</code> لتحميل بيانات الأعدادات
+            من ملف INI , فى هذا المثال يوجد بيانات الأعدادات الخاصة بكل من مرحلة الأنتاج "production"
+            و مرحلة التجهيز "staging" , و لأن بيانات الأعدادات الخاصة بمرحلة الـ staging تتشابه كثيراً مع
+            تلك الخاصة بمرحلة الـ production , فتم جعل قسم بيانات الـ staging يرث من قسم بيانات الـ production ,
+            ربما هذا لا ينطبق على بعض الحالات الأكثر تعقيداً و لكن دعونا نفترض أن بيانات الأعدادت التالية محفوظة
+            على المسار <code>path/to/config.ini/</code> :
+        </para>
+        <programlisting role="ini"><![CDATA[; Production site configuration data
+[production]
+webhost           = www.example.com
+database.type     = pdo_mysql
+database.host     = db.example.com
+database.username = dbuser
+database.password = secret
+database.name     = dbname
+
+; Staging site configuration data inherits from production and
+; overrides values as necessary
+[staging : production]
+database.host     = dev.example.com
+database.username = devuser
+database.password = devsecret]]></programlisting>
+        <para>
+            الأن و لنفترض أن مطور البرنامج يريد تحميل بيانات الأعدادات الخاصة بمرحلة الـ staging من ملف الـ INI ,
+            بالفعل إنه من السهل تحميل هذه البيانات فقط عن طريق تحديد مسار ملف الـ INI و أسم قسم البيانات staging :
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Config/Ini.php';
+
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
+
+echo $config->database->host; // prints "dev.example.com"
+echo $config->database->name; // prints "dbname"]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

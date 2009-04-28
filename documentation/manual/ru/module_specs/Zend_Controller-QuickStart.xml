@@ -1,0 +1,347 @@
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller - Быстрый старт</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>Введение</title>
+        <para>
+            <code>Zend_Controller</code> является ядром системы MVC в Zend
+            Framework. Аббревиатура MVC - сокращение от
+            <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>
+            (модель-вид-контроллер), это паттерн проектирования, предназначенный
+            для отделения логики приложения от логики представления.
+            <code>Zend_Controller_Front</code> реализует паттерн
+            <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
+            Controller</ulink>, в котором все запросы перехватываются
+            фронт-контроллером (front controller) и перенаправляются отдельным
+            контроллерам действий (action controllers), выбор которых
+            производится по запрошенному URL.
+        </para>
+        <para>
+            Система <code>Zend_Controller</code> построена с расчетом на
+            расширяемость как через наследование от уже существующих классов
+            и написание новых классов, реализующих различные интерфейсы и
+            абстрактные классы, образующих основу семейства классов
+            контроллеров, так и через написание плагинов или помощников действий
+            для наращивания функциональности системы или управления ею.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>Быстрый старт</title>
+
+        <para>
+            Если вам нужна более подробная информация, то сразу переходите к
+            следующим разделам. Если хотите быстро начать работать с
+            <code>Zend_Controller</code>, то читайте далее.
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>Создайте файловую структуру</title>
+
+            <para>
+                Первый шаг состоит в том, чтобы создать файловую
+                структуру приложения. Ниже приведено типовое решение:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>Установите корневую директорию для документов</title>
+
+            <para>
+                В своем веб-сервере установите директорию <code>html</code> из
+                приведенной выше структуры в качестве корневой для
+                веб-документов.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>Создайте свои правила перезаписи</title>
+
+            <para>
+                Отредактируйте файл <code>html/.htaccess</code> из
+                приведенной выше структуры следующим образом:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+]]>
+            </programlisting>
+            
+            <para>
+                Если у вас IIS 7.0, то используйте следующую
+                конфигурацию перезаписи:
+            </para>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     <system.webServer>
+         <rewrite>
+             <rules>
+                 <rule name="Imported Rule 1" stopProcessing="true">
+                     <match url="^.*$" />
+                     <conditions logicalGrouping="MatchAny">
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsFile" pattern=""
+                             ignoreCase="false" />
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsDirectory"
+                             pattern="" ignoreCase="false" />
+                     </conditions>
+                     <action type="None" />
+                 </rule>
+                 <rule name="Imported Rule 2" stopProcessing="true">
+                     <match url="^.*$" />
+                     <action type="Rewrite" url="index.php" />
+                 </rule>
+             </rules>
+         </rewrite>
+     </system.webServer>
+</configuration>
+]]></programlisting>
+
+            <para>
+                Эти правила перезаписи пропускают запросы к
+                существующим ресурсам (существующие символьные
+                ссылки, непустые файлы и директории), все остальные запросы
+                перенаправляются к фронт-контроллеру.
+            </para>
+
+            <note>
+                <para>
+                    Вышеприведенные правила перезаписи предназначены для
+                    веб-сервера Apache. За примерами правил перезаписи для
+                    других веб-серверов см. <link linkend="zend.controller.router.introduction">документацию
+                    по маршрутизаторам</link>.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>Создайте файл загрузки</title>
+
+            <para>
+                Файл загрузки - это страница, на которую направляются все
+                запросы, в нашем случае это <code>html/index.php</code>.
+                Откройте <code>html/index.php</code> в любом текстовом редакторе
+                и добавьте следующие строки:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]>
+            </programlisting>
+
+            <para>
+                Этот код выполняет инстанцирование и запуск фронт-контроллера,
+                который будет направлять запросы к контроллерам действий.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>Создайте свой контроллер действий, используемый по умолчанию</title>
+
+            <para>
+                До того, как начать обсуждение контроллеров действий, нужно
+                сначала понять, как обрабатываются запросы в Zend Framework. По
+                умолчанию первая часть пути в URL соответствует контроллеру, а
+                вторая - действию. Например, дан URL
+                <code>http://framework.zend.com/roadmap/components</code>. В нем
+                путь <code>/roadmap/components</code> будет соответствовать
+                контроллеру <code>roadmap</code> и действию
+                <code>components</code>. Если не передано имя действия, то
+                предполагается действие <code>index</code>; если не передано имя
+                контроллера, то предполагается контроллер <code>index</code> (по
+                соглашению Apache это соответствует
+                <code>DirectoryIndex</code>).
+            </para>
+
+            <para>
+                Диспетчер <code>Zend_Controller</code> принимает значение
+                контроллера и находит соответствующий ему класс. По умолчанию
+                это имя контроллера, начинающееся с заглавной буквы и со словом
+                <code>Controller</code> в конце. Таким образом, контроллер
+                <code>roadmap</code> будет соответствовать классу
+                <code>RoadmapController</code>.
+            </para>
+
+            <para>
+                Аналогичным образом устанавливается соответствие значения
+                действия методу класса контроллера. По умолчанию значение
+                приводится к нижнему регистру и к нему присоединяется слово
+                <code>Action</code>. Таким образом, в нашем примере выше
+                действие <code>components</code> будет методом с именем
+                <code>componentsAction</code>, и в итоге вызов метода
+                будет выглядеть следующим образом:
+                <code>RoadmapController::componentsAction()</code>.
+            </para>
+
+            <para>
+                Итак, двигаемся дальше. Теперь приступим к созданию контроллера
+                и действия, используемых по умолчанию. Как было замечено ранее,
+                эти контроллер и действие должны оба называться
+                <code>index</code>. Откройте файл
+                <code>application/controllers/IndexController.php</code> и
+                введите следующее:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/** Zend_Controller_Action */
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                По умолчанию включен помощник действий <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                Это означает, что, просто определив метод действия и
+                соответствующий скрипт вида, вы получите рендеринг контента.
+                По умолчанию в MVC в качестве "вида" используется
+                <code>Zend_View</code>. <code>render()</code> использует имя
+                контроллера (например, <code>index</code>) и имя текущего
+                действия (например, <code>index</code>) для определения того,
+                какой шаблон тянуть. По умолчанию шаблоны имеют расширение
+                <code>.phtml</code>, это значит, что в нашем примере будет
+                использоваться шаблон <code>index/index.phtml</code>. Кроме
+                этого, <code>ViewRenderer</code> автоматически
+                предполагает, что директория <code>views</code>, находящаяся на
+                том же уровне, что и директория контроллера, будет базовой
+                директорией видов, и что действующие скрипты вида будут в
+                поддиректории <code>views/scripts/</code>.
+                Таким образом, шаблон для рендеринга будет находится в
+                <code>application/views/scripts/index/index.phtml</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>Создайте скрипт вида</title>
+
+            <para>
+                Как было упомянуто в <link linkend="zend.controller.quickstart.go.controller">предыдущем
+                разделе</link>, скрипты вида находятся в
+                <code>application/views/scripts/</code>. Скриптом вида для
+                контроллера и действия, используемых по умолчанию, является
+                <code>application/views/scripts/index/index.phtml</code>.
+                Создайте этот файл и добавьте в него какой-либо HTML-код:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>Создайте контроллер ошибок</title>
+
+            <para>
+                По умолчанию зарегистрирован <link
+                linkend="zend.controller.plugins.standard.errorhandler">плагин-обработчик
+                ошибок</link>. Этот плагин ожидает, что есть контроллер для
+                обработки ошибок. По умолчанию он предполагает, что в модуле,
+                используемом по умолчанию, имеется контроллер
+                <code>ErrorController</code> с методом <code>errorAction</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                Согласно уже обсуждаемой выше структуре директорий этот файл
+                будет находиться по пути
+                <code>application/controllers/ErrorController.php</code>. Нужно
+                также создать скрипт вида
+                <code>application/views/scripts/error/error.phtml</code>, пример
+                его содержимого:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Error</title>
+</head>
+<body>
+    <h1>An error occurred</h1>
+    <p>An error occurred; please try again later.</p>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>Смотрим сайт!</title>
+
+            <para>
+                Теперь, имея свои первые контроллер и вид, вы можете
+                запустить свой броузер и просматривать сайт. Если ваш домен -
+                <code>example.com</code>, то любой из следующих URL-ов будет
+                возвращать ту страницу, которую вы только что создали:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                Теперь вы можете приступить к созданию других контроллеров и
+                методы действий. Поздравляем!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,186 @@
+<sect1 id="zend.uri.chapter">
+    <title>Zend_Uri</title>
+
+    <sect2 id="zend.uri.overview">
+        <title>Panoramica</title>
+
+        <para>
+            <code>Zend_Uri</code> è un componente che fornisce supporto nella manipolazione e validazione di
+            <ulink url="http://www.w3.org/Addressing/">Uniform Resource Identifier</ulink> (URI).
+            <code>Zend_Uri</code> esiste principalmente come servizio per altri componenti, ad esempio <code>Zend_Http_Client</code>, ma è altrettanto utile come componente autonomo.
+        </para>
+
+        <para>
+            Gli URI cominciano sempre con uno schema, seguito da ':' (due punti).
+            La costruzione dei differenti tipi di schema varia sensibilmente.
+            La classe <code>Zend_Uri</code> fornisce un metodo factory che restituisce una sottoclasse di se stessa specializzata su uno schema specifico.
+            La sotto classe è chiamata <code>Zend_Uri_&lt;scheme&gt;</code>, dove <code>&lt;scheme&gt;</code> è lo schema in caratteri minuscoli con la prima lettera maiuscola.
+            Lo schema HTTPS rappresenta un'eccezione alla regola poiché è anch'esso gestito da <code>Zend_Uri_Http</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.uri.creation">
+        <title>Creazione di un nuovo URI</title>
+
+        <para>
+            <code>Zend_Uri</code> costruirà un nuovo URI da zero solo se lo schema è passato a <code>Zend_Uri::factory()</code>.
+        </para>
+
+        <example id="zend.uri.creation.example-1">
+            <title>Esempio di creazione di un nuovo URI con <code>Zend_Uri::factory()</code></title>
+
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+//  Per creare un nuovo URI da zero, passare solo lo schema
+$uri = Zend_Uri::factory('http');
+
+// $uri instanceof Zend_Uri_Http]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Per creare un nuovo URI da zero è sufficiente passare solo lo schema a <code>Zend_Uri::factory()</code><footnote><para>Al momento in cui si scrive, Zend_Uri supporta solo gli schemi HTTP e HTTPS.</para></footnote> .
+            Se si fornisce uno schema non supportato verrà generata un'eccezione <code>Zend_Uri_Exception</code>.
+        </para>
+
+        <para>
+            Se lo schema o l'URI fornito è supportato, <code>Zend_Uri::factory()</code> restituirà una sottoclasse di se stessa specializzata nello schema da creare.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.uri.manipulation">
+        <title>Manipolazione di un URI esistente</title>
+
+        <para>
+            Per manipolare un URI esistente passare l'intero URI a<code>Zend_Uri::factory()</code>.
+        </para>
+
+        <example id="zend.uri.manipulation.example-1">
+            <title>Esempio di manipolazione di un URI esistente con <code>Zend_Uri::factory()</code></title>
+
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+// Per manipolare un URI esistente, passarlo come parametro
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+// $uri instanceof Zend_Uri_Http]]>
+            </programlisting>
+        </example>
+
+        <para>
+            L'URI è parsato e validato.
+            Se l'URI non è valido verrà immediatamente generata un'eccezione <code>Zend_Uri_Exception</code>.
+            Altrimenti, <code>Zend_Uri::factory()</code> restituirà una sottoclasse di se stessa specializzata nello schema da manipolare.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.uri.validation">
+        <title>Validazione di un URI</title>
+
+        <para>
+            Si può usare la funzione <code>Zend_Uri::check()</code> se è solo necessario validare un URI esistente.
+        </para>
+
+        <example id="zend.uri.validation.example-1">
+            <title>Esempio di validazione di un URI con <code>Zend_Uri::check()</code></title>
+
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+// Validazione del formato dell'URI
+$valid = Zend_Uri::check('http://uri.in.questione');
+
+// $valid è TRUE per un URI valido, altrimenti FALSE.]]>
+          </programlisting>
+        </example>
+
+        <para>
+            <code>Zend_Uri::check()</code> restituisce un booleano, una forma molto più conveniente che utilizzare <code>Zend_Uri::factory()</code> e catturare l'eccezione.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.uri.instance-methods">
+        <title>Metodi d'istanza in comune</title>
+
+        <para>
+            Ogni istanza di una sottoclasse di<code>Zend_Uri</code> (es. <code>Zend_Uri_Http</code>) contiene diversi metodi d'istanza utili per lavorare con ogni tipo di URI.
+        </para>
+
+        <sect3 id="zend.uri.instance-methods.getscheme">
+            <title>Restituzione dello Schema dell'URI</title>
+
+            <para>
+                Lo schema dell'URI è la parte dell'URI che precede i ":" (due punti).
+                Per esempio, in <code>http://www.zend.com</code> lo schema è <code>http</code>.
+            </para>
+
+            <example id="zend.uri.instance-methods.getscheme.example-1">
+                <title>Esempio di restituzione dello schema di un oggetto <code>Zend_Uri_*</code></title>
+
+                <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$scheme = $uri->getScheme();  // "http"]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Il metodo d'istanza <code>getScheme()</code> restituisce solo la parte corrispondente allo schema dell'oggetto URI.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.uri.instance-methods.geturi">
+            <title>Restituzione dell'intero URI</title>
+
+            <example id="zend.uri.instance-methods.geturi.example-1">
+                <title>Esempio di restituzione dell'intero URI di un oggetto <code>Zend_Uri_*</code></title>
+
+                <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+echo $uri->getUri();  // "http://www.zend.com"]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Il metodo <code>getUri()</code> restituisce una stringa corrispondente alla rappresentazione dell'intero URI.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.uri.instance-methods.valid">
+            <title>Validazione dell'URI</title>
+
+            <para>
+                <code>Zend_Uri::factory()</code> esegue sempre una validazione dell'URI passato e non crea una nuova istanza di una sottoclasse di <code>Zend_Uri</code> se l'URI fornito è invalido.
+                Tuttavia, dopo la creazione di un'istanza di una sottoclasse di <code>Zend_Uri</code> da un nuovo URI o da uno esistente, è possibile che l'URI diventi invalido successivamente ad una manipolazione.
+            </para>
+
+            <example id="zend.uri.instance-methods.valid.example-1">
+                <title>Esempio di validazione di un oggetto <code>Zend_Uri_*</code></title>
+
+                <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$isValid = $uri->valid();  // TRUE]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Il metodo d'istanza <code>valid()</code> fornisce un modo per controllare che l'oggetto URI sia ancora valido.
+            </para>
+        </sect3>
+
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

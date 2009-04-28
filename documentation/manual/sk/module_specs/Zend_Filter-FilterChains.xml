@@ -1,0 +1,41 @@
+<sect1 id="zend.filter.filter_chains">
+
+    <title>Postupnosť filtrov</title>
+
+    <para>
+        Často je požadované aplikovanie viacerých filtrov v požadovanom poradí. Napríklad
+        prihlasovacií formulár akceptuje iba prihlasovacie meno ktoré môže byť len
+        z malých písmen. Trieda <code>Zend_Filter</code> poskytuje jednoduchý spôsob
+        ako vytvoriť postupnosť filtrov. Nasledujúci príklad ukazuje vytvorenie postupnosti
+        dvoch filtrov pre prihlasovacie meno:
+
+        <programlisting role="php"><![CDATA[<?php
+// Provides filter chaining capability
+require_once 'Zend/Filter.php';
+
+// Filters needed for the example
+require_once 'Zend/Filter/Alpha.php';
+require_once 'Zend/Filter/StringToLower.php';
+
+// Create a filter chain and add filters to the chain
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new Zend_Filter_Alpha())
+            ->addFilter(new Zend_Filter_StringToLower());
+
+// Filter the username
+$username = $filterChain->filter($_POST['username']);]]></programlisting>
+
+        Filtre sú volané v poradí v ktorom boli pridané do <code>Zend_Filter</code>.
+        V predchádzajúcom príklade sú najprv odstránené všetky znaky okrem alfabetických a
+        následne prevedené na malé pismená.
+    </para>
+
+    <para>
+        Každý objekt ktorý implementuje <code>Zend_Filter_Interface</code> môže byť
+        použitý v postupnosti filtrov.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

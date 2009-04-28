@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 12816 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.introduction">
+    <title>Introduction à Zend_Currency</title>
+
+    <para>
+        <classname>Zend_Currency</classname> est une partie du coeur de l'i18n
+        ("internationalisation") de Zend Framework. Elle permet le traitement de toutes les
+        questions liées à la monnaie, à la représentation de l'argent et de son formatage. Elle
+        fournit aussi les méthodes supplémentaires qui incluent des informations régionalisées sur
+        des devises, des informations sur quelle monnaie est utilisée dans quelle région et
+        autres.
+    </para>
+
+    <sect2 id="zend.currency.introduction.list">
+        <title>Pourquoi utiliser Zend_Currency&#160;?</title>
+
+        <para>
+            <classname>Zend_Currency</classname> offre les fonctions suivantes pour manipuler
+            les monnaies.
+        </para>
+
+        <itemizedlist mark="opencircle">
+            <listitem>
+                <para>
+                    <emphasis role="strong">Support complet de la régionalisation</emphasis>
+                </para>
+
+                <para>
+                    <classname>Zend_Currency</classname> fonctionne avec toutes les régions
+                    disponibles et a donc la capacité de connaître plus de 100 informations de
+                    monnaie localisées différentes. Cela inclut par exemple des noms de monnaie,
+                    des abréviations, des signes d'argent et plus.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">Définition de monnaie réutilisable</emphasis>
+                </para>
+
+                <para>
+                    <classname>Zend_Currency</classname> n'inclut pas la valeur de la
+                    monnaie. C'est la raison pour laquelle cette fonctionnalité n'est pas inclus
+                    dans <classname>Zend_Locale_Format</classname>. Mais cela a un avantage, les
+                    représentations de monnaie qui ont déjà été définies peuvent être
+                    réutilisés.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis role="strong">Interface fluide</emphasis></para>
+
+                <para>
+                    <classname>Zend_Currency</classname> inclue une interface fluide quand
+                    cela est possible.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis role="strong">Méthodes additionnelles</emphasis></para>
+
+                <para>
+                    <classname>Zend_Currency</classname> inclue des méthodes additionnelles
+                    qui donnent des informations concernant les régions dans lesquelles une monnaie
+                    est utilisée ou quelle monnaie est utilisée dans une région spécifiée.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

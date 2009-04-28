@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
+  <title>mozillaZine.org</title>
+  <link rel="alternate" type="text/html" href="http://www.mozillazine.org/" />
+  <modified>2006-01-23T04:04:45-08:00</modified>
+  <tagline>Your Source for Daily Mozilla News and Advocacy</tagline>
+  <id>tag:mozillazine.org,2004:1</id>
+  <copyright>Copyright (c) 2004, The Mozillazine Organization</copyright>
+    <entry>
+      <title>Minutes of the mozilla.org Staff Meeting of Monday 9th January 2006</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7935" />
+      <modified>2006-01-22T20:04:42-08:00</modified>
+      <created>2006-01-22T20:04:42-08:00</created>
+      <issued>2006-01-22T20:04:42-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7935</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>The <a href="http://groups.google.com/group/mozilla.dev.general/browse_thread/thread/7de43a2673479016/" title="mozilla.dev.general:2005-01-09 - Summary of mozilla.org staff meeting">minutes of the mozilla.org staff meeting held on Monday 9th January 2006</a> are now online. Issues discussed include Firefox 1.5.0.1 release schedule, Thunderbird 1.5 release and Marketing.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7935">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Minutes of the mozilla.org Staff Meeting of Wednesday 4th January 2006</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7895" />
+      <modified>2006-01-12T09:29:47-08:00</modified>
+      <created>2006-01-12T09:29:47-08:00</created>
+      <issued>2006-01-12T09:29:47-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7895</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>The minutes of the mozilla.org staff meeting held on Wednesday 4th January 2006 are now available. Issues discussed include Upcoming Releases, Marketing, Thunderbird, 1.9 Roadmap, Firefox 2 Process and Calendar.</p>
+        <p>The minutes have been posted to the new mozilla.dev.general newsgroup, which is accessible via news.mozilla.org. The previously announced <a href="http://www.mozillazine.org/talkback.html?article=7849" title="mozillaZine:Mozilla Newsgroups Migration Scheduled">newsgroup migration</a> is in progress. Once mozilla.dev.planning is created, minutes will be posted there.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7895">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Thunderbird 1.5 Released</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7892" />
+      <modified>2006-01-11T18:19:13-08:00</modified>
+      <created>2006-01-11T18:19:13-08:00</created>
+      <issued>2006-01-11T18:19:13-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7892</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p><a href="mailto:mscott@mozilla.org" title="mscott@mozilla.org">Scott MacGregor</a> writes: "The final release of Mozilla Thunderbird 1.5 is now available for download from <a href="http://getthunderbird.com">getthunderbird.com</a>. Users of RC1 should see the update soon. If you are using RC2, then you already have 1.5 final."</p>
+        <p>"Thunderbird 1.5 introduces several new features including a software update system, spell check as you type, built in phishing detector, auto save as draft, and support for deleting attachments from email messages. Message filtering has also been improved with new filter actions for replying and forwarding. Saved search folders can now search folders across multiple accounts."</p>
+        <p>"More details can be found in the <a href="http://www.mozilla.com/thunderbird/releases/1.5.html" title="Mozilla Thunderbird 1.5 Release Notes">Mozilla Thunderbird 1.5 Release Notes</a>, and the <a href="http://forums.mozillazine.org/viewforum.php?f=39">support forum staff</a> is available for questions. "</p>
+        <p>"I wanted to thank everyone in the mozillaZine community who helped test the alphas, the betas, and the release candidates that went into this release. Thank you for trusting Thunderbird with your email throughout the development and release cycle for 1.5. I'm looking forward to working with all of you on 2.0 and beyond!"</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7892">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Firefox Smoketest Day Planned for January 6, 2006</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7859" />
+      <modified>2006-01-04T14:14:20-08:00</modified>
+      <created>2006-01-04T14:14:20-08:00</created>
+      <issued>2006-01-04T14:14:20-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7859</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>The <a href="http://weblogs.mozillazine.org/qa/">Mozilla QA team</a> has announced a <a href="http://weblogs.mozillazine.org/qa/archives/2006/01/firefox_smoketest_day_planned.html" title="Mozilla Quality: Firefox Smoketest Day Planned for Jan. 6, 2006">community test day</a> with focus on smoketesting nightly Firefox 1.5.0.1 builds.</p>
+        <p><a href="http://litmus.mozilla.org/">Litmus tool</a> will be used for this testing event. There is a <a href="http://wiki.mozilla.org/Mozilla_QA_Community:Firefox1.5.0.1_Smoketest_Day" title="Mozilla QA Community:Firefox1.5.0.1 Smoketest Day - wiki.mozilla.org">FAQ</a> posted on the QA community wiki that will have specific instructions on how this testing day will run.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7859">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Camino 1.0 Beta 2 Released</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7850" />
+      <modified>2006-01-02T15:23:18-08:00</modified>
+      <created>2006-01-02T15:23:18-08:00</created>
+      <issued>2006-01-02T15:23:18-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7850</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>Camino 1.0 beta 2 has been released. This latest version of the native Mac OS X browser is replacing 0.8.4 as the stable Camino release on all systems 10.2+. See the <a  href="http://www.caminobrowser.org/releases/1.0b2.php">Camino 1.0 Beta 2 Release Notes</a> for more details.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7850">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Mozilla Newsgroups Migration Scheduled</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7849" />
+      <modified>2006-01-02T15:07:27-08:00</modified>
+      <created>2006-01-02T15:07:27-08:00</created>
+      <issued>2006-01-02T15:07:27-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7849</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>Frank Wein has announced that the <a href="http://groups.google.com/group/netscape.public.mozilla.seamonkey/browse_thread/thread/21a3691027dc50ef/" title="netscape.public.mozilla.seamonkey: Migration to new news server and reorganization of netscape.public hierarchy">migration and reorganization of Mozilla newsgroups will take place in January 2006</a>. As announced earlier, the <a href="http://www.mozillazine.org/talkback.html?article=7224" title="mozillaZine: Giganews to Host Mozilla Newsgroups">new newsgroups will be hosted by Giganews</a>. Access to the news server news.mozilla.org will remain free. The new groups will only be propogated to news.mozilla.org, Giganews Servers and Google Groups in an effort to combat news spam. For more information, refer to the <a href="http://www.mozilla.org/community/giganews-migration.html">FAQ</a> and the <a href="http://www.mozilla.org/community/newsgroups.txt">list of new newsgroups</a>.
+</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7849">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Mozilla Thunderbird 1.5 Release Candidate 2 Available</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7823" />
+      <modified>2005-12-21T13:58:07-08:00</modified>
+      <created>2005-12-21T13:58:07-08:00</created>
+      <issued>2005-12-21T13:58:07-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7823</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p><a href="mailto:mscott@mozilla.org" title="mscott@mozilla.org">Scott MacGregor</a> writes: "The second release candidate of Mozilla Thunderbird 1.5 is now available for download. Mozilla Thunderbird 1.5 RC2 is intended to allow testers to ensure that there are no last-minute problems with the Thunderbird 1.5 code. "</p>
+        <p>"RC2 contains several key bug fixes that were identified during the RC1 testing cycle. There are no new features or enchancements from RC1. Users of Thunderbird 1.5 RC1 will be offered RC 2 through the software update system."</p>
+        <p>"Thunderbird 1.5 RC2 can be downloaded from the <a href="http://www.mozilla.org/products/thunderbird/releases/1.5.html"
+> Thunderbird 1.5 RC2 Release Notes</a> page, or the <a href="http://releases.mozilla.org/pub/mozilla.org/thunderbird/releases/1.5rc2/">Thunderbird 1.5rc2 directory on ftp.mozilla.org</a>. More details can be found in the Release Notes."</p>
+        <p>"I'd like to single out all of the folks who participated in our QA testing day and our localization testing day. We wouldn't have been able to release RC2 before the holidays without all the volunteers who pitched in. Thank you!"</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7823">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Interview with Mike Beltzner</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7820" />
+      <modified>2005-12-20T23:00:29-08:00</modified>
+      <created>2005-12-20T23:00:29-08:00</created>
+      <issued>2005-12-20T23:00:29-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7820</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p><a href="http://djst.org/blog">David Tenser</a> has posted an <a href="http://djst.org/blog/2005/12/19/interview-with-mozillas-user-experience-lead-mike-beltzner/" title="djst's improved nest: Interview with Mozilla’s User Experience Lead Mike Beltzner">interview with Mozilla Foundation's User Experience Lead, Mike Beltzner</a>. The interview was conducted over instant messaging sessions during the last week of November. <a href="http://www.beltzner.ca/mike/">Mike</a> talks about usability studies, design of the Mozilla Developer Central, and the new bookmark system planned for Firefox 2.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7820">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Gecko 1.9 Trunk and 1.8 Branch Management Plan Posted</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7819" />
+      <modified>2005-12-20T18:08:36-08:00</modified>
+      <created>2005-12-20T18:08:36-08:00</created>
+      <issued>2005-12-20T18:08:36-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7819</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p><a href="http://weblogs.mozillazine.org/roadmap/">Brendan Eich</a> has posted a <a href="http://wiki.mozilla.org/Global:1.9_Trunk_1.8_Branch_Plan">draft plan for Gecko 1.9 Trunk and 1.8 Branch Management</a>, including a <a href="http://wiki.mozilla.org/index.php?title=Global:1.9_Trunk_1.8_Branch_Plan#A_Dialog.2C_or_FAQ">FAQ</a> at the mozilla wiki. Comments should be directed as followups to the <a href="http://groups.google.com/group/netscape.public.mozilla.builds/browse_thread/thread/d845b9a616ebf42d/">newsgroup post</a>.
+</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7819">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Minutes of the mozilla.org Staff Meeting of Monday 12th December 2005</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7818" />
+      <modified>2005-12-20T18:04:08-08:00</modified>
+      <created>2005-12-20T18:04:08-08:00</created>
+      <issued>2005-12-20T18:04:08-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7818</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>The minutes of the <a href="http://groups.google.com/group/netscape.public.mozilla.seamonkey/browse_thread/thread/fd2034cb74bf085b/" title="netscape.public.mozilla.seamonkey: 2005-12-12 - Summary of mozilla.org staff meeting">mozilla.org staff meeting held on Monday 12th December 2005</a> are now online. Issues discussed include Firefox Summit, Engineering, Upgrading, Awards and Newsgroups reorganisation</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7818">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>Minutes of the mozilla.org Staff Meeting of Monday 5th December 2005</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7817" />
+      <modified>2005-12-20T18:02:08-08:00</modified>
+      <created>2005-12-20T18:02:08-08:00</created>
+      <issued>2005-12-20T18:02:08-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7817</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p>The minutes of the <a href="http://groups.google.com/group/netscape.public.mozilla.seamonkey/browse_thread/thread/139be9195e0120eb/" title="netscape.public.mozilla.seamonkey: 2005-12-05 - Summary of mozilla.org staff meeting">mozilla.org staff meeting held on Monday 5th December 2005</a> are now online. Issues discussed include Firefox Summit and Engineering.</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7817">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+    <entry>
+      <title>SeaMonkey 1.0 Beta Released</title>
+      <link rel="alternate" type="text/html" href="http://www.mozillazine.org/talkback.html?article=7815" />
+      <modified>2005-12-20T17:41:12-08:00</modified>
+      <created>2005-12-20T17:41:12-08:00</created>
+      <issued>2005-12-20T17:41:12-08:00</issued>
+      <id>tag:mozillazine.org,2004:article7815</id>
+      <author>
+        <name>mozillaZine.org</name>
+      </author>
+      <content type="text/html" mode="escaped" xml:lang="en" xml:base="http://www.mozillazine.org/">
+        <![CDATA[<p><a href="mailto:kairo@kairo.at">Robert Kaiser</a> writes:  "Today, the SeaMonkey Council announces a new developer release, <a href="http://www.mozilla.org/projects/seamonkey/releases/">SeaMonkey 1.0 Beta</a>. Compared to the Alpha version released in September, SeaMonkey 1.0 Beta enhances the product with new features like tab drag and drop, but also is the first release branded with the <a href="http://www.mozilla.org/projects/seamonkey/artwork.html">new SeaMonkey logo</a>, which was unveiled earlier this month."</p>
+        <p>"The <a href="http://www.mozilla.org/projects/seamonkey/releases/seamonkey1.0b/">SeaMonkey 1.0 Beta Release Notes</a> have more information about this test version. All the builds are available from the <a href="http://ftp.mozilla.org/pub/mozilla.org/seamonkey/releases/1.0b/">SeaMonkey 1.0b directory on ftp.mozilla.org</a>."</p>]]>
+        <![CDATA[<p><a href="http://www.mozillazine.org/talkback.html?article=7815">Talkback</a></p>]]>
+      </content>
+    </entry>
+
+</feed>

@@ -1,0 +1,55 @@
+<sect1 id="zend.paginator.configuration">
+    <title>Konfiguracja</title>
+
+    <para>
+        Klasa <code>Zend_Paginator</code> posiada kilka metod konfiguracyjnych
+        których możemy użyć:
+    </para>
+
+    <table id="zend.paginator.configuration.table">
+        <title>Metody konfiguracyjne <code>Zend_Paginator</code></title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Metoda</entry>
+                    <entry>Opis</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>setCurrentPageNumber</entry>
+                    <entry>
+                        Ustawia obecny numer strony (domyślnie 1).
+                    </entry>
+                </row>
+                <row>
+                    <entry>setItemCountPerPage</entry>
+                    <entry>
+                        Ustawia maksymalną ilość elementów wyświetlanych na
+                        jednej stronie (domyślnie 10).
+                    </entry>
+                </row>
+                <row>
+                    <entry>setPageRange</entry>
+                    <entry>
+                        Ustawia ilość elementów wyświetlanych w nawigacji
+                        paginacji (domyślnie 10).
+                        Uwaga: W większości przypadków ta ilość będzie określona
+                        na sztywno, ale style przewijania posiadają możliwość
+                        użycia jej tylko jako startową wartość (np. styl Elastic).
+                    </entry>
+                </row>
+                <row>
+                    <entry>setView</entry>
+                    <entry>
+                        Ustawia dla potrzeb renderowania obiekt widoku.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

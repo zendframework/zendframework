@@ -1,0 +1,63 @@
+<sect1 id="zend.mime.introduction">
+    <title>Введение</title>
+    <para>
+        <code>Zend_Mime</code> является вспомогательным классом для работы
+        с сообщениями MIME, имеющими тип носителя multipart. Он используется
+        <link linkend="zend.mail"><code>Zend_Mail</code></link>
+        и может использоваться приложениями, требующими поддержки MIME.
+<!--
+        <code>Zend_Mime</code> is a support class for handling multipart MIME messages. It is used by <link
+        linkend="zend.mail"><code>Zend_Mail</code></link>, and may be used by applications requiring
+        MIME support.
+-->
+    </para>
+    <para>
+        <code>Zend_Mime</code> предоставляет простой набор методов для работы
+        с MIME:
+<!--
+        <code>Zend_Mime</code> provides a simple set of methods to work with MIME:
+-->
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>boundary()</code>: Возвращает разделитель MIME.
+                    <!--Returns the MIME boundary string.-->
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>boundaryLine()</code>: Возвращает полную строку с разделителем MIME.
+                    <!--Returns the complete MIME boundary line.-->
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>encodeBase64()</code>: Кодирует строку по алгоритму base64.
+                    <!--Encodes a string into base64 encoding.-->
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>encodeQuotedPrintable()</code>: Кодирует строку по алгоритму quoted-printable.
+                    <!--Encodes a string with the quoted-printable mechanism.-->
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>isPrintable()</code>: Возвращает TRUE, если данная строка не содержит непечатаемых символов,
+                    иначе FALSE.
+                    <!--Returns TRUE if the given string contains no unprintable characters, FALSE otherwise.-->
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>mimeEnd()</code>: Возвращает полную завершающую строку с разделителем MIME.
+                    <!--Returns the complete MIME end boundary line.-->
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

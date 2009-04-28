@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.view.helpers.initial.doctype">
+    <title>Doctype ヘルパー</title>
+
+    <para>
+        正しい形式の HTML ドキュメントおよび XHTML ドキュメントには、
+        <code>DOCTYPE</code> 宣言が必要です。
+        覚えておくことが難しいというだけではなく、
+        これらは特定の要素のレンダリング方法
+        (たとえば、<code>&lt;script&gt;</code> や
+        <code>&lt;style&gt;</code> 要素における CDATA
+        のエスケープ方法) に影響を与えます。
+    </para>
+
+    <para>
+        <code>Doctype</code> ヘルパーは、以下のいずれかの形式を指定します。
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>XHTML11</code></para></listitem>
+        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
+        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
+        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
+        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
+        <listitem><para><code>HTML4_STRICT</code></para></listitem>
+        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
+        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
+        <listitem><para><code>HTML5</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        整形式なものであれば、独自の doctype を追加することができます。
+    </para>
+
+    <para>
+        <code>Doctype</code> ヘルパーは、
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+        ヘルパー</link> の具象実装です。
+    </para>
+
+    <example id="zend.view.helpers.initial.doctype.basicusage">
+        <title>Doctype ヘルパーの基本的な使用法</title>
+
+        <para>
+            doctype は、いつでも指定することができます。
+            しかし、doctype によって出力を切りかえるヘルパーを使用する場合は
+            まず doctype を設定してからでないと動作しません。もっともシンプルな使用法は、
+            レイアウトスクリプトの先頭で指定と出力を同時に行うことでしょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$doctypeHelper = new Zend_View_Helper_Doctype();
+$doctypeHelper->doctype('XHTML1_STRICT');
+]]>
+        </programlisting>
+
+        <para>
+            そして、それをレイアウトスクリプトの先頭で表示します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->doctype() ?>
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.view.helpers.initial.doctype.retrieving">
+        <title>Doctype の取得</title>
+
+        <para>
+            doctype を知りたくなったら、オブジェクトの
+            <code>getDoctype()</code> をコールします。
+            このオブジェクトは、ヘルパーを起動した際に取得できるものです。
+            invoking the helper.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$doctype = $view->doctype()->getDoctype();
+?>]]></programlisting>
+
+        <para>
+            一般的な使用法としては、doctype が XHTML
+            か否かを調べるということがあります。それ用のメソッドとしては
+            <code>isXhtml()</code> があります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+if ($view->doctype()->isXhtml()) {
+    // 何かをします
+}
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

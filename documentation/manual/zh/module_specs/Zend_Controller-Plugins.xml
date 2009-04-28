@@ -1,0 +1,208 @@
+<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>插件</title>
+
+    <sect2 id="zend.controller.plugins.introduction">
+        <title>简介</title>
+
+        <para>
+            控制器（Controller）结构包含一个可以在控制器周期内确定事件发生时调用用户代码的插件系统。
+            前端控制器（Front controller）使用插件 broker 作为用户插件注册，同时插件 broker
+            确保前端控制器中注册的每个插件都在事件发生时调用相应的事件方法。
+        </para>
+
+        <para>
+            事件方法定义在虚类 <code>Zend_Controller_Plugin_Abstract</code>，用户插件应当从这个类继承：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>routeStartup()</code> 在 <code>Zend_Controller_Front</code>
+                    向注册的 <link linkend="zend.controller.router">路由器</link> 发送请求前被调用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>routeShutdown()</code> 在 <link linkend="zend.controller.router">路由器</link>
+                    完成请求的路由后被调用。
+                </para>
+            </listitem>
+            <!--
+            dispatch 这里应该是分发还是调度？现在的 zend.controller.dispatcher 翻译是使用了分发和分发器，但是调度是不是更合适一些？
+            @todo: 确认 dispatch 的翻译方式，dispatcher 的翻译方式。
+            -->
+            <listitem>
+                <para>
+                    <code>dispatchLoopStartup()</code> 在 <code>Zend_Controller_Front</code>
+                    进入其分发循环（dispatch loop）前被调用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>preDispatch()</code> 在动作由 <link linkend="zend.controller.dispatcher">分发器</link>
+                    分发前被调用。该回调方法允许代理或者过滤行为。通过修改请求和重设分发标志位（利用
+                    <code>Zend_Controller_Request_Abstract::setDispatched(false)</code>
+                    ）当前动作可以跳过或者被替换。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>postDispatch()</code> 在动作由 <link linkend="zend.controller.dispatcher">分发器</link>
+                    分发后被调用。该回调方法允许代理或者过滤行为。通过修改请求和重设分发标志位（利用
+                    <code>Zend_Controller_Request_Abstract::setDispatched(false)</code>
+                    ）可以指定新动作进行分发。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>dispatchLoopShutdown()</code> 在 <code>Zend_Controller_Front</code>
+                    推出其分发循环后调用。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.writing">
+        <title>编写插件</title>
+
+        <para>
+            只需要包含并扩展抽象类 <code>Zend_Controller_Plugin_Abstract</code>
+            即可编写插件类。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    // ...
+}
+
+]]>
+        </programlisting>
+
+        <para>
+            <code>Zend_Controller_Plugin_Abstract</code> 的全部方法都不是抽象的，
+            这意味着插件类并不是一定要去实现前面列出的每一个事件方法。
+            插件的开发者只要实现需要用到的方法即可。
+        </para>
+
+        <para>
+            <code>Zend_Controller_Plugin_Abstract</code> 也可以通过调用
+            <code>getRequest()</code> 和 <code>getResponse()</code>
+            方法从控制器中分别获取 request 对象和 response 对象.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.using">
+        <title>使用插件</title>
+
+        <para>
+            可以使用 <code>Zend_Controller_Front::registerPlugin()</code> 在任何时候注册插件类。
+            下面的代码片段说明了如何在控制器链条中使用插件。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>routeStartup() called</p>\n");
+    }
+
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>routeShutdown() called</p>\n");
+    }
+
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>dispatchLoopStartup() called</p>\n");
+    }
+
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>preDispatch() called</p>\n");
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>postDispatch() called</p>\n");
+    }
+
+    public function dispatchLoopShutdown()
+    {
+        $this->getResponse()->appendBody("<p>dispatchLoopShutdown() called</p>\n");
+    }
+}
+
+$front = Zend_Controller_Front::getInstance();
+$front->setControllerDirectory('/path/to/controllers')
+      ->setRouter(new Zend_Controller_Router_Rewrite())
+      ->registerPlugin(new MyPlugin());
+$front->dispatch();
+]]>
+        </programlisting>
+
+        <para>
+            假设没有动作产生任何输出，而只有一个动作被调用，前面演示的插件仍然会产生下面的输出：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<p>routeStartup() called</p>
+<p>routeShutdown() called</p>
+<p>dispatchLoopStartup() called</p>
+<p>preDispatch() called</p>
+<p>postDispatch() called</p>
+<p>dispatchLoopShutdown() called</p>
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                插件可以在前端控制器（Front controller）执行的任何时候被被注册，
+                如果一个事件在注册时已经完成，则这个事件对应的事件方法不会被触发。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.manipulating">
+        <title>获取和控制插件</title>
+
+        <para>
+            有时，可能需要取消注册或者获取一个插件。下面列出的前端控制器中的方法可以实现这个功能：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>getPlugin($class)</code> 允许获取指定类名的一个插件。
+                    如果没有插件匹配，将返回 false。如果有多个指定类的插件被注册，则返回一个数组。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>getPlugins()</code> 返回全部插件。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>unregisterPlugin($plugin)</code> 允许从插件列表中移除一个插件。
+                    传递一个插件件对象，或者需要移除的插件的类名。如果传递类名，任何该类的插件都将被移除。
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.standard">
+        <title>包含在标准发行包中的插件</title>
+
+        <para>
+            Zend Framework 在其标准发行包中包含错误处理插件。
+        </para>
+
+        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
+        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

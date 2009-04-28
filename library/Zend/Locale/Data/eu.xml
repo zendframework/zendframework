@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.65 $"/>
+		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<language type="eu"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="af">afrikaans</language>
+			<language type="am">amharikera</language>
+			<language type="ar">arabiera</language>
+			<language type="as">assamera</language>
+			<language type="az">azerbaijanera</language>
+			<language type="be">bielorrusiera</language>
+			<language type="bg">bulgariera</language>
+			<language type="bh">biharrera</language>
+			<language type="bn">bengalera</language>
+			<language type="br">bretoiera</language>
+			<language type="bs">bosniera</language>
+			<language type="ca">katalana</language>
+			<language type="cs">txekiera</language>
+			<language type="cy">{0&gt;welsh&lt;}100{&gt;galesera &lt;0}</language>
+			<language type="da">daniera</language>
+			<language type="de">alemanera</language>
+			<language type="el">greziera</language>
+			<language type="en">ingelera</language>
+			<language type="en_AU">ingelesa (australia)</language>
+			<language type="en_GB">ingelesa (erresuma batua)</language>
+			<language type="en_US">ingelesa (aeb)</language>
+			<language type="eo">esperantoa</language>
+			<language type="es">espainiera</language>
+			<language type="et">estoniera</language>
+			<language type="eu">euskara</language>
+			<language type="fa">pertsiera</language>
+			<language type="fi">finlandiera</language>
+			<language type="fil">tagalo</language>
+			<language type="fo">faroera</language>
+			<language type="fr">frantsesera</language>
+			<language type="fy">frisiarra</language>
+			<language type="ga">gaelikoa</language>
+			<language type="gd">eskoziar gaelikoa</language>
+			<language type="gl">galegoa</language>
+			<language type="gn">guaraniera</language>
+			<language type="gu">gujaratera</language>
+			<language type="he">hebreera</language>
+			<language type="hi">hindia</language>
+			<language type="hr">kroaziera</language>
+			<language type="hu">hungariera</language>
+			<language type="hy">armeniera</language>
+			<language type="ia">interlingua</language>
+			<language type="id">indonesiera</language>
+			<language type="ie">interlingue</language>
+			<language type="is">islandiera</language>
+			<language type="it">italiera</language>
+			<language type="ja">japoniera</language>
+			<language type="jv">javera</language>
+			<language type="ka">georgiera</language>
+			<language type="km">khemerera</language>
+			<language type="kn">kannada</language>
+			<language type="ko">koreera</language>
+			<language type="ku">kurduera</language>
+			<language type="ky">kirgizera</language>
+			<language type="la">latina</language>
+			<language type="ln">lingala</language>
+			<language type="lo">laosera</language>
+			<language type="lt">lituaniera</language>
+			<language type="lv">letoniera</language>
+			<language type="mk">mazedoniera</language>
+			<language type="ml">malayalamera</language>
+			<language type="mn">mongoliera</language>
+			<language type="mr">marathera</language>
+			<language type="ms">malaysiera</language>
+			<language type="mt">maltera</language>
+			<language type="ne">nepalera</language>
+			<language type="nl">nederlandera</language>
+			<language type="nn">norvegiera (nynorsk)</language>
+			<language type="no">norvegiera</language>
+			<language type="oc">okzitaniera</language>
+			<language type="or">oriya</language>
+			<language type="pa">punjabera</language>
+			<language type="pl">poloniera</language>
+			<language type="ps">paxtuera</language>
+			<language type="pt">portugalera</language>
+			<language type="pt_BR">portugesa (brasil)</language>
+			<language type="pt_PT">portugesa (portugal)</language>
+			<language type="ro">errumaniera</language>
+			<language type="ru">errusiera</language>
+			<language type="sa">sanskritoa</language>
+			<language type="sd">sindhia</language>
+			<language type="sh">serbokroaziera</language>
+			<language type="si">sinhala</language>
+			<language type="sk">eslovakiera</language>
+			<language type="sl">esloveniera</language>
+			<language type="so">somaliera</language>
+			<language type="sq">albaniera</language>
+			<language type="sr">serbiera</language>
+			<language type="st">sesothoera</language>
+			<language type="su">sundanera</language>
+			<language type="sv">suediera</language>
+			<language type="sw">swahili</language>
+			<language type="ta">tamilera</language>
+			<language type="te">telugua</language>
+			<language type="th">thailandiera</language>
+			<language type="ti">tigrinya</language>
+			<language type="tk">turkmeniera</language>
+			<language type="tl">tagalog</language>
+			<language type="tlh">klingonera</language>
+			<language type="tr">turkiera</language>
+			<language type="tw">twia</language>
+			<language type="ug">uigurrera</language>
+			<language type="uk">ukrainera</language>
+			<language type="ur">urdu</language>
+			<language type="uz">uzbekera</language>
+			<language type="vi">vietnamera</language>
+			<language type="xh">xhosa</language>
+			<language type="yi">yiddishera</language>
+			<language type="zh">txinera</language>
+			<language type="zh_Hans">txinera (soildua)</language>
+			<language type="zh_Hant">txinera (tradizionala)</language>
+			<language type="zu">zuluera</language>
+		</languages>
+		<territories>
+			<territory type="AE">Arabiar Emirrerri Batuak</territory>
+			<territory type="AF">Afganistan</territory>
+			<territory type="AG">Antigua eta Barbuda</territory>
+			<territory type="AL">Albania</territory>
+			<territory type="AM">Armenia</territory>
+			<territory type="AN">Nederlandar Antillak</territory>
+			<territory type="AO">Angola</territory>
+			<territory type="AQ">Antartika</territory>
+			<territory type="AR">Argentina</territory>
+			<territory type="AS">Samoa Estatubatuarra</territory>
+			<territory type="AT">Austria</territory>
+			<territory type="AU">Australia</territory>
+			<territory type="AX">Aland Uharteak</territory>
+			<territory type="AZ">Azerbaijan</territory>
+			<territory type="BA">Bosnia-Herzegovina</territory>
+			<territory type="BD">Bangladesh</territory>
+			<territory type="BE">Belgika</territory>
+			<territory type="BF">Burkina Faso</territory>
+			<territory type="BG">Bulgaria</territory>
+			<territory type="BI">Burundi</territory>
+			<territory type="BJ">Benin</territory>
+			<territory type="BO">Bolibia</territory>
+			<territory type="BR">Brasil</territory>
+			<territory type="BS">Bahamak</territory>
+			<territory type="BT">Bh2utan</territory>
+			<territory type="BV">Bouvet Uhartea</territory>
+			<territory type="BW">Botswana</territory>
+			<territory type="BY">Bielorrusia</territory>
+			<territory type="CA">Kanada</territory>
+			<territory type="CC">Cocos uharteak</territory>
+			<territory type="CD">Kongoko Errepublika Demokratikoa</territory>
+			<territory type="CF">Afrika Erdiko Errepublika</territory>
+			<territory type="CG">Kongo</territory>
+			<territory type="CH">Suitza</territory>
+			<territory type="CI">Boli Kosta</territory>
+			<territory type="CK">Cook uharteak</territory>
+			<territory type="CL">Txile</territory>
+			<territory type="CM">Kamerun</territory>
+			<territory type="CN">Txina</territory>
+			<territory type="CO">Kolonbia</territory>
+			<territory type="CS">Serbia eta Montenegro</territory>
+			<territory type="CU">Kuba</territory>
+			<territory type="CV">Cabo Verde</territory>
+			<territory type="CX">Christmas uhartea</territory>
+			<territory type="CY">Zipre</territory>
+			<territory type="CZ">Txekiar errepublika</territory>
+			<territory type="DE">Alemania</territory>
+			<territory type="DJ">Djibuti</territory>
+			<territory type="DK">Danimarka</territory>
+			<territory type="DM">Dominika</territory>
+			<territory type="DO">Dominikar Errepublika</territory>
+			<territory type="DZ">Aljeria</territory>
+			<territory type="EC">Ekuador</territory>
+			<territory type="EE">Estonia</territory>
+			<territory type="EG">Egipto</territory>
+			<territory type="EH">Mendebaldeko Sahara</territory>
+			<territory type="ER">Eritrea</territory>
+			<territory type="ES">Espainia</territory>
+			<territory type="ET">Etiopia</territory>
+			<territory type="FI">Finlandia</territory>
+			<territory type="FK">Malvinak</territory>
+			<territory type="FM">Mikronesia</territory>
+			<territory type="FO">Faroe Uharteak</territory>
+			<territory type="FR">Frantzia</territory>
+			<territory type="GA">Gabon</territory>
+			<territory type="GB">Erresuma Batua</territory>
+			<territory type="GE">Georgia</territory>
+			<territory type="GF">Guyana Frantsesa</territory>
+			<territory type="GG">Guernsey</territory>
+			<territory type="GH">Ghana</territory>
+			<territory type="GL">Groenlandia</territory>
+			<territory type="GM">Gambia</territory>
+			<territory type="GN">Ginea</territory>
+			<territory type="GQ">Ekuatore Ginea</territory>
+			<territory type="GR">Grezia</territory>
+			<territory type="GS">Hegoaldeko Georgia eta Hegoaldeko Sandwich uharteak</territory>
+			<territory type="GW">Ginea-Bissau</territory>
+			<territory type="HM">Heard eta McDonald Uharteak</territory>
+			<territory type="HN">Honduras</territory>
+			<territory type="HR">Kroazia</territory>
+			<territory type="HT">Haiti</territory>
+			<territory type="HU">Hungaria</territory>
+			<territory type="ID">Indonesia</territory>
+			<territory type="IE">Irlanda</territory>
+			<territory type="IL">Israel</territory>
+			<territory type="IM">Man uhartea</territory>
+			<territory type="IN">India</territory>
+			<territory type="IO">Indiako Ozeanoko Britainiar Lurraldea</territory>
+			<territory type="IQ">Irak</territory>
+			<territory type="IR">Iran</territory>
+			<territory type="IS">Islandia</territory>
+			<territory type="IT">Italia</territory>
+			<territory type="JE">Jersey</territory>
+			<territory type="JM">Jamaika</territory>
+			<territory type="JO">Jordania</territory>
+			<territory type="JP">Japonia</territory>
+			<territory type="KE">Kenia</territory>
+			<territory type="KG">Kirgizistan</territory>
+			<territory type="KH">Kanbodia</territory>
+			<territory type="KI">Kiribati</territory>
+			<territory type="KM">Komoreak</territory>
+			<territory type="KN">Saint Kitts eta Nevis</territory>
+			<territory type="KP">Ipar Korea</territory>
+			<territory type="KR">Hego Korea</territory>
+			<territory type="KY">Kaiman Uharteak</territory>
+			<territory type="KZ">Kazakhstan</territory>
+			<territory type="LA">Laos</territory>
+			<territory type="LB">Libano</territory>
+			<territory type="LC">Santa Luzia</territory>
+			<territory type="LI">Liechtenstein</territory>
+			<territory type="LK">Sri Lanka</territory>
+			<territory type="LR">Liberia</territory>
+			<territory type="LS">Lesotho</territory>
+			<territory type="LT">Lituania</territory>
+			<territory type="LU">Luxenburgo</territory>
+			<territory type="LV">Letonia</territory>
+			<territory type="LY">Libia</territory>
+			<territory type="MA">Maroko</territory>
+			<territory type="MC">Monako</territory>
+			<territory type="MD">Moldavia</territory>
+			<territory type="ME">Montenegro</territory>
+			<territory type="MG">Madagaskar</territory>
+			<territory type="MH">Marshall uharteak</territory>
+			<territory type="MK">Mazedonia</territory>
+			<territory type="ML">Mali</territory>
+			<territory type="MM">Birmania</territory>
+			<territory type="MN">Mongolia</territory>
+			<territory type="MO">Macau</territory>
+			<territory type="MP">Iparraldeko Mariana uharteak</territory>
+			<territory type="MR">Mauritania</territory>
+			<territory type="MU">Maurizio</territory>
+			<territory type="MV">Maldivak</territory>
+			<territory type="MW">Malawi</territory>
+			<territory type="MX">Mexiko</territory>
+			<territory type="MY">Malasia</territory>
+			<territory type="MZ">Mozambike</territory>
+			<territory type="NA">Namibia</territory>
+			<territory type="NC">Kaledonia Berria</territory>
+			<territory type="NE">Niger</territory>
+			<territory type="NF">Norfolk uhartea</territory>
+			<territory type="NG">Nigeria</territory>
+			<territory type="NI">Nikaragua</territory>
+			<territory type="NL">Herbehereak</territory>
+			<territory type="NO">Norvegia</territory>
+			<territory type="NP">Nepal</territory>
+			<territory type="NZ">Zeelanda Berria</territory>
+			<territory type="OM">Oman</territory>
+			<territory type="PE">Peru</territory>
+			<territory type="PF">Polinesia Frantsesa</territory>
+			<territory type="PG">Papua Ginea Berria</territory>
+			<territory type="PH">Filipinak</territory>
+			<territory type="PK">Pakistan</territory>
+			<territory type="PL">Polonia</territory>
+			<territory type="PM">Saint-Pierre eta Mikelune</territory>
+			<territory type="PS">Palestina</territory>
+			<territory type="PT">Portugal</territory>
+			<territory type="PY">Paraguai</territory>
+			<territory type="QA">Katar</territory>
+			<territory type="RO">Errumania</territory>
+			<territory type="RS">Serbia</territory>
+			<territory type="RU">Errusia</territory>
+			<territory type="RW">Ruanda</territory>
+			<territory type="SA">Saudi Arabia</territory>
+			<territory type="SB">Salomon uharteak</territory>
+			<territory type="SC">Seychelleak</territory>
+			<territory type="SD">Sudan</territory>
+			<territory type="SE">Suedia</territory>
+			<territory type="SG">Singapur</territory>
+			<territory type="SH">Saint Helena</territory>
+			<territory type="SI">Eslovenia</territory>
+			<territory type="SJ">Svalbard eta Jan Mayen uharteak</territory>
+			<territory type="SK">Eslovakia</territory>
+			<territory type="SL">Sierra Leona</territory>
+			<territory type="SM">San Marino</territory>
+			<territory type="SN">Senegal</territory>
+			<territory type="SO">Somalia</territory>
+			<territory type="SR">Surinam</territory>
+			<territory type="ST">Sao Tomé eta Principe</territory>
+			<territory type="SY">Siria</territory>
+			<territory type="SZ">Swazilandia</territory>
+			<territory type="TC">Turk eta Caico uharteak</territory>
+			<territory type="TD">Txad</territory>
+			<territory type="TF">Frantziaren Lurralde Australak</territory>
+			<territory type="TG">Togo</territory>
+			<territory type="TH">Tailandia</territory>
+			<territory type="TJ">Tadjikistan</territory>
+			<territory type="TK">Tokelau</territory>
+			<territory type="TL">Ekialdeko Timor</territory>
+			<territory type="TM">Turkmenistan</territory>
+			<territory type="TN">Tunisia</territory>
+			<territory type="TO">Tonga</territory>
+			<territory type="TR">Turkia</territory>
+			<territory type="TT">Trinidad eta Tobago</territory>
+			<territory type="TV">Tuvalu</territory>
+			<territory type="TW">Taiwan</territory>
+			<territory type="TZ">Tanzania</territory>
+			<territory type="UA">Ukraina</territory>
+			<territory type="UG">Uganda</territory>
+			<territory type="UM">Estatu Batuetatik urruti dauden uharte txikiak</territory>
+			<territory type="US">Ameriketako Estatu Batuak</territory>
+			<territory type="UY">Uruguai</territory>
+			<territory type="UZ">Uzbekistan</territory>
+			<territory type="VA">Vatikano</territory>
+			<territory type="VC">Saint Vincent eta Grenadinak</territory>
+			<territory type="VE">Venezuela</territory>
+			<territory type="VG">Virginia uharteak (Erresuma Batua)</territory>
+			<territory type="VI">Virginia uharteak (Ameriketako Estatu Batuak)</territory>
+			<territory type="VN">Vietnam</territory>
+			<territory type="VU">Vanuatu</territory>
+			<territory type="WF">Wallis eta Futuna</territory>
+			<territory type="WS">Samoa</territory>
+			<territory type="YE">Yemen</territory>
+			<territory type="ZA">Hegoafrika</territory>
+			<territory type="ZM">Zambia</territory>
+			<territory type="ZW">Zimbabwe</territory>
+		</territories>
+	</localeDisplayNames>
+	<characters>
+		<exemplarCharacters>[a-c ç d-n ñ o-z]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>‘</quotationStart>
+		<quotationEnd>’</quotationEnd>
+		<alternateQuotationStart>“</alternateQuotationStart>
+		<alternateQuotationEnd>”</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">urt</month>
+							<month type="2">ots</month>
+							<month type="3">mar</month>
+							<month type="4">api</month>
+							<month type="5">mai</month>
+							<month type="6">eka</month>
+							<month type="7">uzt</month>
+							<month type="8">abu</month>
+							<month type="9">ira</month>
+							<month type="10">urr</month>
+							<month type="11">aza</month>
+							<month type="12">abe</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">urtarrila</month>
+							<month type="2">otsaila</month>
+							<month type="3">martxoa</month>
+							<month type="4">apirila</month>
+							<month type="5">maiatza</month>
+							<month type="6">ekaina</month>
+							<month type="7">uztaila</month>
+							<month type="8">abuztua</month>
+							<month type="9">iraila</month>
+							<month type="10">urria</month>
+							<month type="11">azaroa</month>
+							<month type="12">abendua</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">1</month>
+							<month type="2">2</month>
+							<month type="3">3</month>
+							<month type="4">4</month>
+							<month type="5">5</month>
+							<month type="6">6</month>
+							<month type="7">7</month>
+							<month type="8">8</month>
+							<month type="9">9</month>
+							<month type="10">10</month>
+							<month type="11">11</month>
+							<month type="12">12</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">ig</day>
+							<day type="mon">al</day>
+							<day type="tue">as</day>
+							<day type="wed">az</day>
+							<day type="thu">og</day>
+							<day type="fri">or</day>
+							<day type="sat">lr</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">igandea</day>
+							<day type="mon">astelehena</day>
+							<day type="tue">asteartea</day>
+							<day type="wed">asteazkena</day>
+							<day type="thu">osteguna</day>
+							<day type="fri">ostirala</day>
+							<day type="sat">larunbata</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">1</day>
+							<day type="mon">2</day>
+							<day type="tue">3</day>
+							<day type="wed">4</day>
+							<day type="thu">5</day>
+							<day type="fri">6</day>
+							<day type="sat">7</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">Hh1</quarter>
+							<quarter type="2">Hh2</quarter>
+							<quarter type="3">Hh3</quarter>
+							<quarter type="4">Hh4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">1. hiruhilekoa</quarter>
+							<quarter type="2">2. hiruhilekoa</quarter>
+							<quarter type="3">3. hiruhilekoa</quarter>
+							<quarter type="4">4. hiruhilekoa</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<am>AM</am>
+				<pm>PM</pm>
+				<eras>
+					<eraAbbr>
+						<era type="0">BCE</era>
+						<era type="1">CE</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, yyyy'eko' MMMM'ren' dd'a'</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>yyyy'eko' MMM'ren' dd'a'</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>yyyy-MMM-dd</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>yy-MM-dd</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>HH:mm:ss v</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>HH:mm:ss z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>HH:mm:ss</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>HH:mm</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<dateTimeFormatLength>
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<availableFormats>
+						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+					</availableFormats>
+				</dateTimeFormats>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HH:mm;-HH:mm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>{0}</regionFormat>
+			<zone type="Asia/Bahrain">
+				<exemplarCity>Bahrein</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Bermuda">
+				<exemplarCity>Bermudak</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Cape_Verde">
+				<exemplarCity>Cabo Verde</exemplarCity>
+			</zone>
+			<zone type="Africa/Djibouti">
+				<exemplarCity>Djibuti</exemplarCity>
+			</zone>
+			<zone type="America/Dominica">
+				<exemplarCity>Dominika</exemplarCity>
+			</zone>
+			<zone type="Europe/Madrid">
+				<exemplarCity>Madril</exemplarCity>
+			</zone>
+			<zone type="America/Guadeloupe">
+				<exemplarCity>Guadalupe</exemplarCity>
+			</zone>
+			<zone type="America/Jamaica">
+				<exemplarCity>Jamaika</exemplarCity>
+			</zone>
+			<zone type="Europe/Luxembourg">
+				<exemplarCity>Luxenburgo</exemplarCity>
+			</zone>
+			<zone type="Europe/Monaco">
+				<exemplarCity>Monako</exemplarCity>
+			</zone>
+			<zone type="America/Martinique">
+				<exemplarCity>Martinika</exemplarCity>
+			</zone>
+			<zone type="Indian/Mauritius">
+				<exemplarCity>Maurizio</exemplarCity>
+			</zone>
+			<zone type="Indian/Maldives">
+				<exemplarCity>Maldivak</exemplarCity>
+			</zone>
+			<zone type="Asia/Singapore">
+				<exemplarCity>Singapur</exemplarCity>
+			</zone>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<symbols>
+			<decimal>,</decimal>
+			<group>.</group>
+		</symbols>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>#,##0.00 ¤</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+		<currencies>
+			<currency type="ESP">
+				<pattern>¤ #,##0;-¤ #,##0</pattern>
+				<symbol>₧</symbol>
+				<decimal>,</decimal>
+				<group>.</group>
+			</currency>
+		</currencies>
+	</numbers>
+</ldml>

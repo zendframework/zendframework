@@ -1,0 +1,38 @@
+<sect1 id="zend.pdf.save">
+    <title> 保存修改到 PDF 文档 </title>
+    <para>
+        有两个方法来保存修改到 PDF 文档：<code>Zend_Pdf::save()</code> 和 <code>Zend_Pdf::render()</code>。
+    </para>
+
+    <para>
+        <code>Zend_Pdf::save($filename, $updateOnly = false)</code> 保存 PDF 文档到一个文件。如果 $updateOnly 是 true，那么只有新的 PDF 文件段被追加到文件，否则，重写文件。
+    </para>
+
+    <para>
+        <code>Zend_Pdf::render($newSegmentOnly = false)</code> 把 PDF 文档当作字符串返回。如果 $newSegmentOnly 是 true，那么只有新的 PDF 文件段返回。
+    </para>
+
+    <example id="zend.pdf.save.example-1">
+        <title>Save PDF document.</title>
+        <programlisting role="php"><![CDATA[
+...
+// Load PDF document.
+$pdf = Zend_Pdf::load($fileName);
+...
+// Update document
+$pdf->save($fileName, true);
+// Save document as a new file
+$pdf->save($newFileName);
+
+// Return PDF document as a string.
+$pdfString = $pdf->render();
+
+...
+]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

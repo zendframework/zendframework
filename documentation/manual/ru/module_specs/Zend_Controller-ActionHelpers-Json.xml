@@ -1,0 +1,88 @@
+<sect3 id="zend.controller.actionhelpers.json">
+    <title>JSON</title>
+
+    <para>
+        JSON быстро становится предпочтительным форматом для использования с
+        AJAX-запросами, которые подразумевают ответы с данными. Синтаксический
+        разбор JSON может производиться сразу на стороне клиента, что приводит
+        к большей производительности.
+    </para>
+
+    <para>
+        Помощник действий JSON выполняет несколько функций:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Отключает макеты, если они включены.
+        </para></listitem>
+
+        <listitem><para>
+                Отключает ViewRenderer, если он включен.
+        </para></listitem>
+
+        <listitem><para>
+                Устанавливает заголовок ответа 'Content-Type' со значением
+                'application/json'.
+        </para></listitem>
+
+        <listitem><para>
+                По умолчанию сразу возвращает ответ, не дожидаясь завершения
+                выполнения действия.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Использование помощника довольно простое - вызывайте его как метод
+        брокера помощников или вызывайте один из его методов
+        <code>encodeJson()</code> или
+        <code>sendJson()</code>:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // произведение некоторых действий...
+
+        // Отправка ответа JSON:
+        $this->_helper->json($data);
+
+        // или...
+        $this->_helper->json->sendJson($data);
+
+        // либо получение данных в формате json:
+        $json = $this->_helper->json->encodeJson($data);
+    }
+}
+]]>
+    </programlisting>
+
+    <note>
+        <title>Использование с макетами</title>
+
+        <para>
+            Для того, чтобы использовать отдельные макеты для JSON-ответов
+            (например, для того, чтобы помещать JSON-ответы в некоторый
+            контекст), все методы в помощнике JSON принимают второй опциональный
+            параметр - флаг для включения и отключения макетов. Передача
+            значения <code>true</code> сохранит макеты включенными:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Получение данных в формате json, макеты остаются включенными
+        $json = $this->_helper->json->encodeJson($data, true);
+    }
+}
+]]>
+        </programlisting>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

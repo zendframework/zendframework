@@ -1,0 +1,356 @@
+<sect1 id="zend.service.akismet">
+    <title>Zend_Service_Akismet</title>
+
+    <sect2 id="zend.service.akismet.introduction">
+        <title>Wprowadzenie</title>
+
+        <para>
+            Komponent <code>Zend_Service_Akismet</code> jest klientem dla <ulink
+                url="http://akismet.com/development/api/">API serwisu Akismet</ulink>.
+            Serwis Akismet jest używany do określenia czy nadesłane dane są
+            potencjalnym spamem; udostępnia on także metody do nadsyłania danych,
+            które uznamy za spam, oraz danych, które niesłusznie zostały uznane
+            za spam (czyli ham). Pierwotnie serwis Akismet służył do kategoryzowania
+            i identyfikowania spamu dla aplikacji Wordpress, ale obecnie może być
+            użyty do dowolnych danych.
+        </para>
+
+        <para>
+            Do użycia serwisu Akismet wymagane jest posiadanie klucza API. Możesz
+            go otrzymać rejestrując konto w serwisie
+            <ulink url="http://wordpress.com/">WordPress.com</ulink>. Nie musisz
+            aktywować bloga; samo założenie konta umożliwi ci otrzymanie klucza
+            API.
+        </para>
+
+        <para>
+            Dodatkowo Akismet wymaga aby wszystkie żądania zawierały adres URL
+            do zasobu, dla którego dane są filtrowane, i z tego względu, że
+            Akismet pochodzi z WordPress, ten zasób nazywany jest adresem bloga
+            (blog url). Ta wartość powinna być przekazana jako drugi argument do
+            konstruktora, ale może być zresetowana w dowolnej chwili za pomocą
+            metody dostępowej <code>setBlogUrl()</code> lub nadpisana przez
+            określenie klucza 'blog' w różnych wywołaniach metod.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.verifykey">
+        <title>Weryfikowanie klucza API</title>
+
+        <para>
+            Metoda <code>Zend_Service_Akismet::verifyKey($key)</code> jest
+            używana do weryfikowania poprawności klucza API Akismet.
+            W większości przypadków nie musisz tego sprawdzać, ale jeśli chcesz
+            przeprowadzić test dla pewności lub sprawdzić czy otrzymany klucz
+            jest aktywny, możesz to zrobić za pomocą tej metody.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Tworzymy instancję podając klucz API
+// i adres URL używanej aplikacji
+$akismet = new Zend_Service_Akismet($apiKey,
+                                    'http://framework.zend.com/wiki/');
+if ($akismet->verifyKey($apiKey) {
+    echo "Key is valid.\n";
+} else {
+    echo "Key is not valid\n";
+}
+]]>
+        </programlisting>
+
+        <para>
+            Jeśli metoda <code>verifyKey()</code> jest wywołana bez żadnych
+            argumentów, to używany jest klucz API, który był podany do
+            konstruktora.
+        </para>
+
+        <para>
+            Metoda <code>verifyKey()</code> implementuje metodę REST
+            <code>verify-key</code> serwisu Akismet.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.isspam">
+        <title>Sprawdzanie czy dane są spamem</title>
+
+        <para>
+            Metoda <code>Zend_Service_Akismet::isSpam($data)</code> jest używana
+            do sprawdzenia, czy przekazane dane są uznane przez Akismet jako
+            spam. Metoda przyjmuje tablicę asocjacyjną jako jedyny argument.
+            Tablica ta wymaga zdefiniowania poniższych kluczy:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>user_ip</code>, adres IP użytkownika wysyłającego
+                    dane (nie twój adres IP, tylko użytkownika twojego serwisu)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>user_agent</code>, nazwa klienta HTTP (przeglądarka
+                    oraz wersja) użytkownika wysyłającego dane.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Poniższe klucze są także rozpoznawane przez API:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>blog</code>, pełny adres URL do zasobu lub aplikacji.
+                    Jeśli nie jest określony, zostanie użyty adres URL, który
+                    był podany do konstruktora.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>referrer</code>, zawartość nagłówka HTTP_REFERER w
+                    trakcie wysyłania danych. (Zwróć uwagę na pisownię; nie jest
+                    ona taka sama jak nazwa nagłówka.)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>permalink</code>, bezpośredni odnośnik do wpisu, dla
+                    którego dane są przesyłane.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_type</code>, typ przesyłanych danych.
+                    Możliwe wartości określone w API to 'comment', 'trackback',
+                    'pingback', oraz pusty łańcuch znaków (''), ale wartość
+                    może być dowolna.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author</code>, nazwa osoby dodającej dane.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author_email</code>, adres email osoby
+                    dodającej dane.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_author_url</code>, adres URL lub strona
+                    domowa osoby dodającej dane.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>comment_content</code>, aktualnie wysłana zawartość
+                    komentarza.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Możesz także przesłać dowolne inne zmienne opisujące środowisko,
+            ktore według ciebie mogą być pomocne w zweryfikowaniu danych pod
+            kątem spamu. Serwis Akismet sugeruje, aby była to cała zawartość
+            tablicy $_SERVER.
+        </para>
+
+        <para>
+            Metoda <code>isSpam()</code> zwróci wartość logiczną true lub false,
+            a w przypadku gdy klucz API jest nieprawidłowy, wyrzuci wyjątek.
+        </para>
+
+        <example id="zend.service.akismet.isspam.example-1">
+            <title>Użycie metody isSpam()</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT' .
+                              '5.2; en-GB; rv:1.8.1) Gecko/20061010' .
+                              'Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
+);
+if ($akismet->isSpam($data)) {
+    echo "Sorry, but we think you're a spammer.";
+} else {
+    echo "Welcome to our site!";
+}
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Metoda <code>isSpam()</code> implementuje metodę <code>comment-check</code>
+            API serwisu Akismet.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.submitspam">
+        <title>Wysyłanie informacji o spamie</title>
+
+        <para>
+            Czasem dane, które są spamem mogą przejść przez filtr. Jeśli
+            będziesz przeglądał przychodzące dane i znajdziesz dane, które
+            według ciebie powinny być uznane za spam, możesz wysłać je do
+            Akismet aby pomóc ulepszyć filtr.
+        </para>
+
+        <para>
+            Metoda <code>Zend_Service_Akismet::submitSpam()</code> przyjmuje
+            taką samą tablicę danych jak metoda <code>isSpam()</code>, ale nie
+            zwraca wartości. Jeśli klucz API jest nieprawidłowy, zostanie
+            wyrzucony wyjątek.
+        </para>
+
+        <example id="zend.service.akismet.submitspam.example-1">
+            <title>Użycie metody submitSpam()</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+                              'en-GB; rv:1.8.1) Gecko/20061010' .
+                              'Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
+);
+$akismet->submitSpam($data));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Metoda <code>submitSpam()</code> implementuje metodę <code>submit-spam</code>
+            API serwisu Akismet.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.submitham">
+        <title>Wysyłanie informacji o fałszywym spamie (ham)</title>
+
+        <para>
+            Czasem dane zostaną przez Akismet błędnie uznane za spam. Z tego
+            względu, powinieneś zapisywać dane uznane przez Akismet za spam i
+            regularnie je przeglądać. Jeśli znajdziesz takie przypadki, możesz
+            wysłać takie dane do Akismet jako "ham" czyli poprawne dane błędnie
+            uznane  za spam (ham jest dobry, spam nie jest).
+        </para>
+
+        <para>
+            Metoda <code>Zend_Service_Akismet::submitHam()</code> przyjmuje
+            taką samą tablicę danych jak metody <code>isSpam()</code> oraz
+            <code>submitSpam()</code> i tak samo jak metoda
+            <code>submitSpam()</code> nie zwraca wartości. Jeśli klucz API jest
+            nieprawidłowy, zostanie wyrzucony wyjątek.
+        </para>
+
+        <example id="zend.service.akismet.submitham.example-1">
+            <title>Użycie metody submitHam()</title>
+
+            <programlisting role="php"><![CDATA[
+$data = array(
+    'user_ip'              => '111.222.111.222',
+    'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
+                              'en-GB; rv:1.8.1) Gecko/20061010' .
+                              'Firefox/2.0',
+    'comment_type'         => 'contact',
+    'comment_author'       => 'John Doe',
+    'comment_author_email' => 'nospam@myhaus.net',
+    'comment_content'      => "I'm not a spammer, honest!"
+);
+$akismet->submitHam($data));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Metoda <code>submitHam()</code> implementuje metodę <code>submit-ham</code>
+            API serwisu Akismet.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.akismet.accessors">
+        <title>Specyficzne metody dostępowe</title>
+
+        <para>
+            O ile API serwisu Akismet określa jedynie cztery metody,
+            komponent <code>Zend_Service_Akismet</code> posiada kilka
+            dodatkowych metod dostępowych, które mogą być użyte do modyfikowania
+            wewnętrznych właściwości.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Metody <code>getBlogUrl()</code> oraz <code>setBlogUrl()</code>
+                    pozwalają ci na odebranie oraz modyfikację adresu URL bloga
+                    używanego w żądaniach.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metody <code>getApiKey()</code> oraz <code>setApiKey()</code>
+                    pozwalają ci na odebranie oraz modyfikację klucza API
+                    używanego w żądaniach.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metody <code>getCharset()</code> oraz <code>setCharset()</code>
+                    pozwalają ci na odebranie oraz modyfikację zestawu znaków
+                    używanego w żądaniach.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metody <code>getPort()</code> oraz <code>setPort()</code>
+                    pozwalają ci na odebranie oraz modyfikację portu TCP
+                    używanego w żądaniach.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metody <code>getUserAgent()</code> oraz
+                    <code>setUserAgent()</code> pozwalają ci na pobranie oraz
+                    modyfikowanie informacji o kliencie HTTP używanym do
+                    przeprowadzenia żądania.
+                    Nota: nie jest to ta sama wartość co user_agent, która jest
+                    używana w danych wysyłanych do serwisu, ale raczej wartość,
+                    która będzie wysłana w nagłówku HTTP User-Agent podczas
+                    przeprowadzania żądania do serwisu.
+                </para>
+
+                <para>
+                    Wartość użyta do ustawienia nazwy klienta HTTP powinna być
+                    w formacie <code>nazwa klienta/wersja | Akismet/wersja</code>.
+                    Domyślna wartość to <code>Zend Framework/ZF-VERSION | Akismet/1.11</code>,
+                    gdzie <code>ZF-VERSION</code> jest numerem obecnej wersji ZF
+                    przechowywanym w stałej <code>Zend_Framework::VERSION</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

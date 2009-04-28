@@ -1,0 +1,19 @@
+<sect1 id="zend.json.introduction">
+    <title>Inleiding</title>
+    <para>
+        <code>Zend_Json</code> verstrekt gemakkelijke methodes om PHP naar
+        het JSON formaat te serializeren en JSON te decoderen naar PHP. Voor
+        meer informatie over JSON kan je terecht op
+        <ulink url="http://www.json.org/">de website van het JSON project</ulink>.
+    </para>
+    <para>
+        JSON, JavaScript Object Notation, kan gebruikt worden als een lichtgewicht
+        data transporteur tussen javascript en andere programmeertalen. Omdat
+        JSON onmiddellijk in Javascript kan worden geëvalueerd is het een ideaal
+        formaat om te gebruiken met Web 2.0 interfaces; het is een eenvoudiger
+        alternatief dan XML voor AJAX interfaces.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

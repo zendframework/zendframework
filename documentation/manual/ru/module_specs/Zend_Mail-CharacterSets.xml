@@ -1,0 +1,37 @@
+<sect1 id="zend.mail.character-sets">
+    <title>
+        Наборы символов
+<!--
+        Character Sets
+-->
+    </title>
+    <para>
+        <code>Zend_Mail</code> не проверяет правильность выбранного
+        набора символов для частей сообщения. Набор символов для сообщения
+        может быть задан, когда создаете экземпляр
+        <code>Zend_Mail</code>. По умолчанию это <code>iso-8859-1</code>.
+        Приложение должно обеспечивать то, что все части, добавляемые в объект почтового
+        сообщения, имеют содержимое, закодированное с правильным набором символов.
+        Когда создается новая часть сообщения, отличающаяся кодировка должна
+        быть задана для каждой части.
+<!--
+        <code>Zend_Mail</code> does not check for the correct character set of the mail parts. When
+        instantiating <code>Zend_Mail</code>, a charset for the e-mail itself may be given. It defaults to
+        <code>iso-8859-1</code>. The application has to make sure that all parts added to that mail object
+        have their content encoded in the correct character set. When creating a new mail part, a different
+        charset can be given for each part.
+-->
+    </para>
+    <note>
+        <title>Только для текстового формата<!--Only in text format--></title>
+        <para>
+            Наборы символов применимы только к частям сообщения в текстовом формате.
+<!--
+        Character sets are only applicable for message parts in text format.
+-->
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Les aides de vues Dojo</title>
+
+    <para>Zend Framework fournit les aides de vues spécifiques à Dojo suivantes&#160;:</para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>dojo():</emphasis> paramètre l'environnement Dojo de votre page,
+                incluant les valeurs de configuration dojo, les chemins de modules personnalisés,
+                les appels de chargement des modules requis, les feuilles de styles des thêmes,
+                l'utilisation ou non d'un CDN, et d'autres encore.
+            </para>
+
+        </listitem>
+
+    </itemizedlist>
+
+    <example id="zend.dojo.view.setup">
+        <title>Utilisation des aides de vues Dojo</title>
+
+        <para>
+            Pour utiliser les aides de vues Dojo, vous devrez informer votre objet de vue de
+            leur localisation. Vous pouvez faire ceci en appelant
+            <code>addHelperPath()</code>&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/',
+                     'Zend_Dojo_View_Helper');
+]]></programlisting>
+
+        <para>
+            De manière alternative, vous pouvez utiliser la méthode <code>enableView()</code>
+            de <classname>Zend_Dojo</classname> qui le fait pour vous&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Dojo::enableView($view);
+]]></programlisting>
+
+    </example>
+
+    <xi:include href="Zend_Dojo-View-Dojo.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Dojo-View-Dojo.xml" />
+        </xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Dojo-View-Helpers.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml" />
+        </xi:fallback>
+    </xi:include>
+</sect1>

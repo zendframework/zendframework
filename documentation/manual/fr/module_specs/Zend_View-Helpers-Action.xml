@@ -1,0 +1,32 @@
+<!-- EN-Revision: 14385 -->
+<sect3 id="zend.view.helpers.initial.action">
+    <title>L'aide de vue Action</title>
+
+    <para>L'aide de vue <code>Action</code> permet à des scripts de vue de distribuer une action donnée d'un contrôleur
+    ; le résultat de l'objet de réponse suivant la distribution est alors retourné. Ceux-ci peuvent être employés quand
+    une action particulière peut produire du contenu réutilisable ou du contenu de type "gadget".</para>
+
+    <para>Les actions qui ont comme conséquence un <code>_forward()</code> ou une redirection sont considérées invalide,
+    et retourneront une chaîne vide.</para>
+
+    <para>L'API pour l'aide de vue <code>Action</code> respecte le même schéma que la plupart les composants MVC qui
+    appellent des actions de contrôleur : <code>action($action, $controller, $module = null, array $params =
+    array())</code>. <code>$action</code> et <code>$controller</code> sont exigés ; si aucun module n'est spécifié, le
+    module par défaut est implicite.</para>
+
+    <example id="zend.view.helpers.initial.action.usage">
+        <title>Utilisation de base de l'aide de vue Action</title>
+
+        <para>Par exemple, vous pouvez avoir un <code>CommentController</code> avec une méthode
+        <code>listAction()</code> que vous souhaitez appeler afin de récupérer une liste de commentaires pour la requête
+        courante :</para>
+
+        <programlisting role="php"><![CDATA[
+<div id="sidebar right">
+    <div class="item">
+        <?php echo $this->action('list', 'comment', null, array('count' => 10)); ?>
+    </div>
+</div>
+]]></programlisting>
+    </example>
+</sect3>

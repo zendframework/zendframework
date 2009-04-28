@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mime.mime">
+    <title>Zend_Mime</title>
+
+    <sect2 id="zend.mime.mime.introduction">
+        <title>Introduction</title>
+        <para>
+            <classname>Zend_Mime</classname> is a support class for handling multipart MIME messages. It is used by <link
+            linkend="zend.mail"><classname>Zend_Mail</classname></link> and <link
+            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> and may be used by applications requiring
+            MIME support.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.mime.mime.static">
+    <title>Static Methods and Constants</title>
+    <para>
+        <classname>Zend_Mime</classname> provides a simple set of static helper methods to work with MIME:
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::isPrintable()</classname>: Returns TRUE if the given string contains no unprintable characters,
+                FALSE otherwise.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::encodeBase64()</classname>: Encodes a string into base64 encoding.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Encodes a string with the quoted-printable mechanism.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        <classname>Zend_Mime</classname> defines a set of constants commonly used with MIME Messages:
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>: 'application/octet-stream'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::TYPE_TEXT</classname>: 'text/plain'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::TYPE_HTML</classname>: 'text/html'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::ENCODING_7BIT</classname>: '7bit'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::ENCODING_8BIT</classname>: '8bit'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>: 'quoted-printable'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::ENCODING_BASE64</classname>: 'base64'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::DISPOSITION_ATTACHMENT</classname>: 'attachment'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Mime::DISPOSITION_INLINE</classname>: 'inline'
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    </sect2>
+
+    <sect2 id="zend.mime.mime.instantiation">
+    <title>Instantiating Zend_Mime</title>
+    <para>
+        When Instantiating a <classname>Zend_Mime</classname> Object, a MIME boundary is stored that
+        is used for all subsequent non-static method calls on that object.
+        If the constructor is called with a string parameter, this value
+        is used as a MIME boundary. If not, a random MIME boundary is generated
+        during construction time.
+    </para>
+    <para>
+        A <classname>Zend_Mime</classname> object has the following Methods:
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>boundary()</code>: Returns the MIME boundary string.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>boundaryLine()</code>: Returns the complete MIME boundary line.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>mimeEnd()</code>: Returns the complete MIME end boundary line.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,271 @@
+<sect3 id="zend.controller.actionhelpers.redirector">
+    <title>转向器(Redirector)</title>
+
+    <sect4 id="zend.controller.actionhelper.redirector.introduction">
+        <title>介绍</title>
+
+        <para>
+        转向器<code>(Redirector)</code>助手让你使用一个转向器对象帮助程序重定向到新的URL。与<code>_redirect()</code>方法相比，它具有多项优势。例如能够在转向器对象中预先配置整个站点的行为，或者使用与<code>Zend_Controller_Action::_forward()</code>相似的<code>gotoSimple($action, $controller, $module, $params)</code>接口。
+        </para>
+
+        <para>
+           转向器拥有影响重定向行为的大量方法：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setCode()</code> 设置重定向过程中使用的HTTP响应码。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setExit()</code> 在重定向后强制执行<code>exit()</code>方法。默认已设定。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                   <code>setGotoSimple()</code>设置默认的URL，当没有提供参数给<code>gotoSimple()</code>方法时转向该URL。可以使用类似<code>Zend_Controller_Action::_forward()</code>的API：<code>setGotoSimple($action, $controller = null, $module = null, array $params = array())</code>;
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoRoute()</code>设置基于一个注册路由器的URL。通过传入一个键/值数组和一个路由器名，它将根据路由器的类型和定义来组织URL。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoUrl()</code>设置默认的URL，当没有参数传入<code>gotoUrl()</code>，将使用该URL。接受单个URL字符串。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setPrependBase()</code>在<code>setGotoUrl()</code>、<code>gotoUrl()</code>或者<code>gotoUrlAndExit()</code>指定的URL前面，加入请求对象的基地址(base URL)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setUseAbsoluteUri()</code>强制转向器在重定向时使用绝对的URI。当该选项设定后，将使用<code>$_SERVER['HTTP_HOST']</code>、                 <code>$_SERVER['SERVER_PORT']</code>和                    <code>$_SERVER['HTTPS']</code>以及重定向方法指定的URL，来形成一个完整的URI。该选项目前默认关闭，将来的版本可能会默认开启。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+           此外，转向器中还有大量方法来执行实际的重定向。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                   <code>gotoSimple()</code>使用<code>setGotoSimple()</code>(<code>类似_forward()的API</code>)来构建URL并执行重定向。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoRoute()</code>使用<code>setGotoRoute()</code>(路由组装<code>route-assembly</code>)来构建URL并执行重定向。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoUrl()</code>使用<code>setGotoUrl()</code> URL字符串）来构造URL并执行重定向。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+           最后，你可以在任何时刻使用<code>getRedirectUrl()</code>确定当前的重定向URL。
+        </para>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
+        <title>基础用例</title>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
+            <title>设定选项</title>
+
+            <para>
+               这个例子改变了几个选项，包括设定重定向时使用的HTTP状态码为303，重定向时不默认退出，以及定义了默认的URL供重定向使用。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+
+        // Set the default options for the redirector
+        // Since the object is registered in the helper broker, these
+        // become relevant for all actions from this point forward
+        $this->_redirector->setCode(303)
+                          ->setExit(false)
+                          ->setGotoSimple("this-action",
+                                          "some-controller");
+    }
+
+    public function myAction()
+    {
+        /* do some stuff */
+
+        // Redirect to a previously registered URL, and force an exit
+        // to occur when done:
+        $this->_redirector->redirectAndExit();
+        return; // never reached
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
+            <title>使用默认设定</title>
+
+            <para>
+               这个例子假定使用默认设定，也就意味着任何重定向将导致立即退出。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// ALTERNATIVE EXAMPLE
+class AlternativeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* do some stuff */
+
+        $this->_redirector
+            ->gotoUrl('/my-controller/my-action/param1/test/param2/test2');
+        return; // never reached since default is to goto and exit
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
+            <title>使用<code>goto()</code>的<code>_forward()</code>API</title>
+
+            <para>
+                <code>gotoSimple()</code>'s API 模拟了<code>Zend_Controller_Action::_forward()</code>。主要的不同在于它通过传入的参数构造URL，使用默认路由器的默认格式<code>:module/:controller/:action/*</code>。然后重定向而不是继续动作链循环。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ForwardController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* do some stuff */
+
+        // Redirect to 'my-action' of 'my-controller' in the current
+        // module, using the params param1 => test and param2 => test2
+        $this->_redirector->gotoSimple('my-action',
+                                       'my-controller',
+                                       null,
+                                       array('param1' => 'test',
+                                             'param2' => 'test2'
+                                             )
+                                       );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
+            <title>通过<code>gotoRoute()</code>使用路由组装<code>(route assembly)</code></title>
+
+            <para>
+                下面的例子使用了<link linkend="zend.controller.router">路由器</link>的<code>assemble()</code>方法，基于传入参数的关联数组来创建URL。假定下面的路由已经注册:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'blog/:year/:month/:day/:id',
+    array('controller' => 'archive',
+          'module' => 'blog',
+          'action' => 'view')
+);
+$router->addRoute('blogArchive', $route);
+]]>
+            </programlisting>
+
+            <para>
+               给定一个数组，其中年份为2006，月份为4，日期为24，id为42，据此可以组装URL<code>/blog/2006/4/24/42</code>。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class BlogAdminController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - defined for code completion
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function returnAction()
+    {
+        /* do some stuff */
+
+        // Redirect to blog archive. Builds the following URL:
+        // /blog/2006/4/24/42
+        $this->_redirector->gotoRoute(
+            array('year' => 2006,
+                  'month' => 4,
+                  'day' => 24,
+                  'id' => 42),
+            'blogArchive'
+        );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

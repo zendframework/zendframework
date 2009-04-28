@@ -1,0 +1,468 @@
+<sect1 id="zend.currency.usage">
+
+    <title> 如何使用货币 </title>
+
+    <para>
+        在自己的程序中使用 <code>Zend_Currency</code>，就是创建一个它的实例，不需要任何参数。它将创建一个带有实际地方、并定义了在这个地方使用的货币的 <code>Zend_Currency</code> 的一个实例。
+    </para>
+
+    <example id="zend.currency.usage.example1">
+
+        <title> 从实际地方创建 Zend_Currency 的实例 </title>
+
+        <para>
+            期望通过用户（的输入）或环境，你有 'en_US' 设置作为实际地方，通过使用不带参数创建<code>Zend_Currency</code>的实例从地方 'en_US' 来使用实际货币，这导致带美元实例作为带有'en_US'格式规则的实际货币。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency = new Zend_Currency();
+]]>
+        </programlisting>
+
+
+    </example>
+
+    <para>
+        从 Zend Framework 1.7.0 开始，<code>Zend_Currency</code> 也支持程序范围的地方的用法。你可以简单地如下设置 <code>Zend_Locale</code> 实例到注册表。
+        如果你想多次使用同一地方，用这个符号你不需要记住对每个实例手工设置地方。
+     </para>
+
+    <programlisting role="php"><![CDATA[
+// in your bootstrap file
+$locale = new Zend_Locale('de_AT');
+Zend_Registry::set('Zend_Locale', $locale);
+
+// somewhere in your application
+$currency = new Zend_Currency();
+]]>
+    </programlisting>
+
+        <note>
+            <para>
+                要知道，如果你的系统没有缺省地方，或者如果你系统的地方不能自动检测到， <code>Zend_Currency</code>  将抛出一个异常。如果这样，你应当手动设置地方。
+            </para>
+        </note>
+
+    <para>
+        当然，根据需要，若干参数可以在创建时给出，每个参数都是可选的和被禁止，甚至参数的顺序也可以交换。每个参数的意思描述如下：
+    </para>
+
+    <itemizedlist mark='opencircle'>
+        <listitem>
+            <para>
+                <emphasis role="strong">currency</emphasis>:
+            </para>
+            <para>
+                一个地方可以有多种货币，因此第一个参数 <emphasis role="strong">'currency'</emphasis> 可通过给出短名称或全名称来定义哪个货币应当被使用。 如果某货币不被任何地方认识，那么就抛出一个异常。货币短名总是三个字母并且是大写。众所周知的货币短名有<code>USD</code> 或 <code>EUR</code> 。想知道所有货币请参考 <code>Zend_Currency</code> 的信息方法。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">locale</emphasis>:
+            </para>
+            <para>
+                第三个参数 <emphasis role="strong">'locale'</emphasis>  定义了哪个地方用来格式化货币，给出的地方也将用来获得标准脚本和货币（如果这些参数没有给出时的货币）。
+            </para>
+            <note>
+                <para>
+                    注意 Zend_Currency 只接受包括地区的地方，这意味着所有给定的只包括语言地方将抛出一个异常。例如地方 <emphasis role="strong">en</emphasis> 将抛出异常而地方 <emphasis role="strong">en_US</emphasis>  将返回 <emphasis role="strong">USD</emphasis>  作为货币。
+                </para>
+            </note>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.currency.usage.example2">
+
+        <title> 创建 Zend_Currency 实例的其它例子 </title>
+
+        <programlisting role="php"><![CDATA[
+// expect standard locale 'de_AT'
+
+// creates an instance from 'en_US' using 'USD' which is default
+// currency for 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// creates an instance from the actual locale ('de_AT') using 'EUR' as
+// currency
+$currency = new Zend_Currency();
+
+// creates an instance using 'EUR' as currency, 'en_US' for number
+// formating
+$currency = new Zend_Currency('en_US', 'EUR');
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        如果想使用缺省值，你可以禁止任何参数，在处理货币方面没有副作用，例如这在当你不知道某地区的缺省货币很有用。
+    </para>
+
+    <note>
+        <para>
+            许多国家有多种货币，一种正在使用的和一些古老的。如果 '<emphasis role="strong">currency</emphasis>' 参数被禁止，那么使用当前货币。例如在地区 '<emphasis role="strong">de</emphasis>' 有  '<emphasis role="strong">EUR</emphasis>' 和 '<emphasis role="strong">DEM</emphasis>'...'<emphasis role="strong">EUR</emphasis>' 是当前使用的货币，如果这参数被禁止它将被使用。
+        </para>
+    </note>
+
+    <sect2 id="zend.currency.usage.tocurrency">
+
+        <title> 从货币创建输出 </title>
+
+        <para>
+            可以用方法 <emphasis role="strong">toCurrency()</emphasis> 把存在的数值转换成格式化的货币输出，它带有一个可以被转换的数值，这个数值可以是任何标准化的数字。
+        </para>
+
+        <para>
+            如果有个需要转换的本地化的数字，首先用 <link linkend="zend.locale.number.normalize">Zend_Locale_Format::getNumber()</link> 来标准化，然后用 <code>toCurrency()</code> 创建一个货币输出。
+        </para>
+
+        <para>
+            <code>toCurrency(array $options)</code> 接受带有选项的数组，这个选项可用来临时设置成另外的格式或货币表示，关于选项的细节参见 <link linkend="zend.currency.usage.setformat">Changing the format of a currency</link>。
+        </para>
+
+        <example id="zend.currency.usage.tocurrency.example">
+
+            <title> 为货币创建输出 </title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD' which is the default
+// values for 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints '$ 1,000.00'
+echo $currency->toCurrency(1000);
+
+// prints '$ 1.000,00'
+echo $currency->toCurrency(1000, array('format' => 'de_AT'));
+
+// prints '$ ١٬٠٠٠٫٠٠'
+echo $currency->toCurrency(1000, array('script' => 'Arab'));
+]]>
+            </programlisting>
+
+        </example>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.setformat">
+
+        <title> 修改货币格式 </title>
+
+        <para>
+            用来创建 <code>Zend_Currency</code> 实例的格式当然是标准格式，但有时候也需要为自己的意图需要这个格式。
+        </para>
+
+        <para>
+            货币输出的格式包括下面部分：
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 货币符号，短名或名字 </emphasis>:
+                </para>
+                <para>
+                    或不符号一般显示在货币输出之内，如果需要或重写，它可以被禁止。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 货币位置 </emphasis>:
+                </para>
+                <para>
+                    货币符号的位置一般由地方来自动定义，如果需要，它可以被修改。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Script</emphasis>:
+                </para>
+                <para>
+                    Script 用来显示数字，它的详细用法可以从 <code>Zend_Locale</code> 的文档 <link linkend="zend.locale.appendix.numberscripts.supported"> 被支持的数字 scripts</link>找到。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 数字格式 </emphasis>:
+                </para>
+                <para>
+                    货币的数量 （ 就是钱的数量 ）用在地方( locale )里的格式化规则来格式化，例如在英语中 ',' 用来分离每一千，在德国就用 '.'符号（例如一百万，在英语中就是1,000,000 而在德语中就是1.000.000 好像在德语中容易和小数点混淆 by Jason Qi）。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            如果确实需要修改格式，你可以用 <emphasis role="strong">setFormat()</emphasis> 方法。它带有一个数组，包括所有你向修改的选项。<code>options</code> 数组支持下列设置：
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">position</emphasis>: 定义货币显示位置，从 <link linkend="zend.currency.usage.setformat.constantsposition">this table</link> 可以找到被支持的位置。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">script</emphasis>: 定义哪个 script 被用来显示数字，大部分地方的缺省的 script 是 <emphasis role="strong">'Latn'</emphasis> ，它包括数字 0 到 9 。并且其它的 scripts 如 'Arab'(Arabian) 也可以用。所有被支持的 scipts 可以从 <link linkend="zend.locale.appendix.numberscripts.supported">this table</link> 找到。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">format</emphasis>: 定义哪个地方（locale）用来显示数字，数字格式包括千为分隔符。如果没有指定格式，就使用 <code>Zend_Currency</code> 对象中的地方（ locale ）。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">display</emphasis>: 定义货币中的哪个部分用来显示货币表示，有四中表示法可用，都在 <link linkend="zend.currency.usage.setformat.constantsdescription">this table</link> 中描述。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">precision</emphasis>: 定义用于货币表示的精确位数，它的缺省值是<emphasis role="strong">2</emphasis>。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">name</emphasis>: 定义被显示的货币名称，它重写通过创建 <code>Zend_Currency</code> 产生的任何货币名称。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">currency</emphasis>: 定义被显示的国际缩写，它重写通过创建 <code>Zend_Currency</code> 产生的任何缩写。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">symbol</emphasis>: 定义被显示的货币符号，它重写通过创建 <code>Zend_Currency</code> 产生的任何符号。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <table id="zend.currency.usage.setformat.constantsdescription">
+
+            <title> 选择货币描述的常量 </title>
+
+            <tgroup cols="2" align="left">
+                <thead>
+                    <row>
+                        <entry> 常量 </entry>
+                        <entry> 描述 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>NO_SYMBOL</entry>
+                        <entry> 不显示任何货币表示 </entry>
+                    </row>
+                    <row>
+                        <entry>USE_SYMBOL</entry>
+                        <entry> 显示货币符号 </entry>
+                    </row>
+                    <row>
+                        <entry>USE_SHORTNAME</entry>
+                        <entry> 显示三个字母的国际货币缩写 </entry>
+                    </row>
+                    <row>
+                        <entry>USE_NAME</entry>
+                        <entry> 显示货币全名 </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+
+        </table>
+
+        <table id="zend.currency.usage.setformat.constantsposition">
+
+            <title> 选择货币位置的常量 </title>
+
+            <tgroup cols="2" align="left">
+                <thead>
+                    <row>
+                        <entry> 常量 </entry>
+                        <entry> 描述 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>STANDARD</entry>
+                        <entry> 设置在地方里定义标准位置 </entry>
+                    </row>
+                    <row>
+                        <entry>RIGHT</entry>
+                        <entry> 在数的右面显示货币表示符 </entry>
+                    </row>
+                    <row>
+                        <entry>LEFT</entry>
+                        <entry> 在数值的左面显示货币表示符 </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+
+        </table>
+
+        <example id="zend.currency.usage.setformat.example">
+
+            <title> 修改货币的显示格式 </title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD', 'Latin' and 'en_US' as
+// these are the default values from 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints 'US$ 1,000.00'
+echo $currency->toCurrency(1000);
+
+$currency->setFormat('display' => Zend_Currency::USE_NAME,
+                     'position' => Zend_Currency::RIGHT);
+// prints '1.000,00 US Dollar'
+echo $currency->toCurrency(1000);
+
+$currency->setFormat('name' => 'American Dollar');
+// prints '1.000,00 American Dollar'
+echo $currency->toCurrency(1000);
+]]>
+            </programlisting>
+
+        </example>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.informational">
+
+        <title> Zend_Currency 的信息方法 </title>
+
+        <para>
+            当然，<code>Zend_Currency</code> 也支持从 <code>Zend_Locale</code>  获得任何存在的和许多古老货币的信息。支持的方法是：
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getSymbol()</emphasis>:
+                </para>
+                <para>
+                    返回实际货币或给定货币的已知符号。例如 <emphasis role="strong">$</emphasis>  在 <emphasis role="strong">en_US</emphasis> 地方表示美元。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getShortName()</emphasis>:
+                </para>
+                <para>
+                    返回实际货币或给定货币的缩写。例如 <emphasis role="strong">USD</emphasis> 在 <emphasis role="strong">en_US</emphasis>  地方表示美元。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getName()</emphasis>:
+                </para>
+                <para>
+                    返回实际货币或给定货币的全名。例如 <emphasis role="strong">US Dollar</emphasis>  在 <emphasis role="strong">en_US</emphasis> 地方表示美元。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getRegionList()</emphasis>:
+                </para>
+                <para>
+                    返回实际货币或给定被使用货币的地区列表。因为某种货币可能被用于多个地区，所以返回值总是一个数组。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getCurrencyList()</emphasis>:
+                </para>
+                <para>
+                    返回用于给定地区的已知货币的列表。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            函数 <code>getSymbol()</code>、 <code>getShortName()</code> 和 <code>getName()</code> 带两个可选的参数。如果没有给出参数，期望的数据将从当前设置货币返回。第一个参数是货币的短名，短名总是三个字母，例如 EUR 是欧元，USD 是美元。第二个参数定义从哪个地方（ locale ）读数据。如果没有给出地方，就使用当前使用的地方设置。
+        </para>
+
+        <example id="zend.currency.usage.informational.example">
+
+            <title> 从货币中获取信息 </title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD', 'Latin' and 'en_US'
+// as these are the default values from 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints '$'
+echo $currency->getSymbol();
+
+// prints 'EUR'
+echo $currency->getShortName('EUR');
+
+// prints 'Österreichische Schilling'
+echo $currency->getName('ATS', 'de_AT');
+
+// returns an array with all regions where USD is used
+print_r($currency->getRegionList();
+
+// returns an array with all currencies which were ever used in this
+// region
+print_r($currency->getCurrencyList('de_AT');
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.currency.usage.setlocale">
+
+        <title> 设置新缺省值 </title>
+
+        <para>
+            <code>setLocale</code> 方法允许设置新的地方给 <code>Zend_Currency</code> 。当调用这个函数所有的货币的缺省值就被重写，包括货币名、缩写和符号。
+        </para>
+
+        <example id="zend.currency.usage.setlocale.example">
+
+            <title> 设置新地方 </title>
+
+            <programlisting role="php"><![CDATA[
+// 获得 US 货币
+$currency = new Zend_Currency('en_US');
+print $currency->toCurrency(1000);
+
+// 获得 AT 货币
+$currency->setLocale('de_AT');
+print $currency->toCurrency(1000);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.currency.usage.cache">
+
+        <title> 加速 Zend_Currency </title>
+
+        <para>
+            通过 <code>Zend_Cache</code>  的使用可以加速 <code>Zend_Currency</code> 的工作。通过使用静态方法 <code>Zend_Currency::setCache($cache)</code> ，它接受一个选项，<code>Zend_Cache</code> 适配器，当设置它，Zend_Currency 方法的本地化数据就被缓存。
+            也有个静态方法 <code>Zend_Currency::getCache()</code> 方便你的使用。
+         </para>
+
+        <example id="zend.currency.usage.cache.example">
+
+            <title> 缓存货币 </title>
+
+            <programlisting role="php"><![CDATA[
+// 创建一个缓存对象
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             array('lifetime' => 120,
+                                   'automatic_serialization' => true),
+                             array('cache_dir'
+                                       => dirname(__FILE__) . '/_files/'));
+Zend_Currency::setCache($cache);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>

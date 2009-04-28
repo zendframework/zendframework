@@ -1,0 +1,18 @@
+<sect1 id="zend.mail.boundary">
+    <title>控制MIME分界线</title>
+    <para>
+        在一个包含多个段的邮件里，用于分隔邮件不同段的MIME分界线(MIME boundary)通常是随机生成的。但是在某些情况下，你也许会希望使用特定的MIME分界线。如下面的例子所示，你可以使用<code>setMimeBoundary()</code>方法来做到这一点：
+    </para>
+    <example id="zend.mail.boundary.example-1">
+        <title>更改MIME分界线</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+// build message...
+]]>
+       </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

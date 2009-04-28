@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>Consommer une entrée Atom particulière</title>
+
+    <para>
+        Les éléments Atom <code>&lt;entry&gt;</code> sont aussi valides tout seuls.
+        Généralement l'URL d'une entrée constitue l'URL du flux suivie de
+        <code>/&lt;idEntree&gt;</code>, par exemple <code>http://atom.exemple.com/flux/1</code> si
+        on reprend l'URL que nous avons utilisée ci-dessus.
+    </para>
+
+    <para>
+        Si vous lisez une entrée seule, vous obtiendrez toujours un objet
+        <classname>Zend_Feed_Atom</classname> mais cette classe créera automatiquement un flux
+        "anonyme" pour contenir l'entrée.
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.atom">
+        <title>Lire un flux Atom constitué d'une seule entrée</title>
+
+        <programlisting role="php"><![CDATA[
+$flux = new Zend_Feed_Atom('http://atom.exemple.com/flux/1');
+echo 'Le flux possède : ' . $flux->count() . ' entrée(s).';
+
+$entree = $flux->current();
+]]></programlisting>
+    </example>
+
+    <para>
+        Vous pouvez aussi instancier directement la classe représentant les entrées si vous
+        êtes sûr que vous accédez à un document contenant une seule balise
+        <code>&lt;entry&gt;</code>&#160;:
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
+        <title>Utiliser directement l'objet Zend_Feed_Entry_Atom</title>
+
+        <programlisting role="php"><![CDATA[
+$entree = new Zend_Feed_Entry_Atom('http://atom.exemple.com/flux/1');
+echo $entree->title();
+]]></programlisting>
+    </example>
+</sect1>

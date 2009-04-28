@@ -1,0 +1,1524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.db.select">
+
+    <title>Zend_Db_Select</title>
+
+    <sect2 id="zend.db.select.introduction">
+
+        <title>Einführung</title>
+
+        <para>
+            Das <classname>Zend_Db_Select</classname> Objekt repräsentiert ein SQL <code>SELECT</code> Anfrage Statement.
+            Die Klasse bietet Methoden um einzelne Teile der Anfrage hinzuzufügen. Einzelne Teile
+            der Anfrage können mit Hilfe von PHP Methoden und Datenstrukturen angegeben werden, und
+            die Klasse erzeugt korrekte SQL Syntax. Nachdem die Anfrage formuliert wurde kann sie
+            ausgeführt werden als wäre sie mit einem normalen String geschrieben worden.
+        </para>
+
+        <para>
+            <classname>Zend_Db_Select</classname> bietet folgenden Nutzen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Objekt Orientierte Methoden um SQL Anfragen Stück für Stück zu formulieren.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Datenbank unabhängige Abstraktion einiger Teile der SQL Anfrage.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    In den meisten Fällen automatische Quotierung von Metadaten um Bezeichner zu
+                    unterstützen welche reservierte SQL Wörter und spezielle Zeichen enthalten.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Quotierung von Bezeichnern und Werten um dabei zu helfen das Risiko von SQL
+                    Injektion Attacken zu reduzieren.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Nutzung von <classname>Zend_Db_Select</classname> ist nicht zwingend erforderlich. Für einfache SELECT
+            Anfragen ist es normalerweise einfacher die gesamte SQL Anfrage in einem String zu
+            formulieren und mit Hilfe der Methoden der Adapterklasse, wie <code>fetch()</code> oder
+            <code>fetchAll()</code>, auszuführen. Die Nutzung von <classname>Zend_Db_Select</classname> ist hilfreich wenn
+            eine SELECT Anfrage prozedural oder basierend auf der konditionellen Logik der
+            Anwendung zusammengesetzt wird.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.select.creating">
+
+        <title>Erzeugung eines Select Objekts</title>
+
+        <para>
+            Die Instanz eines <classname>Zend_Db_Select</classname> Objekts kann mit Hilfe der <code>select()</code>
+            Methode des <classname>Zend_Db_Adapter_Abstract</classname> Objekts erzeugt werden.
+        </para>
+
+        <example id="zend.db.select.creating.example-db">
+
+            <title>Beispiel für die Nutzung der select() Methode der Datenbankadapterklasse</title>
+
+            <programlisting role="php"><![CDATA[
+$db = Zend_Db::factory( ...Optionen... );
+$select = $db->select();
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            Ein anderer Weg ein <classname>Zend_Db_Select</classname> Objekt zu erzeugen ist die Nutzung des Konstruktors
+            unter Angabe des Datenbankadapters als Argument.
+        </para>
+
+        <example id="zend.db.select.creating.example-new">
+
+            <title>Beispiel für die Erzeugung eines Select Objektes</title>
+
+            <programlisting role="php"><![CDATA[
+$db = Zend_Db::factory( ...Optionen... );
+$select = new Zend_Db_Select($db);
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.db.select.building">
+
+        <title>Erstellung von Select Anfragen</title>
+
+        <para>
+            Wenn die Anfrage erstellt wird können Bedingungen der Anfrage nacheinander hinzugefügt
+            werden. Es gibt eine separate Methode für das Hinzufügen von verschiedenen Bedingungen
+            zum <classname>Zend_Db_Select</classname> Objekt.
+        </para>
+
+        <example id="zend.db.select.building.example">
+
+            <title>Beispiele für die Nutzung der Methoden zum Hinzufügen von Bedingungen</title>
+
+            <programlisting role="php"><![CDATA[
+// Erzeugung des Zend_Db_Select Objekts
+$select = $db->select();
+
+// Hinzufügen einer FROM Bedingung
+$select->from( ...Angabe von Tabelle und Spalten... )
+
+// Hinzufügen einer WHERE Bedingung
+$select->where( ...Angabe von Suchkriterien... )
+
+// Hinzufügen einer ORDER BY Bedingung
+$select->order( ...Angabe von Sortierkriterien... );
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            Die meisten Methoden des <classname>Zend_Db_Select</classname> Objekts lassen sich auch über das bequeme
+            Fluent Interface nutzen. Fluent Interface bedeutet das jede Methode eine Referenz auf
+            das aufrufende Objekt zurück gibt, daher kann direkt eine andere Methode aufgerufen
+            werden.
+        </para>
+
+        <example id="zend.db.select.building.example-fluent">
+
+            <title>Beispiel für die Nutzung der flüssigen Schnittstelle</title>
+
+            <programlisting role="php"><![CDATA[
+$select = $db->select()
+    ->from( ...Angabe von Tabelle und Spalten... )
+    ->where( ...Angabe von Suchkriterien... )
+    ->order( ...Angabe von Sortierkriterien... );
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            Die Beispiele in diesem Abschnitt zeigen die Nutzung des Fluent Interface, es kann aber
+            auch immer das normale Interface verwendet werden. Häufig ist es nötig das normale
+            Interface zu nutzen, zum Beispiel wenn die Anwendung vor dem Hinzufügen der Bedingung
+            Berechnungen durchführen muss.
+        </para>
+
+        <sect3 id="zend.db.select.building.from">
+
+            <title>Hinzufügen eines FROM Abschnitts</title>
+
+            <para>
+                Um die Tabelle für die Anfrage an zu geben wird die <code>from()</code> Methode
+                verwendet. Der Tabellenname kann als einfacher String übergeben werden.
+                <classname>Zend_Db_Select</classname> wendet Bezeichner Quotierung an, es können also auch spezielle
+                Zeichen verwendet werden.
+            </para>
+
+            <example id="zend.db.select.building.from.example">
+
+                <title>Beispiel für die from() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erstellen dieser Anfrage:
+//   SELECT *
+//   FROM "products"
+
+$select = $db->select()
+             ->from( 'products' );
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Es kann auch der Beziehungsname (auch Aliasname genannt) einer Tabelle angegeben
+                werden. Anstelle eines einfachen Strings muss dann ein assoziatives Array übergeben
+                werden, welches den Beziehungsnamen dem tatsächlichen Tabellennamen zuordnet. In
+                anderen Bedingungen der SQL Anfrage kann dann dieser Beziehungsname verwendet
+                werden. Wenn die Anfrage mehr als eine Tabelle verbindet, generiert <classname>Zend_Db_Select</classname>
+                eindeutige Beziehungsnamen basierend auf den Tabellennamen, wenn keine
+                Beziehungsnamen angegeben wurden.
+            </para>
+
+            <example id="zend.db.select.building.from.example-cname">
+
+                <title>Beispiel für das Angeben eines Beziehungsnamens</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p.*
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from( array('p' => 'products') );
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Einige RDBMS Marken unterstützen einen voran stehenden Schemenbezeichner für eine
+                Tabelle. Der Tabellenname kann mit "<code>schemaName.tabellenName</code>" angegeben
+                werden, <classname>Zend_Db_Select</classname> Quotiert die einzelnen Teile für sich. Der Schemaname kann
+                aber auch separat angegeben werden. Ein Schemaname, der mit dem Tabellennamen
+                angegeben wurde bekommt Vorrang, falls beides angegeben wurde.
+            </para>
+
+            <example id="zend.db.select.building.from.example-schema">
+
+                <title>Beispiel für das Angeben eines Schemanamens</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeut diese Anfrage:
+//   SELECT *
+//   FROM "myschema"."products"
+
+$select = $db->select()
+             ->from( 'myschema.products' );
+
+// oder
+
+$select = $db->select()
+             ->from('products', '*', 'myschema');
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.columns">
+
+            <title>Hinzufügen von Spalten</title>
+
+            <para>
+                Im zweiten Argument der <code>from()</code> Methode kann angegeben werden, welche
+                Spalten der Tabelle ausgelesen werden sollen. Werden keine Spalten angegeben, so
+                gilt der Standardwert <code>*</code>, der SQL Platzhalter für alle Spalten.
+            </para>
+
+            <para>
+                Die Spalten können in einem einfachen Array von Strings oder einem assoziativen
+                Array, in dem Aliasnamen a Spaltennamen zugewiesen werden, angegeben werden. Soll
+                nur eine einzelne Spalte ohne Aliasnamen ausgelesen werden, so kann auch ein
+                einfacher String übergeben werden.
+            </para>
+
+            <para>
+                Wird ein leeres Array übergeben, so werden auch keine Spalten der Tabelle in den
+                Ergebnissatz aufgenommen. Ein Codebeispiel gibt es unter
+                <link linkend="zend.db.select.building.join.example-no-columns">code example</link>
+                bei der <code>join()</code> Methode.
+            </para>
+
+            <para>
+                Der Spaltenname kann mit "<code>beziehungsName.spaltenName</code>" angegeben
+                werden. <classname>Zend_Db_Select</classname> Quotiert die einzelnen Teile für sich. Wird kein
+                Beziehungsname für die Spalte angegeben, dann wird der Beziehungsname der Tabelle
+                der aktuellen <code>from()</code> Methode verwendet.
+            </para>
+
+            <example id="zend.db.select.building.columns.example">
+
+                <title>Beispiele für das Angeben von Spalten</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'product_name'));
+
+// Erzeugt dieselbe Anfrage, Angabe von Beziehungsnamen:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('p.product_id', 'p.product_name'));
+
+// Erzeugt diese Anfrage mit einem Alias für eine Spalte:
+//   SELECT p."product_id" AS prodno, p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('prodno' => 'product_id', 'product_name'));
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.columns-expr">
+
+            <title>Hinzufügen von Spalten mit Expressions</title>
+
+            <para>
+                Spalten in einer SQL Anfrage sind manchmal Expressions, keine einfachen
+                Spaltennamen einer Tabelle. Expressions dürfen keine Beziehungsnamen oder
+                Quotierungen bekommen. Wenn der Spaltenstring runde Klammern enthält erkennt
+                <classname>Zend_Db_Select</classname> dies als eine Expression.
+            </para>
+
+            <para>
+                Es kann auch ein Objekt des Typs <classname>Zend_Db_Expr</classname> erzeugt werden um zu verhindern das
+                ein String wie ein Spaltenname behandelt wird. <classname>Zend_Db_Expr</classname> ist eine Minimalklasse
+                die einen String enthält. <classname>Zend_Db_Select</classname> erkennt Objekte des Typs <classname>Zend_Db_Expr</classname> und
+                konvertiert diese in Strings, nimmt aber keine Änderungen daran vor, wie Quotierung
+                oder Beziehungsnamen.
+            </para>
+
+            <note>
+
+                <para>
+                    Benutzung von <classname>Zend_Db_Expr</classname> für Spaltennamen ist nicht nötig wenn Spaltennamen
+                    Expressions runde Klammern enthalten. <classname>Zend_Db_Select</classname> erkennt diese und
+                    behandelt den String als eine Expression und lässt Quotierung und
+                    Beziehungsnamen aus.
+                </para>
+
+            </note>
+
+            <example id="zend.db.select.building.columns-expr.example">
+
+                <title>Beispiel für das angeben von Spaltennamen, die Expressions enthalten</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", LOWER(product_name)
+//   FROM "products" AS p
+// Eine Expression eingeschlossen von runden Klammern wird zu Zend_Db_Expr.
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'LOWER(product_name)'));
+
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", (p.cost * 1.08) AS cost_plus_tax
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id',
+                          'cost_plus_tax' => '(p.cost * 1.08)'));
+
+// Erzeugt diese Anfrage unter ausdrücklicher Verwendung  von Zend_Db_Expr:
+//   SELECT p."product_id", p.cost * 1.08 AS cost_plus_tax
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id',
+                          'cost_plus_tax' =>
+                              new Zend_Db_Expr('p.cost * 1.08'))
+                    );
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                In den oben stehenden Fällen ändern <classname>Zend_Db_Select</classname> den String nicht mit
+                Beziehungsnamen oder Bezeichnerquotierung. Wenn diese Änderungen notwendig sein
+                sollten um doppeldeutigkeiten auf zu lösen, muss dies manuell am String geändert
+                werden.
+            </para>
+
+            <para>
+                Wenn die Spaltennamen aus SQL Schlüsselwörtern besteht oder spezielle Zeichen
+                enthält sollte die <code>quoteIdentifier()</code> Methode verwendet werden und der
+                Rückgabewert in den String eingefügt werden. Die <code>quoteIdentifier()</code>
+                Methode verwendet SQL Quotierung um Bezeichner abzugrenzen, wodurch klar wird, das
+                es sich um einen Bezeichner für eine Tabelle oder Spalte handelt, und nicht um
+                einem anderen Teil der SQL Syntax.
+            </para>
+
+            <para>
+                Der Code wird Datenbank unabhängiger wenn die <code>quoteIdentifier()</code>
+                Methode anstelle von direkter Eingabe der Quotierungszeichen verwendet wird, da
+                einige RDBMS Marken nicht-Standard Symbole für die Quotierung von Bezeichnern
+                verwenden. Die <code>quoteIdentifier()</code> Methode wählt die passenden
+                Quotierungssymbole für den Adaptertyp aus. Die <code>quoteIdentifier()</code>
+                Methode ersetzt außerdem alle Quotierungszeichen innerhalb des Bezeichners.
+            </para>
+
+            <example id="zend.db.select.building.columns-quoteid.example">
+
+                <title>Beispiel für die Quotierung von Spalten in einer Expression</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt folgende Anfrage und Quotiert dabei einen Spaltennamen
+// "from" in der Expression:
+//   SELECT p."from" + 10 AS origin
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('origin' =>
+                          '(p.' . $db->quoteIdentifier('from') . ' + 10)')
+                   );
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.columns-atomic">
+
+            <title>Spalten zu einer existierenden FROM oder JOIN Tabelle hinzufügen</title>
+
+            <para>
+                Es kann Fälle geben wo es gewünscht ist Spalten zu einer bestehenden FROM oder JOIN
+                Tabelle hinzuzufügen nachdem diese Methoden aufgerufen wurde. Die
+                <code>columns()</code> Methode erlaubt es spezifische Spalten an jedem Punkt
+                hinzuzufügen bevor die Abfrage aufgeführt wird. Die Spalte kann entweder als String
+                oder <classname>Zend_Db_Expr</classname> oder als Array dieser Elemente angegeben werden. Das
+                zweite Argument dieser Methode kann unterdrückt werden, was impliziert das die
+                Spalten zu der FROM Tabelle hinzugefügt werden sollen, andernfall muß ein
+                bestehender Korrelationsname verwendet werden.
+            </para>
+
+            <example id="zend.db.select.building.columns-atomic.example">
+
+                <title>Beispiel für das hinzufügen von Spalten mit der <code>columns()</code>
+                    Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Diese Abfrage bauen:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'), 'product_id')
+             ->columns('product_name');
+
+// Die selbe Abfrage bauen, durch spezifizierung der Korrelationsnamen:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->from(array('p' => 'products'), 'p.product_id')
+             ->columns('product_name', 'p');
+             // Alternativ kann columns('p.product_name') verwendet werden]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.join">
+
+            <title>Hinzufügen einer weiteren Tabelle zu der Anfrage mit JOIN</title>
+
+            <para>
+                Viele nützliche Anfragen benötigen ein <code>JOIN</code> um mehrere Spalten
+                verschiedener Tabellen miteinander zu kombinieren. Tabellen können zu einer
+                <classname>Zend_Db_Select</classname> Anfrage mit der <code>join()</code> Methode hinzugefügt werden. Die
+                Nutzung dieser Methode ist ähnlich der <code>from()</code> Methode, außer das in
+                den meisten Fällen zusätzlich eine Join Bedingung angegeben werden kann.
+            </para>
+
+            <example id="zend.db.select.building.join.example">
+
+                <title>Beispiel für die join() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", p."product_name", l.*
+//   FROM "products" AS p JOIN "line_items" AS l
+//     ON p.product_id = l.product_id
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'product_name'))
+             ->join(array('l' => 'line_items'),
+                    'p.product_id = l.product_id');
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Das zweite Argument der <code>join()</code> Methode ist ein String mit der Join
+                Bedingung. Dies ist eine Exspression die Kriterien angibt, welche Zeilen in der
+                einen Tabelle mit Zeilen einer anderen Tabelle verknüpft werden. Es können
+                Beziehungsnamen in dieser Expression verwendet werden.
+            </para>
+
+            <note>
+
+                <para>
+                    Es wird keine Quotierung auf die Expression für die Join Bedingung angewendet.
+                    Werden Spaltennamen verwendet, welche Quotierung benötigen, so muss
+                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die Join
+                    Bedingung formuliert wird.
+                </para>
+
+            </note>
+
+            <para>
+                Das dritte Argument für <code>join()</code> ist ein Array von Spaltennahmen,
+                entsprechend des Arrays der <code>from()</code> Methode. Der Standard ist ebenfalls
+                "<code>*</code>" und unterstützt Beziehungsnamen, Expressions und <classname>Zend_Db_Expr</classname> in
+                der gleichen Weise wie dem Array von Spaltennamen der <code>from()</code> Methode.
+            </para>
+
+            <para>
+                Wenn keine Spalten einer Tabelle ausgewählt werden soll muss ein leeres Array für
+                die Liste der Spaltennamen übergeben werden. Diese Nutzung funktioniert ebenfalls
+                in der <code>from()</code> Methode, aber normalerweise werden einige Spalten der
+                primären Tabelle in den Anfragen benötigt, während möglicherweise keine Spalten der
+                verbundenen Tabelle ausgewählt werden sollen.
+            </para>
+
+            <example id="zend.db.select.building.join.example-no-columns">
+
+                <title>Beispiel für das Angeben keiner Spalten</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p JOIN "line_items" AS l
+//     ON p.product_id = l.product_id
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'product_name'))
+             ->join(array('l' => 'line_items'),
+                    'p.product_id = l.product_id',
+                    array() ); // leere Liste von Spalten
+]]>
+                </programlisting>
+
+                <para>
+                    Zu beachten ist das leere <code>array()</code> in dem oben stehenden Beispiel,
+                    am Stelle einer Liste von Spalten der verbundenen Tabelle.
+                </para>
+
+            </example>
+
+            <para>
+                SQL kennt verschiedene Typen von Joins. In der unten stehen Liste sind Methoden zu
+                finden, für die verschiedenen Join Typen die <classname>Zend_Db_Select</classname> unterstützt.
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <command>INNER JOIN</command> mit den
+                        <code>join(tabelle, join, [spalten])</code> oder
+                        <code>joinInner(tabelle, join, [spalten])</code> Methoden.
+                    </para>
+
+                    <para>
+                        Dies wird der gebräuchlichste Typ von Join sein. Zeilen jeder Tabelle
+                        werden mit Hilfe der angegebenen Join Bedingung verglichen. Der
+                        Ergebnissatz enthält nur die Zeilen die der Join Bedingungen entsprechen.
+                        Der Ergebnissatz kann leer sein, wenn keine Zeile die Bedingung erfüllt.
+                    </para>
+
+                    <para>
+                        Alle RDBMS Marken unterstützen diesen Join Typ.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <command>LEFT JOIN</command> mit der
+                        <code>joinLeft(tabelle, bedingung, [spalten])</code> Methode.
+                    </para>
+
+                    <para>
+                        Alle Zeilen der links vom Operanden stehenden Tabelle sind enthalten,
+                        passende Zeilen der rechts stehenden Tabelle sind ebenfalls enthalten. Die
+                        Spalten der rechts stehenden Tabelle werden mit NULL aufgefüllt, wenn keine
+                        zu der linken Tabelle passenden Zeilen existieren.
+                    </para>
+
+                    <para>
+                        Alle RDBMS Marken unterstützen diesen Join Typ.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <command>RIGHT JOIN</command> mit der
+                        <code>joinRight(tabelle, bedingung, [spalten])</code> Methode.
+                    </para>
+
+                    <para>
+                        Right Outer Join ist das Gegenstück zu Left Outer Join. Alle Zeilen der
+                        rechts vom Operanden stehenden Tabelle sind enthalten, passende Zeilen der
+                        links stehenden Tabelle sind ebenfalls enthalten. Die Spalten der links
+                        stehenden Tabelle werden mit NULL aufgefüllt, wenn keine zu der rechten
+                        Tabelle passenden Zeilen existieren.
+                    </para>
+
+                    <para>
+                        Einige RDBMS Marken unterstützen diesen Join Typ nicht, aber grundsätzlich
+                        kann jeder Right Join durch einen Left Join mit umgekehrter Sortierung der
+                        Tabellen dargestellt werden.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <command>FULL JOIN</command> mit der
+                        <code>joinFull(tabelle, bedingung, [spalten])</code> Methode.
+                    </para>
+
+                    <para>
+                        Ein Full Outer Join ist wie eine Kombination eines Left Outer Join mit
+                        einem Right Outer Join. Alle Zeilen beider Tabellen sind enthalten, gepaart
+                        miteinander in der gleichen Zeile des Ergebnissatzes wenn die Join
+                        Bedingung erfüllt wird, oder wenn nicht, mit NULL an Stelle der Spalten der
+                        anderen Tabelle.
+                    </para>
+
+                    <para>
+                        Einige RDBMS Marken unterstützen diesen Join Typ nicht.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <command>CROSS JOIN</command> mit der
+                        <code>joinCross(tabelle, [spalten])</code> Methode.
+                    </para>
+
+                    <para>
+                        Ein Cross Join ist ein Kartesisches Produkt. Jede Zeile der ersten Tabelle
+                        wird mit jeder Zeile der zweiten Tabelle verbunden. Daher ist die Anzahl
+                        der Zeilen im Ergebnissatz gleich dem Produkt der Zeilenanzahlen der beiden
+                        Tabellen. Der Ergebnissatz kann mit Bedingungen einer WHERE Bedingung
+                        gefiltert werden. Ein Cross Join ist ähnlich der alten SQL-89 JOIN Syntax.
+                    </para>
+
+                    <para>
+                        Die <code>joinCross()</code> Methode hat keinen Parameter für die Join
+                        Bedingung. Einige RDBMS Marken unterstützen diesen Join Typ nicht.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <command>NATURAL JOIN</command> mit der
+                        <code>joinNatural(tabelle, [spalten])</code> Methode.
+                    </para>
+
+                    <para>
+                        Ein Natural Join vergleicht alle Spalten die in beiden Tabellen mit
+                        gleichem Namen vorkommen. Der Vergleich prüft Gleichheit aller Spalten, ein
+                        Vergleich auf Ungleichheit ist kein Natural Join. Von dieser API werden nur
+                        Natural Inner Joins unterstützt, auch wenn SQL auch Natural Outer Joins
+                        erlaubt.
+                    </para>
+
+                    <para>
+                        Die <code>joinNatural()</code> Methode hat keinen Parameter für die Join
+                        Bedingung.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                Zusätzlich zu diesen Join Methoden können Abfragen durch Verwendung der JoinUsing
+                Methoden vereinfacht werden. Statt das eine komplette Definition des Joins
+                angegeben wird, kann einfach der Spaltenname übergeben werden auf welchem gejoint
+                werden soll und das <classname>Zend_Db_Select</classname> Objekt vervollständigt die Bedingung alleine.
+            </para>
+
+            <example id="zend.db.select.building.joinusing.example">
+
+                <title>Beispiel für die joinUsing() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Abfrage
+//   SELECT *
+//   FROM "table1"
+//   JOIN "table2"
+//   ON "table1".column1 = "table2".column1
+//   WHERE column2 = 'foo'
+
+$select = $db->select()
+             ->from('table1')
+             ->joinUsing('table2', 'column1')
+             ->where('column2 = ?', 'foo');
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Jede der anwendbaren Join Methoden in der <classname>Zend_Db_Select</classname> Komponente hat eine
+                entsprechende 'using' Methode.
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>joinUsing(table, join, [columns])</code> und
+                        <code>joinInnerUsing(table, join, [columns])</code>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>joinLeftUsing(table, join, [columns])</code>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>joinRightUsing(table, join, [columns])</code>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>joinFullUsing(table, join, [columns])</code>
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.where">
+
+            <title>Hinzufügen eines WHERE Abschnitts</title>
+
+            <para>
+                Es können Kriterien die den Ergebnissatz einschränken mit der <code>where()</code>
+                Methode angegeben werden. Das erste Argument dieser Methode ist eine SQL
+                Expression, welche im <code>WHERE</code> Abschnitt der Anfrage steht.
+            </para>
+
+            <example id="zend.db.select.building.where.example">
+
+                <title>Beispiel für die where() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE price > 100.00
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('price > 100.00');]]>
+                </programlisting>
+
+            </example>
+
+            <note>
+
+                <para>
+                    Auf Expressions die an <code>where()</code> oder <code>orWhere()</code>
+                    Methoden übergeben werden, wird keine Quotierung angewendet. Werden
+                    Spaltennamen verwendet die Quotiert werden müssen, so muss
+                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die
+                    Bedingung formuliert wird.
+                </para>
+
+            </note>
+
+            <para>
+                Das zweite Argument der <code>where()</code> Methode ist optional. Es ist ein Wert
+                der in die Expression eingesetzt wird. <classname>Zend_Db_Select</classname> Quotiert den Wert und ersetzt
+                ihn für ein Fragezeichen ("<code>?</code>") in der Expression.
+            </para>
+
+            <para>
+                Wenn in eine Expression mehr als eine Variable eingesetzt werden soll muss der
+                String manuell formatiert werden und die Variablen müssen von Hand quotiert und
+                eingesetzt werden.
+            </para>
+
+            <example id="zend.db.select.building.where.example-param">
+
+                <title>Beispiel für einen Parameter in der where() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (price > 100.00)
+
+$minimumPrice = 100;
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('price > ?', $minimumPrice);
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Die <code>where()</code> Methode kann mehrere Male in dem selben <classname>Zend_Db_Select</classname>
+                Objekt aufgerufen werden. Die daraus folgenden Anfrage kombiniert die
+                unterschiedlichen Ausdrücke unter Benutzung von <code>AND</code> zwischen ihnen.
+            </para>
+
+            <example id="zend.db.select.building.where.example-and">
+
+                <title>Beispiel für mehrfach Aufruf der where() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (price > 100.00)
+//     AND (price < 500.00)
+
+$minimumPrice = 100;
+$maximumPrice = 500;
+
+$select = $db->select()
+            ->from('products',
+                   array('product_id', 'product_name', 'price'))
+            ->where('price > ?', $minimumPrice)
+            ->where('price < ?', $maximumPrice);
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Wenn mehrere Ausdrücke mit <code>OR</code> verknüpft werden sollen kann die
+                <code>orWhere()</code> Methode verwendet werden. Sie wird genauso benutzt wie
+                die <code>where()</code> Methode, außer das dem angegebene Ausdruck ein
+                <code>OR</code> vorangestellt wird, anstelle eines <code>AND</code>.
+            </para>
+
+            <example id="zend.db.select.building.where.example-or">
+
+                <title>Beispiel für die orWhere() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (price < 100.00)
+//     OR (price > 500.00)
+
+$minimumPrice = 100;
+$maximumPrice = 500;
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('price < ?', $minimumPrice)
+             ->orWhere('price > ?', $maximumPrice);
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                <classname>Zend_Db_Select</classname> klammert Expressions automatisch mit runden Klammern ein wenn sie
+                mit der <code>where()</code> oder <code>orWhere()</code> Methode angegeben wurden.
+                Dies hilft sicher zu stellen dass das voranstellen von Boolean Operatoren keine
+                unerwarteten Ergebnisse nach sich zieht.
+            </para>
+
+            <example id="zend.db.select.building.where.example-parens">
+
+                <title>Beispiel für das einklammern von Boolean Expressions</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (price < 100.00 OR price > 500.00)
+//     AND (product_name = 'Apple')
+
+$minimumPrice = 100;
+$maximumPrice = 500;
+$prod = 'Apple';
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where("price < $minimumPrice OR price > $maximumPrice")
+             ->where('product_name = ?', $prod);
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                In dem oben stehenden Beispiel währen die Ergebnisse ohne den Klammern ziemlich
+                anders, weil <code>AND</code> eine höhere Priorität als <code>OR</code> hat.
+                <classname>Zend_Db_Select</classname> erzeugt runde Klammern wodurch jede Expression von aufeinander
+                folgenden Aufrufen der <code>where()</code> Methode fester binden als das
+                <code>AND</code> welches die Expressions kombiniert.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.group">
+
+            <title>Hinzufügen eines GROUP BY Abschnitts</title>
+
+            <para>
+                In SQL ermöglicht der <code>GROUP BY</code> Abschnitt die Zeilenzahl des
+                Ergebnissatzes auf eine Zeile pro eindeutigem Wert der Spalte(n), welche in dem
+                <code>GROUP BY</code> Abschnitt benannt sind, einzuschränken.
+            </para>
+
+            <para>
+                In <classname>Zend_Db_Select</classname> können diese Spalte(n) mit der <code>group()</code> Methode
+                angegeben werden. Das Argument der Methode ist ein Spaltenname oder ein Array von
+                Spaltennamen, welche im <code>GROUP BY</code> Abschnitt stehen sollen.
+            </para>
+
+            <example id="zend.db.select.building.group.example">
+
+                <title>Beispiel für die group() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", COUNT(*) AS line_items_per_product
+//   FROM "products" AS p JOIN "line_items" AS l
+//     ON p.product_id = l.product_id
+//   GROUP BY p.product_id
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id'))
+             ->join(array('l' => 'line_items'),
+                    'p.product_id = l.product_id',
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id');
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                Wie in dem Array von Spaltennamen der <code>from()</code> Methode, so können auch
+                hier Beziehungsnamen in den Strings der Spaltennamen verwendet werden, und der
+                Spaltenname wird als Bezeichner Quotiert, wenn er nicht in runden Klammern steht
+                oder ein Objekt des Typs <classname>Zend_Db_Expr</classname> ist.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.having">
+
+            <title>Hinzufügen eines HAVING Abschnittes</title>
+
+            <para>
+                In SQL fügt der <code>HAVING</code> Abschnitt eine Beschränkungsbedingung für
+                Gruppen von Zeilen ein. Dies ist ähnlich der Einschränkungsbedingungen auf Zeilen,
+                des <code>WHERE</code> Abschnittes. Die beiden Abschnitte unterscheiden sich
+                jedoch, denn die <code>WHERE</code> Bedingungen werden abgewendet bevor Gruppen
+                definiert wurden. Im Gegensatz werden <code>HAVING</code> Bedingungen erst
+                angewendet nach dem Gruppen definiert wurden.
+            </para>
+
+            <para>
+                In <classname>Zend_Db_Select</classname> können Bedingungen für die Einschränkung von Gruppen mit der
+                <code>having()</code> Methode angegeben werden. Die Nutzung ist ähnlich wie die der
+                <code>where()</code> Methode. Das erste Argument ist ein String, welcher eine SQL
+                Expression enthält. Das zweite Argument ist optional und wird verwendet um einen
+                positionierten Parameter Platzhalter in der SQL Expression zu ersetzen. Expressions
+                die durch mehrfaches Aufrufen der <code>having()</code> Methode erzeugt wurden
+                werden mit dem Boolean <code>AND</code> Operator verknüpft, oder mit dem
+                <code>OR</code> Operator wenn die <code>orHaving()</code> Methode verwendet wird.
+            </para>
+
+            <example id="zend.db.select.building.having.example">
+
+                <title>Beispiel für die having() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", COUNT(*) AS line_items_per_product
+//   FROM "products" AS p JOIN "line_items" AS l
+//     ON p.product_id = l.product_id
+//   GROUP BY p.product_id
+//   HAVING line_items_per_product > 10
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id'))
+             ->join(array('l' => 'line_items'),
+                    'p.product_id = l.product_id',
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id')
+             ->having('line_items_per_product > 10');
+]]>
+                </programlisting>
+
+            </example>
+
+            <note>
+
+                <para>
+                    Es wird keine Quotierung bei den Expressions welche an die
+                    <code>having()</code> oder <code>orHaving()</code> Methoden übergeben werden.
+                    Werden Spaltennamen verwendet die Quotiert werden müssen, so muss
+                    <code>quoteIdentifier()</code> verwendet werden wenn der String für die
+                    Bedingung formuliert wird.
+                </para>
+
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.order">
+
+            <title>Hinzufügen eines ORDER BY Abschnitts</title>
+
+            <para>
+                In SQL gibt der <code>ORDER BY</code> Abschnitt eine oder mehrere Spalten oder
+                Expressions an, wonach ein Ergebnissatz sortiert wird. Wenn mehrere Spalten
+                angegeben sind, werden die sekundären Spalten verwendet um "ties" aufzulösen; die
+                Sortierung wird von sekundären Spalten bestimmt, wenn vorhergehende Spalten
+                identische Werte enthalten. Die standard Sortierung ist vom kleinsten zum größten
+                Wert. Dieses Verhalten kann umgekehrt werden, wenn das Schlüsselwort
+                <code>DESC</code> nach der Spalte angegeben wird.
+            </para>
+
+            <para>
+                In <classname>Zend_Db_Select</classname> kann die <code>order()</code> Methode verwendet werden um
+                Spalten, oder Arrays von Spalten, anzugeben, nach denen sortiert werden soll. Jedes
+                Element des Arrays ist ein String, welcher die Spalte benennt. Optional kann auf
+                den Namen eines der Schlüsselwörter <code>ASC</code> <code>DESC</code> folgen,
+                abgetrennt durch ein Leerzeichen.
+            </para>
+
+            <para>
+                Wie in den <code>from()</code> und <code>group()</code> Methoden, werden Spalten
+                als Bezeichner Quotiert, wenn sie nicht von runden Klammern eingeschlossen oder vom
+                Objekttyp <classname>Zend_Db_Expr</classname> sind.
+            </para>
+
+            <example id="zend.db.select.building.order.example">
+
+                <title>Beispiel für die order() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", COUNT(*) AS line_items_per_product
+//   FROM "products" AS p JOIN "line_items" AS l
+//     ON p.product_id = l.product_id
+//   GROUP BY p.product_id
+//   ORDER BY "line_items_per_product" DESC, "product_id"
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id'))
+             ->join(array('l' => 'line_items'),
+                    'p.product_id = l.product_id',
+                    array('line_items_per_product' => 'COUNT(*)'))
+             ->group('p.product_id')
+             ->order(array('line_items_per_product DESC',
+                           'product_id'));
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.limit">
+
+            <title>Hinzufügen eines LIMIT Abschnitts</title>
+
+            <para>
+                Einige RDBMS Marken erweitern SQL mit einem Anfrage Abschnitt, bekannt als
+                <code>LIMIT</code> Abschnitt. Dieser Abschnitt begrenzt die Anzahl der Zeilen in
+                einem Ergebnissatz auf die angegebene Höchstanzahl. Es kann ebenfalls angegeben
+                werden, dass eine Anzahl von Zeilen ausgelassen werden soll. Dieses Feature erlaubt
+                es eine Untermenge des Ergebnissatzes zu holen, zum Beispiel wenn Anfrage
+                Ergebnisse auf aufeinander folgenden Seiten angezeigt werden sollen.
+            </para>
+
+            <para>
+                In <classname>Zend_Db_Select</classname> kann die <code>limit()</code> Methode verwendet werden um die
+                Anzahl von Zeilen und die Anzahl der auszulassenden Spalten anzugeben. Das erste
+                Argument ist die gewünschte Anzahl von Zeilen. Das zweite Argument gibt die Anzahl
+                der auszulassenden Zeilen an.
+            </para>
+
+            <example id="zend.db.select.building.limit.example">
+
+                <title>Beispiel für die limit() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+//   LIMIT 10, 20
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'product_name'))
+             ->limit(10, 20);
+]]>
+                </programlisting>
+
+            </example>
+
+            <note>
+
+                <para>
+                    Die <code>LIMIT</code> Syntax wird nicht von allen RDBMS Marken unterstützt.
+                    Einige RDBMS benötigen eine unterschiedliche Syntax für eine ähnliche
+                    Funktionalität. Jede <classname>Zend_Db_Adapter_Abstract</classname> Klasse enthält eine Methode um
+                    für das RDBMS passende Syntax zu erzeugen.
+                </para>
+
+            </note>
+
+            <para>
+                Die <code>limitPage()</code> Methode kann als alternativer Weg verwendet werden um
+                Zeilenanzahl und Offset zu spezifizieren. Diese Methode erlaubt den Ergebnissatz
+                auf einen Subset, aus einer Serie von Subsets mit Reihen einer fixe Länge, auf dem
+                totalen Ergebnissatz der Abfrage, zu limitieren. In anderen Worten, spezifiziert
+                man die Länge einer Seite ("page") von Ergebnissen, und die ordinale Anzahl an
+                Ergebnissen einer einzelnen Seite, die als von der Abfrage zurück gegeben werden
+                sollen. Die Seitennummer ist das erste Argument der <code>limitPage()</code>
+                Methode, nud die Seitenlänge ist das zweite Argument. Beide Argumente werden
+                benötigt; sie haben keinen Standardwert.
+            </para>
+
+            <example id="zend.db.select.building.limit.example2">
+
+                <title>Beispiel der limitPage() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erstelle diese Abfrage:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+//   LIMIT 10, 20
+
+$select = $db->select()
+             ->from(array('p' => 'products'),
+                    array('product_id', 'product_name'))
+             ->limitPage(2, 10);
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.distinct">
+
+            <title>Hinzufügen des DISTINCT Anfragewandlers</title>
+
+            <para>
+                Die <code>distinct()</code> Methode ermöglicht es <code>DISTINCT</code>
+                Schlüsselworte in die SQL Syntax einzufügen.
+            </para>
+
+            <example id="zend.db.select.building.distinct.example">
+
+                <title>Beispiel für die distinct() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT DISTINCT p."product_name"
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->distinct()
+             ->from(array('p' => 'products'), 'product_name');
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.building.for-update">
+
+            <title>Hinzufügen des FOR UPDATE Anfragewandlers</title>
+
+            <para>
+                Die <code>forUpdate()</code> Methode ermöglicht es <code>FOR UPDATE</code>
+                Schlüsselworte in die SQL Syntax einzufügen.
+            </para>
+
+            <example id="zend.db.select.building.for-update.example">
+
+                <title>Beispiel der forUpdate() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT FOR UPDATE p.*
+//   FROM "products" AS p
+
+$select = $db->select()
+             ->forUpdate()
+             ->from(array('p' => 'products'));
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.select.execute">
+
+        <title>Ausführen von SELECT Anfrage</title>
+
+        <para>
+            Dieser Abschnitt beschreibt wie Anfragen ausgeführt werden, die durch ein
+            <classname>Zend_Db_Select</classname> Objekt repräsentiert werden.
+        </para>
+
+        <sect3 id="zend.db.select.execute.query-adapter">
+
+            <title>Ausführen von Select Anfragen aus dem Db Adapter</title>
+
+            <para>
+                Die Anfrage, die durch das <classname>Zend_Db_Select</classname> Objekt repräsentiert wird kann ausgeführt
+                werden, indem sie als erstes Argument an die <code>query()</code> Methode des
+                <classname>Zend_Db_Adapter_Abstract</classname> Objekts übergeben wird. Dabei wird das <classname>Zend_Db_Select</classname>
+                anstelle eines Strings verwendet.
+            </para>
+
+            <para>
+                Die <code>query()</code> Methode gibt ein Objekt vom Typ <classname>Zend_Db_Statement</classname> oder
+                PDOStatement zurück, je nachdem welcher Adaptertyp verwendet wird.
+            </para>
+
+            <example id="zend.db.select.execute.query-adapter.example">
+
+                <title>Beispiel für die Nutzung der query() Methode des Db Adapters</title>
+
+                <programlisting role="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
+
+$stmt = $db->query($select);
+$result = $stmt->fetchAll();
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.execute.query-select">
+
+            <title>Ausführen von Select Anfragen mit dem objekt</title>
+
+            <para>
+                Als Alternative zur Nutzung der <code>query()</code> Methode des Adapterobjekts
+                kann auch die <code>query()</code> Methode des <classname>Zend_Db_Select</classname> Objekts verwendet
+                werden. Beide Methoden geben ein Objekt vom Typ <classname>Zend_Db_Statement</classname> oder PDOStatement
+                zurück, je nachdem welcher Adaptertyp verwendet wird.
+            </para>
+
+            <example id="zend.db.select.execute.query-select.example">
+
+                <title>Beispiel für die Nutzung der query() Methode des Select Objekts</title>
+
+                <programlisting role="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
+
+$stmt = $select->query();
+$result = $stmt->fetchAll();
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.execute.tostring">
+
+            <title>Konvertieren eines Select Objekts in einen SQL String</title>
+
+            <para>
+                Wenn Zugriff zu auf eine String Repräsentante der SQL Anfrage, entsprechend dem
+                <classname>Zend_Db_Select</classname>, benötigt wird, kann die <code>__toString()</code> Methode verwendet
+                werden.
+            </para>
+
+            <example id="zend.db.select.execute.tostring.example">
+
+                <title>Beispiel für die __toString() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+$select = $db->select()
+             ->from('products');
+
+$sql = $select->__toString();
+echo "$sql\n";
+
+// Ausgabe ist dieser String:
+//   SELECT * FROM "products"
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.select.other">
+
+        <title>Andere Methoden</title>
+
+        <para>
+            Dieser Abschnitt beschreibt andere Methoden der <classname>Zend_Db_Select</classname> Klasse, welche bisher
+            nicht beschrieben wurden: <code>getPart()</code> und <code>reset()</code>.
+        </para>
+
+        <sect3 id="zend.db.select.other.get-part">
+
+            <title>Abfragen von Teilen des Select Objekts</title>
+
+            <para>
+                Die <code>getPart()</code> Methode gibt eine Repräsentante eines Teils der SQL
+                Anfrage zurück. Zum Beispiel kann diese Methode verwendet werden um, ein Array von
+                Expressions des <code>WHERE</code> Abschnitts, ein Array von Spalten (oder Spalten
+                Expressions) von <code>SELECT</code> oder die Werte der Spaltenzahl und
+                Auslassungen des <code>LIMIT</code> Abschnitts, zu erhalten.
+            </para>
+
+            <para>
+                Die Rückgabe ist kein String der ein Fragment der SQL Syntax enthält. Der
+                Rückgabewert ist eine interne Repräsentante, was typischerweise eine Arraystruktur
+                ist, welche Werte und Expressions enthält. Jeder Teil der Anfrage hat eine
+                unterschiedliche Struktur.
+            </para>
+
+            <para>
+                Das einzige Argument der <code>getPart()</code> Methode ist ein String der den
+                zurück zu gebenden Teil der Anfrage bezeichnet. Zum Beispiel bezeichnet der String
+                <code>'from'</code> den Teil des Select Objekts, welcher Informationen über den
+                <code>FROM</code> Abschnitt, einschließlich verbundener Tabellen enthält.
+            </para>
+
+            <para>
+                Die <classname>Zend_Db_Select</classname> Klasse definiert Konstanten die für Teile der SQL Anfrage
+                verwendet werden können. Es können die Konstantendefinitionen oder die literalen
+                Strings verwendet werden.
+            </para>
+
+            <table id="zend.db.select.other.get-part.table">
+
+                <title>Konstanten die von getPart() und reset() verwendet werden</title>
+
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Konstante</entry>
+                            <entry>String Wert</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><classname>Zend_Db_Select::DISTINCT</classname></entry>
+                            <entry><code>'distinct'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::FOR_UPDATE</classname></entry>
+                            <entry><code>'forupdate'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::COLUMNS</classname></entry>
+                            <entry><code>'columns'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::FROM</classname></entry>
+                            <entry><code>'from'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::WHERE</classname></entry>
+                            <entry><code>'where'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::GROUP</classname></entry>
+                            <entry><code>'group'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::HAVING</classname></entry>
+                            <entry><code>'having'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::ORDER</classname></entry>
+                            <entry><code>'order'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::LIMIT_COUNT</classname></entry>
+                            <entry><code>'limitcount'</code></entry>
+                        </row>
+
+                        <row>
+                            <entry><classname>Zend_Db_Select::LIMIT_OFFSET</classname></entry>
+                            <entry><code>'limitoffset'</code></entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+            <example id="zend.db.select.other.get-part.example">
+
+                <title>Beispiel der getPart() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+$select = $db->select()
+             ->from('products')
+             ->order('product_id');
+
+// Ein literaler String kann verwendet werden um den Abschnitt zu definieren
+$orderData = $select->getPart( 'order' );
+
+// Eine Konstante kann verwendet werden um den selben Abschnitt zu definieren
+$orderData = $select->getPart( Zend_Db_Select::ORDER );
+
+// Der zurückgegebene Wert kann eine Array Struktur sein, kein String.
+// Jeder Abschnitt hat eine unterschiedliche Struktur.
+print_r( $orderData );
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.select.other.reset">
+
+            <title>Zurücksetzen von Teilen des Select Objekts</title>
+
+            <para>
+                Die <code>reset()</code> Methode ermöglicht es einen angegebenen Teil der SQL
+                Anfrage zu löschen oder, wenn der Parameter ausgelassen ist, alle Teile zu löschen.
+            </para>
+
+            <para>
+                Das einzige Argument ist optional. Es kann der Teil der Anfrage angegeben werden,
+                der gelöscht werden soll, unter Nutzung des gleichen Strings wie er als Argument
+                der <code>getPart()</code> Methode verwendet wird. Der angegebene Teil wird auf ein
+                Standardwert zurück gesetzt.
+            </para>
+
+            <para>
+                Wenn der Parameter ausgelassen wird, setzt <code>reset()</code> alle geänderten
+                Teile auf einen Standardwert zurück. Dadurch ist das <classname>Zend_Db_Select</classname> Objekt
+                gleichwertig mit einem neuen Objekt, wie wenn es gerade Instanziiert wurde.
+            </para>
+
+            <example id="zend.db.select.other.reset.example">
+
+                <title>Beispiel der reset() Methode</title>
+
+                <programlisting role="php"><![CDATA[
+// Erzeugt diese Anfrage:
+//   SELECT p.*
+//   FROM "products" AS p
+//   ORDER BY "product_name"
+
+$select = $db->select()
+             ->from(array('p' => 'products')
+             ->order('product_name');
+
+// Geänderte Anforderungen, stattdessen sortiert nach einer anderen Spalte:
+//   SELECT p.*
+//   FROM "products" AS p
+//   ORDER BY "product_id"
+
+// Lösche einen Abschnitt damit er neu defniert werden kann
+$select->reset( Zend_Db_Select::ORDER );
+
+// und definiere eine andere Spalte
+$select->order('product_id');
+
+// Lösche alle Abschnitte von der Abfrage
+$select->reset();
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

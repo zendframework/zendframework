@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.Db">
+    <title>Db_RecordExists und Db_NoRecordExists</title>
+
+    <para>
+        <classname>Zend_Validate_Db_RecordExists</classname> und <classname>Zend_Validate_Db_NoRecordExists</classname>
+        bieten die Möglichkeit zu testen ob ein Eintrag in einer angegebenen Tabelle einer
+        Datenbank, mit einem gegebenen Wert, existiert.
+    </para>
+
+    <sect3 id="zend.validate.db.basic-usage">
+        <title>Grundsätzliche Verwendung</title>
+
+        <para>
+            Ein Beispiel der rundsätzlichen Verwendung der Validatoren:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Prüft ob die Email Adresse in der Datenbank existiert
+$validator = new Zend_Validate_Db_RecordExists('users', 'emailaddress');
+if ($validator->isValid($emailaddress)) {
+    // Die Email Adresse scheint gültig zu sein
+} else {
+    // Die Email Adresse ist ungültig; gib die Gründe an
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            Das oben stehende testet ob eine gegebene Email Adresse in der Datenbanktabelle
+            vorhanden ist. Wenn kein Eintrag gefunden wird der den Wert von
+            <code>$emailaddress</code> in der spezifizierten Spalte hat, wird eine
+            Fehlermeldung angezeigt.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Prüft ob der Benutzername in der Datenbank existiert
+$validator = new Zend_Validate_Db_NoRecordExists('users', 'username');
+if ($validator->isValid($username)) {
+    // Der Benutzername scheint gültig zu sein
+} else {
+    // Der Benutzername ist ungültig; gib die Gründe an
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            Das oben stehende testet ob ein angegebener Benutzername nicht in der Datenbanktabelle
+            vorhanden ist. Wenn ein Eintrag gefunden wird, der den der von <code>$username</code>
+            in der spezifizierten Spalte enthält, dann wird eine Fehlermeldung angezeigt.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.db.excluding-records">
+        <title>Ausnehmen von Einträgen</title>
+
+        <para>
+            <classname>Zend_Validate_Db_RecordExists</classname> und
+            <classname>Zend_Validate_Db_NoRecordExists</classname> bieten auch die Möglichkeit die Datenbank
+            zu testen, wobei Teile der Tabelle hiervon ausgenommen werden, entweder indem eine
+            where Klausel als String angegeben wird, oder ein Array mit den Schlüsseln "field" und
+            "value".
+        </para>
+
+        <para>
+            Wenn ein Array für die Ausnahmeklausel angegeben wird, dann wird der <code>!=</code>
+            Operator verwenden. Damit kann der Rest einer Tabelle auf einen Wert geprüft werden
+            bevor ein Eintrag geändert wird (zum Beispiel in einem Formular für ein
+            Benutzerprofil).
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Prüft ob kein anderer Benutzer diesen Benutzernamen hat
+$user_id   = $user->getId();
+$validator = new Zend_Validate_Db_NoRecordExists(
+    'users',
+    'username',
+    array(
+        'field' => 'id',
+        'value' => $user_id
+    )
+);
+
+if ($validator->isValid($username)) {
+    // Der Benutzername scheint gültig zu sein
+} else {
+    // Der Benutzername ist ungültig; zeige den Grund
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel prüft die Tabelle um sicherzustellen das keine anderen Einträge
+            existieren bei denen <code>id = $user_id</code> als Wert $username enthalten.
+        </para>
+
+        <para>
+            Man kann auch einen String an die Ausnahmeklausel angeben damit man einen anderen
+            Operator als <code>!=</code> verwenden kann. Das kann nützlich sein um bei geteilten
+            Schlüsseln zu testen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$post_id   = $post->getId();
+$clause    = $db->quoteInto('post_id = ?', $category_id);
+$validator = new Zend_Validate_Db_RecordExists(
+    'posts_categories',
+    'post_id',
+    $clause
+);
+
+if ($validator->isValid($username)) {
+    // Der Benutzername scheint gültig zu sein
+} else {
+    // Der Benutzername ist ungültig; die Gründe ausgeben
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel prüft die Tabelle <code>posts_categories</code> und stellt sicher
+            das ein Eintrag der <code>post_id</code> einen Wert hat der <code>$category_id</code>
+            entspricht.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.db.database-adapters">
+        <title>Datenbank Adapter</title>
+
+        <para>
+            Man kann auch einen Adapter, als vierten Parameter, spezifizieren wenn man die Prüfung
+            instanziiert. Das erlaubt es mit Anwendungen zu arbeiten die mehrere Datenbankadapter
+            verwenden, oder wo kein Standardadapter gesetzt wird. Als Beispiel:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
+]]></programlisting>
+    </sect3>
+</sect2>

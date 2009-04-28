@@ -1,0 +1,745 @@
+<sect1 id="zend.form.standardElements">
+    <title>Elementos Enviados en el Formulario Estandard de Zend Framework</title>
+
+    <para>
+        Zend Framework viene con clases de elementos concretos cubriendo la 
+        mayoría de los elementos de los formularios HTML. La mayoría simplemente 
+        especifica una vista de ayuda para usar cuando se decora el elemento, 
+        pero varios ofrecen funcionalidad adicional. La siguiente es una lista
+        de todas las clases, así como también una descripción de la 
+        funcionalidad que ofrecen.
+    </para>
+
+    <sect2 id="zend.form.standardElements.button">
+        <title>Zend_Form_Element_Button</title>
+
+        <para>
+            Usada para crear elementos HTML de tipo button,
+            <code>Zend_Form_Element_Button</code> extiende <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>,
+            derivandi sy funcionalidad personalizada. It specifies the 'formButton'
+            view helper for decoration.
+        </para>
+
+        <para>
+            Like the submit element, it uses the element's label as the element
+            value for display purposes; in other words, to set the text of the
+            button, set the value of the element. The label will be translated
+            if a translation adapter is present.
+        </para>
+
+        <para>
+            Because the label is used as part of the element, the button element
+            uses only the <link linkend="zend.form.standardDecorators.viewHelper">ViewHelper</link>
+            and <link linkend="zend.form.standardDecorators.dtDdWrapper">DtDdWrapper</link>
+            decorators.
+        </para>
+
+        <para>
+            Después de llenar o validar un formulario, se puede verificar si el
+            botón dado fue clickeado usando el método <code>isChecked()</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.captcha">
+        <title>Zend_Form_Element_Captcha</title>
+
+        <para>
+            Los CAPTCHAs son usados para prevenir el envio automático de 
+            formularios por los robots y otros procesos automatizados.
+        </para>
+
+        <para>
+            The Captcha form element allows you to specify which 
+            <link linkend="zend.captcha.adapters">Zend_Captcha adapter</link> you
+            wish to utilize as a form captcha. It then sets this adapter as a
+            validator to the object, and uses a Captcha decorator for rendering
+            (which proxies to the captcha adapter).
+        </para>
+
+        <para>
+            Adapters may be any adapters in <code>Zend_Captcha</code>, as well
+            as any custom adapters you may have defined elsewhere. To allow
+            this, you may pass an additional plugin loader type key, 'CAPTCHA'
+            or 'captcha', when specifying a plugin loader prefix path:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
+]]>
+        </programlisting>
+
+        <para>
+            Los Captcha entonces pueden ser cargados usando el método 
+            <code>setCaptcha()</code>, el cual puede tomar una instancia 
+            cualquiera de captcha instance, o el nombre corto del adaptador 
+            captcha:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// instancia concreta:
+$element->setCaptcha(new Zend_Captcha_Figlet());
+
+// Usando nombre corto:
+$element->setCaptcha('Dumb');
+]]>
+        </programlisting>
+
+        <para>
+            Si desea cargar sus elementos configuración, especifique la clave
+            'captcha' con un array conteniendo la clave 'captcha', o            
+            ambas claves 'captcha' y 'captchaOptions':
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Usindo la clave captcha simple:
+$element = new Zend_Form_Element_Captcha('foo', array(
+    'label' => "Please verify you're a human",
+    'captcha' => array(
+        'captcha' => 'Figlet',
+        'wordLen' => 6,
+        'timeout' => 300,
+    ),
+));
+
+// Usindo captcha y captchaOptions:
+$element = new Zend_Form_Element_Captcha('foo', array(
+    'label' => "Please verify you're a human"
+    'captcha' => 'Figlet',
+    'captchaOptions' => array(
+        'captcha' => 'Figlet',
+        'wordLen' => 6,
+        'timeout' => 300,
+    ),
+));
+]]>
+        </programlisting>
+
+        <para>
+            El decorador usado es determinado consultando el adaptador captcha.
+            Por defecto, es usado el 
+            <link linkend="zend.form.standardDecorators.captcha">Captcha
+            decorator</link>, pero un adaptadpr puede especificar uno                
+            diferente vía su método<code>getDecorator()</code>.
+        </para>
+
+        <para>
+            Como ha notado, el adaptador captcha actúa él mismo como un validador
+            para el elemento. Adicionalmente, el validador NotEmpty validator 
+            no es usado y el elemento es marcado como requerido. Enla mayoría de
+            los casos, usted no necesitará hacer nada más para tener un captcha 
+            presente en su formulario.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.checkbox">
+        <title>Zend_Form_Element_Checkbox</title>
+
+        <para>
+            Las casillas de verigicación (checkboxes) HTML le permiten devolver 
+            un valor específico, pero básicamente operata como los booleanos: 
+            cuando está marcada, el valor es enviado; cuando no está marcada, no                     se envía nada. Internamente, Zend_Form_Element_Checkbox forza este 
+            estado.
+        </para>
+
+        <para>
+            Por defecto, si la casilla (checkbox) está marcada su valor es '1', 
+            y si no está marcada su valor es '0'.
+            You can specify the values to use using the
+            <code>setCheckedValue()</code> and <code>setUncheckedValue()</code>
+            accessors, respectively. Internally, any time you set the value, if
+            the provided value matches the checked value, then it is set, but
+            any other value causes the unchecked value to be set.
+        </para>
+
+        <para>
+            Additionally, setting the value sets the <code>checked</code>
+            property of the checkbox. You can query this using
+            <code>isChecked()</code> or simply accessing the property. Using the
+            <code>setChecked($flag)</code> method will both set the state of the
+            flag as well as set the appropriate checked or unchecked value in the
+            element. Please use this method when setting the checked state of a
+            checkbox element to ensure the value is set properly.
+        </para>
+
+        <para>
+            <code>Zend_Form_Element_Checkbox</code> uses the 'formCheckbox' view
+            helper. The checked value is always used to populate it.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.file">
+        <title>Zend_Form_Element_File</title>
+
+        <para>
+            The File form element provides a mechanism for supplying file upload
+            fields to your form. It utilizes <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link>
+            internally to provide this functionality, and the
+            <code>FormFile</code> view helper as also the <code>File</code>
+            decorator to display the form element.
+        </para>
+
+        <para>
+            By default, it uses the <code>Http</code> transfer adapter, which
+            introspects the <code>$_FILES</code> array and allows you to attach
+            validators and filters. Validators and filters attached to the form
+            element will be attached to the transfer adapter.
+        </para>
+
+        <example id="zend.form.standardElements.file.usage">
+            <title>File form element usage</title>
+
+            <para>
+                The above explanation of using the File form element may seem
+                arcane, but actual usage is relatively trivial:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$element = new Zend_Form_Element_File('foo');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload');
+// ensure only 1 file
+$element->addValidator('Count', false, 1);
+// limit to 100K
+$element->addValidator('Size', false, 102400);
+// only JPEG, PNG, and GIFs
+$element->addValidator('Extension', false, 'jpg,png,gif');
+$form->addElement($element, 'foo');
+]]>
+            </programlisting>
+
+            <para>
+                También debe asegurarse de que se ha provisto un tipo de 
+                codificación corecto al formulario; se debe utilizar
+                'multipart/form-data'. Se puede hacer esto estableciendo el 
+                atributo 'enctype' en el formulario:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$form->setAttrib('enctype', 'multipart/form-data');
+]]>
+            </programlisting>
+
+            <para>
+                Cuando el atributo ha sido validado exitosamente, usted debe 
+                recibir el archivo para alamacenarlo en el destino final 
+                usando receive(). Adicionalmente puede determinar la 
+                ubicación final usando getFileName():
+            </para>
+
+            <programlisting role="php"><![CDATA[
+if (!$form->isValid) {
+    print "Ohoh... validation error";
+}
+
+if (!$form->foo->receive()) {
+    print "Error receiving the file";
+}
+
+$location = $form->foo->getFileName();
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <title>Ubicaciones Predeterminadas para la Carga de Archivos</title>
+
+            <para>
+                Por defecto, los archivos son cargados al directorio temp del 
+                sistema.
+            </para>
+        </note>
+
+        <note>
+            <title>Valores de archivo</title>
+
+            <para>
+                Dentro de HTTP un elemento file no tiene valor. Por tanto y a 
+                causa de razones de seguridad usted solo obtendrá el nombre del
+                archivo cargado llamando  a getValue() y no el destino completo. 
+                si usted necesita la información completa  llame getFileName() y 
+                le retormará el destino y nombre de archivo completo.
+            </para>
+        </note>
+
+        <para>
+            <code>Zend_Form_Element_File</code> soporta también archivos
+            múltiples. Para llamar el método <code>setMultiFile($count)</code> 
+            usted puede establecer la cantidad de elementos file que usted desea 
+            crear. Esto le previene de establecer la misma configuración varias 
+            veces.
+        </para>
+
+        <example id="zend.form.standardElements.file.multiusage">
+            <title>Configuración de múltiples archivos</title>
+
+            <para>
+                Crear un elemento multi archivo es lo mismo que querer configurar
+                un elemento único. Sólo tiene que llamar a 
+                <code>setMultiFile()</code> adicionalmente después de la creación:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$element = new Zend_Form_Element_File('foo');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload');
+// asegura mínimo 1, maximo 3 archivos
+$element->addValidator('Count', false, array('min' => 1, 'max' => 3));
+// limita a 100K
+$element->addValidator('Size', false, 102400);
+// solo JPEG, PNG, y GIFs
+$element->addValidator('Extension', false, 'jpg,png,gif');
+// define 3 elementos file idénticos
+$element->setMultiFile(3);
+$form->addElement($element, 'foo');
+]]>
+            </programlisting>
+
+            <para>
+                En su vista usted ahora obtendrá 3 elementos para carga de 
+                archivos idénticos los cuales comparten la misma configuración.
+                para obtener  el conjunto de el número de archivos múltiples 
+                simplemente llame  <code>getMultiFile()</code>.
+            </para>
+
+        </example>
+
+        <note>
+            <title>Elementos File en Subformularioss</title>
+
+            <para>
+                Cuando usted use elementos file in subformularios debería 
+                establecer nombres únicos.
+                Así, cuando usted nombre su elemento file en el subformulario1, 
+                debe darle un nombre diferente el el subformulario2.
+            </para>
+
+            <para>
+                Tan pronto como haya dos elementos file nombrados de forma 
+                idéntica, el segundo elemento no se mostrará o enviará.
+            </para>
+        </note>
+
+        <para>
+            Para limitar el tamaño del archivo, el cual es cargado por el 
+            cliente, debe establecer el tamaño máximo de archivo que el 
+            formulario acepta . Esto limitará eñ tamaño del archivo en el lado 
+            del cliente configurando la opción <code>MAX_FILE_SIZE</code>
+            en el formulario. Tan pronto como establesca este valor usando 
+            el método <code>setMaxFileSize($size)</code>, estó será generado
+            con el elemento file.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$element = new Zend_Form_Element_File('foo');
+$element->setLabel('Upload an image:')
+        ->setDestination('/var/www/upload')
+        ->addValidator('Size', false, 102400) // límite en 100K
+        ->setMaxFileSize(102400); // limita el tamaño del archivo en el lado del cliente
+$form->addElement($element, 'foo');
+]]>
+        </programlisting>
+
+        <note>
+            <title>MaxFileSize con elementos file múltiples</title>
+
+            <para>
+                Cuando usted usa elementos file múltiples en los formularios tiene
+                que establecer el <code>MAX_FILE_SIZE</code> una sola vez.
+                 Establecerlo otra vez sobreescribirá el valor previamente 
+                 establecido.
+            </para>
+
+            <para>
+                Note, que usted puede establecer <code>MAX_FILE_SIZE</code> 
+                una sola ves, incluso si usas múltiples formularios.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.hidden">
+        <title>Zend_Form_Element_Hidden</title>
+
+        <para>
+            Los elementos Hidden simplemente injectan datos que deben ser 
+            enviados, pero que el usuario no debe manipular.
+            <code>Zend_Form_Element_Hidden</code> logra esto através del uso de
+            el helper de vista 'formHidden'.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.hash">
+        <title>Zend_Form_Element_Hash</title>
+
+        <para>
+            Este elemento provee protección de ataques desde CSRF sobre 
+            formularios, asegurando que el dato es enviado por la sesión del
+            usuario que generó el formulario y no por un script pillero. 
+            La protección se logra mediante la adición de un elemento hash a             
+            un formulario y verificandolo cuando el formulario es enviado.
+        </para>
+
+        <para>
+            El nombre del elemnto hash debe ser único. Se recomienda usar la 
+            opción <literal>salt</literal> para el elemento, dos hashes con
+            el mismo nombre y diferentes salts no chocan:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
+]]>
+        </programlisting>
+
+        <para>
+            Puede establecer el salt más tarde usando el método
+            <code>setSalt($salt)</code>.
+        </para>
+
+        <para>
+            Internamente, el elemento alamacena un identificador único usando
+            <code>Zend_Session_Namespace</code>, y lo comprueba en el momento
+            que se envía (comprueba que el TTL has no espiró). El validador 
+            'Identical' entonces es usado para asegurarse que el hash enviado
+            marcha con el hash alamacenado.
+        </para>
+
+        <para>
+            El helper de vista 'formHidden' es usado par generar el elemento 
+            en el formulario.
+            form.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.Image">
+        <title>Zend_Form_Element_Image</title>
+
+        <para>
+            Las imáagenes pueden ser usadas como elmentos de formulario, y le
+            permite  especificar elementos gráficos como botones de formulario.
+        </para>
+
+        <para>
+            Los elementos Image necesitan una imagen fuente. 
+            <code>Zend_Form_Element_Image</code>  le permite especificar esto
+            usando el método de acceso <code>setImage()</code>
+            (o clave de configuración 'image'). Opcionalmente, también puede 
+            especificar un valor para utilizar al momento de enviar la imagen
+             utilizando  el método de acceso <code>setImageValue()</code> 
+            (o clave de configuración 'imageValue'). Cuando el valor establecido
+            para el elemento son similares al <code>imageValue</code>, entonces  
+            el método de acceso <code>isChecked()</code> devolverá true.
+        </para>
+
+        <para>
+            El elemento Image usa el 
+            <link linkend="zend.form.standardDecorators.image">Decorador de 
+            Imagen </link> para generar (así como el estandard Errors,
+            HtmlTag, y decorador Label). Opcionalmente, puede especificar una
+            etiqueta para el decorador <code>Image</code> que luego 
+            envuelva al elemento imagen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.multiCheckbox">
+        <title>Zend_Form_Element_MultiCheckbox</title>
+
+        <para>
+            A menudo tiene un conjunto de checkboxes, y desea agrupar los 
+            resultados. Esto es como un 
+            <link linkend="zend.form.standardElements.multiselect">Multiselect</link>,
+            pero en lugar de estar en una lista desplegable, necesita mostrarlos en pares checkbox/value (casilla de verificación/valor).
+        </para>
+
+        <para>
+            <code>Zend_Form_Element_MultiCheckbox</code> hace esto sencillo. Like
+            all other elements extending the base Multi element, you can specify
+            a list of options, and easily validate against that same list. The
+            'formMultiCheckbox' view helper ensures that these are returned as
+            an array in the form submission.
+        </para>
+
+        <para>
+            By default, this element registers an <code>InArray</code> validator
+            which validates against the array keys of registered options. You
+            can disable this behavior by either calling
+            <code>setRegisterInArrayValidator(false)</code>, or by passing a
+            false value to the <code>registerInArrayValidator</code>
+            configuration key.
+        </para>
+
+        <para>
+            You may manipulate the various checkbox options using the following
+            methods:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+
+            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+
+            <listitem><para><code>setMultiOptions(array $options)</code>
+                    (overwrites existing options)</para></listitem>
+
+            <listitem><para>getMultiOption($option)</para></listitem>
+
+            <listitem><para>getMultiOptions()</para></listitem>
+
+            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+
+            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+        </itemizedlist>
+
+        <para>
+            To mark checked items, you need to pass an array of values to
+            <code>setValue()</code>. The following will check the values "bar"
+            and "bat":
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$element = new Zend_Form_Element_MultiCheckbox('foo', array(
+    'multiOptions' => array(
+        'foo' => 'Foo Option',
+        'bar' => 'Bar Option',
+        'baz' => 'Baz Option',
+        'bat' => 'Bat Option',
+    );
+));
+
+$element->setValue(array('bar', 'bat'));
+]]>
+        </programlisting>
+
+        <para>
+            Note that even when setting a single value, you must pass an array.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.multiselect">
+        <title>Zend_Form_Element_Multiselect</title>
+
+        <para>
+            XHTML <code>select</code> elements allow a 'multiple' attribute,
+            indicating multiple options may be selected for submission, instead
+            of the usual one. <code>Zend_Form_Element_Multiselect</code> extends
+            <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link>,
+            and sets the <code>multiple</code> attribute to 'multiple'. Like
+            other classes that inherit from the base
+            <code>Zend_Form_Element_Multi</code> class, you can manipulate the
+            options for the select using:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+
+            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+
+            <listitem><para><code>setMultiOptions(array $options)</code>
+                    (overwrites existing options)</para></listitem>
+
+            <listitem><para>getMultiOption($option)</para></listitem>
+
+            <listitem><para>getMultiOptions()</para></listitem>
+
+            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+
+            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+        </itemizedlist>
+
+        <para>
+            If a translation adapter is registered with the form and/or element,
+            option values will be translated for display purposes.
+        </para>
+
+        <para>
+            By default, this element registers an <code>InArray</code> validator
+            which validates against the array keys of registered options. You
+            can disable this behavior by either calling
+            <code>setRegisterInArrayValidator(false)</code>, or by passing a
+            false value to the <code>registerInArrayValidator</code>
+            configuration key.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.password">
+        <title>Zend_Form_Element_Password</title>
+
+        <para>
+            Password elements are basically normal text elements -- except that
+            you typically do not want the submitted password displayed in error
+            messages or the element itself when the form is re-displayed.
+        </para>
+
+        <para>
+            <code>Zend_Form_Element_Password</code> achieves this by calling
+            <code>setObscureValue(true)</code> on each validator (ensuring that
+            the password is obscured in validation error messages), and using
+            the 'formPassword' view helper (which does not display the value
+            passed to it).
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.radio">
+        <title>Zend_Form_Element_Radio</title>
+
+        <para>
+            Radio elements allow you to specify several options, of which you
+            need a single value returned. <code>Zend_Form_Element_Radio</code>
+            extends the base <code>Zend_Form_Element_Multi</code> class,
+            allowing you to specify a number of options, and then uses the
+            <code>formRadio</code> view helper to display these.
+        </para>
+
+        <para>
+            By default, this element registers an <code>InArray</code> validator
+            which validates against the array keys of registered options. You
+            can disable this behavior by either calling
+            <code>setRegisterInArrayValidator(false)</code>, or by passing a
+            false value to the <code>registerInArrayValidator</code>
+            configuration key.
+        </para>
+
+        <para>
+            Like all elements extending the Multi element base class, the
+            following methods may be used to manipulate the radio options
+            displayed:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+
+            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+
+            <listitem><para><code>setMultiOptions(array $options)</code>
+                    (overwrites existing options)</para></listitem>
+
+            <listitem><para>getMultiOption($option)</para></listitem>
+
+            <listitem><para>getMultiOptions()</para></listitem>
+
+            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+
+            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.reset">
+        <title>Zend_Form_Element_Reset</title>
+
+        <para>
+            Reset buttons are typically used to clear a form, and are not part
+            of submitted data. However, as they serve a purpose in the display,
+            they are included in the standard elements.
+        </para>
+
+        <para>
+            <code>Zend_Form_Element_Reset</code> extends <link linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>.
+            As such, the label is used for the button display, and will be
+            translated if a translation adapter is present. It utilizes only the
+            'ViewHelper' and 'DtDdWrapper' decorators, as there should never be
+            error messages for such elements, nor will a label be necessary.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.select">
+        <title>Zend_Form_Element_Select</title>
+
+        <para>
+            Select boxes are a common way of limiting to specific choices for a
+            given form datum. <code>Zend_Form_Element_Select</code> allows you
+            to generate these quickly and easily.
+        </para>
+
+        <para>
+            By default, this element registers an <code>InArray</code> validator
+            which validates against the array keys of registered options. You
+            can disable this behavior by either calling
+            <code>setRegisterInArrayValidator(false)</code>, or by passing a
+            false value to the <code>registerInArrayValidator</code>
+            configuration key.
+        </para>
+
+        <para>
+            As it extends the base Multi element, the following methods may be
+            used to manipulate the select options:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>addMultiOption($option, $value)</code></para></listitem>
+
+            <listitem><para><code>addMultiOptions(array $options)</code></para></listitem>
+
+            <listitem><para><code>setMultiOptions(array $options)</code>
+                    (overwrites existing options)</para></listitem>
+
+            <listitem><para>getMultiOption($option)</para></listitem>
+
+            <listitem><para>getMultiOptions()</para></listitem>
+
+            <listitem><para><code>removeMultiOption($option)</code></para></listitem>
+
+            <listitem><para><code>clearMultiOptions()</code></para></listitem>
+        </itemizedlist>
+
+        <para>
+            <code>Zend_Form_Element_Select</code> uses the 'formSelect' view
+            helper for decoration.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.submit">
+        <title>Zend_Form_Element_Submit</title>
+
+        <para>
+            Submit buttons are used to submit a form. You may use multiple
+            submit buttons; you can use the button used to submit the form to
+            decide what action to take with the data submitted.
+            <code>Zend_Form_Element_Submit</code> makes this decisioning easy,
+            by adding a <code>isChecked()</code> method; as only one button
+            element will be submitted by the form, after populating or
+            validating the form, you can call this method on each submit button
+            to determine which one was used.
+        </para>
+
+        <para>
+            <code>Zend_Form_Element_Submit</code> uses the label as the "value"
+            of the submit button, translating it if a translation adapter is
+            present. <code>isChecked()</code> checks the submitted value against
+            the label in order to determine if the button was used.
+        </para>
+
+        <para>
+            The <link linkend="zend.form.standardDecorators.viewHelper">ViewHelper</link>
+            and <link linkend="zend.form.standardDecorators.dtDdWrapper">DtDdWrapper</link>
+            decorators to render the element. No label decorator is used, as the
+            button label is used when rendering the element; also, typically,
+            you will not associate errors with a submit element.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.text">
+        <title>Zend_Form_Element_Text</title>
+
+        <para>
+            By far the most prevalent type of form element is the text element,
+            allowing for limited text entry; it's an ideal element for most data
+            entry. <code>Zend_Form_Element_Text</code> simply uses the
+            'formText' view helper to display the element.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.form.standardElements.textarea">
+        <title>Zend_Form_Element_Textarea</title>
+
+        <para>
+            Textareas are used when large quantities of text are expected, and
+            place no limits on the amount of text submitted (other than maximum
+            size limits as dictated by your server or PHP).
+            <code>Zend_Form_Element_Textarea</code> uses the 'textArea' view
+            helper to display such elements, placing the value as the content of
+            the element.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 tw=80 et:
+-->

@@ -1,0 +1,84 @@
+<sect1 id="zend.currency.migration">
+
+    <title> 从前面的版本迁移 </title>
+
+    <para>
+        <code>Zend_Currency</code> 的 API 已经被修改来增加可用性。如果你从一个在本章提到的版本开始使用 <code>Zend_Currency</code>， 请遵循下面的指南来迁移你的脚本到新的 API。
+    </para>
+
+    <sect2 id="zend.currency.usage.migration.fromonezerotwo">
+
+        <title> 从 1.0.2 到 1.0.3 或更新的迁移 </title>
+
+        <para>
+            创建 <code>Zend_Currency</code> 的对象变得容易了。现在你不再需要给一个脚本或把它设置为 null。可选的脚本参数现在可以通过 <code>setFormat()</code> 方法来设置。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency = new Zend_Currency($currency, $locale);
+]]>
+        </programlisting>
+
+        <para>
+            <code>setFormat()</code> 方法现在带有一个可以被设置的选项数组。这些选项被设置成永久并覆盖所有先前设置的值，并且又加了一个新的选项 'precision'，下面的选项都被集成了：
+
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">position</emphasis>:
+                        替换旧的 'rules' 参数。
+                    </para>
+                    <para>
+                        <emphasis role="strong">script</emphasis>:
+                        替换旧的 'script' 参数。
+                    </para>
+                    <para>
+                        <emphasis role="strong">format</emphasis>:
+                        替换旧的 'locale' 参数，它不设置新的货币，只设置数字格式。
+                    </para>
+                    <para>
+                        <emphasis role="strong">display</emphasis>:
+                        替换旧的 'rules' 参数。
+                    </para>
+                    <para>
+                        <emphasis role="strong">precision</emphasis>:
+                        新参数。
+                    </para>
+                    <para>
+                        <emphasis role="strong">name</emphasis>:
+                        替换旧的 'rules' 参数。设置货币全名。
+                    </para>
+                    <para>
+                        <emphasis role="strong">currency</emphasis>:
+                        新参数。
+                    </para>
+                    <para>
+                        <emphasis role="strong">symbol</emphasis>:
+                        新参数。
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->setFormat(array $options);
+]]>
+        </programlisting>
+
+        <para>
+            The <code>toCurrency()</code> 方法不再支持可选的 'script' 和 'locale' 参数，而是它它带有一个选项数组，数组中包含和 <code>setFormat</code> 方法相同的键。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->toCurrency($value, array $options);
+]]>
+        </programlisting>
+
+        <para>
+            方法 <code>getSymbol()</code>、 <code>getShortName()</code>、<code>getName()</code>、 <code>getRegionList()</code> 和 <code>getCurrencyList()</code> 不再是静态并可以在对象中被调用。如果没有参数被设定，它们返回一组对象设的值。
+        </para>
+
+    </sect2>
+
+</sect1>

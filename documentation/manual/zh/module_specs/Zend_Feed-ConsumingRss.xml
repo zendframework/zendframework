@@ -1,0 +1,141 @@
+<sect1 id="zend.feed.consuming-rss">
+    <title>RSS Feed的使用</title>
+    <para>
+        用一个<code>Zend_Feed_Rss</code>对象实例和一个Feed的URL来读取一个RSS Feed再简单不过了:
+    </para>
+    <programlisting role="php"><![CDATA[
+$channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
+]]>
+    </programlisting>
+    <para>
+        如果在获得feed时发生任何错误，那么一个<code>Zend_Feed_Exception</code>异常将被抛出。
+    </para>
+
+    <para>
+        一旦你获得一个Feed对象，那么你就能在这个对象上直接访问任何RSS 标准定义的channel属性:
+    </para>
+    <programlisting role="php"><![CDATA[
+echo $channel->title();?>
+]]>
+     </programlisting>
+    <para>
+        注意函数语法。如果用 "getter" 的语法 (<code>$obj->property</code>) 取一个对象变量或是调用一个对象方法(<code>$obj->property()</code>)时，<code>Zend_Feed</code>将把这个变量名或方法名作为一个XML对象的属性处理(就像访问XML中的某个节点)。这样在取得指定的节点内容后还能访问其子节点。
+    </para>
+
+    <para>
+        如果RSS的channel有属性，那么可以用访问 PHP 数组的语法获得他们:
+    </para>
+    <programlisting role="php"><![CDATA[
+echo $channel->category['domain'];?>
+]]>
+     </programlisting>
+    <para>
+        因为XML的属性不能拥有子节点，所以不需要用方法的语法访问其属性。
+        values.
+    </para>
+
+    <para>
+        最常用的是您可以通过循环遍历Feed的条目来作些事情。<code>Zend_Feed_Abstract</code> 实现的是PHP 的Iterator接口，因此要打印channel中的文章标题可以像下面这样:
+    </para>
+    <programlisting role="php"><![CDATA[
+
+foreach ($channel as $item) {
+    echo $item->title() . "\n";
+}
+]]>
+     </programlisting>
+    <para>
+        如果你对RSS不是很熟，那这有一分关于RSS channel和各个RSS item(条目)标准元素的列表可能对你有帮助。
+    </para>
+
+    <para>
+        必须的 channel 元素:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - channel 名</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - channel相关的站点URL</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - 一句或者若干关于channel的描述</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        可选的channel元素:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>pubDate</code> - 这份内容发布的时间，用 RFC 822 的日期格式</para>
+            </listitem>
+            <listitem>
+                <para><code>language</code> - channel的书写语言</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - channel属于的一个或多个分类(用多个标记指名)</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        RSS 的<code>&lt;item&gt;</code> 组成没有严格的要求。但是<code>title</code> 或 <code>description</code>必须至少有一个。
+    </para>
+
+    <para>
+        常用的item元素:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - item的标题</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - item的链接</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - item的概述</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - 作者Email</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - item所属的一个或者多个分类</para>
+            </listitem>
+            <listitem>
+                <para><code>comments</code> - item相关评论的URL链接</para>
+            </listitem>
+            <listitem>
+                <para><code>pubDate</code> - item的发布日期( RFC 822 日期格式)</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        在你的代码中，一个非空元素总是被能测到:
+    </para>
+    <programlisting role="php"><![CDATA[
+if ($item->propname()) {
+    // ... proceed.
+}
+]]>
+    </programlisting>
+
+    <para>
+        如果你用<code>$item->propname</code>代替<code>$item->propname()</code>，那么你将总是得到一个空对象使条件判断为<code>TRUE</code>，因此条件判断将失效。
+    </para>
+
+    <para>
+        更多信息，请参看RSS 2.0的官方说明:<ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

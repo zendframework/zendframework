@@ -1,0 +1,26 @@
+<sect1 id="zend.mail.adding-recipients">
+    <title>增加收件人</title>
+    <para>
+         有三种方法可以增加收件人：
+        <itemizedlist>
+        <listitem>
+        <para><code>addTo()</code>：增加一个收件人到邮件头“To”（收件人）</para>
+        </listitem>
+        <listitem>
+        <para><code>addCc()</code>：增加一个收件人到邮件头“Cc”（抄送）</para>
+        </listitem>
+        <listitem>
+        <para><code>addBcc()</code>：增加一个收件人到邮件头“Bcc”（暗送）</para>
+        </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <title>附加的参数</title>
+        <para>
+            <code>addTo()</code>和<code>addCc()</code>接受可选的第二个参数用于为邮件头的收件人指定具有可读性的名字。
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

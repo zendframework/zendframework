@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.uri.chapter">
+  <title>Zend_Uri</title>
+
+  <sect2 id="zend.uri.overview">
+    <title>Overview</title>
+
+    <para>
+      <classname>Zend_Uri</classname> is a component that aids in manipulating and
+      validating <ulink url="http://www.w3.org/Addressing/">Uniform Resource
+      Identifiers</ulink> (URIs). <classname>Zend_Uri</classname> exists primarily to
+      service other components such as <classname>Zend_Http_Client</classname> but is
+      also useful as a standalone utility.
+    </para>
+
+    <para>
+      URIs always begin with a scheme, followed by a colon. The construction
+      of the many different schemes varies significantly.  The
+      <classname>Zend_Uri</classname> class provides a factory that returns a subclass of
+      itself which specializes in each scheme.  The subclass
+      will be named <classname>Zend_Uri_&lt;scheme&gt;</classname>, where
+      <code>&lt;scheme&gt;</code> is the scheme lowercased with the first
+      letter capitalized. An exception to this rule is HTTPS, which is also
+      handled by <classname>Zend_Uri_Http</classname>.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.creation">
+    <title>Creating a New URI</title>
+
+    <para>
+      <classname>Zend_Uri</classname> will build a new URI from scratch if only a scheme
+      is passed to <classname>Zend_Uri::factory()</classname>.
+    </para>
+
+    <example id="zend.uri.creation.example-1">
+      <title>Creating a New URI with Zend_Uri::factory()</title>
+
+      <programlisting role="php"><![CDATA[
+// To create a new URI from scratch, pass only the scheme.
+$uri = Zend_Uri::factory('http');
+
+// $uri instanceof Zend_Uri_Http
+]]></programlisting>
+    </example>
+
+    <para>
+      To create a new URI from scratch, pass only the scheme to
+      <classname>Zend_Uri::factory()</classname><footnote><para>At the time of writing,
+      Zend_Uri only supports the HTTP and HTTPS schemes.</para></footnote> .
+      If an unsupported scheme is passed, a <classname>Zend_Uri_Exception</classname>
+      will be thrown.
+    </para>
+
+    <para>
+      If the scheme or URI passed is supported,
+      <classname>Zend_Uri::factory()</classname> will return a subclass of itself that
+      specializes in the scheme to be created.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.manipulation">
+    <title>Manipulating an Existing URI</title>
+
+    <para>
+      To manipulate an existing URI, pass the entire URI to
+      <classname>Zend_Uri::factory()</classname>.
+    </para>
+
+    <example id="zend.uri.manipulation.example-1">
+      <title>Manipulating an Existing URI with Zend_Uri::factory()</title>
+
+      <programlisting role="php"><![CDATA[
+// To manipulate an existing URI, pass it in.
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+// $uri instanceof Zend_Uri_Http
+]]></programlisting>
+    </example>
+
+    <para>
+      The URI will be parsed and validated. If it is found to be invalid, a
+      <classname>Zend_Uri_Exception</classname> will be thrown immediately. Otherwise,
+      <classname>Zend_Uri::factory()</classname> will return a subclass of itself that
+      specializes in the scheme to be manipulated.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.validation">
+    <title>URI Validation</title>
+
+    <para>
+      The <classname>Zend_Uri::check()</classname> function can be used if only
+      validation of an existing URI is needed.
+    </para>
+
+    <example id="zend.uri.validation.example-1">
+      <title>URI Validation with Zend_Uri::check()</title>
+
+      <programlisting role="php"><![CDATA[
+// Validate whether a given URI is well formed
+$valid = Zend_Uri::check('http://uri.in.question');
+
+// $valid is TRUE for a valid URI, or FALSE otherwise.
+]]></programlisting>
+    </example>
+
+    <para>
+      <classname>Zend_Uri::check()</classname> returns a boolean,
+      which is more convenient than using <classname>Zend_Uri::factory()</classname>
+      and catching the exception.
+    </para>
+
+    <sect3 id="zend.uri.validation.allowunwise">
+        <title>Allowing "Unwise" characters in URIs</title>
+
+        <para>
+            By default, Zend_Uri will not accept the following characters, defined by
+            the RFC as "unwise" and invalid: <code>"{", "}", "|", "\", "^", "`"</code>.
+            However, many implementations do accept these characters as valid.
+        </para>
+
+        <para>
+            Zend_Uri can be set to accept these "unwise" characters by setting the
+            'allow_unwise' option to boolean TRUE using the Zend_Uri::setConfig()
+            method:
+        </para>
+
+        <example id="zend.uri.validation.allowunwise.example-1">
+            <title>Allowing special characters in URIs</title>
+            <programlisting role="php"><![CDATA[
+// Contains '|' symbol
+// Normally, this would return false:
+$valid = Zend_Uri::check('http://example.com/?q=this|that');
+
+// However, you can allow "unwise" characters
+Zend_Uri::setConfig(array('allow_unwise' => true));
+// will return 'true'
+$valid = Zend_Uri::check('http://example.com/?q=this|that');
+
+// Reset the 'allow_unwise' value to the default FALSE
+Zend_Uri::setConfig(array('allow_unwise' => false));
+]]></programlisting>
+        </example>
+
+        <note>
+            <para><classname>Zend_Uri::setConfig()</classname> sets configuration options globally.
+            It is recommended to reset the 'allow_unwise' option to 'false' like in
+            the example above, unless you are certain you want to always allow
+            unwise characters globally.</para>
+        </note>
+    </sect3>
+  </sect2>
+
+  <sect2 id="zend.uri.instance-methods">
+    <title>Common Instance Methods</title>
+
+    <para>
+      Every instance of a <classname>Zend_Uri</classname> subclass (e.g.
+      <classname>Zend_Uri_Http</classname>) has several instance methods that are useful
+      for working with any kind of URI.
+    </para>
+
+    <sect3 id="zend.uri.instance-methods.getscheme">
+      <title>Getting the Scheme of the URI</title>
+
+      <para>
+        The scheme of the URI is the part of the URI that precedes the colon.  For example,
+        the scheme of <code>http://www.zend.com</code> is <code>http</code>.
+      </para>
+
+      <example id="zend.uri.instance-methods.getscheme.example-1">
+        <title>Getting the Scheme from a Zend_Uri_* Object</title>
+
+        <programlisting role="php"><![CDATA[
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$scheme = $uri->getScheme();  // "http"
+]]></programlisting>
+      </example>
+
+      <para>
+        The <code>getScheme()</code> instance method returns only the scheme part of
+        the URI object.
+      </para>
+
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.geturi">
+      <title>Getting the Entire URI</title>
+
+      <example id="zend.uri.instance-methods.geturi.example-1">
+        <title>Getting the Entire URI from a Zend_Uri_* Object</title>
+
+        <programlisting role="php"><![CDATA[
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+echo $uri->getUri();  // "http://www.zend.com"
+]]></programlisting>
+      </example>
+
+      <para>
+        The <code>getUri()</code> method returns the string representation
+        of the entire URI.
+      </para>
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.valid">
+      <title>Validating the URI</title>
+
+      <para>
+        <classname>Zend_Uri::factory()</classname> will always validate any URI passed
+        to it and will not instantiate a new <classname>Zend_Uri</classname> subclass
+        if the given URI is found to be invalid. However, after the
+        <classname>Zend_Uri</classname> subclass is instantiated for a new URI or a
+        valid existing one, it is possible that the URI can then later become
+        invalid after it is manipulated.
+      </para>
+
+      <example id="zend.uri.instance-methods.valid.example-1">
+        <title>Validating a Zend_Uri_* Object</title>
+
+        <programlisting role="php"><![CDATA[
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$isValid = $uri->valid();  // TRUE
+]]></programlisting>
+      </example>
+
+      <para>
+        The <code>valid()</code> instance method provides a means to check that the
+        URI object is still valid.
+      </para>
+    </sect3>
+
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

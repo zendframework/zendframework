@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.debug.dumping">
+    <title>Afficher des informations</title>
+
+    <para>
+        La méthode statique <classname>Zend_Debug::dump()</classname> affiche et/ou retourne
+        les informations concernant une expression. Cette technique simple de débogage est commune,
+        parce que facile à utiliser de façon ad hoc et n'exigeant aucune initialisation, aucun
+        outils spéciaux, ou environnement de mise au point.
+    </para>
+
+    <example id="zend.debug.dumping.example">
+        <title>Exemple avec la méthode dump()</title>
+
+        <programlisting role="php"><![CDATA[
+Zend_Debug::dump($var, $label=null, $echo=true);
+]]></programlisting>
+    </example>
+
+    <para>
+        L'argument <code>$var</code> définit l'expression ou la variable que l'on veut
+        examiner avec <classname>Zend_Debug::dump()</classname>.
+    </para>
+
+    <para>
+        L'argument <code>$label</code> est un texte arbitraire à placer avant la sortie de
+        <classname>Zend_Debug::dump()</classname>. Ceci est utile lorsque vous souhaitez afficher à
+        l'écran des informations concernant plusieurs variables.
+    </para>
+
+    <para>
+        Le booléen <code>$echo</code> indique s'il faut (ou non) afficher la sortie de
+        <classname>Zend_Debug::dump()</classname>. Si <code>true</code>, la sortie sera affichée.
+        Quel que soit l'état de <code>$echo</code>, la sortie est toujours retournée.
+    </para>
+
+    <para>
+        Il peut être utile de savoir que la méthode <classname>Zend_Debug::dump()</classname>
+        enveloppe la fonction PHP
+        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>. Si le flux est
+        reconnu à destination d'un contenu Web, l'affichage de <code>var_dump()</code> est échappé
+        avec
+        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>et est
+        enveloppé entre des balises (X)HTML <code>&lt;pre&gt; et &lt;/pre&gt;</code>.
+    </para>
+
+    <tip>
+        <title>Déboguer avec Zend_Log</title>
+
+        <para>
+            Utiliser <classname>Zend_Debug::dump()</classname> est ce qui convient le mieux
+            pour le débogage durant le développement de l'application. Vous pouvez facilement
+            ajouter ou retirer du code que vous souhaitez visualiser.
+        </para>
+
+        <para>
+            Vous pouvez aussi considérer le composant
+            <link linkend="zend.log.overview">Zend_Log</link>si vous souhaitez rendre permanent du
+            code de débogage. Par exemple, vous pouvez utiliser le niveau de log <code>DEBUG</code>
+            et le flux d'écriture Stream du log pour afficher la chaîne retournée par
+            <classname>Zend_Debug::dump()</classname>.
+        </para>
+    </tip>
+</sect1>

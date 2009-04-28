@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.modular">
+    <title>Using a Conventional Modular Directory Structure</title>
+
+    <sect2 id="zend.controller.modular.introduction">
+        <title>Introduction</title>
+        <para>
+            The Conventional Modular directory structure allows you to separate
+            different MVC applications into self-contained units, and re-use
+            them with different front controllers. To illustrate such a
+            directory structure:
+        </para>
+
+        <programlisting>
+<![CDATA[
+docroot/
+    index.php
+application/
+    default/
+        controllers/
+            IndexController.php
+            FooController.php
+        models/
+        views/
+            scripts/
+                index/
+                foo/
+            helpers/
+            filters/
+    blog/
+        controllers/
+            IndexController.php
+        models/
+        views/
+            scripts/
+                index/
+            helpers/
+            filters/
+    news/
+        controllers/
+            IndexController.php
+            ListController.php
+        models/
+        views/
+            scripts/
+                index/
+                list/
+            helpers/
+            filters/
+]]></programlisting>
+
+        <para>
+            In this paradigm, the module name serves as a prefix to the
+            controllers it contains. The above example contains three
+            module controllers, 'Blog_IndexController', 'News_IndexController', and
+            'News_ListController'. Two global controllers, 'IndexController' and
+            'FooController' are also defined; neither of these will be
+            namespaced. This directory structure will be used for examples in
+            this chapter.
+        </para>
+
+        <note>
+            <title>No Namespacing in the Default Module</title>
+            <para>
+                Note that in the default module, controllers do not need a
+                namespace prefix. Thus, in the example above, the controllers in
+                the default module do not need a prefix of 'Default_' -- they
+                are simply dispatched according to their base controller name:
+                'IndexController' and 'FooController'. A namespace prefix is
+                used in all other modules, however.
+            </para>
+        </note>
+
+        <para>
+            So, how do you implement such a directory layout using the Zend
+            Framework MVC components?
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.directories">
+        <title>Specifying Module Controller Directories</title>
+
+        <para>
+            The first step to making use of modules is to modify how you specify
+            the controller directory list in the front controller. In the basic
+            MVC series, you pass either an array or a string to
+            <code>setControllerDirectory()</code>, or a path to
+            <code>addControllerDirectory()</code>. When using modules, you need
+            to alter your calls to these methods slightly.
+        </para>
+
+        <para>
+            With <code>setControllerDirectory()</code>, you will need to pass an
+            associative array and specify key/value pairs of module
+            name/directory paths. The special key <code>default</code> will be
+            used for global controllers (those not needing a module namespace).
+            All entries should contain a string key pointing to a single path,
+            and the <code>default</code> key must be present. As an example:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setControllerDirectory(array(
+    'default' => '/path/to/application/controllers',
+    'blog'    => '/path/to/application/blog/controllers'
+));
+]]></programlisting>
+
+        <para>
+            <code>addControllerDirectory()</code> will take an optional second
+            argument. When using modules, pass the module name as the second
+            argument; if not specified, the path will be added to the
+            <code>default</code> namespace. As an example:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->addControllerDirectory('/path/to/application/news/controllers',
+                               'news');
+]]></programlisting>
+
+        <para>
+            Saving the best for last, the easiest way to specify module
+            directories is to do so en masse, with all modules under a common
+            directory and sharing the same structure. This can be done with
+            <code>addModuleDirectory()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+ * Assuming the following directory structure:
+ * application/
+ *     modules/
+ *         default/
+ *             controllers/
+ *         foo/
+ *             controllers/
+ *         bar/
+ *             controllers/
+ */
+$front->addModuleDirectory('/path/to/application/modules');
+]]></programlisting>
+
+        <para>
+            The above example will define the <code>default</code>,
+            <code>foo</code>, and <code>bar</code> modules, each pointing to the
+            <code>controllers</code> subdirectory of their respective module.
+        </para>
+
+        <para>
+            You may customize the controller subdirectory to use within your
+            modules by using <code>setModuleControllerDirectoryName()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+ * Change the controllers subdirectory to be 'con'
+ * application/
+ *     modules/
+ *         default/
+ *             con/
+ *         foo/
+ *             con/
+ *         bar/
+ *             con/
+ */
+$front->setModuleControllerDirectoryName('con');
+$front->addModuleDirectory('/path/to/application/modules');
+]]></programlisting>
+
+        <note><para>
+            You can indicate that no controller subdirectory be used for your
+            modules by passing an empty value to
+            <code>setModuleControllerDirectoryName()</code>.
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.router">
+        <title>Routing to Modules</title>
+
+        <para>
+            The default route in <classname>Zend_Controller_Router_Rewrite</classname> is
+            an object of type <classname>Zend_Controller_Router_Route_Module</classname>.
+            This route expects one of the following routing schemas:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>:module/:controller/:action/*</code></para></listitem>
+            <listitem><para><code>:controller/:action/*</code></para></listitem>
+        </itemizedlist>
+
+        <para>
+            In other words, it will match a controller and action by themselves
+            or with a preceding module. The rules for matching specify that a
+            module will only be matched if a key of the same name exists in the
+            controller directory array passed to the front controller and
+            dispatcher.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.defaultcontroller">
+        <title>Module or Global Default Controller</title>
+
+        <para>
+            In the default router, if a controller was not specified in the URL,
+            a default controller is used (<code>IndexController</code>, unless
+            otherwise requested). With modular controllers, if a module has been
+            specified but no controller, the dispatcher first looks for this
+            default controller in the module path, and then falls back on the
+            default controller found in the 'default', global, namespace.
+        </para>
+
+        <para>
+            If you wish to always default to the global namespace, set the
+            <code>useDefaultControllerAlways</code> parameter in the front controller:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+]]></programlisting>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

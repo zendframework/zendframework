@@ -1,0 +1,70 @@
+<sect1 id="zend.feed.introduction">
+    <title>Úvod</title>
+    <para>
+        <code>Zend_Feed</code> poskytuje funkcionalitu pre spracovanie RSS a Atom
+        zdrojov. Poskytuje prirodzený spôsob pre prístup k jednotlivým častiam zdroja,
+        ako sú elementy, atribúty a jednotlivé položky. Okrem toho <code>Zend_Feed</code>
+        poskytuje podporu pre modifikáciu zdroja a jeho položiek a spätné uloženie
+        do XML. V budúcnosti pribudne aj podpora Atom Publishing Protocol
+    </para>
+
+    <para>
+        Programátorsky, <code>Zend_Feed</code> pozostáva zo základnej triedy
+        <code>Zend_Feed</code> abstraktných tried <code>Zend_Feed_Abstract</code>
+        a <code>Zend_Feed_Entry_Abstract</code> pre reprezentáciu zdroja a položiek
+        v zdroji. Ďalej sú to špecifické implementácie zdroja a jeho položiek
+        pre RSS a Atom.
+    </para>
+
+    <para>
+        V uvedenom príklade je ukázané získanie RSS zdroja a uloženie relevantných
+        častí do jednoduchého poľa, ktoré môže byť použité pre zobrazenie dát,
+        alebo ich uloženie do databázy, atď.
+    </para>
+
+    <note>
+        <title>Uvedomte si</title>
+        <para>
+            Veľa RSS zdrojov ma rôzne prúdy a rôzne vlastnosti. Špecifikácia RSS
+            poskytuje veľa voliteľných vlastnosti a preto si dávajte pozor pri
+            písaní kódu ktorý pracuje s RSS zdrojmi.
+        </para>
+    </note>
+
+    <example id="zend.feed.introduction.example.rss">
+        <title>Použitie Zend_Feed na získanie dát z RSS zdroja</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Feed.php';
+
+// Získanie posledných noviniek zo slashdot.org
+try {
+    $slashdotRss = Zend_Feed::import('http://rss.slashdot.org/Slashdot/slashdot');
+} catch (Zend_Feed_Exception $e) {
+    // zlyhal import zdroja
+    echo "Exception caught importing feed: {$e->getMessage()}\n";
+    exit;
+}
+
+// Získanie info zo zdroja
+$channel = array(
+    'title'       => $slashdotRss->title(),
+    'link'        => $slashdotRss->link(),
+    'description' => $slashdotRss->description(),
+    'items'       => array()
+    );
+
+// uloženie relevantných dát z každej položky zdroja
+foreach ($slashdotRss as $item) {
+    $channel['items'][] = array(
+        'title'       => $item->title(),
+        'link'        => $item->link(),
+        'description' => $item->description()
+        );
+}
+
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

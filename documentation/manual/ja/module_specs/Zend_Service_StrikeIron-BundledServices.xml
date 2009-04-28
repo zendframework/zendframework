@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.strikeiron.bundled-services">
+    <title>Zend_Service_StrikeIron: バンドルされているサービス</title>
+
+    <para>
+      <classname>Zend_Service_StrikeIron</classname> には、StrikeIron
+      のサービスのうち人気のある 3 つについてのラッパークラスが含まれています。
+    </para>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.zip-code-information">
+      <title>ZIP Code Information</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> は、StrikeIron の
+        Zip Code Information Service 用のクライアントです。
+        このサービスについての詳細は、以下の StrikeIron のリソースを参照ください。
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code Information Service のページ</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip Code Information Service の WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+
+        このサービスの <code>getZipCode()</code> メソッドは、
+        アメリカやカナダの郵便番号についての情報を取得します。
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
+                                                'password' => 'あなたのパスワード'));
+
+// Zip Code Information サービス用のクライアントを取得します
+$zipInfo = $strikeIron->getService(array('class' => 'ZipCodeInfo'));
+
+// 郵便番号 95014 についての情報を取得します
+$response = $zipInfo->getZipCode(array('ZipCode' => 95014));
+$zips = $response->serviceResult;
+
+// 結果を表示します
+if ($zips->count == 0) {
+    echo 'みつかりませんでした';
+} else {
+    // コードをひとつだけ指定したときの返り値はオブジェクトとなります。
+    // 要素ひとつの配列ではありません。
+    if (! is_array($zips->zipCodes)) {
+        $zips->zipCodes = array($zips->zipCodes);
+    }
+
+    // すべての結果を表示します
+    foreach ($zips->zipCodes as $z) {
+        $info = $z->zipCodeInfo;
+
+        // すべてのプロパティを表示します
+        print_r($info);
+
+        // あるいは都市名のみを表示します
+        echo $info->preferredCityName;
+    }
+}
+
+// 詳細なステータス情報
+// http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
+$status = $response->serviceStatus;
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.us-address-verification">
+      <title>U.S. Address Verification</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_USAddressVerification</classname>
+        は StrikeIron の U.S. Address Verification Service 用のクライアントです。
+        このサービスについての詳細は、以下の StrikeIron のリソースを参照ください。
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address Verification Service のページ</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S. Address Verification Service の WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+
+      <para>
+        このサービスの <code>verifyAddressUSA()</code> メソッドは、
+        アメリカの住所を検証します。
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
+                                                'password' => 'あなたのパスワード'));
+
+// Zip Code Information サービス用のクライアントを取得します
+$verifier = $strikeIron->getService(array('class' => 'USAddressVerification'));
+
+// 調べる住所を指定します。すべてのフィールドが必須というわけではありませんが、
+// できるだけ多くを指定したほうがよい結果が得られます
+$address = array('firm'           => 'Zend Technologies',
+                 'addressLine1'   => '19200 Stevens Creek Blvd',
+                 'addressLine2'   => '',
+                 'city_state_zip' => 'Cupertino CA 95014');
+
+// 住所を検証します
+$result = $verifier->verifyAddressUSA($address);
+
+// 結果を表示します
+if ($result->addressErrorNumber != 0) {
+    echo $result->addressErrorNumber;
+    echo $result->addressErrorMessage;
+} else {
+    // すべてのプロパティを表示します
+    print_r($result);
+
+    // あるいは企業名のみを表示します
+    echo $result->firm;
+
+    // 正しい住所ですか?
+    $valid = ($result->valid == 'VALID');
+}
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.sales-use-tax-basic">
+      <title>Sales &amp; Use Tax Basic</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> は、
+        StrikeIron の Sales &amp; Use Tax Basic サービス用のクライアントです。
+        このサービスについての詳細は、以下の StrikeIron のリソースを参照ください。
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Sales &amp; Use Tax Basic Service のページ</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Sales &amp; Use Tax Basic Service の WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+
+      <para>
+        このサービスには 2 つのメソッドがあります。
+        <code>getTaxRateUSA()</code> および <code>getTaxRateCanada()</code> は、
+        それぞれアメリカとカナダの販売・消費税の情報を取得します。
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
+                                                'password' => 'あなたのパスワード'));
+
+// Sales & Use Tax Basic サービス用のクライアントを取得します
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
+
+// カナダのオンタリオ州の税率を取得します
+$rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'foo'));
+print_r($rateInfo);               // すべてのプロパティを表示します
+echo $rateInfo->GST;              // あるいは GST (Goods & Services Tax) のみを表示します
+
+// アメリカ・カリフォルニア州クパチーノの税率を取得します
+$rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
+print_r($rateInfo);               // すべてのプロパティを表示します
+echo $rateInfo->state_sales_tax;  // あるいは州の消費税のみを表示します
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+</sect1>

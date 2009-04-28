@@ -1,0 +1,246 @@
+<sect1 id="zend.memory.memory-objects">
+
+    <title>内存对象</title>
+
+    <sect2 id="zend.memory.memory-objects.movable">
+
+        <title>可移动的</title>
+
+        <para>
+            使用内存管理器的<code>create([$data])</code>方法创建可移动的内存对象:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            "可移动"意思是这样的对象可以被交换并从内存中卸载,然后当应用程序代码访问该对象时再加载它.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.locked">
+
+        <title>锁定的</title>
+
+        <para>
+            使用内存管理器的<code>createLocked([$data])</code>方法创建锁定的内存对象:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->createLocked($data);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            "锁定的"意思是这样的对象绝不会被交换和从内存中卸载.
+        </para>
+
+        <para>
+            锁定的对象和可移动的对象提供相同的接口(<code>Zend_Memory_Container_Interface</code>).
+            因此锁定的对象可以用于任何地方代替可移动对象.
+        </para>
+
+        <para>
+            基于性能的考虑,应用程序或则开发者能决定一些对象应该决不会被交换是非常有用的.
+        </para>
+
+        <para>
+            访问锁定的对象更快,应为内存管理器不需要追踪这些对象的变化.
+        </para>
+
+        <para>
+            The locked objects class (<code>Zend_Memory_Container_Locked</code>)
+            guarantees virtually the same performance as working with a string
+            variable.  The overhead is a single dereference to get the class property.
+
+            锁定的对象类(<code>Zend_Memory_Container_Locked</code>)保证了和处理字符串变量差不多的性能.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.value">
+
+        <title>内存容器 '值' 属性.</title>
+
+        <para>
+            使用内存容器(可移动或者锁定)'<code>值</code>'属性操作内存对象数据:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+
+echo $memObject->value;
+
+$memObject->value = $newValue;
+
+$memObject->value[$index] = '_';
+
+echo ord($memObject->value[$index1]);
+
+$memObject->value = substr($memObject->value, $start, $length);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            访问内存对象数据的一个替代的方法是使用<link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>
+            方法.该方法在<emphasis>必须</emphasis>用于PHP5.2之前的版本.它还不得不用于其他由于性能原因情况
+        </para>
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.api">
+
+        <title>内存容器接口</title>
+
+        <para>
+            内存容器提供下面的方法:
+        </para>
+
+        <sect3 id="zend.memory.memory-objects.api.getRef">
+
+            <title>getRef() 方法</title>
+
+            <programlisting role="php"><![CDATA[
+public function &getRef();
+]]>
+            </programlisting>
+
+            <para>
+                <code>getRef()</code> 方法返回对象值的引用.
+            </para>
+
+            <para>
+                如果此时对象不在内存中,可移动对象从缓存中加载.
+                如果对象从缓存中加载,并且受管理对象的内存使用量总和超过内存限制,将导致交换.
+            </para>
+
+            <para>
+                <code>getRef()</code> 方法 <emphasis>必须</emphasis>
+                用于访问PHP5.2版本以前的内存对象数据.
+            </para>
+
+            <para>
+                追踪数据的变化需要额外的资源.<code>getRef()</code>返回字符串的引用,它直接由用户应用程序改变.
+                因此好的办法是使用<code>getRef()</code>方法进行值数据处理:
+                <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+
+$value = &$memObject->getRef();
+
+for ($count = 0; $count < strlen($value); $count++) {
+    $char = $value[$count];
+    ...
+}
+]]>
+                </programlisting>
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.touch">
+
+            <title>touch() 方法</title>
+
+            <programlisting role="php"><![CDATA[
+public function touch();
+]]>
+            </programlisting>
+            <para>
+                <code>touch()</code> 方法应该和<code>getRef()</code>一起使用.当对象值改变时它会发出信号.
+                <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+...
+
+$value = &$memObject->getRef();
+
+for ($count = 0; $count < strlen($value); $count++) {
+    ...
+    if ($condition) {
+        $value[$count] = $char;
+    }
+    ...
+}
+
+$memObject->touch();
+]]>
+                </programlisting>
+
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.lock">
+
+            <title>lock() 方法</title>
+
+            <programlisting role="php"><![CDATA[
+public function lock();
+]]>
+            </programlisting>
+
+            <para>
+                它用于阻止一些你选择的对象被交换.正常情况,这是不需要的,因为内存管理器使用智能的算法决定候选的交换数据.
+                但是你明确地知道,在代码的这一部分对象不应该被交换,你可以锁定它们.
+            </para>
+
+            <para>
+                在内存中锁定的对象还保证了在解锁对象前<code>getRef()</code>方法返回的引用是有效的:
+                <programlisting role="php"><![CDATA[
+$memObject1 = $memoryManager->create($data1);
+$memObject2 = $memoryManager->create($data2);
+...
+
+$memObject1->lock();
+$memObject2->lock();
+
+$value1 = &$memObject1->getRef();
+$value2 = &$memObject2->getRef();
+
+for ($count = 0; $count < strlen($value2); $count++) {
+    $value1 .= $value2[$count];
+}
+
+$memObject1->touch();
+$memObject1->unlock();
+$memObject2->unlock();
+]]>
+                </programlisting>
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.unlock">
+
+            <title>unlock() 方法</title>
+
+            <programlisting role="php"><![CDATA[
+public function unlock();
+]]>
+            </programlisting>
+
+            <para>
+                当不再需要锁定是<code>unlock()</code> 方法解锁一个内存对象.查看上面的例子.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.isLocked">
+
+            <title>isLocked() 方法</title>
+
+            <programlisting role="php"><![CDATA[
+public function isLocked();
+]]>
+            </programlisting>
+
+            <para>
+                <code>isLocked()</code>方法用于检测是否一个对象被锁定了.如果对象被锁定她返回
+                <code>true</code>,否则如果没有被锁定返回<code>false</code>.
+                对于"锁定的"对象这总是<code>true</code>,对于"可移动"对象可以使<code>true</code>
+                或则<code>false</code>.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>

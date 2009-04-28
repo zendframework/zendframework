@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.simpy">
+    <title>Zend_Service_Simpy</title>
+    <sect2 id="zend.service.simpy.introduction">
+        <title>Introduction</title>
+        <para>
+            <classname>Zend_Service_Simpy</classname> is a lightweight wrapper for the free REST API available
+            for the Simpy social bookmarking service.
+        </para>
+        <para>
+            In order to use <classname>Zend_Service_Simpy</classname>, you should already have a Simpy account.
+            To get an account, visit the <ulink url="http://simpy.com">Simpy web site</ulink>. For more
+            information on the Simpy REST API, refer to the
+            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST API documentation</ulink>.
+        </para>
+        <para>
+            The Simpy REST API allows developers to interact with specific aspects of the service that
+            the Simpy web site offers. The sections following will outline the use of
+            <classname>Zend_Service_Simpy</classname> for each of these areas.
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Links: Create, Retrieve, Update, Delete
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Tags: Retrieve, Delete, Rename, Merge, Split
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Notes: Create, Retrieve, Update, Delete
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Watchlists: Get, Get All
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+    <sect2 id="zend.service.simpy.links">
+        <title>Links</title>
+        <para>
+            When querying links, results are returned in descending order by date added. Links can be
+            searched by title, nickname, tags, note, or even the content of the web page associated
+            with the link. Simpy offers searching by any or all of these fields with phrases, boolean
+            operators, and wildcards. See the
+            <ulink url="http://www.simpy.com/faq#searchSyntax">search syntax</ulink> and
+            <ulink url="http://www.simpy.com/faq#searchFieldsLinks">search fields</ulink>
+            sections of the Simpy FAQ for more information.
+        </para>
+        <example id="zend.service.simpy.links.querying">
+            <title>Querying Links</title>
+            <programlisting role="php"><![CDATA[
+$simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
+
+/* Search for the 10 links added most recently */
+$linkQuery = new Zend_Service_Simpy_LinkQuery();
+$linkQuery->setLimit(10);
+
+/* Get and display the links */
+$linkSet = $simpy->getLinks($linkQuery);
+foreach ($linkSet as $link) {
+    echo '<a href="';
+    echo $link->getUrl();
+    echo '">';
+    echo $link->getTitle();
+    echo '</a><br />';
+}
+
+/* Search for the 5 links added most recently with 'PHP' in
+the title */
+$linkQuery->setQueryString('title:PHP');
+$linkQuery->setLimit(5);
+
+/* Search for all links with 'French' in the title and
+'language' in the tags */
+$linkQuery->setQueryString('+title:French +tags:language');
+
+/* Search for all links with 'French' in the title and without
+'travel' in the tags */
+$linkQuery->setQueryString('+title:French -tags:travel');
+
+/* Search for all links added on 12/9/06 */
+$linkQuery->setDate('2006-12-09');
+
+/* Search for all links added after 12/9/06 (excluding that
+date) */
+$linkQuery->setAfterDate('2006-12-09');
+
+/* Search for all links added before 12/9/06 (excluding that
+date) */
+$linkQuery->setBeforeDate('2006-12-09');
+
+/* Search for all links added between 12/1/06 and 12/9/06
+(excluding those two dates) */
+$linkQuery->setBeforeDate('2006-12-01');
+$linkQuery->setAfterDate('2006-12-09');
+]]></programlisting>
+        </example>
+        <para>
+            Links are represented uniquely by their URLs. In other words, if an attempt is made to save
+            a link that has the same URL as an existing link, data for the existing link will be
+            overwritten with the data specified in the save attempt.
+        </para>
+        <example id="zend.service.simpy.links.modifying">
+            <title>Modifying Links</title>
+            <programlisting role="php"><![CDATA[
+$simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
+
+/* Save a link */
+$simpy->saveLink(
+    'Zend Framework' // Title
+    'http://framework.zend.com', // URL
+    Zend_Service_Simpy_Link::ACCESSTYPE_PUBLIC, // Access Type
+    'zend, framework, php' // Tags
+    'Zend Framework home page' // Alternative title
+    'This site rocks!' // Note
+);
+
+/* Overwrite the existing link with new data */
+$simpy->saveLink(
+    'Zend Framework'
+    'http://framework.zend.com',
+    Zend_Service_Simpy_Link::ACCESSTYPE_PRIVATE, // Access Type has changed
+    'php, zend, framework' // Tags have changed order
+    'Zend Framework' // Alternative title has changed
+    'This site REALLY rocks!' // Note has changed
+);
+
+/* Delete the link */
+$simpy->deleteLink('http://framework.zend.com');
+
+/* A really easy way to do spring cleaning on your links ;) */
+$linkSet = $this->_simpy->getLinks();
+foreach ($linkSet as $link) {
+    $this->_simpy->deleteLink($link->getUrl());
+}
+]]></programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.simpy.tags">
+        <title>Tags</title>
+        <para>
+            When retrieved, tags are sorted in decreasing order (i.e. highest
+            first) by the number of links that use the tag.
+        </para>
+        <example id="zend.service.simpy.tags.working">
+            <title>Working With Tags</title>
+            <programlisting role="php"><![CDATA[
+$simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
+
+/* Save a link with tags */
+$simpy->saveLink(
+    'Zend Framework' // Title
+    'http://framework.zend.com', // URL
+    Zend_Service_Simpy_Link::ACCESSTYPE_PUBLIC, // Access Type
+    'zend, framework, php' // Tags
+);
+
+/* Get a list of all tags in use by links and notes */
+$tagSet = $simpy->getTags();
+
+/* Display each tag with the number of links using it */
+foreach ($tagSet as $tag) {
+    echo $tag->getTag();
+    echo ' - ';
+    echo $tag->getCount();
+    echo '<br />';
+}
+
+/* Remove the 'zend' tag from all links using it */
+$simpy->removeTag('zend');
+
+/* Rename the 'framework' tag to 'frameworks' */
+$simpy->renameTag('framework', 'frameworks');
+
+/* Split the 'frameworks' tag into 'framework' and
+'development', which will remove the 'frameworks' tag for
+all links that use it and add the tags 'framework' and
+'development' to all of those links */
+$simpy->splitTag('frameworks', 'framework', 'development');
+
+/* Merge the 'framework' and 'development' tags back into
+'frameworks', basically doing the opposite of splitting them */
+$simpy->mergeTags('framework', 'development', 'frameworks');
+]]></programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.simpy.notes">
+        <title>Notes</title>
+        <para>
+            Notes can be saved, retrieved, and deleted. They are uniquely
+            identified by a numeric ID value.
+        </para>
+        <example id="zend.service.simpy.notes.working">
+            <title>Working With Notes</title>
+            <programlisting role="php"><![CDATA[
+$simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
+
+/* Save a note */
+$simpy->saveNote(
+    'Test Note', // Title
+    'test,note', // Tags
+    'This is a test note.' // Description
+);
+
+/* Overwrite an existing note */
+$simpy->saveNote(
+    'Updated Test Note', // Title
+    'test,note,updated', // Tags
+    'This is an updated test note.', // Description
+    $note->getId() // Unique identifier
+);
+
+/* Search for the 10 most recently added notes */
+$noteSet = $simpy->getNotes(null, 10);
+
+/* Display the notes */
+foreach ($noteSet as $note) {
+    echo '<p>';
+    echo $note->getTitle();
+    echo '<br />';
+    echo $note->getDescription();
+    echo '<br >';
+    echo $note->getTags();
+    echo '</p>';
+}
+
+/* Search for all notes with 'PHP' in the title */
+$noteSet = $simpy->getNotes('title:PHP');
+
+/* Search for all notes with 'PHP' in the title and
+without 'framework' in the description */
+$noteSet = $simpy->getNotes('+title:PHP -description:framework');
+
+/* Delete a note */
+$simpy->deleteNote($note->getId());
+]]></programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.simpy.watchlists">
+        <title>Watchlists</title>
+        <para>
+            Watchlists cannot be created or removed using the API, only
+            retrieved. Thus, you must set up a watchlist via the Simpy web
+            site prior to attempting to access it using the API.
+        </para>
+        <example id="zend.service.simpy.watchlists.retrieving">
+            <title>Retrieving Watchlists</title>
+            <programlisting role="php"><![CDATA[
+$simpy = new Zend_Service_Simpy('yourusername', 'yourpassword');
+
+/* Get a list of all watchlists */
+$watchlistSet = $simpy->getWatchlists();
+
+/* Display data for each watchlist */
+foreach ($watchlistSet as $watchlist) {
+    echo $watchlist->getId();
+    echo '<br />';
+    echo $watchlist->getName();
+    echo '<br />';
+    echo $watchlist->getDescription();
+    echo '<br />';
+    echo $watchlist->getAddDate();
+    echo '<br />';
+    echo $watchlist->getNewLinks();
+    echo '<br />';
+
+    foreach ($watchlist->getUsers() as $user) {
+        echo $user;
+        echo '<br />';
+    }
+
+    foreach ($watchlist->getFilters() as $filter) {
+        echo $filter->getName();
+        echo '<br />';
+        echo $filter->getQuery();
+        echo '<br />';
+    }
+}
+
+/* Get an individual watchlist by its identifier */
+$watchlist = $simpy->getWatchlist($watchlist->getId());
+$watchlist = $simpy->getWatchlist(1);
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

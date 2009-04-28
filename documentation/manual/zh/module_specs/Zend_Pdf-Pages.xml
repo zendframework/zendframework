@@ -1,0 +1,108 @@
+<sect1 id="zend.pdf.pages">
+    <title> 文档页面 </title>
+    <sect2 id="zend.pdf.pages.creation">
+        <title> 页面生成 </title>
+        <para>
+            PDF 文档页面摘要由 <code>Zend_Pdf_Page</code> 类来描绘。
+        </para>
+
+        <para>
+            PDF 页面或者从 PDF 加载，或者生成新的。
+        </para>
+
+        <para>
+            新页面可以通过创建 <code>Zend_Pdf_Page</code> 对象或调用 <code>Zend_Pdf::newPage()</code> 方法来获得，它返回  <code>Zend_Pdf_Page</code> 对象。<code>Zend_Pdf::newPage()</code> 方法生成已经附加到文档的页面，和未附加的页面不同的是它不能和若干个 PDF 文档一起用，但是性能会稍好一些。
+            <footnote>
+                <para>
+                    Zend_Pdf 模块的 V1.0 有点限制，会在将来的版本中改善。但未附加的页面总是为在文档间共享提供更好（更多的优化）的结果。
+                </para>
+            </footnote>.
+            选择那种方式是你的自由。
+        </para>
+
+        <para>
+            <code>Zend_Pdf::newPage()</code> 方法和 <code>Zend_Pdf_Page</code> 构造器带有相同的指定页面尺寸的参数。它或者是以点（1/72 英寸）来计算的页面的尺寸（$x,$y），或者以预先定义的常数来计算，常数就是页面类型：
+            <itemizedlist>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            文档存储在 <code>Zend_Pdf</code> 类的 public 成员 <code>$pages</code> 里，它是 <code>Zend_Pdf_Page</code> 对象的一个数组。它完整地定义了设置和文档页面的顺序并可以以普通的数组来处理：
+        </para>
+
+        <example id="zend.pdf.pages.example-1">
+            <title>PDF 文档页面管理 </title>
+            <programlisting role="php"><![CDATA[<?php
+    ...
+    // Reverse page order
+    $pdf->pages = array_reverse($pdf->pages);
+    ...
+    // Add new page
+    $pdf->pages[] = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+    // Add new page
+    $pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+
+    // Remove specified page.
+    unset($pdf->pages[$id]);
+
+    ...]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.pdf.pages.cloning">
+        <title> 页面克隆 </title>
+        <para>
+            通过用页面为参数创建 <code>Zend_Pdf_Page</code> 对象 PDF 页面可以被克隆：
+        </para>
+
+        <example id="zend.pdf.pages.example-2">
+            <title>Cloning existing page.</title>
+            <programlisting role="php"><![CDATA[<?php
+    ...
+    // Store template page in a separate variable
+    $template = $pdf->pages[$templatePageIndex];
+    ...
+    // Add new page
+    $page1 = new Zend_Pdf_Page($template);
+    $pdf->pages[] = $page1;
+    ...
+
+    // Add another page
+    $page2 = new Zend_Pdf_Page($template);
+    $pdf->pages[] = $page2;
+    ...
+
+    // Remove source template page from the documents.
+    unset($pdf->pages[$templatePageIndex]);
+
+    ...]]>
+            </programlisting>
+        </example>
+
+        <para>
+            如果你需要用同一个模板生成若干页面，这很有用。
+        </para>
+
+        <caution>
+            <para>
+                重要！克隆页面用模板页面来共享一些 PDF 资源，它只可以用于使用模板页的同一个文档内。修改后的文档可当作新文件来保存。
+            </para>
+        </caution>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

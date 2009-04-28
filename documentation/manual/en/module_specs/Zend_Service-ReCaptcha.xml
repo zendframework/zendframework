@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.recaptcha">
+    <title>Zend_Service_ReCaptcha</title>
+
+    <sect2 id="zend.service.recaptcha.introduction">
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Service_ReCaptcha</classname> provides a client for the <ulink
+                url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>.
+            Per the reCAPTCHA site, "reCAPTCHA is a free CAPTCHA service that
+            helps to digitize books." Each reCAPTCHA requires the user to input
+            two words, the first of which is the actual captcha, and the second
+            of which is a word from some scanned text that Optical Character
+            Recognition (OCR) software has been unable to identify.
+            The assumption is that if a user correctly provides the first
+            word, the second is likely correctly entered as well, and can be
+            used to improve OCR software for digitizing books.
+        </para>
+
+        <para>
+            In order to use the reCAPTCHA service, you will need to <ulink
+                url="http://recaptcha.net/whyrecaptcha.html">sign up for an
+                account</ulink> and register one or more domains with the
+            service in order to generate public and private keys.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.recaptcha.simplestuse">
+        <title>Simplest use</title>
+
+        <para>
+            Instantiate a <classname>Zend_Service_ReCaptcha</classname> object, passing it
+            your public and private keys:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
+]]></programlisting>
+
+        <para>
+            To render the reCAPTCHA, simply call the <code>getHTML()</code>
+            method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $recaptcha->getHTML();
+]]></programlisting>
+
+        <para>
+            When the form is submitted, you should receive two fields,
+            'recaptcha_challenge_field' and 'recaptcha_response_field'. Pass
+            these to the ReCaptcha object's <code>verify()</code> method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$result = $recaptcha->verify(
+    $_POST['recaptcha_challenge_field'],
+    $_POST['recaptcha_response_field']
+);
+]]></programlisting>
+
+        <para>
+            Once you have the result, test against it to see if it is valid. The
+            result is a <classname>Zend_Service_ReCaptcha_Response</classname> object,
+            which provides an <code>isValid()</code> method.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+if (!$result->isValid()) {
+    // Failed validation
+}
+]]></programlisting>
+
+        <para>
+            Even simpler is to use <link
+                linkend="zend.captcha.adapters.recaptcha">the ReCaptcha</link>
+            <classname>Zend_Captcha</classname> adapter, or to use that adapter as a
+            backend for the <link
+                linkend="zend.form.standardElements.captcha">Captcha form
+                element</link>. In each case, the details of rendering and
+            validating the reCAPTCHA are automated for you.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

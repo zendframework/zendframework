@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Formular Elemente und Dekoratore für Dojo</title>
+
+    <para>
+        Aufbauend auf den <link linkend="zend.dojo.view.dijit">Dijit View Helfern</link> bietet die Familie der
+        <classname>Zend_Dojo_Form</classname> Klassen die Möglichkeit Dijits nativ in eigenen Formularen anzupassen.
+    </para>
+
+    <para>
+        Es gibt drei Optionen für die Anpassung der Dojo Formularelemente in eigenen Formularen:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Verwenden von <classname>Zend_Dojo::enableForm()</classname>. Das fügt Pluginpfade für Dekoratore und
+                Elemente in allen hinzugefügten Formularelementen, rekursiv,  hinzu. Zusätzlich macht es
+                die Viewobjekte dojo-verwendbar. Trotzdem ist zu beachten das jedes Unterformular das
+                <emphasis>nach</emphasis> diesem Aufruf angefügt wird, auch an
+                <classname>Zend_Dojo::enableForm()</classname> übergeben wird.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Verwenden der Dojo-spezifischen Formular und Unterformular Implementationen,
+                <classname>Zend_Dojo_Form</classname> und <classname>Zend_Dojo_Form_SubForm</classname>. Diese können als
+                sofort verwendbarer Ersatz für <classname>Zend_Form</classname> und <classname>Zend_Form_SubForm</classname>
+                verwendet werden, enthalten alle notwendigen Dekorator und Elementpfade, setzen die
+                Dojo-spezifische Standard-DisplayGroup-Klasse, und machen die View dojo-verwendbar.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Als letztes, und weitschweifigstes, kan man die notwendigen Dekorator und Elementpfade selbst
+                setzen, die Standard-DisplayGroup-Klasse setzen, und die View dojo-verwendbar machen. Da
+                <classname>Zend_Dojo::enableForm()</classname> das bereits macht, gibt es nur sehr wenig Gründe diesen
+                Weg zu nehmen.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.dojo.form.enable">
+        <title>Aktivieren von Dojo in bestehenden Formularen</title>
+
+        <para>
+            "Warte mal,", wird man sagen; "Ich erweitere bereits <classname>Zend_Form</classname> mit meiner eigenen Formularklasse!
+            Wie kann ich Sie Dojo-verwendbar machen?'"
+        </para>
+
+        <para>
+            Als erstes, und einfachstes, muß einfach die Erweiterung von <classname>Zend_Form</classname> so geändert
+            werden das <classname>Zend_Dojo_Form</classname> erweitert wird, und alle Plätze in denen man
+            <classname>Zend_Form_SubForm</classname> instanziert so aktualisiert werden das
+            <classname>Zend_Dojo_Form_SubForm</classname> instanziert wird.
+        </para>
+
+        <para>
+            Ein zweiter Weg ist der Aufruf von <classname>Zend_Dojo::enableForm()</classname> in der eigenen
+            <code>init()</code> Methode des Formulars; wenn die Fomulardefinition komplett ist, muß durch
+            alle Unterformulare iteriert werden um Sie für Dojo zu aktivieren:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class My_Form_Custom extends Zend_Form
+{
+    public function init()
+    {
+        // Das Formular Dojo-aktivieren:
+        Zend_Dojo::enableForm($this);
+
+        // ... die Fomulardefinition hier weiterführen
+
+        // Alle Unterformulare für Dojo aktivieren:
+        foreach ($this->getSubForms() as $subForm) {
+            Zend_Dojo::enableForm($subForm);
+        }
+    }
+}
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        Die Verwendung der Dijit-spezifischen Formulardekoratoren und Elemente ist wie die Verwendung von
+        anderen Formulardekoratoren oder Element.
+    </para>
+
+    <xi:include href="Zend_Dojo-Form-Decorators.xml" />
+    <xi:include href="Zend_Dojo-Form-Elements.xml" />
+    <xi:include href="Zend_Dojo-Form-Examples.xml" />
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

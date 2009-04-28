@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.pdf.introduction">
+    <!-- @todo review and revise upon completion of refactoring -->
+    <title>Introduction</title>
+    <para>
+    The <classname>Zend_Pdf</classname> component is a PDF (Portable Document Format) manipulation engine.
+    It can load, create, modify and save documents.
+    Thus it can help any PHP application dynamically create PDF documents by modifying existing documents or generating new ones from scratch.
+
+    <classname>Zend_Pdf</classname> offers the following features:
+    <itemizedlist>
+        <listitem>
+            <para>
+            Create a new document or load existing one.
+            <footnote>
+                <para>
+                Loading PDF V1.4 (Acrobat 5) documents is now supported.
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Retrieve a specified revision of the document.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Manipulate pages within a document. Change page order, add new pages, remove pages
+            from a document.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Different drawing primitives (lines, rectangles, polygons, circles, ellipses and sectors).
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Text drawing using any of the 14 standard (built-in) fonts or your own custom TrueType fonts.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Rotations.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Image drawing.
+            <footnote>
+                <para>
+                JPG, PNG [Up to 8bit per channel+Alpha] and TIFF images are supported.
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Incremental PDF file update.
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

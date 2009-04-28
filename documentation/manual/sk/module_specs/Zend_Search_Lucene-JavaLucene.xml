@@ -1,0 +1,87 @@
+<sect1 id="zend.search.lucene.java-lucene">
+    <title>Spolupráca s Java Lucene</title>
+
+    <sect2 id="zend.search.lucene.index-creation.file-formats">
+        <title>Formáty súborov</title>
+        <para>
+            Indexový súbor Zend_Search_Lucene je binárne kompatibilný s verziou
+            Lucene 1.4 a vyššou.
+        </para>
+
+        <para>
+            Detailný <ulink url="http://lucene.apache.org/java/2_0_0/fileformats.html">popis formátu</ulink>
+            je k dispozícii na stránke projektu Lucene
+            <footnote><para>Aktuálne podporovaná verzia indexového súboru je v2.0.</para></footnote>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.index-directory">
+        <title>Adresár indexu</title>
+
+        <para>
+        Po vytvorení indexu obsahuje adresár niekoľko súborov:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                <filename>segments</filename> je súbor, ktorý obsahuje zoznam segmentov indexu.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                <filename>*.cfs</filename> súbory ktoré obsahujú segmenty indexu.
+                Optimalizovaný index vždy obsahuje iba jeden segment!
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                <filename>deletable</filename> súbor ktorý obsahuje zoznam súborov
+                ktoré sa už nepoužívajú indexom, ale nemohli byť zmazané.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.java-lucene.source-code">
+        <title>Zdrojový kód v Java</title>
+        <para>
+            Nasledujúci Java kód poskytuje príklad ako indexovať súbor s použitím
+            Java Lucene:
+        </para>
+
+        <programlisting role="java"><![CDATA[
+/**
+* Index creation:
+*/
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.document.*;
+
+import java.io.*
+
+...
+
+IndexWriter indexWriter = new IndexWriter("/data/my_index",
+                                          new SimpleAnalyzer(), true);
+
+...
+
+String filename = "/path/to/file-to-index.txt"
+File f = new File(filename);
+
+Document doc = new Document();
+doc.add(Field.Text("path", filename));
+doc.add(Field.Keyword("modified",DateField.timeToString(f.lastModified())));
+doc.add(Field.Text("author", "unknown"));
+FileInputStream is = new FileInputStream(f);
+Reader reader = new BufferedReader(new InputStreamReader(is));
+doc.add(Field.Text("contents", reader));
+
+indexWriter.addDocument(doc);]]>
+        </programlisting>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

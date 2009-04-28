@@ -1,0 +1,70 @@
+<!-- EN-Revision: 12116 -->
+<sect2 id="zend.test.phpunit.testing">
+    <title>Tester vos contrôleurs et vos applications MVC</title>
+
+    <para>Une fois , votre fichier d'amorçage en place, vous pouvez commencer à tester. Tester est typiquement ce que
+    vous auriez pu faire avec une suite de test PHPUnit ("test suite"), avec quelques petites différences
+    mineures.</para>
+
+    <para>Premièrement, vous devez distribuer l'URL à tester en utilisant la méthode <code>dispatch()</code> de TestCase
+    :</para>
+
+    <programlisting role="php"><![CDATA[
+class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testPageAccueil()
+    {
+        $this->dispatch('/');
+        // ...
+    }
+}
+]]></programlisting>
+
+    <para>Il y a des moments, cependant, où vous devez fournir des informations supplémentaires - des variables GET et
+    POST, des informations de COOKIE, etc. Vous pouvez peupler la requête avec ces informations :</para>
+
+    <programlisting role="php"><![CDATA[
+class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testBarActionShouldReceiveAllParameters()
+    {
+        // Passer les variables GET :
+        $this->request->setQuery(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+
+        // Passer les variables POST :
+        $this->request->setPost(array(
+            'baz'  => 'bat',
+            'lame' => 'bogus',
+        ));
+
+        // Paramètrer une valeur de cookie :
+        $this->request->setCookie('user', 'matthew');
+        // ou plusieurs :
+        $this->request->setCookies(array(
+            'timestamp' => time(),
+            'host'      => 'foobar',
+        ));
+
+        // Ajouter des en-têtes :
+        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+
+        // Définir le type de requête :
+        $this->request->setMethod('POST');
+
+        // Distribuer :
+        $this->dispatch('/foo/bar');
+
+        // ...
+    }
+}
+]]></programlisting>
+
+    <para>Maintenant que la requête est construite, il est temps de créer des assertions.</para>
+</sect2>

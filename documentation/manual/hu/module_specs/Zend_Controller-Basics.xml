@@ -1,0 +1,167 @@
+<sect1 id="zend.controller.basics">
+    <title>Zend_Controller alapok</title>
+    <para>
+        A
+        <code>Zend_Controller</code>
+        rendszert könnyűnek, modulárisnak és kiterjeszthetőnek tervezték. Minimalista kivitelezés, hogy rugalmasságot és szabadságot engedjen a felhasználóknak, miközben elegendő szerkezetet nyújt hozzá, hogy a
+        <code>Zend_Controller</code>
+        köré épült rendszerek néhány gyakori egyezményen és hasonló kódelrendezésen osztozzanak.
+    </para>
+    <para>
+        A következő ábra bemutatja a munkafolyamatot, az utána következőkben pedig részletesen leírjuk a kölcsönhatásokat:
+    </para>
+    <para>
+        <inlinegraphic
+            align="center"
+            fileref="figures/zend.controller.basics.png"
+            format="PNG"
+            scale="100"
+            valign="middle"
+            width="483"
+        />
+    </para>
+    <para>
+        A
+        <code>Zend_Controller</code>
+        munkafolyamatot több összetevő valósítja meg. Habár nem szükséges teljesen megérteni ezen összetevők működését ahhoz, hogy használjuk a rendszert, a folyamat gyakorlati ismerete hasznos lehet.
+    </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Front</code>
+                    hangszereli a
+                    <code>Zend_Controller</code>
+                    rendszer teljes munkafolyamatát. Az Elülső Vezérlő minta egy megvalósítása. A
+                    <code>Zend_Controller_Front</code> dolgozza fel a kiszolgáló által fogadott összes kérést, és teljes egészében felelős a kérések Műveletvezérlőkhöz (<code>Zend_Controller_Action</code>) való kiküldéséért.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Request_Abstract</code>
+                    (gyakran csak mint a
+                    <code>Kérés Objektum</code>)
+                    képviseli a kérés környezetét és tagfüggvények segítségével lehetővé teszi a vezérlő és művelet nevek, illetve minden kérés-paraméter beállítását és kinyerését. Továbbá számon tartja, hogy a művelet, amit tartalmaz, el lett-e indítva a
+                    <code>Zend_Controller_Dispatcher</code>
+                    által vagy sem. Az elvont kérés objektum kiterjesztései felhasználhatók a teljes környezet megukba foglalására, lehetővé téve az útválasztóknak, hogy információt szedjenek ki belőle a vezérlő és művelet nevek beállítása céljából.
+                </para>
+                <para>
+                    Alapból a
+                    <code>Zend_Controller_Request_Http</code>
+                    van használva, mely a teljes HTTP kéréskörnyezethez hozzáférést biztosít.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Router_Interface</code>-t
+                    útválasztók meghatározásához használjuk. Az útválasztás az a folyamat, melynek során a kéréskörnyezet alapján eldöntjük melyik vezérlőnek, és eme vezérlőnek mely műveletének kell a kérést fogadnia. Ez a vezérlő, művelet és esetleges más paraméterek aztán bekerülnek a kérés objektumba, hogy aztán feldolgozásra kerüljenek a
+                    <code>Zend_Controller_Dispatcher_Standard</code>
+                    által. Útválasztás csak pontosan egyszer zajlik: mikor a kérés megérkezik, az első művelet elindítása előtt.
+                </para>
+                <para>
+                    Az alapértelmezett útválasztó, a
+                    <code>Zend_Controller_Router_Route_Rewrite</code>
+                    vesz egy URI végpontot, ahogy az a
+                    <code>Zend_Controller_Request_Http</code>-ben
+                    van megadva, majd szétbontja azt egy vezérlőre, műveletre és paraméterekre az URL-ben szereplő elérési út alapján. Példának okáért a
+                    <code>http://localhost/ize/bigyo/kulcs/ertek</code>
+                    URL-t visszafejtve az
+                    <code>ize</code>
+                    vezérlő, a
+                    <code>bigyo</code>
+                    művelet lesz használva, megadva a
+                    <code>kulcs</code>
+                    paramétert
+                    <code>ertek</code>
+                    értékkel.
+                </para>
+                <para>
+                    <code>A Zend_Controller_Router_Rewrite</code>-ot
+                    egyéni elérési utaknak is meg lehet feleltetni; további inforációkért lásd
+                    <link linkend="zend.controller.router">az útválasztó dokumentációját</link>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Dispatcher_Interface</code>-t
+                    kézbesítők meghatározására használjuk. A kézbesítés a folyamat, amely során kinyerjük a vezérlőt és a műveletet a kérés objektumból és leképezzük egy vezérlő állományra/osztályra és művelet tagfüggvényre a vezérlő osztályban. Ha a vezérlő vagy a művelet nem létezik, meghatározza az alapértelmezett vezérlőt és műveletet, aminek kézbesíteni kell.
+                </para>
+                <para>
+                    Maga a kézbesítés folyamata a vezérlő példányosításából és az ebben az osztályban lévő művelet tagfüggvény meghívásából áll. Eltérően az útválasztástól, ami csak egyszer történik, a kézbesítés ciklikusan zajlik. Ha a kérés objektum kézbesített állapotát bármikor visszaállítjuk, a ciklus megismétlődik, meghívva azt a műveletet, ami a kérés objektumban épp be van állítva. Az első alkalommal, amikor a ciklus úgy végződik, hogy a kérés objektum kézbesített állapotba van állítva (logikai igaz), a folyamat megáll.
+                </para>
+                <para>
+                    Az alapértelmezett kézbesítő a
+                    <code>Zend_Controller_Dispatcher_Standard</code>.
+                    Ez a vezérlőket a Controller szóra végződő, TeveBetűzöttOsztályokként határozzza meg, a művelet tagfüggvényeket pedig az Action szóra végződő teveBetűzöttTagfüggvényekként:
+                    <code>IzeController::bigyoAction()</code>.
+                    Ebben az esetben a vezérlőre
+                    <code>ize</code>ként,
+                    a műveletre pedig
+                    <code>bigyo</code>ként
+                    hivatkozhatunk.
+                </para>
+                <note>
+                    <title>TeveBetűzöttElnevezésiMegállapodások</title>
+                    <para>
+                        Mivel az emberek közismerten következetlenek a betűzés megtartásában hivatkozások gépelésekor, a Zend Framework egységesen kisbetűsre alakítja az elérési utakat. Ez természetesen kihatással lesz arra, hogyan nevezed el a vezérlőid és műveleteid… vagy hogyan utalsz rájuk a hivatkozásokban.
+                    </para>
+                    <para>
+                        Ha szeretnéd, hogy a vezérlő osztályod vagy műveletneved több TeveBetűzöttSzóból álljon, ezeket a szavakat az URL-ben egy kötőjellel vagy egy ponttal kell elválasztanod (habár beállíthatod a használandó karaktert).
+                    </para>
+                    <para>
+                        A példa kedvéért, ha az
+                        <code>IzeBigyoController::bigyoBigyocskaAction()</code>
+                        műveletet akarod elérni, akkor mint
+                        <code>/ize-bigyo/bigyo-bigyocska</code>
+                        vagy
+                        <code>/ize-bigyo/bigyo-bigyocska</code>
+                        kell hivatkoznod rájuk az URL-ben.
+                    </para>
+                </note>
+            </listitem>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Action</code>
+                    az alap műveletvezérlő összetevő. Minden vezérlő egy osztály, ami a
+                    <code>Zend_Controller_Action</code>
+                    osztálytól örököl, és egy vagy több művelet tagfüggvényt kell tartalmaznia.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    A
+                    <code>Zend_Controller_Response_Abstract</code>
+                    ír le egy a műveletvezérlőkből a válaszok összegyűjtésére és visszaküldésére használt alap válasz osztályt. Mind a fejléc, mind pedig a törzs tartalmat összegyűjti.
+                </para>
+                <para>
+                    Az alapértelmezett válasz osztály a
+                    <code>Zend_Controller_Response_Http</code>,
+                    amely a HTTP környezetben való használatra alkalmas.
+                </para>
+            </listitem>
+        </itemizedlist>
+    <para>
+        A
+        <code>Zend_Controller</code>
+        munkafolyamata viszonylag egyszerű. A
+        <code>Zend_Controller_Front</code>
+        fogadja a kérést, majd meghívja a
+        <code>Zend_Controller_Router_Rewrite</code>-ot,
+        hogy megállapítsa, melyik vezérlőnek (és műveletnek abban a vezérlőben) kézbesítsen. A
+        <code>Zend_Controller_Router_Rewrite</code>
+        felbontja az URI-t, hogy beállítsa a vezérlő és művelet neveket a kérésben. Ezután a
+        <code>Zend_Controller_Front</code>
+        belép a kézbesítési ciklusba. Meghívja a
+        <code>Zend_Controller_Dispatcher_Standard</code>-et,
+        átadva a kérést, hogy kézbesítse a kérésben megadott (vagy az alapbeállítású) vezérlőnek és a műveletnek. Miután a vezérlő végzett, az irányítás visszakerül a
+        <code>Zend_Controller_Front</code>-hoz.
+        Ha a vezérlő a kérés kézbesített állapotának visszaállításával jelezte, hogy egy másik vezérlőnek kell kézbesíteni, a ciklus folytatódik és újabb kézbesítés következik. Egyébként a folyamat leáll.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

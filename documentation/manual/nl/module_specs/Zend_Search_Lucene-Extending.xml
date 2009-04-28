@@ -1,0 +1,388 @@
+<sect1 id="zend.search.lucene.extending">
+    <title>Uitbreidbaarheid</title>
+
+    <sect2 id="zend.search.lucene.extending.analysis">
+        <title>Tekst analysator</title>
+        <para>
+            De <code>Zend_Search_Lucene_Analysis_Analyzer</code> klasse wordt gebruikt door de indexer
+            om tekstvelden van het document van tokens te voorzien.
+        </para>
+
+        <para>
+            De <code>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</code> en <code>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</code> methodes worden gebruikt om de
+            standaard analysator te verkrijgen of te zetten.
+        </para>
+
+        <para>
+            Je kan dus je eigen tekst analysator aanwijzen of er één kiezen uit de aangeboden set van analysators:
+            <code>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</code> en <code>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</code> (standaard).
+            Beiden interpreteren tokens als een opeenvolging van letters. <code>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</code> past tokens aan
+            naar kleine letters.
+        </para>
+
+        <para>
+            Om tussen analysatoren te wisselen kan je de volgende code gebruiken:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new Zend_Search_Lucene_Analysis_Analyzer_Common_Text());
+...
+$index->addDocument($doc);
+
+?>]]></programlisting>
+
+        <para>
+            De <code>Zend_Search_Lucene_Analysis_Analyzer_Common</code> is ontworpen om de parent van alle door gebruikers gedefinieerde
+            analysatoren te zijn. De gebruiker zou alleen de <code>tokenize()</code> methode moeten schrijven, die
+            een string als input data moet aanvaarden en een array van tokens moet terugsturen.
+        </para>
+
+        <para>
+            De <code>tokenize()</code> methode zou de <code>normalize()</code> methode op alle tokens moeten toepassen.
+            Dit laat toe token filters te gebuiken met jouw analysator.
+        </para>
+
+        <para>
+            Hier is een voorbeeld van een zelfgemaakte analysator, welke woorden met cijfers als termen aanvaardt:
+
+            <example>
+                <title>Custom tekst Analysator</title>
+                <programlisting role="php"><![CDATA[<?php
+/** Dit is een zelfgemaakte tekst analysator, die woorden met cijfers als een enkele term beschouwt */
+
+
+/** Zend_Search_Lucene_Analysis_Analyzer_Common */
+require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common.php';
+
+class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
+{
+    /**
+     * Tekst van termtokens voorzien
+     * Geeft een array van Zend_Search_Lucene_Analysis_Token objecten terug
+     *
+     * @param string $data
+     * @return array
+     */
+    public function tokenize($data)
+    {
+        $tokenStream = array();
+
+        $position = 0;
+        while ($position < strlen($data)) {
+            // spaties overslaan
+            while ($position < strlen($data) && !ctype_alpha($data{$position}) && !ctype_digit($data{$position})) {
+                $position++;
+            }
+
+            $termStartPosition = $position;
+
+            // token lezen
+            while ($position < strlen($data) && (ctype_alpha($data{$position}) || ctype_digit($data{$position}))) {
+                $position++;
+            }
+
+            // Leeg token, einde van de stream.
+            if ($position == $termStartPosition) {
+                break;
+            }
+
+            $token = new Zend_Search_Lucene_Analysis_Token(substr($data,
+                                             $termStartPosition,
+                                             $position-$termStartPosition),
+                                      $termStartPosition,
+                                      $position);
+            $tokenStream[] = $this->normalize($token);
+        }
+
+        return $tokenStream;
+    }
+}
+
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new My_Analyzer());
+
+?>]]></programlisting>
+            </example>
+        </para>
+        </sect2>
+
+    <sect2 id="zend.search.lucene.extending.scoring">
+        <title>Score Algorithmes</title>
+        <para>
+            De score van een query <literal>q</literal> voor document <literal>d</literal>
+            is als volgt gedefinieerd:
+        </para>
+
+        <para>
+            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d)  ) *
+            coord(q,d) * queryNorm(q)</code>
+        </para>
+
+        <para>
+            tf(t in d) - <code>Zend_Search_Lucene_Search_Similarity::tf($freq)</code> - een score factor gebaseerd op
+            de frequentie van een term of zin in een document.
+        </para>
+
+        <para>
+            idf(t) - <code>Zend_Search_Lucene_Search_SimilaritySimilarity::tf($term, $reader)</code> - een score factor
+            van een eenvoudige term voor de gespecificeerde index.
+        </para>
+
+        <para>
+            getBoost(t.field in d) - boost factor voor het termveld.
+        </para>
+
+        <para>
+            lengthNorm($term) - de normalisatiewaarde voor een veld, gegeven het totaal
+            aantal termen in een veld. Deze waarde wordt opgeslagen met de index. Deze waarden,
+            samen met de veldboosts, worden opgeslaan in een index en vermenigvuldigd in scores
+            door de zoekcode voor hits op elk veld.
+        </para>
+        <para>
+            Overeenkomsten op langere velden zijn minder precies, dus geven implementaties
+            van deze methode meestal kleinere waarden terug als numTokens groot is, en
+            grotere waarden als numTokens klein is.
+        </para>
+
+        <para>
+            coord(q,d) - <code>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</code> - een score
+            factor gebaseerd op de fractie van alle query termen dat een document bevat.
+        </para>
+
+        <para>
+            De aanwezigheid van een groot deel van de query termen duidt een betere overeenkomst
+            met de query aan, dus zullen implementaties van deze methode meestal grotere waarden
+            teruggeven wanneer de ratio tussen deze parameters groot is en kleinere waarden wanneer
+            de ratio ertussen klein is.
+        </para>
+
+        <para>
+            queryNorm(q) -  de normalizatiewaarde voor een query gegeven de som van de
+            gewichten van elk van de querytermen in het vierkant. Het gewicht van elke query term
+            wordt dan vermenigvuldigd met deze waarde.
+        </para>
+
+        <para>
+            Dit beïnvloedt het ordenen niet, maar probeert enkel scores van verschillende queries
+            vergelijkbaar te maken.
+        </para>
+
+        <para>
+            Het scoring algoritme kan verpersoonlijkt worden door je eigen Similarity klasse te maken. Om
+            dit te doen moet je de Zend_Search_Lucene_Search_Similarity klasse uitbreiden zoals hierna is
+            gedefinieerd, en dan de <code>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</code>
+            methode gebruiken om het tot standaard te zetten.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
+    public function lengthNorm($fieldName, $numTerms) {
+        return 1.0/sqrt($numTerms);
+    }
+
+    public function queryNorm($sumOfSquaredWeights) {
+        return 1.0/sqrt($sumOfSquaredWeights);
+    }
+
+    public function tf($freq) {
+        return sqrt($freq);
+    }
+
+    /**
+     * Wordt nu niet gebruikt. Berekent het aandeel van een slordige zinovereenkomst,
+     * gebaseerd op een edit afstand.
+     */
+    public function sloppyFreq($distance) {
+        return 1.0;
+    }
+
+    public function idfFreq($docFreq, $numDocs) {
+        return log($numDocs/(float)($docFreq+1)) + 1.0;
+    }
+
+    public function coord($overlap, $maxOverlap) {
+        return $overlap/(float)$maxOverlap;
+    }
+}
+
+$mySimilarity = new MySimilarity();
+Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
+
+?>]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.extending.storage">
+        <title>Opslag containers</title>
+        <para>
+        Een abstracte klasse Zend_Search_Lucene_Storage_Directory definieert mapfunctionaliteit.
+        </para>
+
+        <para>
+        De Zend_Search_Lucene constructor gebruikt ofwel een string of een Zend_Search_Lucene_Storage_Directory object
+        als input.
+        </para>
+
+        <para>
+        De Zend_Search_Lucene_Storage_Directory_Filesystem klasse implementeert mapfunctionaliteit voor het
+        bestandssyteem.
+        </para>
+
+        <para>
+        Indien een string werd opgegeven als input voor de Zend_Search_Lucene constructor, zal de
+        indexlezer (Zend_Search_Lucene object) het beschouwen als een bestandssysteempad en zelf een
+        Zend_Search_Lucene_Storage_Directory_Filesystem object instantiëren.
+        </para>
+
+        <para>
+        Je kan je eigen implementatiemap definiëren door de Zend_Search_Lucene_Storage_Directory klasse uit te breiden.
+        </para>
+
+        <para>
+        Zend_Search_Lucene_Storage_Directory methodes:
+        </para>
+        <programlisting><![CDATA[<?php
+
+abstract class Zend_Search_Lucene_Storage_Directory {
+/**
+ * Sluit de opslag.
+ *
+ * @return void
+ */
+abstract function close();
+
+
+/**
+ * Maakt een nieuw, leeg bestand in de map met gegeven $filename.
+ *
+ * @param string $name
+ * @return void
+ */
+abstract function createFile($filename);
+
+
+/**
+ * Verwijdert een bestaande $filename uit de map.
+ *
+ * @param string $filename
+ * @return void
+ */
+abstract function deleteFile($filename);
+
+
+/**
+ * Geeft true terug indien een bestand met gegeven $filename bestaat.
+ *
+ * @param string $filename
+ * @return boolean
+ */
+abstract function fileExists($filename);
+
+
+/**
+ * Geeft de lengte terug van een bestand $filename in de map.
+ *
+ * @param string $filename
+ * @return integer
+ */
+abstract function fileLength($filename);
+
+
+/**
+ * Geeft de UNIX timestamp terug van de laatste wijziging van $filename.
+ *
+ * @param string $filename
+ * @return integer
+ */
+abstract function fileModified($filename);
+
+
+/**
+ * Hernoemt een bestaand bestand in de map.
+ *
+ * @param string $from
+ * @param string $to
+ * @return void
+ */
+abstract function renameFile($from, $to);
+
+
+/**
+ * Zet de gewijzigde tijd van $filename naar nu.
+ *
+ * @param string $filename
+ * @return void
+ */
+abstract function touchFile($filename);
+
+
+/**
+ * Geeft een Zend_Search_Lucene_Storage_File object terug voor een gegeven $filename in de map.
+ *
+ * @param string $filename
+ * @return Zend_Search_Lucene_Storage_File
+ */
+abstract function getFileObject($filename);
+
+}
+
+?>]]></programlisting>
+
+        <para>
+        De <code>getFileObject($filename)</code> methode van de Zend_Search_Lucene_Storage_Directory klasse geeft
+        een Zend_Search_Lucene_Storage_File object terug.
+        </para>
+        <para>
+        De abstrakte klasse Zend_Search_Lucene_Storage_File implementeert bestandsabstractie en voorziet in indexbestand
+        leesprimitieven.
+        </para>
+        <para>
+        Je moet ook de Zend_Search_Lucene_Storage_File klasse uitbreiden voor jouw Directory implementatie.
+        </para>
+        <para>
+        Slechts twee methodes van de Zend_Search_Lucene_Storage_File klasse hoeven te worden overloaded in jouw implementatie:
+        </para>
+        <programlisting><![CDATA[<?php
+
+class MyFile extends Zend_Search_Lucene_Storage_File {
+    /**
+     * Zet de bestandpositie indicator en zet de bestandswijzer voort.
+     * De nieuwe positie, berekend in bytes vanaf het begin van het
+     * bestand, wordt verkregen door offset aan de door $whence aangegeven
+     * positie te voegen, welke waarden als volgt zijn gedefinieerd::
+     * SEEK_SET - Zet de positie gelijk aan offset bytes.
+     * SEEK_CUR - Zet de positie aan de huidige lokatie plus offset.
+     * SEEK_END - Zet de positie tot einde-van-bestand plus offset. (Om naar
+     * een positie vòòr einde-van-bestand te gaan moet je een negatieve waarde
+     * aan offset toekennen.)
+     * Geeft 0 indien success; anders -1
+     *
+     * @param integer $offset
+     * @param integer $whence
+     * @return integer
+     */
+    public function seek($offset, $whence=SEEK_SET) {
+        ...
+    }
+
+    /**
+     * Lees $length bytes van het bestand en beweeg de bestandswijzer voort.
+     *
+     * @param integer $length
+     * @return string
+     */
+    protected function _fread($length=1) {
+        ...
+    }
+}
+
+?>]]></programlisting>
+
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

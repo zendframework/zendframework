@@ -1,0 +1,29 @@
+<sect1 id="zend.json.introduction">
+    <title>Wprowadzenie</title>
+    <para>
+        <code>Zend_Json</code> dostarcza wygodne metody serializowania danych
+        PHP do formatu JSON i dekodowania z formatu JSON do PHP. Aby dowiedzieć
+        się więcej o JSON <ulink url="http://www.json.org/">odwiedź stronę
+        projektu JSON</ulink>.
+    </para>
+    <para>
+        Format JSON, JavaScript Object Notation, może być użyty do wymiany danych
+        między JavaScript a innymi językami. Dzięki temu, że JSON może być
+        bezpośrednio odebrany przez JavaScript jest on dużo bardziej efektywnym
+        i lżejszym formatem wymiany danych z JavaScript niż XML.
+    </para>
+
+    <para>
+        Dodatkowo klasa <code>Zend_Json</code> zapewnia łatwy sposób konwertowania danych
+        XML na JSON. Ta wbudowana funkcjonalność pozwoli programistom PHP
+        zamieniać dane zakodowane w formacie XML do formatu JSON przed wysłaniem
+        ich do aplikacji klienta Ajax opartej na przeglądarce internetowej.
+        Klasa zapewnia łatwy sposób dynamicznej konwersji danych po stronie
+        serwera, zapobiegając niepotrzebnemu parsowaniu danych XML po stronie
+        aplikacji w przeglądarce internetowej. Daje ona funkcjonalność,
+        która powoduje ułatwienie technik przetwarzania danych w aplikacji.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

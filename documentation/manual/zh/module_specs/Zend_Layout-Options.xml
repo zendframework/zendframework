@@ -1,0 +1,150 @@
+<sect1 id="zend.layout.options">
+    <title>Zend_Layout 配置选项</title>
+
+    <para>
+        <code>Zend_Layout</code>有多种配置选项。这些都可以用调用适当的访问器来设置，传递数组或<code>Zend_Config</code>对象给构造器或<code>startMvc()</code>，传递选项数组给<code>setOptions()</code>，或传递<code>Zend_Config</code>对象给to <code>setConfig()</code>。
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <emphasis>layout</emphasis>：被使用的布局。使用当前变形器来解析提供给合适的布局视图脚本的名称。缺省地，这个值是'layout'并解析为'layout.phtml'。访问器是<code>setLayout()</code> 和 <code>getLayout()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>layoutPath</emphasis>:  布局视图脚本的基本路径。访问器是<code>setLayoutPath()</code> 和 <code>getLayoutPath()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>contentKey</emphasis>: 用于缺省内容（和MVC一起使用）的布局变量。缺省值是'content'。访问器是<code>setContentKey()</code> 和 <code>getContentKey()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>mvcSuccessfulActionOnly</emphasis>: 当使用MVC，当动作抛出一个异常并且这个标志为true，布局将不被解析（这是为了防止当<link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler plugin</link> 在使用时，布局被双重解析）。缺省地，这个标记是true。访问器是<code>setMvcSuccessfulActionOnly()</code> 和 <code>getMvcSuccessfulActionOnly()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>view</emphasis>: 当解析时使用的视图对象。当和MVC一起使用时，如果没有视图对象被显式传递，<code>Zend_Layout</code> 将尝试使用用<link linkend="zend.controller.actionhelpers.viewrenderer">the ViewRenderer</link> 注册的视图对象。访问器是<code>setView()</code> 和 <code>getView()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>helperClass</emphasis>: 当和MVC组件一起使用<code>Zend_Layout</code> 时的动作助手。  缺省是 <code>Zend_Layout_Controller_Action_Helper_Layout</code>。访问器是 <code>setHelperClass()</code> 和 <code>getHelperClass()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>pluginClass</emphasis>: 当和MVC组件一起使用<code>Zend_Layout</code> 时的前端控制器插件类。缺省是 <code>Zend_Layout_Controller_Plugin_Layout</code>。访问器是 <code>setPluginClass()</code> 和 <code>getPluginClass()</code>。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>inflector</emphasis>: 当解析布局名给布局视图脚本路径时的变形器；参见<link linkend="zend.layout.advanced.inflector"> <code>Zend_Layout</code> 变形器文档有更多细节 </link>。访问器是 <code>setInflector()</code> 和 <code>getInflector()</code>。
+        </para></listitem>
+    </itemizedlist>
+
+    <note>
+        <title>助手类和插件类必须传递给startMvc()</title>
+
+        <para>
+            为了<code>helperClass</code>和<code>pluginClass</code>设置有效，它们必须作为选项传递给<code>startMvc()</code>；如果以后设置，它们就没有影响。
+        </para>
+    </note>
+
+    <sect2 id="zend.layout.options.examples">
+        <title>范例</title>
+
+        <para>
+            下面的例子假定使用<code>$options</code>数组和<code>$config</code>对象：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$options = array(
+    'layout'     => 'foo',
+    'layoutPath' => '/path/to/layouts',
+    'contentKey' => 'CONTENT',           // ignored when MVC not used
+);
+?>]]></programlisting>
+
+        <programlisting role="php"><![CDATA[<?php
+/**
+[layout]
+layout = "foo"
+layoutPath = "/path/to/layouts"
+contentKey = "CONTENT"
+*/
+$config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
+?>]]></programlisting>
+
+        <example id="zend.layout.options.examples.constructor">
+            <title>传递选项给构造器或startMvc()</title>
+
+            <para>
+                为了配置<code>Zend_Layout</code>实例，构造器和<code>startMvc()</code> 静态方法都可以接受选项数组或带有选项的<code>Zend_Config</code> 对象。
+            </para>
+
+            <para>
+                首先，看一下传递数组：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+// Using constructor:
+$layout = new Zend_Layout($options);
+
+// Using startMvc():
+$layout = Zend_Layout::startMvc($options);
+?>]]></programlisting>
+
+            <para>
+                现在使用配置对象：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
+
+// Using constructor:
+$layout = new Zend_Layout($config);
+
+// Using startMvc():
+$layout = Zend_Layout::startMvc($config);
+?>]]></programlisting>
+
+            <para>
+               基本上，这是定制<code>Zend_Layout</code>实例的最简单的方法。
+            </para>
+        </example>
+
+        <example id="zend.layout.options.examples.setoptionsconfig">
+            <title>使用setOption() 和 setConfig()</title>
+
+            <para>
+                有时候在<code>Zend_Layout</code> 对象初始化以后才需要配置；<code>setOptions()</code> 和 <code>setConfig()</code>让你快速而起容易地来做：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+// Using an array of options:
+$layout->setOptions($options);
+
+// Using a Zend_Config object:
+$layout->setConfig($options);
+?>]]></programlisting>
+
+            <para>
+                然而要注意特定的选项，如<code>pluginClass</code> 和 <code>helperClass</code>，当用这个方法传递，将没有效果；它们需要传递给构造器或者<code>startMvc()</code> 方法。
+            </para>
+        </example>
+
+        <example id="zend.layout.options.examples.accessors">
+            <title>使用访问器</title>
+
+            <para>
+                最后，通过访问器来配置<code>Zend_Layout</code> 实例。所有的访问器实现一个流畅的接口，意味这它们的调用可能被链接：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$layout->setLayout('foo')
+       ->setLayoutPath('/path/to/layouts')
+       ->setContentKey('CONTENT');
+?>]]></programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

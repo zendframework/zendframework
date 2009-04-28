@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.view.helpers.initial.headmeta">
+    <title>HeadMeta ヘルパー</title>
+
+    <para>
+        HTML の <code>&lt;meta&gt;</code> 要素は、
+        HTML ドキュメントに関するメタ情報を扱います。
+        たとえばキーワードや文字セット、キャッシュ方式などです。
+        Meta タグには 'http-equiv' 形式と 'name' 形式があり、
+        'content' 属性が必須となります。また、
+        'lang' あるいは 'scheme' のいずれかの属性を含むことができます。
+    </para>
+
+    <para>
+        <code>HeadMeta</code> ヘルパーは、
+        meta タグを設定したり追加したりするための次のようなメソッドを提供します。
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>offsetSetName($index, $keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>prependName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>setName($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+        <listitem><para><code>appendHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>prependHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>setHttpEquiv($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>$keyValue</code> は 'name' あるいは 'http-equiv'
+        キーの値を定義します。<code>$content</code> は
+        'content' キーの値を定義し、<code>$modifiers</code>
+        はオプションで連想配列を指定します。この配列には
+        'lang' や 'scheme' といったキーが含まれます。
+    </para>
+
+    <para>
+        ヘルパーメソッド <code>headMeta()</code> で meta タグを設定することもできます。
+        このメソッドのシグネチャは <code>headMeta($content,
+            $keyValue, $keyType = 'name', $modifiers = array(), $placement =
+            'APPEND')</code>
+        です。<code>$keyValue</code> には、
+        <code>$keyType</code> ('name' あるいは 'http-equiv')
+        で指定したキーのコンテンツを指定します。
+        <code>$placement</code> は 'SET' (既存の値をすべて上書きする)
+        か 'APPEND' (スタックの最後に追加する)、
+        あるいは 'PREPEND' (スタックの先頭に追加する) となります。
+    </para>
+
+    <para>
+        <code>HeadMeta</code> は <code>append()</code> や
+        <code>offsetSet()</code>、<code>prepend()</code>、そして <code>set()</code>
+        をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
+        内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
+        あとで <code>itemToString()</code> メソッドでシリアライズします。
+        これはスタック内の項目についてチェックを行い、
+        オプションでそれを修正したものを返します。
+    </para>
+
+    <para>
+        <code>HeadMeta</code> ヘルパーは、
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+        ヘルパー</link> の具象実装です。
+    </para>
+
+    <example id="zend.view.helpers.initial.headmeta.basicusage">
+        <title>HeadMeta ヘルパーの基本的な使用法</title>
+
+        <para>
+            meta タグは、いつでも好きなときに指定することができます。
+            一般的には、クライアント側でのキャッシュの制御方法や
+            SEO 用キーワードなどを指定します。
+        </para>
+
+        <para>
+            たとえば、SEO 用のキーワードを指定したい場合は
+            'keywords' という名前の meta タグを作成します。
+            そして、そのページに関連するキーワードを値として指定します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// meta タグでキーワードを指定します
+$this->headMeta()->appendName('keywords', 'framework php productivity');
+]]>
+        </programlisting>
+
+        <para>
+            クライアント側でのキャッシュの制御方法を指定したい場合は、
+            http-equiv タグを設定してルールを指定します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// クライアント側でのキャッシュを無効にします
+$this->headMeta()->appendHttpEquiv('expires',
+                                   'Wed, 26 Feb 1997 08:21:57 GMT')
+                 ->appendHttpEquiv('pragma', 'no-cache')
+                 ->appendHttpEquiv('Cache-Control', 'no-cache');
+]]>
+        </programlisting>
+
+        <para>
+            meta タグの使い方としてもうひとつよくあるのは、
+            コンテンツタイプや文字セット、言語を指定するものです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// コンテンツタイプと文字セットを設定します
+$this->headMeta()->appendHttpEquiv('Content-Type',
+                                   'text/html; charset=UTF-8')
+                 ->appendHttpEquiv('Content-Language', 'en-US');
+]]>
+        </programlisting>
+
+        <para>
+            最後の例として、リダイレクトの前に見せるメッセージを
+            "meta refresh" で指定するものを示します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// 3 秒後に新しい URL に移動させます
+$this->headMeta()->appendHttpEquiv('Refresh',
+                                   '3;URL=http://www.some.org/some.html');
+]]>
+        </programlisting>
+
+        <para>
+            レイアウト内で meta タグを指定し終えたら、ヘルパーの内容を出力します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->headMeta() ?>
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

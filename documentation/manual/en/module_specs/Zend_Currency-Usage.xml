@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.usage">
+
+    <title>How to Work with Currencies</title>
+
+    <para>
+        To use <classname>Zend_Currency</classname> within your application, create an instance of it without any
+        parameters. This will create an instance of <classname>Zend_Currency</classname> with your locale set and defines
+        the currency which should be used for this locale.
+    </para>
+
+    <example id="zend.currency.usage.example1">
+
+        <title>Creating an Instance of Zend_Currency from the Locale</title>
+
+        <para>
+            Assume you have 'en_US' set as the set locale by the user or your environment. By passing no
+            parameters while creating the instance you tell <classname>Zend_Currency</classname> to use the currency
+            from the locale 'en_US'. This leads to an instance with US Dollar set as the currency with
+            formatting rules from 'en_US'.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency = new Zend_Currency();
+]]></programlisting>
+
+
+    </example>
+
+    <para>
+        <classname>Zend_Currency</classname> also supports the usage of an application-wide locale. You can set a <classname>Zend_Locale</classname> instance in the registry as shown
+        below. With this notation you can avoid setting the locale manually for each instance when
+        you want to use the same locale throughout the application.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// in your bootstrap file
+$locale = new Zend_Locale('de_AT');
+Zend_Registry::set('Zend_Locale', $locale);
+
+// somewhere in your application
+$currency = new Zend_Currency();
+]]></programlisting>
+
+    <note>
+        <para>
+            If your system has no default locale, or if the locale of your system can not be
+            detected automatically, <classname>Zend_Currency</classname> will throw an exception. If see this exception, you should consider setting the locale manually.
+        </para>
+    </note>
+
+    <para>
+        Depending on your needs, several parameters can be speicified at instantiation. Each of these parameters
+        is optional and can be omitted. Even the order of the parameters can be switched. The meaning of each
+        parameter is described in this list:
+    </para>
+
+    <itemizedlist mark='opencircle'>
+        <listitem>
+            <para>
+                <emphasis role="strong">currency</emphasis>:
+            </para>
+            <para>
+                A locale can include several currencies. Therefore the first parameter
+                <emphasis role="strong">'currency'</emphasis> can define which currency should be used by giving
+                the short name or full name of that currency. If that currency in not recognized in any locale an
+                exception will be thrown. Currency short names are always made up of 3 letters, written in uppercase.
+                Well known currency shortnames include <code>USD</code> or <code>EUR</code>.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">locale</emphasis>:
+            </para>
+            <para>
+                The <emphasis role="strong">'locale'</emphasis> parameter defines which locale should be
+                used for formatting the currency. The specified locale will also be used to get the script and symbol for this currency if these parameters are not given.
+            </para>
+            <note>
+                <para>
+                    Note that Zend_Currency only accepts locales which include a region. This means that all
+                    locales that only include a language will result in an exception. For example the locale
+                    <emphasis role="strong">en</emphasis> will cause an exception to be thrown whereas the locale
+                    <emphasis role="strong">en_US</emphasis> will return <emphasis role="strong">USD</emphasis>
+                    as currency.
+                </para>
+            </note>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.currency.usage.example2">
+
+        <title>Other Ways to Create Instances of Zend_Currency</title>
+
+        <programlisting role="php"><![CDATA[
+// expect standard locale 'de_AT'
+
+// creates an instance from 'en_US' using 'USD' which is default
+// currency for 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// creates an instance from the set locale ('de_AT') using 'EUR' as
+// currency
+$currency = new Zend_Currency();
+
+// creates an instance using 'EUR' as currency, 'en_US' for number
+// formating
+$currency = new Zend_Currency('en_US', 'EUR');
+]]></programlisting>
+
+    </example>
+
+    <para>
+        You can omit any of the parameters to <classname>Zend_Currency</classname>'s constructor if you want to use the default values. This has no negative effect
+        on handling the currencies. It can be useful if, for example, you don't know the default currency for a region.
+    </para>
+
+    <note>
+        <para>
+            For many countries there are several known currencies. Typically, one currency will currently be in use, with one or more ancient currencies. If the '<emphasis role="strong">currency</emphasis>' parameter
+            is suppressed the contemporary currency will be used. The region '<emphasis role="strong">de</emphasis>' for
+            example knows the currencies '<emphasis role="strong">EUR</emphasis>' and
+            '<emphasis role="strong">DEM</emphasis>'... '<emphasis role="strong">EUR</emphasis>' is the contemporary currency
+            and will be used if the currency parameter is omitted.
+        </para>
+    </note>
+
+    <sect2 id="zend.currency.usage.tocurrency">
+
+        <title>Creating and Output String from a Currency</title>
+
+        <para>
+            To get a numeric value converted to an output string formatted for the currency at hand, use the method
+            <emphasis role="strong">toCurrency()</emphasis>. It takes the value which should be converted.
+            The value itself can be any normalized number.
+        </para>
+
+        <para>
+            If you have a localized number you will have to convert it first to an normalized number with
+            <link linkend="zend.locale.number.normalize">Zend_Locale_Format::getNumber()</link>. It may then
+            be used with <code>toCurrency()</code> to create a currency output string.
+        </para>
+
+        <para>
+            <code>toCurrency(array $options)</code> accepts an array with options which can be used to temporarily set another
+            format or currency representation. For details about which options can be used see
+            <link linkend="zend.currency.usage.setformat">Changing the Format of a Currency</link>.
+        </para>
+
+        <example id="zend.currency.usage.tocurrency.example">
+
+            <title>Creating an Output String for a Currency</title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD', which is the default
+// values for 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints '$ 1,000.00'
+echo $currency->toCurrency(1000);
+
+// prints '$ 1.000,00'
+echo $currency->toCurrency(1000, array('format' => 'de_AT'));
+
+// prints '$ ١٬٠٠٠٫٠٠'
+echo $currency->toCurrency(1000, array('script' => 'Arab'));
+]]></programlisting>
+
+        </example>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.setformat">
+
+        <title>Changing the Format of a Currency</title>
+
+        <para>
+            The format which is used by creation of a <classname>Zend_Currency</classname> instance is, of course, the
+            standard format. But occasionally it is necessary to change this format.
+        </para>
+
+        <para>
+            The format of an currency output includes the following parts:
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Currency symbol, shortname or name</emphasis>:
+                </para>
+                <para>
+                    The symbol of the currency is normally displayed within the currency output string. It can be suppressed
+                    when needed or even overwritten.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Currency position</emphasis>:
+                </para>
+                <para>
+                    The position of the currency symbol is normally automatically defined by the locale. It can be
+                    changed if necessary.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Script</emphasis>:
+                </para>
+                <para>
+                    The script which shall be used to display digits. Detailed information about scripts and their
+                    usage can be found in the documentation of <classname>Zend_Locale</classname> in
+                    <link linkend="zend.locale.appendix.numberscripts.supported">supported number scripts</link>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Number formatting</emphasis>:
+                </para>
+                <para>
+                    The amount of currency (formally known as value of money) is formatted by the usage of
+                    formatting rules within the locale. For example is in English the ',' sign used as separator for
+                    thousands, and in German the '.' sign.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            So if you need to change the format, you should the
+            <emphasis role="strong">setFormat()</emphasis> method. It takes an array which should include every
+            option you want to change. The <code>options</code> array supports the following
+            settings:
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">position</emphasis>: Defines the position at which the currency
+                    description should be displayed. The supported positions can be found in
+                    <link linkend="zend.currency.usage.setformat.constantsposition">this table</link>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">script</emphasis>: Defined which script should be used for
+                    displaying digits. The default script for most locales is
+                    <emphasis role="strong">'Latn'</emphasis>, which includes the digits 0 to 9. Other
+                    scripts such as 'Arab' (Arabian) can be used. All supported scripts can be found in
+                    <link linkend="zend.locale.appendix.numberscripts.supported">this table</link>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">format</emphasis>: Defines the format which should be used for displaying
+                    numbers. This number-format includes for example the thousand separator. You can eighter use
+                    a default format by giving a locale identifier, or define the number-format manually.
+                    If no format is set the locale from the <classname>Zend_Currency</classname> object will be used.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">display</emphasis>: Defines which part of the currency should be
+                    used for displaying the currency representation. There are 4 representations which can be
+                    used and which are all described in
+                    <link linkend="zend.currency.usage.setformat.constantsdescription">this table</link>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">precision</emphasis>: Defines the precision which should be used for
+                    the currency representation. The default value is <emphasis role="strong">2</emphasis>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">name</emphasis>: Defines the full currency name which should be
+                    displayed. This option overwrites any currency name which is set through
+                    the creation of <classname>Zend_Currency</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">currency</emphasis>: Defines the international abbreviation which
+                    should be displayed. This option overwrites any abbreviation which is set through
+                    the creation of <classname>Zend_Currency</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">symbol</emphasis>: Defines the currency symbol which should be
+                    displayed. This option overwrites any symbol which is set through
+                    the creation of <classname>Zend_Currency</classname>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <table id="zend.currency.usage.setformat.constantsdescription">
+
+            <title>Constants for the selecting the currency description</title>
+
+            <tgroup cols="2" align="left">
+                <thead>
+                    <row>
+                        <entry>constant</entry>
+                        <entry>description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>NO_SYMBOL</entry>
+                        <entry>Do not display any currency representation</entry>
+                    </row>
+                    <row>
+                        <entry>USE_SYMBOL</entry>
+                        <entry>Display the currency symbol</entry>
+                    </row>
+                    <row>
+                        <entry>USE_SHORTNAME</entry>
+                        <entry>Display the 3 lettered international currency abbreviation</entry>
+                    </row>
+                    <row>
+                        <entry>USE_NAME</entry>
+                        <entry>Display the full currency name</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+
+        </table>
+
+        <table id="zend.currency.usage.setformat.constantsposition">
+
+            <title>Constants for the selecting the position of the currency description</title>
+
+            <tgroup cols="2" align="left">
+                <thead>
+                    <row>
+                        <entry>constant</entry>
+                        <entry>description</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>STANDARD</entry>
+                        <entry>Set the standard position as defined within the locale</entry>
+                    </row>
+                    <row>
+                        <entry>RIGHT</entry>
+                        <entry>Display the currency representation at the right side of the value</entry>
+                    </row>
+                    <row>
+                        <entry>LEFT</entry>
+                        <entry>Display the currency representation at the left side of the value</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+
+        </table>
+
+        <example id="zend.currency.usage.setformat.example">
+
+            <title>Changing the displayed format of a currency</title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD', 'Latin' and 'en_US' as
+// these are the default values from 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints 'US$ 1,000.00'
+echo $currency->toCurrency(1000);
+
+$currency->setFormat(array('display' => Zend_Currency::USE_NAME,
+                           'position' => Zend_Currency::RIGHT));
+
+// prints '1.000,00 US Dollar'
+echo $currency->toCurrency(1000);
+
+$currency->setFormat(array('name' => 'American Dollar'));
+// prints '1.000,00 American Dollar'
+echo $currency->toCurrency(1000);
+
+$currency->setFormat(array('format' => '##0.00'));
+// prints '1000,00 American Dollar'
+echo $currency->toCurrency(1000);
+]]></programlisting>
+
+        </example>
+    </sect2>
+
+    <sect2 id="zend.currency.usage.informational">
+
+        <title>Reference Methods for Zend_Currency</title>
+
+        <para>
+            Of course, <classname>Zend_Currency</classname> supports also methods to get information about any existing
+            and many ancient currencies from <classname>Zend_Locale</classname>. The supported
+            methods are:
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getSymbol()</emphasis>:
+                </para>
+                <para>
+                    Returns the known symbol of the set currency or a given currency. For example
+                    <emphasis role="strong">$</emphasis> for the US Dollar within the locale
+                    '<emphasis role="strong">en_US</emphasis>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getShortName()</emphasis>:
+                </para>
+                <para>
+                    Returns the abbreviation of the set currency or a given currency.  For example
+                    <emphasis role="strong">USD</emphasis> for the US Dollar within the locale
+                    '<emphasis role="strong">en_US</emphasis>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getName()</emphasis>:
+                </para>
+                <para>
+                    Returns the full name of the set currency of a given currency. For example
+                    <emphasis role="strong">US Dollar</emphasis> for the US Dollar within the locale
+                    '<emphasis role="strong">en_US</emphasis>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getRegionList()</emphasis>:
+                </para>
+                <para>
+                    Returns a list of regions where the set currency or a given one is known to be used.
+                    It is possible that a currency is used within several regions, so the return value
+                    is always an array.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getCurrencyList()</emphasis>:
+                </para>
+                <para>
+                    Returns a list of currencies which are used in the given region.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The function <code>getSymbol()</code>, <code>getShortName()</code> and <code>getName()</code> accept
+            two optional parameters. If no parameter is given the expected data will be returned from the
+            set currency. The first parameter takes the shortname of a currency. Short names are always three
+            lettered, for example EUR for euro or USD for US Dollar. The second parameter defines from which
+            locale the data should be read. If no locale is given, the set locale is used.
+        </para>
+
+        <example id="zend.currency.usage.informational.example">
+
+            <title>Getting Information about Currencies</title>
+
+            <programlisting role="php"><![CDATA[
+// creates an instance with 'en_US' using 'USD', 'Latin' and 'en_US'
+// as these are the default values from 'en_US'
+$currency = new Zend_Currency('en_US');
+
+// prints '$'
+echo $currency->getSymbol();
+
+// prints 'EUR'
+echo $currency->getShortName('EUR');
+
+// prints 'Österreichische Schilling'
+echo $currency->getName('ATS', 'de_AT');
+
+// returns an array with all regions where USD is used
+print_r($currency->getRegionList();
+
+// returns an array with all currencies which were ever used in this
+// region
+print_r($currency->getCurrencyList('de_AT');
+]]></programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.currency.usage.setlocale">
+
+        <title>Settings new default values</title>
+
+        <para>
+            The method <code>setLocale</code> allows to set a new locale for
+            <classname>Zend_Currency</classname>. All default
+            values for the currency will be overwritten when this method is invoked. This includes currency name,
+            abbreviation and symbol.
+        </para>
+
+        <example id="zend.currency.usage.setlocale.example">
+
+            <title>Setting a New Locale</title>
+
+            <programlisting role="php"><![CDATA[
+// get the currency for US
+$currency = new Zend_Currency('en_US');
+print $currency->toCurrency(1000);
+
+// get the currency for AT
+$currency->setLocale('de_AT');
+print $currency->toCurrency(1000);
+]]></programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.currency.usage.cache">
+
+        <title>Zend_Currency Performance Optimization</title>
+
+        <para>
+            <classname>Zend_Currency</classname>'s performance can be optimized using <classname>Zend_Cache</classname>.
+            The static method <classname>Zend_Currency::setCache($cache)</classname> accepts one option: a
+            <classname>Zend_Cache</classname> adapter. If the cache adapter is set, the localization data that
+            Zend_Currency uses are cached. There are some static methods for manipulating the cache:
+            <code>getCache()</code>, <code>hasCache()</code>, <code>clearCache()</code> and
+            <code>removeCache()</code>.
+        </para>
+
+        <example id="zend.currency.usage.cache.example">
+
+            <title>Caching currencies</title>
+
+            <programlisting role="php"><![CDATA[
+// creating a cache object
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             array('lifetime' => 120,
+                                   'automatic_serialization' => true),
+                             array('cache_dir'
+                                       => dirname(__FILE__) . '/_files/'));
+Zend_Currency::setCache($cache);
+]]></programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>

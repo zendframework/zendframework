@@ -1,0 +1,1792 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.96 $"/>
+		<generation date="$Date: 2008/06/26 03:47:58 $"/>
+		<language type="ro"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="ab">abhază</language>
+			<language type="af">afrikaans</language>
+			<language type="afa">limbă afro-asiatică</language>
+			<language type="ain">ainu</language>
+			<language type="akk">akkadiană</language>
+			<language type="ale">aleută</language>
+			<language type="alt">altaică meridională</language>
+			<language type="am">amharică</language>
+			<language type="an">aragoneză</language>
+			<language type="ang">engleză veche</language>
+			<language type="apa">limbă apașă</language>
+			<language type="ar">arabă</language>
+			<language type="arc">aramaică</language>
+			<language type="art">limbă artificială</language>
+			<language type="as">asameză</language>
+			<language type="aus">limbă australiană</language>
+			<language type="av">avară</language>
+			<language type="ay">aymara</language>
+			<language type="az">azeră</language>
+			<language type="ba">bașkiră</language>
+			<language type="bat">limbă baltică</language>
+			<language type="be">bielorusă</language>
+			<language type="ber">berberă</language>
+			<language type="bg">bulgară</language>
+			<language type="bh">bihari</language>
+			<language type="bn">bengaleză</language>
+			<language type="bnt">bantu</language>
+			<language type="bo">tibetană</language>
+			<language type="br">bretonă</language>
+			<language type="bs">bosniacă</language>
+			<language type="ca">catalană</language>
+			<language type="cai">limbă central-amerindiană</language>
+			<language type="cau">limbă caucaziană</language>
+			<language type="ce">cecenă</language>
+			<language type="cel">limbă celtică</language>
+			<language type="co">corsicană</language>
+			<language type="cop">coptă</language>
+			<language type="cs">cehă</language>
+			<language type="cu">slavonă</language>
+			<language type="cv">ciuvașă</language>
+			<language type="cy">galeză</language>
+			<language type="da">daneză</language>
+			<language type="de">germană</language>
+			<language type="de_AT">germană austriacă</language>
+			<language type="de_CH">germană standard elvețiană</language>
+			<language type="dra">limbă dravidiană</language>
+			<language type="egy">egipteană veche</language>
+			<language type="el">greacă</language>
+			<language type="elx">elamită</language>
+			<language type="en">engleză</language>
+			<language type="en_AU">engleză australiană</language>
+			<language type="en_CA">engleză canadiană</language>
+			<language type="en_GB">engleză britanică</language>
+			<language type="en_US">engleză americană</language>
+			<language type="eo">esperanto</language>
+			<language type="es">spaniolă</language>
+			<language type="es_419">spaniolă latino-americană</language>
+			<language type="es_ES">spaniolă iberică</language>
+			<language type="et">estonă</language>
+			<language type="eu">bască</language>
+			<language type="fa">persană</language>
+			<language type="fi">finlandeză</language>
+			<language type="fil">filipineză</language>
+			<language type="fiu">limbă fino-ugrică</language>
+			<language type="fj">fijiană</language>
+			<language type="fo">faroeză</language>
+			<language type="fr">franceză</language>
+			<language type="fr_CA">franceză canadiană</language>
+			<language type="fr_CH">franceză elvețiană</language>
+			<language type="fro">franceză veche</language>
+			<language type="fy">friziană</language>
+			<language type="ga">irlandeză</language>
+			<language type="gd">galică scoțiană</language>
+			<language type="gem">limbă germanică</language>
+			<language type="gl">galiciană</language>
+			<language type="gn">guarani</language>
+			<language type="got">gotică</language>
+			<language type="grc">greacă veche</language>
+			<language type="gsw">germană elvețiană</language>
+			<language type="gu">gujarati</language>
+			<language type="haw">hawaiană</language>
+			<language type="he">ebraică</language>
+			<language type="hi">hindi</language>
+			<language type="hit">hitită</language>
+			<language type="hr">croată</language>
+			<language type="ht">haitiană</language>
+			<language type="hu">maghiară</language>
+			<language type="hy">armeană</language>
+			<language type="ia">interlingua</language>
+			<language type="id">indoneziană</language>
+			<language type="ie">interlingue</language>
+			<language type="ik">inupiak</language>
+			<language type="inc">limbă indiană</language>
+			<language type="ine">limbă indo-europeană</language>
+			<language type="ira">limbă iraniană</language>
+			<language type="is">islandeză</language>
+			<language type="it">italiană</language>
+			<language type="ja">japoneză</language>
+			<language type="jpr">iudeo-persană</language>
+			<language type="jrb">iudeo-arabă</language>
+			<language type="jv">javaneză</language>
+			<language type="ka">georgiană</language>
+			<language type="kg">congoleză</language>
+			<language type="kk">cazacă</language>
+			<language type="kl">groenlandeză</language>
+			<language type="km">khmeră</language>
+			<language type="kn">kannada</language>
+			<language type="ko">coreeană</language>
+			<language type="ks">kashmiri</language>
+			<language type="ku">kurdă</language>
+			<language type="ky">kirghiză</language>
+			<language type="la">latină</language>
+			<language type="lb">luxemburgheză</language>
+			<language type="ln">lingala</language>
+			<language type="lo">laoțiană</language>
+			<language type="lt">lituaniană</language>
+			<language type="lv">letonă</language>
+			<language type="mg">malgașă</language>
+			<language type="mi">maori</language>
+			<language type="mis">limbi diverse</language>
+			<language type="mk">macedoneană</language>
+			<language type="ml">malayalam</language>
+			<language type="mn">mongolă</language>
+			<language type="mnc">manciuriană</language>
+			<language type="mo">moldovenească</language>
+			<language type="mr">marathi</language>
+			<language type="ms">malaeziană</language>
+			<language type="mt">malteză</language>
+			<language type="mul">limbi multiple</language>
+			<language type="mun">limbă munda</language>
+			<language type="my">birmaneză</language>
+			<language type="myn">limbă maya</language>
+			<language type="nai">limbă nord-amerindiană</language>
+			<language type="nap">napolitană</language>
+			<language type="ne">nepaleză</language>
+			<language type="nl">olandeză</language>
+			<language type="nl_BE">flamandă</language>
+			<language type="nn">norvegiană nynorsk</language>
+			<language type="no">norvegiană</language>
+			<language type="nub">limbă nubiană</language>
+			<language type="nv">navajo</language>
+			<language type="oc">occitană</language>
+			<language type="om">oromo</language>
+			<language type="or">oriya</language>
+			<language type="ota">turcă otomană</language>
+			<language type="oto">limbă otomi</language>
+			<language type="pa">punjabi</language>
+			<language type="paa">limbă papuașă</language>
+			<language type="peo">persană veche</language>
+			<language type="phi">limbă filipineză</language>
+			<language type="phn">feniciană</language>
+			<language type="pi">pali</language>
+			<language type="pl">poloneză</language>
+			<language type="pro">provensală veche</language>
+			<language type="ps">pașto</language>
+			<language type="pt">portugheză</language>
+			<language type="pt_BR">portugheză braziliană</language>
+			<language type="pt_PT">portugheză iberică</language>
+			<language type="qu">quechua</language>
+			<language type="rm">retoromană</language>
+			<language type="ro">română</language>
+			<language type="roa">limbă romanică</language>
+			<language type="ru">rusă</language>
+			<language type="rup">aromână</language>
+			<language type="sa">sanscrită</language>
+			<language type="sai">limbă sud-amerindiană</language>
+			<language type="sam">aramaică samariteană</language>
+			<language type="sc">sardiniană</language>
+			<language type="scn">siciliană</language>
+			<language type="sco">scoțiană</language>
+			<language type="sd">sindhi</language>
+			<language type="sem">limbă semitică</language>
+			<language type="sga">irlandeză veche</language>
+			<language type="sgn">limbaj mimico-gestual</language>
+			<language type="sh">sârbo-croată</language>
+			<language type="si">singaleză</language>
+			<language type="sit">limbă sino-tibetană</language>
+			<language type="sk">slovacă</language>
+			<language type="sl">slovenă</language>
+			<language type="sla">limbă slavă</language>
+			<language type="sm">samoană</language>
+			<language type="so">somaleză</language>
+			<language type="sq">albaneză</language>
+			<language type="sr">sârbă</language>
+			<language type="st">sesotho</language>
+			<language type="su">sundaneză</language>
+			<language type="sux">sumeriană</language>
+			<language type="sv">suedeză</language>
+			<language type="sw">swahili</language>
+			<language type="syr">siriană</language>
+			<language type="ta">tamil</language>
+			<language type="tai">limbă thailandeză</language>
+			<language type="te">telugu</language>
+			<language type="tg">tadjică</language>
+			<language type="th">thailandeză</language>
+			<language type="ti">tigrinya</language>
+			<language type="tk">turkmenă</language>
+			<language type="tl">tagalog</language>
+			<language type="tlh">klingoniană</language>
+			<language type="tn">setswana</language>
+			<language type="tr">turcă</language>
+			<language type="tt">tătară</language>
+			<language type="tut">limbă altaică</language>
+			<language type="tw">twi</language>
+			<language type="ty">tahitiană</language>
+			<language type="ug">uigură</language>
+			<language type="uk">ucraineană</language>
+			<language type="und">limbă necunoscută sau incorectă</language>
+			<language type="ur">urdu</language>
+			<language type="uz">uzbecă</language>
+			<language type="vi">vietnameză</language>
+			<language type="vo">volapuk</language>
+			<language type="wa">valonă</language>
+			<language type="wo">wolof</language>
+			<language type="xal">calmucă</language>
+			<language type="xh">xhosa</language>
+			<language type="yi">idiș</language>
+			<language type="yo">yoruba</language>
+			<language type="zap">zapotecă</language>
+			<language type="zh">chineză</language>
+			<language type="zh_Hans">chineză simplificată</language>
+			<language type="zh_Hant">chineză tradițională</language>
+			<language type="zu">zulu</language>
+			<language type="zxx">fară conținut lingvistic</language>
+		</languages>
+		<scripts>
+			<script type="Arab">arabă</script>
+			<script type="Armn">armeană</script>
+			<script type="Bali">balineză</script>
+			<script type="Beng">bengali</script>
+			<script type="Bopo">bopomofo</script>
+			<script type="Brai">braille</script>
+			<script type="Cans">simboluri aborigene canadiene unificate</script>
+			<script type="Copt">coptă</script>
+			<script type="Cprt">cipriotă</script>
+			<script type="Cyrl">chirilică</script>
+			<script type="Cyrs">slavonă bisericească veche</script>
+			<script type="Deva">devanagari</script>
+			<script type="Dsrt">mormonă</script>
+			<script type="Egyd">demotică egipteană</script>
+			<script type="Egyh">hieratică egipteană</script>
+			<script type="Egyp">hieroglife egiptene</script>
+			<script type="Ethi">etiopiană</script>
+			<script type="Geok">georgiană bisericească</script>
+			<script type="Geor">georgiană</script>
+			<script type="Glag">glagolitică</script>
+			<script type="Goth">gotică</script>
+			<script type="Grek">greacă</script>
+			<script type="Hang">coreeană</script>
+			<script type="Hani">ideografică</script>
+			<script type="Hans">ideografică simplificată</script>
+			<script type="Hant">ideografică tradițională</script>
+			<script type="Hebr">ebraică</script>
+			<script type="Hira">hiragana</script>
+			<script type="Hrkt">katakana sau hiragana</script>
+			<script type="Hung">maghiară veche</script>
+			<script type="Inds">valea Indului</script>
+			<script type="Ital">italică veche</script>
+			<script type="Java">javaneză</script>
+			<script type="Jpan">japoneză</script>
+			<script type="Kana">katakana</script>
+			<script type="Khmr">khmeră</script>
+			<script type="Laoo">laoțiană</script>
+			<script type="Latf">latină Fraktur</script>
+			<script type="Latg">latină galică</script>
+			<script type="Latn">latină</script>
+			<script type="Lina">grecă lineară A</script>
+			<script type="Linb">grecă lineară B</script>
+			<script type="Lydi">lidiană</script>
+			<script type="Maya">hieroglife maya</script>
+			<script type="Mong">mongolă</script>
+			<script type="Mymr">birmană</script>
+			<script type="Phnx">feniciană</script>
+			<script type="Qaai">moștenită</script>
+			<script type="Runr">runică</script>
+			<script type="Sinh">singaleză</script>
+			<script type="Syrc">siriană</script>
+			<script type="Syrj">siriană occidentală</script>
+			<script type="Syrn">siriană orientală</script>
+			<script type="Tfng">berberă</script>
+			<script type="Thai">thailandeză</script>
+			<script type="Tibt">tibetană</script>
+			<script type="Xpeo">persană veche</script>
+			<script type="Xsux">cuneiformă sumero-akkadiană</script>
+			<script type="Zxxx">nescrisă</script>
+			<script type="Zyyy">comună</script>
+			<script type="Zzzz">scriere necunoscută sau incorectă</script>
+		</scripts>
+		<territories>
+			<territory type="001">Lume</territory>
+			<territory type="002">Africa</territory>
+			<territory type="003">America de Nord</territory>
+			<territory type="005">America de Sud</territory>
+			<territory type="009">Oceania</territory>
+			<territory type="011">Africa Occidentală</territory>
+			<territory type="013">America Centrală</territory>
+			<territory type="014">Africa Orientală</territory>
+			<territory type="015">Africa Septentrională</territory>
+			<territory type="017">Africa Centrală</territory>
+			<territory type="018">Africa Meridională</territory>
+			<territory type="019">Americi</territory>
+			<territory type="021">America Septentrională</territory>
+			<territory type="029">Caraibe</territory>
+			<territory type="030">Asia Orientală</territory>
+			<territory type="034">Asia Meridională</territory>
+			<territory type="035">Asia de Sud-Est</territory>
+			<territory type="039">Europa Meridională</territory>
+			<territory type="053">Australia și Noua Zeelandă</territory>
+			<territory type="054">Melanezia</territory>
+			<territory type="057">Regiunea Micronezia</territory>
+			<territory type="061">Polinezia</territory>
+			<territory type="062">Asia Centrală de Sud</territory>
+			<territory type="142">Asia</territory>
+			<territory type="143">Asia Centrală</territory>
+			<territory type="145">Asia Occidentală</territory>
+			<territory type="150">Europa</territory>
+			<territory type="151">Europa Orientală</territory>
+			<territory type="154">Europa Septentrională</territory>
+			<territory type="155">Europa Occidentală</territory>
+			<territory type="172">Comunitatea Statelor Independente</territory>
+			<territory type="419">America Latină și Caraibe</territory>
+			<territory type="830">Insulele Anglo-Normande</territory>
+			<territory type="AD">Andorra</territory>
+			<territory type="AE">Emiratele Arabe Unite</territory>
+			<territory type="AF">Afganistan</territory>
+			<territory type="AG">Antigua și Barbuda</territory>
+			<territory type="AI">Anguilla</territory>
+			<territory type="AL">Albania</territory>
+			<territory type="AM">Armenia</territory>
+			<territory type="AN">Antilele Olandeze</territory>
+			<territory type="AO">Angola</territory>
+			<territory type="AQ">Antarctica</territory>
+			<territory type="AR">Argentina</territory>
+			<territory type="AS">Samoa Americană</territory>
+			<territory type="AT">Austria</territory>
+			<territory type="AU">Australia</territory>
+			<territory type="AW">Aruba</territory>
+			<territory type="AX">Insulele Aland</territory>
+			<territory type="AZ">Azerbaidjan</territory>
+			<territory type="BA">Bosnia și Herțegovina</territory>
+			<territory type="BB">Barbados</territory>
+			<territory type="BD">Bangladesh</territory>
+			<territory type="BE">Belgia</territory>
+			<territory type="BF">Burkina Faso</territory>
+			<territory type="BG">Bulgaria</territory>
+			<territory type="BH">Bahrain</territory>
+			<territory type="BI">Burundi</territory>
+			<territory type="BJ">Benin</territory>
+			<territory type="BM">Bermuda</territory>
+			<territory type="BN">Brunei</territory>
+			<territory type="BO">Bolivia</territory>
+			<territory type="BR">Brazilia</territory>
+			<territory type="BS">Bahamas</territory>
+			<territory type="BT">Bhutan</territory>
+			<territory type="BV">Insula Bouvet</territory>
+			<territory type="BW">Botswana</territory>
+			<territory type="BY">Bielorusia</territory>
+			<territory type="BZ">Belize</territory>
+			<territory type="CA">Canada</territory>
+			<territory type="CC">Insulele Cocos</territory>
+			<territory type="CD">Republica Democrată Congo</territory>
+			<territory type="CF">Republica Centrafricană</territory>
+			<territory type="CG">Congo</territory>
+			<territory type="CH">Eleveția</territory>
+			<territory type="CI">Coasta de Fildeș</territory>
+			<territory type="CK">Insulele Cook</territory>
+			<territory type="CL">Chile</territory>
+			<territory type="CM">Camerun</territory>
+			<territory type="CN">China</territory>
+			<territory type="CO">Columbia</territory>
+			<territory type="CR">Costa Rica</territory>
+			<territory type="CS">Serbia și Muntenegru</territory>
+			<territory type="CU">Cuba</territory>
+			<territory type="CV">Capul Verde</territory>
+			<territory type="CX">Insula Christmas</territory>
+			<territory type="CY">Cipru</territory>
+			<territory type="CZ">Republica Cehă</territory>
+			<territory type="DE">Germania</territory>
+			<territory type="DJ">Djibouti</territory>
+			<territory type="DK">Danemarca</territory>
+			<territory type="DM">Dominica</territory>
+			<territory type="DO">Republica Dominicană</territory>
+			<territory type="DZ">Algeria</territory>
+			<territory type="EC">Ecuador</territory>
+			<territory type="EE">Estonia</territory>
+			<territory type="EG">Egipt</territory>
+			<territory type="EH">Sahara de Vest</territory>
+			<territory type="ER">Eritreea</territory>
+			<territory type="ES">Spania</territory>
+			<territory type="ET">Etiopia</territory>
+			<territory type="FI">Finlanda</territory>
+			<territory type="FJ">Fiji</territory>
+			<territory type="FK">Insulele Falkland</territory>
+			<territory type="FM">Micronezia</territory>
+			<territory type="FO">Insulele Feroe</territory>
+			<territory type="FR">Franța</territory>
+			<territory type="GA">Gabon</territory>
+			<territory type="GB">Regatul Unit</territory>
+			<territory type="GD">Grenada</territory>
+			<territory type="GE">Georgia</territory>
+			<territory type="GF">Guyana Franceză</territory>
+			<territory type="GG">Guernsey</territory>
+			<territory type="GH">Ghana</territory>
+			<territory type="GI">Gibraltar</territory>
+			<territory type="GL">Groenlanda</territory>
+			<territory type="GM">Gambia</territory>
+			<territory type="GN">Guineea</territory>
+			<territory type="GP">Guadelupa</territory>
+			<territory type="GQ">Guineea Ecuatorială</territory>
+			<territory type="GR">Grecia</territory>
+			<territory type="GS">Insulele Georgia de Sud și Sandwich de Sud</territory>
+			<territory type="GT">Guatemala</territory>
+			<territory type="GU">Guam</territory>
+			<territory type="GW">Guineea-Bissau</territory>
+			<territory type="GY">Guyana</territory>
+			<territory type="HK">Hong Kong</territory>
+			<territory type="HM">Insula Heard și Insulele McDonald</territory>
+			<territory type="HN">Honduras</territory>
+			<territory type="HR">Croația</territory>
+			<territory type="HT">Haiti</territory>
+			<territory type="HU">Ungaria</territory>
+			<territory type="ID">Indonezia</territory>
+			<territory type="IE">Irlanda</territory>
+			<territory type="IL">Israel</territory>
+			<territory type="IM">Insula Man</territory>
+			<territory type="IN">India</territory>
+			<territory type="IO">Teritoriul Britanic din Oceanul Indian</territory>
+			<territory type="IQ">Irak</territory>
+			<territory type="IR">Iran</territory>
+			<territory type="IS">Islanda</territory>
+			<territory type="IT">Italia</territory>
+			<territory type="JE">Jersey</territory>
+			<territory type="JM">Jamaica</territory>
+			<territory type="JO">Iordania</territory>
+			<territory type="JP">Japonia</territory>
+			<territory type="KE">Kenya</territory>
+			<territory type="KG">Kirghizstan</territory>
+			<territory type="KH">Cambodgia</territory>
+			<territory type="KI">Kiribati</territory>
+			<territory type="KM">Comore</territory>
+			<territory type="KN">Saint Kitts și Nevis</territory>
+			<territory type="KP">Coreea de Nord</territory>
+			<territory type="KR">Coreea de Sud</territory>
+			<territory type="KW">Kuweit</territory>
+			<territory type="KY">Insulele Cayman</territory>
+			<territory type="KZ">Kazahstan</territory>
+			<territory type="LA">Laos</territory>
+			<territory type="LB">Liban</territory>
+			<territory type="LC">Sfânta Lucia</territory>
+			<territory type="LI">Liechtenstein</territory>
+			<territory type="LK">Sri Lanka</territory>
+			<territory type="LR">Liberia</territory>
+			<territory type="LS">Lesotho</territory>
+			<territory type="LT">Lituania</territory>
+			<territory type="LU">Luxemburg</territory>
+			<territory type="LV">Letonia</territory>
+			<territory type="LY">Libia</territory>
+			<territory type="MA">Maroc</territory>
+			<territory type="MC">Monaco</territory>
+			<territory type="MD">Moldova, Republica</territory>
+			<territory type="ME">Muntenegru</territory>
+			<territory type="MG">Madagascar</territory>
+			<territory type="MH">Insulele Marshall</territory>
+			<territory type="MK">Macedonia</territory>
+			<territory type="ML">Mali</territory>
+			<territory type="MM">Myanmar</territory>
+			<territory type="MN">Mongolia</territory>
+			<territory type="MO">Macao</territory>
+			<territory type="MP">Insulele Mariane de Nord</territory>
+			<territory type="MQ">Martinica</territory>
+			<territory type="MR">Mauritania</territory>
+			<territory type="MS">Montserrat</territory>
+			<territory type="MT">Malta</territory>
+			<territory type="MU">Mauritius</territory>
+			<territory type="MV">Maldive</territory>
+			<territory type="MW">Malawi</territory>
+			<territory type="MX">Mexic</territory>
+			<territory type="MY">Malaezia</territory>
+			<territory type="MZ">Mozambic</territory>
+			<territory type="NA">Namibia</territory>
+			<territory type="NC">Noua Caledonie</territory>
+			<territory type="NE">Niger</territory>
+			<territory type="NF">Insulele Norfolk</territory>
+			<territory type="NG">Nigeria</territory>
+			<territory type="NI">Nicaragua</territory>
+			<territory type="NL">Olanda</territory>
+			<territory type="NO">Norvegia</territory>
+			<territory type="NP">Nepal</territory>
+			<territory type="NR">Nauru</territory>
+			<territory type="NU">Niue</territory>
+			<territory type="NZ">Noua Zeelandă</territory>
+			<territory type="OM">Oman</territory>
+			<territory type="PA">Panama</territory>
+			<territory type="PE">Peru</territory>
+			<territory type="PF">Polinezia Franceză</territory>
+			<territory type="PG">Papua Noua Guinee</territory>
+			<territory type="PH">Filipine</territory>
+			<territory type="PK">Pakistan</territory>
+			<territory type="PL">Polonia</territory>
+			<territory type="PM">Saint Pierre și Miquelon</territory>
+			<territory type="PN">Pitcairn</territory>
+			<territory type="PR">Porto Rico</territory>
+			<territory type="PS">Teritoriul Palestinian</territory>
+			<territory type="PT">Portugalia</territory>
+			<territory type="PW">Palau</territory>
+			<territory type="PY">Paraguay</territory>
+			<territory type="QA">Qatar</territory>
+			<territory type="QO">Oceania Periferică</territory>
+			<territory type="QU">Uniunea Europeană</territory>
+			<territory type="RE">Reunion</territory>
+			<territory type="RO">România</territory>
+			<territory type="RS">Serbia</territory>
+			<territory type="RU">Rusia</territory>
+			<territory type="RW">Rwanda</territory>
+			<territory type="SA">Arabia Saudită</territory>
+			<territory type="SB">Insulele Solomon</territory>
+			<territory type="SC">Seychelles</territory>
+			<territory type="SD">Sudan</territory>
+			<territory type="SE">Suedia</territory>
+			<territory type="SG">Singapore</territory>
+			<territory type="SH">Sfânta Elena</territory>
+			<territory type="SI">Slovenia</territory>
+			<territory type="SJ">Svalbard și Jan Mayen</territory>
+			<territory type="SK">Slovacia</territory>
+			<territory type="SL">Sierra Leone</territory>
+			<territory type="SM">San Marino</territory>
+			<territory type="SN">Senegal</territory>
+			<territory type="SO">Somalia</territory>
+			<territory type="SR">Surinam</territory>
+			<territory type="ST">Sao Tome și Principe</territory>
+			<territory type="SV">El Salvador</territory>
+			<territory type="SY">Siria</territory>
+			<territory type="SZ">Swaziland</territory>
+			<territory type="TC">Insulele Turks și Caicos</territory>
+			<territory type="TD">Ciad</territory>
+			<territory type="TF">Teritoriile Australe și Antarctice Franceze</territory>
+			<territory type="TG">Togo</territory>
+			<territory type="TH">Thailanda</territory>
+			<territory type="TJ">Tadjikistan</territory>
+			<territory type="TK">Tokelau</territory>
+			<territory type="TL">Timorul de Est</territory>
+			<territory type="TM">Turkmenistan</territory>
+			<territory type="TN">Tunisia</territory>
+			<territory type="TO">Tonga</territory>
+			<territory type="TR">Turcia</territory>
+			<territory type="TT">Trinidad-Tobago</territory>
+			<territory type="TV">Tuvalu</territory>
+			<territory type="TW">Taiwan</territory>
+			<territory type="TZ">Tanzania</territory>
+			<territory type="UA">Ucraina</territory>
+			<territory type="UG">Uganda</territory>
+			<territory type="UM">Teritoriile Îndepărtate ale Statelor Unite</territory>
+			<territory type="US">Statele Unite</territory>
+			<territory type="UY">Uruguay</territory>
+			<territory type="UZ">Uzbekistan</territory>
+			<territory type="VA">Vatican</territory>
+			<territory type="VC">Saint Vincent și Grenadines</territory>
+			<territory type="VE">Venezuela</territory>
+			<territory type="VG">Insulele Virgine Britanice</territory>
+			<territory type="VI">Insulele Virgine S.U.A.</territory>
+			<territory type="VN">Vietnam</territory>
+			<territory type="VU">Vanuatu</territory>
+			<territory type="WF">Wallis și Futuna</territory>
+			<territory type="WS">Samoa</territory>
+			<territory type="YE">Yemen</territory>
+			<territory type="YT">Mayotte</territory>
+			<territory type="ZA">Africa de Sud</territory>
+			<territory type="ZM">Zambia</territory>
+			<territory type="ZW">Zimbabwe</territory>
+			<territory type="ZZ">Regiune necunoscută sau incorectă</territory>
+		</territories>
+		<keys>
+			<key type="collation">sortare</key>
+			<key type="currency">monedă</key>
+		</keys>
+		<types>
+			<type type="big5han" key="collation">sortare pentru chineza tradițională - Big5</type>
+			<type type="buddhist" key="calendar">calendar budist</type>
+			<type type="chinese" key="calendar">calendar chinezesc</type>
+			<type type="direct" key="collation">sortare directă</type>
+			<type type="gb2312han" key="collation">sortare pentru chineza simplificată - GB2312</type>
+			<type type="gregorian" key="calendar">calendar gregorian</type>
+			<type type="hebrew" key="calendar">calendar ebraic</type>
+			<type type="islamic" key="calendar">calendar islamic</type>
+			<type type="islamic-civil" key="calendar">calendar islamic civil</type>
+			<type type="japanese" key="calendar">calendar japonez</type>
+			<type type="phonebook" key="collation">sortare după cartea de telefon</type>
+			<type type="pinyin" key="collation">sortare pinyin</type>
+			<type type="stroke" key="collation">sortare după numărul de linii</type>
+			<type type="traditional" key="collation">sortare tradițională</type>
+		</types>
+		<measurementSystemNames>
+			<measurementSystemName type="US">american</measurementSystemName>
+			<measurementSystemName type="metric">metric</measurementSystemName>
+		</measurementSystemNames>
+		<codePatterns>
+			<codePattern type="language">Limbă: {0}</codePattern>
+			<codePattern type="script">Scriere: {0}</codePattern>
+			<codePattern type="territory">Regiune: {0}</codePattern>
+		</codePatterns>
+	</localeDisplayNames>
+	<layout>
+		<inText type="keys">lowercase-words</inText>
+		<inText type="languages">lowercase-words</inText>
+		<inText type="measurementSystemNames">lowercase-words</inText>
+		<inText type="scripts">lowercase-words</inText>
+	</layout>
+	<characters>
+		<exemplarCharacters>[a ă â b-i î j-p r s ș t ț u v x z]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[q w y]</exemplarCharacters>
+		<exemplarCharacters type="currencySymbol">[a ă â b-i î j-s ș t ț u-z]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>„</quotationStart>
+		<quotationEnd>”</quotationEnd>
+		<alternateQuotationStart>«</alternateQuotationStart>
+		<alternateQuotationEnd>»</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<localizedPatternChars>GanjkHmsSEDFwWxhKzAeugXZvcL</localizedPatternChars>
+		<dateRangePattern>{0} – {1}</dateRangePattern>
+		<calendars>
+			<calendar type="buddhist">
+				<eras>
+					<eraNames>
+						<era type="0">era budistă</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">e.b.</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, d MMMM, yyyy G</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+			</calendar>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">ian.</month>
+							<month type="2">feb.</month>
+							<month type="3">mar.</month>
+							<month type="4">apr.</month>
+							<month type="5">mai</month>
+							<month type="6">iun.</month>
+							<month type="7">iul.</month>
+							<month type="8">aug.</month>
+							<month type="9">sept.</month>
+							<month type="10">oct.</month>
+							<month type="11">nov.</month>
+							<month type="12">dec.</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">ianuarie</month>
+							<month type="2">februarie</month>
+							<month type="3">martie</month>
+							<month type="4">aprilie</month>
+							<month type="5">mai</month>
+							<month type="6">iunie</month>
+							<month type="7">iulie</month>
+							<month type="8">august</month>
+							<month type="9">septembrie</month>
+							<month type="10">octombrie</month>
+							<month type="11">noiembrie</month>
+							<month type="12">decembrie</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">I</month>
+							<month type="2">F</month>
+							<month type="3">M</month>
+							<month type="4">A</month>
+							<month type="5">M</month>
+							<month type="6">I</month>
+							<month type="7">I</month>
+							<month type="8">A</month>
+							<month type="9">S</month>
+							<month type="10">O</month>
+							<month type="11">N</month>
+							<month type="12">D</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">D</day>
+							<day type="mon">L</day>
+							<day type="tue">Ma</day>
+							<day type="wed">Mi</day>
+							<day type="thu">J</day>
+							<day type="fri">V</day>
+							<day type="sat">S</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">duminică</day>
+							<day type="mon">luni</day>
+							<day type="tue">marți</day>
+							<day type="wed">miercuri</day>
+							<day type="thu">joi</day>
+							<day type="fri">vineri</day>
+							<day type="sat">sâmbătă</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">D</day>
+							<day type="mon">L</day>
+							<day type="tue">M</day>
+							<day type="wed">M</day>
+							<day type="thu">J</day>
+							<day type="fri">V</day>
+							<day type="sat">S</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sat">sâmbătă</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">T1</quarter>
+							<quarter type="2">T2</quarter>
+							<quarter type="3">T3</quarter>
+							<quarter type="4">T4</quarter>
+						</quarterWidth>
+						<quarterWidth type="narrow">
+							<quarter type="1">I</quarter>
+							<quarter type="2">II</quarter>
+							<quarter type="4">IV</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">trimestrul 1</quarter>
+							<quarter type="2">trimestrul 2</quarter>
+							<quarter type="3">trimestrul 3</quarter>
+							<quarter type="4">trimestrul 4</quarter>
+						</quarterWidth>
+					</quarterContext>
+					<quarterContext type="stand-alone">
+						<quarterWidth type="narrow">
+							<quarter type="1">1</quarter>
+							<quarter type="2">2</quarter>
+							<quarter type="3">3</quarter>
+							<quarter type="4">4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">trimestrul al I-lea</quarter>
+							<quarter type="2">trimestrul al II-lea</quarter>
+							<quarter type="3">trimestrul al III-lea</quarter>
+							<quarter type="4">trimestrul al IV-lea</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<am>AM</am>
+				<pm>PM</pm>
+				<eras>
+					<eraNames>
+						<era type="0">înainte de Hristos</era>
+						<era type="1">după Hristos</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">î.e.n.</era>
+						<era type="1">e.n.</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE, d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>dd.MM.yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>dd.MM.yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>HH:mm:ss v</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>HH:mm:ss z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>HH:mm:ss</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>HH:mm</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<dateTimeFormatLength>
+						<dateTimeFormat>
+							<pattern>{1}, {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<availableFormats>
+						<dateFormatItem id="Hm">H:mm</dateFormatItem>
+						<dateFormatItem id="MEd">E, d MMM</dateFormatItem>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMMd">d MMM</dateFormatItem>
+						<dateFormatItem id="MMdd">dd.MM</dateFormatItem>
+						<dateFormatItem id="Md">d.M</dateFormatItem>
+						<dateFormatItem id="d">d</dateFormatItem>
+						<dateFormatItem id="y">yyyy</dateFormatItem>
+						<dateFormatItem id="yM">M.yyyy</dateFormatItem>
+						<dateFormatItem id="yMMM">MMM yyyy</dateFormatItem>
+						<dateFormatItem id="yMMMM">MMMM yyyy</dateFormatItem>
+						<dateFormatItem id="yyMM">MM.yy</dateFormatItem>
+						<dateFormatItem id="yyMMM">MMM yy</dateFormatItem>
+						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+						<dateFormatItem id="yyyyMM">MM.yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+					</availableFormats>
+					<intervalFormats>
+						<intervalFormatFallback>{0} - {1}</intervalFormatFallback>
+						<intervalFormatItem id="M">
+							<greatestDifference id="M">M-M</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MEd">
+							<greatestDifference id="M">dd.MM - dd.MM</greatestDifference>
+							<greatestDifference id="d">dd.MM - dd.MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMM">
+							<greatestDifference id="M">MMM-MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMEd">
+							<greatestDifference id="M">d MMM - d MMM</greatestDifference>
+							<greatestDifference id="d">d-d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="MMMd">
+							<greatestDifference id="M">d MMM - d MMM</greatestDifference>
+							<greatestDifference id="d">d-d MMM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="Md">
+							<greatestDifference id="M">dd.MM - dd.MM</greatestDifference>
+							<greatestDifference id="d">dd.MM - dd.MM</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="d">
+							<greatestDifference id="d">d-d</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="h">
+							<greatestDifference id="h">HH-HH</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hm">
+							<greatestDifference id="h">HH:mm-HH:mm</greatestDifference>
+							<greatestDifference id="m">HH:mm-HH:mm</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hmv">
+							<greatestDifference id="h">HH:mm-HH:mm v</greatestDifference>
+							<greatestDifference id="m">HH:mm-HH:mm v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="hv">
+							<greatestDifference id="h">HH-HH v</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="y">
+							<greatestDifference id="y">y-y</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yM">
+							<greatestDifference id="M">MM.yyyy - MM.yyyy</greatestDifference>
+							<greatestDifference id="y">MM.yyyy - MM.yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMEd">
+							<greatestDifference id="M">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+							<greatestDifference id="d">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+							<greatestDifference id="y">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMM">
+							<greatestDifference id="M">MMM-MMM yyyy</greatestDifference>
+							<greatestDifference id="y">MMM yyyy - MMM yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMEd">
+							<greatestDifference id="M">d MMM - d MMM yyyy</greatestDifference>
+							<greatestDifference id="d">d-d MMM yyyy</greatestDifference>
+							<greatestDifference id="y">d MMM yyyy - d MMM yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMMMd">
+							<greatestDifference id="M">d MMM - d MMM yyyy</greatestDifference>
+							<greatestDifference id="d">d-d MMM yyyy</greatestDifference>
+							<greatestDifference id="y">d MMM yyyy - d MMM yyyy</greatestDifference>
+						</intervalFormatItem>
+						<intervalFormatItem id="yMd">
+							<greatestDifference id="M">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+							<greatestDifference id="d">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+							<greatestDifference id="y">dd.MM.yyyy - dd.MM.yyyy</greatestDifference>
+						</intervalFormatItem>
+					</intervalFormats>
+				</dateTimeFormats>
+				<fields>
+					<field type="era">
+						<displayName>eră</displayName>
+					</field>
+					<field type="year">
+						<displayName>an</displayName>
+					</field>
+					<field type="month">
+						<displayName>lună</displayName>
+					</field>
+					<field type="week">
+						<displayName>săptămână</displayName>
+					</field>
+					<field type="day">
+						<displayName>zi</displayName>
+						<relative type="0">azi</relative>
+						<relative type="1">mâine</relative>
+						<relative type="2">poimâine</relative>
+						<relative type="3">răspoimâine</relative>
+						<relative type="-1">ieri</relative>
+						<relative type="-2">alaltăieri</relative>
+						<relative type="-3">răsalaltăieri</relative>
+					</field>
+					<field type="weekday">
+						<displayName>zi a săptămânii</displayName>
+					</field>
+					<field type="dayperiod">
+						<displayName>perioada zilei</displayName>
+					</field>
+					<field type="hour">
+						<displayName>oră</displayName>
+					</field>
+					<field type="minute">
+						<displayName>minut</displayName>
+					</field>
+					<field type="second">
+						<displayName>secundă</displayName>
+					</field>
+					<field type="zone">
+						<displayName>zonă</displayName>
+					</field>
+				</fields>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HH:mm;−HH:mm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>{0}</regionFormat>
+			<zone type="Etc/Unknown">
+				<exemplarCity>Necunoscut</exemplarCity>
+			</zone>
+			<zone type="Europe/Tirane">
+				<exemplarCity>Tirana</exemplarCity>
+			</zone>
+			<zone type="Asia/Yerevan">
+				<exemplarCity>Erevan</exemplarCity>
+			</zone>
+			<zone type="Antarctica/South_Pole">
+				<exemplarCity>Polul Sud</exemplarCity>
+			</zone>
+			<zone type="Antarctica/DumontDUrville">
+				<exemplarCity>Dumont D'Urville</exemplarCity>
+			</zone>
+			<zone type="Europe/Vienna">
+				<exemplarCity>Viena</exemplarCity>
+			</zone>
+			<zone type="Europe/Brussels">
+				<exemplarCity>Bruxelles</exemplarCity>
+			</zone>
+			<zone type="Pacific/Easter">
+				<exemplarCity>Insula Paștelui</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Cape_Verde">
+				<exemplarCity>Capul Verde</exemplarCity>
+			</zone>
+			<zone type="Europe/Copenhagen">
+				<exemplarCity>Copenhaga</exemplarCity>
+			</zone>
+			<zone type="Africa/Algiers">
+				<exemplarCity>Alger</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Canary">
+				<exemplarCity>Insulele Canare</exemplarCity>
+			</zone>
+			<zone type="Africa/Addis_Ababa">
+				<exemplarCity>Addis Abeba</exemplarCity>
+			</zone>
+			<zone type="Europe/London">
+				<exemplarCity>Londra</exemplarCity>
+			</zone>
+			<zone type="America/Guadeloupe">
+				<exemplarCity>Guadalupe</exemplarCity>
+			</zone>
+			<zone type="Europe/Athens">
+				<exemplarCity>Atena</exemplarCity>
+			</zone>
+			<zone type="Atlantic/South_Georgia">
+				<exemplarCity>Georgia de Sud</exemplarCity>
+			</zone>
+			<zone type="Europe/Budapest">
+				<exemplarCity>Budapesta</exemplarCity>
+			</zone>
+			<zone type="Asia/Jerusalem">
+				<exemplarCity>Ierusalim</exemplarCity>
+			</zone>
+			<zone type="Asia/Baghdad">
+				<exemplarCity>Bagdad</exemplarCity>
+			</zone>
+			<zone type="Asia/Tehran">
+				<exemplarCity>Teheran</exemplarCity>
+			</zone>
+			<zone type="Europe/Rome">
+				<exemplarCity>Roma</exemplarCity>
+			</zone>
+			<zone type="America/St_Kitts">
+				<exemplarCity>St. Kitts</exemplarCity>
+			</zone>
+			<zone type="Asia/Seoul">
+				<exemplarCity>Seul</exemplarCity>
+			</zone>
+			<zone type="Asia/Kuwait">
+				<exemplarCity>Kuweit</exemplarCity>
+			</zone>
+			<zone type="America/St_Lucia">
+				<exemplarCity>St. Lucia</exemplarCity>
+			</zone>
+			<zone type="Europe/Luxembourg">
+				<exemplarCity>Luxemburg</exemplarCity>
+			</zone>
+			<zone type="Europe/Chisinau">
+				<exemplarCity>Chișinău</exemplarCity>
+			</zone>
+			<zone type="Asia/Ulaanbaatar">
+				<exemplarCity>Ulan Bator</exemplarCity>
+			</zone>
+			<zone type="America/Martinique">
+				<exemplarCity>Martinica</exemplarCity>
+			</zone>
+			<zone type="Indian/Maldives">
+				<exemplarCity>Maldive</exemplarCity>
+			</zone>
+			<zone type="Pacific/Marquesas">
+				<exemplarCity>Marchize</exemplarCity>
+			</zone>
+			<zone type="Europe/Warsaw">
+				<exemplarCity>Varșovia</exemplarCity>
+			</zone>
+			<zone type="Atlantic/Azores">
+				<exemplarCity>Azore</exemplarCity>
+			</zone>
+			<zone type="Europe/Lisbon">
+				<exemplarCity>Lisabona</exemplarCity>
+			</zone>
+			<zone type="Asia/Qatar">
+				<exemplarCity>Quatar</exemplarCity>
+			</zone>
+			<zone type="Europe/Bucharest">
+				<exemplarCity>București</exemplarCity>
+			</zone>
+			<zone type="Europe/Moscow">
+				<exemplarCity>Moscova</exemplarCity>
+			</zone>
+			<zone type="Asia/Yekaterinburg">
+				<exemplarCity>Ekaterinburg</exemplarCity>
+			</zone>
+			<zone type="Asia/Irkutsk">
+				<exemplarCity>Irkuțk</exemplarCity>
+			</zone>
+			<zone type="Asia/Yakutsk">
+				<exemplarCity>Yakuțk</exemplarCity>
+			</zone>
+			<zone type="Asia/Sakhalin">
+				<exemplarCity>Sahalin</exemplarCity>
+			</zone>
+			<zone type="Asia/Kamchatka">
+				<exemplarCity>Kamciatka</exemplarCity>
+			</zone>
+			<zone type="Asia/Riyadh">
+				<exemplarCity>Riyad</exemplarCity>
+			</zone>
+			<zone type="Atlantic/St_Helena">
+				<exemplarCity>Sf. Elena</exemplarCity>
+			</zone>
+			<zone type="America/El_Salvador">
+				<exemplarCity>Salvador</exemplarCity>
+			</zone>
+			<zone type="Asia/Damascus">
+				<exemplarCity>Damasc</exemplarCity>
+			</zone>
+			<zone type="Europe/Zaporozhye">
+				<exemplarCity>Zaporoje</exemplarCity>
+			</zone>
+			<zone type="America/Anchorage">
+				<exemplarCity>Ora statului Alaska</exemplarCity>
+			</zone>
+			<zone type="America/St_Vincent">
+				<exemplarCity>Saint Vincent și Grenadines</exemplarCity>
+			</zone>
+			<zone type="America/St_Thomas">
+				<exemplarCity>St. Thomas</exemplarCity>
+			</zone>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<symbols>
+			<decimal>,</decimal>
+			<group>.</group>
+			<list>;</list>
+			<percentSign>%</percentSign>
+			<nativeZeroDigit>0</nativeZeroDigit>
+			<plusSign>+</plusSign>
+			<minusSign>-</minusSign>
+			<exponential>E</exponential>
+			<perMille>‰</perMille>
+			<infinity>∞</infinity>
+			<nan>NaN</nan>
+		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<scientificFormats>
+			<scientificFormatLength>
+				<scientificFormat>
+					<pattern>#E0</pattern>
+				</scientificFormat>
+			</scientificFormatLength>
+		</scientificFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##0%</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>#,##0.00 ¤</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+		<currencies>
+			<currency type="ADP">
+				<displayName>pesetă andorrană</displayName>
+			</currency>
+			<currency type="AED">
+				<displayName>dirham Emiratele Arabe Unite</displayName>
+			</currency>
+			<currency type="ALL">
+				<displayName>leka albaneză</displayName>
+			</currency>
+			<currency type="AMD">
+				<displayName>dram armean</displayName>
+			</currency>
+			<currency type="ANG">
+				<displayName>gulden Antilele Olandeze</displayName>
+			</currency>
+			<currency type="ARP">
+				<displayName>peso argentinian (1983–1985)</displayName>
+			</currency>
+			<currency type="ARS">
+				<displayName>peso argentinian</displayName>
+			</currency>
+			<currency type="ATS">
+				<displayName>șiling austriac</displayName>
+			</currency>
+			<currency type="AUD">
+				<displayName>dolar australian</displayName>
+			</currency>
+			<currency type="AZN">
+				<displayName>manat azerbaidjan</displayName>
+			</currency>
+			<currency type="BAD">
+				<displayName>dinar Bosnia-Herțegovina</displayName>
+			</currency>
+			<currency type="BAM">
+				<displayName>marcă convertibilă bosniacă</displayName>
+			</currency>
+			<currency type="BBD">
+				<displayName>dolar Barbados</displayName>
+			</currency>
+			<currency type="BDT">
+				<displayName>taka Bangladeș</displayName>
+			</currency>
+			<currency type="BEC">
+				<displayName>franc belgian (convertibil)</displayName>
+			</currency>
+			<currency type="BEF">
+				<displayName>franc belgian</displayName>
+			</currency>
+			<currency type="BEL">
+				<displayName>franc belgian (financiar)</displayName>
+			</currency>
+			<currency type="BGN">
+				<displayName>leva bulgărească nouă</displayName>
+			</currency>
+			<currency type="BIF">
+				<displayName>franc Burundi</displayName>
+			</currency>
+			<currency type="BMD">
+				<displayName>dolar Bermude</displayName>
+			</currency>
+			<currency type="BND">
+				<displayName>dolar Brunei</displayName>
+			</currency>
+			<currency type="BOB">
+				<displayName>boliviano</displayName>
+			</currency>
+			<currency type="BOP">
+				<displayName>peso bolivian</displayName>
+			</currency>
+			<currency type="BOV">
+				<displayName>mvdol bolivian</displayName>
+			</currency>
+			<currency type="BRE">
+				<displayName>cruzeiro brazilian (1990–1993)</displayName>
+			</currency>
+			<currency type="BRL">
+				<displayName>real brazilian</displayName>
+			</currency>
+			<currency type="BRR">
+				<displayName>cruzeiro brazilian</displayName>
+			</currency>
+			<currency type="BSD">
+				<displayName>dolar Bahamas</displayName>
+			</currency>
+			<currency type="BTN">
+				<displayName>ngultrum Bhutan</displayName>
+			</currency>
+			<currency type="BUK">
+				<displayName>kyat birman</displayName>
+			</currency>
+			<currency type="BYR">
+				<displayName>rublă bielorusă</displayName>
+			</currency>
+			<currency type="BZD">
+				<displayName>dolar Belize</displayName>
+			</currency>
+			<currency type="CAD">
+				<displayName>dolar canadian</displayName>
+			</currency>
+			<currency type="CDF">
+				<displayName>franc congolez</displayName>
+			</currency>
+			<currency type="CHF">
+				<displayName>franc elvețian</displayName>
+			</currency>
+			<currency type="CLP">
+				<displayName>peso chilian</displayName>
+			</currency>
+			<currency type="CNY">
+				<displayName>yuan renminbi chinezesc</displayName>
+			</currency>
+			<currency type="COP">
+				<displayName>peso columbian</displayName>
+			</currency>
+			<currency type="CRC">
+				<displayName>colon costarican</displayName>
+			</currency>
+			<currency type="CSD">
+				<displayName>dinar vechi Serbia și Muntenegru</displayName>
+			</currency>
+			<currency type="CUP">
+				<displayName>peso cubanez</displayName>
+			</currency>
+			<currency type="CVE">
+				<displayName>escudo al Capului Verde</displayName>
+			</currency>
+			<currency type="CYP">
+				<displayName>liră cipriotă</displayName>
+			</currency>
+			<currency type="CZK">
+				<displayName>coroană cehă</displayName>
+			</currency>
+			<currency type="DDM">
+				<displayName>marcă est-germană</displayName>
+			</currency>
+			<currency type="DEM">
+				<displayName>marcă germană</displayName>
+			</currency>
+			<currency type="DJF">
+				<displayName>franc Djibouti</displayName>
+			</currency>
+			<currency type="DKK">
+				<displayName>coroană daneză</displayName>
+			</currency>
+			<currency type="DOP">
+				<displayName>peso dominican</displayName>
+			</currency>
+			<currency type="DZD">
+				<displayName>dinar algerian</displayName>
+			</currency>
+			<currency type="ECS">
+				<displayName>sucre Ecuador</displayName>
+			</currency>
+			<currency type="EEK">
+				<displayName>coroană estoniană</displayName>
+			</currency>
+			<currency type="EGP">
+				<displayName>liră egipteană</displayName>
+			</currency>
+			<currency type="ESP">
+				<displayName>pesetă spaniolă</displayName>
+			</currency>
+			<currency type="ETB">
+				<displayName>birr etiopian</displayName>
+			</currency>
+			<currency type="EUR">
+				<displayName>euro</displayName>
+				<symbol>euro</symbol>
+			</currency>
+			<currency type="FIM">
+				<displayName>marcă finlandeză</displayName>
+			</currency>
+			<currency type="FJD">
+				<displayName>dolar Fiji</displayName>
+			</currency>
+			<currency type="FKP">
+				<displayName>liră Insulele Falkland</displayName>
+			</currency>
+			<currency type="FRF">
+				<displayName>franc francez</displayName>
+			</currency>
+			<currency type="GBP">
+				<displayName>liră sterlină</displayName>
+			</currency>
+			<currency type="GEL">
+				<displayName>lari georgian</displayName>
+			</currency>
+			<currency type="GHC">
+				<displayName>cedi Ghana</displayName>
+			</currency>
+			<currency type="GIP">
+				<displayName>liră Gibraltar</displayName>
+			</currency>
+			<currency type="GMD">
+				<displayName>dalasi Gambia</displayName>
+			</currency>
+			<currency type="GNF">
+				<displayName>franc Guineea</displayName>
+			</currency>
+			<currency type="GRD">
+				<displayName>drahmă grecească</displayName>
+			</currency>
+			<currency type="GTQ">
+				<displayName>quetzal Guatemala</displayName>
+			</currency>
+			<currency type="GWP">
+				<displayName>peso Guineea-Bissau</displayName>
+			</currency>
+			<currency type="GYD">
+				<displayName>dolar Guyana</displayName>
+			</currency>
+			<currency type="HKD">
+				<displayName>dolar Hong Kong</displayName>
+			</currency>
+			<currency type="HNL">
+				<displayName>lempira Honduras</displayName>
+			</currency>
+			<currency type="HRD">
+				<displayName>dinar croat</displayName>
+			</currency>
+			<currency type="HRK">
+				<displayName>kuna croată</displayName>
+			</currency>
+			<currency type="HTG">
+				<displayName>gourde Haiti</displayName>
+			</currency>
+			<currency type="HUF">
+				<displayName>forint maghiar</displayName>
+			</currency>
+			<currency type="IDR">
+				<displayName>rupie indoneziană</displayName>
+			</currency>
+			<currency type="IEP">
+				<displayName>liră irlandeză</displayName>
+			</currency>
+			<currency type="ILP">
+				<displayName>liră israeliană</displayName>
+			</currency>
+			<currency type="ILS">
+				<displayName>șechel israelian nou</displayName>
+			</currency>
+			<currency type="INR">
+				<displayName>rupie indiană</displayName>
+			</currency>
+			<currency type="IQD">
+				<displayName>dinar irakian</displayName>
+			</currency>
+			<currency type="IRR">
+				<displayName>rial iranian</displayName>
+			</currency>
+			<currency type="ISK">
+				<displayName>coroană islandeză</displayName>
+			</currency>
+			<currency type="ITL">
+				<displayName>liră italiană</displayName>
+			</currency>
+			<currency type="JMD">
+				<displayName>dolar jamaican</displayName>
+			</currency>
+			<currency type="JOD">
+				<displayName>dinar iordanian</displayName>
+			</currency>
+			<currency type="JPY">
+				<displayName>yen japonez</displayName>
+			</currency>
+			<currency type="KES">
+				<displayName>șiling kenyan</displayName>
+			</currency>
+			<currency type="KGS">
+				<displayName>som Kirghizstan</displayName>
+			</currency>
+			<currency type="KHR">
+				<displayName>riel cambodgian</displayName>
+			</currency>
+			<currency type="KMF">
+				<displayName>franc comorian</displayName>
+			</currency>
+			<currency type="KPW">
+				<displayName>won nord-coreean</displayName>
+			</currency>
+			<currency type="KRW">
+				<displayName>won sud-coreean</displayName>
+			</currency>
+			<currency type="KWD">
+				<displayName>dinar kuweitian</displayName>
+			</currency>
+			<currency type="KYD">
+				<displayName>dolar Insulele Cayman</displayName>
+			</currency>
+			<currency type="LAK">
+				<displayName>kip Laos</displayName>
+			</currency>
+			<currency type="LBP">
+				<displayName>liră libaneză</displayName>
+			</currency>
+			<currency type="LKR">
+				<displayName>rupie Sri Lanka</displayName>
+			</currency>
+			<currency type="LRD">
+				<displayName>dolar liberian</displayName>
+			</currency>
+			<currency type="LTL">
+				<displayName>lit lituanian</displayName>
+			</currency>
+			<currency type="LUC">
+				<displayName>franc convertibil luxemburghez</displayName>
+			</currency>
+			<currency type="LUF">
+				<displayName>franc luxemburghez</displayName>
+			</currency>
+			<currency type="LUL">
+				<displayName>franc financiar luxemburghez</displayName>
+			</currency>
+			<currency type="LVL">
+				<displayName>lats Letonia</displayName>
+			</currency>
+			<currency type="LVR">
+				<displayName>rublă Letonia</displayName>
+			</currency>
+			<currency type="LYD">
+				<displayName>dinar libian</displayName>
+			</currency>
+			<currency type="MAD">
+				<displayName>dirham marocan</displayName>
+			</currency>
+			<currency type="MAF">
+				<displayName>franc marocan</displayName>
+			</currency>
+			<currency type="MDL">
+				<displayName>leu moldovenesc</displayName>
+			</currency>
+			<currency type="MGF">
+				<displayName>franc Madagascar</displayName>
+			</currency>
+			<currency type="MKD">
+				<displayName>dinar macedonean</displayName>
+			</currency>
+			<currency type="MLF">
+				<displayName>franc Mali</displayName>
+			</currency>
+			<currency type="MMK">
+				<displayName>kyat Myanmar</displayName>
+			</currency>
+			<currency type="MNT">
+				<displayName>tugrik mongol</displayName>
+			</currency>
+			<currency type="MTL">
+				<displayName>liră malteză</displayName>
+			</currency>
+			<currency type="MXN">
+				<displayName>peso mexican</displayName>
+			</currency>
+			<currency type="MXP">
+				<displayName>peso mexican de argint (1861–1992)</displayName>
+			</currency>
+			<currency type="MYR">
+				<displayName>ringgit malaiezian</displayName>
+			</currency>
+			<currency type="MZE">
+				<displayName>escudo Mozambic</displayName>
+			</currency>
+			<currency type="MZM">
+				<displayName>metical Mozambic vechi</displayName>
+			</currency>
+			<currency type="MZN">
+				<displayName>metical Mozambic</displayName>
+			</currency>
+			<currency type="NAD">
+				<displayName>dolar namibian</displayName>
+			</currency>
+			<currency type="NIC">
+				<displayName>cordoba Nicaragua</displayName>
+			</currency>
+			<currency type="NLG">
+				<displayName>gulden olandez</displayName>
+			</currency>
+			<currency type="NOK">
+				<displayName>coroană norvegiană</displayName>
+			</currency>
+			<currency type="NPR">
+				<displayName>rupie nepaleză</displayName>
+			</currency>
+			<currency type="NZD">
+				<displayName>dolar neozeelandez</displayName>
+			</currency>
+			<currency type="OMR">
+				<displayName>riyal Oman</displayName>
+			</currency>
+			<currency type="PAB">
+				<displayName>balboa panamez</displayName>
+			</currency>
+			<currency type="PEI">
+				<displayName>inti Peru</displayName>
+			</currency>
+			<currency type="PEN">
+				<displayName>sol nou Peru</displayName>
+			</currency>
+			<currency type="PES">
+				<displayName>sol Peru</displayName>
+			</currency>
+			<currency type="PGK">
+				<displayName>kina Papua-Noua Guinee</displayName>
+			</currency>
+			<currency type="PHP">
+				<displayName>peso filipinez</displayName>
+			</currency>
+			<currency type="PKR">
+				<displayName>rupie pakistaneză</displayName>
+			</currency>
+			<currency type="PLN">
+				<displayName>zlot nou polonez</displayName>
+			</currency>
+			<currency type="PLZ">
+				<displayName>zlot polonez (1950–1995)</displayName>
+			</currency>
+			<currency type="PYG">
+				<displayName>guarani Paraguay</displayName>
+			</currency>
+			<currency type="QAR">
+				<displayName>riyal Qatar</displayName>
+			</currency>
+			<currency type="RHD">
+				<displayName>dolar rhodesian</displayName>
+			</currency>
+			<currency type="ROL">
+				<displayName>leu vechi</displayName>
+				<symbol choice="true">0≤lei vechi|1≤leu vechi|1&lt;lei vechi</symbol>
+			</currency>
+			<currency type="RON">
+				<displayName>leu</displayName>
+				<symbol choice="true">0≤lei|1≤leu|1&lt;lei</symbol>
+			</currency>
+			<currency type="RSD">
+				<displayName>dinar sârbesc</displayName>
+			</currency>
+			<currency type="RUB">
+				<displayName>rublă rusească</displayName>
+			</currency>
+			<currency type="RWF">
+				<displayName>franc rwandez</displayName>
+			</currency>
+			<currency type="SAR">
+				<displayName>riyal Arabia Saudită</displayName>
+			</currency>
+			<currency type="SBD">
+				<displayName>dolar Insulele Solomon</displayName>
+			</currency>
+			<currency type="SCR">
+				<displayName>rupie Seychelles</displayName>
+			</currency>
+			<currency type="SDD">
+				<displayName>dinar sudanez</displayName>
+			</currency>
+			<currency type="SDP">
+				<displayName>liră sudaneză</displayName>
+			</currency>
+			<currency type="SEK">
+				<displayName>coroană suedeză</displayName>
+			</currency>
+			<currency type="SGD">
+				<displayName>dolar Singapore</displayName>
+			</currency>
+			<currency type="SHP">
+				<displayName>liră Insula Sf. Elena</displayName>
+			</currency>
+			<currency type="SIT">
+				<displayName>tolar sloven</displayName>
+			</currency>
+			<currency type="SKK">
+				<displayName>coroană slovacă</displayName>
+			</currency>
+			<currency type="SLL">
+				<displayName>leu Sierra Leone</displayName>
+			</currency>
+			<currency type="SOS">
+				<displayName>șiling somalez</displayName>
+			</currency>
+			<currency type="SRD">
+				<displayName>dolar Surinam</displayName>
+			</currency>
+			<currency type="SRG">
+				<displayName>gulden Surinam</displayName>
+			</currency>
+			<currency type="STD">
+				<displayName>dobra Sao Tome și Principe</displayName>
+			</currency>
+			<currency type="SUR">
+				<displayName>rublă sovietică</displayName>
+			</currency>
+			<currency type="SVC">
+				<displayName>colon El Salvador</displayName>
+			</currency>
+			<currency type="SYP">
+				<displayName>liră siriană</displayName>
+			</currency>
+			<currency type="THB">
+				<displayName>baht thailandez</displayName>
+			</currency>
+			<currency type="TJR">
+				<displayName>rublă Tadjikistan</displayName>
+			</currency>
+			<currency type="TND">
+				<displayName>dinar tunisian</displayName>
+			</currency>
+			<currency type="TRL">
+				<displayName>liră turcească</displayName>
+				<displayName count="other">lire turcești</displayName>
+			</currency>
+			<currency type="TRY">
+				<displayName>liră turcească nouă</displayName>
+				<displayName count="other">lire turcești noi</displayName>
+			</currency>
+			<currency type="TTD">
+				<displayName>dolar Trinidad-Tobago</displayName>
+			</currency>
+			<currency type="TWD">
+				<displayName>dolar nou Taiwan</displayName>
+			</currency>
+			<currency type="TZS">
+				<displayName>șiling tanzanian</displayName>
+			</currency>
+			<currency type="UAH">
+				<displayName>hryvna ucraineană</displayName>
+			</currency>
+			<currency type="UAK">
+				<displayName>carboavă ucraineană</displayName>
+			</currency>
+			<currency type="UGS">
+				<displayName>șiling ugandez (1966–1987)</displayName>
+			</currency>
+			<currency type="UGX">
+				<displayName>șiling ugandez</displayName>
+			</currency>
+			<currency type="USD">
+				<displayName>dolar american</displayName>
+			</currency>
+			<currency type="USN">
+				<displayName>dolar american (ziua următoare)</displayName>
+			</currency>
+			<currency type="USS">
+				<displayName>dolar american (aceeași zi)</displayName>
+			</currency>
+			<currency type="UYP">
+				<displayName>peso Uruguay (1975–1993)</displayName>
+			</currency>
+			<currency type="UYU">
+				<displayName>peso nou Uruguay</displayName>
+			</currency>
+			<currency type="UZS">
+				<displayName>sum Uzbekistan</displayName>
+			</currency>
+			<currency type="VEB">
+				<displayName>bolivar Venezuela</displayName>
+			</currency>
+			<currency type="VND">
+				<displayName>dong vietnamez</displayName>
+			</currency>
+			<currency type="XAF">
+				<displayName>franc Comunitatea Financiară</displayName>
+			</currency>
+			<currency type="XAG">
+				<displayName>argint</displayName>
+			</currency>
+			<currency type="XAU">
+				<displayName>aur</displayName>
+			</currency>
+			<currency type="XCD">
+				<displayName>dolar Caraibele de Est</displayName>
+			</currency>
+			<currency type="XDR">
+				<displayName>drepturi speciale de tragere</displayName>
+			</currency>
+			<currency type="XFO">
+				<displayName>franc francez aur</displayName>
+			</currency>
+			<currency type="XPD">
+				<displayName>paladiu</displayName>
+			</currency>
+			<currency type="XPT">
+				<displayName>platină</displayName>
+			</currency>
+			<currency type="XTS">
+				<displayName>cod monetar de test</displayName>
+			</currency>
+			<currency type="XXX">
+				<displayName>monedă necunoscută sau incorectă</displayName>
+			</currency>
+			<currency type="YDD">
+				<displayName>dinar Yemen</displayName>
+			</currency>
+			<currency type="YER">
+				<displayName>riyal Yemen</displayName>
+			</currency>
+			<currency type="YUD">
+				<displayName>dinar iugoslav greu</displayName>
+			</currency>
+			<currency type="YUM">
+				<displayName>dinar iugoslav nou</displayName>
+			</currency>
+			<currency type="YUN">
+				<displayName>dinar iugoslav convertibil</displayName>
+			</currency>
+			<currency type="ZAL">
+				<displayName>rand sud-african (financiar)</displayName>
+			</currency>
+			<currency type="ZAR">
+				<displayName>rand sud-african</displayName>
+			</currency>
+			<currency type="ZRN">
+				<displayName>zair nou</displayName>
+			</currency>
+			<currency type="ZWD">
+				<displayName>dolar Zimbabwe</displayName>
+			</currency>
+		</currencies>
+	</numbers>
+	<posix>
+		<messages>
+			<yesstr>da:d</yesstr>
+			<nostr>nu:n</nostr>
+		</messages>
+	</posix>
+</ldml>

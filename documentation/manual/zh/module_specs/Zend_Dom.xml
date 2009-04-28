@@ -1,0 +1,12 @@
+<sect1 id="zend.dom.introduction">
+    <title>简介</title>
+
+    <para>
+        <code>Zend_Dom</code> 为使用 DOM 文档和结构提供工具。目前，我们提供
+         <code>Zend_Dom_Query</code> ，它提供统一的接口利用 XPath 和 CSS 选
+         择器来查询 DOM 文档。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

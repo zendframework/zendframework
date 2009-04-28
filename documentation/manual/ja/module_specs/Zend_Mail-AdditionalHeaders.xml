@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="zend.mail.additional-headers">
+    <title>追加のヘッダ</title>
+    <para>
+        <code>addHeader()</code> メソッドを使用して、
+        任意のヘッダを指定することができます。ヘッダフィールドの名前、
+        そして設定する値の 2 つのパラメータが必須となります。
+        3 番目のパラメータはオプションで、ヘッダが複数の値をとるかどうかを指定します。
+    </para>
+    <example id="zend.mail.additional-headers.example-1">
+        <title>メールヘッダの追加</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // 複数の値
+$mail->addHeader('X-greetingsTo', 'Dad', true);
+]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

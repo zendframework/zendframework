@@ -1,0 +1,51 @@
+<sect1 id="zend.layout.introduction">
+    <title>Wprowadzenie</title>
+
+    <para>
+        Komponent <code>Zend_Layout</code> implementuje klasyczny wzorzec
+        projektowy Dwuetapowych Widoków (Two Step View), pozwalając programistom
+        na wyświetleniu zawartości aplikacji wewnątrz innego widoku, najczęściej
+        będącego szablonem strony. Z tego powodu, że takie szablony są często w
+        innych projektach nazywane <emphasis>layoutami</emphasis>, także Zend
+        Framework używa tego nazewnictwa w celu zachowania spójności.
+    </para>
+
+    <para>
+        Głównymi założeniami <code>Zend_Layout</code> są:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Automatyczne wybieranie i renderowanie layoutów gdy są one
+                używane wraz z komponentami MVC Zend Framework.
+        </para></listitem>
+
+        <listitem><para>
+                Zapewnienie osobnej przestrzeni dla zmiennych i zawartości layoutu.
+        </para></listitem>
+
+        <listitem><para>
+                Możliwość konfiguracji, włączając w to nazwę layoutu, sposób jej
+                generowania, a także ścieżkę layoutu.
+        </para></listitem>
+
+        <listitem><para>
+                Możliwość wyłączania layoutów, zmiany skryptów layoutów;
+                możliwość przeprowadzania tych akcji zarówno wewnątrz kontrolerów
+                jak i skryptów widoków.
+        </para></listitem>
+
+        <listitem><para>
+                Te same zasady generowania nazw skryptów jak w klasie <link
+                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
+                ale z możliwością zdefiniowania innych zasad.
+        </para></listitem>
+
+        <listitem><para>
+                Możliwość użycia komponentu bez komponentów MVC Zend Framework.
+        </para></listitem>
+    </itemizedlist>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

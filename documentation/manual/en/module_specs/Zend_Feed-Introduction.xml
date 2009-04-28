@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.introduction">
+    <title>Introduction</title>
+    <para>
+        <classname>Zend_Feed</classname> provides functionality for consuming RSS and Atom feeds. It provides a
+        natural syntax for accessing elements of feeds, feed attributes, and entry attributes.
+        <classname>Zend_Feed</classname> also has extensive support for modifying feed and entry structure with the
+        same natural syntax, and turning the result back into XML. In the future, this modification support
+        could provide support for the Atom Publishing Protocol.
+    </para>
+
+    <para>
+        Programmatically, <classname>Zend_Feed</classname> consists of a base <classname>Zend_Feed</classname> class, abstract
+        <classname>Zend_Feed_Abstract</classname> and <classname>Zend_Feed_Entry_Abstract</classname> base classes for
+        representing Feeds and Entries, specific implementations of feeds and entries for RSS and Atom, and
+        a behind-the-scenes helper for making the natural syntax magic work.
+    </para>
+
+    <para>
+        In the example below, we demonstrate a simple use case of retrieving an RSS feed and saving relevant
+        portions of the feed data to a simple PHP array, which could then be used for printing the data, storing
+        to a database, etc.
+    </para>
+
+    <note>
+        <title>Be aware</title>
+        <para>
+            Many RSS feeds have different channel and item properties available. The RSS specification provides for
+            many optional properties, so be aware of this when writing code to work with RSS data.
+        </para>
+    </note>
+
+    <example id="zend.feed.introduction.example.rss">
+        <title>Putting Zend_Feed to Work on RSS Feed Data</title>
+        <programlisting role="php"><![CDATA[
+// Fetch the latest Slashdot headlines
+try {
+    $slashdotRss =
+        Zend_Feed::import('http://rss.slashdot.org/Slashdot/slashdot');
+} catch (Zend_Feed_Exception $e) {
+    // feed import failed
+    echo "Exception caught importing feed: {$e->getMessage()}\n";
+    exit;
+}
+
+// Initialize the channel data array
+$channel = array(
+    'title'       => $slashdotRss->title(),
+    'link'        => $slashdotRss->link(),
+    'description' => $slashdotRss->description(),
+    'items'       => array()
+    );
+
+// Loop over each channel item and store relevant data
+foreach ($slashdotRss as $item) {
+    $channel['items'][] = array(
+        'title'       => $item->title(),
+        'link'        => $item->link(),
+        'description' => $item->description()
+        );
+}
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

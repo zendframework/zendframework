@@ -1,0 +1,66 @@
+<sect1 id="zend.server.reflection">
+    <title>Zend_Server_Reflection</title>
+
+    <sect2 id="zend.server.reflection.introduction">
+        <title>Úvod</title>
+
+        <para>
+            Zend_Server_Reflection poskytuje štandardný mechanizmus pre zisťovanie
+            informácií o funkciách a triedach pre použitie spolu so serverom. Je
+            postavený na PHP 5 Reflection API a rozširuje ho pre poskytnutie metód na
+            získanie parametrov, návratových hodnôt, plného zoznamu prototypov
+            funkcií a metód (t.j. všetky možné a validné spôsoby volania) a popis
+            funkcií a metód.
+        </para>
+        <para>
+            Typicky využije túto funkčnosť iba programátor serverových tried pre
+            framework.
+        </para>
+    </sect2>
+    <sect2 id="zend.server.reflection.usage">
+        <title>Použitie</title>
+
+        <para>
+            Základné použitie je jednoduché:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Server/Reflection.php';
+$class    = Zend_Server_Reflection::reflectClass('My_Class');
+$function = Zend_Server_Reflection::reflectFunction('my_function');
+
+// Získanie prototypov
+$prototypes = $reflection->getPrototypes();
+
+// Cyklus cez všetky prototypy
+foreach ($prototypes as $prototype) {
+
+    // Získanie návratovej hodnoty
+    echo "Return type: ", $prototype->getReturnType(), "\n";
+
+    // Získanie parametrov
+    $parameters = $prototype->getParameters();
+
+    echo "Parameters: \n";
+    foreach ($parameters as $parameter) {
+        // Získanie typuparametra
+        echo "    ", $parameter->getType(), "\n";
+    }
+}
+
+// Získanie menného priestoru triedy, funkcie, alebo metódy
+// Menný priestor môže byť nastavený pri inicializácii (druhy argument) alebo
+// pomocou setNamespace()
+$reflection->getNamespace();
+]]></programlisting>
+
+        <para>
+            <code>reflectFunction()</code> vráti objekt <code>Zend_Server_Reflection_Function</code>;
+            <code>reflectClass</code> vráti objekt <code>Zend_Server_Reflection_Class</code>.
+            Pre viac informácií o dostupných metódach si pozrite API dokumentáciu.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

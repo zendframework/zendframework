@@ -1,0 +1,27 @@
+<sect1 id="zend.mail.sending">
+    <title>E-mail sturen via SMTP</title>
+    <para>
+        Om e-mail te sturen via SMTP moet een <code>Zend_Mail_Transport_Smtp</code> worden gemaakt en geregistreerd
+        aan <code>Zend_Mail</code> voordat de <code>send()</code> methode wordt opgeroepen. Het SMTP transport zal
+        dan voor alle verdere oproepen in het huidige script aan <code>Zend_Mail::send()</code> worden gebruikt:
+    </para>
+    <example>
+        <title>E-mail sturen via SMTP</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
+Zend_Mail::setDefaultTransport($tr);
+?>]]>   </programlisting>
+    </example>
+    <para>
+        De <code>setDefaultTransport()</code> methode en de constructor van <code>Zend_Mail_Transport_Smtp</code>
+        zijn geen dure operaties. Deze twee regels kunnen worden behandeld terwijl je de setup van het script doet
+        (bv: config.inc of iets dergelijks) om het gedrag van de <code>Zend_Mail</code> klasse voor de rest van
+        het script te configureren. Dit houdt de configuratielogica uit de toepassingslogica - of mail gezonden
+        word via SMTP of <ulink url="http://php.net/mail"><code>mail()</code></ulink>, welke mail server te
+        gebruiken enz...
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

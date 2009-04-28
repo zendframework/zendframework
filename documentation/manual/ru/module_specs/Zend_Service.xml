@@ -1,0 +1,44 @@
+<sect1 id="zend.service.introduction">
+    <title>Введение</title>
+    <para>
+        <code>Zend_Service</code> является абстрактным классом, который используется
+        в качестве основы для реализации веб-сервисов, таких, как SOAP или REST.
+<!--
+        <code>Zend_Service</code> is an abstract class which serves as
+        a foundation for web service implementations, such as SOAP or REST.
+-->
+    </para>
+    <para>
+        Если вам нужна общая поддержка основанных на XML REST-сервисов, то
+        см. <link linkend="zend.rest.client"><code>Zend_Rest_Client</code></link>.
+<!--
+        If you need support for generic, XML-based REST services, you may want
+        to look at <link linkend="zend.rest.client"><code>Zend_Rest_Client</code></link>.
+-->
+    </para>
+    <para>
+        Кроме возможности наследования от класса <code>Zend_Service</code>
+        и использования
+        <link linkend="zend.rest.client"><code>Zend_Rest_Client</code></link>
+        для веб-сервисов, основанных на REST, Zend предоставляет поддержку
+        популярных веб-сервисов, таких, как
+        <link linkend="zend.service.akismet">Akismet</link>,
+        <link linkend="zend.service.amazon">Amazon</link>,
+        <link linkend="zend.service.flickr">Flickr</link> и
+        <link linkend="zend.service.yahoo">Yahoo!</link>. В будущем будут
+        добавлены другие веб-сервисы.
+<!--
+        In addition to being able to extend the <code>Zend_Service</code> and
+        use <code>Zend_Rest_Client</code> for REST-based web services, Zend also
+        provides support for popular web services such as
+        <link linkend="zend.service.akismet">Akismet</link>,
+        <link linkend="zend.service.amazon">Amazon</link>,
+        <link linkend="zend.service.flickr">Flickr</link>, and
+        <link linkend="zend.service.yahoo">Yahoo!</link>. Additional services
+        are coming in the future.
+-->
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

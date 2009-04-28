@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.dom.query">
+    <title>Zend_Dom_Query</title>
+
+    <para>
+        <classname>Zend_Dom_Query</classname> を使用すると、XML や (X)HTML ドキュメントに対して
+        XPath あるいは CSS セレクタを用いた問い合わせができるようになります。
+        MVC アプリケーションの機能テストを支援するために作られたものですが、
+        スクリーンスクレイパーを手早く作成するためにも使うことができます。
+    </para>
+
+    <para>
+        CSS セレクタ記法は、ウェブ開発者にとってはシンプルでなじみのある記法です。
+        XML 構造のドキュメントに対する問い合わせに使用できます。
+        この記法は、スタイルシートを扱ったことのある人ならきっとおなじみでしょうし、
+        Javascript のツールキットの中にも
+        CSS セレクタを使用してノードを選択できる機能を持つものがあります
+        (<ulink url="http://prototypejs.org/api/utility/dollar-dollar">Prototype の
+            $$()</ulink> や
+        <ulink url="http://api.dojotoolkit.org/jsdoc/dojo/HEAD/dojo.query">Dojo の
+            dojo.query</ulink> をヒントにしてこのコンポーネントを作成しました)。
+    </para>
+
+    <sect2 id="zend.dom.query.operation">
+        <title>動作原理</title>
+
+        <para>
+            <classname>Zend_Dom_Query</classname> を使用するには、
+            <classname>Zend_Dom_Query</classname> オブジェクトのインスタンスを作成します。
+            その際に、問い合わせたいドキュメント (文字列)
+            をオプションで渡すことができます。
+            ドキュメントを用意すれば、
+            <code>query()</code> メソッドあるいは <code>queryXpath()</code>
+            メソッドを使用することができます。どちらのメソッドも、
+            マッチしたノードを含む <classname>Zend_Dom_Query_Result</classname>
+            オブジェクトを返します。
+        </para>
+
+        <para>
+            <classname>Zend_Dom_Query</classname> を使うことと
+            DOMDocument + DOMXPath を使うことの最大の違いは、
+            CSS セレクタによる選択が可能かどうかということです。
+            以下の内容を、任意の組み合わせで使用することができます。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <emphasis>要素型</emphasis>: マッチさせたい要素の型を指定します。
+                'div', 'a', 'span', 'h2' などです。
+            </para></listitem>
+
+            <listitem><para>
+                <emphasis>style 属性</emphasis>: マッチさせたい CSS style
+                属性を指定します。'.error', 'div.error', 'label.required'
+                などです。ひとつの要素に複数のスタイルが定義されている場合は
+                指定したスタイルがスタイル宣言のどこかに存在すればマッチします。
+            </para></listitem>
+
+            <listitem><para>
+                <emphasis>id 属性</emphasis>: マッチさせたい要素 ID 属性を指定します。
+                '#content', 'div#nav' などです。
+            </para></listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>任意の属性</emphasis>:
+                    マッチさせたい任意の要素属性を指定します。
+                    以下の 3 種類のマッチ形式を用意しています。
+                </para>
+
+                <itemizedlist>
+                    <listitem><para>
+                        <emphasis>完全マッチ</emphasis>: その文字列に完全にマッチする属性。
+                        'div[bar="baz"]' は、"bar" 属性の値が正確に "baz"
+                        と一致する div 要素にマッチします。
+                    </para></listitem>
+
+                    <listitem><para>
+                        <emphasis>単語マッチ</emphasis>:
+                        指定した文字列に一致する単語を含む属性。
+                        'div[bar~="baz"]' は、"bar" 属性の値に単語 "baz"
+                        を含む div 要素にマッチします。
+                        '&lt;div bar="foo baz"&gt;' はマッチしますが、 '&lt;div
+                                bar="foo bazbat"&gt;' はマッチしません。
+                    </para></listitem>
+
+                    <listitem><para>
+                        <emphasis>部分文字列マッチ</emphasis>:
+                        その文字列を含む属性。'div[bar*="baz"]' は、
+                        "bar" 属性の値のどこかに文字列 "baz"
+                        を含む div 要素にマッチします。
+                    </para></listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem><para>
+                <emphasis>直接の子孫</emphasis>:
+                セレクタの間で '&gt;' を使用すると、
+                直接の子要素であることを表します。'div > span'
+                は、'span' 要素のうち 'div' の直接の子であるものだけを選択します。
+                上のセレクタのどれとでも共用できます。
+            </para></listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>子孫</emphasis>:
+                    複数のセレクタをひとつの文字列にまとめると、
+                    探す階層を指定することができます。
+                    'div .foo span #one' が探すのは id が 'one'
+                    である要素です。その要素は、'span'
+                    要素の子孫 (その間の階層の数は問わない) であり、
+                    さらにその 'span' 要素はクラス 'foo' の要素の子孫
+                    (その間の階層の数は問わない) です。
+                    同様に、そのクラス 'foo' の要素は 'div' 要素の子孫
+                    (その間の階層の数は問わない) となります。
+                    これは、たとえば以下のリストにおける単語 'One'
+                    へのリンクにマッチします。
+                </para>
+
+                <programlisting role="html"><![CDATA[
+<div>
+<table>
+    <tr>
+        <td class="foo">
+            <div>
+                Lorem ipsum <span class="bar">
+                    <a href="/foo/bar" id="one">One</a>
+                    <a href="/foo/baz" id="two">Two</a>
+                    <a href="/foo/bat" id="three">Three</a>
+                    <a href="/foo/bla" id="four">Four</a>
+                </span>
+            </div>
+        </td>
+    </tr>
+</table>
+</div>
+]]>
+</programlisting>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            問い合わせを実行したら、その結果のオブジェクトを用いてノードの情報を取得したり、
+            そのノード (あるいはノードの内容) を取り出して操作したりすることができます。
+            <classname>Zend_Dom_Query_Result</classname> は <code>Countable</code>
+            と <code>Iterator</code> を実装しており、内部では結果を
+            DOMNodes/DOMElements で保持しています。
+            たとえば、次のようなコードを上の HTML に対して実行することを考えてみましょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$dom = new Zend_Dom_Query($html);
+$results = $dom->query('.foo .bar a');
+
+$count = count($results); // マッチした数: 4
+foreach ($results as $result) {
+    // $result は DOMElement です
+}
+]]>
+        </programlisting>
+
+        <para>
+            <classname>Zend_Dom_Query</classname> では、
+            <code>queryXpath()</code> メソッドで
+            XPath クエリを直接使用することもできます。
+            XPath クエリとして正しいものならなんでもこのメソッドに渡すことができ、
+            結果は <classname>Zend_Dom_Query_Result</classname> オブジェクトで返されます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.dom.query.methods">
+        <title>使用可能なメソッド</title>
+
+        <para>
+            <classname>Zend_Dom_Query</classname> 系のクラスでは、次のメソッドが使用できます。
+        </para>
+
+        <sect3 id="zend.dom.query.methods.zenddomquery">
+            <title>Zend_Dom_Query</title>
+
+            <para>
+                次のメソッドが
+                <classname>Zend_Dom_Query</classname> で使用できます。
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>setDocumentXml($document)</code>:
+                    対象となる XML 文字列を指定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocumentXhtml($document)</code>:
+                    対象となる XHTML 文字列を指定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocumentHtml($document)</code>:
+                    対象となる HTML 文字列を指定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setDocument($document)</code>:
+                    対象となる文字列を指定します。<classname>Zend_Dom_Query</classname>
+                    がドキュメントの形式を自動判定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocument()</code>:
+                    オブジェクトに渡した元の文字列を取得します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocumentType()</code>:
+                    オブジェクトに渡したドキュメントの形式を取得します。
+                    クラス定数 <code>DOC_XML</code>、<code>DOC_XHTML</code>
+                    あるいは <code>DOC_HTML</code> のいずれかとなります。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>query($query)</code>:
+                    CSS セレクタ記法でドキュメントへの問い合わせを行います。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>queryXpath($xPathQuery)</code>:
+                    XPath 記法でドキュメントへの問い合わせを行います。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.dom.query.methods.zenddomqueryresult">
+            <title>Zend_Dom_Query_Result</title>
+
+            <para>
+                先ほど説明したように、<classname>Zend_Dom_Query_Result</classname>
+                は <code>Iterator</code> と
+                <code>Countable</code> を実装しており、
+                <code>foreach</code> ループで使用したり
+                <code>count()</code> 関数を利用したりすることができます。
+                さらに、次のメソッドを公開しています。
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>getCssQuery()</code>:
+                    その結果を得る元となった CSS セレクタクエリを
+                    (もし存在すれば) 返します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getXpathQuery()</code>:
+                    その結果を得る元となった XPath クエリを返します。
+                    内部的には、<classname>Zend_Dom_Query</classname> は
+                    CSS セレクタクエリを XPath に変換しています。
+                    そのため、このメソッドは常に結果を返します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDocument()</code>:
+                    問い合わせ対象となった DOMDocument を取得します。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

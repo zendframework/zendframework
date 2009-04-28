@@ -1,0 +1,36 @@
+<sect1 id="zend.filter.filter_chains">
+
+    <title>Łańcuchy filtrów</title>
+
+    <para>
+        Często do pewnej wartości potrzebujemy zastosować wiele filtrów w
+        określonej kolejności. Przykładem może być formularz logowania
+        akceptujący jedynie małe znaki alfabetu. <code>Zend_Filter</code>
+        zapewnia prostą metodę dzięki której filtry mogą być wywoływane
+        łańcuchowo. Poniższy kod ilustruje łańcuchowe wywołanie dwóch filtrów
+        dla wysłanej nazwy użytkownika:
+
+        <programlisting role="php"><![CDATA[
+// Tworzymy łańcuch filtrów i dodajemy filtry do łańcucha
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new Zend_Filter_Alpha())
+            ->addFilter(new Zend_Filter_StringToLower());
+
+// Filtrujemy nazwę użytkownika
+$username = $filterChain->filter($_POST['username']);
+]]>
+        </programlisting>
+
+        Filtry są uruchamiane w takiej kolejności, w jakiej zostają dodane do
+        <code>Zend_Filter</code>. W powyższym przykładzie z nazwy użytkownika
+        wpierw są usuwane wszystkie niealfabetyczne znaki, a następnie wszystkie
+        wielkie litery są zamieniane na małe.
+
+    </para>
+
+    <para>
+        W łańcuchu filtrów może być użyty dowolny obiekt, który implementuje
+        interfejs <code>Zend_Filter_Interface</code>.
+    </para>
+
+</sect1>

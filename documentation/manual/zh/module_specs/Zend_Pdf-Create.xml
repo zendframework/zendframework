@@ -1,0 +1,68 @@
+<sect1 id="zend.pdf.create">
+    <title> 生成和加载 PDF 文档 </title>
+    <para>
+       <code>Zend_Pdf</code> 类描绘 PDF 文档自己和提供文档一级的功能。
+    </para>
+
+    <para>
+        要生成新文档，需要创建 <code>Zend_Pdf</code> 对象。
+    </para>
+
+    <para>
+        <code>Zend_Pdf</code> 类也提供两个静态方法来加载 PDF，<code>Zend_Pdf::load()</code> 和 <code>Zend_Pdf::parse()</code>。它们都返回 Zend_Pdf 对象作为结果或如果有错误发生就抛出异常。
+    </para>
+
+    <example id="zend.pdf.create.example-1">
+        <title> 生成新的或加载 PDF 文档 </title>
+        <programlisting role="php"><![CDATA[
+...
+// Create new PDF document.
+$pdf1 = new Zend_Pdf();
+
+// Load PDF document from a file.
+$pdf2 = Zend_Pdf::load($fileName);
+
+// Load PDF document from a string.
+$pdf3 = Zend_Pdf::parse($pdfString);
+...
+]]>
+      </programlisting>
+    </example>
+
+    <para>
+        PDF 文件格式支持增量式文档更新。这样每次文档更新，就产生新的版本。Zend_Pdf 模块支持指定版本的读取。
+    </para>
+    <para>
+       版本可以指定为 <code>Zend_Pdf::load()</code> 和 <code>Zend_Pdf::parse()</code>的第二个参数或由 <code>Zend_Pdf::rollback()</code> 来请求。
+        <footnote>
+            <para>
+                <code>Zend_Pdf::rollback()</code> 方法必需在任何修改前调用，否则它的行为就没有定义。
+            </para>
+        </footnote>
+    call.
+    </para>
+
+    <example id="zend.pdf.create.example-2">
+        <title> 请求 PDF 文档的指定版本 </title>
+        <programlisting role="php"><![CDATA[
+...
+// Load PDF previouse revision of the document.
+$pdf1 = Zend_Pdf::load($fileName, 1);
+
+// Load PDF previouse revision of the document.
+$pdf2 = Zend_Pdf::parse($pdfString, 1);
+
+// Load first revision of the document.
+$pdf3 = Zend_Pdf::load($fileName);
+$revisions = $pdf3->revisions();
+$pdf3->rollback($revisions - 1);
+...
+]]>
+        </programlisting>
+    </example>
+
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

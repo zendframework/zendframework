@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.reflection.examples">
+    <title>Zend_Reflection Beispiele</title>
+
+    <example id="zend.reflection.examples.file">
+        <title>Durchführen von Reflection an einer Datei</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.reflection.examples.class">
+        <title>Durchführen von Reflection an einer Klasse</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.reflection.examples.method">
+        <title>Durchführen von Reflection an einer Methode</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.reflection.examples.docblock">
+        <title>Durchführen von Reflection an einem Docblock</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.reflection.examples.factory">
+        <title>Verwenden der Factory um eigene Reflection Klassen auszuführen</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+</sect1>

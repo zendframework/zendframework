@@ -1,0 +1,82 @@
+<sect1 id="zend.console.getopt.rules">
+    <title> 声明 Getopt 规则 </title>
+    <para>
+        <code>Zend_Console_Getopt</code> 类的构造器带有一到三个参数。第一个参数声明哪个选项被应用程序支持。这个类支持交替（alternative）语法形式来声明选项。参见下面的章节关于这些语法形式的格式和用法。
+    </para>
+    <para>
+        构造器带有的另外两个参数都是可选的。第二个参数可以包含命令行参数，缺省为 <code>$_SERVER['argv']</code> 。
+    </para>
+    <para>
+        第三个参数包含一个配置选项来定制 <code>Zend_Console_Getopt</code> 的行为（behavior）。关于可用选项的引用（reference），参见 <link linkend="zend.console.getopt.configuration.config"> 添加配置 </link>
+    </para>
+
+    <sect2 id="zend.console.getopt.rules.short">
+        <title> 用短语法声明选项 </title>
+        <para>
+            <code>Zend_Console_Getopt</code> 支持紧凑的语法 （类似用于 GNU Getopt的语法，参见 <ulink url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink> ）。这个语法只支持单字符 flag 。在一个单个的字符串中，每个字母对应于被程序支持的 flag。字母后跟着冒号 ("<code>:</code>") 表示这个 flag 需要参数。
+        </para>
+        <example id="zend.console.getopt.rules.short.example">
+            <title> 使用短语法 </title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt('abp:');
+]]>
+            </programlisting>
+        </example>
+        <para>
+            上面的例子示例使用 <code>Zend_Console_Getopt</code> 来声明选项，这个选项也可以以 "<code>-a</code>"、"<code>-b</code>" 或 "<code>-p</code>"的形式给出。后面的 flag 需要一个参数。
+        </para>
+        <para>
+            短语法限于单个字符的flag。别名，参数类型和帮助字符串不被短语法支持。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.console.getopt.rules.long">
+        <title> 用长语法声明选项 </title>
+        <para>
+            带有更多功能的不同的语法也是可用的。这个语法允许为 flag 指定别名、选项参数的类型和用来描述用法的帮助字符串。在短语法中使用单字符串来声明选项，而在常语法中使用联合数组作为构造器的第一个参数。
+        </para>
+        <para>
+            联合数组的每个元素的键是一个字符串，这个字符串带有给flag命名的格式，用管道符号("<code>|</code>")来隔离每个别名。在这些别名后面，如果选项需要参数，则用等号("<code>=</code>")和紧跟一个字母来表示参数的<emphasis> 类型 </emphasis>：
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    "<code>=s</code>" 表示字符串参数
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    "<code>=w</code>" 表示一个字的参数（不包含空白的字符串）
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    "<code>=i</code>" 表示整数参数
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            如果参数是可选的，使用短横线 ("<code>-</code>")而不使用等号。
+        </para>
+        <para>
+            在联合数组中的每个元素的值是帮助字符串，用来描述如何使用程序。
+        </para>
+        <example id="zend.console.getopt.rules.long.example">
+            <title> 使用长语法 </title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt(
+  array(
+    'apple|a'    => 'apple option, with no parameter',
+    'banana|b=i' => 'banana option, with required integer parameter',
+    'pear|p-s'   => 'pear option, with optional string parameter'
+  )
+);
+]]>
+            </programlisting>
+        </example>
+        <para>
+            在上面的声明例子中，有三个选项："<code>--apple</code>" 和 "<code>-a</code>" 互为别名，不带参数；"<code>--banana</code>" and "<code>-b</code>" 互为别名，带有强制的整形参数；最后，"<code>--pear</code>" and "<code>-p</code>" 互为别名，带有可选的字符串参数。
+        </para>
+    </sect2>
+
+</sect1>

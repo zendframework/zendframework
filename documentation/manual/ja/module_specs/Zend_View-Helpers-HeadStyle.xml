@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.view.helpers.initial.headstyle">
+    <title>HeadStyle ヘルパー</title>
+
+    <para>
+        HTML の <code>&lt;style&gt;</code> 要素を使用して、
+        CSS スタイルシートを HTML の <code>&lt;head&gt;</code>
+        要素に埋め込みます。
+    </para>
+
+    <note>
+        <title>HeadLink を使用した CSS ファイルへのリンク</title>
+
+        <para>
+            外部スタイルシートの読み込み用の
+            <code>&lt;link&gt;</code> 要素を作成する場合は
+            <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            を使用する必要があります。スタイルシートをインラインで定義したい場合に
+            <code>HeadScript</code> を使用します。
+        </para>
+    </note>
+
+    <para>
+        <code>HeadStyle</code> ヘルパーがサポートするメソッドは次のとおりです。
+        これらによってスタイルシート宣言の設定や追加を行います。
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>prependStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>setStyle($content, $attributes =
+                    array())</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        すべての場合において、<code>$content</code> には実際の CSS 宣言を指定します。
+        <code>$attributes</code> には、<code>style</code> タグに追加したい属性があれば指定します。
+        lang、title、media そして dir のすべてが使用可能です。
+    </para>
+
+    <note>
+        <title>条件コメントの設定</title>
+
+        <para>
+            <code>HeadStyle</code> では、script タグを条件コメントで囲むことができます。
+            そうすれば、特定のブラウザでだけスクリプトを実行しないこともできます。
+            これを使用するには conditional タグを設定し、条件をメソッドコール時の
+            <code>$attributes</code> パラメータで渡します。
+        </para>
+
+        <example id="zend.view.helpers.initial.headstyle.conditional">
+            <title>Headstyle で条件コメントを使う例</title>
+            <programlisting role="php"><![CDATA[
+// スクリプトを追加します
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
+]]>
+            </programlisting>
+        </example>
+    </note>
+
+    <para>
+        <code>HeadStyle</code> はスタイル宣言のキャプチャも行います。
+        これは、宣言をプログラム上で作成してからどこか別の場所で使いたい場合に便利です。
+        使用法は、以下の例で示します。
+    </para>
+
+    <para>
+        <code>headStyle()</code> メソッドを使うと、宣言の要素を手っ取り早く追加することができます。
+        シグネチャは
+        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>
+        です。<code>$placement</code> には 'APPEND'、'PREPEND' あるいは 'SET'
+        のいずれかを指定します。
+    </para>
+
+    <para>
+        <code>HeadStyle</code> は <code>append()</code> や
+        <code>offsetSet()</code>、<code>prepend()</code>、そして <code>set()</code>
+        をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
+        内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
+        あとで <code>itemToString()</code> メソッドでシリアライズします。
+        これはスタック内の項目についてチェックを行い、
+        オプションでそれを修正したものを返します。
+    </para>
+
+    <para>
+        <code>HeadStyle</code> ヘルパーは、
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+        ヘルパー</link> の具象実装です。
+    </para>
+
+    <example id="zend.view.helpers.initial.headstyle.basicusage">
+        <title>HeadStyle ヘルパーの基本的な使用法</title>
+
+        <para>
+            新しい style タグを、好きなときに指定することができます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// スタイルを追加します
+$this->headStyle()->appendStyle($styles);
+]]>
+        </programlisting>
+
+        <para>
+            CSS では並び順が重要となります。
+            指定した並び順で出力させる必要が出てくることでしょう。
+            そのために使用するのが、append、prepend そして offsetSet
+            といったディレクティブです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// スタイルの順番を指定します
+
+// 特定の位置に置きます
+$this->headStyle()->offsetSetStyle(100, $customStyles);
+
+// 最後に置きます
+$this->headStyle()->appendStyle($finalStyles);
+
+// 先頭に置きます
+$this->headStyle()->prependStyle($firstStyles);
+]]>
+        </programlisting>
+
+        <para>
+            すべてのスタイル宣言を出力する準備が整ったら、
+            あとはレイアウトスクリプトでそれを出力するだけです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->headStyle() ?>
+]]>
+        </programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.headstyle.capture">
+        <title>HeadStyle ヘルパーによるスタイル宣言のキャプチャ</title>
+
+        <para>
+            時には CSS のスタイル宣言をプログラムで生成しなければならないこともあるでしょう。
+            文字列の連結やヒアドキュメント等を使っても構いませんが、
+            ふつうにスタイルを作成してそれを PHP のタグに埋め込めればより簡単です。
+            <code>HeadStyle</code> は、スタックにキャプチャすることでこれを実現します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?php echo $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+]]>
+        </programlisting>
+
+        <para>
+            前提条件は次のとおりです。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    スタイル宣言は、スタックの末尾に追加されていきます。
+                    既存のスタックを上書きしたりスタックの先頭に追加したりしたい場合は、
+                    それぞれ 'SET' あるいは 'PREPEND' を
+                    <code>captureStart()</code> の最初の引数として渡します。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>&lt;style&gt;</code> タグに追加の属性を指定したい場合は、
+                    <code>captureStart()</code> の 2 番目の引数に配列形式で渡します。
+            </para></listitem>
+        </itemizedlist>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

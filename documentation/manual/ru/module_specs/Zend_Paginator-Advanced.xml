@@ -1,0 +1,122 @@
+<sect1 id="zend.paginator.advanced">
+    <title>Продвинутое использование</title>
+
+    <sect2 id="zend.paginator.advanced.adapters">
+        <title>Создание собственных адаптеров к источникам данных</title>
+
+        <para>
+            Вы можете столкнуться с таким типом данных, для которого
+            не предусмотрено адаптера. В этом случае нужно создать
+            собственный адаптер.
+        </para>
+
+        <para>
+            Для этого нужно реализовать интерфейс
+            <code>Zend_Paginator_Adapter_Interface</code>. Он включает в себя
+            два метода:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>count()</para>
+            </listitem>
+            <listitem>
+                <para>getItems($offset, $itemCountPerPage)</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Кроме того, нужно реализовать конструктор, который принимает
+            источник данных в качестве параметра и сохраняет его в
+            защищенном или закрытом свойстве. Как его обрабатывать - решать вам.
+        </para>
+
+        <para>
+            Если вы когда-либо использовали SPL-интерфейс
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
+            то знаете, для чего используется метод <code>count()</code>. В
+            <code>Zend_Paginator</code> он возвращает общее количество
+            элементов в наборе данных.
+        </para>
+
+        <para>
+            Метод <code>getItems()</code> ненамного сложнее. Он должен принимать
+            смещение и количество элементов на странице и возвращать
+            соответствующий кусок данных. В случае массива он мог бы выглядеть
+            следующим образом:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[return array_slice($this->_array, $offset, $itemCountPerPage);]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Посмотрите, как реализованы адаптеры, входящие в поставку
+            Zend Framework (все они реализуют
+            <code>Zend_Paginator_Adapter_Interface</code>), чтобы понять, как
+            реализовать свой адаптер.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.paginator.advanced.scrolling-styles">
+        <title>Создание своих стилей прокрутки</title>
+
+        <para>
+            При создании своего стиля прокрутки требуется, чтобы он
+            реализовывал интерфейс
+            <code>Zend_Paginator_ScrollingStyle_Interface</code>, который
+            определяет единственный метод, <code>getPages()</code>:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[public function getPages(Zend_Paginator $paginator, $pageRange = null);]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Этот метод должен вычислять верхний и нижний пределы номеров
+            страниц в ряде так называемых "локальных" страниц (т.е. страниц,
+            которые находятся рядом с текущей страницей).
+        </para>
+
+        <para>
+            Если только ваш стиль прокрутки не наследует от уже существующего
+            (для примера смотрите
+            <code>Zend_Paginator_ScrollingStyle_Elastic</code>), то этот метод
+            должен заканчиваться чем-то вроде следующего кода:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[return $paginator->getPagesInRange($lowerBound, $upperBound);]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Этим вызовом не делается ничего специального, данный метод просто
+            для удобства. Он проверяет на корректность верхний и нижний пределы
+            и возвращает массив номеров страниц для постраничной навигации.
+        </para>
+
+        <para>
+            Для того, чтобы использовать новый стиль прокрутки,
+            следует указать <code>Zend_Paginator</code>-у, в какой директории
+            он находится. Для этого сделайте следующее:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[// Префикс нового класса стиля прокрутки
+$prefix = 'My_Paginator_ScrollingStyle';
+
+// Путь к новому стилю прокрутки
+$path   = 'My/Paginator/ScrollingStyle/';
+
+// Установка префикса и пути для нового стиля прокрутки
+Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);]]>
+            </programlisting>
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

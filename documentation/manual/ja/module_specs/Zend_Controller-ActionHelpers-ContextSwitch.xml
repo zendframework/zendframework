@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.controller.actionhelpers.contextswitch">
+    <title>ContextSwitch および AjaxContext</title>
+
+    <para>
+        <code>ContextSwitch</code> アクションヘルパーは、
+        リクエストに対してさまざまなレスポンスを返す機能を実現するためのものです。
+        <code>AjaxContext</code> ヘルパーは
+        <code>ContextSwitch</code> をより特化したもので、
+        レスポンスを XmlHttpRequests で返す機能を提供します。
+    </para>
+
+    <para>
+        いずれかを有効にするには、コントローラに対して
+        「どのアクションがどのコンテキストに対応するのか」
+        を教えてやる必要があります。
+        やってきたリクエストがそのアクションで有効なコンテキストである場合、
+        ヘルパーが行う処理は次のようになります。
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                レイアウト機能が有効な場合に、それを無効にする。
+        </para></listitem>
+
+        <listitem><para>
+                別のビューサフィックスを設定し、
+                コンテキストに応じて別のビュースクリプトを効率よく扱えるようにする。
+        </para></listitem>
+
+        <listitem><para>
+                コンテキストに応じて適切なレスポンスヘッダを送信する。
+        </para></listitem>
+
+        <listitem><para>
+                オプションで、指定したコールバックを実行して
+                コンテキストの設定や後処理を行う。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        たとえば、次のようなコントローラを考えてみましょう。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    /**
+     * トップページは listAction() に転送します
+     */
+    public function indexAction()
+    {
+        $this->_forward('list');
+    }
+
+    /**
+     * ニュースの一覧
+     */
+    public function listAction()
+    {
+    }
+
+    /**
+     * ニュースの閲覧
+     */
+    public function viewAction()
+    {
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        ここで、<code>listAction()</code>
+        の結果を XML 形式でも返せるようにしたくなったとしましょう。
+        わざわざ別のアクションを作らなくても、
+        XML でレスポンスを返すように指示することができます。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('list', 'xml')
+                      ->initContext();
+    }
+
+    // ...
+}
+]]>
+    </programlisting>
+
+    <para>
+        これが何を行っているかというと、
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                レスポンスヘッダ 'Content-Type' を 'text/xml' にします。
+        </para></listitem>
+
+        <listitem><para>
+                ビューのサフィックスを 'xml.phtml' (あるいは別のサフィックスをを使っているなら
+                'xml.[your suffix]') に変更します。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        さて、次は新しいビュースクリプト 'news/list.xml.phtml'
+        を作成しましょう。これが XML の作成とレンダリングを行います。
+    </para>
+
+    <para>
+        あるリクエストがコンテキストスイッチを起動するかどうかを判断するために、
+        このヘルパーはリクエストオブジェクト内のトークンを調べます。
+        デフォルトでは 'format' というパラメータを調べることになっていますが、
+        これは変更することもできます。つまり、
+        ほとんどの場合は、リクエストに 'format' パラメータを追加するだけで
+        コンテキストスイッチを行えるということです。
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                URL のパラメータで指定する場合: <code>/news/list/format/xml</code>
+                (デフォルトのルーティング方式では、アクションに続けて任意の
+                キー/値 のペアを指定できたことを思い出しましょう)
+        </para></listitem>
+
+        <listitem><para>
+                GET パラメータで指定する場合: <code>/news/list?format=xml</code>
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>ContextSwitch</code> では任意のコンテキストを指定することができます。
+        つまり (もし存在するなら) サフィックスを自由に変更したり
+        送信するレスポンスヘッダを任意のものに変更したり、
+        任意のコールバックで初期化や後処理を行ったりができるということです。
+    </para>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
+        <title>デフォルトで使用できるコンテキスト</title>
+
+        <para>
+            <code>ContextSwitch</code> ヘルパーで
+            使用できるデフォルトのコンテキストは、json と xml のふたつです。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>JSON</emphasis>。JSON コンテキストは、
+                    'Content-Type' レスポンスヘッダを 'application/json' に設定し、
+                    ビュースクリプトのサフィックスを 'json.phtml' とします。
+                </para>
+
+                <para>
+                    しかし、デフォルトではビュースクリプトは不要です。
+                    これは、すべてのビュー変数を単純にシリアライズして
+                    JSON レスポンスを直接発行するものです。
+                </para>
+
+                <para>
+                    自動 JSON シリアライズ機能を使わないようにすることもできます。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
+]]>
+                </programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>XML</emphasis>。XML コンテキストは、
+                    'Content-Type' レスポンスヘッダを 'text/xml' に設定し、
+                    ビュースクリプトのサフィックスを 'xml.phtml' とします。
+                    このコンテキスト用に、新しいビュースクリプトを作成する必要があります。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
+        <title>独自のコンテキストの作成</title>
+
+        <para>
+            デフォルトのコンテキストだけでは対応しきれないこともあるでしょう。
+            たとえば結果を YAML で返したり、PHP のシリアライズ文字列で返したり、
+            あるいは RSS や ATOM フィードで返したりといったようにです。
+            <code>ContextSwitch</code> を使用すればそれも可能です。
+        </para>
+
+        <para>
+            新たなコンテキストを追加する最も簡単な方法は
+            <code>addContext()</code> メソッドを使用することです。
+            このメソッドの引数は 2 つで、コンテキストの名前と
+            設定の配列を指定します。設定には、以下のうちのひとつあるいは複数を指定します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para><emphasis>suffix</emphasis>:
+                ViewRenderer で登録されているデフォルトのビューサフィックスの
+                前に追加するサフィックス。</para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>headers</emphasis>: ヘッダ/値
+                    のペアの配列で、レスポンスとともに送信したいもの。</para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>callbacks</emphasis>:
+                キー 'init' や 'post' を含む配列で、それぞれ
+                コンテキストの初期化や後処理の際に使用する
+                PHP コールバックを指定します。</para>
+
+                <para>初期化コールバックは、<code>ContextSwitch</code> が
+                コンテキストを検出した場合に実行されます。
+                これを使用して、任意のロジックを実行することができます。
+                たとえば JSON コンテキストでは、
+                このコールバックを使用して
+                自動 JSON シリアライズが有効な場合に ViewRenderer
+                を無効化しています。</para>
+
+                <para>後処理はアクションの <code>postDispatch()</code>
+                で発生します。これを使用して、任意のロジックを実行することができます。
+                たとえば JSON コンテキストでは、このコールバックを使用して
+                自動 JSON シリアライズ機能が有効か無効かを調べています。
+                有効な場合はビュー変数を JSON にシリアライズしてレスポンスに送信し、
+                無効な場合は ViewRenderer を再度有効にします。</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            コンテキストを操作するメソッドには次のようなものがあります。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>addContext($context, array $spec)</code>:
+                新しいコンテキストを追加する。
+                そのコンテキストが既に存在する場合は例外をスローします。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContext($context, array $spec)</code>:
+                新しいコンテキストを追加、あるいは既存のコンテキストを上書きする。
+                <code>addContext()</code> と同じように指定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>addContexts(array $contexts)</code>:
+                複数のコンテキストを一度に追加する。配列 <code>$contexts</code>
+                は、コンテキスト/設定 のペアの配列となります。
+                既に存在するコンテキストを指定した場合は例外をスローします。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContexts(array $contexts)</code>:
+                新しいコンテキストを追加、あるいは既存のコンテキストを上書きする。
+                <code>addContexts()</code> と同じように指定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasContext($context)</code>:
+                そのコンテキストが存在する場合に true、存在しない場合に
+                false を返します。
+            </para></listitem>
+
+            <listitem><para> <code>getContext($context)</code>:
+                    指定した名前のコンテキストを取得する。
+                    <code>addContext()</code> で使用する設定とあわせた配列を返します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getContexts()</code>: すべてのコンテキストを取得する。
+                コンテキスト/設定 のペアの配列を返します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>removeContext($context)</code>:
+                指定した名前のコンテキストを削除する。成功した場合に true、
+                そのコンテキストが見つからない場合に false を返します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>clearContexts()</code>: すべてのコンテキストを削除する。
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
+        <title>アクションごとのコンテキストの設定</title>
+
+        <para>
+            使用するコンテキストの設定には 2 通りの方法があります。
+            コントローラ内で手動で配列を作成する方法、
+            そして <code>ContextSwitch</code> のメソッドでそれを作成する方法です。
+        </para>
+
+        <para>
+            アクションとコンテキストの関連を追加するメソッドは
+            <code>addActionContext()</code> です。
+            このメソッドには 2 つの引数を指定します。
+            ひとつはコンテキストを追加したいアクション、
+            もうひとつはコンテキスト名あるいはコンテキスト名の配列です。
+            たとえば、次のようなコントローラクラスを考えてみましょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function listAction()
+    {
+    }
+
+    public function viewAction()
+    {
+    }
+
+    public function commentsAction()
+    {
+    }
+
+    public function updateAction()
+    {
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            ここで、'list' アクションに XML コンテキストを、
+            そして 'comments' アクションに XML コンテキストと JSON
+            コンテキストを追加してみることにします。これは
+            <code>init()</code> メソッドで行います。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()
+             ->addActionContext('list', 'xml')
+             ->addActionContext('comments', array('xml', 'json'))
+             ->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            あるいは、単純に配列プロパティ
+            <code>$contexts</code> を設定することもできます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public $contexts = array(
+        'list'     => array('xml'),
+        'comments' => array('xml', 'json')
+    );
+
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            このほうがオーバーヘッドが少なくなりますが、
+            書き間違える可能性もあります。
+        </para>
+
+        <para>
+            コンテキストの関連付けを行うメソッドには次のようなものがあります。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addActionContext($action, $context)</code>:
+                    ひとつあるいは複数のコンテキストを、あるアクションで使用できるようにする。
+                    関連付けがすでに設定されている場合は、それに追記します。
+                    <code>$context</code> は、単一のコンテキストか
+                    コンテキストの配列となります。
+                </para>
+
+                <para>
+                    コンテキストとして <code>true</code> を指定すると、
+                    すべてのコンテキストをそのアクションで使用できるようにします。
+                </para>
+
+                <para>
+                    $context に空の値を指定すると、
+                    そのアクションではどのコンテキストも使用できないようにします。
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>setActionContext($action, $context)</code>:
+                    ひとつあるいは複数のコンテキストを、あるアクションで使用できるようにする。
+                    関連付けがすでに設定されている場合は、指定したものでそれを置き換えます。
+                    <code>$context</code> は、単一のコンテキストか
+                    コンテキストの配列となります。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>addActionContexts(array $contexts)</code>:
+                    いくつかの アクション/コンテキスト のペアを一度に追加する。
+                    <code>$contexts</code> は、アクション/コンテキスト
+                    のペアの連想配列です。これは <code>addActionContext()</code>
+                    へのプロキシとなります。つまり、既に別のペアが登録されている場合は
+                    そこに追記します。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setActionContexts(array $contexts)</code>:
+                    <code>addActionContexts()</code> と同様だが、既存の
+                    アクション/コンテキスト のペアは上書きする。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>hasActionContext($action, $context)</code>:
+                    特定のアクションにそのコンテキストが存在するかどうかを調べる。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>getActionContexts($action = null)</code>:
+                    指定したアクションのすべてのコンテキスト、
+                    あるいはすべての アクション/コンテキスト のペアを返す。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>removeActionContext($action, $context)</code>:
+                    ひとつあるいは複数のコンテキストを、指定したアクションから削除する。
+                    <code>$context</code> は、単一のコンテキストか
+                    コンテキストの配列となります。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>clearActionContexts($action = null)</code>:
+                    すべてのコンテキストを、指定したアクションから削除する。
+                    あるいはすべてのアクションのすべてのコンテキストを削除する。
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
+        <title>コンテキストスイッチの初期化</title>
+
+        <para>
+            コンテキストスイッチを初期化するには、アクションコントローラで
+            <code>initContext()</code> をコールする必要があります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            時には、使用するコンテキストを決めてしまいたいこともあるでしょう。
+            たとえば、コンテキストスイッチが起動したときには
+            XML コンテキストだけを使わせたいという場合などです。
+            その場合は、そのコンテキストを
+            <code>initContext()</code> に渡します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$contextSwitch->initContext('xml');
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
+        <title>追加機能</title>
+
+        <para>
+            さまざまなメソッドを使用することで、
+            <code>ContextSwitch</code> ヘルパーの挙動を変更することができます。
+            たとえば次のようなメソッドが存在します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setAutoJsonSerialization($flag)</code>:
+                    デフォルトでは、JSON コンテキストはビュー変数をすべてシリアライズし、
+                    JSON 記法にしたものをレスポンスとして返します。
+                    レスポンスを自分で作成したい場合はこれをオフにしなければなりません。
+                    これは、<code>initContext()</code> をコールする前に行う必要があります。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$contextSwitch->setAutoJsonSerialization(false);
+$contextSwitch->initContext();
+]]>
+                </programlisting>
+
+                <para>
+                    このフラグの値を取得するには
+                    <code>getAutoJsonSerialization()</code> を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setSuffix($context, $suffix,
+                        $prependViewRendererSuffix)</code>:
+                    このメソッドは、指定したコンテキストに対して
+                    別のサフィックスを設定します。
+                    3 番目の引数を使用すると、
+                    ViewRenderer のサフィックスの前に
+                    新しいサフィックスをつけるのかどうかを指定することができます。
+                    このフラグはデフォルトで有効になっています。
+                </para>
+
+                <para>
+                    サフィックスに空の値を指定すると、
+                    ViewRenderer のサフィックスのみを使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeader($context, $header, $content)</code>:
+                    指定したコンテキストにレスポンスヘッダを追加します。
+                    <code>$header</code> はヘッダの名前で、
+                    <code>$content</code> はそのヘッダに渡す値となります。
+                </para>
+
+                <para>
+                    各コンテキストは複数のヘッダを持つことができます。
+                    <code>addHeader()</code> は、
+                    そのヘッダをコンテキストのヘッダスタックに追加します。
+                </para>
+
+                <para>
+                    指定した <code>$header</code> がそのコンテキストに既に存在する場合は、
+                    例外をスローします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($context, $header, $content)</code>:
+                    <code>setHeader()</code> は
+                    <code>addHeader()</code> とほぼ同じですが、
+                    既存のコンテキストヘッダを上書きします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeaders($context, array $headers)</code>:
+                    指定したコンテキストに一度に複数のヘッダを追加します。
+                    <code>addHeader()</code> へのプロキシとして動作するので、
+                    そのヘッダがすでに存在する場合は例外をスローします。
+                    <code>$headers</code> は ヘッダ/コンテキスト
+                    のペアの配列です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeaders($context, array $headers.)</code>:
+                    <code>addHeaders()</code> と似ていますが、これは
+                    <code>setHeader()</code> へのプロキシとして動作し、
+                    既存のヘッダは上書きします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeader($context, $header)</code>:
+                    指定したコンテキストのヘッダの値を取得します。
+                    見つからない場合は null を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeHeader($context, $header)</code>:
+                    指定したコンテキストの単一のヘッダを削除します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders($context, $header)</code>:
+                    指定したコンテキストのすべてのヘッダを削除します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallback($context, $trigger, $callback)</code>:
+                    指定したコンテキストにおける指定したトリガーのコールバックを設定します。
+                    トリガーに指定できる値は 'init' あるいは 'post'
+                    (それぞれ、コンテキストの初期化時と postDispatch 時を表します) です。
+                    <code>$callback</code> は PHP のコールバックとして正しい形式でなければなりません。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallbacks($context, array $callbacks)</code>:
+                    指定したコンテキストに複数のコールバックを設定します。
+                    <code>$callbacks</code> は トリガー/コールバック
+                    のペアとなります。実際のところ、登録できるコールバックは
+                    ほとんどふたつだけで、初期化用のものと後処理ようのものです。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallback($context, $trigger)</code>:
+                    指定したコンテキストにおける指定したトリガーのコールバックを取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallbacks($context)</code>:
+                    指定したコンテキストにおけるすべてのコールバックを取得します。
+                    トリガー/コールバック のペアを返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeCallback($context, $trigger)</code>:
+                    指定したコンテキストにおける指定したトリガーのコールバックを削除します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearCallbacks($context)</code>:
+                    指定したコンテキストにおけるすべてのコールバックを削除します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setContextParam($name)</code>:
+                    コンテキストスイッチが要求されたかどうかを調べるための
+                    リクエストパラメータを設定します。デフォルトは
+                    'format' ですが、このアクセサを使用することで変更することができます。
+                </para>
+
+                <para>
+                    <code>getContextParam()</code>
+                    で、現在の値を取得することができます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setAutoDisableLayout($flag)</code>:
+                    デフォルトでは、コンテキストスイッチが発生したときには
+                    レイアウト機能が無効になります。これは、
+                    レイアウト機能は通常は普通のレスポンスの時に使用するものであって
+                    それ以外のコンテキストでは無意味だからです。
+                    しかし、時にはレイアウト機能を使いたいこともあるでしょう
+                    (新しいコンテキスト用のレイアウトがある場合など)。
+                    その場合は、<code>setAutoDisableLayout()</code>
+                    に false を渡します。これは、
+                    <code>initContext()</code> をコールするより
+                    <emphasis>前に</emphasis> 行わなければなりません。
+                </para>
+
+                <para>
+                    このフラグの現在の値を取得するには、アクセサ
+                    <code>getAutoDisableLayout()</code> を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCurrentContext()</code> を使うと、
+                    現在のコンテキストを取得することができます。
+                    コンテキストスイッチが発生していない場合や
+                    <code>initContext()</code> の起動前にコールした場合は
+                    null を返します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
+        <title>AjaxContext の機能</title>
+
+        <para>
+            <code>AjaxContext</code> ヘルパーは
+            <code>ContextSwitch</code> を継承したものです。
+            <code>ContextSwitch</code> の機能はすべて使用することができます。
+            しかし、いくつか重要な違いがあります。
+        </para>
+
+        <para>
+            まず、コンテキストを決めるアクションコントローラのプロパティは
+            <code>$ajaxable</code> となります。これにより、
+            AJAX 用と通常の HTTP リクエスト用で別のコンテキストを使用できるようになります。
+            <code>AjaxContext</code> の <code>*ActionContext*()</code>
+            系のメソッドは、このプロパティに書き込みます。
+        </para>
+
+        <para>
+            次に、これは XmlHttpRequest が発生した場合にのみ起動します。
+            リクエストオブジェクトの <code>isXmlHttpRequest()</code>
+            メソッドで判断します。したがって、たとえコンテキストパラメータ
+            ('format') をリクエストで渡したとしても、そのリクエストが
+            XmlHttpRequest でない場合はコンテキストスイッチが発生しません。
+        </para>
+
+        <para>
+            3 番目に、<code>AjaxContext</code> は HTML コンテキストを追加します。
+            このコンテキストでは、サフィックスを 'ajax.phtml'
+            として通常のリクエストのコンテキストと区別しています。
+            追加のヘッダは返しません。
+        </para>
+
+        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
+            <title>Ajax リクエストに対してアクションに応答させる</title>
+
+            <para>
+                この例では、アクション 'view'、'form' および 'process'
+                に対する AJAX リクエストにレスポンスを返させるようにしています。
+                最初のふたつ 'view' および 'form' では、HTML
+                コード片を返してページを更新させます。最後の 'process'
+                については JSON を返しています。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class CommentController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('view', 'html')
+                    ->addActionContext('form', 'html')
+                    ->addActionContext('process', 'json')
+                    ->initContext();
+    }
+
+    public function viewAction()
+    {
+        // 単一のコメントを表示します
+        // AjaxContext の場合は comment/view.ajax.phtml
+        // を使用します
+    }
+
+    public function formAction()
+    {
+        // 新規コメントの追加フォームをレンダリングします
+        // AjaxContext の場合は comment/form.ajax.phtml
+        // を使用します
+    }
+
+    public function processAction()
+    {
+        // 新規コメントを処理します
+        // 結果を JSON で返します。結果をビュー変数に格納するだけで、
+        // JSON でそれを返してくれます
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                クライアント側では、AJAX ライブラリからエンドポイント
+                '/comment/view'、'/comment/form' そして
+                '/comment/process' へリクエストを送ることになります。
+                その際に、'format' パラメータを
+                '/comment/view/format/html'、'/comment/form/format/html' そして
+                '/comment/process/format/json' のように指定します
+                (あるいはクエリ文字列で "?format=json" のようにしてもかまいません)。
+            </para>
+
+            <para>
+                ライブラリ側で 'X-Requested-With:
+                XmlHttpRequest' ヘッダが設定されていれば、
+                このアクションは適切な形式でレスポンスを返します。
+            </para>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.view.introduction">
+    <title>Einführung</title>
+
+    <para>
+        <classname>Zend_View</classname> ist eine Klasse für die Verarbeitung des "View" Teils des
+        Model-View-Controller Entwurfsmusters. Er existiert, um das View Skript von den Model und
+        Controller Skripten zu trennen. Es stellt ein System an Helfern, Ausgabefiltern und
+        Variablenmaskierung bereit.
+    </para>
+
+    <para>
+        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst PHP als Template
+        Sprache verwenden oder Instanzen anderer Template Systeme erstellen und diese in deinem
+        View Skript verarbeiten.
+    </para>
+
+    <para>
+        Im Wesentlichen verläuft die Verwendung von <classname>Zend_View</classname> in zwei Hauptschritten:
+
+        1. Dein Controller Skript erstellt eine Instanz von <classname>Zend_View</classname> und übergibt
+        Variablen an diese Instanz.
+
+        2. Der Controller teilt <classname>Zend_View</classname> mit, ein bestimmtes View Skript zu
+        verarbeiten. Dabei wird die Kontrolle an das View Skript übergeben, welches die Ausgabe
+        erstellt.
+    </para>
+
+    <sect2 id="zend.view.introduction.controller">
+
+        <title>Controller Skript</title>
+
+        <para>
+            In einem einfachen Beispiel hat dein Controller Skript eine Liste von Buchdaten, die
+            von einem View Skript verarbeitet werden sollen. Dieses Controller Skript kann ungefähr
+            so aussehen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// verwende ein Modell, um die Daten der Bücher und Autoren zu erhalten
+$data = array(
+    array(
+        'author' => 'Hernando de Soto',
+        'title' => 'The Mystery of Capitalism'
+    ),
+    array(
+        'author' => 'Henry Hazlitt',
+        'title' => 'Economics in One Lesson'
+    ),
+    array(
+        'author' => 'Milton Friedman',
+        'title' => 'Free to Choose'
+    )
+);
+
+// nun übergebe die Buchdaten an die Zend_View Instanz
+Zend_Loader::loadClass('Zend_View');
+$view = new Zend_View();
+$view->books = $data;
+
+// und verarbeite ein View Skript mit Namen "booklist.php"
+echo $view->render('booklist.php');
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.view">
+
+        <title>View Skript</title>
+
+        <para>
+            Nun benötigen wir das zugehörige View Skript "booklist.php". Dies ist ein PHP Skript
+            wie jedes andere mit einer Ausnahme: es wird innerhalb der <classname>Zend_View</classname>
+            Instanz ausgeführt, was bedeutet, dass Referenzen auf $this auf die Eigenschaften und
+            Methoden der <classname>Zend_View</classname> Instanz weisen. (Variablen, die vom Controller an
+            die Instanz übergeben wurden, sind öffentliche (public) Eigenschaften der
+            <classname>Zend_View</classname> Instanz.) Dadurch kann ein sehr einfaches View Skript wie folgt
+            aussehen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php if ($this->books): ?>
+    <!-- Eine Tabelle mit einigen Büchern. -->
+    <table>
+        <tr>
+            <th>Autor</th>
+            <th>Titel</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>Es gibt keine Bücher zum Anzeigen.</p>
+
+<?php endif;?>
+]]>
+        </programlisting>
+
+        <para>
+            Beachte, wie wir die "escape()" Methode verwenden, um die Variablen für die Ausgabe zu
+            maskieren.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.options">
+        <title>Optionen</title>
+
+        <para>
+            <classname>Zend_View</classname> hat einige Optionen die gesetzt werden können um
+            das Verhalten deiner View-Skripte zu konfigurieren.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>basePath</code>: zeigt den Basispfad von dem der Skript-, Helfer-
+                    und Filterpfad gesetzt wird. Es nimmt folgende Verzeichnisstruktur an:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+base/path/
+    helpers/
+    filters/
+    scripts/
+]]>
+                </programlisting>
+
+                <para>
+                    Das kann über <code>setBasePath()</code>,
+                    <code>addBasePath()</code>, oder die <code>basePath</code>
+                    Option dem Konstruktor gesetzt werden.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                <code>encoding</code>: zeigt das Verschlüsseln der Zeichen für die Verwendung mit
+                <code>htmlentities()</code>, <code>htmlspecialchars()</code>, und anderen
+                Operationen. Standardwert ist ISO-8859-1 (latin1). Kann über
+                <code>setEncoding()</code>, oder die <code>encoding</code> Option im Konstruktor,
+                gesetzt werden.
+            </para></listitem>
+
+            <listitem><para>
+                <code>escape</code>: zeigt einen Rückruf welche durch <code>escape()</code> benutzt
+                wird. Kann über <code>setEscape()</code>, oder die <code>escape</code> Option im
+                Konstruktor, gesetzt werden.
+            </para></listitem>
+
+            <listitem><para>
+                <code>filter</code>: zeigt einen Filter welcher nach dem Rendern des View Skripts
+                verwendet wird. Kann über <code>setFilter()</code>, <code>addFilter()</code>, oder
+                die <code>filter</code> Option im Konstruktor, gesetzt werden.
+            </para></listitem>
+
+            <listitem><para>
+                <code>strictVars:</code> zwingt <classname>Zend_View</classname> Notizen und Warnungen
+                auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird. Das kann
+                durch den Aufruf von <code>strictVars(true)</code>, oder der übergabe der
+                <code>strictVars</code> Option im Konstruktor, gesetzt werden.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.shortTags">
+        <title>View Skripte mit Short Tags</title>
+
+        <para>
+            In unseren Beispielen und der Dokumentation verwenden wir PHP Short Tags:
+            <code>&lt;?</code> und <code>&lt;?=</code>. Zusätzlich verwenden wir typischerweise die
+            <ulink url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
+            alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
+            Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte verständlicher
+            machen und die Anweisungen auf einer einzelnen Zeile belassen.
+        </para>
+
+        <para>
+            Aber viele Entwickler bevorzugen die Verwendung von Vollen Tags wegen Prüfungen oder
+            aus Portabilitätsgründen. Zum Beispiel ist <code>short_open_tag</code> in der Datei
+            php.ini.recommended ausgeschaltet, und wenn man XML in View Skripten verwendet werden
+            Short Open Tags dazu führen das die Prüfung des Templates fehlschlägt.
+        </para>
+
+        <para>
+            Zusätzlich, wenn Short Tags verwendet werden und die Einstellung deaktiviert ist, wird
+            das View Skript entweder Fehler verursachen oder einfach Code an den Benutzer ausgeben.
+        </para>
+
+        <para>
+            Für den letzteren Fall, wenn man Short Tags verwenden will, diese aber deaktiviert
+            sind, gibt es zwei Optionen:
+        </para>
+
+       <itemizedlist>
+            <listitem>
+                <para>
+                    Die Short Tags in der <code>.htaccess</code> Datei einschalten:
+                </para>
+
+                <programlisting role="apache"><![CDATA[
+php_value "short_open_tag" "on"
+]]>
+                </programlisting>
+
+                <para>
+                    Das ist nur dann möglich wenn es erlaubt ist <code>.htaccess</code> Dateien zu
+                    erstellen und anzupassen. Diese Direktive kann auch in der
+                    <code>httpd.conf</code> Datei hinzugefügt werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Einen optionalen Stream Wrapper einschalten um Short Tags zu Long Tags on the
+                    fly zu konvertieren:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$view->setUseStreamWrapper(true);
+]]>
+                </programlisting>
+
+                <para>
+                    Das registriert <classname>Zend_View_Stream</classname> als Steam Wrapper für View
+                    Skripte, und stellt sicher das der Code weiterhin funktioniert wie wenn Short
+                    Tags eingeschaltet wären.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>View Stream Wrapper verringert die Geschwindigkeit</title>
+
+            <para>
+                Die Verwendung des Stream Wrapper <emphasis>wird</emphasis> die Geschwindigkeit der
+                Anwendung verringern, auch wenn es nicht möglich ist Benchmarks durchzuführen um
+                den Grad der Verlangsamung festzustellen. Wir empfehlen das entweder Short Tags
+                aktiviert werden, die Skripte volle Tags verwenden, oder eine gute Strategie für
+                das Cachen von partiellen, und/oder volle Seiteninhalten vorhanden ist.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.accessors">
+        <title>Zugriff auf Dienstprogramme</title>
+
+        <para>
+            Typischerweise ist es nur notwendig <code>assign()</code>, <code>render()</code>, oder
+            eine der Methoden für das Setzen/Hinzufügen von Filtern, Helfern und Skript-Pfade
+            aufzurufen. Trotzdem, wenn <classname>Zend_View</classname> selbst erweitert werden soll, oder
+            auf einige der Internas zugegriffen werden soll, existieren hierfür einige
+            Zugriffsmöglichkeiten:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getVars()</code> gibt alle zugeordneten Variablen zurück.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearVars()</code> löscht alle zugeordneten Variablen; Nützlich wenn ein
+                    View-Objekt wiederverwendet werden, aber auch kontrolliert werden soll welche
+                    Variablen vorhanden sind.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPath($script)</code> empfängt den aufgelösten Pfad zu einem
+                    gegebenen View Skript.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPaths()</code> empfängt alle registrierten Skript-Pfade.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPath($helper)</code> empfängt den aufgelösten Pfad zur
+                    angegebenen Helferklasse.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPaths()</code> empfängt alle registrierten Helferpfade.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPath($filter)</code> empfängt den aufgelösten Pfad zur
+                    angegebenen Filterklasse.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPaths()</code> empfängt alle registrierten Filterpfade.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

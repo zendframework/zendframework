@@ -1,0 +1,456 @@
+<sect1 id="zend.cache.backends">
+    <title>Бэкэнды Zend_Cache</title>
+    <para>
+        Есть два типа бэкэндов: стандартные и расширенные. Расширенные
+        предоставляют больше функциональных возможностей.
+    </para>
+    <sect2 id="zend.cache.backends.file">
+        <title><code>Zend_Cache_Backend_File</code></title>
+        <para>
+            Этот расширенный бэкэнд хранит записи кэша в файлах (в выбранной
+            директории).
+        </para>
+        <para>
+            Доступные опции:
+        </para>
+        <table id="zend.cache.backends.file.table">
+            <title>Опции <code>Zend_Cache_Backend_File</code></title>
+            <tgroup cols="4">
+                 <thead>
+                     <row>
+                         <entry>Опция</entry>
+                         <entry>Тип данных</entry>
+                         <entry>Значение по умолчанию</entry>
+                         <entry>Описание</entry>
+                     </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_dir</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'/tmp/'</code></entry>
+                          <entry>
+                              Директория, в которой хранятся файлы кэша
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_locking</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            Включает/отключает блокировку файлов. Позволяет
+                            избежать искажения данных кэша в плохих условиях, но
+                            это не поможет при многопоточном веб-сервере или
+                            файловой системе NFS...
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            Включает/отключает контроль чтения. Если включен,
+                            то в файл кэша добавляется контрольный ключ и этот
+                            ключ сравнивается с другим, вычисляемым после
+                            чтения.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control_type</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'crc32'</code></entry>
+                          <entry>
+                            Тип контроля чтения (только если включен
+                            readControl). Возможные значения: 'md5' (лучший, но
+                            самый медленный),
+                            'crc32' (немного менее безопасный,
+                            но более быстрый, лучший выбор),
+                            'adler32' (новая альтернатива, быстрее, чем crc32),
+                            'strlen' для контроля только по длине (самый
+                            быстрый).
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_level</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0</code></entry>
+                          <entry>
+                              Уровень структуры хэшированного каталога:
+                             <code>0</code> означает "нет структуры
+                             хэшированного каталога",
+                             <code>1</code> — "один уровень каталога",
+                             <code>2</code> — "два уровня"... Эта опция ускорит
+                             кэширование только если у вас тысячи файлов кэша.
+                             Только сравнение может помочь вам выбрать
+                             оптимальное для вас значение. Возможно,
+                             <code>1</code> или <code>2</code> будут хорошими
+                             значениями для начала.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_umask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                              Маска режима создания файлов для структуры
+                              хэшированного каталога.
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_name_prefix</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'zend_cache'</code></entry>
+                          <entry>
+                              Префикс для файлов кэша. Будьте осторожны с этой
+                              опцией, поскольку слишком общее значение в
+                              системной директории для кэша (например '/tmp')
+                              может привести к катастрофическим последствиям при
+                              очищении кэша.
+                        </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.sqlite">
+        <title><code>Zend_Cache_Backend_Sqlite</code></title>
+        <para>
+            Этот расширенный бэкэнд хранит записи кэша в базе данных SQLite.
+        </para>
+        <para>
+            Доступные опции:
+        </para>
+        <table id="zend.cache.backends.sqlite.table">
+            <title>Опции <code>Zend_Cache_Backend_Sqlite</code></title>
+            <tgroup cols="4">
+                 <thead>
+                     <row>
+                         <entry>Опция</entry>
+                         <entry>Тип данных</entry>
+                         <entry>Значение по умолчанию</entry>
+                         <entry>Описание</entry>
+                     </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_db_complete_path (обязательный)</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              Полный путь (с именем файла) к базе данных SQLite.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>automatic_vacuum_factor</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>10</code></entry>
+                          <entry>
+                              Отклочение/настройка процесса автоматической
+                              чистки. Автоматическая чистка дефрагментирует
+                              файл данных (и делает его меньше) при вызове
+                              методов clean() и delete():
+                              0 - автоматическая чистка отключена;
+                              1 - систематическая чистка (при каждом вызове
+                              методов delete() или clean());
+                              x (целое число больше 1) - автоматическая чистка
+                              производится случайным образом 1 раз на x вызовов
+                              методов clean() и delete().
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.memcached">
+        <title><code>Zend_Cache_Backend_Memcached</code></title>
+        <para>
+            Этот расширенный бэкэнд хранит записи кэша в сервере memcached.
+            <ulink url="http://www.danga.com/memcached/">memcached</ulink> —
+            высокопроизводительная распределенная система кэширования объектов
+            в памяти. Для того, чтобы использовать этот бэкэнд, вам нужны
+            установленные демон memcached и <ulink url="http://pecl.php.net/package/memcache">расширение PECL для memcached</ulink>.
+        </para>
+        <para>
+            Будьте осторожны: на данный момент теги для этого бэкэнда
+            не поддерживаются, то же самое с аргументом
+            "doNotTestCacheValidity=true".
+        </para>
+        <para>
+            Доступные опции:
+        </para>
+        <table id="zend.cache.backends.memcached.table">
+            <title>Опции <code>Zend_Cache_Backend_Memcached</code></title>
+            <tgroup cols="4">
+                 <thead>
+                     <row>
+                        <entry>Опция</entry>
+                        <entry>Тип данных</entry>
+                        <entry>Значение по умолчанию</entry>
+                        <entry>Описание</entry>
+                     </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>servers</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry>
+                            <code>
+                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
+                              'timeout' => 5, 'retry_interval' => 15, 'status' => true , 'failure_callback' => '' ))
+                            </code>
+                          </entry>
+                          <entry>
+                              Массив серверов memcached; каждый сервер описан
+                              ассоциативным массивом:
+                              'host' => (string) : имя сервера memcached,
+                              'port' => (int) : порт сервера memcached,
+                              'persistent' => (bool) : использовать или нет
+                              постоянное соединение с сервером,
+                              'weight' => (int) : вес сервера memcached,
+                              'timeout' => (int) : таймаут сервера memcached,
+                              'retry_interval' => (int) : интервал между повторными попытками,
+                              'status' => (bool) : статус сервера memcached,
+                              'failure_callback' => (callback) : callback сервера memcached
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compression</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                             <code>true</code>, если вы хотите использовать
+                             компрессию на лету
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.apc">
+        <title><code>Zend_Cache_Backend_Apc</code></title>
+        <para>
+            Этот расширенный бэкэнд хранит записи кэша в совместно используемой
+            памяти через расширение
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink>
+            (Alternative PHP Cache — альтернативный кэш PHP), которое,
+            разумеется, необходимо установить для использования этого бэкэнда.
+        </para>
+        <para>
+            Будьте осторожны: на данный момент теги для этого бэкэнда
+            не поддерживаются, то же самое и с аргументом
+            "doNotTestCacheValidity=true".
+        </para>
+        <para>
+            Нет специальных опций для этого бэкэнда.
+        </para>
+    </sect2>
+    <sect2 id="zend.cache.backends.xcache">
+        <title><code>Zend_Cache_Backend_Xcache</code></title>
+        <para>
+            Этот бэкэнд хранит записи кэша в совместно используемой
+            памяти через расширение
+            <ulink url="http://xcache.lighttpd.net/">XCache</ulink>, которое
+            должно быть установлено для использования данного бэкэнда.
+        </para>
+        <para>
+            Будьте осторожны: на данный момент теги для этого бэкэнда
+            не поддерживаются, то же самое и с аргументом
+            "doNotTestCacheValidity=true".
+        </para>
+        <para>
+            Доступные опции:
+        </para>
+        <table id="zend.cache.backends.xcache.table">
+            <title>Опции <code>Zend_Cache_Backend_Xcache</code></title>
+            <tgroup cols="4">
+                 <thead>
+                     <row>
+                         <entry>Опция</entry>
+                         <entry>Тип данных</entry>
+                         <entry>Значение по умолчанию</entry>
+                         <entry>Описание</entry>
+                     </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>user</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.user, необходима для метода clean()
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>password</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.pass - пароль в незашифрованном виде,
+                              необходим для метода clean()
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.platform">
+        <title><code>Zend_Cache_Backend_ZendPlatform</code></title>
+        <para>
+            Этот бэкэнд использует API
+            <ulink url="http://www.zend.com/products/platform">Zend
+            Platform</ulink> для кэширования контента. Естетственно,
+            использование этого бэкэнда требует наличия установленного Zend
+            Platform.
+        </para>
+        <para>
+            Этот бэкэнд поддерживает теги, но не поддерживает режим очищения
+            <code>CLEANING_MODE_NOT_MATCHING_TAG</code>.
+        </para>
+        <para>
+            Указывайте этот бэкэнд, используя разделитель слов '-', '.', ' ',
+            или '_' между словами 'Zend' и 'Platform', когда используете метод
+            <code>Zend_Cache::factory()</code>:
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend Platform');
+]]>
+        </programlisting>
+        <para>
+            Нет специальных опций для этого бэкэнда.
+        </para>
+    </sect2>
+    <sect2 id="zend.cache.backends.twolevels">
+        <title><code>Zend_Cache_Backend_TwoLevels</code></title>
+        <para>
+            Этот расширенный бэкэнд является гибридным. Он сохраняет записи кэша
+            через два других бэкэнда: быстрый, но ограниченный в функциональных
+            возможностях, бэкэнд (Apc, Memcache и др.),
+            и "медленный", но более функциональный, бэкэнд (File, Sqlite и др.)
+        </para>
+        <para>
+            Этот бэкэнд использует параметр priority (который передается
+            фронтэнду при сохранении записи) и оставшееся место в быстром
+            бэкэнде для оптимизации использования этих двух бэкэндов.
+        </para>
+        <para>
+            Доступные опции:
+        </para>
+        <table id="zend.cache.backends.twolevels.table">
+            <title>Опции <code>Zend_Cache_Backend_TwoLevels</code></title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                         <entry>Опция</entry>
+                         <entry>Тип данных</entry>
+                         <entry>Значение по умолчанию</entry>
+                         <entry>Описание</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>slow_backend</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>File</code></entry>
+                          <entry>
+                              Имя "медленного" бэкэнда
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>Apc</code></entry>
+                          <entry>
+                              Имя "быстрого" бэкэнда
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_options</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array()</code></entry>
+                          <entry>
+                              Опции для "медленного" бэкэнда
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_options</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array()</code></entry>
+                          <entry>
+                              Опции для "быстрого" бэкэнда
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_custom_naming</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              Если равна true, то аргумент slow_backend
+                              используется как полное имя класса, иначе
+                              значение этого аргумента используется в конце
+                              имени класса "Zend_Cache_Backend_[...]".
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_custom_naming</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              Если равна true, то аргумент fast_backend
+                              используется как полное имя класса, иначе
+                              значение этого аргумента используется в конце
+                              имени класса "Zend_Cache_Backend_[...]".
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_autoload</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              Если равна true, то для медленного бэкэнда не
+                              будет производиться включение require_once
+                              (полезно только при использовании собственных
+                              бэкэндов).
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_autoload</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              Если равна true, то для быстрого бэкэнда не
+                              будет производиться включение require_once
+                              (полезно только при использовании собственных
+                              бэкэндов).
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>auto_refresh_fast_cache</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                              Если равна true, то будет производиться
+                              автоматическое обновление "быстрого" кэша при
+                              попадании в кэш.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>stats_update_factor</code></entry>
+                          <entry><code>integer</code></entry>
+                          <entry><code>10</code></entry>
+                          <entry>
+                              Настройка частоты вычисления
+                              процента заполнения быстрого бэкэнда,
+                              либо полное отключение вычисления. При сохранении
+                              записи в кэш вычисление процента заполнения
+                              быстрого бэкэнда производится случайным образом
+                              1 раз на x записей в кэш.
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

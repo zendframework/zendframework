@@ -1,0 +1,22 @@
+<sect1 id="zend.form.introduction">
+    <title>Zend_Form</title>
+
+    <para>
+        Zend_Form 在 web 程序中简化表单的创建和处理，它完成下列目标：
+    </para>
+
+    <itemizedlist>
+        <listitem><para> 元素输入过滤和校验 </para></listitem>
+        <listitem><para> 元素排序 </para></listitem>
+        <listitem><para> 元素和表单解析（rendering），包括转义（escaping） </para></listitem>
+        <listitem><para> 元素和表单分组 </para></listitem>
+        <listitem><para> 元素和表单级配置 </para></listitem>
+    </itemizedlist>
+
+    <para>
+        它充分利用了其它 Zend Framework 组件来完成其目标，包括：<code>Zend_Config</code>、 <code>Zend_Validate</code>、<code>Zend_Filter</code>、 <code>Zend_Loader_PluginLoader</code> 和 可选的 <code>Zend_View</code>。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

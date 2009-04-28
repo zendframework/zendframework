@@ -1,0 +1,21 @@
+<sect1 id="zend.server.introduction">
+    <title>Úvod</title>
+    <para>
+        Rodina tříd <code>Zend_Server</code> poskytuje funkcionalitu pro různé
+        serverové třídy včetně <code>Zend_XmlRpc_Server</code>,
+        <code>Zend_Rest_Server</code>, <code>Zend_Json_Server</code>
+        a <code>Zend_Soap_Wsdl</code>.
+        <code>Zend_Server_Interface</code> poskytuje rozhraní podobné třídě
+        <code>SoapServer</code> z PHP5; Všechny serverové třídy by implementují
+        toto rozhraní, aby poskytovaly standartní serverové API.
+    </para>
+    <para>
+        Strom tříd <code>Zend_Server_Reflection</code> poskytuje standartní
+        mechanismus pro zkoumání funkcí a tříd použitelných jako callback
+        a poskytuje data použitelná s metodami <code>getFunctions()</code>
+        a<code>loadFunctions()</code> z <code>Zend_Server_Interface</code>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

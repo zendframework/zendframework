@@ -1,0 +1,7 @@
+Error occurred while performing action: <?php echo $this->info->getMessage() ?>
+
+Original request parameters:
+<?php echo var_export($this->request->getParams(), 1) ?>
+
+BackTrace:
+<?php echo $this->info->getTraceAsString() ?>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Plugins</title>
+
+    <sect2 id="zend.controller.plugins.introduction">
+        <title>Introduction</title>
+
+        <para>
+            L'architecture MVC de Zend Framework propose l'injection de plugins de code, qui
+            vont intervenir à différents niveaux dans le processus complet. Le contrôleur frontal
+            enregistre des plugins, et utilise un gestionnaire de plugins ("plugin broker"), qui va
+            se charger de faire intervenir chaque plugin, à chacun des instants clés à votre
+            disposition.
+        </para>
+
+        <para>
+            Les instants clés sont des méthodes événementielles définies dans la classe
+            abstraite <classname>Zend_Controller_Plugin_Abstract</classname>, dont tous les plugins
+            doivent hériter&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>routeStartup()</code> est appelée avant que
+                    <classname>Zend_Controller_Front</classname> n'appelle
+                    <link linkend="zend.controller.router">le routeur</link> pour évaluer ses
+                    routes et remplir la requête.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>routeShutdown()</code> est appelée après que
+                    <link linkend="zend.controller.router">le routeur</link> aie fini de router la
+                    requête.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>dispatchLoopStartup()</code> est appelée juste avant que
+                    <classname>Zend_Controller_Front</classname> n'entre en boucle de
+                    distribution.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>preDispatch()</code> est appelée avant qu'une action ne soit
+                    distribuée par
+                    <link linkend="zend.controller.dispatcher">le distributeur</link>. Cette
+                    méthode permet un filtrage ou un proxy. En jouant sur la requête à ce niveau
+                    là, vous êtes capable de changer le processus, et en vous aidant de
+                    <classname>Zend_Controller_Request_Abstract::setDispatched(true)</classname>),
+                    vous supprimez l'ordre de distribution de celle-ci.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>postDispatch()</code> est appelée après qu'une action n'ait été
+                    distribuée par
+                    <link linkend="zend.controller.dispatcher">le distributeur</link>. Cette
+                    méthode permet un filtrage ou un proxy. En jouant sur la requête à ce niveau
+                    là, vous êtes capable de changer le processus, et en vous aidant de
+                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>),
+                    vous ordonnez une redistribution de celle-ci.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>dispatchLoopShutdown()</code> est appelée par
+                    <classname>Zend_Controller_Front</classname> lorsque celui-ci sort de la boucle
+                    de distribution.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.writing">
+        <title>Écrire des plugins</title>
+
+        <para>
+            Tous les plugins doivent hériter de
+            <classname>Zend_Controller_Plugin_Abstract</classname>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    // ...
+}
+]]></programlisting>
+
+        <para>
+            Comme aucune des méthodes de
+            <classname>Zend_Controller_Plugin_Abstract</classname> n'est abstraite, vous n'êtes pas
+            obligé dans vos plugins de toutes les définir. Vous agissez aux endroits que vous
+            voulez.
+        </para>
+
+        <para>
+            <classname>Zend_Controller_Plugin_Abstract</classname> vous donne aussi accès aux
+            objets de réponse et de requête, dans vos plugins.<code>getRequest()</code> et
+            <code>getResponse()</code> sont là pour ça. Cependant, l'objet de requête est de toute
+            façon passé en paramètre à vos méthodes. Veillez à le récupérer dans la définition de
+            vos méthodes sinon une erreur E_STRICT sera levée.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.using">
+        <title>Utilisation des plugins</title>
+
+        <para>
+            Les plugins sont enregistrés avec
+            <classname>Zend_Controller_Front::registerPlugin()</classname>, et peuvent l'être
+            n'importe quand. Voici un exemple&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function routeStartup(
+                Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>routeStartup() appelée</p>\n");
+    }
+
+    public function routeShutdown(
+                Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>routeShutdown() appelée</p>\n");
+    }
+
+    public function dispatchLoopStartup(
+                Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopStartup() appelée</p>\n");
+    }
+
+    public function preDispatch(
+                Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>preDispatch() appelée</p>\n");
+    }
+
+    public function postDispatch(
+                Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>postDispatch() appelée</p>\n");
+    }
+
+    public function dispatchLoopShutdown()
+    {
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopShutdown() appelée</p>\n");
+    }
+}
+
+$front = Zend_Controller_Front::getInstance();
+$front->setControllerDirectory('/path/to/controllers')
+      ->setRouter(new Zend_Controller_Router_Rewrite())
+      ->registerPlugin(new MyPlugin());
+$front->dispatch();
+]]></programlisting>
+
+        <para>
+            Si aucune autre action ne génère une sortie (typiquement, un rendu de vue), alors
+            le résultat suivant devrait s'afficher&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<p>routeStartup() appelée</p>
+
+<p>routeShutdown() appelée</p>
+
+<p>dispatchLoopStartup() appelée</p>
+
+<p>preDispatch() appelée</p>
+
+<p>postDispatch() appelée</p>
+
+<p>dispatchLoopShutdown() appelée</p>
+]]></programlisting>
+
+        <note>
+            <para>
+                Enregistrez vos plugins où vous voulez dans votre code, mais faites attention
+                de ne pas leur faire sauter de méthodes, selon l'endroit où vous les
+                enregistrez.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.manipulating">
+        <title>Récupération et manipulations des plugins</title>
+
+        <para>
+            Il peut arriver que vous ayez besoin de récupérer des plugins, ou d'en supprimer.
+            Les méthodes suivantes vous seront alors utiles&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getPlugin($class)</code> vous retourne l'objet de plugin
+                    correspondant à la chaîne passée en paramètre. Si il n'y a pas de
+                    correspondance, <code>false</code> est retourné. Un tableau est retourné si il
+                    y a plusieurs plugins de cette classe.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><code>getPlugins()</code> retourne toute la pile de plugins.</para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>unregisterPlugin($plugin)</code> supprime un plugin du processus.
+                    Passez un nom de classe, et tous les plugins de cette classe seront alors
+                    enlevés de la pile. Vous pouvez aussi passer un objet.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.standard">
+        <title>Plugins inclus dans Zend Framework</title>
+
+        <para>Zend Framework possède des plugins dans sa distribution&#160;:</para>
+
+        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
+        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
+    </sect2>
+</sect1>

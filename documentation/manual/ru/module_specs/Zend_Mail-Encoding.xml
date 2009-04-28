@@ -1,0 +1,33 @@
+<sect1 id="zend.mail.encoding">
+    <title>
+        Кодировка
+<!--
+        Encoding
+-->
+    </title>
+    <para>
+        Тела сообщений в текстовом и HTML форматах по умолчанию кодируются
+        по алгоритму quoted-printable. Все другие вложения кодируются
+        по алгоритму base64, если не указана другая кодировка при
+        вызове метода <code>addAttachment()</code> или не установлена позднее для
+        части MIME объекта. Кодировки 7Bit и 8Bit в настоящее время
+        используются только для бинарных данных.
+<!--
+        Text and HTML message bodies are encoded with the quotedprintable mechanism by default. All other
+        attachments are encoded via base64 if no other encoding is given in the <code>addAttachment()</code>
+        call or assigned to the MIME part object later. 7Bit and 8Bit encoding currently only pass on the
+        binary content data.
+-->
+    </para>
+    <para>
+        <code>Zend_Mail_Transport_Smtp</code> кодирует строки, начинающиеся с
+        одной или двух точек, поэтому сообщение не нарушает протокол SMTP.
+<!--
+        <code>Zend_Mail_Transport_Smtp</code> encodes lines starting with one dot or two dots so that the mail
+        does not violate the SMTP protocol.
+-->
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

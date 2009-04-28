@@ -1,0 +1,470 @@
+<sect1 id="zend.auth.adapter.ldap">
+
+    <title>LDAP 认证 </title>
+
+    <sect2 id="zend.auth.adapter.ldap.introduction">
+
+        <title> 简介 </title>
+
+        <para>
+            <code>Zend_Auth_Adapter_Ldap</code> 用 LDAP 服务支持 web 程序认证。它的功能包括用户名和域名规范化、多域认证和实效切（failover）换能力。经测试，它能与  <ulink url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft Active Directory</ulink> 和 <ulink url="http://www.openldap.org/">OpenLDAP</ulink> 一起工作，它也应该能和其它 LDAP 服务提供者一起工作。
+        </para>
+
+        <para>
+            本文档包括使用 <code>Zend_Auth_Adapter_Ldap</code> 的指南、它的 API 、各种可用选项的大纲、认证问题故障排除的诊断信息和Active Directory 与 OpenLDAP 服务器的范例选项。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.usage">
+
+        <title> 用法 </title>
+
+        <para>
+            为了快速把 <code>Zend_Auth_Adapter_Ldap</code> 认证集成到你的程序中，即使你不使用 <code>Zend_Controller</code>，代码的基本部分看起来是这样的：
+            <programlisting role="php"><![CDATA[
+$username = $this->_request->getParam('username');
+$password = $this->_request->getParam('password');
+
+$auth = Zend_Auth::getInstance();
+
+$config = new Zend_Config_Ini('../application/config/config.ini',
+                              'production');
+$log_path = $config->ldap->log_path;
+$options = $config->ldap->toArray();
+unset($options['log_path']);
+
+$adapter = new Zend_Auth_Adapter_Ldap($options, $username,
+                                      $password);
+
+$result = $auth->authenticate($adapter);
+
+if ($log_path) {
+    $messages = $result->getMessages();
+
+    $logger = new Zend_Log();
+    $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
+    $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
+    $logger->addFilter($filter);
+
+    foreach ($messages as $i => $message) {
+        if ($i-- > 1) { // $messages[2] and up are log messages
+            $message = str_replace("\n", "\n  ", $message);
+            $logger->log("Ldap: $i: $message", Zend_Log::DEBUG);
+        }
+    }
+}
+]]>
+            </programlisting>
+            虽然日志（ logging ）代码是可选的，还是强烈建议使用日志。<code>Zend_Auth_Adapter_Ldap</code> 将记录任何想要的信息细节到 <code>$messages</code> （更多的信息看下面），对于难以调试的程序来说，有历史记录这是个很好的功能。
+        </para>
+
+        <para>
+            上面用到 <code>Zend_Config_Ini</code> 的代码是来加载适配器选项，它也是可选的，使用一个规则的数组来完成工作。下面是带有两个单独的服务器选项的 <code>application/config/config.ini</code> 文件的例子。带有多组服务器选项的适配器将按顺序来尝试每个服务器直到资格被成功认证。服务器的名字 （例如 <code>server1</code> and <code>server2</code>）是任意的，关于选项数组的细节，参见下面 <emphasis>Server Options</emphasis> 一节。 注意 <code>Zend_Config_Ini</code> 要求任何带有等号（<code>=</code>）的值需要括起来（如下面的 DNs）。
+            <programlisting role="ini"><![CDATA[
+[production]
+
+ldap.log_path = /tmp/ldap.log
+
+; Typical options for OpenLDAP
+ldap.server1.host = s0.foo.net
+ldap.server1.accountDomainName = foo.net
+ldap.server1.accountDomainNameShort = FOO
+ldap.server1.accountCanonicalForm = 3
+ldap.server1.username = "CN=user1,DC=foo,DC=net"
+ldap.server1.password = pass1
+ldap.server1.baseDn = "OU=Sales,DC=foo,DC=net"
+ldap.server1.bindRequiresDn = true
+
+; Typical options for Active Directory
+ldap.server2.host = dc1.w.net
+ldap.server2.useSsl = true
+ldap.server2.accountDomainName = w.net
+ldap.server2.accountDomainNameShort = W
+ldap.server2.accountCanonicalForm = 3
+ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
+]]>
+</programlisting>
+            上述的配置将指示 <code>Zend_Auth_Adapter_Ldap</code> 首先来尝试用 OpenLDAP 服务器 <code>s0.foo.net</code> 来认证用户，如果不论什么原因认证失败，将尝试 AD 服务器 <code>dc1.w.net</code>。
+        </para>
+
+        <para>
+            这个配置示例了在不同的域的服务器的多域认证，也可以在同一域中用多个服务器来提供冗余。
+        </para>
+
+        <para>
+            注意在这个例子中，即使 OpenLDAP 不需要用于 Windows 的短 NetBIOS 风格的域名，我们仍在这里提供它以保证命名正规化 （参见下面的 <emphasis>Username Canonicalization</emphasis> 一节）。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.api">
+
+        <title>The API</title>
+
+        <para>
+            <code>Zend_Auth_Adapter_Ldap</code> 构造器接受三个参数。
+        </para>
+
+        <para>
+            <code>$options</code> 参数是必需的并且是一个包含一组或多组选项的数组。注意它是 <link linkend="zend.ldap">Zend_Ldap</link> 选项的 <emphasis> 数组的数组 </emphasis> 。即使你只使用一个 LDAP 服务器，选项仍要包含在另一个数组中。
+        </para>
+
+        <para>
+            下面是一个选项参数包含两组服务器选项（ <code>s0.foo.net</code> 和 <code>dc1.w.net</code> （和上面 INI 表示法一样的选项））的例子的 <ulink url="http://php.net/print_r"><code>print_r()</code></ulink> 输出：
+            <programlisting role="output"><![CDATA[
+Array
+(
+    [server2] => Array
+        (
+            [host] => dc1.w.net
+            [useSsl] => 1
+            [accountDomainName] => w.net
+            [accountDomainNameShort] => W
+            [accountCanonicalForm] => 3
+            [baseDn] => CN=Users,DC=w,DC=net
+        )
+
+    [server1] => Array
+        (
+            [host] => s0.foo.net
+            [accountDomainName] => foo.net
+            [accountDomainNameShort] => FOO
+            [accountCanonicalForm] => 3
+            [username] => CN=user1,DC=foo,DC=net
+            [password] => pass1
+            [baseDn] => OU=Sales,DC=foo,DC=net
+            [bindRequiresDn] => 1
+        )
+
+)
+]]>
+</programlisting>
+            上述每组选项提供的信息是不同的，主要是因为当绑定（参见下面 <emphasis> 服务器选项 </emphasis> 一节中的 <code>bindRequiresDn</code> 选项）时 AD 不要求在 DN 表单中的有用户名，这意味着我们可以忽略很多和为认证用户名获取 DN 相关的选项。
+        </para>
+
+        <note>
+            <title> 什么是 DN?</title>
+            <para>
+                DN 或者 "distinguished name" 是一个字符串，表示在 LDAP 目录中到一个对象的路径。每个用逗号分隔的组件是一个属性并且它的值表示一个节点。组件是按反顺序来算的，例如：用户账户 <emphasis>CN=Bob Carter,CN=Users,DC=w,DC=net</emphasis> 直接位于 <emphasis>CN=Users,DC=w,DC=net container</emphasis> 里的。这种结构用 LDAP 浏览器如 ADSI Edit MMC snap-in for Active Directory 或 phpLDAPadmin 可以最好地浏览。
+            </para>
+        </note>
+
+        <para>
+            服务器名（如上面的 '<code>server1</code>' 和 '<code>server2</code>'）是任意的，但因为使用 <code>Zend_Config</code>，标识符（identifiers）应当以数字索引的相反出现并且不应当包含任何用于相关文件格式（例如，'<code>.</code>' INI 属性分隔符，XML 条目参考 '<code>&amp;</code>' 等）的特殊字符。
+        </para>
+
+        <para>
+            用多组服务器选项，适配器可以在多域的环境中认证用户并提供 failover （估计是失败后尝试下一个服务器），所以如果一个服务器不可用，将查询另一个。
+        </para>
+
+        <note>
+            <title> 非常详细的介绍 （The Gory Details）－ 在认证方法中到底发生了什么？</title>
+            <para>
+                当调用 <code>authenticate()</code> 方法，适配器反复把每组服务器选项设置到内部 <code>Zend_Ldap</code> 实例并带用于认证的用户名和密码调用 <code>Zend_Ldap::bind()</code> 方法。<code>Zend_Ldap</code> 类检查用户名是否在域中合格 （例如，有域的组件如 <emphasis>alice@foo.net</emphasis> 或 <emphasis>FOO\alice</emphasis>）。如果域存在，但它不匹配任何一种服务器的域名（<emphasis>foo.net</emphasis> 或 <emphasis>FOO</emphasis>），就抛出一个特殊的异常并由 <code>Zend_Auth_Adapter_Ldap</code> 捕捉，这样那个服务器就被忽略并且选择下个服务器选项。如果域名 <emphasis> 确实 </emphasis> 匹配，但是如果用户没有提供一个合格的用户名，<code>Zend_Ldap</code> 继续尝试绑定被提供的证书（credentials）。如果绑定不成功，<code>Zend_Ldap</code> 抛出一个由 <code>Zend_Auth_Adapter_Ldap</code> 捕捉的 <code>Zend_Ldap_Exception</code> 并尝试下一组服务器选项。如果绑定成功，反复尝试（迭代？(iteration)）就停止，并且适配器的 <code>authenticate()</code> 方法返回一个成功的结果。如果所有服务器选项都试过了而且都不成功，认证就失败了，<code>authenticate()</code> 返回一个失败的结果并带有最后一个尝试的错误消息。
+            </para>
+        </note>
+
+        <para>
+            <code>Zend_Auth_Adapter_Ldap</code> 构造器的用户名和密码参数是要被认证的证书（例如，用户通过 HTML 登录表单提供的证书（credentials））。另外，也可以通过 <code>setUsername()</code> 和 <code>setPassword()</code> 方法来设置。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.server-options">
+
+        <title> 服务器选项 </title>
+
+        <para>
+            <emphasis> 在 Zend_Auth_Adapter_Ldap 的上下文中</emphasis> 的每组服务器选项包含下列选项，它们基本上不可修改地传递给 <code>Zend_Ldap::setOptions()</code>：
+
+            <table id="zend.auth.adapter.ldap.server-options.table">
+              <title> 服务器选项 </title>
+              <tgroup cols="2">
+                <thead>
+                  <row>
+                    <entry> 名称 </entry>
+                    <entry> 描述 </entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry><emphasis role="strong">host</emphasis></entry>
+                    <entry>
+                        这些选项表示的 LDAP 服务器的主机名，该选项是必需的。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">port</emphasis></entry>
+                    <entry>
+                        LDAP 服务器监听的端口，如果 <emphasis role="strong">useSsl</emphasis> 是 <code>true</code>，缺省 <emphasis role="strong"> 端口 </emphasis> 值是 636。如果 <emphasis role="strong">useSsl</emphasis> 是 <code>false</code>，缺省 <emphasis role="strong"> 端口 </emphasis> 值是 389。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">useSsl</emphasis></entry>
+                    <entry>
+                        如果是 <code>true</code>，表示 LDAP 客户端应当使用 SSL / TLS 加密传输。在生产环境中强烈建议使用 <code>true</code> 值以防止明文传输密码。缺省值为 <code>false</code> 是因为服务器经常在安装之后请求被分别安装的证书。它也改变缺省 <emphasis role="strong"> 端口 </emphasis> 值（ 见上面 <emphasis role="strong"> 端口 </emphasis> 的描述）。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">username</emphasis></entry>
+                    <entry>
+                        账户的 DN， 用来执行账户 DN 查找。LDAP servers that require the username to be in DN form when performing the "bind" require this option （这句没有理解）。
+                        如果 <emphasis role="strong">bindRequiresDn</emphasis> 是 <code>true</code>，这个选项是必需的。这个账户不需要是优先账户 － a account with read-only
+                        access to objects under the <emphasis role="strong">baseDn</emphasis> is all that is necessary (and preferred based on the <emphasis>Principle of Least Privilege</emphasis>).
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">password</emphasis></entry>
+                    <entry>
+                        账户的密码，用来执行账户 DN 查找。如果没有提供这个选项，当执行账户 DN 查找时，LDAP 客户端将尝试“匿名绑定”。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                    <entry>
+                        一些 LDAP 服务器要求用户名以 DN 格式来绑定，如 <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis> （基本上 <emphasis> 除了 </emphasis> AD 以外所有的服务器）。如果这个选项是 <code>true</code>，<code>Zend_Ldap</code> 自动获取被认证的用户所对应的 DN。如果它不是 DN 格式，那就重新绑定合适的 DN。缺省值是 <code>false</code>。目前，当绑定时，只有微软的 Active Directory 服务器（ADS）<emphasis> 不 </emphasis> 要求用户名为 DN 格式，所以和 AD 一起使用，这个选项可以是 <code>false</code> （而且应当是，因为获取 DN 需要额外的过程（round trip）到服务器），否则，这个选项必需设置为  <code>true</code> （例如，OpenLDAP）。当搜索账户时，这个选项也控制缺省的 <emphasis role="strong">acountFilterFormat</emphasis>，参见 <emphasis role="strong">accountFilterFormat</emphasis> 选项。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">baseDn</emphasis></entry>
+                    <entry>
+                        定位所有被认证账户下的 DN，这个选项是必需的。如果你不能确定正确的 <emphasis role="strong">baseDn</emphasis> 值，可以用 <emphasis>DC=</emphasis> 组件从用户的 DNS 域来产生它，例如，如果用户的基本名是 <emphasis>alice@foo.net</emphasis>，<emphasis>DC=foo,DC=net</emphasis> 的 <emphasis role="strong">baseDn</emphasis> 应当工作。然而更精确的位置（例如 <emphasis>OU=Sales,DC=foo,DC=net</emphasis> ）将更有效。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                    <entry>
+                        一个是 2、3 或 4 的值，用来指示那个账户名在成功认证后需要规范化。值的解释具体如下：2 表示传统的用户名（例如 <emphasis>alice</emphasis> ），3 表示反斜杠式（backslash-style）名称（例如 <emphasis>FOO\alice</emphasis>），或者 4 表示基本式用户名（例如 <emphasis>alice@foo.net</emphasis>）。缺省值为 4 （例如 <emphasis>alice@foo.net</emphasis> ）。例如，当值为 3，由 <code>Zend_Auth_Result::getIdentity()</code> （如果使用了 <code>Zend_Auth</code>，则是 <code>Zend_Auth::getIdentity()</code>，） 返回的身份（identity）将总是 <emphasis>FOO\alice</emphasis>，不论 Alice 提供了什么格式，如 <emphasis>alice</emphasis>、 <emphasis>alice@foo.net</emphasis>、 <emphasis>FOO\alice</emphasis>、<emphasis>FoO\aLicE</emphasis>、 <emphasis>foo.net\alice</emphasis> 等。见 <code>Zend_Ldap</code> 中的 <emphasis>Account Name Canonicalization</emphasis> 一节有更多的细节。注意当使用多组服务器选项时，建议但不要求所有服务器选项使用相同的 <emphasis role="strong">accountCanonicalForm</emphasis>，这样，用户名对于同一格式总是规范化的（例如，对于 AD 服务器规范化为 <emphasis>EXAMPLE\username</emphasis>，但对于 OpenLDAP 服务器规范化为 <emphasis>username@example.com</emphasis>，对于程序的高水平（high-level）逻辑，这可能很不好用。）
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                    <entry>
+                        目标 LDAP 服务器的 FQDN 域名是一个授权（authority）（例如 <code>example.com</code>）。该选项用来规范化名字，这样用户提供的用户名可以为绑定按需转换。它也可用来决定是否服务器对用户名是一个授权（例如 <emphasis role="strong">accountDomainName</emphasis> 是 <emphasis>foo.net</emphasis> 并且用户提供了 <emphasis>bob@bar.net</emphasis>，将不查询服务器并导致一个错误）。该选项不是必需的，但如果不提供，那就不支持用户名为基本名（principal name）格式（例如 <emphasis>alice@foo.net</emphasis>）。强烈建议使用该选项，因为许多用例要求生成基本名格式。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                    <entry>
+                        目标 LDAP 服务器的 ‘短’ 域名是一个授权（authority）（例如 <emphasis>FOO</emphasis>）。注意按 1:1 来映射 <emphasis role="strong">accountDomainName</emphasis> 和 <emphasis role="strong">accountDomainNameShort</emphasis>。该选项用于为 Windows 网络指定 NetBIOS 名但也可用于非 AD 服务器（例如，当多组服务器选用使用反斜杠风格的 <emphasis role="strong">accountCanonicalForm</emphasis>时为了保持一致性）。该选项不是必需的但如果不使用，就不支持反斜杠格式的用户名（例如 <emphasis>FOO\alice</emphasis>）。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountFilterFormat</emphasis></entry>
+                    <entry>
+                        用来搜索账户的 LDAP 搜索过滤器。这个字符串是个 <ulink url="http://php.net/printf"><code>printf()</code></ulink> 风格的表达式，必需包含一个 '<code>%s</code>' 来适合用户名。缺省值为 '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>'，除非 <emphasis role="strong">bindRequiresDn</emphasis> 设置为 <code>true</code>，那样缺省值就是 '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'。例如，如果因为某种原因你想对 AD 使用 <code>bindRequiresDn = true</code> ，需要设置 <code>accountFilterFormat = '(&amp;(objectClass=user)(sAMAccountName=%s))</code>'。
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+        </para>
+
+        <note>
+            <para>
+                如果你设置  <code>useSsl = true</code> 可能发现 LDAP 客户端会产生一个不能校验服务器证书的错误。假定 PHP LDAP 扩展完全链接到 OpenLDAP 客户库，为解决这个问题你可以在 OpenLDAP 客户 <code>ldap.conf</code> 里设置 “<code>TLS_REQCERT never</code>” （并重启 web 服务器）来指明 OpenLDAP 客户端库你信任这个服务器。另外如果涉及到服务器可能被欺骗，你可以输出 LDAP 服务器的根证书并把它放到 web 服务器，这样 OpenLDAP 客户端可以校验服务器的身份。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.debugging">
+
+        <title> 收集调试信息 </title>
+
+        <para>
+            <code>Zend_Auth_Adapter_Ldap</code> 在它的 <code>authenticate()</code> 方法里收集调试信息。这个信息存储在 <code>Zend_Auth_Result</code> 对象里。下面描述由 <code>Zend_Auth_Result::getMessages()</code> 返回的数组：
+
+            <table id="zend.auth.adapter.ldap.debugging.table">
+              <title> 调试信息 （Messages）</title>
+              <tgroup cols="2">
+                <thead>
+                  <row>
+                    <entry> 信息（Messages） 数组索引</entry>
+                    <entry> 描述 </entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>Index 0</entry>
+                    <entry>
+                        显示给用户的用户友好的一般信息（例如无效的证书（credentials））。如果认证成功，这个字符串是空的。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>Index 1</entry>
+                    <entry>
+                        更详细的错误信息，不适合显示给用户但作为服务器操错日志。如果认证成功，这个字符串是空的。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>Indexes 2 and higher</entry>
+                    <entry>
+                        所有日志信息按顺序从 index 2 开始。
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+
+            实践上，index 0 显示给用户（例如使用 FlashMessenger 助手）， index 1 作为日志，如果收集到调试信息， index 2 和它以后的 index 也作为日志（尽管最终的信息总是从 index 1 的字符串开始）。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
+
+        <title> 特定服务器的通用选项 </title>
+
+        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
+
+            <title>Active Directory 的选项 </title>
+
+            <para>
+                对于 ADS，下列选项值得注意：
+
+                <table id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
+                  <title>Active Directory 的选项 </title>
+                  <tgroup cols="2">
+                    <thead>
+                      <row>
+                        <entry> 名字 </entry>
+                        <entry> 另外的注释 </entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry>
+                            适用所有的服务器，该选项必需。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">useSsl</emphasis></entry>
+                        <entry>
+                            因为安全的缘故，如果服务器安装了必要的证书，这个应该是 <code>true</code>。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry>
+                            适用所有的服务器，该选项必需。缺省地 AD 把所有用户账户放在 <emphasis>Users</emphasis> 容器中 （例如 <emphasis>CN=Users,DC=foo,DC=net</emphasis>），但在大型组织里缺省不常见，要询问 AD 管理员你的程序账户的最好的 DN 是什么。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry>
+                            几乎可以确定你想要这个值为 3 来使用反斜杠式的名称（例如 <emphasis>FOO\alice</emphasis>），这对于 Windows 用户来说是最熟悉的。你 <emphasis> 不 </emphasis> 应该使用不合格的格式 2 （例如 <emphasis>alice</emphasis>），因为它可能授权在其它信任域里（例如 <emphasis>BAR\alice</emphasis> 和 <emphasis>FOO\alice</emphasis> 将被当作相同的用户）相同名字的用户访问你的程序。（参见下面的注释）
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry>
+                            使用 AD 时这是必需的除非使用 <emphasis role="strong">accountCanonicalForm</emphasis> 2 ，再强调一下，我们不鼓励这样用。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry>
+                            AD 服务器是授权的域用户的 NetBIOS 名称。如果使用反斜杠风格 <emphasis role="strong">accountCanonicalForm</emphasis>，这个是必需的。
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+            </para>
+
+            <note>
+                <para>
+                    从技术角度讲，用当前的 <code>Zend_Auth_Adapter_Ldap</code> 实现进行跨域认证是没有危险的，因为服务器域是被显式检查的，但对将来的实现未必是对的，如在运行时发现域名或者如果使用替代的适配器（例如 Kerberos）。一般来说，含糊的账户名是安全问题的来源，所以最好使用合格的账户名称。
+                </para>
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
+
+            <title>OpenLDAP 的选项 </title>
+
+            <para>
+                对于 OpenLDAP 或一般的使用典型的 posixAccount 风格的 LDAP 服务器，下面的选项值得注意：
+
+                <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
+                  <title> OpenLDAP 的选项 </title>
+                  <tgroup cols="2">
+                    <thead>
+                      <row>
+                        <entry> 名字 </entry>
+                        <entry> 另外的注释 </entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry>
+                            适用所有的服务器，该选项必需。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">useSsl</emphasis></entry>
+                        <entry>
+                            因为安全的缘故，如果服务器安装了必要的证书，这个应该是 <code>true</code>。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">username</emphasis></entry>
+                        <entry>
+                            必需并一定是一个 DN，因为当执行绑定时 OpenLDAP 要求 DN 格式的用户名。设法使用无特权的账户。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">password</emphasis></entry>
+                        <entry>
+                            对应上述用户名的密码，如果 LDAP 服务器支持匿名绑定，这个也许会忽略。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                        <entry>
+                            必需并一定是 <code>true</code>，因为当执行绑定时 OpenLDAP 要求 DN 格式的用户名。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry>
+                            适用所有的服务器，该选项是必需的并指示所有被认证的账户的 DN 的定位。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry>
+                            可选但缺省值是 4 （基本风格名如 <emphasis>alice@foo.net</emphasis>），如果适用反斜杠式的名字（如 <emphasis>FOO\alice</emphasis>）这个也许不是理想的。对于反斜杠式名字值为 3。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry>
+                            必需，除非使用不推荐的 <emphasis role="strong">accountCanonicalForm</emphasis> 2，
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry>
+                            如果不使用 AD ，这个值不是必需的。否则，如果使用 <emphasis role="strong">accountCanonicalForm</emphasis> 3 ，该选项必需并是个完全对应 <emphasis role="strong">accountDomainName</emphasis> 的短名 （例如如果 <emphasis role="strong">accountDomainName</emphasis> 是 <emphasis role="strong">foo.net</emphasis>，一个好的 <emphasis role="strong">accountDomainNameShort</emphasis> 值可能是 <emphasis>FOO</emphasis>）。
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

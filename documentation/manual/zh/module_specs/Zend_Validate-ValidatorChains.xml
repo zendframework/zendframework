@@ -1,0 +1,44 @@
+<sect1 id="zend.validate.validator_chains">
+
+    <title>校验器链</title>
+
+    <para>
+        通常，多个校验器按照特定的顺序被用于某些值。下面的代码示范一个办法去解决<link linkend="zend.validate.introduction">introduction</link>中的例子的要求，即用户名必须在6到12个字符的文字数字组合：
+        <programlisting role="php"><![CDATA[
+// Create a validator chain and add validators to it
+$validatorChain = new Zend_Validate();
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+               ->addValidator(new Zend_Validate_Alnum());
+
+// Validate the username
+if ($validatorChain->isValid($username)) {
+    // username passed validation
+} else {
+    // username failed validation; print reasons
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "$message\n";
+    }
+]]>
+        </programlisting>
+
+        校验器按照它们被加到<code>Zend_Validate</code>的顺序执行。在上面的例子中，用户名首先被检查来确保它的长度在6到12个字符，然后它被检查来确保它只包含文字和数字。不管第一个校验（检查长度是否6到12）是否成功，第二个校验（检查是否文字数字组合）总被执行。这就意味着如果两个校验都失败，<code>getMessages()</code>将为两个校验器都返回失败信息。
+    </para>
+
+    <para>
+        在某些情况下，如果校验过程失败， 让校验器中断校验器链符合常识。<code>Zend_Validate</code> 在<code>addValidator()</code>方法中使用第二个参数来支持这样的用例。通过设置<code>$breakChainOnFailure</code>为<code>true</code>，如果校验失败，校验器将中断校验器链执行，这样就避免了在这个情形下运行其他已经被决定是不必要的或不适当的校验。如果上面的例子被写成如下，如果字串长度校验失败，文字数字组合校验就不会发生：
+        <programlisting role="php"><![CDATA[
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
+               ->addValidator(new Zend_Validate_Alnum());
+]]>
+        </programlisting>
+
+    </para>
+
+    <para>
+        任何实现<code>Zend_Validate_Interface</code>的对象都可以被用作校验器链。
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

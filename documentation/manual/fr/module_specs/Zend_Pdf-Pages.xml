@@ -1,0 +1,104 @@
+<!-- EN-Revision: 13863 -->
+<sect1 id="zend.pdf.pages">
+    <title>Les pages d'un document</title>
+
+    <sect2 id="zend.pdf.pages.creation">
+        <title>Création de page</title>
+
+        <para>Les pages d'un document PDF sont représentés par la classe <classname>Zend_Pdf_Page</classname></para>
+
+        <para>Les pages d'un PDF proviennent d'un PDF existant, ou sont créées à partir de rien.</para>
+
+        <para>Une nouvelle page peut-être obtenu en créant un nouvel objet <classname>Zend_Pdf_Page</classname> ou en appelant la
+        méthode <classname>Zend_Pdf::newPage()</classname>qui retourne un objet <classname>Zend_Pdf_Page</classname>. La différence est que
+        la méthode <classname>Zend_Pdf::newPage()</classname> crée une page directement attachée au document. A la différence des
+        pages non attachées à un document, elle ne peut-être utilisée dans plusieurs documents PDF, mais est un peu plus
+        performante. <footnote>
+                <para>C'est une limitation de la version courante du module <classname>Zend_Pdf</classname>. Ce sera corrigé dans une future
+                version. Mais les pages non attachées à un document donneront toujours de meilleurs résultats pour
+                partager une page entre plusieurs documents.</para>
+            </footnote>. C'est à vous de choisir quel approche doit-être utilisée.</para>
+
+        <para>Les méthodes <classname>Zend_Pdf::newPage()</classname> et <classname>Zend_Pdf_Page</classname> prennent le même paramètre.
+        C'est la taille de la page ($x, $y) en point (1/72 inch soit 0,352778 mm), ou une constante prédéfinie, qui
+        correspond au format du papier : <itemizedlist>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4</para>
+                </listitem>
+
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
+                </listitem>
+
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
+                </listitem>
+
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
+                </listitem>
+            </itemizedlist></para>
+
+        <para>Les pages du document sont stockées dans l'attribut public <code>$pages</code> de la classe
+        <classname>Zend_Pdf</classname>. C'est un tableau d'objet <classname>Zend_Pdf_Page</classname>. Il définit l'ensemble des pages,
+        ainsi que l'ordre de celle-ci et peut-être manipulé comme un tableau classique :</para>
+
+        <example id="zend.pdf.pages.example-1">
+            <title>Gestion des pages d'un document PDF</title>
+
+            <programlisting role="php"><![CDATA[
+...
+// Inverse l'ordre des pages
+$pdf->pages = array_reverse($pdf->pages);
+...
+// Ajoute une nouvelle page
+$pdf->pages[] = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+// Ajoute une nouvelle page
+$pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+
+// Retire la page spécifiée
+unset($pdf->pages[$id]);
+...
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.pdf.pages.cloning">
+        <title>Clonage de page</title>
+
+        <para>Les pages existantes d'un PDF peuvent être clonées en créant un nouvel objet <classname>Zend_Pdf_Page</classname>
+        avec la page existante comme paramètre :</para>
+
+        <example id="zend.pdf.pages.example-2">
+            <title>Cloner une page existante</title>
+
+            <programlisting role="php"><![CDATA[
+...
+// Stocke le modèle dans une variable séparée
+$template = $pdf->pages[$templatePageIndex];
+...
+// Ajoute une nouvelle page
+$page1 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page1;
+...
+
+// Ajoute une autre page
+$page2 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page2;
+...
+
+// Enlève la page modèle du document
+unset($pdf->pages[$templatePageIndex]);
+...
+]]></programlisting>
+        </example>
+
+        <para>C'est pratique si plusieurs pages doivent être créées sur le même modèle.</para>
+
+        <caution>
+            <para>Important ! La page clonée partage quelques ressources PDF avec la page modèle, donc ceci doit être
+            utilisé seulement dans le même document qu'une page modèle. Le document modifié peut être sauvegardé comme
+            nouveau document.</para>
+        </caution>
+    </sect2>
+</sect1>

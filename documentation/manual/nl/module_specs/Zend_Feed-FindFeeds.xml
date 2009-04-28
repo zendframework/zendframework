@@ -1,0 +1,25 @@
+<sect1 id="zend.feed.findFeeds">
+    <title>Feeds verkregen van Web Paginas</title>
+    <para>
+        Web paginas bevatten dikwijls <code>alt;link&gt;</code> afbakeningen die naar feeds met
+        relevante informatie met betrekking tot de pagina wijzen. <code>Zend_Feed</code> laat je toe om
+        alle gereferenceerde feeds in een web pagina met één eenvoudige methode oproep te verkrijgen:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+$feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
+
+?>]]></programlisting>
+    <para>
+        De methode <code>findFeeds()</code> stuurt een array van <code>Zend_Feed_Abstract</code> objecten
+        terug die gereferenceerd zijn door <code>&lt;link&gt;</code> afbakeningen op de news.html web
+        pagina. Afhankelijk van het type van elk van de feeds zal elke respectieve entry in de
+        <code>$feedArray</code> array een <code>Zend_Feed_Rss</code> of een <code>Zend_Feed_Atom</code>
+        instantie zijn. <code>Zend_Feed</code> zal een <code>Zend_Feed_Exception</code> opwerpen bij
+        mislukking, zoals een HTTP 404 antwoord of een misvormde feed.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

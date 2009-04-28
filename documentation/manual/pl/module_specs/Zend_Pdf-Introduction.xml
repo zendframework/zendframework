@@ -1,0 +1,70 @@
+<sect1 id="zend.pdf.introduction">
+    <!-- @todo review and revise upon completion of refactoring -->
+    <title>Wprowadzenie</title>
+    <para>
+    Moduł Zend_Pdf jest silnikiem służącym do manipulacji plikami PDF (Portable Document Format)
+    napisanym w całości w PHP 5. Może on ładować istniejące dokumenty, tworzyć nowe,
+    modyfikować i zapisywać zmodyfikowane dokumenty. Umożliwia to dowolnej aplikacji
+    PHP dynamicznie przygotowywać dokumenty PDF modyfikując istniejące szablony
+    lub generować dokumenty od podstaw.
+
+    Moduł Zend_Pdf wspiera następujące funkcjonalności:
+    <itemizedlist>
+        <listitem>
+            <para>
+            Tworzenie nowego dokumentu lub ładowanie istniejącego.
+            <footnote>
+                <para>
+                Obecnie jest możliwe ładowanie dokumentów PDF V1.4 (Acrobat 5).
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Ładowanie określonej wersji dokumentu.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Manipulowanie stronami w dokumencie. Zmiana kolejności stron, dodawanie
+            nowych stron, usuwanie stron z dokumentu.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Podstawowe operacje rysowania (linie, prostokąty, wielokąty, okręgi, elipsy oraz sektory).
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Wypisywanie tekstu używając 14 standardowych (wbudowanych) czcionek lub
+            twoich własych czcionek TrueType.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Obracanie.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Obsługa plików graficznych.
+            <footnote>
+                <para>
+                Obecnie wspierane są pliki JPG, PNG [do 8bit na kanał+Alpha] oraz TIFF.
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Inkrementalne uaktualnianie plików PDF.
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

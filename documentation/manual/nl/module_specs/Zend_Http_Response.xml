@@ -1,0 +1,70 @@
+<sect1 id="zend.http.response">
+    <title>Zend_Http_Response</title>
+
+    <sect2 id="zend.http.response.introduction">
+        <title>Inleiding</title>
+        <para>
+            <code>Zend_Http_Response</code> verstrekt eenvoudige toegang tot de antwoorden die
+            door <xref linkend="zend.http.client" /> worden teruggestuurd. Het verstrekt een intuïtieve set
+            van methodes om met de HTTP antwoorddata die van een verzoek wordt ontvangen te werken:
+            <itemizedlist>
+                <listitem>
+                  <para>
+                    <code>isError()</code>: TRUE indien een HTTP foutcode werd ontvangen; anders FALSE.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    <code>isSuccessful()</code>: TRUE indien een HTTP succescode werd ontvangen; anders FALSE.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    <code>isRedirect()</code>: TRUE indien een HTTP verwijzingscode werd ontvangen; anders FALSE.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    <code>getStatus()</code>: Geeft de HTTP statuscode terug.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    <code>getHeaders()</code>: Geeft een array van strings van HTTP antwoordheaders terug.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    <code>getBody()</code>: Geeft de HTTP antwoordinhoud als een string terug.
+                  </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <example>
+            <title>Met HTTP antwoorddata werken</title>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Http/Client.php';
+try {
+    $http = new Zend_Http_Client('http://example.org');
+    $response = $http->get();
+    if ($response->isSuccessful()) {
+        echo $response->getBody();
+    } else {
+        echo "<p>Er trad een fout op</p>\n";
+        echo "HTTP Status: " . $response->getStatus() . "\n";
+        echo "HTTP Headers:\n";
+        $responseHeaders = $response->getHeaders();
+        foreach ($responseHeaders as $responseHeaderName => $responseHeaderValue) {
+            echo "$responseHeaderName: $responseHeaderValue\n";
+        }
+    }
+} catch (Zend_Http_Exception $e) {
+    echo '<p>Er trad een fout op (' .$e->getMessage(). ')</p>';
+}
+?>]]></programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

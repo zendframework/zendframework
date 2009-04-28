@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.hostname">
+    <title>Zend_Controller_Router_Route_Hostname</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Hostname</classname> est la route par nom
+        d'hôte du framework. Elle fonctionne de la même manière que la route standard, mais elle
+        utilise le nom d'hôte de l'URL appelé au lieu du chemin.
+    </para>
+
+    <para>
+        Utilisons l'exemple d'une route standard et regardons ce que cela donnerais en
+        utilisant le nom d'hôte. Au lieu d'appeler l'utilisateur par le chemin, nous voulons être
+        capable d'appeler <code>http://toto.users.example.com</code> pour voir les informations
+        concernant l'utilisateur "toto"&#160;
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(
+    ':username.users.example.com',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$plainPathRoute = new Zend_Controller_Router_Route_Static('');
+
+$router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
+]]></programlisting>
+
+    <para>
+        Le premier paramètre dans le constructeur
+        <classname>Zend_Controller_Router_Route_Hostname</classname> est la définition d'une route
+        qui correspondra à un nom d'hôte. Les définitions de route consistent en des parties
+        statiques et des parties dynamiques séparées par le caractère point ("<code>.</code>"). Les
+        parties dynamiques, appelées variables, sont marquées en précédant le nom de variable par
+        le caractère deux-points ("<code>:</code>")&#160;: <code>:username</code>. Les parties
+        statiques sont de simples textes&#160;: <code>user</code>.
+    </para>
+
+    <para>
+        Les routes par nom d'hôtes peuvent, mais ne devraient pas être utilisées comme ceci.
+        La raison à cela est que qu'une route par nom d'hôte seule ne correspondra à aucun chemin.
+        Donc vous devez donc chaîner le chemin d'une route à une route par nom d'hôte. Ceci est
+        réalisé comme dans l'exemple ci-dessous en appelant
+        <code>$hostnameRoute-&gt;chain($pathRoute);</code>. En faisant ceci,
+        <code>$hostnameRoute</code> n'est pas modifié, mais une nouvelle route
+        (<classname>Zend_Controller_Router_Route_Chain</classname>) est retournée, qui peut ainsi
+        être fournie au routeur.
+    </para>
+
+    <note>
+        <title>Priorité des paramètres</title>
+        <para>
+            Lors du chaînage de routes ensemble, comme la route par nom d'hôte avec la route
+            par chemin ("path"), les paramètres de la route par nom d'hôte ont une priorité plus
+            haute que les paramètres de la route par chemin. Ainsi si vous définissez un contrôleur
+            dans les deux routes, le contrôleur de la route par nom d'hôte sera sélectionné.
+        </para>
+    </note>
+
+    <sect4 id="zend.controller.router.routes.hostname.config">
+
+        <title>Routes par nom d'hôtes avec Zend_Config</title>
+
+        <para>
+            Pour chaîner ensemble les routes par nom d'hôte et les routes par chemin, il
+            existe un paramètre additionnel pour la configuration nommé <code>chains</code>.
+            Celui-ci est simplement une liste de routes, qui peuvent être chaînées avec la route
+            parente. Ni la route parente, ni la route enfant ne seront ajoutées directement au
+            routeur mais seulement la route chaînée. Le nom de la route chaînée dans le routeur
+            sera la concaténation du nom de la route parente, d'un tiret ("<code>-</code>") et du
+            nom de la route enfant. Un fichier simple de configuration de type XML ressemblera à
+            ceci&#160;:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <index type="Zend_Controller_Rotuer_Route_Static">
+                <route></route>
+                <defaults module="default" controller="index" action="index" />
+            </index>
+            <imprint type="Zend_Controller_Rotuer_Route_Static">
+                <route>imprint</route>
+                <defaults module="default" controller="index" action="index" />
+            </imprint>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Rotuer_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]></programlisting>
+
+        <para>
+            Ceci donnera trois routes <code>www-index</code>, <code>www-imprint</code> et
+            <code>users-profile</code> qui fonctionneront seulement avec le bon nom d'hôte et la
+            route <code>misc</code>, qui fonctionnera avec n'importe quel nom d'hôte.
+        </para>
+    </sect4>
+</sect3>

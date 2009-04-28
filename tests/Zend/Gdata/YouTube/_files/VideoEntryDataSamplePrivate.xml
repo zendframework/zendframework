@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' 
+xmlns:media='http://search.yahoo.com/mrss/' 
+xmlns:gd='http://schemas.google.com/g/2005' 
+xmlns:yt='http://gdata.youtube.com/schemas/2007' 
+xmlns:gml='http://www.opengis.net/gml' 
+xmlns:georss='http://www.georss.org/georss'
+xmlns:app='http://purl.org/atom/app#'>
+  <id>http://gdata.youtube.com/feeds/videos/UMFI1hdm96E</id>
+  <published>2007-01-07T01:50:15.000Z</published>
+  <updated>2007-01-07T01:50:15.000Z</updated>
+  <category scheme='http://schemas.google.com/g/2005#kind'
+  term='http://gdata.youtube.com/schemas/2007#video' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='barkley' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='singing' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='acoustic' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='cover' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/categories.cat'
+  term='Music' label='Music' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='gnarls' />
+  <category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat'
+  term='music' />
+  <title type='text'>"Crazy (Gnarles Barkley)" - Acoustic Cover</title>
+  <content type='html'>&lt;div style="color: #000000;font-family:
+  Arial, Helvetica, sans-serif; font-size:12px; font-size: 12px;
+  width: 555px;"&gt;&lt;table cellspacing="0" cellpadding="0"
+  border="0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td width="140"
+  valign="top" rowspan="2"&gt;&lt;div style="border: 1px solid
+  #999999; margin: 0px 10px 5px 0px;"&gt;&lt;a
+  href="http://www.youtube.com/watch?v=UMFI1hdm96E"&gt;&lt;img
+  alt=""
+  src="http://img.youtube.com/vi/UMFI1hdm96E/2.jpg"&gt;&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;td width="256" valign="top"&gt;&lt;div style="font-size:
+  12px; font-weight: bold;"&gt;&lt;a style="font-size: 15px;
+  font-weight: bold; font-decoration: none;"
+  href="http://www.youtube.com/watch?v=UMFI1hdm96E"&gt;&amp;quot;Crazy
+  (Gnarles Barkley)&amp;quot; - Acoustic Cover&lt;/a&gt;
+  &lt;br&gt;&lt;/div&gt; &lt;div style="font-size: 12px; margin:
+  3px 0px;"&gt;&lt;span&gt;Gnarles Barkley acoustic cover
+  http://www.myspace.com/davidchoimusic&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+  &lt;td style="font-size: 11px; line-height: 1.4em; padding-left:
+  20px; padding-top: 1px;" width="146"
+  valign="top"&gt;&lt;div&gt;&lt;span style="color: #666666;
+  font-size: 11px;"&gt;From:&lt;/span&gt; &lt;a
+  href="http://www.youtube.com/profile?user=davidchoimusic"&gt;davidchoimusic&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;span style="color: #666666; font-size:
+  11px;"&gt;Views:&lt;/span&gt; 113321&lt;/div&gt; &lt;div
+  style="white-space: nowrap;text-align: left"&gt;&lt;img
+  style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_full_11x11.gif"&gt;
+  &lt;img style="border: 0px none; margin: 0px; padding: 0px;
+  vertical-align: middle; font-size: 11px;" align="top" alt=""
+  src="http://gdata.youtube.com/static/images/icn_star_half_11x11.gif"&gt;&lt;/div&gt;
+  &lt;div style="font-size: 11px;"&gt;1005 &lt;span style="color:
+  #666666; font-size:
+  11px;"&gt;ratings&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;&lt;span style="color: #666666; font-size:
+  11px;"&gt;Time:&lt;/span&gt; &lt;span style="color: #000000;
+  font-size: 11px; font-weight:
+  bold;"&gt;04:15&lt;/span&gt;&lt;/td&gt; &lt;td style="font-size:
+  11px; padding-left: 20px;"&gt;&lt;span style="color: #666666;
+  font-size: 11px;"&gt;More in&lt;/span&gt; &lt;a
+  href="http://www.youtube.com/categories_portal?c=10"&gt;Music&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</content>
+  <link rel='self' type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E' />
+  <link rel='alternate' type='text/html'
+  href='http://www.youtube.com/watch?v=UMFI1hdm96E' />
+  <link rel='http://gdata.youtube.com/schemas/2007#video.responses'
+  type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/responses' />
+  <link rel='http://gdata.youtube.com/schemas/2007#video.related'
+  type='application/atom+xml'
+  href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/related' />
+  <author>
+    <name>davidchoimusic</name>
+    <uri>http://gdata.youtube.com/feeds/users/davidchoimusic</uri>
+  </author>
+  <media:group>
+    <media:title type='plain'>"Crazy (Gnarles Barkley)" - Acoustic Cover</media:title>
+    <media:description type='plain'>Gnarles Barkley acoustic cover http://www.myspace.com/davidchoimusic</media:description>
+    <media:keywords>music, singing, gnarls, barkley, acoustic, cover</media:keywords>
+    <yt:duration seconds='255' />
+    <media:category label='Music'
+    scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>
+    Music</media:category>
+    <media:category 
+    scheme='http://gdata.youtube.com/schemas/2007/developertags.cat'>
+    DeveloperTag1</media:category>
+    <media:content url='http://www.youtube.com/v/UMFI1hdm96E'
+    type='application/x-shockwave-flash' medium='video'
+    isDefault='true' expression='full' duration='255'
+    yt:format='5' />
+    <media:player url='http://www.youtube.com/watch?v=UMFI1hdm96E' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/2.jpg'
+    height='97' width='130' time='00:02:07.500' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/1.jpg'
+    height='97' width='130' time='00:01:03.750' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/3.jpg'
+    height='97' width='130' time='00:03:11.250' />
+    <media:thumbnail url='http://img.youtube.com/vi/UMFI1hdm96E/0.jpg'
+    height='240' width='320' time='00:02:07.500' />
+    <yt:private />
+  </media:group>
+  <yt:statistics viewCount='113321' />
+  <gd:rating min='1' max='5' numRaters='1005' average='4.77' />
+  <georss:where>
+    <gml:Point>
+      <gml:pos>37.398529052734375 -122.0635986328125</gml:pos>
+    </gml:Point>
+  </georss:where>
+  <yt:recorded>2008-09-25</yt:recorded>
+  <gd:comments>
+    <gd:feedLink href='http://gdata.youtube.com/feeds/videos/UMFI1hdm96E/comments' />
+  </gd:comments>
+  <yt:noembed />
+      <app:control>
+        <app:draft>yes</app:draft>
+        <yt:state
+          name="rejected"
+          reasonCode="inappropriate"
+          helpUrl="http://www.youtube.com/t/community_guidelines">
+          The content of this video may violate the terms of use.</yt:state>
+      </app:control>
+</entry>

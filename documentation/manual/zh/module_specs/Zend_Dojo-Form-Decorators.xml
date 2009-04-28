@@ -1,0 +1,122 @@
+<sect2 id="zend.dojo.form.decorators">
+    <title>Dijit-Specific 表单装饰器</title>
+
+    <para>
+        大多数表单元素可以使用 DijitElement 装饰器，它从元素抓取 dijit 参数，
+        然后和其它元数据一起传递给由元素指定的视图助手。对于装饰表单、子表单和显示组，
+        有一组和不同的布局 dijits 对应的装饰器。
+    </para>
+
+    <para>
+        所有的 jijit 装饰器寻找给定被装饰元素的 <code>dijitParams</code> 属性，
+        并把它们压到 <code>$params</code> 数组传递给被使用的 dijit 视图助手；
+        这些就和其它属性分离，这样就不会有重复的信息。
+    </para>
+
+    <sect3 id="zend.dojo.form.decorators.dijitElement">
+        <title>DijitElement 装饰器</title>
+
+        <para>
+            就像 <link linkend="zend.form.standardDecorators.viewHelper">视图助手装饰器</link>，
+            DijitElement 也在元素里有个 <code>helper</code>  属性，解析时，它将被用作视图助手。
+            Dijit 参数将直接从元素理拉出来，但也可能通过 <code>dijitParams</code> 键（键值应当是个联合数组选项）
+            作为选项被传递。
+        </para>
+
+        <para>
+            每个元素有个独一无二的 ID （从元素的<code>getId()</code>方法读出）很重要。
+            如果在 <code>dojo()</code> 视图助手里检测到重复的 ID，装饰器将触发一个提示，
+            接着通过追加 <code>uniqid()</code> 的返回值到标识符来生成一个独一无二的 ID。
+        </para>
+
+        <para>
+            标准用法是在装饰器链附加这个装饰器为第一个装饰器，不需要另外的选项。
+        </para>
+
+        <example id="zend.dojo.form.decorators.dijitElement.usage">
+            <title>DijitElement 装饰器用法</title>
+
+            <programlisting role="php"><![CDATA[
+$element->setDecorators(array(
+    'DijitElement',
+    'Errors',
+    'Label',
+    'ContentPane',
+));
+]]>
+            </programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.decorators.dijitForm">
+        <title>DijitForm 装饰器</title>
+
+        <para>
+            DijitForm 装饰器和 <link
+                linkend="zend.form.standardDecorators.form">表单装饰器
+                </link> 非常类似；事实上，它们可以交互使用，因为它们使用同样的视图助手名（'form'）。
+        </para>
+
+        <para>
+            因为 dijit.form.Form 不要求任何 dijit 参数来配置，主要的不同之处是 dijit 表单视图助手
+            要求传递一个 DOM ID 来确保程序生成 dijit。装饰器通过传递表单名为表示符来保证它。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.form.decorators.dijitContainer">
+        <title>DijitContainer-based 装饰器</title>
+
+        <para>
+            <code>DijitContainer</code> 装饰器实际上是一个摘要类，其它装饰器都从它派生。它
+            提供了和 <link
+                linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> 一样的功能，
+            并带有另外的标题支持。许多布局 dijits 要求或使用标题；如果可能，DijitContainer 将使用元素的 legend 属性，如果传递
+            它也可以使用 'legend' 或 'title'装饰器选项其中之一。如果有对应的翻译适配器，标题将被翻译。
+        </para>
+
+        <para>
+            下列的装饰器从 <code>DijitContainer</code> 继承：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>AccordionContainer</para></listitem>
+            <listitem><para>AccordionPane</para></listitem>
+            <listitem><para>BorderContainer</para></listitem>
+            <listitem><para>ContentPane</para></listitem>
+            <listitem><para>SplitContainer</para></listitem>
+            <listitem><para>StackContainer</para></listitem>
+            <listitem><para>TabContainer</para></listitem>
+        </itemizedlist>
+
+        <example id="zend.dojo.form.decorators.dijitContainer.usage">
+            <title>DijitContainer 装饰器用法</title>
+
+            <programlisting role="php"><![CDATA[
+// Use a TabContainer for your form:
+$form->setDecorators(array(
+    'FormElements',
+    array('TabContainer', array(
+        'id'          => 'tabContainer',
+        'style'       => 'width: 600px; height: 500px;',
+        'dijitParams' => array(
+            'tabPosition' => 'top'
+        ),
+    )),
+    'DijitForm',
+));
+
+// Use a ContentPane in your sub form (which can be used with all but
+// AccordionContainer):
+$subForm->setDecorators(array(
+    'FormElements',
+    array('HtmlTag', array('tag' => 'dl')),
+    'ContentPane',
+));
+]]>
+            </programlisting>
+        </example>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

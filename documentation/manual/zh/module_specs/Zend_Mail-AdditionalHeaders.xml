@@ -1,0 +1,19 @@
+<sect1 id="zend.mail.additional-headers">
+    <title>外加邮件头信息</title>
+    <para>
+        使用<code>addHeader()</code>方法可以外加任意的邮件头信息。它需要两个参数，头信息的名称和值，第三个可选的参数，它决定了该邮件头信息是否可以有多个值：
+    </para>
+    <example id="zend.mail.additional-headers.example-1">
+        <title>外加邮件头信息</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values
+$mail->addHeader('X-greetingsTo', 'Dad', true);]]>
+       </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

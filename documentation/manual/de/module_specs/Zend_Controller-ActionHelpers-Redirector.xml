@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.redirector">
+    <title>Redirector</title>
+
+    <sect4 id="zend.controller.actionhelper.redirector.introduction">
+        <title>Einführung</title>
+
+        <para>
+            Der <code>Redirector</code> Helfer erlaubt die Verwendung eines Redirector Objektes um die
+            Notwendigkeiten der Anwendung für das Umleiten zu einer neuen URL zu erfüllen. Er bietet vielfache
+            Vorteile gegenüber der <code>_redirect()</code> Methode. Er ist zum Beispiel fähig seitenweises
+            Verhalten im Redirector Objekt vorzudefinieren oder bietet ein eingebautes
+            <code>gotoSimple($action, $controller, $module, $params)</code> Interface ähnlich dem von
+            <classname>Zend_Controller_Action::_forward()</classname>.
+        </para>
+
+        <para>
+            Der <code>Redirector</code> hat eine Anzahl von Methoden die verwendet werden können um das
+            Verhalten beim Umleiten zu beeinflussen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setCode()</code> kann verwendet werden um den HTTP Antwort Code zu setzen der wärend des
+                    Umleitens verwendet werden soll.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setExit()</code> kann verwendet werden um ein <code>exit()</code> nach einer
+                    Umleitung zu erzwingen. Standardmäßig ist dieser aktiviert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoSimple()</code> kann verwendet werden um eine Standard URL zu setzen die verwendet wird
+                    wenn keine an <code>gotoSimple()</code> übergeben wird. Verwendet die API von
+                    <classname>Zend_Controller_Action::_forward()</classname>:
+                    setGotoSimple($action, $controller = null, $module = null, array $params = array());
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoRoute()</code> kann verwendet werden um eine URL basierend auf einer registrierten
+                    Route zu setzen. Übergeben in einem Array von Schlüssel/Werte Paaren und einem Routernamen,
+                    wird die URL anhand des Routertyps und der Definition zusammengebaut.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setGotoUrl()</code> kann verwendet werden um eine Standard URL zu setzen die
+                    verwendet wird wenn keine an <code>gotoUrl()</code> übergeben wird. Akzeptiert einen einzelnen
+                    URL String.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setPrependBase()</code> kann verwendet werden um die BasisURL des Anfrage Objektes
+                    einer mit <code>setGotoUrl()</code>, <code>gotoUrl()</code> oder <code>gotoUrlAndExit()</code>
+                    definierten URL, voranzustellen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setUseAbsoluteUri()</code> kann verwendet werden um den <code>Redirector</code> dazu zu
+                    zwingen absolute URIs zu verwenden wenn umgeleitet wird. Wenn diese Option gesetzt ist, verwendet
+                    Sie den Wert von <code>$_SERVER['HTTP_HOST']</code>, <code>$_SERVER['SERVER_PORT']</code>, und
+                    <code>$_SERVER['HTTPS']</code> um eine komplete URI zur, durch eine der Umleitungsmethoden,
+                    spezifizierten URL zu erstellen. Diese Option ist standardmäßig ausgeschaltet, kann aber in
+                    späteren Releases standardmäßig eingeschaltet sein.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Zusätzlich gibt es eine Reihe von Methoden im Redirector für die Bearbeitung der aktuellen Umleitungen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>gotoSimple()</code> verwendet <code>setGotoSimple()</code> (<code>_forward()-ähnlcihe API</code>)
+                    um eine URL zu erstellen und eine Umleitung durchzuführen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoRoute()</code> verwendet <code>setGotoRoute()</code> (<code>route-assembly</code>)
+                    um eine URL zu erstellen und eine Umleitung durchzuführen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>gotoUrl()</code> verwendet <code>setGotoUrl()</code> (<code>URL string</code>)
+                    um eine URL zu erstellen und eine Umleitung durchzuführen.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Letztendlich kann die aktuelle Umleitungs URL jederzeit festgestellt werden durch Verwendung von
+            <code>getRedirectUrl()</code>.
+        </para>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.redirector.basicusage">
+        <title>Beispiel für die grundsätzliche Verwendung</title>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
+            <title>Optionen setzen</title>
+
+            <para>
+                Dieses Beispiel überschreibt diverse Optionen, inklusive dem Setzen des HTTP Statuscodes und dessen
+                Verwendung in der Umleitung ('303'), nicht abbrechen der Umleitung und definieren einer Standard URL
+                die beim Umleiten verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - definiert zur Komplettierung des Codes
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+
+        // Setzt die Standardoptionen für die Umleitung
+        // Da das Objekt in der Helferanwendung registriert ist,
+        // wird diese für alle Aktionen ab diesem Zeitpunkt relevant
+        $this->_redirector->setCode(303)
+                          ->setExit(false)
+                          ->setGotoSimple("this-action",
+                                          "some-controller");
+    }
+
+    public function myAction()
+    {
+        /* Mach was */
+
+        // Umleiten zu einer vorher definierten URL, und einen Ausstieg
+        // erzwingen der stattfindet sobald das getan wurde:
+        $this->_redirector->redirectAndExit();
+        return; // wird nie erreicht
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
+            <title>Standardwerte verwenden</title>
+
+            <para>
+                Diese Beispiel nimmt an das die Standardwerte verwendet werden, was bedeutet das jede Umleitung in
+                einem sofortigen <code>exit()</code> resultiert.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// ALTERNATIVES BEISPIEL
+class AlternativeController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - definiert zur Komplettierung des Codes
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* Mach was */
+
+        $this->_redirector
+            ->gotoUrl('/my-controller/my-action/param1/test/param2/test2');
+        return; // wird nie erreicht da standardmäßig gegangen und beendet wird
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
+            <title>Verwenden von goto()'s _forward() API</title>
+
+            <para>
+                <code>gotoSimple()</code>'s API entspricht der von <classname>Zend_Controller_Action::_forward()</classname>. Der
+                primäre Unterschied ist das Sie eine URL von den übergebenen Parametern erstellt und das
+                Standardformat <code>:module/:controller/:action/*</code> des Standardrouters verwendet. Dann leitet
+                es um statt die Aktion zu verketten.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ForwardController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - definiert zur Komplettierung des Codes
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function myAction()
+    {
+        /* Mach was */
+
+        // Umleiten zu 'my-action' von 'my-controller' im aktuellen Modul,
+        // und verwenden der Parameter param1 => test und param2 => test2
+        $this->_redirector->gotoSimple('my-action',
+                                       'my-controller',
+                                       null,
+                                       array('param1' => 'test',
+                                             'param2' => 'test2'
+                                             )
+                                       );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
+            <title>Verwenden von Routen die mit gotoRoute() zusammengebaut wurden</title>
+
+            <para>
+                Das folgende Beispiel verwendet die <code>assemble()</code> Methode des
+                <link linkend="zend.controller.router">Router's</link> um eine URL zu erstellen die auf einem
+                assoziativen Array von Parametern basiert das übergeben wurde. Es nimmt an das die folgende Route
+                registriert wurde:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'blog/:year/:month/:day/:id',
+    array('controller' => 'archive',
+          'module' => 'blog',
+          'action' => 'view')
+);
+$router->addRoute('blogArchive', $route);
+]]>
+            </programlisting>
+
+            <para>
+                Angenommen ein Array hat year auf 206 gesetzt, month auf 4, day auf 24, und id auf 42, dann
+                würde dieses eine URL wie die folgende erstellen: <code>/blog/2006/4/24/42</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class BlogAdminController extends Zend_Controller_Action
+{
+    /**
+     * Redirector - definiert zur Komplettierung des Codes
+     *
+     * @var Zend_Controller_Action_Helper_Redirector
+     */
+    protected $_redirector = null;
+
+    public function init()
+    {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+    }
+
+    public function returnAction()
+    {
+        /* Mach was */
+
+        // Umleiten zum Blog Archiv. Erstellt die folgende URL:
+        // /blog/2006/4/24/42
+        $this->_redirector->gotoRoute(
+            array('year' => 2006,
+                  'month' => 4,
+                  'day' => 24,
+                  'id' => 42),
+            'blogArchive'
+        );
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

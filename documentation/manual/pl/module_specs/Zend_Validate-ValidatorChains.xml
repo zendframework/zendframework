@@ -1,0 +1,68 @@
+<sect1 id="zend.validate.validator_chains">
+
+    <title>Łańcuchy weryfikatorów</title>
+
+    <para>
+        Często do pewnej wartości potrzebujemy zastosować wiele weryfikatorów w
+        określonej kolejności. Poniższy kod demonstruje sposób rozwiązania
+        przykładu z
+        <link linkend="zend.validate.introduction">wprowadzenia</link>, gdzie
+        nazwa użytkownika musi mieć długość między 6 a 12 alfanumerycznych
+        znaków:
+
+        <programlisting role="php"><![CDATA[
+// Tworzymy łańcuch weryfikatorów i dodajemy do niego weryfikatory
+$validatorChain = new Zend_Validate();
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+               ->addValidator(new Zend_Validate_Alnum());
+
+// Sprawdzamy nazwę użytkownika
+if ($validatorChain->isValid($username)) {
+    // nazwa użytkownika jest poprawna
+} else {
+    // nazwa użytkownika nie jest poprawna; wyświetlamy komunikaty
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]>
+        </programlisting>
+
+        Weryfikatory są uruchamiane w takiej kolejności, w jakiej zostały dodane
+        do <code>Zend_Validate</code>. W powyższym przykładzie, wpierw jest
+        sprawdzane jest to, czy długość nazwy użytkownika mieści się miedzy 6 a
+        12 znaków, a następnie sprawdzane jest czy zawiera ona tylko znaki
+        alfanumeryczne. Druga weryfikacja, dla alfanumerycznych znaków, jest
+        przeprowadzana niezależnie od tego, czy pierwsza weryfikacja, dla długości
+        pomiędzy 6 a 12 znaków udała się. Oznacza to, że jeśli nie udadzą się
+        obie weryfikacje, to metoda <code>getMessages()</code> zwróci wiadomości
+        błędów pochodzące od obu weryfikatorów.
+    </para>
+
+    <para>
+        W niektórych przypadkach sensowna może być możliwość przerwania
+        łańcucha weryfikatorów w przypadku, gdy proces weryfikacji nie uda się.
+        <code>Zend_Validate</code> obsługuje takie przypadki za pomocą
+        ustawienia drugiego parametru w metodzie <code>addValidator()</code>.
+        Ustawiając wartość zmiennej <code>$breakChainOnFailure</code> na
+        <code>true</code>, dodany weryfikator przerwie łańcuchowe wywoływanie
+        przy wystąpieniu błędu, co zapobiegnie uruchamianiu innych weryfikacji,
+        które w danej sytuacji zostaną uznane za bezużyteczne. Jeśli powyższy
+        przykład byłby napisany tak jak poniżej, wtedy weryfikacja znaków
+        alfanumerycznych nie byłaby przeprowadzona jeśli długość łańcucha znaków
+        byłaby nieodpowiednia:
+
+        <programlisting role="php"><![CDATA[
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
+        ->addValidator(new Zend_Validate_Alnum());
+]]>
+        </programlisting>
+
+    </para>
+
+    <para>
+        W łańcuchu weryfikatorów może być użyty dowolny obiekt, który implementuje
+        interfejs <code>Zend_Validate_Interface</code>.
+    </para>
+
+</sect1>

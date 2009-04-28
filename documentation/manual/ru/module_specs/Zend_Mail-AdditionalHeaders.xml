@@ -1,0 +1,39 @@
+<sect1 id="zend.mail.additional-headers">
+    <title>
+        Дополнительные заголовки
+<!--
+        Additional Headers
+-->
+    </title>
+    <para>
+        Произвольные заголовки почтовых сообщений могут быть установлены с
+        помощью метода <code>addHeader()</code>. Он требует передачи
+        двух параметров, содержащих имя и значение поля заголовка.
+        Третий необязательный параметр определяет, должен ли заголовок
+        иметь одно или несколько значений.
+<!--
+        Arbitrary mail headers can be set by using the <code>addHeader()</code> method. It requires two
+        parameters containing the name and the value of the header field. A third optional parameter determines
+        if the header should have only one or multiple values:
+-->
+    </para>
+    <example>
+        <title>
+            Добавление заголовков почтового сообщения
+<!--
+            Adding E-Mail Message Headers
+-->
+        </title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MyCoolApplication');
+$mail->addHeader('X-greetingsTo', 'Mom', true); // множественное значение
+$mail->addHeader('X-greetingsTo', 'Dad', true);
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

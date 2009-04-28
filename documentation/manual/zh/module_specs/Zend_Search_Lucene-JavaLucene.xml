@@ -1,0 +1,84 @@
+<sect1 id="zend.search.lucene.java-lucene">
+    <title>与 Java Lucene 的互操作性</title>
+
+    <sect2 id="zend.search.lucene.index-creation.file-formats">
+        <title>文件格式</title>
+        <para>
+          Zend_Search_Lucene 的索引文件格式和 1.4 或更高版本的 Java Lucene 二进制兼容。
+        </para>
+
+        <para>
+          关于文件格式的更详细的描述在这里：
+          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>。
+          <footnote><para> 当前支持的 Lucene 索引文件格式版本是 v2.3（从ZF 1.6 版开始）。</para></footnote>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.index-directory">
+        <title>索引目录</title>
+
+        <para>
+            在创建了索引之后，索引目录中将包含下列文件：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                <filename>segments</filename> 文件是一个索引分段的清单。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                <filename>*.cfs</filename> 文件包含索引分段。请注意！优化了的索引总是只有一个分段。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                <filename>deletable</filename> 文件是一个不再被索引使用但是无法删除的文件清单。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.java-lucene.source-code">
+        <title>Java 源代码</title>
+        <para>
+            下面的 Java 程序提供了一个如何使用 Java Lucene 索引文件的例子：
+        </para>
+
+        <programlisting role="java"><![CDATA[
+/**
+* Index creation:
+*/
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.document.*;
+
+import java.io.*
+
+...
+
+IndexWriter indexWriter = new IndexWriter("/data/my_index",
+                                          new SimpleAnalyzer(), true);
+
+...
+
+String filename = "/path/to/file-to-index.txt"
+File f = new File(filename);
+
+Document doc = new Document();
+doc.add(Field.Text("path", filename));
+doc.add(Field.Keyword("modified",DateField.timeToString(f.lastModified())));
+doc.add(Field.Text("author", "unknown"));
+FileInputStream is = new FileInputStream(f);
+Reader reader = new BufferedReader(new InputStreamReader(is));
+doc.add(Field.Text("contents", reader));
+
+indexWriter.addDocument(doc);
+]]>
+</programlisting>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

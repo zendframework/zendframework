@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
+gd:etag='W/"DEEBR347eCp7ImA9WxRaE0o."'>
+<id>tag:youtube.com,2008:user:zfgdata</id>
+<published>2007-09-20T21:00:09.000-07:00</published>
+<updated>2008-12-15T13:30:56.000-08:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/channeltypes.cat'
+term='Standard' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#userProfile' />
+<title>zfgdata Channel</title>
+<link rel='http://gdata.youtube.com/schemas/2007#featured-video'
+type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/videos/66wj2g5yz0M?v=2' />
+<link rel='related' type='text/html'
+href='http://code.google.com/apis/gdata/' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/profile?user=zfgdata' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:firstName>Lonely</yt:firstName>
+<yt:lastName>TestAccount</yt:lastName>
+<yt:aboutMe>I'm a lonely test account, with little to do but sit
+around and wait for people to use me. I get bored in between
+releases and often sleep to pass the time. Please use me more
+often, as I love to show off my talent in breaking your
+code.</yt:aboutMe>
+<yt:age>32</yt:age>
+<yt:username>zfgdata</yt:username>
+<yt:books>crime and punishment, ps i love you, the stand</yt:books>
+<yt:gender>f</yt:gender>
+<yt:company>Google</yt:company>
+<yt:hobbies>software engineering, information architecture,
+photography, travel</yt:hobbies>
+<yt:hometown>Mountain View, CA</yt:hometown>
+<yt:location>San Francisco, CA 94114, US</yt:location>
+<yt:movies>monk, heroes, law and order, top gun</yt:movies>
+<yt:music>imogen heap, frou frou, thievory corp, morcheeba,
+barenaked ladies</yt:music>
+<yt:occupation>Developer Programs</yt:occupation>
+<yt:relationship>taken</yt:relationship>
+<yt:school>University of the World</yt:school>
+<media:thumbnail url='http://i3.ytimg.com/vi/66wj2g5yz0M/default.jpg' />
+<yt:statistics viewCount='88' videoWatchCount='14' lastWebAccess='2008-12-15T14:56:57.000-08:00' subscriberCount='12' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.favorites'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/favorites?v=2'
+countHint='1' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.contacts'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/contacts?v=2'
+countHint='1' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.inbox'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/inbox?v=2' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.playlists'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/playlists?v=2' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.subscriptions'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions?v=2'
+countHint='8' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.uploads'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/uploads?v=2'
+countHint='1' />
+<gd:feedLink rel='http://gdata.youtube.com/schemas/2007#user.newsubscriptionvideos'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/newsubscriptionvideos?v=2' />
+</entry>

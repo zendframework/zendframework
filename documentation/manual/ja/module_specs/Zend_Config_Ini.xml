@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        <classname>Zend_Config_Ini</classname> は、おなじみの INI
+        形式のファイルに保存された設定データを、<classname>Zend_Config</classname>
+        を通じてオブジェクトのプロパティとして扱えるようにします。
+        この INI 形式は、階層化された設定データを扱うこと、
+        そしてセクション間の継承関係を扱うことに特化されています。
+        設定データの階層構造は、キーの名前をドットあるいはピリオド
+        (<code>.</code>) で区切ることによって表現します。
+        他のセクションを拡張するなどの継承関係は、
+        セクション名に続けてコロン (<code>:</code>) を、
+        そしてその後に継承元のセクション名を指定することで表します。
+    </para>
+    <note>
+        <title>INI ファイルのパース</title>
+        <para>
+            <classname>Zend_Config_Ini</classname> は、PHP の
+            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
+            関数を使用しています。このドキュメントでは、<classname>Zend_Config_Ini</classname>
+            固有の挙動に注意しましょう。例えば、特殊な値として
+            <code>true</code> や <code>false</code>、
+            <code>yes</code>、<code>no</code> そして <code>null</code>
+            を処理できることなどです。
+        </para>
+    </note>
+    <note>
+        <title>キーの区切り文字</title>
+        <para>
+            デフォルトでは、キーの区切り文字はピリオド (<code>.</code>) です。
+            しかし、これは変更することもできます。変更するには、
+            <classname>Zend_Config_Ini</classname> オブジェクトの作成時に
+            <code>$options</code> のキー
+            <code>'nestSeparator'</code> を設定します。たとえばこのようになります。
+            <programlisting role="php"><![CDATA[
+$options['nestSeparator'] = ':';
+$config = new Zend_Config_Ini('/path/to/config.ini',
+                              'staging',
+                              $options);
+]]>
+            </programlisting>
+        </para>
+    </note>
+    <example id="zend.config.adapters.ini.example.using">
+        <title><classname>Zend_Config_Ini</classname> の使用法</title>
+        <para>
+            この例は、<classname>Zend_Config_Ini</classname> を使用して
+            INI ファイルから設定データを読み込むための基本的な方法を説明するものです。
+            この例では、運用環境の設定と開発環境の設定を両方管理しています。
+            開発環境用の設定データは運用環境用のものと非常に似ているので、
+            開発環境用のセクションは運用環境用のセクションを継承させています。
+            今回の場合なら、逆に運用環境用のセクションを開発環境用のものから継承させてもいいでしょう。
+            そうしたからといって特に状況が複雑になるわけではありません。
+            ここでは、次のような内容の設定データが
+            <code>/path/to/config.ini</code> に存在するものとします。
+        </para>
+        <programlisting role="ini"><![CDATA[
+; 運用環境の設定データ
+[production]
+webhost                  = www.example.com
+database.adapter         = pdo_mysql
+database.params.host     = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname   = dbname
+
+; 開発環境の設定データは、運用環境のデータを継承したうえで
+; 必要に応じて値を上書きします
+[staging : production]
+database.params.host     = dev.example.com
+database.params.username = devuser
+database.params.password = devsecret
+]]>
+</programlisting>
+        <para>
+            次に、開発者が開発環境用の設定データを INI ファイルから読み込むことを考えます。
+            これは簡単なことで、単に INI ファイルとセクションを指定するだけです。
+        </para>
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
+
+echo $config->database->params->host;   // "dev.example.com" と出力します
+echo $config->database->params->dbname; // "dbname" と出力します
+]]>
+        </programlisting>
+    </example>
+    <note>
+    <table id="zend.config.adapters.ini.table">
+        <title>Zend_Config_Ini コンストラクタのパラメータ</title>
+        <tgroup cols="2">
+            <thead>
+                  <row>
+                    <entry>パラメータ</entry>
+                    <entry>説明</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>$filename</code></entry>
+                    <entry>読み込む INI ファイル。</entry>
+                </row>
+                <row>
+                    <entry><code>$section</code></entry>
+                    <entry>
+                        ini ファイルの中の、読み込む [section]。
+                        このパラメータを null にすると、すべてのセクションを読み込みます。
+                        また、セクション名の配列を指定すると、複数のセクションを読み込みます。
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>$options = false</code></entry>
+                    <entry>オプションの配列。以下のキーをサポートしています。
+                        <itemizedlist>
+                            <listitem><para><emphasis>allowModifications</emphasis>: true を指定すると、読み込んだファイルを後で変更することができます。デフォルトは false です。</para></listitem>
+                            <listitem><para><emphasis>nestSeparator</emphasis>: ネストの区切り文字として使用する文字を設定します。デフォルトは "." です。</para></listitem>
+                        </itemizedlist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

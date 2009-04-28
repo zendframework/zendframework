@@ -1,0 +1,31 @@
+<sect1 id="zend.json.objects">
+    <title>Oggetti JSON</title>
+    <para>
+        Quando un oggetto PHP viene codificato in JSON, tutte le sue proprietà pubbliche sono convertite in un oggetto JSON.
+    </para>
+    <para>
+        JSON non consente l'uso di riferimenti ad oggetti, quindi è necessario prestare attenzione a non codificare oggetti con riferimenti ricorsivi.
+        In caso di problemi con la ricorsione, i metodi <code>Zend_Json::encode()</code> e <code>Zend_Json_Encoder::encode()</code> offrono un secondo parametro opzionale per verificare la presenza di una funzione ricorsiva; un'eccezione viene generata se si codifica due volte un oggetto.
+    </para>
+    <para>
+        Nonostante gli oggetti JavaScript abbiano una stretta corrispondenza con gli array associativi in PHP, decodificare un oggetto JSON aggiunge una piccola difficoltà.
+        Alcuni suggeriscono che sia necessario passare un identificativo di una classe e creare un'istanza della classe stessa valorizzata con le coppie di chiave/valore dell'oggetto JSON; altri pensano che questo possa creare alcuni sostanziali rischi di sicurezza.
+    </para>
+    <para>
+        Per impostazione predefinita, <code>Zend_Json</code> decodifica gli oggetti JSON in array associativi, Tuttavia, se si desidera che il metodo restituisca un oggetto, è possibile specificarlo:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+// Decodifica gli oggetti JSON in oggetti PHP
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);]]>
+    </programlisting>
+    <para>
+        Ogni oggetto decodificato è restituito come oggetto istanza della classe <code>StdClass</code> dove le proprietà sono rappresentate dalle coppie di chiave/valore nella notazione JSON.
+    </para>
+    <para>
+        La raccomandazione del Framework Zend è che ciascun sviluppatore decida come decodificare gli oggetti JSON.
+        Se è necessario creare un oggetto di un determinato tipo, lo si può creare nel codice dello sviluppatore e valorizzarlo con i dati decodificati usando <code>Zend_Json</code>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

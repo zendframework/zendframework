@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.callback">
+    <title>Callback</title>
+    <para>
+        Dieser Filter erlaubt es einem eigene Methoden in Verbindung mit
+        <classname>Zend_Filter</classname> zu verwenden. Man muß keinen neuen Filter erstellen
+        wenn man bereits eine Methode hat die diesen Job erledigt.
+    </para>
+
+
+    <para>
+        Nehmen wir an das wir einen Filter erstellen wollen der einen String umdreht.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$filter = new Zend_Filter_Callback('strrev');
+
+print $filter->filter('Hello!');
+// Ausgabe "!olleH"
+]]>
+    </programlisting>
+
+    <para>
+        Wie man sehen kann ist es wirklich sehr einfach ein Callback zu verwenden um einen eigenen
+        Filter zu definieren. Es ist auch möglich eine Methode zu verwenden, wenn diese innerhalb
+        einer Klasse definiert ist, indem ein Array als Callback angegeben wird.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Unsere Klassendefinition
+class MyClass
+{
+    public function Reverse($param);
+}
+
+// Die Filter Definition
+$filter = new Zend_Filter_Callback(array('MyClass', 'Reverse'));
+print $filter->filter('Hello!');
+]]>
+    </programlisting>
+
+    <para>
+        Um den aktuell gesetzten Callback zu erhalten kann <code>getCallback()</code> verwendet
+        werden, und um einen anderen Callback zu setzen kann <code>setCallback()</code> verwendet
+        werden.
+    </para>
+
+    <para>
+        Es ist auch möglich Standardparameter zu definieren, die der aufgerufenen Methode als
+        Array übergeben werden wenn der Filter ausgeführt wird. Dieses Array wird mit dem
+        Wert der gefiltert werden soll zusammengehängt.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$filter = new Zend_Filter_Callback(
+    'MyMethod',
+    array('key' => 'param1', 'key2' => 'param2')
+);
+$filter->filter(array('value' => 'Hello'));
+]]>
+    </programlisting>
+
+    <para>
+        Wenn man die oben stehende Methodendefinition manuell aufrufen würde, dann würde das wie
+        folgt aussehen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$value = MyMethod('Hello', 'param1', 'param2');
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            Man sollte auch beachten das die Definition einer Callback Methode, welche nicht
+            aufgerufen werden kann, eine Exception auslöst.
+        </para>
+    </note>
+
+</sect2>

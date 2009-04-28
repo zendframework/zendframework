@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.tool.project.internals">
+    <title>Zend_Tool_Project Internas</title>
+    <sect2 id="zend.tool.project.internals.xml-structure">
+        <title>Interne XML Struktur von Zend_Tool_Project</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.tool.project.internals.extending">
+        <title>Erweiterung der Interna von Zend_Tool_Project</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+</sect1>

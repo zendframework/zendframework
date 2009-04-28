@@ -1,0 +1,31 @@
+<sect1 id="zend.exception.using">
+
+    <title>Użycie wyjątków</title>
+
+    <para>
+        Każdy wyjątek wyrzucany przez klasy Zend Framework powinien
+        wyrzucać wyjątek, który rozszerza podstawową klasę Zend_Exception.
+    </para>
+
+    <example id="zend.exception.using.example">
+        <title>Przykład łapania wyjątku</title>
+        <programlisting role="php"><![CDATA[
+try {
+    Zend_Loader::loadClass('nonexistantclass');
+} catch (Zend_Exception $e) {
+    echo "Caught exception: " . get_class($e) . "\n";
+    echo "Message: " . $e->getMessage() . "\n";
+    // inny kod do obsługi błędu.
+}
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        Zobacz dokumentację dla poszczególnych komponentów Zend Framework
+        aby uzyskać bardziej szczegółowe informacje o tym, które metody
+        wyrzucają wyjątki, jakie są okoliczności wyrzucenia wyjątku oraz które
+        klasy wyjątków pochodzą z klasy Zend_Exception.
+    </para>
+
+</sect1>

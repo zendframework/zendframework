@@ -1,0 +1,47 @@
+<sect1 id="zend.debug.dumping">
+
+    <title> 输出变量的值 (Dumping Variables) </title>
+
+    <para>
+        静态方法 <code>Zend_Debug::dump()</code> 打印或返回某个表达式或变量的信息。这个简单的调试技术很常用，因为在特别时髦和要求没有初始化、特殊工具或调试环境时很容易使用。
+    </para>
+
+    <example id="zend.debug.dumping.example">
+        <title> dump()方法使用示例 </title>
+        <programlisting role="php"><![CDATA[
+
+Zend_Debug::dump($var, $label=null, $echo=true);
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        <code>$var</code> 参数指定了 <code>Zend_Debug::dump()</code> 输出信息的表达式或变量。
+    </para>
+
+    <para>
+        <code>$label</code> 标签参数是用来加在 <code>Zend_Debug::dump()</code> 输出信息之前的一段文本。这非常有用，例如你一次要查看多个变量的信息。（你可以为不同变量设置不同label，如“user”，“password”等等，这样不会弄乱--Haohappy注)
+    </para>
+
+    <para>
+        <code>Zend_Debug::dump()</code> 是否输出，这取决于<code>$echo</code>参数，如果为<code>true</code>，则会输出结果。无论是否指定<code>$echo</code>参数的值，该方法的返回值都包含表达式或变量的信息。
+    </para>
+
+    <para>
+        深入地理解它很有帮助，<code>Zend_Debug::dump()</code> 方法封装 PHP 函数<ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>。如果输出流被检测为 web 表达，<code>var_dump()</code> 的输出结果使用 <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>转义，并封装(X)HTML <code>&lt;pre&gt;</code>标签。
+    </para>
+
+    <tip>
+        <title> 使用 Zend_Log 进行调试 </title>
+        <para>
+            使用 <code>Zend_Debug::dump()</code> 很方便在开发项目时Debug，你可以很容易地增加或移除它。
+        </para>
+        <para>
+            你也可以考虑使用 <link linkend="zend.log.overview">Zend_Log</link> 来调试，用于更长期的非短暂性的调试和监控。例如，你可以使用 <code>DEBUG</code> 记录级别和 Stream 记录器来输出 <code>Zend_Debug::dump()</code> 返回的信息。
+        </para>
+    </tip>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

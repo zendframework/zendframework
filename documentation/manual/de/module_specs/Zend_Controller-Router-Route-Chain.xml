@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15003 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.chain">
+    <title>Zend_Controller_Router_Route_Chain</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Chain</classname> ist eine Route die es erlaubt mehrere
+        Routen miteinander zu verketten. Das erlaubt es Hostname-Routen und Pfad-Routen zu
+        verketten, oder zum Beispiel mehrere Pfad-Routen. Verkettung kann entweder
+        program-technisch oder mit einer Konfigurationsdatei durchgeführt werden.
+    </para>
+
+    <note>
+        <title>Priorität der Parameter</title>
+        <para>
+            Wenn Routen wie die Hostnameroute und die Pfadroute zusammengekettet werden, haben die
+            Parameter der Hostnameroute eine höhere Priorität als die Parameter der Pfadroute.
+            Deshalb wird, wenn man im Hostnamen und in der Pfadroute einen Kontroller definiert,
+            der Kontroller der Hostnameroute ausgewählt.
+        </para>
+    </note>
+
+    <para>
+        Wenn Programmtechnisch verkettet wird, gibt es zwei Wege das zu tun. Der erste besteht
+        darin eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zu erstellen
+        und dann die <code>chain</code> Methode mehrere Male mit allen Routen aufzurufen die
+        zusammen verkettet werden sollen. Der andere Weg besteht darin die erste Route zu nehmen,
+        z.B. eine Hostname Route, und die <code>chain</code> Methode mit der Route auf Ihr
+        aufzurufen, die angehängt werden soll. Das verändert die Hostname Route nicht, gibt aber
+        eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zurück, die dann
+        beide Routen verkettet hat:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Erstellung zweier Routen
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
+$pathRoute     = new Zend_Controller_Router_Route(...);
+
+// Erster Weg, mit Verkettung über die Chain Route
+$chainedRoute = new Zend_Controller_Router_Route_Chain();
+$chainedRoute->chain($hostnameRoute)
+             ->chain($pathRoute);
+
+// Zweiter Weg, direkt verketten
+$chainedRoute = $hostnameRoute->chain($pathRoute);
+]]>
+    </programlisting>
+
+    <para>
+        Wenn Routen miteinander verkettet werden, ist Ihr standardmäßiges Trennzeichen ein
+        Schrägstrich. Es kann Fälle geben in denen man ein anderes Trennzeichen verwenden will:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Zwei Routen erstellen
+$firstRoute  = new Zend_Controller_Router_Route('foo');
+$secondRoute = new Zend_Controller_Router_Route('bar');
+
+// Sie mit einem anderen Trennzeichen miteinander verketten
+$chainedRoute = $firstRoute->chain($secondRoute, '-');
+
+// Zusammenbauen der Route: "foo-bar"
+echo $chainedRoute->assemble();
+]]>
+    </programlisting>
+
+    <sect4 id="zend.controller.router.routes.chain.config">
+        <title>Verkettete Routen über <classname>Zend_Config</classname></title>
+
+        <para>
+            Um Routen in einer Config Datei miteinander zu verketten gibt es zusätzliche Parameter
+            für die Konfiguration von Ihnen. Der einfachere Weg ist die Verwendung des
+            <code>chains</code> Parameters. Dieser ist einfach eine Liste von Routen, die mit der
+            Eltern-Route verkettet werden. Weder die Eltern-, noch die Kind-Routen werden dem
+            Router direkt hinzugefügt sondern nur die resultierende verkettete Route. Der Name der
+            verketteten Route im Router ist der Name der Eltern-Route und der Name der Kind-Route
+            verbunden mit einem Bindestrich (-). Eine einfache Konfiguration würde in XML wie folgt
+            aussehen:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <language type="Zend_Controller_Router_Route">
+                <route>:language</route>
+                <reqs language="[a-z]{2}">
+                <chains>
+                    <index type="Zend_Controller_Router_Route_Static">
+                        <route></route>
+                        <defaults module="default" controller="index" action="index" />
+                    </index>
+                    <imprint type="Zend_Controller_Router_Route_Static">
+                        <route>imprint</route>
+                        <defaults module="default" controller="index" action="index" />
+                    </imprint>
+                </chains>
+            </language>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]>
+        </programlisting>
+
+        <para>
+            Das führt zu den drei Routen <code>www-language-index</code>,
+            <code>www-language-imprint</code> und <code>users-language-profile</code> die nur
+            basierend auf dem Hostnamen und der Route <code>misc</code> passen, was wiederum mit
+            jedem Hostnamen passt.
+        </para>
+
+        <para>
+            Der alternative Weg der Erstellung einer verketteten Route ist der über den
+            <code>chain</code> Parameter, was wiederum nur mit dem Chain-Route Typ direkt
+            verwendet werden kann, und auch im Root Level funktioniert:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Chain">
+        <route>www.example.com</route>
+    </www>
+    <language type="Zend_Controller_Router_Route">
+        <route>:language</route>
+        <reqs language="[a-z]{2}">
+    </language>
+    <index type="Zend_Controller_Router_Route_Static">
+        <route></route>
+        <defaults module="default" controller="index" action="index" />
+    </index>
+    <imprint type="Zend_Controller_Router_Route_Static">
+        <route>imprint</route>
+        <defaults module="default" controller="index" action="index" />
+    </imprint>
+
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www, language, imprint</chain>
+    </www-imprint>
+</routes>
+]]>
+        </programlisting>
+
+        <para>
+            Man kann auch den <code>chain</code> Parameter als Array übergeben statt die Routen
+            mit einem Komma zu seperieren:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www-index type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>index</chain>
+    </www-index>
+    <www-imprint type="Zend_Controller_Router_Route_Chain">
+        <chain>www</chain>
+        <chain>language</chain>
+        <chain>imprint</chain>
+    </www-imprint>
+</routes>
+]]>
+        </programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

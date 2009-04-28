@@ -1,0 +1,74 @@
+<sect1 id="zend.pdf.create">
+    <title>Tworzenie oraz ładowanie dokumentów PDF.</title>
+    <para>
+    Klasa <code>Zend_Pdf</code> reprezentuje dokument PDF i zapewnia funkcjonalność
+    na poziomie dokumentu.
+    </para>
+
+    <para>
+    W celu utworzenia nowego dokumentu trzeba utworzyć obiekt <code>Zend_Pdf</code>.
+    </para>
+
+    <para>
+    Klasa <code>Zend_Pdf</code> zapewnia także dwie statyczne metody do ładowania
+    istniejącego dokumentu PDF. Te metody to <code>Zend_Pdf::load()</code> oraz
+    <code>Zend_Pdf::parse()</code>. Obie zwracają obiekt Zend_Pdf lub wyrzucają
+    wyjątek, jeśli wystąpi błąd.
+    </para>
+
+    <example id="zend.pdf.create.example-1">
+        <title>Tworzenie nowego lub ładowanie istniejącego dokumentu PDF.</title>
+        <programlisting role="php"><![CDATA[
+...
+// Utwórz nowy dokument PDF.
+$pdf1 = new Zend_Pdf();
+
+// Załaduj dokument PDF z pliku.
+$pdf2 = Zend_Pdf::load($fileName);
+
+// Załaduj dokument PDF z łańcucha znaków.
+$pdf3 = Zend_Pdf::parse($pdfString);
+...
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+    Format pliku PDF obsługuję inkrementalne uaktualnianie dokumentu. Wtedy za
+    każdym razem gdy dokument jest uaktualniony, tworzona jest nowa wersja
+    dokumentu. Moduł Zend_Pdf umożliwia następnie ładowanie określonej wersji
+    dokumentu.
+    </para>
+    <para>
+    Wersja może być określona jako drugi parametr w metodach <code>Zend_Pdf::load()</code>
+    oraz <code>Zend_Pdf::parse()</code> lub za pomocą wywołania <code>Zend_Pdf::rollback()</code>
+        <footnote>
+            <para>
+            Metoda <code>Zend_Pdf::rollback()</code> musi być wywołana przed
+            jakimikolwiek zmianami. W przeciwnym wypadku zachowanie nie jest
+            zdefiniowane.
+            </para>
+        </footnote>
+    </para>
+
+    <example id="zend.pdf.create.example-2">
+        <title>Ładowanie określonej wersji dokumentu PDF.</title>
+        <programlisting role="php"><![CDATA[
+...
+// Załaduj poprzednią wersję dokumentu PDF.
+$pdf1 = Zend_Pdf::load($fileName, 1);
+
+// Załaduj poprzednią wersję dokumentu PDF.
+$pdf2 = Zend_Pdf::parse($pdfString, 1);
+
+// Załaduj pierwszą wersję dokumentu PDF.
+$pdf3 = Zend_Pdf::load($fileName);
+$revisions = $pdf3->revisions();
+$pdf3->rollback($revisions - 1);
+...
+]]>
+        </programlisting>
+    </example>
+
+
+</sect1>

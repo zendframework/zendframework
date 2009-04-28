@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.layout.quickstart">
+    <title>Zend_Layout Schnellstart</title>
+
+    <para>
+        Es gibt zwei primäre Verwendungen für <classname>Zend_Layout</classname>: Mit dem Zend Framework MVC, und ohne.
+    </para>
+
+    <sect2 id="zend.layout.quickstart.layouts">
+        <title>Layout Skripte</title>
+
+        <para>
+            In beiden Fällen, müssen trotzdem Layout Skripte erstellt werden. Layout Sktipte verwenden einfach
+            Zend_View (oder welche View Implementation auch immer verwendet wird). Layout Variablen werden
+            mit einem <classname>Zend_Layout</classname>
+            <link linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> registriert, und es kann
+            auf Sie über den Platzhalter Helfer zugegriffen werden oder dadurch das Sie als Objekt Eigenschaften
+            vom Layout Objekt über den Layout Helfer geholt werden.
+        </para>
+
+        <para>
+            Als Beispiel:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Meine Seite</title>
+</head>
+<body>
+<?php
+    // Holt den 'content' Schlüssel durch Verwendung des Layout Helfers:
+    echo $this->layout()->content;
+
+    // Holt den 'foo' Schlüssel durch Verwendung des Platzhalter Helfers:
+    echo $this->placeholder('Zend_Layout')->foo;
+
+    // Holt das Layout Objekt und empfängt verschiedene Schlüssel von Ihm:
+    $layout = $this->layout();
+    echo $layout->bar;
+    echo $layout->baz;
+?>
+</body>
+</html>
+]]>
+        </programlisting>
+
+        <para>
+            Weil <classname>Zend_Layout</classname> <classname>Zend_View</classname> für die Darstellung verwendet, kann auch jeder
+            registrierte View Helfer verwendet werden, und auch auf jede zuvor zugeordnete View Variable kann
+            zugegriffen werden. Sehr hilfreich sind die verschiedenen
+            <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfer</link>, da diese das
+            Empfangen von Inhalt für einen Bereich wie die &lt;head&gt; Sektion, Navigation usw. erlauben:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headScript() ?>
+    <?php echo $this->headStyle() ?>
+</head>
+<body>
+    <?php echo $this->render('header.phtml') ?>
+
+    <div id="nav"><?php echo $this->placeholder('nav') ?></div>
+
+    <div id="content"><?php echo $this->layout()->content ?></div>
+
+    <?php echo $this->render('footer.phtml') ?>
+</body>
+</html>
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.mvc">
+        <title>Zend_Layout mit dem Zend Framework MVC verwenden</title>
+
+        <para>
+            <classname>Zend_Controller</classname> bietet ein reiches Set von Funktionalitäten für Erweiterung mit seinen
+            <link linkend="zend.controller.plugins">Front Kontroller Plugins</link> und
+            <link linkend="zend.controller.actionhelpers">Action Kontroller Helfern</link>.
+            <classname>Zend_View</classname> hat auch <link linkend="zend.view.helpers">Helfer</link>.
+            <classname>Zend_Layout</classname> nimmt Vorteile wahr von diesen verschiedenen Erweiterungspunkten wenn es
+            mit den MVC Komponenten verwendet wird.
+        </para>
+
+        <para>
+            <classname>Zend_Layout::startMvc()</classname> erstellt eine Instanz von <classname>Zend_Layout</classname> mit jeder
+            optionalen Konfiguration die angegeben wird. Anschließend wird ein Front Kontroller Plugin
+            registriert das das Layout mit jedem Anwendungsinhalt darstellt sobald die Dispatch Schleife
+            fertiggestellt ist, und registriert einen Action Helfer der den Zugriff auf das Layout Objekt
+            vom Action Kontroller aus gestattet. Zusätzlich kann jederzeit die Layout Instanz vom View
+            Skript geholt werden indem der <code>layout</code> View Helfer verwendet wird.
+        </para>
+
+        <para>
+            Zuerst sehen wir uns an wie Zend_Layout initialisiert wird um es mit dem MVC zu verwenden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// In der Bootstrap Datei:
+Zend_Layout::startMvc();
+]]>
+        </programlisting>
+
+        <para>
+            <code>startMvc()</code> kann ein optionales Array von Optionen oder ein <classname>Zend_Config</classname>
+            Objekt entgegennehmen um die Instanz anzupassen; diese Optionen werden detailiert in
+            <xref linkend="zend.layout.options" /> beschrieben.
+        </para>
+
+        <para>
+            In einem Action Controller, kann anschließend auf die Layout Instanz als Action Helfer zugegriffen
+            werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Layouts in dieser Aktion deaktivieren:
+        $this->_helper->layout->disableLayout();
+    }
+
+    public function bazAction()
+    {
+        // Ein anderes Layout Skript in dieser Action verwenden:
+        $this->_helper->layout->setLayout('foobaz');
+    };
+}
+]]>
+        </programlisting>
+
+        <para>
+            Im View Skript kann dann auf das Layout Objekt über den <code>layout</code> View Helfer zugegriffen
+            werden. Dieser View Helfer ist etwas anders als andere da er keine Argumente entgegennimmt und ein
+            Objekt statt einem Stringwert zurückgibt. Das erlaubt sofortige Methodenaufrufe auf dem Layout
+            Objekt:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->layout()->setLayout('foo'); // alternatives Layout setzen
+]]>
+        </programlisting>
+
+        <para>
+            Die im MVC registrierte <classname>Zend_Layout</classname> Instanz kann jederzeit über die statische
+            <code>getMvcInstance()</code> Methode geholt werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Gibt null zurück wenn startMvc() nicht zuerst aufgerufen wurde
+$layout = Zend_Layout::getMvcInstance();
+]]>
+        </programlisting>
+
+        <para>
+            Letztendlich hat das Front Controller Plugin von <classname>Zend_Layout</classname> ein wichtiges Feature
+            zusätzlich zur Darstellung des Layouts: Es empfängt alle benannte Segmente vom Antwortobjekt und
+            ordnet diese als Layout Variablen zu, wobei das 'default' Segment der 'content' Variable zugeordnet
+            wird. Das erlaubt es auf den Anwendungsinhalt zugreifen zu können und es in View Skripten
+            darzustellen.
+        </para>
+
+        <para>
+            Als Beispiel, nehmen wir an das der Code zuerst <code>FooController::indexAction()</code>
+            auslöst, welches einige Inhalte im standardmäßigen Antwortobjekt darstellt, und dann zu
+            <code>NavController::menuAction()</code> weiterleitet, welches Inhalt im 'nav' Antwortobjekt
+            darstellt. Letztendlich wird auf <code>CommentController::fetchAction()</code> weitergeleitet und
+            einige Kommentare geholt, aber diese werden auch im standard Antwortobjekt dargestellt. (was
+            Inhalt zu diesem Segment anfügt). Das View Skript kann dann jedes separat darstellen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<body>
+    <!-- Darstellung von /nav/menu -->
+    <div id="nav"><?php echo $this->layout()->nav ?></div>
+
+    <!-- Darstellung von /foo/index + /comment/fetch -->
+    <div id="content"><?php echo $this->layout()->content ?></div>
+</body>
+]]>
+        </programlisting>
+
+        <para>
+            Dieses Feature ist teilweise nützlich wenn es in Verbindung mit dem ActionStack
+            <link linkend="zend.controller.actionhelpers.actionstack">Action Helfer</link> und
+            <link linkend="zend.controller.plugins.standard.actionstack">Plugin</link> verwendet wird, welche
+            verwendet werden können um einen Stack von Aktionen zu definieren der durchgelaufen wird, und welcher
+            angepasste Seiten erstellt.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.standalone">
+        <title>Zend_Layout als eienständige Komponente verwenden</title>
+
+        <para>
+            Als eigenständige Komponente bietet Zend_Layout nicht annähernd so viele Features oder so viel
+            Bequemlichkeit wie wenn es mit MVC verwendet wird. Trotzdem hat es zwie grundsätzliche Vorteile:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Abgrenzung von Layout Variablen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Isolation vom Layout View Skript von anderen View Skripten.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Wenn es als eigenständige Komponente verwendet wird, muß einfach das Layout Objekt instanziiert
+            werden, die unterschiedlichen Zugriffsmethoden verwendet werden um Stati zu setzen, Variablen als
+            Objekt Eigenschaften gesetzt, und das Layout dargestellt werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$layout = new Zend_Layout();
+
+// Einen Layout Skript Pfad setzen:
+$layout->setLayoutPath('/path/to/layouts');
+
+// Einige Variablen setzen:
+$layout->content = $content;
+$layout->nav     = $nav;
+
+// Ein unterschiedliches Layout Skript auswählen:
+$layout->setLayout('foo');
+
+// Letztendlich das Layout darstellen
+echo $layout->render();
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.example">
+        <title>Beispiel Layout</title>
+
+        <para>
+            Machmal ist ein Bild mehr Wert als tausend Wörter. Das folgende ist ein Beispiel Layout Skript
+            das zeigt wie alles zusammenkommen könnte.
+        </para>
+
+         <para>
+            <inlinegraphic align="center" valign="middle"
+                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+        </para>
+
+        <para>
+            Die aktuelle Reihenfolge der Elemente kann variieren, abhängig vom CSS das eingestellt wurde;
+            zum Beispiel, wenn absolute Positionen verwendet werden, kann es möglich sein das die Navigation
+            später im Dokument angezeigt wird, aber immer noch ganz oben gezeigt wird; das selbe könnte
+            für die Sidebar oder den Header gelten. Der aktuelle Mechanismum des Holens von Inhalt bleibt
+            trotzdem der selbe.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

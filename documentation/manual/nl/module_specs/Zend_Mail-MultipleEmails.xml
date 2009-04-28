@@ -1,0 +1,28 @@
+<sect1 id="zend.mail.multiple-emails">
+    <title>Meerdere e-mails sturen via een SMTP verbinding</title>
+    <para>
+        Standaard wordt een SMTP verbinding gemaakt voor elke e-mail die wordt gestuurd. Indien je meerdere
+        e-mails via eenzelfde SMTP verbinding wil sturen moet je zelf <code>connect()</code> afhandelen. Als de
+        transportwijze reeds vastgesteld is voor <code>send()</code> word opgeroepen zal dat transport
+        worden gebruikt en de verbinding zal niet afgesloten worden:
+    </para>
+    <example>
+        <title>Meerdere e-mails sturen via een SMTP verbinding</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// bericht maken...
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
+$tr->connect();
+for ($i = 0; $i < 5; $i++) {
+    $mail->send();
+}
+$tr->disconnect();
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

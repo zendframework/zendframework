@@ -1,0 +1,26 @@
+<sect1 id="zend.mail.adding-recipients">
+    <title>Inserimento dei destinatari</title>
+    <para>
+        E' possibile aggiungere i destinatari in tre modi:
+        <itemizedlist>
+            <listitem>
+                <para><code>addTo()</code>: aggiunge un destinatario all'e-mail con intestazione "a"</para>
+            </listitem>
+            <listitem>
+                <para><code>addCc()</code>: aggiunge un destinatario all'e-mail con intestazione "Cc" (in copia)</para>
+            </listitem>
+            <listitem>
+                <para><code>addBcc()</code>: aggiunge un destinatario all'e-mail con intestazione "Ccn" (in copia nascosta)</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <title>Parametri aggiuntivi</title>
+        <para>
+            I metodi <code>addTo()</code> e <code>addCc()</code> accettano un secondo parametro opzionale utile per indicare il nome del destinatario in formato leggibile.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

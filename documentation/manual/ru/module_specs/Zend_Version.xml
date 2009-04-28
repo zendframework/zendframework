@@ -1,0 +1,46 @@
+<sect1 id="zend.version.reading">
+
+    <title>Получение версии Zend Framework<!--Reading the Zend Framework Version--></title>
+
+    <para>
+        Константа класса <code>Zend_Version::VERSION</code> содержит строку,
+        которая показывает номер текущей версии Zend Framework. Например,
+        "0.9.0beta".
+<!--
+        The class constant <code>Zend_Version::VERSION</code>
+        contains a string that identifies the current version
+        number of Zend Framework.  For example, "0.9.0beta".
+-->
+    </para>
+
+    <para>
+        Статический метод <code>Zend_Version::compareVersion($version)</code>
+        основан на PHP-функции <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Метод возвращает -1, если версия <code>$version</code>
+        более поздняя, чем текущая версия Zend Framework; 0, если они
+        одинаковые и +1, если версия более ранняя, чем текущая.
+<!--
+        The static method <code>Zend_Version::compareVersion($version)</code>
+        is based on the PHP function
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        The method returns -1 if the specified <code>$version</code>
+        is older than the Zend Framework version, 0 if they are the same,
+        and +1 if the specified <code>$version</code> is newer than the
+        Zend Framework version.
+-->
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>Пример использования метода compareVersion()<!--Example of compareVersion() method--></title>
+        <programlisting role="php"><![CDATA[<?php
+
+// возвращает -1, 0 или 1
+$cmp = Zend_Version::compareVersion('1.0.0');
+
+?>]]></programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

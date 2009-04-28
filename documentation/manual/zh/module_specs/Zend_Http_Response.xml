@@ -1,0 +1,69 @@
+<sect1 id="zend.http.response">
+    <title>Zend_Http_Response</title>
+
+    <sect2 id="zend.http.response.introduction">
+        <title>简介</title>
+        <para>
+            对于由<xref linkend="zend.http.client" />返回的应答(Response)信息，<code>Zend_Http_Response</code>
+            可以提供简单的访问方式。 它提供一组友好的方法来获得从请求返回的应答信息:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>isError()</code>: 如果收到HTTP出错状态的代码,返回TRUE, 否则返回FALSE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>isSuccessful()</code>: 如果得到HTTP请求成功的状态代码,返回TRUE, 否则返回FALSE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>isRedirect()</code>: 如果得到HTTP重定向的状态代码,返回TRUE, 否则返回FALSE.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>getStatus()</code>: 返回HTTP请求的状态代码.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>getHeaders()</code>: 以数组的形式返回HTTP请求头部信息的字符串.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>getBody()</code>: 返回HTTP正文内容(字符串).
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <example>
+            <title>处理HTTP应答</title>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Http/Client.php';
+try {
+    $http = new Zend_Http_Client('http://example.org');
+    $response = $http->get();
+    if ($response->isSuccessful()) {
+        echo $response->getBody();
+    } else {
+        echo "<p>发生错误</p>\n";
+        echo "HTTP Status: " . $response->getStatus() . "\n";
+        echo "HTTP Headers:\n";
+        $responseHeaders = $response->getHeaders();
+        foreach ($responseHeaders as $responseHeaderName => $responseHeaderValue) {
+            echo "$responseHeaderName: $responseHeaderValue\n";
+        }
+    }
+} catch (Zend_Http_Client_Exception $e) {
+    echo '<p>An error occurred (' .$e->getMessage(). ')</p>';
+}
+?>]]></programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

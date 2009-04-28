@@ -1,0 +1,244 @@
+<sect1 id="zend.auth.adapter.http">
+
+    <title>HTTP 认证适配器</title>
+
+    <sect2 id="zend.auth.adapter.http.introduction">
+
+        <title>简介</title>
+
+        <para>
+            <code>Zend_Auth_Adapter_Http</code>提供一个大部分符合<ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>的<ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">基本</ulink> 和 <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">摘要</ulink> HTTP 认证。摘要认证是一个认证的方法，它在基本认证的基础上做了改进，不需要在网络上传输明文密码。
+        </para>
+
+        <para>
+            <emphasis role="strong">主要特性：</emphasis>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        支持基本和摘要认证。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        对所有支持的 schemes 发出请求，所以客户端可以响应任何它所支持的 scheme。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        支持代理认证。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        包括支持文本文件认证和提供一个接口来支持其它资源认证，例如数据库。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            还有一些显著的 RFC-2617 特性没有实现：
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Nonce 跟踪，它将考虑 "stale" 支持，和增强的重放供给保护。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        带完整性检查的认证，或 "auth-int"。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        HTTP 认证信息头。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.design_overview">
+
+        <title>设计回顾</title>
+
+        <para>
+            这个适配器包括两个子组件，HTTP authentication类本身和所谓的 "Resolvers"。HTTP authentication类封装了实现基本和摘要认证的逻辑。它使用Resolver在数据存储（缺省是文本文件）中查找客户的身份并取出证书。"resolved" 的证书和客户的输入相比较来决定认证是否成功。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.configuration_options">
+
+        <title>配置选项</title>
+
+        <para>
+            <code>Zend_Auth_Adapter_Http</code> 类需要一个配置数组传递给它的构造器。有若干个配置选项有效，其中一些是必需的：
+            <table id="zend.auth.adapter.configuration_options.table">
+                <title>配置选项</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>选项名称</entry>
+                            <entry>是否必须</entry>
+                            <entry>描述</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><code>accept_schemes</code></entry>
+                            <entry>是</entry>
+                            <entry>
+                                决定适配器从客户端接受哪个认证schemes。必须是包括<code>'basic'</code> 和/或 <code>'digest'</code>的空格分隔的列表。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>realm</code></entry>
+                            <entry>是</entry>
+                            <entry>
+                                设置认证领域；在给定的领域里用户名必须是唯一的。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>digest_domains</code></entry>
+                            <entry>是，当<code>'accept_schemes'</code> 包含 <code>'digest'</code></entry>
+                            <entry>
+                               相同认证信息是有效的空格分隔的URIs列表。 URIs不需要都只想同一个服务器。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>nonce_timeout</code></entry>
+                            <entry>是，当<code>'accept_schemes'</code> 包含 <code>'digest'</code></entry>
+                            <entry>
+                                设置nonce有效的秒数。参见下面的注解。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>proxy_auth</code></entry>
+                            <entry>否</entry>
+                            <entry>
+                                缺省是 Disabled 。Enable 后执行代理认证而不是正常的源服务器认证。
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+        <note>
+            <para>
+                当前的<code>nonce_timeout</code>实现有一些有趣的副作用。这个设置用来决定给定的nonce的有效寿命，或者客户端的认证信息多长时间被有效地接受。目前，如果它被设置为3600（例如），它将导致适配器准点地每个小时提示客户端提供新的证书。一旦nonce跟踪和stale支持实现，这在将来的版本中被解决。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.http.resolvers">
+
+        <title>Resolvers</title>
+
+        <para>
+            Resolver的作用是接受用户名和领域，并返回证书值。基本认证期望接收用户密码的Base64编码版本。摘要认证期望接收用户的用户名，领域和密码（用冒号分隔）的hash。当前，唯一支持的hash算法是MD5。
+        </para>
+
+        <para>
+            <code>Zend_Auth_Adapter_Http</code> 依靠对象实现 <code>Zend_Auth_Adapter_Http_Resolver_Interface</code>。适配器中包含一个文本文件resolver类，但任何其它种类的resolver可以通过实现resolver接口来创建。
+        </para>
+
+        <sect3 id="zend.auth.adapter.http.resolvers.file">
+
+            <title>文件 Resolver</title>
+
+            <para>
+                文件resolver是一个非常简单的类。它有一个单个的属性指定一个文件名，它也可以被传递给构造器。它的<code>resolve()</code>方法遍历文本文件，用匹配用户名和领域来搜索一行。文本文件的格式和Apache htpasswd文件类似： <programlisting><![CDATA[
+<username>:<realm>:<credentials>\n
+]]>
+</programlisting>每行包含三个字段 - 用户名，领域 和 证书 - 用冒号分隔。证书字段对文件resolver不透明；它被简单地不做修改地返回给调用者。所以，这同样的文件格式对基本和摘要认证都适合。对基本认证，证书字段应该是Base64编码的用户的密码。对摘要认证，它应该是上述的MD5 hash。
+            </para>
+
+            <para>
+                有两个同等简单的方法创建文件 Resolver:
+                <programlisting role="php"><![CDATA[
+$path     = 'files/passwd.txt';
+$resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
+]]>
+                </programlisting>
+                或者
+                <programlisting role="php"><![CDATA[
+$path     = 'files/passwd.txt';
+$resolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$resolver->setFile($path);
+]]>
+                </programlisting>
+                如果给定的路径是空的或不可读，将抛出一个异常。
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.http.basic_usage">
+
+        <title>基本用法</title>
+
+        <para>
+            首先，建立一个带有必需的配置值得数组：
+            <programlisting role="php"><![CDATA[
+$config = array(
+    'accept_schemes' => 'basic digest',
+    'realm'          => 'My Web Site',
+    'digest_domains' => '/members_only /my_account',
+    'nonce_timeout'  => 3600,
+);
+]]>
+            </programlisting>
+            这个数组将使适配器接收基本或者摘要认证，并将请求对所有在<code>/members_only</code> 和<code>/my_account</code>之下的区域认证访问。领域值通常在浏览器中密码对话框中显示。<code>nonce_timeout</code>，当然，会有上述的行为。
+        </para>
+
+        <para>
+            下一步, 创建 Zend_Auth_Adapter_Http 对象：
+            <programlisting role="php"><![CDATA[
+$adapter = new Zend_Auth_Adapter_Http($config);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            因为我们对基本和摘要认证都支持，所以我们需要两个不同的resolver对象。注意这仅仅简单地是两个不同的类：
+            <programlisting role="php"><![CDATA[
+$basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$basicResolver->setFile('files/basicPasswd.txt');
+
+$digestResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$digestResolver->setFile('files/digestPasswd.txt');
+
+$adapter->setBasicResolver($basicResolver);
+$adapter->setDigestResolver($digestResolver);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            最后，我们执行认证。为了完成认证，适配器对请求（Request）和响应（Response）都需要一个reference：
+            <programlisting role="php"><![CDATA[
+assert($request instanceof Zend_Controller_Request_Http);
+assert($response instanceof Zend_Controller_Response_Http);
+
+$adapter->setRequest($request);
+$adapter->setResponse($response);
+
+$result = $adapter->authenticate();
+if (!$result->isValid()) {
+    // 错误的 userame/password，或者取消了密码提示
+}
+]]>
+            </programlisting>
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

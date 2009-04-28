@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.view.introduction">
+
+    <title>導入</title>
+
+    <para>
+        <classname>Zend_View</classname> は、モデル - ビュー - コントローラ パターンにおける
+        「ビュー」として働くクラスです。
+        ビューのスクリプトを、モデルおよびコントローラから分離するために存在します。
+        このクラスでは、
+        ヘルパーシステム、出力のフィルタリングおよび変数のエスケープ機能を提供します。
+    </para>
+
+    <para>
+        <classname>Zend_View</classname> は、テンプレートシステムに対しては特にこだわりはありません。
+        テンプレート言語として PHP を使用するか、
+        あるいは他のテンプレートエンジンのインスタンスを作成して、
+        それをビュースクリプトの中で操作することができます。
+    </para>
+
+    <para>
+        基本的に、<classname>Zend_View</classname> を使用する際には 2 つの段階をとることになります。
+
+        1.  コントローラスクリプトが <classname>Zend_View</classname> のインスタンスを作成し、
+        そのインスタンスに変数を代入します。
+
+        2. コントローラが <classname>Zend_View</classname> に対して適切なビューをレンダリングするように指示し、
+        それによってコントローラがビュースクリプトを制御します。
+        そこでビューの出力が作成されます。
+    </para>
+
+    <sect2 id="zend.view.introduction.controller">
+
+        <title>コントローラスクリプト</title>
+
+        <para>
+            単純な例として、本の一覧を扱うコントローラがあることにしましょう。
+            そのデータをビューに表示することを考えます。
+            コントローラスクリプトは、おそらくこのようになるでしょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// 本の著者およびタイトルを取得するためにモデルを使用します
+$data = array(
+    array(
+        'author' => 'Hernando de Soto',
+        'title' => 'The Mystery of Capitalism'
+    ),
+    array(
+        'author' => 'Henry Hazlitt',
+        'title' => 'Economics in One Lesson'
+    ),
+    array(
+        'author' => 'Milton Friedman',
+        'title' => 'Free to Choose'
+    )
+);
+
+// 本のデータを Zend_View インスタンスに代入します
+Zend_Loader::loadClass('Zend_View');
+$view = new Zend_View();
+$view->books = $data;
+
+// "booklist.php" というビュースクリプトをレンダリングします
+echo $view->render('booklist.php');
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.view">
+
+        <title>ビュースクリプト</title>
+
+        <para>
+            次に必要なのは、関連付けるビュースクリプト "booklist.php" です。
+            これは一般的な PHP スクリプトと同じですが、ひとつだけ違いがあります。
+            <classname>Zend_View</classname> インスタンスのスコープで実行されるということです。
+            つまり $this への参照は、<classname>Zend_View</classname>
+            のインスタンスのプロパティやメソッドを指すことになるのです
+            (コントローラによってインスタンスに代入された変数は、
+            <classname>Zend_View</classname> インスタンスの public プロパティとなります)。
+            したがって、基本的なビュースクリプトはこのようになります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+ if ($this->books): ?>
+
+    <!-- 本の一覧 -->
+    <table>
+        <tr>
+            <th>著者</th>
+            <th>タイトル</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>表示する本がありません。</p>
+
+<?php endif;?>
+]]>
+        </programlisting>
+
+        <para>
+            変数の出力時に、"escape()"
+            メソッドでエスケープ処理をしていることに注意しましょう。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.options">
+        <title>オプション</title>
+
+        <para>
+            <classname>Zend_View</classname> のオプションを設定すると、
+            ビュースクリプトの振る舞いを変更することができます。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>basePath</code> は
+                    スクリプトやヘルパー、そしてフィルタを配置する基底パスを指定します。
+                    次のようなディレクトリ構成を想定しています。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+base/path/
+    helpers/
+    filters/
+    scripts/
+]]>
+                </programlisting>
+
+                <para>
+                    これを設定するには <code>setBasePath()</code> か
+                    <code>addBasePath()</code>、あるいはコンストラクタのオプション
+                    <code>basePath</code> を使用します。
+                </para>
+            </listitem>
+
+            <listitem><para>
+                <code>encoding</code> は <code>htmlentities()</code> や
+                <code>htmlspecialchars()</code> などで使用する文字エンコーディングを表します。
+                デフォルトは ISO-8859-1 (latin1) です。
+                <code>setEncoding()</code> か、コンストラクタのオプション
+                <code>encoding</code> で設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>escape</code> は <code>escape()</code>
+                で使用するコールバックを表します。<code>setEscape()</code>
+                か、コンストラクタのオプション <code>escape</code>
+                で設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>filter</code> は、ビュースクリプトをレンダリングした後で使用するフィルタを表します。
+                <code>setFilter()</code> か <code>addFilter()</code>、
+                あるいはコンストラクタのオプション <code>filter</code>
+                で設定します。
+            </para></listitem>
+
+            <listitem><para>
+                <code>strictVars:</code> は、初期化していない変数に <classname>Zend_View</classname>
+                からアクセスしようとした際に notice や warning を発生させるようにします。
+                <code>strictVars(true)</code> か、あるいはコンストラクタのオプション
+                <code>strictVars</code> で設定します。
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.shortTags">
+        <title>ビュースクリプトでの短いタグ</title>
+
+        <para>
+            我々が用意する例やドキュメントでは、PHP の短いタグ
+            <code>&lt;?</code> と <code>&lt;?=</code> を用いています。
+            さらに、<ulink
+                url="http://www.php.net/manual/ja/control-structures.alternative-syntax.php">
+                制御構造に関する別の構文</ulink>
+            も使用しています。
+            これらはビュースクリプトを書く際に便利なものです。
+            より簡潔に書くことができ、文を 1 行にまとめられるからです。
+        </para>
+
+        <para>
+            多くの開発者は、可搬性などを考慮して完全なタグの使用を好むと言われています。
+            実際、php.ini.recommended ファイルでは
+            <code>short_open_tag</code> が無効になっていますし、
+            ビュースクリプト内で XML のテンプレートを使用する場合など、
+            短い形式の開始タグは検証エラーの元となります。
+        </para>
+
+        <para>
+            さらに、もし短いタグが使用できない設定のときに短いタグを使用してしまうと、
+            ビュースクリプトでエラーが発生したり
+            コードの内容がユーザに丸見えになってしまったりします。
+        </para>
+
+        <para>
+            後者の場合のように「短いタグを使いたいけれど設定でそれが無効になっている」
+            場合は、次のいずれかの方法を使用します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    短いタグを、<code>.htaccess</code> ファイルで有効にします。
+                </para>
+
+                <programlisting role="apache"><![CDATA[
+php_value "short_open_tag" "on"
+]]>
+</programlisting>
+
+                <para>
+                    これは、<code>.htaccess</code>
+                    ファイルの作成と使用を許可されている場合にのみ可能です。
+                    この項目は、<code>httpd.conf</code> ファイルに記述することもできます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    オプションのストリームラッパーを有効にして、
+                    短いタグを逐次長いタグに変換します。
+                </para>
+
+        <programlisting role="php"><![CDATA[
+$view->setUseStreamWrapper(true);
+]]>
+        </programlisting>
+
+                <para>
+                    これは、<classname>Zend_View_Stream</classname>
+                    をビュースクリプトのストリームラッパーとして登録します。
+                    そして、まるで短いタグが有効になっているかのようにコードを動作させることができます。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>ビューストリームラッパーによるパフォーマンスの低下</title>
+
+            <para>
+                ストリームラッパーを使用すると、アプリケーションのパフォーマンスは
+                <emphasis>おそらく</emphasis> 低下するでしょう。
+                しかし、実際のところどれくらい低下するのかについては
+                はっきりと数値化することはできません。
+                短いタグを有効にしてしまうか、
+                スクリプトを書き換えてすべて完全なタグにしてしまう、
+                あるいはコンテンツのキャッシュをうまく行うなどの対策を推奨します。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.accessors">
+        <title>ユーティリティメソッド</title>
+
+        <para>
+            通常は、<code>assign()</code> と <code>render()</code>、
+            あるいはフィルタ、ヘルパー、スクリプトのパス用の設定メソッドだけで十分事足りるでしょう。
+            しかし、<classname>Zend_View</classname> を独自に拡張したい場合や
+            その内部にアクセスしたい場合のために、さらにいくつかのメソッドを用意しています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getVars()</code> は、設定されているすべての変数を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearVars()</code> は、すべての変数の値を消去します。
+                    ビュースクリプトを再利用する際に、
+                    これまで使用していた変数を残しておきたいときなどに便利です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPath($script)</code>
+                    は、指定したビュースクリプトのパスを取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPaths()</code>
+                    は、登録されているすべてのスクリプトパスを取得します。
+                    script paths.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPath($helper)</code>
+                    は、指定したヘルパークラスのパスを取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPaths()</code>
+                    は、登録されているすべてのヘルパーパスを取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPath($filter)</code>
+                    は、指定したフィルタクラスのパスを取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPaths()</code>
+                    は、登録されているすべてのフィルタパスを取得します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

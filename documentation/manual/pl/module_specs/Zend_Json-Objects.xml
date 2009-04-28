@@ -1,0 +1,46 @@
+<sect1 id="zend.json.objects">
+    <title>Obiekty JSON</title>
+    <para>
+        Kiedy kodujemy obiekt PHP jako JSON, wszystkie publiczne właściwości
+        tego obiektu zostaną zakodowane w obiekcie JSON.
+    </para>
+    <para>
+        JSON nie pozwala na referencje obiektów, więc musisz uważać abyś
+        nie próbował kodować obiektów z rekurencyjnymi referencjami. Jeśli masz
+        problemy z rekurencją, metody <code>Zend_Json::encode()</code> oraz
+        <code>Zend_Json_Encoder::encode()</code> przyjmują opcjonalny drugi
+        parametr, określający czy ma być sprawdzana rekurencja; jeśli obiekt
+        jest kodowany drugi raz, zostanie wyrzucony wyjątek.
+    </para>
+    <para>
+        Odkodowanie obiektów JSON sprawia dodatkową trudność, ponieważ obiekty
+        Javascript prawie dokładnie odpowiadają tablicom asocjacyjnym PHP.
+        Jedni proponują aby przekazywać identyfikator klasy, a następnie
+        tworzyć instancję obiektu tej klasy i wypełniać ją parami klucz/wartość
+        obiektu JSON; inni ostrzegają, że mogłoby to być istotną luką w bezpieczeństwie.
+    </para>
+    <para>
+        Domyślnie <code>Zend_Json</code> odkoduje obiekty JSON jako tablice
+        asocjacyjne. Jednak jeśli chcesz odebrać obiekt, możesz to określić
+        w ten sposób:
+    </para>
+    <programlisting role="php"><![CDATA[
+// Odkoduj obiekty JSON jako obiekty PHP
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
+]]>
+    </programlisting>
+    <para>
+        Wszystkie dekodowane obiekty są zwracane jako obiekty klasy
+        <code>StdClass</code> z właściwościami odpowiadającymi parom
+        klucz/wartość z obiektu JSON.
+    </para>
+    <para>
+        Zalecane jest aby to programista decydował o tym w jaki sposób mają być
+        odkodowane obiekty JSON. Jeśli powinien być utworzony obiekt konkretnego
+        typu, może być on utworzony w kodzie aplikacji, a następnie wypełniony
+        wartościami odkodowanymi za pomocą <code>Zend_Json</code>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

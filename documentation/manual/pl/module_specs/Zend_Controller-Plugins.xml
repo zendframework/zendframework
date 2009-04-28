@@ -1,0 +1,207 @@
+<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Wtyczki</title>
+
+    <sect2 id="zend.controller.plugins.introduction">
+        <title>Wprowadzenie</title>
+
+        <para>
+            Architektura kontrolera zawiera także system wtyczek, który pozwala
+            programiście na wykonanie własnego kodu, gdy następują określone
+            zdarzenia w trakcie trwania procesu kontrolera. Kontroler frontowy
+            używa agenta wtyczek jako rejeestru dla wtyczek programisty,
+            a agent wtyczek jest odpowiedzialny za to, że metody zdarzeń są
+            wywoływane dla każdej wtyczki zarejestrowanej w kontrolerze
+            frontowym.
+        </para>
+
+        <para>
+            Metody zdarzeń są zdefiniowane w klasie abstrakcyjnej
+            <code>Zend_Controller_Plugin_Abstract</code>, z której dziedziczy
+            każda klasa wtyczki:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Metoda <code>routeStartup()</code> jest wywoływana zanim
+                    <code>Zend_Controller_Front</code> wywoła <link
+                        linkend="zend.controller.router">router</link> w celu
+                    sprawdzenia żądania pod kątem zarejestrowanych tras.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metoda <code>routeShutdown()</code> jest wywoływana po tym
+                    jak <link linkend="zend.controller.router">router</link>
+                    zakończy routing żądania.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metoda <code>dispatchLoopStartup()</code> jest uruchamiana
+                    zanim <code>Zend_Controller_Front</code> zacznie pętlę
+                    uruchamiania.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metoda <code>preDispatch()</code> jest wywoływana zanim
+                    akcja zostanie uruchomiona przez
+                    <link linkend="zend.controller.dispatcher">obiekt
+                    uruchamiający</link>. Pozwala to na stworzenie
+                    funkcjonalności proxy lub filtra. Nadpisując żądanie i
+                    resetując flagę uruchomienia (za pomocą
+                    <code>Zend_Controller_Request_Abstract::setDispatched(false)</code>),
+                    obecna akcja może być pominięta lub zastąpiona.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>postDispatch()</code> jest wywoływana po tym jak akcja
+                    zostanie uruchomiona przez
+                    <link linkend="zend.controller.dispatcher">obiekt
+                        uruchamiający</link>. Pozwala to na stworzenie
+                    funkcjonalności proxy lub filtra. Nadpisując żądanie i
+                    resetując flagę uruchomienia (za pomocą
+                    <code>Zend_Controller_Request_Abstract::setDispatched(false)</code>),
+                    można określić nową akcję do uruchomienia.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metoda <code>dispatchLoopShutdown()</code> jest wywoływana
+                    po tym jak <code>Zend_Controller_Front</code> zakończy
+                    pętlę uruchamiania.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.writing">
+        <title>Pisanie wtyczek</title>
+
+        <para>
+            W celu napisania klasy wtyczki, w prosty sposób rozszerz klasę
+            abstrakcyjną <code>Zend_Controller_Plugin_Abstract</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    // ...
+}
+]]>
+        </programlisting>
+
+        <para>
+            Żadna z metod klasy <code>Zend_Controller_Plugin_Abstract</code> nie
+            jest abstrakcyjna, co oznacza, że nie jest konieczne implementowanie
+            wszystkich dostępnych metod zdarzeń opisanych powyżej. Autor wtyczki
+            może zaimplementować tylko te metody zdarzeń, które są mu
+            rzeczywiście potrzebne.
+        </para>
+        <para>
+            <code>Zend_Controller_Plugin_Abstract</code> udostępnia także
+            obiekty żądania i odpowiedzi wtyczkom kontrolera za pomocą metod
+            <code>getRequest()</code> oraz <code>getResponse()</code>, odpowiednio.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.using">
+        <title>Użycie wtyczek</title>
+        <para>
+            Klasy wtyczek są rejestrowane za pomocą metody
+            <code>Zend_Controller_Front::registerPlugin()</code> i mogą być
+            rejestrowane w dowolnym momencie. Poniższy kod pokazuje w jaki
+            sposób wtyczka może być użyta przez kontroler:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę routeStartup()</p>\n");
+    }
+
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę routeShutdown()</p>\n");
+    }
+
+    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę dispatchLoopStartup()</p>\n");
+    }
+
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę preDispatch()</p>\n");
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę postDispatch()</p>\n");
+    }
+
+    public function dispatchLoopShutdown()
+    {
+        $this->getResponse()->appendBody("<p>Wywołano metodę dispatchLoopShutdown()</p>\n");
+    }
+}
+
+$front = Zend_Controller_Front::getInstance();
+$front->setControllerDirectory('/path/to/controllers')
+      ->setRouter(new Zend_Controller_Router_Rewrite())
+      ->registerPlugin(new MyPlugin());
+$front->dispatch();
+]]>
+        </programlisting>
+
+        <para>
+           Zakładając, że żadne wywołana akcja nie wyświetliła żadnych danych, i
+           że tylko jedna akcja została wywołana, to funkcjonalność powyższej
+           wtyczki spowoduje wyświetlenie takich danych:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<p>Wywołano metodę routeStartup()</p>
+<p>Wywołano metodę routeShutdown()</p>
+<p>Wywołano metodę dispatchLoopStartup()</p>
+<p>Wywołano metodę preDispatch()</p>
+<p>Wywołano metodę postDispatch()</p>
+<p>Wywołano metodę dispatchLoopShutdown()</p>
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                Wtyczki mogą być zarejestrowane w dowolnym momencie podczas
+                uruchomienia kontrolera frontowego. Jednak jeśli zdarzenie dla
+                którego we wtyczce była zarejestrowana metoda już minęło, to
+                metoda ta będzie ominięta.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.standard">
+        <title>Wtyczki dołączone do standardowej dystrybucji</title>
+
+        <para>
+            Zend Framework w standardowej dystrybucji zawiera wtyczkę służącą do
+            obsługi błędów.
+        </para>
+
+        <xi:include href="Zend_Controller-Plugins-ActionStack.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ActionStack.xml" /></xi:fallback>
+        </xi:include>
+        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_Controller-Plugins-ErrorHandler.xml" /></xi:fallback>
+        </xi:include>
+    </sect2>
+</sect1>

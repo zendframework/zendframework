@@ -1,0 +1,58 @@
+<sect1 id="zend.feed.modifying-feed">
+    <title>Modifica della struttura e degli elementi di un feed</title>
+
+    <para>
+        La sintassi intuitiva di <code>Zend_Feed</code> si può utilizzare sia per costruire o modificare i feed ed gli elementi dei feed, sia per leggerli.
+        Un oggetto nuovo o modificato può essere facilmente riconvertito in XML per il salvataggio in un file o l'invio ad un server.
+    </para>
+
+    <example id="zend.feed.modifying-feed.example.modifying">
+        <title>Modifica di un elemento esistente in un feed</title>
+        <programlisting role="php"><![CDATA[<?php
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+$entry = $feed->current();
+
+$entry->title = 'Questo è un nuovo titolo';
+$entry->author->email = 'my_email@example.com';
+
+echo $entry->saveXML();]]>
+        </programlisting>
+        <para>
+            Questo codice esegue l'output di una rappresentazione XML completa dell'elemento, inclusa la dichiarazione <code>&lt;?xml ... &gt;</code> e qualsiasi namespace XML necessario.
+        </para>
+        <para>
+            Si noti come il codice precedente funziona anche se l'elemento esistente non contiene ancora un tag <code>author</code>.
+            Si possono utilizzare quanti livelli di accesso <code>-&gt;</code> si desidera prima di eseguire l'assegnamento. Tutti i livelli intermedi verranno creati in automatico, se necessario.
+        </para>
+    </example>
+
+    <para>
+        Se si desidera utilizzare in un elemento un namespace oltre a <code>atom:</code>, <code>rss:</code> o <code>osrss:</code>, è necessario registrarlo in <code>Zend_Feed</code> utilizzando <code>
+        Zend_Feed::registerNamespace()</code>.
+        Un elemento esistente manterrà sempre il proprio namespace originale in fase di modifica.
+        Un nuovo elemento sarà invece inserito nel namespace predefinito se non si specifica esplicitamente un namespace alternativo.
+    </para>
+
+    <example id="zend.feed.modifying-feed.example.creating">
+        <title>Creazione di un elemento di un feed Atom con namespace personalizzato</title>
+        <programlisting role="php"><![CDATA[<?php
+$entry = new Zend_Feed_Entry_Atom();
+// id è sempre assegnato dal server ad Atom
+$entry->title = 'il mio elemento personalizzato';
+$entry->author->name = 'Autore di Esempio';
+$entry->author->email = 'io@example.com';
+
+// ora esegue la parte personalizzata
+Zend_Feed::registerNamespace('mions', 'http://www.example.com/mions/1.0');
+
+$entry->{'mions:mioelemento_uno'} = 'il mio primo valore personalizzato';
+$entry->{'mions:contenitore_elem'}->parte1 = 'prima parte personalizzata';
+$entry->{'mions:contenitore_elem'}->parte2 = 'seconda parte personalizzata;
+
+echo $entry->saveXML();]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

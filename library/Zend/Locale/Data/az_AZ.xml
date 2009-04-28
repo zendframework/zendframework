@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.40 $"/>
+		<generation date="$Date: 2008/06/24 16:36:03 $"/>
+		<language type="az"/>
+		<territory type="AZ"/>
+	</identity>
+	<alias source="az_Latn_AZ" path="//ldml"/>
+</ldml>

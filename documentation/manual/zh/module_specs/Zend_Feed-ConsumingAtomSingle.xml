@@ -1,0 +1,37 @@
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>单个Atom条目的处理</title>
+
+    <para>
+        单个Atom <code>&lt;entry&gt;</code> 元素自身也是有效的。通常在Feed的URL后带上<code>/&lt;entryId&gt;</code>就是一个条目的URL。就像<code>http://atom.example.com/feed/1</code>，
+        我们就以上述的URL作为例子。
+    </para>
+
+    <para>
+        如果你想读取单个条目，你仍然可以使用<code>Zend_Feed_Atom</code>对象，它将自动创建一个匿名的Feed用来包含条目。
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.atom">
+        <title>读取Atom Feed的单个条目</title>
+        <programlisting role="php"><![CDATA[<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+echo 'The feed has: ' . $feed->count() . ' entry.';
+
+$entry = $feed->current();]]></programlisting>
+    </example>
+
+    <para>
+        或者如果你确定只想访问文档的一个<code>&lt;entry&gt;</code>，那么你可以用条目对象直接访问：
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
+        <title>用条目对象直接访问Atom Feed的单个条目</title>
+        <programlisting role="php"><![CDATA[<?php
+
+$entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
+echo $entry->title();]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

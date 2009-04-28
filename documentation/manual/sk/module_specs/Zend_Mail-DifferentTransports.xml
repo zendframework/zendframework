@@ -1,0 +1,33 @@
+<sect1 id="zend.mail.different-transports">
+    <title>Použitie rôznych spôsobov prenosu</title>
+    <para>
+        V prípade, že je potrebné poslať e-mail cez iné pripojenie je možné
+        nastaviť spôsob prenosu priamo pri volaní <code>send()</code> bez volania
+        <code>setDefaultTransport()</code>. Predaný spôsob prenosu sa použije
+        na miesto prednastaveného pre aktuálne volanie <code>send()</code>:
+    </para>
+    <example>
+        <title>Použitie rôznych spôsobov prenosu</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// vytvorenie správy...
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
+$tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
+$mail->send($tr1);
+$mail->send($tr2);
+$mail->send();  // použije sa prednastavený
+?>]]>   </programlisting>
+    </example>
+    <note>
+        <title>Iné spôsoby prenosu</title>
+        <para>
+            Ostatné spôsoby prenosu môžu byt vytvorené implementáciou <code>Zend_Mail_Transport_Interface</code>.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,118 @@
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        <code>Zend_Config_Ini</code> staat programmeurs toe configuratiedata op te slaan in een
+        vertrouwd INI formaat en deze terug in te lezen in de applicatie door gebruik te maken van
+        een syntax met geneste objecteigenschappen. Het INI formaat is gespecializeerd om een
+        hiërarchie van configuratiedata keys te verstrekken, evenals de erfelijkheid tussen
+        verschillende configuratiedata secties. Hiërachies van configuratiedata worden ondersteund
+        door de keys te scheiden met een punt (<code>.</code>). Een sectie kan een andere sectie
+        uitbreiden of overerven door een dubbelpunt te schrijven achter de sectienaam
+        (<code>:</code>) en de naam van de sectie waarvan de data wordt geërfd.
+    </para>
+     <note>
+        <title>parse_ini_file</title>
+        <para>
+            <code>Zend_Config_Ini</code> gebruikt de
+            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
+            PHP functie. Ga deze documentatie na om op de hoogte te zijn van specifiek gedrag
+            van de functie, die wordt overgedragen naar <code>Zend_Config_Ini</code>, zoals hoe
+            speciale waarden als <code>true</code>, <code>false</code>, <code>yes</code>,
+            <code>no</code>, en <code>null</code> worden behandeld.
+      </para>
+    </note>
+    <note>
+        <title>Key scheider</title>
+        <para>
+            Standaard, is de punt (<code>.</code>) het teken om keys te scheiden. Dit kan worden gewijzigd, door
+            de <code>$config</code> key <code>'nestSeparator'</code> te wijzigen als je een nieuwe
+            <code>Zend_Config_Ini</code> object aanmaakt. Als voorbeeld:
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Config/Ini.php';
+$config['nestSeparator'] = ':';
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging', $config);]]>
+            </programlisting>
+        </para>
+    </note>
+    <example id="zend.config.adapters.ini.example.using">
+        <title>Zend_Config_Ini gebruiken</title>
+        <para>
+            Dit voorbeeld illustreert een basisgebruik van <code>Zend_Config_Ini</code> voor het
+            inladen van configuratiedata vanuit een INI bestand. In dit voorbeeld vind je
+            configuratiedata voor zowel een productiesysteem als een preproductiesysteem. Omdat
+            de preproductiesysteem configuratiedata sterk overeenkomt met de productieserver
+            configuratiedata, erft de preproductieserver sectie van de productie sectie. In dit
+            geval is de beslissing willekeurig en zou dit andersom kunnen worden geschreven, de
+            productieserver sectie zou erven van de preproductieserver sectie, alhoewel het niet
+            het geval zou kunnen zijn in meer complexe situaties. Veronderstel dan dat de volgende
+            configuratiedata in <code>/path/to/config.ini</code> staat:
+        </para>
+        <programlisting role="ini"><![CDATA[; Configuratiedata voor productieserver
+[productie]
+webhost           = www.example.com
+database.type     = pdo_mysql
+database.host     = db.example.com
+database.username = dbuser
+database.password = secret
+database.name     = dbname
+
+; Preproductieserver configuratiedata erft van productieserver en
+; overschrijft waarden waar nodig
+[preproductie : productie]
+database.host     = dev.example.com
+database.username = devuser
+database.password = devsecret]]></programlisting>
+        <para>
+            Veronderstel vervolgens dat de programmeur de preproductie configuratiedata van het
+            INI bestand nodig heeft. Het is eenvoudig om die data in te laden door het INI bestand
+            en de preproductie sectie te specifiëren:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Config/Ini.php';
+
+$config = new Zend_Config_Ini('/path/to/config.ini', 'preproductie');
+
+echo $config->database->host; // geeft "dev.example.com"
+echo $config->database->name; // geeft "dbname"]]></programlisting>
+    </example>
+    <note>
+    <table id="zend.config.adapters.ini.table">
+        <title>Zend_Config_Ini Constructor parameters</title>
+        <tgroup cols="2">
+            <thead>
+                  <row>
+                    <entry>Parameter</entry>
+                    <entry>Opmerking</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>$filename</code></entry>
+                    <entry>Het ini bestand wat geladen moet worden</entry>
+                </row>
+                <row>
+                    <entry><code>$section</code></entry>
+                    <entry>
+                        De sectie binnen het ini bestand dat geladen moet worden.
+                        Door deze parameter de waarde null te geven, worden alle secties geladen.
+                        Verder kan een array van sectie namen worden meegegeven om meerdere secties
+                        te laden.
+                     </entry>
+                </row>
+                <row>
+                    <entry><code>$config = false</code></entry>
+                    <entry>Configuratie array. De volgende keys worden ondersteund:
+                        <itemizedlist>
+                            <listitem><para><emphasis>allowModifications</emphasis>: Zet deze op true om wijzigingen toe te staan in het geladen bestand. Standaard is dit false.</para></listitem>
+                            <listitem><para><emphasis>nestSeparator</emphasis>: Hiermee kan je aangeven welk teken gebruikt moet worden als key scheider. Standaard is dit "."</para></listitem>
+                        </itemizedlist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

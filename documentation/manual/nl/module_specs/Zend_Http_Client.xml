@@ -1,0 +1,160 @@
+<sect1 id="zend.http.client">
+    <title>Zend_Http_Client</title>
+
+    <sect2 id="zend.http.client.introduction">
+        <title>Inleiding</title>
+        <para>
+            <code>Zend_Http_Client</code> verstrekt een eenvoudige interface om HTTP verzoeken te maken.
+            <code>Zend_Http_Client</code> kan GET, POST, PUT en DELETE verzoeken maken.
+        </para>
+        <note>
+          <para>
+            <code>Zend_HttpClient</code> volgt standaard tot 5 HTTP verwijzingen. Om dit gedrag te veranderen
+            geef je het maximum toegestane verwijzingen aan de <code>get()</code> methode op.
+          </para>
+        </note>
+        <para>
+            <example>
+                <title>Een basis GET verzoek maken</title>
+                <programlisting role="php"><![CDATA[<?php
+    require_once 'Zend/Http/Client.php';
+    try {
+        $http = new Zend_Http_Client('http://example.org');
+        $response = $http->get();
+        if ($response->isSuccessful()) {
+            echo $response->getBody();
+        } else {
+            echo '<p>Er trad een fout op</p>';
+        }
+    } catch (Zend_Http_Client_Exception $e) {
+        echo '<p>Er trad een fout op (' .$e->getMessage(). ')</p>';
+    }
+    ?>]]></programlisting>
+            </example>
+        </para>
+    </sect2>
+    <sect2 id="zend.http.client.basic-get-requests">
+        <title>Basis GET verzoeken met gespecificeerde HTTP Headers</title>
+        <para>
+            De <code>Zend_Http_Client</code> constructor maakt een <code>Zend_Http_Client</code> instantie om
+            HTTP verzoeken te zenden.
+        </para>
+        <para>
+            Als je <code>Zend_Http_Client</code> gebruikt op één enkele URL kan je in de meeste gevallen de URL
+            en relevante headers aan de <emphasis>constructor</emphasis> geven, zoals in de volgende voorbeelden:
+        </para>
+        <example>
+            <title>Een Basis Zend_Http_Client maken</title>
+            <programlisting role="php"><![CDATA[<?php
+    require_once 'Zend/Http/Client.php';
+
+    // Specificeer de URL en een enkele header
+    $http = new Zend_Http_Client('http://example.org', 'Accept: text/html');
+    ?>]]>       </programlisting>
+        </example>
+        <para />
+        <example>
+            <title>Meerdere Headers sturen</title>
+            <programlisting role="php"><![CDATA[<?php
+    require_once 'Zend/Http/Client.php';
+
+    // Specificeer de URL en meerdere headers
+    $http = new Zend_Http_Client('http://example.org',
+                            array('Accept: text/html', 'Accept-Language: en-us,en;q=0.5'));
+    ?>]]>       </programlisting>
+        </example>
+        <para>
+            Als je <code>Zend_Http_Client</code> wenst te gebruiken om verzoeken aan <emphasis>meerdere</emphasis> URLs te
+            sturen, zie dan <xref linkend="zend.http.client.requesting-multiple-domains" />
+        </para>
+    </sect2>
+    <sect2 id="zend.http.client.requesting-multiple-domains">
+        <title>Multidomein verzoeken</title>
+        <para>
+            <code>Zend_Http_Client</code> ondersteunt het sturen van verzoeken aan meerdere domeinen
+            door het zetten van de URL via de methode <code>Zend_Http_Client::setUri()</code>.
+        </para>
+        <note>
+            <para>Een geweldig gebruik hiervoor is als je meerdere RSS feeds uitleest.</para>
+        </note>
+        <example>
+            <title>Multidomein verzoek</title>
+            <programlisting role="php"><![CDATA[<?php
+    require_once 'Zend/Http/Client.php';
+
+    // Het client object instantiëren
+    $http = new Zend_Http_Client();
+
+    // De URI naar Slashdot's hoofd feed zetten
+    $http->setUri('http://rss.slashdot.org/Slashdot/slashdot');
+
+    // De feed opvragen
+    $slashdot = $http->get();
+
+    // Nu de BBC news feed instellen
+    $http->setUri('http://newsrss.bbc.co.uk/rss/newsonline_world_edition/technology/rss.xml');
+
+    // de feed opvragen
+    $bbc = $http->get();
+    ?>]]>   </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.http.client.settimeout">
+        <title>De HTTP Timeout wijzigen</title>
+        <para>
+            <code>Zend_Http_Client::setTimeout()</code> laat je toe de timeout voor de HTTP verbinding
+            te zetten, in seconden.
+        </para>
+        <note>
+            <para>De standaard timeout is 10 seconden.</para>
+        </note>
+    </sect2>
+    <sect2 id="zend.http.client.setheaders">
+        <title>Dynamisch HTTP Headers zetten</title>
+        <para>
+            Je kan een <emphasis>array</emphasis> headers zetten met <code>Zend_Http_Client::setHeaders()</code>.
+        </para>
+        <important>
+            <para>
+                Headers moeten het formaat volgen:
+                <option><code>Header: waarde</code></option>
+            </para>
+        </important>
+    </sect2>
+    <sect2 id="zend.http.client.making-other-requests">
+        <title>POST, PUT en DELETE HTTP verzoeken maken</title>
+        <para>
+            Het maken van POST, PUT en DELETE HTTP verzoeken wordt vereenvoudigd in <code>Zend_Http_Client</code>
+            door middel van drie methodes: <code>post()</code>, <code>put()</code>, en <code>delete()</code>,
+            respectievelijk. De <code>post()</code> en <code>put()</code> methodes aanvaarden elk één string
+            parameter, <code>$data</code>, waarin een string met de data correct ge-encodeerd zoals volgt:
+            <emphasis><code>name=value&amp;foo=bar</code></emphasis>. De <code>delete()</code> methode heeft
+            geen parameters.
+        </para>
+        <example>
+            <title>POST data verzenden met Zend_Http_Client</title>
+            <programlisting role="php"><![CDATA[<?php
+    require_once 'Zend/Http/Client.php';
+
+    // Het client object instantiëren
+    $http = new Zend_Http_Client();
+
+    // De URI naar een POST dataverwerker zetten
+    $http->setUri('http://example.org/post/processor');
+
+    // De specifieke GET variabelen als HTTP POST data opslaan
+    $postData = 'foo=' . urlencode($_GET['foo']) . '&bar=' . urlencode($_GET['bar']);
+
+    // Het HTTP POST verzoek maken en het HTTP antwoord opslaan
+    $httpResponse = $http->post($postData);
+    ?>]]>   </programlisting>
+            <para>
+                Een PUT verzoek maken is hetzelfde als in het voorgaande voorbeeld om een POST verzoek te maken;
+                je hoeft slechts de <code>put()</code> methode gebruiken in plaats van de <code>post()</code> methode.
+            </para>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

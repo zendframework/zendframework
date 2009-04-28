@@ -1,0 +1,15 @@
+<sect1 id="zend.mail.character-sets">
+    <title>字符集</title>
+    <para>
+        <code>Zend_Mail</code>不会对邮件段字符集的正确性进行检查。当<code>Zend_Mail</code>初始化的时候，缺省地为邮件设置了<code>iso8859-1</code>字符集。程序必须确保添加至邮件对象的所有段都以正确的字符集编码。在添加一个新的邮件段时，可以为每个段指定不同的字符集。
+    </para>
+    <note>
+        <title>只限于文本(Text)格式</title>
+        <para>
+           字符集只适用于文本格式中的段。
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.introduction">
+
+    <title>Introduction to Zend_Currency</title>
+
+    <para>
+        <classname>Zend_Currency</classname> is part of the strong support for i18n in Zend Framework. It handles all issues
+        related to currency, money representation and formatting. It also provides additional
+        methods which provide localized information on currencies, such as which currency is used
+        in which region.
+    </para>
+
+    <sect2 id="zend.currency.introduction.list">
+
+        <title>Why use Zend_Currency?</title>
+
+        <para>
+            <classname>Zend_Currency</classname> offers the following functions for handling currency manipulations.
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Complete Locale support</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> works with all available locales and therefore knows about over 100 different localized currencies. This includes
+                    currency names, abbreviations, money signs and more.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Reusable Currency Definitions</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> does not include the value of the currency. This is the reason why
+                    its functionality is not included in <classname>Zend_Locale_Format</classname>. <classname>Zend_Currency</classname> has the
+                    advantage that already defined currency representations can be reused.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Fluent Interface</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> includes fluent interfaces where possible.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">Additional Methods</emphasis>
+                </para>
+                <para>
+                    <classname>Zend_Currency</classname> includes additional methods that offer information about
+                    which regions a currency is used in or which currency is used in a specified region.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+</sect1>

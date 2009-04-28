@@ -1,0 +1,29 @@
+<sect1 id="zend.mail.different-transports">
+    <title>Używanie innych transportów</title>
+    <para>
+        W przypadku gdy chcesz wysłać różne e-maile poprzez różne połączenia, możesz
+        także przekazać obiekt transportu bezpośrednio do metody <code>send()</code>
+        bez wcześniejszego wywołania <code>setDefaultTransport()</code>. Przekazany
+        obiekt nadpisze domyślny transport dla aktualnego wywołania <code>send()</code>:
+    </para>
+    <example id="zend.mail.different-transports.example-1">
+        <title>Używanie innych transportów</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+// tworzymy wiadomość...
+$tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
+$tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
+$mail->send($tr1);
+$mail->send($tr2);
+$mail->send();  // znów używamy domyślnego transportu
+]]>
+        </programlisting>
+    </example>
+    <note>
+        <title>Dodatkowe transporty</title>
+        <para>
+            Dodatkowe transporty mogą być napisane poprzez zaimplementowanie interfejsu
+            <code>Zend_Mail_Transport_Interface</code>.
+        </para>
+    </note>
+</sect1>

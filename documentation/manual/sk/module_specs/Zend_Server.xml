@@ -1,0 +1,21 @@
+<sect1 id="zend.server.introduction">
+    <title>Úvod</title>
+    <para>
+        Skupina tried <code>Zend_Server</code> poskytuje funkcionalitu pre viaceré
+        triedy, vrátane <code>Zend_XmlRpc_Server</code>, <code>Zend_Rest_Server</code>,
+        <code>Zend_Json_Server</code> and <code>Zend_Soap_Wsdl</code>.
+        <code>Zend_Server_Interface</code> poskytuje rozhranie ktoré napodobňuje
+        <code>SoapServer</code> triedu v PHP5. Všetky servery by mali mať implementované
+        toto rozhranie aby mohli poskytovať štandardné API.
+    </para>
+    <para>
+        Skupina tried <code>Zend_Server_Reflection</code> poskytuje nástroje
+        pre zisťovanie informácií o funkciách a triedach ktoré sa používajú
+        ako spätné volania v serverových triedach a poskytuje vhodné údaje pre
+        použitie v metódach rozhrania <code>Zend_Server_Interface</code> (
+        <code>getFunctions()</code> a <code>loadFunctions()</code>).
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

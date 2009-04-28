@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.realpath">
+    <title>RealPath</title>
+
+    <para>
+        This filter will resolve given links and pathnames and returns canonicalized absolute
+        pathnames. References to <filename>'/./'</filename>, <filename>'/../'</filename> and extra
+        <filename>'/'</filename> characters in the input path will be stripped. The resulting path
+        will not have any symbolic link, <filename>'/./'</filename> or <filename>'/../'</filename>
+        character.
+    </para>
+
+    <para>
+        <classname>Zend_Filter_RealPath</classname> will return <code>FALSE</code> on failure, e.g.
+        if the file does not exist. On BSD systems <classname>Zend_Filter_RealPath</classname>
+        doesn't fail if only the last path component doesn't exist, while other systems will return
+        <constant>FALSE</constant>.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$filter = new Zend_Filter_RealPath();
+$path   = '/www/var/path/../../mypath';
+$filtered = $filter->filter();
+
+// returns '/www/mypath'
+]]></programlisting>
+
+    <para>
+        Sometimes it is usefull to get also paths when they don't exist, f.e. when you want to
+        get the real path for a path which you want to create. You can then eighter give a
+        <constant>FALSE</constant> at initiation, or use <methodname>setExists()</methodname> to
+        set it.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$filter = new Zend_Filter_RealPath(false);
+$path   = '/www/var/path/../../non/existing/path';
+$filtered = $filter->filter();
+
+// returns '/www/non/existing/path' even when file_exists or realpath would return false
+]]></programlisting>
+
+</sect2>

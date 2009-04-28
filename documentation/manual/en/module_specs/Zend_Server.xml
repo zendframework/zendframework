@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.server.introduction">
+    <title>Introduction</title>
+    <para>
+        The <classname>Zend_Server</classname> family of classes provides functionality
+        for the various server classes, including
+        <classname>Zend_XmlRpc_Server</classname>, <classname>Zend_Rest_Server</classname>,
+        <classname>Zend_Json_Server</classname> and <classname>Zend_Soap_Wsdl</classname>.
+        <classname>Zend_Server_Interface</classname> provides an interface that mimics PHP
+        5's <code>SoapServer</code> class; all server classes should implement
+        this interface in order to provide a standard server API.
+    </para>
+    <para>
+        The <classname>Zend_Server_Reflection</classname> tree provides a standard
+        mechanism for performing function and class introspection for use as
+        callbacks with the server classes, and provides data suitable for use
+        with <classname>Zend_Server_Interface</classname>'s <code>getFunctions()</code>
+        and <code>loadFunctions()</code> methods.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

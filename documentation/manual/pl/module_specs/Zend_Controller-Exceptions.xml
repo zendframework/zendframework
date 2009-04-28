@@ -1,0 +1,362 @@
+<sect1 id="zend.controller.exceptions">
+    <title>Wyjątki MVC</title>
+
+    <sect2 id="zend.controller.exceptions.introduction">
+        <title>Wprowadzenie</title>
+
+        <para>
+            Komponenty MVC w Zend Framework używają kontrolera frontowego, co
+            oznacza, że wszystkie żądania do danej strony przechodzą przez
+            pojedynczy punkt. W rezultacie wszystkie wyjątki ostatecznie
+            zbierane są w kontrolerze frontowym, pozwalając programiście na
+            obsłużenie ich w jednym miejscu.
+        </para>
+
+        <para>
+            Jakkolwiek, wiadomości o wyjątkach oraz informacje o backtrace
+            często zawierają wrażliwe informacje o systemie, jak np. zapytania
+            SQL, informacje o lokacjach plików i wiele innych. Aby pomóc ci
+            chronić swój serwis, domyślnie <code>Zend_Controller_Front</code>
+            łapie wszystkie wyjątki i rejestruje je w obiekcie odpowiedzi; z
+            kolei, obiekt odpowiedzi domyślnie nie wyświetla wiadomości o
+            wyjątkach.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.handling">
+        <title>W jaki sposób możesz obsługiwać wyjątki?</title>
+
+        <para>
+            Obecnie w komponentach MVC wbudowanych jest kilka mechanizmów
+            pozwalających na obsługę wyjątków
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Domyślnie rejestrowana i aktywna jest <link
+                        linkend="zend.controller.plugins.standard.errorhandler">wtyczka
+                    obsługi błędów</link>. Ta wtyczka została stworzona aby
+                    obsługiwać:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para>Błędy spowodowane brakującym kontrolerem lub akcją</para></listitem>
+
+                    <listitem><para>Błędy występujące wewnątrz akcji kontrolerów</para></listitem>
+                </itemizedlist>
+
+                <para>
+                    Wtyczka działa w oparciu o metodę <code>postDispatch()</code>,
+                    i sprawdza czy obiekt uruchamiający, kontroler akcji, lub
+                    inny obiekt wyrzucił wyjątek. Jeśli tak, przekazuje ona
+                    żądanie do kontrolera obsługi błędu.
+                </para>
+
+                <para>
+                    Ta wtyczka obsłuży większość sytuacji, w których został
+                    wyrzucony wyjątek, a także poprawnie obsłuży brakujące
+                    kontrolery oraz akcje.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><code>Zend_Controller_Front::throwExceptions()</code></para>
+
+                <para>
+                    Przekazująć logiczną wartość true do tej metody, możesz
+                    nakazać kontrolerowi frontowemu aby zamiast składować
+                    wyjątki w obiekcie odpowiedzi, wyrzucił je, żebyś mógł
+                    obsłużyć je samodzielnie. Na przykład:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+try {
+    $front->dispatch();
+} catch (Exception $e) {
+    // sam obsłuż wyjątki
+}
+]]>
+                </programlisting>
+
+                <para>
+                    Ta metoda jest najprawdopodobniej najłatwiejszym sposobem
+                    dodania własnej obsługi wyjątków do twojej aplikacji
+                    używającej kontrolera frontowego.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><code>Zend_Controller_Response_Abstract::renderExceptions()</code></para>
+
+                <para>
+                    Przekazując logiczną wartość true do tej metody, możesz
+                    nakazać obiektowi odpowiedzi aby renderował on wyjątki gdy
+                    sam będzie renderowany. W takim scenariuszu, każdy wyjątek
+                    wyrzucony w twojej aplikacji będzie wyświetlony. To jest
+                    jedynie rekomendowane dla nieprodukcyjnych środowisk.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Front::returnResponse()</code> oraz
+                    <code>Zend_Controller_Response_Abstract::isException()</code>
+                </para>
+
+                <para>
+                    Przekazanie wartości logicznej true do metody
+                    <code>Zend_Controller_Front::returnResponse()</code>,
+                    spowoduje, że obiekt
+                    <code>Zend_Controller_Front::dispatch()</code> nie będzie
+                    renderował odpowiedzi, a zamiast tego ją zwróci. Gdy już
+                    masz odpowiedź, możesz sprawdzić czy są w niej wyjątki
+                    używając metody <code>isException()</code>, a następnie
+                    odebrać wyjątki używając metody <code>getException()</code>.
+                    Na przykład:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+if ($response->isException()) {
+    $exceptions = $response->getException();
+    // obsługa wyjątków ...
+} else {
+    $response->sendHeaders();
+    $response->outputBody();
+}
+]]>
+                </programlisting>
+
+                <para>
+                    Główną zaletą, dzięki której ta metoda umożliwia więcej niż
+                    <code>Zend_Controller_Front::throwExceptions()</code>, jest
+                    to, że możesz warunkowo wyświetlać odpowiedź po obsłudze
+                    wyjątków.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.internal">
+        <title>Wyjątki MVC które możesz napotkać</title>
+
+        <para>
+            Różne komponenty MVC -- obiekt żądania, router, obiekt uruchamiający,
+            kontrolery akcji, oraz obiekt odpowiedzi -- każdy może z różnych
+            przyczyn wyrzucać wyjątki. Niektóre wyjątki mogą być warunkowo
+            nadpisane, a inne są używane aby wskazać programiście potrzebę
+            poprawienia aplikacji.
+        </para>
+
+        <para>Kilka przykładów:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Dispatcher::dispatch()</code>
+                    domyślnie wyrzuci wyjątek jeśli zażądano nieprawidłowego
+                    kontrolera. Są dwa zalecane sposoby na obsłużenie tego:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>Ustawienie parametru <code>useDefaultControllerAlways</code>.</para>
+
+                        <para>
+                            W twoim kontrolerze frontowym, lub w obiekcie
+                            uruchamiającym, dodaj poniższą dyrektywę:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+
+// lub
+$dispatcher->setParam('useDefaultControllerAlways', true);
+]]>
+                        </programlisting>
+
+                        <para>
+                            Gdy ta flaga jest ustawiona, obiekt uruchamiający,
+                            użyje domyślnego kontrolera oraz akcji zamiast
+                            wyrzucania wyjątku. Minusem użycia tej metody jest
+                            to, że jakikolwiek błąd literowy w adresie
+                            dostępowym do twojej strony spowoduje wyświetlenie
+                            strony głównej, co może źle wpłynąć na optymalizację
+                            serwisu dla wyszukiwarek internetowych.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Wyjątek wyrzucany przez metodę <code>dispatch()</code>
+                            jest wyjątkiem <code>Zend_Controller_Dispatcher_Exception</code>
+                            zawierającym tekst 'Invalid controller specified'.
+                            Użyj jednej z metod opisanych w <link
+                            linkend="zend.controller.exceptions.handling">poprzedniej
+                            sekcji</link> aby złapać wyjątek, a następnie
+                            przekierować do strony błędu lub do strony głownej.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Metoda <code>Zend_Controller_Action::__call()</code> wyrzuci
+                    wyjątek <code>Zend_Controller_Action_Exception</code>
+                    jeśli nie może uruchomić nieistniejącej metody akcji.
+                    Najczęściej będziesz chciał użyć jakiejś domyślnej akcji
+                    w kontrolerze w tego typu sprawach. Przykładowe metody
+                    za pomocą których możesz to osiśgnąć:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Rozszerzenie klasy <code>Zend_Controller_Action</code>
+                            i nadpisanie metody <code>__call()</code>. Na przykład:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_Action extends Zend_Controller_Action
+{
+    public function __call($method, $args)
+    {
+        if ('Action' == substr($method, -6)) {
+            $controller = $this->getRequest()->getControllerName();
+            $url = '/' . $controller . '/index';
+            return $this->_redirect($url);
+        }
+
+        throw new Exception('Invalid method');
+    }
+}
+]]>
+                        </programlisting>
+                        <para>
+                            Powyższa metoda przechwytuje wszystkie wywołane
+                            niezdefiniowane akcje i przekierowuje żądanie do
+                            domyślnej akcji w kontrolerze.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Rozszerzenie klasy <code>Zend_Controller_Dispatcher</code> o
+                            nadpisanie metody <code>getAction()</code>, która
+                            sprawdza czy akcja istnieje. Na przykład:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
+{
+    public function getAction($request)
+    {
+        $action = $request->getActionName();
+        if (empty($action)) {
+            $action = $this->getDefaultAction();
+            $request->setActionName($action);
+            $action = $this->formatActionName($action);
+        } else {
+            $controller = $this->getController();
+            $action     = $this->formatActionName($action);
+            if (!method_exists($controller, $action)) {
+                $action = $this->getDefaultAction();
+                $request->setActionName($action);
+                $action = $this->formatActionName($action);
+            }
+        }
+
+        return $action;
+    }
+}
+]]>
+                        </programlisting>
+
+                        <para>
+                            Powyższy kod sprawdza czy zażądana akcja istnieje w
+                            klasie kontrolera; jeśli nie, resetuje akcję do
+                            akcji domyślnej.
+                        </para>
+
+                        <para>
+                            Ta metoda jest wygodna ponieważ możesz w niewidoczny
+                            sposób zmienić akcję przed ostatecznym uruchomieniem.
+                            Jednak to także oznacza, że jakikolwiek błąd literowy
+                            w adresie URL może wciąż uruchomić żądanie poprawnie,
+                            co nie jest zbyt dobre dla optymalizacji dla
+                            wyszukiwarek internetowych.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Użycie metody <code>Zend_Controller_Action::preDispatch()</code>
+                            lub <code>Zend_Controller_Plugin_Abstract::preDispatch()</code>
+                            do zidentyfikowania nieprawidłowych akcji.
+                        </para>
+
+                        <para>
+                            Rozszerzając klasę <code>Zend_Controller_Action</code> i
+                            modyfikując metodę <code>preDispatch()</code>, możesz
+                            zmodyfikować wszystkie twoje kontrolery w taki
+                            sposób, aby przenosiły one żądanie do innej akcji
+                            lub przekierowywały zamiast uruchamiać akcję.
+                            Kod wyglądałby podobnie kod nadpisujący metodę
+                            <code>__call()</code>, który został przedstawiony wyżej.
+                        </para>
+
+                        <para>
+                            Alternatywnie, możesz sprawdzać te informacje we
+                            wtyczce globalnej. Zaletą tego rozwiązania jest to,
+                            że kontroler akcji staje się niezależny; jeśli twoja
+                            aplikacja składa się z różnorodnych kontrolerów
+                            akcji i nie wszystkie dziedziczą z tej samej klasy,
+                            ta metoda może dodać konsekwencji w obsłudze różnych
+                            klas.
+                        </para>
+
+                        <para>
+                            Przykład:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $dispatcher = Zend_Controller_Front::getInstance()->getDispatcher();
+        $controller = $dispatcher->getController($request);
+        if (!$controller) {
+            $controller = $dispatcher->getDefaultControllerName($request);
+        }
+        $action     = $dispatcher->getAction($request);
+
+        if (!method_exists($controller, $action)) {
+            $defaultAction = $dispatcher->getDefaultAction();
+            $controllerName = $request->getControllerName();
+            $response = Zend_Controller_Front::getInstance()->getResponse();
+            $response->setRedirect('/' . $controllerName . '/' . $defaultAction);
+            $response->sendHeaders();
+            exit;
+        }
+    }
+}
+]]>
+                        </programlisting>
+
+                        <para>
+                            W tym przykładzie sprawdzamy czy zażądana akcja
+                            jest dostępna w kontrolerze. Jeśli nie,
+                            przekierujemy żądanie do domyślnej akcji w
+                            kontrolerze, i kończymy wykonywanie skryptu.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

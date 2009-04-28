@@ -1,0 +1,19 @@
+<sect1 id="introduction.overview">
+
+    <title>Introdução</title>
+
+    <para>
+        Zend Framework é um framework livre e de alta qualidade para desenvolvimento de
+        Aplicações e Serviços Web com PHP.
+    </para>
+
+    <para>
+        Feito no verdadeiro espírito do PHP, o Zend Framework disponibiliza uma
+        facilidade de uso aliado a uma poderosa funcionalidade. Ele fornece soluções
+        para construir sites web modernos, robustos, e seguros.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

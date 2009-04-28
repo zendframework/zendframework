@@ -1,0 +1,293 @@
+<sect1 id="zend.date.additional">
+
+    <title>Working 范例 </title>
+
+    <para>
+        在本章内，我们将描述若干附加的函数，它们在 <code>Zend_Date</code> 中也有效。
+        当然所述的函数有另外的范例来示范期望的工作和简单的如何正确使用的 API 。
+    </para>
+
+    <sect2 id="zend.date.additional.checking">
+
+        <title> 检查日期 </title>
+
+        <para>
+            大部分输入的日期可能是字符串，问题是你不能确保这些字符串是真的日期。因此 <code>Zend_Date</code>
+            有个特有的静态函数来加查日期字符串。<code>Zend_Locale</code>  有个特有的函数 <code>getDate($date, $locale);</code> ，它解析
+            日期并返回正确的格式化的日期部分。例如月名将被识别和返回月数。
+            但 <code>Zend_Locale</code> 不知道什么是日期，因为它是个格式化和本地化的类，所以我们集成了一个特有的函数 <code>isDate($date);</code> 来做这个。
+        </para>
+
+        <para>
+            <code>isDate($date, $format, $locale);</code> 最多可以带 3 个参数但最少需要一个参数。所以我们需要校验的日期当然是它本身是否一个字符串。
+            第二个参数是日期的格式。如果没有给定格式，使用地方的标准格式。关于格式的细节参见 <link linkend="zend.date.constants.selfdefinedformats">自定义格式</link> 。
+        </para>
+
+        <para>
+            第三个参数也是可选的并可用于给定一个地方。我们需要地方来格式化月名和天名（monthnames and daynames）。
+            所以用第三个参数我们可以根据给定的地方识别 '01.Jänner.2000' 或 '01.January.2000'这样的日期。
+        </para>
+
+        <para>
+            <code>isDate();</code> 当然来检查是否一个日期存在。<code>Zend_Date</code>自己不检查日期。
+            所以有可能用 <code>Zend_Date</code>  生成一个如 '31.February.2000'的日期，因为 <code>Zend_Date</code> 将
+            自动纠正日期并返回适当的日期，在这个例子中为 '03.March.2000' 。而 <code>isDate()</code> 将检查并对 '31.February.2000' 返回 false，
+            因为它知道这是个不可能的日期。
+        </para>
+
+        <example id="zend.date.additional.checking.example-1">
+            <title>检查日期</title>
+            <programlisting role="php"><![CDATA[
+// Checking dates
+$date = '01.03.2000';
+if (Zend_Date::isDate($date)) {
+    print "String $date is a date";
+} else {
+    print "String $date is NO date";
+}
+
+// Checking localized dates
+$date = '01 February 2000';
+if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
+    print "String $date is a date";
+} else {
+    print "String $date is NO date";
+}
+
+// Checking impossible dates
+$date = '30 February 2000';
+if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
+    print "String $date is a date";
+} else {
+    print "String $date is NO date";
+}
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.additional.sunrise-sunset">
+
+        <title>日出和日落</title>
+
+        <para>
+            <code>Zend_Date</code> 也集成了从太阳获得信息的功能。通常在一个特定的日子里获得日出和日落的时间是有必要的。
+            用<code>Zend_Date</code> 来做很容易，因为仅仅给定位置就可以计算到日出日落的时间。
+        </para>
+
+        <para>
+            正如很多人不知道他们所居住的城市的位置，我们也使用助手类来提供了世界上大约 250个首都和其它大城市的位置数据。
+            大多数人使用他们附近的城市来作为地方，这样计算上会差一点时间。
+        </para>
+
+        <para>
+            用 <code>Zend_Date_Cities::getCityList</code>  可以生成一个列表来选择城市。它返回所有在助手类中预定义的可用的城市名称。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-1">
+            <title> 获得所有可用的城市 </title>
+            <programlisting role="php"><![CDATA[
+// Output the complete list of available cities
+print_r (Zend_Date_Cities::getCityList());
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            用 <code>Zend_Date_Cities::City()</code> 函数可以获得位置。它接受由 <code>Zend_Date_Cities::getCityList()</code> 函数返回的城市名
+            和可选的第二个参数来设置地平线（horizon）.
+        </para>
+
+        <para>
+            '<code>effective</code>' horizon is used.
+            有 4 个已定义的地平线可用于位置类精确计算日落和日出。'<code>horizon</code>' 参数在所有的函数中总是可选的。
+            如果没有指定，则使用 '<code>effective</code>' 。
+        </para>
+
+        <table id="zend.date.additional.sunrise-sunset.table">
+            <title> 日落和日出支持的地平线（horizons）类型 </title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>地平线（Horizon）</entry>
+                        <entry>描述</entry>
+                        <entry>用法</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>effective</entry>
+                        <entry> 标准地平线 </entry>
+                        <entry> 认为世界是一个球。这个地平线是缺省值 </entry>
+                    </row>
+                    <row>
+                        <entry>civil</entry>
+                        <entry>通用地平线</entry>
+                        <entry>常用于媒体如电视和电台</entry>
+                    </row>
+                    <row>
+                        <entry>nautic</entry>
+                        <entry>水兵地平线</entry>
+                        <entry>常用于大海导航</entry>
+                    </row>
+                    <row>
+                        <entry>astronomic</entry>
+                        <entry>天文学地平线</entry>
+                        <entry>常用于星际计算</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+             当然也可以给出和计算自定义位置，因此 '<code>latitude</code>' 和 '<code>longitude</code>' 必需给定，而 '<code>horizon</code>' 是可选的。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-2">
+            <title>获得一个城市的位置</title>
+            <programlisting role="php"><![CDATA[
+// Get the location for a defined city
+// uses the effective horizon as no horizon is defined
+print_r (Zend_Date_Cities::City('Vienna'));
+
+// use the nautic horizon
+print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
+
+// self definition of a location
+$mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            现在所有需要的数据可以被设置了，下一步是创建带有计算日落和日出的日期的 <code>Zend_Date</code> 对象。
+
+            有三个函数用于计算，用 '<code>getSunset()</code>'  计算日落，用 '<code>getSunrise()</code>' 计算日出，所有和太阳相关的信息使用 '<code>getSunInfo()</code>' 。
+            经过计算后，<code>Zend_Date</code> 对象返回时就带有计算过的时间。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-3">
+            <title> 计算太阳信息 </title>
+            <programlisting role="php"><![CDATA[
+// Get the location for a defined city
+$city = Zend_Date_Cities::City('Vienna');
+
+// create a date object for the day for which the sun has to be calculated
+$date = new Zend_Date('10.03.2007', Zend_Date::ISO_8601, 'de');
+
+// calculate sunset
+$sunset = $date->getSunset($city);
+print $sunset->get(Zend_Date::ISO_8601);
+
+// calculate all sun informations
+$info = $date->getSunInfo($city);
+foreach ($info as $sun) {
+    print "\n" . $sun->get(Zend_Date::ISO_8601);
+}
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.additional.timezones">
+
+        <title>时区</title>
+
+        <para>
+            时区和日期一样重要，根据用户所居住的地方，有若干时区，所以使用日期意味着要正确设置时区。
+            这听起来很复杂但其实比较简单。正如在 <code>Zend_Date</code> 的第一章所提到的，缺省的时区已经通过 <code>php.ini</code> 或在引导文件（bootstrap file）里定义来设置，
+        </para>
+
+        <para>
+            <code>Zend_Date</code>  对象当然也存储实际的时区。即使在对象创建后修改时区，它也能记住原来的时区并使用它。
+            也不必要在使用php函数的代码里修改时区，<code>Zend_Date</code>  有两个内置的函数来处理这个。
+        </para>
+
+        <para>
+            <code>getTimezone()</code>  返回实际的在 <code>Zend_Date</code> 对象里的时区。请记住 <code>Zend_Date</code> 在内部不和 php 耦合，
+            返回的时区不是 php 脚本的时区二是对象的时区。
+            <code>setTimezone($zone)</code>  是第二个函数并为 <code>Zend_Date</code> 设置新时区。给定的时区总是被检查的，如果不存在就抛出异常。
+            另外通过不带区域参数调用 <code>setTimezone()</code> 实际脚本或系统时区可以被设置到日期对象，在对象被创建是这个也会自动完成。
+        </para>
+
+        <example id="zend.date.additional.timezones.example-1">
+            <title> 使用时区 </title>
+            <programlisting role="php"><![CDATA[
+// Set a default timezone... this has to be done within the bootstrap
+// file or php.ini
+// We do this here just for having a complete example
+date_default_timezone_set('Europe/Vienna');
+
+// create a date object
+$date = new Zend_Date('10.03.2007', Zend_Date::DATES, 'de');
+
+// view our date object
+print $date->getIso();
+
+// what timezone do we have ?
+print $date->getTimezone();
+
+// set another timezone
+$date->setTimezone('America/Chicago');
+
+// what timezone do we now have ?
+print $date->getTimezone();
+
+// see the changed date object
+print $date->getIso();
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            如上面例子的第一行所示，<code>Zend_Date</code>  对创建对象总是使用实际的时区。在被创建的对象里修改时区
+            对日期自己有影响。日期总是和时区相关。对 <code>Zend_Date</code>  对象修改时区不会修改 <code>Zend_Date</code>  的时间。
+            请记住在内部日期总是以时间戳和 GMT 时区存储。所以时区就意味者对用户所在时区和地区对实际的国际时间的加减。
+        </para>
+
+        <para>
+            在 <code>Zend_Date</code>  里耦合时区有另一个正面影响，在不同的时区有可能有若干个日期。
+        </para>
+
+        <example id="zend.date.additional.timezones.example-2">
+            <title> 多重时区 </title>
+            <programlisting role="php"><![CDATA[
+// Set a default timezone... this has to be done within the bootstrap
+// file or php.ini.
+// We do this here just for having a complete example.
+date_default_timezone_set('Europe/Vienna');
+
+// create a date object
+$date = new Zend_Date('10.03.2007 00:00:00', Zend_Date::ISO_8601, 'de');
+
+// view our date object
+print $date->getIso();
+
+// the date stays unchanged even after changeing the timezone
+date_default_timezone_set('America/Chicago');
+print $date->getIso();
+
+$otherdate = clone $date;
+$otherdate->setTimezone('Brazil/Acre');
+
+// view our date object
+print $otherdate->getIso();
+
+// set the object to the actual systems timezone
+$lastdate = clone $date;
+$lastdate->setTimezone();
+
+// view our date object
+print $lastdate->getIso();
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

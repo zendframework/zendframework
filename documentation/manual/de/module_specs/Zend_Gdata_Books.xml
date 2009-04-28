@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15036 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.gdata.books">
+    <title>Die Buchsuche Daten API verwenden</title>
+
+    <para>
+        Die Buchsuche Daten API von Google erlaubt Client Anwendungen Inhalte
+        von Buchsuchen zu sehen und in der Form von Google Daten API Feeds
+        zu aktualisieren.
+    </para>
+
+    <para>
+        Die Client Anwendung kann die Buchsuche Daten API verwenden um Volltextsuchen
+        nach Büchern durchzuführen und um Standardinformationen von Büchern zu erhalten,
+        diese zu bewerten und zu kommentieren. Man kann auch individuelle
+        <ulink url="http://books.google.com/googlebooks/mylibrary/">Sammlungen von
+        Benutzerbibliotheken und öffentlichen Kommentaren</ulink>. Letztendlich kann eine
+        Anwendung authentifizierte Anfragen abschicken um es Benutzern zu ermöglichen
+        Bibliothekssammlungen zu erstellen, zu modifizieren, zu bewerten, zu benennen,
+        zu kommentieren und andere Accountspezifische Dinge zu erlauben.
+    </para>
+
+    <para>
+        Für weitere Informationen über die Buchsuche Daten API referieren Sie bitte zum
+        offiziellen
+        <ulink url="http://code.google.com/apis/books/gdata/developers_guide_php.html">PHP Developer's Guide</ulink>
+        auf code.google.com.
+    </para>
+
+    <sect2 id="zend.gdata.books.authentication">
+
+        <title>Beim Buchsuche Service authentifizieren</title>
+
+        <para>
+            Man kann sowohl auf öffentliche als auch private Feeds zugreifen indem man
+            die Buchsuche Daten API verwendet. Öffentliche Feeds benötigen keine
+            Authentifizierung, aber man kann Sie nur lesen. Wenn man Benutzerbibliotheken
+            verändern oder bewerden will, oder Label hinzufügen will muß der eigene
+            Client authentifiziert werden bevor man private Feeds anfragt. Er kann sich
+            authentifizieren indem einer von zwei Möglichkeiten verwendet wird:
+            AuthSub Proxy Authentifizierung oder ClientLogin Benutzername/Passwort
+            Authentifizierung. Bitte referieren Sie zum
+            <ulink url="http://code.google.com/apis/books/gdata/developers_guide_php.html#Authentication">Authentifizierungs Kapitel im PHP Developer Guide</ulink>
+            für weitere Details.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.books.searching_for_books">
+
+        <title>Nach Büchern suchen</title>
+
+        <para>
+            Die Buchsuche Daten API bietet eine Anzahl an Feeds die Sammlungen von Büchern
+            auflisten.
+        </para>
+
+        <para>
+            Die am meisten übliche Aktion ist das empfangen von Bücherlisten die einer
+            Suchanfrage entsprechen. Um das zu tun muß ein <code>VolumeQuery</code>
+            Objekt erstellt und an die <code>Books::getVolumeFeed</code> Methode
+            übergeben werden.
+        </para>
+
+        <para>
+            Um zum Beispiel eine Schlüsselwortabfrage, mit einem Filter auf der Sichtbarkeit
+            um die Ergebnisse auf partielle oder komplette sichtbare Bücher zu gegrenzen,
+            durchzuführen müssen die <code>setMinViewability</code> und
+            <code>setQuery</code> Methoden des <code>VolumeQuery</code> Objekts verwendet
+            werden. Der folgende Codeschnipsel zeigt Titel und Sichtbarkeit aller Volumes
+            deren Metadaten oder Texte dem Suchbegriff "domino" entsprechen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$books = new Zend_Gdata_Books();
+$query = $books->newVolumeQuery();
+
+$query->setQuery('domino');
+$query->setMinViewability('partial_view');
+
+$feed = $books->getVolumeFeed($query);
+
+foreach ($feed as $entry) {
+    echo $entry->getVolumeId();
+    echo $entry->getTitle();
+    echo $entry->getViewability();
+}
+]]>
+        </programlisting>
+
+        <para>
+            Die <code>Query</code> Klasse, und Subklassen wie <code>VolumeQuery</code>,
+            sind dafür zuständig das Feed URL erzeugt werden. Der VolumeQuery der vorher
+            gezeigt wurde erzeugt eine URL die der folgenden entspricht:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
+]]>
+        </programlisting>
+
+        <para>
+            Beachte: Da die Ergebnisse von Buchsuchen öffentlich sind, können Buchsuche
+            Abfragen ohne Authentifizierung durchgeführt werden.
+        </para>
+
+        <para>
+            Hier sind einige der üblichsten <code>VolumeQuery</code> Methoden für das
+            Setzen von Suchparametern:
+        </para>
+
+        <para>
+            <code>setQuery:</code> Spezifiziert einen Suchabfragebegriff. Buchsuchen
+            durchsuchen alle Metadaten der Bücher und des kompletten Textes nach Büchern die
+            dem Begriff entsprechen. Buchmetadaten enthalten Titel, Schlüsselwörter,
+            Beschreibungen, Namen von Autoren, und Untertitel. Es ist zu beachten das alle
+            Leerzeichen, Hochkomma oder andere Punktierungen im Parameterwert URL-escaped
+            werden müssen. (Verwende ein Plus (<code>+</code>) für ein Leerzeichen.)
+            Um nach einer exakten Phrase zu suchen muß die Phrase in Hochkomma eingeschlossen
+            werden. Um zum Beispiel nach einem Buch zu suchen das der Phrase "spy plane"
+            entspricht, muß der <code>q</code> Parameter auf <code>%22spy+plane%22</code>
+            gesetzt werden. Man kann jede der
+            <ulink url="http://books.google.com/advanced_book_search">zusätzlichen Suchoperatoren</ulink>
+            verwenden die von der Buchsuche unterstützt werden. Zum Beispiel gibt
+            <code>jane+austen+-inauthor:austen</code> Entsprechungen zurück die Jane Austen
+            erwähnen (aber nicht von Ihr geschrieben wurden).
+        </para>
+
+        <para>
+            <code>setStartIndex:</code> Spezifiziert den Index des ersten passenden
+            Ergebnisses das im Ergebnisset enthalten sein sollte. Dieser Parameter verwendet
+            einen eins-basierenden Index, was bedeutet das das erste Ergebnis 1 ist, das
+            zweite Ergebnis 2 und so weiter. Dieser Parameter arbeitet in Verbindung mit
+            dem max-results Parameter um festzustellen welche Ergebnisse zurückzugeben
+            sind. Um zum Beispiel das dritte Set von 10er Ergebnissen zu erhalten,
+            21-30-set, muß der <code>start-index</code> Parameter auf <code>21</code>
+            und der max-results Parameter auf <code>10</code> gesetzt werden. Es ist zu
+            beachten das das kein genereller Cursor Mechanismus ist. Wenn man zuerst
+            eine Abfrage mit <code>?start-index=1&amp;max-results=10</code> und
+            anschließend eine andere Anfrage mit <code>?start-index=11&amp;max-results=10</code>,
+            kann der Service nicht garantieren das die Ergebnisse äquivalent sind, weil
+            zwischen den zwei Anfragen Einfügungen oder Löschungen durchgeführt worden sein
+            können.
+        </para>
+
+        <para>
+            <code>setMaxResults:</code> Spezifiziert die maximale Anzahl an Ergebnissen die
+            im Ergebnisset enthalten sein sollen. Dieser Parameter arbeitet in Verbindung
+            mit dem start-index Parameter um festzustellen welche Ergebnisse zurückgegeben
+            werden sollen. Der Standartwert dieses Parameters ist <code>10</code> und der
+            Maximalwert ist <code>20</code>.
+        </para>
+
+        <para>
+            <code>setMinViewability:</code> Erlaubt es Ergebnisse entsprechend dem
+            <ulink url="http://code.google.com/apis/books/docs/dynamic-links.html#terminology">Status der Sichtbarkeit</ulink>
+            der Bücher zu filtern. Dieser Parameter akzeptiert einen von drei Werten:
+            <code>'none'</code> (der Standardwert, der alle passenden Bücher zurückgibt
+            Unabhängigkeit von der Sichtbarkeit), <code>'partial_view'</code> (was nur
+            Bücher zurückgibt die der Benutzer komplett oder teilweise sehen kann), oder
+            <code>'full_view'</code> (was nur Bücher zurückgibt die der Benutzer in Ihrer
+            Komplettheit sehen kann).
+        </para>
+
+        <sect3 id="zend.gdata.books.partner_restrict">
+
+            <title>Partner Co-Branded Suche</title>
+
+            <para>
+                Die Google Buchsuche bietet eine
+                <ulink url="http://books.google.com/support/partner/bin/answer.py?hl=en&amp;answer=65113">Co-Branded Suche</ulink>
+                an, die Inhaltspartner erlaubt Volltextsuchen Ihrer Bücher von deren
+                Webseite anzubieten.
+            </para>
+
+            <para>
+                Wenn man ein Partner ist der eine Co-Branded Suche durchführen will indem die
+                Buchsuche Daten API verwendet wird, kann man das tun indem die Feed URL von
+                vorher so angepasst wird das Sie auf die eigene Co-Branded Suchimplementation
+                zeigt. Wenn zum Beispiel, eine Co-Branded Suche unter der folgenden URL
+                vorhanden ist:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
+]]>
+            </programlisting>
+
+            <para>
+                kann man die gleichen Ergebnisse erhalten indem die Buchsuche Daten API mit der
+                folgenden URL verwendet wird:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
+]]>
+            </programlisting>
+
+            <para>
+                Um eine alternative URL zu spezifizieren wenn ein Volume Feed abgefragt wird,
+                kann ein extra Parameter an <code>newVolumeQuery</code> übergeben werden
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query =
+    $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
+]]>
+            </programlisting>
+
+            <para>
+                Für zusätzliche Informationen oder Support, sehen Sie in unser
+                <ulink url="http://books.google.com/support/partner/">Partner Help Center</ulink>.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.books.community_features">
+
+        <title>Übliche Features verwenden</title>
+
+        <sect3 id="zend.gdata.books.adding_ratings">
+
+            <title>Eine Bewertung hinzufügen</title>
+
+            <para>
+                Ein Benutzer kann einem Buch eine Bewertung hinzufügen. Die Buchsuche verwendet
+                eie 1-5 Bewertungssystem in dem 1 die geringste Bewertung ist. Benutzer können
+                Ihre Bewertungen nicht aktualisieren oder löschen.
+            </para>
+
+            <para>
+                Um eine Bewertung hinzuzufügen, muß ein <code>Rating</code> an <code>VolumeEntry</code>
+                hinzugefügt werden und an den Anmerkungsfeed gesendet werden. Im unten gezeigten
+                Beispiel starten wir von einem leeren <code>VolumeEntry</code> Objekt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$entry = new Zend_Gdata_Books_VolumeEntry();
+$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
+$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.books.reviews">
+
+            <title>Reviews</title>
+
+            <para>
+                Zusätzlich zu Bewertungen, können authentifizierte Benutzer Reviews übermitteln
+                oder Ihre eigenen Reviews bearbeiten. Für Informationen darüber wie vorher
+                übermittelte Reviews angefragt werden können, siehe
+                <ulink url="#zend.gdata.books.retrieving_annotations">Empfangen von Anmerkungen</ulink>.
+            </para>
+
+            <sect4 id="zend.gdata.books.adding_review">
+
+                <title>Eine Review hinzufügen</title>
+
+                <para>
+                    Um eine Review hinzuzufügen, muß man ein <code>Review</code> Objekt an
+                    <code>VolumeEntry</code> übergeben und es an den Anmerkungsfeed übertragen.
+                    Im unteren Beispiel starten wir von einem bestehenden <code>VolumeEntry</code>
+                    Objekt.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$annotationUrl = $entry->getAnnotationLink()->href;
+$review        = new Zend_Gdata_Books_Extension_Review();
+
+$review->setText("Dieses Buch ist aufregend!");
+$entry->setReview($review);
+$books->insertVolume($entry, $annotationUrl);
+]]>
+                </programlisting>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.books.editing_review">
+
+                <title>Eine Review bearbeiten</title>
+
+                <para>
+                    Um eine bestehende Review zu aktualisieren muß man zuerst die Review die bearbeitet
+                    werden soll empfangen, diese modifizieren, und dann an den Anmerkungsfeed übertragen.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$entryUrl = $entry->getId()->getText();
+$review   = new Zend_Gdata_Books_Extension_Review();
+
+$review->setText("Dieses Buch ist leider nicht sehr gut!");
+$entry->setReview($review);
+$books->updateVolume($entry, $entryUrl);
+]]>
+                </programlisting>
+
+            </sect4>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.books.labels">
+
+            <title>Labels</title>
+
+            <para>
+                Die Buchsuche Daten API kann verwendet werden um Volumes mit Label über Schlüsselwörtern
+                zu versehen. Ein Benutzer kann diese übertragen, empfangen und verändern. Siehe
+                <ulink url="#zend.gdata.books.retrieving_annotations">Anmerkungen empfangen</ulink>
+                dafür wie vorher übertragene Label gelesen werden können.
+            </para>
+
+            <sect4 id="zend.gdata.books.submitting_labels">
+
+                <title>Ein Set von Label übermitteln</title>
+
+                <para>
+                    Um Label zu übermitteln muß ein <code>Category</code> Objekt mit dem Schema
+                    <code>LABELS_SCHEME</code> an <code>VolumeEntry</code> hinzugefügt und an den
+                    Anmerkungsfeed übergeben werden.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$annotationUrl = $entry->getAnnotationLink()->href;
+$category      = new Zend_Gdata_App_Extension_Category(
+    'rated',
+    'http://schemas.google.com/books/2008/labels');
+$entry->setCategory(array($category));
+$books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
+]]>
+                </programlisting>
+
+            </sect4>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.books.retrieving_annotations">
+
+            <title>Empfangen von Anmerkungen: Reviews, Bewertungen und Label</title>
+
+            <para>
+                Die Buchsuche Daten API kann verwendet werden um Anmerkungen zu empfangen die
+                von einen angegebenen Benutzer übermittelt wurden. Anmerkungen enthalten Reviews,
+                Bewertungen und Label. Um irgendwelche Anmerkungen von Benutzern zu empfangen
+                muß eine nicht authentifizierte Anfrage gesendet werden die die BenutzerID des
+                Benutzers enthält. Um die Anmerkungen des authentifizierten Benutzers zu
+                empfangen muß der Wert <code>me</code> als BenutzerID verwendet werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $books->getVolumeFeed(
+            'http://www.google.com/books/feeds/users/USER_ID/volumes');
+<i>(oder)</i>
+$feed = $books->getUserAnnotationFeed();
+
+// Gibt Titel und Bewertungswerte aus
+foreach ($feed as $entry) {
+    foreach ($feed->getTitles() as $title) {
+        echo $title;
+    }
+    if ($entry->getRating()) {
+        echo 'Bewertung: ' . $entry->getRating()->getAverage();
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                Für eine Liste an unterstützten Abfrageparametern, kann man in das Kapitel
+                <ulink url="#zend.gdata.books.query_parameters">Abfrageparameter</ulink> sehen.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.books.deleting_annotations">
+
+            <title>Anmerkungen löschen</title>
+
+            <para>
+                Wenn man einen Anmerkungseintrag empfängt der Bewertungen, Reviews und/oder Label
+                enthält können alle Anmerkungen entfernt werden indem <code>deleteVolume</code>
+                an diesem Eintrag aufgerufen wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$books->deleteVolume($entry);
+]]>
+            </programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.books.sharing_with_my_library">
+
+        <title>Büchersammlungen und My Library</title>
+
+        <para>
+            Die Google Buchsuche bietet eine Anzahl von Benutzerspezifischen Buchsammlungen,
+            jede mit Ihrem eigenen Feed.
+        </para>
+
+        <para>
+            The wichtigste Sammlung ist die My Library des Benutzers, die die Bücher repräsentiert
+            die sich der Benutzer merken, organisieren und mit anderen Teilen will. Das ist die
+            Sammlung die der Benutzer sieht wenn er auf seine oder ihre
+            <ulink url="http://books.google.com/books?op=library">My Library Seite</ulink>
+            zugreift.
+        </para>
+
+        <sect3 id="zend.gdata.books.retrieving_books_in_library">
+
+            <title>Bücher auf der Benutzerbibliothek erhalten</title>
+
+            <para>
+                Die folgenden Kapitel beschreiben wie eine Liste von Büchern von der Bibliothek eines
+                Benutzers, mit oder ohne Abfrageparameter, empfangen werden können.
+            </para>
+
+            <para>
+                Man kann den öffentlichen Feed einer Buchsuche ohne Authentifizierung abfragen.
+            </para>
+
+            <sect4 id="zend.gdata.books.retrieving_all_books_in_library">
+
+                <title>Alle Bücher in einer Benutzerbibliothek empfangen</title>
+
+                <para>
+                    Um alle Bücher eines Benutzers zu empfangen muß eine Anfrage an den My Library
+                    Feed gesendet werden. Um die Bibliothek des authentifizierten Benutzers zu
+                    erhalten muß <code>me</code> statt der <code>USER_ID</code> verwendet werden.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$feed = $books->getUserLibraryFeed();
+]]>
+                </programlisting>
+
+                <para>
+                    Es ist zu beachten das es sein kann das der Feed nicht alle Bücher des Benutzers
+                    enthält, weil es ein Standardlimit der Anzahl der zurückgegebenen Ergebnisse gibt.
+                    Für weitere Information siehe den <code>max-results</code> Abfrageparameter in
+                    <ulink url="#zend.gdata.books.searching_for_books">Suchen nach Büchern</ulink>.
+                </para>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.books.retrieving_books_in_library_with_query">
+
+                <title>Nach Büchern in einer Benutzerbibliothek suchen</title>
+
+                <para>
+                    Genauso wie man
+                    <ulink url="#zend.gdata.books.searching_for_books">über alle Bücher suchen kann</ulink>,
+                    kann man auch eine Volltextsuche über die Bücher in einer Benutzerbibliothek
+                    durchführen. Um das zu tun müssen einfach die betreffenden Parameter am
+                    <code>VolumeQuery</code> Objekt gesetzt werden.
+                </para>
+
+                <para>
+                    Zum Beispiel gibt die folgende Abfrage alle Bücher in der eigenen Bibliothek
+                    zurück die das Word "Bär" enthalten:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$query = $books->newVolumeQuery(
+    'http://www.google.com/books/feeds/users/' .
+    'USER_ID/collections/library/volumes');
+$query->setQuery('Bär');
+$feed = $books->getVolumeFeed($query);
+]]>
+                </programlisting>
+
+                <para>
+                    Für eine Liste von unterstützten Abfrageparametern können Sie in das Kapitel
+                    <ulink url="#zend.gdata.books.query_pParameters">Abfrageparameter</ulink> sehen.
+                    Zusätzlich kann nach Büchern gesucht werden die
+                    <ulink url="#zend.gdata.books.labels">von einem Benutzer gelabelt wurden</ulink>:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$query = $books->newVolumeQuery(
+    'http://www.google.com/books/feeds/users/' .
+    'USER_ID/collections/library/volumes');
+$query->setCategory(
+$query->setCategory('favorites');
+$feed = $books->getVolumeFeed($query);
+]]>
+                </programlisting>
+
+            </sect4>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.books.updating_library">
+
+            <title>Bücher in einer Benutzerbibliothek aktualisieren</title>
+
+            <para>
+                Die Buchsuche Daten API kann dazu verwendet werden um ein Buch einer
+                Benutzerbibliothek hinzuzufügen oder es aus Ihr zu entfernen. Bewertungen,
+                Reviews und Label sind über alle Sammlungen eines Benutzers gültig, und
+                können deswegen bearbeitet werden indem der Anmerkungsfeed verwendet wird (siehe
+                <ulink url="#zend.gdata.books.community_features">Verwendung üblicher Features</ulink>).
+            </para>
+
+            <sect4 id="zend.gdata.books.library_book_add">
+
+                <title>Ein Buch zu einer Bibliothek hinzufügen</title>
+
+                <para>
+                    Nach der Authentifizierung können Bucher zur aktuellen Benutzerbibliothek
+                    hinzugefügt werden.
+                </para>
+
+                <para>
+                    Man kann entweder einen Eintrag von Null auf erstellen wenn man die Volume ID weiß,
+                    oder einen Eintrag einfügen wenn von irgendeinem Feed gelesen wird.
+                </para>
+
+                <para>
+                    Das folgende Beispiel erstellt einen neuen Eintrag und fügt Ihn der Bibliothek hinzu:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$entry = new Zend_Gdata_Books_VolumeEntry();
+$entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
+$books->insertVolume(
+    $entry,
+    Zend_Gdata_Books::MY_LIBRARY_FEED_URI
+);
+]]>
+                </programlisting>
+
+                <para>
+                    Das folgende Beispiel fügt ein bestehendes <code>VolumeEntry</code> Objekt in der
+                    Bibliothek hinzu:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$books->insertVolume(
+    $entry,
+    Zend_Gdata_Books::MY_LIBRARY_FEED_URI
+);
+]]>
+                </programlisting>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.books.library_book_remove">
+
+                <title>Ein Buch von einer Bibliothek entfernen</title>
+
+                <para>
+                    Um ein Buch von einer Benutzerbibliothek zu entfernen, muß
+                    <code>deleteVolume</code> auf dem <code>VolumeEntry</code>
+                    Objekt aufgerufen werden.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$books->deleteVolume($entry);
+]]>
+                </programlisting>
+
+            </sect4>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>

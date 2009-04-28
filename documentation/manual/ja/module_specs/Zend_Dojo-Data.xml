@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.dojo.data">
+    <title>Zend_Dojo_Data: dojo.data エンベロープ</title>
+
+    <para>
+        Dojo には、データを扱うウィジェットのデータを抽象化するための
+        dojo.data コンポーネントが存在します。
+        このコンポーネントの持つ機能は、
+        データストアのアタッチ、identifier フィールド (そしてオプションで
+        label フィールド) に関連するメタデータの提供、
+        問い合わせやソート用の API、
+        データストアからのレコードの取得などがあります。
+    </para>
+
+    <para>
+        dojo.data は、よく XmlHttpRequest と組み合わせて用いられます。
+        動的なデータをサーバから取得するためにです。
+        この基本的な仕組みは、QueryReadStore
+        を拡張して URL とクエリ情報を指定するようにします。
+        サーバ側からは、データを次のような JSON 形式で返します。
+    </para>
+
+    <programlisting role="javascript"><![CDATA[
+{
+    identifier: '<name>',
+    <label: '<label>',>
+    items: [
+        { name: '...', label: '...', someKey: '...' },
+        ...
+    ]
+}
+]]>
+</programlisting>
+
+    <para>
+        <classname>Zend_Dojo_Data</classname> は、
+        このような構造をプログラムで作成したりそれを操作したり、
+        配列や JSON にシリアライズしたりといった機能のシンプルなインターフェイスを提供します。
+    </para>
+
+    <sect2 id="zend.dojo.data.usage">
+        <title>Zend_Dojo_Data の使用法</title>
+
+        <para>
+            もっともシンプルな使用法は、dojo.data
+            に各アイテムの identifier フィールドの名前とアイテムの内容 (データ) を渡すことです。
+            コンストラクタか、あるいは設定用メソッドで渡します。
+        </para>
+
+        <example id="zend.dojo.data.usage.constructor">
+            <title>コンストラクタでの Zend_Dojo_Data の初期化</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data('id', $items);
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.dojo.data.usage.mutators">
+            <title>設定用メソッドでの Zend_Dojo_Data の初期化</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data();
+$data->setIdentifier('id')
+     ->addItems($items);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            アイテムをひとつずつ追加したり複数一括で追加したりするには、それぞれ
+            <code>addItem()</code> および <code>addItems()</code>
+            を使用します。
+        </para>
+
+        <example id="zend.dojo.data.usage.append">
+            <title><classname>Zend_Dojo_Data</classname> へのデータの追加</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data($identifier, $items);
+$data->addItem($someItem);
+
+$data->addItems($someMoreItems);
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title>常に identifier を使うこと!</title>
+
+            <para>
+                すべての dojo.data データストアは、identifier
+                カラムがメタデータに存在することを必須としています。
+                <classname>Zend_Dojo_Data</classname> でもそれは同じです。
+                identifier のないアイテムを追加しようとすると、
+                例外が発生します。
+            </para>
+        </note>
+
+        <para>
+            個々のアイテムは、次のいずれかとなります。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                連想配列
+            </para></listitem>
+
+            <listitem><para>
+                <code>toArray()</code> メソッドを実装したオブジェクト
+            </para></listitem>
+
+            <listitem><para>
+                その他のオブジェクト (get_object_vars() でシリアライズされます)
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            これらのアイテムのコレクションをアタッチするには
+            <code>addItems()</code> あるいは <code>setItems()</code>
+            (既存のアイテムはすべて消去されます) を使用します。
+            これを使用するときには、引数をひとつ指定します。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                配列
+            </para></listitem>
+
+            <listitem><para>
+                <code>Traversable</code> インターフェイスを実装したオブジェクト
+                (このインターフェイスは <code>Iterator</code> と
+                <code>ArrayAccess</code> を含んでいます)。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            アイテムの label として働くフィールドを指定したい場合は
+            <code>setLabel()</code> をコールします。
+        </para>
+
+        <example id="zend.dojo.data.usage.label">
+            <title><classname>Zend_Dojo_Data</classname> での label フィールドの指定</title>
+
+            <programlisting role="php"><![CDATA[
+$data->setLabel('name');
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            最後に、<classname>Zend_Dojo_Data</classname> のアイテムを
+            dojo.data JSON 配列から読み込むには <code>fromJson()</code>
+            メソッドを使用します。
+        </para>
+
+        <example id="zend.dojo.data.usage.populate">
+            <title>JSON からの <classname>Zend_Dojo_Data</classname> の作成</title>
+
+            <programlisting role="php"><![CDATA[
+$data->fromJson($json);
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.dojo.data.metadata">
+        <title>コンテナへのメタデータの追加</title>
+
+        <para>
+            Dojo コンポーネントの中には、
+            dojo.data の中に追加のメタデータを必要とするものもあります。
+            たとえば <code>dojox.grid.Grid</code> は、データを動的に
+            <code>dojox.data.QueryReadStore</code> から取得することができます。
+            ページ移動を正しく行うには、返されるデータの中に <code>numRows</code>
+            というキーのデータ (中身はクエリが返す行の数) が必要となります。
+            これによりグリッドが、サーバ側へのリクエストをいつ送ったらいいのか、
+            そしていつリクエストが不要になるのか
+            (つまり最終ページに達するのがいつなのか) を知ることができるようになります。
+            このテクニックを使用すると、大規模なデータセットをグリッドに表示させる際に
+            データ全体をいちどに取得する必要はなくなります。
+        </para>
+
+        <para>
+            <classname>Zend_Dojo_Data</classname> では、
+            このようなプロパティをオブジェクトのメタデータとして設定することができます。
+            以下の使用例をご覧ください。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// "numRows" を 100 に設定します
+$data->setMetadata('numRows', 100);
+
+// 複数の項目をいちどに設定します
+$data->setMetadata(array(
+    'numRows' => 100,
+    'sort'    => 'name',
+));
+
+// メタデータの値を調べます
+$numRows = $data->getMetadata('numRows');
+
+// すべてのメタデータを取得します
+$metadata = $data->getMetadata();
+
+// メタデータを削除します
+$data->clearMetadata('numRows');
+
+// すべてのメタデータを削除します
+$data->clearMetadata();
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.dojo.data.advanced">
+        <title>高度な使用法</title>
+
+        <para>
+            シリアライズ可能なデータコンテナとしての働きだけではなく、
+            <classname>Zend_Dojo_Data</classname> にはデータを様々な方法で操作したり
+            読み込んだりする機能もあります。
+        </para>
+
+        <para>
+            <classname>Zend_Dojo_Data</classname> は、インターフェイス
+            <code>ArrayAccess</code>、<code>Iterator</code> および
+            <code>Countable</code> を実装しています。
+            そのため、データコレクションをまるで配列であるかのように使用することができます。
+        </para>
+
+        <para>
+            すべてのアイテムは、その identifier フィールドを用いて参照します。
+            identifier は一意でなければならないので、
+            この値を使用すればレコードを特定できるのです。
+            参照する方法には、<code>getItem()</code>
+            メソッドを使用するものと配列表記を使用するものの 2 通りがあります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// getItem() を使用します
+$item = $data->getItem('foo');
+
+// あるいは配列表記を使用します
+$item = $data['foo'];
+]]>
+        </programlisting>
+
+        <para>
+            identifier がわかれば、それを使用してアイテムを取得したり、
+            あるいは更新したり削除したり作成したり調べたりすることができます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// アイテムの更新あるいは作成
+$data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
+
+// アイテムの削除
+unset($data['foo']);
+
+// アイテムの確認
+if (isset($data[foo])) {
+}
+]]>
+        </programlisting>
+
+        <para>
+            すべてのアイテムをループ処理することもできます。
+            内部的には、すべてのアイテムは配列として格納されています。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+foreach ($data as $item) {
+    echo $item['title'] . ': ' . $item['description'] . "\n";
+}
+]]>
+        </programlisting>
+
+        <para>
+            count で、アイテムの総数を調べることも可能です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo count($data), " items found!";
+]]>
+        </programlisting>
+
+        <para>
+            また、このクラスは <code>__toString()</code> を実装しているので、
+            JSON への変換は単に echo するか文字列にキャストするだけで可能です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $data; // JSON 文字列として echo
+
+$json = (string) $data; // 文字列へのキャスト == JSON へのキャスト
+]]>
+        </programlisting>
+
+        <sect3 id="zend.dojo.data.advanced.methods">
+            <title>使用可能なメソッド</title>
+
+            <para>
+                上で説明したインターフェイスを実装するのに必要なメソッドに加えて、
+                次のメソッドが使用可能です。
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>setItems($items)</code>: 複数のアイテムを一度に設定し、
+                    それまでそのオブジェクトに設定されていたアイテムをすべて上書きします。
+                    <code>$items</code> は、配列あるいは
+                    <code>Traversable</code> オブジェクトでなければなりません。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setItem($item, $id = null)</code>:
+                    個別のアイテムを設定し、オプションで明示的に identifier を渡します。
+                    それまでにコレクション内にあったアイテムは上書きされます。
+                    アイテムとして指定できるのは、連想配列、あるいは
+                    <code>toArray()</code> を実装したオブジェクト、
+                    あるいは public プロパティを持つそれ以外のオブジェクトです。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>addItem($item, $id = null)</code>:
+                    個別のアイテムを追加し、オプションで明示的に identifier を渡します。
+                    コレクション内にそのアイテムが既に存在する場合は例外が発生します。
+                    アイテムとして指定できるのは、連想配列、あるいは
+                    <code>toArray()</code> を実装したオブジェクト、
+                    あるいは public プロパティを持つそれ以外のオブジェクトです。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>addItems($items)</code>: 複数のアイテムを一度に追加し、
+                    それを任意のアイテムに追記します。新しく追加するアイテムの中に、
+                    コレクション内の既存のアイテムの identifier
+                    と一致するものがある場合は例外が発生します。
+                    <code>$items</code> は、配列あるいは
+                    <code>Traversable</code> オブジェクトでなければなりません。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getItems()</code>: すべてのアイテムを、配列の配列形式で取得します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>hasItem($id)</code>: 指定した identifier
+                    のアイテムがコレクション内に存在するかどうかを調べます。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getItem($id)</code>: 指定した identifier
+                    のアイテムをコレクションから取得します。
+                    返されるアイテムは連想配列となります。
+                    マッチするアイテムがない場合は、null 値を返します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>removeItem($id)</code>: 指定した identifier
+                    のアイテムをコレクションから削除します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>clearItems()</code>:
+                    コレクション内のすべてのアイテムを消去します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setIdentifier($identifier)</code>:
+                    コレクション内の各アイテムの一意な識別子
+                    (identifier) をあらわすフィールドの名前を設定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getIdentifier()</code>:
+                    identifier フィールドの名前を取得します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setLabel($label)</code>:
+                    アイテムの表示用ラベルとして使用するフィールドの名前を設定します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getLabel()</code>: ラベル用フィールドの名前を取得します。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>toArray()</code>: オブジェクトを配列にキャストします。
+                    配列には、最低限 'identifier' と 'items'
+                    というキーが含まれ、オブジェクトにラベルフィールドが設定されている場合は
+                    'label' というキーも含まれます。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>toJson()</code>: オブジェクトを JSON
+                    表現にキャストします。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
+

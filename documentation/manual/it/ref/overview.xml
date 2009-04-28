@@ -1,0 +1,17 @@
+<sect1 id="introduction.overview">
+
+    <title>Panoramica</title>
+
+    <para>
+        Il Framework Zend è un framework open source di alta qualità destinato allo sviluppo di applicazioni web e servizi web in PHP.
+    </para>
+
+    <para>
+        Costruito in pieno spirito PHP, il Framework Zend offre funzionalità potenti e facili da utilizzare.
+        Fornisce soluzioni utili per costruire siti web moderni, robusti e sicuri.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

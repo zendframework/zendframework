@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15099 -->
+<sect1 id="performance.database">
+    <title>Zend_Dbパフォーマンス</title>
+
+    <para>
+        <classname>Zend_Db</classname>はデータベースを抽象化するレイヤーで、SQL操作のための
+        共通APIを提供する意図があります。
+        <classname>Zend_Db_Table</classname>はテーブルデータのゲートウェィで、抽象的な
+        共通のテーブルレベルでのデータベース操作を提供する意図があります。
+        Due to their abstract nature and the "magic" they do under
+        the hood to perform their operations, they can sometimes introduce
+        performance overhead.
+    </para>
+
+    <sect2 id="performance.database.tableMetadata">
+        <title>テーブルのメタデータを取得する際にZend_Db_Tableによってもたらされる
+        オーバーヘッドをどのようにしたら減らせますか？</title>
+
+        <para>
+            In order to keep usage as simple as possible, and also to support
+            constantly changing schemas during development,
+            <classname>Zend_Db_Table</classname> does some magic under the hood: on
+            first use, it fetches the table schema and stores it within object
+            members. This operation is typically expensive, regardless of the
+            database -- which can contribute to bottlenecks in production.
+        </para>
+
+        <para>
+            Fortunately, there are techniques for improving the situation.
+        </para>
+
+        <sect3 id="performance.database.tableMetadata.cache">
+            <title>メタデータキャッシュの利用</title>
+
+            <para>
+                <classname>Zend_Db_Table</classname>ではテーブルのメタデータをキャッシュする
+                ために<classname>Zend_Cache</classname>を任意で利用できます。
+                This is
+                typically faster to access and less expensive than fetching the
+                metadata from the database itself.
+            </para>
+
+            <para>
+                <link linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table</classname>
+                のドキュメントにメタデータをキャッシュすることについての情報があります。</link>
+            </para>
+        </sect3>
+
+        <sect3 id="performance.database.tableMetadata.hardcoding">
+            <title>テーブル定義でメタデータをハードコーディングする</title>
+
+            <para>
+                As of 1.7.0, <classname>Zend_Db_Table</classname> also provides <link
+                    linkend="zend.db.table.metadata.caching.hardcoding">support
+                for hardcoding metadata in the table definition</link>. This is
+                an advanced use case, and should only be used when you know the
+                table schema is unlikely to change, or that you're able to keep
+                the definitions up-to-date.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="performance.database.select">
+        <title>Zend_Db_Selectで生成されたSQLがインデックスにヒットしません。
+        どのようにしたらより良く出来ますか？</title>
+
+        <para>
+            <classname>Zend_Db_Select</classname> is relatively good at its job. However,
+            if you are performing complex queries requiring joins or
+            sub-selects, it can often be fairly naive.
+        </para>
+
+        <sect3 id="performance.database.select.writeyourown">
+            <title>自分で最適化したSQLを書く</title>
+
+            <para>
+                現実的な唯一の答えは自分でSQLを書くことです;
+                自分で用意できるなら、<classname>Zend_Db</classname>で必ず
+                <classname>Zend_Db_Select</classname>を使わずに、調整されたselect文の
+                SQLが完璧で筋の通った道筋です。
+            </para>
+            <para>
+                Run <code>EXPLAIN</code> on your queries, and test a variety of
+                approaches until you can reliably hit your indices in the most
+                performant way -- and then hardcode the SQL as a class property
+                or constant.
+            </para>
+
+            <para>
+                If the SQL requires variable arguments, provide placeholders in
+                the SQL, and utilize a combination of <code>vsprintf</code> and
+                <code>array_walk</code> to inject the values into the SQL:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// $adapter is the DB adapter. In Zend_Db_Table, retrieve
+// it using $this->getAdapter().
+$sql = vsprintf(
+    self::SELECT_FOO,
+    array_walk($values, array($adapter, 'quoteInto'))
+);
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

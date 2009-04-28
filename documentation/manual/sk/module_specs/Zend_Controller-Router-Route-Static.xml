@@ -1,0 +1,26 @@
+<sect3 id="zend.controller.router.routes.static">
+    <title>Zend_Controller_Router_Route_Static</title>
+
+    <para>
+        Všetky predchádzajúce príklady používajú dynamické smerovanie - smerovania,
+        ktoré obsahujú vzory na porovnávanie. Niekedy je ale smerovanie pevne dané
+        a použitie regulárnych výrazov by bolo až príliš veľa. Odpoveďou na túto
+        situáciu je použitie statického smerovania:
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php
+$route = new Zend_Controller_Router_Route_Static(
+    'login',
+    array('controller' => 'auth', 'action' => 'login')
+);
+$router->addRoute('login', $route);]]></programlisting>
+
+    <para>
+        Uvedený príklad priradí URL <code>http://domain.com/login</code> a
+        pošle metóde <code>AuthController::loginAction()</code>.
+    </para>
+
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

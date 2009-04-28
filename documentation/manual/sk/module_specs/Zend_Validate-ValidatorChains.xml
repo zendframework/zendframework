@@ -1,0 +1,69 @@
+<sect1 id="zend.validate.validator_chains">
+
+    <title>Reťazenie validátorov</title>
+
+    <para>
+        Často je potrebné aplikovať viac typov validácie na hodnotu v istom poradí.
+        Nasledujúca ukážka objasní princíp ako to urobiť na príklade z
+        <link linkend="zend.validate.introduction">úvodu</link>, kde bolo požadované,
+        že meno používateľa musí mať 6 až 12 alfanumerických znakov:
+<programlisting role="php"><![CDATA[<?php
+
+// Triedy na reťazenie validátorov
+require_once 'Zend/Validate.php';
+
+// Potrebné validátory
+require_once 'Zend/Validate/StringLength.php';
+require_once 'Zend/Validate/Alnum.php';
+
+// Vytvorenie zreťazenia
+$validatorChain = new Zend_Validate();
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+               ->addValidator(new Zend_Validate_Alnum());
+
+// Validácia username
+if ($validatorChain->isValid($username)) {
+    // username zodpovedá požiadavke
+} else {
+    // username nezodpovedá požiadavke; zobrazenie chýb
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+
+?>]]></programlisting>
+
+        Validátory sú aplikované podľa podľa poradia v ktorom boli pridané do
+        <code>Zend_Validate</code>. V uvedenom príklade je najprv skontrolovaná dĺžka,
+        či je medzi 6 - 12, potom či obsahuje iba alfanumerické znaky. Druhá validácia
+        je urobená vždy, nezávisle na výsledku prvej. Ak obidve validácie zlyhajú,
+        potom <code>getMessages()</code> vráti chybové správy z obidvoch validátorov.
+    </para>
+
+    <para>
+        V niektorých prípadoch je zmysluplné prerušiť validáciu ak validácia bola neúspešná.
+        <code>Zend_Validate</code> umožňuje takéto správanie pomocou druhého parametra
+        metódy <code>addValidator()</code>. Nastavením <code>$breakChainOnFailure</code>
+        na <code>true</code> sa preruší validácia v prípade neúspešnej validácie a nebudú
+        vykonané všetky ostatné validácie, ktoré sú zbytočné, alebo nevhodné v danej
+        situácii. Ak náš príklad upravíme nasledovne, potom alfanumerická validácia
+        neprebehne ak bude neúspešná validácia na dĺžku reťazca:
+
+        <programlisting role="php"><![CDATA[<?php
+
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
+        ->addValidator(new Zend_Validate_Alnum());
+
+?>]]></programlisting>
+
+    </para>
+
+    <para>
+        Každý objekt ktorý implementuje <code>Zend_Validate_Interface</code> môže byť
+        použitý v zreťazení validátorov.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

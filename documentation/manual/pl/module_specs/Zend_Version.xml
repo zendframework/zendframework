@@ -1,0 +1,30 @@
+<sect1 id="zend.version.reading">
+
+    <title>Odczytywanie wersji Zend Framework</title>
+
+    <para>
+        Stała klasy <code>Zend_Version::VERSION</code> zawiera łańcuch znaków,
+        który określa aktualny numer wersji Zend Framework. Przykładowo może
+        to być "0.9.0beta".
+    </para>
+
+    <para>
+        Statyczna metoda <code>Zend_Version::compareVersion($version)</code>
+        jest oparta na funkcji
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Metoda zwraca -1 gdy wersja ze zmiennej <code>$version</code>
+        jest starsza niż wersja Zend Framework, 0 jeśli są takie same,
+        a +1 gdy wersja ze zmiennej <code>$version</code> jest nowsza niż
+        wersja Zend Framework.
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>Przykład użycia metody compareVersion()</title>
+        <programlisting role="php"><![CDATA[
+// zwraca -1, 0 lub 1
+$cmp = Zend_Version::compareVersion('1.0.0');
+]]>
+        </programlisting>
+    </example>
+
+</sect1>

@@ -1,0 +1,69 @@
+<sect1 id="zend.validate.validator_chains">
+
+    <title>Cadenas de Validadores</title>
+
+    <para>
+        Frecuentemente deben aplicarse múltiples validaciones a algún valor en 
+        un orden particular. 
+        El siguiente código demuestra una forma de resolver el ejemplo de la 
+        <link linkend="zend.validate.introduction">introducción</link>, donde el
+        nombre de usuario debe tener entre 6 y 12 caracteres alfanuméricos.
+
+        <programlisting role="php"><![CDATA[
+// Crea una cadena de validadores y le agrega validadores
+$validatorChain = new Zend_Validate();
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+               ->addValidator(new Zend_Validate_Alnum());
+
+// Valida el username
+if ($validatorChain->isValid($username)) {
+    // username pasó la validación
+} else {
+    // username falló en la validación; muestre las razones
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]>
+        </programlisting>
+
+        Los validadores se ejecutan en el orden en que se agregaron a <code>Zend_Validate</code>. 
+        En el ejemplo anterior, el nombre de usuario, primero se comprueba que 
+        su longitud esté entre 6 y 12 caracteres y luego se controla para garantizar 
+        que sólo contiene caracteres alfanuméricos. 
+        La segunda validación; de caracteres alfanuméricos; se realiza independientemente 
+        de que la primera validación; de longitud entre 6 y 12 caracteres; tenga éxito. 
+        Esto significa que si ambas validaciones fallan, <code>getMessages()</code> 
+        devolverá mensajes de fracaso desde ambos validadores.
+    </para>
+
+    <para>
+        En algunos casos tiene sentido detener la cadena de validación si falla 
+        alguno de los procesos de validación. 
+        <code>Zend_Validate</code> acepta tales casos pasando como segundo 
+        parámetro el método <code>addValidator()</code>. 
+        Poniendo <code>$breakChainOnFailure</code> a <code>true</code>, 
+        el validador agregado quebrará la cadena de ejecución por el fracaso, 
+        que evita correr cualquier otra validación que se decida que es  
+        innecesaria o inapropiada para la situación. 
+        Si el ejemplo anterior fue escrito como sigue, entonces el sistema 
+        de validación alfanumérica no se ejecutará si falla la longitud del 
+        string de validación:
+
+        <programlisting role="php"><![CDATA[
+$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
+        ->addValidator(new Zend_Validate_Alnum());
+]]>
+        </programlisting>
+
+    </para>
+
+    <para>
+        Cualquier objeto que implemente <code>Zend_Validate_Interface</code> 
+        puede ser utilizado en una cadena de validación.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.search.lucene.advanced">
+    <title>Advanced</title>
+
+    <sect2 id="zend.search.lucene.advanced.format_migration">
+        <title>Starting from 1.6, handling index format transformations.</title>
+
+        <para>
+            <classname>Zend_Search_Lucene</classname> component works with Java Lucene 1.4-1.9, 2.1 and 2.3 index formats.
+        </para>
+
+        <para>
+            Current index format may be requested using <code>$index->getFormatVersion()</code> call.
+            It returns one of the following values:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> for Java Lucene 1.4-1.9 index format.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> for Java Lucene 2.1 index format (also used for Lucene 2.2).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> for Java Lucene 2.3 index format.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            Index modifications are performed <emphasis role="strong">only</emphasis> if any index update is done.
+            That happens if a new document is added to an index or index optimization is started manually
+            by <code>$index->optimize()</code> call.
+        </para>
+
+        <para>
+            In a such case <classname>Zend_Search_Lucene</classname> may convert index to the higher format version.
+            That <emphasis role="strong">always</emphasis> happens for the indices in <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> format,
+            which are automatically converted to 2.1 format.
+        </para>
+
+        <para>
+            You may manage conversion process and assign target index format by <code>$index->setFormatVersion()</code> which takes
+            <classname>Zend_Search_Lucene::FORMAT_2_1</classname> or <classname>Zend_Search_Lucene::FORMAT_2_3</classname> constant as a parameter:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>Zend_Search_Lucene::FORMAT_2_1</classname> actually does nothing since pre-2.1 indices are automatically converted
+                        to 2.1 format.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Search_Lucene::FORMAT_2_3</classname> forces conversion to the 2.3 format.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            Backward conversions are not supported.
+        </para>
+
+        <note>
+            <title>Important!</title>
+            <para>
+                Once index is converted to upper version it can't be converted back. So make a backup of your index when you plan
+                migration to upper version, but want to have possibility to go back.
+            </para>
+        </note>
+
+    </sect2>
+
+
+    <sect2 id="zend.search.lucene.advanced.static">
+        <title>Using the index as static property</title>
+
+        <para>
+            The <classname>Zend_Search_Lucene</classname> object uses the destructor method to commit changes and clean up resources.
+        </para>
+
+        <para>
+            It stores added documents in memory and dumps new index segment to disk depending on <code>MaxBufferedDocs</code> parameter.
+        </para>
+
+        <para>
+            If <code>MaxBufferedDocs</code> limit is not reached then there are some "unsaved" documents which are saved as a new segment in the object's destructor method.
+            The index auto-optimization procedure is invoked if necessary depending on the values of the <code>MaxBufferedDocs</code>, <code>MaxMergeDocs</code> and
+            <code>MergeFactor</code> parameters.
+        </para>
+
+        <para>
+            Static object properties (see below) are destroyed <emphasis>after</emphasis> the last line of the executed script.
+
+            <programlisting role="php"><![CDATA[
+class Searcher {
+    private static $_index;
+
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
+    }
+}
+
+Searcher::initIndex();
+]]></programlisting>
+        </para>
+
+
+        <para>
+            All the same, the destructor for static properties is correctly invoked at this point in the program's execution.
+        </para>
+
+        <para>
+            One potential problem is exception handling. Exceptions thrown by destructors of static objects don't have context, because the destructor is executed after the script has already completed.
+        </para>
+
+        <para>
+            You might see a "Fatal error: Exception thrown without a stack frame in Unknown on line 0" error message instead of exception description in such cases.
+        </para>
+
+        <para>
+            <classname>Zend_Search_Lucene</classname> provides a workaround to this problem with the <code>commit()</code> method. It saves all unsaved changes and frees memory used for storing new segments.
+            You are free to use the commit operation any time- or even several times- during script execution. You can still use the <classname>Zend_Search_Lucene</classname> object for searching,
+            adding or deleting document after the commit operation. But the <code>commit()</code> call guarantees that if there are no document added or deleted after the call to <code>commit()</code>, then
+            the <classname>Zend_Search_Lucene</classname> destructor has nothing to do and will not throw exception:
+
+            <programlisting role="php"><![CDATA[
+class Searcher {
+    private static $_index;
+
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
+    }
+
+    ...
+
+    public static function commit() {
+        self::$_index->commit();
+    }
+}
+
+Searcher::initIndex();
+
+...
+
+// Script shutdown routine
+...
+Searcher::commit();
+...
+]]></programlisting>
+        </para>
+    </sect2>
+</sect1>

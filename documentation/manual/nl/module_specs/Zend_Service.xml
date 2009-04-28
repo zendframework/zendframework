@@ -1,0 +1,21 @@
+<sect1 id="zend.service.introduction">
+    <title>Inleiding</title>
+    <para>
+        <code>Zend_Service</code> is een abstracte klasse die als basis dient voor web service implementaties (bv. XML-RPC).
+    </para>
+    <para>
+        <code>Zend_Service</code> biedt ondersteuning voor eender welke REST-gebaseerde web service via
+        <link linkend="zend.rest.client"><code>Zend_Rest_Client</code></link>.
+    </para>
+    <para>
+        Naast de mogelijkheid om <code>Zend_Service</code> uit te breiden en <code>Zend_Service_Rest</code> te gebruiken
+        voor REST-gebaseerde web services biedt Zend ook ondersteuning voor populaire web services zoals
+        <link linkend="zend.service.akismet">Akismet</link>,
+        <link linkend="zend.service.amazon">Amazon</link>,
+        <link linkend="zend.service.flickr">Flickr</link>, and
+        <link linkend="zend.service.yahoo">Yahoo!</link>. Er kunnen er worden bijgevoegd in de toekomst.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

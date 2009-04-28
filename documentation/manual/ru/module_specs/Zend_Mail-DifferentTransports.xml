@@ -1,0 +1,54 @@
+<sect1 id="zend.mail.different-transports">
+    <title>
+        Использование разных соединений
+<!--
+        Using Different Transports
+-->
+    </title>
+    <para>
+        В том случае, если вы хотите отправлять различные сообщения через разные
+        соединения, вы можете передавать объект транспортировщика напрямую в
+        <code>send()</code> без предшествующего вызова <code>setDefaultTransport()</code>.
+        Переданный объект заменит собой транспортировщик по умолчанию для текущего
+        запроса <code>send()</code>.
+<!--
+        In case you want to send different e-mails through different connections, you can also pass the
+        transport object directly to <code>send()</code> without a prior call to
+        <code>setDefaultTransport()</code>. The passed object will override the default transport for the
+        actual <code>send()</code> request:
+-->
+    </para>
+    <example>
+        <title>
+            Использование разных соединений
+<!--
+            Using Different Transports
+-->
+        </title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// формирование сообщения...
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
+$tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
+$mail->send($tr1);
+$mail->send($tr2);
+$mail->send();  // опять используется соединение по умолчанию
+?>]]>   </programlisting>
+    </example>
+    <note>
+        <title>Дополнительные транспортировщики<!--Additional transports--></title>
+        <para>
+            Дополнительные транспортировщики могут быть написаны посредством реализации
+            интерфейса <code>Zend_Mail_Transport_Interface</code>.
+<!--
+            Additional transports can be written by implementing <code>Zend_Mail_Transport_Interface</code>.
+-->
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

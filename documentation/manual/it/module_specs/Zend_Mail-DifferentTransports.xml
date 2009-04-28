@@ -1,0 +1,30 @@
+<sect1 id="zend.mail.different-transports">
+    <title>Utilizzo di differenti transport</title>
+    <para>
+        In caso si desideri inviare differenti e-mail utilizzando differenti connessioni, è possibile specificare l'oggetto transport direttamente al metodo <code>send()</code> senza una chiamata precedente a <code>setDefaultTransport()</code>.
+        L'oggetto fornito sovrascriverà il transport predefinito per la richiesta <code>send()</code> corrente:
+    </para>
+    <example id="zend.mail.different-transports.example-1">
+        <title>Utilizzo di differenti transport</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// crea il messaggio...
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr1 = new Zend_Mail_Transport_Smtp('server@example.com');
+$tr2 = new Zend_Mail_Transport_Smtp('altro_server@example.com');
+$mail->send($tr1);
+$mail->send($tr2);
+$mail->send();  // utilizza nuovamente il tipo predefinito]]>
+        </programlisting>
+    </example>
+    <note>
+        <title>Transport aggiuntivi</title>
+        <para>
+            E' possibile scrivere transport aggiuntivi implementando l'interfaccia <code>Zend_Mail_Transport_Interface</code>.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

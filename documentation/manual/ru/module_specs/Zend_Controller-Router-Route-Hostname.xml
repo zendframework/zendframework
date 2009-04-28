@@ -1,0 +1,127 @@
+<sect3 id="zend.controller.router.routes.hostname">
+    <title>Zend_Controller_Router_Route_Hostname</title>
+
+    <para>
+        <code>Zend_Controller_Router_Route_Hostname</code> является маршрутом,
+        основанным на имени хоста. Он работает аналогично стандартному маршруту,
+        но использует имя хоста в URL вместо пути.
+    </para>
+
+    <para>
+        Возьмем пример из описания стандартного маршрута и посмотрим, как
+        это будет выглядеть при использовании имени хоста. Вместо того, чтобы
+        указывать пользователя через путь, нам требуется, чтобы можно было
+        набрать URL вида <code>http://martel.users.example.com</code> для
+        того, чтобы увидеть информацию о пользователе "martel":
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(
+    ':username.users.example.com',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$plainPathRoute = new Zend_Controller_Router_Route_Static('');
+
+$router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
+]]>
+    </programlisting>
+
+    <para>
+        Первым параметром в конструкторе
+        <code>Zend_Controller_Router_Route_Hostname</code> является определение
+        маршрута, которое будет сопоставляться с именем хоста.
+        Определения маршрутов содержат статические и динамические части,
+        разделенные точкой ('.'). Динамические части, называемые
+        переменными, помечаются знаком двоеточия:
+        <code>:username</code>. Статические части являются обычным текстом:
+        <code>user</code>.
+    </para>
+
+    <para>
+        Технически маршруты по имени хоста могут использоваться сами по
+        себе, но этого никогда не следует делать по той причине, что
+        отдельно такой маршрут может соответствовать любому
+        пути. Поэтому нужно объединять маршруты по имени хоста
+        с маршрутами по пути. Это можно делать так, как
+        показано в примере выше - путем вызова
+        <code>$hostnameRoute->chain($pathRoute);</code>.
+        При этом <code>$hostnameRoute</code> не изменяется, но будет
+        возвращен новый маршрут
+        (<code>Zend_Controller_Router_Route_Chain</code>), который может быть
+        передан маршрутизатору.
+    </para>
+
+    <note>
+        <title>Приоритет параметров</title>
+        <para>
+            При объединении маршрутоа по имени хоста и маршрута по пути
+            параметры маршрута по имени хоста имеют больший приоритет.
+            Таким образом, если вы определили контроллер одновременно в
+            маршрутах обоих типов, то будет выбран контроллер из
+            маршрута по имени хоста.
+        </para>
+    </note>
+
+    <sect4 id="zend.controller.router.routes.hostname.config">
+        <title>Указание маршрутов по имени хоста через <code>Zend_Config</code></title>
+
+        <para>
+            Для объединения маршрутов по имени хоста и по пути есть
+            дополнительный параметр для конфигурации -
+            <code>chains</code>. Это просто список маршрутов, который будет
+            объединен с родительским маршрутом. Ни родительский, ни дочерний
+            маршруты не будут добавлены в маршрутизатор напрямую, в него будет
+            добавлен только составленный из них маршрут. Имя объединенного
+            маршрута в маршрутизаторе будет состоять из имени родительского
+            маршрута и имени дочернего маршрута, объединенных с использованием
+            тире (-). Простая конфигугация в формате XML может выглядеть
+            следующим образом:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<routes>
+    <www type="Zend_Controller_Router_Route_Hostname">
+        <route>www.example.com</route>
+        <chains>
+            <index type="Zend_Controller_Router_Route_Static">
+                <route></route>
+                <defaults module="default" controller="index" action="index" />
+            </index>
+            <imprint type="Zend_Controller_Router_Route_Static">
+                <route>imprint</route>
+                <defaults module="default" controller="index" action="index" />
+            </imprint>
+        </chains>
+    </www>
+    <users type="Zend_Controller_Router_Route_Hostname">
+        <route>users.example.com</route>
+        <chains>
+            <profile type="Zend_Controller_Router_Route">
+                <route>:username</route>
+                <defaults module="users" controller="profile" action="index" />
+            </profile>
+        </chains>
+    </users>
+    <misc type="Zend_Controller_Router_Route_Static">
+        <route>misc</route>
+    </misc>
+</routes>
+]]>
+        </programlisting>
+
+        <para>
+            Результатом будет три маршрута: <code>www-index</code>,
+            <code>www-imprint</code> и <code>users-profile</code>,
+            которые будут соответствовать только именам хоста, подходящим под
+            заданные определения, и маршрут <code>misc</code>, который будет
+            соответствовать любым именам хоста.
+        </para>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

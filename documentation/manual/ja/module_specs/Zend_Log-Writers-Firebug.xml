@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect2 id="zend.log.writers.firebug">
+    <title>Firebug への書き込み</title>
+    <para>
+      <classname>Zend_Log_Writer_Firebug</classname> は、ログデータを
+      <ulink url="http://www.getfirebug.com/">Firebug</ulink>
+      <ulink url="http://getfirebug.com/logging.html">コンソール</ulink>
+      に送信します。
+    </para>
+    <para>
+      <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100" width="310" />
+    </para>
+    <para>
+      すべてのデータの送信には <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
+      コンポーネントを使用します。これは HTTP ヘッダを使用するので、
+      ページのコンテンツには何も影響を及ぼしません。
+      この方式なら、AJAX リクエストのようにクリーンな JSON
+      および XML レスポンスを要求するリクエストのデバッグも行えます。
+    </para>
+    <para>
+      要件:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Firefox ブラウザ。バージョン 3 が最適ですがバージョン 2 にも対応しています。
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Firebug 拡張。
+          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+          からダウンロードできます。
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          FirePHP 拡張。
+          <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+          からダウンロードできます。
+        </para>
+      </listitem>
+    </itemizedlist>
+
+    <example id="zend.log.writers.firebug.example.with_front_controller">
+      <title><classname>Zend_Controller_Front</classname> を使ったログ記録</title>
+
+      <programlisting role="php"><![CDATA[
+// 起動ファイルで、フロントコントローラのディスパッチの前に記述します
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+// モデル、ビューおよびコントローラのファイル内でこれを使用します
+$logger->log('This is a log message!', Zend_Log::INFO);
+]]>
+      </programlisting>
+    </example>
+
+    <example id="zend.log.writers.firebug.example.without_front_controller">
+      <title><classname>Zend_Controller_Front</classname> を使わないログ記録</title>
+
+      <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+$request = new Zend_Controller_Request_Http();
+$response = new Zend_Controller_Response_Http();
+$channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+$channel->setRequest($request);
+$channel->setResponse($response);
+
+// 出力バッファリングを開始します
+ob_start();
+
+// ロガーをコールします
+
+$logger->log('This is a log message!', Zend_Log::INFO);
+
+// ログデータをブラウザに送ります
+$channel->flush();
+$response->sendHeaders();
+]]>
+      </programlisting>
+    </example>
+
+    <sect3 id="zend.log.writers.firebug.priority-styles">
+
+      <title>優先度のスタイルの設定</title>
+
+      <para>
+        組み込みの優先度やユーザ定義の優先度を使うには
+        <code>setPriorityStyle()</code> メソッドを使用します。
+      </para>
+      <programlisting role="php"><![CDATA[
+$logger->addPriority('FOO', 8);
+$writer->setPriorityStyle(8, 'TRACE');
+$logger->foo('Foo Message');
+]]>
+      </programlisting>
+      <para>
+        ユーザ定義の優先度用のデフォルトのスタイルを設定するには
+        <code>setDefaultPriorityStyle()</code> メソッドを使用します。
+      </para>
+      <programlisting role="php"><![CDATA[
+$writer->setDefaultPriorityStyle('TRACE');
+]]>
+      </programlisting>
+      <para>
+        サポートしているスタイルは次のとおりです。
+        <table id="zend.log.writers.firebug.priority-styles.table">
+            <title>Firebug Logging Styles</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>スタイル</entry>
+                        <entry>説明</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>LOG</code></entry>
+                        <entry>通常のログメッセージを表示します</entry>
+                    </row>
+                    <row>
+                        <entry><code>INFO</code></entry>
+                        <entry>情報ログメッセージを表示します</entry>
+                    </row>
+                    <row>
+                        <entry><code>WARN</code></entry>
+                        <entry>警告ログメッセージを表示します</entry>
+                    </row>
+                    <row>
+                        <entry><code>ERROR</code></entry>
+                        <entry>エラーログメッセージを表示し、Firebug のエラーカウントをひとつ増やします</entry>
+                    </row>
+                    <row>
+                        <entry><code>TRACE</code></entry>
+                        <entry>拡張スタックトレースつきのログメッセージを表示します</entry>
+                    </row>
+                    <row>
+                        <entry><code>EXCEPTION</code></entry>
+                        <entry>拡張スタックトレースつきのエラーログメッセージを表示します</entry>
+                    </row>
+                    <row>
+                        <entry><code>TABLE</code></entry>
+                        <entry>拡張テーブルつきのログメッセージを表示します</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data">
+
+      <title>ログ記録用のデータの準備</title>
+
+      <para>
+        任意の PHP の変数を組み込みの優先度でログに記録することができますが、
+        特殊なログ形式を使う場合は、何らかの書式変換が必要となります。
+      </para>
+      <para>
+        <code>LOG</code>、<code>INFO</code>、<code>WARN</code>、<code>ERROR</code>
+        そして <code>TRACE</code> については特別な書式変換は不要です。
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.exception">
+
+      <title>例外のログ記録</title>
+
+      <para>
+        <classname>Zend_Exception</classname> のログを記録するには、
+        単にその例外オブジェクトをロガーに渡すだけです。
+        設定している優先度やスタイルにかかわらず、
+        例外は自動的に例外と判断されます。
+      </para>
+      <programlisting role="php"><![CDATA[
+$exception = new Zend_Exception('Test exception');
+$logger->err($exception);
+]]>
+      </programlisting>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.table">
+
+      <title>表形式のログ</title>
+
+      <para>
+        ログを表形式で記録することができます。カラムは自動検出され、
+        データの最初の行がヘッダと見なされます。
+      </para>
+      <programlisting role="php"><![CDATA[
+$writer->setPriorityStyle(8, 'TABLE');
+$logger->addPriority('TABLE', 8);
+
+$table = array('Summary line for the table',
+             array(
+                 array('Column 1', 'Column 2'),
+                 array('Row 1 c 1',' Row 1 c 2'),
+                 array('Row 2 c 1',' Row 2 c 2')
+             )
+            );
+$logger->table($table);
+]]>
+      </programlisting>
+    </sect3>
+</sect2>

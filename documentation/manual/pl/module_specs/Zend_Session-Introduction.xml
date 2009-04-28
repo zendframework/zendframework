@@ -1,0 +1,77 @@
+<sect1 id="zend.session.introduction">
+
+    <title>Wprowadzenie</title>
+
+    <para>
+        Zespół Zend Framework Auth bardzo docenia twój wkład w naszą listę email:
+        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>
+    </para>
+
+    <para>
+        W aplikacjach web używających PHP, a <emphasis role="bold">sesja</emphasis>
+        reprezentuje logiczne połączenie jeden-do-jednego pomiędzy danymi o stanie
+        użytkownika znajdującymi się na serwerze, a konkretną aplikacją
+        użytkownika (np. przeglądarka stron internetowych).
+        <code>Zend_Session</code> pomaga w zarządzaniu i zabezpieczaniu danych
+        sesji, które są logicznym dopełnieniem danych w ciasteczku, pomiędzy
+        wieloma żądaniami do serwisu przez tego samego klienta. W
+        przeciwieństwie do danych z ciasteczka, dane sesji nie są przechowywane
+        po stronie klienta i są one dostępne dla klienta tylko wtedy, gdy kod po
+        stronie serwera dobrowolnie udostępni dane w odpowiedzi na żądanie
+        klienta. Dla celów tego komponentu oraz dokumentacji, określenie "dane
+        sesji" odnoszą się do danych przechowywanych po stronie serwera w
+        tablicy
+        <ulink url="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>,
+        zarządzanych przez <code>Zend_Session</code>,
+        oraz indywidualnie manipulowanych przez obiekty dostępowe
+        <code>Zend_Session_Namespace</code>.
+        <emphasis role="bold">Przestrzenie nazw sesji</emphasis> zapewniają
+        dostęp do danych sesji używając klasycznych
+        <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">przestrzeni nazw</ulink>
+        implementowanych logicznie jako nazwane grupy asocjacyjnych tablic, o
+        kluczach będących łańcuchami znaków. (analogicznie jak tablice PHP).
+    </para>
+
+    <para>
+        Instancje <code>Zend_Session_Namespace</code> są obiektami dostępowymi
+        dla przestrzeni nazw będących wycinkami tablicy <code>$_SESSION</code>.
+        Komponent <code>Zend_Session</code> rozszerza istniejącą funkcjonalność
+        PHP ext/session dodając interfejs umożliwiający administrację i
+        zarządzanie, a także zapewniając API dla przestrzeni nazw
+        <code>Zend_Session_Namespace</code>.
+        <code>Zend_Session_Namespace</code> zapewnia ustandaryzowany zorientowany
+        obiektowo interfejs do pracy z przestrzeniami nazw istniejącymi wewnątrz
+        standardowego mechanizmu sesji PHP. Wspierane są zarówno przestrzenie
+        nazw dla anonimowych użytkowników, jak i dla uwierzytelnionych (np.
+        zalogowanych). <code>Zend_Auth</code>, komponent autentykacji w Zend
+        Framework używa <code>Zend_Session_Namespace</code> do przechowywania informacji
+        związanych z autentykowanymi użytkownikami w przestrzeni nazw "Zend_Auth".
+        Z tego względu, że <code>Zend_Session</code> używa normalnych
+        wewnętrznych funkcji modułu sesji, oraz umożliwia użycie wszystkich
+        znanych opcji konfiguracyjnych i ustawień (zobacz
+        <ulink url="http://www.php.net/session">http://www.php.net/session</ulink>),
+        a dodatkowo umożliwia dostęp za pomocą zorientowanego obiektowo
+        interfejsu, to użycie tego modułu jest przykładem dobrej praktyki
+        programowania, a także gładko integruje się z Zend Framework.
+        Zatem standardowy identyfikator sesji PHP przechowywany albo w
+        ciasteczku klienta, albo dołączony do adresów URL, umożliwia połączenie
+        klienta oraz danych stanu sesji.
+    </para>
+
+    <para>
+        Domyślna
+        <ulink url="http://www.php.net/manual/en/function.session-set-save-handler.php">obsługa
+        zapisu sesji</ulink> nie rozwiązuje problemu zarządzania tym powiązaniem
+        dla klastrów serwerów, ponieważ dane sesji przechowywane są w systemie
+        plików serwera, który odpowiada na żądanie. Jeśli żądanie może byc
+        przetworzone przez inny serwer niż ten, na którym zapisane są dane
+        sesji, to przetwarzający serwer nie ma dostępu do danych sesji (jeśli
+        nie są dostępne w systemie plików połączonym siecią). Dodatkowe
+        odpowiednie możliwości obsługi zapisu będą zapewnione, gdy będzie to
+        możliwe. Namawiamy członków społeczności aby wysyłali propozycje
+        możliwości obsługi zapisu na listę
+        <ulink url="mailto:fw-auth@lists.zend.com">fw-auth@lists.zend.com</ulink>.
+        Obsługa zapisu kompatybilna z Zend_Db została opisana na liście.
+    </para>
+
+</sect1>

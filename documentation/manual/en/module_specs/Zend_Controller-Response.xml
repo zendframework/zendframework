@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.response">
+    <title>The Response Object</title>
+
+    <sect2 id="zend.controller.response.usage">
+        <title>Usage</title>
+
+        <para>
+            The response object is the logical counterpart to the <link
+                linkend="zend.controller.request">request object</link>. Its
+            purpose is to collate content and/or headers so that they may be
+            returned en masse. Additionally, the front controller will pass any
+            caught exceptions to the response object, allowing the developer to
+            gracefully handle exceptions. This functionality may be overridden
+            by setting
+            <classname>Zend_Controller_Front::throwExceptions(true)</classname>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+]]></programlisting>
+
+        <para>
+            To send the response output, including headers, use
+            <code>sendResponse()</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->sendResponse();
+]]></programlisting>
+
+        <note>
+            <para>
+                By default, the front controller calls <code>sendResponse()</code>
+                when it has finished dispatching the request; typically you will
+                never need to call it. However, if you wish to manipulate the
+                response or use it in testing, you can override this
+                behaviour by setting the <code>returnResponse</code> flag with
+                <classname>Zend_Controller_Front::returnResponse(true)</classname>:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// do some more processing, such as logging...
+// and then send the output:
+$response->sendResponse();
+]]></programlisting>
+        </note>
+
+        <para>
+            Developers should make use of the response object in their action
+            controllers. Instead of directly rendering output and sending
+            headers, push them to the response object:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Within an action controller action:
+// Set a header
+$this->getResponse()
+    ->setHeader('Content-Type', 'text/html')
+    ->appendBody($content);
+]]></programlisting>
+
+        <para>
+            By doing this, all headers get sent at once, just prior to
+            displaying the content.
+        </para>
+
+        <note>
+            <para>
+                If using the action controller <link
+                    linkend="zend.controller.action.viewintegration">view
+                    integration</link>, you do not need to set the rendered view
+                script content in the response object, as
+                <classname>Zend_Controller_Action::render()</classname> does this by default.
+            </para>
+        </note>
+
+        <para>
+            Should an exception occur in an application, check the response object's
+            <code>isException()</code> flag, and retrieve the exception using
+            <code>getException()</code>. Additionally, one may create custom
+            response objects that redirect to error pages, log exception messages,
+            do pretty formatting of exception messages (for development
+            environments), etc.
+        </para>
+
+        <para>
+            You may retrieve the response object following the front controller
+            dispatch(), or request the front controller to return the response
+            object instead of rendering output.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// retrieve post-dispatch:
+$front->dispatch();
+$response = $front->getResponse();
+if ($response->isException()) {
+    // log, mail, etc...
+}
+
+// Or, have the front controller dispatch() process return it
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// do some processing...
+
+// finally, echo the response
+$response->sendResponse();
+]]></programlisting>
+
+        <para>
+            By default, exception messages are not displayed. This behaviour may be
+            overridden by calling <code>renderExceptions()</code>, or enabling the
+            front controller to throwExceptions(), as shown above:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->renderExceptions(true);
+$front->dispatch($request, $response);
+
+// or:
+$front->returnResponse(true);
+$response = $front->dispatch();
+$response->renderExceptions();
+$response->sendResponse();
+
+// or:
+$front->throwExceptions(true);
+$front->dispatch();
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.response.headers">
+        <title>Manipulating Headers</title>
+
+        <para>
+            As stated previously, one aspect of the response object's duties is
+            to collect and emit HTTP response headers. A variety of methods
+            exist for this:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>canSendHeaders()</code> is used to determine if
+                    headers have already been sent. It takes an optional flag
+                    indicating whether or not to throw an exception if headers
+                    have already been sent. This can be overridden by setting
+                    the property <code>headersSentThrowsException</code> to
+                    <code>false</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($name, $value, $replace = false)</code> is
+                    used to set an individual header. By default, it does not
+                    replace existing headers of the same name in the object;
+                    however, setting <code>$replace</code> to true will force it
+                    to do so.
+                </para>
+
+                <para>
+                    Before setting the header, it checks with
+                    <code>canSendHeaders()</code> to see if this operation is
+                    allowed at this point, and requests that an exception be
+                    thrown.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRedirect($url, $code = 302)</code> sets an HTTP
+                    Location header for a redirect. If an HTTP status code has
+                    been provided, it will use that status code.
+                </para>
+
+                <para>
+                    Internally, it calls <code>setHeader()</code> with the
+                    <code>$replace</code> flag on to ensure only one such header
+                    is ever sent.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeaders()</code> returns an array of all headers.
+                    Each array element is an array with the keys 'name' and
+                    'value'.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders()</code> clears all registered headers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRawHeader()</code> can be used to set headers that
+                    are not key/value pairs, such as an HTTP status header.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getRawHeaders()</code> returns any registered raw
+                    headers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearRawHeaders()</code> clears any registered raw
+                    headers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearAllHeaders()</code> clears both regular key/value
+                    headers as well as raw headers.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            In addition to the above methods, there are accessors for setting
+            and retrieving the HTTP response code for the current request,
+            <code>setHttpResponseCode()</code> and
+            <code>getHttpResponseCode()</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.response.namedsegments">
+        <title>Named Segments</title>
+
+        <para>
+            The response object has support for "named segments". This allows
+            you to segregate body content into different segments and order
+            those segments so output is returned in a specific order.
+            Internally, body content is saved as an array, and the various
+            accessor methods can be used to indicate placement and names within
+            that array.
+        </para>
+
+        <para>
+            As an example, you could use a <code>preDispatch()</code> hook to
+            add a header to the response object, then have the action controller
+            add body content, and a <code>postDispatch()</code> hook add a
+            footer:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Assume that this plugin class is registered with the front controller
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->prepend('header', $view->render('header.phtml'));
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->append('footer', $view->render('footer.phtml'));
+    }
+}
+
+// a sample action controller
+class MyController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        $this->render();
+    }
+}
+]]></programlisting>
+
+        <para>
+            In the above example, a call to <code>/my/foo</code> will cause the
+            final body content of the response object to have the following
+            structure:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+array(
+    'header'  => ..., // header content
+    'default' => ..., // body content from MyController::fooAction()
+    'footer'  => ...  // footer content
+);
+]]></programlisting>
+
+        <para>
+            When this is rendered, it will render in the order in which elements
+            are arranged in the array.
+        </para>
+
+        <para>
+            A variety of methods can be used to manipulate the named segments:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setBody()</code> and <code>appendBody()</code> both
+                    allow you to pass a second value, <code>$name</code>,
+                    indicating a named segment. In each case, if you provide
+                    this, it will overwrite that specific named segment or
+                    create it if it does not exist (appending to the array by
+                    default). If no named segment is passed to
+                    <code>setBody()</code>, it resets the entire body content
+                    array. If no named segment is passed to appendBody(), the
+                    content is appended to the value in the 'default' name
+                    segment.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>prepend($name, $content)</code> will create a segment
+                    named <code>$name</code> and place it at the beginning of
+                    the array. If the segment exists already, it will be removed
+                    prior to the operation (i.e., overwritten and replaced).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>append($name, $content)</code> will create a segment
+                    named <code>$name</code> and place it at the end of
+                    the array. If the segment exists already, it will be removed
+                    prior to the operation (i.e., overwritten and replaced).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>insert($name, $content, $parent = null, $before =
+                        false)</code> will create a segment named
+                    <code>$name</code>. If provided with a <code>$parent</code>
+                    segment, the new segment will be placed either before or
+                    after that segment (based on the value of
+                    <code>$before</code>) in the array. If the segment exists
+                    already, it will be removed prior to the operation (i.e.,
+                    overwritten and replaced).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearBody($name = null)</code> will remove a single
+                    named segment if a <code>$name</code> is provided (and the
+                    entire array otherwise).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getBody($spec = false)</code> can be used to retrieve a single
+                    array segment if <code>$spec</code> is the name of a named
+                    segment. If <code>$spec</code> is false, it returns a string
+                    formed by concatenating all named segments in order. If
+                    <code>$spec</code> is true, it returns the body content
+                    array.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.exceptions">
+        <title>Testing for Exceptions in the Response Object</title>
+
+        <para>
+            As mentioned earlier, by default, exceptions caught during dispatch
+            are registered with the response object. Exceptions are registered
+            in a stack, which allows you to keep all exceptions thrown --
+            application exceptions, dispatch exceptions, plugin exceptions, etc.
+            Should you wish to check for particular exceptions or to log
+            exceptions, you'll want to use the response object's exception API:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setException(Exception $e)</code> allows you to
+                    register an exception.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>isException()</code> will tell you if an exception has
+                    been registered.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getException()</code> returns the entire
+                    exception stack.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfType($type)</code> allows you to
+                    determine if an exception of a particular class is in the
+                    stack.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfMessage($message)</code> allows you to
+                    determine if an exception with a specific message is in the
+                    stack.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfCode($code)</code> allows you to
+                    determine if an exception with a specific code is in the
+                    stack.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByType($type)</code> allows you to
+                    retrieve all exceptions of a specific class from the stack.
+                    It will return false if none are found, and an array of
+                    exceptions otherwise.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByMessage($message)</code> allows you to
+                    retrieve all exceptions with a specific message from the stack.
+                    It will return false if none are found, and an array of
+                    exceptions otherwise.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByCode($code)</code> allows you to
+                    retrieve all exceptions with a specific code from the stack.
+                    It will return false if none are found, and an array of
+                    exceptions otherwise.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderExceptions($flag)</code> allows you to set a
+                    flag indicating whether or not exceptions should be emitted
+                    when the response is sent.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.subclassing">
+        <title>Subclassing the Response Object</title>
+
+        <para>
+            The purpose of the response object is to collect headers and content
+            from the various actions and plugins and return them to the client;
+            secondarily, it also collects any errors (exceptions) that occur in
+            order to process them, return them, or hide them from the end user.
+        </para>
+
+        <para>
+            The base response class is
+            <classname>Zend_Controller_Response_Abstract</classname>, and any subclass you
+            create should extend that class or one of its derivatives. The
+            various methods available have been listed in the previous sections.
+        </para>
+
+        <para>
+            Reasons to subclass the response object include modifying how output
+            is returned based on the request environment (e.g., not sending
+            headers for CLI or PHP-GTK requests), adding functionality to return
+            a final view based on content stored in named segments, etc.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

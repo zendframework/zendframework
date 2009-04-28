@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!DOCTYPE martif PUBLIC "ISO 12200:1999A//DTD MARTIF core (DXFcdV04)//EN" "TBXcdv04.dtd">
+
+<martif type="TBX" xml:lang="en">
+    <martifHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>TBX Example</title>
+            </titleStmt>
+            <sourceDesc>
+                <p>for translation tests</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <p type="DCSName">No encoding</p>
+        </encodingDesc>
+    </martifHeader>
+    <text>
+        <body>
+            <termEntry id="c1">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 1</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 1 (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c2">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 2</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 2 (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c3">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 3</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 3 (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c4">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 4</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Message 4 (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c5">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Cooking furniture</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Küchen Möbel (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c6">
+                <langSet xml:lang="en">
+                    <ntig>
+                        <termGrp>
+                            <term>Küchen Möbel</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>Cooking furniture (en)</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+        </body>
+    </text>
+</martif>

@@ -1,0 +1,135 @@
+<sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>标准校验类</title>
+
+    <para>
+        Zend Framework 带有一组标准的校验类供你使用。
+    </para>
+
+    <sect2 id="zend.validate.set.alnum">
+        <title>Alnum</title>
+        <para>
+            当且仅当<code>$value</code>只包含字母和数字字符，返回 <code>true</code>。这个校验器包括一个考虑空白字符是否有效的选项。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.alpha">
+        <title>Alpha</title>
+        <para>
+            当且仅当<code>$value</code>只包含字母字符，返回 <code>true</code>。这个校验器包括一个考虑空白字符是否有效的选项。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.barcode">
+        <title>Barcode</title>
+        <para>
+            这个校验器是个带有条码类型的实例，条码类型是根据你希望用来校验条码值而定。它目前支持 "<code>UPC-A</code>"  （通用产品码）和 "<code>EAN-13</code>"  （欧洲商品码）条码类型，当且仅当输入成功通过条码校验算法的校验，<code>isValid()</code>  返回 true。你应该从输入中删除除了数字0到9（0-9）以外的其它字符，然后传递给校验器。
+         </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.between">
+        <title>Between</title>
+        <para>
+            当且仅当<code>$value</code>在最小值和最大值之间，返回<code>true</code>。缺省地，比较包含边界值（<code>$value</code>可以等于边界值），尽管为了做精确地比较这个可以被覆盖。所谓精确地比较，就是<code>$value</code>必须大于最小值和小于最大值。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ccnum">
+        <title>Ccnum</title>
+        <para>
+            当且仅当<code>$value</code>遵循Luhn(mod-10 checksum)算法，返回<code>true</code> 。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.date">
+        <title>日期</title>
+        <para>
+            当<code>$value</code>是一个格式为<code>YYYY-MM-DD</code>的有效日期，返回<code>true</code> 。如果<code>locale</code> 选项被设置那么日期将根据locale来校验，如果<code>format</code> 选项被设置成这个格式用来校验。关于选项参数的细节参见<link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.digits">
+        <title>数字</title>
+        <para>
+            当且仅当<code>$value</code>只包含数字字符，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-EmailAddress.xml" />
+
+    <sect2 id="zend.validate.set.float">
+        <title>浮点数</title>
+        <para>
+            当且仅当<code>$value</code>是一个浮点数值，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.greater_than">
+        <title>GreaterThan</title>
+        <para>
+            当且仅当<code>$value</code>大于最小值，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.hex">
+        <title>十六进制数</title>
+        <para>
+            当且仅当<code>$value</code>只包含十六进制的数字字符，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-Hostname.xml" />
+
+    <sect2 id="zend.validate.set.in_array">
+        <title>InArray</title>
+        <para>
+            当且仅当一个"needle"<code>$value</code>包含在一个"haystack"数组，返回 <code>true</code>。如果精确选项是<code>true</code>，那么<code>$value</code>的类型也被检查。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.int">
+        <title>整数</title>
+        <para>
+            当且仅当<code>$value</code>是一个有效的整数，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ip">
+        <title>Ip</title>
+        <para>
+            当且仅当<code>$value</code>是一个有效的IP地址，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.less_than">
+        <title>LessThan</title>
+        <para>
+            当且仅当<code>$value</code>小于最大值，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.not_empty">
+        <title>NotEmpty</title>
+        <para>
+            当且仅当<code>$value</code>非空，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.regex">
+        <title>Regex</title>
+        <para>
+            当且仅当<code>$value</code>匹配一个正则表达式，返回 <code>true</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.string_length">
+        <title>StringLength</title>
+        <para>
+            当且仅当字串长度值<code>$value</code>至少是最小值并不大于最大值（当max选项不是<code>null</code>），返回 <code>true</code>。从1.5.0版开始，如果最小长度被设置为一个大于已设定的最大长度的值，<code>setMin()</code>方法抛出一个异常，并且如果最大长度值被设置为小于一个已设定的最小长度的值，<code>setMax()</code>方法抛出一个异常。从1.0.2版开始，基于<ulink url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink> 的当前值，这个类支持UTF-8和其它字符编码。
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,48 @@
+<sect1 id="zend.filter.filter_chains">
+
+    <title>Цепочки фильтров<!--Filter Chains--></title>
+
+    <para>
+        Часто к одним и тем же данным должно быть применено несколько фильтров в определенном порядке. Например, форма аутентификации должна принимать имя пользователя, состояшее только из алфавитных символов в нижнем регистре. <code>Zend_Filter</code> предоставляет простой метод, посредством которого составляется цепочка фильтров. Следующий код показывает, как создать цепочку из двух фильтров для имени пользователя.
+<!--
+        Often multiple filters should be applied to some value in a particular order. For example, a
+        login form accepts a username that should be only lowercase, alphabetic characters.
+        <code>Zend_Filter</code> provides a simple method by which filters may be chained together. The
+        following code illustrates how to chain together two filters for the submitted username:
+-->
+        <programlisting role="php"><![CDATA[<?php
+// Предоставляет возможность создания цепочек фильтров
+require_once 'Zend/Filter.php';
+
+// Фильтры, нужные для примера
+require_once 'Zend/Filter/Alpha.php';
+require_once 'Zend/Filter/StringToLower.php';
+
+// Создание цепочки фильтров и добавление в нее фильтров
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new Zend_Filter_Alpha())
+            ->addFilter(new Zend_Filter_StringToLower());
+
+// Фильтрация имени пользователя
+$username = $filterChain->filter($_POST['username']);]]></programlisting>
+
+        Фильтры применяются в том же порядке, в котором они были добавлены в
+        <code>Zend_Filter</code>. В примере выше из имени пользователя сначала удаляются все неалфавитные символы, затем все символы в верхнем регистре приводятся к нижнему.
+<!--
+        Filters are run in the order they were added to <code>Zend_Filter</code>. In the above example, the
+        username is first removed of any non-alphabetic characters, and then any uppercase characters are
+        converted to lowercase.
+-->
+    </para>
+
+    <para>
+        Все объекты, реализующие интерфейс <code>Zend_Filter_Interface</code>, могут использоваться в цепочке фильтров.
+<!--
+        Any object that implements <code>Zend_Filter_Interface</code> may be used in a filter chain.
+-->
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

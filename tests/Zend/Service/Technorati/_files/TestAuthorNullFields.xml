@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Author XML fragment.
+    
+-->
+<author>
+    <username>cesarehtml</username>
+    <firstname>Cesare</firstname>
+    <lastname>Lamanna</lastname>
+    <thumbnailpicture>http://static.technorati.com/progimages/photo.jpg?uid=117217</thumbnailpicture>
+</author>

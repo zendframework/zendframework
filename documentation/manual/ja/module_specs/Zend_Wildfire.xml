@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.wildfire.chapter">
+
+  <title>Zend_Wildfire</title>
+
+  <para>
+    <classname>Zend_Wildfire</classname> は、PHP コードと
+    <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
+    クライアントコンポーネントとの間の通信を行うコンポーネントです。
+  </para>
+  <para>
+    Wildfire Project の目的は、さまざまなコンポーネントと
+    動的でスクリプタブルなプラグイン機構の間の通信を標準化することです。
+    現時点でもっとも力を注いでいるのは、サーバサイドの PHP
+    コードのログメッセージを
+    <ulink url="http://www.getfirebug.com/">Firebug</ulink>
+    <ulink url="http://getfirebug.com/logging.html">コンソール</ulink>
+    に送る仕組みを提供することです。
+  </para>
+  <para>
+    Firebug へのログ出力のために
+    <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
+    コンポーネントを提供しています。通信プロトコルは
+    HTTP リクエストヘッダとレスポンスヘッダを使用し、
+    これによってサーバとクライアントコンポーネントの間の通信を行っています。
+    ページのコンテンツに何も手を加えなくても、
+    スクリプト実行時に生成したさまざまなデータをブラウザ側で記録できるのです。
+    この方式なら、AJAX リクエストのようにクリーンな JSON
+    および XML レスポンスを要求するリクエストのデバッグも行えます。
+  </para>
+  <para>
+    <link linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
+    コンポーネントを使用すると、データベースのプロファイル情報を Firebug に記録できます。
+  </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

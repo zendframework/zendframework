@@ -1,0 +1,27 @@
+<sect1 id="zend.mail.adding-recipients">
+    <title>Pridávanie príjemcov</title>
+    <para>
+        Príjemcovia môžu byť pridaný jedným zo spôsobov:
+        <itemizedlist>
+        <listitem>
+        <para><code>addTo()</code>: Pridá príjemcu pomocou &quot;To&quot; hlavičky (komu).</para>
+        </listitem>
+        <listitem>
+        <para><code>addCc()</code>: Pridá príjemcu pomocou &quot;Cc&quot; hlavičky (kópia).</para>
+        </listitem>
+        <listitem>
+        <para><code>addBcc()</code>: Pridá príjemcu, ktorý nebude viditeľný pre ostatných (skrytá kópia).</para>
+        </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <title>Ďalší parameter</title>
+        <para>
+            Metódy <code>addTo()</code> a <code>addCc()</code> majú druhý nepovinný parameter, ktorý
+            sa používa ako meno príjemcu.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

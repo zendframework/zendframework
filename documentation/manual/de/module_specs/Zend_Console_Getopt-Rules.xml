@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.console.getopt.rules">
+    <title>Definieren von Getopt Regeln</title>
+    <para>
+        Der Constructor für die <classname>Zend_Console_Getopt</classname> Klasse nimmt
+        ein bis drei Argumente. Das erste Argument definiert welche Optionen durch
+        die Anwendung unterstützt werden. Diese Klasse unterstützt alternative
+        Syntaxformen für das definieren der Optionen. Die nächsten Sektionen geben
+        Auskunft über das Format und die Verwendung dieser Syntaxformen.
+    </para>
+    <para>
+        Der Constructor nimmt zwei weitere Argumente, welche optional sind.
+        Das zweite Argument kann Kommandozeilen Argumente enthalten. Sein
+        Standardwert ist <code>$_SERVER['argv']</code>.
+    </para>
+    <para>
+        Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten
+        um das Verhalten von <classname>Zend_Console_Getopt</classname> anzupassen.
+        Siehe <link linkend="zend.console.getopt.configuration.config">Konfiguration hinzufügen</link>
+        für eine Referenz der möglichen Optionen.
+    </para>
+
+    <sect2 id="zend.console.getopt.rules.short">
+        <title>Optionen mit der kurzen Syntax definieren</title>
+        <para>
+            <classname>Zend_Console_Getopt</classname> unterstützt eine kompakte Syntax wie Sie durch
+            GNU Getopt verwendet wird (siehe
+            <ulink url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
+            Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen
+            Zeichenkette, wird jeder Buchstabe angegeben der einem Flag entspricht
+            das durch die Anwendung unterstützt wird. Der Buchstabe, gefolgt von einem
+            Doppelpunkt Zeichen ("<code>:</code>") zeigt ein Flag das einen Parameter
+            benötigt.
+        </para>
+        <example id="zend.console.getopt.rules.short.example">
+            <title>Verwendung der kurzen Syntax</title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt('abp:');
+]]>
+            </programlisting>
+        </example>
+        <para>
+            Das obige Beispiel zeigt die Verwendung von <classname>Zend_Console_Getopt</classname>
+            um die Optionen zu definieren die als "<code>-a</code>", "<code>-b</code>",
+            oder "<code>-p</code>" angegeben werden können. Das letzte Flag benötigt
+            einen Parameter.
+        </para>
+        <para>
+            Die kurze Syntax ist limitiert auf Flags mit einzelnen Zeichen.
+            Aliase, Parametertypen und Hilfszeichenketten werden in der
+            kurzen Syntax nicht unterstützt.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.console.getopt.rules.long">
+        <title>Optionen mit der langen Syntax definieren</title>
+        <para>
+            Eine andere Syntax mit mehr Möglichkeiten ist auch vorhanden. Diese
+            Syntax ermöglicht es Aliase für Flags, Typen von Optionsparametern
+            und auch Hilfszeichenkette zu definieren um die Verwendung für den
+            Benutzer zu beschreiben. Statt einer einzelnen Zeichenkette die in der
+            kurzen Syntax verwendet wird um die Optionen zu definieren, verwendet
+            die lange Syntax ein assoziatives Array als erstes Argument für den
+            Constructor.
+        </para>
+        <para>
+            Der Schlüssel jeden Elements des assoziativen Array ist eine
+            Zeichenkette mit einem Format das das Flag benennt, mit jedem Alias,
+            getrennt durch ein Pipe Symbol ("<code>|</code>"). Dieser Serie von
+            Flag Aliasen folgende, wenn die Option einen Parameter benötigt, ist
+            ein Gleichheitszeichen ("<code>=</code>") mit einem Buchstaben der
+            für den <emphasis>Typ</emphasis> dieses Parameters steht:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    "<code>=s</code>" für einen Zeichenketten Parameter
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    "<code>=w</code>" für einen Wort Parameter
+                    (eine Zeichenkette die keine Leerzeichen enthält)
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    "<code>=i</code>" für einen Integer Parameter
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            Wenn der Parameter optional ist, kann ein Bindestrich ("<code>-</code>")
+            statt des Gleichheitszeichens verwendet werden.
+        </para>
+        <para>
+            Der Wert jeden Elements in diesem assiziativen Array ist eine
+            Hilfszeichenkette um dem Benutzer zu beschreiben wie das Programm
+            verwendet werden kann.
+        </para>
+        <example id="zend.console.getopt.rules.long.example">
+            <title>Verwendung der langen Syntax</title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt(
+    array(
+        'apfel|a'    => 'Apfel Option, ohne Parameter',
+        'banane|b=i' => 'Bananen Option, mit benötigtem Integer Parameter',
+        'pfirsich|p-s' => 'Pfirsich Option, mit optionalem String Parameter'
+    )
+);
+]]>
+            </programlisting>
+        </example>
+        <para>
+            In der obigen Beispieldefinition, sind drei Optionen.
+            "<code>--apfel</code>" und "<code>-a</code>" sind Aliase füreinander,
+            und diese Option nimmt keinen Parameter.
+            "<code>--banane</code>" und "<code>-b</code>" sind Aliase füreinander,
+            und diese Option nimmt einen notwendigen Integer Parameter.
+            Letztendlich, "<code>--pfirsich</code>" und "<code>-p</code>" sind
+            Aliase füreinander, und diese Option kann einen Optionalen
+            Zeichenketten Parameter annehmen.
+        </para>
+    </sect2>
+
+</sect1>

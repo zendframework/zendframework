@@ -1,0 +1,290 @@
+<sect1 id="zend.registry.using">
+
+    <title>使用对象注册表（Registry）</title>
+
+    <para>
+        对象注册表（或称对象仓库）是一个用于在整个应用空间（application space）内存储对象和值的容器。通过把对象存储在其中，我们可以在整个项目的任何地方使用同一个对象。这种机制相当于一种全局存储。
+    </para>
+
+    <para>
+        我们可以通过Zend_Registry类的静态方法来使用对象注册表，另外，由于该类是一个数组对象，你可以使用数组形式来访问其中的类方法。
+    </para>
+
+    <sect2 id="zend.registry.using.storing">
+
+        <title>设置Registry中的值</title>
+
+        <para>
+            要保存一项内容到注册表中，我们可以使用静态方法 <code>set()</code>。
+        </para>
+
+        <example id="zend.registry.using.storing.example">
+            <title>set() 使用示例：</title>
+            <programlisting role="php"><![CDATA[
+Zend_Registry::set('index', $value);
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+            $value可以是一个对象、数组或者标量。你可以再次使用<code>set()</code>来为注册表中已有的值设置一个新值。
+        </para>
+
+        <para>
+            index参数可以是一个标量，即字符串或整数，就像使用数组一样，类似于数组的索引/键名。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.retrieving">
+
+        <title>获取Registry中的值</title>
+
+        <para>
+            可以使用 <code>get()</code>方法来获取Registry中某项内容的值。
+        </para>
+
+        <example id="zend.registry.using.retrieving.example">
+            <title> get() 方法示例：</title>
+            <programlisting role="php"><![CDATA[
+$value = Zend_Registry::get('index');
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+             <code>getInstance()</code>返回静态registry对象。
+        </para>
+
+        <para>
+            registry对象是可迭代的（iterable）。
+        </para>
+
+        <example id="zend.registry.using.retrieving.example-iterating">
+            <title>迭代一个registry对象：</title>
+            <programlisting role="php"><![CDATA[
+$registry = Zend_Registry::getInstance();
+
+foreach ($registry as $index => $value) {
+    echo "Registry index $index contains:\n";
+    var_dump($value);
+}
+]]>
+           </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.constructing">
+
+        <title>创建一个Registry对象</title>
+
+        <para>
+            除了可以使用静态方法来访问Registry对象之外，你可以直接实例化它，就像使用普通的对象一样。
+        </para>
+
+        <para>
+
+            如果通过静态方法来访问registry对象的实例，它很方便进行静态存储，你可以在程序中的任何地方访问它。
+        </para>
+
+        <para>
+            如果使用传统的<code>new</code> 方法来创建registry的实例，则你可以使用数组一样的方式来初始化registry中的内容。
+        </para>
+
+        <example id="zend.registry.using.constructing.example">
+            <title>创建一个registry对象</title>
+            <programlisting role="php"><![CDATA[
+$registry = new Zend_Registry(array('index' => $value));
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+            在创建这个对象实例之后，你可以使用数组对象方法来使用它，或者你可以把这个对象实例通过静态方法<code>setInstance()</code>设置为静态对象实例。
+        </para>
+
+        <example id="zend.registry.using.constructing.example-setinstance">
+            <title>Example of initializing the static registry</title>
+            <programlisting role="php"><![CDATA[
+$registry = new Zend_Registry(array('index' => $value));
+
+Zend_Registry::setInstance($registry);
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+            如果静态的注册表对象已经被初始化过，则<code>setInstance()</code>方法会抛出一个Zend_Exception异常。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.array-access">
+
+        <title>像访问数组一样访问Registry对象</title>
+
+        <para>
+               如果你要一次访问或设置多个值，你会发现使用数组方式是很方便的。
+        </para>
+
+        <example id="zend.registry.using.array-access.example">
+            <title>array 方式访问示例：</title>
+            <programlisting role="php"><![CDATA[
+$registry = Zend_Registry::getInstance();
+
+$registry['index'] = $value;
+
+var_dump( $registry['index'] );
+]]>
+           </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.array-object">
+
+        <title>对象方式访问Registry</title>
+
+        <para>
+
+            你会发现使用面向对象风格来访问registry对象也是方便的，对象中的属性名称作为索引。
+
+
+            要这样做，你需要使用<code>ArrayObject::ARRAY_AS_PROPS</code>选项来创建registry对象，并初始化静态实例。你要在静态的registry被第一次访问之前就完成这个工作。<emphasis role="strong">小心</emphasis>使用这个选项，因为某些版本的PHP在使用这个选项时会有bug。
+        </para>
+
+        <example id="zend.registry.using.array-object.example">
+            <title>对象形式的访问：</title>
+            <programlisting role="php"><![CDATA[
+//在你的bootstrap代码中：
+$registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS)
+Zend_Registry::setInstance($registry);
+$registry->tree = 'apple';
+
+.
+.
+.
+
+//在程序的任何其它地方：
+$registry = Zend_Registry::getInstance();
+
+echo $registry->tree; // echo's "apple"
+
+$registry->index = $value;
+
+var_dump($registry->index);
+]]>
+           </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.isset">
+
+        <title>查询一个索引是否存在</title>
+
+        <para>
+             可以使用静态方法<code>isRegistered()</code>来查询是否某个特定的索引已经设置了相应的值。
+        </para>
+
+        <example id="zend.registry.using.isset.example-isregistered">
+            <title>isRegistered() 示例：</title>
+            <programlisting role="php"><![CDATA[
+if (Zend_Registry::isRegistered($index)) {
+    $value = Zend_Registry::get($index);
+}
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+
+            要确定一个数组对象中的某个特定索引的值是否设定，可以使用isset()函数，就像在普通的数组中那样使用。
+        </para>
+
+        <example id="zend.registry.using.isset.example-isset">
+            <title>isset() 示例：</title>
+            <programlisting role="php"><![CDATA[
+$registry = Zend_Registry::getInstance();
+
+// using array-access syntax
+if (isset($registry['index'])) {
+    var_dump( $registry['index'] );
+}
+
+// using object-access syntax, if enabled
+if (isset($registry->index)) {
+    var_dump( $registry->index );
+}
+]]>
+           </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.subclassing">
+
+        <title>扩展Registry对象</title>
+
+        <para>
+            静态registry对象是类Zend_Registry的一个实例。如果你想给它增加功能，你可以继承Zend_Registry类，然后指定使用这个类来访问对象注册表。你可以使用静态方法<code>setClassName()</code>来指定使用这个类。注意这个类一定要是Zend_Registry的子类。
+        </para>
+
+        <example id="zend.registry.using.subclassing.example">
+            <title>指定静态注册表的类名：</title>
+            <programlisting role="php"><![CDATA[
+Zend_Registry::setClassName('My_Registry');
+
+Zend_Registry::set('index', $value);
+]]>
+           </programlisting>
+        </example>
+
+        <para>
+
+            如果你在registry已经被访问过后尝试设定该类名，则registry抛出一个异常。建议你在boostrap代码(即index.php)中设置该类名。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.registry.using.unsetting">
+
+        <title>删除静态注册表</title>
+
+        <para>
+            尽管这不是必需的，你可以使用<code>_unsetInstance()</code>方法来删除registry的静态实例。
+        </para>
+
+        <note>
+            <title>数据丢失的风险</title>
+            <para>
+               在使用<code>_unsetInstance()</code>的时候，静态注册表中的所有数据都会丢失并且无法恢复。
+            </para>
+        </note>
+
+        <para>
+            有时你可能需要<code>_unsetInstance()</code>这个方法。例如你想在已经初始化过registry对象之后，再使用<code>setInstance()</code>或 <code>setClassName()</code>，那么你可以使用<code>_unsetInstance()</code>先把静态实例删除了，然后才能使用那些方法。
+        </para>
+
+        <example id="zend.registry.using.unsetting.example">
+            <title> _unsetInstance() 示例：</title>
+            <programlisting role="php"><![CDATA[
+Zend_Registry::set('index', $value);
+
+Zend_Registry::_unsetInstance();
+
+// 改变我们要使用的类
+Zend_Registry::setClassName('My_Registry');
+
+Zend_Registry::set('index', $value);
+]]>
+           </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

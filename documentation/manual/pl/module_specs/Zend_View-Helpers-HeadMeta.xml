@@ -1,0 +1,146 @@
+<sect3 id="zend.view.helpers.initial.headmeta">
+    <title>Helper HeadMeta</title>
+
+    <para>
+        Element HTML <code>&lt;meta&gt;</code> używany jest do definiowania
+        informacji meta o dokumencie HTML -- zazwyczaj są to słowa kluczowe,
+        informacje o zestawie znaków, informacje o sposobie buforowania itp.
+        Są dwa rodzaje znaczników meta, 'http-equiv' oraz 'name', oba muszą
+        zawierać także atrybut 'content', a mogą dodatkowo zawierać jeszcze
+        atrybuty 'lang' oraz 'scheme'.
+    </para>
+
+    <para>
+        Helper <code>HeadMeta</code> udostępnia następujące metody do ustawiania
+        i dodawania znaczników meta:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>offsetSetName($index, $keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>prependName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>setName($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+        <listitem><para><code>appendHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>prependHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>setHttpEquiv($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Zmienna <code>$keyValue</code> jest używana do definiowania wartości
+        atrybutów 'name' oraz 'http-equiv'; Zmienna <code>$content</code>
+        definiuje wartość atrybutu 'content', a zmienna <code>$modifiers</code>
+        jest opcjonalną asocjacyjną tablicą, która może zawierać klucze dla
+        atrybutów 'lang' oraz 'scheme'.
+    </para>
+
+    <para>
+        Możesz także ustawić znaczniki meta używając metody <code>headMeta()</code>
+        helpera, która posiada następującą sygnaturę: <code>headMeta($content,
+            $keyValue, $keyType = 'name', $modifiers = array(), $placement =
+            'APPEND')</code>.
+        Parametr <code>$keyValue</code> jest zawartością dla klucza określonego
+        w parametrze <code>$keyType</code>, którego wartością zawsze powinno być
+        'name' lub 'http-equiv'.
+        Parametr <code>$placement</code> może mieć wartość 'SET' (nadpisuje
+        wszystkie wcześniej ustawione wartości), 'APPEND' (dodaje na spód stosu),
+        lub 'PREPEND' (dodaje na wierzchołek stosu).
+    </para>
+
+    <para>
+        Helper <code>HeadMeta</code> nadpisuje każdą z metod <code>append()</code>,
+        <code>offsetSet()</code>, <code>prepend()</code>, oraz <code>set()</code>
+        aby wymusić użycie specjalnych metod opisanych powyżej.
+        Wewnętrznie klasa przechowuje każdy element jako obiekt klasy
+        <code>stdClass</code>, który jest potem serializowany za pomocą metody
+        <code>itemToString()</code>.
+        Pozwala to na sprawdzenie elementów znajdujących się na stosie, a także
+        na zmianę wartości poprzez modyfikację zwróconego obiektu.
+    </para>
+
+    <para>
+        Helper<code>HeadMeta</code> jest implementacją
+        <link linkend="zend.view.helpers.initial.placeholder">helpera
+            Placeholder</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headmeta.basicusage">
+        <title>Podstawowe użycie helpera HeadMeta</title>
+
+        <para>
+            Możesz określić nowy znacznik meta w dowolnej chwili. Najczęściej
+            będziesz określał zasady buforowania po stronie klienta oraz
+            dane SEO.
+        </para>
+
+        <para>
+            Przykładowo, jeśli chcesz określić słowa kluczowe SEO, powinieneś
+            utworzyć znacznik meta o nazwie 'keywords', a jego zawartością
+            powinny być słowa kluczowe, które chcesz połączyć z daną stroną:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// ustawienie słów kluczowych
+$this->headMeta()->appendName('keywords', 'framework php productivity');
+]]>
+        </programlisting>
+
+        <para>
+            Jeśli chcesz ustalić zasady buforowania po stronie klienta,
+            powinieneś ustawić znaczniki http-equiv:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// zablokowanie buforowania po stronie klienta
+$this->headMeta()->appendHttpEquiv('expires',
+                                   'Wed, 26 Feb 1997 08:21:57 GMT')
+                 ->appendHttpEquiv('pragma', 'no-cache')
+                 ->appendHttpEquiv('Cache-Control', 'no-cache');
+]]>
+        </programlisting>
+
+        <para>
+            Innym popularnym przykładem użycia znaczników meta jest ustawienie
+            typu zawartości, zestawu znaków oraz języka:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// ustawienie typu zawartości i zestawu znaków
+$this->headMeta()->appendHttpEquiv('Content-Type',
+                                   'text/html; charset=UTF-8')
+                 ->appendHttpEquiv('Content-Language', 'en-US');
+]]>
+        </programlisting>
+
+        <para>
+            Ostatnim przykład pokazuje jak można w łatwy sposób wyświetlić
+            komunikat bezpośrednio przez przekierowaniem używając znacznika
+            "meta refresh":
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// ustawienie czasu odświeżenia strony na 3 sekundy z nowym adresem URL:
+$this->headMeta()->appendHttpEquiv('Refresh',
+                                   '3;URL=http://www.some.org/some.html');
+]]>
+        </programlisting>
+
+        <para>
+            Jeśli jesteś gotowy na wyświetlenie znaczników meta w layoucie, po
+            prostu wyświetl helper:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->headMeta() ?>
+]]>
+        </programlisting>
+    </example>
+</sect3>

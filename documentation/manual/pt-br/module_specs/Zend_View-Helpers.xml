@@ -1,0 +1,220 @@
+<sect1 id="zend.view.helpers">
+
+    <title>Assistentes de Visualização (Modificadores)</title>
+
+    <para>
+        Em seus scripts de visualização, frequentemente é necessário a execução de certas tarefas complexas repetidas vezes; exemplo: formatar uma data, gerar um elemento de formulário, ou exibir links de acionamento.  Você pode empregar classes assistentes para executar estas tarefas para você.
+    </para>
+
+    <para>
+        Para usar um assistente em seu script de visualização, chame-o usando $this->helperName(). Em segundo plano, Zend_View irá carregar a classe Zend_View_Helper_HelperName, instanciá-la e chamar seu método helperName().  O objeto criado é persistente dentro do escopo da instância Zend_View e será reutilizado por todas as chamadas futuras a $this->helperName().
+    </para>
+
+    <sect2 id="zend.view.helpers.initial">
+
+        <title>Assistentes Padrão</title>
+
+        <para>
+            Zend_View vem com um conjunto padrão de assistentes, todos dedicados à geração de elementos de formulários. Cada um deles automaticamente escapa a saída apropriada. São eles:
+        </para>
+
+        <itemizedlist>
+
+            <listitem><para>
+                formButton($name, $value, $attribs): Cria um elemento &lt;input type="button" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formCheckbox($name, $value, $attribs, $options): Cria um elemento &lt;input type="checkbox" /&gt;.  O parâmetro $options é um array cujo primeiro valor é o valor "checked" e o segundo é o valor "unchecked" (os valores padrão são '1' e '0').  O controle sera preselecionado de acordo com o conteúdo de $value.
+            </para></listitem>
+
+            <listitem><para>
+                formFile($name, $value, $attribs): Cria um elemento &lt;input type="file" /&gt;.
+                </para></listitem>
+
+            <listitem><para>
+                formHidden($name, $value, $attribs): Cria um elemento &lt;input type="hidden" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formPassword($name, $value, $attribs): Cria um elemento &lt;input type="password" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formRadio($name, $value, $attribs, $options): Cria uma série de elementos &lt;input type="radio" /&gt;, um para cada elemento em $options.  No array $options, a chave e seu valor estão associados ao valor do controle e seu rótulo, respecitvamente. O conteúdo de $value será preselecionado.
+            </para></listitem>
+
+            <listitem><para>
+                formReset($name, $value, $attribs): Cria um elemento &lt;input type="reset" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formSelect($name, $value, $attribs, $options): Cria um bloco &lt;select&gt;...&lt;/select&gt;, com um &lt;option&gt;para elemento em $options.  No array $options, a chave e seu valor estão associados ao valor do controle e seu rótulo.  O conteúdo de $value será preselecionado.
+            </para></listitem>
+
+            <listitem><para>
+                formSubmit($name, $value, $attribs): Cria um elemento &lt;input type="submit" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formText($name, $value, $attribs): Cria um elemento &lt;input type="text" /&gt;.
+            </para></listitem>
+
+            <listitem><para>
+                formTextarea($name, $value, $attribs): Cria um bloco &lt;textarea&gt;...&lt;/textarea&gt;.
+            </para></listitem>
+
+        </itemizedlist>
+
+        <para>
+            Utilizar estes assistentees em seus scripts de visualização é muito fácil, aqui está um exemplo. Note que tudo que você necessita fazer é chamá-los; eles carregam e instanciam a sí próprios a medida que tornam-se necessários.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// dentro do seu script de visualização, $this aponta para a instância de Zend_View.
+// digamos que você já atribuiu uma serie de valores ao array
+// $countries = array('us' => 'United States', 'il' =>'Israel', 'de' => 'Germany').
+?>
+<form action="action.php" method="post">
+    <p><label>Your Email:
+        <?php echo $this->formText('email', 'you@example.com', array('size' => 32)) ?>
+    </label></p>
+    <p><label>Your Country:
+        <?php echo $this->formSelect('country', 'us', null, $this->countries) ?>
+    </label></p>
+    <p><label>Would you like to opt in?
+        <?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no') ?>
+    </label></p>
+</form>]]>
+        </programlisting>
+
+        <para>
+            A saída resultante do script de visualização deverá se parecer com isto:
+        </para>
+
+        <programlisting role="php"><![CDATA[<form action="action.php" method="post">
+    <p><label>Your Email:
+        <input type="text" name="email" value="you@example.com" size="32" />
+    </label></p>
+    <p><label>Your Country:
+        <select name="country">
+            <option value="us" selected="selected">United States</option>
+            <option value="il">Israel</option>
+            <option value="de">Germany</option>
+        </select>
+    </label></p>
+    <p><label>Would you like to opt in?
+        <input type="hidden" name="opt_in" value="no" />
+        <input type="checkbox" name="opt_in" value="yes" checked="checked" />
+    </label></p>
+</form>]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.helpers.paths">
+
+        <title>Localizando os Assistentes</title>
+
+        <para>
+            Assim como os scripts de visualização, seu controlador pode especificar uma lista de caminhos onde o Zend_View deve procurar pelas classes assistentes. Por padrão, Zend_View procura pelas classes assistentes em  "Zend/View/Helper/*". Você pode instruir o Zend_View a procurar em outros locais usando os métodos setHelperPath() e addHelperPath().
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$view = new Zend_View();
+$view->setHelperPath('/path/to/more/helpers');
+?>]]>
+        </programlisting>
+
+        <para>
+            De fato, você pode "empilhar" caminhos usando o método addHelperPath(). A medida que você adiciona caminhos à pilha,  Zend_View procurará no caminho mais recentemente adicionado.  Isto permite a você incrementar o conjunto original de assistentes (ou susbstituir) com os seus próprios personalizados.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$view = new Zend_View();
+$view->addHelperPath('/path/to/some/helpers');
+$view->addHelperPath('/other/path/to/helpers');
+
+// now when you call $this->helperName(), Zend_View will look first for
+// "/other/path/to/helpers/HelperName.php", then for
+// "/path/to/some/helpers/HelperName", and finally for
+// "Zend/View/Helpers/HelperName.php".
+?>]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.helpers.custom">
+
+        <title>Escrevendo Assistentes Personalizados</title>
+
+        <para>
+            Escrever assistentes personalizados é fácil; basta seguir estas regras:
+        </para>
+
+        <itemizedlist>
+
+            <listitem><para>
+                O nome da classe deve ser no formato Zend_View_Helper_*, onde * é o nome do assistente a ser criado.  Ex:, se você criar um assistente chamado "specialPurpose", o nome da classe deverá ser "Zend_View_Helper_SpecialPurpose" (Observe a capitalização).
+            </para></listitem>
+
+            <listitem><para>
+                A classe deve ter um método público que coincida com o nome do assistente; este é o método que será chamado quando o seu template chamar "$this->specialPurpose()".  Em nosso exemplo "specialPurpose", o método requerido deverá ser declarado como "public function specialPurpose()".
+            </para></listitem>
+
+            <listitem><para>
+                Em geral, a classe não deve ecoar ou imprimir a saída gerada.  Em lugar disso, ela deve retornar os valores a serem impressos. Os valores retornados deverão estar devidamente escapados.
+            </para></listitem>
+
+            <listitem><para>
+                A classe deve estar no arquivo chamado após o método assistente. Voltando ao exemplo "specialPurpose", o arquivo rebeu o nome "SpecialPurpose.php".
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Localize o arquivo com a classe assistente em algum dos caminhos armazenados na pilha, e o Zend_View automaticamente irá carregar, instanciar, persistir, e executar o código para você.
+        </para>
+
+        <para>
+            Aqui está um exemplo do assistente SpecialPurpose:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+class Zend_View_Helper_SpecialPurpose {
+    protected $_count = 0;
+    public function specialPurpose()
+    {
+        $this->_count++;
+        $output = "I have seen 'The Jerk' {$this->_count} time(s).";
+        return htmlspecialchars($output);
+    }
+}
+?>]]>
+        </programlisting>
+
+        <para>
+            Em um script de visualização, você pode chamar o assistente SpecialPurpose helper quantas vezes desejar; ele será instanciado apenas uma vez; e persistirá durante todo o tempo de vida da instãncia de Zend_View.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// remember, in a view script, $this refers to the Zend_View instance.
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+?>]]>
+        </programlisting>
+
+        <para>
+            A saída deverá se parecer com isto:
+        </para>
+        <programlisting role="php"><![CDATA[I have seen 'The Jerk' 1 time(s).
+I have seen 'The Jerk' 2 time(s).
+I have seen 'The Jerk' 3 time(s).]]>
+        </programlisting>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

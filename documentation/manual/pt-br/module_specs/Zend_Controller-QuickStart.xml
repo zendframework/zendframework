@@ -1,0 +1,308 @@
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller Início Rápido</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>Introdução</title>
+        <para>
+            <code>Zend_Controller</code> é o coração do sistema MVC do Zend Framework.
+            MVC significa <ulink
+                url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>
+            é um modelo de desenvolvimento voltado para a separação da lógica de aplicação da
+            lógica de visualização. <code>Zend_Controller_Front</code> implementa um padrão de
+            <ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
+                Controller</ulink>, no qual todos os pedidos são
+            interceptado pelo controlador e despachados individualmente
+            para ações baseadas no URL requerido.
+        </para>
+        <para>
+            O sistema <code>Zend_Controller</code> foi construído com a extensibilidade
+            em mente, tanto por derivação das classes existentes, como escrevendo
+            novas classes que implementam as várias interfaces e classes abstratas
+            que formam a fundação da família classes controladoras, ou escrevendo
+            plugins ou ações auxiliadoras para aumentar ou manipular a funcionalidade
+            do sistema.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>Início Rápido</title>
+
+        <para>
+            Se você necessita informações mais detalhadas, veja as seções seguintes.
+            Se você quiser começar rápido, continue lendo.
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>Crie sua estrutura de arquivos</title>
+
+            <para>
+                O primeiro passo é criar sua estrutura de arquivos. A estrutura
+                típica é a seguinte:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>Estabeleça seu documento raiz</title>
+
+            <para>
+                No seu servidor web, defina seu documento raiz para
+                o diretório <code>html</code> da estrutura de arquivos
+                acima mencionada.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>Crie suas regras de re-escrita</title>
+
+            <para>
+                Edite o arquivo <code>html/.htaccess</code> acima
+                para ficar como:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+]]></programlisting>
+
+            <para>
+                As regas acima irão enviar qualquer solicitação
+                a não-recurso (imagens, folhas de estilo) para
+                o controlador de frente. Se existir outras extensões
+                que você queira excluir do controlador de frente
+                (PDFs, arquivos texto, etc), adicione suas extensões
+                ao comutador, ou crie suas próprias regras de re-escrita.
+            </para>
+
+            <note>
+                <para>
+                    As regas de re-escrita acima são para o Apache; para exemplos de
+                    regras de re-escrita para outros servidores web, veja a
+                    <link
+                        linkend="zend.controller.router.introduction">documentação do
+                    roteador</link>.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>Crie seu arquivo de inicialização</title>
+
+            <para>
+                O arquivo de inicialização é a página onde todas as requisições passam
+                -- <code>html/index.php</code> no caso. Abra o arquivo
+                <code>html/index.php</code> em um editor de sua escolha e adicione
+                o seguinte:
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Controller/Front.php';
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]></programlisting>
+
+            <para>
+                Isto irá criar e despachar o controlador de frente, que irá encaminhar
+                as requisições para os controladores de ação.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>Crie o seu controlador de ação padrão</title>
+
+            <para>
+                Antes de discutir controladores de ação, você deve primeiro
+                entender como as requisições são roterizadas no Zend Framework.
+                Por padrão, o primeiro seguimento de um caminho de um URL
+                aponta para um controlador, o segundo para uma ação.
+                Por exemplo, dado o URL
+                <code>http://framework.zend.com/roadmap/components</code>, o
+                caminho é <code>/roadmap/components</code>, que irá apontar para o
+                controlador <code>roadmap</code> e para a ação
+                <code>components</code>. Se nenhuma ação for informada, a ação
+                <code>index</code> é assumida, e se nenhum controlador for informado,
+                o controlador <code>index</code> é assumido (Seguindo a convenção do
+                Apache que mapeia um <code>DirectoryIndex</code> automaticamente).
+            </para>
+
+            <para>
+                O expedidor do <code>Zend_Controller</code> toma o
+                valor do controlador e mapeia-o para uma classe.
+                Por padrão, ele pega o nome do controlador, com a primeira
+                letra em maiúsculo, e acrescenta a palavra
+                <code>Controller</code>. Sendo assim, em nosso exemplo acima,
+                o controlador <code>roadmap</code> é mapeado para a classe
+                <code>RoadmapController</code>.
+            </para>
+
+            <para>
+                Semelhantemente, o valor da ação é mapeado para um método da
+                classe do controlador. Por padrão, o valor é transformado em
+                letras minúsculas, e a palavra <code>Action</code> é acrescentada.
+                Sendo assim, em nosso exemplo acima, a ação <code>components</code>
+                torna-se <code>componentsAction</code>, e o método final chamado
+                é <code>RoadmapController::componentsAction()</code>.
+            </para>
+
+            <para>
+                Então, seguindo em frente, vamos agora criar um controlador
+                de ação padrão e um método de ação. Como mencionado anteriormente,
+                o controlador padrão e a ação são ambos chamados <code>index</code>.
+                Abra o arquivo <code>application/controllers/IndexController.php</code>,
+                e introduza o seguinte:
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]></programlisting>
+
+            <para>
+                O ajudante de ação <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                 é habilitado por padrão. Isto significa que apenas
+                definindo um método de ação simples e o script de visão correspondente,
+                você terá o seu conteúdo mostrador imediatamente. Por padrão,
+                <code>Zend_View</code> é usado como a camada de Visaulização
+                do MVC. O <code>ViewRenderer</code> faz alguma mágica, e usa
+                o nome do controlador (ex.: <code>index</code>) para determinar
+                qual modelo mostrar. Por padrão, modelos terminam com a
+                extensão <code>.phtml</code>, então isto significa que,
+                no exemplo acima o modelo <code>index/index.phtml</code>
+                será mostrado. Adicionalmente, o <code>ViewRenderer</code>
+                automaticamente assume que o diretório <code>views</code>
+                no mesmo nível que do diretório do controlador será o
+                diretório base de visualização, e que o atual script de
+                visualização estará no subdiretório <code>views/scripts/</code>,
+                Sendo assim, o modelo mostrado é encontrado em
+                <code>application/views/scripts/index/index.phtml</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>Crie o seu script de visualização</title>
+
+            <para>
+                Com mensionado <link
+                    linkend="zend.controller.quickstart.go.controller"> na seção
+                    anterior</link>, scripts de visualização são encontrados em
+                <code>application/views/scripts/</code>; O script padrão para
+                o controlador e ação padrão está em
+                <code>application/views/scripts/index/index.phtml</code>.
+                Crie este arquivo e tecle algum HTML:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>Crie seu controlador de erro</title>
+
+            <para>
+                Por padrão, <link
+                    linkend="zend.controller.plugins.standard.errorhandler">plugin
+                do manipulador de erro</link> é registrado. Este plugin espera
+                que um controlador para manipular erros exista. Por padrão, ele
+                assume um <code>ErrorController</code> no módulo padrão com um
+                método <code>errorAction</code>:
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]></programlisting>
+
+            <para>
+                Assumindo o layout de diretório discutido, este arquivo estará
+                em <code>application/controllers/ErrorController.php</code>.
+                Você também precisará criar o script de visualização em
+                <code>application/views/scripts/error/error.phtml</code>;
+                o conteúdo do exemplo parecerá com:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Error</title>
+</head>
+<body>
+    <h1>An error occurred</h1>
+    <p>An error occurred; please try again later.</p>
+</body>
+</html>
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>Veja o site!</title>
+
+            <para>
+                Com o seu primeiro controlador e visualizador embaixo do seu cinto,
+                você agora pode disparar o seu navegador e navegar para o site.
+                Assumindo que o seu domínio é <code>example.com</code>, qualquer
+                dos seguintes URLs irão mostrar a página que acabamos de criar:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                Você agora está pronto para iniciar a criação de mais controladores
+                e metódos de ação. Parabéns!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

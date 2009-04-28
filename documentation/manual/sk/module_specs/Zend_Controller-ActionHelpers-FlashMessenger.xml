@@ -1,0 +1,63 @@
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>Úvod</title>
+        <para>
+            Pomocná trieda <code>FlashMessenger</code> umožnuje odovzdanie správ
+            ktoré možno potrebuje vidieť užívateľ pri ďalšom požiadavku. Pri
+            realizácii tejto požiadavky <code>FlashMessenger</code> používa
+            <code>Zend_Session_Namespace</code> na uloženie správ pre budúcu, alebo
+            nasledujúcu požiadavku. Vo všeobecnosti je dobré ak sa použije
+            <code>Zend_Session</code> alebo <code>Zend_Session_Namespace</code>,
+            ktoré sa inicializuje pomocou <code>Zend_Session::start()</code>
+            (pre viac detailov o používaní pozri
+            <link linkend="zend.session.startingasession">Zend Session</link>)
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>Základné použitie</title>
+        <para>
+            Nasledujúci príklad ukazuje jednoduché použitie <code>FlashMessenger</code>.
+            Ak zavolá akcia <code>/some/my</code>, tak sa uloží správa &quot;Uložené!&quot;.
+            Nasledujúca požiadavka na akciu <code>/some/my-next-request</code>
+            získa túto správu (a tak ju zmaže).
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+
+    public function init()
+    {
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * default method of getting Zend_Controller_Action_Helper_FlashMessenger
+         * instance on-demand
+         */
+        $this->_flashMessenger->addMessage('Uložené!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]></programlisting>
+    </sect4>
+</sect3>

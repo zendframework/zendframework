@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.auth.adapter.digest">
+    <title>Authentification "Digest"</title>
+
+    <sect2 id="zend.auth.adapter.digest.introduction">
+        <title>Introduction</title>
+
+        <para>
+            <ulink url="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Digest">
+            L'authentification "Digest"</ulink> est une méthode d'authentification HTTP qui
+            améliore
+            <ulink url="http://fr.wikipedia.org/wiki/HTTP_Authentification#M.C3.A9thode_Basic">
+            l'authentification basique</ulink> en fournissant un moyen d'authentifier sans avoir à
+            transmettre le mot de passe en clair sur le réseau.
+        </para>
+
+        <para>
+            Cet adaptateur permet l'authentification en utilisant un fichier texte contenant
+            des lignes comportant les éléments de base d'une authentification Digest&#160;:
+            <itemizedlist>
+                <listitem>
+                    <para>identifiant, tel que "<code>jean.utilisateur</code>"</para>
+                </listitem>
+                <listitem>
+                    <para>domaine, tel que "<code>Zone administrative</code>"</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        hachage MD5 d'un identifiant, domaine et mot de passe, séparés par des
+                        caractères deux-points.
+                    </para>
+                </listitem>
+            </itemizedlist>
+            Les éléments ci-dessus sont séparés par des caractères deux-points, comme dans
+            l'exemple suivant (dans lequel le mot de passe est "<code>unMotdepasse</code>")&#160;:
+        </para>
+
+        <programlisting><![CDATA[
+unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.specifics">
+        <title>Spécifications</title>
+
+        <para>
+            L'adaptateur d'authentification Digest, <classname>Zend_Auth_Adapter_Digest</classname>
+            requiert plusieurs paramètres d'entrée&#160;:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>filename</code>&#160;: fichier utilisé pour réaliser
+                        l'authentification
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>realm</code>&#160;: domaine d'authentification Digest
+                        ("<code>realm</code>" en anglais)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>username</code>&#160;: identifiant d'authentification Digest
+                        ("<code>username</code>" en anglais)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>password</code>&#160;: mot de passe pour l'identifiant dans le
+                        domaine
+                    </para>
+                </listitem>
+            </itemizedlist>
+            Ces paramètres doivent être définis avant l'appel de <code>authenticate()</code>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.identity">
+        <title>Identité</title>
+
+        <para>
+            L'adaptateur d'authentification Digest retourne un objet
+            <classname>Zend_Auth_Result</classname>, lequel a été alimenté avec l'identité sous la
+            forme d'un tableau ayant pour clés <code>realm</code> (domaine) et
+            <code>username</code> (identifiant). Les valeurs respectives associées à ces clés
+            correspondent aux valeurs définies avant l'appel à <code>authenticate()</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$adaptateur = new Zend_Auth_Adapter_Digest($nomFichier,
+                                           $domaine,
+                                           $identifiant,
+                                           $motdepasse);
+
+$resultat = $adaptateur->authenticate();
+
+$identite = $resultat->getIdentity();
+
+print_r($identite);
+
+/*
+Array
+(
+    [realm] => Un domaine
+    [username] => unUtilisateur
+)
+*/
+]]></programlisting>
+    </sect2>
+</sect1>

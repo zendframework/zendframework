@@ -1,0 +1,49 @@
+需要的软件：
+
+- autoconf
+- make
+- xsltproc
+- xmllint
+
+在 Windows 下，应当使用 Cygwin 或其他 GNU 开发工具。
+
+如何从 DocBook 生成文档：
+
+- run "autoconf" in this dir
+- run "./configure" in this dir
+- run "make"
+
+HTML 文件生成并存放在“html”文件夹。
+
+在编写内容时，可以通过执行下面的命令来验证改动：
+
+  "make check"
+
+这可以验证整个手册的 XML 是否正确。
+
+也可以通过执行命令验证单个文件是否正确：
+
+  "make XMLFILE=filename.xml check1"
+
+filename.xml 可以用相对“module_specs”目录的路径指定。
+
+DocBook 资源：
+
+http://www.ibiblio.org/godoy/sgml/docbook/howto/index.html
+http://opensource.bureau-cornavin.com/crash-course/index.html
+http://ds9a.nl/docbook/
+http://www.sagehill.net/docbookxsl/index.html
+http://docbook.org/tdg/en/html/part2.html DocBook tag reference
+
+同时将创建 CHM 项目文件，用于生成 CHM 帮助文件。
+你需要安装 MsHtmlHelpWorkshop。
+
+通过命令行进入之前使描述的用 make 生成的 html 文件所在的目录。
+然后调用：
+ "C:/path/to/workshop/hhc htmlhelp.hhp"
+"C:/path/to/workshop/" 是 MsHtmlHelpWorkshop 的安装路径。
+
+这将生成一个 "Zend_Framework_LANGUAGE.chm" 文件。
+在这个文件中你会看到索引以及内容。
+
+补充：中文手册在生成 CHM 文件之前，请使用 tools/convEncoding.php 对 hhp 和 hhc 文件进行编码预处理。详情请看 tools/README.txt

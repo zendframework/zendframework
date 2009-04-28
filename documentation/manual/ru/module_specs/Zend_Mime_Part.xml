@@ -1,0 +1,144 @@
+<sect1 id="zend.mime.part">
+    <title>Zend_Mime_Part</title>
+
+    <sect2 id="zend.mime.part.introduction">
+      <title>Введение</title>
+
+      <para>
+        Этот класс представляет отдельную часть сообщения MIME. он содержит
+        фактическое содержимое части сообщения и информацию об его кодировке,
+        типе содержимого и имени файла оригинала. Он предоставляет методы для
+        генерации строки из сохраненных данных. Объекты <code>Zend_Mime_Part</code>
+        могут быть добавлены в <link
+        linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
+        для компоновки целого сообщения с типом multipart.
+<!--
+      This class represents a single part of a MIME message. It contains the
+        actual content of the message part plus information about its encoding,
+        content type and original filename. It provides a method for generating a
+        string from the stored data. <code>Zend_Mime_Part</code> objects can be
+        added to <link
+        linkend="zend.mime.message"><code>Zend_Mime_Message</code></link> to
+        assemble a complete multipart message.
+-->
+    </para>
+    </sect2>
+
+  <sect2 id="zend.mime.part.instantiation">
+    <title>Инстанцирование<!--Instantiation--></title>
+
+    <para>
+      Экземпляр класса <code>Zend_Mime_Part</code> создается с помощью строки,
+      которая представляет собой содержимое новой части сообщения. Предполагается
+      тип OCTET-STREAM, кодировка 8Bit. После инстанцирования
+      <code>Zend_Mime_Part</code> метаданные могут быть установлены посредством
+      прямого доступа к атрибутам:
+<!--
+      <code>Zend_Mime_Part</code> is instantiated with a string that
+      represents the content of the new part. The type is assumed to be
+      OCTET-STREAM, encoding is 8Bit. After instantiating a
+      <code>Zend_Mime_Part</code>, meta information can be set by accessing its
+      attributes directly:
+-->
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php
+public $type = ZMime::TYPE_OCTETSTREAM;
+public $encoding = ZMime::ENCODING_8BIT;
+public $id;
+public $disposition;
+public $filename;
+public $description;
+public $charset;
+?>]]></programlisting>
+    </sect2>
+
+  <sect2 id="zend.mime.part.methods">
+    <title>
+      Методы для перевода части сообщения в строку
+      <!--Methods for rendering the message part to a string-->
+    </title>
+
+    <para>
+      <code>-&gt;getContent()</code> возвращает закодированное содержимое части
+      сообщения MIME в виде строки с применением кодировки, указанной в атрибуте
+      $encoding. Корректными значениями являются ZMime::ENCODING_*. Преобразование
+      по таблице символов не производится.
+<!--
+      <code>-&gt;getContent()</code> returns the encoded content of the
+      MimePart as a string using the encoding specified in the attribute
+      $encoding. Valid values are ZMime::ENCODING_* Characterset conversions are
+      not performed.
+-->
+    </para>
+
+    <para>
+      <code>-&gt;getHeaders()</code> возвращает заголовки MIME для части сообщения
+       такими, какими они были сгенерированы из информации в открытых
+       атрибутах. Нужно правильно установить атрибуты объекта, прежде чем
+       будет вызван метод.
+<!--
+      <code>-&gt;getHeaders()</code> returns the Mime-Headers for the
+      MimePart as generated from the information in the publicly accessable
+      attributes. The attributes of the object need to be set correctly before
+      this method is called.
+-->
+      <itemizedlist>
+        <listitem>
+            <para>
+                <code>$charset</code>
+                должен соответствовать текущему набору символов содержимого, если это
+                содержимое имеет текстовый тип (простой текст или HTML).
+<!--
+                has to be set to the actual charset of the content if it is a text type (Text or HTML).
+-->
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>$id</code>
+                может быть установлен для идентификации содержимого для включенных
+                изображений в сообщении HTML.
+<!--
+                may be set to identify a content-id for inline images in a HTML mail.
+-->
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>$filename</code>
+                содержит имя файла, которое будет получено при загрузке.
+<!--
+                contains the name the file will get when downloading it.
+-->
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>$disposition</code>
+                определяет, должен ли фал быть приложен в качестве вложения или
+                использоваться внутри сообщения HTML.
+<!--
+                defines if the file should be treated as an attachment or if it is used inside the (HTML-) mail (inline).
+-->
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>$description</code>
+                используется только для информационных целей.
+<!--
+                is only used for informational purposes.
+-->
+            </para>
+        </listitem>
+      </itemizedlist></para>
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

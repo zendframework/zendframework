@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.adding-recipients">
+    <title>Adding Recipients</title>
+    <para>
+        Recipients can be added in three ways:
+        <itemizedlist>
+        <listitem>
+        <para><code>addTo()</code>: Adds a recipient to the mail with a "To" header</para>
+        </listitem>
+        <listitem>
+        <para><code>addCc()</code>: Adds a recipient to the mail with a "Cc" header</para>
+        </listitem>
+        <listitem>
+        <para><code>addBcc()</code>: Adds a recipient to the mail not visible in the header.</para>
+        </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        <code>getRecipients()</code> serves list of the recipients. <code>clearRecipients()</code>
+        clears the list.
+    </para>
+    <note>
+        <title>Additional parameter</title>
+        <para>
+            <code>addTo()</code> and <code>addCc()</code> accept a second optional parameter that is used as a
+            human-readable name of the recipient for the header. Double quotation is changed to
+            single quotation and angle brackets to square brackets in the parameter.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,198 @@
+<sect1 id="zend.log.overview">
+    <title>概述</title>
+
+    <para>
+      <code>Zend_Log</code> 是一个通用日志组件.
+      它支持多个日志后端,格式化发送给日志的消息,过滤被纪录的消息.这些功能被划分为如下的对象:
+
+      <itemizedlist>
+        <listitem>
+          <para>
+            一个Log (<code>Zend_Log</code>的实例)是应用程序使用最多的对象.如果你想你可以有任意多的Log对象;
+       它们之间不会相互影响.一个Log对象必须至少包含一个Writer对象,可选的可以包含一个或多个Filter.
+          </para>
+        </listitem><listitem>
+          <para>
+            一个 Writer (继承自<code>Zend_Log_Writer_Abstract</code>) 负责向存储中保存数据.
+          </para>
+        </listitem><listitem>
+          <para>
+            一个 Filter (实现 <code>Zend_Log_Filter_Interface</code>接口)阻塞数据被保存.一个Filter可以应用到个别的Writer,
+            或则在所有Writer之前应用到一个Log.这样Filter是串联起来的.
+          </para>
+        </listitem><listitem>
+          <para>
+            一个 Formatter (实现了 <code>Zend_Log_Formatter_Interface</code>接口)
+            在由Writer写入数据之前可以对日志数据进行格式化.每一个Writer只能有一个Formatter.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+
+    <sect2 id="zend.log.overview.creating-a-logger">
+      <title>创建Log</title>
+      <para>
+        如要启动日志纪录,实例化一个Writer并把它传递给Log实例:
+        <programlisting role="php"><![CDATA[
+$logger = new Zend_Log();
+$writer = new Zend_Log_Writer_Stream('php://output');
+
+$logger->addWriter($writer);
+]]>
+        </programlisting>
+
+        注意Log必须至少有一个Writer.你可以用<code>addWriter</code>方法添加任意数量的Writer.
+      </para>
+
+      <para>
+        你也可以直接把Writer传递给Log的构造函数:
+
+        <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Stream('php://output');
+$logger = new Zend_Log($writer);
+]]>
+        </programlisting>
+
+        现在Log就可以使用了.
+      </para>
+    </sect2>
+
+    <sect2 id="zend.log.overview.logging-messages">
+      <title>日志消息</title>
+
+      <para>
+        要纪录消息,调用Log实例的<code>log()</code>方法,并向其传递消息和消息等级.
+
+      <programlisting role="php"><![CDATA[
+$logger->log('Informational message', Zend_Log::INFO);
+]]>
+      </programlisting>
+
+      <code>log()</code>方法的第一个参数是是一个字符串<code>message</code>,第二个参数是一个整数<code>priority</code>.
+      priortiy必须是一个可以被Log实例识别的消息等级之一.这会在下一节解释.
+    </para>
+
+    <para>
+      有快捷的方法可以使用.而不是调用<code>log()</code>方法,你可以调用于消息等级同名的方法:
+
+      <programlisting role="php"><![CDATA[
+$logger->log('Informational message', Zend_Log::INFO);
+$logger->info('Informational message');
+
+$logger->log('Emergency message', Zend_Log::EMERG);
+$logger->emerg('Emergency message');
+]]>
+      </programlisting>
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.overview.destroying-a-logger">
+    <title>销毁Log</title>
+    <para>
+
+      如果Log对象不再需要,设置包含Log实例的变量为<code>null</code>即可销毁它.
+      这会在Log对象被销毁前自动地调用每个附加在Log上的Writer的<code>shutdown()</code>方法:
+
+      <programlisting role="php"><![CDATA[
+$logger = null;
+]]>
+      </programlisting>
+
+      在此方法中明确的销毁日志是可选的,并且在PHP关闭是自动执行.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.overview.builtin-priorities">
+    <title>使用内建的消息等级</title>
+    <para>
+      <code>Zend_Log</code> 类定义了下面的消息等级:
+
+      <programlisting role="php"><![CDATA[
+EMERG   = 0;  // Emergency: 系统不可用
+ALERT   = 1;  // Alert: 报警
+CRIT    = 2;  // Critical: 紧要
+ERR     = 3;  // Error: 错误
+WARN    = 4;  // Warning: 警告
+NOTICE  = 5;  // Notice: 通知
+INFO    = 6;  // Informational: 一般信息
+DEBUG   = 7;  // Debug: 小时消息]]>
+      </programlisting>
+
+      这些属性总是可用的.同样还可以使用其对应的快捷方法.
+    </para>
+
+    <para>
+      消息等级不是任意的,它们来自BSD的<code>syslog</code>协议,它们在
+      <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink>
+      RFC文档中有阐述.名字和对应的消息等级号于其他PHP日志系统是兼容的,
+      例如<ulink url="http://pear.php.net/package/log">PEAR Log</ulink>,
+      它也许能够和<code>Zend_Log</code>进行互操作.
+
+    </para>
+
+    <para>
+      消息等级号以重要性顺序排序.<code>EMERG</code> (0)是最重要的消息等级.
+      <code>DEBUG</code> (7) 是内建属性中的次重要的消息等级.你可以定义重要性低于<code>DEBUG</code>的属性.
+      当在日志消息中选择消息等级时,要知道消息等级的层次并选择合适的消息等级.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.overview.user-defined-priorities">
+    <title>添加用户定义的日志等级</title>
+
+    <para>
+      用户定义的消息等级可以在运行时通过Log对象的<code>addPriority()</code>方法添加:
+
+      <programlisting role="php"><![CDATA[
+$logger->addPriority('FOO', 8);
+]]>
+      </programlisting>
+
+    上面的代码片断创建了一个新的日志消息等级, <code>FOO</code>,它的值为 <code>8</code>,
+    这个新的消息等级可以被用于日志:
+
+      <programlisting role="php"><![CDATA[
+$logger->log('Foo message', 8);
+$logger->foo('Foo Message');
+]]>
+      </programlisting>
+
+      新的消息等级不能覆盖已有的.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.overview.understanding-fields">
+    <title>理解日志事件</title>
+
+    <para>
+      当你调用<code>log()</code>方法或它们的快捷方式时,日志事件即被创建.这是一个简单的关联数组,
+      它描述了传递给Writer的事件.下面的数组键总是在数组中创建:<code>timestamp</code>,
+      <code>message</code>, <code>priority</code>, and
+      <code>priorityName</code>.
+    </para>
+
+    <para>
+      <code>event</code>数组的创建是完全透明的.但是对于添加上面默认设置中不存在的项,
+      对<code>event</code>数组的了解是必须的.
+    </para>
+
+    <para>
+      给每个将来的事件添加新项,用给定的键值调用<code>setEventItem()</code>方法:
+
+      <programlisting role="php"><![CDATA[
+$logger->setEventItem('pid', getmypid());
+]]>
+      </programlisting>
+
+      上面的例子设置了一个名为<code>pid</code>的新项并设置它为当前进程的PID.一旦一个新的项被设置,
+      在日志纪录中,它自动对其他所有writer和所有事件数据可用.一个项可以在任何时候再次调用<code>setEventItem()</code>
+      方法被覆盖.
+    </para>
+
+    <para>
+      用<code>setEventItem()</code>设置一个新的事件项将导致新项发送给Logger的所有Writer.但是
+      这不能保证writer实际地纪录了该项.这是由于writer并不知道该怎么做,除非formatter通告了一个新项.
+      要了解更多,请查看Formatter.
+    </para>
+  </sect2>
+</sect1>

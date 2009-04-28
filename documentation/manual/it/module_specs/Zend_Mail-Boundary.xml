@@ -1,0 +1,20 @@
+<sect1 id="zend.mail.boundary">
+    <title>Controllo del separatore MIME</title>
+    <para>
+        In un messaggio multipart, un separatore MIME (MIME boundary) viene normalmente generato in modo casuale per delimitarne le diverse parti.
+        Tuttavia, in alcuni casi, potrebbe essere necessario specificare il separatore MIME da utilizzare.
+        Questo è possibile grazie al metodo <code>setMimeBoundary()</code>, come dimostra l'esempio seguente:
+    </para>
+    <example id="zend.mail.boundary.example-1">
+        <title>Cambio del separatore MIME</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++);
+// crea il messaggio...]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

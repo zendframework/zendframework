@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect2 id="zend.application.available-resources.view">
+    <title>Zend_Application_Resource_View</title>
+
+    <para>
+        <classname>Zend_Application_Resource_View</classname>は<classname>Zend_View</classname>の
+        インスタンスを設定するために使用できます。設定オプションは
+        <link linkend="zend.view.introduction.options">Zend_Viewオプション</link>に
+        従います。
+    </para>
+
+    <para>
+        一旦ビューのインスタンスを設定したら、
+        <classname>Zend_Controller_Action_Helper_ViewRenderer</classname>のインスタンスを
+        作成して、<classname>Zend_Controller_Action_HelperBroker</classname>
+        （後ほどそこから取得できるでしょう）でViewRendererを登録します。
+    </para>
+
+    <example id="zend.application.available-resources.view.configExample">
+        <title>サンプルビューリソースの設定</title>
+
+        <para>
+            下記はビューリソースを設定する方法を示すINIスニペットサンプルです。
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+resources.view.encoding = "UTF-8"
+resources.view.basePath = APPLICATION_PATH "/views/scripts"
+]]></programlisting>
+    </example>
+</sect2>

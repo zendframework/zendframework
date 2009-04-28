@@ -1,0 +1,30 @@
+<sect1 id="zend.mail.adding-recipients">
+    <title>הוספת נמענים</title>
+    <para>
+        ניתן להוסיף נמענים בעזרת שלושה אפשרויות:
+        <itemizedlist>
+        <listitem>
+        <para><code>addTo()</code>: מוסיף נמען לאימייל שנשלח בעזרת הכותר "To"</para>
+        </listitem>
+        <listitem>
+        <para><code>addCc()</code>: מוסיף נמען לאימייל שנשלח בעזרת הכותר "Cc"</para>
+        </listitem>
+        <listitem>
+        <para><code>addBcc()</code>: מוסיף נמען לאימייל שנשלח בעזרת כותר אשר לא ניתן לראותו באימייל.</para>
+        </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        <code>getRecipients()</code> מחזיר רשימה של כל הנמענים. <code>clearRecipients()</code>
+        מנקה את הרשימה.
+    </para>
+    <note>
+        <title>פרמטרים נוספים</title>
+        <para>
+            <code>addTo()</code> ו <code>addCc()</code> מקבלים פרמטר נוסף אופציונלי אשר משמש בתור שם אשר ניתן לקריאה אנושית של הנמען אשר תוצג בכותר שנשלח.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

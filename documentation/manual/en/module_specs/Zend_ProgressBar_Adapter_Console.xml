@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.console">
+    <title>Zend_ProgressBar_Adapter_Console</title>
+    <para>
+        <classname>Zend_ProgressBar_Adapter_Console</classname> is a text-based adapter
+        for terminals. It can automatically detect terminal widths but supports
+        custom widths as well. You can define which elements are displayed with
+        the progressbar and as well customize the order of them. You can also
+        define the style of the progressbar itself.
+    </para>
+    <note>
+        <title>Automatic console width recognition</title>
+        <para>
+            <code>shell_exec</code> is required for this feature to work on
+            *nix based systems. On windows, there is always a fixed terminal
+            width of 80 character, so no recognition is required there.
+        </para>
+    </note>
+    <para>
+        You can set the adapter options either via the <code>set*</code> methods
+        or give an array or a <classname>Zend_Config</classname> instance with options as first
+        parameter to the constructor. The available options are:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>outputStream</code>: A different output-stream, if you don't
+                want to stream to STDOUT. Can be any other stream like
+                <code>php://stderr</code> or a path to a file.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>width</code>: Either an integer or the <code>AUTO</code>
+                constant of <classname>Zend_Console_ProgressBar</classname>.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>elements</code>: Either <code>NULL</code> for default
+                or an array with at least one of the following constants
+                of <classname>Zend_Console_ProgressBar</classname> as value:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_PERCENT</code>: The current value in percent.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_BAR</code>: The visual bar which display
+                        the percentage.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_ETA</code>: The automatic calculated ETA.
+                        This element is firstly displayed after five seconds,
+                        because in this time, it is not able to calculate
+                        accurate results.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_TEXT</code>: An optional status message
+                        about the current process.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </listitem>
+        <listitem>
+            <para>
+                <code>textWidth</code>: Width in characters of the
+                <code>ELEMENT_TEXT</code> element. Default is 20.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>charset</code>: Charset of the
+                <code>ELEMENT_TEXT</code> element. Default is utf-8.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barLeftChar</code>: A string which is used left-hand
+                of the indicator in the progressbar.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barRightChar</code>: A string which is used right-hand
+                of the indicator in the progressbar.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barIndicatorChar</code>: A string which is used for
+                the indicator in the progressbar. This one can be empty.
+            </para>
+        </listitem>
+    </itemizedlist>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE supplementalData SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldmlSupplemental.dtd">
+<supplementalData>
+    <version number="$Revision: 1.19 $"/>
+    <generation date="$Date: 2008/06/16 22:54:14 $"/>
+    <plurals>
+        <pluralRules locales="az fa hu ja ko my to tr vi yo zh
+        bo dz id jv ka km kn ms th"/>
+        <pluralRules locales="ar">
+            <pluralRule count="zero">n is 0</pluralRule>
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="two">n is 2</pluralRule>
+            <pluralRule count="few">n mod 100 in 3..10</pluralRule>
+            <pluralRule count="many">n mod 100 in 11..99</pluralRule>
+        </pluralRules>
+        <pluralRules locales="da de el en eo es et fi fo gl he iw it nb nl nn no pt_PT sv
+        af bg bn ca eu fur fy gu ha is ku lb ml mr nah ne om or pa pap ps so sq sw ta te tk ur zu
+        mn">
+            <pluralRule count="one">n is 1</pluralRule>
+        </pluralRules>
+        <pluralRules locales="pt
+        am bh fil tl guw hi ln mg nso ti wa">
+            <pluralRule count="one">n in 0..1</pluralRule>
+        </pluralRules>
+        <pluralRules locales="fr">
+            <pluralRule count="one">n within 0..2 and n is not 2</pluralRule>
+        </pluralRules>
+        <pluralRules locales="lv">
+            <pluralRule count="zero">n is 0</pluralRule>
+            <pluralRule count="one">n mod 10 is 1 and n mod 100 is not 11</pluralRule>
+        </pluralRules>
+        <pluralRules locales="ga se sma smi smj smn sms">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="two">n is 2</pluralRule>
+        </pluralRules>
+        <pluralRules locales="ro mo">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="few">n is 0 OR n is not 1 AND n mod 100 in 1..19</pluralRule>
+        </pluralRules>
+	     <pluralRules locales="lt">
+	       <pluralRule count="one">n mod 10 is 1 and n mod 100 not in 11..19</pluralRule>
+	       <pluralRule count="few">n mod 10 in 2..9 and n mod 100 not in 11..19</pluralRule>
+	     </pluralRules>
+        <pluralRules locales="hr ru sr uk be bs sh">
+            <pluralRule count="one">n mod 10 is 1 and n mod 100 is not 11</pluralRule>
+            <pluralRule count="few">n mod 10 in 2..4 and n mod 100 not in 12..14</pluralRule>
+            <pluralRule count="many">n mod 10 is 0 or n mod 10 in 5..9 or n mod 100 in 11..14</pluralRule>
+        </pluralRules>
+        <pluralRules locales="cs sk">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="few">n in 2..4</pluralRule>
+        </pluralRules>
+        <pluralRules locales="pl">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="few">n mod 10 in 2..4 and n mod 100 not in 12..14 and n mod 100 not in 22..24</pluralRule>
+        </pluralRules>
+        <pluralRules locales="sl">
+            <pluralRule count="one">n mod 100 is 1</pluralRule>
+            <pluralRule count="two">n mod 100 is 2</pluralRule>
+            <pluralRule count="few">n mod 100 in 3..4</pluralRule>
+        </pluralRules>
+        <pluralRules locales="mt">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="few">n is 0 or n mod 100 in 2..10</pluralRule>
+            <pluralRule count="many">n mod 100 in 11..19</pluralRule>
+        </pluralRules>
+        <pluralRules locales="mk">
+            <pluralRule count="one">n mod 10 is 1</pluralRule>
+        </pluralRules>
+        <pluralRules locales="cy">
+            <pluralRule count="one">n is 1</pluralRule>
+            <pluralRule count="two">n is 2</pluralRule>
+            <pluralRule count="many">n is 8 or n is 11</pluralRule>
+        </pluralRules>
+    </plurals>
+</supplementalData>

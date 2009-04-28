@@ -1,0 +1,77 @@
+<sect3 id="zend.view.helpers.initial.doctype">
+    <title>文档类型助手（Doctype Helper）</title>
+
+    <para>
+        有效的HTML和XHTML文档应当包括一个 <code>DOCTYPE</code> 声明。但是文档类型声明很难记忆，而且会影响到文档中的特定元素的解析（例如，在 <code>&lt;script&gt;</code> 和 <code>&lt;style&gt;</code> 元素中转义的CDATA）。
+    </para>
+
+    <para>
+        <code>Doctype</code> 助手允许指定下列类型之一：
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>XHTML11</code></para></listitem>
+        <listitem><para><code>XHTML1_STRICT</code></para></listitem>
+        <listitem><para><code>XHTML1_TRANSITIONAL</code></para></listitem>
+        <listitem><para><code>XHTML1_FRAMESET</code></para></listitem>
+        <listitem><para><code>XHTML_BASIC1</code></para></listitem>
+        <listitem><para><code>HTML4_STRICT</code></para></listitem>
+        <listitem><para><code>HTML4_LOOSE</code></para></listitem>
+        <listitem><para><code>HTML4_FRAMESET</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        你也可以指定一个自己定制的带有良好结构的文档类型。
+    </para>
+
+    <para>
+        <code>Doctype</code>助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体的实现。
+    </para>
+
+    <example id="zend.view.helpers.initial.doctype.basicusage">
+        <title>Doctype 助手的基本用法 </title>
+
+        <para>
+            在任何时候都可以指定 doctype。然而，依赖 doctype 输出的助手只在你设置后才认识它，所以最简单的用法是在 bootstrap 脚本中指定：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$doctypeHelper = new Zend_View_Helper_Doctype();
+$doctypeHelper->doctype('XHTML1_STRICT');
+]]></programlisting>
+
+        <para>
+            然后在布局脚本中输出：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->doctype() ?>
+]]></programlisting>
+
+    </example>
+
+    <example id="zend.view.helpers.initial.doctype.retrieving">
+        <title>获取 Doctype</title>
+
+        <para>
+            如果需要知道文档类型，可以在由调用助手返回的对象中调用<code>getDoctype()</code>。
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$doctype = $view->doctype()->getDoctype();
+?>]]></programlisting>
+
+        <para>
+            很常见地，你需要知道doctype是否XHTML；那么，<code>isXhtml()</code>方法已经足够：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+if ($view->doctype()->isXhtml()) {
+    // do something differently
+}
+?>]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

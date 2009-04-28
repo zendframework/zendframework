@@ -1,0 +1,336 @@
+<sect1 id="zend.service.flickr">
+    <title>Zend_Service_Flickr</title>
+    <sect2 id="zend.service.flickr.introduction">
+        <title>对Flickr搜索的介绍</title>
+        <para>
+            <code>Zend_Service_Flickr</code> i是一组用来使用Flickr REST Web Service 的简单API.
+            为了可以使用Flickr web services, 你必须拥有 API key. 获取key或需要Flickr REST Web Service更多详细信息, 请访问
+            <ulink url="http://www.flickr.com/services/api/">Flickr API Documentation</ulink>.
+        </para>
+        <para>
+            在下面的例子中, 我们使用 <code>tagSearch()</code>  方法来搜索tag中有 "php"的照片
+            .
+        </para>
+        <example>
+            <title>简单的 Flickr 照片搜索</title>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Service/Flickr.php';
+
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$results = $flickr->tagSearch("php");
+
+foreach ($results as $result) {
+    echo $result->title . '<br />';
+}
+?>]]>       </programlisting>
+        </example>
+        <note><para>
+            <code>tagSearch()</code> 可以接受第二个(可选的)参数提供更多选项.
+        </para></note>
+    </sect2>
+    <sect2 id="zend.service.flickr.finding-users">
+        <title>查找 Flickr 用户</title>
+        <para>
+            <code>Zend_Service_Flickr</code>  提供三种不同的方法来得到 Flickr的用户信息:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>userSearch()</code>: 接受一个以空格来作为分隔符的(由tag构成)查询字符串，用数组的方式(可选)来指定搜索选项, 返回一个
+                 <code>Zend_Service_Flickr_ResultSet</code>
+                对象.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getIdByUsername()</code>: 以字符串的格式返回与给定用户名关联的用户 ID
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getIdByEmail()</code>: 以字符串的格式返回与给定email地址关联的用户 ID
+                </para>
+            </listitem>
+        </itemizedlist>
+        <example>
+            <title>用email地址来查找Flickr用户</title>
+            <para>
+                在这个例子中, 我们有一个Flickr用户的e-mail 地址, 并用
+                 <code>userSearch()</code> 方法获得用户的信息:
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Service/Flickr.php';
+
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$results = $flickr->userSearch($userEmail);
+
+foreach ($results as $result) {
+    echo $result->title . '<br />';
+}
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.flickr.getimagedetails">
+        <title>获得 Flickr 图像详细资料</title>
+        <para><code>Zend_Service_Flickr</code>使我们可以使用给定的图像id来非常方便快捷的得到图像的详细信息,使用<code>getImageDetails()</code>
+        方法, 如下面的例子:</para>
+        <example>
+            <title>获得 Flickr 图像详细资料</title>
+            <para>
+                一旦你有一个Flickr 图像的ID,获得它的详细信息将是小事一桩:
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Service/Flickr.php';
+
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$image = $flickr->getImageDetails($imageId);
+
+echo "Image ID $imageId is $image->width x $image->height pixels.<br />\n";
+echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+<sect2 id="zend.service.flickr.classes">
+    <title>Zend_Service_Flickr 类</title>
+    <para>
+        下面列出的是将由<code>tagSearch()</code> 和 <code>userSearch()</code>返回的一些类:
+        <itemizedlist>
+            <listitem><para><link linkend="zend.service.flickr.classes.resultset"><code>Zend_Service_Flickr_ResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.flickr.classes.result"><code>Zend_Service_Flickr_Result</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.flickr.classes.image"><code>Zend_Service_Flickr_Image</code></link></para></listitem>
+        </itemizedlist>
+    </para>
+    <sect3 id="zend.service.flickr.classes.resultset">
+        <title>Zend_Service_Flickr_ResultSet</title>
+        <para>代表一个Flickr search的结果集.</para>
+        <note>
+            <para>
+                该对象实现了
+                <code>SeekableIterator</code>
+                接口,我们可以很方便的进行遍历 (如 foreach ), 也可以用
+                <code>seek()</code>直接访问指定的结果 .
+                .
+            </para>
+        </note>
+        <sect4 id="zend.service.flickr.classes.resultset.properties">
+            <title>属性</title>
+            <table>
+                <title>Zend_Service_Flickr_ResultSet 属性</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>名称</entry>
+                            <entry>类别</entry>
+                            <entry>描述</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>totalResultsAvailable</entry>
+                            <entry>int</entry>
+                            <entry>所有有效结果的数量</entry>
+                        </row>
+                        <row>
+                            <entry>totalResultsReturned</entry>
+                            <entry>int</entry>
+                            <entry>所有结果的数量</entry>
+                        </row>
+                        <row>
+                            <entry>firstResultPosition</entry>
+                            <entry>int</entry>
+                            <entry>当前结果集在所有结果集中的偏移</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect4>
+        <sect4 id="zend.service.flickr.classes.resultset.totalResults">
+            <title>Zend_Service_Flickr_ResultSet::totalResults()</title>
+            <para>
+                <methodsynopsis>
+                    <type>int</type>
+                    <methodname>totalResults</methodname>
+                    <void />
+                </methodsynopsis>
+            </para>
+            <para>
+                返回这个结果集中所有结果的数量
+            </para>
+            <para>
+                <link linkend="zend.service.flickr.classes">Back to Class List</link>
+            </para>
+        </sect4>
+    </sect3>
+    <sect3 id="zend.service.flickr.classes.result">
+        <title>Zend_Service_Flickr_Result</title>
+        <para>
+            Flickr query中的一个单一图片结果
+        </para>
+        <sect4 id="zend.service.flickr.classes.result.properties">
+            <title>属性</title>
+            <table>
+                <title>Zend_Service_Flickr_Result  属性</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>名称</entry>
+                            <entry>类别</entry>
+                            <entry>描述</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>id</entry>
+                            <entry>int</entry>
+                            <entry>图片 ID</entry>
+                        </row>
+                        <row>
+                            <entry>owner</entry>
+                            <entry>int</entry>
+                            <entry>相片所有者的 NSID.</entry>
+                        </row>
+                        <row>
+                            <entry>secret</entry>
+                            <entry>string</entry>
+                            <entry>一个用于构建url的key</entry>
+                        </row>
+                        <row>
+                            <entry>server</entry>
+                            <entry>string</entry>
+                            <entry>用于构建url的服务器名称</entry>
+                        </row>
+                        <row>
+                            <entry>title</entry>
+                            <entry>string</entry>
+                            <entry>    相片的title</entry>
+                        </row>
+                        <row>
+                            <entry>ispublic</entry>
+                            <entry>boolean</entry>
+                            <entry>相片是否是公开的</entry>
+                        </row>
+                        <row>
+                            <entry>isfriend</entry>
+                            <entry>boolean</entry>
+                            <entry>因为你是相片所有者的朋友，相片对你可见</entry>
+                        </row>
+                        <row>
+                            <entry>isfamily</entry>
+                            <entry>boolean</entry>
+                            <entry>因为你是相片所有者的亲属，相片对你可见</entry>
+                        </row>
+                        <row>
+                            <entry>license</entry>
+                            <entry>string</entry>
+                            <entry>相片基于什么license</entry>
+                        </row>
+                        <row>
+                            <entry>date_upload</entry>
+                            <entry>string</entry>
+                            <entry>上传相片的时间</entry>
+                        </row>
+                        <row>
+                            <entry>date_taken</entry>
+                            <entry>string</entry>
+                            <entry>拍照的时间</entry>
+                        </row>
+                        <row>
+                            <entry>owner_name</entry>
+                            <entry>string</entry>
+                            <entry>相片所有者的名字</entry>
+                        </row>
+                        <row>
+                            <entry>icon_server</entry>
+                            <entry>string</entry>
+                            <entry>    用来装配图标 URLs的服务器</entry>
+                        </row>
+                        <row>
+                            <entry>Square</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>一个 75x75像素大小的预览图</entry>
+                        </row>
+                        <row>
+                            <entry>Thumbnail</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>一个100像素大小的预览图</entry>
+                        </row>
+                        <row>
+                            <entry>Small</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>一个240像素大小的图片</entry>
+                        </row>
+                        <row>
+                            <entry>Medium</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>一个500像素大小的图片</entry>
+                        </row>
+                        <row>
+                            <entry>Large</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>一个640像素大小的图片</entry>
+                        </row>
+                        <row>
+                            <entry>Original</entry>
+                            <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                            <entry>原始图片</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.flickr.classes">Back to Class List</link>
+            </para>
+        </sect4>
+    </sect3>
+    <sect3 id="zend.service.flickr.classes.image">
+        <title>Zend_Service_Flickr_Image</title>
+        <para>代表由Flickr搜索返回的图片</para>
+        <sect4 id="zend.service.flickr.classes.image.properties">
+            <title>属性</title>
+            <table>
+                <title>Zend_Service_Flickr_Image 属性</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>名称</entry>
+                            <entry>类别</entry>
+                            <entry>描述</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>uri</entry>
+                            <entry>string</entry>
+                            <entry>原始图片的URI</entry>
+                        </row>
+                        <row>
+                            <entry>clickUri</entry>
+                            <entry>string</entry>
+                            <entry>图片相关的可点击的URI (如 Flickr 的页面)</entry>
+                        </row>
+                        <row>
+                            <entry>width</entry>
+                            <entry>int</entry>
+                            <entry>图片的宽度</entry>
+                        </row>
+                        <row>
+                            <entry>height</entry>
+                            <entry>int</entry>
+                            <entry>图片的高度</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.flickr.classes">Back to Class List</link>
+            </para>
+        </sect4>
+    </sect3>
+</sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

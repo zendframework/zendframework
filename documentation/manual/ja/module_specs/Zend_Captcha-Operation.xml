@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.captcha.operation">
+    <title>Captcha の方法</title>
+
+    <para>
+        すべての CAPTCHA アダプタは
+        <classname>Zend_Captcha_Adapter</classname> を実装しています。
+        これは次のようなインターフェイスです。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+interface Zend_Captcha_Adapter extends Zend_Validate_Interface
+{
+    public function generate();
+
+    public function render(Zend_View $view, $element = null);
+
+    public function setName($name);
+
+    public function getName();
+
+    public function getDecorator();
+
+    // Zend_Validate_Interface のための追加のメソッド
+    public function isValid($value);
+
+    public function getMessages();
+
+    public function getErrors();
+}
+]]>
+    </programlisting>
+
+    <para>
+        name アクセサを使用して、CAPTCHA の識別子を設定したり取得したりします。
+        <code>getDecorator()</code> を使用して <classname>Zend_Form</classname> のデコレータを指定します。
+        名前、あるいは実際のデコレータオブジェクトを返します。
+        しかし、本当に大事なのは <code>generate()</code>
+        と <code>render()</code> です。
+        <code>generate()</code> は、CAPTCHA トークンを作成します。
+        通常は、このトークンをセッションに保存し、
+        その後のリクエストの内容と比較することになります。
+        <code>render()</code> は CAPTCHA の情報を
+        (画像や figlet、なぞなぞなどの形式で) レンダリングします。
+    </para>
+
+    <para>
+        典型的な使用例は、次のようになります。
+    </para>
+
+        <programlisting role="php"><![CDATA[
+// Zend_View インスタンスを作成します
+$view = new Zend_View();
+
+// 最初のリクエスト
+$captcha = new Zend_Captcha_Figlet(array(
+    'name' => 'foo',
+    'wordLen' => 6,
+    'timeout' => 300,
+));
+
+$id = $captcha->generate();
+echo $captcha->render($view);
+
+// それ以降のリクエスト
+// すでに captcha が準備済みで、送信された内容が $value に保存されているものとします
+if ($captcha->isValid($_POST['foo'], $_POST)) {
+    // 正解!
+}
+]]>
+        </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

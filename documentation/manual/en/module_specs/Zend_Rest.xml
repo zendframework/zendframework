@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.rest.introduction">
+    <title>Introduction</title>
+
+    <para>
+        REST Web Services use service-specific XML formats. These ad-hoc
+        standards mean that the manner for accessing a REST web service is
+        different for each service. REST web services typically use URL
+        parameters (GET data) or path information for requesting data and POST
+        data for sending data.
+    </para>
+
+    <para>
+        Zend Framework provides both Client and Server capabilities, which,
+        when used together allow for a much more "local" interface experience
+        via virtual object property access. The Server component features
+        automatic exposition of functions and classes using a meaningful and
+        simple XML format. When accessing these services using the Client, it is
+        possible to easily retrieve the return data from the remote call. Should
+        you wish to use the client with a non-Zend_Rest_Server based service, it
+        will still provide easier data access.
+    </para>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

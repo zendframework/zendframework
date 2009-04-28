@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14741 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.application.theory-of-operation">
+    <title>Théorie générale</title>
+
+    <para>Monter une application MVC configurée et prête à être lancée requière de plus en plus de
+    code au fur et à mesure de l'ajout de fonctionnalités : monter une base de données, configurer
+    la vue et ses aides, les layouts, enregistrer des plugins, des aides d'action et bien plus
+    encore ...</para>
+
+    <para>Aussi, vous réutiliserez souvent le même code dans vos tests, dans une tâche cron ou
+    encore un service. Il est certes possible d'inclure le script de bootstrap dans de tels cas,
+    mais souvent des variables seront dépendantes de l'environnement. Par exemple, vous n'aurez pas
+    besoin de MVC dans une tâche cron, ou alors vous aurez juste besoin de l'accès à la base de
+    données dans un script de service.</para>
+
+    <para><classname>Zend_Application</classname> a pour but de simplifier ces processus et de promouvoir la
+    réutilisabilité de code en encapsulant les étages de définition du bootstrap en concepts
+    orientés objet.</para>
+
+    <para>Zend_Application se décompose en 3 parties :</para>
+
+    <itemizedlist>
+        <listitem>
+            <para><classname>Zend_Application</classname>: charge l'environnement PHP, à savoir les
+            include_paths et les autoloads, et instancie la classe de bootstrap demandée.</para>
+        </listitem>
+
+        <listitem>
+            <para><classname>Zend_Application_Bootstrap</classname>: regroupement d'interfaces pour les
+            classes de bootstrap. <classname>Zend_Application_Bootstrap_Base</classname> propose des
+            fonctionnalités de base concernant l'amorçage (le bootstrap), à savoir des algorithmes
+            de vérification des dépendances et la possibilité de charger des ressources à la
+            demande.</para>
+        </listitem>
+
+        <listitem>
+            <para><classname>Zend_Application_Resource</classname> est une interface pour les ressources de
+            bootstrap qui peuvent être chargées à la demande depuis les instances de
+            bootstrap.</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>Les développeurs créent une classe de bootstrap pour leur application en étendant
+    <classname>Zend_Application_Bootstrap_Base</classname> ou en implémentant (au minimum)
+    <classname>Zend_Application_Bootstrap_IBootstrap</classname>. Le point d'entrée (public/index.php)
+    chargera <classname>Zend_Application</classname> en l'instanciant et en lui passant :</para>
+
+    <itemizedlist>
+        <listitem>
+            <para>L'environnement courant</para>
+        </listitem>
+
+        <listitem>
+            <para>Des options de bootstrapping</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>Les options de bootstrap incluent le chemin vers le fichier contenant la classe de
+    bootstrap, et optionnellement :</para>
+
+    <itemizedlist>
+        <listitem>
+            <para>Des include_paths supplémentaires</para>
+        </listitem>
+
+        <listitem>
+            <para>Des espaces de nom d'autoload à enregistrer</para>
+        </listitem>
+
+        <listitem>
+            <para>Des paramètres php.ini à initialiser</para>
+        </listitem>
+
+        <listitem>
+            <para>Le nom de la classe pour le bootstrap (sinon "Bootstrap" sera utilisée)</para>
+        </listitem>
+
+        <listitem>
+            <para>Des paires prefix/chemin pour les ressources à utiliser</para>
+        </listitem>
+
+        <listitem>
+            <para>N'importe quelle ressource à utiliser (nom de classe ou nom court)</para>
+        </listitem>
+
+        <listitem>
+            <para>Des chemins additionnels vers un fichier de configuration à charger</para>
+        </listitem>
+
+        <listitem>
+            <para>Des options de configuration supplémentaires</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>Les options peuvent être un tableau, un objet <classname>Zend_Config</classname>, ou le chemin vers
+    un fichier de configuration.</para>
+</sect1>

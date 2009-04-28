@@ -1,0 +1,18 @@
+<sect1 id="zend.json.basics">
+    <title>שימוש בסיסי</title>
+    <para>
+    	שימוש ב <code>Zend_Json</code> נעשה על ידי קריאה לשני מתודות סטטיות שהם: 
+		<code>Zend_Json::encode()</code> ו <code>Zend_Json::decode()</code>.
+    </para>
+    <programlisting role="php"><![CDATA[
+// Retrieve a value:
+$phpNative = Zend_Json::decode($encodedValue);
+
+// Encode it to return to the client:
+$json = Zend_Json::encode($phpNative);
+]]>
+    </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

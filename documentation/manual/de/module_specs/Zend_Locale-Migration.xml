@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.locale.migration">
+
+    <title>Migrieren von vorhergehenden Versionen</title>
+
+    <para>
+        Die API von <classname>Zend_Locale</classname> wurde von Zeit zu Zeit verändert. Wenn man begonnen hat
+        <classname>Zend_Locale</classname> und seine Unterkomponenten in früheren Versionen dann sollte man
+        den unteren Richtlinien folgen um die Skripte so zu migrieren das sie die neue API verwenden.
+    </para>
+
+    <sect2 id="zend.locale.migration.fromonesixtooneseven">
+        <title>Migrieren von 1.6 oder 1.7 zu neueren</title>
+        <sect3 id="zend.locale.migration.fromonesixtooneseven.islocale">
+            <title>Änderungen bei der Verwendung von isLocale()</title>
+
+            <para>
+                Bezugnehmend auf den Codingstandard mußte isLocale() so geändert werden das es ein
+                Boolean zurückgibt. In vorhergehenden Releases wurde im Erfolgsfall ein String zurückgegeben.
+                Für das Release 1.7 wurde ein Kompatibilitätsmodus hinzugefügt der es erlaubt das alte
+                Verhalten, das ein String zurückgegeben wird, zu verwenden, aber das triggert auch eine
+                User Warning die darauf hinweist das man auf das neue Verhalten wechseln sollte. Das
+                Rerouting welches das alte Verhalten von isLocale() durchgeführt hätte ist nicht länger
+                notwendig, da alle I18N Komponenten jetzt das Rerouting selbst durchführen.
+            </para>
+
+            <para>
+                Um die Skripte auf die neue API zu migrieren muß die Methode einfach wie anbei gezeigt
+                verwendet werden.
+            </para>
+
+            <example id="zend.locale.migration.fromonesixtooneseven.example">
+                <title>Wie man isLocale() von 1.6 nach 1.7 ändern muß</title>
+
+                <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+if ($locale = Zend_Locale::isLocale($locale)) {
+    // mach was
+}
+
+// Selbes Beispiel für 1.7
+
+// Man sollte den Kompatibilitätsmodus ändern um User Warnings zu verhindern
+// Aber man kann das in der Bootstrap tun
+Zend_Locale::$compatibilityMode = false;
+
+if (Zend_Locale::isLocale($locale)) {
+}
+]]>
+                </programlisting>
+
+                <para>
+                    Es ist zu beachten das man den zweiten Parameter verwendet kann um zu sehen ob das
+                    Gebietsschema richtig ist ohne das ein Rerouting durchgeführt wird.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+if ($locale = Zend_Locale::isLocale($locale, false)) {
+    // mach was
+}
+
+// Selbes Beispiel für 1.7
+
+// Man sollte den Kompatibilitätsmodus ändern um User Warnings zu verhindern
+// Aber man kann das in der Bootstrap tun
+Zend_Locale::$compatibilityMode = false;
+
+if (Zend_Locale::isLocale($locale, false)) {
+    if (Zend_Locale::isLocale($locale, true)) {
+        // gar kein Gebietsschema
+    }
+
+    // Original String ist kein Gebietsschema, kann aber Reroutet werden
+}
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.locale.migration.fromonesixtooneseven.getdefault">
+            <title>Änderungen bei der Verwendung von getDefault()</title>
+
+            <para>
+                Die Bedeutung der getDefault() Methode wurde verändert durch den Fakt das Framework-weite
+                Gebietsschemata integriert wurden welche mit setDefault() gesetzt werden können. Deswegen
+                gibe es nicht mehr die Kette der Gebietsschemata zurück sondern nur die gesetzten
+                Framework-weiten Gebietsschemata.
+            </para>
+
+            <para>
+                Um die eigenen Skripte auf die neue API zu migrieren, muß einfach die Methode wie unten
+                gezeigt verwendet werden.
+            </para>
+
+            <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">
+                <title>Wie man getDefault() von 1.6 auf 1.7 ändert</title>
+
+                <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$locales = $locale->getDefault(Zend_Locale::BROWSER);
+
+// Selbes Beispiel für 1.7
+
+// Man sollte den Compatibility Mode setzen um User Notices zu verhindern
+// Das kann in der Bootstrap Datei getan werden
+Zend_Locale::$compatibilityMode = false;
+
+$locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
+]]>
+                </programlisting>
+
+                <para>
+                    Es ist zu beachten das der zweite Parameter der alten getDefault() Implementation nicht
+                    mehr vorhanden ist, aber die zurückgegebenen Werte die gleichen sind.
+                </para>
+            </example>
+
+            <note>
+                <para>
+                    Standardmäßig ist das alte Verhalten noch immer aktiv, wirft aber eine User Notice. Wenn man
+                    den eigenen Code zum neuen Verhalten geändert hat sollte man auch den Compatibility Mode auf
+                    false setzen damit keine Notices mehr geworfen werden.
+                </para>
+            </note>
+
+         </sect3>
+
+    </sect2>
+</sect1>

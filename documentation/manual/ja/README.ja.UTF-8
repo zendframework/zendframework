@@ -1,0 +1,22 @@
+このドキュメントをビルドするための方法
+
+- "xsltproc" を使用するために、libxml2-devel パッケージをインストールします。
+
+Windows の場合は cygwin を使用し、autoconf, make, libxml2-devel をインストールします。
+
+- このディレクトリで autoconf を実行します
+- このディレクトリで ./configure を実行します
+- make を実行します
+
+html ディレクトリ以下にドキュメントが作成されます。
+
+"make check" で、ソースの妥当性を検証することができます。
+
+DocBook については以下を参照ください。
+
+http://www.ibiblio.org/godoy/sgml/docbook/howto/index.html
+http://opensource.bureau-cornavin.com/crash-course/index.html
+http://ds9a.nl/docbook/
+http://www.sagehill.net/docbookxsl/index.html
+http://docbook.org/tdg/en/html/part2.html DocBook tag reference
+

@@ -1,0 +1,27 @@
+<sect1 id="zend.mail.adding-recipients">
+    <title>Dodawanie odbiorców</title>
+    <para>
+        Odbiorcy mogą być dodawani na trzy sposoby:
+        <itemizedlist>
+        <listitem>
+        <para><code>addTo()</code>: Dodaje odbiorcę do maila w nagłówku "To"</para>
+        </listitem>
+        <listitem>
+        <para><code>addCc()</code>: Dodaje odbiorcę do maila w nagłówku "Cc"</para>
+        </listitem>
+        <listitem>
+        <para><code>addBcc()</code>: Dodaje do maila odbiorcę niewidocznego w nagłówku.</para>
+        </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <title>Dodatkowy parametr</title>
+        <para>
+            Metody <code>addTo()</code> oraz <code>addCc()</code> akceptują drugi opcjonalny
+            parametr, który jest używany jako nazwa odbiorcy.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,786 @@
+<sect1 id="zend.date.overview">
+    <title>Zend_Date API 概述</title>
+
+    <para>
+        虽然 <code>Zend_Date</code> API 简单并单一，但是通过操作和操作数的丰富组合，它的设计灵活而强大。
+    </para>
+
+    <sect2 id="zend.date.options">
+
+        <title>Zend_Date 选项</title>
+
+        <sect3 id="zend.date.options.formattype">
+
+            <title>选择日期格式类型</title>
+
+            <para>
+                有若干方法使用日期格式串，和 PHP 的 <code>date()</code> 类似。如果你觉得用 PHP 的日期格式指示器（ specifier） 比用 ISO 格式指示器舒服，
+                那么你可以使用 <code>Zend_Date::setOptions(array('format_type' => 'php'))</code> 。
+                然后，对所有接受 <code>$format</code> 参数的函数使用 PHP 的日期格式指示器。
+                使用 <code>Zend_Date::setOptions(array('format_type' => 'iso'))</code> 来切换回只支持 ISO 日期格式的缺省模式。
+                所支持格式代码，参见 <xref linkend="zend.date.constants.phpformats" />
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.fixdst">
+
+            <title>DST 和日期数学 </title>
+
+            <para>
+                当处理日期时，有时候需要考虑 DST（夏令时）更改的影响，一般是加上或减去一个小时。例如，在DST更改前加
+                上月份到日期，如果结果是在DST更改之后，那么结果将会多或少一个小时。对于边界日期，如一个月的第一天或
+                最后一天的午夜，添加足够的月份数来跨国日期边界会导致日期丢失一个小时并变成前面月份的最后一个小时，出现 "off by 1"  错误。
+                为了避免这个情况发生，通过使用 <code>fix_dst</code> 选项来忽略 DST 更改。当跨过夏天/冬天 DST 边界，一般要加减一个小时。
+                例如，如果日期的时间部分是 00:00:00， 日期算术跨过春季 DST 会导致日期比预期少一天。
+                因为 Zend_Date 基于时间戳，而不是带有时间组件的日历日期，时间戳丢失一个小时导致日期在日历天上比预期少一天。
+                为了防止这样的问题，使用选项 <code>fix_dst</code>，它缺省为 true，这样 DST 在日期“算术”（<code>addMOnth(), subMonth()</code>）里无效。
+                当执行日期“算术“，使用 <code>Zend_Date::setOptions(array('fix_dst' => false))</code> 使日期加减考虑 DST 的调整。
+            </para>
+
+            <para>
+                <emphasis role="strong">如果在<code>Zend_Date</code>实例里的当前时区设置为 UTC 或 GMT， 就不用 <code>'fix_dst'</code> 选项</emphasis>，
+                这是因为这两个时区和 DST 没有关系。当你又为这个实例的时区修改为不是 UTC 或 GMT 的时区，那么先前设置的 'fix_dst'选项将用于日期“算术”。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.date.options.extendmonth">
+
+            <title>月份计算</title>
+
+            <para>
+                当从一个日期加减月份时，如果原来的日期接近月末，结果在某月的某天可能不是所期望的。
+                例如，当 1月31日加上1个月是，熟悉 SQL的人将以为结果是 2月28日。另一方面，熟悉 Excel 和 OpenOffice的人将认为结果是 3月3日。
+                这种问题只发生在这样的情况下：结果的月份里没有原来的月份的某天。
+                对于 ZF 的开发者来说，使用 <code>extend_month</code> 选项，当它为 false，就用 SQL 的方式，当它为 true，就用电子表格（如 Excel） 的方式。
+                <code>extend_month</code> 的缺省值为 false，和 SQL 方式兼容。
+                缺省地，<code>Zend_Date</code>  通过截取日期的月末部分（如果有必要）来计算月份，当原始日期指定这个月的某天超过结果月的天数时，不需要把它包含到下个月。
+                使用 <code>Zend_Date::setOptions(array('extend_month' => true));</code> 使月份计算就像流行的电子表格程序（如 Excel）一样。
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.cache">
+
+            <title> 用 Zend_Cache 加速日期本地化和标准化 </title>
+
+            <para>
+                通过使用 <code>Zend_Cache</code> 适配器，你可以加速 <code>Zend_Date</code> 的运算。当你使用本地化的数据，<code>Zend_Date</code> 的所有方法都会加速。
+                例如所有接受 <code>Zend_Date::DATE</code> 和 <code>Zend_Date::TIME</code> 常量的方法将会从中受益。
+                用 <code>Zend_Date::setOptions(array('cache' => $adapter));</code>  就可给 <code>Zend_Date</code> 设置一个 <code>Zend_Cache</code>  适配器。
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.timesync">
+
+            <title> 用 Zend_TimeSync 同步时间戳 </title>
+
+            <para>
+                一般来说服务器和计算机上的时钟都不相同。<code>Zend_TimeSync</code> 帮助 <code>Zend_Date</code>  来处理这样的问题。
+                你可以用 <code>Zend_Date::setOptions(array('timesync' => $timeserver));</code>  来设置一个时间服务器，
+                它将为所有 Zend_Date 的实例设置自己的实际时间戳和真实的实际时间戳之间的偏移量。使用这个选项不修改已存在的实例的时间戳。
+                最好的用法是在引导（bootstrap）文件里设置它。
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.date.values">
+
+        <title> 使用日期值 </title>
+
+        <para>
+            一旦通过生成 <code>Zend_Date</code> 对象格式化输入，它就携带一个时区，但在内部用标准的 <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX 时间戳</ulink> 来表示。
+            为了使日期能够本地化解析，必需知道时区。缺省的时区总是 GMT/UTC。用 <code>getTimeZone())</code>  来检查对象的时区。
+            用 <code>setTimeZone())</code>  来修改对象的时区。这些对象的所有处理都假定和这个时区相关。
+        </para>
+
+        <para>
+            要小心不同时区之间的对象的混合和日期部件的匹配操作，它可能会产生不期望的结果，除非运算只和时间戳相关。
+            除了上述的情况，<code>Zend_Date</code> 对象的操作会处理不同的时区，因为在 <code>Zend_Date</code>  初始化时日期被格式化成时间戳。
+        </para>
+
+        <para>
+            大部分方法需要一个常量来选择需要的日期的<code>$part</code> ，例如 <code>Zend_Date::HOUR</code> 。
+            这些常量对下面的所有函数有效，常数列表参见这里 <xref linkend="zend.date.constants.list" /> 。
+            如果没有指定 <code>$part</code>，就使用 <code>Zend_Date::TIMESTAMP</code>。另外，也可以对 <code>$part</code> 使用用户指定的格式，
+            和 <link linkend="zend.locale.date.normalize"><code>Zend_Locale_Format::getDate()</code></link> 的基本机制和格式一样。
+            如果日期对象用明显的无效日期（如大于12的月份）来构造，那么 <code>Zend_Date</code>  将抛出异常，除非没有指定日期格式。例如，
+            <code>$part</code> 是 <code>null</code> 或者 <code>Zend_Date::DATES</code> （"宽松" 格式） 。
+        </para>
+
+        <example id="zend.date.values.example-1">
+            <title> 用户指定的日期输入格式 </title>
+            <programlisting role="php"><![CDATA[
+$date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
+echo $date1, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
+
+$date2 = new Zend_Date('Feb 31, 2007', Zend_Date::DATES, 'en_US');
+echo $date2, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
+
+// strictly restricts interpretation to specified format
+$date3 = new Zend_Date('Feb 31, 2007', 'MM.dd.yyyy');
+echo $date3, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            如果提供了可选的 <code>$locale</code> 参数，那么 <code>$locale</code> 通过给 <code>$date</code> 操作数替换月和星期名来消除它的歧义，
+            即使根据那个地方的约定来解析日期字符串 （参见 <code><link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link></code>）。
+            当 <code>$part</code>  是 <code>Zend_Date::DATE*</code> 或 <code>Zend_Date::TIME*</code> 常量其中之一，本地化的字符串类型的 <code>$date</code> 就自动格式化。
+            如果 <code>$date</code> 是包含日期的字符串，语言的地方标识符要用来解析月和星期的名字。
+            如果没有 <code>$date</code>  输入参数，那么 <code>$locale</code> 参数指定地方来用于本地化输出（例如，日期格式的字符串表示）。
+            注意 <code>$date</code>  输入参数可能实际有类型名 （例如 <code>$hour</code> 对于 <code>addHour()</code>），尽管它不能防止用 <code>Zend_Date</code> 对象作为参数。
+            如果没有指定 <code>$locale</code> ，那么当前对象的地方用于解释 <code>$date</code>，或选择本地化的格式来输出。
+        </para>
+             <para>
+        从 Zend Framework 1.7.0 开始，<code>Zend_Date</code> 也支持程序范围的地方的用法。你可以简单地如下设置 <code>Zend_Locale</code> 实例到注册表。
+        如果你想多次使用同一地方，用这个符号你不需要记住对每个实例手工设置地方。
+     </para>
+
+    <programlisting role="php"><![CDATA[
+// in your bootstrap file
+$locale = new Zend_Locale('de_AT');
+Zend_Registry::set('Zend_Locale', $locale);
+
+// somewhere in your application
+$date = new Zend_Date('31.Feb.2007');
+]]>
+    </programlisting>
+
+    </sect2>
+
+    <sect2 id="id.date.basic">
+
+        <title>Basic <code>Zend_Date</code> Operations Common to Many Date Parts</title>
+
+        <para>
+            <code>add(), sub(), compare(), get(), and set()</code> 方法一般用来操作日期，就是操作对象里的日期。
+            除了 <code>get()</code>以外，<code>$date</code> 操作数对所有这些方法是必需的，它可能是 <code>Zend_Date</code>  实例对象、数字字符串或一个整数。
+            如果 <code>$date</code> 不是对象，这些方法就假定它是时间戳。然而，<code>$part</code> 操作数控制两个日期的逻辑部分，允许操作对象的日期的部件，如年或分钟，
+            即使 <code>$date</code> 包含一个长格式日期字符串，如 "December 31, 2007 23:59:59" 。
+            除了 <code>compare()</code> 和 <code>get()</code> 外，操作的结果是在对象里修改日期。
+        </para>
+
+        <example id="zend.date.basic.example-1">
+            <title> 日期部件的操作 </title>
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date(); // $date's timestamp === time()
+
+// changes $date by adding 12 hours
+$date->add('12', Zend_Date::HOUR);
+print $date;
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            下表显示了基本操作的每个组合和若干普通的日期部件的方便方法。当使用上述一般的方法时，这些方便的方法帮助我们懒惰的程序员避免在<link linkend="zend.date.constants.list"> 日期部件常量 </link> 方面的打字。
+            方便地，它们的名称由前缀（基本操作名）和后缀（日期部件类型）的组成，如 <code>addYear()</code> 。
+            在下面列表中，能看到所有“日期部件”和“基本操作”的组合。例如，"add"操作适用于这些日期部件，包括 <code>addDay()</code>、 <code>addYear()</code> 等。
+        </para>
+
+        <para>
+            这些方便的方法和基本操作方法有相同的功能，但期望字符串和整数的 <code>$date</code> 操作数只包含表示由方便方法的后缀指示的类型的值。
+            这样，当<code>$date</code>是字符串或整数时， 这些方法的名字（如"Year" 或 "Minute"）能确定 <code>$date</code>  操作数的单元。
+        </para>
+
+        <sect3 id="id.date.basic.parts">
+
+            <title> 日期部件列表 </title>
+
+            <table id="id.date.basic.parts.table">
+                <title>日期部件</title>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>日期部件</entry>
+                            <entry>解释</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Unix_Time">时间戳</ulink>
+                            </entry>
+                            <entry>
+                            UNIX 时间戳，表示从 January 1st, 1970 00:00:00 GMT/UTC 开始的秒数。
+                        </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Gregorian_calendar">年</ulink>
+                            </entry>
+                            <entry> 罗马教皇日历年（如 2006）</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">月</ulink>
+                            </entry>
+                            <entry> 罗马教皇日历月（1-12, 支持本地化名字）</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/24-hour_clock">24 小时时钟 </ulink>
+                            </entry>
+                            <entry>一天的小时数(0-23)，表示从一天开始算起过去的小时数。</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Minute">分钟</ulink>
+                            </entry>
+                            <entry>一小时的分钟数(0-59)，表示从一小时开始算起过去的分钟数。</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Second">秒</ulink>
+                            </entry>
+                            <entry>一分钟的秒数(0-59)，表示从一分钟开始算起过去的秒数。</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Millisecond">毫秒</ulink>
+                            </entry>
+                            <entry>
+                                毫秒表示千分之一秒(0-999)。<code>Zend_Date</code> 支持两个另外的方法来支持小于秒的时间单位。
+                                缺省地，<code>Zend_Date</code>  实例精确到毫秒，如 <code>getFractionalPrecision()</code> ，我们用 <code>setFractionalPrecision($precision)</code> 来修改精确度。
+                                然而，因为 <code>Zend_Date</code> 使用 <code><ulink url="http://php.net/microtime">microtime()</ulink></code>，精确度实际上限制到微秒。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Day">天</ulink>
+                            </entry>
+                            <entry>
+                                如果 <code>$date</code>  操作数是 <code>Zend_Date</code> 的实例或一个数字字符串，<code>Zend_Date::DAY_SHORT</code> 是从 <code>$date</code> 里取出。
+                                否则，根据这些文档 <code>Zend_Date::WEEKDAY_NARROW</code>、
+                                <code>Zend_Date::WEEKDAY_NAME</code>、 <code>Zend_Date::WEEKDAY_SHORT</code> 和 <code>Zend_Date::WEEKDAY</code> （假定为罗马教皇日历）的惯例尝试从天里取出。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Week">星期</ulink>
+                            </entry>
+                            <entry>
+                                如果 <code>$date</code>  操作数是 <code>Zend_Date</code> 的实例或一个数字字符串，<code>Zend_Date::WEEK</code> 是从 <code>$date</code> 里取出。
+                                否则产生一个异常。（假定为罗马教皇日历）
+                             </entry>
+                        </row>
+                        <row>
+                            <entry>日期</entry>
+                            <entry>
+                                如果 <code>$date</code>  操作数是 <code>Zend_Date</code> 的实例或一个数字字符串，<code>Zend_Date::DAY_MEDIUM</code> 是从 <code>$date</code> 里取出。
+                                否则就尝试格式化 <code>$date</code>  字符串成 Zend_Date::DATE_MEDIUM  日期格式。
+                                <code>Zend_Date::DAY_MEDIUM</code>  格式根据地方的不同而不同。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Weekday</entry>
+                            <entry>
+                                Weekdays 表示为从 0 （星期日） 到 6 （星期六）.
+                                如果 <code>$date</code>  操作数是 <code>Zend_Date</code> 的实例或一个数字字符串，<code>Zend_Date::WEEKDAY_DIGIT</code> 是从 <code>$date</code> 里取出。
+                                否则，根据这些文档 <code>Zend_Date::WEEKDAY_NARROW</code>、
+                                <code>Zend_Date::WEEKDAY_NAME</code>、 <code>Zend_Date::WEEKDAY_SHORT</code> 和 <code>Zend_Date::WEEKDAY</code> （假定为罗马教皇日历）的惯例尝试从天里取出。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>DayOfYear</entry>
+                            <entry>
+                                在 <code>Zend_Date</code>，一年中的天表示从一年开始发生的日历天数（0-365）。和其它上述单元一样，小数四舍五入到最近的整数。（假定为罗马教皇日历）
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
+                            </entry>
+                            <entry>
+                                我们支持 Arpa 日期（如 RFC 822 格式日期）。输出使用 "GMT"  或 "Local differential hours+min"  格式（见第5节的 RFC 822）。
+                                在 PHP 5.2.2 以前，一起使用 DATE_RFC822 常量和 PHP 日期函数有时会产生 <ulink url="http://bugs.php.net/bug.php?id=40308">不正确的结果</ulink>。
+                                Zend_Date 的结果是正确的。例如 <code>Mon, 31 Dec 06 23:59:59 GMT</code> 。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
+                            </entry>
+                            <entry>
+                                对于输出只支持完全的 ISO 8601 日期。例如：<code>2009-02-14T00:31:30+01:00</code>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+
+        <sect3 id="id.date.basic.operations">
+
+            <title>List of Date Operations 日期操作列表</title>
+
+            <para>
+                如果 <link linkend="zend.date.constants.list"> 合适的常量 </link> 用于 <code>$part</code> 参数，
+                对特定日期部件，下列基本操作可用来代替方便操作。
+            </para>
+
+            <table id="id.date.basic.operations.table">
+                <title>基本操作</title>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>基本操作</entry>
+                            <entry>解释</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>get()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    使用 <code>get($part)</code>  来获取这个对象的本地化到 <code>$locale</code> 为格式的字符串或整数的日期的 <code>$part</code> 。
+                                    当使用 BCMath 扩展，对大的值返回数字字符串而不是整数。
+                                    <emphasis role="strong">注:</emphasis> 不像 <code>get()</code>，其它 get*()  方便方法只返回 <code>Zend_Date</code>  的实例，
+                                    该实例包含一个表示选择的或计算的日期/时间的日期。
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>set()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">set($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    对从带有 <code>$locale</code> 地方的输入 <code>$date</code> 找到的部件设置当前对象的 <code>$part</code> 一个相应的值。
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>add()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">add($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    加上带有  <code>$locale</code>  地方的 <code>$date</code> 的 <code>$part</code> 到当前对象的日期。
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>sub()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">sub($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    从当前对象的日期减去 加上带有  <code>$locale</code>  地方的 <code>$date</code> 的 <code>$part</code> 。
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>copyPart()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">copyPart($part, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    返回一个克隆的对象，只带有拷贝到克隆的对象的日期的 <code>$part</code> ，克隆带有它自己的地方任意地设置为 <code>$locale</code> （如果指定）。
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>compare()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">compare($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    比较 <code>$date</code> 的 <code>$part</code> 和这个对象的时间戳，如果相等返回 0，如果对象部分更晚，返回1，否则返回 -1。
+                                </para>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.comparison">
+
+        <title> 比较日期 </title>
+
+        <para>
+             对于列表在 <xref linkend="zend.date.overview" />的日期部件，下列基本操作没有相应的方便方法。
+        </para>
+
+        <table id="zend.date.others.comparison.table">
+            <title> 日期比较方法 </title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>方法</entry>
+                        <entry>解释</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>equals()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">equals($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                如果有 <code>$locale</code> 地方的 <code>$date</code> 的 <code>$part</code> 和这个对象的 <code>$part</code> 一样，返回 true，否则返回 false。
+                             </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isEarlier()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isEarlier($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                 如果对象的日期的 <code>$part</code> 早于 有 <code>$locale</code> 地方的 <code>$date</code> 的 <code>$part</code> ，返回 true。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isLater()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isLater($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                               如果对象的日期的 <code>$part</code> 晚于有 <code>$locale</code> 地方的 <code>$date</code> 的 <code>$part</code> ，返回 true。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isToday()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isToday()</emphasis>
+                            </para>
+                            <para>
+                                 测试是否今天的年、月、日匹配这个对象的日期值，使用对象的时区。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isTomorrow()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isTomorrow()</emphasis>
+                            </para>
+                            <para>
+                                测试是否明天的年、月、日匹配这个对象的日期值，使用对象的时区。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isYesterday()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isYesterday()</emphasis>
+                            </para>
+                            <para>
+                                测试是否昨天的年、月、日匹配这个对象的日期值，使用对象的时区。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isLeapYear()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isLeapYear()</emphasis>
+                            </para>
+                            <para>
+                                使用 <code>isLeapYear()</code> 来确定当前对象是否闰年，或使用  Zend_Date::checkLeapYear($year) 来
+                                检查 $year，它可以是字符串、整数或 <code>Zend_Date</code>  的实例。这个年是闰年吗？
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isDate()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isDate($date, $format = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                这个方法检查给定的日期是否一个真实的日期并且如果所有检查通过返回 true。
+                                它和 php 的 checkdate() 函数一样但也检查本地化月名和扩展了 checkdate() 范围的日期。
+                            </para>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.gettingparts">
+
+        <title>获取日期和日期部件</title>
+
+        <para>
+            有若干方法支持获取和 <code>Zend_Date</code> 实例相关的值。
+        </para>
+
+        <table id="zend.date.others.gettingparts.table">
+            <title>日期输出方法</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>方法</entry>
+                        <entry>解释</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>toString()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toString($format = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                直接调用或通过魔术方法 <code>__toString()</code> 。<code>toString()</code> 根据对象地方（或可选地指定 <code>$locale</code>）的约定
+                                来自动格式化日期对象的值。支持的格式代码列表，参见 <xref linkend="zend.date.constants.selfdefinedformats" /> 。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>toArray()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toArray()</emphasis>
+                            </para>
+                            <para>
+                                根据对象的地方的约定返回选择的日期的表示的数组。返回数组和 PHP 的 <ulink url="http://php.net/getdate">getdate()</ulink>
+                                函数相同并包括：
+                            </para>
+                            <para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            Number of day as '<emphasis role="strong">day</emphasis>'
+                                            (<code>Zend_Date::DAY_SHORT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Number of month as '<emphasis role="strong">month</emphasis>'
+                                            (<code>Zend_Date::MONTH_SHORT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Year as '<emphasis role="strong">year</emphasis>'
+                                            (<code>Zend_Date::YEAR</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Hour as '<emphasis role="strong">hour</emphasis>'
+                                            (<code>Zend_Date::HOUR_SHORT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Minute as '<emphasis role="strong">minute</emphasis>'
+                                            (<code>Zend_Date::MINUTE_SHORT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Second as '<emphasis role="strong">second</emphasis>'
+                                            (<code>Zend_Date::SECOND_SHORT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Abbreviated timezone as '<emphasis role="strong">timezone</emphasis>'
+                                            (<code>Zend_Date::TIMEZONE</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Unix timestamp as '<emphasis role="strong">timestamp</emphasis>'
+                                            (<code>Zend_Date::TIMESTAMP</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Number of weekday as '<emphasis role="strong">weekday</emphasis>'
+                                            (<code>Zend_Date::WEEKDAY_DIGIT</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Day of year as '<emphasis role="strong">dayofyear</emphasis>'
+                                            (<code>Zend_Date::DAY_OF_YEAR</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Week as '<emphasis role="strong">week</emphasis>'
+                                            (<code>Zend_Date::WEEK</code>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Delay of timezone to GMT as
+                                            '<emphasis role="strong">gmtsecs</emphasis>'
+                                            (<code>Zend_Date::GMT_SECS</code>)
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>toValue()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toValue($part = null)</emphasis>
+                            </para>
+                            <para>
+                                根据对象的地方的约定返回一个整数的选择的日期 <code>$part</code> 表示。
+                                当 <code>$part</code>选择非数字值，如 <code>Zend_Date::MONTH_NAME_SHORT</code> ，返回 <code>false</code>。
+                                <emphasis role="strong">注:</emphasis>这个方法调用 <link linkend="id.date.basic.operations"><code>get()</code></link>
+                                并把结果做成 PHP 整数，如果  <code>get()</code> 返回一个包含对于你的系统的PHP太大的数的字符串，结果不可预计。
+                                使用 <code>get()</code> 作为替换。
+
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <link linkend="id.date.basic.operations">get()</link>
+                        </entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                这个方法返回对象根据 <code>$locale</code> 本地化的日期的 <code>$part</code>，格式为字符串或整数。
+                                更多信息参见<xref linkend="id.date.basic.operations" />。
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>now()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">now($locale = null)</emphasis>
+                            </para>
+                            <para>
+                                这个方便函数和 <code>new Zend_Date()</code> 相同。它以<code>Zend_Date</code>对象返回当前日期，有 <code>$locale</code> 。
+                            </para>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.fractions">
+
+        <title> 使用秒的片段 </title>
+
+        <para>
+            Several methods support retrieving values related to a <code>Zend_Date</code> instance.
+        </para>
+
+        <table id="zend.date.others.fractions.table">
+            <title> 日期输出方法 </title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>方法</entry>
+                        <entry>解释</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getFractionalPrecision()</emphasis>
+                            </para>
+                        </entry>
+                        <entry> 返回秒的精度 </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">setFractionalPrecision()</emphasis>
+                            </para>
+                        </entry>
+                        <entry> 设置秒的精度 </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.other.sun">
+
+        <title> 日出 / 日落 </title>
+
+        <para>
+            有三个方法提供访问关于太阳的地理本地化信息，包括日出和日落的时间。
+        </para>
+
+        <table id="zend.date.other.sun.table">
+            <title> 辅助方法 </title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>方法</entry>
+                        <entry>解释</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunrise($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry> 返回日期的日出时间 </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunset($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry> 返回日期的日落时间 </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunInfo($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry> 返回带有日期的太阳日期的数组 </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

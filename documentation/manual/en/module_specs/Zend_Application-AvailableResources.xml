@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Available Resource Plugins</title>
+
+    <para>
+        Here you'll find API-like documentation about all resource plugins
+        available by default in <classname>Zend_Application</classname>.
+    </para>
+
+    <xi:include href="Zend_Application-AvailableResources-Db.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Modules.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Session.xml" />
+    <xi:include href="Zend_Application-AvailableResources-View.xml" />
+</sect1>

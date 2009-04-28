@@ -1,0 +1,27 @@
+<sect1 id="zend.mail.sending">
+    <title>Posielanie cez SMTP</title>
+    <para>
+        Pre posielanie e-mailov cez SMTP je potrebné vytvoriť <code>Zend_Mail_Transport_Smtp</code>
+        a registrovať s <code>Zend_Mail</code> pred zavolaním metódy <code>send()</code>.
+        Všetky nasledujúce volania <code>Zend_Mail::send()</code> v skripte budú
+        používať SMTP.
+    </para>
+    <example>
+        <title>Posielanie cez SMTP</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
+Zend_Mail::setDefaultTransport($tr);
+?>]]>   </programlisting>
+    </example>
+    <para>
+        Volanie <code>setDefaultTransport()</code> a vytvorenie <code>Zend_Mail_Transport_Smtp</code>
+        nie sú náročné. Tieto dva riadky kódu môžu byť vykonané počas inicializácie skriptu
+        (napr. config.inc a podobne). Tento spôsob umožní oddeliť konfiguráciu od aplikačnej logiky -
+        bez ohľadu na to či je e-mail posielaný cez SMTP, alebo <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+        , aký mail server je použitý, atď.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

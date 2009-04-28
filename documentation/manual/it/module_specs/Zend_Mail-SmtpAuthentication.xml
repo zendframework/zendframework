@@ -1,0 +1,42 @@
+<sect1 id="zend.mail.smtp-authentication">
+  <title>Autenticazione SMTP</title>
+
+  <para>
+      <code>Zend_Mail</code> supporta l'uso dell'autenticazione SMTP, che si può abilitare passando il parametro 'auth' all'array di configurazione nel costruttore di <code>Zend_Mail_Transport_Smtp</code>.
+      I metodi di autenticazione integrati disponibili sono PLAIN, LOGIN e CRAM-MD5, che necessitano dei valori di 'username' e 'password' nell'array di configurazione.
+  </para>
+
+  <example id="zend.mail.smtp-authentication.example-1">
+    <title>Abilitazione dell'autenticazione in Zend_Mail_Transport_Smtp</title>
+
+    <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+require_once 'Zend/Mail/Transport/Smtp.php';
+
+$config = array('auth' => 'login',
+                'username' => 'myusername',
+                'password' => 'password');
+
+$transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('Questo è il testo.');
+$mail->setFrom('qualcuno@example.com', 'Un mittente');
+$mail->addTo('qualcunaltro@example.com', 'Un destinatario');
+$mail->setSubject('Oggetto testuale');
+$mail->send($transport);]]>
+    </programlisting>
+  </example>
+
+  <note>
+    <title>Tipi di autenticazione</title>
+
+    <para>
+        Il tipo di autenticazione distingue maiuscole e minuscole ma non contiene punteggiatura.
+        Es. per usare CRAM-MD5 passare <code>'auth' => 'crammd5'</code> nel costruttore di <code>Zend_Mail_Transport_Smtp</code>.
+    </para>
+  </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

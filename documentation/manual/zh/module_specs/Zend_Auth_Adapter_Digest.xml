@@ -1,0 +1,111 @@
+﻿<sect1 id="zend.auth.adapter.digest">
+
+    <title>摘要式认证</title>
+
+    <sect2 id="zend.auth.adapter.digest.introduction">
+
+        <title>简介</title>
+
+        <para>
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">摘要式认证</ulink>是一个HTTP认证的方法，它通过不需要通过网络传递明文密码的方法对<ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">基本认证</ulink>加以改进。
+        </para>
+
+        <para>
+            这个适配器允许依靠文本文件认证，该文本包括数行摘要式认证的基本元素：
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        用户名，例如 "<code>joe.user</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        领域，例如 "<code>Administrative Area</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        用户名，领域和密码的MD5 hash用冒号隔开
+                    </para>
+                </listitem>
+            </itemizedlist>
+            在下面的例子中，上面的元素用冒号隔开（密码是"<code>somePassword</code>"）：
+        </para>
+
+        <programlisting><![CDATA[
+someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
+]]>
+</programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.specifics">
+
+        <title>规范（Specifics）</title>
+
+        <para>
+            摘要式认证适配器<code>Zend_Auth_Adapter_Digest</code>需要若干输入参数：
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        文件名 － 认证查询被执行是所需的文件名
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        领域 － 摘要式认证领域
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        用户名 － 摘要式认证用户
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        密码 － 该领域用户的密码
+                    </para>
+                </listitem>
+            </itemizedlist>
+            在调用<code>authenticate()</code>之前必需要设定这些参数。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.identity">
+
+        <title>身份（Identity）</title>
+
+        <para>
+            摘要式认证返回一个<code>Zend_Auth_Result</code> 对象，它由包含<code>realm</code>和<code>username</code>健值的数组的身份形成。在<code>authenticate()</code>被调用之前，分别设置和这些健值关联的数组值为相符的值。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<
+$adapter = new Zend_Auth_Adapter_Digest($filename,
+                                        $realm,
+                                        $username,
+                                        $password);
+
+$result = $adapter->authenticate();
+
+$identity = $result->getIdentity();
+
+print_r($identity);
+
+/*
+Array
+(
+    [realm] => Some Realm
+    [username] => someUser
+)
+*/
+]]>
+        </programlisting>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

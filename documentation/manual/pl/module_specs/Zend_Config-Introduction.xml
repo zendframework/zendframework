@@ -1,0 +1,101 @@
+<sect1 id="zend.config.introduction">
+    <title>Wprowadzenie</title>
+    <para>
+        Klasa <code>Zend_Config</code> została stworzona aby uprościć użycie
+        danych konfiguracyjnych w aplikacjach. Dostarcza ona interfejs bazujący
+        na właściwościach obiektów służący do odczytywania danych
+        konfiguracyjnych wewnątrz kodu aplikacji. Dane konfiguracyjne  mogą 
+        pochodzić z różnego rodzaju źródeł, w których dane konfiguracyjne są
+        przechowywane hierarchiczne. Obecnie <code>Zend_Config</code> dostarcza
+        klasy obsługujące dane konfiguracyjne przechowywane w plikach tekstowych:
+        <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link>, oraz
+        <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
+
+    </para>
+    <example id="zend.config.introduction.example.using">
+        <title>Użycie Zend_Config</title>
+        <para>
+            Normalnie jest tak, że użytkownicy użyliby jednej z klas adaptera,
+            takiej jak <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link>
+            czy <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>,
+            ale dane konfiguracyjne mogą być też dostępne w tablicy PHP. Można w prosty
+            sposób przekazać tablicę do konstruktora <code>Zend_Config</code> w celu
+            uzyskania obiektu zawierającego dane konfiguracyjne:
+        </para>
+        <programlisting role="php"><![CDATA[
+// Tablica danych konfiguracyjnych
+$configArray = array(
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
+        )
+    )
+);
+
+// Tworzy obiekt konfiguracji na podstawie danych konfiguracyjnych
+$config = new Zend_Config($configArray);
+
+// Wyświetlenie wpisu z konfiguracji (wynikiem jest 'www.example.com')
+echo $config->webhost;
+
+// Użycie danych konfiguracyjnych w celu połączenia się z bazą danych
+$db = Zend_Db::factory($config->database->adapter,
+                       $config->database->params->toArray());
+
+// Alternartywne użycie: przekazanie obiektu Zend_Config.
+// Metoda kklasy Zend_Db wie jak zinterpretować dane.
+$db = Zend_Db::factory($config->database);
+]]>
+        </programlisting>
+    </example>
+    <para>
+        Jak zostało pokazane w powyższym przykładzie, klasa <code>Zend_Config</code>
+        zapewnia składnię zagnieżdżonych właściwości obiektów w celu uzyskania
+        dostępu do danych konfiguracyjnych przekazanych do konstruktora.
+    </para>
+    <para>
+        Oprócz zorientowanego obiektowo dostępu do wartości klasa
+        <code>Zend_Config</code> posiada także metodę <code>get()</code>
+        umożliwiającą zwrócenie podanej domyślnej wartości jeśli element nie
+        istnieje. Na przykład:
+    </para>
+    <programlisting role="php"><![CDATA[
+$host = $config->database->get('host', 'localhost');
+]]>
+    </programlisting>
+    <example id="zend.config.introduction.example.file.php">
+        <title>Użycie Zend_Config z plikiem konfiguracyjnym PHP</title>
+        <para>
+            Często wskazane może być użycie do konfiguracji zwykłego pliku PHP.
+            Poniższy kod pokazuje w jak łatwy sposób można to zrobić:
+        </para>
+        <programlisting role="php"><![CDATA[
+return array(
+    'webhost'  => 'www.example.com',
+    'database' => array(
+        'adapter' => 'pdo_mysql',
+        'params'  => array(
+            'host'     => 'db.example.com',
+            'username' => 'dbuser',
+            'password' => 'secret',
+            'dbname'   => 'mydatabase'
+        )
+    )
+);
+]]>
+        </programlisting>
+        <programlisting role="php"><![CDATA[
+// Załadowanie konfiguracji
+$config = new Zend_Config(require 'config.php');
+
+// Wyświetlenie danych konfiguracyjnych (powoduje wyświetlenie 'www.example.com')
+echo $config->webhost;
+]]>
+        </programlisting>
+    </example>
+</sect1>

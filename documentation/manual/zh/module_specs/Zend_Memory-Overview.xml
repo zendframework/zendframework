@@ -1,0 +1,153 @@
+<sect1 id="zend.memory.overview">
+    <title>概述</title>
+
+    <sect2 id="zend.memory.introduction">
+        <title> 简介 </title>
+        <para>
+            Zend_Memory组件用于在一个受限制的内存环境下管理数据.
+        </para>
+
+        <para>
+            内存对象(内存容器)是由内存管理器按照请求生成并在需要的时候透明地交换/加载的.
+        </para>
+
+        <para>
+            例如,如果由于受管理对象的创建或加载导致内存使用量超过你所指定的限制,一些管理对象将被复制到内存以外的缓存存储中.
+            用这种方法,受管理对象的总内存使用量不会超过强制的限制.
+        </para>
+
+        <para>
+            内存管理器使用<link linkend="zend.cache.backends">Zend_Cache backends</link>作为存储提供者
+        </para>
+
+        <example id="zend.memory.introduction.example-1">
+            <title>使用 Zend_Memory 组件</title>
+            <para>
+                <code>Zend_Memory::factory()</code> 用指定的后端选项实例化内存管理器对象.
+            </para>
+                <programlisting role="php"><![CDATA[
+require_once 'Zend/Memory.php';
+
+$backendOptions = array(
+    'cache_dir' => './tmp/' // Directory where to put the swapped memory blocks
+);
+
+$memoryManager = Zend_Memory::factory('File', $backendOptions);
+
+$loadedFiles = array();
+
+for ($count = 0; $count < 10000; $count++) {
+    $f = fopen($fileNames[$count], 'rb');
+    $data = fread($f, filesize($fileNames[$count]));
+    $fclose($f);
+
+    $loadedFiles[] = $memoryManager->create($data);
+}
+
+echo $loadedFiles[$index1]->value;
+
+$loadedFiles[$index2]->value = $newValue;
+
+$loadedFiles[$index3]->value[$charIndex] = '_';
+]]>
+                </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.memory.theory-of-operation">
+
+        <title>操作原理</title>
+
+        <para>
+            Zend_Memory 组件操作有如下的概念:
+            <itemizedlist>
+                <listitem>
+                    <para>内存管理器</para>
+                </listitem>
+                <listitem>
+                    <para>内存容器</para>
+                </listitem>
+                <listitem>
+                    <para>锁定的内存对象</para>
+                </listitem>
+                <listitem>
+                    <para>可移动的内存对象</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <sect3 id="zend.memory.theory-of-operation.manager">
+
+            <title>内存管理器</title>
+
+            <para>
+                内存管理器按照用户应用程序的请求生成内存对象(锁定的或可移动的)并返回已交换到内存容器对象中的那些.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.theory-of-operation.container">
+
+            <title>内存容器</title>
+
+            <para>
+                内存容器有一个虚拟的或者实际的字符串类型的<code>值</code>.
+                这个属性包含了在内存对象创建时指定的数据值.
+            </para>
+
+            <para>
+                你可以作为对象属性操作这个<code>值</code>属性:
+
+                <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+
+echo $memObject->value;
+
+$memObject->value = $newValue;
+
+$memObject->value[$index] = '_';
+
+echo ord($memObject->value[$index1]);
+
+$memObject->value = substr($memObject->value, $start, $length);
+]]>
+                </programlisting>
+            </para>
+
+            <note>
+                <para>
+                    如果你使用的PHP版本小于5.2,使用<link linkend="zend.memory.memory-objects.api.getRef">getRef()</link>
+                    方法而不是直接访问属性值.
+                </para>
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.memory.theory-of-operation.locked">
+
+            <title>锁定的内存</title>
+
+            <para>
+                锁定的内存对象总是存储在内存中.存储在锁定内存对象中的数据绝不会被交换到缓存后端中去.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.theory-of-operation.movable">
+
+            <title>可移动内存</title>
+
+            <para>
+                当需要时,可移动内存对象由Zend_Memory透明的交换到缓存后端或则从缓存后端加载.
+            </para>
+
+            <para>
+                由于性能的考虑,内存管理器不会交换小于指定大小的内存对象.细节请查看
+                <xref linkend="zend.memory.memory-manager.settings.min-size" />
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>

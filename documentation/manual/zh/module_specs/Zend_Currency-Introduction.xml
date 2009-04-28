@@ -1,0 +1,53 @@
+<sect1 id="zend.currency.introduction">
+
+    <title> Zend_Currency 简介 </title>
+
+    <para>
+        <code>Zend_Currency</code> 是Zend_Framework I18n 核心的一部分。它处理所有关于货币、钱的表示和格式。它也提供另外的信息方法，包括货币的本地化信息、关于哪个货币在哪个地区使用等等。
+    </para>
+
+    <sect2 id="zend.currency.introduction.list">
+
+        <title> 为什么使用 <code>Zend_Currency</code> ？</title>
+
+        <para>
+            <code>Zend_Currency</code> 提供了下列函数来处理货币和钱相关的工作。
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 完全本地支持 </emphasis>
+                </para>
+                <para>
+                    <code>Zend_Currency</code> 支持所有有效地区并因此有能力知道超过 100 中不同的本地货币信息，包括例如货币名称、缩写、钱的符合等等。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 可重用的货币定义 </emphasis>
+                </para>
+                <para>
+                    <code>Zend_Currency</code> 不包括货币的值。这就是为什么它的函数不包括在 <code>Zend_Locale_Format</code> 里，但好处是已经定义的货币表示可以被重用。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> Fluent 接口 </emphasis>
+                </para>
+                <para>
+                    <code>Zend_Currency</code> 按需包含 fluent 接口。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong"> 另外的信息方法 </emphasis>
+                </para>
+                <para>
+                    <code>Zend_Currency</code> 包括另外的方法，这方法提供关于哪个地区使用哪种货币或哪种货币被用于被定义的地区的信息。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+</sect1>

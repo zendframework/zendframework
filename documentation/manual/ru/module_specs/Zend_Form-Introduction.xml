@@ -1,0 +1,38 @@
+<sect1 id="zend.form.introduction">
+    <title>Zend_Form</title>
+
+    <para>
+        Компонента <code>Zend_Form</code> упрощает создание форм и управление
+        ими в веб-приложениях. Она выполняет следующие задачи:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            Фильтрация и проверка корректности данных, введенных через элемент
+            формы
+        </para></listitem>
+        <listitem><para>
+            Упорядочение элементов
+        </para></listitem>
+        <listitem><para>
+            Визуализацию элементов и форм, включая экранирование
+        </para></listitem>
+        <listitem><para>
+            Группирование элементов и форм
+        </para></listitem>
+        <listitem><para>
+            Конфигурирование элементов и форм
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Эта компонента активно использует другие компоненты Zend Framework-а
+        в своей работе, включая <code>Zend_Config</code>,
+        <code>Zend_Validate</code>, <code>Zend_Filter</code>,
+        <code>Zend_Loader_PluginLoader</code>, и, опционально,
+        <code>Zend_View</code>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

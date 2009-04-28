@@ -1,0 +1,510 @@
+<sect1 id="zend.paginator.usage">
+    <title>Использование</title>
+
+    <sect2 id="zend.paginator.usage.paginating">
+        <title>Разбиение наборов данных на страницы </title>
+
+        <para>
+            Для разбиения элементов данных на страницы
+            <code>Zend_Paginator</code> должен иметь обобщенный доступ к этим
+            данным. Поэтому доступ к данным осуществляется через адаптеры к
+            источникам данных. В поставку Zend Framework входят несколько
+            адаптеров:
+        </para>
+
+        <table id="zend.paginator.usage.paginating.adapters">
+            <title>Адаптеры для <code>Zend_Paginator</code></title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Адаптер</entry>
+                        <entry>Описание</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Array</entry>
+                        <entry>Использует PHP-массив</entry>
+                    </row>
+                    <row>
+                        <entry>DbSelect</entry>
+                        <entry>
+                            Использует экземпляр
+                            <link linkend="zend.db.select"><code>Zend_Db_Select</code></link>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Iterator</entry>
+                        <entry>
+                            Использует экземпляр
+                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Null</entry>
+                        <entry>
+                            Не использовать <code>Zend_Paginator</code>
+                            для разбиения на страницы.
+                            Но и в этом случае вы можете воспользоваться
+                            возможностями постраничной навигации.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            При создании экземпляра класса <code>Zend_Paginator</code>, следует
+            передать адаптер его конструктору:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_array($array));]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Для удобства вы можете воспользоваться статическим методом
+            <code>factory()</code> для адаптеров, входящих в поставку Zend
+            Framework:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[$paginator = Zend_Paginator::factory($array);]]>
+            </programlisting>
+        </para>
+
+        <note>
+            <para>В случае использования адаптера Null вы должны передавать
+            его конструктору количество элементов вместо набора данных.</para>
+        </note>
+
+        <para>
+            Несмотря на то, что экземпляр технически можно
+            использовать и в таком состоянии, вы должны
+            будете указывать, какой номер страницы запросил пользователь,
+            чтобы он мог просматривать данные:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[$paginator->setCurrentPageNumber($pageNumber);]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Наиболее простым способом отслеживания номера страницы является
+            использование URL. Мы рекомендуем использовать для этого
+            совместимый с <code>Zend_Controller_Router_Interface</code>
+            маршрутизатор, но это не обязательно.
+        </para>
+
+        <para>
+            Ниже приведен пример маршрута, который можно использовать в
+            конфигурационном файле INI:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[routes.example.route = articles/:articleName/:pageNumber
+routes.example.defaults.controller = articles
+routes.example.defaults.action = view
+routes.example.defaults.pageNumber = 1
+routes.example.reqs.articleName = \w+
+routes.example.reqs.pageNumber = \d+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Используя этот маршрут и компоненты MVC Zend Framework-а,
+            вы можете устанавливать номер текущей страницы следующим образом:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[$paginator->setCurrentPageNumber($this->_getParam('pageNumber'));]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Есть также другие опции, о них читайте в разделе
+            <link linkend="zend.paginator.configuration">Конфигурация</link>.
+        </para>
+
+        <para>
+            После этого нужно присвоить экземпляр
+            <code>Zend_Paginator</code> переменной вида. Если используется
+            <code>Zend_View</code> с помощником действий ViewRenderer, то
+            для этого подходит следующий код:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[$this->view->paginator = $paginator;]]>
+            </programlisting>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.paginator.rendering">
+        <title>Визуализация страниц через скрипты видов</title>
+
+        <para>
+            Для визуализации элементов страницы (если
+            вы используете для этого <code>Zend_Paginator</code>)
+            и отображения постраничной навигации используется скрипт вида.
+        </para>
+
+        <para>
+            Поскольку <code>Zend_Paginator</code> реализует SPL-интерфейс
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><code>IteratorAggregate</code></ulink>,
+            то обход элементов и их отображение производится просто.
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[<html>
+<body>
+<h1>Example</h1>
+<?php if (count($this->paginator)): ?>
+<ul>
+<?php foreach ($this->paginator as $item): ?>
+  <li><?= $item; ?></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml'); ?>
+</body>
+</html>]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Обратите внимание, что в конце вызывается помощник вида.
+            <code>PaginationControl</code> принимает экземпляр
+            <code>Zend_Paginator</code>, стиль прокрутки и скрипт вида.
+            Последние два аргумента являются необязательными.
+        </para>
+
+        <para>
+            Но несмотря на это, они очень важны. В то время как скрипт вида
+            используется для определения <emphasis>внешнего вида</emphasis>
+            постраничной навигации, стиль прокрутки определяет ее
+            <emphasis>поведение</emphasis>.
+            Предположим, скрипт вида отображает постраничную навигацию
+            для результатов поиска следующего вида:
+        </para>
+
+        <para>
+            <inlinegraphic align="center" valign="middle"
+                fileref="figures/zend.paginator.usage.rendering.control.png"
+                format="PNG"/>
+        </para>
+
+        <para>
+            Что должно происходить, если пользователь нажимает на ссылку "next"
+            несколько раз? Правильно, тут может быть сколько угодно
+            вариантов. Номер текущей страницы может оставаться в середине
+            (как это реализовано, например, в Yahoo!) или перемещаться к концу
+            ряда при каждом нажатии "next" и затем показываться снова с другого
+            конца. Количество отображаемых номеров страниц может даже
+            увеличиваться и уменьшаться, пока пользователь перемещается по ним
+            (или "прокручивает" их), как это сделано в Google.
+        </para>
+
+        <para>
+            Zend Framework предоставляет четыре стиля прокрутки:
+        </para>
+
+        <table id="zend.paginator.usage.rendering.scrolling-styles">
+            <title>Стили прокрутки для <code>Zend_Paginator</code></title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Стиль прокрутки</entry>
+                        <entry>Описание</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>All</entry>
+                        <entry>
+                            Возвращает все страницы. Полезен для
+                            постраничной навигации в виде выпадающего списка
+                            с относительно небольшим количеством страниц.
+                            В этом случае предпочтительнее, чтобы в нем
+                            отображались все доступные страницы.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Elastic</entry>
+                        <entry>
+                            Скроллинг в стиле Google, в котором количество
+                            отображаемых номеров страниц может увеличиваться и
+                            уменьшаться, пока пользователь перемещается по
+                            страницам.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Jumping</entry>
+                        <entry>
+                            Пока пользователь листает страницы, номер текущей
+                            страницы перемещается к концу ряда и показывается
+                            снова в начале нового ряда.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Sliding</entry>
+                        <entry>
+                            Скроллинг в стиле Yahoo!, в котором номер текущей
+                            страницы находится в середине ряда или настолько
+                            близко к нему, насколько это возможно. Этот стиль
+                            используется по умолчанию.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Установив используемые по умолчанию скрипт вида, стиль прокрутки и
+            экземпляр вида, вы можете полностью исключить вызовы
+            PaginationControl:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[Zend_Paginator::setDefaultScrollingStyle('Sliding');
+Zend_View_Helper_PaginationControl::setDefaultViewPartial('my_pagination_control.phtml');
+$paginator->setView($view);]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Если все эти значения установлены, то вы можете вывести
+            постраничную навигацию в своем скрипте вида с помощью обычной
+            конструкции <code>echo</code>:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[<?= $this->paginator; ?>]]>
+            </programlisting>
+        </para>
+
+        <sect3 id="zend.paginator.usage.rendering.example-controls">
+            <title>Примеры постраничной навигации</title>
+
+            <para>
+                Надеемся, следующие примеры помогут вам с созданием постраничной
+                навигации:
+            </para>
+
+            <para>
+                Постраничная навигация для результатов поиска
+
+                <programlisting role="php"><![CDATA[<!--
+См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
+-->
+
+<?php if ($this->pageCount): ?>
+<div id="paginationControl">
+<!-- Ссылка на предыдущую страницу -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> |
+<?php else: ?>
+  <span class="disabled">&lt; Previous</span> |
+<?php endif; ?>
+
+<!-- Нумерованные ссылки на страницы -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?= $this->url(array('page' => $page)); ?>"><?= $page; ?></a> |
+  <?php else: ?>
+    <?= $page; ?> |
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Ссылка на следующую страницу -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= $this->url(array('page' => $this->next)); ?>">Next &gt;</a>
+<?php else: ?>
+  <span class="disabled">Next &gt;</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Постраничная навигация для элементов
+
+                <programlisting role="php"><![CDATA[<!--
+См. http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
+-->
+
+<?php if ($this->pageCount): ?>
+<div id="paginationControl">
+<?= $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?>
+of <?= $this->totalItemCount; ?>
+
+<!-- Ссылка на первую страницу -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= $this->url(array('page' => $this->first)); ?>">First</a> |
+<?php else: ?>
+  <span class="disabled">First</span> |
+<?php endif; ?>
+
+<!-- Ссылка на предыдущую страницу -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?= $this->url(array('page' => $this->previous)); ?>">&lt; Previous</a> |
+<?php else: ?>
+  <span class="disabled">&lt; Previous</span> |
+<?php endif; ?>
+
+<!-- Ссылка на следующую страницу -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= $this->url(array('page' => $this->next)); ?>">Next &gt;</a> |
+<?php else: ?>
+  <span class="disabled">Next &gt;</span> |
+<?php endif; ?>
+
+<!-- Ссылка на последнюю страницу -->
+<?php if (isset($this->next)): ?>
+  <a href="<?= $this->url(array('page' => $this->last)); ?>">Last</a>
+<?php else: ?>
+  <span class="disabled">Last</span>
+<?php endif; ?>
+
+</div>
+<?php endif; ?>]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Постраничная навигация в виде выпадающего списка
+
+                <programlisting role="php"><![CDATA[
+<?php if ($this->pageCount): ?>
+<select id="paginationControl" size="1">
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
+  <option value="<?= $this->url(array('page' => $page)); ?>"<?= $selected ?>><?= $page; ?></option>
+<?php endforeach; ?>
+</select>
+<?php endif; ?>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js"></script>
+<script type="text/javascript">
+$('paginationControl').observe('change', function() {
+    window.location = this.options[this.selectedIndex].value;
+})
+</script>]]>
+                </programlisting>
+            </para>
+        </sect3>
+
+        <sect3 id="zend.paginator.usage.rendering.properties">
+            <title>Список свойств</title>
+
+            <para>
+                Следующие опции доступны внутри скрипта вида для постраничной
+                навигации:
+            </para>
+
+            <table id="zend.paginator.usage.rendering.properties.table">
+                <title>Свойства, доступные внутри скрипта вида</title>
+
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Свойство</entry>
+                            <entry>Тип</entry>
+                            <entry>Описание</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>first</entry>
+                            <entry>integer</entry>
+                            <entry>Номер первой страницы (т.е. 1)</entry>
+                        </row>
+                        <row>
+                            <entry>firstItemNumber</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Действительный номер первого элемента на
+                                текущей странице
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>firstPageInRange</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Первая страница в ряде, возвращенном текущим
+                                стилем прокрутки
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>current</entry>
+                            <entry>integer</entry>
+                            <entry>Текущий номер страницы</entry>
+                        </row>
+                        <row>
+                            <entry>currentItemCount</entry>
+                            <entry>integer</entry>
+                            <entry>Количество элементов на текущей странице</entry>
+                        </row>
+                        <row>
+                            <entry>last</entry>
+                            <entry>integer</entry>
+                            <entry>Номер последней страницы</entry>
+                        </row>
+                        <row>
+                            <entry>lastItemNumber</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Действительный номер последнего элемента на
+                                текущей странице
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>lastPageInRange</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Последняя страница в ряде, возвращенном текущим
+                                стилем прокрутки
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>next</entry>
+                            <entry>integer</entry>
+                            <entry>Номер следующей страницы</entry>
+                        </row>
+                        <row>
+                            <entry>pageCount</entry>
+                            <entry>integer</entry>
+                            <entry>Общее количество страниц</entry>
+                        </row>
+                        <row>
+                            <entry>pagesInRange</entry>
+                            <entry>array</entry>
+                            <entry>
+                                Массив страниц, возвращенный текущим стилем
+                                прокрутки
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>previous</entry>
+                            <entry>integer</entry>
+                            <entry>Номер предыдущей страницы</entry>
+                        </row>
+                        <row>
+                            <entry>totalItemCount</entry>
+                            <entry>integer</entry>
+                            <entry>Общее количество элементов</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

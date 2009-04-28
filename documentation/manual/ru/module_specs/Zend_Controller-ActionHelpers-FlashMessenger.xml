@@ -1,0 +1,67 @@
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>Введение</title>
+        <para>
+            Помощник <code>FlashMessenger</code> позволяет передавать сообщения,
+            которые нужно отобразить пользователю при следующем запросе.
+            Для хранения сообщений до следующего запроса
+            <code>FlashMessenger</code> использует
+            <code>Zend_Session_Namespace</code> . Как правило, лучше всего
+            использовать тот <code>Zend_Session</code> или
+            <code>Zend_Session_Namespace</code>, который вы инициализировали с
+            помощью <code>Zend_Session::start()</code> в своем файле загрузки.
+            (За более подробной информацией об использовании см.
+            <link linkend="zend.session.advanced_usage.starting_a_session">Zend Session</link>).
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>Базовый пример использования</title>
+        <para>
+            Пример использования ниже демонстрирует простейший случай
+            использования мессенджера. Когда вызывается действие
+            <code>/some/my</code>, оно добавляет мгновенное сообщение "Record
+            Saved!". Последующий запрос к действию
+            <code>/some/my-next-request</code> получит это сообщение
+            (и удалит его).
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+    public function init()
+    {
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * используемый по умолчанию метод для получения экземпляра
+         * Zend_Controller_Action_Helper_FlashMessenger
+         */
+        $this->_flashMessenger->addMessage('Record Saved!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>

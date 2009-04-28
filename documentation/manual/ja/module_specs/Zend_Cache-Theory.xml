@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.cache.theory">
+    <title>キャッシュの仕組み</title>
+    <para>
+        <classname>Zend_Cache</classname> には、3 つのポイントがあります。まず最初は一意な ID (文字列) で、
+        これによってキャッシュレコードを識別します。二番目は、例に含まれる
+        <code>'lifetime'</code> ディレクティブです。これは、キャッシュされたリソースの
+        「賞味期限」を定義するものです。三番目のポイントとなるのが条件付きの実行処理で、
+        不要なコードを完全に読み飛ばすことで処理速度を向上させることになります。
+        フロントエンドの主となる関数 (例えば <classname>Zend_Cache_Core::get()</classname>)
+        は、キャッシュがヒットしなかった場合には常に false を返すよう設計されています。
+        そのため、キャッシュしたい (そして読み飛ばしたい) 部分を
+        <code>if(){ ... }</code> 文で囲む際に、条件式として <classname>Zend_Cache</classname>
+        のメソッド自身を使用できるようになっています。
+        このブロックの最後では、出力内容を
+        (例えば <classname>Zend_Cache_Core::save()</classname> などで)
+        保存する必要があります。
+    </para>
+    <note><para>
+        条件付きの実行処理を必ず記述しなければならないわけではありません。
+        フロントエンドの種類によっては (例えば <code>Function</code> など)、
+        すべてのロジックがフロントエンドの中で実装されています。
+    </para></note>
+    <note><para>
+        'Cache hit (キャッシュにヒットした)' とは、キャッシュレコードが見つかり、
+        かつそのレコードが 'fresh (新鮮)' (言い換えると、まだ有効期限が切れていない)
+        状態であることを表す言葉です。'Cache miss (キャッシュが見つからなかった)'
+        はその正反対です。キャッシュが見つからなかった場合は、
+        データを (通常どおりに) 作成し、それをキャッシュしなければなりません。
+        一方、キャッシュにヒットした場合は、
+        バックエンドが自動的にキャッシュレコードを取得してくれます。
+    </para></note>
+    <sect2 id="zend.cache.factory">
+        <title><classname>Zend_Cache</classname> ファクトリメソッド</title>
+        <para>
+            使用可能な <classname>Zend_Cache</classname> フロントエンドのインスタンスを作成する方法を、
+            以下の例で示します。
+        </para>
+        <programlisting role="php"><![CDATA[
+// バックエンドを選びます (例えば 'File' や 'Sqlite'...)
+$backendName = '[...]';
+
+// フロントエンドを選びます (例えば 'Core'、'Output'、'Page'...)
+$frontendName = '[...]';
+
+// 選択したフロントエンド用のオプションを配列に設定します
+$frontendOptions = array([...]);
+
+// 選択したバックエンド用のオプションを配列に設定します
+$backendOptions = array([...]);
+
+// インスタンスを作成します
+// (もちろん、最後の 2 つの引数は必須ではありません)
+$cache = Zend_Cache::factory($frontendName,
+                             $backendName,
+                             $frontendOptions,
+                             $backendOptions);
+]]>
+        </programlisting>
+         <para>
+            これ以降のドキュメントでは、<code>$cache</code>
+            の中身が有効なフロントエンドになっているものとします。また、
+            選択したバックエンドにパラメータを渡す方法は理解できているものとします。
+        </para>
+        <note><para>
+            常に <classname>Zend_Cache::factory()</classname> を使用してフロントエンドの
+            インスタンスを作成するようにしてください。フロントエンドやバックエンドを
+            自前で作成しようとしても、期待通りには動作しないでしょう。
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.cache.tags">
+        <title>レコードのタグ付け</title>
+        <para>
+            タグは、キャッシュレコードを分類するための仕組みです。
+            <code>save()</code> メソッドでキャッシュを保存する際に、
+            適用するタグを配列で指定することができます。これを使用すると、
+            指定したタグが設定されているキャッシュレコードのみを削除するといったことが可能となります。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+]]>
+        </programlisting>
+        <note><para>
+            <code>save()</code> メソッドには、オプションの第四引数
+            <code>$specificLifetime</code> を指定できることに注意しましょう
+            (false 以外を指定することで、このキャッシュレコードの有効期限を特定の値に設定できます)。
+        </para></note>
+    </sect2>
+    <sect2 id="zend.cache.clean">
+        <title>キャッシュの削除</title>
+        <para>
+            特定のキャッシュ ID を削除/無効化するには、<code>remove()</code>
+            メソッドを使用します。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->remove('削除するID');
+]]>
+        </programlisting>
+        <para>
+            一回の操作で複数のキャッシュ ID を削除/無効化するには、<code>clean()</code>
+            メソッドを使用します。例えば、すべてのキャッシュレコードを削除するには次のようにします。
+        </para>
+        <programlisting role="php"><![CDATA[// すべてのレコードを削除します
+$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+// 有効期限切れのレコードのみ削除します
+$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
+]]>
+        </programlisting>
+        <para>
+            タグ 'tagA' および 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_MATCHING_TAG,
+    array('tagA', 'tagC')
+);
+]]>
+        </programlisting>
+        <para>
+            タグ 'tagA' にも 'tagC' にも該当しないキャッシュエントリを削除するには、このようにします。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
+    array('tagA', 'tagC')
+);
+]]>
+        </programlisting>
+        <para>
+            タグ 'tagA' または 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->clean(
+    Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
+    array('tagA', 'tagC')
+);
+]]>
+        </programlisting>
+        <para>
+            削除モードとして指定可能な値は <code>CLEANING_MODE_ALL</code>、<code>CLEANING_MODE_OLD</code>、
+            <code>CLEANING_MODE_MATCHING_TAG</code>、<code>CLEANING_MODE_NOT_MATCHING_TAG</code> および
+            <code>CLEANING_MODE_MATCHING_ANY_TAG</code> です。
+            後者は、その名が示すとおり、タグの配列と組み合わせて使用します。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

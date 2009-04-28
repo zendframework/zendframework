@@ -1,0 +1,40 @@
+<!-- EN-Revision: 11090 -->
+<sect1 id="zend.view.abstract">
+    <title>Zend_View_Abstract</title>
+
+    <para><classname>Zend_View_Abstract</classname> est la classe de base à partir de laquelle <classname>Zend_View</classname> est
+    construite ; <classname>Zend_View</classname> elle-même l'étend simplement et déclare une implémentation concrète de la
+    méthode <code>_run()</code> (qui est invoquée par <code>render()</code>).</para>
+
+    <para>De nombreux développeurs constatent qu'ils veulent étendre <classname>Zend_View_Abstract</classname> afin d'ajouter des
+    fonctionnalités supplémentaires, et inévitablement se trouvent confrontés face à des problèmes avec ce design, qui
+    inclut un certain nombre de membres privés. Ce document a pour but d'expliquer les décisions qui ont poussé à ce
+    design.</para>
+
+    <para><classname>Zend_View</classname> est une sorte de moteur anti-template dans lequel on utilise nativement PHP pour la
+    réalisation du template. Avec comme résultat, tout le PHP est disponible, et les scripts de vue héritent de la
+    portée des objets appelants.</para>
+
+    <para>C'est ce dernier point qui est important dans le choix de la décision de ce design. En interne,
+    <classname>Zend_View::_run()</classname> réalise simplement ceci :</para>
+
+    <programlisting role="php"><![CDATA[
+protected function _run()
+{
+    include func_get_arg(0);
+}
+]]></programlisting>
+
+    <para>Ainsi, les scripts de vue ont accès à l'objet courant(<code>$this</code>), <emphasis>et toute méthode ou
+    membres et cet objet</emphasis>. Puisque beaucoup d'opérations dépendent de membres ayant une portée limitée, ceci
+    pose un problème : les scrips de vue peuvent potentiellement faire des appels à ces méthodes ou modifier des
+    propriétés critiques directement. Imaginer un script surchargeant par inadvertance <code>$_path</code> ou
+    <code>$_file</code> - tout appel suivant à <code>render()</code> ou aux aides de vue sera cassé !</para>
+
+    <para>Heureusement, PHP 5 a une réponse à ceci avec ses déclarations de visibilité : les membres privés se sont pas
+    accessibles par un objet étendant une classe donnée. Ceci a permis la conception actuelle : <classname>Zend_View</classname>
+    <emphasis>étend</emphasis> <classname>Zend_View_Abstract</classname>, les scripts de vues sont ainsi limités aux seuls
+    méthodes et membres <code>public</code> ou <code>protected</code> de <classname>Zend_View_Abstract</classname> - limitant
+    effectivement les actions qu'il peut exécuter, et nous permettant de sécuriser des secteurs critiques d'un risque de
+    modification par les scripts de vue.</para>
+</sect1>

@@ -1,0 +1,291 @@
+<sect3 id="zend.controller.plugins.standard.errorhandler">
+    <title>Zend_Controller_Plugin_ErrorHandler</title>
+
+    <para>
+        <code>Zend_Controller_Plugin_ErrorHandler</code>提供了一个活动的插件，用来处理从程序抛出的异常，包括那些从缺控制器或动作的来的结果；它是一个列在<link linkend="zend.controller.exceptions">MVC Exceptions section</link>里的方法的一个替代。
+    </para>
+
+    <para>
+        插件的基本目标是：
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                监视由于缺失控制器或动作方法而产生的异常
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>监视动作控制器里产生的异常</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        换句话说，<code>ErrorHandler</code> 插件设计用来处理HTTP 404 类型的错误（找不到页面）和 500 类型错误（内部错误）。它不打算抓取有其它插件或路由产生的异常。
+    </para>
+
+    <para>
+        缺省地，在缺省模块中，<code>Zend_Controller_Plugin_ErrorHandler</code>将转发给<code>ErrorController::errorAction()</code>。你可以通过使用在插件中不同的访问器给它们设置替代的值：
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>setErrorHandlerModule()</code> 设置控制器模块来使用。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerController()</code> 设置控制器来用。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerAction()</code> 设置控制器动作来用。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandler()</code>接受联合数组，它可以包含任何键，如'module'、 'controller' 或 'action'，以及要给它们设置的合适的值。
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        另外，你可以传递一个可选的联合数组给可以代理<code>setErrorHandler()</code>的构造函数。
+    </para>
+
+    <para>
+        <code>Zend_Controller_Plugin_ErrorHandler</code>注册一个<code>postDispatch()</code>钩子和检查注册在<link linkend="zend.controller.response">响应对象</link>里的异常。如果发现有异常，它试图转发给注册的错误处理器（handler）动作。
+    </para>
+
+    <para>
+        如果在派遣错误处理器时发生异常，这插件将告诉前端控制器抛出异常，并重新抛出和带响应对象注册的最后一个异常。
+    </para>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
+        <title>使用 ErrorHandler 作为一个 404 处理器（handler）</title>
+
+        <para>
+            因为<code>ErrorHandler</code>插件不仅抓取程序错误，而且也抓取在控制器链里的由于缺失控制器类和/或动作方法而产生的错误，它可以用作一个404处理器。这样做，需要让错误控制器检查异常类型。
+        </para>
+
+        <para>
+            异常的抓取被记录在一个对象里，这个对象注册在请求里。使用<code>Zend_Controller_Action::_getParam('error_handler')</code>来读取它：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            一旦有错误对象，可通过<code>$errors->type</code>来获得类型。它将是下面其中之一：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</code>，指示控制器没有被发现。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</code>，指示请求动作没有被发现。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</code>，指示其它异常。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            然后可以测试头两个类型中的任意一个，并且，如果这样，显示一个404页面：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... get some output to display...
+                break;
+            default:
+                // application error; display error page, but don't
+                // change status code
+                break;
+        }
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            最后，你可以读取异常，这个异常由错误管理器通过抓取<code>error_handler</code>对象的<code>exception</code>属性来触发的：
+        </para>
+
+        <programlisting role="php">
+<![CDATA[
+public function errorAction()
+{
+        $errors = $this->_getParam('error_handler');
+
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()
+                      ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... get some output to display...
+                break;
+            default:
+                // application error; display error page, but don't change
+                // status code
+
+                // ...
+
+                // Log the exception:
+                $exception = $errors->exception;
+                $log = new Zend_Log(
+                    new Zend_Log_Writer_Stream(
+                        '/tmp/applicationException.log'
+                    )
+                );
+                $log->debug($exception->getMessage() . "\n" .
+                            $exception->getTraceAsString());
+                break;
+        }
+}
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
+        <title>处理以前呈现的(rendered)输出</title>
+
+        <para>
+            如果你在一个请求里派遣多个动作，或者你的动作对<code>render()</code>做多次调用，很可能响应对象已经有存储在它里面的内容。这可以导致呈显期望的内容和错误的内容的混合体。
+        </para>
+
+        <para>
+            如果你希望呈现错误内嵌到这样的页面，不需要修改。如果你不希望呈现这样的内容，你应该在呈现任何视图之前清除响应体：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->getResponse()->clearBody();
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
+        <title>插件用法示例</title>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
+            <title>Standard usage</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
+            <title>Setting a different error handler</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+    'module'     => 'mystuff',
+    'controller' => 'static',
+    'action'     => 'error'
+)));
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
+            <title>Using accessors</title>
+            <programlisting role="php"><![CDATA[
+$plugin = new Zend_Controller_Plugin_ErrorHandler();
+$plugin->setErrorHandlerModule('mystuff')
+       ->setErrorHandlerController('static')
+       ->setErrorHandlerAction('error');
+
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin($plugin);
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
+        <title>错误控制器示例</title>
+
+        <para>
+            为了使用错误处理器插件，你需要错误控制器。下面是个简单的例子。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 error -- controller or action not found
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>The page you requested was not found.</p>
+EOH;
+                break;
+            default:
+                // application error
+                $content =<<<EOH
+<h1>Error!</h1>
+<p>An unexpected error occurred. Please try again later.</p>
+EOH;
+                break;
+        }
+
+        // Clear previous content
+        $this->getResponse()->clearBody();
+
+        $this->view->content = $content;
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,52 @@
+<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Helpery widoków Dojo</title>
+
+    <para>
+        Zend Framework zapewnia dla potrzeb Dojo następujące helpery widoków:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <emphasis>dojo():</emphasis> ustawia środowisko Dojo dla strony,
+            włączając w to zmienne konfiguracyjne dojo, własne ściezki modułów,
+            wyrażenia dołączające moduły, arkusze stylów, adresy CDN i wiele
+            innych.
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.dojo.view.setup">
+        <title>Użycie helperów widoków Dojo</title>
+
+        <para>
+            Aby użyć helperów widoków Dojo będziesz musiał poinformować
+            obiekt widoku gdzie może je znaleźć. Możesz to zrobić wywołując
+            metodę <code>addHelperPath()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]>
+        </programlisting>
+
+        <para>
+            Alternatywnie, możesz użyć metody <code>enableView()</code> klasy
+            <code>Zend_Dojo</code> aby określiła te ścieżki:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Dojo::enableView($view);
+]]>
+        </programlisting>
+    </example>
+
+    <xi:include href="Zend_Dojo-View-Dojo.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Dojo.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Dojo-View-Helpers.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Dojo-View-Helpers.xml" /></xi:fallback>
+    </xi:include>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

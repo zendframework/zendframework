@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.60 $"/>
+		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<language type="kn"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="af">ಅಫ್ರಿಕಾನ್ಸ್‍</language>
+			<language type="am">ಅಮ್ಹಾರಿಕ್</language>
+			<language type="ar">ಅರೇಬಿಕ್</language>
+			<language type="as">ಅಸ್ಸಾಮೀಸ್</language>
+			<language type="ast">ಆಸ್ಟುರಿಯನ್</language>
+			<language type="az">ಅಜರ್ಬೈಜಾನಿ</language>
+			<language type="be">ಬೆಲರೂಸಿಯನ್</language>
+			<language type="bg">ಬಲ್ಗೇರಿಯನ್</language>
+			<language type="bh">ಬಿಹಾರಿ</language>
+			<language type="bn">ಬಂಗಾಳಿ</language>
+			<language type="br">ಬ್ರೆಟನ್</language>
+			<language type="bs">ಬೋಸ್ನಿಯನ್</language>
+			<language type="ca">ಕ್ಯಾಟಲನ್</language>
+			<language type="cs">ಚೆಕ್</language>
+			<language type="cy">ವೆಲ್ಶ್</language>
+			<language type="da">ಡ್ಯಾನಿಷ್</language>
+			<language type="de">ಜರ್ಮನ್</language>
+			<language type="el">ಗ್ರೀಕ್</language>
+			<language type="en">ಇಂಗ್ಲೀಷ್</language>
+			<language type="eo">ಎಸ್ಪರಾಂಟೋ</language>
+			<language type="es">ಸ್ಪ್ಯಾನಿಷ್</language>
+			<language type="et">ಎಸ್ಟೋನಿಯನ್</language>
+			<language type="eu">ಬಾಸ್ಕ್</language>
+			<language type="fa">ಪರ್ಷಿಯನ್</language>
+			<language type="fi">ಫಿನ್ನಿಷ್</language>
+			<language type="fil">ಟ್ಯಾಗಲಾಗ್</language>
+			<language type="fo">ಫೆರೋಯಿಸ್</language>
+			<language type="fr">ಫ್ರೆಂಚ್</language>
+			<language type="fy">ಫ್ರಿಸಿಯನ್</language>
+			<language type="ga">ಐರಿಷ್</language>
+			<language type="gd">ಸ್ಕಾಟಿಶ್ ಗ್ಯಾಲಿಕ್</language>
+			<language type="gl">ಗ್ಯಾಲೀಷಿಯನ್</language>
+			<language type="gn">ಗ್ವಾರಾನಿ</language>
+			<language type="gu">ಗುಜರಾತಿ</language>
+			<language type="he">ಹಿಬ್ರೂ</language>
+			<language type="hi">ಹಿಂದಿ</language>
+			<language type="hr">ಕ್ರೊಯೇಶಿಯನ್</language>
+			<language type="hu">ಹಂಗೇರಿಯನ್</language>
+			<language type="hy">ಆರ್ಮೇನಿಯನ್</language>
+			<language type="ia">ಇಂಟರ್ಲಿಂಗುವಾ</language>
+			<language type="id">ಇಂಡೋನೇಷ್ಯನ್</language>
+			<language type="is">ಐಸ್ಲ್ಯಾಂಡಿಕ್</language>
+			<language type="it">ಇಟಾಲಿಯನ್</language>
+			<language type="ja">ಜಪಾನೀಸ್</language>
+			<language type="jv">ಜಾವನೀಸ್</language>
+			<language type="ka">ಜಾರ್ಜಿಯನ್</language>
+			<language type="km">ಕಾಂಬೋಡಿಯನ್</language>
+			<language type="kn">ಕನ್ನಡ</language>
+			<language type="ko">ಕೊರಿಯನ್</language>
+			<language type="ku">ಕುರ್ದಿಶ್</language>
+			<language type="ky">ಕಿರ್ಗಿಜ್</language>
+			<language type="la">ಲ್ಯಾಟಿನ್</language>
+			<language type="ln">ಲಿಂಗಾಲ</language>
+			<language type="lo">ಲಾವೋ</language>
+			<language type="lt">ಲಿತುವೇನಿಯನ್</language>
+			<language type="lv">ಲಾಟ್ವಿಯನ್</language>
+			<language type="mk">ಮ್ಯಾಸೆಡೋನಿಯನ್</language>
+			<language type="ml">ಮಲೆಯಾಳಂ</language>
+			<language type="mn">ಮಂಗೋಲಿಯನ್</language>
+			<language type="mr">ಮರಾಠಿ</language>
+			<language type="ms">ಮಲಯ</language>
+			<language type="mt">ಮಾಲ್ಟೀಸ್</language>
+			<language type="ne">ನೇಪಾಳಿ</language>
+			<language type="nl">ಡಚ್</language>
+			<language type="nn">ನಾರ್ವೇಜಿಯನ್ (ನೂನಾರ್ಸ್ಕ್‍)</language>
+			<language type="no">ನಾರ್ವೇಜಿಯನ್</language>
+			<language type="oc">ಆಕ್ಸಿಟಾನ್</language>
+			<language type="or">ಒರಿಯಾ</language>
+			<language type="pa">ಪಂಜಾಬಿ</language>
+			<language type="pl">ಪೋಲಿಷ್</language>
+			<language type="ps">ಪಶ್ತೊ</language>
+			<language type="pt">ಪೋರ್ಚುಗೀಸ್</language>
+			<language type="pt_BR">ಪೋರ್ಚುಗೀಸ್(ಬ್ರೆಜಿಲ್)</language>
+			<language type="pt_PT">ಪೋರ್ಚುಗೀಸ್ (ಪೋರ್ಚುಗಲ್)</language>
+			<language type="ro">ರೊಮೇನಿಯನ್</language>
+			<language type="ru">ರಷಿಯನ್</language>
+			<language type="sa">ಸಂಸ್ಕೃತ</language>
+			<language type="sd">ಸಿಂಧಿ</language>
+			<language type="sh">ಸರ್ಬೋ-ಕ್ರೊಯೇಶಿಯನ್</language>
+			<language type="si">ಸಿಂಹಳ</language>
+			<language type="sk">ಸ್ಲೊವಾಕ್</language>
+			<language type="sl">ಸ್ಲೊವೇನಿಯನ್</language>
+			<language type="so">ಸೊಮಾಲಿ</language>
+			<language type="sq">ಆಲ್ಬೇನಿಯನ್</language>
+			<language type="sr">ಸರ್ಬಿಯನ್</language>
+			<language type="st">ಸೆಸೊತೊ</language>
+			<language type="su">ಸುಂದನೀಸ್</language>
+			<language type="sv">ಸ್ವೀಡಿಷ್</language>
+			<language type="sw">ಸ್ವಾಹಿಲಿ</language>
+			<language type="ta">ತಮಿಳು</language>
+			<language type="te">ತೆಲುಗು</language>
+			<language type="th">ಥಾಯ್</language>
+			<language type="ti">ತಿಗ್ರಿನ್ಯ</language>
+			<language type="tk">ತುರ್ಕ್ಮನ್</language>
+			<language type="tlh">ಕ್ಲಿಂಗನ್</language>
+			<language type="tr">ಟರ್ಕಿಷ್</language>
+			<language type="tw">ಟ್ವಿ</language>
+			<language type="uk">ಉಕ್ರೇನಿಯನ್</language>
+			<language type="und">ಗೊತ್ತಿರದ ಅಥವ ಅಮಾನ್ಯ ಭಾಷೆ</language>
+			<language type="ur">ಉರ್ದು</language>
+			<language type="uz">ಉಜ್ಬೆಕ್</language>
+			<language type="vi">ವಿಯೆಟ್ನಾಮಿ</language>
+			<language type="xh">ಕ್ಷೋಸ</language>
+			<language type="yi">ಯಿದ್ದಿಶ್</language>
+			<language type="zh">ಚೈನೀಸ್</language>
+			<language type="zh_Hans">ಸಿಂಪ್ಲಿಫೈಡ್ ಚೈನೀಸ್</language>
+			<language type="zh_Hant">ಟ್ರೆಡೀಶನಲ್ ಚೈನೀಸ್</language>
+			<language type="zu">ಜುಲು</language>
+		</languages>
+		<scripts>
+			<script type="Arab">ಅರೇಬಿಕ್</script>
+			<script type="Armi">ಅರ್ಮಿ</script>
+			<script type="Armn">ಅರ್ಮೇನಿಯನ್</script>
+			<script type="Avst">ಅವೆಸ್ತಾನ್</script>
+			<script type="Bali">ಬಾಲಿನೀಸ್</script>
+			<script type="Batk">ಬಾಟಕ್</script>
+			<script type="Beng">ಬೆಂಗಾಲಿ</script>
+			<script type="Blis">ಬ್ಲಿಸಿಂಬಲ್ಸ್‍</script>
+			<script type="Bopo">ಬೋಪೊಮೋಫೋ</script>
+			<script type="Brah">ಬ್ರಾಹ್ಮಿ</script>
+			<script type="Brai">ಬ್ರೈಲ್</script>
+			<script type="Bugi">ಬಗಿನೀಸ್</script>
+			<script type="Buhd">ಬುಹಿದ್</script>
+			<script type="Cakm">ಕಾಕಂ</script>
+			<script type="Cari">ಕರೇನ್</script>
+			<script type="Cham">ಚಾಮ್</script>
+			<script type="Cher">ಚೆರೋಕೀ</script>
+			<script type="Cirt">ಸಿರ್ಥ್</script>
+			<script type="Copt">ಕಾಪ್ಟಿಕ್</script>
+			<script type="Cprt">ಸಿಪ್ರಿಯಾಟ್</script>
+			<script type="Cyrl">ಸಿರಿಲಿಕ್</script>
+			<script type="Deva">ದೇವನಾಗರಿ</script>
+			<script type="Dsrt">ಡಸರ್ಟ್</script>
+			<script type="Egyd">ಈಜಿಪ್ಟಿಯನ್ ಡೆಮೋಟಿಕ್</script>
+			<script type="Egyh">ಈಜಿಪ್ಟಿಯನ್ ಹಿಯಾರ್ಟಿಕ್</script>
+			<script type="Egyp">ಈಜಿಪ್ಟಿಯನ್ ಹೀರೋಗ್ಲಿಫ್ಸ್‍</script>
+			<script type="Ethi">ಇಥಿಯೋಪಿಯಾ</script>
+			<script type="Geok">ಜಾರ್ಜಿಯನ್ ಖುಸ್ತುರಿ</script>
+			<script type="Geor">ಜಾರ್ಜಿಯನ್</script>
+			<script type="Glag">ಗ್ಲಾಗೋಲಿಟಿಕ್</script>
+			<script type="Goth">ಗೋತಿಕ್</script>
+			<script type="Grek">ಗ್ರೀಕ್</script>
+			<script type="Gujr">ಗುಜರಾತಿ</script>
+			<script type="Guru">ಗುರುಮುಖಿ</script>
+			<script type="Hang">ಹ್ಯಾಂಗಲ್</script>
+			<script type="Hani">ಹಾನ್</script>
+			<script type="Hano">ಹನೂನೂ</script>
+			<script type="Hans">ಸರಳೀಕೃತ ಹಾನ್</script>
+			<script type="Hant">ಸಾಂಪ್ರದಾಯಿಕ ಹಾನ್</script>
+			<script type="Hebr">ಹೀಬ್ರೂ</script>
+			<script type="Hira">ಹಿರಗಾನಾ</script>
+			<script type="Hrkt">ಕಟಕಾನಾ ಅಥವ ಹಿರಗಾನಾ</script>
+			<script type="Inds">ಇಂಡಸ್</script>
+			<script type="Java">ಜಾವನೀಸ್</script>
+			<script type="Jpan">ಜಾಪನೀಸ್</script>
+			<script type="Kali">ಕೆಯಾ ಲಿ</script>
+			<script type="Kana">ಕಟಕಾನಾ</script>
+			<script type="Khar">ಖರೋಶ್ತಿ</script>
+			<script type="Khmr">ಖಮೇರ್</script>
+			<script type="Knda">ಕನ್ನಡ</script>
+			<script type="Kore">ಕೊರಿಯನ್</script>
+			<script type="Kthi">ಕೈಥಿ</script>
+			<script type="Lana">ಲಾನಾ</script>
+			<script type="Laoo">ಲಾವೋ</script>
+			<script type="Latf">ಫ್ರಾಕ್ತರ್ ಲ್ಯಾಟಿನ್</script>
+			<script type="Latg">ಗೇಲಿಕ್ ಲ್ಯಾಟಿನ್</script>
+			<script type="Latn">ಲ್ಯಾಟಿನ್</script>
+			<script type="Lepc">ಲೆಪ್ಚಾ</script>
+			<script type="Limb">ಲಿಂಬು</script>
+			<script type="Lina">ಲೀನಯರ್ ಎ</script>
+			<script type="Linb">ಲೀನಯರ್ ಬಿ</script>
+			<script type="Lyci">ಲೈಸಿಯನ್</script>
+			<script type="Lydi">ಲಿಡಿಯನ್</script>
+			<script type="Mand">ಮಂಡೇಯನ್</script>
+			<script type="Mani">ಮನಿಚಯೇಯನ್</script>
+			<script type="Maya">ಮಯಾನ್ ಹೈರೋಗ್ಲಿಫ್ಸ್‍</script>
+			<script type="Mero">ಮೆರೊಯಿಟಿಕ್</script>
+			<script type="Mlym">ಮಲೆಯಾಳಂ</script>
+			<script type="Mong">ಮಂಗೋಲಿಯನ್</script>
+			<script type="Moon">ಮೂನ್</script>
+			<script type="Mtei">ಮೈತಿ ಮಯೆಕ್</script>
+			<script type="Mymr">ಮ್ಯಾನ್ಮಾರ್</script>
+			<script type="Nkoo">ಎನ್‍ಕೋ</script>
+			<script type="Phlv">ಬುಕ್ ಪಾಹ್ಲವಿ</script>
+			<script type="Qaai">ಇನ್‍ಹೆರಿಟೆಡ್</script>
+			<script type="Syre">ಎಸ್ಟ್ರಾಂಜಿಲೋ ಸಿರಿಯಾಕ್</script>
+			<script type="Syrn">ಪೂರ್ವ ಸಿರಿಯಾಕ್</script>
+			<script type="Zxxx">ಬರೆಯದೆ ಇರುವ</script>
+			<script type="Zyyy">ಸಾಮಾನ್ಯ</script>
+			<script type="Zzzz">ಅಜ್ಞಾತ ಅಥವ ಅಮಾನ್ಯವಾದ ಲಿಪಿ</script>
+		</scripts>
+		<territories>
+			<territory type="002">ಆಫ್ರಿಕಾ</territory>
+			<territory type="013">ಮಧ್ಯ ಅಮೇರಿಕಾ</territory>
+			<territory type="014">ಪೂರ್ವ ಆಫ್ರಿಕಾ</territory>
+			<territory type="019">ಅಮೆರಿಕಾಸ್</territory>
+			<territory type="029">ಕೆರೇಬಿಯನ್</territory>
+			<territory type="030">ಪೂರ್ವ ಎಶಿಯಾ</territory>
+			<territory type="053">ಆಸ್ಟ್ರೇಲಿಯಾ ಹಾಗು ನ್ಯೂಝಿಲ್ಯಾಂಡ್</territory>
+			<territory type="142">ಏಶಿಯಾ</territory>
+			<territory type="143">ಮಧ್ಯ ಏಶಿಯಾ</territory>
+			<territory type="150">ಯೂರೋಪ್</territory>
+			<territory type="151">ಪೂರ್ವ ಯೂರೋಪ್</territory>
+			<territory type="AQ">ಅಂಟಾರ್ಟಿಕಾ</territory>
+			<territory type="AT">ಆಸ್ಟ್ರಿಯಾ</territory>
+			<territory type="AU">ಆಸ್ಟ್ರೆಲಿಯ</territory>
+			<territory type="BE">ಬೆಲ್ಜಿಯಮ್</territory>
+			<territory type="BG">ಬಲ್ಗೇರಿಯನ್</territory>
+			<territory type="BR">ಬ್ರಝಿಲ್</territory>
+			<territory type="BV">ಬೋವೆಟ್ ಐಲ್ಯಾಂಡ್</territory>
+			<territory type="CN">ಚೀನ</territory>
+			<territory type="CY">ಸೈಪ್ರಸ್</territory>
+			<territory type="CZ">ಚೆಕ್ ರಿಪಬ್ಲಿಕ್</territory>
+			<territory type="DE">ಜರ್ಮನಿ</territory>
+			<territory type="DK">ಡೆನ್ಮಾರ್ಕ್</territory>
+			<territory type="EE">ಎಸ್ತೊನಿಯ</territory>
+			<territory type="FI">ಫಿನ್‍‍ಲ್ಯಾಂಡ್</territory>
+			<territory type="FR">ಫ್ರಾನ್ಸ್‍</territory>
+			<territory type="GR">ಗ್ರೀಸ್</territory>
+			<territory type="IN">ಭಾರತ</territory>
+			<territory type="IO">ಬ್ರಿಟೀಶ್ ಇಂಡಿಯನ್ ಓಶಿಯನ್ ಟೆರಿಟರಿ</territory>
+			<territory type="MV">ಮಾಲ್ಡಿವ ದ್ವೀಪಗಳು</territory>
+			<territory type="NP">ನೆಪಾಳ</territory>
+			<territory type="QU">ಯುರೋಪಿಯನ್ ಯೂನಿಯನ್</territory>
+			<territory type="SG">ಸಿಂಗಪುರ</territory>
+			<territory type="TF">ಫ್ರೆಂಚ್ ದಕ್ಷಿಣ ಪ್ರದೇಶಗಳು</territory>
+			<territory type="TO">ಟೊಂಗ</territory>
+			<territory type="TR">ತುರ್ಕಿ</territory>
+		</territories>
+	</localeDisplayNames>
+	<characters>
+		<exemplarCharacters>[಼ ಂ ಃ ೦-೯ ಅ-ಋ ೠ ಌ ೡ ಎ-ಐ ಒ-ನ ಪ-ಲ ವ-ಹ ಳ ೞ ಽ-ೄ ೆ-ೈ ೊ-್ ೕ ೖ]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>'</quotationStart>
+		<quotationEnd>'</quotationEnd>
+		<alternateQuotationStart>&quot;</alternateQuotationStart>
+		<alternateQuotationEnd>&quot;</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">ಜನವರೀ</month>
+							<month type="2">ಫೆಬ್ರವರೀ</month>
+							<month type="3">ಮಾರ್ಚ್</month>
+							<month type="4">ಎಪ್ರಿಲ್</month>
+							<month type="5">ಮೆ</month>
+							<month type="6">ಜೂನ್</month>
+							<month type="7">ಜುಲೈ</month>
+							<month type="8">ಆಗಸ್ಟ್</month>
+							<month type="9">ಸಪ್ಟೆಂಬರ್</month>
+							<month type="10">ಅಕ್ಟೋಬರ್</month>
+							<month type="11">ನವೆಂಬರ್</month>
+							<month type="12">ಡಿಸೆಂಬರ್</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">ಜನವರೀ</month>
+							<month type="2">ಫೆಬ್ರವರೀ</month>
+							<month type="3">ಮಾರ್ಚ್</month>
+							<month type="4">ಎಪ್ರಿಲ್</month>
+							<month type="5">ಮೆ</month>
+							<month type="6">ಜೂನ್</month>
+							<month type="7">ಜುಲೈ</month>
+							<month type="8">ಆಗಸ್ಟ್</month>
+							<month type="9">ಸಪ್ಟೆಂಬರ್</month>
+							<month type="10">ಅಕ್ಟೋಬರ್</month>
+							<month type="11">ನವೆಂಬರ್</month>
+							<month type="12">ಡಿಸೆಂಬರ್</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">1</month>
+							<month type="2">2</month>
+							<month type="3">3</month>
+							<month type="4">4</month>
+							<month type="5">5</month>
+							<month type="6">6</month>
+							<month type="7">7</month>
+							<month type="8">8</month>
+							<month type="9">9</month>
+							<month type="10">10</month>
+							<month type="11">11</month>
+							<month type="12">12</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">ರ.</day>
+							<day type="mon">ಸೋ.</day>
+							<day type="tue">ಮಂ.</day>
+							<day type="wed">ಬು.</day>
+							<day type="thu">ಗು.</day>
+							<day type="fri">ಶು.</day>
+							<day type="sat">ಶನಿ.</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">ರವಿವಾರ</day>
+							<day type="mon">ಸೋಮವಾರ</day>
+							<day type="tue">ಮಂಗಳವಾರ</day>
+							<day type="wed">ಬುಧವಾರ</day>
+							<day type="thu">ಗುರುವಾರ</day>
+							<day type="fri">ಶುಕ್ರವಾರ</day>
+							<day type="sat">ಶನಿವಾರ</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">1</day>
+							<day type="mon">2</day>
+							<day type="tue">3</day>
+							<day type="wed">4</day>
+							<day type="thu">5</day>
+							<day type="fri">6</day>
+							<day type="sat">7</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">Q1</quarter>
+							<quarter type="2">Q2</quarter>
+							<quarter type="3">Q3</quarter>
+							<quarter type="4">Q4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">ಒಂದು  1</quarter>
+							<quarter type="2">ಎರಡು 2</quarter>
+							<quarter type="3">ಮೂರು 3</quarter>
+							<quarter type="4">ನಾಲೃಕ  4</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<am>ಪೂರ್ವಾಹ್ನ</am>
+				<pm>ಅಪರಾಹ್ನ</pm>
+				<eras>
+					<eraNames>
+						<era type="0">ಈಸಪೂವ೯.</era>
+						<era type="1">ಸನ್.</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">BCE</era>
+						<era type="1">CE</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>dd-MM-yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>d-M-yy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>hh:mm:ss a v</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>hh:mm:ss a z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>hh:mm:ss a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>hh:mm a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<dateTimeFormatLength>
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<availableFormats>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
+						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+					</availableFormats>
+				</dateTimeFormats>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HH:mm;-HH:mm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>{0}</regionFormat>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##,##0%</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>¤ #,##,##0.00</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+		<currencies>
+			<currency type="INR">
+				<symbol>रु</symbol>
+			</currency>
+		</currencies>
+	</numbers>
+	<posix>
+		<messages>
+			<yesstr>ಹೌದು</yesstr>
+			<nostr>ಇಲ್ಲ:ಅಲ್ಲ</nostr>
+		</messages>
+	</posix>
+</ldml>
+

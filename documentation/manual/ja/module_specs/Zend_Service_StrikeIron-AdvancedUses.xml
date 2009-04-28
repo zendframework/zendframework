@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.strikeiron.advanced-uses">
+    <title>Zend_Service_StrikeIron: 応用編</title>
+
+    <para>
+      このセクションでは、<classname>Zend_Service_StrikeIron</classname>
+      のより進んだ使用法を説明します。
+    </para>
+
+    <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
+      <title>WSDL によるサービスの使用</title>
+
+      <para>
+        StrikeIron のサービスの中には PHP のラッパークラスが存在するものもあります。
+        これらについては
+        <link linkend="zend.service.strikeiron.bundled-services">バンドルされているサービス</link>
+        を参照ください。しかし、StrikeIron には何百ものサービスがあり、
+        中には便利なものも多くあります。
+        これらについても、ラッパークラスを作成せずに利用することができます。
+      </para>
+
+      <para>
+        ラッパークラスが存在しない StrikeIron サービスを使用するには、
+        <code>getService()</code> のオプションに
+        <code>class</code> ではなく <code>wsdl</code> を指定します。
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
+                                                'password' => 'あなたのパスワード'));
+
+// Reverse Phone Lookup サービス用の汎用クライアントを取得します
+$phone = $strikeIron->getService(
+    array('wsdl' => 'http://ws.strikeiron.com/ReversePhoneLookup?WSDL')
+);
+
+$result = $phone->lookup(array('Number' => '(408) 253-8800'));
+echo $result->listingName;
+
+// Zend Technologies USA Inc
+]]>
+        </programlisting>
+      </para>
+
+      <para>
+        StrikeIron サービスを WSDL から使用するには、
+        WSDL ファイルについての基礎知識が必要です。
+        StrikeIron のサイトには、そのためのリソースも豊富に用意されています。
+        また、
+        <ulink url="http://horde.org">Horde プロジェクト</ulink> の
+        <ulink url="http://janschneider.de">Jan Schneider</ulink> が、
+        WSDL ファイルを読みやすく HTML 形式に変換するための
+        <ulink url="http://janschneider.de/news/25/268">ちょっとした
+        PHP のルーチン</ulink>
+        を公開しています。
+      </para>
+
+      <para>
+        公式にサポートしているのは、
+        <link linkend="zend.service.strikeiron.bundled-services">バンドルされているサービス</link>
+        に挙げられているものだけであることに注意しましょう。
+      </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
+      <title>SOAP トランザクションの表示</title>
+
+      <para>
+        StrikeIron との通信は、すべて SOAP 拡張モジュールを用いて行います。
+        StrikeIron との間でやり取りする XML の内容を確認できると、
+        デバッグ時に便利です。
+      </para>
+
+      <para>
+        すべての StrikeIron クライアント (<classname>Zend_Service_StrikeIron_Base</classname>
+        のサブクラス) には <code>getSoapClient()</code> メソッドが存在します。
+        これは、StrikeIron との通信に使用している
+        <code>SOAPClient</code> のインスタンスを返します。
+      </para>
+
+      <para>
+        PHP の
+        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-construct.php">SOAPClient</ulink>
+        には <code>trace</code> オプションがあり、これを使用すると直前のトランザクションで交換された
+        XML を取得することができます。<classname>Zend_Service_StrikeIron</classname> は、デフォルトでは
+        <code>trace</code> を有効にしません。しかし、<code>SOAPClient</code>
+        に渡すオプションを指定することで、この挙動は簡単に変更できます。
+      </para>
+
+      <para>
+        SOAP のトランザクションを見るには、
+        <code>getSoapClient()</code> メソッドをコールして
+        <code>SOAPClient</code> のインスタンスを取得し、
+        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastrequest.php"><code>__getLastRequest()</code></ulink>
+        や
+        <ulink url="http://www.php.net/manual/ja/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>
+        のような適切なメソッドをコールします。
+
+        <programlisting role="php"><![CDATA[
+$strikeIron =
+    new Zend_Service_StrikeIron(array('username' => 'あなたのユーザ名',
+                                      'password' => 'あなたのパスワード',
+                                      'options'  => array('trace' => true)));
+
+// Sales & Use Tax Basic サービス用のクライアントを取得します
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
+
+// メソッドをコールします
+$taxBasic->getTaxRateCanada(array('province' => 'ontario'));
+
+// SOAPClient のインスタンスを取得し、XML を表示します
+$soapClient = $taxBasic->getSoapClient();
+echo $soapClient->__getLastRequest();
+echo $soapClient->__getLastResponse();
+]]>
+        </programlisting>
+      </para>
+
+    </sect2>
+</sect1>

@@ -1,0 +1,18 @@
+<sect1 id="zend.feed.findFeeds">
+    <title>Individuazione e recupero di feed da pagine web</title>
+    <para>
+        Le pagine web spesso contengono un tag <code>&lt;link&gt;</code> con riferimento ai feed con contenuti rilevanti per quella particolare pagina.
+        <code>Zend_Feed</code> consente di recuperare tutti i feed indicati in una pagina web chiamando semplicemente un metodo:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+$feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');]]>
+    </programlisting>
+    <para>
+        Il metodo <code>findFeeds()</code> restituisce un array di oggetti <code>Zend_Feed_Abstract</code> indicati dai tag <code>&lt;link&gt;</code> contenuti nella pagina web news.html.
+        A seconda del tipo di feed, ogni elemento di <code>$feedArray</code> potrà essere una istanza di <code>Zend_Feed_Rss</code> o <code>Zend_Feed_Atom</code>.
+        <code>Zend_Feed</code> genera un'eccezione <code>Zend_Feed_Exception</code> in caso di errore, come ad esempio un codice di risposta HTTP 404 o un feed non valido.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

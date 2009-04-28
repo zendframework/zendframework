@@ -1,0 +1,93 @@
+<sect1 id="zend.feed.consuming-atom">
+    <title>Lettura di un feed Atom</title>
+
+    <para>
+        <code>Zend_Feed_Atom</code> è utilizzato pressappoco allo stesso modo di <code>Zend_Feed_Rss</code>.
+        Fornisce lo stesso accesso alle proprietà del feed e la possibilità di scorrere gli elementi del feed.
+        La principale differenza è la struttura stessa del formato Atom.
+        L'Atom è un successore dell'RSS; è un formato più generalizzato e disegnato per gestire più facilmente i feed che forniscono l'intero contenuto all'interno del feed stesso, sdoppiando l'elemento <code>description</code> del formato RSS in due elementi: <code>summary</code> e <code>content</code>.
+    </para>
+
+    <example id="zend.feed.consuming-atom.example.usage">
+        <title>Utilizzo base di un feed Atom</title>
+        <para>
+            Lettura di un feed Atom e stampa di <code>title</code> e <code>summary</code> per ogni elemento:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
+echo 'Il feed contiene ' . $feed->count() . ' elementi.' . "\n\n";
+foreach ($feed as $entry) {
+    echo 'Titolo: ' . $entry->title() . "\n";
+    echo 'Sommario: ' . $entry->summary() . "\n\n";
+}]]></programlisting>
+    </example>
+
+    <para>
+        In un feed Atom è possibile trovare le seguenti proprietà:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Il titolo del feed, corrispondente a <code>title</code> per un canale RSS</para>
+            </listitem>
+            <listitem>
+                <para><code>id</code> - Ciascun feed ed elemento in un Atom ha un identificatore univoco</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - I feed possono avere più collegamenti, ciascuno identificato da un attributo <code>type</code></para>
+                <para>
+                    L'equivalente per un canale RSS sarebbe <code>type="text/html"</code>.
+                    Un collegamento che indica una versione alternativa dello stesso contenuto del feed dovrebbe contenere l'attributo <code>rel="alternate"</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>subtitle</code> - La descrizione del feed, equivalente a <code>description</code> per un canale RSS</para>
+                <para><code>author->name()</code> - Il nome dell'autore del feed</para>
+                <para><code>author->email()</code> - L'indirizzo email dell'autore del feed</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Gli elementi di un feed normalmente contengono le seguenti proprietà:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>id</code> - L'identificatore univoco dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>title</code> - Il titolo dell'elemento, corrispondente a <code>title</code> per un elemento RSS</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Collegamento ad un altro formato o ad una visualizzazione alternativa dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>summary</code> - Un sommario del contenuto dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>content</code> - Il contenuto completo dell'elemento; può essere saltato se il feed contiene esclusivamente il sommario</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - Include i tag <code>name</code> e <code>email</code> così come il feed principale</para>
+            </listitem>
+            <listitem>
+                <para><code>published</code> - La data di pubblicazione dell'elemento, nel formato RFC 3339</para>
+            </listitem>
+            <listitem>
+                <para><code>updated</code> - La data di ultimo aggiornamento dell'elemento, nel formato RFC 3339</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Per maggiori informazioni sull'Atom e risorse aggiuntive è possibile visitare
+        <ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

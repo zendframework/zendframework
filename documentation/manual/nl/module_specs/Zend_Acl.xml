@@ -1,0 +1,354 @@
+<sect1 id="zend.acl.introduction">
+    <title>Introductie</title>
+
+    <para>
+        Zend_Acl levert een lichte en flexibele toegangscontrolelijst (ACL) functionaliteit
+        en rechten beheer. In het algemeen, een applicatie mag deze functionaliteit benutten
+        om de toegang tot bepaalde beschermde objecten door andere vragende objecten te controleren.
+    </para>
+
+    <para>
+        Binnen deze documentatie spreken we af,
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Een <emphasis role="strong">Bron</emphasis> is een object waarvan
+                    de toegang wordt gecontroleerd.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Een <emphasis role="strong">Rol</emphasis> is een object dat toegang
+                    vraagt tot een bron.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        Simpel gezegd, <emphasis role="strong">Rollen vragen toegang tot bronnen</emphasis>.
+        Een voorbeeld, als een persoon toegang vraagt tot een auto, dan is de vragende persoon
+        een rol en de auto is de bron, want de toegang tot de auto wordt gecontroleerd.
+    </para>
+
+    <para>
+        Door de specificatie en het gebruiken van een toegangscontrolelijst (ACL), kan een applicatie
+        controleren of vragende objecten (Rollen) zijn toegestaan om beschermde objecten (Bronnen)
+        te gebruiken.
+    </para>
+
+    <sect2 id="zend.acl.introduction.resources">
+        <title>Over Bronnen</title>
+        <para>
+            In Zend_Acl is het maken van een bron heel simpel. Zend_Acl heeft een
+            <code>Zend_Acl_Resource_Interface</code> om het ontwikkelaars makkelijk te maken bij het
+            maken van Bronnen. Een klasse hoeft deze interface alleen maar te implementeren, en bestaat
+            uit een enkele methode, <code>getResourceId()</code>, om Zend_Acl het object als een Bron
+            te laten beschouwen. Verder wordt <code>Zend_Acl_Resource</code> gebruikt binnen Zend_Acl
+            als een standaard Bron implementatie voor ontwikkelaars die uitgebreid kan worden waar wenselijk.
+        </para>
+        <para>
+            Zend_Acl levert een boom structuur waaraan meerdere Bronnen ( of "gebieden onder toegangscontrole" )
+            aan toegevoegd kunnen worden. Omdat Bronnen opgeslagen worden in zo'n boom structuur, kunnen ze
+            algemeen ( tot aan de top van de boom ) tot specifiek ( tot de blaadjes van de boom ) geregeld worden.
+            Vragen aan een specifieke Bron zullen automatisch de Bronnen hiërarchie doorzoeken naar regels
+            verbonden met ouderlijke Bronnen, wat een simpele overerving van regels mogelijk maakt. Als voorbeeld,
+            als een standaard regel moet worden toegepast op ieder gebouw binnen een stad, dan verbind je die
+            regel met de stad, in plaats van aan ieder gebouw. Sommige gebouwen hebben wellicht uitzonderingen op
+            die regel en dit is vrij makkelijk te bereiken binnen Zend_Acl door die uitzonderingsregels te
+            verbinden met ieder gebouw die een uitzondering heeft. Een Bron mag maar van een ouder Bron erven,
+            maar deze ouder Bron kan zijn eigen ouder Bron hebben, etc etc.
+        </para>
+        <para>
+            Zend_Acl ondersteunt ook privileges op Bronnen (zoals, "maak", "lees", "update", "verwijder"), en
+            de ontwikkelaar kan regels toekennen die effect hebben op alle privileges of specifieke privileges
+            op een Bron.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.acl.introduction.roles">
+        <title>Over Rollen</title>
+        <para>
+            Net als bij Bronnen, is het aanmaken van een Rol ook heel simpel. Zend_Acl levert
+            <code>Zend_Acl_Role_Interface</code> om het ontwikkelaars makkelijk te maken bij het maken
+            van een Rol. Een klasse hoeft deze interface alleen maar te implementeren, en bestaat
+            uit een enkele methode, <code>getRoleId()</code>, om Zend_Acl het object als een Rol
+            te laten beschouwen. Verder wordt <code>Zend_Acl_Role</code> gebruikt binnen Zend_Acl
+            als een standaard Rol implementatie voor ontwikkelaars die uitgebreid kan worden waar wenselijk.
+        </para>
+        <para>
+            In Zend_Acl, mag een Rol erven van één of meer Rollen. Dit is om overerving van regels
+            tussen Rollen mogelijk te maken. Als voorbeeld, een gebruiker Rol, zoals "sally", kan behoren tot
+            één of meer ouder Rollen, zoals "redacteur" en  "administrator". De ontwikkelaar kan apart regels
+            toekennen aan "redacteur" en "administrator" en "sally" erft deze regels van beide, zonder dat
+            deze regels direct aan "sally" zijn toegekend.
+        </para>
+        <para>
+            Hoewel de mogelijkheid om te erven van meerdere Rollen heel makkelijk is, brengt meedere
+            overervingen een zekere mate van complexiteit met zich mee. Het volgende voorbeeld illustreert
+            een tegenstrijdige bepaling en hoe Zend_Acl dit oplost.
+        </para>
+        <example id="zend.acl.introduction.roles.example.multiple_inheritance">
+            <title>Meerdere overervingen tussen rollen</title>
+            <para>
+                De volgende code defineerd 3 basis Rollen - "<code>gast</code>", "<code>lid</code>", en
+                "<code>admin</code>" - waarvan andere Rollen kunnen erven. Vervolgens, wordt er een Rol,
+                met de identiteit "<code>eenGebruiker</code>" aangemaakt die van alle drie de Rollen erft.
+                De volgorde waarin deze rollen staan in de <code>$ouders</code> array is van belang.
+                Als het nodig is, zoekt Zend_Acl niet alleen naar toegangsregels voor de geraadpleegde Rol
+                ( in dit voorbeeld "<code>eenGebruiker</code>"), maar ook in de Rollen waar de geraadpleegde
+                Rol van erft (in dit voorbeeld "<code>gast</code>", "<code>lid</code>", en "<code>admin</code>"):
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Acl.php';
+$acl = new Zend_Acl();
+
+require_once 'Zend/Acl/Role.php';
+$acl->addRole(new Zend_Acl_Role('gast'))
+    ->addRole(new Zend_Acl_Role('lid'))
+    ->addRole(new Zend_Acl_Role('admin'));
+
+$ouders = array('gast', 'lid', 'admin');
+$acl->addRole(new Zend_Acl_Role('eenGebruiker'), $ouders);
+
+require_once 'Zend/Acl/Resource.php';
+$acl->add(new Zend_Acl_Resource('eenBron'));
+
+$acl->deny('gast', 'eenBron');
+$acl->allow('lid', 'eenBron');
+
+echo $acl->isAllowed('eenGebruiker', 'eenBron') ? 'toegestaan' : 'weigeren';]]>
+            </programlisting>
+            <para>
+                Omdat er geen regel is gespecificeerd voor de "<code>eenGebruiker</code>" Rol en
+                "<code>eenBron</code>", gaat Zend_Acl opzoek naar regels die mogelijk gedefineerd zijn
+                voor Rollen waar "<code>eenGebruiker</code>" van erft. Als eerste wordt de "<code>admin</code>"
+                Rol geraadpleegd, hiervoor is geen toegang regel gedefineerd. Daarna wordt de
+                "<code>lid</code>" Rol geraadpleegd, en Zend_Acl vindt hier een regel dat "<code>lid</code>"
+                toegestaan is om "<code>eenBron</code>" te gebruiken.
+            </para>
+            <para>
+                Als Zend_Acl door zou gaan met raadplegen van regels gedefineerd voor andere ouder Rollen,
+                dan zou hij vinden dat "<code>gast</code>" geen toegang heeft om "<code>eenBron</code>" te
+                gebruiken. Dit feit introduceert een tegenstrijdigheid want nu is "<code>eenGebruiker</code>"
+                zowel toegestaan als geweigerd om "<code>eenBron</code>" te gebruiken, veroorzaakt door het erven van
+                conflicterende regels van verschillende ouder Rollen.
+            </para>
+            <para>
+                Zend_Acl lost deze tegenstrijdigheid op door de raadpleging te beëindigen zodra de eerste regel
+                gevonden wordt die direct toepasbaar is op de vraag. In dit geval, omdat de "<code>lid</code>"
+                Rol eerder geraadpleegd wordt dan "<code>gast</code>", zal de voorbeeld code "toegestaan" weergeven.
+            </para>
+        </example>
+        <note>
+            <para>
+                Wanneer je meerdere ouders specificeerd voor een Rol, hou dan in gedachten dat de laatste ouder
+                in de lijst als eerste doorzocht wordt op regels die toepasbaar zijn op de autorisatie vraag.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.acl.introduction.creating">
+        <title>Maken van de toegangscontrolelijst (ACL)</title>
+
+        <para>
+            Een ACL kan iedere groep van fysieke en virtuele objecten bevatten die je wenst.
+            Als demonstratie creëren we een basis Content Management Systeem ACL die verschillende niveaus van
+            groepen bevat. Voor het maken van een ACL object, moeten we de ACL instantiëren zonder parameters:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Acl.php';
+
+$acl = new Zend_Acl();]]>
+        </programlisting>
+
+        <note>
+            <para>
+                Totdat een ontwikkelaar een toestaan regel specificeerd, zal Zend_Acl toegang tot iedere privilege
+                van iedere Bron verbieden voor elke Rol.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.acl.introduction.role_registry">
+        <title>Registeren van Rollen</title>
+
+        <para>
+            Content Management Systemen zullen bijna altijd een hiërarchie van rechten nodig hebben
+            om de rechten van zijn gebruikers te bepalen. Er is bijvoorbeeld een 'gast' groep om
+            gelimiteerde toegang voor demonstraties toe te staan, een 'medewerker' groep voor het
+            meerendeel van de CMS gebruikers die de dagelijkse acties uitvoeren, een 'redacteur' groep
+            voor diegene die verantwoordelijke zijn voor herzien, acrhieveren en verwijderen van content
+            en een 'administrator' groep die alles van de andere groepen mag en onderhoud mag plegen aan
+            gevoelige informatie, gebruikersbeheer, configuraties aanpassen en gegevens backuppen/ exporteren.
+            Deze rechten worden verzameld in een Rol lijst, waarin elke groep privileges mag erven
+            van 'ouder' groepen en enkele privileges voor hun unieke groep kunnen hebben.
+            De rechten kunnen als volgt worden weergegeven:
+        </para>
+
+        <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
+          <title>Toegang controle voor een voorbeeld CMS</title>
+          <tgroup cols="3">
+            <thead>
+              <row>
+                <entry>Naam</entry>
+                <entry>Unieke rechten</entry>
+                <entry>Erft rechten van</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Gast</entry>
+                <entry>Bekijk</entry>
+                <entry>N/A</entry>
+              </row>
+              <row>
+                <entry>Medewerker</entry>
+                <entry>Wijzig, Verzenden, Herzien</entry>
+                <entry>Gast</entry>
+              </row>
+              <row>
+                <entry>Redacteur</entry>
+                <entry>Publiceren, Archiveren, Verwijderen</entry>
+                <entry>Medewerker</entry>
+              </row>
+              <row>
+                <entry>Administrator</entry>
+                <entry>Heeft alle rechten</entry>
+                <entry>N/A</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+        <para>
+            Als voorbeeld wordt <code>Zend_Acl_Role</code> gebruikt, maar ieder object dat
+            <code>Zend_Acl_Role_Interface</code> implementeert kan gebruikt worden.
+            De groepen kunnen toegevoegd worden aan de Rol lijst op de volgende manier:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Acl.php';
+
+$acl = new Zend_Acl();
+
+// Voeg groepen toe aan de Rol lijst van Zend_Acl_Role
+require_once 'Zend/Acl/Role.php';
+
+// Gast erft geen oudelijke Rollen
+$rolGast = new Zend_Acl_Role('gast');
+$acl->addRole($rolGast);
+
+// Medewerker erft van gast
+$acl->addRole(new Zend_Acl_Role('medewerker'), $rolGast);
+
+/* Bovenstaande kan ook geschreven worden als:
+$acl->addRole(new Zend_Acl_Role('medewerker'), 'gast');
+*/
+
+// Redacteur erft van medewerker
+$acl->addRole(new Zend_Acl_Role('redacteur'), 'medewerker');
+
+// Administrator erft geen ouder Rollen
+$acl->addRole(new Zend_Acl_Role('administrator'));]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.acl.introduction.defining">
+        <title>Defineren van de toegangscontrole</title>
+
+        <para>
+            Nu de ACL de relevante Rollen bevat, kunnen de regels worden opgesteld die defineren hoe
+            Bronnen kunnen worden gebruikt door Rollen. Het is je misschien opgevallen dat we geen Bronnen
+            hebben gespecificeerd in dit voorbeeld, wat erop neer komt dat de regels gelden voor alle Bronnen.
+            Zend_Acl levert een inplementatie waarbij regels enkel te worden toegekend van algemeen tot specifiek,
+            dit verkleint het aantal regels wat nodig is, want Bronnen en Rollen erven regels die zijn gedefineerd voor
+            hun ouders.
+        </para>
+        <note>
+            <para>In het algemeen, staat Zend_Acl een regel toe als een meer specifiekere regel niet bestaat.</para></note>
+
+        <para>
+            We kunnen dus een redelijke complexe groep van regels defineren met een kleine hoeveelheid code.
+            Om de basisregels toe te passen zoals hierboven staan beschreven:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Acl.php';
+
+$acl = new Zend_Acl();
+
+require_once 'Zend/Acl/Role.php';
+
+$rolGast = new Zend_Acl_Role('gast');
+$acl->addRole($rolGast);
+$acl->addRole(new Zend_Acl_Role('medewerker'), $rolGast);
+$acl->addRole(new Zend_Acl_Role('redacteur'), 'medewerker');
+$acl->addRole(new Zend_Acl_Role('administrator'));
+
+// Gast mag alleen content bekijken
+$acl->allow($rolGast, null, 'bekijk');
+
+/* Bovenstaande kan ook geschreven worden als:
+$acl->allow('gast', null, 'bekijk');
+*/
+
+// Medewerker erft het bekijk privilege van gast, maar heeft extra privileges
+$acl->allow('medewerker', null, array('wijzig', 'verzend', 'herzien'));
+
+// Redacteur erft bekijk, wijzig, verzend en herzien privileges van medewerker
+// maar heeft extra prvileges
+$acl->allow('redacteur', null, array('publiceer', 'archiveer', 'verwijder'));
+
+// Administrator erft niets, maar is alle privileges toegestaan
+$acl->allow('administrator');]]>
+        </programlisting>
+
+        <para>
+            De <code>null</code> waarde in bovenstaande <code>allow()</code> aanroepen worden gebruikt
+            om aan te geven dat de toestaan regels op alle Bronnen van toepassing zijn.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.acl.introduction.querying">
+        <title>Raadplegen van de ACL</title>
+
+        <para>
+            We hebben nu een flexibele ACL die gebruikt kan worden om te bepalen of de aanvrager
+            toestemming heeft om de actie uit te voeren binnen de web applicatie. Raadplegen is
+            vrij simpel met het gebruik van de <code>isAllowed()</code> methode:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+echo $acl->isAllowed('gast', null, 'bekijk') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('medewerker', null, 'publiseer') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('medewerker', null, 'herzien') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('redacteur', null, 'bekijk') ?
+     "toegestaan" : "geweigerd"; // toegestaan vanwege de overerving van gast
+
+echo $acl->isAllowed('redacteur', null, 'update') ?
+     "toegestaan" : "geweigerd"; // geweigerd want er is geen toestaan regel voor 'update'
+
+echo $acl->isAllowed('administrator', null, 'bekijk') ?
+     "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan
+
+echo $acl->isAllowed('administrator') ?
+     "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan
+
+echo $acl->isAllowed('administrator', null, 'update') ?
+     "toegestaan" : "geweigerd"; // toegestaan want administrator is alles toegestaan]]>
+        </programlisting>
+
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

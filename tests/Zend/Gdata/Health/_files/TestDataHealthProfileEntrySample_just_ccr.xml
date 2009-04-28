@@ -1,0 +1,548 @@
+<ContinuityOfCareRecord xmlns="urn:astm-org:CCR">
+  <CCRDocumentObjectID>vneCn5qdEIY</CCRDocumentObjectID>
+  <Language>
+    <Text>English</Text>
+    <Code>
+      <Value>en</Value>
+      <CodingSystem>ISO-639-1</CodingSystem>
+    </Code>
+  </Language>
+  <Version>V1.0</Version>
+  <DateTime>
+    <ExactDateTime>2008-09-29T07:52:17.176Z</ExactDateTime>
+  </DateTime>
+  <Patient>
+    <ActorID>Google Health Profile</ActorID>
+  </Patient>
+  <Body>
+    <FunctionalStatus>
+      <Function>
+        <Type>
+          <Text>Pregnancy status</Text>
+        </Type>
+        <Description>
+          <Text>Not pregnant</Text>
+        </Description>
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@google.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+      </Function>
+      <Function>
+        <Type>
+          <Text>Breastfeeding status</Text>
+        </Type>
+        <Description>
+          <Text>Not breastfeeding</Text>
+        </Description>
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+      </Function>
+    </FunctionalStatus>
+    <Problems>
+      <Problem>
+        <CCRDataObjectID>Hn0FE0IlcY-FMFFgSTxkvA/CONDITION/0</CCRDataObjectID>
+        <DateTime>
+          <Type>
+            <Text>Start date</Text>
+          </Type>
+          <ExactDateTime>2007-04-04T07:00:00Z</ExactDateTime>
+        </DateTime>
+        <Description>
+          <Text>Aortic valve disorders</Text>
+          <Code>
+            <Value>410.10</Value>
+            <CodingSystem>ICD9</CodingSystem>
+            <Version>2004</Version>
+          </Code>
+        </Description>
+        <Status>
+          <Text>Active</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>example.com</ActorID>
+            <ActorRole>
+              <Text>Information Provider</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+      </Problem>
+      <Problem>
+        <Type />
+        <Description>
+          <Text>Malaria</Text>
+          <Code>
+            <Value>136.9</Value>
+            <CodingSystem>ICD9_Broader</CodingSystem>
+          </Code>
+          <Code>
+            <Value>084.6</Value>
+            <CodingSystem>ICD9</CodingSystem>
+          </Code>
+        </Description>
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <HealthStatus>
+          <Description />
+        </HealthStatus>
+      </Problem>
+    </Problems>
+    <SocialHistory>
+      <SocialHistoryElement>
+        <Type>
+          <Text>Race</Text>
+          <Code>
+            <Value>S15814</Value>
+            <CodingSystem>HL7</CodingSystem>
+          </Code>
+        </Type>
+        <Description>
+          <Text>White</Text>
+        </Description>
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Episodes>
+          <Frequency>
+            <Units />
+          </Frequency>
+        </Episodes>
+      </SocialHistoryElement>
+    </SocialHistory>
+    <Alerts>
+      <Alert>
+        <Type>
+          <Text>Allergy</Text>
+        </Type>
+        <Description>
+          <Text>A-Fil</Text>
+        </Description>
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Reaction>
+          <Description />
+          <Severity>
+            <Text>Severe</Text>
+          </Severity>
+        </Reaction>
+      </Alert>
+      <Alert>
+        <Type>
+          <Text>Allergy</Text>
+        </Type>
+        <Description>
+          <Text>A.E.R Traveler</Text>
+        </Description>
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Reaction>
+          <Description />
+          <Severity>
+            <Text>Severe</Text>
+          </Severity>
+        </Reaction>
+      </Alert>
+    </Alerts>
+    <Medications>
+      <Medication>
+        <Type />
+        <Description />
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Product>
+          <ProductName>
+            <Text>A&amp; D</Text>
+          </ProductName>
+          <Strength>
+            <Units />
+            <StrengthSequencePosition>0</StrengthSequencePosition>
+            <VariableStrengthModifier />
+          </Strength>
+        </Product>
+        <Directions>
+          <Direction>
+            <Description />
+            <DeliveryMethod />
+            <Dose>
+              <Units />
+              <DoseSequencePosition>0</DoseSequencePosition>
+              <VariableDoseModifier />
+            </Dose>
+            <Route>
+              <Text>To skin</Text>
+              <Code>
+                <Value>C38305</Value>
+                <CodingSystem>FDA</CodingSystem>
+              </Code>
+              <RouteSequencePosition>0</RouteSequencePosition>
+              <MultipleRouteModifier />
+            </Route>
+          </Direction>
+        </Directions>
+        <Refills />
+      </Medication>
+      <Medication>
+        <Type />
+        <Description />
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Product>
+          <ProductName>
+            <Text>A-Fil</Text>
+          </ProductName>
+          <Strength>
+            <Units />
+            <StrengthSequencePosition>0</StrengthSequencePosition>
+            <VariableStrengthModifier />
+          </Strength>
+        </Product>
+        <Directions>
+          <Direction>
+            <Description />
+            <DeliveryMethod />
+            <Dose>
+              <Units />
+              <DoseSequencePosition>0</DoseSequencePosition>
+              <VariableDoseModifier />
+            </Dose>
+            <Route>
+              <Text>To skin</Text>
+              <Code>
+                <Value>C38305</Value>
+                <CodingSystem>FDA</CodingSystem>
+              </Code>
+              <RouteSequencePosition>0</RouteSequencePosition>
+              <MultipleRouteModifier />
+            </Route>
+          </Direction>
+        </Directions>
+        <Refills />
+      </Medication>
+      <Medication>
+        <Type />
+        <Description />
+        <Status>
+          <Text>ACTIVE</Text>
+        </Status>
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Product>
+          <ProductName>
+            <Text>Lipitor</Text>
+          </ProductName>
+          <Strength>
+            <Units />
+            <StrengthSequencePosition>0</StrengthSequencePosition>
+            <VariableStrengthModifier />
+          </Strength>
+        </Product>
+        <Directions>
+          <Direction>
+            <Description />
+            <DeliveryMethod />
+            <Dose>
+              <Units />
+              <DoseSequencePosition>0</DoseSequencePosition>
+              <VariableDoseModifier />
+            </Dose>
+            <Route>
+              <Text>By mouth</Text>
+              <Code>
+                <Value>C38288</Value>
+                <CodingSystem>FDA</CodingSystem>
+              </Code>
+              <RouteSequencePosition>0</RouteSequencePosition>
+              <MultipleRouteModifier />
+            </Route>
+          </Direction>
+        </Directions>
+        <Refills />
+      </Medication>
+    </Medications>
+    <Immunizations>
+      <Immunization>
+        <Type />
+        <Description />
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Product>
+          <ProductName>
+            <Text>Chickenpox Vaccine</Text>
+            <Code>
+              <Value>21</Value>
+              <CodingSystem>HL7</CodingSystem>
+            </Code>
+          </ProductName>
+        </Product>
+        <Directions>
+          <Direction>
+            <Description />
+            <DeliveryMethod />
+          </Direction>
+        </Directions>
+        <Refills />
+      </Immunization>
+    </Immunizations>
+    <VitalSigns>
+      <Result>
+        <Type />
+        <Description />
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Substance />
+        <Test>
+          <Type />
+          <Description>
+            <Text>Height</Text>
+          </Description>
+          <Status />
+          <TestResult>
+            <ResultSequencePosition>0</ResultSequencePosition>
+            <VariableResultModifier />
+            <Value>70</Value>
+            <Units>
+              <Unit>inches</Unit>
+            </Units>
+          </TestResult>
+          <ConfidenceValue />
+        </Test>
+      </Result>
+      <Result>
+        <Type />
+        <Description />
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Substance />
+        <Test>
+          <Type />
+          <Description>
+            <Text>Weight</Text>
+          </Description>
+          <Status />
+          <TestResult>
+            <ResultSequencePosition>0</ResultSequencePosition>
+            <VariableResultModifier />
+            <Value>2480</Value>
+            <Units>
+              <Unit>ounces</Unit>
+            </Units>
+          </TestResult>
+          <ConfidenceValue />
+        </Test>
+      </Result>
+      <Result>
+        <Type />
+        <Description />
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Substance />
+        <Test>
+          <Type />
+          <Description>
+            <Text>Blood Type</Text>
+          </Description>
+          <Status />
+          <TestResult>
+            <ResultSequencePosition>0</ResultSequencePosition>
+            <VariableResultModifier />
+            <Value>O+</Value>
+            <Units />
+          </TestResult>
+          <ConfidenceValue />
+        </Test>
+      </Result>
+    </VitalSigns>
+    <Results>
+      <Result>
+        <Type />
+        <Description />
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+        <Substance />
+        <Test>
+          <DateTime>
+            <Type>
+              <Text>Collection start date</Text>
+            </Type>
+            <ExactDateTime>2008-09-03</ExactDateTime>
+          </DateTime>
+          <Type />
+          <Description>
+            <Text>Acetaldehyde - Blood</Text>
+          </Description>
+          <Status />
+          <TestResult>
+            <ResultSequencePosition>0</ResultSequencePosition>
+            <VariableResultModifier />
+            <Units />
+          </TestResult>
+          <ConfidenceValue />
+        </Test>
+      </Result>
+    </Results>
+    <Procedures>
+      <Procedure>
+        <Type />
+        <Description>
+          <Text>Abdominal Ultrasound</Text>
+        </Description>
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+      </Procedure>
+      <Procedure>
+        <Type />
+        <Description>
+          <Text>Abdominoplasty</Text>
+        </Description>
+        <Status />
+        <Source>
+          <Actor>
+            <ActorID>user@gmail.com</ActorID>
+            <ActorRole>
+              <Text>Patient</Text>
+            </ActorRole>
+          </Actor>
+        </Source>
+      </Procedure>
+    </Procedures>
+  </Body>
+  <Actors>
+    <Actor>
+      <ActorObjectID>Google Health Profile</ActorObjectID>
+      <Person>
+        <Name>
+          <BirthName />
+          <CurrentName />
+        </Name>
+        <DateOfBirth>
+          <Type />
+          <ExactDateTime>1984-07-22</ExactDateTime>
+        </DateOfBirth>
+        <Gender>
+          <Text>Male</Text>
+        </Gender>
+      </Person>
+      <Status />
+      <Source>
+        <Actor>
+          <ActorID>user@gmail.com</ActorID>
+          <ActorRole>
+            <Text>Patient</Text>
+          </ActorRole>
+        </Actor>
+      </Source>
+    </Actor>
+  </Actors>
+</ContinuityOfCareRecord>

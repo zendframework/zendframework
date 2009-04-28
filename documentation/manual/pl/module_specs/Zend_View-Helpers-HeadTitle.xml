@@ -1,0 +1,56 @@
+<sect3 id="zend.view.helpers.initial.headtitle">
+    <title>Helper HeadTitle</title>
+
+    <para>
+        Element HTML <code>&lt;title&gt;</code> jest używany w celu ustawienia
+        tytułu dla dokumentu HTML. Helper <code>HeadTitle</code> pozwala na
+        ustawianie tytułu i przechowywanie go w celu póżniejszego pobrania
+        i wyświetlenia.
+    </para>
+
+    <para>
+        Helper <code>HeadTitle</code> jest implementacją
+        <link linkend="zend.view.helpers.initial.placeholder">helpera
+            Placeholder</link>. Nadpisuje metodę <code>toString()</code> aby
+        wygenerować element <code>&lt;title&gt;</code>, a także dodaje metodę
+        <code>headTitle()</code> do szybkiego i łatwego ustawiania elementów
+        tytułu. Sygnaturą tej metody jest
+        <code>headTitle($title, $setType = 'APPEND')</code>; domyślnie wartość
+        jest dołączana na koniec stosu, ale możesz także określić opcję 'PREPEND'
+        (umieszczenie na początku stosu) lub 'SET' (zastąpienie stosu).
+    </para>
+
+    <example id="zend.view.helpers.initial.headtitle.basicusage">
+        <title>Podstawowe użycie helpera HeadTitle</title>
+
+        <para>
+            Możesz określić tytuł w dowolnym momencie. Najczęściej będzie tak, że
+            ustawisz segmenty dla poszczególnych części aplikacji: strony,
+            kontrolera, akcji i prawdopodobnie zasobu.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// ustawienie nazwy kontrolera oraz akcji jako segmentów tytułu:
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$this->headTitle($request->getActionName())
+     ->headTitle($request->getControllerName());
+
+// ustawienie nazwy strony w tytule; najczęściej skryptu layoutu:
+$this->headTitle('Zend Framework');
+
+// ustawienie odgranicznika dla segmentów
+$this->headTitle()->setSeparator(' / ');
+]]>
+        </programlisting>
+
+        <para>
+            Kiedy jesteś juz gotowy aby wyświetlić tytuł, możesz to zrobić
+            w swoim pliku layoutu:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<!-- wyświetla <action> / <controller> / Zend Framework -->
+<?= $this->headTitle() ?>
+]]></programlisting>
+    </example>
+</sect3>

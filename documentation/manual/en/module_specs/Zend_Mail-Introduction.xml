@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.introduction">
+
+    <title>Introduction</title>
+
+    <sect2 id="zend.mail.introduction.getting-started">
+
+        <title>Getting started</title>
+
+        <para>
+            <classname>Zend_Mail</classname> provides generalized functionality to compose and send both text and MIME-compliant
+            multipart e-mail messages. Mail can be sent with <classname>Zend_Mail</classname> via the default <classname>Zend_Mail_Transport_Sendmail</classname>
+            transport or via <classname>Zend_Mail_Transport_Smtp</classname>.
+        </para>
+
+        <example id="zend.mail.introduction.example-1">
+
+            <title>Simple E-Mail with Zend_Mail</title>
+
+            <para>
+                A simple e-mail consists of some recipients, a subject, a body and a sender. To send such a mail using
+                <classname>Zend_Mail_Transport_Sendmail</classname>, do the following:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
+
+        </example>
+
+        <note>
+            <title>Minimum definitions</title>
+            <para>
+                In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify at least one recipient, a
+                sender (e.g., with <code>setFrom()</code>), and a message body (text and/or HTML).
+            </para>
+        </note>
+
+        <para>
+            For most mail attributes there are "get" methods to read the information stored in the mail object. For
+            further details, please refer to the API documentation. A special one is <code>getRecipients()</code>.
+            It returns an array with all recipient e-mail addresses that were added prior to the method call.
+        </para>
+
+        <para>
+            For security reasons, <classname>Zend_Mail</classname> filters all header fields to prevent header injection with
+            newline (<code>\n</code>) characters.
+            Double quotation is changed to single quotation and angle brackets to square brackets in the name of
+            sender and recipients. If the marks are in email address, the marks will be removed.
+        </para>
+
+        <para>
+            You also can use most methods of the <classname>Zend_Mail</classname> object with a convenient fluent interface.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.')
+    ->setFrom('somebody@example.com', 'Some Sender')
+    ->addTo('somebody_else@example.com', 'Some Recipient')
+    ->setSubject('TestSubject')
+    ->send();
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.mail.introduction.sendmail">
+
+        <title>Configuring the default sendmail transport</title>
+
+        <para>
+            The default transport for a <classname>Zend_Mail</classname> instance is <classname>Zend_Mail_Transport_Sendmail</classname>.
+            It is essentially a wrapper to the PHP <ulink url="http://php.net/mail"><code>mail()</code></ulink> function.
+            If you wish to pass additional parameters to the <ulink url="http://php.net/mail"><code>mail()</code></ulink> function,
+            simply create a new transport instance and pass your parameters to the constructor. The new transport instance
+            can then act as the default <classname>Zend_Mail</classname> transport, or it can be passed to the <code>send()</code>
+            method of <classname>Zend_Mail</classname>.
+        </para>
+
+        <example id="zend.mail.introduction.sendmail.example-1">
+
+            <title>Passing additional parameters to the Zend_Mail_Transport_Sendmail transport</title>
+
+            <para>
+                This example shows how to change the Return-Path of the <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                function.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
+Zend_Mail::setDefaultTransport($tr);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]></programlisting>
+
+        </example>
+
+        <note>
+            <title>Safe mode restrictions</title>
+            <para>
+                The optional additional parameters will be cause the <ulink url="http://php.net/mail"><code>mail()</code></ulink> function to fail
+                if PHP is running in safe mode.
+            </para>
+        </note>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

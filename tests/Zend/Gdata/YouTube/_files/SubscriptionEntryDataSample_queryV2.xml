@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
+gd:etag='W/"C0QFSH47eCp7ImA9WxRaE0U."'>
+<id>
+tag:youtube.com,2008:user:zfgdata:subscription:59NG0lkr7r4</id>
+<published>2008-12-15T14:48:39.000-08:00</published>
+<updated>2008-12-15T14:48:39.000-08:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='query' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Videos matching : google</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/videos?q=google&amp;v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/results?search_query=google' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/zfgdata/subscriptions/59NG0lkr7r4?v=2' />
+<author>
+<name>zfgdata</name>
+<uri>
+http://gdata.youtube.com/feeds/api/users/zfgdata</uri>
+</author>
+<yt:queryString>google</yt:queryString>
+</entry>

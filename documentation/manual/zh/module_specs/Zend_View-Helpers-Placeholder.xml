@@ -1,0 +1,193 @@
+<sect3 id="zend.view.helpers.initial.placeholder">
+    <title> 占位符助手（Placeholder Helper） </title>
+
+    <para>
+        <code>Placeholder</code> 视图助手用来在视图脚本和视图实例之间持久化内容。它也提供一些有用的功能如：聚合内容、抓取视图脚本内容以后来用和添加前置（pre-）和后置（post-）文本到内容 （还可以为聚合内容定制分隔符等）。
+    </para>
+
+    <example id="zend.view.helpers.initial.placeholder.usage">
+        <title> 占位符的基本用法 </title>
+
+        <para>
+            占位符的基本用法是将视图中的数据持久化。每个<code>Placeholder</code>助手的启用都需要一个占位符名称，助手接着返回一个占位符容器对象，你可以用来处理或者简单地输出。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->set("Some text for later") ?>
+
+<?php
+    echo $this->placeholder('foo');
+    // outputs "Some text for later"
+?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.aggregation">
+        <title> 用占位符来聚合内容 </title>
+
+        <para>
+            通过占位符来聚合内容有时候很有用。例如视图脚本可拥有一个变量数组来存放数据，而视图脚本可以决定这些数据如何显示出来。
+        </para>
+
+        <para>
+            <code>Placeholder</code> 视图助手使用继承自 <code>ArrayObject</code> 的容器，为处理数组提供了丰富的功能。另外，它为格式化存储在容器里的内容提供了众多的方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>setPrefix($prefix)</code> 用内容的前缀设置文本。任何时候使用 <code>getPrefix()</code> 来确定当前的设置是什么。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setPostfix($prefix)</code> 用要追加的内容设置文本。任何时候使用 <code>getPostfix()</code> 来确定当前的设置是什么。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setSeparator($prefix)</code> 设置用来分隔聚合内容的分隔符。任何时候使用 <code>getSeparator()</code> 来确定当前的设置是什么。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setIndent($prefix)</code> 可以用来给内容设置一个缩进的值。如果传递一个整数，就按这个数量来缩进；如果传递一个字符串，就按字符串的长度来缩进。任何时候使用 <code>getIndent()</code> 来确定当前的设置是什么。
+            </para></listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- first view script -->
+<?php $this->placeholder('foo')->exchangeArray($this->data) ?>
+]]></programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- later view script -->
+<?php
+$this->placeholder('foo')->setPrefix("<ul>\n    <li>")
+                         ->setSeparator("</li><li>\n")
+                         ->setIndent(4)
+                         ->setPostfix("</li></ul>\n");
+?>
+
+<?php
+    echo $this->placeholder('foo');
+    //输出一个带有漂亮缩进的HTML无序列表
+?>
+]]></programlisting>
+
+        <para>
+            因为 <code>Placeholder</code> 容器对象从 <code>ArrayObject</code> 继承而来，所以你可以很容易地给特定的键赋值，而不是简单地把它压进容器。键可以作为对象属性或数组键来访问。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->bar = $this->data ?>
+<?php echo $this->placeholder('foo')->bar ?>
+
+<?php
+$foo = $this->placeholder('foo');
+echo $foo['bar'];
+?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.capture">
+        <title> 使用占位符（Placeholders）来抓取内容 </title>
+
+        <para>
+            有时你可能会在视图脚本（最容易的模板）为占位符放些内容，<code>Placeholder</code> 视图助手允许你抓取任意的内容，在以后用下列的 API 来解析并输出（本功能类似于缓冲输出－－Haohappy注）：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>captureStart($type, $key)</code> 开始抓取内容。
+                </para>
+
+                <para>
+                    <code>$type</code> 应该是 <code>Placeholder</code> 的常量 <code>APPEND</code> 或 <code>SET</code> 其中之一。如果用 <code>APPEND</code>，被抓取得内容就追加到在占位符当前内容的列表；                  如果用 <code>SET</code>，被抓取得内容就被用作占位符的唯一内容（替换以前的内容）。缺省地 <code>$type</code> 是 <code>APPEND</code>。
+                </para>
+
+                <para>
+                    <code>$key</code>可用来在占位符容器指定一个特殊的键给你想抓取的内容。
+                </para>
+
+                <para>
+                    <code>captureStart()</code> 锁住抓取直到 <code>captureEnd()</code> 被调用，不能在同一个占位符容器里嵌套抓取，这样做会引起一个异常。
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>captureEnd()</code> 使抓取内容停止，并根据 <code>captureStart()</code> 如何被调用来把它放到容器对象。
+            </para></listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- Default capture: append -->
+<?php $this->placeholder('foo')->captureStart();
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?= $datum->title ?></h2>
+    <p><?= $datum->content ?></p>
+</div>
+ <?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo') ?>
+]]></programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- Capture to key -->
+<?php $this->placeholder('foo')->captureStart('SET', 'data');
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?= $datum->title ?></h2>
+    <p><?= $datum->content ?></p>
+</div>
+ <?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo')->data ?>
+]]></programlisting>
+    </example>
+
+    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
+        <title> 具体占位符实现 </title>
+
+        <para>
+            Zend Framework 自带有若干个具体实现的占位符，包括常用的占位符：doctype、page title、以及各种 &lt;head&gt; 元素。对所有情况，不带参数调用占位符将返回元素自己。
+        </para>
+
+        <para>
+            每个元素的文档，请查看如下链接：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.doctype">Doctype</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headmeta">HeadMeta</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

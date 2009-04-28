@@ -1,0 +1,86 @@
+<sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Dojo 表单元素和装饰器 </title>
+
+    <para>
+        建立在 <link linkend="zend.dojo.view.dijit">dijit 视图助手 </link> 之上的
+        <code>Zend_Dojo_Form</code> 类家族在你的表单里自然地使用 Dijits。
+    </para>
+
+    <para>
+        有三个选项用来在你的表单里使用 Dojo 表单元素：
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                用 <code>Zend_Dojo::enableForm()</code>. 递归地为装饰器和所有表单的元素添加插件路径。
+                另外，它将 dojo-enable 视图对象。然而注意，任何在这个调用 <emphasis>之后</emphasis> 附加
+                的子表单也需要用 <code>Zend_Dojo::enableForm()</code>。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                分别使用 Dojo-specific 表单<code>Zend_Dojo_Form</code>和子表单 <code>Zend_Dojo_Form_SubForm</code>实现。
+                这些可以做为 <code>Zend_Form</code> 和 <code>Zend_Form_SubForm</code>的随时替换，包含所有合适的装饰器
+                和元素路径，设置一个 Dojo-specific 缺省的显示组类并 dojo-enable 视图。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                最后并且是最单调的是，你可以自己设置合适的装饰器和元素路径，设置缺省显示组类
+                并 dojo-enable 视图。因为 <code>Zend_Dojo::enableForm()</code> 已经做了这个，
+                有个小原因需要这样做。
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.dojo.form.enable">
+        <title> 在你的表单里开启 Dojo </title>
+
+        <para>
+            “等等” 你会说，“我已经用我自己定制的表单类扩展了 Zend_form！怎么 Dojo-enable 它？”
+        </para>
+
+        <para>
+            首先而且是最简单的是，修改从 <code>Zend_Form</code> 扩展为从 <code>Zend_Dojo_Form</code> 扩展，
+            并更新任何实例化 <code>Zend_Form_SubForm</code> 的地方为实例化 <code>Zend_Dojo_Form_SubForm</code>。
+        </para>
+
+        <para>
+            第二个方法是在定制表单的 <code>init()</code> 方法里调用 <code>Zend_Dojo::enableForm()</code>；
+            当表单定义完成，遍历所有子表单来 dojo-enable 它们：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class My_Form_Custom extends Zend_Form
+{
+    public function init()
+    {
+        // Dojo-enable the form:
+        Zend_Dojo::enableForm($this);
+
+        // ... continue form definition from here
+
+        // Dojo-enable all sub forms:
+        foreach ($this->getSubForms() as $subForm) {
+            Zend_Dojo::enableForm($subForm);
+        }
+    }
+}
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        dijit-specific 表单装饰器和元素的用法和使用任何其它表单装饰漆或元素一样。
+    </para>
+
+    <xi:include href="Zend_Dojo-Form-Decorators.xml" />
+    <xi:include href="Zend_Dojo-Form-Elements.xml" />
+    <xi:include href="Zend_Dojo-Form-Examples.xml" />
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

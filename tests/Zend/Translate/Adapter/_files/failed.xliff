@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<xliff version='1.1' xmlns='urn:oasis:names:tc:xliff:document:1.1'>
+ <file original='hello.txt' source-language='de' target-language='en' datatype='plaintext'>
+  <body>
+   <trans-unit id='1' />
+    <source>Message 1</source>
+    <target>Message 1 (en)</target>
+   </trans-unit>
+   <trans-unit id='2'>
+    <source>Message 2</source>
+    <target>Message 2 (en)</target>
+   </trans-unit>
+   <trans-unit id='3'>
+    <source>Message 3</source>
+    <target>Message 3 (en)</target>
+   </trans-unit>
+   <trans-unit id='4'>
+    <source>Message 4</source>
+    <target>Message 4 (en)</target>
+   </trans-unit>
+   <trans-unit id='5'>
+    <source>Message 5</source>
+    <target>Message 5 (en)</target>
+   </trans-unit>
+  </body>
+ </file>
+</xliff>

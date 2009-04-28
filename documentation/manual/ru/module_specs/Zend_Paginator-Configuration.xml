@@ -1,0 +1,56 @@
+<sect1 id="zend.paginator.configuration">
+    <title>Конфигурация</title>
+
+    <para>
+        <code>Zend_Paginator</code> имеет несколько методов для настройки:
+    </para>
+
+    <table id="zend.paginator.configuration.table">
+        <title>Методы для настройки <code>Zend_Paginator</code></title>
+
+        <tgroup cols="2">
+            <thead>
+                <row>
+                    <entry>Метод</entry>
+                    <entry>Описание</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>setCurrentPageNumber</entry>
+                    <entry>
+                        Устанавливает текущий номер страницы (по умолчанию он
+                        равен 1).
+                    </entry>
+                </row>
+                <row>
+                    <entry>setItemCountPerPage</entry>
+                    <entry>
+                        Устанавливает максимальное количество отображаемых
+                        на странице элементов (по умолчанию оно равно 10).
+                    </entry>
+                </row>
+                <row>
+                    <entry>setPageRange</entry>
+                    <entry>
+                        Устанавливает количество отображаемых номеров страниц
+                        в постраничной навигации (по умолчанию оно равно 10).
+                        Как правило, этого значения придерживаются
+                        в точности, но некоторые стили прокрутки могут
+                        использовать его только как ориентировочное или
+                        стартовое значение (например, стиль "Elastic")
+                    </entry>
+                </row>
+                <row>
+                    <entry>setView</entry>
+                    <entry>
+                        Устанавливает экземпляр вида для удобства визуализации.
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

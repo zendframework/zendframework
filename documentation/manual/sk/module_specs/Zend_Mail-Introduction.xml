@@ -1,0 +1,61 @@
+<sect1 id="zend.mail.introduction">
+    <title>Úvod</title>
+    <para>
+        <code>Zend_Mail</code> poskytuje obecnú funkcionalitu pre posielanie a vytvaranie
+        textovych a MIME e-mailov. E-Mail môže byť poslaný pomocou vstavanej PHP
+        funkcie <ulink url="http://php.net/mail"><code>mail()</code></ulink> alebo
+        cez SMTP spojenie.
+    </para>
+    <example>
+        <title>Jednoduchý E-Mail pomocou Zend_Mail</title>
+        <para>
+            Jednoduchý e-mail pozostáva z niekoľkých prijímateľov, predmetu, tela
+            a odosielateľa. Pre poslanie e-mailu pomocou PHP funkcie
+            <ulink url="http://php.net/mail"><code>mail()</code></ulink> stačí nasledujúce:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+?>]]>   </programlisting>
+    </example>
+    <note>
+        <title>Minimálne požiadavky</title>
+        <para>
+            Na poslanie e-mailu pomocou <code>Zend_Mail</code> je potrebné zadať
+            aspoň jedného príjemcu, odosielateľa (<code>setFrom()</code>) a telo
+            správy (text a/alebo HTML).
+        </para>
+    </note>
+    <para>
+        Pre väčšinu atribútov e-mailu existujú &quot;get&quot; metódy na získanie
+        hodnôt uložených v objekte. Ďalšie detaily sú v API dokumentácii. Jedna
+        z metód je <code>getRecipients()</code>. Metóda vráti v poli uložený zoznam
+        adresátov e-mailu, ktorí boli pridaný pred volaním tejto metódy.
+    </para>
+    <para>
+        Z dôvodu bezpečnosti <code>Zend_Mail</code> filtruje všetky hodnoty hlavičiek
+        aby sa zabránilo vloženiu iných hlavičiek pomocou znaku nového riadku (<code>\n</code>).
+    </para>
+    <para>
+        Väčšinu metód je možné použiť v pohodlnom plynulom rozhraní. Pohodlné plynulé
+        rozhranie znamená, to že každé volanie vráti referenciu na objekt nad ktorým
+        bola metóda volaná a hneď je teda možné zavolať inú metódu.
+    </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.')
+    ->setFrom('somebody@example.com', 'Some Sender')
+    ->addTo('somebody_else@example.com', 'Some Recipient')
+    ->setSubject('TestSubject')
+    ->send();
+?>]]>   </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

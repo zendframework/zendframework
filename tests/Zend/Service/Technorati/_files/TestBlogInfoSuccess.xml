@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a Bloginfo request
+    http://api.technorati.com/bloginfo?key=VALID_API_KEY&url=www.simonecarletti.com/blog
+    
+    The request has the following properties:
+     * url is a valid blog
+
+-->
+<!-- generator="Technorati API version 1.0" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>www.simonecarletti.com/blog</url>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <rssurl/>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>86</inboundblogs>
+                <inboundlinks>114</inboundlinks>
+                <lastupdate>2007-11-14 21:06:36 GMT</lastupdate>
+                <rank>80591</rank>
+            </weblog>
+            <inboundblogs>86</inboundblogs>
+            <inboundlinks>114</inboundlinks>
+        </result>
+    </document>
+</tapi>

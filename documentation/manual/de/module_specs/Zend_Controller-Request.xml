@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.request">
+    <title>Das Request Objekt</title>
+    <sect2 id="zend.controller.request.introduction">
+        <title>Einführung</title>
+        <para>
+            Das Request Objekt ist eine einfaches Wertobjekt, das zwischen
+            <classname>Zend_Controller_Front</classname> und den Router, Dispatcher und Controller Klassen
+            übergeben wird. Es enthält sowohl die Definition des Controllers, der Aktion und der
+            Parameter, die an die Aktion übergeben werden sollen, als auch den Rest der
+            Anfrageumgebung, seit es HTTP, CLI oder PHP-GTK.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                Auf den Modul Namen kann über <code>getModuleName()</code> und
+                <code>setModuleName()</code> zugegriffen werden.
+            </para></listitem>
+            <listitem><para>
+                Auf den Controller Namen kann über <code>getControllerName()</code> und
+                <code>setControllerName()</code> zugegriffen werden.
+            </para></listitem>
+            <listitem><para>
+                Auf den Namen der Aktion, die in diesem Controller aufgerufen wird, kann über
+                accessed by <code>getActionName()</code> und <code>setActionName()</code>
+                zugegriffen werden.
+            </para></listitem>
+            <listitem><para>
+                Parameter, die von der Aktion ansprechbar sind, bestehen aus einem assoziativen
+                Array mit Schlüssel/Wert Paaren, auf die komplett per <code>getParams()</code> und
+                <code>setParams()</code> oder einzeln per <code>getParam()</code> und
+                <code>setParam()</code> zugegriffen werden kann.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Abhängig vom Typ der Anfrage können auch weitere Methoden verfügbar sein. Das
+            verwendete Standard Request Object <classname>Zend_Controller_Request_Http</classname> stellt z.B.
+            Methoden zum Abfragen der Request URI, Pfadinformationen, <code>$_GET</code> und
+            <code>$_POST</code> Parameter usw. bereit.
+        </para>
+
+        <para>
+            Das Request Objekt wird an den Front Controller übergeben oder, wenn keines bereit
+            gestellt wurde, am Anfang des Dispatcher Prozesses instanziert, bevor das Routing
+            beginnt. Es wird an jedes Objekt in der Dispatcherkette übergeben.
+        </para>
+
+        <para>
+            Zusätzlich ist das Request Object besonders beim Testen sehr nützlich. Der Entwickler
+            kann die Anfrageumgebung von Hand erstellen, inklusive Controller, Aktion, Parameter,
+            URI usw. und das Request Objekt an den Front Controller übrgeben, um den Ablauf der
+            Applikation zu testen. Zusammen mit dem
+            <link linkend="zend.controller.response">Response Objekt</link> sind durchdachte und
+            genaue Unit Tests für eine MVC Applikation möglich.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.request.http">
+        <title>HTTP Anfragen</title>
+
+        <sect3 id="zend.controller.request.http.dataacess">
+            <title>Auf Request Daten zugreifen</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> kapselt den Zugriff auf relevante Werte
+                wie der Schlüssel und Wert für Controller und Action Variablen des Routers und alle
+                zusätzlichen Parameter, die aus der URI ermittelt wurden. Es erlaubt zusätzlich
+                den Zugriff auf superglobale Werte als öffentliche Eigenschaften und verwaltet
+                die aktuelle Basis URL und Request URI. Superglobale Werte können in einem Request
+                Objekt nicht gesetzt werden, stattdessen verwendet man die setParam/getParam
+                Methoden um Benutzerparameter zu setzen oder zu erhalten.
+            </para>
+
+            <note>
+                <title>Superglobale Daten</title>
+                <para>
+                    Beim Zugriff auf superglobale Daten über die öffentlichen Eigenschaften von
+                    <classname>Zend_Controller_Request_Http</classname> ist es notwendig, darauf zu achten,
+                    dass der Eigenschaftsname (der superglobale Arrayschlüssel) einem superglobalen
+                    Wert in einer bestimmten Reihenfolge entspricht: 1. GET, 2. POST, 3. COOKIE,
+                    4. SERVER, 5. ENV.
+                </para>
+            </note>
+
+            <para>
+                Auf spezifische superglobale Werte kann alternativ über eine öffentliche Methode
+                zugegriffen werden. Zum Beispiel kann auf den unverarbeitete Wert von
+                <code>$_POST['user']</code> durch Aufruf der <code>getPost('user')</code> Methode
+                des Request Objekts zugegriffen werden. Diese beinhalten <code>getQuery()</code>,
+                um <code>$_GET</code> Elemente zu erhalten und <code>getHeader()</code>, um
+                Request Header zu erhalten.
+            </para>
+
+            <note>
+                <title>GET und POST Daten</title>
+                <para>
+                    Vorsicht wenn auf Daten von einem Anfrage Objekt zugegriffen wird da diese in keiner Weise
+                    gefiltert werden. Der Router und Dispatcher prüfen und filtern Daten für die Verwendung
+                    innerhalb Ihrer Aufgabe, lassen diese Daten aber unangetastet im Anfrage Objekt.
+                </para>
+            </note>
+
+            <note>
+                <title>Empfangen der rohen POST Daten!</title>
+
+                <para>
+                    Mit 1.5.0 können auch die rohen Post Daten über die <code>getRawBody()</code>
+                    Methode empfangen werden. Diese Methode gibt false zurück wenn keine Daten auf
+                    diesem Weg übermittelt wurden, andernfalls den kompletten Inhalt von Post.
+                </para>
+
+                <para>
+                    Das ist grundsätzlich sinnvoll um Inhalt zu akzeptieren wenn eine RESTvolle MVC
+                    Anwendung entwickelt wird.
+                </para>
+            </note>
+
+            <para>
+                Es können auch Benutzerparameter im Anfrage Objekt gesetzt werden durch Verwendung von
+                <code>setParam()</code> und empfangen derselben später durch verwenden von <code>getParam()</code>.
+                Der Router verwendet diese Funktionalität um passende Parameter in der Anfrage URI im Anfrage
+                Objekt zu setzen.
+            </para>
+
+            <note>
+                <title>getParam() empfängt mehr als Benutzer Parameter</title>
+
+                <para>
+                    Um einiges Ihrer Arbeit zu tun, empfängt <code>getParam()</code> von
+                    verschiedenen Quellen. Je nach Priorität enthalten diese: Benutzer Parameter
+                    die über <code>setParam()</code> gesetzt wurden, <code>GET</code> Parameter,
+                    und letztendlich <code>POST</code> Parameter. Aufpassen vor dem Durchlaufen von
+                    Daten mit dieser Methode.
+                </para>
+
+                <para>
+                    Wenn man nur Parameter erhalten will die vorher mit <code>setParam()</code> gesetzt wurden,
+                    muß <code>getUserParam()</code> verwendet werden.
+                </para>
+
+                <para>
+                    Zusätzlich, sein 1.5.0, kann gesperrt werden welche Quellparameter gesucht
+                    werden. <code>setParamSources()</code> erlaubt es ein leeres Array zu
+                    spezifizieren oder ein Array mit einem oder mehreren Werten von '_GET' oder
+                    '_POST' um zu zeigen welche Quellparameter erlaubt sind (standardmäßig sind
+                    beide erlaubt); Wenn der Zugriff nur auf '_GET' beschränkt werden soll muß
+                    <code>setParamSources(array('_GET'))</code> spezifiziert werden.
+                </para>
+            </note>
+
+            <note>
+                <title>Apache Quirks</title>
+                <para>
+                    Wenn Apache's 404 Handler verwendet wird um eingehende Anfragen an den Front Controller zu
+                    übergeben, oder ein PT Flag mit Rewrite Regeln verwendet wird, enthält
+                    <code>$_SERVER['REDIRECT_URL']</code> die URI die benötigt wird, nicht
+                    <code>$_SERVER['REQUEST_URI']</code>. Wenn so ein Setup verwendet wird und man ungültige
+                    Routen erhält, sollte man stattdessen die <classname>Zend_Controller_Request_Apache404</classname>
+                    Klasse statt der standard Http Klasse für das Anfrage Objekt verwenden:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$request = new Zend_Controller_Request_Apache404();
+$front->setRequest($request);
+]]>
+                </programlisting>
+
+                <para>
+                    Diese Klasse erweitert die <classname>Zend_Controller_Request_Http</classname> Klasse und modifiziert
+                    einfach die automatische Entdeckung der Anfrage URI. Sie kann als einfache Ersetzung verwendet
+                    werden.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.baseurl">
+            <title>Basis Url und Unterverzeichnisse</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> erlaubt, dass <classname>Zend_Controller_Router_Rewrite</classname>
+                in einem Unterverzeichnis verwendet werden kann. <classname>Zend_Controller_Request_Http</classname>
+                versucht, die Basis URL automatisch zu erkennen und entsprechend zu setzen.
+            </para>
+
+            <para>
+                Wenn man zum Beispiel seine <code>index.php</code> in einem Webserverunterverzeichnis
+                mit Namen <code>/projects/myapp/index.php</code> verwendet, sollte die Basis URL
+                (die Rewrite Basis) auf <code>/projects/myapp</code> gesetzt werden. Dieser String
+                wird dann vom Anfang des Pfades entfernt, bevor irgend welche Routingtreffer
+                ermittelt werden. Dies befreit einem davon, es an den Anfang jeder Route setzen zu
+                müssen. Eine Route <code>'user/:username'</code> passt auf URIs wie
+                <code>http://localhost/projects/myapp/user/martel</code> und
+                <code>http://example.com/user/martel</code>.
+            </para>
+
+            <note>
+                <title>URL Erkennung beachtet Groß- und Kleinschreibung</title>
+                <para>
+                    Die automatische Erkennung der Basis URL beachtet die Groß- und Kleinschreibung,
+                    weshalb man sicherstellen sollte, dass die URL einem Unterverzeichnis im
+                    Dateisystem entspricht (sogar auf einem Windows Rechner). Andernfalls wird eine
+                    Ausnahme geworfen.
+                </para>
+            </note>
+
+            <para>
+                Sollte die Basis URL falsch erkannt werden, kann man diese auch mit einem eigenen
+                Pfad mit Hilfe der <code>setBaseUrl()</code> Methode der
+                <classname>Zend_Controller_Request_Http</classname> Klasse oder der
+                <classname>Zend_Controller_Front</classname> Klasse überschreiben. Die einfachste Methode ist
+                die von <classname>Zend_Controller_Front</classname>, welche es an das Request Object weiter
+                leitet. Beispiel, um eine eigene Basis URL zu setzen:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Dispatch Anfrage mit einer kunden basierenden URL mit Zend_Controller_Front.
+ */
+$router     = new Zend_Controller_Router_Rewrite();
+$controller = Zend_Controller_Front::getInstance();
+$controller->setControllerDirectory('./application/controllers')
+           ->setRouter($router)
+           ->setBaseUrl('/projects/myapp'); // Setze die Basis URL!
+$response   = $controller->dispatch();
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.method">
+            <title>Erkennen der Anfrage Methode</title>
+
+            <para>
+                <code>getMethod()</code> erlaubt es die HTTP Anfrage Methode zu erkennen die
+                verwendet wurde um die aktuelle Ressource anzufragen. Zusätzlich existiert eine
+                Vielzahl von Methoden die es erlauben boolsche Antworten zu erhalten wenn gefragt
+                wird ob ein spezieller Typ von Anfrage durchgeführt wurde:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>isGet()</code></para></listitem>
+                <listitem><para><code>isPost()</code></para></listitem>
+                <listitem><para><code>isPut()</code></para></listitem>
+                <listitem><para><code>isDelete()</code></para></listitem>
+                <listitem><para><code>isHead()</code></para></listitem>
+                <listitem><para><code>isOptions()</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                Der grundsätzliche Verwendungszweck hierfür ist die Erstellung von RESTvollen MVC
+                Architekturen.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.ajax">
+            <title>Erkennen von AJAX Anfragen</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> hat eine rudimentäre Methode für die Erkennung von
+                AJAX Anfragen: <code>isXmlHttpRequest()</code>. Diese Methode sucht nach einem HTTP Anfrageheader
+                <code>X-Requested-With</code> mit dem Wert 'XMLHttpRequest'; wenn er gefunden wird, gibt er
+                true zurück.
+            </para>
+
+            <para>
+                Aktuell wird dieser Header standardmäßig mit den folgenden JS Bibliotheken geschickt:
+            </para>
+
+            <itemizedlist>
+                <listitem><para>Prototype/Scriptaculous (und von Prototype abgeleitete Bibliotheken)</para></listitem>
+                <listitem><para>Yahoo! UI Library</para></listitem>
+                <listitem><para>jQuery</para></listitem>
+                <listitem><para>MochiKit</para></listitem>
+            </itemizedlist>
+
+            <para>
+                Die meisten AJAX Bibliotheken erlauben das senden von eigenen HTTP Anfrageheadern; wenn die
+                eigene Bibliothek diesen Header nicht sendet, muß dieser einfach and Anfrageheader hinzugefügt
+                werden um sicherzustellen das die <code>isXmlHttpRequest()</code> Methode funktioniert.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.request.subclassing">
+        <title>Vererben des Anfrage Objektes</title>
+
+        <para>
+            Die Basis Anfrage Klasse die für alle Anfrage Objekte verwendet wird ist die abstrakte Klasse
+            <classname>Zend_Controller_Request_Abstract</classname>. Sie ist sehr grundsätzlich und definiert die folgenden
+            Methoden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+abstract class Zend_Controller_Request_Abstract
+{
+    /**
+     * @return string
+     */
+    public function getControllerName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setControllerName($value);
+
+    /**
+     * @return string
+     */
+    public function getActionName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setActionName($value);
+
+    /**
+     * @return string
+     */
+    public function getControllerKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setControllerKey($key);
+
+    /**
+     * @return string
+     */
+    public function getActionKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setActionKey($key);
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getParam($key);
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return self
+     */
+    public function setParam($key, $value);
+
+    /**
+     * @return array
+     */
+     public function getParams();
+
+    /**
+     * @param array $array
+     * @return self
+     */
+    public function setParams(array $array);
+
+    /**
+     * @param boolean $flag
+     * @return self
+     */
+    public function setDispatched($flag = true);
+
+    /**
+     * @return boolean
+     */
+    public function isDispatched();
+}
+]]>
+        </programlisting>
+
+        <para>
+            Das Anfrage Objekt ist ein Behälter für die Anfrage Umgebung. Die Controller Kette muß wirklich nur
+            wissen wie der Controller, die Aktion, die optionalen Parameter und der Dispatched Status gesetzt
+            und empfangen werden können. Standardmäßig durchsucht das Anfrage Objekt die eigenen Parameter indem
+            es den Controller oder die Aktions Schlüssel verwendet um den Controller und die Aktion zu ermitteln.
+        </para>
+
+        <para>
+            Erweitere diese Klasse, oder eine Ihrer Derivate, wenn die Anfrage Klasse mit einer speziellen
+            Umgebung interagieren soll, um Daten für die obigen Aufgaben zu erhalten. Beispiele beinhalten
+            <link linkend="zend.controller.request.http">die HTTP Umgebung</link>, eine CLI Umgebung, oder eine
+            PHP-GTK Umgebung.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

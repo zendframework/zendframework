@@ -1,0 +1,89 @@
+<sect3 id="zend.view.helpers.initial.headlink">
+    <title>Helper HeadLink</title>
+
+    <para>
+        Element HTML <code>&lt;link&gt;</code> jest używany do dołączania różnego
+        rodzaju zasobów do dokumentu html: arkuszy stylów, kanałów informacyjnych,
+        ikon, adresów trackback i wielu innych. Helper <code>HeadLink</code>
+        zapewnia prosty interfejs służący do tworzenia i łączenia tych
+        elementów, a następnie do wyświetlenia ich później w skrypcie layoutu.
+    </para>
+
+    <para>
+        Helper <code>HeadLink</code> posiada specjalne metody do dodawania
+        arkuszy stylów:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>prependStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+        <listitem><para><code>setStylesheet($href, $media,
+                    $conditionalStylesheet)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Domyślną wartością zmiennej <code>$media</code> jest 'screen', jednak
+        możemy nadać jej inną poprawną wartość. Zmienna
+        <code>$conditionalStylesheet</code> jest wartością logiczną określającą
+        czy podczas renderowania powinien zostać dodany specjalny komentarz
+        zapobiegający ładowaniu arkusza stylów na określonych platformach.
+    </para>
+
+    <para>
+        Dodatkowo helper <code>HeadLink</code> posiada specjalne metody
+        do obsługi łącz 'alternate':
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendAlternate($href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>offsetSetAlternate($index, $href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>prependAlternate($href, $type,
+                    $title)</code></para></listitem>
+        <listitem><para><code>setAlternate($href, $type,
+                    $title)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Metoda <code>headLink()</code> helpera pozwala na określenie wszystkich
+        potrzebnych atrybutów elementu <code>&lt;link&gt;</code>, a także
+        pozwala określić jego umiejscowienie -- czy nowy element ma zastąpić
+        wszystkie istniejące, dołączyć go na koniec lub na początek stosu.
+    </para>
+
+    <para>
+        Helper <code>HeadLink</code> jest implementacją
+        <link linkend="zend.view.helpers.initial.placeholder">helpera
+            Placeholder</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headlink.basicusage">
+        <title>Proste użycie helpera HeadLink</title>
+
+        <para>
+            Możesz użyć helpera <code>headLink</code> w dowolnym momencie.
+            Najczęściej będziesz określał globalne łącza w pliku layoutu,
+            a łącza specyficzne dla aplikacji w skryptach widoków. W skrypcie
+            layoutu wyświetlisz na koniec wszystkie łącza w sekcji
+            &lt;head&gt;.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // ustawianie łącz w skrypcie widoku:
+$this->headLink()->appendStylesheet('/styles/basic.css')
+                 ->headLink(array('rel' => 'favicon',
+                                  'href' => '/img/favicon.ico'),
+                                  'PREPEND')
+                 ->prependStylesheet('/styles/moz.css', 'screen', true);
+?>
+<?php // generowaie łącz: ?>
+<?= $this->headLink() ?>
+]]>
+        </programlisting>
+    </example>
+</sect3>

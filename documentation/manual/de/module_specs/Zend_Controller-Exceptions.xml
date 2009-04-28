@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.exceptions">
+    <title>MVC Ausnahmen</title>
+
+    <sect2 id="zend.controller.exceptions.introduction">
+        <title>Einführung</title>
+
+        <para>
+            Die MVC Komponenten im Zend Framework verwenden einen Front Controller, was bedeutet das alle
+            Anfragen zu einer bestimmten Site über einen einzelnen Eintrittspunkt laufen. Als Ergebnis treten
+            alle Ausnahmen eventuell am Front Controllerauf, was es Entwicklern erlaubt diese an einem
+            einzelnen Ort zu behandeln.
+        </para>
+
+        <para>
+            Trotzdem enthalten Ausnahmemeldungen und Backtrace Informationen oft sensitive Systeminformationen,
+            wie SQL Anweisungen, Dateiorte, und andere. Um zu helfen die eigene Site zu schützen, werden
+            standardmäßig alle Ausnahmen von <classname>Zend_Controller_Front</classname> gefangen und im Antwortobjekt
+            registriert; zusätzlich zeigt das Antwortobjekt die Ausnahmemeldungen standardmäßig nicht an.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.handling">
+        <title>Behandeln von Ausnahmen</title>
+
+        <para>
+            Verschiedene Mechanismen sind bereits in die MVC Komponenten eingebaut um die Behandlung von
+            Ausnahmen zu erlauben.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Standardmäßig ist das
+                    <link linkend="zend.controller.plugins.standard.errorhandler">Error Handler Plugin</link>
+                    registriert und aktiv. Dieses Plugin wurde erstellt um folgendes zu behandeln:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Fehler durch fehlende Controller oder Aktionen
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Fehler die in Actioncontrollern auftreten
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+                <para>
+                    Es arbeitet als <code>postDispatch()</code> Plugin und prüft ob eine Dispatcher,
+                    Actioncontroller oder andere Ausnahme aufgetreten ist. Wenn das so ist, leitet es an den
+                    Error Handler Controller weiter.
+                </para>
+
+                <para>
+                    Dieser Handler deckt die meisten Ausnahmesituationen ab, und behandelt fehlende
+                    Controller und Aktionen taktvoll.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+
+                <para>
+                    Durch die Übergabe eines boolschen True Wertes an diese Methode, kann dem Front Controller
+                    mitgeteilt werden das, statt der Ansammlung der Ausnahmen im Antwortobjekt oder der Verwendung
+                    des Error Handler Plugin's, man diese Ausnahmen selbst behandeln will. Als Beispiel:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+try {
+    $front->dispatch();
+} catch (Exception $e) {
+    // Ausnahmen selbst behandeln
+}
+]]>
+                </programlisting>
+
+                <para>
+                    Diese Methode ist möglicherweise der einfachste Weg um eigene Ausnahmebehandlungen
+                    hinzuzufügen die den vollen Umfang der möglichen Ausnahmen der Front Controller Anwendung
+                    behandeln.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><classname>Zend_Controller_Response_Abstract::renderExceptions()</classname></para>
+
+                <para>
+                    Durch die Übergabe eines boolschen True Wertes an diese Methode kann dem Antwortobjekt
+                    mitgeteilt werden das es Ausnahmenachrichten und Backtrace darstellen soll, wenn es
+                    selbst dargestellt wird. In diesem Szenario wird jede Ausnahme die an der Anwendung
+                    auftritt angezeigt. Das wird nur in nicht-produktiven Umgebungen vorgeschlagen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Front::returnResponse()</classname> und
+                    <classname>Zend_Controller_Response_Abstract::isException()</classname>.
+                </para>
+
+                <para>
+                    Durch die Übergabe eines boolschen True zu
+                    <classname>Zend_Controller_Front::returnResponse()</classname>, wird
+                    <classname>Zend_Controller_Front::dispatch()</classname> die Antwort nicht darstellen, aber diese
+                    stattdessen zurückgeben. Sobald man die antwort hat, kann diese getestet werden um zu
+                    sehen ob irgendwelche Ausnahmen gefangen wurden indem die <code>isException()</code>
+                    Methode verwendet, und die Ausnahme über die <code>getException()</code> Methode
+                    empfangen wird. Als Beispiel:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+if ($response->isException()) {
+    $exceptions = $response->getException();
+    // Ausnahme behandeln ...
+} else {
+    $response->sendHeaders();
+    $response->outputBody();
+}
+]]>
+                </programlisting>
+
+                <para>
+                    Der primäre Vorteil die diese Methode über
+                    <classname>Zend_Controller_Front::throwExceptions()</classname> bietet ist, das Sie es erlaubt
+                    die Antwort wahlweise darzustellen nachdem die Ausnahme behandelt wurde. Das fängt jede
+                    Ausnahme in der Kontrollerkette, im Gegensatz zum Error Handler Plugin.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.internal">
+        <title>MVC Ausnahme die auftreten können</title>
+
+        <para>
+            Die verschiedenen MVC Komponenten -- Anfragen, Router, Dispatcher, Actioncontroller, und
+            Antwortobjekte -- können alle gelegentlich Ausnahmen werfen. Einige Ausnahmen können
+            wahlweise überschrieben werden und andere werden Verwendet um dem Entwickler anzuzeigen das
+            die eigene Struktur der Anwendung überdacht werden sollte.
+        </para>
+
+        <para>Einige Beispiele:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Dispatcher::dispatch()</classname> wird standardmäßig eine Ausnahme werfen
+                    wenn ein ungültiger Controller angefragt wird. Es gibt zwei empfohlene Wege um damit
+                    umzugehen.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>Den <code>useDefaultControllerAlways</code> Parameter setzen.</para>
+
+                        <para>
+                            Im eigenen Frontcontroller, oder dem eigenen Dispatcher, die folgende
+                            Anweisung hinzufügen:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+
+// oder
+
+$dispatcher->setParam('useDefaultControllerAlways', true);
+]]>
+                        </programlisting>
+
+                        <para>
+                            Wenn dieses Flag gesetzt ist, wird der Dispatcher den Standardcontroller und die
+                            Standardaktion verwenden statt eine Ausnahme zu werfen. Der Nachteil dieser Methode
+                            ist das jegliche Schreibfehler die ein Benutzer macht wenn er auf die Site
+                            zugreift, trotzdem aufgelöst werden und die Homepage angezeigt wird, was bei der
+                            Optimierung von Suchmaschienen verherenden Schaden anrichten kann.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Die Ausnahme die von <code>dispatch()</code> geworfen wird, ist eine
+                            <classname>Zend_Controller_Dispatcher_Exception</classname> die den Text
+                            'Invalid controller specified' enthält. Eine der Methoden die in
+                            <link linkend="zend.controller.exceptions.handling">der vorhergehenden Sektion</link>
+                            beschrieben wurden können verwendet werden um die Ausnahme zu fangen und dann zu
+                            einer generellen Fehlerseite oder der Homepage umzuleiten.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Action::__call()</classname> wird eine
+                    <classname>Zend_Controller_Action_Exception</classname> geworfen wenn eine nicht existierende Aktion
+                    einer Methode nicht dargestellt werden kann. Normalerweise wird es gewünscht sein in Fällen
+                    wie diesen eine Standardaktion im Controller zu verwenden. Wege um das zu tun beinhalten:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Eine Subklasse von <classname>Zend_Controller_Action</classname> erstellen und die
+                            <code>__call()</code> Methode überschreiben. Als Beispiel:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_Action extends Zend_Controller_Action
+{
+    public function __call($method, $args)
+    {
+        if ('Action' == substr($method, -6)) {
+            $controller = $this->getRequest()->getControllerName();
+            $url = '/' . $controller . '/index';
+            return $this->_redirect($url);
+        }
+
+        throw new Exception('Ungültige Methode');
+    }
+}
+]]>
+                        </programlisting>
+                        <para>
+                            Das obige Beispiel fängt jede nicht definierte Aktionsmethode ab die aufgerufen wird
+                            und leitet Sie zur Standardaktion im Controller um.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Eine Subklasse von <classname>Zend_Controller_Dispatcher</classname> erstellen und die
+                            <code>getAction()</code> Methode überschreiben um zu prüfen ob die Aktion
+                            existiert. Als Beispiel:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
+{
+    public function getAction($request)
+    {
+        $action = $request->getActionName();
+        if (empty($action)) {
+            $action = $this->getDefaultAction();
+            $request->setActionName($action);
+            $action = $this->formatActionName($action);
+        } else {
+            $controller = $this->getController();
+            $action     = $this->formatActionName($action);
+            if (!method_exists($controller, $action)) {
+                $action = $this->getDefaultAction();
+                $request->setActionName($action);
+                $action = $this->formatActionName($action);
+            }
+        }
+
+        return $action;
+    }
+}
+]]>
+                        </programlisting>
+
+                        <para>
+                            Der obige Code prüft ob die angefragte Aktion in der Controllerklasse existiert ;
+                            wenn nicht wird die Aktion auf die Standardaktion resetiert.
+                        </para>
+
+                        <para>
+                            Diese Methode ist nützlich, weil Sie die Aktion transparent ändert bevor diese
+                            letztendlich dargestellt wird. Trotzdem bedeutet es auch, das Schreibfehler in der
+                            URL trotzdem richtig dargestellt werden, was für die Optimierung von Suchmaschinen
+                            nicht gut ist.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Verwenden von <classname>Zend_Controller_Action::preDispatch()</classname> oder
+                            <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname> um eine ungültige
+                            Aktion zu identifizieren.
+                        </para>
+
+                        <para>
+                            Durch das Erstellen einer Subklasse von <classname>Zend_Controller_Action</classname> und
+                            dem modifizieren von <code>preDispatch()</code>, können alle eigenen Kontroller
+                            geändert werden damit Sie an andere Aktionen weiterleiten oder umleiten bevor
+                            die Aktion letztendlich dargestellt wird. Der Code hierfür schaut ähnlich wie der
+                            Code für das Überschreiben von <code>__call()</code> aus, der oben schon angezeigt
+                            wurde.
+                        </para>
+
+                        <para>
+                            Alternativ kann diese Information in einem globalen Plugin geprüft werden. Das
+                            hat den Vorteil das es unabhängig von Actioncontroller ist; wenn die eigene
+                            Anwendung aus einer Reihe von Actioncontrollern besteht, und nicht alle von der
+                            gleichen Klasse abgeleitet sind, kann diese Methode Kontinuität in der
+                            Handhabung der verschiedenen Klassen bringen.
+                        </para>
+
+                        <para>
+                            Als Beispiel:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $front      = Zend_Controller_Front::getInstance();
+        $dispatcher = $front->getDispatcher();
+        $class      = $dispatcher->getControllerClass($request);
+        if (!$controller) {
+            $class = $dispatcher->getDefaultControllerClass($request);
+        }
+
+        $r      = new ReflectionClass($class);
+        $action = $dispatcher->getActionMethod($request);
+
+        if (!$r->hasMethod($action)) {
+            $defaultAction  = $dispatcher->getDefaultAction();
+            $controllerName = $request->getControllerName();
+            $response       = $front->getResponse();
+            $response->setRedirect('/' . $controllerName
+                                  . '/' . $defaultAction);
+            $response->sendHeaders();
+            exit;
+        }
+    }
+}
+]]>
+                        </programlisting>
+
+                        <para>
+                            In diesem Beispiel wird geprüft ob die angefragte Aktion im Controller vorhanden ist.
+                            Wenn dem nicht so ist, wird auf die Standardaktion im Controller umgeleitet und
+                            die Ausführung des Sktipts sofort beendet.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

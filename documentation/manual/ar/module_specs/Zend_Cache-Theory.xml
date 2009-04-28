@@ -1,0 +1,129 @@
+<sect1 id="zend.cache.theory">
+    <title>مفهوم الـ caching </title>
+    <para>
+        هناك ثلاث مفاهيم رئيسية فى Zend_Cache. الأول هو المعرف المميز و هو عيارة عن string
+و الذى يستخدم لتعريف البيانات المسجلة فى الـ cache.
+الثانى هو التعليمة <code>'lifeTime'</code> كما رأيتها فى المثال السابق, هى تعرف الفترة الزمنية التى
+يتم اعتبار البيانات المحفوظة فى الـ cache و بهذا المعرف قابلة للإستخدام "طازجة" .
+المفهوم الثالث هو التنفيذ الشرطى للأكواد, حيث يتم اهمال جزء من الكود و لا يتم تنفيذه و هذا يزيد من كفائة الأداء (performance) .
+الدالة الأساسية (<code>()Zend_Cache_Core::get</code>) تم تصميمها لتعيد false
+ عندما لا تجد البيانات المطلوبة فى الـ cache قابلة للإستخدام .
+هذا يسمح للمستخدم النهائى (انت المبرمج) من تحديد جزء من الكود الذى يريد عمل cache له داخل جملة
+<code>{ ... }()if</code> حيث ان الشرط هو هذه الدالة من Zend_Cache .
+فى نهاية هذه البلوكات يجب ان تقوم بحفظ الناتج , بإستخدام
+(<code>()Zend_Cache_Core::save</code>).
+    </para>
+    <note><para>
+        عملية التنفيذ الشرطى للأكواد لا تكن مهمة فى بعض الحالات ( مثل إستخدام الـ frontend المسمى
+<code>Function</code> ) حيث سيكون الجزء المنطقى من الكود معرف داخل الـ frontend نفسه.
+    </para></note>
+    <note><para>
+        المصطلح 'Cache hit' و الذى رأيته فى المثال نستخدمه للتعبير عن انه تم إيجاد بيانت فى الـ cache تنتمى
+لهذا المعرف و هذه البيانات قابلة للإستخدام و "طازجة" (بمعنى اخر لم تنتهى فترة صلاحيتها).
+المصطلح 'cache miss' هو عكس ما سبق, فعندما يحدث cache miss يجب ان تقوم بإنتاج بياناتك من
+جديد (كما يحدث فى الأوضاع الطبيعية) ثم تقم بعمل cache لها .
+و عندما يحدث cache hit تقم الـ backend تلقائياً بجلب البيانات من الـ cache .
+
+    </para></note>
+    <sect2 id="zend.cache.factory">
+        <title>الـ factory method فى <code>Zend_Cache</code></title>
+        <para>
+            طريقة جيدة لإنشاء frontend instance قابل لإستخدام من <code>Zend_Cache</code> نستعرضها فى
+المثال التالى :
+            <programlisting role="php"><![CDATA[<?php
+
+# We "load" the Zend_Cache factory
+require 'Zend/Cache.php';
+
+# We choose a backend (for example 'File' or 'Sqlite'...)
+$backendName = '[...]';
+
+# We choose a frontend (for example 'Core', 'Output', 'Page'...)
+$frontendName = '[...]';
+
+# We set an array of options for the choosen frontend
+$frontendOptions = array([...]);
+
+# We set an array of options for the choosen backend
+$backendOptions = array([...]);
+
+# We make the good instance
+# (of course, the two last arguments are optional)
+$cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $backendOptions);
+
+?>]]></programlisting>
+        </para>
+        <para>
+            فى الأمثلة التالية سنعتبر ان المتغير <code>cache$</code> يحتوى frontend instance صالح للإستخدام
+كما هو موضح فى المثال السابق, و انك تفهم كيفية تمرير parameters للـ backends التى تود إستخدامها.
+        </para>
+        <note><para>
+            دائما إستخدم <code>()Zend_Cache::factory</code> لتنشئ frontend instance .
+إنشاء  الـ frontend instance و الـ backends instance بنفسك مباشرة لن يعمل كما تتوقع.
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.cache.tags">
+        <title>إستخدام الـ tags</title>
+        <para>
+            الـ tags طرق لتقسيم البيانات فى الـ cache الى اقسام معرفة, عندما تقم بحفظ cache بإستخدام
+<code>()save</code> يمكنك ان تقم بتمرير array تحتوى على الـ tags التى تتوافق مع هذا الـ
+record (او البيانت المخزنة فى الـ cache ) .
+بالتالى ستستطيع حذف كل الـ cache records المنسوبة الى tag او مجموعة tags محددة.
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+
+?>]]></programlisting>
+    </sect2>
+    <sect2 id="zend.cache.clean">
+        <title>تنظيف الـ cache</title>
+        <para>
+            لحذف او تحديد معرف cache على انه غير قابل للإستخدام, يمكنك استخدام <code>()remove</code>
+ كما فى المثال التالى :
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->remove('idToRemove');
+
+?>]]></programlisting>
+        <para>
+            لحذف او تحديد اكثر من معرف cache على انهم غير قابلين للإستخدام, يمكنك استخدام
+<code>()clean</code> , على سبيل المثال يمكنك حذف كل الـ cache records .
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+// clean all records
+$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+// clean only outdated
+$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
+
+?>]]>   </programlisting>
+        <para>
+            إن اردت حذف الـ cache records التى تنتمى الى tags محددة, مثلا 'tagA' و 'tagC'
+يمكنك استخدام :
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
+
+?>]]>   </programlisting>
+        <para>
+            الـ cleaning modes المتوفرة هى :
+<code>CLEANING_MODE_ALL</code> تقوم بحذف كل الـ cache records الموجودة
+
+,  <code>CLEANING_MODE_OLD</code> تقوم بحذف الـ records القديمة او الغير
+ صالحة للإستخدام
+,
+ <code>CLEANING_MODE_MATCHING_TAG</code> تقوم بحذف كل الـ records التى تنتمى الى مجموعة tags محددة
+,<code>CLEANING_MODE_NOT_MATCHING_TAG</code> تقوم بحذف كل الـ records
+التى لا تنتمى الى مجموعة الـ tags الممررة.
+
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

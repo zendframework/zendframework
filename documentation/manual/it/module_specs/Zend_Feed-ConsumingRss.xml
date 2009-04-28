@@ -1,0 +1,140 @@
+<sect1 id="zend.feed.consuming-rss">
+    <title>Lettura di un feed RSS</title>
+
+    <para>
+        Leggere un feed RSS è tanto semplice quanto creare un'istanza di un nuovo oggetto <code>Zend_Feed_Rss</code> con l'URL del feed:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+$channel = new Zend_Feed_Rss('http://rss.example.com/channelName');]]>
+    </programlisting>
+    <para>
+        Se qualche errore si verifica nel recuperare il feed, verrà generata un'eccezione <code>Zend_Feed_Exception</code>.
+    </para>
+
+    <para>
+        Una volta a disposizione un oggetto feed si ha accesso ad ognuna delle proprietà standard di un canale RSS (channel), direttamente dall'oggetto:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+echo $channel->title();]]>
+    </programlisting>
+    <para>
+        Si noti la sintassi della funzione.
+        <code>Zend_Feed</code> utilizza una convenzione per trattare le proprietà come oggetti XML se sono richieste con la sintassi "getter" di una variabile (<code>$obj->property</code>) e come stringhe se sono richieste con la sintassi tipica di un metodo (<code>$obj->property()</code>).
+        Questo consente l'accesso al testo completo di ogni singolo nodo così come consente pieno accesso a tutti gli elementi figli del nodo stesso.
+    </para>
+
+    <para>
+        Se le proprietà di un canale contengono attributi è possibile accedervi utilizzando la sintassi tipica di un array in PHP:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+echo $channel->category['domain'];]]>
+    </programlisting>
+    <para>
+        Poiché gli attributi XML non possono contenere figli, la sintassi caratteristica di un metodo non è necessaria per accedere ai valori degli attributi.
+    </para>
+
+    <para>
+        Più comunemente si desidera scorrere il feed ed eseguire qualche azione con i suoi elementi.
+        <code>Zend_Feed_Abstract</code> implementa l'interfaccia PHP <code>Iterator</code>, dunque stampare tutti i titoli degli articoli consiste esclusivamente in:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+foreach ($channel as $item) {
+    echo $item->title() . "\n";
+}]]>
+    </programlisting>
+    <para>
+        Se non si ha familiarità con un feed RSS, ecco gli elementi standard che ci si può aspettare essere disponibili in un canale RSS o un singolo elemento RSS (entry).
+    </para>
+
+    <para>
+        Tag obbligatori del canale (<code>channel</code>):
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Il nome del canale</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - L'URL del sito web corrispondente al canale</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Una o alcune frasi descrittive del canale</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Tipici tag opzionali del canale:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>pubDate</code> - La data di pubblicazione del contenuto, nel formato RFC 822</para>
+            </listitem>
+            <listitem>
+                <para><code>language</code> - La lingua nella quale è scritto il canale</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Una o più categorie (specificate da più tag) alle quali appartiene il canale</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Gli elementi (<code>&lt;item&gt;</code>) di un RSS non contengono particolari tag obbligatori.
+        Tuttavia, almeno uno tra i tag <code>title</code> o <code>description</code> deve essere presente.
+    </para>
+
+    <para>
+        Tipici tag di un elemento:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Il titolo dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - L'URL dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Un riassunto dell'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - L'indirizzo email dell'autore</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Una o più categorie alle quali appartiene l'elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>comments</code> - L'URL dei commenti riguardanti questo elemento</para>
+            </listitem>
+            <listitem>
+                <para><code>pubDate</code> - La data di pubblicazione dell'elemento, nel formato RFC 822</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        E' possibile verificare la presenza di un elemento all'interno del codice utilizzando:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+if ($item->propname()) {
+    // ... proceed.
+}]]>
+    </programlisting>
+
+    <para>
+        Se in alternativa si utilizza <code>$item->propname</code>, verrà sempre restituito un oggetto vuoto valutato come <code>TRUE</code>, dunque il controllo non sarà eseguito correttamente.
+    </para>
+
+    <para>
+        Per ulteriori informazioni, le specifiche ufficiali del formato RSS 2.0 sono disponibili all'indirizzo:
+        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

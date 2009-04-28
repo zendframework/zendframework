@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.json">
+    <title>JSON</title>
+
+    <para>
+        JSON responses are rapidly becoming the response of choice when dealing
+        with AJAX requests that expect dataset responses; JSON can be
+        immediately parsed on the client-side, leading to quick execution.
+    </para>
+
+    <para>
+        The JSON action helper does several things:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Disables layouts if currently enabled.
+        </para></listitem>
+
+        <listitem>
+            <para>
+                Optionally, an array of options to pass as the second argument
+                to <classname>Zend_Json::encode()</classname>. This array of options
+                allows enabling layouts and encoding using
+                <classname>Zend_Json_Expr</classname>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$this->_helper->json($data, array('enableJsonExprFinder' => true));
+]]></programlisting>
+        </listitem>
+
+        <listitem><para>
+                Disables the ViewRenderer if currently enabled.
+        </para></listitem>
+
+        <listitem><para>
+                Sets the 'Content-Type' response header to 'application/json'.
+        </para></listitem>
+
+        <listitem><para>
+                By default, immediately returns the response, without waiting
+                for the action to finish execution.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Usage is simple: either call it as a method of the helper broker, or
+        call one of the methods <code>encodeJson()</code> or
+        <code>sendJson()</code>:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // do some processing...
+        // Send the JSON response:
+        $this->_helper->json($data);
+
+        // or...
+        $this->_helper->json->sendJson($data);
+
+        // or retrieve the json:
+        $json = $this->_helper->json->encodeJson($data);
+    }
+}
+]]></programlisting>
+
+    <note>
+        <title>Keeping Layouts</title>
+
+        <para>
+            If you have a separate layout for JSON responses -- perhaps to wrap
+            the JSON response in some sort of context -- each method in the JSON
+            helper accepts a second, optional argument: a flag to enable or
+            disable layouts. Passing a boolean <code>true</code> value will keep
+            layouts enabled:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->_helper->json($data, true);
+]]></programlisting>
+
+        <para>
+            Optionally, you can pass an array as the second parameter. This
+            array may contain a variety of options, including the
+            <code>keepLayouts</code> option:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->_helper->json($data, array('keepLayouts' => true);
+]]></programlisting>
+    </note>
+
+    <note>
+        <title>Enabling encoding using Zend_Json_Expr</title>
+
+        <para>
+            <classname>Zend_Json::encode()</classname> allows the encoding of native JSON
+            expressions using <code>Zend_Json_Expr</code> objects. This option
+            is disabled by default. To enable this option, pass a boolean
+            <code>true</code> value to the <code>enableJsonExprFinder</code>
+            option:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->_helper->json($data, array('enableJsonExprFinder' => true);
+]]></programlisting>
+
+        <para>
+            If you desire to do this, you <emphasis>must</emphasis> pass an
+            array as the second argument. This also allows you to combine other
+            options, such as the <code>keepLayouts</code> option. All such
+            options are then passed to <classname>Zend_Json::encode()</classname>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->_helper->json($data, array(
+    'enableJsonExprFinder' => true,
+    'keepLayouts'          => true,
+));
+]]></programlisting>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.mail.encoding">
+    <title>エンコーディング</title>
+    <para>
+        テキストおよび HTML メッセージの本文は、デフォルトでは
+   quotedprintable 方式でエンコードされます。
+        メッセージヘッダーもbase64を <code>setHeaderEncoding()</code> で指定しなければ
+   quotedprintable 方式でエンコードされます。
+        その他の添付ファイルは、デフォルトでは
+        base64 でエンコードされますが、<code>addAttachment()</code> のコール時に変更したり
+        MIME パートオブジェクトに後から代入して変更することもできます。
+        7Bit エンコーディングおよび 8Bit エンコーディングは、
+        現在はバイナリデータにのみ適用可能です。
+    </para>
+    <para>
+        <classname>Zend_Mail_Transport_Smtp</classname> は、行頭がドット 1 文字あるいはドット
+        2 文字の場合にその行をエンコードします。これにより、
+        SMTP プロトコルに違反するメールを作成しないようにします。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

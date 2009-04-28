@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.audioscrobbler">
+
+    <title>Zend_Service_Audioscrobbler</title>
+
+    <sect2 id="zend.service.audioscrobbler.introduction">
+
+        <title>Introduction</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> is a simple API for using the Audioscrobbler REST Web Service. The
+            Audioscrobbler Web Service provides access to its database of Users, Artists, Albums, Tracks, Tags, Groups,
+            and Forums. The methods of the <classname>Zend_Service_Audioscrobbler</classname> class begin with one of these terms.
+            The syntax and namespaces of the Audioscrobbler Web Service are mirrored in
+            <classname>Zend_Service_Audioscrobbler</classname>. For more information about the Audioscrobbler REST Web Service,
+            please visit the <ulink url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
+            site</ulink>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.users">
+
+        <title>Users</title>
+
+        <para>
+            In order to retrieve information for a specific user, the <code>setUser()</code> method is first used to
+            select the user for which data are to be retrieved. <classname>Zend_Service_Audioscrobbler</classname> provides
+            several methods for retrieving data specific to a single user:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>userGetProfileInformation()</code>: Returns a SimpleXML object containing the current
+                        user's profile information.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopArtists()</code>: Returns a SimpleXML object containing a list of the current
+                        user's most listened to artists.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopAlbums()</code>: Returns a SimpleXML object containing a list of the current
+                        user's most listened to albums.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTracks()</code>: Returns a SimpleXML object containing a list of the current
+                        user's most listened to tracks.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTags()</code>: Returns a SimpleXML object containing a list of tags most applied
+                        by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForArtist()</code>: Requires that an artist be set via
+                        <code>setArtist()</code>. Returns a SimpleXML object containing the tags most applied to the
+                        current artist by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForAlbum()</code>: Requires that an album be set via
+                        <code>setAlbum()</code>. Returns a SimpleXML object containing the tags most applied to the
+                        current album by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForTrack()</code>: Requires that a track be set via
+                        <code>setTrack()</code>. Returns a SimpleXML object containing the tags most applied to the
+                        current track by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetFriends()</code>: Returns a SimpleXML object containing the user names of the
+                        current user's friends.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetNeighbours()</code>: Returns a SimpleXML object containing the user names of
+                        people with similar listening habits to the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentTracks()</code>: Returns a SimpleXML object containing the 10 tracks most
+                        recently played by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentBannedTracks()</code>: Returns a SimpleXML object containing a list of the 10
+                        tracks most recently banned by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentLovedTracks()</code>: Returns a SimpleXML object containing a list of the 10
+                        tracks most recently loved by the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentJournals()</code>: Returns a SimpleXML object containing a list of the
+                        current user's most recent journal entries.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetWeeklyChartList()</code>: Returns a SimpleXML object containing a list of weeks for
+                        which there exist Weekly Charts for the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyArtistChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Artist Chart for the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyAlbumChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Album Chart for the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyTrackChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Track Chart for the current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>: Returns a SimpleXML object
+                        containing the Weekly Artist Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>: Returns a SimpleXML object
+                        containing the Weekly Album Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        current user.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Returns a SimpleXML object
+                        containing the Weekly Track Chart from <code>$fromDate</code> to <code>$toDate</code> for the
+                        current user.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.service.audioscrobbler.users.example.profile_information">
+
+            <title>Retrieving User Profile Information</title>
+
+            <para>
+                In this example, we use the <code>setUser()</code> and <code>userGetProfileInformation()</code> methods
+                to retrieve a specific user's profile information:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// Set the user whose profile information we want to retrieve
+$as->setUser('BigDaddy71');
+// Retrieve BigDaddy71's profile information
+$profileInfo = $as->userGetProfileInformation();
+// Display some of it
+print "Information for $profileInfo->realname "
+    . "can be found at $profileInfo->url";
+]]></programlisting>
+
+        </example>
+
+        <example id="zend.service.audioscrobbler.users.example.weekly_artist_chart">
+
+            <title>Retrieving a User's Weekly Artist Chart</title>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// Set the user whose profile weekly artist chart we want to retrieve
+$as->setUser('lo_fye');
+// Retrieves a list of previous weeks for which there are chart data
+$weeks = $as->userGetWeeklyChartList();
+if (count($weeks) < 1) {
+    echo 'No data available';
+}
+sort($weeks); // Order the list of weeks
+
+$as->setFromDate($weeks[0]); // Set the starting date
+$as->setToDate($weeks[0]); // Set the ending date
+
+$previousWeeklyArtists = $as->userGetPreviousWeeklyArtistChart();
+
+echo 'Artist Chart For Week Of '
+   . date('Y-m-d h:i:s', $as->from_date)
+   . '<br />';
+
+foreach ($previousWeeklyArtists as $artist) {
+    // Display the artists' names with links to their profiles
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+}
+]]></programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.artists">
+
+        <title>Artists</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> provides several methods for retrieving data about a specific
+            artist, specified via the <code>setArtist()</code> method:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>artistGetRelatedArtists()</code>: Returns a SimpleXML object containing a list of
+                        Artists similar to the current Artist.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopFans()</code>: Returns a SimpleXML object containing a list of Users who
+                        listen most to the current Artist.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopTracks()</code>: Returns a SimpleXML object containing a list of the current
+                        Artist's top-rated Tracks.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopAlbums()</code>: Returns a SimpleXML object containing a list of the current
+                        Artist's top-rated Albums.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopTags()</code>: Returns a SimpleXML object containing a list of the Tags most
+                        frequently applied to current Artist.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.service.audioscrobbler.artists.example.related_artists">
+
+            <title>Retrieving Related Artists</title>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// Set the artist for whom you would like to retrieve related artists
+$as->setArtist('LCD Soundsystem');
+// Retrieve the related artists
+$relatedArtists = $as->artistGetRelatedArtists();
+foreach ($relatedArtists as $artist) {
+    // Display the related artists
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+}
+]]></programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.tracks">
+
+        <title>Tracks</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> provides two methods for retrieving data specific to a single
+            track, specified via the <code>setTrack()</code> method:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>trackGetTopFans()</code>: Returns a SimpleXML object containing a list of Users who
+                        listen most to the current Track.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>trackGetTopTags()</code>: Returns a SimpleXML object containing a list of the Tags most
+                        frequently applied to the current Track.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.tags">
+
+        <title>Tags</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> provides several methods for retrieving data specific to a single
+            tag, specified via the <code>setTag()</code> method:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>tagGetOverallTopTags()</code>: Returns a SimpleXML object containing a list of Tags most
+                        frequently used on Audioscrobbler.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopArtists()</code>: Returns a SimpleXML object containing a list of Artists to whom
+                        the current Tag was most frequently applied.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopAlbums()</code>: Returns a SimpleXML object containing a list of Albums to which
+                        the current Tag was most frequently applied.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopTracks()</code>: Returns a SimpleXML object containing a list of Tracks to which
+                        the current Tag was most frequently applied.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.groups">
+
+        <title>Groups</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> provides several methods for retrieving data specific to a single
+            group, specified via the <code>setGroup()</code> method:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentJournals()</code>: Returns a SimpleXML object containing a list of recent
+                        journal posts by Users in the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetWeeklyChart()</code>: Returns a SimpleXML object containing a list of weeks for
+                        which there exist Weekly Charts for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyArtistChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Artist Chart for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyAlbumChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Album Chart for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyTrackChart()</code>: Returns a SimpleXML object containing the most
+                        recent Weekly Track Chart for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>: Requires
+                        <code>setFromDate()</code> and <code>setToDate()</code>. Returns a SimpleXML object containing
+                        the Weekly Artist Chart from the current fromDate to the current toDate for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>: Requires
+                        <code>setFromDate()</code> and <code>setToDate()</code>. Returns a SimpleXML object containing
+                        the Weekly Album Chart from the current fromDate to the current toDate for the current Group.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Returns a SimpleXML object
+                        containing the Weekly Track Chart from the current fromDate to the current toDate for the
+                        current Group.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.forums">
+
+        <title>Forums</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> provides a method for retrieving data specific to a single forum,
+            specified via the <code>setForum()</code> method:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>forumGetRecentPosts()</code>: Returns a SimpleXML object containing a list of recent posts
+                        in the current forum.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

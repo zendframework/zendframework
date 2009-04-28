@@ -1,0 +1,26 @@
+<sect1 id="zend.form.introduction">
+    <title>Zend_Form</title>
+
+    <para>
+        Komponent Zend_Form upraszcza tworzenie i obsługę formularzy w twojej
+        aplikacji. Zapewnia realizację następujących zadań:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>Filtrowanie i weryfikację wprowadzonych informacji</para></listitem>
+        <listitem><para>Ustalanie kolejności elementów</para></listitem>
+        <listitem><para>Renderowanie elementów i formularzy</para></listitem>
+        <listitem><para>Grupowanie elementów i formularzy</para></listitem>
+        <listitem><para>Konfigurację elementów i formularzy</para></listitem>
+    </itemizedlist>
+
+    <para>
+        Komponent jest w dużym stopniu oparty o inne komponenty Zend Framework
+        takie jak <code>Zend_Config</code>, <code>Zend_Validate</code>,
+        <code>Zend_Filter</code>, <code>Zend_Loader_PluginLoader</code> oraz
+        opcjonalnie <code>Zend_View</code>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

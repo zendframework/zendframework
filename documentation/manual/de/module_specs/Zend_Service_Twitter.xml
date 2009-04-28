@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.twitter" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Zend_Service_Twitter</title>
+
+    <sect2 id="zend.service.twitter.introduction">
+        <title>Einführung</title>
+
+        <para>
+            <classname>Zend_Service_Twitter</classname> bietet einen Client für die
+            <ulink url="http://apiwiki.twitter.com/REST+API+Documentation">REST API von Twitter</ulink>.
+            <classname>Zend_Service_Twitter</classname> erlaubt es eine öffentliche Zeitachse abzufragen und wenn man einen
+            Benutzernamen und ein Passwort für Twitter angibt, ist es auch erlaubt den eigenen Status zu
+            erhalten und zu aktualisieren, Freunden zu antworten, Nachrichten an Freunde schicken, Tweets
+            als Favoriten markieren und vieles mehr.
+        </para>
+
+        <para>
+            <classname>Zend_Service_Twitter</classname> implementiert einen REST Service und alle Methoden geben eine
+            Instanz von <classname>Zend_Rest_Client_Result</classname> zurück.
+        </para>
+
+        <para>
+            <classname>Zend_Service_Twitter</classname> ist in Untersektionen geteilt damit man einfachst erkennen kann
+            welcher Typ von Aufrufen angefragt wird.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>account</code>, stellt sicher das die eigenen Zugangsdaten gültig sind, prüft das
+                    API Limit und beendet die aktuelle Session für den authentifizierten Benutzer.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>status</code>, empfängt die öffentlichen und die Zeitlinien von Benutzern, und
+                    erlaubt es Sie anzusehen, zu aktualsieren, zu zerstören und Antworten für den
+                    authentifizierten Benutzer zu empfangen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>user</code>, empfangen von Freunden, Verfolger des authentifizierten Benutzers.
+                    Mit der show Methode kann man erweiterte Informationen über den angegebenen Benutzer
+                    erhalten.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>directMessage</code>, empfängt die direkten Nachrichten des authentifizierten Benutzers
+                    und erlaubt es neue direkte Nachrichten zu senden und zu löschen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>friendship</code>, erstellt oder entfernt eine Freundschaft für den authentifizierten
+                    Benutzer.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>favorite</code>, auflisten, erstellen oder entfernen eines favorisierten Tweets.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.twitter.authentication">
+        <title>Authentifizierung</title>
+
+        <para>
+            Mit der Ausnahme des Holens der öffentlichen Zeitlinie benötigt <classname>Zend_Service_Twitter</classname>
+            eine Authentifizierung um zu funktionieren. Twitter verwendet aktuell eine
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">HTTP Basis Authentifizierung</ulink>.
+            Man kann den eigenen Benutzernamen oder eine registrierte Email mit dem Passwort, für das Login bei
+            Twitter, übergeben.
+        </para>
+
+        <example id="zend.service.twitter.authentication.example">
+            <title>Erstellung der Twitter Klasse</title>
+            <para>
+                Das folgende Codebeispiel zeigt wie man den Twitter Service erstellt, den Benutzernamen und
+                das Passwort übergibt, und dann überprüft ob Sie korrekt sind.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+// Prüft die Angaben mit Twitter
+$response = $twitter->account->verifyCredentials();
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.twitter.accout">
+        <title>Account Methoden</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>verifyCredentials</code>, verwende diese Methode um zu Testen ob die angegebenen
+                    Benutzerdaten gültig sind, und das mit einem minimalen Overhead.
+                </para>
+
+                <example id="zend.service.twitter.account.verifycredentails">
+                    <title>Die Angaben prüfen</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->account->verifyCredentials();
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>endSession</code>, verwende diese Methode um Benutzer aus der Clientanwendung
+                    abzumelden.
+                </para>
+
+                <example id="zend.service.twitter.account.endsession">
+                    <title>Beenden von Sessions</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->account->endSession();
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>rateLimitStatus</code>, gibt die restliche anzahl von API Anfragen zurück die der
+                    authentifizierte Benutzer noch hat, bevor das API Limit für die aktuelle Stunde erreicht
+                    ist.
+                </para>
+
+                <example id="zend.service.twitter.account.ratelimitstatus">
+                    <title>Status des Rating Limits</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->account->rateLimitStatus();
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.twitter.status">
+        <title>Status Methoden</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>publicTimeline</code>, gibt die 20 letzten Statusmeldungen von nicht geschützten
+                    Benutzern mit einem eigenen Benutzericon zurück. Die öffentliche Zeitlinie wird von
+                    Twitter alle 60 Sekunden gecacht.
+                </para>
+
+                <example id="zend.service.twitter.status.publictimeline">
+                    <title>Empfangen der öffentlichen Zeitlinie</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->publicTimeline();
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>friendsTimeline</code>, gibt die 20 letzten Statusmeldungen zurück die von
+                    authentifizierten Benutzer gesendet wurden und den Freunden dieser Benutzer.
+                </para>
+
+                <example id="zend.service.twitter.status.friendstimeline">
+                    <title>Empfangen der Zeitlinie von Freunden</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->friendsTimeline();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>friendsTimeline</code> Methode akzeptiert ein Array von optionalen Parameters
+                    um die Abfrage zu verändern.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die zurückgegeben Ergebnisse auf jene Statusmeldungen
+                            ein die nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden alt) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, die Seite die man zurückbekommen will.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>userTimeline</code>, gibt die 20 letzten Statusmeldungen zurück die von
+                    authentifizierten Benutzern geschrieben wurden.
+                </para>
+
+                <example id="zend.service.twitter.status.usertimeline">
+                    <title>Empfangen der Zeitlinie von Benutzern</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->userTimeline();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>userTimeline</code> Methode akzeptiert ein Array von optionalen Parametern
+                    um die Abfrage zu verändern.</para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, spezifiziert die ID oder den Bildschirmnamen des Benutzers für
+                            den die friends_timeline zurückzugeben ist.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die zurückzugebenden Ergebnisse auf jene Stati ein
+                            die nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden als) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite zurückgegeben werden soll.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>count</code>, spezifiziert die Anzahl der Stati die man erhalten will.
+                            Kann nicht größer als 200 sein.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>show</code>, gibt einen einzelnen Status zurück, der durch den ID Parameter, wie
+                    anbei, spezifiziert wird. Der Author des Status wird auch zurückgegeben. Diese Methode
+                    benötigt eine Tweet ID die an Sie übergeben wird.
+                </para>
+
+                <example id="zend.service.twitter.status.show">
+                    <title>Den Status eines Benutzers sehen</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->show(1234);
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>update</code>, aktualisiert den Status des authentifizierten Benutzers. Diese
+                    Methode erwartet das der aktualisierte Status übergeben wird den man an Twitter übermitteln
+                    will. Ein zweiter optionaler Parameter ist die ID des Tweets auf den man antwortet.
+                </para>
+
+                <example id="zend.service.twitter.status.update">
+                    <title>Aktualisieren des Benutzerstatus</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->update('Mein größter Tweet');
+]]>
+                    </programlisting>
+                </example>
+
+                <para>Die <code>update</code> Methode akzeptiert einen zweiten optionalen Parameter.</para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>in_reply_to_status_id</code>, die ID eines bestehenden Status auf den dieser
+                            Status als Antwort gesendet werden soll.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>replies</code>, gibt die 20 letzten Antworten/@replies (Statusaktualisierungen die
+                    mit @username anfangen) für den authentifizierten Benutzer zurück.
+                </para>
+
+                <example id="zend.service.twitter.status.replies">
+                    <title>Zeigt Benutzerantworten</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->replies();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>replies</code> Methode akzeptiert ein Array von optionalen Parametern um die
+                    Anfrage zu verändern.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die Ergebnisse die man erhält auf jene ein, deren Stati
+                            nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden alt) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>since_id</code>, gibt nur Stati zurück die eine größere ID (das ist die
+                            aktuellere) als die spezifizierte ID haben.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, entfernt den Status der durch den benötigten ID Parameter
+                    spezifiziert ist.
+                </para>
+
+                <example id="zend.service.twitter.status.destroy">
+                    <title>Löschen eines Benutzerstatus</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->status->destroy(12345);
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+        </itemizedlist>
+
+    </sect2>
+
+     <sect2 id="zend.service.twitter.user">
+        <title>Benutzermethoden</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>friends</code>, gibt bis zu 100 Freunde des authentifizierten Benutzers zurück, die
+                    zuletzt aktualisiert haben, und jeden von Ihnen mit dem aktuellen Status.
+                </para>
+
+                <example id="zend.service.twitter.user.friends">
+                    <title>Empfangen von Benutzerfreunden</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->user->friends();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>friends</code> Methode akzeptiert ein Array von optionalen Parameter um die
+                    Abfrage zu verändern.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, spezifiziert die ID oder den Bildschirmnamen des Benutzers von dem
+                            die Liste an Freunden zurückgegeben werden soll.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die zurückzugebenden Ergebnisse auf jene Stati ein
+                            die nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden als) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>followers</code>, gibt die Verfolger des authentifizierten Benutzers zurück, und
+                    jeden von Ihnen mit seinem aktuellen Status.
+                </para>
+
+                <example id="zend.service.twitter.user.followers">
+                    <title>Empfangen der Verfolger eines Benutzers</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->user->followers();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>followers</code> Methode akzeptiert ein Array von optionalen Parametern die
+                    die Anfrage verändern.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, spezifiziert die ID oder den Bildschirmnamen des Benutzers von dem
+                            die Liste an Verfolgern zurückgegeben werden soll.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>show</code>, gibt erweiterte Informationen über einen angegebenen Benutzer zurück,
+                    der durch eine ID oder einen Bildschirmnamen spezifiziert wird wie durch den anbei
+                    benötigten ID Parameter.
+                </para>
+
+                <example id="zend.service.twitter.user.show">
+                    <title>Zeigt Benutzerinformationen</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->user->show('myfriend');
+]]>
+                    </programlisting>
+                </example>
+
+            </listitem>
+
+        </itemizedlist>
+
+    </sect2>
+
+    <sect2 id="zend.service.twitter.directmessage">
+        <title>Methoden zur direkten Benachrichtigung</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>messages</code>, gibt eine Liste der 20 letzten direkten Nachrichten für den
+                    authentifizierten Benutzer zurück.
+                </para>
+
+                <example id="zend.service.twitter.directmessage.messages">
+                    <title>Empfangen der letzten empfangenen direkten Nachrichten</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->directMessage->messages();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>message</code> Methode akzeptiert ein Array von optionalen Parametern um
+                    die Anfrage zu verändern.
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>since_id</code>, gibt nur direkte Nachrichten mit einer ID zurück, die
+                            größer als (das ist aktueller als) die spezifizierte ID sind.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die zurückzugebenden Ergebnisse auf jene Stati ein
+                            die nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden als) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>sent</code>, gibt eine Liste der 20 letzten direkten Nachrichten zurück die vom
+                    authentifizierten Benutzer gesendet wurden.
+                </para>
+
+                <example id="zend.service.twitter.directmessage.sent">
+                    <title>Empfangen der letzten gesendeten direkten Nachrichten</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->directMessage->sent();
+]]>
+                    </programlisting>
+                </example>
+
+                <para>
+                    Die <code>sent</code> Methode akzeptiert ein Array von optionalen Parametern um die
+                    Abfrage zu verändern.
+                </para>
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>since_id</code>, gibt nur direkte Nachrichten mit einer ID zurück, die
+                            größer als (das ist aktueller als) die spezifizierte ID sind.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>since</code>, grenzt die zurückzugebenden Ergebnisse auf jene Stati ein
+                            die nach dem spezifizierten Datum/Zeit (bis zu 24 Stunden als) erstellt wurden.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>new</code>, sendet eine neue direkte Nachricht vom authentifizierten Benutzer zum
+                    spezifizierten Benutzer. Benötigt sowohl den Benutzer also auch den Text Parameter wie
+                    unten gezeigt.
+                </para>
+
+                <example id="zend.service.twitter.directmessage.new">
+                    <title>Senden einer direkten Nachricht</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->directMessage->new('myfriend', 'mymessage');
+]]>
+                    </programlisting>
+                </example>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, entfernt eine direkte Nachricht die im benötigten ID Parameter
+                    spezifiziert wird. Der authentifizierte Benutzer muß der Empfänger der spezifizierten
+                    direkten Nachricht sein.
+                </para>
+
+                <example id="zend.service.twitter.directmessage.destroy">
+                    <title>Löschen einer direkten Nachricht</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->directMessage->destroy(123548);
+]]>
+                    </programlisting>
+                </example>
+
+            </listitem>
+
+        </itemizedlist>
+
+    </sect2>
+
+    <sect2 id="zend.service.twitter.friendship">
+        <title>Methoden für die Freundschaft</title>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>create</code>, befreundet den im ID Parameter spezifizierten Benutzer mit dem
+                    authentifizierten Benutzer.
+                </para>
+
+                <example id="zend.service.twitter.friendship.create">
+                    <title>Erstellung eines Freundes</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->friendship->create('mynewfriend');
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, beendet die Freundschaft des im ID Parameter spezifizierten
+                    Benutzers, mit dem authentifizierten Benutzer.
+                </para>
+
+                <example id="zend.service.twitter.friendship.destroy">
+                    <title>Löschen eines Freundes</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->friendship->destroy('myoldfriend');
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>exists</code>, tested ob eine Freundschaft zwischen dem authentifizierten Benutzer
+                    und dem übergebenen Benutzer existiert.
+                </para>
+
+                <example id="zend.service.twitter.friendship.exists">
+                    <title>Prüfen ob eine Freundschaft existiert</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->friendship->exists('myfriend');
+]]>
+                    </programlisting>
+                </example>
+
+            </listitem>
+
+        </itemizedlist>
+
+    </sect2>
+
+    <sect2 id="zend.service.twitter.favorite">
+        <title>Methoden für Favoriten</title>
+
+        <itemizedlist>
+
+            <listitem>
+                <para>
+                    <code>favorites</code>, gibt die 20 letzten Stati von Favoriten für den authentifizierten
+                    oder durch den ID Parameter spezifizierten Benutzer zurück.
+                </para>
+
+                <example id="zend.service.twitter.favorite.favorites">
+                    <title>Favoriten empfangen</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->favorite->favorites();
+]]>
+                    </programlisting>
+                </example>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <code>id</code>, die ID oder der Bildschirmname des Benutzers von dem
+                            die Liste der bevorzugten Stati zurückgegeben werden soll.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>page</code>, welche Seite soll zurückgegeben werden.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>create</code>, favorisiert den mit dem ID Parameter spezifizierten Status für den
+                    authentifizierten Benutzer
+                </para>
+
+                <example id="zend.service.twitter.favorite.create">
+                    <title>Favoriten erstellen</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->favorite->create(12351);
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>destroy</code>, entfernt die Favorisierung des des mit dem ID Parameter spezifizierten
+                    Status für den authentifizierten Benutzer.
+                </para>
+
+                <example id="zend.service.twitter.favorite.destroy">
+                    <title>Entfernt Favoriten</title>
+                    <programlisting role="php"><![CDATA[
+$twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
+$response = $twitter->favorite->destroy(12351);
+]]>
+                    </programlisting>
+                </example>
+            </listitem>
+
+        </itemizedlist>
+
+    </sect2>
+
+    <xi:include href="Zend_Service_Twitter_Search.xml" />
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.memory.memory-objects">
+
+    <title>Memory Objekte</title>
+
+    <sect2 id="zend.memory.memory-objects.movable">
+
+        <title>Verschiebbar</title>
+
+        <para>
+            Um verschiebbare Memory Objekte zu Erstellen kann die <code>create([$data])</code>
+            Methode des Memory Managers verwendet werden:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            "Verschiebbar" bedeutet das solche Objekte verschoben und von Speicher
+            entfernt werden können und wieder geladen werden wenn der Code der
+            Anwendung auf das Objekt wieder zugreift.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.locked">
+
+        <title>Gesperrt</title>
+
+        <para>
+            Gesperrte Memory Objekte können erstellt werden mit Hilfe der
+            <code>createLocked([$data])</code> Methode des Memory Managers:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->createLocked($data);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            "Gesperrt" bedeutet das solche Objekte niemals getauscht und vom Speicher
+            entfernt werden.
+        </para>
+
+        <para>
+            Gesperrte Objekte haben das selbe Interface wie verschiebbare Objekte
+            (<classname>Zend_Memory_Container_Interface</classname>).
+            Deswegen können gesperrte Objekte an jedem Platz statt verschiebbaren
+            Objekten verwendet werden.
+        </para>
+
+        <para>
+            Es ist nützlich wenn eine Anwendung oder Entwickler entscheiden kann, das
+            einige Objekte niemals getauscht werden sollen, basierend auf
+            Entscheidungen der Geschwindigkeit.
+        </para>
+
+        <para>
+            Der Zugriff auf gesperrte Objekte ist schneller, weil der Memory Manager
+            die Änderungen für diese Objekte nicht verfolgen muß.
+        </para>
+
+        <para>
+            Die Klasse der gelockten Objekte (<classname>Zend_Memory_Container_Locked</classname>)
+            garantiert virtuell die selbe Performance wie das Arbeiten mit einer
+            Zeichenketten Variablen. Der Overhead ist ein einzelnes De-Referenzieren um
+            die Eigenschaft der Klasse zu erhalten.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.value">
+
+        <title>Memory Container 'value' Eigenschaft.</title>
+
+        <para>
+            Die '<code>value</code>' Eigenschaft des Memory Containers (gesperrt oder verschiebbar)
+            kann verwendet werden um mit Memory Objekt Daten zu arbeiten:
+            <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+
+echo $memObject->value;
+
+$memObject->value = $newValue;
+
+$memObject->value[$index] = '_';
+
+echo ord($memObject->value[$index1]);
+
+$memObject->value = substr($memObject->value, $start, $length);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Ein alternaviter Weg um auf die Daten des Memory Objektes zuzugreifen
+            ist die Verwendung der
+            <link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>
+            Methode. Diese Methode <emphasis>muß</emphasis> verwendet werden für PHP
+            Versionen vor 5.2. Sie könnte auch in einigen Fällen verwendet werden,
+            wenn Gründe der Geschwindigkeit dafür sprechen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.memory.memory-objects.api">
+
+        <title>Memory Container Interface</title>
+
+        <para>
+            Der Memory Container stellt die folgenden Methoden zur Verfügung:
+        </para>
+
+        <sect3 id="zend.memory.memory-objects.api.getRef">
+
+            <title>getRef() Methode</title>
+
+            <programlisting role="php"><![CDATA[
+public function &getRef();
+]]>
+            </programlisting>
+
+            <para>
+                Die <code>getRef()</code> Methode gibt eine Referenz auf den Wert
+                des Objektes zurück.
+            </para>
+
+            <para>
+                Verschiebbare Objekte werden vom Cache geladen in dem Moment wenn das
+                Objekt nicht bereits im Speicher vorhanden ist. Wenn das Objekt
+                vom Cache geladen wird, können das einen Tausch von anderen Objekten
+                verursachen wenn das Memory Limit überschritten werden würde wenn alle
+                gemanageten Objekte im Speicher vorhanden sind.
+            </para>
+
+            <para>
+                Die <code>getRef()</code> Methode <emphasis>muß</emphasis> verwendet
+                werden um auf die Daten des Memory Objektes zuzugreifen für
+                PHP Versionen vor 5.2.
+            </para>
+
+            <para>
+                Das Verfolgen von Änderungen an Daten benötigt zusätzliche Ressourcen.
+                Die <code>getRef()</code> Methode gibt eine Referenz zu der
+                Zeichenkette zurück, welches direkt von der Benutzeranwendung
+                verändert wird. Deswegen ist es eine gute Idee die
+                <code>getRef()</code> Methode für den Zugriff auf die Werte der Daten
+                zu verwenden:
+                <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+
+$value = &$memObject->getRef();
+
+for ($count = 0; $count < strlen($value); $count++) {
+    $char = $value[$count];
+    ...
+}
+]]>
+                </programlisting>
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.touch">
+
+            <title>touch() Methode</title>
+
+            <programlisting role="php"><![CDATA[
+public function touch();
+]]>
+            </programlisting>
+            <para>
+                Die <code>touch()</code> Methode sollte in Verbindung mit
+                <code>getRef()</code> verwendet werden. Das signalisiert das der
+                Wert des Objektes sich verändert hat:
+                <programlisting role="php"><![CDATA[
+$memObject = $memoryManager->create($data);
+...
+
+$value = &$memObject->getRef();
+
+for ($count = 0; $count < strlen($value); $count++) {
+    ...
+    if ($condition) {
+        $value[$count] = $char;
+    }
+    ...
+}
+
+$memObject->touch();
+]]>
+                </programlisting>
+
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.lock">
+
+            <title>lock() Methode</title>
+
+            <programlisting role="php"><![CDATA[
+public function lock();
+]]>
+            </programlisting>
+
+            <para>
+                Die <code>lock()</code> Methode versperrt Objekte im Speicher.
+                Sie sollte verwendet werden um das tauschen von ausgewählten
+                Objekten zu verhindern. Normalerweise ist das nicht notwendig,
+                da der Memory Manager einen intelligenten Algorythmus verwendet
+                um Kandidaten für den Tasuch zu eruieren. Aber wenn genau bekannt ist,
+                das ein bestimmter Teil des Codes nicht getauscht werden sollte, kann
+                er gesperrt werden.
+            </para>
+
+            <para>
+                Gesperrte Objekte im Speicher garantieren auch das die Referent die
+                durch die <code>getRef()</code> Methode zurückgegeben wird gültig ist
+                bis das Objekt entsperrt wird:
+                <programlisting role="php"><![CDATA[
+$memObject1 = $memoryManager->create($data1);
+$memObject2 = $memoryManager->create($data2);
+...
+
+$memObject1->lock();
+$memObject2->lock();
+
+$value1 = &$memObject1->getRef();
+$value2 = &$memObject2->getRef();
+
+for ($count = 0; $count < strlen($value2); $count++) {
+    $value1 .= $value2[$count];
+}
+
+$memObject1->touch();
+$memObject1->unlock();
+$memObject2->unlock();
+]]>
+                </programlisting>
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.unlock">
+
+            <title>unlock() Methode</title>
+
+            <programlisting role="php"><![CDATA[
+public function unlock();
+]]>
+            </programlisting>
+
+            <para>
+                Die <code>unlock()</code> Methode entsperrt Objekte wenn es nicht mehr
+                notwendig ist diese zu sperren. Siehe das obige Beispiel.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.memory.memory-objects.api.isLocked">
+
+            <title>isLocked() Methode</title>
+
+            <programlisting role="php"><![CDATA[
+public function isLocked();
+]]>
+            </programlisting>
+
+            <para>
+                Die <code>isLocked()</code> Methode kann verwendet werden um zu
+                Prüfen ob das Objekt gesperrt ist. Sie gibt <code>true</code>
+                zurück wenn das Objekt gesperrt ist, oder <code>false</code> wenn
+                es nicht gesperrt ist. Für "gesperrte" Objekte wird immer
+                <code>true</code> zurückgegeben, und für "verschiebbare" Objekte
+                kann entweder <code>true</code> oder <code>false</code>
+                zurückgegeben werden.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>

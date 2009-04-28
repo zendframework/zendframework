@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.json">
+    <title>JSON</title>
+
+    <para>
+        JSON Antworten sind die Antworten der Wahl wenn mit AJAX Anfragen gearbeitet wird die
+        Dataset Antworten erwarten; JSON kann sofort auf Seite des Clienten geparst werden, was zu
+        schneller Ausführung führt.
+    </para>
+
+    <para>
+        Der JSON Action Helfer macht verschiedene Dinge:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Layouts auschalten wenn sie aktuell aktiviert sind.
+        </para></listitem>
+
+        <listitem><para>
+                Den ViewRenderer ausschalten wenn er aktiviert ist.
+        </para></listitem>
+
+        <listitem><para>
+                Den 'Content-Type' Antwort Header auf 'application/json' setzen.
+        </para></listitem>
+
+        <listitem><para>
+                Standardmäßig, die Antwort sofort zurückgeben, ohne darauf zu warten das die Aktion
+                die Ausführung beendet.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Die Verwendung ist einfach: Entweder als Methode des Helfer Brokers aufrufen, oder eine der
+        Methoden <code>encodeJson()</code> oder <code>sendJson()</code> aufrufen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // einige Berechnungen durchführen...
+        // Die JSON Antwort senden:
+        $this->_helper->json($data);
+
+        // oder...
+        $this->_helper->json->sendJson($data);
+
+        // oder das JSON empfangen:
+        $json = $this->_helper->json->encodeJson($data);
+    }
+}
+]]>
+    </programlisting>
+
+    <note>
+        <title>Layouts behalten</title>
+
+        <para>
+            Wenn man ein separates Layout für JSON Antworten hat -- möglicherweise um die JSON
+            Antworten in einer Art Kontext zu wrappen -- akzeptiert jede Methode im JSON Helfer
+            ein zweites, optionales Argument: Ein Flag um Layouts zu aktivieren oder deaktivieren.
+            Die Übergabe eines boolschen <code>true</code> Wertes hält Layouts aktiviert:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // JSON empfangen, Layouts erhalten:
+        $json = $this->_helper->json->encodeJson($data, true);
+    }
+}
+]]>
+        </programlisting>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,176 @@
+<sect3 id="zend.view.helpers.initial.partial">
+    <title>区域助手（Partial Helper） </title>
+
+    <para>
+        <code>Partial</code> 视图助手被用来在它自己的变量范围内解析特定的模板。主要用法是（解析）可重用的模板片段，你不需要操心变量名的冲突。另外，它们让你从特定的模块指定 partial 视图脚本。
+    </para>
+
+    <para>
+        <code>Partial</code> 的兄弟 <code>PartialLoop</code> 视图助手允许传递可迭代数据并为每个条目解析一部分。
+    </para>
+
+    <example id="zend.view.helpers.initial.partial.usage">
+        <title> Partials 的基本用法 </title>
+
+        <para>
+            partials 的基本用法是在它自己的视图范围内解析一个模板的片段。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // partial.phtml ?>
+<ul>
+    <li>From: <?= $this->escape($this->from) ?></li>
+    <li>Subject: <?= $this->escape($this->subject) ?></li>
+</ul>
+]]></programlisting>
+
+        <para>
+            你可以这样从视图脚本里调用它：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->partial('partial.phtml', array(
+    'from' => 'Team Framework',
+    'subject' => 'view partials')); ?>
+]]></programlisting>
+
+        <para>
+            解析结果如下：
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<ul>
+    <li>From: Team Framework</li>
+    <li>Subject: view partials</li>
+</ul>
+]]></programlisting>
+
+    </example>
+        <note>
+            <title> 什么是模型（model）? </title>
+
+            <para>
+                和 <code>Partial</code> 视图助手一起使用的模型（即partial()的第二个参数，Haohappy注）可以是下列其中之一：
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                        <emphasis> 数组 </emphasis>。如果传递了数组，它应当是联合数组，因为它的 ‘键/值’ 对用作为视图变量的键赋值给视图。
+                </para></listitem>
+
+                <listitem><para>
+                        <emphasis> 实现了toArray() 方法的对象 </emphasis>。如果被传递的对象有 <code>toArray()</code> 方法，<code>toArray()</code>的结果将被当作视图变量赋值给视图对象。
+                </para></listitem>
+
+                <listitem><para>
+                        <emphasis> 标准对象 </emphasis>。 任何其它对象将把<code>object_get_vars()</code>的结果（对象的所有公共属性）赋值给视图对象。
+                </para></listitem>
+            </itemizedlist>
+
+            <para>
+                如果你的模型是一个对象，你可能想让它<emphasis>作为对象</emphasis>传递给 partial 脚本，而不是把它系列化成一个数组变量。
+                你可以通过设置适当的助手的 'objectKey' 属性来完成这个：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Tell partial to pass objects as 'model' variable
+$view->partial()->setObjectKey('model');
+
+// Tell partial to pass objects from partialLoop as 'model' variable in final
+// partial view script:
+$view->partialLoop()->setObjectKey('model');
+]]></programlisting>
+
+            <para>
+                当传递 <code>Zend_Db_Table_Rowset</code>s 给 <code>partialLoop()</code>时这个技术相当有用，
+                因为你在视图脚本里有全部访问 row 对象的权限，允许你调用它们的方法（如从父或依赖的 rows 获取数据）。
+            </para>
+        </note>
+
+
+    <example id="zend.view.helpers.initial.partial.partialloop">
+        <title> 使用 PartialLoop 来解析可迭代的（Iterable）的模型 </title>
+
+        <para>
+            可能你常常会需要在一个循环里使用 partials 来输出相同的内容片段多次，这时你就可以把大块的重复的内容或复杂的显示逻辑放到一个地方。然而这对性能有影响，因为partial助手需要在每个迭代里调用一次。
+        </para>
+
+        <para>
+            <code>PartialLoop</code> 视图助手解决了这个问题。 它允许你把迭代条目（实现<code>Iterator</code>的数组或对象）当做模型来传递。它这些把这些条目当作模型迭代、传递给 partial 脚本。在迭代器里的条目可以是 <code>Partial</code> 视图助手允许的任何模型。
+        </para>
+
+        <para>
+            让我们看一下下面的 partial 视图脚本：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<? // partialLoop.phtml ?>
+    <dt><?= $this->key ?></dt>
+    <dd><?= $this->value ?></dd>
+
+]]></programlisting>
+
+        <para>
+            添加下列 "model"：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$model = array(
+    array('key' => 'Mammal', 'value' => 'Camel'),
+    array('key' => 'Bird', 'value' => 'Penguin'),
+    array('key' => 'Reptile', 'value' => 'Asp'),
+    array('key' => 'Fish', 'value' => 'Flounder'),
+);
+?>]]></programlisting>
+
+        <para>
+            在视图脚本中，你可以这样调用 <code>PartialLoop</code> 助手：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<dl>
+<?= $this->partialLoop('partialLoop.phtml', $model) ?>
+</dl>
+]]></programlisting>
+
+        <programlisting role="html"><![CDATA[
+<dl></dl>
+    <dt>Mammal</dt>
+    <dd>Camel</dd>
+
+    <dt>Bird</dt>
+    <dd>Penguin</dd>
+
+    <dt>Reptile</dt>
+    <dd>Asp</dd>
+
+    <dt>Fish</dt>
+    <dd>Flounder</dd>
+
+</dl>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.partial.modules">
+        <title> 在其它模块中解析 Partials </title>
+
+        <para>
+            有时候 partial 存在于不同的模块(Module)。如果你知道模块的名称，你可以把它当作第二个参数传递给 <code>partial()</code> 或者 <code>partialLoop()</code>，把 <code>$model</code> 作为第三个参数。
+        </para>
+
+        <para>
+            例如，如果一个你想用一个在 'list' 模块的 pager partial，就象下面这样来运用：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->partial('pager.phtml', 'list', $pagerData) ?>
+]]></programlisting>
+
+        <para>
+            这样，你可以重用原来是特别供给其它模块使用的 partials 。所以，在共享的视图脚本路径里放置可重用的 partials 很可能是个好习惯。
+        </para>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,19 @@
+<sect1 id="zend.json.introduction">
+    <title>Introdução</title>
+    <para>
+        <code>Zend_Json</code> provê métodos convenientes para serialiazação
+        do PHP nativo para JSON e a descodificação JSON para PHP nativo. Para mais
+        informações sobre JSON, <ulink url="http://www.json.org/">visite o site do
+        projeto JSON</ulink>.
+    </para>
+    <para>
+        JSON, notação do objeto javascript, pode ser usado para o intercâmbio de
+        dados leves entre o javascript e outras linguagens. Desde que o JSON pode
+        ser diretamente executada em Javascript, é um formato ideal para usar com
+        interfaces Web 2.0; é uma alternativa mais simples do que usar XML para
+        relações com AJAX.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

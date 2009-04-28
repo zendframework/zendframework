@@ -1,0 +1,588 @@
+<sect1 id="zend.service.yahoo">
+    <title>Zend_Service_Yahoo</title>
+    <sect2 id="zend.service.yahoo.introduction">
+        <title>Inleiding</title>
+        <para>
+            <code>Zend_Service_Yahoo</code> is een eenvoudige API om veel van de Yahoo! REST APIs te gebruiken.
+            <code>Zend_Service_Yahoo</code> laat je toe om Yahoo! Web search, Yahoo! News, Yahoo! Local en Yahoo!
+            Images te doorzoeken. Om de Yahoo! REST API te gebruiken, moet je een Yahoo! Application ID hebben. Om die te verkrijgen
+            kan je volgende formulier invullen en opsturen:
+            <ulink url="http://api.search.yahoo.com/webservices/register_application">Application ID Request Form</ulink>.
+        </para>
+    </sect2>
+    <sect2 id="zend.service.yahoo.websearch">
+        <title>Het web doorzoeken met Yahoo!</title>
+        <para>
+            <code>Zend_Service_Yahoo</code> laat je toe het web te doorzoeken met Yahoo! door de
+            <code>webSearch()</code> methode te gebruiken die een string query parameter aanvaardt, plus een
+            optionele tweede parameter als een array van zoekopties. Voor volledige details en een lijst van opties
+            verwijzen we je graag door naar de
+            <ulink url="http://developer.yahoo.net/search/web/V1/webSearch.html">Yahoo! Web Search
+            Documentatie</ulink>. De <code>webSearch()</code> methode geeft een
+            <code>Zend_Service_Yahoo_WebResultSet</code> object terug.
+        </para>
+        <example>
+            <title>Het web doorzoeken met Yahoo!</title>
+            <programlisting><![CDATA[<?php
+require_once 'Zend/Service/Yahoo.php';
+$yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
+$results = $yahoo->webSearch('PHP');
+foreach ($results as $result) {
+    echo $result->Title .'<br />';
+}
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.yahoo.imagesearch">
+        <title>Beelden vinden met Yahoo!</title>
+        <para>
+            Je kan beelden zoeken met Yahoo! door <code>Zend_Service_Yahoo</code>'s <code>imageSearch()</code>
+            methode te gebruiken. Deze methode aanvaardt een string query parameter en een optionele array van
+            zoekopties zoals voor de
+            <link linkend="zend.service.yahoo.websearch"><code>webSearch()</code> methode</link>. Voor alle details
+            en een lijst van opties kan je terecht op de
+            <ulink url="http://developer.yahoo.net/search/image/V1/imageSearch.html">Yahoo! Beeldzoeken
+            Documentatie</ulink>.
+        </para>
+        <example>
+            <title>Beelden vinden met Yahoo!</title>
+            <programlisting><![CDATA[<?php
+require_once 'Zend/Service/Yahoo.php';
+$yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
+$results = $yahoo->imageSearch('PHP');
+foreach ($results as $result) {
+    echo $result->Title .'<br />';
+}
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.yahoo.localsearch">
+        <title>Plaatselijke bedrijven en diensten vinden met Yahoo!</title>
+        <para>
+            Je kan plaatselijke bedrijven en diensten opzoeken met Yahoo! door de <code>localSearch()</code> methode te
+            gebruiken. Voor alle details kan je terecht op de
+            <ulink url="http://developer.yahoo.net/search/local/V1/localSearch.html">Yahoo! Plaatselijk zoeken
+            Documentatie</ulink>.
+        </para>
+        <example>
+            <title>Plaatselijke bedrijven en diensten vinden met Yahoo!</title>
+            <programlisting><![CDATA[<?php
+require_once 'Zend/Service/Yahoo.php';
+$yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
+$results = $yahoo->localSearch('Apple Computers', array('zip' => '95014'));
+foreach ($results as $result) {
+    echo $result->Title .'<br />';
+}
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.yahoo.newssearch">
+        <title>Yahoo! News zoeken</title>
+        <para>
+            Yahoo! News zoeken is eenvoudig; gebruik eenvoudigweg de <code>newsSearch()</code> methode zoals in het
+            volgende voorbeeld. Voor alle details verwijzen we je door naar de
+            <ulink url="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News zoeken
+            Documentatie</ulink>.
+        </para>
+        <example>
+            <title>Yahoo! News zoeken</title>
+            <programlisting><![CDATA[<?php
+require_once 'Zend/Service/Yahoo.php';
+$yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
+$results = $yahoo->newsSearch('PHP');
+foreach ($results as $result) {
+    echo $result->Title .'<br />';
+}
+?>]]>       </programlisting>
+        </example>
+    </sect2>
+<sect2 id="zend.service.yahoo.classes">
+    <title>Zend_Service_Yahoo Klassen</title>
+    <para>
+        De volgende klassen worden allemaal teruggestuurd door de verschillende Yahoo! zoekopdrachten. Elk zoektype
+        stuurt een set resultaten terug die specifiek zijn aan het zoektype. Deze kunnen gemakkelijk worden
+        doorlopen omdat elk resultaat in een resultaattype object zit. Alle klassen voor resultaatsets
+        implementeren de <code>SeekableIterator</code> interface die ervoor zorgt dat je gemakkelijk door een
+        set resultaten kan lopen en een specifiek resultaat erin kan zoeken.
+        <itemizedlist>
+            <listitem><para><link linkend="zend.service.yahoo.classes.resultset"><code>Zend_Service_Yahoo_ResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.webresultset"><code>Zend_Service_Yahoo_WebResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.imageresultset"><code>Zend_Service_Yahoo_ImageResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.localresultset"><code>Zend_Service_Yahoo_LocalResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.newsresultset"><code>Zend_Service_Yahoo_NewsResultSet</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.result"><code>Zend_Service_Yahoo_Result</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.webresult"><code>Zend_Service_Yahoo_WebResult</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.imageresult"><code>Zend_Service_Yahoo_ImageResult</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.localresult"><code>Zend_Service_Yahoo_LocalResult</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.newsresult"><code>Zend_Service_Yahoo_NewsResult</code></link></para></listitem>
+            <listitem><para><link linkend="zend.service.yahoo.classes.image"><code>Zend_Service_Yahoo_Image</code></link></para></listitem>
+        </itemizedlist>
+    </para>
+    <sect3 id="zend.service.yahoo.classes.resultset">
+        <title>Zend_Service_Yahoo_ResultSet</title>
+        <para>
+            Elk van de aan de zoekopdracht specifieke resultaten is uitgebreid vanaf deze basisklasse.
+        </para>
+        <para>
+            Elk van de specifieke set resultaten geeft een specifiek
+            <link linkend="zend.service.yahoo.classes.result">Zend_Service_Yahoo_Result</link> object terug.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.resultset.totalResults">
+            <title>Zend_Service_Yahoo_ResultSet::totalResults()</title>
+            <para>
+                <methodsynopsis>
+                    <type>int</type>
+                    <methodname>totalResults</methodname>
+                    <void />
+                </methodsynopsis>
+            </para>
+            <para>
+                Geeft het aantal resultaten terug die de zoekopdracht terug stuurde.
+            </para>
+        </sect4>
+        <sect4 id="zend.service.yahoo.classes.resultset.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_ResultSet</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>totalResultsAvailable</entry>
+                            <entry>int</entry>
+                            <entry>
+                                Totaal aantal gevonden resultaten.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>totalResultsReturned</entry>
+                            <entry>int</entry>
+                            <entry>Aantal resultaten in de huidige set resultaten</entry>
+                        </row>
+                        <row>
+                            <entry>firstResultPosition</entry>
+                            <entry>int</entry>
+                            <entry>Positie van het eerste resultaat in deze set, relatief aan het totaal aantal resultaten.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+    </sect3>
+    <sect3 id="zend.service.yahoo.classes.webresultset">
+        <title>Zend_Service_Yahoo_WebResultSet</title>
+        <para>
+            <code>Zend_Service_Yahoo_WebResultSet</code> vertegenwoordigt een Yahoo! Web Search set resultaatsets.
+        </para>
+        <note>
+            <para>
+                <code>Zend_Service_Yahoo_WebResultSet</code> breidt <link linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link> uit.
+            </para>
+        </note>
+        <para>
+            <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+        </para>
+    </sect3>
+    <sect3 id="zend.service.yahoo.classes.imageresultset">
+        <title>Zend_Service_Yahoo_ImageResultSet</title>
+        <para>
+            <code>Zend_Service_Yahoo_ImageResultSet</code> vertegenwoordigt een Yahoo! Image Search set resultaatsets.
+        </para>
+        <note>
+            <para>
+                <code>Zend_Service_Yahoo_ImageResultSet</code> breidt <link linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link> uit.
+            </para>
+        </note>
+        <para>
+            <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+        </para>
+    </sect3>
+    <sect3 id="zend.service.yahoo.classes.localresultset">
+        <title>Zend_Service_Yahoo_LocalResultSet</title>
+        <para>
+            <code>Zend_Service_Yahoo_LocalResultSet</code> vertegenwoordigt een Yahoo! Local Search set resultaatsets.
+        </para>
+        <table>
+            <title>Zend_Service_Yahoo_LocalResultSet Eigenschappen</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Naam</entry>
+                        <entry>Type</entry>
+                        <entry>Beschrijving</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>resultSetMapURL</entry>
+                        <entry>string</entry>
+                        <entry>De URL van een webpagina die een grafische kaart bevat met alle teruggestuurde resultaten erop
+                        afgebeeld.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <note>
+            <para>
+                <code>Zend_Service_Yahoo_LocalResultSet</code> breidt <link linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link> uit.
+            </para>
+        </note>
+        <para>
+            <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+        </para>
+    </sect3>
+    <sect3 id="zend.service.yahoo.classes.newsresultset">
+        <title>Zend_Service_Yahoo_NewsResultSet</title>
+        <para>
+            <code>Zend_Service_Yahoo_NewsResultSet</code> vertegenwoordigt een Yahoo! News Search set resultaatsets.
+        </para>
+        <note>
+            <para>
+                <code>Zend_Service_Yahoo_NewsResultSet</code> breidt <link linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link> uit.
+            </para>
+        </note>
+        <para>
+            <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+        </para>
+    </sect3>
+    <sect3 id="zend.service.yahoo.classes.result">
+        <title>Zend_Service_Yahoo_Result</title>
+        <para>
+            Elk van de aan de zoekopdracht specifieke resultaten is uitgebreid van deze basis klasse.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.result.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_Result Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Title</entry>
+                            <entry>string</entry>
+                            <entry>Titel van het resultaat item</entry>
+                        </row>
+                        <row>
+                            <entry>Url</entry>
+                            <entry>string</entry>
+                            <entry>URL van het resultaat item</entry>
+                        </row>
+                        <row>
+                            <entry>ClickUrl</entry>
+                            <entry>string</entry>
+                            <entry>URL om naar het resultaat item te linken</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+     </sect3>
+     <sect3 id="zend.service.yahoo.classes.webresult">
+        <title>Zend_Service_Yahoo_WebResult</title>
+        <para>
+            Elk Web Search resultaat wordt teruggestuurd als een <code>Zend_Service_Yahoo_WebResult</code> object.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.webresult.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_WebResult Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Summary</entry>
+                            <entry>string</entry>
+                            <entry>Samenvatting van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>MimeType</entry>
+                            <entry>string</entry>
+                            <entry>Mimetype van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>ModificationDate</entry>
+                            <entry>string</entry>
+                            <entry>Datum van de laatste wijziging van het resultaat als een UNIX timestamp.</entry>
+                        </row>
+                        <row>
+                            <entry>CacheUrl</entry>
+                            <entry>string</entry>
+                            <entry>Yahoo! web cache URL voor het resultaat indien die bestaat.</entry>
+                        </row>
+                        <row>
+                            <entry>CacheSize</entry>
+                            <entry>int</entry>
+                            <entry>De grootte van het item in de Cache</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+     </sect3>
+     <sect3 id="zend.service.yahoo.classes.imageresult">
+        <title>Zend_Service_Yahoo_ImageResult</title>
+        <para>
+            Elk Image Search resultaat wordt teruggestuurd als een <code>Zend_Service_Yahoo_ImageResult</code> object.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.imageresult.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_ImageResult Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Summary</entry>
+                            <entry>string</entry>
+                            <entry>Samenvatting van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>RefererUrl</entry>
+                            <entry>string</entry>
+                            <entry>De URL van de pagina die het beeld bevat</entry>
+                        </row>
+                        <row>
+                            <entry>FileSize</entry>
+                            <entry>int</entry>
+                            <entry>De grootte van het bestand in bytes</entry>
+                        </row>
+                        <row>
+                            <entry>FileFormat</entry>
+                            <entry>string</entry>
+                            <entry>Het beeldformaat (bmp, gif, jpeg, png, enz...)</entry>
+                        </row>
+                        <row>
+                            <entry>Height</entry>
+                            <entry>int</entry>
+                            <entry>De hoogte van het beeld</entry>
+                        </row>
+                        <row>
+                            <entry>Width</entry>
+                            <entry>int</entry>
+                            <entry>De breedte van het beeld</entry>
+                        </row>
+                        <row>
+                            <entry>Thumbnail</entry>
+                            <entry><link linkend="zend.service.yahoo.classes.image">Zend_Service_Yahoo_Image</link></entry>
+                            <entry>Beeld thumbnail</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+     </sect3>
+     <sect3 id="zend.service.yahoo.classes.localresult">
+        <title>Zend_Service_Yahoo_LocalResult</title>
+        <para>
+            Elk Local Search resultaat wordt teruggestuurd als een <code>Zend_Service_Yahoo_LocalResult</code> object.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.localresult.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_LocalResult Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Address</entry>
+                            <entry>string</entry>
+                            <entry>Straat adres van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>City</entry>
+                            <entry>string</entry>
+                            <entry>Stad waar het resultaat woont</entry>
+                        </row>
+                        <row>
+                            <entry>State</entry>
+                            <entry>string</entry>
+                            <entry>Staat waarin het resultaat woont</entry>
+                        </row>
+                        <row>
+                            <entry>Phone</entry>
+                            <entry>string</entry>
+                            <entry>Telefoonnummer van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>Rating</entry>
+                            <entry>int</entry>
+                            <entry>Door gebruikers gegeven classificatie voor het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>Distance</entry>
+                            <entry>float</entry>
+                            <entry>De afstand tot het resultaat vanaf de door jou opgegeven plaats</entry>
+                        </row>
+                        <row>
+                            <entry>MapUrl</entry>
+                            <entry>string</entry>
+                            <entry>URL van een kaart voor het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>BusinessUrl</entry>
+                            <entry>string</entry>
+                            <entry>URL voor de bedrijfswebsite, indien bekend</entry>
+                        </row>
+                        <row>
+                            <entry>BusinessClickUrl</entry>
+                            <entry>string</entry>
+                            <entry>URL om naar de bedrijfswebsite te linken, indien bekend</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+     </sect3>
+     <sect3 id="zend.service.yahoo.classes.newsresult">
+        <title>Zend_Service_Yahoo_NewsResult</title>
+        <para>
+            Elk News Search resultaat wordt teruggestuurd als een <code>Zend_Service_Yahoo_NewsResult</code> object.
+        </para>
+        <sect4 id="zend.service.yahoo.classes.newsresult.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_NewsResult Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Summary</entry>
+                            <entry>string</entry>
+                            <entry>Samenvatting van het resultaat</entry>
+                        </row>
+                        <row>
+                            <entry>NewsSource</entry>
+                            <entry>string</entry>
+                            <entry>Het bedrijf dat het artikel publiceerde</entry>
+                        </row>
+                        <row>
+                            <entry>NewsSourceUrl</entry>
+                            <entry>string</entry>
+                            <entry>De URL van het bedrijf dat het artikel publiceerde</entry>
+                        </row>
+                        <row>
+                            <entry>Language</entry>
+                            <entry>string</entry>
+                            <entry>De taal waarin het artikel is geschreven</entry>
+                        </row>
+                        <row>
+                            <entry>PublishDate</entry>
+                            <entry>string</entry>
+                            <entry>De publicatiedatum van het artikel als een UNIX timestamp</entry>
+                        </row>
+                        <row>
+                            <entry>ModificationDate</entry>
+                            <entry>string</entry>
+                            <entry>De datum waarop het artikel het laatst werd gewijzigd als een UNIX timestamp</entry>
+                        </row>
+                        <row>
+                            <entry>Thumbnail</entry>
+                            <entry><link linkend="zend.service.yahoo.classes.image">Zend_Service_Yahoo_Image</link></entry>
+                            <entry>Beeld Thumbnail voor het artikel indien het bestaat</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+     </sect3>
+     <sect3 id="zend.service.yahoo.classes.image">
+        <title>Zend_Service_Yahoo_Image</title>
+        <para>
+            Alle beelden die door de Yahoo! Image Search of de Yahoo! News Search worden teruggestuurd
+            worden voorgesteld als <code>Zend_Service_Yahoo_Image</code> objecten
+        </para>
+        <sect4 id="zend.service.yahoo.classes.image.properties">
+            <title>Eigenschappen</title>
+            <table>
+                <title>Zend_Service_Yahoo_Image Eigenschappen</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Naam</entry>
+                            <entry>Type</entry>
+                            <entry>Beschrijving</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>Url</entry>
+                            <entry>string</entry>
+                            <entry>Beeld URL</entry>
+                        </row>
+                        <row>
+                            <entry>Width</entry>
+                            <entry>int</entry>
+                            <entry>Beeld wijdte</entry>
+                        </row>
+                        <row>
+                            <entry>Height</entry>
+                            <entry>int</entry>
+                            <entry>Beeld hoogte</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Terug naar de klasselijst</link>
+            </para>
+        </sect4>
+    </sect3>
+</sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

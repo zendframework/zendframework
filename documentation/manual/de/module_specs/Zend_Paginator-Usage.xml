@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.paginator.usage">
+    <title>Verwendung</title>
+
+    <sect2 id="zend.paginator.usage.paginating">
+        <title>Seitendarstellung von Datensammlungen</title>
+
+        <para>
+            Um Elemente in Seiten darzustellen muß <classname>Zend_Paginator</classname> einen generellen Weg des
+            Zugriffs auf diese Daten haben. Für diesen Zweck, läuft jeder Datenzugriff über Datenquellen
+            Adapter. Verschiedene Adapter werden mit dem Zend Framework standardmäßig ausgeliefert:
+        </para>
+
+        <table id="zend.paginator.usage.paginating.adapters">
+            <title>Adapter für <classname>Zend_Paginator</classname></title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Adapter</entry>
+                        <entry>Beschreibung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Array</entry>
+                        <entry>Verwendet ein PHP Array</entry>
+                    </row>
+                    <row>
+                        <entry>DbSelect</entry>
+                        <entry>
+                            Verwendet eine Instanz von
+                            <link linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
+                            welche ein Array zurückgibt
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>DbTableSelect</entry>
+                        <entry>
+                            Verwendet eine Instanz von
+                            <link linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
+                            welche eine Instanz von <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgibt.
+                            Das gibt zusätzliche Information pber das Ergebnisset, wie z.B. die Namen der Spalten.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Iterator</entry>
+                        <entry>
+                            Verwendet eine Instanz von
+                            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Null</entry>
+                        <entry>
+                            <classname>Zend_Paginator</classname> nicht für das Verwalten von seitenweisen Daten verwenden.
+                            Man kann trotzdem die Vorteile des Features der Seitenkontrolle verwenden.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <note>
+            <para>
+                Statt jede passende Zeile einer gegebenen Abfrage auszuwählen, empfangen die DbSelect und
+                DbTableSelect Adapter nur die kleinste Anzahl an Daten die für die Darstellung der aktuellen
+                Seite notwendig sind.
+            </para>
+
+            <para>
+                Deswegen wird dynamisch eine zweite Abfrage erzeugt um die komplette Anzahl an passenden
+                Zeilen festzustellen. Trotzdem ist es möglich die Anzahl oder die Abfrage für die Anzahl
+                selbst direkt zu übergeben. Siehe die <code>setRowCount()</code> Methode im DbSelect
+                Adapter für weitere Informationen.
+            </para>
+        </note>
+
+        <para>
+            Um eine Instanz von <classname>Zend_Paginator</classname> zu erstellen, muß ein Adapter an den Konstruktor
+            übergeben werden:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Der Einfachheit halber kann man für die mit dem Zend Framework mitgelieferten Adapter die
+            statische <code>factory()</code> verwenden:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$paginator = Zend_Paginator::factory($array);
+]]>
+            </programlisting>
+        </para>
+
+        <note>
+            <para>
+                Im Falle des Null Adapters, muß dem Konstruktor eine Elementanzahl mitgegeben werden da keine
+                Datensammlung vorliegt.
+            </para>
+        </note>
+
+        <para>
+            Auch wenn die Instanz in diesem Fall technische zu verwenden ist, muß in der Controller Aktion
+            der Seitendarstellung mitgeteilt werden welche Seitennummer der Benutzer angefragt hat. Das
+            erlaubt Ihm auf die seitenweisen Daten zuzugreifen.
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$paginator->setCurrentPageNumber($page);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Der einfachste Weg um diesen Wert zu verfolgen ist über eine URL. Auch wenn wir empfehlen einen
+            <classname>Zend_Controller_Router_Interface</classname>-kompatiblen Router zu verwenden um dies zu
+            bewerkstelligen, ist das keine Notwendigkeit.
+        </para>
+
+        <para>
+            Das folgende ist eine Beispielroute die in einer INI Konfigurationsdatei verwendet werden könnte:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+routes.example.route = articles/:articleName/:page
+routes.example.defaults.controller = articles
+routes.example.defaults.action = view
+routes.example.defaults.page = 1
+routes.example.reqs.articleName = \w+
+routes.example.reqs.page = \d+
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Mit der obigen Route (und der Verwendung der Zend Framework MVC Komponenten), kann die aktuelle
+            Seitenzahl wie folgt gesetzt werden:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$paginator->setCurrentPageNumber($this->_getParam('page'));
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Es sind auch andere Optionen vorhanden; siehe
+            <link linkend="zend.paginator.configuration">Konfiguration</link> für zusätzliche Informationen.
+        </para>
+
+        <para>
+            Schlußendlich muß die Paginator Instanz der View angehängt werden. Wenn <classname>Zend_View</classname> mit
+            dem ViewRenderer Action Helfer verwendet wird, dann funktioniert das folgende:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+$this->view->paginator = $paginator;
+]]>
+            </programlisting>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.paginator.rendering">
+        <title>Seiten mit View Skripten darstellen</title>
+
+        <para>
+            Das View Skript wird verwendet um die Seitenelemente darzustellen (wenn <classname>Zend_Paginator</classname>
+            verwendet wird um das zu tun) und die Seitenkontrollen anzuzeigen.
+        </para>
+
+        <para>
+            Weil <classname>Zend_Paginator</classname> Das SPL Interface
+            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceIteratorAggregate.html"><code>IteratorAggregate</code></ulink>
+            integriert, ist das Durchlaufen von Elementen und deren Darstellung einfach.
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+<html>
+<body>
+<h1>Beispiel</h1>
+<?php if (count($this->paginator)): ?>
+<ul>
+<?php foreach ($this->paginator as $item): ?>
+  <li><?php echo $item; ?></li>
+<?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<?php echo $this->paginationControl($this->paginator,
+                             'Sliding',
+                             'my_pagination_control.phtml'); ?>
+</body>
+</html>
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Der Aufruf des View Helfers fast am Ende ist zu beachten. PaginationControl nimmt bis zu vier
+            Parameter: die Paginator Instanz, einen Scrolling Stil, eine partielle View und ein Array von
+            zusätzlichen Parametern.
+        </para>
+
+        <para>
+            Die zweiten und dritten Parameter sind sehr wichtig. Wobei die partielle View verwendet wird
+            um festzustellen wie die Seitenkontrollen <emphasis>aussehen</emphasis> sollten, und der
+            Scrolling Stil verwendet wird um zu kontrollieren wie er sich <emphasis>verhalten</emphasis>
+            sollte. Angenommen die partielle View ist im Stil einer Suchseiten Kontrolle, wie anbei:
+        </para>
+
+        <para>
+            <inlinegraphic align="center" valign="middle"
+                fileref="figures/zend.paginator.usage.rendering.control.png"
+                format="PNG"/>
+        </para>
+
+        <para>
+            Was passiert wenn der Benutzer den "next" Link ein paar Mal anklickt? Nun, viele Dinge könnten
+            geschehen. Die aktuelle Seitennummer könnte in der Mitte stehen wärend man durchklickt (wie Sie
+            es auf Yahoo macht!), oder Sie könnte bis zum Ende des Seitenbereichs ansteigen und dann auf der
+            linken Seite erscheinen wenn der Benutzer ein weiteres Mal "next" klickt. Die Seitennummer könnte
+            sogar größer und kleiner werden wärend der Benutzer auf sie zugreift (oder "scrollt). (wie es auf
+            Google geschieht).
+        </para>
+
+        <para>
+            Es gibt view Scrolling Stile die mit dem Zend Framework geliefert werden:
+        </para>
+
+        <table id="zend.paginator.usage.rendering.scrolling-styles">
+            <title>Scrolling Stile für <classname>Zend_Paginator</classname></title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Scrolling Stil</entry>
+                        <entry>Beschreibung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>All</entry>
+                        <entry>
+                            Gibt alle Seiten zurück. Das ist für Seitenkontrollen mit Dropdownmenüs nützlich
+                            wenn Sie relativ wenig Seiten haben. In diesen Fällen ist es oft gewünscht alle
+                            vorhandenen Seiten dem Benutzer auf einmal anzuzeigen.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Elastic</entry>
+                        <entry>
+                            Eine Google-artiger Scrolling Stil der sich erweitert und verkleinert wenn ein
+                            Benutzer durch die Seiten scrollt.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Jumping</entry>
+                        <entry>
+                            Wenn Benutzer scrollen, steigt die Seitenzahl bis zum Ende eines gegebenen
+                            Bereichs, und startet anschließend wieder beim Beginn eines neuen Bereichs.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Sliding</entry>
+                        <entry>
+                            Ein Yahoo!-artiger Scrolling Stil der die aktuelle Seitenzahl in der Mitte des
+                            Seitenbereichs platziert, oder so nahe wie möglich. Das ist der Standardstil.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            Der vierte und letzte Parameter ist reserviert für ein assoziatives Array an zusätzlichen
+            Variablen das in der partiellen View vorhanden sein sill (über <code>$this</code>). Für
+            Instanzen, können diese Werte extra URL Parameter für Seitendarstellungslinks enthalten.
+        </para>
+
+        <para>
+            Durch das Setzen von einer standardmäßigen partiellen View, einem standardmäßigen Scrolling Stil
+            und einer View Instanz kann dei Aufruf der PaginationControl komplett eliminiert werden:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+Zend_Paginator::setDefaultScrollingStyle('Sliding');
+Zend_View_Helper_PaginationControl::setDefaultViewPartial(
+    'my_pagination_control.phtml'
+);
+$paginator->setView($view);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            Wenn alle diese Werte gesetzt sind, kann die Seitenkontrolle im View Skript mit einem einfachen
+            echo Statement dargestellt werden:
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+<?php echo $this->paginator; ?>
+]]>
+            </programlisting>
+        </para>
+
+        <note>
+            <para>
+                Natürlich ist es möglich <classname>Zend_Paginator</classname> mit anderen Template Engines zu
+                verwenden. Mit Smarty zum Beispiel, würde man das folgendermaßen bewerkstelligen:
+            </para>
+
+            <para>
+                <programlisting role="php"><![CDATA[
+$smarty->assign('pages', $paginator->getPages());
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Man könnte die Seitenverte von einem Template wie folgt erhalten:
+            </para>
+
+            <para>
+                <programlisting role="php"><![CDATA[
+{$pages.pageCount}
+]]>
+                </programlisting>
+            </para>
+        </note>
+
+        <sect3 id="zend.paginator.usage.rendering.example-controls">
+            <title>Beispiel der Seitenkontrolle</title>
+
+            <para>
+                Das folgende Beispiel von Seitenkontrollen wird Ihnen hoffentlich helfen um erstmals
+                anzufangen:
+            </para>
+
+            <para>
+                Such-Seitendarstellung
+
+                <programlisting role="php"><![CDATA[
+<!--
+Siehe http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
+-->
+
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<!-- Vorheriger Seitenlink -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; Vorher
+  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; Vorher</span> |
+<?php endif; ?>
+
+<!-- Anzahl an Seitenlinks -->
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php if ($page != $this->current): ?>
+    <a href="<?php echo $this->url(array('page' => $page)); ?>">
+      <?php echo $page; ?>
+    </a> |
+  <?php else: ?>
+    <?php echo $page; ?> |
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Nächster Seitenlink -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Nächster &gt;
+  </a>
+<?php else: ?>
+  <span class="disabled">Nächster &gt;</span>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Element Seitendarstellung
+
+                <programlisting role="php"><![CDATA[
+<!--
+Siehe http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
+-->
+
+<?php if ($this->pageCount): ?>
+<div class="paginationControl">
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+of <?php echo $this->totalItemCount; ?>
+
+<!-- First page link -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    First
+  </a> |
+<?php else: ?>
+  <span class="disabled">First</span> |
+<?php endif; ?>
+
+<!-- Vorheriger Seitenlink -->
+<?php if (isset($this->previous)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+    &lt; Vorheriger
+  </a> |
+<?php else: ?>
+  <span class="disabled">&lt; Vorheriger</span> |
+<?php endif; ?>
+
+<!-- Next page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+    Nächster &gt;
+  </a> |
+<?php else: ?>
+  <span class="disabled">Nächster &gt;</span> |
+<?php endif; ?>
+
+<!-- Last page link -->
+<?php if (isset($this->next)): ?>
+  <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
+    Last
+  </a>
+<?php else: ?>
+  <span class="disabled">Last</span>
+<?php endif; ?>
+
+</div>
+<?php endif; ?>
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                Dropdown Seitendarstellung
+
+                <programlisting role="php"><![CDATA[
+<?php if ($this->pageCount): ?>
+<select id="paginationControl" size="1">
+<?php foreach ($this->pagesInRange as $page): ?>
+  <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
+  <option value="<?php
+        echo $this->url(array('page' => $page)); ?>"<?php echo $selected ?>>
+    <?php echo $page; ?>
+  </option>
+<?php endforeach; ?>
+</select>
+<?php endif; ?>
+
+<script type="text/javascript"
+     src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.2/prototype.js">
+</script>
+<script type="text/javascript">
+$('paginationControl').observe('change', function() {
+    window.location = this.options[this.selectedIndex].value;
+})
+</script>
+]]>
+                </programlisting>
+            </para>
+        </sect3>
+
+        <sect3 id="zend.paginator.usage.rendering.properties">
+            <title>Tabelle von Eigenschaften</title>
+
+            <para>
+                Die folgenden Optionen von für eine Seitenkontrolle bei View Partials vorhanden:
+            </para>
+
+            <table id="zend.paginator.usage.rendering.properties.table">
+                <title>Eigenschaften die bei View Partials vorhanden sind</title>
+
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>Eigenschaft</entry>
+                            <entry>Typ</entry>
+                            <entry>Beschreibung</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>first</entry>
+                            <entry>integer</entry>
+                            <entry>Erste Seitennummer (z.B., 1)</entry>
+                        </row>
+                        <row>
+                            <entry>firstItemNumber</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Absolute Nummer des ersten Elements auf dieser Seite
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>firstPageInRange</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Erste Seite des Bereichs der vom Scrolling Stil zurückgegeben wird
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>current</entry>
+                            <entry>integer</entry>
+                            <entry>Aktuelle Seitenzahl</entry>
+                        </row>
+                        <row>
+                            <entry>currentItemCount</entry>
+                            <entry>integer</entry>
+                            <entry>Anzahl der Elemente auf dieser Seite</entry>
+                        </row>
+                        <row>
+                            <entry>itemCountPerPage</entry>
+                            <entry>integer</entry>
+                            <entry>Maximale Anzahl der Elemente die auf jeder Seite vorhanden sind</entry>
+                        </row>
+                        <row>
+                            <entry>last</entry>
+                            <entry>integer</entry>
+                            <entry>Letzte Seitennummer</entry>
+                        </row>
+                        <row>
+                            <entry>lastItemNumber</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Absolute Zahl des letzten Elements auf dieser Seite
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>lastPageInRange</entry>
+                            <entry>integer</entry>
+                            <entry>
+                                Letzte Seite im Bereich der vom Scrolling Stil zurückgegeben wird
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>next</entry>
+                            <entry>integer</entry>
+                            <entry>Nächste Seitenzahl</entry>
+                        </row>
+                        <row>
+                            <entry>pageCount</entry>
+                            <entry>integer</entry>
+                            <entry>Anzahl an Seiten</entry>
+                        </row>
+                        <row>
+                            <entry>pagesInRange</entry>
+                            <entry>array</entry>
+                            <entry>
+                                Array von Seiten das vom Scrolling Stil zurückgegeben wird
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>previous</entry>
+                            <entry>integer</entry>
+                            <entry>Vorherige Seitenzahl</entry>
+                        </row>
+                        <row>
+                            <entry>totalItemCount</entry>
+                            <entry>integer</entry>
+                            <entry>Komplette Anzahl an Elementen</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

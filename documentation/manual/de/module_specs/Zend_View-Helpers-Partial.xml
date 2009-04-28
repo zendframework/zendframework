@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.partial">
+    <title>Partielle Helfer</title>
+
+    <para>
+        Der <code>Partial</code> (Partielle) View Helfer wird verwendet um ein spezielles Template innerhalb
+        seines eigenen variablen Bereichs zu rendern. Primär wird er für wiederverwendbare Templatefragmente
+        verwendet bei denen man keine Vorsorge wegen variablen Namenskonflikten aufpassen muß. Zusätzlich
+        erlauben Sie es Teile von View Skripten von speziellen Modulen zu spezifizieren.
+    </para>
+
+    <para>
+        Ein Geschwisterteil zum <code>Partial</code> ist der <code>PartialLoop</code> View Helfer der es
+        erlaubt Daten zu übergeben die durchlaufen werden können, und einen Abschnitt für jedes Teil auszugeben.
+    </para>
+
+    <note>
+        <title>PartialLoop Zähler</title>
+        <para>
+            Der <code>PartialLoop</code> View Helfer fügt der View eine Variable hinzu die
+            <code>partialCounter</code> heißt und die die aktuelle Position des Arrays zum View
+            Skript übergibt. Das bietet einen einfachen Weg um alternative Farbgebungen zum Bespiel
+            bei Tabellenzeilen zu haben.
+        </para>
+
+    </note>
+
+    <example id="zend.view.helpers.initial.partial.usage">
+        <title>Grundsätzliche Verwendung von Partials</title>
+
+        <para>
+            Die grundsätzliche Verwendung von Partials ist die Ausgabe von Templatefragmenten im eigenen
+            Viewbereich. Es wird das folgende teilweise Skript angenommen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // partial.phtml ?>
+<ul>
+    <li>Von: <?php echo $this->escape($this->from) ?></li>
+    <li>Subjekt: <?php echo $this->escape($this->subject) ?></li>
+</ul>
+]]>
+        </programlisting>
+
+        <para>
+            Dieses würde dann vom View Skript aufgerufen indem das folgende verwendet wird:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->partial('partial.phtml', array(
+    'from' => 'Team Framework',
+    'subject' => 'Teil der View')); ?>
+]]>
+        </programlisting>
+
+        <para>
+            Was dann das folgende ausgibt:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<ul>
+    <li>From: Team Framework</li>
+    <li>Subject: Teil der View</li>
+</ul>
+]]>
+        </programlisting>
+
+    </example>
+
+    <note>
+        <title>Was ist ein Modell?</title>
+
+        <para>
+            Ein Modell das mit dem <code>Partial</code> View Helfer verwendet wird kann eines der
+            folgenden sein:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Array</emphasis>. Wenn ein Array übergeben wird, sollte es assoziativ sein,
+                    und seine Schlüssel/Werte Paare werden der View mit dem Schlüssel als View Variable
+                    zugeordnet.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Objekt das die toArray() Methode implementiert</emphasis>. Wenn ein Objekt
+                    übergeben wird das eine <code>toArray()</code> Methode besitzt, wird das Ergebnis von
+                    <code>toArray()</code> dem View Objekt als View Variablen zugeordnet.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Standard Objekt</emphasis>. Jedes andere Objekt wird die Ergebnisse von
+                    <code>object_get_vars()</code> (essentiell alle öffentlichen Eigenschaften des
+                    Objektes) dem View Objekt zuordnen.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Wenn das eigene Modell ein Objekt ist, kann es gewünscht sein, es <emphasis>als Objekt</emphasis>
+            an das Partielle Skript zu übergeben, statt es in ein Array von Variablen zu serialisieren. Das
+            kann durch das Setzen der 'objectKey' Eigenschaft des betreffenden Helfers getan werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Dem Partiellen mitteilen das ein Objekt als 'model' Variable übergeben wird
+$view->partial()->setObjectKey('model');
+
+// Dem Partiellen mitteilen das ein Objekt von partialLoop als 'model'
+// Variable im letzten Partiellen View Skript übergeben wird
+$view->partialLoop()->setObjectKey('model');
+]]>
+        </programlisting>
+
+        <para>
+            Diese Technik ist speziell dann sinnvoll wenn <classname>Zend_Db_Table_Rowset</classname>s an
+            <code>partialLoop()</code> übergeben werden, da man dann kompletten Zugriff auf die Zeilenobjekte
+            im View Skript hat, was es einem erlaubt Ihre Methoden auszurufen (wie das empfangen von Werten
+            bei Eltern- oder abhängigen Zeilen).
+        </para>
+    </note>
+
+    <example id="zend.view.helpers.initial.partial.partialloop">
+        <title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title>
+
+        <para>
+            Typischerweise, wird man Partials in einer Schleife verwenden um das selbe Inhaltsfragment,
+            viele Male, darzustellen; auf diesem Weg können große Blöcke von wiederholenden Inhalten oder
+            komplexe Anzeigelogik auf einen einzelnen Platz gegeben werden. Trotzdem hat das einen
+            Geschwindigkeitsnachteil, da der partielle Helfer einmal für jede Iteration aufgerufen werden
+            muß.
+        </para>
+
+        <para>
+            Der <code>PartialLoop</code> View Helfer hilft bei der Lösung dieses Problems. Er erlaubt es einen
+            wiederholenden Teil (Array oder Objekt das einen <code>Iterator</code> implementiert) als Modell
+            zu übergeben. Er iteriert dann darüber, und übergibt dessen Teile dem Partial Skript als Modell.
+            Teil in diesem Iterator kann jedes Modell sein das der <code>Partial</code> View Helfer erlaubt.
+        </para>
+
+        <para>
+            Es wird das folgende teilweise View Skript angenommen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // partialLoop.phtml ?>
+    <dt><?php echo $this->key ?></dt>
+    <dd><?php echo $this->value ?></dd>
+]]>
+        </programlisting>
+
+        <para>
+            Und das folgende "Modell":
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$model = array(
+    array('key' => 'Säugetier', 'value' => 'Kamel'),
+    array('key' => 'Vogel', 'value' => 'Pinguin'),
+    array('key' => 'Reptil', 'value' => 'Viper'),
+    array('key' => 'Fisch', 'value' => 'Flunder'),
+);
+]]>
+        </programlisting>
+
+        <para>
+            Im View Skript wird dann der <code>PartialLoop</code> Helfer aufgerufen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<dl>
+<?php echo $this->partialLoop('partialLoop.phtml', $model) ?>
+</dl>
+]]>
+        </programlisting>
+
+        <programlisting role="html"><![CDATA[
+<dl>
+    <dt>Säugetier</dt>
+    <dd>Kamel</dd>
+
+    <dt>Vogel</dt>
+    <dd>Pinguin</dd>
+
+    <dt>Reptil</dt>
+    <dd>Viper</dd>
+
+    <dt>Fisch</dt>
+    <dd>Flunder</dd>
+</dl>
+]]>
+</programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.partial.modules">
+        <title>Partials in anderen Modulen darstellen</title>
+
+        <para>
+            Zeitweise existiert ein Parial in einem anderen Modul. Wenn der Name des Moduls bekannt ist,
+            kann dieses als zweites Argument entweder <code>partial()</code> oder <code>partialLoop()</code>
+            übergeben werden, indem das <code>$model</code> Argument an dritte Stelle verschoben wird.
+        </para>
+
+        <para>
+            Wenn zum Beispiel, eine Teilseite existiert im 'list' Modul existiert die verwendet werden soll,
+            kann diese wie folgt genommen werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->partial('pager.phtml', 'list', $pagerData) ?>
+]]>
+        </programlisting>
+
+        <para>
+            Auf diesem Weg, können Teile wiederverwendet werden die speziell für andere Module erstellt wurden.
+            Deshalb ist es besser, wiederverwendbare Teile in einen Pfad für geteilt View Skripte zu geben.
+        </para>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

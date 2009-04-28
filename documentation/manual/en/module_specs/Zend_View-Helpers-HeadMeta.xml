@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.headmeta">
+    <title>HeadMeta Helper</title>
+
+    <para>
+        The HTML <code>&lt;meta&gt;</code> element is used to provide meta
+        information about your HTML document -- typically keywords, document
+        character set, caching pragmas, etc. Meta tags may be either of the
+        'http-equiv' or 'name' types, must contain a 'content' attribute, and
+        can also have either of the 'lang' or 'scheme' modifier attributes.
+    </para>
+
+    <para>
+        The <code>HeadMeta</code> helper supports the following methods for
+        setting and adding meta tags:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>offsetSetName($index, $keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>prependName($keyValue, $content,
+                    $conditionalName)</code></para></listitem>
+        <listitem><para><code>setName($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+        <listitem><para><code>appendHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>prependHttpEquiv($keyValue, $content,
+                    $conditionalHttpEquiv)</code></para></listitem>
+        <listitem><para><code>setHttpEquiv($keyValue, $content,
+                    $modifiers)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        The <code>$keyValue</code> item is used to define a value for the 'name'
+        or 'http-equiv' key; <code>$content</code> is the value for the
+        'content' key, and <code>$modifiers</code> is an optional associative
+        array that can contain keys for 'lang' and/or 'scheme'.
+    </para>
+
+    <para>
+        You may also set meta tags using the <code>headMeta()</code> helper
+        method, which has the following signature: <code>headMeta($content,
+            $keyValue, $keyType = 'name', $modifiers = array(), $placement =
+            'APPEND')</code>. <code>$keyValue</code> is the content for the key
+        specified in <code>$keyType</code>, which should be either 'name' or
+        'http-equiv'. <code>$placement</code> can be either 'SET' (overwrites
+        all previously stored values), 'APPEND' (added to end of stack), or
+        'PREPEND' (added to top of stack).
+    </para>
+
+    <para>
+        <code>HeadMeta</code> overrides each of <code>append()</code>,
+        <code>offsetSet()</code>, <code>prepend()</code>, and <code>set()</code>
+        to enforce usage of the special methods as listed above. Internally, it
+        stores each item as a <code>stdClass</code> token, which it later
+        serializes using the <code>itemToString()</code> method. This allows you
+        to perform checks on the items in the stack, and optionally modify these
+        items by simply modifying the object returned.
+    </para>
+
+    <para>
+        The <code>HeadMeta</code> helper is a concrete implementation of the
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+            helper</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headmeta.basicusage">
+        <title>HeadMeta Helper Basic Usage</title>
+
+        <para>
+            You may specify a new meta tag at any time. Typically, you
+            will specify client-side caching rules or SEO keywords.
+        </para>
+
+        <para>
+            For instance, if you wish to specify SEO keywords, you'd be creating
+            a meta name tag with the name 'keywords' and the content the
+            keywords you wish to associate with your page:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// setting meta keywords
+$this->headMeta()->appendName('keywords', 'framework php productivity');
+]]></programlisting>
+
+        <para>
+            If you wished to set some client-side caching rules, you'd set
+            http-equiv tags with the rules you wish to enforce:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// disabling client-side cache
+$this->headMeta()->appendHttpEquiv('expires',
+                                   'Wed, 26 Feb 1997 08:21:57 GMT')
+                 ->appendHttpEquiv('pragma', 'no-cache')
+                 ->appendHttpEquiv('Cache-Control', 'no-cache');
+]]></programlisting>
+
+        <para>
+            Another popular use for meta tags is setting the content type,
+            character set, and language:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// setting content type and character set
+$this->headMeta()->appendHttpEquiv('Content-Type',
+                                   'text/html; charset=UTF-8')
+                 ->appendHttpEquiv('Content-Language', 'en-US');
+]]></programlisting>
+
+        <para>
+            As a final example, an easy way to display a transitional message
+            before a redirect is using a "meta refresh":
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// setting a meta refresh for 3 seconds to a new url:
+$this->headMeta()->appendHttpEquiv('Refresh',
+                                   '3;URL=http://www.some.org/some.html');
+]]></programlisting>
+
+        <para>
+            When you're ready to place your meta tags in the layout, simply echo
+            the helper:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->headMeta() ?>
+]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

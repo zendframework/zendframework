@@ -1,0 +1,90 @@
+<sect1 id="zend.feed.consuming-atom">
+<title>Atom Feed的使用</title>
+
+    <para>
+        <code>Zend_Feed_Atom</code>在使用上有许多方法与<code>Zend_Feed_Rss</code>是大相径庭的。它提供了相同的方法访问Feed中的属性和遍历所有Feed中的所有条目。不同之处在于Atom协议结构自身。Atom作为RSS的继承者，它是一个更广泛的协议，在处理Feed中提供的所有内容方面它被设计的更加容易，RSS中的<code>description</code>标记在Atom中被分割成两个元素<code>summary</code> 和
+         <code>content</code>就是为了这个目的。
+    </para>
+
+    <example id="zend.feed.consuming-atom.example.usage">
+        <title>Atom Feed的基本用法</title>
+        <para>
+            读取一个Atom Feed并打印出每个条目的<code>title</code> 和 <code>summary</code>：
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
+echo 'The feed contains ' . $feed->count() . ' entries.' . "\n\n";
+foreach ($feed as $entry) {
+    echo '标题: ' . $entry->title() . "\n";
+    echo '摘要: ' . $entry->summary() . "\n\n";
+}]]></programlisting>
+    </example>
+
+    <para>
+        在Atom Feed中你能找到以下Feed属性：
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Feed的标题, 和RSS中的channel标题一样</para>
+            </listitem>
+            <listitem>
+                <para><code>id</code> - 在Atom中的每个Feed和条目都有一个唯一的标识符(id)</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Feed可以有多个链接，它们之间用<code>type</code>属性区别</para>
+                <para>
+                    当<code>type="text/html"</code>时与RSS的channel中的link是一样的。如果这个链接是一个在Feed中相同内容的候选版本，那么它将有一个<code>rel="alternate"</code>属性。
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>subtitle</code> - Feed的描述，等同于RSS中的频道描述
+                </para>
+                <para><code>author->name()</code> - Feed作者名</para>
+                <para><code>author->email()</code> - Feed作者的email地址</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Atom 条目通常具有以下属性：
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>id</code> - 条目唯一标识符</para>
+            </listitem>
+            <listitem>
+                <para><code>title</code> - 条目标题，和RSS的item标题相同</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - 一个到另外一种格式的链接或者当前条目的一个候选观点</para>
+            </listitem>
+            <listitem>
+                <para><code>summary</code> - 条目内容摘要</para>
+            </listitem>
+            <listitem>
+                <para><code>content</code> - 条目的全部内容；如果feed就包含摘要可以被挑过</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - 有 <code>name</code> 和 <code>email</code> 子标记就像feed的author一样</para>
+            </listitem>
+            <listitem>
+                <para><code>published</code> - 条目的发布日期(RFC 3339格式)</para>
+            </listitem>
+            <listitem>
+                <para><code>updated</code> - 条目的最后更新日期(RFC 3339格式)</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        更多关于Atom的信息和丰富的资源，请参看<ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

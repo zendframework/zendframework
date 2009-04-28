@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.plugins.standard.errorhandler">
+    <title>Zend_Controller_Plugin_ErrorHandler</title>
+
+    <para>
+        <classname>Zend_Controller_Plugin_ErrorHandler</classname>
+        は、アプリケーションからスローされた例外を処理するためのプラグインです。
+        たとえば、指定したコントローラやアクションが見つからないといったエラーを処理します。
+        これは、<link linkend="zend.controller.exceptions">MVC の例外についてのセクション</link>
+        で説明したメソッド群の代わりとして使用できます。
+    </para>
+
+    <para>
+        このプラグインが主に対象としているのは、次のような例外です。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>コントローラやアクションメソッドが見つからない場合に発生する例外</para>
+        </listitem>
+
+        <listitem>
+            <para>アクションコントローラ内で発生する例外</para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        言い換えると、<code>ErrorHandler</code> プラグインが想定しているのは、HTTP
+        404 型のエラー (ページが存在しない) と 500 型のエラー (内部エラー)
+        ということになります。
+        他のプラグインやルーティング時に発生したそれ以外の例外の処理は、想定していません。
+    </para>
+
+    <para>
+        デフォルトでは、<classname>Zend_Controller_Plugin_ErrorHandler</classname>
+        はデフォルトモジュールの <code>ErrorController::errorAction()</code>
+        に処理を転送します。これを変更するには、以下のようなアクセス用メソッドを使用します。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>setErrorHandlerModule()</code> は、
+                使用するコントローラモジュール名を設定します。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerController()</code> は、
+                使用するコントローラを設定します。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerAction()</code> は、
+                使用するコントローラアクションを設定します。
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandler()</code> は連想配列を受け取ります。
+                この連想配列のキーには 'module'、'controller'
+                あるいは 'action' を指定することができ、
+                それぞれ対応する値を設定します。
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        さらに、コンストラクタの引数として連想配列を渡すこともできます。
+        この場合、その配列がそのまま <code>setErrorHandler()</code>
+        に渡されます。
+    </para>
+
+    <para>
+        <classname>Zend_Controller_Plugin_ErrorHandler</classname> は
+        <code>postDispatch()</code> フックとして登録され、
+        <link linkend="zend.controller.response">レスポンスオブジェクト</link>
+        に格納された例外を確認します。もし何かの例外が見つかったら、
+        事前に登録されているエラーハンドラアクションに処理を転送します。
+    </para>
+
+    <para>
+        エラーハンドラへのディスパッチ中に例外が発生した場合は、
+        このプラグインはフロントコントローラに例外をスローします。
+        その際に、レスポンスオブジェクトに格納された直近の例外を再度スローします。
+    </para>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
+        <title>404 ハンドラとしての ErrorHandler の使用</title>
+
+        <para>
+            <code>ErrorHandler</code> プラグインが捕捉するのは、
+            アプリケーションのエラーだけではありません。
+            コントローラチェインが次のコントローラクラスやアクションメソッドを
+            見つけられなかった場合に、404 ハンドラとして動作させることもできます。
+            そのためには、エラーコントローラ内で例外の型を調べる必要があります。
+        </para>
+
+        <para>
+            捕捉した例外は、リクエストで登録したオブジェクトの中に記録されます。
+            これを取得するには、
+            <classname>Zend_Controller_Action::_getParam('error_handler')</classname>
+            を使用します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            エラーオブジェクトを取得したら、次に
+            <code>$errors->type</code> でその型を調べます。
+            これは、次のいずれかとなります。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</classname>
+                    は、コントローラが見つからなかったことを表します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</classname>
+                    は、アクションが見つからなかったことを表します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</classname>
+                    は、その他の例外を表します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            最初のふたつの型であった場合に、404 ページを返せばいいわけです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 エラー -- コントローラあるいはアクションが見つかりません
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... 何か、表示する内容を作成します ...
+                break;
+            default:
+                // アプリケーションのエラー。エラーページを表示しますが、
+                // ステータスコードは変更しません
+                break;
+        }
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            エラーハンドラで発生した礼儀を取得するには、
+            <code>error_handler</code> オブジェクトのプロパティ
+            <code>exception</code> を使用します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+public function errorAction()
+{
+        $errors = $this->_getParam('error_handler');
+
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 エラー -- コントローラあるいはアクションが見つかりません
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... 何か、表示する内容を作成します ...
+                break;
+            default:
+                // アプリケーションのエラー。エラーページを表示しますが、
+                // ステータスコードは変更しません
+
+                // ...
+
+                // 例外をログに記録します
+                $exception = $errors->exception;
+                $log = new Zend_Log(
+                    new Zend_Log_Writer_Stream(
+                        '/tmp/applicationException.log'
+                    )
+                );
+                $log->debug($exception->getMessage() . "\n" .
+                            $exception->getTraceAsString());
+                break;
+        }
+}
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
+        <title>前回のレンダリング結果の扱い</title>
+
+        <para>
+            ひとつのリクエストで複数のアクションにディスパッチする場合、
+            あるいはアクション内で <code>render()</code> を複数回コールする場合などは、
+            レスポンスオブジェクト内にすでに内容が格納されていることがあります。
+            これをうまく処理しないと、本当に必要な内容と
+            それ以外の内容が混じってしまう恐れがあります。
+        </para>
+
+        <para>
+            そのような場合にページの中でエラー処理をしたい場合は、
+            特に何も手を加える必要はありません。
+            そのような内容をレンダリングしたくないという場合は、
+            ビューのレンダリング前に以前の内容を消去しておく必要があります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->getResponse()->clearBody();
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
+        <title>プラグインの使用例</title>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
+            <title>標準的な使用法</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
+            <title>別のエラーハンドラの設定</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+    'module'     => 'mystuff',
+    'controller' => 'static',
+    'action'     => 'error'
+)));
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
+            <title>アクセス用メソッドの使用</title>
+            <programlisting role="php"><![CDATA[
+$plugin = new Zend_Controller_Plugin_ErrorHandler();
+$plugin->setErrorHandlerModule('mystuff')
+       ->setErrorHandlerController('static')
+       ->setErrorHandlerAction('error');
+
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin($plugin);
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
+        <title>エラーコントローラの例</title>
+
+        <para>
+            エラーハンドラプラグインを使用するには、
+            エラーコントローラが必要です。以下にシンプルな例を示します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // 404 エラー -- コントローラあるいはアクションが見つかりません
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+
+                $content =<<<EOH
+<h1>エラー!</h1>
+<p>そのページは存在しません。</p>
+EOH;
+                break;
+            default:
+                // アプリケーションのエラー
+                $content =<<<EOH
+<h1>エラー!</h1>
+<p>予期せぬエラーが発生しました。後でもう一度お試しください。</p>
+EOH;
+                break;
+        }
+
+        // 前回の内容を消去します
+        $this->getResponse()->clearBody();
+
+        $this->view->content = $content;
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

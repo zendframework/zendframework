@@ -1,0 +1,22 @@
+<sect1 id="zend.mail.boundary">
+    <title>De MIME Boundary controleren</title>
+    <para>
+        In een multipart bericht wordt meestal een willekeurige MIME boundary aangemaakt om de verschillende
+        delen van het bericht te scheiden. In sommige gevallen kan het echter zijn dat je zelf de MIME
+        boundary wil opgeven die gebruikt moet worden. Dat kan gedaan worden met de
+        <code>setMimeBoundary()</code> methode, zoals in het volgende voorbeeld:
+    </para>
+    <example>
+        <title>De MIME Boundary veranderen</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++);
+// bericht maken...
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

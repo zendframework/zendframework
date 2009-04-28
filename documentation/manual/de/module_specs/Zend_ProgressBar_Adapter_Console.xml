@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.console">
+    <title>Zend_ProgressBar_Adapter_Console</title>
+    <para>
+        <classname>Zend_ProgressBar_Adapter_Console</classname> ist ein Textbasierter Adater für Terminals. Er kann
+        automatisch die Terminalbreite erkennen unterstützt aber auch eigene Breiten. Kann kann definieren
+        welche Elemente mit dem Fortschrittsbalken angezeigt werden und auch deren Reihenfolge ändern. Man
+        kann auch den Stil des Fortschrittsbalkens selbst definieren.
+    </para>
+    <note>
+        <title>Automatische Breitenerkennung der Konsole</title>
+        <para>
+            <code>shell_exec</code> wird benötigt damit dieses Feature auf *nix basierenden Systemen
+            funktioniert. Auf Windows, ist die Terminalbreite immer auf 80 Zeichen begrenzt, sodas dort keine
+            Erkennung notwendig ist.
+        </para>
+    </note>
+    <para>
+        Man kann auch die Optionen des Adapters entweder über die <code>set*</code> Methoden oder durch die
+        Übergabe eines Arrays, oder einer Instanz von <classname>Zend_Config</classname>, an den Constructor mit dem Optionen als
+        ersten Parameter. Die möglichen Optionen sind:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>outputStream</code>: Ein anderer Ausgabe-Stream wenn man nicht auf STDOUT streamen will.
+                Kann jeder andere Stream wie <code>php://stderr</code> oder ein Pfad zu einer Datei sein.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>width</code>: Entweder ein Integer oder die Konstante <code>AUTO</code> von
+                <classname>Zend_Console_ProgressBar</classname>.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>elements</code>: Entweder <code>NULL</code> für Standard oder ein Array mit zumindest
+                einer der folgenden Konstanten von <classname>Zend_Console_ProgressBar</classname> als Wert:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_PERCENT</code>: Der aktuelle Wert in Prozent.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_BAR</code>: Die sichtbare Begrenzung welche den Prozentwert anzeigt.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_ETA</code>: Die automatisch berechnete ETA. Das Element wird zuerst nach
+                        fünf Sekunden angezeigt, weil es wärend dieser Zeit nicht möglich ist korrekte Ergebnisse
+                        zu berechnen.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>ELEMENT_TEXT</code>: Eine optionale Statusmeldung über den aktuelle Fortschritt.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </listitem>
+        <listitem>
+            <para>
+                <code>textWidth</code>: Breite in Zeichen des <code>ELEMENT_TEXT</code> Elements. Standard ist
+                20.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>charset</code>: Zeichensatz des
+                <code>ELEMENT_TEXT</code> Elements. Standardwert ist utf-8.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barLeftChar</code>: Ein String der auf der linken Seite des Zeigers des
+                Fortschrittsbalkens verwendet wird.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barRightChar</code>: Ein String der auf der rechten Seite des Zeigers des
+                Fortschrittsbalkens verwendet wird.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>barIndicatorChar</code>: Ein String der für den Zeiger des Fortschrittsbalkens
+                verwendet wird. Er kann auch leer sein.
+            </para>
+        </listitem>
+    </itemizedlist>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

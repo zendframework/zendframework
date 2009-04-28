@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.strikeiron.bundled-services">
+    <title>Zend_Service_StrikeIron: Mitgelieferte Services</title>
+
+    <para>
+      <classname>Zend_Service_StrikeIron</classname> kommt mit Wrapper Klassen für drei populäre StrikeIron Services.
+    </para>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.zip-code-information">
+      <title>ZIP Code Informationen</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> bietet einen Client für StrikeIron's Zip Code Informations
+        Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron Ressourcen nachgesehen
+        werden:
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code Informations Service Seite</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip Code Informations Service WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+
+        Das Service enthält eine <code>getZipCode()</code> Methode die Informationen über die Amerikanischen
+        ZIP Codes oder Kanadischen Post Codes enthält:
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
+
+// Einen Client für das ZIP Code Informations Service erstellen
+$zipInfo = $strikeIron->getService(array('class' => 'ZipCodeInfo'));
+
+// Eine Zip Information für 95014 erhalten
+$response = $zipInfo->getZipCode(array('ZipCode' => 95014));
+$zips = $response->serviceResult;
+
+// Die Ergebnisse anzeigen
+if ($zips->count == 0) {
+    echo 'Keine Ergebnisse gefunden';
+} else {
+    // Ein Ergebnis mit einem einzelnen ZIP Code wurde als Objekt zurückgegeben
+    // und nicht ein Array mit einem Element wie einige erwarten würden
+    if (! is_array($zips->zipCodes)) {
+        $zips->zipCodes = array($zips->zipCodes);
+    }
+
+    // Alle möglichen Ergebnisse ausgeben
+    foreach ($zips->zipCodes as $z) {
+        $info = $z->zipCodeInfo;
+
+        // Alle Eigenschaften zeigen
+        print_r($info);
+
+        // oder nur den Städtenamen
+        echo $info->preferredCityName;
+    }
+}
+
+// Detailierte Statusinformationen
+// http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
+$status = $response->serviceStatus;
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.us-address-verification">
+      <title>U.S. Address-Prüfung</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_USAddressVerification</classname> bietet einen Client für StrikeIron's U.S.
+        Address-Prüfungs Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron Ressourcen
+        nachgesehen werden:
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address-Prüfungs Service Seite</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S. Address-Prüfungs Service WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+
+      <para>
+        Das Service enthält eine <code>verifyAddressUSA()</code> Methode die eine Adresse in den Vereinigten Staaten
+        prüft:
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
+
+// Einen Client für das ZIP Code Informations Service erstellen
+$verifier = $strikeIron->getService(array('class' => 'USAddressVerification'));
+
+// Adresse die geprüft werden soll. Nicht alle Felder werden benötigt aber es
+// sollten soviele wie möglich für das beste Ergebnis angegeben werden
+$address = array('firm'           => 'Zend Technologies',
+                 'addressLine1'   => '19200 Stevens Creek Blvd',
+                 'addressLine2'   => '',
+                 'city_state_zip' => 'Cupertino CA 95014');
+
+// Adresse prüfen
+$result = $verifier->verifyAddressUSA($address);
+
+// Ergebnisse anzeigen
+if ($result->addressErrorNumber != 0) {
+    echo $result->addressErrorNumber;
+    echo $result->addressErrorMessage;
+} else {
+    // Alle Eigenschaften zeigen
+    print_r($result);
+
+    // oder nur den Firmennamen
+    echo $result->firm;
+
+    // Gültige Adresse?
+    $valid = ($result->valid == 'VALID');
+}
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.bundled-services.sales-use-tax-basic">
+      <title>Verkaufs &amp; Steuer Grundlagen</title>
+
+      <para>
+        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> bietet einen Client für StrikeIron's Verkaufs &amp;
+        Steuer Grundlagen Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron
+        Ressourcen nachgesehen werden:
+
+        <itemizedlist>
+          <listitem>
+            <para>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Verkaufs &amp; Steuer Grundlagen Service Seite</ulink>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Verkaufs &amp; Steuer Grundlagen Service WSDL</ulink>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+
+      <para>
+        Das Service enthält zwei Methoden, <code>getTaxRateUSA()</code> und <code>getTaxRateCanada()</code>,
+        die Verkaufs und Steuer Daten für die Vereinigten Staaten und Kanada enthalten.
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                                'password' => 'your-password'));
+
+// Einen Client für das Verkaufs & Steuer Grundlagen Service erstellen
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
+
+// Die Steuerrate für Ontario, Kanada abfragen
+$rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'foo'));
+print_r($rateInfo);               // alle Eigenschaften zeigen
+echo $rateInfo->GST;              // oder nur die GST (Teile & Services Steuer)
+
+// Die Steuerrate für Cupertino, CA USA abfragen
+$rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
+print_r($rateInfo);               // alle Eigenschaften zeigen
+echo $rateInfo->state_sales_tax;  // oder nur die Staatenweise Verkaufssteuer
+]]>
+        </programlisting>
+      </para>
+    </sect2>
+</sect1>

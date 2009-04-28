@@ -1,0 +1,41 @@
+<sect1 id="zend.pdf.save">
+    <title>Zapisywanie zmian w dokumencie PDF.</title>
+    <para>
+    Dostępne są dwie metody, które zapewniają zapisywanie zmian w dokumencie PDF.
+    Są to metody <code>Zend_Pdf::save()</code> oraz <code>Zend_Pdf::render()</code>.
+    </para>
+
+    <para>
+    Metoda <code>Zend_Pdf::save($filename, $updateOnly = false)</code> zapisuje
+    dokument PDF do pliku. Jeśli zmienna $updateOnly ma wartość true, wtedy
+    tylko nowy segement pliku PDF jest dołączany do pliku. W przeciwnym razie
+    plik jest nadpisywany.
+    </para>
+
+    <para>
+    <code>Zend_Pdf::render($newSegmentOnly = false)</code> zwraca dokument PDF
+    jako łańcuch znaków. Jeśli zmienna $newSegmentOnly ma wartość true, wtedy
+    zwracany jest nowy segment pliku PDF.
+    </para>
+
+    <example id="zend.pdf.save.example-1">
+        <title>Zapisywanie dokumentu PDF.</title>
+        <programlisting role="php"><![CDATA[
+...
+// Załaduj dokument PDF.
+$pdf = Zend_Pdf::load($fileName);
+...
+// Uaktualnij dokument
+$pdf->save($fileName, true);
+// Zapisz dokument jako nowy plik
+$pdf->save($newFileName);
+
+// Zwróć dokument PDF jako łańcuch znaków.
+$pdfString = $pdf->render();
+
+...
+]]>
+        </programlisting>
+    </example>
+
+</sect1>

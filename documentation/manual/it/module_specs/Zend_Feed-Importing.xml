@@ -1,0 +1,252 @@
+<sect1 id="zend.feed.importing">
+
+    <title>Importazione di feed</title>
+
+    <para>
+        <code>Zend_Feed</code> consente agli sviluppatori di recuperare i feed con facilità.
+        Se si conosce l'URI di un feed è sufficiente utilizzare il metodo <code>Zend_Feed::import()</code>:
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php
+$feed = Zend_Feed::import('http://feeds.example.com/feedName');]]>
+    </programlisting>
+
+    <para>
+        E' anche possibile usare <code>Zend_Feed</code> per recuperare il contenuto di un feed da un file o da una variabile stringa in PHP:
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php
+// importazione di un feed da un file di testo
+$feedDaFile = Zend_Feed::importFile('feed.xml');
+
+// importazione di un feed da una variabile stringa in PHP
+$feedDaPHP = Zend_Feed::importString($stringaFeed);]]>
+    </programlisting>
+
+    <para>
+        Ciascuno degli esempi precedenti restituisce un oggetto di una classe che estende <code>Zend_Feed_Abstract</code>, a seconda del tipo di feed.
+        Se il feed recuperato con uno dei metodi indicati è un RSS, allora sarà restituito un oggetto <code>Zend_Feed_Rss</code>. Allo stesso modo, verrà restituito un oggetto <code>Zend_Feed_Atom</code> se è stato importato un feed Atom.
+        I metodi d'importazione generano un'eccezione <code>Zend_Feed_Exception</code> in caso di errore, come ad esempio un feed non leggibile o non valido.
+    </para>
+
+    <sect2 id="zend.feed.importing.custom">
+
+        <title>Feed personalizzati</title>
+
+        <para>
+            <code>Zend_Feed</code> consente agli sviluppatori di creare facilmente i propri feed.
+            E' sufficiente creare un array ed importarlo con <code>Zend_Feed</code>.
+            L'array può essere importato con <code>Zend_Feed::importArray()</code> o con <code>Zend_Feed::importBuilder()</code>. Nell'ultimo caso l'array sarà elaborato al volo da una sorgente di dati personalizzata che implementa <code>Zend_Feed_Builder_Interface</code>.
+        </para>
+
+        <sect3 id="zend.feed.importing.custom.importarray">
+
+            <title>Importazione di un array personalizzato</title>
+
+            <programlisting role="php"><![CDATA[<?php
+// importazione di un feed da un array
+$feedAtomDaArray = Zend_Feed::importArray($array);
+
+// la linea successiva è equivalente alla precedente;
+// un'istanza di Zend_Feed_Atom è restituita per impostazione predefinita
+$feedAtomDaArray = Zend_Feed::importArray($array, 'atom');
+
+// importazione di un feed RSS da un array
+$feedRssDaArray = Zend_Feed::importArray($array, 'rss');]]>
+            </programlisting>
+
+            <para>
+                Il formato dell'array deve essere conforme alla seguente struttura:
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+array(
+      'title'       => 'titolo del feed', // obbligatorio
+      'link'        => 'url canonico del feed', // obbligatorio
+      'lastUpdate'  => 'data di aggiornamento nel formato timestamp', // opzionale
+      'published'   => 'data di pubblicazione nel formato timestamp', // opzionale
+      'charset'     => 'set di caratteri per il contenuto testuale', // obbligatorio
+      'description' => 'breve descrizione del feed', // opzionale
+      'author'      => 'autore/editore del feed', // opzionale
+      'email'       => 'indirizzo email dell\'autore', // opzionale
+      'webmaster'   => 'indirizzo email della persona responsabile degli aspetti tecnici' // opzionale, ignorato nel formato Atom
+      'copyright'   => 'informazioni sul copyright', // opzionale
+      'image'       => 'indirizzo dell\'immagine', // opzionale
+      'generator'   => 'strumento adottato per generare il feed', // opzionale
+      'language'    => 'lingua nella quale è scritto il feed', // opzionale
+      'ttl'         => 'lunghezza in minuti del periodo in cui è possibile salvare in cache il feed', // opzionale, ignorato nel formato Atom
+      'rating'      => 'L\'immagine per la votazione del canale', // opzionale, ignorato nel formato Atom
+      'cloud'       => array(
+                             'domain'            => 'dominio del cloud, es. rpc.sys.com' // obbligatorio
+                             'port'              => 'porta di connessione' // opzionale, 80 è il valore predefinito
+                             'path'              => 'percorso del cloud, es. /RPC2' // obbligatorio
+                             'registerProcedure' => 'procedura da chiamare, es. myCloud.rssPleaseNotify' // obbligatorio
+                             'protocol'          => 'protocol da usare, es. soap o xml-rpc' // obbligatorio
+                             ), // un servizio cloud per essere informato degli aggiornamenti // opzionale, ignorato nel formato Atom
+      'textInput'   => array(
+                             'title'       => 'l\'etichetta del bottone Submit nel campo di testo' // obbligatorio,
+                             'description' => 'spiega il significato del campo di testo' // obbligatorio
+                             'name'        => 'il nome dell'oggetto testuale nel campo di testo' // obbligatorio
+                             'link'        => 'l'indirizzo dello script CGI che processa le richieste' // obbligatorio
+                             ) // un campo per l'inserimento di testo che può essere mostrato con il feed // opzionale, ignorato nel formato Atom
+      'skipHours'   => array(
+                             'ora nel formato 24 ore', // es. 13 (1pm)
+                             // fino a 24 righe dove il valore è un numero compreso tra 0 e 23
+                             ) // Suggerimento agli aggregatori che indica in quali ore è consigliato saltare l'aggiornamento // opzionale, ignorato nel formato Atom
+      'skipDays '   => array(
+                             'il giorno da saltare', // es. Monday
+                             // fino a 7 righe dove il valore è Monday, Tuesday, Wednesday, Thursday, Friday, Saturday o Sunday
+                             ) // Suggerimento agli aggregatori che indica in quali giorni è consigliato saltare l'aggiornamento // opzionale, ignorato nel formato Atom
+      'itunes'      => array(
+                             'author'       => 'Colonna corrispondente all\'artista' // opzionale, impostazione predefinita l'autore principale
+                             'owner'        => array(
+                                                     'name' => 'nome del proprietario' // opzionale, impostazione predefinita l'autore principale
+                                                     'email' => 'email del proprietario' // opzionale, impostazione predefinita l'autore principale
+                                                     ) // Proprietario del podcast // opzionale
+                             'image'        => 'immagine album/podcast' // opzionale, impostazione predefinita l'immagine principale
+                             'subtitle'     => 'sintetica descrizione description' // opzionale, impostazione predefinita la descrizione principale
+                             'summary'      => 'completa descrizione' // opzionale, impostazione predefinita la descrizione principale
+                             'block'        => 'Non mostrare l\'episodio (yes|no)' // opzionale
+                             'category'     => array(
+                                                     array('main' => 'categoria principale', // obbligatorio
+                                                           'sub'  => 'categoria secondaria' // opzionale
+                                                           ),
+                                                     // fino a 3 righe
+                                                     ) // 'Colonna categoria e nella navigazione nell'iTunes Music Store' // obbligatorio
+                             'explicit'     => 'immagine avviso contenuti espliciti (yes|no|clean)' // opzionale
+                             'keywords'     => 'una lista di categorie (fino a 12) separate da virgola' // opzionale
+                             'new-feed-url' => 'utilizzato per informare iTunes di un nuovo indirizzo del feed' // opzionale
+                             ) // Itunes extension data // opzionale, ignorato nel formato Atom
+      'entries'     => array(
+                             array(
+                                   'title'        => 'titolo dell\'elemento del feed', // obbligatorio
+                                   'link'         => 'indirizzo ad un elemento del feed', // obbligatorio
+                                   'description'  => 'breve versione dell\'elemento del feed', // solo testo, no html, obbligatorio
+                                   'guid'         => 'id dell'articolo, il link è utilizzato come alternativa', // opzionale
+                                   'content'      => 'versione completa', // può contenere html, opzionale
+                                   'lastUpdate'   => 'data di pubblicazione nel formato timestamp', // opzionale
+                                   'comments'     => 'pagina dei commenti dell\'elemento del feed', // opzionale
+                                   'commentRss'   => 'il feed dei commenti associati all\'elemento', // opzionale
+                                   'source'       => array(
+                                                           'title' => 'titolo della sorgente originale' // obbligatorio,
+                                                           'url' => 'url della sorgente originale' // obbligatorio
+                                                           ) // sorgente originale dell'elemento del feed // opzionale
+                                   'category'     => array(
+                                                           array(
+                                                                 'term' => 'l\'etichetta della prima categoria' // obbligatorio,
+                                                                 'scheme' => 'url che identifica uno schema di categoria' // opzionale
+                                                                 ),
+                                                           array(
+                                                                 // dati per il secondo elemento ed elementi successivi
+                                                                 )
+                                                           ) // elenco delle categorie // opzionale
+                                   'enclosure'    => array(
+                                                           array(
+                                                                 'url' => 'url del contenuto multimediale collegato' // obbligatorio
+                                                                 'type' => 'mime type del contenuto multimediale' // opzionale
+                                                                 'length' => 'lunghezza in byte del contenuto multimediale collegato' // opzionale
+                                                                 ),
+                                                           array(
+                                                                 // dati per il secondo elemento multimediale ed elementi successivi
+                                                                 )
+                                                           ) // elenco degli elementi multimediali per l'elemento del feed // opzionale
+                                   ),
+                             array(
+                                   // dati per il secondo elemento del feed ed elementi successivi
+                                   )
+                             )
+       );]]>
+            </programlisting>
+
+            <para>
+                Riferimenti:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Specifiche RSS 2.0: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Specifiche Atom: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Specifiche WFW: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Well
+                            Formed Web</ulink>
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            Specifiche iTunes:
+                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">Specifiche Tecniche iTunes</ulink>
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.feed.importing.custom.importbuilder">
+
+            <title>Importazione di una sorgente di dati personalizzata</title>
+
+            <para>
+                E' possibile creare un'istanza di <code>Zend_Feed</code> da una qualsiasi sorgente di dati che implementa <code>Zend_Feed_Builder_Interface</code>.
+                E' sufficiente implementare i metodi <code>getHeader()</code> e <code>getEntries()</code> per essere in grado di utilizzare il proprio oggetto con <code>Zend_Feed::importBuilder()</code>.
+                Come semplice esempio di implementazione è possibile utilizzare <code>Zend_Feed::importBuilder()</code>, che accetta un array in ingresso, esegue alcune validazioni minori ed infine può essere utilizzato nel metodo <code>importBuilder()</code>.
+                Il metodo <code>getHeader()</code> deve restituire un'istanza di <code>Zend_Feed_Builder_Header</code> e <code>getEntries()</code> deve restituire un array di istanze di <code>Zend_Feed_Builder_Entry</code>.
+            </para>
+
+            <note>
+                <para>
+                    <code>Zend_Feed_Builder</code> è utile come concreta implementazione per dimostrare l'utilizzo.
+                    Si consiglia agli utenti la creazione di proprie implementazioni personalizzate di <code>Zend_Feed_Builder_Interface</code>.
+                </para>
+            </note>
+
+            <para>
+                Ecco un esempio di utilizzo di <code>Zend_Feed::importBuilder()</code>:
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+// importazione di un feed da un costruttore personalizzato
+$feedAtomDaArray = Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
+
+// la linea successiva è equivalente alla precedente;
+// un'istanza di Zend_Feed_Atom è restituita per impostazione predefinita
+$feedAtomDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
+
+// importazione di un feed RSS da un costruttore personalizzato
+$feedRssDaArray = Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.feed.importing.custom.dump">
+
+            <title>Stampa del contenuto di un feed</title>
+
+            <para>
+                Per stampare il contenuto di un'istanza di <code>Zend_Feed_Abstract</code> è possibile utilizzare i metodi <code>send()</code> o <code>saveXml()</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+assert($feed instanceof Zend_Feed_Abstract);
+
+// stampa il feed su standard output
+print $feed->saveXML();
+
+// invia gli header http e stampa il feed
+$feed->send();]]>
+            </programlisting>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,64 @@
+<sect1 id="zend.search.lucene.charset">
+    <title>Karakterset.</title>
+
+    <sect2 id="zend.search.lucene.charset.description">
+        <title>Support voor UTF-8 en single-byte karaktersets.</title>
+
+        <para>
+            Zend_Search_Lucene is ontworpen om met de UTF-8 karakterset te werken. Indexbestanden
+            slaan unicode data op in Java's "modified UTF-8 encoding". Zend_Search_Lucene core
+            biedt volledige support voor deze vorm op één uitzondering na.
+            <footnote>
+               <para>
+                   Zend_Search_Lucene biedt alleen support voor Basic
+                   Multilingual Plane (BMP) karakters (van 0x0000 tot 0xFFFF)
+                   en biedt geen support voor bijkomende karakters (karakters
+                   waarvan de codes groter zijn dan 0xFFFF)
+               </para>
+               <para>
+                   Java 2 stelt deze karakters voor als een paar van char (16-bit)
+                   waarden, het eerste paar van de hogere reeks (0xD800_0xDBFF), het
+                   tweede van de lagere reeks (0xDC00-0XDFFF). Daarna worden ze
+                   omgeschreven op 6 bytes zoals gewone UTF-8 karakters.
+                   De standaard UTF-8 voorstelling gebruikt vier bytes voor bijkomende
+                   karakters.
+               </para>
+            </footnote>
+
+        </para>
+
+        <para>
+            Niettemin, tekst analysator, query parser tekst analysator en query parser
+            gebruiken ctype_alpha() om tekst en queries van tokens te voorzien.
+            ctype_alpha() biedt geen support voor UTF-8 en zal moeten worden vervangen
+            in de nabije toekomst.
+        </para>
+
+        <para>
+            We raden je sterk aan jouw data in ASCII om te schrijven
+            <footnote>
+               <para>
+                   Indien de data in non-ascci karakters of UTF-8 is geschreven.
+               </para>
+            </footnote>
+            (zowel voor het opslaan als voor het queryen van de brondocumenten):
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$doc = new Zend_Search_Lucene_Document();
+...
+$docText = iconv('ISO-8859-1', 'ASCII//TRANSLIT', $docText);
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docText));
+
+...
+
+$query = iconv('', 'ASCII//TRANSLIT', $query);
+$hits = $index->find($query);
+?>]]></programlisting>
+
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

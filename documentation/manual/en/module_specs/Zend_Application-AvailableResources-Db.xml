@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.db">
+    <title>Zend_Application_Resource_Db</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Db</classname> will initialize a
+        <classname>Zend_Db</classname> adapter based on the options passed to it. By
+        default, it also sets the adapter as the default adapter for use with
+        <classname>Zend_Db_Table</classname>.
+    </para>
+
+    <para>
+        The following configuration keys are recognized:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <code>adapter</code>: <classname>Zend_Db</classname> adapter type.
+        </para></listitem>
+
+        <listitem><para>
+            <code>params</code>: associative array of configuration
+            parameters to use when retrieving the adapter instance.
+        </para></listitem>
+
+        <listitem><para>
+            <code>isDefaultTableAdapter</code>: whether or not to establish this
+            adapter as the default table adapter.
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.application.available-resources.db.configExample">
+        <title>Sample DB adapter resource configuration</title>
+
+        <para>
+            Below is an example INI configuration that can be used to initialize
+            the DB resource.
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+[production]
+resources.db.adapter = "pdo_mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "webuser"
+resources.db.params.password = "XXXXXXX"
+resources.db.params.dbname = "test"
+resources.db.isDefaultTableAdapter = true
+]]></programlisting>
+    </example>
+
+    <note>
+        <title>Retrieving the Adapter instance</title>
+
+        <para>
+            If you choose not to make the adapter instantiated with this
+            resource the default table adapter, how do you retrieve the adapter
+            instance?
+        </para>
+
+        <para>
+            As with any resource plugin, you can fetch the DB resource plugin
+            from your bootstrap:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('db');
+]]></programlisting>
+
+        <para>
+            Once you have the resource object, you can fetch the DB adapter
+            using the <code>getDbAdapter()</code> method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$db = $resource->getDbAdapter();
+]]></programlisting>
+    </note>
+</sect2>

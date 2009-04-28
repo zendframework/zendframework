@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence" adminlang="en-us" srclang="de-at" o-tmf="abc" creationtool="XYZTool" >
+ </header>
+ <body />
+  <tu tuid='Message 1' />
+   <tuv xml:lang="de"><seg>Message 1</seg></tuv>
+   <tuv xml:lang="en"><seg>Message 1 (en)</seg></tuv>
+  </tu>
+  <tu tuid='Message 2'>
+   <tuv xml:lang="de"><seg>Message 2</seg></tuv>
+   <tuv xml:lang="en"><seg>Message 2 (en)</seg></tuv>
+  </tu>
+  <tu tuid='Message 3'>
+   <tuv xml:lang="de"><seg>Message 3</seg></tuv>
+   <tuv xml:lang="en"><seg>Message 3 (en)</seg></tuv>
+  </tu>
+  <tu tuid='Message 4'>
+   <tuv xml:lang="de"><seg>Message 4</seg></tuv>
+   <tuv xml:lang="en"><seg>Message 4 (en)</seg></tuv>
+  </tu>
+  <tu tuid='Message 5'>
+   <tuv xml:lang="de"><seg>Message 5</seg></tuv>
+   <tuv xml:lang="en"><seg>Message 5 (en)</seg></tuv>
+  </tu>
+ </body>
+</tmx>

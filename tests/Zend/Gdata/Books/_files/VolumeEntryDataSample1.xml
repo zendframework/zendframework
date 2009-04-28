@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:gbs="http://schemas.google.com/books/2008" xmlns:dc="http://purl.org/dc/terms" xmlns:gd="http://schemas.google.com/g/2005">
+  <id>http://www.google.com/books/feeds/volumes/Mfer_MFwQrkC</id>
+  <updated>2008-10-07T15:28:15.000Z</updated>
+  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/books/2008#volume"/>
+  <title type="text">Hamlet</title>
+  <link rel="http://schemas.google.com/books/2008/thumbnail" type="image/jpeg" href="http://bks1.books.google.com/books?id=Mfer_MFwQrkC&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;sig=ACfU3U1o90VpMryPI7WKSyIhmAWdC1uDtw&amp;source=gbs_gdata"/>
+  <link rel="http://schemas.google.com/books/2008/info" type="text/html" href="http://books.google.com/books?id=Mfer_MFwQrkC&amp;ie=ISO-8859-1&amp;source=gbs_gdata"/>
+  <link rel="http://schemas.google.com/books/2008/annotation" type="application/atom+xml" href="http://www.google.com/books/feeds/users/me/volumes"/>
+  <link rel="alternate" type="text/html" href="http://books.google.com/books?id=Mfer_MFwQrkC&amp;ie=ISO-8859-1"/>
+  <link rel="self" type="application/atom+xml" href="http://www.google.com/books/feeds/volumes/Mfer_MFwQrkC"/>
+  <gbs:embeddability value="http://schemas.google.com/books/2008#embeddable"/>
+  <gd:rating min="1" max="5" average="4.00"/>
+  <gbs:viewability value="http://schemas.google.com/books/2008#view_partial"/>
+  <gbs:review type="text">Bad review...</gbs:review>
+  <dc:creator>William Shakespeare</dc:creator>
+  <dc:creator>Roma Gill</dc:creator>
+  <dc:date>2002-02</dc:date>
+  <dc:description>Featuring the images of some of the world's most famous stage and film actors, these additions to the all-new Oxford School Shakespeare introduce--and enthrall--young people to one of the greatest writers of all time. This season brings revised editions of five of the Bard's most famous plays--As You Like It, Othello, Hamlet, Love's Labour Lost and The Taming of the Shrew. Designed specifically for students unfamiliar with Shakespeare's rich literary legacy, these new editions present Shakespeare's sometimes-intimidating Middle English in a way that is easy-to-read and engaging for ages twelve and up. The notes and introductions have been completely revised, allowing unprecedented clarity and accessibility. Featuring new covers and new illustrations--including photos from recent productions of Shakespeare's plays from around the world--Oxford School Shakespeare brings all the pleasure of these literary treasures to life.</dc:description>
+  <dc:format>178 pages</dc:format>
+  <dc:identifier>Mfer_MFwQrkC</dc:identifier>
+  <dc:identifier>ISBN:0198320493</dc:identifier>
+  <dc:language>en</dc:language>
+  <dc:publisher>Oxford University Press</dc:publisher>
+  <dc:subject>Denmark</dc:subject>
+  <dc:subject>Hamlet (Legendary character)/ Drama</dc:subject>
+  <dc:subject>Murder victims' families/ Drama</dc:subject>
+  <dc:subject>Juvenile Nonfiction / Drama</dc:subject>
+  <dc:subject>Drama / English, Irish, Scottish, Welsh</dc:subject>
+  <dc:subject>Drama / Shakespeare</dc:subject>
+  <dc:title>Hamlet</dc:title>
+</entry>

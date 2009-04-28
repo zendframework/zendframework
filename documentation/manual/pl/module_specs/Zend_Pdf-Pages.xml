@@ -1,0 +1,123 @@
+<sect1 id="zend.pdf.pages">
+    <title>Strony dokumentu.</title>
+    <sect2 id="zend.pdf.pages.creation">
+        <title>Tworzenie strony.</title>
+        <para>
+            Strona dokumentu PDF jest reprezentowana przez klasę <code>Zend_Pdf_Page</code>.
+        </para>
+
+        <para>
+            Strony PDF mogą być tworzone lub ładowane z istniejącego dokumentu PDF.
+        </para>
+
+        <para>
+            Nowa strona może być dodana przez utworzenie obiektu <code>Zend_Pdf_Page</code>
+            lub wywołanie metody <code>Zend_Pdf::newPage()</code>, która zwraca obiekt <code>Zend_Pdf_Page</code>.
+            Różnicą jest to, że metoda <code>Zend_Pdf::newPage()</code> tworzy stronę dołączoną
+            do dokumentu. W przeciwieństwie to luźnych stron, niepołączonych z żadnym dokumentem,
+            nie może ona być użyta z kilkoma dokumentami PDF, ale ma ona trochę lepszą wydajność.
+            <footnote>
+                <para>
+                Jest to limitacja wersji V1.0 modułu Zend_Pdf. Będzie to wyeliminowane
+                w przyszłych wersjach. Jednak luźne strony zawsze będą dawały lepsze
+                (bardziej optymalne) wyniki przy używaniu stron w kilku dokumentach.
+                </para>
+            </footnote>. Do ciebie należy wybor sposobu, którego użyjesz.
+        </para>
+
+        <para>
+        Metoda <code>Zend_Pdf::newPage()</code> oraz konstruktor klasy <code>Zend_Pdf_Page</code>
+        przyjmują ten sam zestaw parametrów. W obydwóch jest to rozmiar strony ($x, $y)
+        w punktach (1/72 cala), lub definiowana stała, która jest traktowana jako typ
+        strony:
+            <itemizedlist>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
+                </listitem>
+                <listitem>
+                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            Strony dokumentu są przechowywane w tablicy <code>$pages</code> będącej
+            publiczną właściwością klasy <code>Zend_Pdf</code>. Jest to tablica obiektów
+            <code>Zend_Pdf_Page</code>. Kompletnie definiuje ona zbiór oraz kolejność
+            stron dokumentu, a także możemy nią manipulować jak zwykłą tablicą:
+        </para>
+
+        <example id="zend.pdf.pages.example-1">
+            <title>Zarządzanie stronami dokumentu PDF.</title>
+            <programlisting role="php"><![CDATA[
+...
+// Odwróć kolejność stron
+$pdf->pages = array_reverse($pdf->pages);
+...
+// Dodaj nową stronę
+$pdf->pages[] = new Zend_Pdf_Page(Zend_Pdf_Page::SIZE_A4);
+// Dodaj nową stronę
+$pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
+
+// Usuń określoną stronę.
+unset($pdf->pages[$id]);
+
+...
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.pdf.pages.cloning">
+        <title>Klonowanie stron.</title>
+        <para>
+            Istniejące strony PDF mogą być klonowane przez tworzenie nowego
+            obiektu <code>Zend_Pdf_Page</code> z istniejącą stroną w parametrze.
+        </para>
+
+        <example id="zend.pdf.pages.example-2">
+            <title>Klonowanie istniejącej strony.</title>
+            <programlisting role="php"><![CDATA[
+...
+// Przechowaj szablon strony w osobnej zmiennej
+$template = $pdf->pages[$templatePageIndex];
+...
+// Dodaj nową stronę
+$page1 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page1;
+...
+
+// Dodaj kolejną stronę
+$page2 = new Zend_Pdf_Page($template);
+$pdf->pages[] = $page2;
+...
+
+// Usuń źródłowy szablon strony z dokumentów
+unset($pdf->pages[$templatePageIndex]);
+
+...
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Jest to przydatne gdy chcesz utworzyć wiele stron używając jednego
+            szablonu.
+        </para>
+
+        <caution>
+            <para>
+                Ważne! Klonowane strony korzystają z tych samych zasobów co
+                szablon strony, więc mogą być one użyte tylko w tym samym
+                dokumencie co szablon. Zmodyfkowany dokument może być zapisany
+                jako nowy dokument.
+            </para>
+        </caution>
+    </sect2>
+</sect1>

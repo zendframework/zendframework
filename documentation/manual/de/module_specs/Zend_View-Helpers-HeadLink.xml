@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.headlink">
+    <title>HeadLink Helfer</title>
+
+    <para>
+        Das HTML <code>&lt;link&gt;</code> Element wird immer mehr für das Verlinken einer Vielzahl von
+        Ressourcen der eigenen Site verwendet: Stylesheets, Feeds, FavIcons, Trackbacks, und andere. Der
+        <code>HeadLink</code> Helfer bietet ein einfaches Interface für die Erstellung und das Anhäufen
+        dieser Elemente für das spätere Empfangen und deren Ausgabe im eigenen Layout Skript.
+    </para>
+
+    <para>
+        Der <code>HeadLink</code> Helfer hat spezielle Methode für das hinzufügen von Stylesheet Links zu
+        seinem Stack:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>prependStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem><para><code>setStylesheet($href, $media,
+                    $conditionalStylesheet, $extras)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Der <code>$media</code> Wert ist standardmäßig 'screen', kann aber jeder gültige Media Wert sein.
+        <code>$conditionalStylesheet</code> ist ein String oder boolsches false und wird verwendet um
+        wärend der Darstellung zu erkennen ob spezielle Kommentare inkludiert werden sollen um das Laden
+        dieser Stylesheets auf diversen Plattformen zu verhindern.
+        <code>$extras</code> ist ein Array von extra Werten die man dem Tag hinzufügen will.
+    </para>
+
+    <para>
+        Zusätzlich hat der <code>HeadLink</code> Helfer eine spezielle Methode für das Hinzufügen von
+        'alternativen' (alternate) Links zu seinem Stack:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>offsetSetAlternate($index, $href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>prependAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+        <listitem><para><code>setAlternate($href, $type,
+                    $title, $extras)</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Die <code>headLink()</code> Helfer Methode erlaubt das Spezifizieren aller Attribute die für ein
+        <code>&lt;link&gt;</code> Element notwendig sind, und erlaubt auch die Spezifizfikation der Platzierung
+        --- entweder ersetzt das neue Element alle anderen, wird vorangestellt (an den Beginn des Stacks) , oder
+        angefügt (an das Ende des Stacks).
+    </para>
+
+    <para>
+        Der <code>HeadLink</code> Helfer ist eine konkrete Implementation des
+        <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headlink.basicusage">
+        <title>Grundsätzliche Verwendung des HeadLink Helfers</title>
+
+        <para>
+            <code>headLink</code> kann jederzeit spezifiziert werden. Typischerweise wird ein globaler Link
+            im eigenen Layout Skript spezifiziert, und anwendungsspezifische Links in den View Skripten der
+            Anwendung. Im Layoutskript, in der &lt;head&gt; Sektion, muß das der Helfer ausgegeben werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // Links in einem View Skript setzen:
+$this->headLink()->appendStylesheet('/styles/basic.css')
+                 ->headLink(array('rel' => 'favicon',
+                                  'href' => '/img/favicon.ico'),
+                                  'PREPEND')
+                 ->prependStylesheet('/styles/moz.css',
+                                     'screen',
+                                     true,
+                                     array('id' => 'my_stylesheet'));
+?>
+<?php // Darstellen der Links: ?>
+<?php echo $this->headLink() ?>
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

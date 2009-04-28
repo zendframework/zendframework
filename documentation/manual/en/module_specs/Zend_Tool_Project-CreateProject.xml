@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.tool.project.create-a-project">
+
+    <title>Create A Project</title>
+
+    <para>
+        Note: the following examples will assume you have the command line interface of
+        Zend_Tool_Framework available to you.
+    </para>
+
+    <para>
+        Note: to issue any of the commands for Zend_Tool_Project with CLI, you must be in the directory
+        where the project was initially created.
+    </para>
+
+    <para>
+        To get started with Zend_Tool_Project, you simply need to create a project.  Creating a project
+        is simple: go to a place on your filesystem, create a directory, change to that directory, then
+        issue the following command:
+    </para>
+
+    <para>
+        <code>/tmp/project$ zf create project</code>
+    </para>
+
+    <para>
+        Optionally, you can create a directory anywhere by the following:
+    </para>
+
+    <para>
+        <code>$ zf create project /path/to/non-existent-dir</code>
+    </para>
+
+    <para>
+        The following table will describe the capabilities of providers that are available to
+        you.  As you can see in this table, there is a "Project" provider.  The Project provider
+        has a couple of actions associated to it, and with those actions a number of options that
+        can be used to modify the behavior of the action and provider.
+
+        <table id="zend.tool.project.project-provider-table">
+            <title>Project Provider Options</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry>Provider Name</entry>
+                        <entry>Available Actions</entry>
+                        <entry>Parameters</entry>
+                        <entry>CLI Usage</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            Project
+                        </entry>
+                        <entry>
+                            Create
+                            Show
+                        </entry>
+                        <entry>
+                            create - [path=null, profile='default']
+                        </entry>
+                        <entry>
+                            zf create project some/path
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+
+        </table>
+
+    </para>
+</sect1>

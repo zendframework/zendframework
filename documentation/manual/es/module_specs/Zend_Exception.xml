@@ -1,0 +1,35 @@
+<sect1 id="zend.exception.using">
+
+	<title>Usando Excepciones</title>
+
+	<para>
+		Todas las excepciones lanzadas por las clases de Zend Framework
+		deberian arrojar una excepción que deriva de la clase base
+		Zend_Exception.
+	</para>
+
+	<example id="zend.exception.using.example">
+		<title>Ejemplo de catching de una excepción</title>
+		<programlisting role="php"><![CDATA[
+try {
+    Zend_Loader::loadClass('clasenoexistente');
+} catch (Zend_Exception $e) {
+    echo "Recibida excepción: " . get_class($e) . "\n";
+    echo "Mensaje: " . $e->getMessage() . "\n";
+    // código para recuperar el fallo.
+}
+]]>
+		</programlisting>
+	</example>
+
+	<para>
+		Consulte la documentación de cada uno de los componente de Zend
+		Framework para obtener información más específica sobre los
+		métodos que lanzan excepciones, las circunstancias de las
+		excepciones, y qué clases derivan de Zend_Exception.
+	</para>
+
+</sect1>
+<!--
+	vim:se ts=4 sw=4 et:
+-->

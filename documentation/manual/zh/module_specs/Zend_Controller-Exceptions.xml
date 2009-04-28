@@ -1,0 +1,276 @@
+<sect1 id="zend.controller.exceptions">
+    <title>MVC 异常</title>
+
+    <sect2 id="zend.controller.exceptions.introduction">
+        <title>介绍</title>
+
+        <para>
+              Zend Framework 中的MVC元件利用了一个前端控制器，这意味着到一个站点的所有请求都将通过单一入口。因此，所有的异常最终将起泡到前端控制器，开发人员可在一个位置处理这些异常。
+        </para>
+
+        <para>
+              但是，异常消息以及回溯信息可能含有敏感的系统信息，比如SQL语句，文件位置等等。为了保护站点，<code>Zend_Controller_Front</code> 默认将捕捉所有异常并注册到响应对象，响应对象默认不会显示异常消息。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.handling">
+        <title>如何处理异常?</title>
+
+        <para>
+              MVC元件已经建立了几种机制来处理异常。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                      默认地，<link linkend="zend.controller.plugins.standard.errorhandler">错误处理器插件（error handler	plugin）</link> 将会被注册并激活。这个插件可以处理：
+                </para>
+
+                <itemizedlist>
+                    <listitem><para>控制器或动作缺失导致的异常</para></listitem>
+
+                    <listitem><para>动作控制器中发生的异常</para></listitem>
+                </itemizedlist>
+
+                <para>
+                      它作为一个<code>postDispatch()</code>插件，检查分发器、动作控制器或者其他的异常是否发生。如果发生异常，它将转向一个错误处理控制器。
+                </para>
+
+                <para>
+                      该处理器会涵盖大多数异常情况，并能够优美的处理控制器或者动作缺失异常。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><code>Zend_Controller_Front::throwExceptions()</code></para>
+
+                <para>
+                      通过向该方法传入一个true值，可以通知前端控制器，由开发人员来处理异常，而不是让响应对象收集或者使用错误处理器插件。例如：
+                </para>
+
+                <programlisting	role="php"><![CDATA[
+$front->throwExceptions(true);
+try	{
+    $front->dispatch();
+} catch	(Exception $e) {
+    // handle exceptions yourself
+}
+]]>
+</programlisting>
+
+                <para>
+                      这是向前端控制器中加入定制处理所有可能异常的最简单方式。</para>
+            </listitem>
+
+            <listitem>
+                <para><code>Zend_Controller_Response_Abstract::renderExceptions()</code></para>
+
+                <para>
+                      通过向该方法中传入一个true值，可以让响应对象渲染（render）异常消息，当渲染响应对象时追踪异常（backtrace）。这种情况下，将会显示程序中引发的所有异常。推荐只在非生产（non-production）环境中使用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Front::returnResponse()</code> 和
+                    <code>Zend_Controller_Response_Abstract::isException()</code>.
+                </para>
+
+                <para>
+                      向<code>Zend_Controller_Front::returnResponse()</code>传入一个true值, <code>Zend_Controller_Front::dispatch()</code> 将不渲染响应对象，而是将其返回。获得响应对象后，可通过<code>isException()</code>测试是否捕捉到异常，然后通过<code>getException()</code>获取异常。例如：
+                </para>
+
+                <programlisting	role="php"><![CDATA[
+$front->returnResponse(true);
+$response =	$front->dispatch();
+if ($response->isException()) {
+    $exceptions	= $response->getException();
+    // handle exceptions ...
+} else {
+    $response->sendHeaders();
+    $response->outputBody();
+}
+]]>
+</programlisting>
+
+                <para>
+                      这种方式相对于<code>Zend_Controller_Front::throwExceptions()</code>的主要优点在于，可以在异常处理后有条件的渲染响应对象。不像错误处理器插件，该方法能够捕捉到控制器链中的任何异常。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.exceptions.internal">
+        <title>可能遭遇的MVC异常</title>
+
+        <para>
+              各种MVC元件--请求，路由器，分发器，动作控制器，响应对象--在同一事件中可能每一个都会抛出异常。一些异常可能根据情况被忽略，其他的则提示开发人员考虑程序的结构。
+        </para>
+
+        <para>比如：</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                      如果请求一个无效的控制器，<code>Zend_Controller_Dispatcher::dispatch()</code>	默认会抛出一个异常。推荐采用两种方式来处理。
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>设置<code>useDefaultControllerAlways</code>参数。</para>
+                        <para>
+                              在前端控制器或者分发器中，加入下列代码：
+                        </para>
+
+                        <programlisting	role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+
+// or
+
+$dispatcher->setParam('useDefaultControllerAlways',	true);
+]]>
+</programlisting>
+
+                        <para>
+                              设置了这个标志，分发器将调用默认的控制器和动作，而不是抛出异常。该方法的缺点是用户访问站点时的URL拼写错误，依然会被解析并显示默认页，这将严重破坏搜索引擎的优化。
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                              <code>dispatch()</code>抛出的异常是一个包含文本'Invalid controller	specified'的<code>Zend_Controller_Dispatcher_Exception</code>。使用<link linkend="zend.controller.exceptions.handling">前一节</link>描述的方法捕捉异常，然后重定向到一个一般性的错误页面或者主页。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                      如果由于动作不存在而无法分发，<code>Zend_Controller_Action::__call()</code> 将会抛出一个<code>Zend_Controller_Action_Exception</code>异常。很有可能，像这些例子一样，你会在控制器中调用默认的动作。这些方法包括：
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                              子类化<code>Zend_Controller_Action</code>并重写<code>__call()</code> 方法。例如：
+                        </para>
+
+                        <programlisting	role="php"><![CDATA[
+class My_Controller_Action extends Zend_Controller_Action
+{
+    public function	__call($method,	$args)
+    {
+        if ('Action' ==	substr($method,	-6)) {
+            $controller	= $this->getRequest()->getControllerName();
+            $url = '/' . $controller . '/index';
+            return $this->_redirect($url);
+        }
+
+        throw new Exception('Invalid method');
+    }
+}
+]]>
+</programlisting>
+                        <para>
+                              上面的例子拦截所有未定义的动作调用，并重定向到控制器中的默认动作。
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                              子类化<code>Zend_Controller_Dispatcher</code>	并重写<code>getAction()</code> 方法来验证动作的存在。例如：
+                        </para>
+
+                        <programlisting	role="php"><![CDATA[
+class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
+{
+    public function	getAction($request)
+    {
+        $action	= $request->getActionName();
+        if (empty($action))	{
+            $action	= $this->getDefaultAction();
+            $request->setActionName($action);
+            $action	= $this->formatActionName($action);
+        } else {
+            $controller	= $this->getController();
+            $action		= $this->formatActionName($action);
+            if (!method_exists($controller,	$action)) {
+                $action	= $this->getDefaultAction();
+                $request->setActionName($action);
+                $action	= $this->formatActionName($action);
+            }
+        }
+
+        return $action;
+    }
+}
+]]>
+</programlisting>
+
+                        <para>
+                              上面的代码检查请求的动作在控制类中是否存在，不存在的话，将动作重置为默认动作。
+                        </para>
+
+                        <para>
+                              这个方法好在你可以在最终分发前透明的改变动作。然而，同样意味着URL中的拼写错误会导致不正确的分发，这对搜索引擎的优化很不利。
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                              使用<code>Zend_Controller_Action::preDispatch()</code>或者<code>Zend_Controller_Plugin_Abstract::preDispatch()</code>来识别无效的动作。
+                        </para>
+
+                        <para>
+                              通过子类化<code>Zend_Controller_Action</code>并修改<code>preDispatch()</code>方法，你可以修改所有的控制器转向另一个动作，或者在实际分发动作之前重定向。代码看起来与上面重写<code>__call()</code>方法类似。
+                        </para>
+
+                        <para>
+                              也可以选择在一个全局插件中检查该信息。其优点在于保持动作控制器的独立性；如果程序由大量的动作控制器组成，并且不是所有的动作控制器都从同一类继承，这种方法可以统一的控制各个类。
+                        </para>
+
+                        <para>
+                              例如：
+                        </para>
+
+                        <programlisting	role="php"><![CDATA[
+class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function	preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $dispatcher	=
+            Zend_Controller_Front::getInstance()->getDispatcher();
+        $controller	= $dispatcher->getController($request);
+        if (!$controller) {
+            $controller	=
+                $dispatcher->getDefaultControllerName($request);
+        }
+        $action		= $dispatcher->getAction($request);
+
+        if (!method_exists($controller,	$action)) {
+            $defaultAction = $dispatcher->getDefaultAction();
+            $controllerName	= $request->getControllerName();
+            $response =
+                Zend_Controller_Front::getInstance()->getResponse();
+            $response->setRedirect('/' . $controllerName .
+                                   '/' . $defaultAction);
+            $response->sendHeaders();
+            exit;
+        }
+    }
+}
+]]>
+</programlisting>
+
+                        <para>
+                              这个例子中，先检查请求的动作在控制器中是否有效。如果无效，重定向到控制器默认的动作，并立即退出脚本的执行。
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4	sw=4 et:
+-->

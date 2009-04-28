@@ -1,0 +1,88 @@
+<sect1 id="zend.search.lucene.index-creation">
+    <title>建立索引</title>
+
+    <sect2 id="zend.search.lucene.index-creation.creating">
+        <title>创建新索引</title>
+
+        <para>
+            在 Zend_Search_Lucene 模块和 Java Lucene 中实现了索引的创建和更新机制。你都可以使用。
+        </para>
+
+        <para>
+            下面的 PHP 代码提供了一个如何使用 Zend_Search_Lucene 索引 API 的例子：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+// Setting the second argument to TRUE creates a new index
+$index = new Zend_Search_Lucene('/data/my-index', true);
+
+$doc = new Zend_Search_Lucene_Document();
+
+// Store document URL to identify it in search result.
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+
+// Index document content
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+
+// Add document to the index.
+$index->addDocument($doc);
+
+// Write changes to the index.
+$index->commit();
+?>]]></programlisting>
+
+        <para>
+            在进行了 commit 提交操作之后，新添加的文档就可以被检索了。
+        </para>
+        <para>
+            <code>Zend_Search_Lucene::commit()</code> 会在脚本执行结束前以及任意搜索请求开始之前被自动调用。
+        </para>
+        <para>
+            每一次 commit() 调用产生新的索引分段。因此尽可能少的请求它。当然另一方面，在一步中提交大量的文档需要更多的内存。
+        </para>
+        <para>
+            字段分段管理优化是 Zend_Search_Lucene 未来要增强的内容。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.updating">
+        <title>更新索引</title>
+
+        <para>
+            同样的过程可以用于更新现存的索引。唯一的区别是打开相应的索引是不需要第二个参数：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+
+// Open existing index
+$index = new Zend_Search_Lucene('/data/my-index');
+
+$doc = new Zend_Search_Lucene_Document();
+// Store document URL to identify it in search result.
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+// Index document content
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+
+// Add document to the index.
+$index->addDocument($doc);
+
+// Write changes to the index.
+$index->commit();
+?>]]></programlisting>
+
+        <para>
+            每一次 commit() 调用(显式的或者隐式的)产生新的索引分段。
+        </para>
+        <para>
+            Zend_Search_Lucene 不会自动管理分段。因此你应该关注分段的大小。一方面一个大的分段可能更加理想，另一方面在创建时需要更大的内存。
+        </para>
+        <para>
+            Lucene Java 和 Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)可以用于优化这个版本的 Zend_Search_Lucene 产生的索引。
+        </para>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

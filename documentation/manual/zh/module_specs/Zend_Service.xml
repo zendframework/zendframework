@@ -1,0 +1,22 @@
+<sect1 id="zend.service.introduction">
+    <title>简介</title>
+    <para>
+        <code>Zend_Service</code> 是一个抽象类，Zend用它来作为实现web service（如：XML-RPC）的基础。
+        .
+    </para>
+    <para>
+        通过<link linkend="zend.service.rest"><code>Zend_Service_Rest</code></link>类,
+        <code>Zend_Service</code>可以支持任何基于REST的web服务。
+        .
+    </para>
+    <para>
+        除了可以扩展 <code>Zend_Service</code> 并对基于REST的web services使用 <code>Zend_Service_Rest</code>
+        类进行操作之外，Zend也同时提供对流行的web services的支持，如
+        <link linkend="zend.service.amazon">Amazon</link>,
+        <link linkend="zend.service.flickr">Flickr</link>, 和
+        <link linkend="zend.service.yahoo">Yahoo!</link>. 而且也许不久会加入更多的web serivces哦．
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

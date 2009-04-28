@@ -1,0 +1,68 @@
+<sect1 id="zend.pdf.introduction">
+    <!-- @todo review and revise upon completion of refactoring -->
+    <title>Inleiding</title>
+    <para>
+    De <code>Zend_Pdf</code> module is een volledig in PHP 5 geschreven motor voor het manipuleren van PDF (Portable Document Format).
+    Het kan bestaande documenten laden, nieuwe documenten maken, documenten wijzigen en weer opslaan. Het laat dus eender
+    welke PHP toepassing dynamisch PDF documenten aanmaken door bestaande templates aan te passen of documenten van de grond opnieuw
+    op te bouwen.
+
+    Zend_Pdf ondersteunt de volgende mogelijkheden:
+    <itemizedlist>
+        <listitem>
+            <para>
+            Een nieuw document maken of een bestaand document laden.
+            <footnote>
+                <para>
+                PDF V1.4 (Acrobat 5) documenten zijn nu ondersteund.
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Een bepaalde revisie van een document verkrijgen.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Pagina's binnenin het document manipuleren. De pagina orde veranderen, nieuwe pagina's
+            toevoegen, pagina's verwijderen uit een document.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Verschillende tekening vormen (lijnen, rechthoeken, polygonen, cirkels, ellipsen en sectoren).
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Tekst schrijven met één van de 16 standaard lettertypes.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Rotaties.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Beelden tekenen.
+            <footnote>
+                <para>
+                Enkel JPG beelden zijn ondersteund op dit moment.
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            Incremental PDF bestand update.
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

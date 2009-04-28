@@ -1,0 +1,68 @@
+<sect1 id="zend.feed.modifying-feed">
+    <title>Feed en Entry structuren wijzigen</title>
+
+    <para>
+        De intuïtieve syntax van <code>Zend_Feed</code> breidt zich uit voor het bouwen en wijzigen van feeds en
+        entries, naast het lezen ervan. Je kan gemakkelijk je nieuwe of gewijzigde objecten in
+        goedgevormde XML terugsturen om het in een bestand op te slaan of naar een server te sturen.
+    </para>
+
+    <example>
+        <title>Wijzigen van een bestaande Feed Entry</title>
+        <programlisting role="php"><![CDATA[
+<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+$entry = $feed->current();
+
+$entry->title = 'Dit is een nieuwe titel';
+$entry->author->email = 'my_email@example.com';
+
+echo $entry->saveXML();
+
+?>]]>   </programlisting>
+        <para>
+            Dit zal een volledige (inclusief <code>&lt;?xml ... &gt;</code> proloog) XML representatie van de
+            nieuwe entry weergeven, met inbegrip van alle nodige XML namespaces.
+        </para>
+        <para>
+            Merk op dat het bovenstaande zelfs zal werken indien de oorspronkelijke entry nog geen <code>author</code>
+            afbakening heeft. Je kan zoveel niveaus van <code>-&gt;</code> aandoen als je wil voor een toewijzing te
+            doen; alle niveaus zullen automatisch worden aangemaakt indien nodig.
+        </para>
+    </example>
+
+    <para>
+        Als je een andere namespace wil gebruiken dan <code>atom:</code>, <code>rss:</code> of <code>osrss:</code>
+        in je entry, moet je de namespace registreren aan <code>Zend_Feed</code> door
+        <code>Zend_Feed::registerNamespace()</code> te gebruiken. Als je een bestaand element wil wijzigen zal het
+        steeds zijn oorspronkelijke namespace behouden. Als je een nieuw element toevoegt zal het in de standaard
+        namespace gaan als je niet uitdrukkelijk een andere namespace toewijst.
+    </para>
+
+    <example>
+        <title>Een Atom Entry met elementen van een aangepaste namespace</title>
+        <programlisting role="php"><![CDATA[
+<?php
+
+$entry = new Zend_Feed_Entry_Atom();
+// id wordt altijd via de server toegewezen in Atom
+$entry->title = 'mijn aangepaste entry';
+$entry->author->name = 'Voorbeeldauteur';
+$entry->author->email = 'me@example.com';
+
+// Doe nu de aanpassing
+Zend_Feed::registerNamespace('myns', 'http://www.example.com/myns/1.0');
+
+$entry->{'myns:myelement_one'} = 'mijn eerste aangepaste waarde';
+$entry->{'myns:container_elt'}->part1 = 'eerste genesteld aangepast deel';
+$entry->{'myns:container_elt'}->part2 = 'tweede genesteld aangepast deel';
+
+echo $entry->saveXML();
+
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

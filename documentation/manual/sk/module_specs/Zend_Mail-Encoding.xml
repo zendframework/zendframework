@@ -1,0 +1,17 @@
+<sect1 id="zend.mail.encoding">
+    <title>Kódovanie</title>
+    <para>
+        Telo textových a HTML správ je obvykle zakódované pomocou &quot;quotedprintable&quot; kódovania.
+        Všetky prílohy sú zakódované pomocou &quot;base64&quot; kódovania. Pri volaní metódy
+        <code>addAttachment()</code> je možné nastavené iné kódovanie. Kódovanie je možné nastaviť aj
+        v objekte pre MIME-časť. 7Bit a 8Bit kódovanie v súčastnosti nie je implementované
+        a dáta sú ďalej predané bez zmeny.
+    </para>
+    <para>
+        <code>Zend_Mail_Transport_Smtp</code> zakóduje riadky, ktoré začínajú jednou, alebo dvomi bodkami
+        a teda takýto e-mail nebude narušovať SMTP protokol.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

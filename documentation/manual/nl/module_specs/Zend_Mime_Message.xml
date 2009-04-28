@@ -1,0 +1,85 @@
+<sect1 id="zend.mime.message">
+    <title>Zend_Mime_Message</title>
+
+      <sect2 id="zend.mime.message.introduction">
+          <title>Inleiding</title>
+
+          <para><code>Zend_Mime_Message</code> stelt een MIME compatibel bericht voor
+          dat één of meer gescheiden delen (voorgesteld als
+          <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link> objecten)
+          kan bevatten. Je kan MIME compatibele multipart berichten genereren van
+          MimeParts met <code>Zend_Mime_Message</code>. Encodering en boundary worden
+          transparant door de klasse afgehandeld. <code>Zend_Mime_Message</code> objecten
+          kunnen ook van opgegeven strings worden opgebouwd (experimenteel). Gebruikt door
+          <link linkend="zend.mail"><code>Zend_Mail</code></link>.
+          </para>
+      </sect2>
+
+      <sect2 id="zend.mime.message.instantiation">
+        <title>Instantiëring</title>
+        <para>
+            Er is geen expliciete constructor voor <code>Zend_Mime_Message</code>.
+        </para>
+      </sect2>
+
+      <sect2 id="zend.mime.message.addparts">
+        <title>MIME Delen Toevoegen</title>
+
+        <para><link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>
+        objecten kunnen aan een gegeven <code>Zend_Mime_Message</code> object worden toegevoegd
+        door <code>-&gt;addPart($part)</code> op te roepen</para>
+
+        <para>De methode <code>-&gt;getParts()</code> geeft een array met alle delen
+        in <code>Zend_Mime_Message</code> terug. De <link linkend="zend.mime.part">
+        <code>Zend_Mime_Part</code></link> objecten kunnen dan worden gewijzigd vermits ze
+        als referenties in de array zijn opgeslaan. Indien delen aan de array worden
+        toegevoegd, of de volgorde ervan word gewijzigd, moet de array terug aan
+        <link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link> worden gegeven
+        door <code>-&gt;setParts($partsArray)</code> op te roepen.</para>
+
+        <para>De functie <code>-&gt;isMultiPart()</code> zal true teruggeven als
+        meer dan 1 deel in het Zend_Mime_Message object is geregistreerd en dat
+        object dus een Multipart-Mime-Message zou genereren bij weergave.</para>
+      </sect2>
+
+      <sect2 id="zend.mime.message.bondary">
+        <title>Boundary afhandeling</title>
+
+        <para><code>Zend_Mime_Message</code> maakt en gebruikt meestal zijn eigen
+        <code>Zend_Mime</code> object om een boundary te genereren. Indien je een
+        boundary moet definiëren of je wil het standaard gedrag van het Zend_Mime
+        object dat <code>Zend_Mime_Message</code> gebruikt wil wijzigen, kan je
+        het Zend_Mime object zelf instantiëren en het dan in
+        <code>Zend_Mime_Message</code> registreren. Normaal gesproken zal je dit
+        niet hoeven te doen. <code>-&gt;setMime(Zend_Mime $mime)&lt;-</code> zet een
+        speciale instantie van <code>Zend_Mime</code> dat door deze
+        <code>Zend_Mime_Message</code> moet worden gebruikt.</para>
+
+        <para><code>-&gt;getMime()</code> geeft de instantie van <code>Zend_Mime</code>
+        terug die zal worden gebruikt om het bericht weer te geven wanneer
+        <code>generateMessage()</code> word opgeroepen.</para>
+
+        <para><code>-&gt;generateMessage()</code> geeft de inhoud van
+        <code>Zend_Mime_Message</code> als een string weer.</para>
+      </sect2>
+
+      <sect2 id="zend.mime.message.parse">
+        <title>Een string parsen om een Zend_Mime_Message object te maken
+        (experimenteel)</title>
+
+        <para>Een gegeven MIME compatibel bericht in de vorm van een string
+        kan worden gebruikt om er een <code>Zend_Mime_Message</code> object van
+        te (her)opbouwen.
+        <code>Zend_Mime_Message</code> heeft een statische "factory" methode om
+        deze string te parsen en een <code>Zend_Mime_Message</code> object terug
+        te geven.</para>
+
+        <para><code>Zend_Mime_Message::createFromMessage($str, $boundary)</code>
+        decodeert een gegeven string en geeft een <code>Zend_Mime_Message</code>
+        object terug dat dan kan worden onderzocht door <code>-&gt;getParts()</code>
+        te gebruiken.</para>
+      </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

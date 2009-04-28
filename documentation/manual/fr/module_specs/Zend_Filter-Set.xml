@@ -1,0 +1,115 @@
+<!-- EN-Revision: 13630 -->
+<sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Classes de filtre standards</title>
+
+    <para>Zend Framework est fourni avec un jeu de filtres standards, qui sont directement utilisables.</para>
+
+    <sect2 id="zend.filter.set.alnum">
+        <title>Alnum</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères alphabétiques et numériques.
+        Ce filtre inclue une option permettant d'autoriser ou non les caractères espace.</para>
+
+        <note>
+            <para>Les caractères alphabétiques comprennent les caractères destinés à constituer des mots dans chaque
+            langue. Cependant l'alphabet anglais est aussi utilisé pour les langues suivantes : chinois, japonais et
+            coréen. La langue est spécifiée par <classname>Zend_Locale</classname>.</para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.filter.set.alpha">
+        <title>Alpha</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères alphabétiques. Ce filtre
+        inclue une option permettant d'autoriser ou non les caractères espace.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.basename">
+        <title>BaseName</title>
+
+        <para>En passant une chaîne contenant un chemin vers un fichier, ce filtre retourne le nom de base du
+        fichier.</para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Decryption.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Decryption.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.filter.set.digits">
+        <title>Digits</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en retirant tout sauf les caractères numériques.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.dir">
+        <title>Dir</title>
+
+        <para>Retourne la partie correspondant au nom de dossier dans le chemin spécifié.</para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Encryption.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-Encryption.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.filter.set.htmlentities">
+        <title>HtmlEntities</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en convertissant les caractères en leurs entités HTML
+        correspondantes quand elles existent.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.int">
+        <title>Int</title>
+
+        <para>Retourne la valeur <code>(int) $value</code>.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>Int</title>
+
+        <para>Retourne la valeur <code>$value</code> en enlevant les caractères représentant une nouvelle ligne.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.realpath">
+        <title>RealPath</title>
+
+        <para>Étend tous les liens symboliques et résout les références à '/./', '/../' et les caractères
+        supplémentaires '/' dans le chemin fourni et retourne le nom de chemin absolu. Le chemin retourné ne contient
+        plus de liens symboliques, ou de composantes '/./' ou '/../'.</para>
+
+        <para><classname>Zend_Filter_RealPath</classname> retournera <code>FALSE</code> en cas d'échec, par exemple si un fichier
+        n'existe pas. Sur les systèmes BSD <classname>Zend_Filter_RealPath</classname> n'échouera pas si seul le dernier composant
+        n'existe pas, tandis que tous les autres systèmes retourneront <code>FALSE</code>.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtolower">
+        <title>StringToLower</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en convertissant les caractères alphabétiques en minuscules si
+        nécessaire.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtoupper">
+        <title>StringToUpper</title>
+
+        <para>Retourne la chaîne <code>$value</code>, en convertissant les caractères alphabétiques en majuscules si
+        nécessaire.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtrim">
+        <title>StringTrim</title>
+
+        <para>Retourne la chaîne <code>$value</code> en supprimant les caractères vides en début et fin de
+        chaîne.</para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.striptags">
+        <title>StripTags</title>
+
+        <para>Ce filtre retourne une chaîne, où toutes les balises HTML et PHP sont supprimées, exceptées celles qui
+        sont explicitement autorisées. En plus de pouvoir spécifier quelles balises sont autorisées, les développeurs
+        peuvent spécifier quels attributs sont autorisés soit pour toutes les balises autorisées soit pour des balises
+        spécifiques seulement. Pour finir, ce filtre permet de contrôler si les commentaires (par exemple <code>&lt;!--
+        ... --&gt;</code>) sont refusés ou autorisés.</para>
+    </sect2>
+</sect1>

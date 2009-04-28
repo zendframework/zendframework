@@ -1,0 +1,16 @@
+<appendix id="copyrights">
+    <title>מידע אודות זכויות יוצרים</title>
+
+    <para>
+        זכויות היוצרים הבאים ישימים לחלקים של Zend Framework.
+    </para>
+
+    <para>
+        כל הזכויות שמורות &#169; 2005-<?dbtimestamp format="Y"?> Zend Technologies Inc.
+       (<ulink url="http://www.zend.com" />)
+    </para>
+
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

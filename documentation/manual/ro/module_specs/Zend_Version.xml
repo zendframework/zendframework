@@ -1,0 +1,32 @@
+<sect1 id="zend.version.reading">
+
+    <title>Citirea versiunii de Zend Framework</title>
+
+    <para>
+        Constata de clasă <code>Zend_Version::VERSION</code>
+        conţine un text care identifică numărul versiunii curente
+        de Zend Framework.  De exemplu: „0.9.0beta”.
+    </para>
+
+    <para>
+        Metoda statică <code>Zend_Version::compareVersion($version)</code>
+        se bazează pe funcţia PHP
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Această metodă întoarce -1 dacă versiunea <code>$version</code> specificată
+        este mai veche decât versiunea de Zend Framework, 0 dacă sunt aceleaşi,
+        şi +1 dacă versiunea <code>$version</code> specificată este mai nouă decât
+        versiunea de Zend Framework.
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>Examplu pentru metoda compareVersion()</title>
+        <programlisting role="php"><![CDATA[<?php
+// returns -1, 0 or 1
+$cmp = Zend_Version::compareVersion('1.0.0');]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

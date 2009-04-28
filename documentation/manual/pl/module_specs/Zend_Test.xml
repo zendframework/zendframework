@@ -1,0 +1,13 @@
+<sect1 id="zend.test.introduction">
+    <title>Wprowadzenie</title>
+
+    <para>
+        Komponent <code>Zend_Test</code> zapewnia narzędzia ułatwiające
+        obsługę testów jednostkowych twoich aplikacji opartych o Zend Framework.
+        W tej chwili dostępne są klasy do przeprowadzania testów aplikacji
+        używających wzorca MVC Zend Framework.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

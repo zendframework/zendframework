@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.test.phpunit.assertions">
+    <title>Assertions</title>
+
+    <para>
+        Assertions are at the heart of Unit Testing; you use them to verify
+        that the results are what you expect. To this end,
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> provides a number of
+        assertions to make testing your MVC apps and controllers simpler.
+    </para>
+
+    <sect3 id="zend.test.phpunit.assertions.query">
+        <title>CSS Selector Assertions</title>
+
+        <para>
+            CSS selectors are an easy way to verify that certain artifacts are
+            present in the response content. They also make it trivial to
+            ensure that items necessary for Javascript UIs and/or AJAX
+            integration will be present; most JS toolkits provide some
+            mechanism for pulling DOM elements based on CSS selectors, so the
+            syntax would be the same.
+        </para>
+
+        <para>
+            This functionality is provided via <link
+                linkend="zend.dom.query">Zend_Dom_Query</link>, and integrated
+            into a set of 'Query' assertions. Each of these assertions takes
+            as their first argument a CSS selector, with optionally additional
+            arguments and/or an error message, based on the assertion type. You
+            can find the rules for writing the CSS selectors in the <link
+                linkend="zend.dom.query.operation">Zend_Dom_Query theory of
+                operation chapter</link>. Query assertions include:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>assertQuery($path, $message = '')</code>: assert that
+                one or more DOM elements matching the given CSS selector are
+                present. If a <code>$message</code> is present, it will be
+                prepended to any failed assertion message.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryContentContains($path, $match, $message =
+                    '')</code>: assert that one or more DOM elements matching
+                the given CSS selector are present, and that at least one
+                contains the content provided in <code>$match</code>. If a
+                <code>$message</code> is present, it will be prepended to any
+                failed assertion message.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryContentRegex($path, $pattern, $message =
+                    '')</code>: assert that one or more DOM elements matching
+                the given CSS selector are present, and that at least one
+                matches the regular expression provided in
+                <code>$pattern</code>. If a <code>$message</code> is present,
+                it will be prepended to any failed assertion message.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryCount($path, $count, $message =
+                    '')</code>: assert that there are exactly
+                <code>$count</code> DOM elements matching the given CSS
+                selector present. If a <code>$message</code> is present, it
+                will be prepended to any failed assertion message.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryCountMin($path, $count, $message =
+                    '')</code>: assert that there are at least
+                <code>$count</code> DOM elements matching the given CSS
+                selector present. If a <code>$message</code> is present, it
+                will be prepended to any failed assertion message.
+                <emphasis>Note:</emphasis> specifying a value of 1 for
+                <code>$count</code> is the same as simply using
+                <code>assertQuery()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryCountMax($path, $count, $message =
+                    '')</code>: assert that there are no more than
+                <code>$count</code> DOM elements matching the given CSS
+                selector present. If a <code>$message</code> is present, it
+                will be prepended to any failed assertion message.
+                <emphasis>Note:</emphasis> specifying a value of 1 for
+                <code>$count</code> is the same as simply using
+                <code>assertQuery()</code>.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Additionally, each of the above has a 'Not' variant that provides a
+            negative assertion: <code>assertNotQuery()</code>,
+            <code>assertNotQueryContentContains()</code>,
+            <code>assertNotQueryContentRegex()</code>, and
+            <code>assertNotQueryCount()</code>. (Note that the min and
+            max counts do not have these variants, for what should be obvious
+            reasons.)
+        </para>
+    </sect3>
+
+    <sect3 id="zend.test.phpunit.assertions.xpath">
+        <title>XPath Assertions</title>
+
+        <para>
+            Some developers are more familiar with XPath than with CSS
+            selectors, and thus XPath variants of all the <link
+                linkend="zend.test.phpunit.assertions.query">Query
+                assertions</link> are also provided. These are:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>assertXpath($path, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertNotXpath($path, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertXpathContentContains($path, $match, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertNotXpathContentContains($path, $match, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertXpathContentRegex($path, $pattern, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertNotXpathContentRegex($path, $pattern, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertXpathCount($path, $count, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertNotXpathCount($path, $count, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertXpathCountMin($path, $count, $message = '')</code>
+            </para></listitem>
+            <listitem><para>
+                <code>assertNotXpathCountMax($path, $count, $message = '')</code>
+            </para></listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.test.phpunit.assertions.redirect">
+        <title>Redirect Assertions</title>
+
+        <para>
+            Often an action will redirect. Instead of following the redirect,
+            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> allows you to
+            test for redirects with a handful of assertions.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>assertRedirect($message = '')</code>: assert simply that
+                a redirect has occurred.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertNotRedirect($message = '')</code>: assert that no
+                redirect has occurred.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertRedirectTo($url, $message = '')</code>: assert that
+                a redirect has occurred, and that the value of the Location
+                header is the <code>$url</code> provided.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertNotRedirectTo($url, $message = '')</code>: assert that
+                a redirect has either NOT occurred, or that the value of the Location
+                header is NOT the <code>$url</code> provided.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertRedirectRegex($pattern, $message = '')</code>:
+                assert that a redirect has occurred, and that the value of the
+                Location header matches the regular expression provided by
+                <code>$pattern</code>.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertNotRedirectRegex($pattern, $message = '')</code>:
+                assert that a redirect has either NOT occurred, or that the value of the
+                Location header does NOT match the regular expression provided by
+                <code>$pattern</code>.
+            </para></listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.test.phpunit.assertions.header">
+        <title>Response Header Assertions</title>
+
+        <para>
+            In addition to checking for redirect headers, you will often need
+            to check for specific HTTP response codes and headers -- for
+            instance, to determine whether an action results in a 404 or 500
+            response, or to ensure that JSON responses contain the appropriate
+            Content-Type header. The following assertions are available.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>assertResponseCode($code, $message = '')</code>: assert
+                that the response resulted in the given HTTP response code.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertHeader($header, $message = '')</code>: assert
+                that the response contains the given header.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertHeaderContains($header, $match, $message =
+                '')</code>: assert that the response contains the given header
+                and that its content contains the given string.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertHeaderRegex($header, $pattern, $message =
+                '')</code>: assert that the response contains the given header
+            and that its content matches the given regex.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Additionally, each of the above assertions have a 'Not' variant for
+            negative assertions.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.test.phpunit.assertions.request">
+        <title>Request Assertions</title>
+
+        <para>
+            It's often useful to assert against the last run action,
+            controller, and module; additionally, you may want to assert
+            against the route that was matched. The following assertions can
+            help you in this regard:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>assertModule($module, $message = '')</code>: Assert that
+                the given module was used in the last dispatched action.
+            </para></listitem>
+            <listitem><para>
+                <code>assertController($controller, $message = '')</code>:
+                Assert that the given controller was selected in the last
+                dispatched action.
+            </para></listitem>
+            <listitem><para>
+                <code>assertAction($action, $message = '')</code>: Assert that
+                the given action was last dispatched.
+            </para></listitem>
+            <listitem><para>
+                <code>assertRoute($route, $message = '')</code>: Assert that
+                the given named route was matched by the router.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Each also has a 'Not' variant for negative assertions.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

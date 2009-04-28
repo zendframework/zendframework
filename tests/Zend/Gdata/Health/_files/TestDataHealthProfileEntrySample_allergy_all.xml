@@ -1,0 +1,52 @@
+<Alerts>
+  <Alert>
+    <Type>
+      <Text>Allergy</Text>
+    </Type>
+    <Description>
+      <Text>A-Fil</Text>
+    </Description>
+    <Status>
+      <Text>ACTIVE</Text>
+    </Status>
+    <Source>
+      <Actor>
+        <ActorID>user@gmail.com</ActorID>
+        <ActorRole>
+          <Text>Patient</Text>
+        </ActorRole>
+      </Actor>
+    </Source>
+    <Reaction>
+      <Description />
+      <Severity>
+        <Text>Severe</Text>
+      </Severity>
+    </Reaction>
+  </Alert>
+  <Alert>
+    <Type>
+      <Text>Allergy</Text>
+    </Type>
+    <Description>
+      <Text>A.E.R Traveler</Text>
+    </Description>
+    <Status>
+      <Text>ACTIVE</Text>
+    </Status>
+    <Source>
+      <Actor>
+        <ActorID>user@gmail.com</ActorID>
+        <ActorRole>
+          <Text>Patient</Text>
+        </ActorRole>
+      </Actor>
+    </Source>
+    <Reaction>
+      <Description />
+      <Severity>
+        <Text>Severe</Text>
+      </Severity>
+    </Reaction>
+  </Alert>
+</Alerts>

@@ -1,0 +1,164 @@
+<sect1 id="zend.feed.consuming-rss">
+    <title>Een RSS Feed lezen</title>
+    <para>
+        Een RSS feed lezen is zo eenvoudig als het instantiëren van een <code>Zend_Feed_Rss</code> object
+        met het URI van de feed:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+$channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
+
+?>]]></programlisting>
+    <para>
+        Indien er fouten optreden bij het verkrijgen van de feed zal een <code>Zend_Feed_Exception</code>
+        opgeworpen worden.
+    </para>
+
+    <para>
+        Als je eenmaal een feed object hebt, kan je toegang verkrijgen voor eender welke van de standaard RSS
+        kanaaleigenschappen    op een direkte wijze:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+echo $channel->title();
+
+?>]]></programlisting>
+    <para>
+        Merk de functiesyntax op. <code>Zend_Feed</code> gebruikt een overeenkomst om eigenschappen als
+        XML objecten te behandelen indien ze werden opgevraagd met de variabele "getter" syntax
+        (<code>$obj->property()</code>). Dit laat het toe de volledige tekst van eender welke individuele
+        node te verkrijgen en toch volledig toegang te hebben tot alle childnodes.
+    </para>
+
+    <para>
+        Indien kanaaleigenschappen attributen hebben zijn deze toegangkelijk door het gebruiken van de
+        array syntax van PHP:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+echo $channel->category['domain'];
+
+?>]]></programlisting>
+    <para>
+        Vermits XML attributen geen kinderen kunnen hebben is de functiesyntax niet nodig om toegang te krijgen
+        tot attribuutwaarden.
+    </para>
+
+    <para>
+        Meestal zal je door een feed willen loopen en iets met de entries willen doen.
+        <code>Zend_Feed_Abstract</code> implementeert PHP's <code>Iterator</code> interface, dus het weergeven van alle titels van artikels in een kanaal is eenvoudig met:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+foreach ($channel as $item) {
+    echo $item->title() . "\n";
+}
+
+?>]]></programlisting>
+    <para>
+        Indien je niet vertrouwd bent met RSS zijn hier de standaard elementen die je kan verwachten in een
+        RSS kanaal en in individuele RSS items (entries).
+    </para>
+
+    <para>
+        Verplichte kanaalelementen:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - De naam van het kanaal</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - De URL van de overeenkomstige website</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Eén of meerdere zinnen die het kanaal beschrijven</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Gewone optionele elementen:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>pubDate</code> - De publicatiedatum van deze set van inhoud, in de
+                vorm van een RFC 822 datum</para>
+            </listitem>
+            <listitem>
+                <para><code>language</code> - De taal waarin het kanaal is geschreven</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Eén of meerdere (gespecifieerd door het vermenigvuldigen
+                van de afbakeningen) categoriën waartoe het kanaal behoort</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        RSS <code>&lt;item&gt;</code> elementen hebben geen strict verplichte eigenschappen. Desalnietemin moeten
+        ofwèl <code>title</code> of <code>description</code> aanwezig zijn.
+    </para>
+
+    <para>
+        Gewone item elementen:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - De titel van het item</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - De URL van het item</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Een samenvatting van het item</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - Het e-mailadres van de auteur</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Eén of meerdere categorieën waartoe het item behoort</para>
+            </listitem>
+            <listitem>
+                <para><code>comments</code> - URL van commentaren verbonden aan dit item</para>
+            </listitem>
+            <listitem>
+                <para><code>pubDate</code> - De datum van publicatie van het item in RFC 822 formaat</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Je kan in jouw code altijd testen of een element leeg is of niet met:
+    </para>
+    <programlisting role="php"><![CDATA[
+<?php
+
+if ($item->propname()) {
+    // ... doorgaan.
+}
+
+?>]]></programlisting>
+
+    <para>
+        Indien je in de plaats daarvan <code>$item->propname</code> gebruikt, zal je altijd een leeg
+        object verkrijgen dat geëvalueerd zal worden als <code>TRUE</code> en je test zal niet juist zijn.
+    </para>
+
+    <para>
+        Voor verdere informatie kan je terecht op de officiële RSS 2.0 specificatie:
+        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,92 @@
+<sect1 id="zend.search.lucene.index-creation">
+  <title>Construindo Índices</title>
+
+  <sect2 id="zend.search.lucene.index-creation.creating">
+    <title>Criando um Novo Índice</title>
+
+    <para>As funcionalidades de criação e atualização de índices são
+    implementadas tanto pelo módulo Zend_Search_Lucene quanto pelo Java
+    Lucene. Você pode usar ambas as funcionalidades.</para>
+
+    <para>O código PHP abaixo mostra um exemplo de como indexar um arquivo
+    usando a API de indexação do Zend_Search_Lucene:</para>
+
+    <programlisting role="php">&lt;?php
+
+// Setting the second argument to TRUE creates a new index
+$index = new Zend_Search_Lucene('/data/my-index', true);
+
+$doc = new Zend_Search_Lucene_Document();
+
+// Store document URL to identify it in search result.
+$doc-&gt;addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+
+// Index document content
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+
+// Add document to the index.
+$index-&gt;addDocument($doc);
+
+// Write changes to the index.
+$index-&gt;commit();
+?&gt;</programlisting>
+
+    <para>Documentos adicionados recentemente devem ser pesquisados no índice
+    somente após um "commit" ter sido executado.</para>
+
+    <para>O método <code>Zend_Search_Lucene::commit()</code> é chamado
+    automaticamente ao final da execução do script e antes de qualquer
+    operação de busca.</para>
+
+    <para>Cada chamada a método commit() gera um novo segmento de índice. Ele
+    deve ser usado raramente, se possível. Observe também que executar
+    "commit" em uma grande quantidade de documentos, em um único passo,
+    consome mais memória.</para>
+
+    <para>O gerenciamento e a otimização de segmentos de forma automatica é um
+    assunto para ser tratado em futuros aprimoramentos do módulo
+    Zend_Search_Lucene.</para>
+  </sect2>
+
+  <sect2 id="zend.search.lucene.index-creation.updating">
+    <title>Atualizando um Índice</title>
+
+    <para>O mesmo procedimento é empregado para atualizar um índice existente.
+    A única diferença é que o índice deverá ser aberto sem o segundo
+    parâmetro:</para>
+
+    <programlisting role="php">&lt;?php
+
+// Open existing index
+$index = new Zend_Search_Lucene('/data/my-index');
+
+$doc = new Zend_Search_Lucene_Document();
+// Store document URL to identify it in search result.
+$doc-&gt;addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+// Index document content
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+
+// Add document to the index.
+$index-&gt;addDocument($doc);
+
+// Write changes to the index.
+$index-&gt;commit();
+?&gt;</programlisting>
+
+    <para>Cada chamada a commit() (explícita ou implícita) gera um novo
+    segmento de índice.</para>
+
+    <para>Zend_Search_Lucene não gerencia segmentos automaticamente. Então é
+    tarefa do programador observar o tamanho dos segmentos. De um lado,
+    segmentos grandes são mais otimizados, mas por outro, eles consomem mais
+    memória durante sua criação.</para>
+
+    <para>Lucene Java e Luke (Lucene Index Toolbox - <ulink
+    url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+    podem ser usados para otimizar índices juntamente com esta versão do
+    Zend_Search_Lucene.</para>
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

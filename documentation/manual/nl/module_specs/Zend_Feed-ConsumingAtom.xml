@@ -1,0 +1,103 @@
+<sect1 id="zend.feed.consuming-atom">
+<title>Een Atom Feed lezen</title>
+
+    <para>
+        <code>Zend_Feed_Atom</code> is voor een groot deel identiek aan <code>Zend_Feed_Rss</code>. Het
+        verstrekt dezelfde toegang to feed eigenschappen en het overlopen van de entries in de feed. Het
+        grote verschil zit in de structuur van het Atom protocol zelf. Atom is een opvolger van RSS; het
+        is een meer generiek protocol en is ontworpen om gemakkelijker met feeds om te gaan die de
+        volledige inhoud in de feed aanbieden door het opsplitsen van de RSS <code>description</code>
+        eigenschap in twee elementen: <code>summary</code> en <code>content</code>.
+    </para>
+
+    <example>
+        <title>Basisgebruik van een Atom Feed</title>
+        <para>
+            Lees een Atom feed en beeld de <code>title</code> en <code>summary</code> van elke entry af:
+        </para>
+        <programlisting role="php"><![CDATA[
+<?php
+
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
+echo 'de feed bevat ' . $feed->count() . ' entries.' . "\n\n";
+foreach ($feed as $entry) {
+    echo 'Titel: ' . $entry->title() . "\n";
+    echo 'Samenvatting: ' . $entry->summary() . "\n\n";
+}
+
+?>]]>   </programlisting>
+    </example>
+
+    <para>
+        Je kan de volgende feed eigenschappen verwachten in een Atom feed:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - De titel van de feed, hetzelfde als de kanaaltitel van een RSS feed</para>
+            </listitem>
+            <listitem>
+                <para><code>id</code> - Elke feed en entry heeft een unieke id in Atom</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Feeds kunnen meerder links hebben, ze zijn gescheiden door het
+                <code>type</code> attribuut</para>
+                <para>
+                    De tegenhanger in een RSS kanaal link zou de <code>type="text/html"</code> zijn. Indien
+                    de link naar een alternatieve versie van dezelfde inhoud in de feed verwijst  zou het het
+                    attribuut <code>rel="alternative"</code> hebben.
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>subtitle</code> - De beschrijving van de feed, de tegenhanger van de
+                kanaalbeschrijving in RSS
+                </para>
+                <para><code>author->name()</code> - De naam van de auteur van de feed</para>
+                <para><code>author->email()</code> - Het email adres van de auteur van de feed</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Atom entries hebben gewoonlijk de volgende eigenschappen:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>id</code> - De unieke ID van de entry</para>
+            </listitem>
+            <listitem>
+                <para><code>title</code> - De titel van de entry, hetzelfde als de item titels in RSS</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Een link naar een alternatieve versie of afbeelding van deze entry</para>
+            </listitem>
+            <listitem>
+                <para><code>summary</code> - Een samenvatting van de inhoud van de entry</para>
+            </listitem>
+            <listitem>
+                <para><code>content</code> - De volledige inhoud van de entry; dit kan worden overgeslaan indien
+                de feed alleen samenvattingen bevat</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - met <code>name</code> en <code>email</code> subafbakeningen zoals feeds hebben</para>
+            </listitem>
+            <listitem>
+                <para><code>published</code> - de publicatiedatum in RFC 3339 formaat</para>
+            </listitem>
+            <listitem>
+                <para><code>updated</code> - de datum van de laatste update van het item in RFC 3339 formaat</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Voor meer informatie en een overvloed van bronnen over Atom, ga naar
+        <ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

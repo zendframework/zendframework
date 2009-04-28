@@ -1,0 +1,56 @@
+<!-- EN-Revision: 13827 -->
+<sect1 id="zend.translate.migration">
+    <title>Migrer à partir des versions précédentes</title>
+
+    <para>L'API de <classname>Zend_Translate</classname> a changé au cours du temps. Si vous avez commencé à utiliser
+    <classname>Zend_Translate</classname> et ses sous-composants avec les versions précédentes, suivez les lignes directrices
+    ci-dessous pour migrer vos scripts et ainsi utiliser la nouvelle API.</para>
+
+    <sect2 id="zend.translate.migration.fromonesixtooneseven">
+        <title>Migrer de la version 1.6 vers 1.7 ou plus récent</title>
+
+        <sect3 id="zend.translate.migration.fromonesixtooneseven.languages">
+            <title>Paramétrer les langues</title>
+
+            <para>Lors de l'utilisation de la détection automatique des langues, ou du réglage manuel des langues de
+            <classname>Zend_Translate</classname>, vous avez peut-être remarqué que de temps en temps une notice est envoyée
+            concernant le non-ajout de traductions vides. Dans certaines versions précédentes, une exception était levée
+            dans certains cas.</para>
+
+            <para>Ceci intervient quand un utilisateur requête une langue non existante, vous n'avez alors aucun moyen
+            simple de détecter ce qui ne va pas. Nous avons donc ajouté ces notices qui apparaîtront dans votre
+            historisation et qui vous diront qu'un utilisateur a requêté une langue que vous ne supportez pas. Notez
+            bien que votre code, même si une notice est déclenchée, fonctionnera sans problèmes.</para>
+
+            <para>Mais quand vous utilisez votre propre gestionnaire d'erreur ou d'exception, comme xDebug, toutes les
+            notices vous seront retournées, même si ce n'est pas votre intention initiale. Ceci est du au fait, que ces
+            gestionnaires surchargent tous les réglages internes de PHP.</para>
+
+            <para>Pour vous affranchir de ces notices, vous pouvez simplement paramétrer la nouvelle option
+            <code>disableNotices</code> à <code>true</code>, sa valeur par défaut étant <code>false</code>.</para>
+
+            <example id="zend.translate.migration.fromonesixtooneseven.example">
+                <title>Paramétrer les langues sans avoir de notices</title>
+
+                <para>Assumons que "<code>fr</code>" soit disponible et qu'un utilisateur requête pour "<code>de</code>"
+                qui ne fait pas partie de votre portefeuille de traductions.</para>
+
+                <programlisting role="php"><![CDATA[
+$language = new Zend_Translate('gettext',
+                               '/chemin/vers/les/traductions',
+                               'auto');
+]]></programlisting>
+
+                <para>Dans ce cas nous aurons une notice indiquant la non-disponibilité de la langue "<code>de</code>".
+                Ajoutez simplement l'option et les notices seront désactivées.</para>
+
+                <programlisting role="php"><![CDATA[
+$language = new Zend_Translate('gettext',
+                               '/chemin/vers/les/traductions',
+                               'auto',
+                               array('disableNotices' => true));
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+</sect1>

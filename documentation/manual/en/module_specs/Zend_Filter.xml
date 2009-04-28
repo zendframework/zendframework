@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.introduction">
+
+    <title>Introduction</title>
+
+    <para>
+        The Zend_Filter component provides a set of commonly needed data
+        filters. It also provides a simple filter chaining mechanism by which
+        multiple filters may be applied to a single datum in a user-defined
+        order.
+    </para>
+
+    <sect2 id="zend.filter.introduction.definition">
+
+        <title>What is a filter?</title>
+
+        <para>
+            In the physical world, a filter is typically used for removing
+            unwanted portions of input, and the desired portion of the input
+            passes through as filter output (e.g., coffee). In such scenarios,
+            a filter is an operator that produces a subset of the input. This
+            type of filtering is useful for web applications - removing illegal
+            input, trimming unnecessary white space, etc.
+        </para>
+
+        <para>
+            This basic definition of a filter may be extended to include
+            generalized transformations upon input.  A common transformation
+            applied in web applications is the escaping of HTML entities. For
+            example, if a form field is automatically populated with untrusted
+            input (e.g., from a web browser), this value should either be free
+            of HTML entities or contain only escaped HTML entities, in order to
+            prevent undesired behavior and security vulnerabilities. To meet
+            this requirement, HTML entities that appear in the input must
+            either be removed or escaped. Of course, which approach is more
+            appropriate depends on the situation. A filter that removes the
+            HTML entities operates within the scope of the first definition of
+            filter - an operator that produces a subset of the input. A filter
+            that escapes the HTML entities, however, transforms the input
+            (e.g., "<code>&amp;</code>" is transformed to
+            "<code>&amp;amp;</code>"). Supporting such use cases for web
+            developers is important, and "to filter," in the context of using
+            Zend_Filter, means to perform some transformations upon input data.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.filter.introduction.using">
+
+        <title>Basic usage of filters</title>
+
+        <para>
+            Having this filter definition established provides the foundation
+            for <classname>Zend_Filter_Interface</classname>, which requires a single
+            method named <code>filter()</code> to be implemented by a filter
+            class.
+        </para>
+
+        <para>
+            Following is a basic example of using a filter upon two input data,
+            the ampersand (<code>&amp;</code>) and double quote
+            (<code>&quot;</code>) characters:
+
+            <programlisting role="php"><![CDATA[
+$htmlEntities = new Zend_Filter_HtmlEntities();
+
+echo $htmlEntities->filter('&'); // &amp;
+echo $htmlEntities->filter('"'); // &quot;
+]]></programlisting>
+
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.filter.introduction.static">
+
+        <title>Using the static get() method</title>
+
+        <para>
+            If it is inconvenient to load a given filter class and create an
+            instance of the filter, you can use the static method
+            <classname>Zend_Filter::get()</classname> as an alternative invocation style.
+            The first argument of this method is a data input value, that you
+            would pass to the <code>filter()</code> method.  The second
+            argument is a string, which corresponds to the basename of the
+            filter class, relative to the Zend_Filter namespace.  The
+            <code>get()</code> method automatically loads the class, creates an
+            instance, and applies the <code>filter()</code> method to the data
+            input.
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('&', 'HtmlEntities');
+]]></programlisting>
+
+        </para>
+
+        <para>
+            You can also pass an array of constructor arguments, if they
+            are needed for the filter class.
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+]]></programlisting>
+
+        </para>
+
+        <para>
+            The static usage can be convenient for invoking a filter ad hoc,
+            but if you have the need to run a filter for multiple inputs,
+            it's more efficient to follow the first example above,
+            creating an instance of the filter object and calling its
+            <code>filter()</code> method.
+        </para>
+
+        <para>
+            Also, the Zend_Filter_Input class allows you to instantiate and run
+            multiple filter and validator classes on demand to process
+            sets of input data.  See <xref linkend="zend.filter.input" />.
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

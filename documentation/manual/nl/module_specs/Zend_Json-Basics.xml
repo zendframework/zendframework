@@ -1,0 +1,18 @@
+<sect1 id="zend.json.basics">
+    <title>Basisgebruik</title>
+    <para>
+        Het gebruik van <code>Zend_Json</code> impliceert het gebruik van de
+        volgende twee publiek beschikbare methodes: <code>Zend_Json::encode()</code>
+        en <code>Zend_Json::decode()</code>.
+        <programlisting role="php"><![CDATA[<?php
+// Een waarde verkrijgen:
+$phpNative = Zend_Json::decode($encodedValue);
+
+// Encodering om het terug naar de klant te sturen:
+$json = Zend_Json::encode($phpNative);
+?>]]></programlisting>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

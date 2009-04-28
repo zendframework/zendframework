@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.file.transfer.migration">
+
+    <title>Migration von vorhergehenden Versionen</title>
+
+    <para>
+        Die API von <classname>Zend_File_Transfer</classname> wurde von Zeit zu Zeit verändert. Wenn man bereits
+        angefangen hat <classname>Zend_File_Transfer</classname> und dessen Subkomponenten in vorhergehenden Versionen
+        zu verwenden sollte man den anbei beschriebenen Richtlinien folgen um eigene Skripts auf die neue
+        API zu migrieren.
+    </para>
+
+    <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
+        <title>Migration von 1.6 zu 1.7 oder neuer</title>
+        <sect3 id="zend.file.transfer.migration.fromonesixtooneseven.validators">
+            <title>Änderungen bei der Verwendung von Filtern und Prüfungen</title>
+
+            <para>
+                Wie von Benutzern erwähnt, arbeiteten die Prüfungen von <classname>Zend_File_Transfer</classname>
+                nicht in Verbindung mit <classname>Zend_Config</classname> zusammen, durch den Fakt das Sie keine
+                benannten Arrays verwendet haben.
+            </para>
+
+            <para>
+                Deswegen wurden alle Filter und Prüfungen für <classname>Zend_File_Transfer</classname> überarbeitet.
+                Wärend die alten Signaturen weiterhin funktionieren, wurden sie als veraltet markiert, und
+                werfen eine PHP Notiz mit der Aufforderung das zu beheben.
+            </para>
+
+            <para>
+                Die folgende Liste zeigt die Änderungen und was für die richtige Verwendung der Parameter
+                getan werden muß.
+            </para>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.rename">
+                <title>Filter: <emphasis>Rename</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Filter_File_Rename($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>source</emphasis> identisch mit $oldfile,
+                        <emphasis>target</emphasis> identisch mit $newfile,
+                        <emphasis>overwrite</emphasis> identisch mit $overwrite
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.rename.example">
+                    <title>Änderungen für den Rename Filter von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addFilter('Rename',
+                   array('/path/to/oldfile', '/path/to/newfile', true));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addFilter('Rename',
+                   array('source' => '/path/to/oldfile',
+                         'target' => '/path/to/newfile',
+                         'overwrite' => true));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.count">
+                <title>Prüfung: <emphasis>Count</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_Count($min, $max)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_Count($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>min</emphasis> identisch mit $min,
+                        <emphasis>max</emphasis> identisch mit $max,
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.count.example">
+                    <title>Änderungen für die Count Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Count',
+                      array(2, 3));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Count',
+                      false,
+                      array('min' => 2,
+                            'max' => 3));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.extension">
+                <title>Prüfung: <emphasis>Extension</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_Extension($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>*</emphasis> identisch mit $extension und kann jeden anderen Schlüssel haben
+                        <emphasis>case</emphasis> identisch mit $case,
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.extension.example">
+                    <title>Änderungen für die Extension Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Extension',
+                      array('jpg,gif,bmp', true));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Extension',
+                      false,
+                      array('extension1' => 'jpg,gif,bmp',
+                            'case' => true));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.filessize">
+                <title>Prüfung: <emphasis>FilesSize</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>min</emphasis> identisch mit $min,
+                        <emphasis>max</emphasis> identisch mit $max,
+                        <emphasis>bytestring</emphasis> identisch mit $bytestring
+                    </para></listitem>
+                </itemizedlist>
+
+                <para>
+                    Zustätzlich wurde die Signatur der <code>useByteString()</code> Methode geändert. Sie kann
+                    nur verwendet werden um zu testen ob die Prüfung ByteStrings in den erzeugten Meldungen
+                    verwendet oder ncht. Um den Wert dieses Flags zu setzen muß die
+                    <code>setUseByteString()</code> Methode verwendet werden.
+                </para>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
+                    <title>Änderungen für die FilesSize Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('FilesSize',
+                      array(100, 10000, true));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('FilesSize',
+                      false,
+                      array('min' => 100,
+                            'max' => 10000,
+                            'bytestring' => true));
+
+// Beispiel für 1.6
+$upload->useByteString(true); // Flag setzen
+
+// Gleiches Beispiel für 1.7
+$upload->setUseByteSting(true); // Flag setzen
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.hash">
+                <title>Prüfung: <emphasis>Hash</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_Hash($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>*</emphasis> identisch mit $hash und kann jeden anderen Schlüssel haben
+                        <emphasis>algorithm</emphasis> identisch mit $algorithm,
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.hash.example">
+                    <title>Änderungen für die Hash Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Hash',
+                      array('12345', 'md5'));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Hash',
+                      false,
+                      array('hash1' => '12345',
+                            'algorithm' => 'md5'));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.imagesize">
+                <title>Prüfung: <emphasis>ImageSize</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>minwidth</emphasis> identisch mit $minwidth,
+                        <emphasis>maxwidth</emphasis> identisch mit $maxwidth,
+                        <emphasis>minheight</emphasis> identisch mit $minheight,
+                        <emphasis>maxheight</emphasis> identisch mit $maxheight,
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.imagesize.example">
+                    <title>Änderungen für die ImageSize Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('ImageSize',
+                      array(10, 10, 100, 100));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('ImageSize',
+                      false,
+                      array('minwidth' => 10,
+                            'minheight' => 10,
+                            'maxwidth' => 100,
+                            'maxheight' => 100));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+
+            <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.size">
+                <title>Prüfung: <emphasis>Size</emphasis></title>
+
+                <itemizedlist>
+                    <listitem><para>
+                        Alte API der Methode: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
+                    </para></listitem>
+
+                    <listitem><para>
+                        Neue API der Methode: <classname>Zend_Validate_File_Size($options)</classname> wobei $options
+                        die folgenden Schlüssel für das Array akzeptiert:
+                        <emphasis>min</emphasis> identisch mit $min,
+                        <emphasis>max</emphasis> identisch mit $max,
+                        <emphasis>bytestring</emphasis> identisch mit $bytestring
+                    </para></listitem>
+                </itemizedlist>
+
+                <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.size.example">
+                    <title>Änderungen für die Size Prüfung von 1.6 zu 1.7</title>
+
+                    <programlisting role="php"><![CDATA[
+// Beispiel für 1.6
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Size',
+                      array(100, 10000, true));
+
+// Gleiches Beispiel für 1.7
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('Size',
+                      false,
+                      array('min' => 100,
+                            'max' => 10000,
+                            'bytestring' => true));
+]]>
+                    </programlisting>
+                </example>
+            </sect4>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.migration.fromonesixonetoonesixtwo">
+        <title>Migration von 1.6.1 zu 1.6.2 oder neuer</title>
+        <sect3 id="zend.file.transfer.migration.fromonesixonetoonesixtwo.validators">
+            <title>Änderungen bei der Verwendung von Prüfungen</title>
+
+            <para>
+                Wie von Benutzern festgestellt wurde, haben die Prüfungen von <classname>Zend_File_Transfer</classname>
+                nicht auf die gleiche Art und Weise funktioniert wie standardmäßigen von <classname>Zend_Form</classname>.
+                <classname>Zend_Form</classname> erlaubt die Verwendung eines <code>breakChainOnFailure</code> Parameters
+                der die Prüfung für alle weitere Prüfer unterbricht wenn ein Prüffehler aufgetreten ist.
+            </para>
+
+            <para>
+                Deshalb wurde dieser Parameter bei allen bestehenden Prüfungen von <classname>Zend_File_Transfer</classname>
+                hinzugefügt.
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    Alte API der Methode: <code>addValidator($validator, $options, $files)</code>.
+                </para></listitem>
+
+                <listitem><para>
+                    Neue API der Methode: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                </para></listitem>
+            </itemizedlist>
+
+            <para>
+                Um also eigene Skripte auf die neue API zu migrieren, muß einfach ein <code>false</code> nach
+                der Definition der gewünschten Prüfung hinzugefügt werden.
+            </para>
+
+            <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">
+                <title>Wie man eigene Dateiprüfungen von 1.6.1 auf 1.6.2 ändert</title>
+
+                <programlisting role="php"><![CDATA[
+// Beispiel für 1.6.1
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('FilesSize', array('1B', '100kB'));
+
+// Selbes Beispiel für 1.6.2 und neuer
+// Beachte das hinzugefügte boolsche false
+$upload = new Zend_File_Transfer_Adapter_Http();
+$upload->addValidator('FilesSize', false, array('1B', '100kB'));
+]]>
+            </programlisting>
+        </example>
+        </sect3>
+    </sect2>
+</sect1>

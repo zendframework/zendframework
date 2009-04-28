@@ -1,0 +1,41 @@
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>Pobieranie pojedynczego wpisu kanału Atom</title>
+
+    <para>
+        Pojedyncze elementy <code>&lt;entry&gt;</code> kanału Atom są same w sobie
+        poprawne. Zazwyczaj URL do pojedynczego wpisu jest adresem URL kanału
+        z dodanym identyfikatorem <code>/&lt;entryId&gt;</code> wpisu, na przykład
+        <code>http://atom.example.com/feed/1</code>, dla przykładowego URL,
+        który był użyty wcześniej.
+    </para>
+
+    <para>
+        Gdy odczytujesz pojedynczy wpis, wciąż masz obiekt <code>Zend_Feed_Atom</code>,
+        ale automatycznie tworzy on "anonimowy" kanał zawierający ten wpis.
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.atom">
+        <title>Odczytywanie pojedynczego wpisu kanału Atom</title>
+        <programlisting role="php"><![CDATA[
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+echo 'Kanał zawiera: ' . $feed->count() . ' wspisów.';
+
+$entry = $feed->current();
+]]>
+        </programlisting>
+    </example>
+
+    <para>
+        Mógłbyś też bezpośrednio utworzyć instancję obiektu wpisu jeśli
+        wiesz, że odczytujesz dokument pojedynczego wpisu <code>&lt;entry&gt;</code>:
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
+        <title>Bezpośrednie użycie obiektu wpisu dla pojedynczego wpisu kanału Atom</title>
+        <programlisting role="php"><![CDATA[
+$entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
+echo $entry->title();
+]]>
+        </programlisting>
+    </example>
+</sect1>

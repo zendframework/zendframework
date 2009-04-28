@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.consuming-atom-single-entry">
+    <title>Consuming a Single Atom Entry</title>
+
+    <para>
+        Single Atom <code>&lt;entry&gt;</code> elements are also valid by themselves. Usually the URL for an
+        entry is the feed's URL followed by <code>/&lt;entryId&gt;</code>, such as
+        <code>http://atom.example.com/feed/1</code>, using the example URL we used above.
+    </para>
+
+    <para>
+        If you read a single entry, you will still have a <classname>Zend_Feed_Atom</classname> object, but it will
+        automatically create an "anonymous" feed to contain the entry.
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.atom">
+        <title>Reading a Single-Entry Atom Feed</title>
+        <programlisting role="php"><![CDATA[
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+echo 'The feed has: ' . $feed->count() . ' entry.';
+
+$entry = $feed->current();
+]]></programlisting>
+    </example>
+
+    <para>
+        Alternatively, you could instantiate the entry object directly if you know you are accessing an
+        <code>&lt;entry&gt;</code>-only document:
+    </para>
+
+    <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
+        <title>Using the Entry Object Directly for a Single-Entry Atom Feed</title>
+        <programlisting role="php"><![CDATA[
+$entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
+echo $entry->title();
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

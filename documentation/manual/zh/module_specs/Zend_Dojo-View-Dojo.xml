@@ -1,0 +1,358 @@
+<sect2 id="zend.dojo.view.dojo">
+    <title>dojo() 视图助手</title>
+
+    <para>
+        <code>dojo()</code> 视图助手用来简化设置 Dojo 环境，包括下列职责:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>指定一个 CDN 或一个本地路径给 Dojo 安装。</para></listitem>
+        <listitem><para>指定路径给定制的 Dojo 模块。</para></listitem>
+        <listitem><para>指定 dojo.require 语句。</para></listitem>
+        <listitem><para>指定 dijit 风格主题来使用。 </para></listitem>
+        <listitem><para>指定 dojo.addOnLoad() 事件。</para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>dojo()</code> 视图助手实现是占位符实现的一个范例；数据集在视图对象之间持久，
+        并可能从布局脚本被直接显示。
+    </para>
+
+    <example id="zend.dojo.view.dojo.usage">
+        <title>dojo() 视图助手用法范例</title>
+
+        <para>
+            对本范例，假设开发者将从本地路径使用 Dojo 表单，需要请求若干个 dijits，
+            并将使用 Tundra dijit 主题。
+        </para>
+
+        <para>
+            在许多页面上，开发者可能根本不使用 Dojo。所以，我们集中精力在需要 Dojo 的视图脚本上，
+            然后是布局脚本，在那里，我们将设置一个 Dojo 环境和解析它。
+        </para>
+
+        <para>
+            首先，我们需要告诉视图对象使用 Dojo 视图助手路径。这可以在引导文件里或早期运行的插件里做；
+            简单地抓取你的视图对象并执行下列代码：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]></programlisting>
+
+        <para>
+            接着是视图脚本。在本例中，我们打算指定使用 FilteringSelect － 它需要基于 QueryReadStore 的定制的存储，
+            我们将调用 'PairedStore' 并存储到我们的 'custom' 模块。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<? // setup data store for FilteringSelect ?>
+<div dojoType="custom.PairedStore" jsId="stateStore"
+    url="/data/autocomplete/type/state/format/ajax"
+    requestMethod="get"></div>
+
+<? // Input element: ?>
+State: <input id="state" dojoType="dijit.form.FilteringSelect"
+    store="stateStore" pageSize="5" />
+
+<? // setup required dojo elements:
+$this->dojo()->enable()
+             ->setDjConfigOption('parseOnLoad', true)
+             ->registerModulePath('../custom/')
+             ->requireModule('dijit.form.FilteringSelect')
+             ->requireModule('custom.PairedStore');
+]]></programlisting>
+
+        <para>
+            在布局脚本中，我们接着检查是否开启了 Dojo，如果是，我们将做一些基本配置和组装：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->doctype() ?>
+<html>
+<head>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+<? if ($this->dojo()->isEnabled()):
+    $this->dojo()->setLocalPath('/js/dojo/dojo.js')
+                 ->addStyleSheetModule('dijit.themes.tundra');
+    echo $this->dojo();
+?>
+    <?= $this->headScript() ?>
+</head>
+<body class="tundra">
+    <?= $this->layout()->content ?>
+    <?= $this->inlineScript() ?>
+</body>
+</html>
+]]></programlisting>
+
+        <para>
+            在这点上，你只需要确保你的文件在正确的位置并且你已经为 FilteringSelect 创建了终点动作！
+        </para>
+    </example>
+
+    <sect3 id="zend.dojo.view.dojo.declarative">
+        <title> Dojo 的 Programmatic 和 Declarative 用法</title>
+
+        <para>
+            Dojo 在其许多功能上使用 <emphasis>declarative</emphasis> 和
+            <emphasis>programmatic</emphasis>。
+            <emphasis>Declarative</emphasis> 用法使用标准的带有当页面加载时解析的非标准属性的 HTML 元素。
+            虽然强大并且语法简单，对大多数开发者来说，它在页面校验时容易出问题。
+        </para>
+
+        <para>
+            <emphasis>Programmatic</emphasis> 用法让开发者通过用ID或 CSS 选择器把它们来出来并解析
+            到合适的在 Dojo 里的对象构造器来装饰存在的元素。因为没有使用非标准 HTML 属性，页面可以继续校验。
+        </para>
+
+        <para>
+            在实践中，当禁止 javascript 或不能获取部分 Dojo 脚本资源，上述两个用例都考虑了完美的降级。
+            为提升标准和文档校验， Zend Framework 缺省使用 programmatic 用法，各种
+            视图助手将生成 javascript 并压到 <code>dojo()</code> 视图助手，在解析时包含。
+        </para>
+
+        <para>
+            用这个技术的开发者可能也想探索写自己的页面 programmatic 装饰器。
+            一个好处是可以指定 dijit 事件的句柄。
+        </para>
+
+        <para>
+            为使用此功能，同时也使用 declarative 语法，有许多静态方法可以全局使用。
+        </para>
+
+        <example id="zend.dojo.view.dojo.declarative.usage">
+            <title>指定 Declarative 和 Programmatic Dojo 用法范例</title>
+
+            <para>
+                为指定 declarative 用法，简单地调用静态方法
+                <code>setUseDeclarative()</code>：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
+]]></programlisting>
+
+            <para>
+                如果你决定使用 programmatic 用法，调用静态方法
+                <code>setUseProgrammatic()</code>：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
+]]></programlisting>
+
+            <para>
+                最后，如果你想生成自己的 programmatic 规则，你应当指定 programmatic 用法，
+                但是传递值 '-1'；在这种情况下，不生成用于装饰 dijit 的 javascript。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
+]]></programlisting>
+        </example>
+    </sect3>
+
+    <sect3 id="zend.dojo.view.dojo.themes">
+        <title>主题</title>
+
+        <para>
+            Dojo 允许为它的 dijits（小部件）生成主题。你可以通过传递模块路径来选择一个：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->dojo()->addStylesheetModule('dijit.themes.tundra');
+]]></programlisting>
+
+        <para>
+            模块路径通过使用字符 '.'作为目录分隔符和在主题目录里列表中最后的值作为CSS文件的名称来找出。
+            在上述例子中，Dojo 在 'dijit/themes/tundra/tundra.css' 中寻找主题。
+        </para>
+
+        <para>
+            当使用主题时，记住传递主题类很重要，至少，传递在你使用的 dijits 周围的容器；
+            最常用的用例是在 body 里传递它：
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<body class="tundra">
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.dojo.view.dojo.layers">
+        <title>使用 Layers （定制）</title>
+
+        <para>
+            缺省地，当你使用 dojo.require 语句，dojo 将请求服务器抓取适当的 javascript 文件。
+            如果你有许多 dijits ，将导致许多对服务器请求，－ 这不是很理想。
+        </para>
+
+        <para>
+            Dojo 的解决方案是提供生成 <emphasis>定制</emphasis> 的能力，定制做如下事情：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                把请求文件集中到 <emphasis>layers</emphasis>，layer 把所有的请求
+                文件集中成一个单个的 JS 文件。（Hence the name of this section.）
+            </para></listitem>
+
+            <listitem><para>
+                "Interns" non-javascript files used by dijits (typically,
+                template files). These are also grouped in the same JS file as
+                the layer.
+            </para></listitem>
+
+            <listitem><para>
+                通过 ShrinkSafe 传递文件，它剥离了空白字符和注释，还缩短了短变量名。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            有些文件不能被 layered，但定制处理将生成一个特别的目录来放 layer 文件和其它所有文件。
+            这会对你的站点或应用需求减少发行定制。
+        </para>
+
+        <para>
+            为了使用 layer，<code>dojo()</code> 视图助手有一个
+            <code>addLayer()</code> 方法来添加路径到请求 layers:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+$view->dojo()->addLayer('/js/foo/foo.js');
+]]></programlisting>
+
+        <para>
+            更多关于生成定制的信息，请 <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">refer
+            参考 Dojo 构造文档</ulink>.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.dojo.view.dojo.methods">
+        <title>可用方法</title>
+
+        <para>
+            <code>dojo()</code> 视图助手总返回 dojo 占位符容器的实例。
+            这容器对象有下列方法可用：
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>setView(Zend_View_Interface $view)</code>:
+                    在容器中设置一个视图实例。</para></listitem>
+            <listitem><para><code>enable()</code>: 显式地开启 Dojo
+                    集成。</para></listitem>
+            <listitem><para><code>disable()</code>: 关闭 Dojo
+                    集成。</para></listitem>
+            <listitem><para><code>isEnabled()</code>: 确定是否
+                    Dojo 集成已经开启。</para></listitem>
+            <listitem><para><code>requireModule($module)</code>: 设置一条
+                    <code>dojo.require</code> 语句。</para></listitem>
+            <listitem><para><code>getModules()</code>: 确定模块
+                    已经被请求。</para></listitem>
+            <listitem><para><code>registerModulePath($module, $path)</code>:
+                    注册一个定制的 Dojo 模块路径。</para></listitem>
+            <listitem><para><code>getModulePaths()</code>:
+                    获得已注册模块路径列表。</para></listitem>
+            <listitem><para><code>addLayer($path)</code>: 添加一个 layer （定制）
+                    路径。</para></listitem>
+            <listitem><para><code>getLayers()</code>:
+                    获得已注册的 layer 路径（定制）的列表。</para></listitem>
+            <listitem><para><code>removeLayer($path)</code>:
+                    从已注册的 layers （定制）列表里删除匹配 <code>$path</code> 的 layer。
+                    </para></listitem>
+            <listitem><para><code>setCdnBase($url)</code>: 为  CDN 设置基础 URL；
+                    一般地是
+                    <code>Zend_Dojo::CDN_BASE_AOL</code> 或
+                    <code>Zend_Dojo::CDN_BASE_GOOGLE</code> 其中之一，
+                    但它只需要在版本号之前的 URL 字符串。
+                    </para></listitem>
+            <listitem><para><code>getCdnBase()</code>: 获取基础 CDN url
+                     </para></listitem>
+            <listitem><para><code>setCdnVersion($version = null)</code>:
+                    从 CDN 设置 Dojo 的版本。
+                    </para></listitem>
+            <listitem><para><code>getCdnVersion()</code>:
+                    从将要用的 CDN 获取 Dojo 的版本。
+                    </para></listitem>
+            <listitem><para><code>setCdnDojoPath($path)</code>:
+                    在一个 CDN 中设置 dojo.js 或 dojo.xd.js 文件的相对路径 ；
+                    一般地是 <code>Zend_Dojo::CDN_DOJO_PATH_AOL</code> 或
+                    <code>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</code> 其中之一，但
+                    它只需要是带版本号的路径字符串。
+                    </para></listitem>
+            <listitem><para><code>getCdnDojoPath()</code>:
+                    获取最后的 CDN url 指向 dojo.js文件的路径段。
+                    </para></listitem>
+            <listitem><para><code>useCdn()</code>:
+                    告诉容器使用 CDN；显式地开启集成。
+                    </para></listitem>
+            <listitem><para><code>setLocalPath($path)</code>:
+                    告诉容器指向本地 Dojo 安装（和服务器相关的路径，包括 dojo.js 文件自己）
+                    的路径。显式地开启集成。
+                    </para></listitem>
+            <listitem><para><code>getLocalPath()</code>:
+                    确定使用哪个本地 Dojo 路径。
+                    </para></listitem>
+            <listitem><para><code>useLocalPath()</code>:
+                    是否集成使用 Dojo 本地路径？
+                    </para></listitem>
+            <listitem><para><code>setDjConfig(array $config)</code>:
+                    设置 dojo/dijit 配置值（需要联合数组）。
+                    </para></listitem>
+            <listitem><para><code>setDjConfigOption($option, $value)</code>:
+                    设置一单个的 dojo/dijit 配置值。
+                    </para></listitem>
+            <listitem><para><code>getDjConfig()</code>:
+                    获取所有的 dojo/dijit 配置值。
+                    </para></listitem>
+            <listitem><para><code>getDjConfigOption($option, $default =
+                    null)</code>:
+                    获取一单个的 dojo/dijit 配置值。
+                    </para></listitem>
+            <listitem><para><code>addStylesheetModule($module)</code>:
+                    基于模块主题添加风格。
+                    </para></listitem>
+            <listitem><para><code>getStylesheetModules()</code>:
+                    获取注册为模块主题的风格。
+                    </para></listitem>
+            <listitem><para><code>addStylesheet($path)</code>:
+                    添加一个本地风格来和 Dojo 一起使用。
+                    </para></listitem>
+            <listitem><para><code>getStylesheets()</code>:
+                    获取本地 Dojo 风格。
+                    </para></listitem>
+            <listitem><para><code>addOnLoad($spec, $function = null)</code>:
+                    为 dojo.onLoad 添加一个 lambda 来调用。如果传递一个参数，那就是
+                    函数名或一个 javascript closure。如果传递两个参数，第一参数是
+                    对象实例变量的名字，第二个参数是该对象的方法名或使用这个对象的
+                    一个 closure。
+                    </para></listitem>
+            <listitem><para><code>getOnLoadActions()</code>:
+                    获取所有用容器注册的 dojo.onLoad 动作，将是一个数组的数组。
+                    </para></listitem>
+            <listitem><para><code>onLoadCaptureStart($obj = null)</code>:
+                    为 dojo.onLoad() 抓取用做 lambda 的数据。如果提供了 $obj，
+                    那么 JS 抓取代码被认为是一个和 Javascript 对象一起使用的 closure 。
+                    </para></listitem>
+            <listitem><para><code>onLoadCaptureEnd($obj = null)</code>:
+                    停止为使用 dojo.onLoad() 抓取数据。
+                    </para></listitem>
+            <listitem><para><code>javascriptCaptureStart()</code>:
+                 抓取任意的 javascript 包含到 Dojo JS （onLoad、 require 等语句）。
+                 </para></listitem>
+         <listitem><para><code>javascriptCaptureEnd()</code>:
+                  停止抓取 javascript。
+                  </para></listitem>
+            <listitem><para><code>__toString()</code>:
+                    转换容器为字符串；解析所有的 HTMl 风格和脚本元素。
+                    </para></listitem>
+        </itemizedlist>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,123 @@
+<sect3 id="zend.view.helpers.initial.headstyle">
+    <title>HeadStyle 助手 </title>
+
+    <para>
+        在 HTML <code>&lt;head&gt;</code> 元素中 HTML <code>&lt;style&gt;</code> 元素用来包含 CSS stylesheets inline 。
+    </para>
+
+    <note>
+        <title> 使用 HeadLink 来链接 CSS 文件 </title>
+
+        <para>
+            <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> 为包含外部 stylesheets 应该用来生成 <code>&lt;link&gt;</code> 元素。如果想定义自己的 stylesheets inline， 使用 <code>HeadScript</code> 。
+        </para>
+    </note>
+
+    <para>
+        <code>HeadStyle</code> 助手支持下列方法来设置和添加 stylesheet 声明：
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>prependStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>setStyle($content, $attributes =
+                    array())</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        对于所有情况，<code>$content</code>  是实际上的 CSS 声明。<code>$attributes</code>  是提供给 <code>style</code>  标签的任何额外的属性：lang、 title、 media 或 dir 都是允许的。
+    </para>
+
+    <para>
+        <code>HeadStyle</code>  也允许抓取样式声明，如果想用程序生成声明，然后在任何地方自由使用，这很有用。这个用法将在下面的例子给出。
+    </para>
+
+    <para>
+        最后，你也可以用 <code>headStyle()</code>方法 来快速地添加声明元素，它的用法： <code>headStyle($content$placement = 'APPEND', $attributes = array())</code> 。<code>$placement</code> 是 'APPEND'、 'PREPEND' 或 'SET'。
+    </para>
+
+    <para>
+        <code>HeadStyle</code> 覆盖 <code>append()</code>， <code>offsetSet()</code>，<code>prepend()</code> 和 <code>set()</code> 中的每一个来加强上述特殊方法的用法。 在内部，它存储每个条目为 <code>stdClass</code> 令牌，它在稍后用 <code>itemToString()</code> 方法 serializes 。这允许在堆栈里检查条目，并可选地通过修改返回的对象来修改这些条目。
+    </para>
+
+    <para>
+        <code>HeadStyle</code> 助手是 <link linkend="zend.view.helpers.initial.placeholder"> 占位符助手 </link> 的一个具体实现。
+    </para>
+
+    <example id="zend.view.helpers.initial.headstyle.basicusage">
+        <title>HeadStyle 助手的基本用法 </title>
+
+        <para>
+            在任何时候都可以指定一个新的样式标签：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // adding styles
+$this->headStyle()->appendStyle($styles);
+?>
+]]></programlisting>
+
+        <para>
+            对 CSS 来说，顺序非常重要，因为层叠的顺序(the order of the cascade)，你需要确保样式表中的声明按特定的顺序加载。使用append、 prepend 和 offsetSet 指令可帮助你达到目的：
+         </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // Putting styles in order
+
+// place at a particular offset:
+$this->headStyle()->offsetSetStyle(100, $customStyles);
+
+// place at end:
+$this->headStyle()->appendStyle($finalStyles);
+
+// place at beginning
+$this->headStyle()->prependStyle($firstStyles);
+?>
+]]></programlisting>
+
+        <para>
+            当准备好在布局脚本里输出所有样式声明，简单地 echo 助手：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->headStyle() ?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.headstyle.capture">
+        <title> 用 HeadStyle 助手抓取样式声明 </title>
+
+        <para>
+            有时候需要用程序生成 CSS 样式声明。当你可以使用字符串串联，heredoc等等， 通常通过创建脚本和在PHP标签里做手脚会更容易些。<code>HeadStyle</code> 可以做这个，把它抓取到堆栈：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?= $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+]]></programlisting>
+
+        <para>
+            下面是一些假设：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    样式声明将追加到堆栈。如果需要替换或者加到堆栈顶部，那么需要分别把 'SET' 或 'PREPEND' 作为第一个参数传递给 <code>captureStart()</code> 。
+            </para></listitem>
+
+            <listitem><para>
+                    如果想指定任何另外的属性给 <code>&lt;style&gt;</code> 标签，通过数组把它们作为第二个参数传递给 <code>captureStart()</code> 。
+            </para></listitem>
+        </itemizedlist>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

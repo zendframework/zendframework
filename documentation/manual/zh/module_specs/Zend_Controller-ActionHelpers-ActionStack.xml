@@ -1,0 +1,82 @@
+<sect3 id="zend.controller.actionhelpers.actionstack">
+    <title>动作堆栈（助手）</title>
+
+    <para>
+        <code>动作堆栈</code>助手允许把请求压到<link linkend="zend.controller.plugins.standard.actionstack">动作堆栈</link>前端控制器插件，有效地帮助你在请求期间创建一个动作队列来执行。（动作堆栈）助手允许你通过指定新的请求对象或通过“动作/控制器/模块”集合来添加动作。
+    </para>
+
+    <note>
+        <title>调用动作堆栈助手来初始化动作堆栈插件</title>
+
+        <para>
+            调用<code>动作堆栈</code> 助手暗中注册<code>动作堆栈</code> 插件 -- 这就意味着你不需要显性地注册<code>动作堆栈</code> 插件来用这个功能。
+        </para>
+    </note>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple">
+        <title>用动作、控制器和模块名来添加一个任务</title>
+
+        <para>
+            经常地，仅仅指定动作、控制器和模块（和可选的参数）最简单，和调用<code>Zend_Controller_Action::_forward()</code>一样：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Add two actions to the stack
+        // Add call to /foo/baz/bar/baz
+        // (FooController::bazAction() with request var bar == baz)
+        $this->_helper->actionStack('baz',
+                                    'foo',
+                                    'default',
+                                    array('bar' => 'baz'));
+
+        // Add call to /bar/bat
+        // (BarController::batAction())
+        $this->_helper->actionStack('bat', 'bar');
+    }
+}
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple2">
+        <title>使用请求对象添加一个任务</title>
+
+        <para>
+            有时候请求对象的OOP本性很有用；你也可以传递这样一个对象给<code>动作堆栈</code>助手。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Add two actions to the stack
+        // Add call to /foo/baz/bar/baz
+        // (FooController::bazAction() with request var bar == baz)
+        $request = clone $this->getRequest();
+        // Don't set controller or module; use current values
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
+
+        // Add call to /bar/bat
+        // (BarController::batAction())
+        $request = clone $this->getRequest();
+        // don't set module; use current value
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
+    }
+}
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

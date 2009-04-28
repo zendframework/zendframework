@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect2 id="zend.validate.Db">
+    <title>Db_RecordExists および Db_NoRecordExists</title>
+
+    <para>
+        <classname>Zend_Validate_Db_RecordExists</classname> および
+        <classname>Zend_Validate_Db_NoRecordExists</classname> は、
+        データベースのテーブル上に
+        指定した値のレコードが存在するかどうかを調べる手段を提供します。
+    </para>
+
+    <sect3 id="zend.validate.db.basic-usage">
+        <title>基本的な使用法</title>
+
+        <para>
+            このバリデータの基本的な使用例です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// メールアドレスがデータベース内に存在するかどうかを調べます
+$validator = new Zend_Validate_Db_RecordExists('users', 'emailaddress');
+if ($validator->isValid($emailaddress)) {
+    // メールアドレスは有効なようです
+} else {
+    // メールアドレスが無効なので、その理由を表示します
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            上の例は、指定したメールアドレスがデータベースのテーブル内に存在するかどうかを調べます。
+            指定したカラムの値が <code>$emailaddress</code> に一致するレコードがなければ、
+            エラーメッセージが表示されます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// ユーザ名がデータベースに存在しないことを調べます
+$validator = new Zend_Validate_Db_NoRecordExists('users', 'username');
+if ($validator->isValid($username)) {
+    // ユーザ名は有効なようです
+} else {
+    // ユーザ名が無効なので、その理由を表示します
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            上の例は、指定したユーザ名がデータベースのテーブル上に存在しないことを確認します。
+            指定したカラムの値が <code>$username</code> に一致するレコードが見つかれば、
+            エラーメッセージが表示されます。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.db.excluding-records">
+        <title>レコードの除外</title>
+
+        <para>
+            <classname>Zend_Validate_Db_RecordExists</classname> および
+            <classname>Zend_Validate_Db_NoRecordExists</classname> には、
+            テーブルの一部を除外してその内容を調べる方法があります。
+            where 句を文字列で指定するか、あるいはキー
+            "field" および "value" を含む配列を指定します。
+        </para>
+
+        <para>
+            除外条件を配列で指定すると、<code>!=</code> 演算子を使用します。
+            つまり、テーブル内の残りのレコードの内容を確認してからレコードを変更できるのです
+            (たとえばユーザ情報のフォームなどで使用します)。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// そのユーザ名のユーザがほかにいないことを調べます
+$user_id   = $user->getId();
+$validator = new Zend_Validate_Db_NoRecordExists(
+    'users',
+    'username',
+    array(
+        'field' => 'id',
+        'value' => $user_id
+    )
+);
+
+if ($validator->isValid($username)) {
+    // ユーザ名は有効なようです
+} else {
+    // ユーザ名が無効なので、その理由を表示します
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            上の例は、<code>id = $user_id</code>
+            であるレコードを除いてそのテーブル内に $username
+            を含むレコードが存在しないことを調べます。
+        </para>
+
+        <para>
+            除外条件を文字列で指定することもできるので、
+            <code>!=</code> 以外の演算子を指定することもできます。
+            これは、複合キーに対するチェックの際に便利です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$post_id   = $post->getId();
+$clause    = $db->quoteInto('post_id = ?', $category_id);
+$validator = new Zend_Validate_Db_RecordExists(
+    'posts_categories',
+    'post_id',
+    $clause
+);
+
+if ($validator->isValid($username)) {
+    // ユーザ名は有効なようです
+} else {
+    // ユーザ名が無効なので、その理由を表示します
+    $messages = $validator->getMessages();
+    foreach ($messages as $message) {
+        echo "$message\n";
+    }
+}
+]]></programlisting>
+
+        <para>
+            上の例は、<code>posts_categories</code> テーブル内に
+            <code>post_id</code> の値が
+            <code>$category_id</code> に一致するレコードがあることを調べます。
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.db.database-adapters">
+        <title>データベースアダプタ</title>
+
+        <para>
+            バリデータのインスタンスを作成する際の 4 番目のパラメータで、
+            アダプタを指定することもできます。
+            複数のデータベースアダプタを使用している場合や
+            デフォルトのアダプタを設定していない場合などにこれを使用します。
+            以下に例を示します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
+]]></programlisting>
+    </sect3>
+</sect2>

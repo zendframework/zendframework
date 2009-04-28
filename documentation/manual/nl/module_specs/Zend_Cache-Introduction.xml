@@ -1,0 +1,130 @@
+<sect1 id="zend.cache.introduction">
+    <title>Inleiding</title>
+    <para>
+        <code>Zend_Cache</code> verstrekt een standaard functie om eender welke data te "cachen".
+    </para>
+    <para>
+      Caching in het Zend Framework word door frontends uitgevoerd, terwijl cache records door backend
+      adapters worden opgeslagen (<code>File</code>, <code>Sqlite</code>, <code>Memcache</code>...) via
+      een flexibel systeem van IDs en tags. Het gebruik van deze tags laat toe eenvoudig bepaalde
+      record types te verwijderen (bijvoorbeeld: "verwijder alle cache records gemarkeerd met een
+      bepaalde tag").
+    </para>
+    <para>
+        De kern van de <code>Zend_Cache_Core</code> module is standaard, flexibel en configurabel.
+        Er bestaan echter cache frontends voor specifieke doeleinden die <code>Zend_Cache_Core</code>
+        uitbreiden: <code>Output</code>, <code>File</code>, <code>Function</code> en <code>Class</code>.
+    </para>
+    <example>
+        <title>Een frontend verkrijgen met <code>Zend_Cache::factory()</code></title>
+        <para>
+            <code>Zend_Cache::factory()</code> instantieert juiste objecten en bindt ze samen.
+            In dit eerste voorbeeld zullen we <code>Core</code> frontend gebruiken, samen met
+            <code>File</code> backend.
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Cache.php';
+
+$frontendOptions = array(
+   'lifeTime' => 7200, // cache levensduur van 2 uur
+   'automaticSerialization' => true
+);
+
+$backendOptions = array(
+    'cacheDir' => './tmp/' // Directory waar we de cache bestanden wegschrijven
+);
+
+// verkrijgen van een Zend_Cache_Core object
+$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+
+?>]]></programlisting>
+       <para>
+            Nu we een frontend hebben kunnen we eender welk type data cachen (we activeerden serialisatie).
+            We kunnen bijvoorbeeld het resultaat van een zeer "dure" database query cachen. Nadat het
+            in de cache is opgeslagen, is het zelfs niet meer nodig een verbinding met de database te maken;
+            records worden uit de cache gehaald en gedeserialiseerd.
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+// $cache die in het vorige voorbeeld werd geïnitialiseerd
+
+// nagaan of de cache reeds bestaat:
+if(!$result = $cache->get('mijnresultaat')) {
+
+    // geen cache; verbind met de database
+
+    $db = Zend_Db::factory( [...] );
+
+    $result = $db->fetchAll('SELECT * FROM enorme_tabel');
+
+    $cache->save($result, 'mijnresultaat');
+
+} else {
+
+    // cache bestaat! laat het weten
+    echo "Dit komt uit de cache!\n\n";
+
+}
+
+print_r($result);
+
+?>]]></programlisting>
+    </example>
+    <example>
+        <title>Output cachen met de <code>Zend_Cache</code> output frontend</title>
+        <para>
+            We markeren secties waarin we output willen cachen door er een beetje conditionele
+            logica aan toe te voegen. We zetten de sectie tussen <code>start()</code> en <code>end()</code>
+            methodes (dit wordt geïllustreerd in het eerste voorbeeld en is de voornaamste strategie
+            voor het cachen).
+        </para>
+        <para>
+            Tussen de twee methodes output je je data zoals gewoonlijk - alle output zal worden gecached als
+            de uitvoering de <code>end()</code> methode tegenkomt. Bij de volgende uitvoering zal de hele
+            sectie worden overgeslagen ten voordele van het verkrijgen van de data uit de cache (zolang de
+            cache record geldig is).
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$frontendOptions = array(
+   'lifeTime' => 30,                  // cache levensduur van een halve minuut
+   'automaticSerialization' => false  // dit is sowieso standaard
+);
+
+$backendOptions = array('cacheDir' => './tmp/');
+
+$cache = Zend_Cache::factory('Output', 'File', $frontendOptions, $backendOptions);
+
+// we geven een unieke id door aan de start() methode
+if(!$cache->start('mijnpagina')) {
+    // output zoals gewoonlijk:
+
+    echo 'Hallo wereld! ';
+    echo 'Dit is gecached ('.time().') ';
+
+    $cache->end(); // de output wordt opgeslagen en naar de browser gestuurd
+}
+
+echo 'Dit word nooit gecached ('.time().').';
+
+?>]]>   </programlisting>
+       <para>
+           Merk op dat we het resultaat van <code>time()</code> tweemaal weergeven; dit is iets dynamisch
+           om het voorbeeld te toetsen. Probeer het voorbeeld verschillende malen uit te voeren; je zal
+           merken dat het eerste nummer niet verandert, terwijl het tweede verandert naargelang de tijd
+           vordert. Dit komt omdat het eerste nummer samen met de andere output in de cache werd opgeslaan.
+           Na een halve minuut (we hebben de levensduur op 30 seconden gezet) moeten de nummers opnieuw
+           gelijk zijn omdat de cache record niet meer geldig is -- voor hij opnieuw word gecached. Je
+           zou dit in je browser of console moeten proberen.
+       </para>
+    </example>
+    <note><para>
+        Als je <code>Zend_Cache</code> gebruikt, let dan op de belangrijke cache id (doorgegeven aan
+        <code>save()</code> en <code>start()</code>. Die moet uniek zijn voor elk deel data die je wil
+        cachen, anders kunnen cache records die niets met elkaar te maken hebben elkaar uitwissen of,
+        erger nog, afgebeeld worden in plaats van de ander.
+    </para></note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

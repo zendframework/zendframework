@@ -1,0 +1,6 @@
+
+RewriteEngine on
+
+RewriteRule Boot/(.*) Boot/$1 [QSA,L]
+
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php

@@ -1,0 +1,126 @@
+<sect3 id="zend.view.helpers.initial.object">
+    <title>Helpery HTML Object</title>
+
+    <para>
+        Element HTML <code><![CDATA[<object>]]></code> używany jest do
+        wstawiania do kodu strony takich elementów interaktywnych jak Flash czy
+        QuickTime. Helpery te pozwalają na łatwe wstawianie tych obiektów.
+    </para>
+
+    <para>
+        Obecnie dostępne są cztery helpery Object:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>formFlash</code>
+                Generuje kod do wstawiania plików Flash.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formObject</code>
+                Generuje kod do wstawiania własnego obiektu
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formPage</code>
+                Generuje kod do wstawiania innych stron (X)HTML.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formQuicktime</code>
+                Generuje kod do wstawiania plików QuickTime.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Wszystkie te helpery mają podobny interfejs. Z tego powodu w dokumentacji
+        pokażemy przykłady tylko dwóch z nich.
+    </para>
+
+    <example id="zend.view.helpers.initial.object.flash">
+
+        <title>Helper Flash</title>
+
+        <para>
+            Dołączanie plików Flash do twojej strony jest bardzo łatwe. Jedynym
+            wymaganym argumentem jest adres URI pliku.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
+]]>
+        </programlisting>
+
+        <para>
+            Wyświetli to następujący kod HTML:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<object data="/path/to/flash.swf"
+        type="application/x-shockwave-flash"
+        classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+</object>
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Dodatkowo możesz określić atrybuty, parametry i zawartość jaka ma być
+        zrenderowana wraz z obiektem <code><![CDATA[<object>]]></code>. Zostanie
+        do zademonstrowane za pomocą helpera <code>htmlObject</code>.
+    </para>
+
+    <example id="zend.view.helpers.initial.object.object">
+        <title>Konfigurowanie obiektu poprzez przekazanie dodatkowych argumentów</title>
+
+        <para>
+            Pierwszy argument w helperze jest zawsze wymagany. Określa on adres
+            URL zasobu, który chcesz dołączyć do dokumentu (X)HTML. Drugi
+            argument jest wymagany tylko w helperze <code>htmlObject</code>.
+            Inne helpery posiadają poprawną domyślną wartość dla tego argumentu.
+            Trzeci argument jest używany do przekazywania atrybutów do obiektu
+            elementu. Akceptuje on tablicę par klucz-wartość. Przykładem
+            mogą być atrybuty <code>classid</code> oraz <code>codebase</code>.
+            Czwarty argument przyjmuje także tylko tablice elementów w postaci
+            klucz-wartość i używa ich do elementów <code><![CDATA[<param>]]></code>.
+            Ostatni argument umożliwia przekazanie dodatkowej zawartości do obiektu.
+            Zobacz przykład używający wszystkich argumentów.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $this->htmlObject(
+    '/path/to/file.ext',
+    'mime/type',
+    array(
+        'attr1' => 'aval1',
+        'attr2' => 'aval2'
+    ),
+    array(
+        'param1' => 'pval1',
+        'param2' => 'pval2'
+    ),
+    'some content'
+);
+
+/*
+Spowoduje to wyświetlenie:
+
+<object data="/path/to/file.ext" type="mime/type"
+    attr1="aval1" attr2="aval2">
+    <param name="param1" value="pval1" />
+    <param name="param2" value="pval2" />
+    some content
+</object>
+*/
+]]>
+        </programlisting>
+    </example>
+</sect3>

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.cache.backends">
+    <title><classname>Zend_Cache</classname> のバックエンド</title>
+    <para>
+        バックエンドには、標準と拡張の 2 種類があります。
+        もちろん、拡張バックエンドのほうがより高機能となります。
+    </para>
+    <sect2 id="zend.cache.backends.file">
+        <title>Zend_Cache_Backend_File</title>
+        <para>
+            この (拡張) バックエンドは、キャッシュレコードを
+            (指定したディレクトリの) ファイルに保存します。
+        </para>
+        <para>
+            使用可能なオプションは次のとおりです。
+        </para>
+        <table id="zend.cache.backends.file.table">
+            <title>File バックエンドのオプション</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>オプション</entry>
+                        <entry>データ型</entry>
+                        <entry>デフォルト値</entry>
+                        <entry>説明</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_dir</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'/tmp/'</code></entry>
+                          <entry>
+                              キャッシュファイルを書き込むディレクトリ。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_locking</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            ファイルロックを有効/無効にします。
+                            不慮の事故でキャッシュが破壊されることを防げますが、
+                            マルチスレッドなウェブサーバ環境や NFS ファイルシステム上では役に立ちません。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            読み込み制御を有効/無効にします。有効にすると
+                            キャッシュファイルに制御キーが埋め込まれます。
+                            キャッシュの読み込み後、計算した結果とキャッシュのキーを比較します。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>read_control_type</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'crc32'</code></entry>
+                          <entry>
+                            読み込み制御の方式 (読み込み制御が有効な場合にのみ使用します)。
+                            使用可能な値は
+                            'md5' (一番安全だが、最も遅い)、
+                            'crc32' (安全性には劣るが、より高速。悪くない選択肢です)、
+                            'adler32' (新たな選択肢。crc32 より高速です)、
+                            'strlen' (最も高速。長さのみをチェックします)
+                            のいずれかです。
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_level</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0</code></entry>
+                          <entry>
+                            ディレクトリ構造のレベルを指定します。0 は "ディレクトリ階層を作らない"、
+                            1 は "一段階のサブディレクトリを作る"、2 は "二段階の……" を意味します。
+                            何千ものキャッシュファイルを使用する場合にのみ、
+                            このオプションによる高速化を実感できるでしょう。
+                            適切な設定値を決めるには、実際にベンチマークを取得するしかありません。
+                            たいていの場合は 1 または 2 でよいでしょう。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashed_directory_umask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                              ディレクトリ構造の umask を指定します。
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>file_name_prefix</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'zend_cache'</code></entry>
+                          <entry>
+                              キャッシュファイルのプレフィックスを設定します。
+                              このオプションを設定する際には十分注意しましょう。
+                              あまりにもありふれた値をシステムのキャッシュディレクトリ
+                              (/tmp など) で使用すると、
+                              キャッシュの削除の際に余計なものまで削除されてしまうはめになります。
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>cache_file_umask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                              キャッシュファイルの umask を設定します。
+                          </entry>
+                      </row>
+                       <row>
+                          <entry><code>metatadatas_array_max_size</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>100</code></entry>
+                          <entry>
+                              メタデータ配列の内部最大サイズを設定します
+                              (よくわからない場合はこの値を変更してはいけません)。
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.sqlite">
+        <title>Zend_Cache_Backend_Sqlite</title>
+        <para>
+            この (拡張) バックエンドは、キャッシュレコードを
+            SQLite データベースに保存します。
+        </para>
+        <para>
+            使用可能なオプションは次のとおりです。
+        </para>
+        <table id="zend.cache.backends.sqlite.table">
+            <title>Sqlite バックエンドのオプション</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>オプション</entry>
+                        <entry>データ型</entry>
+                        <entry>デフォルト値</entry>
+                        <entry>説明</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cache_db_complete_path (必須)</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              SQLite データベースへの (ファイル名も含めた) フルパス。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>automatic_vacuum_factor</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>10</code></entry>
+                          <entry>
+                              自動バキューム処理の設定を行います。
+                              自動バキューム処理とは、clean() や delete()
+                              がコールされた際に自動的にデータベースの断片化解消を行う
+                              (そしてサイズを縮小する) ことです。
+                              0 を指定すると、自動バキュームを行いません。
+                              1 を指定すると  (delete() や clean() がコールされると) そのたびにバキュームを行います。
+                              x (1 より大きな整数) を指定すると、
+                              clean() や delete() が x 回コールされるたびに
+                              一回の頻度でランダムに自動バキュームを行います。
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.memcached">
+        <title><classname>Zend_Cache_Backend_Memcached</classname></title>
+        <para>
+            この (拡張) バックエンドは、キャッシュレコードを memcached サーバに保存します。
+            <ulink url="http://www.danga.com/memcached/">memcached</ulink> は、
+            高性能な分散メモリオブジェクトキャッシュシステムです。このバックエンドを使用するには、
+            memcached デーモンおよび
+            <ulink url="http://pecl.php.net/package/memcache">memcache PECL 拡張モジュール</ulink>
+            が必要です。
+        </para>
+        <para>
+            注意: このバックエンドでは、今のところ "タグ" がサポートされていません。
+            また、引数 "doNotTestCacheValidity=true" もサポートされていません。
+        </para>
+        <para>
+            使用可能なオプションは次のとおりです。
+        </para>
+        <table id="zend.cache.backends.memcached.table">
+            <title>Memcached バックエンドのオプション</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>オプション</entry>
+                        <entry>データ型</entry>
+                        <entry>デフォルト値</entry>
+                        <entry>説明</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>servers</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry>
+                            <code>
+                              array(array('host' => 'localhost', 'port' => 11211, 'persistent' => true, 'weight' => 1,
+                              'timeout' => 5, 'retry_interval' => 15, 'status' => true, 'failure_callback' => '' ))
+                            </code>
+                          </entry>
+                          <entry>
+                              memcached サーバの配列です。各 memcached サーバの情報は、
+                              以下のような連想配列で指定します。
+                              'host' => (string) : memcached サーバのサーバ名
+                              'port' => (int) : memcached サーバのポート番号
+                              'persistent' => (bool) : この memcached サーバに対して持続的な接続を使用するかどうか
+                              'weight' => (int) : memcached サーバの重み付け
+                              'timeout' => (int) : memcached サーバのタイムアウト
+                              'retry_interval' => (int) : memcached サーバの再試行間隔
+                              'status' => (bool) : memcached サーバのステータス
+                              'failure_callback' => (callback) : memcached サーバのコールバック関数
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compression</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                             その場での圧縮処理を行いたい場合に true を指定します。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compatibility</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                             古い memcache サーバ/拡張モジュールとの互換性モードを使用したい場合に
+                             true を指定します。
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.apc">
+        <title><classname>Zend_Cache_Backend_Apc</classname></title>
+        <para>
+            この (拡張) バックエンドは、キャッシュレコードを共有メモリに保存する際に
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache)
+            拡張モジュールを使用します
+            (当然、このバックエンドを使用するにはこの拡張モジュールが必要です)。
+        </para>
+        <para>
+            注意: このバックエンドでは、今のところ "タグ" がサポートされていません。
+            また、引数 "doNotTestCacheValidity=true" もサポートされていません。
+        </para>
+        <para>
+            このバックエンドではオプションを使用しません。
+        </para>
+    </sect2>
+    <sect2 id="zend.cache.backends.xcache">
+        <title><classname>Zend_Cache_Backend_Xcache</classname></title>
+        <para>
+            このバックエンドは、キャッシュレコードを共有メモリに保存する際に
+            <ulink url="http://xcache.lighttpd.net/">XCache</ulink>
+            拡張モジュールを使用します
+            (当然、このバックエンドを使うにはこの拡張モジュールが必要となります)。
+        </para>
+        <para>
+            注意: このバックエンドでは、今のところ "タグ" がサポートされていません。
+            また、引数 "doNotTestCacheValidity=true" もサポートされていません。
+        </para>
+        <para>
+            使用可能なオプションは次のとおりです。
+        </para>
+        <table id="zend.cache.backends.xcache.table">
+            <title>Xcache バックエンドのオプション</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>オプション</entry>
+                        <entry>データ型</entry>
+                        <entry>デフォルト値</entry>
+                        <entry>説明</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>user</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.user です。clean() メソッドを使う際に必要です。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>password</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                              xcache.admin.pass (MD5 ではない平文形式) です。
+                              clean() メソッドを使う際に必要です。
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.platform">
+        <title><classname>Zend_Cache_Backend_ZendPlatform</classname></title>
+        <para>
+            このバックエンドは、<ulink url="http://www.zend.com/products/platform">Zend Platform</ulink>
+            製品のコンテンツキャッシング API を使用します。当然、このバックエンドを使用するには
+            Zend Platform をインストールする必要があります。
+        </para>
+        <para>
+            このバックエンドはタグをサポートしています。しかし、
+            クリーニングモード <code>CLEANING_MODE_NOT_MATCHING_TAG</code> はサポートしていません。
+        </para>
+        <para>
+            <classname>Zend_Cache::factory()</classname> メソッドでこのバックエンドを指定する場合は、
+            'Zend' と 'Platform' の間に区切り文字を入れます。区切り文字としては
+            '-'、'.'、' ' あるいは '_' が使用できます。
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', 'Zend Platform');
+]]>
+        </programlisting>
+        <para>
+            このバックエンドではオプションを使用しません。
+        </para>
+    </sect2>
+    <sect2 id="zend.cache.backends.twolevels">
+        <title><classname>Zend_Cache_Backend_TwoLevels</classname></title>
+        <para>
+            この (拡張) バックエンドは複合型です。
+            キャッシュレコードを、
+            高速 (だが制限付き) な Apc、Memcache…… および "低速"
+            な File、Sqlite…… の 2 種類の別々のバックエンドに格納します。
+        </para>
+        <para>
+            このバックエンドは priority パラメータを使用 (フロントエンドレベルで、記録開始時に指定)
+            し、高速バックエンドの残りのスペースを用いてふたつのバックエンドの使用を最適化します。
+            FIXME
+        </para>
+        <para>
+            使用可能なオプションは次のとおりです。
+        </para>
+        <table id="zend.cache.backends.twolevels.table">
+            <title>TwoLevels バックエンドのオプション</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>オプション</entry>
+                        <entry>データ型</entry>
+                        <entry>デフォルト値</entry>
+                        <entry>説明</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>slow_backend</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>File</code></entry>
+                          <entry>
+                              "低速" バックエンドの名前。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>Apc</code></entry>
+                          <entry>
+                              "高速" バックエンドの名前。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_options</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array()</code></entry>
+                          <entry>
+                              "低速" バックエンドのオプション。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_options</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array()</code></entry>
+                          <entry>
+                              "高速" バックエンドのオプション。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_custom_naming</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              true の場合は、引数 slow_backend を完全なクラス名として使用します。
+                              false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
+                              の最後の部分として使用します。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_custom_naming</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              true の場合は、引数 fast_backend を完全なクラス名として使用します。
+                              false の場合は、引数をクラス名 "Zend_Cache_Backend_[...]"
+                              の最後の部分として使用します。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>slow_backend_autoload</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              true の場合は、低速バックエンドに対して require_once を行いません
+                              (独自のバックエンドを使用する場合にのみ有用です)。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fast_backend_autoload</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                              true の場合は、高速バックエンドに対して require_once を行いません
+                              (独自のバックエンドを使用する場合にのみ有用です)。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>auto_refresh_fast_cache</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                              true の場合は、キャッシュレコードにヒットしたときに
+                              高速キャッシュを自動的にリフレッシュします。
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>stats_update_factor</code></entry>
+                          <entry><code>integer</code></entry>
+                          <entry><code>10</code></entry>
+                          <entry>
+                              高速バックエンドを使用率の計算を無効化 / 効率化します
+                              (レコードをキャッシュに書き込む際の
+                              高速バックエンド使用率の計算は、
+                              キャッシュ書き込み x 回につき 1 回の割合でランダムに行われます)。
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.zendserver">
+        <title><classname>Zend_Cache_Backend_ZendServer_Disk</classname> および <classname>Zend_Cache_Backend_ZendServer_ShMem</classname></title>
+        <para>
+            これらのバックエンドは、キャッシュレコードの保存に
+            <ulink url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend Server</ulink>
+            のキャッシュ機能を使用します。
+        </para>
+        <para>
+             注意: このバックエンドでは、今のところ "タグ" がサポートされていません。
+             また、引数 "doNotTestCacheValidity=true" もサポートされていません。
+        </para>
+        <para>
+             これらのバックエンドが動作するのは、Zend Server 環境で
+             HTTP(S) 越しにページをリクエストした場合のみです。
+             コマンドラインでスクリプトを実行した場合は動作しません。
+        </para>
+        <para>
+            このバックエンドにはオプションはありません。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

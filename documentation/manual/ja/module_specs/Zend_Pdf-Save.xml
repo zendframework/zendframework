@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.pdf.save">
+    <title>PDF ドキュメントへの変更内容の保存</title>
+    <para>
+    PDF ドキュメントの変更内容を保存するには 2 種類の方法があります。
+    <classname>Zend_Pdf::save()</classname> および <classname>Zend_Pdf::render()</classname> メソッドです。
+    </para>
+
+    <para>
+    <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname> は、
+    ドキュメントをファイルに保存します。$updateOnly が true の場合は、
+    新しい PDF ファイルセグメントがファイルに追記されます。
+    それ以外の場合はファイルが上書きされます。
+    </para>
+
+    <para>
+    <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> は、
+    PDF ドキュメントを文字列として返します。$newSegmentOnly が true の場合は、
+    新しい PDF ファイルセグメントのみが返されます。
+    </para>
+
+    <example id="zend.pdf.save.example-1">
+        <title>PDF ドキュメントの保存</title>
+        <programlisting role="php"><![CDATA[
+...
+// PDF ドキュメントを読み込みます。
+$pdf = Zend_Pdf::load($fileName);
+...
+// ドキュメントを更新します。
+$pdf->save($fileName, true);
+// ドキュメントを新しいファイルに保存します。
+$pdf->save($newFileName);
+
+// PDF ドキュメントを文字列で返します。
+$pdfString = $pdf->render();
+
+...
+]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

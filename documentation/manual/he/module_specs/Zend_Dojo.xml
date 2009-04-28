@@ -1,0 +1,24 @@
+<sect1 id="zend.dojo.introduction">
+    <title>הקדמה</title>
+
+    <para>
+    	Zend Framework מגיע עם <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> לתמיכה בפיתוח אפליקציות אינטרנט מתקדמות. 
+		 נקודות אינטגרציה בשימוש ב Dojo כוללות:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>תמיכה ב JSON-RPC</para></listitem>
+        <listitem><para>התאמה ל dojo.data</para></listitem>
+        <listitem><para>תוסף עזרה להגדרת סביבת עבודה עם Dojo</para></listitem>
+        <listitem><para>תוספי עזרה של <code>Zend_View</code> המותאמים ישירות ל Dijit</para></listitem>
+        <listitem><para>אלמנטים של <code>Zend_Form</code> המותאמים ישירות ל Dijit</para></listitem>
+    </itemizedlist>
+
+    <para>
+    	התיקיה בה נמצא Dojo היא  <code>externals/dojo/</code> בתיקיה הראשית של Zend Framework.
+		זוהי הפצת מקור, אשר מכילה את כל ה JS של Dojo, קבצי בדיקות , וקבצים המשמשים בתור כלים לבנייה.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

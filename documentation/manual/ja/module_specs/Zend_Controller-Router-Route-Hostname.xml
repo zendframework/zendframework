@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.router.routes.hostname">
+    <title>Zend_Controller_Router_Route_Hostname</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Hostname</classname>
+        はホスト名によるルートです。標準のルートと同じように動作しますが、
+        パスではなくコールされた URL のホスト名に基づいて動作します。
+    </para>
+
+    <para>
+        標準のルートの例を使用して、
+        ホスト名に基づいた動作がどのようなものになるのかを見ていきましょう。
+        パスを利用してユーザをコールするのではなく、たとえば
+        <code>http://martel.users.example.com</code>
+        でユーザ "martel" の情報を見られるようにしたいものとします。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(
+    ':username.users.example.com',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$plainPathRoute = new Zend_Controller_Router_Route_Static('');
+
+$router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
+]]>
+    </programlisting>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Hostname</classname>
+        のコンストラクタの最初のパラメータはルートの定義で、
+        これがホスト名にマッチします。
+        ルート定義には静的な部分と動的な部分があり、両者はドット
+        ('.') で区切られています。動的な部分 (変数)
+        は、変数名の先頭にコロンをつけて <code>:username</code>
+        のように表します。静的な部分は、<code>user</code>
+        のように単純なテキストで表します。
+    </para>
+
+    <para>
+        hostname ルートを単独で使うこともできますが、決してしてはいけません。
+        その理由は、hostname ルートはそれ単体だと任意のパスにマッチすることになるからです。
+        hostname ルートの後には path ルートをつなげなければなりません。
+        例に示したように、<code>$hostnameRoute->chain($pathRoute);</code>
+        のようにコールすることになります。こうすると、
+        <code>$hostnameRoute</code> には何も変更は加えられませんが、新たなルート
+        (<classname>Zend_Controller_Router_Route_Chain</classname>) が返されます。
+        そして、これをルータに渡します。
+    </para>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

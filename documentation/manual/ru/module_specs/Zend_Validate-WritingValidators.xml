@@ -1,0 +1,79 @@
+<sect1 id="zend.validate.writing_validators">
+
+    <title>Написание валидаторов<!--Writing Validators--></title>
+
+    <para>
+        Zend_Validate предоставляет набор наиболее часто используемых валидаторов, но разработчики часто сталкиваются с такими ситуациями, когда требуется написание своих валидаторов. Написание своих валидаторов облегчается реализацией интерфейса <code>Zend_Validate_Interface</code>.
+<!--
+        Zend_Validate supplies a set of commonly needed validators, but inevitably, developers will wish to
+        write custom validators for their particular needs. The task of writing a custom validator is
+        facilitated by implementing <code>Zend_Validate_Interface</code>.
+-->
+    </para>
+
+    <para>
+        <code>Zend_Validate_Interface</code> определяет два метода: <code>isValid()</code> и <code>getMessages()</code>, которые могут быть реализованы своими классами. Объект, реализующий данный интерфейс, может быть добавлен в цепочку валидаторов через метод <code>Zend_Validate::addValidator()</code>.
+<!--
+        <code>Zend_Validate_Interface</code> defines two methods, <code>isValid()</code> and
+        <code>getMessages()</code>, that may be implemented by user classes. An object that implements this
+        interface may be added to a validator chain with <code>Zend_Validate::addValidator()</code>.
+-->
+    </para>
+
+    <para>
+        Следующий пример демонстрирует, как можно писать свои валидаторы:
+<!--
+        The following example demonstrates how a custom validator might be written:
+-->
+
+        <programlisting role="php"><![CDATA[<?php
+
+require_once 'Zend/Validate/Interface.php';
+
+class MyValidator implements Zend_Validate_Interface
+{
+    protected $_messages = array();
+
+    public function isValid($value)
+    {
+        $this->_messages = array();
+
+        // нахождение результата проверки $requirement
+
+        if (!$requirement) {
+            $this->_messages[] = "Reason validation failed";
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getMessages()
+    {
+        return $this->_messages;
+    }
+}
+
+?>]]></programlisting>
+
+    </para>
+
+    <para>
+        Добавление экземпляра только что написанного класса валидатора в цепочку валидаторов:
+<!--
+        To add an instance of the above validator to a validator chain:
+-->
+
+        <programlisting role="php"><![CDATA[<?php
+
+$validatorChain = new Zend_Validate();
+$validatorChain->addValidator(new MyValidator());
+
+?>]]></programlisting>
+
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

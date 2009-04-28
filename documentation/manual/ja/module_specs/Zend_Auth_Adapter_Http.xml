@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.auth.adapter.http">
+
+    <title>HTTP 認証アダプタ</title>
+
+    <sect2 id="zend.auth.adapter.http.introduction">
+
+        <title>導入</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Http</classname> は、
+            <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink> や
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">ベーシック</ulink>、
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">ダイジェスト</ulink>
+            HTTP 認証にほぼ準拠した実装を提供します。ダイジェスト認証とは
+            HTTP 認証方式のひとつで、パスワードを平文でネットワークに送信する必要がないという点で
+            ベーシック認証より優れています。
+        </para>
+
+        <para>
+            <emphasis role="strong">主な機能</emphasis>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        ベーシック認証およびダイジェスト認証の両方のサポート
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        サポートしているすべてのスキームを試みるので
+                        クライアントは、サポートする任意のスキームで応答可能
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        プロキシ認証のサポート
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        テキストファイルを用いた認証のサポート、
+                        あるいはデータベースなどのその他のソースによる認証用インターフェイスの提供
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <para>
+            RFC-2617 の機能のうち、以下についてはまだ実装されていません。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        nonce 値を追いかけることによる "stale" のサポート、
+                        および再試行攻撃への防御
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        整合性チェックを含む認証 "auth-int"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Authentication-Info HTTP ヘッダ
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.design_overview">
+
+        <title>設計の概要</title>
+
+        <para>
+            このアダプタはふたつのサブコンポーネントで構成されています。
+            ひとつは HTTP 認証クラス自身、そしてもうひとつはいわゆる "リゾルバ" です。
+            HTTP 認証クラスは、ベーシック認証およびダイジェスト認証を扱うロジックをカプセル化します。
+            このクラスは、リゾルバを使用してなんらかの保存データ (デフォルトはテキストファイル)
+            からクライアントの ID を探します。認証データが "解決"
+            されると、クライアントから送信された値に基づいて認証が成功したかどうかを判断します。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.configuration_options">
+
+        <title>設定オプション</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Http</classname> クラスのコンストラクタには、
+            設定配列を渡す必要があります。使用可能なオプションはいくつかあり、
+            その中には必須のものもあります。
+            <table id="zend.auth.adapter.configuration_options.table">
+                <title>設定オプション</title>
+                <tgroup cols="3">
+                    <thead>
+                        <row>
+                            <entry>オプション名</entry>
+                            <entry>必須かどうか</entry>
+                            <entry>説明</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><code>accept_schemes</code></entry>
+                            <entry>Yes</entry>
+                            <entry>
+                                そのアダプタがクライアントからどの認証スキームを受け取るのかを設定します。
+                                <code>'basic'</code> や <code>'digest'</code>
+                                を含む空白区切りの文字列でなければなりません。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>realm</code></entry>
+                            <entry>Yes</entry>
+                            <entry>
+                                認証レルムを設定します。ユーザ名は、指定したレルム内で一意でなければなりません。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>digest_domains</code></entry>
+                            <entry><code>'accept_schemes'</code> が <code>'digest'</code> を含む場合は Yes</entry>
+                            <entry>
+                                空白区切りの URI のリストで、同じ認証情報が有効となる場所を指定します。
+                                URL は同一サーバ上でなくてもかまいません。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>nonce_timeout</code></entry>
+                            <entry><code>'accept_schemes'</code> が <code>'digest'</code> を含む場合は Yes</entry>
+                            <entry>
+                                nonce の有効期限を秒数で指定します。以下の注意を参照ください。
+                            </entry>
+                        </row>
+                        <row>
+                            <entry><code>proxy_auth</code></entry>
+                            <entry>No</entry>
+                            <entry>
+                                デフォルトでは無効です。有効にすると、
+                                元のサーバの認証のかわりにプロキシで認証を行います。
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+        <note>
+            <para>
+                現在の <code>nonce_timeout</code> の実装には、いくつかの副作用があります。
+                この設定は、指定した nonce の有効期限、
+                つまり事実上はクライアントの認証情報の有効期限を指定するためのものです。
+                現在は、これを (たとえば) 3600 に設定すると、
+                一時間ごとに新しい認証をクライアントに要求するようアダプタに設定します。
+                これは将来のリリースで nonce の追跡と stale のサポートを実装した時点で解決する予定です。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.http.resolvers">
+
+        <title>リゾルバ</title>
+
+        <para>
+            リゾルバの仕事は、ユーザ名とレルムを受け取って何らかの証明を返すことです。
+            ベーシック認証では、ユーザのパスワードを Base64 でエンコードしたものを受け取ります。
+            ダイジェスト認証では、ユーザ名、レルムおよびパスワード
+            (をコロンでつなげたもの) のハッシュを受け取ります。
+            現在サポートしているハッシュアルゴリズムは MD5 のみです。
+        </para>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Http</classname>
+            <classname>Zend_Auth_Adapter_Http_Resolver_Interface</classname>
+            を実装したオブジェクトを使用しています。
+            このアダプタにはテキストファイル用のリゾルバクラスが含まれていますが、
+            リゾルバインターフェイスを実装することで、
+            その他のリゾルバも簡単に作成できます。
+        </para>
+
+        <sect3 id="zend.auth.adapter.http.resolvers.file">
+
+            <title>File リゾルバ</title>
+
+            <para>
+                ファイルリゾルバは、非常にシンプルなクラスです。
+                ファイル名を指定するプロパティを保持しており、
+                コンストラクタでこれを指定することができます。
+                <code>resolve()</code> メソッドはテキストファイルを走査し、
+                ユーザ名とレルムにマッチする行を探します。テキストファイルのフォーマットは
+                Apache の htpasswd ファイルと似た形式で
+                <programlisting><![CDATA[
+<username>:<realm>:<credentials>\n
+]]>
+</programlisting>
+                のようになります。個々の行は
+                ユーザ名、レルムおよび認証情報の三つのフィールドで構成されており、
+                それらがコロンで区切られています。リゾルバは認証情報フィールドの内容を理解することはできません。
+                取得した値をそのまま呼び出し元に返します。したがって、
+                同じ形式でベーシック認証およびダイジェスト認証の両方に対応できます。
+                ベーシック認証では、このフィールドは平文テキストで書く必要があります。
+                ダイジェスト認証では、これは先ほど説明したような MD5 ハッシュとなります。
+            </para>
+
+            <para>
+                ファイルリゾルバを作成する方法は次の二通りで、どちらも同じくらい簡単です。まずは
+                <programlisting role="php"><![CDATA[
+$path     = 'files/passwd.txt';
+$resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
+]]>
+                </programlisting>
+                もうひとつは
+                <programlisting role="php"><![CDATA[
+$path     = 'files/passwd.txt';
+$resolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$resolver->setFile($path);
+]]>
+                </programlisting>
+                指定したパスが空だったり読み込みできなかったりした場合は、
+                例外をスローします。
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.http.basic_usage">
+
+        <title>基本的な使用法</title>
+
+        <para>
+            まず、必須設定項目を含む配列を作成します。
+            <programlisting role="php"><![CDATA[
+$config = array(
+    'accept_schemes' => 'basic digest',
+    'realm'          => 'My Web Site',
+    'digest_domains' => '/members_only /my_account',
+    'nonce_timeout'  => 3600,
+);
+]]>
+            </programlisting>
+            この配列は、アダプタに対してベーシック認証およびダイジェスト認証の両方を受け付けるように指定します。
+            また、<code>/members_only</code> および <code>/my_account</code>
+            の配下では認証済みアクセスが必要となるようにします。
+            realm の値は、通常はブラウザのパスワードダイアログボックスに表示されます。
+            <code>nonce_timeout</code> は、もちろん、先ほど説明したとおりの振る舞いをします。
+        </para>
+
+        <para>
+            次に、Zend_Auth_Adapter_Http オブジェクトを作成します。
+            <programlisting role="php"><![CDATA[
+require_once 'Zend/Auth/Adapter/Http.php';
+$adapter = new Zend_Auth_Adapter_Http($config);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            ベーシック認証およびダイジェスト認証の両方をサポートしているので、
+            ふたつのリゾルバオブジェクトを作成する必要があります。
+            これは、単にふたつの異なるクラスを作成するだけの簡単なことです。
+            <programlisting role="php"><![CDATA[
+$basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$basicResolver->setFile('files/basicPasswd.txt');
+
+$digestResolver = new Zend_Auth_Adapter_Http_Resolver_File();
+$digestResolver->setFile('files/digestPasswd.txt');
+
+$adapter->setBasicResolver($basicResolver);
+$adapter->setDigestResolver($digestResolver);
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            最後に、認証を行います。このアダプタは、
+            リクエストオブジェクトおよびレスポンスオブジェクトの両方を参照する必要があります。
+            <programlisting role="php"><![CDATA[
+assert($request instanceof Zend_Controller_Request_Http);
+assert($response instanceof Zend_Controller_Response_Http);
+
+$adapter->setRequest($request);
+$adapter->setResponse($response);
+
+$result = $adapter->authenticate();
+if (!$result->isValid()) {
+    // ユーザ名/パスワードが間違っている、あるいはパスワード入力をキャンセルした
+}
+]]>
+            </programlisting>
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

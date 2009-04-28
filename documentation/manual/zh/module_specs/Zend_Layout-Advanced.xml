@@ -1,0 +1,175 @@
+<sect1 id="zend.layout.advanced">
+    <title>Zend_Layout 高级用法</title>
+
+    <para>
+        <code>Zend_Layout</code> 有无数用例提供给愿意修改它以适应不同的视图实现、文件系统布局及更多的高级开发者。
+    </para>
+
+    <para>
+        主要的扩展点是：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <emphasis>定制视图对象。</emphasis> <code>Zend_Layout</code> 允许使用任何实现<code>Zend_View_Interface</code> 的类。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>定制前端控制器插件。</emphasis> <code>Zend_Layout</code> 和在返回响应之前自动解析布局的标准前端控制器插件一起发布。你可以替换你自己的插件。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>定制动作助手。</emphasis> <code>Zend_Layout</code> 和标准动作助手一起发布，因为这个助手对于布局对象自己是一个哑代理（dumb proxy），所以它应该适合大部分的需求。
+        </para></listitem>
+
+        <listitem><para>
+                <emphasis>定制布局脚本路径解析（resolution）</emphasis>。<code>Zend_Layout</code> 允许为布局脚本路径解析使用你自己的 <link linkend="zend.filter.inflector">变形器（inflector）</link> ，或者简单地修改附加的变形器来指定你自己的变形规则。
+        </para></listitem>
+    </itemizedlist>
+
+    <sect2 id="zend.layout.advanced.view">
+        <title>定制视图对象</title>
+
+        <para>
+            <code>Zend_Layout</code> 允许任何实现 <code>Zend_View_Interface</code> 的类或者扩展 <code>Zend_View_Abstract</code> 来解析布局脚本。简单地把定制的视图对象当作参数传递给 constructor/<code>startMvc()</code>，或者用<code>setView()</code> 访问器来设置它：
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$view = new My_Custom_View();
+$layout->setView($view);
+?>]]></programlisting>
+
+        <note>
+            <title>不是所有的 Zend_View 实现都等同</title>
+
+            <para>
+                虽然<code>Zend_Layout</code>允许使用任何实现<code>Zend_View_Interface</code>的类，如果它们不能使用各种<code>Zend_View</code>助手，也可能遇到问题，特别是布局和<link linkend="zend.view.helpers.initial.placeholder">占位符</link>助手。这是因为<code>Zend_Layout</code>通过它自己和<link linkend="zend.view.helpers.initial.placeholder">占位符</link>在可用的对象里设置变量。
+            </para>
+
+            <para>
+                如果要使用一个定制的不支持这些助手<code>Zend_View</code>实现，那么需要找到一个办法把布局变量给视图。这可以通过两个办法来实现：扩展<code>Zend_Layout</code>对象和改变<code>render()</code>方法来传递变量给视图；或者，创建自己的插件类，在解析布局前传递它们。
+            </para>
+
+            <para>
+                做为替换方案，如果你的视图实现支持任何种类的插件，你可以通过'Zend_Layout'占位符使用<link linkend="zend.view.helpers.initial.placeholder">占位符助手</link>：
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$placeholders = new Zend_View_Helper_Placeholder();
+$layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
+?>]]></programlisting>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.layout.advanced.plugin">
+        <title>定制前端控制器插件</title>
+
+        <para>
+            当和MVC组件一起使用，<code>Zend_Layout</code>注册一个前端控制器插件，这个插件把解析布局做为在退出派遣循环之前的最后一个动作。在大多数情况下，缺省的插件适用，但如果你象写你自己的，可以通过传递<code>pluginClass</code>选项给<code>startMvc()</code>方法来指定插件类的名称去加载。
+        </para>
+
+        <para>
+            为这个目的所写的任何插件类将需要扩展<code>Zend_Controller_Plugin_Abstract</code>，并应该接受一个布局对象实例做为参数给构造器。另外，你的实现细节取决于你。
+        </para>
+
+        <para>
+            被使用缺省插件类是<code>Zend_Layout_Controller_Plugin_Layout</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.layout.advanced.helper">
+        <title>定制动作助手</title>
+
+        <para>
+            当和MVC组件一起使用，<code>Zend_Layout</code>用助手经纪注册一个动作控制器助手。缺省助手，<code>Zend_Layout_Controller_Action_Helper_Layout</code>，扮作一个哑代理给布局对象实例自己，并应该适合大多数用例。
+        </para>
+
+        <para>
+            如果你觉得需要写定制的函数，简单地写一个扩展<code>Zend_Controller_Action_Helper_Abstract</code> 的动作助手类并把类名做为<code>helperClass</code>选项传递给<code>startMvc()</code>方法，细节就取决于你了。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.layout.advanced.inflector">
+        <title>定制布局脚本路径解析（Resolution）：使用变形器（Inflector）</title>
+
+        <para>
+            为翻译布局名到布局脚本路径，<code>Zend_Layout</code> 用 <code>Zend_Filter_Inflector</code>来建立一个过滤链。缺省地，它遵循'StringToLower'（字符变小写）来使用规则'CamelCaseToDash'（驼峰变短横线）和加后缀'phtml'来转换名字到路径。如下几个例子所示：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    'foo' will be transformed to 'foo.phtml'.
+            </para></listitem>
+
+            <listitem><para>
+                    'FooBarBaz' will be transformed to 'foo-bar-baz.phtml'.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            有三个选项来修改变形：通过<code>Zend_Layout</code>访问器修改变形目标和/或视图后缀，修改变形器规则和与<code>Zend_Layout</code>实例联合变形器目标，或者创建你自己的变形器实例并传递给<code>Zend_Layout::setInflector()</code>。
+        </para>
+
+        <example id="zend.layout.advanced.inflector.accessors">
+            <title>使用Zend_Layout访问器来修改变形器(inflector)</title>
+
+            <para>
+                缺省的<code>Zend_Layout</code>变形器对目标和脚本后缀使用静态地址(references)，并拥有访问器来设置这些值。
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+// Set the inflector target:
+$layout->setInflectorTarget('layouts/:script.:suffix');
+
+// Set the layout view script suffix:
+$layout->setViewSuffix('php');
+?>]]></programlisting>
+        </example>
+
+        <example id="zend.layout.advanced.inflector.directmodification">
+            <title>Zend_Layout 变形器的直接修改 </title>
+
+            <para>
+                变形器有目标和一个或多个规则。缺省目标和<code>Zend_Layout</code>一起使用是':script.:suffix'；':script'是被传递的已注册的布局名称，':suffix'是变形器的静态规则。
+            </para>
+
+            <para>
+                让我们假设你想用后缀'html'做为布局脚本的文件扩展名，并且想分离混合大小写字和驼峰字为下划线而不是短横线，还不想使用小写字母。另外，你想让它去'layouts'子目录去找脚本。
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$layout->getInflector()->setTarget('layouts/:script.:suffix')
+                       ->setStaticRule('suffix', 'html')
+                       ->setFilterRule(array('CamelCaseToUnderscore'));
+?>]]></programlisting>
+        </example>
+
+        <example id="zend.layout.advanced.inflector.custom">
+            <title>定制变形器（inflectors）</title>
+
+            <para>
+                在大多数情况下，修改已存在的变形器已经足够。然而，你可能想有一个在多个地方使用的变形器，并带有不同的对象和类型。<code>Zend_Layout</code>支持它。
+            </para>
+
+            <programlisting role="php"><![CDATA[<?php
+$inflector = new Zend_Filter_Inflector('layouts/:script.:suffix');
+$inflector->addRules(array(
+    ':script' => array('CamelCaseToUnderscore'),
+    'suffix'  => 'html'
+));
+$layout->setInflector($inflector);
+?>]]></programlisting>
+        </example>
+
+        <note>
+            <title>变形（Inflection）可以被禁止 </title>
+
+            <para>
+                在<code>Zend_Layout</code>对象种用访问器可以禁止和允许变形。这对想指定绝对路径给布局视图脚本来说很有用，或者知道指定布局脚本不需要变形的机制，简单地使用<code>enableInflection()</code> 和 <code>disableInflection()</code> 方法。
+            </para>
+        </note>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

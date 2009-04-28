@@ -1,0 +1,96 @@
+<sect1 id="zend.cache.theory">
+    <title>De theorie van het cachencaching</title>
+    <para>
+        Er zijn drie belangrijke concepten in Zend_Cache. Een is de unieke identifier (een string) die wordt gebruikt om cache records te identificeren. De tweede is de <code>'lifeTime'</code> parameter zoals gezien in de voorbeelden; het definieert hoe lang de cache als 'vers' wordt beschouwd. Het derde belangrijke concept is voorwaardelijke uitvoering zodat delen van de code compleet overgeslagen kunnen worden, waardoor de performance wordt verbeterd. De belangrijkste frontend functie (bijv. <code>Zend_Cache_Core::get()</code> is altijd ontworpen om false terug te geven wanneer er geen waarde in de cache aanwezig is wanneer dat logisch is voor de aard van de frontend. Dat staat eindgebruikers toe om delen van de code te 'wrappen' die ze willen cachen (en dus overslaan) in <code>if(){...}</code> statements waarbij de voorwaarde een Zend_Cache methode is. Aan het einde van deze blokken moet je wel opslaan wat je hebt gegenereerd (bijvoorbeeld <code>Zend_Cache_Core::save()</code>).
+    </para>
+    <note><para>
+        Het ontwerp van de voorwaardelijke uitvoer van de gemaakte code is niet noodzakelijk in sommige frontends (bijvoorbeeld <code>Function</code>) wanneer de logica aan de frontend is geimplementeerd.
+    </para></note>
+    <note><para>
+        'Cache hit' is een term voor een voorwaarde waarbij een cache record wordt gevonden, valide is en 'vers' (in andere woorden, niet verlopen) is. 'Cache miss' is al het andere. Wanneer een cache miss voorkomt moet je je data genereren zoals normaal and cachen. Wanneer je een cache hit hebt, daarentegen, haalt de backend automatisch de record uit de cache.
+    </para></note>
+    <sect2 id="zend.cache.factory">
+        <title>De <code>Zend_Cache</code> factory methode</title>
+        <para>
+            Een goede manier om een bruikbare instantie van een <code>Zend_Cache</code> frontend te bouwen wordt gegeven in het volgende voorbeeld:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+# We "laden" de Zend_Cache factory.
+require 'Zend/Cache.php';
+
+# we kiezen een backend (bijvoorbeeld 'File' of 'Sqlite'...)
+$backendName = '[...]';
+
+# We kiezen een frontend (bijvoorbeeld 'Core', 'Output', 'Page'...)
+$frontendName = '[...]';
+
+# We zetten een array met opties voor de gekozen frontend
+$frontendOptions = array([...]);
+
+# We zetten een array met opties voor de gekozen backend
+$backendOptions = array([...]);
+
+# We maken de goede instantie.
+# (natuurlijk zijn de laatste twee argumenten optioneel)
+$cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $backendOptions);
+
+?>]]></programlisting>
+        <para>
+            In het volgende voorbeeld zullen we uitgaan dat de <code>$cache</code> variabele een valide, geinstantieerde frontend bevat zoals getoond en dat je begrijpt hoe je parameters naar je backends kan doorgeven.
+        </para>
+        <note><para>
+            Gebruikt altijd <code>Zend_Cache::factory()</code> om frontend instanties te krijgen. Zelf frontends en backends instantieren zal niet zoals verwacht werken.
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.cache.tags">
+        <title>Records taggen</title>
+        <para>
+            Tags zijn een manier om je cache records te categoriseren. Wanneer je een cache opslaat met de <code>save()</code> methode, kan je een array zetten met tags voor deze record. Vervolgens heb je de mogelijkheid om alle cache records met een bepaalde tag of met bepaalde tags op te schonen:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->save($veel_data, 'mijnUniekeID', array('tagA', 'tagB', 'tagC'));
+
+?>]]></programlisting>
+    </sect2>
+    <sect2 id="zend.cache.clean">
+        <title>Opschonen van de cache</title>
+        <para>
+            Om een specifieke cache id te verwijderen/invalideren kan je de <code>remove()</code> methode gebruiken:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->remove('idOmTeVerwijderen');
+
+?>]]></programlisting>
+        <para>
+            Om verschillende cache ids in een operatie te verwijderen/invalideren kan je de <code>clean()</code> methode gebruiken. Bijvoorbeeld om alle cache records te verwijderen:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+// Schoon alle cache records op
+$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+// Schoon alleen verlopen records op
+$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
+
+?>]]>   </programlisting>
+        <para>
+            Als je cache records wil verwijderen die aan tags 'tagA' en 'tagC' voldoen:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
+
+?>]]>       </programlisting>
+        <para>
+            Beschikbare opschoon modes zijn: <code>CLEANING_MODE_ALL</code>, <code>CLEANING_MODE_OLD</code>,
+            <code>CLEANING_MODE_MATCHING_TAG</code> en <code>CLEANING_MODE_NOT_MATCHING_TAG</code>. De laatsten zijn, zoals hun namen doen vermoeden, gecombineerd met een array van tags voor de opschoonoperatie.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

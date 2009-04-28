@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.rest.client">
+    <title>Zend_Rest_Client</title>
+    <sect2 id="zend.rest.client.introduction">
+        <title>Einführung</title>
+        <para>
+            Die Verwendung von <classname>Zend_Rest_Client</classname> ist sehr Ähnlich der Verwendung von
+            <code>SoapClient</code> Objekten (
+            <ulink url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>). Man kann einfach die REST
+            Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden aufrufen. Spezifiziere die komplette
+            Adresse des Services im Constructor von <classname>Zend_Rest_Client</classname>.
+        </para>
+
+        <example id="zend.rest.client.introduction.example-1">
+            <title>Eine Basis REST Anfrage</title>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Verbinden zum framework.zend.com Server und eine Begrüßung empfangen
+ */
+$client = new Zend_Rest_Client('http://framework.zend.com/rest');
+
+echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title>Unterschiede im Aufruf</title>
+            <para>
+                <classname>Zend_Rest_Client</classname> versucht das die entfernten Methoden, so weit wie möglich, wie die
+                nativen Methoden aussehen, wobei der einzige Unterschied darin besteht das der Methodenaufruf mit
+                <code>get()</code>, <code>post()</code>, <code>put()</code> oder <code>delete()</code> erfolgen muß.
+                Dieser Aufruf kann entweder über Methoden Verkettung oder in eigenen Methodenaufrufen erfolgen:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$client->sayHello('Davey', 'Tag');
+echo $client->get();
+]]>
+            </programlisting>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.rest.client.return">
+        <title>Antworten</title>
+
+        <para>
+            Alle Anfragen die über <classname>Zend_Rest_Client</classname> gemacht wurden, retournieren ein
+            <classname>Zend_Rest_Client_Response</classname> Objekt. Dieses Objekt hat viele Eigenschaften was es einfacher
+            macht auf die Ergebnisse zuzugreifen.
+        </para>
+
+        <para>
+            Wenn ein Service auf <classname>Zend_Rest_Server</classname> basiert, kann <classname>Zend_Rest_Client</classname> einige
+            Annahmen über die Antwort treffen, inklusive dem Antwort Status (erfolgreich oder fehlerhaft) und den
+            Rückgabetyp.
+        </para>
+
+        <example id="zend.rest.client.return.example-1">
+            <title>Antwort Status</title>
+            <programlisting role="php"><![CDATA[
+$result = $client->sayHello('Davey', 'Tag')->get();
+
+if ($result->isSuccess()) {
+    echo $result; // "Hallo Davey, guten Tag"
+}
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Im obigen Beispiel kann man sehen das das Anfrage Ergebnis als Objekt verwendet wird, um
+            <code>isSuccess()</code> aufzurufen, und dann kann das Objekt wegen <code>__toString()</code> einfach
+            ausgegeben (<code>echo</code>) werden um das Ergebnis zu erhalten. <classname>Zend_Rest_Client_Response</classname>
+            erlaubt die Ausgabe jedes skalaren Wertes. Für komplexe Typen, kann entweder die Array oder die Objekt
+            Schreibweise verwendet werden.
+        </para>
+
+        <para>
+            Wenn trotzdem, ein Service abgefragt wird der nicht <classname>Zend_Rest_Server</classname> verwendet, wird sich
+            das <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie ein <code>SimpleXMLElement</code> verhalten.
+            Um die Dinge trotzdem einfacher zu gestalten, wird das XML automatisch abgefragt, indem XPath verwendet
+            wird wenn die Eigenschaft nicht von direkter Abstammung des Dokument Root Elements ist. Zusätzlich,
+            wenn auf eine Eigenschaft als Methode zugegriffen wird, empfängt man den PHP Wert für das Objekt, oder
+            ein Array mit den PHP Wert Ergebnissen.
+        </para>
+
+        <example id="zend.rest.client.return.example-2">
+            <title>Technorati's Rest Service verwenden</title>
+
+            <programlisting role="php"><![CDATA[
+$technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
+$technorati->key($key);
+$technorati->url('http://pixelated-dreams.com');
+$result = $technorati->get();
+echo $result->firstname() .' '. $result->lastname();
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.rest.client.return.example-3">
+            <title>Beispiel Technorati Antwort</title>
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Technorati API version 1.0 /bloginfo" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN"
+                      "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://pixelated-dreams.com</url>
+            <weblog>
+                <name>Pixelated Dreams</name>
+                <url>http://pixelated-dreams.com</url>
+                <author>
+                    <username>DShafik</username>
+                    <firstname>Davey</firstname>
+                    <lastname>Shafik</lastname>
+                </author>
+                <rssurl>
+                    http://pixelated-dreams.com/feeds/index.rss2
+                </rssurl>
+                <atomurl>
+                    http://pixelated-dreams.com/feeds/atom.xml
+                </atomurl>
+                <inboundblogs>44</inboundblogs>
+                <inboundlinks>218</inboundlinks>
+                <lastupdate>2006-04-26 04:36:36 GMT</lastupdate>
+                <rank>60635</rank>
+            </weblog>
+            <inboundblogs>44</inboundblogs>
+            <inboundlinks>218</inboundlinks>
+        </result>
+    </document>
+</tapi>
+]]>
+</programlisting>
+        </example>
+
+        <para>
+            Hier greifen wir auf die <code>firstname</code> und <code>lastname</code> Eigenschaften zu. Selbst wenn
+            diese keine Top-Level Elemente sind, werden Sie automatisch zurückgegeben wenn auf Sie durch Ihren Namen
+            zugegriffen wird.
+        </para>
+
+        <note>
+            <title>Mehrfache Teile</title>
+
+            <para>
+                Wenn mehrfache Teile gefunden werden wenn auf man einen Wert durch seinen Namen zugreift, wird ein
+                Array von SimpleXMLElementen zurückgegeben; beim Zugriff über die Methodenschreibweise wird ein
+                Array von PHP Werten zurückgegeben.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.rest.client.args">
+        <title>Anfrage Argumente</title>
+
+        <para>
+            Wenn man keine Anfrage an einen <classname>Zend_Rest_Server</classname> basierenden Server durchführt, sind die
+            Chancen groß das man mehrere Argumente mit der Anfrage senden muß. Das wird durchgeführt indem man eine
+            Methode mit dem Namen des Arguments aufruft, und den Wert als das erste (und einzige) Argument übergibt.
+            Jeder dieser Methodenaufrufe gibt das Objekt selbst zurück, was Verkettung oder "flüssige" Verwendung
+            erlaubt. Der erste Aufruf, oder das erste Argument das übergeben wird, wenn man mehr als ein Argument
+            übergeben will, wird immer als die Methode angenommen wenn ein <classname>Zend_Rest_Server</classname> Service
+            aufgerufen wird.
+        </para>
+
+        <example id="zend.rest.client.args.example-1">
+            <title>Anfrage Argumente setzen</title>
+
+            <programlisting role="php"><![CDATA[
+$client = new Zend_Rest_Client('http://example.org/rest');
+
+$client->arg('value1');
+$client->arg2('value2');
+$client->get();
+
+// oder
+
+$client->arg('value1')->arg2('value2')->get();
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Beide der Methoden im obigen Beispiel, ergeben die folgenden get Argumente:
+            <code>?method=arg&amp;arg1=value1&amp;arg=value1&amp;arg2=value2</code>
+        </para>
+
+        <para>
+            Es gilt zu bemerken das der erste Aufruf von <code>$client->arg('value1');</code> in beidem resultiert
+            <code>method=arg&amp;arg1=value1</code> und <code>arg=value1</code>; Es ist so das
+            <classname>Zend_Rest_Server</classname> die Anfrage korrekt versteht, anstatt das vor-definiertes Wissen über das
+            Service benötigt wird.
+        </para>
+
+        <warning>
+            <title>Striktheit von Zend_Rest_Client</title>
+
+            <para>
+                Jeder REST Service der strikt in seinen Argumenten ist die er empfängt wird wegen dem oben
+                beschriebenen Verhalten bei der Verwendung von <classname>Zend_Rest_Client</classname> fehlschlagen.
+                Das ist keine gewöhnliche Praxis und sollte keine Probleme verursachen.
+            </para>
+        </warning>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

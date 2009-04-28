@@ -1,0 +1,138 @@
+<sect1 id="zend.search.lucene.java-lucene">
+    <title>Interoperatie met Java Lucene</title>
+
+    <sect2 id="zend.search.lucene.index-creation.file-formats">
+        <title>Bestandsformaten</title>
+        <para>
+          Het bestandsformaat van het Zend_Search_Lucene index bestand is binary compatible met Lucene
+          versie 1.4 en hoger.
+        </para>
+
+        <para>
+          Een gedetailleerde beschrijving van dit formaat is beschikbaar op:
+          <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.index-directory">
+        <title>Index Map</title>
+
+        <para>
+        Na het aanmaken van de index zal de index map verschillende bestanden bevatten:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                het <filename>segments</filename> bestand is een lijst van index segmenten.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                <filename>*.cfs</filename> bestanden bevatten index segmenten.
+                Nota! Een geoptimaliseerde index heeft altijd slechts één segment.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                het <filename>deletable</filename> bestand is een lijst bestanden die niet langer
+                worden gebruikt door de index, maar niet konden worden verwijderd.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.java-lucene.source-code">
+        <title>Java Broncode</title>
+        <para>
+            Het volgende Java programmavoorbeeld geeft een voorbeeld van hoe je een bestand
+            indexeert via Java Lucene:
+        </para>
+
+        <programlisting role="java"><![CDATA[
+/**
+* Aanmaak van de Index:
+*/
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.document.*;
+
+import java.io.*
+
+...
+
+IndexWriter indexWriter = new IndexWriter("/data/mijn_index",
+                                          new SimpleAnalyzer(), true);
+
+...
+
+String filename = "/pad/naar/bestand-dat-moet-worden-geindexeerd.txt"
+File f = new File(filename);
+
+Document doc = new Document();
+doc.add(Field.Text("path", filename));
+doc.add(Field.Keyword("modified",DateField.timeToString(f.lastModified())));
+doc.add(Field.Text("author", "unknown"));
+FileInputStream is = new FileInputStream(f);
+Reader reader = new BufferedReader(new InputStreamReader(is));
+doc.add(Field.Text("contents", reader));
+
+indexWriter.addDocument(doc);]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.java-lucene.jar">
+        <title>LuceneIndexCreation.jar gebruiken</title>
+
+        <para>
+            Om snel te kunnen starten met Zend_Search_Lucene werd een JAR bestand (Java) aangemaakt
+            dat je toelaat een index vanaf de commandoregel aan te maken. Voor meer informatie over
+            JAR bestanden kan je terecht op: <ulink url="http://java.sun.com/docs/books/tutorial/jar/basics/index.html"/>.
+        </para>
+
+        <para>
+            LuceneIndexCreation.jar leest tekst bestanden door en maakt er een index voor aan. Gebruik:
+        </para>
+        <programlisting role="java"><![CDATA[
+    java -jar LuceneIndexCreation.jar [-c] [-s] <document_pad> <index_pad>
+    -c   - dwing de index naar case sensitive
+    -s   - inhoud in de index opslaan
+    ]]></programlisting>
+       <para>
+            Dit commando leest een map <code>&lt;document_map&gt;</code> door, inclusief alle onderliggende mappen,
+            en maakt een Lucene index aan. De index is een set bestanden die in een andere map, gespecificeerd door
+            <code>&lt;index_map&gt;</code>, zullen worden opgeslagen..
+        </para>
+
+        <para>
+            Voor elk document dat moet worden geïndexeerd maakt LuceneIndexCreation een documentobject aan
+            met drie velden: een <emphasis>contents</emphasis> veld dat de inhoud (body) van het document
+            bevat en een <emphasis>modifies</emphasis> veld dat de bestandswijzigingstijd bevat en tenslotte het
+            <code>&lt;path&gt;</code> veld dat het volledige pad en de bestandsnaam bevat.
+        </para>
+
+        <para>
+            Indien de <option>-c</option> optie werd gespecificeerd zal de index tot case sensitive gedwongen worden. Indien
+            niet, zullen alle termen naar kleine letters worden geconverteerd voor ze aan de index worden toegevoegd.
+        </para>
+
+        <para>
+            Indien de <option>-s</option> optie werd gespecificeerd, zal de inhoud van het document ook in de index
+            worden opgeslagen. Die kan dan via de velden <code>path</code> en <code>modified</code> worden opgeroepen.
+        </para>
+
+        <para>
+            Anders worden alleen de <code>path</code> en <code>modified</code> velden opgeslagen, en
+            het <code>contents</code> veld wordt slechts geïndexeerd. In dat geval moet de documentinhoud
+            vanaf een oorspronkelijke bron worden opgehaald via zijn <code>path</code>.
+        </para>
+
+        <para>
+            Wees voorzichtig, het gebruik van de <option>-s</option> optie vergroot de index ongeveer vijf maal.
+        </para>
+    </sect2>
+
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

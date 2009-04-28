@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.actionstack">
+    <title>ActionStack</title>
+
+    <para>
+        The <code>ActionStack</code> helper allows you to push requests to the
+        <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
+        front controller plugin, effectively helping you create a queue of
+        actions to execute during the request. The helper allows you to add
+        actions either by specifying new request objects or
+        action/controller/module sets.
+    </para>
+
+    <note>
+        <title>Invoking ActionStack Helper Initializes the ActionStack Plugin</title>
+
+        <para>
+            Invoking the <code>ActionStack</code> helper implicitly registers
+            the <code>ActionStack</code> plugin -- which means you do not need
+            to explicitly register the <code>ActionStack</code> plugin to use
+            this functionality.
+        </para>
+    </note>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple">
+        <title>Adding a Task Using Action, Controller and Module Names</title>
+
+        <para>
+            Often, it's simplest to simply specify the action, controller, and
+            module (and optional request parameters), much as you would when
+            calling <classname>Zend_Controller_Action::_forward()</classname>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Add two actions to the stack
+        // Add call to /foo/baz/bar/baz
+        // (FooController::bazAction() with request var bar == baz)
+        $this->_helper->actionStack('baz',
+                                    'foo',
+                                    'default',
+                                    array('bar' => 'baz'));
+
+        // Add call to /bar/bat
+        // (BarController::batAction())
+        $this->_helper->actionStack('bat', 'bar');
+    }
+}
+]]></programlisting>
+
+    </example>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple2">
+        <title>Adding a Task Using a Request Object</title>
+
+        <para>
+            Sometimes the OOP nature of a request object makes most sense; you
+            can pass such an object to the <code>ActionStack</code> helper as
+            well.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Add two actions to the stack
+        // Add call to /foo/baz/bar/baz
+        // (FooController::bazAction() with request var bar == baz)
+        $request = clone $this->getRequest();
+        // Don't set controller or module; use current values
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
+
+        // Add call to /bar/bat
+        // (BarController::batAction())
+        $request = clone $this->getRequest();
+        // don't set module; use current value
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
+    }
+}
+]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

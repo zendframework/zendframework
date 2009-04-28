@@ -1,0 +1,85 @@
+
+
+<sect1 id="zend.config.theory_of_operation">
+    <title>Aspectos Teóricos</title>
+    <para>
+        Los datos de configuración se hacen accesibles al constructor <code>Zend_Config</code>
+		a través de un array asociativo, que puede ser multidimensional, para permitir
+		organizar los datos desde lo general a lo específico. Las clases de adaptador concretas 
+		permiten construir una tabla asociativa para el constructor de <code>Zend_Config</code> 
+		a partir de un sistema de almacenamiento de datos de configuración. Algunos scripts 
+		de usuario pueden proveer esos arrays directamente al constructor Zend_Config, 
+		sin usar una clase adaptador, lo cual puede ser apropiado en ciertas ocasiones.
+    </para>
+    <para>
+        Cada valor del array de datos de configuración se convierte en una propiedad del objeto <code>Zend_Config</code>.
+		La clave es usada como el nombre de la propiedad. Si un valor es un array por sí solo, entonces la propiedad
+		de objeto resultante es creada como un nuevo objeto
+        <code>Zend_Config</code>, cargado con los datos del array. Esto ocurre recursivamente, de forma
+		que una jerarquía de datos de configuración puede ser creada con cualquier número de niveles.
+    </para>
+    <para>
+        <code>Zend_Config</code> implementa las interfaces <code>Countable</code> e <code>Iterator</code>
+        para facilitar el aceso sencillo a los datos de configuración.
+        Así, uno puede usar la función <ulink url="http://php.net/count"><code>count()</code></ulink>
+        y constructores PHP como
+        <ulink url="http://php.net/foreach"><code>foreach</code></ulink> sobre objetos
+        <code>Zend_Config</code>.
+    </para>
+    <para>
+        Por defecto, los datos de configuración permitidos a través de <code>Zend_Config</code>
+        son de sólo lectura, y una asignación (e.g.,
+        <code>$config-&gt;database-&gt;host = 'example.com'</code>)
+        provoca que se lance una excepción. Este comportamiento por defecto puede ser sobrescrito a través
+		del constructor, sin embargo, para permitir la modificación de valores de datos. Además, cuando
+		las modificaciones están permitidas, <code>Zend_Config</code> soporta el borrado de elementos (unset) (i.e. <code>unset($config-&gt;database-&gt;host);</code>). El método
+        <code>readOnly()</code> puede ser usado para determinar si las modificaciones a un objeto <code>Zend_Config</code>
+        están permitidas y el método <code>setReadOnly()</code> puede ser usado para evitar cualquier modificación
+		posterior a un objeto <code>Zend_Config</code> que fue creado con permiso de modificaciones.
+        <note>
+            <para>
+                Es importante no confundir tales modificaciones en memoria con guardar los datos de configuración a un
+				medio de almacenamiento específico. Las herramientas para crear y modificar datos de configuración para 
+				distintos medios de almacenamiento están fuera del alcance de <code>Zend_Config</code>.
+                Existen soluciones third-party de código abierto con el propósito de crear y modificar
+				datos de configuración de distintos medios de almacenamiento.
+            </para>
+        </note>
+    </para>
+    <para>
+        Las clases del adaptador heredan de la clase <code>Zend_Config</code> debido a que utilizan su funcionalidad.
+    </para>
+    <para>
+        La familia de clases <code>Zend_Config</code> permite organizar en secciones 
+		los datos de configuración. Los objetos de adaptador <code>Zend_Config</code>
+		pueden ser cargados con una sola sección especificada, múltiples secciones especificadas,
+		o todas las secciones (si no se especifica ninguna).
+    </para>
+    <para>
+        Las clases del adaptador <code>Zend_Config</code> soportan un modelo de herencia única
+		que permite que los datos de configuración hereden de una sección de datos de configuración a otra. 
+		Esto es provisto con el fin de reducir o eliminar la necesidad de duplicar datos de configuración por
+		distintos motivos. Una sección heredada puede también sobrescribir los valores que hereda de su sección
+		padre. Al igual que la herencia de clases PHP, una sección puede heredar de una sección padre,
+		la cual puede heredar de una sección abuela, etc..., pero la herencia múltiple
+        (i.e., la sección C heredando directamente de las secciones padre A y B) no está permitida.
+    </para>
+    <para>
+        Si tiene dos objetos <code>Zend_Config</code>, puede combinarlos en un único
+		objeto usando la función <code>merge()</code>. Por ejemplo, dados <code>$config</code> y
+        <code>$localConfig</code>, puede fusionar datos de <code>$localConfig</code> a <code>$config</code> usando
+        <code>$config-&gt;merge($localConfig);</code>. Los ítemes en <code>$localConfig</code> sobrescribirán
+		cualquier item con el mismo nombre en <code>$config</code>.
+        <note>
+            <para>
+                El objeto <code>Zend_Config</code> que está ejecutando el merge debe haber sido construido
+				para permitir modificaciones, pasando <code>true</code> como el segundo parámetro del constructor.
+                El método <code>setReadOnly()</code> puede entonces ser usado para evitar cualquier
+				modificación posterior después de que el merge se haya completado.
+            </para>
+        </note>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

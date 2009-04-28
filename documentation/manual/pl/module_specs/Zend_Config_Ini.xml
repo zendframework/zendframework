@@ -1,0 +1,138 @@
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        <code>Zend_Config_Ini</code> pozwala programistom przechowywać dane
+        konfiguracyjne w znanym formacie INI a następnie odczytywać je w aplikacji
+        używając składni zagnieżdżonych właściwości obiektów. Format INI jest
+        wyspecjalizowany aby zapewnić możliwość zachowania hierarchi danych
+        konfiguracyjnych a także możliwość dziedziczenia pomiędzy sekcjami danych
+        konfiguracyjnych. Hierarchia danych konfiguracyjnych jest uzyskiwana
+        poprzez oddzielenie kluczy za pomocą znaku kropki (<code>.</code>).
+        Sekcja może rozszerzać lub dziedziczyć z innej sekcji poprzez dodanie
+        za nazwą sekcji znaku dwukropka (<code>:</code>)  oraz nazwy sekcji,
+        z której dane mają być dziedziczone.
+    </para>
+    <note>
+        <title>parse_ini_file</title>
+        <para>
+            <code>Zend_Config_Ini</code> wykorzystuje funkcję PHP <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>.
+            Proszę przejrzyj dokumentację tej funkcji aby znać jej specyficzne zachowania,
+            które dziedziczy <code>Zend_Config_Ini</code>, takie jak to w jaki sposób
+            są obsługiwane specjalne wartości takie jak <code>true</code>, <code>false</code>,
+            <code>yes</code>, <code>no</code>, oraz <code>null</code>.
+        </para>
+    </note>
+    <note>
+        <title>Separator kluczy</title>
+        <para>
+            Domyślnie separatorem kluczy jest znak kropki (<code>.</code>). Może
+            on być jednak zmieniony przez zmianę klucza
+            <code>'nestSeparator'</code> z tablicy <code>$options</code> podczas
+            tworzenia obiektu <code>Zend_Config_Ini</code>. Na przykład:
+            <programlisting role="php"><![CDATA[
+$options['nestSeparator'] = ':';
+$config = new Zend_Config_Ini('/path/to/config.ini',
+                              'staging',
+                              $options);
+]]>
+            </programlisting>
+        </para>
+    </note>
+    <example id="zend.config.adapters.ini.example.using">
+        <title>Użycie Zend_Config_Ini</title>
+        <para>
+            Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Ini</code>
+            do ładowania danych konfiguracyjnych z pliku INI. W tym przykładzie
+            znajdują się dane konfiguracyjne zarówno dla systemu produkcyjnego
+            jak i dla systemu rozbudowywanego. Z tego względu, że dane
+            konfiguracyjne systemu rozbudowywanego są bardzo podobne do tych dla
+            systemu produkcyjnego, sekcja systemu rozbudowywanego dziedziczy po
+            sekcji systemu produkcyjnego. W tym przypadku decyzja jest dowolna
+            i mogłoby to być zrobione odwrotnie, z sekcją systemu produkcyjnego
+            dziedziczącą po sekcji systemu rozbudowywanego, chociaż nie może to
+            być przykładem dla bardziej złożonych sytuacji. Załóżmy, że poniższe
+            dane konfiguracyjne znajdują się w pliku <code>/path/to/config.ini</code>:
+        </para>
+        <programlisting role="ini"><![CDATA[
+; Podstawowe dane konfiguracyjne
+[production]
+webhost                  = www.example.com
+database.adapter         = pdo_mysql
+database.params.host     = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname   = dbname
+
+; Konfiguracja aplikacji rozbudowywanej dziedziczy z podstawowej
+; konfiguracji, a niektóre wartości są nadpisywane
+[staging : production]
+database.params.host     = dev.example.com
+database.params.username = devuser
+database.params.password = devsecret
+]]>
+        </programlisting>
+        <para>
+            Następnie załóżmy, że programista aplikacji potrzebuje danych
+            konfiguracyjnych aplikacji rozbudowywanej z pliku INI. Prostą 
+            sprawą jest załadowanie tych danych określając plik INI oraz
+            sekcję dla aplikacji rozbudowywanej:
+        </para>
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
+
+echo $config->database->params->host; // wyświetla "dev.example.com"
+echo $config->database->params->dbname; // wyświetla "dbname"
+]]>
+        </programlisting>
+    </example>
+    <note>
+    <table id="zend.config.adapters.ini.table">
+        <title>Parametry konstruktora Zend_Config_Ini</title>
+        <tgroup cols="2">
+            <thead>
+                  <row>
+                    <entry>Parametr</entry>
+                    <entry>Opis</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>$filename</code></entry>
+                    <entry>Nazwa pliku INI do załadowania.</entry>
+                </row>
+                <row>
+                    <entry><code>$section</code></entry>
+                    <entry>
+                        Nazwa sekcji wewnątrz pliku ini, która ma być załadowana.
+                        Ustawienie wartości tego parametru na null spowoduje
+                        załadowanie wszystkich sekcji. Alternatywnie, możesz
+                        przekazać tablicę nazw sekcji aby załadować wiele sekcji.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>$options = false</code></entry>
+                    <entry>Tablica opcji. Obsługiwane są poniższe klucze:
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>allowModifications</emphasis>:
+                                    Ustaw na true aby umożliwić późniejszą
+                                    modyfikację załadowanego pliku. Domyśłnie
+                                    false
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>nestSeparator</emphasis>:
+                                    Ustaw znak jaki ma być użyty do oddzielania
+                                    przestrzeni nazw. Domyślnie "."
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    </note>
+</sect1>

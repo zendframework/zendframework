@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.boundary">
+    <title>Die MIME Abgrenzung kontrollieren</title>
+    <para>
+        In einer mehrteiligen Nachricht wird eine MIME Abgrenzung zum Trennen der verschiedenen
+        Nachrichtenteile normalerweise willkürlich generiert. In einigen Fällen möchtest Du jedoch
+        die zu verwendene MIME Abgrenzung selber angeben. Dies kann durch die
+        <code>setMimeBoundary()</code> Methode erreicht werden, wie in dem folgenden Beispiel:
+    </para>
+    <example id="zend.mail.boundary.example-1">
+        <title>Die MIME Abgrenzung ändern</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+// erstelle Nachricht...
+]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

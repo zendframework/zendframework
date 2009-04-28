@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        <classname>Zend_Config_Ini</classname> enables developers to store configuration data in a familiar INI format and read
+        them in the application by using nested object property syntax. The INI format is specialized to provide both
+        the ability to have a hierarchy of configuration data keys and inheritance between configuration data sections.
+        Configuration data hierarchies are supported by separating the keys with the dot or period character
+        (<code>.</code>). A section may extend or inherit from another section by following the section name with a
+        colon character (<code>:</code>) and the name of the section from which data are to be inherited.
+    </para>
+    <note>
+        <title>Parsing the INI File</title>
+        <para>
+            <classname>Zend_Config_Ini</classname> utilizes the
+            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>
+            PHP function. Please review this documentation to be aware of its specific behaviors,
+            which propagate to <classname>Zend_Config_Ini</classname>, such as how the special values of
+            <code>true</code>, <code>false</code>, <code>yes</code>, <code>no</code>,
+            and <code>null</code> are handled.
+        </para>
+    </note>
+    <note>
+        <title>Key Separator</title>
+        <para>
+            By default, the key separator character is the period character (<code>.</code>). This can be changed,
+            however, by changing the <code>$options</code> key <code>'nestSeparator'</code> when constructing the
+            <classname>Zend_Config_Ini</classname> object. For example:
+            <programlisting role="php"><![CDATA[
+$options['nestSeparator'] = ':';
+$config = new Zend_Config_Ini('/path/to/config.ini',
+                              'staging',
+                              $options);
+]]></programlisting>
+        </para>
+    </note>
+    <example id="zend.config.adapters.ini.example.using">
+        <title>Using Zend_Config_Ini</title>
+        <para>
+            This example illustrates a basic use of <classname>Zend_Config_Ini</classname> for loading configuration data from an
+            INI file. In this example there are configuration data for both a production system and for a staging
+            system. Because the staging system configuration data are very similar to those for production, the staging
+            section inherits from the production section. In this case, the decision is arbitrary and could have been
+            written conversely, with the production section inheriting from the staging section, though this may not be
+            the case for more complex situations. Suppose, then, that the following configuration data are contained in
+            <code>/path/to/config.ini</code>:
+        </para>
+        <programlisting role="ini"><![CDATA[
+; Production site configuration data
+[production]
+webhost                  = www.example.com
+database.adapter         = pdo_mysql
+database.params.host     = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname   = dbname
+
+; Staging site configuration data inherits from production and
+; overrides values as necessary
+[staging : production]
+database.params.host     = dev.example.com
+database.params.username = devuser
+database.params.password = devsecret
+]]></programlisting>
+        <para>
+            Next, assume that the application developer needs the staging configuration data from the INI file. It is a
+            simple matter to load these data by specifying the INI file and the staging section:
+        </para>
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
+
+echo $config->database->params->host;   // prints "dev.example.com"
+echo $config->database->params->dbname; // prints "dbname"
+]]></programlisting>
+    </example>
+    <note>
+    <table id="zend.config.adapters.ini.table">
+        <title>Zend_Config_Ini Constructor Parameters</title>
+        <tgroup cols="2">
+            <thead>
+                  <row>
+                    <entry>Parameter</entry>
+                    <entry>Notes</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>$filename</code></entry>
+                    <entry>The INI file to load.</entry>
+                </row>
+                <row>
+                    <entry><code>$section</code></entry>
+                    <entry>The [section] within the ini file that is to be loaded. Setting
+                        this parameter to null will load all sections. Alternatively, an
+                        array of section names may be supplied to load multiple sections.</entry>
+                </row>
+                <row>
+                    <entry><code>$options = false</code></entry>
+                    <entry>Options array. The following keys are supported:
+                        <itemizedlist>
+                            <listitem><para><emphasis>allowModifications</emphasis>: Set to true to allow subsequent modification of loaded file. Defaults to false</para></listitem>
+                            <listitem><para><emphasis>nestSeparator</emphasis>: Set to the character to be used as the nest separator. Defaults to "."</para></listitem>
+                        </itemizedlist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

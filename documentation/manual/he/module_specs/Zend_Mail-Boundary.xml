@@ -1,0 +1,19 @@
+<sect1 id="zend.mail.boundary">
+    <title>שליטה בגבולות הודעות האימיילים</title>
+    <para>
+    	בהודעות אימייל אשר מחולקות לכמה חלקים, גבול ההודעות אשר מפרידות אחת את השנייה נוצרות על ידי סטרינג רנדומלי. בחלק מהמקרים, לעומת זאת, תרצו להגדיר את הגבול של כל הודעה בעצמכם.
+		את זה תוכלו לבצע בעזרת שימוש במתודת ה <code>setMimeBoundary()</code>, כפי שמוצג בדוגמא:
+    </para>
+    <example id="zend.mail.boundary.example-1">
+        <title>Changing the MIME Boundary</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+// build message...
+]]>
+        </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

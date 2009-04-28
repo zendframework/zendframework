@@ -1,0 +1,91 @@
+<sect1 id="zend.auth.adapter.openid">
+
+    <title>Open ID Authentication</title>
+
+    <sect2 id="zend.auth.adapter.openid.introduction">
+
+        <title> 简介 </title>
+        <para>
+            <code>Zend_Auth_Adapter_OpenId</code> 允许认证用户使用远程 OpenID 服务器，这样的认证过程假设用户只提交他们的 OpenID 身份给 web 程序，接着他们被重定向到 OpenID 的提供者通过密码或其它办法来验证身份，本地的 web 程序是永远不会知道密码的。
+        </para>
+        <para>
+            OpenID 身份只是个指向一些 web 页面的  HTTP URL，在 URL 中带有适当的用户和特别标签的信息，在标签中描述使用哪个服务器和提交哪个身份到那里。关于 OpenID 请参考 <ulink url="http://www.openid.net/">OpenID 官方网站 </ulink>.
+        </para>
+        <para>
+            <code>Zend_Auth_Adapter_OpenId</code> 类是 <code>Zend_OpenId_Consumer</code> 组件的封装，而 <code>>Zend_OpenId_Consumer</code> 组件实现 OpenID 认证协议自己。
+        </para>
+
+        <note>
+            <para>
+                <code>Zend_OpenId</code> 利用有效的 <ulink url="http://php.net/gmp">GMP extension</ulink>。当使用 <code>Zend_Auth_Adapter_OpenId</code> 时，可以考虑打开 GMP extension 来改善性能。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.openid.specifics">
+        <title> 细节 </title>
+        <para>
+            作为  <code>Zend_Auth</code> 的适配器，<code>Zend_Auth_Adapter_OpenId</code> 类实现了 <code>Zend_Auth_Adapter_Interface</code>，而<code>Zend_Auth_Adapter_Interface</code> 定义了一个方法 － <code>authenticate()</code>。这个方法执行认证，但在调用之前要准备号对象，适配器准备包括设置 OpenID 身份和其它 <code>Zend_OpenId</code> 特殊选项。
+        </para>
+
+        <para>
+            然而和其它 <code>Zend_Auth</code> 的适配器不同，它在外部服务器上执行认证并在两次分开的 HTTP 请求中完成，所以必须调用 <code>Zend_Auth_Adapter_OpenId::authenticate()</code> 两次。第一次这个方法不返回，但重定向用户到他们的 OpenID 服务器，然后在服务器上认证后又重定向回来，第二次请求的脚本必须再调用 <code>Zend_Auth_Adapter_OpenId::authenticate()</code> 来校验从服务器返回的重定向请求带来的签名，然后完成认证处理，最后，这个方法将返回期望的 <code>Zend_Auth_Result</code> 对象。
+        </para>
+
+        <para>
+            下面的例子展示 <code>Zend_Auth_Adapter_OpenId</code> 的用法。正如前面所说，<code>Zend_Auth_Adapter_OpenId::authenticate()</code> 被调用两次。第一次 － 在提交 HTML 表单之后，当 <code>$_POST['openid_action']</code> 设置给 <code>"login"</code>时；第二次 － 在从 OpenID 服务器重定向 HTTP 之后，当 <code>$_GET['openid_mode']</code> 或 <code>$_POST['openid_mode']</code> 被设置。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php
+$status = "";
+$auth = Zend_Auth::getInstance();
+if ((isset($_POST['openid_action']) &&
+     $_POST['openid_action'] == "login" &&
+     !empty($_POST['openid_identifier'])) ||
+    isset($_GET['openid_mode']) ||
+    isset($_POST['openid_mode'])) {
+    $result = $auth->authenticate(
+        new Zend_Auth_Adapter_OpenId(@$_POST['openid_identifier']));
+    if ($result->isValid()) {
+        $status = "You are logged in as "
+                . $auth->getIdentity()
+                . "<br>\n";
+    } else {
+        $auth->clearIdentity();
+        foreach ($result->getMessages() as $message) {
+            $status .= "$message<br>\n";
+        }
+    }
+} else if ($auth->hasIdentity()) {
+    if (isset($_POST['openid_action']) &&
+        $_POST['openid_action'] == "logout") {
+        $auth->clearIdentity();
+    } else {
+        $status = "You are logged in as "
+                . $auth->getIdentity()
+                . "<br>\n";
+    }
+}
+?>
+<html><body>
+<?php echo htmlspecialchars($status);?>
+<form method="post"><fieldset>
+<legend>OpenID Login</legend>
+<input type="text" name="openid_identifier" value="">
+<input type="submit" name="openid_action" value="login">
+<input type="submit" name="openid_action" value="logout">
+</fieldset></form></body></html>
+*/
+]]>
+        </programlisting>
+
+        <para>
+            允许和下面这些方法一起来定制 OpenID 认证过程：从 OpenID 服务器上接收在分开的页面上的重定向；指定网站的 "root"。在这种情况下，使用 <code>Zend_OpenId_Consumer_Storage</code> 或 <code>Zend_Controller_Response</code>。也可以使用注册扩展（Registration Extension）来从 OpenID 服务器上获取用户信息。所有这些可能性在 <code>Zend_OpenId_Consumer</code> 有详细描述。
+        </para>
+
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

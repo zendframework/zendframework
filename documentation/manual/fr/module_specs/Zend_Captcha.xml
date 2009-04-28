@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.captcha.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <ulink url="http://en.wikipedia.org/wiki/Captcha">CAPTCHA</ulink> est l'acronyme anglais de
+        "Completely Automated Public Turing test to tell Computers and Humans Apart" [NDT. : test
+        de Turing automatisé permettant de différencier un utilisateur humain d'un ordinateur], il
+        est utilisé comme contre-réponse pour s'assurer que l'émetteur de l'information est un
+        humain et pas un processus automatisé. Typiquement, un captcha est utilisé lors de la
+        soumission d'un formulaire quand des utilisateurs authentifiés ne sont pas nécessaires mais
+        si vous désirez empêcher la soumission de spam.
+    </para>
+
+    <para>
+        Les captchas peuvent prendre un variété de formes, incluant poser des questions de
+        logique, présenter des polices de travers, et présenter des images en demandant ce qu'elle
+        représente. <classname>Zend_Captcha</classname> a pour but de fournir une variété de
+        backends qui peuvent être utilisés de manière autonome ou en conjonction avec
+        <classname>Zend_Form</classname>.
+    </para>
+</sect1>

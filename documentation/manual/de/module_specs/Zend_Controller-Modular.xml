@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.modular">
+    <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
+
+    <sect2 id="zend.controller.modular.introduction">
+        <title>Einführung</title>
+        <para>
+            Eine konventionelle modulare Verzeichnisstruktur erlaubt es verschiedene MVC Anwendungen in
+            selbst-enthaltene Einheiten zu teilen, und diese mit verschiedenen Front Kontrollern wiederzuverwenden.
+            Um so eine Verzeichnisstruktur zu zeigen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+docroot/
+    index.php
+application/
+    default/
+        controllers/
+            IndexController.php
+            FooController.php
+        models/
+        views/
+            scripts/
+                index/
+                foo/
+            helpers/
+            filters/
+    blog/
+        controllers/
+            IndexController.php
+        models/
+        views/
+            scripts/
+                index/
+            helpers/
+            filters/
+    news/
+        controllers/
+            IndexController.php
+            ListController.php
+        models/
+        views/
+            scripts/
+                index/
+                list/
+            helpers/
+            filters/
+]]>
+        </programlisting>
+
+        <para>
+            In diesem Paradigma arbeitet der Modulname als Prefix für den Kontroller den er enthält. Das obige
+            Beispiel enthält drei Modul Kontroller, 'Blog_IndexController', 'News_IndexController', und
+            'News_ListController'. Zwei gloale Kontroller, 'IndexController' und 'FooController' werden auch
+            definiert; keiner von diesen ist in einem Namensraum. Diese Verzeichnisstruktur wird für die
+            Beispiele in diesem Kapitel verwendet.
+        </para>
+
+        <note>
+            <title>Keine Verwendung von Namensräumen im Standard Modul</title>
+            <para>
+                Es ist zu beachten das Kontroller, im Standardmodul, keinen Prefix für den Namensraum benötigen.
+                Deshalb benötigt der Kontroller, im obigen Beispiel, den Prefix 'Default_' nicht -- sie werden
+                einfach dispatched gemäß dem Namen des Basis Kontrollers: 'IndexController' und 'FooController'.
+                Ein Prefix für den Namensraum wird trotzdem in allen anderen Modulen verwendet.
+            </para>
+        </note>
+
+        <para>
+            Also, wie kann solch ein Verzeichnislayout mit den MVC Komponenten des Zend Frameworks implementiert
+            werden?
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.directories">
+        <title>Verzeichnisse für Modul Kontroller spezifizieren</title>
+
+        <para>
+            Der erste Schritt um Module zu verwenden ist es, die Art der Spezifizierung der Kontroller Verzeichnis
+            Liste im Front Kontroller, zu Ändern. In der grundsätzlichen MVC Serie, kann entweder ein Array oder
+            ein String an <code>setControllerDirectory()</code>, oder ein Pfad an
+            <code>addControllerDirectory()</code> übergeben werden. Wenn Module verwendet werden, müssen die
+            Aufrufe dieser Methoden leicht geändert werden.
+        </para>
+
+        <para>
+            Mit <code>setControllerDirectory()</code>, muß ein assoziatives Array übergeben und Schlüssel/Werte
+            Paare von Modul Namen/Verzeichnis Pfaden übergeben werden. Der spezielle Schlüssel <code>default</code>
+            wird für globale Kontroller verwenden (diejenigen die keinen Modul Namensraum benötigen). Alle
+            Einträge sollten einen String Schlüssel enthalten der zu einem einzelnen Pfad zeigt, und der
+            <code>default</code> Schlüssel muß vorhanden sein. Als Beispiel:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setControllerDirectory(array(
+    'default' => '/path/to/application/controllers',
+    'blog'    => '/path/to/application/blog/controllers'
+));
+]]>
+        </programlisting>
+
+        <para>
+            <code>addControllerDirectory()</code> nimmt ein optionales zweites Argument. Wenn Module verwendet
+            werden, kann der Modulname als zweites Argument übergeben werden; wenn nicht spezifiziert, wird der
+            Pfad zum <code>default</code> Namensraum hinzugefügt. Als Beispiel:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->addControllerDirectory('/path/to/application/news/controllers',
+                               'news');
+]]>
+        </programlisting>
+
+        <para>
+            Und das beste zum Schluß. Der einfachste Weg um Modul Verzeichnisse zu spezifizieren ist es en masse
+            zu machen, mit allen Modulen in einem gemeinsamen Verzeichnis und die gleiche Struktur verwendend.
+            Das kann mit <code>addModuleDirectory()</code> getan werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+ * Nehmen wir die folgende Verzeichnisstruktur an:
+ * application/
+ *     modules/
+ *         default/
+ *             controllers/
+ *         foo/
+ *             controllers/
+ *         bar/
+ *             controllers/
+ */
+$front->addModuleDirectory('/path/to/application/modules');
+]]>
+        </programlisting>
+
+        <para>
+            Das obige Beispiel definiert die <code>default</code>, <code>foo</code>, und <code>bar</code> Module,
+            die alle zum Unterverzeichnis <code>controllers</code> zeigen und zu Ihrem betreffenden Modul.
+        </para>
+
+        <para>
+            Das Unterverzeichnis für den Kontroller kann angepasst werden um diesen in eigenen Modulen mit
+            <code>setModuleControllerDirectoryName()</code> verwenden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+ * Das Kontroller Unterverzeichnis ändern damit es 'con' ist
+ * application/
+ *     modules/
+ *         default/
+ *             con/
+ *         foo/
+ *             con/
+ *         bar/
+ *             con/
+ */
+$front->setModuleControllerDirectoryName('con');
+$front->addModuleDirectory('/path/to/application/modules');
+]]>
+        </programlisting>
+
+        <note><para>
+            Man kann angeben das kein Kontroller Unterverzeichnis für die eigenen Module verwendet wird, indem
+            ein leerer Wert an <code>setModuleControllerDirectoryName()</code> übergeben wird.
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.router">
+        <title>Zu Modulen routen</title>
+
+        <para>
+            Die Standardroute in <classname>Zend_Controller_Router_Rewrite</classname> ist ein Objekt vom Typ
+            <classname>Zend_Controller_Router_Route_Module</classname>. Diese Route erwartet eines der folgenden
+            Routing Schemas:
+        </para>
+
+        <itemizedlist>
+            <listitem><para><code>:module/:controller/:action/*</code></para></listitem>
+            <listitem><para><code>:controller/:action/*</code></para></listitem>
+        </itemizedlist>
+
+        <para>
+            In anderen Worten, wird jeder Kontroller und jede Aktion durch sich selbst entsprechen oder mit einem
+            vorangestellten Modul. Diese Regeln für die Entsprechung spezifizieren, das ein Modul nur dann
+            entspricht, wenn ein Schlüssel mit dem gleichen Namen im Kontroller Verzeichnis Array existiert, das dem
+            Front Kontroller und Dispatcher übergeben wird.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.modular.defaultcontroller">
+        <title>Modul oder globaler Standard Kontroller</title>
+
+        <para>
+            Im Standardrouter wird der Standardkontroller verwendet (<code>IndexController</code>, solange nicht
+            anders angefragt), wenn kein Kontroller in der URL spezifiziert wurde. Bei modularen Kontrollern wird
+            der Dispatcher zuerst für diesen Standardkontroller im Modulpfad nachsehen, wenn ein Modul aber kein
+            Kontroller spezifiziert wurde, und fällt dann auf den Standardcontroller zurück, der im 'default'
+            globalen Namensraum gefunden wird.
+        </para>
+
+        <para>
+            Wenn immer auf den globalen Namensraum zurückgefallen werden soll, muß der
+            <code>useDefaultControllerAlways</code> im Front Kontroller gesetzt werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setParam('useDefaultControllerAlways', true);
+]]>
+        </programlisting>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

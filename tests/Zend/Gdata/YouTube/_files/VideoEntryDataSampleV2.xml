@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' 
+xmlns:gml='http://www.opengis.net/gml' 
+xmlns:georss='http://www.georss.org/georss' 
+xmlns:media='http://search.yahoo.com/mrss/' 
+xmlns:batch='http://schemas.google.com/gdata/batch' 
+xmlns:yt='http://gdata.youtube.com/schemas/2007' 
+xmlns:gd='http://schemas.google.com/g/2005' 
+gd:etag='W/&quot;A0cDQn47eCp7ImA9WxRbF00.&quot;'>
+<id>tag:youtube.com,2008:video:UMFI1hdm96E</id>
+<published>2007-01-07T01:50:15.000Z</published>
+<updated>2008-12-08T04:04:33.000Z</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='cover'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='acoustic'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='gnarls'/>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#video'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='barkley'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='music'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/keywords.cat' term='singing'/>
+<category scheme='http://gdata.youtube.com/schemas/2007/categories.cat' term='Music' label='Music'/>
+<title>"Crazy (Gnarles Barkley)" - Acoustic Cover</title>
+<content type='application/x-shockwave-flash' src='http://www.youtube.com/v/UMFI1hdm96E&amp;f=gdata_videos'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/watch?v=UMFI1hdm96E'/>
+<link rel='http://gdata.youtube.com/schemas/2007#video.responses' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/UMFI1hdm96E/responses?v=2'/>
+<link rel='http://gdata.youtube.com/schemas/2007#video.related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/UMFI1hdm96E/related?v=2'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/videos/UMFI1hdm96E?v=2'/>
+<author>
+ <name>davidchoimusic</name><uri>http://gdata.youtube.com/feeds/api/users/davidchoimusic</uri>
+</author>
+<media:group>
+ <media:title type='plain'>"Crazy (Gnarles Barkley)" - Acoustic Cover</media:title>
+ <media:description type='plain'>Gnarles Barkley acoustic cover http://www.myspace.com/davidchoimusic</media:description>
+ <media:rating scheme="http://gdata.youtube.com/schemas/2007#mediarating" country="HK,TW">1</media:rating>
+ <media:category 
+    scheme='http://gdata.youtube.com/schemas/2007/developertags.cat'>
+    DeveloperTag1</media:category>
+ <media:keywords>acoustic, barkley, cover, gnarls, music, singing</media:keywords>
+ <yt:duration seconds='255'/>
+ <yt:videoid>UMFI1hdm96E</yt:videoid>
+ <yt:uploaded>2007-01-07T01:50:15.000Z</yt:uploaded>
+ <media:player url='http://www.youtube.com/watch?v=UMFI1hdm96E'/>
+ <media:credit role='uploader' scheme='urn:youtube' yt:type='partner'>davidchoimusic</media:credit>
+ <media:category label='Music' scheme='http://gdata.youtube.com/schemas/2007/categories.cat'>Music</media:category>
+ <media:content url='http://www.youtube.com/v/UMFI1hdm96E&amp;f=gdata_videos' type='application/x-shockwave-flash' medium='video' isDefault='true' expression='full' duration='255' yt:format='5'/>
+ <media:content url='rtsp://rtsp2.youtube.com/CigLENy73wIaHwmh92YX1kjBUBMYESARFEgGUgxnZGF0YV92aWRlb3MM/0/0/0/video.3gp' type='video/3gpp' medium='video' expression='full' duration='255' yt:format='6'/>
+ <media:thumbnail url='http://i.ytimg.com/vi/UMFI1hdm96E/2.jpg' height='97' width='130' time='00:02:07.500'/>
+ <media:thumbnail url='http://i.ytimg.com/vi/UMFI1hdm96E/1.jpg' height='97' width='130' time='00:01:03.750'/>
+ <media:thumbnail url='http://i.ytimg.com/vi/UMFI1hdm96E/3.jpg' height='97' width='130' time='00:03:11.250'/>
+ <media:thumbnail url='http://i.ytimg.com/vi/UMFI1hdm96E/0.jpg' height='240' width='320' time='00:02:07.500'/>
+ <media:thumbnail url='http://i.ytimg.com/vi/UMFI1hdm96E/hqdefault.jpg' height='360' width='480'/>
+</media:group>
+<yt:statistics viewCount='267971' favoriteCount='1822'/>
+<gd:rating min='1' max='5' numRaters='2062' average='4.74'/>
+ <georss:where>
+    <gml:Point>
+      <gml:pos>37.398529052734375 -122.0635986328125</gml:pos>
+    </gml:Point>
+  </georss:where>
+  <yt:recorded>2008-09-25</yt:recorded>
+<gd:comments>
+  <gd:feedLink href='http://gdata.youtube.com/feeds/api/videos/UMFI1hdm96E/comments?v=2' countHint='1074'/>
+  </gd:comments>
+</entry>

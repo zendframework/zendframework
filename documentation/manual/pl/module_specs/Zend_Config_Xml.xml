@@ -1,0 +1,143 @@
+<sect1 id="zend.config.adapters.xml">
+    <title>Zend_Config_Xml</title>
+    <para>
+        <code>Zend_Config_Xml</code> pozwala programistom przechowywać dane
+        konfiguracyjne w prostym formacie XML a następnie odczytywać je w aplikacji
+        używając składni zagnieżdżonych właściwości obiektów. Nazwa głównego elementu
+        pliku XML jest nieistotna i może być dowolna. Pierwsze poziomy elementów
+        XML odpowiadają sekcjom danych konfiguracyjnych. Format XML obsługuje
+        hierarchiczne zorganizowanie za pomocą zagnieżdżania elementów XML wewnątrz
+        elementów poziomu sekcji. Zawartość najbardziej zagnieżdżonego elementu
+        XML odpowiada wartości danej konfiguracyjnej. Dziedziczenie sekcji jest
+        obsługiwane za pomocą specjalnego atrybutu XML nazwanego <code>extends</code>,
+        a wartość tego atrybutu odpowiada nazwie sekcji, której dane mają być
+        odziedziczone przez rozszerzającą sekcję.
+    </para>
+    <note>
+        <title>Zwracany typ</title>
+        <para>
+            Dane konfiguracyjne odczytywane przez <code>Zend_Config_Xml</code> są
+            zawsze zwracane jako łańcuchy znaków. Konwersja danych z łańcuchów znaków
+            do innych typów leży w gestii programistów, którzy mogą dopasować to
+            do własnych potrzeb.
+        </para>
+    </note>
+    <example id="zend.config.adapters.xml.example.using">
+        <title>Użycie Zend_Config_Xml</title>
+        <para>
+            Ten przykład pokazuje podstawowe użycie klasy <code>Zend_Config_Xml</code>
+            do ładowania danych konfiguracyjnych z pliku XML. W tym przykładzie
+            znajdują się dane konfiguracyjne zarówno dla systemu produkcyjnego
+            jak i dla systemu rozbudowywanego. Z tego względu, że dane
+            konfiguracyjne systemu rozbudowywanego są bardzo podobne do tych dla
+            systemu produkcyjnego, sekcja systemu rozbudowywanego dziedziczy po
+            sekcji systemu produkcyjnego. W tym przypadku decyzja jest dowolna
+            i mogłoby to być zrobione odwrotnie, z sekcją systemu produkcyjnego
+            dziedziczącą po sekcji systemu rozbudowywanego, chociaż nie może to
+            być przykładem dla bardziej złożonych sytuacji. Załóżmy, że poniższe
+            dane konfiguracyjne znajdują się w pliku <code>/path/to/config.xml</code>:
+        </para>
+        <programlisting role="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <adapter>pdo_mysql</adapter>
+            <params>
+                <host>db.example.com</host>
+                <username>dbuser</username>
+                <password>secret</password>
+                <dbname>dbname</dbname>
+            </params>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params>
+                <host>dev.example.com</host>
+                <username>devuser</username>
+                <password>devsecret</password>
+            </params>
+        </database>
+    </staging>
+</configdata>
+]]>
+        </programlisting>
+        <para>
+            Następnie załóżmy, że programista aplikacji potrzebuje danych
+            konfiguracyjnych aplikacji rozbudowywanej z pliku XML. Prostą 
+            sprawą jest załadowanie tych danych określając plik XML oraz
+            sekcję dla aplikacji rozbudowywanej:
+        </para>
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
+
+echo $config->database->params->host; // wyświetla "dev.example.com"
+echo $config->database->params->dbname; // wyświetla "dbname"
+]]>
+        </programlisting>
+    </example>
+    <example id="zend.config.adapters.xml.example.attributes">
+        <title>Używanie atrybutów znaczników w Zend_Config_Xml</title>
+        <para>
+            Komponent Zend_Config_Xml obsługuje także dwa inne sposoby
+            definiowania elementów w pliku konfiguracyjnym. Oba sposoby używają
+            atrybutów. Z tego względu, że atrybuty <code>extends</code> oraz
+            <code>value</code> są zastrzeżone (do rozszerzania sekcji oraz do
+            alternatywnego sposobu użycia atrybutów), nie mogą one być użyte.
+            Pierwszym sposobem użycia atrybutu jest dodanie go w elemencie
+            rodzica. Zostanie on automatycznie przełożony jako element dziecko:
+        </para>
+        <programlisting role="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production webhost="www.example.com">
+        <database adapter="pdo_mysql">
+            <params host="db.example.com" username="dbuser" password="secret" dbname="dbname"/>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params host="dev.example.com" username="devuser" password="devsecret"/>
+        </database>
+    </staging>
+</configdata>
+]]>
+        </programlisting>
+        <para>
+            Kolejny sposób tak naprawdę nie zmniejsza objętości pliku
+            konfiguracyjnego, ale ułatwia zarządzanie nim, ponieważ eliminuje
+            konieczność pisania nazw znaczników podwójnie. Po prostu tworzysz
+            pusty znacznik, który zawiera swoją wartość wewnątrz atrybutu
+            <code>value</code>:
+        </para>
+        <programlisting role="xml"><![CDATA[
+<?xml version="1.0"?>
+<configdata>
+    <production>
+        <webhost>www.example.com</webhost>
+        <database>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+                <username value="dbuser"/>
+                <password value="secret"/>
+                <dbname value="dbname"/>
+            </params>
+        </database>
+    </production>
+    <staging extends="production">
+        <database>
+            <params>
+                <host value="dev.example.com"/>
+                <username value="devuser"/>
+                <password value="devsecret"/>
+            </params>
+        </database>
+    </staging>
+</configdata>
+]]>
+        </programlisting>
+    </example>
+</sect1>

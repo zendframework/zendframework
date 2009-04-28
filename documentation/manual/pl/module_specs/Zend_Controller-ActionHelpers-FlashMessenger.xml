@@ -1,0 +1,67 @@
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>Wprowadzenie</title>
+        <para>
+            Klasa pomocnicza <code>FlashMessenger</code> pozwala na przekazywanie
+            komunikatów, które użytkownik może zobaczyć przy następnym żądaniu.
+            Aby tego dokonać, klasa <code>FlashMessenger</code> używa klasy
+            <code>Zend_Session_Namespace</code> do przechowywania komunikatów,
+            aby mogły one być odebrane w następnych żądaniach. Jeśli chcesz
+            używać <code>Zend_Session</code> lub <code>Zend_Session_Namespace</code>,
+            to dobrym pomysłem jest zainicjowanie tego komponentu w pliku
+            ładującym za pomocą metody <code>Zend_Session::start()</code>.
+            (Zobacz dokumentację klasy
+            <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
+            aby uzyskać więcej szczegółów odnośnie jej użycia.)
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>Przykład prostego użycia</title>
+        <para>
+            Poniższy przykład  pokazuje użycie klasy pomocniczej FlashMessenger
+            w najprostszy możliwy sposób. Gdy wywołana jest akcja
+            <code>/some/my</code>, dodany zostaje komunikat "Rekord zapisany!".
+            Następnie żądanie do akcji <code>/some/my-next-request</code>
+            spowoduje odebranie komunikatu (oraz wykasowanie go).
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+    public function init()
+    {
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * domyślna metoda pobierania instancji klasy
+         * Zend_Controller_Action_Helper_FlashMessenger
+         */
+        $this->_flashMessenger->addMessage('Rekord zapisany!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>

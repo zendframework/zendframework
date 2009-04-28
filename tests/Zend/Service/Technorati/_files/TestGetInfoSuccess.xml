@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Error response returned for a GetInfo request
+    http://api.technorati.com/getinfo?key=VALID_API_KEY&username=weppos
+    
+    Be aware that some test cases underlined how sometimes Technorati 
+    doesn't take care of its DTD.
+    For instance, in the following response `weblog` node is invalid
+    according to current DTD declaration.
+    
+    See http://framework.zend.com/issues/browse/ZF-2203
+
+-->
+<!-- generator="Technorati API version 1.0 /getinfo" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <username>weppos</username>
+            <firstname>Simone</firstname>
+            <lastname>Carletti</lastname>
+        </result>
+        <item>
+            <weblog>
+                <name> coComment -</name>
+                <url>http://www.cocomment.com/comments/weppos</url>
+                <rssurl>http://cocomment.com/myrss2/weppos.rss</rssurl>
+                <inboundblogs>2</inboundblogs>
+                <inboundlinks>2</inboundlinks>
+                <lastupdate>2007-09-18 07:58:43 GMT</lastupdate>
+                <rank>2929077</rank>
+                <lat>0.0</lat>
+                <lon>0.0</lon>
+            </weblog>
+        </item>
+        <item>
+            <weblog>
+                <name>RSS World - Un mondo dedicato al formato RSS, Atom e Blog</name>
+                <url>http://www.rss-world.info</url>
+                <description>Dedicato ai formati RSS e Atom propone informazioni, articoli e risorse sul linguaggio con approfondimenti su blog e podcast.</description>
+                <rssurl>http://www.rss-world.info/feed/risorse.xml</rssurl>
+                <atomurl>http://www.rss-world.info/feed/news.xml</atomurl>
+                <inboundblogs>121</inboundblogs>
+                <inboundlinks>285</inboundlinks>
+                <lastupdate>2006-11-03 14:08:11 GMT</lastupdate>
+                <rank>64696</rank>
+                <lat>0.0</lat>
+                <lon>0.0</lon>
+                <lang>26230</lang>
+            </weblog>
+        </item>
+        <item>
+            <weblog>
+                <name>Vino e Salute: Il potere curativo del vino</name>
+                <url>http://www.vino-salute.com</url>
+                <description>Un viaggio alla scoperta dei poteri terapeutici, degli effetti benefici e curativi del vino sul nostro organismo.</description>
+                <inboundblogs>2</inboundblogs>
+                <inboundlinks>2</inboundlinks>
+                <lastupdate>2007-10-19 04:42:34 GMT</lastupdate>
+                <rank>2929077</rank>
+                <lat>0.0</lat>
+                <lon>0.0</lon>
+                <lang>26230</lang>
+            </weblog>
+        </item>
+        <item>
+            <weblog>
+                <name>ASP Stats Generator Blog</name>
+                <url>http://blog.asp-stats.com</url>
+                <rssurl>http://blog.asp-stats.com/index.php/feed/</rssurl>
+                <inboundblogs>1</inboundblogs>
+                <inboundlinks>7</inboundlinks>
+                <lastupdate>2006-06-22 12:03:49 GMT</lastupdate>
+                <rank>2929077</rank>
+                <lat>0.0</lat>
+                <lon>0.0</lon>
+                <lang>26110</lang>
+            </weblog>
+        </item>
+        <item>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <description>Un piccolo spazio nel web dedicato a marketing, feed e motori di ricerca.</description>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>86</inboundblogs>
+                <inboundlinks>114</inboundlinks>
+                <lastupdate>2007-11-14 19:45:06 GMT</lastupdate>
+                <rank>96928</rank>
+                <lat>41.706</lat>
+                <lon>12.69</lon>
+                <lang>26230</lang>
+            </weblog>
+        </item>
+        <item>
+            <weblog>
+                <name>Daily Feed: Directory di blog e feed Rss/Atom</name>
+                <url>http://dailyfeed.rss-world.info</url>
+                <description>Directory multitematica di siti che propongono feed Atom ed RSS.</description>
+                <rssurl>http://dailyfeed.rss-world.info/index.xml</rssurl>
+                <atomurl>http://www.rss-world.info/feed/news.xml</atomurl>
+                <inboundblogs>2</inboundblogs>
+                <inboundlinks>2</inboundlinks>
+                <lastupdate>2007-08-13 09:59:20 GMT</lastupdate>
+                <rank>2929077</rank>
+                <lat>0.0</lat>
+                <lon>0.0</lon>
+                <lang>26230</lang>
+            </weblog>
+        </item>
+    </document>
+</tapi>
+

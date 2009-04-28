@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.debug.dumping">
+
+    <title>Dumping Variables</title>
+
+    <para>
+        The static method <classname>Zend_Debug::dump()</classname> prints or returns
+        information about an expression.  This simple technique of debugging is
+        common, because it is easy to use in an ad hoc fashion, and requires no
+        initialization, special tools, or debugging environment.
+    </para>
+
+    <example id="zend.debug.dumping.example">
+        <title>Example of dump() method</title>
+        <programlisting role="php"><![CDATA[
+
+Zend_Debug::dump($var, $label=null, $echo=true);
+]]></programlisting>
+    </example>
+
+    <para>
+        The <code>$var</code> argument specifies the expression or variable
+        about which the <classname>Zend_Debug::dump()</classname> method outputs
+        information.
+    </para>
+
+    <para>
+        The <code>$label</code> argument is a string to be prepended to the
+        output of <classname>Zend_Debug::dump()</classname>.  It may be useful, for
+        example, to use labels if you are dumping information about multiple
+        variables on a given screen.
+    </para>
+
+    <para>
+        The boolean <code>$echo</code> argument specifies whether the output
+        of <classname>Zend_Debug::dump()</classname> is echoed or not.
+        If <code>true</code>, the output is echoed.
+        Regardless of the value of the <code>$echo</code> argument, the
+        return value of this method contains the output.
+    </para>
+
+    <para>
+        It may be helpful to understand that internally,
+        <classname>Zend_Debug::dump()</classname> method wraps the PHP function
+        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        If the output stream is detected as a web presentation,
+        the output of <code>var_dump()</code> is escaped using
+        <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+        and wrapped with (X)HTML <code>&lt;pre&gt;</code> tags.
+    </para>
+
+    <tip>
+        <title>Debugging with Zend_Log</title>
+        <para>
+            Using <classname>Zend_Debug::dump()</classname> is best for ad hoc
+            debugging during software development.  You can add code to dump
+            a variable and then remove the code very quickly.
+        </para>
+        <para>
+            Also consider the <link linkend="zend.log.overview">Zend_Log</link>
+            component when writing more permanent debugging code.
+            For example, you can use the <code>DEBUG</code> log level and the
+            Stream log writer, to output the string returned by
+            <classname>Zend_Debug::dump()</classname>.
+        </para>
+    </tip>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

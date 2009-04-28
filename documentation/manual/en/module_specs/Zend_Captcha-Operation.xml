@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.captcha.operation">
+    <title>Captcha Operation</title>
+
+    <para>
+        All CAPTCHA adapter implement
+        <classname>Zend_Captcha_Adapter</classname>, which looks like the following:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+interface Zend_Captcha_Adapter extends Zend_Validate_Interface
+{
+    public function generate();
+
+    public function render(Zend_View $view, $element = null);
+
+    public function setName($name);
+
+    public function getName();
+
+    public function getDecorator();
+
+    // Additionally, to satisfy Zend_Validate_Interface:
+    public function isValid($value);
+
+    public function getMessages();
+
+    public function getErrors();
+}
+]]></programlisting>
+
+    <para>
+        The name setter and getter are used to specify and retrieve the
+        CAPTCHA identifier. <code>getDecorator()</code> can be used to specify a
+        <classname>Zend_Form</classname> decorator either by name or returning an actual decorator
+        object. The most interesting methods are <code>generate()</code>
+        and <code>render()</code>. <code>generate()</code> is used to create the
+        CAPTCHA token. This process typically will store the token in the
+        session so that you may compare against it in subsequent requests.
+        <code>render()</code> is used to render the information that represents
+        the CAPTCHA- be it an image, a figlet, a logic problem, or some other CAPTCHA.
+    </para>
+
+    <para>
+        A typical use case might look like the following:
+    </para>
+
+        <programlisting role="php"><![CDATA[
+// Creating a Zend_View instance
+$view = new Zend_View();
+
+// Originating request:
+$captcha = new Zend_Captcha_Figlet(array(
+    'name' => 'foo',
+    'wordLen' => 6,
+    'timeout' => 300,
+));
+
+$id = $captcha->generate();
+echo $captcha->render($view);
+
+// On subsequent request:
+// Assume captcha setup as before, and $value is the submitted value:
+if ($captcha->isValid($_POST['foo'], $_POST)) {
+    // Validated!
+}
+]]></programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

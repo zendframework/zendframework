@@ -1,0 +1,53 @@
+<sect1 id="zend.layout.introduction">
+    <title>Introductie</title>
+
+    <para>
+        <code>Zend_Layout</code> implementeert het klassieke Two Step View design pattern,
+        dat ontwikkelaars in staat stelt elke output die een applicatie levert te voorzien
+        van een omvattende, andere view. Dit wordt voornamelijk gebruikt om elke pagina
+        binnen een website van dezelfde layout te voorzien. Om deze reden wordt in veel
+        andere projecten de naam <emphasis>layout</emphasis> voor dit pattern gebruikt.
+        Zend Framework gebruikt deze term om de vergelijkbaarheid te vergroten.
+    </para>
+
+    <para>
+        De belangrijkste doelen van <code>Zend_Layout</code> zijn:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Automatische keuze en inbedding van standaard layouts bij gebruik
+                van de MVC-componenten van Zend Framework.
+        </para></listitem>
+
+        <listitem><para>
+                Een aparte omgeving bieden voor layout-gerelateerde variabelen
+                en output.
+        </para></listitem>
+
+        <listitem><para>
+                De ontwikkelaar in staat stellen om de layoutnaam, het pad naar
+                het layout script en de inflectie van het layout script te wijzigen.
+        </para></listitem>
+
+        <listitem><para>
+                De ontwikkelaar in staat stellen om vanuit de actiecontrollers
+                en viewscripts de layout tijdelijk uit te schakelen en het
+                layout script te veranderen.
+        </para></listitem>
+
+        <listitem><para>
+                Dezelfde inflectieregels voor view script namen te volgen als<link
+                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
+                maar ook andere regels mogelijk maken.
+        </para></listitem>
+
+        <listitem><para>
+                Ontwikkelaars die zonder de MVC-componenten werken ook in staat stellen
+                <code>Zend_Layout</code> te gebruiken.
+        </para></listitem>
+    </itemizedlist>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

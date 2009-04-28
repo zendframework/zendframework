@@ -1,0 +1,201 @@
+<sect1 id="zend.uri.chapter">
+  <title>Zend_Uri</title>
+
+  <sect2 id="zend.uri.overview">
+    <title>概述</title>
+
+    <para>
+      <code>Zend_Uri</code> 是一个辅助于操作和验证<ulink url="http://www.w3.org/Addressing/">统一资源标识符</ulink> (URIs)的组件.
+      <code>Zend_Uri</code> 的存在主要是为其他组件服务的,比如<code>Zend_Http_Client</code>,但是作为一个独立的工具也是有用的.
+    </para>
+
+    <para>
+      URIs 总是以一个schema(模式,协议)开始,后跟一个冒号(colon).<code>Zend_Uri</code>类提供一个工厂,
+       返回一个它本身的 适应于每种模式(scheme)的 子类,子类被命名为<code>Zend_Uri_&lt;scheme&gt;</code>,
+      <code>&lt;scheme&gt;</code>是首字母大写的模式名称.一个例外是HTTPS,它也是由<code>Zend_Uri_Http</code>处理的.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.creation">
+    <title>新建一个URI</title>
+
+    <para>
+      如果仅有一个模式被传递给<code>Zend_Uri::factory()</code>,<code>Zend_Uri</code>将从头构造一个新的URI.
+    </para>
+
+    <example>
+      <title>使用<code>Zend_Uri::factory()</code>创建一个新的URI</title>
+
+      <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// 重新创建一个新的URI,仅传递模式.
+$uri = Zend_Uri::factory('http');
+
+// $uri instanceof Zend_Uri_Http
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      从头创建一个的新的URI,仅仅需要传递模式给<code>Zend_Uri::factory()</code><footnote><para>
+      在撰写本文时,Zend_Uri仅支持HTTP和HTTPS模式.</para></footnote> .
+      如果传递了一个未支持的模式,<code>Zend_Uri_Exception</code>异常将被抛出.
+    </para>
+
+    <para>
+      如果传递的模式或者URI被支持,<code>Zend_Uri::factory()</code>返回一个它本身的 适应于特定模式(scheme)的 子类
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.manipulation">
+    <title>操作现有的URI</title>
+
+    <para>
+      要操作一个现有的URL,把整个URI传递给<code>Zend_Uri::factory()</code>.
+    </para>
+
+    <example>
+      <title>使用<code>Zend_Uri::factory()</code>操作一个现有的URI</title>
+
+    <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// 操作一个现有的URI,把他传入到Zend_Uri::factory().
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+// $uri instanceof Zend_Uri_Http
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      这个URI将被解析并且验证.如果发现它是无效的,<code>Zend_Uri_Exception</code>异常立即抛出.否则<code>Zend_Uri::factory()</code>
+      返回一个它本身的 适应于特定模式(scheme)的 子类
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.validation">
+    <title>URI 验证</title>
+
+    <para>
+      <code>Zend_Uri::check()</code> 函数仅在需要验证一个现有的URI时使用.
+    </para>
+
+    <example>
+      <title>使用<code>Zend_Uri::check()</code>进行URI 验证</title>
+
+    <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+// 验证一个给定的URI是否是格式良好的
+$valid = Zend_Uri::check('http://uri.in.question');
+
+// 对于一个有效的URI,$valid为TRUE,否则为FALSE
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+      <code>Zend_Uri::check()</code> 返回布尔值,它比使用<code>Zend_Uri::factory()</code>更便捷,并且能够捕获异常.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.uri.instance-methods">
+    <title>公共实例方法</title>
+
+    <para>
+      每个<code>Zend_Uri</code>子类的实例(如:<code>Zend_Uri_Http</code>)有多个 有用的 处理任何类型的 URI的实例方法.
+    </para>
+
+    <sect3 id="zend.uri.instance-methods.getscheme">
+      <title>取得URI的Schema</title>
+
+      <para>
+      URI模式是冒号之前的部分.例如<code>http://www.zend.com</code>的模式是<code>http</code>.
+      </para>
+
+      <example>
+        <title>从<code>Zend_Uri_*</code> 对象取得模式</title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$scheme = $uri->getScheme();  // "http"
+
+?>]]></programlisting>
+    </example>
+
+      <para>
+        <code>getScheme()</code>实例方法仅返回URI对象的模式部分.
+      </para>
+
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.geturi">
+      <title>取得整个URI</title>
+
+      <example>
+        <title>从一个<code>Zend_Uri_*</code> 对象取得整个URI</title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+echo $uri->getUri();  // "http://www.zend.com"
+
+?>]]></programlisting>
+      </example>
+
+      <para>
+        <code>getUri()</code>方法返回整个URI的字符串标识.
+      </para>
+    </sect3>
+
+    <sect3 id="zend.uri.instance-methods.valid">
+      <title>验证URI</title>
+
+      <para>
+        <code>Zend_Uri::factory()</code>总是验证传递给它的任何URI,如果给定的URI被认为是无效的,它将不会实例化一个新的<code>Zend_Uri</code> 子类.但是
+        <code>Zend_Uri</code>子类为 一个新URI 或者 一个现有的有效的URL 被实例化后,在操作后 该URI可能会变得无效.
+      </para>
+
+      <example>
+        <title>验证一个 <code>Zend_Uri_*</code> 对象</title>
+
+        <programlisting role="php"><![CDATA[
+<?php
+
+require_once 'Zend/Uri.php';
+
+$uri = Zend_Uri::factory('http://www.zend.com');
+
+$isValid = $uri->valid();  // TRUE
+
+?>]]></programlisting>
+      </example>
+
+      <para>
+        <code>valid()</code>实例方法检查URI对象是否仍是有效的.
+      </para>
+    </sect3>
+
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
+

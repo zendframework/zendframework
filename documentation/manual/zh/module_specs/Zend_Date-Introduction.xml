@@ -1,0 +1,118 @@
+<sect1 id="zend.date.introduction">
+
+    <title> 简介 </title>
+
+    <para>
+        <code>Zend_Date</code> 组件提供了一个详细而简单的 API 用来处理日期和时间。它的方法接受广泛的信息，包括日期部分、
+        各种组合产生的许多功能和超出 PHP 日期相关函数的可能行。对于最新的手册，请参考
+        <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home"> 在线手册（及时和 Subversion 同步）</ulink>。
+    </para>
+
+    <para>
+        虽然保持简单是我们的目标，但是日期和时间的本地化修改、合并和比较是不可避免的复杂。
+        日期、还有时间在不同的地方有不同的写法。例如，一些地方月在前面，一些地方年在前面。
+        关于更多处理本地化和标准化的信息，请参考 <link linkend="zend.locale.date.datesandtimes"><code>Zend_Locale</code></link>。
+    </para>
+
+    <para>
+        <code>Zend_Date</code> 在许多语言中也支持月名的缩写。 <code>Zend_Locale</code> 简化本地的月和星期名到时间戳的标准化。
+        这样，它们在其它地区就显示为本地化的格式。
+        <code>Zend_Locale</code>
+    </para>
+
+    <sect2 id="zend.date.setdefaulttimezone">
+
+        <title> 永远设置缺省时区 </title>
+
+        <para>
+            在 PHP 或 Zend Framework 中使用任何日期相关的函数之前，
+            通过使用 <code>date.timezone</code> php.ini 的设置来设置 TZ 环境变量，或者使用 <ulink url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>。
+            首先确保你的程序有个正确的缺省时区，
+            在 PHP 中，通过根据用户的期望设置一个缺省的时区，我们可以调整所有日期和时间相关的函数为特定的用户来工作。
+            时区设置的全部列表，请参考 <ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">CLDR Timezone Identifier List</ulink>。
+            <example id="zend.date.setdefaulttimezone.example-1">
+                <title> 设置一个缺省的时区 </title>
+                <programlisting role="php"><![CDATA[
+// timezone for an American in California
+date_default_timezone_set('America/Los_Angeles');
+// timezone for a German in Germany
+date_default_timezone_set('Europe/Berlin');
+]]>
+                </programlisting>
+            </example>
+            <emphasis role="strong"> 当创建 Zend_Date 实例时，它们的时区就自动地变成当前缺省时区！</emphasis>
+            这样，时区设置将有效地解决任何夏时制（DST）问题，不需要显式地指定夏时制。
+        </para>
+
+        <para>
+            请记住时区 <emphasis role="strong">UTC</emphasis> 和 <emphasis role="strong">GMT</emphasis> 不包括夏令时。
+            这意味着即使你定义了  <code>Zend_Date</code> 工作于 DST，对于设置为 UTC 或 GMT 的 <code>Zend_Date</code> 实例，它也自动切换回来。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.date.why">
+
+        <title> 为什么使用 Zend_Date?</title>
+
+        <para>
+            <code>Zend_Date</code> 提供下列功能，它扩展了 PHP 日期函数的功能：
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    简单的 API
+                </para>
+                <para>
+                    <code>Zend_Date</code> 提供了非常简单的 API，它结合了四种编程语言中的最好的日期/时间函数。
+                    例如在一行中可以加或者比较两个时间。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    完全国际化
+                </para>
+                <para>
+                    支持超过 130 中语言的月和星期名的全称和缩写。以和地方相关联的常规的格式支持使用本地化月和星期名的输入和输出的方法。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    无限制的时间戳
+                </para>
+                <para>
+                    尽管 PHP 5.2 声明 “有效的时间戳范围一般是从 1901年12月13日星期五20:45:54 GMT 到 2038年1月19日星期二 2038 03:14:07 GMT”，
+                    <code>Zend_Date</code> 在 BCMath 扩展的帮助下，还是支持一个几乎无限制的范围。
+                    如果 BCMath 不可用，Zend_Date 将只把对时间戳的支持范围减小到你的服务器所支持的 <code>float</code> 类型的范围。
+                    “浮点数的大小和平台无关，虽然最大数 ~1.8e308 是带有大概精确到 14 位十进制数的一个值（64位 IEEE 格式）”[<ulink url="http://www.php.net/float">http://www.php.net/float</ulink>]。
+                    另外，由于浮点数本身的限制，浮点数的误差可能会带来计算的错误。为避免这个问题，如果 BCMath 扩展可用，ZF I18n 组件就使用它。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    支持 ISO_8601 日期规范
+                </para>
+                <para>
+                    支持ISO_8601 日期规范。即使部分兼容 ISO_8601 日期规范将被识别。当和数据库一起使用时，这些日期格式特别有用。
+                    例如，即使 MsSQL 和 <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
+                    有点不同，<code>Zend_Date</code> 都用 <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>
+                    格式规范常量来支持它们。当日期字符串符合 "Y/m/d" or "Y-m-d H:i:s" 根据 PHP date() 格式令牌，使用 Zend_Date
+                    的内置的 ISO 8601 日期格式。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    计算日出和日落
+                </para>
+                <para>
+                    对于任何地方的一天，可以显示日出和日落的时间，这样你就不会错过一秒的白天时间来工作于你喜欢的 PHP 项目 :)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

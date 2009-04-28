@@ -1,0 +1,341 @@
+<sect3 id="zend.controller.plugins.standard.errorhandler">
+    <title>Zend_Controller_Plugins_ErrorHandler</title>
+
+    <para>
+        <code>Zend_Controller_Plugins_ErrorHandler</code> представляет собой
+        плагин для обработки исключений, брошенных вашим приложением, включая
+        те, которые вызваны отсутствием запрошенного контроллера или
+        действия. Он является альтернативой способам, перечисленным в <link
+        linkend="zend.controller.exceptions">разделе об исключениях MVC</link>.
+    </para>
+
+    <para>
+        Основные назначения этого плагина:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Перехват исключений, вызванных отсутствием контроллера или
+                метода действия
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Перехват исключений, брошенных в контроллерах действий
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Другими словами, плагин ErrorHandler спроектирован для обработки
+        HTTP-ошибок типа 404 (отсутствует страница) и 500
+        (внутренняя ошибка). Он не предназначен для отлова исключений,
+        сгенерированных в других плагинах или в процессе маршрутизации.
+    </para>
+
+    <para>
+        По умолчанию <code>Zend_Controller_Plugins_ErrorHandler</code> будет
+        производить переход к
+        <code>ErrorController::errorAction()</code> в модуле по умолчанию. Вы
+        можете установить альтернативные значения для перехода, используя
+        набор методов-аксессоров, доступных в плагине:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>setErrorHandlerModule()</code> устанавливает модуль, на
+                который производится переход.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerController()</code> устанавливает
+                контроллер, на который производится переход.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandlerAction()</code> устанавливает действие,
+                на которое производится переход.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setErrorHandler()</code> принимает ассоциативный массив,
+                который может содержать любые из ключей 'module', 'controller'
+                или 'action'.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Кроме этого, вы можете опционально передать конструктору
+        ассоциативный массив, который будет в свою очередь передан
+        <code>setErrorHandler()</code>.
+    </para>
+
+    <para>
+        <code>Zend_Controller_Plugin_ErrorHandler</code> регистрирует
+        перехватчик <code>postDispatch()</code> и проверяет, есть ли
+        зарегистрированые исключения в
+        <link linkend="zend.controller.response">объекте ответа</link>.
+        Если есть, то производится попытка перехода на действие,
+        зарегистрированное в качестве обработчика ошибок.
+    </para>
+
+    <para>
+        Если во время диспетчеризации обработчика ошибок произошло исключение,
+        то плагин скажет фронт-контроллеру, чтобы тот бросил исключения, и
+        повторно бросит последнее исключение, зарегистрированное в объекте
+        ответа.
+    </para>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.fourohfour">
+        <title>Использование ErrorHandler в качестве обработчика ошибки 404</title>
+
+        <para>
+            Поскольку плагин захватывает не только ошибки приложения, но и
+            ошибки в цепочке контроллеров, вызванные отсутствием класса
+            контроллера и/или метода действия, то он может использоваться в
+            качестве обработчика ошибки 404. В этом случае нужно, чтобы
+            ваш контроллер ошибок проверял тип исключения.
+        </para>
+
+        <para>
+            Перехваченные исключения журналируются в объекте, зарегистрированном
+            в запросе. Для его получения используйте метод
+            <code>Zend_Controller_Action::_getParam('error_handler')</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Имея объект ошибки, вы можете получить тип ошибки через
+            <code>$errors->type</code>. Тип ошибки может быть одним из
+            следующих:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</code>,
+                    означает, что контроллер не был найден.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION</code>,
+                    означает, что запрошенное действие не было найдено.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_OTHER</code>,
+                    обозначает другие исключения.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Вы можете производить проверку на первые два типа и в случае
+            положительного ответа указывать страницу 404:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // ошибка 404 - не найден контроллер или действие
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... получение данных для отображения...
+                break;
+            default:
+                // ошибка приложения; выводим страницу ошибки,
+                // но не меняем код статуса
+                break;
+        }
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Вы можете извлекать исключение, которое инициировало вызов
+            обработчика ошибок, через свойство <code>exception</code> объекта
+            <code>error_handler</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+public function errorAction()
+{
+        $errors = $this->_getParam('error_handler');
+
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // ошибка 404 - не найден контроллер или действие
+                $this->getResponse()
+                     ->setRawHeader('HTTP/1.1 404 Not Found');
+
+                // ... получение данных для отображения...
+                break;
+            default:
+                // ошибка приложения; выводим страницу ошибки,
+                // но не меняем код статуса
+
+                // ...
+
+                // Журналируем исключение:
+                $exception = $errors->exception;
+                $log = new Zend_Log(
+                    new Zend_Log_Writer_Stream(
+                        '/tmp/applicationException.log'
+                    )
+                );
+                $log->debug($exception->getMessage() . "\n" .
+                            $exception->getTraceAsString());
+                break;
+        }
+}]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
+        <title>Управление сгенерированным ранее выводом</title>
+
+        <para>
+            Если в процессе обработки запроса вызывается несколько действий,
+            или ваше действие несколько раз вызывает метод
+            <code>render()</code>, то возможно, что объект ответа уже содержит
+            в себе сохраненные данные для вывода. Это может привести к тому, что
+            выведется смесь из ожидаемого содержимого и содержимого
+            ошибки.
+        </para>
+
+        <para>
+            Если вы хотите, чтобы сообщения об ошибках выводились на этих же
+            страницах, то нет необходимости что-либо менять. В противном случае
+            следует очистить тело ответа до того, как производить рендеринг
+            каких-либо видов:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->getResponse()->clearBody();
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
+        <title>Примеры использования плагина</title>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
+            <title>Стандартное использование</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
+            <title>Установка другого обработчика ошибок</title>
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
+    'module'     => 'mystuff',
+    'controller' => 'static',
+    'action'     => 'error'
+)));
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
+            <title>Использование аксессоров</title>
+            <programlisting role="php"><![CDATA[
+$plugin = new Zend_Controller_Plugin_ErrorHandler();
+$plugin->setErrorHandlerModule('mystuff')
+       ->setErrorHandlerController('static')
+       ->setErrorHandlerAction('error');
+
+$front = Zend_Controller_Front::getInstance();
+$front->registerPlugin($plugin);
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
+        <title>Пример контроллера ошибок</title>
+
+        <para>
+            Для того, чтобы использовать плагин ErrorHandler, нужен контроллер
+            ошибок. Ниже приводится простой пример такого контроллера.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+                // ошибка 404 - не найден контроллер или действие
+                $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
+
+                $content =<<<EOH
+<h1>Ошибка!</h1>
+<p>Запрошенная вами страница не найдена.</p>
+EOH;
+                break;
+            default:
+                // ошибка приложения
+                $content =<<<EOH
+<h1>Ошибка!</h1>
+<p>Произошла непредвиденная ошибка. Пожалуйста, попробуйте позднее.</p>
+EOH;
+                break;
+        }
+
+        // Удаление добавленного ранее содержимого
+        $this->getResponse()->clearBody();
+
+        $this->view->content = $content;
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

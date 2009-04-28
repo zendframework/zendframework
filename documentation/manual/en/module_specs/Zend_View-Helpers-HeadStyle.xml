@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.headstyle">
+    <title>HeadStyle Helper</title>
+
+    <para>
+        The HTML <code>&lt;style&gt;</code> element is used to include
+        CSS stylesheets inline in the HTML <code>&lt;head&gt;</code> element.
+    </para>
+
+    <note>
+        <title>Use HeadLink to link CSS files</title>
+
+        <para>
+            <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            should be used to create <code>&lt;link&gt;</code> elements for
+            including external stylesheets. <code>HeadScript</code> is used when
+            you wish to define your stylesheets inline.
+        </para>
+    </note>
+
+    <para>
+        The <code>HeadStyle</code> helper supports the following methods for
+        setting and adding stylesheet declarations:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>prependStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>setStyle($content, $attributes =
+                    array())</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        In all cases, <code>$content</code> is the actual CSS declarations.
+        <code>$attributes</code> are any additional attributes you wish to provide to the
+        <code>style</code> tag: lang, title, media, or dir are all permissible.
+    </para>
+
+    <note>
+        <title>Setting Conditional Comments</title>
+
+        <para>
+            <code>HeadStyle</code> allows you to wrap the style tag in conditional comments,
+            which allows you to hide it from specific browsers. To add the conditional
+            tags, pass the conditional value as part of the <code>$attributes</code> parameter in
+            the method calls.
+        </para>
+
+        <example id="zend.view.helpers.initial.headstyle.conditional">
+            <title>Headstyle With Conditional Comments</title>
+            <programlisting role="php"><![CDATA[
+// adding scripts
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
+]]></programlisting>
+        </example>
+    </note>
+
+    <para>
+        <code>HeadStyle</code> also allows capturing style declarations; this
+        can be useful if you want to create the declarations programmatically,
+        and then place them elsewhere. The usage for this will be showed in an
+        example below.
+    </para>
+
+    <para>
+        Finally, you can also use the <code>headStyle()</code> method to
+        quickly add declarations elements; the signature for this is
+        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>.
+        <code>$placement</code> should be either 'APPEND', 'PREPEND', or 'SET'.
+    </para>
+
+    <para>
+        <code>HeadStyle</code> overrides each of <code>append()</code>,
+        <code>offsetSet()</code>, <code>prepend()</code>, and <code>set()</code>
+        to enforce usage of the special methods as listed above. Internally, it
+        stores each item as a <code>stdClass</code> token, which it later
+        serializes using the <code>itemToString()</code> method. This allows you
+        to perform checks on the items in the stack, and optionally modify these
+        items by simply modifying the object returned.
+    </para>
+
+    <para>
+        The <code>HeadStyle</code> helper is a concrete implementation of the
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
+            helper</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headstyle.basicusage">
+        <title>HeadStyle Helper Basic Usage</title>
+
+        <para>
+            You may specify a new style tag at any time:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// adding styles
+$this->headStyle()->appendStyle($styles);
+]]></programlisting>
+
+        <para>
+            Order is very important with CSS; you may need to ensure that
+            declarations are loaded in a specific order due to the order of the
+            cascade; use the various append, prepend, and offsetSet directives
+            to aid in this task:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Putting styles in order
+
+// place at a particular offset:
+$this->headStyle()->offsetSetStyle(100, $customStyles);
+
+// place at end:
+$this->headStyle()->appendStyle($finalStyles);
+
+// place at beginning
+$this->headStyle()->prependStyle($firstStyles);
+]]></programlisting>
+
+        <para>
+            When you're finally ready to output all style declarations in your
+            layout script, simply echo the helper:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->headStyle() ?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.headstyle.capture">
+        <title>Capturing Style Declarations Using the HeadStyle Helper</title>
+
+        <para>
+            Sometimes you need to generate CSS style declarations
+            programmatically. While you could use string concatenation,
+            heredocs, and the like, often it's easier just to do so by creating
+            the styles and sprinkling in PHP tags. <code>HeadStyle</code> lets
+            you do just that, capturing it to the stack:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?php echo $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+]]></programlisting>
+
+        <para>
+            The following assumptions are made:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    The style declarations will be appended to the stack. If you
+                    wish for them to replace the stack or be added to the top,
+                    you will need to pass 'SET' or 'PREPEND', respectively, as
+                    the first argument to <code>captureStart()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                    If you wish to specify any additional attributes for the
+                    <code>&lt;style&gt;</code> tag, pass them in an array as
+                    the second argument to <code>captureStart()</code>.
+            </para></listitem>
+        </itemizedlist>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

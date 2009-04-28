@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.http.client">
+    <title>Einführung</title>
+
+    <para>
+        Zend_Http_Client stellt eine einfache Schnittstelle für das Durchführen von Hyper-Text
+        Transfer Protocol (HTTP) Anfragen. Zend_Http_Client unterstützt die meisten einfachen
+        Funktionen, die man von einem HTTP Client erwartet, sowie einige komplexere Funktionen,
+        wie z.B. HTTP Authentifizierung und Dateiuploads. Erfolgreiche Anfragen (und die meisten
+        nicht erfolgreichen ebenfalls) liefern ein Zend_Http_Response Objekt zurück, welches den
+        Zugriff auf die Header und den Hauptteil der Antwort ermöglichen (siehe
+        <xref linkend="zend.http.response" />).
+    </para>
+
+    <sect2 id="zend.http.client.usage">
+        <title>Zend_Http_Client verwenden</title>
+        <para>
+            Der Klassenkonstruktor akzeptiert optional eine URL als seinen ersten Parameter (kann
+            entweder ein String oder ein Zend_Uri_Http Objekt sein) und ein optionales Array mit
+            Konfigurationsparametern. Beides kann ausgelassen und später durch Verwendung der
+            setUri() and setConfig() Methoden gesetzt werden.
+            <example id="zend.http.client.introduction.example-1">
+                <title>Ein Zend_Http_Client Objekt instanzieren</title>
+                <programlisting role="php"><![CDATA[
+$client = new Zend_Http_Client('http://example.org', array(
+    'maxredirects' => 0,
+    'timeout'      => 30));
+
+// Dies macht genau das selbe:
+$client = new Zend_Http_Client();
+$client->setUri('http://example.org');
+$client->setConfig(array(
+    'maxredirects' => 0,
+    'timeout'      => 30));
+]]>
+                </programlisting>
+            </example>
+
+            <note><para>
+                Zend_Http_Client verwendet Zend_Uri_Http um URLs zu prüfen. Das bedeutet das einige spezielle
+                Zeichen wie das Pipe-Symbol ('|') oder das Karet Symbol ('^') in der URL standardmäßig nicht
+                akzeptiert werden.
+
+                Das kann geändert werden indem die 'allow_unwise' Option von Zend_Uri auf 'true' gesetzt
+                wird. Siehe <xref linkend="zend.uri.validation.allowunwise" /> für mehr Informationen.
+            </para></note>
+        </para>
+    </sect2>
+    <sect2 id="zend.http.client.configuration">
+        <title>Konfigurationsparameter</title>
+        <para>
+            Der Konstruktor und die setConfig() Methode akzeptieren ein assoziatives Array mit
+            Konfigurationsparametern. Das Setzen dieser Parameter ist optional, da alle einen
+            Standardwert haben.
+            <table id="zend.http.client.configuration.table">
+                <title>Zend_Http_Client Konfigurationsparameter</title>
+                <tgroup cols="4">
+                    <thead>
+                        <row>
+                            <entry>Parameter</entry>
+                            <entry>Beschreibung</entry>
+                            <entry>Erwartete Werte</entry>
+                            <entry>Standardwert</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>maxredirects</entry>
+                            <entry>Maximale Anzahl von zu folgenden Umleitungen (0 = keine)</entry>
+                            <entry>integer</entry>
+                            <entry>5</entry>
+                        </row>
+                        <row>
+                            <entry>strict</entry>
+                            <entry>Ob Prüfungen an Headernamen durchzuführen sind. Einige
+                                Prüf-Funktionen werden übersprungen wenn auf false gesetzt.
+                                Sollte normalerweise nicht geändert werden</entry>
+                            <entry>boolean</entry>
+                            <entry>true</entry>
+                        </row>
+                        <row>
+                            <entry>strictredirects</entry>
+                            <entry>Ob beim Umleiten genau dem RFC zu folgen ist (siehe
+                            <xref linkend="zend.http.client.redirections" />)</entry>
+                            <entry>boolean</entry>
+                            <entry>false</entry>
+                        </row>
+                        <row>
+                            <entry>useragent</entry>
+                            <entry>String zur Identifizierung des User Agents (gesendet in den
+                            Anfrageheadern)</entry>
+                            <entry>string</entry>
+                            <entry>'Zend_Http_Client'</entry>
+                        </row>
+                        <row>
+                            <entry>timeout</entry>
+                            <entry>Zeitüberschreitung für Verbindungen (Sekunden)</entry>
+                            <entry>integer</entry>
+                            <entry>10</entry>
+                        </row>
+                        <row>
+                            <entry>httpversion</entry>
+                            <entry>Version des HTTP Protokolls (normalerweise '1.1' oder '1.0')</entry>
+                            <entry>string</entry>
+                            <entry>'1.1'</entry>
+                        </row>
+                        <row>
+                            <entry>adapter</entry>
+                            <entry>Zu verwendene Adapterklasse für die Verbindung (siehe
+                            <xref linkend="zend.http.client.adapters" />)</entry>
+                            <entry>mixed</entry>
+                            <entry>'Zend_Http_Client_Adapter_Socket'</entry>
+                        </row>
+                        <row>
+                            <entry>keepalive</entry>
+                            <entry>Ob keep-alive Verbindungen mit dem Server aktiviert werden
+                            sollen. Nützlich und kann die Performance verbessern, wenn mehrere
+                            aufeinanderfolgend Anfragen an den selben Server ausgeführt werden.</entry>
+                            <entry>boolean</entry>
+                            <entry>false</entry>
+                        </row>
+                        <row>
+                            <entry>storeresponse</entry>
+                            <entry>Ob die letzte Antwort für einen späteren Aufruf von getLastResponse()
+                                gespeichert werden soll. Wird sie auf false gesetzt gibt
+                                getLastResponse() null zurück.</entry>
+                            <entry>boolean</entry>
+                            <entry>true</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+    </sect2>
+    <sect2 id="zend.http.client.basic-requests">
+        <title>Durchführen von einfachen HTTP Anfragen</title>
+        <para>
+            Das Durchführen von einfachen HTTP Anfragen kann sehr leicht durch Verwendung der
+            request() Methode gemacht werden und benötigt selten mehr als drei Codezeilen:
+            <example id="zend.http.client.basic-requests.example-1">
+                <title>Durchführen einer einfache GET Anfrage</title>
+                <programlisting role="php"><![CDATA[
+$client = new Zend_Http_Client('http://example.org');
+$response = $client->request();
+]]>
+                </programlisting>
+            </example>
+            Die request() Methode akzeptiert einen optionalen Parameter - die Anfragemethode.
+            Diese kann GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS oder CONNECT sein, wie im HTTP
+            Protokoll definiert.
+            <footnote>
+              <para>
+                Siehe RFC 2616 - <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" />.
+              </para>
+            </footnote>.
+            Zur Erleichterung sind alle als Klassenkonstanten definiert:
+            Zend_Http_Client::GET, Zend_Http_Client::POST und so weiter.
+        </para>
+        <para>
+            Wenn keine Methode angegeben worden ist, wird die durch den letzten Aufruf von
+            setMethod() gesetzte Methode verwendet. Wenn setMethod() vorher nicht aufgerufen worden
+            ist, wird als Standardmethode GET verwendet (siehe obiges Beispiel).
+            <example id="zend.http.client.basic-requests.example-2">
+                <title>Andere Anfragemethoden als GET verwenden</title>
+                <programlisting role="php"><![CDATA[
+// Durchführen einer POST Anfrage
+$response = $client->request('POST');
+
+// Ein weiterer Weg, eine POST Anfrage durchzuführen
+$client->setMethod(Zend_Http_Client::POST);
+$response = $client->request();
+]]>
+                </programlisting>
+            </example>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.parameters">
+        <title>Hinzufügen von GET und POST Parametern</title>
+        <para>
+            Das Hinzufügen von GET Parametern zu einer HTTP Anfrage ist recht einfach und kann
+            entweder über die Angabe als Teil der URL oder durch Verwendung der setParameterGet()
+            Methode erfolgen.
+            Diese Methode benötigt den Namen des GET Parameter als seinen ersten Parameter und den
+            Wert des GET Parameter als seinen zweiten Parameter. Zur Erleichterung akzeptiert die
+            setParameterGet() Methode auch ein einzelnes assoziatives Array mit GET Parameter als
+            Name => Wert Variablen, was beim setzen von mehreren GET Parametern komfortabler sein
+            kann.
+            <example id="zend.http.client.parameters.example-1">
+                <title>Setzen von GET Parametern</title>
+                <programlisting role="php"><![CDATA[
+// Setzen eines GET Parameter mit der setParameterGet Methode
+$client->setParameterGet('knight', 'lancelot');
+
+// Dies ist äquivalent durch Setzen der URL:
+$client->setUri('http://example.com/index.php?knight=lancelot');
+
+// Hinzufügen mehrerer Parameter durch einen Aufruf
+$client->setParameterGet(array(
+    'first_name'  => 'Bender',
+    'middle_name' => 'Bending'
+    'made_in'     => 'Mexico',
+));
+]]>
+                </programlisting>
+            </example>
+        </para>
+        <para>
+            Während GET Parameter bei jeder Anfragemethode gesetzt werden können, können POST
+            Parameter nur im Hauptteil von POST Anfragen versendet werden. Das Hinzufügen von POST
+            Parameter zu einer Anfrage ist sehr ähnlich wie das Hinzufügen von GET Parametern and
+            kann mit der setParameterPost() Methode gemacht werden, die vom Aufbau der
+            setParameterGet() Methode ähnlich ist..
+            <example id="zend.http.client.parameters.example-2">
+                <title>Setzen von POST Parametern</title>
+                <programlisting role="php"><![CDATA[
+// Setzen eines POST Parameters
+$client->setParameterPost('language', 'fr');
+
+// Hinzufügen von mehreren POST Parametern, eines davon mit mehreren Werten
+$client->setParameterPost(array(
+    'language'  => 'es',
+    'country'   => 'ar',
+    'selection' => array(45, 32, 80)
+));
+]]>
+                </programlisting>
+            </example>
+            Beim Senden einer POST Anfrage ist zu beachten, dass man sowohl GET als auch POST
+            Parameter setzen kann. Auf der anderen Seite wird durch das Setzen von POST Parametern
+            für andere Anfragen als POST kein Fehler ausgeworfen. Solange eine Anfrage keine POST
+            Anfrage ist, werden POST Parameter einfach ignoriert.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.accessing_last">
+        <title>Zugriff auf die Letzte Anfrage und Antwort</title>
+        <para>
+            Zend_Http_Client bietet Methoden um Zugriff auf die letzte gesendete Anfrage und die
+            letzte empfangene Antwort des Client Objekts zu bekommen.
+            <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt die
+            letzte HTTP Anfrage als String zurück die der Client gesendet hat. Auf die gleiche Art
+            und Weise gibt <classname>Zend_Http_Client->getLastResponse()</classname> die letzte HTTP
+            Antwort als <link linkend="zend.http.response">Zend_Http_Response</link> Objekt
+            zurück die der Client empfangen hat.
+        </para>
+    </sect2>
+
+</sect1>

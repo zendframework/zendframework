@@ -1,0 +1,155 @@
+<sect1 id="zend.acl.refining">
+
+    <title>Verfijning van toegangscontrole</title>
+
+    <sect2 id="zend.acl.refining.precise">
+
+        <title>Precieze toegangscontrole</title>
+
+        <para>
+            De basis ACL zoals gedefineerd in de <link linkend="zend.acl.introduction">vorige sectie</link>
+            laat zien hoe verschillende privileges kunnen worden toegestaan op de gehele ACL ( alle Bronnen ).
+            Echter in de praktijk, neigen toegangscontroles naar het hebben van uitzonderingen en gevarieerde
+            niveaus van complexiteit. Zend_Acl staat je toe deze verfijningen in een duidelijke en flexibele manier
+            te bereiken.
+        </para>
+
+        <para>
+            Voor het voorbeeld CMS, is vastgesteld dat terwijl de 'medewerker' groep de benodigheden voor het
+            merendeel van de gebruikers dekt, er een behoefte is aan een nieuwe 'marketing' groep die toegang
+            nodig heeft tot de nieuwsbrieven en het laatste nieuws in het CMS. De groep is vrij onafhankelijk
+            en heeft de mogelijkheid om nieuwsbrieven en het laatste nieuws te publiceren en te archiveren.
+        </para>
+
+        <para>
+            Verder, is er ook verzocht dat de 'medewerker' groep wordt toegestaan om nieuws berichten te zien,
+            maar ze mogen het laatste nieuws niet herzien. Als laatste, zou het voor iedereen (zelfs voor de
+            administrators) onmogelijk moeten zijn om nieuws aankondigingen te archiveren, omdat deze
+            een levensduur hebben van 1-2 dagen.
+        </para>
+
+        <para>
+            Allereerst passen we de Rol lijst aan. We hebben ontdekt dat de 'marketing' groep de zelfde basis
+            rechten heeft als de 'medewerkers', dus we defineren 'marketing' zo dat het de rechten overerft
+            van 'medewerker':
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// De nieuwe marketing groep erft de rechten van medewerker
+$acl->addRole(new Zend_Acl_Role('marketing'), 'medewerker');]]>
+        </programlisting>
+
+        <para>
+            Vervolgens, zien we dat de bovenstaande toegangscontrole refereerd naar specifieke Bronnen
+            ( o.a., "nieuwsbrief", "laatste nieuws", "Nieuws aankondigingen" ). Deze Bronnen gaan we nu toevoegen:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Maken van de Bronnen voor de regels
+require_once 'Zend/Acl/Resource.php';
+$acl->add(new Zend_Acl_Resource('nieuwsbrief'));            	// Nieuwsbrief
+$acl->add(new Zend_Acl_Resource('nieuws'));                 	// Nieuws
+$acl->add(new Zend_Acl_Resource('laatste_nieuws'), 'nieuws');   // Laatste nieuws
+$acl->add(new Zend_Acl_Resource('aankondiging'), 'nieuws'); 	// Nieuws aankondiging]]>
+        </programlisting>
+
+        <para>
+            Dan is het enkel nog een kwestie van het defineren van deze specifieke regels op de doel gebieden van de ACL:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Marketing moet kunnen publiceren en archiveren van de nieuwsbrieven en het laatste nieuws
+$acl->allow('marketing', array('nieuwsbrief', 'laatste_nieuws'), array('publiceren', 'archiveren'));
+
+// Medewerkers ( en marketing door overerving ) worden geweigerd om het laatste nieuws te herzien
+$acl->deny('medewerker', 'laatste_nieuws', 'herzien');
+
+// Iedereen ( ook de administrators ) worden geweigerd om het nieuws aankondigingen te archiveren
+$acl->deny(null, 'aankondiging', 'archiveren');]]>
+        </programlisting>
+
+        <para>
+            We kunnen nu de ACL raadplegen met de nieuwste wijzigingen:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+echo $acl->isAllowed('medewerker', 'nieuwsbrief', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('marketing', 'nieuwsbrief', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('medewerker', 'laatste_nieuws', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'archiveren') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'herzien') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('redacteur', 'aankondiging', 'archiveren') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('administrator', 'aankondiging', 'archiveren') ?
+     "toegestaan" : "geweigerd"; // geweigerd]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.acl.refining.removing">
+
+        <title>Verwijderen van toegangscontrole</title>
+
+        <para>
+            Om één of meer toegangregels te verwijderen van de ACL, gebruiken we simpelweg de beschikbare
+            <code>removeAllow()</code> of <code>removeDeny()</code> methodes. Net als bij <code>allow()</code>
+            en <code>deny()</code>, mag je een <code>null</code> waarde gebruiken om aan te geven dat het
+            voor alle Rollen, Bronnen en privileges geldt:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Verwijder het weigeren van herzien van het laatste nieuws voor medewerkers ( en marketing via overerving )
+$acl->removeDeny('medewerker', 'laatste_nieuws', 'herzien');
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'herzien') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+// Verwijder het toegestaan van publiceren en archiveren van nieuwsbrieven aan marketing
+$acl->removeAllow('marketing', 'nieuwsbrief', array('publiceren', 'archiveren'));
+
+echo $acl->isAllowed('marketing', 'nieuwsbrief', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // geweigerd
+
+echo $acl->isAllowed('marketing', 'nieuwsbrief', 'archiveren') ?
+     "toegestaan" : "geweigerd"; // geweigerd]]>
+        </programlisting>
+
+        <para>
+            Privileges kunnen oplopend worden aangepast zoals je hier boven zag, maar een <code>null</code> waarde
+            voor de privileges overschrijft zo'n oplopende wijziging:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Sta marketing alles toe voor het laatste nieuws
+$acl->allow('marketing', 'laatste_nieuws');
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'publiceren') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'archiveren') ?
+     "toegestaan" : "geweigerd"; // toegestaan
+
+echo $acl->isAllowed('marketing', 'laatste_nieuws', 'iets') ?
+     "toegestaan" : "geweigerd"; // toegestaan]]>
+        </programlisting>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+	<identity>
+		<version number="$Revision: 1.65 $"/>
+		<generation date="$Date: 2008/06/15 08:09:47 $"/>
+		<language type="te"/>
+	</identity>
+	<localeDisplayNames>
+		<languages>
+			<language type="ar">అరబిక్</language>
+			<language type="bh">బీహారి</language>
+			<language type="bn">బెంగాలి</language>
+			<language type="cs">చెక్</language>
+			<language type="da">డానిష్</language>
+			<language type="de">ఙర్మన్</language>
+			<language type="el">గ్రీకు</language>
+			<language type="en">ఆంగ్లం</language>
+			<language type="es">స్పానిష్</language>
+			<language type="et">ఈస్టోనియను</language>
+			<language type="fa">పార్శీ</language>
+			<language type="fi">ఫిన్నిష్</language>
+			<language type="fr">ఫ్రెంచ్</language>
+			<language type="ga">ఐరిష్</language>
+			<language type="gu">గుజరాతి</language>
+			<language type="he">హీబ్రూ</language>
+			<language type="hi">హిందీ</language>
+			<language type="hu">హంగేరియను</language>
+			<language type="id">ఇండొనేసియన్</language>
+			<language type="is">ఐస్ లాండు</language>
+			<language type="it">ఇటాలియన్ భాష</language>
+			<language type="ja">జపాను భాష</language>
+			<language type="kn">కన్నడ</language>
+			<language type="la">లాటిన్</language>
+			<language type="lt">లిథువేనియను</language>
+			<language type="lv">లాత్వియను</language>
+			<language type="ml">మలయాళం</language>
+			<language type="mn">మంగోలియన్</language>
+			<language type="mr">మరాఠి</language>
+			<language type="ne">నేపాలి</language>
+			<language type="nl">డచ్</language>
+			<language type="no">నార్వేజియన్</language>
+			<language type="pa">పంజాబి</language>
+			<language type="pl">పోలిష్</language>
+			<language type="pt">పొర్చుగల్ భాష</language>
+			<language type="ro">రొమేనియను</language>
+			<language type="ru">రష్యన్ భాష</language>
+			<language type="si">సింహళీ</language>
+			<language type="sv">స్వీడిష్</language>
+			<language type="sw">స్వాహిలి</language>
+			<language type="ta">తమిళం</language>
+			<language type="te">తెలుగు</language>
+			<language type="th">థాయి</language>
+			<language type="ur">ఉర్దు</language>
+			<language type="xh">ఖోస</language>
+			<language type="zh">చైనా భాష</language>
+			<language type="zu">జూలూ</language>
+		</languages>
+		<scripts>
+			<script type="Arab">అరబ్బి లిపి</script>
+			<script type="Beng">Beng</script>
+			<script type="Cyrl">సిరిలిక్ లిపి</script>
+			<script type="Hans">సరళమైన చైనా లిపి</script>
+			<script type="Hant">ప్రాచీన చైనా లిపి</script>
+			<script type="Latn">లాటిన్</script>
+			<script type="Telu">తెలుగు</script>
+		</scripts>
+		<territories>
+			<territory type="BR">బ్రజిల్</territory>
+			<territory type="CN">చైనా</territory>
+			<territory type="DE">ఙర్మని</territory>
+			<territory type="FR">ఫ్రాన్స్‌</territory>
+			<territory type="GB">బ్రిటన్</territory>
+			<territory type="IN">భారత దేళం</territory>
+			<territory type="IT">ఇటలి</territory>
+			<territory type="JP">జపాసు</territory>
+			<territory type="RU">రష్య</territory>
+			<territory type="TO">ఠాఙ్గ</territory>
+			<territory type="US">ఐక్య రాష్ట్ర అమెరిక</territory>
+		</territories>
+		<variants>
+			<variant type="1901">ప్రాచీన ఙర్మన వర్ణక్రమం</variant>
+			<variant type="1996">1996 ఙర్మన వర్ణక్రమం</variant>
+			<variant type="REVISED">సవరించబడిన వర్ణక్రమం</variant>
+		</variants>
+	</localeDisplayNames>
+	<characters>
+		<exemplarCharacters>[అ-ఋ ౠ ఌ ౡ ఎ-ఐ ఒ-న ప-ళ వ-హ ఁ-ః ్ ా-ౄ ె-ై ొ-ౌ ౕ ౖ]</exemplarCharacters>
+		<exemplarCharacters type="auxiliary">[\u200C \u200D ౦-౯ b c e g m q t]</exemplarCharacters>
+	</characters>
+	<delimiters>
+		<quotationStart>'</quotationStart>
+		<quotationEnd>'</quotationEnd>
+		<alternateQuotationStart>&quot;</alternateQuotationStart>
+		<alternateQuotationEnd>&quot;</alternateQuotationEnd>
+	</delimiters>
+	<dates>
+		<calendars>
+			<calendar type="gregorian">
+				<months>
+					<monthContext type="format">
+						<monthWidth type="abbreviated">
+							<month type="1">జనవరి</month>
+							<month type="2">ఫిబ్రవరి</month>
+							<month type="3">మార్చి</month>
+							<month type="4">ఏప్రిల్</month>
+							<month type="5">మే</month>
+							<month type="6">జూన్</month>
+							<month type="7">జూలై</month>
+							<month type="8">ఆగస్టు</month>
+							<month type="9">సెప్టెంబర్</month>
+							<month type="10">అక్టోబర్</month>
+							<month type="11">నవంబర్</month>
+							<month type="12">డిసెంబర్</month>
+						</monthWidth>
+						<monthWidth type="wide">
+							<month type="1">జనవరి</month>
+							<month type="2">ఫిబ్రవరి</month>
+							<month type="3">మార్చి</month>
+							<month type="4">ఏప్రిల్</month>
+							<month type="5">మే</month>
+							<month type="6">జూన్</month>
+							<month type="7">జూలై</month>
+							<month type="8">ఆగస్టు</month>
+							<month type="9">సెప్టెంబర్</month>
+							<month type="10">అక్టోబర్</month>
+							<month type="11">నవంబర్</month>
+							<month type="12">డిసెంబర్</month>
+						</monthWidth>
+					</monthContext>
+					<monthContext type="stand-alone">
+						<monthWidth type="narrow">
+							<month type="1">జ</month>
+							<month type="2">ఫి</month>
+							<month type="3">మ</month>
+							<month type="4">ఎ</month>
+							<month type="5">మె</month>
+							<month type="6">జు</month>
+							<month type="7">జు</month>
+							<month type="8">ఆ</month>
+							<month type="9">సె</month>
+							<month type="10">అ</month>
+							<month type="11">న</month>
+							<month type="12">డి</month>
+						</monthWidth>
+					</monthContext>
+				</months>
+				<days>
+					<dayContext type="format">
+						<dayWidth type="abbreviated">
+							<day type="sun">ఆది</day>
+							<day type="mon">సోమ</day>
+							<day type="tue">మంగళ</day>
+							<day type="wed">బుధ</day>
+							<day type="thu">గురు</day>
+							<day type="fri">శుక్ర</day>
+							<day type="sat">శని</day>
+						</dayWidth>
+						<dayWidth type="wide">
+							<day type="sun">ఆదివారం</day>
+							<day type="mon">సోమవారం</day>
+							<day type="tue">మంగళవారం</day>
+							<day type="wed">బుధవారం</day>
+							<day type="thu">గురువారం</day>
+							<day type="fri">శుక్రవారం</day>
+							<day type="sat">శనివారం</day>
+						</dayWidth>
+					</dayContext>
+					<dayContext type="stand-alone">
+						<dayWidth type="narrow">
+							<day type="sun">ఆ</day>
+							<day type="mon">2</day>
+							<day type="tue">సొ</day>
+							<day type="wed">భు</day>
+							<day type="thu">గు</day>
+							<day type="fri">శు</day>
+							<day type="sat">శ</day>
+						</dayWidth>
+					</dayContext>
+				</days>
+				<quarters>
+					<quarterContext type="format">
+						<quarterWidth type="abbreviated">
+							<quarter type="1">Q1</quarter>
+							<quarter type="2">Q2</quarter>
+							<quarter type="3">Q3</quarter>
+							<quarter type="4">Q4</quarter>
+						</quarterWidth>
+						<quarterWidth type="wide">
+							<quarter type="1">ఒకటి  1</quarter>
+							<quarter type="2">రెండు  2</quarter>
+							<quarter type="3">మూడు 3</quarter>
+							<quarter type="4">నాలుగు 4</quarter>
+						</quarterWidth>
+					</quarterContext>
+				</quarters>
+				<am>పూర్వాహ్నం</am>
+				<pm>అపరాహ్నం</pm>
+				<eras>
+					<eraNames>
+						<era type="0">ఈసాపూర్వ.</era>
+						<era type="1">సన్.</era>
+					</eraNames>
+					<eraAbbr>
+						<era type="0">BCE</era>
+						<era type="1">CE</era>
+					</eraAbbr>
+				</eras>
+				<dateFormats>
+					<dateFormatLength type="full">
+						<dateFormat>
+							<pattern>EEEE d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="long">
+						<dateFormat>
+							<pattern>d MMMM yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="medium">
+						<dateFormat>
+							<pattern>dd-MM-yyyy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+					<dateFormatLength type="short">
+						<dateFormat>
+							<pattern>dd-MM-yy</pattern>
+						</dateFormat>
+					</dateFormatLength>
+				</dateFormats>
+				<timeFormats>
+					<timeFormatLength type="full">
+						<timeFormat>
+							<pattern>h:mm:ss a v</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="long">
+						<timeFormat>
+							<pattern>h:mm:ss a z</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="medium">
+						<timeFormat>
+							<pattern>h:mm:ss a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+					<timeFormatLength type="short">
+						<timeFormat>
+							<pattern>h:mm a</pattern>
+						</timeFormat>
+					</timeFormatLength>
+				</timeFormats>
+				<dateTimeFormats>
+					<dateTimeFormatLength>
+						<dateTimeFormat>
+							<pattern>{1} {0}</pattern>
+						</dateTimeFormat>
+					</dateTimeFormatLength>
+					<availableFormats>
+						<dateFormatItem id="MMMMd">d MMMM</dateFormatItem>
+						<dateFormatItem id="MMdd">dd-MM</dateFormatItem>
+						<dateFormatItem id="yyQ">Q yy</dateFormatItem>
+						<dateFormatItem id="yyyyMM">MM-yyyy</dateFormatItem>
+						<dateFormatItem id="yyyyMMMM">MMMM yyyy</dateFormatItem>
+					</availableFormats>
+				</dateTimeFormats>
+			</calendar>
+		</calendars>
+		<timeZoneNames>
+			<hourFormat>+HH:mm;-HH:mm</hourFormat>
+			<gmtFormat>GMT{0}</gmtFormat>
+			<regionFormat>{0}</regionFormat>
+		</timeZoneNames>
+	</dates>
+	<numbers>
+		<symbols>
+			<nativeZeroDigit>౦</nativeZeroDigit>
+		</symbols>
+		<decimalFormats>
+			<decimalFormatLength>
+				<decimalFormat>
+					<pattern>#,##,##0.###</pattern>
+				</decimalFormat>
+			</decimalFormatLength>
+		</decimalFormats>
+		<percentFormats>
+			<percentFormatLength>
+				<percentFormat>
+					<pattern>#,##,##0%</pattern>
+				</percentFormat>
+			</percentFormatLength>
+		</percentFormats>
+		<currencyFormats>
+			<currencyFormatLength>
+				<currencyFormat>
+					<pattern>¤ #,##,##0.00</pattern>
+				</currencyFormat>
+			</currencyFormatLength>
+		</currencyFormats>
+		<currencies>
+			<currency type="BRL">
+				<displayName>బ్రజిల్ దేశ రియాల్</displayName>
+				<symbol>రి$</symbol>
+			</currency>
+			<currency type="CNY">
+				<displayName>చైనా  దేశ యువాన్ రెన్‌మిన్‌బి</displayName>
+				<symbol>యు</symbol>
+			</currency>
+			<currency type="EUR">
+				<displayName>యురొ</displayName>
+			</currency>
+			<currency type="GBP">
+				<displayName>బ్ిటిష్ పౌన్డ స్టెర్లిగ్</displayName>
+			</currency>
+			<currency type="INR">
+				<displayName>రూపాయి</displayName>
+				<symbol>రూ.</symbol>
+			</currency>
+			<currency type="JPY">
+				<displayName>జపాను దేశ యెస్</displayName>
+			</currency>
+			<currency type="RUB">
+				<displayName>రష్య దేశ రూబల్</displayName>
+				<symbol>రూబల్</symbol>
+			</currency>
+			<currency type="USD">
+				<displayName>ఐక్య రాష్ట్ర అమెరిక డాలర్</displayName>
+			</currency>
+		</currencies>
+	</numbers>
+	<posix>
+		<messages>
+			<yesstr>అవను</yesstr>
+			<nostr>కాదు</nostr>
+		</messages>
+	</posix>
+</ldml>

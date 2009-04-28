@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Pages</title>
+
+    <para>
+        <classname>Zend_Navigation</classname> ships with two page types:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.navigation.pages.mvc">MVC pages</link>
+                     – using the class <classname>Zend_Navigation_Page_Mvc</classname>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <link linkend="zend.navigation.pages.uri">URI pages</link>
+                     – using the class <classname>Zend_Navigation_Page_Uri</classname>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        MVC pages are link to on-site web pages, and are defined using MVC
+        parameters (<code>action</code>, <code>controller</code>,
+        <code>module</code>, <code>route</code>, <code>params</code>). URI
+        pages are defined by a single property <code>uri</code>, which give
+        you the full flexibility to link off-site pages or do other things
+        with the generated links (e.g. an URI that turns into
+        <code>&lt;a href="#"&gt;foo&lt;a&gt;</code>).
+    </para>
+
+    <xi:include href="Zend_Navigation-Pages-Common.xml" />
+    <xi:include href="Zend_Navigation-Pages-MVC.xml" />
+    <xi:include href="Zend_Navigation-Pages-URI.xml" />
+    <xi:include href="Zend_Navigation-Pages-Custom.xml" />
+    <xi:include href="Zend_Navigation-Pages-Factory.xml" />
+
+</sect1>

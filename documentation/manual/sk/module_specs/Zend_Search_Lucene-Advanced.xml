@@ -1,0 +1,100 @@
+<sect1 id="zend.search.lucene.advanced">
+    <title>Pokročilé</title>
+
+    <sect2 id="zend.search.lucene.advanced.static">
+        <title>Použitie indexu ako statickej vlastnosti</title>
+
+        <para>
+            <code>Zend_Search_Lucene</code> objekt využíva deštruktor na zapísanie
+            zmien a uvoľnenie zdrojov.
+        </para>
+
+        <para>
+            Pridaná dokumenty sa ukladajú v pamäti a zapísanie novej časti indexu
+            na disk zavisí od parametra <code>MaxBufferedDocs</code>.
+        </para>
+
+        <para>
+            Ak ešte nie je dosiahnutý limit určený parametrom <code>MaxBufferedDocs</code>
+            potom existujú &quot;neuložené&quot; dokumenty ktoré sa uložia ako nový
+            segment v deštruktore objektu.
+
+            Automatická optimalizácia indexu sa spúšťa podľa potreby a jej spustenie
+            je závislé na parametroch <code>MaxBufferedDocs</code>, <code>MaxMergeDocs</code>
+            a <code>MergeFactor</code>.
+        </para>
+
+        <para>
+            Statické vlastnosti objektu sú zničené <emphasis>po</emphasis>
+            &quot;poslednom riadku bežiaceho skriptu&quot;
+
+<programlisting role="php"><![CDATA[<?php
+class Searcher {
+    private static $_index;
+
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
+    }
+}
+
+Searcher::initIndex();
+]]></programlisting>
+
+        </para>
+
+
+        <para>
+            Predsa len, deštruktor statických vlastností je správne zavolaný
+            a má možnosť urobiť všetko čo je potrebné.
+        </para>
+
+        <para>
+            Jedným z problémov sú výnimky. Výnimky ktoré sú vyvolané deštruktorom
+            statického objektu nemajú kontext, lebo sú vykonané &quot;za koncom
+            skriptu&quot;
+        </para>
+
+        <para>
+            V týchto prípadoch dostanente chybu &quot;Fatal error: Exception thrown
+            without a stack frame in Unknown on line 0&quot; namiesto výnimky.
+        </para>
+
+        <para>
+            Zend_Search_Lucene poskytuje možnosť na ošetriť tento problému pomocou
+            metódy <code>commit()</code>. Pri jej zavolaní sa uložia všetky zmeny
+            a uvoľní pamäť ktorá bola použitá na uloženie nových segmentov. Túto
+            operáciu je možné urobiť v ľubovoľnom čase alebo aj viackrát počas behu
+            skriptu. Po tejto operácii je stále možné používať <code>Zend_Search_Lucene</code>
+            na vyhľadávanie, pridávanie, alebo zmazanie dokumentov. Metóda <code>commit()</code>
+            zaistí, že už neexistujú žiadne dokumenty na pridanie, alebo zmazanie
+            a teda deštruktor <code>Zend_Search_Lucene</code> neurobí nič a preto
+            ani nevznikne žiadna výnimka:
+
+<programlisting role="php"><![CDATA[<?php
+class Searcher {
+    private static $_index;
+
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
+    }
+
+ ...
+
+    public static function commit() {
+        self::$_index->commit();
+    }
+}
+
+Searcher::initIndex();
+
+...
+
+// Script shutdown routine
+...
+Searcher::commit();
+...
+]]></programlisting>
+
+        </para>
+    </sect2>
+</sect1>

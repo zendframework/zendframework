@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.hostname">
+    <title>Zend_Controller_Router_Route_Hostname</title>
+
+    <para>
+        <classname>Zend_Controller_Router_Route_Hostname</classname> is the hostname route of
+        the framework. It works similar to the standard route, but it works on
+        the with the hostname of the called URL instead with the path.
+    </para>
+
+    <para>
+        Let's use the example from the standard route and see how it would look
+        like in a hostname based way. Instead of calling the user via a path,
+        we'd want to have a user to be able to call
+        <code>http://martel.users.example.com</code> to see the information
+        about the user "martel":
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$hostnameRoute = new Zend_Controller_Router_Route_Hostname(
+    ':username.users.example.com',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$plainPathRoute = new Zend_Controller_Router_Route_Static('');
+
+$router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
+]]></programlisting>
+
+    <para>
+        The first parameter in the <classname>Zend_Controller_Router_Route_Hostname</classname>
+        constructor is a route definition that will be matched to a hostname. Route
+        definitions consist of static and dynamic parts separated by the dot
+        ('.') character. Dynamic parts, called variables, are marked by
+        prepending a colon to the variable name: <code>:username</code>.
+        Static parts are just simple text: <code>user</code>.
+    </para>
+
+    <para>
+        Hostname routes can, but never should be used as is. The reason behind
+        that is, that a hostname route alone would match any path. So what you
+        have to do is to chain a path route to the hostname route. This is done
+        like in the example by calling <code>$hostnameRoute->chain($pathRoute);</code>.
+        By doing this, <code>$hostnameRoute</code> isn't modified, but a new
+        route (<classname>Zend_Controller_Router_Route_Chain</classname>) is returned,
+        which can then be given to the router.
+    </para>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

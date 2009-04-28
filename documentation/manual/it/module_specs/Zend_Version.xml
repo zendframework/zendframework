@@ -1,0 +1,26 @@
+<sect1 id="zend.version.reading">
+
+    <title>Lettura della versione del Framework Zend</title>
+
+    <para>
+        La costante di classe <code>Zend_Version::VERSION</code> contiene una stringa che identifica il numero di versione corrente del framework Zend. Per esempio, "0.9.0beta".
+    </para>
+
+    <para>
+        Il metodo statico <code>Zend_Version::compareVersion($version)</code> è basato sulla funzione PHP
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Restituisce -1 se la versione indicata da <code>$version</code> è più datata della versione del Framework Zend, 0 se è la stessa e +1 se la versione indicata da <code>$version</code> è più recente.
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>Esempio del metodo compareVersion()</title>
+        <programlisting role="php"><![CDATA[<?php
+// restituisce -1, 0 o 1
+$cmp = Zend_Version::compareVersion('1.0.0');]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

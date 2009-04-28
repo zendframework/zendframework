@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.placeholder">
+    <title>Placeholder Helper</title>
+
+    <para>
+        The <code>Placeholder</code> view helper is used to persist content
+        between view scripts and view instances. It also offers some useful
+        features such as aggregating content, capturing view script content
+        for later use, and adding pre- and post-text to content (and custom
+        separators for aggregated content).
+    </para>
+
+    <example id="zend.view.helpers.initial.placeholder.usage">
+        <title>Basic Usage of Placeholders</title>
+
+        <para>
+            Basic usage of placeholders is to persist view data. Each invocation
+            of the <code>Placeholder</code> helper expects a placeholder name;
+            the helper then returns a placeholder container object that you can
+            either manipulate or simply echo out.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->set("Some text for later") ?>
+
+<?php
+    echo $this->placeholder('foo');
+    // outputs "Some text for later"
+?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.aggregation">
+        <title>Using Placeholders to Aggregate Content</title>
+
+        <para>
+            Aggregating content via placeholders can be useful at times as well.
+            For instance, your view script may have a variable array from which
+            you wish to retrieve messages to display later; a later view script
+            can then determine how those will be rendered.
+        </para>
+
+        <para>
+            The <code>Placeholder</code> view helper uses containers that extend
+            <code>ArrayObject</code>, providing a rich featureset for
+            manipulating arrays. In addition, it offers a variety of methods for
+            formatting the content stored in the container:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>setPrefix($prefix)</code> sets text with which to
+                    prefix the content. Use <code>getPrefix()</code> at any time
+                    to determine what the current setting is.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setPostfix($prefix)</code> sets text with which to
+                    append the content. Use <code>getPostfix()</code> at any time
+                    to determine what the current setting is.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setSeparator($prefix)</code> sets text with which to
+                    separate aggregated content. Use <code>getSeparator()</code>
+                    at any time to determine what the current setting is.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setIndent($prefix)</code> can be used to set an
+                    indentation value for content. If an integer is passed,
+                    that number of spaces will be used; if a string is passed,
+                    the string will be used. Use <code>getIndent()</code>
+                    at any time to determine what the current setting is.
+            </para></listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- first view script -->
+<?php $this->placeholder('foo')->exchangeArray($this->data) ?>
+]]></programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- later view script -->
+<?php
+$this->placeholder('foo')->setPrefix("<ul>\n    <li>")
+                         ->setSeparator("</li><li>\n")
+                         ->setIndent(4)
+                         ->setPostfix("</li></ul>\n");
+?>
+
+<?php
+    echo $this->placeholder('foo');
+    // outputs as unordered list with pretty indentation
+?>
+]]></programlisting>
+
+        <para>
+            Because the <code>Placeholder</code> container objects extend
+            <code>ArrayObject</code>, you can also assign content to a specific
+            key in the container easily, instead of simply pushing it into the
+            container. Keys may be accessed either as object properties or as
+            array keys.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->placeholder('foo')->bar = $this->data ?>
+<?php echo $this->placeholder('foo')->bar ?>
+
+<?php
+$foo = $this->placeholder('foo');
+echo $foo['bar'];
+?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.placeholder.capture">
+        <title>Using Placeholders to Capture Content</title>
+
+        <para>
+            Occasionally you may have content for a placeholder in a view script
+            that is easiest to template; the <code>Placeholder</code> view
+            helper allows you to capture arbitrary content for later rendering
+            using the following API.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>captureStart($type, $key)</code> begins capturing
+                    content.
+                </para>
+
+                <para>
+                    <code>$type</code> should be one of the
+                    <code>Placeholder</code> constants <code>APPEND</code> or
+                    <code>SET</code>. If <code>APPEND</code>, captured content
+                    is appended to the list of current content in the
+                    placeholder; if <code>SET</code>, captured content is used
+                    as the sole value of the placeholder (potentially replacing
+                    any previous content). By default, <code>$type</code> is
+                    <code>APPEND</code>.
+                </para>
+
+                <para>
+                    <code>$key</code> can be used to specify a specific key in
+                    the placeholder container to which you want content
+                    captured.
+                </para>
+
+                <para>
+                    <code>captureStart()</code> locks capturing until
+                    <code>captureEnd()</code> is called; you cannot nest
+                    capturing with the same placeholder container. Doing so will
+                    raise an exception.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>captureEnd()</code> stops capturing content, and
+                    places it in the container object according to how
+                    <code>captureStart()</code> was called.
+            </para></listitem>
+        </itemizedlist>
+
+        <programlisting role="php"><![CDATA[
+<!-- Default capture: append -->
+<?php $this->placeholder('foo')->captureStart();
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+<?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo') ?>
+]]></programlisting>
+
+        <programlisting role="php"><![CDATA[
+<!-- Capture to key -->
+<?php $this->placeholder('foo')->captureStart('SET', 'data');
+foreach ($this->data as $datum): ?>
+<div class="foo">
+    <h2><?php echo $datum->title ?></h2>
+    <p><?php echo $datum->content ?></p>
+</div>
+ <?php endforeach; ?>
+<?php $this->placeholder('foo')->captureEnd() ?>
+
+<?php echo $this->placeholder('foo')->data ?>
+]]></programlisting>
+    </example>
+
+    <sect4 id="zend.view.helpers.initial.placeholder.implementations">
+        <title>Concrete Placeholder Implementations</title>
+
+        <para>
+            Zend Framework ships with a number of "concrete" placeholder
+            implementations. These are for commonly used placeholders: doctype,
+            page title, and various &lt;head&gt; elements. In all cases, calling
+            the placeholder with no arguments returns the element itself.
+        </para>
+
+        <para>
+            Documentation for each element is covered separately, as linked
+            below:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.doctype">Doctype</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headmeta">HeadMeta</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
+            </para></listitem>
+
+            <listitem><para>
+                    <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

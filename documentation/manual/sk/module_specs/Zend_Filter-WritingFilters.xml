@@ -1,0 +1,48 @@
+<sect1 id="zend.filter.writing_filters">
+
+    <title>Písanie filtrov</title>
+
+    <para>
+        Zend_Filter poskytuje často používané filtre, ale vývojári často potrebujú
+        napísať filtre pre špecifické prípady. Úloha napísania filtra je zjednodušená
+        implementáciou rozhrania <code>Zend_Filter_Interface</code>.
+    </para>
+
+    <para>
+        Rozhranie <code>Zend_Filter_Interface</code> definuje len jednu metodu
+        <code>filter()</code> ktorá je implementovaná odvodenou triedou. Objekt,
+        ktorý implementuje rozhranie môže byť zaradený do postupnosti filtrov pomocou
+        <code>Zend_Filter::addFilter()</code>.
+    </para>
+
+    <para>
+        Nasledujúci príklad ukazuje ako vytvoriť vlastný filter:
+
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Filter/Interface.php';
+
+class MyFilter implements Zend_Filter_Interface
+{
+    public function filter($value)
+    {
+        // vykonanie príkazov na $value pre získanie $valueFiltered
+
+        return $valueFiltered;
+    }
+}]]></programlisting>
+
+    </para>
+
+    <para>
+        Pridanie inštancie uvedeného filtra do postupnosti filtrov:
+
+        <programlisting role="php"><![CDATA[<?php
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new MyFilter());]]></programlisting>
+
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

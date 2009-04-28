@@ -1,0 +1,81 @@
+<sect1 id="zend.config.theory_of_operation">
+    <title>Zasady działania</title>
+    <para>
+        Dane konfiguracyjne są przekazywane do konstruktora <code>Zend_Config</code>
+        w postaci asocjacyjnej tablicy, która może być wielowymiarowa, po to, aby
+        obsłużyć dane zorganizowane w różny sposób, od prostych po specyficzne.
+        Konkretny adapter posiada funkcjonalność przystosowującą przechowywane dane
+        konfiguracyjne do wygenerowania tablicy asocjacyjnej dla konstruktora
+        <code>Zend_Config</code>. Skrypt użytkownika może przekazać taką tablicę
+        bezpośrednio do konstruktora <code>Zend_Config</code>, nie używając klasy
+        adaptera, since it may be appropriate to do so in certain situations.
+    </para>
+    <para>
+        Each configuration data array value becomes a property of the
+        <code>Zend_Config</code> object. The key is used as the property name.
+        If a value is itself an array, then the resulting object property is
+        created as a new <code>Zend_Config</code> object, loaded with the array
+        data. This occurs recursively, such that a hierarchy of configuration
+        data may be created with any number of levels.
+    </para>
+    <para>
+        Klasa <code>Zend_Config</code> implementuje interfejsy <code>Countable</code>
+        oraz <code>Iterator</code> w celu zapewnienia łatwego dostępu do danych
+        konfiguracyjnych. Dzięki temu można użyć funkcji
+        <ulink url="http://php.net/count"><code>count()</code></ulink> oraz składni
+        PHP takiej jak <ulink url="http://php.net/foreach"><code>foreach</code></ulink>
+        na obiektach <code>Zend_Config</code>.
+    </para>
+    <para>
+        Domyślnie dane konfiguracyjne dostępne poprzez <code>Zend_Config</code>
+        są tylko do odczytu, i próba przypisania (np., <code>$config->database->host = 'example.com'</code>)
+        spowoduje wyrzucenie wyjątku. Te domyślne zachowanie może być zmienione
+        poprzez konstruktor, aby pozwolić na modyfikację wartości danych konfiguracyjnych.
+        Dodatkowo, jeśli modyfikacje są dozwolone, klasa <code>Zend_Config</code>
+        obsługuje usuwanie wartości danych konfiguracyjnych
+          (np. <code>unset($config->database->host);</code>).
+        <note>
+            <para>
+                Jest ważne, aby nie mylić modyfikacji danych konfiguracyjnych w pamięci z
+                zapisywaniem danych konfiguracyjnych do konkretnych środków przechowywania.
+                Narzędzia do tworzenia i modyfikowania danych konfiguracyjnych dla rożnych
+                środków przechowywania są poza zakresem klasy <code>Zend_Config</code>.
+                Są dostępne zewnętrzne rozwiązania open source służące do
+                tworzenia oraz modyfikowania danych konfiguracyjnych dla różnych
+                środków przechowywania.
+            </para>
+        </note>
+    </para>
+    <para>
+        Klasy adapterów dziedziczą z klasy <code>Zend_Config</code> więc wykorzystują
+        ich funkconalność.
+    </para>
+    <para>
+        Rodzina klas <code>Zend_Config</code> pozwala na zorganizowanie danych
+        konfiguracyjnych w sekcje. Obiekty adapterów <code>Zend_Config</code>
+        mogą załadować jedną określoną sekcję, wiele określonych sekcji lub
+        wszystkie sekcje (gdy żadna nie jest określona).
+    </para>
+    <para>
+        Klasy adapterów <code>Zend_Config</code> wspierają model pojedynczego dziedziczenia,
+        w którym jedna sekcja danych konfiguracyjnych może dziedziczyć z innej sekcji.
+        Jest to zapewnione w celu zredukowania lub wyeliminowania potrzeby
+        duplikowania danych konfiguracyjnych z różnych powodów. Sekcja dziedzicząca
+        może nadpisać wartości, które dziedziczy z sekcji rodzica. Tak jak w
+        dziedziczeniu klas PHP, sekcja może dziedziczyć z sekcji rodzica, która
+        może dziedziczyć z innej sekcji rodzica i tak dalej, ale wielokrotne
+        dziedziczenie (np., sekcja C dziedzicząca bezpośrednio z sekcji A oraz B)
+        nie jest obsługiwane.
+    </para>
+    <para>
+        Jeśli masz dwa obiekty <code>Zend_Config</code>, możesz je połączyć w
+        jeden pojedynczy obiekt używając metody <code>merge()</code>.
+        Na przykład, mając obiekt $config oraz $localConfig, możesz dołączyć
+        obiekt $localConfig do $config używając metody
+        <code>$config->merge($localConfig);</code>. Dane z obiektu $localConfig
+        nadpiszą dane o tej samej nazwie znajdujące się w obiekcie $config.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

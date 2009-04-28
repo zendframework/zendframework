@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.reflection.reference">
+    <title>Zend_Reflection Referenz</title>
+
+    <sect2 id="zend.reflection.reference.class">
+        <title>Zend_Reflection_Class</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock">
+        <title>Zend_Reflection_Docblock</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag">
+        <title>Zend_Reflection_Docblock_Tag</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag-param">
+        <title>Zend_Reflection_Docblock_Tag_Param</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag-return">
+        <title>Zend_Reflection_Docblock_Tag_Return</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.extension">
+        <title>Zend_Reflection_Extension</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.file">
+        <title>Zend_Reflection_File</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.function">
+        <title>Zend_Reflection_Function</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.method">
+        <title>Zend_Reflection_Method</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.parameter">
+        <title>Zend_Reflection_Parameter</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.property">
+        <title>Zend_Reflection_Property</title>
+        <para></para>
+        <!-- @todo -->
+    </sect2>
+</sect1>

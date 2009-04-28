@@ -1,0 +1,89 @@
+<sect1 id="introduction.installation">
+
+    <title>Instalação</title>
+
+    <para>
+        O Zend Framework é construído em PHP 5 orientado a objeto e requer PHP 5.1.4 ou superior. Por favor
+        veja o <link linkend="requirements">apêndice de requerimentos do sistema</link> para informações
+        mais detalhadas.
+    </para>
+
+    <para>
+        Uma vez que um ambiente PHP apropriado estiver disponível, o próximo passo é pegar uma cópia do Zend Framework,
+        que pode ser oficialmente obtida por algum dos métodos seguintes:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <ulink url="http://framework.zend.com/download/stable">Baixar o último lançamento estável.</ulink>
+                    Está versão, disponível em ambos formatos <code>.zip</code> e <code>.tar.gz</code>, é uma boa
+                    escolha para aqueles que são novos no Zend Framework.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://framework.zend.com/download/snapshot">Baixar a última versão instantânea
+                    noturna.</ulink> Para aqueles que gostam de desafios, a versão instantânea noturna representa a
+                    o último progresso no desenvolvimento do Zend Framework. Versões instantâneas são feitas com a
+                    documentação somente em inglês ou com todas as linguagens disponíveis. Se você quiser antecipar
+                    o trabalho com a versão de desenvolvimento do Zend Framework, considere usar um cliente de
+                    Subversion (SVN).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Usar um cliente <ulink url="http://subversion.tigris.org">Subversion</ulink> (SVN). Zend Framework
+                    é um software livre, e o repositório de Subversion usado para seu desenvolvimento está disponível
+                    ao público. Considere usar SVN para pegar o Zend Framework se você já usa o SVN no seu
+                    desenvolvimento de aplicação, se desejar contribuir para o framework, ou se precisar atualizar
+                    sua versão do framework mais freqüentemente que os lançamentos ocorrem.
+                </para>
+                <para>
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">Exportação</ulink> é
+                    útil se você quiser pegar uma determinada revisão do framework sem que os diretórios de
+                    <code>.svn</code> sejam criados em uma cópia de trabalho.
+                </para>
+                <para>
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Verificação de uma
+                    cópia de trabalho</ulink> é boa quando você quer contribuir para o Zend Framework, e uma cópia
+                    de trabalho pode ser atualizada a qualquer momento com uma
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>atualização de svn
+                    </code></ulink>.
+                </para>
+                <para>
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">Uma definição
+                    externa</ulink> é altamente conveniente para desenvolvedores que já usam SVN para gerenciar
+                    cópias de trabalho de sua aplicação.
+                </para>
+                <para>
+                    O URL do tronco do repositório SVN do Zend Framework é:
+                    <ulink url="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/trunk</ulink>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Uma vez que você tiver uma cópia do Zend Framework disponível, sua aplicação terá de ser capaz de acessar
+        as classes do framework. Embora haja
+        <ulink url="http://www.php.net/manual/en/configuration.changes.php">
+        várias maneiras de fazer isto</ulink>, seu PHP
+        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        precisa conter o caminho da biblioteca do Zend Framework.
+    </para>
+
+    <para>
+        Uma das características mais úteis do Zend Framework é sua implementação do
+        <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front Controller</ulink> e
+        dos padrões
+        <ulink url="http://en.wikipdia.org/wiki/Model-view-controller">Model-View-Controller</ulink> (MVC).
+        <link linkend="zend.controller.quickstart">Comece com o MVC do Zend Framework!</link>
+    </para>
+
+    <para>
+        Como os componentes do Zend Framework são levemente ligados, vários componentes podem ser escolhidos
+        para uso independente conforme a necessidade. Cada um dos capítulos seguintes documenta o uso de um
+        determinado componente.
+    </para>
+
+</sect1>

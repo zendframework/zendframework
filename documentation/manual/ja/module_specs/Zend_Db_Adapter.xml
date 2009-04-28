@@ -1,0 +1,2186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.db.adapter">
+
+    <title>Zend_Db_Adapter</title>
+
+    <para>
+        <classname>Zend_Db</classname> とその関連クラス群は、Zend Framework
+        において SQL データベースとのインターフェイスを担当します。
+        <classname>Zend_Db_Adapter</classname> は、PHP アプリケーションから RDBMS
+        に接続する際に使用する基本クラスです。
+        RDBMS の種類に応じて、それぞれ個別のアダプタクラスがあります。
+    </para>
+
+    <para>
+        <classname>Zend_Db</classname> のアダプタは、
+        ベンダ固有の PHP 拡張モジュールを共通インターフェイスにとりまとめる役割を果たします。
+        これにより、いちど書いた PHP アプリケーションが
+        ほんの少しの手間で複数 RDBMS に対応するようになります。
+    </para>
+
+    <para>
+        アダプタクラスのインターフェイスは、
+        <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>
+        拡張モジュールのインターフェイスと似ています。
+        <classname>Zend_Db</classname> では、次の RDBMS 用の PDO ドライバに対するアダプタクラスを用意しています。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                IBM DB2 および Informix Dynamic Server (IDS) (<ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                MySQL (<ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Microsoft SQL Server (<ulink url="http://www.php.net/pdo-mssql">pdo_mssql</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Oracle (<ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                PostgreSQL (<ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                SQLite (<ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink> PHP 拡張モジュールを使用)
+            </para>
+        </listitem>
+
+    </itemizedlist>
+
+    <para>
+        さらに、<classname>Zend_Db</classname> では、
+        以下の RDBMS 用の拡張モジュールを使用するアダプタクラスも用意しています。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                MySQL (<ulink url="http://www.php.net/mysqli">mysqli</ulink> を使用します)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Oracle (<ulink url="http://www.php.net/oci8">oci8</ulink> を使用します)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                IBM DB2 および DB2/i5 (<ulink url="http://www.php.net/ibm_db2">ibm_db2</ulink> を使用します)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Firebird/Interbase (<ulink url="http://www.php.net/ibase">php_interbase</ulink> を使用します)
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <note>
+        <para>
+            <classname>Zend_Db</classname> のアダプタは、どれも PHP の拡張モジュールを使用しています。
+            <classname>Zend_Db</classname> のアダプタを使用するには、
+            対応する PHP 拡張モジュールが使用できる環境でなければなりません。
+            たとえば、PDO 系の Zend_Db アダプタを使用するのなら、
+            PDO 拡張モジュールが必要で、
+            また使用する RDBMS 用の PDO ドライバも必要となります。
+        </para>
+    </note>
+
+    <sect2 id="zend.db.adapter.connecting">
+
+        <title>アダプタを使用したデータベース接続</title>
+
+        <para>
+            ここでは、データベースアダプタのインスタンスを作成する方法を説明します。
+            これは、PHP アプリケーションから RDBMS
+            サーバへの接続を確立することに対応します。
+        </para>
+
+        <sect3 id="zend.db.adapter.connecting.constructor">
+
+            <title><classname>Zend_Db</classname> アダプタのコンストラクタの使用</title>
+
+            <para>
+                コンストラクタを使用して、アダプタのインスタンスを作成することができます。
+                アダプタのコンストラクタが受け取る引数はひとつで、
+                接続を確立するために必要なパラメータを配列で渡します。
+            </para>
+
+            <example id="zend.db.adapter.connecting.constructor.example">
+                <title>アダプタのコンストラクタの使用</title>
+                <programlisting role="php"><![CDATA[
+$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+    'host'     => '127.0.0.1',
+    'username' => 'webuser',
+    'password' => 'xxxxxxxx',
+    'dbname'   => 'test'
+));
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.connecting.factory">
+
+            <title><classname>Zend_Db</classname> のファクトリの使用</title>
+
+            <para>
+                コンストラクタを直接使用する以外の方法として、静的メソッド
+                <classname>Zend_Db::factory()</classname> を使用することもできます。
+                このメソッドは、必要に応じて
+                <link linkend="zend.loader.load.class">Zend_Loader::loadClass()</link>
+                を使用して動的にアダプタクラスを読み込みます。
+            </para>
+
+            <para>
+                最初の引数には、アダプタクラスのベース名を文字列で指定します。
+                たとえば、文字列 'Pdo_Mysql' は Zend_Db_Adapter_Pdo_Mysql
+                クラスに対応します。その次の引数は、
+                アダプタのコンストラクタに指定するのと同じ形式の配列となります。
+            </para>
+
+            <example id="zend.db.adapter.connecting.factory.example">
+                <title>ファクトリメソッドの使用</title>
+                <programlisting role="php"><![CDATA[
+// 次の文は不要です。Zend_Db_Adapter_Pdo_Mysql ファイルは
+// Zend_Db の factory メソッドが読み込みます。
+
+// require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
+
+// 自動的に Zend_Db_Adapter_Pdo_Mysql クラスを読み込み、
+// そのインスタンスを作成します
+$db = Zend_Db::factory('Pdo_Mysql', array(
+    'host'     => '127.0.0.1',
+    'username' => 'webuser',
+    'password' => 'xxxxxxxx',
+    'dbname'   => 'test'
+));
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                独自に <classname>Zend_Db_Adapter_Abstract</classname>
+                の派生クラスを作成し、そのクラス名のプレフィックスが
+                "Zend_Db_Adapter" でない場合に <code>factory()</code>
+                でそのアダプタを読み込むには、
+                作成したクラス名の先頭の部分をパラメータ配列のキー
+                'adapterNamespace' で指定します。
+            </para>
+
+            <example id="zend.db.adapter.connecting.factory.example2">
+                <title>自作のアダプタクラスをアダプタのファクトリメソッドで使用する方法</title>
+                <programlisting role="php"><![CDATA[
+// アダプタのクラスファイルの読み込みは不要です
+// Zend_Db の factory メソッドが読み込みます
+
+// 自動的に MyProject_Db_Adapter_Pdo_Mysql クラスを読み込み、
+// インスタンスを作成します
+$db = Zend_Db::factory('Pdo_Mysql', array(
+    'host'             => '127.0.0.1',
+    'username'         => 'webuser',
+    'password'         => 'xxxxxxxx',
+    'dbname'           => 'test',
+    'adapterNamespace' => 'MyProject_Db_Adapter'
+));
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.connecting.factory-config">
+
+            <title><classname>Zend_Db</classname> ファクトリでの Zend_Config の使用</title>
+
+            <para>
+                <code>factory()</code> メソッドの引数として、
+                <link linkend="zend.config">Zend_Config</link>
+                のオブジェクトを渡すこともできます。
+            </para>
+
+            <para>
+                最初の引数に config オブジェクトを渡す場合は、そのプロパティに
+                <code>adapter</code> が含まれているものとします。
+                そこに、アダプタクラス名を表す文字列を指定します。
+                また、オプションで <code>params</code> というプロパティも指定することができ、
+                その配下のサブプロパティとしてアダプタのパラメータ名を指定します。
+                これは、<code>factory()</code> メソッドの
+                2 番目のパラメータを省略した場合にのみ読み込まれます。
+            </para>
+
+            <example id="zend.db.adapter.connecting.factory.example1">
+                <title>アダプタのファクトリメソッドでの <classname>Zend_Config</classname> オブジェクトの使用</title>
+                <para>
+                    次の例では、配列から <classname>Zend_Config</classname> オブジェクトを作成します。
+                    それ以外にも、
+                    <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
+                    や <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>
+                    などを用いて外部ファイルからデータを読み込むこともできます。
+                </para>
+                <programlisting role="php"><![CDATA[
+$config = new Zend_Config(
+    array(
+        'database' => array(
+            'adapter' => 'Mysqli',
+            'params'  => array(
+                'host'     => '127.0.0.1',
+                'dbname'   => 'test',
+                'username' => 'webuser',
+                'password' => 'secret',
+            )
+        )
+    )
+);
+
+$db = Zend_Db::factory($config->database);
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                <code>factory()</code> メソッドの 2 番目の引数には、
+                アダプタのパラメータに対応するエントリをもつ連想配列となります。
+                この引数はオプションです。最初の引数が <classname>Zend_Config</classname>
+                である場合は、そこにすべてのパラメータが含まれているものとみなし、
+                2 番目の引数は無視されます。
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.connecting.parameters">
+
+            <title>アダプタのパラメータ</title>
+
+            <para>
+                <classname>Zend_Db</classname> のアダプタクラスで使用できるパラメータを以下にまとめます。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">host</emphasis>:
+                        データベースサーバのホスト名あるいは IP アドレス。
+                        データベースが PHP アプリケーションと同じホスト上で動いている場合は、
+                        'localhost' あるいは '127.0.0.1' を指定します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">username</emphasis>:
+                        RDBMS サーバへの接続時に使用する認証用アカウントの ID。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">password</emphasis>:
+                        RDBMS サーバへの接続時に使用する認証用パスワード。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">dbname</emphasis>:
+                        RDBMS サーバ上のデータベースインスタンス名。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">port</emphasis>:
+                        RDBMS サーバによっては、管理者が指定した
+                        ポート番号によるネットワーク接続を許可しているものもあります。
+                        このパラメータを使用すると、PHP
+                        アプリケーションが接続時に使用するポート番号を指定できます。
+                        これは RDBMS サーバの設定にあわせなければなりません。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">options</emphasis>:
+                        このパラメータは、すべての <classname>Zend_Db_Adapter</classname>
+                        クラスで共通のオプションを連想配列で指定します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">driver_options</emphasis>:
+                        このパラメータは、各データベース拡張モジュールに固有の
+                        追加オプションを連想配列で指定します。
+                        典型的な使用例としては、PDO ドライバの属性などがあります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">adapterNamespace</emphasis>:
+                        アダプタクラスの名前の先頭が 'Zend_Db_Adapter'
+                        以外である場合に、それを指定します。これは、
+                        Zend 以外が作成したアダプタクラスを
+                        <code>factory()</code> メソッドで使いたい場合に指定します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <example id="zend.db.adapter.connecting.parameters.example1">
+                <title>ファクトリでの大文字小文字変換オプションの指定</title>
+                <para>
+                    このオプションは、定数
+                    <classname>Zend_Db::CASE_FOLDING</classname> で指定します。
+                    これは、PDO や IBM DB2 データベースドライバにおける
+                    <code>ATTR_CASE</code> 属性に対応するもので、
+                    結果セットの文字列キーの大文字小文字変換を指定します。
+                    設定できる値は
+                    <classname>Zend_Db::CASE_NATURAL</classname> (デフォルト)、
+                    <classname>Zend_Db::CASE_UPPER</classname> および
+                    <classname>Zend_Db::CASE_LOWER</classname> のいずれかです。
+                </para>
+                <programlisting role="php"><![CDATA[
+$options = array(
+    Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
+);
+
+$params = array(
+    'host'           => '127.0.0.1',
+    'username'       => 'webuser',
+    'password'       => 'xxxxxxxx',
+    'dbname'         => 'test',
+    'options'        => $options
+);
+
+$db = Zend_Db::factory('Db2', $params);
+]]>
+                </programlisting>
+            </example>
+
+            <example id="zend.db.adapter.connecting.parameters.example2">
+                <title>ファクトリでの自動クォートオプションの指定</title>
+                <para>
+                    このオプションは、定数
+                    <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname> で指定します。
+                    この値が <code>true</code> (デフォルト) の場合は、
+                    アダプタが生成する SQL 文中のテーブル名やカラム名、
+                    エイリアスといった識別子をすべてクォートします。これにより、
+                    SQL のキーワードや特殊文字を含む識別子を使用できるようになります。
+                    この値が <code>false</code> の場合は、
+                    識別子の自動クォートは行いません。
+                    クォートすべき文字を使用している場合は、自分で
+                    <code>quoteIdentifier()</code> メソッドをコールする必要があります。
+                </para>
+                <programlisting role="php"><![CDATA[
+$options = array(
+    Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
+);
+
+$params = array(
+    'host'           => '127.0.0.1',
+    'username'       => 'webuser',
+    'password'       => 'xxxxxxxx',
+    'dbname'         => 'test',
+    'options'        => $options
+);
+
+$db = Zend_Db::factory('Pdo_Mysql', $params);
+]]>
+                </programlisting>
+            </example>
+
+            <example id="zend.db.adapter.connecting.parameters.example3">
+                <title>ファクトリでの PDO ドライバのオプションの指定</title>
+                <programlisting role="php"><![CDATA[
+$pdoParams = array(
+    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+);
+
+$params = array(
+    'host'           => '127.0.0.1',
+    'username'       => 'webuser',
+    'password'       => 'xxxxxxxx',
+    'dbname'         => 'test',
+    'driver_options' => $pdoParams
+);
+
+$db = Zend_Db::factory('Pdo_Mysql', $params);
+
+echo $db->getConnection()
+        ->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY);
+]]>
+                </programlisting>
+            </example>
+
+            <example id="zend.db.adapter.connecting.parameters.example4">
+                <title>ファクトリでのシリアライズオプションの指定</title>
+                <programlisting role="php"><![CDATA[
+$options = array(
+    Zend_Db::ALLOW_SERIALIZATION => false
+);
+
+$params = array(
+    'host'           => '127.0.0.1',
+    'username'       => 'webuser',
+    'password'       => 'xxxxxxxx',
+    'dbname'         => 'test',
+    'options'        => $options
+);
+
+$db = Zend_Db::factory('Pdo_Mysql', $params);
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.connecting.getconnection">
+            <title>遅延接続の管理</title>
+
+            <para>
+                アダプタクラスのインスタンスを作成した時点では、
+                まだ RDBMS サーバへの接続は行われません。
+                接続用のパラメータを内部で保持しておき、
+                実際にクエリを実行することになった時点で初めて接続を確立します。
+                これにより、アダプタオブジェクトをすばやく作成できるようになっています。
+                つまり、そのリクエストの中で
+                実際にデータベースクエリを発行するかどうかが確定していなくても、
+                とりあえずアダプタのインスタンスを作成しておくということもできます。
+            </para>
+
+            <para>
+                強制的に RDBMS との接続を確立する必要がある場合は、
+                <code>getConnection()</code> メソッドを使用します。
+                このメソッドは、対応する PHP 拡張モジュール用の接続オブジェクトを返します。
+                たとえば、PDO ドライバ系のアダプタクラスを使った場合は、
+                <code>getConnection()</code> は
+                データベースとの接続を確立してから PDO オブジェクトを返します。
+            </para>
+
+            <para>
+                データベースへの接続時に発生する例外、
+                すなわち ID やパスワードの間違いなどを捕捉したい場合に、
+                これは役立つでしょう。
+                実際に接続を行うまで例外はスローされないので、
+                どこか一か所に例外処理をまとめておいたほうが
+                アプリケーションがシンプルになって便利でしょう。
+            </para>
+
+            <para>
+                さらに、アダプタをシリアライズしてたとえばセッション変数などに格納することもできます。
+                これは、アダプタだけでなくアダプタを利用する側
+                (<classname>Zend_Db_Select</classname> オブジェクトなど) にとっても有用です。
+                デフォルトではアダプタのシリアライズが許可されています。
+                シリアライズをしたくない場合は、上の例のように
+                <classname>Zend_Db::ALLOW_SERIALIZATION=false</classname> オプションを渡します。
+                遅延接続の理念を尊重し、アンシリアライズされたアダプタの
+                自動再接続は行いません。つまり、自分で
+                <code>getConnection()</code> をコールしなければなりません。
+                自動再接続を有効にするには、アダプタのオプションに
+                <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname>
+                を渡します。
+            </para>
+
+            <example id="zend.db.adapter.connecting.getconnection.example">
+                <title>接続時の例外処理</title>
+                <programlisting role="php"><![CDATA[
+try {
+    $db = Zend_Db::factory('Pdo_Mysql', $parameters);
+    $db->getConnection();
+} catch (Zend_Db_Adapter_Exception $e) {
+    // ID かパスワードが間違っている、あるいは RDBMS が起動していないなど……
+} catch (Zend_Exception $e) {
+    // factory() が指定したアダプタクラスを読み込めなかったなど……
+}
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.example-database">
+
+        <title>サンプルデータベース</title>
+
+        <para>
+            <classname>Zend_Db</classname> クラスのドキュメントでは、
+            クラスやメソッドの使用法を説明するために単純なデータベースを使用します。
+            これは、とあるソフトウェア開発プロジェクトにおけるバグ管理を想定したものです。
+            次の 4 つのテーブルで構成されています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="strong">accounts</emphasis> テーブルには、
+                    バグ管理データベースを使用するユーザについての情報を格納します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">products</emphasis> テーブルには、
+                    バグを記録する対象となる製品についての情報を格納します。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">bugs</emphasis> テーブルには、
+                    バグについての情報を格納します。
+                    バグの状態や報告者、修正担当者、検証担当者などの情報が含まれます。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis role="strong">bugs_products</emphasis> テーブルには、
+                    バグと製品の関連付け情報を格納します。
+                    これは、いわゆる多対多のリレーションシップを実装するものです。
+                    ひとつのバグが複数の製品に関連するものであることもあれば、
+                    当然ひとつの製品には複数のバグが存在するからです。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            このサンプルデータベースを作成するための SQL
+            の擬似コードは、次のようになります。
+            これらのテーブルは、<classname>Zend_Db</classname> 自体のユニットテストでも使用します。
+        </para>
+
+        <programlisting role="sql"><![CDATA[
+CREATE TABLE accounts (
+  account_name      VARCHAR(100) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE products (
+  product_id        INTEGER NOT NULL PRIMARY KEY,
+  product_name      VARCHAR(100)
+);
+
+CREATE TABLE bugs (
+  bug_id            INTEGER NOT NULL PRIMARY KEY,
+  bug_description   VARCHAR(100),
+  bug_status        VARCHAR(20),
+  reported_by       VARCHAR(100) REFERENCES accounts(account_name),
+  assigned_to       VARCHAR(100) REFERENCES accounts(account_name),
+  verified_by       VARCHAR(100) REFERENCES accounts(account_name)
+);
+
+CREATE TABLE bugs_products (
+  bug_id            INTEGER NOT NULL REFERENCES bugs,
+  product_id        INTEGER NOT NULL REFERENCES products,
+  PRIMARY KEY       (bug_id, product_id)
+);
+]]>
+        </programlisting>
+
+        <para>
+            また、<code>bugs</code> テーブルには <code>accounts</code>
+            テーブルを指す外部キー参照が複数含まれることにも注意しましょう。
+            それぞれの外部キーは、そのバグに対して
+            <code>accounts</code> テーブルの別々の行を参照することもあります。
+        </para>
+
+        <para>
+            サンプルデータベースの物理データモデルは、次の図のようになります。
+        </para>
+
+        <para>
+            <inlinegraphic width="387" scale="100" align="center" valign="middle"
+                fileref="figures/zend.db.adapter.example-database.png" format="PNG" />
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.select">
+
+        <title>クエリ結果の読み込み</title>
+
+        <para>
+            ここでは、SELECT クエリを実行してその結果を取得するための
+            アダプタのメソッドについて説明します。
+        </para>
+
+        <sect3 id="zend.db.adapter.select.fetchall">
+
+            <title>結果セット全体の取得</title>
+
+            <para>
+                SQL の SELECT クエリの実行とその結果の取得を一度に行うには
+                <code>fetchAll()</code> メソッドを使用します。
+            </para>
+
+            <para>
+                このメソッドの最初の引数には、SELECT 文を文字列で指定します。
+                あるいは、文字列ではなく
+                <link linkend="zend.db.select">Zend_Db_Select</link>
+                クラスのオブジェクトを指定することもできます。
+                オブジェクトを渡した場合は、アダプタの内部でそれを自動的に
+                SELECT 文の文字列に変換します。
+            </para>
+
+            <para>
+                <code>fetchAll()</code> でその次に指定する引数は、
+                SQL 文中のパラメータプレースホルダを置換する値の配列となります。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchall.example">
+                <title>fetchAll() の使用</title>
+                <programlisting role="php"><![CDATA[
+$sql = 'SELECT * FROM bugs WHERE bug_id = ?';
+
+$result = $db->fetchAll($sql, 2);
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetch-mode">
+
+            <title>フェッチモードの変更</title>
+
+            <para>
+                デフォルトでは、<code>fetchAll()</code>
+                は行の配列を返します。各行のデータは連想配列となります。
+                連署配列のキーは、列名かあるいは SELECT
+                クエリで指定した列の別名となります。
+            </para>
+
+            <para>
+                返り値の形式を別のものにするには
+                <code>setFetchMode()</code> メソッドを使用します。
+                対応しているモードは、以下の定数で表されるものです。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>:
+                        データを、連想配列の配列として返します。
+                        配列のキーは、カラム名を文字列で表したものとなります。
+                        これは、<classname>Zend_Db_Adapter</classname> クラスのデフォルトのフェッチモードです。
+                    </para>
+                    <para>
+                        select で取得する一覧の中に同名のカラムが含まれている場合
+                        (たとえば複数テーブルを JOIN した場合など)
+                        は、その名前のエントリはひとつしか含まれません。
+                        FETCH_ASSOC モードを使用する場合は、
+                        SELECT クエリでカラムの別名を指定するなどして、
+                        結果の配列におけるキーが一意になるようにしなければなりません。
+                    </para>
+                    <para>
+                        デフォルトでは、これらの文字列はデータベースドライバから返されるものをそのまま使用します。
+                        通常は、これは RDBMS サーバでのカラム名となるでしょう。
+                        大文字小文字を指定するには、<classname>Zend_Db::CASE_FOLDING</classname>
+                        オプションを使用します。これは、
+                        アダプタのインスタンスを作成する際に使用します。
+                        <xref linkend="zend.db.adapter.connecting.parameters.example1" />
+                        を参照ください。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>:
+                        データを、配列の配列で返します。
+                        配列は数値添字形式となり、クエリで指定した順番での位置がキーとなります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>:
+                        データを、配列の配列で返します。
+                        配列のキーは、FETCH_ASSOC モードで用いる文字列と
+                        FETCH_NUM モードで用いる数値の両方を含んだものとなります。
+                        配列の要素数が、FETCH_ASSOC や FETCH_NUM
+                        の場合の倍になることに注意しましょう。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>:
+                        データを、値の配列で返します。
+                        配列の各要素の値は、結果セットのあるひとつのカラムの値となります。
+                        デフォルトでは、これは最初の (0 番目の) カラムとなります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>:
+                        データを、オブジェクトの配列で返します。
+                        デフォルトのクラスは、PHP の組み込みクラス stdClass
+                        となります。結果セットのカラムは、このクラスのプロパティとしてアクセスできます。
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <example id="zend.db.adapter.select.fetch-mode.example">
+                <title>setFetchMode() の使用</title>
+                <programlisting role="php"><![CDATA[
+$db->setFetchMode(Zend_Db::FETCH_OBJ);
+
+$result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
+
+// $result はオブジェクトの配列となります
+echo $result[0]->bug_description;
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetchassoc">
+
+            <title>連想配列形式での結果セットの取得</title>
+
+            <para>
+                <code>fetchAssoc()</code> メソッドは、
+                フェッチモードの設定にかかわらず、
+                結果のデータを連想配列の配列で返します。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchassoc.example">
+                <title>fetchAssoc() の使用</title>
+                <programlisting role="php"><![CDATA[
+$db->setFetchMode(Zend_Db::FETCH_OBJ);
+
+$result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
+
+// $result は、フェッチモードの指定とは関係なく連想配列の配列となります
+echo $result[0]['bug_description'];
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetchcol">
+
+            <title>結果セットの単一のカラムの取得</title>
+
+            <para>
+                <code>fetchCol()</code> メソッドは、
+                フェッチモードの設定にかかわらず、
+                結果のデータを値の配列で返します。
+                これは、クエリの最初のカラムのみを返します。
+                それ以外のカラムの内容は破棄されます。
+                別のカラムが必要な場合は
+                <xref linkend="zend.db.statement.fetching.fetchcolumn" />
+                を参照ください。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchcol.example">
+                <title>fetchCol() の使用</title>
+                <programlisting role="php"><![CDATA[
+$db->setFetchMode(Zend_Db::FETCH_OBJ);
+
+$result = $db->fetchCol(
+    'SELECT bug_description, bug_id FROM bugs WHERE bug_id = ?', 2);
+
+// bug_description を含み、bug_id は含みません
+echo $result[0];
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetchpairs">
+
+            <title>結果セットからの キー/値 のペアの取得</title>
+
+            <para>
+                <code>fetchPairs()</code> メソッドは、データを キー/値
+                のペア (連想配列) の配列で返します。
+                この連想配列のキーは、SELECT クエリが返す最初のカラムの値となります。
+                また、連想配列の値は、SELECT クエリが返す二番目のカラムの値となります。
+                クエリから返されるその他のカラムは破棄されます。
+            </para>
+
+            <para>
+                SELECT クエリをうまく設計し、最初のカラムの値が一意になるようにしなければなりません。
+                もし最初のカラムに重複する値があれば、連想配列のエントリが上書きされてしまいます。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchpairs.example">
+                <title>fetchPairs() の例</title>
+                <programlisting role="php"><![CDATA[
+$db->setFetchMode(Zend_Db::FETCH_OBJ);
+
+$result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
+
+echo $result[2];
+]]>
+                </programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetchrow">
+
+            <title>結果セットからの単一の行の取得</title>
+
+            <para>
+                <code>fetchRow()</code> メソッドは、
+                結果のデータを現在のフェッチモードで返します。
+                ただ、返すのは結果セットから取得した最初の行のみです。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchrow.example">
+                <title>fetchRow() の使用</title>
+                <programlisting role="php"><![CDATA[
+$db->setFetchMode(Zend_Db::FETCH_OBJ);
+
+$result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
+
+// $result はオブジェクトの配列ではなく、単なるオブジェクトとなります
+echo $result->bug_description;
+]]>
+                </programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.select.fetchone">
+
+            <title>結果セットからの単一のスカラー値の取得</title>
+
+            <para>
+                <code>fetchOne()</code> メソッドは
+                <code>fetchRow()</code> と <code>fetchCol()</code>
+                を組み合わせたようなものです。
+                結果セットからの最初の行から、最初のカラムの値のみを返します。
+                したがって、このメソッドの返り値は配列やオブジェクトではなく単一のスカラー値となります。
+            </para>
+
+            <example id="zend.db.adapter.select.fetchone.example">
+                <title>fetchOne() の使用法</title>
+                <programlisting role="php"><![CDATA[
+$result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
+
+// これは単なる文字列となります
+echo $result;
+]]>
+                </programlisting>
+            </example>
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.write">
+
+        <title>データベースへの変更の書き出し</title>
+
+        <para>
+            アダプタクラスを使用して、
+            新しいデータをデータベースに書き込んだり
+            既存のデータに変更を加えたりすることができます。
+            ここでは、そのためのメソッドについて説明します。
+        </para>
+
+        <sect3 id="zend.db.adapter.write.insert">
+
+            <title>データの挿入</title>
+
+            <para>
+                データベースのテーブルに新しい行を追加するには、
+                <code>insert()</code> メソッドを使用します。
+                最初の引数はテーブル名を表す文字列で、
+                その次の引数はカラム名とデータの値を関連付けた連想配列となります。
+            </para>
+
+            <example id="zend.db.adapter.write.insert.example">
+                <title>テーブルへのデータの挿入</title>
+                <programlisting role="php"><![CDATA[
+$data = array(
+    'created_on'      => '2007-03-22',
+    'bug_description' => 'Something wrong',
+    'bug_status'      => 'NEW'
+);
+
+$db->insert('bugs', $data);
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                データの配列で指定しなかったカラムについてはデータベースに対して何も指示しません。
+                つまり、SQL の INSERT 文で列を指定しなかった場合と同じ挙動となります。
+                DEFAULT 句が設定されていればその値が追加され、
+                設定されていなければ NULL のままとなります。
+            </para>
+
+            <para>
+                デフォルトでは、データ配列の値を挿入する際にはパラメータを使用します。
+                これにより、ある種のセキュリティ問題が発生する可能性を軽減します。
+                データ配列で指定するデータについては、
+                エスケープやクォート処理を考慮する必要はありません。
+            </para>
+
+            <para>
+                データ配列の中の値を SQL の式として扱い、
+                クォートしたくない場合もあるかもしれません。
+                デフォルトでは、文字列として渡した値はすべて文字列リテラルとして扱われます。
+                その値が SQL の式であること、つまりクォートしてはいけないということを指定するには、
+                文字列ではなく <classname>Zend_Db_Expr</classname> 型のオブジェクトをデータ配列に渡します。
+            </para>
+
+            <example id="zend.db.adapter.write.insert.example2">
+                <title>テーブルへの式の挿入</title>
+                <programlisting role="php"><![CDATA[
+$data = array(
+    'created_on'      => new Zend_Db_Expr('CURDATE()'),
+    'bug_description' => 'Something wrong',
+    'bug_status'      => 'NEW'
+);
+
+$db->insert('bugs', $data);
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.write.lastinsertid">
+
+            <title>生成された値の取得</title>
+
+            <para>
+                RDBMS によっては、主キーの自動インクリメントをサポートしているものもあります。
+                この方法で定義したテーブルに新しい行を INSERT すると、
+                主キーの値が自動的に生成されます。
+                <code>insert()</code> メソッドの返り値は、最後に追加された ID
+                では<emphasis>ありません</emphasis>。
+                そのテーブルには自動インクリメントのカラムがないかもしれないからです。
+                返り値は、変更された行数 (通常は 1 です) となります。
+            </para>
+
+            <para>
+                そのテーブルで自動インクリメントの主キーを定義している場合は、
+                データを追加した後で <code>lastInsertId()</code>
+                メソッドを使用することができます。このメソッドは、
+                現在のデータベース接続において最後に自動生成された値を返します。
+            </para>
+
+            <example id="zend.db.adapter.write.lastinsertid.example-1">
+                <title>自動インクリメントのキーにおける lastInsertId() の使用法</title>
+                <programlisting role="php"><![CDATA[
+$db->insert('bugs', $data);
+
+// 自動インクリメントのカラムで最後に生成された値を返します
+$id = $db->lastInsertId();
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                RDBMS によっては、シーケンスをサポートしているものもあります。
+                シーケンスを使用して、主キー用の一意な値を生成することができます。
+                シーケンスをサポートするために、<code>lastInsertId()</code>
+                ではオプションの文字列引数を 2 つ受け取れるようにしています。
+                これらの引数には、それぞれテーブル名とカラム名を指定します。
+                シーケンスの名前は、このテーブル名とカラム名をつなげたものの後に
+                "_seq" を付加したものとなります。これは、PostgreSQL
+                が SERIAL 型のカラムに対して自動生成するシーケンス名の規約にもとづいています。
+                たとえば、"bugs" テーブルの主キーカラムが
+                "bug_id" である場合は、"bugs_bug_id_seq"
+                という名前のシーケンスを使用することになります。
+            </para>
+
+            <example id="zend.db.adapter.write.lastinsertid.example-2">
+                <title>シーケンスにおける lastInsertId() の使用法</title>
+                <programlisting role="php"><![CDATA[
+$db->insert('bugs', $data);
+
+// シーケンス 'bugs_bug_id_seq' が最後に生成した値を返します
+$id = $db->lastInsertId('bugs', 'bug_id');
+
+// これは、シーケンス 'bugs_seq' が最後に生成した値を返します
+$id = $db->lastInsertId('bugs');
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                もしこの命名規約とは異なる名前のシーケンスを使用している場合は、代わりに
+                <code>lastSequenceId()</code> メソッドを使用します。
+                このメソッドの引数には、シーケンスの名前を直接指定します。
+            </para>
+
+            <example id="zend.db.adapter.write.lastinsertid.example-3">
+                <title>lastSequenceId() の使用法</title>
+                <programlisting role="php"><![CDATA[
+$db->insert('bugs', $data);
+
+// シーケンス 'bugs_id_gen' が最後に生成した値を返します
+$id = $db->lastSequenceId('bugs_id_gen');
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                シーケンスをサポートしていない RDBMS、たとえば MySQL や
+                Microsoft SQL Server、SQLite などの場合、
+                lastInsertId() メソッドの引数は無視されます。
+                このメソッドの返り値は、現在の接続で最後に実行された
+                INSERT 操作が生成した値となります。また、これらの RDBMS では
+                lastSequenceId() メソッドの返り値は常に <code>null</code>
+                となります。
+            </para>
+
+            <note>
+                <title>"SELECT MAX(id) FROM table" じゃあダメなんですか?</title>
+                <para>
+                    たしかにこのクエリは、最後にテーブルに追加された主キーの値を返すこともあります。
+                    しかしこれは、複数のクライアントがデータベースにレコードを追加するという環境では
+                    安全ではありません。
+                    つまり、データを追加してから MAX(id) の値を取得するまでの間に
+                    他のクライアントが別のデータを追加する可能性があるということです。
+                    この場合、クエリが返す結果はあなたが実際に追加した行の ID とは異なり、
+                    誰か他の人が追加した行の ID となってしまいます。
+                    しかも、もしそのような状況になっていたとしても
+                    あなたにはそれを知ることはできません。
+                </para>
+                <para>
+                    たとえば "repeatable read" のようなトランザクション分離モードを使用すれば、
+                    この危険性を減らせます。しかし、
+                    このレベルのトランザクション分離をサポートしていない RDBMS
+                    もあります。また、そのアプリケーション自体がもっと緩いレベルの
+                    トランザクション分離モードを想定して作成されているかもしれません。
+                </para>
+                <para>
+                    さらに、新しい主キーの値を生成する際に "MAX(id)+1"
+                    のような式を使うのも同様に危険です。ふたつのクライアントから同時にこのクエリを実行すると、
+                    どちらも同じ値を取得することになり、同じ値で INSERT
+                    を行なうことになってしまいます。
+                </para>
+                <para>
+                    どんな RDBMS でも、一意な値を生成する機能や
+                    最後に生成した値を返す機能は持っています。
+                    この機能はトランザクション分離レベルとは無関係に機能するはずなので、
+                    ふたつのクライアントで同じ値が重複してしまうことはありません。
+                    また、他のクライアントで作成した値が
+                    あなたの接続で「最後に生成した値」として返されることもありません。
+                </para>
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.write.update">
+            <title>データの更新</title>
+
+            <para>
+                データベースのテーブルの行を更新するには、アダプタの
+                <code>update()</code> メソッドを使用します。このメソッドへの引数は
+                3 つです。まず最初はテーブルの名前、
+                その次はカラム名と新しい値を関連づけた連想配列となります。
+            </para>
+
+            <para>
+                配列で指定した値は、文字列リテラルとして扱われます。
+                データ配列で SQL の式を扱う方法については
+                <xref linkend="zend.db.adapter.write.insert" />
+                を参照ください。
+            </para>
+
+            <para>
+                三番目の引数は、SQL の式を文字列で指定します。
+                これが、変更する行を絞り込むための条件となります。
+                ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
+                何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
+                <xref linkend="zend.db.adapter.quoting" />
+                で説明しているメソッドを使用するといいでしょう。
+            </para>
+
+            <para>
+                このメソッドの返り値は、更新操作によって変更された行の数となります。
+            </para>
+
+            <example id="zend.db.adapter.write.update.example">
+                <title>行の更新</title>
+                <programlisting role="php"><![CDATA[
+$data = array(
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
+);
+
+$n = $db->update('bugs', $data, 'bug_id = 2');
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                三番目の引数を省略した場合は、テーブルのすべての行が指定した値で更新されます。
+            </para>
+
+            <para>
+                三番目の引数に文字列の配列を指定すると、各要素の内容を
+                <code>AND</code> 演算子で連結して使用します。
+            </para>
+
+            <example id="zend.db.adapter.write.update.example-array">
+                <title>式の配列を指定することによる行の更新</title>
+                <programlisting role="php"><![CDATA[
+$data = array(
+    'updated_on'      => '2007-03-23',
+    'bug_status'      => 'FIXED'
+);
+
+$where[] = "reported_by = 'goofy'";
+$where[] = "bug_status = 'OPEN'";
+
+$n = $db->update('bugs', $data, $where);
+
+// 実行される SQL は、このようになります
+//  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
+//  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.write.delete">
+            <title>行の削除</title>
+            <para>
+                データベースのテーブルから行を削除するには
+                <code>delete()</code> メソッドを使用します。このメソッドに渡す引数は 2 つで、
+                最初の引数はテーブル名を表す文字列です。
+            </para>
+
+            <para>
+                二番目の引数は、SQL の式を文字列で指定します。
+                これが、削除する行を絞り込むための条件となります。
+                ここで指定した値や識別子に対しては、クォートやエスケープは行ないません。
+                何らかの動的な値を使用する場合は、その内容が安全であることを確認するようにしましょう。
+                <xref linkend="zend.db.adapter.quoting" />
+                で説明しているメソッドを使用するといいでしょう。
+            </para>
+
+            <para>
+                このメソッドの返り値は、削除操作によって変更された行の数となります。
+　            </para>
+
+            <example id="zend.db.adapter.write.delete.example">
+                <title>行の削除</title>
+                <programlisting role="php"><![CDATA[
+$n = $db->delete('bugs', 'bug_id = 3');
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                二番目の引数を省略した場合は、テーブルのすべての行を削除します。
+            </para>
+
+            <para>
+                二番目の引数に文字列の配列を指定すると、各要素の内容を
+                <code>AND</code> 演算子で連結して使用します。
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.quoting">
+
+        <title>値や識別子のクォート</title>
+
+        <para>
+            SQL を作成する際には、PHP の変数の値を
+            SQL の式で使用しなければならないこともあるでしょう。
+            これは危険な処理です。なぜなら、PHP の文字列の中には
+            たとえばクォート記号のような特殊文字が含まれていることがあり、
+            できあがる SQL がおかしなものになってしまう可能性があるからです。
+            たとえば、以下のコードで作成した SQL は、クォート文字の対応がおかしいものになります。
+            <programlisting role="php"><![CDATA[
+$name = "O'Reilly";
+$sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
+
+echo $sql;
+// SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
+]]>
+            </programlisting>
+        </para>
+
+        <para>
+            さらに悪いことに、このようなコードを悪用されると
+            あなたのアプリケーションが攻撃の被害を受けることになるかもしれません。
+            PHP の変数の値を HTTP パラメータなどで指定することができれば、
+            SQL クエリを操作して予期せぬことをされてしまう可能性があります
+            (たとえば、その人の権限では見えないはずのデータを見られてしまうなど)。
+            これは、アプリケーションのセキュリティ問題としては非常に有名な手法で、
+            "SQL インジェクション" と呼ばれています
+            (<ulink url="http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3">
+            http://ja.wikipedia.org/wiki/SQL%E3%82%A4%E3%83%B3%E3%82%B8%E3%82%A7%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3</ulink>
+            を参照ください)。
+        </para>
+
+        <para>
+            <classname>Zend_Db</classname> Adapter クラスの提供する便利な関数を使用すると、
+            あなたの PHP コードが SQL インジェクション攻撃を受ける危険性を軽減することができます。
+            この攻撃を回避する方法は、PHP のクォート文字のような特殊文字を
+            正しくエスケープしてから SQL に使用することです。
+            これにより、不意に (あるいは故意に)
+            SQL に特殊文字が埋め込まれてしまうことを防ぎます。
+        </para>
+
+        <sect3 id="zend.db.adapter.quoting.quote">
+
+            <title><code>quote()</code> の使用法</title>
+
+            <para>
+                <code>quote()</code> メソッドは、引数として文字列を受け取ります。
+                そしてその文字列の中の特殊文字をエスケープした上で、
+                両端を区切り文字で囲んだものを返します。
+                エスケープ処理は、使用している RDBMS
+                にあわせて適切に行われます。
+                文字列の両端に使用する区切り文字は、標準の SQL
+                ではシングルクォート (<code>'</code>) となります。
+            </para>
+
+            <example id="zend.db.adapter.quoting.quote.example">
+                <title><code>quote()</code> の使用法</title>
+                <programlisting role="php"><![CDATA[
+$name = $db->quote("O'Reilly");
+echo $name;
+// 'O\'Reilly'
+
+$sql = "SELECT * FROM bugs WHERE reported_by = $name";
+
+echo $sql;
+// SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                <code>quote()</code> の返り値には、文字列の両端に区切り文字が追加されていることに注意しましょう。
+                これは、たとえば
+                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>
+                のようなエスケープ用関数の挙動とは異なります。
+            </para>
+
+            <para>
+                値をクォートするかしないかは、SQL のデータ型によって異なります。
+                たとえば、整数値をクォートしてしまうと
+                数値型カラムや計算式で利用できなくなってしまうという
+                RDBMS もあります。つまり、次のような SQL
+                がエラーになってしまう実装があるということです。
+                ここで、<code>intColumn</code> のデータ型は
+                <code>INTEGER</code> であるものとします。
+
+                <programlisting role="php"><![CDATA[
+SELECT * FROM atable WHERE intColumn = '123'
+]]>
+                </programlisting>
+            </para>
+
+            <para>
+                <code>quote()</code> メソッドでオプションの
+                2 番目の引数を使用すると、
+                SQL のデータ型に応じてクォートするかどうかを選択することができます。
+            </para>
+
+            <example id="zend.db.adapter.quoting.quote.example-2">
+                <title><code>quote()</code> での SQL データ型の指定</title>
+                <programlisting role="php"><![CDATA[
+$value = '1234';
+$sql = 'SELECT * FROM atable WHERE intColumn = '
+     . $db->quote($value, 'INTEGER');
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                各 <classname>Zend_Db_Adapter</classname> クラスでは、その RDBMS
+                用の SQL 数値データ型の名前がコード化されています。
+                それら以外にも
+                <classname>Zend_Db::INT_TYPE</classname> や
+                <classname>Zend_Db::BIGINT_TYPE</classname>、そして
+                <classname>Zend_Db::FLOAT_TYPE</classname>
+                といった定数が用意されており、
+                これらを使用すると RDBMS に依存しないコードを書くことができます。
+            </para>
+
+            <para>
+                <classname>Zend_Db_Table</classname> は、テーブルのキーとなるカラムを使用する際には
+                自動的に SQL データ型を <code>quote()</code> に指定します。
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.adapter.quoting.quote-into">
+
+            <title><code>quoteInto()</code> の使用法</title>
+
+            <para>
+                クォートを使用する場面としていちばんよくあるのが、
+                PHP の変数の値を SQL の式や文中で使用するということです。
+                <code>quoteInto()</code> メソッドを使用すると、この処理を一度でできるようになります。
+                このメソッドが受け取る引数はふたつです。
+                まず最初の引数としてプレースホルダ記号 (<code>?</code>)
+                を含む文字列を指定し、次の引数で PHP の変数などの値を指定します。
+                ここで指定した値で、プレースホルダの部分を置き換えます。
+            </para>
+
+            <para>
+                プレースホルダ用の記号は、多くの RDBMS
+                でパラメータとして使用している記号と同じです。しかし、
+                <code>quoteInto()</code> メソッドはあくまでパラメータをエミュレートしているだけです。
+                このメソッドは単純に文字列の中に値を放り込み、
+                特殊文字をエスケープして両端をクォートするという処理だけを行います。
+                RDBMS におけるパラメータのように、
+                SQL 文字列と値を分離して SQL だけを事前に RDBMS
+                サーバでパースするといったことは行いません。
+            </para>
+
+            <example id="zend.db.adapter.quoting.quote-into.example">
+                <title><code>quoteInto()</code> の使用法</title>
+                <programlisting role="php"><![CDATA[
+$sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
+
+echo $sql;
+// SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                <code>quoteInto()</code> のオプションの
+                3 番目のパラメータを使用すると、SQL のデータ型を指定することができます。
+                数値型はクォートをせず、それ以外の型についてはクォートを行います。
+            </para>
+
+            <example id="zend.db.adapter.quoting.quote-into.example-2">
+                <title><code>quoteInto()</code> での SQL データ型の指定</title>
+                <programlisting role="php"><![CDATA[
+$sql = $db
+    ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
+
+echo $sql;
+// SELECT * FROM bugs WHERE reported_by = 1234
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+        <sect3 id="zend.db.adapter.quoting.quote-identifier">
+
+            <title><code>quoteIdentifier()</code> の使用法</title>
+
+            <para>
+                変数を使用する可能性があるのは、SQL 文中の値だけとは限りません。
+                SQL 文中でのテーブル名やカラム名などの識別子として
+                PHP の変数を使用する場合も、同様にクォートする必要があります。
+                デフォルトでは、SQL の識別子に使用できる文字は
+                PHP などのプログラミング言語の規則と似ています。
+                たとえば、識別子には空白文字や記号を使用することはできませんし、
+                またアルファベット以外の文字も使えません。
+                SQL の文法上特別な意味を持つ単語として予約されているものも、
+                そのままでは識別子として使用できません。
+            </para>
+
+            <para>
+                しかし、適切な区切り文字でクォートすれば、
+                識別子として使用できる文字の幅が広がります。
+                本来識別子として使用できない文字を含んでいても、
+                適切な形式でクォートすることで SQL の識別子として使用できるようになります。
+                たとえば、空白や記号などを使うこともできますし、
+                SQL で予約語として指定されている単語であっても使用可能です。
+            </para>
+
+            <para>
+                <code>quoteIdentifier()</code> メソッドの働きは
+                <code>quote()</code> と似ていますが、
+                このメソッドは使用しているアダプタの型に応じた識別子区切り文字を付加します。
+                たとえば、標準 SQL ではダブルクォート
+                (<code>"</code>) を区切り文字として使用します。
+                多くの RDBMS がこれにしたがっています。
+                MySQL の場合は、デフォルトではバッククォート
+                (<code>`</code>) を使用します。
+                <code>quoteIdentifier()</code> メソッドはまた、
+                文字列引数内の特殊文字のエスケープも行います。
+            </para>
+
+            <example id="zend.db.adapter.quoting.quote-identifier.example">
+                <title>quoteIdentifier() の使用法</title>
+                <programlisting role="php"><![CDATA[
+// テーブル名に、SQL の予約語を使用します
+$tableName = $db->quoteIdentifier("order");
+
+$sql = "SELECT * FROM $tableName";
+
+echo $sql
+// SELECT * FROM "order"
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                クォートしていない場合とは異なり、
+                クォートした識別子は大文字小文字を区別するようになります。
+                したがって、クォートした識別子を使用する場合は
+                大文字小文字の指定も含めて識別子をきちんと記述する必要があります。
+            </para>
+
+            <para>
+                たいていの場合は <classname>Zend_Db</classname> クラスで自動的に SQL
+                を生成することになるでしょう。デフォルトでは、
+                すべての識別子が自動的にクォートされます。
+                この挙動を変更するには、オプション
+                <classname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</classname>
+                を変更します。これは、アダプタのインスタンスを作成する際に指定します。
+                <xref linkend="zend.db.adapter.connecting.parameters.example2" />
+                を参照ください。
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.transactions">
+
+        <title>データベースのトランザクションの制御</title>
+
+        <para>
+            データベースには「トランザクション」と呼ばれる論理的な作業単位があります。
+            複数のテーブルにまたがる操作などを一括して更新 (コミット) したり、
+            一括して取消 (ロールバック) したりできるようになります。
+            データベースドライバがトランザクションを暗黙的にサポートしている場合は、
+            すべてのクエリがトランザクション内で実行されます。
+            これを<emphasis>自動コミット</emphasis>モードといいます。
+            このモードでは、あらゆるクエリを実行する前に
+            ドライバが自動的にトランザクションを開始し、
+            実行が完了したら自動的にトランザクションをコミットします。
+            デフォルトでは、すべての <classname>Zend_Db</classname>
+            アダプタクラスは自動コミットモードで動作ｓｈます。
+        </para>
+
+        <para>
+            一方、トランザクションの始点と終点を自分で指定することにより、
+            複数の SQL クエリをひとつのトランザクション内ですることもできます。
+            トランザクションを開始する際には <code>beginTransaction()</code>
+            メソッドを使用します。それ以降に実行した SQL
+            文は、明示的に指定するまではすべて同じトランザクション内で動作します。
+        </para>
+
+        <para>
+            トランザクションを終了するには、<code>commit()</code>
+            あるいは <code>rollBack()</code> のいずれかを使用します。
+            <code>commit()</code> メソッドは、
+            そのトランザクションでの変更内容をコミットします。
+            つまり、そのトランザクションで行った変更が、
+            他のトランザクションからも見えるようにするということです。
+        </para>
+
+        <para>
+            <code>rollBack()</code> メソッドはその反対の動作をします。
+            このメソッドは、そのトランザクションでの変更内容をすべて破棄します。
+            変更は一切なかったことになり、トランザクションを開始する前の状態にデータを戻します。
+            しかし、あるトランザクションをロールバックしたとしても、
+            その間に他のトランザクションで行った変更には何の影響も与えません。
+        </para>
+
+        <para>
+            トランザクションを終了すると、<classname>Zend_Db_Adapter</classname>
+            は再び自動コミットモードに戻ります。
+            手動でのトランザクション管理を使用したい場合は、
+            <code>beginTransaction()</code> をもう一度コールします。
+        </para>
+
+        <example id="zend.db.adapter.transactions.example">
+            <title>一貫性を保持するためのトランザクション管理</title>
+            <programlisting role="php"><![CDATA[
+// トランザクションを明示的に開始します
+$db->beginTransaction();
+
+try {
+    // いくつかクエリを実行します
+    $db->query(...);
+    $db->query(...);
+    $db->query(...);
+
+    // すべて成功したら、トランザクションをコミットして
+    // すべての変更を一度に適用します
+    $db->commit();
+
+} catch (Exception $e) {
+    // いずれかのクエリが失敗して例外が発生したら、
+    // もし他に成功しているクエリがあったとしても
+    // それも含めてすべての処理をロールバックします。
+    // すべて適用されるか、ひとつも適用されないかのいずれかです。
+    $db->rollBack();
+    echo $e->getMessage();
+}
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.list-describe">
+
+        <title>テーブルの情報の取得</title>
+
+        <para>
+            <code>listTables()</code> メソッドは文字列の配列を返します。
+            この配列には、データベース内のすべてのテーブルの名前が格納されています。
+        </para>
+
+        <para>
+            <code>describeTable()</code> メソッドは、
+            テーブルのメタデータを格納した連想配列を返します。
+            このメソッドの最初の引数に、テーブル名を文字列で指定します。
+            二番目の引数はオプションで、そのテーブルが存在するスキーマの名前を指定します。
+            exists.
+        </para>
+
+        <para>
+            連想配列のキーは、テーブルのカラムの名前となりあｍす。
+            各キーに関連付けられた値も連想配列で、以下のキーが存在します。
+        </para>
+
+        <table frame="all" cellpadding="5" id="zend.db.adapter.list-describe.metadata">
+            <title>describeTable() が返す連想配列のフィールド</title>
+            <tgroup cols="3" align="left" colsep="1" rowsep="1">
+                <thead>
+                    <row>
+                        <entry>キー</entry>
+                        <entry>型</entry>
+                        <entry>説明</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>SCHEMA_NAME</entry>
+                        <entry>(string)</entry>
+                        <entry>このテーブルが属するデータベーススキーマの名前。</entry>
+                    </row>
+                    <row>
+                        <entry>TABLE_NAME</entry>
+                        <entry>(string)</entry>
+                        <entry>このカラムが属するテーブルの名前。</entry>
+                    </row>
+                    <row>
+                        <entry>COLUMN_NAME</entry>
+                        <entry>(string)</entry>
+                        <entry>カラム名。</entry>
+                    </row>
+                    <row>
+                        <entry>COLUMN_POSITION</entry>
+                        <entry>(integer)</entry>
+                        <entry>テーブル内でのそのカラムの位置。</entry>
+                    </row>
+                    <row>
+                        <entry>DATA_TYPE</entry>
+                        <entry>(string)</entry>
+                        <entry>RDBMS で定義されている、そのカラムのデータ型。</entry>
+                    </row>
+                    <row>
+                        <entry>DEFAULT</entry>
+                        <entry>(string)</entry>
+                        <entry>もし存在すれば、そのカラムのデフォルト値。</entry>
+                    </row>
+                    <row>
+                        <entry>NULLABLE</entry>
+                        <entry>(boolean)</entry>
+                        <entry>そのカラムが SQL の NULL を許可している場合は true、NOT NULL 制約が指定されている場合は false。</entry>
+                    </row>
+                    <row>
+                        <entry>LENGTH</entry>
+                        <entry>(integer)</entry>
+                        <entry>RDBMS で定義されている、そのカラムの長さ (サイズ)。</entry>
+                    </row>
+                    <row>
+                        <entry>SCALE</entry>
+                        <entry>(integer)</entry>
+                        <entry>SQL の NUMERIC 型あるいは DECIMAL 型での桁数。</entry>
+                    </row>
+                    <row>
+                        <entry>PRECISION</entry>
+                        <entry>(integer)</entry>
+                        <entry>SQL の NUMERIC 型あるいは DECIMAL 型での精度。</entry>
+                    </row>
+                    <row>
+                        <entry>UNSIGNED</entry>
+                        <entry>(boolean)</entry>
+                        <entry>整数系の型で、符号なし (UNSIGNED) である場合に true。</entry>
+                    </row>
+                    <row>
+                        <entry>PRIMARY</entry>
+                        <entry>(boolean)</entry>
+                        <entry>そのカラムが主キーの一部である場合に true。</entry>
+                    </row>
+                    <row>
+                        <entry>PRIMARY_POSITION</entry>
+                        <entry>(integer)</entry>
+                        <entry>主キーカラムの中での順序 (最初は 1)。</entry>
+                    </row>
+                    <row>
+                        <entry>IDENTITY</entry>
+                        <entry>(boolean)</entry>
+                        <entry>そのカラムが自動生成の値を使用している場合に true。</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <note>
+            <title>各 RDBMS における IDENTITY メタデータフィールドの対応</title>
+            <para>
+                IDENTITY メタデータフィールドの名前は、サロゲートキーを表す
+                '慣用的な' 名前として選択されたものです。
+                このフィールドは、それぞれの RDBMS においては以下のような名前で知られています。
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>IDENTITY</code> - DB2, MSSQL
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>AUTO_INCREMENT</code> - MySQL
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>SERIAL</code> - PostgreSQL
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>SEQUENCE</code> - Oracle
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
+
+        <para>
+            指定したテーブル名とスキーマ名に対応するテーブルが存在しない場合は、
+            <code>describeTable()</code> は空の配列を返します。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.closing">
+
+        <title>接続の終了</title>
+
+        <para>
+            通常は、データベースとの接続を閉じる必要はありません。
+            リクエストの処理が終了した時点で、PHP
+            が自動的にリソースの後始末を行うからです。
+            データベース関連の拡張モジュールは、
+            リソースオブジェクトへの参照がなくなった時点で接続を閉じるように設計されています。
+        </para>
+
+        <para>
+            しかし、実行時間が長くかかり、
+            多くのデータベース接続を扱うような PHP
+            スクリプトの場合は、自分で接続を閉じる必要があるかもしれません。
+            これにより、RDBMS サーバが限界に達してしまうことを防ぎます。
+            データベース接続を明示的に閉じるには、アダプタの
+            <code>closeConnection()</code> メソッドを使用します。
+        </para>
+
+        <para>
+            リリース 1.7.2 以降でしゃ、現在 RDBMS に接続しているかどうかを
+            <code>isConnected()</code> メソッドで取得することができます。
+            これは、コネクションリソースが初期化されたまままだ閉じられていないことを確認します。
+            現在のところ、たとえばサーバ側で接続が切断された場合などは検出することができません。
+            内部的に、接続を閉じる際にこれを使用しています。
+            接続を複数回閉じてもエラーにはなりません。
+            1.7.2 より前でも PDO アダプタは同じ挙動でしたが、それ以外のアダプタは違いました。
+        </para>
+
+        <example id="zend.db.adapter.closing.example">
+            <title>データベースとの接続の解除</title>
+            <programlisting role="php"><![CDATA[
+$db->closeConnection();
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title><classname>Zend_Db</classname> は持続的な接続をサポートしていますか？</title>
+            <para>
+                <classname>Zend_Db</classname> では、持続的な接続の使用はサポートしていません。
+            </para>
+            <para>
+                持続的な接続を使用すると、RDBMS サーバに余計な接続がたまってしまいます。
+                接続作成時のオーバーヘッドが減ることによるパフォーマンスの向上よりも、
+                それによって引き起こされる問題のほうが多くなりえます。
+            </para>
+            <para>
+                データベース接続は、その状態を管理しています。
+                つまり、RDBMS サーバのオブジェクトの中には
+                セッションスコープで存在するものがあるということです。
+                セッションスコープで管理される情報の例としては、
+                ロックやユーザ変数、一時テーブル、直近に実行したクエリの情報
+                (変更された行数、自動生成された ID) などが挙げられます。
+                持続的な接続を使用すると、
+                別の PHP リクエストが作成したデータに
+                誤ってアクセスしてしまう危険が生じてしまいます。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.other-statements">
+
+        <title>その他のステートメントの実行</title>
+
+        <para>
+            PHP のデータベース関連拡張モジュールが提供する接続オブジェクトを、
+            直接操作したくなることがあるかもしれません。
+            <classname>Zend_Db_Adapter_Abstract</classname> が対応していないような
+            そのデータベース固有の機能を使用したい場合などです。
+        </para>
+
+        <para>
+            <classname>Zend_Db</classname> で SQL 文を実行する場合は、
+            常にプリペア/実行の二段階に分けて処理されます。
+            しかし、データベースの機能の中には
+            プリペアドステートメントに対応していないようなものもあります。
+            たとえば、CREATE や ALTER のような DDL は、
+            MySQL ではプリペアドステートメントとすることができません。
+            また、MySQL 5.1.17 より前のバージョンでは
+            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL
+            クエリキャッシュ</ulink>
+            の機能を活用することができません。
+        </para>
+
+        <para>
+            たいていの拡張モジュールには、
+            プリペアドステートメントではなく直接 SQL
+            を実行するためのメソッドが用意されています。
+            たとえば PDO なら <code>exec()</code> がそれにあたります。
+            接続オブジェクトに直接アクセスするには、getConnection()
+            を使用します。
+        </para>
+
+        <example id="zend.db.adapter.other-statements.example">
+            <title>PDO アダプタによる、プリペアド形式ではないクエリの実行</title>
+            <programlisting role="php"><![CDATA[
+$result = $db->getConnection()->exec('DROP TABLE bugs');
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            同様にして、
+            拡張モジュールが提供するその他のメソッドやプロパティにも
+            アクセスすることができます。ただ、注意が必要です。
+            このようなことをすると、あなたの作成したアプリケーションが特定の
+            RDBMS 用の拡張モジュールに依存してしまうようになります。
+        </para>
+
+        <para>
+            将来のバージョンの <classname>Zend_Db</classname> では、
+            データベースの拡張モジュールがサポートする機能への
+            メソッドエントリポイントを追加できるようにする予定です。
+            これは、過去のバージョンとの互換性を損なうことはありません。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.adapter.server-version">
+        <title>サーバのバージョンの取得</title>
+
+        <para>
+            リリース 1.7.2 以降では、サーバのバージョンを取得することができます。これは、
+            PHP の <code>version_compare()</code> で使用できる形式となります。
+            情報が取得できない場合は <code>null</code> が返されます。
+        </para>
+
+        <example id="zend.db.adapter.server-version.example">
+            <title>サーバのバージョンを取得してからクエリを実行する</title>
+            <programlisting role="php"><![CDATA[
+$version = $db->getServerVersion();
+if (!is_null($version)) {
+    if (version_compare($version, '5.0.0', '>=')) {
+        // 何かを行います
+    } else {
+        // 何か別のことを行います
+    }
+} else {
+    // サーバのバージョンを取得できませんでした
+}
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.db.adapter.adapter-notes">
+
+        <title>各アダプタ固有の注意点</title>
+
+        <para>
+            ここでは、使用するアダプタごとに
+            注意すべき点をまとめます。
+        </para>
+
+        <sect3 id="zend.db.adapter.adapter-notes.ibm-db2">
+            <title>IBM DB2</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを factory() で指定する場合は、名前を
+                        'Db2' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の ibm_db2 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        IBM DB2 は、シーケンスも自動インクリメントのキーも
+                        両方サポートしています。
+                        したがって、<code>lastInsertId()</code>
+                        への引数は指定してもしなくてもかまいません。引数を省略した場合は、
+                        自動インクリメントのキーが最後に生成した値を返します。
+                        引数を指定した場合は、
+                        '<emphasis>テーブル名</emphasis>_<emphasis>カラム名</emphasis>_seq'
+                        という名前のシーケンスが最後に生成した値を返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.mysqli">
+            <title>MySQLi</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Mysqli' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の mysqli 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        MySQL はシーケンスをサポートしていません。したがって、
+                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        返り値は、常に自動インクリメントのキーの最後の値となります。
+                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <code>null</code> となります。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.oracle">
+            <title>Oracle</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Oracle' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の oci8 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Oracle は自動インクリメントのキーをサポートしていません。
+                        したがって、<code>lastInsertId()</code> や
+                        <code>lastSequenceId()</code>
+                        にはシーケンス名を指定する必要があります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Oracle 拡張モジュールは位置指定によるパラメータをサポートしていません。
+                        名前つきパラメータを使用する必要があります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        現在、Oracle アダプタでは <classname>Zend_Db::CASE_FOLDING</classname>
+                        オプションをサポートしていません。Oracle
+                        でこの機能を使用したい場合は、PDO OCI
+                        アダプタを使用する必要があります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        デフォルトでは、LOB フィールドは OCI-Lob オブジェクトで返されます。
+                        すべてのリクエストでこれを文字列として取得したい場合は、
+                        ドライバのオプション <code>'lob_as_string'</code> を使用します。
+                        特定のリクエストでだけそうしたい場合は、アダプタあるいはステートメントで
+                        <code>setLobAsString(boolean)</code> を使用します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-ibm">
+            <title>PDO for IBM DB2 and Informix Dynamic Server (IDS)</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Ibm' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_ibm 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        PDO_IBM 拡張モジュールのバージョン 1.2.2 以降が必要です。
+                        これより古いバージョンを使っている場合は、PDO_IBM
+                        拡張モジュールを PECL で更新する必要があります。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-mssql">
+            <title>PDO Microsoft SQL Server</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Mssql' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_mssql 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Microsoft SQL Server はシーケンスをサポートしていません。
+                        したがって、
+                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        返り値は、常に自動インクリメントのキーの最後の値となります。
+                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <code>null</code> となります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        unicode 文字列を UCS-2 以外のエンコーディング (UTF-8 など)
+                        で使用する場合は、アプリケーションのコード内での変換処理
+                        あるいはバイナリカラムへのデータ格納が必要となります。
+                        詳細な情報は
+                        <ulink url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge Base</ulink>
+                        を参照ください。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <classname>Zend_Db_Adapter_Pdo_Mssql</classname> は、SQL Server
+                        に接続した直後に <code>QUOTED_IDENTIFIER ON</code>
+                        を設定します。これにより、SQL の識別子をクォートする際に
+                        標準の区切り文字 (<code>"</code>) を使用するようになります。
+                        SQL Server の独自仕様である角括弧によるクォートは使用しません。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        オプションの配列で、キーとして <code>pdoType</code>
+                        を指定することができます。この値は "mssql" (デフォルト)、
+                        "dblib"、"freetds" あるいは "sybase" のいずれかとなります。
+                        このオプションは、DSN 文字列を作成する際に使用する
+                        DSN プレフィックスに影響を与えます。"freetds" および
+                        "sybase" を指定した場合のプレフィックスは
+                        "sybase:" となります。これは
+                        <ulink url="http://www.freetds.org/">FreeTDS</ulink>
+                        系のライブラリで用いられるものです。
+                        このドライバで使用できる DSN プレフィックスの詳細は
+                        <ulink url="http://www.php.net/manual/ja/ref.pdo-dblib.connection.php">
+                        http://www.php.net/manual/ja/ref.pdo-dblib.connection.php</ulink>
+                        を参照ください。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-mysql">
+            <title>PDO MySQL</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Mysql' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_mysql 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        MySQL はシーケンスをサポートしていません。したがって、
+                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        返り値は、常に自動インクリメントのキーの最後の値となります。
+                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <code>null</code> となります。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-oci">
+            <title>PDO Oracle</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Oci' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_oci 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Oracle は自動インクリメントのキーをサポートしていません。
+                        したがって、<code>lastInsertId()</code> や
+                        <code>lastSequenceId()</code>
+                        にはシーケンス名を指定する必要があります。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-pgsql">
+            <title>PDO PostgreSQL</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Pgsql' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_pgsql 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        PostgreSQL は、シーケンスも自動インクリメントのキーも
+                        両方サポートしています。
+                        したがって、<code>lastInsertId()</code>
+                        への引数は指定してもしなくてもかまいません。引数を省略した場合は、
+                        自動インクリメントのキーが最後に生成した値を返します。
+                        引数を指定した場合は、
+                        '<emphasis>テーブル名</emphasis>_<emphasis>カラム名</emphasis>_seq'
+                        という名前のシーケンスが最後に生成した値を返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.pdo-sqlite">
+            <title>PDO SQLite</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタを <code>factory()</code> で指定する場合は、
+                        名前を 'Pdo_Sqlite' とします。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の pdo および pdo_sqlite 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        SQLite はシーケンスをサポートしていません。したがって、
+                        <code>lastInsertId()</code> に引数を指定してもそれは無視されます。
+                        返り値は、常に自動インクリメントのキーの最後の値となります。
+                        <code>lastSequenceId()</code> メソッドの返り値は
+                        <code>null</code> となります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        SQLite2 データベースに接続するには、
+                        Pdo_Sqlite アダプタのインスタンスを作成する際に
+                        パラメータの配列で
+                        <code>'sqlite2'=>true</code> を指定します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        メモリ上の SQLite データベースに接続するには、
+                        Pdo_Sqlite アダプタのインスタンスを作成する際に
+                        パラメータの配列で
+                        <code>'dbname'=>':memory:'</code> を指定します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        PHP 用の SQLite ドライバの古いバージョンでは、
+                        結果セットで短いカラム名を使用するための
+                        PRAGMA コマンドがサポートされていないようです。
+                        join クエリを実行した際の結果セットのカラム名が
+                        "テーブル名.カラム名" 形式になる場合は、
+                        PHP のバージョンをアップグレードする必要があります。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+        <sect3 id="zend.db.adapter.adapter-notes.firebird">
+            <title>Firebird/Interbase</title>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        このアダプタは、PHP の php_interbase 拡張モジュールを使用します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        Firebird/interbase は自動インクリメントのキーをサポートしていません。
+                        シーケンスの名前を
+                        <code>lastInsertId()</code> あるいは
+                        <code>lastSequenceId()</code> に指定する必要があります。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        現在、Firebird/interbase アダプタでは <classname>Zend_Db::CASE_FOLDING</classname>
+                        オプションをサポートしていません。
+                        クォートしていない識別子は、自動的に大文字で返されます。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

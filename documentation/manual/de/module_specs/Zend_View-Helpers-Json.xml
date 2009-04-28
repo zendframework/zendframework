@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.json">
+    <title>JSON Helfer</title>
+
+    <para>
+        Wenn Views erstellt werden die JSON zurückgeben ist es wichtig auch den entsprechenden
+        Antwort-Header zu setzen. Der JSON View Helfer macht exakt das. Zusätzlich schaltet er,
+        standardmäßig, Layouts aus (wenn diese aktuell eingeschaltet sind), weil Layouts generell
+        nicht mit JSON Antworten verwendet werden.
+    </para>
+
+    <para>
+        Der JSON Helfer setzt die folgenden Header:
+    </para>
+
+    <programlisting role="text"><![CDATA[
+Content-Type: application/json
+]]>
+    </programlisting>
+
+    <para>
+        Die meisten AJAX Bibliotheken sehen nach diesem Header wenn die Antworten geparst werden um
+        festzustellen wie der Inhalt handzuhaben ist.
+    </para>
+
+    <para>
+        Die Verwendung des JSON Helfers ist sehr geradlienig:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+<?php echo $this->json($this->data) ?>
+]]>
+    </programlisting>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

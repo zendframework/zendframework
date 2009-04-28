@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.mail.character-sets">
+    <title>文字セット</title>
+    <para>
+        <classname>Zend_Mail</classname> はメールの現在の文字セットをチェックしません。
+        <classname>Zend_Mail</classname> のインスタンスを作成する際に、メールの文字セットを指定します。
+        デフォルトは <code>iso-8859-1</code> です。
+        メールに追加する内容は、すべて正しい文字セットでエンコードされている必要があります。
+        新しいメールパートを作成する際には、
+        個々のパートについて異なる文字セットを指定することができます。
+    </para>
+    <note>
+        <title>テキスト形式限定</title>
+        <para>
+            文字セットが適用されるのは、プレーンテキストのメッセージについてのみです。
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

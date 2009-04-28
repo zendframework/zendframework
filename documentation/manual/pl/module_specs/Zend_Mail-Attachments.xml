@@ -1,0 +1,59 @@
+<sect1 id="zend.mail.attachments">
+    <title>Załączniki</title>
+    <para>
+        Pliki mogą być dołączone do e-maila za pomocą metody <code>createAttachment()</code>.
+        Domyślnie <code>Zend_Mail</code> założy, że załącznik jest obiektem binarnym
+        (application/octet-stream), który będzie zakodowany w base64. Te założenie
+        może być nadpisane przez przekazanie opcjonalnych parametrów do metody
+        <code>createAttachment()</code>:
+    </para>
+    <example id="zend.mail.attachments.example-1">
+        <title>Wiadomości e-mail z załącznikami</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+// tworzymy wiadomość
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage,
+                        'image/gif',
+                        Zend_Mime::DISPOSITION_INLINE,
+                        Zend_Mime::ENCODING_8BIT);
+]]>
+        </programlisting>
+    </example>
+    <para>
+        Jeśli chcesz mieć większą kontrolę nad częścią MIME wygenerowaną dla tego
+        załącznika możesz użyć wartości zwróconej przez <code>createAttachment()</code>
+        aby zmodyfikować jej atrybuty. Metoda <code>createAttachment()</code> zwraca
+        obiekt <code>Zend_Mime_Part</code>:
+    </para>
+    <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+
+$at = $mail->createAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->send();
+]]>
+    </programlisting>
+    <para>
+        Alternatywą jest utworzenie instancji klasy <code>Zend_Mime_Part</code> i dodanie jej
+        za pomocą metody <code>createAttachment()</code>:
+    </para>
+    <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+
+$at = new Zend_Mime_Part($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->createAttachment($at);
+
+$mail->send();
+]]>
+    </programlisting>
+</sect1>

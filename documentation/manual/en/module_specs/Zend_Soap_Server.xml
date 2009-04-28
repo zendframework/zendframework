@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.soap.server">
+    <title>Zend_Soap_Server</title>
+
+    <para>
+        <classname>Zend_Soap_Server</classname> class is intended to simplify Web Services server part development for PHP programmers.
+    </para>
+
+    <para>
+        It may be used in WSDL or non-WSDL mode, and using classes or functions to define Web Service API.
+    </para>
+
+    <para>
+        When Zend_Soap_Server component works in the WSDL mode, it uses already prepared WSDL document to define
+        server object behavior and transport layer options.
+    </para>
+
+    <para>
+        WSDL document may be auto-generated with functionality provided by
+        <link linkend="zend.soap.autodiscovery.introduction">Zend_Soap_AutoDiscovery component</link> or should be constructed manually using
+        <link linkend="zend.soap.wsdl"><classname>Zend_Soap_Wsdl</classname> class</link> or any other XML generating tool.
+    </para>
+
+    <para>
+        If the non-WSDL mode is used, then all protocol options have to be set using options mechanism.
+    </para>
+
+    <sect2 id="zend.soap.server.constructor">
+        <title>Zend_Soap_Server constructor.</title>
+        <para>
+            <classname>Zend_Soap_Server</classname> constructor should be used a bit differently for WSDL and non-WSDL modes.
+        </para>
+
+        <sect3 id="zend.soap.server.constructor.wsdl_mode">
+            <title>Zend_Soap_Server constructor for the WSDL mode.</title>
+            <para>
+                <classname>Zend_Soap_Server</classname> constructor takes two optional parameters when it works in WSDL mode:
+                <orderedlist>
+                    <listitem>
+                        <para>
+                            <code>$wsdl</code>, which is an URI of a WSDL file<footnote>
+                                                                                  <para>
+                                                                                      May be set later using <code>setWsdl($wsdl)</code> method.
+                                                                                  </para>
+                                                                              </footnote>.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            <code>$options</code> - options to create SOAP server object<footnote>
+                                                                                            <para>
+                                                                                                Options may be set later using
+                                                                                                <code>setOptions($options)</code> method.
+                                                                                            </para>
+                                                                                        </footnote>.
+                        </para>
+                        <para>
+                            The following options are recognized in the WSDL mode:
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or SOAP_1_2).
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        'actor' - the actor URI for the server.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        'classmap' ('classMap') which can be used to map some WSDL types to PHP classes.
+                                    </para>
+                                    <para>
+                                        The option must be an array with WSDL types as keys and names of PHP classes as values.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        'wsdl' which is equivalent to <code>setWsdl($wsdlValue)</code> call.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </para>
+                    </listitem>
+                </orderedlist>
+            </para>
+        </sect3>
+
+        <sect3 id="zend.soap.server.wsdl_mode">
+            <title>Zend_Soap_Server constructor for the non-WSDL mode.</title>
+            <para>
+                The first constructor parameter <emphasis role="strong">must</emphasis> be set to <code>null</code> if you
+                plan to use <classname>Zend_Soap_Server</classname> functionality in non-WSDL mode.
+            </para>
+            <para>
+                You also have to set 'uri' option in this case (see below).
+            </para>
+
+            <para>
+                The second constructor parameter (<code>$options</code>) is an array with options to create
+                SOAP server object<footnote>
+                                      <para>
+                                          Options may be set later using <code>setOptions($options)</code> method.
+                                      </para>
+                                  </footnote>.
+            </para>
+            <para>
+                The following options are recognized in the non-WSDL mode:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or SOAP_1_2).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            'actor' - the actor URI for the server.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            'classmap' ('classMap') which can be used to map some WSDL types to PHP classes.
+                        </para>
+                        <para>
+                            The option must be an array with WSDL types as keys and names of PHP classes as values.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            'uri' (required) - URI namespace for SOAP server.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect3>
+    </sect2>
+
+
+    <sect2 id="zend.soap.server.api_define_methods">
+        <title>Methods to define Web Service API.</title>
+
+        <para>
+            There are two ways to define Web Service API when your want to give access to your PHP code through SOAP.
+        </para>
+
+        <para>
+            The first one is to attach some class to the <classname>Zend_Soap_Server</classname> object which has to completely describe
+            Web Service API:
+            <programlisting role="php"><![CDATA[
+...
+class MyClass {
+    /**
+     * This method takes ...
+     *
+     * @param integer $inputParam
+     * @return string
+     */
+    public function method1($inputParam) {
+        ...
+    }
+
+    /**
+     * This method takes ...
+     *
+     * @param integer $inputParam1
+     * @param string  $inputParam2
+     * @return float
+     */
+    public function method2($inputParam1, $inputParam2) {
+        ...
+    }
+
+    ...
+}
+...
+$server = new Zend_Soap_Server(null, $options);
+// Bind Class to Soap Server
+$server->setClass('MyClass');
+// Bind already initialized object to Soap Server
+$server->setObject(new MyClass());
+...
+$server->handle();
+]]></programlisting>
+            <note>
+                <title>Important!</title>
+                <para>
+                    You should completely describe each method using method docblock if you plan to use autodiscover functionality
+                    to prepare corresponding Web Service WSDL.
+                </para>
+            </note>
+        </para>
+
+        <para>
+            The second method of defining Web Service API is using set of functions and <code>addFunction()</code> or
+            <code>loadFunctions()</code> methods:
+            <programlisting role="php"><![CDATA[
+...
+/**
+ * This function ...
+ *
+ * @param integer $inputParam
+ * @return string
+ */
+function function1($inputParam) {
+    ...
+}
+
+/**
+ * This function ...
+ *
+ * @param integer $inputParam1
+ * @param string  $inputParam2
+ * @return float
+ */
+function function2($inputParam1, $inputParam2) {
+    ...
+}
+...
+$server = new Zend_Soap_Server(null, $options);
+$server->addFunction('function1');
+$server->addFunction('function2');
+...
+$server->handle();
+]]></programlisting>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.soap.server.request_response">
+        <title>Request and response objects handling.</title>
+        <note>
+            <title>Advanced</title>
+            <para>
+                This section describes advanced request/response processing options and may be skipped.
+            </para>
+        </note>
+
+        <para>
+            Zend_Soap_Server component performs request/response processing automatically,
+            but allows to catch it and do some pre- and post-processing.
+        </para>
+
+        <sect3 id="zend.soap.server.request_response.request">
+            <title>Request processing.</title>
+
+            <para>
+                <classname>Zend_Soap_Server::handle()</classname> method takes request from the standard input stream ('php://input').
+                It may be overridden either by supplying optional parameter to the <code>handle()</code> method or
+                by setting request using <code>setRequest()</code> method:
+                <programlisting role="php"><![CDATA[
+...
+$server = new Zend_Soap_Server(...);
+...
+// Set request using optional $request parameter
+$server->handle($request);
+...
+// Set request using setRequest() method
+$server->setRequest();
+$server->handle();
+]]></programlisting>
+            </para>
+
+            <para>
+                Request object may be represented using any of the following:
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            DOMDocument (casted to XML)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            DOMNode (owner document is grabbed and casted to XML)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            SimpleXMLElement (casted to XML)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            stdClass (__toString() is called and verified to be valid XML)
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>
+                            string (verified to be valid XML)
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+
+            <para>
+                Last processed request may be retrieved using <code>getLastRequest()</code> method as an XML string:
+                <programlisting role="php"><![CDATA[
+...
+$server = new Zend_Soap_Server(...);
+...
+$server->handle();
+$request = $server->getLastRequest();
+]]></programlisting>
+
+            </para>
+        </sect3>
+
+        <sect3 id="zend.soap.server.request_response.response">
+            <title>Response pre-processing.</title>
+
+            <para>
+                <classname>Zend_Soap_Server::handle()</classname> method automatically emits generated response to the output stream.
+                It may be blocked using <code>setReturnResponse()</code> with <code>true</code> or <code>false</code>
+                as a parameter<footnote>
+                                <para>
+                                    Current state of the Return Response flag may be requested with
+                                    <code>setReturnResponse()</code> method.
+                                </para>
+                              </footnote>.
+                Generated response is returned by <code>handle()</code> method in this case.
+                <programlisting role="php"><![CDATA[
+...
+$server = new Zend_Soap_Server(...);
+...
+// Get a response as a return value of handle() method
+// instead of emitting it to the standard output
+$server->setReturnResponse(true);
+...
+$response = $server->handle();
+...
+]]></programlisting>
+            </para>
+
+            <para>
+                Last response may be also retrieved by <code>getLastResponse()</code> method for some post-processing:
+                <programlisting role="php"><![CDATA[
+...
+$server = new Zend_Soap_Server(...);
+...
+$server->handle();
+$response = $server->getLastResponse();
+...
+]]></programlisting>
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

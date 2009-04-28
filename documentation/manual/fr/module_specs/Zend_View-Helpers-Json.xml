@@ -1,0 +1,23 @@
+<!-- EN-Revision: 14385 -->
+<sect3 id="zend.view.helpers.initial.json">
+    <title>L'aide de vue JSON</title>
+
+    <para>Quand vous créez des vues qui retournent du JSON, il est important de paramétrer aussi les en-têtes de réponse
+    appropriés. L'aide vue JSON réalise exactement cela. De plus, par défaut, elle désactive l'éventuel layout (s'il est
+    activé), puisque les layouts sont rarement utilisés dans les réponses JSON.</para>
+
+    <para>L'aide de vue JSON ajoute l'en-tête suivant :</para>
+
+    <programlisting role="text"><![CDATA[
+Content-Type: application/json
+]]></programlisting>
+
+    <para>Beaucoup de librairies AJAX recherche cet en-tête quand elles analysent les réponses pour déterminer comment le
+    contenu doit être géré.</para>
+
+    <para>L'utilisation de l'aide de vue JSON est très simple :</para>
+
+    <programlisting role="php"><![CDATA[
+<?php echo $this->json($this->data) ?>
+]]></programlisting>
+</sect3>

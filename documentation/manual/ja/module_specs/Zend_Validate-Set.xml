@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>標準のバリデーションクラス群</title>
+
+    <para>
+        Zend Framework には、すぐに使える標準のバリデーションクラス群が同梱されています。
+    </para>
+
+    <sect2 id="zend.validate.set.alnum">
+        <title>Alnum</title>
+        <para>
+            <code>$value</code> がアルファベットおよび数字のみで構成されているときにのみ <code>true</code> を返します。
+            このバリデータでは、オプションとして空白文字を認めることもできます。
+        </para>
+
+        <note>
+            <para>
+             アルファベットとは各言語で単語を構成する文字を意味します。
+             ただし、以下の言語では英語のアルファベットをアルファベットとして扱います：中国語、日本語、韓国語。
+             言語はZend_Localeで指定されます。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.validate.set.alpha">
+        <title>Alpha</title>
+        <para>
+             <code>$value</code> がアルファベットのみで構成されているときにのみ <code>true</code> を返します。
+            このバリデータでは、オプションとして空白文字を認めることもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.barcode">
+        <title>Barcode</title>
+        <para>
+            このバリデータのインスタンスを作成する際には、検証したいバーコードの形式を指定します。
+            現在サポートしているバーコード形式は "<code>UPC-A</code>" (Universal Product Code) と
+            "<code>EAN-13</code>" (European Article Number) です。
+            <code>isValid()</code> メソッドは、
+            指定した型のバーコードの検証アルゴリズムで入力が検証できた場合に
+            true を返します。このバリデータに入力を渡す前に、
+            数字の 0 から 9 まで (0-9) 以外の文字はすべて取り除いておかなければなりません。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.between">
+        <title>Between</title>
+        <para>
+            <code>$value</code> が最小値と最大値の間にある場合にのみ <code>true</code> を返します。
+            デフォルトでは、両端の値も含めて比較します
+            (<code>$value</code> が境界値と等しくてもかまいません)
+            が、strict オプションを変更して、<code>$value</code> が最小値より大きくて最大値より小さい
+            (最小値と最大値は含まない) とすることもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ccnum">
+        <title>Ccnum</title>
+        <para>
+            <code>$value</code> が Luhn アルゴリズム (10 で割ったあまりのチェックサム)
+            を満たすクレジットカード番号である場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.date">
+        <title>Date</title>
+        <para>
+            <code>$value</code> が <code>YYYY-MM-DD</code> 形式の日付である場合にのみ
+            <code>true</code> を返します。オプションの <code>locale</code>
+            を設定すると、そのロケールに応じた検証を行います。
+            オプションの <code>format</code> を設定すると、
+            そのフォーマットを使用して検証を行います。オプションパラメータの詳細は
+            <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>
+            を参照ください。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-Db.xml" />
+
+    <sect2 id="zend.validate.set.digits">
+        <title>Digits</title>
+        <para>
+            <code>$value</code> が数字のみで構成されている場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-EmailAddress.xml" />
+
+    <sect2 id="zend.validate.set.float">
+        <title>Float</title>
+        <para>
+            <code>$value</code> が浮動小数点値である場合にのみ <code>true</code> を返します。
+            Zend Framework 1.8 以降では、このバリデータは
+            ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
+            もちろん、アクセサ get/setLocale を使用して、
+            バリデータのインスタンスを作成する際に使用するロケールを変更することもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.greater_than">
+        <title>GreaterThan</title>
+        <para>
+            <code>$value</code> が最小値よりも大きい場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.hex">
+        <title>Hex</title>
+        <para>
+            <code>$value</code> が16進文字のみで構成されている場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-Hostname.xml" />
+
+    <sect2 id="zend.validate.set.iban">
+        <title>Iban</title>
+        <para>
+            <code>$value</code> が正しい IBAN
+            (International Bank Account Number) を含む場合にのみ <code>true</code> を返します。
+            IBAN 番号の検証は、使用している国に対して行い、チェックサムを使用します。
+        </para>
+        <para>
+            IBAN 番号の検証方法は 2 通りあります。最初の方法では、国を表すロケールを指定します。
+            その国に対して、指定した IBAN 番号の検証を行います。
+        </para>
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_Iban('de_AT');
+$iban = 'AT611904300234573201';
+if ($validator->isValid($iban)) {
+    // IBAN は有効なようです
+} else {
+    // IBAN は無効です
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]>
+        </programlisting>
+        <para>
+            これは、IBAN 番号をひとつの国に対して検証したい場合に使用します。
+            もっとシンプルな方法としては、この例のようにロケールを指定しないものもあります。
+        </para>
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_Iban();
+$iban = 'AT611904300234573201';
+if ($validator->isValid($iban)) {
+    // IBAN は有効なようです
+} else {
+    // IBAN は無効です
+}
+]]>
+        </programlisting>
+        <para>
+            しかしこれには大きな問題がひとつあります。
+            たとえばフランスならフランスなど 1 か国だけの IBAN 番号を許可したいときに、
+            他の国の IBAN 番号も有効となってしまいます。
+            したがって、特定の国の IBAN 番号を検証したい場合はロケールを指定しなければなりません。
+            国にこだわらずすべての IBAN 番号を許可したい場合は、
+            ロケールを省略してシンプルに書くことができます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.in_array">
+        <title>InArray</title>
+        <para>
+            "needle" <code>$value</code> が "haystack" 配列に含まれる場合にのみ
+            <code>true</code> を返します。strict オプションを <code>true</code>
+            にすると、<code>$value</code> の型も確認します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.int">
+        <title>Int</title>
+        <para>
+            <code>$value</code> が整数値である場合にのみ <code>true</code> を返します。
+            Zend Framework 1.8 以降では、このバリデータは
+            ブラウザや環境変数あるいはアプリケーションで設定されたロケールを考慮するようになります。
+            もちろん、アクセサ get/setLocale を使用して、
+            バリデータのインスタンスを作成する際に使用するロケールを変更することもできます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ip">
+        <title>Ip</title>
+        <para>
+            <code>$value</code> が妥当な形式の IP アドレスである場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.less_than">
+        <title>LessThan</title>
+        <para>
+            <code>$value</code> が最大値よりも小さい場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.not_empty">
+        <title>NotEmpty</title>
+        <para>
+           <code>$value</code> が空の値でない場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.regex">
+        <title>Regex</title>
+        <para>
+            <code>$value</code> が正規表現パターンにマッチする場合にのみ <code>true</code> を返します。
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-Sitemap.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Sitemap.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.validate.set.string_length">
+        <title>StringLength</title>
+        <para>
+            文字列 <code>$value</code> の長さが最小値以上、
+            かつ最大値以下 (最大値が <code>null</code> 以外のとき)
+            の場合にのみ <code>true</code> を返します。
+            <code>setMin()</code>
+            で最大値より大きい値を指定したり <code>setMax()</code>
+            で最小値より小さい値を設定したりした場合に例外をスローします。
+            このクラスは UTF-8 のほかに
+            <ulink url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>
+            にもとづいたその他の文字エンコーディングもサポートします。
+            別のエンコーディングを使用したい場合は、アクセサメソッド getEncoding
+            および setEncoding で設定します。
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a Cosmos request
+    http://api.technorati.com/cosmos?key=VALID_API_KEY&url=www.simonecarletti.com&type=weblog
+    
+    The request has the following properties:
+     * url is site (not a blog)
+     * type is weblog
+    
+-->
+<!-- generator="Technorati API version 1.0" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://www.simonecarletti.com</url>
+            <inboundblogs>39</inboundblogs>
+            <rankingstart>1</rankingstart>
+        </result>
+        <item>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>85</inboundblogs>
+                <inboundlinks>112</inboundlinks>
+                <lastupdate>2007-11-12 20:51:52 GMT</lastupdate>
+            </weblog>
+            <linkurl>http://www.simonecarletti.com</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> Gioxx’s Wall</name>
+                <url>http://gioxx.org</url>
+                <inboundblogs>271</inboundblogs>
+                <inboundlinks>774</inboundlinks>
+                <lastupdate>2007-11-12 17:01:29 GMT</lastupdate>
+            </weblog>
+            <linkurl>http://www.simonecarletti.com</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Controrete - Search Marketing e dintorni</name>
+                <url>http://controrete.blog.excite.it</url>
+                <rssurl>http://feeds.feedburner.com/controrete/cFuo</rssurl>
+                <inboundblogs>1</inboundblogs>
+                <inboundlinks>1</inboundlinks>
+                <lastupdate>1970-01-01 00:00:00 GMT</lastupdate>
+            </weblog>
+            <linkurl>http://www.simonecarletti.com</linkurl>
+        </item>
+    </document>
+</tapi>

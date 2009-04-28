@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom'
+xmlns:media='http://search.yahoo.com/mrss/'
+xmlns:batch='http://schemas.google.com/gdata/batch'
+xmlns:yt='http://gdata.youtube.com/schemas/2007'
+xmlns:gd='http://schemas.google.com/g/2005'
+gd:etag='W/"Dk4FRn47eCp7ImA9WB9WEkg."'>
+<id>
+tag:youtube.com,2008:user:googledevelopers:subscription:Z1Lm-S9gkRQ</id>
+<published>2007-11-16T15:15:17.000-08:00</published>
+<updated>2007-11-16T15:15:17.000-08:00</updated>
+<category scheme='http://gdata.youtube.com/schemas/2007/subscriptiontypes.cat'
+term='channel' />
+<category scheme='http://schemas.google.com/g/2005#kind'
+term='http://gdata.youtube.com/schemas/2007#subscription' />
+<title>Videos published by : androiddevelopers</title>
+<content type='application/atom+xml;type=feed'
+src='http://gdata.youtube.com/feeds/api/users/androiddevelopers/uploads?v=2' />
+<link rel='related' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2' />
+<link rel='alternate' type='text/html'
+href='http://www.youtube.com/profile_videos?user=androiddevelopers' />
+<link rel='self' type='application/atom+xml'
+href='http://gdata.youtube.com/feeds/api/users/googledevelopers/subscriptions/Z1Lm-S9gkRQ?v=2' />
+<author>
+<name>GoogleDevelopers</name>
+<uri>
+http://gdata.youtube.com/feeds/api/users/googledevelopers</uri>
+</author>
+<yt:username>androiddevelopers</yt:username>
+<yt:countHint>50</yt:countHint>
+<media:thumbnail url='http://i2.ytimg.com/vi/1FJHYqE0RDg/default.jpg' />
+</entry>

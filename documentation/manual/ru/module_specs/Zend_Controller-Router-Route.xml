@@ -1,0 +1,206 @@
+<sect3 id="zend.controller.router.routes.standard">
+    <title>Zend_Controller_Router_Route</title>
+
+    <para>
+        <code>Zend_Controller_Router_Route</code> - стандартный маршрут
+        фреймворка. Он сочетает в себе легкость использования и гибкость
+        определения маршрутов. Каждый маршрут состоит в основном из карты URL
+        (статических и динамических частей (переменных)), и может быть
+        инициализирован со значениями по умолчанию и требованиями к переменным.
+    </para>
+
+    <para>
+        Давайте представим себе некое приложение, в котором нужно разместить
+        несколько информационных страниц об авторах. Мы хотим, чтобы адрес
+        <code>http://domain.com/author/martel</code> вел
+        на страницу с информацией об авторе с именем "martel". Маршрут для
+        обеспечения такой функциональности может выглядеть следующим образом:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'author/:username',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$router->addRoute('user', $route);
+]]>
+    </programlisting>
+
+    <para>
+        Первый параметр конструктора <code>Zend_Controller_Router_Route</code> -
+        определение маршрута, которое будет сопоставляться с URL. Определения
+        маршрутов содержат статические и динамические части, разделенные
+        символом косой черты ('/'). Статические части являются обычным текстом:
+        <code>author</code>. Динамические части, называемые переменными,
+        помечаются знаком двоеточия в начале имени переменной:
+        <code>:username</code>.
+    </para>
+
+    <note>
+        <title>Использование символов</title>
+        <para>
+            Текущая реализация позволяет использовать любые (за исключением
+            косой черты) символы в идентификаторе переменной,
+            но сильно рекомендуется использовать в них только символы,
+            допустимые для переменных в php. Есть вероятность, что в
+            будущем реализация изменится, и это может вызвать скрытые ошибки в
+            вашем коде.
+        </para>
+    </note>
+
+    <para>
+        Этот маршрут должен сработать, когда вы вводите
+        <code>http://domain.com/author/martel</code> в своем броузере, в этом
+        случае все его переменные будут добавлены в объект
+        <code>Zend_Controller_Request</code> и будут доступны в вашем
+        контроллере <code>ProfileController</code>.
+        Переменные, возвращаемые в этом примере, могут быть представленые в виде
+        следующего массива пар ключ/значение:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'username'   => 'martel',
+    'controller' => 'profile',
+    'action'     => 'userinfo'
+);
+]]>
+    </programlisting>
+
+    <para>
+        Затем <code>Zend_Controller_Dispatcher_Standard</code> должен вызвать
+        метод <code>userinfoAction()</code> вашего класса
+        <code>ProfileController</code> (используется модуль по умолчанию),
+        основываясь на этих значениях. Вы сможете получать эти переменные через
+        методы <code>Zend_Controller_Action::_getParam()</code> или
+        <code>Zend_Controller_Request::getParam()</code>.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+public function userinfoAction()
+{
+    $request = $this->getRequest();
+    $username = $request->getParam('username');
+
+    $username = $this->_getParam('username');
+}
+]]>
+    </programlisting>
+
+    <para>
+        Определение маршрута может содержать в себе еще один специальный символ
+        (метасимвол), представленный символом '*'. Он используется для сбора
+        параметров, как в маршруте Module, используемом по умолчанию
+        (пары переменная => значение, определенные в URI). Следующий маршрут
+        приближенно воспроизводит поведение маршрута Module:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    ':module/:controller/:action/*',
+    array('module' => 'default')
+);
+$router->addRoute('default', $route);
+]]>
+    </programlisting>
+
+    <sect4 id="zend.controller.router.routes.standard.variable-defaults">
+        <title>Значения переменных по умолчанию</title>
+
+        <para>
+            Любая переменная в маршруте может иметь значение по умолчанию, для
+            этого используется второй параметр конструктора
+            <code>Zend_Controller_Router_Route</code>. Этот параметр является
+            массивом с ключами, представляющими имена переменных, и со
+            значениями в качестве значений переменных по умолчанию:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array('year' => 2006)
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            Маршрут выше будет соответствовать URL-ам
+            <code>http://domain.com/archive/2005</code> и
+            <code>http://example.com/archive</code>. В последнем случае
+            переменная year будет иметь начальное значение по умолчанию 2006.
+        </para>
+
+        <para>
+            В этом примере переменная year будет добавлена в объект запроса.
+            Поскольку не была предоставлена информация для маршрутизации (не
+            определены параметры controller и action), то управление будет
+            передано контроллеру и методу действия, используемым по умолчанию
+            (оба определены в <code>Zend_Controller_Dispatcher_Abstract</code>).
+            Для того, чтобы сделать этот пример более полезным, нужно
+            передать действительные контроллер и действие в качестве значений по
+            умолчанию:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array(
+        'year'       => 2006,
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            В результате будет вызван метод <code>showAction()</code> класса
+            <code>ArchiveController</code>.
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.router.routes.standard.variable-requirements">
+        <title>Требования к переменным</title>
+
+        <para>
+            Можно передать конструктору
+            <code>Zend_Controller_Router_Route</code> третий параметр, в котором
+            установлены требования к переменным. Они определяются как части
+            регулярных выражений:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array(
+        'year'       => 2006,
+        'controller' => 'archive',
+        'action'     => 'show'
+    ),
+    array('year' => '\d+')
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            В случае маршрута, определенного таким образом, маршрутизатор будет
+            считать URL соответствующим ему только если переменная year
+            содержит числовые данные - например,
+            <code>http://domain.com/archive/2345</code>. URL вида
+            <code>http://example.com/archive/test</code> не будет
+            соответствовать этому маршруту, вместо этого будет произведен
+            переход к следующему маршруту в цепочке.
+        </para>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

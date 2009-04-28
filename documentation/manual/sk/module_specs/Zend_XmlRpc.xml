@@ -1,0 +1,18 @@
+<sect1 id="zend.xmlrpc.introduction">
+    <title>Introduction</title>
+
+    <para>
+        Na <ulink url="http://www.xmlrpc.com/">domovskej stránke</ulink> je XML-RPC
+        popisované ako "... vzdialené volanie procedúr pomocou HTTP ako transportnej
+        vrstvy a XML na prenos. XML-RPC je navrhnuté najjednoduchšie ako je to len možné
+        pri zachovaní možnosti prenášať a spracovávať komplexné dátové štruktúry.
+    </para>
+
+    <para>
+        Zend Framework poskytuje podporu pre vytváranie XML-RPC služieb a
+        XML-RPC serverov.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

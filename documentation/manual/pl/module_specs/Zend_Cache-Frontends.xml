@@ -1,0 +1,813 @@
+<sect1 id="zend.cache.frontends">
+    <title>Frontendy Zend_Cache</title>
+
+    <sect2 id="zend.cache.core">
+        <title>Zend_Cache_Core</title>
+        <sect3 id="zend.cache.core.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                <code>Zend_Cache_Core</code> jest specjalnym frontendem ponieważ
+                jest on jądrem modułu. Jest on podstawowym frontendem bufora i
+                jest rozszerzany przez inne klasy.
+            </para>
+            <note><para>
+                Wszystkie frontendy dziedziczą z klasy <code>Zend_Cache_Core</code>
+                więc jej metody i opcje (opisane niżej) są także dostępne w innych
+                frontendach, dlatego nie będą tu opisane.
+            </para></note>
+        </sect3>
+        <sect3 id="zend.cache.core.options">
+            <title>Dostępne opcje</title>
+            <para>
+                Te opcje są przekazywane do metody fabryki jako pokazano w
+                poprzednich przykładach.
+            </para>
+            <table id="zend.cache.frontends.core.options.table">
+                <title>Dostępne opcje</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>Opcja</entry>
+                            <entry>Typ danych</entry>
+                            <entry>Domyślna wartość</entry>
+                            <entry>Opis</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>caching</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  włącza / wyłącza buforowanie (może być użyteczne do
+                                  sprawdzania buforowanych skryptów)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>cache_id_prefix</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><code>null</code></entry>
+                              <entry>
+                                określa rzedrostek dla wszystkich identyfikatorów
+                                bufora, jeśli ma wartość <code>null</code>, nie
+                                będzie użyty żaden przedrostek. Przedrostek
+                                identyfikatorów zasadniczo tworzy przestrzeń nazw
+                                dla buforu, pozwalając na korzystanie z dzielonego
+                                bufora przez kilka aplikacji czy serwisów
+                                internetowych. Każda aplikacja czy serwis
+                                internetowy powinny używać innego przedrostka,
+                                więc określone identyfikatory będą mogły być
+                                użyte więcej niż raz.
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>lifetime</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>3600</code></entry>
+                              <entry>
+                                okres ważności bufora (w sekundach), jeśli ustawiony na
+                                <code>null</code>, bufor będzie ważny na zawsze
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>logging</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                jeśli ma wartość true, aktywowane jest logowanie za pomocą
+                                <code>Zend_Log</code> is activated (ale system jest wolniejszy)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>write_control</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                Włącza / wyłącza kontrolę zapisu (bufor jest odczytywany zaraz
+                                po zapisaniu aby wykryć uszkodzone wpisy), włączając kontrolę
+                                zapisu lekko zwolniesz zapisywanie bufora, ale nie będzie to
+                                miało wpływu na jego odczytywanie (może to wykryć niektóre
+                                uszkodzone pliki bufora, ale nie jest to perfekcyjna kontrola)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automatic_serialization</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                Włącza / wyłącza serializację, może być użyte do bezpośredniego
+                                zapisywania danych, które nie są łańcuchami znaków (ale jest to wolniejsze)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automatic_cleaning_factor</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>10</code></entry>
+                              <entry>
+                                Włącza / ustawia proces automatycznego czyszczenia (garbage collector):
+                                0 oznacza brak automatycznego czyszczenia, 1 oznacza systematyczne czyszczenie
+                                bufora, a x &gt; 1 oznacza automatyczne losowe czyszczenie 1 raz na x operacji
+                                zapisu.
+                              </entry>
+                          </row>
+                              <row>
+                              <entry><code>ignore_user_abort</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                jeśli ma wartość true, komponent ustawi flagę
+                                PHP ignore_user_abort wewnątrz metody save()
+                                aby zapobiec uszkodzeniom buforu w niektórych
+                                przypadkach
+                              </entry>
+                          </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.core.examples">
+            <title>Przykłady</title>
+            <para>
+                Przykład jest podany w dokumentacji na samym początku.
+            </para>
+            <para>
+                Jeśli w buforze przechowujesz tylko łańcuchy znakow (ponieważ z opcją "automatic_serialization" możliwe
+                jest przechowywanie wartości logicznych), możesz użyć bardziej kompaktowej konstrukcji:
+            </para>
+            <programlisting role="php"><![CDATA[
+// zakładamy, że mamy już obiekt $cache
+
+$id = 'myBigLoop'; // id bufora czyli "tego co chcemy buforować"
+
+if (!($data = $cache->load($id))) {
+    // brak bufora
+
+    $data = '';
+    for ($i = 0; $i < 10000; $i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+
+// [...] przetwarzaj dane $data (wyświetl je, przekaż itp.)
+]]>
+            </programlisting>
+            <para>
+                Jeśli chcesz buforować wiele bloków lub instancji danych, idea
+                jest ta sama:
+            </para>
+            <programlisting role="php"><![CDATA[
+// upewnij się, że używasz unikalnych identyfiikatorów:
+$id1 = 'foo';
+$id2 = 'bar';
+
+// blok 1
+if (!($data = $cache->load($id1))) {
+    // brak bufora
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+
+// to nigdy nie jest buforowane
+echo('NEVER CACHED! ');
+
+// blok 2
+if (!($data = $cache->load($id2))) {
+    // brak bufora
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . '!';
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+]]>
+
+            </programlisting>
+            <para>
+                Jeśli chcesz buforować specjalne wartości (np. wartości logiczne
+                przy włączonej opcji "automatic_serialization") lub puste
+                łańcuchy znaków, nie możesz używać uproszczonej konstrukcji
+                przedstawionej powyżej. Musisz jawnie sprawdzić rekord bufora.
+            </para>
+            <programlisting role="php"><![CDATA[
+// konstrukcja uproszczona (nie działa poprawnie dla pustych
+// łańcuchów znaków i wartości logicznych)
+if (!($data = $cache->load($id))) {
+
+    // brak bufora
+
+    // [...] tworzymy dane $data
+
+    $cache->save($data);
+
+}
+
+// pracujemy na danych $data
+
+// [...]
+
+// konstrukcja kompletna (działa zawsze)
+if (!($cache->test($id))) {
+
+    // brak bufora
+
+    // [...] tworzymy dane $data
+
+    $cache->save($data);
+
+} else {
+
+    // bufor został znaleziony
+
+    $data = $cache->load($id);
+
+}
+
+// pracujemy na danych $data
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.output">
+        <title>Zend_Cache_Frontend_Output</title>
+        <sect3 id="zend.cache.frontend.output.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                <code>Zend_Cache_Frontend_Output</code> jest frontendem przechwytującym
+                dane wyjściowe. Przejmuje on wyświetlanie danych wyjściowych w PHP
+                przechwytując wszystko co jest pomiędzy metodami <code>start()</code>
+                oraz <code>end()</code>.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.output.options">
+            <title>Dostępne opcje</title>
+            <para>
+                Ten frontend nie ma żadnych specyficznych opcji innych niż te
+                z <code>Zend_Cache_Core</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.output.examples">
+            <title>Przykłady</title>
+            <para>
+                Przykład jest podany w dokumentacji na samym początku. To są główne różnice:
+            </para>
+            <programlisting role="php"><![CDATA[
+// jeśli bufor nie istnieje, przechwytywane są dane wyjściowe
+if (!($cache->start('mypage'))) {
+
+    // wyświetlaj jak zawsze
+    echo 'Witaj! ';
+    echo 'To jest buforowane ('.time().') ';
+
+    $cache->end(); // kończy się wyświetlanie danych
+}
+
+echo 'To nie jest nigdy buforowane ('.time().').';
+]]>
+            </programlisting>
+            <para>
+                Używając tej formy bardzo łatwe jest ustawienie buforowania
+                danych wyjściowych w twoim aktualnie działającym projekcie przy
+                małej ilości przeróbek w kodzie lub przy ich braku.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.function">
+        <title>Zend_Cache_Frontend_Function</title>
+        <sect3 id="zend.cache.frontend.function.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                Frontend <code>Zend_Cache_Frontend_Function</code> buforuje
+                rezultaty wywołań funkcji. Posiada on jedną metodą nazwaną
+                <code>call()</code>, ktora przyjmuje nazwę funkcji oraz
+                parametry do wywołania w tablicy.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.function.options">
+            <title>Dostępne opcje</title>
+            <table>
+                <title>Dostępne opcje</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>Opcja</entry>
+                            <entry>Typ danych</entry>
+                            <entry>Domyślna wartość</entry>
+                            <entry>Opis</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cache_by_default</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  jeśli ma wartość true, wywołania funkcji będą
+                                  domyślnie buforowane
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cached_functions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  nazwy funkcji które mają być zawsze buforowane
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>non_cached_functions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  nazwy funkcji które nigdy nie mają być buforowane
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.function.examples">
+            <title>Przykłady</title>
+            <para>
+                Użycie funkcji <code>call()</code> jest takie samo jak użycie
+                funkcji <code>call_user_func_array()</code> w PHP:
+            </para>
+            <programlisting role="php"><![CDATA[
+$cache->call('veryExpensiveFunc', $params);
+
+// $params jest tablicą
+// przykładowo aby wywołać (z buforowaniem) funkcję veryExpensiveFunc(1, 'foo', 'bar'), użyj
+// $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
+]]>
+            </programlisting>
+            <para>
+                Frontend <code>Zend_Cache_Frontend_Function</code> jest na tyle sprytny,
+                że buforuje zarówno wartość zwracaną przez funkcję, jak i wszystkie
+                dane wyjściowe, które ona wypisuje.
+            </para>
+            <note><para>
+                Możesz przekazać dowolną wbudowaną funkcję lub zdefiniowną przez
+                użytkownika z wyjątkiem <code>array()</code>, <code>echo()</code>,
+                <code>empty()</code>, <code>eval()</code>, <code>exit()</code>,
+                <code>isset()</code>, <code>list()</code>, <code>print()</code>
+                oraz <code>unset()</code>.
+            </para></note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.class">
+        <title>Zend_Cache_Frontend_Class</title>
+        <sect3 id="zend.cache.frontend.class.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                Frontend <code>Zend_Cache_Frontend_Class</code> różnie się od
+                frontendu <code>Zend_Cache_Frontend_Function</code> tym, że
+                umożliwia buforowanie wywołań metod obiektów (także statycznych)
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.class.options">
+            <title>Dostępne opcje</title>
+            <table  id="zend.cache.frontends.class.options.table">
+                <title>Dostępne opcje</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>Opcja</entry>
+                            <entry>Typ danych</entry>
+                            <entry>Domyślna wartość</entry>
+                            <entry>Opis</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cached_entity</code> (wymagane)</entry>
+                              <entry><code>mixed</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  jeśli ustawiona jest nazwa klasy, będziemy buforować klasę
+                                  abstrakcyjną i używać tylko statycznych wywołań; jeśli ustawiony
+                                  jest obiekt będziemy buforować metody tego obiektu
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cache_by_default</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  jeśli ma wartość true, wywołania będą domyślnie buforowane
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cached_methods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  nazwy metod które mają być zawsze buforowane
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>non_cached_methods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  nazwy metod które nie mają być nigdy buforowane
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.class.examples">
+            <title>Przykłady</title>
+            <para>
+                Na przykład, aby buforować statyczne wywołania:
+            </para>
+            <programlisting role="php"><![CDATA[
+class Test {
+
+    // metoda statyczna
+    public static function foobar($param1, $param2) {
+        echo "foobar_output($param1, $param2)";
+        return "foobar_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cached_entity' => 'Test' // Nazwa klasy
+);
+// [...]
+
+# buforowane wywołanie
+$result = $cache->foobar('1', '2');
+]]>
+            </programlisting>
+            <para>
+                Aby buforować klasyczne wywołania metod:
+            </para>
+            <programlisting role="php"><![CDATA[
+class Test {
+
+    private $_string = 'hello !';
+
+    public function foobar2($param1, $param2) {
+        echo($this->_string);
+        echo "foobar2_output($param1, $param2)";
+        return "foobar2_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cached_entity' => new Test() // instancja klasy
+);
+// [...]
+
+# buforowane wywołanie
+$result = $cache->foobar2('1', '2');
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.file">
+        <title>Zend_Cache_Frontend_File</title>
+        <sect3 id="zend.cache.frontends.file.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                <code>Zend_Cache_Frontend_File</code> jeest frontendem działającym
+                w oparciu o datę modyfikacji "głównego pliku". Jest to bardzo
+                interesujące, na przykład przy zagadnieniach związanych z konfiguracją
+                czy szablonami.
+            </para>
+            <para>
+                Na przykład, jeśli masz plik konfiguracyjny XML, który jest analizowany
+                przez funkcję zwracającą obiekt konfiguracji (na przykład <code>Zend_Config</code>).
+                Za pomocą frontendu <code>Zend_Cache_Frontend_File</code>, możesz przechować
+                obiekt konfiguracji w buforze (aby zapobiec analizowaniu pliku konfiguracyjnego
+                XML za każdym razem), ale przy zależności od "głównego pliku".
+                Więc jeśli plik konfiguracyjny XML zostanie zmodyfikowany, bufor natychmiast
+                straci ważność.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.options">
+            <title>Dostępne opcje</title>
+            <table id="zend.cache.frontends.file.options.table">
+                <title>Dostępne opcje</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>Opcja</entry>
+                            <entry>Typ danych</entry>
+                            <entry>Domyślna wartość</entry>
+                            <entry>Opis</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>master_file (mandatory)</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><code></code></entry>
+                              <entry>
+                                  kompletna ścieżka i nazwa głównego pliku
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.examples">
+            <title>Przykłady</title>
+            <para>
+                Użycie tego frontendu jest takie same jak <code>Zend_Cache_Core</code>.
+                Nie ma potrzeby zamieszczania specyficznego przykładu - jedyną rzeczą
+                do zrobienia jest zdefiniowanie pliku <code>master_file</code> gdy
+                używamy metody fabryki.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.page">
+        <title>Zend_Cache_Frontend_Page</title>
+        <sect3 id="zend.cache.frontends.page.introduction">
+            <title>Wprowadzenie</title>
+            <para>
+                Frontend <code>Zend_Cache_Frontend_Page</code> działa jak <code>Zend_Cache_Frontend_Output</code>
+                ale jest zaprojektowany dla kompletnej strony. Nie jest możliwe użycie <code>Zend_Cache_Frontend_Page</code>
+                do buforowania pojedynczego bloku.
+            </para>
+            <para>
+                Z drugiej strony, identyfikator bufora jest obliczany na podstawie
+                <code>$_SERVER['REQUEST_URI']</code> oraz (zależnie od opcji)
+                <code>$_GET</code>, <code>$_POST</code>, <code>$_SESSION</code>, <code>$_COOKIE</code>, <code>$_FILES</code>.
+                Jeszcze lepiej, masz tylko jedną metodę do wywołania (<code>start()</code>)
+                ponieważ metoda <code>end()</code> jest wywoływana w pełni automatycznie
+                na końcu strony.
+            </para>
+            <para>
+                Obecnie nie jest to zaimplementowane, ale planujemy dodać warunkowy system HTTP
+                w celu oszczędzania transferu (system wyśle nagłówek HTTP 304 Not Modified jeśli
+                bufor istnieje i gdy przeglądarka ma aktualną wersję bufora).
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.options">
+            <title>Dostępne opcje (for this frontend in Zend_Cache factory)</title>
+            <table id="zend.cache.frontends.page.options.table">
+                <title>Dostępne opcje</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>Opcja</entry>
+                            <entry>Typ danych</entry>
+                            <entry>Domyślna wartość</entry>
+                            <entry>Opis</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>http_conditional</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  użyj systemu http_conditional (obecnie jeszcze nie zaimplementowane)
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>debug_header</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  jeśli ma wartość true, testowy tekst jest dodawany przed każdą buforowaną stroną
+                              </entry>
+                         </row>
+                         <row>
+                               <entry><code>default_options</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array(...zobacz niżej...)</code></entry>
+                              <entry>
+                                  asocjacyjna tablica domyślnych opcji:
+                                  <itemizedlist>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) cache</code> :
+                                              bufor jest włączony jeśli ma wartość true
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość false) cache_with_get_variables</code> :
+                                              jeśli ma wartość true, buforowanie jest włączone nawet wtedy gdy są jakieś
+                                              zmienne w tablicy <code>$_GET</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość false) cache_with_post_variables</code> :
+                                              jeśli ma wartość true, buforowanie jest włączone nawet wtedy gdy są jakieś
+                                              zmienne w tablicy <code>$_POST</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość false) cache_with_session_variables</code> :
+                                              jeśli ma wartość true, buforowanie jest włączone nawet wtedy gdy są jakieś
+                                              zmienne w tablicy <code>$_SESSION</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość false) cache_with_files_variables</code> :
+                                              jeśli ma wartość true, buforowanie jest włączone nawet wtedy gdy są jakieś
+                                              zmienne w tablicy <code>$_FILES</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość false) cache_with_cookie_variables</code> :
+                                              jeśli ma wartość true, buforowanie jest włączone nawet wtedy gdy są jakieś
+                                              zmienne w tablicy <code>$_COOKIE</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) makeI_id_with_get_variables</code> :
+                                              jeśli ma wartość true, identyfikator bufora będzie zależał od
+                                              zawartości tablicy <code>$_GET</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) make_id_with_post_variables</code> :
+                                              jeśli ma wartość true, identyfikator bufora będzie zależał od
+                                              zawartości tablicy <code>$_POST</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) make_id_with_session_variables</code> :
+                                              jeśli ma wartość true, identyfikator bufora będzie zależał od
+                                              zawartości tablicy <code>$_SESSION</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) make_id_with_files_variables</code> :
+                                              jeśli ma wartość true, identyfikator bufora będzie zależał od
+                                              zawartości tablicy <code>$_FILES</code>
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, domyślnie wartość true) make_id_with_cookie_variables</code> :
+                                              jeśli ma wartość true, identyfikator bufora będzie zależał od
+                                              zawartości tablicy <code>$_COOKIE</code>
+                                          </para>
+                                      </listitem>
+                                  </itemizedlist>
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>regexps</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array()</code></entry>
+                              <entry>
+                                    tablica asocjacyjna do ustawienia opcji tylko dla pewnych adresów REQUEST_URI,
+                                    klucze są wyrażeniami regularnymi (PCRE), wartości są asocjacyjnymi tablicami
+                                    ze specyficznymi opcjami do ustawienia gdy wyrażenie regularne zostanie
+                                    dopasowane do $_SERVER['REQUEST_URI'] (zobacz default_options aby zobaczyć listę
+                                    wszystkich dostępnych opcji) ; jeśli kilka wyrażen regularnych będzie pasowało
+                                    do $_SERVER['REQUEST_URI'], zostanie użyte tylko te ostatnie
+                              </entry>
+                         </row>
+                         <row>
+                             <entry><code>memorize_headers</code></entry>
+                             <entry><code>array</code></entry>
+                             <entry><code>array()</code></entry>
+                             <entry>
+                                 tablica łańcuchów znaków odpowiadająca nazwom nagłówków
+                                 HTTP. Wymienione nagłówki będą przechowane wraz
+                                 z danymi buforu i odtworzone gdy bufor zostanie użyty
+                             </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.examples">
+            <title>Przykłady</title>
+            <para>
+                Użycie Zend_Cache_Frontend_Page jest naprawdę łatwe:
+            </para>
+            <programlisting role="php"><![CDATA[
+// [...] // wymagane, konfiguracja i fabryka
+
+$cache->start();
+// jeśli bufor jest trafiony, wynik jest wysyłany do przeglądaki a skrypt tutaj kończy działanie
+
+// reszta strony
+]]>
+            </programlisting>
+            <para>
+                bardziej kompleksowy przykład, który pokazuje sposób centralnego
+                zarządzania buforowaniem w pliku ładującym (przykładowo do użycia
+                z klasą Zend_Controller)
+            </para>
+            <programlisting role="php"><![CDATA[
+/**
+ * Powinieneś unikać tworzenia dużej ilości kodu przed sekcją buforowania na
+ * przykład, w celu optymalizacji, instrukcje "require_once" lub
+ * "Zend_Loader::loadClass" powinny znajdować się za sekcją buforowania
+ */
+
+$frontendOptions = array(
+   'lifetime' => 7200,
+   'debug_header' => true, // dla testów
+   'regexps' => array(
+       // buforuj cały kontroler IndexController
+       '^/$' => array('cache' => true),
+
+       // buforuj cały kontroler IndexController
+       '^/index/' => array('cache' => true),
+
+       // nie buforuj kontrolera ArticleController...
+       '^/article/' => array('cache' => false),
+
+       // ...ale buforuj akcję "view"
+       '^/article/view/' => array(
+           // kontrolera ArticleController
+           'cache' => true,
+
+           // i buforuj gdy są dostępne zmienne $_POST
+           'cache_with_post_variables' => true,
+
+           // (ale bufor będzie zależał od tablicy $_POST)
+           'make_id_with_post_variables' => true,
+       )
+   )
+);
+
+$backendOptions = array(
+    'cache_dir' => '/tmp/'
+);
+
+// pobieranie obiektu Zend_Cache_Frontend_Page
+$cache = Zend_Cache::factory('Page',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+
+$cache->start();
+// jeśli bufor jest trafiony, wynik jest wysyłany do przeglądaki
+// a skrypt tutaj kończy działanie
+
+// [...] koniec pliku uruchamiającego
+// te linie nie będą wykonane jeśli bufor jest trafiony
+]]>
+            </programlisting>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.cancel">
+            <title>Metoda zaniechania buforowania</title>
+            <para>
+                Z powodu wymagań projektowych, w niektórych przypadkach (na przykład
+                gdy używamy kodów innych niż HTTP/200), możesz potrzebować zaniechać
+                proces buforowania. Dlatego dla tego frontendu udostępniamy metodę cancel().
+            </para>
+            <programlisting role="php"><![CDATA[
+// [...] // konfiguracja itp.
+
+$cache->start();
+
+// [...]
+
+if ($someTest) {
+    $cache->cancel();
+    // [...]
+}
+
+// [...]
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+</sect1>

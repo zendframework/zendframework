@@ -1,0 +1,155 @@
+<sect3 id="zend.view.helpers.initial.headstyle">
+    <title>HeadStyle Helper</title>
+
+    <para>
+        O elemento HTML <code>&lt;style&gt;</code> é usado para incluir
+        folhas de estilo CSS de forma inline no elemento HTML <code>&lt;head&gt;</code>.
+    </para>
+
+    <note>
+        <title>Use o HeadLink para "linkar" arquivos CSS</title>
+
+        <para>
+            O <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
+            deve ser usado para criar elementos <code>&lt;link&gt;</code> para
+            a inclusão de folhas de estilo externas. <code>HeadScript</code> é usado quando
+            você deseja definir folhas de estilo inline.
+        </para>
+    </note>
+
+    <para>
+        O assistente <code>HeadStyle</code> dá suporte aos seguintes métodos para a configuração
+        e adição de declarações de folhas de estilo:
+    </para>
+
+    <itemizedlist>
+        <listitem><para><code>appendStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>prependStyle($content, $attributes =
+                    array())</code></para></listitem>
+        <listitem><para><code>setStyle($content, $attributes =
+                    array())</code></para></listitem>
+    </itemizedlist>
+
+    <para>
+        Em todos os casos, <code>$content</code> é a verdadeira declaração CSS.
+        $attributes são quaisquer atributos adicionais que você dejesa prover para a
+        tag <code>style</code>: lang, title, media, ou dir são todos admissíveis.
+    </para>
+
+    <para>
+        <code>HeadStyle</code> também permite a captura de declarações de estilo; isso
+        pode ser útil se você quiser criar as declarações através de programação,
+        e então colocalas em outro lugar. A utilização disso será mostrada em um exemplo abaixo.
+    </para>
+
+    <para>
+        Finalmente, você pode usar o método <code>headStyle()</code> para
+        acrescentar rapidamente elementos de declaração; a assinatura para isso é
+        <code>headStyle($content$placement = 'APPEND', $attributes = array())</code>.
+        <code>$placement</code> deve ser 'APPEND', 'PREPEND', ou 'SET'.
+    </para>
+
+    <para>
+        <code>HeadStyle</code> sobrescreve <code>append()</code>,
+        <code>offsetSet()</code>, <code>prepend()</code>, e <code>set()</code>
+        para forçar o uso dos métodos especiais listados acima. Internamente
+        ele armazena cada item como um token <code>stdClass</code> , que depois
+        é serializado usando o método <code>itemToString()</code>. Isso permite
+        que você faça verificações nos itens da pilha, e opcionalmente modifique
+        estes itens simplesmente modificando o objeto retornado.
+    </para>
+
+    <para>
+        O assistente <code>HeadStyle</code> é uma implementação concreta
+        do assistente <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
+    </para>
+
+    <example id="zend.view.helpers.initial.headstyle.basicusage">
+        <title>Uso Básico do Assistente HeadStyle</title>
+
+        <para>
+            Você pode especificar uma nova tag de estilo a qualquer momento:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // adding scripts
+$this->headStyle()->appendStyle($styles);
+?>
+]]></programlisting>
+
+        <para>
+            A ordenação é muito importante no CSS; você talvez tenha que
+            assegurar que as declarações sejam carregadas em uma ordem específica
+            devido à ordem do CSS; use as diretivas append, prepend, e offsetSet
+            para lhe auxiliar nessa tarefa:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php // Putting styles in order
+
+// place at a particular offset:
+$this->headStyle()->offsetSetStyle(100, $customStyles);
+
+// place at end:
+$this->headStyle()->appendStyle($finalStyles);
+
+// place at beginning
+$this->headStyle()->prependStyle($firstStyles);
+?>
+]]></programlisting>
+
+        <para>
+            When you're finally ready to output all style declarations in your
+            layout script, simply echo the helper:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?= $this->headStyle() ?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.headstyle.capture">
+        <title>Capturing Style Declarations Using the HeadStyle Helper</title>
+
+        <para>
+            Sometimes you need to generate CSS style declarations
+            programmatically.  While you could use string concatenation,
+            heredocs, and the like, often it's easier just to do so by creating
+            the styles and sprinkling in PHP tags. <code>HeadStyle</code> lets
+            you do just that, capturing it to the stack:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?= $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+]]></programlisting>
+
+        <para>
+            The following assumptions are made:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    The style declarations will be appended to the stack. If you
+                    wish for them to replace the stack or be added to the top,
+                    you will need to pass 'SET' or 'PREPEND', respectively, as
+                    the first argument to <code>captureStart()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                    If you wish to specify any additional attributes for the
+                    <code>&lt;style&gt;</code> tag, pass them in an array as
+                    the third argument to <code>captureStart()</code>.
+            </para></listitem>
+        </itemizedlist>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

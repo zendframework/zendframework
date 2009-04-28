@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.xmlrpc.server">
+    <title>Zend_XmlRpc_Server</title>
+
+    <sect2 id="zend.xmlrpc.server.introduction">
+        <title>Einführung</title>
+
+        <para>
+            <classname>Zend_XmlRpc_Server</classname> ist als vollständiger XML-RPC Server geplant,
+            der den <ulink url="http://www.xmlrpc.com/spec">Spezifikationen auf
+            www.xmlrpc.com</ulink> folgt. Des Weiteren implementiert er die
+            Methode system.multicall(), welche dem Entwickler erlaubt, mehrere
+            Anfragen aufzureihen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.usage">
+        <title>Grundlegende Benutzung</title>
+
+        <para>
+            Ein Beispiel der grundlegendsten Benutzung:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$server = new Zend_XmlRpc_Server();
+$server->setClass('My_Service_Class');
+echo $server->handle();
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.structure">
+        <title>Server-Struktur</title>
+
+        <para>
+            <classname>Zend_XmlRpc_Server</classname> ist aus einer Vielfalt von Komponenten zusammengesetzt,
+            die vom Server selbst über Anfrage-, Antwort- und bis hin zu Fehler-Objekten
+            reicht.
+        </para>
+
+        <para>
+            Um den <classname>Zend_XmlRpc_Server</classname> zu erstellen, muss der Entwickler dem Server
+            eine oder mehrere Klassen oder Funktionen durch die Methoden
+            <code>setClass()</code> und <code>addFunction()</code> hinzufügen.
+        </para>
+
+        <para>
+            Wenn dieses erstmal erledigt wurde, kann man entweder der Methode
+            <classname>Zend_XmlRpc_Server::handle()</classname> ein
+            <classname>Zend_XmlRpc_Request</classname>-Objekt übergeben oder es wird ein
+            <classname>Zend_XmlRpc_Request_Http</classname> instanziert, falls keines angegeben
+            wurde - die Anfrage wird also aus <code>php://input</code> geladen.
+        </para>
+
+        <para>
+            <classname>Zend_XmlRpc_Server::handle()</classname> versucht daraufhin, den
+            zuständigen Handler, der durch die angeforderte Methode bestimmt wird,
+            auszuführen. Es wird entweder ein <classname>Zend_XmlRpc_Response</classname>-
+            oder ein <classname>Zend_XmlRpc_Server_Fault</classname>-Objekt zurückgegeben.
+            Beide Objekte besitzen eine Methode <code>__toString()</code>, die eine
+            valide XML-RPC Antwort im XML-Format zurückgibt, die direkt ausgegeben
+            werden kann.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.conventions">
+        <title>Konventionen</title>
+        <para>
+            <classname>Zend_XmlRpc_Server</classname> ermöglicht es dem Entwickler, Funktionen und
+            Methodenaufrufe als ausführbare XML-RPC Methoden anzufügen. Durch
+            <classname>Zend_Server_Reflection</classname> wird die Überwachung aller angefügten
+            Methoden - durch Nutzung der DocBlocks der Methoden und Funktionen
+            werden deren Hilfstexte und Signaturen ermittelt - ermöglicht.
+        </para>
+
+        <para>
+            XML-RPC Typen werden nicht zwingend 1:1 zu PHP-Typen konvertiert.
+            Dennoch wird versucht, einen passenden Typ, anhand der in
+            @param- und @return-Zeilen enthaltenen Werte, zu ermitteln. Einige
+            XML-RPC-Typen besitzen jedoch kein direktes Äquivalent und sollten
+            deshalb mittels PHPdoc auf einen XML-RPC-Typen hinweisen. Diese
+            beinhalten:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>dateTime.iso8601, ein String, der das Format
+                    YYYYMMDDTHH:mm:ss besitzt</para></listitem>
+            <listitem><para>base64, base64-kodierte Daten</para></listitem>
+            <listitem><para>struct, jegliches assoziatives Array</para></listitem>
+        </itemizedlist>
+
+        <para>
+            'Anbei ein Beispiel für einen solchen Hinweis:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+* Dies ist eine Beispielfunktion.
+*
+* @param base64 $val1 Base64-kodierte Daten
+* @param dateTime.iso8601 $val2 Ein ISO-Datum
+* @param struct $val3 ein assoziatives Array
+* @return struct
+*/
+function myFunc($val1, $val2, $val3)
+{
+}
+]]>
+        </programlisting>
+
+        <para>
+            PhpDocumentor validiert keine Typen, die in Parameter- oder
+            Rückgabewerten angegeben sind, weshalb dies keinen Einfluss auf
+            die API-Dokumentation hat. Das Angeben der Hinweise ist notwendig,
+            da der Server die, dem Methodenaufruf zugewiesenen, Parameter
+            validiert.
+        </para>
+
+        <para>
+            Es ist genauso gut möglich, mehrere Werte als Parameter oder für
+            die Rückgabe anzugeben; die XML-RPC Spezifikation schlägt sogar
+            vor, dass system.methodeSignatur ein Array, das alle möglichen
+            Methodensignaturen (d.h. jegliche Kombination aus Parametern und
+            Rückgabewerten) enthält, zurückgibt. Um dies zu erreichen, kann
+            man, wie man es normalerweise auch beim PhpDocumentor auch tun würde,
+            einfach den '|'-Operator nutzen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+* Dies ist eine Beispiel-Funktion.
+*
+* @param string|base64 $val1 String oder base64-kodierte Daten
+* @param string|dateTime.iso8601 $val2 String oder ein ISO-Datum
+* @param array|struct $val3 Normal indiziertes oder assoziatives Array
+* @return boolean|struct
+*/
+function myFunc($val1, $val2, $val3)
+{
+}
+]]>
+        </programlisting>
+
+        <para>
+            Dennoch eine Anmerkung: Das Erlaubung von vielen Signaturen kann
+            zu Verwirrung für Entwickler führen, die diese Services nutzen;
+            man sollte einer XML-RPC Methode deshalb nur eine Signatur zuweisen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.namespaces">
+        <title>Nutzen von Namensräumen</title>
+
+        <para>
+            XML-RPC besitzt ein Konzept für Namensräume; Grundlegend erlaubt es
+            das Gruppieren von XML-RPC-Methoden durch Punkt-separierte Namensräume.
+            Dies hilft, Namenkollisionen zwischen Methoden, die durch verschiedene
+            Klassen offeriert werden, zu verhindern. Beispielsweise kann der
+            XML-RPC-Server mehrere Methoden im 'system'-Namensraum nutzen:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>system.listMethods</para></listitem>
+            <listitem><para>system.methodHelp</para></listitem>
+            <listitem><para>system.methodSignature</para></listitem>
+        </itemizedlist>
+
+        <para>
+            Intern werden die Methoden zu Methoden desselben Namens in der
+            Klasse <classname>Zend_XmlRpc_Server</classname> umgeleitet.
+        </para>
+
+        <para>
+            Um angebotenen Methoden Namensräume hinzuzufügen, muss man lediglich beim
+            Hinzufügen der gewünschten Klasse oder Funktion einen Namensraum angeben:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Alle öffentlichten Methoden in My_Service_Class sind als
+// myservice.METHODNAME verfügbar
+$server->setClass('My_Service_Class', 'myservice');
+
+// Funktion 'somefunc' ist als funcs.somefunc ansprechbar.
+$server->addFunction('somefunc', 'funcs');
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.request">
+        <title>Eigene Request-Objekte</title>
+
+        <para>
+            Die meiste Zeit wird man einfach den Standard-Anfragetyp
+            <classname>Zend_XmlRpc_Request_Http</classname>, welcher im <classname>Zend_XmlRpc_Server</classname> enthalten ist,
+            nutzen. Jedoch gibt es gelegentlich Fälle, in denen XML-RPC über die
+            Kommandozeile (CLI), ein grafisches Benutzerinterface (GUI), eine
+            andere Umgebung oder beim Protokollieren von ankommenden Anfragen
+            erreichbar sein muss. Um dies zu bewerkstelligen, muss man ein
+            eigenes Anfrage-Objekt kreieren, das <classname>Zend_XmlRpc_Request</classname> erweitert.
+            Die wichtigste Sache, die man sich merken muss, ist sicherzustellen,
+            dass die Methoden getMethod() und getParams() implementiert sind,
+            so dass der XML-RPC-Server Informationen erhält, die er für
+            das Abfertigen einer Anfrage benötigt.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.response">
+        <title>Eigene Antwort-Objekte</title>
+
+        <para>
+            Ähnlich wie bei den Anfrage-Objekten, kann der <classname>Zend_XmlRpc_Server</classname> auch
+            eigene Antwortobjekte ausliefern; standardmäßig ist dies ein
+            <classname>Zend_XmlRpc_Response_Http-Objekt</classname>, das einen passenden Content-Type HTTP-Header
+            sendet, der für XML-RPC genutzt wird. Mögliche Nutzungen eines eigenen
+            Objekts sind z.B. das Protokollieren von Antworten oder das Senden der
+            Antworten zu STDOUT.
+        </para>
+
+        <para>
+            Um eine eigene Antwortklasse zu nutzen, muss
+            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> vor dem Aufruf von <code>handle()</code>
+            aufgerufen werden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.fault">
+        <title>Verarbeiten von Exceptions durch Fehler</title>
+
+        <para>
+            <classname>Zend_XmlRpc_Server</classname> fängt die, durch eine ausgeführte Methode erzeugten,
+            Exceptions and generiert daraus einen XML-RPC-Fehler als Antwort, wenn
+            eine Exception gefangen wurde. Normalerweise werden die Exceptionnachrichten
+            und -codes nicht in der Fehler-Antwort genutzt. Dies ist eine gewollte
+            Entscheidung um den Code zu schützen; viele Exceptions entblößen mehr
+            Informationen über den Code oder die Umgebung als der Entwickler
+            wünscht (ein Paradebeispiel beinhaltet Datenbankabstraktion- oder
+            die Zugriffsschichten-Exceptions).
+        </para>
+
+        <para>
+            Exception-Klassen können jedoch anhand einer Weißliste (Whitelist) als
+            Fehler-Antworten zurückgegeben werden. Dazu muss man lediglich die gewünschte
+            Exception mittels <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> zur
+            Weißliste hinzufügen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
+]]>
+        </programlisting>
+
+        <para>
+            Abgeleitete Exceptions lassen sich als ganze Familie von Exceptions
+            hinzufügen, indem man deren Basisklasse angibt. <classname>Zend_XmlRpc_Server_Exception</classname>s
+            sind immer auf der Weißliste zu finden, da sie spezielle Serverfehler
+            berichten (undefinierte Methoden, etc.).
+        </para>
+
+        <para>
+            Jede Exception, die nicht auf der Weißliste zu finden ist, generiert
+            eine Antwort mit dem '404' Code und der Nachricht 'Unknown error'.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.caching">
+        <title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title>
+        <para>
+            Das Hinzufügen einer Vielzahl von Klassen zu einer XML-RPC-Server Instanz
+            kann zu einem großen Ressourcenverbrauch führen; jede Klasse muss via
+            Reflection (<classname>Zend_Server_Reflection</classname>) inspiziert werden, welche eine Liste
+            von allen möglichen Signaturen, die der Server verwenden kann, zurückgibt.
+        </para>
+        <para>
+            Um die Einbußen zu reduzieren, kann <classname>Zend_XmlRpc_Server_Cache</classname> genutzt werden,
+            welche die Serverdefinitionen zwischen den Anfragen zwischenspeichert. Wenn
+            dies mit __autoload() kombiniert wird, kann es zu einem großen
+            Geschwindigkeitsschub kommen.
+        </para>
+        <para>
+            Ein Beispiel folgt:
+        </para>
+        <programlisting role="php"><![CDATA[
+function __autoload($class)
+{
+    Zend_Loader::loadClass($class);
+}
+
+$cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
+$server = new Zend_XmlRpc_Server();
+
+if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
+    require_once 'My/Services/Glue.php';
+    require_once 'My/Services/Paste.php';
+    require_once 'My/Services/Tape.php';
+
+    $server->setClass('My_Services_Glue', 'glue');   // glue. Namensraum
+    $server->setClass('My_Services_Paste', 'paste'); // paste. Namensraum
+    $server->setClass('My_Services_Tape', 'tape');   // tape. Namensraum
+
+    Zend_XmlRpc_Server_Cache::save($cacheFile, $server);
+}
+
+echo $server->handle();
+]]>
+        </programlisting>
+        <para>
+            Obiges Beispiel zeigt, wie der Server versucht, eine Definition
+            aus der Datei xmlrpc.cache, welches sich im selben Ordner wie das
+            Skript befindet, zu laden. Wenn dies nicht erfolgreich ist,
+            lädt es die Server-Klassen, die es benötigt, und fügt sie zum
+            Server hinzu. Danach wird versucht, die Cache-Datei mit der
+            Serverdefinition zu erstellen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.use">
+        <title>Nutzungsbeispiele</title>
+        <para>
+            Unten finden sich etliche Beispiele für eine Nutzung, die das
+            gesamte Spektrum der verfügbaren Optionen für den Entwickler darstellen.
+            These Beispiele bauen immer auf den vorangegangenen Beispielen auf.
+        </para>
+        <sect3 id="zend.xmlrpc.server.use.case1">
+            <title>Grundlegende Benutzung</title>
+
+            <para>
+                Folgendes Beispiel fügt eine Funktion als ausführbare XML-RPC-Methode
+                hinzu und verarbeitet eingehende Aufrufe.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Gibt die MD5-Summe eines Strings zurück.
+ *
+ * @param string $value Wert aus dem die MD5-Summe errechnet wird
+ * @return string MD5-Summe des Werts
+ */
+function md5Value($value)
+{
+    return md5($value);
+}
+
+$server = new Zend_XmlRpc_Server();
+$server->addFunction('md5Value');
+echo $server->handle();
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case2">
+            <title>Hinzufügen einer Klasse</title>
+
+            <para>
+                Das nächste Beispiel illustriert, wie man die öffentlichen Methoden
+                eienr Klasse als ausführbare XML-RPC-Methoden hinzufügt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$server = new Zend_XmlRpc_Server();
+$server->setClass('Services_Comb');
+echo $server->handle();
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case3">
+            <title>Mehrere Klassen unter der Nutzung von Namensräumen hinzufügen</title>
+
+            <para>
+                Das nächste Beispiel zeigt, wie man mehrer Klassen mit ihren eigenen
+                Namensräumen hinzufügt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+require_once 'Services/Comb.php';
+require_once 'Services/Brush.php';
+require_once 'Services/Pick.php';
+
+$server = new Zend_XmlRpc_Server();
+
+// Methoden werden als comb.* aufgerufen
+$server->setClass('Services_Comb', 'comb');
+
+// Methoden werden als brush.* aufgerufen
+$server->setClass('Services_Brush', 'brush');
+
+// Methoden werden als pick.* aufgerufen
+$server->setClass('Services_Pick', 'pick');
+echo $server->handle();
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case4">
+            <title>Bestimmen von Exceptions als valide Fehler-Antwort</title>
+
+            <para>
+                Im nächsten Beispiel wird gezeigt, wie man jede Exception, die von
+                Services_Exception abgeleitet wurde, als Fehler-Antwort nutzen kann,
+                dessen Nachricht und Code erhalten bleibt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+require_once 'Services/Exception.php';
+require_once 'Services/Comb.php';
+require_once 'Services/Brush.php';
+require_once 'Services/Pick.php';
+
+// Services_Exceptions dürfen als Fehler-Antwort genutzt werden
+Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
+
+$server = new Zend_XmlRpc_Server();
+
+// Methoden werden als comb.* aufgerufen
+$server->setClass('Services_Comb', 'comb');
+
+// Methoden werden als brush.* aufgerufen
+$server->setClass('Services_Brush', 'brush');
+
+// Methoden werden als pick.* aufgerufen
+$server->setClass('Services_Pick', 'pick');
+echo $server->handle();
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case5">
+            <title>Nutzen eines eigenen Anfrage-Objekts</title>
+
+            <para>
+                Im folgenden Beispiel wird ein eigenes Anfrage-Objekt instanziert
+                und durch den Server verarbeitet.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+require_once 'Services/Request.php';
+require_once 'Services/Exception.php';
+require_once 'Services/Comb.php';
+require_once 'Services/Brush.php';
+require_once 'Services/Pick.php';
+
+// Services_Exceptions dürfen als Fehler-Antwort genutzt werden
+Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
+
+$server = new Zend_XmlRpc_Server();
+
+// Methoden werden als comb.* aufgerufen
+$server->setClass('Services_Comb', 'comb');
+
+// Methoden werden als brush.* aufgerufen
+$server->setClass('Services_Brush', 'brush');
+
+// Methoden werden als pick.* aufgerufen
+$server->setClass('Services_Pick', 'pick');
+
+// Ein neues Anfrage-Objekt wird erstellt
+$request = new Services_Request();
+
+echo $server->handle($request);
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case6">
+            <title>Nutzen eigener Antwort-Objekte</title>
+
+            <para>
+                Das nachstehende Beispiel zeigt, wie man eine eigene Antwort-Klasse
+                als zurückgegebene Antwort für den Server setzt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+require_once 'Services/Request.php';
+require_once 'Services/Response.php';
+require_once 'Services/Exception.php';
+require_once 'Services/Comb.php';
+require_once 'Services/Brush.php';
+require_once 'Services/Pick.php';
+
+// Services_Exceptions dürfen als Fehler-Antwort genutzt werden
+Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
+
+$server = new Zend_XmlRpc_Server();
+
+// Methoden werden als comb.* aufgerufen
+$server->setClass('Services_Comb', 'comb');
+
+// Methoden werden als brush.* aufgerufen
+$server->setClass('Services_Brush', 'brush');
+
+// Methoden werden als pick.* aufgerufen
+$server->setClass('Services_Pick', 'pick');
+
+// Ein neues Anfrage-Objekt wird erstellt
+$request = new Services_Request();
+
+// Nutzen eigener Antwort-Klasse
+$server->setResponseClass('Services_Response');
+
+echo $server->handle($request);
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.use.case7">
+            <title>Zwischenspeichern von Serverdefinition zwischen den Anfragen</title>
+
+            <para>
+                Dieses Beispiel zeigt, wie man Serverdefinitionen zwischen verschiedenen
+                Anfragen zwischenspeichern kann.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Definieren einer Cache-Datei
+$cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
+
+// Services_Exceptions dürfen als Fehler-Antwort genutzt werden
+Zend_XmlRpc_Server_Fault::attachFaultException('Services_Exception');
+
+$server = new Zend_XmlRpc_Server();
+
+// Versucht die Serverdefinition aus dem Cache zu laden
+if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
+
+    // Methoden werden als comb.* aufgerufen
+    $server->setClass('Services_Comb', 'comb');
+
+    // Methoden werden als brush.* aufgerufen
+    $server->setClass('Services_Brush', 'brush');
+
+    // Methoden werden als pick.* aufgerufen
+    $server->setClass('Services_Pick', 'pick');
+
+    // Speichern des Caches
+    Zend_XmlRpc_Server_Cache::save($cacheFile, $server);
+}
+
+// Ein neues Anfrage-Objekt wird erstellt
+$request = new Services_Request();
+
+// Nutzen eigener Antwort-Klasse
+$server->setResponseClass('Services_Response');
+
+echo $server->handle($request);
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,20 @@
+<sect1 id="zend.mail.sending">
+    <title>通过SMTP发送邮件</title>
+    <para>
+        以SMTP方式发送邮件，<code>Zend_Mail_Transport_Smtp</code>对象需要在send()方法被调用之前创建并注册到<code>Zend_Mail</code>中去。当前脚本程序中所有使用<code>Zend_Mail::send()</code>发送的邮件，都将以SMTP方式传送：
+    </para>
+    <example id="zend.mail.sending.example-1">
+        <title>通过 SMTP 发送邮件</title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail/Transport/Smtp.php';
+$tr = new Zend_Mail_Transport_Smtp('mail.example.com');
+Zend_Mail::setDefaultTransport($tr);]]>
+       </programlisting>
+    </example>
+    <para>
+        <code>setDefaultTransport()</code>方法的调用和<code>Zend_Mail_Transport_Smtp</code>对象的构造代价并不昂贵。这两行可以添加在脚本程序的配置文件(例如config.inc或者类似文件)中，从而为整个脚本程序配置<code>Zend_Mail</code>类的行为。如此可以把配置信息从应用程序逻辑分离出来邮件是通过SMTP还是<ulink url="http://php.net/mail"><code>mail()</code></ulink>发送，使用什么邮件服务器等等。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

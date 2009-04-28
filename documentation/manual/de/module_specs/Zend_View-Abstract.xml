@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.view.abstract">
+    <title>Zend_View_Abstract</title>
+
+    <para>
+        <classname>Zend_View_Abstract</classname> ist die Basisklasse auf der <classname>Zend_View</classname>
+        aufbaut; <classname>Zend_View</classname> selbst erweitert Sie einfach und deklariert eine
+        konkrete Implementation der <code>_run()</code> Methode (welche durch <code>render()</code>
+        aufgerufen wird).
+    </para>
+
+    <para>
+        Viele Entwickler finden das Sie <classname>Zend_View_Abstract</classname> erweitern wollen um
+        eigene Funktionalitäten hinzuzufügen und daraus folgend in Probleme mit dessen Design
+        laufen, welches eine Anzahl an privaten Membern enthält. Dieses Dokument zielt darauf ab
+        die Entscheidung hinter diesem Design zu erklären.
+    </para>
+
+    <para>
+        <classname>Zend_View</classname> ist etwas wie eine Anti-Template Maschine und verwendet deswegen
+        PHP nativ für sein Templating. Als Ergebnis ist alles von PHP vorhanden und View Skripte
+        erweitern Ihre aufrufendes Objekt.
+    </para>
+
+    <para>
+        Es ist dieser letzte Punkt der relevant für die Design Entscheidung war. Intern macht
+        <classname>Zend_View::_run()</classname> folgendes:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+protected function _run()
+{
+    include func_get_arg(0);
+}
+]]>
+    </programlisting>
+
+    <para>
+        Als solches, haben die View Skripte Zugriff auf das aktuelle Objekt (<code>$this</code>),
+        <emphasis>und jede Methode oder jeden Member dieses Objekts</emphasis>. Da viele
+        Operationen von Membern mit limitierter Sichtbarkeit abhängen, führt das zu einem Problem:
+        Das View Skript können potentiell Aufrufe zu solchen Methoden tätigen, oder kritische
+        Eigenschaften direkt ändern. Angenommen ein Skript überschreibt  <code>$_path</code> oder
+        <code>$_file</code> unabsichtlich -- jeder weitere Aufruf zu <code>render()</code> oder
+        View Helfern würde fehlschlagen!
+    </para>
+
+    <para>
+        Glücklicherweise hat PHP5 eine Anwort auf das mit seiner Deklaration der Sichtbarkeit;
+        Auf private Member kann nicht durch Objekte zugegriffen werden wenn eine bestehende Klasse
+        erweitert wird. Das führt zum aktuellen Design: Da <classname>Zend_View</classname>
+        <classname>Zend_View_Abstract</classname> <emphasis>erweitert</emphasis> sind View Skripte limitiert
+        auf protected und public Methoden und Member von <classname>Zend_View_Abstract</classname> --
+        was effektiv die Aktionen beschränkt die durchgeführt werden können, und es erlaubt
+        kritische Bereiche vor Missbrauch durch View Skripte zu schützen.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

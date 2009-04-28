@@ -1,0 +1,18 @@
+<!--
+PUT /myFeed/1/1/
+   <atom:entry xmlns:atom="http://www.w3.org/2005/Atom">
+    <atom:id>1</atom:id>
+    <atom:link rel="edit" href="http://fubar.com/myFeed/1/1/"/>
+    <atom:updated>2005-05-23T16:26:00-08:00</atom:updated>
+    <atom:title type="text">Entry 1</atom:title>
+    <atom:content type="text">1.2</atom:content>
+   </atom:entry>
+      200 OK
+-->
+<atom:entry xmlns:atom="http://www.w3.org/2005/Atom">
+ <atom:id>1</atom:id>
+ <atom:link rel="edit" href="http://fubar.com/myFeed/1/2/"/>
+ <atom:updated>2005-05-23T16:27:00-08:00</atom:updated>
+ <atom:title type="text">Entry 1</atom:title>
+ <atom:content type="text">1.2</atom:content>
+</atom:entry>

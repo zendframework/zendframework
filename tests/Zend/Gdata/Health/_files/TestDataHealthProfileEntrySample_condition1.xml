@@ -1,0 +1,28 @@
+<Problem xmlns="urn:astm-org:CCR">
+  <Type />
+  <Description>
+    <Text>Malaria</Text>
+    <Code>
+      <Value>136.9</Value>
+      <CodingSystem>ICD9_Broader</CodingSystem>
+    </Code>
+    <Code>
+      <Value>084.6</Value>
+      <CodingSystem>ICD9</CodingSystem>
+    </Code>
+  </Description>
+  <Status>
+    <Text>ACTIVE</Text>
+  </Status>
+  <Source>
+    <Actor>
+      <ActorID>user@gmail.com</ActorID>
+      <ActorRole>
+        <Text>Patient</Text>
+      </ActorRole>
+    </Actor>
+  </Source>
+  <HealthStatus>
+    <Description />
+  </HealthStatus>
+</Problem>

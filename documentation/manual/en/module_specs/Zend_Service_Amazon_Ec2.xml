@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Zend_Service_Amazon_Ec2</title>
+
+    <sect2 id="zend.service.amazon.ec2.introduction">
+        <title>Introduction</title>
+        <para>
+            <classname>Zend_Service_Amazon_Ec2</classname> provides an interface to Amazon Elastic
+            Clound Computing (EC2).
+        </para>
+    </sect2>
+    <sect2 id="zend.service.amazon.ec2.whatis">
+        <title>What is Amazon Ec2?</title>
+        <para>
+            Amazon EC2 is a web service that enables you to launch and manage server instances
+            in Amazon's data centers using APIs or available tools and utilities. You can use
+            Amazon EC2 server instances at any time, for as long as you need, and for any legal
+            purpose.
+        </para>
+    </sect2>
+
+</sect1>

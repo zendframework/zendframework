@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Date: Wed, 22 Nov 2006 22:31:39 GMT
+Server: Apache
+X-Powered-By: PHP/5.1.6-pl8-gentoo
+Set-Cookie: foo=bar
+Set-Cookie: BOFH=Feature+was+not+beta+tested; expires=Thu, 23-Nov-2006 00:31:40 GMT
+Set-Cookie: time=1164234700
+Content-Length: 26
+Keep-Alive: timeout=15, max=100
+Connection: Keep-Alive
+Content-Type: text/html
+
+This is some response body

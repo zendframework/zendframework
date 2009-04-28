@@ -1,0 +1,64 @@
+<sect1 id="zend.view.abstract">
+    <title>Zend_View_Abstract</title>
+
+    <para>
+        Klasa <code>Zend_View_Abstract</code> jest klasą bazową w oparciu o
+        którą zbudowana jest klasa <code>Zend_View</code>; Klasa
+        <code>Zend_View</code> po prostu rozszerza ją i deklaruje implementację
+        metody <code>_run()</code> (która jest wywoływana przez metodę
+        <code>render()</code>).
+    </para>
+
+    <para>
+        Wielu programistów potrzebuje rozszerzyć obiekt
+        <code>Zend_View_Abstract</code> aby dodać własną funkcjonalność i
+        nieuniknione jest że napotykają problemy dotyczące projektu klasy, która
+        posiada wiele prywatnych zmiennych. Ten dokument ma wyjaśnić jakie
+        przesłanki stały za decyzjami podjętymi podczas projektowania komponentu.
+    </para>
+
+    <para>
+        <code>Zend_View</code> jest czymś w rodzaju systemu szablonów
+        używającego natywnej składni PHP. W rezultacie możliwe jest użycie w
+        skryptach widoków kodu PHP, a dodatkowo dziedziczą one zakres
+        wywołującego je obiektu.
+    </para>
+
+    <para>
+        Dlatego ten drugi punkt jest tak ważny dla decyzji podejmowanych
+        podczas projektowania. Wewnętrznie metoda <code>Zend_View::_run()</code>
+        wygląda tak:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+protected function _run()
+{
+    include func_get_arg(0);
+}
+]]>
+    </programlisting>
+
+    <para>
+        Skrypty widoków mają dostęp do obecnego obiektu (<code>$this</code>),
+        <emphasis>i wszystkich metod oraz zmiennych tego obiektu</emphasis>.
+        Z tego względu, że wiele operacji zależy od zmiennych prywatnych,
+        mogłoby to spowodować problem: skrypty widoków mogłyby
+        wywołać te metody lub bezpośrednio zmodyfikować krytyczne zmienne.
+        Wobraź sobie skrypt nadpisujący w niezamierzony sposób zmienną
+        <code>$_path</code> lub <code>$_file</code> -- wszystkie następne
+        wywołania metody <code>render()</code> lub helperów widoków przestałyby
+        działać!
+    </para>
+
+    <para>
+        Na szczęście w PHP 5 może to być rozwiązane dzięki deklaracjom
+        widoczności: prywatne zmienne nie są dostępne przez obiekty
+        rozszerzające daną klasę. Zostało to użyte w obecnym projekcie: z tego
+        względu, że klasa <code>Zend_View</code> <emphasis>rozszerza</emphasis>
+        klasę <code>Zend_View_Abstract</code>, skrypty widoku są ograniczone
+        tylko do metod i zmiennych chronionych oraz publicznych obiektu
+        <code>Zend_View_Abstract</code> -- efektywnie ograniczając akcje jakie
+        można przeprowadzić i pozwalając nam na zabezpiecznie krytycznych
+        obszarów przed nadużyciami w skryptach widoków.
+    </para>
+</sect1>

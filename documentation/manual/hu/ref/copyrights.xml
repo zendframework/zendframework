@@ -1,0 +1,13 @@
+<appendix id="copyrights">
+    <title>Szerzői jogi adatok</title>
+    <para>
+        A következő szerzői jogok vonatkoznak a Zend Framework részeire.
+    </para>
+    <para>
+        Copyright &#169; 2005-<?dbtimestamp format="Y"?>
+        Zend Technologies Inc. (<ulink url="http://www.zend.com" />)
+    </para>
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

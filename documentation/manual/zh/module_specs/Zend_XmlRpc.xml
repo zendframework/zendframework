@@ -1,0 +1,16 @@
+<sect1 id="zend.xmlrpc.introduction">
+    <title>简介</title>
+
+    <para>
+        从 <ulink url="http://www.xmlrpc.com/">XML-RPC 主页</ulink>上的描述可以了解到，XML-PRC 是
+        “使用 HTTP 作为传输协议、XML 作为编码方式的远程过程调用。在 XML-RPC
+        被设计得尽量简单的同时，又允许传递、处理和返回复杂的数据结构。”
+    </para>
+
+    <para>
+        Zend Framework 提供了调用远程 XML-RPC 服务或创建新的 XML-RPC 服务两种功能。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

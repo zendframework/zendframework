@@ -1,0 +1,22 @@
+<sect1 id="zend.mail.html-mails">
+    <title>E-mail w postaci HTML</title>
+    <para>
+        Aby wysłać e-mail w formacie HTML, ustaw treść za pomocą metody <code>setBodyHTML()</code>
+        zamiast <code>setBodyText()</code>. Typ MIME zostanie automatycznie ustawiony na
+        <code>text/html</code>. Jeśli używasz zarówno treści HTML jak i tekstowej to
+        automatycznie zostanie wygenerowana wiadomość o typie MIME <code>multipart/alternative</code>:
+    </para>
+    <example id="zend.mail.html-mails.example-1">
+        <title>Wysyłanie e-maila w postaci HTML</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('Testowy tekst');
+$mail->setBodyHtml('<b>Testowy</b> tekst');
+$mail->setFrom('somebody@example.com', 'Nadawca');
+$mail->addTo('somebody_else@example.com', 'Odbiorca');
+$mail->setSubject('Testowy temat');
+$mail->send();
+]]>
+        </programlisting>
+    </example>
+</sect1>

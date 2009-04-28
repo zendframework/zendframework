@@ -1,0 +1,199 @@
+<sect3 id="zend.controller.router.routes.standard">
+    <title>Zend_Controller_Router_Route</title>
+
+    <para>
+        <code>Zend_Controller_Router_Route</code> 是标准的框架路由。它结合了灵活路由定义的易用性。每个路由包含了基本的URL映射（静态的和动态的部分（变量））并且可以被缺省地初始化，也可以根据不同的要求初始化。
+    </para>
+
+    <para>
+        让我们想象一下我们假设的应用程序将需要一些广域内容作者的信息页面。我们想能够把浏览器指向<code>http://domain.com/author/martel</code>去看一个叫"martel"的信息。有这样功能的路由看起来是这样的：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'author/:username',
+    array(
+        'controller' => 'profile',
+        'action'     => 'userinfo'
+    )
+);
+
+$router->addRoute('user', $route);
+]]>
+    </programlisting>
+
+    <para>
+        在<code>Zend_Controller_Router_Route</code>里构造函数的第一个参数是路由的定义，它将匹配一个URL。路由定义包含静态的和动态部分，它们由正斜杠('/')符分开。静态部分只是简单的字符：<code>author</code>。动态部分，被叫做变量，用预设的冒号来标记变量名：<code>:username</code>。
+    </para>
+
+    <note>
+        <title>字符的的用法</title>
+        <para>
+            当前的实现允许你使用任何字符（正斜杠除外）作为变量标识符，但强烈建议只使用PHP使用的变量标识符。将来的实现也许会改变这个行为，它可能会导致在你的代码里有隐藏的bugs。
+        </para>
+    </note>
+
+    <para>
+        当你把浏览器指向<code>http://domain.com/author/martel</code>这个例子的路由应该被匹配，它所有的变量将被注入到<code>Zend_Controller_Request</code>对象并在<code>ProfileController</code>可访问。由这个例子返回的变量可能会被表示为如下键和值配对的数组：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'username'   => 'martel',
+    'controller' => 'profile',
+    'action'     => 'userinfo'
+);
+]]>
+    </programlisting>
+
+    <para>
+        稍后，基于这些值，<code>Zend_Controller_Dispatcher_Standard</code>应该调用<code>ProfileController</code>类（在缺省模块中）中的<code>userinfoAction()</code>方法。你将依靠<code>Zend_Controller_Action::_getParam()</code>或者<code>Zend_Controller_Request::getParam()</code>方法能够访问所有的变量：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+public function userinfoAction()
+{
+    $request = $this->getRequest();
+    $username = $request->getParam('username');
+
+    $username = $this->_getParam('username');
+}
+]]>
+    </programlisting>
+
+    <para>
+        路由定义可以包一个额外的特别字符－通配符－表示为'*'号。它被用来取得参数，和缺省模块路由类似（在URI中定义的var=>value）。下面的路由多多少少地模仿了模块路由的行为：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    ':module/:controller/:action/*',
+    array('module' => 'default')
+);
+$router->addRoute('default', $route);
+]]>
+    </programlisting>
+
+    <sect4 id="zend.controller.router.routes.standard.variable-defaults">
+        <title>变量缺省</title>
+
+        <para>
+            在路由中每个变量可以有一个缺省值，这就是<code>Zend_Controller_Router_Route</code>中构造函数使用的第二个变量。这个参数是一个数组，在数组中键表示变量名，值就是期望的缺省值：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array('year' => 2006)
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            上述路由将匹配象<code>http://domain.com/archive/2005</code>和<code>http://example.com/archive</code>的URLs。对于后者变量year将有一个初始的缺省值为2006。
+        </para>
+
+        <para>
+            这个例子将导致注入一个year变量给请求对象。应为没有路由信息出现（没有控制器和动作参数被定义），应用程序将被派遣给缺省的控制器和动作方法（它们都在<code>Zend_Controller_Dispatcher_Abstract</code>被定义）。为使它更可用，你必须提供一个有效的控制器和动作作为路由的缺省值：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array(
+        'year'       => 2006,
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            这个路由将导致派遣给<code>ArchiveController</code>类的<code>showAction()</code>方法。
+        </para>
+
+    </sect4>
+
+    <sect4 id="zend.controller.router.routes.standard.variable-requirements">
+        <title>变量请求</title>
+
+        <para>
+            当变量请求被设定，第三个参数可以加给<code>Zend_Controller_Router_Route</code>的构造函数。这些被定义为正则表达式的一部分：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    'archive/:year',
+    array(
+        'year'       => 2006,
+        'controller' => 'archive',
+        'action'     => 'show'
+    ),
+    array('year' => '\d+')
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            用上述定义的路由，路由器仅当year变量包含数字数据将匹配它，例如<code>http://domain.com/archive/2345</code>。象<code>http://example.com/archive/test</code>这样的URL将不被匹配并且控制将被传递给在链中的下一个路由。
+        </para>
+    </sect4>
+
+    <sect4 id="zend.controller.router.routes.standard.hostname-routing">
+        <title> 主机名路由 </title>
+
+        <para>
+            你也可以使用主机名做路由匹配。对简单的匹配使用静态主机名选项：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    array(
+        'host' => 'blog.mysite.com',
+        'path' => 'archive'
+    ),
+    array(
+        'module'     => 'blog',
+        'controller' => 'archive',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+        </programlisting>
+
+        <para>
+            如果你想匹配参数在主机名里，使用 regex 选项。在下面例子中，子域为动作控制器被用作用户名参数。
+            当组装路由时，你可以给出用户名为参数，就像你用其它路径参数一样：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route(
+    array(
+        'host' => array(
+            'regex'   => '([a-z]+).mysite.com',
+            'reverse' => '%s.mysite.com'
+            'params'  => array(
+                1 => 'username'
+            )
+        ),
+        'path' => ''
+    ),
+    array(
+        'module'     => 'users',
+        'controller' => 'profile',
+        'action'     => 'index'
+    )
+);
+$router->addRoute('profile', $route);
+]]>
+        </programlisting>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

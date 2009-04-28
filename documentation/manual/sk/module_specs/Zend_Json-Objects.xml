@@ -1,0 +1,40 @@
+<sect1 id="zend.json.objects">
+    <title>JSON objekty</title>
+    <para>
+        Keď sa serializuje PHP objekt na JSON objekt všetky verejné vlastnosti
+        sú zahrnuté vo výslednom objekte.
+    </para>
+    <para>
+        JSON nedovoľuje referencie na objekty a teda je potrebné dať pozor na objekty
+        s rekurzívnymi referenciami. Ak máte problém s rekurziou, môžete nastaviť
+        druhy nepovinný parameter pri volaniach <code>Zend_Json::encode()</code> a
+        <code>Zend_Json_Encoder::encode()</code>, ktorý zisťuje rekurziu - ak je objekt
+        serializovaný druhý raz bude vyvolaná výnimka.
+    </para>
+    <para>
+        Deserializácia JSON objektov nie je jednoduchá, pretože Javascript objekty
+        sú podobné asociatívnym poliam v PHP. Niekto navrhuje odovzdať meno triedy
+        a následnej vytvoriť jej inštanciu, ktorá bude obsahovať vlastnosti a hodnoty
+        z JSON objektu - ostatným sa to zdá ako značná bezpečnostná diera.
+    </para>
+    <para>
+        <code>Zend_Json</code> primárne vracia asociatívne pole, ak chcete aby bol
+        vrátený objekt, môžete to urobiť nasledovne:
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+// Decode objects as objects
+$phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
+?>]]></programlisting>
+    <para>
+        Všetky objekty sú takto deserializované ako <code>StdClass</code> a ich
+        vlastnosti zodpovedajú vlastnostiam a ich hodnotám z JSON objektu.
+    </para>
+    <para>
+        Zend Framework prenecháva rozhodnutie ako nakladať z deserializovanými objektami
+        na vývojára. Ak je potrebné vytvoriť špecifický objekt, stále je to možné
+        urobiť priamo v kóde a použiť hodnoty získane z <code>Zend_Json</code>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

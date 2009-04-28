@@ -1,0 +1,124 @@
+<sect1 id="zend.search.lucene.java-lucene">
+  <title>Interoperando com Java Lucene</title>
+
+  <sect2 id="zend.search.lucene.index-creation.file-formats">
+    <title>Formatos de arquivo</title>
+
+    <para>Arquivos Zend_Search_Lucene são arquivos de índice binários
+    compatíveis com a versão 1.4 ou superior do Lucene.</para>
+
+    <para>Uma descrição detalhada deste formato está disponível aqui: <ulink
+    url="http://lucene.apache.org/java/docs/fileformats.html"></ulink>.</para>
+  </sect2>
+
+  <sect2 id="zend.search.lucene.index-creation.index-directory">
+    <title>Diretório índice</title>
+
+    <para>Após a criação do índice, o diretório índice conterá os seguintes
+    arquivos:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>O arquivo <filename>segments</filename> contém uma lista de
+        segmentos de índice.</para>
+      </listitem>
+
+      <listitem>
+        <para>Os arquivos <filename>*.cfs</filename> contém segmentos de
+        índice. Nota! Um índice otimizado terá apenas um único
+        segmento.</para>
+      </listitem>
+
+      <listitem>
+        <para>O arquivo <filename>deletable</filename> contém uma lista de
+        arquivos que não são mais utilizados pelo índice, mas que não puderam
+        ser removidos.</para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+
+  <sect2 id="zend.search.lucene.java-lucene.source-code">
+    <title>Código fonte Java</title>
+
+    <para>A listagem do programa Java abaixo oferece um exemplo de como
+    indexar um arquivo usando Java Lucene:</para>
+
+    <programlisting role="java">
+/**
+* Index creation:
+*/
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.document.*;
+
+import java.io.*
+
+...
+
+IndexWriter indexWriter = new IndexWriter("/data/my_index",
+                                          new SimpleAnalyzer(), true);
+
+...
+
+String filename = "/path/to/file-to-index.txt"
+File f = new File(filename);
+
+Document doc = new Document();
+doc.add(Field.Text("path", filename));
+doc.add(Field.Keyword("modified",DateField.timeToString(f.lastModified())));
+doc.add(Field.Text("author", "unknown"));
+FileInputStream is = new FileInputStream(f);
+Reader reader = new BufferedReader(new InputStreamReader(is));
+doc.add(Field.Text("contents", reader));
+
+indexWriter.addDocument(doc);
+        </programlisting>
+  </sect2>
+
+  <sect2 id="zend.search.lucene.java-lucene.jar">
+    <title>Usando LuceneIndexCreation.jar</title>
+
+    <para>Para acelerar o aprendizado do Zend_Search_Lucene, rode o arquivo
+    JAR (Java) abaixo, conforme o exemplo, para gerar um índice a partir da
+    linha de comando. Para maiores informações sobre arquivos JAR visite:
+    <ulink
+    url="http://java.sun.com/docs/books/tutorial/jar/basics/index.html"></ulink>.</para>
+
+    <para>O programa LuceneIndexCreation.jar processa arquivos de texto,
+    gerando índices a partir deles . Utilização: <programlisting role="java">
+    java -jar LuceneIndexCreation.jar [-c] [-s] &lt;document_dir&gt; &lt;index_dir&gt;
+    -c   - force index to be case sensitive
+    -s   - store content in the index
+    </programlisting> Este comando processa o diretório
+    <code>&lt;document_dir&gt;</code>, incluíndo todos os seus subdiretórios,
+    produzindo um índice Lucene. O índice é um conjunto de arquivos que serão
+    armazenados em um diretório reservado especificado por
+    <code>&lt;index_dir&gt;</code>.</para>
+
+    <para>Para cada documento a ser indexado, LuceneIndexCreation cria um
+    objeto documento contendo três campos: um campo
+    <emphasis>contents</emphasis> que armazena o corpo do documento, um campo
+    <emphasis>modified</emphasis> indicando a hora de modificação do arquivo,
+    e um campo <emphasis>path</emphasis> contendo o nome e caminho completo
+    para o arquivo.</para>
+
+    <para>O parâmetro <option>-c</option>, quando especificado, força o índice
+    a ser sensível à caixa. Se omitido, todos os termos serão convertidos para
+    caractéres minúsculos antes de serem adicionados ao índice.</para>
+
+    <para>O parâmetro <option>-s</option>, determina que o campo
+    <code>contents</code> seja gravado no índice para ser retornado junto com
+    os campos <code>path</code> e <code>modified</code>.</para>
+
+    <para>Se omitido, <code>contents</code> será indexado e <code>path</code>
+    e <code>modified</code> serão armazenados. Neste caso o conteúdo do
+    documento deverá ser recuperado a partir de uma fonte original indicada
+    pelo campo <code>path</code>.</para>
+
+    <para>Seja criterioso ao usar a opção <option>-s</option>, pois ela
+    aumenta o tamanho do índice em cerca de cinco vezes
+    aproximadamente.</para>
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,51 @@
+<sect1 id="zend.mail.attachments">
+    <title> 附件 </title>
+    <para>
+        使用<code>createAttachment()</code>方法可以将文件附加到邮件中。<code>Zend_Mail</code>会缺省地认为该文件是二进制对象(application/octet-stream)，以 base64编码传输, 并且作为邮件的附件处理。通过传递额外的参数给<code>createAttachment()</code>方法可以覆盖上述缺省设定：
+    </para>
+    <example id="zend.mail.attachments.example-1">
+        <title> 带附件的邮件 </title>
+        <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+// build message...
+$mail->createAttachment($someBinaryString);
+$mail->createAttachment($myImage, 'image/gif', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_8BIT);]]>
+        </programlisting>
+    </example>
+    <para>
+        如果你想得到对此附件MIME段产生的更多控制，你可以使用<code>createAttachment()</code>方法的返回值来修改它的属性。方法<code>createAttachment()</code>返回了一个<code>Zend_Mime_Part</code>对象：
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+
+$at = $mail->createAttachment($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->send();]]>
+    </programlisting>
+    <para>
+        创建 <code>Zend_Mime_Part</code> 实例和用 <code>addAttachment()</code> 添加它的替代方案：
+    </para>
+    <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+
+$at = new Zend_Mime_Part($myImage);
+$at->type        = 'image/gif';
+$at->disposition = Zend_Mime::DISPOSITION_INLINE;
+$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->filename    = 'test.gif';
+
+$mail->addAttachment($at);
+
+$mail->send();]]>
+    </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

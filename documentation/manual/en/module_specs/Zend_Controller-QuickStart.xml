@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller Quick Start</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>Introduction</title>
+        <para>
+            <classname>Zend_Controller</classname> is the heart of Zend Framework's MVC
+            system. MVC stands for <ulink
+                url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>
+            and is a design pattern targeted at separating application logic
+            from display logic. <classname>Zend_Controller_Front</classname> implements a
+            <ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
+                Controller</ulink> pattern, in which all requests are
+            intercepted by the front controller and dispatched to individual
+            Action Controllers based on the URL requested.
+        </para>
+        <para>
+            The <classname>Zend_Controller</classname> system was built with extensibility
+            in mind, either by subclassing the existing classes, writing new
+            classes that implement the various interfaces and abstract classes
+            that form the foundation of the controller family of classes, or
+            writing plugins or action helpers to augment or manipulate the
+            functionality of the system.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>Quick Start</title>
+
+        <para>
+            If you need more in-depth information, see the following sections.
+            If you just want to get up and running quickly, read on.
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>Create the Filesystem Layout</title>
+
+            <para>
+                The first step is to create your file system layout. The typical
+                layout is as follows:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>Set the Document Root</title>
+
+            <para>
+                In your web server, point your document root to the
+                <code>html</code> directory of the above file system layout.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>Create the Rewrite Rules</title>
+
+            <para>
+                Edit the <code>html/.htaccess</code> file above to read as
+                follows:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+]]></programlisting>
+
+            <note>
+                <title>Learn about mod_rewrite</title>
+
+                <para>
+                    The above rewrite rules allow access to any file under your
+                    virtual host's document root. If there are files you do not
+                    want exposed in this way, you may want to be more
+                    restrictive in your rules. Go to the Apache website to
+                    <ulink
+                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                        more about mod_rewrite</ulink>.
+                </para>
+            </note>
+
+            <para>
+                If using IIS 7.0, use the following as your rewrite
+                configuration:
+            </para>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     <system.webServer>
+         <rewrite>
+             <rules>
+                 <rule name="Imported Rule 1" stopProcessing="true">
+                     <match url="^.*$" />
+                     <conditions logicalGrouping="MatchAny">
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsFile" pattern=""
+                             ignoreCase="false" />
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsDirectory"
+                             pattern="" ignoreCase="false" />
+                     </conditions>
+                     <action type="None" />
+                 </rule>
+                 <rule name="Imported Rule 2" stopProcessing="true">
+                     <match url="^.*$" />
+                     <action type="Rewrite" url="index.php" />
+                 </rule>
+             </rules>
+         </rewrite>
+     </system.webServer>
+</configuration>
+]]></programlisting>
+
+            <para>
+                The above rules will route requests to existing resources
+                (existing symlinks, non-empty files, or non-empty directories)
+                accordingly, and all other requests to the front controller.
+            </para>
+
+            <note>
+                <para>
+                    The above rewrite rules are for Apache; for examples of
+                    rewrite rules for other web servers, see the <link
+                        linkend="zend.controller.router.introduction">router
+                        documentation</link>.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>Create the Bootstrap File</title>
+
+            <para>
+                The bootstrap file is the page all requests are routed through
+                -- <code>html/index.php</code> in this case. Open up
+                <code>html/index.php</code> in the editor of your choice and add
+                the following:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]></programlisting>
+
+            <para>
+                This will instantiate and dispatch the front controller, which
+                will route requests to action controllers.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>Create the Default Action Controller</title>
+
+            <para>
+                Before discussing action controllers, you should first
+                understand how requests are routed in Zend Framework. By
+                default, the first segment of a URL path maps to a controller,
+                and the second to an action. For example, given the URL
+                <code>http://framework.zend.com/roadmap/components</code>, the
+                path is <code>/roadmap/components</code>, which will map to the
+                controller <code>roadmap</code> and the action
+                <code>components</code>. If no action is provided, the action
+                <code>index</code> is assumed, and if no controller is provided,
+                the controller <code>index</code> is assumed (following the
+                Apache convention that maps a <code>DirectoryIndex</code>
+                automatically).
+            </para>
+
+            <para>
+                <classname>Zend_Controller</classname>'s dispatcher then takes the
+                controller value and maps it to a class. By default, it
+                Title-cases the controller name and appends the word
+                <code>Controller</code>. Thus, in our example above, the
+                controller <code>roadmap</code> is mapped to the class
+                <code>RoadmapController</code>.
+            </para>
+
+            <para>
+                Similarly, the action value is mapped to a method of the
+                controller class. By default, the value is lower-cased, and the
+                word <code>Action</code> is appended. Thus, in our example
+                above, the action <code>components</code> becomes
+                <code>componentsAction</code>, and the final method called is
+                <code>RoadmapController::componentsAction()</code>.
+            </para>
+
+            <para>
+                So, moving on, let's now create a default action controller and
+                action method. As noted earlier, the default controller and
+                action called are both <code>index</code>. Open the file
+                <code>application/controllers/IndexController.php</code>, and
+                enter the following:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/** Zend_Controller_Action */
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]></programlisting>
+
+            <para>
+                By default, the <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                action helper is enabled. What this means is that by simply
+                defining an action method and a corresponding view script, you
+                will immediately get content rendered. By default,
+                <classname>Zend_View</classname> is used as the View layer in the MVC. The
+                <code>ViewRenderer</code> does some magic, and uses the
+                controller name (e.g., <code>index</code>) and the current
+                action name (e.g., <code>index</code>) to determine what
+                template to pull. By default, templates end in the
+                <code>.phtml</code> extension, so this means that, in the above
+                example, the template <code>index/index.phtml</code> will be
+                rendered. Additionally, the <code>ViewRenderer</code>
+                automatically assumes that the directory <code>views</code> at
+                the same level as the controller directory will be the base view
+                directory, and that the actual view scripts will be in the
+                <code>views/scripts/</code> subdirectory. Thus, the template
+                rendered will be found in
+                <code>application/views/scripts/index/index.phtml</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>Create the View Script</title>
+
+            <para>
+                As mentioned <link
+                    linkend="zend.controller.quickstart.go.controller">in the
+                    previous section</link>, view scripts are found in
+                <code>application/views/scripts/</code>; the view script for the
+                default controller and action is in
+                <code>application/views/scripts/index/index.phtml</code>. Create
+                this file, and type in some HTML:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>Create the Error Controller</title>
+
+            <para>
+                By default, <link
+                    linkend="zend.controller.plugins.standard.errorhandler">the
+                error handler plugin</link> is registered. This plugin expects
+                that a controller exists to handle errors. By default, it
+                assumes an <code>ErrorController</code> in the default module
+                with an <code>errorAction</code> method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]></programlisting>
+
+            <para>
+                Assuming the already discussed directory layout, this file will
+                go in <code>application/controllers/ErrorController.php</code>.
+                You will also need to create a view script in
+                <code>application/views/scripts/error/error.phtml</code>; sample
+                content might look like:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Error</title>
+</head>
+<body>
+    <h1>An error occurred</h1>
+    <p>An error occurred; please try again later.</p>
+</body>
+</html>
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>View the Site!</title>
+
+            <para>
+                With your first controller and view under your belt, you can now
+                fire up your browser and browse to the site. Assuming
+                <code>example.com</code> is your domain, any of the following
+                URLs will get to the page we've just created:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                You're now ready to start creating more controllers and action
+                methods. Congratulations!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

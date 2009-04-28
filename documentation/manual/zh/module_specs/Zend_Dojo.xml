@@ -1,0 +1,27 @@
+<sect1 id="zend.dojo.introduction">
+    <title>简介</title>
+
+    <para>
+        从1.6.0版开始，Zend Framework包含<ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+        来支持  out-of-the-box 的富 internet 程序开发。和 Dojo 集成的包括：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>JSON-RPC 支持</para></listitem>
+        <listitem><para>dojo.data 兼容性</para></listitem>
+        <listitem><para>协助设置 Dojo 环境的视图助手</para></listitem>
+        <listitem><para>Dijit-specific Zend_View 助手</para></listitem>
+        <listitem><para>Dijit-specific Zend_Form 元素和装饰</para></listitem>
+    </itemizedlist>
+
+    <para>
+        Dojo 可以从 Zend Framework 发行版的 <code>externals/dojo/</code> 目录找到。
+        这是源代码发行，包括 Dojo 的全部 javascript 源代码，单元测试和构造工具。
+        你可以把它链接到你的 javascript 目录，复制或使用构造工具来生成你自己的定制，
+        然后包含到你的项目里。另外，你可以使用提供Dojo的Content Delivery Networks 中的一个
+        （ZF 支持官方的 AOL CDN 和 Google CDN）。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.action">
+    <title>Action Controllers</title>
+
+    <sect2 id="zend.controller.action.introduction">
+        <title>Introduction</title>
+        <para>
+            <classname>Zend_Controller_Action</classname> is an abstract class you may use
+            for implementing Action Controllers for use with the Front
+            Controller when building a website based on the
+            Model-View-Controller (MVC) pattern.
+        </para>
+
+        <para>
+            To use <classname>Zend_Controller_Action</classname>, you will need to
+            subclass it in your actual action controller classes (or subclass it
+            to create your own base class for action controllers). The most
+            basic operation is to subclass it, and create action methods that
+            correspond to the various actions you wish the controller to handle
+            for your site. <classname>Zend_Controller</classname>'s routing and dispatch handling will
+            autodiscover any methods ending in 'Action' in your class as
+            potential controller actions.
+        </para>
+
+        <para>
+            For example, let's say your class is defined as follows:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // do something
+    }
+
+    public function bazAction()
+    {
+        // do something
+    }
+}
+]]></programlisting>
+
+        <para>
+            The above <code>FooController</code> class (controller
+            <code>foo</code>) defines two actions, <code>bar</code> and
+            <code>baz</code>.
+        </para>
+
+        <para>
+            There's much more that can be accomplished than this, such as custom
+            initialization actions, default actions to call should no action (or
+            an invalid action) be specified, pre- and post-dispatch hooks, and a
+            variety of helper methods. This chapter serves as an overview of the
+            action controller functionality
+        </para>
+
+        <note>
+            <title>Default Behaviour</title>
+
+            <para>
+                By default, the <link linkend="zend.controller.front">front
+                    controller</link> enables the <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                action helper. This helper takes care of injecting the view
+                object into the controller, as well as automatically rendering
+                views. You may disable it within your action controller via one
+                of the following methods:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        // Local to this controller only; affects all actions,
+        // as loaded in init:
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Globally:
+        $this->_helper->removeHelper('viewRenderer');
+
+        // Also globally, but would need to be in conjunction with the
+        // local version in order to propagate for this controller:
+        Zend_Controller_Front::getInstance()
+            ->setParam('noViewRenderer', true);
+    }
+}
+]]></programlisting>
+
+            <para>
+                <code>initView()</code>, <code>getViewScript()</code>,
+                <code>render()</code>, and <code>renderScript()</code> each
+                proxy to the <code>ViewRenderer</code> unless the helper is not
+                in the helper broker or the <code>noViewRenderer</code> flag has
+                been set.
+            </para>
+
+            <para>
+                You can also simply disable rendering for an individual view by
+                setting the <code>ViewRenderer</code>'s <code>noRender</code>
+                flag:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // disable autorendering for this action only:
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+]]></programlisting>
+
+            <para>
+                The primary reasons to disable the <code>ViewRenderer</code> are
+                if you simply do not need a view object or if you are not
+                rendering via view scripts (for instance, when using an action
+                controller to serve web service protocols such as SOAP, XML-RPC,
+                or REST). In most cases, you will never need to globally disable
+                the <code>ViewRenderer</code>, only selectively within
+                individual controllers or actions.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.action.initialization">
+        <title>Object Initialization</title>
+
+        <para>
+            While you can always override the action controller's constructor,
+            we do not recommend this. <classname>Zend_Controller_Action::__construct()</classname>
+            performs some important tasks, such as registering the request and
+            response objects, as well as any custom invocation arguments passed
+            in from the front controller. If you must override the constructor,
+            be sure to call <code>parent::__construct($request, $response,
+            $invokeArgs)</code>.
+        </para>
+
+        <para>
+            The more appropriate way to customize instantiation is to use the
+            <code>init()</code> method, which is called as the last task of
+            <code>__construct()</code>. For example, if you want to connect to
+            a database at instantiation:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->db = Zend_Db::factory('Pdo_Mysql', array(
+            'host'     => 'myhost',
+            'username' => 'user',
+            'password' => 'XXXXXXX',
+            'dbname'   => 'website'
+        ));
+    }
+}
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.action.prepostdispatch">
+        <title>Pre- and Post-Dispatch Hooks</title>
+
+        <para>
+            <classname>Zend_Controller_Action</classname> specifies two methods that may
+            be called to bookend a requested action, <code>preDispatch()</code>
+            and <code>postDispatch()</code>. These can be useful in a variety of
+            ways: verifying authentication and ACLs prior to running an action
+            (by calling <code>_forward()</code> in <code>preDispatch()</code>,
+            the action will be skipped), for instance, or placing generated
+            content in a sitewide template (<code>postDispatch()</code>).
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.action.accessors">
+        <title>Accessors</title>
+
+        <para>
+            A number of objects and variables are registered with the object,
+            and each has accessor methods.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <emphasis>Request Object</emphasis>: <code>getRequest()</code>
+                may be used to retrieve the request object used to call the
+                action.
+            </para></listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Response Object</emphasis>:
+                    <code>getResponse()</code> may be used to retrieve the
+                    response object aggregating the final response. Some typical
+                    calls might look like:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$this->getResponse()->setHeader('Content-Type', 'text/xml');
+$this->getResponse()->appendBody($content);
+]]></programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Invocation Arguments</emphasis>: the front
+                    controller may push parameters into the router, dispatcher,
+                    and action controller. To retrieve these, use
+                    <code>getInvokeArg($key)</code>; alternatively, fetch the
+                    entire list using <code>getInvokeArgs()</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Request parameters</emphasis>: The request object
+                    aggregates request parameters, such as any _GET or _POST
+                    parameters, or user parameters specified in the URL's path
+                    information. To retrieve these, use
+                    <code>_getParam($key)</code> or
+                    <code>_getAllParams()</code>. You may also set request
+                    parameters using <code>_setParam()</code>; this is useful
+                    when forwarding to additional actions.
+                </para>
+
+                <para>
+                    To test whether or not a parameter exists (useful for
+                    logical branching), use <code>_hasParam($key)</code>.
+                </para>
+
+                <note>
+                    <para>
+                        <code>_getParam()</code> may take an optional second
+                        argument containing a default value to use if the
+                        parameter is not set or is empty. Using it eliminates
+                        the need to call <code>_hasParam()</code> prior to
+                        retrieving a value:
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+// Use default value of 1 if id is not set
+$id = $this->_getParam('id', 1);
+
+// Instead of:
+if ($this->_hasParam('id') {
+    $id = $this->_getParam('id');
+} else {
+    $id = 1;
+}
+]]></programlisting>
+                </note>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.action.viewintegration">
+        <title>View Integration</title>
+
+        <note id="zend.controller.action.viewintegration.viewrenderer">
+            <title>Default View Integration is Via the ViewRenderer</title>
+
+            <para>
+                The content in this section is only valid when you have
+                explicitly disabled the <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                Otherwise, you can safely skip over this section.
+            </para>
+        </note>
+
+        <para>
+            <classname>Zend_Controller_Action</classname> provides a rudimentary and
+            flexible mechanism for view integration. Two methods accomplish
+            this, <code>initView()</code> and <code>render()</code>; the former
+            method lazy-loads the <code>$view</code> public property, and the
+            latter renders a view based on the current requested action, using
+            the directory hierarchy to determine the script path.
+        </para>
+
+        <sect3 id="zend.controller.action.viewintegration.initview">
+            <title>View Initialization</title>
+
+            <para>
+                <code>initView()</code> initializes the view object.
+                <code>render()</code> calls <code>initView()</code> in order to
+                retrieve the view object, but it may be initialized at any time;
+                by default it populates the <code>$view</code> property with a
+                <classname>Zend_View</classname> object, but any class implementing
+                <classname>Zend_View_Interface</classname> may be used. If
+                <code>$view</code> is already initialized, it simply returns
+                that property.
+            </para>
+
+            <para>
+                The default implementation makes the following assumption of
+                the directory structure:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+applicationOrModule/
+    controllers/
+        IndexController.php
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+]]></programlisting>
+
+            <para>
+                In other words, view scripts are assumed to be in the
+                <code>views/scripts/</code> subdirectory, and the
+                <code>views</code> subdirectory is assumed to contain sibling
+                functionality (helpers, filters). When determining the view
+                script name and path, the <code>views/scripts/</code> directory
+                will be used as the base path, with directories named after the
+                individual controllers providing a hierarchy of view scripts.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.action.viewintegration.render">
+            <title>Rendering Views</title>
+
+            <para>
+                <code>render()</code> has the following signature:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+string render(string $action = null,
+              string $name = null,
+              bool $noController = false);
+]]></programlisting>
+
+            <para>
+                <code>render()</code> renders a view script. If no arguments are
+                passed, it assumes that the script requested is
+                <code>[controller]/[action].phtml</code> (where
+                <code>.phtml</code> is the value of the <code>$viewSuffix</code>
+                property). Passing a value for <code>$action</code> will render
+                that template in the <code>[controller]</code> subdirectory. To
+                override using the <code>[controller]</code> subdirectory, pass
+                a true value for <code>$noController</code>. Finally, templates
+                are rendered into the response object; if you wish to render to
+                a specific <link
+                    linkend="zend.controller.response.namedsegments">named
+                    segment</link> in the response object, pass a value to
+                <code>$name</code>.
+            </para>
+
+            <note><para>
+                    Since controller and action names may contain word delimiter
+                    characters such as '_', '.', and '-', <code>render()</code> normalizes
+                    these to '-' when determining the script name. Internally,
+                    it uses the dispatcher's word and path delimiters to do this
+                    normalization. Thus, a request to
+                    <code>/foo.bar/baz-bat</code> will render the script
+                    <code>foo-bar/baz-bat.phtml</code>. If your action method
+                    contains camelCasing, please remember that this will result
+                    in '-' separated words when determining the view script
+                    file name.
+            </para></note>
+
+            <para>
+                Some examples:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        // Renders my/foo.phtml
+        $this->render();
+
+        // Renders my/bar.phtml
+        $this->render('bar');
+
+        // Renders baz.phtml
+        $this->render('baz', null, true);
+
+        // Renders my/login.phtml to the 'form' segment of the
+        // response object
+        $this->render('login', 'form');
+
+        // Renders site.phtml to the 'page' segment of the response
+        // object; does not use the 'my/' subirectory
+        $this->render('site', 'page', true);
+    }
+
+    public function bazBatAction()
+    {
+        // Renders my/baz-bat.phtml
+        $this->render();
+    }
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.action.utilmethods">
+        <title>Utility Methods</title>
+
+        <para>
+            Besides the accessors and view integration methods,
+            <classname>Zend_Controller_Action</classname> has several utility methods for
+            performing common tasks from within your action methods (or from
+            pre-/post-dispatch).
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>_forward($action, $controller = null, $module = null,
+                        array $params = null)</code>: perform another action. If
+                    called in <code>preDispatch()</code>, the currently
+                    requested action will be skipped in favor of the new one.
+                    Otherwise, after the current action is processed, the action
+                    requested in _forward() will be executed.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>_redirect($url, array $options =
+                        array())</code>: redirect to another location. This
+                    method takes a URL and an optional set of options. By
+                    default, it performs an HTTP 302 redirect.
+                </para>
+
+                <para>
+                    The options may include one or more of the following:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>exit:</emphasis> whether or not to exit
+                            immediately. If requested, it will cleanly close any
+                            open sessions and perform the redirect.
+                        </para>
+
+                        <para>
+                            You may set this option globally within the
+                            controller using the <code>setRedirectExit()</code>
+                            accessor.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>prependBase:</emphasis> whether or not to
+                            prepend the base URL registered with the request
+                            object to the URL provided.
+                        </para>
+
+                        <para>
+                            You may set this option globally within the
+                            controller using the
+                            <code>setRedirectPrependBase()</code> accessor.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>code:</emphasis> what HTTP code to utilize
+                            in the redirect. By default, an HTTP 302 is
+                            utilized; any code between 301 and 306 may be used.
+                        </para>
+
+                        <para>
+                            You may set this option globally within the
+                            controller using the
+                            <code>setRedirectCode()</code> accessor.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.action.subclassing">
+        <title>Subclassing the Action Controller</title>
+
+        <para>
+            By design, <classname>Zend_Controller_Action</classname> must be subclassed
+            in order to create an action controller. At the minimum, you will
+            need to define action methods that the controller may call.
+        </para>
+
+        <para>
+            Besides creating useful functionality for your web applications, you
+            may also find that you're repeating much of the same setup or
+            utility methods in your various controllers; if so, creating a
+            common base controller class that extends
+            <classname>Zend_Controller_Action</classname> could solve such redundancy.
+        </para>
+
+        <example id="zend.controller.action.subclassing.example-call">
+            <title>Handling Non-Existent Actions</title>
+
+            <para>
+                If a request to a controller is made that includes an undefined
+                action method, <classname>Zend_Controller_Action::__call()</classname>
+                will be invoked. <code>__call()</code> is, of course, PHP's
+                magic method for method overloading.
+            </para>
+
+            <para>
+                By default, this method throws a
+                <classname>Zend_Controller_Action_Exception</classname> indicating the
+                requested method was not found in the controller. If the method
+                requested ends in 'Action', the assumption is that an action was
+                requested and does not exist; such errors result in an exception
+                with a code of 404. All other methods result in an exception
+                with a code of 500. This allows you to easily differentiate
+                between page not found and application errors in your error
+                handler.
+            </para>
+
+            <para>
+                You should override this functionality if you wish to perform
+                other operations. For instance, if you wish to display an error
+                message, you might write something like this:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function __call($method, $args)
+    {
+        if ('Action' == substr($method, -6)) {
+            // If the action method was not found, render the error
+            // template
+            return $this->render('error');
+        }
+
+        // all other methods throw an exception
+        throw new Exception('Invalid method "'
+                            . $method
+                            . '" called',
+                            500);
+    }
+}
+]]></programlisting>
+
+            <para>
+                Another possibility is that you may want to forward on to a
+                default controller page:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+        $this->render();
+    }
+
+    public function __call($method, $args)
+    {
+        if ('Action' == substr($method, -6)) {
+            // If the action method was not found, forward to the
+            // index action
+            return $this->_forward('index');
+        }
+
+        // all other methods throw an exception
+        throw new Exception('Invalid method "'
+                            . $method
+                            . '" called',
+                            500);
+    }
+}
+]]></programlisting>
+        </example>
+
+        <para>
+            Besides overriding <code>__call()</code>, each of the
+            initialization, utility, accessor, view, and dispatch hook methods
+            mentioned previously in this chapter may be overridden in order to
+            customize your controllers. As an example, if you are storing your
+            view object in a registry, you may want to modify your
+            <code>initView()</code> method with code resembling the following:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+abstract class My_Base_Controller extends Zend_Controller_Action
+{
+    public function initView()
+    {
+        if (null === $this->view) {
+            if (Zend_Registry::isRegistered('view')) {
+                $this->view = Zend_Registry::get('view');
+            } else {
+                $this->view = new Zend_View();
+                $this->view->setBasePath(dirname(__FILE__) . '/../views');
+            }
+        }
+
+        return $this->view;
+    }
+}
+]]></programlisting>
+
+        <para>
+            Hopefully, from the information in this chapter, you can see the
+            flexibility of this particular component and how you can shape it to
+            your application's or site's needs.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

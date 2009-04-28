@@ -1,0 +1,53 @@
+<sect3 id="zend.controller.actionhelpers.flashmessenger">
+    <title>FlashMessenger</title>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
+        <title>简介</title>
+        <para>
+            <code>FlashMessenger</code>助手允许你传递用户可能需要在下个请求看到的消息。为实现它，<code>FlashMessenger</code>使用<code>Zend_Session_Namespace</code>来存储消息以备将来或下个请求来读取。如果你计划使用<code>Zend_Session</code>或者<code>Zend_Session_Namespace</code>，在引导文件里用<code>Zend_Session::start()</code>初始化，的确是个好主意。（参见<link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>文档有更多的关于它的用法的细节。）
+        </para>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
+        <title>Basic Usage Example</title>
+        <para>
+            下面的例子展示flash messenger最基本的用法。当动作<code>/some/my</code> 被调用，它添加flash message "Record Saved!"，随后的对动作<code>/some/my-next-request</code>的请求将读取它（并也这样删除它）。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class SomeController extends Zend_Controller_Action
+{
+    /**
+     * FlashMessenger
+     *
+     * @var Zend_Controller_Action_Helper_FlashMessenger
+     */
+    protected $_flashMessenger = null;
+
+    public function init()
+    {
+        $this->_flashMessenger =
+            $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
+    }
+
+    public function myAction()
+    {
+        /**
+         * default method of getting
+         * Zend_Controller_Action_Helper_FlashMessenger instance
+         * on-demand
+         */
+        $this->_flashMessenger->addMessage('Record Saved!');
+    }
+
+    public function myNextRequestAction()
+    {
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+    </sect4>
+</sect3>

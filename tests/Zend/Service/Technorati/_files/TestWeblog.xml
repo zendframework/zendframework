@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Weblog XML fragment.
+    
+-->
+<weblog>
+    <name>Roby Web World Italia</name>
+    <url>http://robyww.blogspot.com</url>
+    <atomurl>http://robyww.blogspot.com/feeds/posts/atom</atomurl>
+    <rssurl>http://robyww.blogspot.com/feeds/posts/rss</rssurl>
+    <inboundblogs>71</inboundblogs>
+    <inboundlinks>103</inboundlinks>
+    <lastupdate>2007-11-11 08:47:26 GMT</lastupdate>
+    <rank>93473</rank>
+    <!-- available only in Cosmos <result> tag -->
+    <rankingstart>1</rankingstart>
+    <author>
+        <username>rfilippini</username>
+        <firstname>Roberto</firstname>
+        <lastname>Filippini</lastname>
+        <thumbnailpicture>http://static.technorati.com/progimages/photo.jpg?uid=290763</thumbnailpicture>
+    </author>
+</weblog>
+

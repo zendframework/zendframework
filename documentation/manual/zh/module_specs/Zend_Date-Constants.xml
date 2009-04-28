@@ -1,0 +1,1428 @@
+<sect1 id="zend.date.constants">
+
+    <title> 一般日期函数的常量 </title>
+
+    <para>
+        不论什么时候 <code>Zend_Date</code> 方法需要参数 <code>$parts</code>，下面常数中其中之一可担当此任，
+        用来选择日期的特定部分或指示日期使用的或期望使用的格式（例如 RFC 822）。
+    </para>
+
+    <sect2 id="zend.date.constants.using">
+
+        <title> 使用常数 </title>
+
+        <para>
+            例如，常数 <code>Zend_Date::HOUR</code> 可以像下列所示来使用。当和星期几、日期、小时、分钟、秒和任何其它因位于世界不同的地方而不同地表示的日期部分一起使用时，
+            对象的时区将自动用来计算当前值，即使是内部的时间戳和此刻一致并且不论用户的地理位置在世界的何方。
+            不管使用了哪些单元，输出必需表达为 GMT/UTC 或本地化。下面的输出例子反映了 Europe/GMT+1 hour (e.g. Germany, Austria, France) 的本地化。
+        </para>
+
+        <table id="zend.date.constants.using.table">
+            <title> Zend_Date::HOUR 的操作 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 函数/输入 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 原始日期 </entry>
+                        <entry> 效果/输出 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>get(Zend_Date::HOUR)</entry>
+                        <entry>Output of the hour</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>14</entry>
+                    </row>
+                    <row>
+                        <entry>set(12, Zend_Date::HOUR)</entry>
+                        <entry>Set new hour</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>2009-02-13T12:53:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>add(12, Zend_Date::HOUR)</entry>
+                        <entry>Add hours</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>2009-02-14T02:53:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>sub(12, Zend_Date::HOUR)</entry>
+                        <entry>Subtract hours</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>2009-02-13T02:53:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>compare(12, Zend_Date::HOUR)</entry>
+                        <entry>Compare hour, returns 0, 1 or -1</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>1 (if object > argument)</entry>
+                    </row>
+                    <row>
+                        <entry>copy(Zend_Date::HOUR)</entry>
+                        <entry>Copies only the hour part</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>1970-01-01T14:00:00+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>equals(14, Zend_Date::HOUR)</entry>
+                        <entry>Compares the hour, returns TRUE or FALSE</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>TRUE</entry>
+                    </row>
+                    <row>
+                        <entry>isEarlier(12, Zend_Date::HOUR)</entry>
+                        <entry>Compares the hour, returns TRUE or FALSE</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>TRUE</entry>
+                    </row>
+                    <row>
+                        <entry>isLater(12, Zend_Date::HOUR)</entry>
+                        <entry>Compares the hour, returns TRUE or FALSE</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry>FALSE</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.constants.list">
+
+        <title> 所有常数列表 </title>
+
+        <para>
+            在 <code>Zend_Date</code> 中每个日期/时间的部分都有独一无二的常数。所有 <code>Zend_Date</code> 支持的常数如下：
+        </para>
+
+        <table id="zend.date.constants.list.table-1">
+            <title>Day Constants</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::DAY</entry>
+                        <entry>Day (as a number, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-<emphasis role="strong">06</emphasis>T14:53:27+01:00 (06)</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DAY_SHORT</entry>
+                        <entry>Day (as a number, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-0<emphasis role="strong">6</emphasis>T14:53:27+01:00 (6)</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY</entry>
+                        <entry>Weekday (Name of the day, localized, complete)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Friday</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY_SHORT</entry>
+                        <entry>Weekday (Name of the day, localized, abbreviated, the first three digits)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fre</emphasis> for Friday</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY_NAME</entry>
+                        <entry>Weekday (Name of the day, localized, abbreviated, the first two digits)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fr</emphasis> for Friday</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry>Weekday (Name of the day, localized, abbreviated, only the first digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">F</emphasis> for Friday</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY_DIGIT</entry>
+                        <entry>Weekday (0 = Sunday, 6 = Saturday)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">5</emphasis> for Friday</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::WEEKDAY_8601</entry>
+                        <entry>Weekday according to ISO 8601 (1 = Monday, 7 = Sunday)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">5</emphasis> for Friday</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DAY_OF_YEAR</entry>
+                        <entry>Day (as a number, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">43</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DAY_SUFFIX</entry>
+                        <entry>English addendum for the day (st, nd, rd, th)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">th</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-2">
+            <title> 星期常数 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::WEEK</entry>
+                        <entry>Week (as a number, 1-53)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">7</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-3">
+            <title> 月常数 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::MONTH_NAME</entry>
+                        <entry>Month (Name of the month, localized, complete)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">February</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MONTH_NAME_SHORT</entry>
+                        <entry>Month (Name of the month, localized, abbreviated, three digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Feb</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MONTH_NAME_NARROW</entry>
+                        <entry>Month (Name of the month, localized, abbreviated, one digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">F</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MONTH</entry>
+                        <entry>Month (Number of the month, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-<emphasis role="strong">02</emphasis>-06T14:53:27+01:00 (02)</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MONTH_SHORT</entry>
+                        <entry>Month (Number of the month, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-0<emphasis role="strong">2</emphasis>-06T14:53:27+01:00 (2)</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MONTH_DAYS</entry>
+                        <entry>Number of days for this month (number)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">28</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-4">
+            <title> 年常数 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry>Year (number)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2009</emphasis>-02-06T14:53:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry>Year according to ISO 8601 (number)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::YEAR_SHORT</entry>
+                        <entry>Year (number, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>20<emphasis role="strong">09</emphasis>-02-06T14:53:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::YEAR_SHORT_8601</entry>
+                        <entry>Year according to ISO 8601 (number, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::LEAPYEAR</entry>
+                        <entry>Is the year a leap year? (TRUE or FALSE)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">FALSE</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-5">
+            <title> 时间常数 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::HOUR</entry>
+                        <entry>Hour (00-23, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::HOUR_SHORT</entry>
+                        <entry>Hour (0-23, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::HOUR_SHORT_AM</entry>
+                        <entry>Hour (1-12, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::HOUR_AM</entry>
+                        <entry>Hour (01-12, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MINUTE</entry>
+                        <entry>Minute (00-59, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-06T14:<emphasis role="strong">53</emphasis>:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MINUTE_SHORT</entry>
+                        <entry>Minute (0-59, one or two digit)</entry>
+                        <entry>2009-02-06T14:03:27+01:00</entry>
+                        <entry>2009-02-06T14:0<emphasis role="strong">3</emphasis>:27+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::SECOND</entry>
+                        <entry>Second (00-59, two digit)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry>2009-02-06T14:53:<emphasis role="strong">27</emphasis>+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::SECOND_SHORT</entry>
+                        <entry>Second (0-59, one or two digit)</entry>
+                        <entry>2009-02-06T14:53:07+01:00</entry>
+                        <entry>2009-02-06T14:53:0<emphasis role="strong">7</emphasis>+01:00</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MILLISECOND</entry>
+                        <entry>Millisecond (theoretically infinite)</entry>
+                        <entry>2009-02-06T14:53:27.20546</entry>
+                        <entry>2009-02-06T14:53:27.<emphasis role="strong">20546</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::MERIDIEM</entry>
+                        <entry>Time of day (forenoon/afternoon)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">afternoon</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::SWATCH</entry>
+                        <entry>Swatch Internet Time</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">620</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-6">
+            <title> 时区常数 </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::TIMEZONE</entry>
+                        <entry>Name der time zone (string, abbreviated)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIMEZONE_NAME</entry>
+                        <entry>Name of the time zone (string, complete)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Europe/Paris</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIMEZONE_SECS</entry>
+                        <entry>Difference of the time zone to GMT in seconds (integer)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">3600</emphasis> seconds to GMT</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::GMT_DIFF</entry>
+                        <entry>Difference to GMT in seconds (string)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">+0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::GMT_DIFF_SEP</entry>
+                        <entry>Difference to GMT in seconds (string, separated)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">+01:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DAYLIGHT</entry>
+                        <entry>Summer time or Winter time? (TRUE or FALSE)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">FALSE</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <table id="zend.date.constants.list.table-7">
+            <title> 日期格式常数（格式包括时区）</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::ISO_8601</entry>
+                        <entry>Date according to ISO 8601 (string, complete)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2009-02-13T14:53:27+01:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RFC_2822</entry>
+                        <entry>Date according to RFC 2822 (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fri, 13 Feb 2009 14:53:27 +0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIMESTAMP</entry>
+                        <entry>
+                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix time</ulink> (seconds since 1.1.1970, mixed)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">1234533207</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::ATOM</entry>
+                        <entry>Date according to ATOM (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2009-02-13T14:53:27+01:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::COOKIE</entry>
+                        <entry>Date for Cookies (string, for Cookies)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Friday, 13-Feb-09 14:53:27 Europe/Paris</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RFC_822</entry>
+                        <entry>Date according to RFC 822 (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fri, 13 Feb 09 14:53:27 +0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RFC_850</entry>
+                        <entry>Date according to RFC 850 (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Friday, 13-Feb-09 14:53:27 Europe/Paris</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RFC_1036</entry>
+                        <entry>Date according to RFC 1036 (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fri, 13 Feb 09 14:53:27 +0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RFC_1123</entry>
+                        <entry>Date according to RFC 1123 (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fri, 13 Feb 2009 14:53:27 +0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::RSS</entry>
+                        <entry>Date for RSS Feeds (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Fri, 13 Feb 2009 14:53:27 +0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::W3C</entry>
+                        <entry>Date for HTML/HTTP according to W3C (string)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">2009-02-13T14:53:27+01:00</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            特别注意 <code>Zend_Date::DATES</code>，因为这个格式指示器在 <code>Zend_Date</code> 之内有个唯一的属性作为 <emphasis role="strong"> 输入 </emphasis> 格式指示器。
+            当 <code>$part</code> 用作一个输入格式，该常量提灵活地接受许多相似的日期格式。启发式自动从输入字符串里解析并“修改”日期里的简单的错误（如果有的话），如当需要时，交换年月日的位置。
+        </para>
+
+        <table id="zend.date.constants.list.table-8">
+            <title> 日期和时间格式 (format varies by locale)</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Zend_Date::ERA</entry>
+                        <entry>Epoch (string, localized, abbreviated)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">AD</emphasis> (anno Domini)</entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::ERA_NAME</entry>
+                        <entry>Epoch (string, localized, complete)</entry>
+                        <entry>2009-02-06T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">anno domini</emphasis> (anno Domini)</entry>
+                    </row>
+                    <row>
+                        <entry><emphasis role="strong">Zend_Date::DATES</emphasis>
+                        </entry>
+                        <entry>Standard date (string, localized, default value).</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">13.02.2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATE_FULL</entry>
+                        <entry>Complete date (string, localized, complete)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">Friday, 13. February 2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATE_LONG</entry>
+                        <entry>Long date (string, localized, long)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">13. February 2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATE_MEDIUM</entry>
+                        <entry>Normal date (string, localized, normal)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">13.02.2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::DATE_SHORT</entry>
+                        <entry>Abbreviated Date (string, localized, abbreviated)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">13.02.09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIMES</entry>
+                        <entry>Standard time (string, localized, default value)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14:53:27</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIME_FULL</entry>
+                        <entry>Complete time (string, localized, complete)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14:53 Uhr CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIME_LONG</entry>
+                        <entry>Long time (string, localized, Long)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14:53:27 CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIME_MEDIUM</entry>
+                        <entry>Normal time (string, localized, normal)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14:53:27</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Zend_Date::TIME_SHORT</entry>
+                        <entry>Abbreviated time (string, localized, abbreviated)</entry>
+                        <entry>2009-02-13T14:53:27+01:00</entry>
+                        <entry><emphasis role="strong">14:53</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.constants.selfdefinedformats">
+
+        <title> 自定义 ISO 输出格式 </title>
+
+        <para>
+            如果你需要的日期格式没有在上述的格式中出现，那么使用从下面 ISO 格式指定器产生的自定义格式。
+            下面的例子示例了从下列表中生成的自定义 ISO 格式的常量的用法。格式长度无限制。并且允许格式常量的多重用法。
+        </para>
+
+        <para>
+            如果你喜欢的话，可接受的格式指定器可以从 ISO 格式修改为 PHP 的日期格式，然而，PHP 日期格式指定不支持所有的按 ISO 标准定义的格式。
+            使用 <code>Zend_Date::setOptions(array('format_type' => 'php'))</code> 方法来把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器（参见下面 <xref linkend="zend.date.constants.phpformats" />）。
+        </para>
+
+        <example id="zend.date.constants.selfdefinedformats.example-1">
+            <title> 自定义 ISO 格式用法示例 </title>
+            <programlisting role="php"><![CDATA[
+$locale = new Zend_Locale('de_AT');
+$date = new Zend_Date(1234567890, false, $locale);
+print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
+]]>
+            </programlisting>
+        </example>
+
+        <table id="zend.date.constants.selfdefinedformats.table">
+            <title> <emphasis role="strong">ISO 8601 日期输出 </emphasis> 常量
+            </title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry> 日期 </entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>G</entry>
+                        <entry>Epoch, localized, abbreviated</entry>
+                        <entry>Zend_Date::ERA</entry>
+                        <entry><emphasis role="strong">AD</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>GG</entry>
+                        <entry>Epoch, localized, abbreviated</entry>
+                        <entry>Zend_Date::ERA</entry>
+                        <entry><emphasis role="strong">AD</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>GGG</entry>
+                        <entry>Epoch, localized, abbreviated</entry>
+                        <entry>Zend_Date::ERA</entry>
+                        <entry><emphasis role="strong">AD</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>GGGG</entry>
+                        <entry>Epoch, localized, complete</entry>
+                        <entry>Zend_Date::ERA_NAME</entry>
+                        <entry><emphasis role="strong">anno domini</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>GGGGG</entry>
+                        <entry>Epoch, localized, abbreviated</entry>
+                        <entry>Zend_Date::ERA</entry>
+                        <entry><emphasis role="strong">a</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>y</entry>
+                        <entry>Year, at least one digit</entry>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry><emphasis role="strong">9</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>yy</entry>
+                        <entry>Year, at least two digit</entry>
+                        <entry>Zend_Date::YEAR_SHORT</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>yyy</entry>
+                        <entry>Year, at least three digit</entry>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>yyyy</entry>
+                        <entry>Year, at least four digit</entry>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>yyyyy</entry>
+                        <entry>Year, at least five digit</entry>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry><emphasis role="strong">02009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Y</entry>
+                        <entry>Year according to ISO 8601, at least one digit</entry>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry><emphasis role="strong">9</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>YY</entry>
+                        <entry>Year according to ISO 8601, at least two digit</entry>
+                        <entry>Zend_Date::YEAR_SHORT_8601</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>YYY</entry>
+                        <entry>Year according to ISO 8601, at least three digit</entry>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>YYYY</entry>
+                        <entry>Year according to ISO 8601, at least four digit</entry>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>YYYYY</entry>
+                        <entry>Year according to ISO 8601, at least five digit</entry>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry><emphasis role="strong">02009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>M</entry>
+                        <entry>Month, one or two digit</entry>
+                        <entry>Zend_Date::MONTH_SHORT</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>MM</entry>
+                        <entry>Month, two digit</entry>
+                        <entry>Zend_Date::MONTH</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>MMM</entry>
+                        <entry>Month, localized, abbreviated</entry>
+                        <entry>Zend_Date::MONTH_NAME_SHORT</entry>
+                        <entry><emphasis role="strong">Feb</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>MMMM</entry>
+                        <entry>Month, localized, complete</entry>
+                        <entry>Zend_Date::MONTH_NAME</entry>
+                        <entry><emphasis role="strong">February</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>MMMMM</entry>
+                        <entry>Month, localized, abbreviated, one digit</entry>
+                        <entry>Zend_Date::MONTH_NAME_NARROW</entry>
+                        <entry><emphasis role="strong">F</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>w</entry>
+                        <entry>Week, one or two digit</entry>
+                        <entry>Zend_Date::WEEK</entry>
+                        <entry><emphasis role="strong">5</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ww</entry>
+                        <entry>Week, two digit</entry>
+                        <entry>Zend_Date::WEEK</entry>
+                        <entry><emphasis role="strong">05</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>d</entry>
+                        <entry>Day of the month, one or two digit</entry>
+                        <entry>Zend_Date::DAY_SHORT</entry>
+                        <entry><emphasis role="strong">9</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>dd</entry>
+                        <entry>Day of the month, two digit</entry>
+                        <entry>Zend_Date::DAY</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>D</entry>
+                        <entry>Day of the year, one, two or three digit</entry>
+                        <entry>Zend_Date::DAY_OF_YEAR</entry>
+                        <entry><emphasis role="strong">7</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>DD</entry>
+                        <entry>Day of the year, two or three digit</entry>
+                        <entry>Zend_Date::DAY_OF_YEAR</entry>
+                        <entry><emphasis role="strong">07</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>DDD</entry>
+                        <entry>Day of the year, three digit</entry>
+                        <entry>Zend_Date::DAY_OF_YEAR</entry>
+                        <entry><emphasis role="strong">007</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>E</entry>
+                        <entry>Day of the week, localized, abbreviated, one char</entry>
+                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry><emphasis role="strong">M</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>EE</entry>
+                        <entry>Day of the week, localized, abbreviated, two char</entry>
+                        <entry>Zend_Date::WEEKDAY_NAME</entry>
+                        <entry><emphasis role="strong">Mo</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>EEE</entry>
+                        <entry>Day of the week, localized, abbreviated, three char</entry>
+                        <entry>Zend_Date::WEEKDAY_SHORT</entry>
+                        <entry><emphasis role="strong">Mon</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>EEEE</entry>
+                        <entry>Day of the week, localized, complete</entry>
+                        <entry>Zend_Date::WEEKDAY</entry>
+                        <entry><emphasis role="strong">Monday</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>EEEEE</entry>
+                        <entry>Day of the week, localized, abbreviated, one digit</entry>
+                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry><emphasis role="strong">M</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>e</entry>
+                        <entry>Number of the day, one digit</entry>
+                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry><emphasis role="strong">4</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ee</entry>
+                        <entry>Number of the day, two digit</entry>
+                        <entry>Zend_Date::WEEKDAY_NARROW</entry>
+                        <entry><emphasis role="strong">04</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>a</entry>
+                        <entry>Time of day, localized</entry>
+                        <entry>Zend_Date::MERIDIEM</entry>
+                        <entry><emphasis role="strong">vorm.</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>h</entry>
+                        <entry>Hour, (1-12), one or two digit</entry>
+                        <entry>Zend_Date::HOUR_SHORT_AM</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>hh</entry>
+                        <entry>Hour, (01-12), two digit</entry>
+                        <entry>Zend_Date::HOUR_AM</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>H</entry>
+                        <entry>Hour, (0-23), one or two digit</entry>
+                        <entry>Zend_Date::HOUR_SHORT</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>HH</entry>
+                        <entry>Hour, (00-23), two digit</entry>
+                        <entry>Zend_Date::HOUR</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>m</entry>
+                        <entry>Minute, (0-59), one or two digit</entry>
+                        <entry>Zend_Date::MINUTE_SHORT</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>mm</entry>
+                        <entry>Minute, (00-59), two digit</entry>
+                        <entry>Zend_Date::MINUTE</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>s</entry>
+                        <entry>Second, (0-59), one or two digit</entry>
+                        <entry>Zend_Date::SECOND_SHORT</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ss</entry>
+                        <entry>Second, (00-59), two digit</entry>
+                        <entry>Zend_Date::SECOND</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>S</entry>
+                        <entry>Millisecond</entry>
+                        <entry>Zend_Date::MILLISECOND</entry>
+                        <entry><emphasis role="strong">20536</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>z</entry>
+                        <entry>Time zone, localized, abbreviated</entry>
+                        <entry>Zend_Date::TIMEZONE</entry>
+                        <entry><emphasis role="strong">CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>zz</entry>
+                        <entry>Time zone, localized, abbreviated</entry>
+                        <entry>Zend_Date::TIMEZONE</entry>
+                        <entry><emphasis role="strong">CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>zzz</entry>
+                        <entry>Time zone, localized, abbreviated</entry>
+                        <entry>Zend_Date::TIMEZONE</entry>
+                        <entry><emphasis role="strong">CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>zzzz</entry>
+                        <entry>Time zone, localized, complete</entry>
+                        <entry>Zend_Date::TIMEZONE_NAME</entry>
+                        <entry><emphasis role="strong">Europe/Paris</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Z</entry>
+                        <entry>Difference of time zone</entry>
+                        <entry>Zend_Date::GMT_DIFF</entry>
+                        <entry><emphasis role="strong">+0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ZZ</entry>
+                        <entry>Difference of time zone</entry>
+                        <entry>Zend_Date::GMT_DIFF</entry>
+                        <entry><emphasis role="strong">+0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ZZZ</entry>
+                        <entry>Difference of time zone</entry>
+                        <entry>Zend_Date::GMT_DIFF</entry>
+                        <entry><emphasis role="strong">+0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>ZZZZ</entry>
+                        <entry>Difference of time zone, separated</entry>
+                        <entry>Zend_Date::GMT_DIFF_SEP</entry>
+                        <entry><emphasis role="strong">+01:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>A</entry>
+                        <entry>Millisecond</entry>
+                        <entry>Zend_Date::MILLISECOND</entry>
+                        <entry><emphasis role="strong">20563</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <note>
+            <para>
+                注意缺省的 ISO 格式不同于 PHP 的格式，如果在先前没有使用，PHP 的格式可以迭代。
+                特别是 <emphasis role="strong">Year and Minute</emphasis> 的格式指定器不常按预期来使用。
+            </para>
+
+            <para>
+                对于 <emphasis role="strong">year</emphasis> 有两个可用的指定器经常发生错误：
+                ISO 年的<emphasis role="strong">Y</emphasis> 指定器和真实年的 <emphasis role="strong">y</emphasis> 的指定器。
+                区别微小但意义重大。
+                <emphasis role="strong">Y</emphasis> 计算 ISO 年，常用于日历格式，例如 the 31. December 2007。
+                真实年为 2007，但它是 2008 年的第一周的第一天，所以，如果使用 'dd.MM.yyyy' 会得到 '31.December.2007' 但如果使用 'dd.MM.YYYY' 会得到 '31.December.2008'。
+                正如你所看到的，这不是 bug ， 但期望的行为依赖指定器的使用。
+            </para>
+
+            <para>
+                对 <emphasis role="strong">minute</emphasis> 来说区别不大。ISO 使用 <emphasis role="strong">m</emphasis> 指定器，PHP 使用 <emphasis role="strong">i</emphasis>。
+                所以如果没有按你的格式获得分钟数，检查是否使用了正确的指定器。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.date.constants.phpformats">
+
+        <title> 使用 PHP 的 date() 格式指定器的自定义输出格式 </title>
+
+        <para>
+            如果你更喜欢使用 PHP 的日期格式指定器，可以使用 <code>Zend_Date::setOptions(array('format' => 'php'))</code> 方法
+            把 Zend_Date 方法从支持 ISO 格式制定器切换到 PHP date()类型制定器。然后所有参数必需用 <ulink url="http://php.net/date">PHP's <code>date()</code> 格式指定器 </ulink> 给出。
+            PHP 日期格式缺乏一些 ISO 格式支持的格式，反之亦然。如果不喜欢，可以使用标准的 ISO 格式。
+            而且，如果你有一些历史遗留的使用 PHP 日期格式的代码，可以用 <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link> 手工转换为 ISO 格式，或使用 <code>setOptions()</code>。
+            下面的例子示例了从下表生成的自定义格式的常量的用法。
+        </para>
+
+        <example id="zend.date.constants.phpformats.example-1">
+            <title> 用 PHP 指定器自定义格式的用例 </title>
+            <programlisting role="php"><![CDATA[
+$locale = new Zend_Locale('de_AT');
+Zend_Date::setOptions(array('format_type' => 'php'));
+$date = new Zend_Date(1234567890, false, $locale);
+
+// outputs something like 'February 16, 2007, 3:36 am'
+print $date->toString('F j, Y, g:i a');
+
+print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            下标列出了带有相应等同的 Zend_Date常量和 CLDR/ISO 格式指定器的 PHP 日期格式指定器。
+            对一些情况，当 CLDR/ISO 格式没有等同的格式指定器时，PHP 格式指定器不用 <code>Zend_Locale_Format::convertPhpToIsoFormat()</code> 来改变，
+            并且 Zend_Date 方法承认这些 “奇特的” PHP 格式指定器，即使是处于缺省的 "ISO" 格式模式中。
+        </para>
+
+        <table id="zend.date.constants.phpformats.table">
+            <title> <emphasis role="strong">PHP 日期输出 </emphasis> 常量
+            </title>
+            <tgroup cols="5">
+                <thead>
+                    <row>
+                        <entry> 常数 </entry>
+                        <entry> 描述 </entry>
+                        <entry>Corresponds best to</entry>
+                        <entry>closest CLDR equivalent</entry>
+                        <entry> 受影响部分/例子 </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>d</entry>
+                        <entry>Day of the month, two digit</entry>
+                        <entry>Zend_Date::DAY</entry>
+                        <entry>dd</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>D</entry>
+                        <entry>Day of the week, localized, abbreviated, three digit</entry>
+                        <entry>Zend_Date::WEEKDAY_SHORT</entry>
+                        <entry>EEE</entry>
+                        <entry><emphasis role="strong">Mon</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>j</entry>
+                        <entry>Day of the month, one or two digit</entry>
+                        <entry>Zend_Date::DAY_SHORT</entry>
+                        <entry>d</entry>
+                        <entry><emphasis role="strong">9</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>l (lowercase L)</entry>
+                        <entry>Day of the week, localized, complete</entry>
+                        <entry>Zend_Date::WEEKDAY</entry>
+                        <entry>EEEE</entry>
+                        <entry><emphasis role="strong">Monday</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>N</entry>
+                        <entry>Number of the weekday, one digit</entry>
+                        <entry>Zend_Date::WEEKDAY_8601</entry>
+                        <entry>e</entry>
+                        <entry><emphasis role="strong">4</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>S</entry>
+                        <entry>English suffixes for day of month, two chars</entry>
+                        <entry>no equivalent</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">st</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>w</entry>
+                        <entry>Number of the weekday, 0=sunday, 6=saturday</entry>
+                        <entry>Zend_Date::WEEKDAY_DIGIT</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">4</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>z</entry>
+                        <entry>Day of the year, one, two or three digit</entry>
+                        <entry>Zend_Date::DAY_OF_YEAR</entry>
+                        <entry>D</entry>
+                        <entry><emphasis role="strong">7</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>W</entry>
+                        <entry>Week, one or two digit</entry>
+                        <entry>Zend_Date::WEEK</entry>
+                        <entry>w</entry>
+                        <entry><emphasis role="strong">5</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>F</entry>
+                        <entry>Month, localized, complete</entry>
+                        <entry>Zend_Date::MONTH_NAME</entry>
+                        <entry>MMMM</entry>
+                        <entry><emphasis role="strong">February</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>m</entry>
+                        <entry>Month, two digit</entry>
+                        <entry>Zend_Date::MONTH</entry>
+                        <entry>MM</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>M</entry>
+                        <entry>Month, localized, abbreviated</entry>
+                        <entry>Zend_Date::MONTH_NAME_SHORT</entry>
+                        <entry>MMM</entry>
+                        <entry><emphasis role="strong">Feb</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>n</entry>
+                        <entry>Month, one or two digit</entry>
+                        <entry>Zend_Date::MONTH_SHORT</entry>
+                        <entry>M</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>t</entry>
+                        <entry>Number of days per month, one or two digits</entry>
+                        <entry>Zend_Date::MONTH_DAYS</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">30</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>L</entry>
+                        <entry>Leapyear, boolean</entry>
+                        <entry>Zend_Date::LEAPYEAR</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">true</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>o</entry>
+                        <entry>Year according to ISO 8601, at least four digit</entry>
+                        <entry>Zend_Date::YEAR_8601</entry>
+                        <entry>YYYY</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Y</entry>
+                        <entry>Year, at least four digit</entry>
+                        <entry>Zend_Date::YEAR</entry>
+                        <entry>yyyy</entry>
+                        <entry><emphasis role="strong">2009</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>y</entry>
+                        <entry>Year, at least two digit</entry>
+                        <entry>Zend_Date::YEAR_SHORT</entry>
+                        <entry>yy</entry>
+                        <entry><emphasis role="strong">09</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>a</entry>
+                        <entry>Time of day, localized</entry>
+                        <entry>Zend_Date::MERIDIEM</entry>
+                        <entry>a (sort of, but likely to be uppercase)</entry>
+                        <entry><emphasis role="strong">vorm.</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>A</entry>
+                        <entry>Time of day, localized</entry>
+                        <entry>Zend_Date::MERIDIEM</entry>
+                        <entry>a (sort of, but no guarantee that the format is uppercase)</entry>
+                        <entry><emphasis role="strong">VORM.</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>B</entry>
+                        <entry>Swatch internet time</entry>
+                        <entry>Zend_Date::SWATCH</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">1463</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>g</entry>
+                        <entry>Hour, (1-12), one or two digit</entry>
+                        <entry>Zend_Date::HOUR_SHORT_AM</entry>
+                        <entry>h</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>G</entry>
+                        <entry>Hour, (0-23), one or two digit</entry>
+                        <entry>Zend_Date::HOUR_SHORT</entry>
+                        <entry>H</entry>
+                        <entry><emphasis role="strong">2</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>h</entry>
+                        <entry>Hour, (01-12), two digit</entry>
+                        <entry>Zend_Date::HOUR_AM</entry>
+                        <entry>hh</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>H</entry>
+                        <entry>Hour, (00-23), two digit</entry>
+                        <entry>Zend_Date::HOUR</entry>
+                        <entry>HH</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>i</entry>
+                        <entry>Minute, (00-59), two digit</entry>
+                        <entry>Zend_Date::MINUTE</entry>
+                        <entry>mm</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>s</entry>
+                        <entry>Second, (00-59), two digit</entry>
+                        <entry>Zend_Date::SECOND</entry>
+                        <entry>ss</entry>
+                        <entry><emphasis role="strong">02</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>e</entry>
+                        <entry>Time zone, localized, complete</entry>
+                        <entry>Zend_Date::TIMEZONE_NAME</entry>
+                        <entry>zzzz</entry>
+                        <entry><emphasis role="strong">Europe/Paris</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>I</entry>
+                        <entry>Daylight</entry>
+                        <entry>Zend_Date::DAYLIGHT</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">1</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>O</entry>
+                        <entry>Difference of time zone</entry>
+                        <entry>Zend_Date::GMT_DIFF</entry>
+                        <entry>Z or ZZ or ZZZ</entry>
+                        <entry><emphasis role="strong">+0100</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>P</entry>
+                        <entry>Difference of time zone, separated</entry>
+                        <entry>Zend_Date::GMT_DIFF_SEP</entry>
+                        <entry>ZZZZ</entry>
+                        <entry><emphasis role="strong">+01:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>T</entry>
+                        <entry>Time zone, localized, abbreviated</entry>
+                        <entry>Zend_Date::TIMEZONE</entry>
+                        <entry>z or zz or zzz</entry>
+                        <entry><emphasis role="strong">CET</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>Z</entry>
+                        <entry>Time zone offset in seconds</entry>
+                        <entry>Zend_Date::TIMEZONE_SECS</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">3600</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>c</entry>
+                        <entry>Standard Iso format output</entry>
+                        <entry>Zend_Date::ISO_8601</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">2004-02-12T15:19:21+00:00</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>r</entry>
+                        <entry>Standard Rfc 2822 format output</entry>
+                        <entry>Zend_Date::RFC_2822</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">Thu, 21 Dec 2000 16:01:07 +0200</emphasis>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>U</entry>
+                        <entry>Unix timestamp</entry>
+                        <entry>Zend_Date::TIMESTAMP</entry>
+                        <entry>no equivalent</entry>
+                        <entry><emphasis role="strong">15275422364</emphasis>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+</sect1>

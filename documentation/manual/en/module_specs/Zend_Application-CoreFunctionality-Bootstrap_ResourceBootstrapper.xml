@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
+    <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
+
+    <para>
+        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> is an
+        interface to use when a bootstrap class will be loading external
+        resources -- i.e., one or more resources will not be defined directly in
+        the class, but rather via plugins. It should be used in conjunction with
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        implements this functionality.
+    </para>
+
+    <para>
+        The following methods make up the definition of the interface.
+    </para>
+
+    <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
+        <title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Return Value</entry>
+                    <entry>Parameters</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>registerPluginResource($resource, $options =
+                            null)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>required</emphasis>.
+                            A resource name or
+                            <classname>Zend_Application_Resource_Resource</classname>
+                            object.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            An array or <classname>Zend_Config</classname> object to pass
+                            to the resource on instantiation.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Register a resource with the class, providing optional
+                        configuration to pass to the resource.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>unregisterPluginResource($resource)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>required</emphasis>.
+                            Name of a resource to unregister from the class.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Remove a plugin resource from the class.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>hasPluginResource($resource)</code></entry>
+                    <entry><code>boolean</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>required</emphasis>.
+                            Name of the resource.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Determine if a specific resource has been registered
+                        with the class.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getPluginResource($resource)</code></entry>
+                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>required</emphasis>.
+                            Name of a resource to retrieve (string).
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Retrieve a plugin resource instance by name.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getPluginResourceNames()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve a list of all registered plugin resource names.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setPluginLoader(Zend_Loader_PluginLoader_Interface
+                            $loader)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$loader</code>: <emphasis>required</emphasis>.
+                            Plugin loader instance to use when resolving plugin
+                            names to classes.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Register a plugin loader instance to use when resolving
+                        plugin class names.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getPluginLoader()</code></entry>
+                    <entry><classname>Zend_Loader_PluginLoader_Interface</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the registered plugin loader.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.auth.adapter.digest">
+
+    <title>Digest Authentication</title>
+
+    <sect2 id="zend.auth.adapter.digest.introduction">
+
+        <title>Introduction</title>
+
+        <para>
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest authentication</ulink>
+            is a method of HTTP authentication that improves upon
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basic authentication</ulink>
+            by providing a way to authenticate without having to transmit the password in clear text across
+            the network.
+        </para>
+
+        <para>
+            This adapter allows authentication against text files containing lines having the basic elements
+            of Digest authentication:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        username, such as "<code>joe.user</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        realm, such as "<code>Administrative Area</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        MD5 hash of the username, realm, and password, separated by colons
+                    </para>
+                </listitem>
+            </itemizedlist>
+            The above elements are separated by colons, as in the following example (in which the password is
+            "<code>somePassword</code>"):
+        </para>
+
+        <programlisting><![CDATA[
+someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.specifics">
+
+        <title>Specifics</title>
+
+        <para>
+            The digest authentication adapter, <classname>Zend_Auth_Adapter_Digest</classname>, requires several input parameters:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        filename - Filename against which authentication queries are performed
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        realm - Digest authentication realm
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        username - Digest authentication user
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        password - Password for the user of the realm
+                    </para>
+                </listitem>
+            </itemizedlist>
+            These parameters must be set prior to calling <code>authenticate()</code>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.identity">
+
+        <title>Identity</title>
+
+        <para>
+            The digest authentication adapter returns a <classname>Zend_Auth_Result</classname> object, which has been
+            populated with the identity as an array having keys of <code>realm</code> and
+            <code>username</code>. The respective array values associated with these keys correspond to the
+            values set before <code>authenticate()</code> is called.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$adapter = new Zend_Auth_Adapter_Digest($filename,
+                                        $realm,
+                                        $username,
+                                        $password);
+
+$result = $adapter->authenticate();
+
+$identity = $result->getIdentity();
+
+print_r($identity);
+
+/*
+Array
+(
+    [realm] => Some Realm
+    [username] => someUser
+)
+*/
+]]></programlisting>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

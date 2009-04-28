@@ -1,0 +1,44 @@
+<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Dojo 视图助手</title>
+
+    <para>
+        Zend Framework 提供下列 Dojo-specific 视图助手：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <emphasis>dojo():</emphasis> 给你的页面设置 Dojo 环境，
+            包括 dojo 配置值、定制模块路径、模块请求语句、主题风格、是否使用 CDN 等等。
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.dojo.view.setup">
+        <title>使用 Dojo 视图助手</title>
+
+        <para>
+            为了使用 Dojo 视图助手，你需要告诉视图对象到哪里去找它们，调用
+            <code>addHelperPath()</code>：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]>
+        </programlisting>
+
+        <para>
+            另外，你也可以使用 <code>Zend_Dojo</code> 的
+            <code>enableView()</code> 方法来做：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Dojo::enableView($view);
+]]>
+        </programlisting>
+    </example>
+
+    <xi:include href="Zend_Dojo-View-Dojo.xml" />
+    <xi:include href="Zend_Dojo-View-Helpers.xml" />
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

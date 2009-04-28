@@ -1,0 +1,12 @@
+<sect1 id="introduction.overview">
+    <title>Áttekintés</title>
+    <para>
+        A Zend Framework egy minőségi, nyílt forrású keretrendszer webalkalmazások és webszolgáltatások PHP-val történő fejlesztésére.
+    </para>
+    <para>
+        Az igazi PHP szellemben épült Zend Framework egyszerű használatot és erőteljes funkcionalitást nyújt. Korszerű, szilárd és biztonságos  weboldalakhoz kínál megoldásokat.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.date.creation">
+
+    <title>Erstellen von Datumswerten</title>
+
+    <para>
+        <classname>Zend_Date</classname> unterstützt viele verschiedene Wege um eine neue Instanz von sich selbst zu
+        erstellen. Da es verschiedene Notwendigkeiten gibt, werden die bequemsten Wege in diesem Kapitel
+        gezeigt.
+    </para>
+
+    <sect2 id="zend.date.creation.actual">
+
+        <title>Erstellen des aktuellen Datums</title>
+
+        <para>
+            Der einfachste Weg der Erstellung eines Datumsobjektes ist es ein aktuelles Datum zu erstellen. Man
+            kann entweder eine neue Instanz mit <emphasis role="strong">new Zend_Date()</emphasis> erstellen, oder
+            die bequemere statische Methode <emphasis role="strong">Zend_Date::now()</emphasis> verwenden wobei
+            beide das aktuelle Datum als neue Instanz von <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum
+            enthält immer das aktuelle Datum und die Zeit für die aktuell gesetzte Zeitzone.
+        </para>
+
+        <example id="zend.date.creation.actual.example-1">
+
+            <title>Datum durch Instanz erstellen</title>
+
+            <para>
+                Datumserstellung durch Erzeugen einer neuen Instanz bedeutet das man keinen Parameter angeben
+                muß. Natürlich gibt es mehrere Parameter die später beschrieben werden aber normalerweise ist
+                das der einfachste und meist genutzte Weg um das aktuelle Datum als <classname>Zend_Date</classname>
+                Instanz zu erhalten.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.date.creation.actual.example-2">
+
+            <title>Statische Erstellung eines Datums</title>
+
+            <para>
+                Machmal ist es einfacher eine statische Methode für die Erstellung eines Datums zu verwenden.
+                Hierfür kann die <emphasis role="strong"><code>now()</code></emphasis> Methode verwendet werden.
+                Sie gibt eine neue Instanz von <classname>Zend_Date</classname> auf die gleiche Art und Weise zurück wie
+                wenn man <code>new Zend_Date()</code> Verwenden würde. Es wird aber immer das aktuelle Datum
+                zurückgegeben und das kann auch nur durch die Angabe von optionalen Parametern geändert werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$date = Zend_Date::now();
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.creation.database">
+
+        <title>Erstellen von Datumswerten von einer Datenbank</title>
+
+        <para>
+            Datenbanken werden oft verwendet um Datumswerte zu speichern. Aber das Problem ist, das jede Datenbank
+            Ihre Datumswerte in einem anderen Weg ausgibt. <code>MsSQL</code> Datenbanken verwenden eine etwas
+            andere Standardausgabe von Datumswerten als <code>MySQL</code> Datenbanken. Aber zur Vereinfachung
+            macht es <classname>Zend_Date</classname> sehr simpel ein Datum von einem Datumswert einer Datenbank zu erstellen.
+        </para>
+
+        <para>
+            Natürlich kann jeder Datenbank gesagt werden das Sie die Ausgabe einer definierten Spalte in einen
+            speziellen Wert konvertiert. Zum Beispiel können ein <code>datetime</code> Wert so konvertiert werden
+            das ein Minutenwert ausgegeben wird. Aber das benötigt viel Zeit und oft müssen Datumswerte auf eine
+            andere Art und Weise bearbeitet werden als bei der Erstellung der Datenbankabfrage gedacht wurde.
+        </para>
+
+        <para>
+            Deswegen gibt es einen schnellen und einen bequemen Weg ein Datum von Datenbankwerten zu erstellen.
+        </para>
+
+        <example id="zend.date.creation.database.example-1">
+
+            <title>Schnelle Erstellung eines Datums von Datumswerten einer Datenbank</title>
+
+            <para>
+                Von allen Datenbanken ist bekannt das Sie Abfragen so schnell wie möglich bearbeiten. Sie wurden
+                erstellt um schnell zu arbeiten und zu antworten. Der Schnellste Weg um Datumswerte zu bearbeiten
+                ist es aus der Datenbank Unit Timestamps zu erhalten. Alle Datenbanken speichern Datumswerte
+                intern als Timestamps (nicht Unix Timestamps). Das bedeutet das die Zeit für die Erstellung
+                eines Timestamps durch eine Abfrage viel kleiner ist als die Konvertierung in ein spezielles
+                Format.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
+$date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.date.creation.database.example-2">
+
+            <title>Bequeme Erstellung eines Datums von Datumswerten einer Datenbank</title>
+
+            <para>
+                Die Standardausgabe von allen Datenbanken ist leicht unterschiedlich selbst wenn
+                diese auf den ersten Blick gleich ausschauen. Aber alle sind Teil des
+                <code>ISO</code> Standards und durch Ihn beschrieben. Deshalb liegt der einfachste
+                Weg ein Datum zu erstellen in der Verwendung von <classname>Zend_Date::ISO_8601</classname>.
+                Datenbanken von denen bekannt ist das Sie durch <classname>Zend_Date::ISO_8601</classname>
+                erkannt werden sind zum Beispiel <code>MySQL</code> und <code>MsSQL</code>. Aber
+                alle Datenbanken können eine <code>ISO 8601</code> Repräsentation von Datumsspalten
+                ausgeben. <code>ISO 8601</code> hat den großen Vorteil das es menschlich lesbar
+                ist. Der Nachteil ist das <code>ISO 8601</code> mehr Zeit zur Berechnung benötigt
+                als ein einfacher Unix Timestamp. Es soll auch erwähnt werden das Unix Timestamps
+                nur für Datumswerte nach dem 1 Jänner 1970 unterstützt werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// SELECT datecolumn FROM my_table
+$date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.creation.array">
+
+        <title>Erstellung eines Datums von einem Array</title>
+
+        <para>
+            Datumswerte können auch durch die Verwendung eines Arrays erstellt werden. Das ist ein einfacher
+            und leichter Weg. Die verwendeten Array Schlüssel sind:
+        </para>
+
+        <para>
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">day</emphasis>: Tag des Datums als Zahl
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">month</emphasis>: Monat des Datums als Zahl
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">year</emphasis>: Vollständiges Jahr des Datums
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">hour</emphasis>: Stunde des Datums
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">minute</emphasis>: Minute des Datums
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">second</emphasis>: Sekunde des Datums
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.date.creation.array.example">
+
+            <title>Erstellen eines Datums durch ein Array</title>
+
+            <para>
+                Normalerweise wird ein komplettes Datumsarray für die Erstellung einer neuen Instanz des Datums
+                angegeben werden. Aber wenn nicht alle Werte angegeben werden, werden die nicht angegebenen
+                Arraywerte genullt. Das bedeutet das wenn z.B. keine Stunde angegeben wird, die Stunde
+                <emphasis role="strong">0</emphasis> verwendet wird.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$datearray = array('year' => 2006,
+                   'month' => 4,
+                   'day' => 18,
+                   'hour' => 12,
+                   'minute' => 3,
+                   'second' => 10);
+$date = new Zend_Date($datearray)
+;]]>
+            </programlisting>
+
+            <programlisting role="php"><![CDATA[
+$datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
+$date = new Zend_Date($datearray);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>

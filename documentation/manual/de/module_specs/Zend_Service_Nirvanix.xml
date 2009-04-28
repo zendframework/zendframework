@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.nirvanix">
+    <title>Zend_Service_Nirvanix</title>
+
+    <sect2 id="zend.service.nirvanix.introduction">
+        <title>Einführung</title>
+
+        <para>
+            Nirvanix bietet ein Internet Media File System (IMFS), einen Internet Speicher Service
+            der es Anwendungen erlaubt Dateien hochzuladen, zu speichern, zu organisieren und
+            nachhaltig auf Sie zuzugreifen durch Verwendung eines Standard Web Service Interfaces.
+            Ein IMFS ist ein verteiltes geclustertes Dateisystem, auf das über das Internet
+            zugegriffen wird, und das für die Handhabung mit Mediendateien (Audio, Video, usw.)
+            optimiert ist. Das Ziel eines IMFA ist es massive Skalarität zu bieten um den
+            Problemen des Wachstums der Medienspeicher Herr zu werden, mit garantiertem Zugriff und
+            Erreichbarkeit unabhängig von Zeit und Ort. Letztendlich, gibt eine IMFS Anwendung die
+            Möglichkeit auf Daten sicher zuzugreifen, ohne die großen Fixkosten die mit der
+            Beschaffung und Einrichtung von physikalischen Speicherbänken verbunden sind.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.registering">
+        <title>Registrierung bei Nirvanix</title>
+
+        <para>
+            Bevor man mit <classname>Zend_Service_Nirvanix</classname> beginnt, muß man sich zuerst für einen
+            Account anmelden. Bitte sehen Sie auf die
+            <ulink url="http://www.nirvanix.com/gettingStarted.aspx">Wie man anfängt</ulink> Seite auf
+            der Nirvanix Webseite für weitere Informationen.
+        </para>
+
+        <para>
+            Nach der Registrierung erhält man einen Benutzernamen, ein Passwort und einen
+            Anwendungsschlüssel. Alle drei werden benötigt um <classname>Zend_Service_Nirvanix</classname> zu
+            verwenden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.apiDocumentation">
+        <title>API Dokumentation</title>
+
+        <para>
+            Der Zugriff auf Nirvanix IMFS ist durch beide, sowohl ein SOAP als auch ein schnelleres
+            REST Service möglich. <classname>Zend_Service_Nirvanix</classname> bietet einen relativ dünnen
+            PHP 5 Wrapper um das REST Service.
+        </para>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname> zielt darauf ab das Nirvanix REST Service einfacher
+            zu verwenden aber zu verstehen das das Service selbst trotzdem noch essentiell ist um
+            mit Nirvanix erfolgreich zu sein.
+        </para>
+
+        <para>
+            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API
+            Dokumentation</ulink> bietet eine Übersicht sowie detailierte Informationen über die
+            Verwendung des Services. Bitte machen Sie sich mit diesem Dokument vertraut und
+            referieren Sie darauf wenn Sie <classname>Zend_Service_Nirvanix</classname> verwenden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.features">
+        <title>Features</title>
+
+        <para>
+            Nirvanix's REST Service kann mit PHP effektiv verwendet werden alleine mit Hilfe der
+            <ulink url="http://www.php.net/simplexml">SimpleXML</ulink> Erweiterung und
+            <classname>Zend_Http_Client</classname>. Trotzdem ist deren Verwendung auf diesem Weg irgendwie
+            unbequem wegen der wiederholenden Operationen, wie die Übergabe des Session Tokens bei
+            jeder Anfrage und der wiederholten Prüfung des Antwort Bodys nach Fehlercodes.
+        </para>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname> bietet die folgenden Funktionalitäten:
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Einen einzelnen Punkt für die Konfiguration der Nirvanix Authentifizierungs
+                        Daten die mit den Nirvanix Namespaces verwendet werden können.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Ein Proxy Objekt das viel bequemer ist als ein HTTP Client alleine,
+                        hauptsächlich wird die Notwendigkeit entfernt die HTTP POST Anfrage manuell
+                        zu erstellen um auf das REST Service zugreifen zu können.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Ein verantwortlicher Wrapper der jeden Antwortbody parst und eine Ausnahme
+                        wirft wenn ein Fehler aufgetreten ist, was die Notwendigkeit mildert
+                        widerholt den Erfolg der vielen Kommandos zu prüfen.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Zusätzliche bequeme Methoden für einige oder die meisten üblichen Operationen.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.storing-your-first">
+        <title>Der Anfang</title>
+
+        <para>
+            Sobald man in Nirvanix registriert ist, ist man bereit die ersten Datein am IMFS zu
+            speichern. Die üblichste Operation die man am IMFS benötigt ist der Erstellung einer
+            neuen Datei, das Herunterladen bestehender Dateien, und das Löschen einer Datei.
+            <classname>Zend_Service_Nirvanix</classname> bietet bequeme Methoden für diese drei Operationen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$auth = array('username' => 'Dein-Benutzername',
+              'password' => 'Dein-Passwort',
+              'appKey'   => 'Dein-App-Schlüssel');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$imfs->putContents('/foo.txt', 'zu speichernder Inhalt');
+
+echo $imfs->getContents('/foo.txt');
+
+$imfs->unlink('/foo.txt');
+]]>
+        </programlisting>
+
+        <para>
+            Der erste Schritt um <classname>Zend_Service_Nirvanix</classname> zu verwenden ist immer sich
+            gegenüber dem Service zu authentifizieren. Das wird durch die Übergabe der Anmeldedaten
+            an den Kontruktor von <classname>Zend_Service_Nirvanix</classname>, wie oben, gemacht. Das
+            assoziative Array wurd direkt an Nirvanix als POST Parameter übergeben.
+        </para>
+
+        <para>
+            Nirvanix teilt seine WebService in
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">Namespaces</ulink>
+            auf. Jeder Namespace kapselt eine Gruppe von zusammengehörenden Operationen. Nachdem
+            man eine Instanz von <classname>Zend_Service_Nirvanix</classname> erhalten hat, muß die
+            <code>getService()</code> Methode aufgerufen werden um einen Proxy für den Namespace zu
+            erhalten den man verwenden will. Oben wird ein Proxy für den <code>IMFS</code>
+            Namespace erstellt.
+        </para>
+
+        <para>
+            Nachdem man den Proxy für den Namespace hat den man verwenden will, muß die Methode auf
+            Ihm aufgerufen werden. Der Proxy erlaubt es jedes Kommando zu verwenden das in der
+            REST API vorhanden ist. Der Proxy kann auch bequeme Methoden verfügbar machen, welche
+            Kommandos des Web Services wrappen. Das obige Beispiel zeigt die Verwendung der
+            bequemen IMFS Methoden um eine neue Datei zu erstellen, sie zu empfangen, diese
+            Datei anzuzeigen und letztendlich die Datei zu löschen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.understanding-proxy">
+        <title>Den Proxy verstehen</title>
+
+        <para>
+            Im vorherigen Beispiel wurde die <code>getService()</code> Methode verwendet um ein
+            Proxy Objekt zum <code>IMFS</code> Namespace zurückzugeben. Das Proxy Objekt erlaubt es
+            das Nirvanix REST Service in einer Art zu verwenden die näher daran ist wie
+            normalerweise ein PHP Methodenaufruf durchgeführt wird, gegenüber der Erstellung von
+            eigenen HTTP Anfrage Objekten.
+        </para>
+
+        <para>
+            Ein Proxy Objekt kann bequeme Methoden enthalten. Das sind Methoden die
+            <classname>Zend_Service_Nirvanix</classname> bietet um die Verwendung der Nirvanix Web Services
+            zu vereinfachen. Im vorigen Beispiel haben die Methoden <code>putContents()</code>,
+            <code>getContents()</code>, und <code>unlink()</code> keine direkte Entsprechungen in
+            der REST API. Das sind bequeme Methoden die von <classname>Zend_Service_Nirvanix</classname>
+            angeboten werden um viel komplexere Operationen der REST API zu abstrahieren.
+        </para>
+
+        <para>
+            Für alle anderen Methodenaufrufe zum Proxy Objekt konvertiert der Proxy dynamisch den
+            Methodenaufruf in die entsprechende HTTP POST Anfrage zur REST API. Hierbei wird der
+            Name der Methode als API Kommando verwendet, und ein assoziatives Array im ersten
+            Argument als POST Parameter.
+        </para>
+
+        <para>
+            Nehmen wir an das wir die REST API Methode
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</ulink>
+            aufrufen wollen welche keine bequeme Methode in <classname>Zend_Service_Nirvanix</classname>
+            besitzen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$auth = array('username' => 'Dein-Benutzername',
+              'password' => 'Dein-Passwort',
+              'appKey'   => 'Dein-App-Schlüssel');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
+                                  'newFileName' => 'bar.txt'));
+]]>
+        </programlisting>
+
+        <para>
+            Oben wird ein Proxy für den <code>IMFS</code> erstellt. Eine Methode,
+            <code>renameFile()</code>, wird dann vom Proxy aufgerufen. Diese Methode existiert
+            nicht als bequeme Methode im PHP Code, deswegen wird Sie durch <code>__call()</code>
+            gefangen und in eine POST Anfrage für die REST API umgewandelt wo das assoziative
+            Array als POST Parameter verwendet wird.
+        </para>
+
+        <para>
+            Es ist in der Nirvanix API Dokumentation zu beachten das <code>sessionToken</code>
+            für diese Methode benötigt wird, wir dieses aber nicht an das Proxy Objekt übbergeben
+            haben. Es wird, der Bequemlichkeit halber, automatisch hinzugefügt.
+        </para>
+
+        <para>
+            Das Ergebnis dieser Operation ist entweder ein
+            <classname>Zend_Service_Nirvanix_Response</classname> Objekt das das von Nirvanix zurückgegebene
+            XLP wrappt, oder <classname>Zend_Service_Nirvanix_Exception</classname> wenn ein Fehler
+            aufgetreten ist.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.examining-results">
+        <title>Ergebnisse erkunden</title>
+
+        <para>
+            Die Nirvanix REST API gibt Ihre Ergebnisse immer in einem XML zurück.
+            <classname>Zend_Service_Nirvanix</classname> parst dieses XML mit der <code>SimpleXML</code>
+            Erweiterung und dekoriert dann das sich ergebende <code>SimpleXMLElement</code>
+            mit einem <classname>Zend_Service_Nirvanix_Response</classname> Objekt.
+        </para>
+
+        <para>
+            Der einfachste Weg ein Ergebnis vom service zu betrachten ist die Verwendung der
+            in PHP eingebauten Funktionen wie <code>print_r()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php
+$auth = array('username' => 'Dein-Benutzername',
+              'password' => 'Dein-Passwort',
+              'appKey'   => 'Dein-App-Schlüssel');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$result = $imfs->putContents('/foo.txt', 'Vierzehn Bytes');
+print_r($result);
+?>
+
+
+Zend_Service_Nirvanix_Response Object
+(
+    [_sxml:protected] => SimpleXMLElement Object
+        (
+            [ResponseCode] => 0
+            [FilesUploaded] => 1
+            [BytesUploaded] => 14
+        ))
+]]>
+        </programlisting>
+
+        <para>
+            Auf jede Eigenschaft oder Methode des dekorierten <code>SimpleXMLElement</code>s kann
+            zugegriffen werden. Im obigen Beispiel, könnte <code>$result->BytesUploaded</code>
+            verwendet werden um die anzahl von empfangenen Bytes zu sehen. Sollte man auf das
+            <code>SimpleXMLElement</code> direkt zugreifen wollen, kann einfach
+            <code>$result->getSxml()</code> verwendet werden.
+        </para>
+
+        <para>
+            Die üblichste Antwort von Nirvanix ist Erfolg (<code>ResponseCode</code> von Null).
+            Es ist normalerweise nicht notwendig <code>ResponseCode</code> zu prüfen weil
+            jedes nicht-null Ergebnis eine <classname>Zend_Service_Nirvanix_Exception</classname> wirft.
+            Siehe das nächste Kapitel über die Behandlung von Fehlern.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.handling-errors">
+        <title>Fehler behandeln</title>
+
+        <para>
+            Wenn Nirvanix verwendet wird, ist es wichtig Fehler zu vermeiden die vom Service
+            zurückgegeben werden können und diese entsprechend zu behandeln.
+        </para>
+
+        <para>
+            Alle Operationen gegenüber dem REST Service ergeben einen XML RückgabePayload der
+            ein <code>ResponseCode</code> Element, wie im folgenden Beispiel, enthält:
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<Response>
+    <ResponseCode>0</ResponseCode>
+</Response>
+]]>
+        </programlisting>
+
+        <para>
+            Wenn <code>ResponseCode</code> Null ist, wie im obigen Beispiel,  war die Operation
+            erfolgreich. Wenn die Operation nicht erfolgreich war, ist <code>ResponseCode</code>
+            nicht-Null und ein <code>ErrorMessage</code> Element sollte vorhanden sein.
+        </para>
+
+        <para>
+            Um die Notwendigkeit zu verringern immer zu Prüfen ob <code>ResponseCode</code> Null
+            ist, prüft <classname>Zend_Service_Nirvanix</classname> automatisch jede von Nirvanix
+            zurückgegebene Antwort. Wenn <code>ResponseCode</code> einen Fehler zeigt, wird eine
+            <classname>Zend_Service_Nirvanix_Exception</classname> geworfen.
+        </para>
+
+      <programlisting role="xml"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
+$nirvanix = new Zend_Service_Nirvanix($auth);
+
+try {
+
+  $imfs = $nirvanix->getService('IMFS');
+  $imfs->unlink('/a-nonexistant-path');
+
+} catch (Zend_Service_Nirvanix_Exception $e) {
+  echo $e->getMessage() . "\n";
+  echo $e->getCode();
+}
+]]>
+        </programlisting>
+
+        <para>
+            im obigen Beispiel ist <code>unlink()</code> eine bequeme Methode die das
+            <code>DeleteFiles</code> der REST API wrappt. Der <code>filePath</code> Parameter wird
+            vom <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
+            Kommando benötigt und enthält einen Pfad der nicht existiert. Das wird in einer
+            <classname>Zend_Service_Nirvanix</classname> Ausnahme resultieren die, mit der Nachricht
+            "Invalid Path" und Code 70005, geworfen wird.
+        </para>
+
+        <para>
+            Die <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API
+            Dokumentation</ulink> beschreibt die mit jedem Kommando assoziierten Fehler.
+            Abhängig von den eigenen Bedürfnissen kann jedes Kommando in einen <code>try</code>
+            Block eingebettet werden oder aus Bequemlichkeit, viele Kommandos im selben
+            <code>try</code> Block.
+        </para>
+    </sect2>
+
+</sect1>

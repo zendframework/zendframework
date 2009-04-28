@@ -1,0 +1,39 @@
+<sect1 id="zend.server.introduction">
+    <title>Введение</title>
+    <para>
+        Семейство классов <code>Zend_Server</code> предоставляет набор
+        функциональных возможностей для различных серверных классов, в которые
+        входят <code>Zend_XmlRpc_Server</code>, <code>Zend_Rest_Server</code>,
+        <code>Zend_Json_Server</code> и <code>Zend_Soap_Wsdl</code>.
+        <code>Zend_Server_Interface</code> предоставляет интерфейс, который
+        имитирует класс <code>SoapServer</code> из PHP 5; все серверные
+        классы должны реализовывать этот интерфейс для того, чтобы предоставлять
+        стандартный серверный API.
+<!--
+        The <code>Zend_Server</code> family of classes provides functionality
+        for the various server classes, including
+        <code>Zend_XmlRpc_Server</code>, <code>Zend_Rest_Server</code>,
+        <code>Zend_Json_Server</code> and <code>Zend_Soap_Wsdl</code>.
+        <code>Zend_Server_Interface</code> provides an interface that mimics PHP
+        5's <code>SoapServer</code> class; all server classes should implement
+        this interface in order to provide a standard server API.
+-->
+    </para>
+    <para>
+        <code>Zend_Server_Reflection</code> предоставляет стандарный
+        механизм для выполнения интроспекции функций и классов, используемых как
+        обратные вызовы (callbacks) с серверными классами, и предоставляет данные,
+        пригодные для использования с методами <code>getFunctions()</code>
+        и <code>loadFunctions()</code> интерфейса <code>Zend_Server_Interface</code>.
+<!--
+        The <code>Zend_Server_Reflection</code> tree provides a standard
+        mechanism for performing function and class introspection for use as
+        callbacks with the server classes, and provides data suitable for use
+        with <code>Zend_Server_Interface</code>'s <code>getFunctions()</code>
+        and <code>loadFunctions()</code> methods.
+-->
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

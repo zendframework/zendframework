@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.resource-resourceabstract">
+    <title>Zend_Application_Resource_ResourceAbstract</title>
+
+    <para>
+        <classname>Zend_Application_Resource_ResourceAbstract</classname> is an abstract
+        class implementing <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        and is a good starting point for creating your own custom plugin
+        resources.
+    </para>
+
+    <para>
+        Note: this abstract class does not implement the <code>init()</code>
+        method; this is left for definition in concrete extensions of the
+        class.
+    </para>
+
+    <table id="zend.application.core-functionality.resource-resourceabstract.api">
+        <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Return Value</entry>
+                    <entry>Parameters</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($options = null)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            Options with which to set resource state.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        The constructor should allow passing options with
+                        which to initialize state.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
+                    <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$bootstrap</code>: <emphasis>required</emphasis>.
+                                Parent bootstrap initializing this resource.
+                            </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Should allow registering the parent bootstrap object.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getBootstrap()</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the registered bootstrap instance.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>required</emphasis>.
+                            Options with which to set state.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Set resource state.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOptions()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve registered options.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>
+

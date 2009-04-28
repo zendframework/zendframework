@@ -1,0 +1,36 @@
+<sect3 id="zend.controller.plugins.standard.actionstack">
+    <title>动作堆栈</title>
+
+    <para>
+        <code>动作堆栈</code>插件可以管理一个请求堆栈，其操作象<code>postDispatch</code>插件。如果一个转发（例如，对另一个动作的调用）在当前请求对象中已经检测到，它不做任何事情。然而，如果没有检测到，它就检查堆栈并把最上面的一个取出，然后转发给由那个请求指定的动作。堆栈按照LIFO（后进先出）顺序处理。
+    </para>
+
+    <para>
+        你可以在任何时候用 <code>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</code>从前端控制器获取插件。一旦你有插件对象，有很多机制你可以用来操作。
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                <code>getRegistry()</code> 和 <code>setRegistry()</code>。在内部， <code>动作堆栈</code> 使用一个<code>Zend_Registry</code> 实例来存储堆栈。你可以用不同的注册表实例来代替或在这些访问器里获取。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getRegistryKey()</code> 和 <code>setRegistryKey()</code>。当弹出堆栈时，这些可以用来识别使用哪个注册表键。缺省地值是'Zend_Controller_Plugin_ActionStack'。
+        </para></listitem>
+
+        <listitem><para>
+                <code>getStack()</code> 允许你全面地获取动作堆栈。
+        </para></listitem>
+
+        <listitem><para>
+                <code>pushStack()</code>  和 <code>popStack()</code> 分别允许你弹出和压栈。<code>pushStack()</code> 接受请求对象。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        一个附加的方法，<code>forward()</code>，准备一个请求对象，并在前端控制器设置当前请求状态给提供的请求对象的状态，使它不可派遣（强制另一个派遣循环迭代）。
+    </para>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,30 @@
+<sect3 id="zend.view.helpers.initial.json">
+    <title> JSON 助手 </title>
+
+    <para>
+        当创建返回 JSON 的视图，设置适当的响应头也非常重要，JSON 视图助手就是来做这个的。另外，缺省地，它关闭（disable）了布局（如果布局是打开（enable）的），因为布局一般不和 JSON 响应一起使用。
+    </para>
+
+    <para>
+        JSON 助手设置下列的头：
+    </para>
+
+    <programlisting role="text"><![CDATA[
+Content-Type: application/json
+]]></programlisting>
+
+    <para>
+        当解析响应来决定如何处理内容，大部分 AJAX 库寻找这个头。
+    </para>
+
+    <para>
+        JSON 助手的用法相当简单：
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php
+<?= $this->json($this->data) ?>
+?>]]></programlisting>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

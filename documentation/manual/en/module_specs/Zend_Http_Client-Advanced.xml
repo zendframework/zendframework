@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.http.client.advanced">
+    <title>Zend_Http_Client - Advanced Usage</title>
+
+    <sect2 id="zend.http.client.redirections">
+        <title>HTTP Redirections</title>
+        <para>
+            By default, Zend_Http_Client automatically handles HTTP redirections,
+            and will follow up to 5 redirections. This can be changed by setting
+            the 'maxredirects' configuration parameter.
+        </para>
+        <para>
+            According to the HTTP/1.1 RFC, HTTP 301 and 302 responses should be
+            treated by the client by resending the same request to the
+            specified location - using the same request method. However, most
+            clients to not implement this and always use a GET request when
+            redirecting. By default, Zend_Http_Client does the same - when
+            redirecting on a 301 or 302 response, all GET and POST parameters
+            are reset, and a GET request is sent to the new location. This
+            behavior can be changed by setting the 'strictredirects' configuration
+            parameter to boolean TRUE:
+            <example id="zend.http.client.redirections.example-1">
+                <title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title>
+                <programlisting role="php"><![CDATA[
+// Strict Redirections
+$client->setConfig(array('strictredirects' => true));
+
+// Non-strict Redirections
+$client->setConfig(array('strictredirects' => false));
+]]></programlisting>
+            </example>
+        </para>
+        <para>
+            You can always get the number of redirections done after sending a
+            request using the getRedirectionsCount() method.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.cookies">
+        <title>Adding Cookies and Using Cookie Persistence</title>
+        <para>
+            Zend_Http_Client provides an easy interface for adding cookies
+            to your request, so that no direct header modification is
+            required. This is done using the setCookie() method. This method
+            can be used in several ways:
+            <example id="zend.http.client.cookies.example-1">
+                <title>Setting Cookies Using setCookie()</title>
+                <programlisting role="php"><![CDATA[
+// Easy and simple: by providing a cookie name and cookie value
+$client->setCookie('flavor', 'chocolate chips');
+
+// By directly providing a raw cookie string (name=value)
+// Note that the value must be already URL encoded
+$client->setCookie('flavor=chocolate%20chips');
+
+// By providing a Zend_Http_Cookie object
+$cookie = Zend_Http_Cookie::fromString('flavor=chocolate%20chips');
+$client->setCookie($cookie);
+]]></programlisting>
+            </example>
+            For more information about Zend_Http_Cookie objects, see
+            <xref linkend="zend.http.cookies" />.
+        </para>
+        <para>
+            Zend_Http_Client also provides the means for cookie stickiness -
+            that is having the client internally store all sent and received
+            cookies, and resend them automatically on subsequent requests. This
+            is useful, for example when you need to log in to a remote site
+            first and receive and authentication or session ID cookie before
+            sending further requests.
+            <example id="zend.http.client.cookies.example-2">
+                <title>Enabling Cookie Stickiness</title>
+                <programlisting role="php"><![CDATA[
+// To turn cookie stickiness on, set a Cookie Jar
+$client->setCookieJar();
+
+// First request: log in and start a session
+$client->setUri('http://example.com/login.php');
+$client->setParameterPost('user', 'h4x0r');
+$client->setParameterPost('password', '1337');
+$client->request('POST');
+
+// The Cookie Jar automatically stores the cookies set
+// in the response, like a session ID cookie.
+
+// Now we can send our next request - the stored cookies
+// will be automatically sent.
+$client->setUri('http://example.com/read_member_news.php');
+$client->request('GET');
+]]></programlisting>
+            </example>
+            For more information about the Zend_Http_CookieJar class, see
+            <xref linkend="zend.http.cookies.cookiejar" />.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.custom_headers">
+        <title>Setting Custom Request Headers</title>
+        <para>
+            Setting custom headers can be done by using the setHeaders() method.
+            This method is quite diverse and can be used in several ways, as
+            the following example shows:
+            <example id="zend.http.client.custom_headers.example-1">
+                <title>Setting A Single Custom Request Header</title>
+                <programlisting role="php"><![CDATA[
+// Setting a single header, overwriting any previous value
+$client->setHeaders('Host', 'www.example.com');
+
+// Another way of doing the exact same thing
+$client->setHeaders('Host: www.example.com');
+
+// Setting several values for the same header
+// (useful mostly for Cookie headers):
+$client->setHeaders('Cookie', array(
+    'PHPSESSID=1234567890abcdef1234567890abcdef',
+    'language=he'
+));
+]]></programlisting>
+            </example>
+        </para>
+        <para>
+            setHeader() can also be easily used to set multiple headers in one
+            call, by providing an array of headers as a single parameter:
+            <example id="zend.http.client.custom_headers.example-2">
+                <title>Setting Multiple Custom Request Headers</title>
+                <programlisting role="php"><![CDATA[
+// Setting multiple headers, overwriting any previous value
+$client->setHeaders(array(
+    'Host' => 'www.example.com',
+    'Accept-encoding' => 'gzip,deflate',
+    'X-Powered-By' => 'Zend Framework'));
+
+// The array can also contain full array strings:
+$client->setHeaders(array(
+    'Host: www.example.com',
+    'Accept-encoding: gzip,deflate',
+    'X-Powered-By: Zend Framework'));
+]]></programlisting>
+            </example>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.file_uploads">
+        <title>File Uploads</title>
+        <para>
+            You can upload files through HTTP using the setFileUpload method.
+            This method takes a file name as the first parameter, a form name
+            as the second parameter, and data as a third optional parameter.
+            If the third data parameter is null, the first file name parameter
+            is considered to be a real file on disk, and Zend_Http_Client will
+            try to read this file and upload it. If the data parameter is not
+            null, the first file name parameter will be sent as the file name,
+            but no actual file needs to exist on the disk.
+            The second form name parameter is always required, and is equivalent
+            to the "name" attribute of an &gt;input&lt; tag, if the file was to
+            be uploaded through an HTML form.
+            A fourth optional parameter provides the file's content-type. If
+            not specified, and Zend_Http_Client reads the file from the disk,
+            the mime_content_type function will be used to guess the file's
+            content type, if it is available. In any case, the default MIME
+            type will be application/octet-stream.
+            <example id="zend.http.client.file_uploads.example-1">
+                <title>Using setFileUpload to Upload Files</title>
+                <programlisting role="php"><![CDATA[
+// Uploading arbitrary data as a file
+$text = 'this is some plain text';
+$client->setFileUpload('some_text.txt', 'upload', $text, 'text/plain');
+
+// Uploading an existing file
+$client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
+
+// Send the files
+$client->request('POST');
+]]></programlisting>
+            </example>
+            In the first example, the $text variable is uploaded and will be
+            available as $_FILES['upload'] on the server side. In the second
+            example, the existing file /tmp/Backup.tar.gz is uploaded to the
+            server and will be available as $_FILES['bufile']. The content type
+            will be guesses automatically if possible - and if not, the content
+            type will be set to 'application/octet-stream'.
+        </para>
+        <note>
+            <title>Uploading files</title>
+            <para>
+                When uploading files, the HTTP request content-type is
+                automatically set to multipart/form-data. Keep in mind that
+                you must send a POST or PUT request in order to upload files.
+                Most servers will ignore the requests body on other request
+                methods.
+            </para>
+        </note>
+    </sect2>
+    <sect2 id="zend.http.client.raw_post_data">
+        <title>Sending Raw POST Data</title>
+        <para>
+            You can use a Zend_Http_Client to send raw POST data using the
+            setRawData() method. This method takes two parameters: the first
+            is the data to send in the request body. The second optional
+            parameter is the content-type of the data. While this parameter is
+            optional, you should usually set it before sending the request -
+            either using setRawData(), or with another method: setEncType().
+            <example id="zend.http.client.raw_post_data.example-1">
+                <title>Sending Raw POST Data</title>
+                <programlisting role="php"><![CDATA[
+$xml = '<book>' .
+       '  <title>Islands in the Stream</title>' .
+       '  <author>Ernest Hemingway</author>' .
+       '  <year>1970</year>' .
+       '</book>';
+
+$client->setRawData($xml, 'text/xml')->request('POST');
+
+// Another way to do the same thing:
+$client->setRawData($xml)->setEncType('text/xml')->request('POST');
+]]></programlisting>
+            </example>
+            The data should be available on the server side through PHP's
+            $HTTP_RAW_POST_DATA variable or through the php://input stream.
+        </para>
+        <note>
+            <title>Using raw POST data</title>
+            <para>
+                Setting raw POST data for a request will override any POST
+                parameters or file uploads. You should not try to use both on
+                the same request. Keep in mind that most servers will ignore
+                the request body unless you send a POST request.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.http.client.http_authentication">
+        <title>HTTP Authentication</title>
+        <para>
+            Currently, Zend_Http_Client only supports basic HTTP authentication.
+            This feature is utilized using the setAuth() method. The method
+            takes 3 parameters: The user name, the password and an optional
+            authentication type parameter. As mentioned, currently only basic
+            authentication is supported (digest authentication support is
+            planned).
+            <example id="zend.http.client.http_authentication.example-1">
+                <title>Setting HTTP Authentication User and Password</title>
+                <programlisting role="php"><![CDATA[
+// Using basic authentication
+$client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
+
+// Since basic auth is default, you can just do this:
+$client->setAuth('shahar', 'myPassword!');
+]]></programlisting>
+            </example>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.multiple_requests">
+        <title>Sending Multiple Requests With the Same Client</title>
+        <para>
+            Zend_Http_Client was also designed specifically to handle several
+            consecutive requests with the same object. This is useful in cases
+            where a script requires data to be fetched from several places, or
+            when accessing a specific HTTP resource requires logging in and
+            obtaining a session cookie, for example.
+        </para>
+        <para>
+            When performing several requests to the same host, it is highly
+            recommended to enable the 'keepalive' configuration flag. This way,
+            if the server supports keep-alive connections, the connection to the
+            server will only be closed once all requests are done and the Client
+            object is destroyed. This prevents the overhead of opening and
+            closing TCP connections to the server.
+        </para>
+        <para>
+            When you perform several requests with the same client, but want
+            to make sure all the request-specific parameters are cleared, you
+            should use the resetParameters() method. This ensures that GET and
+            POST parameters, request body and request-specific headers are
+            reset and are not reused in the next request.
+        </para>
+        <note>
+            <title>Resetting parameters</title>
+            <para>
+                Note that non-request specific headers are not reset when the
+                resetParameters method is used. As a matter of fact, only the
+                'Content-length' and 'Content-type' headers are reset. This
+                allows you to set-and-forget headers like 'Accept-language' and
+                'Accept-encoding'
+            </para>
+        </note>
+        <para>
+            Another feature designed specifically for consecutive requests is
+            the Cookie Jar object. Cookie Jars allow you to automatically save
+            cookies set by the server in the first request, and send them on
+            consecutive requests transparently. This allows, for example, going
+            through an authentication request before sending the actual data
+            fetching request.
+        </para>
+        <para>
+            If your application requires one authentication request per user,
+            and consecutive requests might be performed in more than one script
+            in your application, it might be a good idea to store the Cookie Jar
+            object in the user's session. This way, you will only need to
+            authenticate the user once every session.
+        </para>
+        <example id="zend.http.client.multiple_requests.example-1">
+            <title>Performing consecutive requests with one client</title>
+            <programlisting role="php"><![CDATA[
+// First, instantiate the client
+$client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
+    'keepalive' => true
+));
+
+// Do we have the cookies stored in our session?
+if (isset($_SESSION['cookiejar']) &&
+    $_SESSION['cookiejar'] instanceof Zend_Http_CookieJar)) {
+
+    $client->setCookieJar($_SESSION['cookiejar']);
+} else {
+    // If we don't, authenticate and store cookies
+    $client->setCookieJar();
+    $client->setUri('http://www.example.com/login.php');
+    $client->setParameterPost(array(
+        'user' => 'shahar',
+        'pass' => 'somesecret'
+    ));
+    $client->request(Zend_Http_Client::POST);
+
+    // Now, clear parameters and set the URI to the original one
+    // (note that the cookies that were set by the server are now
+    // stored in the jar)
+    $client->resetParameters();
+    $client->setUri('http://www.example.com/fetchdata.php');
+}
+
+$response = $client->request(Zend_Http_Client::GET);
+
+// Store cookies in session, for next page
+$_SESSION['cookiejar'] = $client->getCookieJar();
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>

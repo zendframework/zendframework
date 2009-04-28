@@ -1,0 +1,35 @@
+<Results>
+<Result>
+  <Type />
+  <Description />
+  <Status />
+  <Source>
+    <Actor>
+      <ActorID>user@gmail.com</ActorID>
+      <ActorRole>
+        <Text>Patient</Text>
+      </ActorRole>
+    </Actor>
+  </Source>
+  <Substance />
+  <Test>
+    <DateTime>
+      <Type>
+        <Text>Collection start date</Text>
+      </Type>
+      <ExactDateTime>2008-09-03</ExactDateTime>
+    </DateTime>
+    <Type />
+    <Description>
+      <Text>Acetaldehyde - Blood</Text>
+    </Description>
+    <Status />
+    <TestResult>
+      <ResultSequencePosition>0</ResultSequencePosition>
+      <VariableResultModifier />
+      <Units />
+    </TestResult>
+    <ConfidenceValue />
+  </Test>
+</Result>
+</Results>

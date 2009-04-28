@@ -1,0 +1,119 @@
+<sect1 id="zend.mime.mime">
+    <title>Zend_Mime</title>
+
+    <sect2 id="zend.mime.mime.introduction">
+        <title>简介</title>
+        <para>
+            <code>Zend_Mime</code>是一个用来处理多段MIME消息的辅助类，
+             在<link linkend="zend.mail"><code>Zend_Mail</code></link>和<link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>中使用了它，
+             也可在需要MIME支持的应用程序中使用。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.mime.mime.static">
+    <title>静态方法和常量</title>
+    <para>
+        <code>Zend_Mime</code>提供了一系列静态辅助方法来处理MIME：
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::isPrintable()</code>: 给定的字符串中不含不可打印(unprintable)的字符，则返回TRUE，否则返回FALSE。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::encodeBase64()</code>: 将一个字符串用base64编码。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::encodeQuotedPrintable()</code>: 将一个字符串以quoted-printable机制编码。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <para>
+        <code>Zend_Mime</code>定义了一系列通常在处理MIME消息的时候要用到的常量：
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::TYPE_OCTETSTREAM</code>: 'application/octet-stream'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::TYPE_TEXT</code>: 'text/plain'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::TYPE_HTML</code>: 'text/html'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::ENCODING_7BIT</code>: '7bit'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::ENCODING_8BIT</code>: '8bit'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::ENCODING_QUOTEDPRINTABLE</code>: 'quoted-printable'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::ENCODING_BASE64</code>: 'base64'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::DISPOSITION_ATTACHMENT</code>: 'attachment'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>Zend_Mime::DISPOSITION_INLINE</code>: 'inline'
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    </sect2>
+
+    <sect2 id="zend.mime.mime.instantiation">
+    <title>实例化Zend_Mime</title>
+    <para>
+        在实例化<code>Zend_Mime</code> 对象时，指定了MIME分界线(MIME boundary)，
+         在调用下面的非静态函数都会用到它(MIME分界线)。
+        如果传递给构造函数一个字符串参数，那么这个参数就用来指定MIME分界线；
+        如果没有给出参数，那么构造器在调用的时候会随机产生一个MIME分界线。
+    </para>
+    <para>
+        <code>Zend_Mime</code>对象拥有以下方法：
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>boundary()</code>: 返回MIME分界线字符串。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>boundaryLine()</code>: 返回完整的MIME分界线行。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>mimeEnd()</code>: 返回完整的MIME结束的分界线行。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

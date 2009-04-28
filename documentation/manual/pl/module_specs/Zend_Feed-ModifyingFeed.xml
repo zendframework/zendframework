@@ -1,0 +1,66 @@
+<sect1 id="zend.feed.modifying-feed">
+    <title>Modyfikacja kanału oraz struktury wpisów</title>
+
+    <para>
+        Naturalna składnia <code>Zend_Feed</code> pozwala na konstruowanie oraz
+        modyfikowanie kanałów i wpisów tak samo jak na odczytywanie ich. Możesz
+        łatwo zamienić nowy lub zmodyfikowany obiekt spowrotem do poprawnego XML
+        aby zapisać go do pliku lub wysłać na serwer.
+    </para>
+
+    <example id="zend.feed.modifying-feed.example.modifying">
+        <title>Modyfikacja istniejącego wpisu</title>
+        <programlisting role="php"><![CDATA[
+$feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
+$entry = $feed->current();
+
+$entry->title = 'To jest nowy tytuł';
+$entry->author->email = 'my_email@example.com';
+
+echo $entry->saveXML();
+]]>
+        </programlisting>
+        <para>
+            To wyświetli pełną (dołączając prolog <code>&lt;?xml ... &gt;</code>)
+            reprezentację XML nowego wpisu, dołączając potrzebne przestrzenie
+            nazw XML.
+        </para>
+        <para>
+            Zauważ, że powyższy przykład będzie działał nawet gdy istniejący wpis
+            nie posiada znacznika autora (author). Możesz użyć tyle ile chcesz
+            poziomów dostępu <code>-&gt;</code> zanim dokonasz przypisania;
+            wszystkie pośrednie poziomy zostaną automatycznie utworzone gdy będzie
+            to potrzebne.
+        </para>
+    </example>
+
+    <para>
+        Jeśli chcesz użyć innej przestrzeni nazw niż <code>atom:</code>, <code>rss:</code>, lub
+        <code>osrss:</code> w swoim wpisie, musisz zarejestrować przestrzeń nazw
+        w <code>Zend_Feed</code> używając metody <code>Zend_Feed::registerNamespace()</code>.
+        Gdy modyfikujesz istniejący element, będzie on zawsze zachowywał oryginalną
+        przestrzeń nazw. Gdy dodajesz nowy element, będzie on utworzony w domyślnej
+        przestrzeni nazw jeśli nie określisz precyzyjnie innej przestrzeni.
+    </para>
+
+    <example id="zend.feed.modifying-feed.example.creating">
+        <title>Tworzenie wpisu Atom z elementami własnej przestrzeni nazw</title>
+        <programlisting role="php"><![CDATA[
+$entry = new Zend_Feed_Entry_Atom();
+// id w Atom jest zawsze nadane przez serwer
+$entry->title = 'mój własny wpis';
+$entry->author->name = 'Przykładowy autor';
+$entry->author->email = 'me@example.com';
+
+// Teraz własna część
+Zend_Feed::registerNamespace('myns', 'http://www.example.com/myns/1.0');
+
+$entry->{'myns:myelement_one'} = 'pierwsza własna część';
+$entry->{'myns:container_elt'}->part1 = 'pierwsza zagnieżdżona część';
+$entry->{'myns:container_elt'}->part2 = 'druga zagnieżdżona część';
+
+echo $entry->saveXML();
+]]>
+        </programlisting>
+    </example>
+</sect1>

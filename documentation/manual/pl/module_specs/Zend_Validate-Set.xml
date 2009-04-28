@@ -1,0 +1,172 @@
+<sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>Standardowe klasy weryfikatorów</title>
+
+    <para>
+        Zend Framework posiada standardowy zestaw gotowych do użycia klas
+        weryfikatorów.
+    </para>
+
+    <sect2 id="zend.validate.set.alnum">
+        <title>Alnum</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
+            zawiera tylko znaki alfabetu oraz cyfry. Ten weryfikator posiada także opcję,
+            służącą do określenia, czy białe znaki mąją być uznane za prawidłowe.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.alpha">
+        <title>Alpha</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
+            zawiera tylko znaki alfabetu. Ten weryfikator posiada także opcję,
+            służącą do określenia, czy białe znaki mąją być uznane za prawidłowe.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.barcode">
+        <title>Barcode</title>
+        <para>
+            Ten weryfikator jest pomocny przy sprawdzaniu poprawności wartości kodu kreskowego. Obecnie obsługuje standardy
+            "<code>UPC-A</code>" (Universal Product Code) oraz "<code>EAN-13</code>" (European Article Number). Metoda
+            <code>isValid()</code> zwraca wartość <code>true</code> tylko w przypadku poprawnej weryfikacji poprzez algorytm
+            kodów kreskowych. Powinieneś usunąć wszystkie znaki nie będące cyframi od zera do dziewiątki (0-9) przed
+            podaniem wartości do weryfikatora.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.between">
+        <title>Between</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
+            znajduje się pomiędzy minimalną a maksymalną zadaną graniczną wartością.
+            Porównanie domyślnie nie jest ostre (wartość <code>$value</code> może
+            być równa granicznej wartości), ale może być to nadpisane w celu uzyskania
+            ścisłego porównania, w którym wartość <code>$value</code> musi być
+            ściśle większa od wartości minimalnej i ściśle mniejsza od wartości maksymalnej.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ccnum">
+        <title>Ccnum</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code>
+            jest prawidłowym numerem karty kredytowej według algorytmu Luhn'a (suma kontrolna mod-10).
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.date">
+        <title>Date</title>
+        <para>
+            Zwraca wartość <code>true</code> jeśli wartość <code>$value</code> jest poprawną datą
+            w formacie <code>YYYY-MM-DD</code>. Jeśli podano opcjonalny parametr <code>locale</code> wtedy data będzie
+            sprawdzana zgodnie z podaną lokalizacją. Dodatkowo jeśli podano opcjonalny parametr <code>format</code> będzie
+            on podstawą do sprawdzenia poprawności daty. Sprawdź
+            <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link> aby uzyskać szczegóły opcjonalnych
+            parametrów.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.digits">
+        <title>Digits</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> zawiera tylko cyfry.
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-EmailAddress.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-EmailAddress.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.validate.set.float">
+        <title>Float</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest wartością zmiennoprzecinkową.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.greater_than">
+        <title>GreaterThan</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest większa od zadanej minimalnej granicznej wartości.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.hex">
+        <title>Hex</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> zawiera tylko znaki szesnastkowe.
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Validate-Hostname.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Hostname.xml" /></xi:fallback>
+    </xi:include>
+
+    <sect2 id="zend.validate.set.in_array">
+        <title>InArray</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy gdy wartość <code>$value</code>
+            znajduje się w zadanej tablicy. Jeśli opcja ścisłego sprawdzania ma
+            wartość <code>true</code>, wtedy typ wartości <code>$value</code>
+            jest także sprawdzany.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.int">
+        <title>Int</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość  <code>$value</code> jest poprawną wartością całkowitą.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.ip">
+        <title>Ip</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest poprawnym adresem IP.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.less_than">
+        <title>LessThan</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> jest mniejsza od zadanej maksymalnej granicznej wartości.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.not_empty">
+        <title>NotEmpty</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> nie jest pustą wartością.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.regex">
+        <title>Regex</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy, gdy wartość <code>$value</code> pasuje do zadanego wyrażenia regularnego.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.validate.set.string_length">
+        <title>StringLength</title>
+        <para>
+            Zwraca wartość <code>true</code> tylko wtedy gdy długość łańcucha znaków
+            <code>$value</code> jest większa lub równa od zadanej wartośći
+            minimalnej i mniejsza lub równa od zadanej wartości maksymalnej.
+            (wtedy gdy zadana wartość maksymalna jest różna od <code>null</code>).
+            Od wersji 1.5.0 metoda <code>setMin()</code> wyrzuca wyjątek jeśli
+            zadana wartość minimalna jest ustawiona na wartość większą od
+            zadanej wartości maksymalnej, a metoda <code>setMax()</code> wyrzuca
+            wyjątek jeśli zadana wartość maksymalna jest ustawiona na wartość
+            mniejszą od zadanej wartości minimalnej. Od wersji 1.0.2, ta klasa
+            obsługuje UTF-8 i inne kodowania znaków, w oparciu o obecną wartość dyrektywy
+            <ulink url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

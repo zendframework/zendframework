@@ -1,0 +1,49 @@
+<sect1 id="zend.date.definition.theory">
+
+    <title> 操作理论 </title>
+
+    <para>
+        为什么在 Zend Framework 中只有一个 <code>Zend_Date</code> 类来处理日期和时间？
+    </para>
+
+    <para>
+        很多语言把处理时间和日历日期分成两个类，然而，Zend Framework 为简单而努力。在很多情况下，迫使开发者为时间和日期在不同的方法中管理不同的对象变成一种负担。 因为 <code>Zend_Date</code> 方法支持不明确的日期，它可能不包括所有部分（era 、年、月、日、小时、分钟、秒、时区），所以开发者可以享受灵活性和轻松地使用同一类和同一方法来进行处理（例如：加、减、比较、合并日期等）。当渴望在短期内熟悉这些交互操作，把处理这些日期的片段分成多个类会把事情弄的复杂。一个单个的类为相似的操作减少了代码重复，也不需要复杂的继承等级结构。
+    </para>
+
+    <sect2 id="zend.date.theory.internals">
+
+        <title> 内部（Internals）</title>
+
+        <para>
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        UNIX 时间戳（Timestamp）
+                    </para>
+                    <para>
+                        所有日期和时间，甚至不明确的（例如，没有年），在内部表示为绝对的时间点，用期望的时间点和1970年1月1日 00:00:00 GMT/UTC 之间的差来作为UNIX 时间戳来表示。这是唯一的可能，因为 <code>Zend_Date</code> 既不限于 UNIX 时间戳也不限于整数值。BCMath 扩展被要求来支持非常大的在星期五，1901年12月13日 20:45:54 GMT 到星期二，2038年1月19日 03:14:07 GMT范围之外的日期。另外，因为浮点数据类型和凑整固有的限制，细小的数学错误会产生，除非使用 BCMath 扩展。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        日期部分为时间戳（ timestamp）偏移量
+                    </para>
+                    <para>
+                        这样，一个表示三小时的实例对象将被表示为在 1970年1月1日 00:00:00 GMT/UTC 之后的三小时 － 例如 0 + 3 * 60 * 60 = 10800 。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        PHP 函数
+                    </para>
+                    <para>
+                        <code>Zend_Date</code> 尽可能经常使用 PHP 函数提高性能。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--vim:se ts=4 sw=4 et:-->

@@ -1,0 +1,22 @@
+<sect1 id="zend.mail.character-sets">
+    <title>Zestawy znaków</title>
+    <para>
+        <code>Zend_Mail</code> nie sprawdza poprawności zestawu znaków poszczególnych
+        części wiadomości. Kiedy tworzymy instancję <code>Zend_Mail</code>, możemy
+        wybrać zestaw znaków dla wiadomości. Domyślny to <code>iso-8859-1</code>.
+        Aplikacja musi zadbać o to, aby wszystkie części dodane do obiektu
+        wiadomości miały zawartośc zakodowaną w prawidłowym zestawie znaków. Kiedy
+        tworzymy nową część wiadomości, możemy użyć innego zestawu znaków dla każdej
+        z części.
+    </para>
+    <note>
+        <title>Tylko w formacie tekstowym</title>
+        <para>
+            Zestawy znaków mają jedynie zastosowanie dla części wiadomości które są
+            w formacie tekstowym.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

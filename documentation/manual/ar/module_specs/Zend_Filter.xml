@@ -1,0 +1,64 @@
+<sect1 id="zend.filter.filter">
+    <title>Zend_Filter</title>
+
+    <sect2 id="zend.filter.filter.introduction">
+        <title>مقدمة</title>
+        <para>
+
+        توفر <literal>Zend_Filter</literal> مكتبة من الـ static methods لفلترة البيانات ,
+        و لفلترة البيانات المدخلة من المستخدم , يجب ان تستخدم <xref linkend="zend.filter.input" />
+        بدلا منها, و ذلك لأنها توفر بيئة كاملة لفلترة البيانات المدخلة من المستخدم , و لكن لأن
+        <literal>Zend_Filter_Input</literal> تم تصميمه فى الأصل للـ arrays , فيمكن
+        ان يكن <literal>Zend_Filter</literal> مفيد عند فلترة البيانات ذات البعد الواحد (strings او اعداد),
+        لأنها تتصرف مثل الدوال المتوفرة فى لغة PHP:
+
+        </para>
+        <programlisting>
+    <![CDATA[<?php
+
+    $alphaUsername = Zend_Filter::getAlpha('John123Doe');
+
+    /* $alphaUsername = 'JohnDoe'; */
+
+    ?>]]>
+        </programlisting>
+    </sect2>
+    <sect2 id="zend.filter.filter.usecases">
+        <title>امثلة</title>
+        <para>
+        فى كل من الأمثة التالية , <literal>value$</literal> تمثل قيمة ذات بعد واحد .
+        </para>
+        <para>Whitelist Filtering:</para>
+        <programlisting>
+    <![CDATA[<?php
+
+    if (Zend_Filter::isEmail($value)) {
+        /* $value is a valid email format. */
+    } else {
+        /* $value is not a valid email format. */
+    }
+
+    ?>]]>
+        </programlisting>
+        <para>Blind Filtering:</para>
+        <programlisting>
+    <![CDATA[<?php
+
+    $alphaName = Zend_Filter::getAlpha($value);
+
+    ?>]]>
+        </programlisting>
+        <para>Blacklist Filtering:</para>
+        <programlisting>
+    <![CDATA[<?php
+
+    $taglessComment = Zend_Filter::noTags($value);
+
+    ?>]]>
+        </programlisting>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

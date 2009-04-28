@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.dojo.introduction">
+    <title>Introduction</title>
+
+    <para>
+        Zend Framework ships <ulink
+            url="http://dojotoolkit.org">Dojo Toolkit</ulink> to support
+        out-of-the-box rich internet application development. Integration
+        points with Dojo include:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>JSON-RPC support</para></listitem>
+        <listitem><para>dojo.data compatibility</para></listitem>
+        <listitem><para>View helper to help setup the Dojo environment</para></listitem>
+        <listitem><para>Dijit-specific <classname>Zend_View</classname> helpers</para></listitem>
+        <listitem><para>Dijit-specific <classname>Zend_Form</classname> elements and decorators</para></listitem>
+    </itemizedlist>
+
+    <para>
+        The Dojo distribution itself may be found in the
+        <code>externals/dojo/</code> directory of the Zend Framework
+        distribution. This is a source distribution, which includes Dojo's full
+        javascript source, unit tests, and build tools. You can symlink this
+        into your javascript directory, copy it, or use the build tool to create
+        your own custom build to include in your project. Alternatively, you can
+        use one of the Content Delivery Networks that offer Dojo (ZF supports
+        both the official AOL CDN as well as the Google CDN).
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

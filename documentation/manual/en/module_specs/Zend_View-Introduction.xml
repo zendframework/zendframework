@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.view.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <classname>Zend_View</classname> is a class for working with the "view" portion of
+        the model-view-controller pattern. That is, it exists to
+        help keep the view script separate from the model and
+        controller scripts. It provides a system of helpers, output
+        filters, and variable escaping.
+    </para>
+
+    <para>
+        <classname>Zend_View</classname> is template system agnostic; you may use PHP as
+        your template language, or create instances of other
+        template systems and manipulate them within your view
+        script.
+    </para>
+
+    <para>
+        Essentially, using <classname>Zend_View</classname> happens in two major steps:
+
+        1. Your controller script creates an instance of
+        <classname>Zend_View</classname> and assigns variables to that instance.
+
+        2. The controller tells the <classname>Zend_View</classname> to render a particular
+        view, thereby handing control over the view script, which
+        generates the view output.
+    </para>
+
+    <sect2 id="zend.view.introduction.controller">
+        <title>Controller Script</title>
+
+        <para>
+            As a simple example, let us say your controller has a list
+            of book data that it wants to have rendered by a view. The
+            controller script might look something like this:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// use a model to get the data for book authors and titles.
+$data = array(
+    array(
+        'author' => 'Hernando de Soto',
+        'title' => 'The Mystery of Capitalism'
+    ),
+    array(
+        'author' => 'Henry Hazlitt',
+        'title' => 'Economics in One Lesson'
+    ),
+    array(
+        'author' => 'Milton Friedman',
+        'title' => 'Free to Choose'
+    )
+);
+
+// now assign the book data to a Zend_View instance
+Zend_Loader::loadClass('Zend_View');
+$view = new Zend_View();
+$view->books = $data;
+
+// and render a view script called "booklist.php"
+echo $view->render('booklist.php');
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.view">
+
+        <title>View Script</title>
+
+        <para>
+            Now we need the associated view script, "booklist.php".
+            This is a PHP script like any other, with one exception:  it
+            executes inside the scope of the <classname>Zend_View</classname> instance, which
+            means that references to $this point to the <classname>Zend_View</classname>
+            instance properties and methods. (Variables assigned to the
+            instance by the controller are public properties of the
+            <classname>Zend_View</classname> instance.)  Thus, a very basic view script could
+            look like this:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+ if ($this->books): ?>
+
+    <!-- A table of some books. -->
+    <table>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>There are no books to display.</p>
+
+<?php endif;?>
+]]></programlisting>
+
+        <para>
+            Note how we use the "escape()" method to apply output
+            escaping to variables.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.view.introduction.options">
+        <title>Options</title>
+
+        <para>
+            <classname>Zend_View</classname> has several options that may be set to
+            configure the behaviour of your view scripts.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>basePath</code>: indicate a base path from which to set
+                    the script, helper, and filter path. It assumes a directory
+                    structure of:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+base/path/
+    helpers/
+    filters/
+    scripts/
+]]></programlisting>
+
+                <para>
+                    This may be set via <code>setBasePath()</code>,
+                    <code>addBasePath()</code>, or the <code>basePath</code>
+                    option to the constructor.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                <code>encoding</code>: indicate the character encoding to use
+                with <code>htmlentities()</code>,
+                <code>htmlspecialchars()</code>, and other operations. Defaults
+                to ISO-8859-1 (latin1). May be set via
+                <code>setEncoding()</code> or the <code>encoding</code> option
+                to the constructor.
+            </para></listitem>
+
+            <listitem><para>
+                <code>escape</code>: indicate a callback to be used by
+                <code>escape()</code>. May be set via <code>setEscape()</code>
+                or the <code>escape</code> option to the constructor.
+            </para></listitem>
+
+            <listitem><para>
+                <code>filter</code>: indicate a filter to use after rendering
+                a view script. May be set via <code>setFilter()</code>,
+                <code>addFilter()</code>, or the <code>filter</code> option to
+                the constructor.
+            </para></listitem>
+
+            <listitem><para>
+                <code>strictVars:</code> force <classname>Zend_View</classname> to emit
+                notices and warnings when uninitialized view variables are
+                accessed. This may be set by calling
+                <code>strictVars(true)</code> or passing the
+                <code>strictVars</code> option to the constructor.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.shortTags">
+        <title>Short Tags with View Scripts</title>
+
+        <para>
+            In our examples and documentation, we make use of PHP short tags:
+            <code>&lt;?</code> and <code>&lt;?=</code>. In addition, we
+            typically use the <ulink
+                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
+                syntax for control structures</ulink>. These are convenient
+            shorthands to use when writing view scripts, as they make the
+            constructs more terse, and keep statements on single lines.
+        </para>
+
+        <para>
+            That said, many developers prefer to use full tags for purposes of
+            validation or portability. For instance,
+            <code>short_open_tag</code> is disabled in the php.ini.recommended
+            file, and if you template XML in view scripts, short open tags will
+            cause the templates to fail validation.
+        </para>
+
+        <para>
+            Additionally, if you use short tags when the setting is off, then
+            the view scripts will either cause errors or simply echo code to the
+            user.
+        </para>
+
+        <para>
+            For this latter case, where you wish to use short tags but they are
+            disabled, you have two options:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Turn on short tags in your <code>.htaccess</code> file:
+                </para>
+
+                <programlisting role="apache"><![CDATA[
+php_value "short_open_tag" "on"
+</programlisting>
+
+                <para>
+                    This will only be possible if you are allowed to create and
+                    utilize <code>.htaccess</code> files. This directive can
+                    also be added to your <code>httpd.conf</code> file.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Enable an optional stream wrapper to convert short tags to
+                    long tags on the fly:
+                </para>
+
+        <programlisting role="php"><![CDATA[
+$view->setUseStreamWrapper(true);
+]]></programlisting>
+
+                <para>
+                    This registers <classname>Zend_View_Stream</classname> as a stream
+                    wrapper for view scripts, and will ensure that your code
+                    continues to work as if short tags were enabled.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>View Stream Wrapper Degrades Performance</title>
+
+            <para>
+                Usage of the stream wrapper <emphasis>will</emphasis> degrade
+                performance of your application, though actual benchmarks are
+                unavailable to quantify the amount of degradation. We recommend
+                that you either enable short tags, convert your scripts to use
+                full tags, or have a good partial and/or full page content
+                caching strategy in place.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.view.introduction.accessors">
+        <title>Utility Accessors</title>
+
+        <para>
+            Typically, you'll only ever need to call on <code>assign()</code>,
+            <code>render()</code>, or one of the methods for setting/adding
+            filter, helper, and script paths. However, if you wish to extend
+            <classname>Zend_View</classname> yourself, or need access to some of its
+            internals, a number of accessors exist:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getVars()</code> will return all assigned variables.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearVars()</code> will clear all assigned variables;
+                    useful when you wish to re-use a view object, but want to
+                    control what variables are available.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPath($script)</code> will retrieve the
+                    resolved path to a given view script.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getScriptPaths()</code> will retrieve all registered
+                    script paths.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPath($helper)</code> will retrieve the
+                    resolved path to the named helper class.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHelperPaths()</code> will retrieve all registered
+                    helper paths.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPath($filter)</code> will retrieve the
+                    resolved path to the named filter class.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getFilterPaths()</code> will retrieve all registered
+                    filter paths.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

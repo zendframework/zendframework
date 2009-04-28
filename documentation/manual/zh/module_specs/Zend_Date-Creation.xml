@@ -1,0 +1,188 @@
+<sect1 id="zend.date.creation">
+
+    <title>生成日期</title>
+
+    <para>
+        因为需求的不同，<code>Zend_Date</code> 提供了若干不同的办法来创建自己的实例，本章将介绍最方便的办法。
+    </para>
+
+    <sect2 id="zend.date.creation.actual">
+
+        <title>生成当前日期</title>
+
+        <para>
+            最简单的创建日期对象是生成当前的日期，通过创建<emphasis role="strong">new Zend_Date()</emphasis>的实例
+            或使用静态方法 <emphasis role="strong">Zend_Date::now()</emphasis> 都可以，它们都返回当前日期的 <code>Zend_Date</code> 实例。
+            当前的日期总是包括当前的日期和时间以及当前的时区。
+        </para>
+
+        <example id="zend.date.creation.actual.example-1">
+
+            <title>通过实例生成日期</title>
+
+            <para>
+                通过创建一个新的实例来生成日期意味着你不需要给出参数。当然有若干个参数我们将以后来描述，但一般
+                来说这是最简单和最常用的方法来获得当期日期为 <code>Zend_Date</code> 的实例。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.date.creation.actual.example-2">
+
+            <title> 静态日期生成 </title>
+
+            <para>
+                有时候用静态方法生成日期更容易。因此，你可以使用  <emphasis role="strong"><code>now()</code></emphasis> 方法，
+                它返回 <code>Zend_Date</code> 的一个新实例，就象你用 <code>new Zend_Date()</code> 一样。
+                但它将总返回当前日期并且不能用可选的参数修改。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$date = Zend_Date::now();
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.creation.database">
+
+        <title> 从数据库生成日期 </title>
+
+        <para>
+            数据库常用来存储数据。问题是，每个数据库用不同的方式输出数据。<code>MsSQL</code> 数据库和 <code>MySQL</code>
+            数据库的日期标准就不一样。为简化起见，<code>Zend_Date</code> 可以很容易从数据库数据生成日期。
+        </para>
+
+        <para>
+            当然每个数据库都可以说把输出转换成定义好的特殊值。例如，你可以把 <code>datetime</code> 转换成输出分钟值。
+            但这很耗时并且当查询数据库时你确实需要用其它方法来处理日期。
+        </para>
+
+        <para>
+            所以我们有一个快速并方便的方法从数据库值生成日期。
+        </para>
+
+        <example id="zend.date.creation.database.example-1">
+
+            <title> 快速从数据库生成日期 </title>
+
+            <para>
+                众所周知，所有的数据库都想尽可能快地查询数据，它们与生俱来就要快速响应。从数据库取得日期的最快
+                方法是使用unix时间戳。所有数据库在内部把日期值都存成时间戳（不是unix时间戳）。这意味着通过查询生
+                成时间戳要比转换成其它格式快。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
+$date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.date.creation.database.example-2">
+
+            <title> 从数据库方便地生成日期 </title>
+
+            <para>
+                即使是你乍一看它们都相同，但是所有数据库的标准输出还是不一样的。但它们都是 <code>ISO</code> 标准的一部分
+                并解释它，所以最容易的生成日期的方法是使用 <code>Zend_Date::ISO_8601</code>。
+                例如数据库里众所周知的 <code>MySQL</code> 和 <code>MsSQL</code> 被 <code>Zend_Date::ISO_8601</code> 认可。
+                但所有数据库也都可以返回一个 <code>ISO 8601</code> 表示的日期列。
+                <code>ISO 8601</code> 一个巨大的有点是人类可读。缺点是 <code>ISO 8601</code> 比 unix 时间戳需要更多
+                的时间来处理，但也应该知道 unix 时间戳只支持 1970年1月1日以后的日期。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// SELECT datecolumn FROM my_table
+$date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.creation.array">
+
+        <title> 从数组生成日期 </title>
+
+        <para>
+            日期也可以从数组生成，这是个简单并容易的方法，使用的数组键是：
+        </para>
+
+        <para>
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">日</emphasis>: 日期的天数
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">月</emphasis>: 日期的月数
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">年</emphasis>: full year of the date
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">小时</emphasis>: 小时数
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">分钟</emphasis>: 分钟数
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">秒</emphasis>: 秒数
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.date.creation.array.example">
+
+            <title> 通过数组生成日期 </title>
+
+            <para>
+                一般地你需要给出一个完整的日期数组用于新的日期实例的生成，但当你没有给出所有值，未给出的值就是零。
+                这意味着如果没有给出小时值，那么就用 <emphasis role="strong">0</emphasis> 小时。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$datearray = array('year' => 2006,
+                   'month' => 4,
+                   'day' => 18,
+                   'hour' => 12,
+                   'minute' => 3,
+                   'second' => 10);
+$date = new Zend_Date($datearray);
+]]>
+            </programlisting>
+
+            <programlisting role="php"><![CDATA[
+$datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
+$date = new Zend_Date($datearray);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

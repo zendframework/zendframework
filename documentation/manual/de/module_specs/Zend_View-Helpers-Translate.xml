@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.translate">
+
+    <title>Übersetzungs Helfer</title>
+
+    <para>
+        Oft sind Webseiten in verschiedenen Sprachen vorhanden. Um den Inhalt einer Site zu übersetzen sollte
+        ganz einfach <link linkend="zend.translate.introduction">Zend Translate</link> verwendet werden, und
+        um <code>Zend Translate</code> in der eigenen View zu integrieren sollte der
+        <code>Translate</code> View Helfer verwendet werden.
+    </para>
+
+
+    <para>
+        In allen folgenden Beispielen verwenden wir den einfachen Array Übersetzungs Adapter. Natürlich kann
+        jede Instanz von <classname>Zend_Translate</classname> und genauso jede Subklasse von
+        <classname>Zend_Translate_Adapter</classname> verwendet werden. Es gibt verschiedene Wege den <code>Translate</code>
+        View Helfer zu initiieren:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Registriert, durch eine vorher in <classname>Zend_Registry</classname> registrierte Instanz
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Danach, durch das Fluent Interface
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Direkt, durch Instanzierung der Klasse
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Eine registrierte Instanz von <classname>Zend_Translate</classname> ist die bevorzugte Verwendung für diesen
+        Helfer. Bevor der Adapter der Registry hinzugefügt wird, kann das zu verwendende Gebietsschema
+        einfach ausgewählt werden.
+    </para>
+
+    <note>
+        <para>
+            Wir sprechen hier von Gebietsschemata (Locale) statt von Sprachen weil eine Sprache auch in
+            verschiedenen Regionen vorhanden sein kann. Zum Beispiel wird Englisch in verschiedenen Dialekten
+            gesprochen. Es könnte eine Übersetzung für Britisch und eine für Amerikanisches Englisch geben.
+            Deswegen sagen wir Gebietsschema "locale" statt Sprache.
+        </para>
+    </note>
+
+    <example id="zend.view.helpers.initial.translate.registered">
+
+        <title>Registrierte Instanz</title>
+
+        <para>
+            Um eine registrierte Instanz zu verwenden muß einfach eine Instanz von <classname>Zend_Translate</classname>
+            oder <classname>Zend_Translate_Adapter</classname> erstellt werden und in <classname>Zend_Registry</classname> durch
+            Verwendung des Schlüssels <classname>Zend_Translate</classname> registriert werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// unser Beispieladapter
+$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+Zend_Registry::set('Zend_Translate', $adapter);
+
+// In der View
+echo $this->translate('simple');
+// gibt 'einfach' zurück
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Wenn man mit dem Fluent Interface besser zurecht kommt, kann eine Instanz auch in der View erstellt
+        werden und der Helfer im Nachhinein initiiert werden.
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.afterwards">
+
+        <title>In der View</title>
+
+        <para>
+            Um das Fluid Interface zu verwenden muß eine Instanz von <classname>Zend_Translate</classname> oder
+            <classname>Zend_Translate_Adapter</classname> erstellt werden, der Helfer ohne Parameter und anschließend
+            die <code>setTranslator()</code> Methode aufgerufen werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// in der View
+$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+$this->translate()->setTranslator($adapter)->translate('simple');
+// das gibt 'einfach' zurück
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Wenn der Helfer ohne <classname>Zend_View</classname> verwendet werden soll kann er auch direkt angesprochen werden.
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.directly">
+
+        <title>Direkte Verwendung</title>
+
+        <programlisting role="php"><![CDATA[
+// unser Beispieladapter
+$adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
+
+// den Helfer initiieren
+$translate = new Zend_View_Helper_Translate($adapter);
+print $translate->translate('simple'); // das gibt 'einfach' zurück
+]]>
+        </programlisting>
+
+        <para>
+            Dieser Weg kann verwendet werden wenn man nicht mit <classname>Zend_View</classname> arbeitet und
+            übersetzte Ausgaben erzeugen muß.
+        </para>
+
+    </example>
+
+    <para>
+        Wie man bereits sehen konnte, wird die <code>translate()</code> Methode verwendet um die Übersetzung
+        zurückzugeben. Sie muss nur mit der benötigten messageid des Übersetzungsadapters aufgerufen werden.
+        Aber sie kann auch Parameter im Übersetzungsstring ersetzen. Deswegen akzeptiert Sie variable
+        Parameter in zwei Wegen: entweder als Liste von Parametern, oder als Array von Parametern. Als
+        Beispiel:
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.parameter">
+
+        <title>Einzelne Parameter</title>
+
+        <para>
+            Um einen einzelnen Parameter zu verwenden muss dieser einfach der Methode angefügt werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = "Montag";
+$this->translate("Today is %1\$s", $date);
+// könnte 'Heute ist Montag' zurückgeben
+]]>
+        </programlisting>
+
+    </example>
+
+    <note>
+        <para>
+            Wenn man Parameter verwendet die auch Text sind ist zu beachten das es auch nötig sein kann diese
+            Parameter zu übersetzen.
+        </para>
+    </note>
+
+    <example id="zend.view.helpers.initial.translate.parameterlist">
+
+        <title>Liste von Parametern</title>
+
+        <para>
+            Oder eine Liste von Parametern verwenden und diese der Methode hinzufügen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = "Monday";
+$month = "April";
+$time = "11:20:55";
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
+                 $date,
+                 $month,
+                 $time);
+// könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.view.helpers.initial.translate.parameterarray">
+
+        <title>Array von Parametern</title>
+
+        <para>
+            Oder ein Array von Parametern verwenden und dieses der Methode hinzufügen.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = array("Monday", "April", "11:20:55");
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+// könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Manchmal ist es notwendig das Gebietsschema der Übersetzung zu Ändern. Das kann entweder dynamisch pro
+        Übersetzung oder statisch für alle folgenden Übersetzungen durchgeführt werden. Dies kann mit beidem,
+        einer Liste von Paramtern oder einem Array von Parametern, verwendet werden. In beiden Fällen muss das
+        als letzter einzelner Parameter angegeben werden.
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.dynamic">
+
+        <title>Das Gebietsschema dynamisch wechseln</title>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = array("Monday", "April", "11:20:55");
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Dieses Beispiel gibt die italienische Übersetzung für die messageid zurück. Aber Sie wird nur einmal
+        verwendet. Die nächste Übersetzung verwendet wieder das Gebietsschema des Adapters. Normalerweise wird
+        das gewünschte Gebietsschema im Übersetzungsadapter gesetzt bevor dieser der Registry hinzugefügt wird.
+        Das Gebietsschema kann aber auch im Helfer gesetzt werden:
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.static">
+
+        <title>Das Gebietsschema statisch wechseln</title>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = array("Monday", "April", "11:20:55");
+$this->translate()->setLocale('it');
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        Das obige Beispiel setzt <code>'it'</code> als neues standardmäßiges Gebietsschema welches für alle
+        weiteren Übersetzungen verwendet wird.
+    </para>
+
+    <para>
+        Natürlich gibt es auch eine <code>getLocale()</code> Methode um das aktuell gesetzte Gebietsschema
+        zu erhalten.
+    </para>
+
+    <example id="zend.view.helpers.initial.translate.getlocale">
+
+        <title>Das aktuell gesetzte Gebietsschema erhalten</title>
+
+        <programlisting role="php"><![CDATA[
+// innerhalb der View
+$date = array("Monday", "April", "11:20:55");
+
+// gibt 'de' als standardmäßig gesetztes Gebietsschema
+// vom obigen Beispiel zurück
+$this->translate()->getLocale();
+
+$this->translate()->setLocale('it');
+$this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
+
+// gibt 'it' als neues standardmäßig gesetztes Gebietsschema zurück
+$this->translate()->getLocale();
+]]>
+        </programlisting>
+
+    </example>
+
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

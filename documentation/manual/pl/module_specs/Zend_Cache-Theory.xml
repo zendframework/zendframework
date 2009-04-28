@@ -1,0 +1,125 @@
+<sect1 id="zend.cache.theory">
+    <title>Teoria buforowania</title>
+    <para>
+        Są trzy kluczowe składniki w Zend_Cache. Pierwszym jest unikalny
+        identyfikator (łańcuch znakow) który jest używany do identyfikowania
+        rekordów bufora. Drugim jest dyrektywa <code>'lifetime'</code> jaką
+        pokazano w przykładach; definiuje ona jak długo buforowany zasób jest
+        uznawany za 'świeży'. Trzecim kluczowym składnikiem jest warunkowe
+        wykonanie więc część twojego kodu może być ominięta, co powoduje wzrost
+        wydajności. Główna funkcja frontendu (np.
+        <code>Zend_Cache_Core::get()</code>) jest zawsze zaprojektowana tak, aby
+        zwracała  wartość false gdy bufor jest nieaktualny, jeśli jest to
+        sensowne dla danego frontendu. To pozwala użytkownikom na ominięcie bloków
+        kodu, które chcą buforować, zawierając je w wyrażenie <code>if(){ ... }</code>
+        gdzie warunkiem jest metoda Zend_Cache. Na końcu takich bloków musisz zapisać
+        to co wygenerowałeś (np. za pomocą metody <code>Zend_Cache_Core::save()</code>).
+    </para>
+    <note><para>
+        Warunkowe uruchamianie twojego kodu nie jest konieczne w niektórych
+        frontendach (na przykład <code>Function</code>), gdzie cała logika
+        jest zaimplementowana we frontendzie.
+    </para></note>
+    <note><para>
+        'bufor istnieje' jest wyrażeniem określającym sytuację, w której
+        rekord bufora został znaleziony, jest poprawny i jest 'świeży'
+        'fresh' (innymi słowy jeszcze nie wygasł). 'Bufor nie istnieje' jest
+        wszystkim innym. Kiedy zdarzy się, że bufor nie istnieje musisz
+        wygenerować swoje dane (tak jak robisz to normalnie) i zapisać je w
+        buforze. Z drugiej strony, gdy bufor istnieje, backend automatycznie
+        pobierze rekord z bufora.
+    </para></note>
+    <sect2 id="zend.cache.factory">
+        <title>Metoda fabryki <code>Zend_Cache</code></title>
+        <para>
+            Dobrym sposobem utworzenia użytecznej instancji frontendu
+            <code>Zend_Cache</code> jest ten pokazany w poniższym przykładzie:
+        </para>
+        <programlisting role="php"><![CDATA[
+// Wybieramy backend (na przykład 'File' lub 'Sqlite'...)
+$backendName = '[...]';
+
+// Wybieramy frontend (na przykład 'Core', 'Output', 'Page'...)
+$frontendName = '[...]';
+
+// Ustawiamy tablicę opcji dla wybranego frontendu
+$frontendOptions = array([...]);
+
+// Ustawiamy tablicę opcji dla wybranego backendu
+$backendOptions = array([...]);
+
+// Tworzymy instancję klasy Zend_Cache
+// (oczywiście dwa ostatnie argumenty są opcjonalne)
+$cache = Zend_Cache::factory($frontendName, $backendName, $frontendOptions, $backendOptions);
+]]>
+        </programlisting>
+        <para>
+            W poniższych przykładach założymy że zmienna <code>$cache</code> zawiera
+            poprawną instancję frontendu i to, że rozumiesz jak przekazać
+            parametry do wybranego backendu.
+        </para>
+        <note><para>
+            Zawsze używaj metody <code>Zend_Cache::factory()</code> aby pobrać
+            instancje frontendu. Tworzenie instancji frontendu czy backendu
+            nie będzie przynosiło oczekiwanych rezultatów.
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.cache.tags">
+        <title>Nadawanie etykiet rekordom</title>
+        <para>
+            Etykiety są sposobem kategoryzowania rekordów bufora. Kiedy zapisujesz bufor
+            za pomocą metody <code>save()</code>, możesz ustawić tablicę etykiet, które
+            mają być przypisane danemu rekordowi. Wtedy będziesz miał możliwość
+            usuwania wszystkich rekordów bufora oznaczonych daną etykietą (lub etykietami):
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
+]]>
+        </programlisting>
+        <note><para>
+            Zauważ, że metoda <code>save()</code> akceptuje opcjonalny czwarty
+            argument: <code>$specificLifetime</code> (jeśli jego wartość jest
+            inna od false, ustawiany jest określony czas ważności dla
+            konkretnego rekordu bufora.
+        </para></note>
+    </sect2>
+    <sect2 id="zend.cache.clean">
+        <title>Czyszczenie bufora</title>
+        <para>
+            Aby usunąć/unieważnić rekord bufora o określonym id, możesz użyć
+            metody <code>remove()</code>:
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->remove('idToRemove');
+]]>
+        </programlisting>
+        <para>
+            Aby usunąć/unieważnić wiele rekordów bufora za jednym razem, możesz
+            użyć metody <code>clean()</code>. Na przykład aby usunąć wszystkie
+            rekordy bufora:
+        </para>
+        <programlisting role="php"><![CDATA[
+// czyszczenie wszystkich rekordów
+$cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+
+// czyszczenie jedynie nieaktualnych rekordów
+$cache->clean(Zend_Cache::CLEANING_MODE_OLD);
+]]>
+        </programlisting>
+        <para>
+            Jeśli chcesz usunąć rekordy bufora oznaczone etykietami 'tagA' oraz 'tagC':
+        </para>
+        <programlisting role="php"><![CDATA[
+$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tagA', 'tagC'));
+]]>
+        </programlisting>
+        <para>
+            Dostępne tryby czyszczenia bufora to: <code>CLEANING_MODE_ALL</code>,
+            <code>CLEANING_MODE_OLD</code>, <code>CLEANING_MODE_MATCHING_TAG</code>
+            oraz <code>CLEANING_MODE_NOT_MATCHING_TAG</code>. Dwa ostatnia, jak
+            nazwa wskazuje, mogą w operacji czyszczenia być użyte wraz z tablicą
+            etykiet.
+        </para>
+    </sect2>
+</sect1>

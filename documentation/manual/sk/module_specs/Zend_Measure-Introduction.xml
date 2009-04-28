@@ -1,0 +1,65 @@
+<sect1 id="zend.measure.introduction">
+
+    <title>Úvod</title>
+
+    <para>
+        Triedy <code>Zend_Measure_*</code> poskytujú jednoduchú možnosť pre prácu
+        z výsledkami. Pomocou <code>Zend_Measure_*</code> je možné konvertovať výsledok
+        do rozličných jednotiek rovnakého typu. Výsledky môžu byt sčitované, odčitované
+        a porovnávané medzi sebou. Z užívateľského vstupu je možné automaticky
+        získať jednotku výsledku. Je podporované veľké množstvo jednotiek.
+    </para>
+
+    <example>
+        <title>Zmena výsledku merania</title>
+        <para>
+            Nasledujúci úvodný príklad ukazuje možnosť zmeny jednotky výsledku
+            merania. Pre zmenu jednotky výsledku merania je potrebné vedieť hodnotu
+            a jednotku hodnoty. Hodnota môže byt celé číslo, desatinné číslo, alebo
+            reťazec ktorý obsahuje číslo. Konvertovať je možné lem medzi jednotkami
+            rovnakého typu (hmotnosť, plocha, teplota, rýchlosť, atď.) a nie vzájomne.
+        </para>
+<programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Measure/Length.php';
+
+$locale = new Zend_Locale('en');
+$unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
+
+// Konverzia meterov to yardy
+echo $unit->convertTo(Zend_Measure_Length::YARD);
+?>]]></programlisting>
+    </example>
+
+    <para>
+        <code>Zend_Measure_*</code> zahŕňa podporu pre rôzne druhy jednotiek meraní.
+        Jednotky majú vždy rovnakú sémantiku: <code>Zend_Measure_&lt;TYP&gt;::MENO_JEDNOTKY</code>,
+        kde &lt;TYP&gt; zodpovedá jednotlivým fyzikálnym veličinám, alebo číselným
+        vlastnostiam. Každá jednotka pozostáva z konverzného faktoru a označenia jednotky.
+        Podrobný zoznam sa nachádza v časti <link linkend="zend.measure.types"><code>
+        Typy meraní</code></link>.
+    </para>
+
+    <example>
+        <title>Použitie jednotky <code>meter</code></title>
+        <para>
+            Meranie pomocou jednotky <code>meter</code>je určené na meranie vzdialeností,
+            a teda jej konštanta je obsiahnutá v triede <code>Length</code>. Pre použitie
+            tejto jednotky je potrebné použiť zápis <code>Length::METER</code>.
+            Zobrazenie jednotky je <code>m</code>.
+        </para>
+<programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Measure/Length.php';
+
+echo Zend_Measure_Length::STANDARD;  // outputs 'Length::METER'
+echo Zend_Measure_Length::KILOMETER; // outputs 'Length::KILOMETER'
+
+$unit = new Zend_Measure_Length(100,'METER');
+echo $unit;
+// výsledok: '100 m'
+?>]]></programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

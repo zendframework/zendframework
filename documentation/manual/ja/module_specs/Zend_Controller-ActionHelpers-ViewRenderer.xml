@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.actionhelpers.viewrenderer">
+    <title>ViewRenderer</title>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
+        <title>導入</title>
+
+        <para>
+            <code>ViewRenderer</code> ヘルパーは、
+            以下のような要件を満たすために作られたものです。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    コントローラ内でいちいちビューオブジェクトのインスタンスを
+                    作成しなくても済むようにする。
+                    ビューオブジェクトは自動的にコントローラに登録されます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    ビュースクリプトやヘルパー、そしてフィルタのパスを
+                    現在のモジュールに基づいて自動的に設定し、
+                    モジュール名をヘルパーやフィルタのクラス名の先頭に自動的に関連付ける。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    すべてのコントローラとアクションで使用できる
+                    グローバルなビューオブジェクトを作成する。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    すべてのコントローラで使用する、
+                    デフォルトのビューレンダリングオプションを設定できるようにする。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    何も指定しなくても、
+                    自動的にビュースクリプトをレンダリングできる機能を追加する。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    ビューの基底パスやビュースクリプトのパスを
+                    独自に指定できるようにする。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>
+                <code>_forward()</code> やリダイレクト、あるいは手動でのレンダリングを行う場合は、
+                自動レンダリングは不要です。これらの処理を行う場合は、
+                出力を自前で行うことを <code>ViewRenderer</code>
+                に対して指示します。
+            </para>
+        </note>
+
+        <note>
+            <para>
+                <code>ViewRenderer</code> はデフォルトで有効になっています。
+                これを無効にするには、フロントコントローラのパラメータ
+                <code>noViewRenderer</code> を指定する
+                (<code>$front->setParam('noViewRenderer', true)</code>) か、
+                あるいはヘルパーブローカからヘルパーを削除
+                (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>)
+                します。
+            </para>
+
+            <para>
+                フロントコントローラでのディスパッチ処理の前に
+                <code>ViewRenderer</code> の設定を変更したい場合は、
+                次のいずれかの方法を使用します。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        独自の <code>ViewRenderer</code> のインスタンスを作成し、
+                        ヘルパーブローカにそれを渡して登録する。
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]>
+                    </programlisting>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>ViewRenderer</code> オブジェクトを、
+                        ヘルパーブローカから必要に応じて作成、取得する。
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+]]>
+                    </programlisting>
+                </listitem>
+            </itemizedlist>
+        </note>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
+        <title>API</title>
+
+        <para>
+            もっとも基本的な使用法は、単に <code>ViewRenderer</code>
+            のインスタンスを作成してそれをヘルパーブローカに渡すというものです。
+            インスタンスの作成と登録を一度に行うには、ヘルパーブローカの
+            <code>getStaticHelper()</code> メソッドを使用するのがいちばん簡単です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+]]>
+        </programlisting>
+
+        <para>
+            アクションコントローラのインスタンスが最初に作成されたときに、
+            <code>ViewRenderer</code> がビューオブジェクトのインスタンスを作成します。
+            コントローラのインスタンスが作成されるたびに、<code>ViewRenderer</code>
+            の <code>init()</code> がコールされます。
+            ここでアクションコントローラのビュープロパティを設定し、
+            現在のモジュールからの相対パスを指定して
+            <code>addScriptPath()</code> をコールします。
+            これは現在のモジュール名に基づいたプレフィックスをクラス名の先頭につけてコールされるので、
+            ヘルパーやフィルタのクラスをモジュール内で効率的に管理することができます。
+        </para>
+
+        <para>
+            <code>postDispatch()</code> がコールされるたびに、現在のアクションの
+            <code>render()</code> を自動的にコールします。
+        </para>
+
+        <para>
+            例として、次のようなクラスを考えてみましょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// foo モジュールのコントローラクラス
+class Foo_BarController extends Zend_Controller_Action
+{
+    // デフォルトで bar/index.phtml をレンダリングするので、特に何もする必要はありません
+    public function indexAction()
+    {
+    }
+
+    // 変数 'foo' の値を 'bar' に設定して bar/populate.phtml をレンダリングします
+    // ビューオブジェクトは既に preDispatch() で定義されているので、既に使用可能です
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+}
+
+...
+
+// ビュースクリプトの中では、たとえば次のように書きます
+$this->foo(); // Foo_View_Helper_Foo::foo() をコールします
+]]>
+        </programlisting>
+
+        <para>
+            <code>ViewRenderer</code> には、
+            ビューのオプションを取得したり設定したりするためのメソッドも豊富に用意されています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setView($view)</code>
+                    は <code>ViewRenderer</code> が使用するビューオブジェクトを設定します。
+                    これは、クラスのプロパティ <code>$view</code> の値を設定します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverRender($flag = true)</code>
+                    を使用すると、自動レンダリング機能を全体的に
+                    （すべてのコントローラに対して）無効にしたり有効にしたりできます。
+                    true を指定すると、そのコントローラの <code>postDispatch()</code>
+                    では <code>render()</code> をコールしなくなります。
+                    <code>getNeverRender()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoRender($flag = true)</code>
+                    を使用すると、自動レンダリングを無効にしたり有効にしたりできます。
+                    true を指定すると、現在のコントローラの <code>postDispatch()</code>
+                    では <code>render()</code> をコールしなくなります。
+                    この設定は、<code>preDispatch()</code> がコールされるたびにいったんリセットされます
+                    (つまり、自動レンダリングを無効にしたいすべてのコントローラで
+                    個々にこれを設定する必要があるということです)。
+                    <code>getNoRender()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoController($flag = true)</code>
+                    を使用すると、<code>render()</code>
+                    がコントローラ名のサブディレクトリにあるアクションスクリプトを
+                    読みにいかなくすることができます (デフォルトでは読みにいきます)。
+                    <code>getNoController()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverController($flag = true)</code>
+                    は <code>setNoController()</code> と似ていますが、
+                    こちらは全体に影響を与えます。つまり、
+                    ディスパッチ処理を行っても設定はリセットされません。
+                    <code>getNeverController()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setScriptAction($name)</code>
+                    を使用すると、レンダリングするアクションスクリプトを指定することができます。
+                    <code>$name</code> は、スクリプト名から拡張子を除いたもの
+                    (そして、<code>noController</code> が指定されていない限り、
+                    コントローラのディレクトリ名も除いたもの) となります。
+                    指定しなかった場合は、リクエストオブジェクト内のアクションに基づいた名前の
+                    ビュースクリプトを探します。
+                    <code>getScriptAction()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setResponseSegment($name)</code>
+                    を使用すると、レンダリング結果を出力する
+                    レスポンスオブジェクトのセグメント名を指定することができます。
+                    指定しなかった場合は、デフォルトのセグメントにレンダリングします。
+                    <code>getResponseSegment()</code> は、現在の設定を取得します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>initView($path, $prefix, $options)</code>
+                    は、ビューの基底パスを指定します。
+                    また、ヘルパースクリプトとフィルタスクリプトの先頭につけるクラスプレフィックスや
+                    <code>ViewRenderer</code> のオプションも設定します。
+                    オプションには、
+                    <code>neverRender</code>、<code>noRender</code>、
+                    <code>noController</code>、<code>scriptAction</code>
+                    および <code>responseSegment</code>
+                    のいずれかのフラグを指定します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRender($action = null, $name = null, $noController
+                        = false)</code>
+                    を使用すると、<code>scriptAction</code> や <code>responseSegment</code>
+                    そして <code>noController</code> のいずれかまたは複数を
+                    一度に指定することができます。<code>direct()</code>
+                    はこのメソッドのエイリアスで、コントローラ内から簡単にコールすることができます。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// 現在のアクションスクリプトではなく 'foo' をレンダリングします
+$this->_helper->viewRenderer('foo');
+
+// form.phtml の内容をレスポンスセグメント 'html' にレンダリングします。
+// コントローラのビュースクリプト用サブディレクトリは使用しません。
+$this->_helper->viewRenderer('form', 'html', true);
+]]>
+                </programlisting>
+
+                <note><para>
+                        <code>setRender()</code> および <code>direct()</code>
+                        は、実際にはビュースクリプトをレンダリングしません。
+                        実際にレンダリングを行うのは <code>postDispatch()</code>
+                        や <code>render()</code> で、それらのメソッドに対するヒントを指示するだけです。
+                </para></note>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            コンストラクタのオプションとして、
+            ビューオブジェクトを渡したり <code>ViewRenderer</code>
+            のオプションを渡したりすることができます。
+            このオプションで指定できるのは、<code>initView()</code>
+            で説明したフラグと同じものです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view    = new Zend_View(array('encoding' => 'UTF-8'));
+$options = array('noController' => true, 'neverRender' => true);
+$viewRenderer =
+    new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
+]]>
+        </programlisting>
+
+        <para>
+            さらに追加のメソッドがあり、
+            ビューオブジェクトで使用するビューの基底パスを変更することができます。
+            また、ビュースクリプトが自動レンダリングを行う際に使用するパスも変更することができます。
+            これらのメソッドでは、以下のプレースホルダのいずれかあるいは複数が使用できます。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>:moduleDir</code> は、現在のモジュールの基底ディレクトリを指します
+                    (規約では、これはモジュールのコントローラディレクトリの親ディレクトリとなります)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:module</code> は、現在のモジュール名を指します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:controller</code> は、現在のコントローラ名を指します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:action</code> は、現在のアクション名を指します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:suffix</code> は、ビュースクリプトのサフィックス
+                    (<code>setViewSuffix()</code> で設定したもの) を指します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            パス指定を制御するメソッドは次のとおりです。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setViewBasePathSpec($spec)</code>
+                    は、ビューオブジェクトを追加する際に使用する基底パスを
+                    決める際に使用するパス指定を変更します。
+                    デフォルトの設定は <code>:moduleDir/views</code> です。
+                    現在の設定を取得するには
+                    <code>getViewBasePathSpec()</code> を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathSpec($spec)</code>
+                    は、個々のビュースクリプトのパス
+                    (からビュースクリプトの基底パスを除いた部分)
+                    を決める際に使用するパス指定を変更します。
+                    デフォルトの設定は <code>:controller/:action.:suffix</code> です。
+                    現在の設定を取得するには
+                    <code>getViewScriptPathSpec()</code> を使用します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathNoControllerSpec($spec)</code>
+                    は、<code>noController</code> が有効な場合に
+                    個々のビュースクリプトのパス
+                    (からビュースクリプトの基底パスを除いた部分)
+                    を決める際に使用するパス指定を変更します。
+                    デフォルトの設定は <code>:action.:suffix</code> です。
+                    現在の設定を取得するには
+                    <code>getViewScriptPathNoControllerSpec()</code> を使用します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            パス指定をよりきめ細かく行うには、
+            <link linkend="zend.filter.inflector">Zend_Filter_Inflector</link>
+            を使用します。実は、<code>ViewRenderer</code>
+            はパスのマッピングを行う際に既にインフレクタを使用しています。
+            インフレクタに手を入れたい (独自のインフレクタを使用したり、
+            デフォルトのインフレクタに手を加えたりしたい) 場合は、
+            以下のメソッドを使用します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getInflector()</code> は、インフレクタを取得します。
+                    まだ <code>ViewRenderer</code> にインフレクタが存在しない場合は、
+                    デフォルトの規則にもとづいたインフレクタを作成します。
+                </para>
+
+                <para>
+                    By default, it uses static rule references for the suffix
+                    and module directory, as well as a static target; this
+                    allows various <code>ViewRenderer</code> properties the
+                    ability to dynamically modify the inflector.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>setInflector($inflector, $reference)</code> は、
+                    <code>ViewRenderer</code> で使用する独自のインフレクタを設定します。
+                    <code>$reference</code> が true の場合は、
+                    対象だけでなくサフィックスやモジュールディレクトリも
+                    <code>ViewRenderer</code> のプロパティへの静的な参照とします。
+            </para></listitem>
+        </itemizedlist>
+
+        <note>
+            <title>デフォルトの検索方式</title>
+
+            <para>
+                <code>ViewRenderer</code> は、
+                パスの正規化を行ってビュースクリプトによる検索を簡単にします。
+                デフォルトのルールは次のようなものです。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>:module</code>:
+                        MixedCase および camelCase 形式の単語がダッシュで分割され、
+                        すべて小文字になります。たとえば
+                        "FooBarBaz" は "foo-bar-baz" となります。
+                    </para>
+
+                    <para>
+                        内部的には、インフレクタはフィルタ
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname> および
+                        <classname>Zend_Filter_StringToLower</classname> を使用します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:controller</code>:
+                        MixedCase および camelCase 形式の単語がダッシュで分割され、
+                        アンダースコアはディレクトリ区切り文字に変換され、
+                        すべて小文字になります。たとえば
+                        "FooBar" は "foo-bar" となり、そして "FooBar_Admin"
+                        は "foo-bar/admin" となります。
+                    </para>
+
+                    <para>
+                        内部的には、インフレクタはフィルタ
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>、
+                        <classname>Zend_Filter_Word_UnderscoreToSeparator</classname> および
+                        <classname>Zend_Filter_StringToLower</classname> を使用します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:action</code>:
+                        MixedCase および camelCase 形式の単語がダッシュで分割され、
+                        英数字以外の文字はダッシュに変換され、
+                        すべて小文字になります。たとえば
+                        "fooBar" は "foo-bar" となり、"foo-barBaz"
+                        は "foo-bar-baz" となります。
+                    </para>
+
+                    <para>
+                        内部的には、インフレクタはフィルタ
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>、
+                        <classname>Zend_Filter_PregReplace</classname> および
+                        <classname>Zend_Filter_StringToLower</classname> を使用します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
+
+        <para>
+            <code>ViewRenderer</code> API の最後に紹介するのは、
+            実際にビュースクリプトのパスを決定するメソッドと
+            ビューのレンダリングを行うメソッドです。以下をご覧ください。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>renderScript($script, $name)</code>
+                    は、指定したパスのスクリプトをレンダリングします。
+                    オプションで、パスセグメントの名前を指定することもできます。
+                    このメソッドを使用する際には、<code>ViewRenderer</code>
+                    はスクリプト名を自動的に決定することはありません。
+                    そのかわりに、<code>$script</code> で指定された内容を直接
+                    ビューオブジェクトの <code>render()</code> メソッドに渡します。
+                </para>
+
+                <note><para>
+                    レスポンスオブジェクトにビューがレンダリングされると、
+                    自動的に <code>noRender</code> を設定します。
+                    これにより、同じビュースクリプトを間違って複数回レンダリングしてしまうことを防ぎます。
+                </para></note>
+
+                <note>
+                    <para>
+                        デフォルトでは、
+                        <classname>Zend_Controller_Action::renderScript()</classname>
+                        は <code>ViewRenderer</code> の
+                        <code>renderScript()</code> メソッドへのプロキシとなります。
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getViewScript($action, $vars)</code>
+                    は、渡されたアクションや <code>$vars</code>
+                    で指定した変数の値に基づいてビュースクリプトのパスを作成します。
+                    <code>$vars</code> 配列のキーは、パスを指定するためのキー
+                    ('moduleDir'、'module'、'controller'、'action' および 'suffix')
+                    のいずれかとなります。渡された変数の値をもとにしてパスを作成します。
+                    なにも渡されなかった場合は、現在のリクエストの内容をもとにしてパスを作成します。
+                </para>
+
+                <para>
+                    <code>getViewScript()</code>
+                    は、<code>noController</code> フラグの内容によって
+                    <code>viewScriptPathSpec</code> あるいは
+                    <code>viewScriptPathNoControllerSpec</code> のいずれかを使用します。
+                </para>
+
+                <para>
+                    モジュール名やコントローラ名、アクション名にあらわれる
+                    単語の区切りは、ダッシュ ('-') に置き換えられます。
+                    したがって、たとえばコントローラ名が 'foo.bar'
+                    でアクション名が 'baz:bat' だったとすると、
+                    デフォルトのパス指定をもとにしたビュースクリプトのパスは
+                    'foo-bar/baz-bat.phtml' となります。
+                </para>
+
+                <note>
+                    <para>
+                        デフォルトでは、
+                        <classname>Zend_Controller_Action::getViewScript()</classname>
+                        は <code>ViewRenderer</code> の
+                        <code>getViewScript()</code> メソッドへのプロキシとなります。
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>render($action, $name, $noController)</code>
+                    は、まず <code>$name</code> あるいは
+                    <code>$noController</code> が指定されているかどうかを調べます。
+                    指定されている場合は、ViewRenderer の対応するフラグ
+                    (それぞれ responseSegment と noController) を設定します。
+                    次に、<code>$action</code> 引数が指定されていれば、
+                    それを <code>getViewScript()</code> に渡します。
+                    最後に、取得したビュースクリプトのパスを
+                    <code>renderScript()</code> に渡します。
+                </para>
+
+                <note>
+                    <para>
+                        render() を使用する際には、その副作用に注意しましょう。
+                        レスポンスセグメント名や noController
+                        フラグに指定した内容は、そのオブジェクト内で残り続けます。
+                        さらに、レンダリングが完了した際に noRender
+                        も設定されます。
+                    </para>
+                </note>
+
+                <note>
+                    <para>
+                        デフォルトでは、
+                        <classname>Zend_Controller_Action::render()</classname> は
+                        <code>ViewRenderer</code> の <code>render()</code>
+                        メソッドへのプロキシとなります。
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderBySpec($action, $vars, $name)</code>
+                    は、パス指定用の変数を渡してビュースクリプトのパスを決定します。
+                    <code>$action</code> および <code>$vars</code> の内容を
+                    <code>getScriptPath()</code> に、そしてその結果得られたスクリプトのパスと
+                    <code>$name</code> を <code>renderScript()</code> に渡します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
+        <title>基本的な使用例</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
+            <title>基本的な使用法</title>
+
+            <para>
+                最も基本的な使用法は、起動ファイル内で <code>ViewRenderer</code>
+                を作成してヘルパーブローカに登録し、
+                アクションメソッドで変数の値を設定するというものです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// 起動ファイル内で
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+
+...
+
+// 'foo' モジュールの 'bar' コントローラ
+class Foo_BarController extends Zend_Controller_Action
+{
+    // デフォルトで bar/index.phtml をレンダリングするので、特に何もする必要はありません
+    public function indexAction()
+    {
+    }
+
+    // 変数 'foo' の値を 'bar' に設定して bar/populate.phtml をレンダリングします
+    // ビューオブジェクトは既に preDispatch() で定義されているので、既に使用可能です
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+
+    // 何もレンダリングせずに別のアクションに転送します
+    // 転送先のアクションで何らかのレンダリングを行います
+    public function bazAction()
+    {
+        $this->_forward('index');
+    }
+
+    // 何もレンダリングせず別の場所にリダイレクトします
+    public function batAction()
+    {
+        $this->_redirect('/index');
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title>命名規約: コントローラ名やアクション名の単語の区切り</title>
+            <para>
+                コントローラやアクションの名前が複数の単語からなるものである場合、
+                ディスパッチャには、特定のパスや区切り文字を使用して単語を区切った
+                URL を指定しなければなりません。
+                <code>ViewRenderer</code> は、コントローラ名の中にあるパス区切り文字を
+                実際のパス区切り文字 ('/') に置き換え、単語区切り文字をダッシュ
+                ('-') に置き換えてパスを作成します。したがって、
+                アクション <code>/foo.bar/baz.bat</code> をコールすると
+                FooBarController.php の
+                <code>FooBarController::bazBatAction()</code> へディスパッチされ、
+                <code>foo-bar/baz-bat.phtml</code> をレンダリングすることになります。
+                また、アクション <code>/bar_baz/baz-bat</code> をコールすると
+                <code>Bar/BazController.php</code> (パス区切り文字に注意) の
+                <code>Bar_BazController::bazBatAction()</code>
+                へディスパッチされ、<code>bar/baz/baz-bat.phtml</code>
+                をレンダリングすることになります。
+            </para>
+
+            <para>
+                二番目の例では、モジュールはデフォルトモジュールのままであることに注意しましょう。
+                しかし、パス区切り文字があるために、
+                <code>Bar/BazController.php</code> にある
+                <code>Bar_BazController</code> を受け取ることになります。
+                ビューレンダラはコントローラのディレクトリ階層を模倣します。
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
+            <title>自動レンダリングの無効化</title>
+
+            <para>
+                アクションやコントローラによっては、自動レンダリングを無効にしたいこともあるでしょう。
+                たとえば、HTML 以外 (XML や JSON など) を出力したい場合や
+                単に何も出力したくない場合などです。
+                そんな場合には以下のいずれかの方法を使用します。
+                つまり、すべての自動レンダリングを無効にする
+                (<code>setNeverRender()</code>) か、あるいは現在のアクションでだけ
+                自動レンダリングを無効にする (<code>setNoRender()</code>) かです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bar モジュールの Baz コントローラクラス
+class Bar_BazController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        // このアクションでは自動レンダリングを行いません
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+
+// Bar モジュールの Bat コントローラクラス
+class Bar_BatController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // このコントローラのアクションでは決して自動レンダリングを行いません
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <para>
+                たいていの場合は、自動レンダリングを全体で無効にする
+                (<code>setNeverRender()</code>) のは無意味です。
+                なぜなら、<code>ViewRenderer</code> の唯一の存在意義が、
+                ビューオブジェクトを自動的に設定することだからです。
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
+            <title>別のビュースクリプトの選択</title>
+
+            <para>
+                アクション名から自動的に決まるスクリプトではなく、
+                それ以外のものをレンダリングしたくなる場合もあるでしょう。
+                たとえば、add アクションと edit アクションのふたつを持つコントローラがあったとしましょう。
+                どちらのアクションも同じ 'form' ビューを表示しますが、
+                そこに設定する値が異なります。
+                そんな場合に、それぞれでスクリプト名を変えるのは簡単です。
+                <code>setScriptAction()</code> や <code>setRender()</code>
+                を使用するか、あるいはヘルパーをメソッドとしてコールします。
+                これは <code>setRender()</code> を起動します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Foo モジュールの Bar コントローラクラス
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function addAction()
+    {
+        // 'bar/add.phtml' ではなく 'bar/form.phtml' をレンダリングします
+        $this->_helper->viewRenderer('form');
+    }
+
+    public function editAction()
+    {
+        // 'bar/edit.phtml' ではなく 'bar/form.phtml' をレンダリングします
+        $this->_helper->viewRenderer->setScriptAction('form');
+    }
+
+    public function processAction()
+    {
+        // 何かのチェックをした後で...
+        if (!$valid) {
+            // 'bar/process.phtml' ではなく 'bar/form.phtml' をレンダリングします
+            $this->_helper->viewRenderer->setRender('form');
+            return;
+        }
+
+        // その他の処理を続けます...
+    }
+
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
+            <title>登録されているビューの変更</title>
+
+            <para>
+                ビューオブジェクトの設定を変更したくなったとしましょう。
+                たとえば、ヘルパーのパスやエンコーディングを変更したくなったらどうしますか?
+                そんな場合は、コントローラに設定されているビューオブジェクトを変更するか、
+                あるいは <code>ViewRenderer</code> の外部からビューオブジェクトを取得します。
+                どちらも同じオブジェクトへの参照を取得することになります。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Foo モジュールの Bar コントローラクラス
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // ビューのエンコーディングを変更します
+        $this->view->setEncoding('UTF-8');
+    }
+
+    public function bazAction()
+    {
+        // ビューオブジェクトを取得し、エスケープ用のコールバックを 'htmlspecialchars' に設定します
+        $view = $this->_helper->viewRenderer->view;
+        $view->setEscape('htmlspecialchars');
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
+        <title>高度な使用例</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
+            <title>パスの指定方法の変更</title>
+
+            <para>
+                場合によっては、デフォルトのパス指定があなたのサイトに
+                うまく当てはまらないこともあるでしょう。
+                たとえば、すべてのテンプレートを単一のディレクトリ配下にまとめ、
+                デザイナにはそのディレクトリに対するアクセス権だけを与えたいといった場合です
+                (<ulink url="http://smarty.php.net/">Smarty</ulink>
+                を使用する場合などにありがちです)。
+                そんな場合は、ビューの基底パスをハードコーディングし、
+                それをアクションのビュースクリプトのパスとして使用することになります。
+            </para>
+
+            <para>
+                この例では、ビューの基底パスを '/opt/vendor/templates'
+                とし、ビュースクリプトのパスは ':moduleDir/:controller/:action.:suffix'
+                となるようにします。noController
+                フラグが設定されている場合は、サブディレクトリ (':action.:suffix')
+                からではなくトップディレクトリからのパスとして探すことになります。
+                最後に、ビュースクリプトのファイルの拡張子として
+                'tpl' を設定します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * 起動ファイル
+ */
+
+// 別のビュー実装を使用します
+$view = new ZF_Smarty();
+
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
+$viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
+             ->setViewScriptPathSpec(':module/:controller/:action.:suffix')
+             ->setViewScriptPathNoControllerSpec(':action.:suffix')
+             ->setViewSuffix('tpl');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
+            <title>単一のアクションから複数のビュースクリプトをレンダリングする例</title>
+
+            <para>
+                時には、複数のビュースクリプトをひとつのアクションで処理したいこともあるでしょう。
+                これは、非常に直感的な方法で実現できます。単に
+                <code>render()</code> を必要なだけコールすればいいのです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SearchController extends Zend_Controller_Action
+{
+    public function resultsAction()
+    {
+        // $this->model に現在のモデルが設定されているものとします
+        $this->view->results =
+            $this->model->find($this->_getParam('query', '');
+
+        // render() は、デフォルトでは ViewRenderer へのプロキシとなります。
+        // まず form を、そして results をレンダリングします
+        $this->render('form');
+        $this->render('results');
+    }
+
+    public function formAction()
+    {
+        // 何もしなくても、ViewRenderer が自動的にビュースクリプトをレンダリングします
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

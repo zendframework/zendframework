@@ -1,0 +1,7 @@
+configure
+config.nice
+autom4te.cache
+config.log
+config.status
+entities.ent
+Makefile

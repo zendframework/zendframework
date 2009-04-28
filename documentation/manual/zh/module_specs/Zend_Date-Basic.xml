@@ -1,0 +1,171 @@
+<sect1 id="zend.date.basic">
+
+    <title>基本方法</title>
+
+    <para>
+        下面的章节用例子来说明 <code>Zend_Date</code> 的基本用法。对于本手册，"dates" 总是暗示
+        带有时间的日历日期，即使没有显式说明，反之亦然。没有指定的部分就在内部缺省为 “零”。
+        这样，添加一个没有日历日期和一个时间值为 12 小时到另一个只包含日历日期的日期上，就变成那个被添加的日期的“中午”。
+    </para>
+
+    <para>
+        只设置一个指定的日期，没有时间部分，那么时间就设置为 00:00:00。相反，只设置一个指定的时间暗示在内部日期
+        设置为 01.01.1970 加上等同已经发生的小时，分钟和秒的秒数。一般来说，人们从开始点测量东西，如 A.D. 0年。
+        然而，许多软件系统使用1970年的第一秒作为开始点，并表示为时间戳偏移量。
+    </para>
+
+    <sect2 id="zend.date.basic.creation">
+
+        <title>当前日期</title>
+
+        <para>
+            不带任何参数，构造一个实例缺省地返回一个用PHP的 <code>time()</code>函数获得 <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX 时间戳</ulink>
+            当前本地日期的对象。请确认你的PHP环境有正确的 <link linkend="zend.date.setdefaulttimezone">缺省时区</link>。
+        </para>
+
+        <example id="zend.date.basic.creation.example-1">
+            <title>生成当前日期</title>
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Output of the current timestamp
+print $date;
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.basic.functions">
+
+        <title>Zend_Date 的例子</title>
+
+        <para>
+            对于不熟悉在其他语言或框架中的日期对象的开发者，回顾一下 <code>Zend_Date</code> 的基本方法是一个好的开始。
+            下面对每个方法提供了一个小的范例。
+        </para>
+
+        <sect3 id="zend.date.simple.functions.get">
+
+            <title>输出日期</title>
+
+            <para>
+                在 <code>Zend_Date</code> 对象里的日期可用 <code>get()</code> 方法获得为本地化的整数或字符串。
+                在后面的章节，我们将解释许多可用的选项。
+            </para>
+
+            <example id="zend.date.simple.functions.get.example-1">
+                <title>get() - 输出日期</title>
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Output of the desired date
+print $date->get();
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.set">
+
+            <title>设置日期</title>
+
+            <para>
+                <code>set()</code> 方法修改存储在对象里的日期，并以时间戳（不是对象）的形式返回最终的日期值。
+                再强调一下， 在后面的章节，我们将解释许多可用的选项。
+            </para>
+
+            <example id="zend.date.simple.functions.set.example-1">
+                <title>set() - 设置日期</title>
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Setting of a new time
+$date->set('13:00:00',Zend_Date::TIMES);
+print $date->get(Zend_Date::W3C);
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.add">
+
+            <title>加减日期</title>
+
+            <para>
+                用 <code>add()</code> 来加两个日期常常是以时间的形式把一个真是的日期加到一个表示日期部分的假的时间戳，
+                如下面例子所示的12小时。<code>add()</code> 和 <code>sub()</code> 都使用相同的选项 <code>set()</code>，
+                我们将在后面解释。
+            </para>
+
+            <example id="zend.date.simple.functions.add.example-1">
+                <title>add() - 加日期</title>
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// changes $date by adding 12 hours
+$date->add('12:00:00', Zend_Date::TIMES);
+
+echo "Date via get() = ", $date->get(Zend_Date::W3C), "\n";
+
+// use magic __toString() method to call Zend_Date's toString()
+echo "Date via toString() = ", $date, "\n";
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+        <sect3 id="zend.date.simple.functions.compare">
+
+            <title>比较日期</title>
+
+            <para>
+                所有基本的 <code>Zend_Date</code> 方法都可以操作整个包含在对象里的日期，或者日期部分，如和一个绝对值比较分钟数。
+                例如使用 <code>compare()</code> 比较当前时间里的当前分钟可以和一个特定的分钟数，示例如下。
+            </para>
+
+            <example id="zend.date.simple.functions.compare.example-1">
+                <title>compare() - 比较日期</title>
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Comparation of both times
+if ($date->compare(10, Zend_Date::MINUTE) == -1) {
+    print "This hour is less than 10 minutes old";
+} else {
+    print "This hour is at least 10 minutes old";
+}
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                对简单的相等比较，使用 <code>equals()</code>，它返回一个布尔值。
+            </para>
+
+            <example id="zend.date.simple.functions.compare.example-2">
+                <title>equals() - 识别日期或日期部分</title>
+                <programlisting role="php"><![CDATA[
+$date = new Zend_Date();
+
+// Comparation of the two dates
+if ($date->equals(10, Zend_Date::HOUR)) {
+    print "It's 10 o'clock. Time to get to work.";
+} else {
+    print "It is not 10 o'clock. You can keep sleeping.";
+}
+]]>
+                </programlisting>
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

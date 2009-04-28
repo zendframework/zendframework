@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 13847 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.contextswitch">
+    <title>ContextSwitch et AjaxContext</title>
+
+    <para>
+        L'aide d'action <code>ContextSwitch</code> est destinée à faciliter le retour de
+        différents formats de réponse à une requête.L'<code>AjaxContext</code> est une aide
+        spécialisée de <code>ContextSwitch</code> qui permet le renvoi de réponses à
+        XmlHttpRequest.
+    </para>
+
+    <para>
+        Pour l'activer, vous devez indiquer à votre contrôleur quelles actions répondent à
+        quel contexte. Si une requête d'entrée indique un contexte valide pour une action, alors
+        l'aide d'action en charge&#160;:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Va désactiver les Layouts, si elles sont activées
+                (<classname>Zend_Layout</classname>).
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Va changer le suffixe de la vue à rendre, il faudra donc créer une vue par
+                contexte.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Va envoyer les bons en-têtes de réponse en fonction du contexte désiré.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Va éventuellement en option appeler des fonctions pour configurer le
+                contexte, ou des fonctions de post-processing.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>Comme exemple, prenons le contrôleur suivant&#160;:</para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    /**
+     * page d'arrivée; forward vers listAction()
+     */
+    public function indexAction()
+    {
+        $this->_forward('list');
+    }
+
+    /**
+     * Liste les news
+     */
+    public function listAction()
+    {
+    }
+
+    /**
+     * Affiche une new particulière
+     */
+    public function viewAction()
+    {
+    }
+}
+]]></programlisting>
+
+    <para>
+        Imaginons que nous voulions que <code>listAction()</code> soit aussi accessible au
+        format XML. Plutôt que de créer une autre action, nous pouvons lui indiquer qu'elle doit
+        retourner du XML&#160;:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('list', 'xml')
+                      ->initContext();
+    }
+
+    // ...
+}
+]]></programlisting>
+
+    <para>Ce code aura pour effet&#160;:</para>
+
+    <itemizedlist>
+        <listitem>
+            <para>De changer le "Content-Type" de la réponse en "text/xml".</para>
+        </listitem>
+        <listitem>
+            <para>
+                De changer le suffixe de vue vers "xml.phtml" (ou un autre suffixe si vous en
+                utilisez un personnalisé "xml.[votre suffixe]").
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Il est donc nécessaire de créer un nouveau script de vue, "news/list.xml.phtml", qui
+        créera et rendra le XML.
+    </para>
+
+    <para>
+        Pour savoir si la requête doit utiliser un contexte switch, l'aide vérifie un jeton
+        dans l'objet de requête. Par défaut, l'aide va chercher le paramètre de requête "format",
+        ceci peut être changé. Ceci signifie que dans la plupart des cas, pour changer le contexte
+        d'une réponse, il faut simplement injecter un paramètre "format" à la requête:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Via l'URL&#160;: <code>/news/list/format/xml</code> (le routeur par défaut utilise
+                les paramètres dans ce style : {...}/action/parametre/valeur)
+            </para>
+        </listitem>
+        <listitem>
+            <para>Via un paramètre GET&#160;: <code>/news/list?format=xml</code></para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        <code>ContextSwitch</code> vous permet d'écrire des contextes, ceux-ci spécifient le
+        suffixe de vue qui change, les en-têtes HTTP de réponse à modifier, et les fonctions de
+        rappel éventuelles.
+    </para>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
+        <title>Contextes inclus par défaut</title>
+
+        <para>
+            Par défaut, il existe 2 contextes dans l'aide <code>ContextSwitch</code>&#160;: json
+            et xml.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>JSON</emphasis>. Le contexte JSON met le "Content-Type" de la
+                    réponse à "application/json", et le suffixe de la vue est "json.phtml".
+                </para>
+                <para>
+                    Par défaut cependant, aucun script de vue n'est nécessaire, il va
+                    simplement sérialiser en JSON toutes les variables de vues, et les envoyer en
+                    tant que réponse.
+                </para>
+                <para>
+                    Ce comportement peut être désactivé en passant le paramètre de
+                    sérialisation à <code>false</code>&#160;:
+                </para>
+                <programlisting role="php"><![CDATA[
+$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
+]]></programlisting>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>XML</emphasis>. Le contexte XML met le "Content-Type" de la
+                    réponse à "text/xml", et utilise un suffixe de vue "xml.phtml". Vous devrez
+                    créer une nouvelle vue pour ce contexte.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
+        <title>Créer ses propres contextes</title>
+
+        <para>
+            Vous pouvez créer vos propres contextes d'action. Par exemple pour retourner du
+            YAML, du PHP sérialisé, ou encore du RSS ou du ATOM. <code>ContextSwitch</code> est là
+            pour cela.
+        </para>
+
+        <para>
+            La manière la plus simple d'ajouter un nouveau contexte d'action est la méthode
+            <code>addContext()</code>. Elle prend 2 paramètres : le nom du contexte, et un tableau
+            d'options. Ce tableau d'option doit comporter au moins une des clés suivantes&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>suffix</emphasis>&#160;: Le préfixe qui va s'ajouter au suffixe de
+                    vue. Il sera utiliser par le ViewRenderer.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>headers</emphasis>&#160;: un tableau d'en-têtes/valeurs que vous
+                    voulez ajouter à la réponse.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <emphasis>callbacks</emphasis>&#160;: un tableau dont les clés peuvent être
+                    "init" ou "post", et les valeurs représentent des noms de fonctions PHP
+                    valides, qui seront utilisées pour initialiser ou traiter la fin du
+                    contexte.
+                </para>
+                <para>
+                    Les fonctions d'initialisation interviennent lorsque le contexte est
+                    détecté par <code>ContextSwitch</code>. Par exemple dans le contexte intégré
+                    JSON, la fonction désactive le ViewRenderer lorsque la sérialisation
+                    automatique est activée.
+                </para>
+                <para>
+                    Les fonctions de traitement de fin de contexte (Post processing)
+                    interviennent durant le processus de <code>postDispatch()</code> de l'action en
+                    cours. Par exemple pour le contexte intégré JSON, la fonction de post process
+                    regarde si la sérialisation automatique est demandée, si c'est le cas, elle va
+                    sérialiser les variables de la vue en JSON, et envoyer la réponse; mais dans le
+                    cas contraire, elle va réactiver le ViewRenderer.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>Voici les méthodes d'interaction avec les contextes&#160;:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addContext($context, array $spec)</code>&#160;: Ajoute un nouveau
+                    contexte. Si celui-ci existe déjà, une exception sera lancée.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setContext($context, array $spec)</code>&#160;: Ajoute un nouveau
+                    contexte, mais écrase celui-ci s'il existait déjà. Utilise les mêmes
+                    spécifications que <code>addContext()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addContexts(array $contexts)</code>&#160;: Ajoute plusieurs contextes
+                    d'un coup. Le tableau <code>$contexts</code> doit être un tableau de paires
+                    contexte/specifications. Si un des contextes existe déjà, une exception est
+                    lancée.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setContexts(array $contexts)</code>&#160;: Ajoute des nouveaux contextes,
+                    mais écrase ceux déjà présents éventuellement. Utilise les mêmes spécifications
+                    que <code>addContexts()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>hasContext($context)</code>&#160;: retourne <code>true</code> si le
+                    contexte existe déjà, <code>false</code> sinon.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getContext($context)</code>&#160;: retourne un contexte par son nom. Le
+                    retour est un tableau qui a la même syntaxe que celui utilisé par
+                    <code>addContext()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getContexts()</code>&#160;: retourne tous les contextes. Le tableau de
+                    retour est de la forme contexte =&gt; spécifications.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>removeContext($context)</code>&#160;: Supprime un contexte grâce à son
+                    nom. Retourne <code>true</code> si réussi, <code>false</code> si le contexte
+                    n'a pas été trouvé.
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>clearContexts()</code>&#160;: Supprime tous les contextes.</para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
+        <title>Affecter des contextes par action</title>
+
+        <para>
+            Il existe deux mécanismes pour créer et affecter des contextes. Vous pouvez créer
+            des tableaux dans vos contrôleurs, ou utiliser plusieurs méthodes de
+            <code>ContextSwitch</code> pour les assembler.
+        </para>
+
+        <para>
+            La méthode principale pour ajouter des contextes à des actions est
+            <code>addActionContext()</code>. Elle attend 2 arguments, l'action et le contexte (ou
+            un tableau de contextes). Par exemple, considérons la classe suivante&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function listAction()
+    {
+    }
+
+    public function viewAction()
+    {
+    }
+
+    public function commentsAction()
+    {
+    }
+
+    public function updateAction()
+    {
+    }
+}
+]]></programlisting>
+
+        <para>
+            Imaginons que nous voulions ajouter un contexte XML à l'action "list", et deux
+            contextes XML et JSON à l'action "comments". Nous pourrions faire ceci dans la méthode
+            <code>init()</code>&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()
+             ->addActionContext('list', 'xml')
+             ->addActionContext('comments', array('xml', 'json'))
+             ->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>
+            De la même manière, il est aussi possible de simplement définir la propriété
+            <code>$contexts</code>&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public $contexts = array(
+        'list'     => array('xml'),
+        'comments' => array('xml', 'json')
+    );
+
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>Cette syntaxe est simplement moins pratique et plus prompte aux erreurs.</para>
+
+        <para>Pour construire vos contextes, les méthodes suivantes vous seront utiles&#160;:</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addActionContext($action, $context)</code>&#160;: Ajoute un ou plusieurs
+                    contextes à une action. <code>$context</code> doit donc être une chaîne, ou un
+                    tableau de chaînes.
+                </para>
+                <para>
+                    Passer la valeur <code>true</code> comme contexte marquera tous les
+                    contextes comme disponibles pour cette action.
+                </para>
+                <para>
+                    Une valeur vide pour <code>$context</code> désactivera tous les contextes
+                    donnés à cette action.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setActionContext($action, $context)</code>&#160;: Marque un ou plusieurs
+                    contextes comme disponibles pour cette action. Si ceux-ci existent déjà, ils
+                    seront remplacés. <code>$context</code> doit être une chaîne ou un tableau de
+                    chaînes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addActionContexts(array $contexts)</code>&#160;: Ajoute plusieurs paires
+                    action/context en une fois. <code>$contexts</code> doit être un tableau
+                    associatif action/contexte. Cette méthode proxie vers
+                    <code>addActionContext()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setActionContexts(array $contexts)</code>&#160;: agit comme
+                    <code>addActionContexts()</code>, mais écrase les paires action/contexte
+                    existantes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>hasActionContext($action, $context)</code>&#160;: détermine si une action
+                    possède un contexte donné.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getActionContexts($action = null)</code>&#160;: Retourne tous les
+                    contextes d'une action donnée, si pas d'action passée, retourne alors toutes
+                    les paires action/contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>removeActionContext($action, $context)</code>&#160;: Supprime un ou
+                    plusieurs contextes pour une action. <code>$context</code> doit être une chaîne
+                    ou un tableau de chaînes.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>clearActionContexts($action = null)</code>&#160;: Supprime tous les
+                    contextes d'une action. Si aucune action n'est spécifiée, supprime alors tous
+                    les contextes de toutes les actions.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
+        <title>Initialiser le Context Switch</title>
+
+        <para>
+            Pour initialiser la permutation de contextes (contexte switching), vous devez
+            appeler <code>initContext()</code> dans vos contrôleurs d'action&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>
+            Dans certains cas, vous voudriez forcer un contexte pour une action et
+            n'autoriser que celui-ci. Passez le alors à <code>initContext()</code>&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$contextSwitch->initContext('xml');
+]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
+        <title>Fonctionnalités avancées</title>
+
+        <para>
+            Voici quelques méthodes qui peuvent être utilisées pour changer le comportement
+            de l'aide <code>ContextSwitch</code>&#160;:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setAutoJsonSerialization($flag)</code>: Par défaut, le contexte
+                    JSON va sérialiser toute variable en notation JSON et les retourner en tant que
+                    réponse. Si vous voulez créer votre propre réponse, vous voudriez désactiver
+                    cet effet. Ceci doit être fait avant l'appel à <code>initContext()</code>.
+                </para>
+                <programlisting role="php"><![CDATA[
+$contextSwitch->setAutoJsonSerialization(false);
+$contextSwitch->initContext();
+]]></programlisting>
+                <para>
+                    Pour récupérer la valeur actuelle, utilisez
+                    <code>getAutoJsonSerialization()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setSuffix($context, $suffix, $prependViewRendererSuffix)</code>:
+                    Cette méthode permet de personnaliser le suffixe de vue d'un contexte. Le
+                    troisième argument indique si le suffixe actuel du ViewRenderer doit être
+                    utilisé comme préfixe de votre suffixe. Par défaut, c'est le cas.
+                </para>
+                <para>
+                    Passer une valeur vide au suffixe aura pour effet de n'utiliser que le
+                    suffixe du ViewRenderer.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addHeader($context, $header, $content)</code>&#160;: Ajoute un en-tête à
+                    la réponse pour un contexte donné. <code>$header</code> est le nom de l'en-tête
+                    et <code>$content</code> sa valeur.
+                </para>
+                <para>
+                    Chaque contexte peut posséder plusieurs en-têtes, <code>addHeader()</code>
+                    ajoute des en-têtes dans une pile, pour un contexte donné.
+                </para>
+                <para>
+                    Si l'en-tête spécifié pour le contexte existe déjà, une exception sera
+                    alors levée.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setHeader($context, $header, $content)</code>&#160;:
+                    <code>setHeader()</code> agit comme <code>addHeader()</code>, sauf qu'il va
+                    écraser un en-tête qui aurait déjà été présent.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addHeaders($context, array $headers)</code>&#160;: Ajoute plusieurs
+                    en-têtes en une seule fois. Proxie vers
+                    <code>addHeader()</code>.<code>$headers</code> est un tableau de paires header
+                    =&gt; contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setHeaders($context, array $headers.)</code>&#160;: comme
+                    <code>addHeaders()</code>, sauf que cette méthode proxie vers
+                    <code>setHeader()</code>, vous permettant d'écraser des en-têtes déjà
+                    présents.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getHeader($context, $header)</code>&#160;: retourne une valeur d'en-tête
+                    pour un contexte. Retourne <code>null</code> si non trouvé.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>removeHeader($context, $header)</code>&#160;: supprime un en-tête d'un
+                    contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>clearHeaders($context, $header)</code>&#160;: supprime tous les en-têtes
+                    d'un contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setCallback($context, $trigger, $callback)</code>&#160;: affecte une
+                    fonction de rappel (callback) pour un contexte. <code>$trigger</code> peut être
+                    soit "init" ou "post" (la fonction de rappel sera appelée soit à
+                    l'initialisation du contexte, ou à la fin, en postDispatch).
+                    <code>$callback</code> doit être un nom de fonction PHP valide.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setCallbacks($context, array $callbacks)</code>&#160;: affecte plusieurs
+                    fonctions de rappel pour un contexte.<code>$callbacks</code> doit être un
+                    tableau de paires trigger/callback. Actuellement, seules deux fonctions maximum
+                    peuvent être enregistrées car il n'existe que 2 déclencheurs (triggers)&#160;:
+                    "init" et "post".
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCallback($context, $trigger)</code>&#160;: retourne un nom de fonction
+                    de rappel affectée à un contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCallbacks($context)</code>&#160;: retourne un tableau de paires
+                    trigger/callback pour un contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>removeCallback($context, $trigger)</code>&#160;: supprime une fonction de
+                    rappel d'un contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>clearCallbacks($context)</code>&#160;: supprime toutes les fonctions de
+                    rappel d'un contexte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setContextParam($name)</code>&#160;: affecte le paramètre de requête à
+                    vérifier pour savoir si un contexte a été appelé. La valeur par défaut est
+                    "format".
+                </para>
+                <para><code>getContextParam()</code> en retourne la valeur actuelle.</para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setAutoDisableLayout($flag)</code>&#160;: Par défaut, les layouts sont
+                    désactivées lorsqu'un contexte intervient, ceci provient du fait que les
+                    layouts n'ont en théorie pas de signification particulière pour un contexte,
+                    mais plutôt pour une réponse 'normale'. Cependant si vous désirez utiliser les
+                    layouts pour des contexte, passez alors la valeur <code>false</code> à cette
+                    méthode. Ceci devant être fait <emphasis>avant</emphasis> l'appel à
+                    <code>initContext()</code>.
+                </para>
+                <para>
+                    Pour récupérer la valeur de ce paramètre, utilisez
+                    <code>getAutoDisableLayout()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCurrentContext()</code> est utilisée pour savoir quel contexte a
+                    été détecté (si c'est le cas). Cette méthode retourne <code>null</code> si
+                    aucune permutation de contexte a été détectée, ou si elle est appelée avant
+                    <code>initContext()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
+        <title>Fonctionnalité AjaxContext</title>
+
+        <para>
+            L'aide <code>AjaxContext</code> étend l'aide de permutation de contexte
+            <code>ContextSwitch</code>, donc toutes ses fonctionnalités s'y retrouvent. Il y a
+            cependant quelques différences&#160;:
+        </para>
+
+        <para>
+            Cette aide utilise une propriété de contrôleur d'action différente pour
+            déterminer les contextes, <code>$ajaxable</code>. Vous pouvez avoir différents
+            contextes utilisés avec les requêtes AJAX. Les différentes méthodes
+            <code>*ActionContext*()</code> de <code>AjaxContext</code> vont écrire dans cette
+            propriété.
+        </para>
+
+        <para>
+            De plus, cette aide ne sera déclenchée que si la requête répond au critère
+            <code>isXmlHttpRequest()</code>. Donc même si le paramètre "format" est passée à la
+            requête, il faut nécessairement que celle ci soit une requête XmlHttpRequest, sinon la
+            permutation d'<code>AjaxContext</code> n'aura pas lieu.
+        </para>
+
+        <para>
+            Enfin, <code>AjaxContext</code> ajoute un contexte, HTML. Dans ce contexte, le
+            suffixe de vue est "ajax.phtml". Il n'y a pas d'en-tête particulier ajouté à la
+            réponse.
+        </para>
+
+        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
+            <title>Autoriser les actions à répondre aux requêtes AJAX</title>
+
+            <para>
+                Dans l'exemple qui suit, nous autorisons les actions "view", "form", et
+                "process" à répondre aux requêtes AJAX. Dans les actions, "view" et "form", nous
+                retournerons des portions de HTML; dans "process", nous retournerons du
+                JSON.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class CommentController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('view', 'html')
+                    ->addActionContext('form', 'html')
+                    ->addActionContext('process', 'json')
+                    ->initContext();
+    }
+
+    public function viewAction()
+    {
+        // Voir les commentaires.
+        // Quand le AjaxContext est détecté, il utilise le script de vue
+        // comment/view.ajax.phtml
+    }
+
+    public function formAction()
+    {
+        // Rend les formulaire "ajoutez un commentaire".
+        // Lorsque le AjaxContext est détecté, il utilise le script de
+        // vue : comment/form.ajax.phtml
+    }
+
+    public function processAction()
+    {
+        // Traite un commentaire
+        // Retourne les résultats sous forme JSON ; assignez simplement
+        // vos résultats comme variables de vues.
+    }
+}
+]]></programlisting>
+
+            <para>
+                Coté client, votre bibliothèque AJAX requêtera simplement "/comment/view",
+                "/comment/form", et "/comment/process", en passant le paramètre "format" :
+                "/comment/view/format/html", "/comment/form/format/html",
+                "/comment/process/format/json". (Ceci fonctionne aussi avec "?format=json".)
+            </para>
+
+            <para>
+                Il est nécessaire que votre bibliothèque envoie l'en-tête HTTP
+                "X-Requested-With: XmlHttpRequest", ce qui est en général le cas.
+            </para>
+        </example>
+    </sect4>
+</sect3>

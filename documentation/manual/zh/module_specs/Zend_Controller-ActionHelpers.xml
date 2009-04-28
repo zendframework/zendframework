@@ -1,0 +1,259 @@
+<sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>动作助手</title>
+
+    <sect2 id="zend.controller.actionhelper.introduction">
+        <title>介绍</title>
+        <para>
+           动作助手可以向任何Zend_Controller_Action的衍生动作控制器中，即时的加入功能(runtime and/or on-demand functionality)，以使得增加公共的动作控制器功能时，尽量减少衍生动作控制器类的必要。
+        </para>
+
+        <para>
+           动作助手有多种使用方式。动作助手使用了一套经纪系统(brokerage system)，与<link linkend="zend.view.helpers">Zend_View_Helper</link>中使用的，也就是<link linkend="zend.controller.plugins">Zend_Controller_Plugin</link>的经纪系统类似。动作助手（like <code>Zend_View_Helper</code>）在需要调用时加载，可以在请求的时候(bootstrap)或者动作控制器创建的时候(init())实例化。要充分了解这些细节，请阅读下面的章节。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.actionhelper.initialization">
+        <title>初始化助手</title>
+
+        <para>
+           根据需求以及助手的功能，可有几种不同的初始化方式。
+        </para>
+
+        <para>
+           助手经纪人(broker)存储在<code>Zend_Controller_Action</code>的 <code>$_helper</code>成员中，可以使用经纪人来获取或者调用助手。以下是操作方法：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                   显式的调用<code>getHelper()</code>方法。简单的传入助手名字，就可以返回助手对象。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$flashMessenger = $this->_helper->getHelper('FlashMessenger');
+$flashMessenger->addMessage('We did something in the last request');
+]]>
+                </programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                   使用助手经纪人的<code>__get()</code>方法，就像获取经纪人的成员属性一样获取助手。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$flashMessenger = $this->_helper->FlashMessenger;
+$flashMessenger->addMessage('We did something in the last request');
+]]>
+                </programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                   最后，大部分动作助手实现了<code>direct()</code>方法，它将调用助手的一个特定的，默认的方法。以<code>FlashMessenger</code>为例，它调用了方法<code>addMessage()</code>：
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$this->_helper->FlashMessenger('We did something in the last request');
+]]>
+                </programlisting>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>上面的例子在功能上是等价的。</para>
+        </note>
+
+        <para>
+           也可以显式的实例化助手。如果你要在动作控制器之外使用助手，或者给助手经纪人传入一个助手供所有的动作使用，你可能希望直接这么做。实例化助手和实例化其他PHP类的方法一样。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.actionhelper.broker">
+        <title>助手经纪人</title>
+
+        <para>
+            <code>Zend_Controller_Action_HelperBroker</code>处理注册助手对象和助手路径，即时的获取助手等细节。
+        </para>
+
+        <para>
+           使用<code>addHelper</code>来注册助手：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Action_HelperBroker::addHelper($helper);
+]]>
+        </programlisting>
+
+        <para>
+           实例化助手并传入经纪人有点耗费时间和资源，不过<code>addPrefix()</code>和<code>addPath()</code>两个方法能够很容易的自动完成这些工作：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addPrefix()</code>方法带有一个类前缀参数，用来加入自定义助手类的路径。它假定前缀遵循Zend Framework的类命名惯例。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Add helpers prefixed with My_Action_Helpers in My/Action/Helpers/
+Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
+]]>
+                </programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addPath()</code>方法第一个参数为一个目录，第二个为类前缀(默认为'Zend_Controller_Action_Helper')。用来将自己的类前缀映射到指定的目录。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Add helpers prefixed with Helper in Plugins/Helpers/
+Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
+                                             'Helper');
+]]>
+                </programlisting>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+           这些方法是静态的，因而可以根据需要在控制器链中的任何位置调用动态的加载助手。
+        </para>
+
+        <para>
+           使用<code>hasHelper($name)</code>方法来判定助手经纪人中是否存在某助手，<code>$name</code>是助手的短名称（去掉前缀的）：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Check if 'redirector' helper is registered with the broker:
+if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
+    echo 'Redirector helper registered';
+}
+]]>
+        </programlisting>
+
+        <para>
+            从助手经纪人中获取助手有两个静态方法：<code>getExistingHelper()</code> 和 <code>getStaticHelper()</code> 。<code>getExistingHelper()</code>将获取助手仅当它以前调用过或者显性地通过助手经纪人注册过，否则就抛出一个异常。<code>getStaticHelper()</code> 的做法和<code>getExistingHelper()</code>一样，但如果还没有注册助手堆栈，它将尝试初始化助手，为获取你要配置的的助手，<code>getStaticHelper()</code>是一个好的选择。
+        </para>
+
+        <para>
+            两个方法都带一个参数，<code>$name</code>，它是助手的短名称（去掉前缀）。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Check if 'redirector' helper is registered with the broker, and fetch:
+if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
+    $redirector =
+        Zend_Controller_Action_HelperBroker::getExistingHelper('redirector');
+}
+
+// Or, simply retrieve it, not worrying about whether or not it was
+// previously registered:
+$redirector =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+}
+]]>
+        </programlisting>
+
+        <para>
+           最后，使用<code>removeHelper($name)</code>来删除助手经纪人中的某个助手，<code>$name</code>是助手的短名称。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Conditionally remove the 'redirector' helper from the broker:
+if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
+    Zend_Controller_Action_HelperBroker::removeHelper('redirector')
+}
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.actionhelper.stockhelpers">
+        <title>内建的动作助手</title>
+
+        <para>
+           Zend Framework 默认包含若干个动作助手：<code>AutoComplete</code> 自动响应 AJAX 的自动完成；<code>ContextSwitch</code> 和 <code>AjaxContext</code> 为你的动作提供替代响应格式；<code>FlashMessenger</code> 用来处理Flash Messenger会话；<code>Json</code> 用来解码和发送 JSON 响应；<code>Redirector</code> 提供另一种实现方式，帮助程序重定向到内部或者外部页面；<code>ViewRenderer</code> 自动的完成在控制器内建立视图对象并渲染视图的过程。
+        </para>
+
+        <xi:include href="Zend_Controller-ActionHelpers-ActionStack.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-AutoComplete.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-ContextSwitch.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-FlashMessenger.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-Json.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-Redirector.xml" />
+        <xi:include href="Zend_Controller-ActionHelpers-ViewRenderer.xml" />
+    </sect2>
+
+    <sect2 id="zend.controller.actionhelper.writingyourown">
+        <title>编写自己的助手</title>
+
+        <para>
+           动作助手继承抽象类<code>Zend_Controller_Action_Helper_Abstract</code>，该类提供了助手经纪人要求的基本接口和功能，包含下列方法：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setActionController()</code> 用来设置当前的动作控制器。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>init()</code>，该方法在实例化时由助手经纪人触发，可用来触发助手的初始化过程；动作链中多个控制器使用相同的助手时，如要恢复状态时将十分有用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>preDispatch()</code>分发动作之前触发。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>postDispatch()</code>分发过程结束时触发——即使<code>preDispatch()</code>插件已经跳过了该动作。清理时大量使用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getRequest()</code> 获取当前的请求对象。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getResponse()</code> 获取当前的响应对象。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getName()</code> 获取助手名。获取了下划线后面的类名部分，没有下划线则获取类的全名。例如，如果类名为<code>Zend_Controller_Action_Helper_Redirector</code>，他将返回 <code>Redirector</code>，如果类名为<code>FooMessage</code>，将会返回全名。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+           助手类中还可以包含一个<code>direct()</code>方法，如果定义了该方法，就可以将助手视作助手经纪人的一个方法，以便简单的、一次性的使用助手。例如<link linkend="zend.controller.actionhelpers.redirector">redirector</link> 定义<code>direct()</code> 作为<code>goto()</code>的别名,就可以这样使用：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Redirect to /blog/view/item/id/42
+$this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
+]]>
+        </programlisting>
+
+        <para>
+           在内部，助手经纪人的<code>__call()</code>方法先寻找名叫<code>redirector</code>的助手，然后检查该助手的<code>direct</code>方法是否定义，然后使用所提供的参数来调用该方法。
+        </para>
+
+        <para>
+           如果创建了自己的助手，可以按照前面章节所述的提供相应的访问方法。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.paginator.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <classname>Zend_Paginator</classname> is a flexible component for paginating
+        collections of data and presenting that data to users.
+    </para>
+
+    <para>
+        The primary design goals of <classname>Zend_Paginator</classname> are as follows:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Paginate arbitrary data, not just relational databases
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Fetch only the results that need to be displayed
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Do not force users to adhere to only one way of displaying
+                    data or rendering pagination controls
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Loosely couple <classname>Zend_Paginator</classname> to other Zend
+                    Framework components so that users who wish to use it
+                    independently of <classname>Zend_View</classname>,
+                    <classname>Zend_Db</classname>, etc. can do so
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

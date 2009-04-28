@@ -1,0 +1,75 @@
+<sect1 id="zend.config.theory_of_operation">
+    <title>Werkingstheorie</title>
+    <para>
+        Configuratiedata wordt toegankelijk gemaakt voor de <code>Zend_Config</code> constructor
+        via een associatieve array, welke multidimensioneel kan zijn, om het organizeren van de
+        data van alemeen naar specifiek te ondersteunen. Er bestaan concrete functies van
+        de hulpklassen om de configuratiedata aan te passen vanuit het bestand om een associatieve
+        array voor de constructor van <code>Zend_Config</code> aan te maken. Gebruikerscripts
+        kunnen deze arrays direct doorgeven aan de constructor van <code>Zend_Config</code>,
+        zonder een hulpklasse te gebruiken. Dit kan toepasselijk zijn in sommige situaties.
+    </para>
+     <para>
+        Elke configuratie data array waarde wordt een eigenschap van het <code>Zend_Config</code> object.
+        De key wordt gebruikt als de naam van de eigenschap. Als de waarde zelf een array is, dan zal hiervoor
+        een nieuw <code>Zend_Config</code> object worden gemaakt, waarin de array data geladen wordt. Dit gebeurt
+        recursief, zodat er een hiërarchie van configuratie data gemaakt kan worden van elke hoeveelheid niveaus.
+    </para>
+    <para>
+        <code>Zend_Config</code> implementeert de <code>Countable</code> en <code>Iterator</code>
+        interfaces om eenvoudige toegang tot de configuratiedata te vergemakkelijken. Je kan dus
+        de <ulink url="http://php.net/count"><code>count()</code></ulink> functie en PHP
+        constructies zoals <ulink url="http://php.net/foreach"><code>foreach</code></ulink>
+        gebruiken op <code>Zend_Config</code> objecten.
+    </para>
+
+    <para>
+        Standaard is de configuratiedata die beschikbaar wordt gemaakt via <code>Zend_Config</code>
+        alleen lezen, en het toewijzen van een waarde
+        (bv: <code><![CDATA[$config->database->host = 'example.com']]></code>) resulteert in het
+        opwerpen van een uitzondering. Deze standaardeigenschap kan worden gewijzigd via de
+        constructor om het wijzigen van waarden toe te staan. Ook, wanneer wijzigingen zijn toegstaan,
+        ondersteunt <code>Zend_Config</code> het verwijderen van waardes
+        (i.e. <code><![CDATA[unset($config->database->host);]]></code>).
+    </para>
+    <note>
+      <para>
+        Het is belangrijk zulke in-memory wijzigingen niet te verwarren met het opslaan van
+        configuratiedata in een specifieke opslagmedia. Programma's voor het aanmaken en wijzigen
+        van configuratiedata voor de verschillende opslagmedia worden hier niet besproken, want ze
+        vallen buiten het bereik van <code>Zend_Config</code>. Open source toepassingen van derden zijn
+        beschikbaar voor het aanmaken en wijzigen van configuratiedata voor verschillende
+        opslagmedia.
+      </para>
+    </note>
+    <para>
+        Hulpklassen erven van de <code>Zend_Config</code> klasse want ze gebruiken haar
+        functionaliteiten.
+    </para>
+    <para>
+        De familie van <code>Zend_Config</code> klassen staat de organizatie van configuratiedata
+        in secties toe. <code>Zend_Config</code> hulpklasse objecten kunnen een enkele
+        gespecifieerde sectie, verschillende gespecifieerde secties of alle secties (indien er
+        geen sectie werd gespecifieerd) inladen.
+    </para>
+    <para>
+        <code>Zend_Config</code> hulpklassen ondersteunen een enkel ervingsmodel dat een
+        configuratiedata sectie toelaat te erven van een andere sectie. Dit word gedaan om het
+        verdubbelen van configuratiedata voor verchillende doeleinden te verminderen of te
+        verwijderen. Een ervende sectie kan ook de overgeërfde waarden overschrijven. Net zoals
+        PHP klasse erving kan een sectie van een oudersectie erven, die van een grootouder erft en
+        zo verder, maar veelvoudige overerving (bv: sectie C erft onmiddellijk van oudersecties A
+        en B) wordt niet ondersteund.
+    </para>
+     <para>
+        Als je twee <code>Zend_Config</code> objecten hebt, kan je ze samenvoegen tot een enkel object
+        door gebruik te maken van de <code>merge()</code> functie. Als voorbeeld, een gegeven
+        <code>$config</code> en <code>$localConfig</code>, je kan de data van <code>$localConfig</code>
+        samenvoegen met <code>$config</code> door gebruikt te maken van <code>$config->merge($localConfig);</code>.
+        De elementen uit <code>$localConfig</code> zullen de elementen uit <code>$config</code> overschrijven,
+        als ze dezelfde naam hebben.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

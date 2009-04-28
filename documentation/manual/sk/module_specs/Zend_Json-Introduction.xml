@@ -1,0 +1,17 @@
+<sect1 id="zend.json.introduction">
+    <title>Úvod</title>
+    <para>
+        <code>Zend_Json</code> poskytuje vyhovujúce metódy pre prenos
+        PHP do JSON a dekódovanie JSON do PHP. Pre viac informácií o JSON
+        <ulink url="http://www.json.org/">si pozri stránku JSON projektu</ulink>
+    </para>
+    <para>
+        JSON, JavaScript Object Notation, môže byť použité pre výmenu dát medzi
+        JavaScript a iným jazykom. Kedže JSON môže byt priamo vykonaný v
+        JavaScript predstavuje efektívnejší a menej náročný formát ako XML pre
+        výmenu dát s JavaScript klientom
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

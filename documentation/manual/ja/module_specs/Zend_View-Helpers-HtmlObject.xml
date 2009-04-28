@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect3 id="zend.view.helpers.initial.object">
+    <title>HTML オブジェクトヘルパー</title>
+
+    <para>
+        HTML の <code><![CDATA[<object>]]></code> 要素は、
+        Flash や QuickTime といったメディアをウェブページに埋め込むために使用するものです。
+        オブジェクトビューヘルパーは、
+        最低限の労力でメディアを埋め込めるよう手助けします。
+    </para>
+
+    <para>
+        最初は、以下の 4 つのオブジェクトヘルパーを提供します。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>formFlash</code>
+                は、Flash ファイルの埋め込み用のマークアップを生成します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formObject</code>
+                は、カスタムオブジェクトの埋め込み用のマークアップを生成します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formPage</code>
+                は、他の (X)HTML ページの埋め込み用のマークアップを生成します。
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>formQuicktime</code>
+                は、QuickTime ファイルの埋め込み用のマークアップを生成します。
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        これらのヘルパーはすべて、同じインターフェイスを共有しています。
+        そのため、このドキュメントでは、そのうちの 2 つのヘルパーの例だけを紹介します。
+    </para>
+
+    <example id="zend.view.helpers.initial.object.flash">
+
+        <title>Flash ヘルパー</title>
+
+        <para>
+            このヘルパーを使うと、Flash をページの中に簡単に埋め込めるようになります。
+            リソースの URI を引数として渡すだけの簡単な作業です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
+]]>
+        </programlisting>
+
+        <para>
+            この結果は、次のような HTML となります。
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<object data="/path/to/flash.swf"
+        type="application/x-shockwave-flash"
+        classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+</object>
+]]>
+</programlisting>
+
+    </example>
+
+    <para>
+        さらに、属性やパラメータ、コンテンツなど <code><![CDATA[<object>]]></code>
+        とともにレンダリングする内容も指定できます。その方法は
+        <code>htmlObject</code> ヘルパーで紹介します。
+    </para>
+
+    <example id="zend.view.helpers.initial.object.object">
+        <title>追加属性を渡すことによるオブジェクトのカスタマイズ</title>
+
+        <para>
+            オブジェクトヘルパーの最初の引数は常に必須です。
+            これは、埋め込みたいリソースの URI となります。
+            2 番目の引数は <code>htmlObject</code> ヘルパーの場合のみ必須となります。
+            それ以外のヘルパーはこの引数の正確な値を既に知っているからです。
+            3 番目の引数には、object 要素の属性を渡します。
+            キー/値 のペア形式の配列のみを受け付けます。
+            属性の例としては、たとえば <code>classid</code>
+            や <code>codebase</code> などがあります。
+            4 番目の引数も同様に キー/値 のペア形式の配列のみを受け取り、
+            それを使用して <code><![CDATA[<param>]]></code>
+            要素を作成します。例を参照ください。
+            最後に、オプションでそのオブジェクトの追加コンテンツを指定できます。
+            これらすべての引数を使用した例をごらんください。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $this->htmlObject(
+    '/path/to/file.ext',
+    'mime/type',
+    array(
+        'attr1' => 'aval1',
+        'attr2' => 'aval2'
+    ),
+    array(
+        'param1' => 'pval1',
+        'param2' => 'pval2'
+    ),
+    'some content'
+);
+
+/*
+出力は次のようになります
+
+<object data="/path/to/file.ext" type="mime/type"
+    attr1="aval1" attr2="aval2">
+    <param name="param1" value="pval1" />
+    <param name="param2" value="pval2" />
+    some content
+</object>
+*/
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

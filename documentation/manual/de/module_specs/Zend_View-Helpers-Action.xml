@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.view.helpers.initial.action">
+    <title>Action View Helfer</title>
+
+    <para>
+        Der <code>Action</code> View Helfer ermöglicht es View Skripten eine gegebene Kontroller Aktion
+        auszuführen; das Ergebnis des Antwortsobjektes das der Ausführung folgt wird dann zurückgegeben.
+        Dieses kann verwendet werden wenn eine bestimmte Aktion wiederverwendbare Inhalte oder
+        "helfende" Inhalte erstellt.
+    </para>
+
+    <para>
+        Aktionen die zu einem <code>_forward()</code> oder einer Umleitung führen werden als ungültig
+        angenommen, und als leerer String zurückgegeben.
+    </para>
+
+    <para>
+        Die API für den <code>Action</code> View Helfer folgt dem der meisten MVC Komponenten die
+        Kontroller Aktionen aufrufen:
+        <code>action($action, $controller, $module = null, array $params = array())</code>.
+        <code>$action</code> und <code>$controller</code> werden benötigt; wenn kein Modul angegeben wird,
+        dann wird das Standardmodul angenommen.
+    </para>
+
+    <example id="zend.view.helpers.initial.action.usage">
+        <title>Grundsätzliche Verwendung von Action View Helfern</title>
+
+        <para>
+            Als Beispiel, könnte man einen <code>CommentController</code> mit einer <code>listAction()</code>
+            Methode haben die man in Reihenfolge ausführen will, um eine Liste von Kommentaren für die
+            aktuelle Anfrage herauszuholen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<div id="sidebar right">
+    <div class="item">
+        <?php echo $this->action('list',
+                                 'comment',
+                                 null,
+                                 array('count' => 10)); ?>
+    </div>
+</div>
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

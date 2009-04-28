@@ -1,0 +1,89 @@
+<sect1 id="zend.validate.introduction">
+
+    <title>Введение<!--Introduction--></title>
+
+    <para>
+        Компонента Zend_Validate предоставляет набор наиболее часто используемых валидаторов. Она также предоставляет простой механизм формирования цепочки валидаторов, посредством которого к одним и тем же данным может быть применено несколько валидаторов в порядке, заданном пользователем.
+<!--
+        The Zend_Validate component provides a set of commonly needed validators. It also provides a simple
+        validator chaining mechanism by which multiple validators may be applied to a single datum in a
+        user-defined order.
+-->
+    </para>
+
+    <para>
+        Что такое валидатор?
+<!--
+        <emphasis role="strong">What is a validator?</emphasis>
+-->
+    </para>
+
+    <para>
+        Валидатор проверяет входные данные на предмет соответствия некоторым требованиям и возвращает результат булевого типа. Если входные данные не соответствуют требованиям, то валидатор может предоставить информацию о том, какому требованию (требованиям) не соответствуют входные данные.
+<!--
+        A validator examines its input with respect to some requirements and produces a boolean result -
+        whether the input successfully validates against the requirements. If the input does not meet the
+        requirements, a validator may additionally provide information about which requirement(s) the input
+        does not meet.
+-->
+    </para>
+
+    <para>
+        Например, веб-приложение может требовать, чтобы имя пользователя было длиной от 6 до 12 символов и содержало только алфавитно-цифровые символы. Для того, чтобы проверить, соответствует ли имя пользователя этим требованиям, можно использовать валидатор. Если выбранное имя пользователя не соответствует одному из требований (или обоим требованиям), то будет также полезно знать, каким именно требованиям не соответствует имя пользователя.
+<!--
+        For example, a web application might require that a username be between six and twelve characters in
+        length and may only contain alphanumeric characters. A validator can be used for ensuring that
+        usernames meet these requirements. If a chosen username does not meet one or both of the requirements,
+        it would be useful to know which of the requirements the username fails to meet.
+-->
+    </para>
+
+    <para>
+        Такое определение валидации дает основу для <code>Zend_Validate_Interface</code>, который определяет два метода - <code>isValid()</code> и <code>getMessages()</code>. Метод <code>isValid()</code> выполняет валидацию переданного значения, возвращая <code>true</code> тогда и только тогда, когда значение прошло проверку по критериям валидации. Если <code>isValid()</code> возвращает <code>false</code>, то <code>getMessages()</code> используется для получения массива сообщений, объясняющих, по каким причинам валидация не была пройдена.
+<!--
+        Having defined validation in this way provides the foundation for
+        <code>Zend_Validate_Interface</code>, which defines two methods, <code>isValid()</code> and
+        <code>getMessages()</code>. The <code>isValid()</code> method performs validation upon the provided
+        value, returning <code>true</code> if and only if the value passes against the validation criteria. If
+        <code>isValid()</code> returns <code>false</code>, the <code>getMessages()</code> is provided to
+        return an array of messages explaining the reason(s) for validation failure.
+-->
+    </para>
+
+    <note>
+        <para>
+            <code>getMessages()</code> возвращает сообщения ошибок валидации только для последнего вызова <code>isValid()</code>, поскольку <code>isValid()</code> удаляет все сообщения, существующие с предыдущего вызова <code>isValid()</code>.
+<!--
+            The <code>getMessages()</code> returns validation failure messages for the most recent
+            <code>isValid()</code> call only, since <code>isValid()</code> clears any messages existing from a previous <code>isValid()</code> call.
+-->
+        </para>
+    </note>
+
+    <para>
+        Следующий пример демонстрирует проверку адреса e-mail:
+<!--
+        The following example illustrates validation of an e-mail address:
+-->
+
+        <programlisting role="php"><![CDATA[<?php
+
+require_once 'Zend/Validate/EmailAddress.php';
+$validator = new Zend_Validate_EmailAddress();
+if ($validator->isValid($email)) {
+    // email прошел валидацию
+} else {
+    // email не прошел валидацию; вывод причин этого
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+
+?>]]></programlisting>
+
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

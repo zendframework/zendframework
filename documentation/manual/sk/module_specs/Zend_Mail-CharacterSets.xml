@@ -1,0 +1,20 @@
+<sect1 id="zend.mail.character-sets">
+    <title>Znakové sady</title>
+    <para>
+        Trieda <code>Zend_Mail</code> nekontroluje správne nastavenie znakovej sady v jednotlivých častiach
+        e-mailu. Pri vytváraní inštancie <code>Zend_Mail</code> je možné nastaviť inú znakovú sadu ako
+        <code>iso-8859-1</code>, ktorá je ako východzia. Každá časť, ktorá je pridaná k vytvorenému objektu
+        musí mať správne nastavenú znakovú sadu. Pre každú časť MIME e-mailu je možné nastaviť inú
+        znakovú sadu.
+    </para>
+
+    <note>
+        <title>Iba pre textový obsah</title>
+        <para>
+            Nastavenie znakovej sady je platné iba pre časti ktoré sú textové.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

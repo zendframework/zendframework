@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.server.introduction">
+    <title>導入</title>
+    <para>
+        <classname>Zend_Server</classname> 系のクラス群は、さまざまなサーバクラスの機能を提供します。
+        たとえば
+        <classname>Zend_XmlRpc_Server</classname>、<classname>Zend_Rest_Server</classname>、
+        <classname>Zend_Json_Server</classname> そして <classname>Zend_Soap_Wsdl</classname> などがあります。
+        <classname>Zend_Server_Interface</classname> は、PHP 5 の
+        <code>SoapServer</code> クラスをまねたものです。すべてのサーバクラスは、
+        このインターフェイスを実装することで標準のサーバ API を提供しています。
+    </para>
+    <para>
+        <classname>Zend_Server_Reflection</classname> は、
+        関数やクラスの内容を知るための標準的な仕組みを提供するもので、
+        サーバクラス群でのコールバックのために使用します。また、
+        <classname>Zend_Server_Interface</classname> の <code>getFunctions()</code>
+        や <code>loadFunctions()</code> で使用できる形式のデータを提供します。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

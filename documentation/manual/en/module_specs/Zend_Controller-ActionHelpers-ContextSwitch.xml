@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.contextswitch">
+    <title>ContextSwitch and AjaxContext</title>
+
+    <para>
+        The <code>ContextSwitch</code> action helper is intended for
+        facilitating returning different response formats on request.
+        The <code>AjaxContext</code> helper is a specialized version of
+        <code>ContextSwitch</code> that facilitates returning responses
+        to XmlHttpRequests.
+    </para>
+
+    <para>
+        To enable either one, you must provide hinting in your controller as to
+        what actions can respond to which contexts. If an incoming request
+        indicates a valid context for the given action, the helper will then:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Disable layouts, if enabled.
+        </para></listitem>
+
+        <listitem><para>
+                Set an alternate view suffix, effectively requiring a separate
+                view script for the context.
+        </para></listitem>
+
+        <listitem><para>
+                Send appropriate response headers for the context desired.
+        </para></listitem>
+
+        <listitem><para>
+                Optionally, call specified callbacks to setup the context and/or
+                perform post-processing.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        As an example, let's consider the following controller:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    /**
+     * Landing page; forwards to listAction()
+     */
+    public function indexAction()
+    {
+        $this->_forward('list');
+    }
+
+    /**
+     * List news items
+     */
+    public function listAction()
+    {
+    }
+
+    /**
+     * View a news item
+     */
+    public function viewAction()
+    {
+    }
+}
+]]></programlisting>
+
+    <para>
+        Let's say that we want the <code>listAction()</code> to also be
+        available in an XML format. Instead of creating a different action, we
+        can hint that it can return an XML response:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('list', 'xml')
+                      ->initContext();
+    }
+
+    // ...
+}
+]]></programlisting>
+
+    <para>
+        What this will do is:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Set the 'Content-Type' response header to 'text/xml'.
+        </para></listitem>
+
+        <listitem><para>
+                Change the view suffix to 'xml.phtml' (or, if you use an
+                alternate view suffix, 'xml.[your suffix]').
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Now, you'll need to create a new view script, 'news/list.xml.phtml',
+        which will create and render the XML.
+    </para>
+
+    <para>
+        To determine if a request should initiate a context switch, the helper
+        checks for a token in the request object. By default, it looks for the
+        'format' parameter, though this may be configured. This means that, in
+        most cases, to trigger a context switch, you can add a 'format'
+        parameter to your request:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                Via URL parameter: <code>/news/list/format/xml</code> (recall,
+                the default routing schema allows for arbitrary key/value pairs
+                following the action)
+        </para></listitem>
+
+        <listitem><para>
+                Via GET parameter: <code>/news/list?format=xml</code>
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>ContextSwitch</code> allows you to specify arbitrary contexts,
+        including what suffix change will occur (if any), any response headers
+        that should be sent, and arbitrary callbacks for initialization and post
+        processing.
+    </para>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
+        <title>Default Contexts Available</title>
+
+        <para>
+            By default, two contexts are available to the
+            <code>ContextSwitch</code> helper: json and xml.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>JSON</emphasis>. The JSON context sets the
+                    'Content-Type' response header to 'application/json', and
+                    the view script suffix to 'json.phtml'.
+                </para>
+
+                <para>
+                    By default, however, no view script is required. It will
+                    simply serialize all view variables, and emit the JSON
+                    response immediately.
+                </para>
+
+                <para>
+                    This behaviour can be disabled by turning off auto-JSON
+                    serialization:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
+]]></programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>XML</emphasis>. The XML context sets the
+                    'Content-Type' response header to 'text/xml', and the view
+                    script suffix to 'xml.phtml'. You will need to create a new
+                    view script for the context.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
+        <title>Creating Custom Contexts</title>
+
+        <para>
+            Sometimes, the default contexts are not enough. For instance, you
+            may wish to return YAML, or serialized PHP, an RSS or ATOM feed,
+            etc. <code>ContextSwitch</code> allows you to do so.
+        </para>
+
+        <para>
+            The easiest way to add a new context is via the
+            <code>addContext()</code> method. This method takes two arguments,
+            the name of the context, and an array specification. The
+            specification should include one or more of the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para><emphasis>suffix</emphasis>: the suffix to prepend to the
+                default view suffix as registered in the ViewRenderer.</para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>headers</emphasis>: an array of header/value
+                    pairs you wish sent as part of the response.</para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>callbacks</emphasis>: an array containing one or
+                more of the keys 'init' or 'post', pointing to valid PHP
+                callbacks that can be used for context initialization and post
+                processing.</para>
+
+                <para>Initialization callbacks occur when the context is
+                detected by <code>ContextSwitch</code>. You can use it to
+                perform arbitrary logic that should occur. As an example,
+                the JSON context uses a callback to disable the ViewRenderer
+                when auto-JSON serialization is on.</para>
+
+                <para>Post processing occurs during the action's
+                <code>postDispatch()</code> routine, and can be used to perform
+                arbitrary logic. As an example, the JSON context uses a callback
+                to determine if auto-JSON serialization is on; if so, it
+                serializes the view variables to JSON and sends the response,
+                but if not, it re-enables the ViewRenderer.</para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are a variety of methods for interacting with contexts:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>addContext($context, array $spec)</code>: add a new
+                context. Throws an exception if the context already exists.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContext($context, array $spec)</code>: add a new
+                context or overwrite an existing context. Uses the same
+                specification as <code>addContext()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                <code>addContexts(array $contexts)</code>: add many contexts at
+                once. The <code>$contexts</code> array should be an array of
+                context/specification pairs. If any of the contexts already
+                exists, it will throw an exception.
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContexts(array $contexts)</code>: add new contexts and
+                overwrite existing ones. Uses the same specification as
+                <code>addContexts()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasContext($context)</code>: returns true if the context
+                exists, false otherwise.
+            </para></listitem>
+
+            <listitem><para> <code>getContext($context)</code>: retrieve a
+                    single context by name. Returns an array following the
+                    specification used in <code>addContext()</code>.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getContexts()</code>: retrieve all contexts. Returns an
+                array of context/specification pairs.
+            </para></listitem>
+
+            <listitem><para>
+                <code>removeContext($context)</code>: remove a single context by
+                name. Returns true if successful, false if the context was not
+                found.
+            </para></listitem>
+
+            <listitem><para>
+                <code>clearContexts()</code>: remove all contexts.
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
+        <title>Setting Contexts Per Action</title>
+
+        <para>
+            There are two mechanisms for setting available contexts. You can
+            either manually create arrays in your controller, or use several
+            methods in <code>ContextSwitch</code> to assemble them.
+        </para>
+
+        <para>
+            The principle method for adding action/context relations is
+            <code>addActionContext()</code>. It expects two arguments, the
+            action to which the context is being added, and either the name of a
+            context or an array of contexts. As an example, consider the
+            following controller class:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function listAction()
+    {
+    }
+
+    public function viewAction()
+    {
+    }
+
+    public function commentsAction()
+    {
+    }
+
+    public function updateAction()
+    {
+    }
+}
+]]></programlisting>
+
+        <para>
+            Let's say we wanted to add an XML context to the 'list' action, and
+            XML and JSON contexts to the 'comments' action. We could do so in
+            the <code>init()</code> method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()
+             ->addActionContext('list', 'xml')
+             ->addActionContext('comments', array('xml', 'json'))
+             ->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>
+            Alternately, you could simply define the array property
+            <code>$contexts</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public $contexts = array(
+        'list'     => array('xml'),
+        'comments' => array('xml', 'json')
+    );
+
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>
+            The above is less overhead, but also prone to potential errors.
+        </para>
+
+        <para>
+            The following methods can be used to build the context mappings:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addActionContext($action, $context)</code>: marks one
+                    or more contexts as available to an action. If mappings
+                    already exists, simply appends to those mappings.
+                    <code>$context</code> may be a single context, or an array
+                    of contexts.
+                </para>
+
+                <para>
+                    A value of <code>true</code> for the context will mark
+                    all available contexts as available for the action.
+                </para>
+
+                <para>
+                    An empty value for $context will disable all contexts for
+                    the given action.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>setActionContext($action, $context)</code>: marks one
+                    or more contexts as available to an action. If mappings
+                    already exists, it replaces them with those specified.
+                    <code>$context</code> may be a single context, or an array
+                    of contexts.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>addActionContexts(array $contexts)</code>: add several
+                    action/context pairings at once. <code>$contexts</code>
+                    should be an associative array of action/context pairs. It
+                    proxies to <code>addActionContext()</code>, meaning that if
+                    pairings already exist, it appends to them.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setActionContexts(array $contexts)</code>: acts like
+                    <code>addActionContexts()</code>, but overwrites existing
+                    action/context pairs.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>hasActionContext($action, $context)</code>: determine
+                    if a particular action has a given context.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>getActionContexts($action = null)</code>: returns
+                    either all contexts for a given action, or all
+                    action/context pairs.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>removeActionContext($action, $context)</code>: remove
+                    one or more contexts from a given action.
+                    <code>$context</code> may be a single context or an array of
+                    contexts.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>clearActionContexts($action = null)</code>: remove all
+                    contexts from a given action, or from all actions with
+                    contexts.
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
+        <title>Initializing Context Switching</title>
+
+        <para>
+            To initialize context switching, you need to call
+            <code>initContext()</code> in your action controller:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]></programlisting>
+
+        <para>
+            In some cases, you may want to force the context used; for instance,
+            you may only want to allow the XML context if context switching is
+            activated. You can do so by passing the context to
+            <code>initContext()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$contextSwitch->initContext('xml');
+]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
+        <title>Additional Functionality</title>
+
+        <para>
+            A variety of methods can be used to alter the behaviour of the
+            <code>ContextSwitch</code> helper. These include:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setAutoJsonSerialization($flag)</code>: By default,
+                    JSON contexts will serialize any view variables to JSON
+                    notation and return this as a response. If you wish to
+                    create your own response, you should turn this off; this
+                    needs to be done prior to the call to
+                    <code>initContext()</code>.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$contextSwitch->setAutoJsonSerialization(false);
+$contextSwitch->initContext();
+]]></programlisting>
+
+                <para>
+                    You can retrieve the value of the flag with
+                    <code>getAutoJsonSerialization()</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setSuffix($context, $suffix,
+                        $prependViewRendererSuffix)</code>: With this method,
+                    you can specify a different suffix to use for a given
+                    context. The third argument is used to indicate whether or
+                    not to prepend the current ViewRenderer suffix with the new
+                    suffix; this flag is enabled by default.
+                </para>
+
+                <para>
+                    Passing an empty value to the suffix will cause only the
+                    ViewRenderer suffix to be used.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeader($context, $header, $content)</code>: Add a
+                    response header for a given context. <code>$header</code> is
+                    the header name, and <code>$content</code> is the value to
+                    pass for that header.
+                </para>
+
+                <para>
+                    Each context can have multiple headers;
+                    <code>addHeader()</code> adds additional headers to the
+                    context's header stack.
+                </para>
+
+                <para>
+                    If the <code>$header</code> specified already exists for the
+                    context, an exception will be thrown.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($context, $header, $content)</code>:
+                    <code>setHeader()</code> acts just like
+                    <code>addHeader()</code>, except it allows you to overwrite
+                    existing context headers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeaders($context, array $headers)</code>: Add
+                    multiple headers at once to a given context. Proxies to
+                    <code>addHeader()</code>, so if the header already exists,
+                    an exception will be thrown. <code>$headers</code> is an
+                    array of header/context pairs.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeaders($context, array $headers.)</code>: like
+                    <code>addHeaders()</code>, except it proxies to
+                    <code>setHeader()</code>, allowing you to overwrite existing
+                    headers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeader($context, $header)</code>: retrieve the
+                    value of a header for a given context. Returns null if not
+                    found.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeHeader($context, $header)</code>: remove a
+                    single header for a given context.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders($context, $header)</code>: remove all
+                    headers for a given context.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallback($context, $trigger, $callback)</code>: set
+                    a callback at a given trigger for a given context. Triggers
+                    may be either 'init' or 'post' (indicating callback will be
+                    called at either context initialization or postDispatch).
+                    <code>$callback</code> should be a valid PHP callback.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallbacks($context, array $callbacks)</code>: set
+                    multiple callbacks for a given context. <code>$callbacks</code>
+                    should be trigger/callback pairs. In actuality, the most callbacks
+                    that can be registered are two, one for initialization and
+                    one for post processing.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallback($context, $trigger)</code>: retrieve a
+                    callback for a given trigger in a given context.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallbacks($context)</code>: retrieve all callbacks
+                    for a given context. Returns an array of trigger/callback
+                    pairs.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeCallback($context, $trigger)</code>: remove a
+                    callback for a given trigger and context.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearCallbacks($context)</code>: remove all
+                    callbacks for a given context.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setContextParam($name)</code>: set the request
+                    parameter to check when determining if a context switch has
+                    been requested. The value defaults to 'format', but this
+                    accessor can be used to set an alternate value.
+                </para>
+
+                <para>
+                    <code>getContextParam()</code> can be used to retrieve the
+                    current value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setAutoDisableLayout($flag)</code>: By default,
+                    layouts are disabled when a context switch occurs; this is
+                    because typically layouts will only be used for returning
+                    normal responses, and have no meaning in alternate contexts.
+                    However, if you wish to use layouts (perhaps you may have a
+                    layout for the new context), you can change this behaviour
+                    by passing a false value to
+                    <code>setAutoDisableLayout()</code>. You should do this
+                    <emphasis>before</emphasis> calling
+                    <code>initContext()</code>.
+                </para>
+
+                <para>
+                    To get the value of this flag, use the accessor
+                    <code>getAutoDisableLayout()</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCurrentContext()</code> can be used to determine
+                    what context was detected, if any. This returns null if no
+                    context switch occurred, or if called before
+                    <code>initContext()</code> has been invoked.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
+        <title>AjaxContext Functionality</title>
+
+        <para>
+            The <code>AjaxContext</code> helper extends
+            <code>ContextSwitch</code>, so all of the functionality listed for
+            <code>ContextSwitch</code> is available to it. There are a few key
+            differences, however.
+        </para>
+
+        <para>
+            First, it uses a different action controller property for
+            determining contexts, <code>$ajaxable</code>. This is so you can
+            have different contexts used for AJAX versus normal HTTP requests.
+            The various <code>*ActionContext*()</code> methods of
+            <code>AjaxContext</code> will write to this property.
+        </para>
+
+        <para>
+            Second, it will only trigger if an XmlHttpRequest has occurred, as
+            determined by the request object's <code>isXmlHttpRequest()</code>
+            method. Thus, if the context parameter ('format') is passed in the
+            request, but the request was not made as an XmlHttpRequest, no
+            context switch will trigger.
+        </para>
+
+        <para>
+            Third, <code>AjaxContext</code> adds an additional context, HTML. In
+            this context, it sets the suffix to 'ajax.phtml' in order to
+            differentiate the context from a normal request. No additional
+            headers are returned.
+        </para>
+
+        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
+            <title>Allowing Actions to Respond To Ajax Requests</title>
+
+            <para>
+                In this following example, we're allowing requests to the
+                actions 'view', 'form', and 'process' to respond to AJAX
+                requests. In the first two cases, 'view' and 'form', we'll
+                return HTML snippets with which to update the page; in the
+                latter, we'll return JSON.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class CommentController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('view', 'html')
+                    ->addActionContext('form', 'html')
+                    ->addActionContext('process', 'json')
+                    ->initContext();
+    }
+
+    public function viewAction()
+    {
+        // Pull a single comment to view.
+        // When AjaxContext detected, uses the comment/view.ajax.phtml
+        // view script.
+    }
+
+    public function formAction()
+    {
+        // Render the "add new comment" form.
+        // When AjaxContext detected, uses the comment/form.ajax.phtml
+        // view script.
+    }
+
+    public function processAction()
+    {
+        // Process a new comment
+        // Return the results as JSON; simply assign the results as
+        // view variables, and JSON will be returned.
+    }
+}
+]]></programlisting>
+
+            <para>
+                On the client end, your AJAX library will simply request the
+                endpoints '/comment/view', '/comment/form', and
+                '/comment/process', and pass the 'format' parameter:
+                '/comment/view/format/html', '/comment/form/format/html',
+                '/comment/process/format/json'. (Or you can pass the parameter
+                via query string: e.g., "?format=json".)
+            </para>
+
+            <para>
+                Assuming your library passes the 'X-Requested-With:
+                XmlHttpRequest' header, these actions will then return the
+                appropriate response format.
+            </para>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

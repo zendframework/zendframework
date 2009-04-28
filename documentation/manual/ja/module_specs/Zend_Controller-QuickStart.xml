@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller クイックスタート</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>導入</title>
+        <para>
+            <classname>Zend_Controller</classname> は、Zend Framework の MVC
+            システムの中心となるものです。MVC は <ulink
+                url="http://en.wikipedia.org/wiki/Model-view-controller">モデル-ビュー-コントローラ</ulink>
+            の頭文字をとったもので、アプリケーションのロジックと表示ロジックを分離させる設計手法です。
+            <classname>Zend_Controller_Front</classname> は
+            <ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">
+                フロントコントローラ</ulink> パターンを実装しており、
+            すべてのリクエストをいったんフロントコントローラで受け取った上でその
+            URL にもとづいたアクションコントローラに配送します。
+        </para>
+        <para>
+            <classname>Zend_Controller</classname> は、拡張性を考慮して作成されています。
+            拡張の方法としては、既存のクラスのサブクラスを作成する方法と
+            アクションヘルパーを作成する方法があります。
+            新しいサブクラスを作成すると、コントローラクラスの基盤となる
+            インターフェイスや機能を新たに書くことができます。
+            アクションヘルパーを使用すると、システムの機能を強化したり変更したりできるようになります。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>クイックスタート</title>
+
+        <para>
+            より詳しい情報が知りたい場合は、次のセクションを参照ください。
+            とりあえず動かしてみたいという方は、ここを読むといいでしょう。
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>ファイルシステムレイアウトの作成</title>
+
+            <para>
+                まずはディレクトリ構成を決めましょう。
+                典型的なレイアウトは、次のようなものです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>ドキュメントルートの設定</title>
+
+            <para>
+                ウェブサーバのドキュメントルートを、先ほどのレイアウト中の
+                <code>html</code> ディレクトリに設定します。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>rewrite ルールの作成</title>
+
+            <para>
+                上のレイアウトの <code>html/.htaccess</code>
+                ファイルを、次のように編集します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+]]>
+            </programlisting>
+
+            <para>
+                IIS 7.0 をお使いの場合は、次のような rewrite 設定を使用します。
+            </para>
+
+            <programlisting role="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     <system.webServer>
+         <rewrite>
+             <rules>
+                 <rule name="Imported Rule 1" stopProcessing="true">
+                     <match url="^.*$" />
+                     <conditions logicalGrouping="MatchAny">
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsFile" pattern=""
+                             ignoreCase="false" />
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsDirectory"
+                             pattern="" ignoreCase="false" />
+                     </conditions>
+                     <action type="None" />
+                 </rule>
+                 <rule name="Imported Rule 2" stopProcessing="true">
+                     <match url="^.*$" />
+                     <action type="Rewrite" url="index.php" />
+                 </rule>
+             </rules>
+         </rewrite>
+     </system.webServer>
+</configuration>
+]]></programlisting>
+
+            <para>
+                このルールは、既存のリソース
+                (シンボリックリンク、空でないファイル、あるいは空でないディレクトリ)
+                へのリクエストを適切に転送し、
+                それ以外のすべてのリクエストをフロントコントローラに転送します。
+            </para>
+
+            <note>
+                <para>
+                    上の rewrire ルールは Apache 用のものです。
+                    その他のウェブサーバ用の例については
+                    <link linkend="zend.controller.router.introduction">
+                    ルータのドキュメント</link> を参照ください。
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>起動ファイルの作成</title>
+
+            <para>
+                起動ファイルとはすべてのリクエストの転送先となるファイルのことで、
+                今回の例では <code>html/index.php</code> がそれにあたります。
+                <code>html/index.php</code> をお好みのエディタで開き、次の内容を追加します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]>
+            </programlisting>
+
+            <para>
+                これは、フロントコントローラのインスタンスとディスパッチを行います。
+                この結果、アクションコントローラへリクエストが転送されます。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>デフォルトのアクションコントローラの作成</title>
+
+            <para>
+                アクションコントローラについて説明する前に、まず
+                Zend Framework でのリクエストの処理方法について知っておきましょう。
+                デフォルトでは、URL パスの最初の部分がコントローラ、
+                そしてその次の部分がアクションに対応します。たとえば URL が
+                <code>http://framework.zend.com/roadmap/components</code>
+                である場合、パスは <code>/roadmap/components</code>
+                となり、これは <code>roadmap</code> コントローラの
+                <code>components</code> アクションに対応します。
+                アクションを省略した場合は <code>index</code> アクションであるとみなされます。
+                またコントローラを省略した場合は <code>index</code> コントローラであるとみなされます
+                (Apache が自動的に <code>DirectoryIndex</code>
+                に対応させるという規約に従っています)。
+            </para>
+
+            <para>
+                <classname>Zend_Controller</classname> のディスパッチャは、
+                コントローラを対応するクラスに関連付けます。
+                デフォルトでは、コントローラ名の先頭を大文字にしたものに
+                <code>Controller</code> をつなげたものがクラス名となります。
+                つまり、上の例では <code>roadmap</code> コントローラが
+                <code>RoadmapController</code> クラスに対応することになります。
+            </para>
+
+            <para>
+                同様に、アクションもコントローラクラスのメソッドに関連付けます。
+                デフォルトでは、アクション名を小文字に変換して
+                <code>Action</code> を追加したものがメソッド名となります。
+                つまり、上の例では <code>components</code> アクションは
+                <code>componentsAction</code> メソッドになり、最終的に
+                <code>RoadmapController::componentsAction()</code>
+                がコールされることになります。
+            </para>
+
+            <para>
+                続いて、デフォルトのアクションコントローラと
+                アクションメソッドを作ってみましょう。
+                先ほど説明したように、デフォルトのコントローラ名およびアクション名はどちらも
+                <code>index</code> となります。
+                <code>application/controllers/IndexController.php</code>
+                を開き、次の内容を入力しましょう。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/** Zend_Controller_Action */
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                デフォルトでは
+                <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                アクションヘルパーが有効になります。つまり、
+                アクションメソッドとそれに対応するビュースクリプトを用意すれば、
+                すぐにその内容をレンダリングできるというわけです。
+                デフォルトでは、MVCのビュー層として <classname>Zend_View</classname> を使用します。
+                <code>ViewRenderer</code> は、コントローラ名
+                (たとえば <code>index</code>) とアクション名
+                (たとえば <code>index</code>) から処理するテンプレートを決定します。
+                デフォルトでは、テンプレートの拡張子は
+                <code>.phtml</code> となります。つまり、上の例では
+                <code>index/index.phtml</code> をレンダリングします。
+                さらに <code>ViewRenderer</code> は、
+                コントローラと同一階層にある <code>views</code>
+                ディレクトリを自動的にビューの基底ディレクトリとみなし、
+                <code>views/scripts/</code> ビュースクリプトがおかれるものと考えます。
+                したがって、実際にレンダリングされるテンプレートは
+                <code>application/views/scripts/index/index.phtml</code>
+                となります。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>ビュースクリプトの作成</title>
+
+            <para>
+                <link linkend="zend.controller.quickstart.go.controller">
+                先ほど説明したように</link>、ビュースクリプトの場所は
+                <code>application/views/scripts/</code> です。
+                デフォルトコントローラにおけるデフォルトのアクションのビュースクリプトは
+                <code>application/views/scripts/index/index.phtml</code>
+                となります。このファイルを作成し、何か HTML を入力してみましょう。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>エラーコントローラの作成</title>
+
+            <para>
+                デフォルトで、
+                <link linkend="zend.controller.plugins.standard.errorhandler">
+                エラーハンドラプラグイン</link> が登録されています。
+                このプラグインを使用するには、エラー処理用のコントローラが必要です。
+                デフォルト設定では、デフォルトモジュールの
+                <code>ErrorController</code> に <code>errorAction</code>
+                というメソッドがあることを想定しています。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                先ほど説明したディレクトリ構成により、このファイルは
+                <code>application/controllers/ErrorController.php</code>
+                に配置されることになります。これとは別に、ビュースクリプト
+                <code>application/views/scripts/error/error.phtml</code>
+                が必要です。その中身は、たとえば次のようになるでしょう。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>エラー</title>
+</head>
+<body>
+    <h1>エラーが発生しました</h1>
+    <p>エラーが発生しました。後ほどもう一度お試しください。</p>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>実際に見てみましょう!</title>
+
+            <para>
+                ここまでくれば、実際にブラウザでサイトを表示してみることができます。
+                あなたのドメインが <code>example.com</code> だとすると、
+                以下のいずれかの URL で先ほど作成したページが表示されることでしょう。
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                これで、実際にコントローラやアクションを作成する準備ができました。
+                おめでとうございます!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

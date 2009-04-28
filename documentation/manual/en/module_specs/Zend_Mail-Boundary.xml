@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.mail.boundary">
+    <title>Controlling the MIME Boundary</title>
+    <para>
+        In a multipart message, a MIME boundary for separating the different parts of the message is normally
+        generated at random. In some cases, however, you might want to specify the MIME boundary that is used.
+        This can be done using the <code>setMimeBoundary()</code> method, as in the following example:
+    </para>
+    <example id="zend.mail.boundary.example-1">
+        <title>Changing the MIME Boundary</title>
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+// build message...
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

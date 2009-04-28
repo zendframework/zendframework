@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>プラグイン</title>
+
+    <sect2 id="zend.controller.plugins.introduction">
+        <title>導入</title>
+
+        <para>
+            コントローラにはプラグイン機構が組み込まれており、
+            コントローラの処理中にイベントが発生した際にユーザのコードをコールすることができます。
+            フロントコントローラは、プラグインブローカにユーザのプラグインを登録します。
+            そして、イベントメソッドがコールされた際に、
+            フロントコントローラに登録されているプラグインをプラグインブローカが実行します。
+        </para>
+
+        <para>
+            イベントメソッドは、抽象クラス
+            <classname>Zend_Controller_Plugin_Abstract</classname> で定義されています。
+            ユーザが作成するプラグインクラスは、これを継承させます。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>routeStartup()</code> は、<classname>Zend_Controller_Front</classname>
+                    が <link linkend="zend.controller.router">ルータ</link>
+                    をコールしてルートに対するリクエストの評価を始める前にコールされます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>routeShutdown()</code> は、
+                    <link linkend="zend.controller.router">ルータ</link>
+                    がリクエストのルーティングを終了した後にコールされます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>dispatchLoopStartup()</code> は、<classname>Zend_Controller_Front</classname>
+                    がディスパッチループに入る前にコールされます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>preDispatch()</code> は、アクションが
+                    <link linkend="zend.controller.dispatcher">ディスパッチャ</link> でディスパッチされる前にコールされます。
+                    このコールバックは、プロキシやフィルタ的な動作をさせることができます。
+                    リクエストの内容を変更してディスパッチフラグをリセット
+                    (<classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname> を使用します)
+                    することで、現在のアクションをスキップさせたり置き換えたりすることができます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>postDispatch()</code> は、アクションが <link linkend="zend.controller.dispatcher">ディスパッチャ</link>
+                    でディスパッチされた後にコールされます。
+                    このコールバックは、プロキシやフィルタ的な動作をさせることができます。
+                    リクエストの内容を変更してディスパッチフラグをリセット
+                    (<classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname> を使用します)
+                    することで、新しいディスパッチ先アクションを指定することができます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>dispatchLoopShutdown()</code> は、<classname>Zend_Controller_Front</classname>
+                    がディスパッチループを抜けた後にコールされます。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.writing">
+        <title>プラグインの書き方</title>
+
+        <para>
+            プラグインクラスを書くには、単に抽象クラス
+            <classname>Zend_Controller_Plugin_Abstract</classname>
+            をインクルードしてそれを継承するだけです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    // ...
+}
+]]>
+        </programlisting>
+
+        <para>
+            <classname>Zend_Controller_Plugin_Abstract</classname> には抽象メソッドはありません。
+            つまり、上に示したイベントメソッドを、
+            プラグインクラスでかならず実装しなければならないわけではありません。
+            プラグインの作者が、必要なものだけを選んで実装することができます。
+        </para>
+
+        <para>
+            <classname>Zend_Controller_Plugin_Abstract</classname> では、
+            リクエストオブジェクトやレスポンスオブジェクトをプラグインから操作することができます。
+            それぞれ、<code>getRequest()</code> メソッドおよび
+            <code>getResponse()</code> メソッドを使用します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.using">
+        <title>プラグインの使用法</title>
+        <para>
+            プラグインクラスを登録するには、
+            <classname>Zend_Controller_Front::registerPlugin()</classname> をコールします。
+            これは、いつでも行うことができます。
+            次の例は、コントローラチェインでプラグインを使用する方法を示すものです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function routeStartup(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>routeStartup() がコールされました</p>\n");
+    }
+
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>routeShutdown() がコールされました</p>\n");
+    }
+
+    public function dispatchLoopStartup(
+        Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopStartup() がコールされました</p>\n");
+    }
+
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>preDispatch() がコールされました</p>\n");
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->getResponse()
+             ->appendBody("<p>postDispatch() がコールされました</p>\n");
+    }
+
+    public function dispatchLoopShutdown()
+    {
+        $this->getResponse()
+             ->appendBody("<p>dispatchLoopShutdown() がコールされました</p>\n");
+    }
+}
+
+$front = Zend_Controller_Front::getInstance();
+$front->setControllerDirectory('/path/to/controllers')
+      ->setRouter(new Zend_Controller_Router_Rewrite())
+      ->registerPlugin(new MyPlugin());
+$front->dispatch();
+]]>
+        </programlisting>
+
+        <para>
+            他に何かの出力を行うアクションがなく、ひとつのアクションのみがコールされたとしましょう。
+            上のプラグインは、次のような出力を行います。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<p>routeStartup() がコールされました</p>
+<p>routeShutdown() がコールされました</p>
+<p>dispatchLoopStartup() がコールされました</p>
+<p>preDispatch() がコールされました</p>
+<p>postDispatch() がコールされました</p>
+<p>dispatchLoopShutdown() がコールされました</p>
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                プラグインは、フロントコントローラの実行時ならいつでも登録することができます。
+                しかし、プラグインがイベントメソッドを登録しようとしているイベントが終わった後では、
+                そのメソッドは実行されません。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.manipulating">
+        <title>プラグインの取得と操作</title>
+
+        <para>
+            時には、プラグインの登録を解除したりプラグインの情報を取得したいこともあるでしょう。
+            フロントコントローラには、そのような場合のために次のメソッドが用意されています。
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>getPlugin($class)</code>
+                    は、指定したクラス名のプラグインを取得します。
+                    一致するプラグインがない場合は false を返します。
+                    同じクラス名のプラグインが複数登録されている場合は、結果を配列で返します。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>getPlugins()</code> は、プラグインスタック全体を取得します。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>unregisterPlugin($plugin)</code>
+                    は、プラグインをスタックから登録解除します。
+                    パラメータには、プラグインオブジェクト自体かそのクラス名を渡します。
+                    クラス名を渡すと、一致するプラグインがすべて削除されます。
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.plugins.standard">
+        <title>標準の配布パッケージに含まれるプラグイン</title>
+
+        <para>
+            Zend Framework の配布パッケージには、
+            エラー処理用のプラグインが標準で組み込まれています。
+        </para>
+
+        <xi:include href="Zend_Controller-Plugins-ActionStack.xml" />
+        <xi:include href="Zend_Controller-Plugins-ErrorHandler.xml" />
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

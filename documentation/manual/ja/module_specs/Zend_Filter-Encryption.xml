@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect2 id="zend.filter.set.encrypt">
+    <title>Encrypt</title>
+    <para>
+        このフィルタは、指定した設定で任意の文字列を暗号化します。
+        暗号化の際に、アダプタを使用します。実際には、PHP の
+        <code>Mcrypt</code> および <code>OpenSSL</code>
+        拡張モジュール用のアダプタを使用します。
+    </para>
+
+    <para>
+        これら 2 つの暗号化手法はまったく異なる方式なので、
+        アダプタの使用法もそれぞれ異なります。
+        フィルタを初期化する際に、どのアダプタを使うかを選ばなければなりません。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Mcrypt アダプタを使用します
+$filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
+
+// OpenSSL アダプタを使用します
+$filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
+]]>
+    </programlisting>
+
+    <para>
+        別のアダプタを設定するために <code>setAdapter()</code>
+        を使用することもできます。また <code>getAdapter()</code>
+        メソッドで、実際に設定されているアダプタを取得することができます。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+// Mcrypt アダプタを使用します
+$filter = new Zend_Filter_Encrypt();
+$filter->setAdapter('openssl');
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            <code>adapter</code> オプションを指定しなかったり setAdapter
+            を使用しなかったりした場合は、デフォルトで
+            <code>Mcrypt</code> アダプタを使用します。
+        </para>
+    </note>
+
+    <sect3 id="zend.filter.set.encrypt.mcrypt">
+        <title>Mcrypt での暗号化</title>
+        <para>
+            <code>Mcrypt</code> 拡張モジュールをインストールすると、
+            <code>Mcrypt</code> アダプタが使えるようになります。
+            このアダプタは、初期化時のオプションとして以下をサポートしています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>key</emphasis>: 暗号化用の鍵。
+                    入力を暗号化する際に使用します。
+                    復号する際にも同じ鍵が必要です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>algorithm</emphasis>: 使用するアルゴリズム。
+                    <ulink url="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</ulink>
+                    であげられている暗号化アルゴリズムのいずれかでなければなりません。
+                    省略した場合のデフォルトは <code>blowfish</code> です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>algorithm_directory</emphasis>:
+                    アルゴリズムが存在するディレクトリ。
+                    省略した場合のデフォルトは、mcrypt
+                    拡張モジュールで設定されているパスです。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mode</emphasis>: 使用する暗号化モード。
+                    <ulink url="http://php.net/mcrypt">PHP マニュアルの mcrypt のページ</ulink>
+                    であげられているモードのいずれかでなければなりません。
+                    省略した場合のデフォルトは <code>cbc</code> です。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>mode_directory</emphasis>:
+                    モードが存在するディレクトリ。
+                    省略した場合のデフォルトは、<code>mcrypt</code>
+                    拡張モジュールで設定されているパスです。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>vector</emphasis>: 使用する初期化ベクトル。
+                    省略した場合はランダムなベクトルとなります。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            配列ではなく文字列を指定した場合は、その文字列を鍵として使用します。
+        </para>
+
+        <para>
+            初期化した後で暗号化の値を取得したり設定したりするには、それぞれ
+            <code>getEncryption()</code> および <code>setEncryption()</code>
+            メソッドを使用します。
+        </para>
+
+        <note>
+            <para>
+                mcrypt 拡張モジュールが使用できない場合は例外が発生することに注意しましょう。
+            </para>
+        </note>
+
+        <note>
+            <para>
+                また、インスタンス作成時あるいは setEncryption()
+                をコールした際にすべての設定がチェックされることにも注意しましょう。
+                設定内容に問題があることを mcrypt が検知すると、例外がスローされます。
+            </para>
+        </note>
+
+        <para>
+            暗号化ベクトルの取得や設定には、それぞれ <code>getVector()</code>
+            および <code>setVector()</code> を使用可能です。指定した文字列が、
+            そのアルゴリズムに必要なベクトルのサイズに応じて切り詰められたり伸ばされたりします。
+        </para>
+
+        <note>
+            <para>
+                自前のベクトル以外を使用する場合は、
+                そのベクトルを取得してどこかに保存しておかなければならないことに注意しましょう。
+                そうしないと、文字列が復号できなくなります。
+            </para>
+        </note>
+
+        <programlisting role="php"><![CDATA[
+// デフォルト設定の blowfish を使用します
+$filter = new Zend_Filter_Encrypt('myencryptionkey');
+
+// 自前のベクトルを設定します。それ以外の場合は getVector()
+// をコールしてベクトルを保存しておかないと、後で復号できなくなります
+$filter->setVector('myvector');
+// $filter->getVector();
+
+$encrypted = $filter->filter('text_to_be_encoded');
+print $encrypted;
+
+// 復号の方法は Decrypt フィルタを参照ください
+]]>
+        </programlisting>
+    </sect3>
+
+    <sect3 id="zend.filter.set.encrypt.openssl">
+        <title>OpenSSL での暗号化</title>
+        <para>
+            <code>OpenSSL</code> 拡張モジュールをインストールすると、
+            <code>OpenSSL</code> アダプタが使えるようになります。
+            このアダプタは、初期化時のオプションとして以下をサポートしています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>public</emphasis>: 暗号化したコンテンツを渡したい相手の公開鍵。
+                    複数の公開鍵を指定するには、配列を使用します。
+                    鍵ファイルのパスとファイル名を指定するか、
+                    あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>private</emphasis>: コンテンツの暗号化に使用する、あなたの秘密鍵。
+                    鍵ファイルのパスとファイル名を指定するか、
+                    あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            後から公開鍵を取得あるいは設定するには、<code>getPublicKey()</code>
+            および <code>setPublicKey()</code> メソッドを使用します。
+            秘密鍵についても、<code>getPrivateKey()</code> および <code>setPrivateKey()</code>
+            メソッドで取得あるいは設定することができます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時に公開鍵を指定することもできます
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                <code>OpenSSL</code> アダプタは、正しい鍵を渡さないと動作しないことに注意しましょう。
+            </para>
+        </note>
+
+        <para>
+            鍵自体も暗号化したい場合は、パスフレーズを
+            <code>setPassphrase()</code> メソッドで渡します。
+            パスフレーズつきで暗号化したコンテンツを復号したい場合は、
+            公開鍵だけではなく (暗号化された鍵を復号するための) パスフレーズも必要となります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時に公開鍵を指定することもできます
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+]]>
+        </programlisting>
+
+        <para>
+            最後に、OpenSSL を使用した場合に受け手に渡す必要があるものをまとめます。
+            暗号化されたコンテンツ、パスフレーズを使用した場合はそのパスフレーズ、
+            そして復号用のエンベロープ鍵。これらが必要となります。
+        </para>
+
+        <para>
+            つまり、暗号化を終えたらエンベロープ鍵を取得する必要があるということです。
+            取得するには <code>getEnvelopeKey()</code> メソッドを使用します。
+        </para>
+
+        <para>
+            <code>OpenSSL</code> でコンテンツの暗号化を行う完全な例は、このようになります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// openssl を使用し、秘密鍵を指定します
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem'
+));
+
+// もちろん、初期化時に公開鍵を指定することもできます
+$filter->setPublicKey(array(
+    '/public/key/path/first.pem',
+    '/public/key/path/second.pem'
+));
+$filter->setPassphrase('mypassphrase');
+
+$encrypted = $filter->filter('text_to_be_encoded');
+$envelope  = $filter->getEnvelopeKey();
+print $encrypted;
+
+// 復号の方法は Decrypt フィルタを参照ください
+]]>
+        </programlisting>
+    </sect3>
+</sect2>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

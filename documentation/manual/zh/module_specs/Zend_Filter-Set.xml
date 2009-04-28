@@ -1,0 +1,106 @@
+<sect1 id="zend.filter.set">
+
+    <title> 标准过滤器类 </title>
+
+    <para>
+        Zend Framework 带有一组标准的过滤器。
+    </para>
+
+    <sect2 id="zend.filter.set.alnum">
+        <title>Alnum</title>
+        <para>
+            返回只保留字母和数字的字符串 <code>$value</code>，这个过滤器包括一个允许空白字符的选项。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.alpha">
+        <title>Alpha</title>
+        <para>
+            返回只保留字母的字符串 <code>$value</code>，这个过滤器包括一个允许空白字符的选项。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.basename">
+        <title>BaseName</title>
+        <para>
+            给定包含一个文件的路径字符串，这个过路器将返回这个文件的基本名（base name）。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.digits">
+        <title>Digits</title>
+        <para>
+            返回只保留数字的字符串 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.dir">
+        <title>Dir</title>
+        <para>
+            返回路径的名字部分。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.htmlentities">
+        <title>HtmlEntities</title>
+        <para>
+            返回转换成它们对应 HTML 实体的字符串 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.int">
+        <title>Int</title>
+        <para>
+            返回整数 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>StripNewlines</title>
+        <para>
+            返回不带任何新行控制符的字符串 <code>$value</code> 。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.realpath">
+        <title>RealPath</title>
+        <para>
+            扩展所有符号的链接和解析指向在输入路径里的 '/./', '/../' 和额外的 '/' 字符并且返回规范化后的绝对路径名，返回的结果路径将没有符号链接 '/./' 或 '/../' 部分。
+        </para>
+        <para>
+            如果失败，例如文件不存在，<code>Zend_Filter_RealPath</code> 将返回 <code>FALSE</code>。在 BSD 系统，如果只有路径最后部分不存在， <code>Zend_Filter_RealPath</code> 不会失败，但其它系统返回 <code>FALSE</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtolower">
+        <title>StringToLower</title>
+        <para>
+            返回按需转换字母成小写的字符串 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtoupper">
+        <title>StringToUpper</title>
+        <para>
+            返回按需转换字母成大写的字符串 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtrim">
+        <title>StringTrim</title>
+        <para>
+            返回从头到尾整理过的字符串 <code>$value</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.striptags">
+        <title>StripTags</title>
+        <para>
+            返回把 HTML 和 PHP 标签已剥离的（声明为允许的标签不会剥离）输入的字符串。除了能指定允许哪个标签，开发者也可以在所有允许的标签（或只对特定的标签）中指定哪个属性被允许。最后，这个过滤器提供控制是否注释（如 <code>&lt;!-- ... --&gt;</code>）被删除或允许。
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

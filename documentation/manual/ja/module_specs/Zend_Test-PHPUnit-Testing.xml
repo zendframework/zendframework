@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect2 id="zend.test.phpunit.testing">
+    <title>コントローラおよび MVC アプリケーションのテスト</title>
+
+    <para>
+        起動用の設定を済ませたら、テストの開始です。
+        テストの方法は PHPUnit テストスイートによるものとほぼ同じですが、
+        ちょっとした違いがいくつかあります。
+    </para>
+
+    <para>
+        まず、テストケースの <code>dispatch()</code>
+        メソッドを用いてテストの URL をディスパッチしなければなりません。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testHomePage()
+    {
+        $this->dispatch('/');
+        // ...
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        しかし、時にはこれ以外の情報 (GET 変数や POST 変数、
+        COOKIE 情報など) が必要になることもあります。
+        これらの情報をリクエストに含めることもできます。
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+{
+    // ...
+
+    public function testBarActionShouldReceiveAllParameters()
+    {
+        // GET 変数を設定します
+        $this->request->setQuery(array(
+            'foo' => 'bar',
+            'bar' => 'baz',
+        ));
+
+        // POST 変数を設定します
+        $this->request->setPost(array(
+            'baz'  => 'bat',
+            'lame' => 'bogus',
+        ));
+
+        // クッキーの値を指定します
+        $this->request->setCookie('user', 'matthew');
+        // あるいは複数の値を指定します
+        $this->request->setCookies(array(
+            'timestamp' => time(),
+            'host'      => 'foobar',
+        ));
+
+        // ヘッダを設定することもできます
+        $this->request->setHeader('X-Requested-With', 'XmlHttpRequest');
+
+        // リクエストメソッドを設定します
+        $this->request->setMethod('POST');
+
+        // ディスパッチします
+        $this->dispatch('/foo/bar');
+
+        // ...
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        リクエストが準備できたので、次はアサーションを作成してみましょう。
+    </para>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

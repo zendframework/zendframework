@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.version.reading">
+
+    <title>Die Version des Zend Frameworks erhalten</title>
+
+    <para>
+        <classname>Zend_Version</classname> bietet eine Klassenkonstante
+        <classname>Zend_Version::VERSION</classname> die einen String enthält der die
+        Versionsnummer der eigenen Installation des Zend Frameworks enthält.
+        <classname>Zend_Version::VERSION</classname> kann zum Beispiel "1.7.4" enthalten.
+    </para>
+
+    <para>
+        Die statische Methode <classname>Zend_Version::compareVersion($version)</classname>
+        basiert auf der PHP Funktion
+        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
+        Die Methode gibt -1 zurück wenn die angegebene Version älter als die
+        installierte Version des Zend Frameworks ist, 0 wenn Sie identisch sind und
+        +1 wenn die angegebene Version neuer ist als die Version des
+        Zend Frameworks.
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>Beispiel der <code>compareVersion()</code> Methode</title>
+        <programlisting role="php"><![CDATA[
+// gibt -1, 0 oder 1 zurück
+$cmp = Zend_Version::compareVersion('2.0.0');
+]]>
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

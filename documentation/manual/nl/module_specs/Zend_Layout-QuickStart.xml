@@ -1,0 +1,292 @@
+<sect1 id="zend.layout.quickstart">
+    <title>Zend_Layout Snelle Start</title>
+
+    <para>
+        Er zijn twee belangrijke gebruiksomgevingen voor <code>Zend_Layout</code>:
+        mét en zonder Zend Framework MVC-componenten
+    </para>
+
+    <sect2 id="zend.layout.quickstart.layouts">
+        <title>Layout scripts</title>
+
+        <para>
+            In beide gevallen heb je een layout script nodig.
+            Layout scripts gebruiken Zend_View (of elke implementatie
+            daarvan die je gebruikt). Layoutvariabelen worden geregistreerd
+            met een <code>Zend_Layout</code> <link linkend="zend.view.helpers.initial.placeholder">placeholder</link>.
+            Toegang tot deze variabelen krijg je via de Placeholder Helper
+            of door ze op te vragen als eigenschappen van het layoutobject
+            via de layout helper.
+        </para>
+
+        <para>
+            Bijvoorbeeld:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Mijn website</title>
+</head>
+<body>
+<?php
+    // Vraag de 'content'-sleutel op met behulp van de layout helper:
+    echo $this->layout()->content;
+
+    // Vraag de 'foo'-sleutel op met behulp van de placeholder helper:
+    echo $this->placeholder('Zend_Layout')->foo;
+
+    // Vraag het layout object op en vraag daaruit verschillende sleutels op:
+    $layout = $this->layout();
+    echo $layout->bar;
+    echo $layout->baz;
+?>
+</body>
+</html>
+]]></programlisting>
+
+        <para>
+            Doordat <code>Zend_Layout</code> <code>Zend_View</code> gebruikt om
+            het layout script te renderen kun je alle geregistreerde View Helpers
+            gebruiken en heb je ook toegang tot alle viewvariabelen die reeds
+            zijn ingesteld. Vooral handig zijn de verschillende <link
+                linkend="zend.view.helpers.initial.placeholder">placeholder
+            helpers</link>, die je in staat stellen om velerlei gegevens voor
+            bijvoorbeeld de &lt;head&gt;-sectie, navigatie, etc. op te vragen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Gebruik verschillende placeholder helpers om specifieke informatie op te vragen:
+    <title><?= $this->headTitle() ?></title>
+    <?= $this->headScript() ?>
+    <?= $this->headStyle() ?>
+</head>
+<body>
+    <?= $this->render('header.phtml') ?>
+
+    <div id="nav"><?= $this->placeholder('nav') ?></div>
+
+    <div id="content"><?= $this->layout()->content ?></div>
+
+    <?= $this->render('footer.phtml') ?>
+</body>
+</html>
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.mvc">
+        <title>Zend_Layout met Zend Framework MVC-componenten</title>
+
+        <para>
+            <code>Zend_Controller</code> biedt een uitgebreide set aan
+            uitbreidingsfunctionaliteiten via de <link
+            linkend="zend.controller.plugins">front controller plugins</link>
+            en <link linkend="zend.controller.actionhelpers">actiiecontroller
+            helpers</link>. <code>Zend_View</code> heeft ook <link
+            linkend="zend.view.helpers">helpers</link>. <code>Zend_Layout</code>
+            gebruikt deze verschillende uitbreidingsmogelijkheden als het wordt
+            gebruikt in een MVC-context.
+        </para>
+
+        <para>
+            <code>Zend_Layout::startMvc()</code> instantieert <code>Zend_Layout</code>
+            met behulp van de optionele configuratie die wordt meegegeven.
+            Vervolgens registreert het een front controller plugin die zorg
+            draagt voor het renderen van de layout ná; de dispatch loop en
+            een actiecontroller helper die de ontwikkelaar toegang geeft tot
+            het layoutobject vanuit de actiecontrollers.
+            De ontwikkelaar kan verder op ieder gewenst moment de layoutinstantie
+            opvragen via de <code>layout</code> view helper.
+        </para>
+
+        <para>
+            Laten we om te beginnen kijken naar het initialiseren van
+            <code>Zend_Layout</code> in een MVC-context.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// In de bootstrap:
+Zend_Layout::startMvc();
+?>]]></programlisting>
+
+        <para>
+            Je kunt aan <code>startMvc()</code> een optionele array van
+            configuratieopties of een instantie van <code>Zend_Config</code>
+            meegeven om de instantie aan te passen aan jouw wensen.
+            De verschillende beschikbare opties worden uitgelegd in
+            <xref linkend="zend.layout.options" />.
+        </para>
+
+        <para>
+            In een actiecontroller kun je toegang tot het layoutobject krijgen
+            alsof het een action helper is.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Schakel de layout uit voor deze actie:
+        $this->_helper->layout->disableLayout();
+    }
+
+    public function bazAction()
+    {
+        // Gebruik een ander layout script voor deze actie:
+        $this->_helper->layout->setLayout('foobaz');
+    };
+}
+?>]]></programlisting>
+
+        <para>
+            In je view scripts kun je toegang verkrijgen tot het layoutobject
+            via de <code>layout</code> view helper. Deze view helper verschilt
+            van andere view helpers: hij neemt geen argumenten aan en geeft
+            geen stringwaarde, maar een object terug. Dit stelt je in staat om
+            het layoutobject verder direct te benaderen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->layout()->setLayout('foo'); // Stel een alternatieve layout in ?>
+]]></programlisting>
+
+        <para>
+            Je kunt te allen tijde het layoutobject (binnen MVC-context)
+            opvragen via de statische methode <code>getMvcInstance()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// Geeft null terug als startMvc() nog niet aangeroepen is
+$layout = Zend_Layout::getMvcInstance();
+?>]]></programlisting>
+
+        <para>
+            Tot slot heeft de front controller plugin van
+            <code>Zend_Layout</code> één belangrijke toegevoegde
+            functionaliteit ten opzichte van het renderen van de layout:
+            <code>Zend_Layout</code> vraagt alle benoemde segmenten uit het
+            response object op en wijst ze toe als layoutvariabelen. Het
+            segment 'default' wordt toegewezen aan de variabele 'content'. Dit
+            geeft je de mogelijkheid om de verschillende delen van de output
+            van je applicatie in de layout te renderen.
+        </para>
+
+        <para>
+            Een voorbeeldje: Stel dat je applicatiecode als eerst langs
+            <code>FooController::indexAction()</code> komt, waarvan de
+            uitkomst in het 'default' response segment wordt geplaatst en de
+            code vervolgens doorstuurt naar
+            <code>NavController::menuAction()</code>, waarvan de uitkomst in
+            het 'nav' response segment wordt geplaatst en tot slot langs
+            <code>CommentController::fetchAction()</code> wordt gestuurd,
+            waarvan de uitkomst aan het eind van het 'default' response
+            segment wordt toegevoegd. Je kunt dan beide segmenten apart
+            door je layout script laten renderen:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<body>
+    <!-- Rendert /nav/menu -->
+    <div id="nav"><?= $this->layout()->nav ?></div>
+
+    <!-- Rendert /foo/index + /comment/fetch -->
+    <div id="content"><?= $this->layout()->content ?></div>
+</body>
+]]></programlisting>
+
+        <para>
+            Deze functionaliteit is vooral handig als hij wordt gebruikt samen
+            met de ActionStack
+            <link linkend="zend.controller.actionhelpers.actionstack">action
+                helper</link> en <link
+            linkend="zend.controller.plugins.standard.actionstack">plugin</link>.
+            Hiermee kun je een lijst van uit te voeren acties aanleggen,
+            waardoor je allerlei widgets kunt laden binnen één layout.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.standalone">
+        <title>Zend_Layout als standalone component</title>
+
+        <para>
+            Zonder de Zend Framework MVC-context is Zend_Layout niet half zo
+            functioneel of handig als mét. Toch heeft het twee
+            belangrijke voordelen:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                    <code>Zend_Layout</code> biedt een aparte omgeving voor
+                    layoutvariabelen.
+            </para></listitem>
+
+            <listitem><para>
+                    <code>Zend_Layout</code> isoleert het layout script (dat
+                    meestal op nagenoeg elke pagina hetzelfde zal zijn) van de
+                    andere, normale view scripts.
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Als je <code>Zend_Layout</code> als standalone component gebruikt
+            kun je simpelweg het layout object instantiëren en de
+            verschillende accessoren gebruiken om het object te configureren,
+            variabelen aan het object toe te wijzen en de layout te renderen:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+$layout = new Zend_Layout();
+
+// Stel het layout script pad in:
+$layout->setLayoutPath('/path/to/layouts');
+
+// Wijs een paar variabelen toe:
+$layout->content = $content;
+$layout->nav     = $nav;
+
+// Wissel van layout script:
+$layout->setLayout('foo');
+
+// Render de uiteindelijke layout
+echo $layout->render();
+?>]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.layout.quickstart.example">
+        <title>Voorbeeld</title>
+
+        <para>
+            Soms zegt een plaatje meer dan duizend woorden. Vandaar de volgende
+            afbeelding. Het laat zien hoe het allemaal bij elkaar kan komen.
+        </para>
+
+         <para>
+            <inlinegraphic align="center" valign="middle"
+                fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
+        </para>
+
+        <para>
+            De daadwerkelijke volgorde van de elementen kan variëren; dat
+            hangt af van de CSS die je gebruikt. Als je bijvoorbeeld elementen
+            absoluut positioneert kan het zijn dat je, hoewel de navigatie
+            later in het document staat, het alsnog bovenaan laat weergeven.
+            Dit kan natuurlijk ook gelden voor de header of zijbalk. De
+            technische kant van het bij elkaar renderen van verschillende
+            stukken inhoud blijft echter hetzelfde.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

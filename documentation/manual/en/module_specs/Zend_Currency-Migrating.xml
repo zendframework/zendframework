@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.migration">
+
+    <title>Migrating from Previous Versions</title>
+
+    <para>
+        The API of <classname>Zend_Currency</classname> has changed in the past to enhance
+        usability. If you started using <classname>Zend_Currency</classname> with a
+        version which is mentioned in this chapter follow the guidelines below
+        to migrate your scripts to the new API.
+    </para>
+
+    <sect2 id="zend.currency.usage.migration.fromonezerotwo">
+
+        <title>Migrating from 1.0.2 to 1.0.3 or Newer</title>
+
+        <para>
+            Creating an object of <classname>Zend_Currency</classname> has become simpler.
+            You no longer have to give a script or set it to null. The optional
+            script parameter is now an option which can be set through the
+            <code>setFormat()</code> method.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency = new Zend_Currency($currency, $locale);
+]]></programlisting>
+
+        <para>
+            The <code>setFormat()</code> method takes now an array of options. These options are set permanently and override all previously
+            set values. Also a new option 'precision' has been added. The
+            following options have been refactored:
+
+            <itemizedlist mark='opencircle'>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">position</emphasis>:
+                        Replacement for the old 'rules' parameter.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">script</emphasis>:
+                        Replacement for the old 'script' parameter.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">format</emphasis>:
+                        Replacement for the old 'locale' parameter which does not
+                        set new currencies but only the number format.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">display</emphasis>:
+                        Replacement for the old 'rules' parameter.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">precision</emphasis>:
+                        New parameter.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">name</emphasis>:
+                        Replacement for the ole 'rules' parameter. Sets the full
+                        currencies name.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">currency</emphasis>:
+                        New parameter.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">symbol</emphasis>:
+                        New parameter.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->setFormat(array $options);
+]]></programlisting>
+
+        <para>
+            The <code>toCurrency()</code> method no longer supports the optional
+            'script' and 'locale' parameters. Instead it takes an options array which
+            can contain the same keys as for the <code>setFormat</code> method.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->toCurrency($value, array $options);
+]]></programlisting>
+
+        <para>
+            The methods <code>getSymbol()</code>, <code>getShortName()</code>,
+            <code>getName()</code>, <code>getRegionList()</code> and
+            <code>getCurrencyList()</code> are no longer static and can be called
+            from within the object. They return the set values of the object if no
+            parameter has been set.
+        </para>
+
+    </sect2>
+
+</sect1>

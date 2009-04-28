@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<entry xmlns='http://www.w3.org/2005/Atom' xmlns:media='http://search.yahoo.com/mrss/' xmlns:yt='http://gdata.youtube.com/schemas/2007' xmlns:gd='http://schemas.google.com/g/2005' gd:etag='W/&quot;CE4CQn47eCp7ImA9WxRbGU0.&quot;'>
+<id>tag:youtube.com,2008:user:googledevelopers:playlist:8E2186857EE27746</id>
+<published>2007-08-23T21:48:43.000Z</published>
+<updated>2008-12-10T09:56:03.000Z</updated>
+<category scheme='http://schemas.google.com/g/2005#kind' term='http://gdata.youtube.com/schemas/2007#playlistLink'/>
+<title>Non-google Interviews</title>
+<summary>This playlist contains interviews with people outside of Google.</summary>
+<content type='application/atom+xml;type=feed' src='http://gdata.youtube.com/feeds/api/playlists/8E2186857EE27746?v=2'/>
+<link rel='related' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers?v=2'/>
+<link rel='alternate' type='text/html' href='http://www.youtube.com/view_play_list?p=8E2186857EE27746'/>
+<link rel='self' type='application/atom+xml' href='http://gdata.youtube.com/feeds/api/users/googledevelopers/playlists/8E2186857EE27746?v=2'/>
+<author><name>googledevelopers</name><uri>http://gdata.youtube.com/feeds/api/users/googledevelopers</uri></author>
+<yt:playlistId>8E2186857EE27746</yt:playlistId>
+<yt:countHint>1</yt:countHint>
+</entry>

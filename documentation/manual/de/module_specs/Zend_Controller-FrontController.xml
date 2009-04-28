@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.front">
+    <title>Der Front Controller</title>
+
+    <sect2 id="zend.controller.front.overview">
+        <title>Übersicht</title>
+
+        <para>
+            <classname>Zend_Controller_Front</classname> implementiert ein <ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front
+                Controller-Entwurfsmuster</ulink>, das in <ulink
+                url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller
+                (MVC)</ulink>-Anwendungen verwendet wird. Seine Aufgabe ist, die Abfrage-Umgebung zu initialisieren,
+                die eingehende Abfrage zu routen und dann die Anfrage an alle angefragten Aktionen weiterzuleiten
+                (das alles zusammen wird auch dispatchen genannt);
+                er fasst alle Antworten zusammen und gibt sie zurück, wenn der Prozess beendet ist.
+        </para>
+
+        <para>
+            <classname>Zend_Controller_Front</classname> implementiert auch das <ulink
+                url="http://de.wikipedia.org/wiki/Einzelst%C3%BCck_%28Entwurfsmuster%29">Singleton-Entwurfsmuster
+            </ulink>,
+            das heißt nur eine einzige Instanz dieser Klasse darf zu jedem Zeitpunkt existieren.
+            Das ermöglicht es auch, dass der Front-Controller als Registry fungiert, in der alle anderen Objekte
+            des Prozesses Daten persistent speichern können.
+        </para>
+
+        <para>
+            <classname>Zend_Controller_Front</classname> registriert einen <link
+                linkend="zend.controller.plugins">Plugin-Broker</link> in der Registry, die er selber ist,
+            was es erlaubt, verschiedene Events, die er auslöst, von den Plugins überwachen zu lassen.
+            In den meisten Fällen gibt das dem Entwickler die Möglichkeit, einen maßgeschneiderten Dispatch-Prozess
+            zu entwerfen, ohne den Front-Controller erweitern zu müssen um Funktionalität hinzuzufügen.
+        </para>
+
+        <para>
+            Als ein absolutes Minimum, um zu funktionieren, braucht der Front-Controller den Pfad zu einem
+            oder mehr Verzeichnissen, die <link linkend="zend.controller.action">Action-Controller</link>
+            enthalten. Verschiedene Methoden können auch noch aufgerufen werden, um die Front-Controller-Umgebung
+            und die seiner Hilfsklassen anzupassen.
+        </para>
+
+        <note>
+            <title>Standardverhalten</title>
+            <para>
+                Standardmäßig lädt der Front-Controller sowohl das <link
+                    linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>-Plugin
+                als auch das <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>-
+                Action-Helper-Plugin. Diese sind dafür geschrieben, Fehlerbehandlung bzw. das Rendern von Views
+                in den Controllern zu vereinfachen.
+            </para>
+
+            <para>
+                Um den <code>ErrorHandler</code> abzuschalten, kann der folgende Code an jeder Stelle vor
+                dem Aufruf der <code>dispatch()</code>-Methode des Front-Controllers ausgeführt werden:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Error-Handler-Plugin abschalten:
+$front->setParam('noErrorHandler', true);
+]]>
+            </programlisting>
+
+            <para>
+                Um den <code>ViewRenderer</code> abzuschalten muss wiederum der folgende Code vor dem
+                <code>dispatch()</code> ausgeführt werden:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Den ViewRenderer Action-Helper deaktivieren:
+$front->setParam('noViewRenderer', true);
+]]>
+            </programlisting>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.controller.front.methods.primary">
+        <title>Grundlegende Methoden</title>
+
+        <para>
+            Der Front-Controller hat etliche Zugriffsmethoden, die benutzt werden können, um seine
+            Umgebung zu konfigurieren. Jedoch gibt es drei grundlegende Methoden, die entscheidend für die
+            funktionalität des Front-Controllers sind:
+        </para>
+
+        <sect3 id="zend.controller.front.methods.primary.getinstance">
+            <title>getInstance()</title>
+
+            <para>
+                <code>getInstance()</code> wird benutzt, um eine Front-Controller-Instanz zu erhalten.
+                Da der Front-Controller das Singleton-Entwurfsmuster implementiert, ist das auch die einzige
+                Möglichkeit, ein Front-Controller-Objekt zu erhalten.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$front = Zend_Controller_Front::getInstance();
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
+            <title>setControllerDirectory() und addControllerDirectory()</title>
+
+            <para>
+                <code>setControllerDirectory()</code> wird benutzt, um <link
+                    linkend="zend.controller.dispatcher">dem Dispatcher</link>
+                zu sagen, wo er nach <link
+                    linkend="zend.controller.action">Action-Controller</link>-Klassendateien suchen soll.
+                Sie akzeptiert sowohl einen einzelnen Pfad als auch ein Array aus Modul/Pfad-Paaren.
+            </para>
+
+            <para>
+                Ein Paar Beispiele:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Standard-Controller-Verzeichnis setzen:
+$front->setControllerDirectory('../application/controllers');
+
+// Einige Modul-Ordner auf einmal setzen:
+$front->setControllerDirectory(array(
+    'default' => '../application/controllers',
+    'blog'    => '../modules/blog/controllers',
+    'news'    => '../modules/news/controllers',
+));
+
+// Den Ordner für das Modul 'foo' hinzufügen:
+$front->addControllerDirectory('../modules/foo/controllers', 'foo');
+]]>
+            </programlisting>
+
+            <note>
+                <para>
+                    Wenn <code>addControllerDirectory()</code> ohne einen Modulnamen verwendet wird,
+                    setzt sie den Ordner für das Modul <code>default</code> -- und überschreibt einen Pfad, der
+                    vorher gesetzt wurde.
+                </para>
+            </note>
+
+            <para>
+                Die aktuellen Einstellungen für den/die Controller-Ordner können mit
+                <code>getControllerDirectory()</code> abgerufen werden; das gibt ein Array mit
+                Modul/Verzeichnis-Paaren zurück.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.front.methods.primary.addmoduledirectory">
+            <title>addModuleDirectory() und getModuleDirectory()</title>
+
+            <para>
+                Ein Aspekt des Frontcontrollers ist das man <link linkend="zend.controller.modular">eine
+                modulare Verzeichnisstruktur definieren kann</link> für die Erstellung von alleinstehenden
+                Komponenten; diese werden "Module" (modules) genannt.
+            </para>
+
+            <para>
+                Jedes Modul sollte in seinem eigenen Verzeichnis sein und die Verzeichnisstruktur des
+                Standardmoduls spiegeln -- z.B., sollte es mindestens ein "controllers" Unterzeichnis haben
+                und typischerweise ein "views" Unterverzeichnis und andere Anwendungsverzeichnisse.
+            </para>
+
+            <para>
+                <code>addModuleDirectory()</code> erlaubt es den Namen des Verzeichnisses zu übergeben der
+                ein oder mehrere Modulverzeichnisse enthält. Er scannt dieses dann und fügt es den
+                Controllerverzeichnissen des Frontcontrollers hinzu.
+            </para>
+
+            <para>
+                Später, wenn man den Pfad zu einem speziellen Modul oder dem aktuellen Modul eruieren will,
+                kann <code>getModuleDirectory()</code> aufgerufen werden und optional ein Modulname übergeben
+                werden für das das spezielle Modulverzeichnis geholt werden soll.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.front.methods.primary.dispatch">
+            <title>dispatch()</title>
+
+            <para>
+                <code>dispatch(Zend_Controller_Request_Abstract $request = null,
+                    Zend_Controller_Response_Abstract $response = null)</code>
+                erledigt die Schwerstarbeit des Front-Controllers. Sie nimmt als Parameter optional
+                ein <link linkend="zend.controller.request">Anfrage-Object</link> und/oder ein <link
+                    linkend="zend.controller.response">Antwort-Objekt</link> entgegen,
+                was dem entwickler erlaubt, wahlweise eigene Objekte für diese beiden Aufgaben zu bestimmen.
+            </para>
+
+            <para>
+                Wenn kein Anfrage- oder Antwort-Objekt angegeben werden, wird <code>dispatch()</code>
+                nach vorher registrierten Objekten suchen und diese benutzen oder Standard-Versionen
+                für seinen Prozess instanzieren (in beiden Fällen wird der HTTP-Dialekt als Standard benutzt).
+            </para>
+
+            <para>
+                Auf ähnliche Art sucht <code>dispatch()</code> nach registrierten <link
+                    linkend="zend.controller.router">Router</link>- und <link
+                    linkend="zend.controller.dispatcher">Dispatcher</link>-Objekten und instanziert
+                die Standard-Versionen wenn keine gefunden werden.
+            </para>
+
+            <para>
+                Der Dispatch-Prozess hat drei verschiedene Schritte:
+            </para>
+
+            <itemizedlist>
+                <listitem><para>Routing</para></listitem>
+                <listitem><para>Dispatching</para></listitem>
+                <listitem><para>Antwort</para></listitem>
+            </itemizedlist>
+
+            <para>
+                Das Routing geschieht genau einmal, indem die Werte aus dem Anfrage-Objekt benutzt,
+                die zum Zeitpunkt des Aufrufes von <code>dispatch()</code> vorhanden waren. Das
+                Dispatchen geschieht in einer Schleife; eine Anfrage kann entweder melden, dass es
+                mehrere Aktionen gibt, die ausgeführt werden sollen, oder der Controller oder ein
+                Plugin können das Anfrage-Objekt zurücksetzen, um zu erzwingen, dass noch
+                zusätzliche Aktionen ausgeführt werden sollen. Wenn alles erledigt ist, gibt der
+                Front-Controller eine Antwort zurück.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.front.methods.primary.run">
+            <title>run()</title>
+
+            <para>
+                <classname>Zend_Controller_Front::run($path)</classname> ist eine statische Methode, die einfach einen
+                Pfad zu einem Verzeichnis, das Action-Controller enthält, als Parameter akzeptiert.
+                Sie holt sich eine Front-Controller-Instanz (mit
+                <link
+                    linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>,
+                registriert den angegebenen Pfad mit <link
+                    linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>,
+                und <link
+                    linkend="zend.controller.front.methods.primary.dispatch">dispatcht</link> schlussendlich.
+            </para>
+
+            <para>
+                Im Grunde ist <code>run()</code> eine Komfort-Methode, die für Seitenkonstellationen
+                benutzt werden kann, die keine Anpassung der Front-Controller-Umgebung benötigen.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Front-Controller instanzieren, Controller-Verzeichnis setzen
+// und dispatchen in einem einfachen Schritt:
+Zend_Controller_Front::run('../application/controllers');
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.front.methods.environment">
+        <title>Methoden für Umgebungszugriff</title>
+
+        <para>
+            Zusätzlich zu den oben aufgelisteten Methoden gibt es eine Menge Zugriffsmethoden, die benutzt werden
+            können, um die Front-Controller-Umgebung zu beeinflussen -- und damit die Umgebung der Klassen,
+            an die der Front-Controller seine Arbeit weiterleitet.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>resetInstance()</code> wird benutzt, um alle aktuellen Einstellungen zu löschen.
+                    Ihr hauptsächlicher Nutzen sind Testfälle, aber sie kann auch für Fälle benutzt werden,
+                    in denen mehrere Front-Controller-Ausführungen aneinander gehängt werden sollen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>(set|get)DefaultControllerName()</code> erlaubt es, dem Front-Controller einen anderen Namen
+                    für den Standard-Action-Controller mitzugeben (ansonsten wird 'index' benutzt), bzw. den
+                    aktuellen Wert herauszufinden. Diese Funktionen leiten die Anfragen an den <link
+                        linkend="zend.controller.dispatcher">Dispatcher</link> weiter.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>(set|get)DefaultAction()</code> erlaubt analog, den Standard-Aktionsnamen zu setzen -
+                    ohne Einstellung wird 'index' verwendet - und den aktuellen Wert auszulesen. Auch diese beiden
+                    leiten an den <link linkend="zend.controller.dispatcher">Dispatcher</link> weiter.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Mit <code>(set|get)Request()</code> kann
+                    <link linkend="zend.controller.request">die Request</link> Klasse oder das
+                    Objekt, das während des Dispatch-Prozesses verwendet wird und um das aktuelle
+                    Objekt zu erhalten. Wenn das Requestobjekt gesetzt wird, kann ein
+                    Request-Klassenname übergeben werden, und in diesem Fall wird die Methode die
+                    Klassendatei laden und Sie initialisieren.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Mit <code>(set|get)Router()</code> kann auf die gleiche Art der Klassenname bzw. das Objekt
+                    übergeben bzw. zurückgegeben werden, das beim dispatchen als
+                    <link linkend="zend.controller.router">Router</link> verwendet wird.
+                </para>
+
+                <para>
+                    Wenn nach dem Router-Objekt gefragt wird, wird erst überprüft, ob eines existiert. Wenn nicht,
+                    wird der Standard-Router (der Rewrite-Router) instanziert und zurückgegeben.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>(set|get)BaseUrl()</code> erlaubt es, die <link
+                        linkend="zend.controller.request.http.baseurl">Basis-URL</link> zu setzen, die beim Routen
+                        der Anfrage außen vor gelassen wird, sowie den aktuellen Wert dieser Einstellung zu erhalten.
+                        Diese URL wird dem Request-Objekt erst direkt vor dem Routing bekannt gemacht.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>(set|get)Dispatcher()</code> kann die <link
+                        linkend="zend.controller.dispatcher">Dispatcher</link>-Klasse/das Dispatcher-Objekt setzen,
+                    das den Dispatch-Prozess übernimmt. Wie oben, so kann auch hier ein Klassenname oder ein Objekt
+                    übergeben werden; die get-Methode gibt in jedem Fall ein Objekt zurück.
+                </para>
+
+                <para>
+                    Wenn das Dispatcher Objekt empfangen wird, wird erst überprüft, ob bereits ein
+                    Dispatcher existiert, wenn nicht, wird der Standard-Dispatcher instanziert und
+                    zurückgegeben.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Über <code>(set|get)Response()</code> kann das <link
+                    linkend="zend.controller.response">Antwort-Objekt</link> gesetzt bzw. erhalten werden.
+                    Auch hier kann wieder ein Klassenname oder ein Objekt übergeben werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Mit <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code> können
+                    <link linkend="zend.controller.plugins">Front-Controller-Plugins</link> registriert werden. Über
+                    den optionalen <code>$stackIndex</code> kann kontrolliert werden, in welcher Reihenfolge die
+                    Plugins ausgeführt werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>unregisterPlugin($plugin)</code> kann registrierte <link
+                    linkend="zend.controller.plugins">Plugin-Objekte</link> entfernen. <code>$plugin</code> kann entweder
+                    ein Plugin-Objekt oder eine Zeichenkette sein, die die Klasse des zu entfernenden Plugins angibt.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Mit <code>throwExceptions($flag)</code> wird festgelegt, ob Exceptions
+                    (Ausnahmen), die während des Dispatch-Prozesses von Plugins, Controllern,
+                    Hilfsklassen etc. geworfen werden. Als Standardeinstellung werden Exceptions
+                    gefangen und im <link linkend="zend.controller.response">Antwort-Objekt</link>
+                    gespeichert. Das Einschalten von <code>throwExceptions()</code> überschreibt
+                    dieses Verhalten.
+                </para>
+
+                <para>
+                    Mehr Informationen gibt es hier: <xref
+                        linkend="zend.controller.exceptions" />.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>returnResponse($flag)</code> stellt ein, ob die Antwort nach
+                    <code>dispatch()</code> vom Front-Controller zurückgegeben werden soll
+                    (<code>true</code>) oder ob er sie automatisch ausgibt (<code>false</code>).
+                    In der Standardeinstellung wird die Antwort automatisch ausgegeben (durch
+                    Aufruf von <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);
+                    das Einschalten von <code>returnResponse()</code> ändert das.
+                </para>
+
+                <para>
+                    Gründe, die Antwort zurückzugeben, wären zum Beispiel der Wunsch, nach Fehlern
+                    zu suchen, bevor die Antwort ausgegeben wird, das Logging verschiedener Aspekte
+                    der Antwort (bspw. HTTP-Header), etc.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.front.methods.params">
+        <title>Front Controller-Parameter</title>
+
+        <para>
+            In der Einführung haben wir erwähnt, dass der Front-Controller auch als eine Registry für die verschiedenen
+            Controller-Komponenten fungiert. Das macht er über eine Gruppe von "param"-Methoden, de es erlauben,
+            beliebige Daten -- Objekte und Variablen -- im Front-Controller zu registrieren, die dann zu jeder Zeit
+            im Dispatch-Prozess abgerufen werden können. Diese Werte werden weitergegeben an den Router,
+            den Dispatcher, und an die Aktions-Controller. Diese Methodengruppe besteht aus:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setParam($name, $value)</code> setzt einen einzelnen Parameter mit dem Namen
+                    <code>$name</code> und dem Wert <code>$value</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setParams(array $params)</code> setzt mehrere Parameter auf einmal mit Hilfe eines
+                    assoziativen Arrays.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getParam($name)</code> gibt den Parameter <code>$name</code> zurück.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getParams()</code> gibt eine komplette Liste mit allen gesetzten Parametern zurück.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearParams()</code> kann einen Parameter löschen (wenn eine Zeichenkette mit einem gültigen
+                    Namen übergeben wird), mehrere benannte Parameter (wenn ein Array mit mehreren Parameter-Namen
+                    übergeben wird) oder alle (wenn nichts übergeben wird).
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt mehrere vordefinierte Parameter (die ebenfalls gesetzt werden können), die speziellen Einfluss
+            auf den Dispatch-Prozess haben:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>useDefaultControllerAlways</code> wird benutzt, um dem <link
+                        linkend="zend.controller.dispatcher">Dispatcher</link> zu sagen, dass er, wenn er einen Fehler
+                        beim Dispatchen feststellt - also ein Modul / einen Controller / eine Aktionsmethode nicht
+                        findet, automatisch den Startseiten-Controller im Modul default benutzen soll. Standardmäßig
+                        ausgeschaltet.
+                </para>
+
+                <para>
+                    Siehe <xref linkend="zend.controller.exceptions.internal" />
+                    für detailliertere Informationen über die Benutzung dieser Einstellung.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>disableOutputBuffering</code> sagt dem <link
+                        linkend="zend.controller.dispatcher">Dispatcher</link>, dass er keinen Ausgabepuffer benutzen
+                    soll, um die Ausgabe, die von den Action-Controllern generiert wird, abzufangen. Standardmäßig
+                    werden sämtliche Ausgaben abgefangen und im Antwort-Objekt gespeichert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Wenn <code>noViewRenderer</code> auf true steht, wird der <link
+                        linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link> abgeschaltet.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>noErrorHandler</code> auf true schaltet das <link
+                        linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler-Plugin</link> ab.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.front.subclassing">
+        <title>Erweitern des Front-Controllers</title>
+
+        <para>
+            Um den Front-Controller zu erweitern, muss als Minimalanforderung auf jeden Fall
+            die Methode <code>getInstance()</code> überschrieben werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class My_Controller_Front extends Zend_Controller_Front
+{
+    public static function getInstance()
+    {
+        if (null === self::$_instance) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            Das Überschreiben der <code>getInstance()</code>-Methode sorgt dafür, dass folgende Aufrufe von
+            <classname>Zend_Controller_Front::getInstance()</classname> eine Instanz der neuen Subklasse zurückgeben anstatt
+            einer <classname>Zend_Controller_Front</classname>-Instanz -- das ist speziell für einige der alternativen Router
+            und View-Helfer nützlich.
+        </para>
+
+        <para>
+            Typischerweise muss der Front-Controller nicht erweitert werden, es sei denn, es ist gewünscht, neue
+            Funktionalität (wie zum Beispiel einen Plugin-Autoloader oder einen Weg, Action-Helper-Pfade anzugeben)
+            hinzuzufügen. Einige Gelegenheiten, bei denen das Standard-Verhalten geändert werden könnte, wären zum
+            Beispiel die Art, wie Controller geladen oder deren Pfade gespeichert werden, oder welcher Standard-Router
+            und/oder Dispatcher benutzt werden.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

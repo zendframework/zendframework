@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.file.transfer.introduction">
+
+    <title>Zend_File_Transfer</title>
+
+    <para>
+        <classname>Zend_File_Transfer</classname> を使用すると、
+        ファイルのアップロードやダウンロードを管理することができます。
+        組み込みのバリデータを使ってファイルを検証したり、
+        フィルタによってファイルを変更したりという機能があります。
+        <classname>Zend_File_Transfer</classname> はアダプタ形式を採用しており、
+        HTTP や FTP、WEBDAV などのさまざまな転送プロトコルを同じ API で使用することができます。
+    </para>
+
+    <note>
+        <title>制限</title>
+        <para>
+            現在の <classname>Zend_File_Transfer</classname>
+            の実装では、HTTP Post によるアップロードにしか対応していません。
+            ファイルのダウンロードやその他のアダプタについては次のリリースで追加される予定です。
+            実装されていないメソッドを実行すると例外をスローします。
+            したがって、実際のところは
+            <classname>Zend_File_Transfer_Adapter_Http</classname>
+            のインスタンスを直接操作することになります。
+            これは、将来複数のアダプタが使用可能になった段階で変更される予定です。
+        </para>
+    </note>
+
+    <note>
+        <title>フォーム</title>
+        <para>
+            <classname>Zend_Form</classname> を使う場合は <classname>Zend_Form</classname>
+            の API を使うようにし、<classname>Zend_File_Transfer</classname>
+            を直接使わないようにしましょう。<classname>Zend_Form</classname>
+            のファイル転送機能は <classname>Zend_File_Transfer</classname>
+            で実装されているので、この章の説明は <classname>Zend_Form</classname>
+            のユーザにも有用です。
+        </para>
+    </note>
+
+    <para>
+        <classname>Zend_File_Transfer</classname> の使い方はきわめて単純です。
+        ふたつの部分から成り立っており、
+        アップロードを行う HTTP フォームとアップロードされたファイルを
+        <classname>Zend_File_Transfer</classname> で処理するコードを作成します。
+        次の例を参照ください。
+    </para>
+
+    <example id="zend.file.transfer.introduction.example">
+        <title>シンプルなファイルアップロードフォーム</title>
+        <para>
+            これは、基本的なファイルアップロード処理の例です。
+            まずはファイルアップロードフォームから。
+            今回の例では。アップロードしたいファイルはひとつです。
+        </para>
+        <programlisting><![CDATA[
+<form enctype="multipart/form-data" action="/file/upload" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+        アップロードするファイルを選択: <input name="uploadedfile" type="file" />
+    <br />
+    <input type="submit" value="アップロード" />
+</form>
+]]>
+</programlisting>
+        <para>
+            HTML を直接作成するのではなく、利便性を考慮して
+            <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link>
+            を使っていることに注意しましょう。
+        </para>
+        <para>
+            次はアップロードしたファイルを受け取る側です。
+            今回の例では、受け取る側は <code>/file/upload</code>
+            となります。そこで、<code>file</code> コントローラにアクション
+            <code>upload</code> を作成します。
+        </para>
+        <programlisting role="php"><![CDATA[
+$adapter = new Zend_File_Transfer_Adapter_Http();
+
+$adapter->setDestination('C:\temp');
+
+if (!$adapter->receive()) {
+    $messages = $adapter->getMessages();
+    echo implode("\n", $messages);
+}
+]]>
+        </programlisting>
+        <para>
+            このコードは <classname>Zend_File_Transfer</classname> のもっともシンプルな使用法を示すものです。
+            ローカルの保存先を <code>setDestination</code> メソッドで指定して
+            <code>receive()</code> メソッドをコールします。
+            アップロード時に何らかのエラーが発生した場合は、
+            返された例外の中でその情報を取得することができます。
+        </para>
+
+    </example>
+
+    <note>
+        <title>注意</title>
+        <para>
+            この例は、<classname>Zend_File_Transfer</classname> の基本的な API を説明するためだけのものです。
+            これをそのまま実際の環境で使用しては
+            <emphasis role="strong">いけません</emphasis>。
+            深刻なセキュリティ問題を引き起こしてしまいます。
+            常にバリデータを使用してセキュリティを向上させるようにしなければなりません。
+        </para>
+    </note>
+
+    <sect2 id="zend.file.transfer.introduction.adapters">
+
+        <title>Zend_File_Transfer がサポートするアダプタ</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname> は、
+            さまざまなアダプタと転送方向をサポートするように作られています。
+            ファイルのアップロードやダウンロードだけでなく、転送
+            (あるアダプタでのアップロードと別のアダプタでのダウンロードを同時に行う)
+            にも対応できるように設計されています。
+            しかし、Zend Framework 1.6 の時点で存在するアダプタは
+            Http アダプタひとつだけです。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.options">
+
+        <title>Zend_File_Transfer のオプション</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname> やそのアダプタはさまざまなオプションをサポートしています。
+            オプションはコンストラクタで指定することもできますし、
+            <code>setOptions($options)</code> で指定することもできます。
+            <code>getOptions()</code> は、実際に設定されているオプションを返します。
+            サポートするオプションは次のとおりです。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="strong">ignoreNoFile</emphasis>: このオプションを true にすると、
+                    ファイルがフォームからアップロードされなかったときにバリデータは何も行いません。
+                    このオプションのデフォルトは false で、
+                    この場合はファイルがアップロードされなければエラーとなります。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.checking">
+
+        <title>ファイルのチェック</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname>
+            のメソッドの中には、さまざまな前提条件をチェックするためのものもあります。
+            これらは、アップロードされたファイルを処理する際に便利です。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="strong">isValid($files = null)</emphasis>: このメソッドは、
+                    ファイルにアタッチされたバリデータを用いてそのファイルが妥当なものかどうかを検証します。
+                    ファイル名を省略した場合はすべてのファイルをチェックします。
+                    <code>isValid()</code> を <code>receive()</code> の前にコールすることもできます。
+                    この場合、<code>receive()</code> がファイルを受信する際に内部的に
+                    <code>isValid</code> をコールすることはありません。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">isUploaded($files = null)</emphasis>: このメソッドは、
+                    指定したファイルがユーザによってアップロードされたものなのかどうかを調べます。
+                    これは、複数のファイルを任意でアップロードできるようにする場合などに便利です。
+                    ファイル名を省略した場合はすべてのファイルをチェックします。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">isReceived($files = null)</emphasis>: このメソッドは、
+                    指定したファイルがすでに受信済みであるかどうかを調べます。
+                    ファイル名を省略した場合はすべてのファイルをチェックします。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.file.transfer.introduction.checking.example">
+            <title>ファイルのチェック</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+
+// すべての既知の内部ファイル情報を返します
+$files = $upload->getFileInfo();
+
+foreach ($files as $file => $info) {
+    // アップロードされたファイルか ?
+    if (!$upload->isUploaded($file)) {
+        print "ファイルをアップロードしてください";
+        continue;
+    }
+
+    // バリデータを通過したか ?
+    if (!$upload->isValid($file)) {
+        print "$file は不適切です";
+        continue;
+    }
+}
+
+$upload->receive();
+]]>
+            </programlisting>
+
+        </example>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.informations">
+
+        <title>さらなるファイル情報</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname> は、ファイルについてのさらなる情報を返すことができます。
+            次のメソッドが使用可能です。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis role="strong">getFileName($file = null, $path = true)</emphasis>:
+                    このメソッドは、転送されたファイルの実際のファイル名を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">getFileInfo($file = null)</emphasis>:
+                    このメソッドは、転送されたファイルのすべての内部情報を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">getFileSize($file = null)</emphasis>:
+                    このメソッドは、指定したaifるの実際のファイルサイズを返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">getHash($hash = 'crc32', $files = null)</emphasis>:
+                    このメソッドは、転送されたファイルの内容のハッシュを返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis role="strong">getMimeType($files = null)</emphasis>:
+                    このメソッドは、転送されたファイルの mimetype を返します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            <code>getFileName()</code> の最初のパラメータには、
+            要素の名前を渡すことができます。名前を省略した場合は、
+            すべてのファイル名を配列で返します。
+            multifile 形式であった場合も結果は配列となります。
+            ファイルがひとつだけだった場合は結果を文字列で返します。
+        </para>
+
+        <para>
+            デフォルトでは、ファイル名はフルパス形式で返されます。
+            パス抜きのファイル名だけがほしい場合は、2 番目のパラメータ
+            <code>$path</code> を設定します。これを false
+            にするとパスの部分を取り除いた結果を返します。
+        </para>
+
+        <example id="zend.file.transfer.introduction.informations.example1">
+            <title>ファイル名の取得</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// すべてのファイルのファイル名を返します
+$names = $upload->getFileName();
+
+// フォームの 'foo' 要素のファイル名を返します。
+$names = $upload->getFileName('foo');
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <para>
+                ファイルを受信する際にファイル名が変わることがあることに注意しましょう。
+                これは、ファイルを受信した後ですべてのフィルタが適用されるからです。
+                <code>getFileName()</code> をコールするのは、ファイルを受信してからでなければなりません。
+            </para>
+        </note>
+
+        <para>
+            <code>getFileSize()</code> は、デフォルトではファイルサイズを SI 記法で返します。
+            つまり、たとえば <code>2048</code> ではなく <code>2kB</code>
+            のようになるということです。単にサイズだけが知りたい場合は、オプション
+            <code>useByteString</code> を false に設定してください。
+        </para>
+
+        <example id="zend.file.transfer.introduction.informations.example.getfilesize">
+            <title>ファイルのサイズの取得</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// 複数のファイルがアップロードされた場合は、すべてのファイルのサイズを配列で返します
+$size = $upload->getFileSize();
+
+// SI 記法を無効にし、数値のみを返すようにします
+$upload->setOption(array('useByteString' => false));
+$size = $upload->getFileSize();
+]]>
+            </programlisting>
+
+        </example>
+
+        <para>
+            <code>getHash()</code> の最初のパラメータには、ハッシュアルゴリズムの名前を指定します。
+            使用できるアルゴリズムについては
+            <ulink url="http://php.net/hash_algos">PHP の hash_algos メソッド</ulink>
+            を参照ください。アルゴリズムを省略した場合は
+            <code>crc32</code> をデフォルトのアルゴリズムとして使用します。
+        </para>
+
+        <example id="zend.file.transfer.introduction.informations.example2">
+            <title>ファイルのハッシュの取得</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+// 複数のファイルがアップロードされた場合は、すべてのファイルのハッシュを配列で返します
+$hash = $upload->getHash('md5');
+
+// フォームの 'foo' 要素のハッシュを返します。
+$names = $upload->getHash('crc32', 'foo');
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <para>
+                複数のファイルを指定した場合は、返される結果が配列となることに注意しましょう。
+            </para>
+        </note>
+
+        <para>
+            <code>getMimeType()</code> はファイルの mimetype を返します。
+            複数のファイルがアップロードされた場合は配列、そうでない場合は文字列を返します。
+        </para>
+
+        <example id="zend.file.transfer.introduction.informations.getmimetype">
+            <title>ファイルの mimetype の取得</title>
+
+            <programlisting role="php"><![CDATA[
+$upload = new Zend_File_Transfer();
+$upload->receive();
+
+$mime = $upload->getMimeType();
+
+// フォーム要素 'foo' の mimetype を返します
+$names = $upload->getMimeType('foo');
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <para>
+                このメソッドは、fileinfo 拡張モジュールが使用可能な場合はそれを使用することに注意しましょう。
+                この拡張モジュールがみつからなかった場合は、mimemagic 拡張モジュールを使用します。
+                それもみつからなかった場合は、ファイルがアップロードされた際にファイルサーバから渡された
+                mimetype を使用します。
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.file.transfer.introduction.uploadprogress">
+
+        <title>ファイルアップロードの進捗</title>
+
+        <para>
+            <classname>Zend_File_Transfer</classname> では、ファイルアップロードの進捗状況を知ることができます。
+            この機能を使用するには、<code>APC</code> 拡張モジュール
+            (ほとんどの PHP 環境においてデフォルトで提供されています)
+            あるいは <code>uploadprogress</code> 拡張モジュールが必要です。
+            これらの拡張モジュールがインストールされていれば、自動検出してそれを使用します。
+            進捗状況を取得するには、いくつかの事前条件があります。
+        </para>
+
+        <para>
+            まず、<code>APC</code> あるいは <code>uploadprogress</code>
+            のいずれかを有効にする必要があります。<code>APC</code>
+            の機能は php.ini で無効化できることに注意しましょう。
+        </para>
+
+        <para>
+            次に、ファイルを送信するフォームの中に適切な hidden
+            フィールドを追加しなければなりません。<classname>Zend_Form_Element_File</classname>
+            を使う場合は、この hidden フィールドは
+            <classname>Zend_Form</classname> が自動的に追加します。
+        </para>
+
+        <para>
+            これらふたつの条件さえ満たせば、ファイルアップロードの進捗状況を
+            <code>getProgress</code> メソッドで取得することができます。
+            実際には、これを処理する公式な方法は 2 通りあります。
+        </para>
+
+        <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">
+
+            <title>progressbar アダプタを使用する</title>
+
+            <para>
+                <emphasis>Zend_ProgressBar</emphasis> を使用して、
+                実際の進捗状況を取得した上でそれをシンプルにユーザに見せることができます。
+            </para>
+
+            <para>
+                そのためには、<code>getProgress()</code> を最初にコールするときにお望みの
+                <emphasis>Zend_ProgressBar_Adapter</emphasis> を追加しなければなりません。
+                どのアダプタを使用すればいいのかについては
+                <link linkend="zend.progressbar.adapters">Zend_ProgressBar の標準のアダプタ</link>
+                の章を参照ください。
+            </para>
+
+            <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
+
+                <title>progressbar アダプタを使用した実際の状態の取得</title>
+
+                <programlisting role="php"><![CDATA[
+$adapter = new Zend_ProgressBar_Adapter_Console();
+$upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
+
+$upload = null;
+while (!$upload['done']) {
+    $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
+}
+]]>
+                </programlisting>
+
+            </example>
+
+            <para>
+                完全な処理は、バックグラウンドで <code>getProgress()</code> によって行われます。
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.file.transfer.introduction.uploadprogress.manually">
+
+            <title>getProgress() を手動で使用する</title>
+
+            <para>
+                <classname>Zend_ProgressBar</classname> を使わずに手動で
+                <code>getProgress()</code> を動作させることもできます。
+            </para>
+
+            <para>
+                <code>getProgress()</code> を何も設定なしでコールします。
+                すると、いくつかのキーを含む配列が返されます。
+                使用している PHP 拡張モジュールによってその内容は異なります。
+                しかし、次のキーは拡張モジュールにかかわらず返されます。
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">id</emphasis>:
+                        このアップロードの ID。その拡張モジュール内でのアップロードを一意に識別します。
+                        自動的に設定され、この値は決して変更することができません。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">total</emphasis>:
+                        アップロードされたファイル全体のサイズをバイト単位で表した整数値。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">current</emphasis>:
+                        現在までにアップロードされたファイルサイズをバイト単位で表した整数値。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">rate</emphasis>:
+                        アップロードの平均速度を「バイト/秒」単位で表した整数値。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">done</emphasis>:
+                        アップロードがいつ終了したのかを返します。
+                        終了していない場合は false を返します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">message</emphasis>:
+                        実際のメッセージ。進捗を <emphasis role="strong">10kB / 200kB</emphasis>
+                        形式で表したテキストか、何か問題が起こった場合には有用なメッセージとなります。
+                        「問題」とは、何もアップロード中でない場合や
+                        進捗状況の取得に失敗した場合、あるいはアップロードがキャンセルされた場合を意味します。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">progress</emphasis>:
+                        このオプションキーには Zend_ProgressBar_Adapter あるいは
+                        Zend_ProgressBar のインスタンスが含まれ、
+                        プログレスバー内から実際のアップロード状況を取得できるようになります。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">session</emphasis>:
+                        このオプションキーには Zend_ProgressBar
+                        内で使用するセッション名前空間の名前が含まれます。
+                        このキーが与えられなかったときのデフォルトは
+                        <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname> です。
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                それ以外に返されるキーについては各拡張モジュールが直接返すものであり、
+                チェックしていません。
+            </para>
+
+            <para>
+                次の例は、手動で使用する方法を示すものです。
+            </para>
+
+            <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
+
+                <title>手動での進捗状況表示の使用法</title>
+
+                <programlisting role="php"><![CDATA[
+$upload  = Zend_File_Transfer_Adapter_Http::getProgress();
+
+while (!$upload['done']) {
+    $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
+    print "\nActual progress:".$upload['message'];
+    // 何か必要な処理をします
+}
+]]>
+                </programlisting>
+
+            </example>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 tw=80 et:
+-->

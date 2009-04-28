@@ -1,0 +1,18 @@
+<!-- EN-Revision: 12754 -->
+<sect1 id="zend.mail.boundary">
+    <title>Contrôler les limites MIME</title>
+
+    <para>Dans un message en plusieurs parties, une limite MIME est normalement générée aléatoirement pour séparer les
+    différentes parties du message. Cependant dans le cas où vous souhaiteriez spécifier vous-même la limite MIME
+    utilisée, vous pouvez appeler la méthode <code>setMimeBoundary()</code>, comme le montre l'exemple suivant :</para>
+
+    <example id="zend.mail.boundary.example-1">
+        <title>Changer la limite MIME</title>
+
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
+// construction du message...
+]]></programlisting>
+    </example>
+</sect1>

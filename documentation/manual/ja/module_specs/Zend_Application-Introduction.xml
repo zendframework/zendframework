@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.application.introduction">
+    <title>導入</title>
+
+    <para>
+        <classname>Zend_Application</classname>は再利用可能なリソースや、共通の、かつ
+        モジュールベースのブートストラップクラス、および依存性の検査を提供する
+        アプリケーションのためのブートストラップの便宜を提供します。
+        さらにPHP環境の設定や既定値の自動的な読み込みを始めるように面倒を見ます。
+    </para>
+</sect1>

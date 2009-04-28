@@ -1,0 +1,121 @@
+<sect1 id="zend.translate.introduction">
+
+    <title>简介</title>
+
+    <para>
+        Zend_Translate是Zend框架为多语言应用程序提供的一个解决方案.
+    </para>
+
+    <para>
+        在多语言应用程序中,内容必须翻译为多种语言,并且根据用户的语言设置显示相应的内容.
+        PHP已经提供了几个方法处理这样的问题,但是存在一些问题:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis role="strong">不一致的API:</emphasis>
+                对于不同的源格式没有单一的API.gettext的使用非常复杂.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">PHP仅支持gettext和原生数组:</emphasis>
+                PHP本生仅为数组和gettext提供支持 . 所有其他的源格式必须自己进行处理,因为没有提供原生的支持.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">不检测默认语言:</emphasis>
+                没有深入的不同浏览器的背景知识,用户的默认语言不能被检测.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">Gettext 是非线程安全的:</emphasis>
+                PHP'的gettext库不是现在安全的,并且它不应该用于多线程环境中.这是由于gettex本生的问题而不是PHP,但却是一个存在的问题.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Zend_Translate没有上面的问题.这就是为什么我们推进使用Zend_Translate而不是PHP的原生函数.Zend_Translate的优点有:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis role="strong">
+                    支持多种源格式:
+                </emphasis>
+                Zend_Translate 支持多种源格式,
+                包括被PHP支持的,和其他的格式,包括TMX和CSV文件.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">线程安全的gettext:</emphasis>
+                Zend_Translate 的 gettext reader是线程安全的.在多线程的环境中使用它没有问题.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">简易并且通用的API:</emphasis>
+                Zend_Translate的API非常简单并且只要求少数的函数.因此易于学习和维护.所有的源格式用同样的方法处理,如果你的源格式从Gettext改为TMX,
+                你只需要改变一行代码指定存储适配器.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <emphasis role="strong">
+                    用户的标准语言检测:
+                </emphasis>
+                用户访问站点的首选语言能够通过被检测并被Zend_Translate使用。
+            </para>
+        </listitem>
+        <listitem>
+      <para>
+       <emphasis role="strong"> 自动源文检测：</emphasis>
+        Zend_Translate 能够检测和集成多个源文件并根据文件名或目录另外地检测哪个地方（locale）在用。
+      </para>
+    </listitem>
+    </itemizedlist>
+
+    <sect2 id="zend.translate.introduction.adapters">
+
+        <title>开始多语言化</title>
+
+        <para>
+            让我们打开多语言Web应用程序的窗口.我们想做的是转换字符串,产生翻译后的输出.
+            否则我们不得不给每种语言都写一个视图,没人愿意这么做.通常,多语言站点在设计中是非常简单的.仅有4个必须做的步骤:
+        </para>
+
+        <orderedlist numeration='arabic'>
+            <listitem>
+                <para>决定你想使用那个适配器;</para>
+            </listitem>
+            <listitem>
+                <para>
+                    创建视图并把Zend_Translate集成到你的代码中.
+                </para>
+            </listitem>
+            <listitem>
+                <para>从你的代码中创建源文件;</para>
+            </listitem>
+            <listitem>
+                <para>
+                    翻译你的源文件为所期望的语言.
+                </para>
+            </listitem>
+        </orderedlist>
+
+        <para>
+            下面的章节将指导你通过全部4个步骤.读取接下来的一些页面创建你自己的多语言web应用程序.
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+    vim:se ts=4 sw=4 et:
+-->

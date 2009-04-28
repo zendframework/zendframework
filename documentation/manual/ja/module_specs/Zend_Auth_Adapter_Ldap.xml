@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.auth.adapter.ldap">
+
+    <title>LDAP 認証</title>
+
+    <sect2 id="zend.auth.adapter.ldap.introduction">
+
+        <title>導入</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Ldap</classname> は、LDAP
+            サービスによるウェブアプリケーションの認証をサポートします。
+            ユーザ名やドメイン名の正規化や複数ドメインの認証、
+            フェイルオーバー機能などがあります。
+            <ulink url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
+            Active Directory</ulink>
+            と
+            <ulink url="http://www.openldap.org/">OpenLDAP</ulink>
+            で動作確認をしていますが、それ以外の LDAP
+            サービスプロバイダでも動作するはずです。
+        </para>
+
+        <para>
+            このドキュメントで扱う内容は、
+            <classname>Zend_Auth_Adapter_Ldap</classname> の使い方やその API、
+            使用可能なオプション、トラブルシューティングの方法、
+            そして Active Directory 用および OpenLDAP 用の設定例です。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.usage">
+
+        <title>使用法</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Ldap</classname> による認証をアプリケーションに手っ取り早く組み込むには、
+            <classname>Zend_Controller</classname> を使うかどうかにかかわらず、次のようなコードを書くことになります。
+            <programlisting role="php"><![CDATA[
+$username = $this->_request->getParam('username');
+$password = $this->_request->getParam('password');
+
+$auth = Zend_Auth::getInstance();
+
+$config = new Zend_Config_Ini('../application/config/config.ini',
+                              'production');
+$log_path = $config->ldap->log_path;
+$options = $config->ldap->toArray();
+unset($options['log_path']);
+
+$adapter = new Zend_Auth_Adapter_Ldap($options, $username,
+                                      $password);
+
+$result = $auth->authenticate($adapter);
+
+if ($log_path) {
+    $messages = $result->getMessages();
+
+    $logger = new Zend_Log();
+    $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
+    $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
+    $logger->addFilter($filter);
+
+    foreach ($messages as $i => $message) {
+        if ($i-- > 1) { // $messages[2] 以降はログメッセージです
+            $message = str_replace("\n", "\n  ", $message);
+            $logger->log("Ldap: $i: $message", Zend_Log::DEBUG);
+        }
+    }
+}
+]]>
+            </programlisting>
+            もちろんログを記録するかどうかは自由ですが、
+            ロガーを使用することを強く推奨します。
+            <classname>Zend_Auth_Adapter_Ldap</classname> は、皆がほしがるであろう情報をすべて
+            <code>$messages</code> (詳細は以下で) に記録します。
+            この機能を使用すれば、デバッグを容易に行えるようになります。
+        </para>
+
+        <para>
+            上のコードでは、<classname>Zend_Config_Ini</classname> を用いてアダプタのオプションを読み込んでいます。
+            これもまた必須ではありません。普通の配列を使用しても同様に動作します。
+            以下に <code>application/config/config.ini</code> ファイルの例を示します。
+            このファイルでは、ふたつの別のサーバの設定を記述しています。
+            複数のサーバのオプションを設定しておくと、
+            アダプタ側では認証に成功するまで順にそれぞれのサーバへの認証を試みます。
+            サーバの名前 (<code>server1</code> や <code>server2</code> など)
+            は任意です。オプション配列についての詳細は、以下の
+            <emphasis>サーバのオプション</emphasis> に関するセクションを参照ください。
+            <classname>Zend_Config_Ini</classname> では、等号
+            (<code>=</code>) を含む値 (以下の例では DN など)
+            はクォートしなければならないことに注意しましょう。
+            <programlisting role="ini"><![CDATA[
+[production]
+
+ldap.log_path = /tmp/ldap.log
+
+; OpenLDAP 用の設定の例
+ldap.server1.host = s0.foo.net
+ldap.server1.accountDomainName = foo.net
+ldap.server1.accountDomainNameShort = FOO
+ldap.server1.accountCanonicalForm = 3
+ldap.server1.username = "CN=user1,DC=foo,DC=net"
+ldap.server1.password = pass1
+ldap.server1.baseDn = "OU=Sales,DC=foo,DC=net"
+ldap.server1.bindRequiresDn = true
+
+; Active Directory 用の設定の例
+ldap.server2.host = dc1.w.net
+ldap.server2.useStartTls = true
+ldap.server2.accountDomainName = w.net
+ldap.server2.accountDomainNameShort = W
+ldap.server2.accountCanonicalForm = 3
+ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
+]]>
+</programlisting>
+            この設定を使用すると、<classname>Zend_Auth_Adapter_Ldap</classname>
+            はまず OpenLDAP サーバ <code>s0.foo.net</code> でのユーザ認証を試みます。
+            何らかの理由で認証に失敗した場合は、AD サーバ
+            <code>dc1.w.net</code> を用いて認証を試みます。
+        </para>
+
+        <para>
+            異なるドメインのサーバを指定したことで、
+            この設定では複数ドメインの認証を行えるようになっています。
+            同一ドメイン内の複数サーバを指定して冗長性を確保することもできます。
+        </para>
+
+        <para>
+            この場合、OpenLDAP には短い形式の NetBIOS ドメイン名 (Windows で使用するもの)
+            は不要ですが、設定していることに注意しましょう。これは、名前の正規化のために使用します
+            (以下の <emphasis>ユーザ名の正規化</emphasis> のセクションを参照ください)。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.api">
+
+        <title>API</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Ldap</classname> のコンストラクタは、3 つのパラメータを受け取ります。
+        </para>
+
+        <para>
+            <code>$options</code> パラメータは必須で、
+            ひとつあるいは複数のオプションを含む配列でなければなりません。
+            これは、<link linkend="zend.ldap"><classname>Zend_Ldap</classname></link> のオプションの
+            <emphasis>配列の配列</emphasis> であることに注意しましょう。
+            単一の LDAP サーバの設定のみを指定する場合でも、
+            「設定オプションの配列を配列の中に格納する」形式でなければなりません。
+        </para>
+
+        <para>
+            以下に、サンプルのオプションパラメータを
+            <ulink url="http://php.net/print_r"><code>print_r()</code></ulink>
+            で出力した例を示します。これは、ふたつの LDAP サーバ
+            <code>s0.foo.net</code> と
+            <code>dc1.w.net</code> の設定を含むものです
+            (先ほどの INI ファイルと同じ設定です)。
+            <programlisting role="output"><![CDATA[
+Array
+(
+    [server2] => Array
+        (
+            [host] => dc1.w.net
+            [useStartTls] => 1
+            [accountDomainName] => w.net
+            [accountDomainNameShort] => W
+            [accountCanonicalForm] => 3
+            [baseDn] => CN=Users,DC=w,DC=net
+        )
+
+    [server1] => Array
+        (
+            [host] => s0.foo.net
+            [accountDomainName] => foo.net
+            [accountDomainNameShort] => FOO
+            [accountCanonicalForm] => 3
+            [username] => CN=user1,DC=foo,DC=net
+            [password] => pass1
+            [baseDn] => OU=Sales,DC=foo,DC=net
+            [bindRequiresDn] => 1
+        )
+
+)
+]]>
+</programlisting>
+            上の各オプションで設定した内容の違いの主な理由は、AD へのバインド時にはユーザ名が
+            DN 形式である必要がないということです (以下の <emphasis>サーバのオプション</emphasis>
+            における <code>bindRequiresDn</code> の説明を参照ください)。
+            つまり、認証時のユーザ名から DN を取得するために使用する多くのオプションは
+            省略できるということです。
+        </para>
+
+        <note>
+            <title>Distinguished Name とは?</title>
+            <para>
+                DN ("distinguished name") とは、
+                LDAP ディレクトリ内のオブジェクトへのパスを表す文字列のことです。
+                カンマで区切られた各部分が、ノードを表す属性と値となります。
+                各部分は逆順に評価されます。たとえば、ユーザアカウント
+                <emphasis>CN=Bob Carter,CN=Users,DC=w,DC=net</emphasis> は、ディレクトリ
+                <emphasis>CN=Users,DC=w,DC=net container</emphasis> の配下に位置することになります。
+                この構造をたどるには、ADSI Edit MMC snap-in for Active Directory や phpLDAPadmin
+                といった LDAP ブラウザが最適です。
+            </para>
+        </note>
+
+        <para>
+            サーバの名前 (上の例における '<code>server1</code>' や '<code>server2</code>')
+            は基本的には何でもかまいません。しかし、<classname>Zend_Config</classname> を用いる場合は、
+            (数値インデックスではなく) 識別子を使用しなければなりません。また、
+            各ファイルフォーマットで特別な意味を持つ文字
+            (INI のプロパティ区切り文字 '<code>.</code>' や
+            XML エンティティ参照の '<code>&amp;</code>' など)
+            は含まないようにしましょう。
+        </para>
+
+        <para>
+            複数のサーバオプションを設定しておけば、
+            このアダプタで複数ドメインのユーザ認証を行うことができます。
+            また、ひとつのサーバが使用できない場合に別のサーバに問い合わせを行う
+            フェイルオーバー機能も提供することができます。
+        </para>
+
+        <note>
+            <title>認証メソッドの中では実際に何が行われているのか?</title>
+            <para>
+                <code>authenticate()</code> メソッドがコールされると、
+                アダプタは各サーバ設定を順に処理し、内部で管理する
+                <classname>Zend_Ldap</classname> のインスタンスに設定したうえでユーザ名とパスワードを指定して
+                <classname>Zend_Ldap::bind()</classname> メソッドをコールします。
+                <classname>Zend_Ldap</classname> クラスは、そのユーザ名がドメインつきのものであるかどうか
+                (<emphasis>alice@foo.net</emphasis> や <emphasis>FOO\alice</emphasis> といった形式であるかどうか)
+                を調べます。ドメインが指定されているけれどもそれがどのサーバのドメイン名
+                (<emphasis>foo.net</emphasis> あるいは <emphasis>FOO</emphasis>)
+                とも一致しない場合は、特別な例外がスローされます。この例外は
+                <classname>Zend_Auth_Adapter_Ldap</classname> で捕捉され、
+                そのサーバを無視して次に指定されているサーバ設定を利用するようにします。
+                ドメインがマッチ <emphasis>しない</emphasis> 場合、
+                あるいはユーザがドメインつきのユーザ名を指定しなかった場合は、
+                <classname>Zend_Ldap</classname> は指定された認証情報でのバインドを試みます。
+                バインドに失敗した場合は <classname>Zend_Ldap</classname> は <classname>Zend_Ldap_Exception</classname>
+                をスローします。これは <classname>Zend_Auth_Adapter_Ldap</classname> で捕捉され、
+                次に設定されているサーバでの認証を試みます。
+                バインドが成功した場合はそこで処理を終了し、アダプタの <code>authenticate()</code>
+                メソッドは成功したという結果を返します。
+                設定されているサーバをすべて試したけれどもどれも成功しなかったという場合は、
+                認証は失敗し、<code>authenticate()</code> は最後のエラーメッセージとともにその結果を返します。
+            </para>
+        </note>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Ldap</classname> コンストラクタのパラメータに渡す
+            ユーザ名とパスワードは、認証に用いる情報
+            (つまり、HTML のログインフォームでユーザが入力した情報)
+            を表します。これらは、<code>setUsername()</code> メソッドと
+            <code>setPassword()</code> メソッドで指定することもできます。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.server-options">
+
+        <title>サーバのオプション</title>
+
+        <para>
+            <emphasis><classname>Zend_Auth_Adapter_Ldap</classname> のコンテキストにおける</emphasis>
+            サーバのオプションは次のようなものです。これらは、ほとんどそのままの形で
+            <classname>Zend_Ldap::setOptions()</classname> に渡されます。
+
+            <table id="zend.auth.adapter.ldap.server-options.table">
+              <title>サーバのオプション</title>
+              <tgroup cols="2">
+                <thead>
+                  <row>
+                    <entry>名前</entry>
+                    <entry>説明</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry><emphasis role="strong">host</emphasis></entry>
+                    <entry>
+                        このオプションが表す LDAP サーバのホスト名。必須です。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">port</emphasis></entry>
+                    <entry>
+                        LDAP サーバが待ち受けるポート。<emphasis role="strong">useSsl</emphasis> が
+                        <code>true</code> の場合、デフォルトの <emphasis role="strong">port</emphasis>
+                        は 636 となります。<emphasis role="strong">useSsl</emphasis> が <code>false</code>
+                        の場合、デフォルトの <emphasis role="strong">port</emphasis> は 389 です。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>useStartTls</entry>
+                    <entry>
+                        LDAP クライアントが TLS (SSLv2) で暗号化されたトランスポートを用いるかどうか。
+                        実運用環境では、この値を <code>true</code> にすることを強く推奨します。
+                        そうすれば、パスワードが平文で転送されることを防ぐことができます。
+                        デフォルト値は <code>false</code> です。
+                        というのも、別途証明書のインストールを要するサーバが多く存在するからです。
+                        <code>useSsl</code> と <code>useStartTls</code> は互いに排他的です。
+                        <code>useStartTls</code> オプションのほうが <code>useSsl</code>
+                        よりおすすめですが、中にはこの新しい仕組みをサポートしていないサーバもあります。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>useSsl</entry>
+                    <entry>
+                        LDAP クライアントが SSL で暗号化されたトランスポートを用いるかどうか。
+                        <code>useSsl</code> と <code>useStartTls</code> は互いに排他的ですが、
+                        サーバや LDAP クライアントライブラリが対応している場合は
+                        <code>useStartTls</code> を使うことを推奨します。
+                        この値によって、デフォルトの <emphasis role="strong">port</emphasis>
+                        の値が変わります (上の <emphasis role="strong">port</emphasis> の説明を参照ください)。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">username</emphasis></entry>
+                    <entry>
+                        アカウントの DN を探す際に使用するアカウントの DN。
+                        バインド時のユーザ名が DN 形式であることを要求する
+                        LDAP サーバで、このオプションを使用します。
+                        <emphasis role="strong">bindRequiresDn</emphasis> が <code>true</code>
+                        の場合はこのオプションが必須となります。
+                        このアカウントは特権アカウントである必要はありません。<emphasis role="strong">baseDn</emphasis>
+                        配下のオブジェクトに対する読み込み権限がありさえすればいいのです
+                        (これは <emphasis>Principle of Least Privilege: 最小特権の原則</emphasis>
+                        にもかなっています)。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">password</emphasis></entry>
+                    <entry>
+                        アカウントの DN を探す際に使用するアカウントのパスワード。
+                        このオプションを省略した場合は、LDAP クライアントがアカウントの DN
+                        を探す際に "匿名バインド" を試みます。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                    <entry>
+                        LDAP サーバによっては、バインド時に使用するユーザ名が
+                        <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis>
+                        のような DN 形式でなければならないものもあります (基本的に、AD
+                        <emphasis>以外</emphasis> のすべてのサーバがそうです)。
+                        このオプションが <code>true</code> の場合、
+                        もし認証対象のユーザ名が DN 形式でなければ
+                        <classname>Zend_Ldap</classname> に自動的に DN を取得させ、
+                        その DN で再度バインドさせるようにします。
+                        デフォルト値は <code>false</code> です。現時点で、
+                        バインド時のユーザ名が DN 形式で <emphasis>なくてもよい</emphasis>
+                        サーバとして知られているのは Microsoft Active Directory Server (ADS)
+                        のみです。したがって、AD を使用する場合はこのオプションを
+                        <code>false</code> にしてもかまいません (そうするべきです。
+                        DN を取得するために、サーバとの余計なやりとりが発生してしまうわけですから)。
+                        それ以外の場合 (OpenLDAP など) は、このオプションを
+                        <code>true</code> にしなければなりません。このオプションは、
+                        アカウントを検索する際に使用する
+                        <emphasis role="strong">acountFilterFormat</emphasis>
+                        のデフォルト値にも影響を及ぼします。
+                        <emphasis role="strong">accountFilterFormat</emphasis>
+                        オプションも参照ください。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">baseDn</emphasis></entry>
+                    <entry>
+                        認証対象となるアカウントが配置されている場所の DN。このオプションは必須です。
+                        正しい <emphasis role="strong">baseDn</emphasis> の値がよくわからない場合は、
+                        ユーザの DNS ドメインを <emphasis>DC=</emphasis>
+                        コンポーネントで表したものと考えれば差し支えないでしょう。
+                        たとえば、ユーザ名が <emphasis>alice@foo.net</emphasis> である場合は
+                        <emphasis role="strong">baseDn</emphasis> を <emphasis>DC=foo,DC=net</emphasis>
+                        とすれば動作するでしょう。しかし、より正確な場所
+                        (<emphasis>OU=Sales,DC=foo,DC=net</emphasis> など)
+                        を指定したほうが効率的です。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                    <entry>
+                        2、3 あるいは 4 を指定し、認証に成功した後のアカウント名の正規化方式を指定します。
+                        それぞれの値の意味は次のとおりです。2 は伝統的なユーザ名 (例:
+                        <emphasis>alice</emphasis>)、3 はバックスラッシュ形式の名前 (例: <emphasis>FOO\alice</emphasis>)
+                        そして 4 はプリンシパル形式のユーザ名 (例: <emphasis>alice@foo.net</emphasis>)
+                        となります。デフォルト値は 4 (例: <emphasis>alice@foo.net</emphasis>) です。
+                        たとえば 3 を指定したとすると、<classname>Zend_Auth_Result::getIdentity()</classname>
+                        (<classname>Zend_Auth</classname> を使う場合は <classname>Zend_Auth::getIdentity()</classname>)
+                        の返す識別子は常に <emphasis>FOO\alice</emphasis> となります。これは、Alice が入力した内容が
+                        <emphasis>alice</emphasis>、<emphasis>alice@foo.net</emphasis>、<emphasis>FOO\alice</emphasis>、
+                        <emphasis>FoO\aLicE</emphasis>、<emphasis>foo.net\alice</emphasis>
+                        などのいずれであろうが同じです。詳細は、<classname>Zend_Ldap</classname>
+                        のドキュメントの <emphasis>アカウント名の正規化</emphasis>
+                        のセクションを参照ください。複数のサーバのオプションを設定する場合は、すべてのサーバで
+                        <emphasis role="strong">accountCanonicalForm</emphasis>
+                        を同じにしておくことを推奨します (必須ではありません)。
+                        そうすれば、結果のユーザ名はいつでも同じ形式に正規化されることになります
+                        (もし AD サーバでは <emphasis>EXAMPLE\username</emphasis>、OpenLDAP サーバでは
+                        <emphasis>username@example.com</emphasis> を返すようになっていれば、
+                        アプリケーション側のロジックが不格好になります)。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                    <entry>
+                        対象となる LDAP サーバの FQDN ドメイン
+                        (例 <code>example.com</code>)。
+                        このオプションは、名前を正規化する際に使用します。
+                        バインド時に、ユーザが指定したユーザ名を必要に応じて変換します。
+                        指定したユーザ名がそのサーバに存在するかどうかを調べる際にも使用します
+                        (<emphasis role="strong">accountDomainName</emphasis> が <emphasis>foo.net</emphasis>
+                        でユーザが <emphasis>bob@bar.net</emphasis> を入力した場合、
+                        サーバへの問い合わせを行わず、結果は失敗となります)。
+                        このオプションは必須ではありませんが、もし指定していなければ
+                        プリンシパル形式のユーザ名 (例 <emphasis>alice@foo.net</emphasis>)
+                        はサポートされません。このオプションを指定しておくことを推奨します。
+                        プリンシパル形式のユーザ名が必要となる場面は数多くあるからです。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                    <entry>
+                        対象となる LDAP サーバの '短い' ドメイン
+                        (例 <emphasis>FOO</emphasis>)。
+                        <emphasis role="strong">accountDomainName</emphasis> と
+                        <emphasis role="strong">accountDomainNameShort</emphasis>
+                        は一対一対応となることに注意しましょう。このオプションは
+                        Windows ネットワークの NetBIOS ドメイン名として用いられますが、
+                        AD 以外のサーバで用いられることもあります
+                        (複数のサーバオプションでバックスラッシュ形式の
+                        <emphasis role="strong">accountCanonicalForm</emphasis> を使用する場合など)。
+                        このオプションは必須ではありませんが、もし指定していなければ
+                        バックスラッシュ形式のユーザ名 (例 <emphasis>FOO\alice</emphasis>)
+                        はサポートされません。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">accountFilterFormat</emphasis></entry>
+                    <entry>
+                        アカウントを検索する際に使用する LDAP 検索フィルタ。
+                        この文字列は
+                        <ulink url="http://php.net/printf"><code>printf()</code></ulink>
+                        形式のものとなり、ユーザ名を表す '<code>%s</code>'
+                        をひとつ含む必要があります。デフォルト値は
+                        '<code>(&amp;(objectClass=user)(sAMAccountName=%s))</code>' です。
+                        ただし、<code>bindRequiresDn</code> が <code>true</code>
+                        の場合のデフォルト値は
+                        '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'
+                        となります。たとえば、何らかの理由で AD 環境で
+                        <code>bindRequiresDn = true</code> を使いたい場合は
+                        <code>accountFilterFormat = '(&amp;(objectClass=user)(sAMAccountName=%s))</code>'
+                        と設定する必要があります。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry><emphasis role="strong">optReferrals</emphasis></entry>
+                    <entry>
+                        <code>true</code> に設定すると、
+                        参照先を追跡するよう LDAP クライアントに指示します。
+                        デフォルト値は <code>false</code> です。
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+        </para>
+
+        <note>
+            <para>
+                <code>useStartTls = true</code> あるいは
+                <code>useSsl = true</code> としていると、LDAP クライアント側で
+                「サーバの証明書を検証できない」というエラーが発生することに気づかれるかもしれません。
+                PHP の LDAP 拡張モジュールは OpenLDAP クライアントライブラリと密接につながっているので、
+                この問題を解決するには OpenLDAP クライアントの <code>ldap.conf</code> で
+                "<code>TLS_REQCERT never</code>" を設定 (そしてウェブサーバを再起動)
+                して OpenLDAP クライアントライブラリがサーバを信頼するようにします。
+                もしいわゆる「なりすまし」が心配なら、
+                LDAP サーバのルート証明書をエクスポートしてそれをウェブサーバに配置すれば、
+                OpenLDAP クライアントがサーバを検証できるようになります。
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.debugging">
+
+        <title>デバッグメッセージの収集</title>
+
+        <para>
+            <classname>Zend_Auth_Adapter_Ldap</classname> は、<classname>authenticate()</classname>
+            メソッド内でのデバッグ情報を収集します。この情報は、<classname>Zend_Auth_Result</classname>
+            オブジェクト内にメッセージとして保存されます。<classname>Zend_Auth_Result::getMessages()</classname>
+            が返す配列は次のような形式になります。
+
+            <table id="zend.auth.adapter.ldap.debugging.table">
+              <title>デバッグメッセージ</title>
+              <tgroup cols="2">
+                <thead>
+                  <row>
+                    <entry>メッセージ配列の添字</entry>
+                    <entry>説明</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>0</entry>
+                    <entry>
+                        ユーザ向けの表示に適した、全般的なメッセージ (認証に失敗したなど)。
+                        認証に成功した場合は、この文字列は空となります。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>1</entry>
+                    <entry>
+                        より詳細なエラーメッセージ。ユーザ向けに表示するには適しませんが、
+                        サーバ管理者向けには記録しておくべき内容です。
+                        認証に成功した場合は、この文字列は空となります。
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>2 以降</entry>
+                    <entry>
+                        すべてのログメッセージが、インデックス 2 以降に順に格納されます。
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+
+            実際に使用する上では、まずインデックス 0 の内容はユーザ向けに表示することになります
+            (FlashMessenger ヘルパーなどを使用します)。そしてインデックス 1 はログに記録し、
+            デバッグ情報が必要ならインデックス 2 以降も同様に記録します
+            (最後のメッセージには、常にインデックス 1 の内容も含まれています)。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
+
+        <title>サーバ固有の共通オプション</title>
+
+        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
+
+            <title>Active Directory 用のオプション</title>
+
+            <para>
+                ADS 用のオプションとして注目すべきものは次のとおりです。
+
+                <table id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
+                  <title>Active Directory 用のオプション</title>
+                  <tgroup cols="2">
+                    <thead>
+                      <row>
+                        <entry>名前</entry>
+                        <entry>補足説明</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry>
+                            すべてのサーバでこのオプションは必須です。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">useStartTls</emphasis></entry>
+                        <entry>
+                            セキュリティの観点からは、これは <code>true</code> にしておくべきです。
+                            この場合、サーバに証明書をインストールしておく必要があります。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">useSsl</emphasis></entry>
+                        <entry>
+                            <code>useStartTls</code> の代替として用いられます (上を参照ください)。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry>
+                            すべてのサーバでこのオプションは必須です。デフォルトの AD では
+                            すべてのユーザアカウントが <emphasis>Users</emphasis> コンテナ
+                            (たとえば <emphasis>CN=Users,DC=foo,DC=net</emphasis>) の配下におかれますが、
+                            もっと長い組織になることもあるので共通のデフォルトはありません。
+                            AD の管理者に問い合わせて、アプリケーションのアカウントでどんな
+                            DN を使用したらよいのかを確認しましょう。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry>
+                            ほとんどの場合は 3 を指定してバックスラッシュ形式の名前 (例
+                            <emphasis>FOO\alice</emphasis>) を使用することになるでしょう。
+                            これは Windows ユーザにとってもっともなじみ深い形式です。修飾されていない形式である 2
+                            (例 <emphasis>alice</emphasis>) を使っては <emphasis>いけません</emphasis>。
+                            これは、他の信頼済みドメインに属する同じユーザ名のユーザにも
+                            アプリケーションへのアクセスを許可してしまうことになるからです
+                            (たとえば <emphasis>BAR\alice</emphasis> と <emphasis>FOO\alice</emphasis>
+                            は同じユーザという扱いになります)。以下の注意も参照ください。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry>
+                            これは AD には必須です。<emphasis role="strong">accountCanonicalForm</emphasis>
+                            が 2 の場合は不要ですが、何度も言うようにこれはおすすめしません。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry>
+                            ユーザが属するドメインの NetBIOS 名で、AD サーバの認証対象となります。
+                            これは、バックスラッシュ形式の
+                            <emphasis role="strong">accountCanonicalForm</emphasis>
+                            を使用する場合には必須です。
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+            </para>
+
+            <note>
+                <para>
+                    技術的には、現在の <classname>Zend_Auth_Adapter_Ldap</classname> の実装では
+                    意図せぬクロスドメイン認証の危険はあり得ません。
+                    サーバのドメインが明示的にチェックされるからです。
+                    しかし、将来にわたってもそうであるかどうかはわかりません。
+                    実行時にドメインを見つけるような実装に変わったり、
+                    別のアダプタ (Kerberos など) を使うことになるかもしれません。
+                    一般論として、あいまいなアカウント名はセキュリティ問題の原因となりやすいものです。
+                    修飾した形式のアカウント名を使うようにしましょう。
+                </para>
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
+
+            <title>OpenLDAP 用のオプション</title>
+
+            <para>
+                OpenLDAP、あるいは posixAccount 形式のスキーマを用いる一般的な
+                LDAP サーバ用のオプションとして注目すべきものは次のとおりです。
+
+                <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
+                  <title>OpenLDAP 用のオプション</title>
+                  <tgroup cols="2">
+                    <thead>
+                      <row>
+                        <entry>名前</entry>
+                        <entry>補足説明</entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row>
+                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry>
+                            すべてのサーバでこのオプションは必須です。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">useStartTls</emphasis></entry>
+                        <entry>
+                            セキュリティの観点からは、これは <code>true</code> にしておくべきです。
+                            この場合、サーバに証明書をインストールしておく必要があります。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry>
+                            <code>useStartTls</code> の代替として用いられます (上を参照ください)。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">username</emphasis></entry>
+                        <entry>
+                            必須、かつ DN である必要があります。OpenLDAP のバインド時には、
+                            ユーザ名が DN 形式であることが必須だからです。
+                            特権アカウント以外を使用するようにしましょう。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">password</emphasis></entry>
+                        <entry>
+                            上のユーザ名に対応するパスワード。しかし、
+                            匿名バインドによるユーザ検索を
+                            LDAP サーバがサポートしている場合には省略することもできます。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                        <entry>
+                            必須、かつ <code>true</code> である必要があります。
+                            OpenLDAP のバインド時には、ユーザ名が DN 形式であることが必須だからです。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry>
+                            すべてのサーバでこのオプションは必須です。
+                            認証対象となるアカウントが位置する DN を指すようにします。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry>
+                            オプションで、デフォルト値は 4 (<emphasis>alice@foo.net</emphasis>
+                            のようなプリンシパル形式) です。これは、ユーザがバックスラッシュ形式の名前
+                            (<emphasis>FOO\alice</emphasis> など)
+                            を使用する場合には望ましくありません。バックスラッシュ形式の名前の場合は
+                            3 を使用します。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry>
+                            必須です。<emphasis role="strong">accountCanonicalForm</emphasis>
+                            が 2 の場合は不要ですが、これはおすすめしません。
+                        </entry>
+                      </row>
+                      <row>
+                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry>
+                            AD とともに使用するのでなければこれは必須ではありません。
+                            それ以外の場合、もし
+                            <emphasis role="strong">accountCanonicalForm</emphasis> 3 を使用するのなら
+                            このオプションは必須で、
+                            <emphasis role="strong">accountDomainName</emphasis>
+                            に対応する短縮名を指定しなければなりません
+                            (たとえば <emphasis role="strong">accountDomainName</emphasis> が
+                            <emphasis role="strong">foo.net</emphasis> なら
+                            <emphasis role="strong">accountDomainNameShort</emphasis>
+                            の適切な値は <emphasis>FOO</emphasis> となるでしょう)。
+                        </entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
+
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

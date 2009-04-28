@@ -1,0 +1,197 @@
+<sect1 id="zend.captcha.adapters">
+    <title>Captcha 适配器</title>
+
+    <para>
+        Zend Framework 缺省地带有下列适配器。
+    </para>
+
+    <sect2 id="zend.captcha.adapters.word">
+        <title>Zend_Captcha_Word</title>
+
+        <para>
+            Zend_Captcha_Word 是个摘要适配器，它是 Dumb、Figlet 和 Image 适配器的基础。
+            ，它提供了增变器用来指定字符长度、会话 TTL 、会话命名空间对象，如果你不想
+            使用 Zend_Session_Namespace，它提供了会话命名空间来用于持久。
+            另外，它封装了所有校验逻辑。
+        </para>
+
+        <para>
+            缺省地，字符长度为 8，会话超时为 5 分钟，Zend_Session_Namespace
+            用于持久（使用命名空间"Zend_Form_Captcha_&lt;captcha ID&gt;"）。
+        </para>
+
+        <para>
+            除了 <code>Zend_Captcha_Adapter</code> 接口要求的标准方法外，
+            <code>Zend_Captcha_Word</code> 还有下列方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setWordLen($length)</code> 和 <code>getWordLen()</code>
+                指定生成的“字符”的长度和获取当前值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setTimeout($ttl)</code> 和 <code>getTimeout()</code>
+                指定会话令牌的 time-to-live 和获取当前值。<code>$ttl</code> 以秒计。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSessionClass($class)</code> 和
+                <code>getSessionClass()</code> 指定替代的
+                <code>Zend_Session_Namespace</code> 实现来持久 captcha 令牌和获取当前值。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getId()</code> 获取当前令牌标识符。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getWord()</code> 获取用于 captcha 的生成字符，如果以前没有生成，它将生成一个。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSession(Zend_Session_Namespace $session)</code> 指定一个会话对象用来持久 captcha 令牌；
+                <code>getSession()</code> 获取当前会话对象。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+
+            所有字符 captchas 传递一个选项数组给构造器，或者把它们传递给
+            <code>setOptions()</code> （或传递一个 <code>Zend_Config</code> 对象给 <code>setConfig()</code>）。
+            缺省地，可能使用所有的键 <code>wordLen</code>、 <code>timeout</code> 和
+            <code>sessionClass</code> ；每个具体的实现可能定义另外的键或选项。
+        </para>
+
+        <note><para>
+            记住，Word 是个摘要类并且可能不能直接初始化。
+        </para></note>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.dumb">
+        <title>Zend_Captcha_Dumb</title>
+
+        <para>
+            Dumb 适配器通常是自解释的。它提供了随机字符串需要用反序输入来校验。
+            这样，它不是一个好的 CAPTCHA 方案，只用于测试或者最后的方案。
+            它继承 <code>Zend_Captcha_Word</code>。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.figlet">
+        <title>Zend_Captcha_Figlet</title>
+
+        <para>
+            Figlet 适配器利用 <link
+                linkend="zend.text.figlet">Zend_Text_Figlet</link> 来展示一个
+            Figlet 给用户。Figlet captchas 只限于字符。
+        </para>
+
+        <para>
+            传递给构造器的选项也可以传递给适配器使用的 <link
+                linkend="zend.text.figlet">Zend_Text_Figlet</link> 对象。
+            请参考关于配置选项的细节的文档。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.image">
+        <title>Zend_Captcha_Image</title>
+
+        <para>
+            Image 适配器使用生成的字符并解析为图像，并把它变换成难以自动解密。
+            它需要 <ulink url="http://php.net/gd">GD extension</ulink>，使用
+            TrueType 或 Freetype 支持的编译。目前，Image 适配器只能产生 PNG 图像。
+        </para>
+
+        <para>
+            <code>Zend_Captcha_Image</code> 集成
+            <code>Zend_Captcha_Word</code>，并附加了下列方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setExpiration($expiration)</code> 和
+                <code>getExpiration()</code> 指定 captcha 图像可以保留在文件系统
+                中的最大生命周期。一般长于会话的生命周期。每次调用 captcha 对象，
+                垃圾收集就运行一次，过期的图像就被清除。过期值以秒计。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setGcFreq($gcFreq)</code> 和 <code>getGcFreg()</code>
+                指定垃圾收集运行的频度。每 <code>1/$gcFreq</code> 垃圾收集就运行一次（缺省值为 100）。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFont($font)</code> 和 <code>getFont()</code>
+                指定要用的字体。它是到字体文件的全路径。如果没有设置这个值，captcha
+                就在生成的时候抛出异常。字体是必需的。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setFontSize($fsize)</code> 和 <code>getFontSize()</code>
+                指定字体尺寸，以象素为单位，用于生成 captcha。缺省值为 24px。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setHeight($height)</code> 和 <code>getHeight()</code>
+                指定生成 captcha 图像的高度，以象素为单位。缺省值为 50px。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setWidth($width)</code> 和 <code>getWidth()</code>
+                指定生成 captcha 图像的宽度，以象素为单位。缺省值为 200px 。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setImgDir($imgDir)</code> 和 <code>getImgDir()</code>
+                指定 captcha 图像存储的目录。缺省为 "./images/captcha/" ，相对于引导（bootstrap）脚本。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setImgUrl($imgUrl)</code> 和 <code>getImgUrl()</code>
+                指定用于 HTML 标记语言的 captcha 图像的相对路径。 缺省为 "/images/captcha/"。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setSuffix($suffix)</code> 和 <code>getSuffix()</code>
+                指定文件名后缀。缺省为 ".png" 。注：它的改变不影响产生的图像类型。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            所有上述选项都可作为选项传递给构造器，只要去掉 'set' 方法前缀并
+            把首字母变成小写：如 "suffix"、 "height"、"imgUrl"  等。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.captcha.adapters.recaptcha">
+        <title>Zend_Captcha_ReCaptcha</title>
+
+        <para>
+            ReCaptcha 适配器利用 <link
+                linkend="zend.service.recaptcha">Zend_Service_ReCaptcha</link>
+            来生成校验 captchas。它有下列方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>setPrivKey($key)</code> 和 <code>getPrivKey()</code>
+                让你指定和 ReCaptcha 服务一起使用的私钥。这必需在构造期间指定，尽管任何时候它都可以被覆盖。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setPubKey($key)</code> 和 <code>getPubKey()</code>
+                让你指定和 ReCaptcha 服务一起使用的公钥。这必需在构造期间指定，尽管任何时候它都可以被覆盖。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setService(Zend_Service_ReCaptcha $service)</code> 和
+                <code>getService()</code> 让你指定并和 ReCaptcha 服务对象交互使用。
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.request">
+    <title>L'objet Requête</title>
+
+    <sect2 id="zend.controller.request.introduction">
+        <title>Introduction</title>
+
+        <para>
+            L'objet requête est un objet simple de valeur qui est passé entre
+            <classname>Zend_Controller_Front</classname> et le routeur, le distributeur, et les
+            classes de contrôleur. Il empaquette les noms du module demandé, du contrôleur, de
+            l'action, et des paramètres facultatifs, aussi bien que le reste de l'environnement de
+            requête, que ce soit le HTTP, du CLI, ou de PHP-GTK.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Le nom de module est accessible par <code>getModuleName()</code> et
+                    <code>setModuleName()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Le nom de contrôleur est accessible par <code>getControllerName()</code>
+                    et <code>setControllerName()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Le nom de l'action à appeler dans le contrôleur est accessible par
+                    <code>getActionName()</code> et <code>setActionName()</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Les paramètres accessibles par l'action sont dans un tableau associatif
+                    de paires clés/valeurs qui sont récupérables par <code>getParams()</code> et
+                    modifiables par <code>setParams()</code>, ou individuellement par
+                    <code>getParam()</code> et <code>setParam()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            En fonction du type de requête, il peut y avoir plus de méthodes disponibles. La
+            requête par défaut utilisée, <classname>Zend_Controller_Request_Http</classname>, par
+            exemple, a des méthodes pour rechercher l'URI de la requête, l'information sur le
+            chemin, les paramètres <code>$_GET</code> et <code>$_POST</code>, etc.
+        </para>
+
+        <para>
+            L'objet requête est passé au contrôleur frontal, ou si aucun n'est fourni, il est
+            instancié au début du processus de distribution, avant que le routage ne se produise.
+            Il est passé à travers chaque objet dans la chaîne de distribution.
+        </para>
+
+        <para>
+            De plus, l'objet requête est particulièrement utile pour les tests. Le
+            développeur peut simuler l'environnement de requête, y compris le module, le
+            contrôleur, l'action, les paramètres, l'URI, etc., et passe l'objet requête au
+            contrôleur frontal pour tester une application. Une fois appairés avec
+            <link linkend="zend.controller.response">l'objet réponse</link>, les tests unitaires
+            élaboré et précis d'application MVC deviennent possible.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.controller.request.http">
+        <title>Les requêtes HTTP</title>
+
+        <sect3 id="zend.controller.request.http.dataacess">
+            <title>Accéder aux données de la requête</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> encapsule l'accès aux
+                valeurs appropriées telles que le nom de la clé et la valeur pour les variables
+                contrôleur d'action et routeur , et tous les paramètres additionnels analysés à
+                partir de l'URI. Il permet en plus l'accès aux valeurs contenues dans les
+                superglobales en tant que membres publics, et contrôle l'URL de base et l'URI
+                courants de la requête. Des valeurs superglobales ne peuvent pas être placées dans
+                un objet requête, au lieu de cela utilisez les méthodes setParam/getParam pour
+                régler ou pour récupérer des paramètres d'utilisateur.
+            </para>
+
+            <note>
+                <title>Données superglobales</title>
+                <para>
+                    En accédant à des données superglobales par
+                    <classname>Zend_Controller_Request_Http</classname> en tant que propriétés
+                    publiques de membre, il est nécessaire de maintenir dans l'esprit que le nom de
+                    propriété (clé du tableau des superglobales) est assorti à une superglobale
+                    dans un ordre spécifique de priorité&#160;: 1.&#160;GET, 2.&#160;POST,
+                    3.&#160;COOKIE, 4.&#160;SERVER, 5.&#160;ENV.
+                </para>
+            </note>
+
+            <para>
+                Des superglobales spécifiques peuvent être accédées en utilisant une méthode
+                publique comme alternative. Par exemple, la valeur directe
+                <code>$_POST['user']</code> peut être accédée en appelant
+                <code>getPost('user')</code> sur l'objet de requête. Ceci inclue
+                <code>getQuery()</code> pour rechercher des éléments $<code>$_GET</code>, et
+                <code>getHeader()</code> pour récupérer les en-têtes de la requête.
+            </para>
+
+            <note>
+                <title>Données GET et POST</title>
+                <para>
+                    Soyez prudent en accédant à des données de l'objet de requête car il
+                    n'est pas du tout filtré. Le routeur et le distributeur valident et filtrent
+                    les données pour leur usage, mais laissent les données intactes dans l'objet de
+                    requête.
+                </para>
+            </note>
+
+            <note>
+                <title>Récupérer les données POST brutes</title>
+                <para>
+                    A partir de la version 1.5.0, vous pouvez aussi les données POST brutes
+                    avec la méthode <code>getRawBody()</code>. La méthode retourne
+                    <code>false</code> si aucune donnée n'a été envoyé, et le corps complet du POST
+                    sinon.
+                </para>
+                <para>
+                    Ceci est principalement utile pour accepter le contenu lors du
+                    développement des applications MVC de type REST.
+                </para>
+            </note>
+
+            <para>
+                Vous pouvez également placer des paramètres d'utilisateur dans l'objet de
+                requête en utilisant <code>setParam()</code> et récupérer ces derniers en utilisant
+                plus tard <code>getParam()</code>. Le routeur se sert de cette fonctionnalité pour
+                faire correspondre des paramètres de l'URI de la requête dans l'objet
+                requête.
+            </para>
+
+            <note>
+                <title>getParam() retrouve plus que les paramètres d'utilisateur</title>
+                <para>
+                    Afin d'effectuer une partie de son travail, <code>getParam()</code>
+                    recherche réellement dans plusieurs sources. Dans l'ordre de priorité, ceux-ci
+                    incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par l'intermédiaire de
+                    <code>setParam()</code>, les paramètres <code>GET</code>, et finalement les
+                    paramètres <code>POST</code>. Faites attention à ceci lorsque vous récupérez
+                    des données par l'intermédiaire de cette méthode.
+                </para>
+                <para>
+                    Si vous souhaitez rechercher seulement dans les valeurs que vous avez
+                    paramétrées avec <code>setParam()</code>, utilisez
+                    <code>getUserParam()</code>.
+                </para>
+                <para>
+                    De plus, à partir de la version 1.5.0, vous pouvez verrouiller les
+                    sources de paramètres à utiliser. <code>setParamSources()</code> vous permet de
+                    spécifier un tableau vide ou un tableau contenant une ou plusieurs des valeurs
+                    "_GET" ou "_POST" indiquant quelle source de paramètres est autorisée (par
+                    défaut les deux sont autorisées)&#160;; si vous souhaitez restreindre l'accès
+                    seulement à "_GET", spécifiez
+                    <code>setParamSources(array('_GET'))</code>.
+                </para>
+            </note>
+
+            <note>
+                <title>Caprices d'Apache</title>
+                <para>
+                    Si vous utilisez le gestionnaire 404 d'Apache pour passer les requêtes
+                    entrantes au contrôleur frontal, ou si vous utilisez le drapeau PT avec les
+                    règles de ré-écriture, <code>$_SERVER['REDIRECT_URL']</code> contient l'URI
+                    dont vous avez besoin, pas <code>$_SERVER['REQUEST_URI']</code>. Si vous
+                    employez une telle installation et obtenez un routage invalide, vous devriez
+                    employer la classe <classname>Zend_Controller_Request_Apache404</classname> au
+                    lieu de la classe HTTP par défaut pour votre objet de requête&#160;:
+                </para>
+                <programlisting role="php"><![CDATA[
+$request = new Zend_Controller_Request_Apache404();
+$front->setRequest($request);
+]]></programlisting>
+                <para>
+                    Cette classe étend la classe
+                    <classname>Zend_Controller_Request_Http</classname> et modifie simplement la
+                    recherche automatique de l'URI de la requête. Elle peut être employée comme un
+                    remplacement "drop-in".
+                </para>
+            </note>
+
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.baseurl">
+            <title>Base de l'URL et sous-dossiers</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> permet à
+                <classname>Zend_Controller_Router_Rewrite</classname> d'être employé dans des
+                sous-répertoires. <classname>Zend_Controller_Request_Http</classname> essayera de
+                détecter automatiquement votre base d'URL et de la régler en conséquence.
+            </para>
+
+            <para>
+                Par exemple, si vous maintenez votre <code>index.php</code> dans un
+                sous-répertoire du serveur Web appelé <code>/projects/myapp/index.php</code>, la
+                base d'URL (rewrite base) devrait être réglé à <code>/projects/myapp</code>. Cette
+                chaîne sera alors dépouillée du début du chemin avant de calculer tous les routes
+                correspondantes. Ceci libère de la nécessité de l'ajouter au début de n'importe
+                laquelle de vos routes. Une route <code>'user/:username'</code> correspondra à des
+                URI comme <code>http://localhost/projects/myapp/user/martel</code> et
+                <code>http://example.com/user/martel</code>.
+            </para>
+
+            <note>
+                <title>La détection d'URL est sensible à la casse</title>
+                <para>
+                    La détection automatique d'URL de base est sensible à la casse, ainsi
+                    assurez vous que votre URL correspond à un nom de sous-répertoire dans le
+                    système de fichiers (même sur les machines Windows). S'il n'y en a pas, une
+                    exception sera levée.
+                </para>
+            </note>
+
+            <para>
+                Si la base de l'URL est détectée de manière inexacte vous pouvez la
+                surcharger avec votre propre chemin de base grâce à la méthode
+                <code>setBaseUrl()</code> soit de la classe de
+                <classname>Zend_Controller_Request_Http</classname>, soit de la classe de
+                <classname>Zend_Controller_Front</classname>. La méthode la plus facile est de la
+                régler dans <classname>Zend_Controller_Front</classname>, qui le transmets dans
+                l'objet de requête. Exemple d'utilisation pour régler une base d'URL
+                personnalisée&#160;:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Distribue la requête avec une base d'URL réglé
+ * avec Zend_Controller_Front.
+ */
+$router     = new Zend_Controller_Router_Rewrite();
+$controller = Zend_Controller_Front::getInstance();
+$controller->setControllerDirectory('./application/controllers')
+           ->setRouter($router)
+           ->setBaseUrl('/projects/myapp'); // affecte la base d'url
+$response   = $controller->dispatch();
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.method">
+            <title>Déterminer le type de la requête</title>
+
+            <para>
+                <code>getMethod()</code> vous permet de déterminer le type de requête HTTP
+                utiliser pour appeler la ressource courante. De plus, différentes méthodes existent
+                pour récupérer sous la forme de booléen le type de requête réalisée&#160;:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para><code>isGet()</code></para>
+                </listitem>
+                <listitem>
+                    <para><code>isPost()</code></para>
+                </listitem>
+                <listitem>
+                    <para><code>isPut()</code></para>
+                </listitem>
+                <listitem>
+                    <para><code>isDelete()</code></para>
+                </listitem>
+                <listitem>
+                    <para><code>isHead()</code></para>
+                </listitem>
+                <listitem>
+                    <para><code>isOptions()</code></para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                La principale utilisation est lors de la création des architectures MVC de
+                type REST.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.controller.request.http.ajax">
+            <title>Détecter les requêtes AJAX</title>
+
+            <para>
+                <classname>Zend_Controller_Request_Http</classname> possède une méthode
+                rudimentaire pour détecter les requêtes AJAX&#160;:
+                <code>isXmlHttpRequest()</code>.
+                Cette méthode parcourt les en-têtes de la requête HTTP à la recherche de
+                <code>X-Requested-With</code> ayant la valeur "XMLHttpRequest"&#160;; si celui-ci
+                est trouvé, la méthode retourne <code>true</code>.
+            </para>
+
+            <para>
+                Actuellement, on sait que cet en-tête est fourni par défaut par les
+                bibliothèques JS suivantes&#160;:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para> Prototype/Scriptaculous (et les librairies dérivées de Prototype)</para>
+                </listitem>
+                <listitem>
+                    <para>Yahoo! UI Library</para>
+                </listitem>
+                <listitem>
+                    <para>jQuery</para>
+                </listitem>
+                <listitem>
+                    <para>MochiKit</para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                La plupart des librairies AJAX vous permettent d'envoyer vos propres en-têtes
+                de requête HTTP ; si votre librairie n'envoie pas cet en-tête, ajoutez le
+                simplement afin d'être sûr que la méthode <code>isXmlHttpRequest()</code>
+                fonctionne dans votre cas.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.request.subclassing">
+        <title>Sous-classer l'objet Requête</title>
+
+        <para>
+            La classe de requête de base utilisée pour tous les objets de requête est la
+            classe abstraite <classname>Zend_Controller_Request_Abstract</classname>. Au minimum,
+            elle définit les méthodes suivantes&#160;:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+abstract class Zend_Controller_Request_Abstract
+{
+    /**
+     * @return string
+     */
+    public function getControllerName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setControllerName($value);
+
+    /**
+     * @return string
+     */
+    public function getActionName();
+
+    /**
+     * @param string $value
+     * @return self
+     */
+    public function setActionName($value);
+
+    /**
+     * @return string
+     */
+    public function getControllerKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setControllerKey($key);
+
+    /**
+     * @return string
+     */
+    public function getActionKey();
+
+    /**
+     * @param string $key
+     * @return self
+     */
+    public function setActionKey($key);
+
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    public function getParam($key);
+
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return self
+     */
+    public function setParam($key, $value);
+
+    /**
+     * @return array
+     */
+     public function getParams();
+
+    /**
+     * @param array $array
+     * @return self
+     */
+    public function setParams(array $array);
+
+    /**
+     * @param boolean $flag
+     * @return self
+     */
+    public function setDispatched($flag = true);
+
+    /**
+     * @return boolean
+     */
+    public function isDispatched();
+}
+]]></programlisting>
+
+        <para>
+            L'objet de requête est un conteneur pour l'environnement de la requête. La chaîne
+            de contrôleur doit seulement savoir régler et récupérer le contrôleur, l'action, les
+            paramètres facultatifs, et le statut distribué. Par défaut, la demande recherchera ses
+            propres paramètres en utilisant les clés de contrôleur ou d'action afin de déterminer
+            le contrôleur et l'action.
+        </para>
+
+        <para>
+            Étendez cette classe, ou une de ses dérivés, quand vous avez besoin de la classe
+            de requête pour interagir avec un environnement spécifique afin de récupérer des
+            données pour les utiliser dans les tâches ci-dessus. Les exemples incluent
+            <link linkend="zend.controller.request.http">l'environnement HTTP</link>, un
+            environnement CLI, ou un environnement PHP-GTK.
+        </para>
+    </sect2>
+</sect1>

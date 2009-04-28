@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.date.additional">
+
+    <title>動作例</title>
+
+    <para>
+        この章では、<classname>Zend_Date</classname> で使用できるその他の関数について説明します。
+        もちろん、ここで取り上げている関数については動作例を示すサンプルも提示しており、
+        それを適切に使用するための API についても説明しています。
+    </para>
+
+    <sect2 id="zend.date.additional.checking">
+
+        <title>日付の確認</title>
+
+        <para>
+            おそらく、入力として受け取る日付の大半は文字列形式でしょう。
+            しかし、文字列で渡されると、それが本当に日付を表すものなのかがわかりません。
+            そこで <classname>Zend_Date</classname> では、
+            日付文字列を調べるために独自の静的関数を用意することにしました。
+            <classname>Zend_Locale</classname> には <code>getDate($date, $locale);</code>
+            という関数があり、これは日付を受け取って、適切に正規化された内容を返します。
+            たとえば、月の名前が指定されていた場合もそれを適切に解釈し、
+            数値に変換して返します。しかし、<classname>Zend_Locale</classname>
+            は日付については何も知りません。なぜなら、
+            このクラスは正規化および地域化を行うためのクラスだからです。
+            そこで、日付を確認する関数 <code>isDate($date);</code>
+            と組み合わせて使用するようにします。
+        </para>
+
+        <para>
+            <code>isDate($date, $format, $locale);</code> は最大で三つまでのパラメータを受け取ります。
+            そのうちのひとつは必須です。そのひとつは、当然ながら調べたい日付となります。
+            この日付は文字列で渡します。二番目のパラメータは日付の書式を表します。
+            これを省略した場合は、そのロケールの書式を使用します。
+            書式についての詳細は、<link linkend="zend.date.constants.selfdefinedformats">自分で定義する書式</link>
+            の章を参照ください。
+        </para>
+
+        <para>
+            三番目のパラメータも、二番目のパラメータと同様に省略可能です。
+            これはロケールを指定するものです。月名や曜日名を正規化するためにロケールが必要となります。
+            この三番目のパラメータを指定することで、'01.Jänner.2000' や '01.January.2000'
+            といった文字列をロケールに応じて適切に処理できるようになります。
+        </para>
+
+        <para>
+            <code>isDate();</code> は、存在しない日付についての確認も行います。
+            <classname>Zend_Date</classname> 自体は日付についての確認を行いません。
+            つまり、たとえば '31.February.2000' のような日付を <classname>Zend_Date</classname>
+            で作成することもできます。この場合、<classname>Zend_Date</classname>
+            は自動的に日付を適切な値に修正して返します。この例の場合なら
+            '03.March.2000' となります。一方 <code>isDate()</code>
+            は日付の確認を行い、'31.February.2000' を渡すと false を返します。
+            というのもそんな日付はありえないということを知っているからです。
+        </para>
+
+        <example id="zend.date.additional.checking.example-1">
+            <title>日付の確認</title>
+            <programlisting role="php"><![CDATA[
+// 日付を確認します
+$date = '01.03.2000';
+if (Zend_Date::isDate($date)) {
+    print "文字列 $date は日付です";
+} else {
+    print "文字列 $date は日付ではありません";
+}
+
+// 地域化した日付を確認します
+$date = '01 February 2000';
+if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
+    print "文字列 $date は日付です";
+} else {
+    print "文字列 $date は日付ではありません";
+}
+
+// ありえない日付を確認します
+$date = '30 February 2000';
+if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
+    print "文字列 $date は日付です";
+} else {
+    print "文字列 $date は日付ではありません";
+}
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.additional.sunrise-sunset">
+
+        <title>日の出と日没</title>
+
+        <para>
+            <classname>Zend_Date</classname> には、太陽の動きに関する情報を取得するための関数も組み込まれています。
+            たとえば、指定した日の日の出時刻や日没時刻を取得する際に必要となります。
+            <classname>Zend_Date</classname> を使用すると、指定した日の指定した場所における
+            日の出時刻や日没時刻を簡単に取得できます。
+        </para>
+
+        <para>
+            ほとんどの人は、自分が住んでいる場所の位置データを知らないことでしょう。
+            ということで、位置データを取得するヘルパークラスも用意しました。
+            このクラスは、各国の首都や大都市など、世界中の約 250 の都市についての位置データを提供します。
+            ほとんどの人は、これらの中に自分の住む場所の近所の都市を見つけられるでしょう。
+            というのも、これらの都市は、お互い数秒 (訳注: 角度の単位) 間隔で配置されているからです。
+        </para>
+
+        <para>
+            リストボックスでどこかの都市を選ばせるには、関数 <classname>Zend_Date_Cities::getCityList</classname>
+            を使用します。これは、ヘルパークラスで使用可能な定義済みの都市名の一覧を返します。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-1">
+            <title>利用可能な都市の取得</title>
+            <programlisting role="php"><![CDATA[
+// 利用可能な都市の一覧を出力します
+print_r (Zend_Date_Cities::getCityList());
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            位置データ自体を取得するには、関数 <classname>Zend_Date_Cities::City()</classname> を使用します。
+            この関数に、<classname>Zend_Date_Cities::getCityList()</classname> が返す都市名を渡します。
+            また、オプションの二番目のパラメータで、水平線の種類を設定します。
+        </para>
+
+        <para>
+            定義済みの水平線は四種類です。これらと位置情報を組み合わせることで、日の出や日没の正確な時刻を取得します。
+            すべての関数について、オプションのパラメータとして '<code>horizon</code>' を指定できます。
+            省略した場合は '<code>effective</code>' を使用します。
+        </para>
+
+        <table id="zend.date.additional.sunrise-sunset.table">
+            <title>日の出や日没のためにサポートしている水平線の形式</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>水平線</entry>
+                        <entry>説明</entry>
+                        <entry>使用例</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>effective</entry>
+                        <entry>標準の水平線</entry>
+                        <entry>世界が完全な球体であると仮定します。何も指定しない場合には常にこれを使用します。</entry>
+                    </row>
+                    <row>
+                        <entry>civil</entry>
+                        <entry>一般的な水平線</entry>
+                        <entry>テレビやラジオなどのメディアで一般に使用します。</entry>
+                    </row>
+                    <row>
+                        <entry>nautic</entry>
+                        <entry>航海時の水平線</entry>
+                        <entry>航海時によく使用します。</entry>
+                    </row>
+                    <row>
+                        <entry>astronomic</entry>
+                        <entry>天文学上の水平線</entry>
+                        <entry>天体観測でよく使用します。</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            もちろん、位置情報を自分で指定して計算することも可能です。
+            その場合は '<code>latitude</code>' (緯度) と
+            '<code>longitude</code>' (経度) を指定し、そしてオプションで '<code>horizon</code>'
+            を指定します。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-2">
+            <title>都市の位置の取得</title>
+            <programlisting role="php"><![CDATA[
+// 定義済みの都市の位置を取得します
+// 水平線を指定していないので、effective horizon を使用します
+print_r (Zend_Date_Cities::City('Vienna'));
+
+// nautic horizon を使用します
+print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
+
+// 位置情報を指定します
+$mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            これで、必要なデータがすべて設定できました。次に行うことは、
+            日の出や日没に関する情報を取得したい日付を表す <classname>Zend_Date</classname>
+            オブジェクトの作成です。算出用の関数は三つあります。
+            日没情報を算出するのが '<code>getSunset()</code>'、日の出の情報は '<code>getSunrise()</code>'、
+            そして太陽に関するすべての情報を取得するのが '<code>getSunInfo()</code>' です。
+            算出した結果は、その時刻を保持する <classname>Zend_Date</classname>
+            オブジェクトとして返されます。
+        </para>
+
+        <example id="zend.date.additional.sunrise-sunset.example-3">
+            <title>太陽の情報の算出</title>
+            <programlisting role="php"><![CDATA[
+// 定義済みの都市の位置を取得します
+$city = Zend_Date_Cities::City('Vienna');
+
+// 太陽の情報を算出したい日付についての date オブジェクトを作成します
+$date = new Zend_Date('10.03.2007', Zend_Date::ISO_8601, 'de');
+
+// 日没時刻を算出します
+$sunset = $date->getSunset($city);
+print $sunset->get(Zend_Date::ISO_8601);
+
+// 太陽に関するすべての情報を算出します
+$info = $date->getSunInfo($city);
+foreach ($info as $sun) {
+    print "\n" . $sun->get(Zend_Date::ISO_8601);
+}
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.date.additional.timezones">
+
+        <title>タイムゾーン</title>
+
+        <para>
+            タイムゾーンは、日付そのものと同じくらい重要です。
+            ユーザが住んでいる場所によって、さまざまなタイムゾーンがあります。
+            つまり、日付を扱う際には適切なタイムゾーンを設定しなければならないということです。
+            複雑な話のように聞こえるかも知れませんが、思ったほど複雑でもありません。
+            <classname>Zend_Date</classname> の最初の章で既に説明したとおり、デフォルトのタイムゾーンは
+            <code>php.ini</code> あるいは起動ファイル内で設定されています。
+        </para>
+
+        <para>
+            <classname>Zend_Date</classname> オブジェクトは、実際のタイムゾーンも保持しています。
+            オブジェクトを作成した後でタイムゾーンを変更しても、元のタイムゾーンを覚えており、
+            それを用いて作業を続けることができます。タイムゾーンを変更するのに、
+            コード内で PHP の関数を使用する必要はありません。
+            <classname>Zend_Date</classname> には、タイムゾーンを処理するための
+            ふたつの組み込み関数が用意されています。
+        </para>
+
+        <para>
+            <code>getTimezone()</code> は <classname>Zend_Date</classname>
+            オブジェクト内で実際に設定されているタイムゾーンを返します。
+            <classname>Zend_Date</classname> は、PHP の内部とは連携していないことを覚えておきましょう。
+            つまり、返されるタイムゾーンは、PHP スクリプトのタイムゾーンではなく
+            そのオブジェクトのタイムゾーンとなるということです。
+            <code>setTimezone($zone)</code> がもうひとつの関数で、
+            これは <classname>Zend_Date</classname> に新しいタイムゾーンを設定します。
+            指定したタイムゾーンに対しては常にチェックが行われ、
+            もしそのタイムゾーンが存在しない場合は例外がスローされます。
+            スクリプトやシステムの実際のタイムゾーンをオブジェクトに設定するには、
+            パラメータを指定せずに <code>setTimezone()</code> をコールします。
+            date オブジェクトを作成する際には、自動的にこれが行われます。
+        </para>
+
+        <example id="zend.date.additional.timezones.example-1">
+            <title>タイムゾーンの処理</title>
+            <programlisting role="php"><![CDATA[
+// デフォルトのタイムゾーンを設定します。
+// これは、起動ファイルか php.ini で設定します。
+// ここで設定しているのは、単体でサンプルとして完結させるためです。
+date_default_timezone_set('Europe/Vienna');
+
+// date オブジェクトを作成します
+$date = new Zend_Date('10.03.2007', Zend_Date::DATES, 'de');
+
+// date オブジェクトの内容を確認します
+print $date->getIso();
+
+// タイムゾーンの設定内容は ?
+print $date->getTimezone();
+
+// 別のタイムゾーンを設定します
+$date->setTimezone('America/Chicago');
+
+// タイムゾーンはどうなった ?
+print $date->getTimezone();
+
+// 変更された date オブジェクトの内容を確認します
+print $date->getIso();
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            サンプルの最初の行にあるように、
+            <classname>Zend_Date</classname> は、オブジェクトの作成時には
+            常に実際のタイムゾーンを受け取ります。
+            作成したオブジェクト内のタイムゾーンを変更すると、日付自身にも影響を与えます。
+            日付は常にタイムゾーンと関連します。
+            <classname>Zend_Date</classname> オブジェクトのタイムゾーンを変更しても、
+            <classname>Zend_Date</classname> の時刻は変わりません。
+            内部での日付情報は、常にタイムスタンプ形式で GMT で格納されることを覚えておきましょう。
+            つまり、タイムゾーン情報が意味するのは、
+            そのタイムゾーンや地域の時刻を得るために、何時間ぶん加算あるいは減算しなければならないのかということです。
+        </para>
+
+        <para>
+            <classname>Zend_Date</classname> 内でタイムゾーンを管理して使用することには、もうひとつ利点があります。
+            さまざまなタイムゾーンをもつ複数の日付を扱うことができるようになるということです。
+        </para>
+
+        <example id="zend.date.additional.timezones.example-2">
+            <title>複数のタイムゾーン</title>
+            <programlisting role="php"><![CDATA[
+// デフォルトのタイムゾーンを設定します。
+// これは、起動ファイルか php.ini で設定します。
+// ここで設定しているのは、単体でサンプルとして完結させるためです。
+date_default_timezone_set('Europe/Vienna');
+
+// date オブジェクトを作成します
+$date = new Zend_Date('10.03.2007 00:00:00', Zend_Date::ISO_8601, 'de');
+
+// date オブジェクトの内容を確認します
+print $date->getIso();
+
+// タイムゾーンを変更しても、日付は変わらないままです
+date_default_timezone_set('America/Chicago');
+print $date->getIso();
+
+$otherdate = clone $date;
+$otherdate->setTimezone('Brazil/Acre');
+
+// date オブジェクトの内容を確認します
+print $otherdate->getIso();
+
+// システムの実際のタイムゾーンをオブジェクトに設定します
+$lastdate = clone $date;
+$lastdate->setTimezone();
+
+// date オブジェクトの内容を確認します
+print $lastdate->getIso();
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

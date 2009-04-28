@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.pdf.introduction">
+    <!-- @todo review and revise upon completion of refactoring -->
+    <title>導入</title>
+    <para>
+    <classname>Zend_Pdf</classname> コンポーネントは、PDF (Portable Document Format)
+    操作エンジンです。既存のドキュメントの読み込みや新しいドキュメントの作成、
+    ドキュメントの変更および変更内容の保存が可能です。PHP アプリケーションから
+    既存のテンプレートを使用した PDF を作成したり、新しい
+    PDF ドキュメントを作成したりする際の助けになるでしょう。
+
+    <classname>Zend_Pdf</classname> は、以下の機能をサポートしています。
+    <itemizedlist>
+        <listitem>
+            <para>
+            新しいドキュメントの作成や既存のドキュメントの読み込み
+            <footnote>
+                <para>
+                PDF V1.4 (Acrobat 5) 形式のドキュメントの読み込みをサポートしています。
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            指定した版のドキュメントの取得
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            ドキュメント内のページの操作。ページの並び順の変更や新しいページの追加、
+            ドキュメントからのページの削除など
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            さまざまな図形の描画 (直線、矩形、多角形、円、楕円、扇形)
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            14 種類の標準 (組み込み) フォントのうちのいずれか、あるいはあなたが用意した
+            TrueType フォントを使用したテキストの描画
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            回転
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            画像の描画
+            <footnote>
+                <para>
+                JPG、PNG [チャネルあたり8bit+Alpha まで] および TIFF 画像をサポートしています。
+                </para>
+            </footnote>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+            PDF ファイルのインクリメンタルな更新
+            </para>
+        </listitem>
+    </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

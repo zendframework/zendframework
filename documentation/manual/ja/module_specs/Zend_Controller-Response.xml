@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.controller.response">
+    <title>レスポンスオブジェクト</title>
+
+    <sect2 id="zend.controller.response.usage">
+        <title>使用法</title>
+
+        <para>
+            レスポンスオブジェクトは、
+            <link linkend="zend.controller.request">リクエストオブジェクト</link>
+            と対になるものです。
+            その目的は、コンテンツやヘッダを収集し、それを返すことです。
+            さらに、フロントコントローラで捕捉した例外はすべてレスポンスオブジェクトに渡されます。
+            これにより、例外の処理がやりやすくなります。
+            この挙動を変更するには
+            <classname>Zend_Controller_Front::throwExceptions(true)</classname>
+            と設定します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+]]>
+        </programlisting>
+
+        <para>
+            ヘッダを含むレスポンス出力を送信するには、
+            <code>sendOutput()</code> を使用します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->sendResponse();
+]]>
+        </programlisting>
+
+        <note>
+            <para>
+                デフォルトでは、リクエストのディスパッチに終了した時点でフロントコントローラが
+                <code>sendResponse()</code> をコールします。通常はこれをコールする必要はありません。
+                しかし、テスト中などにレスポンスの内容を操作したい場合は、
+                <code>returnResponse</code> フラグを
+                <classname>Zend_Controller_Front::returnResponse(true)</classname>
+                と設定することでこの振る舞いを変更できます。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// 何かの処理、たとえばログの記録などを行ってから
+// 結果を出力します
+$response->sendResponse();
+]]>
+            </programlisting>
+        </note>
+
+        <para>
+            開発者は、アクションコントローラの中でレスポンスオブジェクトを使用しなければなりません。
+            出力を直接レンダリングしたり直接ヘッダを送信したりするのではなく、
+            それらをレスポンスオブジェクトに格納するようにします。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// アクションコントローラのアクション内で、
+// ヘッダを設定します
+$this->getResponse()
+    ->setHeader('Content-Type', 'text/html')
+    ->appendBody($content);
+]]>
+        </programlisting>
+
+        <para>
+            こうすることで、すべてのヘッダを一度に送信し、
+            その後でコンテンツを表示することができます。
+        </para>
+
+        <note>
+            <para>
+                アクションコントローラで <link
+                    linkend="zend.controller.action.viewintegration">ビューの統合
+                    </link> を使用する場合は、
+                レンダリングされたビュースクリプトの内容をレスポンスオブジェクトに設定する必要はありません。
+                <classname>Zend_Controller_Action::render()</classname> がデフォルトでこれを行います。
+            </para>
+        </note>
+
+        <para>
+            アプリケーションで例外が発生したかどうかを調べるには、
+            レスポンスオブジェクトの <code>isException()</code>
+            フラグを調べます。例外を取得するには <code>getException()</code>
+            を使用します。さらに、独自のレスポンスオブジェクトを作成して、
+            エラーページへのリダイレクトや例外メッセージのログ出力、
+            例外をわかりやすく表示する (開発用) などを行うことができます。
+        </para>
+
+        <para>
+            レスポンスオブジェクトは、フロントコントローラの
+            dispatch() から受け取ることになります。あるいは、
+            出力のレンダリングを行わない状態のレスポンスオブジェクトを
+            フロントコントローラから受け取ることもできます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// dispatch の後に取得します
+$front->dispatch();
+$response = $front->getResponse();
+if ($response->isException()) {
+    // ログへの記録、メール送信など...
+}
+
+// あるいは、フロントコントローラの dispatch() の返り値を使用します
+$front->returnResponse(true);
+$response = $front->dispatch();
+
+// 何かの処理...
+
+// 最後に結果を表示します
+$response->sendResponse();
+]]>
+        </programlisting>
+
+        <para>
+            デフォルトでは、例外メッセージは表示されません。
+            この挙動をオーバーライドするには <code>renderExceptions()</code>
+            メソッドを使用するか、あるいは上で示したようにフロントコントローラで
+            throwExceptions() を有効にします。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$response->renderExceptions(true);
+$front->dispatch($request, $response);
+
+// あるいは
+$front->returnResponse(true);
+$response = $front->dispatch();
+$response->renderExceptions();
+$response->sendResponse();
+
+// あるいは
+$front->throwExceptions(true);
+$front->dispatch();
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.controller.response.headers">
+        <title>ヘッダの操作</title>
+
+        <para>
+            先ほど説明したように、レスポンスオブジェクトの役割のひとつは
+            HTTP レスポンスヘッダを発行することです。
+            このために、さまざまなメソッドが用意されています。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>canSendHeaders()</code> を使用して、
+                    ヘッダがすでに送信されているかどうかを調べます。
+                    オプションのフラグで、ヘッダが送信済みの場合に例外をスローするかどうかを指定します。
+                    この設定は、プロパティ <code>headersSentThrowsException</code>
+                    を <code>false</code> にすることで上書きできます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($name, $value, $replace = false)</code>
+                    を使用して、個々のヘッダを設定します。デフォルトでは、
+                    同名のヘッダがすでに存在した場合に既存のヘッダを置換することはありません。
+                    しかし、<code>$replace</code> を true に設定すると、
+                    既存のヘッダを上書きするようになります。
+                </para>
+
+                <para>
+                    ヘッダを設定する前に、このメソッドは
+                    <code>canSendHeaders()</code> を使用して
+                    ヘッダが現時点で送信済みでないかどうか、例外をスローするかどうかを調べます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRedirect($url, $code = 302)</code> は、
+                    リダイレクト用の HTTP Location ヘッダを設定します。
+                    HTTP ステータスコードを指定した場合は、そのコードを使用します。
+                </para>
+
+                <para>
+                    内部的には、このメソッドは
+                    <code>$replace</code> フラグをオンにして
+                    <code>setHeader()</code> をコールしています。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeaders()</code> は、すべてのヘッダを配列で返します。
+                    個々の配列の要素は、'name' および 'value'
+                    のふたつのキーを持つ配列となります。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders()</code> は登録済みのヘッダをすべて削除します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRawHeader()</code>
+                    を使用して、キー/値 の組になっていないヘッダを設定します。
+                    たとえば HTTP status ヘッダなどがこれにあたります。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getRawHeaders()</code> は、登録済みの生のヘッダを返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearRawHeaders()</code> は、登録済みの生のヘッダを消去します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearAllHeaders()</code> は、キー/値 のペアである通常のヘッダと
+                    生のヘッダの両方を消去します。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            これらのメソッドのほかに、現在のリクエストの HTTP レスポンスコードを
+            設定したり取得したりするメソッドとして
+            <code>setHttpResponseCode()</code> と
+            <code>getHttpResponseCode()</code> が用意されています。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.response.namedsegments">
+        <title>名前つきセグメント</title>
+
+        <para>
+            レスポンスオブジェクトでは「名前つきセグメント」をサポートしています。
+            これにより、本文部だけを別のセグメントに切り分けて、
+            指定した順序で出力したりといったことができるようになります。
+            内部的にはコンテンツは配列として保存され、
+            さまざまなメソッドを使用してその配列にアクセスできるようになります。
+        </para>
+
+        <para>
+            例として、<code>preDispatch()</code> フックメソッドで
+            レスポンスオブジェクトにヘッダを追加し、
+            アクションコントローラで本文を追加して、
+            最後に <code>postDispatch()</code> フックメソッドでフッタを追加することを考えてみましょう。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// このプラグインクラスがフロントコントローラで登録済みであると仮定します
+class MyPlugin extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->prepend('header', $view->render('header.phtml'));
+    }
+
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $response = $this->getResponse();
+        $view = new Zend_View();
+        $view->setBasePath('../views/scripts');
+
+        $response->append('footer', $view->render('footer.phtml'));
+    }
+}
+
+// アクションコントローラの例
+class MyController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        $this->render();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            上の例で <code>/my/foo</code> をコールすると、
+            レスポンスオブジェクトに最終的に格納されるコンテンツは次のようになります。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+array(
+    'header'  => ..., // ヘッダの内容
+    'default' => ..., // MyController::fooAction() が作成した本文
+    'footer'  => ...  // フッタの内容
+);
+]]>
+        </programlisting>
+
+        <para>
+            これをレンダリングすると、配列に要素が追加された順に表示されます。
+        </para>
+
+        <para>
+            名前つきセグメントを操作するメソッドには、以下のようなものがあります。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setBody()</code> および <code>appendBody()</code>
+                    の二番目のパラメータである <code>$name</code>
+                    に、セグメント名を渡すことができます。
+                    これを指定すると、指定したセグメントの内容を上書きします
+                    (存在しない場合は新たに作成し、配列に追加します)。
+                    <code>setBody()</code> にセグメント名を指定しなかった場合は、
+                    配列全体を初期化します。appendBody()
+                    でセグメント名を省略した場合は、'default'
+                    という名前のセグメントを追加します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>prepend($name, $content)</code> は、
+                    <code>$name</code> という名前のセグメントを作成して、
+                    それを配列の先頭に追加します。同じ名前のセグメントが存在する場合は、
+                    まずそれを削除してから追加します(つまり、既存のものを上書きします)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>append($name, $content)</code> は、
+                    <code>$name</code> という名前のセグメントを作成して、
+                    それを配列の最後に追加します。同じ名前のセグメントが存在する場合は、
+                    まずそれを削除してから追加します(つまり、既存のものを上書きします)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>insert($name, $content, $parent = null, $before =
+                        false)</code> は、<code>$name</code> という名前のセグメントを作成します。
+                    <code>$parent</code> セグメントを指定すると、
+                    新しいセグメントはそのセグメントの前か後ろ
+                    (<code>$before</code> の値で決まります)
+                    に配置されます。同じ名前のセグメントが存在する場合は、
+                    まずそれを削除してから追加します(つまり、既存のものを上書きします)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearBody($name = null)</code>
+                    に <code>$name</code> を指定すると、その名前のセグメントを消去します
+                    (省略した場合は、配列全体を消去します)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getBody($spec = false)</code> で
+                    <code>$spec</code> にセグメント名を指定すると、そのセグメントを取得できます。
+                    <code>$spec</code> に false を指定すると、
+                    すべてのセグメントの内容を順番に連結した結果を文字列で返します。
+                    <code>$spec</code> に true を指定すると、本文の配列を返します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.exceptions">
+        <title>レスポンスオブジェクト内での例外の検査</title>
+
+        <para>
+            先ほど説明したように、デフォルトでは
+            ディスパッチ中に発生した例外はレスポンスオブジェクトに登録されます。
+            例外はスタックに登録されるので、発生した例外はすべて保持することができます。
+            アプリケーションの例外、ディスパッチ処理の例外、プラグインの例外などなど……。
+            特定の例外の内容を調べたり例外をログに記録したりしたい場合は、
+            レスポンスオブジェクトの例外用 API を使用します。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setException(Exception $e)</code>
+                    は、例外を登録します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>isException()</code>
+                    は、例外が登録されているかどうかを調べます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getException()</code>
+                    は、例外スタック全体を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfType($type)</code>
+                    は、特定のクラスの例外がスタックに登録されているかどうかを調べます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfMessage($message)</code>
+                    は、指定したメッセージを含む例外が
+                    スタックに登録されているかどうかを調べます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>hasExceptionOfCode($code)</code>
+                    は、指定したコードを含む例外が
+                    スタックに登録されているかどうかを調べます。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByType($type)</code>
+                    は、指定したクラスの例外をスタックからすべて取り出します。
+                    そのクラスの例外が見つからなかった場合は false を返し、
+                    見つかった場合は例外の配列を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByMessage($message)</code>
+                    は、指定したメッセージを含む例外をスタックからすべて取り出します。
+                    そのクラスの例外が見つからなかった場合は false を返し、
+                    見つかった場合は例外の配列を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getExceptionByCode($code)</code>
+                    は、指定したコードを含む例外をスタックからすべて取り出します。
+                    そのクラスの例外が見つからなかった場合は false を返し、
+                    見つかった場合は例外の配列を返します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderExceptions($flag)</code>
+                    は、例外が発生したかどうかを表すフラグを設定します。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.response.subclassing">
+        <title>レスポンスオブジェクトのサブクラスの作成</title>
+
+        <para>
+            レスポンスオブジェクトの役割は、
+            さまざまなアクションやプラグインからヘッダやコンテンツを収集し、
+            それをクライアントに返すことです。
+            さらに、処理中に発生したエラーの内容も収集します。
+            これはそのまま返すこともありますし、あるいはユーザから見えないように隠すこともあります。
+        </para>
+
+        <para>
+            レスポンスクラスの基底クラスは
+            <classname>Zend_Controller_Response_Abstract</classname>
+            です。レスポンスクラスを作成する際には、
+            このクラスあるいはその派生クラスのいずれかを継承しなければなりません。
+            このクラスが提供するメソッドについては、先ほど説明しました。
+        </para>
+
+        <para>
+            レスポンスオブジェクトのサブクラスを作成する理由としては、
+            リクエストされた環境に応じて出力内容を変えたり
+            (たとえば CLI や PHP-GTK の場合はヘッダを送信しないなど)
+            名前つきセグメントに保存された内容の最終結果を返す機能を追加したりといったことが考えられます。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

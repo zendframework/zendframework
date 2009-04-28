@@ -1,0 +1,183 @@
+<sect1 id="zend.cache.backends">
+    <title>Zend_Cache backends</title>
+
+    <sect2 id="zend.cache.backends.file">
+        <title>Zend_Cache_Backend_File</title>
+        <para>
+            Deze backends slaat cache records op in bestanden (in een gekozen map).
+        </para>
+        <para>
+            Beschikbare opties zijn :
+        </para>
+        <table>
+            <title>Beschikbare opties</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>Optie</entry>
+                        <entry>Data Type</entry>
+                        <entry>Standaardwaarde</entry>
+                        <entry>Omschrijving</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cacheDir</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'/tmp/'</code></entry>
+                          <entry>
+                              Map waar de cache bestanden worden opgeslaan
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>fileLocking</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            Zet fileLocking af of aan : kan cache corruptie onder slechte
+                            omstandigheden vermijden maar helpt niet op multithread webservers
+                            of op NFS bestandssystemen...
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>readControl</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>true</code></entry>
+                          <entry>
+                            Zet schrijfcontrole af of aan : indien aangezet wordt er een een
+                            controlesleutel in het cachebestand geschreven en deze sleutel
+                            word dan vergelijkt met de berekende sleutel na het inlezen.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>readControlType</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>'crc32'</code></entry>
+                          <entry>
+                            Leescontrole type (alleen indien schrijfcontrole is aangezet). Beschikbare waarden
+                            zijn : 'md5' (beste maar traagste), 'crc32' (een beetje minder secuur maar sneller,
+                            betere keuze), 'strlen' voor een lengtetest alleen (snelst).
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashedDirectoryLevel</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0</code></entry>
+                          <entry>
+                            Maat van gehashte map structuur :    0 betekent "geen gehashte mapstructuur",
+                            1 betekent "1 map level", 2 betekent "2 map levels"...
+                            Deze optie kan de cache versnellen indien je meerdere duizende cache bestanden
+                            hebt. Alleen specifieke benchen kunnen je helpen om de juiste waarde voor je
+                            te vinden. Misschien is 1 of 2 een goede start.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>hashedDirectoryUmask</code></entry>
+                          <entry><code>int</code></entry>
+                          <entry><code>0700</code></entry>
+                          <entry>
+                            Umask voor de gehashte mapstructuur
+                        </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.sqlite">
+        <title>Zend_Cache_Backend_Sqlite</title>
+        <para>
+            Deze backend slaat cache records op in een SQLite database.
+        </para>
+        <para>
+            Beschikbare opties zijn :
+        </para>
+        <table>
+            <title>Beschikbare opties</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>Optie</entry>
+                        <entry>Data Type</entry>
+                        <entry>Standaardwaarde</entry>
+                        <entry>Omschrijving</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>cacheDBCompletePath (mandatory)</code></entry>
+                          <entry><code>string</code></entry>
+                          <entry><code>null</code></entry>
+                          <entry>
+                            Het complete pad (met bestandsnaam) naar de SQLite database
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.memcached">
+        <title>Zend_Cache_Backend_Memcached</title>
+        <para>
+            Deze backend slaat cache records op in een memcache server. <ulink url="http://www.danga.com/memcached/">memcached</ulink> is een high-performance, gedistribueerd systeem van object caching. Om deze
+            backend te gebruiken heb je een memcached daemon en de <ulink url="http://pecl.php.net/package/memcache">memcache PECL extension</ulink> nodig.
+        </para>
+        <para>
+            Opgelet : met deze backend zijn "tags" niet ondersteund als het "doNotTestCacheValidity=true" argument.
+        </para>
+        <para>
+            Beschikbare opties zijn :
+        </para>
+        <table>
+            <title>Beschikbare opties</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>Optie</entry>
+                        <entry>Data Type</entry>
+                        <entry>Standaardwaarde</entry>
+                        <entry>Omschrijving</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><code>servers</code></entry>
+                          <entry><code>array</code></entry>
+                          <entry><code>array(array('host' => 'localhost','port' => 11211, 'persistent' => true))</code></entry>
+                          <entry>
+                            Een array van memcached servers ; elke memcached server is beschreven door een associatieve
+                            array :
+                            'host' => (string) : de naam van een memcached server,
+                            'port' => (int) : de poort van een memcached server,
+                            'persistent' => (bool) : gebruik of niet van persistante verbindingen met deze memcached server
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compression</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                            true indien je on-the-fly compressie wil gebruiken
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    <sect2 id="zend.cache.backends.apc">
+        <title>Zend_Cache_Backend_APC</title>
+        <para>
+            Deze backend slaat cache records op in shared memory via de
+            <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternative PHP Cache) extensie
+            (welke uiteraard nodig is voor het gebruik van deze backend).
+        </para>
+        <para>
+            Opgelet : met deze backend zijn "tags" niet ondersteund als het "doNotTestCacheValidity=true" argument.
+        </para>
+        <para>
+            Er zijn geen opties voor deze backend.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

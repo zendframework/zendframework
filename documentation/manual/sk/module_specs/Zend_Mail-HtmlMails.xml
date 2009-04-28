@@ -1,0 +1,25 @@
+<sect1 id="zend.mail.html-mails">
+    <title>HTML e-mail</title>
+    <para>
+        Na poslanie e-mailu v HTML formáte je potrebné vytvoriť telo e-mailu pomocou metódy <code>setBodyHTML()</code>
+        na miesto metódy <code>setBodyText()</code>. Obsah bude automaticky označený ako <code>text/html</code>.
+        Ak sa vytvorí HTML a aj textová verzia e-mailu výsledný e-mail bude typu multipart/alternative:
+    </para>
+    <example>
+        <title>Vytvorenie a poslanie HTML e-mailu</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->setBodyText('Môj pekný Test Text');
+$mail->setBodyHtml('Môj pekný <b>Test</b> Text');
+$mail->setFrom('somebody@example.com', 'Odosielateľ');
+$mail->addTo('somebody_else@example.com', 'Príjemca');
+$mail->setSubject('Predmet');
+$mail->send();
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

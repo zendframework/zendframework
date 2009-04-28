@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.json.basics">
+    <title>基本的な使用法</title>
+    <para>
+        <classname>Zend_Json</classname> を使用するために、
+        静的な publicメソッドが 2 つ公開されています。
+        名前は <classname>Zend_Json::encode()</classname> および
+        <classname>Zend_Json::decode()</classname> となります。
+    </para>
+    <programlisting role="php"><![CDATA[
+// 値を取得します
+$phpNative = Zend_Json::decode($encodedValue);
+
+// クライアントに返すために、それをエンコードします
+$json = Zend_Json::encode($phpNative);
+]]>
+    </programlisting>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.nirvanix">
+    <title>Zend_Service_Nirvanix</title>
+
+    <sect2 id="zend.service.nirvanix.introduction">
+        <title>導入</title>
+
+        <para>
+            Nirvanix は Internet Media File System (IMFS)
+            です。インターネット上のストレージサービスに対して
+            ファイルをアップロードして保存し、ファイルを管理します。
+            また、標準的なウェブサービスインターフェイスでファイルにアクセスすることができます。
+            IMFS はクラスタ形式のファイルシステムで、インターネット越しにアクセスします。
+            また、メディアファイル (音声や動画など) に最適化されています。
+            IMFS の目標は、ますます増えていくメディアストレージに対応する
+            スケーラビリティを提供すること、
+            そしていつでもどこでもそこにアクセスできることを保証することです。
+            最後に、IMFS を使用すればアプリケーションからデータに対して
+            セキュアにアクセスできるようになります。また、
+            物理的なストレージを確保したり保守したりするためのコストも回避できます。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.registering">
+        <title>Nirvanix への登録</title>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname> を使う前に、
+            まずアカウントを取得する必要があります。詳細な情報は、
+            Nirvanix のウェブサイトにある
+            <ulink url="http://www.nirvanix.com/gettingStarted.aspx">Getting Started</ulink>
+            を参照ください。
+        </para>
+
+        <para>
+            登録を済ませると、ユーザ名とパスワードそしてアプリケーションキーが得られます。
+            <classname>Zend_Service_Nirvanix</classname> を使うには、
+            これらすべてが必要となります。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.apiDocumentation">
+        <title>API ドキュメント</title>
+
+        <para>
+            Nirvanix IMFS へのアクセス方法には、SOAP を使用する方法と
+            (より高速な) REST サービスを使用する方法があります。
+            <classname>Zend_Service_Nirvanix</classname>
+            は、REST サービスに対する比較的軽量な PHP 5 ラッパーを提供します。
+        </para>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname> の狙いは
+            Nirvanix REST サービスをより簡単に使用できるようにすることですが、
+            Nirvanix サービス自体についてきちんと理解しておくことも大切です。
+        </para>
+
+        <para>
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix API Documentation</ulink>
+            に、このサービスについての概要から詳細な情報までがまとめられています。
+            このドキュメントを熟読し、
+            <classname>Zend_Service_Nirvanix</classname>
+            を使う際にも常に参照するようにしましょう。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.features">
+        <title>機能</title>
+
+        <para>
+            Nirvanix の REST サービスは、PHP の
+            <ulink url="http://www.php.net/simplexml">SimpleXML</ulink>
+            拡張モジュールと <classname>Zend_Http_Client</classname>
+            を使うだけでもうまく操作できます。しかしこの方法だと、
+            リクエスト時にセッショントークンを毎回渡したり、
+            レスポンスの内容を確認してエラーコードを調べたりといった繰り返し処理が面倒です。
+        </para>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname> には次のような機能があります。
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Nirvanix の認証情報を一元管理し、
+                        Nirvanix 名前空間内で使いまわします。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        HTTP クライアントをそのまま使うよりもより便利なプロキシオブジェクトを用意し、
+                        REST サービスへのアクセス時に毎回 HTTP POST
+                        リクエストを手で作成させるような手間を省きます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        レスポンスオブジェクトのラッパーを用意し、
+                        レスポンスをパースしてエラー時には例外をスローするようにします。
+                        これにより、コマンドが成功したかどうかを調べるような
+                        面倒くさい処理を軽減させることができます。
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        ありがちな操作を行うための、便利なメソッドを提供します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.storing-your-first">
+        <title>さぁはじめましょう</title>
+
+        <para>
+            Nirvanix への登録をすませたら、
+            IMFS 上にファイルを格納する準備は完了です。
+            IMFS 上で必要となる作業として最もよくあるものは、
+            新規ファイルの作成や既存ファイルのダウンロード、
+            そしてファイルの削除といったところでしょう。
+            <classname>Zend_Service_Nirvanix</classname>
+            には、これら 3 つの操作のための便利なメソッドが用意されています。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$imfs->putContents('/foo.txt', 'contents to store');
+
+echo $imfs->getContents('/foo.txt');
+
+$imfs->unlink('/foo.txt');
+]]>
+        </programlisting>
+
+        <para>
+            <classname>Zend_Service_Nirvanix</classname>
+            を利用する際の最初の手続きは常に、サービスに対する認証となります。
+            これは、認証情報を上のように <classname>Zend_Service_Nirvanix</classname>
+            のコンストラクタに渡すことで行います。
+            連想配列の内容が、Nirvanix に対する POST パラメータとして直接渡されます。
+        </para>
+
+        <para>
+            Nirvanix は、ウェブサービスを
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999879">名前空間</ulink>
+            で区別しています。個々の名前空間が、関連する操作群をカプセル化しています。
+            <classname>Zend_Service_Nirvanix</classname> のインスタンスを取得したら、
+            <code>getService()</code> メソッドをコールして
+            使いたい名前空間へのプロキシを作成します。
+            上の例では、<code>IMFS</code> 名前空間へのプロキシを作成しています。
+        </para>
+
+        <para>
+            使いたい名前空間へのプロキシを取得したら、そのメソッドをコールします。
+            プロキシ上では、REST API の任意のコマンドを使用することができます。
+            また、プロキシにはウェブサービスのコマンドをラップする便利なメソッドも用意されています。
+            上の例では、IMFS の便利なメソッドを使用して新規ファイルを作成し、
+            それを取得して表示し、最後にファイルを削除しています。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.understanding-proxy">
+        <title>プロキシについて</title>
+
+        <para>
+            先ほどの理恵では、<code>getService()</code> メソッドを使用して
+            <code>IMFS</code> 名前空間へのプロキシオブジェクトを取得しました。
+            このプロキシオブジェクトを使用すると、Nirvanix の REST
+            サービスを通常の PHP のメソッドコールと同じ方式で行うことができます。
+            自分で HTTP リクエストオブジェクトを作成する方式ではこのようにはいきません。
+        </para>
+
+        <para>
+            プロキシオブジェクトには、その他の便利なメソッドも用意されています。
+            <classname>Zend_Service_Nirvanix</classname> が用意するこれらのメソッドを使用すれば、
+            Nirvanix ウェブサービスをよりシンプルに使用することができます。
+            先ほどの例では
+            <code>putContents()</code> や <code>getContents()</code>、
+            そして <code>unlink()</code> といったメソッドを使用していますが、
+            REST API にはこれらに直接対応するものは存在しません。
+            これらのメソッドは <classname>Zend_Service_Nirvanix</classname>
+            が提供しているもので、REST API 上でのより複雑な操作を抽象化したものです。
+        </para>
+
+        <para>
+            プロキシオブジェクトに対するその他のすべてのメソッドコールは、
+            プロキシによって動的に変換され、同等の REST API
+            に対する HTTP POST リクエストとなります。
+            これは、メソッド名を API のコマンドとして使用し、
+            最初の引数に渡した連想配列を POST パラメータとして使用します。
+        </para>
+
+        <para>
+            たとえば、REST API のメソッド
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999923">RenameFile</ulink>
+            をコールすることを考えてみましょう。このメソッドに対応する便利なメソッドは
+            <classname>Zend_Service_Nirvanix</classname> には用意されていません。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
+                                  'newFileName' => 'bar.txt'));
+]]>
+        </programlisting>
+
+        <para>
+            上の例では、<code>IMFS</code> 名前空間へのプロキシを作成します。
+            そして、プロキシ上で <code>renameFile()</code> メソッドをコールします。
+            このメソッドは PHP のコード上では定義されていないので、
+            <code>__call()</code> に渡されます。
+            そして、REST API に対する POST リクエストに変換され、
+            連想配列を POST パラメータとして使用します。
+        </para>
+
+        <para>
+            Nirvanix の API ドキュメントには、このメソッドには <code>sessionToken</code>
+            が必須であるとかかれていますが、プロキシオブジェクトにこれを渡していません。
+            これは、利便性を考慮して自動的に付加されるようになっています。
+        </para>
+
+        <para>
+            この操作の結果は <classname>Zend_Service_Nirvanix_Response</classname>
+            オブジェクトで返されます。これは Nirvanix が返す XML
+            をラップしたものです。エラーが発生した場合は
+            <classname>Zend_Service_Nirvanix_Exception</classname>
+            を返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.examining-results">
+        <title>結果の吟味</title>
+
+        <para>
+            Nirvanix の REST API は、常に結果を XML で返します。
+            <classname>Zend_Service_Nirvanix</classname> は、この XML を
+            <code>SimpleXML</code> 拡張モジュールでパースして、
+            結果として得られた <code>SimpleXMLElement</code>
+            を <classname>Zend_Service_Nirvanix_Response</classname>
+            オブジェクトに変換します。
+        </para>
+
+        <para>
+            サービスから返された結果の内容を調べるいちばん簡単な方法は、
+            PHP の組み込み関数である <code>print_r()</code>
+            などを使用することです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
+
+$nirvanix = new Zend_Service_Nirvanix($auth);
+$imfs = $nirvanix->getService('IMFS');
+
+$result = $imfs->putContents('/foo.txt', 'fourteen bytes');
+print_r($result);
+?>
+
+
+Zend_Service_Nirvanix_Response Object
+(
+    [_sxml:protected] => SimpleXMLElement Object
+        (
+            [ResponseCode] => 0
+            [FilesUploaded] => 1
+            [BytesUploaded] => 14
+        )
+)
+]]>
+        </programlisting>
+
+        <para>
+            <code>SimpleXMLElement</code> の任意のプロパティやメソッドにアクセスすることができます。
+            上の例では、<code>$result->BytesUploaded</code> を使用して
+            取得したバイト数を調べています。<code>SimpleXMLElement</code>
+            に直接アクセスしたい場合は <code>$result->getSxml()</code> を使用します。
+        </para>
+
+        <para>
+            Nirvanix からの帰り値のほとんどは、成功を表すもの (<code>ResponseCode</code> がゼロ)
+            です。通常は <code>ResponseCode</code> をチェックする必要はありません。
+            というのも、結果がゼロ以外になる場合は
+            <classname>Zend_Service_Nirvanix_Exception</classname> がスローされるからです。
+            エラー処理については次のセクションを参照ください。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.nirvanix.handling-errors">
+        <title>エラー処理</title>
+
+        <para>
+            Nirvanix を使用する際には、
+            サービスからエラーが返されることも想定して
+            適切にエラー処理を行うようにすることが大切です。
+        </para>
+
+        <para>
+            REST サービスに対するすべて操作の結果は XML で返され、
+            その中には <code>ResponseCode</code> 要素が含まれています。
+            たとえば次のようになります。
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+<Response>
+   <ResponseCode>0</ResponseCode>
+</Response>
+]]>
+</programlisting>
+
+        <para>
+            上の例のように <code>ResponseCode</code> がゼロの場合は、
+            その操作が成功したことを表します。操作が成功しなかった場合は
+            <code>ResponseCode</code> がゼロ以外の値となり、さらに
+            <code>ErrorMessage</code> 要素が含まれるようになります。
+        </para>
+
+        <para>
+            <code>ResponseCode</code> がゼロでないかどうかを
+            毎回チェックするのは手間がかかるので、
+            <classname>Zend_Service_Nirvanix</classname> は自動的に
+            Nirvanix が返す各レスポンスの内容をチェックします。
+            <code>ResponseCode</code> がエラーを表す値であった場合は
+            <classname>Zend_Service_Nirvanix_Exception</classname> がスローされます。
+        </para>
+
+        <programlisting role="xml"><![CDATA[
+$auth = array('username' => 'your-username',
+              'password' => 'your-password',
+              'appKey'   => 'your-app-key');
+$nirvanix = new Zend_Service_Nirvanix($auth);
+
+try {
+
+  $imfs = $nirvanix->getService('IMFS');
+  $imfs->unlink('/a-nonexistant-path');
+
+} catch (Zend_Service_Nirvanix_Exception $e) {
+  echo $e->getMessage() . "\n";
+  echo $e->getCode();
+}
+]]>
+</programlisting>
+
+        <para>
+            上の例で使用している <code>unlink()</code> は、REST API の
+            <code>DeleteFiles</code> コマンドをラップした便利なメソッドです。
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html#_Toc175999918">DeleteFiles</ulink>
+            コマンドが要求する The <code>filePath</code> パラメータに、
+            存在しないパスを指定しています。その結果、
+            <classname>Zend_Service_Nirvanix</classname> からは例外がスローされます。
+            メッセージは "Invalid path"、そしてコードは 70005 となります。
+        </para>
+
+        <para>
+            <ulink url="http://developer.nirvanix.com/sitefiles/1000/API.html">Nirvanix
+            API ドキュメント</ulink> に、各コマンドに関連するエラーが説明されています。
+            必要に応じて、各コマンドを <code>try</code> ブロックでラップするようにしましょう。
+            あるいは複数のコマンドをひとつの <code>try</code> ブロックにまとめてもかまいません。
+        </para>
+    </sect2>
+
+</sect1>

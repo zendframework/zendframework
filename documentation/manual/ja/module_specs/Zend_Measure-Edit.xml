@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.measure.edit">
+
+    <title>計測値の操作</title>
+
+    <para>
+        入力のパースと正規化、そしてローカライズされた表記での出力により、
+        さまざまなロケールのユーザがデータにアクセスできるようになります。
+        <classname>Zend_Measure_*</classname> コンポーネントには
+        それ以外にもさまざまなメソッドがあり、
+        正規化されたデータを操作することができます。
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.convert"><code>変換</code>
+                </link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.add"><code>加減算</code>
+                </link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.equal"><code>真偽の比較</code>
+                </link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.compare"><code>大小の比較</code>
+                </link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.changevalue"><code>値の変更</code>
+                </link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.measure.edit.changetype"><code>型の変更</code>
+                </link>
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <sect2 id="zend.measure.edit.convert">
+
+        <title>変換</title>
+
+        <para>
+            おそらく最も重要な機能は、異なる単位の変換でしょう。
+            単位の変換は、<code>convertTo()</code>
+            メソッドを使用していつでも何度でも行えます。
+            単位の変換は、同じ型の単位間に限られます。したがって、
+            たとえば長さの単位を重さの単位に変換することなどはできません。
+            もしそんなことができたらプログラムがめちゃくちゃになってしまい、
+            エラーだらけになってしまうでしょう。
+        </para>
+
+        <para>
+            <code>convertTo</code> メソッドには、オプションのパラメータ
+            '<code>round</code>' を指定することができます。
+            これは、出力結果の精度を設定するものです。標準の精度は
+            '<code>2</code>' です。
+        </para>
+
+        <example id="zend.measure.edit.convert.example-1">
+            <title>変換</title>
+            <programlisting role="php"><![CDATA[
+$locale = new Zend_Locale('de');
+$mystring = "1.234.567,89";
+$unit = new Zend_Measure_Weight($mystring,'POND', $locale);
+
+print "Kilo:".$unit->convertTo('KILOGRAM');
+
+// 文字列を使うより定数で指定するほうが "よりよい方法" です
+print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON);
+
+// 出力の精度を定義します
+print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.measure.edit.add">
+
+        <title>加減算</title>
+
+        <para>
+            複数の計測値の加算には <code>add()</code>、そして減算には <code>sub()</code>
+            を使用します。これらはそれぞれ、結果を格納した新しいオブジェクトを作成します。
+            このクラスがもとのオブジェクトを変更することはありません。
+            新しいオブジェクトは、もとのオブジェクトと同じ型になります。
+            Dynamic objects support a fluid style of
+            programming, where complex sequences of operations
+            can be nested without risk of side-effects altering the
+            input objects.
+        </para>
+
+        <para>
+            <example id="zend.measure.edit.add.example-1">
+                <title>単位の加算</title>
+                <programlisting role="php"><![CDATA[
+// オブジェクトを定義します
+$unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
+$unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+
+// $unit2 を $unit に足します
+$sum = $unit->add($unit2);
+
+echo $sum; // "300 cm" と出力します
+]]>
+                </programlisting>
+            </example>
+        </para>
+
+        <note>
+            <title>自動的な変換</title>
+            <para>
+                あるオブジェクトを別のオブジェクトに足す際には、
+                適切な単位に自動的に変換されます。異なる単位の値を足す前に
+                <link linkend="zend.measure.edit.convert"><code>convertTo()</code>
+                </link> をコールする必要はありません。
+            </para>
+        </note>
+
+        <para>
+            <example id="zend.measure.edit.add.example-2">
+                <title>減算</title>
+                <para>
+                    減算も、加算と同じように動作します。
+                </para>
+                <programlisting role="php"><![CDATA[
+// オブジェクトを定義します
+$unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
+$unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+
+// $unit2 を $unit から引きます
+$sum = $unit->sub($unit2);
+
+echo $sum;
+]]>
+                </programlisting>
+            </example>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.measure.edit.equal">
+
+        <title>比較</title>
+
+        <para>
+            計測値を比較することもできますが、自動的な単位変換は行われません。
+            したがって、<code>equals()</code> が
+            <code>TRUE</code> を返すのは、値と単位の両方が等しい場合のみです。
+        </para>
+
+        <para>
+            <example id="zend.measure.edit.equal.example-1">
+                <title>異なる計測値</title>
+                <programlisting role="php"><![CDATA[
+// 値を定義します
+$unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+
+if ($unit->equals($unit2)) {
+    print "これらは同じです";
+} else {
+    print "これらは異なります";
+}
+]]>
+                </programlisting>
+            </example>
+            <example id="zend.measure.edit.equal.example-2">
+                <title>同一の計測値</title>
+                <programlisting role="php"><![CDATA[
+// 値を定義します
+$unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+
+$unit2->setType(Zend_Measure_Length::CENTIMETER);
+
+if ($unit->equals($unit2)) {
+    print "これらは同じです";
+} else {
+    print "これらは異なります";
+}
+]]>
+                </programlisting>
+            </example>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.measure.edit.compare">
+
+        <title>比較</title>
+
+        <para>
+            ある計測値が別の計測値より小さいか大きいかを調べるには
+            <code>compare()</code> を使用します。これは、
+            ふたつのオブジェクトの差によって 0、1 あるいは -1 を返します。
+            ふたつが同一の場合は 0、小さい場合は負の数、
+            そして大きい場合は正の数を返します。
+        </para>
+
+        <para>
+            <example id="zend.measure.edit.compare.example-1">
+                <title>差</title>
+                <programlisting role="php"><![CDATA[
+$unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+$unit3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
+
+print "Equal:".$unit2->compare($unit);
+print "Lesser:".$unit2->compare($unit3);
+print "Greater:".$unit3->compare($unit2);
+]]>
+                </programlisting>
+            </example>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.measure.edit.changevalue">
+
+        <title>値の変更</title>
+
+        <para>
+            値を明示的に変更するには <code>setValue()</code> を使用します。
+            これは現在の値を上書きします。パラメータは、コンストラクタと同じです。
+        </para>
+
+        <para>
+            <example id="zend.measure.edit.changevalue.example-1">
+                <title>値の変更</title>
+                <programlisting role="php"><![CDATA[
+$locale = new Zend_Locale('de_AT');
+$unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
+
+$unit->setValue(1.2);
+echo $unit;
+
+$unit->setValue(1.2, Zend_Measure_Length::KILOMETER);
+echo $unit;
+
+$unit->setValue("1.234,56", Zend_Measure_Length::MILLIMETER,$locale);
+echo $unit;
+]]>
+                </programlisting>
+            </example>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.measure.edit.changetype">
+
+        <title>型の変更</title>
+
+        <para>
+            値はそのままで型だけを変更するには <code>setType()</code>
+            を使用します。
+        </para>
+
+        <example id="zend.measure.edit.changetype.example-1">
+            <title>型の変更</title>
+            <programlisting role="php"><![CDATA[
+$unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
+echo $unit; // "1 m" と出力します
+
+$unit->setType(Zend_Measure_Length::KILOMETER);
+echo $unit; // "1000 km" と出力します
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

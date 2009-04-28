@@ -1,0 +1,38 @@
+<sect1 id="zend.paginator.introduction">
+    <title>הקדמה</title>
+
+    <para>
+    	<code>Zend_Paginator</code> הינו רכיב גמיש למספור אוסף של נתונים ולהציגו למשתמשים.
+    </para>
+
+    <para>
+    	המטרות העיקריות של <code>Zend_Paginator</code> הן:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                	מספור מידע כל סוג, לא רק משהו שקשור למסד נתונים
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                	שליפת רק את אותם נתונים שצריך להציג
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                לא להכריח משתמשים להציג נתונים בשיטה אחת בלבד
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                רכיב ה <code>Zend_Paginator</code> משתמש בקושי ברכיבים אחרים של Zend Framework ככה שמשתמשים שרוצים להשתמש ב <code>Zend_Paginator</code> ללא צורך בכל
+                 ה Framework יוכלו לעשות זאת.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

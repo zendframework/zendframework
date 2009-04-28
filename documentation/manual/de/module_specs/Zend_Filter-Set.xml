@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <title>Standard Filter Klassen</title>
+
+    <para>
+        Zend Framework kommt mit einem Standardset von Filtern, welche bereits zur Verwendung fertig sind.
+    </para>
+
+    <sect2 id="zend.filter.set.alnum">
+        <title>Alnum</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und entfernt alles ausser alphabetische und nummerische
+            Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen erlaubt.
+        </para>
+
+        <note>
+            <para>
+                Alphabetische Zeichen bedeuten Zeichen die in jeder Spache Wörter bilden. Trotzdem wird das
+                englische Alphabet in den folgenden Sprachen für alphabethische Zeichen verwendet:
+                Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von Zend_Locale spezifiziert.
+            </para>
+        </note>
+
+    </sect2>
+
+    <sect2 id="zend.filter.set.alpha">
+        <title>Alpha</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und entfernt alles ausser alphabetische Zeichen. Dieser
+            Filter inkludiert eine Option die auch Leerzeichen erlaubt.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.basename">
+        <title>BaseName</title>
+        <para>
+            Wenn ein String einen Pfad zu einer Datei enthält gibt dieser Filter den Basisnamen der Datei zurück.
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Callback.xml" />
+    <xi:include href="Zend_Filter-Decryption.xml" />
+
+    <sect2 id="zend.filter.set.digits">
+        <title>Digits</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und entfernt alles ausser nummerische Zeichen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.dir">
+        <title>Dir</title>
+        <para>
+            Gibt den Verzeichnisnamen einer Pfadangabe zurück.
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-Encryption.xml" />
+
+    <sect2 id="zend.filter.set.htmlentities">
+        <title>HtmlEntities</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und konvertiert die Zeichen in Ihre
+            entsprechende HTML Entitität wenn diese existiert.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.int">
+        <title>Int</title>
+        <para>
+            Gibt (int) <code>$value</code> zurück.
+        </para>
+    </sect2>
+
+    <xi:include href="Zend_Filter-LocalizedToNormalized.xml" />
+    <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>StripNewlines</title>
+        <para>
+            Gibt den String <code>$value</code> ohne Zeilenumbruch Zeichen zurück.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.realpath">
+        <title>RealPath</title>
+        <para>
+            Erweitert alle symbolischen Links und löst Referenzen in '/./', '/../' und extra '/' Zeichen im
+            Eingabepfad auf und gibt den kanonischen absoluten Pfadnamen zurück. Der sich ergebende Pfad hat keine
+            symbolischen Links, '/./' oder '/../' Komponenten.
+        </para>
+        <para>
+            <classname>Zend_Filter_RealPath</classname> gibt bei einem Fehlschlag <code>FALSE</code> zurück, bzw. wenn
+            die Datei nicht existiert. Auf BSD Systemen schlägt <classname>Zend_Filter_RealPath</classname> nicht fehl
+            wenn die letzte Pfadkomponenten nicht existiert, wärend Sie auf anderen Systemen <code>FALSE</code>
+            zurückgibt.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtolower">
+        <title>StringToLower</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und konvertiert alphabetische Zeichen zu Kleinschreibung
+            wenn das notwendig ist.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtoupper">
+        <title>StringToUpper</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und konvertiert alphabetische Zeichen zu Großschreibung
+            wenn das notwendig ist.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stringtrim">
+        <title>StringTrim</title>
+        <para>
+            Gibt den String <code>$value</code> zurück und entfernt alle Leerzeichen vom Begin und vom Ende.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.striptags">
+        <title>StripTags</title>
+        <para>
+            Dieser Filter gibt den Eingabestring zurück, wobei alle HTML und PHP Tags von Ihm entfernt werden
+            ausser diesen die explizit erlaubt sind. Zusätzlich zur Möglichkeit zu definieren welche Tags erlaubt
+            sind können Entwickler definieren welche Attribute über alle erlaubten Tags erlaubt sind und auch nur
+            für spezielle Tags. Und Letztendlich bietet dieser Filter Kontrolle darüber ob Kommentare
+            (z.B., <code>&lt;!-- ... --&gt;</code>) entfernt werden oder nicht.
+        </para>
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,178 @@
+<?php
+
+/**
+ * @category   Zend
+ * @package    Zend_Mail
+ * @subpackage UnitTests
+ */
+
+
+/**
+ * Zend_Mail_Storage_Mbox
+ */
+require_once 'Zend/Mail/Storage/Mbox.php';
+
+/**
+ * PHPUnit test case
+ */
+require_once 'PHPUnit/Framework/TestCase.php';
+
+
+/**
+ * @category   Zend
+ * @package    Zend_Mail
+ * @subpackage UnitTests
+ */
+class Zend_Mail_InterfaceTest extends PHPUnit_Framework_TestCase
+{
+    protected $_mboxFile;
+
+    public function setUp()
+    {
+        $this->_mboxFile = dirname(__FILE__) . '/_files/test.mbox/INBOX';
+    }
+
+    public function testCount()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $count = count($list);
+        $this->assertEquals(7, $count);
+    }
+
+    public function testIsset()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $this->assertTrue(isset($list[1]));
+    }
+
+    public function testNotIsset()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $this->assertFalse(isset($list[10]));
+    }
+
+    public function testArrayGet()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $subject = $list[1]->subject;
+        $this->assertEquals('Simple Message', $subject);
+    }
+
+    public function testArraySetFail()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        try {
+            $list[1] = 'test';
+        } catch (Exception $e) {
+            return; // test ok
+        }
+
+        $this->fail('no exception thrown while writing to array access');
+    }
+
+    public function testIterationKey()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $pos = 1;
+        foreach ($list as $key => $message) {
+            $this->assertEquals($key, $pos, "wrong key in iteration $pos");
+            ++$pos;
+        }
+    }
+
+    public function testIterationIsMessage()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        foreach ($list as $key => $message) {
+            $this->assertTrue($message instanceof Zend_Mail_Message_Interface, 'value in iteration is not a mail message');
+        }
+    }
+
+    public function testIterationRounds()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $count = 0;
+        foreach ($list as $key => $message) {
+            ++$count;
+        }
+
+        $this->assertEquals(7, $count);
+    }
+
+    public function testIterationWithSeek()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $count = 0;
+        foreach (new LimitIterator($list, 1, 3) as $key => $message) {
+            ++$count;
+        }
+
+        $this->assertEquals(3, $count);
+    }
+
+    public function testIterationWithSeekCapped()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        $count = 0;
+        foreach (new LimitIterator($list, 3, 7) as $key => $message) {
+            ++$count;
+        }
+
+        $this->assertEquals(5, $count);
+    }
+
+    public function testFallback()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        try {
+            $result = $list->noop();
+            $this->assertTrue($result);
+        } catch (Exception $e) {
+            $this->fail('exception raised while calling noop thru fallback');
+        }
+    }
+
+    public function testWrongVariable()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        try {
+            $list->thisdoesnotexist;
+        } catch (Exception $e) {
+            return; // test ok
+        }
+
+        $this->fail('no exception thrown while reading wrong variable (via __get())');
+    }
+
+    public function testGetHeaders()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+        $headers = $list[1]->getHeaders();
+        $this->assertTrue(count($headers) > 0);
+    }
+
+    public function testWrongHeader()
+    {
+        $list = new Zend_Mail_Storage_Mbox(array('filename' => $this->_mboxFile));
+
+        try {
+            $list[1]->thisdoesnotexist;
+        } catch (Exception $e) {
+            return; // test ok
+        }
+
+        $this->fail('no exception thrown while reading wrong header');
+    }
+}

@@ -1,0 +1,35 @@
+<sect3 id="zend.view.helpers.initial.inlinescript">
+    <title>Helper InlineScript</title>
+
+    <para>
+        Znacznik HTML <code>&lt;script&gt;</code> używany jest zarówno do
+        wstawiania kodu skryptów wykonujących się po stronie klienta do treści
+        dokumentu jak i do załączania zewnętrznych plików zawierających taki
+        skrypty. Helper <code>InlineScript</code> pozwala ci na obsłużenie obu
+        sposobów. Wywodzi się on z <link
+            linkend="zend.view.helpers.initial.headscript">helpera HeadScript</link>
+        więc dostępne są wszystkie jego metody; z tą różnicą, że tu używaj metody
+        <code>inlineScript()</code> zamiast metody <code>headScript()</code>.
+    </para>
+
+    <note>
+        <title>Używaj helpera InlineScript dla skryptów w sekcji HTML Body</title>
+
+        <para>
+            Helpera <code>InlineScript</code> powinieneś użyć gdy chcesz dołączyć
+            skrypty wewnątrz sekcji HTML <code>body</code>. Umieszczanie
+            skryptów na końcu dokumentu jest dobrą praktyką powodującą
+            przyspieszenie ładowania strony, szczególnie gdy używasz skryptów
+            statystyk pochodzących od zewnętrznych firm.
+        </para>
+
+        <para>
+            Niektóre biblioteki JS muszą być dołączone w sekcji HTML <code>head</code>;
+            użyj <link linkend="zend.view.helpers.initial.headscript">helpera HeadScript</link>
+            dla tych skryptów.
+        </para>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

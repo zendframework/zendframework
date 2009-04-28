@@ -1,0 +1,45 @@
+<sect1 id="zend.mail.smtp-authentication">
+  <title>SMTP Autentifikácia</title>
+
+  <para>
+  <code>Zend_Mail</code> podporuje použitie SMTP autentifikacie, ktorá môže
+  byť povolená nastavením parametra 'auth' v konfiguračnom poli konštruktora
+  <code>Zend_Mail_Transport_Smtp</code>. Dostupné autentifikačné metódy su
+  PLAIN, LOGIN a CRAM-MD5 a všetky očakávajú zadané 'username' a 'password'
+  v konfiguračnom poli.
+  </para>
+
+  <example>
+    <title>Nastavenie SMTP autentifikácie v Zend_Mail_Transport_Smtp</title>
+
+    <programlisting role="php">&lt;?php
+
+require_once 'Zend/Mail.php';
+require_once 'Zend/Mail/Transport/Smtp.php';
+
+$config = array('auth' =&gt; 'login',
+                'username' =&gt; 'myusername',
+                'password' =&gt; 'password');
+
+$transport = new Zend_Mail_Transport_Smtp('mail.server.com', $config);
+
+$mail = new Zend_Mail();
+$mail-&gt;setBodyText('This is the text of the mail.');
+$mail-&gt;setFrom('sender@test.com', 'Some Sender');
+$mail-&gt;addTo('recipient@test.com', 'Some Recipient');
+$mail-&gt;setSubject('TestSubject');
+$mail-&gt;send($transport);</programlisting>
+  </example>
+
+  <note>
+    <title>Druhy autentifikácie</title>
+
+    <para>
+    Typy autentifikácie sú nezávislé na veľkosti písmen ale bez interpunkcie. Pre použitie napr.
+    CRAM-MD5 zadajte 'auth' =&gt; 'crammd5' v konštruktore <code>Zend_Mail_Transport_Smtp</code>.
+    </para>
+  </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

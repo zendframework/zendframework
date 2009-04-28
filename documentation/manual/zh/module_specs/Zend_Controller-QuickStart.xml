@@ -1,0 +1,231 @@
+<sect1 id="zend.controller.quickstart">
+    <title>Zend_Controller 快速入门</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>简介</title>
+        <para>
+
+        <code>Zend_Controller</code>是Zend Framework的MVC体系的核心部份。MVC指<ulink
+                url="http://en.wikipedia.org/wiki/Model-view-controller">Model-View-Controller</ulink>，是一个用于分离应用逻辑和表现逻辑的设计模式。<code>Zend_Controller_Front</code>实现了<ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front Controller</ulink>设计模式，所有的请求都通过front controller(前端控制器)并分发(dispatch)到不同的控制器来处理，分发的过程基于请求的URL。
+        </para>
+        <para>
+
+            <code>Zend_Controller</code>体系具有可扩展性，可以通过继承已有的类或者自己写个新的类来实现各种接口和抽象类，也可以编写插件或者助手类(helper)来增强系统的功能。
+
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>入门</title>
+
+        <para>
+            如果你想深入了解控制器，请认真看下面几节内容，如果你只是想快速地把系统搭建起来，看这一节。
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>文件系统的组织结构</title>
+
+            <para>
+                首先你要规划好自己的文件结构布局，典型的结构是这样的：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>设置文件根目录</title>
+
+            <para>
+                将你的WEB服务器文件根目录指向上面文件布局中的<code>html</code>目录。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>创建URL重写规则</title>
+
+            <para>
+                创建<code>html/.htaccess</code>，编辑其内容为：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+]]>
+            </programlisting>
+
+            <para>
+                在上例中，所有请求(除了对那几个扩展名的文件的请求)都被转向到index.php。如果你想在访问某些扩展名的文件时不转向到index.php，你可以建立自己的URL重写规则，或者直接把扩展名添加到(|)之中去。
+            </para>
+
+            <note>
+                <para>
+
+                上面的重写规则只能用于Apache服务器，如果你使用的是其它服务器，请查看 <link                         linkend="zend.controller.router.introduction">router的文档</link>.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>创建你的bootstrap文件</title>
+
+            <para>
+            (所谓Bootstrap，就相当于一小段引导程序或者入口程序，在ZF中，通常即指index.php，因为我们所有的请求都是从index.php进入的。--Haohappy注)
+            在设置好 .htaccess文件之后，建立一个新的文件index.php：
+
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]>
+            </programlisting>
+
+            <para>
+                这是一个入口文件，目的仅在于启动Zend_Controller_Front。Zend_Controller_Front用于分配请求到不同的控制器。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>创建默认的控制器（Action Controller）</title>
+
+            <para>
+
+                在讨论控制器之前，你应该先理解Zend Framework是如何处理HTTP请求的。默认情况下，URL的第一个部份会映射到一个控制器，第二个部份则映射到控制器类中的Action（即控制器类内部的一个方法）。例如：URL<code>http://framework.zend.com/roadmap/components</code>，其服务器路径为<code>/roadmap/components</code>，则会映射到<code>roadmap</code>控制器和<code>components</code>　Action。如果不存在action，则会调用index这个action。如果控制器不存在，则会自动调用index控制器。(按照Apache的命名惯例，自动映射到<code>DirectoryIndex</code>文件)
+
+
+            </para>
+
+            <para>
+
+                 接下来，<code>Zend_Controller</code>的dispatcher会根据控制器的名称找到具体的控制器类。通常它会把控制器名称加上<code>Controller</code>。因此，上例中<code>roadmap</code>控制器与类<code>RoadmapController</code>相对应。
+
+            </para>
+
+            <para>
+                   类似地，action会映射到控制器类中的一个类方法。默认情下，会被转成小写字母，然后加上<code>Action</code>字符串。因此，上例中<code>components</code>这个action与 <code>componentsAction</code>相对应。最终我们访问URL调用的是<code>RoadmapController->componentsAction()</code>
+
+            </para>
+
+            <para>
+                现在让我们来创建一个默认的控制器和Action方法吧。上面说过，默认的控制器和方法都以“index”命名。打开文件<code>application/controllers/IndexController.php</code>，输入：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/** Zend_Controller_Action */
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+
+                默认情况下，<link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>会被启用。这意味着只需要简单地下定义一个action方法，就会自动指定一个对应的View脚本，你可在action中直接把内容输出。默认情况下，我们采用Zend_View作为MVC开发的表现层部份。<code>ViewRenderer</code>根据控制器的名称（例如index）和当前的action的名称（例如index）来决定使用哪个模板文件。默认情况下，模板文件使用.phtml作为扩展名。　也就是说，上例中，我们将使用<code>index/index.phtml</code>模板文件。　另外，<code>ViewRenderer</code>自动假设<code>views</code>目录与控制器目录平级，作为视图层的基础目录，而实际的模板文件则放置在<code>views/scripts/</code> 子目录下。因为我们的模板文件应该是 <code>application/views/scripts/index/index.phtml</code>。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>创建你的视图脚本</title>
+
+            <para>
+                之前说过，视图脚本（即模板文件）放在<code>application/views/scripts/</code>目录下，而默认的模板是<code>application/views/scripts/index/index.phtml</code>。我们来创建这个文件，加入一些HTML代码：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>My first Zend Framework App</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>创建你自己的错误控制器</title>
+
+            <para>
+                默认情况下，<link linkend="zend.controller.plugins.standard.errorhandler">“错误处理器”插件</link> 是已经被注册的。这个插件要求存在一个用于处理错误的控制器。它假设存在一个<code>ErrorController</code>，并且其中有一个名为<code>errorAction</code>的Action：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                使用我们之前讨论的目录布局，这个文件将是<code>application/controllers/ErrorController.php</code>，你也需要为它创建一个模板文件，即<code>application/views/scripts/error/error.phtml</code>。其中的内容如下：
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>错误</title>
+</head>
+<body>
+    <h1>出错了</h1>
+    <p>出现了一个错误，请重试。</p>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>访问站点！</title>
+
+            <para>
+                创建好了你的第一个控制器和模板，你现在可以打开浏览器来访问看看了！　假设<code>example.com</code>是你的站点域名，那么下面的URL都会带你访问你刚才创建的页面：
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                恭喜你！　你已经准备好了，可以开始创建更多的控制器和Action！
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

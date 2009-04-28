@@ -1,0 +1,122 @@
+<sect1 id="zend.auth.adapter.digest">
+
+    <title>Uwierzytelnianie Digest</title>
+
+    <sect2 id="zend.auth.adapter.digest.introduction">
+
+        <title>Wprowadzenie</title>
+
+        <para>
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Uwierzytelnianie Digest</ulink>
+            jest metodą uwierzytelniania HTTP, która udoskonala
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">uwierzytelnianie Basic</ulink>
+            dostarczając sposób uwierzytelniania bez konieczności przesyłania
+            hasła w postaci czystego tekstu poprzez sieć.
+        </para>
+
+        <para>
+            Ten adapter pozwala na uwierzytelnianie w oparciu o pliki tekstowe
+            zawierające linie, w których znajdują się podstawowe elementy
+            uwierzytelniania digest:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        nazwa użytkownika, jak na przykład "<code>joe.user</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        nazwa obszaru, jak na przykład "<code>Administrative Area</code>"
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        skrót MD5 nazwy użytkownika, nazwy obszaru oraz hasła,
+                        oddzielonych dwukropkami
+                    </para>
+                </listitem>
+            </itemizedlist>
+            Powyższe elementy są oddzielone dwukropkami, tak jak w poniższym przykładzie
+            (w którym hasłem jest "<code>somePassword</code>"):
+        </para>
+
+        <programlisting><![CDATA[
+someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
+]]>
+</programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.specifics">
+
+        <title>Parametry</title>
+
+        <para>
+            Adapter uwierzytelniania digest, <code>Zend_Auth_Adapter_Digest</code>,
+            wymaga ustawienia kilku wejściowych parametrów:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        filename - plik na podstawie którego przeprowadzane są
+                        zapytania uwierzytelniania
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        realm - obszar uwierzytelniania Digest
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        username - użytkownik uwierzytelniania Digest
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        password - hasło dla użytkownika danego obszaru
+                    </para>
+                </listitem>
+            </itemizedlist>
+            Te parametry muszą być ustawione przed wywołaniem metody
+            <code>authenticate()</code>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.auth.adapter.digest.identity">
+
+        <title>Tożsamość</title>
+
+        <para>
+            Adapter uwierzytelniania digest zwraca obiekt <code>Zend_Auth_Result</code>,
+            który został wypełniony danymi tożsamości w postaci tablicy posiadajacej
+            klucze <code>realm</code> oraz <code>username</code>. Odpowiednie
+            wartości tablicy powiązane z tymi kluczami odpowiadają wartościom
+            ustawionym przed wywołaniem metody <code>authenticate()</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$adapter = new Zend_Auth_Adapter_Digest($filename,
+                                        $realm,
+                                        $username,
+                                        $password);
+
+$result = $adapter->authenticate();
+
+$identity = $result->getIdentity();
+
+print_r($identity);
+
+/*
+Array
+(
+    [realm] => Some Realm
+    [username] => someUser
+)
+*/
+]]>
+        </programlisting>
+
+    </sect2>
+
+</sect1>

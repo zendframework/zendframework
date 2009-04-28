@@ -1,0 +1,65 @@
+<sect1 id="zend.mime.message">
+    <title>Zend_Mime_Message</title>
+
+    <sect2 id="zend.mime.message.introduction">
+      <title>简介</title>
+
+      <para><code>Zend_Mime_Message</code>表示一个包含一个或多个段（段以<link
+      linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>对象表示）的符合MIME标准的消息。
+      在<code>Zend_Mime_Message</code>中，符合MIME标准的多段消息由<code>Zend_Mime_Part</code>对象产生。
+      编码和分段也是在Zend_Mime_Message中被处理。<code>Zend_Mime_Message</code>对象也可从给定的字符串中重构出来（实验性的）。
+      Zend_Mime_Message也被<link linkend="zend.mail"><code>Zend_Mail</code></link>使用（译注：Zend_Mail继承了Zend_Mime_Message）。
+      </para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.instantiation">
+        <title>实例化</title>
+        <para>
+            <code>Zend_Mime_Message</code>没有构造函数。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.addparts">
+        <title>增加MIME消息段</title>
+
+        <para>
+            <code>Zend_Mime_Message</code>对象通过调用<code>addPart($part)</code>方法，
+            可以添加<link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link>对象。
+        </para>
+     <para>
+         调用<code>Zend_Mime_Message</code>对象的<code>getParts()</code>方法，
+         返回<link linkend="zend.mime.part"><code>Zend_Mime_Part</code></link> 对象数组。
+        Zend_Mime_Part对象可以被更改，因为他们以引用的方式存储在Zend_Mime_Message对象的数组中。
+         如果数组中有新的段加入或者改变了段的顺序，该数组需通过调用<code>setParts($partsArray)</code>方法，反馈到<code>Zend_Mime_Message</code>中去。
+        </para>
+
+        <para>
+          当<code>Zend_Mime_Message</code>中存在多个段，方法<code>isMultiPart()</code>将返回TRUE。
+         <code>Zend_Mime_Message</code>在产生实际输出产生多段的MIME消息。
+     </para>
+    </sect2>
+
+    <sect2 id="zend.mime.message.bondary">
+        <title>分界线处理</title>
+        <para>
+          <code>Zend_Mime_Message</code>通常创建和使用自身的<code>Zend_Mime</code>对象来产生MINE分界线。
+          如果你想自己定义分界线或想更改<code>Zend_Mime_Message</code>自身的<code>Zend_Mime</code>对象的缺省的行为，
+          你可以自己实例化<code>Zend_Mime</code>对象，然后通过<code>setMime(Zend_Mime $mime)</code>方法注册到<code>Zend_Mime_Message</code>对象中去，通常你不需要这么做。
+     </para>
+        <para><code>-&gt;getMime()</code>方法，返回<code>Zend_Mime</code>实例，当<code>generateMessage()</code>被调用时<code>Zend_Mime</code>实例用来渲染MIME消息。</para>
+        <para><code>-&gt;generateMessage()</code>方法，渲染<code>Zend_Mime_Message</code>的内容为字符串。</para>
+   </sect2>
+
+    <sect2 id="zend.mime.message.parse">
+        <title>解析字符串，创建Zend_Mime_Message对象（实验性的）</title>
+
+        <para>给定一个字符串形式的符合MIME标准的消息，可以重构出<code>Zend_Mime_Message</code>对象。
+        <code>Zend_Mime_Message</code>有一个静态的工厂方法，解析字符串，返回<code>Zend_Mime_Message</code>对象。</para>
+
+        <para><code>Zend_Mime_Message::createFromMessage($str, $boundary)</code>将给定的字符串解码，
+            返回<code>Zend_Mime_Message</code>对象，可以用<code>getParts()</code>方法来检验一下。</para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

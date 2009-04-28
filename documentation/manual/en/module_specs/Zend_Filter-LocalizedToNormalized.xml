@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.filter.set.localizedtonormalized">
+
+    <title>LocalizedToNormalized</title>
+
+    <para>
+        This filter will change any given localized input to it's normalized representation. It
+        uses in Background <classname>Zend_Locale</classname> to do this transformation for you.
+    </para>
+
+    <para>
+        This allows your user to enter informations in his own language notation, and you can then
+        store the normalized value into your database for example.
+    </para>
+
+    <note>
+        <para>
+            Please note that normalization is not equal to translation. This filter can not translate
+            strings from one language into another like you could expect with months or names of days.
+        </para>
+    </note>
+
+    <para>
+        The following input types can be normalized:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>integer</emphasis>: Integer numbers, which are localized, will be normalized
+                to the english notation.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>float</emphasis>: Float numbers, which are localized, will be normalized
+                to the english notation.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>numbers</emphasis>: Other numbers, like real, will be normalized
+                to the english notation.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>time</emphasis>: Time values, will be normalized to a named array.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>date</emphasis>: Date values, will be normalized to a named array.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Any other input will be returned as it, without changing it.
+    </para>
+
+    <note>
+        <para>
+            You should note that normalized output is always given as string. Otherwise your
+            environment would transfor the normalized output automatically to the notation used
+            by the locale your environment is set to.
+        </para>
+    </note>
+
+    <sect3 id="zend.filter.set.localizedtonormalized.numbers">
+
+        <title>Normalization for numbers</title>
+
+        <para>
+            Any given number like integer, float or real value, can be normalized. Note, that
+            numbers in scientific notation, can actually not be handled by this filter.
+        </para>
+
+        <para>
+            So how does this normalization work in detail for numbers:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Initiate the filter
+$filter = new Zend_Filter_LocalizedToNormalized();
+$filter->filter('123.456,78');
+// returns the value '123456.78'
+]]></programlisting>
+
+        <para>
+            Let's expect you have set the locale 'de' as application wide locale.
+            <classname>Zend_Filter_LocalizedToNormalized</classname> will take the set locale and use it to
+            detect which sort of input you gave. In our example it was a value with precision. Now
+            the filter will return you the normalized representation for this value as string.
+        </para>
+
+        <para>
+            You can also control how your normalized number has to look like. Therefor you can give
+            all options which are also used by <classname>Zend_Locale_Format</classname>. The most common are:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>date_format</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>locale</emphasis>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>precision</emphasis>
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            For details about how these options are used take a look into this
+            <link linkend="zend.locale.parsing">Zend_Locale chapter</link>.
+        </para>
+
+        <para>
+            Below is a example with defined precision so you can see how options
+            work:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Numeric Filter
+$filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
+
+$filter->filter('123.456');
+// returns the value '123456.00'
+
+$filter->filter('123.456,78901');
+// returns the value '123456.79'
+]]></programlisting>
+
+    </sect3>
+
+    <sect3 id="zend.filter.set.localizedtonormalized.dates">
+
+        <title>Normalization for date and time</title>
+
+        <para>
+            Input for date and time values can also be normalized. All given date and time values
+            will be returned as array, where each date part is given within a own key.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Initiate the filter
+$filter = new Zend_Filter_LocalizedToNormalized();
+$filter->filter('12.April.2009');
+// returns array('day' => '12', 'month' => '04', 'year' => '2009')
+]]></programlisting>
+
+        <para>
+            Let's expect you have set the locale 'de' again. Now the input is automatically detected
+            as date, and you will get a named array in return.
+        </para>
+
+        <para>
+            Of course you can also control how your date input looks like with the
+            <emphasis>date_format</emphasis> and the <emphasis>locale</emphasis> option.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Date Filter
+$filter = new Zend_Filter_LocalizedToNormalized(
+    array('date_format' => 'ss:mm:HH')
+);
+
+$filter->filter('11:22:33');
+// returns array('hour' => '33', 'minute' => '22', 'second' => '11')
+]]></programlisting>
+    </sect3>
+
+</sect2>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

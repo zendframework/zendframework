@@ -1,0 +1,143 @@
+<!-- EN-Revision: 14385 -->
+<sect3 id="zend.view.helpers.initial.headstyle">
+    <title>L'aide de vue HeadStyle</title>
+
+    <para>L'élément HTML <code>&lt;style&gt;</code> est utilisé pour inclure des feuilles de styles CSS à l'intérieur de
+    l'élément HTML <code>&lt;head&gt;</code>.</para>
+
+    <note>
+        <title>Utilisez HeadLink pour lier des fichiers CSS externes</title>
+
+        <para><link linkend="zend.view.helpers.initial.headlink">HeadLink</link> devrait être utilisé pour inclure des
+        feuilles de styles externes. <code>HeadScript</code> ne devrait être utilisé que si vous souhaitez définir des
+        feuilles de styles internes.</para>
+    </note>
+
+    <para>L'aide de vue <code>HeadStyle</code> supporte les méthodes suivantes pour l'ajout et le paramétrage des
+    déclarations de feuilles de styles :</para>
+
+    <itemizedlist>
+        <listitem>
+            <para><code>appendStyle($content, $attributes = array())</code></para>
+        </listitem>
+
+        <listitem>
+            <para><code>offsetSetStyle($index, $content, $attributes = array())</code></para>
+        </listitem>
+
+        <listitem>
+            <para><code>prependStyle($content, $attributes = array())</code></para>
+        </listitem>
+
+        <listitem>
+            <para><code>setStyle($content, $attributes = array())</code></para>
+        </listitem>
+    </itemizedlist>
+
+    <para>Dans tous les cas, <code>$content</code> est le contenu des déclarations CSS. <code>$attributes</code> sont
+    les attributs additionnels que vous pouvez fournir à la balise <code>style</code> : "lang", "title", "media", ou
+    "dir" sont autorisés.</para>
+
+    <note>
+        <title>Paramétrez des commentaires conditionnels</title>
+
+        <para><code>HeadStyle</code> vous permet d'englober vos balises de style avec des commentaires conditionnels, ce
+        qui permet de les masquer pour des navigateurs spécifiques. Pour ajouter les balises conditionnelles, fournissez
+        le paramètre <code>conditional</code> en tant que partie du paramètre <code>$attrs</code> lors de l'appel de la
+        méthode.</para>
+
+        <example id="zend.view.helpers.initial.headstyle.conditional">
+            <title>HeadStyle avec des commentaires conditionnels</title>
+
+            <programlisting role="php"><![CDATA[
+// adding scripts
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
+]]></programlisting>
+        </example>
+    </note>
+
+    <para><code>HeadStyle</code> permet aussi la capture des déclarations de style ; ceci peut être utile si vous voulez
+    créer des déclarations par programme, et ensuite les placer à un autre endroit. L'utilisation de cette
+    fonctionnalité est montrée dans un exemple ci-dessous.</para>
+
+    <para>Enfin, vous pouvez utiliser la méthode <code>headStyle()</code> pour ajouter rapidement des éléments de
+    déclarations ; la signature de la méthode est <code>headStyle($content$placement = 'APPEND', $attributes =
+    array())</code>. <code>$placement</code> peut être "APPEND", "PREPEND", ou "SET".</para>
+
+    <para><code>HeadStyle</code> surcharge chacune des méthodes <code>append()</code>, <code>offsetSet()</code>,
+    <code>prepend()</code>, et <code>set()</code> pour imposer l'utilisation des méthodes spéciales listées ci-dessus.
+    En interne, il stocke chaque élément sous la forme d'un <code>stdClass</code>, qui est ensuite sérialisé en
+    utilisant la méthode <code>itemToString()</code>. Ceci vous permet de réaliser des vérifications sur les éléments de
+    la pile, et optionnellement modifier ces éléments en modifiant simplement l'objet retourné.</para>
+
+    <para>L'aide <code>HeadStyle</code> est une implémentation concrète de l'aide <link
+    linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.</para>
+
+    <example id="zend.view.helpers.initial.headstyle.basicusage">
+        <title>Utilisation basique de l'aide HeadStyle</title>
+
+        <para>Vous pouvez spécifier une nouvelle balise de style à n'importe quel moment :</para>
+
+        <programlisting role="php"><![CDATA[
+// ajout de styles
+$this->headStyle()->appendStyle($styles);
+]]></programlisting>
+
+        <para>L'ordre est très important avec les CSS ; vous pouvez devoir assurer que les déclarations soient chargées
+        dans un ordre spécifique dû à l'ordre de la cascade ; employez les diverses directives "append", "prepend", et
+        "offsetSet" pour faciliter cette tâche :</para>
+
+        <programlisting role="php"><![CDATA[
+// Mettre les styles dans le bon ordre
+
+// - placer à un offset particulier
+$this->headStyle()->offsetSetStyle(100, $stylesPerso);
+
+// - placer à la fin
+$this->headStyle()->appendStyle($stylesFinaux);
+
+// - placer au début
+$this->headStyle()->prependStyle($stylesInitiaux);
+]]></programlisting>
+
+        <para>Quand vous êtes finalement prêt à afficher toutes les déclarations de styles dans votre script de layout,
+        faîtes un simple <code>echo</code> de l'aide :</para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->headStyle() ?>
+]]></programlisting>
+    </example>
+
+    <example id="zend.view.helpers.initial.headstyle.capture">
+        <title>Capturer les déclarations de style en utilisant l'aide HeadStyle</title>
+
+        <para>Parfois vous devez produire des déclarations de styles CSS par programme. Même si vous pouvez employer la
+        concaténation de chaînes, les "heredocs", ou tout autre équivalent, il est souvent plus facile de faire juste la
+        création des styles et de les entourer par des balises PHP. <code>HeadStyle</code> vous permet de le faire, et
+        capture ainsi l'élément dans la pile :</para>
+
+        <programlisting role="php"><![CDATA[
+<?php $this->headStyle()->captureStart() ?>
+body {
+    background-color: <?php echo $this->bgColor ?>;
+}
+<?php $this->headStyle()->captureEnd() ?>
+]]></programlisting>
+
+        <para>Les suppositions suivantes sont considérées :</para>
+
+        <itemizedlist>
+            <listitem>
+                <para>Les déclarations de styles sont ajoutées à la pile. Si vous souhaitez qu'elles remplacent la pile
+                ou qu'elles soient ajoutées en début de pile, vous devez fournir "SET" ou "PREPEND", en tant que premier
+                argument de <code>captureStart()</code>.</para>
+            </listitem>
+
+            <listitem>
+                <para>Si vous souhaitez spécifier un quelconque attribut additionnel pour la balise
+                <code>&lt;style&gt;</code>, fournissez-le sous la forme d'un tableau en deuxième argument de
+                <code>captureStart()</code>.</para>
+            </listitem>
+        </itemizedlist>
+    </example>
+</sect3>

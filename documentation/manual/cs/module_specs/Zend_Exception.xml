@@ -1,0 +1,33 @@
+<sect1 id="zend.exception.using">
+
+    <title>Práce s výjimkami</title>
+
+    <para>
+        Všechny výjimky vyhozené v Zend Frameworku by měly být odvozeny od
+        hlavní třídy Zend_Exception.
+    </para>
+
+    <example id="zend.exception.using.example">
+        <title>Příklad zachycení výjimky</title>
+        <programlisting role="php"><![CDATA[<?php
+try {
+    Zend_Loader::loadClass('neexistujicitrida');
+} catch (Zend_Exception $e) {
+    echo "Zachycená výjimka: " . get_class($e) . "\n";
+    echo "Zpráva: " . $e->getMessage() . "\n";
+    // další kód, který se vykoná při chybě
+}
+?>]]></programlisting>
+    </example>
+
+    <para>
+        Pro více informací o výjimkách se podívejte do dokumentace
+        k příslušné knihovně Zend Frameworku. Najdete informace metodach,
+        které výjimky vyhazují a za jakých okolností se tak děje
+        a které výjimky jsou zděděny z hlavní výjimky - Zend_Exception.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

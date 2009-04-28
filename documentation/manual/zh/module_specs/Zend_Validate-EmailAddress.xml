@@ -1,0 +1,126 @@
+<sect2 id="zend.validate.set.email_addresses">
+
+    <title> Email 地址</title>
+
+    <para>
+        <code>Zend_Validate_EmailAddress</code>允许你校验一个email地址。首先校验器把email地址分成local-part和@hostname并试图按照email地址和主机名的规范来匹配它。
+    </para>
+
+    <para>
+        <emphasis role="strong">基本用法</emphasis>
+    </para>
+
+    <para>
+        一个基本用法的例子如下：
+
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress();
+if ($validator->isValid($email)) {
+    // email appears to be valid
+} else {
+    // email is invalid; print the reasons
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]>
+        </programlisting>
+
+        这个例子匹配email地址<code>$email</code>并在匹配失败的时候用<code>$validator->getMessages()</code>来获得有用的错误信息。
+
+    </para>
+
+
+    <para>
+        <emphasis role="strong">复杂的local parts</emphasis>
+    </para>
+
+    <para>
+        <code>Zend_Validate_EmailAddress</code>根据RFC2822来匹配任何有效的email地址。例如，有效的email地址包括<code>bob@domain.com</code>, <code>bob+jones@domain.us</code>, <code>"bob@jones"@domain.com</code> 和 <code>"bob jones"@domain.com</code>。一些过时的email格式目前不再校验（例如email地址中的回车符或"\"符）。
+    </para>
+
+    <para>
+        <emphasis role="strong">校验不同类型的主机名</emphasis>
+    </para>
+
+    <para>
+        Email地址中的主机名部分依靠<link linkend="zend.validate.set.hostnames"><code>Zend_Validate_Hostname</code></link>来校验。尽管你希望IP地址和本地主机名也被接受，但缺省地只有像<code>domain.com</code>格式的DNS主机名被接受。
+        当然如果你想如愿，需要实例化<code>Zend_Validate_EmailAddress</code>并传递一个参数来指明哪种主机名你想接受。更多的细节包含在<code>Zend_Validate_Hostname</code>中。
+        下面的例子显示如何同时接受DNS和本地主机名：
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_LOCAL);
+if ($validator->isValid($email)) {
+    // email appears to be valid
+} else {
+    // email is invalid; print the reasons
+    foreach ($validator->getMessages() as $message) {
+        echo "$message\n";
+    }
+}
+]]>
+        </programlisting>
+
+    </para>
+    <para>
+        <emphasis role="strong">检查主机名是否确实接受email</emphasis>
+    </para>
+
+    <para>
+        email地址的格式正确并不意味着这个email地址确实存在。为解决这个问题，你可以用MX校验来检查一个MX(email)条目的主机名是否存在于DNS的纪录里。这将告诉你这个主机名接受email，但并不告诉你确切的email地址是有效的。
+    </para>
+
+    <para>
+        MX 检查不是缺省地激活的，并且目前只支持UNIX平台。为激活MX检查，你可以传递第二个参数给<code>Zend_Validate_EmailAddress</code>构造器。
+        <programlisting role="php"><![CDATA[
+$validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS, true);
+]]>
+        </programlisting>
+
+        另外你可以传递 <code>true</code> 或 <code>false</code> 给<code>$validator->setValidateMx()</code> 来激活或禁止 MX 校验。
+    </para>
+
+    <para>
+        用激活这个设置的网络函数将用来为你所想校验的email地址的主机名中的MX记录的存在做检查。请注意这将可能把你的脚本变慢。
+    </para>
+
+    <para>
+        <emphasis role="strong">校验国际域名</emphasis>
+    </para>
+
+    <para>
+        <code>Zend_Validate_EmailAddress</code> 也将匹配存在于某些域名中的国际字符。这就是国际域名（IDN）支持。这个是缺省激活，你可以通过用存在于 <code>Zend_Validate_EmailAddress</code> 中的内部的 <code>Zend_Validate_Hostname</code> 对象来改变设置来禁止。
+
+    <programlisting role="php"><![CDATA[
+$validator->hostnameValidator->setValidateIdn(false);
+]]>
+    </programlisting>
+
+        关于 <code>setValidateIdn()</code> 更多的信息在<code>Zend_Validate_Hostname</code> 文档中。
+    </para>
+
+    <para>
+        请注意你有你允许DNS 主机名被校验，国际域名（IDNs）才被校验。
+    </para>
+
+    <para>
+        <emphasis role="strong">校验顶级域名</emphasis>
+    </para>
+
+    <para>
+       缺省地用已知的TLDs列表来检查主机名。你可以通过用存在于<code>Zend_Validate_EmailAddress</code> 中的内部的 <code>Zend_Validate_Hostname</code> 对象来改变设置来禁止。
+    <programlisting role="php"><![CDATA[
+$validator->hostnameValidator->setValidateTld(false);
+]]>
+    </programlisting>
+
+        关于 <code>setValidateTld()</code> 更多的信息在<code>Zend_Validate_Hostname</code> 文档中。
+    </para>
+
+    <para>
+        请注意你有你允许DNS 主机名被校验，顶级域名（TLDs）才被校验。
+    </para>
+
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,66 @@
+<sect1 id="zend.debug.dumping">
+
+    <title>Zobrazovanie obsahu premenených</title>
+
+    <para>
+        Statická metóda <code>Zend_Debug::dump()</code> vypíše, alebo vráti informáciu
+        o výraze. Tento spôsob ladenia je bežný, lebo je jednoducho použiteľný a
+        nepotrebuje inicializáciu, špeciálne nástroje, alebo ladiace prostredie.
+    </para>
+
+    <example id="zend.debug.dumping.example">
+        <title>Príklad metódy dump() </title>
+        <programlisting role="php"><![CDATA[<?php
+
+Zend_Debug::dump($var, $label=null, $echo=true)
+
+?>]]></programlisting>
+    </example>
+
+    <para>
+        Argument <code>$var</code> obsahuje výraz, premennú o ktorej chceme zistiť
+        informácie pomocou metódy <code>Zend_Debug::dump()</code>
+    </para>
+
+    <para>
+        Argument <code>$label</code> je reťazec ktorý bude pridaný pre výstup
+        <code>Zend_Debug::dump()</code>. Môže to byť užitočné keď sa zobrazuje viac
+        premenných na jednej obrazovke.
+    </para>
+
+    <para>
+        Argument <code>$echo</code> určuje či výstup z <code>Zend_Debug::dump()</code>
+        bude vypísaný, alebo nie. Ak je <code>true</code> výstup bude vypísaný.
+        Návratová hodnota vždy obsahuje výstup a nezáleží na hodnote argumentu
+        <code>$echo</code>.
+    </para>
+
+    <para>
+        Môže byť užitočné vedieť ako funguje metóda <code>Zend_Debug::dump()</code>
+        vnútorne. Je to obalenie PHP funkcie
+        <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
+        Ak je výstup detekovaný ako web, potom je výstup z <code>var_dump()</code>
+        escapovaný pomocou
+       <ulink url="http://php.net/htmlspecialchars"><code>htmlspecialchars()</code></ulink>
+       a obalený (X)HTML značkou <code>&lt;pre&gt;</code>.
+    </para>
+
+    <tip>
+        <title>Ladenie s Zend_Log</title>
+        <para>
+            Použitie <code>Zend_Debug::dump()</code> je najlepšie pre okamžité
+            použitie počas vývoja aplikácie. Pridanie a odobratie kódu pre zobrazenie
+            premennej, alebo výrazu je rýchle.
+        </para>
+        <para>
+            Vhodné je zvážiť použitie <link linkend="zend.log.overview">Zend_Log</link>
+            pre písanie trvalejšieho kódu pre ladenie. Napríklad je možné použiť
+            úroveň zaznamenávania <code>DEBUG</code> a zapisovať do súboru, ...,
+            výstup vrátený metódou <code>Zend_Debug::dump()</code>.
+        </para>
+    </tip>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

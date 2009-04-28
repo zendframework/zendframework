@@ -1,0 +1,17 @@
+<sect1 id="zend.json.introduction">
+    <title>مقدمة</title>
+    <para>
+        توفر <code>Zend_Json</code> مجموعة من الـ methods التى تسهل عملية الـ serialization من PHP
+        إلى JSON , و عملية تحويل JSON إلى PHP عادية , و لمزيد من المعلومات عن JSON :
+        <ulink url="http://www.json.org/">قم بزيارة موقع مشروع JSON</ulink>.
+    </para>
+    <para>
+        JSON أو JavaScript Object Notation , يمكن إستخدامها لتبادل البيانات بين لغة JavaScript
+        و اللغات الأخرى, و حيث أن JSON يمكن أن يتم فهمها مباشرة من قبل JavaScript ,
+        لذلك تتميز بكفائة و خفة وزن أكبر من التى توفرها XML و ذلك فى عمليات تبادل البيانات
+        مع لغة JavaScript .
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

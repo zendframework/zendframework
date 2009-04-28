@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.test.phpunit.bootstrapping">
+    <title>Bootstrapping der eigenen TestCases</title>
+
+    <para>
+        Wie im <link linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gezeigt sollten alle
+        MVC Testcases <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> erweitern. Diese Klasse ihrerseits
+        erweitert <code>PHPUnit_Framework_TestCase</code>, und gibt einem alle Strukturen und Ausnahmen
+        die man von PHPUnit erwartet -- sowie einiges an Scaffolding und Ausnahme spezifisches der
+        Zend Framework MVC Implementation.
+    </para>
+
+    <para>
+        Um die eigene MVC Anwendung zu testen muß diese ein Bootstrap ausführen. Es gibt verschiedene Wege
+        um das zu tun, wobei alle von Ihnen sich der öffentlichen <code>$bootstrap</code> Eigenschaft
+        bedienen.
+    </para>
+
+    <para>
+        Zuerst kann diese Eigenschaft so gesetzt werden das Sie auf eine Datei zeigt. Wenn das getan wurde
+        sollte diese Datei <emphasis>nicht</emphasis> den Front Kontroller ausführen, aber stattdessen den
+        Front Kontroller konfigurieren und alles was die Anwendung an speziellen Dingen benötigt.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public $bootstrap = '/path/to/bootstrap/file.php'
+
+    // ...
+}
+]]>
+    </programlisting>
+
+    <para>
+        Zweitens kann ein PHP Callback angegeben werden der nach dem Bootstrap der Anwendung ausgeführt wird.
+        Diese Methode kann im <link linkend="zend.test.phpunit.loginexample">Login Beispiel</link> gesehen
+        werden. Wenn das Callback eine Funktion oder statische Methode ist, könnte Sie auch in der Klasse
+        gesetzt werden:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public $bootstrap = array('App', 'bootstrap');
+
+    // ...
+}
+]]>
+    </programlisting>
+
+    <para>
+        In Fällen in denen eine Objekt Instanz notwendig ist, empfehlen wir die Durchführung in der eigenen
+        <code>setUp()</code> Methode:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
+{
+    public function setUp()
+    {
+        // Verwende die 'start' Methode einer Bootstrap Objekt Instanz:
+        $bootstrap = new Bootstrap('test');
+        $this->bootstrap = array($bootstrap, 'start');
+        parent::setUp();
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Beachte das <code>parent::setUp()</code> aufgerufen wird; das ist notwendig, da die <code>setUp()</code>
+        Methode von <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> die Erinnerung des Bootstrap Prozesses
+        durchführen wird (was den Aufruf des Callbacks inkludiert).
+    </para>
+
+    <para>
+        Wärend der normalen Anwendung wird die <code>setUp()</code> Methode das Bootstrap der Anwendung
+        ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung enthalten um einen reinen
+        Anfragestatus zu erhalten, das Resetieren jedes Plugins, Helfers und Antwort Objektes. Sobald das
+        getan wurde, wird sie anschließend die Datei <code>laden(include)</code> die in <code>$bootstrap</code>
+        spezifiziert wurde, oder den spezifizierten Callback aufrufen.
+    </para>
+
+    <para>
+        Das Bootstrappen sollte so nahe wie möglich daran sein wie die Anwendung das Bootstrap durchführt.
+        Trotzdem gibt es einige Fallstricke:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            Wir bieten keine alternative Implementierung der Anfrage und Antwort Objekte; diese werden nicht
+            verwendet. <classname>Zend_Test_PHPUnit_Controller_TestCase</classname> verwendet eigene Anfrage und
+            Antwort Objekte, <classname>Zend_Controller_Request_HttpTestCase</classname> und
+            <classname>Zend_Controller_Response_HttpTestCase</classname>. Diese Objekte bieten Methoden für das
+            Konfigurieren der Anfrageumgebung auf gezieltem Wege an, und dem holen von Antwort Artefakten auf
+            speziellem Weg.
+        </para></listitem>
+
+        <listitem><para>
+            Man sollte nicht erwarten Server spezielles zu testen. In anderen Worten, die Tests garantieren
+            nicht das der Code in einer speziellen Serverkonfiguration läuft, aber das die Anwendung wie
+            erwartet funktionieren sollte, und der Router eine gegebene Anfrage routen kann. Um das
+            Abzuschließen sollten keine Server-speziellen Header im Anfrage Objekt gesetzt werden.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Sobald die Anwendung das Bootstrapping ausgeführt hat, kann damit begonnen werden eigene Tests zu
+        erstellen.
+    </para>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.strikeiron.advanced-uses">
+    <title>Zend_Service_StrikeIron: Erweiterte Verwendung</title>
+
+    <para>
+        Diese Sektion beschreibt die erweiterte Verwendung von <classname>Zend_Service_StrikeIron</classname>.
+    </para>
+
+    <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
+      <title>Die Services durch WSDL verwenden</title>
+
+      <para>
+        Für einige StrikeIron Services können PHP Wrapper Klassen vorhanden sein, so wie die die in
+        <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link> beschrieben werden.
+        Trotzdem bietet StrikeIron hunderte von Services und viele von diesen können nihct verwendbar sein wenn
+        keine spezielle Wrapper Klasse erstellt wird.
+      </para>
+
+      <para>
+        Um ein StrikeIron Service zu probieren für das keine Wrapper Klasse vorhanden ist, muß die <code>wsdl</code>
+        Option statt der <code>class</code> Option an <code>getService()</code> übergeben werden:
+
+        <programlisting role="php"><![CDATA[
+$strikeIron = new Zend_Service_StrikeIron(
+    array('username' => 'your-username', 'password' => 'your-password')
+);
+
+// Erhalte einen generellen Client zum Reverse Phone Lookup Service
+$phone = $strikeIron->getService(
+    array('wsdl' => 'http://ws.strikeiron.com/ReversePhoneLookup?WSDL')
+);
+
+$result = $phone->lookup(array('Number' => '(408) 253-8800'));
+echo $result->listingName;
+
+// Zend Technologies USA Inc
+]]>
+        </programlisting>
+      </para>
+
+      <para>
+        Um StrikeIron Services durch WSDL zu verwenden wird zumindest ein Verständnis für WSDL Files benötigt.
+        StrikeIron hat viele Ressourcen auf Ihren Seiten die hierbei helfen. Auch
+        <ulink url="http://janschneider.de">Jan Schneider</ulink> vom
+        <ulink url="http://horde.org">Horde Projekt</ulink> hat eine
+        <ulink url="http://janschneider.de/news/25/268">kleine PHP Routine</ulink> geschrieben die eine WSDL
+        Datei in lesbares HTML konvertiert.
+      </para>
+
+      <para>
+        Es ist zu beachten das nur die Services die in der
+        <link linkend="zend.service.strikeiron.bundled-services">Mitgelieferten Services</link> Sektion
+        beschrieben werden auch offiziell unterstützt werden.
+      </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
+      <title>SOAP Transaktionen betrachten</title>
+
+      <para>
+        Die gesamte Kommunikation mit StrikeIron wird durch Verwenden der SOAP Erweiterung durchgeführt. Es
+        kann zeitweise nützlich sein das mit StrikeIron getauschte XML für Debugging Zwecke zu betrachten.
+      </para>
+
+      <para>
+        Jeder StrikeIron Client (Subklasse von <classname>Zend_Service_StrikeIron_Base</classname>) enthält eine
+        <code>getSoapClient()</code> Methode um die darunterliegende Instanz von <code>SOAPClient</code>
+        zu retournieren, die für die Kommunikation mit StrikeIron verwendet wird.
+      </para>
+
+      <para>
+        PHP's <ulink url="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</ulink>
+        hat eine <code>trace</code> Option die dazu führt das das XML, das wärend der letzten Transaktion getauscht
+        wurde, gemerkt wird. <classname>Zend_Service_StrikeIron</classname> aktiviert die <code>trace</code> Option nicht standardmäßig
+        aber das kann einfach getan werden durch Spezifizierung der Option die dazu verwendet wird den
+        <code>SOAPClient</code> Konstruktor zu übergeben.
+      </para>
+
+      <para>
+        Um die SOAP Transaktion zu betrachten muß die <code>getSoapClient()</code> Methode aufgerufen werden um die
+        <code>SOAPClient</code> Instanz zu erhalten und anschließend die entsprechenden Methoden wie
+        <ulink url="http://www.php.net/manual/de/function.soap-soapclient-getlastrequest.php"><code>__getLastRequest()</code></ulink>
+        und
+        <ulink url="http://www.php.net/manual/de/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>:
+        aufzurufen:
+
+        <programlisting role="php"><![CDATA[
+$strikeIron =
+    new Zend_Service_StrikeIron(array('username' => 'your-username',
+                                      'password' => 'your-password',
+                                      'options'  => array('trace' => true)));
+
+// Erstelle einen Client für das Verkaufs & Verwende Steuer BasisService
+$taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
+
+// Einen Methodenaufruf durchführen
+$taxBasic->getTaxRateCanada(array('province' => 'ontario'));
+
+// Die SOAPClient Instanz holen und das XML ansehen
+$soapClient = $taxBasic->getSoapClient();
+echo $soapClient->__getLastRequest();
+echo $soapClient->__getLastResponse();
+]]>
+        </programlisting>
+      </para>
+
+    </sect2>
+</sect1>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a Cosmos request
+    http://api.technorati.com/cosmos?key=VALID_API_KEY&url=www.simonecarletti.com/blog&type=link
+    
+    The request has the following properties:
+     * url is blog
+     * type is weblog
+    
+-->
+<!-- generator="Technorati API version 1.0" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://www.simonecarletti.com/blog</url>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>85</inboundblogs>
+                <inboundlinks>112</inboundlinks>
+                <lastupdate>2007-11-12 20:51:52 GMT</lastupdate>
+                <rank>81766</rank>
+            </weblog>
+            <inboundlinks>298</inboundlinks>
+            <rankingstart>1</rankingstart>
+        </result>
+        <item>
+            <weblog>
+                <name> Gioxx’s Wall</name>
+                <url>http://gioxx.org</url>
+                <inboundblogs>271</inboundblogs>
+                <inboundlinks>774</inboundlinks>
+                <lastupdate>2007-11-12 17:01:29 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard.  Su Mercury ho 1 GB di ram, Leopard installato ed una virtuale XP Professional che uso quando ne ho bisogno. I consumi della virtuale si aggirano attorno ai 512 MB di ram</excerpt>
+            <linkcreated>2007-11-11 20:07:11 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Controrete - Search Marketing e dintorni</name>
+                <url>http://controrete.blog.excite.it</url>
+                <rssurl>http://feeds.feedburner.com/controrete/cFuo</rssurl>
+                <inboundblogs>1</inboundblogs>
+                <inboundlinks>1</inboundlinks>
+                <lastupdate>1970-01-01 00:00:00 GMT</lastupdate>
+            </weblog>
+            <excerpt>Scegli il mese             PREFERITI     [IMG]   Seth Godin's Blog       [IMG]   John Battelle's Search Blog       [IMG]   Search Engine Land       [IMG]   SEM Blog (Marco Loguercio)       [IMG]Simone Carletti's Blog</excerpt>
+            <linkcreated>2007-11-11 16:56:30 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> Gioxx’s Wall</name>
+                <url>http://gioxx.wordpress.com</url>
+                <inboundblogs>7</inboundblogs>
+                <inboundlinks>8</inboundlinks>
+                <lastupdate>2007-11-12 21:35:14 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard.  Su Mercury ho 1 GB di ram, Leopard installato ed una virtuale XP Professional che uso quando ne ho bisogno. I consumi della virtuale si aggirano attorno ai 512 MB di ram</excerpt>
+            <linkcreated>2007-11-11 05:04:12 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Progetto-Seo </name>
+                <url>http://www.progetto-seo.com</url>
+                <rssurl>http://www.progetto-seo.com/feed/</rssurl>
+                <inboundblogs>43</inboundblogs>
+                <inboundlinks>84</inboundlinks>
+                <lastupdate>2007-11-10 08:57:22 GMT</lastupdate>
+            </weblog>
+            <excerpt>( soprattutto Google ) a riconoscere il nostro dominio di competenza; tutto questo influirà sensibilmente sui risultati dell’intero progetto.   I migliori SEO divulgano insegnamenti che sfortunatamente in pochi hanno l’accortezza di seguire;Simone Carlettiè sicuramente uno dei più autorevoli; vediamo insieme cosa egli scrive nella sua recente guida dedicata ai Google site links:  Ci sono alcune attività che possono agevolare l’analisi e l’interpretazione del sito, migliorando l</excerpt>
+            <linkcreated>2007-11-10 09:01:12 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Progetto-Seo </name>
+                <url>http://www.progetto-seo.com</url>
+                <rssurl>http://www.progetto-seo.com/feed/</rssurl>
+                <inboundblogs>43</inboundblogs>
+                <inboundlinks>84</inboundlinks>
+                <lastupdate>2007-11-10 08:57:22 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.progetto-seo.com/motori-di-ricerca/links-interni</nearestpermalink>
+            <excerpt>( soprattutto Google ) a riconoscere il nostro dominio di competenza; tutto questo influirà sensibilmente sui risultati dell’intero progetto.   I migliori SEO divulgano insegnamenti che sfortunatamente in pochi hanno l’accortezza di seguire;Simone Carlettiè sicuramente uno dei più autorevoli; vediamo insieme cosa egli scrive nella sua recente guida dedicata ai Google site links:  Ci sono alcune attività che possono agevolare l’analisi e l’interpretazione del sito, migliorando l</excerpt>
+            <linkcreated>2007-11-10 08:57:22 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>FeedBurner Stats 2 Feed 1.1 - Build your own FeedBurner feeds stats feed</name>
+                <url>http://lab.rss-world.info/feedburner-feedstats</url>
+                <rssurl>http://lab.rss-world.info/feedburner-feedstats/stats2feed.php</rssurl>
+                <inboundblogs>1</inboundblogs>
+                <inboundlinks>4</inboundlinks>
+                <lastupdate>2007-11-07 17:54:16 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://lab.rss-world.info/feedburner-feedstats/#errors</nearestpermalink>
+            <excerpt>here</excerpt>
+            <linkcreated>2007-11-08 11:54:32 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2006/06/feedburner_stats_2_feed.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Se siamo fatti di pura energia,</name>
+                <url>http://sitaram.splinder.com</url>
+                <rssurl>http://syndication.splinder.com/sitaram/rss2.xml</rssurl>
+                <atomurl>http://syndication.splinder.com/sitaram/atom.xml</atomurl>
+                <inboundblogs>27</inboundblogs>
+                <inboundlinks>49</inboundlinks>
+                <lastupdate>2007-11-10 19:27:05 GMT</lastupdate>
+            </weblog>
+            <excerpt>Blog di Mercante di Sogni Blog di Morris Goodman Blog di Natalibera Blog di Nuovo Spazio Blog di Oltre l'infinito Blog di OsteMax Blog di Pachucha Blog di Paul Coelho Blog di Riccardo Blog di Ron Peer Blog di SilasBlog di Simone CarlettiBlog di Sofia Blog di Stazione Celeste Blog di Susan Hanshaw Blog di Visualizzazione Positiva Blog di Web Caffè Blog di Wolf Blog di Zio Hack Buddhismo della Via di Diamante Celestian Center Cellula Cancerosa</excerpt>
+            <linkcreated>2007-11-07 21:03:08 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>BLOG intarget.net</name>
+                <url>http://blog.intarget.net</url>
+                <rssurl>http://blog.intarget.net/feed</rssurl>
+                <atomurl>http://blog.intarget.net/feed/atom</atomurl>
+                <inboundblogs>0</inboundblogs>
+                <inboundlinks>0</inboundlinks>
+                <lastupdate>2007-11-06 16:58:08 GMT</lastupdate>
+            </weblog>
+            <excerpt>- “tecniche segrete” del marketing Pandemia - ambiente, media, rete e tecnologia Search Advertising Blog - il Blog di Andrea Cappello Search Engine Marketing - il blog di Marco Loguercio SeoTalk - il Blog di Salvatore CarielloSimone Carletti's Blog- Un piccolo spazio nel web dedicato al web con approfondimenti su marketing, feed RSS / Atom e motori di ricerca Tagliaerbe Blog - seo blog</excerpt>
+            <linkcreated>2007-11-06 16:58:13 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Soft Review </name>
+                <url>http://softrevi.com</url>
+                <rssurl>http://softrevi.com/feed/</rssurl>
+                <inboundblogs>1</inboundblogs>
+                <inboundlinks>1</inboundlinks>
+                <lastupdate>2007-11-12 17:38:55 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://softrevi.com/2007/11/06/how-to-add-rmail-as-a-choice-in-firefox-20/</nearestpermalink>
+            <excerpt>read more</excerpt>
+            <linkcreated>2007-11-06 16:51:43 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2006/06/how_to_add_rmail_as_a_choice_i.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Progetto-Seo </name>
+                <url>http://www.progetto-seo.com</url>
+                <rssurl>http://www.progetto-seo.com/feed/</rssurl>
+                <inboundblogs>43</inboundblogs>
+                <inboundlinks>84</inboundlinks>
+                <lastupdate>2007-11-10 08:57:22 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.progetto-seo.com/motori-di-ricerca/rel-nofollow-seo</nearestpermalink>
+            <excerpt>è presente, significa che la pagina d’origine non attribuirà alcun valore alla pagina di destinazione; Ask dichiara di non averlo mai supportato ufficialmente, potete trovare tutte le informazioni necessarie inquesto articolo, liberamente tradotto da Simone Carletti da un articolo di Loren Baker pubblicato sul Search Engine Journal.  Technorati Tag: SEO, rel nofollow, motori di ricerca</excerpt>
+            <linkcreated>2007-11-06 14:03:18 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/google-yahoo-ask-nofollow.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> Gioxx’s Wall</name>
+                <url>http://gioxx.wordpress.com</url>
+                <inboundblogs>7</inboundblogs>
+                <inboundlinks>8</inboundlinks>
+                <lastupdate>2007-11-12 21:35:14 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard.  Su Mercury ho 1 GB di ram, Leopard installato ed una virtuale XP Professional che uso quando ne ho bisogno. I consumi della virtuale si aggirano attorno ai 512 MB di ram</excerpt>
+            <linkcreated>2007-11-05 12:47:43 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>DreamsWorld - www.dreamsworld.it - Errore Interno del Server</name>
+                <url>http://www.dreamsworld.it/emanuele</url>
+                <inboundblogs>112</inboundblogs>
+                <inboundlinks>354</inboundlinks>
+                <lastupdate>2007-11-12 18:42:17 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.dreamsworld.it/emanuele/2007-11-04/mac-onsigliatemi-11-domande-prima-di-passare-a-mac/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard. A questo punto immagino che sia consigliabile avere almeno 2Gb di ram. Conviene spendere 132??? ed acquistare “l’upgrade</excerpt>
+            <linkcreated>2007-11-04 19:15:57 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> …time is what you make of it…</name>
+                <url>http://emanuele.dreamsworld.it</url>
+                <rssurl>http://www.dreamsworld.it/emanuele/feed/</rssurl>
+                <inboundblogs>2</inboundblogs>
+                <inboundlinks>2</inboundlinks>
+                <lastupdate>2007-11-12 15:24:46 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.dreamsworld.it/emanuele/2007-11-04/mac-onsigliatemi-11-domande-prima-di-passare-a-mac/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard. A questo punto immagino che sia consigliabile avere almeno 2Gb di ram. Conviene spendere 132€ ed acquistare “l’upgrade</excerpt>
+            <linkcreated>2007-11-04 19:15:57 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Stefano Gorgoni » Dovevo chiedervi scusa?</name>
+                <url>http://www.stefanogorgoni.com/384/dovevo-chiedervi-scusa</url>
+                <rssurl>http://www.stefanogorgoni.com/feed/</rssurl>
+                <inboundblogs>0</inboundblogs>
+                <inboundlinks>0</inboundlinks>
+                <lastupdate>2007-11-02 14:11:04 GMT</lastupdate>
+            </weblog>
+            <excerpt>inaritech kerouac3001 marketing routes mauro lupi mini marketing motoricerca.info motoricerca.net progetto seo ranklab seo search advertising blog semblog seo talk studiocelso webmarketing web marketingwepposYoYo Formazione rotolante</excerpt>
+            <linkcreated>2007-11-03 13:02:10 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>[] - RSS/ATOM Feeds Aggregator </name>
+                <url>http://www.codicesorgente.it</url>
+                <rssurl>http://www.codicesorgente.it/feedsaggregator/rss.php</rssurl>
+                <inboundblogs>67</inboundblogs>
+                <inboundlinks>321</inboundlinks>
+                <lastupdate>2007-11-05 02:40:19 GMT</lastupdate>
+            </weblog>
+            <excerpt>ho sentita) che rappresentano, per il momento, una piccola minoranza, e non rientrano tra quelli considerati “utente medio”  peccando di superbia, penso di aver fatto una bella analisi, ma mi piacerebbe avere il parere di alberto, tambu,simone, altre che naturalmente di tutti quelli che avranno voglia di lasciarmelo…  [richiesta marchetta on]  non contento della dose di link appena vomitata, aggiungo che se marco formento, lele dainesi  e</excerpt>
+            <linkcreated>2007-11-03 08:03:16 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>Roby Web World Italia</name>
+                <url>http://robyww.blogspot.com</url>
+                <atomurl>http://robyww.blogspot.com/feeds/posts/default</atomurl>
+                <inboundblogs>71</inboundblogs>
+                <inboundlinks>103</inboundlinks>
+                <lastupdate>2007-11-11 08:47:26 GMT</lastupdate>
+            </weblog>
+            <excerpt>Seth's Blog David Naylor Reporter Diffuso Marco Loguercio Tiziano Fogliata Davide Pozzi SetFocus [dot] IT Mauro Lupi 980Km Lo Direi Così Lafra Napolux Senza Stile Titti Zingone Giorgio Tave Luca ContiSimone CarlettiLalui Felter Roberto Luca Togni Robin Good Albegor's Blog Nik's Blog [mini]marketing Blographik Luca DeBiase Cristian Castellari Massimo Mantellini Sacha Catalano Numero Venti Xipe Eugenio La Mesa Andrea Cappello</excerpt>
+            <linkcreated>2007-11-01 09:13:15 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>ItalyFilm Blog</name>
+                <url>http://italyfilm.net</url>
+                <rssurl>http://italyfilm.net/feed/</rssurl>
+                <atomurl>http://italyfilm.net/feed/atom/</atomurl>
+                <inboundblogs>5</inboundblogs>
+                <inboundlinks>39</inboundlinks>
+                <lastupdate>2007-11-12 18:48:28 GMT</lastupdate>
+            </weblog>
+            <excerpt>Redazione:   Ogni dipendente, ad esempio, può creare il proprio calendario aziendale e condividerlo in sola lettura con gli altri colleghi. Un calendario aziendale, condiviso in lettura e scrittura, permetterà di segnare gli appuntamenti comuni.</excerpt>
+            <linkcreated>2007-10-30 23:58:10 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/10/ottimizzare-costi-azienda-parte-2.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>ItalyFilm Blog</name>
+                <url>http://italyfilm.net</url>
+                <rssurl>http://italyfilm.net/feed/</rssurl>
+                <atomurl>http://italyfilm.net/feed/atom/</atomurl>
+                <inboundblogs>5</inboundblogs>
+                <inboundlinks>39</inboundlinks>
+                <lastupdate>2007-11-12 18:48:28 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://italyfilm.net/Cinema-2007/10/31/come-ridurre-ed-ottimizzare-i-costi-tecnici-in-azienda-parte-2/</nearestpermalink>
+            <excerpt>Redazione:   Ogni dipendente, ad esempio, può creare il proprio calendario aziendale e condividerlo in sola lettura con gli altri colleghi. Un calendario aziendale, condiviso in lettura e scrittura, permetterà di segnare gli appuntamenti comuni.</excerpt>
+            <linkcreated>2007-10-30 23:36:00 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/10/ottimizzare-costi-azienda-parte-2.php</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name>980km | Smart Web Marketing</name>
+                <url>http://www.980km.com</url>
+                <rssurl>http://feeds.980km.com/980kmSmartWebMarketing</rssurl>
+                <inboundblogs>137</inboundblogs>
+                <inboundlinks>327</inboundlinks>
+                <lastupdate>2007-11-11 21:08:33 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.980km.com/web-marketing/980km-entra-nel-network-web-marketing-e-motori-di-ricerca.html</nearestpermalink>
+            <excerpt>Dopo 6 mesi di dura attività su 980km eccomi giunto ad uno dei traguardi che mi ero prefissato fin dall’inizio: entrare nel network “Web marketing e motori di ricerca” su Feedburner, Network gestito daSimone Carletti; è una grande soddisfazione per me! D’ora in poi i contenuti di 980km verrano distribuiti anche sul Network, oltre al Feed diretto dal blog.   Per conoscere tutti i siti/blog che compongono il Network basta andare su</excerpt>
+            <linkcreated>2007-10-29 18:14:58 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> Allora vendi PageRank! E Matt Cutts lo conferma su Search Engine Journal | 980km</name>
+                <url>http://www.980km.com/google/allora-vendi-pagerank-e-matt-cutts-lo-conferma-su-search-engine-journal.html</url>
+                <rssurl>http://feeds.980km.com/980kmSmartWebMarketing</rssurl>
+                <inboundblogs>0</inboundblogs>
+                <inboundlinks>0</inboundlinks>
+                <lastupdate>2007-10-31 13:06:51 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://www.980km.com/web-marketing/980km-entra-nel-network-web-marketing-e-motori-di-ricerca.html</nearestpermalink>
+            <excerpt>Dopo 6 mesi di dura attività su 980km eccomi giunto ad uno dei traguardi che mi ero prefissato fin dall’inizio: entrare nel network “Web marketing e motori di ricerca” su Feedburner, Network gestito daSimone Carletti; è una grande soddisfazione per me! D’ora in poi i contenuti di 980km verrano distribuiti anche sul Network, oltre al Feed diretto dal blog.   Per conoscere tutti i siti/blog che compongono il Network basta andare su</excerpt>
+            <linkcreated>2007-10-29 18:14:58 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/</linkurl>
+        </item>
+    </document>
+</tapi>

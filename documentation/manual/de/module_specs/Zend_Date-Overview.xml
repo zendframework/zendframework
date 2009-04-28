@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.date.overview">
+
+    <title>Zend_Date API Übersicht</title>
+
+    <para>
+        Obwohl die API von <classname>Zend_Date</classname> simpel und eindeutig ist, ist dessen Design flexibel und
+        mächtig durch die Vielzahl an Möglcihkeiten von Operationen und Operanden.
+    </para>
+
+    <sect2 id="zend.date.options">
+
+        <title>Zend_Date Optionen</title>
+
+        <sect3 id="zend.date.options.formattype">
+
+            <title>Auswahl der Art des Datumsformats</title>
+
+            <para>
+                Viele Methoden  benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's <code>date()</code>.
+                Wenn man mit den Zeichen von PHP's Datumsformaten mehr Erfahrung hat als mit den ISO
+                Zeichen für Formate dann kann man <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>
+                benutzen. Danach können PHP's Zeichen für Datumsformate für alle Funktionen verwendet werden die
+                einen <code>$format</code> Parameter akzeptieren. Durch Benutzen von
+                <classname>Zend_Date::setOptions(array('format_type' => 'iso'))</classname> kann man wieder auf den
+                Standardmodus zurückwechseln der nur ISO Zeichen für Datumsformate unterstützt. Für eine Liste von
+                unterstützten Zeichen Codes kann hier nachgelesen werden: <xref linkend="zend.date.constants.phpformats" />
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.fixdst">
+
+            <title>Sommer-/Winterzeit und Datumsberechnungen</title>
+
+            <para>
+                Wenn Daten manipuliert werden überschrieten Sie manchmal die Sommer-/Winterzeit Grenze was
+                normalerweise dazu führt das das Datum eine Stunde verliert oder hinzubekommt. Wenn zum Beispiel
+                ein Monat zu einem Datum vor einer Sommer-/Winterzeitänderung hinzugefügt wird und das
+                Ergebnismonat nach dieser Änderung liegt, sieht es so aus als ob das Datum eine Stunde verliert
+                oder hinzubekommt durch den Wert des geänderten Datums. Für Grenzstunden, wie Mitternacht für
+                den ersten oder letzten Tag eines Monats, führt das Hinzufügen von genügend Monaten, wenn die
+                Sommer-/Winterzeitgrenze überschritten wird, dazu das das Datum eine Stunde verliert und damit
+                zum letzten Tag des Vormonats wird durch das Erscheinungsbild des "eins fehlt" Fehlers. Um diese
+                Situationen zu vermeiden, kann die Sommer-/Winterzeit durch Verwendung der
+                <code>fix_dst</code> Option ignoriert werden. Wenn eine Sommer-/Winterzeitgrenze überschritten wird,
+                wird ja normalerweise eine Stunde hinzugefügt oder entfernt abhändig vom Datum. Zum Beispiel führt
+                eine Datumsberechnung einer Frühlingsgrenze z ueinem Datum welche einen Tag weniger hat als
+                erwartet, wenn die Zeit des Originaldatums 00:00:00 war. Da Zend_Date auf Zeitpunkten basiert
+                und nicht auf Kalenderdaten mit Zeitkomponenten, verliert der Zeitpunkt eine Stunde was zu einem
+                Datum führt das einen Kalendertag weniger hat als erwartet. Um solche Problem zu verhindern kann
+                die Option <code>fix_dst</code> verwendet werden, welche standardmäßig wahr ist. Das führt
+                dazu das die Sommer-/Winterzeit keinen Einfluß mehr bei Datumsberechnungen zeigt
+                (<code>addMOnth(), subMonth()</code>). <classname>Zend_Date::setOptions(array('fix_dst' => false))</classname>
+                kann benutzt werden um Hinzufügen oder Entfernen der Sommer-/Winterzeitanpassung zu gestatten wenn
+                Datumsberechnungen durchgeführt werden.
+            </para>
+
+            <para>
+                <emphasis role="strong">Wenn die aktuelle Zeitzone innerhalb der Instanz von
+                <classname>Zend_Date</classname> auf UTC oder GMT gestellt wird, wird die Option <code>'fix_dst'</code>
+                nicht verwendet</emphasis> weil diese zwei Zeitzonen nicht mit DST arbeiten. Wenn die Zeitzone
+                für diese Instanz wieder auf eine Zeitzone gestellt wird die nicht UTC oder GMT ist, wird die
+                vorher definierte 'fix_dst' Option wieder für die Datumsberechnungen verwendet.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.date.options.extendmonth">
+
+            <title>Monatsberechnungen</title>
+
+            <para>
+                Wenn Monate von einem existierenden Datum hinzugefügt oder entfernt werden, kann der
+                Ergebniswert des Monatstages unerwartet sein, wenn das Originaldatum auf einen Tag gefallen ist
+                der Nahe am Ende des Monats ist. Wenn zum Beispiel ein Monat zum 31sten Jänner hinzugefügt wird,
+                werden Personen welche mit SQL vertraut sind den 28sten Februar als Ergebnis erwarten. Auf der
+                anderen Seite werden Personen welche mit Excel und OpenOffice vertraut sind werden den
+                3tten März als Ergebnis erwarten. Das Problem besteht nur wen das Ergebnismonat den Tag der
+                im Originaldatum gesetzt war, nicht hat. Für ZF Entwickler können das gewünschte Verhalten
+                ausgewählen indem die Option <code>extend_month</code> genutzt wird um entweder das SQL
+                Verhalten, wenn die Option wahr ist, oder das Tabellenverhalten, wenn die Option falsch ist,
+                auszuwählen. Das Standardverhalten für <code>extend_month</code> ist falsch, um SQL kompatibles
+                Verhalten zu erlauben. <classname>Zend_Date</classname> führt Monatsberechnungen standardmäßig in der Art
+                durch das Daten auf das Monatsende hin abgeschnitten werden (wenn notwendig), ohne das in den
+                nächsten Monat umgebrochen wird wenn das Originaldatum einen Monatstag bestimmt der die
+                Anzahl der Tag des Ergebnismonats überschreitet.
+                <classname>Zend_Date::setOptions(array('extend_month' => true));</classname> kann benutzt werden um
+                Monatsberechnungen wie in populären Tabellenkalkulationen durchzuführen.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.cache">
+
+            <title>Lokalisierung und Normalisierung von Daten mit Zend_Cache schneller machen</title>
+
+            <para>
+                Man kann <classname>Zend_Date</classname> schneller machen indem ein <classname>Zend_Cache</classname> Adapter
+                verwendet wird. Das verschnellert alle Methoden von <classname>Zend_Date</classname> wenn lokalisierte
+                Daten verwendet werden. Zum Beispiel werden alle Methoden welche <classname>Zend_Date::DATE</classname>
+                und <classname>Zend_Date::TIME</classname> Konstanten akzeptieren hiervon profitieren. Um einen
+                <classname>Zend_Cache</classname> Adapter für <classname>Zend_Date</classname> zu setzen muß nur
+                <classname>Zend_Date::setOptions(array('cache' => $adapter));</classname> aufgerufen werden.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.date.options.timesync">
+
+            <title>Syncronisierte Zeiten mit Zend_TimeSync erhalten</title>
+
+            <para>
+                Normalerweise unterscheiden sich die Uhren von Servern und Computern voneinander.
+                <classname>Zend_Date</classname> ist dazu fähig solche Probleme mit Hilfe von <classname>Zend_TimeSync</classname>
+                zu handhaben. Mit <classname>Zend_Date::setOptions(array('timesync' => $timeserver));</classname>
+                kann ein Zeitserver gesetzt werden welcher den Unterschied zwischen dem eigenen aktuellen
+                Zeitpunkt und dem wirklichen aktuellen Zeitpunkt für alle Instanzen von Zend_Date setzt.
+                Die Verwendung dieser Option ändern nicht den Zeitpunkt von bestehenden Instanzen. Am besten
+                ist es also dies innerhalb der Bootstrap Datei zu setzen.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.date.values">
+
+        <title>Arbeiten mit Datumswerten</title>
+
+        <para>
+            Sobald die Eingabe durch die Erstellung eines <classname>Zend_Date</classname> Objektes normalisiert wurde,
+            hat es eine zugeordnete Zeitzone aber eine Interne Darstellung durch Verwendung von
+            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkten</ulink>.
+            Damit ein Datum in einer lokalisierten Art und Weise durchsucht werden kann, muß zuerst eine
+            Zeitzone bekannt sein. Die Standardzeitzone ist immer GMT/UTC. Um die Zeitzone des Objektes zu
+            inspizieren kann <code>getTimeZone())</code> verwendet werden. Um die Zeitzone des Objektes zu
+            wechseln kann <code>setTimeZone())</code> verwendet werden. Alle Änderungen des Objektes sind immer
+            relativ zu seiner Zeitzone zu sehen.
+        </para>
+
+        <para>
+            Aufpassen das nicht Teile von Datumsobjekten die unterschiedliche Zeitzonen haben, gemischt oder
+            verglichen werden, da dies Grundsätzlich unerwartete Resultate zeigen kann da die Manipulationen
+            nur dem Zeitpunkt zugeordnet werden. Das Arbeiten an <classname>Zend_Date</classname> Objekten die unterschiedliche
+            Zeitzonen haben funktioniert grundsätzlich abgesehen davon wie vorher erwähnt, da Daten bei der
+            Instantiierung von <classname>Zend_Date</classname> zu UNIX Zeitpunkten normalisiert werden.
+        </para>
+
+        <para>
+            Die meisten Methoden erwarten eine Konstante für die Auswahl des gewünschten Teils <code>$part</code>
+            des Datums, wie z.B. <classname>Zend_Date::HOUR</classname>. Diese Konstanten sind für alle unten angeführten
+            Funktionen gültig. Eine Liste aller vorhandenen Konstanten wird hier beschrieben:
+            <xref linkend="zend.date.constants.list" />.
+            Wenn <code>$part</code> nicht spezifiziert wird, wird <classname>Zend_Date::TIMESTAMP</classname> angenommen.
+            Alternativ kann ein benutzerdefiniertes Format für <code>$part</code> verwendet werden, mit Hilfe
+            der gleichen Mechanismen und Formatdefinitionen wie bei
+            <link linkend="zend.locale.date.normalize"><classname>Zend_Locale_Format::getDate()</classname>
+            </link>. Wenn ein Datumsobjekt erstellt wird durch Verwendung eines offensichtlich falschen Datums
+            (z.B. die Nummer des Monats größer als 12), wird <classname>Zend_Date</classname> eine Ausnahme werfen, solange
+            kein spezielles Datumsformat ausgewählt wurde, und z.B. <code>$part</code> entweder <code>null</code>
+            oder <classname>Zend_Date::DATES</classname> (ein "fehlertolerantes" Format).
+        </para>
+
+        <example id="zend.date.values.example-1">
+            <title>Benutzerdefinierte Eingabeformate für Daten</title>
+            <programlisting role="php"><![CDATA[
+$date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
+echo $date1, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
+
+$date2 = new Zend_Date('Feb 31, 2007', Zend_Date::DATES, 'en_US');
+echo $date2, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
+
+// Stikte Interpretation des angegebenen Formats
+$date3 = new Zend_Date('Feb 31, 2007', 'MM.dd.yyyy');
+echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Wenn der optionale <code>$locale</code> Parameter angegeben wurde, dann verdeutlicht <code>$locale</code>
+            den <code>$date</code> Operand durch Ersetzen der Monatsnamen und Wochentagsnamen für die <code>$date</code>
+            Zeichenkette, und auch Datumszeichenketten können analysiert werden durch die Vorschriften dieses
+            Gebietsschemas (siehe
+            <code><link linkend="zend.locale.date.normalize">Zend_Locale_Format::getDate()</link></code>).
+            Die automatische Normalisierung von lokalisierten <code>$date</code> Angaben einer Zeichenkette werden
+            nur dann durchgeführt wenn eine der <classname>Zend_Date::DATE*</classname> oder <classname>Zend_Date::TIME*</classname>
+            Konstanten verwendet wird. Das Gebietsschema identifiziert die Sprache welche verwendet werden soll
+            um Monatsnamen und Wochentagsnamen zu analysieren wenn <code>$date</code> eine Zeichenkette ist die
+            ein Datum enthält. Wenn der Eingabeparameter <code>$date</code> nicht angegeben wurde, dann definiert
+            der <code>$locale</code> Parameter das Gebietsschema für lokalisierte Ausgaben (z.B. das Datumsformat
+            für eine Ausgabe als Zeichenkette). Anzumerken ist auch das der <code>$date</code> Parameter stattdessen
+            ein Typname sein kann (z.B. <code>$hour</code> für <code>addHour()</code>), und das verhindert auch nicht
+            das ein <classname>Zend_Date</classname> Objekt als Argument für diesen Parameter angegeben werden kann. Wenn keine
+            <code>$locale</code> angegeben wurde, wird das Gebietsschema des aktuellen Objektes genommen um
+            <code>$date</code> zu interpretieren oder das lokalisierte Format für die Ausgabe auszuwählen.
+        </para>
+
+        <para>
+            Seit Zend Framework 1.7.0 unterstützt <classname>Zend_Date</classname> auch die Verwendung eines
+            Anwendungsweiten Gebietsschemas. Man kann ganz einfach eine <classname>Zend_Locale</classname> Instanz
+            in der Registry setzen wie anbei gezeigt. Mit dieser Schreibweise kann man das manuelle Setzen eines
+            Gebietsschemas für jede Instanz vergessen wenn man das selbe Gebietsschema mehrere Male verwenden
+            will.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// In der Bootstrap Datei
+$locale = new Zend_Locale('de_AT');
+Zend_Registry::set('Zend_Locale', $locale);
+
+// Irgendwo in der eigenen Anwendung
+$date = new Zend_Date('31.Feb.2007');
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="id.date.basic">
+
+        <title>Grundsätzliche <classname>Zend_Date</classname> Operationen für die meisten Teile von Daten</title>
+
+        <para>
+            Die Methoden <code>add(), sub(), compare(), get(), und set()</code> arbeiten generell mit Daten. In
+            Jedem Fall wird die Operation auf dem Datum durchgeführt das in den Objektinstanz vorhanden ist. Der
+            <code>$date</code> Operand wird für alle dieser Methoden benötigt, ausser für <code>get()</code> und
+            kann eine <classname>Zend_Date</classname> Objektinstanz, eine nummerische Zeichenkette oder ein Integer sein.
+            Diese Methoden nehmen an das <code>$date</code> ein Zeitpunkt ist, wenn es kein Objekt ist. Trotzdem
+            kontrolliert der <code>$part</code> Operand an welchem logischen Teil der zwei Daten gearbeitet werden
+            soll, was Arbeiten an Teilen von Daten des Objekts erlaubt, wie Jahr oder Minute selbst wenn
+            <code>$date</code> eine lange Form einer Datumszeichenkette enthält wie "Dezember 31, 2007 23:59:59".
+            Das Ergebnis der Operation ändert das Datum im Objekt ausser bei <code>compare()</code> und
+            <code>get()</code>.
+        </para>
+
+        <example id="zend.date.basic.example-1">
+            <title>Arbeiten an Teilen von Daten</title>
+            <programlisting role="php"><![CDATA[
+$date = new Zend_Date(); // $date's Zeitpunkt === time()
+
+// Ändert $date durch addieren von 12 Stunden
+$date->add('12', Zend_Date::HOUR);
+print $date;
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Übliche Methoden existieren für jede Kombination von Basisarbeiten und viele normale Datumsabschnitte
+            wie in der Tabelle anbei gezeigt. Diese üblichen Methoden erlauben uns faulen Programmierern zu vermeiden
+            das die
+            <link linkend="zend.date.constants.list">Konstanten für Datumsabschnitte</link> ausgeschrieben werden
+            müssen. Normalerweise sind wir benannt durch Kombination eines Prefixes (Name der Basisoperation) und
+            einem Suffix (Art des Datumsabschnittes), wie <code>addYear()</code>. In der Liste die anbei steht,
+            existieren alle Kombinationen von "Datumsabschnitten" und "Basisoperationen". Zum Beispiel die Operation
+            "add" existiert für jeden dieser Datumsabschnitte wie <code>addDay()</code>, <code>addYear()</code>
+            und viele mehr.
+        </para>
+
+        <para>
+            Diese üblichen Methoden haben die selbe gleichartige Funktionalität wie die Methoden für die
+            Basisoperationen, aber Sie erwarten Zeichenkette und Integer <code>$date</code> Operanden welche
+            nur die Werte enthalten welche durch den Typ definiert sind der durch den Suffix der Methode definiert
+            wurde. Deshalb identifizieren diese Methoden (z.B. "Year" oder "Minute") die Einheit des
+            <code>$date</code> Operanden wenn <code>$date</code> eine Zeichenkette oder ein Integer ist
+        </para>
+
+        <sect3 id="id.date.basic.parts">
+
+            <title>Liste der Datumsabschnitte</title>
+
+            <table id="id.date.basic.parts.table">
+                <title>Datumsabschnitte</title>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Datumsabschnitt</entry>
+                            <entry>Erklärung</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Zeitpunkt</ulink>
+                            </entry>
+                            <entry>
+                                UNIX Zeitpunkt, ausgedrückt in Sekunden die vergangen sind seit dem
+                                1. Jänner, 1970 00:00:00 GMT/UTC.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Gregorian_calendar">Jahr</ulink>
+                            </entry>
+                            <entry>Gregorianisches Kalenderjahr (z.B. 2006)</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Monat</ulink>
+                            </entry>
+                            <entry>Gregorianisches Kalendermonat (1-12, Lokalisierte Namen werden unterstützt)</entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/24-hour_clock">24 Stunden Uhr</ulink>
+                            </entry>
+                            <entry>
+                                Stunde des Tages (0-23) bezeichnet die vergangenen Stunden seit dem Beginn
+                                des Tages
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Minute">Minute</ulink>
+                            </entry>
+                            <entry>
+                                Minuten der Stunde (0-59) bezeichnet die vergangenen Minuten seit dem Beginn
+                                der Stunde
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Second">Sekunde</ulink>
+                            </entry>
+                            <entry>
+                                Sekunde der Minute (0-59) bezeichnet die vergangenen Sekunden seit dem Beginn
+                                der Minute
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Millisecond">Millisekunde</ulink>
+                            </entry>
+                            <entry>
+                                Millisekunden bezeichnen Tausendstel einer Sekunde (0-999). <classname>Zend_Date</classname>
+                                unterstützt zwei zusätzliche Methoden für das Arbeiten mit Zeiteinheiten die kleiner
+                                als Sekunden sind. Normalerweise verwenden <classname>Zend_Date</classname> Instanzen eine
+                                Genauigkeit welche der von Millisekunden entspricht wie man durch
+                                <code>getFractionalPrecision()</code> sehen kann. Um die Genauigkeit zu Ändern kann
+                                <code>setFractionalPrecision($precision)</code> verwendet werden. Trotzdem ist die
+                                Genauigkeit praktisch auf Millisekunden begrezt da <classname>Zend_Date</classname>
+                                <code>
+                                <ulink url="http://php.net/microtime">microtime()</ulink></code> dafür benutzt.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Day">Tag</ulink>
+                            </entry>
+                            <entry>
+                                <classname>Zend_Date::DAY_SHORT</classname> wird von <code>$date</code> extrahiert wenn der
+                                <code>$date</code> Operand eine <classname>Zend_Date</classname> Instanz oder eine nummerische
+                                Zeichenkette ist. Sonst wird versucht den Tag laut den dokumentierten Konventionen
+                                für diese Konstanten zu extrahieren: <classname>Zend_Date::WEEKDAY_NARROW</classname>
+                                , <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>
+                                , <classname>Zend_Date::WEEKDAY</classname> (Gregorianischer Kalender angenommen)
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/Week">Woche</ulink>
+                            </entry>
+                            <entry>
+                                <classname>Zend_Date::WEEK</classname> wird von <code>$date</code> extrahiert wenn der
+                                <code>$date</code> Operand eine Instanz von <classname>Zend_Date</classname> oder eine
+                                nummerische Zeichenkette ist. Sonst wird eine Ausnahme geworfen.
+                                (Gregorianischer Kalender angenommen)</entry>
+                        </row>
+                        <row>
+                            <entry>Datum</entry>
+                            <entry>
+                                <classname>Zend_Date::DAY_MEDIUM</classname> wird aus <code>$date</code> extrahiert wenn der
+                                <code>$date</code> Operand eine Instanz von <classname>Zend_Date</classname> ist. Sonst wird
+                                versucht das Datum in ein Zend_Date::DATE_MEDIUM formatiertes Datum
+                                zu normalisieren. Das Format von <classname>Zend_Date::DATE_MEDIUM</classname> hängt vom
+                                Gebietsschema des Objektes ab.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Wochentage</entry>
+                            <entry>
+                                Wochentage werden nummerisch dargestellt von 0 (für Sonntag) bis 6 (für Samstag).
+                                <classname>Zend_Date::WEEKDAY_DIGIT</classname> wird aus <code>$date</code> extrahiert wenn
+                                der <code>$date</code> Operand eine Instanz von <classname>Zend_Date</classname> oder eine
+                                numerische Zeichenkette ist. Sonst wird versucht den Tag laut den dokumentierten
+                                Konventionen für diese Konstanten zu extrahieren:
+                                <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>,
+                                <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname>
+                                (Gregorianischer Kalender angenommen)
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>Tag des Jahres</entry>
+                            <entry>
+                                In <classname>Zend_Date</classname> wird der Tag des Jahres als Anzahl der Kalendertage
+                                dargestellt die seit dem Start des Jahres vergangen sind (0-365). Wie bei den
+                                anderen oben dargestellten Einheiten werden Bruchteile auf die nächste ganze
+                                Nummer abgerundet. (Gregorianischer Kalender angenommen)
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
+                            </entry>
+                            <entry>
+                                Arpa Daten (bzw RFC 822 formatierte Daten) werden unterstützt. Die Ausgabe verwendet
+                                entweder "GMT" oder "Laut Gebietsschema unterschiedliche Stunden + Minuten" Format
+                                (siehe Sektion 5 von RFC 822). Vor PHP 5.2.2, zeigte die Verwendung der
+                                DATE_RFC822 Konstante mit PHP date Funktionen hier und da
+                                <ulink url="http://bugs.php.net/bug.php?id=40308">fehlerhafte Ergebnisse</ulink>.
+                                Die Ergebnisse von Zend_Date sind korrekt. Beispiel:
+                                <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
+                            </entry>
+                            <entry>
+                                Für die Ausgabe werden nur vollständige ISO 8601 Daten unterstützt.
+                                Beispiel: <code>2009-02-14T00:31:30+01:00</code>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+
+        <sect3 id="id.date.basic.operations">
+
+            <title>Liste der Datums-Operationen</title>
+
+            <para>
+                Die unten angeführten Basisoperationen können statt den bequemlichen Operationen für spezielle
+                Datumsabschnitte verwendet werden. Die
+                <link linkend="zend.date.constants.list">entsprechenden Konstanten</link> werden für den
+                <code>$part</code> Parameter verwendet.
+            </para>
+
+            <table id="id.date.basic.operations.table">
+                <title>Basis Operationen</title>
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Basis Operationen</entry>
+                            <entry>Erklärung</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>get()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    <code>get($part)</code> kann benutzt werden um einen Datumsabschnitt
+                                    <code>$part</code> dieses Datumsobjektes welcher in ein
+                                    Gebietsschema lokalisiert oder als formatierte Zeichenkette oder Integer
+                                    gewünscht ist zurück zu bekommen. Durch Verwendung der BCMath Erweiterung können
+                                    nummerische Zeichenkettten statt Integer für große Werte zurückgegeben werden.
+                                    <emphasis role="strong">NOTE:</emphasis> Anders als <code>get()</code> geben
+                                    die anderen get*() bequemlichen Methoden nur Instanzen von <classname>Zend_Date</classname>
+                                    zurück welche nur das Datum oder die Zeit repräsentieren das ausgewählt oder berechnet
+                                    wurde.
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>set()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">set($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    Setzt den Abschnitt <code>$part</code> des aktuellen Objektes übereinstimmend mit
+                                    dem Wert der für diesen Abschnitt in der Eingabe <code>$date</code>
+                                    und im Gebietsschema <code>$locale</code> gefunden wurde.
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>add()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">add($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    Addiert den Abschnitt <code>$part</code> von <code>$date</code> welcher im
+                                    Gebietsschema <code>$locale</code> geschrieben ist zum Datum des
+                                    aktuellen Objektes.
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>sub()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">sub($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    Subtrahiert den Abschnitt <code>$part</code> von <code>$date</code> welcher
+                                    im Gebietsschema <code>$locale</code> geschrieben ist vom Datum des
+                                    aktuellen Objektes.
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>copyPart()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">copyPart($part, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    Gibt ein geklontes Objekt zurück, wobei nur der gewünschte Abschnitt
+                                    <code>$part</code> des Datumsobjektes kopiert wird, wobei im Klon das
+                                    Gebietsschema von <code>$locale</code> gesetzt wird (wenn angegeben).
+                                </para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>compare()</entry>
+                            <entry>
+                                <para>
+                                    <emphasis role="strong">compare($date, $part = null, $locale = null)</emphasis>
+                                </para>
+                                <para>
+                                    Vergleicht den Abschnitt <code>$part</code> des Datums <code>$date</code> mit
+                                    dem Zeitpunkt des Objektes. Gibt 0 zurück wenn sie gleich sind, 1 wenn wenn
+                                    der Abschnitt dieses Objektes früher war als der Abschnitt von $date und
+                                    andernfalls -1.
+                                </para>
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.comparison">
+
+        <title>Vergleichen von Daten</title>
+
+        <para>
+            Die folgenden Basisoperationen haben keine vergleichbaren vereinfachten Methoden für
+            Datumsabschnitt wie beschrieben unter <xref linkend="zend.date.overview" />.
+        </para>
+
+        <table id="zend.date.others.comparison.table">
+            <title>Methoden zum Vergleichen von Daten</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Methoden</entry>
+                        <entry>Beschreibung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>equals()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">equals($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Gibt true zurück wenn der Abschnitt <code>$part</code> von <code>$date</code> der
+                                das Gebietsschema <code>$locale</code> hat, der gleiche ist wie der Abschnitt
+                                <code>$part</code> vom Datum des Objektes, andernfalls false
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isEarlier()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isEarlier($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Gibt true zurück wenn der Abschnitt <code>$part</code> vom Datum des Objektes
+                                früher ist als der Abschnitt <code>$part</code> von <code>$date</code> der
+                                das Gebietsschema <code>$locale</code> hat
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isLater()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isLater($date, $part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Gibt true zurück wenn der Abschnitt <code>$part</code> vom Datum des Objektes
+                                später ist als der Abschnitt <code>$part</code> von <code>$date</code> der
+                                das Gebietsschema <code>$locale</code> hat
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isToday()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isToday()</emphasis>
+                            </para>
+                            <para>
+                                Testet ob Jahr, Monat und Tag des heutigen Datums mit dem Datumswert des
+                                Objektes übereinstimmen, wenn die Zeitzone des Objektes verwendet wird.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isTomorrow()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isTomorrow()</emphasis>
+                            </para>
+                            <para>
+                                Testet ob Jahr, Monat und Tag des morgigen Datums mit dem Datumswert des
+                                Objektes übereinstimmen, wenn die Zeitzone des Objektes verwendet wird.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isYesterday()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isYesterday()</emphasis>
+                            </para>
+                            <para>
+                                Testet ob Jahr, Monat und Tag des gestrigen Datums mit dem Datumswert des
+                                Objektes übereinstimmen, wenn die Zeitzone des Objektes verwendet wird.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isLeapYear()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isLeapYear()</emphasis>
+                            </para>
+                            <para>
+                                <code>isLeapYear()</code> kann benutzt werden ob zu prüfen ob das aktuelle
+                                Objekt ein Schaltjahr ist. Sonst kann Zend_Date::checkLeapYear($year) benutzt
+                                werden um das Jahr $year zu prüfen, welches eine Zeichenkette, ein Integer
+                                oder eine Instanz von <classname>Zend_Date</classname> sein kann. Ist das Jahr ein Schaltjahr ?
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>isDate()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">isDate($date, $format = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                This method checks if a given date is a real date and returns true if all checks are ok.
+                                It works like PHP's checkdate() function but can also check for localized month names and
+                                for dates extending the range of checkdate()
+                                false
+                            </para>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.gettingparts">
+
+        <title>Getting Dates and Date Parts</title>
+
+        <para>
+            Several methods support retrieving values related to a <classname>Zend_Date</classname> instance.
+        </para>
+
+        <table id="zend.date.others.gettingparts.table">
+            <title>Date Output Methods</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Method</entry>
+                        <entry>Explanation</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>toString()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toString($format = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Direkt aufzurufen oder über die magische Methode <code>__toString()</code>. Die
+                                <code>toString()</code> Methode formatiert automatisch den Wert des Datumsobjektes
+                                anhand der Konventionen des Gebietsschemas des Objektes, oder einem optional definierten
+                                Gebietsschema <code>$locale</code>. Für eine Liste von unterstützten Formatcodes
+                                kann hier nachgeschaut werden: <xref linkend="zend.date.constants.selfdefinedformats" />.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>toArray()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toArray()</emphasis>
+                            </para>
+                            <para>
+                                Gibt eine Array Representation des ausgewählten Datums anhand der Konventionen des
+                                Gebietsschemas zurück. Das zurückgegebene Array is identisch zu PHP's
+                                <ulink url="http://php.net/getdate">getdate()</ulink> Funktion und beinhaltet:
+                            </para>
+                            <para>
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>
+                                            Tag als Zahl mit '<emphasis role="strong">day</emphasis>'
+                                            (<classname>Zend_Date::DAY_SHORT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Monat als Zahl mit '<emphasis role="strong">month</emphasis>'
+                                            (<classname>Zend_Date::MONTH_SHORT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Jahr als '<emphasis role="strong">year</emphasis>'
+                                            (<classname>Zend_Date::YEAR</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Stunde als '<emphasis role="strong">hour</emphasis>'
+                                            (<classname>Zend_Date::HOUR_SHORT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Minute als '<emphasis role="strong">minute</emphasis>'
+                                            (<classname>Zend_Date::MINUTE_SHORT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Sekunde als '<emphasis role="strong">second</emphasis>'
+                                            (<classname>Zend_Date::SECOND_SHORT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Abgekürzte Zeitzone als '<emphasis role="strong">timezone</emphasis>'
+                                            (<classname>Zend_Date::TIMEZONE</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Unix Zeitpunkt als '<emphasis role="strong">timestamp</emphasis>'
+                                            (<classname>Zend_Date::TIMESTAMP</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Wochentag als Zahl mit '<emphasis role="strong">weekday</emphasis>'
+                                            (<classname>Zend_Date::WEEKDAY_DIGIT</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Tag des Jahres als '<emphasis role="strong">dayofyear</emphasis>'
+                                            (<classname>Zend_Date::DAY_OF_YEAR</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Woche als '<emphasis role="strong">week</emphasis>'
+                                            (<classname>Zend_Date::WEEK</classname>)
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            Abstand der Zeitzone zu GMT als
+                                            '<emphasis role="strong">gmtsecs</emphasis>'
+                                            (<classname>Zend_Date::GMT_SECS</classname>)
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>toValue()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">toValue($part = null)</emphasis>
+                            </para>
+                            <para>
+                                Gibt eine Integer Repräsentation des ausgewählten Datumsabschnittes <code>$part</code>
+                                zurück anhand der Konventionen des Gebietsschemas des Objektes. Gibt <code>false</code>
+                                zurück wenn der Abschnitt <code>$part</code> ein nicht numerischer Wert ist, wie
+                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>. <emphasis role="strong">NOTIZ:</emphasis>
+                                Diese Methode ruft <link linkend="id.date.basic.operations"><code>get()</code>
+                                </link> auf und castet das Ergebnis einen PHP Integer Wert, welcher unerwartete Ergebnisse
+                                liefern wird, wenn <code>get()</code> eine numerische Zeichenkette zurückgibt die
+                                eine Zahl enthält welche zu groß für einen PHP Integer Wert auf Ihrem System ist.
+                                Stattdessen sollte <code>get()</code> benutzt werden.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <link linkend="id.date.basic.operations">get()</link>
+                        </entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Diese Methode gibt den Abschnitt <code>$part</code> vom Datum des Objektes,
+                                welches mit dem Gebietsschema <code>$locale</code> lokalisiert wurde, als
+                                formatierten String oder Integer zurück. Für weitere Informationen hier weiterlesen:
+                                <xref linkend="id.date.basic.operations" />.
+                            </para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>now()</entry>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">now($locale = null)</emphasis>
+                            </para>
+                            <para>
+                                Diese bequemliche Funktion ist identisch mit <code>new Zend_Date()</code>.
+                                Sie gibt das aktuelle Datum als <classname>Zend_Date</classname> Objekt zurück, welches das
+                                Gebietsschema <code>$locale</code> hat.
+                            </para>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.others.fractions">
+
+        <title>Arbeiten mit Sekundenbruchteilen</title>
+
+        <para>
+            Viele Methoden unterstützen es, Werte relativ zu einer <classname>Zend_Date</classname> Instanz zu erhalten.
+        </para>
+
+        <table id="zend.date.others.fractions.table">
+            <title>Methoden zur Datumsausgabe</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Methode</entry>
+                        <entry>Erklärung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getFractionalPrecision()</emphasis>
+                            </para>
+                        </entry>
+                        <entry>Gibt die Genauigkeit des Sekundenbruchteils zurück</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">setFractionalPrecision()</emphasis>
+                            </para>
+                        </entry>
+                        <entry>Setzt die Genauigkeit des Sekundenbruchteils</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+    <sect2 id="zend.date.other.sun">
+
+        <title>Sonnenaufgang / Sonnenuntergang</title>
+
+        <para>
+            Drei Methoden geben Zugriff auf geographisch lokalisierte Informationen über die Sonne was die Zeit
+            für Sonnenaufgang und Sonnenuntergang beinhaltet.
+        </para>
+
+        <table id="zend.date.other.sun.table">
+            <title>Gewöhliche Methoden</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Methode</entry>
+                        <entry>Erklärung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunrise($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry>Gibt die Zeit des Sonnenaufgangs dieses Datums zurück</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunset($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry>Gibt die Zeit des Sonnenuntergangs dieses Datums zurück</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para>
+                                <emphasis role="strong">getSunInfo($location)</emphasis>
+                            </para>
+                        </entry>
+                        <entry>Gibt ein Array mit den Sonnendaten des Datums zurück</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

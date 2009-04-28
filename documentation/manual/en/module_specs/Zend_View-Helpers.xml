@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>View Helpers</title>
+
+    <para>
+        In your view scripts, often it is necessary to perform certain
+        complex functions over and over: e.g., formatting a date,
+        generating form elements, or displaying action links. You can
+        use helper classes to perform these behaviors for you.
+    </para>
+
+    <para>
+        A helper is simply a class. Let's say we want a helper named 'fooBar'.
+        By default, the class is prefixed with 'Zend_View_Helper_'
+        (you can specify a custom prefix when setting a helper path), and the
+        last segment of the class name is the helper name; this segment should
+        be TitleCapped; the full class name is then:
+        <classname>Zend_View_Helper_FooBar</classname>. This class should contain at the
+        minimum a single method, named after the helper, and camelCased:
+        <code>fooBar()</code>.
+    </para>
+
+    <note>
+        <title>Watch the Case</title>
+        <para>
+            Helper names are always camelCased, i.e., they never begin with an
+            uppercase character. The class name itself is MixedCased, but the
+            method that is actually executed is camelCased.
+        </para>
+    </note>
+
+    <note>
+        <title>Default Helper Path</title>
+
+        <para>
+            The default helper path always points to the Zend Framework view
+            helpers, i.e., 'Zend/View/Helper/'. Even if you call
+            <code>setHelperPath()</code> to overwrite the existing paths, this
+            path will be set to ensure the default helpers work.
+        </para>
+    </note>
+
+
+    <para>
+        To use a helper in your view script, call it using
+        <code>$this->helperName()</code>. Behind the scenes,
+        <classname>Zend_View</classname> will load the
+        <classname>Zend_View_Helper_HelperName</classname> class, create an object
+        instance of it, and call its <code>helperName()</code> method. The
+        object instance is persistent within the <classname>Zend_View</classname>
+        instance, and is reused for all future calls to
+        <code>$this->helperName()</code>.
+    </para>
+
+    <sect2 id="zend.view.helpers.initial">
+        <title>Initial Helpers</title>
+
+        <para>
+            <classname>Zend_View</classname> comes with an initial set of helper classes,
+            most of which relate to form element generation and perform
+            the appropriate output escaping automatically. In addition, there
+            are helpers for creating route-based URLs and HTML lists, as well as
+            declaring variables. The currently shipped helpers include:
+        </para>
+
+        <itemizedlist>
+
+            <listitem><para>
+                <code>declareVars():</code> Primarily for use when using
+                <code>strictVars()</code>, this helper can be used to declare
+                template variables that may or may not already be set in the
+                view object, as well as to set default values. Arrays passed as
+                arguments to the method will be used to set default values;
+                otherwise, if the variable does not exist, it is set to an empty
+                string.
+            </para></listitem>
+
+            <listitem><para>
+                <code>fieldset($name, $content, $attribs):</code> Creates an
+                XHTML fieldset. If <code>$attribs</code> contains a 'legend'
+                key, that value will be used for the fieldset legend. The
+                fieldset will surround the <code>$content</code> as provided to
+                the helper.
+            </para></listitem>
+
+            <listitem><para>
+                <code>form($name, $attribs, $content):</code> Generates an XHTML
+                form. All <code>$attribs</code> are escaped and rendered as
+                XHTML attributes of the form tag. If <code>$content</code> is
+                present and not a boolean false, then that content is rendered
+                within the start and close form tags; if <code>$content</code>
+                is a boolean false (the default), only the opening form tag is
+                generated.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formButton($name, $value, $attribs):</code> Creates an
+                &lt;button /&gt; element.
+            </para></listitem>
+
+            <listitem>
+                <para>
+                    <code>formCheckbox($name, $value, $attribs,
+                        $options):</code> Creates an &lt;input type="checkbox"
+                    /&gt; element.
+                </para>
+
+                <para>
+                    By default, when no $value is provided and no $options are
+                    present, '0' is assumed to be the unchecked value, and '1'
+                    the checked value. If a $value is passed, but no $options
+                    are present, the checked value is assumed to be the value
+                    passed.
+                </para>
+
+                <para>
+                    $options should be an array. If the array is indexed, the
+                    first value is the checked value, and the second the
+                    unchecked value; all other values are ignored. You may also
+                    pass an associative array with the keys 'checked' and
+                    'unChecked'.
+                </para>
+
+                <para>
+                    If $options has been passed, if $value matches the checked
+                    value, then the element will be marked as checked. You may
+                    also mark the element as checked or unchecked by passing a
+                    boolean value for the attribute 'checked'.
+                </para>
+
+                <para>
+                    The above is probably best summed up with some examples:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// '1' and '0' as checked/unchecked options; not checked
+echo $this->formCheckbox('foo');
+
+// '1' and '0' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', null, array('checked' => true));
+
+// 'bar' and '0' as checked/unchecked options; not checked
+echo $this->formCheckbox('foo', 'bar');
+
+// 'bar' and '0' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', 'bar', array('checked' => true));
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz');
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', null, null, array(
+    'checked' => 'bar',
+    'unChecked' => 'baz'
+));
+
+// 'bar' and 'baz' as checked/unchecked options; checked
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz');
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => true),
+                         array('bar', 'baz');
+
+// 'bar' and 'baz' as checked/unchecked options; unchecked
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz');
+echo $this->formCheckbox('foo',
+                         null,
+                         array('checked' => false),
+                         array('bar', 'baz');
+]]></programlisting>
+
+                <para>
+                    In all cases, the markup prepends a hidden element with the
+                    unchecked value; this way, if the value is unchecked, you
+                    will still get a valid value returned to your form.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>formErrors($errors, $options):</code> Generates an
+                    XHTML unordered list to show errors. <code>$errors</code>
+                    should be a string or an array of strings;
+                    <code>$options</code> should be any attributes you want
+                    placed in the opening list tag.
+                </para>
+
+                <para>
+                    You can specify alternate opening, closing, and separator
+                    content when rendering the errors by calling several methods
+                    on the helper:
+                </para>
+
+                <itemizedlist>
+                    <listitem><para>
+                            <code>setElementStart($string)</code>; default is
+                            '&lt;ul class="errors"%s"&gt;&lt;li&gt;', where %s
+                            is replaced with the attributes as specified in
+                            <code>$options</code>.
+                    </para></listitem>
+
+                    <listitem><para>
+                            <code>setElementSeparator($string)</code>; default
+                            is '&lt;/li&gt;&lt;li&gt;'.
+                    </para></listitem>
+
+                    <listitem><para>
+                            <code>setElementEnd($string)</code>; default is
+                            '&lt;/li&gt;&lt;/ul&gt;'.
+                    </para></listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem><para>
+                <code>formFile($name, $attribs):</code> Creates an
+                &lt;input type="file" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formHidden($name, $value, $attribs):</code> Creates an
+                &lt;input type="hidden" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formLabel($name, $value, $attribs):</code> Creates a
+                &lt;label&gt; element, setting the <code>for</code> attribute to
+                <code>$name</code>, and the actual label text to
+                <code>$value</code>. If <code>disable</code> is passed in
+                <code>attribs</code>, nothing will be returned.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formMultiCheckbox($name, $value, $attribs, $options,
+                    $listsep):</code> Creates a list of checkboxes.
+                <code>$options</code> should be an associative array, and may be
+                arbitrarily deep. <code>$value</code> may be a single value or
+                an array of selected values that match the keys in the
+                <code>$options</code> array. <code>$listsep</code> is an HTML
+                break ("&lt;br /&gt;") by default. By default, this element is
+                treated as an array; all checkboxes share the same name, and are
+                submitted as an array.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formPassword($name, $value, $attribs):</code> Creates an
+                &lt;input type="password" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formRadio($name, $value, $attribs, $options):</code>
+                Creates a series of &lt;input type="radio" /&gt; elements, one
+                for each of the $options elements. In the $options array, the
+                element key is the radio value, and the element value is the
+                radio label. The $value radio will be preselected for you.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formReset($name, $value, $attribs):</code> Creates an
+                &lt;input type="reset" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formSelect($name, $value, $attribs, $options):</code>
+                Creates a &lt;select&gt;...&lt;/select&gt; block, with one
+                &lt;option&gt;one for each of the $options elements. In the
+                $options array, the element key is the option value, and the
+                element value is the option label. The $value option(s) will be
+                preselected for you.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formSubmit($name, $value, $attribs):</code> Creates an
+                &lt;input type="submit" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formText($name, $value, $attribs):</code> Creates an
+                &lt;input type="text" /&gt; element.
+            </para></listitem>
+
+            <listitem><para>
+                <code>formTextarea($name, $value, $attribs):</code> Creates a
+                &lt;textarea&gt;...&lt;/textarea&gt; block.
+            </para></listitem>
+
+            <listitem><para>
+                <code>url($urlOptions, $name, $reset):</code> Creates a URL
+                string based on a named route. <code>$urlOptions</code> should
+                be an associative array of key/value pairs used by the
+                particular route.
+            </para></listitem>
+
+            <listitem><para>
+                <code>htmlList($items, $ordered, $attribs, $escape):</code> generates
+                unordered and ordered lists based on the <code>$items</code>
+                passed to it. If <code>$items</code> is a multidimensional
+                array, a nested list will be built. If the <code>$escape</code>
+                flag is true (default), individual items will be escaped using
+                the view objects registered escaping mechanisms; pass a false
+                value if you want to allow markup in your lists.
+            </para></listitem>
+
+        </itemizedlist>
+
+        <para>
+            Using these in your view scripts is very easy, here is an example.
+            Note that you all you need to do is call them; they will load
+            and instantiate themselves as they are needed.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// inside your view script, $this refers to the Zend_View instance.
+//
+// say that you have already assigned a series of select options under
+// the name $countries as array('us' => 'United States', 'il' =>
+// 'Israel', 'de' => 'Germany').
+?>
+<form action="action.php" method="post">
+    <p><label>Your Email:
+<?php echo $this->formText('email', 'you@example.com', array('size' => 32)) ?>
+    </label></p>
+    <p><label>Your Country:
+<?php echo $this->formSelect('country', 'us', null, $this->countries) ?>
+    </label></p>
+    <p><label>Would you like to opt in?
+<?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
+    </label></p>
+</form>
+]]></programlisting>
+
+        <para>
+            The resulting output from the view script will look something like this:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<form action="action.php" method="post">
+    <p><label>Your Email:
+        <input type="text" name="email" value="you@example.com" size="32" />
+    </label></p>
+    <p><label>Your Country:
+        <select name="country">
+            <option value="us" selected="selected">United States</option>
+            <option value="il">Israel</option>
+            <option value="de">Germany</option>
+        </select>
+    </label></p>
+    <p><label>Would you like to opt in?
+        <input type="hidden" name="opt_in" value="no" />
+        <input type="checkbox" name="opt_in" value="yes" checked="checked" />
+    </label></p>
+</form>
+]]></programlisting>
+
+        <xi:include href="Zend_View-Helpers-Action.xml" />
+        <xi:include href="Zend_View-Helpers-Cycle.xml" />
+        <xi:include href="Zend_View-Helpers-Partial.xml" />
+        <xi:include href="Zend_View-Helpers-Placeholder.xml" />
+        <xi:include href="Zend_View-Helpers-Doctype.xml" />
+        <xi:include href="Zend_View-Helpers-HeadLink.xml" />
+        <xi:include href="Zend_View-Helpers-HeadMeta.xml" />
+        <xi:include href="Zend_View-Helpers-HeadScript.xml" />
+        <xi:include href="Zend_View-Helpers-HeadStyle.xml" />
+        <xi:include href="Zend_View-Helpers-HeadTitle.xml" />
+        <xi:include href="Zend_View-Helpers-HtmlObject.xml" />
+        <xi:include href="Zend_View-Helpers-InlineScript.xml" />
+        <xi:include href="Zend_View-Helpers-Json.xml" />
+        <xi:include href="Zend_View-Helpers-Navigation.xml" />
+        <xi:include href="Zend_View-Helpers-Translate.xml" />
+    </sect2>
+
+    <sect2 id="zend.view.helpers.paths">
+        <title>Helper Paths</title>
+
+        <para>
+            As with view scripts, your controller can specify a stack of paths
+            for <classname>Zend_View</classname> to search for helper classes. By default,
+            <classname>Zend_View</classname> looks in "Zend/View/Helper/*" for helper
+            classes. You can tell <classname>Zend_View</classname> to look in other
+            locations using the <code>setHelperPath()</code> and
+            <code>addHelperPath()</code> methods. Additionally, you can
+            indicate a class prefix to use for helpers in the path provided, to
+            allow namespacing your helper classes. By default, if no class
+            prefix is provided, 'Zend_View_Helper_' is assumed.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+
+// Set path to /path/to/more/helpers, with prefix 'My_View_Helper'
+$view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
+]]></programlisting>
+
+
+        <para>
+            In fact, you can "stack" paths using the
+            <code>addHelperPath()</code> method. As you add paths to the stack,
+            <classname>Zend_View</classname> will look at the most-recently-added path for
+            the requested helper class. This allows you to add to (or even
+            override) the initial distribution of helpers with your own custom
+            helpers.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view = new Zend_View();
+// Add /path/to/some/helpers with class prefix 'My_View_Helper'
+$view->addHelperPath('/path/to/some/helpers', 'My_View_Helper');
+// Add /other/path/to/helpers with class prefix 'Your_View_Helper'
+$view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
+
+// now when you call $this->helperName(), Zend_View will look first for
+// "/path/to/some/helpers/HelperName" using class name
+// "Your_View_Helper_HelperName", then for
+// "/other/path/to/helpers/HelperName.php" using class name
+// "My_View_Helper_HelperName", and finally for
+// "Zend/View/Helper/HelperName.php" using class name
+// "Zend_View_Helper_HelperName".
+]]></programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.view.helpers.custom">
+        <title>Writing Custom Helpers</title>
+
+        <para>
+            Writing custom helpers is easy; just follow these rules:
+        </para>
+
+        <itemizedlist>
+
+            <listitem><para>
+                While not strictly necessary, we recommend either implementing
+                <classname>Zend_View_Helper_Interface</classname> or extending
+                <classname>Zend_View_Helper_Abstract</classname> when creating your
+                helpers. Introduced in 1.6.0, these simply define a
+                <code>setView()</code> method; however, in upcoming releases, we
+                plan to implement a strategy pattern that will simplify much of
+                the naming schema detailed below. Building off these now will
+                help you future-proof your code.
+            </para></listitem>
+
+            <listitem><para>
+                The class name must, at the very minimum, end with the helper
+                name itself, using MixedCaps. E.g., if you were writing a
+                helper called "specialPurpose", the class name would minimally
+                need to be "SpecialPurpose". You may, and should, give the class
+                name a prefix, and it is recommended that you use 'View_Helper'
+                as part of that prefix: "My_View_Helper_SpecialPurpose". (You
+                will need to pass in the prefix, with or without the trailing
+                underscore, to <code>addHelperPath()</code> or
+                <code>setHelperPath()</code>).
+            </para></listitem>
+
+            <listitem><para>
+                The class must have a public method that matches the
+                helper name; this is the method that will be called when
+                your template calls "$this->specialPurpose()". In our
+                "specialPurpose" helper example, the required method
+                declaration would be "public function specialPurpose()".
+            </para></listitem>
+
+            <listitem><para>
+                In general, the class should not echo or print or otherwise
+                generate output. Instead, it should return values to be
+                printed or echoed. The returned values should be escaped
+                appropriately.
+            </para></listitem>
+
+            <listitem><para>
+                The class must be in a file named after the helper class. Again
+                using our "specialPurpose" helper example, the file has to be
+                named "SpecialPurpose.php".
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            Place the helper class file somewhere in your helper path stack, and
+            <classname>Zend_View</classname> will automatically load, instantiate,
+            persist, and execute it for you.
+        </para>
+
+        <para>
+            Here is an example of our <code>SpecialPurpose</code> helper code:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
+{
+    protected $_count = 0;
+    public function specialPurpose()
+    {
+        $this->_count++;
+        $output = "I have seen 'The Jerk' {$this->_count} time(s).";
+        return htmlspecialchars($output);
+    }
+}
+]]></programlisting>
+
+        <para>
+            Then in a view script, you can call the <code>SpecialPurpose</code>
+            helper as many times as you like; it will be instantiated once, and
+            then it persists for the life of that <classname>Zend_View</classname>
+            instance.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// remember, in a view script, $this refers to the Zend_View instance.
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+echo $this->specialPurpose();
+]]></programlisting>
+
+        <para>
+            The output would look something like this:
+        </para>
+        <programlisting role="php"><![CDATA[
+I have seen 'The Jerk' 1 time(s).
+I have seen 'The Jerk' 2 time(s).
+I have seen 'The Jerk' 3 time(s).
+]]></programlisting>
+
+        <para>
+            Sometimes you will need access to the calling <classname>Zend_View</classname>
+            object -- for instance, if you need to use the registered encoding,
+            or want to render another view script as part of your helper. To get
+            access to the view object, your helper class should have a
+            <code>setView($view)</code> method, like the following:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class My_View_Helper_ScriptPath
+{
+    public $view;
+
+    public function setView(Zend_View_Interface $view)
+    {
+        $this->view = $view;
+    }
+
+    public function scriptPath($script)
+    {
+        return $this->view->getScriptPath($script);
+    }
+}
+]]></programlisting>
+
+        <para>
+            If your helper class has a <code>setView()</code> method, it will be
+            called when the helper class is first instantiated, and passed the
+            current view object. It is up to you to persist the object in your
+            class, as well as determine how it should be accessed.
+        </para>
+
+        <para>
+            If you are extending <classname>Zend_View_Helper_Abstract</classname>, you do
+            not need to define this method, as it is defined for you.
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,134 @@
+<sect1 id="zend.console.getopt.fetching">
+    <title> 读取（Fetching）选项和参数 </title>
+    <para>
+        在声明 <code>Zend_Console_Getopt</code> 对象认可的选项和从命令行或数组提供参数后，可以查询这个对象来找出哪个选项被用户在程序中给定的命令行调用中被指定。这个类实现魔术方法，所以可以用名字来查询选项。
+    </para>
+    <para>
+        数据的解析被延迟到第一个依靠 <code>Zend_Console_Getopt</code> 对象查询是否发现一个选项被给出，然后这个对象来执行解析。它允许在解析发生之前使用若干个方法调用来配置选项、参数、帮助内容和配置选项。
+    </para>
+
+    <sect2 id="zend.console.getopt.fetching.exceptions">
+        <title> 操作 Getopt 异常 </title>
+        <para>
+            如果用户在命令行中给出任何无效选项，解析函数抛出一个<code>Zend_Console_Getopt_Exception</code>。你应当在程序代码理捕捉这个异常。可以使用<code>parse()</code>方法强制对象来解析参数。这很有用，因为可以在<code>try</code> 块中调用<code>parse()</code>。如果通过，解析不再抛出异常。异常的抛出有一个定制的方法 <code>getUsageMessage()</code>，它作为字符串返回，这个字符串是所有被声明的选项的用法信息。
+        </para>
+        <example id="zend.console.getopt.fetching.exceptions.example">
+            <title> 捕捉 Getopt 异常 </title>
+            <programlisting role="php"><![CDATA[
+try {
+    $opts = new Zend_Console_Getopt('abp:');
+    $opts->parse();
+} catch (Zend_Console_Getopt_Exception $e) {
+    echo $e->getUsageMessage();
+    exit;
+}
+]]>
+            </programlisting>
+        </example>
+        <para>
+            解析抛出异常的情况包括：
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    给出的选项不被认可。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    选项需要参数，但没有给出。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    选项参数类型错误。例如，当要求整数却给出一个非数字字符串。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.console.getopt.fetching.byname">
+        <title> 通过名字读取 （Fetching）选项 </title>
+        <para>
+            可以使用 <code>getOption()</code> 方法来查询选项的值。如果选项有一个参数，这个方法返回参数的值。如果选项不带参数但用户的确在命令行中指定了，这个方法返回<code>true</code>，否则，返回<code>null</code>。
+        </para>
+        <example id="zend.console.getopt.fetching.byname.example.setoption">
+            <title> 使用 getOption()</title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt('abp:');
+$b = $opts->getOption('b');
+$p_parameter = $opts->getOption('p');
+]]>
+            </programlisting>
+        </example>
+        <para>
+            另外，可以使用魔术函数 <code>__get()</code> 来获取选项的值，好像它是类成员变量。 <code>__isset()</code> 魔术方法也可以实现。
+        </para>
+        <example id="zend.console.getopt.fetching.byname.example.magic">
+            <title> 使用 __get() 和 __isset() 魔术方法 </title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt('abp:');
+if (isset($opts->b)) {
+    echo "I got the b option.\n";
+}
+$p_parameter = $opts->p; // null if not set
+]]>
+            </programlisting>
+        </example>
+        <para>
+            如果选项被带有别名声明，在上面的方法中可以使用任何别名。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.console.getopt.fetching.reporting">
+        <title> 报告选项 </title>
+        <para>
+            有若干方法来报告由用户在当前命令行给出的选项的全集。
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    作为字符串：使用<code>toString()</code>方法。选项被返回为用空格分隔的"<code>flag=value</code>"对的字符串。没有参数的选项值是字面上的"<code>true</code>"。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    作为数组：使用<code>toArray()</code>方法。选项被返回在一个简单的整数索引的字符串数组，flag 字符串在参数字符串之后，如果有的话。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    作为包含JSON数据的字符串：使用 <code>toJson()</code> 方法。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    作为包含 XML 数据的字符串： 使用 <code>toXml()</code> 方法。
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            在上述所有的方法中，flag 字符串是对应于别名列表中的第一个字符串。例如：如果选项别名被声明如"<code>verbose|v</code>"，那么第一个字符串，"<code>verbose</code>"，被用作选项的规范名称。选项flag的名称不包括任何前面所述的短横线。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.console.getopt.fetching.remainingargs">
+        <title> 读取非选项参数 </title>
+        <para>
+            在选项参数和它们的参数从命令行中解析后，可能还有另外的参数剩余。可以使用<code>getRemainingArgs()</code>方法来查询这些参数。这个方法返回一个不属于任何选项的字符串数组。
+        </para>
+        <example id="zend.console.getopt.fetching.remainingargs.example">
+            <title> 使用 getRemainingArgs()</title>
+            <programlisting role="php"><![CDATA[
+$opts = new Zend_Console_Getopt('abp:');
+$opts->setArguments(array('-p', 'p_parameter', 'filename'));
+$args = $opts->getRemainingArgs(); // returns array('filename')
+]]>
+            </programlisting>
+        </example>
+        <para>
+            <code>Zend_Console_Getopt</code>支持 GNU 惯例，在参数中包含双短横线表示选项的结尾。在这个符号后面的任何参数必须当作非选项参数。如果有以一个短横线开头的非选项参数，这很有用。例如："<command>rm -- -filename-with-dash</command>"。
+        </para>
+    </sect2>
+
+</sect1>

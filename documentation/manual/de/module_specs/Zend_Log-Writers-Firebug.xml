@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.log.writers.firebug">
+
+    <title>An Firebox schreiben</title>
+
+    <para>
+        <classname>Zend_Log_Writer_Firebug</classname> sendet Logdaten an die
+        <ulink url="http://www.getfirebug.com/">Firebug</ulink>
+        <ulink url="http://getfirebug.com/logging.html">Console</ulink>.
+    </para>
+
+    <para>
+        <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100" width="310" />
+    </para>
+
+    <para>
+        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname> Komponente gesendet welche
+        HTTP Header verwendet um sicherzustellen das der Seiteninhlat nicht verändert wird. Das Debuggen
+        von AJAX Anfragen die klare JSON und XML Antworten benötigen ist mit diesem Vorgehen möglich.
+    </para>
+
+    <para>
+        Notwendigkeiten:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Ein Firefox Browser idealerweise Version 3 aber auch Version 2 wird unterstützt.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Die Firebug Firefox Erweiterung welche unter
+                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+                heruntergeladen werden kann.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Die FirePHP Filefox Erweiterung welche unter
+                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+                heruntergeladen werden kann.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <example id="zend.log.writers.firebug.example.with_front_controller">
+        <title>Loggen mit <classname>Zend_Controller_Front</classname></title>
+
+        <programlisting role="php"><![CDATA[
+// In der Bootstrap Datei platzieren bevor der Frontcontroller ausgeführt wird
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+// Verwende das in den Modell, View, und Controller Dateien
+$logger->log('Das ist eine Lognachricht!', Zend_Log::INFO);
+]]>
+        </programlisting>
+    </example>
+
+    <example id="zend.log.writers.firebug.example.without_front_controller">
+        <title>Loggen ohne <classname>Zend_Controller_Front</classname></title>
+
+        <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Firebug();
+$logger = new Zend_Log($writer);
+
+$request = new Zend_Controller_Request_Http();
+$response = new Zend_Controller_Response_Http();
+$channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+$channel->setRequest($request);
+$channel->setResponse($response);
+
+// Ausgabe buffering starten
+ob_start();
+
+// Jetzt können Aufrufe an den Logger durchgeführt werden
+$logger->log('Das ist eine Lognachricht!', Zend_Log::INFO);
+
+// Logdaten an den Browser senden
+$channel->flush();
+$response->sendHeaders();
+]]>
+        </programlisting>
+    </example>
+
+    <sect3 id="zend.log.writers.firebug.priority-styles">
+
+        <title>Setzen von Stilen für Prioritäten</title>
+
+        <para>
+            Eingebaute und Benutzerdefinierte Prioritäten können mit der
+            <code>setPriorityStyle()</code> Methode angepasst werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$logger->addPriority('FOO', 8);
+$writer->setPriorityStyle(8, 'TRACE');
+$logger->foo('Foo Nachricht');
+]]>
+        </programlisting>
+
+        <para>
+            Der Standardstil für Benutzerdefinierte Prioritäten kann mit der
+            <code>setDefaultPriorityStyle()</code> Methode gesetzt werden.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$writer->setDefaultPriorityStyle('TRACE');
+]]>
+        </programlisting>
+
+        <para>
+            Die unterstützten Stile sind wie folgt:
+        <table id="zend.log.writers.firebug.priority-styles.table">
+            <title>Firebug Logging Stile</title>
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Stil</entry>
+                        <entry>Beschreibung</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><code>LOG</code></entry>
+                        <entry>Zeigt eine reine Lognachricht an</entry>
+                    </row>
+                    <row>
+                        <entry><code>INFO</code></entry>
+                        <entry>Zeigt eine Info Lognachricht an</entry>
+                    </row>
+                    <row>
+                        <entry><code>WARN</code></entry>
+                        <entry>Zeigt eine Warnungs Lognachricht an</entry>
+                    </row>
+                    <row>
+                        <entry><code>ERROR</code></entry>
+                        <entry>Zeigt eine Fehler Lognachricht an die den Fehlerzählen von Firebug erhöht</entry>
+                    </row>
+                    <row>
+                        <entry><code>TRACE</code></entry>
+                        <entry>Zeigt eine Lognachricht mit einem erweiterbaren Stack Trace an</entry>
+                    </row>
+                    <row>
+                        <entry><code>EXCEPTION</code></entry>
+                        <entry>Zeigt eine lange Fehlernachicht mit erweiterbarem Stack Trace an</entry>
+                    </row>
+                    <row>
+                        <entry><code>TABLE</code></entry>
+                        <entry>Zeigt eine Lognachricht mit erweiterbarer Tabelle an</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data">
+
+      <title>Daten für das Loggen vorbereiten</title>
+
+      <para>
+          Wärend jede PHP Variable mit den eingebauten Prioritäten geloggt werden kann, ist eine etwas spezielle
+          Formatierung notwendig wenn einige der spezialisierteren Logstile verwendet werden.
+      </para>
+
+      <para>
+          Die <code>LOG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> und <code>TRACE</code>
+          Stile benötigen keine spezielle Formatierung.
+      </para>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.exception">
+
+      <title>Loggen von Ausnahmen</title>
+
+      <para>
+          Um eine <classname>Zend_Exception</classname> zu loggen muß einfach das Exceptionobjekt an den Logger
+          übergeben werden. Es ist egal welche Priorität oder welcher Stil gesetzt wurde, da die Ausnahme
+          automatisch erkannt wird.
+      </para>
+
+      <programlisting role="php"><![CDATA[
+$exception = new Zend_Exception('Test Ausnahme');
+$logger->err($exception);
+]]>
+      </programlisting>
+    </sect3>
+
+    <sect3 id="zend.log.writers.firebug.preparing-data.table">
+
+      <title>Tabellen loggen</title>
+
+      <para>
+          Man kann auch Daten loggen und diese in einem Table Stil formatieren. Spalten werden automatisch
+          erkannt und die erste Zeile der Daten wird automatisch der Header.
+      </para>
+
+      <programlisting role="php"><![CDATA[
+$writer->setPriorityStyle(8, 'TABLE');
+$logger->addPriority('TABLE', 8);
+
+$table = array('Summary line for the table',
+               array(
+                   array('Spalte 1', 'Spalte 2'),
+                   array('Zeile 1 c 1','Zeile 1 c 2'),
+                   array('Zeile 2 c 1',' Zeile 2 c 2')
+               )
+         );
+$logger->table($table);
+]]>
+      </programlisting>
+    </sect3>
+</sect2>

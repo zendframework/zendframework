@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.gdata.gapps">
+    <title>Using Google Apps Provisioning</title>
+
+    <para>
+        Google Apps is a service which allows domain administrators to offer
+        their users managed access to Google services such as Mail, Calendar,
+        and Docs &amp; Spreadsheets. The Provisioning API offers a programmatic
+        interface to configure this service. Specifically, this API allows
+        administrators the ability to create, retrieve, update, and delete
+        user accounts, nicknames, and email lists.
+    </para>
+
+    <para>
+        This library implements version 2.0 of the Provisioning API. Access to
+        your account via the Provisioning API must be manually enabled for
+        each domain using the Google Apps control panel. Only certain
+        account types are able to enable this feature.
+    </para>
+
+    <para>
+        For more information on the Google Apps Provisioning API, including
+        instructions for enabling API access, refer to the <ulink
+        url="http://code.google.com/apis/calendar/overview.html">Provisioning
+        API V2.0 Reference</ulink>.
+    </para>
+
+    <note>
+        <title>Authentication</title>
+        <para>
+            The Provisioning API does not support authentication via AuthSub
+            and anonymous access is not permitted. All HTTP connections must
+            be authenticated using ClientAuth authentication.
+            </para>
+    </note>
+
+    <sect2 id="zend.gdata.gapps.domain">
+        <title>Setting the current domain</title>
+
+        <para>
+            In order to use the Provisioning API, the domain being
+            administered needs to be specified in all request URIs. In order
+            to ease development, this information is stored within both the
+            Gapps service and query classes to use when constructing
+            requests.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.domain.service">
+            <title>Setting the domain for the service class</title>
+
+            <para>
+                To set the domain for requests made by the service class,
+                either call <code>setDomain()</code> or specify the domain
+                when instantiating the service class. For example:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$domain = "example.com";
+$gdata = new Zend_Gdata_Gapps($client, $domain);
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.domain.query">
+            <title>Setting the domain for query classes</title>
+
+            <para>
+                Setting the domain for requests made by query classes is
+                similar to setting it for the service class-either call
+                <code>setDomain()</code> or specify the domain when creating
+                the query. For example:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$domain = "example.com";
+$query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
+]]></programlisting>
+
+            <para>
+                When using a service class factory method to create a query,
+                the service class will automatically set the query's domain to
+                match its own domain. As a result, it is not necessary to
+                specify the domain as part of the constructor arguments.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$domain = "example.com";
+$gdata = new Zend_Gdata_Gapps($client, $domain);
+$query = $gdata->newUserQuery($arg);
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.users">
+        <title>Interacting with users</title>
+
+        <para>
+            Each user account on a Google Apps hosted domain is represented as
+            an instance of <classname>Zend_Gdata_Gapps_UserEntry</classname>. This class provides
+            access to all account properties including name, username,
+            password, access rights, and current quota.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.users.creating">
+            <title>Creating a user account</title>
+
+            <para>
+                User accounts can be created by calling the
+                <code>createUser()</code> convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->createUser('foo', 'Random', 'User', '••••••••');
+]]></programlisting>
+
+            <para>
+                Users can also be created by instantiating UserEntry,
+                providing a username, given name, family name, and password,
+                then calling <code>insertUser()</code> on a service object to
+                upload the entry to the server.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$user = $gdata->newUserEntry();
+$user->login = $gdata->newLogin();
+$user->login->username = 'foo';
+$user->login->password = '••••••••';
+$user->name = $gdata->newName();
+$user->name->givenName = 'Random';
+$user->name->familyName = 'User';
+$user = $gdata->insertUser($user);
+]]></programlisting>
+
+            <para>
+                The user's password should normally be provided as cleartext.
+                Optionally, the password can be provided as an SHA-1 digest if
+                <code>login->passwordHashFunction</code> is set to 'SHA-1'.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.users.retrieving">
+            <title>Retrieving a user account</title>
+
+            <para>
+                Individual user accounts can be retrieved by calling the
+                <code>retrieveUser()</code> convenience method. If the user is
+                not found, <code>null</code> will be returned.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+
+echo 'Username: ' . $user->login->userName . "\n";
+echo 'Given Name: ' . $user->login->givenName . "\n";
+echo 'Family Name: ' . $user->login->familyName . "\n";
+echo 'Suspended: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
+echo 'Admin: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
+echo 'Must Change Password: ' .
+     ($user->login->changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
+echo 'Has Agreed To Terms: ' .
+     ($user->login->agreedToTerms ? 'Yes' : 'No') . "\n";
+]]></programlisting>
+
+            <para>
+                Users can also be retrieved by creating an
+                instance of <classname>Zend_Gdata_Gapps_UserQuery</classname>, setting its username
+                property to equal the username of the user that is to be
+                retrieved, and calling <code>getUserEntry()</code> on a
+                service object with that query.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query = $gdata->newUserQuery('foo');
+$user = $gdata->getUserEntry($query);
+
+echo 'Username: ' . $user->login->userName . "\n";
+echo 'Given Name: ' . $user->login->givenName . "\n";
+echo 'Family Name: ' . $user->login->familyName . "\n";
+echo 'Suspended: ' . ($user->login->suspended ? 'Yes' : 'No') . "\n";
+echo 'Admin: ' . ($user->login->admin ? 'Yes' : 'No') . "\n"
+echo 'Must Change Password: ' .
+     ($user->login->changePasswordAtNextLogin ? 'Yes' : 'No') . "\n";
+echo 'Has Agreed To Terms: ' .
+     ($user->login->agreedToTerms ? 'Yes' : 'No') . "\n";
+]]></programlisting>
+
+            <para>
+                If the specified user cannot be located a ServiceException
+                will be thrown with an error code of
+                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>.
+                ServiceExceptions will be covered in <xref
+                linkend="zend.gdata.gapps.exceptions" />.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.users.retrievingAll">
+            <title>Retrieving all users in a domain</title>
+
+            <para>
+                To retrieve all users in a domain, call the
+                <code>retrieveAllUsers()</code> convenience method.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveAllUsers();
+
+foreach ($feed as $user) {
+    echo "  * " . $user->login->username . ' (' . $user->name->givenName .
+        ' ' . $user->name->familyName . ")\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_UserFeed</classname> object which
+                holds each user on the domain.
+            </para>
+
+            <para>
+                Alternatively, call <code>getUserFeed()</code> with no
+                options. Keep in mind that on larger
+                domains this feed may be paged by the server. For more
+                information on paging, see <xref
+                linkend="zend.gdata.introduction.paging" />.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->getUserFeed();
+
+foreach ($feed as $user) {
+    echo "  * " . $user->login->username . ' (' . $user->name->givenName .
+        ' ' . $user->name->familyName . ")\n";
+}
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.users.updating">
+            <title>Updating a user account</title>
+
+            <para>
+                The easiest way to update a user account is to retrieve the
+                user as described in the previous sections, make any desired
+                changes, then call <code>save()</code> on that user. Any
+                changes made will be propagated to the server.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->name->givenName = 'Foo';
+$user->name->familyName = 'Bar';
+$user = $user->save();
+]]></programlisting>
+
+            <sect4 id="zend.gdata.gapps.users.updating.resettingPassword">
+                <title>Resetting a user's password</title>
+
+                <para>
+                    A user's password can be reset to a new value by updating
+                    the <code>login->password</code> property.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->password = '••••••••';
+$user = $user->save();
+]]></programlisting>
+
+                <para>
+                    Note that it is not possible to recover a password in this
+                    manner as stored passwords are not made available via the
+                    Provisioning API for security reasons.
+                </para>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.gapps.users.updating.forcingPasswordChange">
+                <title>Forcing a user to change their password</title>
+
+                <para>
+                    A user can be forced to change their password at their
+                    next login by setting the
+                    <code>login->changePasswordAtNextLogin</code> property to
+                    <code>true</code>.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->changePasswordAtNextLogin = true;
+$user = $user->save();
+]]></programlisting>
+
+                <para>
+                    Similarly, this can be undone by setting the
+                    <code>login->changePasswordAtNextLogin</code> property to
+                    <code>false</code>.
+                </para>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.gapps.users.updating.suspendingAccount">
+                <title>Suspending a user account</title>
+
+                <para>
+                    Users can be restricted from logging in without deleting
+                    their user account by instead
+                    <emphasis>suspending</emphasis> their user account.
+                    Accounts can be suspended or restored by using the
+                    <code>suspendUser()</code> and <code>restoreUser()</code>
+                    convenience methods:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$gdata->suspendUser('foo');
+$gdata->restoreUser('foo');
+]]></programlisting>
+
+                <para>
+                    Alternatively, you can set the UserEntry's
+                    <code>login->suspended</code> property to
+                    <code>true</code>.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->suspended = true;
+$user = $user->save();
+]]></programlisting>
+
+                <para>
+                    To restore the user's access, set the
+                    <code>login->suspended</code> property to
+                    <code>false</code>.
+                </para>
+
+            </sect4>
+
+            <sect4 id="zend.gdata.gapps.users.updating.grantingAdminRights">
+                <title>Granting administrative rights</title>
+
+                <para>
+                    Users can be granted the ability to administer your domain
+                    by setting their <code>login->admin</code> property to
+                    <code>true</code>.
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->login->admin = true;
+$user = $user->save();
+]]></programlisting>
+
+                <para>
+                    And as expected, setting a user's <code>login->admin</code>
+                    property to <code>false</code> revokes their
+                    administrative rights.
+                </para>
+
+            </sect4>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.users.deleting">
+            <title>Deleting user accounts</title>
+
+            <para>
+                Deleting a user account to which you already hold a UserEntry
+                is a simple as calling <code>delete()</code> on that
+                entry.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$user = $gdata->retrieveUser('foo');
+$user->delete();
+]]></programlisting>
+
+            <para>
+                If you do not have access to a UserEntry object for an
+                account, use the <code>deleteUser()</code> convenience method.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->deleteUser('foo');
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.nicknames">
+        <title>Interacting with nicknames</title>
+
+        <para>
+            Nicknames serve as email aliases for existing users. Each nickname
+            contains precisely two key properties: its name and its owner. Any
+            email addressed to a nickname is forwarded to the user who owns
+            that nickname.
+        </para>
+
+        <para>
+            Nicknames are represented as an instances of
+            <classname>Zend_Gdata_Gapps_NicknameEntry</classname>.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.nicknames.creating">
+            <title>Creating a nickname</title>
+
+            <para>
+                Nicknames can be created by calling the
+                <code>createNickname()</code> convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->createNickname('foo', 'bar');
+]]></programlisting>
+
+            <para>
+                Nicknames can also be created by instantiating NicknameEntry,
+                providing the nickname with a name and an owner, then calling
+                <code>insertNickname()</code> on a service object to upload
+                the entry to the server.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$nickname = $gdata->newNicknameEntry();
+$nickname->login = $gdata->newLogin('foo');
+$nickname->nickname = $gdata->newNickname('bar');
+$nickname = $gdata->insertNickname($nickname);
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.nicknames.retrieving">
+            <title>Retrieving a nickname</title>
+
+            <para>
+                Nicknames can be retrieved by calling the
+                <code>retrieveNickname()</code> convenience method. This will
+                return <code>null</code> if a user is not found.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$nickname = $gdata->retrieveNickname('bar');
+
+echo 'Nickname: ' . $nickname->nickname->name . "\n";
+echo 'Owner: ' . $nickname->login->username . "\n";
+]]></programlisting>
+
+            <para>
+                Individual nicknames can also be retrieved by creating an
+                instance of <classname>Zend_Gdata_Gapps_NicknameQuery</classname>, setting its
+                nickname property to equal the nickname that is to be
+                retrieved, and calling <code>getNicknameEntry()</code> on a
+                service object with that query.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query = $gdata->newNicknameQuery('bar');
+$nickname = $gdata->getNicknameEntry($query);
+
+echo 'Nickname: ' . $nickname->nickname->name . "\n";
+echo 'Owner: ' . $nickname->login->username . "\n";
+]]></programlisting>
+
+            <para>
+                As with users, if no corresponding nickname is found a
+                ServiceException will be thrown with an error code of
+                <classname>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</classname>. Again, these
+                will be discussed in <xref linkend="zend.gdata.gapps.exceptions"
+                />.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.nicknames.retrievingUser">
+            <title>Retrieving all nicknames for a user</title>
+
+            <para>
+                To retrieve all nicknames associated with a given user, call
+                the convenience method <code>retrieveNicknames()</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveNicknames('foo');
+
+foreach ($feed as $nickname) {
+    echo '  * ' . $nickname->nickname->name . "\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_NicknameFeed</classname> object which
+                holds each nickname associated with the specified user.
+            </para>
+
+            <para>
+                Alternatively, create a new <classname>Zend_Gdata_Gapps_NicknameQuery</classname>,
+                set its username property to the desired user, and submit the
+                query by calling <code>getNicknameFeed()</code> on a service
+                object.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query = $gdata->newNicknameQuery();
+$query->setUsername('foo');
+$feed = $gdata->getNicknameFeed($query);
+
+foreach ($feed as $nickname) {
+    echo '  * ' . $nickname->nickname->name . "\n";
+}
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.nicknames.retrievingAll">
+            <title>Retrieving all nicknames in a domain</title>
+            <para>
+                To retrieve all nicknames in a feed, simply call the
+                convenience method <code>retrieveAllNicknames()</code>
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveAllNicknames();
+
+foreach ($feed as $nickname) {
+    echo '  * ' . $nickname->nickname->name . ' => ' .
+        $nickname->login->username . "\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_NicknameFeed</classname> object which
+                holds each nickname on the domain.
+            </para>
+
+            <para>
+                Alternatively, call <code>getNicknameFeed()</code> on a
+                service object with no arguments.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->getNicknameFeed();
+
+foreach ($feed as $nickname) {
+    echo '  * ' . $nickname->nickname->name . ' => ' .
+        $nickname->login->username . "\n";
+}
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.nicknames.deleting">
+            <title>Deleting a nickname</title>
+
+            <para>
+                Deleting a nickname to which you already hold a NicknameEntry
+                for is a simple as calling <code>delete()</code> on that
+                entry.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$nickname = $gdata->retrieveNickname('bar');
+$nickname->delete();
+]]></programlisting>
+
+            <para>
+                For nicknames which you do not hold a NicknameEntry for, use
+                the <code>deleteNickname()</code> convenience method.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->deleteNickname('bar');
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.emailLists">
+        <title>Interacting with email lists</title>
+
+        <para>
+            Email lists allow several users to retrieve email addressed to a
+            single email address. Users do not need to be a
+            member of this domain in order to subscribe to an email list
+            provided their complete email address (including domain) is used.
+        </para>
+
+        <para>
+            Each email list on a domain is represented as an instance of
+            <classname>Zend_Gdata_Gapps_EmailListEntry</classname>.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.emailLists.creating">
+            <title>Creating an email list</title>
+
+            <para>
+                Email lists can be created by calling the
+                <code>createEmailList()</code> convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->createEmailList('friends');
+]]></programlisting>
+
+            <para>
+                Email lists can also be created by instantiating
+                EmailListEntry, providing a name for the list, then calling
+                <code>insertEmailList()</code> on a service object to upload
+                the entry to the server.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$list = $gdata->newEmailListEntry();
+$list->emailList = $gdata->newEmailList('friends');
+$list = $gdata->insertEmailList($list);
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.emailList.retrieve">
+            <title>Retrieving all email lists to which a recipient is
+            subscribed</title>
+
+            <para>
+                To retrieve all email lists to which a particular recipient is
+                subscribed, call the <code>retrieveEmailLists()</code>
+                convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveEmailLists('baz@somewhere.com');
+
+foreach ($feed as $list) {
+    echo '  * ' . $list->emailList->name . "\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object which
+                holds each email list associated with the specified recipient.
+            </para>
+
+            <para>
+                Alternatively, create a new <classname>Zend_Gdata_Gapps_EmailListQuery</classname>,
+                set its recipient property to the desired email address, and
+                submit the query by calling <code>getEmailListFeed()</code> on
+                a service object.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query = $gdata->newEmailListQuery();
+$query->setRecipient('baz@somewhere.com');
+$feed = $gdata->getEmailListFeed($query);
+
+foreach ($feed as $list) {
+    echo '  * ' . $list->emailList->name . "\n";
+}
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.emailLists.retrievingAll">
+            <title>Retrieving all email lists in a domain</title>
+
+            <para>
+                To retrieve all email lists in a domain, call the convenience
+                method <code>retrieveAllEmailLists()</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveAllEmailLists();
+
+foreach ($feed as $list) {
+    echo '  * ' . $list->emailList->name . "\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object which
+                holds each email list on the domain.
+            </para>
+
+            <para>
+                Alternatively, call <code>getEmailListFeed()</code> on a
+                service object with no arguments.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->getEmailListFeed();
+
+foreach ($feed as $list) {
+    echo '  * ' . $list->emailList->name . "\n";
+}
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.emailList.deleting">
+            <title>Deleting an email list</title>
+
+            <para>
+                To delete an email list, call the deleteEmailList()
+                convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->deleteEmailList('friends');
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.emailListRecipients">
+        <title>Interacting with email list recipients</title>
+
+        <para>
+            Each recipient subscribed to an email list is represented by an
+            instance of <classname>Zend_Gdata_Gapps_EmailListRecipient</classname>. Through this
+            class, individual recipients can be added and removed from email
+            lists.
+        </para>
+
+        <sect3 id="zend.gdata.gapps.emailListRecipients.adding">
+            <title>Adding a recipient to an email list</title>
+
+            <para>
+                To add a recipient to an email list, simply call the
+                <code>addRecipientToEmailList()</code> convenience method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
+]]></programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.emailListRecipients.retrieving">
+            <title>Retrieving the list of subscribers to an email list</title>
+
+            <para>
+                The convenience method <code>retrieveAllRecipients()</code>
+                can be used to retrieve the list of subscribers to an email list:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$feed = $gdata->retrieveAllRecipients('friends');
+
+foreach ($feed as $recipient) {
+    echo '  * ' . $recipient->who->email . "\n";
+}
+]]></programlisting>
+
+            <para>
+                Alternatively, construct a new EmailListRecipientQuery, set
+                its emailListName property to match the desired email list,
+                and call <code>getEmailListRecipientFeed()</code> on a service
+                object.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$query = $gdata->newEmailListRecipientQuery();
+$query->setEmailListName('friends');
+$feed = $gdata->getEmailListRecipientFeed($query);
+
+foreach ($feed as $recipient) {
+    echo '  * ' . $recipient->who->email . "\n";
+}
+]]></programlisting>
+
+            <para>
+                This will create a <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname>
+                object which holds each recipient for the selected email list.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.gdata.gapps.emailListRecipients.removing">
+            <title>Removing a recipient from an email list</title>
+
+            <para>
+                To remove a recipient from an email list, call the
+                <code>removeRecipientFromEmailList()</code> convenience
+                method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
+]]></programlisting>
+
+        </sect3>
+
+    </sect2>
+
+    <sect2 id="zend.gdata.gapps.exceptions">
+        <title>Handling errors</title>
+
+        <para>
+            In addition to the standard suite of exceptions thrown by
+            <classname>Zend_Gdata</classname>, requests using the Provisioning API may also throw a
+            <classname>Zend_Gdata_Gapps_ServiceException</classname>. These exceptions
+            indicate that a API specific error occurred which prevents the
+            request from completing.
+        </para>
+
+        <para>
+            Each ServiceException instance may hold one or more Error objects.
+            Each of these objects contains an error code, reason, and
+            (optionally) the input which triggered the exception. A complete
+            list of known error codes is provided in the Zend Framework API
+            documentation under <classname>Zend_Gdata_Gapps_Error</classname>. Additionally, the
+            authoritative error list is available online at <ulink
+            url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
+            Apps Provisioning API V2.0 Reference: Appendix D</ulink>.
+        </para>
+
+        <para>
+            While the complete list of errors received is available within
+            ServiceException as an array by calling <code>getErrors()</code>,
+            often it is convenient to know if one specific error occurred. For
+            these cases the presence of an error can be determined by calling
+            <code>hasError()</code>.
+        </para>
+
+        <para>
+            The following example demonstrates how to detect if a requested
+            resource doesn't exist and handle the fault gracefully:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+function retrieveUser ($username) {
+    $query = $gdata->newUserQuery($username);
+    try {
+        $user = $gdata->getUserEntry($query);
+    } catch (Zend_Gdata_Gapps_ServiceException $e) {
+        // Set the user to null if not found
+        if ($e->hasError(Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST)) {
+            $user = null;
+        } else {
+            throw $e;
+        }
+    }
+    return $user;
+}
+]]></programlisting>
+
+    </sect2>
+
+</sect1>

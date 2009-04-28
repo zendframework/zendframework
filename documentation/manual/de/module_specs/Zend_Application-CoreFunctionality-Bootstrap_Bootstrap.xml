@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
+    <title>Zend_Application_Bootstrap_Bootstrap</title>
+
+    <para>
+        <classname>Zend_Application_Bootstrap_Bootstrap</classname> ist eine konkrete Implementation von
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
+        Dessen primäre Features sind, das es die
+        <link linkend="zend.application.available-resources.frontcontroller">Front Controller Ressource</link>
+        registriert und das die <code>run()</code> Methode zuerst prüft ob ein Standardmodul
+        definiert ist, und dann den Front Controller ausführt.
+    </para>
+
+    <para>
+        In den meisten Fällen wird man diese Klasst für die eigenen Bedürfnisse des Bootstrappens
+        erweitern, oder einfach diese Klasse verwenden und eine Liste von Ressource Plugins
+        angeben die zu verwenden sind.
+    </para>
+</sect2>

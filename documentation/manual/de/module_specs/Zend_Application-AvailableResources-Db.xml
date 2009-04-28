@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.db">
+    <title>Zend_Application_Resource_Db</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Db</classname> initialisiert einen <classname>Zend_Db</classname> Adapter
+        basieren auf den Ihm übergebenen Optionen. Standardmäßig, setzt es den Adapter als
+        Default Adapter zur Verwendung mit <classname>Zend_Db_Table</classname>.
+    </para>
+
+    <para>
+        Die folgenden Konfigurationsschlüssel werden erkannt:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <code>adapter</code>: <classname>Zend_Db</classname> Adaptertyp.
+        </para></listitem>
+
+        <listitem><para>
+            <code>params</code>: Assoziatives Array von Konfigurationsparametern das verwendet wird
+            wenn man die Instanz des Adapter empfängt.
+        </para></listitem>
+
+        <listitem><para>
+            <code>isDefaultTableAdapter</code>: Ob dieser Adapter als Standard-Tabellen Adapter
+            verwendet werden soll oder nicht.
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.application.available-resources.db.configExample">
+        <title>Beispiel der Konfiguration einer DB Adapter Ressource</title>
+
+        <para>
+            Anbei ist das Beispiel einer INI Konfiguration die verwendet werden kann um die DB
+            Ressource zu initialisieren.
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+[production]
+resources.db.adapter = "pdo_mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "webuser"
+resources.db.params.password = "XXXXXXX"
+resources.db.params.dbname = "test"
+resources.db.isDefaultTableAdapter = true
+]]></programlisting>
+    </example>
+
+    <note>
+        <title>Empfangen der Adapter Instanz</title>
+
+        <para>
+            Wenn man den, mit dieser Ressource initialisierten Adapter, nicht zum
+            Standard-Tabellen Adapter macht, wie erhält man dann die Adapter Instanz ?
+        </para>
+
+        <para>
+            Wie bei jedem Ressource Plugin, kann an das DB Ressource Plugin von der Bootstrap Datei
+            erhalten:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('db');
+]]></programlisting>
+
+        <para>
+            Sobald man das Ressource Objekt hat, kann man den DB Adapter erhalten indem die
+            <code>getDbAdapter()</code> Methode verwendet wird:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$db = $resource->getDbAdapter();
+]]></programlisting>
+    </note>
+</sect2>

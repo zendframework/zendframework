@@ -1,0 +1,51 @@
+<sect1 id="zend.search.lucene.charset">
+  <title>Conjuntos de Caracteres</title>
+
+  <sect2 id="zend.search.lucene.charset.description">
+    <title>Suporte aos conjuntos de caracteres UTF-8 e byte-simples.</title>
+
+    <para>Zend_Search_Lucene foi projetado para trabalhar com conjuntos de
+    caracteres UTF-8. Arquivos de índice armazenam dados unicode no formato de
+    codificação "UTF-8 modificado" usado pelo Java. O núcleo do
+    Zend_Search_Lucene suporta-os plenamente, com uma exceção: <footnote>
+        <para>Zend_Search_Lucene suporta somente os caracteres do Plano
+        Multilingual Básico (BMP) (de 0x0000 a 0xFFFF), não suportando os
+        caracteres suplementares (caracteres acima de 0xFFFF)</para>
+
+        <para>O Java 2 representa estes caracteres como um par de valores do
+        tipo char (16 bits), o primeiro vem da faixa superior (0xD800-0xDBFF),
+        o segundo, da faixa inferior (0xDC00-0xDFFF). Logo eles são
+        codificados como caracteres usuais UTF-8 em seis bytes. A
+        representação padrão UTF-8 utiliza quatro bytes para caracteres
+        suplementares.</para>
+      </footnote></para>
+
+    <para>Em todo caso, tanto os analizadores de texto, quanto os
+    interpretadores e processadores de consultas, utilizam a função
+    ctype_alpha() para tokenizar os textos e as consultas. A função
+    ctype_alpha() não suporta UTF-8 e sua substituição deve ser considerada em
+    um futuro próximo.</para>
+
+    <para>Por enquanto, recomendamos a conversão dos dados para a
+    representação ASCII. <footnote>
+        <para>Se os dados estiverem em formato UTF-8 ou, obrigatoriamente,
+        contiverem caracteres inexistentes em ASCII.</para>
+      </footnote> (isso vale tanto para consultas, quanto para armazenagem de
+    documentos fonte):</para>
+
+    <programlisting role="php">&lt;?php
+$doc = new Zend_Search_Lucene_Document();
+...
+$docText = iconv('ISO-8859-1', 'ASCII//TRANSLIT', $docText);
+$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents', $docText));
+
+...
+
+$query = iconv('', 'ASCII//TRANSLIT', $query);
+$hits = $index-&gt;find($query);
+?&gt;</programlisting>
+  </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

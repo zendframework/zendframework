@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config>
+    <one>one</one>
+    <two>
+        <three>three</three>
+        <four>
+            <five>five</five>
+        </four>
+    </two>
+    <six extends="two"></six>
+</config>

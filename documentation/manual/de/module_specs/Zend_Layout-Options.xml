@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.layout.options">
+    <title>Zend_Layout Konfigurations Optionen</title>
+
+    <para>
+        <classname>Zend_Layout</classname> hat eine Variation an Konfigurations Optionen. Diese können durch den Aufruf
+        entsprechender Zugriffsmethoden gesetzt werden, durch die Übergabe eines Arrays oder
+        <classname>Zend_Config</classname> Objektes an den Konstruktor oder <code>startMvc()</code>, durch die Übergabe
+        eines Arrays von Optionen an <code>setOptions()</code>, oder der Übergabe eines <classname>Zend_Config</classname>
+        Objektes an <code>setConfig()</code>.
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>layout</emphasis>: Das Layout das verwendet werden soll. Verwendet die aktuelle Beugung
+                um den Namen, der dem entsprechenden Layout View Skript angegeben wurde, aufzulösen.
+                Standardmäßig ist dieser Wert 'layout' und wird zu 'layout.phtml' aufgelöst. Zugriffsmethoden
+                sind <code>setLayout()</code> und <code>getLayout()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>layoutPath</emphasis>: Der Basispfad zu den Layout View Skripten. Zugriffsmethoden
+                sind <code>setLayoutPath()</code> und <code>getLayoutPath()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>contentKey</emphasis>: Die Layout Variable die für Standardinhalte verwendet wird
+                (wenn mit dem MVC verwendet). Der Standardwert ist 'content'. Zugriffsmethoden sind
+                <code>setContentKey()</code> und <code>getContentKey()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>mvcSuccessfulActionOnly</emphasis>: Wenn MVC verwendet wird, dann wird das Layout
+                nicht dargestellt wenn eine Aktion eine Ausnahme wirft und dieses Flag true ist (das wird
+                verwendet um zu verhindern das das Layout doppelt dargestellt wird wen das
+                <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler Plugin</link> verwendet wird.
+                Standardmäßig ist dieses Flag true. Zugriffsmethoden sind
+                <code>setMvcSuccessfulActionOnly()</code> und <code>getMvcSuccessfulActionOnly()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>view</emphasis>: Das View Objekt das für die Darstellung verwendet wird. Wenn mit
+                MVC verwendet, dann versucht <classname>Zend_Layout</classname> das View Objekt zu verwenden das mit
+                <link linkend="zend.controller.actionhelpers.viewrenderer">dem ViewRenderer</link> registriert
+                wurde wenn kein explizites View Objekt übergeben wurde. Zugriffsmethoden sind
+                <code>setView()</code> und <code>getView()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>helperClass</emphasis>: Die Action Helfer Klasse die verwendet wird wenn
+                <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird. Standardmäßig ist das
+                <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>. Zugriffsmethoden sind
+                <code>setHelperClass()</code> und <code>getHelperClass()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>pluginClass</emphasis>: Das Front Kontroller Plugin das verwendet wird wenn
+                <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird. Standardmäßig ist das
+                <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Zugriffsmethoden sind
+                <code>setPluginClass()</code> und <code>getPluginClass()</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>inflector</emphasis>: Die Beugung die verwendet werden soll wenn Layout Namen zu
+                Layout Skript Pfaden aufgelöst werden; siehe <link linkend="zend.layout.advanced.inflector">die
+                <classname>Zend_Layout</classname> Beugungs Dokumentation für weitere Details</link>.
+                Zugriffsmethoden sind <code>setInflector()</code> und <code>getInflector()</code>.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <note>
+        <title>HelferKlasse und PluginKlasse müssen an startMvc() übergeben werden</title>
+
+        <para>
+            Damit die <code>helperClass</code> und <code>pluginClass</code> Einstellungen wirken, müssen
+            diese als Option an <code>startMvc()</code> übergeben werden; wenn sie später gesetzt werden,
+            haben Sie keinen Effekt.
+        </para>
+    </note>
+
+    <sect2 id="zend.layout.options.examples">
+        <title>Beispiele</title>
+
+        <para>
+            Die folgenden Beispiele nehmen das folgende <code>$options</code> Array und <code>$config</code>
+            Objekt an:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$options = array(
+    'layout'     => 'foo',
+    'layoutPath' => '/path/to/layouts',
+    'contentKey' => 'CONTENT', // Ignoriert wenn MVC nicht verwendet wird
+);
+]]>
+        </programlisting>
+
+        <programlisting role="php"><![CDATA[
+/**
+[layout]
+layout = "foo"
+layoutPath = "/path/to/layouts"
+contentKey = "CONTENT"
+*/
+$config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
+]]>
+        </programlisting>
+
+        <example id="zend.layout.options.examples.constructor">
+            <title>Optionen an den Konstruktor oder startMvc() übergeben</title>
+
+            <para>
+                Beide, der Konstruktor und die statische <code>startMvc()</code> Methode akzeptieren entweder
+                ein Array von Optionen oder ein <classname>Zend_Config</classname> Objekt mit Optionen um die
+                <classname>Zend_Layout</classname> Instanz zu konfigurieren.
+            </para>
+
+            <para>
+                Zuerst zeigen wir die Übergabe eines Arrays:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Konstruktor verwenden:
+$layout = new Zend_Layout($options);
+
+// startMvc() verwenden:
+$layout = Zend_Layout::startMvc($options);
+]]>
+            </programlisting>
+
+            <para>
+                Und jetzt die Verwendung eines Config Objekts:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+
+$config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
+
+// Konstruktor verwenden:
+$layout = new Zend_Layout($config);
+
+// startMvc() verwenden:
+$layout = Zend_Layout::startMvc($config);
+]]>
+            </programlisting>
+
+            <para>
+                Grundsätzlich ist das der einfachste Weg um die <classname>Zend_Layout</classname> Instanz anzupassen.
+            </para>
+        </example>
+
+        <example id="zend.layout.options.examples.setoptionsconfig">
+            <title>setOption() und setConfig() verwenden</title>
+
+            <para>
+                Machmal ist es notwendig das <classname>Zend_Layout</classname> Objekt zu Konfigurieren nachdem es
+                instanziiert wurde; <code>setOptions()</code> und <code>setConfig()</code> bieten einen
+                schnellen und einfachen Weg das zu tun:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Ein Array von Optionen verwenden:
+$layout->setOptions($options);
+
+// Ein Zend_Config Objekt verwenden:
+$layout->setConfig($options);
+]]>
+            </programlisting>
+
+            <para>
+                Es ist zu beachten das einige Optionen, wie <code>pluginClass</code> und
+                <code>helperClass</code>, keinen Effekt haven wenn Sie mit Hilfe dieser Methode übergeben werden;
+                sie müssen mit dem Konstruktor oder der <code>startMvc()</code> Methode übergeben werden.
+            </para>
+        </example>
+
+        <example id="zend.layout.options.examples.accessors">
+            <title>Zugriffsmethoden verwenden</title>
+
+            <para>
+                Letztendlich kann die <classname>Zend_Layout</classname> Instanz auch über Zugriffsmetoden konfiguriert
+                werden. Alle Zugriffsmethoden implementieren ein Flüssiges Interface, was bedeutet das Ihre
+                Aufrufe gekettet werden können:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$layout->setLayout('foo')
+       ->setLayoutPath('/path/to/layouts')
+       ->setContentKey('CONTENT');
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,602 @@
+<sect3 id="zend.controller.actionhelpers.contextswitch">
+    <title>ContextSwitch and AjaxContext</title>
+
+    <para>
+        <code>ContextSwitch</code> 动作助手用来使在请求后返回不同的响应格式变得容易。<code>AjaxContext</code> 助手是 <code>ContextSwitch</code> 的特别版本，用来返回响应到 XmlHttpRequests。
+    </para>
+
+    <para>
+        你必须在关于动作能够响应哪个上下文（context）的控制器中打开（enable）其中一个。如果一个进来的请求对给定的动作指出一个有效的上下文，助手将做：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                如果布局被打开，则关闭它。
+        </para></listitem>
+
+        <listitem><para>
+                设置一个备用的视图后缀，为上下文有效地请求一个分离的视图脚本。
+        </para></listitem>
+
+        <listitem><para>
+                为期望的上下文发送适当的响应头。
+        </para></listitem>
+
+        <listitem><para>
+                可选地调用特别的回调（callback）来设置上下文和/或执行处理后的任务。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        例子，考虑下列的控制器：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    /**
+     * Landing page; forwards to listAction()
+     */
+    public function indexAction()
+    {
+        $this->_forward('list');
+    }
+
+    /**
+     * List news items
+     */
+    public function listAction()
+    {
+    }
+
+    /**
+     * View a news item
+     */
+    public function viewAction()
+    {
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        我们想让 <code>listAction()</code> 也支持 XML 格式，不用创建一个不同的动作，我们可以提示它可以返回 XML 响应：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $contextSwitch = $this->_helper->getHelper('contextSwitch');
+        $contextSwitch->addActionContext('list', 'xml')
+                      ->initContext();
+    }
+
+    // ...
+}
+]]>
+    </programlisting>
+
+    <para>
+        这将完成：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                设置 'Content-Type' 响应头为 'text/xml'.
+        </para></listitem>
+
+        <listitem><para>
+                修改视图后缀为 'xml.phtml' （或者，如果你使用另外的视图后缀，'xml.[你的后缀]'）。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        现在你需要创建一个新的视图脚本 'news/list.xml.phtml'，它将创建和解析 XML。
+    </para>
+
+    <para>
+        为决定一个请求是否应该初始化一个上下文开关（context switch），这个助手检查在请求对象理的令牌。缺省地，它寻找一个 'format' 参数，尽管这是可配置的。这意味着，在大多数情况下，为触发一个上下文开关，你可以添加一个 'format' 参数给你的请求：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                通过 URL 参数：<code>/news/list/format/xml</code> （回忆一下，缺省路由模式（schema）允许在动作后跟随任意的键/值对）
+        </para></listitem>
+
+        <listitem><para>
+                通过 GET 参数：<code>/news/list?format=xml</code>
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        <code>ContextSwitch</code> 允许指定任意的上下文，包括需要修改后缀的、任何应该被发送的响应头和任意的用来初始化和善后的回调（callback）。
+    </para>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.contexts">
+        <title> 缺省可用的上下文 </title>
+
+        <para>
+            缺省地，<code>ContextSwitch</code> 助手的两个上下文可用：json 和 xml。
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>JSON</emphasis>. JSON 上下文设置 'Content-Type' 响应头为 'application/json'，设置视图脚本后缀为 'json.phtml'。
+                </para>
+
+                <para>
+                    缺省地，不需要视图脚本，它将系列化所有的视图变量，立即发出 JSON 响应。
+                </para>
+
+                <para>
+                    通过关闭 auto-JSON serialization 可禁止这个行为：
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$this->_helper->contextSwitch()->setAutoJsonSerialization(false);
+]]>
+                </programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>XML</emphasis>. XML 上下文设置 'Content-Type' 响应头为 'text/xml'，设置视图脚本后缀为 'xml.phtml'。你需要为这个上下文创建新的视图脚本。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.custom">
+        <title> 创建定制的上下文 </title>
+
+        <para>
+            有时候，缺省的上下文不够用，例如你需要返回 YAML，或系列化 PHP、RSS 或 ATOM feed 等等，<code>ContextSwitch</code> 正是你需要的东西。
+        </para>
+
+        <para>
+            最容易的添加新的上下文的办法是通过 <code>addContext()</code> 方法。这个方法带有两个参数：上下文的名称和一个规范（specification）数组，规范应当包含下列中的一个或多个：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para><emphasis>suffix</emphasis>: 当在视图解析器里注册时，预先准备的缺省的视图后缀。 </para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>headers</emphasis>: 作为响应的一部分发送的头/值（header/value）对的数组。</para>
+            </listitem>
+
+            <listitem>
+                <para><emphasis>callbacks</emphasis>: 数组，包含一个或更多键  'init' 或 'post'，指向有效的可用于上下文和善后处理的 PHP 回调（callback）。</para>
+
+                <para>
+                    回调的初始化发生在当 <code>ContextSwitch</code> 检测到上下文时，你可以用它来执行任意的应该发生的逻辑。作为例子，当 auto-JSON serialization 是 on 的时候，JSON 上下文使用回调来关闭视图解析器（ViewRenderer）。
+                </para>
+
+                <para>
+                   善后处理（post processing）发生在动作的 <code>postDispatch()</code> 程序期间，可用来执行任意的逻辑。作为例子，JSON 上下文使用回调（callback）来决定是否 auto-JSON serialization 是 on；如果是，它系列化视图变量到 JSON 和 发送响应，如果不是，它重新打开（re-enable）视图解析器（ViewRenderer）。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            和上下文交互作用的方法：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>addContext($context, array $spec)</code>: 添加新的上下文，如果上下文存在，抛出一个异常。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContext($context, array $spec)</code>: 添加新的上下文或重写一个已存在的上下文，和 <code>addContext()</code> 使用相同的规范（specification）。
+            </para></listitem>
+
+            <listitem><para>
+                <code>addContexts(array $contexts)</code>: 一次添加多个上下文。<code>$contexts</code> 应当是上下文/规范（context/specification）对的数组。如果任何一个上下文存在，就抛出异常。
+            </para></listitem>
+
+            <listitem><para>
+                <code>setContexts(array $contexts)</code>: 添加和重写存在的上下文（多于一个），和 <code>addContexts()</code> 使用相同的规范。
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasContext($context)</code>: 如果上下文存在，返回 true，否则返回 false。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getContext($context)</code>: 通过名称来获取一个单个的上下文，返回一个遵循用于 <code>addContext()</code> 的规范的数组。
+            </para></listitem>
+
+            <listitem><para>
+                <code>getContexts()</code>: 获取所有的上下文，返回上下文/规范对的数组。
+            </para></listitem>
+
+            <listitem><para>
+                <code>removeContext($context)</code>: 通过名称来清除一个单个的上下文，成功返回 true，如果没有发现上下文返回 false。
+            </para></listitem>
+
+            <listitem><para>
+                <code>clearContexts()</code>: 清除所有上下文。
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.actions">
+        <title> 为每个动作设置上下文 </title>
+
+        <para>
+            有两个设置可用的上下文的机制：或者在控制器里手工创建数组，或者使用在 <code>ContextSwitch</code> 里的方法来装配它们。
+        </para>
+
+        <para>
+            添加动作/上下文关系的基本方法是 <code>addActionContext()</code> 。它有两个参数：上下文被添加到的动作和上下文的名称或上下文数组的其中之一。作为例子，考虑下列的控制器类：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function listAction()
+    {
+    }
+
+    public function viewAction()
+    {
+    }
+
+    public function commentsAction()
+    {
+    }
+
+    public function updateAction()
+    {
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            假如我们想添加 XML 上下文到 'list'动作、XML 和 JSON 上下文到 'comments' 动作，可以在 <code>init()</code> 方法中完成：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()
+             ->addActionContext('list', 'xml')
+             ->addActionContext('comments', array('xml', 'json'))
+             ->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            另外，还可以定义数组属性 <code>$contexts</code>：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public $contexts = array(
+        'list'     => array('xml'),
+        'comments' => array('xml', 'json')
+    );
+
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            上述不但缺少周密考虑，而且有潜在的错误。
+        </para>
+
+        <para>
+            下面的方法可用来构造上下文映射：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>addActionContext($action, $context)</code>: 标记一个或多个可用的上下文给一个动作，如果映射已经存在，就追加到那些映射中。<code>$context</code> 可以是一个单个的上下文，或者是一个上下文数组。
+                </para>
+
+                <para>
+                    一个上下文的 <code>true</code> 值将标记所有可用的上下文给动作。
+                </para>
+
+                <para>
+                    一个 $context 的空值将关闭（disable）所有给定动作的上下文。
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>setActionContext($action, $context)</code>: 标记一个或多个上下文对动作可用，如果映射已经存在，它就替换它们。<code>$context</code> 可以是一个单个的上下文，或者是一个上下文数组。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>addActionContexts(array $contexts)</code>: 一次性添加若干动作/上下文对，<code>$contexts</code> 是动作/上下文对的关联数组。它代理 <code>addActionContext()</code>，意味着如果那些动作/上下文对存在，就追加之。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>setActionContexts(array $contexts)</code>: 和 <code>addActionContexts()</code> 一样，但重写已存在的动作/上下文对。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>hasActionContext($action, $context)</code>: 决定一个特定的动作是否有一个给定的上下文。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>getActionContexts($action = null)</code>: 返回或者给定动作的所有上下文，或者所有动作/上下文对。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>removeActionContext($action, $context)</code>: 从给定动作中清除一个或多个上下文。<code>$context</code> 可以是一个单个的上下文，或者是一个上下文数组。
+            </para></listitem>
+
+            <listitem><para>
+                    <code>clearActionContexts($action = null)</code>: 从给定动作或者从有上下文的动作中清除所有上下文。
+            </para></listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.initcontext">
+        <title> 初始化上下文开关 </title>
+
+        <para>
+            为初始化上下文开关，需要在动作控制器中调用 <code>initContext()</code>：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class NewsController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $this->_helper->contextSwitch()->initContext();
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            在某些情况下，你想强制使用上下文，例如，如果上下文开关是激活状态，你只想用 XML 上下文，可以通过传递上下文给 <code>initContext()</code> 来完成：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$contextSwitch->initContext('xml');
+]]>
+        </programlisting>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
+        <title> 另外的功能 </title>
+
+        <para>
+            用来改变 <code>ContextSwitch</code> 助手行为的方法包括：
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setAutoJsonSerialization($flag)</code>: 缺省地，JSON 上下文将系列化任何视图变量给 JSON 符号并把它作为响应返回。如果想创建自己的响应，你需要关闭它，这需要在调用  <code>initContext()</code> 之前来完成。
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$contextSwitch->setAutoJsonSerialization(false);
+$contextSwitch->initContext();
+]]>
+                </programlisting>
+
+                <para>
+                    用 <code>getAutoJsonSerialization()</code> 来获取 flag 的值。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setSuffix($context, $suffix, $prependViewRendererSuffix)</code>: 用这个方法，你可以为给定的上下文指定一个不同的后缀。第三个参数用来指示是否用新的后缀预先准备当前视图解析器，这个 flag 缺省为打开。
+                </para>
+
+                <para>
+                    传递空值给后缀将导致只有视图解析器的后缀被使用。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeader($context, $header, $content)</code>: 为给定的上下文添加一个响应头，<code>$header</code> 是头的名称，<code>$content</code> 是为这个头传递的值。
+                </para>
+
+                <para>
+                    每个上下文可以有多个头，<code>addHeader()</code> 把另外的头添加到头的堆栈。
+                </para>
+
+                <para>
+                    如果为上下文指定的 <code>$header</code> 已经存在，就抛出一个异常。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeader($context, $header, $content)</code>: <code>setHeader()</code> 和 <code>addHeader()</code> 一样，但它允许重写已经存在的上下文的头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>addHeaders($context, array $headers)</code>: 一次性添加多个头到给定的上下文，代理 <code>addHeader()</code>，如果头已经存在，将抛出异常。<code>$headers</code> 是一个头/上下文对的数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setHeaders($context, array $headers.)</code>: 象 <code>addHeaders()</code> 一样，但代理 <code>setHeader()</code>，允许重写已存在的头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getHeader($context, $header)</code>: 获取给定上下文的头的值，如果没有发现返回 null。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeHeader($context, $header)</code>: 清除一个单个的给定上下文的头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearHeaders($context, $header)</code>: 清除所有给定上下文的头。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallback($context, $trigger, $callback)</code>: 为给定的上下文在给定的触发器设置回调（callback），触发器或者是 'init'，或者是 'post'（指明回调将被在上下文初始化时或者派遣后（postDispatch）调用）。 <code>$callback</code> 应当是一个有效的 PHP 回调。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setCallbacks($context, array $callbacks)</code>: 为给定的上下文设置多个回调，<code>$callbacks</code> 应当是触发器/回调对。事实上，最常用的可注册的回调有两个：一个为初始化用的，一个是做善后处理。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallback($context, $trigger)</code>: 在给定的上下文中从给定的触发器中获取一个回调。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCallbacks($context)</code>: 从给定的上下文获取所有的回调，返回一个触发器/回调对数组。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>removeCallback($context, $trigger)</code>: 从给定的触发器和上下文清除一个回调。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>clearCallbacks($context)</code>: 为给定的上下文清除所有的回调。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setContextParam($name)</code>: 设置请求参数来检查什么时候决定上下文开关是否已经请求，缺省值为 'format'，但这个访问器可以用来设置一个备用的值。
+                </para>
+
+                <para>
+                    <code>getContextParam()</code> 用来获取当前的值。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setAutoDisableLayout($flag)</code>: 缺省地，当上下文开关出现，布局是关闭的；这是因为一般布局将只用来返回正常的相应，对备用的（alternate）上下文没有意义。然而，如果想使用布局（也许你对新的上下文有个布局），你可以通过传递一个 false 的值给 <code>setAutoDisableLayout()</code> 来改变它的行为。这应当 <emphasis> 在 </emphasis>调用 <code>initContext()</code> <emphasis> 之前 </emphasis> 来做。
+                </para>
+
+                <para>
+                    用访问器 <code>getAutoDisableLayout()</code> 来获取这个 flag 的值。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getCurrentContext()</code> 可用来确定什么上下文被检测到，如果有的话。如果没有上下文开关发生，或者在调用 <code>initContext()</code> 之前调用它，则返回 null。
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelpers.contextswitch.ajaxcontext">
+        <title>AjaxContext 函数 </title>
+
+        <para>
+            <code>AjaxContext</code> 助手继承 <code>ContextSwitch</code>，所有 <code>ContextSwitch</code> 函数列表对它也有效，只是有些小小的不同。
+        </para>
+
+        <para>
+            首先，它为确定上下文使用不同的动作控制器属性 － <code>$ajaxable</code>。这样你就可以对 AJAX 和 普通的 HTTP 请求使用不同的上下文。<code>AjaxContext</code> 的各种各样 <code>*ActionContext*()</code> 方法将写到这个属性。
+        </para>
+
+        <para>
+            其次，由请求对象的 <code>isXmlHttpRequest()</code> 方法来确定，它只有在 XmlHttpRequest 出现后才触发。这样，如果上下文参数 （'format'）在请求中传递，但请求没有做成 XmlHttpRequest，不会触发上下文开关。
+        </para>
+
+        <para>
+            第三，<code>AjaxContext</code> 添加另外的上下文 － HTML。在这个上下文中，为了区别这个上下文和普通的请求，它设置后缀为 'ajax.phtml'。没有另外的头返回。
+        </para>
+
+        <example id="zend.controller.actionhelpers.contextswitch.ajaxcontext.example">
+            <title> 允许动作响应 Ajax 的请求 </title>
+
+            <para>
+                在下面的例子中，我们允许对动作 'view'、 'form' 和 'process' 的请求响应 AJAX 的请求。在头两个例子 'view' 和 'form'，返回不更新页面的 HTML 片段；在最后的例子，返回 JSON。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class CommentController extends Zend_Controller_Action
+{
+    public function init()
+    {
+        $ajaxContext = $this->_helper->getHelper('AjaxContext');
+        $ajaxContext->addActionContext('view', 'html')
+                    ->addActionContext('form', 'html')
+                    ->addActionContext('process', 'json')
+                    ->initContext();
+    }
+
+    public function viewAction()
+    {
+        // Pull a single comment to view.
+        // When AjaxContext detected, uses the comment/view.ajax.phtml
+        // view script.
+    }
+
+    public function formAction()
+    {
+        // Render the "add new comment" form.
+        // When AjaxContext detected, uses the comment/form.ajax.phtml
+        // view script.
+    }
+
+    public function processAction()
+    {
+        // Process a new comment
+        // Return the results as JSON; simply assign the results as
+        // view variables, and JSON will be returned.
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                在客户端，AJAX 库将请求终点  '/comment/view'、 '/comment/form' 和 '/comment/process'，并传递 'format' 参数：'/comment/view/format/html'、'/comment/form/format/html' 和 '/comment/process/format/json'。（或者你可以通过查询字符串（ query string） 传递参数，如："?format=json"）
+            </para>
+
+            <para>
+                假定你的库传递 'X-Requested-With:XmlHttpRequest'头，这些动作将返回适当的响应格式。
+            </para>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

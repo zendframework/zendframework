@@ -1,0 +1,43 @@
+<sect1 id="zend.paginator.introduction">
+    <title>Wprowadzenie</title>
+
+    <para>
+        <code>Zend_Paginator</code> jest elastycznym komponentem do paginacji
+        kolekcji danych i prezentowania tych danych użytkownikom.
+    </para>
+
+    <para>
+        Głównymi założeniami projektowymi komponentu <code>Zend_Paginator</code> są:
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Paginacja dowolnych danych, nie tylko danych pochodzących z
+                    baz danych
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Pobieranie tylko tych wyników które mają być wyświetlone
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Nie zmuszanie użytkowników do użycia tylko jednego sposobu
+                    wyświetlania danych lub generowania nawigacji paginacji
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Luźne połączenie komponentu <code>Zend_Paginator</code> z
+                    innymi komponentami Zend Framework aby użytkownicy mogli
+                    użyć go niezależnie od <code>Zend_View</code>,
+                    <code>Zend_Db</code> itp.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect3 id="zend.controller.actionhelpers.actionstack">
+    <title>ActionStack</title>
+
+    <para>
+        <code>ActionStack</code> ヘルパーは、リクエストをフロントコントローラの
+        <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
+        プラグインに格納します。これにより、
+        リクエストの実行時にアクションのキューを作成しやすくなります。
+        このヘルパーは、アクションを追加する際に
+        新しいリクエストオブジェクトを指定するか
+        アクション/コントローラ/モジュール の設定を指定するかのいずれかを用います。
+    </para>
+
+    <note>
+        <title>ActionStack ヘルパーを起動すると ActionStack プラグインが初期化される</title>
+
+        <para>
+            <code>ActionStack</code> を起動すると、暗黙のうちに
+            <code>ActionStack</code> プラグインを登録します。
+            つまり、この機能を使う際に明示的に <code>ActionStack</code>
+            プラグインを登録する必要はないということです。
+        </para>
+    </note>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple">
+        <title>アクション、コントローラおよびモジュール名によるタスクの追加</title>
+
+        <para>
+            単純にアクションとコントローラそしてモジュール
+            (およびオプションでリクエストパラメータ)
+            を指定して <classname>Zend_Controller_Action::_forward()</classname>
+            をコールするのが一番シンプルな方法です。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // 2 つのアクションをスタックに格納して
+        // /foo/baz/bar/baz をコールします
+        // (FooController::bazAction() にリクエスト変数 bar == baz を指定したもの)
+        $this->_helper->actionStack('baz',
+                                    'foo',
+                                    'default',
+                                    array('bar' => 'baz'));
+
+        // /bar/bat のコール
+        // (BarController::batAction()) を追加します
+        $this->_helper->actionStack('bat', 'bar');
+    }
+}
+]]>
+        </programlisting>
+
+    </example>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple2">
+        <title>リクエストオブジェクトによるタスクの追加</title>
+
+        <para>
+            時にはリクエストオブジェクトのオブジェクト指向的な部分が使いたいこともあるでしょう。
+            そんな場合はこのオブジェクトを <code>ActionStack</code>
+            ヘルパーに渡すこともできます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // 2 つのアクションをスタックに格納して
+        // /foo/baz/bar/baz をコールします
+        // (FooController::bazAction() にリクエスト変数 bar == baz を指定したもの)
+        $request = clone $this->getRequest();
+        // コントローラやモジュールは指定せず、現在の値を使用します
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
+
+        // /bar/bat のコール
+        // (BarController::batAction()) を追加します
+        $request = clone $this->getRequest();
+        // モジュールは指定せず、現在の値を使用します
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
+    }
+}
+]]>
+        </programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

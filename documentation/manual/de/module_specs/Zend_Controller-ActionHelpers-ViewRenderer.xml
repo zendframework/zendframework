@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.viewrenderer">
+    <title>ViewRenderer</title>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
+        <title>Einführung</title>
+
+        <para>
+            Der <code>ViewRenderer</code> Helfer wurde designt um die folgenden Ziele erfüllen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Entfernen der Notwendigkeit View Objekte innerhalb der Kontroller zu instanzieren; View Objekte
+                    werden automatisch mit dem Kontroller registriert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Automatisch View Skript, Helfer und Filter Pfade setzen basierend auf dem aktuellen Modul, und
+                    den aktuellen Modulnamen automatisch als Klassenprefix für Helfer und Filterklassen assoziieren.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Ein global vorhandenes View Objekt für alle bearbeitenden Kontroller und Aktionen erstellen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Dem Entwickler erlauben das Standard View Rendering Optionen für alle Kontroller gesetzt werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Die Fähigkeit hinzufügen das ein View Skript ohne Intervention automatisch gerendert wird.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Dem Entwickler erlauben seine eigenen Spezifikationen, für den View Basisnamen und für View
+                    Skriptpfade, zu erstellen.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>
+                Wenn man ein <code>_forward()</code>, eine Umleitung, oder ein <code>render</code> manuell
+                durchführt, wird kein automatisches rendern erfolgen, da man beim Ausführen von jeder dieser
+                Aktionen dem <code>ViewRenderer</code> mitteilt das man seine eigene Ausgabe durchführen will.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                Der <code>ViewRenderer</code> ist standardmäßig aktiviert. Man kann Ihn über den Parameter
+                <code>noViewRenderer</code> des Frontkontrollers deaktivieren
+                (<code>$front->setParam('noViewRenderer', true)</code>) oder den Helfer vom Helfer Broker Stack
+                entfernen (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>).
+            </para>
+
+            <para>
+                Wenn man Einstellungen vom <code>ViewRenderer</code> vor der Ausführung des Front Kontrollers
+                ändern will, kann das auf zwei Wegen getan werden:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Instanzieren und Registrieren eines eigenen <code>ViewRenderer</code> Objekts und dieses
+                        an den Helfer Broker übergeben:
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]>
+                    </programlisting>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Initialisieren und/oder empfangen eines <code>ViewRenderer</code> Objekts auf Wunsch über den
+                        Helfer Broker:
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+]]>
+                    </programlisting>
+                </listitem>
+            </itemizedlist>
+        </note>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
+        <title>API</title>
+
+        <para>
+            In seiner einfachsten Verwendung, kann der <code>ViewRenderer</code> ganz einfach instanziert und
+            an den Aktion Helfer Broker übergeben werden. Der einfachste Weg Ihn auf einmal zu Instanzieren
+            und Registrieren ist es, die Methode <code>getStaticHelper()</code> des Helfer Brokers zu verwenden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+]]>
+        </programlisting>
+
+        <para>
+            Das erste Mal wenn ein Aktion Kontroller instanziert wird, triggert er den <code>ViewRenderer</code>
+            ein View Objekt zu instanzieren. Jedes Mal wen ein Kontroller Instanziert wird, wird die
+            <code>init()</code> Methode des <code>ViewRenderer</code>'s aufgerufen, was dazu führt das er die
+            view Eigenschaft des Aktion Kontrollers setzt, und <code>addScriptPath()</code>, mit einem Pfad
+            relativ zum aktuellen Modul, aufruft; das wird mit einem Klassenprefix aufgerufen der nach dem
+            aktuellen Modul benannt ist, was effektiv für alle Helfer und Filterklassen die im Modul definiert werden
+            den Namensraum setzt.
+        </para>
+
+        <para>
+            Jedes Mal wenn <code>postDispatch()</code> aufgerufen wird, ruft dieses <code>render()</code> für die
+            aktuelle Aktion auf.
+        </para>
+
+        <para>
+            Als Beispiel kann die folgende Klasse angenommen werden:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Eine Kontroller Klasse, foo Modul:
+class Foo_BarController extends Zend_Controller_Action
+{
+    // Rendert standardmäßig bar/index.phtml; keine Aktion benötigt
+    public function indexAction()
+    {
+    }
+
+    // Rendert bar/populate.phtml mit der Variable 'foo' gesetzt auf 'bar'.
+    // Da View Objekte beim preDispatch() definiert werden, sind diese
+    // bereits vorhanden.
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+}
+
+...
+
+// In einem der View Sktipte:
+$this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
+]]>
+        </programlisting>
+
+        <para>
+            Der <code>ViewRenderer</code> definiert auch eine Anzahl von Zugriffspunkten im das Setzen und Empfangen
+            von View Optionen zu erlauben:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setView($view)</code> erlaubt das Setzen des View Objektes für den
+                    <code>ViewRenderer</code>. Er wird als öffentliche Klasseneigenschaft <code>$view</code>
+                    gesetzt.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverRender($flag = true)</code> kann verwendet werden um das automatische rendern
+                    global ein- oder auszuschalten, z.B. für alle Kontroller. Wenn er auf true gesetzt wird, ruft
+                    <code>postDispatch()</code> nicht automatisch <code>render()</code> im aktuellen Kontroller auf.
+                    <code>getNeverRender()</code> empfängt den aktuellen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoRender($flag = true)</code> kann verwendet werden um das automatische rendern
+                    ein- oder auszuschalten. Wenn er auf true gesetzt wird, wird <code>postDispatch()</code>
+                    <code>render()</code> im aktuellen Kontroller nicht automatisch aufrufen. Diese Einstellung
+                    wird jedesmal zurückgesetzt wenn <code>preDispatch()</code> aufgerufen wird (z.B. muß dieses
+                    Flag für jeden Kontroller gesetzt werden für den das automatische rendern nicht automatisch
+                    stattfinden soll). <code>getNoRender()</code> empfängt den aktuellen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoController($flag = true)</code> kann verwendet werden um <code>render()</code> zu
+                    sagen das für Aktion Skripts nicht in einem Unterverzeichnis gesucht werden soll das nach dem
+                    Kontroller benannt ist (was das Standardverhalten ist). <code>getNoController()</code> empfängt
+                    den aktuellen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverController($flag = true)</code> ist analog zu <code>setNoController()</code>,
+                    arbeitet aber auf einem globalen Leven -- z.B. wird es nicht für jede ausgeführte Aktion
+                    resetiert. <code>getNeverController()</code> empfängt den aktuellen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setScriptAction($name)</code> kann verwendet werden um das Aktion Skript zu spezifizieren
+                    das gerendert werden soll. <code>$name</code> sollte der Name des Skripts sein, ohne den
+                    Datei Suffix (und ohne das Kontroller Unterverzeichnis, ausser wenn <code>noController</code>
+                    eingeschaltet wurde). Wenn nicht spezifiziert, wird nach einem View Skript gesucht das nach der
+                    Aktion in Anfrage Objekt benannt ist. <code>getScriptAction()</code> empfängt den aktuellen
+                    Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setResponseSegment($name)</code> kann verwendet werden um zu spezifizieren in welches
+                    Segment das nach einem Antwort Objekt benannt ist, gerendert werden soll. Wenn nicht
+                    spezifiziert, wird in das Standard Segment gerendert. <code>getResponseSegment()</code>
+                    empfängt den aktuellen Wert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>initView($path, $prefix, $options)</code> kann aufgerufen werden um den Basis View Pfad,
+                    den Klassenprefix für Helfer, Filter Skripts und <code>ViewRenderer</code> Optionen zu
+                    spezifizieren. Es kann eines der folgenden Flags übergeben werden: <code>neverRender</code>,
+                    <code>noRender</code>, <code>noController</code>, <code>scriptAction</code>, und
+                    <code>responseSegment</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRender($action = null, $name = null, $noController = false)</code> erlaubt es
+                    <code>scriptAction</code>, <code>responseSegment</code>, oder <code>noController</code> in einem
+                    Schritt zu übergeben. <code>direct()</code> ist ein Alias für diese Methode, und erlaubt es
+                    diese Methode einfach vom eigenen Kontroller aus aufzurufen:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Rendert 'foo' statt dem aktuellen Aktion Skript
+$this->_helper->viewRenderer('foo');
+
+// Rendert form.phtml zum 'html' Antwort Segment, ohne einen Kontroller aus dem
+// Unterverzeichnis des View Skripts zu verwenden:
+$this->_helper->viewRenderer('form', 'html', true);
+]]>
+                </programlisting>
+
+                <note><para>
+                        <code>setRender()</code> und <code>direct()</code> stellen das View Sktript
+                        nicht dar, sondern setzen Hinweise die <code>postDispatch()</code> und
+                        <code>render()</code> dann verwenden wenn die View dargestellt wird.
+                </para></note>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Der Constructor erlaubt es optional das View Objekt und <code>ViewRenderer</code>
+            Optionen zu übergeben; er akzeptiert die gleichen Flags wie <code>initView()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view    = new Zend_View(array('encoding' => 'UTF-8'));
+$options = array('noController' => true, 'neverRender' => true);
+$viewRenderer =
+    new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
+]]>
+        </programlisting>
+
+        <para>
+            Es gibt einige zusätzliche Methoden für das individualisieren von Pfadspezifikationen die für das
+            Herausfinden des Basis View Pfades verwendet werden der dem View Objekt hinzugefügt wird, und den View
+            Skript Pfad der verwendet wird wenn das View Skript zu dem gerendert werden soll automatisch
+            herausgefunden wird. Diese Methoden nehmen alle ein oder mehrere der folgenden Platzhalter:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>:moduleDir</code> zeigt auf das aktuelle Modul Basisverzeichnis (von der Konvention her
+                    das Elternverzeicnis des Kontroller Verzeichnisses des Moduls).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:module</code> zeigt auf den aktuellen Modulnamen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:controller</code> zeigt auf den aktuellen Kontrollernamen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:action</code> zeigt auf den aktuellen Aktionsnamen.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:suffix</code> zeigt auf das aktuelle Suffix des View Skripts (welcher über
+                    <code>setViewSuffix()</code> gesetzt werden kann).
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Die Methoden für das kontrollieren der Pfad Spezifikationen sind:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setViewBasePathSpec($spec)</code> erlaubt die Änderung der Pfad
+                    Spezifikation die verwendet wird um den Basispfad herauszufinden zu dem das
+                    View Objekt hinzugefügt werden soll. Die Standardspezifikation ist
+                    <code>:moduleDir/views</code>. Die aktuelle Spezifikation kann jederzeit
+                    durch Verwenden von <code>getViewBasePathSpec()</code> erhalten werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathSpec($spec)</code> erlaubt die Änderung der Pfad Spezifikation die
+                    verwendet wird um den Pfad zu einem individuellen View Skript herauszufinden (ohne den Basis
+                    View Skript Pfad). Die Standard Spezifikation ist <code>:controller/:action.:suffix</code>.
+                    Die aktuelle Spezifikation kann jederzeit durch Verwenden von
+                    <code>getViewScriptPathSpec()</code> erhalten werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathNoControllerSpec($spec)</code> erlaubt die Änderung der Pfad
+                    Spezifkiation die verwendet wird um den Pfad zu einem individuellen View Skript herauszufinden
+                    wenn <code>noController</code> aktiv ist (ohne den Basis View Skript Pfad). Die Standard
+                    Spezifikation ist <code>:action.:suffix</code>. Die aktuelle Spezikifation kann jederzeit durch
+                    Verwenden von <code>getViewScriptPathNoControllerSpec()</code> erhalten werden.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Für eine feinkörnige Kontrolle über Pfadspezifikationen kann
+            <link linkend="zend.filter.inflector">Zend_Filter_Inflector</link> verwendet werden.
+            Im Hintergrund verwendet der <code>ViewRenderer</code> einen Inflector um bereits
+            Abstimmungen am Pfad durchzuführen. Um auf dem Inflector einzuwirken, damit entweder
+            ein eigener für die Verwendung gesetzt wird, oder um den Standard Inflector zu verändern,
+            können die folgenden Methoden verwendet werden:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getInflector()</code> empfängt den Inflector. Wenn bis dahin keiner im
+                    <code>ViewRenderer</code> existiert, wird dieser, anhand der Verwendung der
+                    Standard Regeln, erstellt.
+                </para>
+
+                <para>
+                    Standardmäßig verwendet dieser statische Referenzregeln für das Suffix und
+                    Modulverzeichnis, sowie ein statisches Ziel; das erlaubt verschiedenen
+                    <code>ViewRenderer</code> Eigenschaften den Inflector dynamisch zu ändern.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setInflector($inflector, $reference)</code> erlaubt das Setzen eines
+                    eigenen Inflectors für die Verwendung mit dem <code>ViewRenderer</code>. Wenn
+                    <code>$reference</code> true ist, setzt dieser das Suffix und Modulverzeichnis
+                    als statische Referenz zu <code>ViewRenderer</code> Eigenschaften, genauso wie
+                    das Ziel.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Standard Konventionen für das Eruieren</title>
+
+            <para>
+                Der <code>ViewRenderer</code> führt einige Pfad Normalisierungen durch um das Eruieren
+                von View Skripten einfacher zu machen. Die Standardregeln sind wie folgt:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>:module</code>: MixedCase und camelCaseWörter werden durch
+                        Bindestriche getrennt, und der komplette String wird auf
+                        Kleinschreibung geändert. z.B.: "FooBarBaz" wird "foo-bar-baz".
+                    </para>
+
+                    <para>
+                        Intern verwendet der Inflector die Filter <classname>Zend_Filter_Word_CamelCaseToDash</classname>
+                        und <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:controller</code>: MixedCase und camelCaseWörter werden durch
+                        Bindestriche getrennt; Unterstriche werden in Verzeichnistrennzeichen
+                        konvertiert, und der komplette String wird auf Kleinschreibung geändert.
+                        Beispiele: "FooBar" wird "foo-bar"; "FooBar_Admin" wird "foo-bar/admin".
+                    </para>
+
+                    <para>
+                        Intern verwendet der Inflector die Filter <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_Word_UnderscoreToSeparator</classname> und
+                        <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:action</code>: MixedCase und camelCaseWörter werden durch
+                        Bindestriche getrennt; nicht-anphanummerische Zeichen werden zu
+                        Bindestrichen übersetzt, und der komplette String wird auf
+                        Kleinschreibung geändert. Beispiele: "fooBar" wird "foo-bar"; "foo-barBaz"
+                        wird "foo-bar-baz".
+                    </para>
+
+                    <para>
+                        Intern verwendet der Inflector die Filter <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_PregReplace</classname> und <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
+
+        <para>
+            Die letzten Teile in der <code>ViewRenderer</code> API sind die Methoden für das aktuelle herausfinden
+            von View Skript Pfaden und Rendern von Views. Diese beinhalten:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>renderScript($script, $name)</code> erlaubt es ein Skript mit einem selbst spezifizierten
+                    Pfad zu rendern, optional zu einem benannten Pfad Segment. Wenn diese Methode verwendet wird,
+                    ermittelt der <code>ViewRenderer</code> nicht automatisch den Skriptnamen sondern übergibt das
+                    <code>$script</code> Argument direkt der <code>render()</code> Methode des View Objekts.
+                </para>
+
+                <note><para>
+                    Sobald die View zum Antwort Objekt gerendert wurde, setzt diese <code>noRender</code> um
+                    irrtümliches mehrfaches rendern zum selben View Skript zu verhindern.
+                </para></note>
+
+                <note>
+                    <para>
+                        Standardmäßig handelt <classname>Zend_Controller_Action::renderScript()</classname> in Vertretung zur
+                        <code>renderScript()</code> Methode des <code>ViewRenderer</code>'s.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getViewScript($action, $vars)</code> erstellt den Pfad zu einem View Skript das auf einer
+                    Aktion basiert die übergeben wird, und/oder allen Variablen die in <code>$vars</code> übergeben
+                    werden. Schlüssel für dieses Array können jede der Pfad Spezifikations Schhüssel enthalten
+                    ('moduleDir', 'module', 'controller', 'action', und 'suffix'). Jede übergebene Variable wird
+                    verwendet; andernfalls werden Werte die auf der aktuellen Anfrage basieren angewendet.
+                </para>
+
+                <para>
+                    <code>getViewScript()</code> verwendet entweder <code>viewScriptPathSpec</code> oder
+                    <code>viewScriptPathNoControllerSpec</code> basierend auf den Einstellungen des
+                    <code>noController</code> Flags.
+                </para>
+
+                <para>
+                    Wortbegrenzer die in Modul-, Kontroller- oder Aktionsnamen vorkommen werden mit Bindestrichen
+                    ('-') ersetzt. Deshalb resultiert, wenn der Kontrollername 'foo.bar' und die Aktion 'baz:bat'
+                    ist, die Verwendung der standard Pfad Spezifikation einen View Skript Pfad von
+                    'foo-bar/baz-bat.phtml'.
+                </para>
+
+                <note>
+                    <para>
+                        Standardmäßig handelt <classname>Zend_Controller_Action::getViewScript()</classname> in Vertretung
+                        zur <code>getViewScript()</code> Methode des <code>ViewRenderer</code>'s.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>render($action, $name, $noController)</code> prüft zuerst ob entweder <code>$name</code>
+                    oder <code>$noController</code> übergeben wurde, und wenn dem so ist, wird das betreffende
+                    Flag (respektive responseSegment und noController) im ViewRenderer gesetzt. Dann übergibt er
+                    das <code>$action</code> Argument, wenn vorhanden, an <code>getViewScript()</code>.
+                    Am Ende wird der berechnete View Skript Pfad an <code>renderScript()</code> übergeben.
+                </para>
+
+                <note>
+                    <para>
+                        Achtung vor den Nebeneffekten bei der Verwendung von render(): Die Werte die für den
+                        Anwort Segment Namen und für das noController Flag übergeben werden sind im Objekt dauerhaft.
+                        Zusätzlich wird noRender gesetzt nachdem das rendern fertig ist.
+                    </para>
+                </note>
+
+                <note>
+                    <para>
+                        Standardmäßig handelt <classname>Zend_Controller_Action::render()</classname> in Vertretung zur
+                        <code>render()</code> Methode des <code>ViewRenderer</code>'s.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderBySpec($action, $vars, $name)</code> erlaubt es Pfad Spezifikations Variablen zu
+                    übergeben um den View Skript Pfad zu ermitteln der erstellt werden soll. Es übergibt
+                    <code>$action</code> und <code>$vars</code> an <code>getScriptPath()</code> und übergibt
+                    anschließend den resultierenden Skript Pfad und <code>$name</code> an
+                    <code>renderScript()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
+        <title>Grundsätzliches Beispiel der Verwendung</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
+            <title>Grundsätzliche Verwendung</title>
+
+            <para>
+                Am einfachsten, wird einfach der <code>ViewRenderer</code> Helfer mit dem Helfer Broker in der
+                eigenen Bootstrap Datei, initialisiert und registriert, und anschließend die Variablen in den Aktion
+                Methoden gesetzt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// In der Bootstrap Datei:
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+
+...
+
+// 'foo' Modul, 'bar' Kontroller:
+class Foo_BarController extends Zend_Controller_Action
+{
+    // Rendert standardmäßig bar/index.phtml; keine Aktion benötigt
+    public function indexAction()
+    {
+    }
+
+    // Rendert bar/populate.phtml wobei die Variable 'foo' auf 'bar'
+    // gesetzt wird. Da das View Objekt beim preDispatch() definiert,
+    // ist es bereits vorhanden.
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+
+    // Rendert nichts da zu einer anderen Aktion weitergeleitet wird;
+    // die neue Aktion wird jegliches rendern durchführen
+    public function bazAction()
+    {
+        $this->_forward('index');
+    }
+
+    // Rendert nichts da zu einer anderen Lokation weitergeleitet wird
+    public function batAction()
+    {
+        $this->_redirect('/index');
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title>Benamungs Konventionen: Wort Begrenzer in Kontroller- und Aktionnamen</title>
+            <para>
+                Wenn der Kontroller- oder Aktionsname aus mehreren Wörtern aufgebaut ist, müssen diese,
+                da der Dispatcher das benötigt, seperiert sein durch die URL nach spezifischem Pfad und Wort
+                Begrenzer Zeichen. Der <code>ViewRenderer</code> ersetzt jeden Pfad Begrenzer den er im
+                Kontrollernamen findet mit einem aktuellen Pfad Begrenzer ('/'), und jeden Wort Begrenzer der
+                gefunden wird mit einem Bindestrich ('-') wenn Pfade erstellt werden. Deshalb würde ein Aufruf
+                der Aktion <code>/foo.bar/baz.bat</code> zu <code>FooBarController::bazBatAction()</code> in
+                FooBarControll.php weiterleiten was wiederum <code>foo-bar/baz-bat.phtml</code> rendern würde;
+                ein Aufruf der Aktion <code>/bar_baz/baz-bat</code> für dazu das
+                <code>Bar_BazController::bazBatAction()</code> in <code>Bar/BazController.php</code> dispatched
+                wird (betrachte die Separation des Pfades) und <code>bar/baz/baz-bat.phtml</code> gerendert wird.
+            </para>
+
+            <para>
+                Es ist zu beachten das im zweiten Beispiel, das Modul noch immer das Standardmodul ist, aber das der
+                Kontroller, wegen der Existenz eines Pfad Separators, den Namen <code>Bar_BazController</code> in
+                <code>Bar/BazController.php</code> empfängt. Der ViewRenderer emuliert die Kontroller
+                Verzeichnis Hierarchie.
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
+            <title>Automatisches rendern ausschalten</title>
+
+            <para>
+                Für einige Aktionen oder Kontroller, kann es gewünscht sein das automatische Rendern auszuschalten
+                -- zum Beispiel, wenn eine andere Art von Ausgabe (XML, JSON, etc) ausgegeben werden soll, oder wenn
+                man einfach nichts ausgeben will. Es gibt zwei Optionen: Alle Fälle von automatischem Rendern
+                ausschalten (<code>setNeverRender()</code>), oder dieses einfach für die aktuelle Aktion ausschalten
+                (<code>setNoRender()</code>).
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Baz Kontroller Klasse, bar Modul:
+class Bar_BazController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        // Diese Sektion nicht automatisch Rendern
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+
+// Bat Kontroller Klasse, Bar Modul:
+class Bar_BatController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // Die Aktionen dieses Kontroller nie automatisch Rendern
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <para>
+                In den meisten Fällen, macht es keinen Sinn das automatische Rendern global auszuschalten
+                (ala <code>setNeverRender()</code>), da das einzige das man dann vom <code>ViewRenderer</code>
+                erhält das automatische Setup des View Objekts ist.
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
+            <title>Ein anderes View Skript auswählen</title>
+
+            <para>
+                Einige Situationen erfordern das ein anderes Skript, als das nach der Aktion benannte, ausgeführt
+                wird. Zum Beispiel, wenn man einen Kontroller hat der Aktionen sowohl hinzufügen als auch bearbeiten
+                kann, und beide mit der selben 'form' View angezeigt werden, aber mit unterschiedlichen Werten
+                gesetzt werden. Der Skript Name kann ganz einfach geändert werden. Entweder mit
+                <code>setScriptAction()</code>, <code>setRender()</code> oder durch Aufruf des Helfers als Methode,
+                was wiederum <code>setRender()</code> ausruft.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bar Kontroller Klasse, foo Modul:
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function addAction()
+    {
+        // Rendert 'bar/form.phtml' statt 'bar/add.phtml'
+        $this->_helper->viewRenderer('form');
+    }
+
+    public function editAction()
+    {
+        // Rendert 'bar/form.phtml' statt 'bar/edit.phtml'
+        $this->_helper->viewRenderer->setScriptAction('form');
+    }
+
+    public function processAction()
+    {
+        // einige Prüfungen durchführen...
+        if (!$valid) {
+            // Rendert 'bar/form.phtml' statt 'bar/process.phtml'
+            $this->_helper->viewRenderer->setRender('form');
+            return;
+        }
+
+        // andernfalls die Bearbeitung weiter durchführen...
+    }
+
+}
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
+            <title>Die resigstrierte View ändern</title>
+
+            <para>
+                Was wenn ein View Objekt modifiziert werden soll -- zum Beispiel, die Helfer Pfade ändern, oder
+                die Kodierung? Das kann durch Modifikation des View Objekts, das im Kontroller gesetzt ist,
+                gemacht werden, oder durch herausnehmen des View Objekts aus dem <code>ViewRenderer</code>;
+                beide referenzieren auf das gleiche Objekt.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bar Kontroller Klasse, foo Modul:
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // Die Kodierung der View ändern
+        $this->view->setEncoding('UTF-8');
+    }
+
+    public function bazAction()
+    {
+        // Das View Objekt erhalten, und den Kommentar Callback
+        // auf 'htmlspecialchars' setzen
+        $view = $this->_helper->viewRenderer->view;
+        $view->setEscape('htmlspecialchars');
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
+        <title>Erweiterte Beispiel der Verwendung</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
+            <title>Die Pfad Spezifikationen ändern</title>
+
+            <para>
+                In einigen Fällen, kann man entscheiden das die standardmäßige Pfad Spezifikation nicht den
+                Notwendigkeiten der Seite entspricht. Zum Beispiel, wenn man einen einzelnen Template Baum haben will
+                zu dem man dann Zugriff für Entwickler geben kann (das ist sehr typisch wenn man zum Beispiel
+                <ulink url="http://smarty.php.net/">Smarty</ulink> verwendet). In solchen Fällen, kann es
+                gewünscht sein die Spezifkiation des View Basispfades hardkodiert zu erstellen und eine alternative
+                Spezifikation für die Pfade der Aktions View Skripte selbst zu erstellen.
+            </para>
+
+            <para>
+                Für die Zwecke dieses Beispiels, nehmen wir an das der Basispfad zur View '/opt/vendor/templates'
+                sein soll, und das die View Skripte durch ':moduleDir/:controller/:action.:suffix' referenziert
+                werden sollen; wenn das noController Flag gesetzt wurde, soll aus dem Top Level statt aus einem
+                Unterverzeichnis gerendert werden (':action.:suffix'). Zuletzt soll 'tpl' als View Skript Suffix
+                für Dateinamen verwendet werden.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * In der Bootstrap Datei:
+ */
+
+// Unterschiedliche View Implmentation
+$view = new ZF_Smarty();
+
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
+$viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
+             ->setViewScriptPathSpec(':module/:controller/:action.:suffix')
+             ->setViewScriptPathNoControllerSpec(':action.:suffix')
+             ->setViewSuffix('tpl');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
+            <title>Mehrfache View Skripte von der gleichen Aktion rendern</title>
+
+            <para>
+                Manchmal, ist es notwendig mehrfache View Skripte von einer einzelnen Aktion zu rendern.
+                Das ist sehr geradlinig -- einfach mehrere Aufrufe zu <code>render()</code> machen:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SearchController extends Zend_Controller_Action
+{
+    public function resultsAction()
+    {
+        // Annahme das $this->model das aktuelle Modell ist
+        $this->view->results =
+            $this->model->find($this->_getParam('query', '');
+
+        // render() handelt standardmäßig in Vertretung zum ViewRenderer
+        // Rendert zuerst die Such Form und anschließend die Ergebnisse
+        $this->render('form');
+        $this->render('results');
+    }
+
+    public function formAction()
+    {
+        // tue nichts; der ViewRenderer bearbeitet das View Skript automatisch
+    }
+}
+]]>
+            </programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

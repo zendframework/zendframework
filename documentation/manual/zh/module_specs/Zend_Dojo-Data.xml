@@ -1,0 +1,300 @@
+<sect1 id="zend.dojo.data">
+    <title>Zend_Dojo_Data: dojo.data Envelopes</title>
+
+    <para>
+        Dojo 通过它的 dojo.data 组件为 data-enabled 小部件提供数据抽象。
+        该组件提供附加数据存储的能力，提供一些关于身份字段和可选的标签字段的元数据以及
+        从数据存储查询、排序和获取记录和一组记录的 API。
+    </para>
+
+    <para>
+        dojo.data 常和XmlHttpRequest一起使用来从服务器取出动态数据。
+        它的基本机制是扩展 QueryReadStore 来指向一个 URL 并指定查询信息，服务器端就用
+        下列 JSON 格式来返回数据：
+    </para>
+
+    <programlisting role="javascript"><![CDATA[
+{
+    identifier: '<name>',
+    <label: '<label>',>
+    items: [
+        { name: '...', label: '...', someKey: '...' },
+        ...
+    ]
+}
+]]>
+</programlisting>
+
+    <para>
+        <code>Zend_Dojo_Data</code> 提供一个简单的接口通过程序来构造这样的结构，
+        交互并系列化成一个数组或 JSON。
+    </para>
+
+    <sect2 id="zend.dojo.data.usage">
+        <title>Zend_Dojo_Data 用法</title>
+
+        <para>
+            很简单，dojo.data 要求你在每个条目和一组条目（数据）中提供标识符字段的名字。
+            你可以通过构造函数或 mutators 来传递它们：
+        </para>
+
+        <example id="zend.dojo.data.usage.constructor">
+            <title>通过构造函数初始化 Zend_Dojo_Data</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data('id', $items);
+]]>
+            </programlisting>
+        </example>
+
+        <example id="zend.dojo.data.usage.mutators">
+            <title>通过 mutators 初始化 Zend_Dojo_Data</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data();
+$data->setIdentifier('id')
+     ->addItems($items);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            用 <code>addItem()</code> 和 <code>addItems()</code> 添加一个单个条目或追加多个条目。
+        </para>
+
+        <example id="zend.dojo.data.usage.append">
+            <title>追加数据到 Zend_Dojo_Data</title>
+
+            <programlisting role="php"><![CDATA[
+$data = new Zend_Dojo_Data($identifier, $items);
+$data->addItem($someItem);
+
+$data->addItems($someMoreItems);
+]]>
+            </programlisting>
+        </example>
+
+        <note>
+            <title> 永远使用标识符！</title>
+
+            <para>
+                每个 dojo.data 数据存储要求以元数据来提供标识符列，<code>Zend_Dojo_Data</code> 也一样。
+                实际上，如果不用标识符添加条目，将会抛出异常。
+            </para>
+        </note>
+
+        <para>
+            条目可以是下列其中之一：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                联合数组
+            </para></listitem>
+
+            <listitem><para>
+                实现 <code>toArray()</code> 方法的对象
+            </para></listitem>
+
+            <listitem><para>
+                任何其它对象（将通过 get_object_vars() 系列化 ）
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            你可以通过 <code>addItems()</code> 或 <code>setItems()</code>（覆盖先前的条目） 附加上述条目的集合；
+            用的时候，你可以传递一个参数：
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                数组
+            </para></listitem>
+
+            <listitem><para>
+                实现<code>Traversable</code>接口的对象（包括 <code>Iterator</code> 和 <code>ArrayAccess</code> 接口）。
+            </para></listitem>
+        </itemizedlist>
+
+        <para>
+            如果想为条目指定一个用作标签的字段，调用<code>setLabel()</code>:
+        </para>
+
+        <example id="zend.dojo.data.usage.label">
+            <title>在 Zend_Dojo_Data 里指定一个标签字段 </title>
+
+            <programlisting role="php"><![CDATA[
+$data->setLabel('name');
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            最后，你也可以用 <code>fromJson()</code> 方法从 dojo.data JSON 数组加载一个 <code>Zend_Dojo_Data</code> 条目，
+        </para>
+
+        <example id="zend.dojo.data.usage.populate">
+            <title> 从 JSON 组装 Zend_Dojo_Data </title>
+
+            <programlisting role="php"><![CDATA[
+$data->fromJson($json);
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.dojo.data.advanced">
+        <title>高级用例</title>
+
+        <para>
+            除了可以作为可系列化的数据容器，<code>Zend_Dojo_Data</code> 也可以用各种各样的方法处理和疏导（traverse）数据。
+        </para>
+
+        <para>
+            <code>Zend_Dojo_Data</code> 实现 <code>ArrayAccess</code>、 <code>Iterator</code> 和 <code>Countable</code> 的接口。
+            这意味着你可以使用数据集合几乎就像使用数组一样。
+        </para>
+
+        <para>
+            所有的条目通过标识符字段来引用。因为表示符必须是独一无二的，你可用它的值来取出每个记录。
+            有两个方法可以做这个：通过 <code>getItem()</code> 方法，或通过数组符号。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Using getItem():
+$item = $data->getItem('foo');
+
+// Or use array notation:
+$item = $data['foo'];
+]]>
+        </programlisting>
+
+        <para>
+            如果你知道标识符，你可以用它来读取、更新、删除、创建或测试条目：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Update or create an item:
+$data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
+
+// Delete an item:
+unset($data['foo']);
+
+// Test for an item:
+if (isset($data[foo])) {
+}
+]]>
+       </programlisting>
+
+        <para>
+            你也可以遍历所有条目，在内部，所有的条目以数组形式存储。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+foreach ($data as $item) {
+    echo $item['title'] . ': ' . $item['description'] . "\n";
+}
+]]>
+        </programlisting>
+
+        <para>
+            甚至还可以数出你有多少条目：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo count($data), " items found!";
+]]>
+        </programlisting>
+
+        <para>
+            最后，因为这个类实现 <code>__toString()</code>， 你也可以通过 echo 它把它传给 JSON 或 字符串：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $data; // echo as JSON string
+
+$json = (string) $data; // cast to string == cast to JSON
+]]>
+        </programlisting>
+
+        <sect3 id="zend.dojo.data.advanced.methods">
+            <title> 可用的方法 </title>
+
+            <para>
+                除了上述实现接口必须的方法外，下列方法也可用。
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>setItems($items)</code>: 一次设置多个条目，覆盖在对象里先前的任何条目。
+                    <code>$items</code> 是一个数组或一个 <code>Traversable</code> 对象。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setItem($item, $id = null)</code>: 设置一个条目，可选地传递一个显式标识符。
+                    如果有的话，覆盖先前在集合里的条目。有效的条目包括联合数组，实现 <code>toArray()</code> 的对象或任何有 public 属性的对象。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>addItem($item, $id = null)</code>: 添加一个条目，可选地传递一个显式标识符。
+                    如果在集合理已经存在该条目，将产生异常。有效的条目包括联合数组，实现 <code>toArray()</code> 的对象或任何有 public 属性的对象。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>addItems($items)</code>: 一次添加多个条目，追加到任何当前条目。如果新条目的标识符在集合理已经存在，将产生异常。
+                    <code>$items</code> 是一个数组或一个 <code>Traversable</code> 对象。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getItems()</code>: 以数组的数组（array of arrays）的形式获取所有条目。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>hasItem($id)</code>: 确定一个条目的标识符是否在集合理存在。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getItem($id)</code>: 从集合里按给定的标识符获取一个条目；返回一个联合数组。
+                    如果没有条目匹配，返回 null。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>removeItem($id)</code>: 从集合里按给定的标识符删除一个条目。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>clearItems()</code>: 从集合里删除所有条目。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setIdentifier($identifier)</code>: 为集合里的每个条目设置表示独一无二的标识符的字段名。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getIdentifier()</code>: 获取标识符字段的名字。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setLabel($label)</code>: 设置用于为条目显示标签的字段的名字。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getLabel()</code>: 读取标签字段名。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>toArray()</code>: 传递对象到一个数组。数组里最少包含键 'identifier' 和 'items'，
+                    如果在对象里设置了标签，也要包含 'label'。
+                </para></listitem>
+
+                <listitem><para>
+                    <code>toJson()</code>: 传递对象给一个JSON 表达。
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->
+

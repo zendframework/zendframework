@@ -1,0 +1,163 @@
+<sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Writers</title>
+  <para>
+    一个Writer是继承自<code>Zend_Log_Writer_Abstract</code>类的一个对象.Writer的职责是向存储后端纪录日志数据.
+  </para>
+
+  <sect2 id="zend.log.writers.stream">
+    <title>写入到流(Streams)</title>
+    <para>
+      <code>Zend_Log_Writer_Stream</code> 写入日志数据到
+      <ulink url="http://www.php.net/stream">PHP 流</ulink>中.
+    </para>
+
+    <para>
+      要把日志写入到输出缓冲区,使用URL<code>php:://output</code>. 或则你可以直接发送日志数据到像<code>STDERR</code>
+      这样的流中(php://stderr).
+
+      <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Stream('php://output');
+$logger = new Zend_Log($writer);
+
+$logger->info('Informational message');
+]]>
+      </programlisting>
+    </para>
+
+    <para>
+      写入日志数据到一个文件,使用<ulink url="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
+      URLs</ulink>之一:
+
+      <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Stream('/path/to/logfile');
+$logger = new Zend_Log($writer);
+
+$logger->info('Informational message');
+]]>
+      </programlisting>
+
+      默认情况流一个追加(<code>"a"</code>)的方式打开.要以不同的模式打开,Zend_Log_Writer_Stream
+      构造函数接受第二个参数作为可选的模式参数.
+    </para>
+
+    <para>
+      <code>Zend_Log_Writer_Stream</code>还接受一个现有的流资源:
+
+      <programlisting role="php"><![CDATA[
+$stream = @fopen('/path/to/logfile', 'a', false);
+if (! $stream) {
+    throw new Exception('Failed to open stream');
+}
+
+$writer = new Zend_Log_Writer_Stream($stream);
+$logger = new Zend_Log($writer);
+
+$logger->info('Informational message');
+]]>
+      </programlisting>
+
+      你不能给现有的流资源指定模式.这样作将导致抛出一个<code>Zend_Log_Exception</code>异常.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.writers.database">
+    <title>写入到数据库</title>
+    <para>
+        <code>Zend_Log_Writer_Db</code>使用<code>Zend_Db</code>写入日志信息到数据库表中.
+        <code>Zend_Log_Writer_Db</code>的构造函数接受一个<code>Zend_Db_Adapter</code>
+        实例,一个表名,和一个数据库字段到事件数据项的映射:
+      <programlisting role="php"><![CDATA[
+$params = array ('host'     => '127.0.0.1',
+                 'username' => 'malory',
+                 'password' => '******',
+                 'dbname'   => 'camelot');
+$db = Zend_Db::factory('PDO_MYSQL', $params);
+
+$columnMapping = array('lvl' => 'priority', 'msg' => 'message');
+$writer = new Zend_Log_Writer_Db($db, 'log_table_name', $columnMapping);
+
+$logger = new Zend_Log($writer);
+
+$logger->info('Informational message');
+]]>
+      </programlisting>
+
+      上面的例子写入单个行到名称为<code>log_table_name</code>的数据库表中.数据库字段<code>lvs</code>
+      接收优先级号,名为<code>msg</code>的字段接收日志消息.
+    </para>
+
+  </sect2>
+
+<xi:include href="Zend_Log-Writers-Firebug.xml">
+    <xi:fallback href="../en/module_specs/Zend_Log-Writers-Firebug.xml"/>
+</xi:include>
+
+  <sect2 id="zend.log.writers.null">
+    <title>踩熄Writer</title>
+    <para>
+      <code>Zend_Log_Writer_Null</code>是一个不向任何地方写入任何数据的存根.
+      用于在测试期间关闭或踩熄日志.
+
+      <programlisting role="php"><![CDATA[
+$writer = new Zend_Log_Writer_Null;
+$logger = new Zend_Log($writer);
+
+// goes nowhere
+$logger->info('Informational message');
+]]>
+      </programlisting>
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.writers.mock">
+    <title>测试 Mock</title>
+    <para>
+      <code>Zend_Log_Writer_Mock</code>是一个非常简单的Writer,它纪录所接收到的原始的数据到到作为public属性的
+      数组中.
+
+      <programlisting role="php"><![CDATA[
+$mock = new Zend_Log_Writer_Mock;
+$logger = new Zend_Log($mock);
+
+$logger->info('Informational message');
+
+var_dump($mock->events[0]);
+
+// Array
+// (
+//    [timestamp] => 2007-04-06T07:16:37-07:00
+//    [message] => Informational message
+//    [priority] => 6
+//    [priorityName] => INFO
+// )
+]]>
+      </programlisting>
+    </para>
+
+    <para>
+      清空有mock记录的日志,设置<code>$mock->events = array()</code>即可.
+    </para>
+  </sect2>
+
+  <sect2 id="zend.log.writers.compositing">
+    <title>组合Writers</title>
+
+    <para>
+      没有复合Writer对象,但是一个Log实例可以有任意个Writer.使用<code>addWriter</code>方法
+      添加Writer:
+
+      <programlisting role="php"><![CDATA[
+$writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
+$writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
+
+$logger = new Zend_Log();
+$logger->addWriter($writer1);
+$logger->addWriter($writer2);
+
+// goes to both writers
+$logger->info('Informational message');
+]]>
+      </programlisting>
+    </para>
+  </sect2>
+</sect1>

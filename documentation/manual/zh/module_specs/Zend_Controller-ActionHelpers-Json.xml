@@ -1,0 +1,75 @@
+<sect3 id="zend.controller.actionhelpers.json">
+    <title>JSON</title>
+
+    <para>
+        当处理期望数据表响应的 AJAX 请求，JSON 响应迅速变成选择的响应。JSON 可以立即在客户端被解析，从而快速执行。
+    </para>
+
+    <para>
+        JSON 动作助手完成以下任务：
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+                如果布局是打开（enabled）的，则关闭（disable）它。
+        </para></listitem>
+
+        <listitem><para>
+                如果视图解析器（ViewRenderer）是打开的，则关闭它。
+        </para></listitem>
+
+        <listitem><para>
+                设置 'Content-Type' 响应头为 'application/json'。
+        </para></listitem>
+
+        <listitem><para>
+                缺省地，不需要等待动作执行完成，立即返回响应。
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        用法很简单：或者把它作为助手代理的方法来调用，或者调用 <code>encodeJson()</code> 和 <code>sendJson()</code> 方法的其中之一：
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // do some processing...
+        // Send the JSON response:
+        $this->_helper->json($data);
+
+        // or...
+        $this->_helper->json->sendJson($data);
+
+        // or retrieve the json:
+        $json = $this->_helper->json->encodeJson($data);
+    }
+}
+]]>
+    </programlisting>
+
+    <note>
+        <title> 保持布局 （Keeping Layouts）</title>
+
+        <para>
+            如果你为 JSON 响应有分离的布局 － 也许把 JSON 封装到一些上下文 － 在 JSON 助手的每个方法接受第二个可选的参数：打开或关闭布局的 flag ，传递一个布尔 <code>true</code> 值将使布局保持打开：
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Retrieve the json, keeping layouts:
+        $json = $this->_helper->json->encodeJson($data, true);
+    }
+}
+]]>
+        </programlisting>
+    </note>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

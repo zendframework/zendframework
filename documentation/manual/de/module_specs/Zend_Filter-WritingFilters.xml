@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.filter.writing_filters">
+
+    <title>Filter schreiben</title>
+
+    <para>
+        Zend_Filter bietet ein Set von normalerweise benötigten Filtern, aber Entwickler müssen oft Ihre eigenen
+        Filter für deren eigene spezielle Verwendung schreiben. Die Arbeit des Schreibens eines eigenen Filters
+        ist möglich durch die Implementierung von <classname>Zend_Filter_Interface</classname>.
+    </para>
+
+    <para>
+        <classname>Zend_Filter_Interface</classname> definiert eine einzige Methode, <code>filter()</code>, die von
+        Benutzerdefinierten Klassen implementiert werden kann. Ein Objekt das dieses Interface implementiert
+        kann in eine Filterkette mit <classname>Zend_Filter::addFilter()</classname> hinzugefügt werden.
+    </para>
+
+    <para>
+        Das folgende Beispiel demonstriert wie ein eigener Filter geschrieben wird:
+
+        <programlisting role="php"><![CDATA[
+class MyFilter implements Zend_Filter_Interface
+{
+    public function filter($value)
+    {
+        // einige Transformationen über $value durchführen
+        // um $valueFiltered zu erhalten
+
+        return $valueFiltered;
+    }
+}
+]]>
+        </programlisting>
+
+    </para>
+
+    <para>
+        Um eine Instanz des Filters der oben definiert wurde in eine Filterkette hinzuzufügen:
+
+        <programlisting role="php"><![CDATA[
+$filterChain = new Zend_Filter();
+$filterChain->addFilter(new MyFilter());
+]]>
+        </programlisting>
+
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

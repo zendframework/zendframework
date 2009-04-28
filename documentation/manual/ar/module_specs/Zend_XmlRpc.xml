@@ -1,0 +1,19 @@
+<sect1 id="zend.xmlrpc.introduction">
+    <title>مقدمة</title>
+    <para>
+        XML-RPC عبارة عن " نظام لتنفيذ المهام عن بعد بإستخدام HTTP كوسيلة لنقل البيانات و بإستخدام XML
+        كهيئة نقل بيانات , تم تصميم XML-RPC لتكون بسيطة قدر الأمكان, مع امكانية نقل و معالجة و ارجاع اى شكل
+        من اشكال البيانات المعقدة " .
+        (<ulink url="http://www.xmlrpc.com/">موقع XML-RPC</ulink>)
+    </para>
+    <para>
+        الأسلوب الذى قامت ZF بطتبيقه لإنشاء الـ client الخاص بـ XML-RPC (و فى المستقبل سيتوافر XML-RPC server)
+        يجعل استخدام XML-RPC اسهل بشكل كبير, عن طريق محاولة جعل طريقة استخدامها مشابهة لطريقة استخدام
+        للـ extension الخاصة بـ PHP5 المسمى
+        <ulink url="http://www.php.net/soap">SOAP web service</ulink>.
+    </para>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

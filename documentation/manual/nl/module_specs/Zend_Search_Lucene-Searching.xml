@@ -1,0 +1,158 @@
+<sect1 id="zend.search.lucene.searching">
+    <title>Het doorzoeken van een index</title>
+
+    <sect2 id="zend.search.lucene.searching.query-parser">
+        <title>Opbouwen van Queries</title>
+
+        <para>
+            Er zijn twee manieren om door een index te zoeken. De eerste methode gebruikt de Query Parser om een query op te bouwen van een string. De tweede bied de mogelijkheid je eigen queries te maken via de Zend_Search_Lucene API.
+        </para>
+
+        <para>
+        Alvorens te kiezen voor de aangeboden Query Parser, hou het volgende in gedachte:
+
+            <orderedlist>
+                <listitem>
+                  <para>
+                    Wanneer je query string door je applicatie wordt opgebouwd dan moet je serieus overwegen om je queries op te bouwen met de query API. Met andere woorden: De query parser is bedoeld voor door mensen ingevoerde tekst, niet voor applicatie-gerelateerde tekst.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    Untokenized velden worden het best direct aan queries toegevoegd, en niet via de query parser. Wanneerde waarde van een veld via een applicatie wordt gegenereerd, dan dienen de query clases ook op die manier tot stand te komen voor dit veld.
+                    De query parser gebruikt een analyzer om door mensen ingegeven strings to converteren van tekst naar termen. Waardes gegenereerd door een programma, zoals data, trefwoorden, etc. dienen consistent door het programma gegenereerd te worden.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    In een query formulier dienen velden die over het algemeen tekst bevatten de query parser te gebruiken. Alle andere velden, zoals datum ranges, trefwoorden etc. kunnen het beste direct via de query API worden toegevoegd. Een veld met een gelimiteerde set van waarden, die kan worden geselecteerd via een pull-down menu, horen niet via een query string toegevoegd en geparsed worden, maar via een TermQuery clausule.
+                  </para>
+                </listitem>
+            </orderedlist>
+
+        </para>
+
+        <para>
+            Beide manieren gebruiken dezelfde API methode om door de index te zoeken:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+require_once('Zend/Search/Lucene.php');
+
+$index = new Zend_Search_Lucene('/data/my_index');
+
+$index->find($query);
+
+?>]]></programlisting>
+        <para>
+            De <code>Zend_Search_Lucene::find()</code> methode herkent automatisch het invoer type en gebruikt de query parser om het juiste Zend_Search_Lucene_Search_Query object
+            van een string te maken.
+        </para>
+
+        <para>
+            Het is belangrijk om te zien dat <code>find()</code> case sensitive is. Standaard normaliseert LuceneIndexCreation.jar alle documenten naar kleine letters. Dit kan uitgezet worden met een command line switch (type LuceneIndexCreation.jar zonder argumenten voor hulp). De case van de tekst die aan <code>find()</code> wordt doorgegeven moet overeenkomen met die in de index. Als de index is genormaliseerd naar kleine letters, dan dient alle tekst die aan <code>find()</code> wordt doorgegeven worden onderworpen aan <code>strtolower()</code>, anders worden mogelijk geen resultaten gevonden.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.searching.results">
+        <title>Zoek resultaten</title>
+        <para>
+            Het zoek resultaat is een array van Zend_Search_Lucene_Search_QueryHit objecten.  Ieder van deze objecten heeft twee eigenschappen: <code>$hit->document</code> is een documentnummer binnen de index en <code>$hit->score</code> is een score van het resultaat binnen het volledige zoekresultaat. Resultaat wordt geordend op score (hoogste score komt eerst).
+        </para>
+
+        <para>
+            Het Zend_Search_Lucene_Search_QueryHit object bied daarnaast ook ieder veld van het gevonden Zend_Search_Lucene_Document als een eigenschap. In het volgende voorbeeld wordt een resultaat teruggegeven en heeft het document twee velden: title en author.
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+require_once('Zend/Search/Lucene.php');
+
+$index = new Zend_Search_Lucene('/data/my_index');
+
+$hits = $index->find($query);
+
+foreach ($hits as $hit) {
+    echo $hit->id;
+    echo $hit->score;
+
+    echo $hit->title;
+    echo $hit->author;
+}
+
+?>]]></programlisting>
+
+        <para>
+        Het originele Zend_Search_Lucene_Document object kan ook worden teruggegeven vanuit de Zend_Search_Lucene_Search_QueryHit.
+
+        Je kan opgeslagen delen van het document verkrijgen door gebruik te maken van de <code>getDocument()</code>methode van het index object en dan de <code>getFieldValue()</code> methode te gebruiken:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+
+require_once('Zend/Search/Lucene.php');
+
+$index = new Zend_Search_Lucene('/data/my_index');
+
+$hits = $index->find($query);
+foreach ($hits as $hit) {
+    // geef een Zend_Search_Lucene_Document object terug voor dit resultaat
+    echo $document = $hit->getDocument();
+
+    // geef een Zend_Search_Lucene_Field object terug
+    // uit het Zend_Search_Lucene_Document
+    echo $document->getField('title');
+
+    // geef de string waarde terug van een Zend_Search_Lucene_Field object
+    echo $document->getFieldValue('title');
+
+    // hetzelfde als getFieldValue()
+    echo $document->title;
+}
+
+?>]]></programlisting>
+        <para>
+        De velden die beschikbaar zijn via het Zend_Search_Lucene_Document object worden besloten tijdens het indexeren. De document velden worden ofwel geindexeerd, ofwel geindexeerd en opgeslagen, in het document door de indexeringsapplicatie (bijvoorbeeld LuceneIndexCreation.jar).
+        </para>
+
+        <para>
+        Let op dat de document identiteit ('path' in het voorbeeld) ook wordt opgeslagen in de index en vanuit de index opgehaald dient te worden.
+        </para>
+
+    </sect2>
+
+
+    <sect2 id="zend.search.lucene.searching.results-scoring">
+        <title>Resultaten Scoring</title>
+        <para>
+            Zend_Search_Lucene gebruikt hetzelfde score algoritme als Java Lucene.
+            Zoek resultaten worden geordend op score, met de hoogste score als eerst.
+        </para>
+
+        <para>
+            Een verschillende score betekent dat een document meer overeenkomt met de zoekopdracht dan de andere.
+        </para>
+
+        <para>
+            Ruwweg genomen wordt de zoekopdracht vaker gevonden in documenten met een hogere score dan in documenten met een lagere score.
+        </para>
+
+        <para>
+            Score kan worden verkregen via de <code>score</code> eigenschap van het resultaat:
+        </para>
+        <programlisting role="php"><![CDATA[<?php
+$hits = $index->find($query);
+
+foreach ($hits as $hit) {
+    echo $hit->id;
+    echo $hit->score;
+}
+
+?>]]></programlisting>
+
+        <para>
+            Zend_Search_Lucene_Search_Similarity klasse wordt gebruikt om de score te berekenen. Zie <link linkend="zend.search.lucene.extending.scoring">Uitbreidbaarheid. Scoring Algoritmes</link> sectie voor details.
+        </para>
+
+    </sect2>
+
+</sect1>
+

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 13465 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.migration">
+    <title>Migrer depuis des versions antérieures</title>
+
+    <para>
+        L'API de <classname>Zend_Currency</classname> a changé pour gagner en simplicité. Si
+        vous utilisiez une des versions décrites dans ce chapitre, vous devriez lire ce guide de
+        migration.
+    </para>
+
+    <sect2 id="zend.currency.usage.migration.fromonezerotwo">
+        <title>Migrer de 1.0.2 à 1.0.3 ou plus récent</title>
+
+        <para>
+            Créer un objet <classname>Zend_Currency</classname> est devenu plus simple. Vous
+            n'avez plus besoin de passer un script ou de le mettre à <code>null</code>, le
+            paramètre script est optionnel et peut être spécifié par la méthode
+            <code>setFormat()</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency = new Zend_Currency($currency, $locale);
+]]></programlisting>
+
+        <para>
+            La méthode <code>setFormat()</code> prend maintenant en paramètre un tableau
+            d'options. Ces options sont permanentes et écrasent les précédentes déjà présentes. La
+            nouvelle option "precision" a été intégrée&#160;:
+            <itemizedlist mark="opencircle">
+                <listitem>
+                    <para>
+                        <emphasis role="strong">position</emphasis>&#160;: Remplacement de l'ancien
+                        paramètre "rules"
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">script</emphasis>&#160;: Remplacement de l'ancien
+                        paramètre "script"
+                    </para>
+
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">format</emphasis>&#160;: Remplacement de l'ancien
+                        paramètre "locale" qui n'affecte plus de nouvelle monnaie, mais seulement un
+                        format de nombre.
+                    </para>
+
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">display</emphasis>&#160;: Remplacement de l'ancien
+                        paramètre "rules"
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">precision</emphasis>&#160;: Nouveau paramètre
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">name</emphasis>&#160;: Remplacement de l'ancien
+                        paramètre "rules". Affecte le nom complet de la monnaie.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis role="strong">currency</emphasis>&#160;: Nouveau paramètre
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para><emphasis role="strong">symbol</emphasis>&#160;: Nouveau paramètre</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->setFormat(array $options);
+]]></programlisting>
+
+        <para>
+            La méthode <code>toCurrency()</code> ne supporte plus les paramètres optionnels
+            "script" et "locale". A la place, elle accepte un tableau d'options qui sera de la même
+            forme que celui utilisé par <code>setFormat</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$currency->toCurrency($value, array $options);
+]]></programlisting>
+
+        <para>
+            Les méthodes <code>getSymbol()</code>, <code>getShortName()</code>,
+            <code>getName()</code>, <code>getRegionList()</code> et <code>getCurrencyList()</code>
+            ne sont plus statiques. Elles retournent les valeurs affectées dans l'objet, si on ne
+            leur passe pas de paramètre.
+        </para>
+    </sect2>
+</sect1>

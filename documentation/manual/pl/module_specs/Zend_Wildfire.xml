@@ -1,0 +1,36 @@
+<sect1 id="zend.wildfire.chapter">
+
+  <title>Zend_Wildfire</title>
+
+  <para>
+    <code>Zend_Wildfire</code> jest komponentem, który umożliwia komunikację
+    pomiędzy kodem PHP a komponentami klienckimi <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>.
+  </para>
+  <para>
+    Celem projektu Wildfire jest utworzenie standardowego kanału komunikacji
+    pomiędzy wieloma różnymi komponentami, a dynamiczną i skryptową architekturą
+    wtyczek.
+
+    Obecnie skupiamy się na dostarczeniu systemu pozwalającego skryptop PHP
+    na przekazywanie wiadomości dziennika do <ulink url="http://getfirebug.com/logging.html">Konsoli</ulink>
+    <ulink url="http://www.getfirebug.com/">Firebug</ulink>.
+  </para>
+  <para>
+    Dla celów zapisywania dziennika do konsoli Firebug stworzony został
+    komponent <link linkend="zend.log.writers.firebug"><code>Zend_Log_Writer_Firebug</code></link>,
+    a także został stworzony protokół komunikacyjny, który używa żądań HTTP
+    i nagłówków odpowiedzi do przesyłania danych pomiędzy serwerem, a komponentami
+    klienckimi. Jest to świetne dla zapisywania dziennika zdarzeń, generowanego
+    podczas wykonania skryptu, do przeglądarki, bez modyfikowania zawartości
+    strony internetowej. Dzięki temu możliwe jest debugoanie żądań AJAX, które
+    wymagają poprawnych danych JSON oraz XML.
+  </para>
+  <para>
+    Dostępny jest także komponet <link linkend="zend.db.profiler.profilers.firebug"><code>Zend_Db_Profiler_Firebug</code></link>
+    pozwalający na zapisywanie dziennika zdarzeń bazy danych do konsoli Firebug.
+  </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

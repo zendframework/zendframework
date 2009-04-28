@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.view.abstract">
+    <title>Zend_View_Abstract</title>
+
+    <para>
+        <classname>Zend_View_Abstract</classname> is the base class on which
+        <classname>Zend_View</classname> is built; <classname>Zend_View</classname> itself simply
+        extends it and declares a concrete implementation of the
+        <code>_run()</code> method (which is invoked by <code>render()</code>).
+    </para>
+
+    <para>
+        Many developers find that they want to extend
+        <classname>Zend_View_Abstract</classname> to add custom functionality, and
+        inevitably run into issues with its design, which includes a number of
+        private members. This document aims to explain the decision behind the
+        design.
+    </para>
+
+    <para>
+        <classname>Zend_View</classname> is something of an anti-templating engine in that
+        it uses PHP natively for its templating. As a result, all of PHP is
+        available, and view scripts inherit the scope of their calling object.
+    </para>
+
+    <para>
+        It is this latter point that is salient to the design decisions.
+        Internally, <classname>Zend_View::_run()</classname> does the following:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+protected function _run()
+{
+    include func_get_arg(0);
+}
+]]></programlisting>
+
+    <para>
+        As such, the view scripts have access to the current object
+        (<code>$this</code>), <emphasis>and any methods or members of that
+            object</emphasis>. Since many operations depend on members with
+        limited visibility, this poses a problem: the view scripts could
+        potentially make calls to such methods or modify critical properties
+        directly. Imagine a script overwriting <code>$_path</code> or
+        <code>$_file</code> inadvertently -- any further calls to
+        <code>render()</code> or view helpers would break!
+    </para>
+
+    <para>
+        Fortunately, PHP 5 has an answer to this with its visibility
+        declarations: private members are not accessible by objects extending a
+        given class. This led to the current design: since
+        <classname>Zend_View</classname> <emphasis>extends</emphasis>
+        <classname>Zend_View_Abstract</classname>, view scripts are thus limited to only
+        protected or public methods and members of
+        <classname>Zend_View_Abstract</classname> -- effectively limiting the actions it
+        can perform, and allowing us to secure critical areas from abuse by view
+        scripts.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

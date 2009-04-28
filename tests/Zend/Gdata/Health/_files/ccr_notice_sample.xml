@@ -1,0 +1,21 @@
+<ContinuityOfCareRecord xmlns="urn:astm-org:CCR">
+  <Body>
+   <Problems>
+    <Problem>
+      <DateTime>
+        <Type><Text>Start date</Text></Type>
+        <ExactDateTime>2007-04-04T07:00:00Z</ExactDateTime>
+      </DateTime>
+      <Description>
+        <Text>Aortic valve disorders</Text>
+        <Code>
+          <Value>410.10</Value>
+          <CodingSystem>ICD9</CodingSystem>
+          <Version>2004</Version>
+        </Code>
+      </Description>
+      <Status><Text>Active</Text></Status>
+    </Problem>
+  </Problems>
+  </Body>
+</ContinuityOfCareRecord>

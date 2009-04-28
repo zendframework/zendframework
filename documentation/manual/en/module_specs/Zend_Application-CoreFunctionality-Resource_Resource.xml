@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.resource-resource">
+    <title>Zend_Application_Resource_Resource</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Resource</classname> is an interface for
+        plugin resources used with bootstrap classes implementing
+        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>. Resource
+        plugins are expected to allow configuration, be bootstrap aware, and
+        implement a strategy pattern for initializing the resource.
+    </para>
+
+    <table id="zend.application.core-functionality.resource-resource.api">
+        <title>Zend_Application_Resource_Resource Interface</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Method</entry>
+                    <entry>Return Value</entry>
+                    <entry>Parameters</entry>
+                    <entry>Description</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($options = null)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>optional</emphasis>.
+                            Options with which to set resource state.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        The constructor should allow passing options with
+                        which to initialize state.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
+                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$bootstrap</code>: <emphasis>required</emphasis>.
+                                Parent bootstrap initializing this resource.
+                            </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Should allow registering the parent bootstrap object.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getBootstrap()</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve the registered bootstrap instance.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>required</emphasis>.
+                            Options with which to set state.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Set resource state.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOptions()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Retrieve registered options.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>init()</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Strategy pattern: run initialization of the resource.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

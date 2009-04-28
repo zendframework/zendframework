@@ -1,0 +1,29 @@
+<sect1 id="zend.version.reading">
+
+    <title>读取Zend Framework的当前版本</title>
+
+    <para>
+
+        常量<code>Zend_Version::VERSION</code>的值为Zend Framework的当前版本号，例如0.9.0beta。
+
+    </para>
+
+    <para>
+
+        静态方法<code>Zend_Version::compareVersion($version)</code>基于PHP函数<ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>。如果指定的<code>$version</code>比当前ZF的版本旧，则该方法返回-1，如果相等则返回0，如果比当前版本更新返回+1。
+    </para>
+
+    <example id="zend.version.reading.example">
+        <title>compareVersion()方法示例：</title>
+        <programlisting role="php"><![CDATA[
+// returns -1, 0 or 1
+$cmp = Zend_Version::compareVersion('1.0.0');
+]]>
+
+        </programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

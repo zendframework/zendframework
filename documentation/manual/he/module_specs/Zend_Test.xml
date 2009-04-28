@@ -1,0 +1,11 @@
+<sect1 id="zend.test.introduction">
+    <title>הקדמה</title>
+
+    <para>
+    	<code>Zend_Test</code> מספק כלים כדי לאפשר לך לבצע בדיקות שונות על גבי המערכות שהינך בונה בעזרת Zend Framework.
+		 נכון לעכשיו, ניתן לבצע בדיקות על מנת לבדוק את המערכת הנבנות בעזרת Zend Framework בעזרת הטכנולוגיה של ה MVC.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

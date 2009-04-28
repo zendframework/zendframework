@@ -1,0 +1,710 @@
+<sect1 id="zend.cache.frontends">
+    <title>الـ frontends المتوفرة فى Zend_Cache</title>
+
+    <sect2 id="zend.cache.core">
+        <title>Zend_Cache_Core</title>
+        <sect3 id="zend.cache.core.introduction">
+            <title>مقدمة</title>
+            <para>
+                <code>Zend_Cache_Core</code> هو frontend مميز لأنه جوهر الـ module .
+هو عبارة cache frontend عام و هناك classes أخرى ممتدة منه.
+            </para>
+            <note><para>
+                كل الـ frontends ترث من <code>Zend_Cache_Core</code> و بهذا كل الـ methods
+و الـ options الخاصة به (سيتم توضيحها لاحقاً) متوفرة فى الـ frontends الأخرى , لذلك لن نقوم بشرحها هناك.
+            </para></note>
+        </sect3>
+        <sect3 id="zend.cache.core.options">
+            <title>الـ options المتوفرة</title>
+            <para>
+                هذه الـ options يتم تمريرها الى الـ factory method كما كان موضحاً فى امثلة سابقة.
+            </para>
+            <table>
+                <title>الـ options المتوفرة لـ Zend_Cache_Core</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>الـ Option</entry>
+                            <entry>الـ Data Type</entry>
+                            <entry>الـ Default Value</entry>
+                            <entry>الوصف</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>caching</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  تقوم بإقاف او تشغيل عملية الـ caching ( من الممكن ان تكن مفيدة عند عمل debuging للكود الواقع فى
+نطاق عمل عملية الـ caching ).
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>lifeTime</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>3600</code></entry>
+                              <entry>
+                                فترة صلاحية الـ cache record (بالثوانى), إن كانت قيمتها تساوى null فسيكون الـ cache record
+صالح للإستخدام دائما.
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>logging</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                إن كانت قيمتها تساوى TRUE, سيتم تنشيط عملية الـ loging من خلال <code>Zend_Log</code> .
+(لكن سيبطئ من عمل النظام نسبياً)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>writeControl</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                               تقوم بايقاف او تشغيل الـ write control (أى سيتم قرائة الـ cache بعد حفظه للتأكد من
+عدم وجود اخطاء به).
+تشغيل الـ write control سيتسبب فى ابطاء عملية كتابة "حفظ" الـ cache قليلا, لكنه
+لن يؤثر فى علية القرائة.
+(يمكن ان بساعد فى اكتشاف ملفات الـ cache المعطوبة "الفاسدة" و لكنه برغم ذالك لا يعتبر
+control ممتاز )
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automaticSerialization</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                تقوم بتشغيل او ايقاف عملية الـ serialization التلقائية , يمكن ان يتم استخدامها عند الحاجة لحفظ
+بيانات مباشرة , حيث ان هذه البيانات ليست من النوع string.
+ (لكنها ابطء)
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automaticCleaningFactor</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>10</code></entry>
+                              <entry>
+                                تقوم بتشغيل او ايقاف عملية التنظيف (garbage collector):
+القيمة 0 تعنى إيقاف عملية التنظيف التلقائى للـ cache ,
+القيمة 1 تعنى تشغيل عملية التنظيف بشكل منتظم,
+و عندما تكن القيمة هى x &gt; 1 سيتم تنفيذ عملية تنظيف تلقائى عشوائية لكل عدد x من
+عمليات الكتابة.
+                              </entry>
+                          </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.core.examples">
+            <title>امثلة</title>
+            <para>
+                تم اعطاء مثال فى بداية هذا الفصل.
+            </para>
+            <para>
+                إن كنت تقم بحفظ بيانات من النوع string فقط فى الـ cache (من الممكن حفظ
+بيانات من النوع bool ايضا بتشغيل الـ option المسمى "automaticSerialization" ) ,
+يمكنك ان تستخدم بنية كود ادق مثل هذه :
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+// we assume you already have $cache
+
+$id = 'myBigLoop'; // cache id of "what we want to cache"
+
+if (!($data = $cache->load($id))) {
+    // cache miss
+
+    $data = '';
+    for ($i = 0; $i < 10000; $i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+
+// [...] do something with $data (echo it, pass it on etc.)
+
+?>]]>       </programlisting>
+            <para>
+                إن كنت تريد حفظ اكثر من بلوك او مجموعة بيانات مختلفة, فهى نفس الفكرة :
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+// make sure you use unique identifiers:
+$id1 = 'foo';
+$id2 = 'bar';
+
+// block 1
+if (!($data = $cache->load($id1))) {
+    // cache missed
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+
+// this isn't affected by caching
+echo('NEVER CACHED! ');
+
+// block 2
+if (!($data = $cache->load($id2))) {
+    // cache missed
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . '!';
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+
+?>]]>       </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.output">
+        <title>Zend_Cache_Frontend_Output</title>
+        <sect3 id="zend.cache.frontend.output.introduction">
+            <title>مقدمة</title>
+            <para>
+                <code>Zend_Cache_Frontend_Output</code> هو frontend يستخدم فى التقاط البيانات
+المخرجة. يستخدم خاصية الـ output buffering التى تقدمها لغة PHP ليلتقط كل شئ يتم اخراجه بين
+الـ methods المسمى <code>()start</code> و <code>()end</code>.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.output.options">
+            <title>الـ options المتوفرة</title>
+            <para>
+                هذا الـ frontend لا يحتوى اى options جديدة بخلاف الموجودة فى
+<code>Zend_Cache_Core</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.output.examples">
+            <title>امثلة</title>
+            <para>
+                تم اعطاء مثال فى بداية هذا الفصل, ها هو مع بعض التعديلات الصغيرة:
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+// if it is a cache miss, output buffering is triggered
+if(!$cache->start('mypage')):
+
+// output everything as usual
+echo 'Hello world! ';
+echo 'This is cached ('.time().') ';
+
+$cache->end(); // output buffering ends
+endif;
+
+echo 'This is never cached ('.time().').';
+
+?>]]>       </programlisting>
+            <para>
+                بإستخدام هذه الطريقة يمكنك بسهولة إدخال خاصية الـ caching لمخرجات الأكواد فى مشروعك بإستخدام القليل او
+ربما عدم الأحتياج لعمل refactoring.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.function">
+        <title>Zend_Cache_Frontend_Function</title>
+        <sect3 id="zend.cache.frontend.function.introduction">
+            <title>مقدمة</title>
+            <para>
+                تقوم <code>Zend_Cache_Frontend_Function</code> بعمل cache
+لناتج استدعاء دالة ما, و لديها method واحد رئيسى يسمى <code>()call</code> و الذى
+يأخذ اسم الدالة المراد استدعائها و array تحتوتى الـ parameters التى سيتم تمريرها لهذه الدالة.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.function.options">
+            <title>الـ options المتوفرة</title>
+            <table>
+                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Function</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>الـ Option</entry>
+                            <entry>الـ Data Type</entry>
+                            <entry>الـ Default Value</entry>
+                            <entry>الوصف</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cacheByDefault</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  إن كانت قيمتها true , سيتم تنفيذ عملية الـ cache لكل عملية استدعاء دالة (by default).
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cachedFunctions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  اسماء الـ functions التى سيتم عمل cache لها دائما.
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>nonCachedFunctions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  اسماء الـ functions التى لا يجب عمل cache لها ابدا.
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.function.examples">
+            <title>امثلة</title>
+            <para>
+                استخدام الـ method المسمى <code>()call</code> هو نفس طريقة استخدام
+دالة لغة PHP المسمى <code>()call_user_func_array</code> :
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+$cache->call('veryExpensiveFunc', $params);
+
+# $params is an array
+# for example to call (with caching) veryExpensiveFunc(1, 'foo', 'bar'), you will use
+# $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
+
+?>]]>       </programlisting>
+            <para>
+                <code>Zend_Cache_Frontend_Function</code> ذكية كفاية لتقوم بعمل
+cache لكل من ناتج الدالة العائد من "return" و البيانات المخرجة داخل الدالة (مثل عمل طباعة
+لبعض البيانات من داخل الدالة).
+            </para>
+            <note><para>
+                يمكنك تمرير اى دالة سواء كانت من دوال اللغة او دالة انت انشئتها بإستثناء الدوال التالية :
+<code>array</code>,
+ <code>echo</code>,
+<code>empty</code>,
+ <code>eval</code>,
+
+  <code>exit</code>,
+ <code>isset</code>,
+<code>list</code>
+, <code>print</code>
+
+  <code>unset</code>.
+            </para></note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontend.class">
+        <title>Zend_Cache_Frontend_Class</title>
+        <sect3 id="zend.cache.frontend.class.introduction">
+            <title>مقدمة</title>
+            <para>
+                يختلف <code>Zend_Cache_Frontend_Class</code> عن
+<code>Zend_Cache_Frontend_Function</code> حيث انه
+يقوم بعمل cache لعمليات استدعاء الـ objects و الـ static methods.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontend.class.options">
+            <title>الـ options المتوفر</title>
+            <table>
+                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Class</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>الـ Option</entry>
+                            <entry>الـ Data Type</entry>
+                            <entry>الـ Default Value</entry>
+                            <entry>الوصف</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cachedEntity</code> (مطلوب)</entry>
+                              <entry><code>mixed</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  إن كانت قيمتها عبارة عن اسم class, سيتم عمل cache للـ class على انه abstract
+و سيتم استخدام طلبات الـ static mithods الخاصة به.
+إذا كانت قيمتها عبارة عن object, سيتم عمل cache لكل الـ methods الخاصة
+بهذا الـ object.
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cacheByDefault</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  إن كانت تحمل القيمة true, كل الطلبات "calls" سيتم عمل cache لها تلقائيا.
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cachedMethods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                 اسماء الـ methods التى يستم عمل cache لها دائما.
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>nonCachedMethods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  اسماء الـ methods التى لا يجب عمل cache لها ابدا.
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontend.class.examples">
+            <title>امثلة</title>
+            <para>
+                مثال على عمل cache لأستدعائات الـ static methods:
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+class test {
+
+    # Static method
+    public static function foobar($param1, $param2) {
+        echo "foobar_output($param1, $param2)";
+        return "foobar_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cachedEntity' => 'test' // The name of the class
+);
+// [...]
+
+# The cached call
+$res = $cache->foobar('1', '2');
+
+?>]]>       </programlisting>
+            <para>
+                لعمل cache للـ methods العادية:
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+class test {
+
+    private $_string = 'hello !';
+
+    public function foobar2($param1, $param2) {
+        echo($this->_string);
+        echo "foobar2_output($param1, $param2)";
+        return "foobar2_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cachedEntity' => new test() // An instance of the class
+);
+// [...]
+
+# The cached call
+$res = $cache->foobar2('1', '2');
+
+?>]]>       </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.file">
+        <title>Zend_Cache_Frontend_File</title>
+        <sect3 id="zend.cache.frontends.file.introduction">
+            <title>مقدمة</title>
+            <para>
+                <code>Zend_Cache_Frontend_File</code> هو frontend يعتمد
+على اخر وقت تعديل ملف معين "master file".
+يتم استخدامه على سبيل المثال مع ملفات الـ configuration او الملفات التى تخص
+الـ templating.
+            </para>
+            <para>
+                على سبيل المثال: انت لديك ملف XML يحتوى على الـ configurations الخاصة ببرنامجك,
+هذا الملف يتم قرائة محتوياته بإستخدام دالة معينة و التى تعيد "return" إلينا "config object"
+(مثل <code>Zend_Config</code> ).
+عن طريق <code>Zend_Cache_Frontend_File</code> يمكنك
+حفظ الـ "config object" فى الـ cache (لتتجنب عملية قرائة ملف الـ XML عند كل مرة)
+لكن بالأعتماد بشدة على الـ "master file" اى ملف الـ XML.
+إذاً, إن تم تعديل ملف الـ XML سيتم اعتبار النسخة فى الـ cache غير صالحة للإستخدام و سيتم إنشاء
+اخرى جديدة.
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.options">
+            <title>الـ options المتوفرة</title>
+            <table>
+                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_File</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>الـ Option</entry>
+                            <entry>الـ Data Type</entry>
+                            <entry>الـ Default Value</entry>
+                            <entry>الوصف</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>masterFile (إجبارى)</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><code></code></entry>
+                              <entry>
+                                  المسار الكامل للملف "master file".
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.examples">
+            <title>امثلة</title>
+            <para>
+                إستخدام هذا الـ frontend هو نفس طريقة استخدام <code>Zend_Cache_Core</code>,
+لذلك لا يوجد حاجة إلى مثال جديد, الشئ الوحيد الذى ستقوم به هو تعريف قيمة
+<code>masterFile</code> عند إستخدام الـ factory.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.page">
+        <title>Zend_Cache_Frontend_Page</title>
+        <sect3 id="zend.cache.frontends.page.introduction">
+            <title>مقدمة</title>
+            <para>
+                <code>Zend_Cache_Frontend_Page</code> يتشابه مع
+<code>Zend_Cache_Frontend_Output</code> إلا انه تم تصميمه
+لعمل cache لصفحة كاملة.
+فلا يمكن إستخدام <code>Zend_Cache_Frontend_Page</code>
+لعمل cache لجزء او بلوك معين فقط.
+            </para>
+            <para>
+                على الجانب الأخر, الـ "cache id" يتم حسابه من خلال
+<code>['SERVER['REQUEST_URI_$</code> و (اعتمادا على قيم الـ options يستخدم التالى)
+<code>GET</code>, <code>POST</code>,
+<code>SESSION</code>, <code>COOKIE</code>,
+<code>FILES</code>.
+غير ذلك, يجب عليك استدعاء method واحد فقط و هو (<code>()start</code>) لأن
+<code>()end</code> يتم إستدعائه تلقائيا عند إنتهاء الصفحة.
+            </para>
+            <para>
+                الى هذه اللحظة لم يتم تنفيذه لكننا ننوى إضافة نظام HTTP شرطى لحفظ المذيد من الـ bandwith
+(سيقوم النظام بإرسال الهيدر "HTTP 304" أى لم يتم تعديل الملف و هذا إذا تم إيجاد نسخة cache
+قابلة للأستخدام "طازجة" و إذا كان لدى المتصفح ايضا نسخة صالحة "طازجة" من هذه الصفحة.
+            </para>
+            <note><para>
+              Zend_Cache_Frontend_Page يعتبر فى المرحلة alpha الأن , إى انه سيتم عمل
+ تطويرات جديدة له مع مرور الوقت.
+            </para></note>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.options">
+            <title>الـ options المتوفرة</title>
+            <table>
+                <title>الـ options المتوفرة لـ Zend_Cache_Frontend_Page</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>الـ Option</entry>
+                            <entry>الـ Data Type</entry>
+                            <entry>الـ Default Value</entry>
+                            <entry>الوصف</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>httpConditional</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  إستخدم نظام الـ HTTP الشرطى "httpConditional system" (لم يتم دعمه الى الأن).
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>debugHeader</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  إن كانت تحمل القيمة true, بيانات الـ debugging سيتم إضافتها قبل كل صفحة لها cache.
+                              </entry>
+                         </row>
+                         <row>
+                               <entry><code>defaultOptions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>(.انظر الوصف.)array</code></entry>
+                              <entry>
+                                  associative array تحتوى على الـ default options :
+                                  <itemizedlist>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) cache</code> :
+                                            إن كانت تحمل قيمة true فالـ cache مفعل
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, false by default) cacheWithGetVariables</code> :
+                                            إن كانت تحمل القيمة true فالـ cache مفعل حتى لو كان هناك قيم فى المصفوفة
+                                            <code>GET_$</code>
+                                        </para>
+                                    </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, false by default) cacheWithPostVariables</code> :
+                                            إن كانت تحمل القيمة true فالـ cache مفعل حتى لو كان هناك قيم فى المصفوفة
+                                            <code>POST_$</code>
+                                        </para>
+                                    </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, false by default) cacheWithSessionVariables</code> :
+                                            إن كانت تحمل القيمة true فالـ cache مفعل حتى لو كان هناك قيم فى المصفوفة
+                                            <code>SESSION_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, false by default) cacheWithFilesVariables</code> :
+                                            إن كانت تحمل القيمة true فالـ cache مفعل حتى لو كان هناك قيم فى المصفوفة
+                                            <code>FILES_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, false by default) cacheWithCookieVariables</code> :
+                                            إن كانت تحمل القيمة true فالـ cache مفعل حتى لو كان هناك قيم فى المصفوفة
+                                            <code>COOKIE_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) makeIdWithGetVariables</code> :
+                                            إن كانت تحمل القيمة true فقيمة الـ "cache id" تعتمد على محتويات المصفوفة
+                                            <code>GET_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) makeIdWithPostVariables</code> :
+                                            إن كانت تحمل القيمة true فقيمة الـ "cache id" تعتمد على محتويات المصفوفة
+                                            <code>POST_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) makeIdWithSessionVariables</code> :
+                                            إن كانت تحمل القيمة true فقيمة الـ "cache id" تعتمد على محتويات المصفوفة
+                                            <code>SESSION_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) makeIdWithFilesVariables</code> :
+                                            إن كانت تحمل القيمة true فقيمة الـ "cache id" تعتمد على محتويات المصفوفة
+                                            <code>FILES_$</code>
+                                        </para>
+                                      </listitem>
+                                      <listitem>
+                                        <para>
+                                            <code>(boolean, true by default) makeIdWithCookieVariables</code> :
+                                            إن كانت تحمل القيمة true فقيمة الـ "cache id" تعتمد على محتويات المصفوفة
+                                            <code>COOKIE_$</code>
+                                        </para>
+                                      </listitem>
+                                  </itemizedlist>
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>regexps</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array()</code></entry>
+                              <entry>
+                                    associative array تضع بها الـ options الخاصة بـ REQUEST_URI.
+المفتاح "key" سيكون عبارة عن جملة regex من النوع (PCRE), و القيم "values"
+ستكون عبارة عن associative array تحتوى مجموعة من الـ options التى سيتم
+تنفيذها إذا توافقت جملة الـ regex مع ['SERVER['REQUEST_URI_$
+(انظر الى defaultOptions لقائمة بالـ options المتوفرة).
+إذا توافقت اكثر من جملة regexp مع قيمة ['SERVER['REQUEST_URI_$ , سيتم
+إستخدام اخر واحد فقط.
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.examples">
+            <title>امثلة</title>
+            <para>
+                إستخدام Zend_Cache_Frontend_Page سهل جدا :
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+// [...] // require, configuration and factory
+
+$cache->start();
+// if the cache is hit, the result is sent to the browser and the script stop here
+
+// rest of the page ...
+
+?>]]>       </programlisting>
+            <para>
+                مثال اكثر تعقيدا يوضح اسلوب لتنفيذ إدارة مركزية للـ cache داخل ملف bootstrap
+"ملف رئيسى لتشغيل البرنامج".
+(مثلا للإستخدام مع Zend_Controller)
+            </para>
+            <programlisting role="php"><![CDATA[<?php
+
+// [...] you should avoid to put too much lines before the cache section
+// [...] for example, for optimal performances, "require_once" or "Zend_Loader::loadClass" should be
+// [...] after the cache section
+
+require_once 'Zend/Cache.php';
+
+$frontendOptions = array(
+   'lifeTime' => 7200,
+   'debugHeader' => true, // for debuging
+   'regexps' => array(
+       '^/$' => array('cache' => true),         // cache the whole IndexController
+       '^/index/' => array('cache' => true),    // cache the whole IndexController
+       '^/article/' => array('cache' => false), // we don't cache the ArticleController...
+       '^/article/view/' => array(              // ...but we cache the "view" action of
+           'cache' => true,                     // this ArticleController
+           'cacheWithPostVariables' => true,    // and we cache even there are some variables in $_POST
+           'makeIdWithPostVariables' => true,   // (but the cache will be dependent of the $_POST array)
+       )
+   )
+);
+$backendOptions = array(
+    'cacheDir' => '/tmp/'
+);
+
+// getting a Zend_Cache_Frontend_Page object
+$cache = Zend_Cache::factory('Page', 'File', $frontendOptions, $backendOptions);
+
+$cache->start();
+// if the cache is hit, the result is sent to the browser and the script stop here
+
+// [...] the end of the bootstrap file (these lines won't be executed if the cache is hit)
+
+?>]]>       </programlisting>
+        </sect3>
+    </sect2>
+</sect1>

@@ -1,0 +1,16 @@
+<appendix id="copyrights">
+    <title>Informazioni sul copyright</title>
+
+    <para>
+        I seguenti diritti sono applicabili ai componenti del Framework Zend.
+    </para>
+
+    <para>
+        Copyright &#169; 2005-<?dbtimestamp format="Y"?> Zend Technologies Inc.
+        (<ulink url="http://www.zend.com" />)
+    </para>
+
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

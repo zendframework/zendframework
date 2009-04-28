@@ -1,0 +1,469 @@
+<appendix id="requirements">
+
+    <title>Requisitos do Sistema</title>
+
+    <para>
+        Está seção documenta os requisitos do Zend Framework.
+    </para>
+
+    <sect1 id="requirements.version">
+
+        <title>Versão requerida do PHP</title>
+
+        <para>
+            Zend Framework requer PHP 5.1.4 ou superior. Algumas interfaces
+            SPL como <code>Countable</code> não estão estáveis nas versões
+            anteriores do PHP.
+        </para>
+
+        <para>
+            Zend Framework têm uma coleção extensa de testes de automação,
+            que você pode executar usando PHPUnit 3.0 ou superior. Está versão
+            do PHPUnit também requere PHP 5.1.4 ou superior.
+        </para>
+
+        <para>
+            Apesar do Zend Framework funcionar corretamente com a versão do
+            PHP mencionada acima, você é fortemente recomendado a usar o PHP 5.2.2
+            ou posterior. Há melhorias importantes de segurança e performance
+            disponíveis nas versão mais nova do PHP.
+        </para>
+
+    </sect1>
+
+    <sect1 id="requirements.extensions">
+
+        <title>Extensões PHP</title>
+
+        <para>
+            A baixo está uma tabela que lista todas as extensões típicas
+            encontradas no PHP, e como elas são usadas no Zend Framework.
+            Isto pode ajudar a guiá-lo para saber quais extensões são
+            requeridas para a sua aplicação. Nem todas as extensões usadas
+            pelo Zend Framework são necessárias para as aplicações.
+        </para>
+
+        <table frame='all' id="requirements.extensions.table-1">
+            <title>Extensões PHP usadas pelo Zend Framework</title>
+            <tgroup cols='3'>
+                <colspec colwidth='1in'/>
+                <colspec colwidth='1in'/>
+                <colspec colwidth='3in'/>
+                <thead>
+                    <row>
+                        <entry>Extensão</entry>
+                        <entry>Típo de Uso</entry>
+                        <entry>Usado por quais Componentes do Zend Framework</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>apc</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Cache_Backend_Apc</entry>
+                    </row>
+                    <row>
+                        <entry>bcmath</entry>
+                        <entry>Opcional</entry>
+                        <entry>Zend_Locale_Math</entry>
+                    </row>
+                    <row>
+                        <entry>bitset</entry>
+                        <entry>Opcional</entry>
+                        <entry>Zend_Search_Lucene</entry>
+                    </row>
+                    <row>
+                        <entry>bz2</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>calendar</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>com_dotnet</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>ctype</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Auth_Adapter_Http, Zend_Gdata_App, Zend_Http_Client, Zend_Pdf, Zend_Rest_Client, Zend_Rest_Server, Zend_Search_Lucene, Zend_Uri, Zend_Validate</entry>
+                    </row>
+                    <row>
+                        <entry>curl</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Http_Client_Adapter_Curl</entry>
+                    </row>
+                    <row>
+                        <entry>date</entry>
+                        <entry>?</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>dba</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>dbase</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>dom</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Feed, Zend_Gdata, Zend_Log_Formatter_Xml, Zend_Rest_Server, Zend_Search_Lucene, Zend_Service_Amazon, Zend_Service_Delicious, Zend_Service_Flickr, Zend_Service_Simpy, Zend_Service_Yahoo, Zend_XmlRpc</entry>
+                    </row>
+                    <row>
+                        <entry>exif</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>fbsql</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>fdf</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>filter</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>ftp</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>gd</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Pdf</entry>
+                    </row>
+                    <row>
+                        <entry>gettext</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>gmp</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>hash</entry>
+                        <entry>?</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>ibm_db2</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Db2</entry>
+                    </row>
+                    <row>
+                        <entry>iconv</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Locale_Format, Zend_Mime_Decode, Zend_Pdf, Zend_Search_Lucene, Zend_Service_Audioscrobbler, Zend_Service_Flickr, Zend_XmlRpc_Client</entry>
+                    </row>
+                    <row>
+                        <entry>imap</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>informix</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>interbase</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Firebird</entry>
+                    </row>
+                    <row>
+                        <entry>json</entry>
+                        <entry>Opcional</entry>
+                        <entry>Zend_Json</entry>
+                    </row>
+                    <row>
+                        <entry>ldap</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>libxml</entry>
+                        <entry>Dependência</entry>
+                        <entry>DOM, SimpleXML, XSLT</entry>
+                    </row>
+                    <row>
+                        <entry>mbstring</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Feed</entry>
+                    </row>
+                    <row>
+                        <entry>mcrypt</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>memcache</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Cache_Backend_Memcached</entry>
+                    </row>
+                    <row>
+                        <entry>mhash</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>mime_magic</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Http_Client</entry>
+                    </row>
+                    <row>
+                        <entry>ming</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>msql</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>mssql</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>mysql</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>mysqli</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Mysqli</entry>
+                    </row>
+                    <row>
+                        <entry>ncurses</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>oci8</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Oracle</entry>
+                    </row>
+                    <row>
+                        <entry>odbc</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>openssl</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>pcntl</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>pcre</entry>
+                        <entry>Dependência</entry>
+                        <entry>Virtualmente todos os componentes</entry>
+                    </row>
+                    <row>
+                        <entry>pdo</entry>
+                        <entry>Dependência</entry>
+                        <entry>Todos adptadores de bancos de dados PDO</entry>
+                    </row>
+                    <row>
+                        <entry>pdo_dblib</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>pdo_firebird</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>pdo_mssql</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Pdo_Mssql</entry>
+                    </row>
+                    <row>
+                        <entry>pdo_mysql</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Pdo_Mysql</entry>
+                    </row>
+                    <row>
+                        <entry>pdo_oci</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Pdo_Oci</entry>
+                    </row>
+                    <row>
+                        <entry>pdo_pgsql</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Pdo_Pgsql</entry>
+                    </row>
+                    <row>
+                        <entry>pdo_sqlite</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Db_Adapter_Pdo_Sqlite</entry>
+                    </row>
+                    <row>
+                        <entry>pgsql</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>posix</entry>
+                        <entry>Opcional</entry>
+                        <entry>Zend_Mail</entry>
+                    </row>
+                    <row>
+                        <entry>pspell</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>readline</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>recode</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>Reflection</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Controller, Zend_Filter, Zend_Filter_Input, Zend_Json, Zend_Log, Zend_Rest_Server, Zend_Server_Reflection, Zend_Validate, Zend_View, Zend_XmlRpc_Server</entry>
+                    </row>
+                    <row>
+                        <entry>session</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Controller_Action_Helper_Redirector, Zend_Session</entry>
+                    </row>
+                    <row>
+                        <entry>shmop</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>SimpleXML</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Config_Xml, Zend_Feed, Zend_Rest_Client, Zend_Service_Audioscrobbler, Zend_XmlRpc</entry>
+                    </row>
+                    <row>
+                        <entry>soap</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Service_StrikeIron</entry>
+                    </row>
+                    <row>
+                        <entry>sockets</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>SPL</entry>
+                        <entry>Dependência</entry>
+                        <entry>Virtually all components</entry>
+                    </row>
+                    <row>
+                        <entry>standard</entry>
+                        <entry>Dependência</entry>
+                        <entry>Virtually all components</entry>
+                    </row>
+                    <row>
+                        <entry>sybase</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>sysvmsg</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>sysvsem</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>sysvshm</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>tidy</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>tokenizer</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>wddx</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>xml</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Translate_Adapter_Qt, Zend_Translate_Adapter_Tmx, Zend_Translate_Adapter_Xliff</entry>
+                    </row>
+                    <row>
+                        <entry>XMLReader</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>xmlrpc</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>XMLWriter</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>xsl</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>zip</entry>
+                        <entry>--</entry>
+                        <entry></entry>
+                    </row>
+                    <row>
+                        <entry>zlib</entry>
+                        <entry>Dependência</entry>
+                        <entry>Zend_Pdf, Memcache</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+    </sect1>
+
+</appendix>
+<!--
+vim:se ts=4 sw=4 et:
+-->

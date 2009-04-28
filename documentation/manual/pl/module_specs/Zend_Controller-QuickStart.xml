@@ -1,0 +1,305 @@
+<sect1 id="zend.controller.quickstart">
+    <title>Szybki start z klasą Zend_Controller</title>
+
+    <sect2 id="zend.controller.quickstart.introduction">
+        <title>Wprowadzenie</title>
+        <para>
+            Klasa <code>Zend_Controller</code> jest sercem systemu MVC
+            biblioteki Zend Framework. MVC oznacza <ulink
+                url="http://pl.wikipedia.org/wiki/Model-widok-kontroler">Model-Widok-Kontroler</ulink>
+            i jest wzorcem projektowym mającym na celu oddzielenie logiki
+            aplikacji od logiki wyświetlania. Klasa
+            <code>Zend_Controller_Front</code> implementuje wzorzec projektowy
+            <ulink
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">kontrolera
+                frontowego</ulink>. Wszystkie żądania są przechwytywane
+            przez kontroler frontowy i na podstawie adresu URL uruchamiany
+            jest odpowiedni kontroler akcji.
+        </para>
+        <para>
+            The <code>Zend_Controller</code> system was built with extensibility
+            in mind, either by subclassing the existing classes, writing new
+            classes that implement the various interfaces and abstract classes
+            that form the foundation of the controller family of classes, or
+            writing plugins or action helpers to augment or manipulate the
+            functionality of the system.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.quickstart.go">
+        <title>Szybki start</title>
+
+        <para>
+            If you need more in-depth information, see the following sections.
+            If you just want to get up and running quickly, read on.
+        </para>
+
+        <sect3 id="zend.controller.quickstart.go.directory">
+            <title>Utwórz strukturę katalogów</title>
+
+            <para>
+                Pierwszym krokiem jest utworzenie struktury katalogów. Typowa
+                struktura wygląda w taki sposób:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+application/
+    controllers/
+        IndexController.php
+    models/
+    views/
+        scripts/
+            index/
+                index.phtml
+        helpers/
+        filters/
+html/
+    .htaccess
+    index.php
+]]>
+            </programlisting>
+
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.docroot">
+            <title>Ustaw główną ścieżkę serwera</title>
+
+            <para>
+                W swoim serwerze www, ustaw główną ścieżkę serwera na katalog
+                <code>html</code> znajdujący się w powyższej przykładowej
+                strukturze katalogów.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.rewrite">
+            <title>Ustaw reguły przepisania</title>
+
+            <para>
+                Zedytuj plik <code>html/.htaccess</code> aby wyglądał w taki
+                sposób:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+RewriteEngine on
+RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
+]]>
+            </programlisting>
+
+            <para>
+                The above rules will route any non-resource (images,
+                stylesheets) requests to the front controller. If there are
+                other extensions you wish to exclude from the front controller
+                (PDFs, text files, etc), add their extensions to the switch, or
+                create your own rewrite rules.
+            </para>
+
+            <note>
+                <para>
+                    Powyższe reguły przepisania przygotowane sa dla serwera
+                    Apache; aby zobaczyć przykładowe reguły dla innych serwerów,
+                    zobacz <link
+                      linkend="zend.controller.router.introduction">dokumentację
+                    routera</link>.
+                </para>
+            </note>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.bootstrap">
+            <title>Utwórz plik ładujący</title>
+
+            <para>
+                Plik ładujący jest miejscem, przez którze przechodzą wszystkie
+                żądania -- w tym przypadku jest to -- <code>html/index.php</code>.
+                Otwórz plik <code>html/index.php</code> w dowolnym edytorze i
+                dodaj poniższy kod:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/app/controllers');
+]]>
+            </programlisting>
+
+            <para>
+                Utworzy to egzemplarz kontrolera frontowego i go uruchomi,
+                co spowoduje przekazanie żądań do kontrolerów akcji.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.controller">
+            <title>Utwórz domyślny kontroler akcji</title>
+
+            <para>
+                Before discussing action controllers, you should first
+                understand how requests are routed in Zend Framework. By
+                default, the first segment of a URL path maps to a controller,
+                and the second to an action. For example, given the URL
+                <code>http://framework.zend.com/roadmap/components</code>, the
+                path is <code>/roadmap/components</code>, which will map to the
+                controller <code>roadmap</code> and the action
+                <code>components</code>. If no action is provided, the action
+                <code>index</code> is assumed, and if no controller is provided,
+                the controller <code>index</code> is assumed (following the
+                Apache convention that maps a <code>DirectoryIndex</code>
+                automatically).
+            </para>
+
+            <para>
+                <code>Zend_Controller</code>'s dispatcher then takes the
+                controller value and maps it to a class. By default, it
+                Title-cases the controller name and appends the word
+                <code>Controller</code>. Thus, in our example above, the
+                controller <code>roadmap</code> is mapped to the class
+                <code>RoadmapController</code>.
+            </para>
+
+            <para>
+                Similarly, the action value is mapped to a method of the
+                controller class. By default, the value is lower-cased, and the
+                word <code>Action</code> is appended. Thus, in our example
+                above, the action <code>components</code> becomes
+                <code>componentsAction</code>, and the final method called is
+                <code>RoadmapController::componentsAction()</code>.
+            </para>
+
+            <para>
+                Idąc dalej, utwórzmy teraz domyślny kontroler akcji i metodę
+                akcji. Jak wspomniano wcześniej, domyślna nazwa kontrolera oraz
+                akcji to <code>index</code>. Otwórz w edytorze plik
+                <code>application/controllers/IndexController.php</code>, i
+                dodaj poniższy kod:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class IndexController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                By default, the <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+                action helper is enabled. What this means is that by simply
+                defining an action method and a corresponding view script, you
+                will immediately get content rendered.  By default,
+                <code>Zend_View</code> is used as the View layer in the MVC. The
+                <code>ViewRenderer</code> does some magic, and uses the
+                controller name (e.g., <code>index</code>) and the current
+                action name (e.g., <code>index</code>) to determine what
+                template to pull. By default, templates end in the
+                <code>.phtml</code> extension, so this means that, in the above
+                example, the template <code>index/index.phtml</code> will be
+                rendered. Additionally, the <code>ViewRenderer</code>
+                automatically assumes that the directory <code>views</code> at
+                the same level as the controller directory will be the base view
+                directory, and that the actual view scripts will be in the
+                <code>views/scripts/</code> subdirectory. Thus, the template
+                rendered will be found in
+                <code>application/views/scripts/index/index.phtml</code>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.view">
+            <title>Utwórz własny skrypt widoku</title>
+
+            <para>
+                As mentioned <link
+                    linkend="zend.controller.quickstart.go.controller">in the
+                    previous section</link>, view scripts are found in
+                <code>application/views/scripts/</code>; the view script for the
+                default controller and action is in
+                <code>application/views/scripts/index/index.phtml</code>. Create
+                this file, and type in some HTML:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Pierwsza aplikacja Zend Framework</title>
+</head>
+<body>
+    <h1>Witaj!</h1>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.errorhandler">
+            <title>Utwórz kontroler błędu</title>
+
+            <para>
+                Domyślnie, <link
+                    linkend="zend.controller.plugins.standard.errorhandler">wtyczka
+                obsługi błędów</link> jest zarejestrowana. Ta wtyczka
+                expects that a controller exists to handle errors.
+                By default, it assumes an <code>ErrorController</code> in the
+                default module with an <code>errorAction</code> method:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class ErrorController extends Zend_Controller_Action
+{
+    public function errorAction()
+    {
+    }
+}
+]]>
+            </programlisting>
+
+            <para>
+                Assuming the already discussed directory layout, this file will
+                go in <code>application/controllers/ErrorController.php</code>.
+                You will also need to create a view script in
+                <code>application/views/scripts/error/error.phtml</code>; sample
+                content might look like:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Błąd</title>
+</head>
+<body>
+    <h1>Wystąpił błąd</h1>
+    <p>Wystąpił błąd; spróbuj ponownie później.</p>
+</body>
+</html>
+]]>
+            </programlisting>
+        </sect3>
+
+        <sect3 id="zend.controller.quickstart.go.finish">
+            <title>Zobacz stronę!</title>
+
+            <para>
+                With your first controller and view under your belt, you can now
+                fire up your browser and browse to the site. Assuming
+                <code>example.com</code> is your domain, any of the following
+                URLs will get to the page we've just created:
+            </para>
+
+            <itemizedlist>
+                <listitem><para><code>http://example.com/</code></para></listitem>
+                <listitem><para><code>http://example.com/index</code></para></listitem>
+                <listitem><para><code>http://example.com/index/index</code></para></listitem>
+            </itemizedlist>
+
+            <para>
+                Teraz jesteś gotowy do tworzenia kolejnych kontrolerów i metod
+                akcji. Gratulacje!
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

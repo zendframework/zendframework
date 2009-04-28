@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="performance.introduction">
+    <title>Einführung</title>
+
+    <para>
+        Der Zweck dieses Anhangs ist es einige konkrete Strategien für die Verbesserung der
+        Geschwindigkeit für Zend Framework Anwendungen zu geben. Der Ratgeber wird im "Frage und
+        Antwort" Format präsentiert, und ist in Abschnitte von gleichlautenden Interessen geteilt.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

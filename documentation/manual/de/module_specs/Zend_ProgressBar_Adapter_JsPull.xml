@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.jspull">
+    <title>Zend_ProgressBar_Adapter_JsPull</title>
+    <para>
+        <classname>Zend_ProgressBar_Adapter_JsPull</classname> ist das Gegenteil von jsPush, da es ein Holen für neue
+        Updates benötigt, statt die Updates zum Browser zu schicken. Generell sollte man den Adapter mit
+        der Persistenz Option auf <classname>Zend_ProgressBar</classname> verwenden. Bei der Benachrichtigung sendet
+        der Adapter einen JSON String zum Browser, der exakt wie der JSON String aussieht der vom jsPush
+        Adapter gesendet wird. Der einzige Unterschied ist, das er einen zusätzlichen Parameter
+        <code>finished</code> enthält, der entweder <code>false</code> ist, wenn <code>update()</code>
+        aufgerufen wurde, oder <code>true</code> wenn <code>finish()</code> aufgerufen wurde.
+    </para>
+    <para>
+        Die Adapteroptionen kann man entweder über die <code>set*</code> Methoden oder durch die Übergabe
+        eines Arrays oder einer Instanz von <classname>Zend_Config</classname> mit den Optionen als ersten Parameter an den
+        Constructor setzen. Die vorhandenen Optionen sind:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>exitAfterSend</code>: Beendet die aktuelle Anfrage nachdem die Daten an den Browser
+                gesendet wurden. Der Standardwert ist <code>true</code>.
+            </para>
+        </listitem>
+    </itemizedlist>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

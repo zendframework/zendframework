@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15014 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.application.examples">
+    <title>Beispiele</title>
+
+    <para>
+        Die Bootstrap Klasse selbst wird typischerweise sehr minimal sein; oft wird sie einfach
+        nur ein leerer Stub sein der die Basis Bootstrapping Klasse erweitert:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+}
+]]>
+    </programlisting>
+
+    <para>
+        Mit einer entsprechenden Konfigurationsdatei:
+    </para>
+
+    <programlisting role="ini"><![CDATA[
+; APPLICATION_PATH/configs/application.ini
+[production]
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+
+[development : testing]
+[development : production]
+]]></programlisting>
+
+    <para>
+        Sollten trotzdem, eigene Initialisierungen notwendig sein, hat man zwei Möglichkeiten.
+        Erstens, kann man Methoden schreiben die mit <code>_init</code> anfangen um eigenen Code
+        zu spezifizieren der für das Bootstrapping verwendet werden soll. Diese Methoden werden
+        durch bootstrap( aufgerufen, und können genauso aufgerufen werden wie wenn Sie öffentliche
+        Methoden wären: <code>bootstrap&lt;resource&gt;()</code>. Sie sollten ein optionales
+        Array an Optionen akzeptieren.
+    </para>
+
+    <para>
+        Wenn die eigene Ressource Methode einen Wert zurückgibt, wird diese in einem Container
+        im Bootstrap gespeichert. Das kann nützlich sein wenn verschiedene Ressourcen interagieren
+        müssen (wie wenn eine Ressource sich selbst in eine andere Iniziiert). Die Methode
+        <code>getResource()</code> kann dann verwendet werden um diese Werte zu erhalten.
+    </para>
+
+    <para>
+        Das Beispiel anbei zwigt eine Ressource Methode für die Initialisierung des Anfrage
+        Objekts. Es verwendet die Erkennung der Abhängigkeit (diese hängt von der Front Controller
+        Ressource ab), holt eine Ressource vom Bootstrap, und gibt einen Wert zurück um Ihn im
+        Bootstrap zu speichern.
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    protected function _initRequest(array $options = array())
+    {
+        // Sicherstellen das eine Front Controller Instanz vorhanden ist
+        // und diese holen
+        $this->bootstrap('FrontController');
+        $front = $this->getResource('FrontController');
+
+        // Das Anfrage Objekt initialisieren
+        $request = new Zend_Controller_Request_Http();
+        $request->setBaseUrl('/foo');
+
+        // Sie dem Front Controller hinzufügen
+        $front->setRequest($request);
+
+        // Bootstrap speichert den Wert im 'request' Schlüssel
+        // seines Containers
+        return $request;
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Beachte in diesem Beispiel den Aufruf von <code>bootstrap()</code>; dieser stellt sicher
+        das der Front Controlle initialisiert wurde before die Methode aufgerufen wird. Dieser
+        Aufruf kann entweder eine Ressource oder eine andere Methode in der Klasse auslösen.
+    </para>
+
+    <para>
+        Die andere Option ist die Verwendung eines Ressource Plugins. Ressource Plugins sind
+        Objekte die spezielle Initialisierungen ausführen, und die wie folgt spezifiziert werden
+        können:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Wärend der Instanzierung des Zend_Application Objekts
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Wärend der Initialisierung des Bootstrap Objekts
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                Durch explizites einschalten über Methodenaufrufe auf dem Bootstrap Objekt
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Ressource Plugins implementieren <classname>Zend_Application_Bootstrap_Resource</classname>, welche
+        einfach definieren das Sie Injektion des Aufrufers und von Optionen erlauben, und die eine
+        <code>init()</code> Methode haben. Als Beispiel, könnte eine eigene "View" Bootstrap
+        Ressource wie folgt aussehen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class My_Bootstrap_Resource_View
+    extends Zend_Application_Resource_ResourceAbstract
+{
+    public function init()
+    {
+        $view = new Zend_View($this->_getOptions());
+        Zend_Dojo::enableView($view);
+
+        $view->doctype('XHTML1_STRICT');
+        $view->headTitle()->setSeparator(' - ')->append('Meine Site');
+        $view->headMeta()->appendHttpEquiv('Content-Type',
+                                           'text/html; charset=utf-8');
+
+        $view->dojo()->setDjConfigOption('parseOnLoad', true)
+                     ->setLocalPath('/js/dojo/dojo.js')
+                     ->registerModulePath('../spindle', 'spindle')
+                     ->addStylesheetModule('spindle.themes.spindle')
+                     ->requireModule('spindle.main')
+                     ->disable();
+
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
+            'ViewRenderer'
+        );
+        $viewRenderer->setView($view);
+
+        return $view;
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Um der Bootstrap zu sagen das sie das verwenden soll, würde man entweder den Klassennamen
+        der Ressource übergeben müssen, oder eine Kombination eines Plugin Loader Präfix Pfades
+        und den Kurznamen der Ressource (z.B. "view"):
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$application = new Zend_Application(
+    APPLICATION_ENV,
+    array(
+        'resources' => array(
+            'My_Bootstrap_Resource_View', // kompletter Klassenname; ODER
+            'view',                       // Kurzname
+
+            'FrontController' => array(
+                'controllerDirectory' => APPLICATION_PATH . '/controllers',
+            ),
+        ),
+
+        // Für Kurznamen, definiere die Ressourcen Pfade:
+        'resourcePaths = array(
+            'My_Bootstrap_Resource' => 'My/Bootstrap/Resource',
+        )
+    )
+);
+]]>
+    </programlisting>
+
+    <para>
+        Ressourcen können andere Ressourcen und Initialisierungen aufrufen indem Sie auf den
+        Eltern-Bootstrap zugreifen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+class My_Bootstrap_Resource_Layout
+    extends Zend_Application_Resource_ResourceAbstract
+{
+    public function init()
+    {
+        // Sicherstellen das die View initialisiert ist...
+        $this->getBootstrap()->bootstrap('view');
+
+        // Das View Objekt erhalten
+        $view = $this->getBootstrap()->getResource('view');
+
+        // ...
+    }
+}
+]]>
+    </programlisting>
+
+    <para>
+        Bei normaler Verwendung würde man die Anwendung instanziieren, sie bootstrappen, und
+        anschließend ausführen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$application = new Zend_Application(...);
+$application->bootstrap()
+            ->run();
+]]>
+    </programlisting>
+
+    <para>
+        Für ein eigenes Skript müsste man einfach spezifische Ressourcen initialisieren:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$application = new Zend_Application(...);
+$application->getBootstrap('db');
+
+$service = new Zend_XmlRpc_Server();
+$service->setClass('Foo');  // Verwende die Datenbank...
+echo $service->handle();
+]]>
+    </programlisting>
+
+    <para>
+        Statt der Verwendung der <code>bootstrap()</code> Methode um interne Methode oder
+        Ressourcen aufzurufen, kann man auch Überladung verwenden:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$application = new Zend_Application(...);
+$application->getBootstrapDb();
+]]>
+    </programlisting>
+</sect1>

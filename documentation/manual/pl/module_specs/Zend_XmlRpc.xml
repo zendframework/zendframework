@@ -1,0 +1,17 @@
+<sect1 id="zend.xmlrpc.introduction">
+    <title>Wprowadzenie</title>
+    <para>
+        Na <ulink url="http://www.xmlrpc.com/">stronie domowej</ulink> XML-RPC
+        opisane jest jako "zdalne wywoływanie procedur przy użyciu protokołu HTTP
+        jako transportu i XML jako kodowania. XML-RPC jest zaprojektowane aby było
+        tak proste jak to tylko możliwe, przy jednoczesnej możliwości przekazywania,
+        przetwarzania i zwracania zaawansowanych struktur danych."
+    </para>
+    <para>
+        Zend Framework zapewnia zarówno obsługę zdalnych serwisów
+        XML-RPC jak i budowania nowych serwerów XML-RPC.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.db.statement">
+
+    <title>Zend_Db_Statement</title>
+
+    <para>
+        Zusätzlich zu den herkömmlichen Methoden wie <code>fetchAll()</code> und <code>insert()</code>,
+        beschrieben in <xref linkend="zend.db.adapter" />, kann auch ein Statement-Objekt verwendet werden,
+        um zusätzliche Möglichkeiten beim Ausführen von Abfragen und holen von Ergebnissätzen zu erhalten.
+        Dieser Abschnitt beschreibt wie eine Instanz eines Statement-Objekts erzeugt wird, und wie dessen
+        Methoden verwendet werden.
+    </para>
+
+    <para>
+        <classname>Zend_Db_Statement</classname> basiert auf dem PDOStatement Objekt aus der <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>
+        Erweiterung.
+    </para>
+
+    <sect2 id="zend.db.statement.creating">
+
+        <title>Erzeugung von Statement Objekten</title>
+
+        <para>
+            Normalerweise wird ein Statement Objekt von der <code>query()</code> Methode der Datenbank
+            Adapterklasse zurück gegeben. Diese Methode ist der grundsätzliche Weg um ein beliebiges SQL Statement
+            vor zu bereiten. Das erste Argument ist ein String, der das SQL Statement enthält. Das optionale zweite
+            Argument ist ein Array von Werten, verknüpft mit Parameterplatzhaltern im SQL String.
+        </para>
+
+        <example id="zend.db.statement.creating.example1">
+            <title>Erzeugung eines SQL Statement Objekts mit query()</title>
+            <programlisting role="php"><![CDATA[
+$stmt = $db->query(
+            'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
+            array('goofy', 'FIXED')
+        );
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Das Statement Objekt entspricht einem SQL Statement welches vorbereitet und einmalig mit angegebenen
+            verknüpften Werten ausgeführt wurde. War das Statement eine SELECT Abfrage, oder irgendein Statement
+            welches ein Ergebnissatz zurück gibt, so ist es nun bereit um Ergebnisse zu holen.
+        </para>
+
+        <para>
+            Ein Statement kann ebenfalls mit dem Konstruktor erzeugt werden, auch wenn dies eine weniger typische
+            Nutzung ist. Es existiert jedoch keine factory Methode um das Objekt zu erzeugen, weßhalb die
+            entsprechende Statementklasse geladen, und ihr Konstruktor aufgerufen werden muss. Als erstes Argument
+            muss das Adapterobjekt übergeben werden und als zweites Argument ein String welcher das SQL Statement
+            enthält. Das Statement ist dadurch vorbereitet, jedoch nicht Ausgeführt.
+        </para>
+
+        <example id="zend.db.statement.creating.example2">
+            <title>Nutzung des SQL Statement Konstruktors</title>
+            <programlisting role="php"><![CDATA[
+$sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
+
+$stmt = new Zend_Db_Statement_Mysqli($db, $sql);
+]]>
+            </programlisting>
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.db.statement.executing">
+
+        <title>Ausführen eines Statements</title>
+
+        <para>
+            Ein Statement Objekt muss ausgeführt werden wenn es über den Konstruktor erzeugt wurde, oder kann, wenn
+            es mehrere Male hintereinander ausgeführt werden soll. Dazu wird die <code>execute()</code> Methode des
+            Statement Objekts verwendet. Das einzige Argument ist ein Array von Werten, welche mit
+            Parameterplatzhaltern im Statement verknüpft werden.
+        </para>
+
+        <para>
+            Wenn <emphasis>positionierte Parameter</emphasis>, oder solche, die mit dem Fragezeichen (<code>?</code>)
+            verwendet werden, muss ein einfaches Array übergeben werden.
+        </para>
+
+        <example id="zend.db.statement.executing.example1">
+            <title>Ausführen eines Statements mit positionierten Parametern</title>
+            <programlisting role="php"><![CDATA[
+$sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
+
+$stmt = new Zend_Db_Statement_Mysqli($db, $sql);
+
+$stmt->execute(array('goofy', 'FIXED'));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Wenn <emphasis>benannte Parameter</emphasis>, oder solche die mit einem String und voranstehenden
+            Doppelpunkt (<code>:</code>) bezeichnet werden, verwendet werden, muss ein assoziatives Array übergeben
+            werden. Die Schlüssel dieses Arrays müssen den Parameternamen entsprechen.
+        </para>
+
+        <example id="zend.db.statement.executing.example2">
+            <title>Ausführen eines Statements mit benannten Parametern</title>
+            <programlisting role="php"><![CDATA[
+$sql = 'SELECT * FROM bugs WHERE ' .
+       'reported_by = :reporter AND bug_status = :status';
+
+$stmt = new Zend_Db_Statement_Mysqli($db, $sql);
+
+$stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            PDO Statements unterstützen sowohl postionierte als auch benannte Parameter, jedoch nicht beide Typen
+            in einem einzelnen SQL Statement. Einige der <classname>Zend_Db_Statement</classname> Klassen für nicht-PDO Erweiterungen
+            könnten nur einen Typ von Parametern unterstützen.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.db.statement.fetching">
+
+        <title>Holen von Ergebnissen eines <code>SELECT</code> Statements</title>
+
+        <para>
+            Es können Methoden des Statement Objekts aufgefufen werden um Ergebnissätze zu erzeugen. SELECT, SHOW,
+            DESCRIBE und EXPLAIN sind Beispiele von von Statements die Ergebnissätze erzeugen. INSERT, UPDATE und
+            DELETE sind Beispiele von Statements die keine Ergebnissätze erzeugen. Letztere Statements können zwar
+            mit <classname>Zend_Db_Statement</classname> ausgeführt werden, aber Methoden die Zeilen oder Ergebnisse liefern können bei
+            diesen nicht verwendet werden.
+        </para>
+
+        <sect3 id="zend.db.statement.fetching.fetch">
+
+            <title>Holen einer einzelnen Zeile eines Ergebnissatzes</title>
+
+            <para>
+                Um eine einzelne Zeile eines Ergebnissatzes aubzurufen kann die <code>fetch()</code> Methode des
+                Statement Objekts verwendet werden. Alle drei Argumente dieser Methode sind optional:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Fetch Style</emphasis> ist das erste Argument. Es steuert die
+                        Struktur in welcher die Zeile zurück gegeben wird. Unter <xref linkend="zend.db.adapter.select.fetch-mode" />
+                        befindet sich eine Beschreibung der gültigen Werte und der entsprechenden Datenformaten.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard ist
+                        Zend_Db::FETCH_ORI_NEXT, was einfach bedeutet das für jeden Aufruf von <code>fetch()</code>
+                        die nächste Zeile des Ergebnissatzes, in der Riehenfolge des RDBMS, zurück gegeben wird.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis role="strong">Offset</emphasis> ist das dritte Argument.
+                        Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_ABS ist, dann ist die Offset-Nummer die
+                        ordinale Nummer der Zeile die zurück gegeben wird.
+                        Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_REL, dann ist die Offset-Nummer relativ zu
+                        der Cursorposition bevor <code>fetch()</code> aufgerufen wurde.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                <code>fetch()</code> gibt <code>false</code> zurück wenn alle Zeilen des Ergbnissatzes geholt wurden.
+            </para>
+
+            <example id="zend.db.statement.fetching.fetch.example">
+                <title>Nutzung fetch() in einer Schleife</title>
+                <programlisting role="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
+
+while ($row = $stmt->fetch()) {
+    echo $row['bug_description'];
+}
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Weitere Informationen unter <ulink url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.statement.fetching.fetchall">
+
+            <title>Holen eines gesamten Ergebnissatzes</title>
+
+            <para>
+                Um alle Zeilen eines Ergebnissatzes in einem Schritt abzurufen wird die <code>fetchAll()</code> Methode
+                verwendet. Dies ist gleichbedeutend mit dem Aufruf der <code>fetch()</code> Methode in einer Schleife
+                und dem Speichern der Rückgabewerte in einem Array.
+                Die <code>fetchAll()</code> Methode akzeptiert zwei Argumente. Das Erste ist der Fetch Style, wie oben
+                beschrieben, und das Zweite gibt die Nummer der zurück zu gebenden Spalte an, wenn der Fetch Style
+                Zend_Db::FETCH_COLUMN ist.
+            </para>
+
+            <example id="zend.db.statement.fetching.fetchall.example">
+                <title>Nutzung von fetchAll()</title>
+                <programlisting role="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
+
+$rows = $stmt->fetchAll();
+
+echo $rows[0]['bug_description'];
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Weitere Informationen unter <ulink url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.statement.fetching.fetch-mode">
+
+            <title>Ändern des Fetch Modus</title>
+
+            <para>
+                Standardmäßig gibt das Statement Objekt Zeilen des Ergebnissatzes als assoziatives Array, mapping
+                column names to column values, zurück. Ein anderes Format für die Datenrückgabe der Statementklasse
+                kann genau wie bei der Adapterklasse angegeben werden. Die <code>setFetchMode()</code> Methode des
+                Statement Objekts wird verwendet um den Fetch-Modus anzugeben. Dazu werden die Zend_Db Klassen
+                Konstanten FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN und FETCH_OBJ verwendet.
+                Weiter Informationenüber diese Modi gibt es unter <xref linkend="zend.db.adapter.select.fetch-mode" />.
+                Nachfolgende Aufrufe der Statement Methoden <code>fetch()</code> und <code>fetchAll()</code> benutzen
+                den neu gesetzten Fetch-Modus.
+            </para>
+
+            <example id="zend.db.statement.fetching.fetch-mode.example">
+                <title>Ändern des Fetch-Modus</title>
+                <programlisting role="php"><![CDATA[
+$stmt = $db->query('SELECT * FROM bugs');
+
+$stmt->setFetchMode(Zend_Db::FETCH_NUM);
+
+$rows = $stmt->fetchAll();
+
+echo $rows[0][0];
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Weitere Informationen unter <ulink url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.statement.fetching.fetchcolumn">
+
+            <title>Holen einer einzelnen Spalte eines Ergebnissatzes</title>
+
+            <para>
+                <code>fetchColumn()</code> wird verwendet mm eine einzelne Spalte eines Ergebnissatzes zurück zu
+                geben. Das optionale Argument ist der Integer Index der Spalte die zurück gegeben werden soll. Der
+                Standardwert ist 0. Diese Methode gibt einen scalaren Wert zurück, oder <code>false</code> wenn alle
+                Zeilen des Ergebnissatzes bereits geholt wurden.
+            </para>
+
+            <para>
+                Zu beachten ist, dass diese Methode anders als die <code>fetchCol()</code> Methode der Adapterklasse
+                arbeitet. Die <code>fetchColumn()</code> Methode der Statementklasse gibt einen einzelnen Wert einer
+                Zeile zurück.
+                Die <code>fetchCol()</code> Methode der Adapterklasse hingegen gibt ein Array von Werten der ersten Spalte
+                aller Zeilen eines Ergebnissatzes zurück.
+            </para>
+
+            <example id="zend.db.statement.fetching.fetchcolumn.example">
+                <title>Nutzung von fetchColumn()</title>
+                <programlisting role="php"><![CDATA[
+$stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
+
+$bug_status = $stmt->fetchColumn(2);
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Weitere Informationen unter <ulink url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
+            </para>
+
+        </sect3>
+
+        <sect3 id="zend.db.statement.fetching.fetchobject">
+
+            <title>Holen einer Zeile als Objekt</title>
+
+            <para>
+                Um eine Zeile eines Ergebnissatzes zu holen, die wie ein Objekt strukturiert ist, wird die <code>fetchObject()</code>
+                Methode verwendet.
+                Diese Methode nimmt zwei optionale Argumente entgegen. Das erste Argument ist ein String der den
+                Klassenname des zurück zu gebenden Objekts enthält, standard ist 'stdClass'. Das zweite Argument
+                ist ein Array von Werten, die an den Konstruktor des Objekts übergeben werden.
+            </para>
+
+            <example id="zend.db.statement.fetching.fetchobject.example">
+                <title>Nutzung von fetchObject()</title>
+                <programlisting role="php"><![CDATA[
+$stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
+
+$obj = $stmt->fetchObject();
+
+echo $obj->bug_description;
+]]>
+                </programlisting>
+            </example>
+
+            <para>
+                Weitere Informationen unter <ulink url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
+            </para>
+
+        </sect3>
+
+    </sect2>
+
+    <!--
+      @todo: binding parameters is not working yet.
+
+    <sect2 id="zend.db.statement.binding-param">
+
+        <title>Binding PHP Variables to Parameters</title>
+
+        <para>
+        </para>
+
+        <example id="zend.db.statement.binding-param.example">
+            <title>Binding parameters from PHP variables</title>
+            <programlisting role="php"><![CDATA[
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            See also <ulink url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>.
+        </para>
+
+    </sect2>
+    -->
+
+    <!--
+      @todo: binding columns is not working yet.
+    <sect2 id="zend.db.statement.binding-column">
+
+        <title>Binding PHP Variables to Query Results</title>
+
+        <para>
+        </para>
+
+        <example id="zend.db.statement.binding-column.example">
+            <title>Binding results to PHP variables</title>
+            <programlisting role="php"><![CDATA[
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            See also <ulink url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>.
+        </para>
+
+    </sect2>
+    -->
+
+</sect1>

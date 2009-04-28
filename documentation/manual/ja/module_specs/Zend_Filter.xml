@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.filter.introduction">
+
+    <title>導入</title>
+
+    <para>
+        Zend_Filter コンポーネントは、データのフィルタリングに必要となる一般的な機能を提供します。
+        シンプルなフィルタチェイン機能も持っており、
+        ひとつのデータに対して複数のフィルタを指定した順に適用することができます。
+    </para>
+
+    <sect2 id="zend.filter.introduction.definition">
+
+        <title>フィルタとは?</title>
+
+        <para>
+            自然界におけるフィルタの典型的な使用法は、
+            入力から不要な部分を除去して必要なものだけを出力することです (例: コーヒーのフィルタ)。
+            このような場合、フィルタは入力の一部を取り出すための演算子となります。
+            この型のフィルタリングはウェブアプリケーションで有用です。
+            たとえば不正な入力を除去したり、余分な空白を除去したりといったことが考えられます。
+        </para>
+
+        <para>
+            この基本的なフィルタの定義を拡張して、入力に一般的な変換を加える処理もフィルタに含めることにしましょう。
+            ウェブアプリケーションでよくある変換は、HTML エンティティのエスケープ処理です。
+            たとえば (ウェブブラウザなどからの) 信頼できない入力をもとにして
+            フォームのフィールドに値を自動的に埋め込む場合は、その値には
+            HTML エンティティが含まれてはいけません。あるいはもし含むならそれをエスケープしておかなければなりません。
+            これにより、予期せぬ振る舞いを起こすことを防ぎ、
+            セキュリティ上の脆弱性も防ぎます。
+            この要求を満たすには、入力に含まれる HTML
+            エンティティを削除あるいはエスケープしなければなりません。
+            もちろん、どちらの方式が適切かはその場の状況に依存します。
+            HTML エンティティを除去するフィルタは、最初に定義したフィルタの考え方
+            - 入力の一部を取り出すための演算子 - にもとづくものです。
+            一方、HTML エンティティをエスケープするフィルタは、入力を変換するタイプのものです
+            (たとえば "<code>&amp;</code>" は "<code>&amp;amp;</code>" に変換されます)。
+            これらの例のような処理はウェブ開発者にとって重要です。
+            Zend_Filter で "フィルタリングする" という場合、
+            それは入力データに対して何らかの変換を行うことを意味します。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.filter.introduction.using">
+
+        <title>フィルタの基本的な使用法</title>
+
+        <para>
+            ここで考えたフィルタについての定義をもとにして
+            <classname>Zend_Filter_Interface</classname> が作成されました。
+            これは、フィルタクラスに対して <code>filter()</code>
+            という名前のメソッドを実装するよう強制するものです。
+        </para>
+
+        <para>
+            以下の例は、アンパサンド (<code>&amp;</code>) およびダブルクォート (<code>&quot;</code>)
+            の二つの入力データに対してフィルタを適用するものです。
+
+            <programlisting role="php"><![CDATA[
+$htmlEntities = new Zend_Filter_HtmlEntities();
+
+echo $htmlEntities->filter('&'); // &amp;
+echo $htmlEntities->filter('"'); // &quot;
+]]>
+            </programlisting>
+
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.filter.introduction.static">
+
+        <title>静的メソッド <code>get()</code> の使用法</title>
+
+        <para>
+            指定したフィルタクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
+            もうひとつの方法として、静的メソッド <classname>Zend_Filter::get()</classname>
+            を実行する方法もあります。このメソッドの最初の引数には、
+            <code>filter()</code> メソッドに渡す入力値を指定します。
+            二番目の引数は文字列で、フィルタクラスのベースネーム
+            (Zend_Filter 名前空間における相対的な名前) を指定します。
+            <code>get()</code> メソッドは自動的にクラスを読み込んでそのインスタンスを作成し、
+            指定した入力に対して <code>filter()</code> メソッドを適用します。
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('&', 'HtmlEntities');
+]]>
+            </programlisting>
+
+        </para>
+
+        <para>
+            フィルタクラスのコンストラクタにオプションを指定する必要がある場合は、
+            それを配列で渡すことができます。
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+]]>
+            </programlisting>
+
+        </para>
+
+        <para>
+            この静的な使用法は、その場限りのフィルタリングには便利です。
+            ただ、複数の入力に対してフィルタを適用するのなら、
+            最初の例の方式、つまりフィルタオブジェクトのインスタンスを作成して
+            その <code>filter()</code> メソッドをコールする方式のほうがより効率的です。
+        </para>
+
+        <para>
+            また、Zend_Filter_Input クラスでも、特定の入力データのセットを処理する際に
+            複数のフィルタやバリデータを必要に応じて実行させる機能も提供しています。
+            詳細は <xref linkend="zend.filter.input" /> を参照ください。
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

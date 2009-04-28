@@ -1,0 +1,25 @@
+<sect1 id="zend.service.introduction">
+    <title>مقدمة</title>
+    <para>
+        <code>Zend_Service</code> عبارة عن abstract class و الذى بدوره يصبح
+        اساس لكل تطبيقات الـ web services (مثل XML-RPC ).
+    </para>
+    <para>
+        توفر <code>Zend_Service</code> دعم لأى web service تعتمد على REST من خلال
+        <link linkend="zend.service.rest"><code>Zend_Service_Rest</code></link>.
+    </para>
+    <para>
+        بالإضافة إلى امكانية الوراثة من <code>Zend_Service</code> و إستخدام
+        <code>Zend_Service_Rest</code> للـ web services التى تعتمد على REST , توفر
+        ZF توفر دعم ايضا لـ web services مشهورة مثل :
+
+        <link linkend="zend.service.amazon">Amazon</link>,
+        <link linkend="zend.service.flickr">Flickr</link>, و
+        <link linkend="zend.service.yahoo">Yahoo!</link>.
+        و ربما سيتم اضافة المزيد فى المستقبل.
+    </para>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

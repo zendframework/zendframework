@@ -1,0 +1,8 @@
+<!-- EN-Revision: 12893 -->
+<sect1 id="performance.introduction">
+    <title>Introduction</title>
+
+    <para>Le but de cette annexe est de fournir des stratégies concrètes afin d'améliorer les performances de vos
+    applications Zend Framework. Ce guide est présenté sous le format "Question &amp; Réponse" et est divisé en différents
+    sujets de préoccupation.</para>
+</sect1>

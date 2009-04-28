@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.mail.introduction">
+
+    <title>導入</title>
+
+    <sect2 id="zend.mail.introduction.getting-started">
+
+        <title>まずはじめに</title>
+
+        <para>
+            <classname>Zend_Mail</classname> は、テキストメールや MIME
+            マルチパートメールを作成・送信するための一般的な機能を提供します。
+            <classname>Zend_Mail</classname> を使用すると、デフォルトの
+            <classname>Zend_Mail_Transport_Sendmail</classname> か、あるいは
+            <classname>Zend_Mail_Transport_Smtp</classname>
+            を使用してメールを送信することが可能です。
+        </para>
+
+        <example id="zend.mail.introduction.example-1">
+
+            <title><classname>Zend_Mail</classname> を使用したシンプルなメール送信</title>
+
+            <para>
+                受信者、表題、本文および送信者を指定しただけの単純なメールです。
+                このようなメールを <classname>Zend_Mail_Transport_Sendmail</classname>
+                を用いて送信するには、次のようにします。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <title>最低限の定義</title>
+            <para>
+                <classname>Zend_Mail</classname> でメールを送信するには、
+                最低 1 か所以上の受信者、送信者 (<code>setFrom()</code> を使用します)、
+                そして本文 (テキストや HTML) を指定しなければなりません。
+            </para>
+        </note>
+
+        <para>
+            大半の属性については、その情報を読み込むための "get"
+            メソッドが用意されています。詳細は、API ドキュメントを参照ください。
+            <code>getRecipients()</code> だけは特別で、
+            これまでに追加されたすべての受信者アドレスを配列で返します。
+        </para>
+
+        <para>
+            セキュリティの観点から、<classname>Zend_Mail</classname>
+            はすべてのヘッダフィールドの改行文字 (<code>\n</code>) を取り除きます。
+            これにより、ヘッダインジェクションを防ぎます。
+            送信者名およびあて先名中の２重引用符は単一引用符に、山括弧は角括弧に変更されます。
+            もしその記号がメールアドレス中にある場合は除去されます。
+        </para>
+
+        <para>
+            <classname>Zend_Mail</classname> オブジェクトのほとんどのメソッドは、
+            流れるようなインターフェイス形式でコールすることもできます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.')
+    ->setFrom('somebody@example.com', 'Some Sender')
+    ->addTo('somebody_else@example.com', 'Some Recipient')
+    ->setSubject('TestSubject')
+    ->send();
+]]>
+        </programlisting>
+
+    </sect2>
+
+    <sect2 id="zend.mail.introduction.sendmail">
+
+        <title>デフォルトの sendmail トランスポートの設定</title>
+
+        <para>
+            <classname>Zend_Mail</classname> がデフォルトで使用するのは <classname>Zend_Mail_Transport_Sendmail</classname>
+            です。これは、単に PHP の <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+            関数をラップしただけのものです。
+            <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+            関数に追加のパラメータを渡したい場合は、
+            新しいインスタンスを作成する際のコンストラクタにパラメータを渡します。
+            新しく作成したインスタンスは、<classname>Zend_Mail</classname>
+            のデフォルトのトランスポートとすることができます。
+            あるいは <classname>Zend_Mail</classname> の <code>send()</code>
+            メソッドに渡すこともできます。
+        </para>
+
+        <example id="zend.mail.introduction.sendmail.example-1">
+
+            <title><classname>Zend_Mail_Transport_Sendmail</classname> トランスポートへの追加パラメータの渡し方</title>
+
+            <para>
+                この例は、<ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                関数の Return-Path を変更する方法を示すものです。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
+Zend_Mail::setDefaultTransport($tr);
+
+$mail = new Zend_Mail();
+$mail->setBodyText('This is the text of the mail.');
+$mail->setFrom('somebody@example.com', 'Some Sender');
+$mail->addTo('somebody_else@example.com', 'Some Recipient');
+$mail->setSubject('TestSubject');
+$mail->send();
+]]>
+            </programlisting>
+
+        </example>
+
+        <note>
+            <title>セーフモード時の制限</title>
+            <para>
+                PHP をセーフモードで実行している場合、オプションの追加パラメータを指定すると
+                <ulink url="http://php.net/mail"><code>mail()</code></ulink>
+                関数の実行に失敗する可能性があります。
+            </para>
+        </note>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

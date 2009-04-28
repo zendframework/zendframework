@@ -1,0 +1,373 @@
+<sect1 id="zend.service.flickr">
+    <title>Zend_Service_Flickr</title>
+    <sect2 id="zend.service.flickr.introduction">
+        <title>Wprowadzenie do przeszukiwania Flickr</title>
+        <para>
+            <code>Zend_Service_Flickr</code> jest prostym API do użycia z serwisem
+            Flickr REST Web Service. W celu użycia web serwisów Flickr, musisz
+            posiadać klucz API. Aby zdoby klucz i uzyskać więcej informacji o
+            Flickr REST Web Service, odwiedź
+            <ulink url="http://www.flickr.com/services/api/">dokumentację Flickr API</ulink>.
+        </para>
+        <para>
+            W poniższym przykladzie, używamy metody <code>tagSearch()</code> do
+            wyszukiwania zdjęć zawierających etykietę "php".
+        </para>
+        <example id="zend.service.flickr.introduction.example-1">
+            <title>Proste wyszukiwanie zdjęć Flickr</title>
+            <programlisting role="php"><![CDATA[
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$results = $flickr->tagSearch("php");
+
+foreach ($results as $result) {
+    echo $result->title . '<br />';
+}
+]]>
+            </programlisting>
+        </example>
+        <note>
+            <title>Opcjonalny parametr</title>
+            <para>
+                Metoda <code>tagSearch()</code> akceptuje tablicę opcji jako
+                opcjonalny drugi parametr.
+            </para>
+        </note>
+    </sect2>
+    <sect2 id="zend.service.flickr.finding-users">
+        <title>Wyszukiwanie zdjęć użytkowników Flickr i informacji o nich</title>
+        <para>
+            Klasa <code>Zend_Service_Flickr</code> zapewnia kilka możliwości
+            pobierania informacji o użytkownikach serwisu Flickr:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>userSearch()</code>: akceptuje w parametrze treść
+                    zapytania w postaci etykiet oddzielonych spacją oraz tablicę
+                    opcji wyszukiwania jako opcjonalny drugi parametr, a zwraca
+                    zestaw zdjęć jako obiekt
+                    <code>Zend_Service_Flickr_ResultSet</code>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getIdByUsername()</code>: Zwraca ID użytkownika powiązane
+                    z podaną nazwą użytkownika.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getIdByEmail()</code>:Zwraca ID użytkownika powiązane z
+                    podanym adresem email.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <example id="zend.service.flickr.finding-users.example-1">
+            <title>Wyszukiwanie publicznych zdjęć użytkownika serwisu Flickr na podstawie adresu e-mail</title>
+            <para>
+                W tym przykładzie, posiadamy adres e-mail użytkownika serwisu
+                Flickr i szukamy publicznych zdjęć użytkownika używając metody
+                <code>userSearch()</code>:
+            </para>
+            <programlisting role="php"><![CDATA[
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$results = $flickr->userSearch($userEmail);
+
+foreach ($results as $result) {
+    echo $result->title . '<br />';
+}
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.flickr.grouppoolgetphotos">
+        <title>Wyszukiwanie zdjęć w Group Pool</title>
+        <para>
+            Klasa <code>Zend_Service_Flickr</code> pozwala na pobieranie
+            zdjęć grupy w oparciu o jej ID. Użyj metody
+            <code>groupPoolGetPhotos()</code>:
+        </para>
+        <example id="zend.service.flickr.grouppoolgetphotos.example-1">
+            <title>Pobieranie zdjęć z Group Pool na podstawie ID grupy:</title>
+            <programlisting role="php"><![CDATA[
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$results = $flickr->groupPoolGetPhotos($groupId);
+
+foreach ($results as $result) {
+    echo $result->title . '<br />';
+}
+]]>
+            </programlisting>
+        </example>
+        <note>
+            <title>Opcjonalny parametr</title>
+            <para>
+                Metoda <code>groupPoolGetPhotos()</code> akceptuje opcjonalny
+                drugi parametr będący tablicą opcji.
+            </para>
+        </note>
+    </sect2>
+    <sect2 id="zend.service.flickr.getimagedetails">
+        <title>Pobieranie szczegółów zdjęcia Flickr</title>
+        <para>
+            <code>Zend_Service_Flickr</code> ułatwia pobieranie informacji o
+            zdjęciu na podstawie podanego ID zdjęcia. Po prostu użyj metody
+            <code>getImageDetails()</code>, tak jak w poniższym przykładzie:
+        </para>
+        <example id="zend.service.flickr.getimagedetails.example-1">
+            <title>Pobieranie szczegółów zdjęcia Flickr</title>
+            <para>
+                Jeśli posiadasz ID zdjęcia Flickr, pobranie informacji o zdjęciu
+                jest bardzo proste:
+            </para>
+            <programlisting role="php"><![CDATA[
+$flickr = new Zend_Service_Flickr('MY_API_KEY');
+
+$image = $flickr->getImageDetails($imageId);
+
+echo "Obrazek o ID $imageId ma rozmiar $image->width x $image->height pikseli.<br />\n";
+echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
+]]>
+            </programlisting>
+        </example>
+    </sect2>
+    <sect2 id="zend.service.flickr.classes">
+        <title>Klasy wyników Zend_Service_Flickr</title>
+        <para>
+            Poniższe klasy są zwracane przez metody <code>tagSearch()</code> oraz <code>userSearch()</code>:
+            <itemizedlist>
+                <listitem><para><link linkend="zend.service.flickr.classes.resultset"><code>Zend_Service_Flickr_ResultSet</code></link></para></listitem>
+                <listitem><para><link linkend="zend.service.flickr.classes.result"><code>Zend_Service_Flickr_Result</code></link></para></listitem>
+                <listitem><para><link linkend="zend.service.flickr.classes.image"><code>Zend_Service_Flickr_Image</code></link></para></listitem>
+            </itemizedlist>
+        </para>
+        <sect3 id="zend.service.flickr.classes.resultset">
+            <title>Zend_Service_Flickr_ResultSet</title>
+            <para>Reprezentuje zestaw wyników wysuzkiwania Flickr.</para>
+            <note>
+                <para>
+                    Implementuje interfejs <code>SeekableIterator</code>
+                    dla łatwej iteracji (np., używając <code>foreach</code>),
+                    tak samo jak i dla bezpośredniego dostępu do specyficznego
+                    wyniku używając metody <code>seek()</code>.
+                </para>
+            </note>
+            <sect4 id="zend.service.flickr.classes.resultset.properties">
+                <title>Właściwości</title>
+                <table id="zend.service.flickr.classes.resultset.properties.table-1">
+                    <title>Właściwości Zend_Service_Flickr_ResultSet</title>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Nazwa</entry>
+                                <entry>Typ</entry>
+                                <entry>Opis</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>totalResultsAvailable</entry>
+                                <entry>int</entry>
+                                <entry>Całkowita ilość dostępnych wyników wyszukiwania</entry>
+                            </row>
+                            <row>
+                                <entry>totalResultsReturned</entry>
+                                <entry>int</entry>
+                                <entry>Całkowita ilość zwróconych wyników wyszukiwania</entry>
+                            </row>
+                            <row>
+                                <entry>firstResultPosition</entry>
+                                <entry>int</entry>
+                                <entry>Pozycja obecnego zestawu wyników we wszystkich wynikach</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </sect4>
+            <sect4 id="zend.service.flickr.classes.resultset.totalResults">
+                <title>Zend_Service_Flickr_ResultSet::totalResults()</title>
+                <para>
+                    <methodsynopsis>
+                        <type>int</type>
+                        <methodname>totalResults</methodname>
+                        <void />
+                    </methodsynopsis>
+                </para>
+                <para>
+                    Zwraca całkowitą ilość wyników w tym zestawie wyników wyszukiwania.
+                </para>
+                <para>
+                    <link linkend="zend.service.flickr.classes">Powrót do listy klas</link>
+                </para>
+            </sect4>
+        </sect3>
+        <sect3 id="zend.service.flickr.classes.result">
+            <title>Zend_Service_Flickr_Result</title>
+            <para>
+                Pojedynczy wynik wyszukiwania zdjęcia w serwisie Flickr
+            </para>
+            <sect4 id="zend.service.flickr.classes.result.properties">
+                <title>Właściwości</title>
+                <table id="zend.service.flickr.classes.result.properties.table-1">
+                    <title>Właściwości Zend_Service_Flickr_Result</title>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Nazwa</entry>
+                                <entry>Typ</entry>
+                                <entry>Opis</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>id</entry>
+                                <entry>string</entry>
+                                <entry>ID zdjęcia</entry>
+                            </row>
+                            <row>
+                                <entry>owner</entry>
+                                <entry>string</entry>
+                                <entry>Identyfikator NSID właściciela zdjęcia.</entry>
+                            </row>
+                            <row>
+                                <entry>secret</entry>
+                                <entry>string</entry>
+                                <entry>Klucz używany w konstrukcji URL.</entry>
+                            </row>
+                            <row>
+                                <entry>server</entry>
+                                <entry>string</entry>
+                                <entry>Nazwa serwera używana w konstrukcji URL.</entry>
+                            </row>
+                            <row>
+                                <entry>title</entry>
+                                <entry>string</entry>
+                                <entry>Tytuł zdjęcia.</entry>
+                            </row>
+                            <row>
+                                <entry>ispublic</entry>
+                                <entry>string</entry>
+                                <entry>Czy zdjęcie jest publiczne.</entry>
+                            </row>
+                            <row>
+                                <entry>isfriend</entry>
+                                <entry>string</entry>
+                                <entry>Czy zdjęcie jest dla Ciebie widoczne ponieważ jesteś przyjacielem właściciela.</entry>
+                            </row>
+                            <row>
+                                <entry>isfamily</entry>
+                                <entry>string</entry>
+                                <entry>Czy zdjęcie jest dla Ciebie widoczne ponieważ jesteś rodziną właściciela.</entry>
+                            </row>
+                            <row>
+                                <entry>license</entry>
+                                <entry>string</entry>
+                                <entry>Licencja pod jaką dostępne jest zdjęcie.</entry>
+                            </row>
+                            <row>
+                                <entry>dateupload</entry>
+                                <entry>string</entry>
+                                <entry>Data wgrania zdjęcia.</entry>
+                            </row>
+                            <row>
+                                <entry>datetaken</entry>
+                                <entry>string</entry>
+                                <entry>Data zrobienia zdjęcia.</entry>
+                            </row>
+                            <row>
+                                <entry>ownername</entry>
+                                <entry>string</entry>
+                                <entry>Wyświetlana nazwa użytkownika.</entry>
+                            </row>
+                            <row>
+                                <entry>iconserver</entry>
+                                <entry>string</entry>
+                                <entry>Serwer używany przy dołączaniu adresów URL ikon.</entry>
+                            </row>
+                            <row>
+                                <entry>Square</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Miniaturka zdjęcia o wielkości 75x75.</entry>
+                            </row>
+                            <row>
+                                <entry>Thumbnail</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Miniaturka zdjęcia o wielkości 100 pikseli.</entry>
+                            </row>
+                            <row>
+                                <entry>Small</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Wersja zdjęcia o wielkości 240 pikseli.</entry>
+                            </row>
+                            <row>
+                                <entry>Medium</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Wersja zdjęcia o wielkości 500 pikseli.</entry>
+                            </row>
+                            <row>
+                                <entry>Large</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Wersja zdjęcia o wielkości 640 pikseli.</entry>
+                            </row>
+                            <row>
+                                <entry>Original</entry>
+                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>Oryginalne zdjęcie.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <para>
+                    <link linkend="zend.service.flickr.classes">Powrót do listy klas</link>
+                </para>
+            </sect4>
+        </sect3>
+        <sect3 id="zend.service.flickr.classes.image">
+            <title>Zend_Service_Flickr_Image</title>
+            <para>Reprezentuje zdjęcie zwrócone przez wyszukiwanie Flickr.</para>
+            <sect4 id="zend.service.flickr.classes.image.properties">
+                <title>Właściwości</title>
+                <table id="zend.service.flickr.classes.image.properties.table-1">
+                    <title>Właściwości Zend_Service_Flickr_Image</title>
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Nazwa</entry>
+                                <entry>Typ</entry>
+                                <entry>Opis</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>uri</entry>
+                                <entry>string</entry>
+                                <entry>Adres URI oryginalnego zdjęcia</entry>
+                            </row>
+                            <row>
+                                <entry>clickUri</entry>
+                                <entry>string</entry>
+                                <entry>Klikalny adres URI (np. strony Flickr) dla zdjęcia</entry>
+                            </row>
+                            <row>
+                                <entry>width</entry>
+                                <entry>int</entry>
+                                <entry>Szerokość zdjęcia</entry>
+                            </row>
+                            <row>
+                                <entry>height</entry>
+                                <entry>int</entry>
+                                <entry>Wysokość zdjęcia</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+                <para>
+                    <link linkend="zend.service.flickr.classes">Powrót do listy klas</link>
+                </para>
+            </sect4>
+        </sect3>
+    </sect2>
+</sect1>

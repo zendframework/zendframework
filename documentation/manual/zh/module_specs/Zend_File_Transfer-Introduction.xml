@@ -1,0 +1,74 @@
+<sect1 id="zend.file.transfer.introduction">
+
+    <title>Zend_File_Transfer</title>
+
+    <para>
+        <code>Zend_File_Transfer</code> 让开发者控制文件上载和下载。它有用于文件的内置的校验器
+        并且甚至可以用过滤器来修改文件。<code>Zend_File_Transfer</code> 使用适配器，这样对于
+        不同的传输协议如 HTTP、 FTP、 WEBDAV 等等就可以使用相同的 API。
+    </para>
+
+    <note>
+        <title>局限</title>
+        <para>
+            当前的 <code>Zend_File_Transfer</code> 实现包含在 1.6.0 版中，仅限于 HTTP Post 上载。文件下载和
+            其它适配器在下次发行时会增加。没实现的功能会抛出异常。所以应该直接使用 <code>Zend_File_Transfer_Adapter_Http</code> 的实例。
+            当多重适配器可用时，这个就会改变。
+        </para>
+    </note>
+
+    <para>
+        <code>Zend_File_Transfer</code> 的用法非常简单。它包括两个部分：用于上载的 HTTP 表单和用
+        <code>Zend_File_Transfer</code> 来处理上载文件。参见下面的例子：
+    </para>
+
+    <example id="zend.file.transfer.introduction.example">
+        <title> 简单的文件上载表单 </title>
+        <para>
+            本例示范了一个基本的文件上传，它使用 <code>Zend_File_Transfer</code>  来完成。
+            第一部分是文件表单。在例子中，有一个文件要上载。
+        </para>
+        <programlisting><![CDATA[
+<form enctype="multipart/form-data" action="/file/upload" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+        Choose a file to upload: <input name="uploadedfile" type="file" />
+    <br />
+    <input type="submit" value="Upload File" />
+</form>
+]]>
+</programlisting>
+        <para>
+            注意利用 <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> 而不需要手工编写 HTML。
+        </para>
+        <para>
+            下一步是生成上载的接收者。在本例中接收者是 <code>/file/upload</code> 。所以我们就编写
+            带有动作 <code>upload</code> 的控制器 <code>file</code> 。
+        </para>
+        <programlisting role="php"><![CDATA[
+$adapter = new Zend_File_Transfer_Adapter_Http();
+
+$adapter->setDestination('C:\temp');
+
+if (!$adapter->receive()) {
+    $messages = $adapter->getMessages();
+    echo implode("\n", $messages);
+}
+]]>
+        </programlisting>
+        <para>
+            正如你所看到的简单的用法，使用 <code>setDestination</code> 定义一个目的地然后调用 <code>receive()</code>  方法。
+            如果有任何上载错误，就会包含在返回的异常里。
+        </para>
+
+        <note>
+            <title>注意</title>
+            <para>
+                记住这只是个最简单的用法，应该 <emphasis role="strong">永远不要</emphasis>仅仅把它用于实际的环境，
+                因为它有严重的安全问题。实际中需要用校验器来增强安全性。
+            </para>
+        </note>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 tw=80 et:
+-->

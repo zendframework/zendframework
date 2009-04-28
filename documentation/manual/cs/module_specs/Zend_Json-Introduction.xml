@@ -1,0 +1,28 @@
+<sect1 id="zend.json.introduction">
+    <title>Úvod</title>
+    <para>
+        <code>Zend_Json</code> poskytuje užitečné metody pro serializaci PHP
+        do JSON a pro dekódování JSON do PHP. Pro více informací o JSON,
+        <ulink url="http://www.json.org/">navštivte web JSON projektu</ulink>.
+    </para>
+    <para>
+        JSON, JavaScript Object Notation, může být použit pro výměnu dat mezi
+        JavaScriptem a dalšími jazyky. Protože JSON může být přímo zpracovám
+        JavaScriptem, je to rychlejší formát pro výměnu dat než XML.
+    </para>
+
+    <para>
+        <code>Zend_Json</code> navíc poskytuje možnost pro převod jakéhokoliv
+        řetězce formátovaného pomocí XML do řetězce formátovaného pomocí JSON.
+        Tato vestavěná funkce umožní PHP programátorům převádět enterprise data
+        v XML formátu do JSON formátu před odesláním do browser-based Ajax
+        aplikací. Umožnuje snadno převádět data na straně serveru,
+        čímž se vyhneme nepotřebnému parsování XML na straně klienta.
+        Poskytuje užitečnou funkcionalitu, která umožňuje snadnější zpracování
+        dat v aplikaci.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="performance.introduction">
+    <title>導入</title>
+
+    <para>
+        この付録の目的は、Zend Framework
+        アプリケーションのパフォーマンスを向上させるための具体的な作戦を説明することです。
+        いわゆる "Q &amp; A" 形式で、分野ごとに説明してきます。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

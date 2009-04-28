@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ldml SYSTEM "http://www.unicode.org/cldr/dtd/1.6/ldml.dtd">
+<ldml>
+    <identity>
+        <version number="$Revision: 1.1 $"/>
+        <generation date="$Date: 2008/06/02 20:30:10 $"/>
+        <language type="mo"/>
+    </identity>
+    <alias source="ro_MD" path="//ldml"/>
+</ldml>

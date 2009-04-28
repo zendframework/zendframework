@@ -1,0 +1,106 @@
+<sect1 id="zend.controller.basics">
+    <title>Zend_Controller 基础</title>
+
+    <para>
+        <code>Zend_Controller</code>系统被设计为轻量、模块化、和可扩展的系统。虽然它提供了足够多的功能结构让你的系统建立在<code>Zend_Controller</code>之上并共享通用的约定和相似的代码设计，但它是一个最低要求的设计，给用户最大的灵活性和自由度。
+    </para>
+
+    <para>
+        以下图表描述了工作流，下面的说明中详细介绍了之间的交互
+    </para>
+
+    <para>
+        <inlinegraphic width="483" scale="100" align="center" valign="middle"
+            fileref="figures/zend.controller.basics.png" format="PNG" />
+    </para>
+
+    <para>
+        <code>Zend_Controller</code>工作流用若干组件来实现。虽然不需要完全理解所有组件的基础知识来使用它，但是拥有工作流程的知识很有帮助。
+    </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Front</code> 控制了<code>Zend_Controller</code>系统的整个工作流。它是前端控制器（FrontController）模型的解释。<code>Zend_Controller_Front</code>处理所有由服务器接收的请求并负责把请求派发给动作控制器（ActionControllers）(<code>Zend_Controller_Action</code>)。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Request_Abstract</code> (often referred to as the <code>Request Object</code>)描述请求环境和提供设置和读取控制器和动作名字以及任何请求参数的方法。另外它跟踪它所包含的动作是否被<code>Zend_Controller_Dispatcher</code>派遣。抽象请求对象的扩展可被用来封装整个请求环境，为了设置控制器和动作的名字，它允许路由器从请求环境中读出信息。
+                </para>
+
+                <para>
+                    缺省地，<code>Zend_Controller_Request_Http</code>被用来访问整个HTTP请求环境。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Router_Interface</code>用来定义路由器。路由是个过程，在这个过程中它通过检查请求环境来决定哪个个控制器和哪个控制器中的动作应该接受请求。控制器、动作和可选的参数就通过<code>Zend_Controller_Dispatcher_Standard</code>处理来设置在请求对象中。路由只发生一次：在最初收到请求并在第一个控制器被派遣之前。
+                </para>
+
+                <para>
+                    缺省路由器，<code>Zend_Controller_Router_Rewrite</code>，从<code>Zend_Controller_Request_Http</code>取出URI的终点作为参数并基于在url中的路径信息分解成控制器、动作和参数。作为一个例子，URL <code>http://localhost/foo/bar/key/value</code>将被解析为<code>foo</code>控制器、<code>bar</code> 动作和带有一个值<code>value</code>的参数<code>key</code>。
+                </para>
+
+                <para>
+                    <code>Zend_Controller_Router_Rewrite</code>也可以用来匹配任意的路径；参见<link linkend="zend.controller.router">路由器文档</link> 有更多的信息。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Dispatcher_Interface</code>被用来定义派遣器。派遣是个过程，在这个过程中它从请求对象中取出控制器和动作并映射它们到控制器文件/类和在控制器中的动作方法。如果控制器和动作不存在，它派遣缺省的控制器和动作。
+                </para>
+
+                <para>
+                    实际的派遣过程包括初始化控制器类和在这个类中调用动作方法。不像路由，只发生一次，派遣是循环发生的。如果请求对象的派遣状态在任何点上重置，循环将被重复，调用不论哪个当前在请求对象中的动作。第一次循环随请求对象的派遣状态设置（布尔 true）完成，它将完成处理。
+                </para>
+
+                <para>
+                    缺省的派遣器是<code>Zend_Controller_Dispatcher_Standard</code>。它定义控制器为以Controller结尾的 MixedCasedClasses，并且动作为以Action结尾的camelCasedMethods：<code>FooController::barAction()</code>。在这个例子中，控制器是<code>foo</code>，动作是the action as <code>bar</code>。
+                </para>
+
+                <note>
+                    <title> 大小写命名协议 </title>
+
+                    <para>
+                        因为人们经常在大小写上犯错误，所以Zend Framework把路径信息标准化为小写。当然，这会影响你来命名控制器和动作或指向它们的链接。
+                    </para>
+
+                    <para>
+                        如果你想使你的控制器类和动作方法名称有多个混合大小写字或驼峰字，你需要在url中使用'-'或'.'来把它们分开（尽管你可以配置使用的字符）。
+                    </para>
+
+                    <para>
+                        作为例子，如果你打算用<code>FooBarController::bazBatAction()</code>，那么在url中链接时要用<code>/foo-bar/baz-bat</code>或<code>/foo.bar/baz.bat</code>。
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Action</code>是基本的动作控制器组件。每个控制器是一个从<code>Zend_Controller_Action class</code>扩展的单个的类并且应该包含一个或更多的动作方法。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>Zend_Controller_Response_Abstract</code>定义了一个基本的响应类，用来从动作控制器收集和返回响应。头和body的内容它都收集。
+                </para>
+
+                <para>
+                    缺省的响应类是<code>Zend_Controller_Response_Http</code>，它适合用于HTTP环境。
+                </para>
+            </listitem>
+        </itemizedlist>
+
+    <para>
+        <code>Zend_Controller</code>的工作流相当简单。请求被<code>Zend_Controller_Front</code>接收，然后它调用<code>Zend_Controller_Router_Rewrite</code>来决定哪个控制器（和控制器中的动作）被派遣。为了在请求中设置控制器和动作名字<code>Zend_Controller_Router_Rewrite</code>分解URI。<code>Zend_Controller_Front</code>接着进入一个派遣循环。它调用<code>Zend_Controller_Dispatcher_Standard</code>，传递给它请求，派遣在请求（或使用缺省的）中指定的控制器和动作。在控制器完成之后，控制返回到<code>Zend_Controller_Front</code>。如果控制器通过重置请求派遣状态指示其它的控制器应该被派遣，循环将继续并且其它派遣被执行。否则，处理结束。
+    </para>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

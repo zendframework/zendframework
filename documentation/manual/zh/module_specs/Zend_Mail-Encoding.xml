@@ -1,0 +1,12 @@
+<sect1 id="zend.mail.encoding">
+    <title>编码</title>
+    <para>
+        文本和HTML信息在缺省下以Quoted-printable机制编码。在调用<code>addAttachment()</code>方法添加附件的时候，
+        如果没有指定编码方式，都将以base64方式编码，或稍后通过给MIME段对象(<code>Zend_Mime_Part</code>)相应属性赋值来指定编码方式。
+       7Bit和8Bit编码目前仅仅在二进制数据上可行。
+    </para>
+    <para><code>Zend_Mail_Transport_Smtp</code>编码行以一个点(.)或者两个点(..)起始，以确保邮件不违反SMTP协议。</para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,59 @@
+<!-- EN-Revision: 13835 -->
+<sect1 id="zend.pdf.create">
+    <title>Créer et charger des documents PDF</title>
+
+    <para>La classe <classname>Zend_Pdf</classname> représente le document PDF en lui-même et fournis des méthodes pour manipuler
+    l'ensemble du document.</para>
+
+    <para>Pour créer un nouveau document, un nouvel objet <classname>Zend_Pdf</classname> doit être créé.</para>
+
+    <para>La classe <classname>Zend_Pdf</classname> fournis deux méthodes statiques pour charger un PDF existant. Ce sont les
+    méthodes <classname>Zend_Pdf::load()</classname> et <classname>Zend_Pdf::parse()</classname>. Les deux retournent un objet
+    <classname>Zend_Pdf</classname> ou lève une exception en cas d'erreur.</para>
+
+    <example id="zend.pdf.create.example-1">
+        <title>Créer un nouveau document PDF ou en charger un existant</title>
+
+        <programlisting role="php"><![CDATA[
+...
+/// Crée un nouveau document PDF.
+$pdf1 = new Zend_Pdf();
+
+// Charge un document PDF depuis un fichier.
+$pdf2 = Zend_Pdf::load($fileName);
+
+// Charge un document PDF depuis une string
+$pdf3 = Zend_Pdf::parse($pdfString);
+...
+]]></programlisting>
+    </example>
+
+    <para>Le format de fichier PDF supporte la mise à jour incrémentale d'un document. Ainsi chaque fois que le document
+    est mis à jour, une nouvelle version du document est créée. Le module <classname>Zend_Pdf</classname> supporte la récupération
+    d'une version spécifique.</para>
+
+    <para>La version peut-être donnée en second paramètre des méthodes <classname>Zend_Pdf::load()</classname> et
+    <classname>Zend_Pdf::parse()</classname> ou obligatoire dans le cas d'un appel à <classname>Zend_Pdf::rollback()</classname> <footnote>
+            <para>La méthode <classname>Zend_Pdf::rollback()</classname> doit être appelée avant tout changement. Sinon le
+            comportement est indéfini.</para>
+        </footnote></para>
+
+    <example id="zend.pdf.create.example-2">
+        <title>Demander une version particulière d'un document PDF</title>
+
+        <programlisting role="php"><![CDATA[
+...
+// Charge la version précédente d'un document PDF.
+$pdf1 = Zend_Pdf::load($fileName, 1);
+
+// Charge la version précédente d'un document PDF.
+$pdf2 = Zend_Pdf::parse($pdfString, 1);
+
+// Charge la première version d'un document
+$pdf3 = Zend_Pdf::load($fileName);
+$revisions = $pdf3->revisions();
+$pdf3->rollback($revisions - 1);
+...
+]]></programlisting>
+    </example>
+</sect1>

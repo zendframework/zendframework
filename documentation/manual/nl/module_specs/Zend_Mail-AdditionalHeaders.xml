@@ -1,0 +1,22 @@
+<sect1 id="zend.mail.additional-headers">
+    <title>Bijkomende Headers</title>
+    <para>
+        Je kan willekeurige headers zetten met de <code>addHeader</code> methode. Deze methode verwacht
+        twee parameters die de naam en de waarde van het headerveld moeten bevatten. Een derde optionele
+        parameter geeft aan of de header één enkele of meerdere waarden zou moeten hebben:
+    </para>
+    <example>
+        <title>E-mailbericht Headers toevoegen</title>
+        <programlisting role="php"><![CDATA[
+<?php
+require_once 'Zend/Mail.php';
+$mail = new Zend_Mail();
+$mail->addHeader('X-MailGenerator', 'MijnSuperToepassing');
+$mail->addHeader('X-greetingsTo', 'Mamma', true); // Meerdere waarden
+$mail->addHeader('X-greetingsTo', 'Pappa', true);
+?>]]>   </programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

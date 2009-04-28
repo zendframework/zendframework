@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.search.lucene.index-creation">
+    <title>インデックスの構築</title>
+
+    <sect2 id="zend.search.lucene.index-creation.creating">
+        <title>新しいインデックスの作成</title>
+
+        <para>
+            インデックスの作成機能および更新機能は、
+            <classname>Zend_Search_Lucene</classname> モジュールと Java Lucene で実装されています。
+            これらのいずれかの機能を使用して作成したインデックスについて、
+            <classname>Zend_Search_Lucene</classname> による検索が可能です。
+        </para>
+
+        <para>
+            以下の PHP コードでは、<classname>Zend_Search_Lucene</classname> のインデックス作成
+            API を用いてファイルをインデックス化する例を示します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// インデックスを作成します
+$index = Zend_Search_Lucene::create('/data/my-index');
+
+$doc = new Zend_Search_Lucene_Document();
+
+// ドキュメントの URL を、検索結果の ID として保存します。
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+
+// ドキュメントの内容をインデックス化します。
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
+
+// ドキュメントをインデックスに追加します。
+$index->addDocument($doc);
+]]>
+        </programlisting>
+
+        <para>
+            新しく追加されたドキュメントは、
+            すぐにインデックスから取得できるようになります。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.updating">
+        <title>インデックスの更新</title>
+
+        <para>
+            既存のインデックスを更新する際にも同じ手順を使用します。ただひとつの違いは、
+            create() メソッドではなく open() メソッドをコールするということです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// 既存のインデックスをオープンします。
+$index = Zend_Search_Lucene::open('/data/my-index');
+
+$doc = new Zend_Search_Lucene_Document();
+// ドキュメントの URL を、検索結果の ID として保存します。
+$doc->addField(Zend_Search_Lucene_Field::Text('url', $docUrl));
+// ドキュメントの内容をインデックス化します。
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
+                                                  $docContent));
+
+// ドキュメントをインデックスに追加します。
+$index->addDocument($doc);
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.document-updating">
+        <title>ドキュメントの更新</title>
+
+        <para>
+            Lucene インデックスファイルは、ドキュメントの更新をサポートしていません。
+            更新するためには、いったん削除した上で改めて追加する必要があります。
+        </para>
+
+        <para>
+            そのためには、インデックス内部のドキュメント ID を使用して
+            <classname>Zend_Search_Lucene::delete()</classname> メソッドをコールします。
+            この ID は、クエリでヒットした内容から 'id' プロパティで取得できます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$removePath = ...;
+$hits = $index->find('path:' . $removePath);
+foreach ($hits as $hit) {
+    $index->delete($hit->id);
+}
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.counting">
+        <title>インデックスの大きさの取得</title>
+
+        <para>
+            <classname>Zend_Search_Lucene</classname> のインデックスの大きさを知るには、二通りの方法があります。
+        </para>
+
+        <para>
+             <classname>Zend_Search_Lucene::maxDoc()</classname> は、
+             最大のドキュメント番号にひとつ足した値を返します。
+             これは、削除されたドキュメントを含む、インデックス内のドキュメントの総数を表します。
+             そこで、このメソッドのシノニムとして <classname>Zend_Search_Lucene::count()</classname>
+             を用意しました。
+        </para>
+
+        <para>
+             <classname>Zend_Search_Lucene::numDocs()</classname> は、削除されていないドキュメントの総数を返します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$indexSize = $index->count();
+$documents = $index->numDocs();
+]]>
+        </programlisting>
+
+        <para>
+            <classname>Zend_Search_Lucene::isDeleted($id)</classname>
+            メソッドで、そのドキュメントが削除されているかどうかを調べます。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+for ($count = 0; $count < $index->maxDoc(); $count++) {
+    if ($index->isDeleted($count)) {
+        echo "ドキュメント #$id は削除されました。\n";
+    }
+}
+]]>
+        </programlisting>
+
+        <para>
+            インデックスの最適化を行うと、削除されたドキュメントを取り除き、
+            ドキュメントの ID を前のほうに詰め込みます。
+            つまり、内部でのドキュメント ID は変わる可能性があります。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.optimization">
+        <title>インデックスの最適化</title>
+
+        <para>
+            Lucene のインデックスは、セグメントから構成されます。
+            各セグメントはデータの一部分を表し、それぞれ完全に独立しています。
+        </para>
+        <para>
+            Lucene インデックスセグメントのファイルは、その性質上更新することはできません。
+            セグメントを更新するには、セグメント全体を再構成する必要があります
+            (Lucene インデックスファイルのフォーマットについての詳細は、
+            <ulink url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>
+            を参照ください)
+            <footnote><para>現在サポートしている Lucene インデックスファイルフォーマットのバージョンは v2.3 (ZF 1.6 以降) です</para></footnote>。
+            このことより、新しいドキュメントをインデックスに追加する際には、
+            新しいセグメントを作成することになります。
+        </para>
+        <para>
+            セグメントの数が増えるとインデックスの効率が下がります。
+            しかし、インデックスの最適化によってこれを修復することができます。
+            最適化により、複数のセグメントに分かれているデータがひとつにまとめられます。
+            この処理も、セグメントを更新することはありません。まず大きなセグメントを新しく作成し、
+            これまでいくつものセグメントに分かれていたデータをひとまとめにしてそこに格納し、
+            その後でセグメント一覧 ('segments' ファイル) を更新します。
+        </para>
+
+        <para>
+            インデックス全体の最適化を行うには、<classname>Zend_Search_Lucene::optimize()</classname>
+            をコールします。これは、すべてのインデックスセグメントを新しいひとつのセグメントにまとめます。
+        </para>
+        <programlisting role="php"><![CDATA[
+// 既存のインデックスをオープンします
+$index = Zend_Search_Lucene::open('/data/my-index');
+
+// インデックスを最適化します
+$index->optimize();
+]]>
+        </programlisting>
+
+        <para>
+            自動的なインデックス最適化により、インデックスの一貫性を保ちます。
+        </para>
+        <para>
+            自動的な最適化は、いくつかのインデックスオプションにもとづいて段階的に進められます。
+            まず非常に小さなセグメントが少し大きめのセグメントに統合され、
+            さらにそれがもう少し大きな別のセグメントに統合され、... といった具合です。
+        </para>
+
+        <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">
+            <title>自動最適化オプション <emphasis>MaxBufferedDocs</emphasis></title>
+            <para>
+                <emphasis>MaxBufferedDocs</emphasis> は、メモリ内に溜め込まれたドキュメントを
+                新しいセグメントに書き出す際の最小ドキュメント数です。
+            </para>
+            <para>
+                <emphasis>MaxBufferedDocs</emphasis> の値の取得や設定は、<code>$index->getMaxBufferedDocs()</code>
+                あるいは <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code> のコールによって行います。
+            </para>
+            <para>
+                デフォルト値は 10 です。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.search.lucene.index-creation.optimization.maxmergedocs">
+            <title>自動最適化オプション <emphasis>MaxMergeDocs</emphasis></title>
+            <para>
+                <emphasis>MaxMergeDocs</emphasis> は、addDocument()
+                によってまとめられる最大のドキュメント数です。小さな値
+                (例えば 10.000 未満) は、対話的にインデックスを作成していく際に有効です。
+                これにより、インデックス化の際の処理の中断時間を数秒に抑えられます。
+                大きな値は、バッチ処理の際に有効です。これにより、検索をより高速に行えるようになります。
+            </para>
+            <para>
+                <emphasis>MaxMergeDocs</emphasis> の値の取得や設定は、<code>$index->getMaxMergeDocs()</code>
+                あるいは <code>$index->setMaxMergeDocs($maxMergeDocs)</code> のコールによって行います。
+            </para>
+            <para>
+                デフォルト値は PHP_INT_MAX です。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
+            <title>自動最適化オプション <emphasis>MergeFactor</emphasis></title>
+            <para>
+                <emphasis>MergeFactor</emphasis> は、addDocument() でセグメントをまとめる頻度を指定します。
+                小さな値を指定すると、インデックス作成の際に使用する RAM の量を抑えられます。
+                また最適化されていないインデックスへの検索が高速になります。しかし、
+                インデックス作成の速度は遅くなります。大きな値を指定すると、インデックス作成の際の
+                RAM の使用量が多くなります。また最適化されていないインデックスへの検索速度が落ちます。
+                しかしインデックスの作成は高速に行えます。大きな値 (&gt; 10)
+                はバッチ的なインデックス作成の際に有効で、小さな値 (&lt; 10)
+                は対話的なインデックス保守の際に有効です。
+            </para>
+            <para>
+                <emphasis>MergeFactor</emphasis>
+                は、自動最適化が行われる平均セグメント数にほぼ等しくなります。
+                あまり大きな値を指定すると、新しいセグメントにまとめる前に
+                セグメント数が多くなってしまいます。これは
+                "failed to open stream: Too many open files"
+                というエラーの原因となります。制限は、システムに依存します。
+            </para>
+            <para>
+                <emphasis>MergeFactor</emphasis> の値の取得や設定は、<code>$index->getMergeFactor()</code>
+                あるいは <code>$index->setMergeFactor($mergeFactor)</code> のコールによって行います。
+            </para>
+            <para>
+                デフォルト値は 10 です。
+            </para>
+            <para>
+                Lucene Java および Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
+                を使用してインデックスを最適化することもできます。
+                Luke の最新リリース (v0.8) は Lucene v2.3 をベースにしており、
+                現在の <classname>Zend_Search_Lucene</classname> コンポーネントの実装 (ZF 1.6) と互換性があります。
+                古いのバージョンの <classname>Zend_Search_Lucene</classname> の実装を使う場合は、
+                それと互換性のある別のバージョンの Java Lucene ツールを使う必要があります。
+                <itemizedlist>
+                    <listitem>
+                        <para>ZF 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
+                    </listitem>
+                    <listitem>
+                        <para>ZF 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.permissions">
+        <title>パーミッション</title>
+
+        <para>
+            インデックスファイルは、デフォルトでは全員が読み書き可能となっています。
+        </para>
+
+        <para>
+            この設定を上書きするには
+            <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname>
+            メソッドを使用します。
+        </para>
+
+
+        <programlisting role="php"><![CDATA[
+// 現在のデフォルトのファイルパーミッションを取得します
+$currentPermissions =
+    Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();
+
+// 現在のユーザとグループに対してのみ読み書きアクセス権限を付与します
+Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
+]]>
+        </programlisting>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.index-creation.limitations">
+        <title>制限事項</title>
+
+        <sect3 id="zend.search.lucene.index-creation.limitations.index-size">
+            <title>インデックスの大きさ</title>
+            <para>
+                インデックスの大きさは、
+                32 ビットプラットフォームでは最大 2GB までとなります。
+            </para>
+
+            <para>
+                64 ビットプラットフォームを使用すれば、
+                もっと大きなインデックスを扱えます。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.search.lucene.index-creation.limitations.filesystems">
+            <title>サポートするファイルシステム</title>
+            <para>
+                <classname>Zend_Search_Lucene</classname> は、
+                検索処理やインデックス更新、インデックスの最適化を処理する際に
+                <code>flock()</code> を使用しています。
+            </para>
+
+            <para>
+                PHP の <ulink url="http://www.php.net/manual/ja/function.flock.php">マニュアル</ulink>
+                によると、
+                "<code>flock()</code> は NFS 及び他の多くのネットワークファイルシステムでは動作しません"
+                とのことです。
+            </para>
+
+            <para>
+                ネットワークファイルシステムは、<classname>Zend_Search_Lucene</classname> では使用しないでください。
+            </para>
+        </sect3>
+    </sect2>
+</sect1>
+
+<!--
+vim:se ts=4 sw=4 et:
+-->

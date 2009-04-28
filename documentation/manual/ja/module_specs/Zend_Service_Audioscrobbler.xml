@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.audioscrobbler">
+
+    <title>Zend_Service_Audioscrobbler</title>
+
+    <sect2 id="zend.service.audioscrobbler.introduction">
+
+        <title>導入</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、Audioscrobbler REST ウェブサービス
+            を使用するためのシンプルな API です。Audioscrobbler Web Service
+            は、ユーザ (Users) やアーティスト (Artists)、アルバム (Albums)、曲 (Tracks)、
+            タグ (Tags)、グループ (Groups) そしてフォーラム (Forums) といったデータへの
+            アクセス機能を提供します。
+            <classname>Zend_Service_Audioscrobbler</classname> クラスのメソッドは、
+            これらの単語のいずれかで始まります。Audioscrobbler Web Service
+            の文法および名前空間が、<classname>Zend_Service_Audioscrobbler</classname>
+            にまとめられています。Audioscrobbler REST ウェブサービスについての詳細は
+            <ulink url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
+            のサイト</ulink> を参照ください。
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.users">
+
+        <title>ユーザ (Users)</title>
+
+        <para>
+            特定のユーザについての情報を取得するには、
+            まず <code>setUser()</code> メソッドを使用して
+            データを取得したいユーザを選択します。
+            <classname>Zend_Service_Audioscrobbler</classname> では、
+            指定したユーザについての情報を取得するためのいくつかのメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>userGetProfileInformation()</code>:
+                        現在のユーザのプロファイル情報を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopArtists()</code>:
+                        現在のユーザが一番よく聴いているアーティストの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopAlbums()</code>:
+                        現在のユーザが一番よく聴いているアルバムの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTracks()</code>:
+                        現在のユーザが一番よく聴いている曲の一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTags()</code>:
+                        現在のユーザが一番よく指定しているタグの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForArtist()</code>:
+                        アーティストを <code>setArtist()</code> で設定している必要があります。
+                        現在のユーザが、そのアーティストに対して一番よく指定しているタグを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForAlbum()</code>:
+                        アルバムを <code>setAlbum()</code> で設定している必要があります。
+                        現在のユーザが、そのアルバムに対して一番よく指定しているタグを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetTopTagsForTrack()</code>:
+                        曲を <code>setTrack()</code> で設定している必要があります。
+                        現在のユーザが、その曲に対して一番よく指定しているタグを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetFriends()</code>:
+                        現在のユーザの友人のユーザ名を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetNeighbours()</code>:
+                        現在のユーザと同じようなものを聴いているユーザ名を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentTracks()</code>:
+                        現在のユーザが最近聴いた 10 曲の情報を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentBannedTracks()</code>:
+                        現在のユーザが最近拒否した 10 曲の一覧を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentLovedTracks()</code>:
+                        現在のユーザが最近お気に入りにした 10 曲の一覧を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentJournals()</code>:
+                        現在のユーザの直近の記事エントリの一覧を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetWeeklyChartList()</code>:
+                        現在のユーザの週間チャートが存在する週の一覧を含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyArtistChart()</code>:
+                        現在のユーザの直近の週間アーティストチャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyAlbumChart()</code>:
+                        現在のユーザの直近の週間アルバムチャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetRecentWeeklyTrackChart()</code>:
+                        現在のユーザの直近の週間曲チャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>:
+                        現在のユーザの <code>$fromDate</code> から <code>$toDate</code>
+                        までの週間アーティストチャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>:
+                        現在のユーザの <code>$fromDate</code> から <code>$toDate</code>
+                        までの週間アルバムチャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>userGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>:
+                        現在のユーザの <code>$fromDate</code> から <code>$toDate</code>
+                        までの週間曲チャートを含む SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.service.audioscrobbler.users.example.profile_information">
+
+            <title>ユーザのプロファイル情報の取得</title>
+
+            <para>
+                この例では、<code>setUser()</code> メソッドおよび
+                <code>userGetProfileInformation()</code> メソッドを使用して、
+                指定したユーザのプロファイル情報を取得します。
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// プロファイル情報を取得したいユーザを設定します
+$as->setUser('BigDaddy71');
+// BigDaddy71 のプロファイル情報を取得します
+$profileInfo = $as->userGetProfileInformation();
+// その一部を表示します
+print "$profileInfo->realname の情報は "
+    . "$profileInfo->url にあります";
+]]>
+            </programlisting>
+
+        </example>
+
+        <example id="zend.service.audioscrobbler.users.example.weekly_artist_chart">
+
+            <title>あるユーザの週間アーティストチャートの取得</title>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// 週間アーティストチャートを取得したいユーザを設定します
+$as->setUser('lo_fye');
+// チャートデータが存在する、過去の一覧を取得します
+$weeks = $as->userGetWeeklyChartList();
+if (count($weeks) < 1) {
+    echo 'データが存在しません';
+}
+sort($weeks); // 週のリストを並べ替えます
+
+$as->setFromDate($weeks[0]); // 開始日を設定します
+$as->setToDate($weeks[0]); // 終了日を設定します
+
+$previousWeeklyArtists = $as->userGetPreviousWeeklyArtistChart();
+
+echo '週間アーティストチャート '
+   . date('Y-m-d h:i:s', $as->from_date)
+   . '<br />';
+
+foreach ($previousWeeklyArtists as $artist) {
+    // アーティスト名と、プロファイルへのリンクを表示します
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+}
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.artists">
+
+        <title>アーティスト (Artists)</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、<code>setArtist()</code>
+            で指定した特定のアーティストに関するデータを取得するためのいくつかのメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>artistGetRelatedArtists()</code>:
+                        現在のアーティストと似たアーティストの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopFans()</code>:
+                        現在のアーティストを最もよく聴いているユーザの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopTracks()</code>:
+                        現在のアーティストの、高評価の曲の一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopAlbums()</code>:
+                        現在のアーティストの、高評価のアルバムの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>artistGetTopTags()</code>:
+                        現在のアーティストによく指定されているタグの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+        <example id="zend.service.audioscrobbler.artists.example.related_artists">
+
+            <title>関連するアーティストの取得</title>
+
+            <programlisting role="php"><![CDATA[
+$as = new Zend_Service_Audioscrobbler();
+// 関連アーティストを取得したいアーティストを設定します
+$as->setArtist('LCD Soundsystem');
+// 関連アーティストを取得します
+$relatedArtists = $as->artistGetRelatedArtists();
+foreach ($relatedArtists as $artist) {
+    // 関連アーティストを表示します
+    print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
+}
+]]>
+            </programlisting>
+
+        </example>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.tracks">
+
+        <title>曲 (Tracks)</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、<code>setTrack()</code>
+            メソッドで指定した曲についてのデータを取得する、ふたつのメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>trackGetTopFans()</code>:
+                        現在の曲を最もよく聴いているユーザの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>trackGetTopTags()</code>:
+                        現在の曲に最もよく適用されているタグの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.tags">
+
+        <title>タグ (Tags)</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、<code>setTag()</code>
+            メソッドで指定したタグに関するデータを取得するためのいくつかのメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>tagGetOverallTopTags()</code>:
+                        Audioscrobbler で最もよく使用されているタグの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopArtists()</code>:
+                        現在のタグが最もよく適用されているアーティストの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopAlbums()</code>:
+                        現在のタグが最もよく適用されているアルバムの一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>tagGetTopTracks()</code>:
+                        現在のタグが最もよく適用されている曲の一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.groups">
+
+        <title>グループ (Groups)</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、<code>setGroup()</code>
+            メソッドで指定したグループに関するデータを取得するためのいくつかのメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentJournals()</code>:
+                        現在のグループのユーザが最近投稿した記事の一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetWeeklyChart()</code>:
+                        現在のグループの週間チャートが存在する週の一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyArtistChart()</code>:
+                        現在のグループの直近の週間アーティストチャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyAlbumChart()</code>:
+                        現在のグループの直近の週間アルバムチャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetRecentWeeklyTrackChart()</code>:
+                        現在のグループの直近の週間曲チャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>:
+                        <code>setFromDate()</code> および <code>setToDate()</code>
+                        が必要です。現在のグループの、fromDate から toDate
+                        までの週間アーティストチャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>:
+                        <code>setFromDate()</code> および <code>setToDate()</code>
+                        が必要です。現在のグループの、fromDate から toDate
+                        までの週間アルバムチャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>groupGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>:
+                        現在のグループの、fromDate から toDate
+                        までの週間曲チャートを含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.service.audioscrobbler.forums">
+
+        <title>フォーラム (Forums)</title>
+
+        <para>
+            <classname>Zend_Service_Audioscrobbler</classname> は、<code>setForum()</code>
+            メソッドで指定した特定のフォーラムの情報を取得するメソッドを提供しています。
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>forumGetRecentPosts()</code>:
+                        現在のフォーラムの最近の投稿一覧を含む
+                        SimpleXML オブジェクトを返します。
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

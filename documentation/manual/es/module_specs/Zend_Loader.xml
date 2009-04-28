@@ -1,0 +1,235 @@
+<!-- versión 12819 -->
+<sect1 id="zend.loader.load">
+
+    <title>Cargando archivos y clases dinámicamente</title>
+
+    <para>
+        La clase Zend_Loader incluye métodos para ayudar a cargar archivos
+        dinámicamente.
+    </para>
+
+    <tip>
+        <title>Zend_Loader vs. require_once()</title>
+        <para>
+            Los métodos de <code>Zend_Loader</code> tienen más utilidad si el 
+            nombre de archivo que necesita cargar es variable. Por ejemplo, 
+            si éste se basa en un parametro de entrada del usuario o argumento 
+            de un método. Si carga un archivo o clase cuyo nombre es constante, no
+            hay ningún beneficio al usar <code>Zend_Loader</code> sobre el uso 
+            de funciones tradicionales de PHP como 
+            <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
+        </para>
+    </tip>
+
+    <sect2 id="zend.loader.load.file">
+
+        <title>Cargando Archivos</title>
+
+        <para>
+            El método estático <code>Zend_Loader::loadFile()</code> carga un archivo
+            PHP. El archivo cargado puede contener cualquier código PHP.
+            El método se comporta como un envoltorio para la función PHP
+            <ulink url="http://php.net/include"><code>include()</code></ulink>.
+            Este método devuelve un booleano false en caso de fallo, por ejemplo,
+			si el archivo especificado no existe.
+        </para>
+
+        <example id="zend.loader.load.file.example">
+            <title>Ejemplo del Método loadFile()</title>
+            <programlisting role="php"><![CDATA[
+Zend_Loader::loadFile($filename, $dirs=null, $once=false);
+]]>
+            </programlisting>
+    </example>
+
+        <para>
+            El argumento <code>$filename</code> especifica el archivo que se va a cargar,
+            el cual no debe contener ninguna información de rutas.
+            Una verificación de seguridad es efectuada sobre <code>$filename</code>.
+            El archivo <code>$filename</code> sólo puede contener caracteres alfanuméricos,
+            guiones ("-"), barras bajas ("_"), o puntos (".").
+            No hay ninguna restricción en el argumento <code>$dirs</code>.
+        </para>
+
+        <para>
+            El parámetro <code>$dirs</code> especifica en qué carpetas buscar el archivo.
+			Si el valor es <code>NULL</code>, sólo se buscará en el <code>include_path</code>
+            ; si el valor es un string o un array, se buscará en la carpeta o carpetas especificadas
+            , seguidas del <code>include_path</code>.
+        </para>
+
+        <para>
+            El argumento <code>$once</code> es un booleano.  Si es <code>TRUE</code>,
+            <code>Zend_Loader::loadFile()</code> esa la función PHP
+            <ulink url="http://php.net/include"><code>include_once()</code></ulink>
+            para cargar el archivo, de lo contrario se utiliza la función PHP
+            <ulink url="http://php.net/include_once"><code>include()</code></ulink>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.loader.load.class">
+
+        <title>Cargando Clases</title>
+
+        <para>
+            El método estático <code>Zend_Loader::loadClass($class, $dirs)</code>
+            carga un archivo PHP y comprueba la existencia de la clase.
+        </para>
+
+        <example id="zend.loader.load.class.example">
+            <title>Ejemplo del método loadClass()</title>
+            <programlisting role="php"><![CDATA[
+Zend_Loader::loadClass('Container_Tree',
+    array(
+        '/home/production/mylib',
+        '/home/production/myapp'
+    )
+);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            La cadena que especifica la clase es convertida a una ruta relativa sustituyendo las barras
+			bajas (_) por el separador de carpeta de su Sistema Operativo, y añadiendo
+            '.php'. En el ejemplo de arriba, 'Container_Tree' se convierte en 'Container/Tree.php' en Windows.
+        </para>
+
+        <para>
+            Si <code>$dirs</code> es una cadena o un array,
+            <code>Zend_Loader::loadClass()</code> busca las carpetas en el 
+			orden suministrado. El primer archivo encontrado es cargado. Si el archivo
+			no existe en el <code>$dirs</code> especificado, entonces se busca en el
+            <code>include_path</code> del entorno PHP.
+        </para>
+
+        <para>
+            Si el archivo no es encontrado o la clase no existe después de la carga,
+            <code>Zend_Loader::loadClass()</code> lanza una <code>Zend_Exception</code>.
+        </para>
+
+        <para>
+            <code>Zend_Loader::loadFile()</code> se usa para cargar, así que
+			el nombre de la clase puede contener únicamente caracteres alfanuméricos,
+			guiones ('-'), barras bajas ('_'), y puntos ('.').
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.loader.load.isreadable">
+
+        <title>Comprobando si un Archivo Puede Ser Leído</title>
+
+        <para>
+            El método estático <code>Zend_Loader::isReadable($pathname)</code>
+            devuelve <code>TRUE</code> si el archivo en la ruta $pathname existe
+			y tiene permisos de lectura, <code>FALSE</code> en caso contrario.
+        </para>
+
+        <example id="zend.loader.load.isreadable.example">
+            <title>Ejemplo del método isReadable()</title>
+            <programlisting role="php"><![CDATA[
+if (Zend_Loader::isReadable($filename)) {
+    // hace algo con $filename
+}
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            El argumento <code>$filename</code> especifica el nombre de archivo que
+			comprobar.  Puede contener información de la ruta.
+            Este método envuelve la función PHP
+            <ulink url="http://php.net/is_readable"><code>is_readable()</code></ulink>.
+            La función PHP no busca en <code>include_path</code>,
+            mientras que <code>Zend_Loader::isReadable()</code> sí.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.loader.load.autoload">
+
+        <title>Usando el Autoloader</title>
+
+        <para>
+            La clase <code>Zend_Loader</code> contiene un método que se puede registrar
+			con PHP SPL autoloader.  <code>Zend_Loader::autoload()</code> es el método
+            callback.  Por comodidad, <code>Zend_Loader</code> permite a la función
+            <code>registerAutoload()</code> registrar su método
+            <code>autoload()</code>.  Si la extensión <code>spl_autoload</code>
+            no está presente en el entorno PHP, entonces el método
+            <code>registerAutoload()</code> lanza una <code>Zend_Exception</code>.
+        </para>
+
+        <example id="zend.loader.load.autoload.example">
+            <title>Ejemplo de registro del método callback del autoloader</title>
+            <programlisting role="php"><![CDATA[
+Zend_Loader::registerAutoload();
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Después de registrar el callback de autoload de Zend Framework, se pueden
+			referenciar clases de Zend Framework sin tener que cargarlas
+            explícitamente.  El método <code>autoload()</code> usa automáticamente
+            <code>Zend_Loader::loadClass()</code> cuando referencie una clase.
+        </para>
+
+        <para>
+            Si ha extendido la clase <code>Zend_Loader</code>, se puede pasar un
+			argumento opcional a <code>registerAutoload()</code>, para especificar
+			la clase a partir de la cual registrar un método <code>autoload()</code>.
+        </para>
+
+        <example id="zend.loader.load.autoload.example-extended">
+            <title>Ejemplo de registro del método de callback autoload desde una clase
+			extendida</title>
+            <para>
+                Debido a la semántica de referencia de funciones estáticas en PHP,
+				se debe implementar código tanto para la clase <code>loadClass()</code>
+                como <code>autoload()</code>, y <code>autoload()</code>
+                debe llamar a <code>self::loadClass()</code>.  Si su método
+                <code>autoload()</code> delega en su padre la llamada a
+				<code>self::loadClass()</code>, entonces llamará 
+				al método con ese nombre en la clase padre, no la subclase.
+            </para>
+            <programlisting role="php"><![CDATA[
+class My_Loader extends Zend_Loader
+{
+    public static function loadClass($class, $dirs = null)
+    {
+        parent::loadClass($class, $dirs);
+    }
+
+    public static function autoload($class)
+    {
+        try {
+            self::loadClass($class);
+            return $class;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+}
+
+Zend_Loader::registerAutoload('My_Loader');
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            Se puede eliminar un callback de autoload.  
+			<code>registerAutoload()</code> tiene un segundo parámetro opcional,
+            que es <code>true</code> por defecto. Si este parámetro es
+            <code>false</code>, el callback de autoload será borrado de la pila
+            de autoload SPL.
+        </para>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.router.routes.regex">
+    <title>Zend_Controller_Router_Route_Regex</title>
+
+    <para>
+        Zusätzlich zu den standard statischen Routetypen, ist ein Regular Expression Routetyp vorhanden. Diese
+        Route bietet mehr Power und Flexibilität als die anderen, aber auf leichten Kosten von Komplexität.
+        Wärend der selben Zeit, sollte Sie schneller als die Standardroute sein.
+    </para>
+
+    <para>
+        Wie die Standardroute, muß diese Route mit einer Routendefinition und einigen Standardwerten initialisiert
+        werden. Lasst uns eine Archivroute als Beispiel erstellen, ähnlich der zuletzt definierten, nur das dieses
+        Mal die Regex Route verwendet wird:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array(
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        Jedes definierte Regex Subpattern wird in das Anfrageobjekt injiziiert. Mit dem obigen Beispiel, nachdem
+        <code>http://domain.com/archive/2006</code> erfolgreich geprüft wurde, kann das resultierende Wertearray
+        so aussehen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    1            => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            Führende und folgende Schrägstriche werden von der URL im Router vor dem Vergleich entfernt. Als
+            Ergebnis, wird ein Vergleich der URL <code>http://domain.com/foo/bar/</code>, ein Regex von
+            <code>foo/bar</code> inkludieren, aber nicht <code>/foo/bar</code>.
+        </para>
+    </note>
+
+    <note>
+        <para>
+            Zeilenbeginn und Endanker (normalerweise '^' und '$') werden automatisch allen Ausdrücken vor- und
+            nachgesetzt. Deswegen sollten Sie nicht in den Regular Expressions verwendet werden, und der
+            komplette String sollte entsprechen.
+        </para>
+    </note>
+
+    <note>
+        <para>
+            Diese Routeklasse verwendet das <code>#</code> Zeichen als Begrenzer. Das bedeutet das ein Hashzeichen
+            ('#') kommentiert werden muß aber keine Schrägstriche ('/') in der Routendefinition. Da das '#' Zeichen
+            (Anker genannt) selben an einen Webserver übergeben wird, wird man dieses Zeichen selten in der eigenen
+            regex verwenden.
+        </para>
+    </note>
+
+    <para>
+        Die Inhalte von definierten Subpattern können auf dem üblichen Weg bekommen werden:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+public function showAction()
+{
+    $request = $this->getRequest();
+    $year    = $request->getParam(1); // $year = '2006';
+}
+]]>
+    </programlisting>
+
+    <note>
+        <para>Beachte das der Schlüssel ein Integer ist (1) anstatt ein String ('1').</para>
+    </note>
+
+    <para>
+        Diese Route wird jetzt noch nicht exakt gleich wie Ihr Gegenspieler, die Standardroute, arbeiten da der
+        Standard für 'year' noch nicht gesetzt ist. Und was jetzt noch nicht offensichtlich ist, ist das wir ein
+        Problem mit endenden Schrägstrichen haben, selbst wenn wir einen Standard für das Jahr definieren und das
+        Subpattern optional machen. Die Lösung ist, den ganzen year Teil optional zu nachen zusammen mit dem
+        Schrägstrich, aber nur den nummerischen Teil zu holen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive(?:/(\d+))?',
+    array(
+        1            => '2006',
+        'controller' => 'archive',
+        'action'     => 'show'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        Jetzt betrachten wir das Problem das möglicherweise schon selbst gefunden wurde. Die Verwendung von Integer
+        basierten Schlüsseln für Parameter ist keine einfach zu handhabende Lösung und kann, wärend einer langen
+        Laufzeit, potentiell problematisch sein. Hier kommt der dritte Parameter ins Spiel. Dieser Parameter ist
+        ein assoziatives Array das einer Karte von Regex Subpatterns zu Parametern benannten Schlüsseln entspricht.
+        Betrachten wir ein einfacheres Beispiel:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array(
+        'controller' => 'archive',
+        'action' => 'show'
+    ),
+    array(
+        1 => 'year'
+    )
+);
+$router->addRoute('archive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        Als Ergebnis werden die folgenden Werte in die Anfrage injiziiert:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'year'       => '2006',
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <para>
+        Die Karte kann in jede Richtung definiert werden damit Sie in jeder Umgebung funktioniert. Schlüssel können
+        Variablennamen oder Indezes von Subpattern enthalten:
+    </para>
+
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array(1 => 'year')
+);
+
+// ODER
+
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array('year' => 1)
+);
+]]>
+    </programlisting>
+
+    <note>
+        <para>
+            Schlüssel von Subpattern müssen durch Integer repräsentiert werden.
+        </para>
+    </note>
+
+    <para>
+        Es gilt zu beachten das der nummerische Index in den Anfragewerten jetzt weg ist und eine benannte Variable
+        statt Ihm angezeigt wird. Natürlich können nummerische und benannte Variablen gemischt werden wenn das
+        gewünscht ist:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)/page/(\d+)',
+    array( ... ),
+    array('year' => 1)
+);
+]]>
+    </programlisting>
+
+    <para>
+        Das führt zu gemischten Werten die in der Anfrage vorhanden sind. Als Beispiel, wird die URL
+        <code>http://domain.com/archive/2006/page/10</code> zu folgenden Werte führen:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$values = array(
+    'year'       => '2006',
+    2            => 10,
+    'controller' => 'archive',
+    'action'     => 'show'
+);
+]]>
+    </programlisting>
+
+    <para>
+        Da Regex Patterns nicht einfach rückgängig zu machen sind, muß eine umgekehrte URL vorbereitet werden wenn
+        ein URL Helfer verwendet werden soll oder sogar eine Herstellungsmethode dieser Klasse. Dieser
+        umgekehrte Pfad wird durch einen String dargestellt der durch sprintf() durchsucht werden kann und als
+        vierter Parameter definiert wird:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'archive/(\d+)',
+    array( ... ),
+    array('year' => 1),
+    'archive/%s'
+);
+]]>
+    </programlisting>
+
+    <para>
+        Da all das bereits etwas ist das durch die Bedeutung eines standardmäßigen Route Objektes möglich ist
+        kommt natürlich die Frage aus worin der Vorteil einer regex Route besteht? Primär erlaubt Sie jeden Typ von
+        URL zu beschreiben ohne irgendwelche Einschränkungen. Angenommen man hat einen Blog und will eine URL wie
+        die folgende erstellen: <code>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</code>, und
+        muß das jetzt Pfad Element <code>01-Using_the_Regex_Router.html</code> bearbeiten, in eine Artikel ID und
+        eine Artikel Titel/Beschreibung; das ist nicht möglich mit der Standardroute. Mit der Regex Route ist
+        etwas wie die folgende Lösung möglich:
+    </para>
+
+    <programlisting role="php"><![CDATA[
+$route = new Zend_Controller_Router_Route_Regex(
+    'blog/archive/(\d+)-(.+)\.html',
+    array(
+        'controller' => 'blog',
+        'action'     => 'view'
+    ),
+    array(
+        1 => 'id',
+        2 => 'description'
+    ),
+    'blog/archive/%d-%s.html'
+);
+$router->addRoute('blogArchive', $route);
+]]>
+    </programlisting>
+
+    <para>
+        Wie man sieht, fügt das ein enormes Potential von Flexibilität zur Stnadardroute hinzu.
+    </para>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

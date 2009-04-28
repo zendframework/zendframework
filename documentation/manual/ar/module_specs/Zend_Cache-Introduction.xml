@@ -1,0 +1,133 @@
+<sect1 id="zend.cache.introduction">
+    <title>مقدمة</title>
+    <para>
+        <code>Zend_Cache</code> يوفر إمكانية عمل cache للبيانات.
+    </para>
+      <para>
+          عملية الـ caching فى إطار عمل Zend يتم إدارتها من خلال مجموعة من الـ frontends فى حين ان سجلات الـ cache يتم حفظها
+           و استرجاعها عن طريق backend adapters مثل (<code>File</code>, <code>Sqlite</code>, <code>Memcache</code>...)
+          و يستخدم ايضا IDs و tags. بهذه الطريقة يكن من السهل حذف مجموعات محددة من السجلات بعد ذلك.
+          على سبيل المثال ("حذف كل سجلات الـ cache المعرفة بـ tag معين")
+
+
+    </para>
+
+    <para>
+        Core هو (<code>Zend_Cache_Core</code>) و هو يمثل المرونة و الشمولية و قابلية تعديل الخصائص (configurable).
+        حتى الأن يوجد مجموعة من الـ cache frontends تمتد عن <code>Zend_Cache_Core</code> و التى ستخدم احتياجاتك.
+        و هى : <code>Output</code>, <code>File</code>, <code>Function</code> و <code>Class</code>.
+
+
+    </para>
+    <example>
+        <title>إنشاء frontend بواسطة <code>()Zend_Cache::factory</code></title>
+
+        <para>
+            <code>()Zend_Cache::factory</code> ينشئ الـ objects المتوافقة معا و التى
+            ستحتاجها لإتمام عملك. فى هذا المثال, سنستخدم frontend و هو <code>Core</code>
+            و سنستخدم ايضا backend  وهو <code>File</code>.
+
+            <programlisting role="php"><![CDATA[<?php
+require_once 'Zend/Cache.php';
+
+$frontendOptions = array(
+   'lifeTime' => 7200, // cache lifetime of 2 hours
+   'automaticSerialization' => true
+);
+
+$backendOptions = array(
+    'cacheDir' => './tmp/' // Directory where to put the cache files
+);
+
+// getting a Zend_Cache_Core object
+$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+
+?>]]></programlisting>
+       </para>
+       <para>
+
+            الأن لدينا frontend و أيضا يمكننا عمل cache لأى نوع من البيانات (لأننا قمنا بتشغيل الـ serialization ) .
+ على سبيل المثال , يمكننا عمل cache لبيانات ناتجة عن تنفيذ استعلام كبير على قاعدة بيانات .
+ بعد عمل cache لهذه البيانات, لن نحتاج الى ان نتصل حتى بقاعدة البيانات فى المرات القادمة; كل ما علينا
+هو جلب هذه البيانات من الـ cache و استخدامها (سيتم عمل unserialization للبيانات ضمنيا ).
+            <programlisting role="php"><![CDATA[<?php
+
+// $cache initialized in previous example
+
+// see if a cache already exists:
+if(!$result = $cache->load('myresult')) {
+
+    // cache miss; connect to the database
+
+    $db = Zend_Db::factory( [...] );
+
+    $result = $db->fetchAll('SELECT * FROM huge_table');
+
+    $cache->save($result, 'myresult');
+
+} else {
+
+    // cache hit! shout so that we know
+    echo "This one is from cache!\n\n";
+
+}
+
+print_r($result);
+
+?>]]></programlisting>
+       </para>
+    </example>
+    <example>
+        <title>عمل cache للخرج بإستخدام الـ Output frontend الخاصة بـ <code>Zend_Cache</code></title>
+        <para>
+           سنقوم بتحديد الأماكن التى نريد عمل cache لخرجها و ذلك بإستخدامنا لبعض الأكواد الشرطية,
+سنضع بلوك الكود المحدد ما بين الـ method المسمى <code>()start</code> و الأخر المسمى <code>()end</code> .
+( هذا يعيد هيكلة المثال الأول و هذه هى الفكرة الأساسية للـ caching ).
+        </para><para>
+           بالداخل ستقوم بإخراج البيانات كالمعتاد, كل الخرج سيكن قد تم عمل cache له عندما يتم الوصول الى <code>()end</code> .
+عند تشغيل هذا الكود مرة اخرى, لن يتم تنفيذ الكود المحدد فى هذا المكان لكن سيتم جلب البيانات من الـ cache
+- و هذا طالما ان البيانات فى الـ cache مازالت قابلة للإستخدام .
+            <programlisting role="php"><![CDATA[<?php
+
+$frontendOptions = array(
+   'lifeTime' => 30,                  // cache lifetime of half a minute
+   'automaticSerialization' => false  // this is default anyway
+);
+
+$backendOptions = array('cacheDir' => './tmp/');
+
+$cache = Zend_Cache::factory('Output', 'File', $frontendOptions, $backendOptions);
+
+// we pass a unique identifier to the start() method
+if(!$cache->start('mypage')) {
+    // output as usual:
+
+    echo 'Hello world! ';
+    echo 'This is cached ('.time().') ';
+
+    $cache->end(); // the output is saved and sent to the browser
+}
+
+echo 'This is never cached ('.time().').';
+
+?>]]>       </programlisting>
+       </para>
+       <para>
+           لاحظ اننا نقوم بإخراج ناتج الدالة <code>()time</code> مرتين; و هذا نستخدمه هنا فقط للتوضيح.
+جرب ان تشغل هذا مرة ثم قم بإعادة تشغيله عدة مرات متتالية, ستلاحظ ان الرقم الأول لا يتغير و
+لكن الرقم الثانى يتغير مع مرور الوقت, هذا لأن الرقم الأول تم اخراجه فى منطقة الـ cache المحددة فى الكود
+و بالتالى تم حفظه فى الـ cache على عكس بقية البيانات المخرجة.
+بعد نصف دقيقة سيصبح الرقمين متساويين لأن فترة صلاحية البيانات فى الـ cache قد انتهت
+( لقد قمنا بوضع قيمة lifeTime الى 30 ثانية ). و بهذا سيتم تحديث قيمة البيانات المخزنة فى الـ cache
+من جديد. - جرب هذا بنفسك فى متصفحك لتفهم ما يحدث.
+       </para>
+    </example>
+    <note><para>
+        عند إستخدام Zend_Cache, ركز على إعطاء معرف مميز للـ cache (الذى تمرره الى
+ <code>()start</code> و <code>()save</code> ) و يجب الا يتكرر فى عمليات cache اخرى.
+الوقوع فى هذا الخطأ سيسبب تداخل بين البيانات و اسوأ ما سيحدث هو أن هذه البيانات ستظهر فى اماكن ظهور بيانات أخرى.
+    </para></note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

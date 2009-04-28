@@ -1,0 +1,74 @@
+<sect1 id="zend.pdf.pages">
+    <title>Document pagina's</title>
+    <para>
+    De PDF document pagina abstractie word afgehandeld door de <code>Zend_Pdf_Page</code> klasse.
+    </para>
+
+    <para>
+    PDF pagina's worden ofwel vanuit bestaande PDF documenten geladen of worden nieuw aangemaakt.
+    </para>
+
+    <para>
+    Een nieuwe pagina kan worden verkregen door een nieuw <code>Zend_Pdf_Page</code> object te maken of
+    door de <code>Zend_Pdf::newPage()</code> methode op te roepen, welke een <code>Zend_Pdf_Page</code> object
+    teruggeeft. Het verschil is dat de <code>Zend_Pdf::newPage()</code> methode een nieuwe pagina in een
+    bestaand PDF document maakt. Ongebonden pagina's kunnen niet in verschillende PDF documenten worden
+    gebruikt, maar zijn iets sneller om aan te maken.
+    <footnote>
+        <para>
+        Het is een limitatie van de V1.0 versie van de Zend_Pdf module. Deze limitatie zal verdwijnen in volgende
+        versies. Ongebonden pagina's zullen altijd een beter (optimaler) resultaat geven om pagina's in te delen
+        onder documenten.
+        </para>
+    </footnote>Aan jou om de keuze te maken welke aanpak je kiest.
+    </para>
+
+    <para>
+    De <code>Zend_Pdf::newPage()</code> methode en de <code>Zend_Pdf_Page</code> constructor aanvaarden dezelfde
+    set parameters. Ofwel is het de paginagrootte ($x, $y) in points (1/72 duim), of een vastgestelde constante,
+    welke een paginatype voorstelt:
+        <itemizedlist>
+            <listitem>
+                <para>Zend_Pdf_Const::PAGESIZE_A4</para>
+            </listitem>
+            <listitem>
+                <para>Zend_Pdf_Const::PAGESIZE_A4_LANDSCAPE</para>
+            </listitem>
+            <listitem>
+                <para>Zend_Pdf_Const::PAGESIZE_LETTER</para>
+            </listitem>
+            <listitem>
+                <para>Zend_Pdf_Const::PAGESIZE_LETTER_LANDSCAPE</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+    Document pagina's worden opgeslagen in de publieke <code>$pages</code> eigenschap van de <code>Zend_Pdf</code> klasse.
+    Dat is een array van <code>Zend_Pdf_Page</code> objecten. Het omvat de volledige set, en de orde van de pagina's van het
+    document en kan gemanipuleerd worden als een array:
+    </para>
+
+    <example>
+        <title>PDF pagina management</title>
+        <programlisting role="php"><![CDATA[<?php
+...
+// De volgorde omkeren
+$pdf->pages = array_reverse($pdf->pages);
+...
+// Een nieuw pagina toevoegen
+$pdf->pages[] = new Zend_Pdf_Page(Zend_Pdf_Const::PAGESIZE_A4);
+// Een nieuwe pagina toevoegen
+$pdf->pages[] = $pdf->newPage(Zend_Pdf_Const::PAGESIZE_A4);
+
+// De aangeduide pagina verwijderen.
+unset($pdf->pages[$id]);
+
+...
+?>]]></programlisting>
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

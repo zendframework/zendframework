@@ -1,0 +1,144 @@
+<sect1 id="zend.config.adapters.ini">
+    <title>Zend_Config_Ini</title>
+    <para>
+        <code>Zend_Config_Ini</code> дает разработчикам возможность хранить
+        конфигурационные данные в знакомом большинству формате INI и считывать
+        их в приложении с использованием синтаксиса вложенных свойств объекта.
+        Формат INI специализируется на обеспечении иерархии конфигурационных
+        данных и наследования между разделами конфигурационных данных.
+        Иерархии конфигурационных данных поддерживаются посредством
+        разделения ключей точкой (<code>.</code>). Раздел можно расширять
+        или наследовать от другого раздела посредством указания имени раздела
+        с двоеточием (<code>:</code>) и именем раздела, от которого
+        наследуются данные, после него.
+    </para>
+    <note>
+        <title>Синтаксический разбор INI-файла</title>
+        <para>
+            <code>Zend_Config_Ini</code> использует функцию PHP
+            <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>.
+            Пожалуйста, почитайте документацию, чтобы получить представление об
+            особенностях ее поведения, которые распространяются и на
+            <code>Zend_Config_Ini</code> — например, о том, как обрабатываются
+            специальные значения <code>true</code>, <code>false</code>, <code>yes</code>,
+            <code>no</code> и <code>null</code>.
+        </para>
+    </note>
+        <note>
+        <title>Разделитель ключей</title>
+        <para>
+            По умолчанию разделителем ключей является символ точки
+            (<code>.</code>). Он может быть заменен на любой другой путем
+            изменения ключа <code>'nestSeparator'</code> в массиве
+            <code>$options</code> при создании объекта <code>Zend_Config_Ini</code>.
+            Например:
+            <programlisting role="php"><![CDATA[
+$options['nestSeparator'] = ':';
+$config = new Zend_Config_Ini('/path/to/config.ini',
+                              'staging',
+                              $options);
+]]>
+            </programlisting>
+        </para>
+    </note>
+    <example id="zend.config.adapters.ini.example.using">
+        <title>Использование <code>Zend_Config_Ini</code></title>
+        <para>
+            Данный пример демонстрирует использование <code>Zend_Config_Ini</code>
+            для загрузки конфигурационных данных из файла INI. В этом примере
+            используются конфигурационные данные для производственной и
+            промежуточной систем. Поскольку конфигурационные данные для
+            промежуточной и производственной систем в основном одни и те же,
+            то "промежуточный" (staging) раздел наследует от
+            "производственного" (production) раздела. В данном случае выбор
+            произвольный, т.е. может быть и наоборот — "производственный"
+            раздел наследует от "промежуточного", хотя это может не подходить в
+            более сложных случаях. Допустим, конфигурационные данные
+            находятся в файле <code>/path/to/config.ini</code>:
+        </para>
+        <programlisting role="ini"><![CDATA[
+; Конфигурационные данные производственного сайта
+[production]
+webhost                  = www.example.com
+database.adapter         = pdo_mysql
+database.params.host     = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname   = dbname
+
+; Конфигурационные данные промежуточного сайта наследуются от
+; данных производственного и подменяют их при необходимости.
+[staging : production]
+database.params.host     = dev.example.com
+database.params.username = devuser
+database.params.password = devsecret
+]]>
+</programlisting>
+        <para>
+            Далее предположим, что разработчику приложения нужны "промежуточные"
+            конфигурационные данные из файла INI. Загрузить эти данные,
+            указав файл INI и нужный раздел, довольно просто:
+        </para>
+        <programlisting role="php"><![CDATA[
+$config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
+
+echo $config->database->params->host;   // выведет "dev.example.com"
+echo $config->database->params->dbname; // выведет "dbname"
+]]>
+        </programlisting>
+    </example>
+    <note>
+    <table id="zend.config.adapters.ini.table">
+        <title>Параметры конструктора Zend_Config_Ini</title>
+        <tgroup cols="2">
+            <thead>
+                  <row>
+                    <entry>Параметр</entry>
+                    <entry>Примечание</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>$filename</code></entry>
+                    <entry>INI-файл для загрузки</entry>
+                </row>
+                <row>
+                    <entry><code>$section</code></entry>
+                    <entry>
+                        Раздел в INI-файле, который должен быть загружен.
+                        Установка этого параметра в null вызовет загрузку всех
+                        разделов. Также может быть передан массив имен разделов
+                        для загрузки нескольких разделов.
+                    </entry>
+                </row>
+                <row>
+                    <entry><code>$options = false</code></entry>
+                    <entry>
+                        Массив опций. Поддерживаются следующие ключи:
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <emphasis>allowModifications</emphasis>:
+                                    Устанавливается в true, чтобы разрешить
+                                    последующую модификацию загруженного файла.
+                                    По умолчанию установлен в false
+                                </para>
+                            </listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>nestSeparator</emphasis>:
+                                    Задает символ, используемый в качестве
+                                    разделителя узлов. По умолчанию это "."
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

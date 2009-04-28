@@ -1,0 +1,141 @@
+<sect1 id="zend.config.writer.introduction">
+    <title>Zend_Config_Writer</title>
+    <para>
+        <code>Zend_Config_Writer</code> позволяет создавать конфигурационные
+        файлы из объектов <code>Zend_Config</code>.
+        Он работает и без использования адаптеров и, таким образом, очень прост
+        в использовании.
+        По умолчанию <code>Zend_Config_Writer</code> поставляется с тремя
+        адаптерами, которые используются одинаково. Вы инстанцируете класс для
+        записи с опциями, которыми могут быть <code>filename</code>
+        (имя файла) и <code>config</code> (конфигурационные данные).
+        Затем вы вызываете метод <code>write()</code> объекта, и он
+        создает конфигурационный файл. Вы можете также передавать
+        <code>$filename</code> и <code>$config</code> непосредственно
+        методу <code>write()</code>. В настоящее время вместе с
+        <code>Zend_Config_Writer</code> поставляются следующие адаптеры:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>Zend_Config_Writer_Array</code>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>Zend_Config_Writer_Ini</code>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>Zend_Config_Writer_Xml</code>
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        В качестве исключения <code>Zend_Config_Writer_Ini</code> имеет
+        еще один опциональный параметр <code>nestSeparator</code>, через
+        который указывается символ-разделитель для узлов.
+        По умолчанию это точка, как и в <code>Zend_Config_Ini</code>.
+    </para>
+
+    <para>
+        При изменении или создании объекта <code>Zend_Config</code> следует
+        знать следующее.
+        Для того, чтобы создать или изменить значение, устанавливайте
+        параметр объекта <code>Zend_Config</code> через аксессор
+        <code>-&gt;</code>. Для того, чтобы создать раздел в корне или
+        ветку, создавайте новый массив
+        (<code>$config-&gt;branch = array();</code>). Для того, чтобы
+        указать, от какого раздела наследует другой, вызывайте метод в корне
+        объекта <code>Zend_Config</code>.
+    </para>
+
+    <example id="zend.config.writer.example.using">
+        <title>Использование <code>Zend_Config_Writer</code></title>
+        <para>
+            Этот пример демонстрирует использование
+            <code>Zend_Config_Writer_Xml</code> для создания нового
+            конфигурационного файла:
+        </para>
+        <programlisting role="php"><![CDATA[
+// Создание объекта конфигурации
+$config = new Zend_Config(array(), true);
+$config->production = array();
+$config->staging    = array();
+
+$config->setExtend('staging', 'production');
+
+$config->production->db = array();
+$config->production->db->hostname = 'localhost';
+$config->production->db->username = 'production';
+
+$config->staging->db = array();
+$config->staging->db->username = 'staging';
+
+// Вы можете записать конфигурационный файл одним из следующих способов:
+// а)
+$writer = new Zend_Config_Writer_Xml(array('config'   => $config,
+                                           'filename' => 'config.xml'));
+$writer->write();
+
+// б)
+$writer = new Zend_Config_Writer_Xml();
+$writer->setConfig($config)
+       ->setFilename('config.xml')
+       ->write();
+
+// в)
+$writer = new Zend_Config_Writer_Xml();
+$writer->write('config.xml', $config);
+]]>
+        </programlisting>
+        <para>
+            В этом примере создается конфигурационный
+            XML-файл с "промежуточным" (staging) и "производственным"
+            (production) разделами, в котором первый раздел наследует от
+            второго.
+        </para>
+    </example>
+
+    <example id="zend.config.writer.modifying">
+        <title>Изменение существующего конфигурационного файла</title>
+        <para>
+            Этот пример демонстрирует редактирование существующего
+            конфигурационного файла.
+        </para>
+        <programlisting role="php"><![CDATA[
+// Загрузка всех разделов из существующего конфигурационного файла с
+// пропуском "расширений"
+$config = new Zend_Config_Ini('config.ini',
+                              null,
+                              array('skipExtends'        => true,
+                                    'allowModifications' => true));
+
+// Изменение значения
+$config->production->hostname = 'foobar';
+
+// Сохранение
+$writer = new Zend_Config_Writer_Ini(array('config'   => $config,
+                                           'filename' => 'config.ini'));
+$writer->write();
+]]>
+        </programlisting>
+    </example>
+
+    <note>
+        <title>Загрузка конфигурационного файла</title>
+        <para>
+            При загрузке существующего файла для последующих изменений
+            важно загрузить все
+            разделы с пропуском расширений с тем, чтобы значения не
+            объединялись. Это достигается путем передачи опции
+            <code>skipExtends</code> конструктору.
+        </para>
+    </note>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

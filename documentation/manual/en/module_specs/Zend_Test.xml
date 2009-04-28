@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.test.introduction">
+    <title>Introduction</title>
+
+    <para>
+        <classname>Zend_Test</classname> provides tools to facilitate unit testing of your
+        Zend Framework applications. At this time, we offer facilities to enable
+        testing of your Zend Framework MVC applications
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

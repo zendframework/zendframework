@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 14978 -->
+<sect1 id="zend.mail.multiple-emails">
+    <title>SMTP 接続による複数のメールの送信</title>
+
+    <para>
+        デフォルトでは、ひとつの SMTP トランスポートが
+        ひとつの接続を作成し、スクリプトの実行中はそれを使いまわします。
+        この SMTP 接続で、複数のメールを送信することができます。
+        SMTP のハンドシェイクを正しく行うには、
+        メッセージの配送の前に REST コマンドを発行します。
+    </para>
+
+    <example id="zend.mail.multiple-emails.example-1">
+
+        <title>SMTP 接続による複数のメールの送信</title>
+
+        <programlisting role="php"><![CDATA[
+// トランスポートを作成します
+$transport = new Zend_Mail_Transport_Smtp('localhost');
+
+// メッセージをループ処理します
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - Sending Multiple Mails per SMTP Connection'
+    );
+    $mail->setBodyText('...Your message here...');
+    $mail->send($transport);
+}
+]]>
+        </programlisting>
+
+    </example>
+
+    <para>
+        各配送ごとに別々の接続を使用したい場合は、
+        <function>send()</function> メソッドのコールの前後に
+        トランスポートの作成と廃棄をする必要があります。
+        あるいは、トランスポートのプロトコルオブジェクトを用いて
+        各配送の接続を操作することもできます。
+    </para>
+
+    <example id="zend.mail.multiple-emails.example-2">
+
+        <title>トランスポートの接続の手動制御</title>
+
+        <programlisting role="php"><![CDATA[
+// トランスポートを作成します
+$transport = new Zend_Mail_Transport_Smtp();
+
+$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol->connect();
+$protocol->helo('localhost');
+
+$transport->setConnection($protocol);
+
+// メッセージをループ処理します
+for ($i = 0; $i > 5; $i++) {
+    $mail = new Zend_Mail();
+    $mail->addTo('studio@peptolab.com', 'Test');
+    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->setSubject(
+        'Demonstration - Sending Multiple Mails per SMTP Connection'
+    );
+    $mail->setBodyText('...Your message here...');
+
+    // 手動で接続を制御します
+    $protocol->rset();
+    $mail->send($transport);
+}
+
+$protocol->quit();
+$protocol->disconnect();
+]]>
+        </programlisting>
+
+    </example>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -1,0 +1,19 @@
+<sect1 id="introduction.overview">
+
+    <title>Všeobecný přehled</title>
+
+    <para>
+
+        Zend Framework je vysoce kvalitní open source framework pro tvorbu
+        Webových aplikací a služeb pomocí PHP.
+    </para>
+
+    <para>
+        Zend Framework, postavený v opravdovém duchu PHP, poskytuje snadno použitelnou
+        a mocnou funkcionalitu. Umožuje vytváření řešení pro moderní, robustné a bezpečné weby.
+    </para>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

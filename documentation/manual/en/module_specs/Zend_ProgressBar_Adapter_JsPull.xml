@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.progressbar.adapter.jspull">
+    <title>Zend_ProgressBar_Adapter_JsPull</title>
+    <para>
+        <classname>Zend_ProgressBar_Adapter_JsPull</classname> is the opposite of jsPush,
+        as it requires to pull for new updates, instead of pushing updates out
+        to the browsers. Generally you should use the adapter with the
+        persistence option of the <classname>Zend_ProgressBar</classname>. On notify,
+        the adapter sends a JSON string to the browser, which looks exactly
+        like the JSON string which is send by the jsPush adapter. The only
+        difference is, that it contains an additional parameter,
+        <code>finished</code>, which is either <code>false</code> when
+        <code>update()</code> is called or <code>true</code>, when
+        <code>finish()</code> is called.
+    </para>
+    <para>
+        You can set the adapter options either via the <code>set*</code> methods
+        or give an array or a <classname>Zend_Config</classname> instance with options as first
+        parameter to the constructor. The available options are:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <code>exitAfterSend</code>: Exits the current request after the
+                data were send to the browser. Default is <code>true</code>.
+            </para>
+        </listitem>
+    </itemizedlist>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

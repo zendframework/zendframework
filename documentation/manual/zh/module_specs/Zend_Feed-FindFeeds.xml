@@ -1,0 +1,16 @@
+<sect1 id="zend.feed.findFeeds">
+    <title>从网页上获得Feed</title>
+    <para>
+        在网页上与该页内容其相关的详细信息常被包含在一个用<code>&lt;link&gt;</code>标记关联的Feed中。<code>Zend_Feed</code>能让你用一个简单的方法提取一个页面上所有关联的Feed:
+    </para>
+    <programlisting role="php"><![CDATA[
+$feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
+]]>
+    </programlisting>
+    <para>
+        <code>findFeeds()</code>方法返回一个<code>Zend_Feed_Abstract</code>对象数组，数组中的内容对应news.html页中所有用<code>&lt;link&gt;</code>关联到的Feed。根据每个feed类型的不同，<code>$feedArray</code>数组的下标变量可能是一个<code>Zend_Feed_Rss</code>对象的实例也可能是一个<code>Zend_Feed_Atom</code>对象的实例。但是如果服务器端响应HTTP 404或者feed不符合规范，那么<code>Zend_Feed</code>将抛出一个<code>Zend_Feed_Exception</code>异常。
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

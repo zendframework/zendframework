@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.cache.frontends">
+    <title><classname>Zend_Cache</classname> のフロントエンド</title>
+
+    <sect2 id="zend.cache.frontends.core">
+        <title>Zend_Cache_Core</title>
+        <sect3 id="zend.cache.frontends.core.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Core</classname> は特別なフロントエンドであり、
+                モジュールのコアに含まれています。これはキャッシュフロントエンドの
+                基本機能を実装したものであり、他のクラスによってオーバーライドされます。
+            </para>
+            <note><para>
+                その他のフロントエンドクラスは、すべて <classname>Zend_Cache_Core</classname>
+                を継承しており、以下で説明しているメソッドおよびオプションは
+                他のフロントエンドでも使用可能です。そのため、ここではこれらについての
+                詳しい説明は省略します。
+            </para></note>
+        </sect3>
+        <sect3 id="zend.cache.frontends.core.options">
+            <title>使用可能なオプション</title>
+            <para>
+                これらのオプションを、先の例で示したようにファクトリメソッドに渡します。
+            </para>
+            <table id="zend.cache.frontends.core.options.table">
+                <title>Core フロントエンドのオプション</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>オプション</entry>
+                            <entry>データ型</entry>
+                            <entry>デフォルト値</entry>
+                            <entry>説明</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>caching</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  キャッシングを有効/無効にします
+                                  (キャッシュされたスクリプトのデバッグ時に有用です)。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>cache_id_prefix</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><code>null</code></entry>
+                              <entry>
+                                すべてのキャッシュ ID のプレフィックス。<code>null</code> を指定すると、
+                                プレフィックスは使用しません。
+                                キャッシュ ID のプレフィックスは、いわばキャッシュ内での名前空間です。
+                                これによって、複数のアプリケーションやウェブサイトで
+                                キャッシュを共用できるようになります。
+                                個々のアプリケーションやウェブサイトで
+                                それぞれ異なるキャッシュ ID プレフィックスを用いるようにすれば、
+                                特定のキャッシュ ID をそれぞれの環境で使用できるようになります。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>lifetime</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>3600</code></entry>
+                              <entry>
+                                キャッシュの有効期間 (秒)。<code>null</code>
+                                を指定すると、有効期間が無期限となります。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>logging</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                true を指定すると、<classname>Zend_Log</classname> によるロギングが有効になります
+                                (しかし、処理速度は低下します)。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>write_control</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                書き込み制御を有効/無効にします (壊れたエントリを検出するため、
+                                書き込んだ直後にそのキャッシュを読み込みます)。
+                                writeControl を有効にすると、キャッシュの書き込みがやや遅くなりますが、
+                                読み込みの速度は変わりません
+                                (これはキャッシュファイルが壊れているかどうかを調べるものですが、
+                                完全に判断できるわけではありません)。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automatic_serialization</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                自動シリアライズを有効/無効にします。
+                                文字列でないデータを直接保存する際に使用します
+                                (しかし、処理速度は低下します)。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>automatic_cleaning_factor</code></entry>
+                              <entry><code>int</code></entry>
+                              <entry><code>10</code></entry>
+                              <entry>
+                                自動クリーンアッププロセス (ガベージコレクタ) の設定を行います。
+                                0 を指定すると、自動キャッシュクリーニングを行いません。
+                                1 を指定すると計画的にキャッシュのクリーニングを行い、また
+                                x (1 より大きな整数) を指定すると、
+                                x 回のキャッシュ書き込みについて 1 回の頻度で
+                                ランダムに自動クリーニングを行います。
+                              </entry>
+                          </row>
+                          <row>
+                              <entry><code>ignore_user_abort</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                true を指定すると、save() メソッド内で PHP の
+                                ignore_user_abort フラグを設定し、
+                                キャッシュが破壊されることを防ぎます。
+                              </entry>
+                          </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.core.examples">
+            <title>例</title>
+            <para>
+                マニュアルのいちばんはじめのほうに、例を示しています。
+            </para>
+            <para>
+                もしキャッシュに文字列しか保存しないのなら
+                ("automatic_serialization" オプションを使用すると boolean も保存できるので)、
+                このようにもう少しコンパクトに作成することが可能です。
+            </para>
+            <programlisting role="php"><![CDATA[
+// すでに $cache が存在するものとします
+
+$id = 'myBigLoop'; //「キャッシュしたい内容」のキャッシュ ID
+
+if (!($data = $cache->load($id))) {
+    // キャッシュが存在しませんでした
+
+    $data = '';
+    for ($i = 0; $i < 10000; $i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+
+// [...] $data を用いて何かをします (echo したり、何かに渡したりなど)
+]]>
+            </programlisting>
+            <para>
+                複数のブロックやデータのインスタンスをキャッシュしたい場合も、考え方は同じです。
+            </para>
+            <programlisting role="php"><![CDATA[
+// 一意な ID を使用するようにしましょう
+$id1 = 'foo';
+$id2 = 'bar';
+
+// ブロック 1
+if (!($data = $cache->load($id1))) {
+    // キャッシュが存在しませんでした
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . $i;
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+
+// これは、キャッシュ処理の影響を受けません
+echo('キャッシュされません !');
+
+// ブロック 2
+if (!($data = $cache->load($id2))) {
+    // キャッシュが存在しませんでした
+
+    $data = '';
+    for ($i=0;$i<10000;$i++) {
+        $data = $data . '!';
+    }
+
+    $cache->save($data);
+
+}
+echo($data);
+]]>
+            </programlisting>
+            <para>
+                特殊な値 (boolean 値に "automatic_serialization" オプションを指定したものなど)
+                や空の文字列をキャッシュしたい場合は、
+                上で示したコンパクトな例を使用することはできません。
+                キャッシュレコードを正式に調べる必要があります。
+            </para>
+            <programlisting role="php"><![CDATA[
+// コンパクトな構文
+// (空の文字列や boolean をキャッシュする場合はうまくいきません)
+if (!($data = $cache->load($id))) {
+
+    // キャッシュが存在しませんでした
+
+    // [...] $data を作成します
+
+    $cache->save($data);
+
+}
+
+// $data に対して何らかの操作をします
+
+// [...]
+
+// 完全な構文 (どんな場合でも動作します)
+if (!($cache->test($id))) {
+
+    // キャッシュが存在しませんでした
+
+    // [...] $data を作成します
+
+    $cache->save($data);
+
+} else {
+
+    // キャッシュが見つかりました
+
+    $data = $cache->load($id);
+
+}
+
+// $data に対して何らかの操作をします
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.output">
+        <title><classname>Zend_Cache_Frontend_Output</classname></title>
+        <sect3 id="zend.cache.frontends.output.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Frontend_Output</classname> は、出力を横取りするフロントエンドです。
+                これは PHP の出力バッファリング処理を使いやすくしたもので、
+                <code>start()</code> メソッドと
+                <code>end()</code> メソッドの間の出力を横取りします。
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.output.options">
+            <title>使用可能なオプション</title>
+            <para>
+                <classname>Zend_Cache_Core</classname> のオプション以外に、
+                このフロントエンドが独自に使用するオプションはありません。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.cache.frontends.output.examples">
+            <title>例</title>
+            <para>
+                このマニュアルの冒頭に示した例とほとんど同じですが、少しだけ変更を加えています。
+            </para>
+            <programlisting role="php"><![CDATA[
+// キャッシュが見つからなかった場合に、出力バッファリングが起動します
+if (!($cache->start('mypage'))) {
+
+    // すべてをいつもどおりに出力しますoutput everything as usual
+    echo 'Hello world! ';
+    echo 'これはキャッシュされます ('.time().') ';
+
+    $cache->end(); // 出力バッファリングを終了します
+
+}
+
+echo 'これはキャッシュされません ('.time().').';
+]]>
+            </programlisting>
+            <para>
+                この形式を使用すると、既存のプロジェクトに簡単に出力キャッシュ処理を追加することができます。
+                コードのリファクタリングもほとんど行わずにすませられるでしょう。
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.function">
+        <title><classname>Zend_Cache_Frontend_Function</classname></title>
+        <sect3 id="zend.cache.frontends.function.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Frontend_Function</classname> は、関数コールの結果をキャッシュします。
+                <code>call()</code> というメソッドを保持しており、
+                関数名とパラメータを配列にしてこのメソッドに渡します。
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.function.options">
+            <title>使用可能なオプション</title>
+            <table id="zend.cache.frontends.function.options.table">
+                <title>Function フロントエンドのオプション</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>オプション</entry>
+                            <entry>データ型</entry>
+                            <entry>デフォルト値</entry>
+                            <entry>説明</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cache_by_default</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  true の場合は、関数のコール結果がデフォルトでキャッシュされます。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cached_functions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  常にキャッシュされる関数の名前。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>non_cached_functions</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  決してキャッシュされない関数の名前。
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontends.function.examples">
+            <title>例</title>
+            <para>
+                <code>call()</code> 関数の使用法は、PHP の
+                <code>call_user_func_array()</code> と同じです。
+            </para>
+            <programlisting role="php"><![CDATA[
+$cache->call('veryExpensiveFunc', $params);
+
+// $params は配列です。
+// 例えば、veryExpensiveFunc(1, 'foo', 'bar') のコールをキャッシュするには
+// $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar')) とします。
+]]>
+            </programlisting>
+            <para>
+                <classname>Zend_Cache_Frontend_Function</classname> は、
+                関数の返り値だけでなく関数内部での出力もキャッシュします。
+            </para>
+            <note><para>
+                <code>array()</code>、<code>echo()</code>、<code>empty()</code>、<code>eval()</code>、
+                <code>exit()</code>、<code>isset()</code>、<code>list()</code>、<code>print()</code>
+                および <code>unset()</code> 以外なら、
+                任意の組み込み関数やユーザ定義関数を渡すことができます。
+            </para></note>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.class">
+        <title><classname>Zend_Cache_Frontend_Class</classname></title>
+        <sect3 id="zend.cache.frontends.class.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Frontend_Class</classname> は、<classname>Zend_Cache_Frontend_Function</classname>
+                と異なり、オブジェクトおよびスタティックメソッドのコールをキャッシュします。
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.class.options">
+            <title>使用可能なオプション</title>
+            <table id="zend.cache.frontends.class.options.table">
+                <title>Class フロントエンドのオプション</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>オプション</entry>
+                            <entry>データ型</entry>
+                            <entry>デフォルト値</entry>
+                            <entry>説明</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                          <row>
+                              <entry><code>cached_entity</code> (必須)</entry>
+                              <entry><code>mixed</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  クラス名を設定すると、抽象クラスおよびスタティックコールをキャッシュします。
+                                  オブジェクトを設定すると、そのオブジェクトのメソッドをキャッシュします。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cache_by_default</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>true</code></entry>
+                              <entry>
+                                  true を設定すると、デフォルトでキャッシュされます。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>cached_methods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  常にキャッシュされるメソッドの名前。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>non_cached_methods</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry></entry>
+                              <entry>
+                                  決してキャッシュされないメソッドの名前。
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+
+        <sect3 id="zend.cache.frontends.class.examples">
+            <title>例</title>
+            <para>
+                例えば、スタティックメソッドのコールをキャッシュするには次のようにします。
+            </para>
+            <programlisting role="php"><![CDATA[
+class Test {
+
+    // スタティックメソッド
+    public static function foobar($param1, $param2) {
+        echo "foobar_output($param1, $param2)";
+        return "foobar_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cached_entity' => 'Test' // クラス名を指定します
+);
+// [...]
+
+// これはキャッシュされます
+$result = $cache->foobar('1', '2');
+]]>
+            </programlisting>
+            <para>
+                通常のメソッドのコールをキャッシュするには次のようにします。
+            </para>
+            <programlisting role="php"><![CDATA[
+class Test {
+
+    private $_string = 'hello !';
+
+    public function foobar2($param1, $param2) {
+        echo($this->_string);
+        echo "foobar2_output($param1, $param2)";
+        return "foobar2_return($param1, $param2)";
+    }
+
+}
+
+// [...]
+$frontendOptions = array(
+    'cached_entity' => new Test() // クラスのインスタンスを指定します
+);
+// [...]
+
+// これはキャッシュされます
+$result = $cache->foobar2('1', '2');
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.file">
+        <title><classname>Zend_Cache_Frontend_File</classname></title>
+        <sect3 id="zend.cache.frontends.file.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Frontend_File</classname> は、マスタファイルの
+                「更新時刻」にもとづいて動作するフロントエンドです。
+                これは、例えば設定ファイルやテンプレートなどで有効に使えるでしょう。
+                複数のマスタファイルを使用することもできます。
+            </para>
+            <para>
+                例えば、XML の設定ファイルを使用しており、それが「設定オブジェクト」
+                (<classname>Zend_Config</classname> など) を返す関数でパースされるとしましょう。
+                <classname>Zend_Cache_Frontend_File</classname> を使用すると、その「設定オブジェクト」
+                をキャッシュすることができ (これにより、
+                XML ファイルを毎回パースする必要がなくなります)、さらに「マスタファイル」
+                との間で強力な依存性を保持することができます。そのため、XML
+                設定ファイルが更新されると、即時にキャッシュが無効になります。
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.options">
+            <title>使用可能なオプション</title>
+            <table id="zend.cache.frontends.file.options.table">
+                <title>File フロントエンドのオプション</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>オプション</entry>
+                            <entry>データ型</entry>
+                            <entry>デフォルト値</entry>
+                            <entry>説明</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                         <row>
+                              <entry><code>master_file (非推奨)</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><code></code></entry>
+                              <entry>
+                                  マスタファイルへのフルパス。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>master_files</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code></code></entry>
+                              <entry>
+                                  マスタファイル群へのフルパスの配列。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>master_files_mode</code></entry>
+                              <entry><code>string</code></entry>
+                              <entry><classname>Zend_Cache_Frontend_File::MODE_OR</classname></entry>
+                              <entry>
+                                  <classname>Zend_Cache_Frontend_File::MODE_AND</classname> あるいは
+                                  <classname>Zend_Cache_Frontend_File::MODE_OR</classname>。
+                                  <code>MODE_AND</code> の場合は、
+                                  すべてのマスタファイルにアクセスがあるまでキャッシュが無効化されません。
+                                  <code>MODE_OR</code> の場合は、
+                                  どれかひとつのマスタファイルにアクセスがあればキャッシュを無効化します。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>ignore_missing_master_files</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  true の場合は、マスタファイルが存在しない場合は無視します
+                                  (true でない場合は例外が発生します)。
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.file.examples">
+            <title>例</title>
+            <para>
+                このフロントエンドの使用法は <classname>Zend_Cache_Core</classname> と同じです。
+                そのため、特に例は用意していません。唯一しなければならないことは、
+                ファクトリを使用する際に、バックエンドのオプションとして
+                <code>master_file</code> を設定することだけです。
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.cache.frontends.page">
+        <title><classname>Zend_Cache_Frontend_Page</classname></title>
+        <sect3 id="zend.cache.frontends.page.introduction">
+            <title>導入</title>
+            <para>
+                <classname>Zend_Cache_Frontend_Page</classname> は <classname>Zend_Cache_Frontend_Output</classname>
+                と似ていますが、ページ全体をキャッシュする目的で設計されています。
+                <classname>Zend_Cache_Frontend_Page</classname> を使用して、
+                ページの一部だけをキャッシュすることはできません。
+            </para>
+            <para>
+                一方、「キャッシュ ID」は自動的に生成されます。この ID は、
+                <code>$_SERVER['REQUEST_URI']</code> および (オプションの設定によっては)
+                <code>$_GET</code>、<code>$_POST</code>、<code>$_SESSION</code>、
+                <code>$_COOKIE</code>、<code>$_FILES</code> をもとにして生成されます。
+                さらに、ひとつのメソッド (<code>start()</code>) をコールするだけで使用できます。
+                <code>end()</code> は、ページの終了時に自動的にコールされます。
+            </para>
+            <para>
+                現時点ではまだ実装されていませんが、将来は HTTP conditional システムを追加する予定です。
+                これにより、ネットワークの帯域を節約できるようになります
+                (キャッシュにヒットし、かつブラウザがそのバージョンを既に持っている場合に
+                HTTP 304 Not Modified を送信するようにします)。
+            </para>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.options">
+            <title>使用可能なオプション</title>
+            <table id="zend.cache.frontends.page.options.table">
+                <title>Page フロントエンドのオプション</title>
+                <tgroup cols="4">
+                     <thead>
+                          <row>
+                            <entry>オプション</entry>
+                            <entry>データ型</entry>
+                            <entry>デフォルト値</entry>
+                            <entry>説明</entry>
+                        </row>
+                     </thead>
+                     <tbody>
+                         <row>
+                              <entry><code>http_conditional</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  http_conditional システムを使用します (現時点ではまだ実装されていません)。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>debug_header</code></entry>
+                              <entry><code>boolean</code></entry>
+                              <entry><code>false</code></entry>
+                              <entry>
+                                  true の場合は、キャッシュされた各ページの先頭に
+                                  デバッグ用テキストが追加されます。
+                              </entry>
+                         </row>
+                         <row>
+                               <entry><code>default_options</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array(...説明を参照ください...)</code></entry>
+                              <entry>
+                                  デフォルトのオプションを表す連想配列です。
+                                  <itemizedlist>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) cache</code> :
+                                              true の場合はキャッシュが有効になります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは false) cache_with_get_variables</code> :
+                                              true の場合は、<code>$_GET</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは false) cache_with_post_variables</code> :
+                                              true の場合は、<code>$_POST</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは false) cache_with_session_variables</code> :
+                                              true の場合は、<code>$_SESSION</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは false) cache_with_files_variables</code> :
+                                              true の場合は、<code>$_FILES</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは false) cache_with_cookie_variables</code> :
+                                              true の場合は、<code>$_COOKIE</code> 配列に変数が含まれていてもキャッシュがオンのままになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) make_id_with_get_variables</code> :
+                                              true の場合は、キャッシュ ID が <code>$_GET</code> 配列の内容に依存するようになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) make_id_with_post_variables</code> :
+                                              true の場合は、キャッシュ ID が <code>$_POST</code> 配列の内容に依存するようになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) make_id_with_session_variables</code> :
+                                              true の場合は、キャッシュ ID が <code>$_SESSION</code> 配列の内容に依存するようになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) make_id_with_files_variables</code> :
+                                              true の場合は、キャッシュ ID が <code>$_FILES</code> 配列の内容に依存するようになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(boolean, デフォルトは true) make_id_with_cookie_variables</code> :
+                                              true の場合は、キャッシュ ID が <code>$_COOKIE</code> 配列の内容に依存するようになります。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(int, デフォルトは false) specific_lifetime</code> :
+                                              false でない場合は、選択した正規表現に対して指定した有効期限を使用します。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(配列, デフォルトは array()) tags</code> :
+                                              キャッシュレコード用のタグ。
+                                          </para>
+                                      </listitem>
+                                      <listitem>
+                                          <para>
+                                              <code>(int, デフォルトは null) priority</code> :
+                                              優先度 (バックエンドが優先度をサポートしている場合)。
+                                          </para>
+                                      </listitem>
+                                  </itemizedlist>
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>regexps</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array()</code></entry>
+                              <entry>
+                                  特定の REQUEST_URI に対してのみ適用するオプションを設定する連想配列です。
+                                  キーが (PCRE の) 正規表現、対応する値は連想配列となります。
+                                  この連想配列には、正規表現が $_SERVER['REQUEST_URI']
+                                  にマッチした場合に設定されるオプションを設定します
+                                  (使用可能なオプションについては default_options を参照ください)。
+                                  複数の正規表現が $_SERVER['REQUEST_URI'] にマッチした場合は、
+                                  一番最後にマッチしたもののみが使用されます。
+                              </entry>
+                         </row>
+                         <row>
+                              <entry><code>memorize_headers</code></entry>
+                              <entry><code>array</code></entry>
+                              <entry><code>array()</code></entry>
+                              <entry>
+                                   HTTP ヘッダ名に対応する文字列の配列です。
+                                   ここにあげられたヘッダがキャッシュデータとともに保存され、
+                                   キャッシュにヒットしたときにそれが "リプレイ" されます。
+                              </entry>
+                         </row>
+                      </tbody>
+                  </tgroup>
+              </table>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.examples">
+            <title>例</title>
+            <para>
+                <classname>Zend_Cache_Frontend_Page</classname> の使用法は、きわめて簡単です。
+            </para>
+            <programlisting role="php"><![CDATA[
+// [...] // require、設定そしてファクトリ
+
+$cache->start();
+// キャッシュにヒットした場合はその結果がブラウザに送信され、
+// 処理はここで停止します
+
+// ページの残りの部分 ...
+]]>
+            </programlisting>
+            <para>
+                もう少し複雑な例を見てみましょう。これは、起動ファイル
+                (例えば <classname>Zend_Controller</classname> など) 内でキャッシュを集中管理する方法を示したものです。
+            </para>
+            <programlisting role="php"><![CDATA[
+/*
+ * キャッシュセクションの前には、あまり多くの行を書かないようにしましょう。
+ * 例えば、処理速度を最適化するためには "require_once" や "Zend_Loader::loadClass"
+ * をキャッシュセクションの後におくべきです。
+ */
+
+$frontendOptions = array(
+   'lifetime' => 7200,
+   'debug_header' => true, // デバッグします
+   'regexps' => array(
+       // IndexController 全体をキャッシュします
+       '^/$' => array('cache' => true),
+
+       // IndexController 全体をキャッシュします
+       '^/index/' => array('cache' => true),
+
+       // ArticleController はキャッシュしません
+       '^/article/' => array('cache' => false),
+
+       // ……が、ArticleController の "view" アクションはキャッシュします
+       '^/article/view/' => array(
+           'cache' => true,
+
+           // また、たとえ $_POST に何らかの変数がふくまれていてもキャッシュを行います
+           'cache_with_post_variables' => true,
+
+           // しかし、そのキャッシュは $_POST 配列に依存します
+           'make_id_with_post_variables' => true
+       )
+   )
+);
+
+$backendOptions = array(
+    'cache_dir' => '/tmp/'
+);
+
+// Zend_Cache_Frontend_Page オブジェクトを取得します
+$cache = Zend_Cache::factory('Page',
+                             'File',
+                             $frontendOptions,
+                             $backendOptions);
+
+$cache->start();
+// キャッシュにヒットした場合はその結果がブラウザに送信され、スクリプトの処理はここで停止します。
+
+// [...] 起動ファイルの終点 (これらの行は、キャッシュにヒットした場合は実行されません)
+]]>
+            </programlisting>
+        </sect3>
+        <sect3 id="zend.cache.frontends.page.cancel">
+            <title>キャンセル用のメソッド</title>
+            <para>
+                設計上の理由から、場合によっては (HTTP/200 以外のコードを使用する場合など)
+                現在のキャッシュ処理をキャンセルする必要が生じることもあります。
+                そこで、このフロントエンド用に cancel() メソッドを用意しました。
+            </para>
+            <programlisting role="php"><![CDATA[
+// [...] // require, configuration そして factory
+
+$cache->start();
+
+// [...]
+
+if ($someTest) {
+    $cache->cancel();
+    // [...]
+}
+
+// [...]
+]]>
+            </programlisting>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

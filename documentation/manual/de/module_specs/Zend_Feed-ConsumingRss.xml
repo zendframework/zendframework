@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.consuming-rss">
+    <title>Einen RSS Feed konsumieren</title>
+    <para>
+        Einen RSS Feed zu lesen, ist so einfach wie das Instanziieren eines <classname>Zend_Feed_Rss</classname>
+        Objekts mit der URL eines Feeds:
+    </para>
+        <programlisting role="php"><![CDATA[
+$channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
+]]>
+        </programlisting>
+    <para>
+        Wenn beim Abrufen des Feeds Fehler auftreten, wird eine <classname>Zend_Feed_Exception</classname>
+        geworfen.
+    </para>
+
+    <para>
+        Sobald du ein Feed Objekt hast, kannst du auf jeden Channel-Eigenschaften eines Standard
+        RSS Feeds direkt über das Objekt zugreifen:
+    </para>
+        <programlisting role="php"><![CDATA[
+echo $channel->title();
+]]>
+        </programlisting>
+    <para>
+        Beachte die Syntax der Funktion. <classname>Zend_Feed</classname> verwendet die Konvention, die
+        Eigenschaften als XML Objekt zu behandeln, wenn sie durch die "Getter" Syntax für Variablen
+        (<code>$obj->property</code>) angefordert werden, und als String zu behandeln, wenn sie
+        durch die Methodensyntax (<code>$obj->property()</code>) angefordert werden. Dies ermöglicht
+        den Zugriff auf den kompletten Text jedes individuellen Knotens, während weiterhin der
+        komplette Zugriff auf alle Kindelemente erlaubt ist.
+    </para>
+
+    <para>
+        Wenn Channel-Eigenschaften Attribute beinhalten, sind diese durch die PHP Array Syntax
+        ansprechbar:
+    </para>
+        <programlisting role="php"><![CDATA[
+echo $channel->category['domain'];
+]]>
+        </programlisting>
+    <para>
+        Da XML Attribute keine Kindelemente haben können, ist die Methodensyntax für den Zugriff auf
+        Attributwerte nicht notwendig.
+    </para>
+
+    <para>
+        Meistens möchtest Du einen Feed durchlaufen und etwas mit seinen Einträgen machen.
+        <classname>Zend_Feed_Abstract</classname> implementiert das <code>Iterator</code> Interface von PHP,
+        so dass die Ausgabe aller Artikelüberschriften eines Channels nur dies erfordert:
+    </para>
+        <programlisting role="php"><![CDATA[
+foreach ($channel as $item) {
+    echo $item->title() . "\n";
+}
+]]>
+        </programlisting>
+    <para>
+        Wenn du mit RSS nicht vertraut bist, kommt hier eine Übersicht über die Standardelemente,
+        die du in einem RSS Channel und in einzelnen RSS Elementen (Einträgen) als verfügbar
+        erwarten kannst.
+    </para>
+
+    <para>
+        Erforderliche Elemente eines Channels:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Der Name des Channels</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Die URL einer Website, die dem Channel entspricht</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Ein oder mehr Sätze, die den Channel beschreiben</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Allgemeine optionale Elemente eines Channels:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>pubDate</code> - Das Erscheinungsdatum dieses Informationssatzes, im
+                RFC 822 Datumsformat</para>
+            </listitem>
+            <listitem>
+                <para><code>language</code> - Die Sprache, in der dieser Channel verfasst ist</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Eine oder mehrere Kategorien (durch mehrfache Tags
+                spezifiziert), zu denen der Channel gehört</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        RSS <code>&lt;item&gt;</code> Elemente haben keine strikt erforderlichen Elemente. Dennoch
+        müssen entweder <code>title</code> oder <code>description</code> vorhanden sein.
+    </para>
+
+    <para>
+        Allgemeine Elements eines Eintrags:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Die Überschrift des Eintrags</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Die URL des Eintrags</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Eine Zusammenfassung des Eintrags</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - Die E-Mail Adresse des Autoren</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Eine oder mehrere Kategorien, zu denen der Eintrag
+                gehört</para>
+            </listitem>
+            <listitem>
+                <para><code>comments</code> - URL der Kommentare zu diesem Eintrag</para>
+            </listitem>
+            <listitem>
+                <para><code>pubDate</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
+                im RFC 822 Datumsformat</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        In deinem Code kannst du hiermit immer überprüfen, ob ein Element nicht leer ist:
+    </para>
+        <programlisting role="php"><![CDATA[
+if ($item->propname()) {
+    // ... fahre fort.
+}
+]]>
+        </programlisting>
+
+    <para>
+        Wenn du stattdessen <code>$item->propname</code> verwendest, wirst du immer ein leeres
+        Objekt erhalten, das mit <code>TRUE</code> evaluiert, so dass deine Prüfung fehlschlagen
+        würde.
+    </para>
+
+    <para>
+        Für weitere Informationen ist die offizielle RSS 2.0 Specification hier verfügbar:
+        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

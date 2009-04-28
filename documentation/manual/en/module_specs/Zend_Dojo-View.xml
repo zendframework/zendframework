@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Dojo View Helpers</title>
+
+    <para>
+        Zend Framework provides the following Dojo-specific view helpers:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <emphasis>dojo():</emphasis> setup the Dojo environment
+            for your page, including dojo configuration values, custom module
+            paths, module require statements, theme stylesheets, CDN usage, and more.
+        </para></listitem>
+    </itemizedlist>
+
+    <example id="zend.dojo.view.setup">
+        <title>Using Dojo View Helpers</title>
+
+        <para>
+            To use Dojo view helpers, you will need to tell your view object
+            where to find them. You can do this by calling
+            <code>addHelperPath()</code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
+]]></programlisting>
+
+        <para>
+            Alternately, you can use <classname>Zend_Dojo</classname>'s
+            <code>enableView()</code> method to do the work for you:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Dojo::enableView($view);
+]]></programlisting>
+    </example>
+
+    <xi:include href="Zend_Dojo-View-Dojo.xml" />
+    <xi:include href="Zend_Dojo-View-Helpers.xml" />
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

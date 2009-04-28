@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+
+    Successful response returned for a Cosmos request
+    http://api.technorati.com/cosmos?key=VALID_API_KEY&url=www.simonecarletti.com
+    
+    The request has the following properties:
+     * url is site (not a blog)
+    
+-->
+<!-- generator="Technorati API version 1.0" -->
+<!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN" "http://api.technorati.com/dtd/tapi-002.xml">
+<tapi version="1.0">
+    <document>
+        <result>
+            <url>http://www.simonecarletti.com</url>
+            <inboundlinks>949</inboundlinks>
+            <rankingstart>1</rankingstart>
+        </result>
+        <item>
+            <weblog>
+                <name>Simone Carletti's Blog</name>
+                <url>http://www.simonecarletti.com/blog</url>
+                <atomurl>http://www.simonecarletti.com/blog/index.xml</atomurl>
+                <inboundblogs>85</inboundblogs>
+                <inboundlinks>112</inboundlinks>
+                <lastupdate>2007-11-12 20:51:52 GMT</lastupdate>
+            </weblog>
+            <excerpt>Superata la diffidenza iniziale (a dire il vero durata meno di 30 minuti) di pagare in anticipo senza alcuna referenza un servizio online, ho ordinato il mio primo template.  Tag: design (3) · html (3) · psd (1)   Continua la lettura di "PSD to HTML: convertire PSD in (X)HTML " »      Scritto da Simone Carletti alle 20:37  Permalink | Commenti (0) | TrackBack (0)     Categorie servizi</excerpt>
+            <linkcreated>2007-11-12 20:53:13 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/mt4/mt-search.cgi?tag=html&amp;blog_id=1</linkurl>
+        </item>
+        <item>
+            <weblog>
+                <name> Gioxx’s Wall</name>
+                <url>http://gioxx.org</url>
+                <inboundblogs>271</inboundblogs>
+                <inboundlinks>774</inboundlinks>
+                <lastupdate>2007-11-12 17:01:29 GMT</lastupdate>
+            </weblog>
+            <nearestpermalink>http://gioxx.org/2007/11/05/il-passaggio-a-mac-le-11-risposte/</nearestpermalink>
+            <excerpt>Ho intenzione di prendere il modello bianco “non base” (quello con il SuperDrive per intenderci)… quanta ram consigliate di mettergli? Escono di default con 1Gb, ma considerate che mi piacerebbe potersfruttare Parallelsper bene tenendo magari un OS secondario su uno degli “spaces” di Leopard.  Su Mercury ho 1 GB di ram, Leopard installato ed una virtuale XP Professional che uso quando ne ho bisogno. I consumi della virtuale si aggirano attorno ai 512 MB di ram</excerpt>
+            <linkcreated>2007-11-11 20:07:11 GMT</linkcreated>
+            <linkurl>http://www.simonecarletti.com/blog/2007/04/parallels-desktop-overview.php</linkurl>
+        </item>
+    </document>
+</tapi>

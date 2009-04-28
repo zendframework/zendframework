@@ -1,0 +1,154 @@
+<sect1 id="zend.view.scripts">
+
+    <title>Scripts de Visualização</title>
+
+    <para>
+        Uma vez que seu controlador tenha atribuido as variáveis e chamado o método, Zend_View incluirá o script de visualização requerido e o executará dentro do escopo de sua própria instância.  Portanto, em seus scripts de visualização, as referências a $this apontarão para a própria instância de Zend_View.
+    </para>
+
+    <para>
+        Variáveis atribuídas à visualização pelo controlador são referidas como propriedades de instância. Por exemplo, se o controlador atribuir a variável 'algumacoisa', você deve referir-se a ela como $this->algumacoisa em seu scritp de visualização.  (Isto permite um rastreamento dos valores que foram atribuidos ao script, e que são internos ao mesmo).
+    </para>
+
+    <para>
+        A fim de lembrar, aqui está um exemplo de script de visualização originado da introdução do Zend_View.
+    </para>
+
+    <programlisting role="php"><![CDATA[<?php if ($this->books): ?>
+
+    <!-- Uma tabela contendo alguns livros. -->
+    <table>
+        <tr>
+            <th>Autor</th>
+            <th>Título</th>
+        </tr>
+
+        <?php foreach ($this->books as $key => $val): ?>
+        <tr>
+            <td><?php echo $this->escape($val['author']) ?></td>
+            <td><?php echo $this->escape($val['title']) ?></td>
+        </tr>
+        <?php endforeach; ?>
+
+    </table>
+
+<?php else: ?>
+
+    <p>Não existem livros a serem exibidos.</p>
+
+<?php endif; ?>]]>
+    </programlisting>
+
+    <sect2 id="zend.view.scripts.escaping">
+
+        <title>Escapando a Saída</title>
+
+        <para>
+            Uma das tarefas mais importantes a ser executada por scripts de visualização é assegurar que a saída seja corretamente escapada; entre outras coisas, isto ajuda a evitar ataques do tipo site-cruzado. A menos que você esteja usando uma função, método, ou assistente que realize o escape, você sempre deverá escapar o conteúdo das variáveis antes de exibí-lo.
+        </para>
+
+        <para>
+            Zend_View implementa um método chamado escape() que realiza corretamente o escape para você.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// maneira ruim:
+echo $this->variable;
+
+// maneira recomendada:
+echo $this->escape($this->variable);
+?>]]>
+        </programlisting>
+
+        <para>
+        Por padrão, o método escape() usa a função PHP htmlspecialchars() para fazer o escape.  Mas, dependendo do seu ambiente, você pode desejar um comportamento diferente para o escape. Use o método setEscape() no nível do controlador para instruir o  Zend_View sobre qual função de callback utilizar para fazer o escape.
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+// cria uma instância de Zend_View
+$view = new Zend_View();
+
+// instrui o uso de htmlentities como método de escape
+$view->setEscape('htmlentities');
+
+// ou instrui o uso de um método estático de classe
+$view->setEscape(array('SomeClass', 'methodName'));
+
+// ou mesmo um método de instância
+$obj = new SomeClass();
+$view->setEscape(array($obj, 'methodName'));
+
+// e renderiza a visualização
+echo $view->render(...);
+?>]]>
+        </programlisting>
+
+        <para>
+            A função ou método de callback deverá tomar o valor a ser escapado como seu primeiro parâmetro, e os demais parâmetros deverão ser opcionais.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.view.scripts.templates">
+
+        <title>Sistemas de Template</title>
+
+        <para>
+            Embora o PHP em sí seja um poderoso sistema de template, muitos desenvolvedores sentiram que ele é muito potente ou complexo para seus designers de templates.  Como tal, o script de visualização pode ser usado para instanciar e manipular um objeto de template separadamente, tal como um template ao estilo PHPLIB (ou Smarty).  O script de visualização para este tipo de tarefa pode ser algo como isto:
+        </para>
+
+        <programlisting role="php"><![CDATA[<?php
+include_once 'template.inc';
+$tpl = new Template();
+
+if ($this->books) {
+    $tpl->setFile(array(
+        "booklist" => "booklist.tpl",
+        "eachbook" => "eachbook.tpl",
+    ));
+
+    foreach ($this->books as $key => $val) {
+        $tpl->set_var('author', $this->escape($val['author']);
+        $tpl->set_var('title', $this->escape($val['title']);
+        $tpl->parse("books", "eachbook", true);
+    }
+
+    $tpl->pparse("output", "booklist");
+} else {
+    $tpl->setFile("nobooks", "nobooks.tpl")
+    $tpl->pparse("output", "nobooks");
+}
+?>]]>
+        </programlisting>
+
+        <para>
+            Estes seriam os arquivos de template relacionados:
+        </para>
+
+        <programlisting role="html"><![CDATA[
+<!-- booklist.tpl -->
+<table>
+    <tr>
+        <th>Author</th>
+        <th>Title</th>
+    </tr>
+    {books}
+</table>
+
+<!-- eachbook.tpl -->
+    <tr>
+        <td>{author}</td>
+        <td>{title}</td>
+    </tr>
+
+<!-- nobooks.tpl -->
+<p>There are no books to display.</p>
+]]>
+        </programlisting>
+
+    </sect2>
+
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

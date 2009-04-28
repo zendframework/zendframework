@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.service.recaptcha">
+    <title>Zend_Service_ReCaptcha</title>
+
+    <sect2 id="zend.service.recaptcha.introduction">
+        <title>導入</title>
+
+        <para>
+            <classname>Zend_Service_ReCaptcha</classname> は <ulink
+                url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>
+            用のクライアントです。reCAPTCHA のサイトによると、
+            "reCAPTCHA is a free CAPTCHA service that
+            helps to digitize books
+            (reCAPTCHA はフリーな CAPTCHA サービスで、
+            書籍の電子化を支援しています)" とのことです。
+            reCAPTCHA は、ユーザにふたつの単語を入力させます。
+            ひとつは実際の captcha で、もうひとつはスキャンされたテキスト
+            (OCR ソフトウェアで認識できないもの) の単語です。
+            ユーザが最初の単語を正しく入力したら、
+            おそらく 2 番目の単語も正しく入力してくれるものとみなせます。
+            その入力内容を使って、OCR ソフトウェアの能力を向上させるわけです。
+        </para>
+
+        <para>
+            reCAPTCHA サービスを使用するには、<ulink
+                url="http://recaptcha.net/whyrecaptcha.html">アカウントのサインアップ
+                </ulink>
+            が必要です。また公開鍵と秘密鍵を作成するには、
+            サービスを使用するドメインを登録しなければなりません。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.recaptcha.simplestuse">
+        <title>単純な使用法</title>
+
+        <para>
+            <classname>Zend_Service_ReCaptcha</classname> オブジェクトのインスタンスを作成し、
+            公開鍵と秘密鍵を渡します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
+]]>
+        </programlisting>
+
+        <para>
+            reCAPTCHA をレンダリングするには、
+            <code>getHTML()</code> メソッドをコールするだけです。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+echo $recaptcha->getHTML();
+]]>
+        </programlisting>
+
+        <para>
+            フォームから送信されてきた内容のうち、
+            'recaptcha_challenge_field' と 'recaptcha_response_field'
+            のふたつのフィールドの内容を受け取らなければなりません。
+            これらを、ReCaptcha オブジェクトの <code>verify()</code>
+            メソッドに渡します。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$result = $recaptcha->verify(
+    $_POST['recaptcha_challenge_field'],
+    $_POST['recaptcha_response_field']
+);
+]]>
+        </programlisting>
+
+        <para>
+            結果が得られたら、正しいものだったかどうかを確認します。結果は
+            <classname>Zend_Service_ReCaptcha_Response</classname> オブジェクトとなり、
+            このオブジェクトは <code>isValid()</code> メソッドを提供しています。
+        </para>
+
+        <programlisting role="php"><![CDATA[
+if (!$result->isValid()) {
+    // 検証に失敗
+}
+]]>
+        </programlisting>
+
+        <para>
+            もっと簡単な使用法は、<link
+                linkend="zend.captcha.adapters.recaptcha">ReCaptcha</link>
+            <classname>Zend_Captcha</classname> アダプタを使うか、そのアダプタを
+            <link
+                linkend="zend.form.standardElements.captcha">Captcha
+                フォーム要素</link>
+            のバックエンドとして使用することです。
+            どちらの場合でも、reCAPTCHA のレンダリングや検証は自動化されます。
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

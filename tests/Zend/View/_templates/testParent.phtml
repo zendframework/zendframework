@@ -1,0 +1,11 @@
+<?php
+require_once 'PHPUnit/Util/Filter.php';
+
+PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+
+$content = $this->render($this->content);
+require_once 'Zend/Log.php';
+require_once 'Zend/Log/Writer/Stream.php';
+$logger = new Zend_Log(new Zend_Log_Writer_Stream(dirname(__FILE__) . '/view.log'));
+$logger->log(var_export($content, 1), Zend_Log::DEBUG);
+$logger->log(var_export(__FILE__, 1), Zend_Log::DEBUG);

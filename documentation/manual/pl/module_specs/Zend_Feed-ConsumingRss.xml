@@ -1,0 +1,156 @@
+<sect1 id="zend.feed.consuming-rss">
+    <title>Odbieranie danych z kanału informacyjnego RSS</title>
+    <para>
+        Odczytywanie kanału RSS jest tak proste jak utworzenie obiektu <code>Zend_Feed_Rss</code> z adresem
+        URL kanału przekazanym do konstruktora:
+    </para>
+    <programlisting role="php"><![CDATA[
+$channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
+]]>
+    </programlisting>
+    <para>
+        Jeśli wystąpi jakiś błąd podczas obróbki danych pochodzących z kanału,
+        zostanie wyrzucony wyjątek <code>Zend_Feed_Exception</code>.
+    </para>
+
+    <para>
+        Kiedy już masz obiekt kanału informacyjnego, możesz łatwo uzyskać dostęp
+        do standardowych właściwości kanału RSS bezpośrednio na obiekcie:
+    </para>
+    <programlisting role="php"><![CDATA[
+echo $channel->title();
+]]>
+    </programlisting>
+    <para>
+        Zwróć uwagę na składnie funkcji. <code>Zend_Feed</code> używa konwencji
+        traktującej właściwości jak obiekt XML gdy próbujemy uzyskać do nich dostęp
+        za pomocą składni "getter" (<code>$obj->property</code>) i jako łańcuch
+        znaków gdy próbujemy uzyskać dostęp jak do metody (<code>$obj->property()</code>).
+        To pozwala na pełny dostęp do danych tekstowych przy jednoczesnym dostępie
+        do wszystkich niższych składników.
+    </para>
+
+    <para>
+        Jeśli właściwości kanału mają atrybuty, są one dostępne przy użyciu składni
+        tablic PHP:
+    </para>
+    <programlisting role="php"><![CDATA[
+echo $channel->category['domain'];
+]]>
+    </programlisting>
+    <para>
+        Since XML attributes cannot have children, method syntax is not necessary for accessing attribute
+        values.
+    </para>
+
+    <para>
+        Najczęściej będziesz chciał przejść pętlą po danych kanału i zrobić coś
+        z jego wpisami. Klasa <code>Zend_Feed_Abstract</code> implementuje wbudowany
+        w PHP interfejs <code>Iterator</code>, więc wyświetlenie wszystkich tytułów
+        artykułów z kanału jest bardzo proste:
+    </para>
+    <programlisting role="php"><![CDATA[
+foreach ($channel as $item) {
+    echo $item->title() . "\n";
+}
+]]>
+    </programlisting>
+    <para>
+        Jeśli nie jesteś obeznany z RSS, poniżej znajdziesz opis podstawowych
+        składników, które możesz znaleść w kanale RSS i w jego indywidualnych
+        elementach (wpisach).
+    </para>
+
+    <para>
+        Wymagane składniki kanału:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Nazwa kanału</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Adres URL strony internetowej odpowiadającej kanałowi</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Opis kanału</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Opcjonalne składniki kanału:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>pubDate</code> - Data publikacji zawartości, format RFC 822 format</para>
+            </listitem>
+            <listitem>
+                <para><code>language</code> - Język kanału</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Jedna lub więcej kategorii do których należy kanał</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        Elementy RSS <code>&lt;item&gt;</code> nie mają wymaganych składników,
+        jednak albo składnik <code>title</code> albo <code>description</code> musi
+        istnieć w elemencie.
+    </para>
+
+    <para>
+        Składniki elementu kanału:
+    </para>
+
+    <para>
+        <itemizedlist>
+            <listitem>
+                <para><code>title</code> - Tytuł elementu</para>
+            </listitem>
+            <listitem>
+                <para><code>link</code> - Adres URL elementu</para>
+            </listitem>
+            <listitem>
+                <para><code>description</code> - Opis elementu</para>
+            </listitem>
+            <listitem>
+                <para><code>author</code> - Adres email autora elementu</para>
+            </listitem>
+            <listitem>
+                <para><code>category</code> - Jedna lub więcej kategorii do których należy element</para>
+            </listitem>
+            <listitem>
+                <para><code>comments</code> - Adres URL komentarzy do tego elementu</para>
+            </listitem>
+            <listitem>
+                <para><code>pubDate</code> - Data publikacji elementu, w formacie RFC 822</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <para>
+        W twoim kodzie zawsze możesz sprawdzić czy element nie jest pusty za pomocą:
+    </para>
+    <programlisting role="php"><![CDATA[
+if ($item->propname()) {
+    // ... kontynuuj.
+}
+]]>
+    </programlisting>
+
+    <para>
+        Jeśli zamiast tego użyjesz <code>$item->propname</code>, zawsze dostaniesz
+        pusty obiekt który zostanie skonwertowany do wartości <code>TRUE</code>,
+        więc test zawiedzie.
+    </para>
+
+    <para>
+        Więcej informacji dostępnych jest w oficjalnej specyfikacji RSS 2.0:
+        <ulink url="http://blogs.law.harvard.edu/tech/rss">http://blogs.law.harvard.edu/tech/rss</ulink>
+    </para>
+</sect1>

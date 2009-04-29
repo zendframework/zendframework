@@ -7,11 +7,10 @@
     <para>
         Zend Frameworkアプリケーションのプロファイルをとってみた人は誰でも、
         Zend Frameworkではクラスの読み込みが比較的高くつくことにすぐ気がつくでしょう。
-        Between the sheer number of class files that need to be
-        loaded for many components, to the use of plugins that do not have a 1:1
-        relationship between their class name and the file system, the various
-        calls to <code>include_once</code> and <code>require_once</code> can be
-        problematic. 
+        多くのコンポーネントのために読み込まれる必要があるクラスファイルの本当の数、
+        クラス名とファイルシステムとの間に１対１の関係が成立しないプラグインの利用、
+        <code>include_once</code>や<code>require_once</code>などの呼び出し、
+        これらの間には検討の余地があり得ます。
         この章ではこれらの問題に対して確立したいくつかの解決方法を提示するつもりです。
     </para>
 
@@ -19,8 +18,8 @@
         <title>どのようにしたらinclude_pathを最適化できますか？</title>
 
         <para>
-            クラスの読み込み速度を向上させるためにあなたができるささやかな最適化の
-            ひとつはinclude_pathに注意をはらうことです。
+            クラスの読み込み速度を向上させるためにできる、
+            ささやかな最適化のひとつはinclude_pathに注意をはらうことです。
             特に４つのことをすべきでしょう:
             絶対パスを使うこと（または相対パスを絶対パスに変えること）、
             定義したincludeパスの数を減らすこと、
@@ -32,17 +31,16 @@
             <title>絶対パスを使う</title>
 
             <para>
-                これは些細な最適化に見えますが、実は、やらなければPHPのrealpathキャッシュの
-                恩恵がほとんど受けられません。
+                これは些細な最適化に見えますが、
+                実は、やらなければPHPのrealpathキャッシュの恩恵がほとんど受けられません。
                 結果として、あなたが期待するようにはopcodeキャッシュもほとんど動作しません。
             </para>
 
             <para>
                 このことを確かめる易しい方法が２つあります。
-                ひとつはパスをphp.iniやhttpd.confもしくは .htaccessで
-                ハードコーディングすることです。
-                もうひとつはPHPの<code>realpath()</code>関数を使ってinclude_pathを
-                設定することです:
+                ひとつはパスをphp.iniやhttpd.conf、
+                もしくは .htaccessでハードコーディングすることです。
+                もうひとつはPHPの<code>realpath()</code>関数を使ってinclude_pathを設定することです:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -54,8 +52,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 ]]></programlisting>
 
             <para>
-                You <emphasis>can</emphasis> use 相対パス -- so long as
-                they are relative to an absolute path:
+                とある絶対パスとの関連性がある限り、
+                相対パスを使用することが<emphasis>できます</emphasis>。
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -68,8 +66,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 ]]></programlisting>
 
             <para>
-                However, even so, it's typically a trivial task to simply pass
-                the path to <code>realpath()</code>.
+                しかしながらそうであっても、
+                <code>realpath()</code>にパスを単純に渡すことが一般的にありふれたやり方でしょう。
             </para>
         </sect3>
 
@@ -80,21 +78,21 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 includeパスはinclude_pathに記載された順番にスキャンされます。
                 ファイルが後からではなく最初のほうのスキャンで見つかれば、
                 結果を早く得られることをこのことは明らかに意味します。
-                Thus, a rather obvious enhancement is to simply reduce the
-                number of paths in your include_path to only what you need. Look
-                through each include_path you've defined, and determine if you
-                actually have any functionality in that path that is used in
-                your application; if not, remove it.
+                従って、やや分かりやすい高速化方法は、
+                include_path上のパスの数を必要とするものだけに単純に減らすことです。
+                定義したinclude_pathそれぞれを精査して、
+                アプリケーションで使われるパスに何らかの機能が実際にあるのか判断してください。
+                もし無いのであれば削除してください。
             </para>
 
             <para>
-                Another optimization is to combine paths. For instance, Zend
-                Framework follows PEAR naming conventions; thus, if you are
-                using PEAR libraries (or libraries from another framework or
-                component library that follows PEAR CS), try to put all of these
-                libraries on the same include_path. This can often be achieved
-                by something as simple as symlinking one or more libraries into
-                a common directory.
+                他の最適化にはパスの合併があります。
+                例えば、Zend FrameworkはPEARの命名規則に従っています。
+                そのため、もしPEARのライブラリを使うなら、
+                （またはPEARの命名規則に従うほかのフレームワークやライブラリを使うなら）
+                それらすべてのライブラリを同じinclude_pathに入れてみてください。
+                １つ以上のライブラリを共通のディレクトリにsymlinkでまとめるのと同じくらい簡単に、
+                しばしば目標に達することができます。
             </para>
         </sect3>
 
@@ -102,11 +100,11 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             <title>Zend Frameworkのinclude_pathを出来るだけ先に定義する</title>
 
             <para>
-                前述の提案に引き続き、Zend Frameworkのinclude_pathをinclude_pathの
-                中でできる限り先に定義することも別の明らかな最適化です。
+                前述の提案に引き続き、
+                Zend Frameworkのパスをinclude_pathの中でできる限り先に定義することも明らかな別の最適化です。
                 多くの場合、そのリストの中の一番最初のパスになるでしょう。
-                このことによりZend Frameworkからincludeされるファイルが最初の
-                スキャンで見つかることを保証します。
+                このことにより、
+                Zend Frameworkからincludeされるファイルが最初のスキャンで見つかることを保証します。
             </para>
         </sect3>
 
@@ -114,32 +112,30 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
             <title>現行ディレクトリは最後に定義するか、または定義しない</title>
 
             <para>
-                Most include_path examples show using the current directory, or
-                '.'. This is convenient for ensuring that scripts in the same
-                directory as the file requiring them can be loaded. However,
-                these same examples typically show this path item as the first
-                item in the include_path -- which means that the current
-                directory tree is always scanned first. In most cases, with Zend
-                Framework applications, this is not desired, and the path may be
-                safely pushed to the last item in the list.
+                ほとんどの例でinclude_pathに現行ディレクトリ、つまり '.' が見受けられます。
+                スクリプトを必要とするファイルとしては、
+                同じディレクトリにあるスクリプトを確実に読み込めるので便利です。
+                しかしながら同じくそれらの例では、
+                現行ディレクトリが一般的にinclude_pathの最初の要素として見つかります。
+                このことは現行ディレクトリの配下がいつも最初にスキャンされることを意味しています。
+                Zend Frameworkアプリケーションでは多くの場合望ましくありません。
+                間違いなく現行ディレクトリはリストの最後の要素に入れても良いでしょう。
             </para>
 
         <example id="performance.classloading.includepath.example">
             <title>例: 最適化されたinclude_path</title>
 
             <para>
-                Let's put all of these suggestions together. Our assumption will
-                be that you are using one or more PEAR libraries in conjunction
-                with Zend Framework -- perhaps the PHPUnit and Archive_Tar
-                libraries -- and that you occasionally need to include
-                files relative to the current file.
+                それではこれらすべての提案を一緒に実施してみましょう。
+                仮にZend Frameworkと一緒にひとつ以上のPEARライブラリを使っていると仮定します。
+                ひっとするとPHPUnitやArchive_Tarライブラリかもしれませんし、
+                場合によっては現行のファイルに関連してincludeする必要のあるファイルかもしれません。
             </para>
 
             <para>
-                First, we'll create a library directory in our project. Inside
-                that directory, we'll symlink our Zend Framework's library/Zend
-                directory, as well as the necessary directories from our PEAR
-                installation:
+                初めに、プロジェクト内にライブラリのディレクトリを作成します。
+                ディレクトリの中にはZend Frameworkのlibrary/Zendディレクトリをsymlinkで設定し、
+                同様にインストールしたPEARから必要なディレクトリを設定します。
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -151,24 +147,24 @@ library
 ]]></programlisting>
 
             <para>
-                This allows us to add our own library code if necessary, while
-                keeping shared libraries intact.
+                これで必要に応じて共有ライブラリをそのままに保ちながら、
+                独自のライブラリのコードを追加できるようになります。
             </para>
 
             <para>
-                Next, we'll opt to create our include_path programmatically
-                within our public/index.php file. This allows us to move our
-                code around on the file system, without needing to edit the
-                include_path every time.
+                次にpublic/index.phpファイルで予定通りinclude_pathを作成します。
+                これでinclude_pathを毎回編集しなくても、
+                コードをファイルシステム内で移動させることができます。
             </para>
 
             <para>
-                We'll borrow ideas from each of the suggestions above: we'll use
-                absolute paths, as determined using <code>realpath()</code>;
-                we'll include the Zend Framework includeパス early; we've
-                already consolidated include_paths; and we'll put the current
-                directory as the last path. In fact, we're doing really well
-                here -- we're going to end up with only two paths.
+                それぞれの提案のアイデアは上記から取り入れています。:
+                絶対パスを使います。<code>realpath()</code>を使う判断がされています。;
+                include_pathの先のほうでZend Frameworkをincludeします。;
+                さらにまたinclude_pathを併合します。;
+                そして現行ディレクトリをパスの最後にします。
+                思い切って本当にうまくするとこのようになります。
+                結果としてパス２つだけに到達します。
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -186,31 +182,35 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
         <title>どのようにしたら不要なrequire_once文を除去できますか？</title>
 
         <para>
-            Lazy loading is an optimization technique designed to push the
-            expensive operation of loading a class file until the last possible
-            moment -- i.e., when instantiating an object of that class, calling
-            a static class method, or referencing a class constant or static
-            property. PHP supports this via autoloading, which allows you to
-            define one or more callbacks to execute in order to map a class name
-            to a file.
+            Lazy loadingとは、
+            高くつくクラスファイルの読み込み操作をできるだけ最後の時にさせるように構想された最適化技術です。
+            つまり、クラスのオブジェクトのインスタンス化、
+            静的なクラスメソッドの呼び出し、
+            あるいはクラスの定数や静的プロパティを参照するときです。
+            これはPHPではオートローディングを通じてサポートされます。
+            それにより、
+            クラス名をファイルに紐付けるために実行するひとつ以上のcallback関数を定義できます。
         </para>
 
         <para>
-            However, most benefits you may reap from autoloading are negated if
-            your library code is still performing require_once calls -- which is
-            precisely the case with Zend Framework. So, the question is: how can
-            you eliminate those require_once calls in order to maximize
-            autoloader performance?
+            しかしながら、
+            ライブラリのコードがまだrequire_once呼び出しを行なっているなら、
+            オートローディングから受け取るであろう利益のほとんどは失われます。
+            Zend Frameworkの場合もまさにその通りです。
+            そこで質問があります:
+            オートローダーの性能を最大化するために、
+            それらのrequire_once呼び出しをどのようにしたら除去できるでしょう？
         </para>
 
         <sect3 id="performance.classloading.striprequires.sed">
             <title>findおよびsedコマンドを使ってrequire_onceの呼び出しを取り去る</title>
 
             <para>
-                An easy way to strip require_once calls is to use the UNIX
-                utilities 'find' and 'sed' in conjunction to comment out each
-                call. Try executing the following statements (where '%'
-                indicates the shell prompt):
+                require_once呼び出しを除去する簡単な方法は、
+                UNIXのユーティリテイーのfindとsedコマンドを組み合わせて、
+                各呼び出し箇所をコメントアウトすることです。
+                下記の命令を試しに実行してみてください。
+                ('%'記号はシェルプロンプトを示します):
             </para>
 
             <programlisting role="shell"><![CDATA[
@@ -220,23 +220,23 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 ]]></programlisting>
 
             <para>
-                This one-liner (broken into two lines for readability) iterates
-                through each PHP file and tells it to replace each instance of
-                'require_once' with '// require_once', effectively commenting
-                out each such statement.
+                (読みやすくするために２行に分けていますが)
+                この一行コマンドは各PHPファイルを繰り返し処理しながら、
+                'require_once' を '// require_once' で置換し、
+                効果的にその命令をコメントアウトします。
             </para>
 
             <para>
-                This command could be added to an automated build or release
-                process trivially, helping boost performance in your production
-                application. It should be noted, however, that if you use this
-                technique, you <emphasis>must</emphasis> utilize autoloading;
-                you can do that from your "public/index.php" file with the
-                following code:
+                製品のアプリケーションの性能向上を助けるために、
+                このコマンドは自動化されたビルドやリリース工程にささやかに付け加えられます。
+                しかしながら、もしこの技術を使う場合は、
+                オートローディングを使わ<emphasis>なければいけない</emphasis>、
+                ということを記載しておかなければいけません。;
+                "public/index.php"ファイルで下記のコードを記述することにより実施できます。
             </para>
 
             <programlisting role="php"><![CDATA[
-require_once 'Zend/Loader.php'; // one require_once is still necessary
+require_once 'Zend/Loader.php'; // require_onceはひとつはまだ必要です
 Zend_Loader::registerAutoload();
 ]]></programlisting>
         </sect3>
@@ -246,28 +246,30 @@ Zend_Loader::registerAutoload();
         <title>どのようにしたらプラグインの読み込みを速く出来ますか？</title>
 
         <para>
-            Many components have plugins, which allow you to create your own
-            classes to utilize with the component, as well as to override
-            existing, standard plugins shipped with Zend Framework. This
-            provides important flexibility to the framework, but at a price:
-            plugin loading is a fairly expensive task.
+            多くのコンポーネントにはプラグインがあり、
+            Zend Frameworkとともに出荷された既存の標準プラグインを上書きして、
+            そのコンポーネントで利用する独自のクラスを作成することができます。
+            このことにより、さほどの犠牲を払わなくても、
+            フレームワークに重要な柔軟性が得られます。:
+            プラグインローディングはある程度高くつく作業です。
         </para>
 
         <para>
-            The plugin loader allows you to register class prefix / path pairs,
-            allowing you to specify class files in non-standard paths. Each
-            prefix can have multiple paths associated with it.
-            Internally, the plugin loader loops through each prefix, and then
-            through each path attached to it, testing to see if the file exists
-            and is readable on that path. It then loads it, and tests to see
-            that the class it is looking for is available. As you might imagine,
-            this can lead to many stat calls on the file system.
+            プラグインローダーによりクラスのプレフィックスやパスのペアを登録したり、
+            標準的ではないパスでクラスファイルを指定することができます。
+            各プレフィックスはそれに関連した複数のパスを持つことができます。
+            内部的にはプラグインローダーは各プレフィックスごとに繰り返して、
+            各パスをそれに追加し、ファイルが存在するかどうか、
+            およびそのパスが読み込み可能かどうかをテストします。
+            読み込むと探しているクラスが利用可能かどうかテストします。
+            そのためご想像の通り、
+            ファイルシステム上で多数のstat呼び出しが引き起こされます。
         </para>
 
         <para>
-            Multiply this by the number of components that use the PluginLoader,
-            and you get an idea of the scope of this issue. At the time of this
-            writing, the following components made use of the PluginLoader:
+            プラグインローダーを使うコンポーネントの数によってこれをどんどん増やしてください。
+            そしてこの問題の範囲のアイデアが得られます。
+            この文章を記載した時点では、下記のコンポーネントがプラグインローダーを使います。
         </para>
 
         <itemizedlist>
@@ -312,19 +314,19 @@ Zend_Loader::registerAutoload();
 
         <sect3
             id="performance.classloading.pluginloader.includefilecache">
-            <title>ファイルキャッシュを含むPluginLoaderを使う</title>
+            <title>ファイルキャッシュを含むプラグインローダーを使う</title>
 
             <para>
-                Zend Frameworkの1.7.0でPluginLoaderにincludeファイルキャッシュが
+                Zend Frameworkの1.7.0でプラグインローダーにincludeファイルキャッシュが
                 追加されました。
-                This functionality writes "include_once" calls to
-                a file, which you can then include in your bootstrap. While this
-                introduces extra include_once calls to your code, またそのことは
-                PluginLoaderができるだけ早く returns <!-- TODO --> することを保証します。
+                この機能は"include_once"呼び出しをファイルに書き出します。
+                そのファイルはブートストラップでincludeできます。
+                これは追加のinclude_once呼び出しをコードに導入しますが、
+                またそのことはプラグインローダーができるだけ早く結果を戻すことを保証します。
             </para>
 
             <para>
-                PluginLoaderのドキュメントに<link
+                プラグインローダーのドキュメントに<link
                     linkend="zend.loader.pluginloader.performance.example">
                     その使い方の完全な例があります</link>。
             </para>

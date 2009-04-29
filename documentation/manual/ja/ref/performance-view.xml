@@ -5,29 +5,31 @@
     <title>ビューのレンダリング</title>
 
     <para>
-        When using Zend Framework's MVC layer, chances are you will be using
-        <classname>Zend_View</classname>. <classname>Zend_View</classname> is performs well
-        compared to other view or templating engines; since view scripts
-        are written in PHP, you do not incur the overhead of compiling custom
-        markup to PHP, nor do you need to worry that the compiled PHP is
-        not optimized. However, <classname>Zend_View</classname> presents its own issues:
-        extension is done via overloading (view helpers), and a number of view
-        helpers, while carrying out key functionality do so with a performance
-        cost.
+        Zend FrameworkのMVCレイヤを使うときには、
+        <classname>Zend_View</classname>を使うようになる機会があります。
+        <classname>Zend_View</classname>は、
+        他のビューやテンプレートエンジンに比べて良く機能します。
+        ビュースクリプトはPHPで記述されているので、
+        PHPにカスタムで加えたコンパイルのオーバーヘッドを招きませんし、
+        コンパイルされたPHPが最適されていないかどうか心配する必要もありません。
+        しかしながら、<classname>Zend_View</classname>には特有の問題があります:
+        エクステンションはオーバーロード経由で実行されます（ビューヘルパ）。
+        ビューヘルパの多くは重要な機能を担っていますが、
+        性能面でのコストもあります。
     </para>
 
     <sect2 id="performance.view.pluginloader">
         <title>どのようにしたらビューヘルパの解決を速く出来ますか？</title>
 
         <para>
-            Most <classname>Zend_View</classname> "methods" are actually provided via
-            overloading to the helper system. This provides important
-            flexibility to Zend_View; instead of needing to extend Zend_View and
-            provide all the helper methods you may utilize in your application,
-            you can define your helper methods in separate classes and consume
-            them at will as if they were direct methods of Zend_View. This keeps
-            the view object itself relatively thin, and ensures that objects are
-            created only when needed.
+            ほとんどの<classname>Zend_View</classname> "メソッド"は、
+            実際ヘルパ方式でオーバーロード経由で提供されています。
+            これによりZend_Viewに重要な柔軟性が与えられています;
+            Zend_Viewを拡張してアプリケーションで利用するであろうすべてのヘルパメソッドを提供する必要の代わりに、
+            分離されたクラスにヘルパメソッドを定義して、
+            まるでZend_Viewそのもののメソッドであるかのように使い切ることができます。
+            このことによりビューオブジェクト自身は比較的身軽に保たれ、
+            オブジェクトが必要なときだけ生成されることが保証されます。
         </para>
 
         <para>
@@ -43,7 +45,7 @@
         </para>
 
         <para>
-            The question, then, is: どのようにしたらヘルパの解決を速く出来ますか？
+            それでは質問です: どのようにしたらヘルパの解決を速く出来ますか？
         </para>
 
         <sect3 id="performance.view.pluginloader.cache">

@@ -327,7 +327,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 ; ADD THE FOLLOWING LINES
-resources.layout.layout = "layout.phtml"
+resources.layout.layout = "layout"
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 
 [staging : production]

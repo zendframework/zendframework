@@ -1,29 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.introduction">
     <title>Введение</title>
 
     <para>
-        Согласно информации, размещенной на его
-        <ulink url="http://www.xmlrpc.com/">начальной странице</ulink> XML-RPC
+        Согласно информации, размещенной на стартовой странице
+        <ulink url="http://www.xmlrpc.com/">официального сайта</ulink>, XML-RPC
         является "... удаленным вызовом процедур с использованием HTTP для
         передачи данных и XML для кодирования. XML-RPC разработан в расчете
         на максимально простое использование, и в то же время позволяет
         передавать, обрабатывать и возвращать сложные структуры данных."
-<!--
-        From its <ulink url="http://www.xmlrpc.com/">home page</ulink>,
-        XML-RPC is described as a "...remote procedure calling using HTTP as the
-        transport and XML as the encoding. XML-RPC is designed to be as simple
-        as possible, while allowing complex data structures to be transmitted,
-        processed and returned."
--->
     </para>
 
     <para>
         Zend Framework поддерживает как использование удаленных XML-RPC
         сервисов, так и создание новых XML-RPC серверов.
-<!--
-        Zend Framework provides support for both consuming remote XML-RPC
-        services and building new XML-RPC servers.
--->
     </para>
 </sect1>
 <!--

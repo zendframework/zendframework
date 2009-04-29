@@ -219,7 +219,17 @@
                           <entry><code>false</code></entry>
                           <entry>
                              <code>true</code>, если вы хотите использовать
-                             компрессию на лету
+                             компрессию "на лету"
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><code>compatibility</code></entry>
+                          <entry><code>boolean</code></entry>
+                          <entry><code>false</code></entry>
+                          <entry>
+                             true, если нужно включить режим
+                             совместимости со старыми серверами и расширениями
+                             memcache
                           </entry>
                       </row>
                   </tbody>

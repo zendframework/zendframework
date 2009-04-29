@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
 
     <title>Введение</title>
 
     <para>
-        <code>Zend_View</code> является классом для работы с частью вид (view)
+        <classname>Zend_View</classname> является классом для работы с частью вид (view)
         паттерна модель-вид-контроллер (model-view-controller). То есть он
         предназначен для того, чтобы помочь отделить скрипты видов от
         скриптов моделей и контроллеров. Он предоставляет систему помощников,
@@ -11,19 +13,19 @@
     </para>
 
     <para>
-        <code>Zend_View</code> является независимым от выбранной системы
-        шаблонов: вы можете использовать PHP в качестве языка шаблонов или
+        <classname>Zend_View</classname> не зависит от выбранной вами системы
+        шаблонов - вы можете использовать PHP в качестве языка шаблонов или
         создавать экземпляры других систем шаблонов и работать с ними
         в ваших скриптах вида.
     </para>
 
     <para>
-        Использование <code>Zend_View</code> в основном состоит из двух шагов:
+        По существу применение <classname>Zend_View</classname> состоит из двух шагов:
 
-        1.  Ваш скрипт контроллера создает экземпляр <code>Zend_View</code> и
+        1.  Ваш скрипт контроллера создает экземпляр <classname>Zend_View</classname> и
         объявляет переменные этого экземпляра.
 
-        2. Контроллер приказывает <code>Zend_View</code> воспроизвести
+        2. Контроллер приказывает <classname>Zend_View</classname> воспроизвести
         данный вид, посредством этого производится контроль за скриптом
         вида, который генерирует выходные данные вида.
     </para>
@@ -38,7 +40,7 @@
             Скрипт контроллера может выглядеть наподобие этого:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 // использование модели для получения данных о заголовках и авторах книг
 $data = array(
     array(
@@ -61,8 +63,8 @@ $view = new Zend_View();
 $view->books = $data;
 
 // и выполняем скрипт вида "booklist.php"
-echo $view->render('booklist.php');]]>
-        </programlisting>
+echo $view->render('booklist.php');
+]]></programlisting>
 
     </sect2>
 
@@ -73,17 +75,18 @@ echo $view->render('booklist.php');]]>
         <para>
             Теперь нам нужен сопутствующий скрипт вида "booklist.php".
             Это такой же скрипт PHP, как и остальные, за одним исключением:
-            он выполняется в области видимости экземпляра <code>Zend_View</code>,
+            он выполняется в области видимости экземпляра <classname>Zend_View</classname>,
             это означает, что <code>$this</code> ссылается на
-            экземпляр <code>Zend_View</code>. Переменные, присваиваемые в
+            экземпляр <classname>Zend_View</classname>. Переменные, присваиваемые в
             контроллере для скрипта вида, являются открытыми свойствами
-            экземпляра <code>Zend_View</code>. Таким образом, базовый скрипт
+            экземпляра <classname>Zend_View</classname>. Таким образом, базовый скрипт
             вида может выглядеть следующим образом:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php if ($this->books): ?>
+        <programlisting role="php"><![CDATA[
+<?php if ($this->books): ?>
 
-    <!-- Таблица нескольких книг. -->
+    <!-- Таблица из нескольких книг. -->
     <table>
         <tr>
             <th>Author</th>
@@ -103,8 +106,8 @@ echo $view->render('booklist.php');]]>
 
     <p>Нет книг для отображения.</p>
 
-<?php endif;]]>
-        </programlisting>
+<?php endif; ?>
+]]></programlisting>
 
         <para>
             Обратите внимание, что мы используем метод <code>escape()</code>
@@ -117,7 +120,7 @@ echo $view->render('booklist.php');]]>
         <title>Опции</title>
 
         <para>
-            <code>Zend_View</code> имеет несколько опций, которые могут
+            <classname>Zend_View</classname> имеет несколько опций, которые могут
             использоваться для управления поведением ваших скриптов вида:
         </para>
 
@@ -134,12 +137,12 @@ echo $view->render('booklist.php');]]>
 base/path/
     helpers/
     filters/
-    scripts/]]>
-                </programlisting>
+    scripts/
+]]></programlisting>
 
                 <para>
                     Эта опция может быть установлена через методы
-                    <code>setBasePath()</code>, <code>addBasePath()</code>, или
+                    <code>setBasePath()</code>, <code>addBasePath()</code> или
                     опцию <code>basePath</code> для конструктора.
                 </para>
             </listitem>
@@ -156,20 +159,20 @@ base/path/
             <listitem><para>
                 <code>escape</code> - обратный вызов, который следует
                 использовать для метода <code>escape()</code>. Может быть
-                установлена через метод <code>setEscape()</code> или опцию
+                установлен через метод <code>setEscape()</code> или опцию
                 <code>escape</code> для конструктора.
             </para></listitem>
 
             <listitem><para>
                 <code>filter</code> - фильтр, который следует использовать после
-                рендеринга скрипта вида. Может быть установлена через методы
+                рендеринга скрипта вида. Может быть установлен через методы
                 <code>setFilter()</code>, <code>addFilter()</code>, или опцию
                 <code>filter</code> для конструктора.
             </para></listitem>
 
             <listitem><para>
                 <code>strictVars</code> - если опция установлена, то
-                <code>Zend_View</code> генерирует уведомления (notices) и
+                <classname>Zend_View</classname> генерирует уведомления (notices) и
                 предупреждения (warnings), когда производится обращение к
                 неинициализированной переменной. Опция может быть
                 установлена посредством вызова <code>strictVars(true)</code> или
@@ -178,15 +181,105 @@ base/path/
         </itemizedlist>
     </sect2>
 
+    <sect2 id="zend.view.introduction.shortTags">
+        <title>Короткие теги в скриптах вида</title>
+
+        <para>
+            В нашей документации и примерах мы применяем короткие теги PHP:
+            <code>&lt;?</code> and <code>&lt;?=</code>. Кроме того, мы обычно
+            используем <ulink
+                url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">альтернативный
+                синтаксис для управляющих структур</ulink>. Их удобно
+            использовать при написании скриптов вида, они делают конструкции
+            более лаконичными и позволяют размещать операторы без лишних
+            переходов на другую строку.
+        </para>
+
+        <para>
+            Несмотря на это, многие разработчики
+            предпочитают использовать длинную форму записи для обеспечения
+            валидности или переносимости кода. Например, в рекомендуемой
+            конфигурации PHP
+            (файл php.ini.recommended) опция <code>short_open_tag</code>
+            отключена. Также, если вы используете XML в своих скриптах
+            вида, то с короткими открывающими тегами PHP они не будут проходить
+            валидацию.
+        </para>
+
+        <para>
+            Кроме того, если вы используете короткие теги, и опция
+            <code>short_open_tag</code> отключена, то скрипты вида будут либо
+            приводить к ошибкам выполнения, либо просто выводить пользователю
+            код, включенный в эти теги.
+        </para>
+
+        <para>
+            В последнем случае, если вы хотите использовать короткие теги,
+            но они отключены, у вас есть два возможных решения:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Включить короткие теги в своем файле <code>.htaccess</code>:
+                </para>
+
+                <programlisting role="apache"><![CDATA[
+php_value "short_open_tag" "on"
+]]></programlisting>
+
+                <para>
+                    Это будет действовать только в том случае, если у вас есть
+                    права на создание и использование файлов <code>.htaccess</code>.
+                    Эта директива также может быть добавлена в
+                    конфигурационный файл <code>httpd.conf</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Включить обертку потока (stream wrapper), которая будет
+                    на лету преобразовывать короткие теги в полные:
+                </para>
+
+        <programlisting role="php"><![CDATA[
+$view->setUseStreamWrapper(true);
+]]></programlisting>
+
+                <para>
+                    В этом вызове <classname>Zend_View_Stream</classname> регистрируется в
+                    качестве обертки потока к скриптам вида, благодаря этому
+                    код будет работать так же, как если бы короткие теги были
+                    были включены.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Обертка потока для скриптов вида снижает производительность</title>
+
+            <para>
+                Использование обертки потока <emphasis>снижает</emphasis>
+                производительность вашего приложения.
+                Мы рекомендуем включать короткие
+                теги, переписывать свои скрипты вида с тем, чтобы
+                использовалась полная форма записи тегов, либо использовать
+                продуманную стратегию частичного или полного кэширования
+                содержимого страниц.
+            </para>
+        </note>
+    </sect2>
+
     <sect2 id="zend.view.introduction.accessors">
         <title>Вспомогательные аксессоры</title>
 
         <para>
-            Скорее всего, вам никогда не понадобится вызывать методы
-            <code>assign()</code>, <code>render()</code> или перечисленные ниже
-            для установки/добавления фильтров, помощников, и путей к скриптам
-            вида. Тем не менее, если вы хотите самостоятельно расширить класс
-            <code>Zend_View</code> или нуждаетесь в доступе к его внутренностям,
+            Скорее всего, вам никогда не понадобится вызывать
+            <code>assign()</code>, <code>render()</code> и другие
+            перечисленные ниже методы
+            для установки/добавления фильтров, помощников, путей к скриптам
+            вида. Тем не менее, если требуется расширить класс
+            <classname>Zend_View</classname> или нужен доступ к его внутреннему коду,
             то можно использовать следующие аксессоры:
         </para>
 
@@ -215,7 +308,8 @@ base/path/
 
             <listitem>
                 <para>
-                    <code>getScriptPaths()</code> возвращает все зарегистрированные пути к скриптам вида.
+                    <code>getScriptPaths()</code> возвращает все
+                    зарегистрированные пути к скриптам вида.
                 </para>
             </listitem>
 
@@ -229,7 +323,8 @@ base/path/
 
             <listitem>
                 <para>
-                    <code>getHelperPaths()</code> возвращает все зарегистрированные пути к классам помощников.
+                    <code>getHelperPaths()</code> возвращает все
+                    зарегистрированные пути к классам помощников.
                 </para>
             </listitem>
 
@@ -243,7 +338,8 @@ base/path/
 
             <listitem>
                 <para>
-                    <code>getFilterPaths()</code> возвращает все зарегистрированные пути к классам фильтров.
+                    <code>getFilterPaths()</code> возвращает все
+                    зарегистрированные пути к классам фильтров.
                 </para>
             </listitem>
         </itemizedlist>

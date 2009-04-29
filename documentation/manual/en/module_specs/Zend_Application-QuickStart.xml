@@ -239,6 +239,13 @@ defined('APPLICATION_ENV')
               (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
                                          : 'production'));
 
+// Typically, you will also want to add your library/ directory
+// to the include_path, particularly if it contains your ZF install
+set_include_path(implode(PATH_SEPARATOR, array(
+    dirname(dirname(__FILE__)) . '/library',
+    get_include_path(),
+)));
+
 /** Zend_Application */
 require_once 'Zend/Application.php';
 
@@ -322,7 +329,6 @@ RewriteRule ^.*$ index.php [NC,L]
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
-includePaths.library = APPLICATION_PATH "/../library"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"

@@ -191,16 +191,6 @@ class Zend_Search_Lucene_Search_Query_Term extends Zend_Search_Lucene_Search_Que
     }
 
     /**
-     * Returns query term
-     *
-     * @return array
-     */
-    public function getTerms()
-    {
-        return $this->_terms;
-    }
-
-    /**
      * Query specific matches highlighting
      *
      * @param Zend_Search_Lucene_Search_Highlighter_Interface $highlighter  Highlighter object (also contains doc for highlighting)

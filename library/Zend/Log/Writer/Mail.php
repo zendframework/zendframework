@@ -245,17 +245,34 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
             // are assuming that the layout is for use with HTML.
             $this->_layout->events =
                 implode('', $this->_layoutEventsToMail);
-            $this->_mail->setBodyHtml($this->_layout->render());
+
+            // If an exception occurs during rendering, convert it to a notice
+            // so we can avoid an exception thrown without a stack frame.
+            try {
+                $this->_mail->setBodyHtml($this->_layout->render());
+            } catch (Exception $e) {
+                trigger_error(
+                    "exception occurred when rendering layout; " .
+                        "unable to set html body for message; " .
+                        "message = {$e->getMessage()}; " .
+                        "code = {$e->getCode()}; " .
+                        "exception class = " . get_class($e),
+                    E_USER_NOTICE);
+            }
         }
 
-        // Finally, send the mail, but re-throw any exceptions at the
-        // proper level of abstraction.
+        // Finally, send the mail.  If an exception occurs, convert it into a
+        // warning-level message so we can avoid an exception thrown without a
+        // stack frame.
         try {
             $this->_mail->send();
         } catch (Exception $e) {
-            throw new Zend_Log_Exception(
-                $e->getMessage(),
-                $e->getCode());
+            trigger_error(
+                "unable to send log entries via email; " .
+                    "message = {$e->getMessage()}; " .
+                    "code = {$e->getCode()}; " .
+                        "exception class = " . get_class($e),
+                E_USER_WARNING);
         }
     }
 

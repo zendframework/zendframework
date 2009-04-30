@@ -42,6 +42,12 @@ require_once 'Zend/Log/Writer/Mail.php';
 /** Zend_Mail */
 require_once 'Zend/Mail.php';
 
+/** Zend_Mail_Transport_Exception */
+require_once 'Zend/Mail/Transport/Exception.php';
+
+/** Zend_View_Exception */
+require_once 'Zend/View/Exception.php';
+
 class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -212,14 +218,62 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests destruction of the Zend_Log instance when an error message entry
+     * is in place, but the mail can't be sent.  Should result in a warning,
+     * which we test for here.
+     *
+     * @return void
+     */
+    public function testDestructorMailError()
+    {
+        list($mail, $writer, $log) = $this->_getSimpleLogger(false);
+
+        // Force the send() method to throw the same exception that would be
+        // thrown if, say, the SMTP server couldn't be contacted.
+        $mail->expects($this->any())
+             ->method('send')
+             ->will($this->throwException(new Zend_Mail_Transport_Exception()));
+
+        // Log an error message so that there's something to send via email.
+        $log->err('a bogus error message to force mail sending');
+
+        $this->setExpectedException('PHPUnit_Framework_Error');
+        unset($log);
+    }
+
+    /**
+     * Tests destruction of the Zend_Log instance when an error message entry
+     * is in place, but the layout can't be rendered.  Should result in a
+     * notice, which we test for here.
+     *
+     * @return void
+     */
+    public function testDestructorLayoutError()
+    {
+        list($mail, $writer, $log, $layout) = $this->_getSimpleLogger(true);
+
+        // Force the render() method to throw the same exception that would
+        // be thrown if, say, the layout template file couldn't be found.
+        $layout->expects($this->any())
+               ->method('render')
+               ->will($this->throwException(new Zend_View_Exception('bogus message')));
+
+        // Log an error message so that there's something to send via email.
+        $log->err('a bogus error message to force mail sending');
+
+        $this->setExpectedException('PHPUnit_Framework_Error');
+        unset($log);
+    }
+
+    /**
      * Returns an array of the Zend_Mail mock object, Zend_Log_Writer_Mail
      * object, and Zend_Log objects.
      *
      * This is just a helper function for the various test methods above.
      *
      * @return array Numerically indexed array of Zend_Mail,
-     *               Zend_Log_Writer_Mail, and Zend_Log objects, in that
-     *               order.
+     *               Zend_Log_Writer_Mail, Zend_Log, and Zend_Layout objects,
+     *               in that order.
      */
     protected function _getSimpleLogger($useLayout = false)
     {
@@ -241,12 +295,13 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
             $writer = new Zend_Log_Writer_Mail($mail, $layout);
         } else {
             $writer = new Zend_Log_Writer_Mail($mail);
+            $layout = null;
         }
 
         $log = new Zend_Log();
         $log->addWriter($writer);
 
-        return array($mail, $writer, $log);
+        return array($mail, $writer, $log, $layout);
     }
 }
 

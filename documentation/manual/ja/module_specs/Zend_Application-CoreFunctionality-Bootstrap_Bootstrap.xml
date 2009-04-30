@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
+    <title>Zend_Application_Bootstrap_Bootstrap</title>
+
+    <para>
+        <classname>Zend_Application_Bootstrap_Bootstrap</classname>は
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        を具体的に実装したものです。
+        これは
+        <link linkend="zend.application.available-resources.frontcontroller">フロントコントローラリソース</link>
+        を登録し、デフォルトのモジュールが定義されていることと、
+        それからフロントコントローラをディスパッチすることを最初にチェックする
+        <code>run()</code>メソッドという主要なフィーチャーです。
+    </para>
+
+    <para>
+        多くの場合、ブートストラップする必要性に応じて拡張するか、
+        このクラスを単純に使って、利用するリソースプラグインのリストを与えたいことでしょう。
+    </para>
+</sect2>

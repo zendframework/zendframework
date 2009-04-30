@@ -205,6 +205,23 @@ roam~0.8
         </para>
     </sect2>
 
+    <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
+        <title>Matched terms limitation.</title>
+
+        <para>
+            Wildcard, range and fuzzy search queries may match too many terms. It may cause incredible search performance downgrade.
+        </para>
+
+        <para>
+            So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit can be retrieved and set using
+            <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
+            methods. 
+        </para>
+        <para>
+            Default matched terms per query limit is 1024.
+        </para>
+    </sect2>
+
     <sect2 id="zend.search.lucene.query-language.proximity-search">
         <title>Proximity Searches</title>
 

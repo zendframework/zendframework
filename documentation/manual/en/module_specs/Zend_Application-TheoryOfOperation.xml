@@ -220,7 +220,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
             <para>
-                $o bootstrap just the <code>_initFoo()</code> method, do the
+                To bootstrap just the <code>_initFoo()</code> method, do the
                 following:
             </para>
 

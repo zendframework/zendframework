@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!-- EN-Revision: 14945 -->
+<!-- EN-Revision: 15048 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -466,6 +466,12 @@
         <xi:include href="module_specs/Zend_Soap_Client.xml" />
         <xi:include href="module_specs/Zend_Soap_Wsdl.xml" />
         <xi:include href="module_specs/Zend_Soap_AutoDiscovery.xml" />
+    </chapter>
+
+    <chapter id="zend.tag">
+        <title>Zend_Tag</title>
+        <xi:include href="module_specs/Zend_Tag-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Tag_Cloud.xml" />
     </chapter>
 
     <chapter id="zend.test">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.timesync.working">
 
     <title>Zend_TimeSync の動作</title>
@@ -35,8 +35,7 @@
 $server = new Zend_TimeSync('0.pool.ntp.org');
 
 print $server->getDate()->getIso();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このとき <classname>Zend_TimeSync</classname> の裏側では何が起こっているのでしょうか?
@@ -82,8 +81,7 @@ $server = new Zend_TimeSync(array('0.pool.ntp.org',
 $server->addServer('3.pool.ntp.org');
 
 print $server->getDate()->getIso();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             追加できるタイムサーバの数には制限はありません。
@@ -105,8 +103,7 @@ $server = new Zend_TimeSync(array('generic'  => '0.pool.ntp.org',
 $server->addServer('3.pool.ntp.org', 'additional');
 
 print $server->getDate()->getIso();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             タイムサーバの名前を設定することで、
@@ -141,8 +138,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
 $server->addServer('sntp:\\internal.myserver.com', 'additional');
 
 print $server->getDate()->getIso();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_TimeSync</classname> は複数のタイムサーバを使用することができます。
@@ -175,8 +171,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org:200',
 $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 
 print $server->getDate()->getIso();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -217,8 +212,7 @@ $server->addServer('sntp:\\internal.myserver.com', 'additional');
 print $server->getDate()->getIso();
 print_r(Zend_TimeSync::getOptions();
 print "Timeout = " . Zend_TimeSync::getOptions('timeout');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ご覧のとおり、<classname>Zend_TimeSync</classname> のオプションは静的なものです。
@@ -250,8 +244,7 @@ $server->addServer('sntp:\\internal.myserver.com', 'additional');
 
 $actual = $server->getServer();
 $server = $server->setServer('additional');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -269,8 +262,7 @@ $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 
 print_r ($server->getInfo());
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             どのような情報が得られるのかは、
@@ -309,7 +301,6 @@ try {
         echo '<br />';
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>

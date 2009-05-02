@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
@@ -27,8 +27,7 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         バリデータは、<classname>Zend_Validate</classname> に追加した順に適用されます。
         上の例では、まずユーザ名の長さが 6 文字から 12 文字までの間であるかどうかを調べます。
@@ -53,8 +52,7 @@ if ($validatorChain->isValid($username)) {
         <programlisting role="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
-]]>
-        </programlisting>
+]]></programlisting>
 
     </para>
 

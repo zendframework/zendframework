@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.validate.writing_validators">
 
     <title>バリデータの書き方</title>
@@ -80,8 +80,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             このクラス内には、検証が失敗したときのメッセージ用のテンプレートがひとつ定義されており、
             その中では組み込みのマジックパラメータ <code>%value%</code> を使用しています。
@@ -162,8 +161,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             パブリックプロパティ <code>$minimum</code> および <code>$maximum</code>
             でそれぞれ最小値と最大値を定義し、値がこの間にあった場合に検証が成功したことにしています。
@@ -257,8 +255,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
         return $isValid;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <code>isValid()</code> では四つのチェックを行っていますが、
             チェックに失敗してもその場では <code>false</code> を返していないことに注目しましょう。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.pdf.create">
     <title>PDF ドキュメントの作成および読み込み</title>
     <para>
@@ -34,8 +34,7 @@ $pdf2 = Zend_Pdf::load($fileName);
 // 文字列から PDF ドキュメントを読み込みます。
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -72,8 +71,7 @@ $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
 ...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.pdf.save">
     <title>PDF ドキュメントへの変更内容の保存</title>
     <para>
@@ -37,8 +37,7 @@ $pdf->save($newFileName);
 $pdfString = $pdf->render();
 
 ...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

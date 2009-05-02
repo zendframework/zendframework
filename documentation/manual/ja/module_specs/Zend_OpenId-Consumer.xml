@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer の基本</title>
     <para>
@@ -57,8 +57,7 @@
 <input type="text" name="openid_identifier">
 <input type="submit" name="openid_action" value="login">
 </fieldset></form></body></html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -80,8 +79,7 @@ $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
     die("OpenID でのログインに失敗しました。");
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -130,8 +128,7 @@ if ($consumer->verify($_GET, $id)) {
 } else {
     echo "無効 " . htmlspecialchars($id);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -192,8 +189,7 @@ if (isset($_POST['openid_action']) &&
 </fieldset>
 </form>
 </body></html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -241,8 +237,7 @@ if (!$consumer->login($_POST['openid_identifier'],
                       'http://*.php.net/')) {
     die("OpenID でのログインに失敗しました。");
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -273,8 +268,7 @@ $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
     die("OpenID でのログインに失敗しました。");
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -501,8 +495,7 @@ $db = Zend_Db::factory('Pdo_Sqlite',
     array('dbname'=>'/tmp/openid_consumer.db'));
 $storage = new DbStorage($db);
 $consumer = new Zend_OpenId_Consumer($storage);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -614,8 +607,7 @@ if (!$consumer->login($_POST['openid_identifier'],
                       $sreg)) {
     die("OpenID でのログインに失敗しました。");
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -659,8 +651,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 } else {
     echo "無効 " . htmlspecialchars($id);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -775,8 +766,7 @@ if ((isset($_POST['openid_action']) &&
 <input type="submit" name="openid_action" value="login">
 <input type="submit" name="openid_action" value="logout">
 </fieldset></form></body></html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

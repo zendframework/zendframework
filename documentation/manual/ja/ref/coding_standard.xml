@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -174,8 +174,7 @@ Zend/Db.php
 Zend/Controller/Front.php
 
 Zend/View/Helper/FormRadio.php
-]]>
-                </programlisting>
+]]></programlisting>
 
                 ファイル名は、上で説明したとおりの方式でクラス名と対応していなければなりません。
             </para>
@@ -213,8 +212,7 @@ filterInput()
 getElementById()
 
 widgetFactory()
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -310,8 +308,7 @@ widgetFactory()
 <?php
 
 ?>
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -335,8 +332,7 @@ widgetFactory()
 
                     <programlisting role="php"><![CDATA[
 $a = '文字列の例';
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -351,8 +347,7 @@ $a = '文字列の例';
                     <programlisting role="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
-]]>
-                    </programlisting>
+]]></programlisting>
 
                     アポストロフィをエスケープするよりも、上の構文のほうが読みやすくなるのでお勧めです。
                 </para>
@@ -368,8 +363,7 @@ $sql = "SELECT `id`, `name` from `people` "
 $greeting = "こんにちは $name さん。ようこそ!";
 
 $greeting = "こんにちは {$name} さん。ようこそ!";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -377,8 +371,7 @@ $greeting = "こんにちは {$name} さん。ようこそ!";
 
                     <programlisting role="php"><![CDATA[
 $greeting = "こんにちは ${name} さん。ようこそ!";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -391,8 +384,7 @@ $greeting = "こんにちは ${name} さん。ようこそ!";
 
                     <programlisting role="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -405,8 +397,7 @@ $company = 'Zend' . ' ' . 'Technologies';
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>
@@ -431,8 +422,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
 
                     <programlisting role="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -444,8 +434,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -461,8 +450,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     <programlisting role="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>
@@ -499,8 +487,7 @@ class SampleClass
     // クラスのすべての内容は、
     // 空白 4 文字の字下げを使用します。
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -564,8 +551,7 @@ class Foo
         // 空白 4 文字の字下げを使用します。
     }
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -583,8 +569,7 @@ class Foo
     public function bar(&$baz)
     {}
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -618,8 +603,7 @@ class Foo
         return $this->bar;
     }
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
             </sect3>
@@ -634,8 +618,7 @@ class Foo
 
                     <programlisting role="php"><![CDATA[
 threeArguments(1, 2, 3);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -654,8 +637,7 @@ threeArguments(array(1, 2, 3), 2, 3);
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>
@@ -687,8 +669,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
 if ($a != 2) {
     $a = 2;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -709,8 +690,7 @@ if ($a != 2) {
 } else {
     $a = 7;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                     場合によっては、これらの文で波括弧が必要ない場合もあります。
                     しかし、このコーディング規約では、このような例外を認めません。
                     "if"、"elseif" あるいは "else" 文では、常に波括弧を使用しなければなりません。
@@ -747,8 +727,7 @@ switch ($numPeople) {
     default:
         break;
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     <code>switch</code> 文の <code>default</code> は、
@@ -811,8 +790,7 @@ switch ($numPeople) {
  * @link       http://framework.zend.com/package/PackageName
  * @since      File available since Release 1.5.0
 */
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -836,8 +814,7 @@ switch ($numPeople) {
  * @since      Class available since Release 1.5.0
  * @deprecated Class deprecated in Release 2.0.0
  */
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -866,8 +843,7 @@ switch ($numPeople) {
 
                     <programlisting role="php"><![CDATA[
 @throws exceptionclass [description]
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>

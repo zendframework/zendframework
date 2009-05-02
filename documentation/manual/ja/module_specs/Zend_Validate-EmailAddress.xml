@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect2 id="zend.validate.set.email_address">
 
     <title>メールアドレス</title>
@@ -29,8 +29,7 @@ if ($validator->isValid($email)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         これは、メールアドレス <code>$email</code> を検証し、失敗した場合は
         その原因を表す便利なエラーメッセージを
@@ -85,8 +84,7 @@ if ($validator->isValid($email)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -112,8 +110,7 @@ if ($validator->isValid($email)) {
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         あるいは、<code>true</code> または <code>false</code> を
         <code>$validator->setValidateMx()</code> に渡すことで、
@@ -139,8 +136,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
 
         <programlisting role="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <code>setValidateIdn()</code> の詳細な使用法は、
         <classname>Zend_Validate_Hostname</classname> のドキュメントを参照ください。
@@ -162,8 +158,7 @@ $validator->hostnameValidator->setValidateIdn(false);
 
         <programlisting role="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <code>setValidateTld()</code> の詳細な使用法は、
         <classname>Zend_Validate_Hostname</classname> のドキュメントを参照ください。

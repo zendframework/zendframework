@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
     <sect2 id="zend.service.flickr.introduction">
@@ -27,8 +27,7 @@ $results = $flickr->tagSearch("php");
 foreach ($results as $result) {
     echo $result->title . '<br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <title>オプションのパラメータ</title>
@@ -80,8 +79,7 @@ $results = $flickr->userSearch($userEmail);
 foreach ($results as $result) {
     echo $result->title . '<br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.flickr.grouppoolgetphotos">
@@ -101,8 +99,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
     foreach ($results as $result) {
         echo $result->title . '<br />';
     }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <title>オプションのパラメータ</title>
@@ -132,8 +129,7 @@ $image = $flickr->getImageDetails($imageId);
 
 echo "画像 ID $imageId は $image->width x $image->height ピクセルです。<br />\n";
 echo "<a href=\"$image->clickUri\">クリックすると画像を表示します</a>\n";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.flickr.classes">

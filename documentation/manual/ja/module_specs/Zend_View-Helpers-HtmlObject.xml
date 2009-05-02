@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML オブジェクトヘルパー</title>
 
@@ -58,8 +58,7 @@
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この結果は、次のような HTML となります。
@@ -71,8 +70,7 @@
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
 </object>
-]]>
-</programlisting>
+]]></programlisting>
 
     </example>
 
@@ -126,8 +124,7 @@ echo $this->htmlObject(
     some content
 </object>
 */
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

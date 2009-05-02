@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -54,8 +54,7 @@ foreach ($hits as $hit) {
     // 'title' フィールドもこの方法で取得できます
     $title = $hit->getDocument()->title;
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -91,8 +90,7 @@ foreach ($hits as $hit) {
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -325,8 +323,7 @@ $index = Zend_Search_Lucene::open($indexPath);
 
 ...
 
-unset($index);]]>
-            </programlisting>
+unset($index);]]></programlisting>
         </para>
 
         <para>
@@ -335,8 +332,7 @@ unset($index);]]>
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
-]]>
-            </programlisting>
+]]></programlisting>
             これについては、このドキュメントの
             "<link linkend="zend.search.lucene.advanced.static">応用: 静的プロパティとしてのインデックスの使用</link>"
             でも説明しています。
@@ -390,8 +386,7 @@ foreach ($docIds as $id) {
     $contents = $doc->contents;
     ...
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -483,8 +478,7 @@ $doc->addField(Zend_Search_Lucene_Field::Text('title',
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $contents,
                                                   'utf-8'));
-]]>
-            </programlisting>
+]]></programlisting>
             エンコーディングの指定をはっきりさせるという意味で、これが最も良い方法です。
         </para>
 
@@ -500,8 +494,7 @@ setlocale(LC_ALL, 'de_DE.iso-8859-1');
 
 setlocale(LC_ALL, 'ja_JP.UTF-8');
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -521,8 +514,7 @@ $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
 $hits = $index->find($query);
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -532,8 +524,7 @@ $hits = $index->find($query);
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...
-]]>
-            </programlisting>
+]]></programlisting>
             空の文字列は、'現在のロケール' を意味します。
         </para>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.view.abstract">
     <title>Zend_View_Abstract</title>
 
@@ -37,8 +37,7 @@ protected function _run()
 {
     include func_get_arg(0);
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         こうすることで、ビュースクリプトが現在のオブジェクト

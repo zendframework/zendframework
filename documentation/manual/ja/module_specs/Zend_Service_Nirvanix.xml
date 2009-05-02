@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
 
@@ -141,8 +141,7 @@ $imfs->putContents('/foo.txt', 'contents to store');
 echo $imfs->getContents('/foo.txt');
 
 $imfs->unlink('/foo.txt');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Service_Nirvanix</classname>
@@ -219,8 +218,7 @@ $imfs = $nirvanix->getService('IMFS');
 
 $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
                                   'newFileName' => 'bar.txt'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例では、<code>IMFS</code> 名前空間へのプロキシを作成します。
@@ -287,8 +285,7 @@ Zend_Service_Nirvanix_Response Object
             [BytesUploaded] => 14
         )
 )
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>SimpleXMLElement</code> の任意のプロパティやメソッドにアクセスすることができます。
@@ -325,8 +322,7 @@ Zend_Service_Nirvanix_Response Object
 <Response>
    <ResponseCode>0</ResponseCode>
 </Response>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             上の例のように <code>ResponseCode</code> がゼロの場合は、
@@ -359,8 +355,7 @@ try {
   echo $e->getMessage() . "\n";
   echo $e->getCode();
 }
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             上の例で使用している <code>unlink()</code> は、REST API の

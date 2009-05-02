@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -53,8 +53,7 @@ foreach ($prototypes as $prototype) {
 // 名前空間は、インスタンス作成時 (二番目の引数) あるいは
 // setNamespace() で設定します。
 $reflection->getNamespace();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>reflectFunction()</code> は

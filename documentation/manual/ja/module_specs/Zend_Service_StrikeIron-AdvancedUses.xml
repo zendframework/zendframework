@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.strikeiron.advanced-uses">
     <title>Zend_Service_StrikeIron: 応用編</title>
 
@@ -39,8 +39,7 @@ $result = $phone->lookup(array('Number' => '(408) 253-8800'));
 echo $result->listingName;
 
 // Zend Technologies USA Inc
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>
@@ -114,8 +113,7 @@ $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
     </sect2>

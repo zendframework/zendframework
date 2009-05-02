@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
 
@@ -36,8 +36,7 @@ public $charset;
 public $boundary;
 public $location;
 public $language;
-]]>
-    </programlisting>
+]]></programlisting>
     </sect2>
 
   <sect2 id="zend.mime.part.methods">

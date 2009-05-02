@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -44,8 +44,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 echo $client->call('test.sayHello');
 
 // hello
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -74,8 +73,7 @@ $arg2 = 'foo';
 $result = $client->call('test.sayHello', array($arg1, $arg2));
 
 // $result はネイティブな PHP の型になります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -194,8 +192,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <programlisting role="php"><![CDATA[
 $client->setSkipSystemLookup(true);
 $result = $client->call('foo.bar', array(array()));
-]]>
-                </programlisting>
+]]></programlisting>
             </note>
         </sect3>
 
@@ -340,8 +337,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 $server = $client->getProxy();           // デフォルトの名前空間のプロキシを作成します
 
 $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -359,8 +355,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 $test  = $client->getProxy('test');     // "test" 名前空間のプロキシを作成します
 
 $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -407,8 +402,7 @@ try {
     // $e->getMessage() は "Not Found" を返します
 
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -452,8 +446,7 @@ try {
     // $e->getMessage() は "Unknown method" を返します
 
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -519,8 +512,7 @@ $client->doRequest($request);
 
 // $server->getLastRequest() は Zend_XmlRpc_Request のインスタンスを返します
 // $server->getLastResponse() は Zend_XmlRpc_Response のインスタンスを返します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

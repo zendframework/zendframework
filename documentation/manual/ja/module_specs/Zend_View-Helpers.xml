@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -168,8 +168,7 @@ echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
                          array('bar', 'baz');
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     どの場合についても、マークアップの先頭に hidden
@@ -330,8 +329,7 @@ echo $this->formCheckbox('foo',
 <?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
     </label></p>
 </form>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ビュースクリプトの出力結果は、次のようになります。
@@ -354,8 +352,7 @@ echo $this->formCheckbox('foo',
         <input type="checkbox" name="opt_in" value="yes" checked="checked" />
     </label></p>
 </form>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <xi:include href="Zend_View-Helpers-Action.xml" />
         <xi:include href="Zend_View-Helpers-Cycle.xml">
@@ -398,8 +395,7 @@ $view = new Zend_View();
 
 // パスを /path/to/more/helpers 、プレフィックスを 'My_View_Helper' と設定します
 $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
-]]>
-        </programlisting>
+]]></programlisting>
 
 
         <para>
@@ -424,8 +420,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "My_View_Helper_HelperName" という名前のクラスを探し、
 // そして最後に "Zend/View/Helpers/HelperName.php" で
 // "Zend_View_Helper_HelperName" という名前のクラスを探します。
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -503,8 +498,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
         return htmlspecialchars($output);
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             そして、ビュースクリプト内で <code>SpecialPurpose</code>
@@ -517,8 +511,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 echo $this->specialPurpose();
 echo $this->specialPurpose();
 echo $this->specialPurpose();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             出力結果は、次のようになります。
@@ -527,8 +520,7 @@ echo $this->specialPurpose();
 'The Jerk' を 1 回見ました。
 'The Jerk' を 2 回見ました。
 'The Jerk' を 3 回見ました。
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             時には <classname>Zend_View</classname> オブジェクトを使用したくなることもあるでしょう。
@@ -553,8 +545,7 @@ class My_View_Helper_ScriptPath
         return $this->view->getScriptPath($script);
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ヘルパークラスで <code>setView()</code> メソッドを定義しておくと、

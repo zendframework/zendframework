@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
@@ -115,8 +115,7 @@
 require_once 'Zend/Text/Figlet.php';
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             等幅フォントを使用すると、この結果は次のようになります。
         </para>
@@ -127,8 +126,7 @@ echo $figlet->render('Zend');
   / //__   | ||___   | .  || | |__/ ||
  /_____||  |_____||  |_|\_|| |_____//
  `-----`'  `-----`   `-` -`'  -----`
-]]>
-</programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

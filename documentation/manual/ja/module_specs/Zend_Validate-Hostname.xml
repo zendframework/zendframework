@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
@@ -30,8 +30,7 @@ if ($validator->isValid($hostname)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         これは、ホスト名 <code>$hostname</code> を検証し、失敗した場合は
         その原因を表す便利なエラーメッセージを
@@ -65,8 +64,7 @@ if ($validator->isValid($hostname)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -75,8 +73,7 @@ if ($validator->isValid($hostname)) {
         たとえば、DNS およびローカルホスト名を許可するには、
         Zend_Validate_Hostname のインスタンスを次のように作成します。
         <programlisting role="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_IP);]]>
-        </programlisting>
+$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_IP);]]></programlisting>
 
     </para>
 
@@ -137,8 +134,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         のコンストラクタに二番目のパラメータを次のように渡します。
 
         <programlisting role="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);]]>
-        </programlisting>
+$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);]]></programlisting>
 
         あるいは、TRUE または FALSE を
         <code>$validator->setValidateIdn()</code> に渡すことで、
@@ -165,8 +161,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false
         以下の例では、IDN の検証は二番目のパラメータで有効にしています。
 
         <programlisting role="php"><![CDATA[
-$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, true, false);]]>
-        </programlisting>
+$validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, true, false);]]></programlisting>
 
         あるいは、TRUE または FALSE を
         <code>$validator->ValidateTld()</code> に渡すことで、

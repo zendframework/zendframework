@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink ヘルパー</title>
 
@@ -93,8 +93,7 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 ?>
 <?php // リンクをレンダリングします ?>
 <?php echo $this->headLink() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

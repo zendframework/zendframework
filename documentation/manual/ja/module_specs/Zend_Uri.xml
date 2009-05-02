@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
 
@@ -45,8 +45,7 @@
 $uri = Zend_Uri::factory('http');
 
 // $uri は Zend_Uri_Http のインスタンスとなります
-]]>
-      </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -81,8 +80,7 @@ $uri = Zend_Uri::factory('http');
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 // $uri は Zend_Uri_Http のインスタンスです
-]]>
-      </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -110,8 +108,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
 $valid = Zend_Uri::check('http://uri.in.question');
 
 // $valid は、正しければ TRUE、そうでなければ FALSE となります
-]]>
-      </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -150,8 +147,7 @@ $valid = Zend_Uri::check('http://example.com/?q=this|that');
 
 // 'allow_unwise' の値をデフォルトの FALSE に戻します
 Zend_Uri::setConfig(array('allow_unwise' => false));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -187,8 +183,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $scheme = $uri->getScheme();  // "http"
-]]>
-        </programlisting>
+]]></programlisting>
       </example>
 
       <para>
@@ -208,8 +203,7 @@ $scheme = $uri->getScheme();  // "http"
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 echo $uri->getUri();  // "http://www.zend.com"
-]]>
-        </programlisting>
+]]></programlisting>
       </example>
 
       <para>
@@ -236,8 +230,7 @@ echo $uri->getUri();  // "http://www.zend.com"
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $isValid = $uri->valid();  // TRUE
-]]>
-        </programlisting>
+]]></programlisting>
       </example>
 
       <para>

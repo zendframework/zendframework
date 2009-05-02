@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
     <para>
@@ -22,8 +22,7 @@ CREATE TABLE `session` (
   `data` text,
   PRIMARY KEY (`id`)
 );
-]]>
-</programlisting>
+]]></programlisting>
         <programlisting role="php"><![CDATA[
 // データベース接続を準備します
 $db = Zend_Db::factory('Pdo_Mysql', array(
@@ -52,8 +51,7 @@ Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config));
 Zend_Session::start();
 
 // これで、ふつうに Zend_Session を使えるようになります
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         Zend_Session_SaveHandler_DbTable で、複数カラムの主キーを使用することもできます。
@@ -70,8 +68,7 @@ CREATE TABLE `session` (
     `session_data` text,
     PRIMARY KEY (`Session_ID`, `save_path`, `name`)
 );
-]]>
-</programlisting>
+]]></programlisting>
         <programlisting role="php"><![CDATA[
 // 先ほど同様にまず DB 接続を設定します
 // 注意: この設定は Zend_Db_Table にも渡されることに注意しましょう
@@ -102,8 +99,7 @@ Zend_Session::setSaveHandler(new Zend_Session_SaveHandler_DbTable($config));
 Zend_Session::start();
 
 // ふつうに Zend_Session を使用します
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

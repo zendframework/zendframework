@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript ヘルパー</title>
 
@@ -62,8 +62,7 @@ $this->headScript()->appendFile(
     'text/javascript',
     array('conditional' => 'lt IE 7')
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </note>
 
@@ -133,8 +132,7 @@ $this->headScript()->appendFile(
 
         <programlisting role="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
-]]>
-        </programlisting>
+]]></programlisting>
     </note>
 
     <example id="zend.view.helpers.initial.headscript.basicusage">
@@ -150,8 +148,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 // スクリプトを追加します
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             クライアント側のスクリプトでは並び順が重要となります。
@@ -171,8 +168,7 @@ $this->headScript()->appendFile('/js/scriptaculous.js');
 
 // でも、もととなる prototype スクリプトは常に最初に読み込まれるようにします
 $this->headScript()->prependFile('/js/prototype.js');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             すべてのスクリプトを出力する準備が整ったら、
@@ -181,8 +177,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->headScript() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.headscript.capture">
@@ -200,8 +195,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;
 <?php $this->headScript()->captureEnd() ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             前提条件は次のとおりです。

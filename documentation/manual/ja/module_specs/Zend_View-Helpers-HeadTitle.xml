@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle ヘルパー</title>
 
@@ -47,8 +47,7 @@ $this->headTitle('Zend Framework');
 
 // 各部分を区切る文字列を設定します
 $this->headTitle()->setSeparator(' / ');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             最後に、レイアウトスクリプト内でタイトルをレンダリングする際にそれを出力するだけです。
@@ -57,8 +56,7 @@ $this->headTitle()->setSeparator(' / ');
         <programlisting role="php"><![CDATA[
 <!-- <アクション名> / <コントローラ名> / Zend Framework と出力されます -->
 <?php echo $this->headTitle() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

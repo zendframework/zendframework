@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -139,8 +139,7 @@ if ($validator->isValid($iban)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             これは、IBAN 番号をひとつの国に対して検証したい場合に使用します。
             もっとシンプルな方法としては、この例のようにロケールを指定しないものもあります。
@@ -153,8 +152,7 @@ if ($validator->isValid($iban)) {
 } else {
     // IBAN は無効です
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             しかしこれには大きな問題がひとつあります。
             たとえばフランスならフランスなど 1 か国だけの IBAN 番号を許可したいときに、

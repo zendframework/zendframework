@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta ヘルパー</title>
 
@@ -92,8 +92,7 @@
         <programlisting role="php"><![CDATA[
 // meta タグでキーワードを指定します
 $this->headMeta()->appendName('keywords', 'framework php productivity');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             クライアント側でのキャッシュの制御方法を指定したい場合は、
@@ -106,8 +105,7 @@ $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
                  ->appendHttpEquiv('pragma', 'no-cache')
                  ->appendHttpEquiv('Cache-Control', 'no-cache');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             meta タグの使い方としてもうひとつよくあるのは、
@@ -119,8 +117,7 @@ $this->headMeta()->appendHttpEquiv('expires',
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'en-US');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             最後の例として、リダイレクトの前に見せるメッセージを
@@ -131,8 +128,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 // 3 秒後に新しい URL に移動させます
 $this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             レイアウト内で meta タグを指定し終えたら、ヘルパーの内容を出力します。
@@ -140,8 +136,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->headMeta() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

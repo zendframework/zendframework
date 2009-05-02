@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.pdf.pages">
     <title>ページの操作</title>
     <sect2 id="zend.pdf.pages.creation">
@@ -78,8 +78,7 @@ $pdf->pages[] = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 unset($pdf->pages[$id]);
 
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -111,8 +110,7 @@ $pdf->pages[] = $page2;
 unset($pdf->pages[$templatePageIndex]);
 
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

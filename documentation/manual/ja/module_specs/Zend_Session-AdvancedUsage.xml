@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -26,8 +26,7 @@
 
             <programlisting role="php"><![CDATA[
 Zend_Session::start();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -56,8 +55,7 @@ Zend_Session::start();
                     に以下の内容を追加します。
                     <programlisting role="httpd.conf"><![CDATA[
 php_value session.auto_start 0
-]]>
-</programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -173,8 +171,7 @@ $userProfileNamespace->lock();
 if ($userProfileNamespace->isLocked()) {
     $userProfileNamespace->unLock();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -212,8 +209,7 @@ $s->setExpirationSeconds(60);
 // "expireAll" 名前空間は、60 秒が経過するか
 // 5 ホップに達するかのどちらかが発生した時点で
 // "有効期限切れ" となります
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -257,8 +253,7 @@ $testSpace = new Zend_Session_Namespace('testSpace');
 $testSpace->setExpirationSeconds(300, 'accept_answer');
 $testSpace->accept_answer = true;
 //...
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 次に、回答を処理するコントローラを示します。
@@ -276,8 +271,7 @@ else {
     // 時間切れ
 }
 // ...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -324,8 +318,7 @@ try {
     echo 'この名前空間ではインスタンスを作成できません。すでに ' .
          '$authSpaceAccessor2 があるからです\n';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -372,8 +365,7 @@ $sessionNamespace->array = array();
 // PHP 5.2.1 より前のバージョンでは、期待通りに動作しません
 $sessionNamespace->array['testKey'] = 1;
 echo $sessionNamespace->array['testKey'];
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -388,8 +380,7 @@ echo $sessionNamespace->array['testKey'];
             <programlisting role="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -424,8 +415,7 @@ $tmp['fruit'] = 'peach';
 $sessionNamespace->array = $tmp;
 
 echo $sessionNamespace->array['fruit']; // prints "peach"
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -444,8 +434,7 @@ $a = array(1, 2, 3);
 $myNamespace->someArray = array( &$a );
 $a['foo'] = 'bar';
 echo $myNamespace->someArray['foo']; // "bar" と表示されます
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -550,8 +539,7 @@ $result = $this->sortResult($result);
 session_start(); // resume artificially suspended session
 $this->assertTrue($result === ';p === plum',
     "iteration over named Zend_Session namespace failed (result=$result)");
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

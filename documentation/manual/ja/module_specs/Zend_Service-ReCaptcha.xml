@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
 
@@ -42,8 +42,7 @@
 
         <programlisting role="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             reCAPTCHA をレンダリングするには、
@@ -52,8 +51,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 
         <programlisting role="php"><![CDATA[
 echo $recaptcha->getHTML();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             フォームから送信されてきた内容のうち、
@@ -68,8 +66,7 @@ $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             結果が得られたら、正しいものだったかどうかを確認します。結果は
@@ -81,8 +78,7 @@ $result = $recaptcha->verify(
 if (!$result->isValid()) {
     // 検証に失敗
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             もっと簡単な使用法は、<link

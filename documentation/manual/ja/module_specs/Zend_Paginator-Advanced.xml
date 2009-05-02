@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.paginator.advanced">
     <title>高度な使用法</title>
 
@@ -56,8 +56,7 @@
         <para>
             <programlisting role="php"><![CDATA[
 return array_slice($this->_array, $offset, $itemCountPerPage);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -80,8 +79,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         <para>
             <programlisting role="php"><![CDATA[
 public function getPages(Zend_Paginator $paginator, $pageRange = null);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -100,8 +98,7 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
         <para>
             <programlisting role="php"><![CDATA[
 return $paginator->getPagesInRange($lowerBound, $upperBound);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -121,8 +118,7 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
 $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -143,8 +139,7 @@ $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
 $bO = array('cache_dir'=>'/tmp');
 $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
 Zend_Paginator::setCache($cache);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -162,8 +157,7 @@ Zend_Paginator::setCache($cache);
 // ... スクリプトの後半で次のようにすると
 $paginator->setCacheEnable(false);
 // キャッシュが無効になります
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -188,8 +182,7 @@ $paginator->clearPageItemCache(3);
 
 // すべてのキャッシュをクリアします
 $paginator->clearPageItemCache();
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -206,8 +199,7 @@ $items = $paginator->getCurrentItems();
 
 // すべてのキャッシュデータが消去されます
 $paginator->setItemCountPerPage(2);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -227,8 +219,7 @@ $otherItems = $paginator->getItemsPerPage(4);
 
 // キャッシュされたアイテムを二次元配列で取得します
 var_dump($paginator->getPageItemCache());
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 </sect1>

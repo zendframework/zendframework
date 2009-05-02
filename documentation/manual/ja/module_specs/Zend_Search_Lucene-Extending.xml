@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -38,8 +38,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Text());
 ...
 $index->addDocument($doc);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ユーザ定義の解析器のための共通の親クラスとして設計されているのが
@@ -133,8 +132,7 @@ class My_Analyzer extends Zend_Search_Lucene_Analysis_Analyzer_Common
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new My_Analyzer());
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -200,8 +198,7 @@ $analyzer =
 $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]>
-            </programlisting>
+]]></programlisting>
             <programlisting role="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
@@ -210,8 +207,7 @@ $analyzer =
 $analyzer->addFilter($shortWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -227,8 +223,7 @@ $analyzer =
 $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
-]]>
-            </programlisting>
+]]></programlisting>
             ファイル形式は一般的なテキストファイルで、各文字列にひとつの単語が含まれるものとなります。
             '#' を指定すると、その文字列はコメントであるとみなします。
         </para>
@@ -343,8 +338,7 @@ class MySimilarity extends Zend_Search_Lucene_Search_Similarity {
 
 $mySimilarity = new MySimilarity();
 Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.extending.storage">
@@ -463,8 +457,7 @@ abstract function touchFile($filename);
 abstract function getFileObject($filename);
 
 }
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
         Zend_Search_Lucene_Storage_Directory クラスの
@@ -514,8 +507,7 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
         ...
     }
 }
-]]>
-</programlisting>
+]]></programlisting>
 
     </sect2>
 </sect1>

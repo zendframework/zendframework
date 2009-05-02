@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.measure.output">
 
     <title>計測値の出力</title>
@@ -45,8 +45,7 @@ $unit = new Zend_Measure_Length($mystring,
                                 $locale);
 
 echo $unit;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -81,8 +80,7 @@ $unit = new Zend_Measure_Length($mystring,
                                 $locale);
 
 echo $unit->getValue();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -110,8 +108,7 @@ $unit = new Zend_Measure_Weight($mystring,
                                 $locale);
 
 echo $unit->getType();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 

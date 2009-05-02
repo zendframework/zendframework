@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
 
@@ -58,8 +58,7 @@ if ($akismet->verifyKey($apiKey) {
 } else {
     echo "このキーは無効です。\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             引数を指定せずにコールすると、<code>verifyKey()</code>
@@ -195,8 +194,7 @@ if ($akismet->isSpam($data)) {
 } else {
     echo "私たちのサイトへようこそ!";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -236,8 +234,7 @@ $data = array(
     'comment_content'      => "スパマーじゃないもん。信じて!"
 );
 $akismet->submitSpam($data));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -279,8 +276,7 @@ $data = array(
     'comment_content'      => "スパマーじゃないもん。信じて!"
 );
 $akismet->submitHam($data));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

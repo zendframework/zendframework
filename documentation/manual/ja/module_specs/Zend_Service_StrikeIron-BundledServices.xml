@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.strikeiron.bundled-services">
     <title>Zend_Service_StrikeIron: バンドルされているサービス</title>
 
@@ -69,8 +69,7 @@ if ($zips->count == 0) {
 // 詳細なステータス情報
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
 $status = $response->serviceStatus;
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 
@@ -131,8 +130,7 @@ if ($result->addressErrorNumber != 0) {
     // 正しい住所ですか?
     $valid = ($result->valid == 'VALID');
 }
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 
@@ -179,8 +177,7 @@ echo $rateInfo->GST;              // あるいは GST (Goods & Services Tax) の
 $rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // すべてのプロパティを表示します
 echo $rateInfo->state_sales_tax;  // あるいは州の消費税のみを表示します
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 </sect1>

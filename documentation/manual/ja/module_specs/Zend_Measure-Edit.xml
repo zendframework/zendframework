@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.measure.edit">
 
     <title>計測値の操作</title>
@@ -87,8 +87,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON);
 
 // 出力の精度を定義します
 print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -120,8 +119,7 @@ $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 $sum = $unit->add($unit2);
 
 echo $sum; // "300 cm" と出力します
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -150,8 +148,7 @@ $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 $sum = $unit->sub($unit2);
 
 echo $sum;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -180,8 +177,7 @@ if ($unit->equals($unit2)) {
 } else {
     print "これらは異なります";
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             <example id="zend.measure.edit.equal.example-2">
                 <title>同一の計測値</title>
@@ -197,8 +193,7 @@ if ($unit->equals($unit2)) {
 } else {
     print "これらは異なります";
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -227,8 +222,7 @@ $unit3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
 print "Equal:".$unit2->compare($unit);
 print "Lesser:".$unit2->compare($unit3);
 print "Greater:".$unit3->compare($unit2);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -258,8 +252,7 @@ echo $unit;
 
 $unit->setValue("1.234,56", Zend_Measure_Length::MILLIMETER,$locale);
 echo $unit;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
 
@@ -282,8 +275,7 @@ echo $unit; // "1 m" と出力します
 
 $unit->setType(Zend_Measure_Length::KILOMETER);
 echo $unit; // "1000 km" と出力します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

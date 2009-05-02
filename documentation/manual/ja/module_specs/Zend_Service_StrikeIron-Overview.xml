@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
 
@@ -164,8 +164,7 @@ $strikeIron = new Zend_Service_StrikeIron(array('username' => 'あなたのユ�
                                                 'password' => 'あなたのパスワード'));
 
 $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>
@@ -207,8 +206,7 @@ $rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 echo $rateInfo->province;
 echo $rateInfo->abbreviation;
 echo $rateInfo->GST;
-]]>
-        </programlisting>
+]]></programlisting>
 
         上の例では、<code>getService()</code> メソッドを使用して
         <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Sales &amp; Use Tax Basic</link>
@@ -279,8 +277,7 @@ Zend_Service_StrikeIron_Decorator Object
             [HST] => Y
         )
 )
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>
@@ -345,8 +342,7 @@ try {
   // エラー処理をここで行います
 
 }
-]]>
-        </programlisting>
+]]></programlisting>
         スローされる例外は、常に <classname>Zend_Service_StrikeIron_Exception</classname>
         となります。
       </para>
@@ -397,8 +393,7 @@ $taxBasic = $strikeIron->getService(array('class => 'SalesUseTaxBasic'));
 // Sales & Use Tax Basic サービスをあと何回使用できるかを調べます
 $subscription = $taxBasic->getSubscriptionInfo();
 echo $subscription->remainingHits;
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>

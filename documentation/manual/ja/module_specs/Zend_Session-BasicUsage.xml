@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.session.basic_usage">
 
     <title>基本的な使用法</title>
@@ -28,8 +28,7 @@
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace は $_SESSION['myNamespace'] に対応します
-]]>
-        </programlisting>
+]]></programlisting>
 
         Zend_Session は、<code>$_SESSION</code> を直接使用するその他のコードと組み合わせて使用することもできます。
         しかし、問題が起こることをさけるために、<code>$_SESSION</code>
@@ -67,8 +66,7 @@ if (isset($defaultNamespace->numberOfPageRequests)) {
 
 echo "このセッションでページがリクエストされた回数: ",
     $defaultNamespace->numberOfPageRequests;
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -101,8 +99,7 @@ $authNamespace->user = "myusername";
 // ウェブサービスコンポーネント用
 $webServiceNamespace = new Zend_Session_Namespace('Some_Web_Service');
 $webServiceNamespace->user = "mywebusername";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -118,8 +115,7 @@ $webServiceNamespace->user = "mywebusername";
             <programlisting role="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "myusername";
 $_SESSION['Some_Web_Service']['user'] = "mywebusername";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -146,8 +142,7 @@ $aNamespace =
 foreach ($aNamespace as $index => $value) {
     echo "aNamespace->$index = '$value';\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -181,8 +176,7 @@ if (!isset($namespace->bar)) {
 }
 
 unset($namespace->foo);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

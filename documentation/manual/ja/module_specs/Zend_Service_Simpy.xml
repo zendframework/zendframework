@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.simpy">
     <title>Zend_Service_Simpy</title>
     <sect2 id="zend.service.simpy.introduction">
@@ -106,8 +106,7 @@ $linkQuery->setBeforeDate('2006-12-09');
    すべてのリンクを探します */
 $linkQuery->setBeforeDate('2006-12-01');
 $linkQuery->setAfterDate('2006-12-09');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             リンクの識別は、URL によって行います。言い換えると、
@@ -147,8 +146,7 @@ $linkSet = $this->_simpy->getLinks();
 foreach ($linkSet as $link) {
     $this->_simpy->deleteLink($link->getUrl());
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.simpy.tags">
@@ -196,8 +194,7 @@ $simpy->splitTag('frameworks', 'framework', 'development');
 /* 'framework' および 'development' のふたつのタグを
 'frameworks' に統合します。これは分割の反対の作業です */
 $simpy->mergeTags('framework', 'development', 'frameworks');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.simpy.notes">
@@ -249,8 +246,7 @@ $noteSet = $simpy->getNotes('+title:PHP -description:framework');
 
 /* メモを削除します */
 $simpy->deleteNote($note->getId());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.simpy.watchlists">
@@ -297,8 +293,7 @@ foreach ($watchlistSet as $watchlist) {
 /* 個々のウォッチリストを、ID を指定して取得します */
 $watchlist = $simpy->getWatchlist($watchlist->getId());
 $watchlist = $simpy->getWatchlist(1);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

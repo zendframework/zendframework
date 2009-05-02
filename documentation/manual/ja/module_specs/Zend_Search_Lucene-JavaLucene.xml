@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.search.lucene.java-lucene">
     <title>Java Lucene との相互運用</title>
 
@@ -84,8 +84,7 @@ Reader reader = new BufferedReader(new InputStreamReader(is));
 doc.add(Field.Text("contents", reader));
 
 indexWriter.addDocument(doc);
-]]>
-</programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 

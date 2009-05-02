@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.pdf.usage">
     <title>Zend_Pdf モジュールの使用例</title>
     <para>
@@ -262,8 +262,7 @@ if (isset($argv[2])) {
 } else {
     $pdf->save($argv[1], true /* 更新 */);
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

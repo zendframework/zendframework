@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle ヘルパー</title>
 
@@ -59,8 +59,7 @@
             <programlisting role="php"><![CDATA[
 // スクリプトを追加します
 $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </note>
 
@@ -104,8 +103,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
         <programlisting role="php"><![CDATA[
 // スタイルを追加します
 $this->headStyle()->appendStyle($styles);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             CSS では並び順が重要となります。
@@ -125,8 +123,7 @@ $this->headStyle()->appendStyle($finalStyles);
 
 // 先頭に置きます
 $this->headStyle()->prependStyle($firstStyles);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             すべてのスタイル宣言を出力する準備が整ったら、
@@ -135,8 +132,7 @@ $this->headStyle()->prependStyle($firstStyles);
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->headStyle() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.headstyle.capture">
@@ -155,8 +151,7 @@ body {
     background-color: <?php echo $this->bgColor ?>;
 }
 <?php $this->headStyle()->captureEnd() ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             前提条件は次のとおりです。

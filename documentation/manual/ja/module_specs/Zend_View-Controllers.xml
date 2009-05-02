@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.view.controllers">
     <title>コントローラスクリプト</title>
 
@@ -25,8 +25,7 @@ $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             しかし、代入する値がすでに配列やオブジェクトの形式になっている場合は、
@@ -58,8 +57,7 @@ $obj->a = "Hay";
 $obj->b = "Bee";
 $obj->c = "Sea";
 $view->assign((array) $obj);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             別の方法として、assign メソッドを使用してひとつひとつ代入することもできます。
@@ -71,8 +69,7 @@ $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -96,8 +93,7 @@ $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -123,8 +119,7 @@ echo $view->render('someView.php');
         <programlisting role="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             こうすると、$view->render('someView.php') がコールされた場合に
@@ -149,8 +144,7 @@ $view->addScriptPath('/path/to/custom/');
 // まず最初に "/path/to/custom/booklist.php" を探し、
 // 次に "/path/to/app/views/booklist.php"、そして最後に
 // カレントディレクトリから "booklist.php" を探します。
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>ユーザの入力内容をスクリプトパスに設定してはいけません</title>

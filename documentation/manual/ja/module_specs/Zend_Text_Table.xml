@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
     <para>
@@ -150,8 +150,7 @@ $row->appendColumn(new Zend_Text_Table_Column('Framework'));
 $table->appendRow($row);
 
 echo $table;
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             この結果は次のようになります。
         </para>
@@ -159,8 +158,7 @@ echo $table;
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

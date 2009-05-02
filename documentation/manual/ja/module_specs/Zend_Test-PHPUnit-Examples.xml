@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect2 id="zend.test.phpunit.examples">
     <title>例</title>
 
@@ -135,8 +135,7 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 
     // この後にメソッド定義が続きます...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             これで、起動用コールバックを次のように作れるようになります。
@@ -161,8 +160,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     // ...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ここまでできたら、テストを書くことができます。
@@ -198,8 +196,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     // ...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ではテストを書いてみましょう。
@@ -283,8 +280,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertQuery('form .errors');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             これらは簡潔なものであり、大半は実際の中身までは見ていないことに注意しましょう。

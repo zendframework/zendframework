@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action ビューヘルパー</title>
 
@@ -45,8 +45,7 @@
                                  array('count' => 10)); ?>
     </div>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

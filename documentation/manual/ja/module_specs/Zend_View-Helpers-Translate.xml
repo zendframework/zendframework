@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect3 id="zend.view.helpers.initial.translate">
 
     <title>翻訳ヘルパー</title>
@@ -73,8 +73,7 @@ Zend_Registry::set('Zend_Translate', $adapter);
 // ビューの中で
 echo $this->translate('simple');
 // これは 'einfach' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -99,8 +98,7 @@ echo $this->translate('simple');
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 $this->translate()->setTranslator($adapter)->translate('simple');
 // これは 'einfach' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -120,8 +118,7 @@ $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 // アダプタを初期化します
 $translate = new Zend_View_Helper_Translate($adapter);
 print $translate->translate('simple'); // これは 'einfach' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_View</classname> は使わないけれど、
@@ -152,8 +149,7 @@ print $translate->translate('simple'); // これは 'einfach' を返します
 $date = "Monday";
 $this->translate("Today is %1\$s", $date);
 // これは 'Heute ist Monday' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -182,8 +178,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
                  $month,
                  $time);
 // これは 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -200,8 +195,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // これは 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -221,8 +215,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // ビューの中で
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -243,8 +236,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
 $date = array("Monday", "April", "11:20:55");
 $this->translate()->setLocale('it');
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -274,8 +266,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
 // 新たに設定されたデフォルトロケールである 'it' を返します
 $this->translate()->getLocale();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 

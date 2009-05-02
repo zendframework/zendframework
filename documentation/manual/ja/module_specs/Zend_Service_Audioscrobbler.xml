@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.service.audioscrobbler">
 
     <title>Zend_Service_Audioscrobbler</title>
@@ -198,8 +198,7 @@ $profileInfo = $as->userGetProfileInformation();
 // その一部を表示します
 print "$profileInfo->realname の情報は "
     . "$profileInfo->url にあります";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -231,8 +230,7 @@ foreach ($previousWeeklyArtists as $artist) {
     // アーティスト名と、プロファイルへのリンクを表示します
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -298,8 +296,7 @@ foreach ($relatedArtists as $artist) {
     // 関連アーティストを表示します
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

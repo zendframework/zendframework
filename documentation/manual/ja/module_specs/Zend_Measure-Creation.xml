@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.measure.creation">
 
     <title>計測値の作成</title>
@@ -46,8 +46,7 @@ echo $unit;
 $unit = new Zend_Measure_Length($measurement, Zend_Measure_Length::STANDARD);
 echo $unit;
 // 出力は '1234.7 m' (メートル) となります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -79,8 +78,7 @@ $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 
 echo $unit;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -101,8 +99,7 @@ echo $unit; // 出力は "125 m² in size" となります
 $mystring = "My house is 125m² in size, it has 5 rooms of 25m² each.";
 $unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
 echo $unit; // 出力は "125 m² in size" となります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -139,8 +136,7 @@ $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 'en_US');
 echo $unit; // 出力は "1234.50 m" となります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -159,8 +155,7 @@ Zend_Registry::set('Zend_Locale', $locale);
 
 // アプリケーションのどこかで
 $length = new Zend_Measure_Length(Zend_Measure_Length::METER();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

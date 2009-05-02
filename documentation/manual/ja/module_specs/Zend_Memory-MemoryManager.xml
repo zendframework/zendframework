@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.memory.memory-manager">
     <title>メモリマネージャ</title>
 
@@ -31,8 +31,7 @@ $backendOptions = array(
 );
 
 $memoryManager = Zend_Memory::factory('File', $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Memory</classname> は <link linkend="zend.cache.backends">Zend_Cache のバックエンド</link>
@@ -45,8 +44,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
 
             <programlisting role="php"><![CDATA[
 $memoryManager = Zend_Memory::factory('None');
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -81,8 +79,7 @@ $memoryManager = Zend_Memory::factory('None');
                 メソッドを使用します。
                 <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->create($data);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </para>
 
@@ -104,8 +101,7 @@ $memObject = $memoryManager->create($data);
                 メソッドを使用します。
                 <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -148,8 +144,7 @@ function foo()
     // $memObject3 オブジェクトはまだ $memList に参照されており、
     // 破棄されていません
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -187,8 +182,7 @@ function foo()
                 <programlisting role="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();  // メモリの制限バイト数を取得します
 $memoryManager->setMemoryLimit($newLimit);     // メモリの制限バイト数を設定します
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -221,8 +215,7 @@ $memoryManager->setMemoryLimit($newLimit);     // メモリの制限バイト数
                 <programlisting role="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // MinSize をバイト数で取得します
 $memoryManager->setMinSize($newSize);        // MinSize をバイト数で設定します
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>

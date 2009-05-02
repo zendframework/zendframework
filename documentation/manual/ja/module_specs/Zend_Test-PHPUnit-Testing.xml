@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <sect2 id="zend.test.phpunit.testing">
     <title>コントローラおよび MVC アプリケーションのテスト</title>
 
@@ -26,8 +26,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         // ...
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         しかし、時にはこれ以外の情報 (GET 変数や POST 変数、
@@ -74,8 +73,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         // ...
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         リクエストが準備できたので、次はアサーションを作成してみましょう。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.translate.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -54,8 +54,7 @@
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     この場合、存在しない言語 'fr' が指定されたことに関する notice が発行されます。
@@ -67,8 +66,7 @@ $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',
                                array('disableNotices' => true));
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 

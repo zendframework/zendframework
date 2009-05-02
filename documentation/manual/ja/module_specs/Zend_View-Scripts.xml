@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.view.scripts">
 
     <title>ビュースクリプト</title>
@@ -49,8 +49,8 @@
 
     <p>表示する本がありません。</p>
 
-<?php endif;]]>
-    </programlisting>
+<?php endif;?>
+]]></programlisting>
 
     <sect2 id="zend.view.scripts.escaping">
 
@@ -74,8 +74,8 @@
 echo $this->variable;
 
 // ビュースクリプトのよい例
-echo $this->escape($this->variable);]]>
-        </programlisting>
+echo $this->escape($this->variable);
+]]></programlisting>
 
         <para>
             デフォルトでは、escape() メソッドは PHP の htmlspecialchars()

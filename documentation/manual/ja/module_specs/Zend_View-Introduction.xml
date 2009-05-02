@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -65,8 +65,7 @@ $view->books = $data;
 
 // "booklist.php" というビュースクリプトをレンダリングします
 echo $view->render('booklist.php');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -109,8 +108,7 @@ echo $view->render('booklist.php');
     <p>表示する本がありません。</p>
 
 <?php endif;?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             変数の出力時に、"escape()"
@@ -140,8 +138,7 @@ base/path/
     helpers/
     filters/
     scripts/
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     これを設定するには <code>setBasePath()</code> か
@@ -222,8 +219,7 @@ base/path/
 
                 <programlisting role="apache"><![CDATA[
 php_value "short_open_tag" "on"
-]]>
-</programlisting>
+]]></programlisting>
 
                 <para>
                     これは、<code>.htaccess</code>
@@ -240,8 +236,7 @@ php_value "short_open_tag" "on"
 
         <programlisting role="php"><![CDATA[
 $view->setUseStreamWrapper(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
                 <para>
                     これは、<classname>Zend_View_Stream</classname>

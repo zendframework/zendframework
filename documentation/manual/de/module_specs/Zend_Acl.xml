@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15030 -->
+<!-- EN-Revision: 15101 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
@@ -123,8 +123,7 @@ $acl->deny('guest', 'someResource');
 $acl->allow('member', 'someResource');
 
 echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Da keine Regel speziell für die Rolle "someUser" und "someResource" definiert
                 wurde, muss <classname>Zend_Acl</classname> nach Regeln suchen, die für Rollen definiert
@@ -170,8 +169,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
 
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -262,8 +260,7 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 
 // Administrator erbt keine Zugriffsrechte
 $acl->addRole(new Zend_Acl_Role('administrator'));
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -319,8 +316,7 @@ $acl->allow('editor', null, array('publish', 'archive', 'delete'));
 
 // Administrator erbt gar nichts, aber erhält alle Rechte
 $acl->allow('administrator');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <code>null</code> Werte im obigen <code>allow()</code> Aufrufen werden verwendet,
@@ -370,8 +366,7 @@ echo $acl->isAllowed('administrator') ?
 echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // erlaubt, weil Administrator alle Rechte haben
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15034 -->
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
@@ -25,8 +25,7 @@ $server = new Zend_Amf_Server();
 $server->setClass('Foo');
 $response = $server->handle();
 echo $response;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kann stattdessen man eine einfache Funktion als Callback anhängen:
@@ -37,8 +36,7 @@ $server = new Zend_Amf_Server();
 $server->addFunction('myUberCoolFunction');
 $response = $server->handle();
 echo $response;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann auch mehrere Klassen und Funktionen mischen und verwenden. Wenn man das macht
@@ -55,8 +53,7 @@ $server->addFunction('myUberCoolFunction', 'my')
        ->setClass('Bar', 'bar');
 $response = $server->handle();
 echo $response;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>Zend Amf Server</code> erlaubt es auch Services das Sie dynamisch geladen werden, basierend
@@ -69,8 +66,7 @@ echo $response;
         <programlisting role="php"><![CDATA[
 $server->addDirectory(dirname(__FILE__) .'/../services/');
 $server->addDirectory(dirname(__FILE__) .'/../package/');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich (_) oder Punkt (.)
@@ -110,8 +106,7 @@ function helloWorld($name, $greeting = 'Hello')
 {
     return $greeting . ', ' . $name;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 // Angehängte Klasse
@@ -128,8 +123,7 @@ class World
         return $greeting . ', ' . $name;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Andere anmerkungen können verwendet werden, werden aber ignoriert.
@@ -215,8 +209,7 @@ class World
         </channel-definition>
     </channels>
 </services-config>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es gibt zwei Schlüsselpunkt im Beispiel. Erstens, aber letztes im Code, erstellen wir
@@ -229,8 +222,7 @@ class World
     <endpoint uri="http://example.com/server.php"
         class="flex.messaging.endpoints.AMFEndpoint"/>
 </channel-definition>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es ist zu beachten das wir diesem Kanal einen Identifikator, "zend-endpoint", gegeben
@@ -248,8 +240,7 @@ class World
     fault="faultHandler(event)"
     showBusyCursor="true"
     destination="zend">
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Hier haben wir ein neues entferntes Objekt definiert das durch "myservice" identifiziert
@@ -260,8 +251,7 @@ class World
 
         <programlisting role="ActionScript"><![CDATA[
 myservice.hello("Wade");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn wir Namespaces aktivieren würden wir "myservice.&lt;namespace&gt;.&lt;method&gt;"
@@ -270,8 +260,7 @@ myservice.hello("Wade");
 
         <programlisting role="ActionScript"><![CDATA[
 myservice.world.hello("Wade");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Für weitere Informationen über den Aufruf von Flex RemoteObject,
@@ -303,8 +292,7 @@ myservice.world.hello("Wade");
 
         <programlisting role="php"><![CDATA[
 $server->setProduction(false);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um Ihn wieder einzuschalten, muß stattdessen einfach ein boolscher true Wert übergeben werden:
@@ -312,8 +300,7 @@ $server->setProduction(false);
 
         <programlisting role="php"><![CDATA[
 $server->setProduction(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>Der Produktionsmode sollte sparsam deaktiviert werden!</title>
@@ -359,8 +346,7 @@ $server->setProduction(true);
 $response = $server->handle();
 $response->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $response;
-]]>
-        </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -389,8 +375,7 @@ echo $response;
                 <programlisting role="php"><![CDATA[
 // Die ActionScript Klasse 'ContactVO' auf die PHP Klasse 'Contact' mappen:
 $server->setClassMap('ContactVO', 'Contact');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -405,8 +390,7 @@ class Contact
 {
     public $_explicitType = 'ContactVO';
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -424,8 +408,7 @@ class Contact
         return 'ContactVO';
     }
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -454,8 +437,7 @@ package
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Die Klasse ist syntaktisch identisch zu der von PHP mit dem gleichen Namen. Die
             Variablennamen sind exakt die gleichen und müssen im gleichen Fall sein um korrekt
@@ -473,8 +455,7 @@ private var myContact:ContactVO;
 private function getContactHandler(event:ResultEvent):void {
     myContact = ContactVO(event.result);
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Das folgende Ergebnisevent vom Serviceaufruf wird sofort zu Flex ContactVO gecastet.
             Alles das bei myContact gebunden ist, wird mit den von ContactVO zurückgegebenen
@@ -544,8 +525,7 @@ package {
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wir müssen zuerst zwei ActionScript Bibliotheken importieren die den Haufen an Arbeit erledigen.
@@ -557,8 +537,7 @@ package {
         <programlisting role="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             In der Klasse benötigen wir drei Variable um NetConnection, Responder, und die Gateway URL zu
@@ -569,8 +548,7 @@ import flash.net.Responder;
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Im Main Contructor erstellen wir einen Responder und eine neue Verbindung zum
@@ -583,8 +561,7 @@ private var responder:Responder;
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             In der onComplete Funktion, welche ausgeführt wird sobald das Konstrukt fertiggestellt wurde,
@@ -594,8 +571,7 @@ connection.connect(gateway);
 
         <programlisting role="as"><![CDATA[
 connection.call("World.hello", responder, params);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Als wir die Responder Variable erstellt haben, haben wir auch eine onResult und eine onFault
@@ -609,8 +585,7 @@ private function onResult(result:Object):void {
     // Display the returned data
     trace(String(result));
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die onFault Funktion wird aufgerufen wenn eine ungültige Antwort vom Server zurückgekommen ist.
@@ -623,8 +598,7 @@ private function onResult(result:Object):void {
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das ActionScripts für die Erstellung der entfernten Verbindung ist jetzt fertiggestellt.

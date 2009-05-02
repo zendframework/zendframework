@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15108 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -159,8 +159,8 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     array(
         'resources' => array(
-            'My_Bootstrap_Resource_View', // kompletter Klassenname; ODER
-            'view',                       // Kurzname
+            'My_Bootstrap_Resource_View' => array(), // kompletter Klassenname; ODER
+            'view',                                  // Kurzname
 
             'FrontController' => array(
                 'controllerDirectory' => APPLICATION_PATH . '/controllers',

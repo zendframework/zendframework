@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15140 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -2015,6 +2015,23 @@ if (!is_null($version)) {
                         Aktuell wird die <classname>Zend_Db::CASE_FOLDING</classname> Option vom
                         Firebird/interbase Adapter nicht unterstützt. Nicht gequotete Identifizierer
                         werden automatisch in Großschreibweise zurückgegeben.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>Der Name des Adapters ist ZendX_Db_Adapter_Firebird.</para>
+                    <para>
+                        Beachte das der Parameter adapterNamespace mit dem Wert ZendX_Db_Adapter
+                        zu verwenden ist.
+                    </para>
+                    <para>
+                        Wir empfehlen die gds32.dll (oder Ihr Linux Äquivalent) welche mit PHP
+                        ausgeliefert wird, auf die gleiche Version wie am Server hochzurüsten.
+                        Für Firebird ist das Äquivalent zu gds32.dll die fbclient.dll.
+                    </para>
+                    <para>
+                        Standardmäßig werden alle Identifikatoren (Tabellennamen, Felder) in
+                        Großschreibweise zurückgegeben.
                     </para>
                 </listitem>
             </itemizedlist>

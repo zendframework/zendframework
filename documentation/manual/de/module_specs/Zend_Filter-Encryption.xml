@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15120 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -95,6 +95,14 @@ $filter->setAdapter('openssl');
                 <para>
                     <emphasis>vector</emphasis>: Der Initialisierungs Vektor der verwendet werden soll. Wenn er
                     nicht gesetzt wird, wird ein zufälliger Vektor verwende.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>salt</emphasis>: Ob der Schlüssel als Salt Wert verwendet wird. Der
+                    Schlüssel der für die Verschlüsselung verwendet wird, wird selbst auch
+                    verschlüsselt. Der Standardwert ist false.
                 </para>
             </listitem>
         </itemizedlist>

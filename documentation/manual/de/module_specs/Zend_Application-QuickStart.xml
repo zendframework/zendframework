@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15106 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -143,7 +143,7 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
-$application->bootstrap();
+$application->bootstrap()
             ->run();
 ]]></programlisting>
 

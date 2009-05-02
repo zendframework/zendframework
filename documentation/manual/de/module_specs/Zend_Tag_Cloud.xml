@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15121 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tag.cloud">
 
@@ -52,6 +52,20 @@
                 Muß ein Array sein das die Schlüssel prefix und path oder mehrere Arrays
                 enthält, welche die Schlüssel prefix und path enthalten. Ungültige Elemente
                 werden übersprungen.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>pluginLoader</code>: ein anderer Plugin Loader der verwendet wird. Muß eine
+                Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <code>prefixPath</code>: Präfix Pfad der dem Plugin Loader hinzugefügt wird. Muß
+                ein Array sein das die Schlüssel prefix und path enthält, oder mehrere Array
+                welche die Schlüssel prefix und path enthalten. Ungültige Elemente werden
+                übersprungen.
             </para>
         </listitem>
         <listitem>

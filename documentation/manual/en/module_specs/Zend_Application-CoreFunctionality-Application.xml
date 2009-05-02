@@ -30,8 +30,8 @@
                 <row>
                     <entry><code>phpSettings</code></entry>
                     <entry><para>
-                        Array of php.ini settings to use. Keys should be the php.ini
-                        keys.
+                        Array of <filename>php.ini</filename> settings to use. Keys should be the
+                        <filename>php.ini</filename> keys.
                     </para></entry>
                 </row>
 
@@ -47,7 +47,7 @@
                     <entry><code>autoloaderNamespaces</code></entry>
                     <entry><para>
                         Array of additional namespaces to register with the
-                        <code>Zend_Loader_Autoloader</code> instance.
+                        <classname>Zend_Loader_Autoloader</classname> instance.
                     </para></entry>
                 </row>
 

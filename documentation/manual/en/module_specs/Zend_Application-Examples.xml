@@ -33,7 +33,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         However, should custom initialization be necessary, you have two
         choices. First, you can write methods prefixed with <code>_init</code>
         to specify discrete code to bootstrap. These methods will be called by
-        bootstrap(), and can also be called as if they were public methods:
+        <code>bootstrap()</code>, and can also be called as if they were public methods:
         <code>bootstrap&lt;resource&gt;()</code>. They should accept an optional
         array of options.
     </para>
@@ -90,7 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <itemizedlist>
         <listitem>
             <para>
-                When instantiating the Zend_Application object
+                When instantiating the <classname>Zend_Application</classname> object
             </para>
         </listitem>
         <listitem>

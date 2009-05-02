@@ -15,22 +15,22 @@
 
     <sect2 id="zend.tool.framework.system-providers.version">
         <title>The Version Provider</title>
-        
+
         <para>
             The Version provider is included so that you may determine which
             version of the framework that the <code>zf</code> or
             <code>Zend_Tool</code> is currently set to work with.
         </para>
-        
+
         <para>
             Through the command line, simply run <code>zf show version</code>.
         </para>
-        
+
     </sect2>
-    
+
     <sect2 id="zend.tool.framework.system-providers.manifest">
         <title>The Manifest Provider</title>
-        
+
         <para>
             The Manifest provider is included so that you may determine what
             kind of "manifest" information is available during the
@@ -41,7 +41,7 @@
             Data found in the manifest can be used by any provider or client on
             an as-needed basis.
         </para>
-        
+
         <para>
             Through the command line, simply run <code>zf show manifest</code>.
         </para>

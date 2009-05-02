@@ -280,7 +280,7 @@
 
     <sect2 id="zend.reflection.reference.extension">
         <title>Zend_Reflection_Extension</title>
-        
+
         <para>
             <code>Zend_Reflection_Extension</code> extends
             <code>ReflectionExtension</code>, and follows its API. It overrides
@@ -312,7 +312,7 @@
             <code>Zend_Reflection_Function</code> adds a method for retrieving
             the function return type, as well as overrides several methods to
             allow specifying the reflection class to use for returned reflection
-            objects. 
+            objects.
         </para>
 
         <itemizedlist>

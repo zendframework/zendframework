@@ -76,7 +76,7 @@ newproject
 
         <para>
             In the above diagram, your bootstrap is in
-            <code>newproject/application/Bootstrap.php</code>, and looks like
+            <filename>newproject/application/Bootstrap.php</filename>, and looks like
             the following at first:
         </para>
 
@@ -119,12 +119,11 @@ phpSettings.display_errors = 1
 
         <para>
             Another file of interest is the
-            <code>newproject/public/index.php</code> file, which invokes
+            <filename>newproject/public/index.php</filename> file, which invokes
             <classname>Zend_Application</classname> and dispatches it.
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -164,29 +163,28 @@ $application->bootstrap()
 
         <itemizedlist>
             <listitem><para>
-                Create an <code>application/Bootstrap.php</code> file, with the
+                Create an <filename>application/Bootstrap.php</filename> file, with the
                 class <code>Bootstrap</code>.
             </para></listitem>
 
             <listitem><para>
-                Create an <code>application/configs/application.ini</code>
+                Create an <filename>application/configs/application.ini</filename>
                 configuration file with the base configuration necessary for
                 <classname>Zend_Application</classname>.
             </para></listitem>
 
             <listitem><para>
-                Modify your <code>public/index.php</code> to utilize
+                Modify your <filename>public/index.php</filename> to utilize
                 <classname>Zend_Application</classname>.
             </para></listitem>
         </itemizedlist>
 
         <para>
             First, create your <code>Bootstrap</code> class. Create a file,
-            <code>application/Bootstrap.php</code>, with the following contents:
+            <filename>application/Bootstrap.php</filename>, with the following contents:
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -196,7 +194,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Now, create your configuration. For this tutorial, we will use an INI
             style configuration; you may, of course, use an XML or PHP
             configuration file as well. Create the file
-            <code>application/configs/application.ini</code>, and provide the
+            <filename>application/configs/application.ini</filename>, and provide the
             following contents:
         </para>
 
@@ -222,12 +220,11 @@ phpSettings.display_errors = 1
 
         <para>
             Now, let's modify your gateway script,
-            <code>public/index.php</code>. If the file does not exist, create
+            <filename>public/index.php</filename>. If the file does not exist, create
             it; otherwise, replace it with the following contents:
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -262,9 +259,9 @@ $application->bootstrap()
             You may note that the application environment constant value looks
             for an environment variable "APPLICATION_ENV". We recommend setting
             this in your web server environment. In Apache, you can set this
-            either in your vhost definition, or in your <code>.htaccess</code>
+            either in your vhost definition, or in your <filename>.htaccess</filename>
             file. We recommend the following contents for your
-            <code>public/.htacces</code> file:
+            <filename>public/.htacces</filename> file:
         </para>
 
         <programlisting role="conf"><![CDATA[
@@ -276,7 +273,6 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-
 ]]></programlisting>
 
         <note>
@@ -349,8 +345,8 @@ phpSettings.display_errors = 1
 
         <para>
             If you haven't already, create the directory
-            <code>application/layouts/scripts/</code>, and the file
-            <code>layout.phtml</code> within that directory. A good starting
+            <filename>application/layouts/scripts/</filename>, and the file
+            <filename>layout.phtml</filename> within that directory. A good starting
             layout is as follows (and ties in with the view resource covered
             next):
         </para>
@@ -382,7 +378,6 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()

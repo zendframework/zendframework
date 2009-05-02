@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Application_Resource_Modules</classname> is used to initialize
         your application modules. If your module has a
-        <code>Bootstrap.php</code> file in its root, and it contains a class
+        <filename>Bootstrap.php</filename> file in its root, and it contains a class
         named <code>Module_Bootstrap</code> (where "Module" is the module name),
         then it will use that class to bootstrap the module.
     </para>

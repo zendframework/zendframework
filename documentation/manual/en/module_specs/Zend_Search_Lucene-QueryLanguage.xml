@@ -131,15 +131,15 @@ test*
 ]]></programlisting>
             It searches for "write", "wrote", "written", "rewrite", "rewrote" and so on.
         </para>
-        
+
         <para>
             Starting from ZF 1.7.7 wildcard patterns need some non-wildcard prefix. Default prefix length is 3 (like in Java Lucene).
             So "*", "te?t", "*wr?t*" terms will cause an exception<footnote>
-            <para>Please note, that it's not a <code>Zend_Search_Lucene_Search_QueryParserException</code>, but a 
-            <code>Zend_Search_Lucene_Exception</code>. It's thrown during query rewrite (execution) operation.</para></footnote>.  
+            <para>Please note, that it's not a <code>Zend_Search_Lucene_Search_QueryParserException</code>, but a
+            <code>Zend_Search_Lucene_Exception</code>. It's thrown during query rewrite (execution) operation.</para></footnote>.
         </para>
         <para>
-            It can be altered using <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> and 
+            It can be altered using <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> and
             <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code> methods.
         </para>
     </sect2>
@@ -215,7 +215,7 @@ roam~0.8
         <para>
             So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit can be retrieved and set using
             <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
-            methods. 
+            methods.
         </para>
         <para>
             Default matched terms per query limit is 1024.

@@ -406,7 +406,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         <para>
             Optional second parameter is a default HTML document encoding. It's used if encoding is not specified using
             Content-type HTTP-EQUIV meta tag.
-        </para> 
+        </para>
         <para>
             Optional third parameter is a highlighter object which has to implement
             <code>Zend_Search_Lucene_Search_Highlighter_Interface</code> interface:
@@ -451,9 +451,9 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             your own highlighter or just extend the default and redefine color table.
         </para>
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar behavior. The only differenece 
-            is that it takes as an input and returns HTML fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags. 
-            Nevertheless, fragment is automatically transformed to valid XHTML. 
+            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar behavior. The only differenece
+            is that it takes as an input and returns HTML fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
+            Nevertheless, fragment is automatically transformed to valid XHTML.
         </para>
     </sect2>
 </sect1>

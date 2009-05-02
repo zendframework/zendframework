@@ -32,7 +32,9 @@
                 <row>
                     <entry><code>registerPluginResource($resource, $options =
                             null)</code></entry>
-                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
+                    </entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <code>$resource</code>: <emphasis>required</emphasis>.
@@ -55,7 +57,9 @@
 
                 <row>
                     <entry><code>unregisterPluginResource($resource)</code></entry>
-                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
+                    </entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <code>$resource</code>: <emphasis>required</emphasis>.
@@ -108,7 +112,9 @@
                 <row>
                     <entry><code>setPluginLoader(Zend_Loader_PluginLoader_Interface
                             $loader)</code></entry>
-                    <entry><classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
+                    </entry>
                     <entry><itemizedlist>
                         <listitem><para>
                             <code>$loader</code>: <emphasis>required</emphasis>.

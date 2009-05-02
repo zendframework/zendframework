@@ -2,7 +2,7 @@
     <title>Zend_Form</title>
 
     <para>
-    	<code>Zend_Form</code> מפשט את השימוש והיצור של טפסים במערכות שלכם. הוא מבצע את הפעולות הבאות:
+        <code>Zend_Form</code> מפשט את השימוש והיצור של טפסים במערכות שלכם. הוא מבצע את הפעולות הבאות:
     </para>
 
     <itemizedlist>
@@ -14,8 +14,8 @@
     </itemizedlist>
 
     <para>
-    	<code>Zend_Form</code> משתמש בכמה רכיבים במערכת ה Zend Framework כדי לבצע את פעולותיו הכוללים את הרכיבים:
-		<code>Zend_Config</code>, <code>Zend_Validate</code>,
+        <code>Zend_Form</code> משתמש בכמה רכיבים במערכת ה Zend Framework כדי לבצע את פעולותיו הכוללים את הרכיבים:
+        <code>Zend_Config</code>, <code>Zend_Validate</code>,
         <code>Zend_Filter</code>, <code>Zend_Loader_PluginLoader</code>, ובנוסף <code>Zend_View</code>.
     </para>
 </sect1>

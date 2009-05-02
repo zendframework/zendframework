@@ -1,8 +1,8 @@
 <sect1 id="zend.mail.different-transports">
     <title>שימוש בחיבורים שונים</title>
     <para>
-    	 במידה ותרצו לשלוח אימיילים שונים בחיבורים שונים, תוכלו להעביר את אובייקט השליחה ישירות ל <code>send()</code> ללא שום קריאה קודם ל <code>setDefaultTransport()</code>.
-		 האובייקט שהועבר ידרוס את החיבור ברירת המחדל לבקשת השליחה הנוכחית של <code>send()</code>.  
+         במידה ותרצו לשלוח אימיילים שונים בחיבורים שונים, תוכלו להעביר את אובייקט השליחה ישירות ל <code>send()</code> ללא שום קריאה קודם ל <code>setDefaultTransport()</code>.
+         האובייקט שהועבר ידרוס את החיבור ברירת המחדל לבקשת השליחה הנוכחית של <code>send()</code>.
     </para>
     <example id="zend.mail.different-transports.example-1">
         <title>שימוש בחיבורים שונים</title>

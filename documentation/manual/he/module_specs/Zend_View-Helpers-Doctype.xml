@@ -2,8 +2,8 @@
     <title>תוסף עזרה ה Doctype</title>
 
     <para>
-    	קוד HTML ו XHTML תקני צריכים להכיל הגדרה של <code>DOCTYPE</code>.
-		מלבד זה שקשה לזכור אותם, ערכים אלו משפיעים על אופן העבודה של אלמנטים אחרים בעמוד שלכם ואופן התצוגה שלהם, לדוגמא הברחת תגי CDATA בתוך אלמנטים <code>&lt;script&gt;</code> ו
+        קוד HTML ו XHTML תקני צריכים להכיל הגדרה של <code>DOCTYPE</code>.
+        מלבד זה שקשה לזכור אותם, ערכים אלו משפיעים על אופן העבודה של אלמנטים אחרים בעמוד שלכם ואופן התצוגה שלהם, לדוגמא הברחת תגי CDATA בתוך אלמנטים <code>&lt;script&gt;</code> ו
         <code>&lt;style&gt;</code>
     </para>
 
@@ -28,7 +28,7 @@
     </para>
 
     <para>
-    	תוסף העזרה <code>Doctype</code> הוא יישום בסיסי של <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
+        תוסף העזרה <code>Doctype</code> הוא יישום בסיסי של <link linkend="zend.view.helpers.initial.placeholder">Placeholder</link>.
     </para>
 
     <example id="zend.view.helpers.initial.doctype.basicusage">
@@ -59,7 +59,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
         <title>קבלת הערך</title>
 
         <para>
-        	אם אתה צריך לדעת מהו הערך שהוגדר תוכל לעשות זאת על ידי קריאה למתודה <code>getDoctype()</code> על האובייקט, שמוחזר על ידי שימוש בתוסף.
+            אם אתה צריך לדעת מהו הערך שהוגדר תוכל לעשות זאת על ידי קריאה למתודה <code>getDoctype()</code> על האובייקט, שמוחזר על ידי שימוש בתוסף.
         </para>
 
         <programlisting role="php"><![CDATA[

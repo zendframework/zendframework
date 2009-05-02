@@ -8,13 +8,13 @@
 
         <para>
             <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">אימות מתקדם</ulink>
-            הינה שיטת אימות בעזרת פרוטוקול HTTP אשר משפרת את 
+            הינה שיטת אימות בעזרת פרוטוקול HTTP אשר משפרת את
             <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">אימות בסיסי</ulink>
             על ידי מתן אפשרות לאמת נתונים של משתמש דרך שרתים ללא צורך בהעברת הסיסמא בתור טקסט רגיל.
         </para>
 
         <para>
-        	מתאם זה מאפשר לאמת מול קבצי טקסט המכילים שורות התואמים לאלמנטים הבסיסים של אימות מתקדם:
+            מתאם זה מאפשר לאמת מול קבצי טקסט המכילים שורות התואמים לאלמנטים הבסיסים של אימות מתקדם:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -28,11 +28,11 @@
                 </listitem>
                 <listitem>
                     <para>
-                    	הצפנת MD5 של שם המשתמש, התחום והסיסמא, מופרדים בנקודותיים.
+                        הצפנת MD5 של שם המשתמש, התחום והסיסמא, מופרדים בנקודותיים.
                     </para>
                 </listitem>
             </itemizedlist>
-			האלמנטים למעלה מופרדים בנקודותיים, כמו בדוגמא הבאה ("<code>somePassword</code>"):
+            האלמנטים למעלה מופרדים בנקודותיים, כמו בדוגמא הבאה ("<code>somePassword</code>"):
         </para>
 
         <programlisting><![CDATA[
@@ -51,28 +51,28 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
             <itemizedlist>
                 <listitem>
                     <para>
-                    	שם הקובץ - שם הקובץ שמולו כל שאילתות האימות יבוצעו.
+                        שם הקובץ - שם הקובץ שמולו כל שאילתות האימות יבוצעו.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	תחום - התחום שבו האימות מתבצע עליו
-						
+                        תחום - התחום שבו האימות מתבצע עליו
+
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	שם משתמש - שם משתמש לאימות
-						
+                        שם משתמש - שם משתמש לאימות
+
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                    	סיסמא - סיסמא למשתמש של אותו תחום
+                        סיסמא - סיסמא למשתמש של אותו תחום
                     </para>
                 </listitem>
             </itemizedlist>
-			פרמטרים אלו צריכים להיות מוגדרים לפני הקריאה אל <code>authenticate()</code>.
+            פרמטרים אלו צריכים להיות מוגדרים לפני הקריאה אל <code>authenticate()</code>.
         </para>
 
     </sect2>
@@ -82,8 +82,8 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
         <title>זהות</title>
 
         <para>
-        	המתאם המתקדם מחזיר אובייקט של <code>Zend_Auth_Result</code>, אשר נוצרה עם הזהות בתור מערך אשר מכיל מפתחות של <code>realm</code> ו <code>username</code>.
-			הערכים במערך מקושרים למפתחות אשר הוגדרו לפני קריאה ל  <code>authenticate()</code>.
+            המתאם המתקדם מחזיר אובייקט של <code>Zend_Auth_Result</code>, אשר נוצרה עם הזהות בתור מערך אשר מכיל מפתחות של <code>realm</code> ו <code>username</code>.
+            הערכים במערך מקושרים למפתחות אשר הוגדרו לפני קריאה ל  <code>authenticate()</code>.
         </para>
 
         <programlisting role="php"><![CDATA[

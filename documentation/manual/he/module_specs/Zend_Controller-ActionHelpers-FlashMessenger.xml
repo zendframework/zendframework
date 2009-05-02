@@ -4,11 +4,11 @@
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>הקדמה</title>
         <para>
-        	תוסף העזרה <code>FlashMessenger</code> מאפשר לך להעביר הודעות שהמשתמש צריך יהיה לראות בעמוד הבא.
-			כדי לבצע את הפעולה הזאת <code>FlashMessenger</code> משתמש ב <code>Zend_Session_Namespace</code> כדי לשמור הודעות להמשך או לעמוד הבא.
-			בדרך כלל זה רעיון טוב שאם הינך מתכוון להשתמש ב <code>Zend_Session</code> או <code>Zend_Session_Namespace</code>, שקודם כל תקרא ל <code>Zend_Session::start()</code>
-			בקובץ ה bootstap.
-			למידע נוסף <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>.
+            תוסף העזרה <code>FlashMessenger</code> מאפשר לך להעביר הודעות שהמשתמש צריך יהיה לראות בעמוד הבא.
+            כדי לבצע את הפעולה הזאת <code>FlashMessenger</code> משתמש ב <code>Zend_Session_Namespace</code> כדי לשמור הודעות להמשך או לעמוד הבא.
+            בדרך כלל זה רעיון טוב שאם הינך מתכוון להשתמש ב <code>Zend_Session</code> או <code>Zend_Session_Namespace</code>, שקודם כל תקרא ל <code>Zend_Session::start()</code>
+            בקובץ ה bootstap.
+            למידע נוסף <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>.
         </para>
 
     </sect4>
@@ -16,8 +16,8 @@
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>דוגמא לשימוש בסיסי</title>
         <para>
-        	הדוגמא למטה מציגה את השימוש בתוסף עזרה זה בצורה הכי בסיסית שלו. 
-			כשהפעולה <code>/some/my</code> נקראת, היא מוסיפה את ההודעה "Record Saved!" לאחר מכן הפעולה <code>/some/my-next-request</code> תחזיר את זה ותציג אותו לאחר מכן גם תמחק אותו.
+            הדוגמא למטה מציגה את השימוש בתוסף עזרה זה בצורה הכי בסיסית שלו.
+            כשהפעולה <code>/some/my</code> נקראת, היא מוסיפה את ההודעה "Record Saved!" לאחר מכן הפעולה <code>/some/my-next-request</code> תחזיר את זה ותציג אותו לאחר מכן גם תמחק אותו.
         </para>
 
         <programlisting role="php"><![CDATA[

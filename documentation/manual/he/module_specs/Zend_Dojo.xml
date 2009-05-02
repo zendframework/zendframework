@@ -2,8 +2,8 @@
     <title>הקדמה</title>
 
     <para>
-    	Zend Framework מגיע עם <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> לתמיכה בפיתוח אפליקציות אינטרנט מתקדמות. 
-		 נקודות אינטגרציה בשימוש ב Dojo כוללות:
+        Zend Framework מגיע עם <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> לתמיכה בפיתוח אפליקציות אינטרנט מתקדמות.
+         נקודות אינטגרציה בשימוש ב Dojo כוללות:
     </para>
 
     <itemizedlist>
@@ -15,8 +15,8 @@
     </itemizedlist>
 
     <para>
-    	התיקיה בה נמצא Dojo היא  <code>externals/dojo/</code> בתיקיה הראשית של Zend Framework.
-		זוהי הפצת מקור, אשר מכילה את כל ה JS של Dojo, קבצי בדיקות , וקבצים המשמשים בתור כלים לבנייה.
+        התיקיה בה נמצא Dojo היא  <code>externals/dojo/</code> בתיקיה הראשית של Zend Framework.
+        זוהי הפצת מקור, אשר מכילה את כל ה JS של Dojo, קבצי בדיקות , וקבצים המשמשים בתור כלים לבנייה.
     </para>
 </sect1>
 <!--

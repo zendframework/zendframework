@@ -1,17 +1,17 @@
 <sect1 id="zend.pdf.save">
     <title>שמירת שינויים בטפסי PDF</title>
     <para>
-    	ישנם שני מתודות אשר שומרות שינויים לטפסי PDF: <code>Zend_Pdf::save()</code> ו <code>Zend_Pdf::render()</code>.
+        ישנם שני מתודות אשר שומרות שינויים לטפסי PDF: <code>Zend_Pdf::save()</code> ו <code>Zend_Pdf::render()</code>.
     </para>
 
     <para>
-    	<code>Zend_Pdf::save($filename, $updateOnly = false)</code> שומר את טופס ה PDF לקובץ. 
-		אם $updateOnly מוגדר ל true, אז רק השינויים החדשים מצורפים לקובץ. אחרת הקובץ משוכתב מחדש.
+        <code>Zend_Pdf::save($filename, $updateOnly = false)</code> שומר את טופס ה PDF לקובץ.
+        אם $updateOnly מוגדר ל true, אז רק השינויים החדשים מצורפים לקובץ. אחרת הקובץ משוכתב מחדש.
     </para>
 
     <para>
-    	<code>Zend_Pdf::render($newSegmentOnly = false)</code> מחזיר את הטופס PDF כסטרינג. 
-		אם $newSegmentOnly מוגדר ל true, אז רק השינויים החדשים מוחזרים.
+        <code>Zend_Pdf::render($newSegmentOnly = false)</code> מחזיר את הטופס PDF כסטרינג.
+        אם $newSegmentOnly מוגדר ל true, אז רק השינויים החדשים מוחזרים.
     </para>
 
     <example id="zend.pdf.save.example-1">

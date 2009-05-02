@@ -2,22 +2,22 @@
     <title>תוספי עזרה ל Dojo</title>
 
     <para>
-    	Zend Framework מספקת את תוספי העזרה הבאים לשימוש ספציפי ב Dojo:
+        Zend Framework מספקת את תוספי העזרה הבאים לשימוש ספציפי ב Dojo:
     </para>
 
     <itemizedlist>
         <listitem>
-        	<para>
-        	<emphasis>dojo():</emphasis> התקנת סביבת העבודה עם Dojo לעמוד שלך, הכוללים ערכי הגדרות של Dojo, נתיבים למודלים מותאמים אישית, הצהרות של הוספת מודלים, קבצי סגנונות עיצוב ועוד.
-       	 	</para>
-		</listitem>
+            <para>
+            <emphasis>dojo():</emphasis> התקנת סביבת העבודה עם Dojo לעמוד שלך, הכוללים ערכי הגדרות של Dojo, נתיבים למודלים מותאמים אישית, הצהרות של הוספת מודלים, קבצי סגנונות עיצוב ועוד.
+                </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.dojo.view.setup">
         <title>שימוש בתוספי עזרה ל Dojo</title>
 
         <para>
-        	כדי להשתמש בתוספי העזרה, תצטרכו להגיד לאובייקט התצוגה שלהם איפה הם נמצאים. תוכלו לעשות זאת על ידי:
+            כדי להשתמש בתוספי העזרה, תצטרכו להגיד לאובייקט התצוגה שלהם איפה הם נמצאים. תוכלו לעשות זאת על ידי:
             <code>addHelperPath()</code>:
         </para>
 
@@ -27,7 +27,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
         </programlisting>
 
         <para>
-        	לחלופין תוכלו להשתמש במתודה <code>enableView()</code> של המחלקה <code>Zend_Dojo</code> כדי שתעשה את העבודה בישבלכם:
+            לחלופין תוכלו להשתמש במתודה <code>enableView()</code> של המחלקה <code>Zend_Dojo</code> כדי שתעשה את העבודה בישבלכם:
         </para>
 
         <programlisting role="php"><![CDATA[

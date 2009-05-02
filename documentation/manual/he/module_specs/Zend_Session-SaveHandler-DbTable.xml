@@ -1,12 +1,12 @@
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
     <para>
-    	ההתקנה הבסיסית של Zend_Session_SaveHandler_DbTable חייבת לכלול לפחות 4 עמודות, 
-		המצויינים בקובץ ההגדרות/אובייקט ההגדרות:
-		primary, אשר הוא המפתח הראשי וכברירת מחדל מוגדר למזהה היחודי אשר בעצם סטרינג באורך 32 תווים;
-		modified, אשר משמש בתור זמן בפורמט UNIX של התאריך עדכון האחרון;
-		lifetime, אשר משמש בתור תקופת החיים של ה session (modified + lifetime > time() );
-		data, אשר משמש בתור המידע אשר נשמר בטבלה.
+        ההתקנה הבסיסית של Zend_Session_SaveHandler_DbTable חייבת לכלול לפחות 4 עמודות,
+        המצויינים בקובץ ההגדרות/אובייקט ההגדרות:
+        primary, אשר הוא המפתח הראשי וכברירת מחדל מוגדר למזהה היחודי אשר בעצם סטרינג באורך 32 תווים;
+        modified, אשר משמש בתור זמן בפורמט UNIX של התאריך עדכון האחרון;
+        lifetime, אשר משמש בתור תקופת החיים של ה session (modified + lifetime > time() );
+        data, אשר משמש בתור המידע אשר נשמר בטבלה.
     </para>
     <example id="zend.session.savehandler.dbtable.basic">
             <title>שימוש בסיסי</title>
@@ -52,7 +52,7 @@ Zend_Session::start();
         </programlisting>
     </example>
     <para>
-    	ניתן גם להשתמש בכמה מפתחות ראשיים לכמה עמודות ב Zend_Session_SaveHandler_DbTable.
+        ניתן גם להשתמש בכמה מפתחות ראשיים לכמה עמודות ב Zend_Session_SaveHandler_DbTable.
     </para>
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>שימוש במפתח ראשי לכמה עמודות</title>

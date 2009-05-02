@@ -2,21 +2,21 @@
     <title>הקדמה</title>
 
     <para>
-    	<code>Zend_Paginator</code> הינו רכיב גמיש למספור אוסף של נתונים ולהציגו למשתמשים.
+        <code>Zend_Paginator</code> הינו רכיב גמיש למספור אוסף של נתונים ולהציגו למשתמשים.
     </para>
 
     <para>
-    	המטרות העיקריות של <code>Zend_Paginator</code> הן:
+        המטרות העיקריות של <code>Zend_Paginator</code> הן:
 
         <itemizedlist>
             <listitem>
                 <para>
-                	מספור מידע כל סוג, לא רק משהו שקשור למסד נתונים
+                    מספור מידע כל סוג, לא רק משהו שקשור למסד נתונים
                 </para>
             </listitem>
             <listitem>
                 <para>
-                	שליפת רק את אותם נתונים שצריך להציג
+                    שליפת רק את אותם נתונים שצריך להציג
                 </para>
             </listitem>
             <listitem>

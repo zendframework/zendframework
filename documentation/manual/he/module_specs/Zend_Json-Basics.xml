@@ -1,8 +1,8 @@
 <sect1 id="zend.json.basics">
     <title>שימוש בסיסי</title>
     <para>
-    	שימוש ב <code>Zend_Json</code> נעשה על ידי קריאה לשני מתודות סטטיות שהם: 
-		<code>Zend_Json::encode()</code> ו <code>Zend_Json::decode()</code>.
+        שימוש ב <code>Zend_Json</code> נעשה על ידי קריאה לשני מתודות סטטיות שהם:
+        <code>Zend_Json::encode()</code> ו <code>Zend_Json::decode()</code>.
     </para>
     <programlisting role="php"><![CDATA[
 // Retrieve a value:

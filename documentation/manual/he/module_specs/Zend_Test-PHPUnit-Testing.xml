@@ -2,12 +2,12 @@
     <title>בדיקת המערכות שלך</title>
 
     <para>
-    	ברגע שכבר הגדרת את קובץ ה bootstrap שלך, תוכל להתחיל בשלב הבדיקות. 
-		בדיקות אלו בדרך כלל זהות לבדיקות שנעשות בעזרת PHPUnit, עם כמה הבדלים קלים.
+        ברגע שכבר הגדרת את קובץ ה bootstrap שלך, תוכל להתחיל בשלב הבדיקות.
+        בדיקות אלו בדרך כלל זהות לבדיקות שנעשות בעזרת PHPUnit, עם כמה הבדלים קלים.
     </para>
 
     <para>
-    	קודם כל, תצטרכו לשלוח קישור לבדיקה, על ידי שימוש במתודת ה <code>dispatch()</code>  שנמצאת תחת המחלקה TestCase
+        קודם כל, תצטרכו לשלוח קישור לבדיקה, על ידי שימוש במתודת ה <code>dispatch()</code>  שנמצאת תחת המחלקה TestCase
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -25,7 +25,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     </programlisting>
 
     <para>
-    	למרות, שיהיו רגעים שתצטרכו לספק מידע נוסף  כמו ערכים גלובאלים של GET, POST, COOKIE וכדומה. תוכלו להציג את המידע הזה בעזרת האפשרויות הבאות:
+        למרות, שיהיו רגעים שתצטרכו לספק מידע נוסף  כמו ערכים גלובאלים של GET, POST, COOKIE וכדומה. תוכלו להציג את המידע הזה בעזרת האפשרויות הבאות:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -71,7 +71,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     </programlisting>
 
     <para>
-    	עכשיו שהבקשה התבצעה, הגיע הזמן להסיק מסקנות לגביהם. 
+        עכשיו שהבקשה התבצעה, הגיע הזמן להסיק מסקנות לגביהם.
     </para>
 </sect2>
 <!--

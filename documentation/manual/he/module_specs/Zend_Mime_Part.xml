@@ -5,19 +5,19 @@
       <title>הקדמה</title>
 
       <para>
-      	מחלקה זו מייצגת חלק בודד מהודעת MIME. 
-		היא מכילה את התוכן של ההודעה ואת המידע אודות הקידוד שלה, סוג התוכן ושם הקובץ המקורי.
-		היא מספקת מתודה ליצירת סטרינג מהמידע שנשמר. אובייקטים של <code>Zend_Mime_Part</code> ניתנים להוספה אל <link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
-		 כדי להרכיב הודעה מרובה חלקים מלאה.</para>
+          מחלקה זו מייצגת חלק בודד מהודעת MIME.
+        היא מכילה את התוכן של ההודעה ואת המידע אודות הקידוד שלה, סוג התוכן ושם הקובץ המקורי.
+        היא מספקת מתודה ליצירת סטרינג מהמידע שנשמר. אובייקטים של <code>Zend_Mime_Part</code> ניתנים להוספה אל <link linkend="zend.mime.message"><code>Zend_Mime_Message</code></link>
+         כדי להרכיב הודעה מרובה חלקים מלאה.</para>
     </sect2>
 
   <sect2 id="zend.mime.part.instantiation">
     <title>התקנה</title>
 
     <para>
-    	<code>Zend_Mime_Part</code> נקראת ונוצרת עם הוספת פרמטר שמהווה סטרינג שמייצג את התוכן של החלק החדש. הסוג בדרך כלל מוגדר ל OCTET-STREAM, קידוד הינו 8ביט.
-		לאחר יצירת <code>Zend_Mime_Part</code>, ניתן להגדירו על ידי הצבת ערכים לתכונות שלו:
-	</para>
+        <code>Zend_Mime_Part</code> נקראת ונוצרת עם הוספת פרמטר שמהווה סטרינג שמייצג את התוכן של החלק החדש. הסוג בדרך כלל מוגדר ל OCTET-STREAM, קידוד הינו 8ביט.
+        לאחר יצירת <code>Zend_Mime_Part</code>, ניתן להגדירו על ידי הצבת ערכים לתכונות שלו:
+    </para>
 
     <programlisting role="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
@@ -38,13 +38,13 @@ public $language;
     <title>מתודות</title>
 
     <para>
-    	<code>getContent()</code> מחזיר את התוכן המקודד של ה MimePart בתור סטרינג על ידי שימוש בקידוד שהוגדר בערך $encoding.
-		ערכים חוקיים הם Zend_Mime::ENCODING_* המרת קידודים לא נעשית.
-	</para>
+        <code>getContent()</code> מחזיר את התוכן המקודד של ה MimePart בתור סטרינג על ידי שימוש בקידוד שהוגדר בערך $encoding.
+        ערכים חוקיים הם Zend_Mime::ENCODING_* המרת קידודים לא נעשית.
+    </para>
 
     <para>
-    	<code>getHeaders()</code> מחזיר את הכותרים של ה MimePart כפי שהם נוצרו בתכונות הניתנות לגישה של המחלקה.
-		התכונות צריכות להיות מוגדרות בהתאם לפני קריאה למתודה זו.
+        <code>getHeaders()</code> מחזיר את הכותרים של ה MimePart כפי שהם נוצרו בתכונות הניתנות לגישה של המחלקה.
+        התכונות צריכות להיות מוגדרות בהתאם לפני קריאה למתודה זו.
         <itemizedlist>
             <listitem>
                 <para>
@@ -55,7 +55,7 @@ public $language;
             <listitem>
                 <para>
                     <code>$id</code>
-					ניתן להגדרה כדי לזהות תוכן מסויים לתמונות פנימיות בתוך אימייל HTML.
+                    ניתן להגדרה כדי לזהות תוכן מסויים לתמונות פנימיות בתוך אימייל HTML.
                 </para>
             </listitem>
             <listitem>
@@ -67,7 +67,7 @@ public $language;
             <listitem>
                 <para>
                     <code>$disposition</code>
-					מגדיר בין אם הקובץ יהיה קובץ להורדה בתור צירוף, או ישמש בתור קובץ פנימי של האימייל.
+                    מגדיר בין אם הקובץ יהיה קובץ להורדה בתור צירוף, או ישמש בתור קובץ פנימי של האימייל.
                 </para>
             </listitem>
             <listitem>

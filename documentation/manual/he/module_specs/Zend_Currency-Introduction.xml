@@ -3,8 +3,8 @@
     <title>הקדמה ל Zend_Currency</title>
 
     <para>
-    	<code>Zend_Currency</code> היא חלק מהתמיכה החזקה ל i18n במערכת ה Zend Framework. היא מטפלת בכל הנושאים הקשורים למטבעות, תצוגת מטבעות ותצוגת מבנה לכל מטבע.
-		כמו כן היא מספקת מתודות נוספות אשר מספקות מידע אודות מטבעות, כמו איזה מטבע משומש בכל איזור.
+        <code>Zend_Currency</code> היא חלק מהתמיכה החזקה ל i18n במערכת ה Zend Framework. היא מטפלת בכל הנושאים הקשורים למטבעות, תצוגת מטבעות ותצוגת מבנה לכל מטבע.
+        כמו כן היא מספקת מתודות נוספות אשר מספקות מידע אודות מטבעות, כמו איזה מטבע משומש בכל איזור.
     </para>
 
     <sect2 id="zend.currency.introduction.list">
@@ -21,7 +21,7 @@
                     <emphasis role="strong">תמיכה מקומית מלאה</emphasis>
                 </para>
                 <para>
-                	<code>Zend_Currency</code> עובדת עם כל התמיכות המקומיות ולכן מכיר יותר מ 100 סוגי מטבעות שונים. זה כולל שמות המטבעות, סמלי המטבעות ועוד.
+                    <code>Zend_Currency</code> עובדת עם כל התמיכות המקומיות ולכן מכיר יותר מ 100 סוגי מטבעות שונים. זה כולל שמות המטבעות, סמלי המטבעות ועוד.
                 </para>
             </listitem>
             <listitem>
@@ -29,8 +29,8 @@
                     <emphasis role="strong">הגדרת מטבעות שניתן לעשות בהם שימוש חוזר</emphasis>
                 </para>
                 <para>
-                	<code>Zend_Currency</code> לא מכיל את הערך של כל מטבע. זוהי הסיבה למה הפונקציונליות שלו לא כלולה ב <code>Zend_Locale_Format</code>.
-					<code>Zend_Currency</code> מכיל את היתרון שכבר הוגדר של יצוג של מטבעות ושימוש חוזר בהן. 
+                    <code>Zend_Currency</code> לא מכיל את הערך של כל מטבע. זוהי הסיבה למה הפונקציונליות שלו לא כלולה ב <code>Zend_Locale_Format</code>.
+                    <code>Zend_Currency</code> מכיל את היתרון שכבר הוגדר של יצוג של מטבעות ושימוש חוזר בהן.
                 </para>
             </listitem>
             <listitem>
@@ -46,7 +46,7 @@
                     <emphasis role="strong">מתודות נוספות</emphasis>
                 </para>
                 <para>
-                	<code>Zend_Currency</code> מכילה מתודות נוספות אשר מציעות מידע אודות איזורים ואילו מטבעות משתמשים בהם. 
+                    <code>Zend_Currency</code> מכילה מתודות נוספות אשר מציעות מידע אודות איזורים ואילו מטבעות משתמשים בהם.
                 </para>
             </listitem>
         </itemizedlist>

@@ -2,7 +2,7 @@
     <title>הגדרות</title>
 
     <para>
-    	<code>Zend_Paginator</code> מכיל כמה מתודות אשר ניתן לקרוא להן כדי להגדיר את השימוש במחלקה:
+        <code>Zend_Paginator</code> מכיל כמה מתודות אשר ניתן לקרוא להן כדי להגדיר את השימוש במחלקה:
     </para>
 
     <table id="zend.paginator.configuration.table">
@@ -19,25 +19,25 @@
                 <row>
                     <entry>setCurrentPageNumber</entry>
                     <entry>
-                    	קביעת מספר העמוד הנוכחי (ברירת המחדל היא 1)
+                        קביעת מספר העמוד הנוכחי (ברירת המחדל היא 1)
                     </entry>
                 </row>
                 <row>
                     <entry>setItemCountPerPage</entry>
                     <entry>
-                    	הגדרת מספר מקסימלי של נתונים להצגה בעמוד אחד (ברירת המחדל היא 10)
+                        הגדרת מספר מקסימלי של נתונים להצגה בעמוד אחד (ברירת המחדל היא 10)
                     </entry>
                 </row>
                 <row>
                     <entry>setPageRange</entry>
                     <entry>
-                    	הגדרת כמות הפריטים להצגה בשליטת העמודים (ברירת המחדל היא 10).
+                        הגדרת כמות הפריטים להצגה בשליטת העמודים (ברירת המחדל היא 10).
                     </entry>
                 </row>
                 <row>
                     <entry>setView</entry>
                     <entry>
-                    	הגדרת אובייקט התצוגה, להצגה נוחה של העמודים.
+                        הגדרת אובייקט התצוגה, להצגה נוחה של העמודים.
                     </entry>
                 </row>
             </tbody>

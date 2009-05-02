@@ -4,11 +4,11 @@
     <sect2 id="zend.search.lucene.index-creation.file-formats">
         <title>סוגי קבצים</title>
         <para>
-        	אינדקס סוגי הקבצים של <code>Zend_Search_Lucene</code> תומכים בסוג בינארי עם Java Lucene גרסא 1.4 ומעלה.
+            אינדקס סוגי הקבצים של <code>Zend_Search_Lucene</code> תומכים בסוג בינארי עם Java Lucene גרסא 1.4 ומעלה.
         </para>
 
         <para>
-        	הסבר מלא אודות פורמט זה ניתן לקרוא כאן:
+            הסבר מלא אודות פורמט זה ניתן לקרוא כאן:
           <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>
           <footnote><para>הגרסא הנתמכת הנוכחית בפורמט אינדקס קבצים היא 2.3 החל מ Zend Framework 1.6.</para></footnote>.
         </para>
@@ -24,18 +24,18 @@
         <itemizedlist>
             <listitem>
                 <para>
-                	קובץ ה <filename>segments</filename> היא רשימת החלקים של האינדקס. 
+                    קובץ ה <filename>segments</filename> היא רשימת החלקים של האינדקס.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                	קבצי ה <filename>*.cfs</filename> מכילים חלקי אינדקס.
-					הערה! אינדקס אשר כתוב כמו שצריך תמיד יכיל חלק אחד.
+                    קבצי ה <filename>*.cfs</filename> מכילים חלקי אינדקס.
+                    הערה! אינדקס אשר כתוב כמו שצריך תמיד יכיל חלק אחד.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                	הקובץ <filename>deletable</filename> מכיל רשימה של קבצים שכבר לא משומשים על ידי האינדקס, אבל לא ניתן למחוק אותם.
+                    הקובץ <filename>deletable</filename> מכיל רשימה של קבצים שכבר לא משומשים על ידי האינדקס, אבל לא ניתן למחוק אותם.
                 </para>
             </listitem>
         </itemizedlist>
@@ -44,7 +44,7 @@
     <sect2 id="zend.search.lucene.java-lucene.source-code">
         <title>קוד המקור</title>
         <para>
-        	תוכנת ה Java המוצגת למעלה מדגימה כיצד לאנדקס קובץ בעזרת Java Lucene:
+            תוכנת ה Java המוצגת למעלה מדגימה כיצד לאנדקס קובץ בעזרת Java Lucene:
         </para>
 
         <programlisting role="java"><![CDATA[

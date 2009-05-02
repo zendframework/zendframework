@@ -2,13 +2,13 @@
     <title>פרופילינג בעזרת Firebug</title>
 
     <para>
-    	<code>Zend_Db_Profiler_Firebug</code> שולח מידע פרופילינג ל <ulink url="http://www.getfirebug.com/">Firebug</ulink> <ulink
+        <code>Zend_Db_Profiler_Firebug</code> שולח מידע פרופילינג ל <ulink url="http://www.getfirebug.com/">Firebug</ulink> <ulink
             url="http://getfirebug.com/logging.html">Console</ulink>.
     </para>
 
     <para>
-    	כל המידע נשלח באמצעות רכיב ה <code>Zend_Wildfire_Channel_HttpHeaders</code> אשר משתמש בכותרי HTTP כדי לוודא שתוכן העמוד לא משובש.
-		ניפוי בקשות AJAX אשר דורשות תגובות XML ו JSON אפשרי בשיטה זו.
+        כל המידע נשלח באמצעות רכיב ה <code>Zend_Wildfire_Channel_HttpHeaders</code> אשר משתמש בכותרי HTTP כדי לוודא שתוכן העמוד לא משובש.
+        ניפוי בקשות AJAX אשר דורשות תגובות XML ו JSON אפשרי בשיטה זו.
     </para>
 
     <para>
@@ -21,11 +21,11 @@
         </para></listitem>
 
         <listitem> <para>
-        	תוסף ה Firebug לפיירפוקס אשר ניתן להורדה דרך <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+            תוסף ה Firebug לפיירפוקס אשר ניתן להורדה דרך <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
         </para></listitem>
 
         <listitem><para>
-        	תוסף ה FirePHP לפיירפוקס אשר ניתן להורדה דרך <ulink
+            תוסף ה FirePHP לפיירפוקס אשר ניתן להורדה דרך <ulink
                 url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
         </para></listitem>
     </itemizedlist>

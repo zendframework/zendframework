@@ -5,12 +5,12 @@
         <title>הקדמה</title>
 
         <para>
-        	<code>Zend_Server_Reflection</code> מספק מנגנון שליטה ובקרה סטנדרטי לבחינה עצמית של מחלקות ופונצקיות לשימוש במחלקות שרת.
-			רכיב זה מבוסס על ה Reflection API של PHP 5, המרחיב אותו בעזרת מתודות להחזרת פרמטרים ותיאורים אודות מחלקות ופונצקיות שונות,
-			 ורשימה מלאה של כל הפונצקיות.
+            <code>Zend_Server_Reflection</code> מספק מנגנון שליטה ובקרה סטנדרטי לבחינה עצמית של מחלקות ופונצקיות לשימוש במחלקות שרת.
+            רכיב זה מבוסס על ה Reflection API של PHP 5, המרחיב אותו בעזרת מתודות להחזרת פרמטרים ותיאורים אודות מחלקות ופונצקיות שונות,
+             ורשימה מלאה של כל הפונצקיות.
         </para>
         <para>
-        	בדרך כלל, ברכיב זה ישתמשו רק מתכנתים אשר משתמשים במחלקות השרת במערכת.
+            בדרך כלל, ברכיב זה ישתמשו רק מתכנתים אשר משתמשים במחלקות השרת במערכת.
         </para>
     </sect2>
     <sect2 id="zend.server.reflection.usage">
@@ -54,9 +54,9 @@ $reflection->getNamespace();
             <code>reflectFunction()</code> מחזיר אובייקט מסוג
             <code>Zend_Server_Reflection_Function</code> ;
             <code>reflectClass</code> מחזיר אובייקט מסוג
-            <code>Zend_Server_Reflection_Class</code>. 
-			
-			יש לקרוא את הדוקומנטציה כדי לדעת אילו מתודות יש לכל אחד.
+            <code>Zend_Server_Reflection_Class</code>.
+
+            יש לקרוא את הדוקומנטציה כדי לדעת אילו מתודות יש לכל אחד.
         </para>
     </sect2>
 </sect1>

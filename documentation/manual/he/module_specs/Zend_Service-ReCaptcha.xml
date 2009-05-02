@@ -5,14 +5,14 @@
         <title>הקדמה</title>
 
         <para>
-        	<code>Zend_Service_ReCaptcha</code> מספק תמיכה בשירות ה <ulink url="http://recaptcha.net/">reCAPTCHA</ulink>.
-			כפי שמוסבר באתר reCAPTCHA, "reCAPTCHA הינו שירות ווב חינמי אשר מציג מילים מתוך ספרות למניעת ספאם ושימוש של האתר והתוכן בצורה לא חוקית ולמטרת ספאם.".
-			כל reCAPTCHA דורש מהמשתמש להזין שתי מילים, המילה הראשונה היא בעצם ה captcha עצמה, והשנייה היא טקסט כלשהו שנסרק אשר מונע מתוכנת OCR לנסות ולפענח אותו.
-			ההשערה היא שבמידה והמילה הראשונה הוזנה כפי שצריך רוב הסיכויים שגם השנייה תיהיה נכונה.
+            <code>Zend_Service_ReCaptcha</code> מספק תמיכה בשירות ה <ulink url="http://recaptcha.net/">reCAPTCHA</ulink>.
+            כפי שמוסבר באתר reCAPTCHA, "reCAPTCHA הינו שירות ווב חינמי אשר מציג מילים מתוך ספרות למניעת ספאם ושימוש של האתר והתוכן בצורה לא חוקית ולמטרת ספאם.".
+            כל reCAPTCHA דורש מהמשתמש להזין שתי מילים, המילה הראשונה היא בעצם ה captcha עצמה, והשנייה היא טקסט כלשהו שנסרק אשר מונע מתוכנת OCR לנסות ולפענח אותו.
+            ההשערה היא שבמידה והמילה הראשונה הוזנה כפי שצריך רוב הסיכויים שגם השנייה תיהיה נכונה.
         </para>
 
         <para>
-        	כדי להשתמש בשירות של reCAPTCHA, תצטרך <ulink url="http://recaptcha.net/whyrecaptcha.html">להרשם</ulink> לשירות ולהוסיף דומיין אחד או יותר כדי לקבל מפתחות זיהוי.
+            כדי להשתמש בשירות של reCAPTCHA, תצטרך <ulink url="http://recaptcha.net/whyrecaptcha.html">להרשם</ulink> לשירות ולהוסיף דומיין אחד או יותר כדי לקבל מפתחות זיהוי.
         </para>
     </sect2>
 
@@ -38,8 +38,8 @@ echo $recaptcha->getHTML();
         </programlisting>
 
         <para>
-        	כשהטופס נשלח, אתם תקבלו שני שדות, 'recaptcha_challenge_field' ו 'recaptcha_response_field'.
-			העבירו את שני השדות למתודה <code>verify()</code>:
+            כשהטופס נשלח, אתם תקבלו שני שדות, 'recaptcha_challenge_field' ו 'recaptcha_response_field'.
+            העבירו את שני השדות למתודה <code>verify()</code>:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -51,8 +51,8 @@ $result = $recaptcha->verify(
         </programlisting>
 
         <para>
-        	ברגע שיש לכם את התוצאה מהמתודה, בדקו זאת אם היא תקינה.
-			התוצאה הינה אובייקט של <code>Zend_Service_ReCaptcha_Response</code>, אשר מספק מתודה <code>isValid()</code>.
+            ברגע שיש לכם את התוצאה מהמתודה, בדקו זאת אם היא תקינה.
+            התוצאה הינה אובייקט של <code>Zend_Service_ReCaptcha_Response</code>, אשר מספק מתודה <code>isValid()</code>.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -63,8 +63,8 @@ if (!$result->isValid()) {
         </programlisting>
 
         <para>
-        	יותר פשוט יהיה להשתמש במתאם <link linkend="zend.captcha.adapters.recaptcha">ReCaptcha</link> <code>Zend_Captcha</code>, או להשתמש במתאם בתור בסיס ל
-			<link linkend="zend.form.standardElements.captcha">אלמנט טפסים</link>. במקרה הזה, הפרטים של התצוגה והאימות מול reCAPTCHA נעשים אוטומטית.
+            יותר פשוט יהיה להשתמש במתאם <link linkend="zend.captcha.adapters.recaptcha">ReCaptcha</link> <code>Zend_Captcha</code>, או להשתמש במתאם בתור בסיס ל
+            <link linkend="zend.form.standardElements.captcha">אלמנט טפסים</link>. במקרה הזה, הפרטים של התצוגה והאימות מול reCAPTCHA נעשים אוטומטית.
         </para>
     </sect2>
 </sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -112,7 +112,7 @@
 
         <sect3 id="zend.db.adapter.connecting.constructor">
 
-            <title><classname>Zend_Db</classname> アダプタのコンストラクタの使用</title>
+            <title>Zend_Db アダプタのコンストラクタの使用</title>
 
             <para>
                 コンストラクタを使用して、アダプタのインスタンスを作成することができます。
@@ -129,15 +129,14 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.factory">
 
-            <title><classname>Zend_Db</classname> のファクトリの使用</title>
+            <title>Zend_Db のファクトリの使用</title>
 
             <para>
                 コンストラクタを直接使用する以外の方法として、静的メソッド
@@ -170,8 +169,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -198,15 +196,14 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'dbname'           => 'test',
     'adapterNamespace' => 'MyProject_Db_Adapter'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.factory-config">
 
-            <title><classname>Zend_Db</classname> ファクトリでの Zend_Config の使用</title>
+            <title>Zend_Db ファクトリでの Zend_Config の使用</title>
 
             <para>
                 <code>factory()</code> メソッドの引数として、
@@ -225,7 +222,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
-                <title>アダプタのファクトリメソッドでの <classname>Zend_Config</classname> オブジェクトの使用</title>
+                <title>アダプタのファクトリメソッドでの Zend_Config オブジェクトの使用</title>
                 <para>
                     次の例では、配列から <classname>Zend_Config</classname> オブジェクトを作成します。
                     それ以外にも、
@@ -249,8 +246,7 @@ $config = new Zend_Config(
 );
 
 $db = Zend_Db::factory($config->database);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -361,8 +357,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Db2', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example2">
@@ -393,8 +388,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example3">
@@ -416,8 +410,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
 echo $db->getConnection()
         ->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example4">
@@ -436,8 +429,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -500,8 +492,7 @@ try {
 } catch (Zend_Exception $e) {
     // factory() が指定したアダプタクラスを読み込めなかったなど……
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -580,8 +571,7 @@ CREATE TABLE bugs_products (
   product_id        INTEGER NOT NULL REFERENCES products,
   PRIMARY KEY       (bug_id, product_id)
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             また、<code>bugs</code> テーブルには <code>accounts</code>
@@ -639,8 +629,7 @@ CREATE TABLE bugs_products (
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -732,8 +721,7 @@ $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
 // $result はオブジェクトの配列となります
 echo $result[0]->bug_description;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -757,8 +745,7 @@ $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
 // $result は、フェッチモードの指定とは関係なく連想配列の配列となります
 echo $result[0]['bug_description'];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -788,8 +775,7 @@ $result = $db->fetchCol(
 
 // bug_description を含み、bug_id は含みません
 echo $result[0];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -819,8 +805,7 @@ $db->setFetchMode(Zend_Db::FETCH_OBJ);
 $result = $db->fetchPairs('SELECT bug_id, bug_status FROM bugs');
 
 echo $result[2];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -843,8 +828,7 @@ $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
 
 // $result はオブジェクトの配列ではなく、単なるオブジェクトとなります
 echo $result->bug_description;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -867,8 +851,7 @@ $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // これは単なる文字列となります
 echo $result;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -906,8 +889,7 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -942,8 +924,7 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -976,8 +957,7 @@ $db->insert('bugs', $data);
 
 // 自動インクリメントのカラムで最後に生成された値を返します
 $id = $db->lastInsertId();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1004,8 +984,7 @@ $id = $db->lastInsertId('bugs', 'bug_id');
 
 // これは、シーケンス 'bugs_seq' が最後に生成した値を返します
 $id = $db->lastInsertId('bugs');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1021,8 +1000,7 @@ $db->insert('bugs', $data);
 
 // シーケンス 'bugs_id_gen' が最後に生成した値を返します
 $id = $db->lastSequenceId('bugs_id_gen');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1112,8 +1090,7 @@ $data = array(
 );
 
 $n = $db->update('bugs', $data, 'bug_id = 2');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1141,8 +1118,7 @@ $n = $db->update('bugs', $data, $where);
 // 実行される SQL は、このようになります
 //  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -1172,8 +1148,7 @@ $n = $db->update('bugs', $data, $where);
                 <title>行の削除</title>
                 <programlisting role="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1206,8 +1181,7 @@ $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -1234,7 +1208,7 @@ echo $sql;
 
         <sect3 id="zend.db.adapter.quoting.quote">
 
-            <title><code>quote()</code> の使用法</title>
+            <title>quote() の使用法</title>
 
             <para>
                 <code>quote()</code> メソッドは、引数として文字列を受け取ります。
@@ -1247,7 +1221,7 @@ echo $sql;
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
-                <title><code>quote()</code> の使用法</title>
+                <title>quote() の使用法</title>
                 <programlisting role="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
@@ -1257,8 +1231,7 @@ $sql = "SELECT * FROM bugs WHERE reported_by = $name";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1279,8 +1252,7 @@ echo $sql;
 
                 <programlisting role="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -1290,13 +1262,12 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
-                <title><code>quote()</code> での SQL データ型の指定</title>
+                <title>quote() での SQL データ型の指定</title>
                 <programlisting role="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1319,7 +1290,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
         <sect3 id="zend.db.adapter.quoting.quote-into">
 
-            <title><code>quoteInto()</code> の使用法</title>
+            <title>quoteInto() の使用法</title>
 
             <para>
                 クォートを使用する場面としていちばんよくあるのが、
@@ -1343,14 +1314,13 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example">
-                <title><code>quoteInto()</code> の使用法</title>
+                <title>quoteInto() の使用法</title>
                 <programlisting role="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1360,21 +1330,20 @@ echo $sql;
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
-                <title><code>quoteInto()</code> での SQL データ型の指定</title>
+                <title>quoteInto() での SQL データ型の指定</title>
                 <programlisting role="php"><![CDATA[
 $sql = $db
     ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 1234
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
         <sect3 id="zend.db.adapter.quoting.quote-identifier">
 
-            <title><code>quoteIdentifier()</code> の使用法</title>
+            <title>quoteIdentifier() の使用法</title>
 
             <para>
                 変数を使用する可能性があるのは、SQL 文中の値だけとは限りません。
@@ -1420,8 +1389,7 @@ $sql = "SELECT * FROM $tableName";
 
 echo $sql
 // SELECT * FROM "order"
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1520,8 +1488,7 @@ try {
     $db->rollBack();
     echo $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -1706,12 +1673,11 @@ try {
             <title>データベースとの接続の解除</title>
             <programlisting role="php"><![CDATA[
 $db->closeConnection();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
-            <title><classname>Zend_Db</classname> は持続的な接続をサポートしていますか？</title>
+            <title>Zend_Db は持続的な接続をサポートしていますか？</title>
             <para>
                 <classname>Zend_Db</classname> では、持続的な接続の使用はサポートしていません。
             </para>
@@ -1772,8 +1738,7 @@ $db->closeConnection();
             <title>PDO アダプタによる、プリペアド形式ではないクエリの実行</title>
             <programlisting role="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1815,8 +1780,7 @@ if (!is_null($version)) {
 } else {
     // サーバのバージョンを取得できませんでした
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -2173,6 +2137,13 @@ if (!is_null($version)) {
                         オプションをサポートしていません。
                         クォートしていない識別子は、自動的に大文字で返されます。
                     </para>
+                </listitem>
+
+                <listitem>
+                    <para>アダプタ名は ZendX_Db_Adapter_Firebird です。</para>
+                    <para>パラメータ adapterNamespace の値を ZendX_Db_Adapter とすることを覚えておきましょう。</para>
+                    <para>php にバンドルされている gds32.dll (あるいは linux 環境でそれに相当するもの) をアップデートし、サーバと同じバージョンにしておくことを推奨します。Firebird で gds32.dll に相当するものは fbclient.dll です。</para>
+                    <para>デフォルトでは、すべての識別子 (テーブル名やフィールド) は大文字で返されます。</para>
                 </listitem>
             </itemizedlist>
         </sect3>

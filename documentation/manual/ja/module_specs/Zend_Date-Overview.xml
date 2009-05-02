@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.date.overview">
 
     <title>Zend_Date API の概要</title>
@@ -186,8 +186,7 @@ echo $date2, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
 // 指定したフォーマットで解釈するように強制します
 $date3 = new Zend_Date('Feb 31, 2007', 'MM.dd.yyyy');
 echo $date3, "\n"; // 出力は "Mar 3, 2007 12:00:00 AM" となります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -230,14 +229,13 @@ Zend_Registry::set('Zend_Locale', $locale);
 
 // アプリケーションのどこかで
 $date = new Zend_Date('31.Feb.2007');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
     <sect2 id="id.date.basic">
 
-        <title>多くの日付要素で共通に使用できる、<classname>Zend_Date</classname> の基本操作</title>
+        <title>多くの日付要素で共通に使用できる、Zend_Date の基本操作</title>
 
         <para>
             メソッド <code>add(), sub(), compare(), get(), and set()</code>
@@ -266,8 +264,7 @@ $date = new Zend_Date(); // $date のタイムスタンプは time() の返す�
 // $date に 12 時間足します
 $date->add('12', Zend_Date::HOUR);
 print $date;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

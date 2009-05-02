@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.form.decorators">
-    <title><classname>Zend_Form_Decorator</classname> による独自のフォームマークアップの作成</title>
+    <title>Zend_Form_Decorator による独自のフォームマークアップの作成</title>
 
     <para>
         フォームオブジェクトのレンダリングは、完全に別の処理です。
@@ -162,8 +162,7 @@ interface Zend_Decorator_Interface
     public function clearOptions();
     public function render($content);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             よりお手軽に作成するには、<classname>Zend_Decorator_Abstract</classname>
@@ -263,8 +262,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             そして、これをデコレータのパスに配置します。
@@ -280,8 +278,7 @@ $element->addPrefixPath('My_Decorator',
 $form->addElementPrefixPath('My_Decorator',
                             'My/Decorator/',
                             'decorator');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             そうすれば、このデコレータを 'Composite'
@@ -291,8 +288,7 @@ $form->addElementPrefixPath('My_Decorator',
         <programlisting role="php"><![CDATA[
 // 既存のデコレータをこのひとつで置き換えます
 $element->setDecorators(array('Composite'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この例では複数の要素のプロパティをもとに複雑な出力を作成するデコレータの
@@ -330,8 +326,7 @@ class My_Decorator_Errors
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この例では、デコレータ名の最後の部分である 'Errors' が

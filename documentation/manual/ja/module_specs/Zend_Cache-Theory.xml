@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.cache.theory">
     <title>キャッシュの仕組み</title>
     <para>
@@ -33,7 +33,7 @@
         バックエンドが自動的にキャッシュレコードを取得してくれます。
     </para></note>
     <sect2 id="zend.cache.factory">
-        <title><classname>Zend_Cache</classname> ファクトリメソッド</title>
+        <title>Zend_Cache ファクトリメソッド</title>
         <para>
             使用可能な <classname>Zend_Cache</classname> フロントエンドのインスタンスを作成する方法を、
             以下の例で示します。
@@ -57,8 +57,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendName,
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
          <para>
             これ以降のドキュメントでは、<code>$cache</code>
             の中身が有効なフロントエンドになっているものとします。また、
@@ -81,8 +80,7 @@ $cache = Zend_Cache::factory($frontendName,
         </para>
         <programlisting role="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
-]]>
-        </programlisting>
+]]></programlisting>
         <note><para>
             <code>save()</code> メソッドには、オプションの第四引数
             <code>$specificLifetime</code> を指定できることに注意しましょう
@@ -97,8 +95,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         </para>
         <programlisting role="php"><![CDATA[
 $cache->remove('削除するID');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             一回の操作で複数のキャッシュ ID を削除/無効化するには、<code>clean()</code>
             メソッドを使用します。例えば、すべてのキャッシュレコードを削除するには次のようにします。
@@ -108,8 +105,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // 有効期限切れのレコードのみ削除します
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             タグ 'tagA' および 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
@@ -118,8 +114,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             タグ 'tagA' にも 'tagC' にも該当しないキャッシュエントリを削除するには、このようにします。
         </para>
@@ -128,8 +123,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             タグ 'tagA' または 'tagC' に該当するキャッシュエントリを削除するには、このようにします。
         </para>
@@ -138,8 +132,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             削除モードとして指定可能な値は <code>CLEANING_MODE_ALL</code>、<code>CLEANING_MODE_OLD</code>、
             <code>CLEANING_MODE_MATCHING_TAG</code>、<code>CLEANING_MODE_NOT_MATCHING_TAG</code> および

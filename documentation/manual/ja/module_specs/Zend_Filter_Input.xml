@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -125,8 +125,7 @@ $filters = array(
 $validators = array(
     'account' => 'Alpha'
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>$filters</code> 配列の各キーは、
@@ -146,8 +145,7 @@ $validators = array(
 $validators = array(
     'month'   => 'Digits',
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -160,8 +158,7 @@ $digits = new Zend_Validate_Digits();
 $validators = array(
     'month'   => $digits
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -180,8 +177,7 @@ $validators = array(
         array('Between', 1, 12)  // 文字列とコンストラクタの引数
     )
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
         </itemizedlist>
@@ -208,8 +204,7 @@ $filters = array(
     '*'     => 'StringTrim',
     'month' => 'Digits'
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -226,8 +221,7 @@ $filters = array(
 
         <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             入力データは、コンストラクタの第三引数として指定することができます。
@@ -243,8 +237,7 @@ $input = new Zend_Filter_Input($filters, $validators);
 $data = $_GET;
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             あるいは、<code>setData()</code> メソッドを使用してデータを渡すこともできます。
@@ -254,8 +247,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
         <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
 $input->setData($newData);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>setData()</code> メソッドは、既存の
@@ -293,8 +285,7 @@ $input->setData($newData);
 if ($input->isValid()) {
   echo "OK\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このメソッドには、オプションで文字列の引数を指定することができます。
@@ -308,8 +299,7 @@ if ($input->isValid()) {
 if ($input->isValid('month')) {
   echo "'month' フィールドの内容は正しい形式です\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -363,8 +353,7 @@ if ($input->hasMissing()) {
 if ($input->hasUnknown()) {
   $unknownFields = $input->getUnknown();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>getMessages()</code> メソッドの返り値は連想配列となります。
@@ -407,8 +396,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>getUnknown()</code> メソッドの結果は、
@@ -436,8 +424,7 @@ $input->setOptions($options);
 $m = $input->month;                 // エスケープ済み (マジックメソッド)
 $m = $input->getEscaped('month');   // エスケープ済み
 $m = $input->getUnescaped('month'); // エスケープ前
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 デフォルトでは、値を取得する際には
@@ -467,8 +454,7 @@ $m = $input->getUnescaped('month'); // エスケープ前
             <programlisting role="php"><![CDATA[
 $options = array('escapeFilter' => 'StringTrim');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 あるいは、
@@ -479,8 +465,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 どちらの場合についても、エスケープフィルタの指定方法は
@@ -530,7 +515,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
         <sect3 id="zend.filter.input.metacommands.fields">
 
-            <title><code>FIELDS</code> メタコマンド</title>
+            <title>FIELDS メタコマンド</title>
 
             <para>
                 フィルタやバリデータの名前がそれを適用するフィールドの名前と異なる場合は、
@@ -549,8 +534,7 @@ $filters = array(
         'fields' => 'mo' // 文字列インデックスのフィールド名 ['fields']
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 上の例では、'digits' フィルタを 'mo'
@@ -588,8 +572,7 @@ $validators = array(
 // 仮想クラス Zend_Validate_StringEquals に、
 // ふたつのフィールド 'password1' および 'password2'
 // の値を含む配列を渡します
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このルールのバリデーションに失敗した場合は、
@@ -602,7 +585,7 @@ $validators = array(
 
         <sect3 id="zend.filter.input.metacommands.presence">
 
-            <title><code>PRESENCE</code> メタコマンド</title>
+            <title>PRESENCE メタコマンド</title>
 
             <para>
                 バリデータ配列の各エントリでは、メタコマンド
@@ -624,8 +607,7 @@ $validators = array(
         'presence' => 'required'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このメタコマンドのデフォルト値は 'optional' です。
@@ -635,7 +617,7 @@ $validators = array(
 
         <sect3 id="zend.filter.input.metacommands.default">
 
-            <title><code>DEFAULT_VALUE</code> メタコマンド</title>
+            <title>DEFAULT_VALUE メタコマンド</title>
 
             <para>
                 入力データにそのフィールドが存在しない場合に、もしメタコマンド
@@ -669,8 +651,7 @@ $data = array();
 
 $input = new Zend_Filter_Input(null, $validators, $data);
 echo $input->month; // 1 を出力します
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>FIELDS</code> メタコマンドで複数のフィールドをルールに定義している場合、
@@ -689,7 +670,7 @@ echo $input->month; // 1 を出力します
 
         <sect3 id="zend.filter.input.metacommands.allow-empty">
 
-            <title><code>ALLOW_EMPTY</code> メタコマンド</title>
+            <title>ALLOW_EMPTY メタコマンド</title>
 
             <para>
                 デフォルトでは、入力データ中にフィールドが存在すれば、
@@ -720,8 +701,7 @@ $validators = array(
         'allowEmpty' => true
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このメタコマンドのデフォルト値は <code>false</code> です。
@@ -749,14 +729,13 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.break-chain">
 
-            <title><code>BREAK_CHAIN</code> メタコマンド</title>
+            <title>BREAK_CHAIN メタコマンド</title>
 
             <para>
                 デフォルトでは、ひとつのルールに複数のバリデータが登録されている場合は
@@ -788,8 +767,7 @@ $validators = array(
     )
 );
 $input = new Zend_Filter_Input(null, $validators);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このメタコマンドのデフォルト値は <code>false</code> です。
@@ -820,14 +798,13 @@ $validators = array(
     'month' => $chain
 );
 $input = new Zend_Filter_Input(null, $validators);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.messages">
 
-            <title><code>MESSAGES</code> メタコマンド</title>
+            <title>MESSAGES メタコマンド</title>
 
             <para>
                 ルール内の個々のバリデータのエラーメッセージを指定するには、メタコマンド
@@ -853,8 +830,7 @@ $validators = array(
         'messages' => '月として指定できるのは数字のみです'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 エラーメッセージを設定したいバリデータが複数ある場合は、
@@ -881,8 +857,7 @@ $validators = array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 ひとつのバリデータに複数のエラーメッセージが存在する場合は、
@@ -911,8 +886,7 @@ $validators = array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 各バリデータクラスがエラーメッセージを複数持っているかどうかや
@@ -949,8 +923,7 @@ $validators = array(
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 メタコマンド 'fields'、'messages' と 'default' については、
@@ -985,8 +958,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $options = array('filterNamespace' => 'My_Namespace_Filter',
                  'validatorNamespace' => 'My_Namespace_Validate');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             あるいは、<code>addValidatorPrefixPath($prefix, $path)</code> メソッドや
@@ -1007,8 +979,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 // 1. My_Namespace_Filter
 // 2. Foo_Namespace
 // 3. Zend_Filter
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             名前空間 Zend_Filter と Zend_Validate は削除することができません。

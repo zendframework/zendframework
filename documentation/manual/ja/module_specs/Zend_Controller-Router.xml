@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>標準のルータ</title>
     <sect2 id="zend.controller.router.introduction">
@@ -28,8 +28,7 @@
         <programlisting role="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             あるいは (推奨)
@@ -42,8 +41,7 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Rewrite ルータを IIS ウェブサーバ (バージョン &lt;= 7.0) で使用するには
@@ -53,8 +51,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         <programlisting role="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>IIS Isapi_Rewrite</title>
@@ -110,8 +107,7 @@ url.rewrite-once = (
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
     "" => "/index.php"
 )
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.usage">
@@ -133,8 +129,7 @@ $router->addRoute(
                                      array('controller' => 'user',
                                            'action' => 'info'))
 );
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.basic">
@@ -150,8 +145,7 @@ $router->addRoute(
         <programlisting role="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Rewrite ルータには、6 種類の基本的なルーティング方式があります
@@ -191,8 +185,7 @@ $router->addRoute('user',
             <programlisting role="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 これは <code>user/martel</code> へのリンクとなります。
@@ -305,8 +298,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
     action     == list
     sort       == alpha
     date       == desc
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             デフォルトのルートは、<classname>Zend_Controller_Router_Route_Module</classname>
@@ -320,8 +312,7 @@ $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
 $this->addRoute('default', $compat);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このデフォルトルートが不要な場合は、独自の 'デフォルト' ルートで上書きします
@@ -333,8 +324,7 @@ $this->addRoute('default', $compat);
         <programlisting role="php"><![CDATA[
 // すべてのデフォルトルートを削除します
 $router->removeDefaultRoutes();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -358,8 +348,7 @@ $router->removeDefaultRoutes();
 
         <programlisting role="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -378,8 +367,7 @@ $request->setBaseUrl('/~user/application-root/');
 
         <programlisting role="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.routes">
@@ -394,7 +382,7 @@ $router->setGlobalParam('lang', 'en');
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">
-        <title>RewriteRouter での <classname>Zend_Config</classname> の使用法</title>
+        <title>RewriteRouter での Zend_Config の使用法</title>
 
         <para>
             新しいルートを追加する際に、
@@ -427,8 +415,7 @@ routes.archive.defaults.controller = "archive"
 routes.archive.defaults.action = "show"
 routes.archive.map.1 = "year"
 ; あるいは: routes.archive.map.year = 1
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の INI ファイルを、次のようにして
@@ -439,8 +426,7 @@ routes.archive.map.1 = "year"
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例では、INI ファイルの 'routes' セクションを使用してルートを決めるよう、
@@ -485,8 +471,7 @@ interface Zend_Controller_Router_Interface
    */
   public function route(Zend_Controller_Request_Abstract $request);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ルーティング処理は、システムが最初にリクエストを受け取った際に一度だけ行われます。

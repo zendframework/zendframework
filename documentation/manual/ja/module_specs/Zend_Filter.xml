@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -65,8 +65,7 @@ $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -74,7 +73,7 @@ echo $htmlEntities->filter('"'); // &quot;
 
     <sect2 id="zend.filter.introduction.static">
 
-        <title>静的メソッド <code>get()</code> の使用法</title>
+        <title>静的メソッド get() の使用法</title>
 
         <para>
             指定したフィルタクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
@@ -88,8 +87,7 @@ echo $htmlEntities->filter('"'); // &quot;
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -99,8 +97,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 

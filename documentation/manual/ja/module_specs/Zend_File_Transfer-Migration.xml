@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.file.transfer.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -34,7 +34,7 @@
             </para>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.rename">
-                <title><emphasis>Rename</emphasis> フィルタ</title>
+                <title>Rename フィルタ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -65,13 +65,12 @@ $upload->addFilter('Rename',
                    array('source' => '/path/to/oldfile',
                          'target' => '/path/to/newfile',
                          'overwrite' => true));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.count">
-                <title><emphasis>Count</emphasis> バリデータ</title>
+                <title>Count バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -101,13 +100,12 @@ $upload->addValidator('Count',
                       false,
                       array('min' => 2,
                             'max' => 3));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.extension">
-                <title><emphasis>Extension</emphasis> バリデータ</title>
+                <title>Extension バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -137,13 +135,12 @@ $upload->addValidator('Extension',
                       false,
                       array('extension1' => 'jpg,gif,bmp',
                             'case' => true));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.filessize">
-                <title><emphasis>FilesSize</emphasis> バリデータ</title>
+                <title>FilesSize バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -189,13 +186,12 @@ $upload->useByteString(true); // set flag
 
 // 1.7 の例
 $upload->setUseByteSting(true); // set flag
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.hash">
-                <title><emphasis>Hash</emphasis> バリデータ</title>
+                <title>Hash バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -225,13 +221,12 @@ $upload->addValidator('Hash',
                       false,
                       array('hash1' => '12345',
                             'algorithm' => 'md5'));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.imagesize">
-                <title><emphasis>ImageSize</emphasis> バリデータ</title>
+                <title>ImageSize バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -265,13 +260,12 @@ $upload->addValidator('ImageSize',
                             'minheight' => 10,
                             'maxwidth' => 100,
                             'maxheight' => 100));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.size">
-                <title><emphasis>Size</emphasis> バリデータ</title>
+                <title>Size バリデータ</title>
 
                 <itemizedlist>
                     <listitem><para>
@@ -303,8 +297,7 @@ $upload->addValidator('Size',
                       array('min' => 100,
                             'max' => 10000,
                             'bytestring' => true));
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </sect4>
         </sect3>
@@ -355,8 +348,7 @@ $upload->addValidator('FilesSize', array('1B', '100kB'));
 // boolean false が追加されていることに注意しましょう
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize', false, array('1B', '100kB'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         </sect3>
     </sect2>

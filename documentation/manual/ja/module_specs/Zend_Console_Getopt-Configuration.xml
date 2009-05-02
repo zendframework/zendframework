@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.console.getopt.configuration">
-    <title><classname>Zend_Console_Getopt</classname> の設定</title>
+    <title>Zend_Console_Getopt の設定</title>
 
     <sect2 id="zend.console.getopt.configuration.addrules">
         <title>オプションの規則の追加</title>
@@ -26,8 +26,7 @@ $opts->addRules(
     'verbose|v' => '詳細な出力を表示する'
   )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例は、"<code>--verbose</code>" というオプションと
@@ -57,8 +56,7 @@ $opts->setHelp(
         'p' => '洋ナシです。オプションで文字列パラメータを指定します。'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             エイリアスつきでオプションを宣言した場合は、
@@ -94,8 +92,7 @@ $opts->setAliases(
         'p' => 'pear'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例では
@@ -136,8 +133,7 @@ $opts->addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
 
 // 新しい配列で既存の引数を置き換えます
 $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -217,8 +213,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOption('ignoreCase', true);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <code>setOptions()</code> メソッドに渡す引数は連想配列です。
@@ -237,8 +232,7 @@ $opts->setOptions(
         'dashDash'   => false
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 

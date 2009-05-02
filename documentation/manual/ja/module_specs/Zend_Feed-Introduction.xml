@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.feed.introduction">
     <title>導入</title>
     <para>
@@ -35,7 +35,7 @@
     </note>
 
     <example id="zend.feed.introduction.example.rss">
-        <title><classname>Zend_Feed</classname> による RSS フィードデータの使用</title>
+        <title>Zend_Feed による RSS フィードデータの使用</title>
         <programlisting role="php"><![CDATA[
 // 最新の Slashdot ヘッドラインを取得します
 try {
@@ -63,8 +63,7 @@ foreach ($slashdotRss as $item) {
         'description' => $item->description()
         );
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

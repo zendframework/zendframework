@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.currency.introduction">
 
     <title>Zend_Currency について</title>
@@ -15,7 +15,7 @@
 
     <sect2 id="zend.currency.introduction.list">
 
-        <title><classname>Zend_Currency</classname> を使うべき理由は?</title>
+        <title>Zend_Currency を使うべき理由は?</title>
 
         <para>
             <classname>Zend_Currency</classname> は、通貨や金額に関する作業を行うために以下のような機能を提供しています。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -158,8 +158,7 @@ if (!($data = $cache->load($id))) {
 }
 
 // [...] $data を用いて何かをします (echo したり、何かに渡したりなど)
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 複数のブロックやデータのインスタンスをキャッシュしたい場合も、考え方は同じです。
             </para>
@@ -198,8 +197,7 @@ if (!($data = $cache->load($id2))) {
 
 }
 echo($data);
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 特殊な値 (boolean 値に "automatic_serialization" オプションを指定したものなど)
                 や空の文字列をキャッシュしたい場合は、
@@ -241,13 +239,12 @@ if (!($cache->test($id))) {
 }
 
 // $data に対して何らかの操作をします
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.cache.frontends.output">
-        <title><classname>Zend_Cache_Frontend_Output</classname></title>
+        <title>Zend_Cache_Frontend_Output</title>
         <sect3 id="zend.cache.frontends.output.introduction">
             <title>導入</title>
             <para>
@@ -283,8 +280,7 @@ if (!($cache->start('mypage'))) {
 }
 
 echo 'これはキャッシュされません ('.time().').';
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 この形式を使用すると、既存のプロジェクトに簡単に出力キャッシュ処理を追加することができます。
                 コードのリファクタリングもほとんど行わずにすませられるでしょう。
@@ -293,7 +289,7 @@ echo 'これはキャッシュされません ('.time().').';
     </sect2>
 
     <sect2 id="zend.cache.frontends.function">
-        <title><classname>Zend_Cache_Frontend_Function</classname></title>
+        <title>Zend_Cache_Frontend_Function</title>
         <sect3 id="zend.cache.frontends.function.introduction">
             <title>導入</title>
             <para>
@@ -357,8 +353,7 @@ $cache->call('veryExpensiveFunc', $params);
 // $params は配列です。
 // 例えば、veryExpensiveFunc(1, 'foo', 'bar') のコールをキャッシュするには
 // $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar')) とします。
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> は、
                 関数の返り値だけでなく関数内部での出力もキャッシュします。
@@ -373,7 +368,7 @@ $cache->call('veryExpensiveFunc', $params);
     </sect2>
 
     <sect2 id="zend.cache.frontends.class">
-        <title><classname>Zend_Cache_Frontend_Class</classname></title>
+        <title>Zend_Cache_Frontend_Class</title>
         <sect3 id="zend.cache.frontends.class.introduction">
             <title>導入</title>
             <para>
@@ -457,8 +452,7 @@ $frontendOptions = array(
 
 // これはキャッシュされます
 $result = $cache->foobar('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 通常のメソッドのコールをキャッシュするには次のようにします。
             </para>
@@ -483,13 +477,12 @@ $frontendOptions = array(
 
 // これはキャッシュされます
 $result = $cache->foobar2('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.cache.frontends.file">
-        <title><classname>Zend_Cache_Frontend_File</classname></title>
+        <title>Zend_Cache_Frontend_File</title>
         <sect3 id="zend.cache.frontends.file.introduction">
             <title>導入</title>
             <para>
@@ -576,7 +569,7 @@ $result = $cache->foobar2('1', '2');
     </sect2>
 
     <sect2 id="zend.cache.frontends.page">
-        <title><classname>Zend_Cache_Frontend_Page</classname></title>
+        <title>Zend_Cache_Frontend_Page</title>
         <sect3 id="zend.cache.frontends.page.introduction">
             <title>導入</title>
             <para>
@@ -766,8 +759,7 @@ $cache->start();
 // 処理はここで停止します
 
 // ページの残りの部分 ...
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 もう少し複雑な例を見てみましょう。これは、起動ファイル
                 (例えば <classname>Zend_Controller</classname> など) 内でキャッシュを集中管理する方法を示したものです。
@@ -819,8 +811,7 @@ $cache->start();
 // キャッシュにヒットした場合はその結果がブラウザに送信され、スクリプトの処理はここで停止します。
 
 // [...] 起動ファイルの終点 (これらの行は、キャッシュにヒットした場合は実行されません)
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
         <sect3 id="zend.cache.frontends.page.cancel">
             <title>キャンセル用のメソッド</title>
@@ -842,8 +833,7 @@ if ($someTest) {
 }
 
 // [...]
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 </sect1>

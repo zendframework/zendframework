@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.cache.introduction">
     <title>導入</title>
     <para>
@@ -22,7 +22,7 @@
         こともできます。
     </para>
     <example id="zend.cache.introduction.example-1">
-        <title><classname>Zend_Cache::factory()</classname> によるフロントエンドの取得</title>
+        <title>Zend_Cache::factory() によるフロントエンドの取得</title>
         <para>
             <classname>Zend_Cache::factory()</classname> は、適切なオブジェクトを作成してそれらを互いに結び付けます。
             この最初の例では、フロントエンドに <code>Core</code>、バックエンドに <code>File</code>
@@ -44,8 +44,7 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>
@@ -91,12 +90,11 @@ if(!$result = $cache->load('myresult')) {
 }
 
 print_r($result);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.cache.introduction.example-3">
-        <title><classname>Zend_Cache</classname> 出力フロントエンドによる出力のキャッシュ</title>
+        <title>Zend_Cache 出力フロントエンドによる出力のキャッシュ</title>
         <para>
             まず、出力をキャッシュしたい部分を何らかの条件式で「マークアップ」し、
             その前後を <code>start()</code> メソッドおよび <code>end()</code>
@@ -131,8 +129,7 @@ if(!$cache->start('mypage')) {
 }
 
 echo 'これはキャッシュされません ('.time().').';
-]]>
-        </programlisting>
+]]></programlisting>
        <para>
            <code>time()</code> の結果を二度出力していることに注目しましょう。
            動作説明のため、何らかの動的な出力がほしかったのです。これを実行し、

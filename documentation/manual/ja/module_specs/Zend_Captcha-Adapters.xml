@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA アダプタ</title>
 
@@ -88,7 +88,7 @@
     </sect2>
 
     <sect2 id="zend.captcha.adapters.dumb">
-        <title><classname>Zend_Captcha_Dumb</classname></title>
+        <title>Zend_Captcha_Dumb</title>
 
         <para>
             <classname>Zend_Captch_Dumb</classname> アダプタは、その名が示すとおりのものです。
@@ -101,7 +101,7 @@
     </sect2>
 
     <sect2 id="zend.captcha.adapters.figlet">
-        <title><classname>Zend_Captcha_Figlet</classname></title>
+        <title>Zend_Captcha_Figlet</title>
 
         <para>
             <classname>Zend_Captcha_Figlet</classname> アダプタは、<link

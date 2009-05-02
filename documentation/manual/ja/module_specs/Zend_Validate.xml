@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -84,8 +84,7 @@ if ($validator->isValid($email)) {
         echo "バリデーションエラー '$messageId': $message\n";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -134,8 +133,7 @@ if (!$validator->isValid('word')) {
 
     // "文字列 'word' は短すぎます。最低 8 文字以上必要です"
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -149,8 +147,7 @@ $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_SHORT => '文字列 \'%value%\' は短すぎます',
     Zend_Validate_StringLength::TOO_LONG  => '文字列 \'%value%\' は長すぎます'
 ));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -175,15 +172,14 @@ if (!validator->isValid('word')) {
         . $validator->max
         . " までの間ではありません\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
     </sect2>
 
     <sect2 id="zend.validate.introduction.static">
 
-        <title>静的メソッド <code>is()</code> の使用法</title>
+        <title>静的メソッド is() の使用法</title>
 
         <para>
             指定したバリデーションクラスを読み込んでそのインスタンスを作成するというのが面倒ならば、
@@ -199,8 +195,7 @@ if (!validator->isValid('word')) {
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // email は妥当な形式です
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -214,8 +209,7 @@ require_once 'Zend/Validate.php';
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // $value は 1 から 12 までの間です
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -261,8 +255,7 @@ $translate = new Zend_Translate(
 );
 
 $validator->setTranslator($translate);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             静的メソッド <code>setDefaultTranslator()</code> で
@@ -279,8 +272,7 @@ $translate = new Zend_Translate(
     'en'
 );
 Zend_Validate::setDefaultTranslator($translate);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -301,8 +293,7 @@ $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>setMessage()</code> で独自のメッセージを設定するかわりに翻訳器を使うこともできますが、

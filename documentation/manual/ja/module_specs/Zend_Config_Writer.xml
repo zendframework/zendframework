@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
@@ -56,7 +56,7 @@
     </para>
 
     <example id="zend.config.writer.example.using">
-        <title><classname>Zend_Config_Writer</classname> の使用法</title>
+        <title>Zend_Config_Writer の使用法</title>
         <para>
             この例では、<classname>Zend_Config_Writer_Xml</classname>
             で新しい設定ファイルを作成する方法を説明します。
@@ -91,8 +91,7 @@ $writer->setConfig($config)
 // c)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             これは、production と staging というセクションを持つ XML
             設定ファイルを作成します。staging は production を継承しています。
@@ -118,8 +117,7 @@ $config->production->hostname = 'foobar';
 $writer = new Zend_Config_Writer_Ini(array('config'   => $config,
                                            'filename' => 'config.ini'));
 $writer->write();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>

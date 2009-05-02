@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
@@ -45,7 +45,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
         </para>
     </note>
     <example id="zend.config.adapters.ini.example.using">
-        <title><classname>Zend_Config_Ini</classname> の使用法</title>
+        <title>Zend_Config_Ini の使用法</title>
         <para>
             この例は、<classname>Zend_Config_Ini</classname> を使用して
             INI ファイルから設定データを読み込むための基本的な方法を説明するものです。

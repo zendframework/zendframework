@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.config.introduction">
     <title>導入</title>
     <para>
@@ -16,7 +16,7 @@
         の二種類で、テキストファイルに格納された設定データを使用できるようになっています。.
     </para>
     <example id="zend.config.introduction.example.using">
-        <title><classname>Zend_Config</classname> の使用例</title>
+        <title>Zend_Config の使用例</title>
         <para>
             通常は、<link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
             あるいは <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
@@ -53,8 +53,7 @@ $db = Zend_Db::factory($config->database->adapter,
 // もうひとつの方法: 単に Zend_Config オブジェクトを渡します
 // Zend_Db のファクトリは、その処理方法を知っています
 $db = Zend_Db::factory($config->database);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         上の例で説明したように、<classname>Zend_Config</classname> を使用すると、
@@ -69,10 +68,9 @@ $db = Zend_Db::factory($config->database);
     </para>
     <programlisting role="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
-]]>
-    </programlisting>
+]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
-        <title><classname>Zend_Config</classname> における PHP 設定ファイルの使用法</title>
+        <title>Zend_Config における PHP 設定ファイルの使用法</title>
         <para>
             設定ファイルそのものを PHP で書きたいこともあるでしょう。
             以下のようにすると、簡単にそれを行うことができます。
@@ -91,16 +89,14 @@ return array(
         )
     )
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <programlisting role="php"><![CDATA[
 // 設定を読み込みます
 $config = new Zend_Config(require 'config.php');
 
 // 設定データを出力します (この結果は 'www.example.com' です)
 echo $config->webhost;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

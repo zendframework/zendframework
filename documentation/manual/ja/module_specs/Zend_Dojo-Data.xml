@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data エンベロープ</title>
 
@@ -31,8 +31,7 @@
         ...
     ]
 }
-]]>
-</programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Dojo_Data</classname> は、
@@ -54,8 +53,7 @@
 
             <programlisting role="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.dojo.data.usage.mutators">
@@ -65,8 +63,7 @@ $data = new Zend_Dojo_Data('id', $items);
 $data = new Zend_Dojo_Data();
 $data->setIdentifier('id')
      ->addItems($items);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -76,15 +73,14 @@ $data->setIdentifier('id')
         </para>
 
         <example id="zend.dojo.data.usage.append">
-            <title><classname>Zend_Dojo_Data</classname> へのデータの追加</title>
+            <title>Zend_Dojo_Data へのデータの追加</title>
 
             <programlisting role="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
 $data->addItem($someItem);
 
 $data->addItems($someMoreItems);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -142,12 +138,11 @@ $data->addItems($someMoreItems);
         </para>
 
         <example id="zend.dojo.data.usage.label">
-            <title><classname>Zend_Dojo_Data</classname> での label フィールドの指定</title>
+            <title>Zend_Dojo_Data での label フィールドの指定</title>
 
             <programlisting role="php"><![CDATA[
 $data->setLabel('name');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -157,12 +152,11 @@ $data->setLabel('name');
         </para>
 
         <example id="zend.dojo.data.usage.populate">
-            <title>JSON からの <classname>Zend_Dojo_Data</classname> の作成</title>
+            <title>JSON からの Zend_Dojo_Data の作成</title>
 
             <programlisting role="php"><![CDATA[
 $data->fromJson($json);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -243,8 +237,7 @@ $item = $data->getItem('foo');
 
 // あるいは配列表記を使用します
 $item = $data['foo'];
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             identifier がわかれば、それを使用してアイテムを取得したり、
@@ -261,8 +254,7 @@ unset($data['foo']);
 // アイテムの確認
 if (isset($data[foo])) {
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             すべてのアイテムをループ処理することもできます。
@@ -273,8 +265,7 @@ if (isset($data[foo])) {
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             count で、アイテムの総数を調べることも可能です。
@@ -282,8 +273,7 @@ foreach ($data as $item) {
 
         <programlisting role="php"><![CDATA[
 echo count($data), " items found!";
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             また、このクラスは <code>__toString()</code> を実装しているので、
@@ -294,8 +284,7 @@ echo count($data), " items found!";
 echo $data; // JSON 文字列として echo
 
 $json = (string) $data; // 文字列へのキャスト == JSON へのキャスト
-]]>
-        </programlisting>
+]]></programlisting>
 
         <sect3 id="zend.dojo.data.advanced.methods">
             <title>使用可能なメソッド</title>

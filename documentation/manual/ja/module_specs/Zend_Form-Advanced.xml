@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.form.advanced">
-    <title><classname>Zend_Form</classname> の高度な使用法</title>
+    <title>Zend_Form の高度な使用法</title>
 
     <para>
         <classname>Zend_Form</classname> にはさまざまな機能があり、
@@ -71,8 +71,7 @@
         <dd><input name="save" type="submit" value="Save" /></dd>
     </dl>
 </form>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             この例では、請求先住所と配送先住所に同じフィールドを使用しているため、
@@ -140,8 +139,7 @@
         <dd><input name="save" type="submit" value="Save" /></dd>
     </dl>
 </form>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             上の例では、住所をそれぞれ個別に受け取ることができます。
@@ -338,8 +336,7 @@ class My_Form_Registration extends Zend_Form
         ));
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 submit ボタンがないこと、
@@ -427,8 +424,7 @@ class My_Form_Registration extends Zend_Form
         return $this;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 次に、アクションコントローラ用の仕組みを追加する必要があります。
@@ -459,8 +455,7 @@ class RegistrationController extends Zend_Controller_Action
         return $this->_form;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 それでは、どのフォームを表示するのかを決める機能を追加していきましょう。
@@ -563,8 +558,7 @@ class RegistrationController extends Zend_Controller_Action
         return false;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 上のメソッドを使用すると、たとえば "<code>$subForm =
@@ -632,8 +626,7 @@ class RegistrationController extends Zend_Controller_Action
         return $this->getForm()->isValid($data);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 これで足場は固まりました。
@@ -682,8 +675,7 @@ class RegistrationController extends Zend_Controller_Action
         $this->render('verification');
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 お気づきのとおり、実際にフォームを処理する部分のコードは比較的シンプルです。
@@ -732,8 +724,7 @@ foreach ($this->info as $info):
 </dl>
 <?php endforeach;
 endforeach ?>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 将来的に、Zend Framework には複数ページのフォームを

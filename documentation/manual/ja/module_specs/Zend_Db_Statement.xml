@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -40,8 +40,7 @@ $stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
             array('goofy', 'FIXED')
         );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -67,8 +66,7 @@ $stmt = $db->query(
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -100,8 +98,7 @@ $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
 $stmt->execute(array('goofy', 'FIXED'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -120,8 +117,7 @@ $sql = 'SELECT * FROM bugs WHERE ' .
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
 $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -135,7 +131,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     <sect2 id="zend.db.statement.fetching">
 
-        <title><code>SELECT</code> 文からの結果の取得</title>
+        <title>SELECT 文からの結果の取得</title>
 
         <para>
             ステートメントオブジェクトのメソッドをコールすることで、
@@ -203,8 +199,7 @@ $stmt = $db->query('SELECT * FROM bugs');
 while ($row = $stmt->fetch()) {
     echo $row['bug_description'];
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -237,8 +232,7 @@ $stmt = $db->query('SELECT * FROM bugs');
 $rows = $stmt->fetchAll();
 
 echo $rows[0]['bug_description'];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -275,8 +269,7 @@ $stmt->setFetchMode(Zend_Db::FETCH_NUM);
 $rows = $stmt->fetchAll();
 
 echo $rows[0][0];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -314,8 +307,7 @@ echo $rows[0][0];
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 $bug_status = $stmt->fetchColumn(2);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -345,8 +337,7 @@ $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 $obj = $stmt->fetchObject();
 
 echo $obj->bug_description;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -371,8 +362,7 @@ echo $obj->bug_description;
         <example id="zend.db.statement.binding-param.example">
             <title>Binding parameters from PHP variables</title>
             <programlisting role="php"><![CDATA[
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -394,8 +384,7 @@ echo $obj->bug_description;
         <example id="zend.db.statement.binding-column.example">
             <title>Binding results to PHP variables</title>
             <programlisting role="php"><![CDATA[
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

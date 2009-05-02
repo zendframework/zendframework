@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -95,8 +95,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
     );
 
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Db_Table</classname> で UPDATE や DELETE の連鎖操作をエミュレートする場合は、
@@ -231,8 +230,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <programlisting role="php"><![CDATA[
 $row->findDependentRowset($table, [$rule]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このメソッドは <classname>Zend_Db_Table_Rowset_Abstract</classname> オブジェクトを返します。
@@ -262,8 +260,7 @@ $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -301,8 +298,7 @@ $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -315,7 +311,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
 
             <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
 
-                <title><classname>Zend_Db_Table_Select</classname> による従属行セットの取得</title>
+                <title>Zend_Db_Table_Select による従属行セットの取得</title>
 
                 <para>
                     この例では <code>Accounts</code> テーブルから行オブジェクトを取得し、
@@ -333,8 +329,7 @@ $select = $accountsTable->select()->order('name ASC')
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
@@ -403,8 +398,7 @@ $bugsReportedBy = $user1234->findBugs();
 
 // 参照ルールを指定します
 $bugsAssignedTo = $user1234->findBugsByEngineer();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -422,8 +416,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
 
         <programlisting role="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             従属テーブルに対応する親テーブルの行は、常にひとつだけです。
@@ -454,8 +447,7 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $reporter = $bug1->findParentRow('Accounts');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -492,8 +484,7 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $engineer = $bug1->findParentRow('Accounts', 'Engineer');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -558,8 +549,7 @@ $reporter = $bug1->findParentAccounts();
 
 // 参照ルールを指定します
 $engineer = $bug1->findParentAccountsByEngineer();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -585,8 +575,7 @@ $row->findManyToManyRowset($table,
                                    [Zend_Db_Table_Select $select]
                                ]
                            ]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このメソッドは <classname>Zend_Db_Table_Rowset_Abstract</classname> オブジェクトを返します。
@@ -626,8 +615,7 @@ $bug1234 = $bugsRowset->current();
 
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -684,8 +672,7 @@ $bug1234 = $bugsRowset->current();
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -759,8 +746,7 @@ $products = $bug1234->findProductsViaBugsProducts();
 
 // 参照ルールを指定します
 $products = $bug1234->findProductsViaBugsProductsByBug();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -827,8 +813,7 @@ $product1234 = $productsRowset->current();
 $product1234->delete();
 // 自動的に Bugs テーブルにも連鎖し、
 // 従属する行が削除されます
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -893,8 +878,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         ...
     );
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

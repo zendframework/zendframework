@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.form.elements">
-    <title><classname>Zend_Form_Element</classname> を用いたフォーム要素の作成</title>
+    <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
     <para>
         フォームは、いくつかの要素から構成されています。
@@ -163,8 +163,7 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 では、デコレータを探す際にこのプラグインパスを考慮するように
@@ -173,8 +172,7 @@ class My_Decorator_Label extends Zend_Form_Decorator_Abstract
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 あるいは、フォームレベルでこれを設定してしまうべ、
@@ -183,8 +181,7 @@ $element->addPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
             <programlisting role="php"><![CDATA[
 $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このパスにデコレータを追加すれば
@@ -215,8 +212,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
         <programlisting role="php"><![CDATA[
 $filtered = $element->getValue();
 
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             フィルタをチェインに追加する方法は、次のふたつです。
@@ -247,8 +243,7 @@ $element->addFilter('Zend_Filter_Alnum');
 // 短い形式のフィルタ名
 $element->addFilter('Alnum');
 $element->addFilter('alnum');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             短い形式の名前とは、通常はフィルタ名からプレフィックスを除いた部分のことです。
@@ -269,8 +264,7 @@ $element->addFilter('alnum');
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 (3 番目の引数が、このアクションを行う際のプラグインローダーであったことを思い出しましょう)
@@ -284,8 +278,7 @@ $element->addPrefixPath('My_Filter', 'My/Filter/', 'filter');
 
         <programlisting role="php"><![CDATA[
 $unfiltered = $element->getUnfilteredValue();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             フィルタについての詳細な情報は <link
@@ -368,8 +361,7 @@ $element->addValidator('Zend_Validate_Alnum');
 // 短い形式の名前
 $element->addValidator('Alnum');
 $element->addValidator('alnum');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             短い形式の名前とは、通常はバリデータ名からプレフィックスを除いた部分のことです。
@@ -390,8 +382,7 @@ $element->addValidator('alnum');
 
             <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 (3 番目の引数が、このアクションを行う際のプラグインローダーであったことを思い出しましょう)
@@ -406,8 +397,7 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 
         <programlisting role="php"><![CDATA[
 $element->addValidator('alnum', true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             バリデータの名前を指定して追加する場合で
@@ -417,8 +407,7 @@ $element->addValidator('alnum', true);
 
         <programlisting role="php"><![CDATA[
 $element->addValidator('StringLength', false, array(6, 20));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この方式で引数を渡す場合は、コンストラクタで定義されているとおりの順で指定する必要があります。
@@ -429,8 +418,7 @@ $element->addValidator('StringLength', false, array(6, 20));
 
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(6, 20);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>独自のバリデートエラーメッセージの指定</title>
@@ -466,8 +454,7 @@ $element->addValidators(array(
     array('alnum'),
     array('stringLength', false, array(6, 20)),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             もうすこし詳しくはっきりと書きたい場合は、キー
@@ -485,8 +472,7 @@ $element->addValidators(array(
         'validator' => 'stringLength',
         'options'   => array(6, 20)),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この使用法は、設定ファイルを用いてバリデータを設定する場合に便利です。
@@ -499,8 +485,7 @@ element.validators.alnum.validator = "Alnum"
 element.validators.strlen.validator = "StringLength"
 element.validators.strlen.options.min = 6
 element.validators.strlen.options.max = 20
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             それが必要か否かにかかわらず、すべての項目がキーを持つことに注意しましょう。
@@ -520,8 +505,7 @@ if ($element->isValid($value)) {
 } else {
     // 無効
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>フィルタリング後の値の検証</title>
@@ -581,8 +565,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         return false;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -601,8 +584,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         <programlisting role="php"><![CDATA[
 $errors   = $element->getErrors();
 $messages = $element->getMessages();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             (注意: 返されるエラーメッセージは連想配列形式で、
@@ -878,8 +860,7 @@ $element = new Zend_Form_Element('foo',
                                  array('disableLoadDefaultDecorators' =>
                                       true)
                                 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 このオプションは、他のオプションと混用することもできます。
@@ -904,8 +885,7 @@ $this->addDecorators(array(
     array('HtmlTag', array('tag' => 'dd')),
     array('Label', array('tag' => 'dt')),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             最初のコンテンツを作成するのは 'ViewHelper'
@@ -934,8 +914,7 @@ $this->addDecorators(array(
         This is some descriptive text regarding the element.
     </p>
 </dd>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             デコレータについての詳細な情報は <link
@@ -967,8 +946,7 @@ $element->addDecorator(array('FooBar' => 'HtmlTag'),
 
 // 後で、このように取得できます
 $decorator = $element->getDecorator('FooBar');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>addDecorators()</code> メソッドおよび
@@ -989,8 +967,7 @@ $element->addDecorators(
 // 後で、このように取得できます
 $htmlTag = $element->getDecorator('HtmlTag');
 $fooBar  = $element->getDecorator('FooBar');
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -1158,8 +1135,7 @@ echo $element->renderHtmlTag("This is the html tag content");
         <programlisting role="php"><![CDATA[
 // $element->setAttrib('class', 'text') と同じ意味です
 $element->class = 'text;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             デフォルトでは、すべての属性がビューヘルパーに渡され、
@@ -1373,8 +1349,7 @@ filters.ucase.filter = "StringToUpper"
 decorators.element.decorator = "ViewHelper"
 decorators.element.options.helper = "FormText"
 decorators.label.decorator = "Label"
-]]>
-</programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.form.elements.custom">
@@ -1427,8 +1402,7 @@ class My_Element_Text extends Zend_Form_Element
              ->setAttrib('class', 'text');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             それから、フォームオブジェクトに対して
@@ -1438,8 +1412,7 @@ class My_Element_Text extends Zend_Form_Element
         <programlisting role="php"><![CDATA[
 $form->addPrefixPath('My_Element', 'My/Element/', 'element')
      ->addElement('text', 'foo');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             'foo' 要素はこれで <code>My_Element_Text</code>
@@ -1466,8 +1439,7 @@ class My_Element_Text extends Zend_Form_Element
                             array('tag' => 'div', 'class' => 'element'));
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             要素のカスタマイズにはさまざまな方法があります。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <sect1 id="zend.date.constants">
 
     <title>日付関数全般用の定数</title>
@@ -694,15 +694,11 @@
 $locale = new Zend_Locale('de_AT');
 $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <table id="zend.date.constants.selfdefinedformats.table">
-            <title>
-              <emphasis role="strong">ISO 8601 日付出力</emphasis>
-              に関する定数
-            </title>
+            <title>ISO 8601 日付出力に関する定数</title>
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -1153,8 +1149,7 @@ $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString('F j, Y, g:i a');
 
 print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1168,8 +1163,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         </para>
 
         <table id="zend.date.constants.phpformats.table">
-            <title><emphasis role="strong">PHP の日付出力</emphasis> 用の定数
-            </title>
+            <title>PHP の日付出力用の定数</title>
             <tgroup cols="5">
                 <thead>
                     <row>

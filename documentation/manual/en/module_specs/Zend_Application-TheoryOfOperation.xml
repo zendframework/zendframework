@@ -25,7 +25,7 @@
     </para>
 
     <para>
-        Zend_Application is broken into three realms:
+        <classname>Zend_Application</classname> is broken into three realms:
     </para>
 
     <itemizedlist>
@@ -60,8 +60,8 @@
         Developers create a bootstrap class for their application, extending
         <classname>Zend_Application_Bootstrap_Bootstrap</classname> or implementing (minimally)
         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>. The entry point
-        (e.g., public/index.php) will load <classname>Zend_Application</classname>,
-        and instantiate it by passing:
+        (e.g., <filename>public/index.php</filename>) will load
+        <classname>Zend_Application</classname>, and instantiate it by passing:
     </para>
 
     <itemizedlist>
@@ -535,7 +535,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             much of your coding to discrete classes is to utilize resource
             plugins. While Zend Framework ships with a number of standard
             resource plugins, the intention is that developers should write
-            their own to encapsulate their own intialization needs.
+            their own to encapsulate their own initialization needs.
         </para>
 
         <para>

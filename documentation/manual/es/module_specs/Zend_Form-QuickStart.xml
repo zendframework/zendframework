@@ -10,7 +10,7 @@
         <title>Creando un objeto formulario</title>
 
         <para>
-            Crear un objeto de formulario es muy simple: solo instancíe 
+            Crear un objeto de formulario es muy simple: solo instancíe
             <code>Zend_Form</code>
         </para>
 
@@ -20,7 +20,7 @@ $form = new Zend_Form;
         </programlisting>
 
         <para>
-            Para casos de uso avanzados, es posible desee crear una subclase de 
+            Para casos de uso avanzados, es posible desee crear una subclase de
             <code>Zend_Form</code>, pero para formularios simples, puede
             programar la creación de un formulario usando un objeto
             <code>Zend_Form</code>
@@ -46,7 +46,7 @@ $form->setAction('/resource/process')
 
         <para>
             Usted puede establecer atributos HTML adicionales para la etiqueta
-            <code>&lt;form&gt;</code> mediante el uso de los métodos 
+            <code>&lt;form&gt;</code> mediante el uso de los métodos
             setAttrib() o setAttribs(). Por ejemplo, si desea especificar el id
             establezca el atributo "id":
         </para>
@@ -62,8 +62,8 @@ $form->setAttrib('id', 'login');
 
         <para>
             Un formulario no es nada sin sus elementos. <code>Zend_Form</code>
-            contiene de manera predeterminada algunos elementos que generan 
-            XHTML vía auxiliares <code>Zend_View</code>. Son los 
+            contiene de manera predeterminada algunos elementos que generan
+            XHTML vía auxiliares <code>Zend_View</code>. Son los
             siguientes:
         </para>
 
@@ -135,7 +135,7 @@ $form->addElement('text', 'username');
 
         <para>
             De manera predeterminada, éstos no tienen validadores o filtros.
-            Esto significa que tendrá que configurar sus elementos con un 
+            Esto significa que tendrá que configurar sus elementos con un
             mínimo de validadores, y potencialmente filtros. Puede hacer esto
             (a) antes de pasar el elemento al formulario, (b) vía opciones de
             configuración pasadas cuando crea un elemento a través de
@@ -145,7 +145,7 @@ $form->addElement('text', 'username');
 
         <para>
             Veamos primero la creación de validadores para la instancia de
-            un elemento concreto. Puede pasar objetos 
+            un elemento concreto. Puede pasar objetos
             <code>Zend_Validate_*</code> o el nombre de un validador para utilizar:
         </para>
 
@@ -173,13 +173,13 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         </programlisting>
 
         <para>
-            (El segundo parámetro se utiliza para indicar si el fallo 
-            debería prevenir la ejecución de validadores posteriores o no; por 
+            (El segundo parámetro se utiliza para indicar si el fallo
+            debería prevenir la ejecución de validadores posteriores o no; por
             defecto, el valor es false.)
         </para>
 
         <para>
-            Puede también desear especificar un elemento como requerido. Esto 
+            Puede también desear especificar un elemento como requerido. Esto
             puede hacerse utilizando un método de acceso o pasando una opción al
             crear el elemento. En el primer caso:
         </para>
@@ -231,7 +231,7 @@ $username->addValidators(array('alnum',
             Tan simple como esto, realizarlo para cada uno de los elementos
             del formulario puede resultar un poco tedioso. Intentemos la opción
             (b) arriba mencionada. Cuando creamos un nuevo elemento utilizando
-            <code>Zend_Form::addElement()</code> como fábrica, opcionalmente 
+            <code>Zend_Form::addElement()</code> como fábrica, opcionalmente
             podemos pasar las opciones de configuración. Éstas pueden incluir
             validadores y los filtros que se van a utilizar. Por lo tanto, para hacer todo
             lo anterior implícitamente, intente lo siguiente:
@@ -261,10 +261,10 @@ $form->addElement('text', 'username', array(
         <title>Generar un formulario</title>
 
         <para>
-            Generar un formulario es simple. La mayoría de los elementos 
+            Generar un formulario es simple. La mayoría de los elementos
             utilizan un auxiliar de <code>Zend_View</code> para generarse a sí
-            mismos, por lo tanto necesitan un objeto vista con el fin de 
-            generarse. Además, tiene dos opciones: usar el método render() 
+            mismos, por lo tanto necesitan un objeto vista con el fin de
+            generarse. Además, tiene dos opciones: usar el método render()
             del formulario, o simplemente mostrarlo con echo.
         </para>
 
@@ -278,7 +278,7 @@ echo $form;
         </programlisting>
 
         <para>
-            De manera predeterminada, <code>Zend_Form</code> y 
+            De manera predeterminada, <code>Zend_Form</code> y
             <code>Zend_Form_Element</code> intentarán utilizar el objeto vista
             inicializado en el <code>ViewRenderer</code>, lo que significa que
             no tendrá que establecer la vista manualmente cuando use el MVC de
@@ -296,8 +296,8 @@ echo $form;
             (decorators) para generar la salida. Estos decoradores pueden
             reemplazar, añadir o anteponer contenido, y tienen plena
             introspección al elemento que les es pasado. Como resultado, puede
-            combinar múltiples decoradores para lograr efectos personalizados. 
-            Predeterminadamente, <code>Zend_Form_Element</code> actualmente 
+            combinar múltiples decoradores para lograr efectos personalizados.
+            Predeterminadamente, <code>Zend_Form_Element</code> actualmente
             combina cuatro decoradores para obtener su salida; la configuración
             sería como sigue:
         </para>
@@ -313,7 +313,7 @@ $element->addDecorators(array(
         </programlisting>
 
         <para>
-            (Donde &lt;HELPERNAME&gt; es el nombre de un view helper que 
+            (Donde &lt;HELPERNAME&gt; es el nombre de un view helper que
             utilizar, y varía según el elemento)
         </para>
 
@@ -339,13 +339,13 @@ $element->addDecorators(array(
 
         <para>
             Puede cambiar los decoradores usados para un elemento si desea tener
-            diferente salida; véase la sección sobre decoradores para mayor 
+            diferente salida; véase la sección sobre decoradores para mayor
             información.
         </para>
 
         <para>
-            El propio formulario simplemente itera sobre los elementos y 
-            los cubre en un &lt;form&gt; HTML. El action y method que 
+            El propio formulario simplemente itera sobre los elementos y
+            los cubre en un &lt;form&gt; HTML. El action y method que
             proporcionó cuando definió el formulario se pasan a la etiqueta
             <code>&lt;form&gt;</code>, como cualquier atributo que establezca
             vía <code>setAttribs()</code> y familia.
@@ -376,15 +376,15 @@ $form->addElement('text', 'username', array('order' => 10));
         <title>Comprobar si un formulario es válido</title>
 
         <para>
-            Después que un formulario es enviado, necesitará comprobar y ver si 
-            pasa las validaciones. Cada elemento es valuado contra los datos 
-            provistos; si una clave no está presente y el campo fue marcado como 
+            Después que un formulario es enviado, necesitará comprobar y ver si
+            pasa las validaciones. Cada elemento es valuado contra los datos
+            provistos; si una clave no está presente y el campo fue marcado como
             requerido, la validación se ejecuta contra un valor nulo.
         </para>
 
         <para>
             ¿De dónde provienen los datos?. Puede usar <code>$_POST</code> o
-            <code>$_GET</code>, o cualquier otra fuente de datos que tenga a 
+            <code>$_GET</code>, o cualquier otra fuente de datos que tenga a
             mano (solicitud de un servicio web, por ejemplo):
         </para>
 
@@ -401,8 +401,8 @@ if ($form->isValid($_POST)) {
             Con solicitudes AJAX, a veces puede ignorar la validación de un solo
             elemento, o grupo de elementos.
             <code>isValidPartial()</code> validará parcialmente el formulario.
-            A diferencia de <code>isValid()</code>, que como sea, si alguna 
-            clave no esta presente, no ejecutará las validaciones para ese 
+            A diferencia de <code>isValid()</code>, que como sea, si alguna
+            clave no esta presente, no ejecutará las validaciones para ese
             elemento en particular.
         </para>
 
@@ -416,7 +416,7 @@ if ($form->isValidPartial($_POST)) {
         </programlisting>
 
         <para>
-            Un método adicional, <code>processAjax()</code>, puede también ser 
+            Un método adicional, <code>processAjax()</code>, puede también ser
             usado para validar formularios parciales. A diferencia de
             <code>isValidPartial()</code>, regresa una cadena en formato JSON
             conteniendo mensajes de error en caso de fallo.
@@ -447,7 +447,7 @@ $unfiltered = $form->getUnfilteredValues();
 
         <para>
             Entonces, ¿su formulario no es válido? En la mayoría de los casos,
-            simplemente puede generar el formulario nuevamente y los errores se 
+            simplemente puede generar el formulario nuevamente y los errores se
             mostrarán cuando se usen los decoradores predeterminados:
         </para>
 
@@ -464,7 +464,7 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Si quiere inspeccionar los errores, tiene dos métodos.
-            <code>getErrors()</code> regresa una matriz asociativa de nombres / 
+            <code>getErrors()</code> regresa una matriz asociativa de nombres /
             códigos de elementos (donde códigos es una matriz de códigos de
             error). <code>getMessages()</code> regresa una matriz asociativa
             de nombres / mensajes de elementos (donde mensajes es una matriz
@@ -488,17 +488,17 @@ if (!$form->isValid($_POST)) {
         </itemizedlist>
 
         <para>
-            Para nuestros propósitos, vamos a suponer que un usuario válido 
+            Para nuestros propósitos, vamos a suponer que un usuario válido
             cumplirá con tener solo caracteres alfanuméricos, comenzar con una
-            letra, tener una longitud mínima de 6 caracteres y una longitud 
-            máxima de 20 caracteres; se normalizarán en minúsculas. Las 
+            letra, tener una longitud mínima de 6 caracteres y una longitud
+            máxima de 20 caracteres; se normalizarán en minúsculas. Las
             contraseñas deben tener un mínimo de 6 caracteres. Cuando se procese
-            vamos simplemente a mostrar el valor, por lo que puede permanecer 
+            vamos simplemente a mostrar el valor, por lo que puede permanecer
             inválido.
         </para>
 
         <para>
-            Usaremos el poder de la opciones de configuración de 
+            Usaremos el poder de la opciones de configuración de
             <code>Zend_Form</code> para crear el formulario:
         </para>
 
@@ -579,8 +579,8 @@ class UserController extends Zend_Controller_Action
 
         <para>
             Como notará en el código del controlador, hay más trabajo por hacer:
-            mientras la información enviada sea válida, necesitará todavía 
-            realizar la autenticación usando <code>Zend_Auth</code>, por 
+            mientras la información enviada sea válida, necesitará todavía
+            realizar la autenticación usando <code>Zend_Auth</code>, por
             ejemplo.
         </para>
     </sect2>
@@ -590,12 +590,12 @@ class UserController extends Zend_Controller_Action
 
         <para>
             Todas las clases <code>Zend_Form</code> son configurables mediante
-            <code>Zend_Config</code>; puede incluso pasar un objeto al 
-            constructor o pasarlo a través de <code>setConfig()</code>. Veamos 
-            cómo podemos crear el formulario anterior usando un archivo INI. 
-            Primero, vamos a seguir las recomendaciones, y colocaremos nuestras 
+            <code>Zend_Config</code>; puede incluso pasar un objeto al
+            constructor o pasarlo a través de <code>setConfig()</code>. Veamos
+            cómo podemos crear el formulario anterior usando un archivo INI.
+            Primero, vamos a seguir las recomendaciones, y colocaremos nuestras
             configuraciones dentro de secciones reflejando su objetivo y
-            y enfocándonos en la sección 'development'. A continuación, 
+            y enfocándonos en la sección 'development'. A continuación,
             pondremos en una sección de configuración para el controlador dado
             ('user'), y una clave para el formulario ('login'):
         </para>
@@ -648,7 +648,7 @@ $form   = new Zend_Form($config->user->login);
 
         <para>
             Esperamos que después de este pequeño tutorial sea capaz de descubrir
-            el poder y flexibilidad de <code>Zend_Form</code>. Continúe leyendo 
+            el poder y flexibilidad de <code>Zend_Form</code>. Continúe leyendo
             para profundizar más en el tema.
         </para>
     </sect2>

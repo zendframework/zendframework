@@ -7,17 +7,17 @@
         <title>Introducción</title>
 
         <para>
-            <code>Zend_Db_Profiler</code> puede ser habilitado para Perfilar las 
+            <code>Zend_Db_Profiler</code> puede ser habilitado para Perfilar las
             consultas. Los Perfiles incluyen la consulta procesada por el adaptador como
-			el tiempo as transcurrido en la ejecución de las consultas, permitiendo 
-			inspeccionar las consultas realizadas win necesidad de agregar información 
-			de depuración extra en el código de las clases. El uso avanzado también permite
-			que el desarrollador filtre las consultas que desea perfilar.
+            el tiempo as transcurrido en la ejecución de las consultas, permitiendo
+            inspeccionar las consultas realizadas win necesidad de agregar información
+            de depuración extra en el código de las clases. El uso avanzado también permite
+            que el desarrollador filtre las consultas que desea perfilar.
         </para>
 
         <para>
-            Habilite el perfilador pasando una directiva al al constructor del adaptador, 
-			o pidiendole al adaptador permitirlo más adelante.
+            Habilite el perfilador pasando una directiva al al constructor del adaptador,
+            o pidiendole al adaptador permitirlo más adelante.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -42,14 +42,14 @@ $db->getProfiler()->setEnabled(true);
 
         <para>
             El valor de la opción '<code>profiler</code>' es flexible. Es interpretada de distintas
-			formas dependiendo del tipo. Normalmente, debería usar un valor booleano simple, pero
-			otros tipos le permiten personalizar el comportamiento del perfilador.
+            formas dependiendo del tipo. Normalmente, debería usar un valor booleano simple, pero
+            otros tipos le permiten personalizar el comportamiento del perfilador.
         </para>
 
         <para>
-            Un argumento booleano establece el perfilador como habilitado si el valor es 
-			<code>true</code>, o deshabilitado si es <code>false</code>. La clase del perfilador
-			es el la clase de perfilador por defecto del adaptador, <code>Zend_Db_Profiler</code>.
+            Un argumento booleano establece el perfilador como habilitado si el valor es
+            <code>true</code>, o deshabilitado si es <code>false</code>. La clase del perfilador
+            es el la clase de perfilador por defecto del adaptador, <code>Zend_Db_Profiler</code>.
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
@@ -58,9 +58,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            Una instancia del objeto perfilador hace que el adaptador use ese objeto. 
-			El tipo del objeto debe ser <code>Zend_Db_Profiler</code> o una subclase de este. 
-			Habilitar el perfilador se hace por separado.
+            Una instancia del objeto perfilador hace que el adaptador use ese objeto.
+            El tipo del objeto debe ser <code>Zend_Db_Profiler</code> o una subclase de este.
+            Habilitar el perfilador se hace por separado.
             <programlisting role="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
@@ -72,13 +72,13 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             El argumento puede ser un array asociativo conteniendo algunas o todas las claves
-			'<code>enabled</code>', '<code>instance</code>', y '<code>class</code>'. Las claves 
-			'<code>enabled</code>' e '<code>instance</code>' corresponden a los tipos booleano y
-			la instancia documentada previamente. La clave '<code>class</code>' es usada para nombrar
-			la clase que usará el perfilador personalizado. La clase debe ser 
-			<code>Zend_Db_Profiler</code> o una subclase. La clase es instanciada sin argumentos
-			de constructor. La opción '<code>class</code>' es ignorada cuando la opción
-			'<code>instance</code>' está dada.
+            '<code>enabled</code>', '<code>instance</code>', y '<code>class</code>'. Las claves
+            '<code>enabled</code>' e '<code>instance</code>' corresponden a los tipos booleano y
+            la instancia documentada previamente. La clave '<code>class</code>' es usada para nombrar
+            la clase que usará el perfilador personalizado. La clase debe ser
+            <code>Zend_Db_Profiler</code> o una subclase. La clase es instanciada sin argumentos
+            de constructor. La opción '<code>class</code>' es ignorada cuando la opción
+            '<code>instance</code>' está dada.
             <programlisting role="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
@@ -91,8 +91,8 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             Finalmente, el argumento puede ser un objeto de tipo <code>Zend_Config</code>
-			conteniendo las propiedades, que son tratadas como las claves de array descritas recién.
-			Por ejemplo, un archivo "config.ini" puede contener los siguientes datos:
+            conteniendo las propiedades, que son tratadas como las claves de array descritas recién.
+            Por ejemplo, un archivo "config.ini" puede contener los siguientes datos:
             <programlisting role="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
@@ -143,14 +143,14 @@ $profiler = $db->getProfiler();
         <para>
             Este retorna una instancia del objeto <code>Zend_Db_Profiler</code>. Con
             esta instancia, el desarrollador puede examinar las consultar usando una variedad
-			de métodos:
+            de métodos:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getTotalNumQueries()</code> retorna el número total 
-					de consultas que han sido perfiladas.
+                    <code>getTotalNumQueries()</code> retorna el número total
+                    de consultas que han sido perfiladas.
                 </para>
             </listitem>
             <listitem>
@@ -161,15 +161,15 @@ $profiler = $db->getProfiler();
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryProfiles()</code> retorna un array con todos 
-					los perfiles de consultas.
+                    <code>getQueryProfiles()</code> retorna un array con todos
+                    los perfiles de consultas.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <code>getLastQueryProfile()</code> retorna el último perfil (más
-	                    reciente) de consulta, independientemente de si la consulta ha 
-						terminado o no (si no lo ha hecho, la hora de finalización será nula).
+                        reciente) de consulta, independientemente de si la consulta ha
+                        terminado o no (si no lo ha hecho, la hora de finalización será nula).
                 </para>
             </listitem>
             <listitem>
@@ -180,9 +180,9 @@ $profiler = $db->getProfiler();
         </itemizedlist>
 
         <para>
-            El valor de retorno de <code>getLastQueryProfile()</code> y 
-			elementos individuales de <code>getQueryProfiles()</code> son
-            <code>Zend_Db_Profiler_Query</code> objetos, que proporcionan la 
+            El valor de retorno de <code>getLastQueryProfile()</code> y
+            elementos individuales de <code>getQueryProfiles()</code> son
+            <code>Zend_Db_Profiler_Query</code> objetos, que proporcionan la
              capacidad para inspeccionar cada una de las consultas:
         </para>
 
@@ -192,7 +192,7 @@ $profiler = $db->getProfiler();
                     <code>getQuery()</code> retorna el texto SQL de la consulta.
                     El texto SQL de una declaración preparada con parámetros es el
                     texto al tiempo en que la consulta fué preparada, por lo que contiene
-					marcadores de posición, no los valores utilizados cuando la
+                    marcadores de posición, no los valores utilizados cuando la
                     declaración se ejecuta.
                 </para>
             </listitem>
@@ -200,9 +200,9 @@ $profiler = $db->getProfiler();
                 <para>
                     <code>getQueryParams()</code> retorna un array de
                     los valores de los parámetros usados cuando se ejecuta una consulta preparada.
-                    Este incluye ambos parámetros y argumentos vinculados al método 
-					<code>execute()</code> de la declaración.  Las claves del array
-					son las posiciones (basado en 1) o indices de parámetros nombrados (string).
+                    Este incluye ambos parámetros y argumentos vinculados al método
+                    <code>execute()</code> de la declaración.  Las claves del array
+                    son las posiciones (basado en 1) o indices de parámetros nombrados (string).
                 </para>
             </listitem>
             <listitem>
@@ -215,9 +215,9 @@ $profiler = $db->getProfiler();
 
         <para>
             La información que <code>Zend_Db_Profiler</code> provee es útil para
-            perfilar cuellos de botella en aplicaciones, y para depurar consultas que 
-			han sido ejecutadas. Por instancia, para ver la consulta exacta que tuvo la
-			última ejecución:
+            perfilar cuellos de botella en aplicaciones, y para depurar consultas que
+            han sido ejecutadas. Por instancia, para ver la consulta exacta que tuvo la
+            última ejecución:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -228,10 +228,10 @@ echo $query->getQuery();
         </programlisting>
 
         <para>
-            Tal vez una página se genera lentamente; use el perfilador para 
-			determinar primero el número total de segundos de todas las consultas, 
-			y luego recorrer paso a paso a través de las consultas para encontrar 
-			la más lenta:
+            Tal vez una página se genera lentamente; use el perfilador para
+            determinar primero el número total de segundos de todas las consultas,
+            y luego recorrer paso a paso a través de las consultas para encontrar
+            la más lenta:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -275,7 +275,7 @@ echo "Consulta más lenta: \n" . $longestQuery . "\n";
             <para>
                 <code>setFilterElapsedSecs()</code> le permite al desarrolador establecer
                 un tiempo mínimo antes de que una consulta se perfile. Para remover el filtro,
-				pase un valor null al método.
+                pase un valor null al método.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -293,8 +293,8 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 <code>setFilterQueryType()</code> le permite al desarrollador
-				establecer que tipo de consulta serán perfiladas; para perfilar multiples tipos,
-				use un "OR" lógico. Los tipos de consulta se definen como las siguientes
+                establecer que tipo de consulta serán perfiladas; para perfilar multiples tipos,
+                use un "OR" lógico. Los tipos de consulta se definen como las siguientes
                 constantes de <code>Zend_Db_Profiler</code>:
             </para>
 
@@ -302,31 +302,31 @@ $profiler->setFilterElapsedSecs(null);
                 <listitem>
                     <para>
                         <code>Zend_Db_Profiler::CONNECT</code>: operaciones de
-						conexión o selección de base de datos.
+                        conexión o selección de base de datos.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Zend_Db_Profiler::QUERY</code>: consultas generales
-						a la base de datos que no calzan con otros tipos.
+                        a la base de datos que no calzan con otros tipos.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Zend_Db_Profiler::INSERT</code>: cualquier consulta
-						que agrega filas a la base de datos, generalmente un SQL INSERT.
+                        que agrega filas a la base de datos, generalmente un SQL INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Zend_Db_Profiler::UPDATE</code>: cualquier consulta que
-						actualice registros existentes, usualmente un SQL UPDATE.
+                        actualice registros existentes, usualmente un SQL UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>Zend_Db_Profiler::DELETE</code>: cualquier consulta
-						que elimine datos existentes, usualmente un SQL DELETE.
+                        que elimine datos existentes, usualmente un SQL DELETE.
                     </para>
                 </listitem>
                 <listitem>
@@ -346,7 +346,7 @@ $profiler->setFilterElapsedSecs(null);
 
             <para>
                 Asi como con <code>setFilterElapsedSecs()</code>, puedes remover cualquier filtro
-				existente pasando un <code>null</code> como único argumento.
+                existente pasando un <code>null</code> como único argumento.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -372,13 +372,13 @@ $profiler->setFilterQueryType(null);
             <title>Obtener perfiles por tipo de consulta</title>
 
             <para>
-                Usando <code>setFilterQueryType()</code> puedes reducir los 
-				perfiles generados. Sin embargo, a veces puede ser más útil 
-                mantener todos los perfiles, pero ver sólo los que necesita 
-				en un determinado momento. Otra característica de 
-				<code>getQueryProfiles()</code> es que puede este filtrado al-vuelo,
-				pasando un tipo de consulta(o una combinación lógica de tipos de consulta)
-				en el primer; vea <xref linkend="zend.db.profiler.advanced.filtertype" />
+                Usando <code>setFilterQueryType()</code> puedes reducir los
+                perfiles generados. Sin embargo, a veces puede ser más útil
+                mantener todos los perfiles, pero ver sólo los que necesita
+                en un determinado momento. Otra característica de
+                <code>getQueryProfiles()</code> es que puede este filtrado al-vuelo,
+                pasando un tipo de consulta(o una combinación lógica de tipos de consulta)
+                en el primer; vea <xref linkend="zend.db.profiler.advanced.filtertype" />
                 para una lista las constantes de tipo de consulta.
             </para>
 
@@ -405,8 +405,8 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 
         <para>
             Un Perfilador Especializado es un objeto que hereda de
-            <code>Zend_Db_Profiler</code>.  Los Perfiladores Especializados 
-			tratan la información de perfilado de maneras más especificas.
+            <code>Zend_Db_Profiler</code>.  Los Perfiladores Especializados
+            tratan la información de perfilado de maneras más especificas.
         </para>
 
         <xi:include href="Zend_Db_Profiler-Firebug.xml" />

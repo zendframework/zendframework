@@ -2,8 +2,8 @@
     <title>Zend_Form</title>
 
     <para>
-        Zend_Form simplifica la creación y manejo de formularios en sus 
-        aplicaciones web. Cumple los siguientes objetivos: 
+        Zend_Form simplifica la creación y manejo de formularios en sus
+        aplicaciones web. Cumple los siguientes objetivos:
     </para>
 
     <itemizedlist>
@@ -15,8 +15,8 @@
     </itemizedlist>
 
     <para>
-        Se aprovecha en gran medida de otros componentes de Zend Framework para lograr sus objetivos, 
-        incluyendo <code>Zend_Config</code>, <code>Zend_Validate</code>, <code>Zend_Filter</code>, 
+        Se aprovecha en gran medida de otros componentes de Zend Framework para lograr sus objetivos,
+        incluyendo <code>Zend_Config</code>, <code>Zend_Validate</code>, <code>Zend_Filter</code>,
         <code>Zend_Loader_PluginLoader</code> y, opcionalmente, <code>Zend_View</code>.
     </para>
 </sect1>

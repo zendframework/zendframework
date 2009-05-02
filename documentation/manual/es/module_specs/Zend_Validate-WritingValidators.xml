@@ -3,54 +3,54 @@
     <title>Escribiendo Validadores</title>
 
     <para>
-        Zend_Validate provee un conjunto de validadores que suelen necesitarse, 
-        pero inevitablemente, los desarrolladores quiere escribir sus propios 
-        validadores personalizados para sus necesidades particulares. 
+        Zend_Validate provee un conjunto de validadores que suelen necesitarse,
+        pero inevitablemente, los desarrolladores quiere escribir sus propios
+        validadores personalizados para sus necesidades particulares.
         La tarea de escribir un validador personalizado se describe en esta sección.
     </para>
 
     <para>
-        <code>Zend_Validate_Interface</code> define tres métodos, isValid(), 
-        getMessages(), y getErrors(), que pueden ser implementadas por clases de usuario 
-        a fin de crear objetos de validación personalizados. 
-        Un objeto que implementa una interfaz <code>Zend_Validate_Interface</code>  
-        puede añadirse a una cadena de validación con <code>Zend_Validate::addValidator()</code>.  
-        Tales objetos también pueden ser usados con  
-        <link linkend="zend.filter.input"><code>Zend_Filter_Input</code></link>. 
+        <code>Zend_Validate_Interface</code> define tres métodos, isValid(),
+        getMessages(), y getErrors(), que pueden ser implementadas por clases de usuario
+        a fin de crear objetos de validación personalizados.
+        Un objeto que implementa una interfaz <code>Zend_Validate_Interface</code>
+        puede añadirse a una cadena de validación con <code>Zend_Validate::addValidator()</code>.
+        Tales objetos también pueden ser usados con
+        <link linkend="zend.filter.input"><code>Zend_Filter_Input</code></link>.
     </para>
 
     <para>
-        De la descripción anterior de <code>Zend_Validate_Interface</code>, podrá inferir 
-        que las clases de validación que proporciona Zend Framework devuelven un 
-        valor booleano para cuando un valor se valida satisfactoriamente o no. 
-        También proporcionan información sobre <emphasis role="bold">por qué</emphasis>  
-        un valor falló en la validación. 
-        La disponibilidad de las razones para los fracasos de validación puede ser 
-        valiosa para una aplicación por diversos motivos, tales como proporcionar 
+        De la descripción anterior de <code>Zend_Validate_Interface</code>, podrá inferir
+        que las clases de validación que proporciona Zend Framework devuelven un
+        valor booleano para cuando un valor se valida satisfactoriamente o no.
+        También proporcionan información sobre <emphasis role="bold">por qué</emphasis>
+        un valor falló en la validación.
+        La disponibilidad de las razones para los fracasos de validación puede ser
+        valiosa para una aplicación por diversos motivos, tales como proporcionar
         estadísticas para análisis de usabilidad.
     </para>
 
     <para>
-        La funcionalidad de los mensajes de validación básica de fallos están 
-        implementados en <code>Zend_Validate_Abstract</code>. 
-        A fin de incluir esta funcionalidad al crear una clase de validación, 
-        simplemente extienda <code>Zend_Validate_Abstract</code>. 
-        En la extensión de la clase deberá aplicar la lógica del método 
-        <code>isValid()</code> y definir las variables y plantillas de mensajes 
-        que correspondan a los tipos de fallos de validación que puedan suceder. 
-        Si falla un valor en su test de validación, entonces <code>isValid()</code> 
-        deberá devolver <code>false</code>. 
-        Si el valor pasa su test de validación, entonces <code>isValid()</code> 
-        deberá devolver <code>true</code>. 
+        La funcionalidad de los mensajes de validación básica de fallos están
+        implementados en <code>Zend_Validate_Abstract</code>.
+        A fin de incluir esta funcionalidad al crear una clase de validación,
+        simplemente extienda <code>Zend_Validate_Abstract</code>.
+        En la extensión de la clase deberá aplicar la lógica del método
+        <code>isValid()</code> y definir las variables y plantillas de mensajes
+        que correspondan a los tipos de fallos de validación que puedan suceder.
+        Si falla un valor en su test de validación, entonces <code>isValid()</code>
+        deberá devolver <code>false</code>.
+        Si el valor pasa su test de validación, entonces <code>isValid()</code>
+        deberá devolver <code>true</code>.
     </para>
 
     <para>
-        En general, el método <code>isValid()</code> no debería arrojar 
-        excepciones, salvo que sea imposible determinar si el valor de entrada 
-        es válido o no. 
-        Algunos ejemplos de casos razonables para lanzar una excepción podría ser 
-        si un archivo no puede abrirse, que un servidor LDAP no pudiera ser 
-        contactado, o una conexión a una base de datos no estuviera disponible. 
+        En general, el método <code>isValid()</code> no debería arrojar
+        excepciones, salvo que sea imposible determinar si el valor de entrada
+        es válido o no.
+        Algunos ejemplos de casos razonables para lanzar una excepción podría ser
+        si un archivo no puede abrirse, que un servidor LDAP no pudiera ser
+        contactado, o una conexión a una base de datos no estuviera disponible.
         Estos son casos en los que puede ser necesario determinar el éxito o
         fracaso de la validación.
     </para>
@@ -60,9 +60,9 @@
         <title>Crear una Clase de Validación sencilla</title>
 
         <para>
-            El siguiente ejemplo demuestra cómo podría escribirse un sencillo 
-            validador personalizado. 
-            En este caso las reglas de validación son simplemente que el valor 
+            El siguiente ejemplo demuestra cómo podría escribirse un sencillo
+            validador personalizado.
+            En este caso las reglas de validación son simplemente que el valor
             de entrada debe ser de punto flotante.
 
             <programlisting role="php"><![CDATA[
@@ -89,14 +89,14 @@ class MyValid_Float extends Zend_Validate_Abstract
 ]]>
             </programlisting>
 
-            La clase define una plantilla para su único mensaje de fallo de 
-            validación, que incluye el mágico parámetro <code>%value%</code>. 
-            La llamada a <code>_setValue()</code> prepara al objeto para insertar 
-            automáticamente en el mensaje de fallo al valor probado, si éste  
-            falla en la validación. 
-            La llamada a <code>_error()</code> sigue las pistas para establecer 
-            una razón por el fracaso de la validación. 
-            Dado que esta clase sólo define un mensaje de fallo, no es necesario 
+            La clase define una plantilla para su único mensaje de fallo de
+            validación, que incluye el mágico parámetro <code>%value%</code>.
+            La llamada a <code>_setValue()</code> prepara al objeto para insertar
+            automáticamente en el mensaje de fallo al valor probado, si éste
+            falla en la validación.
+            La llamada a <code>_error()</code> sigue las pistas para establecer
+            una razón por el fracaso de la validación.
+            Dado que esta clase sólo define un mensaje de fallo, no es necesario
             darle a <code>_error()</code> el nombre de la plantilla del mensaje
             de fallo.
         </para>
@@ -107,10 +107,10 @@ class MyValid_Float extends Zend_Validate_Abstract
 
         <title>Escribiendo una Clase de Validación habiendo Condiciones Dependientes </title>
         <para>
-            El siguiente ejemplo muestra un conjunto de reglas de validación 
-            más complejo, donde es necesario que el valor de entrada ser numérico 
-            y dentro del límite de un rango de valores mínimos y máximos. 
-            Un valor de entrada podría fallar en la validación exactamente por una 
+            El siguiente ejemplo muestra un conjunto de reglas de validación
+            más complejo, donde es necesario que el valor de entrada ser numérico
+            y dentro del límite de un rango de valores mínimos y máximos.
+            Un valor de entrada podría fallar en la validación exactamente por una
             de las siguientes razones:
 
             <itemizedlist>
@@ -175,27 +175,27 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 ]]>
             </programlisting>
 
-            Las propiedades públicas <code>$minimum</code> y <code>$maximum</code> 
-            se han establecido para proporcionar los límites mínimo y máximo, 
-            respectivamente, de un valor a validar. 
-            La clase también define dos variables de mensajes que corresponden a 
-            las propiedades públicas y permiten usar <code>min</code> y <code>max</code> 
-            en plantillas de mensajes como parámetros mágicos, al igual que con  
+            Las propiedades públicas <code>$minimum</code> y <code>$maximum</code>
+            se han establecido para proporcionar los límites mínimo y máximo,
+            respectivamente, de un valor a validar.
+            La clase también define dos variables de mensajes que corresponden a
+            las propiedades públicas y permiten usar <code>min</code> y <code>max</code>
+            en plantillas de mensajes como parámetros mágicos, al igual que con
             <code>value</code>.
         </para>
 
         <para>
-        
-            Tenga en cuenta que si cualquiera de las comprobaciones de validación 
-            falla en <code>isValid()</code>, ya está preparado un mensaje apropiado, 
+
+            Tenga en cuenta que si cualquiera de las comprobaciones de validación
+            falla en <code>isValid()</code>, ya está preparado un mensaje apropiado,
             y el método inmediatamente devuelve <code>false</code>.
-            Estas reglas de validación son por lo tanto secuencialmente dependientes. 
-            Es decir, si uno de los tests falla, no hay necesidad de poner a 
-            prueba las posteriores reglas de validación. 
-            Sin embargo, esta necesidad no será el caso. 
-            El siguiente ejemplo ilustra cómo escribir una clase con reglas de 
-            validación independientes, donde el objeto validación puede devolver 
-            múltiples razones por las cuales fracasó un intento de validación en 
+            Estas reglas de validación son por lo tanto secuencialmente dependientes.
+            Es decir, si uno de los tests falla, no hay necesidad de poner a
+            prueba las posteriores reglas de validación.
+            Sin embargo, esta necesidad no será el caso.
+            El siguiente ejemplo ilustra cómo escribir una clase con reglas de
+            validación independientes, donde el objeto validación puede devolver
+            múltiples razones por las cuales fracasó un intento de validación en
             particular.
         </para>
 
@@ -205,10 +205,10 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
         <title>Validación con Condiciones Independientes, Múltiples Razones del Fracaso</title>
         <para>
-            Considere escribir una clase de validación y control de 
-            contraseñas - cuando es necesario que un usuario elija una 
-            contraseña que cumple determinados criterios para ayudar a tener  
-            cuentas de usuario seguras. Supongamos que la seguridad de la contraseña 
+            Considere escribir una clase de validación y control de
+            contraseñas - cuando es necesario que un usuario elija una
+            contraseña que cumple determinados criterios para ayudar a tener
+            cuentas de usuario seguras. Supongamos que la seguridad de la contraseña
             aplica criterios que fuerzan a lo siguiente:
 
             <itemizedlist>
@@ -277,14 +277,14 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]>
             </programlisting>
 
-            Las cuatro pruebas de criterio en <code>isValid()</code> no devuelven 
-            inmediatamente <code>false</code>. 
-            Esto permite a la clase de validación a proporcionar <emphasis role="bold">todas</emphasis> 
-            las razones por las que la contraseña de entrada no cumplió los requisitos 
-            de validación. 
-            Si, por ejemplo, un usuario ingresara el string "<code>#$%</code>" 
-            como contraseña, <code>isValid()</code> causaría que los cuatro 
-            mensajes de fracaso de validación sean devueltos por un llamado posterior 
+            Las cuatro pruebas de criterio en <code>isValid()</code> no devuelven
+            inmediatamente <code>false</code>.
+            Esto permite a la clase de validación a proporcionar <emphasis role="bold">todas</emphasis>
+            las razones por las que la contraseña de entrada no cumplió los requisitos
+            de validación.
+            Si, por ejemplo, un usuario ingresara el string "<code>#$%</code>"
+            como contraseña, <code>isValid()</code> causaría que los cuatro
+            mensajes de fracaso de validación sean devueltos por un llamado posterior
             a <code>getMessages()</code>.
         </para>
 

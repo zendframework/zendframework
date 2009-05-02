@@ -3,9 +3,9 @@
     <title>Dirección de Email</title>
 
     <para>
-        <code>Zend_Validate_EmailAddress</code> Le permite validar una dirección 
+        <code>Zend_Validate_EmailAddress</code> Le permite validar una dirección
         de email. El validador primero divide la dirección de email en la parte
-        local @ nombre de host e intenta igualar a estos contra especificaciones 
+        local @ nombre de host e intenta igualar a estos contra especificaciones
         conocidas para direcciones y nombres de host para el correo electrónico.
     </para>
 
@@ -29,7 +29,7 @@ if ($validator->isValid($email)) {
 ]]>
         </programlisting>
 
-        Esto coincide con el correo electrónico <code>$email</code> y si fracasa, 
+        Esto coincide con el correo electrónico <code>$email</code> y si fracasa,
         alimenta <code>$validator->getMessages()</code> con mensajes de error útiles.
     </para>
 
@@ -38,16 +38,16 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <code>Zend_Validate_EmailAddress</code> se comparará con cualquier 
-        dirección de correo válida de acuardo a RFC2822. 
-        Por ejemplo, correos electrónicos válidos incluyen <code>bob@domain.com</code> , 
-        <code>bob+jones@domain.us</code> , <code>"bob@jones"@domain.com</code> y 
+        <code>Zend_Validate_EmailAddress</code> se comparará con cualquier
+        dirección de correo válida de acuardo a RFC2822.
+        Por ejemplo, correos electrónicos válidos incluyen <code>bob@domain.com</code> ,
+        <code>bob+jones@domain.us</code> , <code>"bob@jones"@domain.com</code> y
         <code>"bob jones"@domain.com</code>
     </para>
 
     <para>
-        Algunos formatos obsoletos de email actualmente no validan 
-        (por ejemplo los retornos de carro o "\" un caracter en una dirección 
+        Algunos formatos obsoletos de email actualmente no validan
+        (por ejemplo los retornos de carro o "\" un caracter en una dirección
         de correo electrónico).
     </para>
 
@@ -56,18 +56,18 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        La parte nombre de host de una dirección de correo es validado contra 
-        <link linkend="zend.validate.set.hostname"><code>Zend_Validate_Hostname</code></link>. 
-        Por defecto sólo son aceptados nombres de host DNS de la forma 
-        <code>domain.com</code>, aunque si lo desea también puede aceptar 
+        La parte nombre de host de una dirección de correo es validado contra
+        <link linkend="zend.validate.set.hostname"><code>Zend_Validate_Hostname</code></link>.
+        Por defecto sólo son aceptados nombres de host DNS de la forma
+        <code>domain.com</code>, aunque si lo desea también puede aceptar
         direcciones IP y nombres de host locales.
     </para>
 
     <para>
-        Para ello necesita instanciar a <code>Zend_Validate_EmailAddress</code> 
-        pasando un parámetro para indicar el tipo de nombres de host que quiere aceptar. 
-        Más detalles están incluidos en <code>Zend_Validate_EmailAddress</code>, 
-        aunque abajo hay un ejemplo de cómo aceptar tanto nombres de host DNS y 
+        Para ello necesita instanciar a <code>Zend_Validate_EmailAddress</code>
+        pasando un parámetro para indicar el tipo de nombres de host que quiere aceptar.
+        Más detalles están incluidos en <code>Zend_Validate_EmailAddress</code>,
+        aunque abajo hay un ejemplo de cómo aceptar tanto nombres de host DNS y
         locales:
 
         <programlisting role="php"><![CDATA[
@@ -91,19 +91,19 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        Sólo porque una dirección de correo electrónico está en el formato correcto, 
-        no necesariamente significa que esa dirección de correo electrónico 
-        existe realmente. Para ayudar a resolver este problema, puede usar la 
-        validación MX para comprobar si existe una entrada MX (email) en el 
-        registro DNS para correo electrónico en ese nombre de host. 
+        Sólo porque una dirección de correo electrónico está en el formato correcto,
+        no necesariamente significa que esa dirección de correo electrónico
+        existe realmente. Para ayudar a resolver este problema, puede usar la
+        validación MX para comprobar si existe una entrada MX (email) en el
+        registro DNS para correo electrónico en ese nombre de host.
         Esto le dice que el nombre de host acepta email, pero no le dice si la
         dirección de correo electrónico exacta es válida en si misma.
     </para>
 
     <para>
-        La comprobación MX no está activada por defecto y en este momento es 
-        soportada sólo por plataformas UNIX. 
-        Para habilitar el control MX puede pasar un segundo parámetro al 
+        La comprobación MX no está activada por defecto y en este momento es
+        soportada sólo por plataformas UNIX.
+        Para habilitar el control MX puede pasar un segundo parámetro al
         constructor <code>Zend_Validate_EmailAddress</code>.
 
         <programlisting role="php"><![CDATA[
@@ -111,14 +111,14 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]>
         </programlisting>
-        Alternativamente, para activar o desactivar la validación MX puede pasar 
+        Alternativamente, para activar o desactivar la validación MX puede pasar
         <code>true</code> o <code>false</code> a <code>$validator->setValidateMx()</code>.
     </para>
 
     <para>
-        Al habilitarlo, se usarán las funciones de red para comprobar 
-        la presencia de un registro MX en el nombre de host de la dirección 
-        de correo electrónico que desea validar. 
+        Al habilitarlo, se usarán las funciones de red para comprobar
+        la presencia de un registro MX en el nombre de host de la dirección
+        de correo electrónico que desea validar.
         Tenga en cuenta esto probablemente hará más lento su script.
     </para>
 
@@ -127,11 +127,11 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
     </para>
 
     <para>
-        <code>Zend_Validate_EmailAddress</code> también comparará caracteres 
-        internationales que existen en algunos dominios. 
-        Esto se conoce como soporte de International Domain Name (IDN). 
-        Está activado por defecto, aunque puede deshabilitarlo internamente 
-        cambiando el ajuste a través del objeto <code>Zend_Validate_Hostname</code> 
+        <code>Zend_Validate_EmailAddress</code> también comparará caracteres
+        internationales que existen en algunos dominios.
+        Esto se conoce como soporte de International Domain Name (IDN).
+        Está activado por defecto, aunque puede deshabilitarlo internamente
+        cambiando el ajuste a través del objeto <code>Zend_Validate_Hostname</code>
         que existe en <code>Zend_Validate_EmailAddress</code>.
 
         <programlisting role="php"><![CDATA[
@@ -143,7 +143,7 @@ $validator->hostnameValidator->setValidateIdn(false);
     </para>
 
     <para>
-        Tenga en cuenta que los IDNs se validarán solo si 
+        Tenga en cuenta que los IDNs se validarán solo si
         usted permite que nombres de host DNS sean validados.
     </para>
 
@@ -152,21 +152,21 @@ $validator->hostnameValidator->setValidateIdn(false);
     </para>
 
     <para>
-        Por defecto, un nombre de host se cotejará con una lista conocida de TLDs. 
-        Está activado por defecto, aunque puede deshabilitarlo cambiando el 
-        ajuste a través del objeto interno <code>Zend_Validate_Hostname</code> 
+        Por defecto, un nombre de host se cotejará con una lista conocida de TLDs.
+        Está activado por defecto, aunque puede deshabilitarlo cambiando el
+        ajuste a través del objeto interno <code>Zend_Validate_Hostname</code>
         que existe en <code>Zend_Validate_EmailAddress</code>.
 
         <programlisting role="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]>
         </programlisting>
-        Encontrará más información sobre el uso de <code>setValidateTld()</code> 
+        Encontrará más información sobre el uso de <code>setValidateTld()</code>
         en la documentación de <code>Zend_Validate_Hostname</code>.
     </para>
 
     <para>
-        Tenga en cuenta que los TLDs se validarán solo si 
+        Tenga en cuenta que los TLDs se validarán solo si
         usted permite que nombres de host DNS sean validados.
     </para>
 

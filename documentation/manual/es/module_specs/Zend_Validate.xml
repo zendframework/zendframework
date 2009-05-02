@@ -3,8 +3,8 @@
     <title>Introducción</title>
 
     <para>
-        Cuando se necesita validar algún tipo de dato, el componente Zend_Validate ofrece un conjunto de validadores, 
-        como así también un sencillo mecanismo de encadenado de validaciones por el cual 
+        Cuando se necesita validar algún tipo de dato, el componente Zend_Validate ofrece un conjunto de validadores,
+        como así también un sencillo mecanismo de encadenado de validaciones por el cual
         múltiples validadores pueden aplicarse a un dato en un orden definido por el usuario.
     </para>
 
@@ -13,20 +13,20 @@
         <title>¿Qué es un validador?</title>
 
         <para>
-            Un validador examina su entrada con respecto a algunos requerimientos  
-            y produce un resultado booleano si la entrada valida satisfactoriamente 
-            con los requisitos. Si la entrada no cumple los requisitos, 
-            un validador también podrá proporcionar información adicional 
+            Un validador examina su entrada con respecto a algunos requerimientos
+            y produce un resultado booleano si la entrada valida satisfactoriamente
+            con los requisitos. Si la entrada no cumple los requisitos,
+            un validador también podrá proporcionar información adicional
             sobre que requisito(s) no son satisfechos.
         </para>
 
         <para>
             Por ejemplo, una aplicación web podría requerir que un usuario ingrese
-            su nombre, de entre seis y doce caracteres de longitud y 
-            que sólo puede contener caracteres alfanuméricos. 
-            Se puede usar un validador para asegurar que los usuarios cumplan 
-            estos requisitos. 
-            Si el nombre de usuario elegido no cumple con uno o ambos de los requisitos, 
+            su nombre, de entre seis y doce caracteres de longitud y
+            que sólo puede contener caracteres alfanuméricos.
+            Se puede usar un validador para asegurar que los usuarios cumplan
+            estos requisitos.
+            Si el nombre de usuario elegido no cumple con uno o ambos de los requisitos,
             sería útil saber cuál de estos requisitos no se cumple.
         </para>
 
@@ -37,35 +37,35 @@
         <title>Uso básico de validadores</title>
 
         <para>
-            Habiendo definido la validación de esta manera, Zend Framework nos proporciona el fundamento 
-            para <code>Zend_Validate_Interface</code> que define dos métodos, 
-            <code>isValid()</code> y <code>getMessages()</code>. 
-            El método <code>isValid()</code> realiza la validación del valor, 
-            devolviendo <code>true</code> si y sólo si el valor pasa contra el criterio de 
+            Habiendo definido la validación de esta manera, Zend Framework nos proporciona el fundamento
+            para <code>Zend_Validate_Interface</code> que define dos métodos,
+            <code>isValid()</code> y <code>getMessages()</code>.
+            El método <code>isValid()</code> realiza la validación del valor,
+            devolviendo <code>true</code> si y sólo si el valor pasa contra el criterio de
             validación.
         </para>
 
         <para>
-            Si <code>isValid()</code> devuelve <code>false</code>, la función 
-            <code>getMessages()</code> devuelve un array de mensajes explicando 
-            el motivo(s) del fracaso de la validación. Las claves del array son 
-            strings cortos que identifican las razones por las cuales fracasó 
-            la validación, y los valores del array son los correspondientes mensajes  
-            para ser leídos por un ser humano. 
-            Las claves y los valores son dependientes de la clase; cada clase de validación 
-            define su propio conjunto de mensajes de validación fallidas y las 
-            claves únicas que las identifican. 
-            Cada clase tiene también una definición <code>const</code>  
-            que hace corresponder a cada identificador con una causa del fallo 
+            Si <code>isValid()</code> devuelve <code>false</code>, la función
+            <code>getMessages()</code> devuelve un array de mensajes explicando
+            el motivo(s) del fracaso de la validación. Las claves del array son
+            strings cortos que identifican las razones por las cuales fracasó
+            la validación, y los valores del array son los correspondientes mensajes
+            para ser leídos por un ser humano.
+            Las claves y los valores son dependientes de la clase; cada clase de validación
+            define su propio conjunto de mensajes de validación fallidas y las
+            claves únicas que las identifican.
+            Cada clase tiene también una definición <code>const</code>
+            que hace corresponder a cada identificador con una causa del fallo
             de validación.
         </para>
 
         <note>
             <para>
-               El método <code>getMessages()</code> devuelve información del fracaso 
-               de la validación sólo para la llamada más reciente a <code>isValid()</code>. 
-               Cada llamada a <code>isValid()</code> borra los mensajes y errores 
-               causados por una llamada anterior <code>isValid()</code>, porque es 
+               El método <code>getMessages()</code> devuelve información del fracaso
+               de la validación sólo para la llamada más reciente a <code>isValid()</code>.
+               Cada llamada a <code>isValid()</code> borra los mensajes y errores
+               causados por una llamada anterior <code>isValid()</code>, porque es
                probable que cada llamada a <code>isValid()</code> se refiera al valor de una entrada diferente.
             </para>
         </note>
@@ -96,31 +96,31 @@ if ($validator->isValid($email)) {
         <title>Personalizar los mensajes</title>
 
         <para>
-           Para validar las clases se proporciona un método <code>setMessage()</code> 
-           con el que se puede especificar el formato de un mensaje devuelto por 
-           <code>getMessages()</code> en caso de fallo de validación. 
-           El primer argumento de este método es un string que contiene el mensaje 
-           de error. Usted puede incluir tokens en este array que serán sustituidos 
-           con datos relevantes al validador. El token <code>%value%</code> es aceptado 
-           por todos los validadores, que es sustituido por el valor que pasó a 
+           Para validar las clases se proporciona un método <code>setMessage()</code>
+           con el que se puede especificar el formato de un mensaje devuelto por
+           <code>getMessages()</code> en caso de fallo de validación.
+           El primer argumento de este método es un string que contiene el mensaje
+           de error. Usted puede incluir tokens en este array que serán sustituidos
+           con datos relevantes al validador. El token <code>%value%</code> es aceptado
+           por todos los validadores, que es sustituido por el valor que pasó a
            <code>isValid()</code>. Cada clase de validación, puede dar apoyo a otros
-           tokens en base a cada caso. Por ejemplo, <code>%max%</code> es un token 
-           apoyado por <code>Zend_Validate_LessThan</code>. 
-           El método <code>getMessageVariables()</code> devuelve un array de tokens 
+           tokens en base a cada caso. Por ejemplo, <code>%max%</code> es un token
+           apoyado por <code>Zend_Validate_LessThan</code>.
+           El método <code>getMessageVariables()</code> devuelve un array de tokens
            variables aceptados por el validador.
         </para>
 
         <para>
-            El segundo argumento opcional es un string que identifica la plantilla 
-            de mensajes que se establecerá en caso del fracaso de la validación, 
-            lo que es útil cuando una clase de validación define más de una causa para 
-            el fallo. 
-            Si omite el segundo argumento, <code>setMessage()</code> asume que el 
+            El segundo argumento opcional es un string que identifica la plantilla
+            de mensajes que se establecerá en caso del fracaso de la validación,
+            lo que es útil cuando una clase de validación define más de una causa para
+            el fallo.
+            Si omite el segundo argumento, <code>setMessage()</code> asume que el
             mensaje que especifique debe ser utilizado por la plantilla del
             primer mensaje que declaró en la clase de validación.
-            Muchas clases de validación sólo definen una plantilla de mensaje de 
-            error, así que no hay necesidad de especificar el cambio de plantilla 
-            de mensaje. 
+            Muchas clases de validación sólo definen una plantilla de mensaje de
+            error, así que no hay necesidad de especificar el cambio de plantilla
+            de mensaje.
         </para>
 
         <para>
@@ -143,7 +143,7 @@ if (!$validator->isValid('word')) {
         </para>
 
         <para>
-            Puede establecer varios mensajes usando el método <code>setMessages()</code>. 
+            Puede establecer varios mensajes usando el método <code>setMessages()</code>.
             Su argumento es un array que contiene pares de clave/mensaje.
 
             <programlisting role="php"><![CDATA[
@@ -161,14 +161,14 @@ $validator->setMessages( array(
         </para>
 
         <para>
-            Incluso, si su aplicación requiere una mayor flexibilidad para informar 
-            los fallos de validación, puede acceder a las propiedades por el 
-            mismo nombre, tal como los tokens de mensajes apoyados por una determinada 
+            Incluso, si su aplicación requiere una mayor flexibilidad para informar
+            los fallos de validación, puede acceder a las propiedades por el
+            mismo nombre, tal como los tokens de mensajes apoyados por una determinada
             clase de validación.
-            La propiedad <code>value</code> siempre está disponible en un validador; 
-            es el valor que especificó en el argumento de <code>isValid()</code>. 
-            En cada clase de validación se puede dar apoyo a otras propiedades 
-            basándose en el esquema de caso por caso. 
+            La propiedad <code>value</code> siempre está disponible en un validador;
+            es el valor que especificó en el argumento de <code>isValid()</code>.
+            En cada clase de validación se puede dar apoyo a otras propiedades
+            basándose en el esquema de caso por caso.
 
             <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
@@ -193,14 +193,14 @@ if (!validator->isValid('word')) {
         <title>Utilizando el método estático <code>is()</code> </title>
 
         <para>
-            Si es inconveniente cargar una clase de validación y crear una 
-            instancia del validador, puede usar el método estático 
+            Si es inconveniente cargar una clase de validación y crear una
+            instancia del validador, puede usar el método estático
             <code>Zend_Validate::is()</code> como un estilo alternativo de invocación.
-            El primer argumento de este método es el valor de una entrada de datos  
-            que usted pasaría al método <code>isValid()</code>. 
-            El segundo argumento es un string, que corresponde al nombre base 
+            El primer argumento de este método es el valor de una entrada de datos
+            que usted pasaría al método <code>isValid()</code>.
+            El segundo argumento es un string, que corresponde al nombre base
             de la clase de validación, relativo al nombre de espacio <code>Zend_Validate</code>.
-            El método <code>is()</code> carga automáticamente la clase, crea una 
+            El método <code>is()</code> carga automáticamente la clase, crea una
             instancia y aplica el método <code>isValid()</code> a la entrada de datos.
 
             <programlisting role="php"><![CDATA[
@@ -225,24 +225,24 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
         <para>
-            El método <code>is()</code> devuelve un valor booleano, lo mismo que 
-            el método <code>isValid()</code>. Cuando se utiliza el método estático 
+            El método <code>is()</code> devuelve un valor booleano, lo mismo que
+            el método <code>isValid()</code>. Cuando se utiliza el método estático
             <code>is()</code>, no están disponibles los mensajes de fracaso de
             validación.
         </para>
 
         <para>
-            El uso estático puede ser conveniente para invocar un validador ad-hoc  
-            (hecho especialmente), pero si tiene la necesidad de ejecutar el validador para múltiples 
+            El uso estático puede ser conveniente para invocar un validador ad-hoc
+            (hecho especialmente), pero si tiene la necesidad de ejecutar el validador para múltiples
             entradas, es más eficiente usar métodos no estáticos, creando una
             instancia del objeto validador y llamando a su método <code>isValid()</code>.
         </para>
 
         <para>
-            También la clase <code>Zend_Filter_Input</code> le permite crear 
+            También la clase <code>Zend_Filter_Input</code> le permite crear
             ejemplos y ejecutar múltiples filtros y clases de validadores por
-            demanda, para procesar juegos de datos de entrada. Ver 
-            <xref linkend="zend.filter.input" />.        
+            demanda, para procesar juegos de datos de entrada. Ver
+            <xref linkend="zend.filter.input" />.
         </para>
 
     </sect2>

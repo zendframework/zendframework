@@ -1,76 +1,76 @@
 <sect1 id="zend.date.introduction">
 
-	<title>Introducción</title>
+    <title>Introducción</title>
 
-	<para>
-		El componente
-		<code>Zend_Date</code>
-		ofrece una API detallada pero simple para manipular fechas y
-		horas. Sus métodos aceptan una gran variedad de tipos de
-		información, incluyendo partes de fecha, en numerosas
-		combinaciones provocando muchas características y posibilidades
-		más allá de las funciones de fecha PHP relacionadas. Para
-		las últimas actualizaciones manuales, por favor ver el siguiente
-		link <ulink>
-		url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home"&gt;our
-		online manual (sincronizado frecuentemente con Subversion)
-		</ulink>
-		.
-	</para>
+    <para>
+        El componente
+        <code>Zend_Date</code>
+        ofrece una API detallada pero simple para manipular fechas y
+        horas. Sus métodos aceptan una gran variedad de tipos de
+        información, incluyendo partes de fecha, en numerosas
+        combinaciones provocando muchas características y posibilidades
+        más allá de las funciones de fecha PHP relacionadas. Para
+        las últimas actualizaciones manuales, por favor ver el siguiente
+        link <ulink>
+        url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home"&gt;our
+        online manual (sincronizado frecuentemente con Subversion)
+        </ulink>
+        .
+    </para>
 
-	<para>
-		Aunque la simplicidad sea el objetivo, trabajar con fechas y
-		tiempos localizados mientras se modifican, combinan y comparan
-		partes, provoca una complejidad inevitable. Las fechas, así como
-		los tiempos, a menudo son escritos de forma diferente en
-		zonas locales distintas. Por ejemplo, algunos colocan primero el
-		mes, mientras otros escriben el año en primer lugar cuando
-		expresan fechas del calendario. Para más información relacionada
-		con manejo de localizaciones y normalización, por favor
-		vea el manual de
-		<link linkend="zend.locale.date.datesandtimes">
-			<code>Zend_Locale</code>
-		</link>
-		.
-	</para>
+    <para>
+        Aunque la simplicidad sea el objetivo, trabajar con fechas y
+        tiempos localizados mientras se modifican, combinan y comparan
+        partes, provoca una complejidad inevitable. Las fechas, así como
+        los tiempos, a menudo son escritos de forma diferente en
+        zonas locales distintas. Por ejemplo, algunos colocan primero el
+        mes, mientras otros escriben el año en primer lugar cuando
+        expresan fechas del calendario. Para más información relacionada
+        con manejo de localizaciones y normalización, por favor
+        vea el manual de
+        <link linkend="zend.locale.date.datesandtimes">
+            <code>Zend_Locale</code>
+        </link>
+        .
+    </para>
 
-	<para>
-		<code>Zend_Date</code>
-		también soporta nombres de meses abreviados en varios idiomas.
-		<code>Zend_Locale</code>
-		facilita la normalización de meses localizados y nombres de días
-		de la semana a timestamps, los cuales pueden, a su vez, ser
-		mostrados localizados a otras regiones.
-	</para>
+    <para>
+        <code>Zend_Date</code>
+        también soporta nombres de meses abreviados en varios idiomas.
+        <code>Zend_Locale</code>
+        facilita la normalización de meses localizados y nombres de días
+        de la semana a timestamps, los cuales pueden, a su vez, ser
+        mostrados localizados a otras regiones.
+    </para>
 
-	<sect2 id="zend.date.setdefaulttimezone">
+    <sect2 id="zend.date.setdefaulttimezone">
 
-		<title>Asigne Siempre una Zona Horaria por Defecto</title>
+        <title>Asigne Siempre una Zona Horaria por Defecto</title>
 
-		<para>
-			Antes de utilizar funciones relacionadas con fechas en PHP o
-			en el Zend Framework, primero debe asegurarse que su
-			aplicación tiene una zona horaria correcta por defecto,
-			configurando la variable de entorno TZ, usando el
-			parametro del php.ini
-			<code>date.timezone</code>
-			, o usando
-			<ulink url="http://php.net/date_default_timezone_set">
-				date_default_timezone_set()
-			</ulink>
-			. En PHP, podemos ajustar todas las funciones relacionadas
-			con fechas y hora para trabajar para un usuario particular
-			configurando por defecto una zona horaria de acuerdo a las
-			expectativas del usuario. Para una lista completa de
-			configuraciones de zona horaria, vea el siguiente link
-			<ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">
-				Lista de Identificadores de Zonas Horarias CLDR
-			</ulink>
-			.
-			<example id="zend.date.setdefaulttimezone.example-1">
-				<title>Configurando una Zona Horaria por Defecto</title>
-				<programlisting role="php"><![CDATA[
-				// zona horaria para un estadounidense en California
+        <para>
+            Antes de utilizar funciones relacionadas con fechas en PHP o
+            en el Zend Framework, primero debe asegurarse que su
+            aplicación tiene una zona horaria correcta por defecto,
+            configurando la variable de entorno TZ, usando el
+            parametro del php.ini
+            <code>date.timezone</code>
+            , o usando
+            <ulink url="http://php.net/date_default_timezone_set">
+                date_default_timezone_set()
+            </ulink>
+            . En PHP, podemos ajustar todas las funciones relacionadas
+            con fechas y hora para trabajar para un usuario particular
+            configurando por defecto una zona horaria de acuerdo a las
+            expectativas del usuario. Para una lista completa de
+            configuraciones de zona horaria, vea el siguiente link
+            <ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">
+                Lista de Identificadores de Zonas Horarias CLDR
+            </ulink>
+            .
+            <example id="zend.date.setdefaulttimezone.example-1">
+                <title>Configurando una Zona Horaria por Defecto</title>
+                <programlisting role="php"><![CDATA[
+                // zona horaria para un estadounidense en California
 date_default_timezone_set('America/Los_Angeles');
 // zona horaria para un alemán en Alemania
 date_default_timezone_set('Europe/Berlin');
@@ -78,17 +78,17 @@ date_default_timezone_set('Europe/Berlin');
                 </programlisting>
             </example>
             <emphasis role="strong">¡Al crear instancias de Zend_Date, su zona horaria se convertirá automáticamente
-			en la zona horaria por defecto actual!</emphasis> De esta forma, la configuración de zona horaria tendrá
-			en cuenta cualquier cambio de hora de invierno/verano (Daylight Saving Time, DST), eliminando la necesidad
-			de especificarlo explícitamente.
+            en la zona horaria por defecto actual!</emphasis> De esta forma, la configuración de zona horaria tendrá
+            en cuenta cualquier cambio de hora de invierno/verano (Daylight Saving Time, DST), eliminando la necesidad
+            de especificarlo explícitamente.
         </para>
 
         <para>
             Tenga en cuenta que las zonas horarias <emphasis role="strong">UTC</emphasis> y
             <emphasis role="strong">GMT</emphasis> no incluyen el cambio de hora de invierno/verano (Daylight Saving Time, DST). 
-			Esto significa que aunque defina a mano que <code>Zend_Date</code> deba trabajar con DST, podría
-			ser anulado por las instancias de <code>Zend_Date</code> que han sido fijadas a
-			UTC o GMT.
+            Esto significa que aunque defina a mano que <code>Zend_Date</code> deba trabajar con DST, podría
+            ser anulado por las instancias de <code>Zend_Date</code> que han sido fijadas a
+            UTC o GMT.
         </para>
     </sect2>
 
@@ -107,8 +107,8 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     <code>Zend_Date</code> aporta una API muy sencilla, que combina lo mejor de la funcionalidad
-					fecha/hora de cuatro lenguajes de programación. Es posible, por ejemplo, añadir o comparar dos horas 
-					dentro de una misma columna.
+                    fecha/hora de cuatro lenguajes de programación. Es posible, por ejemplo, añadir o comparar dos horas 
+                    dentro de una misma columna.
                 </para>
             </listitem>
             <listitem>
@@ -126,15 +126,15 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     A pesar de que la documentación de PHP 5.2 indice: "El intervalo de valores admitidos de timestamps es
-					desde el 13 Dec 1901 20:45:54 GMT al 19 Ene 2038 03:14:07 GMT," <code>Zend_Date</code> admite un rango
-					casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una 
-					funcionalidad de timestamps reducida al rango del tipo <code>float</code> soportado por su servidor.
-					El tamaño de un float es dependiente de la plataforma, aunque un máximo de ~1.8e308 con una precisión
-					de cerca de 14 dígitos decimales es un valor habitual (formato 64 bit IEEE)." [
+                    desde el 13 Dec 1901 20:45:54 GMT al 19 Ene 2038 03:14:07 GMT," <code>Zend_Date</code> admite un rango
+                    casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una 
+                    funcionalidad de timestamps reducida al rango del tipo <code>float</code> soportado por su servidor.
+                    El tamaño de un float es dependiente de la plataforma, aunque un máximo de ~1.8e308 con una precisión
+                    de cerca de 14 dígitos decimales es un valor habitual (formato 64 bit IEEE)." [
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>
                     ].  Adicionalmente, las limitaciones heredadas de los tipos de dato float, y errores de redondeo de números
-					flotantes pueden introducir errores en los cálculos. Para evitar estos problemas, los componentes ZF I18n 
-					usan la extensión BCMath, si está disponible.
+                    flotantes pueden introducir errores en los cálculos. Para evitar estos problemas, los componentes ZF I18n 
+                    usan la extensión BCMath, si está disponible.
                 </para>
             </listitem>
             <listitem>
@@ -143,11 +143,11 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Las especificaciones de fecha ISO_8601 están aceptadas. Incluso las especificaciones de fecha ISO_8601 
-					parcialmente autorizadas serán identificadas. Estos formatos de fecha son particularmente útiles al
-					trabajar con bases de datos. Por ejemplo, aunque MsSQL y 
+                    parcialmente autorizadas serán identificadas. Estos formatos de fecha son particularmente útiles al
+                    trabajar con bases de datos. Por ejemplo, aunque MsSQL y 
                     <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
                     difieren ligeramente uno de otro, ambos tienen soporte por parte de <code>Zend_Date</code> usando la constante 
-					de especificación de formato 
+                    de especificación de formato 
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>.
                     Cuando las cadenas de fecha sean del tipo "Y/m/d" o "Y-m-d H:i:s", de acuerdo con los tokens de formato
                     PHP date(), use el soporte integrado de Zend_Date para fechas formateadas ISO 8601.
@@ -159,7 +159,7 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Las horas de amanecer y puesta de sol pueden mostrarse para cualquier lugar y día, para que no pierda ni un segundo de luz diurna 
-					para trabajar en su proyecto PHP favorito :)
+                    para trabajar en su proyecto PHP favorito :)
                 </para>
             </listitem>
         </itemizedlist>
@@ -168,5 +168,5 @@ date_default_timezone_set('Europe/Berlin');
 
 </sect1>
 <!--
-	vim:se ts=4 sw=4 et:
+    vim:se ts=4 sw=4 et:
 -->

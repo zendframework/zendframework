@@ -3,16 +3,16 @@
     <title>Clases de Validación Estándar</title>
 
     <para>
-        Zend Framework viene con un conjunto estándar de clases de validación  
+        Zend Framework viene con un conjunto estándar de clases de validación
         listas para usar.
     </para>
 
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene 
-            caracteres alfanuméricos únicamente. 
-            Este validador incluye una opción para considerar también al espacio 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene
+            caracteres alfanuméricos únicamente.
+            Este validador incluye una opción para considerar también al espacio
             en blanco como caracter válido.
         </para>
     </sect2>
@@ -20,9 +20,9 @@
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> sólo 
-            contiene caracteres alfabéticos. 
-            Este validador incluye una opción para considerar también al espacio 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> sólo
+            contiene caracteres alfabéticos.
+            Este validador incluye una opción para considerar también al espacio
             en blanco como caracter válido.
         </para>
     </sect2>
@@ -30,14 +30,14 @@
     <sect2 id="zend.validate.set.barcode">
         <title>Barcode</title>
         <para>
-            Este validador es instanciado con un tipo de código de barras contra 
+            Este validador es instanciado con un tipo de código de barras contra
             el valor del código de barras que quiere validar.
-            En la actualidad acepta los tipos de código de barras "<code>UPC-A</code>" 
-            (Universal Product Code) y "<code>EAN-13</code>" (European Article Number),  
+            En la actualidad acepta los tipos de código de barras "<code>UPC-A</code>"
+            (Universal Product Code) y "<code>EAN-13</code>" (European Article Number),
             además el método <code>isValid()</code> devuelve verdadero si y solo si
             la entrada valida satisfactoriamente contra el algoritmo de validación
-            del código de barras. 
-            Antes de enviar los datos de entrada al validador, debe asegurarse 
+            del código de barras.
+            Antes de enviar los datos de entrada al validador, debe asegurarse
             de eliminar todos los caracteres distintos a los dígitos cero a nueve (0-9).
         </para>
     </sect2>
@@ -45,11 +45,11 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> está entre 
-            los valores límites mínimo y máximo. 
-            La comparación es inclusiva por defecto (<code>$valor</code> puede ser 
-            igual a una valor límite), aunque esto puede ser anulado a fin de 
-            hacer una comparación estricta, donde <code>$valor</code> debe ser 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> está entre
+            los valores límites mínimo y máximo.
+            La comparación es inclusiva por defecto (<code>$valor</code> puede ser
+            igual a una valor límite), aunque esto puede ser anulado a fin de
+            hacer una comparación estricta, donde <code>$valor</code> debe ser
             estrictamente mayor al mínimo y estrictamente menor al máximo.
         </para>
     </sect2>
@@ -57,7 +57,7 @@
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> sigue el 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> sigue el
             algoritmo Luhn (mod-10 checksum) para tarjetas de crédito.
         </para>
     </sect2>
@@ -65,11 +65,11 @@
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es una 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> es una
             fecha válida en el formato <code>YYYY-MM-DD</code> (AAAA-MM-DD).
-            Si se usa la opción <code>locale</code> entonces la fecha 
+            Si se usa la opción <code>locale</code> entonces la fecha
             será validada de acuerdo a lo establecido para ese lugar.
-            El formato <code>format</code> es una opción que establece este 
+            El formato <code>format</code> es una opción que establece este
             formato a ser utilizado para la validación.
             Para los detalles acerca de los parámetros opcionales ver en:
             <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
@@ -79,8 +79,8 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene 
-            solamente dígitos. 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> contiene
+            solamente dígitos.
         </para>
     </sect2>
 <!--
@@ -116,7 +116,7 @@
         <title>InArray</title>
         <para>
             Devuelve <code>true</code> si y sólo si <code>$valor</code> se encuentra
-            en un array, y si la opción es estricta entonces también verificará 
+            en un array, y si la opción es estricta entonces también verificará
             el tipo de dato de <code>$valor</code>.
         </para>
     </sect2>
@@ -138,7 +138,7 @@
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Devuelve <code>true</code> si y sólo si <code>$valor</code> es menor 
+            Devuelve <code>true</code> si y sólo si <code>$valor</code> es menor
             al límite máximo.
         </para>
     </sect2>
@@ -161,15 +161,15 @@
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
         <para>
-            Devuelve <code>true</code> si y sólo si la longitud del string <code>$valor</code> 
-            es por lo menos un mínimo y no mayor a un máximo 
+            Devuelve <code>true</code> si y sólo si la longitud del string <code>$valor</code>
+            es por lo menos un mínimo y no mayor a un máximo
             (cuando la opción max no es <code>null</code>).
-            Desde la versión 1.5.0, el método <code>setMin()</code> lanza una 
-            excepción si la longitud mínima tiene un valor mayor que la longitud 
-            máxima establecida, y el método <code>setMax()</code> lanza una excepción si la 
-            longitud máxima se fija a un valor inferior que la longitud 
-            mínima establecida. Desde la versión 1.0.2, esta clase soporta UTF-8 y a otras 
-            codificaciones, basado en el valor actual de:        
+            Desde la versión 1.5.0, el método <code>setMin()</code> lanza una
+            excepción si la longitud mínima tiene un valor mayor que la longitud
+            máxima establecida, y el método <code>setMax()</code> lanza una excepción si la
+            longitud máxima se fija a un valor inferior que la longitud
+            mínima establecida. Desde la versión 1.0.2, esta clase soporta UTF-8 y a otras
+            codificaciones, basado en el valor actual de:
             <ulink url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
         </para>
     </sect2>

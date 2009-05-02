@@ -19,7 +19,7 @@
         <para>
         Los datos de configuración que se leen en <code>Zend_Config_Xml</code>
         son siempre devueltos como strings.
-			  La conversión de datos de string a otros tipos se deja en manos de los
+              La conversión de datos de string a otros tipos se deja en manos de los
         desarrolladores para que se ajuste a sus necesidades particulares.
         </para>
     </note>
@@ -36,7 +36,7 @@
          producción heredando de la sección de pruebas, a pesar de que éste no          
          sería el caso para situaciones más complejas. Suponga, pues, que los 
          datos de configuración siguientes están contenidos
-			en <code>/ruta/de/config.xml</code>:
+            en <code>/ruta/de/config.xml</code>:
         </para>
         <programlisting role="xml"><![CDATA[
 <?xml version="1.0"?>
@@ -87,7 +87,7 @@ echo $config->database->params->dbname; // muestra "dbname"
             los atributos <code>extends</code> y <code>value</code> son palabras
             reservadas (la última por la segunda manera de usar atributos),
             pueden no ser utilizadas. 
-			      La primera manera de utilizar atributos es añadir atributos en un
+                  La primera manera de utilizar atributos es añadir atributos en un
             nodo padre, el cual será interpretado como hijo de ese nodo:
         </para>
         <programlisting role="xml"><![CDATA[

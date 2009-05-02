@@ -41,25 +41,25 @@
             Escribiendo reglas condicionales ACL con aserciones
         </title>
 
-		<para>
-			A veces, una regla para permitir o negar una función de acceso a un
-			recurso no debería ser absoluta sino que depende de varios criterios.
-			Por ejemplo, supóngase que debe permitirse cierto acceso, pero
-			únicamente entre las 8:00am y 5:00pm. Otro ejemplo sería negar el
-			acceso debido a una petición que proviene de una dirección IP que se
-			ha marcado como una fuente de abusos. Zend_Acl tiene soporte para la
-			aplicación de normas basadas en cualquier condición que el
-			desarrollador necesite.
+        <para>
+            A veces, una regla para permitir o negar una función de acceso a un
+            recurso no debería ser absoluta sino que depende de varios criterios.
+            Por ejemplo, supóngase que debe permitirse cierto acceso, pero
+            únicamente entre las 8:00am y 5:00pm. Otro ejemplo sería negar el
+            acceso debido a una petición que proviene de una dirección IP que se
+            ha marcado como una fuente de abusos. Zend_Acl tiene soporte para la
+            aplicación de normas basadas en cualquier condición que el
+            desarrollador necesite.
         </para>
 
-	<para>
-		Zend_Acl provee soporte para reglas condicionales con
-		<code>Zend_Acl_Assert_Interface</code>
-		. Con el fin de utilizar la regla de aserción de la interfaz,
-		un desarrollador escribe una clase que implemente el método
-		<code>assert()</code>
-		de la interfaz:
-	</para>
+    <para>
+        Zend_Acl provee soporte para reglas condicionales con
+        <code>Zend_Acl_Assert_Interface</code>
+        . Con el fin de utilizar la regla de aserción de la interfaz,
+        un desarrollador escribe una clase que implemente el método
+        <code>assert()</code>
+        de la interfaz:
+    </para>
 
         <programlisting role="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
@@ -80,43 +80,43 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
 ]]>
         </programlisting>
 
-		<para>
-			Una vez la clase de aserción esta disponible, el desarrollador puede 
-			suministrar una instancia de la clase de aserción cuando asigna reglas 
-			condicionales. Una regla que es creada con una aserción
-			sólo se aplica cuando el método de la aserción devuelve true.
-		</para>
-		
+        <para>
+            Una vez la clase de aserción esta disponible, el desarrollador puede 
+            suministrar una instancia de la clase de aserción cuando asigna reglas 
+            condicionales. Una regla que es creada con una aserción
+            sólo se aplica cuando el método de la aserción devuelve true.
+        </para>
+        
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
 ]]>
         </programlisting>
 
-		<para>
-			El código anterior crea una regla condicional que permite el acceso a 
-			todos los privilegios sobre todo, por todo el mundo, excepto cuando la IP 
-			de quien hace la petición está en la "lista negra". Si una petición 
-			viene desde una IP que no está considerada "limpia", entonces la regla no
-			se aplica. Dado que la regla se aplica a todos los roles, todos los 
-			recursos, y todos los privilegios, una IP "no limpia" daría lugar a una 
-			negación de acceso. Éste es un caso especial, sin embargo, y debería ser
-			entendido que en todos los otros casos (por ejemplo, cuando un rol 
-			específico, recurso, o privilegio está especificado por la regla), 
-			una aserción fallida provoca que la regla no se aplique, y otras reglas 
-			deberían ser usadas para determinar si el acceso está permitido o
-			denegado.
-		</para>
+        <para>
+            El código anterior crea una regla condicional que permite el acceso a 
+            todos los privilegios sobre todo, por todo el mundo, excepto cuando la IP 
+            de quien hace la petición está en la "lista negra". Si una petición 
+            viene desde una IP que no está considerada "limpia", entonces la regla no
+            se aplica. Dado que la regla se aplica a todos los roles, todos los 
+            recursos, y todos los privilegios, una IP "no limpia" daría lugar a una 
+            negación de acceso. Éste es un caso especial, sin embargo, y debería ser
+            entendido que en todos los otros casos (por ejemplo, cuando un rol 
+            específico, recurso, o privilegio está especificado por la regla), 
+            una aserción fallida provoca que la regla no se aplique, y otras reglas 
+            deberían ser usadas para determinar si el acceso está permitido o
+            denegado.
+        </para>
 
-		<para>
-			El método
-			<code>assert()</code>
-			de un objeto aserción es pasado a la ACL, regla,  recurso, y privilegio 
+        <para>
+            El método
+            <code>assert()</code>
+            de un objeto aserción es pasado a la ACL, regla,  recurso, y privilegio 
       para el cual una consulta de autorización (por ejemplo,
-			<code>isAllowed()</code>
-			) se aplica, con el fin de proporcionar un contexto para que la clase de 
+            <code>isAllowed()</code>
+            ) se aplica, con el fin de proporcionar un contexto para que la clase de 
       aserción determine sus condiciones cuando fuera necesario.
-		</para>
+        </para>
 
     </sect2>
 

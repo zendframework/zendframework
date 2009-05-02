@@ -1,6 +1,6 @@
 ﻿<sect1 id="zend.auth.introduction">
 
-    <title>Introduction</title> 
+    <title>Introduction</title>
 
     <para>
         Zend_Auth provides an API for authentication and includes concrete authentication adapters for

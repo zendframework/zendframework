@@ -2,39 +2,39 @@
     <title>Introducción</title>
 
     <para>
-        <code>Zend_Layout</code> implementa un patrón clásico "Vista en dos 
-        etapas" (Two Step View) permitiendo a los desarrolladores colocar el 
-        contenido de la aplicación dentro de otra vista, usualmente 
-        representando la plantilla del sitio. Tales plantillas son a menudo 
-        denominadas <emphasis>layouts</emphasis> por otros proyectos, y Zend 
+        <code>Zend_Layout</code> implementa un patrón clásico "Vista en dos
+        etapas" (Two Step View) permitiendo a los desarrolladores colocar el
+        contenido de la aplicación dentro de otra vista, usualmente
+        representando la plantilla del sitio. Tales plantillas son a menudo
+        denominadas <emphasis>layouts</emphasis> por otros proyectos, y Zend
         Framework ha adoptado este término por consistencia.
     </para>
 
     <para>
-        Los objetivos principales de <code>Zend_Layout</code> son los 
+        Los objetivos principales de <code>Zend_Layout</code> son los
         siguientes:
     </para>
 
     <itemizedlist>
         <listitem><para>
-                Automatizar la selección y renderizado de layouts cuando se usan 
-                con los componentes MVC de Zend Framework. 
+                Automatizar la selección y renderizado de layouts cuando se usan
+                con los componentes MVC de Zend Framework.
         </para></listitem>
 
         <listitem><para>
-                Proveer ámbitos separados para variables relacionadas al diseño 
+                Proveer ámbitos separados para variables relacionadas al diseño
                 y contenido.
         </para></listitem>
 
         <listitem><para>
                 Permitir configuraciones, incluyendo el nombre del layout,
-                resolución (inflexión) del script layout, y ruta del script 
+                resolución (inflexión) del script layout, y ruta del script
                 layout.
         </para></listitem>
 
         <listitem><para>
-                Permitir deshabilitar layouts, cambiar el script de diseño y 
-                otras condiciones; permitir estas acciones dentro de los 
+                Permitir deshabilitar layouts, cambiar el script de diseño y
+                otras condiciones; permitir estas acciones dentro de los
                 controladores y scripts de vista.
         </para></listitem>
 

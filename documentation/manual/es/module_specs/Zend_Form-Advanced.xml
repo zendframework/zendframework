@@ -11,12 +11,12 @@
         <title>Notación de array</title>
 
         <para>
-        	Muchos desarroladores experimentados les gusta agrupar elementos de formulario
-        	usando notación de array en los nombres de elementos. Por ejemplo, si se tiene
-        	dos direcciones que se desea capturar, un envio y una dirección de facturación,
-        	se puede tener elementos identicos; agrupandolos en un array se puede 
-        	asegurar que son capturados por separado. Toma el siguiente fomrulario
-        	por ejemplo:
+            Muchos desarroladores experimentados les gusta agrupar elementos de formulario
+            usando notación de array en los nombres de elementos. Por ejemplo, si se tiene
+            dos direcciones que se desea capturar, un envio y una dirección de facturación,
+            se puede tener elementos identicos; agrupandolos en un array se puede
+            asegurar que son capturados por separado. Toma el siguiente fomrulario
+            por ejemplo:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -73,9 +73,9 @@
 </programlisting>
 
         <para>
-        	En este ejemplo, la facturación y la dirección de envío contienen algunos
-        	campos identicos, eso significa uno puede sobre escribir al otro. Nosotros podemos
-        	resolver esta solución usando una notación de array:
+            En este ejemplo, la facturación y la dirección de envío contienen algunos
+            campos identicos, eso significa uno puede sobre escribir al otro. Nosotros podemos
+            resolver esta solución usando una notación de array:
         </para>
 
         <programlisting role="html"><![CDATA[

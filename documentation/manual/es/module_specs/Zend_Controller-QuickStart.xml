@@ -103,14 +103,14 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <para>
                 La regla de arriba redigirá las peticiones a recuros existentes
-                (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos) 
+                (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos)
         en consecuencia, y todas las otras peticiones al front controller.
             </para>
 
             <note>
                 <para>
                     Las reglas de arriba pertenecen a Apache. Para ejemplos de reglas
-                    de rewrite para otros servidores web, mire la 
+                    de rewrite para otros servidores web, mire la
                     <link linkend="zend.controller.router.introduction">
                         documentación de router
                     </link>
@@ -126,7 +126,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 El archivo bootstrap es la página a la que todas las peticiones
                 son redirigidas a través de --
                 <code>html/index.php</code>
-                en este caso. Abra el archivo 
+                en este caso. Abra el archivo
                 <code>html/index.php</code>
                 en el editor de su elección y añada lo siguiente:
             </para>
@@ -137,7 +137,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             </programlisting>
 
             <para>
-                Esto instanciará y hará un dispatch del front controller, que 
+                Esto instanciará y hará un dispatch del front controller, que
                 redigirá las peticiones a los action controllers.
             </para>
         </sect3>
@@ -164,7 +164,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 <code>index</code>
                 , y si no se suministra un controlador, se asume el controlador
                 <code>index</code>
-                (siguiendo la convención de Apache de apuntar a 
+                (siguiendo la convención de Apache de apuntar a
                 <code>DirectoryIndex</code>
                 automáticamente).
             </para>
@@ -197,7 +197,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             </para>
 
             <para>
-                Continuando, creemos ahora un action controller 
+                Continuando, creemos ahora un action controller
                 y un método de acción por defecto. Como se ha dicho antes,
                 el controlador por defecto y la acción llamada son ambos
                 <code>index</code>
@@ -261,9 +261,9 @@ class IndexController extends Zend_Controller_Action
                 <link linkend="zend.controller.quickstart.go.controller">
                     en la sección anterior
                 </link>
-                , los scripts de vista se encuentran en 
+                , los scripts de vista se encuentran en
                 <code>application/views/scripts/</code>
-                ; el view script para el controlador y la acción por defecto 
+                ; el view script para el controlador y la acción por defecto
                 está en
                 <code>application/views/scripts/index/index.phtml</code>
                 . Cree este archivo, y escriba un poco de HTML:
@@ -295,7 +295,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                     el plugin 'error handler'
                 </link>. Este plugin espera que exista
                 un controlador para manejar los errores.
-                Por defecto, asume un 
+                Por defecto, asume un
                 <code>ErrorController</code>
                 en el módulo default con un método
                 <code>errorAction</code>
@@ -313,7 +313,7 @@ class ErrorController extends Zend_Controller_Action
             </programlisting>
 
             <para>
-                Asumiendo el sistema de carpetas discutido anteriormente, 
+                Asumiendo el sistema de carpetas discutido anteriormente,
                 este archivo irá en
                 <code>application/controllers/ErrorController.php</code>
                 . También necesitará crear un view script en
@@ -346,7 +346,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su sitio.
                 Asumiendo que
                 <code>example.com</code>
-                es su dominio, cualquiera de las siguientes URLs le llevará a 
+                es su dominio, cualquiera de las siguientes URLs le llevará a
                 la página que acaba de crear:
             </para>
 

@@ -1,7 +1,7 @@
 ﻿<sect1 id="zend.acl.introduction">
     <title>Introducción</title>
     <para>
-        Zend_Acl provee la implementación de un sistema simple y
+        <classname>Zend_Acl</classname> provee la implementación de un sistema simple y
         flexible de Listas de Control de Acceso (ACL, por sus siglas en
         inglés) para la administración de privilegios. En general, una
         aplicación puede utilizar las ACL para controlar el acceso a
@@ -47,22 +47,22 @@
     <sect2 id="zend.acl.introduction.resources">
         <title>Acerca de los Recursos</title>
         <para>
-            En Zend_Acl, crear un recurso es muy sencillo. Zend_Acl
+            En <classname>Zend_Acl</classname>, crear un recurso es muy sencillo. <classname>Zend_Acl</classname>
             proporciona el
-            <code>Zend_Acl_Resource_Interface</code>
+            <classname>Zend_Acl_Resource_Interface</classname>
             para facilitar a los desarrolladores la creacción de
             recursos. Una clase solo necesita implementar su interfaz,
             la cual consiste en un método único,
             <code>getResourceId()</code>
-            , para que Zend_Acl considere el objeto como un recurso.
+            , para que <classname>Zend_Acl</classname> considere el objeto como un recurso.
             Adicionalmente,
-            <code>Zend_Acl_Resource</code>
-            se incluye con Zend_Acl como una implementación principal de
-            recursos para los desarrolladores para extenderla hasta
+            <classname>Zend_Acl_Resource</classname>
+            es proporcionado por <classname>Zend_Acl</classname> como un recurso básico de
+            aplicación  para que los desarrolladores puedan extenderla hasta
             donde lo deseen.
         </para>
         <para>
-            Zend_Acl provee un estructura de árbol a la cual pueden ser
+            <classname>Zend_Acl</classname> provee un estructura de árbol a la cual pueden ser
             agregados múltiples recursos (o "Áreas con Controles de
             Acceso").Ya que los recursos son almacenados en esta
             estructura de árbol, estos pueden ser organizados desde lo
@@ -76,14 +76,14 @@
             podría asignar la regla a la ciudad, en lugar de asignar la
             misma regla a cada edificio. Algunos edificios pueden
             necesitar excepciones a la regla, sin embargo, y esto es
-            fácil de hacer en Zend_Acl asignando esta excepción a
+            fácil de hacer en <classname>Zend_Acl</classname> asignando esta excepción a
             cada edificio que necesite una excepción a la regla. Un
             recurso sólo puede heredar de un recurso padre, aunque este
             recurso padre puede tener a la vez su propio recurso padre,
             y así; sucesivamente.
         </para>
         <para>
-            Zend_Acl también soporta privilegios sobre recursos (ej.
+            <classname>Zend_Acl</classname> también soporta privilegios sobre recursos (ej.
             "crear","leer","actualizar", "borrar"), y el desarrollador
             puede asignar reglas que afecten o a todos los privilegios o
             a privilegios específicos sobre un recurso.
@@ -94,21 +94,21 @@
         <title>Acerca de las Reglas</title>
         <para>
             Al igual que los recursos, la creación de un rol
-            también es muy simple. Zend_Acl proporciona
-            <code>Zend_Acl_Role_Interface</code>
+            también es muy simple. <classname>Zend_Acl</classname> proporciona
+           <classname>Zend_Acl_Role_Interface</classname>
             para facilitar a los desarrolladores la creación de
             roles. Una clase solo necesita la implementación de su
             interfaz, la cual consiste en un método único,
             <code>getRoleId()</code>
-            , para que Zend_Acl considere que el objeto es un Rol.
+            , para que <classname>Zend_Acl</classname> considere que el objeto es un Rol.
             Adicionalmente,
-            <code>Zend_Acl_Role</code>
-            está incluido con Zend_Acl como una implementación principal
+           <classname>Zend_Acl_Role</classname>
+            está incluido con <classname>Zend_Acl</classname> como una implementación principal
             del rol para que los desarrolladores la extiendan hasta
             donde lo deseen.
         </para>
         <para>
-            En Zend_Acl, un Rol puede heredar de otro o más roles. Esto
+            En <classname>Zend_Acl</classname>, un Rol puede heredar de otro o más roles. Esto
             es para soportar herencia de reglas entre roles. Por ejemplo,
             un Rol de usuario, como "sally", puede estar bajo uno o más
             roles padre, como "editor" y "administrador". El
@@ -121,7 +121,7 @@
             Dado que la habilidad de herencia desde múltiples roles es
             muy util, múltiples herencias tambien introduce cierto grado
             de complejidad. El siguiente ejemplo ilustra la condición de
-            ambiguedad y como Zend_Acl soluciona esto.
+            ambiguedad y como <classname>Zend_Acl</classname> soluciona esto.
         </para>
         <example
             id="zend.acl.introduction.roles.example.multiple_inheritance">
@@ -139,7 +139,7 @@
                 " es colocado y hereda de los otros tres roles. El orden en
                 el cual estos roles aparecen en el array
                 <code>$parents</code>
-                es importante. Cuando es necesario, Zend_Acl busca por
+                es importante. Cuando es necesario, <classname>Zend_Acl</classname> busca por
                 reglas de acceso definidas no solo para el rol
                 solicitado (aquí, "
                 <code>unUsuario</code>
@@ -153,18 +153,18 @@
             </para>
             <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Acl.php';
-$acl = new Zend_Acl();
+$acl = new <classname>Zend_Acl</classname>();
 
 require_once 'Zend/Acl/Role.php';
-$acl->addRole(new Zend_Acl_Role('invitado'))
-    ->addRole(new Zend_Acl_Role('miembro'))
-    ->addRole(new Zend_Acl_Role('admin'));
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('invitado'))
+    ->addRole(new <classname>Zend_Acl</classname>_Role('miembro'))
+    ->addRole(new <classname>Zend_Acl</classname>_Role('admin'));
 
 $parents = array('invitado', 'miembro', 'admin');
-$acl->addRole(new Zend_Acl_Role('unUsuario'), $parents);
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('unUsuario'), $parents);
 
 require_once 'Zend/Acl/Resource.php';
-$acl->add(new Zend_Acl_Resource('unRecurso'));
+$acl->add(new <classname>Zend_Acl</classname>_Resource('unRecurso'));
 
 $acl->deny('invitado', 'unRecurso');
 $acl->allow('miembro', 'unRecurso');
@@ -177,7 +177,7 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
                 <code>unUsuario</code>
                 " y "
                 <code>unRecurso</code>
-                ", Zend_Acl debe buscar por reglas que puedan estar
+                ", <classname>Zend_Acl</classname> debe buscar por reglas que puedan estar
                 definidas para roles "
                 <code>unUsuario</code>
                 " hereda. Primero, el rol "
@@ -185,7 +185,7 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
                 " es visitado, y no hay regla de acceso definida
                 para éste. Luego, el rol "
                 <code>miembro</code>
-                " es visitado, y Zend_Acl encuentra que aquí hay una
+                " es visitado, y <classname>Zend_Acl</classname> encuentra que aquí hay una
                 regla especificando que "
                 <code>miembro</code>
                 " tiene permiso para acceder a "
@@ -193,7 +193,7 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
                 ".
             </para>
             <para>
-                Así, Zend_Acl va a seguir examinando las reglas definidas
+                Así, <classname>Zend_Acl</classname> va a seguir examinando las reglas definidas
                 para otros roles padre, sin embargo, encontraría que "
                 <code>invitado</code>
                 " tiene el acceso denegado a "
@@ -207,7 +207,7 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
                 heredadas de diferentes roles padre.
             </para>
             <para>
-                Zend_Acl resuelve esta ambiguedad completando la
+                <classname>Zend_Acl</classname> resuelve esta ambiguedad completando la
                 consulta cuando encuentra la primera regla que es
                 directamente aplicable a la consulta. En este caso, dado
                 que el rol "
@@ -244,13 +244,13 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Acl.php';
 
-$acl = new Zend_Acl();]]>
+$acl = new <classname>Zend_Acl</classname>();]]>
         </programlisting>
 
         <note>
             <para>
                 Hasta que un desarrollador especifique una regla
-                "permitido", Zend_Acl deniega el acceso a cada privilegio
+                "permitido", <classname>Zend_Acl</classname> deniega el acceso a cada privilegio
                 sobre cada recurso para cada rol.
             </para>
         </note>
@@ -318,9 +318,9 @@ $acl = new Zend_Acl();]]>
 
         <para>
             Para este ejemplo, se usa
-            <code>Zend_Acl_Role</code>
+           <classname>Zend_Acl_Role</classname>
             , pero cualquier objeto que implemente
-            <code>Zend_Acl_Role_Interface</code>
+           <classname>Zend_Acl</classname>_Role_Interface</code>
             es admisible. Estos grupos pueden ser agragados al registro
             de roles de la siguiente manera:
         </para>
@@ -328,27 +328,27 @@ $acl = new Zend_Acl();]]>
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Acl.php';
 
-$acl = new Zend_Acl();
+$acl = new <classname>Zend_Acl</classname>();
 
-// Agregar grupos al registro de roles usando Zend_Acl_Role
+// Agregar grupos al registro de roles usando <classname>Zend_Acl</classname>_Role
 require_once 'Zend/Acl/Role.php';
 
 // Invitado no hereda controles de acceso
-$rolInvitado = new Zend_Acl_Role('invitado');
+$rolInvitado = new <classname>Zend_Acl</classname>_Role('invitado');
 $acl->addRole($rolInvitado);
 
 // Personal hereda de Invitado
-$acl->addRole(new Zend_Acl_Role('personal'), $rolInvitado);
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), $rolInvitado);
 
 /* alternativamente, lo de arriba puede ser escrito así:
-$rolInvitado = $acl->addRole(new Zend_Acl_Role('personal'), 'invitado');
+$rolInvitado = $acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), 'invitado');
 //*/
 
 // Editor hereda desde personal
-$acl->addRole(new Zend_Acl_Role('editor'), 'personal');
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('editor'), 'personal');
 
 // Administrador no hereda controles de acceso
-$acl->addRole(new Zend_Acl_Role('administrador'));]]>
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('administrador'));]]>
         </programlisting>
 
     </sect2>
@@ -362,7 +362,7 @@ $acl->addRole(new Zend_Acl_Role('administrador'));]]>
             a los recursos. Tenga en cuenta que no definiremos ningún
             recurso en particular para este ejemplo, el cual está
             simplificado para ilustrar que las reglas se aplican a todos
-            los recursos. Zend_Acl proporciona una forma práctica por la
+            los recursos. <classname>Zend_Acl</classname> proporciona una forma práctica por la
             cual las reglas solo necesitan ser asignadas de lo general a
             lo especifico, minimizando el número de reglas necesarias,
             porque los recursos y roles heredan reglas que están
@@ -378,15 +378,15 @@ $acl->addRole(new Zend_Acl_Role('administrador'));]]>
         <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Acl.php';
 
-$acl = new Zend_Acl();
+$acl = new <classname>Zend_Acl</classname>();
 
 require_once 'Zend/Acl/Role.php';
 
-$rolInvitado = new Zend_Acl_Role('invitado');
+$rolInvitado = new <classname>Zend_Acl</classname>_Role('invitado');
 $acl->addRole($rolInvitado);
-$acl->addRole(new Zend_Acl_Role('personal'), $rolInvitado);
-$acl->addRole(new Zend_Acl_Role('editor'), 'personal');
-$acl->addRole(new Zend_Acl_Role('administrador'));
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), $rolInvitado);
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('editor'), 'personal');
+$acl->addRole(new <classname>Zend_Acl</classname>_Role('administrador'));
 
 // Invitado solo puede ver el contenido
 $acl->allow($rolInvitado, null, 'ver');
@@ -455,7 +455,7 @@ echo $acl->isAllowed('administrador', null, 'actualizar') ?
      "permitido" : "denegado"; // permitido porque administrador tiene permitidos todos los privilegios]]>
         </programlisting>
     </sect2>
-</sect1> 
+</sect1>
 <!--
     vim:se ts=4 sw=4 et:
 -->

@@ -2,9 +2,9 @@
     <title>Creando elementos de formulario usando Zend_Form_Element</title>
 
     <para>
-        Un formulario esta compuesto de elementos, que normalmente corresponden 
+        Un formulario esta compuesto de elementos, que normalmente corresponden
         al  elemento HTML input. <code>Zend_Form_Element</code> encapsula
-        elementos de formulario individualmente, con las siguientes áreas de 
+        elementos de formulario individualmente, con las siguientes áreas de
         responsabilidad:
     </para>
 
@@ -20,7 +20,7 @@
         </listitem>
 
         <listitem><para>
-            filtrado (¿cómo es escapado y normalizado el elemento para su 
+            filtrado (¿cómo es escapado y normalizado el elemento para su
             validación y/o salida?
         </para></listitem>
 
@@ -36,9 +36,9 @@
 
     <para>
         La clase base, <code>Zend_Form_Element</code>, funciona por defecto para
-        varios casos, pero es mejor extender la clase para elementos con fines 
-        especiales de uso común. Adicionalmente, Zend Framework contiene un 
-        número de elementos XHTML estándar; puede leer de ellos <link linkend="zend.form.standardElements">en el capítulo Elementos
+        varios casos, pero es mejor extender la clase para elementos con fines
+        especiales de uso común. Adicionalmente, Zend Framework contiene un
+        número de elementos XHTML estándar; puede leer de ellos <link linkend="zend.form.standarElements">en el capítulo Elementos
         Estándares</link>
     </para>
 
@@ -48,8 +48,8 @@
         <para>
             <code>Zend_Form_Element</code> hace uso de <link linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
             para permitir a los desarrolladores especificar ubicaciones de
-            validadores, filtros y decoradores alternos. Cada uno tiene su 
-            propio cargador de plugin asociado a él y métodos de acceso 
+            validadores, filtros y decoradores alternos. Cada uno tiene su
+            propio cargador de plugin asociado a él y métodos de acceso
             generales usados para su recuperación y modificación.
         </para>
 
@@ -60,7 +60,7 @@
         </para>
 
         <para>
-            Los métodos usados para interactuar con los cargadores de plugin son 
+            Los métodos usados para interactuar con los cargadores de plugin son
             los siguientes:
         </para>
 
@@ -84,7 +84,7 @@
                 <code>$type</code>. Si <code>$type</code> es null, se intentará
                 agregar la ruta a todos los cargadores, añadiendo el prefijo a
                 cada "_Validate", "_Filter" y "_Decorator"; y agregandole
-                "Validate/", "Filter/" y "Decorator/" a la ruta. Si tiene todas 
+                "Validate/", "Filter/" y "Decorator/" a la ruta. Si tiene todas
                 sus clases extras para elementos de formulario dentro de
                 una jerarquía común, este método es conveniente para establecer
                 el prefijo para todas ellas.
@@ -111,14 +111,14 @@
                 Un uso común de los plugins es proveer reemplazos para las
                 clases estándares. Por ejemplo, si desea proveer una implementación diferente
                  del decorador 'Label' -- por ejemplo, para
-                añadir siempre dos puntos -- puede crear su  propio decorador 
-                'Label' con su propio prefijo de clase, y entonces añadirlo a su 
+                añadir siempre dos puntos -- puede crear su  propio decorador
+                'Label' con su propio prefijo de clase, y entonces añadirlo a su
                 prefijo de ruta.
             </para>
 
             <para>
-                Comencemos con un decorador de etiqueta personalizado. Le 
-                daremos el prefijo "My_Decorator", y la clase estará en el 
+                Comencemos con un decorador de etiqueta personalizado. Le
+                daremos el prefijo "My_Decorator", y la clase estará en el
                 archivo "My/Decorator/Label.php".
             </para>
 
@@ -186,8 +186,8 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
             <para>
                 Con esta ruta añadida, cuando agregue un decorador, la ruta
-                'My/Decorator' será consultada primero en búsqueda de la 
-                existencia del decorador en este lugar. Como resultado, 
+                'My/Decorator' será consultada primero en búsqueda de la
+                existencia del decorador en este lugar. Como resultado,
                 'My_Decorator_Label' ahora será utilizado cuando el decorador
                 'Label' sea requerido.
             </para>
@@ -227,7 +227,7 @@ $filtered = $element->getValue();
             </para></listitem>
 
             <listitem><para>
-                proveyendo un nombre de filtro – el correspondiente nombre 
+                proveyendo un nombre de filtro – el correspondiente nombre
                 corto o completo de la clase
             </para></listitem>
         </itemizedlist>
@@ -252,7 +252,7 @@ $element->addFilter('alnum');
         <para>
             Los nombres cortos son típicamente el nombre del filtro sin el
             prefijo. En el caso predeterminado, esto se refiere a sin el prefijo
-            'Zend_Filter_'. Además, la primera letra no necesita estar en 
+            'Zend_Filter_'. Además, la primera letra no necesita estar en
             mayúscula.
         </para>
 
@@ -260,8 +260,8 @@ $element->addFilter('alnum');
             <title>Usando clases de filtros personalizados</title>
 
             <para>
-                Si tiene su propio conjunto de clases de filtro, puede 
-                informarle de ellas a <code>Zend_Form_Element</code> usando 
+                Si tiene su propio conjunto de clases de filtro, puede
+                informarle de ellas a <code>Zend_Form_Element</code> usando
                 <code>addPrefixPath()</code>. Por ejemplo, si tiene filtros
                 con el prefijo 'My_Filter', puede indicárselo a
                 <code>Zend_Form_Element</code> de la siguiente manera:
@@ -289,7 +289,7 @@ $unfiltered = $element->getUnfilteredValue();
         </programlisting>
 
         <para>
-            Para mayor información sobre filtros, vea la <link linkend="zend.filter.introduction">documentación de 
+            Para mayor información sobre filtros, vea la <link linkend="zend.filter.introduction">documentación de
                 Zend_Filter</link>.
         </para>
 
@@ -352,7 +352,7 @@ $unfiltered = $element->getUnfilteredValue();
             </para></listitem>
 
             <listitem><para>
-                proveyendo un nombre de validador – el correspondiente nombre 
+                proveyendo un nombre de validador – el correspondiente nombre
                 corto o completo de clase
             </para></listitem>
         </itemizedlist>
@@ -385,8 +385,8 @@ $element->addValidator('alnum');
             <title>Usando clases de validación personalizadas</title>
 
             <para>
-                Si tiene su propio conjunto de clases de validación, puede 
-                informarle de ellas a <code>Zend_Form_Element</code> usando 
+                Si tiene su propio conjunto de clases de validación, puede
+                informarle de ellas a <code>Zend_Form_Element</code> usando
                 <code>addPrefixPath()</code>. Por ejemplo, si tiene validadores
                 con el prefijo 'My_Validator', puede indicárselo a
                 <code>Zend_Form_Element</code> de la siguiente manera:
@@ -414,9 +414,9 @@ $element->addValidator('alnum', true);
         </programlisting>
 
         <para>
-            Si está usando la cadena nombre para añadir el validador, y la clase 
+            Si está usando la cadena nombre para añadir el validador, y la clase
             del validador acepta argumentos para su constructor, puede pasarlos
-            a el tercer parámetro de <code>addValidator()</code> como un 
+            a el tercer parámetro de <code>addValidator()</code> como un
             array:
         </para>
 
@@ -427,7 +427,7 @@ $element->addValidator('StringLength', false, array(6, 20));
 
         <para>
             Los argumentos pasados de esta manera deben estar en el orden en el
-            cual son definidos en el constructor. El ejemplo de arriba 
+            cual son definidos en el constructor. El ejemplo de arriba
             instanciará la clase <code>Zend_Validate_StringLenth</code> con los
             parámetros <code>$min</code> y <code>$max</code>:
         </para>
@@ -442,21 +442,21 @@ $validator = new Zend_Validate_StringLength(6, 20);
 
             <para>
                 Algunos desarrolladores querrán estipular mensajes de error
-                personalizados para un validador. El argumento 
-                <code>$options</code> de 
-                <code>Zend_Form_Element::addValidator()</code> le permite 
-                hacerlo proporcionando la clave 'messages' y estableciendolos en 
-                un array de pares clave/valor para especificar las plantillas 
-                de mensaje. Necesitará conocer los códigos de error de los 
+                personalizados para un validador. El argumento
+                <code>$options</code> de
+                <code>Zend_Form_Element::addValidator()</code> le permite
+                hacerlo proporcionando la clave 'messages' y estableciendolos en
+                un array de pares clave/valor para especificar las plantillas
+                de mensaje. Necesitará conocer los códigos de error de los
                 diferentes tipos de error de un validador en particular.
             </para>
 
             <para>
                 Una opción mejor es usar <code>Zend_Translate_Adapter</code>
-                con su formulario. Los códigos de error son automáticamente 
-                pasados al adaptador por el decorador Errors por defecto; puede 
-                especificar su propias cadenas de mensaje de error mediante la 
-                creación de traducciones para los varios códigos de error de 
+                con su formulario. Los códigos de error son automáticamente
+                pasados al adaptador por el decorador Errors por defecto; puede
+                especificar su propias cadenas de mensaje de error mediante la
+                creación de traducciones para los varios códigos de error de
                 sus validadores.
             </para>
         </note>
@@ -464,7 +464,7 @@ $validator = new Zend_Validate_StringLength(6, 20);
         <para>
             Puede también establecer varios validadores a la vez, usando
             <code>addValidators()</code>. Su uso básico es pasar una matriz de
-            arrays, donde cada array contenga de 1 a 3 valores, 
+            arrays, donde cada array contenga de 1 a 3 valores,
             correspondientes al constructor de <code>addValidator()</code>:
         </para>
 
@@ -478,7 +478,7 @@ $element->addValidators(array(
         </programlisting>
 
         <para>
-            Si quiere ser más detallado o explícito, puede utilizar las claves 
+            Si quiere ser más detallado o explícito, puede utilizar las claves
             'validator', 'breakChainOnFailure', y 'options' en el array:
         </para>
 
@@ -511,10 +511,10 @@ element.validators.strlen.options.max = 20
 </programlisting>
 
         <para>
-            Note que cada elemento tiene una clave, la necesite o no; esta es 
-            una limitación del uso de archivos de configuración -- pero también 
-            ayuda a hacer más explicito el para qué son usados los argumentos. 
-            Sólo recuerde que cualesquiera opciones del validador deben ser 
+            Note que cada elemento tiene una clave, la necesite o no; esta es
+            una limitación del uso de archivos de configuración -- pero también
+            ayuda a hacer más explicito el para qué son usados los argumentos.
+            Sólo recuerde que cualesquiera opciones del validador deben ser
             especificadas en orden.
         </para>
 
@@ -536,9 +536,9 @@ if ($element->isValid($value)) {
             <title>Validación operando en valores filtrados</title>
 
             <para>
-                <code>Zend_Form_Element::isValid()</code> siempre filtra los 
+                <code>Zend_Form_Element::isValid()</code> siempre filtra los
                 valores antes de la validación a través de la cadena de filtros.
-                Vea <link linkend="zend.form.elements.filters">la sección de 
+                Vea <link linkend="zend.form.elements.filters">la sección de
                 filtros</link> para más información.
             </para>
         </note>
@@ -549,15 +549,15 @@ if ($element->isValid($value)) {
             <para>
                 <code>Zend_Form_Element::isValid()</code> soporta un argumento
                 adicional, <code>$context</code>.
-                <code>Zend_Form::isValid()</code> pasa todo el conjunto de datos 
-                procesados a <code>$context</code> cuando valida un formulario, 
-                y <code>Zend_Form_Element::isValid()</code>, a su vez, lo pasa a 
-                cada validador. Esto significa que puede escribir validadores 
-                que son conscientes de los datos pasados a otros elementos del 
+                <code>Zend_Form::isValid()</code> pasa todo el conjunto de datos
+                procesados a <code>$context</code> cuando valida un formulario,
+                y <code>Zend_Form_Element::isValid()</code>, a su vez, lo pasa a
+                cada validador. Esto significa que puede escribir validadores
+                que son conscientes de los datos pasados a otros elementos del
                 formulario. Como ejemplo, considere un formulario de registro
-                estándar que tiene campos para la contraseña y la confirmación 
-                de la contraseña; una validación sería que los dos campos 
-                coincidan. Este validador puede tener un aspecto como el 
+                estándar que tiene campos para la contraseña y la confirmación
+                de la contraseña; una validación sería que los dos campos
+                coincidan. Este validador puede tener un aspecto como el
                 siguiente:
             </para>
 
@@ -594,14 +594,14 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
         </note>
 
         <para>
-            Los validadores son procesados en orden. Cada validador es 
+            Los validadores son procesados en orden. Cada validador es
             procesado, a menos que un validador creado con un valor true para
-            <code>breakChainOnFailure</code> falle su validación. Asegúrese de 
+            <code>breakChainOnFailure</code> falle su validación. Asegúrese de
             especificar sus validadores en un orden razonable.
         </para>
 
         <para>
-            Después de una validación fallida, puede recuperar los códigos y 
+            Después de una validación fallida, puede recuperar los códigos y
             mensajes de error de la cadena del validador:
         </para>
 
@@ -613,14 +613,14 @@ $messages = $element->getMessages();
 
         <para>
             (Nota: los mensajes de error retornados son un array asociativo de
-            pares código / mensaje de error.) 
+            pares código / mensaje de error.)
         </para>
 
         <para>
             En adición a los validadores, puede especificar que un elemento es
             necesario, usando <code>setRequired(true)</code>. Por defecto, esta
-            bandera es false, lo que significa que pasará su cadena de  
-            validadores si ningún valor es pasado a <code>isValid()</code>. 
+            bandera es false, lo que significa que pasará su cadena de 
+            validadores si ningún valor es pasado a <code>isValid()</code>.
             Puede modificar este comportamiento en un número de maneras:
         </para>
 
@@ -628,12 +628,12 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     Por defecto, cuando un elemento es requerido, una bandera,
-                    'allowEmpty', también es true. Esto quiere decir que si un 
-                    valor empty es evaluado pasándolo a <code>isValid()</code>, 
+                    'allowEmpty', también es true. Esto quiere decir que si un
+                    valor empty es evaluado pasándolo a <code>isValid()</code>,
                     los validadores serán saltados. Puede intercalar esta
-                    bandera usando el método de acceso 
-                    <code>setAllowEmpty($flag)</code>; cuando la bandera es 
-                    false, si un valor es pasado, los validadores seguirán 
+                    bandera usando el método de acceso
+                    <code>setAllowEmpty($flag)</code>; cuando la bandera es
+                    false, si un valor es pasado, los validadores seguirán
                     ejecutándose.
                 </para>
             </listitem>
@@ -642,27 +642,27 @@ $messages = $element->getMessages();
                 <para>
                     Por defecto, si un elemento es requerido, pero no contiene
                     un validador 'NotEmpty', <code>isValid()</code> añadirá uno
-                    en la cima de la pila, con la bandera 
-                    <code>breakChainOnFailure</code> establecido. Esto hace que 
-                    la bandera requerida tenga un significado semántico: si 
-                    ningún valor es pasado, inmediatamente invalidamos el envío 
-                    y se le notifica al usuario, e impedimos que otros 
-                    validadores se ejecuten en lo que ya sabemos son datos 
+                    en la cima de la pila, con la bandera
+                    <code>breakChainOnFailure</code> establecido. Esto hace que
+                    la bandera requerida tenga un significado semántico: si
+                    ningún valor es pasado, inmediatamente invalidamos el envío
+                    y se le notifica al usuario, e impedimos que otros
+                    validadores se ejecuten en lo que ya sabemos son datos
                     inválidos.
                 </para>
 
                 <para>
                     Si no quiere este comportamiento, puede desactivarlo pasando
-                    un valor false a 
+                    un valor false a
                     <code>setAutoInsertNotEmptyValidator($flag)</code>; esto
-                    prevendrá a <code>isValid()</code> de colocar un validador 
+                    prevendrá a <code>isValid()</code> de colocar un validador
                     'NotEmpty' en la cadena de validaciones.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Para mayor información sobre validadores, vea la <link linkend="zend.validate.introduction">documentación de 
+            Para mayor información sobre validadores, vea la <link linkend="zend.validate.introduction">documentación de
                 Zend_Validate</link>.
         </para>
 
@@ -672,7 +672,7 @@ $messages = $element->getMessages();
             <para>
                 <code>Zend_Form_Element</code> implementa
                 <code>Zend_Validate_Interface</code>, significando un elemento
-                puede también usarse como un validador en otro, cadenas de 
+                puede también usarse como un validador en otro, cadenas de
                 validación no relacionadas al formulario.
             </para>
         </note>
@@ -684,26 +684,26 @@ $messages = $element->getMessages();
         <itemizedlist>
             <listitem><para>
                     <code>setRequired($flag)</code> y
-                    <code>isRequired()</code> permiten establecer y recuperar el 
-                    estado de la bandera 'required'. Cuando se le asigna un 
+                    <code>isRequired()</code> permiten establecer y recuperar el
+                    estado de la bandera 'required'. Cuando se le asigna un
                     booleano <code>true</code>, esta bandera requiere que el
-                    elemento esté presente en la información procesada por 
+                    elemento esté presente en la información procesada por
                     <code>Zend_Form</code>.
             </para></listitem>
 
             <listitem><para>
                     <code>setAllowEmpty($flag)</code> y
-                    <code>getAllowEmpty()</code> permiten modificar el 
-                    comportamiento de elementos opcionales (p.e., elementos 
-                    donde la bandera required es false). Cuando la bandera  
+                    <code>getAllowEmpty()</code> permiten modificar el
+                    comportamiento de elementos opcionales (p.e., elementos
+                    donde la bandera required es false). Cuando la bandera 
                     'allow empty' es true, valores vacíos no pasarán la cadena
                     de validadores.
             </para></listitem>
 
             <listitem><para>
                     <code>setAutoInsertNotEmptyValidator($flag)</code> permite
-                    especificar si realmente un validador 'NotEmpty' será 
-                    añadido el inicio de la cadena de validaciones cuando un 
+                    especificar si realmente un validador 'NotEmpty' será
+                    añadido el inicio de la cadena de validaciones cuando un
                     elemento es requerido. Por defecto, esta bandera es true.
             </para></listitem>
 
@@ -741,78 +741,78 @@ $messages = $element->getMessages();
 
             <para>
                 Alguna veces, querrá especificar uno o más mensajes de error para
-                usarlos en lugar de los mensajes de error generados por los 
+                usarlos en lugar de los mensajes de error generados por los
                 validadores adjuntos a los elementos. Adicionalmente, algunas
-                veces usted mismo querrá marcar al elemento como inválido. A 
-                partir de 1.6.0, esta funcionalidad es posible vía los 
-                siguientes métodos. 
+                veces usted mismo querrá marcar al elemento como inválido. A
+                partir de 1.6.0, esta funcionalidad es posible vía los
+                siguientes métodos.
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>addErrorMessage($message)</code>: añade un mensaje de 
-                    error para mostrarlos en forma de errores de validación. Puede 
-                    llamarlo más de una vez, y los nuevos mensajes nuevos son 
+                    <code>addErrorMessage($message)</code>: añade un mensaje de
+                    error para mostrarlos en forma de errores de validación. Puede
+                    llamarlo más de una vez, y los nuevos mensajes nuevos son
                     añadidos a la pila.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrorMessages(array $messages)</code>: añade 
+                    <code>addErrorMessages(array $messages)</code>: añade
                     múltiples mensajes de error para mostrarlos en forma de errores de
                     validación.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrorMessages(array $messages)</code>: añade 
+                    <code>setErrorMessages(array $messages)</code>: añade
                     múltiples mensajes de error para mostrarlos en forma de errores de
-                    validación, sobreescribiendo todos los mensajes de error 
-                    previamente establecidos. 
+                    validación, sobreescribiendo todos los mensajes de error
+                    previamente establecidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getErrorMessages()</code>: recupera la lista de 
+                    <code>getErrorMessages()</code>: recupera la lista de
                     mensajes de error personalizados que fueron definidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearErrorMessages()</code>: remueve todos los 
+                    <code>clearErrorMessages()</code>: remueve todos los
                     mensajes de error personalizados que hayan sido definidos.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>markAsError()</code>: marca al elemento como que falló 
+                    <code>markAsError()</code>: marca al elemento como que falló
                     la validación.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>hasErrors()</code>: determina si el elemento ha 
+                    <code>hasErrors()</code>: determina si el elemento ha
                     fallado la validación o ha sido marcado como inválido.
                 </para></listitem>
 
                 <listitem><para>
                     <code>addError($message)</code>: añade un mensaje a la pila
-                    de mensaje de error personalizados y marca al elemento como 
+                    de mensaje de error personalizados y marca al elemento como
                     inválido.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrors(array $messages)</code>: añade varios 
-                    mensajes a la pila de mensajes de error personalizados y 
+                    <code>addErrors(array $messages)</code>: añade varios
+                    mensajes a la pila de mensajes de error personalizados y
                     marca al elemento como inválido.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrors(array $messages)</code>: sobreescribe el 
+                    <code>setErrors(array $messages)</code>: sobreescribe el
                     mensaje de error personalizado en la pila con los mensajes
                     previstos y marca al elemento como inválido.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                Todos los errores establecidos de este modo pueden ser 
-                traducidos. Adicionalmente, puede insertar el marcador "%value%" 
-                para representar el valor del elemento; este valor actual del 
-                elemento será sustituido cuando el mensaje de error sea 
+                Todos los errores establecidos de este modo pueden ser
+                traducidos. Adicionalmente, puede insertar el marcador "%value%"
+                para representar el valor del elemento; este valor actual del
+                elemento será sustituido cuando el mensaje de error sea
                 recuperado.
             </para>
         </sect3>
@@ -835,7 +835,7 @@ $messages = $element->getMessages();
             el uso de "decoradores". Los decoradores son clases simples que tienen
             métodos de acceso al elemento y métodos para generar el contenido. Para
             obtener mayor información sobre cómo trabajan los decoradores, consulte
-            por favor  la sección sobre 
+            por favor  la sección sobre
             <link linkend="zend.form.decorators">Zend_Form_Decorator</link>.
         </para>
 
@@ -850,7 +850,7 @@ $messages = $element->getMessages();
                 usar para general el elemento. El atributo 'helper' del elemento
                 puede usarse para especificar qué auxiliar vista usar. Por
                 defecto, <code>Zend_Form_Element</code> especifica el auxiliar
-                vista 'formText', pero cada subclase especifica diferentes 
+                vista 'formText', pero cada subclase especifica diferentes
                 auxiliares.
             </para></listitem>
 
@@ -932,10 +932,10 @@ $this->addDecorators(array(
             descripción está presente, el decorador 'Description' añadirá
             un párrafo con class 'description' conteniendo el texto descriptivo
             para el contenido agregado. El siguiente decorador, 'HtmlTag',
-            envuelve al elemento, los errores, y la descripción en una etiqueta 
+            envuelve al elemento, los errores, y la descripción en una etiqueta
             HTML &lt;dd&gt;. Finalmente, el último decorador, 'label', recupera
             la etiqueta del elemento y la pasa al auxiliar vista 'FormLabel',
-            envolviéndolo en una etiqueta &lt;dt&gt;; por default el valor es 
+            envolviéndolo en una etiqueta &lt;dt&gt;; por default el valor es
             añadido al inicio del contenido. El resultado de la salida
             básicamente se ve así:
         </para>
@@ -964,8 +964,8 @@ $this->addDecorators(array(
             <para>
                 Internamente, <code>Zend_Form_Element</code> utiliza una clase
                 decorador como mecanismo de búsqueda para la recuperación de
-                decoradores. Como resultado, no puede registrar múltiples 
-                decoradores del mismo tipo; decoradores subsecuentes 
+                decoradores. Como resultado, no puede registrar múltiples
+                decoradores del mismo tipo; decoradores subsecuentes
                 simplemente sobreescribirán aquellos que ya existían.
             </para>
 
@@ -1052,7 +1052,7 @@ $fooBar  = $element->getDecorator('FooBar');
             permitir generar decoradores específicos. <code>__call()</code>
             interceptará métodos que comiencen con el texto 'render' y utilizará
             el resto del nombre del método para buscar un decorador; si se
-            encuentra, entonces será generado <emphasis>sólo ese</emphasis> 
+            encuentra, entonces será generado <emphasis>sólo ese</emphasis>
             decorador. Cualquier argumento pasado al llamado del método será
             usado como contenido para pasar  al método <code>render()</code> del
             decorador. Como ejemplo:
@@ -1098,7 +1098,7 @@ echo $element->renderHtmlTag("This is the html tag content");
 
             <listitem><para>
                 <emphasis>value</emphasis>: El valor del elemento actual. Emplea
-                los métodos de acceso <code>setValue()</code> y 
+                los métodos de acceso <code>setValue()</code> y
                 <code>getValue()</code>.
             </para></listitem>
 
@@ -1106,14 +1106,14 @@ echo $element->renderHtmlTag("This is the html tag content");
                 <emphasis>description</emphasis>: una descripción del elemento;
                 a menudo utilizada para proveer un tooltip o ayuda contextual
                 con javascript describiendo el propósito del elemento. Emplea
-                los métodos de acceso <code>setDescription()</code> y 
+                los métodos de acceso <code>setDescription()</code> y
                 <code>getDescription()</code>.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>required</emphasis>: bandera que indica si un elemento
                 es requerido o no cuando se efectúa la validación del
-                formulario. Emplea los métodos de acceso 
+                formulario. Emplea los métodos de acceso
                 <code>setRequired()</code> y <code>getRequired()</code>. Esta
                 bandera es false por defecto.
             </para></listitem>
@@ -1123,13 +1123,13 @@ echo $element->renderHtmlTag("This is the html tag content");
                 elemento no-requerido (opcional) debe intentar validar o no
                 valores vacíos. Cuando es true, y la bandera required es false,
                 valores vacíos no pasarán la cadena de validación, y se supone
-                verdadero. Emplea los métodos de acceso 
+                verdadero. Emplea los métodos de acceso
                 <code>setAllowEmpty()</code> y <code>getAllowEmpty()</code>.
                 Esta bandera es true por defecto.
             </para></listitem>
 
             <listitem><para>
-                <emphasis>autoInsertNotEmptyValidator</emphasis>: bandera 
+                <emphasis>autoInsertNotEmptyValidator</emphasis>: bandera
                 indicando insertar o no un validador 'NotEmpty' cuando un
                 elemento es requerido. Por defecto, esta bandera es true.
                 Establezca la bandera con
@@ -1179,7 +1179,7 @@ $element->class = 'text;
         </programlisting>
 
         <para>
-            Por defecto, todos los atributos son pasados al auxiliar vista usado 
+            Por defecto, todos los atributos son pasados al auxiliar vista usado
             por el elemento durante la generación, y generados como atributos de
             la etiqueta del elemento.
         </para>
@@ -1190,7 +1190,7 @@ $element->class = 'text;
 
         <para>
             <code>Zend_Form</code> contiene un buen número de elementos
-            estándar; por favor lea el capítulo <link linkend="zend.form.standardElements">Elementos Estándar</link> para
+            estándar; por favor lea el capítulo <link linkend="zend.form.standarElements">Elementos Estándar</link> para
             todos los detalles.
         </para>
     </sect2>
@@ -1315,7 +1315,7 @@ $element->class = 'text;
 
         <itemizedlist>
             <listitem><para>
-                Si 'set' + clave se refiere a un método de 
+                Si 'set' + clave se refiere a un método de
                 <code>Zend_Form_Element</code>, entonces el valor provisto será
                 pasado a el método.
             </para></listitem>
@@ -1406,7 +1406,7 @@ decorators.label.decorator = "Label"
 
         <itemizedlist>
             <listitem><para>
-                Elementos que comparten validadores y/o filtros comunes 
+                Elementos que comparten validadores y/o filtros comunes
             </para></listitem>
 
             <listitem><para>

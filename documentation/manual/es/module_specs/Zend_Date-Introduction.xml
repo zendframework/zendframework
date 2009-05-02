@@ -85,7 +85,7 @@ date_default_timezone_set('Europe/Berlin');
 
         <para>
             Tenga en cuenta que las zonas horarias <emphasis role="strong">UTC</emphasis> y
-            <emphasis role="strong">GMT</emphasis> no incluyen el cambio de hora de invierno/verano (Daylight Saving Time, DST). 
+            <emphasis role="strong">GMT</emphasis> no incluyen el cambio de hora de invierno/verano (Daylight Saving Time, DST).
             Esto significa que aunque defina a mano que <code>Zend_Date</code> deba trabajar con DST, podría
             ser anulado por las instancias de <code>Zend_Date</code> que han sido fijadas a
             UTC o GMT.
@@ -107,7 +107,7 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     <code>Zend_Date</code> aporta una API muy sencilla, que combina lo mejor de la funcionalidad
-                    fecha/hora de cuatro lenguajes de programación. Es posible, por ejemplo, añadir o comparar dos horas 
+                    fecha/hora de cuatro lenguajes de programación. Es posible, por ejemplo, añadir o comparar dos horas
                     dentro de una misma columna.
                 </para>
             </listitem>
@@ -127,13 +127,13 @@ date_default_timezone_set('Europe/Berlin');
                 <para>
                     A pesar de que la documentación de PHP 5.2 indice: "El intervalo de valores admitidos de timestamps es
                     desde el 13 Dec 1901 20:45:54 GMT al 19 Ene 2038 03:14:07 GMT," <code>Zend_Date</code> admite un rango
-                    casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una 
+                    casi ilimitado, con la ayuda de la extensión BCMath. Si BCMath no está disponible, Zend_Date tendrá una
                     funcionalidad de timestamps reducida al rango del tipo <code>float</code> soportado por su servidor.
                     El tamaño de un float es dependiente de la plataforma, aunque un máximo de ~1.8e308 con una precisión
                     de cerca de 14 dígitos decimales es un valor habitual (formato 64 bit IEEE)." [
                     <ulink url="http://www.php.net/float">http://www.php.net/float</ulink>
                     ].  Adicionalmente, las limitaciones heredadas de los tipos de dato float, y errores de redondeo de números
-                    flotantes pueden introducir errores en los cálculos. Para evitar estos problemas, los componentes ZF I18n 
+                    flotantes pueden introducir errores en los cálculos. Para evitar estos problemas, los componentes ZF I18n
                     usan la extensión BCMath, si está disponible.
                 </para>
             </listitem>
@@ -142,12 +142,12 @@ date_default_timezone_set('Europe/Berlin');
                     Soporte para especificaciones de fecha ISO_8601
                 </para>
                 <para>
-                    Las especificaciones de fecha ISO_8601 están aceptadas. Incluso las especificaciones de fecha ISO_8601 
+                    Las especificaciones de fecha ISO_8601 están aceptadas. Incluso las especificaciones de fecha ISO_8601
                     parcialmente autorizadas serán identificadas. Estos formatos de fecha son particularmente útiles al
-                    trabajar con bases de datos. Por ejemplo, aunque MsSQL y 
+                    trabajar con bases de datos. Por ejemplo, aunque MsSQL y
                     <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
-                    difieren ligeramente uno de otro, ambos tienen soporte por parte de <code>Zend_Date</code> usando la constante 
-                    de especificación de formato 
+                    difieren ligeramente uno de otro, ambos tienen soporte por parte de <code>Zend_Date</code> usando la constante
+                    de especificación de formato
                     <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>.
                     Cuando las cadenas de fecha sean del tipo "Y/m/d" o "Y-m-d H:i:s", de acuerdo con los tokens de formato
                     PHP date(), use el soporte integrado de Zend_Date para fechas formateadas ISO 8601.
@@ -158,7 +158,7 @@ date_default_timezone_set('Europe/Berlin');
                     Calcular amanecer y puesta de sol
                 </para>
                 <para>
-                    Las horas de amanecer y puesta de sol pueden mostrarse para cualquier lugar y día, para que no pierda ni un segundo de luz diurna 
+                    Las horas de amanecer y puesta de sol pueden mostrarse para cualquier lugar y día, para que no pierda ni un segundo de luz diurna
                     para trabajar en su proyecto PHP favorito :)
                 </para>
             </listitem>

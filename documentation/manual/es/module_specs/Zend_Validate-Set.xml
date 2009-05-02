@@ -79,7 +79,6 @@
     <xi:include href="Zend_Validate-Db.xml">
         <xi:fallback href="../../en/module_specs/Zend_Validate-Db.xml"></xi:fallback>
     </xi:include>
-
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
@@ -91,7 +90,6 @@
     <xi:include href="Zend_Validate-EmailAddress.xml">
         <xi:fallback href="../../en/module_specs/Zend_Validate-EmailAddress.xml"></xi:fallback>
     </xi:include>
-
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
@@ -115,6 +113,7 @@
             caracteres hexadecimales (0-9 y A-F).
         </para>
     </sect2>
+
 
     <xi:include href="Zend_Validate-Hostname.xml">
         <xi:fallback href="../../en/module_specs/Zend_Validate-Hostname.xml"></xi:fallback>

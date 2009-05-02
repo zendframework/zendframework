@@ -5,10 +5,10 @@
     <para>
         Los datos de configuración se hacen accesibles al constructor <code>Zend_Config</code>
         a través de un array asociativo, que puede ser multidimensional, para permitir
-        organizar los datos desde lo general a lo específico. Las clases de adaptador concretas 
-        permiten construir una tabla asociativa para el constructor de <code>Zend_Config</code> 
-        a partir de un sistema de almacenamiento de datos de configuración. Algunos scripts 
-        de usuario pueden proveer esos arrays directamente al constructor Zend_Config, 
+        organizar los datos desde lo general a lo específico. Las clases de adaptador concretas
+        permiten construir una tabla asociativa para el constructor de <code>Zend_Config</code>
+        a partir de un sistema de almacenamiento de datos de configuración. Algunos scripts
+        de usuario pueden proveer esos arrays directamente al constructor Zend_Config,
         sin usar una clase adaptador, lo cual puede ser apropiado en ciertas ocasiones.
     </para>
     <para>
@@ -39,7 +39,7 @@
         <note>
             <para>
                 Es importante no confundir tales modificaciones en memoria con guardar los datos de configuración a un
-                medio de almacenamiento específico. Las herramientas para crear y modificar datos de configuración para 
+                medio de almacenamiento específico. Las herramientas para crear y modificar datos de configuración para
                 distintos medios de almacenamiento están fuera del alcance de <code>Zend_Config</code>.
                 Existen soluciones third-party de código abierto con el propósito de crear y modificar
                 datos de configuración de distintos medios de almacenamiento.
@@ -50,14 +50,14 @@
         Las clases del adaptador heredan de la clase <code>Zend_Config</code> debido a que utilizan su funcionalidad.
     </para>
     <para>
-        La familia de clases <code>Zend_Config</code> permite organizar en secciones 
+        La familia de clases <code>Zend_Config</code> permite organizar en secciones
         los datos de configuración. Los objetos de adaptador <code>Zend_Config</code>
         pueden ser cargados con una sola sección especificada, múltiples secciones especificadas,
         o todas las secciones (si no se especifica ninguna).
     </para>
     <para>
         Las clases del adaptador <code>Zend_Config</code> soportan un modelo de herencia única
-        que permite que los datos de configuración hereden de una sección de datos de configuración a otra. 
+        que permite que los datos de configuración hereden de una sección de datos de configuración a otra.
         Esto es provisto con el fin de reducir o eliminar la necesidad de duplicar datos de configuración por
         distintos motivos. Una sección heredada puede también sobrescribir los valores que hereda de su sección
         padre. Al igual que la herencia de clases PHP, una sección puede heredar de una sección padre,

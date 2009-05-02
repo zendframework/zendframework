@@ -1,61 +1,57 @@
-﻿<sect1 id="zend.auth.introduction">
-
-    <title>Introduction</title>
-
+<sect1 id="zend.auth.introduction">
+<?xml version="1.0" encoding="UTF-8"?>
+    <title>Introducción</title>
     <para>
-        Zend_Auth provides an API for authentication and includes concrete authentication adapters for
-        common use case scenarios.
+        Zend_Auth provee una API para autenticación e incluye adaptadores concretos de autenticación para
+        escenarios de casos de uso común.
     </para>
-
     <para>
-        Zend_Auth is concerned only with <emphasis role="strong">authentication</emphasis> and not with
-        <emphasis role="strong">authorization</emphasis>. Authentication is loosely defined as determining
-        whether an entity actually is what it purports to be (i.e., identification), based on some set of
-        credentials. Authorization, the process of deciding whether to allow an entity access to, or to
-        perform operations upon, other entities is outside the scope of Zend_Auth. For more information about
-        authorization and access control with the Zend Framework, please see
-        <link linkend="zend.acl">Zend_Acl</link>.
+        Zend_Auth es concerniente sólo con <emphasis role="strong">autenticación</emphasis> y no con
+        <emphasis role="strong">autorización</emphasis>. Autenticación es vagamente definido como: determinar
+        si una entidad realmente es lo que pretende ser (o sea, identificación), basandose en un grupo de
+    credenciales. Autorización, el proceso de decidir si se permite a una entidad: acceso a, o el
+    realizar operaciones en, otras entidades esta fuera del alcance de Zend_Auth. Para más información sobre
+    autorización y control de acceso con Zend Framework, por favor vea
+    <link linkend="zend.acl">Zend_Acl</link>.
     </para>
-
     <note>
         <para>
-            The <code>Zend_Auth</code> class implements the Singleton pattern - only one instance of the class is
-            available - through its static <code>getInstance()</code> method. This means that using the <code>new</code>
-            operator and the <code>clone</code> keyword will not work with the <code>Zend_Auth</code> class; use
-            <code>Zend_Auth::getInstance()</code> instead.
+            La clase <code>Zend_Auth</code> implementa el patrón Singleton - sólo una instancia de la clase está
+            disponible - a través de su método estático <code>getInstance()</code>. Esto significa que usar el operador <code>new</code>
+            y la keyword <code>clone</code> no va a funcionar con la clase <code>Zend_Auth</code> : use
+            <code>Zend_Auth::getInstance()</code> en su lugar.
         </para>
     </note>
-
     <sect2 id="zend.auth.introduction.adapters">
 
-        <title>Adapters</title>
+        <title>Adaptadores</title>
 
         <para>
-            A Zend_Auth adapter is used to authenticate against a particular type of authentication service,
-            such as LDAP, RDBMS, or file-based storage. Different adapters are likely to have vastly different
-            options and behaviors, but some basic things are common among authentication adapters. For example,
-            accepting authentication credentials (including a purported identity), performing queries against the
-            authentication service, and returning results are common to Zend_Auth adapters.
+            Un adaptador Zend_Auth es usado para autenticar en contra de un tipo particular de servicio de autenticación,
+            como LDAP, RDBMS, o almacenamiento basado en ficheros. Diferentes adaptadores pueden tener opciones y compotamientos
+            muy diferentes, pero algunas cosas básicas son comunes entre los adaptadores de autenticación. Por ejemplo,
+            aceptar credenciales de autenticación (incluyendo una identidad supuesta), realizar consultas ante el
+            servicio de autenticación, y regresar resultados, son comunes para los adaptadores Zend_Auth.
         </para>
 
         <para>
-            Each Zend_Auth adapter class implements <code>Zend_Auth_Adapter_Interface</code>. This interface defines one
-            method, <code>authenticate()</code>, that an adapter class must implement for performing an authentication
-            query. Each adapter class must be prepared prior to calling <code>authenticate()</code>. Such adapter
-            preparation includes setting up credentials (e.g., username and password) and defining values for adapter-
-            specific configuration options, such as database connection settings for a database table adapter.
+            Cada clase adaptadora Zend_Auth implementa <code>Zend_Auth_Adapter_Interface</code>. Esta interface define un
+            metodo, <code>authenticate()</code>, que la clase adaptadora debe implementar para realizar una peticion de
+            autenticación. Cada clase adaptadora debe ser preparada antes de llamar a <code>authenticate()</code>. Esta preparación
+            del adaptador incluye la creación de credenciales (p.ej. nombre de usuario y contraseña) y la definición de valores para opciones
+            de configuración especificos del adaptador, como valores de coneccion a base de datos para un adaptador de tabla de base de datos.
         </para>
 
         <para>
-            The following is an example authentication adapter that requires a username and password to be set
-            for authentication. Other details, such as how the authentication service is queried, have been
-            omitted for brevity:
-
+            El siguente ejemplo es un adaptador de autenticación que requiere que un nombre de usuario y contraseña sean especificados
+            para la autenticación. Otros detalles, como la forma de realizar peticiones al servicio de autenticación, han sido
+            omitídos por brevedad:
+           
             <programlisting role="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {
     /**
-     * Sets username and password for authentication
+     * Establece nombre de usuario y contraseña para autenticacón
      *
      * @return void
      */
@@ -65,10 +61,10 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * Performs an authentication attempt
+     * Realiza un intento de autenticación
      *
-     * @throws Zend_Auth_Adapter_Exception If authentication cannot
-     *                                     be performed
+     * @throws Zend_Auth_Adapter_Exception Si la autenticación no puede
+     *                                     ser realizada
      * @return Zend_Auth_Result
      */
     public function authenticate()
@@ -79,62 +75,62 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 ]]>
             </programlisting>
 
-            As indicated in its docblock, <code>authenticate()</code> must return an instance of
-            <code>Zend_Auth_Result</code> (or of a class derived from <code>Zend_Auth_Result</code>). If for some
-            reason performing an authentication query is impossible, <code>authenticate()</code> should throw
-            an exception that derives from <code>Zend_Auth_Adapter_Exception</code>.
+            Como se ha indicado en su docblock, <code>authenticate()</code> debe regresar una instancia de
+            <code>Zend_Auth_Result</code> (o de una clase derivada de <code>Zend_Auth_Result</code>). Si por alguna
+            razón es imposible realizar una petición de autenticación, <code>authenticate()</code> debería arrojar
+            una excepción que se derive de <code>Zend_Auth_Adapter_Exception</code>.
         </para>
 
     </sect2>
 
     <sect2 id="zend.auth.introduction.results">
 
-        <title>Results</title>
+        <title>Resultados</title>
 
         <para>
-            Zend_Auth adapters return an instance of <code>Zend_Auth_Result</code> with
-            <code>authenticate()</code> in order to represent the results of an authentication attempt. Adapters
-            populate the <code>Zend_Auth_Result</code> object upon construction, so that the following four methods
-            provide a basic set of user-facing operations that are common to the results of Zend_Auth adapters:
+            Los adaptadores Zend_Auth regresan una instancia de <code>Zend_Auth_Result</code> con
+            <code>authenticate()</code> para representar el resultado de un intento de autenticación. Los adaptadores
+            llenan el objeto <code>Zend_Auth_Result</code> en cuanto se construye, así que los siguientes cuatro métodos
+            proveen un grupo básico de operaciones "frente al usuario" que son comunes a los resultados de adaptadores Zend_Auth:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>isValid()</code> - returns true if and only if the result represents a
-                        successful authentication attempt
+                        <code>isValid()</code> - regresa true si y solo si el resultado representa un
+                        intento de autenticación exitoso
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getCode()</code> - returns a <code>Zend_Auth_Result</code> constant identifier for
-                        determining the type of authentication failure or whether success has occurred. This may be
-                        used in situations where the developer wishes to distinguish among several authentication
-                        result types. This allows developers to maintain detailed authentication result statistics,
-                        for example. Another use of this feature is to provide specific, customized messages to
-                        users for usability reasons, though developers are encouraged to consider the risks of
-                        providing such detailed reasons to users, instead of a general authentication failure
-                        message. For more information, see the notes below.
+                        <code>getCode()</code> - regresa una constante identificadora <code>Zend_Auth_Result</code> para
+                        determinar el tipo de fallo en la autenticación o si ha sido exitosa. Este puede ser usado
+                        en situaciones cuando el desarrollador desea distinguir entre varios tipos de resultados
+                        de autenticación. Esto permite a los desarrolladores, por ejemplo, mantener estadísticas
+                        detalladas de los resultados de autenticación. Otro uso de esta característica es: proporcionar
+                        al usuario mensajes específicos detallados por razones de usabilidad, aunque los desarrolladores
+                        son	exhortados a considerar el riesgo de proporcionar tales detalles a los usuarios, en vez de
+                        un mensaje general de fallo en la autenticación. Para más información, vea las siguientes notas:
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getIdentity()</code> - returns the identity of the authentication attempt
+                        <code>getIdentity()</code> - regresa la identidad del intento de autenticación
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>getMessages()</code> - returns an array of messages regarding a failed
-                        authentication attempt
+                        <code>getMessages()</code> - regresa un arreglo de mensajes pertinentes a un fallido
+                        intento de autenticación
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
         <para>
-            A developer may wish to branch based on the type of authentication result in order to perform more
-            specific operations. Some operations developers might find useful are locking accounts after too many
-            unsuccessful password attempts, flagging an IP address after too many nonexistent identities are
-            attempted, and providing specific, customized authentication result messages to the user. The following
-            result codes are available:
+            El desarrollador podría desear ramificar basado en el tipo de resultado de la autenticación a fin de
+            realizar operaciones mas específicas. Algunas operaciones que los desarrolladores podrían encontrar útiles
+            son: bloquear cuentas despues de varios intentos fallidos de ingresar una contraseña, marcar una dirección IP
+            despues de que ha intentado muchas identidades no existentes, y porporcionar al usuario mensajes especificos
+            resultados de la autenticación. Los siguientes codigos de resultado están disponibles:
 
             <programlisting role="php"><![CDATA[
 Zend_Auth_Result::SUCCESS
@@ -149,28 +145,28 @@ Zend_Auth_Result::FAILURE_UNCATEGORIZED
         </para>
 
         <para>
-            The following example illustrates how a developer may branch on the result code:
+            El siguiente ejemplo ilustra como un desarrollador podría ramificar basado en el código resultado:
 
             <programlisting role="php"><![CDATA[
-// inside of AuthController / loginAction
+// debtri de AuthController / loginAction
 $result = $this->_auth->authenticate($adapter);
 
 switch ($result->getCode()) {
 
     case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-        /** do stuff for nonexistent identity **/
+        /** realiza algo para identidad inexistente **/
         break;
 
     case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-        /** do stuff for invalid credential **/
+        /** realiza algo para credencial invalida **/
         break;
 
     case Zend_Auth_Result::SUCCESS:
-        /** do stuff for successful authentication **/
+        /** realiza algo para autenticación exitosa **/
         break;
 
     default:
-        /** do stuff for other failure **/
+        /** realiza algo para otras fallas **/
         break;
 }
 ]]>
@@ -182,40 +178,38 @@ switch ($result->getCode()) {
 
     <sect2 id="zend.auth.introduction.persistence">
 
-        <title>Identity Persistence</title>
+        <title>Persistencia de Identidad</title>
 
         <para>
-            Authenticating a request that includes authentication credentials is useful per se, but it is also
-            important to support maintaining the authenticated identity without having to present the
-            authentication credentials with each request.
+            Autenticar una petición que incluye credenciales de autenticación es util por sí mismo, pero también
+            es importante el soportar mantener la identidad autenticada sin tener que presentar las credenciales
+            de autenticación con cada petición.
         </para>
 
         <para>
-            HTTP is a stateless protocol, however, and techniques such as cookies and sessions have been
-            developed in order to facilitate maintaining state across multiple requests in server-side web
-            applications.
+            HTTP es un protocolo sin estado, sin embargo, se han desarrollado técnicas como las cookies y sesiones
+            a fin de facilitar mantener el estado a través de multiples peticiones en aplicaciones web del lado del servidor.
         </para>
 
         <sect3 id="zend.auth.introduction.persistence.default">
 
-            <title>Default Persistence in the PHP Session</title>
+            <title>Persistencia por Defecto en la Sesión PHP</title>
 
             <para>
-                 By default, <code>Zend_Auth</code> provides persistent storage of the identity from a successful
-                 authentication attempt using the PHP session. Upon a successful authentication attempt,
-                 <code>Zend_Auth::authenticate()</code> stores the identity from the authentication result into
-                 persistent storage. Unless configured otherwise, <code>Zend_Auth</code> uses a storage class named
-                 <code>Zend_Auth_Storage_Session</code>, which, in turn, uses
-                 <link linkend="zend.session">Zend_Session</link>. A custom class may instead be used by providing an
-                 object that implements <code>Zend_Auth_Storage_Interface</code> to
-                 <code>Zend_Auth::setStorage()</code>.
+                 Por defecto, <code>Zend_Auth</code> provee almacenamiento persistente de la identidad desde un intento
+                 de autenticación exitoso usando la sesión PHP. En un intento de autenticación exitoso,
+                 <code>Zend_Auth::authenticate()</code> almacena la identidad del resultado de autenticación en
+                 almacenamiento persistente. A menos que se configure diferente, <code>Zend_Auth</code> usa una clase de
+                 almacenamiento llamada <code>Zend_Auth_Storage_Session</code>, la cual, a su vez usa
+                 <link linkend="zend.session">Zend_Session</link>. Una clase diferente podría ser utilizada mediante
+                 proveer un objeto que implemente <code>Zend_Auth_Storage_Interface</code> a <code>Zend_Auth::setStorage()</code>
             </para>
 
             <note>
                 <para>
-                    If automatic persistent storage of the identity is not appropriate for a particular use case, then
-                    developers may forgo using the <code>Zend_Auth</code> class altogether, instead using an adapter
-                    class directly.
+                    Si el automático almacenamiento persistente de la identidad no es apropiado para un caso en particular,
+                    entonces los desarrolladores podrían dejar de usar la clase <code>Zend_Auth</code> al mismo tiempo,
+                    utilizando en su lugar una clase adaptadora directamente.
                 </para>
             </note>
 
@@ -224,25 +218,25 @@ switch ($result->getCode()) {
                 <title>Modifying the Session Namespace</title>
 
                 <para>
-                    <code>Zend_Auth_Storage_Session</code> uses a session namespace of <code>'Zend_Auth'</code>. This
-                    namespace may be overridden by passing a different value to the constructor of
-                    <code>Zend_Auth_Storage_Session</code>, and this value is internally passed along to the constructor
-                    of <code>Zend_Session_Namespace</code>. This should occur before authentication is attempted, since
-                    <code>Zend_Auth::authenticate()</code> performs the automatic storage of the identity.
+                    <code>Zend_Auth_Storage_Session</code> usa un espacionombre (namespace) de sesión <code>'Zend_Auth'</code>.
+                    Este espacio-nombre podría ser OVERRIDDEN al pasar un valor diferente al contructor de
+                    <code>Zend_Auth_Storage_Session</code>, y este valor es pasado internamente al constructor de
+                    <code>Zend_Session_Namespace</code>. Esto debería ocurrir antes de que se intente la autenticación, ya que
+                    <code>Zend_Auth::authenticate()</code> realiza el almacenamiento automático de la identidad.
 
                     <programlisting role="php"><![CDATA[
-// Save a reference to the Singleton instance of Zend_Auth
+// Almacena una referencia a la instancia Singleton de Zend_Auth
 $auth = Zend_Auth::getInstance();
 
-// Use 'someNamespace' instead of 'Zend_Auth'
-$auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
+// Usa 'unEspacionombre' en lugar de 'Zend_Auth'
+$auth->setStorage(new Zend_Auth_Storage_Session('unEspacionombre'));
 
 /**
  * @todo Set up the auth adapter, $authAdapter
  */
 
-// Authenticate, saving the result, and persisting the identity on
-// success
+// Autenticar, almacenando el resultado, y persistiendo la identidad en
+// suceso
 $result = $auth->authenticate($authAdapter);
 ]]>
                     </programlisting>
@@ -255,84 +249,83 @@ $result = $auth->authenticate($authAdapter);
 
         <sect3 id="zend.auth.introduction.persistence.custom">
 
-            <title>Implementing Customized Storage</title>
+            <title>Implementando Almacenamiento Personalizado</title>
 
             <para>
-                Sometimes developers may need to use different identity persistence behavior than that provided by
-                <code>Zend_Auth_Storage_Session</code>. For such cases developers may simply implement
-                <code>Zend_Auth_Storage_Interface</code> and supply an instance of the class to
+                En ocaciones los desarrolladores podrían necesitar usar un diferente comportamiento de persistencia	de identidad
+                que el provisto por <code>Zend_Auth_Storage_Session</code>. Para esos casos los desarrolladores podrían simplemente
+                implementar <code>Zend_Auth_Storage_Interface</code> y suplir una instancia de la clase a
                 <code>Zend_Auth::setStorage()</code>.
             </para>
 
             <example id="zend.auth.introduction.persistence.custom.example">
 
-                <title>Using a Custom Storage Class</title>
+                <title>Usando una Clase de Almacenamiento Personalizada</title>
 
                 <para>
-                    In order to use an identity persistence storage class other than
-                    <code>Zend_Auth_Storage_Session</code>, a developer implements
-                    <code>Zend_Auth_Storage_Interface</code>:
+                    Para poder utilizar una clase de almacenamiento persistente de identidad diferente a
+                    <code>Zend_Auth_Storage_Session</code>, el desarrollador implementa <code>Zend_Auth_Storage_Interface</code>:
 
                     <programlisting role="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
     /**
-     * Returns true if and only if storage is empty
+     * Regresa true si y solo si el almacenamiento esta vacio
      *
-     * @throws Zend_Auth_Storage_Exception If it is impossible to
-     *                                     determine whether storage
-     *                                     is empty
-     * @return boolean
+     * @arroja Zend_Auth_Storage_Exception Si es imposible
+     *                                     determinar si el almacenamiento
+     *                                     esta vacio
+     * @regresa boleano
      */
     public function isEmpty()
     {
         /**
-         * @todo implementation
+         * @por hacer implementación
          */
     }
 
     /**
-     * Returns the contents of storage
+     * Regresa el contenido del almacenamiento
      *
-     * Behavior is undefined when storage is empty.
+     * El comportamiento es indefinido cuando el almacenamiento esta vacio
      *
-     * @throws Zend_Auth_Storage_Exception If reading contents from
-     *                                     storage is impossible
-     * @return mixed
+     * @arroja Zend_Auth_Storage_Exception Si leer contenido de
+     *                                     almacenamiento es imposible
+     * @regresa mixto
      */
     public function read()
     {
         /**
-         * @todo implementation
+         * @por hacer implementación
          */
     }
 
     /**
-     * Writes $contents to storage
+     * Escribe $contents al almacenamiento
      *
-     * @param  mixed $contents
-     * @throws Zend_Auth_Storage_Exception If writing $contents to
-     *                                     storage is impossible
-     * @return void
+     * @parametros mezclado $contents
+     * @arroja Zend_Auth_Storage_Exception Si escribir $contents al
+     *                                     almacenamiento es imposible
+     * @regresa boleano
      */
     public function write($contents)
     {
         /**
-         * @todo implementation
+         * @por hacer implementación
          */
     }
 
     /**
-     * Clears contents from storage
+     * limpia contenidos del almacenamiento
      *
-     * @throws Zend_Auth_Storage_Exception If clearing contents from
-     *                                     storage is impossible
-     * @return void
+     * @arroja Zend_Auth_Storage_Exception Si limpiar contenidos del
+     *                                     almacenamiento es imposible
+     * @regresa void
      */
     public function clear()
     {
         /**
-         * @todo implementation
+         * @por hacer implementación
          */
     }
 }
@@ -342,19 +335,19 @@ class MyStorage implements Zend_Auth_Storage_Interface
                 </para>
 
                 <para>
-                    In order to use this custom storage class, <code>Zend_Auth::setStorage()</code> is invoked before an
-                    authentication query is attempted:
+                    A fin de poder usar esta clase de almacenamiento personalizada, <code>Zend_Auth::setStorage()</code>
+                    es invocada antes de intentar una petición de autenticación:
 
                     <programlisting role="php"><![CDATA[
-// Instruct Zend_Auth to use the custom storage class
+// Instruye Zend_Auth para usar la clase de almacenamiento personalizada
 Zend_Auth::getInstance()->setStorage(new MyStorage());
 
 /**
- * @todo Set up the auth adapter, $authAdapter
+ * @por hacer Configurar el adaptador de autenticación, $authAdapter
  */
 
-// Authenticate, saving the result, and persisting the identity on
-// success
+// Autenticar, almacenando el resultado, y persistiendo la identidad
+// si hay exito
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 ]]>
                     </programlisting>
@@ -369,46 +362,46 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
     <sect2 id="zend.auth.introduction.using">
 
-        <title>Using Zend_Auth</title>
+        <title>Usando Zend_Auth</title>
 
         <para>
-            There are two provided ways to use Zend_Auth adapters:
+            Hay dos formas provistas de usar adaptadores Zend_Auth:
             <orderedlist>
             <listitem>
                 <para>
-                    indirectly, through <code>Zend_Auth::authenticate()</code>
+                    indirectamente, a través de <code>Zend_Auth::authenticate()</code>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    directly, through the adapter's <code>authenticate()</code> method
+                    directamente, a través del metodo<code>authenticate()</code> del adaptador
                 </para>
             </listitem>
             </orderedlist>
         </para>
 
         <para>
-            The following example illustrates how to use a Zend_Auth adapter indirectly, through the use of
-            the <code>Zend_Auth</code> class:
+            El siguiente ejemplo ilustra como usar el adaptador Zend_Auth indirectamente, a través
+            del uso de la clase <code>Zend_Auth</code>:
 
             <programlisting role="php"><![CDATA[
-// Get a reference to the singleton instance of Zend_Auth
+// Recibe una referencia a la instancia singleton de Zend_Auth
 $auth = Zend_Auth::getInstance();
 
-// Set up the authentication adapter
+// Configura el adaptador de autenticación
 $authAdapter = new MyAuthAdapter($username, $password);
 
-// Attempt authentication, saving the result
+// Intenta la autenticación, almacenando el resultado
 $result = $auth->authenticate($authAdapter);
 
 if (!$result->isValid()) {
-    // Authentication failed; print the reasons why
+    // Fautenticación fallida: imprime el por que
     foreach ($result->getMessages() as $message) {
         echo "$message\n";
     }
 } else {
-    // Authentication succeeded; the identity ($username) is stored
-    // in the session
+    // Autenticación exitosa, la identidad ($username) es almacenada
+    // en la sesión
     // $result->getIdentity() === $auth->getIdentity()
     // $result->getIdentity() === $username
 }
@@ -417,12 +410,12 @@ if (!$result->isValid()) {
         </para>
 
         <para>
-            Once authentication has been attempted in a request, as in the above example, it is a simple
-            matter to check whether a successfully authenticated identity exists:
+            Una vez que la autenticación ha sido intentada en una petición, como en el ejemplo anterior,
+            es fácil verificar si existe una identidad autenticada exitosamente:
             <programlisting role="php"><![CDATA[
 $auth = Zend_Auth::getInstance();
 if ($auth->hasIdentity()) {
-    // Identity exists; get it
+    // Existe la identidad; obtenla
     $identity = $auth->getIdentity();
 }
 ]]>
@@ -430,8 +423,8 @@ if ($auth->hasIdentity()) {
         </para>
 
         <para>
-            To remove an identity from persistent storage, simply use the <code>clearIdentity()</code> method.
-            This typically would be used for implementing an application "logout" operation:
+            Para remover una identidad del almacenamiento persistente, simplemente usa el metodo <code>clearIdentity()</code>method.
+            Comunmente esto sería usado para implementar una operación "cerrar sesión" en la aplicación:
             <programlisting role="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
 ]]>
@@ -439,27 +432,27 @@ Zend_Auth::getInstance()->clearIdentity();
         </para>
 
         <para>
-            When the automatic use of persistent storage is inappropriate for a particular use case, a
-            developer may simply bypass the use of the <code>Zend_Auth</code> class, using an adapter class
-            directly. Direct use of an adapter class involves configuring and preparing an adapter object and
-            then calling its <code>authenticate()</code> method. Adapter-specific details are discussed in the
-            documentation for each adapter. The following example directly utilizes
-            <code>MyAuthAdapter</code>:
+            Cuando el uso automático de almacenamiento persistente es inapropiado para un caso en particular,
+            el desarrollador podría simplemente omitir el uso de la clase <code>Zend_Auth</code>, usando una
+            clase adaptadora directamente. El uso directo de una clase adaptadora implica configurar y preparar
+            un objeto adaptador y despues llamar a su metodo <code>authenticate()</code>. Los detalles específicos
+            del adaptador son discutidos en la documentación de cada adaptador. El siguiente ejemplo utiliza
+            directamente <code>MyAuthAdapter</code>:
 
             <programlisting role="php"><![CDATA[
-// Set up the authentication adapter
+// Configura el adaptador de autenticación
 $authAdapter = new MyAuthAdapter($username, $password);
 
-// Attempt authentication, saving the result
+// Intenta la autenticación, almacenando el resultado
 $result = $authAdapter->authenticate();
 
 if (!$result->isValid()) {
-    // Authentication failed; print the reasons why
+    // Autenticación fallida, imprime el porque
     foreach ($result->getMessages() as $message) {
         echo "$message\n";
     }
 } else {
-    // Authentication succeeded
+    // Autenticación exitosa
     // $result->getIdentity() === $username
 }
 ]]>

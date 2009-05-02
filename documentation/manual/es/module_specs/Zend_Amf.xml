@@ -1,31 +1,31 @@
 ﻿<sect1 id="zend.amf.introduction">
-    <title>IntroducciР“С–n</title>
+    <title>Introducción</title>
 
     <para>
         <code>Zend_Amf</code>
         provee apoyo para el Formato de Mensajes de ActionScript
         <ulink url="http://en.wikipedia.org/wiki/Action_Message_Format">Action
             Message Format</ulink>
-        (AMF) de Adobe, que permite la comunicaciР“С–n
+        (AMF) de Adobe, que permite la comunicación
         entre Adobe
         <ulink url="http://en.wikipedia.org/wiki/Adobe_Flash_Player">Flash
             Player</ulink>
-        y PHP. EspecР“В­ficamente, proporciona una aplicaciР“С–n
+        y PHP. Específicamente, proporciona una aplicación
         para un
         servidor gateway que tramita las solicitudes enviadas desde
         Flash Player al servidor, mapeando estos requerimientos
-        al objeto y a sus mР“В©todos de clase, como asР“В­ tambiР“В©n a llamadas
-        arbitrarias de comunicaciР“С–n.
+        al objeto y a sus métodos de clase, como así también a llamadas
+        arbitrarias de comunicación.
     </para>
 
     <para>
         Las
-        <ulink
+        <ulink>
             url="http://download.macromedia.com/pub/labs/amf/amf3_spec_121207.pdf">
         </ulink>
         especificaciones
-        (en inglР“В©s) de AMF3 son de libre disponibilidad y sirven como referencia
-        para establecer quР“В© tipos de mensajes
+        (en ingles) de AMF3 son de libre disponibilidad y sirven como referencia
+        para establecer qué tipos de mensajes
         pueden ser enviados entre Flash Player y el servidor.
     </para>
 </sect1>

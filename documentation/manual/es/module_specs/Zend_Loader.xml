@@ -220,7 +220,7 @@ Zend_Loader::registerAutoload('My_Loader');
         </example>
 
         <para>
-            Se puede eliminar un callback de autoload.
+            Se puede eliminar un callback de autoload. 
             <code>registerAutoload()</code> tiene un segundo parámetro opcional,
             que es <code>true</code> por defecto. Si este parámetro es
             <code>false</code>, el callback de autoload será borrado de la pila

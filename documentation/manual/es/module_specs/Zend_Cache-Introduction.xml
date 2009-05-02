@@ -158,7 +158,7 @@ $cache = Zend_Cache::factory('Output',
                              $frontendOptions,
                              $backendOptions);
 
-// Pasamos un identificador único al método start() 
+// Pasamos un identificador único al método start()
 if(!$cache->start('mypage')) {
     // salida como de costumbre:
 
@@ -190,7 +190,7 @@ echo 'Esto no estará en caché nunca ('.time().').';
     <note>
         <para>
             Cuando usamos Zend_Cache, ponemos atención a la importación
-            del identificador caché (pasado a 
+            del identificador caché (pasado a
             <code>save()</code>
             y
             <code>start()</code>

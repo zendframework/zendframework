@@ -8,7 +8,7 @@
         <xref linkend="zend.db.adapter" />, puede usarse un objeto de declaración
         para obtener más opciones al ejecutar consultas y devolver conjuntos de
         resultados. Esta sección describe cómo obtener una instancia de un
-        objeto de declaración y como usar sus métodos.
+        objeto de declaración y cómo usar sus métodos.
     </para>
 
     <para>
@@ -43,7 +43,7 @@ $stmt = $db->query(
 
         <para>
             El objeto de declaración corresponde a una declaración SQL que ha
-            sido preparada, y ejecutada una vez con valores vinculados
+            sido preparada y ejecutada una vez con valores vinculados
             especificados.
             Si la declaración fue una consulta SELECT u otro tipo de declaración
             que devuelve un conjunto de resultados, ahora estará lista para
@@ -51,7 +51,7 @@ $stmt = $db->query(
         </para>
 
         <para>
-            Puede crear una declaración con su constructor, pero este es un
+            Puede crear una declaración con su constructor, pero éste es un
             uso menos típico. No hay un método factory para crear el objeto,
             así que es necesario cargar una clase de declaración específica y llamar a su constructor.
             Pase el objeto Adaptador como el primer parámetro, y un string
@@ -138,15 +138,15 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         <para>
             Puede llamar a métodos del objeto de declaración para obtener filas
             desde declaraciones SQL que producen conjuntos de resultados.
-
+         
             SELECT, SHOW, DESCRIBE y EXPLAIN son ejemplos de declaraciones que
             producen un conjunto de resultados.
             INSERT, UPDATE, and DELETE son ejemplo de declaraciones que
             no producen un conjunto de resultados.
-
+         
             Puede ejecutar las últimas declaraciones de SQL usando
             Zend_Db_Statement, pero no puede llamar a los métodos que extraen
-            filas de resultados desde este.
+            filas de resultados desde éste.
         </para>
 
         <sect3 id="zend.db.statement.fetching.fetch">
@@ -163,7 +163,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <listitem>
                     <para>
                         <emphasis role="strong">Estilo de Extracción</emphasis>
-                        es el primer parámetro.  Éste controla la estructura
+                        es el primer parámetro. Éste controla la estructura
                         en la que será devuelta la fila.
                         Vea <xref linkend="zend.db.adapter.select.fetch-mode" />
                         para la descripción de un valor válido los
@@ -300,7 +300,7 @@ echo $rows[0][0];
                 Para devolver una única columna de la siguiente fila del
                 conjunto de resultados, use <code>fetchColumn()</code>. El
                 parámetro opcional es el índice de la columna (integer), y por
-                defecto es 0.  Este método devuelve un valor escalar, o
+                defecto es 0. Este método devuelve un valor escalar, o
                 <code>false</code> si todas las filas del conjunto de resultados
                 han sido extraídas.
             </para>
@@ -341,7 +341,7 @@ $bug_status = $stmt->fetchColumn(2);
                 <code>fetchObject()</code>.  Este método tiene 2 parámetros
                 opcionales. El primer parámetro es un string con el nombre de
                 la clase del objeto que devolver; por defecto será 'stdClass'. El segundo
-                parámetro es un array de valores que serán pasados al
+                parámetro es un array de valores que será pasado al
                 constructor de la clase.
             </para>
 

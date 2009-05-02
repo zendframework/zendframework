@@ -1,4 +1,4 @@
-<sect1 id="zend.db.select">
+﻿<sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
 
@@ -9,21 +9,21 @@
         <para>
             El objeto Zend_Db_Select object representa una declaración de consulta
             <code>SELECT</code> de SQL. La clase tiene métodos para agregar partes
-            individuales a la consulta. Puedes especificar algunas partes de la consulta
+            individuales a la consulta. Se pueden especificar algunas partes de la consulta
             usando los métodos en PHP y sus estructuras de datos, y la clase forma la sintaxis
-            SLQ correcta. Despues de construir la consulta, puedes ejecutarla como si
+            SLQ correcta. Después de construir la consulta, puede ejecutarla como si
             se hubiera escrito como un string.
         </para>
 
         <para>
-            El valor entregado por Zend_Db_Select incluye:
+            Las posibilidades de Zend_Db_Select incluyen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     Métodos Orientados a objetos para especificar consultas SQL
-                    de manera pieza-a-pieza;
+                    pieza-a-pieza;
                 </para>
             </listitem>
 
@@ -45,7 +45,7 @@
             <listitem>
                 <para>
                     Entrecomillado de identificadores y valores, para ayudar a reducir el
-                    riesgo de ataque de inyección SQL.
+                    riesgo de ataque por inyección SQL.
                 </para>
             </listitem>
         </itemizedlist>
@@ -54,8 +54,8 @@
             El uso de Zend_Db_Select no es obligatorio. Para consultas SELECT muy simples,
             es usualmente más simple especificar la consulta completa como un string
             y ejecutarla usando un método del Adapter como <code>query()</code> o
-            <code>fetchAll()</code>. Usar Zend_Db_Select es util si se necesita ensamblar
-            una consulta SELECT proceduralmente, o basado en condiciones lógicas en
+            <code>fetchAll()</code>. Usar Zend_Db_Select es útil si se necesita ensamblar
+            una consulta SELECT proceduralmente, o basada en condiciones lógicas en
             la aplicación.
         </para>
 
@@ -66,7 +66,7 @@
         <title>Creando un Objeto Select</title>
 
         <para>
-            Puedes crear un a instancia del objeto Zend_Db_Select usando el método
+            Se puede crear una instancia del objeto Zend_Db_Select usando el método
             <code>select()</code> de un objeto Zend_Db_Adapter_Abstract.
         </para>
 
@@ -105,8 +105,8 @@ $select = new Zend_Db_Select($db);
 
         <title>Construyendo consultas Select</title>
 
-        <para>Cuando se construye una consulta, puede agregar clausulas a esta, una por una.
-            Hay un método separado para agregar cada al objeto Zend_Db_Select.</para>
+        <para>Cuando se construye una consulta, puede agregar cláusulas a ésta, una por una.
+            Hay un método separado para agregar cada una al objeto Zend_Db_Select.</para>
 
         <example id="zend.db.select.building.example">
 
@@ -129,9 +129,9 @@ $select->order( ...specify sorting criteria... );
 
         </example>
 
-        <para>También puede utilizar la mayoría de los métodos del objeto Zend_Db_Select con una 
-            interfaz fluida. Una interfaz fluida significa que cada método retorna una referencia
-            al objeto que se ha llamado, así puedes llamar inmediatamente a otro método.</para>
+        <para>También puede utilizar la mayoría de los métodos del objeto Zend_Db_Select con una
+        interfaz fluida. Una interfaz fluida significa que cada método devuelve una referencia
+            al objeto que se ha llamado, así se puede llamar inmediatamente a otro método.</para>
 
         <example id="zend.db.select.building.example-fluent">
 
@@ -148,7 +148,7 @@ $select = $db->select()
         </example>
 
         <para>Los ejemplos en esta sección muestran el uso de la interfaz fluída, pero también
-            puedes usar la interfaz no-fluída en todos los casos. A menudo es necesario
+            se puede usar la interfaz no-fluída en todos los casos. A menudo es necesario
             utilizar la interfaz no-fluída, por ejemplo, si su aplicación necesita realizar
             cierta lógica antes de añadir una cláusula a la consulta.</para>
 
@@ -157,10 +157,10 @@ $select = $db->select()
             <title>Agregando una cláusula FROM</title>
 
             <para>
-                Especifica la tabla para esta consulta usando el método <code>from()</code>.
-                Puedes especificar el nombre de la tabla  como un simple string. Zend_Db_Select
-                aplica el identificador entrecomillando el nombre de la tabla, así puedes
-                usar caracteres especiales.
+                Especifique la tabla para esta consulta usando el método <code>from()</code>.
+                Se puede especificar el nombre de la tabla como un string. Zend_Db_Select
+                aplica el identificador entrecomillando el nombre de la tabla, así puede
+                utilizar caracteres especiales.
             </para>
 
             <example id="zend.db.select.building.from.example">
@@ -180,21 +180,21 @@ $select = $db->select()
             </example>
 
             <para>
-                Puedes especificar un nombre correlacionado (también llamado a veces
-                "alias de tabla") para una tabla. En lugar de un simple string, se usa un
-                array asociativo que mapee el nombre de la correlación con el nombre de la tabla.
-                En otras cláusulas de consulta SQL, se usa esta correlación de nombre.
-                si su consulta se une con más de una tabla, Zend_Db_Select generatiza una
+                Puede especificar un nombre de correlación (también llamado a veces
+                "alias de tabla") para una tabla. En lugar de un string, se usa un
+                array asociativo que mapee el nombre de correlación con el nombre de la tabla.
+                En otras cláusulas de consulta SQL, utilice nombre de correlación.
+                Si su consulta se une con más de una tabla, Zend_Db_Select genera una
                 correlación unica de nombres basados en el nombre de la tabla, para una tabla
-                a la cual no se le espicifique un nombre correlacionado.
+                a la cual no se le espicifique un nombre de correlación.
             </para>
 
             <example id="zend.db.select.building.from.example-cname">
 
-                <title>Ejemplo especificando una tabla con nombre correlacionado</title>
+                <title>Ejemplo especificando una tabla con nombre de correlación</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p.*
 //   FROM "products" AS p
 
@@ -207,7 +207,7 @@ $select = $db->select()
 
             <para>
                 Algunos RDBMS apoyan el uso de un especificador de esquema para una tabla.
-                Puedes especificar el nombre de la tabla como
+                Puede especificar el nombre de la tabla como
                 "<code>nombreDeEsquema.nombre DeTabla</code>", donde Zend_Db_Select entrecomillará
                 cada parte individualmente, o tambien puedes especificar el nombre de esquema
                 por separado. Un nombre de esquema especificado en el nombre de la tabla toma
@@ -220,7 +220,7 @@ $select = $db->select()
                 <title>Ejemplo especificando un nombre de esquema</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT *
 //   FROM "myschema"."products"
 
@@ -243,32 +243,32 @@ $select = $db->select()
             <title>Agregando Columnas</title>
 
             <para>
-                En el segundo argumento del método <code>from()</code>, puedes especificar
-                las columnas a seleccionar desde la respectiva tabla.
-                Si no especificas columns, por defecto será "<code>*</code>",
+                En el segundo argumento del método <code>from()</code>, puede especificar
+                las columnas que seleccionar desde la tabla respectiva.
+                Si no especifica columnas, por defecto será "<code>*</code>",
                 el comodín SQL para "todas las columnas".
             </para>
 
             <para>
-                Puedes listar las columnas en un simple array de strings, o en un
+                Puede listar las columnas en un simple array de strings, o en un
                 array asociativo mapeando los alias de columnas a su nombre de tabla.
-                Si solo se especifica una columna en la consulta y no necesitas especificar un
-                alias de columna, puedes listarla solo con un string plano de lugar de un array.
+                Si solo se especifica una columna en la consulta y no necesita especificar un
+                alias de columna, puede listarla solo con un string en lugar de un array.
             </para>
 
             <para>
                 Si se entrega un array vacío como el argumento de las tablas, no se incluirán
                 columnas en el resultado. Vea un
-                <link linkend="zend.db.select.building.join.example-no-columns">codigo de ejemplo</link>
-                bajo la sección del método <code>join()</code>.
+                <link linkend="zend.db.select.building.join.example-no-columns">código de ejemplo</link>
+                en la sección del método <code>join()</code>.
             </para>
 
             <para>
                 Puedes especificar el nombre de columna como
                 "<code>nombreCorrelacionado.nombreDeColumna</code>".
-                Zend_Db_Select entrecomullará cada parte individualmente. Si no especificas
-                un nombre correlacionado para una columna, se usará el nombre correlacionado
-                para la tabla nombrada en el actual método <code>from()</code>.
+                Zend_Db_Select entrecomillará cada parte individualmente. Si no especifica
+                un nombre de correlación para una columna, se usará el nombre de correlación
+                para la tabla nombrada en el método actual <code>from()</code>.
             </para>
 
             <example id="zend.db.select.building.columns.example">
@@ -284,7 +284,7 @@ $select = $db->select()
              ->from(array('p' => 'products'),
                     array('product_id', 'product_name'));
 
-// Construir la misma consulta, especificando nombres correlacionados:
+// Construir la misma consulta, especificando nombres de correlación
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 
@@ -312,12 +312,12 @@ $select = $db->select()
 
             <para>
                 Las columnas en consultas SQL a veces son expresiones, no simples columnas
-                de una tabla. Las expresiones no deberían tener nombres correlacionados o entrecomillado aplicado.
-                Si sus columnas contienen parentesis, Zend_Db_Select las reconoce como una expresión.
+                de una tabla. Las expresiones no deberían tener nombres de correlación o entrecomillado aplicado.
+                Si sus columnas contienen paréntesis, Zend_Db_Select las reconoce como una expresión.
             </para>
 
             <para>
-                Tambien puedes crear un objeto de tipo Zend_Db_Expr explícitamente, para prevenir
+                Tambien puede crear un objeto de tipo Zend_Db_Expr explícitamente, para prevenir
                 que el string sea tratado como columna. Zend_Db_Expr es una clase mínima, que contiene
                 un simple string. Zend_Db_Select reconoce el objeto de tipo Zend_Db_Expr y
                 lo convierte de vuelta en el string, pero no le aplica ninguna alteración,
@@ -328,8 +328,8 @@ $select = $db->select()
 
                 <para>
                     El Uso de Zend_Db_Expr para nombres de columnas no es necesario si
-                    la expresión de la columna contiene parentesis; Zend_Db_Select reconoce
-                    y trata el string como expresión, saltándose el entrcomillado y la
+                    la expresión de la columna contiene paréntesis; Zend_Db_Select reconoce
+                    y trata el string como expresión, saltándose el entrecomillado y la
                     correlación de nombres.
                 </para>
 
@@ -340,7 +340,7 @@ $select = $db->select()
                 <title>Ejemplos especificando columnas que contienen expresiones</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", LOWER(product_name)
 //   FROM "products" AS p
 // Una expresion con parentesis implicitamente se transforma en
@@ -350,7 +350,7 @@ $select = $db->select()
              ->from(array('p' => 'products'),
                     array('product_id', 'LOWER(product_name)'));
 
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", (p.cost * 1.08) AS cost_plus_tax
 //   FROM "products" AS p
 
@@ -360,7 +360,7 @@ $select = $db->select()
                           'cost_plus_tax' => '(p.cost * 1.08)')
                    );
 
-// Construye esta consulta usando Zend_Db_Expr explícitamente:
+// Construya esta consulta usando Zend_Db_Expr explícitamente:
 //   SELECT p."product_id", p.cost * 1.08 AS cost_plus_tax
 //   FROM "products" AS p
 
@@ -408,7 +408,7 @@ $select = $db->select()
                 <title>Ejemplo de entrecomillado de columnas en una expresión</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta, entrecomillando el nombre
+// Construya esta consulta, entrecomillando el nombre
 // especial de la columna llamada "from" en la expresión:
 //   SELECT p."from" + 10 AS origin
 //   FROM "products" AS p
@@ -483,7 +483,7 @@ $select = $db->select()
                 <title>Ejemplo del método join()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", p."product_name", l.*
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
@@ -533,7 +533,7 @@ $select = $db->select()
                 <title>Ejemplo especificando ninguna columna</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
@@ -556,7 +556,7 @@ $select = $db->select()
 
             <para>
                 SQL tiene muchos tipos de uniones. Vea una lista a continuación para los métodos
-                que soportan cada tipo de unión en Zend_Db_Select.
+                que soporta cada tipo de unión en Zend_Db_Select.
             </para>
 
             <itemizedlist>
@@ -568,9 +568,9 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Esta es el tipo de unión más comun. Las filas de cada tabla son comparadas
+                        Éste es el tipo de unión más comun. Las filas de cada tabla son comparadas
                         usando la condición de unión especificada. El resultado incluye solo las filas
-                        que satisfacen la condición. El resultado puede ser vacio si no hay filas que
+                        que satisfacen la condición. El resultado puede ser vacío si no hay filas que
                         satisfagan la condición.
                     </para>
 
@@ -586,10 +586,10 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Todas las filas de tabla a la izquierda del operando son incluídas,
+                        Todas las filas de tabla a la izquierda del operando son incluidas,
                         pareando las filas de la tabla a la derecha del operando,
                         y las columnas de la tabla a la derecha del operando son rellenadas con
-                        NULLs si no existen filas que calcen con la tabla a la izquierda.
+                        NULLs si no existen filas que coincidan con la tabla a la izquierda.
                     </para>
 
                     <para>
@@ -604,16 +604,16 @@ $select = $db->select()
                     </para>
 
                     <para>
-                        Unión exterior por la derecha es un complemento de la unión exterior por la
-                        izquierda. Todas las filas de la tabla a la derecha del operando son incluídos,
-                        pareando las filas de la tabla a la izquierda del operando incluídos, y las
+                        Unión exterior por la derecha es el complementario de la unión exterior por la
+                        izquierda. Todas las filas de la tabla a la derecha del operando son incluidas,
+                        pareando las filas de la tabla a la izquierda del operando incluidas, y las
                         columnas de la tabla a la izquierda del operando son rellenadas con NULLs si
-                        no existen filas que calcen con la tabla de la derecha.
+                        no existen filas que coincidan con la tabla de la derecha.
                     </para>
 
                     <para>
-                        Algunos RDBMS no soportan'este tipo de join, pero en general, cualquier unión
-                        por la derecha puede representarse por una unión por la derecha invirtiendo
+                        Algunos RDBMS no soportan este tipo de join, pero en general, cualquier unión
+                        por la derecha puede representarse por una unión por la izquierda invirtiendo
                         el orden de las tablas.
                     </para>
                 </listitem>
@@ -627,9 +627,9 @@ $select = $db->select()
                     <para>
                         Una unión externa total es como una combinación de una unión exterior por
                         la izquierda y una unión exterior por la derecha.
-                        Todas las filas de ambas tablas son incluídas, vinculadas entre sí
-                        en la  misma fila si estos satisfacen la condición de unión, y en otro
-                        caso se vinculan con valores nulos en lugar de columnas de la otra tabla.
+                        Todas las filas de ambas tablas son incluidas, vinculadas entre sí
+                        en la  misma fila si satisfacen la condición de unión, y en otro
+                        caso, se vinculan con valores nulos en lugar de columnas de la otra tabla.
                     </para>
 
                     <para>
@@ -648,7 +648,7 @@ $select = $db->select()
                         es pareada con cada una en la segunda tabla.
                         Por lo tanto, el número de filas en el resultado es igual al producto del
                         número de filas en cada tabla.
-                        Puede filtrar el conjunto de resultados con el uso de condiciones en una
+                        Puede filtrar el conjunto de resultados con el uso de condiciones en un
                         cláusula WHERE; de esta forma una unión cruzada es similar a la antigua
                         sintaxis de unión en SQL-89.
                     </para>
@@ -680,10 +680,10 @@ $select = $db->select()
             </itemizedlist>
 
             <para>
-                Además de los métodos de unión, puedes simplificar las consultas
+                Además de los métodos de unión, puede simplificar las consultas
                 usando métodos JoinUsing. En vez de proveer una condición completa a la unión,
-                simplemente pasas el nombre de columna en la que se hará la uninón y
-                el objeto Zend_Db_Select completa la condición por ti.
+                simplemente pase el nombre de columna en la que se hará la unión y
+                el objeto Zend_Db_Select completa la condición.
             </para>
 
             <example id="zend.db.select.building.joinusing.example">
@@ -691,7 +691,7 @@ $select = $db->select()
                 <title>Ejemplo de método joinUsing()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT *
 //   FROM "table1"
 //   JOIN "table2"
@@ -708,7 +708,7 @@ $select = $db->select()
 
             <para>
                 Cada uno de los métodos aplicables para uniones en el componente
-                Zend_Db_Select tiene su correspondiente método 'usando'.
+                Zend_Db_Select tiene su correspondiente método 'using' (usando)
             </para>
 
             <itemizedlist>
@@ -756,7 +756,7 @@ $select = $db->select()
                 <title>Ejemplo del método where()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT product_id, product_name, price
 //   FROM "products"
 //   WHERE price > 100.00
@@ -773,7 +773,7 @@ $select = $db->select()
 
                 <para>
                     No se aplica entrecomillado en una expresión dada en el método <code>where()</code> u
-                    <code>orWhere()</code>. Si tienes nombres de columnas que necesitan ser entrecomillada,
+                    <code>orWhere()</code>. Si tiene nombres de columnas que necesitan ser entrecomillados,
                     debe usar el método <code>quoteIdentifier()</code> para formar el string de la condición.
                 </para>
 
@@ -781,15 +781,15 @@ $select = $db->select()
 
             <para>
                 El segundo argumento del método <code>where()</code> es opcional.
-                Es un valor a sustituir en la expresión. Zend_Db_Select entrecomilla el valor
-                y sustituye por un signo de interrogación ("<code>?</code>") en la expresión.
+                Es un valor para sustituir en la expresión. Zend_Db_Select entrecomilla el valor
+                y lo sustituye por un signo de interrogación ("<code>?</code>") en la expresión.
             </para>
 
             <para>
-                Este método acepta solo un parámetro. Si tienes una expresión
-                en la cual necesitas sustituir multiples variables, deberás formar
+                Este método acepta solo un parámetro. Si tiene una expresión
+                en la cual necesita sustituir múltiples variables, deberá formar
                 el string manualmente, interpolando variables y realizando entrecomillado
-                tu mismo.
+                manualmente.
             </para>
 
             <example id="zend.db.select.building.where.example-param">
@@ -797,7 +797,7 @@ $select = $db->select()
                 <title>Ejemplo de parámetro en el método where()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT product_id, product_name, price
 //   FROM "products"
 //   WHERE (price > 100.00)
@@ -814,17 +814,17 @@ $select = $db->select()
             </example>
 
             <para>
-                Puedes invocar el método <code>where()</code> multiples veces en el mismo objeto
-                Zend_Db_Select. La consulta resultante combina los multiples terminos
-                juntos usando <code>AND</code> entre ellos.
+                Puede invocar el método <code>where()</code> múltiples veces en el mismo objeto
+                Zend_Db_Select. La consulta resultante combina los términos multiples
+                usando <code>AND</code> entre ellos.
             </para>
 
             <example id="zend.db.select.building.where.example-and">
 
-                <title>Ejemplo de multiples métodos where()</title>
+                <title>Ejemplo de métodos where() múltiples</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT product_id, product_name, price
 //   FROM "products"
 //   WHERE (price > 100.00)
@@ -844,9 +844,9 @@ $select = $db->select()
             </example>
 
             <para>
-                Si necesitas combinar terminos juntos uando <code>OR</code>, use el método
-                <code>orWhere()</code>. Este mñetodo se usa del mismo modo que el método
-                <code>where()</code>, excepto que el termino especificado es precedido por
+                Si necesita combinar terminos usando<code>OR</code>, use el método
+                <code>orWhere()</code>. Este método se usa del mismo modo que el método
+                <code>where()</code>, excepto que el término especificado es precedido por
                 <code>OR</code>, en lugar de <code>AND</code>.
             </para>
 
@@ -855,7 +855,7 @@ $select = $db->select()
                 <title>Ejemplo del método orWhere()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT product_id, product_name, price
 //   FROM "products"
 //   WHERE (price < 100.00)
@@ -876,17 +876,17 @@ $select = $db->select()
 
             <para>
                 Zend_Db_Select automáticamente pone paréntesis alrededor de cada expresión
-                que especifiques usandp el método <code>where()</code> u <code>orWhere()</code>.
+                que especifique usando el método <code>where()</code> u <code>orWhere()</code>.
                 Esto ayuda a asegurar que la precedencia del operador Booleano no cause resultados
                 inesperados.
             </para>
 
             <example id="zend.db.select.building.where.example-parens">
 
-                <title>Ejemplos de Expresiones Booleanas con parentesis</title>
+                <title>Ejemplos de Expresiones Booleanas con paréntesis</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT product_id, product_name, price
 //   FROM "products"
 //   WHERE (price < 100.00 OR price > 500.00)
@@ -908,9 +908,9 @@ $select = $db->select()
 
             <para>
                 En el ejemplo anterior, los resultados deberían ser diferentes sin paréntesis,
-                porque <code>AND</code> tiene alta precedencia respecto a <code>OR</code>.
+                porque <code>AND</code> tiene precedencia más alta respecto a <code>OR</code>.
                 Zend_Db_Select aplica el parentesis con un efecto tal que la expresión en sucesivas
-                llamadas al método <code>where()</code> vincule más estrechamente el <code>AND</code>
+                llamadas al método <code>where()</code> vincula de forma más fuerte el <code>AND</code>
                 que combina las expresiones.
             </para>
 
@@ -928,7 +928,7 @@ $select = $db->select()
             </para>
 
             <para>
-                En Zend_Db_Select, puedes especificar la(s) columna(s) a usar para el
+                En Zend_Db_Select, puede especificar la(s) columna(s) que usar para el
                 cálculo de grupos de filas usando el método <code>group()</code>.
                 El argumento de este método es una columna o un array de columnas
                 que se usarán en la cláusula <code>GROUP BY</code>.
@@ -936,10 +936,10 @@ $select = $db->select()
 
             <example id="zend.db.select.building.group.example">
 
-                <title>Ejemplo del método groups group()</title>
+                <title>Ejemplo del método group()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
@@ -958,8 +958,8 @@ $select = $db->select()
             </example>
 
             <para>
-                Como el array de columnas del método <code>from()</code>, peudes usar
-                correlación de nombres en el string de nombre de columna, y la conlumna será
+                Como el array de columnas del método <code>from()</code>, se puede usar
+                correlación de nombres en el string de nombre de columna, y la columna será
                 entrecomillada como un identificador, salvo que el string contenga paréntesis
                 o sea un objeto de tipo Zend_Db_Expr.
             </para>
@@ -980,14 +980,14 @@ $select = $db->select()
             </para>
 
             <para>
-                En Zend_Db_Select, puedes especificar condiciones para restringir
+                En Zend_Db_Select, puede especificar condiciones para restringir
                 grupos usando el método <code>having()</code>. Su uso es similar al
                 del método <code>where()</code>. El primer agumento es un string
                 conteniendo una expresión SQL. El segundo argumento es un valor
                 que es usado para reemplazar un parámetro marcador de posición en la
                 expresión SQL. Las expresiones dadas en multiples invocaciones al método
-                <code>having()</code> son combinados usando el operador Booleano
-                <code>AND</code>, o el operador <code>OR</code> si usas el método
+                <code>having()</code> son combinadas usando el operador Booleano
+                <code>AND</code>, o el operador <code>OR</code> si usa el método
                 <code>orHaving()</code>.
             </para>
 
@@ -996,7 +996,7 @@ $select = $db->select()
                 <title>Ejemplo del método having()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
@@ -1020,8 +1020,8 @@ $select = $db->select()
 
                 <para>
                     No se aplica entrecomillado a expresiones dadas al método <code>having()</code> u
-                    <code>orHaving()</code>. Si tienes nombres de columnas que deban ser
-                    entrecomillados, deberás usar <code>quoteIdentifier()</code> para
+                    <code>orHaving()</code>. Si tiene nombres de columnas que deban ser
+                    entrecomillados, deberá usar <code>quoteIdentifier()</code> para
                     formar el string de la condición.
                 </para>
 
@@ -1038,17 +1038,17 @@ $select = $db->select()
                 columnas o expresiones por el cual el resultado de la consulta
                 será ordenado. Si multiples columnas son listadas, las columnas secundarias
                 serán usadas para resolver relaciones; el orden de clasificación es determinado
-                por columnas secundarias si la columna anterior contiene valores identicos.
-                El orden por defecto es del menor valor al mayor valor. Puedes también
+                por columnas secundarias si la columna anterior contiene valores idénticos.
+                El orden por defecto es del menor valor al mayor valor. Puede también
                 ordenar de mayor a menor valor para una columna dada en la lista espeificando
-                la palabra clave <code>DESC</code> despues de la columna.
+                la palabra clave <code>DESC</code> después de la columna.
             </para>
 
             <para>
-                En Zend_Db_Select, puedes usar el método el método <code>order()</code>
+                En Zend_Db_Select, puede usar el método <code>order()</code>
                 para especificar una columna o un array de columnas por el cual ordenar.
                 Cada elemento del array es un string nombrando la columna. Opcionalmente con la
-                palabra reservada <code>ASC</code> o <code>DESC</code> siguiendola, deparada
+                palabra reservada <code>ASC</code> o <code>DESC</code> siguiendola, separada
                 por un espacio.
             </para>
 
@@ -1063,7 +1063,7 @@ $select = $db->select()
                 <title>Ejemplo del método order()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", COUNT(*) AS line_items_per_product
 //   FROM "products" AS p JOIN "line_items" AS l
 //     ON p.product_id = l.product_id
@@ -1093,16 +1093,16 @@ $select = $db->select()
             <para>
                 Algunos RDBMS extienden una consulta SQL con una cláusula conocida como <code>LIMIT</code>.
                 Esta cláusuala reduce el número de filas en el resultado a no más de un número
-                especificado. También puedes especificar saltar el número de filas antes
+                especificado. También puede especificar saltar el número de filas antes
                 de empezar la salida. Esta característica hace más fácil tomar un subconjunto de
                 resultados, por ejemplo cuando mostramos los resultados de una consulta en
-                progresivas páginas de salida.
+                páginas progresivas de salida.
             </para>
 
             <para>
-                En Zend_Db_Select, puedes usar el método <code>limit()</code> para especificar
-                la cantidad de filas y el número de filas a saltar. El primer argumento es
-                el método es el número de filas deseado. El segundo argument es el númerp de filas a saltar.
+                En Zend_Db_Select, puede usar el método <code>limit()</code> para especificar
+                la cantidad de filas y el número de filas que saltar. El primer argumento es
+                el método es el número de filas deseado. El segundo argument es el número de filas que saltar.
             </para>
 
             <example id="zend.db.select.building.limit.example">
@@ -1110,7 +1110,7 @@ $select = $db->select()
                 <title>Ejemplo del método limit()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 //   LIMIT 10, 20
@@ -1128,7 +1128,7 @@ $select = $db->select()
 
                 <para>
                     La sintaxis de <code>LIMIT</code> no está soportada por todos los RDBMS brands.
-                    Algunos RDBMS requieren diferente sintaxis para soportar una funcionalidad simialr.
+                    Algunos RDBMS requieren diferente sintaxis para soportar una funcionalidad similar
                     Cada clase Zend_Db_Adapter_Abstract incluye un método
                     para producir el SQL apropiado para cada RDBMS.
                 </para>
@@ -1136,12 +1136,12 @@ $select = $db->select()
             </note>
 
             <para>
-                Use el método <code>limitPage()</code> como un modo alternativa de
-                especificar la cantidad de filas y compensación.
+                Use el método <code>limitPage()</code> como un modo alternativo de
+                especificar la cantidad de filas y el offset.
                 Este método permite limitar el conjunto resultado a una serie de subconjuntos
                 de tamaño fijo de filas del total del resultado de la consulta.
-                En otras palabras, puedes especificar el tamaño de una "página" de resultados,
-                y el número ordinal de la página simple donde se espera que retorne la consulta.
+                En otras palabras, puede especificar el tamaño de una "página" de resultados,
+                y el número ordinal de la página simple donde se espera que devuelva la consulta.
                 El número de página es el primer argumento del método <code>limitPage()</code>,
                 y la longitud de la página es el segundo argumento.
                 Ambos son argumentos requeridos; no tienen valores por omisión.
@@ -1152,7 +1152,7 @@ $select = $db->select()
                 <title>Ejemplo del método limitPage()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 //   LIMIT 10, 20
@@ -1182,7 +1182,7 @@ $select = $db->select()
                 <title>Ejemplo del método distinct()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT DISTINCT p."product_name"
 //   FROM "products" AS p
 
@@ -1210,7 +1210,7 @@ $select = $db->select()
                 <title>Example of forUpdate() method</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT FOR UPDATE p.*
 //   FROM "products" AS p
 
@@ -1231,7 +1231,7 @@ $select = $db->select()
         <title>Ejecutando consultas Select</title>
 
         <para>
-            Esta sección se describe como ejecutar una consulta representada por
+            En esta sección se describe cómo ejecutar una consulta representada por
              un objeto Zend_Db_Select.
         </para>
 
@@ -1240,13 +1240,13 @@ $select = $db->select()
             <title>Ejecutando Consultas SelectExecuting desde el Adaptador de Base de Datos</title>
 
             <para>
-                Puedes ejecutar la consulta representada por el objeto Zend_Db_Select pasandolo
+                Puede ejecutar la consulta representada por el objeto Zend_Db_Select pasándolo
                 como primer argumento al método <code>query()</code> de un objeto Zend_Db_Adapter_Abstract.
                 Use objetos Zend_Db_Select en lugar de un string de consulta.
             </para>
 
             <para>
-                El método <code>query()</code> retorna un objeto de tipo
+                El método <code>query()</code> devuelve un objeto de tipo
                 Zend_Db_Statement o PDOStatement, dependiendo del tipo de adaptador.
             </para>
 
@@ -1273,8 +1273,8 @@ $result = $stmt->fetchAll();
 
             <para>
                 Como alternativa al uso del método <code>query()</code> del objeto adaptador,
-                puedes usar el método <code>query()</code> del objeto Zend_Db_Select. Ambos
-                métodos retornan un objeto de tipo Zend_Db_Statement o PDOStatement, dependiendo
+                puede usar el método <code>query()</code> del objeto Zend_Db_Select. Ambos
+                métodos devuelven un objeto de tipo Zend_Db_Statement o PDOStatement, dependiendo
                 del tipo de adaptador.
             </para>
 
@@ -1300,7 +1300,7 @@ $result = $stmt->fetchAll();
             <title>Convertiendo un Objeto Select a un String SQL</title>
 
             <para>
-                Si necesitas acceder a una represantación en un string de la
+                Si necesita acceder a una represantación en un string de la
                 consulta SQL correspondiente al objeto Zend_Db_Select,
                 use el método <code>__toString()</code>.
             </para>
@@ -1316,7 +1316,7 @@ $select = $db->select()
 $sql = $select->__toString();
 echo "$sql\n";
 
-// The output is the string:
+// La salida es el string:
 //   SELECT * FROM "products"
 ]]>
                 </programlisting>
@@ -1341,9 +1341,9 @@ echo "$sql\n";
             <title>Obtener Partes de un Objeto Select</title>
 
             <para>
-                El método <code>getPart()</code> retorna una representación de
-                una parte de su consulta SQL. Por ejemplo, puedes usar este
-                método para retornar un array de expresiones para la cláusula
+                El método <code>getPart()</code> devuelve una representación de
+                una parte de su consulta SQL. Por ejemplo, puede usar este
+                método para devolver un array de expresiones para la cláusula
                 <code>WHERE</code>, o el array de columnas (o expresiones de
                 columnas) que estan en la lista del <code>SELECT</code>, o los
                 valores de la cantidad y comienzo para la cláusula
@@ -1360,8 +1360,8 @@ echo "$sql\n";
 
             <para>
                 El único argumento del método <code>getPart()</code> es un
-                string que identifica que parte del la consulta Select va a
-                retornar. Por ejemplo, el string <code>'from'</code> identifica
+                string que identifica qué parte del la consulta Select va a
+                devolver. Por ejemplo, el string <code>'from'</code> identifica
                 la parte del objeto Select que almacena la información de las
                 tablas de la cláusula <code>FROM</code>, incluyendo uniones de
                 tablas.
@@ -1370,7 +1370,7 @@ echo "$sql\n";
             <para>
                 La clase Zend_Db_Select define constantes que puedes usar para
                 las partes de la consulta SQL.
-                Puedes usar estas definiciones de constantes, o los strings
+                Puede usar estas definiciones de constantes, o los strings
                 literales.
             </para>
 
@@ -1449,10 +1449,10 @@ $select = $db->select()
              ->from('products')
              ->order('product_id');
 
-// Puedes especificar un string string literal para especificar la parte
+// Puede especificar un string literal para especificar la parte
 $orderData = $select->getPart( 'order' );
 
-// Puedes usar una constante para especificar la misma parte
+// Puede usar una constante para especificar la misma parte
 $orderData = $select->getPart( Zend_Db_Select::ORDER );
 
 // El valor de retorno puede ser una estructura en un array, no un string.
@@ -1472,22 +1472,22 @@ print_r( $orderData );
             <para>
                 El método <code>reset()</code> permite limpiar una parte
                 específica de la consulta SQL, o limpia todas las partes de la
-                consulta SQL si omites el argumento.
+                consulta SQL si omite el argumento.
             </para>
 
             <para>
-                El argumento es opcional. Puedes especificar la parte de la
+                El argumento es opcional. Puede especificar la parte de la
                 consulta que será limpiada, usando los mismos strings que usa el
                 argumento del método <code>getPart()</code>. La parte de la
-                consulta que especifiques se reestablecerá a su estado por
+                consulta que especifique se reestablecerá a su estado por
                 omisión.
             </para>
 
             <para>
-                Si omites el parámetro, <code>reset()</code> cambia todas las
+                Si omite el parámetro, <code>reset()</code> cambia todas las
                 partes de la consulta a su estado por omisión. Esto hace que
                 el objeto Zend_Db_Select sea equivalente a crear un nuevo
-                objeto, como si acabases de instanciarlo.
+                objeto, como si acabase de instanciarlo.
             </para>
 
             <example id="zend.db.select.other.reset.example">
@@ -1495,7 +1495,7 @@ print_r( $orderData );
                 <title>Ejemplo del método reset()</title>
 
                 <programlisting role="php"><![CDATA[
-// Construye esta consulta:
+// Construya esta consulta:
 //   SELECT p.*
 //   FROM "products" AS p
 //   ORDER BY "product_name"

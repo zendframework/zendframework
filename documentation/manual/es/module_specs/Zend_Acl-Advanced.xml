@@ -81,12 +81,12 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         </programlisting>
 
         <para>
-            Una vez la clase de aserción esta disponible, el desarrollador puede 
-            suministrar una instancia de la clase de aserción cuando asigna reglas 
+            Una vez la clase de aserción esta disponible, el desarrollador puede
+            suministrar una instancia de la clase de aserción cuando asigna reglas
             condicionales. Una regla que es creada con una aserción
             sólo se aplica cuando el método de la aserción devuelve true.
         </para>
-        
+       
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
@@ -94,16 +94,16 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         </programlisting>
 
         <para>
-            El código anterior crea una regla condicional que permite el acceso a 
-            todos los privilegios sobre todo, por todo el mundo, excepto cuando la IP 
-            de quien hace la petición está en la "lista negra". Si una petición 
+            El código anterior crea una regla condicional que permite el acceso a
+            todos los privilegios sobre todo, por todo el mundo, excepto cuando la IP
+            de quien hace la petición está en la "lista negra". Si una petición
             viene desde una IP que no está considerada "limpia", entonces la regla no
-            se aplica. Dado que la regla se aplica a todos los roles, todos los 
-            recursos, y todos los privilegios, una IP "no limpia" daría lugar a una 
+            se aplica. Dado que la regla se aplica a todos los roles, todos los
+            recursos, y todos los privilegios, una IP "no limpia" daría lugar a una
             negación de acceso. Éste es un caso especial, sin embargo, y debería ser
-            entendido que en todos los otros casos (por ejemplo, cuando un rol 
-            específico, recurso, o privilegio está especificado por la regla), 
-            una aserción fallida provoca que la regla no se aplique, y otras reglas 
+            entendido que en todos los otros casos (por ejemplo, cuando un rol
+            específico, recurso, o privilegio está especificado por la regla),
+            una aserción fallida provoca que la regla no se aplique, y otras reglas
             deberían ser usadas para determinar si el acceso está permitido o
             denegado.
         </para>
@@ -111,10 +111,10 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         <para>
             El método
             <code>assert()</code>
-            de un objeto aserción es pasado a la ACL, regla,  recurso, y privilegio 
+            de un objeto aserción es pasado a la ACL, regla,  recurso, y privilegio
       para el cual una consulta de autorización (por ejemplo,
             <code>isAllowed()</code>
-            ) se aplica, con el fin de proporcionar un contexto para que la clase de 
+            ) se aplica, con el fin de proporcionar un contexto para que la clase de
       aserción determine sus condiciones cuando fuera necesario.
         </para>
 

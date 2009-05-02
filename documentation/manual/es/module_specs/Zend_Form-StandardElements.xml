@@ -2,11 +2,11 @@
     <title>Elementos Enviados en el Formulario Estandard de Zend Framework</title>
 
     <para>
-        Zend Framework viene con clases de elementos concretos cubriendo la 
-        mayoría de los elementos de los formularios HTML. La mayoría simplemente 
-        especifica una vista de ayuda para usar cuando se decora el elemento, 
+        Zend Framework viene con clases de elementos concretos cubriendo la
+        mayoría de los elementos de los formularios HTML. La mayoría simplemente
+        especifica una vista de ayuda para usar cuando se decora el elemento,
         pero varios ofrecen funcionalidad adicional. La siguiente es una lista
-        de todas las clases, así como también una descripción de la 
+        de todas las clases, así como también una descripción de la
         funcionalidad que ofrecen.
     </para>
 
@@ -36,7 +36,7 @@
 
         <para>
             Después de llenar o validar un formulario, se puede verificar si el
-            botón dado fue clickeado usando el método <code>isChecked()</code>.
+            botón dado fue pulsado usando el método <code>isChecked()</code>.
         </para>
     </sect2>
 
@@ -44,12 +44,12 @@
         <title>Zend_Form_Element_Captcha</title>
 
         <para>
-            Los CAPTCHAs son usados para prevenir el envio automático de 
+            Los CAPTCHAs son usados para prevenir el envio automático de
             formularios por los robots y otros procesos automatizados.
         </para>
 
         <para>
-            The Captcha form element allows you to specify which 
+            The Captcha form element allows you to specify which
             <link linkend="zend.captcha.adapters">Zend_Captcha adapter</link> you
             wish to utilize as a form captcha. It then sets this adapter as a
             validator to the object, and uses a Captcha decorator for rendering
@@ -69,9 +69,9 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
         </programlisting>
 
         <para>
-            Los Captcha entonces pueden ser cargados usando el método 
-            <code>setCaptcha()</code>, el cual puede tomar una instancia 
-            cualquiera de captcha instance, o el nombre corto del adaptador 
+            Los Captcha entonces pueden ser cargados usando el método
+            <code>setCaptcha()</code>, el cual puede tomar una instancia
+            cualquiera de captcha instance, o el nombre corto del adaptador
             captcha:
         </para>
 
@@ -86,7 +86,7 @@ $element->setCaptcha('Dumb');
 
         <para>
             Si desea cargar sus elementos configuración, especifique la clave
-            'captcha' con un array conteniendo la clave 'captcha', o            
+            'captcha' con un array conteniendo la clave 'captcha', o           
             ambas claves 'captcha' y 'captchaOptions':
         </para>
 
@@ -116,17 +116,17 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             El decorador usado es determinado consultando el adaptador captcha.
-            Por defecto, es usado el 
+            Por defecto, es usado el
             <link linkend="zend.form.standardDecorators.captcha">Captcha
-            decorator</link>, pero un adaptadpr puede especificar uno                
+            decorator</link>, pero un adaptador puede especificar uno               
             diferente vía su método<code>getDecorator()</code>.
         </para>
 
         <para>
             Como ha notado, el adaptador captcha actúa él mismo como un validador
-            para el elemento. Adicionalmente, el validador NotEmpty validator 
-            no es usado y el elemento es marcado como requerido. Enla mayoría de
-            los casos, usted no necesitará hacer nada más para tener un captcha 
+            para el elemento. Adicionalmente, el validador NotEmpty
+            no es usado y el elemento es marcado como requerido. En la mayoría de
+            los casos, usted no necesitará hacer nada más para tener un captcha
             presente en su formulario.
         </para>
     </sect2>
@@ -135,14 +135,14 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         <title>Zend_Form_Element_Checkbox</title>
 
         <para>
-            Las casillas de verigicación (checkboxes) HTML le permiten devolver 
-            un valor específico, pero básicamente operata como los booleanos: 
-            cuando está marcada, el valor es enviado; cuando no está marcada, no                     se envía nada. Internamente, Zend_Form_Element_Checkbox forza este 
+            Las casillas de verificación (checkboxes) HTML le permiten devolver
+            un valor específico, pero básicamente funcionan como los booleanos:
+            cuando está marcada, el valor es enviado; cuando no está marcada, no                     se envía nada. Internamente, Zend_Form_Element_Checkbox fuerza este
             estado.
         </para>
 
         <para>
-            Por defecto, si la casilla (checkbox) está marcada su valor es '1', 
+            Por defecto, si la casilla (checkbox) está marcada su valor es '1',
             y si no está marcada su valor es '0'.
             You can specify the values to use using the
             <code>setCheckedValue()</code> and <code>setUncheckedValue()</code>
@@ -208,9 +208,9 @@ $form->addElement($element, 'foo');
             </programlisting>
 
             <para>
-                También debe asegurarse de que se ha provisto un tipo de 
+                También debe asegurarse de que se ha provisto un tipo de
                 codificación corecto al formulario; se debe utilizar
-                'multipart/form-data'. Se puede hacer esto estableciendo el 
+                'multipart/form-data'. Se puede hacer esto estableciendo el
                 atributo 'enctype' en el formulario:
             </para>
 
@@ -220,9 +220,9 @@ $form->setAttrib('enctype', 'multipart/form-data');
             </programlisting>
 
             <para>
-                Cuando el atributo ha sido validado exitosamente, usted debe 
-                recibir el archivo para alamacenarlo en el destino final 
-                usando receive(). Adicionalmente puede determinar la 
+                Cuando el atributo ha sido validado exitosamente, usted debe
+                recibir el archivo para almacenarlo en el destino final
+                usando receive(). Adicionalmente, puede determinar la
                 ubicación final usando getFileName():
             </para>
 
@@ -245,7 +245,7 @@ $location = $form->foo->getFileName();
             <title>Ubicaciones Predeterminadas para la Carga de Archivos</title>
 
             <para>
-                Por defecto, los archivos son cargados al directorio temp del 
+                Por defecto, los archivos son cargados al directorio temp del
                 sistema.
             </para>
         </note>
@@ -254,19 +254,19 @@ $location = $form->foo->getFileName();
             <title>Valores de archivo</title>
 
             <para>
-                Dentro de HTTP un elemento file no tiene valor. Por tanto y a 
+                Dentro de HTTP, un elemento file no tiene valor. Por tanto y a
                 causa de razones de seguridad usted solo obtendrá el nombre del
-                archivo cargado llamando  a getValue() y no el destino completo. 
-                si usted necesita la información completa  llame getFileName() y 
-                le retormará el destino y nombre de archivo completo.
+                archivo cargado llamando a getValue() y no el destino completo.
+                si usted necesita la información completa llame a getFileName() y
+                le devolverá el destino y nombre de archivo completo.
             </para>
         </note>
 
         <para>
             <code>Zend_Form_Element_File</code> soporta también archivos
-            múltiples. Para llamar el método <code>setMultiFile($count)</code> 
-            usted puede establecer la cantidad de elementos file que usted desea 
-            crear. Esto le previene de establecer la misma configuración varias 
+            múltiples. Para llamar el método <code>setMultiFile($count)</code>
+            usted puede establecer la cantidad de elementos file que usted desea
+            crear. Esto le previene de establecer la misma configuración varias
             veces.
         </para>
 
@@ -275,7 +275,7 @@ $location = $form->foo->getFileName();
 
             <para>
                 Crear un elemento multi archivo es lo mismo que querer configurar
-                un elemento único. Sólo tiene que llamar a 
+                un elemento único. Sólo tiene que llamar a
                 <code>setMultiFile()</code> adicionalmente después de la creación:
             </para>
 
@@ -296,10 +296,10 @@ $form->addElement($element, 'foo');
             </programlisting>
 
             <para>
-                En su vista usted ahora obtendrá 3 elementos para carga de 
+                En su vista usted ahora obtendrá 3 elementos para carga de
                 archivos idénticos los cuales comparten la misma configuración.
-                para obtener  el conjunto de el número de archivos múltiples 
-                simplemente llame  <code>getMultiFile()</code>.
+                Para obtener el conjunto del número de archivos múltiples
+                simplemente llame a <code>getMultiFile()</code>.
             </para>
 
         </example>
@@ -308,25 +308,25 @@ $form->addElement($element, 'foo');
             <title>Elementos File en Subformularioss</title>
 
             <para>
-                Cuando usted use elementos file in subformularios debería 
+                Cuando usted use elementos file en subformularios debería
                 establecer nombres únicos.
-                Así, cuando usted nombre su elemento file en el subformulario1, 
-                debe darle un nombre diferente el el subformulario2.
+                Así, cuando usted nombre su elemento file en el subformulario1,
+                debe darle un nombre diferente en el subformulario2.
             </para>
 
             <para>
-                Tan pronto como haya dos elementos file nombrados de forma 
+                Tan pronto como haya dos elementos file nombrados de forma
                 idéntica, el segundo elemento no se mostrará o enviará.
             </para>
         </note>
 
         <para>
-            Para limitar el tamaño del archivo, el cual es cargado por el 
-            cliente, debe establecer el tamaño máximo de archivo que el 
-            formulario acepta . Esto limitará eñ tamaño del archivo en el lado 
+            Para limitar el tamaño del archivo, el cual es cargado por el
+            cliente, debe establecer el tamaño máximo de archivo que el
+            formulario acepta . Esto limitará el tamaño del archivo en el lado
             del cliente configurando la opción <code>MAX_FILE_SIZE</code>
-            en el formulario. Tan pronto como establesca este valor usando 
-            el método <code>setMaxFileSize($size)</code>, estó será generado
+            en el formulario. Tan pronto como establezca este valor usando
+            el método <code>setMaxFileSize($size)</code>, será generado
             con el elemento file.
         </para>
 
@@ -346,13 +346,13 @@ $form->addElement($element, 'foo');
             <para>
                 Cuando usted usa elementos file múltiples en los formularios tiene
                 que establecer el <code>MAX_FILE_SIZE</code> una sola vez.
-                 Establecerlo otra vez sobreescribirá el valor previamente 
+                 Establecerlo otra vez sobreescribirá el valor previamente
                  establecido.
             </para>
 
             <para>
-                Note, que usted puede establecer <code>MAX_FILE_SIZE</code> 
-                una sola ves, incluso si usas múltiples formularios.
+                Note que usted puede establecer <code>MAX_FILE_SIZE</code>
+                una sola vez, incluso si usa múltiples formularios.
             </para>
         </note>
     </sect2>
@@ -361,10 +361,9 @@ $form->addElement($element, 'foo');
         <title>Zend_Form_Element_Hidden</title>
 
         <para>
-            Los elementos Hidden simplemente injectan datos que deben ser 
+            Los elementos Hidden simplemente inyectan datos que deben ser
             enviados, pero que el usuario no debe manipular.
-            <code>Zend_Form_Element_Hidden</code> logra esto através del uso de
-            el helper de vista 'formHidden'.
+            <code>Zend_Form_Element_Hidden</code> logra esto a través del uso del helper de vista 'formHidden'.
         </para>
     </sect2>
 
@@ -372,15 +371,15 @@ $form->addElement($element, 'foo');
         <title>Zend_Form_Element_Hash</title>
 
         <para>
-            Este elemento provee protección de ataques desde CSRF sobre 
+            Este elemento provee protección de ataques desde CSRF sobre
             formularios, asegurando que el dato es enviado por la sesión del
-            usuario que generó el formulario y no por un script pillero. 
-            La protección se logra mediante la adición de un elemento hash a             
+            usuario que generó el formulario y no por un script malicioso.
+            La protección se logra mediante la adición de un elemento hash a            
             un formulario y verificandolo cuando el formulario es enviado.
         </para>
 
         <para>
-            El nombre del elemnto hash debe ser único. Se recomienda usar la 
+            El nombre del elemento hash debe ser único. Se recomienda usar la
             opción <literal>salt</literal> para el elemento, dos hashes con
             el mismo nombre y diferentes salts no chocan:
         </para>
@@ -396,17 +395,16 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <para>
-            Internamente, el elemento alamacena un identificador único usando
+            Internamente, el elemento almacena un identificador único usando
             <code>Zend_Session_Namespace</code>, y lo comprueba en el momento
-            que se envía (comprueba que el TTL has no espiró). El validador 
+            que se envía (comprueba que el TTL no ha espirado). El validador
             'Identical' entonces es usado para asegurarse que el hash enviado
             marcha con el hash alamacenado.
         </para>
 
         <para>
-            El helper de vista 'formHidden' es usado par generar el elemento 
+            El helper de vista 'formHidden' es usado para generar el elemento
             en el formulario.
-            form.
         </para>
     </sect2>
 
@@ -414,28 +412,28 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <title>Zend_Form_Element_Image</title>
 
         <para>
-            Las imáagenes pueden ser usadas como elmentos de formulario, y le
-            permite  especificar elementos gráficos como botones de formulario.
+            Las imágenes pueden ser usadas como elementos de formulario, y le
+            permiten especificar elementos gráficos como botones de formulario.
         </para>
 
         <para>
-            Los elementos Image necesitan una imagen fuente. 
+            Los elementos Image necesitan una imagen fuente.
             <code>Zend_Form_Element_Image</code>  le permite especificar esto
             usando el método de acceso <code>setImage()</code>
-            (o clave de configuración 'image'). Opcionalmente, también puede 
+            (o clave de configuración 'image'). Opcionalmente, también puede
             especificar un valor para utilizar al momento de enviar la imagen
-             utilizando  el método de acceso <code>setImageValue()</code> 
+             utilizando  el método de acceso <code>setImageValue()</code>
             (o clave de configuración 'imageValue'). Cuando el valor establecido
-            para el elemento son similares al <code>imageValue</code>, entonces  
+            para el elemento sea igual a <code>imageValue</code>, entonces 
             el método de acceso <code>isChecked()</code> devolverá true.
         </para>
 
         <para>
-            El elemento Image usa el 
-            <link linkend="zend.form.standardDecorators.image">Decorador de 
+            Los elementos Image usan el
+            <link linkend="zend.form.standardDecorators.image">Decorador de
             Imagen </link> para generar (así como el estandard Errors,
             HtmlTag, y decorador Label). Opcionalmente, puede especificar una
-            etiqueta para el decorador <code>Image</code> que luego 
+            etiqueta para el decorador <code>Image</code> que luego
             envuelva al elemento imagen.
         </para>
     </sect2>
@@ -444,8 +442,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <title>Zend_Form_Element_MultiCheckbox</title>
 
         <para>
-            A menudo tiene un conjunto de checkboxes, y desea agrupar los 
-            resultados. Esto es como un 
+            En ocasiones, se tiene un conjunto de checkboxes, y se desea agrupar los
+            resultados. Esto es como un
             <link linkend="zend.form.standardElements.multiselect">Multiselect</link>,
             pero en lugar de estar en una lista desplegable, necesita mostrarlos en pares checkbox/value (casilla de verificación/valor).
         </para>

@@ -7,8 +7,8 @@
         <para>
             Zend Framework provee soporte para consumo remoto para servicios XML-RPC
             como un cliente en el paquete <code>Zend_XmlRpc_Client</code>
-            . Su mejor característica es la conversión atuomática de tipos 
-            entre PHP y XML-RPC, un servidor de objeto proxy, y acceso a 
+            . Su mejor característica es la conversión automática de tipos
+            entre PHP y XML-RPC, un servidor de objeto proxy, y acceso a
             capacidades de instrospección del servidor.
         </para>
 
@@ -19,15 +19,15 @@
         <title>Method Calls</title>
 
         <para>
-            El constructor de <code>Zend_XmlRpc_Client</code> recibe la 
+            El constructor de <code>Zend_XmlRpc_Client</code> recibe la
             URL del servidor XML-RPC como su primer parámetro.
-            La nueva instacia devuelta pu7ede ser usada para llamar cualquier número de métodos remotos en el punto final.
+            La nueva instacia devuelta puede ser usada para llamar cualquier número de métodos remotos en el punto final.
         </para>
 
         <para>
-            Para llamar un método remoto con el cliente XML-RPC, instáncealo 
-            y usa el método de instancia <code>call()</code> . El código de ejemplo a continuación utiliza una demostración en el servidor XML-RPC en el sitio wed del Zend Framework
-            . Puede utilizarlo para probar o explorar los componentes 
+            Para llamar un método remoto con el cliente XML-RPC, instáncealo
+            y usa el método de instancia <code>call()</code> . El código de ejemplo a continuación utiliza una demostración en el servidor XML-RPC en el sitio web de Zend Framework
+            . Puede utilizarlo para probar o explorar los componentes
             <code>Zend_XmlRpc</code>.
         </para>
 
@@ -44,14 +44,14 @@ echo $client->call('test.sayHello');
         </example>
 
         <para>
-            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo PHP equivalente            
+            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo PHP equivalente           
 
-            . En el ejemplo anterior, es devuelto un <code>string</code> PHP 
-            y está listo para ser usada inmediatamente.
+            . En el ejemplo anterior, es devuelto un <code>string</code> PHP
+            y está listo para ser usado inmediatamente.
         </para>
 
         <para>
-            El primer parámetro del método <code>call()</code> recibe el nombre del método remoto a llamar. Si el método remoto requiere algún parámetro, este puede ser enviado por el suministro de un segundo, parámetro opcional a <code>call()</code> con un <code>array</code> de
+            El primer parámetro del método <code>call()</code> recibe el nombre del método remoto que llamar. Si el método remoto requiere algún parámetro, éste puede ser enviado por el suministro de un segundo, parámetro opcional a <code>call()</code> con un <code>array</code> de
             valores para pasar el método remoto:
         </para>
 
@@ -65,13 +65,13 @@ $arg2 = 'foo';
 
 $result = $client->call('test.sayHello', array($arg1, $arg2));
 
-// $result es un tipo nativo PHP 
+// $result es un tipo nativo PHP
 ]]>
             </programlisting>
         </example>
 
         <para>
-            si el método remoto no requiere parámetros,  este parámetro opcional 
+            si el método remoto no requiere parámetros,  este parámetro opcional
             podrá ser excluido o se puede pasar un <code>array()</code>
             vacío. El array de parámeters para el método repoto puede contener tipos nativos PHPs, objetos <code>Zend_XmlRpc_Value</code>
             , o una combinación de estos.
@@ -89,23 +89,23 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
     <sect2 id="zend.xmlrpc.value.parameters">
         <title>Tipos y Conversiones</title>
         <para>
-            Algunas llamadas a métodos remoto requieren parámetros.  Estos son 
+            Algunas llamadas a métodos remoto requieren parámetros. Éstos son
            dados al método <code>call()</code> de <code>Zend_XmlRpc_Client</code>
-            como un array en el segundo parámetro.  Cada parámetro puede ser dado
-            como cualquier tipo nativo PHP ya que este será convertido automáticamente,
-            o como un  objeto que representa un tipo específico de XML-RPC 
+            como un array en el segundo parámetro. Cada parámetro puede ser dado
+            como un tipo nativo PHP, que será convertido automáticamente,
+            o como un  objeto que representa un tipo específico de XML-RPC
             (uno de los objetos  <code>Zend_XmlRpc_Value</code>).
         </para>
 
         <sect3 id="zend.xmlrpc.value.parameters.php-native">
             <title>Tipos Nativos PHP como Parámetro</title>
             <para>
-                Los parámetros pueden ser pasados a <code>call()</code> como variables 
+                Los parámetros pueden ser pasados a <code>call()</code> como variables
                 PHP nativas, ya sea un <code>string</code>,
                 <code>integer</code>, <code>float</code>,
                 <code>boolean</code>, <code>array</code>, o un
                 <code>object</code>. En este caso, cada tipo PHP nativo será
-                autodetectada y convertida en uno de los tipos XML-RPC 
+                autodetectado y convertido en uno de los tipos XML-RPC
                 de acuerdo con esta tabla:
             </para>
 
@@ -448,19 +448,19 @@ try {
             </example>
 
             <para>
-                When the <code>call()</code> method is used to make the
-                request, the <code>Zend_XmlRpc_Client_FaultException</code> will be
-                thrown on fault. A <code>Zend_XmlRpc_Response</code> object
-                containing the fault will also be available by calling
+                Cuando el método <code>call()</code> es usado para realizar la
+                petición, <code>Zend_XmlRpc_Client_FaultException</code> será
+				lanzado como error. Un objeto <code>Zend_XmlRpc_Response</code> conteniendo
+				el error estará disponible llamando a
                 <code>getLastResponse()</code>.
             </para>
 
             <para>
-                When the <code>doRequest()</code> method is used to make the
-                request, it will not throw the exception. Instead, it will
-                return a <code>Zend_XmlRpc_Response</code> object returned
-                will containing the fault. This can be checked with
-                <code>isFault()</code> instance method of
+                Cuando el método <code>doRequest()</code> sea usado para realizar una
+				petición, no lanzará una excepción. En vez de eso, devolverá un objeto
+				<code>Zend_XmlRpc_Response</code> que contendrá el error.
+				Esto puede comprobarse con
+                <code>isFault()</code> método instancia de
                 <code>Zend_XmlRpc_Response</code>.
             </para>
         </sect3>

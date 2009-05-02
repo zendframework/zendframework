@@ -36,7 +36,7 @@
             'staff':
         </para>
 
-        <programlisting role="php"><![CDATA[ 
+        <programlisting role="php"><![CDATA[
  // El nuevo grupo de Marketing hereda los permisos de Staff
  $acl->addRole(new Zend_Acl_Role('marketing'), 'staff'); ]]>
         </programlisting>
@@ -48,17 +48,17 @@
             noticias"). Ahora añadimos estos recursos:
         </para>
 
-        <programlisting role="php"><![CDATA[ 
+        <programlisting role="php"><![CDATA[
 // Crear recursos para las reglas
  // newsletter
  $acl->add(new Zend_Acl_Resource('newsletter'));
- 
+
  // news
  $acl->add(new Zend_Acl_Resource('news'));
- 
+
  // Últimas Noticias
  $acl->add(new Zend_Acl_Resource('latest'), 'news');
- 
+
  // anuncio de noticias
  $acl->add(new Zend_Acl_Resource('announcement'), 'news'); ]]>
         </programlisting>
@@ -68,17 +68,17 @@
             estas normas más específicas en ámbitos de la ACL:
         </para>
 
-        <programlisting role="php"><![CDATA[ // 
+        <programlisting role="php"><![CDATA[ //
  Marketing debe ser capaz de archivar y publicar boletines informativos y
  // las últimas noticias
  $acl->allow('marketing',
  array('newsletter', 'latest'),
  array('publish', 'archive'));
- 
+
  // Staff (y marketing, por herencia), se le denega el permiso a
  // revisar las últimas noticias
  $acl->deny('staff', 'latest', 'revise');
- 
+
  // Todos (incluyendo los administradores) tienen permiso denegado para
  // archivar anuncios y noticias
  $acl->deny(null, 'announcement', 'archive'); ]]>
@@ -89,38 +89,38 @@
             cambios:
         </para>
 
-        <programlisting role="php"><![CDATA[ 
+        <programlisting role="php"><![CDATA[
  echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
  "allowed" : "denied";
  // denegado
- 
+
  echo $acl->isAllowed('marketing', 'newsletter', 'publish') ?
  "allowed" : "denied";
- // permitido    
- 
+ // permitido   
+
  echo $acl->isAllowed('staff', 'latest', 'publish') ?
  "allowed" : "denied";
  // denegado
- 
+
  echo $acl->isAllowed('marketing', 'latest', 'publish') ?
  "allowed" : "denied";
- // permitido    
- 
+ // permitido   
+
  echo $acl->isAllowed('marketing', 'latest', 'archive') ?
  "allowed" : "denied";
- // permitido    
- 
+ // permitido   
+
  echo $acl->isAllowed('marketing', 'latest', 'revise') ?
  "allowed" : "denied";
  // denegado
- 
+
  echo $acl->isAllowed('editor', 'announcement', 'archive') ?
  "allowed" : "denied";
  // denegado
- 
+
  echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
  "allowed" : "denied";
- // denegado 
+ // denegado
  ]]>
         </programlisting>
 
@@ -139,16 +139,16 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-// Elimina la prohibición de leer las últimas noticias de staff (y marketing, 
+// Elimina la prohibición de leer las últimas noticias de staff (y marketing,
 // por herencia)
 $acl->removeDeny('staff', 'latest', 'revise');
 
 echo $acl->isAllowed('marketing', 'latest', 'revise') ?
- "allowed" : "denied"; 
-// permitido 
+ "allowed" : "denied";
+// permitido
 
-// Elimina la autorización para publicar y archivar los boletines 
-// marketing 
+// Elimina la autorización para publicar y archivar los boletines
+// marketing
 $acl->removeAllow('marketing',
                   'newsletter',
                   array('publish', 'archive'));

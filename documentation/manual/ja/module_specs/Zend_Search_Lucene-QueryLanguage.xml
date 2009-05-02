@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15261 -->
+<!-- EN-Revision: 15289 -->
 <sect1 id="zend.search.lucene.query-language">
     <title>クエリ言語</title>
 
@@ -148,7 +148,7 @@ test*
 ]]></programlisting>
             は、"write" や "wrote"、"written"、"rewrite"、"rewrote" などに対応します。
         </para>
-        
+
         <para>
             ZF 1.7.7 以降、ワイルドカードパターンにはワイルドカード以外のプレフィックスが必要となりました。
             デフォルトのプレフィックスの長さは 3 (Java Lucene と同じ) です。

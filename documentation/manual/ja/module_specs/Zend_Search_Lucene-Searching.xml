@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15225 -->
+<!-- EN-Revision: 15289 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -402,7 +402,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
         <para>
             強調した結果を取得するには <code>Zend_Search_Lucene_Document_Html->getHTML()</code> メソッドを使用します。
         </para>
-        
+
         <note>
             <para>
                 強調処理は、現在の解析器を使って行われます。つまり、解析器が理解するすべての形式の単語が強調されます。
@@ -435,7 +435,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
             オプションの 2 番目のパラメータは、
             デフォルトの HTML ドキュメントエンコーディングです。
             省略した場合は、Content-type HTTP-EQUIV meta タグを使用します。
-        </para> 
+        </para>
         <para>
             オプションの 3 番目のパラメータは、
             <code>Zend_Search_Lucene_Search_Highlighter_Interface</code>

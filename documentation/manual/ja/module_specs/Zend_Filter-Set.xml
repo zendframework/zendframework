@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15212 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -92,23 +92,6 @@
         <title>StripNewlines</title>
         <para>
             文字列 <code>$value</code> から一切の改行制御文字を取り除いたものを返します。
-        </para>
-    </sect2>
-
-    <sect2 id="zend.filter.set.realpath">
-        <title>RealPath</title>
-        <para>
-            入力されたパスのすべてのシンボリックリンクを展開し、'/./'、'/../'
-            や余分な '/' の参照を解決して正規化された絶対パスを返します。
-            この結果、パスにはシンボリックリンクや
-            '/./' あるいは '/../' が含まれなくなります。
-        </para>
-        <para>
-            <classname>Zend_Filter_RealPath</classname> は、
-            ファイルが存在しないなどで失敗した場合に <code>FALSE</code> を返します。
-            BSD システムでは、パスの最後の部分だけが存在しない場合には
-            <classname>Zend_Filter_RealPath</classname> は失敗しません。しかし他のシステムではこのような場合も
-            <code>FALSE</code> を返します。
         </para>
     </sect2>
 

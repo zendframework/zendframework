@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.custom-feed">
     <title>独自のフィードクラスおよびエントリクラス</title>
 
@@ -73,8 +73,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             そしてこのクラスを使用すると、インスタンスを作成したらすぐに
             <code>myUpdated</code> プロパティを設定することができます。
@@ -87,8 +86,7 @@ $entry->myUpdated = '2005-04-19T15:30';
 $entry->myUpdated();
 // プロパティ型のコールは __get 関数が処理します
 $entry->myUpdated;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

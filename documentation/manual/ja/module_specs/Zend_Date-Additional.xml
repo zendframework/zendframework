@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.date.additional">
 
     <title>動作例</title>
@@ -83,8 +83,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 } else {
     print "文字列 $date は日付ではありません";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -118,8 +117,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             <programlisting role="php"><![CDATA[
 // 利用可能な都市の一覧を出力します
 print_r (Zend_Date_Cities::getCityList());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -188,8 +186,7 @@ print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
 
 // 位置情報を指定します
 $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -220,8 +217,7 @@ $info = $date->getSunInfo($city);
 foreach ($info as $sun) {
     print "\n" . $sun->get(Zend_Date::ISO_8601);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -288,8 +284,7 @@ print $date->getTimezone();
 
 // 変更された date オブジェクトの内容を確認します
 print $date->getIso();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -340,8 +335,7 @@ $lastdate->setTimezone();
 
 // date オブジェクトの内容を確認します
 print $lastdate->getIso();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

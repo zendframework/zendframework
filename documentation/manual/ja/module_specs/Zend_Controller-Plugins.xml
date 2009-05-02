@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>プラグイン</title>
 
@@ -90,8 +90,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Controller_Plugin_Abstract</classname> には抽象メソッドはありません。
@@ -163,8 +162,7 @@ $front->setControllerDirectory('/path/to/controllers')
       ->setRouter(new Zend_Controller_Router_Rewrite())
       ->registerPlugin(new MyPlugin());
 $front->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             他に何かの出力を行うアクションがなく、ひとつのアクションのみがコールされたとしましょう。
@@ -178,8 +176,7 @@ $front->dispatch();
 <p>preDispatch() がコールされました</p>
 <p>postDispatch() がコールされました</p>
 <p>dispatchLoopShutdown() がコールされました</p>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>

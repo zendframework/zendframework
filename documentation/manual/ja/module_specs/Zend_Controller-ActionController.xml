@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
@@ -42,8 +42,7 @@ class FooController extends Zend_Controller_Action
         // 何かをします
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この <code>FooController</code> クラス (<code>foo</code> コントローラ)
@@ -92,8 +91,7 @@ class FooController extends Zend_Controller_Action
             ->setParam('noViewRenderer', true);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>initView()</code>、<code>getViewScript()</code>、
@@ -118,8 +116,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>ViewRenderer</code> を無効にする場面として考えられるのは、
@@ -166,8 +163,7 @@ class FooController extends Zend_Controller_Action
         ));
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.action.prepostdispatch">
@@ -211,8 +207,7 @@ class FooController extends Zend_Controller_Action
                 <programlisting role="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -263,8 +258,7 @@ if ($this->_hasParam('id') {
 } else {
     $id = 1;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </note>
             </listitem>
         </itemizedlist>
@@ -322,8 +316,7 @@ applicationOrModule/
                 index.phtml
         helpers/
         filters/
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 言い換えると、ビュースクリプトが
@@ -347,8 +340,7 @@ applicationOrModule/
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>render()</code> はビュースクリプトをレンダリングします。
@@ -412,8 +404,7 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -559,8 +550,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 もうひとつの例として、デフォルトコントローラに転送する処理を見てみましょう。
@@ -590,8 +580,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -618,8 +607,7 @@ abstract class My_Base_Controller extends Zend_Controller_Action
         return $this->view;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この章の情報をもとに、それぞれの機能の柔軟性をもとにして

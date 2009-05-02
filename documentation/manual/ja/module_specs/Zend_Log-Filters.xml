@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.log.filters">
     <title>フィルタ</title>
 
@@ -29,8 +29,7 @@ $logger->info('通知メッセージ');
 
 // 記録されます
 $logger->emerg('緊急メッセージ');
-]]>
-        </programlisting>
+]]></programlisting>
 
         ログオブジェクトにフィルタを追加すると、
         すべてのフィルタを通貨したものだけをライターが受け取るようになります。
@@ -62,8 +61,7 @@ $logger->info('通知メッセージ');
 
 // 両方のライターに記録されます
 $logger->emerg('緊急メッセージ');
-]]>
-        </programlisting>
+]]></programlisting>
     </para>
   </sect2>
 </sect1>

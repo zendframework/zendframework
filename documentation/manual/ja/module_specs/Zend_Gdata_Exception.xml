@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.exception">
     <title>Gdata の例外処理</title>
 
@@ -18,8 +18,7 @@ try {
     // 例外の内容をユーザに報告します
     die($ex->getMessage());
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Gdata</classname> では、以下のような例外サブクラスを使用しています。
@@ -95,7 +94,6 @@ try {
 } catch(Zend_Gdata_App_HttpException $httpEx) {
     // Google Data のサーバに接続できませんでした
     die($httpEx->getMessage);}
-]]>
-    </programlisting>
+]]></programlisting>
 
 </sect1>

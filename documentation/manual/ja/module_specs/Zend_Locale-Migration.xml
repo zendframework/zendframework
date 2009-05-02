@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.locale.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -48,8 +48,7 @@ Zend_Locale::$compatibilityMode = false;
 
 if (Zend_Locale::isLocale($locale)) {
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     2 番目のパラメータを使えば、
@@ -75,8 +74,7 @@ if (Zend_Locale::isLocale($locale, false)) {
 
     // もとの文字列はロケールを持ちませんが再ルーティングすることができます
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
@@ -111,8 +109,7 @@ $locales = $locale->getDefault(Zend_Locale::BROWSER);
 Zend_Locale::$compatibilityMode = false;
 
 $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     古い実装における getDefault()

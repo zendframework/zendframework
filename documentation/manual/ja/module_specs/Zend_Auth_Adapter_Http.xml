@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -196,8 +196,7 @@
                 Apache の htpasswd ファイルと似た形式で
                 <programlisting><![CDATA[
 <username>:<realm>:<credentials>\n
-]]>
-</programlisting>
+]]></programlisting>
                 のようになります。個々の行は
                 ユーザ名、レルムおよび認証情報の三つのフィールドで構成されており、
                 それらがコロンで区切られています。リゾルバは認証情報フィールドの内容を理解することはできません。
@@ -212,15 +211,13 @@
                 <programlisting role="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
-]]>
-                </programlisting>
+]]></programlisting>
                 もうひとつは
                 <programlisting role="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
-]]>
-                </programlisting>
+]]></programlisting>
                 指定したパスが空だったり読み込みできなかったりした場合は、
                 例外をスローします。
             </para>
@@ -242,8 +239,7 @@ $config = array(
     'digest_domains' => '/members_only /my_account',
     'nonce_timeout'  => 3600,
 );
-]]>
-            </programlisting>
+]]></programlisting>
             この配列は、アダプタに対してベーシック認証およびダイジェスト認証の両方を受け付けるように指定します。
             また、<code>/members_only</code> および <code>/my_account</code>
             の配下では認証済みアクセスが必要となるようにします。
@@ -256,8 +252,7 @@ $config = array(
             <programlisting role="php"><![CDATA[
 require_once 'Zend/Auth/Adapter/Http.php';
 $adapter = new Zend_Auth_Adapter_Http($config);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -273,8 +268,7 @@ $digestResolver->setFile('files/digestPasswd.txt');
 
 $adapter->setBasicResolver($basicResolver);
 $adapter->setDigestResolver($digestResolver);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -291,8 +285,7 @@ $result = $adapter->authenticate();
 if (!$result->isValid()) {
     // ユーザ名/パスワードが間違っている、あるいはパスワード入力をキャンセルした
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
     </sect2>

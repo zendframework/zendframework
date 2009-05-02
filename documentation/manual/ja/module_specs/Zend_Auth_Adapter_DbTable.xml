@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -88,8 +88,7 @@ $sqlInsert = "INSERT INTO users (username, password, real_name) "
            . "VALUES ('my_username', 'my_password', 'My Real Name')";
 
 // データを挿入します
-$dbAdapter->query($sqlInsert);]]>
-            </programlisting>
+$dbAdapter->query($sqlInsert);]]></programlisting>
             <para>
                 データベース接続およびテーブルが使用可能となったので
                 <classname>Zend_Auth_Adapter_DbTable</classname> のインスタンスが作成できます。
@@ -112,8 +111,7 @@ $authAdapter
     ->setTableName('users')
     ->setIdentityColumn('username')
     ->setCredentialColumn('password')
-;]]>
-            </programlisting>
+;]]></programlisting>
             <para>
                 この時点で、認証アダプタのインスタンスは認証クエリを受け付ける準備ができました。
                 認証クエリを処理するには、入力された証明情報をアダプタに渡してから
@@ -127,8 +125,7 @@ $authAdapter
 ;
 
 // 認証クエリを実行し、結果を保存します
-$result = $authAdapter->authenticate();]]>
-            </programlisting>
+$result = $authAdapter->authenticate();]]></programlisting>
             <para>
                 認証結果オブジェクトでの <code>getIdentity()</code>
                 メソッドに加え、<classname>Zend_Auth_Adapter_DbTable</classname>
@@ -151,8 +148,7 @@ Array
     [password] => my_password
     [real_name] => My Real Name
 )
-*/]]>
-            </programlisting>
+*/]]></programlisting>
             <para>
                 テーブルの行には証明情報が含まれているので、
                 予期せぬアクセスからその内容を守ることが重要となります。
@@ -194,8 +190,7 @@ if ($result->isValid()) {
 
     /* ... */
 
-}]]>
-        </programlisting>
+}]]></programlisting>
     </sect2>
     <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
         <title>高度な使用例</title>
@@ -228,8 +223,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     'username',
     'password',
     'MD5(?) AND active = "TRUE"'
-);]]>
-        </programlisting>
+);]]></programlisting>
         <para>
             もうひとつの例として、salt メカニズムの実装を見てみましょう。
             salt とは、アプリケーションのセキュリティを格段に向上させるテクニックを指す用語です。
@@ -244,16 +238,14 @@ $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
 
-$dbAdapter->query($sqlAlter);]]>
-        </programlisting>
+$dbAdapter->query($sqlAlter);]]></programlisting>
         <para>
             すべてのユーザに対して登録時に salt 文字列を生成するシンプルな方法を示します。
         </para>
         <programlisting role="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
-}]]>
-        </programlisting>
+}]]></programlisting>
         <para>
             それではアダプタを作成してみましょう。
         </para>
@@ -266,8 +258,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     "MD5(CONCAT('"
     . Zend_Registry::get('staticSalt')
     . "', ?, password_salt))"
-);]]>
-        </programlisting>
+);]]></programlisting>
         <note>
             <para>
                 salt がたとえハードコーディングされた固定文字列であったとしても、
@@ -307,7 +298,6 @@ $select->where('active = "TRUE"');
 // 認証。これにより、users.active = TRUE であることを保証します
 $adapter->authenticate();
 
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>

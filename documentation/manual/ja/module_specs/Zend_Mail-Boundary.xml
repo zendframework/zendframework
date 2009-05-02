@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.boundary">
     <title>MIME バウンダリの制御</title>
     <para>
@@ -16,8 +16,7 @@
 $mail = new Zend_Mail();
 $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // メッセージを作成します...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

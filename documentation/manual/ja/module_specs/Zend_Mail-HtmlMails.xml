@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML メール</title>
     <para>
@@ -20,8 +20,7 @@ $mail->setFrom('somebody@example.com', 'Some Sender');
 $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

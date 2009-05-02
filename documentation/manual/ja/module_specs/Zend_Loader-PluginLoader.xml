@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.loader.pluginloader">
     <title>プラグインのロード</title>
 
@@ -52,8 +52,7 @@ library/
                 FormLabel.php
                 FormSubmit.php
                 FormText.php
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             では、プラグインローダーを作成してビューヘルパー群の場所を指定しましょう。
@@ -66,8 +65,7 @@ $loader->addPrefixPath('Zend_View_Helper', 'Zend/View/Helper/')
                        'application/modules/foo/views/helpers')
        ->addPrefixPath('Bar_View_Helper',
                        'application/modules/bar/views/helpers');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             こうしておけば、クラス名のプレフィックスを除いた部分を指定するだけで
@@ -83,8 +81,7 @@ $formLabelClass = $loader->load('FormLabel'); // 'Foo_View_Helper_FormLabel'
 
 // 'FormSubmit' ヘルパーをロードします
 $formSubmitClass = $loader->load('FormSubmit'); // 'Bar_View_Helper_FormSubmit'
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             クラスを読み込めたら、次はそのインスタンスを作成します。
@@ -115,8 +112,7 @@ $loader = new Zend_Loader_PluginLoader(array(
     'Foo_View_Helper'  => 'application/modules/foo/views/helpers',
     'Bar_View_Helper'  => 'application/modules/bar/views/helpers'
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -131,8 +127,7 @@ $loader = new Zend_Loader_PluginLoader(array(
         <programlisting role="php"><![CDATA[
 // プラグインを静的レジストリ 'foobar' に保存します
 $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>PluginLoader</code> がインスタンス化したその他のコンポーネントで
@@ -196,8 +191,7 @@ if ($loader->isLoaded('Adapter')) {
     $class   = $loader->getClassName('Adapter');
     $adapter = call_user_func(array($class, 'getInstance'));
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.loader.pluginloader.performance">

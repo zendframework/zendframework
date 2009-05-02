@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout の設定オプション</title>
 
@@ -121,8 +121,7 @@ $options = array(
     'layoutPath' => '/path/to/layouts',
     'contentKey' => 'CONTENT',           // MVC を使わない場合は無視されます
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 /**
@@ -132,8 +131,7 @@ layoutPath = "/path/to/layouts"
 contentKey = "CONTENT"
 */
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <example id="zend.layout.options.examples.constructor">
             <title>オプションをコンストラクタあるいは startMvc() で渡す</title>
@@ -156,8 +154,7 @@ $layout = new Zend_Layout($options);
 
 // startMvc() を使用します
 $layout = Zend_Layout::startMvc($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 次に config オブジェクトを使用する方法です。
@@ -172,8 +169,7 @@ $layout = new Zend_Layout($config);
 
 // startMvc() を使用します
 $layout = Zend_Layout::startMvc($config);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 基本的に、これは <classname>Zend_Layout</classname>
@@ -197,8 +193,7 @@ $layout->setOptions($options);
 
 // Zend_Config オブジェクトを使用します
 $layout->setConfig($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 しかし、ここで注意すべき点があります。
@@ -223,8 +218,7 @@ $layout->setConfig($options);
 $layout->setLayout('foo')
        ->setLayoutPath('/path/to/layouts')
        ->setContentKey('CONTENT');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

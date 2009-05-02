@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.json.advanced">
     <title>Zend_Json の高度な使用法</title>
 
@@ -35,8 +35,7 @@
         <programlisting role="php"><![CDATA[
 // JSONオブジェクトをPHPオブジェクトにデコードします
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             このようにしてデコードされたオブジェクトは <code>StdClass</code>
             オブジェクトとなり、JSON の キー/値
@@ -87,8 +86,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <programlisting role="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.json.advanced.expr">
@@ -128,8 +126,7 @@ $jsonObjectWithExpression = Zend_Json::encode(
     false,
     array('enableJsonExprFinder' => true)
 );
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

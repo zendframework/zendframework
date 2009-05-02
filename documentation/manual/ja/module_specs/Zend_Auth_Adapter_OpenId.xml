@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.auth.adapter.openid">
 
     <title>Open ID 認証</title>
@@ -118,8 +118,7 @@ if ((isset($_POST['openid_action']) &&
 <input type="submit" name="openid_action" value="logout">
 </fieldset></form></body></html>
 */
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             OpenID 認証手続きをカスタマイズして、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.gbase">
     <title>Google Base の使用法</title>
     <para>
@@ -117,8 +117,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 
 // Base サービスのインスタンスを作成します
 $service = new Zend_Gdata_Gbase($client);
-]]>
-            </programlisting>
+]]></programlisting>
 <para>AuthSub を使用した Base サービスの作成方法も同様ですが、少し冗長になります。</para>
 <programlisting role="php"><![CDATA[
 
@@ -208,14 +207,12 @@ session_start();
 // Base サービスのインスタンスを作成し、必要に応じて
 // AuthSub サーバにリダイレクトします
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
-]]>
- </programlisting>
+]]></programlisting>
 <para>最後に、snippets フィード用の未認証のサーバを作成する方法を示します。</para>
 <programlisting role="php"><![CDATA[
 // Base サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Gbase();
-]]>
- </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.gbase.retrieve">
@@ -255,8 +252,7 @@ $query->setOrderBy('modification_time');
 $query->setSortOrder('descending');
 $query->setMaxResults('5');
 $feed = $service->getGbaseItemFeed($query);
-]]>
-                </programlisting>
+]]></programlisting>
                 <para>
                     使用できるパラメータの一覧は、Customer Items フィードのドキュメントにある
                     <ulink url="http://code.google.com/apis/base/items-feed.html#QueParameters">
@@ -278,8 +274,7 @@ $query->setOrderBy('modification_time');
 $query->setSortOrder('descending');
 $query->setMaxResults('5');
 $feed = $service->getGbaseSnippetFeed($query);
-]]>
-                </programlisting>
+]]></programlisting>
                 <para>
                     使用できるパラメータの一覧は、Snippets フィードのドキュメントにある
                     <ulink url="http://code.google.com/apis/base/snippets-feed.html#Parameters">
@@ -305,8 +300,7 @@ foreach ($feed->entries as $entry) {
     echo "属性 " . $attr->name . " : " . $attr->text . "<br>";
   }
 }
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 あるいは、特定の属性の名前を指定してそれにマッチする結果を取得することもできます。
             </para>
@@ -318,8 +312,7 @@ foreach ($feed->entries as $entry) {
     echo "主原料: " . $attr->text . "<br>";
   }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.gbase.crud">
@@ -373,8 +366,7 @@ $newEntry->addGbaseAttribute("payment_accepted", "Google Checkout", "text");
 
 $dryRun = true;
 $createdEntry = $service->insertGbaseItem($newEntry, $dryRun);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
         <sect3 id="zend.gdata.gbase.crud.modify">
             <title>アイテムの変更</title>
@@ -423,8 +415,7 @@ $entry->save($dryRun);
 // あるいは、サービスオブジェクトの updateGbaseItem() をコールして変更を保存します
 // $dryRun = true;
 // $service->updateGbaseItem($entry, $dryRun);
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 変更した後は、<classname>Zend_Gdata_Gbase_ItemEntry</classname>
                 オブジェクトの <code>save($dryRun)</code> メソッドを実行するか
@@ -442,8 +433,7 @@ $entry->save($dryRun);
             <programlisting role="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 あるいは、<classname>Zend_Gdata_Gbase_ItemEntry</classname> オブジェクトの
                 <code>delete()</code> を実行することもできます。
@@ -451,8 +441,7 @@ $service->deleteGbaseItem($entry, $dryRun);
             <programlisting role="php"><![CDATA[
 $dryRun = false;
 $entry->delete($dryRun);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 </sect1>

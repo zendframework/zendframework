@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -27,8 +27,7 @@
 
         <programlisting role="php"><![CDATA[
 $currency = new Zend_Currency();
-]]>
-        </programlisting>
+]]></programlisting>
 
 
     </example>
@@ -49,8 +48,7 @@ Zend_Registry::set('Zend_Locale', $locale);
 
 // アプリケーションのどこかで
 $currency = new Zend_Currency();
-]]>
-    </programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -123,8 +121,7 @@ $currency = new Zend_Currency();
 
 // 通貨として 'EUR'、数値フォーマットに 'en_US' を使用するインスタンスを作成します
 $currency = new Zend_Currency('en_US', 'EUR');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -192,8 +189,7 @@ echo $currency->toCurrency(1000, array('format' => 'de_AT'));
 
 // '$ ١٬٠٠٠٫٠٠' と表示します
 echo $currency->toCurrency(1000, array('script' => 'Arab'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -419,8 +415,7 @@ echo $currency->toCurrency(1000);
 $currency->setFormat(array('format' => '##0.00'));
 // '1000,00 American Dollar' と表示します
 echo $currency->toCurrency(1000);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -525,8 +520,7 @@ print_r($currency->getRegionList();
 
 // この地域で用いられているすべての通貨を配列で返します
 print_r($currency->getCurrencyList('de_AT');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -555,8 +549,7 @@ print $currency->toCurrency(1000);
 // オーストリアの通貨を取得します
 $currency->setLocale('de_AT');
 print $currency->toCurrency(1000);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -589,8 +582,7 @@ $cache = Zend_Cache::factory('Core',
                              array('cache_dir'
                                        => dirname(__FILE__) . '/_files/'));
 Zend_Currency::setCache($cache);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

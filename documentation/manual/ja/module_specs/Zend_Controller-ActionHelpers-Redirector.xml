@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
 
@@ -174,8 +174,7 @@ class SomeController extends Zend_Controller_Action
         return; // 決してここには到達しません
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
@@ -212,8 +211,7 @@ class AlternativeController extends Zend_Controller_Action
         return; // リダイレクト後に自動的に exit() されるので、決してここには到達しません
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
@@ -259,8 +257,7 @@ class ForwardController extends Zend_Controller_Action
                                        );
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
@@ -282,8 +279,7 @@ $route = new Zend_Controller_Router_Route(
           'action' => 'view')
 );
 $router->addRoute('blogArchive', $route);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 year を 2006、month を 4、day を 24、そして ID を 42
@@ -321,8 +317,7 @@ class BlogAdminController extends Zend_Controller_Action
         );
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 </sect3>

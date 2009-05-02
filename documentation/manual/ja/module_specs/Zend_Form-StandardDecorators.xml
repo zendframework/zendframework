@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.form.standardDecorators">
     <title>Zend Framework に同梱されている標準のデコレータ</title>
 
@@ -34,8 +34,7 @@ class Util
         return '<span class="label">' . $element->getLabel() . "</span>";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このコールバックは <code>array('Util',
@@ -124,8 +123,7 @@ class Util
     <legend>User Information</legend>
     ...
 </fieldset></dd>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             このデコレータは、元のコンテンツを上書きし、
@@ -485,8 +483,7 @@ $element->setDecorators(array(array('ViewScript', array(
 $element->viewScript = '_element.phtml';
 $element->setDecorators(array(array('ViewScript',
                                     array('class' => 'form element'))));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             そして、次のようなビュースクリプトを作成します
@@ -504,8 +501,7 @@ $element->setDecorators(array(array('ViewScript',
     <?php echo $this->formErrors($this->element->getMessages()) ?>
     <div class="hint"><?php echo $this->element->getDescription() ?></div>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>ビュースクリプトによるコンテンツの置換</title>
@@ -529,8 +525,7 @@ $element->getDecorator('ViewScript')->setOption('placement', false);
 
 // デコレータが使用するビュースクリプト内
 $this->decorator->setOption('placement', false);
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>

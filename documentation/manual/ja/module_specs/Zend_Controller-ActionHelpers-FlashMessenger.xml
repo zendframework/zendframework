@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.actionhelpers.flashmessenger">
     <title>FlashMessenger</title>
 
@@ -63,7 +63,6 @@ class SomeController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 </sect3>

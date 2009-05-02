@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
@@ -28,8 +28,7 @@ $route = new Zend_Controller_Router_Route(
 );
 
 $router->addRoute('user', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Controller_Router_Route</classname>
@@ -66,8 +65,7 @@ $values = array(
     'controller' => 'profile',
     'action'     => 'userinfo'
 );
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         その後、<classname>Zend_Controller_Dispatcher</classname> は
@@ -85,8 +83,7 @@ public function userinfoAction()
 
     $username = $this->_getParam('username');
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         ルート定義には、特殊文字 (ワイルドカード)
@@ -102,8 +99,7 @@ $route = new Zend_Controller_Router_Route(
     array('module' => 'default')
 );
 $router->addRoute('default', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <sect4 id="zend.controller.router.routes.standard.variable-defaults">
         <title>変数のデフォルト</title>
@@ -122,8 +118,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => 2006)
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上のルートは <code>'http://domain.com/archive/2005'</code> および
@@ -152,8 +147,7 @@ $route = new Zend_Controller_Router_Route(
     )
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             このルートは、<code>ArchiveController</code> の
@@ -182,8 +176,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => '\d+')
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例のルートでは、year 変数の値が数値データである場合にのみ
@@ -294,8 +287,7 @@ $translator->setLocale('en');
 
 // ルートのデフォルト翻訳器として設定します
 Zend_Controller_Router_Route::setDefaultTranslator($translator);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             これは、静的セグメントを使用する例です。
@@ -317,8 +309,7 @@ $route->assemble(array());
 
 // URL をドイツ語でアセンブルします: archiv
 $route->assemble(array());
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             動的セグメントを使用すると、
@@ -341,8 +332,7 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
 
 // URL をドイツ語でアセンブルします: archiv/uebersicht/foo/bar
 $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             静的セグメントと動的セグメントを同時に使用することもできます。
@@ -368,8 +358,7 @@ $route->assemble(array('mode' => 'month', 'value' => '5'));
 
 // URL をドイツ語でアセンブルします: archiv/monat/5
 $route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 </sect3>
 <!--

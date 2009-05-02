@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -157,8 +157,7 @@ $client = new Zend_Http_Client('https://www.example.com', $config);
 
 // これ以降のリクエストは、TLS セキュア接続上で行われます
 $response = $client->request();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例の結果は、次の PHP コマンドで TCP
@@ -264,8 +263,7 @@ $config = array(
 $client = new Zend_Http_Client('http://www.example.com', $config);
 
 // 作業を続けます...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             説明したとおり、もし proxy_host を省略したり空文字列を設定したりすると、
@@ -320,8 +318,7 @@ $adapter->setResponse(
 
 $response = $client->request('GET');
 // .. $response の処理を続けます...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例のようにすると、HTTP クライアントにお望みのレスポンスを返させることができます。
@@ -368,8 +365,7 @@ $adapter->addResponse(
 
 // HTTP クライアントオブジェクト ($client) をテスト対象の
 // オブジェクトに注入し、オブジェクトの動きを以下でテストします
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             setResponse() メソッドは、
@@ -415,8 +411,7 @@ $config = array(
     'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
 );
 $client = new Zend_Http_Client($uri, $config);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -450,8 +445,7 @@ $adapter->setConfig(array(
     )
 ));
 $client->request("PUT");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -544,8 +538,7 @@ class MyApp_Http_Client_Adapter_BananaProtocol
 $client = new Zend_Http_Client(array(
     'adapter' => 'MyApp_Http_Client_Adapter_BananaProtocol'
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

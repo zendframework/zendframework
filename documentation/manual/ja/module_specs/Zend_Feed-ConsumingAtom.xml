@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.consuming-atom">
 <title>Atom フィードの使用</title>
 
@@ -28,8 +28,7 @@ foreach ($feed as $entry) {
     echo 'タイトル: ' . $entry->title() . "\n";
     echo '概要: ' . $entry->summary() . "\n\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>

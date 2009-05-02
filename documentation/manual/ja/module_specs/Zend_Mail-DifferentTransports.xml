@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.different-transports">
     <title>異なる転送手段の使用</title>
     <para>
@@ -20,8 +20,7 @@ $tr2 = new Zend_Mail_Transport_Smtp('other_server@example.com');
 $mail->send($tr1);
 $mail->send($tr2);
 $mail->send();  // もう一度デフォルトを使用します
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <note>
         <title>転送手段の追加</title>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -150,8 +150,7 @@ $inflector->setFilterRule(':action', array(
     ),
     'StringToLower'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     上のコードは、インフレクタを変更して単語をダッシュで区切らないようにしています。
@@ -175,8 +174,7 @@ $inflector->setFilterRule(':action', array(
 
                 <programlisting role="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
-]]>
-</programlisting>
+]]></programlisting>
 
                 <para>
                     これで camelCasing 形式の URL を使えるようになり、
@@ -217,8 +215,7 @@ $front->setParam('useCaseSensitiveActions', true);
 
         <programlisting role="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>ViewRenderer</code> アクションヘルパーは、
@@ -239,8 +236,7 @@ $front->setParam('noErrorHandler', true);
         <programlisting role="php"><![CDATA[
 // $front は Zend_Controller_Front のインスタンスであるとします
 $front->setParam('noViewRenderer', true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             しかし、長い目で見ればこれはあまりよい作戦ではありません。
@@ -267,8 +263,7 @@ $front->setParam('noViewRenderer', true);
 
         <programlisting role="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             レンダリング、転送あるいはリダイレクトを行っているアクションメソッドがひとつもない場合は、
@@ -283,8 +278,7 @@ public function preDispatch()
     $this->_helper->viewRenderer->setNoRender()
     // .. 何かほかのことをします...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             もしメソッド内で <code>render()</code> をコールしていて、
@@ -343,8 +337,7 @@ public function preDispatch()
 // $view はすでに定義されているものとします
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -355,8 +348,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <programlisting role="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-$viewRenderer->setView($view);]]>
-                </programlisting>
+$viewRenderer->setView($view);]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -429,8 +421,7 @@ $viewRenderer->setView($view);]]>
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             しかし、ディレクトリ構造を見直し、いくつかのコンポーネントが削除されました。
@@ -490,8 +481,7 @@ final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
                                   array $params = null);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     <code>$action</code> は常に必須です。
@@ -518,8 +508,7 @@ final protected function _forward($action,
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 /* -- ルータを作成します -- */
@@ -536,8 +525,7 @@ $ctrl->setRouter($router);
 /* -- コントローラのディレクトリを設定し、ディスパッチします -- */
 $ctrl->setControllerDirectory('/path/to/controllers');
 $ctrl->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             レスポンスオブジェクトを使用して、コンテンツとヘッダを取得することを推奨します。
@@ -580,8 +568,7 @@ $ctrl->dispatch();
                         </para>
                         <programlisting role="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -599,8 +586,7 @@ $front->returnResponse(true);
 $response = $front->dispatch();
 $response->renderExceptions(true);
 echo $response;
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -696,8 +682,7 @@ $action = $this->getRequest()->getActionName();
 $params = $this->_getParams();
 // パラメータ 'foo' を取得します。見つからなかった場合はデフォルト値 'default' を設定します
 $foo = $this->_getParam('foo', 'default');
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
 
                     <listitem>
@@ -718,8 +703,7 @@ public function __call($method, $args)
 
     throw new Zend_Controller_Exception('無効なメソッド呼び出しです');
 }
-]]>
-                        </programlisting>
+]]></programlisting>
                     </listitem>
                 </itemizedlist>
             </listitem>

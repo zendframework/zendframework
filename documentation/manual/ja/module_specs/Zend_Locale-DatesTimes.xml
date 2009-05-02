@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.locale.date.datesandtimes">
 
     <title>日付および時刻の扱い</title>
@@ -190,8 +190,7 @@ Array
     [year] => 2006
     [fixed] => 4
 )
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -219,8 +218,7 @@ $date = Zend_Locale_Format::getDate('13.04.2006',
                                    );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -239,8 +237,7 @@ $date = Zend_Locale_Format::getDate('13.04.2005 22:14:55',
                                     );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -259,8 +256,7 @@ $date = Zend_Locale_Format::getDate('13200504T551422',
                                    );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -372,8 +368,7 @@ $date = Zend_Locale_Format::getDate('41.10.20',
 
 // 41 は、日付ではなく年として返されます
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -406,8 +401,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 } else {
     print "日付ではありません";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -436,8 +430,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
 } else {
     print "時刻ではありません";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -464,8 +457,7 @@ if (Zend_Locale_Format::checkDateFormat('13:44:42',
 } else {
     print "時刻ではありません";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

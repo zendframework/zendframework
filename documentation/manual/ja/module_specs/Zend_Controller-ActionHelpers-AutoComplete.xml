@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
@@ -44,8 +44,7 @@ class FooController extends Zend_Controller_Action
                                   ->prepareAutoCompletion($data);
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     <para>
         デフォルトでは以下のような作業を行います。
@@ -136,8 +135,7 @@ class FooController extends Zend_Controller_Action
         <programlisting role="php"><![CDATA[
 // コントローラのアクション内で
 $this->_helper->autoCompleteDojo($data);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
             <title>Zend MVC を使用した、Dojo でのオートコンプリート</title>
@@ -173,8 +171,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
         return this.inherited("fetch", arguments);
     }
 });
-]]>
-</programlisting>
+]]></programlisting>
 
             <para>
                 このクラスは、単に Dojo 自身の QueryReadStore
@@ -216,8 +213,7 @@ class TestController extends Zend_Controller_Action
         return $this->_form;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 ここでは、単に 'test' と 'go' メソッドのみを持つフォームを作成します。
@@ -271,8 +267,7 @@ class TestController extends Zend_Controller_Action
         $this->_helper->autoCompleteDojo($matches);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>autocompleteAction()</code>
@@ -327,8 +322,7 @@ dojo.require("dojox.data.QueryReadStore");
 dojo.require("dijit.form.ComboBox");
 dojo.require("custom.TestNameReadStore");
 <?php $this->headScript()->captureEnd() ?>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 headStyle や headScript といったビューヘルパーのコールに注意しましょう。

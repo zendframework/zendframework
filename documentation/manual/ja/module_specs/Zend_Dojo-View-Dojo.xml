@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() ビューヘルパー</title>
 
@@ -48,8 +48,7 @@
 
         <programlisting role="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             次はビュースクリプトです。今回の例では、
@@ -75,8 +74,7 @@ $this->dojo()->enable()
              ->registerModulePath('custom', '../custom/')
              ->requireModule('dijit.form.FilteringSelect')
              ->requireModule('custom.PairedStore'); ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             レイアウトスクリプトでは、
@@ -105,8 +103,7 @@ $this->dojo()->enable()
     <?php echo $this->inlineScript() ?>
 </body>
 </html>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             これで、各ファイルが正しい場所にありさえすれば
@@ -166,8 +163,7 @@ $this->dojo()->enable()
 
             <programlisting role="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 プログラム的な使用法を指定するには、静的メソッド
@@ -176,8 +172,7 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 
             <programlisting role="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 独自のプログラム的なルールを作成したい場合は、
@@ -188,8 +183,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 
             <programlisting role="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect3>
 
@@ -203,8 +197,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 
         <programlisting role="php"><![CDATA[
 $view->dojo()->addStylesheetModule('dijit.themes.tundra');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             モジュールパスの検索は、'.' をディレクトリ区切り文字として使用し、
@@ -220,8 +213,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 
         <programlisting role="html"><![CDATA[
 <body class="tundra">
-]]>
-</programlisting>
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.dojo.view.dojo.layers">
@@ -276,8 +268,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 
         <programlisting role="html"><![CDATA[
 $view->dojo()->addLayer('/js/foo/foo.js');
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             独自のビルドを作成するためのさらなる情報は、<ulink

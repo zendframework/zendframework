@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.request">
     <title>リクエストオブジェクト</title>
     <sect2 id="zend.controller.request.introduction">
@@ -187,8 +187,7 @@
                 <programlisting role="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     このクラスは
@@ -252,8 +251,7 @@ $controller->setControllerDirectory('./application/controllers')
            ->setRouter($router)
            ->setBaseUrl('/projects/myapp'); // ベース URL を指定します!
 $response   = $controller->dispatch();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -408,8 +406,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function isDispatched();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             リクエストオブジェクトは、リクエスト環境のコンテナとなります。

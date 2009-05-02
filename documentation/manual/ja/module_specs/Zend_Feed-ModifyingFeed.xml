@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.modifying-feed">
     <title>フィードおよびエントリの構造の変更</title>
 
@@ -21,8 +21,7 @@ $entry->title = '新しいタイトルです';
 $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             これは、必要な XML 名前空間も含めた完全な
             (最初の <code>&lt;?xml ... &gt;</code> も含めた)
@@ -63,8 +62,7 @@ $entry->{'myns:container_elt'}->part1 = '入れ子になった独自部分、そ
 $entry->{'myns:container_elt'}->part2 = '入れ子になった独自部分、その2';
 
 echo $entry->saveXML();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

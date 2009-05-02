@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -117,8 +117,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             エラーオブジェクトを取得したら、次に
@@ -176,8 +175,7 @@ class ErrorController extends Zend_Controller_Action
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             エラーハンドラで発生した礼儀を取得するには、
@@ -218,8 +216,7 @@ public function errorAction()
                 break;
         }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
@@ -242,8 +239,7 @@ public function errorAction()
 
         <programlisting role="php"><![CDATA[
 $this->getResponse()->clearBody();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
@@ -254,8 +250,7 @@ $this->getResponse()->clearBody();
             <programlisting role="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
@@ -267,8 +262,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'controller' => 'static',
     'action'     => 'error'
 )));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
@@ -281,8 +275,7 @@ $plugin->setErrorHandlerModule('mystuff')
 
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin($plugin);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
     <sect4 id="zend.controller.plugins.standard.errorhandler.controllerexamples">
@@ -326,8 +319,7 @@ EOH;
         $this->view->content = $content;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 </sect3>
 <!--

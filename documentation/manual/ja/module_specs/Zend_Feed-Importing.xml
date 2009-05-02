@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.importing">
 
     <title>フィードの読み込み</title>
@@ -13,8 +13,7 @@
 
     <programlisting role="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Feed</classname> を使用して、ファイルや PHP
@@ -27,8 +26,7 @@ $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // PHP の文字列変数からフィードを読み込みます
 $feedFromPHP = Zend_Feed::importString($feedString);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         上のすべての例では、成功した場合に返されるのは
@@ -67,8 +65,7 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // rss フィードを配列から読み込みます
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 配列の書式は、次のような構造になっていなければなりません。
@@ -253,8 +250,7 @@ array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 参考
@@ -331,8 +327,7 @@ $atomFeedFromArray =
 // 独自のビルダ配列から rss フィードを読み込みます
 $rssFeedFromArray =
     Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -353,8 +348,7 @@ print $feed->saveXML();
 
 // http ヘッダを送信し、フィードを出力します
 $feed->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 

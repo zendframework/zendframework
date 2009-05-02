@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -38,8 +38,7 @@
             <title>loadFile() メソッドの例</title>
             <programlisting role="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
-]]>
-            </programlisting>
+]]></programlisting>
     </example>
 
         <para>
@@ -87,8 +86,7 @@ Zend_Loader::loadClass('Container_Tree',
         '/home/production/myapp'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -135,8 +133,7 @@ Zend_Loader::loadClass('Container_Tree',
 if (Zend_Loader::isReadable($filename)) {
     // $filename で何かをします
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -169,8 +166,7 @@ if (Zend_Loader::isReadable($filename)) {
             <title>自動ローダー用コールバックメソッドの登録例</title>
             <programlisting role="php"><![CDATA[
 Zend_Loader::registerAutoload();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -218,8 +214,7 @@ class My_Loader extends Zend_Loader
 }
 
 Zend_Loader::registerAutoload('My_Loader');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

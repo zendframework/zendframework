@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.docs">
     <title>Google Documents List Data API の使用法</title>
 
@@ -35,8 +35,7 @@ $service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $docs = new Zend_Gdata_Docs($client);
 $feed = $docs->getDocumentListFeed();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
         結果として得られる <classname>Zend_Gdata_Docs_DocumentListFeed</classname>
@@ -104,8 +103,7 @@ function uploadDocument($docs, $html, $originalFileName,
   echo $newDocumentEntry->title."\n";
   if ($html) {echo "</a>\n";}
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.docs.queries">
@@ -133,8 +131,7 @@ function uploadDocument($docs, $html, $originalFileName,
 
             <programlisting role="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
-    'http://docs.google.com/feeds/documents/private/full/-/document');]]>
-            </programlisting>
+    'http://docs.google.com/feeds/documents/private/full/-/document');]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.docs.listspreadsheets">
@@ -146,8 +143,7 @@ $feed = $docs->getDocumentListFeed(
 
             <programlisting role="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
-    'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');]]>
-            </programlisting>
+    'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.docs.textquery">
@@ -162,8 +158,7 @@ $feed = $docs->getDocumentListFeed(
             <programlisting role="php"><![CDATA[
 $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
-$feed = $client->getDocumentListFeed($docsQuery);]]>
-            </programlisting>
+$feed = $client->getDocumentListFeed($docsQuery);]]></programlisting>
         </sect3>
 
     </sect2>

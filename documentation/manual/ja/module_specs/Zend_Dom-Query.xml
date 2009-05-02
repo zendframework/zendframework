@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
 
@@ -136,8 +136,7 @@
     </tr>
 </table>
 </div>
-]]>
-</programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -158,8 +157,7 @@ $count = count($results); // マッチした数: 4
 foreach ($results as $result) {
     // $result は DOMElement です
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Dom_Query</classname> では、

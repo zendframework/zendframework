@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.attachments">
     <title>ファイルの添付</title>
     <para>
@@ -20,8 +20,7 @@ $mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
                         Zend_Mime::ENCODING_8BIT);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         添付ファイル用の MIME パートを細かく制御するには、
@@ -39,8 +38,7 @@ $at->encoding    = Zend_Mime::ENCODING_8BIT;
 $at->filename    = 'test.gif';
 
 $mail->send();
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         もうひとつの方法は、<classname>Zend_Mime_Part</classname> のインスタンスを作成して
         それを <code>addAttachment()</code> で追加するものです。
@@ -57,8 +55,7 @@ $at->filename    = 'test.gif';
 $mail->addAttachment($at);
 
 $mail->send();
-]]>
-    </programlisting>
+]]></programlisting>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

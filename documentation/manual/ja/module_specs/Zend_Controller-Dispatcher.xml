@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.dispatcher">
     <title>ディスパッチャ</title>
 
@@ -40,8 +40,7 @@ $front->setParam('prefixDefaultModule', true);
 
 // ディスパッチャで
 $dispatcher->setParam('prefixDefaultModule', true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 これにより、既存のモジュールをアプリケーションのデフォルトモジュールとすることができます。
@@ -92,8 +91,7 @@ public function bazAction()
     // Foo_BarController::bazAction() に転送します
     $this->_forward('baz', 'bar', 'foo', array('baz' => 'bogus'));
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.dispatcher.subclassing">
@@ -273,8 +271,7 @@ interface Zend_Controller_Dispatcher_Interface
      */
     public function getDefaultAction();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             しかし、たいていの場合は単純に抽象クラス

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.consuming-rss">
     <title>RSS フィードの使用</title>
     <para>
@@ -9,8 +9,7 @@
     </para>
     <programlisting role="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         フィードの取得時にエラーが発生した場合は
         <classname>Zend_Feed_Exception</classname> がスローされます。
@@ -22,8 +21,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->title();
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         関数の構文に注意しましょう。"getter" 方式の構文 (<code>$obj->property</code>)
         をした場合は、<classname>Zend_Feed</classname> はプロパティを XML オブジェクトとして扱います。
@@ -38,8 +36,7 @@ echo $channel->title();
     </para>
     <programlisting role="php"><![CDATA[
 echo $channel->category['domain'];
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         XML の属性は子を持つことができないので、
         属性値へアクセスする際にメソッド構文を使用する必要はありません。
@@ -56,8 +53,7 @@ echo $channel->category['domain'];
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         RSS にあまり詳しくない方のために、RSS チャネルおよび個々の RSS
         アイテム (エントリ) で利用できる標準的な要素をまとめます。
@@ -144,8 +140,7 @@ foreach ($channel as $item) {
 if ($item->propname()) {
     // ... 続行できます
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <code>$item->propname</code> 形式を使用した場合は、

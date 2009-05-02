@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
@@ -62,8 +62,7 @@
     <br />
     <input type="submit" value="アップロード" />
 </form>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             HTML を直接作成するのではなく、利便性を考慮して
             <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link>
@@ -84,8 +83,7 @@ if (!$adapter->receive()) {
     $messages = $adapter->getMessages();
     echo implode("\n", $messages);
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             このコードは <classname>Zend_File_Transfer</classname> のもっともシンプルな使用法を示すものです。
             ローカルの保存先を <code>setDestination</code> メソッドで指定して
@@ -210,8 +208,7 @@ foreach ($files as $file => $info) {
 }
 
 $upload->receive();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -289,8 +286,7 @@ $names = $upload->getFileName();
 
 // フォームの 'foo' 要素のファイル名を返します。
 $names = $upload->getFileName('foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -322,8 +318,7 @@ $size = $upload->getFileSize();
 // SI 記法を無効にし、数値のみを返すようにします
 $upload->setOption(array('useByteString' => false));
 $size = $upload->getFileSize();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -347,8 +342,7 @@ $hash = $upload->getHash('md5');
 
 // フォームの 'foo' 要素のハッシュを返します。
 $names = $upload->getHash('crc32', 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -374,8 +368,7 @@ $mime = $upload->getMimeType();
 
 // フォーム要素 'foo' の mimetype を返します
 $names = $upload->getMimeType('foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -450,8 +443,7 @@ $upload = null;
 while (!$upload['done']) {
     $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
@@ -566,8 +558,7 @@ while (!$upload['done']) {
     print "\nActual progress:".$upload['message'];
     // 何か必要な処理をします
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 

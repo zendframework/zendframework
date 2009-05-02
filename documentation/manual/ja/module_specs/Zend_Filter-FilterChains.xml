@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.filter.filter_chains">
 
     <title>フィルタチェイン</title>
@@ -20,8 +20,7 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 
 // ユーザ名をフィルタリングします
 $username = $filterChain->filter($_POST['username']);
-]]>
-        </programlisting>
+]]></programlisting>
 
         フィルタは、<classname>Zend_Filter</classname> に追加した順に適用されます。
         上の例では、まずユーザ名から非英字を除去したあとで、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.multiple-emails">
     <title>SMTP 接続による複数のメールの送信</title>
 
@@ -31,8 +31,7 @@ for ($i = 0; $i > 5; $i++) {
     $mail->setBodyText('...Your message here...');
     $mail->send($transport);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -75,8 +74,7 @@ for ($i = 0; $i > 5; $i++) {
 
 $protocol->quit();
 $protocol->disconnect();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie および Zend_Http_CookieJar</title>
 
@@ -104,8 +104,7 @@ $cookie = Zend_Http_Cookie::fromString('foo=bar; domain=.example.com; ' .
 // クッキーのドメインが設定されていない場合は、手動で設定する必要があります。
 $cookie = Zend_Http_Cookie::fromString('foo=bar; secure;',
                                        'http://www.example.com/path');
-]]>
-               </programlisting>
+]]></programlisting>
             </example>
             <note>
                 <para>
@@ -139,8 +138,7 @@ echo (string) $cookie;
 
 // PHP 5.2 以降では、これでもかまいません。
 echo $cookie;
-]]>
-               </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -232,8 +230,7 @@ echo ($cookie->isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
 
 echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
 // これは 'No' を表示します
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -317,8 +314,7 @@ $cookie->match('http://subdomain.example.com/');
 
 $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
 // これは false を返します。今から三時間後の時刻を指定したからです。
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>

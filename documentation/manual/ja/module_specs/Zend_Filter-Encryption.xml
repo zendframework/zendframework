@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
@@ -22,8 +22,7 @@ $filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
 
 // OpenSSL アダプタを使用します
 $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         別のアダプタを設定するために <code>setAdapter()</code>
@@ -35,8 +34,7 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 // Mcrypt アダプタを使用します
 $filter = new Zend_Filter_Encrypt();
 $filter->setAdapter('openssl');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -105,6 +103,14 @@ $filter->setAdapter('openssl');
                     省略した場合はランダムなベクトルとなります。
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>salt</emphasis>: キーを salt 値として使用するかどうか。
+                    使用すると、暗号化に使用するキー自体も暗号化されます。
+                    デフォルトは false です。
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -158,8 +164,7 @@ $encrypted = $filter->filter('text_to_be_encoded');
 print $encrypted;
 
 // 復号の方法は Decrypt フィルタを参照ください
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.filter.set.encrypt.openssl">
@@ -208,8 +213,7 @@ $filter->setPublicKey(array(
     '/public/key/path/first.pem',
     '/public/key/path/second.pem'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -237,8 +241,7 @@ $filter->setPublicKey(array(
     '/public/key/path/second.pem'
 ));
 $filter->setPassphrase('mypassphrase');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             最後に、OpenSSL を使用した場合に受け手に渡す必要があるものをまとめます。
@@ -274,8 +277,7 @@ $envelope  = $filter->getEnvelopeKey();
 print $encrypted;
 
 // 復号の方法は Decrypt フィルタを参照ください
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 </sect2>
 

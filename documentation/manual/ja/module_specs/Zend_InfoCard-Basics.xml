@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.infocard.basics">
     <title>導入</title>
 
@@ -47,8 +47,7 @@
          http://.../claims/surname" />
  </object>
 </form>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             この例において、<code>requiredClaims</code>
@@ -143,8 +142,7 @@ if (isset($_POST['xmlToken'])) {
   </object>
  </form>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例では、まず最初に
@@ -212,8 +210,7 @@ if (isset($_POST['xmlToken'])) {
    </object>
  </form>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例では、<classname>Zend_InfoCard</classname>
@@ -334,8 +331,7 @@ public function submitinfocardAction()
             ZBlog_Exception("Infomation card failed security checks");
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.infocard.basics.adapters">
@@ -399,8 +395,7 @@ $infoCard->addCertificatePair(SSL_PRIVATE, SSL_PUB);
 $infoCard->setAdapter($adapter);
 
 $claims = $infoCard->process($_POST['xmlToken']);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.authsub">
     <title>AuthSub による認証</title>
 
@@ -100,8 +100,7 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 
 // 認証済み Http クライアントを使用して Gdata オブジェクトを作成します
 $cal = new Zend_Gdata_Calendar($client);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -127,8 +126,7 @@ if (isset($_GET['logout'])) {
     header('Location: ' . $php_self);
     exit();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     <note>
         <title>セキュリティについて</title>

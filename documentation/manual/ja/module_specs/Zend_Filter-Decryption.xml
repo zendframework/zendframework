@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
@@ -43,8 +43,7 @@ $filter->setVector('myvector');
 
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -103,8 +102,7 @@ $filter->setEnvelopeKey(array(
     '/key/from/encoder/first.pem',
     '/key/from/encoder/second.pem'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -130,8 +128,7 @@ $filter->setEnvelopeKey(array(
     '/key/from/encoder/second.pem'
 ));
 $filter->setPassphrase('mypassphrase');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             最後に、コンテンツを復号します。
@@ -154,8 +151,7 @@ $filter->setPassphrase('mypassphrase');
 
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 </sect2>
 <!--

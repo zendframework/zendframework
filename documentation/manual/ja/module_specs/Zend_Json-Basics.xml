@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.json.basics">
     <title>基本的な使用法</title>
     <para>
@@ -15,8 +15,7 @@ $phpNative = Zend_Json::decode($encodedValue);
 
 // クライアントに返すために、それをエンコードします
 $json = Zend_Json::encode($phpNative);
-]]>
-    </programlisting>
+]]></programlisting>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.captcha.operation">
     <title>Captcha の方法</title>
 
@@ -30,8 +30,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     public function getErrors();
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         name アクセサを使用して、CAPTCHA の識別子を設定したり取得したりします。
@@ -69,8 +68,7 @@ echo $captcha->render($view);
 if ($captcha->isValid($_POST['foo'], $_POST)) {
     // 正解!
 }
-]]>
-        </programlisting>
+]]></programlisting>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

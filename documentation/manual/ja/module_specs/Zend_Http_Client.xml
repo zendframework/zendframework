@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.http.client">
     <title>導入</title>
     <para>
@@ -33,8 +33,7 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <note>
@@ -141,8 +140,7 @@ $client->setConfig(array(
                 <programlisting role="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
 $response = $client->request();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             request() メソッドには、オプションでパラメータを指定することができます。
             このパラメータはリクエストメソッドで、HTTP プロトコルで定義されている
@@ -169,8 +167,7 @@ $response = $client->request('POST');
 // POST リクエストを実行するためのもうひとつの方法です
 $client->setMethod(Zend_Http_Client::POST);
 $response = $client->request();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -200,8 +197,7 @@ $client->setParameterGet(array(
     'middle_name' => 'Bending'
     'made_in'     => 'Mexico',
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
         <para>
@@ -223,8 +219,7 @@ $client->setParameterPost(array(
     'country'   => 'ar',
     'selection' => array(45, 32, 80)
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             POST リクエストを送信する際には、GET パラメータと POST
             パラメータの両方を設定できることに注意しましょう。

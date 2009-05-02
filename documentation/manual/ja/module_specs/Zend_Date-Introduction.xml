@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.date.introduction">
 
     <title>導入</title>
@@ -59,8 +59,7 @@
 date_default_timezone_set('America/Los_Angeles');
 // ドイツのドイツ人用のタイムゾーン
 date_default_timezone_set('Europe/Berlin');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             <emphasis role="strong">Zend_Date のインスタンスを作成すると、
             そのタイムゾーンは自動的に現在のデフォルトタイムゾーンになります!</emphasis>

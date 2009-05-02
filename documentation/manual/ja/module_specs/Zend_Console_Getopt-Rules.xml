@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.console.getopt.rules">
     <title>Getopt の規則の宣言</title>
     <para>
@@ -41,8 +41,7 @@
             <title>短い形式の構文の使用</title>
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例は、<classname>Zend_Console_Getopt</classname> を用いて、
@@ -109,8 +108,7 @@ $opts = new Zend_Console_Getopt(
     'pear|p-s'   => '洋ナシです。オプションで文字列パラメータを指定します。'
   )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             上の例では、三種類のオプションを宣言しています。

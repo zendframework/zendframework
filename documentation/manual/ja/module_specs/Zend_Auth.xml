@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.auth.introduction">
 
     <title>導入</title>
@@ -93,8 +93,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
         // ...
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             docblock コメントで説明しているとおり、
             <code>authenticate()</code> は
@@ -164,8 +163,7 @@ Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
 Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS
 Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
 Zend_Auth_Result::FAILURE_UNCATEGORIZED
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -194,8 +192,7 @@ switch ($result->getCode()) {
         /** その他の原因で失敗した場合の処理 **/
         break;
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -269,8 +266,7 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 
 // 認証と結果の保存、そして成功時に ID を持続させます
 $result = $auth->authenticate($authAdapter);
-]]>
-                    </programlisting>
+]]></programlisting>
 
                 </para>
 
@@ -356,8 +352,7 @@ class MyStorage implements Zend_Auth_Storage_Interface
          */
     }
 }
-]]>
-                    </programlisting>
+]]></programlisting>
 
                 </para>
 
@@ -375,8 +370,7 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 
 // 認証と結果の保存、そして成功時に ID を持続させます
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
-]]>
-                    </programlisting>
+]]></programlisting>
 
                 </para>
 
@@ -430,8 +424,7 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $auth->getIdentity()
     // $result->getIdentity() === $username
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -443,8 +436,7 @@ if ($auth->hasIdentity()) {
     // ID があるのでそれを取得します
     $identity = $auth->getIdentity();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -453,8 +445,7 @@ if ($auth->hasIdentity()) {
             これは、アプリケーションの "ログアウト" 処理を実装するためのものです。
             <programlisting role="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -482,8 +473,7 @@ if (!$result->isValid()) {
     // 認証に成功しました
     // $result->getIdentity() === $username
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
     </sect2>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.json.xml2json">
     <title>XML から JSON への変換</title>
     <para>
@@ -24,8 +24,7 @@
     <programlisting role="php"><![CDATA[
 // fromXml 関数の入力には、XML を含む文字列を渡します
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Json::fromXml()</classname> 関数は、
@@ -75,8 +74,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <publisher>O'Reilly</publisher>
     </book>
 </books>
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Json::fromXml()</classname> 関数が返す JSON 文字列です。
@@ -113,8 +111,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
       }
    ]}
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         xml2json の機能についての詳細は、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.clientlogin">
     <title>ClientLogin による認証</title>
 
@@ -98,8 +98,7 @@ try {
 }
 
 $cal = new Zend_Gdata_Calendar($client);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

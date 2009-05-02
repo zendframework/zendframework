@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.front">
     <title>フロントコントローラ</title>
 
@@ -60,8 +60,7 @@
             <programlisting role="php"><![CDATA[
 // ErrorHandler プラグインを無効にします
 $front->setParam('noErrorHandler', true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>ViewRenderer</code> を無効にするには、
@@ -71,8 +70,7 @@ $front->setParam('noErrorHandler', true);
             <programlisting role="php"><![CDATA[
 // ViewRenderer ヘルパーを無効にします
 $front->setParam('noViewRenderer', true);
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
     </sect2>
 
@@ -95,8 +93,7 @@ $front->setParam('noViewRenderer', true);
 
             <programlisting role="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.front.methods.primary.setcontrollerdirectory">
@@ -128,8 +125,7 @@ $front->setControllerDirectory(array(
 
 // 'foo' モジュールのディレクトリを追加します
 $front->addControllerDirectory('../modules/foo/controllers', 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <note>
                 <para>
@@ -249,8 +245,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 // フロントコントローラを作成してコントローラディレクトリを設定し、
 // ディスパッチするまでをいちどでお手軽に行います
 Zend_Controller_Front::run('../application/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -533,8 +528,7 @@ class My_Controller_Front extends Zend_Controller_Front
         return self::$_instance;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>getInstance()</code> メソッドをオーバーライドすることで、それ以降の

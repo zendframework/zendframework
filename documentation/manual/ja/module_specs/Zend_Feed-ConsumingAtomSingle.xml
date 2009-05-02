@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>単一の Atom エントリの処理</title>
 
@@ -24,8 +24,7 @@ $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 echo 'このフィードには ' . $feed->count() . ' 件のエントリが含まれます。';
 
 $entry = $feed->current();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -38,8 +37,7 @@ $entry = $feed->current();
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

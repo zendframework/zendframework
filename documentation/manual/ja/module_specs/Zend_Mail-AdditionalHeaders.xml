@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.mail.additional-headers">
     <title>追加のヘッダ</title>
     <para>
@@ -16,8 +16,7 @@ $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');
 $mail->addHeader('X-greetingsTo', 'Mom', true); // 複数の値
 $mail->addHeader('X-greetingsTo', 'Dad', true);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

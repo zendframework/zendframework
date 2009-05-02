@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect3 id="zend.controller.router.routes.hostname">
     <title>Zend_Controller_Router_Route_Hostname</title>
 
@@ -30,8 +30,7 @@ $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
 $plainPathRoute = new Zend_Controller_Router_Route_Static('');
 
 $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Controller_Router_Route_Hostname</classname>

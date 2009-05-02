@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.log.formatters">
   <title>フォーマッタ</title>
   <para>
@@ -26,8 +26,7 @@
       <programlisting role="php"><![CDATA[
 $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
 $formatter = new Zend_Log_Formatter_Simple($format);
-]]>
-      </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -45,8 +44,7 @@ $logger->addWriter($writer);
 $logger->info('there');
 
 // "hello there" と出力します
-]]>
-      </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -75,8 +73,7 @@ $logger = new Zend_Log();
 $logger->addWriter($writer);
 
 $logger->info('通知メッセージ');
-]]>
-      </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -89,8 +86,7 @@ $logger->info('通知メッセージ');
   <priority>6</priority>
   <priorityName>INFO</priorityName>
 </logEntry>
-]]>
-</programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -111,8 +107,7 @@ $logger = new Zend_Log();
 $logger->addWriter($writer);
 
 $logger->info('通知メッセージ');
-]]>
-      </programlisting>
+]]></programlisting>
 
       上のコードは、ルート要素の名前をデフォルトの
       <code>logEntry</code> から <code>log</code> に変更します。また、要素名
@@ -124,8 +119,7 @@ $logger->info('通知メッセージ');
   <msg>通知メッセージ</msg>
   <level>INFO</level>
 </log>
-]]>
-</programlisting>
+]]></programlisting>
     </para>
 
   </sect2>

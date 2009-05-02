@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
 
@@ -32,8 +32,7 @@ while ($buff = fread($sock, 1024))
     $str .= $sock;
 
 $response = Zend_Http_Response::factory($str);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
         <para>
@@ -110,8 +109,7 @@ if ($response->isError()) {
        " " . $response->getMessage() . "\n";
 }
 // .. ここでレスポンスを処理します...
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -181,8 +179,7 @@ if ($response->getStatus() == 200) {
   echo "データの取得時にエラーが発生しました。<br />";
   echo $response->getStatus() . ": " . $response->getMessage();
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             <note>
                 <title>常に返り値をチェックする</title>
@@ -205,8 +202,7 @@ if ($ctype == 'text/html' || $ctype == 'text/xml') {
 }
 
 echo $body;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>

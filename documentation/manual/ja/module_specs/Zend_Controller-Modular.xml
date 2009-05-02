@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
@@ -49,8 +49,7 @@ application/
                 list/
             helpers/
             filters/
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この考え方では、モジュール名が、
@@ -108,8 +107,7 @@ $front->setControllerDirectory(array(
     'default' => '/path/to/application/controllers',
     'blog'    => '/path/to/application/blog/controllers'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>addControllerDirectory()</code> では、オプションの二番目の引数を受け付けます。
@@ -121,8 +119,7 @@ $front->setControllerDirectory(array(
         <programlisting role="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             結局のところ、モジュールのディレクトリを設定する一番お手軽な方法は、
@@ -143,8 +140,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
  *             controllers/
  */
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             上の例は <code>default</code>、
@@ -172,8 +168,7 @@ $front->addModuleDirectory('/path/to/application/modules');
  */
 $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note><para>
             モジュール内でコントローラディレクトリを使用しない場合は、
@@ -226,8 +221,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <programlisting role="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

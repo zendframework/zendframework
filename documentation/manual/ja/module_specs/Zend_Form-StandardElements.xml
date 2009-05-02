@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.form.standardElements">
     <title>Zend Framework に同梱されている標準のフォーム要素</title>
 
@@ -70,8 +70,7 @@
 
         <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             CAPTCHA を登録するには <code>setCaptcha()</code>
@@ -85,8 +84,7 @@ $element->setCaptcha(new Zend_Captcha_Figlet());
 
 // 短い名前
 $element->setCaptcha('Dumb');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             設定経由で要素を読み込みたい場合は、キー 'captcha'
@@ -115,8 +113,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         'timeout' => 300,
     ),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             使用するデコレータは、captcha アダプタの設定によって決まります。
@@ -216,8 +213,7 @@ $element->addValidator('Size', false, 102400);
 // JPEG、PNG および GIF のみ
 $element->addValidator('Extension', false, 'jpg,png,gif');
 $form->addElement($element, 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 また、正しいエンコード形式をフォームに指定する必要があります。
@@ -227,8 +223,7 @@ $form->addElement($element, 'foo');
 
             <programlisting role="php"><![CDATA[
 $form->setAttrib('enctype', 'multipart/form-data');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 フォームの検証が成功したら、<code>receive()</code>
@@ -246,8 +241,7 @@ if (!$form->foo->receive()) {
 }
 
 $location = $form->foo->getFileName();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -280,8 +274,7 @@ $location = $form->foo->getFileName();
 
         <programlisting role="php"><![CDATA[
 $form->getValues();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -310,8 +303,7 @@ $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Upload an image:')
         ->setDestination('/var/www/upload')
         ->setValueDisabled(true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 これで、 <code>getValues()</code> をコールしてもファイルは取得されなくなります。
@@ -327,8 +319,7 @@ if ($form->isValid($form->getPost())) {
         print "Upload error";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -373,8 +364,7 @@ $form->addElement($element, 'foo');
 if ($form->foo->isUploaded()) {
     // foo がアップロードされたので、ここで何かをします
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -405,8 +395,7 @@ $element->addValidator('Extension', false, 'jpg,png,gif');
 // 3 つの file 要素を作成します
 $element->setMultiFile(3);
 $form->addElement($element, 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 ビューにおいて、同じ設定のファイルアップロード要素が 3 つ取得できます。
@@ -447,8 +436,7 @@ $element->setLabel('Upload an image:')
         ->addValidator('Size', false, 102400) // 100K までに制限します
         ->setMaxFileSize(102400); // ファイルサイズをクライアント側で制限します
 $form->addElement($element, 'foo');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>複数の file 要素がある場合の MaxFileSize</title>
@@ -495,8 +483,7 @@ $form->addElement($element, 'foo');
 
         <programlisting role="php"><![CDATA[
 $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             salt は、後から <code>setSalt($salt)</code>
@@ -618,8 +605,7 @@ $element = new Zend_Form_Element_MultiCheckbox('foo', array(
 ));
 
 $element->setValue(array('bar', 'bat'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             値をひとつだけ指定する場合でも、配列形式でなければならないことに注意しましょう。

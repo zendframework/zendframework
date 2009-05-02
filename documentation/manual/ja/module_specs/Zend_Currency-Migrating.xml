@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.currency.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -26,8 +26,7 @@
 
         <programlisting role="php"><![CDATA[
 $currency = new Zend_Currency($currency, $locale);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>setFormat()</code> メソッドには、オプションの配列を渡せるようになりました。
@@ -94,8 +93,7 @@ $currency = new Zend_Currency($currency, $locale);
 
         <programlisting role="php"><![CDATA[
 $currency->setFormat(array $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>toCurrency()</code> メソッドは、オプションのパラメータ
@@ -107,8 +105,7 @@ $currency->setFormat(array $options);
 
         <programlisting role="php"><![CDATA[
 $currency->toCurrency($value, array $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>getSymbol()</code> や <code>getShortName()</code>、

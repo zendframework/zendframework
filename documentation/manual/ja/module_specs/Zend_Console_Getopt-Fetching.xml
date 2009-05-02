@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.console.getopt.fetching">
     <title>オプションおよび引数の取得</title>
     <para>
@@ -42,8 +42,7 @@ try {
     echo $e->getUsageMessage();
     exit;
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             例外が発生するのは、次のような場合です。
@@ -85,8 +84,7 @@ try {
 $opts = new Zend_Console_Getopt('abp:');
 $b = $opts->getOption('b');
 $p_parameter = $opts->getOption('p');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             あるいは、マジックメソッド <code>__get()</code> を使用して、
@@ -101,8 +99,7 @@ if (isset($opts->b)) {
     echo "オプション b を取得しました。\n";
 }
 $p_parameter = $opts->p; // 設定されていない場合は null となります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             オプションにエイリアスが指定されている場合は、
@@ -168,8 +165,7 @@ $p_parameter = $opts->p; // 設定されていない場合は null となりま�
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setArguments(array('-p', 'p_parameter', 'filename'));
 $args = $opts->getRemainingArgs(); // array('filename') を返します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <classname>Zend_Console_Getopt</classname> は、GNU

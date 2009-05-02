@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.exception.using">
 
     <title>例外の使用法</title>
@@ -25,8 +25,7 @@ try {
     echo "メッセージ: " . $e->getMessage() . "\n";
     // その他、エラーから復帰するためのコード
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         <classname>Zend_Exception</classname> を使用すると、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Albums の使用法</title>
 
@@ -139,8 +139,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 
 // サービスのインスタンスを作成します
 $service = new Zend_Gdata_Photos($client);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 AuthSub を使用するサービスを作成するのもほぼ同様ですが、
@@ -231,15 +230,13 @@ function getAuthSubHttpClient()
  * 必要に応じてユーザを AuthSub サーバにリダイレクトします
  */
 $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>未認証のサーバを作成して、公開フィードへのアクセスに使用することができます。</para>
             <programlisting role="php"><![CDATA[
 // サービスのインスタンスを、未認証の HTTP クライアントで作成します
 $service = new Zend_Gdata_Photos();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -283,8 +280,7 @@ $service = new Zend_Gdata_Photos($client);
 
 $query = new Zend_Gdata_Photos_UserQuery();
 $query->setUser("sample.user");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             各クエリで検索結果を絞り込むために使用するパラメータを取得したり設定したりするには、
@@ -412,8 +408,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>あるいは、クエリを作成してフィードにアクセスすることもできます。この場合は、まず次のようにします。</para>
             <programlisting role="php"><![CDATA[
@@ -429,8 +424,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>クエリを作成すると、ユーザエントリオブジェクトも取得できるようになります。</para>
             <programlisting role="php"><![CDATA[
@@ -447,8 +441,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.album_retrieval">
@@ -472,8 +465,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 あるいは、<code>setAlbumName</code>
@@ -498,8 +490,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_retrieval">
@@ -524,8 +515,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>クエリを作成すると、写真エントリオブジェクトも取得できるようになります。</para>
             <programlisting role="php"><![CDATA[
@@ -544,8 +534,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_retrieval">
@@ -579,8 +568,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_retrieval">
@@ -614,8 +602,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "エラー: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>
@@ -636,8 +623,7 @@ $entry = new Zend_Gdata_Photos_AlbumEntry();
 $entry->setTitle($service->newTitle("test album"));
 
 $service->insertAlbumEntry($entry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_creation">
@@ -664,8 +650,7 @@ $albumQuery->setAlbumId("1");
 $albumEntry = $service->getAlbumEntry($albumQuery);
 
 $service->insertPhotoEntry($entry, $albumEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_creation">
@@ -689,8 +674,7 @@ $photoQuery->setType('entry');
 $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertCommentEntry($entry, $photoEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_creation">
@@ -713,8 +697,7 @@ $photoQuery->setType('entry');
 $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertTagEntry($entry, $photoEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>
@@ -739,8 +722,7 @@ $albumQuery->setType('entry');
 $entry = $service->getAlbumEntry($albumQuery);
 
 $service->deleteAlbumEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_deletion">
@@ -760,8 +742,7 @@ $photoQuery->setType('entry');
 $entry = $service->getPhotoEntry($photoQuery);
 
 $service->deletePhotoEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_deletion">
@@ -783,8 +764,7 @@ $path = $photoQuery->getQueryUrl() . '/commentid/' . "1000";
 $entry = $service->getCommentEntry($path);
 
 $service->deleteCommentEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_deletion">
@@ -813,8 +793,7 @@ foreach ($photoFeed as $entry) {
 }
 
 $service->deleteTagEntry($tagEntry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.optimistic_concurrenty">
@@ -846,8 +825,7 @@ try {
         throw $e;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>

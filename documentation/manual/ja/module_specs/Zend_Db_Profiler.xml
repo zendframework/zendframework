@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -38,8 +38,7 @@ $db->getProfiler()->setEnabled(false);
 
 // プロファイラを有効にします
 $db->getProfiler()->setEnabled(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>profiler</code> オプションの値には柔軟性があり、
@@ -57,8 +56,7 @@ $db->getProfiler()->setEnabled(true);
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -71,8 +69,7 @@ $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -92,8 +89,7 @@ $params['profiler'] = array(
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -104,8 +100,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
-]]>
-            </programlisting>
+]]></programlisting>
 
             この設定を適用するには、次のような PHP コードを書きます。
 
@@ -113,8 +108,7 @@ db.profiler.enabled = true
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
 
             '<code>instance</code>' プロパティは、次のように使用します。
             <programlisting role="php"><![CDATA[
@@ -126,8 +120,7 @@ $configData = array(
 $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -145,8 +138,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <programlisting role="php"><![CDATA[
 $profiler = $db->getProfiler();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             これは、<classname>Zend_Db_Profiler</classname> オブジェクトのインスタンスを返します。
@@ -234,8 +226,7 @@ $profiler = $db->getProfiler();
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             ページの生成に時間がかかっているとしましょう。この場合、
@@ -262,8 +253,7 @@ echo '平均の所要時間: ' . $totalTime / $queryCount . ' 秒' . "\n";
 echo '1 秒あたりのクエリ実行数: ' . $queryCount / $totalTime . "\n";
 echo '所要時間の最大値: ' . $longestTime . "\n";
 echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -292,8 +282,7 @@ $profiler->setFilterElapsedSecs(5);
 
 // 所要時間にかかわらず、すべてのクエリを調べます
 $profiler->setFilterElapsedSecs(null);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.db.profiler.advanced.filtertype">
@@ -373,8 +362,7 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
 // すべてのフィルタを削除します
 $profiler->setFilterQueryType(null);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -403,8 +391,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 
 // DELETE クエリの情報を取得します
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 

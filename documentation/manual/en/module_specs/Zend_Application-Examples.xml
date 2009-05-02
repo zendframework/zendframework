@@ -164,8 +164,8 @@ $application = new Zend_Application(
             ),
         ),
 
-        // For short names, define resource paths:
-        'resourcePaths = array(
+        // For short names, define plugin paths:
+        'pluginPaths = array(
             'My_Bootstrap_Resource' => 'My/Bootstrap/Resource',
         )
     )

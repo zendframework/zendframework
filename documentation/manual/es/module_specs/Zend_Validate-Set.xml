@@ -76,6 +76,10 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Validate-Db.xml">
+        <xi:fallback href="../../en/module_specs/Zend_Validate-Db.xml"></xi:fallback>
+    </xi:include>
+
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
@@ -83,9 +87,11 @@
             solamente dígitos.
         </para>
     </sect2>
-<!--
-    <xi:include href="Zend_Validate-EmailAddress.xml" />
--->
+
+    <xi:include href="Zend_Validate-EmailAddress.xml">
+        <xi:fallback href="../../en/module_specs/Zend_Validate-EmailAddress.xml"></xi:fallback>
+    </xi:include>
+
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
         <para>
@@ -110,7 +116,9 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Validate-Hostname.xml" />
+    <xi:include href="Zend_Validate-Hostname.xml">
+        <xi:fallback href="../../en/module_specs/Zend_Validate-Hostname.xml"></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
@@ -157,6 +165,10 @@
             con el patrón de una expresión regular.
         </para>
     </sect2>
+
+    <xi:include href="Zend_Validate-Sitemap.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Sitemap.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>

@@ -2,7 +2,7 @@
     <title>Introducción</title>
     <para>
 
-        <code class="code">Zend_Config</code>
+        <code>Zend_Config</code>
         está diseñado para simplificar el acceso y el uso de datos de
         configuración dentro de aplicaciones. Provee una interfaz de
         usuario basada en propiedades de objetos anidadas para acceder a
@@ -10,7 +10,7 @@
         datos de configuración pueden venir de multitud de medios que
         soporten almacenamiento de datos de forma jerárquica.
         Actualmente
-        <code class="code">Zend_Config</code>
+        <code>Zend_Config</code>
         provee adaptadores para datos de configuración que están
         almacenados en archivos de texto con
         <link linkend="zend.config.adapters.ini">

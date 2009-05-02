@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15225 -->
 <sect1 id="zend.search.lucene.searching">
     <title>インデックスの検索</title>
 
@@ -66,8 +66,7 @@
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $index->find($query);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             <classname>Zend_Search_Lucene::find()</classname> メソッドは、
             入力の型を自動的に判別し、クエリパーサを使用して文字列から
@@ -117,8 +116,7 @@ $query->addSubquery($userQuery, true /* required */);
 $query->addSubquery($pathQuery, true /* required */);
 
 $hits = $index->find($query);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -128,8 +126,7 @@ $hits = $index->find($query);
             <programlisting role="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
-]]>
-            </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -144,8 +141,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -183,8 +179,7 @@ foreach ($hits as $hit) {
     echo $hit->title;
     echo $hit->author;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             保存されたフィールドは、常に UTF-8 エンコーディングで返されます。
@@ -218,8 +213,7 @@ foreach ($hits as $hit) {
     // getFieldValue() と同じです
     echo $document->title;
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
         <classname>Zend_Search_Lucene_Document</classname> オブジェクトで使用可能なフィールドは、
         インデックス化の際に決まります。ドキュメントのフィールドは、
@@ -249,8 +243,7 @@ foreach ($hits as $hit) {
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
-]]>
-            </programlisting>
+]]></programlisting>
             0 (デフォルト値) は、'制限しない' という意味です。
         </para>
 
@@ -287,8 +280,7 @@ foreach ($hits as $hit) {
     echo $hit->id;
     echo $hit->score;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             重みを計算するために使用されるのが
@@ -313,8 +305,7 @@ foreach ($hits as $hit) {
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
              ...);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -338,16 +329,13 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
             例を以下に示します。
             <programlisting role="php"><![CDATA[
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
-]]>
-            </programlisting>
+]]></programlisting>
             <programlisting role="php"><![CDATA[
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
-]]>
-            </programlisting>
+]]></programlisting>
             <programlisting role="php"><![CDATA[
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -375,8 +363,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
  * @return string
  */
 public function highlight($words, $colour = '#66ffff');
-]]>
-            </programlisting>
+]]></programlisting>
             <programlisting role="php"><![CDATA[
 /**
  * テキストを、指定したビューヘルパーあるいはコールバック関数で強調する
@@ -389,8 +376,7 @@ public function highlight($words, $colour = '#66ffff');
  * @throws Zend_Search_Lucene_Exception
  */
 public function highlightExtended($words, $callback, $params = array())
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
         <para>
             強調方法をカスタマイズするには <code>highlightExtended()</code>
@@ -411,11 +397,10 @@ public function highlightExtended($words, $callback, $params = array())
             <link linkend="zend.view.helpers">ビューヘルパー</link> も、ビュースクリプトのコンテキストでコールバックとして使えます。
             <programlisting role="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
         <para>
-            強調した結果を取得するには <classname>Zend_Search_Lucene_Document_Html->getHTML()</classname> メソッドを使用します。
+            強調した結果を取得するには <code>Zend_Search_Lucene_Document_Html->getHTML()</code> メソッドを使用します。
         </para>
         
         <note>
@@ -439,17 +424,21 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 
         <para>
             もうひとつの方法は、
-            <classname>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[, Zend_Search_Lucene_Search_Highlighter_Interface $highlighter])</classname> 
+            <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[, Zend_Search_Lucene_Search_Highlighter_Interface $highlighter])</code>
             メソッドを使うことです。
             <programlisting role="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 $highlightedHTML = $query->highlightMatches($sourceHTML);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
         <para>
             オプションの 2 番目のパラメータは、
-            <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname>
+            デフォルトの HTML ドキュメントエンコーディングです。
+            省略した場合は、Content-type HTTP-EQUIV meta タグを使用します。
+        </para> 
+        <para>
+            オプションの 3 番目のパラメータは、
+            <code>Zend_Search_Lucene_Search_Highlighter_Interface</code>
             インターフェイスを実装したオブジェクトです。
             <programlisting role="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
@@ -475,8 +464,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
      */
     public function highlight($words);
 }
-]]>
-            </programlisting>
+]]></programlisting>
             ここでの <classname>Zend_Search_Lucene_Document_Html</classname> オブジェクトは、
             <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> メソッドに渡された
             HTML から作成されるオブジェクトです。
@@ -493,6 +481,12 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
         <para>
             実際のところ、デフォルトの処理は定義済みの色テーブルを使用しているだけです。
             自前の強調処理を実装することもできますし、デフォルトの処理を継承して色テーブルだけを再定義することもできます。
+        </para>
+        <para>
+            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
+            も同じような動きをします。唯一の違いは、入力を受け取って、
+            &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags タグを含まない HTML 片を返すことです。
+            それでも、返される HTML 片は自動的に正しい XHTML に変換されます.
         </para>
     </sect2>
 </sect1>

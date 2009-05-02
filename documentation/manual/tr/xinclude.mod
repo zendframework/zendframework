@@ -10,6 +10,9 @@
 <!ATTLIST xi:fallback
     xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2001/XInclude" >
 
+<!ATTLIST sect1
+    xmlns:xi   CDATA   #FIXED   "http://www.w3.org/2001/XInclude" >
+
 <!-- inside chapter or section elements -->
 <!ENTITY % local.divcomponent.mix "| xi:include">
 <!-- inside para, programlisting, literallayout, etc. -->

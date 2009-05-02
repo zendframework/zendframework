@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_ProgressBar</title>
 
@@ -16,7 +16,7 @@
     </sect2>
 
     <sect2 id="zend.progressbar.basic">
-        <title><classname>Zend_Progressbar</classname> の基本的な使用法</title>
+        <title>Zend_Progressbar の基本的な使用法</title>
         <para>
             <classname>Zend_ProgressBar</classname> の使い方はきわめて簡単です。
             単純に <classname>Zend_Progressbar</classname> の新しいインスタンスを作成し、
@@ -34,8 +34,7 @@ while (!feof($fp)) {
 }
 
 $progressBar->finish();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             まず第一段階として、<classname>Zend_ProgressBar</classname>

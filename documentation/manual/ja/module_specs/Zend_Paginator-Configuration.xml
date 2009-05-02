@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.paginator.configuration">
     <title>設定</title>
 
@@ -9,7 +9,7 @@
     </para>
 
     <table id="zend.paginator.configuration.table">
-        <title><classname>Zend_Paginator</classname> の設定用メソッド</title>
+        <title>Zend_Paginator の設定用メソッド</title>
 
         <tgroup cols="2">
             <thead>

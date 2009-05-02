@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -33,8 +33,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
 
 // ドキュメントをインデックスに追加します。
 $index->addDocument($doc);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             新しく追加されたドキュメントは、
@@ -63,8 +62,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
 // ドキュメントをインデックスに追加します。
 $index->addDocument($doc);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.document-updating">
@@ -87,8 +85,7 @@ $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
     $index->delete($hit->id);
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.counting">
@@ -113,8 +110,7 @@ foreach ($hits as $hit) {
         <programlisting role="php"><![CDATA[
 $indexSize = $index->count();
 $documents = $index->numDocs();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Search_Lucene::isDeleted($id)</classname>
@@ -127,8 +123,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         echo "ドキュメント #$id は削除されました。\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             インデックスの最適化を行うと、削除されたドキュメントを取り除き、
@@ -173,8 +168,7 @@ $index = Zend_Search_Lucene::open('/data/my-index');
 
 // インデックスを最適化します
 $index->optimize();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             自動的なインデックス最適化により、インデックスの一貫性を保ちます。
@@ -186,7 +180,7 @@ $index->optimize();
         </para>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">
-            <title>自動最適化オプション <emphasis>MaxBufferedDocs</emphasis></title>
+            <title>自動最適化オプション MaxBufferedDocs</title>
             <para>
                 <emphasis>MaxBufferedDocs</emphasis> は、メモリ内に溜め込まれたドキュメントを
                 新しいセグメントに書き出す際の最小ドキュメント数です。
@@ -201,7 +195,7 @@ $index->optimize();
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.maxmergedocs">
-            <title>自動最適化オプション <emphasis>MaxMergeDocs</emphasis></title>
+            <title>自動最適化オプション MaxMergeDocs</title>
             <para>
                 <emphasis>MaxMergeDocs</emphasis> は、addDocument()
                 によってまとめられる最大のドキュメント数です。小さな値
@@ -219,7 +213,7 @@ $index->optimize();
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
-            <title>自動最適化オプション <emphasis>MergeFactor</emphasis></title>
+            <title>自動最適化オプション MergeFactor</title>
             <para>
                 <emphasis>MergeFactor</emphasis> は、addDocument() でセグメントをまとめる頻度を指定します。
                 小さな値を指定すると、インデックス作成の際に使用する RAM の量を抑えられます。
@@ -285,8 +279,7 @@ $currentPermissions =
 
 // 現在のユーザとグループに対してのみ読み書きアクセス権限を付与します
 Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.limitations">

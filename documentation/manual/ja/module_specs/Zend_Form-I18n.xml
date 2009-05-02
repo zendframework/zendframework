@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.form.i18n">
-    <title><classname>Zend_Form</classname> の国際化</title>
+    <title>Zend_Form の国際化</title>
 
     <para>
         作成したコンテンツを複数の言語や地域に対応させるという作業は、
@@ -59,8 +59,7 @@
                 <programlisting role="php"><![CDATA[
 // 'Zend_Translate' キーを使用します。$translate は Zend_Translate オブジェクトです
 Zend_Registry::set('Zend_Translate', $translate);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     これは、<classname>Zend_Form</classname> や
@@ -78,8 +77,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                 <programlisting role="php"><![CDATA[
 // すべてのバリデーションクラスに、指定した翻訳アダプタを使用させます
 Zend_Validate_Abstract::setDefaultTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -93,8 +91,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
 // すべてのフォームクラスで特定の翻訳アダプタを使用させます。
 // このアダプタは、検証エラーメッセージの翻訳にも用いられます。
 Zend_Form::setDefaultTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -113,8 +110,7 @@ $form->setTranslator($translate);
 // 「この」要素のインスタンスで特定の翻訳アダプタを使用させます。
 // このアダプタは、この要素の検証エラーメッセージの翻訳にも用いられます。
 $element->setTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
     </sect2>

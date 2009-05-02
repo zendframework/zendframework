@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect2 id="zend.log.writers.mail">
     <title>Email への書き込み</title>
 
@@ -63,7 +63,7 @@ $log->error('unable to connect to database');
     </para>
 
     <sect3 id="zend.log.writers.mail.layoutusage">
-        <title><classname>Zend_Layout</classname> の使用法</title>
+        <title>Zend_Layout の使用法</title>
 
         <para>
             <classname>Zend_Layout</classname> のインスタンスを使用して、

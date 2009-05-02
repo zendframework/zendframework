@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.mail.smtp-authentication">
   <title>SMTP 認証</title>
 
@@ -12,7 +12,7 @@
   が指定されていることを想定しています。</para>
 
   <example id="zend.mail.smtp-authentication.example-1">
-    <title><classname>Zend_Mail_Transport_Smtp</classname> での認証の有効化</title>
+    <title>Zend_Mail_Transport_Smtp での認証の有効化</title>
 
     <programlisting role="php"><![CDATA[
 $config = array('auth' => 'login',
@@ -27,8 +27,7 @@ $mail->setFrom('sender@test.com', 'Some Sender');
 $mail->addTo('recipient@test.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send($transport);
-]]>
-    </programlisting>
+]]></programlisting>
   </example>
 
   <note>

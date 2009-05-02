@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect2 id="zend.log.writers.firebug">
     <title>Firebug への書き込み</title>
     <para>
@@ -45,7 +45,7 @@
     </itemizedlist>
 
     <example id="zend.log.writers.firebug.example.with_front_controller">
-      <title><classname>Zend_Controller_Front</classname> を使ったログ記録</title>
+      <title>Zend_Controller_Front を使ったログ記録</title>
 
       <programlisting role="php"><![CDATA[
 // 起動ファイルで、フロントコントローラのディスパッチの前に記述します
@@ -54,12 +54,11 @@ $logger = new Zend_Log($writer);
 
 // モデル、ビューおよびコントローラのファイル内でこれを使用します
 $logger->log('This is a log message!', Zend_Log::INFO);
-]]>
-      </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.log.writers.firebug.example.without_front_controller">
-      <title><classname>Zend_Controller_Front</classname> を使わないログ記録</title>
+      <title>Zend_Controller_Front を使わないログ記録</title>
 
       <programlisting role="php"><![CDATA[
 $writer = new Zend_Log_Writer_Firebug();
@@ -81,8 +80,7 @@ $logger->log('This is a log message!', Zend_Log::INFO);
 // ログデータをブラウザに送ります
 $channel->flush();
 $response->sendHeaders();
-]]>
-      </programlisting>
+]]></programlisting>
     </example>
 
     <sect3 id="zend.log.writers.firebug.priority-styles">
@@ -97,16 +95,14 @@ $response->sendHeaders();
 $logger->addPriority('FOO', 8);
 $writer->setPriorityStyle(8, 'TRACE');
 $logger->foo('Foo Message');
-]]>
-      </programlisting>
+]]></programlisting>
       <para>
         ユーザ定義の優先度用のデフォルトのスタイルを設定するには
         <code>setDefaultPriorityStyle()</code> メソッドを使用します。
       </para>
       <programlisting role="php"><![CDATA[
 $writer->setDefaultPriorityStyle('TRACE');
-]]>
-      </programlisting>
+]]></programlisting>
       <para>
         サポートしているスタイルは次のとおりです。
         <table id="zend.log.writers.firebug.priority-styles.table">
@@ -180,8 +176,7 @@ $writer->setDefaultPriorityStyle('TRACE');
       <programlisting role="php"><![CDATA[
 $exception = new Zend_Exception('Test exception');
 $logger->err($exception);
-]]>
-      </programlisting>
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.log.writers.firebug.preparing-data.table">
@@ -204,7 +199,6 @@ $table = array('Summary line for the table',
              )
             );
 $logger->table($table);
-]]>
-      </programlisting>
+]]></programlisting>
     </sect3>
 </sect2>

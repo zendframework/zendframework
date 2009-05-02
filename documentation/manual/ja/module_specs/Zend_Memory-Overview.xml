@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.memory.overview">
     <title>概要</title>
 
@@ -33,7 +33,7 @@
         </para>
 
         <example id="zend.memory.introduction.example-1">
-            <title><classname>Zend_Memory</classname> コンポーネントの使用法</title>
+            <title>Zend_Memory コンポーネントの使用法</title>
             <para>
                 <classname>Zend_Memory::factory()</classname> は、
                 指定したバックエンドオプションでメモリマネージャオブジェクトの
@@ -61,8 +61,7 @@ echo $loadedFiles[$index1]->value;
 $loadedFiles[$index2]->value = $newValue;
 
 $loadedFiles[$index3]->value[$charIndex] = '_';
-]]>
-                </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -125,8 +124,7 @@ $memObject->value[$index] = '_';
 echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <note>

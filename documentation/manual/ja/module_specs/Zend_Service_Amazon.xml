@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
@@ -71,8 +71,7 @@ $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
 foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
-]]>
-</programlisting>
+]]></programlisting>
         </example>
         <example id="zend.service.amazon.introduction.example.query_api">
             <title>クエリ API を使用した Amazon 検索</title>
@@ -88,8 +87,7 @@ $results = $query->search();
 foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
-]]>
-</programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.amazon.countrycodes">
@@ -104,8 +102,7 @@ foreach ($results as $result) {
             <programlisting><![CDATA[
 // 日本の Amazon に接続します
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
-]]>
-</programlisting>
+]]></programlisting>
         </example>
         <note>
             <title>国コード</title>
@@ -126,8 +123,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP');
             <programlisting><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $item = $amazon->itemLookup('B0000A432X');
-]]>
-</programlisting>
+]]></programlisting>
         </example>
         <para>
             <code>itemLookup()</code> メソッドにオプションの第 2 パラメータを渡すことで、
@@ -160,11 +156,10 @@ $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
 foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
-]]>
-</programlisting>
+]]></programlisting>
         </example>
         <example id="zend.service.amazon.itemsearch.example.responsegroup">
-            <title><code>ResponseGroup</code> オプションの使用法</title>
+            <title>ResponseGroup オプションの使用法</title>
             <para>
                 <code>ResponseGroup</code> オプションを使用すると、
                 レスポンスで返される情報を制御することができます。
@@ -180,8 +175,7 @@ $results = $amazon->itemSearch(array(
 foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <code>itemSearch()</code> は配列のパラメータをひとつ受け取り、
@@ -226,8 +220,7 @@ $results = $query->search();
 foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
-]]>
-</programlisting>
+]]></programlisting>
                 <para>
                     これは、オプション <code>Category</code> の値を "Books"、
                     そして <code>Keywords</code> の値を "PHP" に設定します。

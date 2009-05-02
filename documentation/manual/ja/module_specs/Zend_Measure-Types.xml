@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.measure.types">
 
     <title>計測値の型</title>
@@ -261,7 +261,7 @@
 
     <sect2 id="zend.measure.types.binary">
 
-        <title><classname>Zend_Measure_Binary</classname> のヒント</title>
+        <title>Zend_Measure_Binary のヒント</title>
 
         <para>
             よく使われるバイナリの規約では、キロ、メガ、ギガ
@@ -286,7 +286,7 @@
 
     <sect2 id="zend.measure.types.decimal">
 
-        <title><classname>Zend_Measure_Number</classname> のヒント</title>
+        <title>Zend_Measure_Number のヒント</title>
 
         <para>
             いちばんよく知られている形式は、十進法です。
@@ -315,8 +315,7 @@ $unit = new Zend_Measure_Number($great,Zend_Measure_Number::ROMAN, $locale);
 
 十進数に変換します
 echo $unit->convertTo(Zend_Measure_Number::DECIMAL);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

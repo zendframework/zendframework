@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -108,7 +108,7 @@
     </note>
 
     <sect2 id="zend.gdata.introduction.structure">
-        <title><classname>Zend_Gdata</classname> の構造</title>
+        <title>Zend_Gdata の構造</title>
         <para>
             <classname>Zend_Gata</classname> は、いくつかの型のクラスを組み合わせたものです。
             <itemizedlist>
@@ -211,7 +211,7 @@
     </sect2>
 
     <sect2 id="zend.gdata.introdduction.magicfactory">
-        <title><classname>Zend_Gdata</classname> クラスのインスタンスの取得</title>
+        <title>Zend_Gdata クラスのインスタンスの取得</title>
         <para>
             Zend Framework の命名規約では、すべてのクラスは
             その存在位置のディレクトリ構造に基づいた名前をつける必要があります。
@@ -248,8 +248,7 @@ $cell->setColumn('3');
 $entry->cell = $cell;
 
 // ... $entry を使用して、Google Spreadsheet の内容を更新します
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             継承ツリー内にある各サービス用クラス内で、
@@ -322,8 +321,7 @@ $client = new Zend_Http_Client();
 $client->setConfig( ...オプション... );
 
 $gdata = new Zend_Gdata($client);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zend Framework 1.7 以降、プロトコルのバージョン管理のサポートが追加されました。
@@ -341,8 +339,7 @@ $client->setConfig( ...オプション... );
 $gdata = new Zend_Gdata($client);
 $gdata->setMajorProtocolVersion(2);
 $gdata->setMinorProtocolVersion(null);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             認証済みの <classname>Zend_Http_Client</classname> オブジェクトを作成する方法については、
@@ -460,8 +457,7 @@ $gdata->setMinorProtocolVersion(null);
 $query = new Zend_Gdata_Query();
 $query->setMaxResults(10);
 echo $query->getMaxResults();   // 10 を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Gdata</classname> クラスでは、
@@ -473,8 +469,7 @@ echo $query->getMaxResults();   // 10 を返します
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 echo $query->maxResults;        // 10 を返します
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             すべてのパラメータを消去するには <code>resetParameters()</code>
@@ -489,8 +484,7 @@ $query->maxResults = 10;
 
 $gdata->resetParameters();      // すべてのパラメータを消去します
 // ...別のフィードを取得します...
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -509,8 +503,7 @@ $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
 $query->setMaxResults(10);
 $feed = $gdata->getFeed($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             この後の節で、各 Google Data
@@ -541,8 +534,7 @@ function getNextPage($feed) {
         return null;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             もしこのようにページに分かれているのが気に入らない場合は、
@@ -558,8 +550,7 @@ $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
 $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             大きなフィードに対してこの関数をコールすると、
@@ -593,8 +584,7 @@ foreach ($feed as $entry) {
     // 定義されているアクセス用メソッドを使用します
     echo 'Content: ' . $entry->getContent()->getText();
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.introduction.updateentry">
@@ -620,8 +610,7 @@ foreach ($feed as $entry) {
     $newEntry = $entry->save();
     echo 'New Title: ' . $newEntry->title->text;
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.introduction.post">
@@ -662,8 +651,7 @@ $entryResult = $gdata->insertEntry($entry,
         'http://www.blogger.com/feeds/blogID/posts/default');
 
 echo 'この結果のエントリの <id> は、' . $entryResult->id->text;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             エントリを送信するには、認証済みの <classname>Zend_Http_Client</classname>
@@ -702,8 +690,7 @@ foreach ($feed as $feedEntry) {
     // に渡してエントリを削除します
     // $gdata->delete($feedEntry->getEditLink()->href);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             エントリを削除するには、認証済みの <classname>Zend_Http_Client</classname>

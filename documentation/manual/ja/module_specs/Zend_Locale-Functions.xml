@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.locale.functions">
 
-    <title><classname>Zend_Locale</classname> の使用法</title>
+    <title>Zend_Locale の使用法</title>
 
     <para>
         <classname>Zend_Locale</classname> は、各ロケールについての情報も、
@@ -42,8 +42,7 @@ print "copied: ", $copiedLocale->toString();
 
 // PHP は、__toString() 経由で自動的に toString() をコールします
 print "copied: ", $copiedLocale;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -68,8 +67,7 @@ $mylocale = new Zend_Locale('en_US');
 if ($locale->equals($mylocale)) {
     print "これらのロケールは同一です";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -105,8 +103,7 @@ print_r($found);
 // ブラウザのロケールのみを返します
 $found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -158,8 +155,7 @@ print $locale->toString();
 // 新しいロケール
 $locale->setLocale('aa_DJ');
 print $locale->toString();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -185,8 +181,7 @@ print $locale->getLanguage();
 
 // ロケールが 'ja_JP' の場合は、地域として 'JP' が返されます
 print $locale->getRegion();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -220,8 +215,7 @@ print_r ($list);
 // これらのキーのいずれかを getTranslation() メソッドで使用します
 print Zend_Locale::getTranslation('de', 'language', 'zh');
 // これは、言語 'de' を中国語で表した文字列を返します
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1384,8 +1378,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
             <programlisting role="php"><![CDATA[
 // すべての国名をドイツ語で表示します
 print_r(Zend_Locale::getTranslationList('country', 'de'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1401,8 +1394,7 @@ $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
 echo Zend_Locale::getLanguageTranslation($frenchCode, 'de_AT');
 // 出力は、「フランス語」を表すドイツ語の名前になります
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1433,8 +1425,7 @@ foreach($list as $language => $content) {
         continue;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -1509,8 +1500,7 @@ Array
     [yesexpr] => ^([jJ][aA]?)|([jJ]?)
     [noexpr] => ^([nN]([eE][iI][nN])?)|([nN]?)
 )
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1540,8 +1530,7 @@ Array
             <title>getLocaleList()</title>
             <programlisting role="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1571,8 +1560,7 @@ if (Zend_Locale::isLocale($input)) {
 } else {
     print "Sorry... the given input is no locale";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1609,8 +1597,7 @@ if (Zend_Locale::isLocale($input, true)) {
 } else {
     print "Sorry... the given input is no locale";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1639,8 +1626,7 @@ if (!Zend_Locale::isLocale($locale, true, false)) {
 if ($locale instanceof Zend_Locale) {
     $locale = $locale->toString();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1695,8 +1681,7 @@ if ($locale instanceof Zend_Locale) {
             <title>ZF 1.8 以降でのロケール対応の振る舞いの実装</title>
             <programlisting role="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

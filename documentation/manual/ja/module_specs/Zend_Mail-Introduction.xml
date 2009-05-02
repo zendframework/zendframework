@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -20,7 +20,7 @@
 
         <example id="zend.mail.introduction.example-1">
 
-            <title><classname>Zend_Mail</classname> を使用したシンプルなメール送信</title>
+            <title>Zend_Mail を使用したシンプルなメール送信</title>
 
             <para>
                 受信者、表題、本文および送信者を指定しただけの単純なメールです。
@@ -35,8 +35,7 @@ $mail->setFrom('somebody@example.com', 'Some Sender');
 $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -76,8 +75,7 @@ $mail->setBodyText('This is the text of the mail.')
     ->addTo('somebody_else@example.com', 'Some Recipient')
     ->setSubject('TestSubject')
     ->send();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -100,7 +98,7 @@ $mail->setBodyText('This is the text of the mail.')
 
         <example id="zend.mail.introduction.sendmail.example-1">
 
-            <title><classname>Zend_Mail_Transport_Sendmail</classname> トランスポートへの追加パラメータの渡し方</title>
+            <title>Zend_Mail_Transport_Sendmail トランスポートへの追加パラメータの渡し方</title>
 
             <para>
                 この例は、<ulink url="http://php.net/mail"><code>mail()</code></ulink>
@@ -117,8 +115,7 @@ $mail->setFrom('somebody@example.com', 'Some Sender');
 $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

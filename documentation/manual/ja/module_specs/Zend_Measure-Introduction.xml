@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.measure.introduction">
 
     <title>導入</title>
@@ -31,8 +31,7 @@ $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
 // メートルをヤードに変換します
 echo $unit->convertTo(Zend_Measure_Length::YARD);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -48,7 +47,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
     </para>
 
     <example id="zend.measure.introduction.example-2">
-        <title><code>メートル</code> の計測</title>
+        <title>メートルの計測</title>
         <para>
             <code>メートル</code> は長さの単位です。したがって、対応する定数は
             <code>Length</code> クラス内にあります。この単位を使用するには、
@@ -62,8 +61,7 @@ echo Zend_Measure_Length::KILOMETER; // 出力は 'Length::KILOMETER' となり�
 $unit = new Zend_Measure_Length(100,'METER');
 echo $unit;
 // 出力は '100 m' となります
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

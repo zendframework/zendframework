@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15215 -->
 <sect1 id="zend.ldap.using">
 
     <title>導入</title>
@@ -56,8 +56,7 @@ $ldap = new Zend_Ldap($options);
 $acctname = $ldap->getCanonicalAccountName('abaker',
                                            Zend_Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -78,8 +77,7 @@ $ldap = new Zend_Ldap($options);
 $acctname = $ldap->getCanonicalAccountName('bcarter',
                                            Zend_Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             ここでは、<code>getCanonicalAccountName()</code> メソッドでアカウントの DN
             を取得していることに注意しましょう。
@@ -123,8 +121,7 @@ $ldap->bind('abaker', 'moonbike55');
 $acctname = $ldap->getCanonicalAccountName('abaker',
                                            Zend_Ldap::ACCTNAME_FORM_DN);
 echo "$acctname\n";
-]]>
-                </programlisting>
+]]></programlisting>
 
                 この例において <code>bind()</code> をコールすると、
                 ユーザ名 '<code>abaker</code>' が DN 形式でないことと
@@ -298,7 +295,7 @@ echo "$acctname\n";
                 このオプションの値は、次のいずれかとなります。
 
                 <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-                  <title><code>accountCanonicalForm</code></title>
+                  <title>accountCanonicalForm</title>
                   <tgroup cols="3">
                     <thead>
                       <row>
@@ -424,8 +421,7 @@ foreach ($multiOptions as $name => $options) {
         }
     }
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 何らかの理由でバインドに失敗すると、その次のオプションでのバインドを試みます。
             </para>

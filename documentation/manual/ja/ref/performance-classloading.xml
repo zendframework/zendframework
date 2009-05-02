@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15246 -->
+<!-- EN-Revision: 15301 -->
 <sect1 id="performance.classloading">
     <title>クラスの読み込み</title>
 
@@ -215,7 +215,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
             <programlisting role="shell"><![CDATA[
 % cd path/to/ZendFramework/library
-% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php -print0 | \
+% find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
 ]]></programlisting>
 

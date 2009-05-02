@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15261 -->
 <sect1 id="zend.search.lucene.query-language">
     <title>クエリ言語</title>
 
@@ -64,8 +64,7 @@
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
 Zend_Search_Lucene::setDefaultSearchField('contents');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>null</code> 値は、すべてのフィールドを検索の対象とすることを意味します。
@@ -83,15 +82,13 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
         </para>
         <programlisting role="querystring"><![CDATA[
 title:"The Right Way" AND text:go
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             あるいは
         </para>
         <programlisting role="querystring"><![CDATA[
 title:"Do it right" AND go
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             とします。"text" はデフォルトのフィールドなので、フィールドの指定は必須ではなくなります。
         </para>
@@ -101,8 +98,7 @@ title:"Do it right" AND go
             フレーズあるいはサブクエリだけであることに注意しましょう。つまり、クエリ
             <programlisting role="querystring"><![CDATA[
 title:Do it right
-]]>
-</programlisting>
+]]></programlisting>
             は "Do" だけを title フィールドから探し、"it" や "right"
             はデフォルトのフィールドから探します。デフォルトのフィールドが
             <code>null</code> に設定されている場合は、"it" や "right"
@@ -131,8 +127,7 @@ title:Do it right
             たとえば、"text" あるいは "test" を探したい場合は
             <programlisting role="querystring"><![CDATA[
 te?t
-]]>
-</programlisting>
+]]></programlisting>
             とします。
         </para>
 
@@ -141,8 +136,7 @@ te?t
             たとえば test、tests あるいは tester を探したい場合は
             <programlisting role="querystring"><![CDATA[
 test*
-]]>
-</programlisting>
+]]></programlisting>
             とします。
         </para>
 
@@ -151,9 +145,22 @@ test*
             また両方を同時に使うこともできます。たとえば
             <programlisting role="querystring"><![CDATA[
 *wr?t*
-]]>
-</programlisting>
+]]></programlisting>
             は、"write" や "wrote"、"written"、"rewrite"、"rewrote" などに対応します。
+        </para>
+        
+        <para>
+            ZF 1.7.7 以降、ワイルドカードパターンにはワイルドカード以外のプレフィックスが必要となりました。
+            デフォルトのプレフィックスの長さは 3 (Java Lucene と同じ) です。
+            つまり "*", "te?t", "*wr?t*" といった単語は例外を引き起こします<footnote>
+            <para>この例外は <code>Zend_Search_Lucene_Search_QueryParserException</code> ではなく
+            <code>Zend_Search_Lucene_Exception</code> となることに注意しましょう。
+            この例外がスローされるのは、クエリの書き換え (実行) 操作のときです。</para></footnote>。
+        </para>
+        <para>
+            これは、<code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> および
+            <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code>
+            メソッドで変更することができます。
         </para>
     </sect2>
 
@@ -179,15 +186,13 @@ test*
             並べ替えは、辞書順で行われます。
             <programlisting role="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
-]]>
-</programlisting>
+]]></programlisting>
             これは、mod_date フィールドの値が 20020101 から 20030101 (両端を含む)
             であるドキュメントを探します。
             範囲検索は、日付フィールド以外でも使えることに注意しましょう。
             <programlisting role="querystring"><![CDATA[
 title:{Aida TO Carmen}
-]]>
-</programlisting>
+]]></programlisting>
             これは、タイトルが Aida から Carmen までの間にあるドキュメントを探します。
             ただし、Aida および Carmen は含めません。
         </para>
@@ -200,8 +205,7 @@ title:{Aida TO Carmen}
             はすべてのフィールドに対して範囲検索を行います。
             <programlisting role="querystring"><![CDATA[
 {Aida TO Carmen}
-]]>
-</programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -215,8 +219,7 @@ title:{Aida TO Carmen}
 
             <programlisting role="querystring"><![CDATA[
 roam~
-]]>
-</programlisting>
+]]></programlisting>
 
             この検索は、foam あるいは roams といった単語にマッチします。
 
@@ -228,10 +231,28 @@ roam~
 
             <programlisting role="querystring"><![CDATA[
 roam~0.8
-]]>
-</programlisting>
+]]></programlisting>
 
             このパラメータを省略した場合のデフォルトは 0.5 です。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
+        <title>マッチする単語の制限</title>
+
+        <para>
+            ワイルドカード検索や範囲検索、あいまい検索は、マッチする単語が多くなりすぎる可能性があります。
+            そんな場合は検索のパフォーマンスが大幅に低下してしまいます。
+        </para>
+
+        <para>
+            そこで、Zend_Search_Lucene はマッチする単語数の制限をクエリ (サブクエリ) 単位で設定します。
+            この制限を取得したり設定したりするには
+            <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
+            メソッドを使用します。
+        </para>
+        <para>
+            デフォルトのマッチ数の制限は、クエリ単位で 1024 です。
         </para>
     </sect2>
 
@@ -244,8 +265,7 @@ roam~0.8
             たとえば、"Zend" と "Framework" がお互い 10 ワードの範囲内にあらわれるドキュメントを検索するには
             <programlisting role="querystring"><![CDATA[
 "Zend Framework"~10
-]]>
-</programlisting>
+]]></programlisting>
             とします。
         </para>
     </sect2>
@@ -265,20 +285,17 @@ roam~0.8
             たとえば
             <programlisting role="querystring"><![CDATA[
 PHP framework
-]]>
-</programlisting>
+]]></programlisting>
             を検索しようとしており、単語 "PHP" をより重視したいとしましょう。
             そんな場合は ^ 記号と強調度を単語の後に続けます。つまり
             <programlisting role="querystring"><![CDATA[
 PHP^4 framework
-]]>
-</programlisting>
+]]></programlisting>
             のようにします。これにより、PHP という単語を含むドキュメントがより重視されるようになります。
             フレーズやサブクエリを強調することも可能です。たとえば
             <programlisting role="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
             のようになります。デフォルトの強調度は 1 です。強調度には正の数値を指定しますが、
             1 より小さくする (たとえば 0.2 など) ことも可能です。
         </para>
@@ -315,8 +332,7 @@ PHP^4 framework
                 "PHP framework" および "Zend Framework" を含むドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 "PHP framework" AND "Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
         </sect3>
@@ -330,8 +346,7 @@ PHP^4 framework
                 "PHP framework" あるいは "Zend Framework" を含むドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 "PHP framework" OR "Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
         </sect3>
@@ -347,8 +362,7 @@ PHP^4 framework
                 "PHP framework" を含むが "Zend Framework" は含まないドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 "PHP framework" AND NOT "Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
         </sect3>
@@ -370,8 +384,7 @@ PHP^4 framework
                 "Zend" を必ず含み、"Framework" を含んでも含まなくてもかまわないドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 +Zend Framework
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
         </sect3>
@@ -386,8 +399,7 @@ PHP^4 framework
                 "PHP framework" は含むが "Zend Framework" は含まないドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 "PHP framework" -"Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
         </sect3>
@@ -410,8 +422,7 @@ PHP^4 framework
                 "PHP framework" は必須で "Zend Framework" は含んでも含まなくてもかまわないドキュメントを検索するには
                 <programlisting role="querystring"><![CDATA[
 +"PHP framework" "Zend Framework"
-]]>
-</programlisting>
+]]></programlisting>
                 を使用します。
             </para>
 
@@ -437,8 +448,7 @@ PHP^4 framework
             これは、クエリのロジックを制御したい場合や異なるスタイルの論理クエリを共用したい場合などに便利です。
             <programlisting role="querystring"><![CDATA[
 +(framework OR library) +php
-]]>
-</programlisting>
+]]></programlisting>
             <classname>Zend_Search_Lucene</classname> は、あらゆるレベルのサブクエリをサポートしています。
         </para>
     </sect2>
@@ -453,8 +463,7 @@ PHP^4 framework
             タイトルに単語 "return" とフレーズ "pink panther" の両方を含むドキュメントを検索するには
             <programlisting role="querystring"><![CDATA[
 title:(+return +"pink panther")
-]]>
-</programlisting>
+]]></programlisting>
             を使用します。Zend_Search_Lucene は、あらゆるレベルのサブクエリをサポートしています。
         </para>
     </sect2>
@@ -477,8 +486,7 @@ title:(+return +"pink panther")
             たとえば、(1+1):2 を検索するには
             <programlisting role="querystring"><![CDATA[
 \(1\+1\)\:2
-]]>
-</programlisting>
+]]></programlisting>
             を使用します。
         </para>
     </sect2>

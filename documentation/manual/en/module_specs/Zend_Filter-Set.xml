@@ -85,6 +85,8 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Filter-RealPath.xml" />
+
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>
         <para>

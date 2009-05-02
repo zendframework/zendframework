@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15234 -->
 <sect1 id="zend.service.delicious">
     <title>Zend_Service_Delicious</title>
     <sect2 id="zend.service.delicious.introduction">
@@ -24,8 +24,7 @@ foreach ($posts as $post) {
     echo "タイトル: {$post->getTitle()}\n";
     echo "URL: {$post->getUrl()}\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.retrieving_posts">
@@ -65,8 +64,7 @@ public function getRecentPosts($tag = null, $count = 15);
  * @return Zend_Service_Delicious_PostList
  */
 public function getAllPosts($tag = null);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
     <sect2 id="zend.service.delicious.postlist">
         <title>Zend_Service_Delicious_PostList</title>
@@ -98,8 +96,7 @@ foreach ($posts as $post) {
 
 // 配列風のアクセス方式で投稿を取得します
 echo $posts[0]->getTitle();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <para>
@@ -129,8 +126,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
     echo "タイトル: {$post->getTitle()}\n";
     echo "URL: {$post->getUrl()}\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>URL の指定による投稿一覧のフィルタリング</title>
@@ -147,8 +143,7 @@ foreach ($posts->withUrl('/help/') as $post) {
     echo "タイトル: {$post->getTitle()}\n";
     echo "URL: {$post->getUrl()}\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.editing_posts">
@@ -163,8 +158,7 @@ $posts = $delicious->getPosts();
 $posts[0]->setTitle('新しいタイトル');
 // 変更を保存します
 $posts[0]->save();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <example id="zend.service.delicious.editing_posts.method_call_chaining">
             <title>メソッドコールの連結</title>
@@ -179,8 +173,7 @@ $posts = $delicious->getPosts();
 $posts[0]->setTitle('新しいタイトル')
          ->setNotes('新しいメモ')
          ->save();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.deleting_posts">
@@ -204,8 +197,7 @@ $posts[0]->delete();
 
 // deletePost() を使用する、もうひとつの方法
 $delicious->deletePost($posts[0]->getUrl());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.adding_posts">
@@ -231,8 +223,7 @@ $newPost = $delicious->createNewPost('Zend Framework',
                                      'http://framework.zend.com');
 $newPost->setNotes('Zend Framework Homepage');
 $newPost->save();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.tags">
@@ -247,8 +238,7 @@ print_r($delicious->getTags());
 
 // タグ ZF の名前を zendFramework に変更します
 $delicious->renameTag('ZF', 'zendFramework');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.bundles">
@@ -266,8 +256,7 @@ $delicious->deleteBundle('someBundle');
 
 // バンドルを追加します
 $delicious->addBundle('newBundle', array('tag1', 'tag2'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
     <sect2 id="zend.service.delicious.public_data">
@@ -330,8 +319,7 @@ print_r($delicious->getUserNetwork('someUser'));
 
 // someUser のタグを取得します
 print_r($delicious->getUserTags('someUser'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <sect3 id="zend.service.delicious.public_data.posts">
             <title>公開投稿</title>
@@ -342,7 +330,7 @@ print_r($delicious->getUserTags('someUser'));
                 その中には URL やタイトル、メモ、タグといった投稿に関する基本情報が含まれます。
             </para>
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
-                <title><classname>Zend_Service_Delicious_SimplePost</classname> クラスのメソッド</title>
+                <title>Zend_Service_Delicious_SimplePost クラスのメソッド</title>
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -387,12 +375,11 @@ print_r($delicious->getUserTags('someUser'));
             の HTTP クライアントを変更する必要があります。
         </para>
         <example id="zend.service.delicious.httpclient.changing">
-            <title><classname>Zend_Rest_Client</classname> の HTTP クライアントの変更</title>
+            <title>Zend_Rest_Client の HTTP クライアントの変更</title>
             <programlisting role="php"><![CDATA[
 $myHttpClient = new My_Http_Client();
 Zend_Rest_Client::setHttpClient($myHttpClient);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <classname>Zend_Service_Delicious</classname> で複数のリクエストを作成する際に
@@ -404,8 +391,7 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
 Zend_Rest_Client::getHttpClient()->setConfig(array(
         'keepalive' => true
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <para>

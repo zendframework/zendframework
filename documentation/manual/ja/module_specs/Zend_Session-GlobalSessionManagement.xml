@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15234 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -93,8 +93,7 @@ save_path = /home/myaccount/zend_sessions/myapp
 use_only_cookies = on
 ; セッション ID クッキーを持続させる場合は、その有効期限を 10 日にします
 remember_me_seconds = 864000
-]]>
-</programlisting>
+]]></programlisting>
 
             <para>
                 次に、この設定ファイルを読み込んで、その内容を配列として
@@ -105,8 +104,7 @@ remember_me_seconds = 864000
 $config = new Zend_Config_Ini('myapp.ini', 'development');
 
 Zend_Session::setOptions($config->toArray());
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -455,8 +453,7 @@ if (!isset($defaultNamespace->initialized)) {
     Zend_Session::regenerateId();
     $defaultNamespace->initialized = true;
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
@@ -466,7 +463,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.rememberme">
 
-        <title><code>rememberMe(integer $seconds)</code></title>
+        <title>rememberMe(integer $seconds)</title>
 
         <para>
             通常は、セッションが終わるのはユーザエージェントが終了したとき、
@@ -487,7 +484,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.forgetme">
 
-        <title><code>forgetMe()</code></title>
+        <title>forgetMe()</title>
 
         <para>
             この関数は <code>rememberMe()</code> を補完するものです。
@@ -499,7 +496,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.sessionexists">
 
-        <title><code>sessionExists()</code></title>
+        <title>sessionExists()</title>
 
         <para>
             このメソッドを使用して、現在のユーザエージェント/リクエスト
@@ -513,7 +510,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.destroy">
 
-        <title><code>destroy(bool $remove_cookie = true, bool $readonly = true)</code></title>
+        <title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         <para>
             <classname>Zend_Session::destroy()</classname> は、
@@ -555,7 +552,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.stop">
 
-        <title><code>stop()</code></title>
+        <title>stop()</title>
 
         <para>
             このメソッドは、単に Zend_Session のフラグを切り替え、
@@ -574,7 +571,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.writeclose">
 
-        <title><code>writeClose($readonly = true)</code></title>
+        <title>writeClose($readonly = true)</title>
 
         <para>
             セッションを終了して内容を書き込んだ後に、
@@ -615,7 +612,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.savehandler">
 
-        <title><code>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</code></title>
+        <title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
 
         <para>
             ほとんどの開発者にとっては、デフォルトの保存ハンドラで十分でしょう。
@@ -629,7 +626,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceisset">
 
-        <title><code>namespaceIsset($namespace)</code></title>
+        <title>namespaceIsset($namespace)</title>
 
         <para>
             このメソッドを使用して、セッション名前空間が存在するかどうかを調べます。
@@ -649,7 +646,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceunset">
 
-        <title><code>namespaceUnset($namespace)</code></title>
+        <title>namespaceUnset($namespace)</title>
 
         <para>
             <classname>Zend_Session::namespaceUnset($namespace)</classname> を使用すると、
@@ -679,7 +676,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceget">
 
-        <title><code>namespaceGet($namespace)</code></title>
+        <title>namespaceGet($namespace)</title>
 
         <para>
             非推奨: <classname>Zend_Session_Namespace</classname> の <code>getIterator()</code>
@@ -704,7 +701,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.getiterator">
 
-        <title><code>getIterator()</code></title>
+        <title>getIterator()</title>
 
         <para>
             <code>getIterator()</code> を使用して、全名前空間の名前を含む配列を取得します。

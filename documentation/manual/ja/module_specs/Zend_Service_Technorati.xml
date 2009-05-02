@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15234 -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
 
@@ -66,8 +66,7 @@ $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // Technorati で PHP というキーワードを検索します
 $resultSet = $technorati->search('PHP');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             検索用のメソッドにはオプションパラメータの配列を渡すことができます。
@@ -86,8 +85,7 @@ $options = array('authority' => 'a4');
 
 // Technorati で PHP というキーワードを検索します
 $resultSet = $technorati->search('PHP', $options);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <classname>Zend_Service_Technorati</classname> のインスタンスは使い捨てのオブジェクトではありません。
@@ -96,7 +94,7 @@ $resultSet = $technorati->search('PHP', $options);
             オブジェクトを、気の済むまで使い回せばいいのです。
         </para>
         <example id="zend.service.technorati.making-first-query.example-3">
-            <title>ひとつの <classname>Zend_Service_Technorati</classname> インスタンスでの複数のクエリの送信</title>
+            <title>ひとつの Zend_Service_Technorati インスタンスでの複数のクエリの送信</title>
             <programlisting role="php"><![CDATA[
 // API_KEY を指定して
 // Zend_Service_Technorati を作成します
@@ -107,8 +105,7 @@ $search = $technorati->search('PHP');
 
 // Technorati で一番よく登録されているタブを取得します
 $topTags = $technorati->topTags();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -141,8 +138,7 @@ $resultSet = $technorati->search('PHP');
 foreach ($resultSet as $result) {
     // $result は Zend_Service_Technorati_SearchResult のインスタンスです
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <classname>Zend_Service_Technorati_ResultSet</classname> は <code>SeekableIterator</code>
@@ -163,8 +159,7 @@ $resultSet = $technorati->search('PHP');
 // $result は Zend_Service_Technorati_SearchResult のインスタンスです
 $resultSet->seek(1);
 $result = $resultSet->current();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <para>
@@ -198,8 +193,7 @@ foreach ($result->getWeblogs() as $weblog) {
     echo '<li>' . $weblog->getName() . '</li>';
 }
 echo "</ol>";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             レスポンスクラスの詳細については
@@ -237,8 +231,7 @@ try {
 } catch(Zend_Service_Technorati_Exception $e) {
     echo "エラーが発生しました: " $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -267,8 +260,7 @@ $key = $technorati->keyInfo();
 echo "API Key: " . $key->getApiKey() . "<br />";
 echo "Daily Usage: " . $key->getApiQueries() . "/" .
      $key->getMaxQueries() . "<br />";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -312,8 +304,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -341,8 +332,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -370,8 +360,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -396,8 +385,7 @@ foreach ($resultSet as $result) {
          "(" . $result->getCount() . ")</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -425,8 +413,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getTag() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -448,8 +435,7 @@ $result = $technorati->blogInfo('http://devzone.zend.com/');
 
 echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
      $result->getWeblog()->getName() . '</a></h2>';
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -477,8 +463,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getTag() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -506,8 +491,7 @@ foreach ($result->getWeblogs() as $weblog) {
     echo "<li>" . $weblog->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -604,8 +588,7 @@ foreach ($resultSet as $result) {
     // Zend_Service_Technorati_SearchResult オブジェクトに対して
     // 何らかの操作をします
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 

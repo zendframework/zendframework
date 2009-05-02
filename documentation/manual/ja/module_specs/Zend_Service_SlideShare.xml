@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15234 -->
 <sect1 id="zend.service.slideshare">
 
     <title>導入</title>
@@ -17,7 +17,7 @@
 
     <sect2 id="zend.service.slideshare.basicusage">
 
-        <title><classname>Zend_Service_SlideShare</classname> の使い方</title>
+        <title>Zend_Service_SlideShare の使い方</title>
 
         <para>
             <classname>Zend_Service_SlideShare</classname> コンポーネントを使うには、まず
@@ -39,8 +39,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
                                   'USERNAME',
                                   'PASSWORD');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -191,8 +190,7 @@ class Zend_Service_SlideShare_SlideShow {
         return $this->_numViews;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
 
@@ -234,8 +232,7 @@ $slideshow = $ss->getSlideShow(123456);
 
 print "スライドショーのタイトル: {$slideshow->getTitle()}<br/>\n";
 print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -310,14 +307,13 @@ $ss_group = $ss->getSlideShowsByGroup('mygroup', $starting_offset, $limit);
 foreach($ss_user as $slideshow) {
    print "スライドショーのタイトル: {$slideshow->getTitle}<br/>\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
     <sect2 id="zend.service.slideshare.caching">
 
-        <title><classname>Zend_Service_SlideShare</classname> のキャッシュ処理のポリシー</title>
+        <title>Zend_Service_SlideShare のキャッシュ処理のポリシー</title>
 
         <para>
             デフォルトでは、<classname>Zend_Service_SlideShare</classname>
@@ -347,8 +343,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -374,8 +369,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'PASSWORD');
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

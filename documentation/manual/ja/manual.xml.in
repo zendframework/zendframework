@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!-- EN-Revision: 15048 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15216 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -604,9 +605,11 @@
         <xi:include href="module_specs/Zend_Tool_Project-Providers.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Tool_Project-Providers.xml" /></xi:fallback>
         </xi:include>
+        <!--
         <xi:include href="module_specs/Zend_Tool_Project-Internals.xml">
             <xi:fallback><xi:include href="../en/module_specs/Zend_Tool_Project-Internals.xml" /></xi:fallback>
         </xi:include>
+        -->
     </chapter>
 
     <chapter id="zend.translate">

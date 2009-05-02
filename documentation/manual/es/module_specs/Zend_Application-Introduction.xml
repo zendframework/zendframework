@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.application.introduction">
+    <title>Introducción</title>
+
+    <para>
+        <classname>Zend_Application</classname> ofrece un motor de bootstrap
+        para aplicaciones que proporcionan recursos reutilizables,
+        -- clases de bootstrap comunes y basadas en módulos -- y comprobación de
+        dependencias. También se ocupa de establecer el entorno de PHP
+        e introduce la autocarga (autoloading) por defecto.
+    </para>
+</sect1>

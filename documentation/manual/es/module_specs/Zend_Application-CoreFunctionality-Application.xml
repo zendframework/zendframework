@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.application">
+    <title>Zend_Application</title>
+
+    <para>
+        <classname>Zend_Application</classname>  proporciona la funcionalidad
+        básica del componente, y el punto de entrada a su aplicación
+        Zend Framework. Su propósito es doble: para configurar el medio ambiente
+        PHP (incluyendo autocarga), y ejecutar su aplicación bootstrap.
+    </para>
+
+    <para>
+        Típicamente, pasará toda la configuración al constructor
+        <classname>Zend_Application</classname>, pero también puede configurar
+        totalmente el objeto utilizando sus propios métodos. En esta referencia 
+        se ilustran ambos casos de uso.
+    </para>
+
+    <table id="zend.application.core-functionality.application.api.table">
+        <title>Métodos de Zend_Application</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Método</entry>
+                    <entry>Valor de Retorno</entry>
+                    <entry>Parámetros</entry>
+                    <entry>Descripción</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($environment, $options = null)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$environment</code>: <emphasis>requerido</emphasis>,.
+                                String que representa el actual entorno de aplicación.
+                                Strings típicos podrían incluir "desarrollo",
+                                "pruebas", "qa", o "producción", pero será definido
+                                por sus requisitos organizacionales.
+                            </para></listitem>
+
+                            <listitem>
+                            <para>
+                                <code>$options</code>: <emphasis>opcional</emphasis>.
+                                El argumento puede ser uno de los siguientes valores:
+                            </para>
+                            <itemizedlist>
+                                <listitem><para>
+                                    <emphasis>String</emphasis>: path
+                                    al archivo <classname>Zend_Config</classname>
+                                    para cargarlo como donfiguración de su
+                                    aplicación.
+                                    <code>$environment</code> se utilizará para
+                                    determinar qué sección de la configuración
+                                    se traerá.
+                                </para></listitem>
+
+                                <listitem><para>
+                                    <emphasis>Array</emphasis>: array asociativo
+                                    de datos de configuración para su aplicación.
+                                </para></listitem>
+
+                                <listitem><para>
+                                    <emphasis>Zend_Config</emphasis>:
+                                    instancia del objeto de configuración.
+                                </para></listitem>
+                            </itemizedlist>
+                        </listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Constructor. Los argumentos son como se describe,
+                        y será utilizado para establecer el estado incial del
+                        objeto. Una instancia de
+                        <classname>Zend_Loader_Autoloader</classname>
+                        es registrada durante la instanciación.
+                        Las opciones pasadas al onstructor se pasan a
+                        <code>setOptions()</code>.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getEnvironment()</code></entry>
+                    <entry><code>string</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar el string del medio ambiente que se pasó al
+                        constructor.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getAutoloader()</code></entry>
+                    <entry><classname>Zend_Loader_Autoloader</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar la instancia de
+                        <classname>Zend_Loader_Autoloader</classname>
+                        registrados durante la instanciación.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            Un array de opciones de aplicación.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Todas las opciones se almacenan internamente, y llamando
+                        al método varias veces las opciones se fusionarán.
+                        Las opciones concordantes con los diversos métodos
+                        setter se pasarán a esos métodos.
+                        Como ejemplo, la opción "phpSettings" será pasada a
+                        <code>setPhpSettings()</code>.
+                        (Los nombres de opciones son indiferentes a mayúsculas/
+                        minúsculas.)
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOptions()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar todas las opciones usadas para inicializar el
+                        objeto; podría ser utilizada para guardar en cache a
+                        través de <classname>Zend_Config</classname> las
+                        opciones para serializar un formato entre reqerimientos.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>hasOption($key)</code></entry>
+                    <entry><code>boolean</code></entry>
+                    <entry>
+                    <itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: String opcional de la clave de lookup
+                        </para></listitem>
+                    </itemizedlist>
+                    </entry>
+                    <entry><para>
+                        Determinar si una opción con la clave ha sido registrada
+                        o no. Las claves son indiferentes a mayúsculas/
+                        minúsculas.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOption($key)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: String opcional de la clave de lookup
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Recuperar el valor de la opción de una clave dada.
+                        Retorna null si la clave no existe.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setPhpSettings(array $settings, $prefix = '')</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$settings</code>: <emphasis>requerido</emphasis>.
+                            Array asociativo en los settings de PHP INI.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$prefix</code>: <emphasis>opcional</emphasis>.
+                            Prefijo de tipo string para anteponer a la opción
+                            claves. Usado internamente para permitir el mapping 
+                            anidado de matrices separados por puntos en las
+                            claves de php.ini.
+                            En el uso normal, este argumento nunca debe ser
+                            pasado por un usuario.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Establece un conjunto de ajustaes en php.ini para run-time. 
+                        Las configuraciones separadas por punto pueden ser
+                        anidadas jerárquicamente
+                        (lo que puede ocurrir con los archivos INI
+                        <classname>Zend_Config</classname>) mediante un array de
+                        de arrays, y aún resolver correctamente.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setAutoloaderNamespaces(array $namespaces)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$namespaces</code>: <emphasis>requerido</emphasis>.
+                            Array de strings representando los namespaces a
+                            registrar con la instancia
+                            <classname>Zend_Loader_Autoloader</classname>.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Registra los namespaces con la instancia
+                        <classname>Zend_Loader_Autoloader</classname>.
+                      </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setBootstrap($path, $class = null)</code></entry>
+                    <entry><classname>Zend_Application</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$path</code>: <emphasis>requerido</emphasis>.
+                            Puede ser tanto una instancia de
+                            <classname>Zend_Application_Bootstrap_Bootstrapper
+                            </classname>, un string del path a la clase bootstrap,
+                            un arrray asociativo de classname =&gt;nombre_de_archivo,
+                            o un array asociativo con las claves 'class' y 'path'.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$class</code>: <emphasis>opcional</emphasis>.
+                            Si <code>$path</code> es un string, entonces
+                            <code>$class</code> puede ser especificado,
+                            y debe ser el string nombre de clase de la
+                            clase contenida en el archivo representado por path.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                </row>
+
+                <row>
+                    <entry><code>getBootstrap()</code></entry>
+                    <entry><code>null | Zend_Application_Bootstrap_Bootstrapper</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar la instancia del bootstrap registrado.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>bootstrap()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Llamar al método <code>bootstrap()</code>
+                        para cargar la aplicación.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>run()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Llamar al método <code>run()</code> del bootstrap
+                        para despachar la aplicación.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

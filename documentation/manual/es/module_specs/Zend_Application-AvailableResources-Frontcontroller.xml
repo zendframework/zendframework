@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.frontcontroller">
+    <title>Zend_Application_Resource_Frontcontroller</title>
+
+    <para>
+        Probablemente el recurso más común que se carga con
+        <classname>Zend_Application</classname> será el recurso Front Controller
+        , que proporciona la habilidad para configurar
+        <classname>Zend_Controller_Front</classname>. Este recurso ofrece
+        la posibilidad de establecer parámetros arbitrarios del Front Controller,
+        especificar plugins para inicializar, y mucho más.
+    </para>
+
+    <para>
+        Una vez inicializado, el recurso asigna la propiedad del
+        <code>frontController</code> del bootstrap a la instancia
+        <classname>Zend_Controller_Front</classname>.
+    </para>
+
+    <para>
+        Las claves de configuración disponibles incluyen las siguientes,
+        sin importar si son mayúsculas ó minúsculas:
+    </para>
+
+    <itemizedlist>
+        <listitem><para>
+            <code>controllerDirectory</code>: ya sea un valor de string
+            especificando un único directorio controlador, o un array de
+            pares de directorio módulo/controlador.
+        </para></listitem>
+
+        <listitem><para>
+            <code>moduleControllerDirectoryName</code>: un valor de string
+            indicando el subdirectorio bajo el cual un módulo contiene controladores.
+        </para></listitem>
+
+        <listitem><para>
+            <code>moduleDirectory</code>: directorio bajo el cual pueden
+            encontrarse los módulos.
+        </para></listitem>
+
+        <listitem><para>
+            <code>defaultControllerName</code>: Nombre base del controlador por
+            defecto (normalmente, "índex").
+        </para></listitem>
+
+        <listitem><para>
+            <code>defaultAction</code>: nombre base de la acción por defecto
+            (normalmente, "índex").
+        </para></listitem>
+
+        <listitem><para>
+            <code>defaultModule</code>: nombre base del módulo por defecto
+            (normalmente, "default").
+        </para></listitem>
+
+        <listitem><para>
+            <code>baseUrl</code>: base explícita a la URL de la aplicación
+            (normalmente auto-detect).
+        </para></listitem>
+
+        <listitem><para>
+            <code>plugins</code>: array con los nombres de los plugins de las
+            clases de los Front Controllers.
+            El recurso instanciará a cada clase (sin argumentos al constructor)
+            y luego registra la instancia con el Front Controller.
+        </para></listitem>
+
+        <listitem><para>
+            <code>params</code>: array de pares clave/valor para registrarse con
+            el front controller.
+        </para></listitem>
+    </itemizedlist>
+
+    <para>
+        Si se ingresa una clave no reconocida, ésta será registrada como un
+        parámetro de Front Controller pasándolo a <code>setParam()</code>.
+    </para>
+
+    <example id="zend.application.available-resources.frontcontroller.configExample">
+
+        <para>
+            A continuación, INI es un snippet para mostrar cómo configurar
+            el recurso Front Controller.
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+[production]
+resources.frontController.controllerDirectory = APPLICATION_PATH . "/controllers"
+resources.frontController.moduleControllerDirectoryName = "actions"
+resources.frontController.moduleController = APPLICATION_PATH .  "/modules"
+resources.frontController.defaultControllerName = "site"
+resources.frontController.defaultAction = "home"
+resources.frontController.defaultModule = "static"
+resources.frontController.baseUrl = "/subdir"
+resources.frontController.plugins.foo = "My_Plugin_Foo"
+resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.env = APPLICATION_ENV
+]]></programlisting>
+    </example>
+
+    <example id="zend.application.available-resources.frontcontroller.frontControllerPropertyExample">
+        <title>Recuperar el Front Controller de su arranque (bootstrap)</title>
+        <para>
+            Una vez que el recurso de su Front Controller ha sido inicializado,
+            se puede recuperar la instancia de Front Controller a través de la
+            propiedad <code>frontController</code> de su bootstrap.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$bootstrap->bootstrap('frontController');
+$front = $bootstrap->frontController;
+]]></programlisting>
+    </example>
+</sect2>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.modules">
+    <title>Zend_Application_Resource_Modules</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Modules</classname> se utiliza
+        para inicializar sus módulos de aplicación. Si su módulo tiene un
+        archivo <code>Bootstrap.php</code> en su raíz, y contiene una clase
+        llamada <code>Module_Bootstrap</code> (donde "Module" es el nombre del
+        módulo), entonces usará esa clase para arrancar el módulo.
+    </para>
+
+    <para>
+        Por defecto, se creará una instancia de
+        <classname>Zend_Application_Module_Autoloader</classname> para el
+        módulo, utilizando el nombre del módulo y del directorio para
+        inicializarlo.
+    </para>
+
+    <note>
+        <title>Dependencia de recursos del Front Controller</title>
+
+        <para>
+            El recurso Modules tiene una dependencia de
+            <link linkend="zend.application.available-resources.frontcontroller">
+            Front Controller resource</link>. Usted puede, por supuesto,
+            proporcionar su propia sustitución de ese recurso mediante un
+            recurso personalizado de la clase Front Controller o un método
+            inicializador de la clase -- tan largo como se quiera siempre que
+            el plugin del recurso de la clase termine en "Frontcontroller"
+            o el método inicializador se llame "_initFrontController"
+            (case insensible).
+        </para>
+    </note>
+
+    <example id="zend.application.available-resources.modules.configExample">
+        <title>Configurando Módulos</title>
+        <para>
+            Usted puede especificar una configuración específica de un mósulo
+            utilizando el nombre del módulo como un prefijo/sub-sección en su
+            archivo de configuración.
+        </para>
+
+        <para>
+            Por ejemplo, supongamos que su aplicación tiene un mósulo "noticias".
+            Los siguientes son ejemplos de INI y XML que muestran la
+            configuración de recursos en ese módulo.
+        </para>
+
+        <programlisting role="ini"><![CDATA[
+[production]
+news.resources.db.adapter = "pdo_mysql"
+news.resources.db.params.host = "localhost"
+news.resources.db.params.username = "webuser"
+news.resources.db.params.password = "XXXXXXX"
+news.resources.db.params.dbname = "news"
+news.resources.layout.layout = "news.phtml"
+]]></programlisting>
+
+        <programlisting role="xml"><![CDATA[
+<?xml version="1.0"?>
+<config>
+    <production>
+        <news>
+            <resources>
+                <db>
+                    <adapter>pdo_mysql</adapter>
+                    <params>
+                        <host>localhost</host>
+                        <username>webuser</username>
+                        <password>XXXXXXX</password>
+                        <dbname>news</dbname>
+                    </params>
+                    <isDefaultAdapter>true</isDefaultAdapter>
+                </db>
+            </resources>
+        </news>
+    </production>
+</config>
+]]></programlisting>
+    </example>
+
+    <example id="zend.application.available-resources.modules.retrieveBootstrapExample">
+        <title>Recuperando el bootstrap de un módulo específico</title>
+
+        <para>
+            En ocasiones, puede que necesite para recuperar el objeto bootstrap 
+            de un módulo específico -- tal vez para ejecutar discretos
+            métodos bootstrap ,o a recoger el cargador automático con el fin de
+            configurarlo. Esto puede hacerse utilizando el método
+            <code>getExecutedBootstraps()</code> de los recursos de Módulo. 
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$resource = $bootstrap->getPluginResource('modules');
+$moduleBootstraps = $resource->getExecutedBootstraps();
+$newsBootstrap = $moduleBootstraps['news'];
+]]></programlisting>
+    </example>
+</sect2>

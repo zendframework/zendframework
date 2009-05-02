@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.resource-resourceabstract">
+    <title>Zend_Application_Resource_ResourceAbstract</title>
+
+    <para>
+        <classname>Zend_Application_Resource_ResourceAbstract</classname> es una clase abstracta
+        implementando <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        y es un buen punto de partida para crear sus propios recursos de plugin
+        personalizados.
+    </para>
+
+    <para>
+        Nota: esta clase abstracta no implementa el método <code>init()</code>;
+        esto se deja para la definición de extensiones concretas de la clase.
+    </para>
+
+    <table id="zend.application.core-functionality.resource-resourceabstract.api">
+        <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Método</entry>
+                    <entry>Valor de Retorno</entry>
+                    <entry>Parámetros</entry>
+                    <entry>Descripción</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($options = null)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>opcional</emphasis>.
+                            Opciones con las cuales establecer el estado del recurso.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        El constructor debería permitir pasar opciones con las
+                        cuales inicializar el estado.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
+                    <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$bootstrap</code>: <emphasis>requerido</emphasis>.
+                                Padre del bootstrap inicializando este recurso.
+                            </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Debería permitir registrar el objeto padre del bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getBootstrap()</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar la instancia registrada del bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            Opciones con las cuales establecer el estado.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Establecer el estado del recurso.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOptions()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar opciones registradas.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>
+

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
+    <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
+
+    <para>
+        <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> es
+        una clase abstracta que proporciona la base funcional de un arranque
+        (bootstrap) común. Implementa a ambos
+        <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">
+            Zend_Application_Bootstrap_Bootstrapper</link> y a <link
+            linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
+            Zend_Application_Bootstrap_ResourceBootstrapper</link>.
+    </para>
+
+    <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
+        <title>Métodos de Zend_Application_Bootstrap_BootstrapAbstract</title>
+        <tgroup cols="4">
+            <thead>
+                <row>
+                    <entry>Método</entry>
+                    <entry>Valor de Retorno</entry>
+                    <entry>Parámetros</entry>
+                    <entry>Descripción</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><code>__construct($application)</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$application</code>: <emphasis>requerido</emphasis>.
+                            Acepta tanto a <classname>Zend_Application</classname> o al
+                            objeto <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                            como único argumento.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Constructor. Acepta un solo argumento, que debe ser un
+                        objeto <classname>Zend_Application</classname>, u otro
+                        objeto bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setOptions(array $options)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$options</code>: <emphasis>requerido</emphasis>.
+                            Array de opciones a establecer.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry>
+                    <para>
+                        Cualquier opción que tiene un setter concordante invocará
+                        ese setter; de lo contrario, la opción será simplemente
+                        almacenada para su recuperación posterior.
+                        Como ejemplo, si su clase extendida definió
+                        un método  <code>setFoo()</code>, la opción 'foo'
+                        pasaría el valor a ese método.
+                    </para>
+                    <para>
+                        También pueden usarse dos opciones especiales clave.
+                        <code>pluginPaths</code> puede ser utilizada para
+                        especificar prefijos de paths para los recursos plugin;
+                        debería ser un array de la clase pares prefijo/path.
+                        <code>resources</code> puede ser utilizada para
+                        especificar los recursos plugin a utilizar,
+                        y debería estar constituído por pares de opciones plugin
+                        recurso/instanciación.
+                    </para>
+                    </entry>
+                </row>
+
+                <row>
+                    <entry><code>getOption()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Devuelve todas las opciones registradas via
+                        <code>setOptions()</code>.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>hasOption($key)</code></entry>
+                    <entry><code>boolean</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: <emphasis>requerido</emphasis>.
+                            Clave de opción a probar.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>Determinar si una opción clave está presente.</para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getOption($key)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$key</code>: <emphasis>requerido</emphasis>.
+                            Clave de opción para recuperar.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Recuperar el valor asociado con una opción clave;
+                        retorna null si ninguna opción está registrada con
+                        esa clave.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setApplication(Zend_Application |
+                            Zend_Application_Bootstrap_Bootstrapper $application)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_BootstrapAbstract</classname></entry>
+                    <entry><itemizedlist>
+                            <listitem><para>
+                                <code>$application</code>: <emphasis>requerido</emphasis>.
+                            </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Registrar al objeto padre de aplicación/bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getApplication()</code></entry>
+                    <entry><classname>Zend_Application |
+                            Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar el objeto aplicación/bootstrap pasado via
+                        constructor.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getEnvironment()</code></entry>
+                    <entry><code>string</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar el string del medio ambiente registrado
+                        con el objeto padre aplicación/bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getClassResources()</code></entry>
+                    <entry><code>array</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recuperar una lista de los recursos inicializadores de
+                        nombres disponibles con los fueron definidos en la clase.
+                        Esto puede ser de implementación específica.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getContainer()</code></entry>
+                    <entry><code>object</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Recupera el contenedor que almacena recursos.
+                        Si no hay un contenedor actualmente registrado,
+                        registra una instancia
+                        <link linkend="zend.registry">Zend_Registry</link>
+                        antes de retornarlo.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>setContainer($container)</code></entry>
+                    <entry><classname>Zend_Application_Bootstrap_BootstrapAbstract</classname></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$container</code>, <emphasis>requerido</emphasis>.
+                            Un objeto en el cual almacenar recursos.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Proporciona un contenedor en el que se almacenan recursos.
+                        Cuando un método de recurso o plugin devuelve un valor,
+                        será almacenado en este contenedor para su recuperación
+                        posterior.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>hasResource($name)</code></entry>
+                    <entry><code>boolean</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$name</code>, <emphasis>requerido</emphasis>.
+                            Nombre del recurso a comprobar.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Cuando un método de recurso o plugin devuelve un valor,
+                        será almacenado en el contenedor de recursos (ver
+                        <code>getContainer()</code> y
+                        <code>setContainer()</code>. Este método indicará si
+                        se ha establecido o no un valor para ese recurso.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>getResource($name)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$name</code>, <emphasis>requerido</emphasis>.
+                            Nombre del recurso a recuperar.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Cuando un método de recurso o plugin devuelve un valor,
+                        será almacenado en el contenedor de recursos (ver
+                        <code>getContainer()</code> y
+                        <code>setContainer()</code>. Este método recuperará
+                        recursos del contenedor.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>bootstrap($resource = null)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$resource</code>: <emphasis>opcional</emphasis>.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry>
+                    <para>
+                        Si <code>$resource</code> está vacío, ejecutar todos
+                        los recursos del bootstrap.
+                        Si es un string, ejecutar ese único recurso;
+                        si es un array, ejecutar cada recurso del array.
+                    </para>
+
+                    <para>
+                        Este método puede ser utilizado para ejecutar
+                        bootstraps individuales, ya hayan sido definidos en la
+                        propia clase o mediante clases de recursos de plugin.
+                        Un recurso definido en la clase será ejecutado en
+                        preferencia por sobre un recurso de plugin en el caso
+                        de conflicto de nombres.
+                    </para>
+                    </entry>
+                </row>
+
+                <row>
+                    <entry><code>run()</code></entry>
+                    <entry><code>void</code></entry>
+                    <entry>N/A</entry>
+                    <entry><para>
+                        Define qué lógica de aplicación ejecutar luego del
+                        bootstrap.
+                    </para></entry>
+                </row>
+
+                <row>
+                    <entry><code>__call($method, $args)</code></entry>
+                    <entry><code>mixed</code></entry>
+                    <entry><itemizedlist>
+                        <listitem><para>
+                            <code>$method</code>: <emphasis>requerido</emphasis>.
+                            El nombre del método a llamar.
+                        </para></listitem>
+
+                        <listitem><para>
+                            <code>$args</code>: <emphasis>requerido</emphasis>.
+                            Array de argumentos para usar en el método de llamada.
+                        </para></listitem>
+                    </itemizedlist></entry>
+                    <entry><para>
+                        Ofrece comodidad para bootstrapping de recursos
+                        individuales permitiéndole llamar
+                        'bootstrap&lt;ResourceName&gt;()' en vez de usar el
+                        método <code>bootstrap()</code>.
+                    </para></entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</sect2>

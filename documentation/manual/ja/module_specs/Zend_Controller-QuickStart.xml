@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15182 -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller クイックスタート</title>
 
@@ -58,8 +58,7 @@ application/
 html/
     .htaccess
     index.php
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -87,8 +86,23 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-            </programlisting>
+]]></programlisting>
+
+            <note>
+                <title>mod_rewrite について</title>
+
+                <para>
+                    上のリライトルールは、バーチャルホストのドキュメントルート配下にある
+                    すべてのファイルへのアクセスを許可するものです。
+                    この方式で公開してしまってはまずいファイルがある場合は、
+                    このルールにさらに制約を追加しなければなりません。
+                    Apache のウェブサイトにいけば、
+                    <ulink
+                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">
+                        mod_rewrite について</ulink>
+                    もっと詳しく知ることができます。
+                </para>
+            </note>
 
             <para>
                 IIS 7.0 をお使いの場合は、次のような rewrite 設定を使用します。
@@ -150,8 +164,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 これは、フロントコントローラのインスタンスとディスパッチを行います。
@@ -213,8 +226,7 @@ class IndexController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 デフォルトでは
@@ -264,8 +276,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <h1>Hello, World!</h1>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.errorhandler">
@@ -288,8 +299,7 @@ class ErrorController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 先ほど説明したディレクトリ構成により、このファイルは
@@ -313,8 +323,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <p>エラーが発生しました。後ほどもう一度お試しください。</p>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.finish">

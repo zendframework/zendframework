@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -22,8 +22,7 @@
 $server = new Zend_Rest_Server();
 $server->setClass('My_Service_Class');
 $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.rest.server.usage.example-2">
@@ -45,8 +44,7 @@ function sayHello($who, $when)
 $server = new Zend_Rest_Server();
 $server->addFunction('sayHello');
 $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -111,8 +109,7 @@ function sayHello($who, $when)
 $server = new Zend_Rest_Server();
 $server->addFunction('sayHello');
 $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -151,8 +148,7 @@ $server = new Zend_Rest_Server();
 $server->addFunction('sayHello');
 
 $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

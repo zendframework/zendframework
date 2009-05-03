@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
@@ -109,8 +109,7 @@ class Calculator
         return $x / $y;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es ist zu beachten das jede Methode einen Docblock mit Einträgen besitzt die jeden Parameter und
@@ -131,8 +130,7 @@ $server->setClass('Calculator');
 
 // Behandelt die Anfrage:
 $server->handle();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Trotzdem behandelt das noch immer nicht das Problem der Rückgabe eines SMD damit der JSON-RPC
@@ -159,8 +157,7 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
 }
 
 $server->handle();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn der JSON-RPC Server mit dem Dojo Toolkit verwendet wird muß auch ein spezielles
@@ -185,8 +182,7 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
 }
 
 $server->handle();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <sect2 id="zend.json.server.details">

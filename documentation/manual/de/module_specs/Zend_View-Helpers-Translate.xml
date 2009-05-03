@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
 
@@ -71,8 +71,7 @@ Zend_Registry::set('Zend_Translate', $adapter);
 // In der View
 echo $this->translate('simple');
 // gibt 'einfach' zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -96,8 +95,7 @@ echo $this->translate('simple');
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 $this->translate()->setTranslator($adapter)->translate('simple');
 // das gibt 'einfach' zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -116,8 +114,7 @@ $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 // den Helfer initiieren
 $translate = new Zend_View_Helper_Translate($adapter);
 print $translate->translate('simple'); // das gibt 'einfach' zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dieser Weg kann verwendet werden wenn man nicht mit <classname>Zend_View</classname> arbeitet und
@@ -147,8 +144,7 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
 $date = "Montag";
 $this->translate("Today is %1\$s", $date);
 // könnte 'Heute ist Montag' zurückgeben
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -177,8 +173,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
                  $month,
                  $time);
 // könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -195,8 +190,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -215,8 +209,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // innerhalb der View
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -236,8 +229,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
 $date = array("Monday", "April", "11:20:55");
 $this->translate()->setLocale('it');
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -268,8 +260,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
 // gibt 'it' als neues standardmäßig gesetztes Gebietsschema zurück
 $this->translate()->getLocale();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 

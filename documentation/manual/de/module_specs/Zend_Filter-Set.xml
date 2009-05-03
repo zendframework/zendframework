@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15153 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -85,20 +85,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.filter.set.realpath">
-        <title>RealPath</title>
-        <para>
-            Erweitert alle symbolischen Links und löst Referenzen in '/./', '/../' und extra '/' Zeichen im
-            Eingabepfad auf und gibt den kanonischen absoluten Pfadnamen zurück. Der sich ergebende Pfad hat keine
-            symbolischen Links, '/./' oder '/../' Komponenten.
-        </para>
-        <para>
-            <classname>Zend_Filter_RealPath</classname> gibt bei einem Fehlschlag <code>FALSE</code> zurück, bzw. wenn
-            die Datei nicht existiert. Auf BSD Systemen schlägt <classname>Zend_Filter_RealPath</classname> nicht fehl
-            wenn die letzte Pfadkomponenten nicht existiert, wärend Sie auf anderen Systemen <code>FALSE</code>
-            zurückgibt.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Filter-RealPath.xml" />
 
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>

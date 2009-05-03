@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -360,8 +360,7 @@ class MyClass {
 }
 ...
 $soapMyClassType = $wsdl->getType('MyClass');
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -529,8 +528,7 @@ foreach($result->services AS $service) {
 foreach($result->types AS $type) {
     // mach was
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Alle Element implementieren das Interface <classname>Zend_Soap_Wsdl_Element_Interface</classname> das
         auf eine <code>getName()</code> und <code>getDocumentation()</code> Funktion mit den eindeutigen

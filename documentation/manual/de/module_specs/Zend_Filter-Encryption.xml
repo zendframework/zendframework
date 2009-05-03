@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15120 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -21,8 +21,7 @@ $filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
 
 // Verwendung des OpenSSL Adapters
 $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Um einen anderen Adapter zu setzen kann man auch <code>setAdapter()</code> verwenden, und die
@@ -33,8 +32,7 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 // Verwenden des Mcrypt Adapters
 $filter = new Zend_Filter_Encrypt();
 $filter->setAdapter('openssl');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <note>
         <para>
@@ -157,8 +155,7 @@ $encrypted = $filter->filter('text_to_be_encoded');
 print $encrypted;
 
 // Für Entschlüsselung siehe den Decrypt Filter
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.filter.set.encrypt.openssl">
@@ -207,8 +204,7 @@ $filter->setPublicKey(array(
     '/public/key/path/first.pem',
     '/public/key/path/second.pem'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -238,8 +234,7 @@ $filter->setPublicKey(array(
     '/public/key/path/second.pem'
 ));
 $filter->setPassphrase('mypassphrase');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zum Schluß muß man, wenn OpenSSL verwendet wird, dem Empfänger den verschlüsselten Inhalt, die
@@ -276,8 +271,7 @@ $envelope  = $filter->getEnvelopeKey();
 print $encrypted;
 
 // Für die Entschlüsselung siehe beim Decrypt Filter
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 </sect2>
 <!--

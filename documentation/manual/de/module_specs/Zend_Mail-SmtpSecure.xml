@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.smtp-secure">
   <title>SMTP Übertragungen sichern</title>
@@ -24,8 +24,7 @@ $mail->setFrom('sender@test.com', 'Einige Sender');
 $mail->addTo('recipient@test.com', 'Einige Empfänger');
 $mail->setSubject('TestBetreff');
 $mail->send($transport);
-]]>
-    </programlisting>
+]]></programlisting>
   </example>
 </sect1>
 <!--

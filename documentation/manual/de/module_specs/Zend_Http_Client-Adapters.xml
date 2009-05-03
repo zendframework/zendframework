@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -155,8 +155,7 @@ $client = new Zend_Http_Client('https://www.example.com', $config);
 
 // Jetzt wird der Request über eine verschlüsselte Verbindung verschickt
 $response = $client->request();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Ein ähnliches Ergebnis erzielt man mit folgendem Code:
@@ -260,8 +259,7 @@ $config = array(
 $client = new Zend_Http_Client('http://www.example.com', $config);
 
 // $client kann jetzt wie gewohnt benutzt werden
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
                         Wie vorher erwähnt, nutzt der Proxy-Adapter eine einfache Socket-Verbindung,
@@ -317,8 +315,7 @@ $adapter->setResponse(
 
 $response = $client->request('GET');
 // .. setze die Verarbeitung von $response fort...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Das obere Beispiel zeigt, wie man einen HTTP Client voreinstellen kann, damit er die
@@ -364,8 +361,7 @@ $adapter->addResponse(
 
 // Das $client Objekt kann jetzt zu testzwecken herangezogen werden,
 // indem es wie ein normales Client-Objekt benutzt wird.
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -401,8 +397,7 @@ $config = array(
     'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
 );
 $client = new Zend_Http_Client($uri, $config);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -435,8 +430,7 @@ $adapter->setConfig(array(
     )
 ));
 $client->request("PUT");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -527,8 +521,7 @@ class MyApp_Http_Client_Adapter_BananaProtocol
 $client = new Zend_Http_Client(array(
     'adapter' => 'MyApp_Http_Client_Adapter_BananaProtocol'
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

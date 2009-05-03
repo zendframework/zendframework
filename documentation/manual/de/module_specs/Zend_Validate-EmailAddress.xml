@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
 
@@ -28,8 +28,7 @@ if ($validator->isValid($email)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         Das prüft die Email Adresse <code>$email</code> und gibt bei einem Fehler über
         <code>$validator->getMessages()</code> eine nützliche Fehlermeldung aus.
@@ -80,8 +79,7 @@ if ($validator->isValid($email)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </para>
 
     <para>
@@ -104,8 +102,7 @@ if ($validator->isValid($email)) {
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         Alternativ kann entweder <code>true</code> oder <code>false</code> an
         <code>$validator->setValidateMx()</code> übergeben werden um die MX Prüfung ein- oder auszuschalten.
@@ -130,8 +127,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
 
         <programlisting role="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
-]]>
-        </programlisting>
+]]></programlisting>
 
         Weitere Informationen über die Verwendung von <code>setValidateIdn()</code> gibt es
         in der <classname>Zend_Validate_Hostname</classname> Dokumentation.
@@ -153,8 +149,7 @@ $validator->hostnameValidator->setValidateIdn(false);
 
         <programlisting role="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
-]]>
-        </programlisting>
+]]></programlisting>
 
         Mehr Informationen über die Verwendung von <code>setValidateTld()</code> gibt es in der
         <classname>Zend_Validate_Hostname</classname> Dokumentation.

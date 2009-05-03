@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Einleitung</title>
@@ -14,7 +14,7 @@
         das Einlesen von Daten aus Textfiles zur Verfügung.
     </para>
     <example id="zend.config.introduction.example.using">
-        <title><code>Zend-Config</code> verwenden</title>
+        <title>Zend-Config verwenden</title>
         <para>
             In der Regel geht man davon aus, dass Anwender eine der Adapter-Klassen wie
             <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> oder
@@ -51,8 +51,7 @@ $db = Zend_Db::factory($config->database->adapter,
 // Alternative Verwendung: einfach das Zend_Config Objekt übergeben.
 // Zend_Db factory weiß wie es zu interpretieren ist.
 $db = Zend_Db::factory($config->database);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         Wie das Beispiel oben zeigt, kann man über <classname>Zend_Config</classname> auf die
@@ -66,10 +65,9 @@ $db = Zend_Db::factory($config->database);
     </para>
     <programlisting role="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
-]]>
-    </programlisting>
+]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
-        <title><classname>Zend_Config</classname> mit einer PHP Konfigurationsdatei verwenden</title>
+        <title>Zend_Config mit einer PHP Konfigurationsdatei verwenden</title>
         <para>
             Es ist oft gewünscht eine reine PHP-basierende Konfigurationsdatei zu verwenden. Der folgende
             Code zeigt wie das ganz einfach erreicht werden kann:
@@ -88,16 +86,14 @@ return array(
         )
     )
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <programlisting role="php"><![CDATA[
 // Konfiguration konsumieren
 $config = new Zend_Config(require 'config.php');
 
 // Einen Konfigurationswert ausgeben (führt zu 'www.example.com')
 echo $config->webhost;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

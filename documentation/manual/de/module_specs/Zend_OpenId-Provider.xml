@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
@@ -43,8 +43,7 @@ if (!$server->hasUser(TEST_ID)) {
 </head><body>
 <?php echo TEST_ID;?>
 </body></html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -76,8 +75,7 @@ if (is_string($ret)) {
     header('HTTP/1.0 403 Forbidden');
     echo 'Verboten';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -165,8 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 </form>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -225,8 +222,7 @@ ihre Identitäts URL ist.
 </form>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -281,8 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         echo 'Verboten';
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -332,8 +327,7 @@ if (!$server->hasUser(TEST_ID)) {
 <?php echo TEST_ID;?>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -385,8 +379,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         echo 'Verboten';
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.technorati">
     <title>Zend_Service_Technorati</title>
@@ -61,8 +61,7 @@ $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 
 // Technorati nach dem Schlüsselwort PHP durchsuchen
 $resultSet = $technorati->search('PHP');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Jede Abfragemethode akzeptiert ein Array von optionalen Parametern die verwendet werden kann um die
@@ -80,8 +79,7 @@ $options = array('authority' => 'a4');
 
 // Technorati nach dem Schlüsselwort PHP durchsuchen
 $resultSet = $technorati->search('PHP', $options);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Eine <classname>Zend_Service_Technorati</classname> Instanz ist kein einmal zu verwendendes Objekt. Deswegen
@@ -99,8 +97,7 @@ $search = $technorati->search('PHP');
 
 // Top Tags die von Technorati indiziert wurden erhalten
 $topTags = $technorati->topTags();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -130,8 +127,7 @@ $resultSet = $technorati->search('PHP');
 foreach ($resultSet as $result) {
     // $result ist eine Instanz von Zend_Service_Technorati_SearchResult
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Weil <classname>Zend_Service_Technorati_ResultSet</classname> das <code>SeekableIterator</code> Interface
@@ -151,8 +147,7 @@ $resultSet = $technorati->search('PHP');
 // $result ist eine Instanz von Zend_Service_Technorati_SearchResult
 $resultSet->seek(1);
 $result = $resultSet->current();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <para>
@@ -183,8 +178,7 @@ foreach ($result->getWeblogs() as $weblog) {
     echo '<li>' . $weblog->getName() . '</li>';
 }
 echo "</ol>";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Bitte lesen Sie das
@@ -221,8 +215,7 @@ try {
 } catch(Zend_Service_Technorati_Exception $e) {
     echo "Ein Fehler ist aufgetreten: " $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -249,8 +242,7 @@ $key = $technorati->keyInfo();
 echo "API Schlüssel: " . $key->getApiKey() . "<br />";
 echo "Tägliche Verwendung: " . $key->getApiQueries() . "/" .
      $key->getMaxQueries() . "<br />";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -293,8 +285,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -321,8 +312,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -349,8 +339,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getWeblog()->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -374,8 +363,7 @@ foreach ($resultSet as $result) {
          "(" . $result->getCount() . ")</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -402,8 +390,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getTag() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -424,8 +411,7 @@ $result = $technorati->blogInfo('http://devzone.zend.com/');
 
 echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
      $result->getWeblog()->getName() . '</a></h2>';
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -452,8 +438,7 @@ foreach ($resultSet as $result) {
     echo "<li>" . $result->getTag() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -480,8 +465,7 @@ foreach ($result->getWeblogs() as $weblog) {
     echo "<li>" . $weblog->getName() . "</li>";
 }
 echo "</ol>";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -572,8 +556,7 @@ $resultSet = $technorati->search('php');
 foreach ($resultSet as $result) {
     // irgendwas mit dem Zend_Service_Technorati_SearchResult Objekt anfangen
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 

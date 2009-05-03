@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -27,8 +27,7 @@
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.structure">
@@ -107,8 +106,7 @@ echo $server->handle();
 function myFunc($val1, $val2, $val3)
 {
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             PhpDocumentor validiert keine Typen, die in Parameter- oder
@@ -140,8 +138,7 @@ function myFunc($val1, $val2, $val3)
 function myFunc($val1, $val2, $val3)
 {
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dennoch eine Anmerkung: Das Erlaubung von vielen Signaturen kann
@@ -184,8 +181,7 @@ $server->setClass('My_Service_Class', 'myservice');
 
 // Funktion 'somefunc' ist als funcs.somefunc ansprechbar.
 $server->addFunction('somefunc', 'funcs');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.request">
@@ -248,8 +244,7 @@ $server->addFunction('somefunc', 'funcs');
 
         <programlisting role="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Abgeleitete Exceptions lassen sich als ganze Familie von Exceptions
@@ -303,8 +298,7 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 }
 
 echo $server->handle();
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Obiges Beispiel zeigt, wie der Server versucht, eine Definition
             aus der Datei xmlrpc.cache, welches sich im selben Ordner wie das
@@ -345,8 +339,7 @@ function md5Value($value)
 $server = new Zend_XmlRpc_Server();
 $server->addFunction('md5Value');
 echo $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case2">
@@ -361,8 +354,7 @@ echo $server->handle();
 $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case3">
@@ -389,8 +381,7 @@ $server->setClass('Services_Brush', 'brush');
 // Methoden werden als pick.* aufgerufen
 $server->setClass('Services_Pick', 'pick');
 echo $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case4">
@@ -422,8 +413,7 @@ $server->setClass('Services_Brush', 'brush');
 // Methoden werden als pick.* aufgerufen
 $server->setClass('Services_Pick', 'pick');
 echo $server->handle();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case5">
@@ -459,8 +449,7 @@ $server->setClass('Services_Pick', 'pick');
 $request = new Services_Request();
 
 echo $server->handle($request);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case6">
@@ -500,8 +489,7 @@ $request = new Services_Request();
 $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.xmlrpc.server.use.case7">
@@ -544,8 +532,7 @@ $request = new Services_Request();
 $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 </sect1>

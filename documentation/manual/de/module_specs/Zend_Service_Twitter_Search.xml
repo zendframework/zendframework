@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.twitter.search">
     <title>Zend_Service_Twitter_Search</title>
@@ -33,8 +33,7 @@ $twitter_trends = $twitter_search->trends();
 foreach($twitter_trends as $trend) {
     print $trend['name'] . ' - ' . $trend['url'] . PHP_EOL
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das zurückgegebene Array enthält zwei Werte:
@@ -125,8 +124,7 @@ foreach($twitter_trends as $trend) {
             <programlisting role="php"><![CDATA[
 $twitter_search = new Zend_Service_Twitter_Search('json');
 $search_results = $twitter_search->search('zend', array('lang' => 'en'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.twitter.search.search.atom">
@@ -138,8 +136,7 @@ $search_results = $twitter_search->search('zend', array('lang' => 'en'));
             <programlisting role="php"><![CDATA[
 $twitter_search = new Zend_Service_Twitter_Search('atom');
 $search_results = $twitter_search->search('zend', array('lang' => 'en'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect3>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
 
@@ -26,8 +26,7 @@
 
             <programlisting role="php"><![CDATA[
 Zend_Session::start();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -156,8 +155,7 @@ $userProfileNamespace->lock();
 if ($userProfileNamespace->isLocked()) {
     $userProfileNamespace->unLock();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -195,8 +193,7 @@ $s->setExpirationSeconds(60);
 // Der "expireAll" Namensraum wird als "abgelaufen" markiert
 // sobald der erste Aufruf empfangen wurde und 60 Sekunden
 // vergangen sind, oder in 5 Sprüngen, was auch immer zuerst stattfindet
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -239,8 +236,7 @@ $testSpace->setExpirationSeconds(300, 'accept_answer');
 // Nur diese Variable ablaufen lassen
 $testSpace->accept_answer = true;
 //...
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Danach bestimmt der Kontroller der die Antworten für die Test Fragen bearbeitet ob eine
@@ -259,8 +255,7 @@ $testSpace->accept_answer = true;
      // nicht innerhalb der Zeit
  }
 // ...
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -307,8 +302,7 @@ try {
     echo 'Dieser Namensraum kann nicht instanziert werden da ' .
          '$authSpaceAccessor2 erstellt wurde\n';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -352,8 +346,7 @@ $sessionNamespace->array = array();
 // wird nicht wie gewünscht funktionieren vor PHP 5.2.1
 $sessionNamespace->array['testKey'] = 1;
 echo $sessionNamespace->array['testKey'];
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -369,8 +362,7 @@ echo $sessionNamespace->array['testKey'];
             <programlisting role="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -405,8 +397,7 @@ $tmp['fruit'] = 'peach';
 $sessionNamespace->array = $tmp;
 
 echo $sessionNamespace->array['fruit']; // gibt "peach" aus
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -425,8 +416,7 @@ $a = array(1, 2, 3);
 $myNamespace->someArray = array( &$a );
 $a['foo'] = 'bar';
 echo $myNamespace->someArray['foo']; // gibt "bar" aus
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -528,8 +518,7 @@ session_start(); // Die bestimmte Session wiederherstellen
 $this->assertTrue($result === ';p === plum',
     "Iterierung durch benannte Zend_Session Namensräume " .
     "fehlgeschlaten (result=$result)");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
 
@@ -26,8 +26,7 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         Prüfungen werden in der Reihenfolge durchgeführt in der Sie <classname>Zend_Validate</classname> hinzugefügt
         wurden. Im obigen Beispiel wird der Benutzername zuerst geprüft um sicherzustellen das die Länge
@@ -50,8 +49,7 @@ if ($validatorChain->isValid($username)) {
         <programlisting role="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
-]]>
-        </programlisting>
+]]></programlisting>
 
     </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.writing_filters">
 
@@ -31,8 +31,7 @@ class MyFilter implements Zend_Filter_Interface
         return $valueFiltered;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </para>
 
@@ -42,8 +41,7 @@ class MyFilter implements Zend_Filter_Interface
         <programlisting role="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
-]]>
-        </programlisting>
+]]></programlisting>
 
     </para>
 

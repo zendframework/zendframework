@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.controllers">
     <title>Controller Skripte</title>
@@ -25,8 +25,7 @@ $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Allerdings kann dies mühsam sein, wenn du bereits alle Werte gesammelt hast, um sie
@@ -59,8 +58,7 @@ $obj->a = "Hay";
 $obj->b = "Bee";
 $obj->c = "Sea";
 $view->assign((array) $obj);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kannst du die assign() Methode auch benutzen, um nacheinander einen
@@ -72,8 +70,7 @@ $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -95,8 +92,7 @@ $view->a = "Hay";
 $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -120,8 +116,7 @@ echo $view->render('someView.php');
         <programlisting role="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn du nun $view->render('someView.php') aufrufst, wird es nach der Datei
@@ -145,8 +140,7 @@ $view->addScriptPath('/path/to/custom/');
 // Zend_View zuerst nach der Datei "/path/to/custom/booklist.php",
 // dann nach "/path/to/app/views/booklist.php" und zuguterletzt
 // im aktuellen Pfad nach der Datei "booklist.php" schauen
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>Benutze nie Eingaben des Benutzers um den Skriptpfad zu setzen</title>

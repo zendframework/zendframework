@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
@@ -54,8 +54,7 @@ foreach ($prototypes as $prototype) {
 // Namensräume können zum Zeitpunkt der Instanzierung gesetzt werden
 // (zweites Argument) oder durch Verwendung von setNamespace()
 $reflection->getNamespace();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>reflectFunction()</code> gibt ein  <classname>Zend_Server_Reflection_Function</classname>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
@@ -19,8 +19,7 @@ $filter = new Zend_Filter_Callback('strrev');
 
 print $filter->filter('Hello!');
 // Ausgabe "!olleH"
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Wie man sehen kann ist es wirklich sehr einfach ein Callback zu verwenden um einen eigenen
@@ -38,8 +37,7 @@ class MyClass
 // Die Filter Definition
 $filter = new Zend_Filter_Callback(array('MyClass', 'Reverse'));
 print $filter->filter('Hello!');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Um den aktuell gesetzten Callback zu erhalten kann <code>getCallback()</code> verwendet
@@ -59,8 +57,7 @@ $filter = new Zend_Filter_Callback(
     array('key' => 'param1', 'key2' => 'param2')
 );
 $filter->filter(array('value' => 'Hello'));
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Wenn man die oben stehende Methodendefinition manuell aufrufen würde, dann würde das wie
@@ -69,8 +66,7 @@ $filter->filter(array('value' => 'Hello'));
 
     <programlisting role="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <note>
         <para>

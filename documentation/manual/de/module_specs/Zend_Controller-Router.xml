@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router"  xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
@@ -28,8 +28,7 @@
         <programlisting role="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             oder (bevorzugt):
@@ -42,8 +41,7 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der Rewrite Router kann auch mit dem IIS Webserver verwendet werden (Versionen &lt;= 7.0), wenn
@@ -53,8 +51,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
         <programlisting role="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>IIS Isapi_Rewrite</title>
@@ -109,8 +106,7 @@ url.rewrite-once = (
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
     "" => "/index.php"
 )
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.usage">
@@ -132,8 +128,7 @@ $router->addRoute(
                                      array('controller' => 'user',
                                            'action' => 'info'))
 );
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.basic">
@@ -148,8 +143,7 @@ $router->addRoute(
         <programlisting role="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der Rewrite Router kommt mit sechs Basistypen von Routen (eine von denen ist speziell):
@@ -188,8 +182,7 @@ $router->addRoute('user',
             <programlisting role="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Was zu folgender href führt: <code>user/martel</code>.
@@ -298,8 +291,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
     action     == list
     sort       == alpha
     date       == desc
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Standardroute ist einfach ein <classname>Zend_Controller_Router_Route_Module</classname> Objekt welches unter
@@ -312,8 +304,7 @@ $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
 $this->addRoute('default', $compat);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn diese spezielle Standard Route im eigenen Routing Schema nicht gewünscht ist, kann Sie durch
@@ -324,8 +315,7 @@ $this->addRoute('default', $compat);
         <programlisting role="php"><![CDATA[
 // Löschen aller Standard Routen
 $router->removeDefaultRoutes();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -347,8 +337,7 @@ $router->removeDefaultRoutes();
 
         <programlisting role="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -364,8 +353,7 @@ $request->setBaseUrl('/~user/application-root/');
 
         <programlisting role="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.router.routes">
@@ -378,7 +366,7 @@ $router->setGlobalParam('lang', 'en');
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">
-        <title><classname>Zend_Config</classname> mit dem RewriteRouter verwenden</title>
+        <title>Zend_Config mit dem RewriteRouter verwenden</title>
 
         <para>
             Manchmal ist es praktischer, eine Konfigurationsdatei mit neuen Routen zu
@@ -411,8 +399,7 @@ routes.archive.defaults.controller = "archive"
 routes.archive.defaults.action = "show"
 routes.archive.map.1 = "year"
 ; OR: routes.archive.map.year = 1
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die oben angeführte INI Datei kann dann wie folgt in ein
@@ -423,8 +410,7 @@ routes.archive.map.1 = "year"
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Im oberen Beispiel teilen wir dem Router mit, den 'routes' Bereich der INI Datei
@@ -467,8 +453,7 @@ interface Zend_Controller_Router_Interface
    */
   public function route(Zend_Controller_Request_Abstract $request);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das Routing findet nur einmal statt, wenn die Anfrage das erste Mal vom System erhalten

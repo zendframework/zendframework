@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15182 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller Schnellstart</title>
@@ -55,8 +55,7 @@ application/
 html/
     .htaccess
     index.php
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -83,8 +82,20 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-            </programlisting>
+]]></programlisting>
+
+            <note>
+                <title>Über mod_rewrite lernen</title>
+
+                <para>
+                    Die obigen Rewrite Regeln erlauben es auf jede Datei im Document Root des
+                    eigenen virtuellen Host's zuzugreifen. Wenn es Dateien gibt die man auf diesem
+                    Weg nicht bereitstellen will, muss man in seinen Regeln restriktiver sein. Gehe
+                    zur Apache WebSite und <ulink
+                    url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
+                    mod_rewrite</ulink>.
+                </para>
+            </note>
 
             <para>
                 Wenn man IIS 7.0 verwendet, sollte man die folgende Rewrite Konfiguration verwenden:
@@ -143,8 +154,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das instanziert und führt den Front-Controller aus,
@@ -198,8 +208,7 @@ class IndexController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Normalerweise ist ein Action-Helper namens <link
@@ -242,8 +251,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <h1>Hallo Welt!</h1>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.errorhandler">
@@ -265,8 +273,7 @@ class ErrorController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 In der bereits angesprochenen Ordnerstruktur gehört dieser Code in die Datei
@@ -291,8 +298,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
        bitte versuchen Sie es später noch einmal.</p>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.finish">

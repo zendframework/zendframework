@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -76,8 +76,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             Die Klasse definiert ein Template für Ihre einzige Nachricht bei Prüfungsfehlern, welche den eingebauten
             magischen Parameter <code>%value%</code> inkludiert. Der Aufruf von <code>_setValue()</code> präpariert
@@ -157,8 +156,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         return true;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             Die öffentlichen Eigenschaften <code>$minimum</code> und <code>$maximum</code> wurden eingeführt um
             die Mindest- und Maximalgrenzen anzubieten, beziehungsweise, für einen Wert um die Prüfung erfolgreich
@@ -253,8 +251,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
         return $isValid;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             Zu beachten ist das diese vier Testkriterien in <code>isValid()</code> nicht sofort <code>false</code>
             zurückgeben. Das erlaubt der Prüfklasse <emphasis role="bold">alle</emphasis> Gründe anzubieten bei denen

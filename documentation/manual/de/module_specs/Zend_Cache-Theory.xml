@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
@@ -28,7 +28,7 @@
         Datensatz vom Cache transparent holen.
     </para></note>
     <sect2 id="zend.cache.factory">
-        <title>Die <classname>Zend_Cache</classname> Factory Methode</title>
+        <title>Die Zend_Cache Factory Methode</title>
         <para>
             Ein guter Weg, um eine verwendbare Instanz eines <classname>Zend_Cache</classname> Frontends zu erstellen, wird im
             folgenden Beispiel gegeben:
@@ -52,8 +52,7 @@ $cache = Zend_Cache::factory($frontendName,
                              $backendName,
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             In den folgenden Beispielen wird angenommen, dass die <code>$cache</code> Variable ein
             gültiges, initiiertes Frontend wie gezeigt enthält und dass verstanden wird, wie
@@ -76,8 +75,7 @@ $cache = Zend_Cache::factory($frontendName,
         </para>
         <programlisting role="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
-]]>
-        </programlisting>
+]]></programlisting>
         <note><para>
             Man beachte, dass die <code>save()</code> Method einen optionales, viertes Argument akzeptiert:
             <code>$specificLifetime</code> (wenn != false, setzt es eine spezifische Laufzeit für diesen speziellen Cache Eintrag)
@@ -90,8 +88,7 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
         </para>
              <programlisting role="php"><![CDATA[
 $cache->remove('idToRemove');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Um mehrere Cache IDs mit einer Operation zu entfernen/annulieren, kann die <code>clean()</code> Methode
             benutzt werden. Zum Beispiel um alle Cache Datensätze zu entfernen :
@@ -102,8 +99,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
 // Nur abgelaufene löschen
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' und 'tagC' entsprechen :
         </para>
@@ -112,8 +108,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Um Cache Einträge zu löschen die den Tags 'tagA' oder 'tagC' nicht entsprechen:
         </para>
@@ -122,8 +117,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' oder 'tagC' entsprechen :
         </para>
@@ -132,8 +126,7 @@ $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Mögliche Löschmodi sind: <code>CLEANING_MODE_ALL</code>, <code>CLEANING_MODE_OLD</code>,
             <code>CLEANING_MODE_MATCHING_TAG</code>, <code>CLEANING_MODE_NOT_MATCHING_TAG</code> und

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
@@ -60,8 +60,7 @@ $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -81,8 +80,7 @@ echo $htmlEntities->filter('"'); // &quot;
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -92,8 +90,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 

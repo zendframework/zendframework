@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
@@ -96,8 +96,7 @@
         <programlisting role="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Angenommen es wird eine Monospace Schriftart verwenden dann würde das Beispiel wie folgt aussehen:
         </para>

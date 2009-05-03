@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
 
@@ -188,8 +188,7 @@ Array
     [year] => 2006
     [fixed] => 4
 )
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -214,8 +213,7 @@ $date = Zend_Locale_Format::getDate('13.04.2006',
                                    );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -234,8 +232,7 @@ $date = Zend_Locale_Format::getDate('13.04.2005 22:14:55',
                                     );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -253,8 +250,7 @@ $date = Zend_Locale_Format::getDate('13200504T551422',
                                    );
 
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -364,8 +360,7 @@ $date = Zend_Locale_Format::getDate('41.10.20',
 
 // Statt 41 für den Tag wird die 41 als Wert für das Jahr zurück gegeben
 print_r ($date);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -398,8 +393,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 } else {
     print "kein Datum";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -428,8 +422,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
 } else {
     print "keine Zeit";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -455,8 +448,7 @@ if (Zend_Locale_Format::checkDateFormat('13:44:42',
 } else {
     print "keine Zeit";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
@@ -131,8 +131,7 @@ $imfs->putContents('/foo.txt', 'zu speichernder Inhalt');
 echo $imfs->getContents('/foo.txt');
 
 $imfs->unlink('/foo.txt');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der erste Schritt um <classname>Zend_Service_Nirvanix</classname> zu verwenden ist immer sich
@@ -205,8 +204,7 @@ $imfs = $nirvanix->getService('IMFS');
 
 $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
                                   'newFileName' => 'bar.txt'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Oben wird ein Proxy für den <code>IMFS</code> erstellt. Eine Methode,
@@ -267,8 +265,7 @@ Zend_Service_Nirvanix_Response Object
             [FilesUploaded] => 1
             [BytesUploaded] => 14
         ))
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Auf jede Eigenschaft oder Methode des dekorierten <code>SimpleXMLElement</code>s kann
@@ -303,8 +300,7 @@ Zend_Service_Nirvanix_Response Object
 <Response>
     <ResponseCode>0</ResponseCode>
 </Response>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn <code>ResponseCode</code> Null ist, wie im obigen Beispiel,  war die Operation
@@ -334,8 +330,7 @@ try {
   echo $e->getMessage() . "\n";
   echo $e->getCode();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             im obigen Beispiel ist <code>unlink()</code> eine bequeme Methode die das

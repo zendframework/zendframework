@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Einführung</title>
@@ -19,7 +19,7 @@
         erweitern: <code>Output</code>, <code>File</code>, <code>Function</code> und <code>Class</code>.
     </para>
     <example id="zend.cache.introduction.example-1">
-        <title>Ein Frontend mit <classname>Zend_Cache::factory()</classname> erzeugen</title>
+        <title>Ein Frontend mit Zend_Cache::factory() erzeugen</title>
         <para>
             <classname>Zend_Cache::factory()</classname> instanziiert korrekte Objekte und fügt sie zusammen.
             In diesem ersten Beispiel wird das <code>Core</code> Frontend zusammen mit dem
@@ -41,8 +41,7 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>
@@ -86,13 +85,12 @@ if(!$result = $cache->load('myresult')) {
 }
 
 print_r($result);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
     <example id="zend.cache.introduction.example-3">
-        <title>Cache Ausgabe mit dem <classname>Zend_Cache</classname> Frontend</title>
+        <title>Cache Ausgabe mit dem Zend_Cache Frontend</title>
         <para>
             Abschnitte, in denen die Ausgabe gecached werden soll, werden 'markiert', durch Hinzufügen
             von etwas bedingter Logik, wobei der Abschnitt innerhalb der <code>start()</code> und <code>end()</code> Methoden
@@ -127,8 +125,7 @@ if(!$cache->start('mypage')) {
 }
 
 echo 'Das wird nie gecached ('.time().').';
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Zu beachten ist das das Ergebnis von <code>time()</code> zweimal ausgegeben wird; das ist
             etwas dynamisches für Demonstrationszwecke. Beim Versuch dieses auszuführen und mehrfach zu

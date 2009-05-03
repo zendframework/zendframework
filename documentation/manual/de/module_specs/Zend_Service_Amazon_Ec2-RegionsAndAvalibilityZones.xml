@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.zones">
     <title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title>
@@ -46,8 +46,7 @@ $regions = $ec2_region->describe();
 foreach($regions as $region) {
     print $region['regionName'] . ' -- ' . $region['regionUrl'] . '<br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -84,8 +83,7 @@ $zones = $ec2_zones->describe();
 foreach($zones as $zone) {
     print $zone['zoneName'] . ' -- ' . $zone['zoneState'] . '<br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

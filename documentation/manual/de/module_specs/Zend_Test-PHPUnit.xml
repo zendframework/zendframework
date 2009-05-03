@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
@@ -91,8 +91,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         $this->assertQueryContentContains('h2', 'User: foobar');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dieses Beispiel können auch einfacher geschrieben werden -- nicht alle der gezeigten Ausnahmen

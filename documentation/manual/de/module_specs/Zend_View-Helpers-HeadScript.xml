@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -59,8 +59,7 @@ $this->headScript()->appendFile(
     'text/javascript',
     array('conditional' => 'lt IE 7')
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         </example>
     </note>
@@ -120,8 +119,7 @@ $this->headScript()->appendFile(
 
         <programlisting role="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
-]]>
-        </programlisting>
+]]></programlisting>
     </note>
 
     <example id="zend.view.helpers.initial.headscript.basicusage">
@@ -136,8 +134,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
 // Skripte hinzufügen
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Reihenfolge ist oft wichtig beim Clientseitigen Skripting; es kann notwendig sein sicherzustellen
@@ -157,8 +154,7 @@ $this->headScript()->appendFile('/js/scriptaculous.js');
 
 // Aber Basis Prototype Skripte müssen immer als erstes geladen werden
 $this->headScript()->prependFile('/js/prototype.js');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn man letztendlich damit fertig ist am alle Skripte im Layoutskript darzustellen, muß der
@@ -167,8 +163,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->headScript() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.headscript.capture">
@@ -186,8 +181,7 @@ $this->headScript()->prependFile('/js/prototype.js');
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;
 <?php $this->headScript()->captureEnd() ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die folgenden Annahmen werden gemacht:

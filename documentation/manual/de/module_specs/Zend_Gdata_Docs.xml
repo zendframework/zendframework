@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.docs">
     <title>Verwenden der Google Dokumente Listen Daten API</title>
@@ -31,8 +31,7 @@ $service = Zend_Gdata_Docs::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $docs = new Zend_Gdata_Docs($client);
 $feed = $docs->getDocumentListFeed();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das sich ergebende <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt repräsentiert die Antwort
@@ -103,8 +102,7 @@ function uploadDocument($docs, $html, $originalFileName,
   echo $newDocumentEntry->title."\n";
   if ($html) {echo "</a>\n";}
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.docs.queries">
@@ -131,8 +129,7 @@ function uploadDocument($docs, $html, $originalFileName,
             <programlisting role="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/document');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.docs.listspreadsheets">
@@ -145,8 +142,7 @@ $feed = $docs->getDocumentListFeed(
             <programlisting role="php"><![CDATA[
 $feed = $docs->getDocumentListFeed(
     'http://docs.google.com/feeds/documents/private/full/-/spreadsheet');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.docs.textquery">
@@ -161,8 +157,7 @@ $feed = $docs->getDocumentListFeed(
 $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
 $feed = $client->getDocumentListFeed($docsQuery);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>

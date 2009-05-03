@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Zend Framework Coding Standard für PHP</title>
@@ -181,8 +181,7 @@ Zend/Db.php
 Zend/Controller/Front.php
 
 Zend/View/Helper/FormRadio.php
-]]>
-                </programlisting>
+]]></programlisting>
 
                 Dateinamen müssen den Klassennamen wie oben beschrieben entsprechen.
             </para>
@@ -217,8 +216,7 @@ filterInput()
 getElementById()
 
 widgetFactory()
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -313,8 +311,7 @@ widgetFactory()
 <?php
 
 ?>
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -337,8 +334,7 @@ widgetFactory()
 
                     <programlisting role="php"><![CDATA[
 $a = 'Beispiel String';
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -353,8 +349,7 @@ $a = 'Beispiel String';
                     <programlisting role="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
-]]>
-                    </programlisting>
+]]></programlisting>
 
                     Diese Syntax ist zu bevorzugen, im Gegensatz zum Ausbruch von Apostrophs, da Sie viel
                     einfacher lesbar ist.
@@ -371,8 +366,7 @@ $sql = "SELECT `id`, `name` from `people` "
 $greeting = "Halle $name, willkommen zurück!";
 
 $greeting = "Hallo {$name}, willkommen zurück!";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -380,8 +374,7 @@ $greeting = "Hallo {$name}, willkommen zurück!";
 
                     <programlisting role="php"><![CDATA[
 $greeting = "Hallo ${name}, willkommen zurück!";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -394,8 +387,7 @@ $greeting = "Hallo ${name}, willkommen zurück!";
 
                     <programlisting role="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -408,8 +400,7 @@ $company = 'Zend' . ' ' . 'Technologies';
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>
@@ -434,8 +425,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
 
                     <programlisting role="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -447,8 +437,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -464,8 +453,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     <programlisting role="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
-]]>
-                    </programlisting>
+]]></programlisting>
                  </para>
             </sect3>
         </sect2>
@@ -502,8 +490,7 @@ class SampleClass
     // gesamter Inhalt der Klasse
     // muss mit vier Leerzeichen eingerückt sein
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -570,8 +557,7 @@ class Foo
         // muss durch view Leerzeichen eingerückt sein
     }
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -590,8 +576,7 @@ class Foo
     public function bar(&$baz)
     {}
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -625,8 +610,7 @@ class Foo
         return $this->bar;
     }
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
             </sect3>
@@ -641,8 +625,7 @@ class Foo
 
                     <programlisting role="php"><![CDATA[
 threeArguments(1, 2, 3);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -662,8 +645,7 @@ threeArguments(array(1, 2, 3), 2, 3);
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500), 2, 3);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>
@@ -695,8 +677,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
 if ($a != 2) {
     $a = 2;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
 
                 <para>
@@ -718,8 +699,7 @@ if ($a != 2) {
 } else {
     $a = 7;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                     PHP erlaubt das Anweisungen in einigen Fällen auch ohne Klammern zu schreiben.
                     Dieser Coding Standard macht keine Unterscheidungen und es müssen alle "if", "elseif" oder "else"
                     Anweisungen in Klammern geschrieben werden.
@@ -757,8 +737,7 @@ switch ($numPeople) {
     default:
         break;
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das <code>default</code> Konstrukt darf nie bei der <code>switch</code> Anweisung vergessen
@@ -817,8 +796,7 @@ switch ($numPeople) {
  * @link       http://framework.zend.com/package/PackageName
  * @since      Datei vorhanden seit Release 1.2.0
 */
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -841,8 +819,7 @@ switch ($numPeople) {
  * @since      Klasse vorhanden seit Release 1.5.0
  * @deprecated Klasse abgeraten ab Release 2.0.0
  */
- ]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
 
@@ -871,8 +848,7 @@ switch ($numPeople) {
 
                     <programlisting role="php"><![CDATA[
 @throws exceptionclass [Beschreibung]
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </sect3>
         </sect2>

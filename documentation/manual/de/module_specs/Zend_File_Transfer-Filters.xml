@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -128,8 +128,7 @@ $upload->addFilter('Rename', 'C:\picture\uploads');
 $upload->addFilter('Rename',
                    array('target' => 'C:\picture\uploads',
                          'overwrite' => true));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.file.transfer.filters.usage.exampletwo">
@@ -147,8 +146,7 @@ $upload = new Zend_File_Transfer();
 
 // Setzt einen neuen Zielpfad und begrenzt Ihn auf 'file2'
 $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -172,8 +170,7 @@ $upload = new Zend_File_Transfer();
 // Setzt mehrere Rename Filter
 $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
        ->addFilter('Rename', 'C:\picture\newgif', 'file2');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -220,8 +217,7 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 // with mcrypt and the key mykey
 $upload->addFilter('Decrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -237,8 +233,7 @@ $upload->addFilter('Decrypt',
     array('adapter' => 'openssl',
           'private' => '/path/to/privatekey.pem',
           'envelope' => '/path/to/envelopekey.pem'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -275,8 +270,7 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 // und dem Schlüssel mykey zu verschlüsseln
 $upload->addFilter('Encrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -291,8 +285,7 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Encrypt',
     array('adapter' => 'openssl',
           'public' => '/path/to/publickey.pem'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -329,8 +322,7 @@ $upload->addFilter('LowerCase', null, 'uploadfile1');
 // Fügt einen Filter für die Kleinschreibung hinzu wobei die Kodierung
 // auf ISO-8859-1 gesetzt wird
 $upload->addFilter('LowerCase', 'ISO-8859-1');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -392,8 +384,7 @@ $upload->addFilter('Rename', 'C:\mypics\new');
 
 // Setzt einen neuen Zielpfad nur für uploadfile1
 $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -512,8 +503,7 @@ $upload->addFilter('UpperCase', null, 'uploadfile1');
 // Fügt einen Filter für die Großschreibung hinzu wobei die Kodierung
 // auf ISO-8859-1 gesetzt wird
 $upload->addFilter('UpperCase', 'ISO-8859-1');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

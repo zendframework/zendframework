@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron.bundled-services">
     <title>Zend_Service_StrikeIron: Mitgelieferte Services</title>
@@ -68,8 +68,7 @@ if ($zips->count == 0) {
 // Detailierte Statusinformationen
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
 $status = $response->serviceStatus;
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 
@@ -130,8 +129,7 @@ if ($result->addressErrorNumber != 0) {
     // Gültige Adresse?
     $valid = ($result->valid == 'VALID');
 }
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 
@@ -177,8 +175,7 @@ echo $rateInfo->GST;              // oder nur die GST (Teile & Services Steuer)
 $rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // alle Eigenschaften zeigen
 echo $rateInfo->state_sales_tax;  // oder nur die Staatenweise Verkaufssteuer
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
     </sect2>
 </sect1>

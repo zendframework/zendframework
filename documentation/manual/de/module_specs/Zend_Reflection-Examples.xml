@@ -1,36 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15192 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.examples">
     <title>Zend_Reflection Beispiele</title>
 
     <example id="zend.reflection.examples.file">
         <title>Durchführen von Reflection an einer Datei</title>
-        <para></para>
-        <!-- @todo -->
+
+        <programlisting role="php"><![CDATA[
+$r = new Zend_Reflection_File($filename);
+printf(
+    "===> Die Datei %s\n".
+    "     hat %d Zeilen\n",
+    $r->getFileName(),
+    $r->getEndLine()
+);
+
+$classes = $r->getClasses();
+echo "     Sie hat " . count($classes) . ":\n";
+foreach ($classes as $class) {
+    echo "         " . $class->getName() . "\n";
+}
+
+$functions = $r->getFunctions();
+echo "     Sie hat " . count($functions) . ":\n";
+foreach ($functions as $function) {
+    echo "         " . $function->getName() . "\n";
+}
+
+]]></programlisting>
     </example>
 
     <example id="zend.reflection.examples.class">
         <title>Durchführen von Reflection an einer Klasse</title>
-        <para></para>
-        <!-- @todo -->
+
+        <programlisting role="php"><![CDATA[
+$r = new Zend_Reflection_Class($class);
+
+printf(
+    "Der Klassen-Level Docblock hat die Kurzbeschreibung: %s\n".
+    "Der Klassen-Level Docblock hat die Langbeschreibung:\n%s\n",
+    $r->getDocblock()->getShortDescription(),
+    $r->getDocblock()->getLongDescription(),
+);
+
+// Die Deklarierte Datei Reflektion
+$file = $r->getDeclaringFile();
+]]></programlisting>
     </example>
 
     <example id="zend.reflection.examples.method">
         <title>Durchführen von Reflection an einer Methode</title>
-        <para></para>
-        <!-- @todo -->
+
+        <programlisting role="php"><![CDATA[
+$r = new Zend_Reflection_Method($class, $name);
+
+printf(
+"Die Methode '%s' hat einen Rückgabetyp von %s",
+    $r->getName(),
+    $r->getReturn()
+);
+
+foreach ($r->getParameters() as $key => $param) {
+    printf(
+        "Der Parameter an Position '%d' ist vom Typ '%s'\n",
+        $key,
+        $param->getType()
+    );
+}
+]]></programlisting>
     </example>
 
     <example id="zend.reflection.examples.docblock">
         <title>Durchführen von Reflection an einem Docblock</title>
-        <para></para>
-        <!-- @todo -->
-    </example>
 
-    <example id="zend.reflection.examples.factory">
-        <title>Verwenden der Factory um eigene Reflection Klassen auszuführen</title>
-        <para></para>
-        <!-- @todo -->
+        <programlisting role="php"><![CDATA[
+$r = new Zend_Reflection_Method($class, $name);
+$docblock = $r->getDocblock();
+
+printf(
+    "Die Kurzbeschreibung: %s\n".
+    "Die Langbeschreibung:\n%s\n",
+    $r->getDocblock()->getShortDescription(),
+    $r->getDocblock()->getLongDescription(),
+);
+
+foreach ($docblock->getTags() as $tag) {
+    printf(
+        "Das Hinweis-Tag '%s' hat die Beschreibung '%s'\n",
+        $tag->getName(),
+        $tag->getDescription()
+    );
+}
+]]></programlisting>
     </example>
 </sect1>

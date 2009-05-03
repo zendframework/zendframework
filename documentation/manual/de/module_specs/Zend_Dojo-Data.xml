@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -27,8 +27,7 @@
         ...
     ]
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         <classname>Zend_Dojo_Data</classname> bietet ein einfaches Interface für das programmtechnische erstellen solcher
@@ -49,8 +48,7 @@
 
             <programlisting role="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.dojo.data.usage.mutators">
@@ -60,8 +58,7 @@ $data = new Zend_Dojo_Data('id', $items);
 $data = new Zend_Dojo_Data();
 $data->setIdentifier('id')
      ->addItems($items);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -77,8 +74,7 @@ $data = new Zend_Dojo_Data($identifier, $items);
 $data->addItem($someItem);
 
 $data->addItems($someMoreItems);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -137,8 +133,7 @@ $data->addItems($someMoreItems);
 
             <programlisting role="php"><![CDATA[
 $data->setLabel('name');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -151,8 +146,7 @@ $data->setLabel('name');
 
             <programlisting role="php"><![CDATA[
 $data->fromJson($json);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -230,8 +224,7 @@ $item = $data->getItem('foo');
 
 // Oder verwenden der Array Schreibweise:
 $item = $data['foo'];
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn man den Identifikator kennt, kann man Ihn verwende um ein Element zu erhalten, es upzudaten,
@@ -248,8 +241,7 @@ unset($data['foo']);
 // Testen eines Elements:
 if (isset($data[foo])) {
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann genauso über alle Elemente iterieren. Intern werden alle Elemente als Arrays gespeichert.
@@ -259,8 +251,7 @@ if (isset($data[foo])) {
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Oder Sie sogar zählen um zu sehen wie viele Elemente man hat:
@@ -268,8 +259,7 @@ foreach ($data as $item) {
 
         <programlisting role="php"><![CDATA[
 echo count($data), " Elemente gefunden!";
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Letztendlich kann man, da die Klasse <code>__toString()</code> implementiert, Sie auch zu JSON
@@ -280,8 +270,7 @@ echo count($data), " Elemente gefunden!";
 echo $data; // Ausgabe als JSON String
 
 $json = (string) $data; // Casten zu einem String == casten zu JSON
-]]>
-        </programlisting>
+]]></programlisting>
 
         <sect3 id="zend.dojo.data.advanced.methods">
             <title>Vorhandene Methoden</title>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
@@ -38,8 +38,7 @@
             <title>Verwendung der kurzen Syntax</title>
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Das obige Beispiel zeigt die Verwendung von <classname>Zend_Console_Getopt</classname>
@@ -110,8 +109,7 @@ $opts = new Zend_Console_Getopt(
         'pfirsich|p-s' => 'Pfirsich Option, mit optionalem String Parameter'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             In der obigen Beispieldefinition, sind drei Optionen.

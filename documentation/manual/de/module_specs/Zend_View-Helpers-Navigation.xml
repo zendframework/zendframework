@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -198,8 +198,7 @@
 $this->navigation()->addPage(array(
     'type' => 'uri',
     'label' => 'New page'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der obige Aufruf fügt eine Seite zum Container im <classname>Navigation</classname>
@@ -483,8 +482,7 @@ $view->navigation($container);
 
 // ...oder ihn einfach in der Registry speichern:
 Zend_Registry::set('Zend_Navigation', $container);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zusätzlich zum obigen Container, wird das folgende Setup angenommen:
@@ -524,8 +522,7 @@ $view->navigation()->setAcl($acl)->setRole('member');
 // ...oder ein standard ACL und Rolle statisch setzen:
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultAcl($acl);
 Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.view.helpers.initial.navigation.breadcrumbs">
@@ -623,8 +620,7 @@ und sind identisch mit:
 
 Ausgabe:
 <a href="/products">Produkte</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.breadcrumbs.example2">
@@ -641,8 +637,7 @@ Darstellung mit 8 Leerzeichen Einrückung:
 
 Ausgabe:
         <a href="/products">Products</a> &gt; <a href="/products/server">Foo Server</a> &gt; FAQ
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.breadcrumbs.example3">
@@ -679,8 +674,7 @@ echo $this->navigation()->breadcrumbs();
 
 Ausgabe:
 Nichts, weil die tiefste aktive Seite nicht auf Level 10 oder tiefer ist.
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.breadcrumbs.example4">
@@ -703,8 +697,7 @@ Nichts, weil die tiefste aktive Seite nicht auf Level 10 oder tiefer ist.
 $partial = ;
 echo $this->navigation()->breadcrumbs()
                         ->setPartial(array('breadcrumbs.phtml', 'default'));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Inhalt von
@@ -715,8 +708,7 @@ echo $this->navigation()->breadcrumbs()
 echo implode(', ', array_map(
         create_function('$a', 'return $a->getLabel();'),
         $this->pages));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Ausgabe:
@@ -724,8 +716,7 @@ echo implode(', ', array_map(
 
             <programlisting role="php"><![CDATA[
 Produkte, Foo Server, FAQ
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -1017,8 +1008,7 @@ $container = new Zend_Navigation(array(
         )
     )
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.links.example2">
@@ -1043,8 +1033,7 @@ Ausgabe:
 <link rel="chapter" href="/community" title="Community">
 <link rel="canonical" href="http://www.example.com/?page=server-faq">
 <link rev="subsection" href="/products/server" title="Foo Server">
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.links.example3">
@@ -1065,8 +1054,7 @@ Ausgabe:
 <link rel="start" href="/" title="Home">
 <link rel="next" href="/products/server/editions" title="Editionen">
 <link rel="prev" href="/products/server" title="Foo Server">
-]]>
-            </programlisting>
+]]></programlisting>
 
             <programlisting role="php"><![CDATA[
 Nur native Linktypen darstellen:
@@ -1082,8 +1070,7 @@ Ausgabe:
 <link rel="chapter" href="/company/about" title="Firma">
 <link rel="chapter" href="/community" title="Community">
 <link rev="subsection" href="/products/server" title="Foo Server">
-]]>
-            </programlisting>
+]]></programlisting>
 
             <programlisting role="php"><![CDATA[
 Alles ausser Kapitel darstellen:
@@ -1097,8 +1084,7 @@ Ausgabe:
 <link rel="prev" href="/products/server" title="Foo Server">
 <link rel="canonical" href="http://www.example.com/?page=server-faq">
 <link rev="subsection" href="/products/server" title="Foo Server">
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -1321,8 +1307,7 @@ Ausgabe:
         </ul>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example2">
@@ -1355,8 +1340,7 @@ Output:
                         <a class="external" href="http://forums.example.com/">Forums</a>
                     </li>
                 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example3">
@@ -1400,8 +1384,7 @@ Die Ausgabe ist die gleiche wenn 'FAQ' oder 'Foo Server' aktiv sind:
             <a href="/products/server/requirements">System Anforderungen</a>
         </li>
     </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example4">
@@ -1453,8 +1436,7 @@ Ausgabe:
         </ul>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example5">
@@ -1515,8 +1497,7 @@ Ausgabe:
         <a class="external" href="http://forums.example.com/">Forums</a>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example6">
@@ -1551,8 +1532,7 @@ Ausgabe:
         </ul>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example7">
@@ -1585,8 +1565,7 @@ Ausgabe:
         </ul>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example8">
@@ -1616,8 +1595,7 @@ Ausgabe:
         </ul>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example9">
@@ -1646,8 +1624,7 @@ Ausgabe:
         <a href="/products/studio">Foo Studio</a>
     </li>
 </ul>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example10">
@@ -1670,8 +1647,7 @@ Ausgabe:
 $partial = array('menu.phtml', 'default');
 $this->navigation()->menu()->setPartial($partial);
 echo $this->navigation()->menu()->render();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>In application/modules/default/views/menu.phtml:</para>
 
@@ -1679,8 +1655,7 @@ echo $this->navigation()->menu()->render();
 foreach ($this->container as $page) {
     echo $this->menu()->htmlify($page), PHP_EOL;
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>Ausgabe:</para>
 
@@ -1689,8 +1664,7 @@ foreach ($this->container as $page) {
 <a href="/products">Produkte</a>
 <a title="About us" href="/company/about">Firma</a>
 <a href="/community">Community</a>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -1882,8 +1856,7 @@ $this->navigation()
 
 // Sitemap ausdrucken
 echo $this->navigation()->sitemap();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Es ist zu beachten wie Seiten die unsichtbar oder Seiten mit ACL Rollen die mit dem
@@ -1945,8 +1918,7 @@ echo $this->navigation()->sitemap();
     <loc>http://forums.example.com/</loc>
   </url>
 </urlset>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die Sitemap ohne Verwendung einer ACL Rolle darstellen (sollte /community/account
@@ -1958,8 +1930,7 @@ echo $this->navigation()
           ->sitemap()
           ->setFormatOutput(true)
           ->setRole();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <programlisting role="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2013,8 +1984,7 @@ echo $this->navigation()
     <loc>http://forums.example.com/</loc>
   </url>
 </urlset>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Darstellen der Sitemap mit Verwendung einer maximalen Tiefe von 1.
@@ -2025,8 +1995,7 @@ echo $this->navigation()
           ->sitemap()
           ->setFormatOutput(true)
           ->setMaxDepth(1);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <programlisting role="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2062,8 +2031,7 @@ echo $this->navigation()
     <loc>http://forums.example.com/</loc>
   </url>
 </urlset>
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect4>

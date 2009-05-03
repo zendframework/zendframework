@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -211,15 +211,13 @@
                 <programlisting role="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
-]]>
-                </programlisting>
+]]></programlisting>
                 oder
                 <programlisting role="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
-]]>
-                </programlisting>
+]]></programlisting>
                 Wenn der angegebene Pfad leer oder nicht lesbar ist, wird eine Ausnahme geworfen.
             </para>
 
@@ -240,8 +238,7 @@ $config = array(
     'digest_domains' => '/members_only /my_account',
     'nonce_timeout'  => 3600,
 );
-]]>
-            </programlisting>
+]]></programlisting>
             Dieses Array bringt den Adapter dazu entwedet Basis oder Digest Authentifizierung zu akzeptieren,
             und benötigt einen authentifizierten Zugriff auf alle Areale der Site unter <code>/members_only</code>
             und <code>/my_account</code>. Der Bereichs Wert wird normalerweise durch den Browser in der
@@ -253,8 +250,7 @@ $config = array(
             Dann wird ein Zend_Auth_Adapter_Http Objekt erstellt:
             <programlisting role="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Http($config);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -270,8 +266,7 @@ $digestResolver->setFile('files/digestPasswd.txt');
 
 $adapter->setBasicResolver($basicResolver);
 $adapter->setDigestResolver($digestResolver);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -288,8 +283,7 @@ $result = $adapter->authenticate();
 if (!$result->isValid()) {
     // Schlechter Benutzername/Passwort, oder abgebrochener Passwort Prompt
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
     </sect2>

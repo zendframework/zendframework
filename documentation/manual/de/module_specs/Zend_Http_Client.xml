@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -34,8 +34,7 @@ $client->setUri('http://example.org');
 $client->setConfig(array(
     'maxredirects' => 0,
     'timeout'      => 30));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <note><para>
@@ -144,8 +143,7 @@ $client->setConfig(array(
                 <programlisting role="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
 $response = $client->request();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             Die request() Methode akzeptiert einen optionalen Parameter - die Anfragemethode.
             Diese kann GET, POST, PUT, HEAD, DELETE, TRACE, OPTIONS oder CONNECT sein, wie im HTTP
@@ -171,8 +169,7 @@ $response = $client->request('POST');
 // Ein weiterer Weg, eine POST Anfrage durchzuführen
 $client->setMethod(Zend_Http_Client::POST);
 $response = $client->request();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
     </sect2>
@@ -203,8 +200,7 @@ $client->setParameterGet(array(
     'middle_name' => 'Bending'
     'made_in'     => 'Mexico',
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </para>
         <para>
@@ -225,8 +221,7 @@ $client->setParameterPost(array(
     'country'   => 'ar',
     'selection' => array(45, 32, 80)
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             Beim Senden einer POST Anfrage ist zu beachten, dass man sowohl GET als auch POST
             Parameter setzen kann. Auf der anderen Seite wird durch das Setzen von POST Parametern

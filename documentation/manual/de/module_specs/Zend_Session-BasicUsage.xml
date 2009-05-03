@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.basic_usage">
 
@@ -24,8 +24,7 @@
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
-]]>
-        </programlisting>
+]]></programlisting>
 
         Es ist möglich Zend_Session in Verbindung mit anderem Code zu verwenden welche <code>$_SESSION</code> direkt
         verwendet. Um Probleme zu vermeiden wird trotzdem stärkstens empfohlen das solcher Code nur Teile von
@@ -63,8 +62,7 @@ if (isset($defaultNamespace->numberOfPageRequests)) {
 
 echo "Seitenzugriffe in dieser Session: ",
     $defaultNamespace->numberOfPageRequests;
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -96,8 +94,7 @@ $authNamespace->user = "meinbenutzername";
 // In einer Web Service Komponente
 $webServiceNamespace = new Zend_Session_Namespace('Mein_Web_Service');
 $webServiceNamespace->user = "meinwebbenutzername";
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -112,8 +109,7 @@ $webServiceNamespace->user = "meinwebbenutzername";
             <programlisting role="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "meinbenutzername";
 $_SESSION['Some_Web_Service']['user'] = "meinwebbenutzername";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -140,8 +136,7 @@ $aNamespace =
 foreach ($aNamespace as $index => $value) {
     echo "aNamespace->$index = '$value';\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -174,8 +169,7 @@ if (!isset($namespace->bar)) {
 }
 
 unset($namespace->foo);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

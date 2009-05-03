@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -62,8 +62,7 @@ $view->books = $data;
 
 // und verarbeite ein View Skript mit Namen "booklist.php"
 echo $view->render('booklist.php');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -104,8 +103,7 @@ echo $view->render('booklist.php');
     <p>Es gibt keine Bücher zum Anzeigen.</p>
 
 <?php endif;?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Beachte, wie wir die "escape()" Methode verwenden, um die Variablen für die Ausgabe zu
@@ -134,8 +132,7 @@ base/path/
     helpers/
     filters/
     scripts/
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das kann über <code>setBasePath()</code>,
@@ -210,8 +207,7 @@ base/path/
 
                 <programlisting role="apache"><![CDATA[
 php_value "short_open_tag" "on"
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das ist nur dann möglich wenn es erlaubt ist <code>.htaccess</code> Dateien zu
@@ -228,8 +224,7 @@ php_value "short_open_tag" "on"
 
                 <programlisting role="php"><![CDATA[
 $view->setUseStreamWrapper(true);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das registriert <classname>Zend_View_Stream</classname> als Steam Wrapper für View

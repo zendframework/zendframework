@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -110,8 +110,7 @@ $options = array(
     'layoutPath' => '/path/to/layouts',
     'contentKey' => 'CONTENT', // Ignoriert wenn MVC nicht verwendet wird
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 /**
@@ -121,8 +120,7 @@ layoutPath = "/path/to/layouts"
 contentKey = "CONTENT"
 */
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <example id="zend.layout.options.examples.constructor">
             <title>Optionen an den Konstruktor oder startMvc() übergeben</title>
@@ -143,8 +141,7 @@ $layout = new Zend_Layout($options);
 
 // startMvc() verwenden:
 $layout = Zend_Layout::startMvc($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Und jetzt die Verwendung eines Config Objekts:
@@ -159,8 +156,7 @@ $layout = new Zend_Layout($config);
 
 // startMvc() verwenden:
 $layout = Zend_Layout::startMvc($config);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Grundsätzlich ist das der einfachste Weg um die <classname>Zend_Layout</classname> Instanz anzupassen.
@@ -182,8 +178,7 @@ $layout->setOptions($options);
 
 // Ein Zend_Config Objekt verwenden:
 $layout->setConfig($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Es ist zu beachten das einige Optionen, wie <code>pluginClass</code> und
@@ -205,8 +200,7 @@ $layout->setConfig($options);
 $layout->setLayout('foo')
        ->setLayoutPath('/path/to/layouts')
        ->setContentKey('CONTENT');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

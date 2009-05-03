@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -84,7 +84,7 @@
     </sect2>
 
     <sect2 id="zend.captcha.adapters.dumb">
-        <title><classname>Zend_Captcha_Dumb</classname></title>
+        <title>Zend_Captcha_Dumb</title>
 
         <para>
             Der <classname>Zend_Captcha_Dumb</classname> Adapter ist fast selbsterklärend. Er bietet einen
@@ -95,7 +95,7 @@
     </sect2>
 
     <sect2 id="zend.captcha.adapters.figlet">
-        <title><classname>Zend_Captcha_Figlet</classname></title>
+        <title>Zend_Captcha_Figlet</title>
 
         <para>
             Der <classname>Zend_Captcha_Figlet</classname> Adapter verwendet

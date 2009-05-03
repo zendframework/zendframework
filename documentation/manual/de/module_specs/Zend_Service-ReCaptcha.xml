@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -36,8 +36,7 @@
 
         <programlisting role="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um das reCAPTCHA darzustellen, muß einfach die <code>getHTML()</code> Methode aufgerufen werden:
@@ -45,8 +44,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 
         <programlisting role="php"><![CDATA[
 echo $recaptcha->getHTML();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn das Formular übertragen wurde, sollte man zwei Felder empfangen haben,
@@ -59,8 +57,7 @@ $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Sobald man das Ergebnis hat, kann es getestet werden um zu sehen ob es gültig ist. Das
@@ -72,8 +69,7 @@ $result = $recaptcha->verify(
 if (!$result->isValid()) {
     // Fehlerhafte Prüfung
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Noch einfacher zu verwenden ist

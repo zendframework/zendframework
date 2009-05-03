@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-manager">
     <title>Memory Manager</title>
@@ -33,8 +33,7 @@ $backendOptions = array(
 );
 
 $memoryManager = Zend_Memory::factory('File', $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Memory</classname> verwendet <link linkend="zend.cache.backends"><classname>Zend_Cache Backends</classname></link>
@@ -47,8 +46,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
 
             <programlisting role="php"><![CDATA[
 $memoryManager = Zend_Memory::factory('None');
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -84,8 +82,7 @@ $memoryManager = Zend_Memory::factory('None');
                 <classname>Zend_Memory_Manager::create([$data])</classname> Methode:
                 <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->create($data);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </para>
 
@@ -107,8 +104,7 @@ $memObject = $memoryManager->create($data);
                 <classname>Zend_Memory_Manager::createLocked([$data])</classname> Methode:
                 <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -151,8 +147,7 @@ function foo()
     // Aber das $memObject3 Objekt ist noch immer referenziert
     // durch $memList und ist nicht zerstört
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -189,8 +184,7 @@ function foo()
                 <programlisting role="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit(); // Memorylimit in Bytes empfangen
 $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -223,8 +217,7 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
                 <programlisting role="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // MinSize in Bytes empfangen
 $memoryManager->setMinSize($newSize);        // MinSize Limit in Bytes setzen
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>

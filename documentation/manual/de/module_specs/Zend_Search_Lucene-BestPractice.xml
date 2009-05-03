@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -51,8 +51,7 @@ foreach ($hits as $hit) {
     // Ein anderer Weg um das 'title' Dokumentfeld zu erhalten
     $title = $hit->getDocument()->title;
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -85,8 +84,7 @@ foreach ($hits as $hit) {
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -318,8 +316,7 @@ $index = Zend_Search_Lucene::open($indexPath);
 ...
 
 unset($index);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -328,8 +325,7 @@ unset($index);
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
-]]>
-            </programlisting>
+]]></programlisting>
             Diese Möglichkeit wird auch im Kapitel
             "<link linkend="zend.search.lucene.advanced.static">Fortgeschrittene Verwendung von Indezes als statische Eigenschaften</link>"
             beschrieben.
@@ -383,8 +379,7 @@ foreach ($docIds as $id) {
     $contents = $doc->contents;
     ...
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -478,8 +473,7 @@ $doc->addField(Zend_Search_Lucene_Field::Text('title',
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   $contents,
                                                   'utf-8'));
-]]>
-            </programlisting>
+]]></programlisting>
             Das ist der beste Weg um Problemen bei der verwendeten Verschlüsselung vorzubeugen.
         </para>
 
@@ -496,8 +490,7 @@ setlocale(LC_ALL, 'de_DE.iso-8859-1');
 
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -517,8 +510,7 @@ $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
 $hits = $index->find($query);
 ...
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -528,8 +520,7 @@ $hits = $index->find($query);
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...
-]]>
-            </programlisting>
+]]></programlisting>
             Ein leerer String impliziert das 'aktuelle Gebietsschema'.
         </para>
 

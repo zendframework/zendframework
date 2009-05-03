@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.findFeeds">
     <title>Feeds von Websites abrufen</title>
@@ -10,8 +10,7 @@
     </para>
     <programlisting role="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         Hier gibt die <code>findFeeds()</code> Methode ein Array mit <classname>Zend_Feed_Abstract</classname>
         Objekten zurück, die durch die <code>&lt;link&gt;</code> Tags der news.html Webseite

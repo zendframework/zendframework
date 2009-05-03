@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partielle Helfer</title>
@@ -41,8 +41,7 @@
     <li>Von: <?php echo $this->escape($this->from) ?></li>
     <li>Subjekt: <?php echo $this->escape($this->subject) ?></li>
 </ul>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dieses würde dann vom View Skript aufgerufen indem das folgende verwendet wird:
@@ -52,8 +51,7 @@
 <?php echo $this->partial('partial.phtml', array(
     'from' => 'Team Framework',
     'subject' => 'Teil der View')); ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Was dann das folgende ausgibt:
@@ -64,8 +62,7 @@
     <li>From: Team Framework</li>
     <li>Subject: Teil der View</li>
 </ul>
-]]>
-        </programlisting>
+]]></programlisting>
 
     </example>
 
@@ -116,8 +113,7 @@ $view->partial()->setObjectKey('model');
 // Dem Partiellen mitteilen das ein Objekt von partialLoop als 'model'
 // Variable im letzten Partiellen View Skript übergeben wird
 $view->partialLoop()->setObjectKey('model');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Diese Technik ist speziell dann sinnvoll wenn <classname>Zend_Db_Table_Rowset</classname>s an
@@ -153,8 +149,7 @@ $view->partialLoop()->setObjectKey('model');
 <?php // partialLoop.phtml ?>
     <dt><?php echo $this->key ?></dt>
     <dd><?php echo $this->value ?></dd>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Und das folgende "Modell":
@@ -167,8 +162,7 @@ $model = array(
     array('key' => 'Reptil', 'value' => 'Viper'),
     array('key' => 'Fisch', 'value' => 'Flunder'),
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Im View Skript wird dann der <code>PartialLoop</code> Helfer aufgerufen:
@@ -178,8 +172,7 @@ $model = array(
 <dl>
 <?php echo $this->partialLoop('partialLoop.phtml', $model) ?>
 </dl>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="html"><![CDATA[
 <dl>
@@ -215,8 +208,7 @@ $model = array(
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->partial('pager.phtml', 'list', $pagerData) ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Auf diesem Weg, können Teile wiederverwendet werden die speziell für andere Module erstellt wurden.

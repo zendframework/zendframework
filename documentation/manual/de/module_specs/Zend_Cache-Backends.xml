@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -121,7 +121,7 @@
           </table>
     </sect2>
     <sect2 id="zend.cache.backends.sqlite">
-        <title><classname>Zend_Cache_Backend_Sqlite</classname></title>
+        <title>Zend_Cache_Backend_Sqlite</title>
         <para>
             Dieses (erweiterte) Backend speichert die Cache Datensätze in einer SQLite Datenbank.
         </para>
@@ -166,7 +166,7 @@
           </table>
     </sect2>
     <sect2 id="zend.cache.backends.memcached">
-        <title><classname>Zend_Cache_Backend_Memcached</classname></title>
+        <title>Zend_Cache_Backend_Memcached</title>
         <para>
             Dieses (erweiterte) Backend speichert Cache Datensätze in einem Memcached Server. <ulink url="http://www.danga.com/memcached/">memcached</ulink>
             ist ein hoch-performantes, verteiltes Speicher Objekt Caching System. Um dieses Backend zu benutzen,
@@ -235,7 +235,7 @@
           </table>
     </sect2>
     <sect2 id="zend.cache.backends.apc">
-        <title><classname>Zend_Cache_Backend_Apc</classname></title>
+        <title>Zend_Cache_Backend_Apc</title>
         <para>
             Dieses (erweiterte) Backend speichert Cache Datensätze im Shared Memory durch die
             <ulink url="http://pecl.php.net/package/APC">APC</ulink> (Alternativer PHP Cache) Erweiterung
@@ -250,7 +250,7 @@
         </para>
     </sect2>
     <sect2 id="zend.cache.backends.xcache">
-        <title><classname>Zend_Cache_Backend_Xcache</classname></title>
+        <title>Zend_Cache_Backend_Xcache</title>
         <para>
             Dieses Backend speichert Cache Einträge im Shared Memory durch die
             <ulink url="http://xcache.lighttpd.net/">XCache</ulink> Erweiterung (welche natürlich
@@ -296,7 +296,7 @@
         </table>
     </sect2>
     <sect2 id="zend.cache.backends.platform">
-        <title><classname>Zend_Cache_Backend_ZendPlatform</classname></title>
+        <title>Zend_Cache_Backend_ZendPlatform</title>
         <para>
             Dieses Backend verwendet die Content Caching API des
             <ulink url="http://www.zend.com/products/platform">Zend Platform</ulink> Produktes.
@@ -314,14 +314,13 @@
         </para>
         <programlisting role="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Es gibt keine Optionen für dieses Backend.
         </para>
     </sect2>
     <sect2 id="zend.cache.backends.twolevels">
-        <title><classname>Zend_Cache_Backend_TwoLevels</classname></title>
+        <title>Zend_Cache_Backend_TwoLevels</title>
         <para>
             Dieses (erweiterte) Backend ist ein Hybrides. Es speichert Cache Einträge in zwei anderen
             Backends: Ein schnelles (aber limitiertes) wie Apc, Memcache... und ein "langsames" wie
@@ -443,7 +442,7 @@ $cache = Zend_Cache::factory('Core', 'Zend Platform');
           </table>
     </sect2>
     <sect2 id="zend.cache.backends.zendserver">
-        <title><classname>Zend_Cache_Backend_ZendServer_Disk</classname> und <classname>Zend_Cache_Backend_ZendServer_ShMem</classname></title>
+        <title>Zend_Cache_Backend_ZendServer_Disk und Zend_Cache_Backend_ZendServer_ShMem</title>
         <para>
             Diese Backends speichern Cacheeinträge indem Sie die Caching Funktionalitäten von
             <ulink url="http://www.zend.com/en/products/server/downloads-all?zfs=zf_download">Zend Server</ulink>

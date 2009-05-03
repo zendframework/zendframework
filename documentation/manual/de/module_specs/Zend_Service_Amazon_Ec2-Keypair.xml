@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.keypairs">
     <title>Zend_Service_Amazon_Ec2: Schlüsselpaare</title>
@@ -21,8 +21,7 @@
         <programlisting role="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->create('my-new-key');
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.keypairs.delete">
@@ -38,8 +37,7 @@ $return = $ec2_kp->create('my-new-key');
         <programlisting role="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->delete('my-new-key');
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.describe">
@@ -56,7 +54,6 @@ $return = $ec2_kp->delete('my-new-key');
         <programlisting role="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>

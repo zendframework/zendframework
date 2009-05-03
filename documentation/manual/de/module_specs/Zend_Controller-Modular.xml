@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
     <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
@@ -47,8 +47,7 @@ application/
                 list/
             helpers/
             filters/
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             In diesem Paradigma arbeitet der Modulname als Prefix für den Kontroller den er enthält. Das obige
@@ -98,8 +97,7 @@ $front->setControllerDirectory(array(
     'default' => '/path/to/application/controllers',
     'blog'    => '/path/to/application/blog/controllers'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>addControllerDirectory()</code> nimmt ein optionales zweites Argument. Wenn Module verwendet
@@ -110,8 +108,7 @@ $front->setControllerDirectory(array(
         <programlisting role="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Und das beste zum Schluß. Der einfachste Weg um Modul Verzeichnisse zu spezifizieren ist es en masse
@@ -132,8 +129,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
  *             controllers/
  */
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das obige Beispiel definiert die <code>default</code>, <code>foo</code>, und <code>bar</code> Module,
@@ -159,8 +155,7 @@ $front->addModuleDirectory('/path/to/application/modules');
  */
 $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note><para>
             Man kann angeben das kein Kontroller Unterverzeichnis für die eigenen Module verwendet wird, indem
@@ -208,8 +203,7 @@ $front->addModuleDirectory('/path/to/application/modules');
 
         <programlisting role="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

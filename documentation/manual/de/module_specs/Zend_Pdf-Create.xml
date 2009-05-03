@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Erstellen und Laden von PDF Dokumenten</title>
@@ -33,8 +33,7 @@ $pdf2 = Zend_Pdf::load($fileName);
 // Lade ein PDF Dokument aus einer Zeichenkette
 $pdf3 = Zend_Pdf::parse($pdfString);
 ...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>
@@ -70,8 +69,7 @@ $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
 ...
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 

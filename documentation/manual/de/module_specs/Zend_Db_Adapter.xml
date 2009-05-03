@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15140 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -127,8 +127,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -165,8 +164,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'password' => 'xxxxxxxx',
     'dbname'   => 'test'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -191,8 +189,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
     'dbname'           => 'test',
     'adapterNamespace' => 'MyProject_Db_Adapter'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -238,8 +235,7 @@ $config = new Zend_Config(
 );
 
 $db = Zend_Db::factory($config->database);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -343,8 +339,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Db2', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example2">
@@ -372,8 +367,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example3">
@@ -395,8 +389,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
 echo $db->getConnection()
         ->getAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <example id="zend.db.adapter.connecting.parameters.example4">
@@ -415,8 +408,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -474,8 +466,7 @@ try {
 } catch (Zend_Exception $e) {
     // Möglicherweise kann factory() die definierte Adapter Klasse nicht laden
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -551,8 +542,7 @@ CREATE TABLE bugs_products (
   product_id        INTEGER NOT NULL REFERENCES products,
   PRIMARY KEY       (bug_id, product_id)
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Weiterhin zu beachten ist, dass die <code>bugs</code> Tabelle mehrere Foreign-Key References zu der
@@ -607,8 +597,7 @@ CREATE TABLE bugs_products (
 $sql = 'SELECT * FROM bugs WHERE bug_id = ?';
 
 $result = $db->fetchAll($sql, 2);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -693,8 +682,7 @@ $result = $db->fetchAll('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
 // $result ist ein Array von Objekten
 echo $result[0]->bug_description;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -717,8 +705,7 @@ $result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
 
 // $result ist ein Array von assoziativen Arrays im Geist von fetch mode
 echo $result[0]['bug_description'];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -744,8 +731,7 @@ $result = $db->fetchCol(
 
 // Enthält bug_description; bug_id wird nicht zurückgegeben
 echo $result[0];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -775,8 +761,7 @@ $db->setFetchMode(Zend_Db::FETCH_OBJ);
 $result = $db->fetchAssoc('SELECT bug_id, bug_status FROM bugs');
 
 echo $result[2];
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -799,8 +784,7 @@ $result = $db->fetchRow('SELECT * FROM bugs WHERE bug_id = 2');
 
 // Beachte das $result ein einzelnes Objekt ist, und kein Array von Objekten
 echo $result->bug_description;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -823,8 +807,7 @@ $result = $db->fetchOne('SELECT bug_status FROM bugs WHERE bug_id = 2');
 
 // this is a single string value
 echo $result;
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
 
@@ -859,8 +842,7 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -894,8 +876,7 @@ $data = array(
 );
 
 $db->insert('bugs', $data);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -925,8 +906,7 @@ $db->insert('bugs', $data);
 
 // Gib den letzten durch eine auto-inkrement Spalte erzeugten Wert zurück
 $id = $db->lastInsertId();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -951,8 +931,7 @@ $id = $db->lastInsertId('bugs', 'bug_id');
 // Gib, alternativ, den letzten durch die 'bugs_seq' Sequenz
 // erstellten Wert zurück
 $id = $db->lastInsertId('bugs');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -968,8 +947,7 @@ $db->insert('bugs', $data);
 
 // Gib den letzten durch die 'bugs_id_gen' Sequenz erstellten Wert zurück.
 $id = $db->lastSequenceId('bugs_id_gen');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1051,8 +1029,7 @@ $data = array(
 );
 
 $n = $db->update('bugs', $data, 'bug_id = 2');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1081,8 +1058,7 @@ $n = $db->update('bugs', $data, $where);
 // Der erstellte SQL Syntax ist:
 //  UPDATE "bugs" SET "update_on" = '2007-03-23', "bug_status" = 'FIXED'
 //  WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN')
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -1110,8 +1086,7 @@ $n = $db->update('bugs', $data, $where);
                 <title>Löschen von Zeilen</title>
                 <programlisting role="php"><![CDATA[
 $n = $db->delete('bugs', 'bug_id = 3');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1142,8 +1117,7 @@ $sql = "SELECT * FROM bugs WHERE reported_by = '$name'";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O'Reilly'
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -1186,8 +1160,7 @@ $sql = "SELECT * FROM bugs WHERE reported_by = $name";
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1207,8 +1180,7 @@ echo $sql;
 
                 <programlisting role="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -1222,8 +1194,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
      . $db->quote($value, 'INTEGER');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1267,8 +1238,7 @@ $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 'O\'Reilly'
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1285,8 +1255,7 @@ $sql = $db
 
 echo $sql;
 // SELECT * FROM bugs WHERE reported_by = 1234
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -1333,8 +1302,7 @@ $sql = "SELECT * FROM $tableName";
 
 echo $sql
 // SELECT * FROM "order"
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -1420,8 +1388,7 @@ try {
     $db->rollBack();
     echo $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -1599,8 +1566,7 @@ try {
             <title>Schließen einer Datenbankverbindung</title>
             <programlisting role="php"><![CDATA[
 $db->closeConnection();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1652,8 +1618,7 @@ $db->closeConnection();
             <title>Ausführen eines nicht-prepared Statements mit einem PDO Adapter</title>
             <programlisting role="php"><![CDATA[
 $result = $db->getConnection()->exec('DROP TABLE bugs');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1692,8 +1657,7 @@ if (!is_null($version)) {
 } else {
     // Server Version ist unmöglich zu lesen
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 

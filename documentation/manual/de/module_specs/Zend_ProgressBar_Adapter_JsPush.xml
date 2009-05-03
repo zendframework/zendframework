@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
@@ -82,8 +82,7 @@
 </div>
 
 <iframe src="long-running-process.php" id="long-running-process"></iframe>
-]]>
-        </programlisting>
+]]></programlisting>
         <programlisting role="css"><![CDATA[
 #long-running-process {
     position: absolute;
@@ -108,15 +107,13 @@
 
     background-color: #000000;
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <programlisting role="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
     document.getElementById('zend-progressbar-done').style.width = data.percent + '%';
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das erstellt einen einfachen Container mit einem schwarzen Rand und einem Block der den aktuellen

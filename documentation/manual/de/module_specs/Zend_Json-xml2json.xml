@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.xml2json">
     <title>XML zu JSON Konvertierung</title>
@@ -22,8 +22,7 @@
 // Die fromXml Funktion nimmt einfach einen String der XML
 // Inhalt als Eingabe enthält.
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Die <classname>Zend_Json::fromXml()</classname> Funktion führt die Konvertierung des XML formatierten String
@@ -69,8 +68,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         <publisher>O'Reilly</publisher>
     </book>
 </books>
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         JSON Ausgabe String der von der <classname>Zend_Json::fromXml()</classname> Funktion zurückgegeben wird:
@@ -107,8 +105,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
       }
    ]}
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Weitere Details über das xml2json Feature können im originalen Proposal selbst gefunden werden.

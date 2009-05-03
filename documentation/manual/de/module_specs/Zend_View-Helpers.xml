@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -161,8 +161,7 @@ echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
                          array('bar', 'baz');
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     In allen Fällen, wird das Markup einem versteckten Element mit dem
@@ -317,8 +316,7 @@ echo $this->formCheckbox('foo',
 <?php echo $this->formCheckbox('opt_in', 'yes', null, array('yes', 'no')) ?>
     </label></p>
 </form>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Ausgabe des View Skriptes wird in etwa so aussehen:
@@ -341,8 +339,7 @@ echo $this->formCheckbox('foo',
         <input type="checkbox" name="opt_in" value="yes" checked="checked" />
     </label></p>
 </form>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <xi:include href="Zend_View-Helpers-Action.xml" />
         <xi:include href="Zend_View-Helpers-Cycle.xml" />
@@ -381,8 +378,7 @@ $view = new Zend_View();
 
 // Setze den Pfad auf /path/to/more/helpers, mit dem Präfix 'My_View_Helper'
 $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Durch Verwendung der <code>addHelperPath()</code> Methode können die Pfade "gestapelt"
@@ -405,8 +401,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "My_View_Helper_HelperName", und zuletzt nach
 // "Zend/View/Helpers/HelperName.php" mit dem Klassennamen
 // "Zend_View_Helper_HelperName" schauen.
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -480,8 +475,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
         return htmlspecialchars($output);
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dann rufst du in einem View Skript den <code>SpecialPurpose</code> Helfer so oft auf,
@@ -495,8 +489,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 echo $this->specialPurpose();
 echo $this->specialPurpose();
 echo $this->specialPurpose();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Ausgabe wird in etwa so aussehen:
@@ -505,8 +498,7 @@ echo $this->specialPurpose();
 Ich habe 'The Jerk' 1 Mal(e) gesehen.
 Ich habe 'The Jerk' 2 Mal(e) gesehen.
 Ich habe 'The Jerk' 3 Mal(e) gesehen.
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Hier und da ist es notwendig das aufrufende <classname>Zend_View</classname> Objekt aufzurufen --
@@ -531,8 +523,7 @@ class My_View_Helper_ScriptPath
         return $this->view->getScriptPath($script);
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn die Helfer Klasse eine <code>setView()</code> Methode hat, wird diese aufgerufen wenn die

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Erweiterte Verwendung von Zend_Layout</title>
@@ -61,8 +61,7 @@
         <programlisting role="php"><![CDATA[
 $view = new My_Custom_View();
 $layout->setView($view);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>Nicht alle Zend_View Implementationen sind gleich</title>
@@ -94,8 +93,7 @@ $layout->setView($view);
             <programlisting role="php"><![CDATA[
 $placeholders = new Zend_View_Helper_Placeholder();
 $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
     </sect2>
 
@@ -187,8 +185,7 @@ $layout->setInflectorTarget('layouts/:script.:suffix');
 
 // Setzen des Layout View Skript Suffix:
 $layout->setViewSuffix('php');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.layout.advanced.inflector.directmodification">
@@ -211,8 +208,7 @@ $layout->setViewSuffix('php');
 $layout->getInflector()->setTarget('layouts/:script.:suffix')
                        ->setStaticRule('suffix', 'html')
                        ->setFilterRule(array('Word_CamelCaseToUnderscore'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.layout.advanced.inflector.custom">
@@ -231,8 +227,7 @@ $inflector->addRules(array(
     'suffix'  => 'html'
 ));
 $layout->setInflector($inflector);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>

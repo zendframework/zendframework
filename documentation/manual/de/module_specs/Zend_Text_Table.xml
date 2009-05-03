@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
@@ -137,8 +137,7 @@ $row->appendColumn(new Zend_Text_Table_Column('Framework'));
 $table->appendRow($row);
 
 echo $table;
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Das führt zur folgenden Ausgabe:
         </para>
@@ -146,8 +145,7 @@ echo $table;
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
 
@@ -12,8 +12,7 @@
 
     <programlisting role="php"><![CDATA[
 $feed = Zend_Feed::import('http://feeds.example.com/feedName');
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Du kannst <classname>Zend_Feed</classname> außerdem verwenden, um Inhalte eines Feeds aus einer Datei
@@ -26,8 +25,7 @@ $feedFromFile = Zend_Feed::importFile('feed.xml');
 
 // Feeds von einer PHP String Variable importieren
 $feedFromPHP = Zend_Feed::importString($feedString);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         In jedem der obigen Beispiele wird bei Erfolg abhängig vom Typ des Feeds ein Objekt einer
@@ -65,8 +63,7 @@ $atomFeedFromArray = Zend_Feed::importArray($array, 'atom');
 
 // Importieren eines RSS Feeds von einem Array
 $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das Format des Arrays muß dieser Struktur entsprechen:
@@ -262,8 +259,7 @@ array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Referenzen:
@@ -338,8 +334,7 @@ $atomFeedFromArray =
 // Einen RSS Feeed von einem Array von eigenen Erstellungsquellen importieren
 $rssFeedFromArray =
     Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -360,8 +355,7 @@ print $feed->saveXML();
 
 // HTTP Header und den Feed ausgeben
 $feed->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 

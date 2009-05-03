@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.photos">
     <title>Picasa Web Alben verwenden</title>
@@ -120,8 +120,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 
 // Erstellt eine Instanz des Kalender Services
 $service = new Zend_Gdata_Photos($client);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Eine Service Instanz die AuthSub verwendet, kann ähnlich erstellt werden, aber durch eine etwas
@@ -210,8 +209,7 @@ function getAuthSubHttpClient()
  * Erstellt eine neue Instant des Services und leitet den Benutzer zum AuthSub Server um wenn das notwendig ist.
  */
 $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Zuletzt kann ein nicht authentifizierter Server für die Verwendung mit öffentlichen Feeds
@@ -220,8 +218,7 @@ $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
             <programlisting role="php"><![CDATA[
 // Erstellt eine Instanz des Services und verwendet einen nicht authentifizierten HTTP Client
 $service = new Zend_Gdata_Photos();
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -263,8 +260,7 @@ $service = new Zend_Gdata_Photos($client);
 
 $query = new Zend_Gdata_Photos_UserQuery();
 $query->setUser("sample.user");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Für jede Abfrage kann eine Anzahl an Parameter, welche die Suche limitieren, abgefragt, oder
@@ -375,8 +371,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Oder, der auf den Feed kann zugegriffen werden indem zuerst eine Abfrage erstellt wird:
@@ -394,8 +389,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die Erstellung einer Abfrage bietet auch die Möglichkeit ein Benutzer Eintrags Objekt abzufragen:
@@ -414,8 +408,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.album_retrieval">
@@ -442,8 +435,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Alternativ kann dem Abfrage Objekt ein Album Name mit <code>setAlbumName</code> angegeben werden.
@@ -469,8 +461,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_retrieval">
@@ -499,8 +490,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die Erstellung einer Abfragen bietet auch die Möglichkeit ein Photo Eintrags Objekt abzufragen:
@@ -521,8 +511,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_retrieval">
@@ -559,8 +548,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_retrieval">
@@ -594,8 +582,7 @@ try {
 } catch (Zend_Gdata_App_Exception $e) {
     echo "Fehler: " . $e->getMessage();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>
@@ -616,8 +603,7 @@ $entry = new Zend_Gdata_Photos_AlbumEntry();
 $entry->setTitle($service->newTitle("test album"));
 
 $service->insertAlbumEntry($entry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_creation">
@@ -644,8 +630,7 @@ $albumQuery->setAlbumId("1");
 $albumEntry = $service->getAlbumEntry($albumQuery);
 
 $service->insertPhotoEntry($entry, $albumEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_creation">
@@ -669,8 +654,7 @@ $photoQuery->setType('entry');
 $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertCommentEntry($entry, $photoEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_creation">
@@ -693,8 +677,7 @@ $photoQuery->setType('entry');
 $photoEntry = $service->getPhotoEntry($photoQuery);
 
 $service->insertTagEntry($entry, $photoEntry);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>
@@ -719,8 +702,7 @@ $albumQuery->setType('entry');
 $entry = $service->getAlbumEntry($albumQuery);
 
 $service->deleteAlbumEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.photo_deletion">
@@ -740,8 +722,7 @@ $photoQuery->setType('entry');
 $entry = $service->getPhotoEntry($photoQuery);
 
 $service->deletePhotoEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.comment_deletion">
@@ -763,8 +744,7 @@ $path = $photoQuery->getQueryUrl() . '/commentid/' . "1000";
 $entry = $service->getCommentEntry($path);
 
 $service->deleteCommentEntry($entry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.tag_deletion">
@@ -793,8 +773,7 @@ foreach ($photoFeed as $entry) {
 }
 
 $service->deleteTagEntry($tagEntry, true);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.gdata.photos.optimistic_concurrenty">
@@ -825,8 +804,7 @@ try {
         throw $e;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>

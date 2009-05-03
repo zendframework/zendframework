@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
@@ -24,7 +24,7 @@
         </para>
     </note>
     <example id="zend.config.adapters.xml.example.using">
-        <title><classname>Zend_Config_Xml</classname> benutzen</title>
+        <title>Zend_Config_Xml benutzen</title>
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von <classname>Zend_Config_Xml</classname> um
             Konfigurations-Daten aus einem XML-File zu laden. In diesem Beispiel gibt es
@@ -73,11 +73,10 @@ $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // ausgabe "dev.example.com"
 echo $config->database->params->dbname; // ausgabe "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <example id="zend.config.adapters.xml.example.attributes">
-        <title>Tag Attribute in <classname>Zend_Config_Xml</classname> verwenden</title>
+        <title>Tag Attribute in Zend_Config_Xml verwenden</title>
         <para>
             <classname>Zend_Config_Xml</classname> unterstützt auch zwei zusätzliche Wege der Definition von Knoten in der
             Konfiguration. Beide verwenden Attribute. Da die <code>extends</code> und
@@ -165,8 +164,7 @@ $string = <<<EOT
 EOT;
 
 $config = new Zend_Config_Xml($string, 'staging');
-]]>
-        </programlisting>
+]]></programlisting>
     </note>
 </sect1>
 <!--

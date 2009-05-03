@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -43,8 +43,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 echo $client->call('test.sayHello');
 
 // hello
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -73,8 +72,7 @@ $arg2 = 'foo';
 $result = $client->call('test.sayHello', array($arg1, $arg2));
 
 // $result ist ein nativer PHP-Typ
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -187,8 +185,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <programlisting role="php"><![CDATA[
 $client->setSkipSystemLookup(true);
 $result = $client->call('foo.bar', array(array()));
-]]>
-                </programlisting>
+]]></programlisting>
             </note>
         </sect3>
 
@@ -334,8 +331,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 $server = $client->getProxy();           // Umleitung im Standard-Namenraum
 
 $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) gibt "hello" zurück
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -354,8 +350,7 @@ $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 $test  = $client->getProxy('test');     // Leitet zum "test"-Namensraum um
 
 $hello = $test->sayHello(1, 2);         // test.Hello(1,2) gibt "hello" zurück
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -402,8 +397,7 @@ try {
     // $e->getMessage() gibt "Not Found" zurück
 
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -448,8 +442,7 @@ try {
     // $e->getMessage() gibt "Unknown method" zurück
 
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -516,8 +509,7 @@ $client->doRequest($request);
 
 // $server->getLastRequest() gibt ein Zend_XmlRpc_Request-Objekt zurück
 // $server->getLastResponse() gibt ein Zend_XmlRpc_Response-Objekt zurück
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

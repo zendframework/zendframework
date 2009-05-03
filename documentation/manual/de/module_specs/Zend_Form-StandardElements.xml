@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -66,8 +66,7 @@
 
         <programlisting role="php"><![CDATA[
 $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Captcha's können dann durch Verwendung der <code>setCaptcha()</code> Methode registriert werden,
@@ -80,8 +79,7 @@ $element->setCaptcha(new Zend_Captcha_Figlet());
 
 // Verwendung von Kurznamen:
 $element->setCaptcha('Dumb');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn das Element über die Konfiguration geladen werden soll, kann entweder der Schlüssel
@@ -110,8 +108,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         'timeout' => 300,
     ),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der verwendete Dekorator wird durch die Abfrage des Captcha Adapters erkannt. Standardmäßig wird
@@ -198,8 +195,7 @@ $element->addValidator('Size', false, 102400);
 // Nur JPEG, PNG, und GIFs
 $element->addValidator('Extension', false, 'jpg,png,gif');
 $form->addElement($element, 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Man sollte auch den richtigen Encodingtyp sicherstellen in dem das Formular angeboten wird.
@@ -208,8 +204,7 @@ $form->addElement($element, 'foo');
 
             <programlisting role="php"><![CDATA[
 $form->setAttrib('enctype', 'multipart/form-data');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Nachdem das Formular erfolgreich geprüft wurde, muß die Datei empfangen werden um Sie an Ihrem
@@ -227,8 +222,7 @@ if (!$form->foo->receive()) {
 }
 
 $location = $form->foo->getFileName();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -260,8 +254,7 @@ $location = $form->foo->getFileName();
 
         <programlisting role="php"><![CDATA[
 $form->getValues();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -291,8 +284,7 @@ $element = new Zend_Form_Element_File('foo');
 $element->setLabel('Ein Bild hochladen:')
         ->setDestination('/var/www/upload')
         ->setValueDisabled(true);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Jetzt wird die Datei nicht mehr empfangen wenn man <code>getValues()</code>
@@ -308,8 +300,7 @@ if ($form->isValid($form->getPost())) {
         print "Upload Fehler";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -353,8 +344,7 @@ $form->addElement($element, 'foo');
 if ($form->foo->isUploaded()) {
     // Die foo Datei ist angegeben... mach was
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -385,8 +375,7 @@ $element->addValidator('Extension', false, 'jpg,png,gif');
 // 3 identische Dateielemente definieren
 $element->setMultiFile(3);
 $form->addElement($element, 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 In der View erhält man nun 3 identische File Upload Elemente welche alle die gleichen
@@ -425,8 +414,7 @@ $element->setLabel('Ein Bild hochladen:')
         ->addValidator('Size', false, 102400) // Limitiert auf 100k
         ->setMaxFileSize(102400); // Limitiert die Dateigröße auf der Clientseite
 $form->addElement($element, 'foo');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>MaxFileSize mit mehreren File Elementen</title>
@@ -470,8 +458,7 @@ $form->addElement($element, 'foo');
 
         <programlisting role="php"><![CDATA[
 $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das Salt kann später gesetzt werden durch Verwendung der <code>setSalt($salt)</code>
@@ -585,8 +572,7 @@ $element = new Zend_Form_Element_MultiCheckbox('foo', array(
 ));
 
 $element->setValue(array('bar', 'bat'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Beachte das man auch für das Setzen eines einzelnen Wertes ein Array übergeben muß.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -60,8 +60,7 @@
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
 Zend_Search_Lucene::setDefaultSearchField('contents');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der <code>null</code> Wert bedeutet, das die Suche über alle Felder durchgeführt wird. Das ist die
@@ -78,15 +77,13 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
         </para>
         <programlisting role="querystring"><![CDATA[
 title:"Der richtige Weg" AND text:go
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             oder
         </para>
         <programlisting role="querystring"><![CDATA[
 title:"Mach es richtig" AND go
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Weil "text" das Standardfeld ist, wird der Feld Indikator nicht benötigt.
         </para>
@@ -96,8 +93,7 @@ title:"Mach es richtig" AND go
             danach folgt, sodas die Abfrage
             <programlisting role="querystring"><![CDATA[
 title:Mach es richtig
-]]>
-            </programlisting>
+]]></programlisting>
             nur "Mach" im title Feld finden wird. Es findet "es" und "richtig" im Standardfeld (wenn das
             Standardfeld gesetzt ist) oder in allen indizierten Felder (wenn das Standardfeld auf
             <code>null</code> gesetzt ist).
@@ -125,8 +121,7 @@ title:Mach es richtig
             zu suchen kann die folgende Suche verwendet werden:
             <programlisting role="querystring"><![CDATA[
 Te?t
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -135,16 +130,14 @@ Te?t
             werden:
             <programlisting role="querystring"><![CDATA[
 Test*
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
             Es können "?", "*" oder beide an jeder Stelle des Ausdrucks verwendet werden:
             <programlisting role="querystring"><![CDATA[
 *schrei?t*
-]]>
-            </programlisting>
+]]></programlisting>
             Sucht nach "schreibt", "schreibtisch", "beschreibt", "schreist" und so weiter.
         </para>
     </sect2>
@@ -172,15 +165,13 @@ Test*
             werden lexikalisch durchgeführt.
             <programlisting role="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
-]]>
-            </programlisting>
+]]></programlisting>
             Das wird Dokumente finden dessen lod_date Felder Werte zwischen 20020101 und 20030101 inklusive
             haben. Es ist zu beachten das Bereichsabfragen nicht für Datumsfelder reserviert sind.
             Bereichsabfragen können auch mit nicht-datums Felder verwendet werden:
             <programlisting role="querystring"><![CDATA[
 title:{Aida TO Carmen}
-]]>
-            </programlisting>
+]]></programlisting>
             Das wird alle Dokumente finden dessen Titel zwischen Aida und Carmen sortiert sind,
             aber ohne Aida und Carmen.
         </para>
@@ -193,8 +184,7 @@ title:{Aida TO Carmen}
             Intervallen in allen Feldern.
             <programlisting role="querystring"><![CDATA[
 {Aida TO Carmen}
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -208,15 +198,13 @@ title:{Aida TO Carmen}
             verwendet werden:
             <programlisting role="querystring"><![CDATA[
 roam~
-]]>
-            </programlisting>
+]]></programlisting>
             Diese Suche wird Begriffe wie "Baum" und "Saum" finden. Zusätzliche (optionale) Parameter können
             die benötigte Ähnlichkeit spezifizieren. Der Wert muß zwischen 0 und 1 sein. Mit einem Wert näher
             bei 1 werden nur Begriffe mit einer höheren Warscheinlichkeit gefunden. Zum Beispiel:
             <programlisting role="querystring"><![CDATA[
 roam~0.8
-]]>
-            </programlisting>
+]]></programlisting>
             Der verwendete Standardwert wenn der Parameter nicht angegeben wurde ist 0.5.
         </para>
     </sect2>
@@ -232,8 +220,7 @@ roam~0.8
             verwendet werden:
             <programlisting role="querystring"><![CDATA[
 "Zend Framework"~10
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -251,21 +238,18 @@ roam~0.8
             Ausdrücke. Wenn man zum Beispiel nach
             <programlisting role="querystring"><![CDATA[
 PHP framework
-]]>
-            </programlisting>
+]]></programlisting>
             sucht und will das der Ausdruck "PHP" mehr Relevanz hat, kann er durch Verwendung des ^ Symbols
             zusammen mit einem Boost Faktor beim Ausdruck geboostet werden. Man würde zum Beispiel folgendes
             angeben:
             <programlisting role="querystring"><![CDATA[
 PHP^4 framework
-]]>
-            </programlisting>
+]]></programlisting>
             Das macht Dokumente in denen der Ausdruck PHP vorkommt relevanter. Man kann genauso Phrasenausdrücke
             boosten und Unterabfragen wie im Beispiel gezeigt:
             <programlisting role="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
-]]>
-            </programlisting>
+]]></programlisting>
             Standardwert ist der Boost Faktor 1. Auch wenn der Boost Faktor positiv sein muß, kann er kleiner
             als 1 sein (z.B. 0.2).
         </para>
@@ -303,8 +287,7 @@ PHP^4 framework
                 folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 "PHP Framework" AND "Zend Framework"
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -318,8 +301,7 @@ PHP^4 framework
                 folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 "PHP Framework" OR "Zend Framework"
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -335,8 +317,7 @@ PHP^4 framework
                 folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 "PHP Framework" AND NOT "Zend Framework"
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -358,8 +339,7 @@ PHP^4 framework
                 die folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 +Zend Framework
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -374,8 +354,7 @@ PHP^4 framework
                 die folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 "PHP Framework" -"Zend Framework"
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
         </sect3>
 
@@ -397,8 +376,7 @@ PHP^4 framework
                 können kann die folgende Abfrage verwendet werden:
                 <programlisting role="querystring"><![CDATA[
 +"PHP Framework" "Zend Framework"
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <para>
@@ -423,8 +401,7 @@ PHP^4 framework
             Abfrage kontrollieren will, oder unterschiedliche Abfragestile mischen will:
             <programlisting role="querystring"><![CDATA[
 +(Framework OR Bibliothek) +php
-]]>
-            </programlisting>
+]]></programlisting>
             <classname>Zend_Search_Lucene</classname> unterstützt Unterabfragen von beliebigen Ebenen.
         </para>
     </sect2>
@@ -440,8 +417,7 @@ PHP^4 framework
             kann die folgende Abfrage verwendet werden:
             <programlisting role="querystring"><![CDATA[
 title:(+Rückkehr +"rosaroter Panther")
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -464,8 +440,7 @@ title:(+Rückkehr +"rosaroter Panther")
             werden:
             <programlisting role="querystring"><![CDATA[
 \(1\+1\)\:2
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 

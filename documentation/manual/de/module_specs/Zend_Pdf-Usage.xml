@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
@@ -264,8 +264,7 @@ if (isset($argv[2])) {
 } else {
     $pdf->save($argv[1], true /* Aktualisierung */);
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

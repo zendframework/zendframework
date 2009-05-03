@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.migration">
 
@@ -55,8 +55,7 @@
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     In diesem Fall werden wir eine Notiz darüber erhalten das die Sprache 'fr' nicht vorhanden
@@ -68,8 +67,7 @@ $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',
                                array('disableNotices' => true));
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 

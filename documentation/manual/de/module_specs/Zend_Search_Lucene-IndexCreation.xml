@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Indexerstellung</title>
@@ -33,8 +33,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $docContent));
 
 // Füge das Dokument dem Index hinzu
 $index->addDocument($doc);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Neu hinzugefügte Dokumente können sofort im Index gesucht werden.
@@ -65,8 +64,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
 // Füge das Dokument dem Index hinzu
 $index->addDocument($doc);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
     <sect2 id="zend.search.lucene.index-creation.document-updating">
         <title>Dokumente aktualisieren</title>
@@ -88,8 +86,7 @@ $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
     $index->delete($hit->id);
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.counting">
@@ -112,8 +109,7 @@ foreach ($hits as $hit) {
         <programlisting role="php"><![CDATA[
 $indexSize = $index->count();
 $documents = $index->numDocs();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Methode <classname>Zend_Search_Lucene::isDeleted($id)</classname> kann verwendet werden um zu Prüfen ob ein
@@ -126,8 +122,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         echo "Dokument #$id ist gelöscht.\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Index Optimierung entfernt gelöschte Dokumente und quetscht die Dokument Ids in einen kleineren
@@ -171,8 +166,7 @@ $index = new Zend_Search_Lucene('/data/my-index');
 
 // Optimiere Index
 $index->optimize();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die automatische Indexoptimierung wird durchgeführt, um einen Index in einem konsistenten Status
@@ -279,8 +273,7 @@ $currentPermissions =
 
 // Nur für aktuellen Benutzer und Gruppe die Lese-Schreib Berechtigung setzen
 Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.limitations">

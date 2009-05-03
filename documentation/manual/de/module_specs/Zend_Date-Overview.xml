@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -175,8 +175,7 @@ echo $date2, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
 // Stikte Interpretation des angegebenen Formats
 $date3 = new Zend_Date('Feb 31, 2007', 'MM.dd.yyyy');
 echo $date3, "\n"; // Ausgabe "Mar 3, 2007 12:00:00 AM"
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -213,8 +212,7 @@ Zend_Registry::set('Zend_Locale', $locale);
 
 // Irgendwo in der eigenen Anwendung
 $date = new Zend_Date('31.Feb.2007');
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -243,8 +241,7 @@ $date = new Zend_Date(); // $date's Zeitpunkt === time()
 // Ändert $date durch addieren von 12 Stunden
 $date->add('12', Zend_Date::HOUR);
 print $date;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

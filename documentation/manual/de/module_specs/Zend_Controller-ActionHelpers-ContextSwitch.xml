@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.contextswitch">
     <title>ContextSwitch und AjaxContext</title>
@@ -66,8 +66,7 @@ class NewsController extends Zend_Controller_Action
     {
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Angenommen wir wollen das <code>listAction()</code> auch im XML Format vorhanden ist. Statt
@@ -87,8 +86,7 @@ class NewsController extends Zend_Controller_Action
 
     // ...
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Was macht das:
@@ -162,8 +160,7 @@ class NewsController extends Zend_Controller_Action
 
                 <programlisting role="php"><![CDATA[
 $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -314,8 +311,7 @@ class FooController extends Zend_Controller_Action
     {
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Angenommen wir sollen einen XML Kontext zu der 'list' Aktion hinzufügen, und XML und
@@ -334,8 +330,7 @@ class FooController extends Zend_Controller_Action
              ->initContext();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kann einfach die Array-Eigenschaft <code>$contexts</code> definiert werden:
@@ -354,8 +349,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->contextSwitch()->initContext();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das obige ist weniger Overhead, aber enthält auch potentielle Fehler.
@@ -443,8 +437,7 @@ class NewsController extends Zend_Controller_Action
         $this->_helper->contextSwitch()->initContext();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             In einigen Fällen, will man einen Kontext erzwingen der verwendet werden soll; zum
@@ -455,8 +448,7 @@ class NewsController extends Zend_Controller_Action
 
         <programlisting role="php"><![CDATA[
 $contextSwitch->initContext('xml');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.actionhelpers.contextswitch.misc">
@@ -479,8 +471,7 @@ $contextSwitch->initContext('xml');
                 <programlisting role="php"><![CDATA[
 $contextSwitch->setAutoJsonSerialization(false);
 $contextSwitch->initContext();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Der Wert des Flags erhält man mit <code>getAutoJsonSerialization()</code>.
@@ -731,8 +722,7 @@ class CommentController extends Zend_Controller_Action
         // View Variablen hinzu, und JSON wird zurückgegeben.
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Auf der Seite des Clients, wird die JAX Bibliothe einfach die Endpunkte

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -36,12 +36,11 @@ $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </note>
     <example id="zend.config.adapters.ini.example.using">
-        <title><classname>Zend_Config_Ini</classname> benutzen</title>
+        <title>Zend_Config_Ini benutzen</title>
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von <classname>Zend_Config_Ini</classname> um
             Konfigurations-Daten aus einem XML-File zu laden. In diesem Beispiel gibt es
@@ -69,8 +68,7 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Nehmen wir weiterhin an, dass der Anwendungs-Entwickler die Staging-Konfiguration aus
             diesem INI-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
@@ -81,8 +79,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host;   // Ausgabe "dev.example.com"
 echo $config->database->params->dbname; // Ausgabe "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <note>
     <table id="zend.config.adapters.ini.table">

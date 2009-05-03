@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15196 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.view">
     <title>Darstellen der View</title>
@@ -311,7 +311,7 @@ echo "</ul>\n";
             <programlisting role="php"><![CDATA[
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
-    public function direct()
+    public function bugList()
     {
         $model = new Bug();
         $html  = "<ul>\n";

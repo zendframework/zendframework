@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -40,8 +40,7 @@ $db->getProfiler()->setEnabled(false);
 
 // aktiviere Profiler
 $db->getProfiler()->setEnabled(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der Wert der <code>profiler</code> Option ist flexibel. Er wird unterschiedlich interpretiert,
@@ -56,8 +55,7 @@ $db->getProfiler()->setEnabled(true);
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -69,8 +67,7 @@ $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -87,8 +84,7 @@ $params['profiler'] = array(
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -108,8 +104,7 @@ db.profiler.enabled = true
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
 
             Die '<code>instance</code>' Eigenschaft kann wie folgt verwendet werden:
             <programlisting role="php"><![CDATA[
@@ -121,8 +116,7 @@ $configData = array(
 $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -139,8 +133,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <programlisting role="php"><![CDATA[
 $profiler = $db->getProfiler();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dies gibt eine <classname>Zend_Db_Profiler</classname> Objektinstanz zurück. Mit dieser Instanz
@@ -222,8 +215,7 @@ $profiler = $db->getProfiler();
 $query = $profiler->getLastQueryProfile();
 
 echo $query->getQuery();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Vielleicht wird eine Seite langsam erstellt; verwende den Profiler, um zuerst die
@@ -251,8 +243,7 @@ echo 'Average query length: ' . $totalTime / $queryCount .
 echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -281,8 +272,7 @@ $profiler->setFilterElapsedSecs(5);
 
 // Zeichne alle Abfragen unabhängig von deren Laufzeit auf:
 $profiler->setFilterElapsedSecs(null);
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.db.profiler.advanced.filtertype">
@@ -359,8 +349,7 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
 // Remove all filters
 $profiler->setFilterQueryType(null);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -389,8 +378,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 
 // Hole DELETE Abfragen zurück
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
@@ -139,8 +139,7 @@ $count = count($results); // Gib die Anzahl an Gefundenen Nodes zurück: 4
 foreach ($results as $result) {
     // $result ist ein DOMElement
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <classname>Zend_Dom_Query</classname> erlaubt auch strenge XPath Abfragen durch Verwendung der

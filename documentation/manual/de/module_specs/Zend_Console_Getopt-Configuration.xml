@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
-    <title>Konfigurieren von <classname>Zend_Console_Getopt</classname></title>
+    <title>Konfigurieren von Zend_Console_Getopt</title>
 
     <sect2 id="zend.console.getopt.configuration.addrules">
         <title>Regeln für das Hinzufügen von Optionen</title>
@@ -27,8 +27,7 @@ $opts->addRules(
     'verbose|v' => 'Druckt zusätzliche Ausgaben'
   )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Das obige Beispiel zeigt das hinzufügen der "<code>--verbose</code>"
@@ -60,8 +59,7 @@ $opts->setHelp(
         'p' => 'Pfirsich Option, mit optionalem Zeichenketten Parameter'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Wenn Optionen mit Aliasen definiert wurden, kann jeder dieser Aliase
@@ -100,8 +98,7 @@ $opts->setAliases(
         'p' => 'pfirsich'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Im obigen Beispiel sind, nach Definition der Aliase, "<code>-a</code>",
@@ -141,8 +138,7 @@ $opts->addArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
 
 // Ein neues Array als Ersatz für die bestehenden Argumente
 $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -220,8 +216,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOption('ignoreCase', true);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Das Argument für die <code>setOptions()</code> Methode ist ein
@@ -242,8 +237,7 @@ $opts->setOptions(
         'dashDash'   => false
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 

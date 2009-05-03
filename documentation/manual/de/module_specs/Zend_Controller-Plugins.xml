@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.plugins" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins</title>
@@ -92,8 +92,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Keine der Methoden von <classname>Zend_Controller_Plugin_Abstract</classname> ist abstrakt, so
@@ -165,8 +164,7 @@ $front->setControllerDirectory('/path/to/controllers')
       ->setRouter(new Zend_Controller_Router_Rewrite())
       ->registerPlugin(new MyPlugin());
 $front->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Angenommen das keine der Aktionen igendeine Ausgabe produzieren, und nur eine Aktion aufgerufen wurde,
@@ -180,8 +178,7 @@ $front->dispatch();
 <p>preDispatch() aufgerufen</p>
 <p>postDispatch() aufgerufen</p>
 <p>dispatchLoopShutdown() aufgerufen</p>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
@@ -148,8 +148,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user,
 
 // Erstellt eine Instanz des Health Services
 $service = new Zend_Gdata_Health($client);
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Ein Health Service der AuthSub verwendet kann ähnlich erstellt werden, im einem etwas längeren
                 Aussehen. AuthSub ist das empfohlene Interface um mit Google Health zu kommunizieren weil jeder
@@ -242,8 +241,7 @@ $userH9Sandbox = false;
 $healthService = new Zend_Gdata_Health($client,
                                        'googleInc-MyTestAppName-v1.0',
                                        $userH9Sandbox);
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Achtung: der Rest dieses Dokument wird annehmen das man AuthSub für die Authentifikation verwendet.
             </para>
@@ -287,8 +285,7 @@ $query->setMaxResultsInGroup(2);
 $query->setCategory("medication");
 
 $profileFeed = $healthService->getHealthProfileFeed($query);
-]]>
-                </programlisting>
+]]></programlisting>
                 <para>
                     Wenn man <code>setDigest("true")</code> verwendet werden alle CCR Daten des Benutzers in einem
                     einzelnen Atom <code>&lt;entry&gt;</code> zurückgegeben.
@@ -332,8 +329,7 @@ foreach ($entries as $entry) {
         echo "<pre>" . $xmlStr . "</pre>";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Hier wird die <code>getCcr()</code> Methode in Verbindung mit einem magischen Helfer verwendet um
                 nur die Medikationsdaten aufzureißen und aus den CCR des Eintrags zu extrahieren. Der hierbei
@@ -362,8 +358,7 @@ foreach ($conditions as $cond) {
     $xmlStr = $cond->ownerDocument->saveXML($cond);
     echo "<pre>" . $xmlStr . "</pre>";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.health.profilelist">
@@ -396,8 +391,7 @@ foreach ($entries as $entry) {
     echo '<p>Profil Name: ' . $entry->getProfileName() . '<br>';
     echo 'Profil ID: ' . $entry->getProfileID() . '</p>';
 }
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Sobald man sich entschieden hat welches Profil verwendet werden soll, wird
                 <code>setProfileID()</code> mit der Profil ID als Argument aufgerufen. Das begrenzt die
@@ -412,8 +406,7 @@ $profileFeed = $healthService->getHealthProfileFeed();
 
 $profileID = $healthService->getProfileID();
 echo '<p><b>Abgefragte Profil ID</b>: ' . $profileID . '</p>';
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
     <sect2 id="zend.gdata.health.notice">
@@ -463,8 +456,7 @@ $responseEntry = $healthService->sendHealthNotice($subject,
                                                   $body,
                                                   "html",
                                                   $ccr);
-]]>
-          </programlisting>
+]]></programlisting>
       </sect3>
     </sect2>
 </sect1>

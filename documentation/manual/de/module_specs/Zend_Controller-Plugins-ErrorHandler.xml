@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -102,8 +102,7 @@
         $errors = $this->_getParam('error_handler');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Sobald das Fehler Objekt vorhanden ist, kann man es über den Typ mit <code>$errors->type</code>
@@ -160,8 +159,7 @@ class ErrorController extends Zend_Controller_Action
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Letztendlich kann die Anwendung die den Fehler Handler verursacht hat, empfangen werden indem die
@@ -201,8 +199,7 @@ public function errorAction()
                 break;
         }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.buffer">
@@ -222,8 +219,7 @@ public function errorAction()
 
         <programlisting role="php"><![CDATA[
 $this->getResponse()->clearBody();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
     <sect4 id="zend.controller.plugins.standard.errorhandler.examples">
@@ -234,8 +230,7 @@ $this->getResponse()->clearBody();
             <programlisting role="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
@@ -247,8 +242,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'controller' => 'static',
     'action'     => 'error'
 )));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
@@ -261,8 +255,7 @@ $plugin->setErrorHandlerModule('mystuff')
 
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin($plugin);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -308,8 +301,7 @@ EOH;
         $this->view->content = $content;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 </sect3>
 <!--

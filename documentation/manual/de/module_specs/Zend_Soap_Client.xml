@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -147,8 +147,7 @@ $client = new Zend_Soap_Client("some.wsdl",
 // Anfragen komprimieren durch Verwendung der Deflate Komprimierung
 $client = new Zend_Soap_Client("some.wsdl",
   array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
-]]>
-                        </programlisting>
+]]></programlisting>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -217,8 +216,7 @@ $result1 = $client->method1(10);
 
 // $result2 ist ein Float
 $result2 = $client->method2(22, 'irgendein String');
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 </sect1>

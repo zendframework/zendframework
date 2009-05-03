@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Zend_Cache Frontends</title>
 
     <sect2 id="zend.cache.frontends.core">
-        <title><classname>Zend_Cache_Core</classname></title>
+        <title>Zend_Cache_Core</title>
         <sect3 id="zend.cache.frontends.core.introduction">
             <title>Einführung</title>
             <para>
@@ -151,8 +151,7 @@ if (!($data = $cache->load($id))) {
 }
 
 // [...] Irgendwas mit $data machen (ausgeben, verarbeiten, usw.)
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Wenn mehrere Blöcke von Daten oder Daten Instanzen gecached werden sollen, ist die
                 Idee dahinter die gleiche:
@@ -192,8 +191,7 @@ if (!($data = $cache->load($id2))) {
 
 }
 echo($data);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn spezielle Werte gecached werden sollen (boolean mit der "automatic_serialization" Option)
@@ -236,15 +234,14 @@ if (!($cache->test($id))) {
 }
 
 // Wir machen irgendetwas mit $data
-]]>
-            </programlisting>
+]]></programlisting>
 
        </sect3>
 
     </sect2>
 
     <sect2 id="zend.cache.frontends.output">
-        <title><classname>Zend_Cache_Frontend_Output</classname></title>
+        <title>Zend_Cache_Frontend_Output</title>
         <sect3 id="zend.cache.frontends.output.introduction">
             <title>Einführung</title>
             <para>
@@ -279,8 +276,7 @@ if( ! ($cache->start('mypage'))) {
 }
 
 echo 'Hier wird nie gecached ('.time().').';
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Die Verwendung dieser Form ist ziemlich einfach, um Ausgabe caching in einem bereits bestehenden
                 Projekt, mit nur wenig oder gar keinen Codeänderungen, zu erhalten.
@@ -289,7 +285,7 @@ echo 'Hier wird nie gecached ('.time().').';
     </sect2>
 
     <sect2 id="zend.cache.frontends.function">
-        <title><classname>Zend_Cache_Frontend_Function</classname></title>
+        <title>Zend_Cache_Frontend_Function</title>
         <sect3 id="zend.cache.frontends.function.introduction">
             <title>Einführung</title>
             <para>
@@ -354,8 +350,7 @@ $cache->call('veryExpensiveFunc', $params);
 // Für das Aufrufen von veryExpensiveFunc(1, 'foo', 'bar') mit Caching kann,
 // z.B. $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar')) benutzt
 // werden
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 <classname>Zend_Cache_Frontend_Function</classname> ist elegant genug, um beides zu cachen, den
                 Rückgabewert der Funktion und deren interne Ausgabe.
@@ -370,7 +365,7 @@ $cache->call('veryExpensiveFunc', $params);
     </sect2>
 
     <sect2 id="zend.cache.frontends.class">
-        <title><classname>Zend_Cache_Frontend_Class</classname></title>
+        <title>Zend_Cache_Frontend_Class</title>
         <sect3 id="zend.cache.frontends.class.introduction">
             <title>Einführung</title>
             <para>
@@ -455,8 +450,7 @@ $frontendOptions = array(
 
 // Der gecachte Aufruf
 $result = $cache->foobar('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Um klassische Methodenaufrufe zu cachen :
             </para>
@@ -481,13 +475,12 @@ $frontendOptions = array(
 
 // Der gecachte Aufruf
 $res = $cache->foobar2('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.cache.frontends.file">
-        <title><classname>Zend_Cache_Frontend_File</classname></title>
+        <title>Zend_Cache_Frontend_File</title>
         <sect3 id="zend.cache.frontends.file.introduction">
             <title>Einführung</title>
             <para>
@@ -571,7 +564,7 @@ $res = $cache->foobar2('1', '2');
     </sect2>
 
     <sect2 id="zend.cache.frontends.page">
-        <title><classname>Zend_Cache_Frontend_Page</classname></title>
+        <title>Zend_Cache_Frontend_Page</title>
         <sect3 id="zend.cache.frontends.page.introduction">
             <title>Einführung</title>
             <para>
@@ -766,8 +759,7 @@ $cache->start();
 // und das Skript stoppt hier
 
 // Rest der Seite ...
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Ein etwas komplexeres Beispiel, welches einen Weg zeigt, um ein zentralisiertes
                 Cache Management in einer Bootstrap Datei zu erhalten (um es z.B. mit <classname>Zend_Controller</classname>
@@ -823,8 +815,7 @@ $cache->start();
 
 // [...] das Ende der Bootstrap Datei
 // diese Zeilen werden nicht ausgeführt, wenn der Cache ausgegeben wurde
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
         <sect3 id="zend.cache.frontends.page.cancel">
             <title>Die spezielle cancel Methode</title>
@@ -846,8 +837,7 @@ if ($someTest) {
 }
 
 // [...]
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
     </sect2>

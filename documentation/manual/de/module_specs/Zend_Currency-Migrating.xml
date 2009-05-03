@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.migration">
 
@@ -26,8 +26,7 @@
 
         <programlisting role="php"><![CDATA[
 $currency = new Zend_Currency($currency, $locale);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <code>setFormat()</code> Methode nimmt jetzt ein Array von Optionen. Diese Optionen
@@ -90,8 +89,7 @@ $currency = new Zend_Currency($currency, $locale);
 
         <programlisting role="php"><![CDATA[
 $currency->setFormat(array $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <code>toCurrency()</code> Methode unterstützt die optionalen 'script' und 'locale' Parameter
@@ -101,8 +99,7 @@ $currency->setFormat(array $options);
 
         <programlisting role="php"><![CDATA[
 $currency->toCurrency($value, array $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die Methoden <code>getSymbol()</code>, <code>getShortName()</code>, <code>getName()</code>,

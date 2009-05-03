@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.advanced">
     <title>Advanced usage</title>
@@ -50,8 +50,7 @@
         <para>
             <programlisting role="php"><![CDATA[
 return array_slice($this->_array, $offset, $itemCountPerPage);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -73,8 +72,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         <para>
             <programlisting role="php"><![CDATA[
 public function getPages(Zend_Paginator $paginator, $pageRange = null);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -91,8 +89,7 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
         <para>
             <programlisting role="php"><![CDATA[
 return $paginator->getPagesInRange($lowerBound, $upperBound);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -111,8 +108,7 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
 $prefix = 'My_Paginator_ScrollingStyle';
 $path   = 'My/Paginator/ScrollingStyle/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -133,8 +129,7 @@ $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
 $bO = array('cache_dir'=>'/tmp');
 $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
 Zend_Paginator::setCache($cache);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -151,8 +146,7 @@ Zend_Paginator::setCache($cache);
 // ... später im Skript
 $paginator->setCacheEnable(false);
 // Der Cache ist nun ausgeschaltet
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -177,8 +171,7 @@ $paginator->clearPageItemCache(3);
 
 // Alle Cachedaten löschen
 $paginator->clearPageItemCache();
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -195,8 +188,7 @@ $items = $paginator->getCurrentItems();
 
 // Alle Cachedaten werden ausgegeben :
 $paginator->setItemCountPerPage(2);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -216,8 +208,7 @@ $otherItems = $paginator->getItemsPerPage(4);
 
 // Die gecachten Teile als zwei-dimensionales Array sehen
 var_dump($paginator->getPageItemCache());
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 </sect1>

@@ -145,8 +145,7 @@ library
     PEAR/
     PHPUnit/
     Zend/
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das erlaubt es und unseren eigenen Blbiliothekscode hinzuzufügen wenn das
@@ -175,8 +174,7 @@ $paths = array(
     '.'
 );
 set_include_path(implode(PATH_SEPARATOR, $paths));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
     </sect2>

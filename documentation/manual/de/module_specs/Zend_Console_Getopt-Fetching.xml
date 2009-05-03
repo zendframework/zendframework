@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Holen von Optionen und Argumenten</title>
@@ -45,8 +45,7 @@ try {
     echo $e->getUsageMessage();
     exit;
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Die Fälle in denen die Analyse eine Ausnahme werden sind unter anderem:
@@ -88,8 +87,7 @@ try {
 $opts = new Zend_Console_Getopt('abp:');
 $b = $opts->getOption('b');
 $p_parameter = $opts->getOption('p');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Alternativ kann die magische <code>__get()</code> Funktion verwendet
@@ -105,8 +103,7 @@ if (isset($opts->b)) {
     echo "Die Option b ist da.\n";
 }
 $p_parameter = $opts->p; // Null wenn nicht gesetzt
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             Wenn die Optionen mit Aliasen definiert wurden, kann jeder der Aliase für
@@ -172,8 +169,7 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setArguments(array('-p', 'p_parameter', 'filename'));
 $args = $opts->getRemainingArgs(); // Rückgabe array('filename')
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <para>
             <classname>Zend_Console_Getopt</classname> unterstützt die GNU Konvention das ein Argument welches auf einem

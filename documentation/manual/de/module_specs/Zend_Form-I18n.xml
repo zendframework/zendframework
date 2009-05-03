@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.i18n">
     <title>Internationalisierung von <classname>Zend_Form</classname></title>
@@ -54,8 +54,7 @@
                 <programlisting role="php"><![CDATA[
 // verwende den 'Zend_Translate' Schlüssel; $translate ist ein Zend_Translate Objekt:
 Zend_Registry::set('Zend_Translate', $translate);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das wird von <classname>Zend_Form</classname>, <classname>Zend_Validate</classname>, und
@@ -72,8 +71,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                 <programlisting role="php"><![CDATA[
 // Allen Prüfklassen mitteilen, dass ein spezieller Übersetzungsadapter verwendet werden soll:
 Zend_Validate_Abstract::setDefaultTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -88,8 +86,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
 // verwendet werden soll, sowie, dass der Adapter für die Übersetzung von
 // Fehlermeldungen verwendet werden soll:
 Zend_Form::setDefaultTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -109,8 +106,7 @@ $form->setTranslator($translate);
 // verwendet werden soll, sie wird auch für die Übersetzung von allen
 // Fehlermeldungen für dieses Elemente verwendet:
 $element->setTranslator($translate);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
     </sect2>

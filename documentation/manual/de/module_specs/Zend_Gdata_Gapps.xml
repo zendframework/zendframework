@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -55,8 +55,7 @@
             <programlisting role="php"><![CDATA[
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -72,8 +71,7 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
             <programlisting role="php"><![CDATA[
 $domain = "example.com";
 $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn eine Serviceklassen Factorymethode verwendet wird um eine Abfrage zu erstellen, setzt
@@ -85,8 +83,7 @@ $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 $query = $gdata->newUserQuery($arg);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -111,8 +108,7 @@ $query = $gdata->newUserQuery($arg);
 
             <programlisting role="php"><![CDATA[
 $gdata->createUser('foo', 'Random', 'User', '••••••••');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Benutzer können durch das instanzieren eines  UserEntry erstellt werden, indem ein Benutzername,
@@ -129,8 +125,7 @@ $user->name = $gdata->newName();
 $user->name->givenName = 'Irgendwer';
 $user->name->familyName = 'Benutzer';
 $user = $gdata->insertUser($user);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das Passwort den Benutzers sollte normalerweise als Klartext angegeben werden. Operional kann
@@ -161,8 +156,7 @@ echo 'Muss das Passwort ändern: ' .
      ($user->login->changePasswordAtNextLogin ? 'Ja' : 'Nein') . "\n";
 echo 'Hat den Regeln zugestimmt: ' .
      ($user->login->agreedToTerms ? 'Ja' : 'Nein') . "\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Benutzer kann man auch erhalten indem eine Instanz von <classname>Zend_Gdata_Gapps_UserQuery</classname> erstellt wird,
@@ -183,8 +177,7 @@ echo 'Muss das Passwort ändern: ' .
      ($user->login->changePasswordAtNextLogin ? 'Ja' : 'Nein') . "\n";
 echo 'Hat den Regeln zugestimmt: ' .
      ($user->login->agreedToTerms ? 'Ja' : 'Nein') . "\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn der spezifizierte Benutzer nicht gefunden werden kann wird eine ServiceException mit einem
@@ -209,8 +202,7 @@ foreach ($feed as $user) {
     echo "  * " . $user->login->username . ' (' . $user->name->givenName .
         ' ' . $user->name->familyName . ")\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das wird ein <classname>Zend_Gdata_Gapps_UserFeed</classname> Objekt erstellen welches jeden Benutzer dieser Domain
@@ -231,8 +223,7 @@ foreach ($feed as $user) {
     echo "  * " . $user->login->username . ' (' . $user->name->givenName .
         ' ' . $user->name->familyName . ")\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -251,8 +242,7 @@ $user = $gdata->retrieveUser('foo');
 $user->name->givenName = 'Foo';
 $user->name->familyName = 'Bar';
 $user = $user->save();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <sect4 id="zend.gdata.gapps.users.updating.resettingPassword">
                 <title>Ein Benutzerpasswort resetieren</title>
@@ -266,8 +256,7 @@ $user = $user->save();
 $user = $gdata->retrieveUser('foo');
 $user->login->password = '••••••••';
 $user = $user->save();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Es ist zu beachten das es nicht möglich ist ein Passwort auf diesem Weg wiederherzustellen da
@@ -290,8 +279,7 @@ $user = $user->save();
 $user = $gdata->retrieveUser('foo');
 $user->login->changePasswordAtNextLogin = true;
 $user = $user->save();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Genauso kann das rückgängig gemacht werden indem die
@@ -313,8 +301,7 @@ $user = $user->save();
                 <programlisting role="php"><![CDATA[
 $gdata->suspendUser('foo');
 $gdata->restoreUser('foo');
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Alternativ kann die Eigenschaft <code>login->suspended</code> des Benutzerzugangs auf
@@ -325,8 +312,7 @@ $gdata->restoreUser('foo');
 $user = $gdata->retrieveUser('foo');
 $user->login->suspended = true;
 $user = $user->save();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Um den Benutzerzugang wiederherzustellen muß die <code>login->suspended</code> Eigenschaft
@@ -347,8 +333,7 @@ $user = $user->save();
 $user = $gdata->retrieveUser('foo');
 $user->login->admin = true;
 $user = $user->save();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Und wie erwartet, entfernt das Setzen der Eigenschaft <code>login->admin</code>, des
@@ -370,8 +355,7 @@ $user = $user->save();
             <programlisting role="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->delete();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn man keinen Zugriff auf ein UserEntry Objekt für einen Zugang hat, kann die einfache
@@ -380,8 +364,7 @@ $user->delete();
 
             <programlisting role="php"><![CDATA[
 $gdata->deleteUser('foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -410,8 +393,7 @@ $gdata->deleteUser('foo');
 
             <programlisting role="php"><![CDATA[
 $gdata->createNickname('foo', 'bar');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Spitznamen können auch durch das instanzieren eines NichnameEntry erstellt werden, wobei der
@@ -425,8 +407,7 @@ $nickname = $gdata->newNicknameEntry();
 $nickname->login = $gdata->newLogin('foo');
 $nickname->nickname = $gdata->newNickname('bar');
 $nickname = $gdata->insertNickname($nickname);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -443,8 +424,7 @@ $nickname = $gdata->retrieveNickname('bar');
 
 echo 'Spitzname: ' . $nickname->nickname->name . "\n";
 echo 'Eigentümer: ' . $nickname->login->username . "\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Individuelle Spitznamen können durch Erstellung einer <classname>Zend_Gdata_Gapps_NicknameQuery</classname> Instanz
@@ -459,8 +439,7 @@ $nickname = $gdata->getNicknameEntry($query);
 
 echo 'Spitzname: ' . $nickname->nickname->name . "\n";
 echo 'Eigentümer: ' . $nickname->login->username . "\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Genau wie bei den Benutzern wird eine ServiceException geworfen wenn kein entsprechender
@@ -484,8 +463,7 @@ $feed = $gdata->retrieveNicknames('foo');
 foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das erzeugt ein <classname>Zend_Gdata_Gapps_NicknameFeed</classname> Objekt welches jeden mit dem spezifizierten
@@ -506,8 +484,7 @@ $feed = $gdata->getNicknameFeed($query);
 foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -525,8 +502,7 @@ foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . ' => ' .
         $nickname->login->username . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das wird ein <classname>Zend_Gdata_Gapps_NicknameFeed</classname> Objekt erstellen welches jeden Spitznamen in der
@@ -545,8 +521,7 @@ foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . ' => ' .
         $nickname->login->username . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -561,8 +536,7 @@ foreach ($feed as $nickname) {
             <programlisting role="php"><![CDATA[
 $nickname = $gdata->retrieveNickname('bar');
 $nickname->delete();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Für Spitznamen zu denen man keinen NicknameEntry hält, kann die bequeme
@@ -571,8 +545,7 @@ $nickname->delete();
 
             <programlisting role="php"><![CDATA[
 $gdata->deleteNickname('bar');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -601,8 +574,7 @@ $gdata->deleteNickname('bar');
 
             <programlisting role="php"><![CDATA[
 $gdata->createEmailList('friends');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Email Listen können auch durch die Instanzierung von EmailListEntry erstellt werden, indem
@@ -614,8 +586,7 @@ $gdata->createEmailList('friends');
 $list = $gdata->newEmailListEntry();
 $list->emailList = $gdata->newEmailList('friends');
 $list = $gdata->insertEmailList($list);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -633,8 +604,7 @@ $feed = $gdata->retrieveEmailLists('baz@somewhere.com');
 foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das erstellt ein <classname>Zend_Gdata_Gapps_EmailListFeed</classname> Objekt welches jede Email Liste enthält die
@@ -655,8 +625,7 @@ $feed = $gdata->getEmailListFeed($query);
 foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -674,8 +643,7 @@ $feed = $gdata->retrieveAllEmailLists();
 foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das erzeugt ein <classname>Zend_Gdata_Gapps_EmailListFeed</classname> Objekt welches jede Email Liste der Domain
@@ -693,8 +661,7 @@ $feed = $gdata->getEmailListFeed();
 foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -707,8 +674,7 @@ foreach ($feed as $list) {
 
             <programlisting role="php"><![CDATA[
 $gdata->deleteEmailList('friends');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -733,8 +699,7 @@ $gdata->deleteEmailList('friends');
 
             <programlisting role="php"><![CDATA[
 $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -752,8 +717,7 @@ $feed = $gdata->retrieveAllRecipients('friends');
 foreach ($feed as $recipient) {
     echo '  * ' . $recipient->who->email . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Alternativ kann ein neuer EmailListRecipientQuery erstellt werdne, dessen emailListName
@@ -769,8 +733,7 @@ $feed = $gdata->getEmailListRecipientFeed($query);
 foreach ($feed as $recipient) {
     echo '  * ' . $recipient->who->email . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das Erstellt ein <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname> Objekt welche jeden Empfänger für die
@@ -790,8 +753,7 @@ foreach ($feed as $recipient) {
 
             <programlisting role="php"><![CDATA[
 $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -844,8 +806,7 @@ function retrieveUser ($username) {
     }
     return $user;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

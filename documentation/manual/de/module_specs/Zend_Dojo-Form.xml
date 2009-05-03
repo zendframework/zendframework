@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.form" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Formular Elemente und Dekoratore für Dojo</title>
@@ -81,8 +81,7 @@ class My_Form_Custom extends Zend_Form
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>

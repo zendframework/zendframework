@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>
@@ -40,8 +40,7 @@
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.creating.volumesnapshot">
@@ -58,8 +57,7 @@ $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.creating.snapshot">
@@ -77,8 +75,7 @@ $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createSnapshot('volumeId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -106,8 +103,7 @@ $return = $ec2_ebs->createSnapshot('volumeId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeVolume('volumeId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.describing.attachedvolumes">
@@ -126,8 +122,7 @@ $return = $ec2_ebs->describeVolume('volumeId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeAttachedVolumes('instanceId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.describing.snapshot">
@@ -149,8 +144,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeSnapshot('volumeId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -173,8 +167,7 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.attachdetach.detach">
@@ -194,8 +187,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->detachVolume('volumeId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
         <note>
             <title>Erzwingene Entfernung</title>
@@ -227,8 +219,7 @@ $return = $ec2_ebs->detachVolume('volumeId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteVolume('volumeId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.service.amazon.ec2.ebs.deleting.snapshot">
@@ -243,8 +234,7 @@ $return = $ec2_ebs->deleteVolume('volumeId');
             <programlisting role="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteSnapshot('snapshotId');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

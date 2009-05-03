@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -20,8 +20,7 @@ echo $pdf->properties['Author'] . "\n";
 
 $pdf->properties['Title'] = 'Neuer Titel.';
 $pdf->save($pdfPath);
-]]>
-            </programlisting>
+]]></programlisting>
 
     </para>
     <para>
@@ -195,8 +194,7 @@ $title = $titleNode->nodeValue;
 $titleNode->nodeValue = 'New title';
 $pdf->setMetadata($metadataDOM->saveXML());
 $pdf->save($pdfPath);
-]]>
-            </programlisting>
+]]></programlisting>
     </para>
 
     <para>

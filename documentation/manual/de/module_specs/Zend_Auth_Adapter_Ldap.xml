@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
 
@@ -69,8 +69,7 @@ if ($log_path) {
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
             Natürlich ist der Logging Code optional, aber es wird dringend empfohlen einen Logger
             zu verwenden. <classname>Zend_Auth_Adapter_Ldap</classname> zeichnet fast jedes Bisschen an
             Information in <code>$messages</code> auf das irgendwer benötigen können (mehr anbei),

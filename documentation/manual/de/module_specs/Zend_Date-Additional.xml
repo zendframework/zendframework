@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
 
@@ -78,8 +78,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 } else {
     print "Zeichenkette $date ist KEIN Datum";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -113,8 +112,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
             <programlisting role="php"><![CDATA[
 // Ausgabe der kompletten Liste aller verfügbaren Städte
 print_r (Zend_Date_Cities::getCityList());
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -181,8 +179,7 @@ print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
 
 // Selbstdefinition einer Ortsangabe
 $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -213,8 +210,7 @@ $info = $date->getSunInfo($city);
 foreach ($info as $sun) {
     print "\n" . $sun->get(Zend_Date::ISO_8601);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -275,8 +271,7 @@ print $date->getTimezone();
 
 // Ausgabe des geänderten Datumsobjektes
 print $date->getIso();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -324,8 +319,7 @@ $lastdate->setTimezone();
 
 // Ausgabe des Datumsobjektes
 print $lastdate->getIso();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

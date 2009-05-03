@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
 
@@ -48,8 +48,7 @@
     <p>Es gibt keine Bücher zum Anzeigen.</p>
 
 <?php endif; ?>
-]]>
-    </programlisting>
+]]></programlisting>
 
     <sect2 id="zend.view.scripts.escaping">
 
@@ -73,8 +72,7 @@ echo $this->variable;
 
 // gute View Skript Praxis:
 echo $this->escape($this->variable);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Standardmäßig verwendet escape() die PHP htmlspecialchars() Funktion für die Maskierung.
@@ -101,8 +99,7 @@ $view->setEscape(array($obj, 'methodName'));
 
 // und dann erstelle die Ausgabe
 echo $view->render(...);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Diese Callback Funktion oder Methode sollte den zu maskierenden Wert als ersten
@@ -152,8 +149,7 @@ if ($this->books) {
     $tpl->setFile("nobooks", "nobooks.tpl")
     $tpl->pparse("output", "nobooks");
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Dies wären die zugehörigen Template Dateien:
@@ -177,8 +173,7 @@ if ($this->books) {
 
 <!-- nobooks.tpl -->
 <p>Es gibt keine Bücher zum Anzeigen.</p>
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -240,8 +235,7 @@ public function clearVars();
  * Rendern des Templates mit dem Namen $name
  */
 public function render($name);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Durch Verwendung dieses Interfaces ist es relativ einfach, das Templatesystem eines
@@ -421,8 +415,7 @@ class Zend_View_Smarty implements Zend_View_Interface
         return $this->_smarty->fetch($name);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 In diesem Beispiel kannst du die <classname>Zend_View_Smarty</classname> anstelle von

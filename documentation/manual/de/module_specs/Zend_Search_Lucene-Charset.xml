@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Zeichensätze</title>
@@ -75,8 +75,7 @@
             <programlisting role="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <warning>
@@ -111,8 +110,7 @@ if (@preg_match('/\pL/u', 'a') == 1) {
 } else {
     echo "PCRE Unicode Unterstützung ist ausgeschaltet.\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -150,8 +148,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('title',
 
 // Titel Feld für das Empfangen (nicht indiziert, gespeichert)
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <programlisting role="php"><![CDATA[
 // Suche
@@ -165,8 +162,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 ...
 
 $hits = $index->find(strtolower($query));
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 </sect1>

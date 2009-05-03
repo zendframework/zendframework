@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.digest">
 
@@ -113,8 +113,7 @@ Array
     [username] => irgendeinBenutzer
 )
 */
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

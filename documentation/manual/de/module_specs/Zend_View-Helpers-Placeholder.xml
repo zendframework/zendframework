@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Platzhalter (PlaceHolder) Helfer</title>
@@ -27,8 +27,7 @@
     echo $this->placeholder('foo');
     // Ausgabe "Ein Text für später"
 ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.placeholder.aggregation">
@@ -86,8 +85,7 @@
         <programlisting role="php"><![CDATA[
 <!-- Erstes View Skript -->
 <?php $this->placeholder('foo')->exchangeArray($this->data) ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 <!-- Späteres View Skript -->
@@ -102,8 +100,7 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
     echo $this->placeholder('foo');
     // Ausgabe als unsortierte Liste mit schöner Einrückung
 ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Weil die <code>Placeholder</code> Container Objekte <code>ArrayObject</code> erweitern, können
@@ -120,8 +117,7 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
 $foo = $this->placeholder('foo');
 echo $foo['bar'];
 ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.placeholder.capture">
@@ -179,8 +175,7 @@ foreach ($this->data as $datum): ?>
 <?php $this->placeholder('foo')->captureEnd() ?>
 
 <?php echo $this->placeholder('foo') ?>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 <!-- Erfassung zum Schlüssel -->
@@ -194,8 +189,7 @@ foreach ($this->data as $datum): ?>
 <?php $this->placeholder('foo')->captureEnd() ?>
 
 <?php echo $this->placeholder('foo')->data ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <sect4 id="zend.view.helpers.initial.placeholder.implementations">

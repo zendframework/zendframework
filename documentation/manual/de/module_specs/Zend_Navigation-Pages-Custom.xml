@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.custom">
     <title>Erstellung eigener Seiten Typen</title>
@@ -35,8 +35,7 @@ class My_Simple_Page extends Zend_Navigation_Page
         return 'something-completely-different';
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.navigation.custom.example.properties">
@@ -94,7 +93,6 @@ $page = Zend_Navigation_Page::factory(array(
     'foo'     => 'bar',
     'foo_bar' => 'baz'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect2>

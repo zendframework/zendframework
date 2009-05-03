@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -693,8 +693,7 @@
 $locale = new Zend_Locale('de_AT');
 $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <table id="zend.date.constants.selfdefinedformats.table">
@@ -1148,8 +1147,7 @@ $date = new Zend_Date(1234567890, false, $locale);
 print $date->toString('F j, Y, g:i a');
 
 print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

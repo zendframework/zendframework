@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
@@ -42,8 +42,7 @@ $filter->setVector('myvector');
 
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -102,8 +101,7 @@ $filter->setEnvelopeKey(array(
     '/key/from/encoder/first.pem',
     '/key/from/encoder/second.pem'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -130,8 +128,7 @@ $filter->setEnvelopeKey(array(
     '/key/from/encoder/second.pem'
 ));
 $filter->setPassphrase('mypassphrase');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zum Schluß kann der Inhalt entschlüsselt werden. Unser komplettes Beispiel für den vorher
@@ -154,8 +151,7 @@ $filter->setPassphrase('mypassphrase');
 
 $decrypted = $filter->filter('encoded_text_normally_unreadable');
 print $decrypted;
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 </sect2>
 <!--

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.response">
     <title>Das Response Objekt</title>
@@ -19,8 +19,7 @@
 
         <programlisting role="php"><![CDATA[
 $front->throwExceptions(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um die Ausgabe der Response, inklusiver der gesetzten Header, zu senden, verwendet man
@@ -29,8 +28,7 @@ $front->throwExceptions(true);
 
         <programlisting role="php"><![CDATA[
 $response->sendResponse();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -47,8 +45,7 @@ $response = $front->dispatch();
 // ein bischen mehr verarbeiten, wie z.B. loggen...
 // und dann die Ausgabe senden:
 $response->sendResponse();
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>
@@ -63,8 +60,7 @@ $response->sendResponse();
 $this->getResponse()
     ->setHeader('Content-Type', 'text/html')
     ->appendBody($content);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dadurch werden alle Header in einem Rutsch versendet, genau vor der Anzeige des Inhalts.
@@ -108,8 +104,7 @@ $response = $front->dispatch();
 
 // zum Schluß, gib die Antwort aus
 $response->sendResponse();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Standardmäßig werden Ausnahmennachrichten nicht ausgegeben. Dieses Verhalten kann durch
@@ -131,8 +126,7 @@ $response->sendResponse();
 // oder:
 $front->throwExceptions(true);
 $front->dispatch();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.response.headers">
@@ -272,8 +266,7 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Im obigen Beispiel wird ein Aufruf zu <code>/my/foo</code> den endgültigen Inhalt des Bodys des Antwort
@@ -286,8 +279,7 @@ array(
     'default' => ..., // Body Inhalt von MyController::fooAction()
     'footer'  => ...  // Footer Inhalt
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn das gerendert wird, wird es in der Reihenfolge gerendert in dem die Elements im Array angeordnet

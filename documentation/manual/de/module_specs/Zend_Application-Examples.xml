@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15108 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -13,8 +13,7 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Mit einer entsprechenden Konfigurationsdatei:
@@ -76,8 +75,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $request;
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Beachte in diesem Beispiel den Aufruf von <code>bootstrap()</code>; dieser stellt sicher
@@ -145,8 +143,7 @@ class My_Bootstrap_Resource_View
         return $view;
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Um der Bootstrap zu sagen das sie das verwenden soll, würde man entweder den Klassennamen
@@ -173,8 +170,7 @@ $application = new Zend_Application(
         )
     )
 );
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Ressourcen können andere Ressourcen und Initialisierungen aufrufen indem Sie auf den
@@ -196,8 +192,7 @@ class My_Bootstrap_Resource_Layout
         // ...
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Bei normaler Verwendung würde man die Anwendung instanziieren, sie bootstrappen, und
@@ -208,8 +203,7 @@ class My_Bootstrap_Resource_Layout
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Für ein eigenes Skript müsste man einfach spezifische Ressourcen initialisieren:
@@ -222,8 +216,7 @@ $application->getBootstrap('db');
 $service = new Zend_XmlRpc_Server();
 $service->setClass('Foo');  // Verwende die Datenbank...
 echo $service->handle();
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Statt der Verwendung der <code>bootstrap()</code> Methode um interne Methode oder
@@ -233,6 +226,5 @@ echo $service->handle();
     <programlisting role="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrapDb();
-]]>
-    </programlisting>
+]]></programlisting>
 </sect1>

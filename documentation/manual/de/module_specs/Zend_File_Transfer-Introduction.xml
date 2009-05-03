@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
 
@@ -54,8 +54,7 @@
     <br />
     <input type="submit" value="Upload File" />
 </form>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der Bequemlichkeit halber kann
@@ -78,8 +77,7 @@ if (!$adapter->receive()) {
     $messages = $adapter->getMessages();
     echo implode("\n", $messages);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dieses Codebeispiel demonstriert die einfachste Verwendung von <classname>Zend_File_Transfer</classname>.
@@ -198,8 +196,7 @@ foreach ($files as $file => $info) {
 }
 
 $upload->receive();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>
@@ -275,8 +272,7 @@ $names = $upload->getFileName();
 
 // Gibt den Dateinamen des Formularelements 'foo' zurück
 $names = $upload->getFileName('foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -309,8 +305,7 @@ $size = $upload->getFileSize();
 // Wechsle die SI Schreibweise damit reine Nummern zurückgegeben werden
 $upload->setOption(array('useByteString' => false));
 $size = $upload->getFileSize();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -334,8 +329,7 @@ $hash = $upload->getHash('md5');
 
 // Gibt den Has für das 'foo' Formularelement zurück
 $names = $upload->getHash('crc32', 'foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -362,8 +356,7 @@ $mime = $upload->getMimeType();
 
 // Gibt den Mimetyp des 'foo' Form Elements zurück
 $names = $upload->getMimeType('foo');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -435,8 +428,7 @@ $upload = null;
 while (!$upload['done']) {
     $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
@@ -547,8 +539,7 @@ while (!$upload['done']) {
     print "\nAktueller Fortschritt:".$upload['message'];
     // Tu was zu tun ist
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 

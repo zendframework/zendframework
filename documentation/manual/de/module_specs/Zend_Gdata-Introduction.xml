@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Einführung</title>
@@ -220,8 +220,7 @@ $entry->cell = $cell;
 
 // ... $entry kann dann verwendet werden um eine Aktualisierung
 // an eine Google Tabellenkalkulation zu senden
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Jede Service Klasse im abgeleiteten Baum ist dafür verantwortlich das die richtigen 'Pakete'
@@ -284,8 +283,7 @@ $client = new Zend_Http_Client();
 $client->setConfig( ...options... );
 
 $gdata = new Zend_Gdata($client);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Beginnend mit Zend Framework 1.7, wurde die Unterstützung für die Versionierung des Protkolls
@@ -303,8 +301,7 @@ $client->setConfig( ...options... );
 $gdata = new Zend_Gdata($client);
 $gdata->setMajorProtocolVersion(2);
 $gdata->setMinorProtocolVersion(null);
-]]>
-         </programlisting>
+]]></programlisting>
 
         <para>
             Siehe auch die Sektion über Authentifizierung für Methoden, um ein authentifiziertes
@@ -401,8 +398,7 @@ $gdata->setMinorProtocolVersion(null);
 $query = new Zend_Gdata_Query();
 $query->setMaxResults(10);
 echo $query->getMaxResults();   // gibt 10 zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <classname>Zend_Gdata</classname> Klasse implementiert auch "magische" Getter und Setter Methoden, es kann also der
@@ -413,8 +409,7 @@ echo $query->getMaxResults();   // gibt 10 zurück
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 echo $query->maxResults;        // gibt 10 zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es können alle Parameter mit der <code>resetParameters()</code> Funktion gelöscht werden. Das
@@ -428,8 +423,7 @@ $query->maxResults = 10;
 
 $query->resetParameters();      // löscht alle Parameter
 // ...einen anderen Feed empfangen...
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -448,8 +442,7 @@ $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
 $query->setMaxResults(10);
 $feed = $gdata->getFeed($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Siehe spätere Sektionen für spezielle Funktionen in jeder Helfer Klasse für Google Daten Services.
@@ -479,8 +472,7 @@ function getNextPage($feed) {
         return null;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn man es vorzieht nicht mit Seiten in der eigenen Anwendung zu arbeiten, kann die erste Seite des
@@ -494,8 +486,7 @@ $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
 $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es gilt zu beachten das wenn diese Funktion aufgerufen wird, dies eine sehr lange Zeit benötigen
@@ -527,8 +518,7 @@ foreach ($feed as $entry) {
     // Die definierten Zugriffsmethoden verwenden
     echo 'Inhalt: ' . $entry->getContent()->getText();
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.introduction.updateentry">
@@ -555,8 +545,7 @@ foreach ($feed as $entry) {
     $newEntry = $entry->save();
     echo 'New Title: ' . $newEntry->title->text;
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.gdata.introduction.post">
@@ -596,8 +585,7 @@ $entryResult = $gdata->insertEntry($entry,
         'http://www.blogger.com/feeds/blogID/posts/default');
 
 echo 'Die <id> des resultierenden Eintrages ist: ' . $entryResult->id->text;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um Einträge zu senden, muß ein authentifizierter <classname>Zend_Http_Client</classname> verwendet werden der mit Hilfe der
@@ -632,8 +620,7 @@ foreach ($feed as $feedEntry) {
     // $gdata->delete() löschen
     // $gdata->delete($feedEntry->getEditLink()->href);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um Einträge zu löschen, muß ein authentifizierter <classname>Zend_Http_Client</classname> verwendet werden der mit Hilfe der

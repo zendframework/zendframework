@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -251,8 +251,7 @@ $upload->setValidators(array(
     'Size'  => array('min' => 20, 'max' => 20000),
     'Count' => array('min' => 1, 'max' => 3),
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.file.transfer.validators.usage.exampletwo">
@@ -270,8 +269,7 @@ $upload = new Zend_File_Transfer();
 
 // Setzt die Dateigröße auf 20000 Bytes und limitiert Sie nur auf 'file2'
 $upload->addValidator('Size', false, 20000, 'file2');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -296,8 +294,7 @@ $upload = new Zend_File_Transfer();
 $upload->addValidator('Size', false, 20000)
        ->addValidator('Count', false, 2)
        ->addValidator('Filessize', false, 25000);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -333,8 +330,7 @@ $upload->addValidator('Size', false, 20000)
 if ($upload->isValid()) {
     print "Prüfung fehlgeschlagen";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -413,8 +409,7 @@ $upload->addValidator('Count', false, 2);
 
 // Die Anzahl der Dateien auf maximal 5 und mindestens 1 Datei limitieren
 $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -461,8 +456,7 @@ $upload->addValidator('Hash', false, '3b3652f');
 
 // Begrenzt diese Prüfung auf zwei unterschiedliche Hashes
 $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -521,8 +515,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe'));
 $upload->addValidator('ExcludeExtension',
                       false,
                       array('php', 'exe', 'case' => true));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
         <note>
@@ -575,8 +568,7 @@ $upload->setValidator('ExcludeMimeType', array('image/gif',
 
 // Verweigert die MIME Typ Gruppe image für alle Dateien
 $upload->setValidator('ExcludeMimeType', 'image');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -633,8 +625,7 @@ $upload->addValidator('Exists', false, '\temp');
 $upload->addValidator('Exists',
                       false,
                       array('\home\images', '\home\uploads'));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
         <note>
@@ -701,8 +692,7 @@ $upload->addValidator('Extension', false, array('mo', 'png', 'case' => true));
 if (!$upload->isValid('C:\temp\myfile.MO')) {
     print 'Nicht gültig da MO und mo Kleinschreibungsmäßig nicht passen';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -792,8 +782,7 @@ $upload->addValidator('FilesSize',
                       array('min' => '10kB',
                             'max' => '4MB',
                             'bytestring' => false));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -874,8 +863,7 @@ $upload->addValidator('ImageSize', false,
 
 // Resetiert die Breite der Prüfung
 $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -904,8 +892,7 @@ $upload->addValidator('IsCompressed', false, array('application/zip'));
 // Limitiert diese Prüfung auf Zip Dateien,
 // und verwendet eine einfachere Schreibweise
 $upload->addValidator('IsCompressed', false, 'zip');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -943,8 +930,7 @@ $upload->addValidator('IsImage', false, array('application/gif'));
 // Limitiert diese Prüfung auf Jpeg Dateien,
 // verwendet eine einfachere Schreibweise
 $upload->addValidator('IsImage', false, 'jpeg');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1009,8 +995,7 @@ $upload->addValidator('Hash',
                       false,
                       array('315b3cd8273d44912a7',
                             'algorithm' => 'md5'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1059,8 +1044,7 @@ $upload->addValidator('Md5',
                       false,
                       array('3b3652f336522365223',
                             'eb3365f3365ddc65365'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -1130,8 +1114,7 @@ $upload->addValidator('MimeType',
                       false,
                       array('image',
                             'magicfile' => '/path/to/magicfile.mgx'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1203,8 +1186,7 @@ $upload->addValidator('NotExists',
                       array('\home\images',
                             '\home\uploads')
                      );
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
         <note>
@@ -1251,8 +1233,7 @@ $upload->addValidator('Sha1', false, '3b3652f336522365223');
 $upload->addValidator('Sha1',
                       false, array('3b3652f336522365223',
                                    'eb3365f3365ddc65365'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -1323,8 +1304,7 @@ $upload->addValidator('Size',
                       array('min' => '10kB',
                             'max' => '4MB',
                             'bytestring' => false));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -1369,8 +1349,7 @@ $upload->addValidator('WordCount', false, 2000);
 // Begrenzt die Anzahl der Wörter in Dateien auf maximal 5000
 // und mindestens 1000 Wörter
 $upload->addValidator('WordCount', false, array('min' => 1000, 'max' => 5000));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
     </sect2>

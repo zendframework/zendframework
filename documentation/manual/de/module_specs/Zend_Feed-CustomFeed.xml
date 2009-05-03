@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.custom-feed">
     <title>Eigene Klassen für Feeds und Einträge</title>
@@ -73,8 +73,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Um diese Klasse zu verwenden, musst du sie nur direkt instanziieren und die
             <code>myUpdated</code> Eigenschaft setzen.
@@ -87,8 +86,7 @@ $entry->myUpdated = '2005-04-19T15:30';
 $entry->myUpdated();
 // Eigenschaften-Stil Aufruf wurd von der __get Methode gehandhabt
 $entry->myUpdated;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

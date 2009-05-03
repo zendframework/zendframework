@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
     <title>Zusätzliche Kopfzeilen</title>
@@ -16,8 +16,7 @@ $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MeineCooleAnwendung');
 $mail->addHeader('X-greetingsTo', 'Mom', true); // mehrer Werte
 $mail->addHeader('X-greetingsTo', 'Dad', true);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

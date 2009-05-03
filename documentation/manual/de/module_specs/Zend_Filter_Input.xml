@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -109,8 +109,7 @@ $filters = array(
 $validators = array(
     'account' => 'Alpha'
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Jeder Schlüssel im obigen <code>$filters</code> Array ist der Name einer Regel die auf einen Filter
@@ -130,8 +129,7 @@ $validators = array(
 $validators = array(
     'month'   => 'Digits',
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -144,8 +142,7 @@ $digits = new Zend_Validate_Digits();
 $validators = array(
     'month'   => $digits
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>
@@ -164,8 +161,7 @@ $validators = array(
         array('Between', 1, 12)  // String mit Konstruktor Argumenten
     )
 );
-]]>
-                    </programlisting>
+]]></programlisting>
                 </para>
             </listitem>
         </itemizedlist>
@@ -190,8 +186,7 @@ $filters = array(
     '*'     => 'StringTrim',
     'month' => 'Digits'
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -207,8 +202,7 @@ $filters = array(
 
         <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann Eingabedaten als drittes Argument im Konstruktor spezifizieren. Die Datenstruktur ist ein
@@ -221,8 +215,7 @@ $input = new Zend_Filter_Input($filters, $validators);
 $data = $_GET;
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kann die <code>setData()</code> Methode verwendet werden, indem ein assoziatives Array von
@@ -232,8 +225,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data);
         <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators);
 $input->setData($newData);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <code>setData()</code> Methode definiert Daten nocheinmal, in einem existierenden Zend_Filter_Input
@@ -267,8 +259,7 @@ $input->setData($newData);
 if ($input->isValid()) {
   echo "OK\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Diese Methode akzeptiert ein optionales String Argument, das ein individuelles Feld benennt.
@@ -280,8 +271,7 @@ if ($input->isValid()) {
 if ($input->isValid('month')) {
   echo "Feld 'month' ist OK\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -331,8 +321,7 @@ if ($input->hasMissing()) {
 if ($input->hasUnknown()) {
   $unknownFields = $input->getUnknown();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das Ergebnis der <code>getMessages()</code> Methode ist ein assoziatives Array, das die Regelnamen
@@ -372,8 +361,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Das Ergebnis der <code>getUnknown()</code> Methode ist ein assoziatives Array, in dem die Feldnamen
@@ -397,8 +385,7 @@ $input->setOptions($options);
 $m = $input->month;                 // Ausgabe vom magischen Accessor kommentieren
 $m = $input->getEscaped('month');   // Ausgabe kommentieren
 $m = $input->getUnescaped('month'); // nicht kommentieren
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Standardmäßig, wenn ein Wert empfangen wird, wird er mit Zend_Filter_HtmlEntities gefiltert. Das ist
@@ -423,8 +410,7 @@ $m = $input->getUnescaped('month'); // nicht kommentieren
             <programlisting role="php"><![CDATA[
 $options = array('escapeFilter' => 'StringTrim');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Alternativ kann die <code>setDefaultEscapeFilter()</code> Methode verwendet werden:
@@ -433,8 +419,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
             <programlisting role="php"><![CDATA[
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Bei jeder Verwendung, kann der Kommentarfilter als String Basisname der Filterklasse, oder als
@@ -496,8 +481,7 @@ $filters = array(
         'fields' => 'mo' // Namen als String Index ['fields'] filtern
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Im obigen Beispiel wendet die Filterregel den 'digits' Filter am Eingabefeld, das 'mo' heißt, an.
@@ -532,8 +516,7 @@ $validators = array(
 //  Inkludiert die hypotetische Klasse Zend_Validate_StringEquals,
 // übergibt dieser ein Array Argument das den Wert der beiden Eingabe
 // Datenfelder enthält die 'password1' und 'password2' heißen.
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn die Prüfung dieser Regel fehlschlägt wird der Schlüssel der Regel (<code>'password'</code>)
@@ -565,8 +548,7 @@ $validators = array(
         'presence' => 'required'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Der Standardwert dieses Metakommandos ist 'optional'.
@@ -609,8 +591,7 @@ $data = array();
 
 $input = new Zend_Filter_Input(null, $validators, $data);
 echo $input->month; // gibt 1 aus
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn eine Regel das <code>FIELDS</code> Metakommando verwendet um ein Array mit mehrfachen Feldern
@@ -656,8 +637,7 @@ $validators = array(
         'allowEmpty' => true
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Der Standardwert dieses Metakommandos ist <code>false</code>.
@@ -683,8 +663,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -720,8 +699,7 @@ $validators = array(
     )
 );
 $input = new Zend_Filter_Input(null, $validators);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Der Standardwert dieses Metakommandos ist <code>false</code>.
@@ -750,8 +728,7 @@ $validators = array(
     'month' => $chain
 );
 $input = new Zend_Filter_Input(null, $validators);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -783,8 +760,7 @@ $validators = array(
         'messages' => 'Ein Monat darf nur aus Ziffern bestehen'
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn mehrere Prüfer vorhanden sind für die eine Fehlermeldung gesetzt werden soll, sollte ein
@@ -811,8 +787,7 @@ $validators = array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn einer der Prüfer mehrere Fehlermeldungen besitzt, werden diese durch Nachrichten Schlüssel
@@ -839,8 +814,7 @@ $validators = array(
         )
     )
 );
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Es sollte für jede Prüfklasse in die Dokumentation gesehen werden, um zu wissen ob diese mehrere
@@ -875,8 +849,7 @@ $validators = array(
 );
 
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die 'fields', 'messages', und 'default' Metakommandos können nicht mit dieser Technik gesetzt werden.
@@ -907,8 +880,7 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $options = array('filterNamespace' => 'My_Namespace_Filter',
                  'validatorNamespace' => 'My_Namespace_Validate');
 $input = new Zend_Filter_Input($filters, $validators, $data, $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternatic kann die <code>addValidatorPrefixPath($prefix, $path)</code> oder die
@@ -929,8 +901,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
 // 1. My_Namespace_Filter
 // 2. Foo_Namespace
 // 3. Zend_Filter
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zend_Filter und Zend_Validate können als Namensraum nicht entfernt werden, es können nur Namensräume

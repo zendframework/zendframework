@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -81,8 +81,7 @@ if ($validator->isValid($email)) {
         echo "Validation failure '$messageId': $message\n";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -130,8 +129,7 @@ if (!$validator->isValid('word')) {
 
     // "Der String 'word' ist zu kurz; er muss mindestens 8 Zeichen sein"
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -147,8 +145,7 @@ $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_LONG  =>
         'Der String \'%value%\' ist zu lang'
 ));
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -172,8 +169,7 @@ if (!validator->isValid('word')) {
         . $validator->max
         . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
     </sect2>
@@ -196,8 +192,7 @@ if (!validator->isValid('word')) {
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Ja, die Email Adresse scheint gültig zu sein
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -209,8 +204,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Ja, $value ist zwischen 1 und 12
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </para>
 
@@ -255,8 +249,7 @@ $translate = new Zend_Translate(
 );
 
 $validator->setTranslator($translate);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Mit der statischen Methode <code>setDefaultTranslator()</code> kann eine Instanz von
@@ -272,8 +265,7 @@ $translate = new Zend_Translate(
     'en'
 );
 Zend_Validate::setDefaultTranslator($translate);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <para>
@@ -294,8 +286,7 @@ $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es ist auch möglich einen Übersetzer zu verwenden statt eigene Meldungen mit

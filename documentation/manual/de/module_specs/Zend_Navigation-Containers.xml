@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.containers">
     <title>Container</title>
@@ -199,8 +199,7 @@ $container = new Zend_Navigation(array(
         'route' => 'zf-route'
     )
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.navigation.containers.creating.example.config">
@@ -393,8 +392,7 @@ $container = new Zend_Navigation(array(
 
 $config = new Zend_Config_Xml('/path/to/navigation.xml', 'nav');
 $container = new Zend_Navigation($config);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -445,8 +443,7 @@ $container->addPages($pages);
 
 // Bestehende Seite entfernen und die gegebenen Seiten hinzufügen
 $container->setPages($pages);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -493,8 +490,7 @@ $container->removePage(200);    // Entfernt Seite 2
 
 // Entfernt alle Seiten
 $container->removePages();      // Entfernt alle Seiten
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -607,8 +603,7 @@ $found = $container->findAllByfoo('bar');
 
 // Findet alle mit controller = 'index'
 $found = $container->findAllByController('index'); // Gibt Seite 2 und 3 zurück
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -669,8 +664,7 @@ $it = new RecursiveIteratorIterator(
 foreach ($it as $page) {
     echo $page->label;
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -800,8 +794,7 @@ array(2) {
   }
 }
 */
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
@@ -44,8 +44,7 @@ class FooController extends Zend_Controller_Action
                                   ->prepareAutoCompletion($data);
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Standardmäßig mach die automatische Vervollständigung folgendes:
@@ -135,8 +134,7 @@ class FooController extends Zend_Controller_Action
         <programlisting role="php"><![CDATA[
 // In der Controller Aktion:
 $this->_helper->autoCompleteDojo($data);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <example id="zend.controller.actionhelpers.autocomplete.dojo.example1">
             <title>AutoCompletion mit Dojo und der Verwendung von Zend MVC</title>
@@ -168,8 +166,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
         return this.inherited("fetch", arguments);
     }
 });
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Diese Klasse ist einfach eine Erweiterung von Dojo's eigenem QueryReadStore,
@@ -210,8 +207,7 @@ class TestController extends Zend_Controller_Action
         return $this->_form;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Hier erstellen wir einfach eine Form mit den 'test' und 'go' Methoden. Die 'test'
@@ -263,8 +259,7 @@ class TestController extends Zend_Controller_Action
         $this->_helper->autoCompleteDojo($matches);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 in unserer <code>autocompleteAction()</code> machen wir eine Anzahl von Dingen.
@@ -318,8 +313,7 @@ dojo.require("dojox.data.QueryReadStore");
 dojo.require("dijit.form.ComboBox");
 dojo.require("custom.TestNameReadStore");
 <?php $this->headScript()->captureEnd() ?>
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Beachte die Aufrufe zu den View Helfern wie headStyle und headScript; das sind

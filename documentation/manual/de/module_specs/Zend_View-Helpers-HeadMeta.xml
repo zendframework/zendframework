@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
@@ -82,8 +82,7 @@
         <programlisting role="php"><![CDATA[
 // Meta Schlüsselwörter setzen
 $this->headMeta()->appendName('keywords', 'framework php productivity');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn Clientseitige Cacheregeln gesetzt werden sollen, können http-equiv Tags mit den Regeln die
@@ -96,8 +95,7 @@ $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
                  ->appendHttpEquiv('pragma', 'no-cache')
                  ->appendHttpEquiv('Cache-Control', 'no-cache');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Ein anderer populärer Verwendungszweck für Meta Tags ist das Setzen des Inhalt-Typs, Zeichensatzes,
@@ -109,8 +107,7 @@ $this->headMeta()->appendHttpEquiv('expires',
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'en-US');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Als letztes Beispiel, ein einfacher Weg um eine kurze Nachricht anzuzeigen bevor mit Hilfe eines
@@ -121,8 +118,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 // Einen Meta Refresh mit 3 Sekunden zu einer neuen URL setzen:
 $this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wenn man bereit ist die Meta Tags im Layout zu platzieren, muß einfach der Helfer ausgegeben werden:
@@ -130,8 +126,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->headMeta() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

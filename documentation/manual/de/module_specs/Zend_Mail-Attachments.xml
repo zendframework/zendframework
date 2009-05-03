@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.attachments">
     <title>Anhänge</title>
@@ -20,8 +20,7 @@ $mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
                         Zend_Mime::ENCODING_8BIT);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         Wenn du weitere Kontrolle über den für diesen Anhang generierten MIME Teil benötigst, kannst
@@ -39,8 +38,7 @@ $at->encoding    = Zend_Mime::ENCODING_8BIT;
 $at->filename    = 'test.gif';
 
 $mail->send();
-]]>
-    </programlisting>
+]]></programlisting>
     <para>
         Eine Alternative ist die Erstellung einer Instanz von <classname>Zend_Mime_Part</classname> und das Hinzufügen von Ihr mit
         <code>addAttachment()</code>:
@@ -57,8 +55,7 @@ $at->filename    = 'test.gif';
 $mail->addAttachment($at);
 
 $mail->send();
-]]>
-    </programlisting>
+]]></programlisting>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

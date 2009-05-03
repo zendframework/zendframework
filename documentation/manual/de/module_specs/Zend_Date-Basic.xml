@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.basic">
 
@@ -43,8 +43,7 @@ $date = new Zend_Date();
 
 // Ausgabe des aktuellen Zeitpunktes
 print $date;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -76,8 +75,7 @@ $date = new Zend_Date();
 
 // Ausgabe des gewünschten Datums
 print $date->get();
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -100,8 +98,7 @@ $date = new Zend_Date();
 // Setzen einer neuen Zeit
 $date->set('13:00:00',Zend_Date::TIMES);
 print $date->get(Zend_Date::W3C);
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -130,8 +127,7 @@ echo "Datum über get() = ", $date->get(Zend_Date::W3C), "\n";
 // benutze die magische __toString() Methode um
 // Zend_Date's toString() aufzurufen
 echo "Datum über toString() = ", $date, "\n";
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>
@@ -159,8 +155,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
 } else {
     print "Diese Stunde ist mehr als 10 Minuten alt";
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
             <para>
@@ -179,8 +174,7 @@ if ($date->equals(10, Zend_Date::HOUR)) {
 } else {
     print "Es ist noch nicht 10Uhr. Du kannst weiterschlafen.";
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
 
         </sect3>

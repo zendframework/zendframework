@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -85,8 +85,7 @@ $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-                    </programlisting>
+]]></programlisting>
                 </listitem>
 
                 <listitem>
@@ -100,8 +99,7 @@ $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
-]]>
-                    </programlisting>
+]]></programlisting>
                 </listitem>
             </itemizedlist>
         </note>
@@ -118,8 +116,7 @@ $viewRenderer->setView($view)
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das erste Mal wenn ein Aktion Kontroller instanziert wird, triggert er den <code>ViewRenderer</code>
@@ -162,8 +159,7 @@ class Foo_BarController extends Zend_Controller_Action
 
 // In einem der View Sktipte:
 $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der <code>ViewRenderer</code> definiert auch eine Anzahl von Zugriffspunkten im das Setzen und Empfangen
@@ -261,8 +257,7 @@ $this->_helper->viewRenderer('foo');
 // Rendert form.phtml zum 'html' Antwort Segment, ohne einen Kontroller aus dem
 // Unterverzeichnis des View Skripts zu verwenden:
 $this->_helper->viewRenderer('form', 'html', true);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <note><para>
                         <code>setRender()</code> und <code>direct()</code> stellen das View Sktript
@@ -282,8 +277,7 @@ $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
     new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es gibt einige zusätzliche Methoden für das individualisieren von Pfadspezifikationen die für das
@@ -592,8 +586,7 @@ class Foo_BarController extends Zend_Controller_Action
         $this->_redirect('/index');
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -650,8 +643,7 @@ class Bar_BatController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -703,8 +695,7 @@ class Foo_BarController extends Zend_Controller_Action
     }
 
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
@@ -735,8 +726,7 @@ class Foo_BarController extends Zend_Controller_Action
         $view->setEscape('htmlspecialchars');
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 
@@ -777,8 +767,7 @@ $viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
              ->setViewScriptPathNoControllerSpec(':action.:suffix')
              ->setViewSuffix('tpl');
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
@@ -809,8 +798,7 @@ class SearchController extends Zend_Controller_Action
         // tue nichts; der ViewRenderer bearbeitet das View Skript automatisch
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect4>
 </sect3>

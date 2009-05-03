@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -31,8 +31,7 @@
             <title>Beispiel der Verwendung der <code>set()</code> Methode</title>
             <programlisting role="php"><![CDATA[
 Zend_Registry::set('index', $value);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -62,8 +61,7 @@ Zend_Registry::set('index', $value);
             <title>Beispiel der Verwendung der <code>get()</code> Methode</title>
             <programlisting role="php"><![CDATA[
 $value = Zend_Registry::get('index');
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -81,8 +79,7 @@ foreach ($registry as $index => $value) {
     echo "Registry Index $index enthält:\n";
     var_dump($value);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -114,8 +111,7 @@ foreach ($registry as $index => $value) {
             <title>Beispiel für das Erstellen einer Registry</title>
             <programlisting role="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -131,8 +127,7 @@ $registry = new Zend_Registry(array('index' => $value));
 $registry = new Zend_Registry(array('index' => $value));
 
 Zend_Registry::setInstance($registry);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -159,8 +154,7 @@ $registry = Zend_Registry::getInstance();
 $registry['index'] = $value;
 
 var_dump( $registry['index'] );
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -213,8 +207,7 @@ echo $registry->tree; // Gibt "Apfel" aus
 $registry->index = $value;
 
 var_dump($registry->index);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -234,8 +227,7 @@ var_dump($registry->index);
 if (Zend_Registry::isRegistered($index)) {
     $value = Zend_Registry::get($index);
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -258,8 +250,7 @@ if (isset($registry['index'])) {
 if (isset($registry->index)) {
     var_dump( $registry->index );
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -288,8 +279,7 @@ if (isset($registry->index)) {
 Zend_Registry::setClassName('Meine_Registry');
 
 Zend_Registry::set('index', $value);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -341,8 +331,7 @@ Zend_Registry::_unsetInstance();
 Zend_Registry::setClassName('Meine_Registry');
 
 Zend_Registry::set('index', $value);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

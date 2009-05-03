@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.rowset">
 
@@ -36,8 +36,7 @@
             <programlisting role="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -74,8 +73,7 @@ if ($rowCount > 0) {
 } else {
     echo 'keine Zeilen für die Abfrage gefunden.';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -93,8 +91,7 @@ if ($rowCount > 0) {
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -135,8 +132,7 @@ foreach ($rowset as $row) {
     // Änderung in der Datenbank speichern
     $row->save();
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -169,8 +165,7 @@ $row9 = $rowset->current();
 // und es verwenden
 $row9->assigned_to = 'mmouse';
 $row9->save();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -197,8 +192,7 @@ $row9->getRow(8);
 // und es verwenden:
 $row9->assigned_to = 'mmouse';
 $row9->save();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Sobald der Zugriff auf ein Zeilenobjekt besteht, kann dieses mit den Methoden manipuliert werden,
@@ -237,8 +231,7 @@ foreach ($rowsetArray as $rowArray) {
     ++$rowCount;
     echo "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -276,8 +269,7 @@ $serializedRowset = serialize($rowset);
 
 // Jetzt kann $serializedRowset bspw.
 // in einer Datei gespeichert werden
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -305,8 +297,7 @@ $rowsetDisconnected = unserialize($serializedRowset);
 // aber nur lesend.
 $row = $rowsetDisconnected->current();
 echo $row->bug_description;
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -352,8 +343,7 @@ $row = $rowset->current();
 // Jetzt können wieder Werte geändert und danach gespeichert werden
 $row->bug_status = 'FIXED';
 $row->save();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -394,8 +384,7 @@ class Products extends Zend_Db_Table_Abstract
 // Oder eine eigene Zeilensatz-Klasse angeben, die in einer
 // Instanz einer Tabellenklasse benutzt wird
 $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -432,8 +421,7 @@ class Bugs extends Zend_Db_Table_Abstract
     protected $_name = 'bugs';
     protected $_rowsetClass = 'MyBugsRowset';
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15036 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.books">
     <title>Die Buchsuche Daten API verwenden</title>
@@ -86,8 +86,7 @@ foreach ($feed as $entry) {
     echo $entry->getTitle();
     echo $entry->getViewability();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die <code>Query</code> Klasse, und Subklassen wie <code>VolumeQuery</code>,
@@ -97,8 +96,7 @@ foreach ($feed as $entry) {
 
         <programlisting role="php"><![CDATA[
 http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Beachte: Da die Ergebnisse von Buchsuchen öffentlich sind, können Buchsuche
@@ -184,8 +182,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 
             <programlisting role="php"><![CDATA[
 http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 kann man die gleichen Ergebnisse erhalten indem die Buchsuche Daten API mit der
@@ -194,8 +191,7 @@ http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
 
             <programlisting role="php"><![CDATA[
 http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Um eine alternative URL zu spezifizieren wenn ein Volume Feed abgefragt wird,
@@ -205,8 +201,7 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
             <programlisting role="php"><![CDATA[
 $query =
     $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Für zusätzliche Informationen oder Support, sehen Sie in unser
@@ -242,8 +237,7 @@ $entry = new Zend_Gdata_Books_VolumeEntry();
 $entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
 $entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
 $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -276,8 +270,7 @@ $review        = new Zend_Gdata_Books_Extension_Review();
 $review->setText("Dieses Buch ist aufregend!");
 $entry->setReview($review);
 $books->insertVolume($entry, $annotationUrl);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 
@@ -297,8 +290,7 @@ $review   = new Zend_Gdata_Books_Extension_Review();
 $review->setText("Dieses Buch ist leider nicht sehr gut!");
 $entry->setReview($review);
 $books->updateVolume($entry, $entryUrl);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 
@@ -332,8 +324,7 @@ $category      = new Zend_Gdata_App_Extension_Category(
     'http://schemas.google.com/books/2008/labels');
 $entry->setCategory(array($category));
 $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 
@@ -367,8 +358,7 @@ foreach ($feed as $entry) {
         echo 'Bewertung: ' . $entry->getRating()->getAverage();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Für eine Liste an unterstützten Abfrageparametern, kann man in das Kapitel
@@ -389,8 +379,7 @@ foreach ($feed as $entry) {
 
             <programlisting role="php"><![CDATA[
 $books->deleteVolume($entry);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -438,8 +427,7 @@ $books->deleteVolume($entry);
 
                 <programlisting role="php"><![CDATA[
 $feed = $books->getUserLibraryFeed();
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Es ist zu beachten das es sein kann das der Feed nicht alle Bücher des Benutzers
@@ -473,8 +461,7 @@ $query = $books->newVolumeQuery(
     'USER_ID/collections/library/volumes');
 $query->setQuery('Bär');
 $feed = $books->getVolumeFeed($query);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Für eine Liste von unterstützten Abfrageparametern können Sie in das Kapitel
@@ -490,8 +477,7 @@ $query = $books->newVolumeQuery(
 $query->setCategory(
 $query->setCategory('favorites');
 $feed = $books->getVolumeFeed($query);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 
@@ -534,8 +520,7 @@ $books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Das folgende Beispiel fügt ein bestehendes <code>VolumeEntry</code> Objekt in der
@@ -547,8 +532,7 @@ $books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
 );
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 
@@ -564,8 +548,7 @@ $books->insertVolume(
 
                 <programlisting role="php"><![CDATA[
 $books->deleteVolume($entry);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </sect4>
 

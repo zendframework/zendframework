@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Fortgeschrittene Verwendung von Zend_Json</title>
@@ -38,8 +38,7 @@
         <programlisting role="php"><![CDATA[
 // Dekodiere JSON Objekte als PHP Objekte
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Jedes dekodierte Objekte wird als <code>StdClass</code> Objekt mit Eigenschaften
@@ -86,8 +85,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 
         <programlisting role="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.json.advanced.expr">
@@ -124,8 +122,7 @@ $jsonObjectWithExpression = Zend_Json::encode(
     false,
     array('enableJsonExprFinder' => true)
 );
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
 </sect1>

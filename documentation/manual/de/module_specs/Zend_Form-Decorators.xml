@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch <classname>Zend_Form_Decorator</classname></title>
@@ -154,8 +154,7 @@ interface Zend_Decorator_Interface
     public function clearOptions();
     public function render($content);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um es sich einfacher zu machen, kann man <classname>Zend_Decorator_Abstract</classname>
@@ -253,8 +252,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Danach kannst du ihn in den Dekoratoren Pfad platzieren:
@@ -270,8 +268,7 @@ $element->addPrefixPath('My_Decorator',
 $form->addElementPrefixPath('My_Decorator',
                             'My/Decorator/',
                             'decorator');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann dann diesen Dekorator als 'gemeinsam' spezifizieren und diesen an ein Element
@@ -281,8 +278,7 @@ $form->addElementPrefixPath('My_Decorator',
         <programlisting role="php"><![CDATA[
 // Überschreibe existierende Dekoratoren mit diesem einzelnen:
 $element->setDecorators(array('Composite'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Während dieses Beispiel zeigt, wie ein Dekorator erstellt werden kann, der komplexe
@@ -319,8 +315,7 @@ class My_Decorator_Errors
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             In diesem speziellen Beispiel, weil das letzte Segment 'Errors' des Dekorators auf

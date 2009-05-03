@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
@@ -43,8 +43,7 @@ print "copied: ", $copiedLocale->toString();
 
 // PHP ruft automatisch toString() über __toString(); auf
 print "copied: ", $copiedLocale;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -69,8 +68,7 @@ $mylocale = new Zend_Locale('en_US');
 if ($locale->equals($mylocale)) {
     print "Die Gebietsschemata sind gleich";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -102,8 +100,7 @@ print_r($found);
 // Nur die Gebietsschema des Browsers zurück geben
 $found2 = $locale->getDefault(Zend_Locale::BROWSER,TRUE);
 print_r($found2);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -154,8 +151,7 @@ print $locale->toString();
 // neues Gebietsschema
 $locale->setLocale('aa_DJ');
 print $locale->toString();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -180,8 +176,7 @@ print $locale->getLanguage();
 
 // Wenn das Gebietsschema 'de_AT' ist, wird 'AT' als Region zurückgegeben
 print $locale->getRegion();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -216,8 +211,7 @@ print_r ($list);
 // getTranslation() Methode einer anderen Sprache verwenden
 print Zend_Locale::getTranslation('de', 'language', 'zh');
 // Gibt die Übersetzung für die Sprache 'de' in chinesisch zurück
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1137,8 +1131,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
 $locale = new Zend_Locale('en_US');
 // Gibt die Namen aller Länder in der Französischen Sprache aus
 print_r(Zend_Locale::getTranslationList('country', 'fr'));
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1155,8 +1148,7 @@ $name2code = array_flip($code2name);
 $frenchCode = $name2code['French'];
 echo $locale->getLanguageTranslation($frenchCode, 'es');
 // Ausgegeben wird der Spanische Name der Fransösischen Sprache
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1185,8 +1177,7 @@ foreach($list as $language => $content) {
         continue;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -1245,8 +1236,7 @@ Array
     [yesexpr]^([yY]([eE][sS])?)|([jJ][aA]?)[/yesexpr]
     [noexpr]^([nN]([oO]|([eE][iI][nN]))?)[/noexpr]
 )
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
     </sect2>
@@ -1266,8 +1256,7 @@ Array
             <title>getLocaleList()</title>
             <programlisting role="php"><![CDATA[
 $localelist = Zend_Locale::getLocaleList();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -1297,8 +1286,7 @@ if (Zend_Locale::isLocale($input)) {
 } else {
     print "Sorry... die vorhandene Eingabe ist kein Gebietsschema";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1332,8 +1320,7 @@ if (Zend_Locale::isLocale($input, true)) {
 } else {
     print "Sorry... die vorhandene Eingabe ist kein Gebietsschema";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1362,8 +1349,7 @@ if (!Zend_Locale::isLocale($locale, true, false)) {
 if ($locale instanceof Zend_Locale) {
     $locale = $locale->toString();
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -1421,8 +1407,7 @@ if ($locale instanceof Zend_Locale) {
             <title>Gebietsschema bezogenes Verhalten mit ZF 1.8</title>
             <programlisting role="php"><![CDATA[
 $locale = Zend_Locale::findLocale($inputstring);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

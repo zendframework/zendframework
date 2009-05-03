@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
@@ -31,8 +31,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     // ...
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Zweitens kann ein PHP Callback angegeben werden der nach dem Bootstrap der Anwendung ausgeführt wird.
@@ -48,8 +47,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
     // ...
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         In Fällen in denen eine Objekt Instanz notwendig ist, empfehlen wir die Durchführung in der eigenen
@@ -67,8 +65,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         parent::setUp();
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Beachte das <code>parent::setUp()</code> aufgerufen wird; das ist notwendig, da die <code>setUp()</code>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink Helfer</title>
@@ -85,8 +85,7 @@ $this->headLink()->appendStylesheet('/styles/basic.css')
 ?>
 <?php // Darstellen der Links: ?>
 <?php echo $this->headLink() ?>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

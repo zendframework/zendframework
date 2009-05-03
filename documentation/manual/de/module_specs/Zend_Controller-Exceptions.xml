@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC Ausnahmen</title>
@@ -79,8 +79,7 @@ try {
 } catch (Exception $e) {
     // Ausnahmen selbst behandeln
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Diese Methode ist möglicherweise der einfachste Weg um eigene Ausnahmebehandlungen
@@ -126,8 +125,7 @@ if ($response->isException()) {
     $response->sendHeaders();
     $response->outputBody();
 }
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Der primäre Vorteil die diese Methode über
@@ -174,8 +172,7 @@ $front->setParam('useDefaultControllerAlways', true);
 // oder
 
 $dispatcher->setParam('useDefaultControllerAlways', true);
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             Wenn dieses Flag gesetzt ist, wird der Dispatcher den Standardcontroller und die
@@ -228,8 +225,7 @@ class My_Controller_Action extends Zend_Controller_Action
         throw new Exception('Ungültige Methode');
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
                         <para>
                             Das obige Beispiel fängt jede nicht definierte Aktionsmethode ab die aufgerufen wird
                             und leitet Sie zur Standardaktion im Controller um.
@@ -266,8 +262,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
         return $action;
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             Der obige Code prüft ob die angefragte Aktion in der Controllerklasse existiert ;
@@ -336,8 +331,7 @@ class My_Controller_PreDispatchPlugin extends Zend_Controller_Plugin_Abstract
         }
     }
 }
-]]>
-                        </programlisting>
+]]></programlisting>
 
                         <para>
                             In diesem Beispiel wird geprüft ob die angefragte Aktion im Controller vorhanden ist.

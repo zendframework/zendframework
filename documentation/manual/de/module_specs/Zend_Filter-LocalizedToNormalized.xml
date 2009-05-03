@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.localizedtonormalized">
 
@@ -96,8 +96,7 @@
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('123.456,78');
 // Gibt den Wert '123456.78' zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Nehmen wir an das wir das Gebietsschema 'de' als Anwendungsweites Gebietsschema gesetzt
@@ -152,8 +151,7 @@ $filter->filter('123.456');
 
 $filter->filter('123.456,78901');
 // Gibt den Wert '123456.79' zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect3>
 
@@ -172,8 +170,7 @@ $filter->filter('123.456,78901');
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('12.April.2009');
 // Gibt array('day' => '12', 'month' => '04', 'year' => '2009') zurück
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Angenommen wir haben wieder das Gebietsschema 'de' gesetzt. Die Eingaben werden jetzt
@@ -194,8 +191,7 @@ $filter = new Zend_Filter_LocalizedToNormalized(
 
 $filter->filter('11:22:33');
 // Gibt array('hour' => '33', 'minute' => '22', 'second' => '11') zurück
-]]>
-        </programlisting>
+]]></programlisting>
     </sect3>
 
 </sect2>

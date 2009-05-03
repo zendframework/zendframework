@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -146,8 +146,7 @@ $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
 $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>
@@ -186,8 +185,7 @@ $rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 echo $rateInfo->province;
 echo $rateInfo->abbreviation;
 echo $rateInfo->GST;
-]]>
-        </programlisting>
+]]></programlisting>
 
         Im obigen Beispiel wird die <code>getService()</code> Methode verwendet um einen Client zum
         <link linkend="zend.service.strikeiron.bundled-services.sales-use-tax-basic">Verkaufs- &amp; Steuergrundlagen</link>
@@ -250,8 +248,7 @@ Zend_Service_StrikeIron_Decorator Object
             [HST] => Y
         )
 )
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>
@@ -309,8 +306,7 @@ try {
   // Fehler handhaben für Events wie Verbindungsprobleme oder Account Probleme
 
 }
-]]>
-        </programlisting>
+]]></programlisting>
         Die geworfenen Ausnahmen werden immer <classname>Zend_Service_StrikeIron_Exception</classname> sein.
       </para>
 
@@ -356,8 +352,7 @@ $taxBasic = $strikeIron->getService(array('class => 'SalesUseTaxBasic'));
 // Prüfe die noch möglichen Zugriffe für das Verkaufs- & Steuerbasis Service
 $subscription = $taxBasic->getSubscriptionInfo();
 echo $subscription->remainingHits;
-]]>
-        </programlisting>
+]]></programlisting>
       </para>
 
       <para>

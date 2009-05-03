@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.factory">
     <title>Erstellen von Seiten durch Verwendung der Page Factory</title>
@@ -49,8 +49,7 @@ $page = Zend_Navigation_Page::factory(array(
     'type'   => 'mvc',
     'label'  => 'My MVC page'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.navigation.pages.factory.example.uri">
@@ -77,8 +76,7 @@ $page = Zend_Navigation_Page::factory(array(
     'type'   => 'uri',
     'label'  => 'My URI page'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.navigation.pages.factory.example.custom">
@@ -106,7 +104,6 @@ $page = Zend_Navigation_Page::factory(array(
     'label'   => 'My custom page',
     'foo_bar' => 'foo bar'
 ));
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect2>

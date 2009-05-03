@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.introduction">
 
@@ -56,8 +56,7 @@
 date_default_timezone_set('America/Los_Angeles');
 // Zeitzone für Deutschland
 date_default_timezone_set('Europe/Berlin');
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
             <emphasis role="strong">Wenn eine Zend_Date Instanz erzeugt wird, wird die
             Zeitzone des aktuellen Benutzers automatisch als aktuelle Standardzeitzone übernommen</emphasis>.

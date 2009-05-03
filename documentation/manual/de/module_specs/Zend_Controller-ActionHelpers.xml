@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Action Helfer</title>
@@ -48,8 +48,7 @@
                 <programlisting role="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -61,8 +60,7 @@ $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
                 <programlisting role="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -74,8 +72,7 @@ $flashMessenger->addMessage('Wir haben in der letzten Anfrage etwas getan');
 
                 <programlisting role="php"><![CDATA[
 $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -104,8 +101,7 @@ $this->_helper->FlashMessenger('Wir haben in der letzten Anfrage etwas getan');
 
         <programlisting role="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Natürlich ist das Instanzieren und übergeben von Helfern an den Broker etwas Zeit- und Ressourcen
@@ -124,8 +120,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                 <programlisting role="php"><![CDATA[
 // Helfer mit vorangestelltem My_Action_Helpers in My/Action/Helpers/ hinzufügen
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -139,8 +134,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 // Helfer mit vorangestelltem Helper in Plugins/Helpers/ hinzufügen
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -166,8 +160,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Der Redirector Helfer ist registriert';
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es gibt auch zwei statische Methoden für das bekommen von Helfern vom Helferbroker:
@@ -197,8 +190,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
 $redirector =
     Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Schlußendlich, um einen registrierten Helfer vom Broker zu entfernen, kann
@@ -211,8 +203,7 @@ $redirector =
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.actionhelper.stockhelpers">
@@ -311,8 +302,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
         <programlisting role="php"><![CDATA[
 // Umleiten zu /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Intern schaut die <code>__call()</code> Methode des Helfer Brokers nach einem Helfer der

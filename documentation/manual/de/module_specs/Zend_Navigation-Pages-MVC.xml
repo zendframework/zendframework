@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
@@ -123,8 +123,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
     'module'     => 'blog',
     'params'     => array('id' => 1337)
 ));
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.navigation.pages.mvc.example.isActive">
@@ -188,8 +187,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
 // Gibt false zurück weil die Seite den id Parameter in der
 // Anfrage gesetzt haben muß
 $page->isActive(); // gibt false zurück
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.navigation.pages.mvc.example.routes">
@@ -243,7 +241,6 @@ $page = new Zend_Navigation_Page_Mvc(array(
 
 // Gibt /a/42 zurück
 $page->getHref();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.examples">
     <title>Dojo Formular Beispiele</title>
@@ -348,8 +348,7 @@ class My_Form_Test extends Zend_Dojo_Form
              ->addSubForm($sliderForm, 'slidertab');
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.dojo.form.examples.decorating">
@@ -384,8 +383,7 @@ array(
     ),
 )
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kann die Formular Initialisierung auch leicht verschnellert werden:
@@ -401,8 +399,7 @@ class My_Custom_Form extends Zend_Form
         // ...
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Natürlich kann auch das getan werden... man könnte und sollte einfach die Klasse so verändern das

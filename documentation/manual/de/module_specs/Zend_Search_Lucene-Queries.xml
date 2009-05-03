@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -13,8 +13,7 @@
         Abfrageparser verwenden um eine Abfrage von einem String zu erstellen:
         <programlisting role="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
-]]>
-        </programlisting>
+]]></programlisting>
     </para>
 
     <sect2 id="zend.search.lucene.queries.exceptions">
@@ -43,8 +42,7 @@ try {
 } catch (Zend_Search_Lucene_Search_QueryParserException $e) {
     echo "Abfrage Syntax Fehler: " . $e->getMessage() . "\n";
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -75,8 +73,7 @@ try {
         </para>
         <programlisting role="querystring"><![CDATA[
 word1
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>oder</para>
 
@@ -87,8 +84,7 @@ word1
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle indizierten Felder in jedem
@@ -99,8 +95,7 @@ $hits  = $index->find($query);
 $term  = new Zend_Search_Lucene_Index_Term('wort1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -154,8 +149,7 @@ $hits  = $index->find($query);
         </para>
         <programlisting role="querystring"><![CDATA[
 +word1 author:word2 -word3
-]]>
-        </programlisting>
+]]></programlisting>
 
         <itemizedlist>
             <listitem>
@@ -190,8 +184,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('word2', 'author'),
 $query->addTerm(new Zend_Search_Lucene_Index_Term('word3'), false);
 
 $hits  = $index->find($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es ist auch möglich Begriffslisten in einem MultiTerm Anfrage Konstruktor zu spezifizieren:
@@ -204,8 +197,7 @@ $signs = array(true, null, false);
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm($terms, $signs);
 
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -279,8 +271,7 @@ $hits  = $index->find($query);
         </para>
         <programlisting role="querystring"><![CDATA[
 +(word1 word2 word3) author:(word4 word5) -word6
-]]>
-        </programlisting>
+]]></programlisting>
 
         <itemizedlist>
             <listitem>
@@ -326,8 +317,7 @@ $query->addSubquery($subquery2, null  /* optional */);
 $query->addSubquery($subquery3, false /* verboten (prohibited) */);
 
 $hits  = $index->find($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es ist auch möglich Listen von Unterabfragen im Konstruktor der Boolschen Abfrage zu definieren:
@@ -339,8 +329,7 @@ $signs = array(true, null, false);
 $query = new Zend_Search_Lucene_Search_Query_Boolean($subqueries, $signs);
 
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -370,13 +359,11 @@ $hits  = $index->find($query);
             die Vorzeichen-Schreibweise verwendet und mit Hilfe der API erstellt wird. Zum Beispiel:
             <programlisting role="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
-]]>
-            </programlisting>
+]]></programlisting>
             ist identisch mit
             <programlisting role="querystring"><![CDATA[
 (+(word1) +(+word2 +word3 -word4)) (word5)
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -399,8 +386,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
             Abfragestring:
             <programlisting role="querystring"><![CDATA[
 field1:test*
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>oder</para>
@@ -411,8 +397,7 @@ field1:test*
 $pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -422,8 +407,7 @@ $hits  = $index->find($query);
 $pattern = new Zend_Search_Lucene_Index_Term('test*');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -438,8 +422,7 @@ $hits  = $index->find($query);
             Abfrage String:
             <programlisting role="querystring"><![CDATA[
 field1:test~
-]]>
-            </programlisting>
+]]></programlisting>
             Diese Abfrage trifft Dokumente die die Wörter 'test' 'text' 'best' und andere enthalten.
         </para>
 
@@ -451,8 +434,7 @@ field1:test~
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -463,8 +445,7 @@ $hits  = $index->find($query);
             Abfrage String:
             <programlisting role="querystring"><![CDATA[
 field1:test~0.4
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>oder</para>
@@ -475,8 +456,7 @@ field1:test~0.4
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -486,8 +466,7 @@ $hits  = $index->find($query);
 $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </sect2>
 
@@ -536,8 +515,7 @@ $query3 = new Zend_Search_Lucene_Search_Query_Phrase(
 
 $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
                 array('word1', 'word2'), array(0,1), 'annotation');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Eine Phrasenabfrage kann in einem Schritt mit einem Klassenkonstruktor erstellt werden
@@ -553,8 +531,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 Zend_Search_Lucene_Search_Query_Phrase(
     [array $terms[, array $offsets[, string $field]]]
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der <code>$terms</code> Parameter ist ein Array von Strings die ein Set von Phrasen Strings
@@ -575,8 +552,7 @@ Zend_Search_Lucene_Search_Query_Phrase(
         <programlisting role="php"><![CDATA[
 $query =
     new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'));
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Wird nach der Phrase 'zend framework' in allen Feldern suchen.
         </para>
@@ -585,8 +561,7 @@ $query =
 $query = new Zend_Search_Lucene_Search_Query_Phrase(
                  array('zend', 'download'), array(0, 2)
              );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform download',
@@ -598,8 +573,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
 $query = new Zend_Search_Lucene_Search_Query_Phrase(
                  array('zend', 'framework'), null, 'title'
              );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wird nach der Phrase 'zend framework' im 'title' Feld suchen.
@@ -615,8 +589,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
 Zend_Search_Lucene_Search_Query_Phrase::addTerm(
     Zend_Search_Lucene_Index_Term $term[, integer $position]
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             <code>$term</code> enthält den nächsten Begriff in der Phrase. Er muss das selbe Feld
@@ -631,8 +604,7 @@ Zend_Search_Lucene_Search_Query_Phrase::addTerm(
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend'));
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Demnach wird hier nach der Phrase 'zend framework' gesucht.
@@ -642,8 +614,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'));
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend'), 0);
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform download',
@@ -655,8 +626,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);
 $query = new Zend_Search_Lucene_Search_Query_Phrase();
 $query->addTerm(new Zend_Search_Lucene_Index_Term('zend', 'title'));
 $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Es wird nach der Phrase 'zend framework' im 'title' Feld gesucht.
@@ -696,8 +666,7 @@ $hits1 = $index->find($query);
 // 'word1 ... ... word2', 'word2 word1'
 $query->setSlop(2);
 $hits2 = $index->find($query);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -713,8 +682,7 @@ $hits2 = $index->find($query);
             <programlisting role="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 title:{Aida TO Carmen}
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>oder</para>
@@ -728,8 +696,7 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
                  $from, $to, true // inclusive
              );
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -742,8 +709,7 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
                  $from, $to, false // non-inclusive
              );
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -756,8 +722,7 @@ $query = new Zend_Search_Lucene_Search_Query_Range(
                  $from, null, true // inclusive
              );
 $hits  = $index->find($query);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
      </sect2>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
 
@@ -97,8 +97,7 @@ $sqlInsert = "INSERT INTO users (username, password, real_name) "
 
 // Daten einfügen
 $dbAdapter->query($sqlInsert);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Mit der Datenbankverbindung und den vorhandenen Tabellendaten, kann eine Instanz von
@@ -123,8 +122,7 @@ $authAdapter
     ->setIdentityColumn('username')
     ->setCredentialColumn('password')
 ;
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 An diesem Punkt ist die Instanz des Authentifizierungsadapters bereit um Authentifierungsabfragen
@@ -140,8 +138,7 @@ $authAdapter
 
 // Die Authentifizierungsabfrage durchführen, das Ergebnis speichern
 $result = $authAdapter->authenticate();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Zusätzlich zum Vorhandensein der <code>getIdentity()</code> Methode über das Authentifizierungs
@@ -167,8 +164,7 @@ Array
     [real_name] => My Real Name
 )
 */
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Da die Zeile der Tabelle die Zeugnis Daten enthält ist es wichtig diese Werte gegenüber
@@ -220,8 +216,7 @@ if ($result->isValid()) {
     /* ... */
 
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -261,8 +256,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     'password',
     'MD5(?) AND active = "TRUE"'
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Ein anderes Szenario kann die Implementierung eines Saltingmachanismus sein. Salting ist ein
@@ -281,8 +275,8 @@ $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
 
-$dbAdapter->query($sqlAlter);]]>
-        </programlisting>
+$dbAdapter->query($sqlAlter);
+]]></programlisting>
 
         <para>
             Hier ist ein einfacher Weg um einen Salt String für jeden Benutzer bei der Registrierung zu
@@ -293,8 +287,7 @@ $dbAdapter->query($sqlAlter);]]>
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Und nun erstellen wir den Adapter:
@@ -310,8 +303,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     . Zend_Registry::get('staticSalt')
     . "', ?, password_salt))"
 );
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
 
@@ -356,8 +348,7 @@ $select->where('active = "TRUE"');
 // Authentifizieren, das stellt sicher das users.active = TRUE
 $adapter->authenticate();
 
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

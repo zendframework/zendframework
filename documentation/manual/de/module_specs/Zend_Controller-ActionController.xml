@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Kontroller</title>
@@ -38,8 +38,7 @@ class FooController extends Zend_Controller_Action
         // mach irgendwas
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die obige <code>FooController</code> Klasse (Kontroller <code>foo</code>) definiert zwei Aktionen,
@@ -82,8 +81,7 @@ class FooController extends Zend_Controller_Action
             ->setParam('noViewRenderer', true);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>initView()</code>, <code>getViewScript()</code>, <code>render()</code>, und
@@ -105,8 +103,7 @@ class FooController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Der primäre Grund um den <code>ViewRenderer</code> auszuschalten ist, wenn einfach kein View Objekt
@@ -148,8 +145,7 @@ class FooController extends Zend_Controller_Action
         ));
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.controller.action.prepostdispatch">
@@ -188,8 +184,7 @@ class FooController extends Zend_Controller_Action
                 <programlisting role="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -234,8 +229,7 @@ if ($this->_hasParam('id') {
 } else {
     $id = 1;
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </note>
             </listitem>
         </itemizedlist>
@@ -288,8 +282,7 @@ applicationOrModule/
                 index.phtml
         helpers/
         filters/
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 In anderen Worten, wird angenommen das View Skripte im <code>views/scripts/</code> Unterverzeichnis
@@ -311,8 +304,7 @@ applicationOrModule/
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>render()</code> rendert ein View Skript. Wenn keine Argumente übergeben werden, wird angenommen
@@ -368,8 +360,7 @@ class MyController extends Zend_Controller_Action
         $this->render();
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -502,8 +493,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Eine andere Möglichkeit ist das man zu einer standardmäßigen Kontroller Seiten weiterleiten will:
@@ -532,8 +522,7 @@ class MyController extends Zend_Controller_Action
                             500);
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -561,8 +550,7 @@ abstract class My_Base_Controller extends Zend_Controller_Action
         return $this->view;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Hoffentlich kann man anhand der Informationen in diesem Kapitel ersehen wie flexibel diese spezielle

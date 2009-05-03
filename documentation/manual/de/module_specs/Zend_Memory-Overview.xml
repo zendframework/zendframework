@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.overview">
     <title>Übersicht</title>
@@ -61,8 +61,7 @@ echo $loadedFiles[$index1]->value;
 $loadedFiles[$index2]->value = $newValue;
 
 $loadedFiles[$index3]->value[$charIndex] = '_';
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -127,8 +126,7 @@ $memObject->value[$index] = '_';
 echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
             <note>

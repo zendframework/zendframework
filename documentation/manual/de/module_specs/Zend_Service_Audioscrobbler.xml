@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.audioscrobbler">
 
@@ -187,8 +187,7 @@ $profileInfo = $as->userGetProfileInformation();
 // Einige von Ihnen darstellen
 print "Informationen für $profileInfo->realname können unter "
     . "$profileInfo->url gefunden werden";
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -220,8 +219,7 @@ foreach ($previousWeeklyArtists as $artist) {
     // Artistennamen mit Links zu Ihrem Profil darstellen
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -282,8 +280,7 @@ foreach ($relatedArtists as $artist) {
     // Die ähnlichen Artisten anzeigen
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

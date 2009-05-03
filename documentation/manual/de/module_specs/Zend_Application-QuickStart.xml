@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15106 -->
+<!-- EN-Revision: 15198 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -81,7 +81,7 @@ newproject
         </para>
 
         <programlisting role="php"><![CDATA[
-class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
 ]]></programlisting>
@@ -184,7 +184,7 @@ $application->bootstrap()
 
         <programlisting role="php"><![CDATA[
 <?php
-class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
 ]]></programlisting>
@@ -266,6 +266,19 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 
 ]]></programlisting>
+
+        <note>
+            <title>Mehr über mod_rewrite lernen</title>
+
+            <para>
+                Die obigen Rewrite Regeln erlauben es auf jede Datei im Document Root des eigenen
+                virtuellen Host's zuzugreifen. Wenn es Dateien gibt die man auf diesem Weg nicht
+                bereitstellen will, muss man in seinen Regeln restriktiver sein. Gehe zur
+                Apache WebSite und <ulink
+                url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">lerne mehr über
+                mod_rewrite</ulink>.
+            </para>
+        </note>
 
         <para>
             An diesem Punkt, wurde alles gesetzt um die Vorteile von <classname>Zend_Application</classname>
@@ -356,7 +369,7 @@ phpSettings.display_errors = 1
 
         <programlisting role="php"><![CDATA[
 <?php
-class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
     {

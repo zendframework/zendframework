@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
 
@@ -14,8 +14,7 @@
             Methode des Memory Managers verwendet werden:
             <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->create($data);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -35,8 +34,7 @@ $memObject = $memoryManager->create($data);
             <code>createLocked([$data])</code> Methode des Memory Managers:
             <programlisting role="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -90,8 +88,7 @@ $memObject->value[$index] = '_';
 echo ord($memObject->value[$index1]);
 
 $memObject->value = substr($memObject->value, $start, $length);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
 
         <para>
@@ -118,8 +115,7 @@ $memObject->value = substr($memObject->value, $start, $length);
 
             <programlisting role="php"><![CDATA[
 public function &getRef();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die <code>getRef()</code> Methode gibt eine Referenz auf den Wert
@@ -156,8 +152,7 @@ for ($count = 0; $count < strlen($value); $count++) {
     $char = $value[$count];
     ...
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
         </sect3>
@@ -168,8 +163,7 @@ for ($count = 0; $count < strlen($value); $count++) {
 
             <programlisting role="php"><![CDATA[
 public function touch();
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Die <code>touch()</code> Methode sollte in Verbindung mit
                 <code>getRef()</code> verwendet werden. Das signalisiert das der
@@ -189,8 +183,7 @@ for ($count = 0; $count < strlen($value); $count++) {
 }
 
 $memObject->touch();
-]]>
-                </programlisting>
+]]></programlisting>
 
             </para>
 
@@ -202,8 +195,7 @@ $memObject->touch();
 
             <programlisting role="php"><![CDATA[
 public function lock();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die <code>lock()</code> Methode versperrt Objekte im Speicher.
@@ -237,8 +229,7 @@ for ($count = 0; $count < strlen($value2); $count++) {
 $memObject1->touch();
 $memObject1->unlock();
 $memObject2->unlock();
-]]>
-                </programlisting>
+]]></programlisting>
             </para>
 
         </sect3>
@@ -249,8 +240,7 @@ $memObject2->unlock();
 
             <programlisting role="php"><![CDATA[
 public function unlock();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die <code>unlock()</code> Methode entsperrt Objekte wenn es nicht mehr
@@ -265,8 +255,7 @@ public function unlock();
 
             <programlisting role="php"><![CDATA[
 public function isLocked();
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die <code>isLocked()</code> Methode kann verwendet werden um zu

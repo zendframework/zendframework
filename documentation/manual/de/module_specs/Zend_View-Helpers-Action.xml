@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action View Helfer</title>
@@ -42,8 +42,7 @@
                                  array('count' => 10)); ?>
     </div>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

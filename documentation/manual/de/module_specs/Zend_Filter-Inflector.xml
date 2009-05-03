@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -38,8 +38,7 @@ $filtered = $inflector->filter(array('page' => $string));
 $string   = 'this_is_not_camel_cased';
 $filtered = $inflector->filter(array('page' => $string));
 // pages/this_is_not_camel_cased.html
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <sect2 id="zend.filter.inflector.operation">
@@ -87,8 +86,7 @@ $filtered = $inflector->filter(array('page' => $string));
         <programlisting role="php"><![CDATA[
 // Verwendet Zend_Filter_Word_CamelCaseToDash als Regel
 $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um einen alternativen Pfad zu setzen hat <classname>Zend_Filter_Inflector</classname> eine Utility Methode
@@ -97,8 +95,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 
         <programlisting role="php"><![CDATA[
 $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativ kann der Plugin Lader von der Beugung empfangen, und direkt mit Ihm interagiert werden:
@@ -107,8 +104,7 @@ $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
         <programlisting role="php"><![CDATA[
 $loader = $inflector->getPluginLoader();
 $loader->addPrefixPath('My_Filter', 'My/Filter/');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Für weitere Optionen über das Bearbeiten von Pfaden zu Filtern sollte in die
@@ -137,8 +133,7 @@ $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 
 // Über Zugriffsmethode:
 $inflector->setTargetReplacementIdentifier('#');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Typischerweise wird das Ziel über den Konstruktor gesetzt. Trotzdem kann es Ziel später geändert
@@ -150,8 +145,7 @@ $inflector->setTargetReplacementIdentifier('#');
         <programlisting role="php"><![CDATA[
 $inflector = $layout->getInflector();
 $inflector->setTarget('layouts/:script.phtml');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zusätzlich kann es gewünscht sein einen Klassenmember für die eigene Klasse zu haben, der es
@@ -190,8 +184,7 @@ class Foo
         return $this;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.filter.inflector.rules">
@@ -231,8 +224,7 @@ $inflector->setStaticRule('suffix', 'phtml');
 
 // Später ändern:
 $inflector->setStaticRule('suffix', 'php');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 So wie das Ziel selbst kann auch eine statische Regel an eine Referenz gebunden werden, was
@@ -273,8 +265,7 @@ class Foo
         return $this;
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.filter.inflector.rules.filters">
@@ -333,8 +324,7 @@ $inflector->setFilterRule('script', array(
     'Word_CamelCaseToDash',
     new Zend_Filter_StringToLower()
 ));
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.filter.inflector.rules.multiple">
@@ -380,8 +370,7 @@ $inflector->addRules(array(
     // Statische Regel:
     'suffix'      => 'phtml'
 ));
-]]>
-                </programlisting>
+]]></programlisting>
             </example>
         </sect3>
     </sect2>
@@ -495,8 +484,7 @@ $inflector = new Zend_Filter_Inflector($config);
 // Oder mit setConfig():
 $inflector = new Zend_Filter_Inflector();
 $inflector->setConfig($config);
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 </sect1>

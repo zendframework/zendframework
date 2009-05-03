@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -114,8 +114,7 @@ $s3->createBucket("my-own-bucket");
 $s3->putObject("my-own-bucket/myobject", "somedata");
 
 echo $s3->getObject("my-own-bucket/myobject");
-]]>
-        </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -132,8 +131,7 @@ require_once 'Zend/Service/Amazon/S3.php';
 
 Zend_Service_Amazon_S3::setKeys($my_aws_key, $my_aws_secret_key);
 $s3 = new Zend_Service_Amazon_S3();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.service.amazon.s3.buckets">
@@ -182,8 +180,7 @@ $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 
 $s3->cleanBucket("my-own-bucket");
 $s3->removeBucket("my-own-bucket");
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -204,8 +201,7 @@ $list = $s3->getBuckets();
 foreach($list as $bucket) {
   echo "Ich habe das Bucket $bucket\n";
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -345,8 +341,7 @@ $s3->putFile("me.png", "my-own-bucket/Pictures/Me.png",
     array(Zend_Service_Amazon_S3::S3_ACL_HEADER =>
           Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
 echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
-]]>
-                                </programlisting>
+]]></programlisting>
                             </example>
                         </listitem>
                     </varlistentry>
@@ -431,8 +426,7 @@ foreach($list as $name) {
   $data = $s3->getObject("my-own-bucket/$name");
   echo "with data: $data\n";
 }
-]]>
-                    </programlisting>
+]]></programlisting>
                 </example>
             </listitem>
 
@@ -480,8 +474,7 @@ mkdir("s3://my-own-bucket");
 file_put_contents("s3://my-own-bucket/testdata", "mydata");
 
 echo file_get_contents("s3://my-own-bucket/testdata");
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

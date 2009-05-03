@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profilen mit Firebug</title>
@@ -54,8 +54,7 @@ $db->setProfiler($profiler);
 
 // Alle DB Abfragen im Modell, View und Controller Dateien
 // werden nun profiled und an Firebug gesendet
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
@@ -82,8 +81,7 @@ ob_start();
 // Die Profilingdaten an den Browser senden
 $channel->flush();
 $response->sendHeaders();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect3>
 <!--

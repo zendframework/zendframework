@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
@@ -165,8 +165,7 @@
                 <programlisting role="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
-]]>
-                </programlisting>
+]]></programlisting>
 
                 <para>
                     Diese Klasse erweitert die <classname>Zend_Controller_Request_Http</classname> Klasse und modifiziert
@@ -225,8 +224,7 @@ $controller->setControllerDirectory('./application/controllers')
            ->setRouter($router)
            ->setBaseUrl('/projects/myapp'); // Setze die Basis URL!
 $response   = $controller->dispatch();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -375,8 +373,7 @@ abstract class Zend_Controller_Request_Abstract
      */
     public function isDispatched();
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Das Anfrage Objekt ist ein Behälter für die Anfrage Umgebung. Die Controller Kette muß wirklich nur

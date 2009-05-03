@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.elasticip">
     <title>Zend_Service_Amazon_Ec2: Elastische IP Adressen</title>
@@ -43,8 +43,7 @@ $ip = $ec2_eip->allocate();
 
 // Gibt die neu verknüpfte elastische IP Adresse aus;
 print $ip;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.elasticip.describe">
@@ -70,8 +69,7 @@ $ips = $ec2_eip->describe(array('ip1', 'ip2', 'ip3'));
 
 // Beschreibe eine einzelne IP Adresse
 $ip = $ec2_eip->describe('ip1');
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.elasticip.release">
@@ -86,8 +84,7 @@ $ip = $ec2_eip->describe('ip1');
         <programlisting role="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->release('ipaddress);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.elasticip.associate">
@@ -104,8 +101,7 @@ $ec2_eip->release('ipaddress);
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->associate('instance_id', 'ipaddress');
 
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.service.amazon.ec2.elasticip.disassocate">
@@ -122,8 +118,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
         <programlisting role="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->disassocate('ipaddress');
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
 </sect1>

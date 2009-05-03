@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -215,7 +215,6 @@ echo $page->foo;
 if ($page->meaning != 42) {
     // Eine Aktion sollte durchgeführt werden
 }
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
 
@@ -33,8 +33,7 @@ $mail->setFrom('somebody@example.com', 'Ein Versender');
 $mail->addTo('somebody_else@example.com', 'Ein Empfänger');
 $mail->setSubject('TestBetreff');
 $mail->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -73,8 +72,7 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
     ->addTo('somebody_else@example.com', 'Einige Empfänger')
     ->setSubject('TestBetreff')
     ->send();
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -112,8 +110,7 @@ $mail->setFrom('somebody@example.com', 'Einige Sender');
 $mail->addTo('somebody_else@example.com', 'Einige Empfänger');
 $mail->setSubject('TestBetreff');
 $mail->send();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 

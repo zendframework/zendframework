@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.read">
     <title>Lesen von Mail Nachrichten</title>
@@ -89,8 +89,7 @@ echo $mail->countMessages() . " Nachrichten gefunden\n";
 foreach ($mail as $message) {
     echo "Mail von '{$message->from}': {$message->subject}\n";
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
     <sect2 id="zend.mail.read-open-local">
@@ -108,16 +107,14 @@ foreach ($mail as $message) {
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Mbox(array('filename' =>
                                              '/home/test/mail/inbox'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Maildir ist sehr einfach benötigt aber einen Verzeichnisnamen:</para>
 
         <programlisting role="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Maildir(array('dirname' =>
                                                 '/home/test/mail/'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Beide Konstruktoren werfen eine <classname>Zend_Mail_Exception</classname> Ausnahme wenn der Speicher nicht
         gelesen werden kann.</para>
@@ -148,8 +145,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
                                          'port'     => 1120
                                          'user'     => 'test',
                                          'password' => 'test'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Für beide Speicher werden SSL und TLS unterstützt. Wenn SSL verwendet wird, wird der Standardport laut
@@ -172,8 +168,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
                                          'user'     => 'test',
                                          'password' => 'test',
                                          'ssl'      => 'TLS'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Beide Konstruktoren können eine <classname>Zend_Mail_Exception</classname> oder
@@ -193,8 +188,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'example.com',
 
         <programlisting role="php"><![CDATA[
 $message = $mail->getMessage($messageNum);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Zugriff über Arrays ist auch möglich, unterstützt aber nicht jeden zusätzlichen Parameter der zu
@@ -203,8 +197,7 @@ $message = $mail->getMessage($messageNum);
 
         <programlisting role="php"><![CDATA[
 $message = $mail[$messageNum];
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Um über alle Nachrichten zu iterieren wurde das Iterator Interface implementiert:</para>
 
@@ -212,8 +205,7 @@ $message = $mail[$messageNum];
 foreach ($mail as $messageNum => $message) {
     // mach was ...
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Um die Nachrichten im Speicher zu zählen kann entweder die Methode <code>countMessages()</code> oder
@@ -226,8 +218,7 @@ $maxMessage = $mail->countMessages();
 
 // Array Zugriff
 $maxMessage = count($mail);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Um eine Mail zu entfernen kann die Methode <code>removeMessage()</code> oder auch der Array Zugriff
         verwendet werden:</para>
@@ -238,8 +229,7 @@ $mail->removeMessage($messageNum);
 
 // Array Zugriff
 unset($mail[$messageNum]);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
     <sect2 id="zend.mail.read-message">
@@ -268,8 +258,7 @@ $type = $message->contentType;
 if( isset($message->cc) ) { // oder $message->headerExists('cc');
     $cc = $message->cc;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Wenn mehrere Kopfzeilen mit dem selben Namen vorhanden sind z.B. die empfangenen Kopfzeilen
         kann es gewünscht sein diese als Array statt als String zu haben, was mit der <code>getHeader()</code>
@@ -295,8 +284,7 @@ $received = $message->getHeader('received');
 if (is_string($received)) {
     // Nur eine empfangene Kopfzeile in der Nachricht gefunden
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Die Methode <code>getHeaders()</code> gibt alle Kopfzeilen als Array mit den kleingeschriebenen Namen
         als Schlüssel und den Wert als Array für mehrere Kopfzeilen oder als String für einzelne Kopfzeilen.</para>
@@ -312,8 +300,7 @@ foreach ($message->getHeaders() as $name => $value) {
         echo "$name: $entry\n";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Wenn keine Nachricht aus mehreren Teilen vorlieg kann der Inhalt sehr einfach über
         <code>getContent()</code> geholt werden. Anders als die Kopfzeilen wird der Inhalt nur geholt wenn dies
@@ -324,8 +311,7 @@ foreach ($message->getHeaders() as $name => $value) {
 echo '<pre>';
 echo $message->getContent();
 echo '</pre>';
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Die Prüfung auf mehrteilige Nachrichten wird in der Methode <code>isMultipart()</code> gemacht.
         Wenn eine mehrteilige Nachricht vorliegt kann eine Instanz von <classname>Zend_Mail_Part</classname> mit der
@@ -343,8 +329,7 @@ while ($part->isMultipart()) {
 echo 'Der Typ des Teils ist ' . strtok($part->contentType, ';') . "\n";
 echo "Inhalt:\n";
 echo $part->getContent();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para><classname>Zend_Mail_Part</classname> implementiert auch den <code>RecursiveIterator</code>, welcher es sehr einfach macht alle Teile
         zu durchsuchen. Und für die einfache Ausgabe wurde auch die magische Methode <code>__toString()</code> implementiert,
@@ -368,8 +353,7 @@ if (!$foundPart) {
 } else {
     echo "Reiner Text-Teil: \n" . $foundPart;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
     <sect2 id="zend.mail.read-flags">
@@ -417,8 +401,7 @@ foreach ($flags as $flag) {
             echo $flag . '(unbekanntes Flag) ';
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>Da IMAP Benutzern oder auch Clients selbstdefinierte Flags erlaubt, können auch Flags empfangen werden
         die keine Konstante in <classname>Zend_Mail_Storage</classname> haben. Stattdessen werden sie als String zurückgegeben
@@ -433,8 +416,7 @@ if (!$message->hasFlag('$SpamTested')) {
 } else {
     echo 'Diese Nachricht ist Speck';
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
     <sect2 id="zend.mail.read-folders">
@@ -484,8 +466,7 @@ $mail = new Zend_Mail_Storage_Folder_Maildir(array('dirname' =>
 $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
                                          'user'     => 'test',
                                          'password' => 'test'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Mit der Methode getFolders($root = null) kann die Verzeichnisstruktur beginnend mit dem
@@ -546,8 +527,7 @@ foreach ($folders as $localName => $folder) {
         . htmlspecialchars($localName) . '</option>';
 }
 echo '</select>';
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Der aktuell ausgewählte Ordner wird durch die Methode <code>getSelectedFolder()</code> zurückgegeben.
@@ -568,8 +548,7 @@ echo 'Der letzte Ordner war '
    . $mail->getSelectedFolder()
    . "neuer Ordner ist $folder\n";
 $mail->selectFolder($folder);
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
     <sect2 id="zend.mail.read-advanced">
@@ -594,8 +573,7 @@ foreach ($mail as $message) {
 
     $mail->noop(); // am Leben halten
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
         <sect3 id="zend.mail.read-advanced.caching">
@@ -632,8 +610,7 @@ if (!$cache->isCached($cache_id) ||
 // irgendwas machen ...
 
 $cache->set($cache_id, $mail);
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
         <sect3 id="zend.mail.read-advanced.extending">
@@ -718,8 +695,7 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                                           'password'    => 'test',
                                           'knock_ports' =>
                                               array(1101, 1105, 1111)));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wie gesehen werden kann wird angenommen das man immer verbunden, eingeloggt und, wenn es
@@ -759,8 +735,7 @@ echo 'Quotenprüfung ist jetzt ', $mail->getQuota() ? 'eingeschaltet'
 // selbst wenn die Quotenprüfung ausgeschaltet ist
 echo 'Sie sind ', $mail->checkQuota() ? 'über der Quote'
                                       : 'nicht über der Quote', "\n";
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 <code>checkQuota()</code> kann eine viel detailiertere Antwort zurückgeben:
@@ -776,8 +751,7 @@ echo 'Sie haben ',
     $quota['quota']['count'],
     ' Nachrichten und verwenden ';
 echo $quota['size'], ' von ', $quota['quota']['size'], ' Oktets';
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn man eigene Quoten spezifizieren will statt die bereits in der maildirsize
@@ -787,8 +761,7 @@ echo $quota['size'], ' von ', $quota['quota']['size'], ' Oktets';
             <programlisting role="php"><![CDATA[
 // message count and octet size supported, order does matter
 $quota = $mail->setQuota(array('size' => 10000, 'count' => 100));
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Wenn eigene Quotenchecks hinzugefügt werden sollen können einzelne Buchstaben als
@@ -816,8 +789,7 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
     </sect2>

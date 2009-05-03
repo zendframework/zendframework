@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
@@ -23,8 +23,7 @@
 $client = new Zend_Rest_Client('http://framework.zend.com/rest');
 
 echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <note>
@@ -39,8 +38,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
             <programlisting role="php"><![CDATA[
 $client->sayHello('Davey', 'Tag');
 echo $client->get();
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
     </sect2>
 
@@ -67,8 +65,7 @@ $result = $client->sayHello('Davey', 'Tag')->get();
 if ($result->isSuccess()) {
     echo $result; // "Hallo Davey, guten Tag"
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>
@@ -97,8 +94,7 @@ $technorati->key($key);
 $technorati->url('http://pixelated-dreams.com');
 $result = $technorati->get();
 echo $result->firstname() .' '. $result->lastname();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <example id="zend.rest.client.return.example-3">
@@ -183,8 +179,7 @@ $client->get();
 // oder
 
 $client->arg('value1')->arg2('value2')->get();
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
 
         <para>

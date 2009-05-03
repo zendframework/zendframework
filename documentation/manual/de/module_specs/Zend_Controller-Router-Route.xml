@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -27,8 +27,7 @@ $route = new Zend_Controller_Router_Route(
 );
 
 $router->addRoute('user', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Der ersten Parameter im Konstruktor von <code>http://domain.com/author/martel</code> ist eine
@@ -62,8 +61,7 @@ $values = array(
     'controller' => 'profile',
     'action'     => 'userinfo'
 );
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die <code>userinfoAction()</code> Methode
@@ -80,8 +78,7 @@ public function userinfoAction()
 
     $username = $this->_getParam('username');
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Eine Routendefinition kann ein weiteres spezielles Zeichen enthalten - eine Wildcard - dargestellt durch ein
@@ -95,8 +92,7 @@ $route = new Zend_Controller_Router_Route(
     array('module' => 'default')
 );
 $router->addRoute('default', $route);
-]]>
-    </programlisting>
+]]></programlisting>
 
     <sect4 id="zend.controller.router.routes.standard.variable-defaults">
         <title>Variable Standards</title>
@@ -113,8 +109,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => 2006)
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Die obige Route entspricht URLs wie <code>http://domain.com/archive/2005</code> und
@@ -141,8 +136,7 @@ $route = new Zend_Controller_Router_Route(
     )
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Diese Route führt dazu das an die Methode <code>showAction()</code> der Klasse
@@ -171,8 +165,7 @@ $route = new Zend_Controller_Router_Route(
     array('year' => '\d+')
 );
 $router->addRoute('archive', $route);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Mit einer Route die wie oben definiert ist, wird das Routing nur dann stattfinden wenn die year
@@ -278,8 +271,7 @@ $translator->setLocale('en');
 
 // Als Standard-Übersetzer für Routen setzen
 Zend_Controller_Router_Route::setDefaultTranslator($translator);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Dieses Beispiel zeigt die Verwendung von statischen Segmenten:
@@ -301,8 +293,7 @@ $route->assemble(array());
 
 // Die URL in Deutsch zusammenbauen: archiv
 $route->assemble(array());
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann dynamische Segmente verwenden um eine Modul-Route, so wie die übersetzte Version,
@@ -325,8 +316,7 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
 
 // Die URL in Deutsch zusammenbauen: archiv/uebersicht/foo/bar
 $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Man kann auch statische und dynamische Segmente mischen:
@@ -352,8 +342,7 @@ $route->assemble(array('mode' => 'month', 'value' => '5'));
 
 // Die URL in Deutsch zusammenbauen: archiv/monat/5
 $route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
-]]>
-        </programlisting>
+]]></programlisting>
     </sect4>
 
 </sect3>

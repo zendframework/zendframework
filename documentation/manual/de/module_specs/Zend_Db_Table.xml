@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -1119,7 +1119,7 @@ $rows = $table->fetchAll($select);
 
             <example id="zend.db.table.qry.rows.set.integrity.example">
 
-                <title>Entfernen des Integritäts Checks von <classname>Zend_Db_Table_Select</classname> um geJOINte Zeilen zu erlauben</title>
+                <title>Entfernen des Integritäts Checks von Zend_Db_Table_Select um geJOINte Zeilen zu erlauben</title>
 
                 <programlisting><![CDATA[
 $table = new Bugs();
@@ -1330,7 +1330,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
         <example id="zend.db.table.metadata.caching-default">
 
-            <title>Verwenden eines standardmäßigen Caches fpr Metadaten für alle Tabellenobjekte</title>
+            <title>Verwenden eines standardmäßigen Caches für Metadaten für alle Tabellenobjekte</title>
 
             <para>
                 Der folgende Code demonstriert wie ein standardmäßiger Cache für die Metadaten gesetzt werden
@@ -1628,7 +1628,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         <sect3 id="zend.db.table.extending.finders">
 
-            <title>Eigene Such Methoden in <classname>Zend_Db_Table</classname> definieren</title>
+            <title>Eigene Such Methoden in Zend_Db_Table definieren</title>
 
             <para>
                 Es können eigene Abfrage Methoden in der Table Klasse implementiert werden, wenn oft die
@@ -1662,7 +1662,7 @@ class Bugs extends Zend_Db_Table_Abstract
 
         <sect3 id="zend.db.table.extending.inflection">
 
-            <title>Inflection (Beugung) in <classname>Zend_Db_Table</classname> definieren</title>
+            <title>Inflection (Beugung) in Zend_Db_Table definieren</title>
 
             <para>
                 Einige Leute bevorzugen das der Name der Table Klasse einem Tabellennamen in der RDBMS, durch

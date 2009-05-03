@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.overview">
 
@@ -218,7 +218,7 @@ $date = new Zend_Date('31.Feb.2007');
 
     <sect2 id="id.date.basic">
 
-        <title>Grundsätzliche <classname>Zend_Date</classname> Operationen für die meisten Teile von Daten</title>
+        <title>Grundsätzliche Zend_Date Operationen für die meisten Teile von Daten</title>
 
         <para>
             Die Methoden <code>add(), sub(), compare(), get(), und set()</code> arbeiten generell mit Daten. In

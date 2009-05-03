@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
@@ -176,7 +176,7 @@ if (!validator->isValid('word')) {
 
     <sect2 id="zend.validate.introduction.static">
 
-        <title>Verwenden der statischen <code>is()</code> Methode</title>
+        <title>Verwenden der statischen is() Methode</title>
 
         <para>
             Wenn es nicht gebräuchlich ist eine gegebenen Prüfklasse zu laden und eine Instanz

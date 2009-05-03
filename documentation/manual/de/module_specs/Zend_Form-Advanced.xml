@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
-    <title>Fortgeschrittene Verwendung von <classname>Zend_Form</classname></title>
+    <title>Fortgeschrittene Verwendung von Zend_Form</title>
 
     <para>
         <classname>Zend_Form</classname> hat eine Vielzahl an Funktionalitäten, von denen viele auf

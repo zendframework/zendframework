@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
-    <title>Erstellen von Form Elementen mit Hilfe von <classname>Zend_Form_Element</classname></title>
+    <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
 
     <para>
         Ein Formular ist aus Elementen gemacht, die typischerweise mit einer HTML Form Eingabe

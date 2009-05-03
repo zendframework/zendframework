@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
 
@@ -158,7 +158,7 @@
     </itemizedlist>
 
     <sect2 id="zend.file.transfer.validators.usage">
-        <title>Prüfungen mit <classname>Zend_File_Transfer</classname> verwenden</title>
+        <title>Prüfungen mit Zend_File_Transfer verwenden</title>
 
         <para>
             Prüfungen einzubinden ist sehr einfach. Es gibt verschiedene Methoden für das

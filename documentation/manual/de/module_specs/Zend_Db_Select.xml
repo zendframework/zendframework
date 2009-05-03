@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -431,8 +431,7 @@ $select = $db->select()
 
             <example id="zend.db.select.building.columns-atomic.example">
 
-                <title>Beispiel für das hinzufügen von Spalten mit der <code>columns()</code>
-                    Methode</title>
+                <title>Beispiel für das Hinzufügen von Spalten mit der columns() Methode</title>
 
                 <programlisting role="php"><![CDATA[
 // Diese Abfrage bauen:
@@ -870,7 +869,7 @@ $select = $db->select()
 
             <example id="zend.db.select.building.where.example-parens">
 
-                <title>Beispiel für das einklammern von Boolean Expressions</title>
+                <title>Beispiel für das Einklammern von Boolean Expressions</title>
 
                 <programlisting role="php"><![CDATA[
 // Erzeugt diese Anfrage:

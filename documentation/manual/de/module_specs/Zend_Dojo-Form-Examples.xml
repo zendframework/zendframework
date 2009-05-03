@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.examples">
     <title>Dojo Formular Beispiele</title>
 
     <example id="zend.dojo.form.examples.dojoform">
-        <title><classname>Zend_Dojo_Form</classname> verwenden</title>
+        <title>Zend_Dojo_Form verwenden</title>
 
         <para>
             Der einfachste Weg um Dojo mit <classname>Zend_Form</classname> zu verwenden besteht darin

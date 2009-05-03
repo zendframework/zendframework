@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
@@ -23,7 +23,7 @@
     </para>
 
     <example id="zend.version.reading.example">
-        <title>Beispiel der <code>compareVersion()</code> Methode</title>
+        <title>Beispiel der compareVersion() Methode</title>
         <programlisting role="php"><![CDATA[
 // gibt -1, 0 oder 1 zurück
 $cmp = Zend_Version::compareVersion('2.0.0');

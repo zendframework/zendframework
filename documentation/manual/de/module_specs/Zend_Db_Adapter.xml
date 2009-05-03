@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
 
@@ -110,7 +110,7 @@
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
-            <title>Nutzung des <classname>Zend_Db</classname> Adapter Konstruktors</title>
+            <title>Nutzung des Zend_Db Adapter Konstruktors</title>
 
             <para>
                 Man kann eine Instanz eines Adapters erzeugen, indem man den Konstruktor verwendet. Ein Adapter
@@ -132,7 +132,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.factory">
-            <title>Nutzung der <classname>Zend_Db</classname> Factory</title>
+            <title>Nutzung der Zend_Db Factory</title>
 
             <para>
                 Als Alternative zur direkten Nutzung des Konstruktors kann man auch eine Instanz des Adapters
@@ -196,7 +196,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
         <sect3 id="zend.db.adapter.connecting.factory-config">
 
-            <title>Zend_Config mit <classname>Zend_Db_Factory</classname> verwenden</title>
+            <title>Zend_Config mit Zend_Db_Factory verwenden</title>
 
             <para>
                 Optional kann jedes Argument der <code>factory()</code> Methode als Objekt des Typs
@@ -212,7 +212,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example1">
-                <title>Verwenden der Factory Methode des Adapters mit einem <classname>Zend_Config Objekt</classname></title>
+                <title>Verwenden der Factory Methode des Adapters mit einem Zend_Config Objekt</title>
                 <para>
                     Im Beispiel anbei wird ein <classname>Zend_Config</classname> Objekt von einem Array erstellt. Die Daten können
                     auch aus einer externen Datei geladen werden indem Klassen wie zum Beispiel
@@ -1140,7 +1140,7 @@ echo $sql;
 
         <sect3 id="zend.db.adapter.quoting.quote">
 
-            <title>Nutzung von <code>quote()</code></title>
+            <title>Nutzung von quote()</title>
 
             <para>
                 Die <code>quote()</code> Methode benötigt ein Argument, einen scalaren String Wert. Sie gibt den
@@ -1150,7 +1150,7 @@ echo $sql;
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example">
-                <title>Nutzung von <code>quote()</code></title>
+                <title>Nutzung von quote()</title>
                 <programlisting role="php"><![CDATA[
 $name = $db->quote("O'Reilly");
 echo $name;
@@ -1189,7 +1189,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <example id="zend.db.adapter.quoting.quote.example-2">
-                <title>Verwenden von <code>quote()</code> mit einem SQL Typ</title>
+                <title>Verwenden von quote() mit einem SQL Typ</title>
                 <programlisting role="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
@@ -1213,7 +1213,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
 
         <sect3 id="zend.db.adapter.quoting.quote-into">
 
-            <title>Nutzung von <code>quoteInto()</code></title>
+            <title>Nutzung von quoteInto()</title>
 
             <para>
                 Die typischste Anwendung von Quotierung ist das Einfügen von PHP Variablen in eine SQL Expression
@@ -1232,7 +1232,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example">
-                <title>Nutzung von <code>quoteInto()</code></title>
+                <title>Nutzung von quoteInto()</title>
                 <programlisting role="php"><![CDATA[
 $sql = $db->quoteInto("SELECT * FROM bugs WHERE reported_by = ?", "O'Reilly");
 
@@ -1248,7 +1248,7 @@ echo $sql;
             </para>
 
             <example id="zend.db.adapter.quoting.quote-into.example-2">
-                <title>Verwenden von <code>quoteInto()</code> mit einem SQL Typ</title>
+                <title>Verwenden von quoteInto() mit einem SQL Typ</title>
                 <programlisting role="php"><![CDATA[
 $sql = $db
     ->quoteInto("SELECT * FROM bugs WHERE bug_id = ?", '1234', 'INTEGER');
@@ -1261,7 +1261,7 @@ echo $sql;
         </sect3>
         <sect3 id="zend.db.adapter.quoting.quote-identifier">
 
-            <title>Nutzung von <code>quoteIdentifier()</code></title>
+            <title>Nutzung von quoteIdentifier()</title>
 
             <para>
                 Werte könnten nicht der einzige Teil der SQL Syntax sein, der Variabel sein soll. Wenn PHP
@@ -1570,7 +1570,7 @@ $db->closeConnection();
         </example>
 
         <note>
-            <title>Unterstützt <classname>Zend_Db</classname> persistente Verbindungen?</title>
+            <title>Unterstützt Zend_Db persistente Verbindungen?</title>
             <para>
                 Die Nutzung von persistenten Verbindungen wird weder von <classname>Zend_Db</classname> unterstützt, noch gewünscht.
             </para>

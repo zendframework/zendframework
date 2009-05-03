@@ -13,83 +13,80 @@
     </para>
 
     <para>
-        <code>Zend_Reflection</code> analyzes method docblock annotations to
-        determine parameter variable types and the return type. Specifically,
-        the <code>@param</code> and <code>@return</code> annotations are used.
-        However, you can also check for any other annotation tags, as well as
-        the standard "short" and "long" descriptions.
+        <code>Zend_Reflection</code> analysiert die DocBlock Anotations von Methoden um die
+        Variablen-Typen und Rückgabe-Typen von Parametern zu Erkennen. Speziell die Annotations
+        von <code>@param</code> und <code>@return</code> werden verwendet. Trotzdem kann man auch
+        auf andere Annotation Tags prüfen, sowie die Standardmäßigen "Kurz"- (short) und
+        "Lang" (long) Beschreibungen.
     </para>
 
     <para>
-        Each reflection object in <code>Zend_Reflection</code> overrides the
-        <code>getDocblock()</code> method to return an instance of
-        <code>Zend_Reflection_Docblock</code>. This class provides introspection
-        into the docblocks and annotation tags.
+        Jedes Reflection Objekt in <code>Zend_Reflection</code> überschreibt die
+        <code>getDocblock()</code> Methode um eine Instanz von
+        <code>Zend_Reflection_Docblock</code> zurückzugeben. Die klasse bietet Introspektion in die
+        DocBlocks und Annotation Tags.
     </para>
 
     <para>
-        <code>Zend_Reflection_File</code> is a new reflection class that allows
-        introspection of PHP files. With it, you can retrieve the classes,
-        functions, and global PHP code contained in the file.
+        <code>Zend_Reflection_File</code> ist eine neue Reflection Klasse welche die Introspektion
+        von PHP Dateien erlaubt. Mit Ihr kann man die Klassen, Funktionen und globalen PHP Code
+        erhalten der in der Datei enthalten ist.
     </para>
 
     <para>
-        Finally, the various methods that return other reflection objects
-        allow a second parameter, the name of the reflection class to use for
-        the returned reflection object.
+        Letztendlich erlauben die verschiedenen Methoden, die andere Reflection Objekte
+        zurückgeben, einen zweiten Parameter: Den Namen der Reflection Klasse die für das
+        zurückzugebende Reflection Objekt zu verwenden ist.
     </para>
 
     <sect2 id="zend.reflection.reference.docblock">
         <title>Zend_Reflection_Docblock</title>
 
         <para>
-            <code>Zend_Reflection_Docblock</code> is the heart of
-            <code>Zend_Reflection</code>'s value-add over PHP's Reflection API.
-            It provides the following methods:
+            <code>Zend_Reflection_Docblock</code> ist das Herz von
+            <code>Zend_Reflection_Docblock</code> Bonus über PHP's Reflection API. Es bietet die
+            folgenden Methoden:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getContents()</code>: returns the full contents of the
-                docblock.
+                <code>getContents()</code>: Gibt den kompletten Inhalt des DocBlocks zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getStartLine()</code>: returns the starting position of
-                the docblock within the defining file.
+                <code>getStartLine()</code>: Gibt die Startposition des DocBlocks in der
+                definierten Datei zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getEndLine()</code>: get last line of docblock within the
-                defining file.
+                <code>getEndLine()</code>: Gibt die letzte Zeile des DocBlocks in der definierten
+                Datei zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getShortDescription()</code>: get the short, one-line
-                description (usually the first line of the docblock).
+                <code>getShortDescription()</code>: Gibt die kurze, ein-zeilige Beschreibung zurück
+                (normalerweise die erste Zeile des DocBlocks).
             </para></listitem>
 
             <listitem><para>
-                <code>getLongDescription()</code>: get the long description from
-                the docblock.
+                <code>getLongDescription()</code>: Gibt die lange Beschreibung des DocBlocks
+                zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>hasTag($name)</code>: determine if the docblock has the
-                given annotation tag.
+                <code>hasTag($name)</code>: Erkennt ob der DocBlock das angegebene Annotation Tag
+                besitzt.
             </para></listitem>
 
             <listitem><para>
-                <code>getTag($name)</code>: Retrieve the given annotation tag
-                reflection object, or a boolean <code>false</code> if it's not
-                present.
+                <code>getTag($name)</code>: Empfängt das Reflection Objekt des angegebenen
+                Annotation Tags, oder ein boolsches <code>false</code> wenn es nicht vorhanden ist.
             </para></listitem>
 
             <listitem><para>
-                <code>getTags($filter)</code>: Retrieve all tags, or all tags
-                matching the given <code>$filter</code> string. The tags
-                returned will be an array of
-                <code>Zend_Reflection_Docblock_Tag</code> objects.
+                <code>getTags($filter)</code>: Gibt alle Tags zurück, oder alle Tags die dem
+                angegebenen <code>$filter</code> String entsprechen. Die zurückgegebenen Tags
+                werden ein Array von <code>Zend_Reflection_Docblock_Tag</code> Objekten sein.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -98,30 +95,28 @@
         <title>Zend_Reflection_Docblock_Tag</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag</code> provides reflection for
-            individual annotation tags. Most tags consist of only a name and a
-            description. In the case of some special tags, the class provides a
-            factory method for retrieving an instance of the appropriate class.
+            <code>Zend_Reflection_Docblock_Tag</code> bietet Reflection für individuelle
+            Annotation Tags. Die meisten Tags bestehen nur aus einem Namen und einer Beschreibung.
+            Im Fall einiger spezieller Tags, bietet die Klasse eine Factory Methode um eine
+            Instanz der entsprechenden Klasse zu erhalten.
         </para>
 
         <para>
-            The following methods are defined for
-            <code>Zend_Reflection_Docblock_Tag</code>:
+            Die folgenden Methoden sind für <code>Zend_Reflection_Docblock_Tag</code> definiert:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>factory($tagDocblockLine)</code>: instantiate the
-                appropriate tag reflection class and return it.
+                <code>factory($tagDocblockLine)</code>: Instanziert die entsprechende Reflection
+                Klasse des Tags und gibt diese zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getName()</code>: return the annotation tag name.
+                <code>getName()</code>: Gibt den Namen des Annotation Tags zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getDescription()</code>: return the annotation
-                description.
+                <code>getDescription()</code>: Gibt die Beschreibung des Annotation Tags zurück.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -130,21 +125,20 @@
         <title>Zend_Reflection_Docblock_Tag_Param</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
-            <code>@param</code> annotation tag description consists of the
-            parameter type, variable name, and variable description. It adds the
-            following methods to <code>Zend_Reflection_Docblock_Tag</code>:
+            <code>Zend_Reflection_Docblock_Tag_Param</code> ist eine spezialisierte Version von
+            <code>Zend_Reflection_Docblock_Tag</code>. Die Beschreibung des <code>@param</code>
+            Annotation Tags besteht aus dem Typ des Parameters, dem Namen der Variable und der
+            Beschreibung der Variable. Sie fügt die folgenden Methoden zu
+            <code>Zend_Reflection_Docblock_Tag</code> hinzu:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: return the parameter variable type.
+                <code>getType()</code>: Gibt den Variablentyp des Parameters zurück.
             </para></listitem>
 
             <listitem><para>
-                <code>getVariableName()</code>: return the parameter variable
-                name.
+                <code>getVariableName()</code>: Gibt den Variablennamen des Parameters zurück.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -153,17 +147,16 @@
         <title>Zend_Reflection_Docblock_Tag_Return</title>
 
         <para>
-            Like <code>Zend_Reflection_Docblock_Tag_Param</code>,
-            <code>Zend_Reflection_Docblock_Tag_Return</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
-            <code>@return</code> annotation tag description consists of the
-            return type and variable description. It adds the following method
-            to <code>Zend_Reflection_Docblock_Tag</code>:
+            Wie <code>Zend_Reflection_Docblock_Tag_Param</code> ist
+            <code>Zend_Reflection_Docblock_Tag_Return</code> eine spezialisierte Version von
+            <code>Zend_Reflection_Docblock_Tag</code>. Die Beschreibung des <code>@return</code>
+            Annotation Tags besteht aus dem Rückgabetyp und der Beschreibung der Variable. Sie
+            fügt die folgende Methode zu <code>Zend_Reflection_Docblock_Tag</code> hinzu:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: return the return type.
+                <code>getType()</code>: gibt den Rückgabetyp zurück.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -172,54 +165,49 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <code>Zend_Reflection_File</code> provides introspection into PHP
-            files. With it, you can introspect the classes, functions, and bare
-            PHP code defined in a file. It defines the following methods:
+            <code>Zend_Reflection_File</code> bietet Introspection in PHP Dateien. Mit Ihr kann
+            man Klassen, Funktionen und reinen PHP Code der in einer Datei definiert ist,
+            betrachten. Sie definiert die folgenden Methoden:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getFileName()</code>: retrieve the filename of the file
-                being reflected.
+                <code>getFileName()</code>: empfängt den Dateinamen der Datei die reflektiert wird.
             </para></listitem>
 
             <listitem><para>
-                <code>getStartLine()</code>: retrieve the starting line of the
-                file (always "1").
+                <code>getStartLine()</code>: empfängt den Startwert der Datei (Immer "1").
             </para></listitem>
 
             <listitem><para>
-                <code>getEndLine()</code> retrieve the last line / number of
-                lines in the file.
+                <code>getEndLine()</code>: empfängt die letzte Teile / Anzahl der Linien in der
+                Datei.
             </para></listitem>
 
             <listitem><para>
-                <code>getDocComment($reflectionClass =
-                    'Zend_Reflection_Docblock')</code>: retrive the file-level
-                docblock reflection object.
+                <code>getDocComment($reflectionClass = 'Zend_Reflection_Docblock')</code>:
+                empfängt das Reflection Objekt des Datei-Level DocBlocks.
             </para></listitem>
 
             <listitem><para>
-                <code>getClasses($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve an array of
-                reflection objects, one for each class defined in the file.
+                <code>getClasses($reflectionClass = 'Zend_Reflection_Class')</code>:
+                empfängt ein Array von Reflection Objekten, eines für jede Klasse die in der
+                Datei definiert ist.
             </para></listitem>
 
             <listitem><para>
-                <code>getFunctions($reflectionClass =
-                    'Zend_Reflection_Function')</code>: retrieve an array of
-                reflection objects, one for each function defined in the file.
+                <code>getFunctions($reflectionClass = 'Zend_Reflection_Function')</code>:
+                empfängt ein Array von Reflection Objekten, eines für jede Funktion die in der
+                Datei definiert ist.
             </para></listitem>
 
             <listitem><para>
-                <code>getClass($name = null, $reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the reflection
-                object for a single class.
+                <code>getClass($name = null, $reflectionClass = 'Zend_Reflection_Class')</code>:
+                empfängt das Reflection Objekt für eine einzelne Klasse.
             </para></listitem>
 
             <listitem><para>
-                <code>getContents()</code>: retrieve the full contents of the
-                file.
+                <code>getContents()</code>: empfängt den kompletten Inhalt der Datei.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -228,17 +216,16 @@
         <title>Zend_Reflection_Class</title>
 
         <para>
-            <code>Zend_Reflection_Class</code> extends
-            <code>ReflectionClass</code>, and follows its API. It adds one
-            additional method, <code>getDeclaringFile()</code>, which may be
-            used to retrieve the <code>Zend_Reflection_File</code> reflection
-            object for the defining file.
+            <code>Zend_Reflection_Class</code> erweitert <code>ReflectionClass</code> und folgt
+            dessen API. Sie fügt eine zusätzliche, <code>getDeclaringFile()</code>, Methode
+            hinzu, welche verwendet werden kann um das <code>Zend_Reflection_File</code>
+            Reflection Objekt für die definierte Datei zu erhalten.
         </para>
 
         <para>
-            Additionally, the following methods add an additional argument for
-            specifying the reflection class to use when fetching a reflection
-            object:
+            Zusätzlich fügen die folgenden Methoden ein zusätzliches Argument für die Spezifikation
+            der Reflection Klasse hinzu, die zu verwenden ist wenn ein Reflection Objekt geholt
+            wird.
         </para>
 
         <itemizedlist>
@@ -283,25 +270,23 @@
         <title>Zend_Reflection_Extension</title>
 
         <para>
-            <code>Zend_Reflection_Extension</code> extends
-            <code>ReflectionExtension</code>, and follows its API. It overrides
-            the following methods to add an additional argument for specifying
-            the reflection class to use when fetching a reflection object:
+            <code>Zend_Reflection_Extension</code> erweitert <code>ReflectionExtension</code> und
+            folgt dessen API. Sie überschreibt die folgenden Methoden und fügt ein zusätzliches
+            Argument hinzu, für die Spezifikation der Reflection Klasse, die zu verwenden ist
+            wenn ein Reflection Objekt geholt wird:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getFunctions($reflectionClass =
-                    'Zend_Reflection_Function')</code>: retrieve an array of
-                reflection objects representing the functions defined by the
-                extension.
+                <code>getFunctions($reflectionClass = 'Zend_Reflection_Function')</code>: empfängt
+                ein Array von Reflection Objekten welche die Funktionen repräsentieren die von der
+                Erweiterung definiert werden.
             </para></listitem>
 
             <listitem><para>
-                <code>getClasses($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve an array of
-                reflection objects representing the classes defined by the
-                extension.
+                <code>getClasses($reflectionClass = 'Zend_Reflection_Class')</code>: empfängt ein
+                Array von Reflection Objekten welche die Klassen repräsentieren die von der
+                Erweiterung definiert werden.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -310,28 +295,25 @@
         <title>Zend_Reflection_Function</title>
 
         <para>
-            <code>Zend_Reflection_Function</code> adds a method for retrieving
-            the function return type, as well as overrides several methods to
-            allow specifying the reflection class to use for returned reflection
-            objects.
+            <code>Zend_Reflection_Function</code> fügt eine Methode für das Empfangen des
+            Rückgabewerts der Funktion hinzu, und überschreibt diverse Methoden um die
+            Spezifikation der Reflection Klasse zu erlauben, die für zurückgegebene Reflection
+            Objekte zu verwenden ist.
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getDocblock($reflectionClass =
-                    'Zend_Reflection_Docblock')</code>: retrieve the function
-                docblock reflection object.
+                <code>getDocblock($reflectionClass = 'Zend_Reflection_Docblock')</code>: empfängt
+                das Reflection Objekt des Funktions DocBlocks.
             </para></listitem>
 
             <listitem><para>
-                <code>getParameters($reflectionClass =
-                    'Zend_Reflection_Parameter')</code>: retrieve an array of
-                all function parameter reflection objects.
+                <code>getParameters($reflectionClass = 'Zend_Reflection_Parameter')</code>:
+                empfängt ein Array aller Reflection Objekte für die Parameter der Funktionen.
             </para></listitem>
 
             <listitem><para>
-                <code>getReturn()</code>: retrieve the return type reflection
-                object.
+                <code>getReturn()</code>: empfängt das Reflection Objekt des Rückgabewerts.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -340,16 +322,14 @@
         <title>Zend_Reflection_Method</title>
 
         <para>
-            <code>Zend_Reflection_Method</code> mirrors
-            <code>Zend_Reflection_Function</code>, and only overrides one
-            additional method:
+            <code>Zend_Reflection_Method</code> spiegelt <code>Zend_Reflection_Function</code>
+            und überschreibt nur eine zusätzliche Methode:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getParentClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the parent class
-                reflection object.
+                <code>getParentClass($reflectionClass = 'Zend_Reflection_Class')</code>: empfängt
+                das Reflection Objekt der Eltern-Klasse.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -358,32 +338,30 @@
         <title>Zend_Reflection_Parameter</title>
 
         <para>
-            <code>Zend_Reflection_Parameter</code> adds a method for retrieving
-            the parameter type, as well as overrides methods to allow specifying
-            the reflection class to use on returned reflection objects.
+            <code>Zend_Reflection_Parameter</code> fügt eine Methode für das Empfangen des
+            Parametertyps hinzu, und überschreibt Methoden um die Spezifikation der Reflection
+            Klasse zu erlauben, die für zurückgegebene Reflection Objekte zu verwenden ist.
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getDeclaringClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: get the declaring class of
-                the parameter as a reflection object (if available).
+                <code>getDeclaringClass($reflectionClass = 'Zend_Reflection_Class')</code>:
+                gibt die deklarierte Klasse des Parameters als Reflection Objekt zurück (wenn
+                vorhanden).
             </para></listitem>
 
             <listitem><para>
-                <code>getClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: get the class of
-                the parameter as a reflection object (if available).
+                <code>getClass($reflectionClass = 'Zend_Reflection_Class')</code>: gibt die Klasse
+                des Parameters als Reflection Objekt zurück (wenn vorhanden).
             </para></listitem>
 
             <listitem><para>
-                <code>getDeclaringFunction($reflectionClass =
-                    'Zend_Reflection_Function')</code>: get the function of
-                the parameter as a reflection object (if available).
+                <code>getDeclaringFunction($reflectionClass = 'Zend_Reflection_Function')</code>:
+                gibt die Funktion des Parameters als Reflection Objekt zurück (wenn vorhanden).
             </para></listitem>
 
             <listitem><para>
-                <code>getType()</code>: get the parameter type.
+                <code>getType()</code>: gibt den Typ des Parameters zurück.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -392,15 +370,14 @@
         <title>Zend_Reflection_Property</title>
 
         <para>
-            <code>Zend_Reflection_Property</code> overrides a single method in
-            order to allow specifying the returned reflection object class:
+            <code>Zend_Reflection_Property</code> überschreibt eine einzelne Methode um die
+            Spezifikation der zurückgegebenen Reflection Objekt Klasse zu spezifizieren:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getDeclaringClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the declaring
-                class of the property as a reflection object.
+                <code>getDeclaringClass($reflectionClass = 'Zend_Reflection_Class')</code>:
+                empfängt die deklarierte Klasse der Eigenschaft als Reflection Objekt.
             </para></listitem>
         </itemizedlist>
     </sect2>

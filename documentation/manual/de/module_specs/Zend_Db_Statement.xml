@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -119,7 +119,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     <sect2 id="zend.db.statement.fetching">
 
-        <title>Holen von Ergebnissen eines <code>SELECT</code> Statements</title>
+        <title>Holen von Ergebnissen eines SELECT Statements</title>
 
         <para>
             Es können Methoden des Statement Objekts aufgefufen werden um Ergebnissätze zu erzeugen. SELECT, SHOW,

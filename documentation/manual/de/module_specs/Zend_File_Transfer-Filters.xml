@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
 
@@ -48,7 +48,7 @@
     </itemizedlist>
 
     <sect2 id="zend.file.transfer.filters.usage">
-        <title>Verwenden von Filtern mit <classname>Zend_File_Transfer</classname></title>
+        <title>Verwenden von Filtern mit Zend_File_Transfer</title>
 
         <para>
             Die Verwendung von Filtern ist sehr einfach. Es gibt verschiedene Methoden für das

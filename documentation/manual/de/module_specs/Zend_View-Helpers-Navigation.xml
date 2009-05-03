@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -1311,7 +1311,7 @@ Ausgabe:
         </example>
 
         <example id="zend.view.helpers.initial.navigation.menu.example2">
-            <title><code>renderMenu()</code> direkt aufrufen</title>
+            <title>renderMenu() direkt aufrufen</title>
 
             <para>
                 Dieses Beispiel zeigt wie ein Menü dargestellt werden kann das nicht im View

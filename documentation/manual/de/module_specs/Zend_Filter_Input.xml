@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -462,7 +462,7 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
 
         <sect3 id="zend.filter.input.metacommands.fields">
 
-            <title>Das <code>FIELDS</code> Metakommando</title>
+            <title>Das FIELDS Metakommando</title>
 
             <para>
                 Wenn der Name der Regel für einen Filter oder Prüfer anders lautet als das Feld in welchem er
@@ -528,7 +528,7 @@ $validators = array(
 
         <sect3 id="zend.filter.input.metacommands.presence">
 
-            <title>Das <code>PRESENCE</code> Metakommando</title>
+            <title>Das PRESENCE Metakommando</title>
 
             <para>
                 Jeder Eintrag im Prüfarray kann ein Metakommando haben das 'presence' heißt. Wenn der Wert dieses
@@ -558,7 +558,7 @@ $validators = array(
 
         <sect3 id="zend.filter.input.metacommands.default">
 
-            <title>Das <code>DEFAULT_VALUE</code> Metakommando</title>
+            <title>Das DEFAULT_VALUE Metakommando</title>
 
             <para>
                 Wenn ein Feld, für das ein Wert mit dem 'default' Metakommando für diese Regel, in den Eigabedaten
@@ -610,7 +610,7 @@ echo $input->month; // gibt 1 aus
 
         <sect3 id="zend.filter.input.metacommands.allow-empty">
 
-            <title>Das <code>ALLOW_EMPTY</code> Metakommando</title>
+            <title>Das ALLOW_EMPTY Metakommando</title>
 
             <para>
                 Standardmäßig, wenn ein Feld in den Eingabedaten existiert, wird Ihm der Prüfer zugeordnet selbst
@@ -669,7 +669,7 @@ $input->setOptions($options);
 
         <sect3 id="zend.filter.input.metacommands.break-chain">
 
-            <title>Das <code>BREAK_CHAIN</code> Metakommando</title>
+            <title>Das BREAK_CHAIN Metakommando</title>
 
             <para>
                 Standardmäßig, wenn eine Regel mehr als einen Prüfer hat werden alle Prüfer auf die Eingabe
@@ -734,7 +734,7 @@ $input = new Zend_Filter_Input(null, $validators);
 
         <sect3 id="zend.filter.input.metacommands.messages">
 
-            <title>Das <code>MESSAGES</code> Metakommando</title>
+            <title>Das MESSAGES Metakommando</title>
 
             <para>
                 Man kann Fehlermeldungen für jeden Prüfer in einer Regel spezifizieren indem das 'messages'

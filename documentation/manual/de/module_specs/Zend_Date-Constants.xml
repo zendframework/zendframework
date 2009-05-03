@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -697,8 +697,7 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
         </example>
 
         <table id="zend.date.constants.selfdefinedformats.table">
-            <title>Konstanten für <emphasis role="strong">ISO 8601 Datums Ausgaben</emphasis>
-            </title>
+            <title>Konstanten für ISO 8601 Datums Ausgaben</title>
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -1160,8 +1159,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         </para>
 
         <table id="zend.date.constants.phpformats.table">
-            <title>Konstanten für <emphasis role="strong">PHP date Ausgaben</emphasis>
-            </title>
+            <title>Konstanten für PHP date Ausgaben</title>
             <tgroup cols="5">
                 <thead>
                     <row>

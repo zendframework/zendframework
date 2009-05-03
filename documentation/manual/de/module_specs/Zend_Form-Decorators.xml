@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
-    <title>Erstellen von eigenem Form Markup durch <classname>Zend_Form_Decorator</classname></title>
+    <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
 
     <para>
         Die Darstellung eines Form Objektes ist komplett optional -- <classname>Zend_Form</classname>'s

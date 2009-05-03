@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.introduction">
     <title>Einführung</title>
@@ -37,7 +37,7 @@
     </note>
 
     <example id="zend.feed.introduction.example.rss">
-        <title><classname>Zend_Feed</classname> für die Verarbeitung von RSS Feed Daten verwenden</title>
+        <title>Zend_Feed für die Verarbeitung von RSS Feed Daten verwenden</title>
         <programlisting role="php"><![CDATA[
 // hole die neuesten Slashdot Schlagzeilen
 try {

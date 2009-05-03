@@ -216,7 +216,7 @@ base/path/
 
                 <programlisting role="apache"><![CDATA[
 php_value "short_open_tag" "on"
-</programlisting>
+]]></programlisting>
 
                 <para>
                     This will only be possible if you are allowed to create and

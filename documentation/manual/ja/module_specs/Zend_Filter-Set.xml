@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15212 -->
+<!-- EN-Revision: 15311 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -94,6 +94,10 @@
             文字列 <code>$value</code> から一切の改行制御文字を取り除いたものを返します。
         </para>
     </sect2>
+
+    <xi:include href="Zend_Filter-RealPath.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-RealPath.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.filter.set.stringtolower">
         <title>StringToLower</title>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -190,7 +190,7 @@ $result = $client->call('foo.bar', array(array()));
         </sect3>
 
         <sect3 id="zend.xmlrpc.value.parameters.xmlrpc-value">
-            <title><classname>Zend_XmlRpc_Value</classname>-Objekte als Parameter</title>
+            <title>Zend_XmlRpc_Value-Objekte als Parameter</title>
             <para>
                 Parameter können auch direkt als <classname>Zend_XmlRpc_Value</classname>-Instanzen
                 erstellt werden, um einen exakten XML-RPC-Typen darzustellen. Die
@@ -233,7 +233,7 @@ $result = $client->call('foo.bar', array(array()));
             </para>
 
             <table id="zend.xmlrpc.value.parameters.xmlrpc-value.table-1">
-                <title><classname>Zend_XmlRpc_Value</classname> Objekte als XML-RPC Typen</title>
+                <title>Zend_XmlRpc_Value Objekte als XML-RPC Typen</title>
                 <tgroup cols="3">
                     <thead>
                         <row>

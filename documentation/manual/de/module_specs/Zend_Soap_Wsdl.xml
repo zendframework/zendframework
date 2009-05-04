@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -17,7 +17,7 @@
     </note>
 
     <sect2 id="zend.soap.wsdl.constructor">
-        <title><classname>Zend_Soap_Wsdl</classname> Konstruktor.</title>
+        <title>Zend_Soap_Wsdl Konstruktor.</title>
         <para>
             Der <classname>Zend_Soap_Wsdl</classname> Konstruktor nimmt drei Parameter:
             <orderedlist>
@@ -46,7 +46,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.addmessage">
-        <title>Die <code>addMessage()</code> Methode.</title>
+        <title>Die addMessage() Methode.</title>
         <para>
             Die <code>addMessage($name, $parts)</code> Methode fügt eine neue Nachrichten Beschreibung
             zu einem WSDL Dokumetn hinzu (/definitions/message Element).
@@ -93,7 +93,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_type">
-        <title>Die <code>addPortType()</code> Methode.</title>
+        <title>Die addPortType() Methode.</title>
         <para>
             Die <code>addPortType($name)</code> Methode fügt neue Port Typen zu einem WSDL Dokument
             (/definitions/portType) mit dem spezifizierten Port Typ Namen hinzu.
@@ -108,7 +108,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_operation">
-        <title>Die <code>addPortOperation()</code> Methode.</title>
+        <title>Die addPortOperation() Methode.</title>
         <para>
             Die <code>addPortOperation($portType, $name, $input = false, $output = false, $fault = false)</code>
             Methode fügt eine neue Port Operation zum spezifizierten Port Typ des WSDL Dokuments hinzu
@@ -148,7 +148,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding">
-        <title>Die <code>addBinding()</code> Methode.</title>
+        <title>Die addBinding() Methode.</title>
         <para>
             Die <code>addBinding($name, $portType)</code> Methode fügt neue Bindungen in das WSDL Dokument ein
             (/definitions/binding).
@@ -171,7 +171,7 @@
 
 
     <sect2 id="zend.soap.wsdl.add_binding_operation">
-        <title>Die <code>addBindingOperation()</code> Methode.</title>
+        <title>Die addBindingOperation() Methode.</title>
         <para>
             Die <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)</code>
             Methode fügt eine Operation zu einem gebundenen Element mit dem spezifizierten Namen hinzu
@@ -193,7 +193,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_binding">
-        <title>Die <code>addSoapBinding()</code> Methode.</title>
+        <title>Die addSoapBinding() Methode.</title>
         <para>
             Die <code>addSoapBinding($binding, $style = 'document', $transport = 'http://schemas.xmlsoap.org/soap/http')</code>
             Methode fügt einen SOAP Bindung Eintrag ('soap:binding') zum Bindung Element (welches bereits
@@ -210,7 +210,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_operation">
-        <title>Die <code>addSoapOperation()</code> Methode.</title>
+        <title>Die addSoapOperation() Methode.</title>
         <para>
             Die <code>addSoapOperation($binding, $soap_action)</code> Methode fügt einen SOAP Operations Eintrag
             ('soap:operation') zum Bindungs Element mit den spezifizierten Aktionen hinzu. Das 'style' Attribut
@@ -232,7 +232,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_service">
-        <title>Die <code>addService()</code> Methode.</title>
+        <title>Die addService() Methode.</title>
         <para>
             Die <code>addService($name, $port_name, $binding, $location)</code> Methode fügt dem WSDL Dokument
             ein '/definitions/service' Element mit dem spezifizierten Web Service Namen, Port Namen, Bindung
@@ -455,7 +455,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_documentation">
-        <title>Die <code>addDocumentation()</code> Methode.</title>
+        <title>Die addDocumentation() Methode.</title>
         <para>
             Die <code>addDocumentation($input_node, $documentation)</code> Methode fügt menschlich lesbare
             Dokumentation hinzu indem das optionale 'wsdl:document' Element verwendet wird.

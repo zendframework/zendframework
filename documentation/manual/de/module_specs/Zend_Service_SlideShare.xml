@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
 
@@ -15,7 +15,7 @@
 
     <sect2 id="zend.service.slideshare.basicusage">
 
-        <title>Mit <classname>Zend_Service_SlideShare</classname> beginnen</title>
+        <title>Mit Zend_Service_SlideShare beginnen</title>
 
         <para>
             Um die <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden muß zuerst ein Account auf
@@ -321,7 +321,7 @@ foreach($ss_user as $slideshow) {
 
     <sect2 id="zend.service.slideshare.caching">
 
-        <title><classname>Zend_Service_SlideShare</classname> Caching Policy</title>
+        <title>Zend_Service_SlideShare Caching Policy</title>
 
         <para>
             Standardmäßig cached <classname>Zend_Service_SlideShare</classname> jede Anfrage an den

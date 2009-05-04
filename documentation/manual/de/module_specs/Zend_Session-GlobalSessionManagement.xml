@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
 
@@ -408,7 +408,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.rememberme">
 
-        <title>><code>rememberMe(integer $seconds)</code></title>
+        <title>>rememberMe(integer $seconds)</title>
 
         <para>
             Normalerweise enden Sessions wenn der User Agent terminiert, wie wenn der End-Benutzer seinen WebBrowser
@@ -426,7 +426,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.forgetme">
 
-        <title><code>forgetMe()</code></title>
+        <title>forgetMe()</title>
 
         <para>
             Diese Funktion ist das Gegenteil von <code>rememberMe()</code> durch Schreiben eines Session Cookies
@@ -437,7 +437,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.sessionexists">
 
-        <title><code>sessionExists()</code></title>
+        <title>sessionExists()</title>
 
         <para>
             Diese Methode kann verwendet werden um Herauszufinden ob eine Session für den aktuellen User Agent/Anfrage
@@ -449,7 +449,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.destroy">
 
-        <title><code>destroy(bool $remove_cookie = true, bool $readonly = true)</code></title>
+        <title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         <para>
             <classname>Zend_Session::destroy()</classname> entfernt alle deuerhaften Daten welche mit der aktuellen Session
@@ -484,7 +484,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.stop">
 
-        <title><code>stop()</code></title>
+        <title>stop()</title>
 
         <para>
             Diese Methode macht nicht mehr als ein Flag in Zend_Session zu wechseln um weiteres Schreiben in den
@@ -500,7 +500,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.writeclose">
 
-        <title><code>writeClose($readonly = true)</code></title>
+        <title>writeClose($readonly = true)</title>
 
         <para>
             Beendet die Session, schließt das schreiben und entfernt <code>$_SESSION</code> vom Backend Speicher
@@ -525,7 +525,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.expiresessioncookie">
 
-        <title><code>expireSessionCookie()</code></title>
+        <title>expireSessionCookie()</title>
 
         <para>
             Diese Methode sendet ein abgelaufenes Session Id Cookie, was den Client dazu bringt den Session Cookie
@@ -536,7 +536,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.savehandler">
 
-        <title><code>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</code></title>
+        <title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
 
         <para>
             Die meisten Entwickler werden den Standardmäßigen Speicher Handle ausreichend finden. Diese Methode
@@ -548,7 +548,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceisset">
 
-        <title><code>namespaceIsset($namespace)</code></title>
+        <title>namespaceIsset($namespace)</title>
 
         <para>
             Diese Methode kann dazu verwendet werden um  herauszufinden ob ein Session Namensraum existiert, oder ob
@@ -567,7 +567,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceunset">
 
-        <title><code>namespaceUnset($namespace)</code></title>
+        <title>namespaceUnset($namespace)</title>
 
         <para>
             <classname>Zend_Session::namespaceUnset($namespace)</classname> kann verwendet
@@ -590,7 +590,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.namespaceget">
 
-        <title><code>namespaceGet($namespace)</code></title>
+        <title>namespaceGet($namespace)</title>
 
         <para>
             DEPRECATED: <code>getIterator()</code> in <classname>Zend_Session_Namespace</classname> sollte verwendet werden.
@@ -612,7 +612,7 @@ if (!isset($defaultNamespace->initialized)) {
 
     <sect2 id="zend.session.global_session_management.getiterator">
 
-        <title><code>getIterator()</code></title>
+        <title>getIterator()</title>
 
         <para>
             <code>getIterator()</code> kann verwendet werden, um ein Array zu erhalten, das

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15198 -->
+<!-- EN-Revision: 15250 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -235,6 +235,13 @@ defined('APPLICATION_ENV')
               (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV')
                                          : 'production'));
 
+// Typischerweise wird man das eigene library/ Verzeichnis zum include_path
+// hinzufügen wollen, speziell wenn es die ZF Installation enthält
+set_include_path(implode(PATH_SEPARATOR, array(
+    dirname(dirname(__FILE__)) . '/library',
+    get_include_path(),
+)));
+
 /** Zend_Application */
 require_once 'Zend/Application.php';
 
@@ -315,12 +322,11 @@ RewriteRule ^.*$ index.php [NC,L]
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
-includePaths.library = APPLICATION_PATH "/../library"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 ; ADD THE FOLLOWING LINES
-resources.layout.layout = "layout.phtml"
+resources.layout.layout = "layout"
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 
 [staging : production]

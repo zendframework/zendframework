@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.server">
     <title>Zend_Soap_Server</title>
@@ -33,14 +33,14 @@
     </para>
 
     <sect2 id="zend.soap.server.constructor">
-        <title>Der <classname>Zend_Soap_Server</classname> Konstruktor.</title>
+        <title>Der Zend_Soap_Server Konstruktor.</title>
         <para>
             Der Contructor von <classname>Zend_Soap_Server</classname> sollte für WSDL und nicht-WSDL Modi
             unterschiedlich verwendet werden.
         </para>
 
         <sect3 id="zend.soap.server.constructor.wsdl_mode">
-            <title>Der <classname>Zend_Soap_Server</classname> Konstruktor für den WSDL Modus.</title>
+            <title>Der Zend_Soap_Server Konstruktor für den WSDL Modus.</title>
             <para>
                 Der <classname>Zend_Soap_Server</classname> Konstruktor nimmt zwei optionale Parameter wenn er im
                 WSDL Modus arbeitet:
@@ -109,7 +109,7 @@
         </sect3>
 
         <sect3 id="zend.soap.server.wsdl_mode">
-            <title>Der <classname>Zend_Soap_Server</classname> Konstruktor für den nicht-WSDL Modus.</title>
+            <title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus.</title>
             <para>
                 Der erste Parameter des Konstruktors <emphasis role="strong">muß</emphasis> auf
                 <code>null</code> gesetzt werden wenn man plant die Funktionalität von

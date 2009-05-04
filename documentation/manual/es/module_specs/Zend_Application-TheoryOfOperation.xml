@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Teoría de Operación</title>
@@ -249,7 +250,7 @@ $bootstrap->bootstrap(array('foo', 'bar));
 
             <para>
                 Para arrancar todos los métodos de recursos, llame a
-                code>bootstrap()</code> sin argumentos:
+                <code>code>bootstrap()</code> sin argumentos:
             </para>
 
             <programlisting role="php"><![CDATA[

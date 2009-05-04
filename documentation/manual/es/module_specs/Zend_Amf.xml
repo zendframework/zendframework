@@ -20,8 +20,7 @@
 
     <para>
         Las
-        <ulink>
-            url="http://download.macromedia.com/pub/labs/amf/amf3_spec_121207.pdf">
+        <ulink url="http://download.macromedia.com/pub/labs/amf/amf3_spec_121207.pdf">
         </ulink>
         especificaciones
         (en ingles) de AMF3 son de libre disponibilidad y sirven como referencia

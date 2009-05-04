@@ -38,7 +38,7 @@
         La clase base, <code>Zend_Form_Element</code>, funciona por defecto para
         varios casos, pero es mejor extender la clase para elementos con fines
         especiales de uso común. Adicionalmente, Zend Framework contiene un
-        número de elementos XHTML estándar; puede leer de ellos <link linkend="zend.form.standarElements">en el capítulo Elementos
+        número de elementos XHTML estándar; puede leer de ellos <link linkend="zend.form.standardElements">en el capítulo Elementos
         Estándares</link>
     </para>
 
@@ -1190,7 +1190,7 @@ $element->class = 'text;
 
         <para>
             <code>Zend_Form</code> contiene un buen número de elementos
-            estándar; por favor lea el capítulo <link linkend="zend.form.standarElements">Elementos Estándar</link> para
+            estándar; por favor lea el capítulo <link linkend="zend.form.standardElements">Elementos Estándar</link> para
             todos los detalles.
         </para>
     </sect2>

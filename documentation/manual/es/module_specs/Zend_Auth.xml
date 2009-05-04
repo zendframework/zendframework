@@ -1,5 +1,5 @@
-<sect1 id="zend.auth.introduction">
 <?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="zend.auth.introduction">
     <title>Introducción</title>
     <para>
         Zend_Auth provee una API para autenticación e incluye adaptadores concretos de autenticación para

@@ -151,20 +151,20 @@
                 <code>admin</code>
                 "):
             </para>
-            <programlisting role="php"><![CDATA[<?php
+            <programlisting role="php"><![CDATA[
 require_once 'Zend/Acl.php';
-$acl = new <classname>Zend_Acl</classname>();
+$acl = new Zend_Acl();
 
 require_once 'Zend/Acl/Role.php';
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('invitado'))
-    ->addRole(new <classname>Zend_Acl</classname>_Role('miembro'))
-    ->addRole(new <classname>Zend_Acl</classname>_Role('admin'));
+$acl->addRole(new Zend_Acl_Role('invitado'))
+    ->addRole(new Zend_Acl_Role('miembro'))
+    ->addRole(new Zend_Acl_Role('admin'));
 
 $parents = array('invitado', 'miembro', 'admin');
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('unUsuario'), $parents);
+$acl->addRole(new Zend_Acl_Role('unUsuario'), $parents);
 
 require_once 'Zend/Acl/Resource.php';
-$acl->add(new <classname>Zend_Acl</classname>_Resource('unRecurso'));
+$acl->add(new Zend_Acl_Resource('unRecurso'));
 
 $acl->deny('invitado', 'unRecurso');
 $acl->allow('miembro', 'unRecurso');
@@ -241,10 +241,10 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
             nuevo objeto ACL, iniciamos la ACL sin parámetros:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 require_once 'Zend/Acl.php';
 
-$acl = new <classname>Zend_Acl</classname>();]]>
+$acl = new Zend_Acl();]]>
         </programlisting>
 
         <note>
@@ -320,35 +320,35 @@ $acl = new <classname>Zend_Acl</classname>();]]>
             Para este ejemplo, se usa
            <classname>Zend_Acl_Role</classname>
             , pero cualquier objeto que implemente
-           <classname>Zend_Acl</classname>_Role_Interface</code>
+           <classname>Zend_Acl_Role_Interface</classname>
             es admisible. Estos grupos pueden ser agragados al registro
             de roles de la siguiente manera:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 require_once 'Zend/Acl.php';
 
-$acl = new <classname>Zend_Acl</classname>();
+$acl = new Zend_Acl();
 
 // Agregar grupos al registro de roles usando <classname>Zend_Acl</classname>_Role
 require_once 'Zend/Acl/Role.php';
 
 // Invitado no hereda controles de acceso
-$rolInvitado = new <classname>Zend_Acl</classname>_Role('invitado');
+$rolInvitado = new Zend_Acl_Role('invitado');
 $acl->addRole($rolInvitado);
 
 // Personal hereda de Invitado
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), $rolInvitado);
+$acl->addRole(new Zend_Acl_Role('personal'), $rolInvitado);
 
 /* alternativamente, lo de arriba puede ser escrito así:
-$rolInvitado = $acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), 'invitado');
+$rolInvitado = $acl->addRole(new Zend_Acl_Role('personal'), 'invitado');
 //*/
 
 // Editor hereda desde personal
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('editor'), 'personal');
+$acl->addRole(new Zend_Acl_Role('editor'), 'personal');
 
 // Administrador no hereda controles de acceso
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('administrador'));]]>
+$acl->addRole(new Zend_Acl_Role('administrador'));]]>
         </programlisting>
 
     </sect2>
@@ -375,18 +375,18 @@ $acl->addRole(new <classname>Zend_Acl</classname>_Role('administrador'));]]>
             estos permisos básicos como están definidos arriba:
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 require_once 'Zend/Acl.php';
 
-$acl = new <classname>Zend_Acl</classname>();
+$acl = new Zend_Acl();
 
 require_once 'Zend/Acl/Role.php';
 
-$rolInvitado = new <classname>Zend_Acl</classname>_Role('invitado');
+$rolInvitado = new Zend_Acl_Role('invitado');
 $acl->addRole($rolInvitado);
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('personal'), $rolInvitado);
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('editor'), 'personal');
-$acl->addRole(new <classname>Zend_Acl</classname>_Role('administrador'));
+$acl->addRole(new Zend_Acl_Role('personal'), $rolInvitado);
+$acl->addRole(new Zend_Acl_Role('editor'), 'personal');
+$acl->addRole(new Zend_Acl_Role('administrador'));
 
 // Invitado solo puede ver el contenido
 $acl->allow($rolInvitado, null, 'ver');
@@ -429,7 +429,7 @@ $acl->allow('administrador');]]>
             :
         </para>
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 echo $acl->isAllowed('invitado', null, 'ver') ?
      "permitido" : "denegado"; // permitido
 

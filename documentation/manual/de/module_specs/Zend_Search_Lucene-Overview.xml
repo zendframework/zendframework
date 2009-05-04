@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15225 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
@@ -309,18 +309,13 @@ $index->addDocument($doc);
             vom Index empfangen werden. Standardmäßig wird der Body nur Tokenized und Indiziert, aber nicht
             gespeichert.
         </para>
-<!--        <para>
-            Der dritte Parameter der <code>loadHTML()</code> und <code>loadHTMLFile()</code>
-            Methoden spezifiziert optional die Kodierung des Quell- HTML Dokuments. Wenn er nicht
-            angegeben wird, wird die Kodierung automatisch vom Metatag content type charset
-            erkannt.
-        </para>
         <para>
-            Die Kodierung kann später mit den Methoden
-            <code>getEncoding()</code>/<code>setEncoding($encoding)</code> empfangen/überschrieben
-            werden.
+            Der dritte Parameter der <code>loadHTML()</code> und <code>loadHTMLFile()</code>
+            Methoden spezifiziert optional die Kodierung des Quell- HTML Dokuments. Er wird
+            verwendet wenn die Kodierung nicht durch die Angabe des Content-type MetaTags
+            HTTP-EQUIV  spezifiziert ist.
         </para>
--->
+
         <para>
             Andere Dokument Header Meta Tags produzieren zusätzliche Dokument Felder. Der Feld 'name' wird vom
             'name' Attribut genommen, und das 'content' Attribut veröffentlicht das Feld 'value'. Beide werden

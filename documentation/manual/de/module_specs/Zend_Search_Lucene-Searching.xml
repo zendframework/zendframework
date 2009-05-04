@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15225 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -436,14 +436,20 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
         <para>
             Die zweite Option ist die Verwendung der
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
-            Zend_Search_Lucene_Search_Highlighter_Interface $highlighter])</code> Methode:
+            $defaultEncoding = 'UTF-8'[,
+            Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> Methode:
             <programlisting role="php"><![CDATA[
 query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
         </para>
         <para>
-            Der optionale zweite Parameter ist ein Highlighter Objekt welches das
+            Der optionale zweite Parameter ist die standardmäßige Kodierung des HTML Dokuments.
+            Er wird verwendet wenn die Kodierung nicht, durch die Verwendung des Content-type
+            MetaTags HTTP-EQUIV, spezifiziert ist.
+        </para>
+        <para>
+            Der optionale dritte Parameter ist ein Highlighter Objekt welches das
             <code>Zend_Search_Lucene_Search_Highlighter_Interface</code> Interface implementiert:
             <programlisting role="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
@@ -489,6 +495,12 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             Aktuell, macht der standardmäßige Highlighter das indem eine vordefinierte Farbtabelle
             durchlaufen wird. Man kann also seinen eigenen Highlighter implementieren, oder den
             standardmäßigen nur erweitern und die Farbtabelle umdefinieren.
+        </para>
+        <para>
+            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
+            hat ein ähnliches Verhalten. Der einzige Unterschied besteht darin das er eine
+            Eingabe entgegen nimmt, und HTML Fragmente ohne die &lt;>HTML>, &lt;HEAD>, &lt;BODY>
+            Tags zurückgibt. Trotzdem werden Fragmente automatisch in gültiges XHTML transformiert.
         </para>
     </sect2>
 

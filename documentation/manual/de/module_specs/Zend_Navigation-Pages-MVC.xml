@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
@@ -94,7 +94,7 @@
     </note>
 
     <example id="zend.navigation.pages.mvc.example.getHref">
-        <title><code>getHref() erstellt die Seiten URI</code></title>
+        <title>getHref() erstellt die Seiten URI</title>
 
         <para>
             Dieses Beispiel zeigt das MVC Seiten intern
@@ -127,7 +127,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
     </example>
 
     <example id="zend.navigation.pages.mvc.example.isActive">
-        <title><code>isActive()</code> erkennt ob eine Seite aktiv ist</title>
+        <title>isActive() erkennt ob eine Seite aktiv ist</title>
 
         <para>
             Dieses Beispiel zeigt das MVC Seiten erkennen ob sie aktiv sind indem die Parameter

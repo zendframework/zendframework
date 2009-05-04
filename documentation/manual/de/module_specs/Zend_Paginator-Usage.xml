@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -14,7 +14,7 @@
         </para>
 
         <table id="zend.paginator.usage.paginating.adapters">
-            <title>Adapter für <classname>Zend_Paginator</classname></title>
+            <title>Adapter für Zend_Paginator</title>
 
             <tgroup cols="2">
                 <thead>
@@ -236,7 +236,7 @@ $this->view->paginator = $paginator;
         </para>
 
         <table id="zend.paginator.usage.rendering.scrolling-styles">
-            <title>Scrolling Stile für <classname>Zend_Paginator</classname></title>
+            <title>Scrolling Stile für Zend_Paginator</title>
 
             <tgroup cols="2">
                 <thead>

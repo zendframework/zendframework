@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15214 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -95,7 +95,7 @@ resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>
 
-    <example id="zend.application.available-resources.frontcontroller.frontControllerPropertyExample">
+    <example id="zend.application.available-resources.frontcontroller.PropertyExample">
         <title>Empfangen des Front Controllers im eigenen Bootstrap</title>
 
         <para>

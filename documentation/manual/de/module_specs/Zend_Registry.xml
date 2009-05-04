@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
 
@@ -28,7 +28,7 @@
         </para>
 
         <example id="zend.registry.using.storing.example">
-            <title>Beispiel der Verwendung der <code>set()</code> Methode</title>
+            <title>Beispiel der Verwendung der set() Methode</title>
             <programlisting role="php"><![CDATA[
 Zend_Registry::set('index', $value);
 ]]></programlisting>
@@ -58,7 +58,7 @@ Zend_Registry::set('index', $value);
         </para>
 
         <example id="zend.registry.using.retrieving.example">
-            <title>Beispiel der Verwendung der <code>get()</code> Methode</title>
+            <title>Beispiel der Verwendung der get() Methode</title>
             <programlisting role="php"><![CDATA[
 $value = Zend_Registry::get('index');
 ]]></programlisting>
@@ -179,7 +179,7 @@ var_dump( $registry['index'] );
         </para>
 
         <warning>
-            <title>Bekannte Probleme mit der <code>ArrayObject::ARRAY_AS_PROPS</code> Option</title>
+            <title>Bekannte Probleme mit der ArrayObject::ARRAY_AS_PROPS Option</title>
 
             <para>
                 Einige Versionen von PHP sind bekanntermaßen sehr fehlerhaft wenn die Registry mit der
@@ -237,7 +237,7 @@ if (Zend_Registry::isRegistered($index)) {
         </para>
 
         <example id="zend.registry.using.isset.example-isset">
-            <title>Beispiel der Verwendung der <code>isset()</code> Methode</title>
+            <title>Beispiel der Verwendung der isset() Methode</title>
             <programlisting role="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
@@ -321,7 +321,7 @@ Zend_Registry::set('index', $value);
         </para>
 
         <example id="zend.registry.using.unsetting.example">
-            <title>Beispiel der Verwendung der <code>_unsetInstance()</code> Methode</title>
+            <title>Beispiel der Verwendung der _unsetInstance() Methode</title>
             <programlisting role="php"><![CDATA[
 Zend_Registry::set('index', $value);
 

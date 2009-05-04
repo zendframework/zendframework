@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -149,7 +149,7 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
         <example id="zend.service.amazon.itemsearch.example.responsegroup">
-            <title>Verwenden der <code>ResponseGroup</code> Option</title>
+            <title>Verwenden der ResponseGroup Option</title>
             <para>
                 Die <code>ResponseGroup</code> Option wird verwendet um die spezielle Information zu kontrollieren
                 die in der Antwort zurückgegeben wird.

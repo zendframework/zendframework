@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.using">
 
@@ -288,7 +288,7 @@ echo "$acctname\n";
                 Diese Option kann einen der folgenden Werte annehmen:
 
                 <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
-                  <title><code>accountCanonicalForm</code></title>
+                  <title>accountCanonicalForm</title>
                   <tgroup cols="3">
                     <thead>
                       <row>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.introduction">
 
@@ -103,9 +103,7 @@
 
     <sect2 id="zend.locale.whatis">
 
-        <title>
-            <ulink url="http://unicode.org/reports/tr35/#Locale">Was ist ein Gebietsschema?</ulink>
-        </title>
+        <title>Was ist ein Gebietsschema?</title>
 
         <para>
             Jeder Computer benutzt Gebietsschemata, selbst wenn Sie es nicht wissen. Anwendungen welche keine
@@ -537,7 +535,7 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
 
     <sect2 id="zend.locale.cache">
 
-        <title><classname>Zend_Locale</classname> und dessen Subklassen schneller machen</title>
+        <title>Zend_Locale und dessen Subklassen schneller machen</title>
 
         <para>
             <classname>Zend_Locale</classname> und dessen Subklassen können durch die Verwendung von

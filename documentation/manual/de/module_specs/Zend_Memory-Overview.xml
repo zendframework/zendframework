@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.overview">
     <title>Übersicht</title>
@@ -33,7 +33,7 @@
         </para>
 
         <example id="zend.memory.introduction.example-1">
-            <title>Verwenden der <classname>Zend_Memory</classname> Komponente</title>
+            <title>Verwenden der Zend_Memory Komponente</title>
             <para>
                 <classname>Zend_Memory::factory()</classname> instantiiert das Speichermanager
                 Objekt mit den definierten Backend Optionen.

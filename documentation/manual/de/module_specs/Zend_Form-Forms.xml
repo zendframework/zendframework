@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
-    <title>Erstellen von Form durch Verwendung von <classname>Zend_Form</classname></title>
+    <title>Erstellen von Form durch Verwendung von Zend_Form</title>
 
     <para>
         Die <classname>Zend_Form</classname> Klasse wird verwendet um Form Element, Anzeigegruppen und

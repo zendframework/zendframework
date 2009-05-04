@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
 
-    <title><classname>Zend_Locale</classname> verwenden</title>
+    <title>Zend_Locale verwenden</title>
 
     <para>
         <classname>Zend_Locale</classname> liefert auch lokalisierte Informationen über Gebietsschema für jedes

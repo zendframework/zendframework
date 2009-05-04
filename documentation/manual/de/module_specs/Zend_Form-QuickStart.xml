@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -545,7 +545,7 @@ class UserController extends Zend_Controller_Action
     </sect2>
 
     <sect2 id="zend.form.quickstart.config">
-        <title>Ein <classname>Zend_Config</classname> Objekt verwenden</title>
+        <title>Ein Zend_Config Objekt verwenden</title>
 
         <para>
             Alle <classname>Zend_Form</classname>'s sind konfigurierbar, indem <classname>Zend_Config</classname>

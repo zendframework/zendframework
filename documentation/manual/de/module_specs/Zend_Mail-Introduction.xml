@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
 
@@ -18,7 +18,7 @@
 
         <example id="zend.mail.introduction.example-1">
 
-            <title>Einfache E-Mail mit <classname>Zend_Mail</classname></title>
+            <title>Einfache E-Mail mit Zend_Mail</title>
 
             <para>
                 Eine einfache E-Mail besteht aus einigen Empfängern, einem Betreff, einem Hauptteil und
@@ -93,7 +93,7 @@ $mail->setBodyText('Das ist der Text der Nachricht.')
 
         <example id="zend.mail.introduction.sendmail.example-1">
 
-            <title>Zusätzliche Parameter einem <classname>Zend_Mail_Transport_Sendmail</classname> Transport übergeben</title>
+            <title>Zusätzliche Parameter einem Zend_Mail_Transport_Sendmail Transport übergeben</title>
 
             <para>
                 Dieses Beispiel zeigt wie der Rückgabe-Pfad der

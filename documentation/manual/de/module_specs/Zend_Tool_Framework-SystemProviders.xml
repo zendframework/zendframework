@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15220 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.system-providers">
     <title>Mitgelieferte System Provider</title>
-    <para></para>
-    <!-- @todo -->
+
+    <para>
+        In addition to the more useful project based providers that come shipped
+        with <code>Zend_Tool_Project</code>, there are also some more basic, but
+        interesting providers that come built into
+        <code>Zend_Tool_Framework</code>.  Some of these exist for the purpose
+        of providing a means via the command line to extract information, such
+        as the version, while others are intended to aid the developer when
+        creating additional providers.
+    </para>
+
+    <sect2 id="zend.tool.framework.system-providers.version">
+        <title>The Version Provider</title>
+
+        <para>
+            The Version provider is included so that you may determine which
+            version of the framework that the <code>zf</code> or
+            <code>Zend_Tool</code> is currently set to work with.
+        </para>
+
+        <para>
+            Through the command line, simply run <code>zf show version</code>.
+        </para>
+
+    </sect2>
+
+    <sect2 id="zend.tool.framework.system-providers.manifest">
+        <title>The Manifest Provider</title>
+
+        <para>
+            The Manifest provider is included so that you may determine what
+            kind of "manifest" information is available during the
+            <code>Zend_Tool</code> runtime.  Manifest data is information that
+            is attached to specific objects during <code>Zend_Tool</code>'s
+            runtime.  Inside the manifest you will find the console specific
+            namings that you are expected to use when calling certain commands.
+            Data found in the manifest can be used by any provider or client on
+            an as-needed basis.
+        </para>
+
+        <para>
+            Through the command line, simply run <code>zf show manifest</code>.
+        </para>
+    </sect2>
 </sect1>

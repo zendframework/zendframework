@@ -139,6 +139,21 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $expected   = array('bar', 'foo');
         $this->assertEquals($expected, $test);
     }
+
+    public function testShouldReturnExecutedBootstrapsWhenComplete()
+    {
+        require_once 'Zend/Application/Resource/Modules.php';
+
+        $this->bootstrap->registerPluginResource('Frontcontroller', array(
+            'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+        ));
+        $resource = new Zend_Application_Resource_Modules(array());
+        $resource->setBootstrap($this->bootstrap);
+        $bootstraps = $resource->init();
+        $test       = array_keys((array) $bootstraps);
+        $expected   = array('bar', 'foo');
+        $this->assertEquals($expected, $test);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ModulesTest::main') {

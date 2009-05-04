@@ -241,6 +241,16 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
             $this->assertTrue($front->hasPlugin($class));
         }
     }
+
+    public function testShouldReturnFrontControllerWhenComplete()
+    {
+        require_once 'Zend/Application/Resource/Frontcontroller.php';
+        $resource = new Zend_Application_Resource_Frontcontroller(array(
+            'controllerDirectory' => dirname(__FILE__),
+        ));
+        $front = $resource->init();
+        $this->assertTrue($front instanceof Zend_Controller_Front);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_FrontcontrollerTest::main') {

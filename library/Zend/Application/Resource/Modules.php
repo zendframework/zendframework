@@ -57,8 +57,8 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
     public function init()
     {
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('frontcontroller');
-        $front = $bootstrap->frontController;
+        $bootstrap->bootstrap('FrontController');
+        $front = $bootstrap->getResource('FrontController');
 
         $modules = $front->getControllerDirectory();
         $default = $front->getDefaultModule();

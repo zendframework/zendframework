@@ -738,7 +738,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
         <para>
             The size itself is also accepted in SI notation as handled by most operating systems. That is, instead of
-            specifying <emphasis role="strong">20000 bytes</emphasis>, <emphasis role="strong">20kB</emphasis> may be given. All file sizes are converted
+            specifying <emphasis>20000 bytes</emphasis>, <emphasis>20kB</emphasis> may be given. All file sizes are converted
             using 1024 as the base value. The following Units are accepted: <code>kB</code>, <code>MB</code>,
             <code>GB</code>, <code>TB</code>, <code>PB</code> and <code>EB</code>. Note that 1kB is equal to 1024 bytes, 1MB is equal to 1024kB, and so on.
         </para>
@@ -1241,7 +1241,7 @@ $upload->addValidator('Sha1',
 
         <para>
             The size itself is also accepted in SI notation as handled by most operating systems. That is, instead of
-            specifying <emphasis role="strong">20000 bytes</emphasis>, <emphasis role="strong">20kB</emphasis> may be given. All file sizes are converted
+            specifying <emphasis>20000 bytes</emphasis>, <emphasis>20kB</emphasis> may be given. All file sizes are converted
             using 1024 as the base value. The following Units are accepted: <code>kB</code>, <code>MB</code>,
             <code>GB</code>, <code>TB</code>, <code>PB</code> and <code>EB</code>. Note that 1kB is equal to 1024 bytes, 1MB is equal to 1024kB, and so on.
         </para>

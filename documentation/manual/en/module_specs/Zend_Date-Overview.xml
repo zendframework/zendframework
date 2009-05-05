@@ -53,7 +53,7 @@
             </para>
 
             <para>
-                <emphasis role="strong">If your actual timezone within the instance of <classname>Zend_Date</classname>
+                <emphasis>If your actual timezone within the instance of <classname>Zend_Date</classname>
                 is set to UTC or GMT the option <code>'fix_dst'</code> will not be used</emphasis> because
                 these two timezones do not work with DST. When you change the timezone for this instance
                 again to a timezone which is not UTC or GMT the previous set 'fix_dst' option will be used
@@ -373,13 +373,13 @@ print $date;
                             <entry>get()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                                    <emphasis>get($part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     Use <code>get($part)</code> to retrieve the date <code>$part</code> of this object's
                                     date localized to <code>$locale</code> as a formatted string or integer. When using
                                     the BCMath extension, numeric strings might be returned instead of integers for
-                                    large values. <emphasis role="strong">NOTE:</emphasis> Unlike <code>get()</code>,
+                                    large values. <emphasis>NOTE:</emphasis> Unlike <code>get()</code>,
                                     the other get*() convenience methods only return instances of <classname>Zend_Date</classname>
                                     containing a date representing the selected or computed date/time.
                                 </para>
@@ -389,7 +389,7 @@ print $date;
                             <entry>set()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">set($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis>set($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     Sets the <code>$part</code> of the current object to the corresponding value for
@@ -402,7 +402,7 @@ print $date;
                             <entry>add()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">add($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis>add($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     Adds the <code>$part</code> of <code>$date</code> having a locale
@@ -414,7 +414,7 @@ print $date;
                             <entry>sub()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">sub($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis>sub($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     Subtracts the <code>$part</code> of <code>$date</code> having a locale
@@ -426,7 +426,7 @@ print $date;
                             <entry>copyPart()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">copyPart($part, $locale = null)</emphasis>
+                                    <emphasis>copyPart($part, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     Returns a cloned object, with only <code>$part</code> of the object's date copied to
@@ -439,7 +439,7 @@ print $date;
                             <entry>compare()</entry>
                             <entry>
                                 <para>
-                                    <emphasis role="strong">compare($date, $part = null, $locale = null)</emphasis>
+                                    <emphasis>compare($date, $part = null, $locale = null)</emphasis>
                                 </para>
                                 <para>
                                     compares <code>$part</code> of <code>$date</code> to this object's timestamp,
@@ -480,7 +480,7 @@ print $date;
                         <entry>equals()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">equals($date, $part = null, $locale = null)</emphasis>
+                                <emphasis>equals($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 returns true, if <code>$part</code> of <code>$date</code> having locale
@@ -493,7 +493,7 @@ print $date;
                         <entry>isEarlier()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isEarlier($date, $part = null, $locale = null)</emphasis>
+                                <emphasis>isEarlier($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 returns true, if <code>$part</code> of this object's date is earlier than
@@ -505,7 +505,7 @@ print $date;
                         <entry>isLater()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isLater($date, $part = null, $locale = null)</emphasis>
+                                <emphasis>isLater($date, $part = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 returns true, if <code>$part</code> of this object's date is later than
@@ -517,7 +517,7 @@ print $date;
                         <entry>isToday()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isToday()</emphasis>
+                                <emphasis>isToday()</emphasis>
                             </para>
                             <para>
                                 Tests if today's year, month, and day match this object's date value, using this
@@ -529,7 +529,7 @@ print $date;
                         <entry>isTomorrow()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isTomorrow()</emphasis>
+                                <emphasis>isTomorrow()</emphasis>
                             </para>
                             <para>
                                 Tests if tomorrow's year, month, and day match this object's date value, using this
@@ -541,7 +541,7 @@ print $date;
                         <entry>isYesterday()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isYesterday()</emphasis>
+                                <emphasis>isYesterday()</emphasis>
                             </para>
                             <para>
                                 Tests if yesterday's year, month, and day match this object's date value, using this
@@ -553,7 +553,7 @@ print $date;
                         <entry>isLeapYear()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isLeapYear()</emphasis>
+                                <emphasis>isLeapYear()</emphasis>
                             </para>
                             <para>
                                 Use <code>isLeapYear()</code> to determine if the current object is a leap year, or use
@@ -566,7 +566,7 @@ print $date;
                         <entry>isDate()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">isDate($date, $format = null, $locale = null)</emphasis>
+                                <emphasis>isDate($date, $format = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 This method checks if a given date is a real date and returns true if all checks are ok.
@@ -604,7 +604,7 @@ print $date;
                         <entry>toString()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">toString($format = null, $locale = null)</emphasis>
+                                <emphasis>toString($format = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 Invoke directly or via the magic method <code>__toString()</code>. The
@@ -620,7 +620,7 @@ print $date;
                         <entry>toArray()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">toArray()</emphasis>
+                                <emphasis>toArray()</emphasis>
                             </para>
                             <para>
                                 Returns an array representation of the selected date according to
@@ -631,74 +631,74 @@ print $date;
                                 <itemizedlist>
                                     <listitem>
                                         <para>
-                                            Number of day as '<emphasis role="strong">day</emphasis>'
+                                            Number of day as '<emphasis>day</emphasis>'
                                             (<classname>Zend_Date::DAY_SHORT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Number of month as '<emphasis role="strong">month</emphasis>'
+                                            Number of month as '<emphasis>month</emphasis>'
                                             (<classname>Zend_Date::MONTH_SHORT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Year as '<emphasis role="strong">year</emphasis>'
+                                            Year as '<emphasis>year</emphasis>'
                                             (<classname>Zend_Date::YEAR</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Hour as '<emphasis role="strong">hour</emphasis>'
+                                            Hour as '<emphasis>hour</emphasis>'
                                             (<classname>Zend_Date::HOUR_SHORT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Minute as '<emphasis role="strong">minute</emphasis>'
+                                            Minute as '<emphasis>minute</emphasis>'
                                             (<classname>Zend_Date::MINUTE_SHORT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Second as '<emphasis role="strong">second</emphasis>'
+                                            Second as '<emphasis>second</emphasis>'
                                             (<classname>Zend_Date::SECOND_SHORT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Abbreviated timezone as '<emphasis role="strong">timezone</emphasis>'
+                                            Abbreviated timezone as '<emphasis>timezone</emphasis>'
                                             (<classname>Zend_Date::TIMEZONE</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Unix timestamp as '<emphasis role="strong">timestamp</emphasis>'
+                                            Unix timestamp as '<emphasis>timestamp</emphasis>'
                                             (<classname>Zend_Date::TIMESTAMP</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Number of weekday as '<emphasis role="strong">weekday</emphasis>'
+                                            Number of weekday as '<emphasis>weekday</emphasis>'
                                             (<classname>Zend_Date::WEEKDAY_DIGIT</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Day of year as '<emphasis role="strong">dayofyear</emphasis>'
+                                            Day of year as '<emphasis>dayofyear</emphasis>'
                                             (<classname>Zend_Date::DAY_OF_YEAR</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
-                                            Week as '<emphasis role="strong">week</emphasis>'
+                                            Week as '<emphasis>week</emphasis>'
                                             (<classname>Zend_Date::WEEK</classname>)
                                         </para>
                                     </listitem>
                                     <listitem>
                                         <para>
                                             Delay of timezone to GMT as
-                                            '<emphasis role="strong">gmtsecs</emphasis>'
+                                            '<emphasis>gmtsecs</emphasis>'
                                             (<classname>Zend_Date::GMT_SECS</classname>)
                                         </para>
                                     </listitem>
@@ -710,13 +710,13 @@ print $date;
                         <entry>toValue()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">toValue($part = null)</emphasis>
+                                <emphasis>toValue($part = null)</emphasis>
                             </para>
                             <para>
                                 Returns an integer representation of the selected date <code>$part</code> according to
                                 the conventions of the object's locale. Returns <code>false</code> when
                                 <code>$part</code> selects a non-numeric value, such as
-                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>. <emphasis role="strong">NOTE:</emphasis> This
+                                <classname>Zend_Date::MONTH_NAME_SHORT</classname>. <emphasis>NOTE:</emphasis> This
                                 method calls
                                 <link linkend="id.date.basic.operations"><code>get()</code>
                                 </link>
@@ -732,7 +732,7 @@ print $date;
                         </entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">get($part = null, $locale = null)</emphasis>
+                                <emphasis>get($part = null, $locale = null)</emphasis>
                             </para>
                             <para>
                                 This method returns the <code>$part</code> of object's date localized to
@@ -746,7 +746,7 @@ print $date;
                         <entry>now()</entry>
                         <entry>
                             <para>
-                                <emphasis role="strong">now($locale = null)</emphasis>
+                                <emphasis>now($locale = null)</emphasis>
                             </para>
                             <para>
                                 This convenience function is equivalent to <code>new Zend_Date()</code>. It returns the
@@ -781,7 +781,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis role="strong">getFractionalPrecision()</emphasis>
+                                <emphasis>getFractionalPrecision()</emphasis>
                             </para>
                         </entry>
                         <entry>Return the precision of the part seconds</entry>
@@ -789,7 +789,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis role="strong">setFractionalPrecision()</emphasis>
+                                <emphasis>setFractionalPrecision()</emphasis>
                             </para>
                         </entry>
                         <entry>Set the precision of the part seconds</entry>
@@ -822,7 +822,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis role="strong">getSunrise($location)</emphasis>
+                                <emphasis>getSunrise($location)</emphasis>
                             </para>
                         </entry>
                         <entry>Return the date's time of sunrise</entry>
@@ -830,7 +830,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis role="strong">getSunset($location)</emphasis>
+                                <emphasis>getSunset($location)</emphasis>
                             </para>
                         </entry>
                         <entry>Return the date's time of sunset</entry>
@@ -838,7 +838,7 @@ print $date;
                     <row>
                         <entry>
                             <para>
-                                <emphasis role="strong">getSunInfo($location)</emphasis>
+                                <emphasis>getSunInfo($location)</emphasis>
                             </para>
                         </entry>
                         <entry>Return an array with the date's sun dates</entry>

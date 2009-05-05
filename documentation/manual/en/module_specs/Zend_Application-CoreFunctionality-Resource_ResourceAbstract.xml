@@ -5,7 +5,8 @@
 
     <para>
         <classname>Zend_Application_Resource_ResourceAbstract</classname> is an abstract
-        class implementing <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
+        class implementing <link
+            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>,
         and is a good starting point for creating your own custom plugin
         resources.
     </para>
@@ -45,7 +46,8 @@
 
                 <row>
                     <entry>
-                        <code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code>
+                        <code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
+                        $bootstrap)</code>
                     </entry>
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
                     <entry><itemizedlist>
@@ -94,4 +96,3 @@
         </tgroup>
     </table>
 </sect2>
-

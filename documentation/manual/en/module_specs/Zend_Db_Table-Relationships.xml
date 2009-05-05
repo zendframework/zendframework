@@ -138,7 +138,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">columns</emphasis> => A string or an array of strings
+                    <emphasis>columns</emphasis> => A string or an array of strings
                     naming the foreign key column name(s) in the dependent table.
                 </para>
 
@@ -150,7 +150,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refTableClass</emphasis> => The class name of the
+                    <emphasis>refTableClass</emphasis> => The class name of the
                     parent table. Use the class name, not the physical name of the SQL table.
                 </para>
 
@@ -166,7 +166,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refColumns</emphasis> => A string or an array of
+                    <emphasis>refColumns</emphasis> => A string or an array of
                     strings naming the primary key column name(s) in the parent table.
                 </para>
 
@@ -186,7 +186,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onDelete</emphasis> => The rule for an action to
+                    <emphasis>onDelete</emphasis> => The rule for an action to
                     execute if a row is deleted in the parent table. See
                     <xref linkend="zend.db.table.relationships.cascading" /> for more information.
                 </para>
@@ -194,7 +194,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onUpdate</emphasis> => The rule for an action to
+                    <emphasis>onUpdate</emphasis> => The rule for an action to
                     execute if values in primary key columns are updated in the parent table. See
                     <xref linkend="zend.db.table.relationships.cascading" /> for more information.
                 </para>
@@ -715,7 +715,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
-                <emphasis role="strong">only</emphasis> for RDBMS brands that do not support
+                <emphasis>only</emphasis> for RDBMS brands that do not support
                 declarative referential integrity (DRI).
             </para>
 
@@ -830,7 +830,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <title>Notes Regarding Cascading Operations</title>
 
             <para>
-                <emphasis role="strong">Cascading operations invoked by <classname>Zend_Db_Table</classname> are not
+                <emphasis>Cascading operations invoked by <classname>Zend_Db_Table</classname> are not
                 atomic.</emphasis>
             </para>
 
@@ -867,7 +867,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Cascading operations in <classname>Zend_Db_Table</classname> are invoked only by
+                <emphasis>Cascading operations in <classname>Zend_Db_Table</classname> are invoked only by
                 <classname>Zend_Db_Table</classname>.</emphasis>
             </para>
 
@@ -882,7 +882,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">No Cascading <code>INSERT</code>.</emphasis>
+                <emphasis>No Cascading <code>INSERT</code>.</emphasis>
             </para>
 
             <para>

@@ -15,19 +15,19 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    a <emphasis role="strong">resource</emphasis> is an object
+                    a <emphasis>resource</emphasis> is an object
                     to which access is controlled.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    a <emphasis role="strong">role</emphasis> is an object
+                    a <emphasis>role</emphasis> is an object
                     that may request access to a Resource.
                 </para>
             </listitem>
         </itemizedlist>
 
-        Put simply, <emphasis role="strong">roles request access to resources</emphasis>. For
+        Put simply, <emphasis>roles request access to resources</emphasis>. For
         example, if a parking attendant requests access to a car, then the parking attendant is the
         requesting role, and the car is the resource, since access to the car may not be granted to
         everyone.

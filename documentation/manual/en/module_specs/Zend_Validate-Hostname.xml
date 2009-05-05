@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <emphasis role="strong">Basic usage</emphasis>
+        <emphasis>Basic usage</emphasis>
     </para>
 
     <para>
@@ -36,7 +36,7 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        <emphasis role="strong">Validating different types of hostnames</emphasis>
+        <emphasis>Validating different types of hostnames</emphasis>
     </para>
 
     <para>
@@ -76,7 +76,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        <emphasis role="strong">Validating International Domains Names</emphasis>
+        <emphasis>Validating International Domains Names</emphasis>
     </para>
 
     <para>
@@ -148,7 +148,7 @@ $validator =
     </para>
 
     <para>
-        <emphasis role="strong">Validating Top Level Domains</emphasis>
+        <emphasis>Validating Top Level Domains</emphasis>
     </para>
 
     <para>

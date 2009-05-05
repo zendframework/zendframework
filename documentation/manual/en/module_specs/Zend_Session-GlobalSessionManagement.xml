@@ -119,7 +119,7 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         string <code>save_path</code> - The correct value is system dependent, and should be provided by
-                        the developer using an <emphasis role="strong">absolute path</emphasis> to a directory readable
+                        the developer using an <emphasis>absolute path</emphasis> to a directory readable
                         and writable by the PHP process. If a writable path is not supplied, then
                         <classname>Zend_Session</classname> will throw an exception when started (i.e., when <code>start()</code>
                         is called).
@@ -154,7 +154,7 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         string <code>name</code> - The correct value is system dependent and should be provided by the
-                        developer using a value <emphasis role="strong">unique</emphasis> to the application.
+                        developer using a value <emphasis>unique</emphasis> to the application.
                     </para>
                     <note>
                         <title>Security Risk</title>

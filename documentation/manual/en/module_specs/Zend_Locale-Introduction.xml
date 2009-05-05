@@ -368,7 +368,7 @@ $date = new Zend_Date();
 
         <para>
             In the case that no locale can be detected, automatically the locale
-            <emphasis role="strong">de</emphasis> will be used. Otherwise, the detected locale will be used.
+            <emphasis>de</emphasis> will be used. Otherwise, the detected locale will be used.
         </para>
 
     </sect2>

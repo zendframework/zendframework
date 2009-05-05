@@ -22,7 +22,7 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">Complete Locale support</emphasis>
+                    <emphasis>Complete Locale support</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> works with all available locales and therefore knows about over 100 different localized currencies. This includes
@@ -31,7 +31,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Reusable Currency Definitions</emphasis>
+                    <emphasis>Reusable Currency Definitions</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> does not include the value of the currency. This is the reason why
@@ -41,7 +41,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Fluent Interface</emphasis>
+                    <emphasis>Fluent Interface</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> includes fluent interfaces where possible.
@@ -49,7 +49,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Additional Methods</emphasis>
+                    <emphasis>Additional Methods</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> includes additional methods that offer information about

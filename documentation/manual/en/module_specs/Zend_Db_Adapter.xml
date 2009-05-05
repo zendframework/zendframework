@@ -269,7 +269,7 @@ $db = Zend_Db::factory($config->database);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">host</emphasis>:
+                        <emphasis>host</emphasis>:
                         a string containing a hostname or IP address of the
                         database server. If the database is running on the
                         same host as the PHP application, you may use
@@ -278,27 +278,27 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">username</emphasis>:
+                        <emphasis>username</emphasis>:
                         account identifier for authenticating a connection to the
                         RDBMS server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">password</emphasis>:
+                        <emphasis>password</emphasis>:
                         account password credential for authenticating a
                         connection to the RDBMS server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">dbname</emphasis>:
+                        <emphasis>dbname</emphasis>:
                         database instance name on the RDBMS server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">port</emphasis>:
+                        <emphasis>port</emphasis>:
                         some RDBMS servers can accept network connections on a
                         administrator-specified port number. The port
                         parameter allow you to specify the port to which your
@@ -308,14 +308,14 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">options</emphasis>:
+                        <emphasis>options</emphasis>:
                         this parameter is an associative array of options
                         that are generic to all <classname>Zend_Db_Adapter</classname> classes.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">driver_options</emphasis>:
+                        <emphasis>driver_options</emphasis>:
                         this parameter is an associative array of additional
                         options that are specific to a given database
                         extension. One typical use of this parameter is to
@@ -324,7 +324,7 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">adapterNamespace</emphasis>:
+                        <emphasis>adapterNamespace</emphasis>:
                         names the initial part of the class name for the
                         adapter, instead of 'Zend_Db_Adapter'. Use this if
                         you need to use the <code>factory()</code> method to
@@ -516,20 +516,20 @@ try {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">accounts</emphasis> stores
+                    <emphasis>accounts</emphasis> stores
                     information about each user of the bug-tracking database.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">products</emphasis> stores
+                    <emphasis>products</emphasis> stores
                     information about each product for which a bug can be
                     logged.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs</emphasis> stores information
+                    <emphasis>bugs</emphasis> stores information
                     about bugs, including that current state of the bug, the
                     person who reported the bug, the person who is assigned to
                     fix the bug, and the person who is assigned to verify the
@@ -538,7 +538,7 @@ try {
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs_products</emphasis> stores a
+                    <emphasis>bugs_products</emphasis> stores a
                     relationship between bugs and products. This implements a
                     many-to-many relationship, because a given bug may be
                     relevant to multiple products, and of course a given
@@ -661,7 +661,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         return data in an array of associative arrays.
                         The array keys are column names, as strings.
                         This is the default fetch mode for <classname>Zend_Db_Adapter</classname> classes.
@@ -687,7 +687,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
                         return data in an array of arrays. The arrays are
                         indexed by integers, corresponding to the position of
                         the respective field in the select-list of the query.
@@ -695,7 +695,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
                         return data in an array of arrays. The array keys are
                         both strings as used in the FETCH_ASSOC mode, and
                         integers as used in the FETCH_NUM mode. Note that the
@@ -706,7 +706,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
                         return data in an array of values. The value in each array
                         is the value returned by one column of the result set.
                         By default, this is the first column, indexed by 0.
@@ -714,7 +714,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         return data in an array of objects. The default class
                         is the PHP built-in class stdClass. Columns of the
                         result set are available as public properties of the

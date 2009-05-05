@@ -10,8 +10,8 @@
     </para>
 
     <para>
-        <classname>Zend_Auth</classname> is concerned only with <emphasis role="strong">authentication</emphasis> and not with
-        <emphasis role="strong">authorization</emphasis>. Authentication is loosely defined as determining
+        <classname>Zend_Auth</classname> is concerned only with <emphasis>authentication</emphasis> and not with
+        <emphasis>authorization</emphasis>. Authentication is loosely defined as determining
         whether an entity actually is what it purports to be (i.e., identification), based on some set of
         credentials. Authorization, the process of deciding whether to allow an entity access to, or to
         perform operations upon, other entities is outside the scope of <classname>Zend_Auth</classname>. For more information about

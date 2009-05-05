@@ -15,8 +15,8 @@
 
         <para>
             The simplest way of creating a date object is to create the actual date. You can either create a new
-            instance with <emphasis role="strong">new Zend_Date()</emphasis> or use the convenient static method
-            <emphasis role="strong">Zend_Date::now()</emphasis> which both will return the actual date as new
+            instance with <emphasis>new Zend_Date()</emphasis> or use the convenient static method
+            <emphasis>Zend_Date::now()</emphasis> which both will return the actual date as new
             instance of <classname>Zend_Date</classname>. The actual date always include the actual date and time for the
             actual set timezone.
         </para>
@@ -43,7 +43,7 @@ $date = new Zend_Date();
 
             <para>
                 Sometimes it is easier to use a static method for date creation. Therefor you can use the
-                <emphasis role="strong"><code>now()</code></emphasis> method. It returns a new instance of
+                <emphasis><code>now()</code></emphasis> method. It returns a new instance of
                 <classname>Zend_Date</classname> the same way as if you would use <code>new Zend_Date()</code>. But it will
                 always return the actual date and can not be changed by giving optional parameters.
             </para>
@@ -134,32 +134,32 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             <itemizedlist mark='opencircle'>
                 <listitem>
                     <para>
-                        <emphasis role="strong">day</emphasis>: day of the date as number
+                        <emphasis>day</emphasis>: day of the date as number
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">month</emphasis>: month of the date as number
+                        <emphasis>month</emphasis>: month of the date as number
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">year</emphasis>: full year of the date
+                        <emphasis>year</emphasis>: full year of the date
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">hour</emphasis>: hour of the date
+                        <emphasis>hour</emphasis>: hour of the date
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">minute</emphasis>: minute of the date
+                        <emphasis>minute</emphasis>: minute of the date
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">second</emphasis>: second of the date
+                        <emphasis>second</emphasis>: second of the date
                     </para>
                 </listitem>
             </itemizedlist>
@@ -172,7 +172,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             <para>
                 Normally you will give a complete date array for creation of a new date instance. But when you
                 do not give all values, the not given array values are zeroed. This means that if f.e. no hour is
-                given the hour <emphasis role="strong">0</emphasis> is used.
+                given the hour <emphasis>0</emphasis> is used.
             </para>
 
             <programlisting role="php"><![CDATA[

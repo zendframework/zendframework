@@ -1188,27 +1188,27 @@ echo "The table name is " . $info['name'] . "\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis> => the name of the table.
+                    <emphasis>name</emphasis> => the name of the table.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">cols</emphasis> => an array, naming the column(s) of
+                    <emphasis>cols</emphasis> => an array, naming the column(s) of
                     the table.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">primary</emphasis> => an array, naming the column(s) in
+                    <emphasis>primary</emphasis> => an array, naming the column(s) in
                     the primary key.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">metadata</emphasis> => an associative array, mapping
+                    <emphasis>metadata</emphasis> => an associative array, mapping
                     column names to information about the columns. This is the information returned
                     by the <code>describeTable()</code> method.
                 </para>
@@ -1216,7 +1216,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowClass</emphasis> => the name of the concrete class
+                    <emphasis>rowClass</emphasis> => the name of the concrete class
                     used for Row objects returned by methods of this table instance. This defaults
                     to <classname>Zend_Db_Table_Row</classname>.
                 </para>
@@ -1224,7 +1224,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowsetClass</emphasis> => the name of the concrete
+                    <emphasis>rowsetClass</emphasis> => the name of the concrete
                     class used for Rowset objects returned by methods of this table instance. This
                     defaults to <classname>Zend_Db_Table_Rowset</classname>.
                 </para>
@@ -1232,7 +1232,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">referenceMap</emphasis> => an associative array, with
+                    <emphasis>referenceMap</emphasis> => an associative array, with
                     information about references from this table to any parent tables. See
                     <xref linkend="zend.db.table.relationships.defining" />.
                 </para>
@@ -1240,7 +1240,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">dependentTables</emphasis> => an array of class names
+                    <emphasis>dependentTables</emphasis> => an array of class names
                     of tables that reference this table. See
                     <xref linkend="zend.db.table.relationships.defining" />.
                 </para>
@@ -1248,7 +1248,7 @@ echo "The table name is " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">schema</emphasis> => the name of the schema (or
+                    <emphasis>schema</emphasis> => the name of the schema (or
                     database or tablespace) for this table.
                 </para>
             </listitem>
@@ -1291,7 +1291,7 @@ echo "The table name is " . $info['name'] . "\n";
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Call
+                        <emphasis>Call
                         <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis> - This allows
                         a developer to once set the default cache object to be used for all table
                         classes.
@@ -1300,7 +1300,7 @@ echo "The table name is " . $info['name'] . "\n";
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">Configure
+                        <emphasis>Configure
                         <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> - This allows a developer
                         to set the cache object to be used for a particular table class instance.
                     </para>

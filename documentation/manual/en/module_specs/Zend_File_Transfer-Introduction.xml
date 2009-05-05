@@ -81,7 +81,7 @@ if (!$adapter->receive()) {
         <title>Attention</title>
         <para>
             This example is suitable only for demonstrating the basic API of <classname>Zend_File_Transfer</classname>. You should
-            <emphasis role="strong">never</emphasis> use this code listing in a production environment, because
+            <emphasis>never</emphasis> use this code listing in a production environment, because
             severe security issues may be introduced. You should always use validators to increase security.
         </para>
     </note>
@@ -111,7 +111,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">ignoreNoFile</emphasis>: If this option is set to true,
+                    <emphasis>ignoreNoFile</emphasis>: If this option is set to true,
                     all validators will ignore files that have not been uploaded by the form. The default value is false which results in an error if no files were specified.
                 </para>
             </listitem>
@@ -130,7 +130,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">isValid($files = null)</emphasis>: This method will check if the
+                    <emphasis>isValid($files = null)</emphasis>: This method will check if the
                     given files are valid, based on the validators that are attached to the files.
                     If no files are specified, all files will be checked. You can call <code>isValid()</code>
                     before calling <code>receive()</code>; in this case, <code>receive()</code> will not call
@@ -140,7 +140,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isUploaded($files = null)</emphasis>: This method will check if the
+                    <emphasis>isUploaded($files = null)</emphasis>: This method will check if the
                     specified files have been uploaded by the user. This is useful when you have defined
                     one or more optional files. When no files are specified, all files will be checked.
                 </para>
@@ -148,7 +148,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isReceived($files = null)</emphasis>: This method will check if the
+                    <emphasis>isReceived($files = null)</emphasis>: This method will check if the
                     given files have already been received. When no files are specified, all files will be checked.
                 </para>
             </listitem>
@@ -195,35 +195,35 @@ $upload->receive();
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileName($file = null, $path = true)</emphasis>: This method
+                    <emphasis>getFileName($file = null, $path = true)</emphasis>: This method
                     will return the real file name of a transferred file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileInfo($file = null)</emphasis>: This method will return all
+                    <emphasis>getFileInfo($file = null)</emphasis>: This method will return all
                     internal information for the given file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileSize($file = null)</emphasis>: This method will return the
+                    <emphasis>getFileSize($file = null)</emphasis>: This method will return the
                     real filesize for the given file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getHash($hash = 'crc32', $files = null)</emphasis>: This method
+                    <emphasis>getHash($hash = 'crc32', $files = null)</emphasis>: This method
                     returns a hash of the content of a given transferred file.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getMimeType($files = null)</emphasis>: This method returns the
+                    <emphasis>getMimeType($files = null)</emphasis>: This method returns the
                     mimetype of a given transferred file.
                 </para>
             </listitem>
@@ -431,7 +431,7 @@ while (!$upload['done']) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">id</emphasis>: The ID of this upload. This ID identifies the
+                        <emphasis>id</emphasis>: The ID of this upload. This ID identifies the
                         upload within the extension. It is filled automatically. You should never change or
                         give this value yourself.
                     </para>
@@ -439,36 +439,36 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">total</emphasis>: The total filesize of the uploaded files in bytes
+                        <emphasis>total</emphasis>: The total filesize of the uploaded files in bytes
                         as integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">current</emphasis>: The current uploaded filesize in bytes
+                        <emphasis>current</emphasis>: The current uploaded filesize in bytes
                         as integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">rate</emphasis>: The average upload speed in bytes per second
+                        <emphasis>rate</emphasis>: The average upload speed in bytes per second
                         as integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">done</emphasis>: Returns true when the upload is finished and false
+                        <emphasis>done</emphasis>: Returns true when the upload is finished and false
                         otherwise.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">message</emphasis>: The actual message. Eighter the progress as
-                        text in the form <emphasis role="strong">10kB / 200kB</emphasis>, or a helpful message
+                        <emphasis>message</emphasis>: The actual message. Eighter the progress as
+                        text in the form <emphasis>10kB / 200kB</emphasis>, or a helpful message
                         in the case of a problem. Problems could be, that there is no upload in progress, that
                         there was a failure while retrieving the data for the progress, or that the upload has
                         been canceled.
@@ -477,7 +477,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">progress</emphasis>: This optional key takes a instance of
+                        <emphasis>progress</emphasis>: This optional key takes a instance of
                         Zend_ProgressBar_Adapter or Zend_ProgressBar and allows to get the actual upload state
                         within a progressbar.
                     </para>
@@ -485,7 +485,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">session</emphasis>: This optional key takes the name of a session
+                        <emphasis>session</emphasis>: This optional key takes the name of a session
                         namespace which will be used within Zend_ProgressBar. When this key is not given it
                         defaults to <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.
                     </para>

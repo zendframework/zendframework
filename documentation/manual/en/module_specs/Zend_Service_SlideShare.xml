@@ -244,7 +244,7 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <emphasis role="strong">Slide shows from a specific account</emphasis>
+                    <emphasis>Slide shows from a specific account</emphasis>
                 </para>
 
                 <para>
@@ -256,7 +256,7 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">Slide shows which contain specific tags</emphasis>
+                    <emphasis>Slide shows which contain specific tags</emphasis>
                 </para>
 
                 <para>
@@ -268,7 +268,7 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">Slide shows by group</emphasis>
+                    <emphasis>Slide shows by group</emphasis>
                 </para>
 
                 <para>

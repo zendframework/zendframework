@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_TimeSync</classname> is able to receive internet or network time from a time server using
-        the <emphasis role="strong">NTP</emphasis> or <emphasis role="strong">SNTP</emphasis> protocol.
+        the <emphasis>NTP</emphasis> or <emphasis>SNTP</emphasis> protocol.
         With <classname>Zend_TimeSync</classname>, Zend Framework is able to act independently from the
         time settings of the server where it is running.
     </para>
@@ -51,7 +51,7 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">Server without time service</emphasis>
+                    <emphasis>Server without time service</emphasis>
                 </para>
                 <para>
                     If your application is running on a server and this server does not have any time service
@@ -60,17 +60,17 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Separate database server</emphasis>
+                    <emphasis>Separate database server</emphasis>
                 </para>
                 <para>
                     If your database is running on a different server and this server is not connected
-                    with <emphasis role="strong">NTP</emphasis> or <emphasis role="strong">SNTP</emphasis>
+                    with <emphasis>NTP</emphasis> or <emphasis>SNTP</emphasis>
                     to the application server, you might have problems using storing and using time stamp data.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Multiple servers</emphasis>
+                    <emphasis>Multiple servers</emphasis>
                 </para>
                 <para>
                     If your application is running on more than one server and these servers' time bases
@@ -80,7 +80,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Batch processing</emphasis>
+                    <emphasis>Batch processing</emphasis>
                 </para>
                 <para>
                     If you want to work with a time service within a batch file or within a
@@ -101,7 +101,7 @@
         <title>What is NTP ?</title>
 
         <para>
-            The <code>Network Time Protocol</code> (<emphasis role="strong">NTP</emphasis>) is a protocol
+            The <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) is a protocol
             for synchronizing multiple systems' clocks over packet-switched, variable-latency data
             networks. NTP uses UDP port 123 as its transport layer. See the
             <ulink url="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia article</ulink>
@@ -115,7 +115,7 @@
         <title>What is SNTP?</title>
 
         <para>
-            The <code>Simple Network Time Protocol</code> (<emphasis role="strong">SNTP</emphasis>) is a
+            The <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>) is a
             protocol synchronizing multiple systems' clocks over packet-switched, variable-latency
             data networks. SNTP uses UDP port 37 as its transport layer. It is closely related to the
             Network Time Protocol, but simpler.

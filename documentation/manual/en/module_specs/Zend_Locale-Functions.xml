@@ -228,19 +228,19 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis role="strong">Language</emphasis></entry>
+                        <entry><emphasis>Language</emphasis></entry>
                         <entry>Returns a localized list of all languages. The language part of the locale
                             is returned as key and the translation as value. For your convenience use the
                             <code>getLanguageTranslationList()</code> method</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Script</emphasis></entry>
+                        <entry><emphasis>Script</emphasis></entry>
                         <entry>Returns a localized list of all scripts. The script is returned as key and the
                             translation as value. For your convenience use the
                             <code>getScriptTranslationList()</code> method</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Territory</emphasis></entry>
+                        <entry><emphasis>Territory</emphasis></entry>
                         <entry>Returns a localized list of all territories. This contains countries,
                             continents and territories. To get only territories and continents
                             use '1' as value. To get only countries use '2' as value. The country part of
@@ -252,18 +252,18 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             you will get a list with both.</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Variant</emphasis></entry>
+                        <entry><emphasis>Variant</emphasis></entry>
                         <entry>Returns a localized list of known variants of scripts. The variant is
                             returned as key and the translation as value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Key</emphasis></entry>
+                        <entry><emphasis>Key</emphasis></entry>
                         <entry>Returns a localized list of known keys. This keys are generic values used
                             in translation. These are normally calendar, collation and currency. The key
                             is returned as array key and the translation as value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Type</emphasis></entry>
+                        <entry><emphasis>Type</emphasis></entry>
                         <entry>Returns a localized list of known types of keys. These are variants of types
                             of calendar representations and types of collations. When you use 'collation' as
                             value you will get all types of collations returned. When you use 'calendar' as
@@ -272,23 +272,23 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Layout</emphasis></entry>
+                        <entry><emphasis>Layout</emphasis></entry>
                         <entry>Returns a list of rules which describes how to format special text parts</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Characters</emphasis></entry>
+                        <entry><emphasis>Characters</emphasis></entry>
                         <entry>Returns a list of allowed characters within this locale</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Delimiters</emphasis></entry>
+                        <entry><emphasis>Delimiters</emphasis></entry>
                         <entry>Returns a list of allowed quoting characters for this locale</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Measurement</emphasis></entry>
+                        <entry><emphasis>Measurement</emphasis></entry>
                         <entry>Returns a list of known measurement values. This list is depreciated</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Months</emphasis></entry>
+                        <entry><emphasis>Months</emphasis></entry>
                         <entry>Returns a list of all month representations within this locale. There are
                             several different representations which are all returned as sub array. If you omit
                             the value you will get a list of all months from the 'gregorian' calendar returned.
@@ -297,7 +297,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Month</emphasis></entry>
+                        <entry><emphasis>Month</emphasis></entry>
                         <entry>Returns a localized list of all month names for this locale. If you omit the
                             value you will get the normally used gregorian full name of the months where each
                             month number is used as key and the translated month is returned as value. You
@@ -307,7 +307,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Days</emphasis></entry>
+                        <entry><emphasis>Days</emphasis></entry>
                         <entry>Returns a list of all day representations within this locale. There are
                             several different representations which are all returned as sub array. If you omit
                             the value you will get a list of all days from the 'gregorian' calendar returned.
@@ -316,7 +316,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Day</emphasis></entry>
+                        <entry><emphasis>Day</emphasis></entry>
                         <entry>Returns a localized list of all day names for this locale. If you omit the
                             value you will get the normally used gregorian full name of the days where the
                             english day abbreviation is used as key and the translated day is returned as
@@ -326,12 +326,12 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Week</emphasis></entry>
+                        <entry><emphasis>Week</emphasis></entry>
                         <entry>Returns a list of values used for proper week calculations within a locale.
                             Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Quarters</emphasis></entry>
+                        <entry><emphasis>Quarters</emphasis></entry>
                         <entry>Returns a list of all quarter representations within this locale. There are
                             several different representations which are all returned as sub array. If you omit
                             the value you will get a list of all quarters from the 'gregorian' calendar returned.
@@ -339,7 +339,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             returned</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Quarter</emphasis></entry>
+                        <entry><emphasis>Quarter</emphasis></entry>
                         <entry>Returns a localized list of all quarter names for this locale. If you omit the
                             value you will get the normally used gregorian full name of the quarters where each
                             quarter number is used as key and the translated quarter is returned as value. You
@@ -348,14 +348,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             and the third the width to return</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Eras</emphasis></entry>
+                        <entry><emphasis>Eras</emphasis></entry>
                         <entry>Returns a list of all era representations within this locale. If you omit
                             the value you will get a list of all eras from the 'gregorian' calendar returned.
                             You can give any known calendar as value to get a list of eras from this calendar
                             returned</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Era</emphasis></entry>
+                        <entry><emphasis>Era</emphasis></entry>
                         <entry>Returns a localized list of all era names for this locale. If you omit the
                             value you will get the normally used gregorian full name of the eras where each
                             era number is used as key and the translated era is returned as value. You
@@ -364,7 +364,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             return</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Date</emphasis></entry>
+                        <entry><emphasis>Date</emphasis></entry>
                         <entry>Returns a localized list of all date formats for this locale. The name of the
                             dateformat is used as key and the format itself as value.If you omit the value you
                             will get the date formats for the gregorian calendar returned. You can get the
@@ -372,7 +372,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Time</emphasis></entry>
+                        <entry><emphasis>Time</emphasis></entry>
                         <entry>Returns a localized list of all time formats for this locale. The name of the
                             timeformat is used as key and the format itself as value. If you omit the value you
                             will get the time formats for the gregorian calendar returned. You can get the
@@ -380,7 +380,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             Use <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DateTime</emphasis></entry>
+                        <entry><emphasis>DateTime</emphasis></entry>
                         <entry>Returns a localized list of all known date-time formats for this locale. The name
                             of the date-time format is used as key and the format itself as value. If you
                             omit the value you will get the date-time formats for the gregorian calendar returned.
@@ -389,14 +389,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Field</emphasis></entry>
+                        <entry><emphasis>Field</emphasis></entry>
                         <entry>Returns a localized list of date fields which can be used to display calendars
                             or date strings like 'month' or 'year' in a wished language. If you omit the value
                             you will get this list for the gregorian calendar returned. You can get the
                             list for different calendars if you give the wished calendar as string</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Relative</emphasis></entry>
+                        <entry><emphasis>Relative</emphasis></entry>
                         <entry>Returns a localized list of relative dates which can be used to display
                             textual relative dates like 'yesterday' or 'tomorrow' in a wished language.
                             If you omit the value you will get this list for the gregorian calendar
@@ -404,122 +404,122 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             calendar as string</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Symbols</emphasis></entry>
+                        <entry><emphasis>Symbols</emphasis></entry>
                         <entry>Returns a localized list of characters used for number representations</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">NameToCurrency</emphasis></entry>
+                        <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>Returns a localized list of names for currencies. The currency is used as key
                             and the translated name as value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyToName</emphasis></entry>
+                        <entry><emphasis>CurrencyToName</emphasis></entry>
                         <entry>Returns a list of currencies for localized names. The translated name is used
                             as key and the currency as value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencySymbol</emphasis></entry>
+                        <entry><emphasis>CurrencySymbol</emphasis></entry>
                         <entry>Returns a list of known localized currency symbols for currencies. The
                             currency is used as key and the symbol as value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Question</emphasis></entry>
+                        <entry><emphasis>Question</emphasis></entry>
                         <entry>Returns a list of localized strings for acceptance ('yes') and
                             negotation ('no'). Use
                             <link linkend="zend.locale.getquestion">Zend_Locale's getQuestion method</link>
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyFraction</emphasis></entry>
+                        <entry><emphasis>CurrencyFraction</emphasis></entry>
                         <entry>Returns a list of fractions for currency values. The currency is used as key and
                             the fraction as integer value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyRounding</emphasis></entry>
+                        <entry><emphasis>CurrencyRounding</emphasis></entry>
                         <entry>Returns a list of how to round which currency. The currency is used as key and
                             the rounding as integer value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyToRegion</emphasis></entry>
+                        <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>Returns a list of currencies which are known to be used within a region.
                             The ISO3166 value ('region') is used as array key and the ISO4217 value
                             ('currency') as array value. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">RegionToCurrency</emphasis></entry>
+                        <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>Returns a list of regions where a currency is used . The ISO4217 value ('currency')
                             is used as array key and the ISO3166 value ('region') as array value. When a currency
                             is used in several regions these regions are separated with a whitespace. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">RegionToTerritory</emphasis></entry>
+                        <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>Returns a list of territories with the countries or sub territories which are
                             included within that territory. The ISO territory code ('territory') is used as
                             array key and the ISO3166 value ('region') as array value. When a territory contains
                             several regions these regions are separated with a whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToRegion</emphasis></entry>
+                        <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>Returns a list of regions and the territories where these regions are located.
                             The ISO3166 code ('region') is used as array key and the ISO territory code
                             ('territory') as array value. When a region is located in several territories
                             these territories are separated with a whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">ScriptToLanguage</emphasis></entry>
+                        <entry><emphasis>ScriptToLanguage</emphasis></entry>
                         <entry>Returns a list of scripts which are used within a language. The language code
                             is used as array key and the script code as array value. When a language contains
                             several scripts these scripts are separated with a whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">LanguageToScript</emphasis></entry>
+                        <entry><emphasis>LanguageToScript</emphasis></entry>
                         <entry>Returns a list of languages which are using a script. The script code
                             is used as array key and the language code as array value. When a script is used
                             in several languages these languages are separated with a whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToLanguage</emphasis></entry>
+                        <entry><emphasis>TerritoryToLanguage</emphasis></entry>
                         <entry>Returns a list of countries which are using a language. The country code
                             is used as array key and the language code as array value. When a language is used in
                             several countries these countries are separated with a whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">LanguageToTerritory</emphasis></entry>
+                        <entry><emphasis>LanguageToTerritory</emphasis></entry>
                         <entry>Returns a list of countries and the languages spoken within these countries.
                             The country code is used as array key and the language code as array value. When
                             a territory is using several languages these languages are separated with a
                             whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToWindows</emphasis></entry>
+                        <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>Returns a list of windows timezones and the related ISO timezone. The windows
                             timezone is used as array key and the ISO timezone as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">WindowsToTimezone</emphasis></entry>
+                        <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>Returns a list of ISO timezones and the related windows timezone. The ISO
                             timezone is used as array key and the windows timezone as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToTimezone</emphasis></entry>
+                        <entry><emphasis>TerritoryToTimezone</emphasis></entry>
                         <entry>Returns a list of regions or territories and the related ISO timezone. The
                             ISO timezone is used as array key and the territory code as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToTerritory</emphasis></entry>
+                        <entry><emphasis>TimezoneToTerritory</emphasis></entry>
                         <entry>Returns a list of timezones and the related region or territory code. The
                             region or territory code is used as array key and the ISO timezone as array
                             value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CityToTimezone</emphasis></entry>
+                        <entry><emphasis>CityToTimezone</emphasis></entry>
                         <entry>Returns a localized list of cities which can be used as translation for a
                             related timezone. Not for all timezones is a translation available, but for a
                             user is the real city written in his languages more accurate than the ISO name
@@ -527,43 +527,43 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             city as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToCity</emphasis></entry>
+                        <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>Returns a list of timezones for localized city names. The localized city is
                             used as array key and the ISO timezone name as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">PhoneToTerritory</emphasis></entry>
+                        <entry><emphasis>PhoneToTerritory</emphasis></entry>
                         <entry>Returns a list of phone codes which are known to be used within a territory.
                             The territory (region) is used as array key and the telephone code
                             as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToPhone</emphasis></entry>
+                        <entry><emphasis>TerritoryToPhone</emphasis></entry>
                         <entry>Returns a list of territories where a phone is used . The phone code
                             is used as array key and the territory (region) as array value. When a
                             phone code is used in several territories these territories are separated with a
                             whitespace</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">NumericToTerritory</emphasis></entry>
+                        <entry><emphasis>NumericToTerritory</emphasis></entry>
                         <entry>Returns a list of 3 digit number codes for territories.
                             The territory (region) is used as array key and the 3 digit number code
                             as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToNumeric</emphasis></entry>
+                        <entry><emphasis>TerritoryToNumeric</emphasis></entry>
                         <entry>Returns a list of territories with their 3 digit number code. The 3 digit
                             number code is used as array key and the territory (region) as array value
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Alpha3ToTerritory</emphasis></entry>
+                        <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
                         <entry>Returns a list of 3 sign character codes for territories.
                             The territory (region) is used as array key and the 3 sign character code
                             as array value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToAlpha3</emphasis></entry>
+                        <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>Returns a list of territories with their 3 sign character code. The 3 sign
                             character code is used as array key and the territory (region) as array value
                         </entry>
@@ -601,61 +601,61 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                 </thead>
                 <tbody>
                     <row>
-                        <entry><emphasis role="strong">Language</emphasis></entry>
+                        <entry><emphasis>Language</emphasis></entry>
                         <entry>Returns a translation for a language. To select the wished translation
                             you must give the language code as value. For your convenience use the
                             <code>getLanguageTranslation($value)</code> method</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Script</emphasis></entry>
+                        <entry><emphasis>Script</emphasis></entry>
                         <entry>Returns a translation for a script. To select the wished translation you
                             must give the script code as value. For your convenience use the
                             <code>getScriptTranslation($value)</code> method</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Territory</emphasis> or
-                            <emphasis role="strong">Country</emphasis></entry>
+                        <entry><emphasis>Territory</emphasis> or
+                            <emphasis>Country</emphasis></entry>
                         <entry>Returns a translation for a territory. This can be countries, continents
                             and territories. To select the wished variant you must give the territory
                             code as value. For your convenience use the
                             <code>getCountryTranslation($value)</code> method.</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Variant</emphasis></entry>
+                        <entry><emphasis>Variant</emphasis></entry>
                         <entry>Returns a translation for a script variant. To select the wished variant
                             you must give the variant code as value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Key</emphasis></entry>
+                        <entry><emphasis>Key</emphasis></entry>
                         <entry>Returns translation for a known keys. This keys are generic values used
                             in translation. These are normally calendar, collation and currency. To
                             select the wished key you must give the key code as value</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DateChars</emphasis></entry>
+                        <entry><emphasis>DateChars</emphasis></entry>
                         <entry>Returns a character table which contains all characters used when displaying
                             dates</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DefaultCalendar</emphasis></entry>
+                        <entry><emphasis>DefaultCalendar</emphasis></entry>
                         <entry>Returns the default calendar for the given locale. For most locales this
                             will be 'gregorian'. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">MonthContext</emphasis></entry>
+                        <entry><emphasis>MonthContext</emphasis></entry>
                         <entry>Returns the default context for months which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DefaultMonth</emphasis></entry>
+                        <entry><emphasis>DefaultMonth</emphasis></entry>
                         <entry>Returns the default format for months which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Month</emphasis></entry>
+                        <entry><emphasis>Month</emphasis></entry>
                         <entry>Returns a translation for a month. You have to give the number of the month
                             as integer value. It has to be between 1 and 12. If you want to receive data for
                             other calendars, contexts or formats, then you must give an array instead of an
@@ -666,19 +666,19 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DayContext</emphasis></entry>
+                        <entry><emphasis>DayContext</emphasis></entry>
                         <entry>Returns the default context for ´days which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DefaultDay</emphasis></entry>
+                        <entry><emphasis>DefaultDay</emphasis></entry>
                         <entry>Returns the default format for days which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Day</emphasis></entry>
+                        <entry><emphasis>Day</emphasis></entry>
                         <entry>Returns a translation for a day. You have to give the english abbreviation
                             of the day as string value ('sun', 'mon', etc.). If you want to receive data
                             for other calendars, contexts or format, then you must give an array instead of
@@ -689,7 +689,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Quarter</emphasis></entry>
+                        <entry><emphasis>Quarter</emphasis></entry>
                         <entry>Returns a translation for a quarter. You have to give the number of the
                             quarter as integer and it has to be between 1 and 4. If you want to receive
                             data for other calendars, contexts or formats, then you must give an array
@@ -699,21 +699,21 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             the context 'format' and the format 'wide'</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Am</emphasis></entry>
+                        <entry><emphasis>Am</emphasis></entry>
                         <entry>Returns a translation for 'AM' in a expected locale. If you want to receive
                             data for other calendars an string with the expected calendar. If you omit the
                             value then the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Pm</emphasis></entry>
+                        <entry><emphasis>Pm</emphasis></entry>
                         <entry>Returns a translation for 'PM' in a expected locale. If you want to receive
                             data for other calendars an string with the expected calendar. If you omit the
                             value then the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Era</emphasis></entry>
+                        <entry><emphasis>Era</emphasis></entry>
                         <entry>Returns a translation for an era within a locale. You have to give the era
                             number as string or integer. If you want to receive data for other calendars or
                             formats, then you must give an array instead of the era number with the expected
@@ -723,13 +723,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             format</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DefaultDate</emphasis></entry>
+                        <entry><emphasis>DefaultDate</emphasis></entry>
                         <entry>Returns the default date format which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Date</emphasis></entry>
+                        <entry><emphasis>Date</emphasis></entry>
                         <entry>Returns the date format for an given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with the
                             'medium' format. If you give a string then the 'gregorian' calendar will be
@@ -738,13 +738,13 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DefaultTime</emphasis></entry>
+                        <entry><emphasis>DefaultTime</emphasis></entry>
                         <entry>Returns the default time format which is used within the given
                             calendar. If you omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Time</emphasis></entry>
+                        <entry><emphasis>Time</emphasis></entry>
                         <entry>Returns the time format for an given calendar or format within a locale.
                             If you omit the value then the 'gregorian' calendar will be used with the
                             'medium' format. If you give a string then the 'gregorian' calendar will be
@@ -753,14 +753,14 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DateTime</emphasis></entry>
+                        <entry><emphasis>DateTime</emphasis></entry>
                         <entry>Returns the datetime format for the given locale which indicates how to
                             display date with times in the same string within the given calendar. If you
                             omit the value the 'gregorian' calendar will be used. Use
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Field</emphasis></entry>
+                        <entry><emphasis>Field</emphasis></entry>
                         <entry>Returns a translated date field which can be used to display calendars or
                             date strings like 'month' or 'year' in a wished language. You must give the
                             field which has to be returned as string. In this case the 'gregorian'
@@ -769,7 +769,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <code>array('calendar', 'date field')</code></entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Relative</emphasis></entry>
+                        <entry><emphasis>Relative</emphasis></entry>
                         <entry>Returns a translated date which is relative to today which can include date
                             strings like 'yesterday' or 'tomorrow' in a wished language. You have to give
                             the number of days relative to tomorrow to receive the expected string. Yesterday
@@ -779,42 +779,42 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             <link linkend="zend.date.introduction">Zend_Date</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">DecimalNumber</emphasis></entry>
+                        <entry><emphasis>DecimalNumber</emphasis></entry>
                         <entry>Returns the format for decimal numbers within a given locale. Use
                             <link linkend="zend.locale.parsing">Zend_Locale_Format</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">ScientificNumber</emphasis></entry>
+                        <entry><emphasis>ScientificNumber</emphasis></entry>
                         <entry>Returns the format for scientific numbers within a given locale</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">PercentNumber</emphasis></entry>
+                        <entry><emphasis>PercentNumber</emphasis></entry>
                         <entry>Returns the format for percentage numbers within a given locale</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyNumber</emphasis></entry>
+                        <entry><emphasis>CurrencyNumber</emphasis></entry>
                         <entry>Returns the format for displaying currency numbers within a given locale. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">NameToCurrency</emphasis></entry>
+                        <entry><emphasis>NameToCurrency</emphasis></entry>
                         <entry>Returns the translated name for a given currency. The currency has to be
                             given in ISO format which is for example 'EUR' for the currency 'euro'. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyToName</emphasis></entry>
+                        <entry><emphasis>CurrencyToName</emphasis></entry>
                         <entry>Returns a currency for a given localized name. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencySymbol</emphasis></entry>
+                        <entry><emphasis>CurrencySymbol</emphasis></entry>
                         <entry>Returns the used symbol for a currency within a given locale. Not for all
                             currencies exists a symbol. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Question</emphasis></entry>
+                        <entry><emphasis>Question</emphasis></entry>
                         <entry>Returns a localized string for acceptance ('yes') and
                             negotation ('no'). You have to give either 'yes' or 'no' as value to receive the
                             expected string. Use
@@ -822,128 +822,128 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyFraction</emphasis></entry>
+                        <entry><emphasis>CurrencyFraction</emphasis></entry>
                         <entry>Returns the fraction to use for a given currency. You must give the currency
                             as ISO value. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyRounding</emphasis></entry>
+                        <entry><emphasis>CurrencyRounding</emphasis></entry>
                         <entry>Returns how to round a given currency. You must give the currency
                             as ISO value. If you omit the currency then the 'DEFAULT' rounding will be
                             returned. Use <link linkend="zend.currency.introduction">Zend_Currency</link>
                             for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CurrencyToRegion</emphasis></entry>
+                        <entry><emphasis>CurrencyToRegion</emphasis></entry>
                         <entry>Returns the currency for a given region. The region code has to be given
                             as ISO3166 string for example 'AT' for austria. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">RegionToCurrency</emphasis></entry>
+                        <entry><emphasis>RegionToCurrency</emphasis></entry>
                         <entry>Returns the regions where a currency is used. The currency has to be given
                             as ISO4217 code for example 'EUR' for euro. When a currency is used in multiple
                             regions, these regions are separated with a whitespace character. Use
                             <link linkend="zend.currency.introduction">Zend_Currency</link> for simplicity</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">RegionToTerritory</emphasis></entry>
+                        <entry><emphasis>RegionToTerritory</emphasis></entry>
                         <entry>Returns the regions for a given territory. The territory has to be given as
                             ISO4217 string for example '001' for world. The regions within this territory
                             are separated with a whitespace character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToRegion</emphasis></entry>
+                        <entry><emphasis>TerritoryToRegion</emphasis></entry>
                         <entry>Returns the territories where a given region is located. The region has to be
                             given in ISO3166 string for example 'AT' for austria. When a region is located in
                             multiple territories then these territories are separated with a whitespace
                             character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">ScriptToLanguage</emphasis></entry>
+                        <entry><emphasis>ScriptToLanguage</emphasis></entry>
                         <entry>Returns the scripts which are used within a given language. The language has
                             to be given as ISO language code for example 'en' for english. When multiple
                             scripts are used within a language then these scripts are separated with a
                             whitespace character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">LanguageToScript</emphasis></entry>
+                        <entry><emphasis>LanguageToScript</emphasis></entry>
                         <entry>Returns the languages which are used within a given script. The script has to be
                             given as ISO script code for example 'Latn' for latin. When a script is used in
                             multiple languages then these languages are separated with a whitespace
                             character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToLanguage</emphasis></entry>
+                        <entry><emphasis>TerritoryToLanguage</emphasis></entry>
                         <entry>Returns the territories where a given language is used. The language has
                             to be given as ISO language code for example 'en' for english. When multiple
                             territories exist where this language is used then these territories are
                             separated with a whitespace character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">LanguageToTerritory</emphasis></entry>
+                        <entry><emphasis>LanguageToTerritory</emphasis></entry>
                         <entry>Returns the languages which are used within a given territory. The territory
                             has to be given as ISO3166 code for example 'IT' for italia. When a language
                             is used in multiple territories then these territories are separated with a
                             whitespace character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToWindows</emphasis></entry>
+                        <entry><emphasis>TimezoneToWindows</emphasis></entry>
                         <entry>Returns a ISO timezone for a given windows timezone</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">WindowsToTimezone</emphasis></entry>
+                        <entry><emphasis>WindowsToTimezone</emphasis></entry>
                         <entry>Returns a windows timezone for a given ISO timezone</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToTimezone</emphasis></entry>
+                        <entry><emphasis>TerritoryToTimezone</emphasis></entry>
                         <entry>Returns the territory for a given ISO timezone</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToTerritory</emphasis></entry>
+                        <entry><emphasis>TimezoneToTerritory</emphasis></entry>
                         <entry>Returns the ISO timezone for a given territory</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">CityToTimezone</emphasis></entry>
+                        <entry><emphasis>CityToTimezone</emphasis></entry>
                         <entry>Returns the localized city for a given ISO timezone. Not for all timezones
                             does a city translation exist</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TimezoneToCity</emphasis></entry>
+                        <entry><emphasis>TimezoneToCity</emphasis></entry>
                         <entry>Returns the ISO timezone for a given localized city name. Not for all cities
                             does a timezone exist</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">PhoneToTerritory</emphasis></entry>
+                        <entry><emphasis>PhoneToTerritory</emphasis></entry>
                         <entry>Returns the telephone code for a given territory (region). The territory code
                             has to be given as ISO3166 string for example 'AT' for austria</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToPhone</emphasis></entry>
+                        <entry><emphasis>TerritoryToPhone</emphasis></entry>
                         <entry>Returns the territory (region) where a telephone code is used. The telephone
                             code has to be given as plain integer code for example '43' for +43. When a
                             telephone code is used in multiple territories (regions), these territories are
                             separated with a whitespace character</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">NumericToTerritory</emphasis></entry>
+                        <entry><emphasis>NumericToTerritory</emphasis></entry>
                         <entry>Returns the 3 digit number code for a given territory (region). The territory
                             code has to be given as ISO3166 string for example 'AT' for austria</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToNumeric</emphasis></entry>
+                        <entry><emphasis>TerritoryToNumeric</emphasis></entry>
                         <entry>Returns the territory (region) for a 3 digit number code. The 3 digit number
                             code has to be given as plain integer code for example '43'
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">Alpha3ToTerritory</emphasis></entry>
+                        <entry><emphasis>Alpha3ToTerritory</emphasis></entry>
                         <entry>Returns the 3 sign character code for a given territory (region). The territory
                             code has to be given as ISO3166 string for example 'AT' for austria</entry>
                     </row>
                     <row>
-                        <entry><emphasis role="strong">TerritoryToAlpha3</emphasis></entry>
+                        <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
                         <entry>Returns the territory (region) for a 3 sign character code</entry>
                     </row>
                 </tbody>
@@ -1103,19 +1103,19 @@ foreach($list as $language => $content) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">yes and no</emphasis>: A generic string representation for yes
+                    <emphasis>yes and no</emphasis>: A generic string representation for yes
                     and no responses. This will contain the first and most generic response from yesarray and
                     noarray.
                 </para>
 
                 <para>
-                    <emphasis role="strong">yesarray and noarray</emphasis>: An array with all known yes and
+                    <emphasis>yesarray and noarray</emphasis>: An array with all known yes and
                     no responses. Several languages have more than just two responses. In general this is the
                     full string and its abbreviation.
                 </para>
 
                 <para>
-                    <emphasis role="strong">yesexpr and noexpr</emphasis>: An generated regex which allows you
+                    <emphasis>yesexpr and noexpr</emphasis>: An generated regex which allows you
                     to handle user response, and search for yes or no.
                 </para>
             </listitem>
@@ -1159,9 +1159,9 @@ Array
 
         <note>
             <para>
-                Until 1.0.3 <emphasis role="strong">yesabbr</emphasis> from the underlaying locale data was also
+                Until 1.0.3 <emphasis>yesabbr</emphasis> from the underlaying locale data was also
                 available. Since 1.5 this information is no longer standalone available, but you will find the
-                information from it within <emphasis role="strong">yesarray</emphasis>.
+                information from it within <emphasis>yesarray</emphasis>.
             </para>
         </note>
     </sect2>

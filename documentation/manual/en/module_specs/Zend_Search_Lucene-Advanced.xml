@@ -33,14 +33,14 @@
         </para>
 
         <para>
-            Index modifications are performed <emphasis role="strong">only</emphasis> if any index update is done.
+            Index modifications are performed <emphasis>only</emphasis> if any index update is done.
             That happens if a new document is added to an index or index optimization is started manually
             by <code>$index->optimize()</code> call.
         </para>
 
         <para>
             In a such case <classname>Zend_Search_Lucene</classname> may convert index to the higher format version.
-            That <emphasis role="strong">always</emphasis> happens for the indices in <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> format,
+            That <emphasis>always</emphasis> happens for the indices in <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> format,
             which are automatically converted to 2.1 format.
         </para>
 

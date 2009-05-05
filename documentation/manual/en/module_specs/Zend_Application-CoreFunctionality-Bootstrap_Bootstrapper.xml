@@ -62,7 +62,10 @@
 
                 <row>
                     <entry><code>getApplication()</code></entry>
-                    <entry><classname>Zend_Application | Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application |
+                        Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Retrieve the application/bootstrap object passed via the

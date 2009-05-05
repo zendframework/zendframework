@@ -28,7 +28,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Filters</emphasis> transform input
+                <emphasis>Filters</emphasis> transform input
                 values, by removing or changing characters within the value.
                 The goal is to "normalize" input values until they match an
                 expected format. For example, if a string of numeric digits is
@@ -39,7 +39,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Validators</emphasis> check input
+                <emphasis>Validators</emphasis> check input
                 values against criteria and report whether they passed the test
                 or not. The value is not changed, but the check may fail. For
                 example, if a string must look like an email address, and the
@@ -49,7 +49,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Escapers</emphasis> transform a value
+                <emphasis>Escapers</emphasis> transform a value
                 by removing magic behavior of certain characters. In some
                 output contexts, special characters have meaning. For example,
                 the characters '&lt;' and '&gt;' delimit HTML tags, and if a
@@ -306,14 +306,14 @@ if ($input->isValid('month')) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Invalid</emphasis> fields are
+                        <emphasis>Invalid</emphasis> fields are
                         those that don't pass one or more of their validation
                         checks.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Missing</emphasis> fields are
+                        <emphasis>Missing</emphasis> fields are
                         those that are not present in the input data, but were
                         declared with the metacommand
                         <code>'presence'=>'required'</code> (see the
@@ -323,7 +323,7 @@ if ($input->isValid('month')) {
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Unknown</emphasis> fields are
+                        <emphasis>Unknown</emphasis> fields are
                         those that are not declared in any rule in the array of
                         validators, but appear in the input data.
                     </para>

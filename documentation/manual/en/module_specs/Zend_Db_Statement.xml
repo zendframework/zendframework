@@ -151,7 +151,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Fetch style</emphasis> is the
+                        <emphasis>Fetch style</emphasis> is the
                         first argument. This controls the structure in which
                         the row is returned.
                         See <xref linkend="zend.db.adapter.select.fetch-mode" />
@@ -161,7 +161,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Cursor orientation</emphasis>
+                        <emphasis>Cursor orientation</emphasis>
                         is the second argument. The default is
                         Zend_Db::FETCH_ORI_NEXT, which simply means that each
                         call to <code>fetch()</code> returns the next row in
@@ -170,7 +170,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Offset</emphasis> is the third
+                        <emphasis>Offset</emphasis> is the third
                         argument.
                         If the cursor orientation is Zend_Db::FETCH_ORI_ABS,
                         then the offset number is the ordinal number of the row

@@ -52,14 +52,14 @@ date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set('Europe/Berlin');
 ]]></programlisting>
             </example>
-            <emphasis role="strong">When creating Zend_Date instances, their timezone will automatically become the
+            <emphasis>When creating Zend_Date instances, their timezone will automatically become the
             current default timezone!</emphasis> Thus, the timezone setting will account for any Daylight Savings Time
             (DST) in effect, eliminating the need to explicitly specify DST.
         </para>
 
         <para>
-            Keep in mind that the timezones <emphasis role="strong">UTC</emphasis> and
-            <emphasis role="strong">GMT</emphasis> do not include Daylight Saving Time. This means that even
+            Keep in mind that the timezones <emphasis>UTC</emphasis> and
+            <emphasis>GMT</emphasis> do not include Daylight Saving Time. This means that even
             if you define per hand that <classname>Zend_Date</classname> should work with DST, it would automatically
             be switched back for the instances of <classname>Zend_Date</classname> which have been set to UTC or GMT.
         </para>

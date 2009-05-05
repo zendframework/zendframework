@@ -19,14 +19,14 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Inconsistent API:</emphasis>
+                <emphasis>Inconsistent API:</emphasis>
                 There is no single API for the different source formats.
                 The usage of gettext for example is very complicated.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">PHP supports only gettext and native array:</emphasis>
+                <emphasis>PHP supports only gettext and native array:</emphasis>
                 PHP itself offers only support for array or gettext.
                 All other source formats have to be coded manually,
                 because there is no native support.
@@ -34,7 +34,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">No detection of the default language:</emphasis>
+                <emphasis>No detection of the default language:</emphasis>
                 The default language of the user cannot be detected without
                 deeper knowledge of the backgrounds for
                 the different web browsers.
@@ -42,7 +42,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Gettext is not thread-safe:</emphasis>
+                <emphasis>Gettext is not thread-safe:</emphasis>
                 PHP's gettext library is not thread safe, and it
                 should not be used in a multithreaded environment.
                 This is due to problems with gettext itself, not PHP,
@@ -60,7 +60,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Supports multiple source formats:</emphasis>
+                <emphasis>Supports multiple source formats:</emphasis>
                 <classname>Zend_Translate</classname> supports several source formats, including
                 those supported by PHP, and other formats including TMX
                 and CSV files.
@@ -68,14 +68,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Thread-safe gettext:</emphasis>
+                <emphasis>Thread-safe gettext:</emphasis>
                 The gettext reader of <classname>Zend_Translate</classname> is thread-safe.
                 There are no problems using it in multi-threaded environments.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Easy and generic API:</emphasis>
+                <emphasis>Easy and generic API:</emphasis>
                 The API of <classname>Zend_Translate</classname> is very simple and requires only a
                 handful of functions.
                 So it's easy to learn and easy to maintain.
@@ -87,14 +87,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Detection of the user's standard language:</emphasis>
+                <emphasis>Detection of the user's standard language:</emphasis>
                 The preferred language of the user accessing the site can be
                 detected and used by <classname>Zend_Translate</classname>.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Automatic source detection:</emphasis>
+                <emphasis>Automatic source detection:</emphasis>
                 <classname>Zend_Translate</classname> is capable of detecting and integrating multiple source files
                 and additionally detect the locale to be used depending on directory or filenames.
             </para>

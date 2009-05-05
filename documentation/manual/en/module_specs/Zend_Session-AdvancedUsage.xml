@@ -108,7 +108,7 @@ php_value session.auto_start 0
                     Correct: Just instantiate <classname>Zend_Session_Namespace</classname> whenever needed, and the underlying
                     PHP session will be automatically started. This offers extremely simple usage that works well in
                     most situations. However, you then become responsible for ensuring that the first
-                    <code>new Zend_Session_Namespace()</code> happens <emphasis role="strong">before</emphasis> any
+                    <code>new Zend_Session_Namespace()</code> happens <emphasis>before</emphasis> any
                     output (e.g., <ulink url="http://www.php.net/headers_sent">HTTP headers</ulink>) has been sent by
                     PHP to the client, if you are using the default, cookie-based sessions (strongly recommended). See
                     <xref linkend="zend.session.global_session_management.headers_sent" /> for more information.
@@ -429,7 +429,7 @@ echo $myNamespace->someArray['foo']; // prints "bar"
         <para>
             Zend Framework relies on PHPUnit to facilitate testing of itself. Many developers extend the existing
             suite of unit tests to cover the code in their applications. The exception
-            "<emphasis role="strong">Zend_Session is currently marked as read-only</emphasis>" is thrown while
+            "<emphasis>Zend_Session is currently marked as read-only</emphasis>" is thrown while
             performing unit tests, if any write-related methods are used after ending the session. However, unit tests
             using Zend_Session require extra attention, because closing (<classname>Zend_Session::writeClose()</classname>), or
             destroying a session (<classname>Zend_Session::destroy()</classname>) prevents any further setting or unsetting of

@@ -213,8 +213,8 @@ if ($result->isValid()) {
         <para>
             While the primary purpose of <classname>Zend_Auth</classname> (and consequently
             <classname>Zend_Auth_Adapter_DbTable</classname>) is primarily
-            <emphasis role="strong">authentication</emphasis> and not
-            <emphasis role="strong">authorization</emphasis>, there are a few
+            <emphasis>authentication</emphasis> and not
+            <emphasis>authorization</emphasis>, there are a few
             instances and problems that toe the line between which domain they fit
             within. Depending on how you’ve decided to explain your problem, it
              sometimes makes sense to solve what could look like an

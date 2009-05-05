@@ -10,21 +10,22 @@
         <title>Dauerhafte Speicherung von ACL Daten</title>
 
         <para>
-            <classname>Zend_Acl</classname> wurde so entwickelt, dass keine spezielle Backend Technologie benötigt
-            wird, wie z.B. eine Datenbank oder ein Cache Server, um die ACL Daten zu speichern. Die
-            vollständige PHP Implementation ermöglicht angepasste Administrationstools, die relativ
-            einfach und flexibel auf <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern eine
-            interaktive Wartung der ACL und <classname>Zend_Acl</classname> stellt Methoden für das Einrichten
+            <classname>Zend_Acl</classname> wurde so entwickelt, dass keine spezielle Backend
+            Technologie benötigt wird, wie z.B. eine Datenbank oder ein Cache Server, um die ACL
+            Daten zu speichern. Die vollständige PHP Implementation ermöglicht angepasste
+            Administrationstools, die relativ einfach und flexibel auf
+            <classname>Zend_Acl</classname> aufbauen. Viele Situationen erfordern eine interaktive
+            Wartung der ACL und <classname>Zend_Acl</classname> stellt Methoden für das Einrichten
             und Abfragen der Zugriffskontrolle einer Anwendung.
         </para>
 
         <para>
             Die Speicherung der ACL Daten ist deshalb die Aufgabe des Entwicklers, da sich die
             Anwendungsfälle für verschiedene Situationen erwartungsgemäß stark unterscheiden. Da
-            <classname>Zend_Acl</classname> serialisierbar ist, können ACL Objekte mit der PHP Funktion
-            <ulink url="http://php.net/serialize"><code>serialize()</code></ulink> serialisiert
-            werden und das Ergebnis kann überall gespeichert werden, wo es der Entwickler möchte,
-            wie z.B. eine Datei, eine Datenbank oder ein Cache Mechanismus.
+            <classname>Zend_Acl</classname> serialisierbar ist, können ACL Objekte mit der PHP
+            Funktion <ulink url="http://php.net/serialize"><code>serialize()</code></ulink>
+            serialisiert werden und das Ergebnis kann überall gespeichert werden, wo es der
+            Entwickler möchte, wie z.B. eine Datei, eine Datenbank oder ein Cache Mechanismus.
         </para>
 
     </sect2>
@@ -39,15 +40,15 @@
             wir an, dass ein bestimmter Zugriff erlaubt sei, aber nur zwischen 08:00 und 17:00 Uhr.
             Ein anderes Beispiel könnte sein, dass der Zugriff verboten wird, weil eine Anfrage von
             einer bestimmten IP Addresse kommt, die als Missbrauchsquelle markiert worden ist.
-            <classname>Zend_Acl</classname> bietet eine eingebaute Unterstützung für die Implementierung von
-            Regeln, die auf Bedingungen basieren, die der Entwickler benötigt.
+            <classname>Zend_Acl</classname> bietet eine eingebaute Unterstützung für die
+            Implementierung von Regeln, die auf Bedingungen basieren, die der Entwickler benötigt.
         </para>
 
         <para>
             <classname>Zend_Acl</classname> bietet Unterstützung für bedingte Regel mit dem
-            <classname>Zend_Acl_Assert_Interface</classname>. Um das Regelbehauptungsinterface benutzen
-            zu können, schreibt der Entwickler eine Klasse, welche die <code>assert()</code>
-            Methode des Interfaces implementiert:
+            <classname>Zend_Acl_Assert_Interface</classname>. Um das Regelbehauptungsinterface
+            benutzen zu können, schreibt der Entwickler eine Klasse, welche die
+            <code>assert()</code> Methode des Interfaces implementiert:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -94,7 +95,7 @@ $acl->allow(null, null, null, new CleanIPAssertion());
 
         <para>
             Der <code>assert()</code> Methode eines Behauptungsobjektes werden die ACL, Rolle,
-            Ressource and die Rechte übergeben, auf welche die Autorisierungsabfrage  (d.h.,
+            Ressource and die Rechte übergeben, auf welche die Autorisierungsabfrage (d.h.,
             <code>isAllowed()</code>) passt, um den Kontext für die Behauptungsklasse bereit zu
             stellen, um die Bedingungen zu ermitteln wo erforderlich.
         </para>

@@ -13,8 +13,9 @@
             Die grundlegende ACL, wie sie im <link linkend="zend.acl.introduction">vorherigen
             Kapitel</link> definiert ist, zeigt wie verschiedene Rechte für die gesamte ACL (alle
             Ressourcen) vergeben werden können. In der Praxis tendieren Zugangsbeschränkungen jedoch
-            eher dahin, Ausnahmen und verschiedene Stufen von Komplexität zu haben. <classname>Zend_Acl</classname>
-            erlaubt einem, diese Verfeinerungen auf einfache und flexible Weise zu bewerkstelligen.
+            eher dahin, Ausnahmen und verschiedene Stufen von Komplexität zu haben.
+            <classname>Zend_Acl</classname> erlaubt einem, diese Verfeinerungen auf einfache und
+            flexible Weise zu bewerkstelligen.
         </para>
 
         <para>
@@ -26,10 +27,10 @@
         </para>
 
         <para>
-            Zusätzlich wurde angefordert, dass es der 'staff' Gruppe erlaubt sein soll, die Nachrichten
-            ansehen, aber nicht die neuesten Nachrichen überarbeiten zu können. Zuguterletzt soll
-            es für jeden (Administratoren eingeschlossen) unmöglich sein, irgend eine
-            Bekanntmachung zu archivieren, da diese sowieso nur eine Lebensdauer von 1 bis 2
+            Zusätzlich wurde angefordert, dass es der 'staff' Gruppe erlaubt sein soll, die
+            Nachrichten ansehen, aber nicht die neuesten Nachrichen überarbeiten zu können.
+            Letztendlich soll es für jeden (Administratoren eingeschlossen) unmöglich sein, irgend
+            eine Bekanntmachung zu archivieren, da diese sowieso nur eine Lebensdauer von 1 bis 2
             Tagen haben.
         </para>
 

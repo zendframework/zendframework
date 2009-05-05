@@ -306,7 +306,6 @@ $listEntry->delete();
             feed and a list-based feed for the same worksheet at the same time.
         </para>
 
-
         <sect3 id="zend.gdata.spreadsheets.cellfeeds.get">
             <title>Get a Cell-based Feed</title>
             <para>

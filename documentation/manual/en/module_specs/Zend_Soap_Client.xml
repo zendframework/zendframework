@@ -142,7 +142,6 @@ $client = new Zend_Soap_Client("some.wsdl",
         </para>
     </sect2>
 
-
     <sect2 id="zend.soap.client.calls">
         <title>Performing SOAP Requests</title>
 

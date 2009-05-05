@@ -364,7 +364,6 @@ foreach ($mail as $message) {
     echo $message->subject . "\n";
 }
 
-
 // check for known flags
 $flags = $message->getFlags();
 echo "Message is flagged as: ";
@@ -756,7 +755,6 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     }
 }
 ]]></programlisting>
-
 
         </sect3>
     </sect2>

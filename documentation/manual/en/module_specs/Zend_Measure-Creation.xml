@@ -119,7 +119,6 @@ $unit = new Zend_Measure_Length($mystring,
                                 $locale);
 echo $unit; // outputs "1.234 m"
 
-
 $mystring = "The boat is 1,234.50 long.";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,

@@ -56,7 +56,6 @@ echo $this->json($this->data, true);
 echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
 
-
         <para>
             <classname>Zend_Json::encode</classname> allows the encoding of native JSON
             expressions using <classname>Zend_Json_Expr</classname> objects. This option

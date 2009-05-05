@@ -25,7 +25,6 @@
 $currency = new Zend_Currency();
 ]]></programlisting>
 
-
     </example>
 
     <para>

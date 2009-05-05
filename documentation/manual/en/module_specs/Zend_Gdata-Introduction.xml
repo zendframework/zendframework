@@ -264,7 +264,6 @@ $entry->cell = $cell;
         </para>
     </sect2>
 
-
     <sect2 id="zend.gdata.introduction.authentication">
         <title>Google Data Client Authentication</title>
         <para>

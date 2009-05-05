@@ -147,7 +147,6 @@
         </sect3>
     </sect2>
 
-
     <sect2 id="zend.soap.server.api_define_methods">
         <title>Methods to define Web Service API.</title>
 

@@ -183,8 +183,6 @@ $row9->assigned_to = 'mmouse';
 $row9->save();
 ]]></programlisting>
 
-
-
         <para>
             After you have access to an individual Row object, you can manipulate the Row using methods described in
             <xref linkend="zend.db.table.row" />.
@@ -408,7 +406,6 @@ class Bugs extends Zend_Db_Table_Abstract
         </example>
 
     </sect2>
-
 
 </sect1>
 <!--

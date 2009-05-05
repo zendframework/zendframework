@@ -254,7 +254,6 @@ $result = $imfs->putContents('/foo.txt', 'fourteen bytes');
 print_r($result);
 ?>
 
-
 Zend_Service_Nirvanix_Response Object
 (
     [_sxml:protected] => SimpleXMLElement Object

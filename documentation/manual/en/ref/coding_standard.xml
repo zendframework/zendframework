@@ -542,7 +542,6 @@ class Foo
                     Call-time pass-by-reference is strictly prohibited.
                 </para>
 
-
                 <para>
                     The return value must not be enclosed in parentheses.  This can hinder readability, in additional to breaking code
                     if a method is later changed to return by reference.

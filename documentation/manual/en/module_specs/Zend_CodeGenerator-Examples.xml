@@ -49,7 +49,6 @@ echo $foo->generate();
 class Foo
 {
 
-
 }
 ]]></programlisting>
     </example>
@@ -122,7 +121,6 @@ class Foo
     public $baz = 'bat';
 
     const bat = 'foobarbazbat';
-
 
 }
 ]]></programlisting>
@@ -246,7 +244,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * Retrieve the bar property
      *
@@ -256,8 +253,6 @@ class Foo
     {
         return $this->_bar;
     }
-
-
 
 }
 ]]></programlisting>
@@ -319,7 +314,6 @@ file_put_contents('Foo.php', $code);
  * @license New BSD
  */
 
-
 /**
  * Sample generated class
  *
@@ -349,7 +343,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * Retrieve the bar property
      *
@@ -360,10 +353,7 @@ class Foo
         return $this->_bar;
     }
 
-
-
 }
-
 
 define('APPLICATION_ENV', 'testing');
 ]]></programlisting>

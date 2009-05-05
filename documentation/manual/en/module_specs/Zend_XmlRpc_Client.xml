@@ -16,7 +16,6 @@
 
     </sect2>
 
-
     <sect2 id="zend.xmlrpc.client.method-calls">
         <title>Method Calls</title>
 
@@ -363,7 +362,6 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
             <code>$test->foo->bar()</code>.
         </para>
     </sect2>
-
 
     <sect2 id="zend.xmlrpc.client.error-handling">
         <title>Error Handling</title>

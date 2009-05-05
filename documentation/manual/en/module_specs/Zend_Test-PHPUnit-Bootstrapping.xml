@@ -26,7 +26,6 @@
         specific needs.
     </para>
 
-
     <programlisting role="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {

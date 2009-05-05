@@ -70,7 +70,6 @@
             The<classname>Zend_Soap_AutoDiscover</classname> class also supports datatypes mapping from PHP to <ulink url="http://www.w3.org/TR/xmlschema-2/">XSD types</ulink>.
         </para>
 
-
         <para>
             Here is an example of common usage of the autodiscovery functionality. The <code>handle()</code>
             function generates the WSDL file and posts it to the browser.
@@ -124,7 +123,6 @@ if(isset($_GET['wsdl'])) {
             </para>
         </note>
     </sect2>
-
 
     <sect2 id="zend.soap.autodiscovery.class">
         <title>Class autodiscovering</title>
@@ -188,7 +186,6 @@ $autodiscover->handle();
             </para>
         </note>
     </sect2>
-
 
     <sect2 id="zend.soap.autodiscovery.functions">
         <title>Functions autodiscovering</title>
@@ -255,7 +252,6 @@ $autodiscover->handle();
             </para>
         </note>
     </sect2>
-
 
     <sect2 id="zend.soap.autodiscovery.datatypes">
         <title>Autodiscovering Datatypes</title>

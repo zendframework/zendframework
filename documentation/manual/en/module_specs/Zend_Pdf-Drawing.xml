@@ -49,7 +49,6 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </sect2>
 
-
     <sect2 id="zend.pdf.drawing.shape-drawing">
         <title>Shape Drawing</title>
         <para>
@@ -440,7 +439,6 @@ $pdfPage->setFont($font, 36)
         </example>
     </sect2>
 
-
     <sect2 id="zend.pdf.drawing.extracting-fonts">
         <title>Extracting fonts.</title>
         <para>
@@ -556,8 +554,6 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
             </itemizedlist>
         </para>
     </sect2>
-
-
 
     <sect2 id="zend.pdf.drawing.image-drawing">
         <title>Image Drawing</title>

@@ -225,7 +225,6 @@ foreach($list as $bucket) {
         <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
         </para>
 
-
         <itemizedlist>
             <listitem>
                 <para>

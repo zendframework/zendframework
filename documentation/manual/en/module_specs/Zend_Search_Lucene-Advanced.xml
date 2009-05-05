@@ -76,7 +76,6 @@
 
     </sect2>
 
-
     <sect2 id="zend.search.lucene.advanced.static">
         <title>Using the index as static property</title>
 
@@ -109,7 +108,6 @@ class Searcher {
 Searcher::initIndex();
 ]]></programlisting>
         </para>
-
 
         <para>
             All the same, the destructor for static properties is correctly invoked at this point in the program's execution.

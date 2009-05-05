@@ -76,7 +76,6 @@ name = UNIQUE_NAME
 ; remember_me_seconds = <integer seconds>
 ; strict = on|off
 
-
 ; Development inherits configuration from production, but overrides
 ; several values
 [development : production]

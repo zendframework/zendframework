@@ -72,8 +72,6 @@ class World
         echo 'Hello world!';
     }
 
-
-
 }
 ]]></programlisting>
 
@@ -125,7 +123,6 @@ class World
     {
         echo 'Hello world!';
     }
-
 
     public function mrMcFeeley()
     {

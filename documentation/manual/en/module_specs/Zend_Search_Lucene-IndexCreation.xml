@@ -245,7 +245,6 @@ $index->optimize();
             It's possible to override this with the <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname> method:
         </para>
 
-
         <programlisting role="php"><![CDATA[
 // Get current default file permissions
 $currentPermissions =

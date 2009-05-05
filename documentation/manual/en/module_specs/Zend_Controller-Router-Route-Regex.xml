@@ -148,7 +148,6 @@ $values = array(
         environment. Keys may contain variable names or subpattern indexes:
     </para>
 
-
     <programlisting role="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',

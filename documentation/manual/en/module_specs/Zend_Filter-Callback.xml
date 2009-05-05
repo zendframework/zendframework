@@ -8,7 +8,6 @@
         have a method which does the job.
     </para>
 
-
     <para>
         Let's expect we want to create a filter which reverses a string.
     </para>

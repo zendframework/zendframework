@@ -14,7 +14,6 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
     </para>
 
-
     <sect2 id="zend.search.lucene.queries.exceptions">
         <title>Query Parser Exceptions</title>
 
@@ -359,7 +358,6 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
         </para>
     </sect2>
 
-
     <sect2 id="zend.search.lucene.queries.wildcard">
         <title>Wildcard Query</title>
         <para>
@@ -380,7 +378,6 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 field1:test*
 ]]></programlisting>
         </para>
-
 
         <para>or</para>
 
@@ -451,7 +448,6 @@ $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
 $hits  = $index->find($query);
 ]]></programlisting>
         </para>
-
 
         <para>
             The term field is optional. <classname>Zend_Search_Lucene</classname> searches through all fields on each document if a field is not specified:
@@ -569,7 +565,6 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
             will search for the phrase 'zend framework' in the 'title' field.
         </para>
 
-
         <para>
             <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> takes two arguments, a
             required <classname>Zend_Search_Lucene_Index_Term</classname> object and an optional position:
@@ -617,7 +612,6 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
         <para>
             will search for the phrase 'zend framework' in the 'title' field.
         </para>
-
 
         <para>
             The slop factor sets the number of other words permitted between specified words in the query phrase. If set to zero,

@@ -173,7 +173,6 @@ $server->handle();
             interoperate properly:
         </para>
 
-
         <programlisting role="php"><![CDATA[
 $server = new Zend_Json_Server();
 $server->setClass('Calculator');

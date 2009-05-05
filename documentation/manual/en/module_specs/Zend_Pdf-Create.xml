@@ -68,7 +68,6 @@ $pdf3->rollback($revisions - 1);
 ]]></programlisting>
     </example>
 
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -12,7 +12,6 @@
         the <code>Translate</code> View Helper.
     </para>
 
-
     <para>
         In all following examples we are using the simple Array Translation
         Adapter. Of course you can also use any instance of

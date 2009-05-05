@@ -124,7 +124,6 @@ abstract class Zend_Tool_Framework_Provider_Abstract
             manifest metadata is loaded into the Manifest Repository.
         </para>
 
-
         <para>
             To implement a loader, one must extend the following abstract class:
         </para>

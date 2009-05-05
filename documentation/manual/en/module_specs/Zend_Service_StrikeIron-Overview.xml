@@ -246,7 +246,6 @@ $rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 print_r($rateInfo);
 ?>
 
-
 Zend_Service_StrikeIron_Decorator Object
 (
     [_name:protected] => GetTaxRateCanadaResult

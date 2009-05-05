@@ -221,7 +221,6 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 
     </sect2>
 
-
     <sect2 id="zend.search.lucene.extending.scoring">
         <title>Scoring Algorithms</title>
         <para>
@@ -362,7 +361,6 @@ abstract class Zend_Search_Lucene_Storage_Directory {
  */
 abstract function close();
 
-
 /**
  * Creates a new, empty file in the directory with the given $filename.
  *
@@ -370,7 +368,6 @@ abstract function close();
  * @return void
  */
 abstract function createFile($filename);
-
 
 /**
  * Removes an existing $filename in the directory.
@@ -380,7 +377,6 @@ abstract function createFile($filename);
  */
 abstract function deleteFile($filename);
 
-
 /**
  * Returns true if a file with the given $filename exists.
  *
@@ -388,7 +384,6 @@ abstract function deleteFile($filename);
  * @return boolean
  */
 abstract function fileExists($filename);
-
 
 /**
  * Returns the length of a $filename in the directory.
@@ -398,7 +393,6 @@ abstract function fileExists($filename);
  */
 abstract function fileLength($filename);
 
-
 /**
  * Returns the UNIX timestamp $filename was last modified.
  *
@@ -406,7 +400,6 @@ abstract function fileLength($filename);
  * @return integer
  */
 abstract function fileModified($filename);
-
 
 /**
  * Renames an existing file in the directory.
@@ -417,7 +410,6 @@ abstract function fileModified($filename);
  */
 abstract function renameFile($from, $to);
 
-
 /**
  * Sets the modified time of $filename to now.
  *
@@ -425,7 +417,6 @@ abstract function renameFile($from, $to);
  * @return void
  */
 abstract function touchFile($filename);
-
 
 /**
  * Returns a Zend_Search_Lucene_Storage_File object for a given

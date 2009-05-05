@@ -43,7 +43,6 @@ $yt = new Zend_Gdata_YouTube($httpClient,
             </example>
     </sect2>
 
-
     <sect2 id="zend.gdata.youtube.videos">
         <title>Retrieving public video feeds</title>
 
@@ -88,7 +87,6 @@ foreach ($videoFeed as $videoEntry) {
 }
 ]]></programlisting>
             </example>
-
 
             <para>
                 For more details on the different query parameters, please

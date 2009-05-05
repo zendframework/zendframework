@@ -30,13 +30,11 @@ foreach ($hits as $hit) {
     // Get 'contents' document field
     $contents = $hit->contents;
 
-
     // Get internal Lucene document id
     $id = $hit->id;
 
     // Get query hit score
     $score = $hit->score;
-
 
     // Get 'id' document field
     $docId = $hit->getDocument()->id;
@@ -50,7 +48,6 @@ foreach ($hits as $hit) {
 ]]></programlisting>
         </para>
     </sect2>
-
 
     <sect2 id="zend.search.lucene.best-practice.indexing-performance">
         <title>Indexing performance</title>
@@ -136,7 +133,6 @@ $index->optimize();
             memory usage.</para></footnote>. It's a best practice not to use more than a half of the allowed memory.
         </para>
 
-
         <para>
             <emphasis>MaxMergeDocs</emphasis> limits the segment size (in terms of documents). It therefore also limits auto-optimization time by guaranteeing
             that the <code>addDocument()</code> method is not executed more than a certain number of times. This is very important for interactive applications.
@@ -158,7 +154,6 @@ $index->optimize();
             in general, background index optimization should be performed for interactive indexing mode and <emphasis>MaxMergeDocs</emphasis> shouldn't be
             too low for batch indexing.
         </para>
-
 
         <para>
             <emphasis>MergeFactor</emphasis> affects auto-optimization frequency. Lower values increase the quality of unoptimized indexes. Larger values increase
@@ -199,7 +194,6 @@ $index->optimize();
             <emphasis>MaxBufferedDocs</emphasis> is determined by allowed memory. This allows for the appropriate merge factor to get a reasonable
             number of segments.
         </para>
-
 
         <para>
             Tuning the <emphasis>MergeFactor</emphasis> parameter is more effective for batch indexing performance than <emphasis>MaxMergeDocs</emphasis>. But it's also more course-grained.

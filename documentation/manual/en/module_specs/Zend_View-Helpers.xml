@@ -41,7 +41,6 @@
         </para>
     </note>
 
-
     <para>
         To use a helper in your view script, call it using
         <code>$this->helperName()</code>. Behind the scenes,
@@ -390,7 +389,6 @@ $view = new Zend_View();
 // Set path to /path/to/more/helpers, with prefix 'My_View_Helper'
 $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 ]]></programlisting>
-
 
         <para>
             In fact, you can "stack" paths using the

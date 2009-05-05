@@ -240,7 +240,6 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
 
     </sect2>
 
-
     <sect2 id="zend.locale.selection.automatic">
 
         <title>Usage of automatic Locales</title>
@@ -511,7 +510,6 @@ Zend_Locale_Format::setOptions(array('locale' => Zend_Locale_Format::STANDARD,
         </example>
 
     </sect2>
-
 
     <sect2 id="zend.locale.cache">
 

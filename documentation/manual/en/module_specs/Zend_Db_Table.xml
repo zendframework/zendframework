@@ -1338,17 +1338,14 @@ $cache = Zend_Cache::factory('Core',
                              $frontendOptions,
                              $backendOptions);
 
-
 // Next, set the cache to be used with all table objects
 Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
-
 
 // A table class is also needed
 class Bugs extends Zend_Db_Table_Abstract
 {
     // ...
 }
-
 
 // Each instance of Bugs now uses the default metadata cache
 $bugs = new Bugs();

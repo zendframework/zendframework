@@ -41,7 +41,6 @@
         </para>
     </sect2>
 
-
     <sect2 id="zend.soap.wsdl.addmessage">
         <title>addMessage() method.</title>
         <para>
@@ -156,7 +155,6 @@
             Zend_Soap_Server implementation uses <code>$serviceName . 'Binding'</code> name for 'binding' element of WSDL document.
         </para>
     </sect2>
-
 
     <sect2 id="zend.soap.wsdl.add_binding_operation">
         <title>addBindingOperation() method.</title>

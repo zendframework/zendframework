@@ -217,7 +217,6 @@ $username->addValidators(array('alnum',
     ->addFilters(array('StringToLower'));
 ]]></programlisting>
 
-
         <para>
             Simple as this is, repeating it this for every element in a form
             can be a bit tedious. Let's try option (b) from above. When we

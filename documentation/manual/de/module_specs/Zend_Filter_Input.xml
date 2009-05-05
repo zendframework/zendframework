@@ -25,7 +25,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Filter</emphasis> wandeln Eingabewerte um, inden Sie Zeichen in dem Wert
+                <emphasis>Filter</emphasis> wandeln Eingabewerte um, inden Sie Zeichen in dem Wert
                 entfernen oder Ändern. Das Ziel ist es Eingabewerte zu "normalisieren" bis diese einem
                 erwarteten Format entsprechen. Zum Beispiel, wenn ein String von nummerischen Zeichen benötigt wird,
                 und der Eingabewert "abc123" ist dann könnte eine erwartete Umwandlung die Änderung des Wertes in
@@ -34,7 +34,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Prüfer</emphasis> prüfen Eingabewerte gegenüber Kriterien und melden ob
+                <emphasis>Prüfer</emphasis> prüfen Eingabewerte gegenüber Kriterien und melden ob
                 diese den Test bestanden haben oder nicht. Der Wert wird nicht geändert, aber die Prüfung kann
                 fehlschlagen. Zum Beispiel, wenn ein String wie eine Email Adresse aussehen muß, und der Eingabewert
                 "abc123" ist, dann wird der Wert als nicht gültig angenommen.
@@ -42,7 +42,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Auskommentierer</emphasis> wandeln einen Wert um indem Sie magisches
+                <emphasis>Auskommentierer</emphasis> wandeln einen Wert um indem Sie magisches
                 Verhalten von bestimmten Zeichen entfernen. In einigen Ausgabekontexten haben speziellen Zeichen
                 eine Bedeutung. Zum Beispiel das Zeichen '&lt;' und '&gt;' begrenzen HTML Tags, und wenn ein String
                 diese Zeichen enthält und in einem HTML Kontext ausgegeben wird, könnte der Inhalt zwischen Ihnen
@@ -282,13 +282,13 @@ if ($input->isValid('month')) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Ungültige</emphasis> Felder sind jene, die einen oder mehrere Ihrer
+                        <emphasis>Ungültige</emphasis> Felder sind jene, die einen oder mehrere Ihrer
                         Prüfungen nicht bestehen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Fehlende</emphasis> Felder sind jene die nicht in den
+                        <emphasis>Fehlende</emphasis> Felder sind jene die nicht in den
                         Eingabedaten vorhanden sind, aber im Metakommando <code>'presence'=>'required'</code>
                         (Siehe die <link linkend="zend.filter.input.metacommands.presence">spätere Sektion</link>
                         über Metakommandos) deklariert wurden.
@@ -296,7 +296,7 @@ if ($input->isValid('month')) {
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Unbekannte</emphasis> Felder sind jene die in keiner einzigen Regel,
+                        <emphasis>Unbekannte</emphasis> Felder sind jene die in keiner einzigen Regel,
                         im Array der Prüfer, deklariert wurden, aber in den Eingabedaten vorkommen.
                     </para>
                 </listitem>

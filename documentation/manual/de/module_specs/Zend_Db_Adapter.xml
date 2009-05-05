@@ -258,7 +258,7 @@ $db = Zend_Db::factory($config->database);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">host</emphasis>:
+                        <emphasis>host</emphasis>:
                         Ein String der den Hostname oder die Ip-Adresse des Datenbankservers beinhaltet. Wenn
                         die Datenbank auf dem gleichen Host wie die PHP Anwendung läuft wird 'localhost' oder
                         '127.0.0.1' verwendet.
@@ -266,25 +266,25 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">username</emphasis>:
+                        <emphasis>username</emphasis>:
                         Konto Kennung zur Authentisierung einer Verbindung zum RDBMS Server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">password</emphasis>:
+                        <emphasis>password</emphasis>:
                         Konto Passwort zur Authentisierung einer Verbindung zum RDBMS Server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">dbname</emphasis>:
+                        <emphasis>dbname</emphasis>:
                         Datenbank Name auf dem RDBMS Server.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">port</emphasis>:
+                        <emphasis>port</emphasis>:
                         Einige RDBMS Server können Netzwerkverbindungen an vom Administrator spezifizierten
                         Ports akzeptieren. Der Port-Parameter gibt die Möglichkeit die Portnummer anzugeben,
                         an welche die PHP Anwendung verbindet um der Port-Konfiguration des RDBMS Servers zu
@@ -293,14 +293,14 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">options</emphasis>:
+                        <emphasis>options</emphasis>:
                         Dieser Parameter ist ein assoziatives Array von Optionen die in allen Zend_Db_Adapter
                         Klassen enthalten sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">driver_options</emphasis>:
+                        <emphasis>driver_options</emphasis>:
                         Dieser Parameter ist ein assoziatives Array von zusätzlichen Optionen die spezifisch
                         für die angegebene Datenbankerweiterung sind. Eine typische Anwendung dieses Parameters ist,
                         Attribute für einen PDO Treiber zu setzen.
@@ -308,7 +308,7 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">adapterNamespace</emphasis>:
+                        <emphasis>adapterNamespace</emphasis>:
                         Benennt den führenden Teil des Klassen Namens für den Adapter statt 'Zend_Db_Adapter'.
                         Dies kann verwendet werden wenn man die <code>factory()</code>Methode verwenden muß
                         um eine nicht von Zend kommende Datenbank Adapter Klasse zu laden.
@@ -486,26 +486,26 @@ try {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">accounts</emphasis> speichert Informationen über jeden Benutzer des
+                    <emphasis>accounts</emphasis> speichert Informationen über jeden Benutzer des
                     Bugtracking Systems.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">products</emphasis> speichert Informationen über jedes Produkt für das
+                    <emphasis>products</emphasis> speichert Informationen über jedes Produkt für das
                     ein Bug erfasst werden kann.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs</emphasis> speichert informationen über Bugs, dazu gehört der
+                    <emphasis>bugs</emphasis> speichert informationen über Bugs, dazu gehört der
                     derzeitige Status des Bugs, die Person die den Bug berichtet hat, die Person die den Bug
                     beheben soll und die Person die die Fehlerbehebung verifizieren soll.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs_products</emphasis> speichert Beziehungen zwischen Bugs und
+                    <emphasis>bugs_products</emphasis> speichert Beziehungen zwischen Bugs und
                     Produkten. Dies enthält eine Viele-zu-Viele Beziehung, da ein Bug für mehrere Produkte relevant
                     sein kann. Und natürlich kann ein Produkt auch mehrere Bugs enthalten.
                 </para>
@@ -620,7 +620,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         Gibt Daten in einem assoziativem Array zurück. Die Array Schlüssel sind Strings der
                         Spaltennamen. Dies ist der Standardmodus für <classname>Zend_Db_Adapter</classname> Klassen.
                     </para>
@@ -641,14 +641,14 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
                         Gibt Daten in einem Array von Arrays zurück. Die Arrays werden über Integer indiziert,
                         entsprechend der Position der betreffenden Felder in der Select-Liste der Anfrage.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
                         Gibt ein Array von Arrays zurück. Die Arrayschlüssel sind sowohl Strings wie beim
                         FETCH_ASSOC Modus, als auch Integer wie beim FETCH_NUM modus. Zu beachten ist, dass die
                         Anzahl der Elemente in dem Array doppelt so groß ist, als wenn FETCH_ASSOC oder FETCH_NUM
@@ -657,7 +657,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
                         Gibt Daten in einem Array von Werten zurück. Die Werte in jedem Array sind die Werte wie sie
                         in einer Spalte des Ergebnisses zurück gegeben wurden. Standardmäßig ist die erste Spalte
                         mit 0 indiziert.
@@ -665,7 +665,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         Gibt Daten in einem Array von Objekten zurück. Die Standardklasse ist die in PHP eingebaute
                         Klasse stdClass. Spalten des Ergebnisses sind als öffentliche Eigenschaften des Objekts
                         verfügbar.

@@ -5,10 +5,10 @@
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
 
     <para>
-        <classname>Zend_Application_Bootstrap_Bootstrapper</classname> ist das Basisinterface das alle
-        Bootstrap Klassen implementieren müssen. Die Basisfunktionalität zielt auf Konfiguration,
-        Identifikation von Ressourcen, Bootstrapping (entweder von individuellen Ressourcen oder
-        der kompletten Anwendung), und dem Dispatchen der Anwendung ab.
+        <classname>Zend_Application_Bootstrap_Bootstrapper</classname> ist das Basisinterface das
+        alle Bootstrap Klassen implementieren müssen. Die Basisfunktionalität zielt auf
+        Konfiguration, Identifikation von Ressourcen, Bootstrapping (entweder von individuellen
+        Ressourcen oder der kompletten Anwendung), und dem Dispatchen der Anwendung ab.
     </para>
 
     <para>
@@ -34,14 +34,14 @@
                         <listitem><para>
                             <code>$application</code>: <emphasis>benötigt</emphasis>.
                             Sollte ein <classname>Zend_Application</classname> oder
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt als einziges
-                            Argument akzeptieren.
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt
+                            als einziges Argument akzeptieren.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Konstruktor. Akzeptiert ein einzelnes Argument, welche ein
-                        <classname>Zend_Application</classname> oder ein anderes Bootstrap Objekt sein
-                        sollte.
+                        <classname>Zend_Application</classname> oder ein anderes Bootstrap Objekt
+                        sein sollte.
                     </para></entry>
                 </row>
 
@@ -63,7 +63,10 @@
 
                 <row>
                     <entry><code>getApplication()</code></entry>
-                    <entry><classname>Zend_Application | Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application |
+                        Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt das Anwendungs/Bootstrap Objekt das über den Konstruktor übergeben

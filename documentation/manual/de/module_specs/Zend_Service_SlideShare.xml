@@ -253,7 +253,7 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <emphasis role="strong">Slideshows von einem speziellen Account</emphasis>
+                    <emphasis>Slideshows von einem speziellen Account</emphasis>
                 </para>
 
                 <para>
@@ -265,7 +265,7 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">Slideshows mit einem speziellen Tag</emphasis>
+                    <emphasis>Slideshows mit einem speziellen Tag</emphasis>
                 </para>
 
                 <para>
@@ -278,7 +278,7 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">Slideshows durch Gruppen</emphasis>
+                    <emphasis>Slideshows durch Gruppen</emphasis>
                 </para>
 
                 <para>

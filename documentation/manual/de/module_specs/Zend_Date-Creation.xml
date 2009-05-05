@@ -17,8 +17,8 @@
 
         <para>
             Der einfachste Weg der Erstellung eines Datumsobjektes ist es ein aktuelles Datum zu erstellen. Man
-            kann entweder eine neue Instanz mit <emphasis role="strong">new Zend_Date()</emphasis> erstellen, oder
-            die bequemere statische Methode <emphasis role="strong">Zend_Date::now()</emphasis> verwenden wobei
+            kann entweder eine neue Instanz mit <emphasis>new Zend_Date()</emphasis> erstellen, oder
+            die bequemere statische Methode <emphasis>Zend_Date::now()</emphasis> verwenden wobei
             beide das aktuelle Datum als neue Instanz von <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum
             enthält immer das aktuelle Datum und die Zeit für die aktuell gesetzte Zeitzone.
         </para>
@@ -46,7 +46,7 @@ $date = new Zend_Date();
 
             <para>
                 Machmal ist es einfacher eine statische Methode für die Erstellung eines Datums zu verwenden.
-                Hierfür kann die <emphasis role="strong"><code>now()</code></emphasis> Methode verwendet werden.
+                Hierfür kann die <emphasis><code>now()</code></emphasis> Methode verwendet werden.
                 Sie gibt eine neue Instanz von <classname>Zend_Date</classname> auf die gleiche Art und Weise zurück wie
                 wenn man <code>new Zend_Date()</code> Verwenden würde. Es wird aber immer das aktuelle Datum
                 zurückgegeben und das kann auch nur durch die Angabe von optionalen Parametern geändert werden.
@@ -142,32 +142,32 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             <itemizedlist mark='opencircle'>
                 <listitem>
                     <para>
-                        <emphasis role="strong">day</emphasis>: Tag des Datums als Zahl
+                        <emphasis>day</emphasis>: Tag des Datums als Zahl
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">month</emphasis>: Monat des Datums als Zahl
+                        <emphasis>month</emphasis>: Monat des Datums als Zahl
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">year</emphasis>: Vollständiges Jahr des Datums
+                        <emphasis>year</emphasis>: Vollständiges Jahr des Datums
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">hour</emphasis>: Stunde des Datums
+                        <emphasis>hour</emphasis>: Stunde des Datums
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">minute</emphasis>: Minute des Datums
+                        <emphasis>minute</emphasis>: Minute des Datums
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">second</emphasis>: Sekunde des Datums
+                        <emphasis>second</emphasis>: Sekunde des Datums
                     </para>
                 </listitem>
             </itemizedlist>
@@ -181,7 +181,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 Normalerweise wird ein komplettes Datumsarray für die Erstellung einer neuen Instanz des Datums
                 angegeben werden. Aber wenn nicht alle Werte angegeben werden, werden die nicht angegebenen
                 Arraywerte genullt. Das bedeutet das wenn z.B. keine Stunde angegeben wird, die Stunde
-                <emphasis role="strong">0</emphasis> verwendet wird.
+                <emphasis>0</emphasis> verwendet wird.
             </para>
 
             <programlisting role="php"><![CDATA[

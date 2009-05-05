@@ -111,7 +111,7 @@
         <sect3 id="zend.soap.server.wsdl_mode">
             <title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus.</title>
             <para>
-                Der erste Parameter des Konstruktors <emphasis role="strong">muß</emphasis> auf
+                Der erste Parameter des Konstruktors <emphasis>muß</emphasis> auf
                 <code>null</code> gesetzt werden wenn man plant die Funktionalität von
                 <classname>Zend_Soap_Server</classname> im nicht-WSDL Modus zu verwenden.
             </para>

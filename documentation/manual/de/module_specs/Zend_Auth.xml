@@ -12,8 +12,8 @@
 
     <para>
         <classname>Zend_Auth</classname> behandelt nur die
-        <emphasis role="strong">Authentifizierung</emphasis> und nicht die
-        <emphasis role="strong">Authorisierung</emphasis>. Authentifizierung ist lose definiert als
+        <emphasis>Authentifizierung</emphasis> und nicht die
+        <emphasis>Authorisierung</emphasis>. Authentifizierung ist lose definiert als
         das Ermitteln ob eine Entität aktuell das ist was Sie vorgibt zu sein (z.B.
         Identifizierung), basierend auf einem Set von Zeugnissen. Authorisierung, der Prozess des
         Entscheidens ob es einer Entität erlaubt wird auf andere Entitäten Zugriff zu erhalten,

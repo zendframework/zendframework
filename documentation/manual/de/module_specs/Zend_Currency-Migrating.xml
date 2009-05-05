@@ -36,50 +36,50 @@ $currency = new Zend_Currency($currency, $locale);
             <itemizedlist mark='opencircle'>
                 <listitem>
                     <para>
-                        <emphasis role="strong">position</emphasis>:
+                        <emphasis>position</emphasis>:
                         Ersetzt den alten 'rules' Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">script</emphasis>:
+                        <emphasis>script</emphasis>:
                         Ersetzt den alten 'script' Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">format</emphasis>:
+                        <emphasis>format</emphasis>:
                         Ersetzt den alten 'locale' Parameter welcher keine neue Währung, sondern
                         nur das Format der Nummern setzt.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">display</emphasis>:
+                        <emphasis>display</emphasis>:
                         Ersetzt den alten 'rules' Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">precision</emphasis>:
+                        <emphasis>precision</emphasis>:
                         Neuer Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">name</emphasis>:
+                        <emphasis>name</emphasis>:
                         Ersetzt den alten 'rules' Parameter. Setzt den vollständigen Namen der Währung.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">currency</emphasis>:
+                        <emphasis>currency</emphasis>:
                         Neuer Parameter.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">symbol</emphasis>:
+                        <emphasis>symbol</emphasis>:
                         Neuer Parameter.
                     </para>
                 </listitem>

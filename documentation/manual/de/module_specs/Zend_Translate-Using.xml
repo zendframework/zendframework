@@ -70,9 +70,9 @@ $translate = new Zend_Translate(
 );
 ]]></programlisting>
 
-        In diesem Beispiel haben wir den <emphasis role="strong">Gettext Adapter</emphasis>
-        ausgewählt. Die Übersetzungsdatei <emphasis role="strong">source-de.mo</emphasis> wird im
-        Verzeichnis <emphasis role="strong">/path/to/translation</emphasis> platziert. Diese
+        In diesem Beispiel haben wir den <emphasis>Gettext Adapter</emphasis>
+        ausgewählt. Die Übersetzungsdatei <emphasis>source-de.mo</emphasis> wird im
+        Verzeichnis <emphasis>/path/to/translation</emphasis> platziert. Diese
         Gettext Datei beinhaltet eine deutsche Übersetzung und es steht auch eine zweite
         Sprachquelle für Französisch zur Verfügung.
     </para>
@@ -131,9 +131,9 @@ print $translate->_(2) . "\n";
         <classname>Zend_Translate</classname> ob in der gesetzten Sprache, für die angegebene Message ID oder
         den String, eine Übersetzung vorhanden ist. Wenn kein Übersetzung gefunden wurde, wird in
         der nächsten tiefer gelegenen Sprache gesucht wie in <classname>Zend_Locale</classname> definiert.
-        "<emphasis role="strong">de_AT</emphasis>" wird also zu
-        "<emphasis role="strong">de</emphasis>". Wenn auch hier keine Übersetzung in der Sprache
-        "<emphasis role="strong">de</emphasis>" gefunden wurde, wird der Original String zurück
+        "<emphasis>de_AT</emphasis>" wird also zu
+        "<emphasis>de</emphasis>". Wenn auch hier keine Übersetzung in der Sprache
+        "<emphasis>de</emphasis>" gefunden wurde, wird der Original String zurück
         gegeben. Das bedeutet also das immer eine Ausgabe existiert, selbst wenn für eine Message
         ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translate</classname> wird niemals
         eine Exception oder einen Fehler ausgeben wenn ein String übersetzt werden soll.
@@ -357,7 +357,7 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
         <para>
             Gettext Quellen werden durch GNU's Gettext Bibliothek erstellt. Es gibt einige
             kostenlose Tools welche den Code parsen können und hierbei die gewünschten Gettext
-            Quellen erstellen. Diese haben die Endung <emphasis role="strong">*.mo</emphasis> und
+            Quellen erstellen. Diese haben die Endung <emphasis>*.mo</emphasis> und
             sind binäre Dateien. Ein Open Source Tool für die Erstellung der Quellen ist
             <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>. Dieses Tool
             unterstützt auch beim Übersetzungs-Prozesses selbst.
@@ -371,8 +371,8 @@ $translate->addTranslation('/path/to/german.mo', 'de');
 
         <para>
             Wie man sieht wird dieser Adapter auf exakt die gleiche Art und Weise verwendet mit
-            einer kleinen Änderung: dem Wechsel von <emphasis role="strong">array</emphasis> zu
-            <emphasis role="strong">gettext</emphasis>. Alle anderen Punkte werden in jedem anderen
+            einer kleinen Änderung: dem Wechsel von <emphasis>array</emphasis> zu
+            <emphasis>gettext</emphasis>. Alle anderen Punkte werden in jedem anderen
             Adapter auf exakt die gleiche Weise verwendet. Mit diesem Gettext Adapter muß nicht
             mehr auf die geforderte Standard Verzeichnis Struktur von Gettext geachtet werden. Auch
             nicht auf bindtextdomain und textdomain. Nur der Pfad und der Dateiname muß dem Adapter
@@ -639,7 +639,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Das kann statt dem Erstellen einer neuen Instanz verwendet werden wenn
                             neue Übersetzungsdaten gelesen werden
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
@@ -649,7 +649,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             vorhandenen Übersetzungen ausgeschaltet. Man sollte diese Option in
                             einer Produktionsumgebung auf true setzen
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
@@ -657,13 +657,13 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Alle Verzeichnisse und Dateien die mit diesem Präfix beginnen werden
                             bei der Suche nach Dateien ignoriert. Der Standardwert ist
-                            <emphasis role="strong">'.'</emphasis> was zu dem Verhalten führt das
+                            <emphasis>'.'</emphasis> was zu dem Verhalten führt das
                             alle versteckten Dateien ignoriert werden. Wenn dieser Wert auf
                             <code>'tmp'</code> gesetzt wird, bedeutet das, Verzeichnisse und
                             Dateien wie z.B. <code>'tmpImages'</code> und <code>'tmpFiles'</code>,
                             sowie alle darunter liegenden Verzeichnisse, werden ignoriert.
                         </entry>
-                        <entry><emphasis role="strong">.</emphasis></entry>
+                        <entry><emphasis>.</emphasis></entry>
                     </row>
                     <row>
                         <entry>log</entry>
@@ -672,7 +672,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Eine Instanz von <classname>Zend_Log</classname> wohin nicht übersetzbare Meldungen und
                             Notizen geschrieben werden
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -680,7 +680,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Die Nachricht die in das Log geschrieben werden soll
                         </entry>
-                        <entry><emphasis role="strong">Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -689,7 +689,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Wenn diese Option auf true gesetzt wird, werden alle Nachrichten Id's
                             die nicht übersetzt werden können in das angehängte Log geschrieben
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
@@ -702,25 +702,25 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Gebietsschema im Dateinamen gesucht. Siehe
                             <xref linkend="zend.translate.using.detection" /> für Details
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
                         <entry>Definiert welches Zeichen als Trenner für Quelle und Übersetzung verwendet wird</entry>
-                        <entry><emphasis role="strong">;</emphasis></entry>
+                        <entry><emphasis>;</emphasis></entry>
                     </row>
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
                         <entry>Definiert die maximale Länge einer CSV Zeile. Auf 0 gesetzt wird sie automatisch erkannt</entry>
-                        <entry><emphasis role="strong">0</emphasis></entry>
+                        <entry><emphasis>0</emphasis></entry>
                     </row>
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
                         <entry>Definiert das zu verwendende Einschließungszeichen. Standard ist das doppelte Hochkomma</entry>
-                        <entry><emphasis role="strong">"</emphasis></entry>
+                        <entry><emphasis>"</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -876,7 +876,7 @@ $translate->setLocale('it_IT');
 
             <para>
                 Wenn man Sie wieder verwenden will, kann die Sprache
-                <emphasis role="strong">auto</emphasis> mit <code>setLocale()</code> gesetzt
+                <emphasis>auto</emphasis> mit <code>setLocale()</code> gesetzt
                 werden, was die automatische Erkennung für <classname>Zend_Translate</classname> wieder
                 reaktiviert.
             </para>
@@ -1326,7 +1326,7 @@ $translate->translate('unknown string');
         <note>
             <para>
                 Achtung: Das zurückgegebene Array kann
-                <emphasis role="strong">sehr groß</emphasis> sein, abhängig von der Anzahl an
+                <emphasis>sehr groß</emphasis> sein, abhängig von der Anzahl an
                 hinzugefügten Gebietsschemata und der Anzahl an Übersetzungsdaten.
             </para>
         </note>

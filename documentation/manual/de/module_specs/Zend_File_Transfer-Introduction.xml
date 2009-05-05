@@ -93,7 +93,7 @@ if (!$adapter->receive()) {
         <para>
             Dieses Beispiel ist nur für die Demonstration der grundsätzlichen API von
             <classname>Zend_File_Transfer</classname>. Man sollte dieses Code Beispiel
-            <emphasis role="strong">niemals</emphasis> in einer Produktivumgebung einsetzen da es
+            <emphasis>niemals</emphasis> in einer Produktivumgebung einsetzen da es
             massive Sicherheitslücken aufweisst. Man sollte immer Prüfungen verwenden um die Sicherheit
             zu erhöhen.
         </para>
@@ -125,7 +125,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">ignoreNoFile</emphasis>: Wenn diese Option auf true gesetzt ist,
+                    <emphasis>ignoreNoFile</emphasis>: Wenn diese Option auf true gesetzt ist,
                     ignorieren alle Prüfer Dateien die nicht vom Formular hochgeladen wurde. Der
                     Standardwert ist false, was einen Fehler verursacht wenn die Datei nicht spezifiziert wurde.
                 </para>
@@ -146,7 +146,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">isValid($files = null)</emphasis>: Diese Methode prüft ob die
+                    <emphasis>isValid($files = null)</emphasis>: Diese Methode prüft ob die
                     angegebene Datei gültig ist, basierend auf den Prüfungen welche dieser Datei
                     angehängt sind. Wenn keine Dateien spezifiziert wurden, werden alle Dateien geprüft.
                     Man kann <code>isValid()</code> aufrufen bevor <code>receive()</code> aufgerufen wird;
@@ -156,7 +156,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isUploaded($files = null)</emphasis>: Diese Methode prüft ob die
+                    <emphasis>isUploaded($files = null)</emphasis>: Diese Methode prüft ob die
                     spezifizierte Datei vom Benutzer hochgeladen wurde. Das ist nützlich wenn man eine oder
                     mehrere Dateien definiert hat. Wenn keine Dateien spezifiziert wurden, werden alle
                     Dateien geprüft.
@@ -165,7 +165,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isReceived($files = null)</emphasis>: Diese Methode prüft ob die
+                    <emphasis>isReceived($files = null)</emphasis>: Diese Methode prüft ob die
                     spezifizierte Datei bereits empfangen wurde. Wenn keine Dateien angegeben wurden, werden
                     alle Dateien geprüft.
                 </para>
@@ -213,35 +213,35 @@ $upload->receive();
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileName($file = null, $path = true)</emphasis>: Diese Methode
+                    <emphasis>getFileName($file = null, $path = true)</emphasis>: Diese Methode
                     gibt den wirklichen Namen der übertragenen Datei zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileInfo($file = null)</emphasis>: Diese Methode gibt die
+                    <emphasis>getFileInfo($file = null)</emphasis>: Diese Methode gibt die
                     internen Informationen für die angegebene übertragene Datei zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileSize($file = null)</emphasis>: Diese Methode gibt die
+                    <emphasis>getFileSize($file = null)</emphasis>: Diese Methode gibt die
                     echte Dateigröße für die angegebene Datei zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getHash($hash = 'crc32', $files = null)</emphasis>: Diese Methode
+                    <emphasis>getHash($hash = 'crc32', $files = null)</emphasis>: Diese Methode
                     gibt einen Hash des Inhalts einer angegebenen übertragenen Datei zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getMimeType($files = null)</emphasis>: Diese Methode gibt den
+                    <emphasis>getMimeType($files = null)</emphasis>: Diese Methode gibt den
                     Mimetyp der angegebenen übertragenen Datei zurück.
                 </para>
             </listitem>
@@ -456,7 +456,7 @@ while (!$upload['done']) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">id</emphasis>: Die ID dieses Uploads. Die ID identifiziert den
+                        <emphasis>id</emphasis>: Die ID dieses Uploads. Die ID identifiziert den
                         Upload in der Extension. Sie wird automatisch geschrieben. Man sollte Sie nie ändern
                         oder den Wert selbst setzen.
                     </para>
@@ -464,36 +464,36 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">total</emphasis>: Die komplette Größe der Datei die hochgeladen
+                        <emphasis>total</emphasis>: Die komplette Größe der Datei die hochgeladen
                         wird in Bytes als Integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">current</emphasis>: Die aktuelle hochgeladene Größe der
+                        <emphasis>current</emphasis>: Die aktuelle hochgeladene Größe der
                         Datei in Bytes als Integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">rate</emphasis>: Die durchschnittliche Geschwindigkeit des
+                        <emphasis>rate</emphasis>: Die durchschnittliche Geschwindigkeit des
                         Uploads in Bytes pro Sekunde als Integer.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">done</emphasis>: Gibt true zurück wenn der Upload abgeschlossen
+                        <emphasis>done</emphasis>: Gibt true zurück wenn der Upload abgeschlossen
                         wurde, andernfalls false.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">message</emphasis>: Die aktuelle Meldung. Entweder der
-                        Fortschritt als Text in der Form <emphasis role="strong">10kB / 200kB</emphasis>, oder
+                        <emphasis>message</emphasis>: Die aktuelle Meldung. Entweder der
+                        Fortschritt als Text in der Form <emphasis>10kB / 200kB</emphasis>, oder
                         eine hilfreiche Nachricht im Fall eines Problems. Probleme könnten sein, das kein
                         Upload durchgeführt wird, das ein Fehler wärend des Empfangens der Daten, für den
                         Fortschritt, aufgetreten ist, oder das der Upload abgebrochen wurde.
@@ -502,7 +502,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">progress</emphasis>: Dieser optionale Schlüssel nimmt eine
+                        <emphasis>progress</emphasis>: Dieser optionale Schlüssel nimmt eine
                         Instanz von Zend_ProgressBar_Adapter oder Zend_ProgressBar, und erlaubt es, den aktuellen
                         Status des Uploads, in einer Progressbar zu erhalten
                     </para>
@@ -510,7 +510,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">session</emphasis>: Dieser optionale Schlüssel nimmt den Namen
+                        <emphasis>session</emphasis>: Dieser optionale Schlüssel nimmt den Namen
                         eines Session Namespaces entgegen der in Zend_ProgressBar verwendet wird. Wenn dieser
                         Schlüssel nicht angegeben wird, ist er standardmäßig
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.

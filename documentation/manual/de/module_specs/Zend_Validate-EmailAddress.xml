@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        <emphasis role="strong">Normale Verwendung</emphasis>
+        <emphasis>Normale Verwendung</emphasis>
     </para>
 
     <para>
@@ -35,7 +35,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">Komplexe lokale Abschnitte</emphasis>
+        <emphasis>Komplexe lokale Abschnitte</emphasis>
     </para>
 
     <para>
@@ -51,7 +51,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">Prüfen von unterschiedlichen Typen von Hostnamen</emphasis>
+        <emphasis>Prüfen von unterschiedlichen Typen von Hostnamen</emphasis>
     </para>
 
     <para>
@@ -83,7 +83,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">Prüfen ob der Hostname aktuell Emails akzeptiert</emphasis>
+        <emphasis>Prüfen ob der Hostname aktuell Emails akzeptiert</emphasis>
     </para>
 
     <para>
@@ -115,7 +115,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
     </para>
 
     <para>
-        <emphasis role="strong">Internationale Domain Namen prüfen</emphasis>
+        <emphasis>Internationale Domain Namen prüfen</emphasis>
     </para>
 
     <para>
@@ -138,7 +138,7 @@ $validator->hostnameValidator->setValidateIdn(false);
     </para>
 
     <para>
-        <emphasis role="strong">Top Level Domains prüfen</emphasis>
+        <emphasis>Top Level Domains prüfen</emphasis>
     </para>
 
     <para>

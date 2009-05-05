@@ -66,11 +66,11 @@ $currency = new Zend_Currency();
     <itemizedlist mark='opencircle'>
         <listitem>
             <para>
-                <emphasis role="strong">currency</emphasis>:
+                <emphasis>currency</emphasis>:
             </para>
             <para>
                 Ein Gebietsschema kann verschiedene Währungen beinhalten. Deshalb kann der erste Parameter
-                <emphasis role="strong">'currency'</emphasis> definieren welche Währung verwendet werden soll
+                <emphasis>'currency'</emphasis> definieren welche Währung verwendet werden soll
                 indem der Kurzname oder der komplette Name dieser Währung angegeben wird. Wenn die angegebene
                 Währung in keinem Gebietsschema erkannt wird, wird eine Ausnahme geworfen. Kurznamen von
                 Währungen bestehen immer aus 3 Buchstaben und sind groß geschrieben. Bekannte Kurznamen
@@ -79,10 +79,10 @@ $currency = new Zend_Currency();
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">locale</emphasis>:
+                <emphasis>locale</emphasis>:
             </para>
             <para>
-                Der <emphasis role="strong">'locale'</emphasis> Parameter definiert welches
+                Der <emphasis>'locale'</emphasis> Parameter definiert welches
                 Gebietsschema für die Formatierung der Währung verwendet werden soll. Das spezifizierte
                 Gebietsschema wird auch verwendet um die Schreibweise und das Symbol für diese Währung zu
                 erhalten wenn diese Parameter nicht angegeben werden.
@@ -92,9 +92,9 @@ $currency = new Zend_Currency();
                     Es gilt zu Beachten das Zend_Currency nur Gebietsschema akzeptiert die eine Region
                     beinhalten. Das bedeutet das alle angegebenen Gebietsschemata die nur eine Sprache
                     beinhalten zu einer Ausnahme führen. Zum Beispiel wird das Gebietsschema
-                    <emphasis role="strong">en</emphasis> zu einer Ausnahme führen, aber das Gebietsschema
-                    <emphasis role="strong">en_US</emphasis> wird als Währung
-                    <emphasis role="strong">USD</emphasis> zurückgeben.
+                    <emphasis>en</emphasis> zu einer Ausnahme führen, aber das Gebietsschema
+                    <emphasis>en_US</emphasis> wird als Währung
+                    <emphasis>USD</emphasis> zurückgeben.
                 </para>
             </note>
         </listitem>
@@ -132,10 +132,10 @@ $currency = new Zend_Currency('en_US', 'EUR');
         <para>
             Für viele Länder gibt es verschiedene bekannt Währungen. Typishcerweise wird eine Währung immer
             gerade aktuell verwendet und es gibt eventuell noch alte Währungen. Wenn der
-            '<emphasis role="strong">currency</emphasis>' Parameter unterdrückt wird, wird immer die aktuelle
-            Währung verwendet. Die Region '<emphasis role="strong">de</emphasis>' zum Beispiel kennt die
-            Währungen '<emphasis role="strong">EUR</emphasis>' und
-            '<emphasis role="strong">DEM</emphasis>'... '<emphasis role="strong">EUR</emphasis>' ist die
+            '<emphasis>currency</emphasis>' Parameter unterdrückt wird, wird immer die aktuelle
+            Währung verwendet. Die Region '<emphasis>de</emphasis>' zum Beispiel kennt die
+            Währungen '<emphasis>EUR</emphasis>' und
+            '<emphasis>DEM</emphasis>'... '<emphasis>EUR</emphasis>' ist die
             aktuell verwendete Währung und wird verwendet wenn der Parameter unterdrückt wird.
         </para>
     </note>
@@ -146,7 +146,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
 
         <para>
             Um einen nummerischen Wert in einen formatierten String für die aktuelle Währung zu konvertieren,
-            muß man die Methode <emphasis role="strong">toCurrency()</emphasis> verwenden. Sie nimmt einen
+            muß man die Methode <emphasis>toCurrency()</emphasis> verwenden. Sie nimmt einen
             Wert der konvertiert werden soll. Der Wert selbst kann jede normalisierte Zahl sein.
         </para>
 
@@ -202,7 +202,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">Symbol, Kurzname oder Name der Währung</emphasis>:
+                    <emphasis>Symbol, Kurzname oder Name der Währung</emphasis>:
                 </para>
                 <para>
                     Das Symbol der Währung wird normalerweise bei der Ausgabe eines Währungs Strings angezeigt.
@@ -211,7 +211,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Position der Währung</emphasis>:
+                    <emphasis>Position der Währung</emphasis>:
                 </para>
                 <para>
                     Die Position des Währungssymbols ist normalerweise automatisch durch das
@@ -220,7 +220,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Script</emphasis>:
+                    <emphasis>Script</emphasis>:
                 </para>
                 <para>
                     Die Schreibweise die verwendet werden soll um Ziffern anzuzeigen. Detailierte
@@ -232,7 +232,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Zahlenformat</emphasis>:
+                    <emphasis>Zahlenformat</emphasis>:
                 </para>
                 <para>
                     Der Wert der Währung (üblicherweise bekannt als Geldwert) wird durch die Verwendung der
@@ -244,7 +244,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         </itemizedlist>
 
         <para>
-            Wenn man also das Format ändern muß, kann die <emphasis role="strong">setFormat()</emphasis>
+            Wenn man also das Format ändern muß, kann die <emphasis>setFormat()</emphasis>
             Methode verwendet werden. Diese akzeptiert ein Array welches alle Optionen enthält die geändert
             werden sollen. Das <code>options</code> Array unterstützt folgenden Einstellungen:
         </para>
@@ -252,7 +252,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">position</emphasis>: Definiert die Position an der die Beschreibung
+                    <emphasis>position</emphasis>: Definiert die Position an der die Beschreibung
                     der Währung angezeigt werden soll. Die unterstützten Positionen können in
                     <link linkend="zend.currency.usage.setformat.constantsposition">dieser Tabelle</link>
                     gefunden werden.
@@ -260,9 +260,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">script</emphasis>: Definiert welche Schreibweise für die Anzeige
+                    <emphasis>script</emphasis>: Definiert welche Schreibweise für die Anzeige
                     von Ziffern verwendet werden soll. Die Standardschreibweise der meisten Gebietsschemata
-                    ist <emphasis role="strong">'Latn'</emphasis>, welches die Ziffern 0 bis 9 enthält. Aber auch
+                    ist <emphasis>'Latn'</emphasis>, welches die Ziffern 0 bis 9 enthält. Aber auch
                     andere Schreibweisen wie 'Arab' (Arabisch) können verwendet werden. Alle unterstützten
                     Schreibweisen können in
                     <link linkend="zend.locale.appendix.numberscripts.supported">dieser Tabelle</link>
@@ -271,7 +271,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">format</emphasis>: Definiert das Format welches verwendet werden
+                    <emphasis>format</emphasis>: Definiert das Format welches verwendet werden
                     soll um Nummern darzustellen. Dieses Nummern-Format enthält zum Beispiel das
                     Trennzeichen für Tausender. Man kann entweder ein Standardformat verwenden indem ein
                     Identifikator für ein Gebietsschema angegeben wird, oder das Nummern-Format manuell
@@ -281,7 +281,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">display</emphasis>: Definiert welcher Teil der Währung verwendet
+                    <emphasis>display</emphasis>: Definiert welcher Teil der Währung verwendet
                     werden soll um die Währung darzustellen. Es gibt 4 Darstellungen welche verwendet werden
                     können. Sie werden in
                     <link linkend="zend.currency.usage.setformat.constantsdescription">dieser Tabelle</link>
@@ -290,28 +290,28 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">precision</emphasis>: Definiert die Genauigkeit welche für die
+                    <emphasis>precision</emphasis>: Definiert die Genauigkeit welche für die
                     Darstellung der Währung verwendet werden soll. Der Standardwert ist
-                    <emphasis role="strong">2</emphasis>.
+                    <emphasis>2</emphasis>.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis>: Definiert den kompletten Namen der Währung der
+                    <emphasis>name</emphasis>: Definiert den kompletten Namen der Währung der
                     angezeigt werden soll. Diese Option überschreibt den Namen der Währung der durch die
                     Erstellung von <classname>Zend_Currency</classname> gesetzt wurde.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">currency</emphasis>: Definiert die internationale Abkürzung die
+                    <emphasis>currency</emphasis>: Definiert die internationale Abkürzung die
                     angezeigt werden soll. Diese Option überschreibt die Abkürzung die durch die Erstellung
                     von <classname>Zend_Currency</classname> gesetzt wurde.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">symbol</emphasis>: Definiert das Symbol der Währung welches
+                    <emphasis>symbol</emphasis>: Definiert das Symbol der Währung welches
                     angezeigt werden soll. Diese Option überschreibt das Symbol das durch die Erstellung
                     von <classname>Zend_Currency</classname> gesetzt wurde.
                 </para>
@@ -422,37 +422,37 @@ echo $currency->toCurrency(1000);
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">getSymbol()</emphasis>:
+                    <emphasis>getSymbol()</emphasis>:
                 </para>
                 <para>
                     Gibt das bekannte Symbol der aktuellen oder einer angegebenen Währung zurück.
-                    Zum Beispiel <emphasis role="strong">$</emphasis> für den US Dollar innerhalb des
-                    Gebietsschemas '<emphasis role="strong">en_US</emphasis>'.
+                    Zum Beispiel <emphasis>$</emphasis> für den US Dollar innerhalb des
+                    Gebietsschemas '<emphasis>en_US</emphasis>'.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getShortName()</emphasis>:
+                    <emphasis>getShortName()</emphasis>:
                 </para>
                 <para>
                     Gibt die Abkürzung der aktuellen oder einer angegebenen Währung zurück. Zum Beispiel
-                    <emphasis role="strong">USD</emphasis> für den US Dollar innerhalb des
-                    Gebietsschemas '<emphasis role="strong">en_US</emphasis>'.
+                    <emphasis>USD</emphasis> für den US Dollar innerhalb des
+                    Gebietsschemas '<emphasis>en_US</emphasis>'.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getName()</emphasis>:
+                    <emphasis>getName()</emphasis>:
                 </para>
                 <para>
                     Gibt den kompletten Namen der aktuellen oder einer angegebenen Währung zurück. Zum Beispiel
-                    <emphasis role="strong">US Dollar</emphasis> für den US Dollar innerhalb des
-                    Gebietsschemas '<emphasis role="strong">en_US</emphasis>'.
+                    <emphasis>US Dollar</emphasis> für den US Dollar innerhalb des
+                    Gebietsschemas '<emphasis>en_US</emphasis>'.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getRegionList()</emphasis>:
+                    <emphasis>getRegionList()</emphasis>:
                 </para>
                 <para>
                     Gibt eine Liste von Regionen zurück in denen die aktuelle oder eine angegebene
@@ -462,7 +462,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getCurrencyList()</emphasis>:
+                    <emphasis>getCurrencyList()</emphasis>:
                 </para>
                 <para>
                     Gibt eine Liste von Währungen zurück die in einer angegebenen Region verwendet werden.

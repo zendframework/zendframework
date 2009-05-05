@@ -23,7 +23,7 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">Kompletter Support für Gebietsschemata</emphasis>
+                    <emphasis>Kompletter Support für Gebietsschemata</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> arbeitet mit allen vorhandenen Gebietsschemata und kennt
@@ -33,7 +33,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Wiederverwendbare Währungs Definitionen</emphasis>
+                    <emphasis>Wiederverwendbare Währungs Definitionen</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> enthält nicht den Wert der Währung. Das ist der Grund warum
@@ -44,7 +44,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Fluent Interface</emphasis>
+                    <emphasis>Fluent Interface</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> beinhaltet das Fluent Interface wo es möglich ist.
@@ -52,7 +52,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Zusätzliche Methoden</emphasis>
+                    <emphasis>Zusätzliche Methoden</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> enthält zusätzliche Methoden die Informationen darüber anbieten

@@ -7,8 +7,8 @@
 
     <para>
         <classname>Zend_TimeSync</classname> ist fähig die Internet- oder Netzwerkzeit von einem Zeitserver
-        zu empfangen indem es das <emphasis role="strong">NTP</emphasis> oder
-        <emphasis role="strong">SNTP</emphasis> Protokoll verwendet. Mit <classname>Zend_TimeSync</classname>
+        zu empfangen indem es das <emphasis>NTP</emphasis> oder
+        <emphasis>SNTP</emphasis> Protokoll verwendet. Mit <classname>Zend_TimeSync</classname>
         ist Zend Framework fähig unabhängig von den Zeiteinstellungen des Servers auf dem es
         läuft zu agieren.
     </para>
@@ -54,7 +54,7 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">Server ohne Zeitservice</emphasis>
+                    <emphasis>Server ohne Zeitservice</emphasis>
                 </para>
                 <para>
                     Wenn eine Anwendung auf einem Server läuft und auf diesem Server kein
@@ -64,18 +64,18 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Separater Datenbank Server</emphasis>
+                    <emphasis>Separater Datenbank Server</emphasis>
                 </para>
                 <para>
                     Wenn eine Datenbank auf einem anderen Server läuft und dieser Server
-                    nicht mit <emphasis role="strong">NTP</emphasis> oder
-                    <emphasis role="strong">SNTP</emphasis> an dem Anwendungsserver angebunden ist,
+                    nicht mit <emphasis>NTP</emphasis> oder
+                    <emphasis>SNTP</emphasis> an dem Anwendungsserver angebunden ist,
                     kann man Probleme haben Zeitstempel zu speichern und zu verwenden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Mehrere Server</emphasis>
+                    <emphasis>Mehrere Server</emphasis>
                 </para>
                 <para>
                     Wenn die Anwendung auf mehr als einem Server läuft, und die Zeitbasis dieser
@@ -86,7 +86,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">Batch Ausführung</emphasis>
+                    <emphasis>Batch Ausführung</emphasis>
                 </para>
                 <para>
                     Wenn man mit einem Zeitserver arbeiten oder Ihn in einer Batchdatei oder in
@@ -107,7 +107,7 @@
         <title>Was ist NTP ?</title>
 
         <para>
-            Das <code>Network Time Protocol</code> (<emphasis role="strong">NTP</emphasis>) ist
+            Das <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) ist
             ein Protokoll für die Synchronisierung von mehreren Systemuhren über
             Paket-geführte, variabel laufende Datennetzwerke. NTP verwendet den UDP Port 123 als seine
             Transportschicht. Siehe
@@ -122,7 +122,7 @@
         <title>Was ist SNTP?</title>
 
         <para>
-            Das <code>Simple Network Time Protocol</code> (<emphasis role="strong">SNTP</emphasis>)
+            Das <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>)
             ist ein Protokoll für die Synchronisierung von mehreren Systemuhren über
             Paket-geführte, variabel laufende Datennetzwerke. SNTP verwendet den UDP Port 37 als
             Transportschicht. Es ist fast identisch mit dem Network Time Protokoll aber

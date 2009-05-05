@@ -360,7 +360,7 @@ $translate = new Zend_Translate('gettext',
 
         <note>
             <para>
-                Der Cache muß <emphasis role="strong">vor</emphasis> seiner Verwendung oder Initiierung eines
+                Der Cache muß <emphasis>vor</emphasis> seiner Verwendung oder Initiierung eines
                 Adapter oder einer Instanz von <classname>Zend_Translate</classname> gesetzt werden. Andernfalls wird
                 die Übersetzungs Quelle nicht gecached bis eine neue Quelle mit der
                 <code>addTranslation()</code> Methode hinzugefügt wird.

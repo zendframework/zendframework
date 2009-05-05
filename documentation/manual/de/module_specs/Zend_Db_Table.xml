@@ -1204,26 +1204,26 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis> => der Name der Tabelle.
+                    <emphasis>name</emphasis> => der Name der Tabelle.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">cols</emphasis> => ein Array das die Spalte(n) der Tabelle benennt.
+                    <emphasis>cols</emphasis> => ein Array das die Spalte(n) der Tabelle benennt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">primary</emphasis> => ein Array das die Spalte(n) des Primärschlüssels
+                    <emphasis>primary</emphasis> => ein Array das die Spalte(n) des Primärschlüssels
                     benennt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">metadata</emphasis> => ein assoziatives Array das die Spaltennamen
+                    <emphasis>metadata</emphasis> => ein assoziatives Array das die Spaltennamen
                     mit Informationen über die Spalten zusammenführt. Das ist die Information die durch die
                     <code>describeTable()</code> Methode zurückgegeben wird.
                 </para>
@@ -1231,7 +1231,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowClass</emphasis> => der Name der konkreten Klasse die für
+                    <emphasis>rowClass</emphasis> => der Name der konkreten Klasse die für
                     Zeilen Objekte verwendet wird und von den Methoden dieser Table Instanz zurückgegeben
                     wird. Der Standardwert ist <classname>Zend_Db_Table_Row</classname>.
                 </para>
@@ -1239,7 +1239,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowsetClass</emphasis> => Name der konkreten Klasse für für
+                    <emphasis>rowsetClass</emphasis> => Name der konkreten Klasse für für
                     Rowset Objekte verwendet wird und von den Methoden dieser Table Instanz zurückgegeben
                     wird. Der Standardwert ist <classname>Zend_Db_Table_Rowset</classname>.
                 </para>
@@ -1247,7 +1247,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">referenceMap</emphasis> => ist ein assoziatives Array von
+                    <emphasis>referenceMap</emphasis> => ist ein assoziatives Array von
                     Klassennamen von Tabellen die diese Tabelle referenzieren. Siese
                     <xref linkend="zend.db.table.relationships.defining" />.
                 </para>
@@ -1255,7 +1255,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">dependentTables</emphasis> => ein Array von Klassennamen von
+                    <emphasis>dependentTables</emphasis> => ein Array von Klassennamen von
                     Tabellen die diese Tabelle referenzieren. Siese
                     <xref linkend="zend.db.table.relationships.defining" />.
                 </para>
@@ -1263,7 +1263,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">schema</emphasis> => der Name des Schemas (oder der
+                    <emphasis>schema</emphasis> => der Name des Schemas (oder der
                     Datenbank oder dem Tabellenraum) für diese Tabelle.
                 </para>
             </listitem>
@@ -1305,7 +1305,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Aufruf von <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis> -
+                        <emphasis>Aufruf von <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis> -
                         Das erlaubt es Entwicklern das Standardcacheobjekt zu setzen das für alle Tabellenklassen
                         verwendet werden soll.
                     </para>
@@ -1313,7 +1313,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">Konfigurieren von <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
+                        <emphasis>Konfigurieren von <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
                         Das erlaubt es Entwicklern das Cacheobjekt zu setzen das für eine spezielle Instanz
                         der Tabellenklasse verwendet werden soll.
                     </para>

@@ -753,8 +753,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
         <para>
             Die Größe selbst wird auch in der SI Schreibweise akzeptiert wie Sie die meisten
-            Betriebsystemen verwenden. Statt <emphasis role="strong">20000 bytes</emphasis> kann auch
-            <emphasis role="strong">20kB</emphasis> angeben werden. Alle Einheiten werden mit dem Basiswert
+            Betriebsystemen verwenden. Statt <emphasis>20000 bytes</emphasis> kann auch
+            <emphasis>20kB</emphasis> angeben werden. Alle Einheiten werden mit dem Basiswert
             1024 konvertiert. Die folgenden Einheiten werden akzeptiert: <code>kB</code>, <code>MB</code>,
             <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>. Beachte das 1kB gleich
             1024 Bytes ist, 1MB gleich 1024kB, und so weiter.
@@ -1280,8 +1280,8 @@ $upload->addValidator('Sha1',
 
         <para>
             Die Größe selbst wird auch in der SI Schreibweise akzeptiert wie Sie von den meisten
-            Betriebsystemen verwendet wird. Statt <emphasis role="strong">20000 bytes</emphasis> kann man auch
-            <emphasis role="strong">20kB</emphasis> angeben. Alle Einheiten werden konvertiert wobei 1024 als
+            Betriebsystemen verwendet wird. Statt <emphasis>20000 bytes</emphasis> kann man auch
+            <emphasis>20kB</emphasis> angeben. Alle Einheiten werden konvertiert wobei 1024 als
             Basiswert verwendet wird. Die folgenden Einheiten werden akzeptiert: <code>kB</code>, <code>MB</code>,
             <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>. Beachte das 1kB identisch
             mit 1024 Bytes ist, 1MB identisch mit 1024kB ist, und so weiter.

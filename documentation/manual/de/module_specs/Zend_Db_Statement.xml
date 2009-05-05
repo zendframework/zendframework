@@ -141,21 +141,21 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Fetch Style</emphasis> ist das erste Argument. Es steuert die
+                        <emphasis>Fetch Style</emphasis> ist das erste Argument. Es steuert die
                         Struktur in welcher die Zeile zurück gegeben wird. Unter <xref linkend="zend.db.adapter.select.fetch-mode" />
                         befindet sich eine Beschreibung der gültigen Werte und der entsprechenden Datenformaten.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard ist
+                        <emphasis>Cursor Ausrichtung</emphasis> ist das zweite Argument. Standard ist
                         Zend_Db::FETCH_ORI_NEXT, was einfach bedeutet das für jeden Aufruf von <code>fetch()</code>
                         die nächste Zeile des Ergebnissatzes, in der Riehenfolge des RDBMS, zurück gegeben wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Offset</emphasis> ist das dritte Argument.
+                        <emphasis>Offset</emphasis> ist das dritte Argument.
                         Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_ABS ist, dann ist die Offset-Nummer die
                         ordinale Nummer der Zeile die zurück gegeben wird.
                         Wenn die Cursor Ausrichtung Zend_Db::FETCH_ORI_REL, dann ist die Offset-Nummer relativ zu

@@ -7,7 +7,7 @@
 
     <para>
         <classname>Zend_TimeSync</classname> kann die aktuelle Zeit von jedem angegebenen
-        <emphasis role="strong">NTP</emphasis> oder <emphasis role="strong">SNTP</emphasis>
+        <emphasis>NTP</emphasis> oder <emphasis>SNTP</emphasis>
         Zeitserver zurückgeben. Es kann automatisch mehrere Server handhaben und bietet ein
         einfaches Interface.
     </para>
@@ -15,7 +15,7 @@
     <note>
         <para>
             Alle Beispiele in diesem Kapitel verwenden einen öfentlichen, generellen
-            Zeitserver: <emphasis role="strong">0.europe.pool.ntp.org</emphasis>.
+            Zeitserver: <emphasis>0.europe.pool.ntp.org</emphasis>.
             Man sollte einen öffentlichen, generellen Zeitserver verwenden der in der Nähe
             des eigenen Anwendungsservers steht. Siehe
             <ulink url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink> für Informationen.
@@ -117,15 +117,15 @@ print $server->getDate()->getIso();
 
         <para>
             Es gibt verschiedene Typen von Zeitservern. Die meisten öffentlichen Zeitserver
-            verwenden <emphasis role="strong">NTP</emphasis> als Protokoll. Es sind auch
+            verwenden <emphasis>NTP</emphasis> als Protokoll. Es sind auch
             andere Zeit Synchronisations Prtokolle vorhanden.
         </para>
 
         <para>
             Man kann das richtige Prokoll mit der Adresse des Zeitservers setzen. Aktuell gibt
             es zwei Prokolle die von <classname>Zend_TimeSync</classname> unterstützt werden:
-            <emphasis role="strong">NTP</emphasis> und <emphasis role="strong">SNTP</emphasis>. Das
-            Standardprotokoll ist <emphasis role="strong">NTP</emphasis>. Wenn man nur <emphasis role="strong">NTP</emphasis>
+            <emphasis>NTP</emphasis> und <emphasis>SNTP</emphasis>. Das
+            Standardprotokoll ist <emphasis>NTP</emphasis>. Wenn man nur <emphasis>NTP</emphasis>
             verwendet kann das Protkoll in der Adresse, wie im vorherigen Beispiel gezeigt, unterdrücken.
         </para>
 
@@ -152,9 +152,9 @@ print $server->getDate()->getIso();
 
         <para>
             Wie bei jedes Protkoll im World Wide Web, verwenden das
-            <emphasis role="strong">NTP</emphasis> und <emphasis role="strong">SNTP</emphasis>
-            Protokoll Standardports. NTP verwendet den Port <emphasis role="strong">123</emphasis>,
-            und SNTP den Port <emphasis role="strong">37</emphasis>.
+            <emphasis>NTP</emphasis> und <emphasis>SNTP</emphasis>
+            Protokoll Standardports. NTP verwendet den Port <emphasis>123</emphasis>,
+            und SNTP den Port <emphasis>37</emphasis>.
         </para>
 
         <para>
@@ -180,14 +180,14 @@ print $server->getDate()->getIso();
 
         <para>
             Es gibt nur eine Option in <classname>Zend_TimeSync</classname> die intern verwendet wird:
-            <emphasis role="strong">timeout</emphasis>. Man kann aber beliebige selbstdefinierte
+            <emphasis>timeout</emphasis>. Man kann aber beliebige selbstdefinierte
             Optionen verwenden wenn man will und diese auch Abfragen.
         </para>
 
         <para>
-            Die Option <emphasis role="strong">timeout</emphasis> definiert die Anzahl an Sekunden
+            Die Option <emphasis>timeout</emphasis> definiert die Anzahl an Sekunden
             nach der eine Verbindung als Abgebrochen erkannt wird wenn keine Antwort kommt. Der
-            Standardwert ist <emphasis role="strong">1</emphasis>, was bedeutet das
+            Standardwert ist <emphasis>1</emphasis>, was bedeutet das
             <classname>Zend_TimeSync</classname> auf den nächsten Zeitserver zurückfällt wenn der
             angefragte Server nicht in einer Sekunde antwortet.
         </para>

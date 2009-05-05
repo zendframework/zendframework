@@ -225,8 +225,8 @@ if ($result->isValid()) {
 
         <para>
             Wärend der primäre Zweck von <classname>Zend_Auth</classname> (und konsequenter Weise
-            <classname>Zend_Auth_Adapter_DbTable</classname>) die <emphasis role="strong">Authentifizierung</emphasis>
-            und nicht die <emphasis role="strong">Authorisierung</emphasis> ist, gibt es ein paar
+            <classname>Zend_Auth_Adapter_DbTable</classname>) die <emphasis>Authentifizierung</emphasis>
+            und nicht die <emphasis>Authorisierung</emphasis> ist, gibt es ein paar
             Instanzen und Probleme auf dem Weg welche Art besser passt. Abhängig davon wie man sich
             entscheidet ein Problem zu beschreiben, macht es manchmal Sinn, das was wie ein
             Authorisierungsproblem aussieht im Authentifizierungs-Adapter zu lösen.

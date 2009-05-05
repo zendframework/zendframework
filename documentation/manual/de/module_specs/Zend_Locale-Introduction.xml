@@ -384,7 +384,7 @@ $date = new Zend_Date();
 
         <para>
             Im Fall das kein Gebietsschema erkannt wird, wird automatisch das Gebietsschema
-            <emphasis role="strong">de</emphasis> verwendet. Andernfalls wird das erkannte Gebietsschema
+            <emphasis>de</emphasis> verwendet. Andernfalls wird das erkannte Gebietsschema
             verwendet.
         </para>
 

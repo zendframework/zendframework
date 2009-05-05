@@ -125,7 +125,7 @@ Zend_Session::setOptions($config->toArray());
                 <listitem>
                     <para>
                         string <code>save_path</code> - Der richtige Wert ist abhängig vom System, und sollte
-                        vom Entwickler auf einen <emphasis role="strong">absoluten Pfad</emphasis> zu einem
+                        vom Entwickler auf einen <emphasis>absoluten Pfad</emphasis> zu einem
                         Verzeichnis bereitgestellt werden, welches durch den PHP Prozess lesbar und beschreibbar ist.
                         Wenn kein schreibbarer Pfad gegeben ist, wird <classname>Zend_Session</classname> eine Ausnahme
                         werden sobald Sie gestartet wird (z.B. wenn <code>start()</code> aufgerufen wird).
@@ -165,7 +165,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>name</code> - Der richtige Wert ist abhängig vom System and sollte vom
                         Entwickler, durch Verwenden eines bestimmten Wertes, bereitgestellt werden, welcher
-                        für jede ZF Anwendung <emphasis role="strong">eindeutig</emphasis> ist.
+                        für jede ZF Anwendung <emphasis>eindeutig</emphasis> ist.
                     </para>
                     <note>
                         <title>Sicherheits Risiko</title>

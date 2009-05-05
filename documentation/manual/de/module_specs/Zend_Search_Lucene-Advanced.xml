@@ -36,7 +36,7 @@
         </para>
 
         <para>
-            Indexveränderungen werden <emphasis role="strong">nur</emphasis> durchgeführt wenn irgendein
+            Indexveränderungen werden <emphasis>nur</emphasis> durchgeführt wenn irgendein
             Update des Index durchgeführt wird. Das passiert wenn ein neues Dokument zu einem Index
             hinzugefügt wird, oder wenn manuell eine Indexoptimierung durch den Aufruf von
             <code>$index->optimize()</code> gestartet wird.
@@ -44,7 +44,7 @@
 
         <para>
             In solch einem Fall kann <classname>Zend_Search_Lucene</classname> den Index in eine höhere Formatversion konvertieren.
-            Das geschieht <emphasis role="strong">immer</emphasis> für Indezes welche im
+            Das geschieht <emphasis>immer</emphasis> für Indezes welche im
             <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> sind. Diese werden automatisch ins Format 2.1
             konvertiert.
         </para>

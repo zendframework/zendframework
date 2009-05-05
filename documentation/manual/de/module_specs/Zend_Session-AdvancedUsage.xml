@@ -114,7 +114,7 @@ php_value session.auto_start 0
                     notwendig ist, und die darunterliegende PHP Session wird automatisch gestartet. Das bietet
                     eine extrem simple Handhabung die in den meisten Situationen gut funktioniert. Trotzdem ist man
                     dann dafür verantwortlich darauf zu schauen das das erste <code>new Zend_Session_Namespace()</code>
-                    passiert <emphasis role="strong">bevor</emphasis> irgendeine Ausgabe (z.B.
+                    passiert <emphasis>bevor</emphasis> irgendeine Ausgabe (z.B.
                     <ulink url="http://www.php.net/headers_sent">HTTP headers</ulink> ) von PHP an den Client
                     gesendet wird, wenn standardmäßige, Cookie-basierte Sessions verwendet werden (sehr
                     empfehlenswert). Siehe <xref linkend="zend.session.global_session_management.headers_sent" />
@@ -445,7 +445,7 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
         <para>
             Zend Framework vertraut auf PHPUnit um das Testen von sich selbst zu ermöglichen. Viele
             Entwickler erweitern die existierende Sammlung von Unit Tests um den Code in deren Anwendungen
-            anzudecken. Die Ausnahme "<emphasis role="strong">Zend_Session ist aktuell als nur-lesbar markiert</emphasis>"
+            anzudecken. Die Ausnahme "<emphasis>Zend_Session ist aktuell als nur-lesbar markiert</emphasis>"
             wird geworfen wärend Unit Tests durchgeführt werden, wenn irgendeine schreibende Methode verwendet wird
             nachdem Ende der Session. Trotzdem benötigen Unit Tests die Zend_Session verwenden besondere Aufmerksamkeit
             weil das Schließen (<classname>Zend_Session::writeClose()</classname>) oder Zerstören einer Session

@@ -58,14 +58,14 @@ date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set('Europe/Berlin');
 ]]></programlisting>
             </example>
-            <emphasis role="strong">Wenn eine Zend_Date Instanz erzeugt wird, wird die
+            <emphasis>Wenn eine Zend_Date Instanz erzeugt wird, wird die
             Zeitzone des aktuellen Benutzers automatisch als aktuelle Standardzeitzone übernommen</emphasis>.
             Das erspart das explizite setzen der Sommer-/Winterzeitumstellung (DST).
         </para>
 
         <para>
-            Es gilt zu beachten das die Zeitzonen <emphasis role="strong">UTC</emphasis> und
-            <emphasis role="strong">GMT</emphasis> keine Sommer-/Winterzeitumstellung enthalten. Das bedeutet
+            Es gilt zu beachten das die Zeitzonen <emphasis>UTC</emphasis> und
+            <emphasis>GMT</emphasis> keine Sommer-/Winterzeitumstellung enthalten. Das bedeutet
             das selbst wenn per Hand definiert wurde das <classname>Zend_Date</classname> die DST berücksichtigen soll,
             das automatisch für alle Instanzen von <classname>Zend_Date</classname> zurückgeschaltet wird die auf
             UTC oder GMT eingestellt wurden.

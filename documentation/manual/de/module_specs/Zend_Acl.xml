@@ -18,19 +18,19 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    ist eine <emphasis role="strong">Ressource</emphasis> ein Objekt, auf das der
+                    ist eine <emphasis>Ressource</emphasis> ein Objekt, auf das der
                     Zugriff kontrolliert wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    ist eine <emphasis role="strong">Rolle</emphasis> ein Objekt, dass den Zugriff
+                    ist eine <emphasis>Rolle</emphasis> ein Objekt, dass den Zugriff
                     auf eine Ressource anfordern kann.
                 </para>
             </listitem>
         </itemizedlist>
 
-        Einfach ausgedrückt, <emphasis role="strong">fordern Rollen den Zugriff auf Ressourcen
+        Einfach ausgedrückt, <emphasis>fordern Rollen den Zugriff auf Ressourcen
         an</emphasis>. Wenn z.B. ein Parkplatzhalter den Zugriff auf ein Auto anfordert, ist der
         Parkplatzhalter die anfordernde Rolle und das Auto die Ressource, weil der Zugriff auf das
         Auto nicht jedem erlaubt ist.

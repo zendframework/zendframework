@@ -146,7 +146,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">columns</emphasis> => Ein String oder ein Array von
+                    <emphasis>columns</emphasis> => Ein String oder ein Array von
                     Strings die die Namen der entfernten Schlüsselspalte der abhängigen Tabelle
                     benennen.
                 </para>
@@ -159,7 +159,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refTableClass</emphasis> => Der Klassenname der
+                    <emphasis>refTableClass</emphasis> => Der Klassenname der
                     Elterntabelle. Es sollte der Klassenname und nicht der physikalische Name der
                     SQL Tabelle verwendet werden.
                 </para>
@@ -177,7 +177,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refColumns</emphasis> => Ein String oder ein Array von
+                    <emphasis>refColumns</emphasis> => Ein String oder ein Array von
                     Strings die den Spaltennamen des primären Schlüssels in der Elterntabelle
                     benennen.
                 </para>
@@ -198,7 +198,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onDelete</emphasis> => Eine Regel für eine Aktion die
+                    <emphasis>onDelete</emphasis> => Eine Regel für eine Aktion die
                     ausgeführt wird wenn eine Zeile in der Elterntabelle gelöscht wird. Siehe auch
                     <xref linkend="zend.db.table.relationships.cascading" /> für weitere
                     Informationen.
@@ -207,7 +207,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onUpdate</emphasis> => Eine Regel für eine Aktion die
+                    <emphasis>onUpdate</emphasis> => Eine Regel für eine Aktion die
                     ausgeführt wird wenn Werte in der primären Schlüsselspalte der Elterntabelle
                     aktualisiert werden. Siehe auch
                     <xref linkend="zend.db.table.relationships.cascading" /> für weitere
@@ -752,7 +752,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 Die Deklaration von kaskadierenden Operationen in <classname>Zend_Db_Table</classname>
-                <emphasis role="strong">nur</emphasis> für RDBMS Marken gedacht die keine
+                <emphasis>nur</emphasis> für RDBMS Marken gedacht die keine
                 deklarative referentielle Integrität unterstützen (DRI).
             </para>
 
@@ -872,7 +872,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <title>Notizen betreffend kaskadierenden Operationen</title>
 
             <para>
-                <emphasis role="strong">Kaskadierende Operationen die durch <classname>Zend_Db_Table</classname>
+                <emphasis>Kaskadierende Operationen die durch <classname>Zend_Db_Table</classname>
                 aufgerufen werden sind nicht atomar.</emphasis>
             </para>
 
@@ -913,7 +913,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Kaskadierende Operationen in <classname>Zend_Db_Table</classname> werden nur durch
+                <emphasis>Kaskadierende Operationen in <classname>Zend_Db_Table</classname> werden nur durch
                 <classname>Zend_Db_Table</classname> aufgerufen.</emphasis>
             </para>
 
@@ -930,7 +930,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Kein kaskadierendes <code>INSERT</code>.</emphasis>
+                <emphasis>Kein kaskadierendes <code>INSERT</code>.</emphasis>
             </para>
 
             <para>

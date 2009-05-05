@@ -19,14 +19,14 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Unzureichende API:</emphasis>
+                <emphasis>Unzureichende API:</emphasis>
                 Es gibt keine API die für die verschiedenen Quellen identisch ist.
                 Die Benutzung von Gettext zum Beispiel ist sehr kompliziert.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">PHP unterstützt nur Gettext und Arrays:</emphasis>
+                <emphasis>PHP unterstützt nur Gettext und Arrays:</emphasis>
                 PHP selbst bietet nur Unterstützung von Arrays oder Gettext.
                 Alle anderen Quellen müssten händisch programmiert werden, weil es keinen
                 eingebauten Support hierfür gibt.
@@ -34,14 +34,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Keine Erkennung der Standard Sprache:</emphasis>
+                <emphasis>Keine Erkennung der Standard Sprache:</emphasis>
                 Die Standard Sprache eines Benutzers kann nicht ohne tiefere Kenntnisse
                 über die Hintergründe der Web Browser erkannt und benutzt werden.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Gettext ist nicht Threadsicher:</emphasis>
+                <emphasis>Gettext ist nicht Threadsicher:</emphasis>
                 PHP's Gettext Bibliothek ist nicht Threadsicher und sollte nicht in
                 Multithreaded Umgebungen verwendet werden. Das ist ein Problem der
                 verwendeten Gettext Bibliothek und nicht von PHP selbst. Aber es ist
@@ -59,7 +59,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">Unterstützt mehrere Quell Formate:</emphasis>
+                <emphasis>Unterstützt mehrere Quell Formate:</emphasis>
                 <classname>Zend_Translate</classname> unterstützt verschiedene Quell Formate, natürlich auch
                 die welche von PHP unterstützt werden und andere Formate wie zum
                 Beispiel TMX und CSV Quellen.
@@ -67,14 +67,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Threadsicheres Gettext:</emphasis>
+                <emphasis>Threadsicheres Gettext:</emphasis>
                 Der Gettext Reader von <classname>Zend_Translate</classname> ist Threadsicher. Er kann ohne
                 Probleme in Multithreaded Umgebungen verwendet werden.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Einfache und einheitliche API:</emphasis>
+                <emphasis>Einfache und einheitliche API:</emphasis>
                 Die API von <classname>Zend_Translate</classname> ist sehr einfach und benötigt nur eine
                 handvoll von Funktionen. So ist sie einfach zu lernen und einfach
                 zu warten. Alle Quell Formate werden auf die gleiche Art und Weise
@@ -85,14 +85,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Erkennung der Standard Sprache des Benutzers:</emphasis>
+                <emphasis>Erkennung der Standard Sprache des Benutzers:</emphasis>
                 Die bevorzugte Sprache des Benutzers der auf die Site zugreift kann durch
                 <classname>Zend_Translate</classname> erkannt und automatisch verwendet werden.
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Automatische Erkennung der Quelle:</emphasis>
+                <emphasis>Automatische Erkennung der Quelle:</emphasis>
                 <classname>Zend_Translate</classname> kann mehrere Quelldateien erkennen und integrieren und zusätzlich das
                 zu verwendende Gebietsschema erkennen abhängig vom Verzeichnis oder Dateinamen.
             </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15261 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -140,6 +140,26 @@ Test*
 ]]></programlisting>
             Sucht nach "schreibt", "schreibtisch", "beschreibt", "schreist" und so weiter.
         </para>
+
+        <para>
+            Beginnend mit ZF 1.7.7 benötigen Wildcard Präfixe einen nicht-Wildcard Präfix. Die
+            standardmäßige Länge des Präfixes ist 3 (wie in Java Lucene). Die Ausdrücke
+            "*", "te?t", "*wr?t*" werden also eine Exception werfen
+            <footnote>
+                <para>
+                    Es ist zu beachten das es nicht zu einer
+                    <code>Zend_Search_Lucene_Search_QueryParserException</code> kommt, sondern zu
+                    einer <code>Zend_Search_Lucene_Exception</code>. Sie wird wärend dem
+                    Umschreiben der Abfrage geworfen.
+                </para>
+            </footnote>.
+        </para>
+        <para>
+            Das kann durch Verwendung der Methoden
+            <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> und
+            <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code> geändert
+            werden.
+        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.query-language.modifiers">
@@ -206,6 +226,26 @@ roam~
 roam~0.8
 ]]></programlisting>
             Der verwendete Standardwert wenn der Parameter nicht angegeben wurde ist 0.5.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
+        <title>Einschränkung passender Ausdrücke</title>
+
+        <para>
+            Wildcard, Bereichs- und Fuzzy Suchabfragen können bei zu vielen Ausdrücken passen.
+            Das kann die Geschwindigkeit der Suche sehr stark verlangsamen.
+        </para>
+
+        <para>
+            Deshalb setzt Zend_Search_Lucene ein Limit der passenden Ausdrücke pro Abfrage
+            (Unterabfrage). Dieses Limit kann durch Verwendung der Methoden
+            <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/
+            <code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code> empfangen und gesetzt
+            werden.
+        </para>
+        <para>
+            Das standardmäßige Limit für passende Ausdrücke ist 1024.
         </para>
     </sect2>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15288 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
@@ -24,7 +24,7 @@
     </para>
 
     <para>
-        Zend_Application ist in drei Bereiche geteilt:
+        <classname>Zend_Application</classname> ist in drei Bereiche geteilt:
     </para>
 
     <itemizedlist>
@@ -56,8 +56,8 @@
         Entwickler erstellen eine Bootstrap Klasse für Ihre Anwendung und erweitern
         <classname>Zend_Application_Bootstrap_Bootstrap</classname> oder implementieren (mindestens)
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>. Der Einstiegspunkt
-        (z.B. public/index.php) lädt <classname>Zend_Application</classname> und initialisiert Sie indem
-        folgendes übergeben wird:
+        (z.B. <filename>public/index.php</filename>) lädt <classname>Zend_Application</classname>
+        und initialisiert Sie, indem folgendes übergeben wird:
     </para>
 
     <itemizedlist>

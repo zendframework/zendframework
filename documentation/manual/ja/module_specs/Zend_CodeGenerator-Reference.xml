@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15103 -->
+<sect1 id="zend.codegenerator.reference">
+    <title>Zend_CodeGeneratorリファレンス</title>
+
+    <sect2 id="zend.codegenerator.reference.abstracts">
+        <title>抽象クラスとインターフェース</title>
+
+        <sect3 id="zend.codegenerator.reference.abstracts.abstract">
+            <title>Zend_CodeGenerator_Abstract</title>
+
+            <para>
+                すべてのCodeGeneratorクラスが継承する基底のクラスは、
+                必要な最小限の機能性を提供します。
+                そのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+abstract class Zend_CodeGenerator_Abstract
+{
+    final public function __construct(Array $options = array())
+    public function setOptions(Array $options)
+    public function setSourceContent($sourceContent)
+    public function getSourceContent()
+    protected function _init()
+    protected function _prepare()
+    abstract public function generate();
+    final public function __toString()
+}
+]]></programlisting>
+
+            <para>
+                コンストラクタは最初に<code>_init()</code>を呼び出します。
+                （それは、具体的に拡張するクラスを実装するために空のままにされます）
+                それから<code>setOptions()</code>に<code>$options</code>パラメータを渡し、
+                最後に<code>_prepare()</code>を呼び出します。
+                （<!-- TODO -->again, 
+                クラスの拡張によって実装されます。）
+            </para>
+
+            <para>
+                Zend Frameworkのほとんどのクラスのように、
+                <code>setOptions()</code>ではクラスの既存のセッターへのオプション・キーを比較して、
+                見つかったら、メソッドに値を渡します。
+            </para>
+
+            <para>
+                <code>__toString()</code>は最後に指定され、
+                <code>generate()</code>の代わりをします。
+            </para>
+
+            <para>
+                <code>setSourceContent()</code>及び<code>getSourceContent()</code>は
+                デフォルト・コンテンツを生成されたコードに設定するか、
+                一旦すべての生成作業が完了した前述のコンテンツと入れ替えることを目的とします。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.abstracts.php-abstract">
+            <title>Zend_CodeGenerator_Php_Abstract</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Abstract</classname>は
+                <classname>Zend_CodeGenerator_Abstract</classname>を拡張し、
+                生成されたコンテンツの前に現れなければならないインデントの量だけでなく、
+                コンテンツが変わったかどうか追跡するための若干のプロパティも加えます。
+                そのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+abstract class Zend_CodeGenerator_Php_Abstract
+    extends Zend_CodeGenerator_Abstract
+{
+    public function setSourceDirty($isSourceDirty = true)
+    public function isSourceDirty()
+    public function setIndentation($indentation)
+    public function getIndentation()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.abstracts.php-member-abstract">
+            <title>Zend_CodeGenerator_Php_Member_Abstract</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>は
+                クラスのメンバー - プロパティとメソッド - を生成するための基底クラスで、
+                可視性を確立するためのアクセッサとミューテータを提供します;
+                メンバーやメンバー名がabstract、staticまたはfinalのいずれにせよ。
+                そのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+abstract class Zend_CodeGenerator_Php_Member_Abstract
+    extends Zend_CodeGenerator_Php_Abstract
+{
+    public function setAbstract($isAbstract)
+    public function isAbstract()
+    public function setStatic($isStatic)
+    public function isStatic()
+    public function setVisibility($visibility)
+    public function getVisibility()
+    public function setName($name)
+    public function getName()
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.codegenerator.reference.concrete">
+        <title>Concrete CodeGenerator Classes</title>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-body">
+            <title>Zend_CodeGenerator_Php_Body</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Body</classname>は、
+                ファイルの中に含む任意の手続き的なコードを生成することを目的とします。
+                そのように、単にコンテンツをオブジェクトに設定し、
+                <code>generate()</code>を実施すると、それはそのコンテンツを返します。
+            </para>
+
+            <para>
+            
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
+{
+    public function setContent($content)
+    public function getContent()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-class">
+            <title>Zend_CodeGenerator_Php_Class</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Class</classname>は、
+                PHPクラスを生成することを目的とします。
+                基本的機能ではPHPクラスそのものを生成し、
+                また、任意で関連したPHP DocBlockも生成します。
+                クラスは他のクラスを実装するかもしれませんし、継承するかもしれません。
+                またはabstractと指定されるかもしれません。
+                他のコード・ジェネレーター・クラスを利用して、
+                クラスの定数やプロパティ、メソッドを付与することもできます。
+            </para>
+
+            <para>
+                そのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Class $reflectionClass
+    )
+    public function setDocblock(Zend_CodeGenerator_Php_Docblock $docblock)
+    public function getDocblock()
+    public function setName($name)
+    public function getName()
+    public function setAbstract($isAbstract)
+    public function isAbstract()
+    public function setExtendedClass($extendedClass)
+    public function getExtendedClass()
+    public function setImplementedInterfaces(Array $implementedInterfaces)
+    public function getImplementedInterfaces()
+    public function setProperties(Array $properties)
+    public function setProperty($property)
+    public function getProperties()
+    public function getProperty($propertyName)
+    public function setMethods(Array $methods)
+    public function setMethod($method)
+    public function getMethods()
+    public function getMethod($methodName)
+    public function hasMethod($methodName)
+    public function isSourceDirty()
+    public function generate()
+}
+]]></programlisting>
+
+            <para>
+                <code>setProperty()</code>メソッドは、
+                <classname>Zend_CodeGenerator_Php_Property</classname>インスタンスを生成するために
+                用いられるかもしれない情報の配列、
+                またはただ単に<classname>Zend_CodeGenerator_Php_Property</classname>インスタンス、
+                を受け入れます。
+                同様に<code>setMethod()</code>は、
+                <classname>Zend_CodeGenerator_Php_Method</classname>インスタンスを生成するための、
+                情報の配列またはそのクラスの具体化したインスタンスを受け入れます。
+            </para>
+
+            <para>
+                <code>setDocBlock()</code>が<classname>Zend_CodeGenerator_Php_DocBlock</classname>の
+                インスタンスを期待することも注意してください。
+            </para>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-docblock">
+            <title>Zend_CodeGenerator_Php_Docblock</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Docblock</classname> can be used to
+                generate arbitrary PHP docblocks, including all the standard
+                docblock features: short and long descriptions and annotation
+                tags.
+            </para>
+
+            <para>
+                Annotation tags may be set using the <code>setTag()</code> and
+                <code>setTags()</code> methods; these each take either an array
+                describing the tag that may be passed to the
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> constructor, or
+                an instance of that class.
+            </para>
+
+            <para>
+                そのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Docblock $reflectionDocblock
+    )
+    public function setShortDescription($shortDescription)
+    public function getShortDescription()
+    public function setLongDescription($longDescription)
+    public function getLongDescription()
+    public function setTags(Array $tags)
+    public function setTag($tag)
+    public function getTags()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag">
+            <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> is intended for
+                creating arbitrary annotation tags for inclusion in PHP
+                docblocks. Tags are expected to contain a name (the portion
+                immediately following the '@' symbol) and a description
+                (everything following the tag name).
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Docblock_Tag
+    extends Zend_CodeGenerator_Php_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Docblock_Tag $reflectionTag
+    )
+    public function setName($name)
+    public function getName()
+    public function setDescription($description)
+    public function getDescription()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-param">
+            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> is a
+                specialized version of
+                <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>, and represents
+                a method parameter. The tag name is therefor known ("param"),
+                but due to the format of this annotation tag, additional
+                information is required in order to generate it: the parameter
+                name and data type it represents.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Docblock_Tag_Param
+    extends Zend_CodeGenerator_Php_Docblock_Tag
+{
+    public static function fromReflection(
+        Zend_Reflection_Docblock_Tag $reflectionTagParam
+    )
+    public function setDatatype($datatype)
+    public function getDatatype()
+    public function setParamName($paramName)
+    public function getParamName()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
+            <title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
+
+            <para>
+                Like the param docblock tag variant,
+                <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname> is an
+                annotation tag variant for representing a method return value.
+                In this case, the annotation tag name is known ("return"), but
+                requires a return type.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Docblock_Tag_Param
+    extends Zend_CodeGenerator_Php_Docblock_Tag
+{
+    public static function fromReflection(
+        Zend_Reflection_Docblock_Tag $reflectionTagReturn
+    )
+    public function setDatatype($datatype)
+    public function getDatatype()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-file">
+            <title>Zend_CodeGenerator_Php_File</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_File</classname> is used to generate
+                the full contents of a file that will contain PHP code. The file
+                may contain classes or arbitrary PHP code, as well as a
+                file-level docblock if desired.
+            </para>
+
+            <para>
+                When adding classes to the file, you will need to pass either an
+                array of information to pass to the
+                <classname>Zend_CodeGenerator_Php_Class</classname> constructor, or an
+                instance of that class. Similarly, with docblocks, you will need
+                to pass information for the
+                <classname>Zend_CodeGenerator_Php_Docblock</classname> constructor to
+                consume or an instance of the class.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
+{
+    public static function fromReflectedFilePath(
+        $filePath,
+        $usePreviousCodeGeneratorIfItExists = true,
+        $includeIfNotAlreadyIncluded = true)
+    public static function fromReflection(Zend_Reflection_File $reflectionFile)
+    public function setDocblock(Zend_CodeGenerator_Php_Docblock $docblock)
+    public function getDocblock()
+    public function setRequiredFiles($requiredFiles)
+    public function getRequiredFiles()
+    public function setClasses(Array $classes)
+    public function getClass($name = null)
+    public function setClass($class)
+    public function setFilename($filename)
+    public function getFilename()
+    public function getClasses()
+    public function setBody($body)
+    public function getBody()
+    public function isSourceDirty()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-member-container">
+            <title>Zend_CodeGenerator_Php_Member_Container</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Member_Container</classname> is used
+                internally by <classname>Zend_CodeGenerator_Php_Class</classname> to keep
+                track of class members -- properties and methods alike. These
+                are indexed by name, using the concrete instances of the members
+                as values.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
+{
+    public function __construct($type = self::TYPE_PROPERTY)
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-method">
+            <title>Zend_CodeGenerator_Php_Method</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Method</classname> describes a class
+                method, and can generate both the code and the docblock for the
+                method. The visibility and status as static,
+                abstract, or final may be indicated, per its parent class,
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>. Finally,
+                the parameters and return value for the method may be specified.
+            </para>
+
+            <para>
+                Parameters may be set using <code>setParameter()</code> or
+                <code>setParameters()</code>. In each case, a parameter should
+                either be an array of information to pass to the
+                <classname>Zend_CodeGenerator_Php_Parameter</classname> constructor or an
+                instance of that class.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Method
+    extends Zend_CodeGenerator_Php_Member_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Method $reflectionMethod
+    )
+    public function setDocblock(Zend_CodeGenerator_Php_Docblock $docblock)
+    public function getDocblock()
+    public function setFinal($isFinal)
+    public function setParameters(Array $parameters)
+    public function setParameter($parameter)
+    public function getParameters()
+    public function setBody($body)
+    public function getBody()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-parameter">
+            <title>Zend_CodeGenerator_Php_Parameter</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Parameter</classname> may be used to
+                specify method parameters. Each parameter may have a position
+                (if unspecified, the order in which they are registered with the
+                method will be used), a default value, and a data type; a
+                parameter name is required.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Parameter $reflectionParameter
+    )
+    public function setType($type)
+    public function getType()
+    public function setName($name)
+    public function getName()
+    public function setDefaultValue($defaultValue)
+    public function getDefaultValue()
+    public function setPosition($position)
+    public function getPosition()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.codegenerator.reference.concrete.php-property">
+            <title>Zend_CodeGenerator_Php_Property</title>
+
+            <para>
+                <classname>Zend_CodeGenerator_Php_Property</classname> describes a class
+                property, which may be either a constant or a variable. In each
+                case, the property may have an optional default value associated
+                with it. Additionally, the visibility of variable properties may
+                be set, per the parent class,
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>.
+            </para>
+
+            <para>
+                そのクラスのAPIは下記の通りです。:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class Zend_CodeGenerator_Php_Property
+    extends Zend_CodeGenerator_Php_Member_Abstract
+{
+    public static function fromReflection(
+        Zend_Reflection_Property $reflectionProperty
+    )
+    public function setConst($const)
+    public function isConst()
+    public function setDefaultValue($defaultValue)
+    public function getDefaultValue()
+    public function generate()
+}
+]]></programlisting>
+        </sect3>
+    </sect2>
+</sect1>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15343 -->
 <sect1 id="zend.uri.chapter">
   <title>Zend_Uri</title>
 
@@ -38,7 +38,7 @@
     </para>
 
     <example id="zend.uri.creation.example-1">
-      <title><classname>Zend_Uri::factory()</classname> による新しい URI の作成</title>
+      <title>Zend_Uri::factory() による新しい URI の作成</title>
 
       <programlisting role="php"><![CDATA[
 // 何もないところから新しい URI を作成するには、スキームのみを渡します
@@ -73,7 +73,7 @@ $uri = Zend_Uri::factory('http');
     </para>
 
     <example id="zend.uri.manipulation.example-1">
-      <title><classname>Zend_Uri::factory()</classname> による既存の URI の操作</title>
+      <title>Zend_Uri::factory() による既存の URI の操作</title>
 
       <programlisting role="php"><![CDATA[
 // 既存の URI を操作するには、それを渡します
@@ -101,7 +101,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     </para>
 
     <example id="zend.uri.validation.example-1">
-      <title><classname>Zend_Uri::check()</classname> による URI の検証</title>
+      <title>Zend_Uri::check() による URI の検証</title>
 
       <programlisting role="php"><![CDATA[
 // 指定した URI が正しい形式かどうかを調べます
@@ -177,7 +177,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
       </para>
 
       <example id="zend.uri.instance-methods.getscheme.example-1">
-        <title><classname>Zend_Uri_*</classname> オブジェクトからのスキームの取得</title>
+        <title>Zend_Uri_* オブジェクトからのスキームの取得</title>
 
         <programlisting role="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
@@ -197,7 +197,7 @@ $scheme = $uri->getScheme();  // "http"
       <title>URI 全体の取得</title>
 
       <example id="zend.uri.instance-methods.geturi.example-1">
-        <title><classname>Zend_Uri_*</classname> オブジェクトからの URI 全体の取得</title>
+        <title>Zend_Uri_* オブジェクトからの URI 全体の取得</title>
 
         <programlisting role="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
@@ -224,7 +224,7 @@ echo $uri->getUri();  // "http://www.zend.com"
       </para>
 
       <example id="zend.uri.instance-methods.valid.example-1">
-        <title><classname>Zend_Uri_*</classname> オブジェクトの検証</title>
+        <title>Zend_Uri_* オブジェクトの検証</title>
 
         <programlisting role="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');

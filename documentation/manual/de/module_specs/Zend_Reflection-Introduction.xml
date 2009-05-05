@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.introduction">
     <title>Einführung</title>
@@ -42,8 +42,8 @@
     </itemizedlist>
 
     <para>
-        Generell arbeitet <classname>Zend_Reflection</classname> genauso wie die Standard Reflection API,
-        bietet aber einige zusätzliche Methoden für das Empfangen von Teilinformationen die in
-        der Reflection API nicht definiert sind.
+        Generell arbeitet <classname>Zend_Reflection</classname> genauso wie die Standard
+        Reflection API, bietet aber einige zusätzliche Methoden für das Empfangen von
+        Teilinformationen die in der Reflection API nicht definiert sind.
     </para>
 </sect1>

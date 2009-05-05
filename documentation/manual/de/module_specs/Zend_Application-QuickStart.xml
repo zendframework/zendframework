@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15250 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -77,7 +77,7 @@ newproject
 
         <para>
             Im obigen Diagramm ist die Bootstrap unter
-            <code>newproject/application/Bootstrap.php</code> und sieht zuerst wie folgt aus:
+            <filename>newproject/application/Bootstrap.php</filename> und sieht zuerst wie folgt aus:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -118,12 +118,11 @@ phpSettings.display_errors = 1
         </para>
 
         <para>
-            Eine andere Datei von Interesse ist die <code>newproject/public/index.php</code> Datei,
+            Eine andere Datei von Interesse ist die <filename>newproject/public/index.php</filename> Datei,
             welche <classname>Zend_Application</classname> einfügt und diese ausführt.
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -162,28 +161,27 @@ $application->bootstrap()
 
         <itemizedlist>
             <listitem><para>
-                Eine <code>application/Bootstrap.php</code> Datei mit der Klasse
+                Eine <filename>application/Bootstrap.php</filename> Datei mit der Klasse
                 <code>Bootstrap</code> erstellen.
             </para></listitem>
 
             <listitem><para>
-                Eine Konfigurationsdatei <code>application/configs/application.ini</code> mit der
+                Eine Konfigurationsdatei <filename>application/configs/application.ini</filename> mit der
                 Basiskonfiguration für <classname>Zend_Application</classname> erstellen.
             </para></listitem>
 
             <listitem><para>
-                Ändern von <code>public/index.php</code> um <classname>Zend_Application</classname>
+                Ändern von <filename>public/index.php</filename> um <classname>Zend_Application</classname>
                 anzupassen.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Zuerst die eigene <code>Bootstrap</code> Klasse erstellen. Erzeuge eine Datei
-            <code>application/Bootstrap.php</code> mit dem folgenden Inhalt:
+            <filename>application/Bootstrap.php</filename> mit dem folgenden Inhalt:
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -193,7 +191,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             Jetzt die Konfiguration erstellen. Für dieses Tutorial, verwenden wir eine
             Konfiguration im INI Stil; man kann natürlich genauso eine XML oder PHP
             Konfigurationsdatei verwenden. Erstelle eine Datei
-            <code>application/configs/application.ini</code>, und füge den folgenden Inhalt ein:
+            <filename>application/configs/application.ini</filename>, und füge den folgenden Inhalt ein:
         </para>
 
         <programlisting role="dosini"><![CDATA[
@@ -217,13 +215,12 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
         <para>
-            Jetz verändern wir das Gateway Skript <code>public/index.php</code>. Wenn die Datei
+            Jetz verändern wir das Gateway Skript <filename>public/index.php</filename>. Wenn die Datei
             nicht existiert erstellen wir Sie; andernfalls ersetzen wir Sie mit dem folgenden
             Inhalt:
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -258,8 +255,8 @@ $application->bootstrap()
             Es ist zu beachten das die Environment Konstante der Anwendung nach einer Environment
             Variable "APPLICATION_ENV" sucht. Wir empfehlen diese im Web Server Environment zu
             setzen. In Apache kann man diese entweder in der vhost Definition setzen, oder in der
-            <code>.htaccess</code> Datei. Wir empfehlen den folgenden Inhalt in der Datei
-            <code>public/.htacces</code>:
+            <filename>.htaccess</filename> Datei. Wir empfehlen den folgenden Inhalt in der Datei
+            <filename>public/.htacces</filename>:
         </para>
 
         <programlisting role="conf"><![CDATA[
@@ -271,7 +268,6 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-
 ]]></programlisting>
 
         <note>
@@ -342,7 +338,7 @@ phpSettings.display_errors = 1
 
         <para>
             Wenn man es nicht bereits getan hat, muß man das Verzeichnis
-            <code>application/layouts/scripts/</code> und die Datei <code>layout.phtml</code> in
+            <filename>application/layouts/scripts/</filename> und die Datei <filename>layout.phtml</filename> in
             diesem Verzeichnis erstellen. Ein gutes Layout zum Starten ist das folgende (und ist
             mit der View Ressource die als nächstes besprochen wird verbunden):
         </para>
@@ -374,7 +370,6 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()

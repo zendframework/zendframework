@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
     <title>Zend_Application_Bootstrap_Bootstrap</title>
 
     <para>
-        <classname>Zend_Application_Bootstrap_Bootstrap</classname> ist eine konkrete Implementation von
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
-        Dessen primäre Features sind, das es die
-        <link linkend="zend.application.available-resources.frontcontroller">Front Controller Ressource</link>
-        registriert und das die <code>run()</code> Methode zuerst prüft ob ein Standardmodul
-        definiert ist, und dann den Front Controller ausführt.
+        <classname>Zend_Application_Bootstrap_Bootstrap</classname> ist eine konkrete
+        Implementation von <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>.
+        Dessen primäre Features sind, das es die <link
+            linkend="zend.application.available-resources.frontcontroller">Front Controller
+            Ressource</link> registriert und das die <code>run()</code> Methode zuerst prüft ob
+        ein Standardmodul definiert ist, und dann den Front Controller ausführt.
     </para>
 
     <para>

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15248 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
 
     <para>
-        <classname>Zend_Application_Resource_Modules</classname> wird verwendet im eigene Anwendungsmodule zu
-        initialisieren. Wenn das Modul eine <code>Bootstrap.php</code> Datei in seinem Root hat,
-        und es eine Klasse die <code>Module_Bootstrap</code> heißt enthält (wobei "Module" der
-        Modulname ist), dann wird diese Klasse verwendet um das Modul zu bootstrappen.
+        <classname>Zend_Application_Resource_Modules</classname> wird verwendet im eigene
+        Anwendungsmodule zu initialisieren. Wenn das Modul eine <filename>Bootstrap.php</filename>
+        Datei in seinem Root hat, und es eine Klasse die <code>Module_Bootstrap</code> heißt
+        enthält (wobei "Module" der Modulname ist), dann wird diese Klasse verwendet um das Modul
+        zu bootstrappen.
     </para>
 
     <para>
-        Standardmäßig wird eine Instanz vom <classname>Zend_Application_Module_Autoloader</classname> für das
-        Modul erstellt, indem der Modulname und das Verzeichnis dazu verwendet werden sie zu
-        initialisieren.
+        Standardmäßig wird eine Instanz vom
+        <classname>Zend_Application_Module_Autoloader</classname> für das Modul erstellt, indem der
+        Modulname und das Verzeichnis dazu verwendet werden sie zu initialisieren.
     </para>
 
     <note>

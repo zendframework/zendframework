@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15304 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.examples">
     <title>Beispiele</title>
@@ -34,9 +34,9 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         Sollten trotzdem, eigene Initialisierungen notwendig sein, hat man zwei Möglichkeiten.
         Erstens, kann man Methoden schreiben die mit <code>_init</code> anfangen um eigenen Code
         zu spezifizieren der für das Bootstrapping verwendet werden soll. Diese Methoden werden
-        durch bootstrap( aufgerufen, und können genauso aufgerufen werden wie wenn Sie öffentliche
-        Methoden wären: <code>bootstrap&lt;resource&gt;()</code>. Sie sollten ein optionales
-        Array an Optionen akzeptieren.
+        durch <code>bootstrap()</code> aufgerufen, und können genauso aufgerufen werden wie wenn
+        Sie öffentliche Methoden wären: <code>bootstrap&lt;resource&gt;()</code>. Sie sollten ein
+        optionales Array an Optionen akzeptieren.
     </para>
 
     <para>
@@ -92,7 +92,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <itemizedlist>
         <listitem>
             <para>
-                Wärend der Instanzierung des Zend_Application Objekts
+                Wärend der Instanzierung des <classname>Zend_Application</classname> Objekts
             </para>
         </listitem>
         <listitem>
@@ -164,8 +164,8 @@ $application = new Zend_Application(
             ),
         ),
 
-        // Für Kurznamen, definiere die Ressourcen Pfade:
-        'resourcePaths = array(
+        // Für Kurznamen, definiere die Plugin Pfade:
+        'pluginPaths = array(
             'My_Bootstrap_Resource' => 'My/Bootstrap/Resource',
         )
     )

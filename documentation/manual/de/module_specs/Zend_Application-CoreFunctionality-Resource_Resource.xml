@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
@@ -41,7 +41,9 @@
 
                 <row>
                     <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
-                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
+                    <entry>
+                        <classname>Zend_Application_Resource_Resource</classname>
+                    </entry>
                     <entry><itemizedlist>
                             <listitem><para>
                                 <code>$bootstrap</code>: <emphasis>Benötigt</emphasis>.

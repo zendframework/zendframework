@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15212 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
@@ -29,8 +29,8 @@
                 <row>
                     <entry><code>phpSettings</code></entry>
                     <entry><para>
-                        Array von php.ini Einstellungen die zu verwenden sind. Die Schlüssel
-                        sollten die php.ini Schlüssel sein.
+                        Array von <filename>php.ini</filename> Einstellungen die zu verwenden sind.
+                        Die Schlüssel sollten die <filename>php.ini</filename> Schlüssel sein.
                     </para></entry>
                 </row>
 
@@ -46,7 +46,7 @@
                     <entry><code>autoloaderNamespaces</code></entry>
                     <entry><para>
                         Array von zusätzlichen Namespaces die bei der
-                        <code>Zend_Loader_Autoloader</code> Instanz zu registrieren sind.
+                        <classname>Zend_Loader_Autoloader</classname> Instanz zu registrieren sind.
                     </para></entry>
                 </row>
 

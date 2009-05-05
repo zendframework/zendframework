@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15220 -->
+<!-- EN-Revision: 15289 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.system-providers">
     <title>Mitgelieferte System Provider</title>
 
     <para>
-        In addition to the more useful project based providers that come shipped
-        with <code>Zend_Tool_Project</code>, there are also some more basic, but
-        interesting providers that come built into
-        <code>Zend_Tool_Framework</code>.  Some of these exist for the purpose
-        of providing a means via the command line to extract information, such
-        as the version, while others are intended to aid the developer when
-        creating additional providers.
+        Zusätzlich zu den nützlicheren Projekt basierten Providern die mit
+        <code>Zend_Tool_Project</code> ausgeliefert werden, gibt es auch einige grundsätzlichere,
+        aber interessante Provider die in <code>Zend_Tool_Framework</code> eingebaut sind.
+        Einige von Ihnen existieren für den Zweck, über die Kommandozeile Informationen zu
+        extrahieren, wie die Version, wärend andere dazu gedacht sind den Entwickler zu
+        unterstützen, wärend er zusätzliche Provider erstellt.
     </para>
 
     <sect2 id="zend.tool.framework.system-providers.version">
-        <title>The Version Provider</title>
+        <title>Der Version Provider</title>
 
         <para>
-            The Version provider is included so that you may determine which
-            version of the framework that the <code>zf</code> or
-            <code>Zend_Tool</code> is currently set to work with.
+            Der Version Provider ist enthalten, sodas man feststellen kann mit welcher Version vom
+            Framework <code>zf</code> oder <code>Zend_Tool</code> aktuell arbeitet.
         </para>
 
         <para>
-            Through the command line, simply run <code>zf show version</code>.
+            Über die Kommandozeile, einfach <code>zf show version</code> ausführen.
         </para>
 
     </sect2>
 
     <sect2 id="zend.tool.framework.system-providers.manifest">
-        <title>The Manifest Provider</title>
+        <title>Der Manifest Provider</title>
 
         <para>
-            The Manifest provider is included so that you may determine what
-            kind of "manifest" information is available during the
-            <code>Zend_Tool</code> runtime.  Manifest data is information that
-            is attached to specific objects during <code>Zend_Tool</code>'s
-            runtime.  Inside the manifest you will find the console specific
-            namings that you are expected to use when calling certain commands.
-            Data found in the manifest can be used by any provider or client on
-            an as-needed basis.
+            Der Manifest Provider ist enthalten, sodas man feststellen kann welche Art von
+            "manifest" Information wärend der Laufzeit von <code>Zend_Tool</code> vorhanden ist.
+            Manifest Daten sind Informationen die speziellen Objekten wärend der Laufzeit von
+            <code>Zend_Tool</code> angehängt werden. Im Manifest findet man Konsolen-spezifische
+            Benennungen die man verwendet wenn bestimmte Kommandos aufgerufen werden. Die Daten
+            die im Manifest gefunden werden können von jedem Provider oder Client bei Bedarf
+            verwendet werden.
         </para>
 
         <para>
-            Through the command line, simply run <code>zf show manifest</code>.
+            Über die Kommandozeile, einfach <code>zf show manifest</code> ausführen.
         </para>
     </sect2>
 </sect1>

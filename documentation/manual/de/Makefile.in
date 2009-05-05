@@ -77,14 +77,22 @@ pdf-dir:
 		mkdir pdf; \
 	fi
 
+pdf: pdf-dir $(MANUAL_XML)
+	@echo "Rendering of the PDF manual with $(FOP)..."
+	$(XMLLINT) --xinclude --output _temp_manual.xml $(MANUAL_XML)
+	$(XSLTPROC) --xinclude --output ZendFramework.fo $(DOCBOOK_FO_XSL) _temp_manual.xml
+	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFramework.pdf
+
 pdf-print-volume1: pdf-dir $(MANUAL_PRINT1_XML)
 	@echo "Rendering volume 1 of the PDF manual with $(FOP)..."
-	$(XSLTPROC) --xinclude --output ZendFramework.fo $(DOCBOOK_FO_XSL) $(MANUAL_PRINT1_XML)
+	$(XMLLINT) --xinclude --output _temp_manual_1.xml $(MANUAL_PRINT1_XML)
+	$(XSLTPROC) --xinclude --output ZendFramework.fo $(DOCBOOK_FO_XSL) _temp_manual_1.xml
 	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFrameworkVolume1.pdf
 
 pdf-print-volume2: pdf-dir $(MANUAL_PRINT2_XML)
 	@echo "Rendering volume 2 of the PDF manual with $(FOP)..."
-	$(XSLTPROC) --xinclude --output ZendFramework.fo $(DOCBOOK_FO_XSL) $(MANUAL_PRINT2_XML)
+	$(XMLLINT) --xinclude --output _temp_manual_2.xml $(MANUAL_PRINT1_XML)
+	$(XSLTPROC) --xinclude --output ZendFramework.fo $(DOCBOOK_FO_XSL) _temp_manual_2.xml
 	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFrameworkVolume2.pdf
 
 $(MANUAL_PRINT1_XML): $(MANUAL_PRINT1_XML).in

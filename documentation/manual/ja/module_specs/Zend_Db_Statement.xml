@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.db.statement">
 
     <title>Zend_Db_Statement</title>
@@ -157,7 +157,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <listitem>
                     <para>
                         最初の引数は
-                        <emphasis role="strong">取得形式</emphasis>
+                        <emphasis>取得形式</emphasis>
                         を指定します。これは、返り値の構造を決めるものです。
                         ここで指定できる値と対応する返り値については
                         <xref linkend="zend.db.adapter.select.fetch-mode" />
@@ -167,7 +167,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <listitem>
                     <para>
                         二番目の引数で指定するのは、
-                        <emphasis role="strong">カーソルの種類</emphasis>
+                        <emphasis>カーソルの種類</emphasis>
                         です。デフォルトは Zend_Db::FETCH_ORI_NEXT
                         で、<code>fetch()</code> をコールするたびに
                         RDBMS が返す順で次の行を返すというものです。
@@ -176,7 +176,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                 <listitem>
                     <para>
                         三番目の引数で指定するのは
-                        <emphasis role="strong">オフセット</emphasis> です。
+                        <emphasis>オフセット</emphasis> です。
                         カーソルの種類が Zend_Db::FETCH_ORI_ABS の場合、
                         これは結果セットの中の何行目を返すのかを表します。
                         カーソルの種類が Zend_Db::FETCH_ORI_REL の場合、

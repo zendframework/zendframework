@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <sect2 id="zend.validate.set.email_address">
 
     <title>メールアドレス</title>
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        <emphasis role="strong">基本的な使用法</emphasis>
+        <emphasis>基本的な使用法</emphasis>
     </para>
 
     <para>
@@ -37,7 +37,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">複雑なローカルパート</emphasis>
+        <emphasis>複雑なローカルパート</emphasis>
     </para>
 
     <para>
@@ -54,7 +54,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">さまざまな形式のホスト名の検証</emphasis>
+        <emphasis>さまざまな形式のホスト名の検証</emphasis>
     </para>
 
     <para>
@@ -88,7 +88,7 @@ if ($validator->isValid($email)) {
     </para>
 
     <para>
-        <emphasis role="strong">そのホスト名が実際にメールを受け付けるかどうかのチェック</emphasis>
+        <emphasis>そのホスト名が実際にメールを受け付けるかどうかのチェック</emphasis>
     </para>
 
     <para>
@@ -124,7 +124,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
     </para>
 
     <para>
-        <emphasis role="strong">国際化ドメイン名の検証</emphasis>
+        <emphasis>国際化ドメイン名の検証</emphasis>
     </para>
 
     <para>
@@ -147,7 +147,7 @@ $validator->hostnameValidator->setValidateIdn(false);
     </para>
 
     <para>
-        <emphasis role="strong">トップレベルドメインの検証</emphasis>
+        <emphasis>トップレベルドメインの検証</emphasis>
     </para>
 
     <para>

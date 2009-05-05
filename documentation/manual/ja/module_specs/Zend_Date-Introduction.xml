@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.date.introduction">
 
     <title>導入</title>
@@ -61,15 +61,15 @@ date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set('Europe/Berlin');
 ]]></programlisting>
             </example>
-            <emphasis role="strong">Zend_Date のインスタンスを作成すると、
+            <emphasis>Zend_Date のインスタンスを作成すると、
             そのタイムゾーンは自動的に現在のデフォルトタイムゾーンになります!</emphasis>
             したがって、そのタイムゾーン設定は夏時間も事実上考慮したものになるでしょう。
             明示的に夏時間を指定する必要はありません。
         </para>
 
         <para>
-            タイムゾーン <emphasis role="strong">UTC</emphasis> および
-            <emphasis role="strong">GMT</emphasis> には夏時間が存在しないことに注意しましょう。
+            タイムゾーン <emphasis>UTC</emphasis> および
+            <emphasis>GMT</emphasis> には夏時間が存在しないことに注意しましょう。
             つまり、たとえ手動で DST を使うよう設定したとしても、
             UTC や GMT に設定された <classname>Zend_Date</classname>
             のインスタンスはその影響を受けないということです。

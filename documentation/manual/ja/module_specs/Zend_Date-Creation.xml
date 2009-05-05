@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.date.creation">
 
     <title>日付の作成</title>
@@ -16,8 +16,8 @@
 
         <para>
             日付オブジェクトを作成する最も簡単な方法は、実際の日付を作成することです。
-            <emphasis role="strong">new Zend_Date()</emphasis> か、あるいは便利な静的メソッド
-            <emphasis role="strong">Zend_Date::now()</emphasis> を使用すれば、
+            <emphasis>new Zend_Date()</emphasis> か、あるいは便利な静的メソッド
+            <emphasis>Zend_Date::now()</emphasis> を使用すれば、
             作成時の日付情報を持つ <classname>Zend_Date</classname> のインスタンスが作成されます。
             日付、時刻、タイムゾーンのすべてに値が設定されます。
         </para>
@@ -45,7 +45,7 @@ $date = new Zend_Date();
 
             <para>
                 静的メソッドを使用したほうが簡単に日付を作成できるという場合もあるでしょう。
-                そんな場合は <emphasis role="strong"><code>now()</code></emphasis>
+                そんな場合は <emphasis><code>now()</code></emphasis>
                 メソッドが使用できます。これは、<code>new Zend_Date()</code>
                 とした時と同じ内容の <classname>Zend_Date</classname> オブジェクトを返します。
                 しかし、これは常にその時の日付情報を持つオブジェクトとなり、
@@ -149,32 +149,32 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
             <itemizedlist mark='opencircle'>
                 <listitem>
                     <para>
-                        <emphasis role="strong">day</emphasis>: 日
+                        <emphasis>day</emphasis>: 日
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">month</emphasis>: 月
+                        <emphasis>month</emphasis>: 月
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">year</emphasis>: 年
+                        <emphasis>year</emphasis>: 年
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">hour</emphasis>: 時
+                        <emphasis>hour</emphasis>: 時
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">minute</emphasis>: 分
+                        <emphasis>minute</emphasis>: 分
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">second</emphasis>: 秒
+                        <emphasis>second</emphasis>: 秒
                     </para>
                 </listitem>
             </itemizedlist>
@@ -189,7 +189,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 しかし、指定されていない項目があった場合は、
                 その項目の値はゼロとして処理されます。
                 つまり、たとえば hour を指定しなかった場合は
-                <emphasis role="strong">0</emphasis> 時として扱われるということです。
+                <emphasis>0</emphasis> 時として扱われるということです。
             </para>
 
             <programlisting role="php"><![CDATA[

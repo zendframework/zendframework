@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.auth.adapter.ldap">
 
     <title>LDAP 認証</title>
@@ -280,18 +280,18 @@ Array
                 </thead>
                 <tbody>
                   <row>
-                    <entry><emphasis role="strong">host</emphasis></entry>
+                    <entry><emphasis>host</emphasis></entry>
                     <entry>
                         このオプションが表す LDAP サーバのホスト名。必須です。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">port</emphasis></entry>
+                    <entry><emphasis>port</emphasis></entry>
                     <entry>
-                        LDAP サーバが待ち受けるポート。<emphasis role="strong">useSsl</emphasis> が
-                        <code>true</code> の場合、デフォルトの <emphasis role="strong">port</emphasis>
-                        は 636 となります。<emphasis role="strong">useSsl</emphasis> が <code>false</code>
-                        の場合、デフォルトの <emphasis role="strong">port</emphasis> は 389 です。
+                        LDAP サーバが待ち受けるポート。<emphasis>useSsl</emphasis> が
+                        <code>true</code> の場合、デフォルトの <emphasis>port</emphasis>
+                        は 636 となります。<emphasis>useSsl</emphasis> が <code>false</code>
+                        の場合、デフォルトの <emphasis>port</emphasis> は 389 です。
                     </entry>
                   </row>
                   <row>
@@ -314,26 +314,26 @@ Array
                         <code>useSsl</code> と <code>useStartTls</code> は互いに排他的ですが、
                         サーバや LDAP クライアントライブラリが対応している場合は
                         <code>useStartTls</code> を使うことを推奨します。
-                        この値によって、デフォルトの <emphasis role="strong">port</emphasis>
-                        の値が変わります (上の <emphasis role="strong">port</emphasis> の説明を参照ください)。
+                        この値によって、デフォルトの <emphasis>port</emphasis>
+                        の値が変わります (上の <emphasis>port</emphasis> の説明を参照ください)。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">username</emphasis></entry>
+                    <entry><emphasis>username</emphasis></entry>
                     <entry>
                         アカウントの DN を探す際に使用するアカウントの DN。
                         バインド時のユーザ名が DN 形式であることを要求する
                         LDAP サーバで、このオプションを使用します。
-                        <emphasis role="strong">bindRequiresDn</emphasis> が <code>true</code>
+                        <emphasis>bindRequiresDn</emphasis> が <code>true</code>
                         の場合はこのオプションが必須となります。
-                        このアカウントは特権アカウントである必要はありません。<emphasis role="strong">baseDn</emphasis>
+                        このアカウントは特権アカウントである必要はありません。<emphasis>baseDn</emphasis>
                         配下のオブジェクトに対する読み込み権限がありさえすればいいのです
                         (これは <emphasis>Principle of Least Privilege: 最小特権の原則</emphasis>
                         にもかなっています)。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">password</emphasis></entry>
+                    <entry><emphasis>password</emphasis></entry>
                     <entry>
                         アカウントの DN を探す際に使用するアカウントのパスワード。
                         このオプションを省略した場合は、LDAP クライアントがアカウントの DN
@@ -341,7 +341,7 @@ Array
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                    <entry><emphasis>bindRequiresDn</emphasis></entry>
                     <entry>
                         LDAP サーバによっては、バインド時に使用するユーザ名が
                         <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis>
@@ -360,28 +360,28 @@ Array
                         それ以外の場合 (OpenLDAP など) は、このオプションを
                         <code>true</code> にしなければなりません。このオプションは、
                         アカウントを検索する際に使用する
-                        <emphasis role="strong">acountFilterFormat</emphasis>
+                        <emphasis>acountFilterFormat</emphasis>
                         のデフォルト値にも影響を及ぼします。
-                        <emphasis role="strong">accountFilterFormat</emphasis>
+                        <emphasis>accountFilterFormat</emphasis>
                         オプションも参照ください。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">baseDn</emphasis></entry>
+                    <entry><emphasis>baseDn</emphasis></entry>
                     <entry>
                         認証対象となるアカウントが配置されている場所の DN。このオプションは必須です。
-                        正しい <emphasis role="strong">baseDn</emphasis> の値がよくわからない場合は、
+                        正しい <emphasis>baseDn</emphasis> の値がよくわからない場合は、
                         ユーザの DNS ドメインを <emphasis>DC=</emphasis>
                         コンポーネントで表したものと考えれば差し支えないでしょう。
                         たとえば、ユーザ名が <emphasis>alice@foo.net</emphasis> である場合は
-                        <emphasis role="strong">baseDn</emphasis> を <emphasis>DC=foo,DC=net</emphasis>
+                        <emphasis>baseDn</emphasis> を <emphasis>DC=foo,DC=net</emphasis>
                         とすれば動作するでしょう。しかし、より正確な場所
                         (<emphasis>OU=Sales,DC=foo,DC=net</emphasis> など)
                         を指定したほうが効率的です。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                    <entry><emphasis>accountCanonicalForm</emphasis></entry>
                     <entry>
                         2、3 あるいは 4 を指定し、認証に成功した後のアカウント名の正規化方式を指定します。
                         それぞれの値の意味は次のとおりです。2 は伝統的なユーザ名 (例:
@@ -396,7 +396,7 @@ Array
                         などのいずれであろうが同じです。詳細は、<classname>Zend_Ldap</classname>
                         のドキュメントの <emphasis>アカウント名の正規化</emphasis>
                         のセクションを参照ください。複数のサーバのオプションを設定する場合は、すべてのサーバで
-                        <emphasis role="strong">accountCanonicalForm</emphasis>
+                        <emphasis>accountCanonicalForm</emphasis>
                         を同じにしておくことを推奨します (必須ではありません)。
                         そうすれば、結果のユーザ名はいつでも同じ形式に正規化されることになります
                         (もし AD サーバでは <emphasis>EXAMPLE\username</emphasis>、OpenLDAP サーバでは
@@ -405,14 +405,14 @@ Array
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                    <entry><emphasis>accountDomainName</emphasis></entry>
                     <entry>
                         対象となる LDAP サーバの FQDN ドメイン
                         (例 <code>example.com</code>)。
                         このオプションは、名前を正規化する際に使用します。
                         バインド時に、ユーザが指定したユーザ名を必要に応じて変換します。
                         指定したユーザ名がそのサーバに存在するかどうかを調べる際にも使用します
-                        (<emphasis role="strong">accountDomainName</emphasis> が <emphasis>foo.net</emphasis>
+                        (<emphasis>accountDomainName</emphasis> が <emphasis>foo.net</emphasis>
                         でユーザが <emphasis>bob@bar.net</emphasis> を入力した場合、
                         サーバへの問い合わせを行わず、結果は失敗となります)。
                         このオプションは必須ではありませんが、もし指定していなければ
@@ -422,24 +422,24 @@ Array
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                    <entry><emphasis>accountDomainNameShort</emphasis></entry>
                     <entry>
                         対象となる LDAP サーバの '短い' ドメイン
                         (例 <emphasis>FOO</emphasis>)。
-                        <emphasis role="strong">accountDomainName</emphasis> と
-                        <emphasis role="strong">accountDomainNameShort</emphasis>
+                        <emphasis>accountDomainName</emphasis> と
+                        <emphasis>accountDomainNameShort</emphasis>
                         は一対一対応となることに注意しましょう。このオプションは
                         Windows ネットワークの NetBIOS ドメイン名として用いられますが、
                         AD 以外のサーバで用いられることもあります
                         (複数のサーバオプションでバックスラッシュ形式の
-                        <emphasis role="strong">accountCanonicalForm</emphasis> を使用する場合など)。
+                        <emphasis>accountCanonicalForm</emphasis> を使用する場合など)。
                         このオプションは必須ではありませんが、もし指定していなければ
                         バックスラッシュ形式のユーザ名 (例 <emphasis>FOO\alice</emphasis>)
                         はサポートされません。
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">accountFilterFormat</emphasis></entry>
+                    <entry><emphasis>accountFilterFormat</emphasis></entry>
                     <entry>
                         アカウントを検索する際に使用する LDAP 検索フィルタ。
                         この文字列は
@@ -457,7 +457,7 @@ Array
                     </entry>
                   </row>
                   <row>
-                    <entry><emphasis role="strong">optReferrals</emphasis></entry>
+                    <entry><emphasis>optReferrals</emphasis></entry>
                     <entry>
                         <code>true</code> に設定すると、
                         参照先を追跡するよう LDAP クライアントに指示します。
@@ -561,26 +561,26 @@ Array
                     </thead>
                     <tbody>
                       <row>
-                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry><emphasis>host</emphasis></entry>
                         <entry>
                             すべてのサーバでこのオプションは必須です。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">useStartTls</emphasis></entry>
+                        <entry><emphasis>useStartTls</emphasis></entry>
                         <entry>
                             セキュリティの観点からは、これは <code>true</code> にしておくべきです。
                             この場合、サーバに証明書をインストールしておく必要があります。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">useSsl</emphasis></entry>
+                        <entry><emphasis>useSsl</emphasis></entry>
                         <entry>
                             <code>useStartTls</code> の代替として用いられます (上を参照ください)。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry><emphasis>baseDn</emphasis></entry>
                         <entry>
                             すべてのサーバでこのオプションは必須です。デフォルトの AD では
                             すべてのユーザアカウントが <emphasis>Users</emphasis> コンテナ
@@ -591,7 +591,7 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry><emphasis>accountCanonicalForm</emphasis></entry>
                         <entry>
                             ほとんどの場合は 3 を指定してバックスラッシュ形式の名前 (例
                             <emphasis>FOO\alice</emphasis>) を使用することになるでしょう。
@@ -604,18 +604,18 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry><emphasis>accountDomainName</emphasis></entry>
                         <entry>
-                            これは AD には必須です。<emphasis role="strong">accountCanonicalForm</emphasis>
+                            これは AD には必須です。<emphasis>accountCanonicalForm</emphasis>
                             が 2 の場合は不要ですが、何度も言うようにこれはおすすめしません。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry><emphasis>accountDomainNameShort</emphasis></entry>
                         <entry>
                             ユーザが属するドメインの NetBIOS 名で、AD サーバの認証対象となります。
                             これは、バックスラッシュ形式の
-                            <emphasis role="strong">accountCanonicalForm</emphasis>
+                            <emphasis>accountCanonicalForm</emphasis>
                             を使用する場合には必須です。
                         </entry>
                       </row>
@@ -658,13 +658,13 @@ Array
                     </thead>
                     <tbody>
                       <row>
-                        <entry><emphasis role="strong">host</emphasis></entry>
+                        <entry><emphasis>host</emphasis></entry>
                         <entry>
                             すべてのサーバでこのオプションは必須です。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">useStartTls</emphasis></entry>
+                        <entry><emphasis>useStartTls</emphasis></entry>
                         <entry>
                             セキュリティの観点からは、これは <code>true</code> にしておくべきです。
                             この場合、サーバに証明書をインストールしておく必要があります。
@@ -676,7 +676,7 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">username</emphasis></entry>
+                        <entry><emphasis>username</emphasis></entry>
                         <entry>
                             必須、かつ DN である必要があります。OpenLDAP のバインド時には、
                             ユーザ名が DN 形式であることが必須だからです。
@@ -684,7 +684,7 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">password</emphasis></entry>
+                        <entry><emphasis>password</emphasis></entry>
                         <entry>
                             上のユーザ名に対応するパスワード。しかし、
                             匿名バインドによるユーザ検索を
@@ -692,21 +692,21 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">bindRequiresDn</emphasis></entry>
+                        <entry><emphasis>bindRequiresDn</emphasis></entry>
                         <entry>
                             必須、かつ <code>true</code> である必要があります。
                             OpenLDAP のバインド時には、ユーザ名が DN 形式であることが必須だからです。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">baseDn</emphasis></entry>
+                        <entry><emphasis>baseDn</emphasis></entry>
                         <entry>
                             すべてのサーバでこのオプションは必須です。
                             認証対象となるアカウントが位置する DN を指すようにします。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountCanonicalForm</emphasis></entry>
+                        <entry><emphasis>accountCanonicalForm</emphasis></entry>
                         <entry>
                             オプションで、デフォルト値は 4 (<emphasis>alice@foo.net</emphasis>
                             のようなプリンシパル形式) です。これは、ユーザがバックスラッシュ形式の名前
@@ -716,24 +716,24 @@ Array
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountDomainName</emphasis></entry>
+                        <entry><emphasis>accountDomainName</emphasis></entry>
                         <entry>
-                            必須です。<emphasis role="strong">accountCanonicalForm</emphasis>
+                            必須です。<emphasis>accountCanonicalForm</emphasis>
                             が 2 の場合は不要ですが、これはおすすめしません。
                         </entry>
                       </row>
                       <row>
-                        <entry><emphasis role="strong">accountDomainNameShort</emphasis></entry>
+                        <entry><emphasis>accountDomainNameShort</emphasis></entry>
                         <entry>
                             AD とともに使用するのでなければこれは必須ではありません。
                             それ以外の場合、もし
-                            <emphasis role="strong">accountCanonicalForm</emphasis> 3 を使用するのなら
+                            <emphasis>accountCanonicalForm</emphasis> 3 を使用するのなら
                             このオプションは必須で、
-                            <emphasis role="strong">accountDomainName</emphasis>
+                            <emphasis>accountDomainName</emphasis>
                             に対応する短縮名を指定しなければなりません
-                            (たとえば <emphasis role="strong">accountDomainName</emphasis> が
-                            <emphasis role="strong">foo.net</emphasis> なら
-                            <emphasis role="strong">accountDomainNameShort</emphasis>
+                            (たとえば <emphasis>accountDomainName</emphasis> が
+                            <emphasis>foo.net</emphasis> なら
+                            <emphasis>accountDomainNameShort</emphasis>
                             の適切な値は <emphasis>FOO</emphasis> となるでしょう)。
                         </entry>
                       </row>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>データベースのテーブルでの認証</title>
     <sect2 id="zend.auth.adapter.dbtable.introduction">
@@ -196,8 +196,8 @@ if ($result->isValid()) {
         <title>高度な使用例</title>
         <para>
             <classname>Zend_Auth</classname> (そして <classname>Zend_Auth_Adapter_DbTable</classname>) の主な目的は
-            <emphasis role="strong">認証 (authentication)</emphasis> であって
-            <emphasis role="strong">認可 (authorization)</emphasis>,
+            <emphasis>認証 (authentication)</emphasis> であって
+            <emphasis>認可 (authorization)</emphasis>,
             ではありませんが、認可にもかかわる問題も多少あります。
             問題によっては、認証アダプタの中で認可にかかわる問題を解決することもあるでしょう。
         </para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.auth.introduction">
 
     <title>導入</title>
@@ -11,8 +11,8 @@
     </para>
 
     <para>
-        <classname>Zend_Auth</classname> が扱うのはあくまでも <emphasis role="strong">認証 (authentication)</emphasis>
-        であり、<emphasis role="strong">承認 (authorization)</emphasis> ではありません。
+        <classname>Zend_Auth</classname> が扱うのはあくまでも <emphasis>認証 (authentication)</emphasis>
+        であり、<emphasis>承認 (authorization)</emphasis> ではありません。
         認証 (authentication) とはつまり、あるエンティティが何者であるのかを示す
         (識別する) ことです。これを、なんらかの条件にもとづいて行います。
         承認 (authorization) とは、あるエンティティが他のエンティティに対して

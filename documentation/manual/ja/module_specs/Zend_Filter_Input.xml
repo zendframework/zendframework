@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
 
@@ -30,7 +30,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">フィルタ</emphasis>
+                <emphasis>フィルタ</emphasis>
                 は入力値を変換します。たとえば、値の中の特定の文字を削除したり
                 変更したりします。フィルタの目的は、入力値を "正規化"
                 して期待通りの書式にすることです。
@@ -41,7 +41,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">バリデータ</emphasis>
+                <emphasis>バリデータ</emphasis>
                 は入力値が特定の条件を満たしているかどうかを調べ、
                 その結果を返します。条件を満たしていなくても、
                 値自体には手を加えません。たとえば、
@@ -52,7 +52,7 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">エスケーパ</emphasis>
+                <emphasis>エスケーパ</emphasis>
                 は、特定の文字が特殊な働きをしないようにするために
                 入力値を変換するものです。
                 状況によっては、特定の文字が特殊な意味を持つことがあります。
@@ -310,13 +310,13 @@ if ($input->isValid('month')) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">無効な (invalid)</emphasis>
+                        <emphasis>無効な (invalid)</emphasis>
                         フィールドとは、検証を通過しなかったフィールドのことです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">存在しない (missing)</emphasis>
+                        <emphasis>存在しない (missing)</emphasis>
                         フィールドとは、入力データ中には存在しないが
                         メタコマンドでは <code>'presence'=>'required'</code>
                         のように定義されているフィールドのことです
@@ -327,7 +327,7 @@ if ($input->isValid('month')) {
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">未知の (unknown)</emphasis>
+                        <emphasis>未知の (unknown)</emphasis>
                         フィールドとは、バリデータの配列のルールとしては宣言されていないが
                         入力データには存在するフィールドのことです。
                     </para>

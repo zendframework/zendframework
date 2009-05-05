@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.timesync.working">
 
     <title>Zend_TimeSync の動作</title>
 
     <para>
         <classname>Zend_TimeSync</classname> は、指定した任意の
-        <emphasis role="strong">NTP</emphasis> タイムサーバあるいは
-        <emphasis role="strong">SNTP</emphasis> タイムサーバから実際の時刻を返します。
+        <emphasis>NTP</emphasis> タイムサーバあるいは
+        <emphasis>SNTP</emphasis> タイムサーバから実際の時刻を返します。
         自動的に複数のサーバを処理することができ、シンプルなインターフェイスを提供します。
     </para>
 
     <note>
         <para>
             この章のすべてのサンプルでは、一般に公開されているタイムサーバのひとつを使用します。
-            私たちは <emphasis role="strong">0.europe.pool.ntp.org</emphasis>
+            私たちは <emphasis>0.europe.pool.ntp.org</emphasis>
             を使用しますが、あなたの環境にあわせて最も近いタイムサーバを使うことをお勧めします。
             詳細は <ulink url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink>
             を参照ください。
@@ -120,14 +120,14 @@ print $server->getDate()->getIso();
         <para>
             タイムサーバにはさまざまな形式があります。
             公開されているタイムサーバのほとんどは、
-            <emphasis role="strong">NTP</emphasis> プロトコルを使用するものです。
+            <emphasis>NTP</emphasis> プロトコルを使用するものです。
             しかし、それ以外のプロトコルを使用しているサーバもあります。
         </para>
 
         <para>
             タイムサーバのアドレスに、適切なプロトコルを指定することができます。
             <classname>Zend_TimeSync</classname> がサポートしているプロトコルは 2 種類で、
-            デフォルトのプロトコルは <emphasis role="strong">NTP</emphasis> です。
+            デフォルトのプロトコルは <emphasis>NTP</emphasis> です。
             NTP しか使用しないのなら、先ほどまでの例のようにプロトコル指定を省略しても構いません。
         </para>
 
@@ -152,10 +152,10 @@ print $server->getDate()->getIso();
         <title>タイムサーバのポートの指定</title>
 
         <para>
-            ウェブにおけるさまざまな他のプロトコルと同様、<emphasis role="strong">NTP</emphasis> や
-            <emphasis role="strong">SNTP</emphasis> にも標準のポート番号があります。
-            NTP が使用するポートは <emphasis role="strong">123</emphasis> で、
-            SNTP は <emphasis role="strong">37</emphasis> を使用します。
+            ウェブにおけるさまざまな他のプロトコルと同様、<emphasis>NTP</emphasis> や
+            <emphasis>SNTP</emphasis> にも標準のポート番号があります。
+            NTP が使用するポートは <emphasis>123</emphasis> で、
+            SNTP は <emphasis>37</emphasis> を使用します。
         </para>
 
         <para>
@@ -186,9 +186,9 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            <emphasis role="strong">timeout</emphasis> オプションは、
+            <emphasis>timeout</emphasis> オプションは、
             応答がない状態が何秒続けば接続に失敗したとみなすのかを表します。
-            デフォルトの値は <emphasis role="strong">1</emphasis> で、
+            デフォルトの値は <emphasis>1</emphasis> で、
             タイムサーバからの応答が 1 秒以内に返ってこなかった場合に
             <classname>Zend_TimeSync</classname> は別のタイムサーバに処理を移します。
         </para>

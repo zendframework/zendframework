@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.db.table.relationships">
 
     <title>導入</title>
@@ -147,7 +147,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">columns</emphasis> =>
+                    <emphasis>columns</emphasis> =>
                     文字列あるいは文字列の配列で、従属テーブル内での外部キー列の名前を指定します。
                 </para>
 
@@ -159,7 +159,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refTableClass</emphasis> =>
+                    <emphasis>refTableClass</emphasis> =>
                     親テーブルのクラス名を指定します。
                     SQL テーブルの物理的な名前ではなく、クラス名を使用します。
                 </para>
@@ -178,7 +178,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refColumns</emphasis> =>
+                    <emphasis>refColumns</emphasis> =>
                     文字列あるいは文字列の配列で、親テーブルの主キーのカラム名を指定します。
                 </para>
 
@@ -199,7 +199,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onDelete</emphasis> =>
+                    <emphasis>onDelete</emphasis> =>
                     親テーブルの行が削除されたときに実行する動作を指定します。詳細は
                     <xref linkend="zend.db.table.relationships.cascading" />
                     を参照ください。
@@ -208,7 +208,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onUpdate</emphasis> =>
+                    <emphasis>onUpdate</emphasis> =>
                     親テーブルで主キーカラムの値が更新されたときに実行する動作を指定します。詳細は
                     <xref linkend="zend.db.table.relationships.cascading" />
                     を参照ください。
@@ -764,7 +764,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 <classname>Zend_Db_Table</classname> の連鎖操作を宣言するのは、
                 RDBMS が宣言参照整合性 (DRI)
                 をサポートしていない場合
-                <emphasis role="strong">のみ</emphasis> を想定しています。
+                <emphasis>のみ</emphasis> を想定しています。
             </para>
 
             <para>
@@ -887,7 +887,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <title>連鎖操作に関する注意点</title>
 
             <para>
-                <emphasis role="strong"><classname>Zend_Db_Table</classname> が実行する連鎖操作はアトミックではありません。</emphasis>
+                <emphasis><classname>Zend_Db_Table</classname> が実行する連鎖操作はアトミックではありません。</emphasis>
             </para>
 
             <para>
@@ -927,7 +927,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong"><classname>Zend_Db_Table</classname> の連鎖処理は
+                <emphasis><classname>Zend_Db_Table</classname> の連鎖処理は
                 <classname>Zend_Db_Table</classname> からのみ実行できます。</emphasis>
             </para>
 
@@ -944,7 +944,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">連鎖 <code>INSERT</code> はありません。</emphasis>
+                <emphasis>連鎖 <code>INSERT</code> はありません。</emphasis>
             </para>
 
             <para>

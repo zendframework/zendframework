@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.session.advanced_usage">
 
     <title>高度な使用法</title>
@@ -124,7 +124,7 @@ php_value session.auto_start 0
                     しかし、デフォルトであるクッキーベースのセッション (強く推奨します)
                     を使用している場合には、PHP がクライアントに何らかの出力
                     (<ulink url="http://www.php.net/headers_sent">HTTP ヘッダ</ulink> など)
-                    をする <emphasis role="strong">前に</emphasis>、確実に
+                    をする <emphasis>前に</emphasis>、確実に
                     最初の <code>new Zend_Session_Namespace()</code> をコールしなければなりません。
                     詳細は <xref linkend="zend.session.global_session_management.headers_sent" />
                     を参照ください。
@@ -465,7 +465,7 @@ echo $myNamespace->someArray['foo']; // "bar" と表示されます
             Zend Framework 自体のテストには PHPUnit を使用しています。
             多くの開発者は、このテストスイートを拡張して自分のアプリケーションのコードをテストしています。
             ユニットテスト中で、セッションの終了後に書き込み関連のメソッドを使用すると
-            "<emphasis role="strong">Zend_Session is currently marked as read-only</emphasis>"
+            "<emphasis>Zend_Session is currently marked as read-only</emphasis>"
             という例外がスローされます。しかし、Zend_Session を使用するユニットテストには要注意です。
             セッションを閉じたり (<classname>Zend_Session::writeClose()</classname>)
             破棄したり (<classname>Zend_Session::destroy()</classname>) したら、

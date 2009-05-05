@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.search.lucene.advanced">
     <title>応用</title>
 
@@ -39,7 +39,7 @@
         </para>
 
         <para>
-            インデックスの変更は、インデックスが更新されたときに <emphasis role="strong">のみ</emphasis>
+            インデックスの変更は、インデックスが更新されたときに <emphasis>のみ</emphasis>
             行います。インデックスの更新が行われるのは、
             新しいドキュメントがインデックスに追加された場合や
             <code>$index->optimize()</code> による最適化を手動で開始した場合です。
@@ -48,7 +48,7 @@
         <para>
             <classname>Zend_Search_Lucene</classname> が、インデックスを上位バージョンのフォーマットに変換することがあります。
             <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname> フォーマットの場合はこれが
-            <emphasis role="strong">常に</emphasis> 起こり、
+            <emphasis>常に</emphasis> 起こり、
             自動的に 2.1 フォーマットに変換されます。
         </para>
 

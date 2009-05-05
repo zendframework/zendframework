@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
@@ -14,7 +14,7 @@
     </para>
 
     <para>
-        <emphasis role="strong">基本的な使用法</emphasis>
+        <emphasis>基本的な使用法</emphasis>
     </para>
 
     <para>
@@ -39,7 +39,7 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        <emphasis role="strong">さまざまな形式のホスト名の検証</emphasis>
+        <emphasis>さまざまな形式のホスト名の検証</emphasis>
     </para>
 
     <para>
@@ -78,7 +78,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
     </para>
 
     <para>
-        <emphasis role="strong">国際化ドメイン名の検証</emphasis>
+        <emphasis>国際化ドメイン名の検証</emphasis>
     </para>
 
     <para>
@@ -151,7 +151,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false
     </para>
 
     <para>
-        <emphasis role="strong">トップレベルドメインの検証</emphasis>
+        <emphasis>トップレベルドメインの検証</emphasis>
     </para>
 
     <para>

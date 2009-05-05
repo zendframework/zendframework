@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -130,7 +130,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>save_path</code> -
                         正確な値はシステムに依存し、開発者がそのディレクトリまでの
-                        <emphasis role="strong">絶対パス</emphasis> を指定する必要があります。
+                        <emphasis>絶対パス</emphasis> を指定する必要があります。
                         このディレクトリは、PHP のプロセスから読み書き可能でなければなりません。
                         書き込み可能なパスを指定しなかった場合は、
                         <classname>Zend_Session</classname> の開始時 (<code>start()</code> がコールされた場合)
@@ -176,7 +176,7 @@ Zend_Session::setOptions($config->toArray());
                     <para>
                         string <code>name</code> -
                         正しい値はシステムに依存します。
-                        アプリケーション間で <emphasis role="strong">一意</emphasis>
+                        アプリケーション間で <emphasis>一意</emphasis>
                         な値を開発者側で指定する必要があります。
                     </para>
                     <note>

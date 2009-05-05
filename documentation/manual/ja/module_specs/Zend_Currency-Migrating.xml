@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.currency.migration">
 
     <title>以前のバージョンからの移行</title>
@@ -38,19 +38,19 @@ $currency = new Zend_Currency($currency, $locale);
             <itemizedlist mark='opencircle'>
                 <listitem>
                     <para>
-                        <emphasis role="strong">position</emphasis>:
+                        <emphasis>position</emphasis>:
                         以前の 'rules' パラメータを置き換えるものです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">script</emphasis>:
+                        <emphasis>script</emphasis>:
                         以前の 'script' パラメータを置き換えるものです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">format</emphasis>:
+                        <emphasis>format</emphasis>:
                         以前の 'locale' パラメータを置き換えるものです。
                         これは新しい通貨を設定するのではなく、
                         数値フォーマットのみを設定します。
@@ -58,32 +58,32 @@ $currency = new Zend_Currency($currency, $locale);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">display</emphasis>:
+                        <emphasis>display</emphasis>:
                         以前の 'rules' パラメータを置き換えるものです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">precision</emphasis>:
+                        <emphasis>precision</emphasis>:
                         新しいパラメータです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">name</emphasis>:
+                        <emphasis>name</emphasis>:
                         以前の 'rules' パラメータを置き換えるものです。
                         完全な通貨名を指定します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">currency</emphasis>:
+                        <emphasis>currency</emphasis>:
                         新しいパラメータです。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">symbol</emphasis>:
+                        <emphasis>symbol</emphasis>:
                         新しいパラメータです。
                     </para>
                 </listitem>

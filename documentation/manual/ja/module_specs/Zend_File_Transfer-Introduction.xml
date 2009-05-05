@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
@@ -99,7 +99,7 @@ if (!$adapter->receive()) {
         <para>
             この例は、<classname>Zend_File_Transfer</classname> の基本的な API を説明するためだけのものです。
             これをそのまま実際の環境で使用しては
-            <emphasis role="strong">いけません</emphasis>。
+            <emphasis>いけません</emphasis>。
             深刻なセキュリティ問題を引き起こしてしまいます。
             常にバリデータを使用してセキュリティを向上させるようにしなければなりません。
         </para>
@@ -135,7 +135,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">ignoreNoFile</emphasis>: このオプションを true にすると、
+                    <emphasis>ignoreNoFile</emphasis>: このオプションを true にすると、
                     ファイルがフォームからアップロードされなかったときにバリデータは何も行いません。
                     このオプションのデフォルトは false で、
                     この場合はファイルがアップロードされなければエラーとなります。
@@ -157,7 +157,7 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">isValid($files = null)</emphasis>: このメソッドは、
+                    <emphasis>isValid($files = null)</emphasis>: このメソッドは、
                     ファイルにアタッチされたバリデータを用いてそのファイルが妥当なものかどうかを検証します。
                     ファイル名を省略した場合はすべてのファイルをチェックします。
                     <code>isValid()</code> を <code>receive()</code> の前にコールすることもできます。
@@ -168,7 +168,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isUploaded($files = null)</emphasis>: このメソッドは、
+                    <emphasis>isUploaded($files = null)</emphasis>: このメソッドは、
                     指定したファイルがユーザによってアップロードされたものなのかどうかを調べます。
                     これは、複数のファイルを任意でアップロードできるようにする場合などに便利です。
                     ファイル名を省略した場合はすべてのファイルをチェックします。
@@ -177,7 +177,7 @@ if (!$adapter->receive()) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">isReceived($files = null)</emphasis>: このメソッドは、
+                    <emphasis>isReceived($files = null)</emphasis>: このメソッドは、
                     指定したファイルがすでに受信済みであるかどうかを調べます。
                     ファイル名を省略した場合はすべてのファイルをチェックします。
                 </para>
@@ -225,35 +225,35 @@ $upload->receive();
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileName($file = null, $path = true)</emphasis>:
+                    <emphasis>getFileName($file = null, $path = true)</emphasis>:
                     このメソッドは、転送されたファイルの実際のファイル名を返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileInfo($file = null)</emphasis>:
+                    <emphasis>getFileInfo($file = null)</emphasis>:
                     このメソッドは、転送されたファイルのすべての内部情報を返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getFileSize($file = null)</emphasis>:
+                    <emphasis>getFileSize($file = null)</emphasis>:
                     このメソッドは、指定したaifるの実際のファイルサイズを返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getHash($hash = 'crc32', $files = null)</emphasis>:
+                    <emphasis>getHash($hash = 'crc32', $files = null)</emphasis>:
                     このメソッドは、転送されたファイルの内容のハッシュを返します。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">getMimeType($files = null)</emphasis>:
+                    <emphasis>getMimeType($files = null)</emphasis>:
                     このメソッドは、転送されたファイルの mimetype を返します。
                 </para>
             </listitem>
@@ -472,7 +472,7 @@ while (!$upload['done']) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">id</emphasis>:
+                        <emphasis>id</emphasis>:
                         このアップロードの ID。その拡張モジュール内でのアップロードを一意に識別します。
                         自動的に設定され、この値は決して変更することができません。
                     </para>
@@ -480,28 +480,28 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">total</emphasis>:
+                        <emphasis>total</emphasis>:
                         アップロードされたファイル全体のサイズをバイト単位で表した整数値。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">current</emphasis>:
+                        <emphasis>current</emphasis>:
                         現在までにアップロードされたファイルサイズをバイト単位で表した整数値。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">rate</emphasis>:
+                        <emphasis>rate</emphasis>:
                         アップロードの平均速度を「バイト/秒」単位で表した整数値。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">done</emphasis>:
+                        <emphasis>done</emphasis>:
                         アップロードがいつ終了したのかを返します。
                         終了していない場合は false を返します。
                     </para>
@@ -509,8 +509,8 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">message</emphasis>:
-                        実際のメッセージ。進捗を <emphasis role="strong">10kB / 200kB</emphasis>
+                        <emphasis>message</emphasis>:
+                        実際のメッセージ。進捗を <emphasis>10kB / 200kB</emphasis>
                         形式で表したテキストか、何か問題が起こった場合には有用なメッセージとなります。
                         「問題」とは、何もアップロード中でない場合や
                         進捗状況の取得に失敗した場合、あるいはアップロードがキャンセルされた場合を意味します。
@@ -519,7 +519,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">progress</emphasis>:
+                        <emphasis>progress</emphasis>:
                         このオプションキーには Zend_ProgressBar_Adapter あるいは
                         Zend_ProgressBar のインスタンスが含まれ、
                         プログレスバー内から実際のアップロード状況を取得できるようになります。
@@ -528,7 +528,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">session</emphasis>:
+                        <emphasis>session</emphasis>:
                         このオプションキーには Zend_ProgressBar
                         内で使用するセッション名前空間の名前が含まれます。
                         このキーが与えられなかったときのデフォルトは

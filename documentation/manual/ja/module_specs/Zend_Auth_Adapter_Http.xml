@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -20,7 +20,7 @@
         </para>
 
         <para>
-            <emphasis role="strong">主な機能</emphasis>
+            <emphasis>主な機能</emphasis>
             <itemizedlist>
                 <listitem>
                     <para>

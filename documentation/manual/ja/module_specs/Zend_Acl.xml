@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15101 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.acl.introduction">
     <title>導入</title>
 
@@ -16,19 +16,19 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">リソース (Resource)</emphasis>
+                    <emphasis>リソース (Resource)</emphasis>
                     とは、アクセス制御の対象となるオブジェクトのことです。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">ロール (Role)</emphasis>
+                    <emphasis>ロール (Role)</emphasis>
                     とは、リソースに対してのアクセスを要求するオブジェクトのことです。
                 </para>
             </listitem>
         </itemizedlist>
 
-        簡単に言うと、<emphasis role="strong">ロールがリソースに対してのアクセスを要求する</emphasis>
+        簡単に言うと、<emphasis>ロールがリソースに対してのアクセスを要求する</emphasis>
         ということです。たとえば、ある人が自動車を利用したいと考えているとしましょう。
         この場合、自動車を誰が利用できるのかが管理されているとすると
         「ある人」がロールで「自動車」がリソースとなります。

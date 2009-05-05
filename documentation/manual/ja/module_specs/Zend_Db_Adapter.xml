@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -270,7 +270,7 @@ $db = Zend_Db::factory($config->database);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">host</emphasis>:
+                        <emphasis>host</emphasis>:
                         データベースサーバのホスト名あるいは IP アドレス。
                         データベースが PHP アプリケーションと同じホスト上で動いている場合は、
                         'localhost' あるいは '127.0.0.1' を指定します。
@@ -278,25 +278,25 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">username</emphasis>:
+                        <emphasis>username</emphasis>:
                         RDBMS サーバへの接続時に使用する認証用アカウントの ID。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">password</emphasis>:
+                        <emphasis>password</emphasis>:
                         RDBMS サーバへの接続時に使用する認証用パスワード。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">dbname</emphasis>:
+                        <emphasis>dbname</emphasis>:
                         RDBMS サーバ上のデータベースインスタンス名。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">port</emphasis>:
+                        <emphasis>port</emphasis>:
                         RDBMS サーバによっては、管理者が指定した
                         ポート番号によるネットワーク接続を許可しているものもあります。
                         このパラメータを使用すると、PHP
@@ -306,14 +306,14 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">options</emphasis>:
+                        <emphasis>options</emphasis>:
                         このパラメータは、すべての <classname>Zend_Db_Adapter</classname>
                         クラスで共通のオプションを連想配列で指定します。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">driver_options</emphasis>:
+                        <emphasis>driver_options</emphasis>:
                         このパラメータは、各データベース拡張モジュールに固有の
                         追加オプションを連想配列で指定します。
                         典型的な使用例としては、PDO ドライバの属性などがあります。
@@ -321,7 +321,7 @@ $db = Zend_Db::factory($config->database);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">adapterNamespace</emphasis>:
+                        <emphasis>adapterNamespace</emphasis>:
                         アダプタクラスの名前の先頭が 'Zend_Db_Adapter'
                         以外である場合に、それを指定します。これは、
                         Zend 以外が作成したアダプタクラスを
@@ -513,26 +513,26 @@ try {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">accounts</emphasis> テーブルには、
+                    <emphasis>accounts</emphasis> テーブルには、
                     バグ管理データベースを使用するユーザについての情報を格納します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">products</emphasis> テーブルには、
+                    <emphasis>products</emphasis> テーブルには、
                     バグを記録する対象となる製品についての情報を格納します。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs</emphasis> テーブルには、
+                    <emphasis>bugs</emphasis> テーブルには、
                     バグについての情報を格納します。
                     バグの状態や報告者、修正担当者、検証担当者などの情報が含まれます。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">bugs_products</emphasis> テーブルには、
+                    <emphasis>bugs_products</emphasis> テーブルには、
                     バグと製品の関連付け情報を格納します。
                     これは、いわゆる多対多のリレーションシップを実装するものです。
                     ひとつのバグが複数の製品に関連するものであることもあれば、
@@ -654,7 +654,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>:
+                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         データを、連想配列の配列として返します。
                         配列のキーは、カラム名を文字列で表したものとなります。
                         これは、<classname>Zend_Db_Adapter</classname> クラスのデフォルトのフェッチモードです。
@@ -679,14 +679,14 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>:
+                        <emphasis>Zend_Db::FETCH_NUM</emphasis>:
                         データを、配列の配列で返します。
                         配列は数値添字形式となり、クエリで指定した順番での位置がキーとなります。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>:
+                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>:
                         データを、配列の配列で返します。
                         配列のキーは、FETCH_ASSOC モードで用いる文字列と
                         FETCH_NUM モードで用いる数値の両方を含んだものとなります。
@@ -696,7 +696,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>:
+                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>:
                         データを、値の配列で返します。
                         配列の各要素の値は、結果セットのあるひとつのカラムの値となります。
                         デフォルトでは、これは最初の (0 番目の) カラムとなります。
@@ -704,7 +704,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>:
+                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         データを、オブジェクトの配列で返します。
                         デフォルトのクラスは、PHP の組み込みクラス stdClass
                         となります。結果セットのカラムは、このクラスのプロパティとしてアクセスできます。

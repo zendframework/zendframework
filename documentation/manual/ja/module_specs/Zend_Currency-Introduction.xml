@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.currency.introduction">
 
     <title>Zend_Currency について</title>
@@ -24,7 +24,7 @@
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">完全なロケールのサポート</emphasis>
+                    <emphasis>完全なロケールのサポート</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> はあらゆるロケールに対応しており、
@@ -34,7 +34,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">再利用可能な通貨定義</emphasis>
+                    <emphasis>再利用可能な通貨定義</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> は通貨の値を含んでいません。そのため、この機能は
@@ -44,7 +44,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">流れるようなインターフェイス</emphasis>
+                    <emphasis>流れるようなインターフェイス</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> は、可能な限り「流れるような」インターフェイスを採用しています。
@@ -52,7 +52,7 @@
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">追加情報の取得用メソッド</emphasis>
+                    <emphasis>追加情報の取得用メソッド</emphasis>
                 </para>
                 <para>
                     <classname>Zend_Currency</classname> にはさまざまなメソッドが含まれており、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.locale.introduction">
 
     <title>導入</title>
@@ -413,7 +413,7 @@ $date = new Zend_Date();
 
         <para>
             ロケールが検出できなかった場合は、自動的にロケール
-            <emphasis role="strong">de</emphasis> を使用します。
+            <emphasis>de</emphasis> を使用します。
             見つかった場合は、そのロケールを使用します。
         </para>
 

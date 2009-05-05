@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -372,7 +372,7 @@ $translate = new Zend_Translate('gettext',
             <para>
                 キャッシュの設定は、アダプタや
                 <classname>Zend_Translate</classname> のインスタンスを使用したり初期化したりする
-                <emphasis role="strong">前</emphasis> に行わなければなりません。
+                <emphasis>前</emphasis> に行わなければなりません。
                 さもないと、新たなソースを
                 <code>addTranslation()</code> メソッドで追加するまで
                 翻訳ソースのキャッシュは行われません。

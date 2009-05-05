@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1233,28 +1233,28 @@ echo "テーブル名は " . $info['name'] . " です\n";
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis> =>
+                    <emphasis>name</emphasis> =>
                     テーブルの名前。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">cols</emphasis> =>
+                    <emphasis>cols</emphasis> =>
                     テーブルのカラム名を表す配列。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">primary</emphasis> =>
+                    <emphasis>primary</emphasis> =>
                     主キーのカラム名を表す配列。
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">metadata</emphasis> =>
+                    <emphasis>metadata</emphasis> =>
                     カラム名とカラムに関する情報を関連付けた連想配列。
                     これは <code>describeTable()</code> メソッドが返す情報です。
                 </para>
@@ -1262,7 +1262,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowClass</emphasis> =>
+                    <emphasis>rowClass</emphasis> =>
                     このテーブルインスタンスのメソッドが返す行オブジェクトで使用する
                     具象クラス名。デフォルトは <classname>Zend_Db_Table_Row</classname> です。
                 </para>
@@ -1270,7 +1270,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rowsetClass</emphasis> =>
+                    <emphasis>rowsetClass</emphasis> =>
                     このテーブルインスタンスのメソッドが返す行セットオブジェクトで使用する
                     具象クラス名。デフォルトは <classname>Zend_Db_Table_Rowset</classname> です。
                 </para>
@@ -1278,7 +1278,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">referenceMap</emphasis> =>
+                    <emphasis>referenceMap</emphasis> =>
                     このテーブルから任意の親テーブルに対する参照の情報を含む連想配列。
                     <xref linkend="zend.db.table.relationships.defining" />
                     を参照ください。
@@ -1287,7 +1287,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">dependentTables</emphasis> =>
+                    <emphasis>dependentTables</emphasis> =>
                     このテーブルを参照しているテーブルのクラス名の配列。
                     <xref linkend="zend.db.table.relationships.defining" />
                     を参照ください。
@@ -1296,7 +1296,7 @@ echo "テーブル名は " . $info['name'] . " です\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">schema</emphasis> =>
+                    <emphasis>schema</emphasis> =>
                     テーブルのスキーマ (あるいはデータベース、あるいは表領域)
                     の名前。
                 </para>
@@ -1340,14 +1340,14 @@ echo "テーブル名は " . $info['name'] . " です\n";
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong"><classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname> をコールする</emphasis> -
+                        <emphasis><classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname> をコールする</emphasis> -
                         これは、すべてのテーブルクラスで使用するデフォルトのキャッシュオブジェクトを一度で設定できます。
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong"><classname>Zend_Db_Table_Abstract::__construct()</classname> を設定する</emphasis> -
+                        <emphasis><classname>Zend_Db_Table_Abstract::__construct()</classname> を設定する</emphasis> -
                         これは、特定のテーブルクラスのインスタンスでh使用するキャッシュオブジェクトを設定できます。
                     </para>
                 </listitem>

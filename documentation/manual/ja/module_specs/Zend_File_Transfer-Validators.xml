@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.file.transfer.validators">
 
     <title>Zend_File_Transfer 用のバリデータ</title>
@@ -780,8 +780,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <para>
             サイズの指定には SI 記法も使えます。
             これは多くのオペレーティングシステムでもサポートされているものです。
-            <emphasis role="strong">20000 bytes</emphasis>
-            と書くかわりに、<emphasis role="strong">20kB</emphasis>
+            <emphasis>20000 bytes</emphasis>
+            と書くかわりに、<emphasis>20kB</emphasis>
             とすることができるのです。すべての単位は、1024 単位に変換されます。
             使用できる単位は <code>kB</code>、<code>MB</code>、
             <code>GB</code>、<code>TB</code>、<code>PB</code> および <code>EB</code>
@@ -1331,8 +1331,8 @@ $upload->addValidator('Sha1',
         <para>
             サイズの指定には SI 記法も使えます。
             これは多くのオペレーティングシステムでもサポートされているものです。
-            <emphasis role="strong">20000 bytes</emphasis>
-            と書くかわりに、<emphasis role="strong">20kB</emphasis>
+            <emphasis>20000 bytes</emphasis>
+            と書くかわりに、<emphasis>20kB</emphasis>
             とすることができるのです。すべての単位は、1024 単位に変換されます。
             使用できる単位は <code>kB</code>、<code>MB</code>、
             <code>GB</code>、<code>TB</code>、<code>PB</code> および <code>EB</code>

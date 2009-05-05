@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -68,11 +68,11 @@ $currency = new Zend_Currency();
     <itemizedlist mark='opencircle'>
         <listitem>
             <para>
-                <emphasis role="strong">currency</emphasis>:
+                <emphasis>currency</emphasis>:
             </para>
             <para>
                 ひとつのロケールには複数の通貨を含めることができます。
-                最初のパラメータ <emphasis role="strong">'currency'</emphasis>
+                最初のパラメータ <emphasis>'currency'</emphasis>
                 では、どの通貨を使用するのかを定義します。
                 定義する際には、その通貨の短い名前あるいは完全な名前を使用します。
                 未知の通貨を指定した場合は例外をスローします。
@@ -85,10 +85,10 @@ $currency = new Zend_Currency();
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">locale</emphasis>:
+                <emphasis>locale</emphasis>:
             </para>
             <para>
-                3 番目のパラメータ <emphasis role="strong">'locale'</emphasis>
+                3 番目のパラメータ <emphasis>'locale'</emphasis>
                 は、通貨のフォーマットの際に使用するロケールを定義します。
                 script や currency が省略された場合は、
                 このパラメータの内容をもとに標準の数字と通貨を取得します。
@@ -97,9 +97,9 @@ $currency = new Zend_Currency();
                 <para>
                     Zend_Currency で使用できるロケールは、地域情報を含むものだけであることに注意しましょう。
                     言語情報のみのロケールを指定すると、例外が発生します。たとえば
-                    <emphasis role="strong">en</emphasis> を指定するとエラーとなります。一方
-                    <emphasis role="strong">en_US</emphasis> を指定すると、
-                    通貨は <emphasis role="strong">USD</emphasis> となります。
+                    <emphasis>en</emphasis> を指定するとエラーとなります。一方
+                    <emphasis>en_US</emphasis> を指定すると、
+                    通貨は <emphasis>USD</emphasis> となります。
                 </para>
             </note>
         </listitem>
@@ -135,13 +135,13 @@ $currency = new Zend_Currency('en_US', 'EUR');
             複数の通貨を使用している国もあります。
             たとえば、現在流通しているもの以外に
             以前に使用していた通貨がある場合などです。
-            '<emphasis role="strong">currency</emphasis>' パラメータを省略した場合は、
+            '<emphasis>currency</emphasis>' パラメータを省略した場合は、
             現在流通している通貨を使用します。たとえば
-            '<emphasis role="strong">de</emphasis>' (ドイツ) の通貨には
-            '<emphasis role="strong">EUR</emphasis>' (ユーロ) と
-            '<emphasis role="strong">DEM</emphasis>' (独マルク) がありますが、
+            '<emphasis>de</emphasis>' (ドイツ) の通貨には
+            '<emphasis>EUR</emphasis>' (ユーロ) と
+            '<emphasis>DEM</emphasis>' (独マルク) がありますが、
             現在流通しているのは
-            '<emphasis role="strong">EUR</emphasis>' です。
+            '<emphasis>EUR</emphasis>' です。
             パラメータを省略した場合はこちらを使用します。
         </para>
     </note>
@@ -152,7 +152,7 @@ $currency = new Zend_Currency('en_US', 'EUR');
 
         <para>
             既存の値を通貨形式にフォーマットして出力するには
-            <emphasis role="strong">toCurrency()</emphasis> メソッドを使用します。
+            <emphasis>toCurrency()</emphasis> メソッドを使用します。
             変換したい値をこのメソッドに渡します。
             この値には、正規化された数値ならなんでも指定できます。
         </para>
@@ -209,7 +209,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">通貨記号、略称、あるいは名前</emphasis>:
+                    <emphasis>通貨記号、略称、あるいは名前</emphasis>:
                 </para>
                 <para>
                     通常は、通貨の出力時には通貨記号が表示されます。
@@ -218,7 +218,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">通貨記号の位置</emphasis>:
+                    <emphasis>通貨記号の位置</emphasis>:
                 </para>
                 <para>
                     通貨記号の位置は、通常はロケールに応じて自動的に決まります。
@@ -227,7 +227,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">文字</emphasis>:
+                    <emphasis>文字</emphasis>:
                 </para>
                 <para>
                     数値を表示する際に使用する文字です。詳細な情報は、
@@ -238,7 +238,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">数値フォーマット</emphasis>:
+                    <emphasis>数値フォーマット</emphasis>:
                 </para>
                 <para>
                     通貨の量 (要するに、金額のことです) を表す際には、
@@ -251,7 +251,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
 
         <para>
             出力形式を変更したい場合は
-            <emphasis role="strong">setFormat()</emphasis> メソッドを使用します。
+            <emphasis>setFormat()</emphasis> メソッドを使用します。
             このメソッドに、変更したいすべてのオプションを含む配列を渡します。
             <code>options</code> 配列がサポートしている設定は、次のとおりです。
         </para>
@@ -259,7 +259,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">position</emphasis>:
+                    <emphasis>position</emphasis>:
                     通貨記号をどの位置に表示するのかを定義します。サポートしている位置は
                     <link linkend="zend.currency.usage.setformat.constantsposition">この表</link>
                     を参照ください。
@@ -267,9 +267,9 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">script</emphasis>:
+                    <emphasis>script</emphasis>:
                     数値の表示に使用する数字の種類を定義します。ほとんどのロケールでは、
-                    デフォルトの数字は <emphasis role="strong">'Latn'</emphasis>
+                    デフォルトの数字は <emphasis>'Latn'</emphasis>
                     です。これは 0 から 9 を使用します。それ以外には
                     'Arab' (アラビア数字) なども使用できます。サポートしている数字は
                     <link linkend="zend.locale.appendix.numberscripts.supported">この表</link>
@@ -278,7 +278,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">format</emphasis>:
+                    <emphasis>format</emphasis>:
                     数値を表示する際に使用するロケールを定義します。
                     数値フォーマットに含まれる内容としては、たとえば 3 桁ごとの区切り文字などがあります。
                     ロケール ID を指定してデフォルトのフォーマットを使用することもできますし、
@@ -288,7 +288,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">display</emphasis>:
+                    <emphasis>display</emphasis>:
                     通貨を表す際に、通貨のどの部分を使用するのかを定義します。
                     使用できる表示形式は 4 通りです。
                     <link linkend="zend.currency.usage.setformat.constantsdescription">この表</link>
@@ -297,14 +297,14 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">precision</emphasis>:
+                    <emphasis>precision</emphasis>:
                     通貨を表現する際の精度を定義します。デフォルト値は
-                    <emphasis role="strong">2</emphasis> です。
+                    <emphasis>2</emphasis> です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">name</emphasis>:
+                    <emphasis>name</emphasis>:
                     表示に使用する完全な通貨名を定義します。
                     このオプションは、<classname>Zend_Currency</classname>
                     の作成時に設定した通貨名を上書きします。
@@ -312,7 +312,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">currency</emphasis>:
+                    <emphasis>currency</emphasis>:
                     表示に使用する国際通貨略称を定義します。
                     このオプションは、<classname>Zend_Currency</classname>
                     の作成時に設定した通貨略称を上書きします。
@@ -320,7 +320,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">symbol</emphasis>:
+                    <emphasis>symbol</emphasis>:
                     表示に使用する通貨記号を定義します。
                     このオプションは、<classname>Zend_Currency</classname>
                     の作成時に設定した通貨記号を上書きします。
@@ -434,40 +434,40 @@ echo $currency->toCurrency(1000);
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis role="strong">getSymbol()</emphasis>:
+                    <emphasis>getSymbol()</emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨を表す通貨記号を返します。たとえば、
-                    '<emphasis role="strong">en_US</emphasis>
+                    '<emphasis>en_US</emphasis>
                     ロケールにおける米ドルを表す記号は
-                    <emphasis role="strong">$</emphasis> です。
+                    <emphasis>$</emphasis> です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getShortName()</emphasis>:
+                    <emphasis>getShortName()</emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨の短い名前を返します。たとえば、
-                    '<emphasis role="strong">en_US</emphasis>
+                    '<emphasis>en_US</emphasis>
                     ロケールにおける米ドルの短い名前は
-                    <emphasis role="strong">USD</emphasis> です。
+                    <emphasis>USD</emphasis> です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getName()</emphasis>:
+                    <emphasis>getName()</emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨の完全な名前を返します。たとえば、
-                    '<emphasis role="strong">en_US</emphasis>
+                    '<emphasis>en_US</emphasis>
                     ロケールにおける米ドルの完全な名前は
-                    <emphasis role="strong">US Dollar</emphasis> です。
+                    <emphasis>US Dollar</emphasis> です。
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getRegionList()</emphasis>:
+                    <emphasis>getRegionList()</emphasis>:
                 </para>
                 <para>
                     実際の通貨あるいは指定した通貨が用いられている地域の一覧を返します。
@@ -477,7 +477,7 @@ echo $currency->toCurrency(1000);
             </listitem>
             <listitem>
                 <para>
-                    <emphasis role="strong">getCurrencyList()</emphasis>:
+                    <emphasis>getCurrencyList()</emphasis>:
                 </para>
                 <para>
                     指定した地域で用いられている通貨の一覧を返します。

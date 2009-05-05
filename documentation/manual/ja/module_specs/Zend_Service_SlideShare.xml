@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15234 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.service.slideshare">
 
     <title>導入</title>
@@ -248,7 +248,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <emphasis role="strong">特定のアカウントでアップロードしたスライドショー</emphasis>
+                    <emphasis>特定のアカウントでアップロードしたスライドショー</emphasis>
                 </para>
 
                 <para>
@@ -260,7 +260,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">特定のタグを含むスライドショー</emphasis>
+                    <emphasis>特定のタグを含むスライドショー</emphasis>
                 </para>
 
                 <para>
@@ -272,7 +272,7 @@ print "閲覧回数: {$slideshow->getNumViews()}<br/>\n";
 
             <listitem>
                 <para>
-                    <emphasis role="strong">特定のグループに属するスライドショー</emphasis>
+                    <emphasis>特定のグループに属するスライドショー</emphasis>
                 </para>
 
                 <para>

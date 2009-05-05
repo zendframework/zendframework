@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15346 -->
 <sect1 id="zend.translate.introduction">
 
     <title>導入</title>
@@ -20,14 +20,14 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">一貫性のない API:</emphasis>
+                <emphasis>一貫性のない API:</emphasis>
                 入力フォーマットによって API が異なります。
                 たとえば gettext の使用法は非常に複雑です。
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">PHP は gettext
+                <emphasis>PHP は gettext
                 およびネイティブの配列しかサポートしていない:</emphasis>
                 PHP 自身は配列あるいは gettext しかサポートしていません。
                 その他の入力フォーマットは、手動で変換する必要があります。
@@ -36,14 +36,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">デフォルト言語の検出方法がない:</emphasis>
+                <emphasis>デフォルト言語の検出方法がない:</emphasis>
                 ユーザのデフォルト言語を検出するには、
                 個々のブラウザについての深い知識を要します。
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">Gettext はスレッドセーフでない:</emphasis>
+                <emphasis>Gettext はスレッドセーフでない:</emphasis>
                 PHP の gettext ライブラリはスレッドセーフではないので、
                 マルチスレッド環境で使用してはいけません。
                 これは gettext 自体の問題であって PHP のせいではありませんが、
@@ -62,7 +62,7 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis role="strong">複数の入力フォーマットのサポート:</emphasis>
+                <emphasis>複数の入力フォーマットのサポート:</emphasis>
                 <classname>Zend_Translate</classname> はいくつかの入力フォーマットに対応しています。
                 PHP でサポートしているもののほかに、TMX や CSV
                 形式のファイルにも対応しています。
@@ -70,14 +70,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">スレッドセーフな gettext:</emphasis>
+                <emphasis>スレッドセーフな gettext:</emphasis>
                 <classname>Zend_Translate</classname> の gettext リーダーはスレッドセーフです。
                 マルチスレッド環境でも問題なく使用できます。
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">簡単で汎用的な API:</emphasis>
+                <emphasis>簡単で汎用的な API:</emphasis>
                 <classname>Zend_Translate</classname> の API は非常にシンプルで、使用する関数はほんの少しだけです。
                 そのため、容易に覚えることができ、保守も簡単です。
                 すべての入力フォーマットを同じように処理できます。
@@ -87,14 +87,14 @@
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">ユーザの標準言語の検出:</emphasis>
+                <emphasis>ユーザの標準言語の検出:</emphasis>
                 ユーザがサイトにアクセスする際の preferred language
                 設定を検出し、<classname>Zend_Translate</classname> で使用することができます。
             </para>
         </listitem>
         <listitem>
             <para>
-                <emphasis role="strong">自動的なソースの検出:</emphasis>
+                <emphasis>自動的なソースの検出:</emphasis>
                 <classname>Zend_Translate</classname> は、複数のソースファイルを検出して統合することができます。
                 さらに、ディレクトリやファイル名に応じて使用するロケールを自動検出することもできます。
             </para>

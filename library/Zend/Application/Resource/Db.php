@@ -142,7 +142,7 @@ class Zend_Application_Resource_Db extends Zend_Application_Resource_ResourceAbs
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend_Db_Adapter_Abstract|null
      */
     public function init()
     {

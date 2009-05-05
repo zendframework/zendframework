@@ -44,7 +44,7 @@ class Zend_Application_Resource_Navigation
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend_Navigation
      */
     public function init()
     {

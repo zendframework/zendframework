@@ -197,7 +197,7 @@ class Util
             mensajes de error en la parte superior del formulario. El decorador
             FormErrors le permite hacer esto.
         </para>
-       
+
         <para>
             Por defecto, la lista de errores generada tiene el siguiente marcado:
         </para>

@@ -96,7 +96,7 @@
 
  echo $acl->isAllowed('marketing', 'newsletter', 'publish') ?
  "allowed" : "denied";
- // permitido   
+ // permitido
 
  echo $acl->isAllowed('staff', 'latest', 'publish') ?
  "allowed" : "denied";
@@ -104,11 +104,11 @@
 
  echo $acl->isAllowed('marketing', 'latest', 'publish') ?
  "allowed" : "denied";
- // permitido   
+ // permitido
 
  echo $acl->isAllowed('marketing', 'latest', 'archive') ?
  "allowed" : "denied";
- // permitido   
+ // permitido
 
  echo $acl->isAllowed('marketing', 'latest', 'revise') ?
  "allowed" : "denied";

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.codegenerator.examples">
+    <title>Ejemplos de Zend_CodeGenerator</title>
+
+    <example id="zend.codegenerator.examples.class">
+        <title>Generando clases PHP</title>
+
+        <para>
+            El siguiente ejemplo genera una clase vacía con una clase de nivel 
+            DocBlock.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$foo      = new Zend_CodeGenerator_Php_Class();
+$docblock = new Zend_CodeGenerator_Php_Docblock(array(
+    'shortDescription' => 'Sample generated class',
+    'longDescription'  => 'This is a class generated with Zend_CodeGenerator.',
+    'tags'             => array(
+        array(
+            'name'        => 'version',
+            'description' => '$Rev:$',
+        ),
+        array(
+            'name'        => 'license',
+            'description' => 'New BSD',
+        ),
+    ),
+));
+$foo->setName('Foo')
+    ->setDocblock($docblock);
+echo $foo->generate();
+]]></programlisting>
+
+        <para>
+            El código anterior resultará en lo siguiente:
+        </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Sample generated class
+ *
+ * This is a class generated with Zend_CodeGenerator.
+ *
+ * @version $Rev:$
+ * @license New BSD
+ *
+ */
+class Foo
+{
+
+
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.codegenerator.examples.class-properties">
+        <title>Generando clases PHP con propiedades de clase</title>
+
+        <para>
+            Basándonos en el ejemplo anterior, ahora agreguemos propiedades a 
+            nuestra clase generada.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$foo      = new Zend_CodeGenerator_Php_Class();
+$docblock = new Zend_CodeGenerator_Php_Docblock(array(
+    'shortDescription' => 'Sample generated class',
+    'longDescription'  => 'This is a class generated with Zend_CodeGenerator.',
+    'tags'             => array(
+        array(
+            'name'        => 'version',
+            'description' => '$Rev:$',
+        ),
+        array(
+            'name'        => 'license',
+            'description' => 'New BSD',
+        ),
+    ),
+));
+$foo->setName('Foo')
+    ->setDocblock($docblock)
+    ->setProperties(array(
+        array(
+            'name'         => '_bar',
+            'visibility'   => 'protected',
+            'defaultValue' => 'baz',
+        ),
+        array(
+            'name'         => 'baz',
+            'visibility'   => 'public',
+            'defaultValue' => 'bat',
+        ),
+        array(
+            'name'         => 'bat',
+            'const'        => true,
+            'defaultValue' => 'foobarbazbat',
+        ),
+    ));
+echo $foo->generate();
+]]></programlisting>
+
+        <para>
+            Lo anterior resulta en la siguiente definición de clase:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+/**
+ * Sample generated class
+ *
+ * This is a class generated with Zend_CodeGenerator.
+ *
+ * @version $Rev:$
+ * @license New BSD
+ *
+ */
+class Foo
+{
+
+    protected $_bar = 'baz';
+
+    public $baz = 'bat';
+
+    const bat = 'foobarbazbat';
+
+
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.codegenerator.examples.class-methods">
+        <title>Generando clases PHP con métodos de clase</title>
+
+        <para>
+            <classname>Zend_CodeGenerator_Php_Class</classname> le permite 
+            adjuntar métodos con contenido opcional a sus clases. 
+            Los métodos pueden adjuntarse tanto como arrys o como instancias 
+            concretas de <classname>Zend_CodeGenerator_Php_Method</classname>.
+        </para>
+
+            <programlisting role="php"><![CDATA[
+$foo      = new Zend_CodeGenerator_Php_Class();
+$docblock = new Zend_CodeGenerator_Php_Docblock(array(
+    'shortDescription' => 'Sample generated class',
+    'longDescription'  => 'This is a class generated with Zend_CodeGenerator.',
+    'tags'             => array(
+        array(
+            'name'        => 'version',
+            'description' => '$Rev:$',
+        ),
+        array(
+            'name'        => 'license',
+            'description' => 'New BSD',
+        ),
+    ),
+));
+$foo->setName('Foo')
+    ->setDocblock($docblock)
+    ->setProperties(array(
+        array(
+            'name'         => '_bar',
+            'visibility'   => 'protected',
+            'defaultValue' => 'baz',
+        ),
+        array(
+            'name'         => 'baz',
+            'visibility'   => 'public',
+            'defaultValue' => 'bat',
+        ),
+        array(
+            'name'         => 'bat',
+            'const'        => true,
+            'defaultValue' => 'foobarbazbat',
+        ),
+    ))
+    ->setMethods(array(
+        // Método pasado como array
+        array(
+            'name'       => 'setBar',
+            'parameters' => array(
+                array('name' => 'bar'),
+            ),
+            'body'       => '$this->_bar = $bar;' . "\n" . 'return $this;',
+            'docblock'   => new Zend_CodeGenerator_Php_Docblock(array(
+                'shortDescription' => 'Set the bar property',
+                'tags'             => array(
+                    new Zend_CodeGenerator_Php_Docblock_Tag_Param(array(
+                        'paramName' => 'bar',
+                        'datatype'  => 'string'
+                    )),
+                    new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
+                        'datatype'  => 'string',
+                    )),
+                ),
+            )),
+        ),
+        // Método pasado como instancia concreta
+        new Zend_CodeGenerator_Php_Method(array(
+            'name' => 'getBar',
+            'body'       => 'return $this->_bar;',
+            'docblock'   => new Zend_CodeGenerator_Php_Docblock(array(
+                'shortDescription' => 'Retrieve the bar property',
+                'tags'             => array(
+                    new Zend_CodeGenerator_Php_Docblock_Tag_Return(array(
+                        'datatype'  => 'string|null',
+                    )),
+                ),
+            )),
+        )),
+    ));
+
+echo $foo->generate();
+]]></programlisting>
+
+        <para>
+            Lo anterior genera la siguiente salida:
+        </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * Sample generated class
+ *
+ * This is a class generated with Zend_CodeGenerator.
+ *
+ * @version $Rev:$
+ * @license New BSD
+ */
+class Foo
+{
+
+    protected $_bar = 'baz';
+
+    public $baz = 'bat';
+
+    const bat = 'foobarbazbat';
+
+    /**
+     * Set the bar property
+     *
+     * @param string bar
+     * @return string
+     */
+    public function setBar($bar)
+    {
+        $this->_bar = $bar;
+        return $this;
+    }
+
+
+    /**
+     * Retrieve the bar property
+     *
+     * @return string|null
+     */
+    public function getBar()
+    {
+        return $this->_bar;
+    }
+
+
+
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.codegenerator.examples.file">
+        <title>Generando archivos PHP</title>
+
+        <para>
+            <classname>Zend_CodeGenerator_Php_File</classname> puede ser 
+            utilizada para generar el contenido de un archivo PHP. 
+            Usted puede incluir clases, así como el contenido arbitrario del 
+            cuerpo. Cuando acople clases, debe adjuntar instancias concretas de
+            <classname>Zend_CodeGenerator_Php_Class</classname> o un array 
+            definiendo la clase.
+        </para>
+
+        <para>
+            En el ejemplo siguiente, asumiremos que ha definido 
+            <code>$foo</code> como una de las definiciones de clase del
+            ejemplo anterior.
+        </para>
+
+            <programlisting role="php"><![CDATA[
+$file = new Zend_CodeGenerator_Php_File(array(
+    'classes'  => array($foo);
+    'docblock' => new Zend_CodeGenerator_Php_Docblock(array(
+        'shortDescription' => 'Foo class file',
+        'tags'             => array(
+            array(
+                'name'        => 'license',
+                'description' => 'New BSD',
+            ),
+        ),
+    )),
+    'body'     => 'define(\'APPLICATION_ENV\', \'testing\');',
+));
+]]></programlisting>
+
+        <para>
+            Llamando a <code>generate()</code> generará el código -- pero no lo 
+            grabará en un archivo. Usted mismo deberá capturar y grabar los 
+            contenidos en un archivo. Por ejemplo:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$code = $file->generate();
+file_put_contents('Foo.php', $code);
+]]></programlisting>
+
+        <para>
+            Lo anterior generará el siguiente archivo:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php
+/**
+ * Foo class file
+ *
+ * @license New BSD
+ */
+
+
+/**
+ * Sample generated class
+ *
+ * This is a class generated with Zend_CodeGenerator.
+ *
+ * @version $Rev:$
+ * @license New BSD
+ */
+class Foo
+{
+
+    protected $_bar = 'baz';
+
+    public $baz = 'bat';
+
+    const bat = 'foobarbazbat';
+
+    /**
+     * Set the bar property
+     *
+     * @param string bar
+     * @return string
+     */
+    public function setBar($bar)
+    {
+        $this->_bar = $bar;
+        return $this;
+    }
+
+
+    /**
+     * Retrieve the bar property
+     *
+     * @return string|null
+     */
+    public function getBar()
+    {
+        return $this->_bar;
+    }
+
+
+
+}
+
+
+define('APPLICATION_ENV', 'testing');
+]]></programlisting>
+    </example>
+
+    <example id="zend.codegenerator.examples.reflection-file">
+        <title>Sembrando la generación de código para un archivo PHP 
+        via reflection</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.codegenerator.examples.reflection-class">
+        <title>Sembrando la generación de clases PHP via reflection</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+
+    <example id="zend.codegenerator.examples.reflection-method">
+        <title>Sembrando la generación de métodos PHP via reflection</title>
+        <para></para>
+        <!-- @todo -->
+    </example>
+</sect1>

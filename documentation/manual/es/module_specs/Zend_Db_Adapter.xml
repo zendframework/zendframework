@@ -197,7 +197,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 <title>Usando el Adaptador del método factory</title>
                 <programlisting role="php"><![CDATA[
 // No necesitamos la siguiente declaración, porque
-// el archivo Zend_Db_Adapter_Pdo_Mysql será cargado para nosotros por el método 
+// el archivo Zend_Db_Adapter_Pdo_Mysql será cargado para nosotros por el método
 // factory de Zend_Db.
 
 // require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
@@ -223,7 +223,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             de la clase del adaptador con la clave "adapterNamespace" en
             el conjunto de parámetros
             </para>
-       
+
             <example id="zend.db.adapter.connecting.factory.example2">
                 <title>
                     Usando el método factory para una clase Adaptador
@@ -277,7 +277,7 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <example id="zend.db.adapter.connecting.factory.example1">
                 <title>
-                    Uso del método factory del Adaptador con un objeto Zend_Config           
+                    Uso del método factory del Adaptador con un objeto Zend_Config
                 </title>
                 <para>
                     En el siguiente ejemplo, un objeto Zend_Config es
@@ -368,7 +368,7 @@ $db = Zend_Db::factory($config->database);
                         : algunos servidores RDBMS pueden aceptar conexiones de red
                         sobre un número de puerto específico.
             El parámetro del puerto le permite especificar el puerto al
-            que su aplicación PHP se conecta, para que concuerde el puerto           
+            que su aplicación PHP se conecta, para que concuerde el puerto
             configurado en el servidor RDBMS.
                     </para>
                 </listitem>

@@ -138,12 +138,12 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         <para>
             Puede llamar a métodos del objeto de declaración para obtener filas
             desde declaraciones SQL que producen conjuntos de resultados.
-         
+
             SELECT, SHOW, DESCRIBE y EXPLAIN son ejemplos de declaraciones que
             producen un conjunto de resultados.
             INSERT, UPDATE, and DELETE son ejemplo de declaraciones que
             no producen un conjunto de resultados.
-         
+
             Puede ejecutar las últimas declaraciones de SQL usando
             Zend_Db_Statement, pero no puede llamar a los métodos que extraen
             filas de resultados desde éste.

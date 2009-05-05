@@ -76,7 +76,7 @@
         	En este ejemplo, la facturación y la dirección de envío contienen algunos
         	campos idénticos, eso significa uno puede sobre escribir al otro. Nosotros podemos
         	resolver esta solución usando una notación de array:
-        
+
         	In this example, the billing and shipping address contain some
             identical fields, which means one would overwrite the other. We can
             solve this solution using array notation:
@@ -156,7 +156,7 @@
         	<code>Zend_Form</code> intenta automatizar este proceso con los
             <link linkend="zend.form.forms.subforms">sub formularios</link>. Por
             defecto, los sub formularios son generados usando la notación de array como se muestra
-            en el anterior formulario HTML listado completo con identificadores. El nombre del array 
+            en el anterior formulario HTML listado completo con identificadores. El nombre del array
             esta basado en el nombre del sub formulario, con las llaves basados en los elementos
             contenidos  en el sub formulario. Los sub formularios pueder ser anidados arbitrariamente,
             y esto puede crear arrays anidados que reflejan la estructura.
@@ -164,7 +164,7 @@
             <code>Zend_Form</code> respetan la estructura del array, asegurando que sus
             formularios sean validados correctamente, no importa cuan arbitrariamente anidados esten los
             sub formularios. No se necesita hacer nada para beneficiarse; éste
-            comportamiento esta activo por defecto.           
+            comportamiento esta activo por defecto.
         </para>
 
         <para>
@@ -184,7 +184,7 @@
                     formulario no tiene un específico nombre, o si
                     <code>setElementsBelongTo()</code> no ha sido definido, esta bandera
                     será ignorada (como no hay nombre del array al cual
-                    los elementos puedan pertenecer).                   
+                    los elementos puedan pertenecer).
                 </para>
 
                 <para>
@@ -197,7 +197,7 @@
             		<code>Zend_Form::setElementsBelongTo($array)</code>:
                     Usando este método, se puede especificar el nombre de un array al
                     cual todos los elementos del formulario pertenecen. Se puede determinar el
-                    nombre usando el accesor <code>getElementsBelongTo()</code>.                   
+                    nombre usando el accesor <code>getElementsBelongTo()</code>.
             </para></listitem>
         </itemizedlist>
 
@@ -435,7 +435,7 @@ class My_Form_Registration extends Zend_Form
 
             <para>
             	Siguiente, necesitamos adicionar scaffolding en nuestro controlador acción,
-            
+
             	y tener muchas consideraciones. Primero, necesitamos asegurar que
             	persiste la información del formulario entre los requerimientos, de esa manera determinar
             	cuadno terminar. Segundo, necesitamos alguna lógica para determinar que segmentos

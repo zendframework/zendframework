@@ -162,9 +162,9 @@ class Mundo
              En el cuadro de diálogo 'properties' del proyecto ir al menú ‘Flex Build Path' (Crear ruta Flex),
              luego en la pestaña ‘Library path’ (ruta de biblioteca) asegúrese
              de que el fichero 'rpc.swc' sea añadido a su ruta de proyectos
-             y pulse Ok (Aceptar) para cerrar la ventana. 
+             y pulse Ok (Aceptar) para cerrar la ventana.
         </para>
-        <para>         
+        <para>
             También necesitará indicarle al compilador que debe usar
             services-config.xml para encontrar el punto final de RemoteObject.
             Para hacerlo, abra de nuevo el panel de propiedades de su proyecto
@@ -175,9 +175,9 @@ class Mundo
             Presione 'Apply' (Aplicar) y luego en OK para volver a actualizar la opción.
             Lo que acaba de hacer es decirle al compilador Flex que busque en el fichero
             services-config.xml aquellas variables que se usarán en tiempo de
-            ejecución por la clase RemotingObject.          
+            ejecución por la clase RemotingObject.
         </para>
-        <para>        
+        <para>
             Ahora, para conectarnos a nuestros métodos remotos debemos indicarle a Flex
             qué fichero de configuración de servicios utilizar.
             Por esta razón creamos un nuevo fichero 'services-config.xml'
@@ -185,7 +185,7 @@ class Mundo
             Con click derecho sobre el proyecto y seleccionando 'new'(nuevo)
             'File' (fichero), se abrirá una nueva ventana.
             Seleccione la carpeta del proyecto y luego nombre el archivo
-            'services-config.xml' y presione 'finish' (finalizar).         
+            'services-config.xml' y presione 'finish' (finalizar).
         </para>
         <para>
             Flex ha creado y abierto el nuevo fichero services-config.xml.
@@ -333,7 +333,7 @@ $servidor->setProduction(true);
                 Los mensajes de excepción y los backtraces puede contener información
                 sensible del sistema, y no desea que se pueda acceder a ellas
                 desde el exterior.
-                Aunque AMF es un formato binario, ahora al ser abierta la especificación, 
+                Aunque AMF es un formato binario, ahora al ser abierta la especificación,
                 cualquiera puede potencialmente deserializar los datos.
             </para>
         </note>
@@ -365,7 +365,7 @@ $servidor->setProduction(true);
 
             <para>
                 En este ejemplo, añadiremos la cabecera de mensaje (MessageHeader)
-                "foo" con el valor 'bar' a la respuesta antes de devolverla.           
+                "foo" con el valor 'bar' a la respuesta antes de devolverla.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -395,7 +395,7 @@ echo $respuesta;
                 <para>
                     Primero, usted puede crear uniones explícitas a nivel del servidor,
                     utilizando el método <code>setClassMap()</code>.
-                    El primer argumento es el nombre de la clase de ActionScript, 
+                    El primer argumento es el nombre de la clase de ActionScript,
                     el segundo es el nombre de la clase PHP que lo mapea:
                 </para>
 
@@ -424,7 +424,7 @@ class Contact
 
             <listitem>
                 <para>
-                    Tercero, en un sentido similar, puede definir como público el método               
+                    Tercero, en un sentido similar, puede definir como público el método
                     <code>getASClassName()</code> dentro de su clase.
                     Este método debe devolver la clase ActionScript apropiada:
                  </para>
@@ -444,7 +444,7 @@ class Contact
 
         <para>
             Aunque hemos creado ContactVO en el servidor,
-            ahora tenemos que hacer su clase correspondiente en AS3 
+            ahora tenemos que hacer su clase correspondiente en AS3
             para que el servidor pueda mapear el objeto.
         </para>
         <para>
@@ -479,7 +479,7 @@ package
             El segundo es el tag RemoteClass y define que esta clase puede tener
             mapeado un objeto remoto con un nombre de alias, en este caso <code>ContactVO</code>
             Es obligatorio que en esta etiqueta(tag), el valor que se estableció es la clase PHP
-            sea estrictamente equivalente.              
+            sea estrictamente equivalente.
         </para>
         <programlisting role="as"><![CDATA[
 [Bindable]
@@ -601,7 +601,7 @@ connection.connect(gateway);
         <para>
             La función onComplete se ejecuta tan pronto como la construcción
             ha concluido, enviando los datos al servidor.
-            Necesitamos añadir una línea más que hace una llamada a la función 
+            Necesitamos añadir una línea más que hace una llamada a la función
             <code>Zend_Amf_Server</code> Mundo->hola.
         </para>
         <programlisting role="as"><![CDATA[
@@ -613,7 +613,7 @@ connection.call("Mundo.hola", responder, params);
             para manejar la respuesta proveniente del servidor.
             Hemos añadido la función OnResult para el resultado exitoso desde el servidor.
             Cada vez que se ejecuta apropiadamente el manejo de conexión con el
-            servidor, el manejador de eventos llama esta función. 
+            servidor, el manejador de eventos llama esta función.
         </para>
         <programlisting role="as"><![CDATA[
 private function onResult(result:Object):void {

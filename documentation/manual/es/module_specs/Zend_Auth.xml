@@ -46,7 +46,7 @@
             El siguente ejemplo es un adaptador de autenticación que requiere que un nombre de usuario y contraseña sean especificados
             para la autenticación. Otros detalles, como la forma de realizar peticiones al servicio de autenticación, han sido
             omitídos por brevedad:
-           
+
             <programlisting role="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {

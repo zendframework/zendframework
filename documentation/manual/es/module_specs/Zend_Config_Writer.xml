@@ -82,7 +82,7 @@ $writer = new Zend_Config_Writer_Xml();
 $writer->setConfig($config)
        ->setFilename('config.xml')
        ->write();
-      
+
 // c)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);

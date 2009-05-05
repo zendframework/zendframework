@@ -86,7 +86,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
             condicionales. Una regla que es creada con una aserción
             sólo se aplica cuando el método de la aserción devuelve true.
         </para>
-       
+
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());

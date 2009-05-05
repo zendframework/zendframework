@@ -44,7 +44,7 @@ echo $client->call('test.sayHello');
         </example>
 
         <para>
-            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo PHP equivalente           
+            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo PHP equivalente
 
             . En el ejemplo anterior, es devuelto un <code>string</code> PHP
             y está listo para ser usado inmediatamente.

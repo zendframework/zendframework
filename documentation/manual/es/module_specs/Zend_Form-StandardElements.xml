@@ -86,7 +86,7 @@ $element->setCaptcha('Dumb');
 
         <para>
             Si desea cargar sus elementos configuración, especifique la clave
-            'captcha' con un array conteniendo la clave 'captcha', o           
+            'captcha' con un array conteniendo la clave 'captcha', o
             ambas claves 'captcha' y 'captchaOptions':
         </para>
 
@@ -118,7 +118,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
             El decorador usado es determinado consultando el adaptador captcha.
             Por defecto, es usado el
             <link linkend="zend.form.standardDecorators.captcha">Captcha
-            decorator</link>, pero un adaptador puede especificar uno               
+            decorator</link>, pero un adaptador puede especificar uno
             diferente vía su método<code>getDecorator()</code>.
         </para>
 
@@ -374,7 +374,7 @@ $form->addElement($element, 'foo');
             Este elemento provee protección de ataques desde CSRF sobre
             formularios, asegurando que el dato es enviado por la sesión del
             usuario que generó el formulario y no por un script malicioso.
-            La protección se logra mediante la adición de un elemento hash a            
+            La protección se logra mediante la adición de un elemento hash a
             un formulario y verificandolo cuando el formulario es enviado.
         </para>
 
@@ -424,7 +424,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             especificar un valor para utilizar al momento de enviar la imagen
              utilizando  el método de acceso <code>setImageValue()</code>
             (o clave de configuración 'imageValue'). Cuando el valor establecido
-            para el elemento sea igual a <code>imageValue</code>, entonces 
+            para el elemento sea igual a <code>imageValue</code>, entonces
             el método de acceso <code>isChecked()</code> devolverá true.
         </para>
 

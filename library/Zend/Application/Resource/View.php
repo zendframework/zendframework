@@ -40,7 +40,7 @@ class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceA
     /**
      * Defined by Zend_Application_Resource_Resource
      *
-     * @return void
+     * @return Zend_View
      */
     public function init()
     {

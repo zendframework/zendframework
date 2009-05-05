@@ -592,7 +592,7 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             $title   = '';
             if (array_key_exists('title', $options)) {
                 $title = $options['title'];
-                unset($options['title]);
+                unset($options['title']);
             }
 
             $view = new Zend_View($options);

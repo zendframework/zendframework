@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -16,7 +16,6 @@
         </para>
 
     </sect2>
-
 
     <sect2 id="zend.xmlrpc.client.method-calls">
         <title>メソッドのコール</title>
@@ -366,7 +365,6 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
             のようにコールします。
         </para>
     </sect2>
-
 
     <sect2 id="zend.xmlrpc.client.error-handling">
         <title>エラー処理</title>

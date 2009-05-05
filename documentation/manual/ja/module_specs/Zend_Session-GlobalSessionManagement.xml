@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15234 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.session.global_session_management">
 
     <title>グローバルセッションの管理</title>
@@ -82,7 +82,6 @@ name = UNIQUE_NAME
 
 ; remember_me_seconds = <整数の秒数>
 ; strict = on|off
-
 
 ; テスト環境の設定は本番サーバとほぼ同じです。設定が異なる部分だけを
 ; 以下で上書きします

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.gdata.introduction">
     <title>導入</title>
     <para>
@@ -256,7 +256,6 @@ $entry->cell = $cell;
             ファクトリメソッドは、これを使用してクラスを探します。
         </para>
     </sect2>
-
 
     <sect2 id="zend.gdata.introduction.authentication">
         <title>Google Data クライアント認証</title>

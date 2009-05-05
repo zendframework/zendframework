@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15190 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGeneratorサンプル</title>
 
@@ -48,7 +48,6 @@ echo $foo->generate();
  */
 class Foo
 {
-
 
 }
 ]]></programlisting>
@@ -121,7 +120,6 @@ class Foo
     public $baz = 'bat';
 
     const bat = 'foobarbazbat';
-
 
 }
 ]]></programlisting>
@@ -244,7 +242,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * barプロパティーを取得
      *
@@ -254,8 +251,6 @@ class Foo
     {
         return $this->_bar;
     }
-
-
 
 }
 ]]></programlisting>
@@ -315,7 +310,6 @@ file_put_contents('Foo.php', $code);
  * @license New BSD
  */
 
-
 /**
  * 生成されたクラスサンプル
  *
@@ -345,7 +339,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * barプロパティーを取得
      *
@@ -356,10 +349,7 @@ class Foo
         return $this->_bar;
     }
 
-
-
 }
-
 
 define('APPLICATION_ENV', 'testing');
 ]]></programlisting>

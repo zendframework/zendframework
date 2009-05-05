@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.measure.creation">
 
     <title>計測値の作成</title>
@@ -129,7 +129,6 @@ $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
 echo $unit; // 出力は "1.234 m" となります
-
 
 $mystring = "The boat is 1,234.50 long.";
 $unit = new Zend_Measure_Length($mystring,

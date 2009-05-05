@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.search.lucene.query-api">
     <title>クエリ作成用の API</title>
 
@@ -15,7 +15,6 @@
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
     </para>
-
 
     <sect2 id="zend.search.lucene.queries.exceptions">
         <title>クエリパーサの例外</title>
@@ -369,7 +368,6 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
         </para>
     </sect2>
 
-
     <sect2 id="zend.search.lucene.queries.wildcard">
         <title>ワイルドカードクエリ</title>
         <para>
@@ -390,7 +388,6 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 field1:test*
 ]]></programlisting>
         </para>
-
 
         <para>あるいは</para>
 
@@ -462,7 +459,6 @@ $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
 $hits  = $index->find($query);
 ]]></programlisting>
         </para>
-
 
         <para>
             単語のフィールドはオプションです。
@@ -589,7 +585,6 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
             は 'title' フィールドから 'zend framework' を検索します。
         </para>
 
-
         <para>
             <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> メソッドは
             2 つの引数をとります。<classname>Zend_Search_Lucene_Index_Term</classname>
@@ -640,7 +635,6 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
         <para>
             は 'title' フィールドから 'zend framework' を検索します。
         </para>
-
 
         <para>
             曖昧度は、フレーズの間に別の単語が何個まで入ることを許すのかを設定します。

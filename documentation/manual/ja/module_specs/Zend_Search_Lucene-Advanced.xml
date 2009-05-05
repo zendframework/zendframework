@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.search.lucene.advanced">
     <title>応用</title>
 
@@ -90,7 +90,6 @@
 
     </sect2>
 
-
     <sect2 id="zend.search.lucene.advanced.static">
         <title>静的プロパティとしてのインデックスの使用</title>
 
@@ -130,7 +129,6 @@ class Searcher {
 Searcher::initIndex();
 ]]></programlisting>
         </para>
-
 
         <para>
             にもかかわらず、静的プロパティのオブジェクトのデストラクタは正常に起動し、

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -520,7 +520,6 @@ package {
   }
 }
 ]]></programlisting>
-
 
         <para>
             まず、さまざまな作業をするための ActionScript ライブラリをインポートする必要があります。

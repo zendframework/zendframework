@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>ベストプラクティス</title>
 
@@ -37,13 +37,11 @@ foreach ($hits as $hit) {
     // 'contents' フィールドを取得します
     $contents = $hit->contents;
 
-
     // Lucene ドキュメントの内部 ID を取得します
     $id = $hit->id;
 
     // 検索結果のスコアを取得します
     $score = $hit->score;
-
 
     // 'id' フィールドを取得します
     $docId = $hit->getDocument()->id;
@@ -57,7 +55,6 @@ foreach ($hits as $hit) {
 ]]></programlisting>
         </para>
     </sect2>
-
 
     <sect2 id="zend.search.lucene.best-practice.indexing-performance">
         <title>インデックス作成のパフォーマンス</title>
@@ -174,7 +171,6 @@ $index->optimize();
             使用可能なメモリのうち半分を超えない程度のメモリ消費量に抑えておくことをお勧めします。
         </para>
 
-
         <para>
             <emphasis>MaxMergeDocs</emphasis> はセグメントの大きさ
             (これはドキュメントの大きさによって決まります) を制限します。
@@ -213,7 +209,6 @@ $index->optimize();
             バッチ処理用の <emphasis>MaxMergeDocs</emphasis>
             はあまり小さくしすぎないようにしなければなりません。
         </para>
-
 
         <para>
             <emphasis>MergeFactor</emphasis> は自動最適化の頻度に影響を及ぼします。
@@ -262,7 +257,6 @@ $index->optimize();
             <emphasis>MaxBufferedDocs</emphasis> は、使用できるメモリ量によって決まります。
             MergeFactor を適切に設定することで、セグメントの数を調整することができます。
         </para>
-
 
         <para>
             バッチ処理においては、<emphasis>MergeFactor</emphasis>

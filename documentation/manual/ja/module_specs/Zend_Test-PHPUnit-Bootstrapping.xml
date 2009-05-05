@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
@@ -28,7 +28,6 @@
         単にフロントコントローラ (とアプリケーション固有の設定)
         を準備するだけの役割となります。
     </para>
-
 
     <programlisting role="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase

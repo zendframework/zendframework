@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>インデックスの構築</title>
 
@@ -270,7 +270,6 @@ $index->optimize();
             <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname>
             メソッドを使用します。
         </para>
-
 
         <programlisting role="php"><![CDATA[
 // 現在のデフォルトのファイルパーミッションを取得します

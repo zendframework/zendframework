@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15341 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -187,7 +187,6 @@ class ErrorController extends Zend_Controller_Action
 public function errorAction()
 {
         $errors = $this->_getParam('error_handler');
-
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:

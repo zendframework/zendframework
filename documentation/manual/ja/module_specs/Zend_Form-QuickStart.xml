@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -220,7 +220,6 @@ $username->addValidators(array('alnum',
     ->setRequired(true)
     ->addFilters(array('StringToLower'));
 ]]></programlisting>
-
 
         <para>
             シンプルといえばシンプルですが、

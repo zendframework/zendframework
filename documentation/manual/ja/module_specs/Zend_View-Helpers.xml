@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -42,7 +42,6 @@
             デフォルトのヘルパーは常に動作することが保証されます。
         </para>
     </note>
-
 
     <para>
         ビュースクリプト内でヘルパーを使用するには、
@@ -396,7 +395,6 @@ $view = new Zend_View();
 // パスを /path/to/more/helpers 、プレフィックスを 'My_View_Helper' と設定します
 $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 ]]></programlisting>
-
 
         <para>
             <code>addHelperPath()</code> メソッドを使用すると、検索パスを「積み重ねる」

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.mail.read">
     <title>メールメッセージの読み込み</title>
 
@@ -397,7 +397,6 @@ foreach ($mail as $message) {
     }
     echo $message->subject . "\n";
 }
-
 
 // フラグをチェックします
 $flags = $message->getFlags();
@@ -824,7 +823,6 @@ class Example_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     }
 }
 ]]></programlisting>
-
 
         </sect3>
     </sect2>

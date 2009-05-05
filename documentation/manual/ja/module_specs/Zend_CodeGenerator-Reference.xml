@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGeneratorリファレンス</title>
 
@@ -357,7 +357,6 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             <para>
                 そのクラスのAPIは下記の通りです。:
             </para>
-
 
             <programlisting role="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.service.nirvanix">
     <title>Zend_Service_Nirvanix</title>
 
@@ -274,7 +274,6 @@ $imfs = $nirvanix->getService('IMFS');
 $result = $imfs->putContents('/foo.txt', 'fourteen bytes');
 print_r($result);
 ?>
-
 
 Zend_Service_Nirvanix_Response Object
 (

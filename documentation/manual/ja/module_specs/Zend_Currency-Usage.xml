@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.currency.usage">
 
     <title>通貨の操作方法</title>
@@ -28,7 +28,6 @@
         <programlisting role="php"><![CDATA[
 $currency = new Zend_Currency();
 ]]></programlisting>
-
 
     </example>
 

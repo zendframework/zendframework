@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Spreadsheets の使用法</title>
 
@@ -301,7 +301,6 @@ $listEntry->delete();
             ひとつのワークシートで
             セルベースのフィードとリストベースのフィードを同時に使用するのはやめておきましょう。
         </para>
-
 
         <sect3 id="zend.gdata.spreadsheets.cellfeeds.get">
             <title>セルベースのフィードの取得</title>

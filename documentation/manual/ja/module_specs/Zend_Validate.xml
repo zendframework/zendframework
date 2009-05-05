@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -233,7 +233,6 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
         </para>
 
     </sect2>
-
 
     <sect2 id="zend.validate.introduction.translation">
 

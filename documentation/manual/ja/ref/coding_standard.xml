@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <appendix id="coding-standard">
   <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
@@ -575,7 +575,6 @@ class Foo
                 <para>
                     実行時の参照渡しは禁止されています。
                 </para>
-
 
                 <para>
                     返り値は括弧で囲んではいけません。これは可読性を下げますし、

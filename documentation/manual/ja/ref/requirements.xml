@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15341 -->
 <appendix id="requirements">
 
     <title>Zend Framework のシステム要件</title>
@@ -3606,5 +3606,4 @@ Tables related to Release 1.7.2
 1Zend_Layout
 1Zend_Session
 -->
-
 

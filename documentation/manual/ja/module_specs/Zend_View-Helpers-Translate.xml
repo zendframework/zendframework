@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect3 id="zend.view.helpers.initial.translate">
 
     <title>翻訳ヘルパー</title>
@@ -12,7 +12,6 @@
         を使用します。これをビューと統合するために使用するのが
         <code>Translate</code> ビューヘルパーです。
     </para>
-
 
     <para>
         これ以降のすべての例では、単純は配列翻訳アダプタを使用します。

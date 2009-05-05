@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.pdf.drawing">
     <title>描画</title>
 
@@ -51,7 +51,6 @@ $color2 = new Zend_Pdf_Color_Html('silver');
 $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </sect2>
-
 
     <sect2 id="zend.pdf.drawing.shape-drawing">
         <title>図形の描画</title>
@@ -456,7 +455,6 @@ $pdfPage->setFont($font, 36)
         </example>
     </sect2>
 
-
     <sect2 id="zend.pdf.drawing.extracting-fonts">
         <title>フォントの抽出</title>
         <para>
@@ -574,8 +572,6 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
             </itemizedlist>
         </para>
     </sect2>
-
-
 
     <sect2 id="zend.pdf.drawing.image-drawing">
         <title>画像の描画</title>

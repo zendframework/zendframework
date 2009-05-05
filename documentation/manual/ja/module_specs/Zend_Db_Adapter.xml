@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -2147,7 +2147,6 @@ if (!is_null($version)) {
                 </listitem>
             </itemizedlist>
         </sect3>
-
 
     </sect2>
 

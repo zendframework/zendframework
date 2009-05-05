@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15341 -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON ヘルパー</title>
 
@@ -58,7 +58,6 @@ echo $this->json($this->data, true);
 // あるいは、キー "keepLayouts" に true を指定します
 echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
-
 
         <para>
             <classname>Zend_Json::encode()</classname> は、ネイティブ JSON 式を

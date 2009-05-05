@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.search.lucene.extending">
     <title>拡張性</title>
 
@@ -236,7 +236,6 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 
     </sect2>
 
-
     <sect2 id="zend.search.lucene.extending.scoring">
         <title>重み付けのアルゴリズム</title>
         <para>
@@ -382,7 +381,6 @@ abstract class Zend_Search_Lucene_Storage_Directory {
  */
 abstract function close();
 
-
 /**
  * $filename という名前の新しい空のファイルを、ディレクトリ内に作成します
  *
@@ -390,7 +388,6 @@ abstract function close();
  * @return void
  */
 abstract function createFile($filename);
-
 
 /**
  * 既存の $filename をディレクトリから削除します
@@ -400,7 +397,6 @@ abstract function createFile($filename);
  */
 abstract function deleteFile($filename);
 
-
 /**
  * $filename で指定したファイルが存在する場合に true を返します
  *
@@ -408,7 +404,6 @@ abstract function deleteFile($filename);
  * @return boolean
  */
 abstract function fileExists($filename);
-
 
 /**
  * ディレクトリ内の $filename の長さを返します
@@ -418,7 +413,6 @@ abstract function fileExists($filename);
  */
 abstract function fileLength($filename);
 
-
 /**
  * $filename の最終更新日時を UNIX タイムスタンプで返します
  *
@@ -426,7 +420,6 @@ abstract function fileLength($filename);
  * @return integer
  */
 abstract function fileModified($filename);
-
 
 /**
  * ディレクトリ内の既存のファイルの名前を変更します
@@ -437,7 +430,6 @@ abstract function fileModified($filename);
  */
 abstract function renameFile($from, $to);
 
-
 /**
  * $filename の更新時刻を現在の時刻にします
  *
@@ -445,7 +437,6 @@ abstract function renameFile($from, $to);
  * @return void
  */
 abstract function touchFile($filename);
-
 
 /**
  * ディレクトリ内の $filename についての

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 15341 -->
 <sect1 id="zend.gdata.youtube">
     <title>YouTube Data API の使用法</title>
 
@@ -53,7 +53,6 @@ $yt = new Zend_Gdata_YouTube($httpClient,
             </example>
     </sect2>
 
-
     <sect2 id="zend.gdata.youtube.videos">
         <title>公開動画フィードの取得</title>
 
@@ -100,7 +99,6 @@ foreach ($videoFeed as $videoEntry) {
 }
 ]]></programlisting>
             </example>
-
 
             <para>
                 その他のクエリパラメータの詳細は

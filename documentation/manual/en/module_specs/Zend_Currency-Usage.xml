@@ -410,7 +410,7 @@ echo $currency->toCurrency(1000);
                     <emphasis role="strong">getShortName()</emphasis>:
                 </para>
                 <para>
-                    Returns the abbreviation of the set currency or a given currency.  For example
+                    Returns the abbreviation of the set currency or a given currency. For example
                     <emphasis role="strong">USD</emphasis> for the US Dollar within the locale
                     '<emphasis role="strong">en_US</emphasis>.
                 </para>

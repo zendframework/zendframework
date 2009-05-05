@@ -64,7 +64,7 @@
             <para>
                 The <code>getMessages()</code> methods return validation
                 failure information only for the most recent
-                <code>isValid()</code> call.  Each call to
+                <code>isValid()</code> call. Each call to
                 <code>isValid()</code> clears any messages and errors caused by
                 a previous <code>isValid()</code> call, because it's likely
                 that each call to <code>isValid()</code> is made for a
@@ -99,14 +99,14 @@ if ($validator->isValid($email)) {
         <para>
             Validate classes provide a <code>setMessage()</code> method with
             which you can specify the format of a message returned by
-            <code>getMessages()</code> in case of validation failure.  The
+            <code>getMessages()</code> in case of validation failure. The
             first argument of this method is a string containing the error
-            message.  You can include tokens in this string which will be
-            substituted with data relevant to the validator.  The token
+            message. You can include tokens in this string which will be
+            substituted with data relevant to the validator. The token
             <code>%value%</code> is supported by all validators; this is
             substituted with the value you passed to <code>isValid()</code>.
             Other tokens may be supported on a case-by-case basis in each
-            validation class.  For example, <code>%max%</code> is a token
+            validation class. For example, <code>%max%</code> is a token
             supported by <classname>Zend_Validate_LessThan</classname>.
             The <code>getMessageVariables()</code> method returns an array
             of variable tokens supported by the validator.
@@ -143,7 +143,7 @@ if (!$validator->isValid('word')) {
 
         <para>
             You can set multiple messages using the <code>setMessages()</code>
-            method.  Its argument is an array containing key/message pairs.
+            method. Its argument is an array containing key/message pairs.
 
             <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
@@ -164,7 +164,7 @@ $validator->setMessages( array(
             name as the message tokens supported by a given validation class.
             The <code>value</code> property is always available in a validator;
             it is the value you specified as the argument of
-            <code>isValid()</code>.  Other properties may be supported on a
+            <code>isValid()</code>. Other properties may be supported on a
             case-by-case basis in each validation class.
 
             <programlisting role="php"><![CDATA[
@@ -192,11 +192,11 @@ if (!validator->isValid('word')) {
             If it's inconvenient to load a given validation class and create an
             instance of the validator, you can use the static method
             <classname>Zend_Validate::is()</classname> as an alternative invocation
-            style.  The first argument of this method is a data input value,
-            that you would pass to the <code>isValid()</code> method.  The
+            style. The first argument of this method is a data input value,
+            that you would pass to the <code>isValid()</code> method. The
             second argument is a string, which corresponds to the basename of
             the validation class, relative to the <classname>Zend_Validate</classname>
-            namespace.  The <code>is()</code> method automatically loads the
+            namespace. The <code>is()</code> method automatically loads the
             class, creates an instance, and applies the <code>isValid()</code>
             method to the data input.
 
@@ -222,7 +222,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
 
         <para>
             The <code>is()</code> method returns a boolean value, the same as
-            the <code>isValid()</code> method.  When using the static
+            the <code>isValid()</code> method. When using the static
             <code>is()</code> method, validation failure messages are not
             available.
         </para>

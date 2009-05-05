@@ -101,7 +101,7 @@
                 <para>
                     <emphasis>descendents</emphasis>: string together
                     multiple selectors to indicate a hierarchy along which
-                    to search.  'div .foo span #one' would select an element
+                    to search. 'div .foo span #one' would select an element
                     of id 'one' that is a descendent of arbitrary depth
                     beneath a 'span' element, which is in turn a descendent
                     of arbitrary depth beneath an element with a class of
@@ -137,7 +137,7 @@
             them and/or their content directly for examination and manipulation.
             <classname>Zend_Dom_Query_Result</classname> implements <code>Countable</code>
             and <code>Iterator</code>, and store the results internally as
-            DOMNodes/DOMElements.  As an example, consider the following call,
+            DOMNodes/DOMElements. As an example, consider the following call,
             that selects against the HTML above:
         </para>
 

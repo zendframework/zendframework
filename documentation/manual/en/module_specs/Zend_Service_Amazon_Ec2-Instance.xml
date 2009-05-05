@@ -28,7 +28,7 @@
         <note>
             <title>Instance Types</title>
             <para>
-                The instance types are defined as constants in the code.  Column eight
+                The instance types are defined as constants in the code. Column eight
                 in the table is the defined constanc name
             </para>
         </note>
@@ -208,14 +208,14 @@
                         <row>
                             <entry><code>minCount</code></entry>
                             <entry><para>
-                                Minimum number of instances to launch.  Default: 1
+                                Minimum number of instances to launch. Default: 1
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>
                         <row>
                             <entry><code>maxCount</code></entry>
                             <entry><para>
-                                Maximum number of instances to launch.  Default: 1
+                                Maximum number of instances to launch. Default: 1
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>
@@ -247,7 +247,7 @@
                         <row>
                             <entry><code>instanceType</code></entry>
                             <entry><para>
-                                Specifies the instance type.  Default: m1.small
+                                Specifies the instance type. Default: m1.small
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>

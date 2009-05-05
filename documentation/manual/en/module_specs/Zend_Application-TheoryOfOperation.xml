@@ -302,7 +302,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
                 options passed to the application object and/or bootstrap. These
                 options may come from a configuration file, or be passed in
                 manually. Options will be of key/options pairs, with the key
-                representing the resource name.  The resource name will be the
+                representing the resource name. The resource name will be the
                 segment following the class prefix. For example, the resources
                 shipped with Zend Framework have the class prefix
                 "Zend_Application_Resource_"; anything following this would be

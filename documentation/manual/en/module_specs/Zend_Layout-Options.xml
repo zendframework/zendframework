@@ -67,7 +67,7 @@
                 <emphasis>pluginClass</emphasis>: the front controller plugin
                 class to use when using <classname>Zend_Layout</classname> with the MVC
                 components. By default, this is
-                <classname>Zend_Layout_Controller_Plugin_Layout</classname>.  Accessors
+                <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Accessors
                 are <code>setPluginClass()</code> and
                 <code>getPluginClass()</code>.
         </para></listitem>

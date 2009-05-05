@@ -86,14 +86,14 @@ $return = $ec2_ebs->createSnapshot('volumeId');
             <title>Describing an EBS Volume</title>
             <para>
                 <code>describeVolume</code> allows you to get information on an EBS Volume or a set of EBS
-                Volumes.  If nothing is passed in then it will return all EBS Volumes.  If only
+                Volumes. If nothing is passed in then it will return all EBS Volumes. If only
                 one EBS Volume needs to be described a string can be passed in while an array of
                 EBS Volume Id's can be passed in to describe them.
             </para>
             <para>
                 <code>describeVolume</code> will return an array with information about each Volume which
-                includes the volumeId, size, status and createTime.  If the volume is attached to an instance,
-                an addition value of attachmentSet will be returned.  Attachment set contains information
+                includes the volumeId, size, status and createTime. If the volume is attached to an instance,
+                an addition value of attachmentSet will be returned. Attachment set contains information
                 about the instance that the EBS Volume is attached to, which includes volumeId, instanceId,
                 device, status and attachTime.
             </para>
@@ -125,8 +125,8 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
             <title>Describe an EBS Volume Snapshot</title>
             <para>
                 <code>describeSnapshot</code> allows you to get information on an EBS Volume Snapshot
-                or a set of EBS Volume Snapshots.  If nothing is passed in then it will return information
-                about all EBS Volume Snapshots.  If only one EBS Volume Snapshot needs to be described it's
+                or a set of EBS Volume Snapshots. If nothing is passed in then it will return information
+                about all EBS Volume Snapshots. If only one EBS Volume Snapshot needs to be described it's
                 snapshotId can be passed in while an array of EBS Volume Snapshot Id's can be passed in to
                 describe them.
             </para>
@@ -148,7 +148,7 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
         <example id="zend.service.amazon.ec2.ebs.attachdetach.attach">
             <title>Attaching an EBS Volume</title>
             <para>
-                <code>attachVolume</code> will attach an EBS Volume to a running Instance.  To
+                <code>attachVolume</code> will attach an EBS Volume to a running Instance. To
                 attach a volume you need to specify the volumeId, the instanceId and the
                 device <emphasis>(ex: /dev/sdh)</emphasis>.
             </para>
@@ -169,7 +169,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
             <para>
                 <code>detachVolume</code> will detach an EBS Volume from a running Instance.
                 <code>detachVolume</code> required that you specify the volumeId with the optional
-                instanceId and device name that was passed when attaching the volume.  If you need to
+                instanceId and device name that was passed when attaching the volume. If you need to
                 force the detachment you can set the forth parameter to be true and it will force
                 the volume to detach.
             </para>

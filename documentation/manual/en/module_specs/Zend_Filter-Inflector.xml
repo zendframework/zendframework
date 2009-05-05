@@ -208,10 +208,10 @@ class Foo
             <para>
                 It is important to note that regardless of the method in which you add
                 rules to the inflector, either one-by-one, or all-at-once; the order is very
-                important.  More specific names, or names that might contain other rule names,
-                must be added before least specific names.  For example, assuming the two rule
+                important. More specific names, or names that might contain other rule names,
+                must be added before least specific names. For example, assuming the two rule
                 names 'moduleDir' and 'module', the 'moduleDir' rule should appear before module
-                since 'module' is contained within 'moduleDir'.  If 'module' were added before
+                since 'module' is contained within 'moduleDir'. If 'module' were added before
                 'moduleDir', 'module' will match part of 'moduleDir' and process it leaving 'Dir'
                 inside of the target uninflected.
             </para>

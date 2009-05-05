@@ -113,7 +113,7 @@ $ip = $ec2_img->deregister($imageId);
             </para>
             <para>
                 <code>describe</code> returns an array for all the images that match the critera that was
-                passed in.  The array contains the imageId, imageLocation, imageState, imageOwnerId, isPublic,
+                passed in. The array contains the imageId, imageLocation, imageState, imageOwnerId, isPublic,
                 architecture, imageTYpe, kernelId, ramdiskId and platform.
             </para>
 
@@ -202,7 +202,7 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
             <title>Describe AMI Attribute</title>
             <para>
                 <code>describeAttribute</code> returns information about an attribute of an AMI.
-                Only one attribute can be specified per call.  Currently only launchPermission and
+                Only one attribute can be specified per call. Currently only launchPermission and
                 productCodes are supported.
             </para>
             <para>

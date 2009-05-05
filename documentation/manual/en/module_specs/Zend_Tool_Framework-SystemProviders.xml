@@ -7,7 +7,7 @@
         In addition to the more useful project based providers that come shipped
         with <code>Zend_Tool_Project</code>, there are also some more basic, but
         interesting providers that come built into
-        <code>Zend_Tool_Framework</code>.  Some of these exist for the purpose
+        <code>Zend_Tool_Framework</code>. Some of these exist for the purpose
         of providing a means via the command line to extract information, such
         as the version, while others are intended to aid the developer when
         creating additional providers.
@@ -34,9 +34,9 @@
         <para>
             The Manifest provider is included so that you may determine what
             kind of "manifest" information is available during the
-            <code>Zend_Tool</code> runtime.  Manifest data is information that
+            <code>Zend_Tool</code> runtime. Manifest data is information that
             is attached to specific objects during <code>Zend_Tool</code>'s
-            runtime.  Inside the manifest you will find the console specific
+            runtime. Inside the manifest you will find the console specific
             namings that you are expected to use when calling certain commands.
             Data found in the manifest can be used by any provider or client on
             an as-needed basis.

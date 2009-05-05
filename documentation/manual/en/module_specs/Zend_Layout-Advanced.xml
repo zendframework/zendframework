@@ -141,7 +141,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
             an action helper class extending
             <classname>Zend_Controller_Action_Helper_Abstract</classname> and pass the
             class name as the <code>helperClass</code> option to the
-            <code>startMvc()</code> method.  Details of the implementation are
+            <code>startMvc()</code> method. Details of the implementation are
             up to you.
         </para>
     </sect2>

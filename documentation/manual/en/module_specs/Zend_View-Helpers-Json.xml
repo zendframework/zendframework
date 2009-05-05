@@ -59,7 +59,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
         <para>
             <classname>Zend_Json::encode</classname> allows the encoding of native JSON
             expressions using <classname>Zend_Json_Expr</classname> objects. This option
-            is disabled by default.  To enable this option, pass a boolean
+            is disabled by default. To enable this option, pass a boolean
             <code>true</code> to the <code>enableJsonExprFinder</code> key of
             the options array:
         </para>

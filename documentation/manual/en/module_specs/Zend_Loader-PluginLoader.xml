@@ -181,7 +181,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
         <para>
             Another common use case for the <code>PluginLoader</code> is to
             determine fully qualified plugin class names of loaded classes;
-            <code>getClassName()</code> provides this functionality.  Typically,
+            <code>getClassName()</code> provides this functionality. Typically,
             this would be used in conjunction with <code>isLoaded()</code>:
         </para>
 
@@ -223,7 +223,7 @@ if ($loader->isLoaded('Adapter')) {
             </para>
 
             <programlisting role="php"><![CDATA[
-$classFileIncCache = APPLICATION_PATH .  '/../data/pluginLoaderCache.php';
+$classFileIncCache = APPLICATION_PATH . '/../data/pluginLoaderCache.php';
 if (file_exists($classFileIncCache)) {
     include_once $classFileIncCache;
 }
@@ -243,7 +243,7 @@ Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
             </para>
 
             <programlisting role="php"><![CDATA[
-$classFileIncCache = APPLICATION_PATH .  '/../data/pluginLoaderCache.php';
+$classFileIncCache = APPLICATION_PATH . '/../data/pluginLoaderCache.php';
 if (file_exists($classFileIncCache)) {
     include_once $classFileIncCache;
 }

@@ -5,7 +5,7 @@
 
     <para>
         Zend_Tool_Project builds on and extends the capabilities of Zend_Tool_Framework to that
-        of managing a "project".  In general, a "project" is a planned endeavor or an initiative.
+        of managing a "project". In general, a "project" is a planned endeavor or an initiative.
         In the computer world, projects generally are a collection of resources. These resources
         can be files, directories, databases, schemas, images, styles, and more.
     </para>

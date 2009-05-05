@@ -6,7 +6,7 @@
 
     <para>
         The static method <classname>Zend_Debug::dump()</classname> prints or returns
-        information about an expression.  This simple technique of debugging is
+        information about an expression. This simple technique of debugging is
         common, because it is easy to use in an ad hoc fashion, and requires no
         initialization, special tools, or debugging environment.
     </para>
@@ -27,7 +27,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         The <code>$label</code> argument is a string to be prepended to the
-        output of <classname>Zend_Debug::dump()</classname>.  It may be useful, for
+        output of <classname>Zend_Debug::dump()</classname>. It may be useful, for
         example, to use labels if you are dumping information about multiple
         variables on a given screen.
     </para>
@@ -54,7 +54,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         <title>Debugging with Zend_Log</title>
         <para>
             Using <classname>Zend_Debug::dump()</classname> is best for ad hoc
-            debugging during software development.  You can add code to dump
+            debugging during software development. You can add code to dump
             a variable and then remove the code very quickly.
         </para>
         <para>

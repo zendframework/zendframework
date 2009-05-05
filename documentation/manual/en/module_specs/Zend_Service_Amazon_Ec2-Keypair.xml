@@ -26,8 +26,8 @@ $return = $ec2_kp->create('my-new-key');
     <example id="zend.service.amazon.ec2.keypairs.delete">
         <title>Deleting an Amazon Keypair</title>
         <para>
-            <code>delete</code>, will delete the key pair.  This will only
-            prevent it from being use on new instances.  Instances currently
+            <code>delete</code>, will delete the key pair. This will only
+            prevent it from being use on new instances. Instances currently
             running with the keypair will still allow you to access them.
         </para>
         <para>

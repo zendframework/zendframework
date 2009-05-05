@@ -16,9 +16,9 @@
 
     <para>
       URIs always begin with a scheme, followed by a colon. The construction
-      of the many different schemes varies significantly.  The
+      of the many different schemes varies significantly. The
       <classname>Zend_Uri</classname> class provides a factory that returns a subclass of
-      itself which specializes in each scheme.  The subclass
+      itself which specializes in each scheme. The subclass
       will be named <classname>Zend_Uri_&lt;scheme&gt;</classname>, where
       <code>&lt;scheme&gt;</code> is the scheme lowercased with the first
       letter capitalized. An exception to this rule is HTTPS, which is also
@@ -166,7 +166,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
       <title>Getting the Scheme of the URI</title>
 
       <para>
-        The scheme of the URI is the part of the URI that precedes the colon.  For example,
+        The scheme of the URI is the part of the URI that precedes the colon. For example,
         the scheme of <code>http://www.zend.com</code> is <code>http</code>.
       </para>
 

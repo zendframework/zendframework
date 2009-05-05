@@ -375,12 +375,12 @@ $adapter->addResponse(
         <para>
             The setResponse() method clears any responses in the
             Zend_Http_Client_Adapter_Test's buffer and sets the
-            first response that will be returned.  The addResponse()
+            first response that will be returned. The addResponse()
             method will add successive responses.
         </para>
         <para>
             The responses will be replayed in the order that they
-            were added.  If more requests are made than the number
+            were added. If more requests are made than the number
             of responses stored, the responses will cycle again
             in order.
         </para>

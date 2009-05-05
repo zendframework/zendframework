@@ -36,7 +36,7 @@
             </para>
             <para>
                 <code>describe</code> will return an array containg information about which regions
-                are available.  Each array will contain regionName and regionUrl.
+                are available. Each array will contain regionName and regionUrl.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -72,7 +72,7 @@ foreach($regions as $region) {
             </para>
             <para>
                 <code>describe</code> will return an array containg information about which zones
-                are available.  Each array will contain zoneName and zoneState.
+                are available. Each array will contain zoneName and zoneState.
             </para>
 
             <programlisting role="php"><![CDATA[

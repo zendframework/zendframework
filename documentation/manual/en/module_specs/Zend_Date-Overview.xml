@@ -35,15 +35,15 @@
 
             <para>
                 When dates are manipulated, sometimes they cross over a DST change, normally resulting in the date
-                losing or gaining an hour.  For exmaple, when adding months to a date before a DST change, if the
+                losing or gaining an hour. For exmaple, when adding months to a date before a DST change, if the
                 resulting date is after the DST change, then the resulting date will appear to lose or gain an hour,
-                resulting in the time value of the date changing.  For boundary dates, such as midnight of the first
+                resulting in the time value of the date changing. For boundary dates, such as midnight of the first
                 or last day of a month, adding enough months to cross a date boundary results in the date losing
                 an hour and becoming the last hour of the preceding month, giving the appearance of an "off by 1"
-                error.  To avoid this situation, the DST change ignored by using the <code>fix_dst</code> option.
+                error. To avoid this situation, the DST change ignored by using the <code>fix_dst</code> option.
                 When crossing the Summer/Winter DST boundary, normally an hour is substracted or added depending
-                on the date.  For example, date math crossing the Spring DST leads to a date having a day value
-                one less than expected, if the time part of the date was originally 00:00:00.  Since Zend_Date
+                on the date. For example, date math crossing the Spring DST leads to a date having a day value
+                one less than expected, if the time part of the date was originally 00:00:00. Since Zend_Date
                 is based on timestamps, and not calendar dates with a time component, the timestamp loses an hour,
                 resulting in the date having a calendar day value one less than expected.
                 To prevent such problems use the option <code>fix_dst</code>, which defaults to true, causing DST
@@ -71,13 +71,13 @@
                 For example, when adding one month to January 31st, people familiar with SQL will expect February
                 28th as the result. On the other side, people familiar with Excel and OpenOffice will expect
                 March 3rd as the result. The problem only occurs, if the resulting month does not have the day,
-                which is set in the original date.  For ZF developers, the desired behavior is selectable using
+                which is set in the original date. For ZF developers, the desired behavior is selectable using
                 the <code>extend_month</code> option to choose either the SQL behaviour, if set to false,
                 or the spreadsheet behaviour when set to true. The default behaviour for <code>extend_month</code>
-                is false, providing behavior compatible to SQL.  By default, <classname>Zend_Date</classname> computes month
+                is false, providing behavior compatible to SQL. By default, <classname>Zend_Date</classname> computes month
                 calculations by truncating dates to the end of the month (if necessary), without wrapping into the
                 next month when the original date designates a day of the month exceeding the number of days in
-                the resulting month.  Use <classname>Zend_Date::setOptions(array('extend_month' => true));</classname>
+                the resulting month. Use <classname>Zend_Date::setOptions(array('extend_month' => true));</classname>
                 to make month calculations work like popular spreadsheet programs.
             </para>
 
@@ -300,14 +300,14 @@ print $date;
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Millisecond">millisecond</ulink>
                             </entry>
-                            <entry>Milliseconds denote thousandths of a second (0-999). <classname>Zend_Date</classname> supports two additional methods for working with time units smaller than seconds. By default, <classname>Zend_Date</classname> instances use a precision defaulting to milliseconds, as seen using <code>getFractionalPrecision()</code>. To change the precision use <code>setFractionalPrecision($precision)</code>.  However, precision is limited practically to microseconds, since <classname>Zend_Date</classname> uses <code>
+                            <entry>Milliseconds denote thousandths of a second (0-999). <classname>Zend_Date</classname> supports two additional methods for working with time units smaller than seconds. By default, <classname>Zend_Date</classname> instances use a precision defaulting to milliseconds, as seen using <code>getFractionalPrecision()</code>. To change the precision use <code>setFractionalPrecision($precision)</code>. However, precision is limited practically to microseconds, since <classname>Zend_Date</classname> uses <code>
                                 <ulink url="http://php.net/microtime">microtime()</ulink></code>.</entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Day">Day</ulink>
                             </entry>
-                            <entry><classname>Zend_Date::DAY_SHORT</classname> is extracted from <code>$date</code> if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname> or a numeric string.  Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
+                            <entry><classname>Zend_Date::DAY_SHORT</classname> is extracted from <code>$date</code> if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname> or a numeric string. Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
                         </row>
                         <row>
                             <entry>
@@ -317,22 +317,22 @@ print $date;
                         </row>
                         <row>
                             <entry>Date</entry>
-                            <entry><classname>Zend_Date::DAY_MEDIUM</classname> is extracted from <code>$date</code> if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname>.  Otherwise, an attempt is made to normalize the <code>$date</code> string into a Zend_Date::DATE_MEDIUM formatted date. The format of <classname>Zend_Date::DAY_MEDIUM</classname> depends on the object's locale.</entry>
+                            <entry><classname>Zend_Date::DAY_MEDIUM</classname> is extracted from <code>$date</code> if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname>. Otherwise, an attempt is made to normalize the <code>$date</code> string into a Zend_Date::DATE_MEDIUM formatted date. The format of <classname>Zend_Date::DAY_MEDIUM</classname> depends on the object's locale.</entry>
                         </row>
                         <row>
                             <entry>Weekday</entry>
-                            <entry>Weekdays are represented numerically as 0 (for Sunday) through 6 (for Saturday).  <classname>Zend_Date::WEEKDAY_DIGIT</classname> is extracted from <code>$date</code>, if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname> or a numeric string.  Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
+                            <entry>Weekdays are represented numerically as 0 (for Sunday) through 6 (for Saturday). <classname>Zend_Date::WEEKDAY_DIGIT</classname> is extracted from <code>$date</code>, if the <code>$date</code> operand is an instance of <classname>Zend_Date</classname> or a numeric string. Otherwise, an attempt is made to extract the day according to the conventions documented for these constants: <classname>Zend_Date::WEEKDAY_NARROW</classname>, <classname>Zend_Date::WEEKDAY_NAME</classname>, <classname>Zend_Date::WEEKDAY_SHORT</classname>, <classname>Zend_Date::WEEKDAY</classname> (Gregorian calendar assumed)</entry>
                         </row>
                         <row>
                             <entry>DayOfYear</entry>
-                            <entry>In <classname>Zend_Date</classname>, the day of the year represents the number of calendar days elapsed since the start of the year (0-365).  As with other units above, fractions are rounded down to the nearest whole number. (Gregorian calendar assumed)
+                            <entry>In <classname>Zend_Date</classname>, the day of the year represents the number of calendar days elapsed since the start of the year (0-365). As with other units above, fractions are rounded down to the nearest whole number. (Gregorian calendar assumed)
                         </entry>
                         </row>
                         <row>
                             <entry>
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
-                            <entry>Arpa dates (i.e. RFC 822 formatted dates) are supported. Output uses either a "GMT" or "Local differential hours+min" format (see section 5 of RFC 822).  Before PHP 5.2.2, using the DATE_RFC822 constant with PHP date functions sometimes produces <ulink url="http://bugs.php.net/bug.php?id=40308">incorrect results</ulink>.  Zend_Date's results are correct.  Example: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                            <entry>Arpa dates (i.e. RFC 822 formatted dates) are supported. Output uses either a "GMT" or "Local differential hours+min" format (see section 5 of RFC 822). Before PHP 5.2.2, using the DATE_RFC822 constant with PHP date functions sometimes produces <ulink url="http://bugs.php.net/bug.php?id=40308">incorrect results</ulink>. Zend_Date's results are correct. Example: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
                         <row>

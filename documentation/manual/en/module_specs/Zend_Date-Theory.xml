@@ -36,7 +36,7 @@
                         time and January 1st, 1970 00:00:00 GMT/UTC. This was only possible, because
                         <classname>Zend_Date</classname> is not limited to UNIX timestamps nor integer values. The BCMath
                         extension is required to support extremely large dates outside of the range Fri, 13 Dec 1901
-                        20:45:54 GMT to Tue, 19 Jan 2038 03:14:07 GMT.  Additional, tiny math errors may arise due to
+                        20:45:54 GMT to Tue, 19 Jan 2038 03:14:07 GMT. Additional, tiny math errors may arise due to
                         the inherent limitations of float data types and rounding, unless using the BCMath extension.
                     </para>
                 </listitem>

@@ -61,7 +61,7 @@
             <title>General</title>
 
             <para>
-                For files that contain only PHP code, the closing tag ("?>") is never permitted.  It is
+                For files that contain only PHP code, the closing tag ("?>") is never permitted. It is
                 not required by PHP, and omitting it prevents the accidental injection of trailing white space into the response.
             </para>
 
@@ -126,7 +126,7 @@
 
             <para>
                 If a class name is comprised of more than one word, the first letter of each new
-                word must be capitalized.  Successive capitalized letters are not allowed, e.g.
+                word must be capitalized. Successive capitalized letters are not allowed, e.g.
                 a class "Zend_PDF" is not allowed while "Zend_Pdf" is acceptable.
             </para>
 
@@ -285,7 +285,7 @@ widgetFactory()
             </para>
 
             <para>
-                Short tags are never allowed.  For files containing only PHP code, the
+                Short tags are never allowed. For files containing only PHP code, the
                 closing tag must always be omitted (See <xref linkend="coding-standard.php-file-formatting.general" />).
             </para>
         </sect2>
@@ -468,7 +468,7 @@ class SampleClass
                     declaration of any methods.
                 </para>
                 <para>
-                    The <code>var</code> construct is not permitted.  Member variables always declare
+                    The <code>var</code> construct is not permitted. Member variables always declare
                     their visibility by using one of the <code>private</code>, <code>protected</code>,
                     or <code>public</code> modifiers. Giving access to member variables directly by declaring them
                     as public is permitted but discouraged in favor of accessor methods (set/get).
@@ -543,7 +543,7 @@ class Foo
                 </para>
 
                 <para>
-                    The return value must not be enclosed in parentheses.  This can hinder readability, in additional to breaking code
+                    The return value must not be enclosed in parentheses. This can hinder readability, in additional to breaking code
                     if a method is later changed to return by reference.
 
                     <programlisting role="php"><![CDATA[
@@ -591,7 +591,7 @@ threeArguments(1, 2, 3);
                 </para>
                 <para>
                     In passing arrays as arguments to a function, the function call may include the
-                    "array" hint and may be split into multiple lines to improve readability.  In
+                    "array" hint and may be split into multiple lines to improve readability. In
                     such cases, the normal guidelines for writing arrays still apply:
 
                     <programlisting role="php"><![CDATA[

@@ -143,7 +143,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
                 generating PHP classes. The basic functionality just generates
                 the PHP class itself, as well as optionally the related PHP
                 DocBlock. Classes may implement or inherit from other classes,
-                and may be marked as abstract.  Utilizing other code generator
+                and may be marked as abstract. Utilizing other code generator
                 classes, you can also attach class constants, properties, and
                 methods.
             </para>

@@ -21,7 +21,7 @@
 
         <para>
             Before you can get started with <classname>Zend_Service_Amazon_S3</classname>, you must first
-            register for an account.  Please see the
+            register for an account. Please see the
             <ulink url="http://aws.amazon.com/s3/faqs/">S3 FAQ</ulink>
             page on the Amazon website for more information.
         </para>

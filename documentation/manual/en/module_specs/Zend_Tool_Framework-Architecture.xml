@@ -72,7 +72,7 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
 
         <para>
             <classname>Zend_Tool_Framework_Provider</classname> represents the functional
-            or "capability" aspect of the framework.  Fundamentally,
+            or "capability" aspect of the framework. Fundamentally,
             <classname>Zend_Tool_Framework_Provider</classname> will provide the
             interfaces necessary to produce "providers", or bits of tooling
             functionality that can be called and used inside the
@@ -143,7 +143,7 @@ abstract class Zend_Tool_Framework_Loader_Abstract
 
         <para>
             The <code>_getFiles()</code> method should return an array of files (absolute
-            paths).  The built-in loader supplied with ZF is called the
+            paths). The built-in loader supplied with ZF is called the
             IncludePath loader. By default, the Tooling framework will use an
             include_path based loader to find files that might include Providers
             or Manifest Metadata objects.
@@ -214,9 +214,9 @@ interface Zend_Tool_Framework_Manifest_Interface
 
         <para>
             There are a few different metadata classes that can be used to
-            describe metadata.  The
+            describe metadata. The
             <code>Zend_Tool_Framework_Manifest_Metadata</code> is the base
-            metadata object.  As you can see by the following code
+            metadata object. As you can see by the following code
             snippet, the base metadata class is fairly lightweight and
             abstract in nature:
         </para>
@@ -241,10 +241,10 @@ class Zend_Tool_Framework_Metadata_Basic
         <para>
             There are other built in metadata classes as well for describing
             more specialized metadata: <code>ActionMetadata</code> and
-            <code>ProviderMetadata</code>.  These classes will help you describe
+            <code>ProviderMetadata</code>. These classes will help you describe
             in more detail metadata that is specific to either actions or
             providers, and the reference is expected to be a reference to an
-            action or a provider respectively.  These classes are described in
+            action or a provider respectively. These classes are described in
             the follow code snippet.
         </para>
 
@@ -278,10 +278,10 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
 
         <para>
             'Type' in these classes is used to describe the type of metadata the
-            object is responsible for.  In the cases of the
+            object is responsible for. In the cases of the
             <code>ActionMetadat</code>a, the type would be 'Action', and
             conversely in the case of the <code>ProviderMetadata</code> the type
-            is 'Provider'.  These metadata types will also include additional
+            is 'Provider'. These metadata types will also include additional
             structured information about both the "thing" they are describing as
             well as the object (the <code>->getReference()</code>) they are
             referencing with this new metadata.
@@ -291,7 +291,7 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
             In order to create your own metadata type, all one must do is extend
             the base <code>Zend_Tool_Framework_Manifest_Metadata</code> class
             and return these new metadata objects via a local Manifest
-            class/object.  These user based classes will live in the Manifest
+            class/object. These user based classes will live in the Manifest
             Repository
         </para>
 
@@ -327,7 +327,7 @@ class Zend_Tool_Framework_Manifest_Repository
 
     /**
      * The following will return exactly one of the matching search criteria,
-     * regardless of how many have been returned.  First one in the manifest is
+     * regardless of how many have been returned. First one in the manifest is
      * what will be returned.
      */
     public function findMetadata(Array $searchProperties = array(),
@@ -342,8 +342,8 @@ class Zend_Tool_Framework_Manifest_Repository
 
         <para>
             Looking at the search methods above, the signatures allow for
-            extremely flexible searching.  In order to find a metadata object,
-            simply pass in an array of matching constraints via an array.  If
+            extremely flexible searching. In order to find a metadata object,
+            simply pass in an array of matching constraints via an array. If
             the data is accessible through the Property accessor (the
             <code>getSomething()</code> methods implemented on the metadata
             object), then it will be passed back to the user as a "found"
@@ -358,7 +358,7 @@ class Zend_Tool_Framework_Manifest_Repository
             Clients are the interface which bridges a user or external tool into
             the <code>Zend_Tool_Framework</code> system. Clients can come in all
             shapes and sizes: RPC endpoints, Command Line Interface, or
-            even a web interface.  Zend_Tool has implemented the command
+            even a web interface. Zend_Tool has implemented the command
             line interface as the default interface for interacting with
             the <code>Zend_Tool_Framework</code> system.
         </para>
@@ -399,7 +399,7 @@ abstract class Zend_Tool_Framework_Client_Abstract
 
         <para>
             As you can see, there 1 method required to fulfill the needs of a
-            client (two others suggested), the initialization, prehandling and post handling.  For a
+            client (two others suggested), the initialization, prehandling and post handling. For a
             more in depth study of how the command line client works, please see
             the <ulink url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">source code</ulink>.
         </para>

@@ -144,7 +144,7 @@ if (isset($_POST['xmlToken'])) {
             by the card selector into it. Once an instance has been created you
             must then provide at least one SSL certificate public/private key
             pair used by the web server that received the <code>HTTP
-            POST</code>.  These files are used to validate the destination
+            POST</code>. These files are used to validate the destination
             of the information posted to the server and are a requirement when
             using Information Cards.
         </para>
@@ -340,7 +340,7 @@ public function submitinfocardAction()
             The <classname>Zend_InfoCard</classname> adapter is used as a callback
             mechanism within the component to perform various tasks, such as
             storing and retrieving Assertion IDs for information cards when they
-            are processed by the component.  While storing the assertion IDs of
+            are processed by the component. While storing the assertion IDs of
             submitted information cards is not necessary, failing to do so opens
             up the possibility of the authentication scheme being compromised
             through a replay attack.

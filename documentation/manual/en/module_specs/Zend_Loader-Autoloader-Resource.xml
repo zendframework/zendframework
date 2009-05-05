@@ -40,7 +40,7 @@ path/to/some/directory/
             Within this directory, all code is prefixed with the namespace
             "My_". Within the "acls" subdirectory, the component prefix "Acl_"
             is added, giving a final class name of "My_Acl_Site". Similarly, the
-            "forms" subdirectory maps to "Form_", giving "My_Form_Login".  The
+            "forms" subdirectory maps to "Form_", giving "My_Form_Login". The
             "models" subdirectory has no component namespace, giving "My_User".
         </para>
 

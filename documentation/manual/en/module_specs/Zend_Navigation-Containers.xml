@@ -456,7 +456,7 @@ $container->setPages($pages);
 
         <para>
             Removing pages can be done with <code>removePage()</code> or
-            <code>removePages()</code>.  The first method accepts a an instance
+            <code>removePages()</code>. The first method accepts a an instance
             of a page, or an integer. The integer corresponds to the
             <code>order</code> a page has. The latter method will remove all
             pages in the container.

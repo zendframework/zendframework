@@ -15,7 +15,7 @@
     </para>
 
     <para>
-        To get started with Zend_Tool_Project, you simply need to create a project.  Creating a project
+        To get started with Zend_Tool_Project, you simply need to create a project. Creating a project
         is simple: go to a place on your filesystem, create a directory, change to that directory, then
         issue the following command:
     </para>
@@ -34,7 +34,7 @@
 
     <para>
         The following table will describe the capabilities of providers that are available to
-        you.  As you can see in this table, there is a "Project" provider.  The Project provider
+        you. As you can see in this table, there is a "Project" provider. The Project provider
         has a couple of actions associated to it, and with those actions a number of options that
         can be used to modify the behavior of the action and provider.
 

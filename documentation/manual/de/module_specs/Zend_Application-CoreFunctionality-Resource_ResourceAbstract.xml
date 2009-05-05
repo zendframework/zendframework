@@ -5,8 +5,9 @@
     <title>Zend_Application_Resource_ResourceAbstract</title>
 
     <para>
-        <classname>Zend_Application_Resource_ResourceAbstract</classname> ist eine abstrakte Klasse die
-        <link linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>
+        <classname>Zend_Application_Resource_ResourceAbstract</classname> ist eine abstrakte Klasse
+        die <link
+            linkend="zend.application.core-functionality.resource-resource">Zend_Application_Resource_Resource</link>
         implementiert, und ist ein guter Startpunkt für die Erstellung eigener Plugin Ressourcen.
     </para>
 

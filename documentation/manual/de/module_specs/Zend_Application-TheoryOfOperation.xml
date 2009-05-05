@@ -19,8 +19,8 @@
     </para>
 
     <para>
-        <classname>Zend_Application</classname> zielt darauf ab das alles einfacher zu machen und bietet
-        Wiederwervendbarkeit durch die Kapselung vom Bootstrapping in OOP Paradigmen.
+        <classname>Zend_Application</classname> zielt darauf ab das alles einfacher zu machen und
+        bietet Wiederwervendbarkeit durch die Kapselung vom Bootstrapping in OOP Paradigmen.
     </para>
 
     <para>
@@ -30,17 +30,17 @@
     <itemizedlist>
         <listitem>
             <para>
-                <classname>Zend_Application</classname>: Lädt die PHP Umgebung, inklusive Inklude-Pfade und
-                Autoloading, und instanziiert die benötigte Bootstrap Klasse.
+                <classname>Zend_Application</classname>: Lädt die PHP Umgebung, inklusive
+                Inklude-Pfade und Autoloading, und instanziiert die benötigte Bootstrap Klasse.
             </para>
         </listitem>
         <listitem>
             <para>
-                <classname>Zend_Application_Bootstrap</classname>: Bietet Interfaces für Bootstrap Klassen.
-                <classname>Zend_Application_Bootstrap_Bootstrap</classname> bietet übliche Funktionalitäten für
-                die meisten Notwendigkeiten des Bootstrappings, inklusive Angorithmen um
-                Abhängigkeiten zu prüfen und die Möglichkeit Bootstrap Ressourcen bei Bedarf zu
-                laden.
+                <classname>Zend_Application_Bootstrap</classname>: Bietet Interfaces für Bootstrap
+                Klassen. <classname>Zend_Application_Bootstrap_Bootstrap</classname> bietet übliche
+                Funktionalitäten für die meisten Notwendigkeiten des Bootstrappings, inklusive
+                Angorithmen um Abhängigkeiten zu prüfen und die Möglichkeit Bootstrap Ressourcen bei
+                Bedarf zu laden.
             </para>
         </listitem>
         <listitem>
@@ -132,8 +132,8 @@
         <para>
             <classname>Zend_Application</classname>'s zweites Feld der Arbeit ist die Ausführung des
             Bootstraps der Anwendung. Bootstraps müssen mindestens
-            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> implementieren, welches die
-            folgende API definiert:
+            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> implementieren, welches
+            die folgende API definiert:
         </para>
 
         <programlisting role="php"><![CDATA[

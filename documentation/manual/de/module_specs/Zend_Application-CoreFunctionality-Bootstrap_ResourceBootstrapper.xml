@@ -5,13 +5,13 @@
     <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
 
     <para>
-        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> ist ein Interface das zu
-        Verwenden ist wenn externe Ressourcen geladen werden -- z.B. wenn ein oder mehrere
+        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> ist ein Interface das
+        zu Verwenden ist wenn externe Ressourcen geladen werden -- z.B. wenn ein oder mehrere
         Ressourcen nicht direkt in der Klasse definiert werden, sonder über Plugins. Es sollte
-        in Verbindung mit
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
-        verwendet werden;
-        <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
+        in Verbindung mit <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
+        verwendet werden; <link
+            linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
         implementiert diese Funktionalität.
     </para>
 
@@ -46,8 +46,8 @@
 
                         <listitem><para>
                             <code>$options</code>: <emphasis>Optional</emphasis>.
-                            Ein Array oder <classname>Zend_Config</classname> Objekt das an die Ressource
-                            bei der Instanziierung zu übergeben ist.
+                            Ein Array oder <classname>Zend_Config</classname> Objekt das an die
+                            Ressource bei der Instanziierung zu übergeben ist.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>

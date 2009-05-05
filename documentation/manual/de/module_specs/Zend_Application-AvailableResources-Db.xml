@@ -5,9 +5,10 @@
     <title>Zend_Application_Resource_Db</title>
 
     <para>
-        <classname>Zend_Application_Resource_Db</classname> initialisiert einen <classname>Zend_Db</classname> Adapter
-        basieren auf den Ihm übergebenen Optionen. Standardmäßig, setzt es den Adapter als
-        Default Adapter zur Verwendung mit <classname>Zend_Db_Table</classname>.
+        <classname>Zend_Application_Resource_Db</classname> initialisiert einen
+        <classname>Zend_Db</classname> Adapter basieren auf den Ihm übergebenen Optionen.
+        Standardmäßig, setzt es den Adapter als Default Adapter zur Verwendung mit
+        <classname>Zend_Db_Table</classname>.
     </para>
 
     <para>

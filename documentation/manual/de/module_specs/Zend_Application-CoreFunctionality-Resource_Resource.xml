@@ -5,11 +5,11 @@
     <title>Zend_Application_Resource_Resource</title>
 
     <para>
-        <classname>Zend_Application_Resource_Resource</classname> ist ein Interface für Plugin Ressourcen
-        die mit Bootstrap Klassen verwendet werden welche
-        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> implementieren. Von Ressourcen
-        Plugins wird erwartet das Sie Konfiguration erlauben, das Sie Bootstrapping erlauben, und
-        ein Strategy Pattern für die Initialisierung der Ressource implementieren.
+        <classname>Zend_Application_Resource_Resource</classname> ist ein Interface für Plugin
+        Ressourcen die mit Bootstrap Klassen verwendet werden welche
+        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> implementieren. Von
+        Ressourcen Plugins wird erwartet das Sie Konfiguration erlauben, das Sie Bootstrapping
+        erlauben, und ein Strategy Pattern für die Initialisierung der Ressource implementieren.
     </para>
 
     <table id="zend.application.core-functionality.resource-resource.api">

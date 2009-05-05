@@ -5,10 +5,10 @@
     <title>Zend_Amf_Server</title>
 
     <para>
-        <classname>Zend_Amf_Server</classname> bietet einen RPC-artigen Server für die Behandlung der
-        Anfragen die vom Adobe Flash Player durchgeführt werden indem das AMF Protokoll verwendet
-        wird. Wie alle Zend Framework Serverklassen, folgt es der SoapServer API, und bietet ein
-        einfach zu merkendes Interface für die Erstellung von Servern.
+        <classname>Zend_Amf_Server</classname> bietet einen RPC-artigen Server für die Behandlung
+        der Anfragen die vom Adobe Flash Player durchgeführt werden indem das AMF Protokoll
+        verwendet wird. Wie alle Zend Framework Serverklassen, folgt es der SoapServer API, und
+        bietet ein einfach zu merkendes Interface für die Erstellung von Servern.
     </para>
 
     <example id="zend.amf.server.basic">
@@ -56,11 +56,12 @@ echo $response;
 ]]></programlisting>
 
         <para>
-            <code>Zend Amf Server</code> erlaubt es auch Services das Sie dynamisch geladen werden, basierend
-            auf dem angegebenen Verzeichnispfad. Man kann dem Server so viele Verzeichnisse wie man will
-            hinzufügen. Die Reihenfolge in der man die Verzeichnisse zum Server hinzufügt ist die Reihenfolge
-            in der die LIFO Suche auf den Verzeichnissen durchgeführt wird um die Klasse zu finden.
-            Das Hinzufügen von Verzeichnissen wird mit der <code>addDirectory()</code> Methode durchgeführt.
+            <code>Zend Amf Server</code> erlaubt es auch Services das Sie dynamisch geladen werden,
+            basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so viele
+            Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die Verzeichnisse zum
+            Server hinzufügt ist die Reihenfolge in der die LIFO Suche auf den Verzeichnissen
+            durchgeführt wird um die Klasse zu finden. Das Hinzufügen von Verzeichnissen wird mit
+            der <code>addDirectory()</code> Methode durchgeführt.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -69,13 +70,14 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
 
         <para>
-            Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich (_) oder Punkt (.)
-            Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird werden die Namenskonventionen
-            der PEAR und Zend Framework Klassen verwendet. Das bedeutet das wenn man das Sevice
-            <code>com_Foo_Bar</code> aufruft wird der Server nach der Datei Bar.php suchen, und zwar in jedem
-            der eingefügten Pfade unter <code>com/Foo/Bar.php</code>. Wenn die Punkt Notation für entfernte
-            Services wie für <code>com.Foo.Bar</code> verwendet wird, wird jedem eingefügten Pfad
-            <code>com/Foo/Bar.php</code> am Ende hinzugefügt um Bar.php automatisch zu laden.
+            Wenn entfernte Services aufgerufen werden kann der Quellname einen Unterstrich (_) oder
+            Punkt (.) Begrenzer im Verzeichnis haben. Wenn ein Unterstrich verwendet wird werden die
+            Namenskonventionen der PEAR und Zend Framework Klassen verwendet. Das bedeutet das wenn
+            man das Sevice <code>com_Foo_Bar</code> aufruft wird der Server nach der Datei Bar.php
+            suchen, und zwar in jedem der eingefügten Pfade unter <code>com/Foo/Bar.php</code>. Wenn
+            die Punkt Notation für entfernte Services wie für <code>com.Foo.Bar</code> verwendet
+            wird, wird jedem eingefügten Pfad <code>com/Foo/Bar.php</code> am Ende hinzugefügt um
+            Bar.php automatisch zu laden.
         </para>
 
         <para>
@@ -134,9 +136,9 @@ class World
         <title>Zum Server von Flex aus verbinden</title>
 
         <para>
-            Zum eigenen <classname>Zend_Amf_Server</classname> von einem Flex Projekt aus zu verbinden
-            ist recht einfach; man muß zur Endpunkt URI des <classname>Zend_Amf_Server</classname>
-            Sripts zeigen.
+            Zum eigenen <classname>Zend_Amf_Server</classname> von einem Flex Projekt aus zu
+            verbinden ist recht einfach; man muß zur Endpunkt URI des
+            <classname>Zend_Amf_Server</classname> Sripts zeigen.
         </para>
 
         <para>
@@ -162,10 +164,10 @@ class World
             Projekteigenschaften nochmals durch einen rechts-klick auf das Projektverzeichnis
             vom Navigator aus geöffnet und Eigenschaften ausgewählt werden. Vom Eigenschaften-Popup
             muß ‘Flex Compiler’ aufgewählt und der String: -services “services-config.xml”
-            hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die Option zu aktualisieren.
-            Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er in der services-config.xml
-            Datei nach Laufzeitvariablen schauen soll die von der RemotingObject Klasse verwendet
-            werden.
+            hinzugefügt werden. Auf Apply drücken, anschließend auf OK um die Option zu
+            aktualisieren. Was man jetzt getan hat, ist dem Flex Compiler zu sagen das er in der
+            Datei services-config.xml nach Laufzeitvariablen schauen soll die von der RemotingObject
+            Klasse verwendet werden.
         </para>
 
         <para>
@@ -263,8 +265,8 @@ myservice.world.hello("Wade");
 ]]></programlisting>
 
         <para>
-            Für weitere Informationen über den Aufruf von Flex RemoteObject,
-            <ulink url="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">besuchen
+            Für weitere Informationen über den Aufruf von Flex RemoteObject, <ulink
+                url="http://livedocs.adobe.com/flex/3/html/help.html?content=data_access_4.html">besuchen
             Sie die Adobe Flex 3 Hilfeseite</ulink>.
         </para>
     </sect2>
@@ -275,15 +277,15 @@ myservice.world.hello("Wade");
         <para>
             Standardmäßig werden alle Exceptions die in den angehängten Klassen oder Funktionen
             geworfen werden gefangen und als AMF Fehlermeldungen zurückgegeben. Trotzdem wird der
-            Inhalt des ErrorMessage Objekts variieren basierend darauf ob der Server im "Produktions"
-            Modus ist (der Standardzustand) oder nicht.
+            Inhalt des ErrorMessage Objekts variieren basierend darauf ob der Server im
+            "Produktions" Modus ist (der Standardzustand) oder nicht.
         </para>
 
         <para>
             Wenn er in Produktionsmodus ist wird nur der Exceptioncode zurückgegeben. Wenn der
             Produktionsmodus ausgeschaltet wird -- etwas das nur für das Testen getan werden sollte
-            -- werden die meisten Exceptiondetails zurückgegeben: Die Meldung der Exception, die Zeile,
-            und der Backtrace werden alle angehängt.
+            -- werden die meisten Exceptiondetails zurückgegeben: Die Meldung der Exception, die
+            Zeile, und der Backtrace werden alle angehängt.
         </para>
 
         <para>
@@ -295,7 +297,8 @@ $server->setProduction(false);
 ]]></programlisting>
 
         <para>
-            Um Ihn wieder einzuschalten, muß stattdessen einfach ein boolscher true Wert übergeben werden:
+            Um Ihn wieder einzuschalten, muß stattdessen einfach ein boolscher true Wert übergeben
+            werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -329,8 +332,8 @@ $server->setProduction(true);
 
         <para>
             Fallweise ist es gewünscht das Antwortobjekt leicht zu manipulieren, typischerweise um
-            zusätzliche Nachrichtenheader zurückzugeben. Die <code>handle()</code> Methode des Servers
-            gibt das Antwortobjekt zurück, was es erlaubt das zu tun.
+            zusätzliche Nachrichtenheader zurückzugeben. Die <code>handle()</code> Methode des
+            Servers gibt das Antwortobjekt zurück, was es erlaubt das zu tun.
         </para>
 
         <example id="zend.amf.server.response.messageHeaderExample">
@@ -356,12 +359,13 @@ echo $response;
         <title>Typ Objekte</title>
 
         <para>
-            Ähnlich wie SOAP, erlaubt es AMF Objekte zwischen dem Client und dem Server zu übergeben.
-            Das erlaubt eine große Flexibilität und Bindung zwischen den zwei Umgebungen.
+            Ähnlich wie SOAP, erlaubt es AMF Objekte zwischen dem Client und dem Server zu
+            übergeben. Das erlaubt eine große Flexibilität und Bindung zwischen den zwei Umgebungen.
         </para>
 
         <para>
-            <classname>Zend_Amf</classname> bietet drei Methoden für das Mappen von ActionScript und PHP Objekten.
+            <classname>Zend_Amf</classname> bietet drei Methoden für das Mappen von ActionScript und
+            PHP Objekten.
         </para>
 
         <itemizedlist>
@@ -369,7 +373,8 @@ echo $response;
                 <para>
                     Erstens kann man explizite Bindungen auf Serverlevel erstellen indem die
                     <code>setClassMap()</code> Methode verwendet wird. Das erste Argument ist der
-                    ActionScript Klassenname, das zweite ist der Name der PHP Klasse auf die gemappt wird:
+                    ActionScript Klassenname, das zweite ist der Name der PHP Klasse auf die gemappt
+                    wird:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -467,29 +472,30 @@ private function getContactHandler(event:ResultEvent):void {
         <title>Von Flash aus auf den Server verbinden</title>
 
         <para>
-            Auf den <classname>Zend_Amf_Server</classname> vom Flash Projekt aus zu verbinden ist etwas anders
-            als von Flex aus. Trotzdem sind die Funktionen mit <classname>Zend_Amf_Server</classname> die gleichen
-            wie mit Flex sobald die Verbindung erstellt wurde. Das folgende Beispiel kann auch von einer
-            Flex AS3 Datei aus verwendet werden. Wir werden die selbe <classname>Zend_Amf_Server</classname>
-            Konfiguration mit der World Klasse unserer Verbindung wiederverwenden.
+            Auf den <classname>Zend_Amf_Server</classname> vom Flash Projekt aus zu verbinden ist
+            etwas anders als von Flex aus. Trotzdem sind die Funktionen mit
+            <classname>Zend_Amf_Server</classname> die gleichen wie mit Flex sobald die Verbindung
+            erstellt wurde. Das folgende Beispiel kann auch von einer Flex AS3 Datei aus verwendet
+            werden. Wir werden die selbe <classname>Zend_Amf_Server</classname> Konfiguration mit
+            der World Klasse unserer Verbindung wiederverwenden.
         </para>
 
         <para>
             Öffne Flash CS und erstelle eine neue Flash Datei (ActionScript 3). Benenne das Dokument
-            ZendExample.fla und speichere das Dokument in einem Verzeichnis das wir für dieses Beispiel
-            verwenden werden. Erstelle eine neue AS3 Datei im selben Verzeichnis und benenne die Datei
-            Main.as. Öffne beide Dateien im Editor. Wir werden jetzt diese zwei Dateien über die Document
-            Klasse verbinden. Wähle ZendExample aus und klicke auf "stage". Im Eigenschaftsfenster von "stage"
-            ändere die Document Klasse auf Main. Das verbindet die Main.as ActionScript Datei mit dem Benutzer
-            Interface von ZendExample.fla. Wenn die Flashdatei ZendExample ausgeführt wird, dann wird die
-            Klasse Main.as gestartet. Als nächstes werden wir ein ActionScript hinzufügen um den AMF
-            Aufruf durchzuführen.
+            ZendExample.fla und speichere das Dokument in einem Verzeichnis das wir für dieses
+            Beispiel verwenden werden. Erstelle eine neue AS3 Datei im selben Verzeichnis und
+            benenne die Datei Main.as. Öffne beide Dateien im Editor. Wir werden jetzt diese zwei
+            Dateien über die Document Klasse verbinden. Wähle ZendExample aus und klicke auf
+            "stage". Im Eigenschaftsfenster von "stage" ändere die Document Klasse auf Main. Das
+            verbindet die Main.as ActionScript Datei mit dem Benutzer Interface von ZendExample.fla.
+            Wenn die Flashdatei ZendExample ausgeführt wird, dann wird die Klasse Main.as gestartet.
+            Als nächstes werden wir ein ActionScript hinzufügen um den AMF Aufruf durchzuführen.
         </para>
 
         <para>
-            Jetzt werden wir eine Main Klasse erstellen damit wir die Daten zum Server schicken und das
-            Ergebnis anzeigen lassen können. Kopiere den folgenden Code in die Main.as Datei und wird werden
-            den Code anschauen um zu erklären was die Rolle eines jeden Elements ist.
+            Jetzt werden wir eine Main Klasse erstellen damit wir die Daten zum Server schicken und
+            das Ergebnis anzeigen lassen können. Kopiere den folgenden Code in die Main.as Datei und
+            wird werden den Code anschauen um zu erklären was die Rolle eines jeden Elements ist.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -528,10 +534,10 @@ package {
 ]]></programlisting>
 
         <para>
-            Wir müssen zuerst zwei ActionScript Bibliotheken importieren die den Haufen an Arbeit erledigen.
-            Das erste ist NetConnection welches wie eine Zweiwege-Leitung, zwischen dem Client und dem Server,
-            funktioniert. Das zweite ist ein Responder Objekt welches die Rückgabewerte des Servers behandelt
-            relativ zum Erfolg oder Mißerfolg des Aufrufs.
+            Wir müssen zuerst zwei ActionScript Bibliotheken importieren die den Haufen an Arbeit
+            erledigen. Das erste ist NetConnection welches wie eine Zweiwege-Leitung, zwischen dem
+            Client und dem Server, funktioniert. Das zweite ist ein Responder Objekt welches die
+            Rückgabewerte des Servers behandelt relativ zum Erfolg oder Mißerfolg des Aufrufs.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -540,8 +546,8 @@ import flash.net.Responder;
 ]]></programlisting>
 
         <para>
-            In der Klasse benötigen wir drei Variable um NetConnection, Responder, und die Gateway URL zu
-            unserer <classname>Zend_Amf_Server</classname> Installation zu repräsentieren.
+            In der Klasse benötigen wir drei Variable um NetConnection, Responder, und die Gateway
+            URL zu unserer <classname>Zend_Amf_Server</classname> Installation zu repräsentieren.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -552,9 +558,9 @@ private var responder:Responder;
 
         <para>
             Im Main Contructor erstellen wir einen Responder und eine neue Verbindung zum
-            <classname>Zend_Amf_Server</classname> Endpunkt. Der Responder definiert zwei unterschiedliche Methoden
-            für die Behandlung des Servers. Der Einfachheit halber haben wir Sie onResult und onFault
-            benannt.
+            <classname>Zend_Amf_Server</classname> Endpunkt. Der Responder definiert zwei
+            unterschiedliche Methoden für die Behandlung des Servers. Der Einfachheit halber haben
+            wir Sie onResult und onFault benannt.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -564,9 +570,10 @@ connection.connect(gateway);
 ]]></programlisting>
 
         <para>
-            In der onComplete Funktion, welche ausgeführt wird sobald das Konstrukt fertiggestellt wurde,
-            senden wir die Daten zum Server. Wird benötigen eine weitere zusätzliche Zeile die den Aufruf
-            der <classname>Zend_Amf_Server</classname> World->hello Funktion durchführt.
+            In der onComplete Funktion, welche ausgeführt wird sobald das Konstrukt fertiggestellt
+            wurde, senden wir die Daten zum Server. Wird benötigen eine weitere zusätzliche Zeile
+            die den Aufruf der <classname>Zend_Amf_Server</classname> World->hello Funktion
+            durchführt.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -574,10 +581,11 @@ connection.call("World.hello", responder, params);
 ]]></programlisting>
 
         <para>
-            Als wir die Responder Variable erstellt haben, haben wir auch eine onResult und eine onFault
-            Funktion definiert die die Antwort des Servers behandeln. Wir haben diese Funktionen für ein
-            ergolfreiches Ergebnis der Servers hunzugefügt. Ein erfolgreicher Eventhandler wird immer dann
-            ausgeführt wenn die Verbindung zum Server richtig handgehabt wird.
+            Als wir die Responder Variable erstellt haben, haben wir auch eine onResult und eine
+            onFault Funktion definiert die die Antwort des Servers behandeln. Wir haben diese
+            Funktionen für ein erfolgreiches Ergebnis der Servers hunzugefügt. Ein erfolgreicher
+            Eventhandler wird immer dann ausgeführt wenn die Verbindung zum Server richtig
+            handgehabt wird.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -588,10 +596,10 @@ private function onResult(result:Object):void {
 ]]></programlisting>
 
         <para>
-            Die onFault Funktion wird aufgerufen wenn eine ungültige Antwort vom Server zurückgekommen ist.
-            Das passiert wenn auf dem Server ein Fehler stattgefunden hat, die URL zum Server ungültig ist,
-            der entfernte Service oder die Methode nicht existiert, und bei jedem anderen Verbindungsrelevanten
-            Problem.
+            Die onFault Funktion wird aufgerufen wenn eine ungültige Antwort vom Server
+            zurückgekommen ist. Das passiert wenn auf dem Server ein Fehler stattgefunden hat, die
+            URL zum Server ungültig ist, der entfernte Service oder die Methode nicht existiert, und
+            bei jedem anderen Verbindungsrelevanten Problem.
         </para>
 
         <programlisting role="as"><![CDATA[
@@ -602,11 +610,11 @@ private function onFault(fault:Object):void {
 
         <para>
             Das ActionScripts für die Erstellung der entfernten Verbindung ist jetzt fertiggestellt.
-            Der Aufruf der ZendExample Datei führt jetzt die Verbindung zu Zend Amf aus. Rückblickend
-            haben wir die benötigten Variablen hinzugefügt um eine Verbindung zum entfernten Server zu
-            öffnen, definiert welche Methoden in der Anwendung verwendet werden sollen wenn die Anwendung
-            eine Antwort vom Server empfängt, und schlußendlich die Anzeige der zurückgegebenen Daten über
-            trace().
+            Der Aufruf der ZendExample Datei führt jetzt die Verbindung zu Zend Amf aus.
+            Rückblickend haben wir die benötigten Variablen hinzugefügt um eine Verbindung zum
+            entfernten Server zu öffnen, definiert welche Methoden in der Anwendung verwendet werden
+            sollen wenn die Anwendung eine Antwort vom Server empfängt, und schlußendlich die
+            Anzeige der zurückgegebenen Daten über trace().
         </para>
 
     </sect2>

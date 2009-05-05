@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15345 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
@@ -13,8 +13,7 @@
             このディレクトリ構造は、次のようになります。
         </para>
 
-        <programlisting>
-<![CDATA[
+        <programlisting><![CDATA[
 docroot/
     index.php
 application/

@@ -6,8 +6,9 @@
 
     <para>
         Zend Framework wird mit dem
-        <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> ausgeliefert um Out-Of-The-Box reiche
-        Entwicklung von Internet Anwendungen zu unterstützen. Die Integrationspunkte mit Dojo enthalten:
+        <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink> ausgeliefert um Out-Of-The-Box
+        reiche Entwicklung von Internet Anwendungen zu unterstützen. Die Integrationspunkte mit Dojo
+        enthalten:
     </para>
 
     <itemizedlist>
@@ -15,17 +16,19 @@
         <listitem><para>dojo.data Kompatibilität</para></listitem>
         <listitem><para>View Helfer um beim Setup der Dojo Umgebung zu helfen</para></listitem>
         <listitem><para>Dijit-spezifische <classname>Zend_View</classname> Helfer</para></listitem>
-        <listitem><para>Dijit-spezifische <classname>Zend_Form</classname> Elemente und Dekoratore</para></listitem>
+        <listitem>
+            <para>Dijit-spezifische <classname>Zend_Form</classname> Elemente und Dekoratore</para>
+        </listitem>
     </itemizedlist>
 
     <para>
-        Die Dojo Distribution selbst kann im <code>externals/dojo/</code> Verzeichnis der Zend Framework
-        Distribution gefunden werden. Es ist eine Source Distribution, welche Dojo's kompletten
-        Javascript Source enthält, Unit Tests und Build Tools. Man kann das ins eigene Javascript
-        Verzeichnis symbolisch linken, es kopieren, oder das Build Tool verwenden um einen eigenen
-        Build zu erstellen und ins eigene Projekt zu inkludieren. Alternativ kann eines der Content
-        Delivery Networks verwendet werden die Dojo anbietet (ZF unterstützt beide, den offiziellen AOL CDN
-        sowie den Google CDN).
+        Die Dojo Distribution selbst kann im <code>externals/dojo/</code> Verzeichnis der Zend
+        Framework Distribution gefunden werden. Es ist eine Source Distribution, welche Dojo's
+        kompletten Javascript Source enthält, Unit Tests und Build Tools. Man kann das ins eigene
+        Javascript Verzeichnis symbolisch linken, es kopieren, oder das Build Tool verwenden um
+        einen eigenen Build zu erstellen und ins eigene Projekt zu inkludieren. Alternativ kann
+        eines der Content Delivery Networks verwendet werden die Dojo anbietet (ZF unterstützt
+        beide, den offiziellen AOL CDN sowie den Google CDN).
     </para>
 </sect1>
 <!--

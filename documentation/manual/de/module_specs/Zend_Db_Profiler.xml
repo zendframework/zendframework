@@ -10,9 +10,9 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Db_Profiler</classname> kann aktiviert werden, um das Erstellen von Profilen für
-            Abfragen zu erlauben. Die Profile enthalten die Abfragen, die durch den Adapter
-            verarbeitet worden sind, sowie die Laufzeit der Abfragen, um die Kontrolle der
+            <classname>Zend_Db_Profiler</classname> kann aktiviert werden, um das Erstellen von
+            Profilen für Abfragen zu erlauben. Die Profile enthalten die Abfragen, die durch den
+            Adapter verarbeitet worden sind, sowie die Laufzeit der Abfragen, um die Kontrolle der
             verarbeiteten Abfragen zu ermöglichen, ohne das extra Code für das Debugging zu den
             Klassen hinzugefügt werden muß. Die erweiterte Verwendung ermöglicht den Entwickler
             sogar zu filtern, welche Abfragen aufgezeichnet werden sollen.
@@ -43,15 +43,16 @@ $db->getProfiler()->setEnabled(true);
 ]]></programlisting>
 
         <para>
-            Der Wert der <code>profiler</code> Option ist flexibel. Er wird unterschiedlich interpretiert,
-            abhängig von seinem Typ. Meistens sollte ein einfacher Boolscher Wert verwendet werden, aber
-            andere Typen ermöglichen es das Verhalten des Profilers anzupassen.
+            Der Wert der <code>profiler</code> Option ist flexibel. Er wird unterschiedlich
+            interpretiert, abhängig von seinem Typ. Meistens sollte ein einfacher Boolscher Wert
+            verwendet werden, aber andere Typen ermöglichen es das Verhalten des Profilers
+            anzupassen.
         </para>
 
         <para>
-            Ein boolsches Argument aktiviert den Profiler wenn es der Wert <code>true</code> ist, oder schaltet
-            ihn mit <code>false</code> aus. Die Profiler Klasse ist die Standard Profiler Klasse des Adapters
-            <classname>Zend_Db_Profiler</classname>.
+            Ein boolsches Argument aktiviert den Profiler wenn es der Wert <code>true</code> ist,
+            oder schaltet ihn mit <code>false</code> aus. Die Profiler Klasse ist die Standard
+            Profiler Klasse des Adapters <classname>Zend_Db_Profiler</classname>.
             <programlisting role="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
@@ -59,9 +60,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            Eine Instanz eines Profiler Objektes führt dazu das der Adapter dieses Objekt verwendet. Der
-            Typ des Objektes muß hierfür <classname>Zend_Db_Profiler</classname> oder eine Subklasse sein.
-            Der Profiler muß separat eingeschaltet werden.
+            Eine Instanz eines Profiler Objektes führt dazu das der Adapter dieses Objekt verwendet.
+            Der Typ des Objektes muß hierfür <classname>Zend_Db_Profiler</classname> oder eine
+            Subklasse sein. Der Profiler muß separat eingeschaltet werden.
             <programlisting role="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
@@ -71,13 +72,15 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            Ein Argument kann ein assoziatives Array sein das eines oder alle der folgenden Schlüssel enthält:
-            '<code>enabled</code>', '<code>instance</code>', oder '<code>class</code>'. Die '<code>enabled</code>'
-            und '<code>instance</code>' Schlüssel korrespondieren zu den zuvor dokumentierten boolschen und Instanz
-            Typen. Der '<code>class</code>' Schlüssel wird verwendet um die Klasse die für einen eigenen Profiler
-            verwendet werden soll, zu benennen. Die Klasse muß <classname>Zend_Db_Profiler</classname> oder eine
-            Subklasse sein. Die Klasse wird ohne Konstruktor Argumente instanziert. Die '<code>class</code>'
-            Option wird ignoriert wenn die '<code>instance</code>' Option angegeben wurde.
+            Ein Argument kann ein assoziatives Array sein das eines oder alle der folgenden
+            Schlüssel enthält: '<code>enabled</code>', '<code>instance</code>', oder
+            '<code>class</code>'. Die '<code>enabled</code>' und '<code>instance</code>' Schlüssel
+            korrespondieren zu den zuvor dokumentierten boolschen und Instanz Typen. Der
+            '<code>class</code>' Schlüssel wird verwendet um die Klasse die für einen eigenen
+            Profiler verwendet werden soll, zu benennen. Die Klasse muß
+            <classname>Zend_Db_Profiler</classname> oder eine Subklasse sein. Die Klasse wird ohne
+            Konstruktor Argumente instanziert. Die '<code>class</code>' Option wird ignoriert wenn
+            die '<code>instance</code>' Option angegeben wurde.
             <programlisting role="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
@@ -88,9 +91,9 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         </para>
 
         <para>
-            Letztendlich kann das Argument ein Objekt des Typs <classname>Zend_Config</classname> sein das
-            Eigenschaften enthält welche als Array Schlüssel verwendet werden wie anbei beschrieben.
-            Zum Beispiel könnte die Datei "config.ini" die folgenden Daten enthalten:
+            Letztendlich kann das Argument ein Objekt des Typs <classname>Zend_Config</classname>
+            sein das Eigenschaften enthält welche als Array Schlüssel verwendet werden wie anbei
+            beschrieben. Zum Beispiel könnte die Datei "config.ini" die folgenden Daten enthalten:
             <programlisting role="php"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
@@ -136,8 +139,9 @@ $profiler = $db->getProfiler();
 ]]></programlisting>
 
         <para>
-            Dies gibt eine <classname>Zend_Db_Profiler</classname> Objektinstanz zurück. Mit dieser Instanz
-            kann der Entwickler seine Abfragen mit Hilfe von verschiedenen Methoden untersuchen:
+            Dies gibt eine <classname>Zend_Db_Profiler</classname> Objektinstanz zurück. Mit dieser
+            Instanz kann der Entwickler seine Abfragen mit Hilfe von verschiedenen Methoden
+            untersuchen:
         </para>
 
         <itemizedlist>
@@ -162,8 +166,8 @@ $profiler = $db->getProfiler();
             <listitem>
                 <para>
                     <code>getLastQueryProfile()</code> gibt das Profil der letzten (neuesten)
-                    Abfrage zurück, gleichgültig ob die Abfrage beendet werden konnte oder nicht (wenn
-                    nicht, wird die Endzeit null sein)
+                    Abfrage zurück, gleichgültig ob die Abfrage beendet werden konnte oder nicht
+                    (wenn nicht, wird die Endzeit null sein)
                 </para>
             </listitem>
             <listitem>
@@ -175,25 +179,26 @@ $profiler = $db->getProfiler();
 
         <para>
             Der Rückgabewert von <code>getLastQueryProfile()</code> und die einzelnen Elemente von
-            <code>getQueryProfiles()</code> sind <classname>Zend_Db_Profiler_Query</classname> Objekte, welche
-            die Möglichkeit bieten, die individuellen Abfragen zu untersuchen:
+            <code>getQueryProfiles()</code> sind <classname>Zend_Db_Profiler_Query</classname>
+            Objekte, welche die Möglichkeit bieten, die individuellen Abfragen zu untersuchen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>getQuery()</code> gibt den SQL Text der Abfrage zurück.
-                    Der SQL Text des vorbereiteten Statements mit Parametern ist der Text, zu der Zeit
-                    als die Abfrage vorbereitet wurde, er enthält also Platzhalter für Parameter, nicht die
+                    <code>getQuery()</code> gibt den SQL Text der Abfrage zurück. Der SQL Text des
+                    vorbereiteten Statements mit Parametern ist der Text, zu der Zeit als die
+                    Abfrage vorbereitet wurde, er enthält also Platzhalter für Parameter, nicht die
                     Werte die verwendet werden wenn das Statement ausgeführt wird.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getQueryParams()</code> gibt ein Array von Parameter Werten zurück die verwendet werden
-                    wenn eine vorbereitete Abfrage ausgeführt wird. Das beinhaltet beide, gebundene Parameter und
-                    Argumente für die <code>execute()</code> Methode des Statements. Die Schlüssel des Arrays sind
-                    die Positionierten (1-basierend) oder benannten (Zeichenkette) Parameter Indezes.
+                    <code>getQueryParams()</code> gibt ein Array von Parameter Werten zurück die
+                    verwendet werden wenn eine vorbereitete Abfrage ausgeführt wird. Das beinhaltet
+                    beide, gebundene Parameter und Argumente für die <code>execute()</code> Methode
+                    des Statements. Die Schlüssel des Arrays sind die Positionierten (1-basierend)
+                    oder benannten (Zeichenkette) Parameter Indezes.
                 </para>
             </listitem>
             <listitem>
@@ -205,10 +210,10 @@ $profiler = $db->getProfiler();
         </itemizedlist>
 
         <para>
-            Die Informationen, die <classname>Zend_Db_Profiler</classname> bereitstellt, sind nützlich, um
-            Engpässe in der Anwendung zu ermitteln und um Abfragen zu überprüfen, die durchgeführt
-            worden sind. Um zum Beispiel die genaue Abfrage zu sehen, die zuletzt durchgeführt
-            worden ist:
+            Die Informationen, die <classname>Zend_Db_Profiler</classname> bereitstellt, sind
+            nützlich, um Engpässe in der Anwendung zu ermitteln und um Abfragen zu überprüfen, die
+            durchgeführt worden sind. Um zum Beispiel die genaue Abfrage zu sehen, die zuletzt
+            durchgeführt worden ist:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -288,44 +293,45 @@ $profiler->setFilterElapsedSecs(null);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::CONNECT</classname>: Verbindungsoperationen oder
-                        Auswahl einer Datenbank .
+                        <classname>Zend_Db_Profiler::CONNECT</classname>: Verbindungsoperationen
+                        oder Auswahl einer Datenbank .
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::QUERY</classname>: allgemeine Datenbankabfragen, die
-                        keinem der anderen Typen entsprechen.
+                        <classname>Zend_Db_Profiler::QUERY</classname>: allgemeine
+                        Datenbankabfragen, die keinem der anderen Typen entsprechen.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::INSERT</classname>: jede Abfrage, die neue Daten zur
-                        Datenbank hinzufügt, normalerweise ein SQL INSERT.
+                        <classname>Zend_Db_Profiler::INSERT</classname>: jede Abfrage, die neue
+                        Daten zur Datenbank hinzufügt, normalerweise ein SQL INSERT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::UPDATE</classname>: jede Abfrage, die vorhandene Daten
-                        aktualisiert, normalerweise ein SQL UPDATE.
+                        <classname>Zend_Db_Profiler::UPDATE</classname>: jede Abfrage, die
+                        vorhandene Daten aktualisiert, normalerweise ein SQL UPDATE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::DELETE</classname>: jede Abfrage, die vorhandene Daten
-                        löscht, normalerweise ein SQL DELETE.
+                        <classname>Zend_Db_Profiler::DELETE</classname>: jede Abfrage, die
+                        vorhandene Daten löscht, normalerweise ein SQL DELETE.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::SELECT</classname>: jede Abfrage, die vorhandene Daten
-                        selektiert, normalerweise ein SQL SELECT.
+                        <classname>Zend_Db_Profiler::SELECT</classname>: jede Abfrage, die
+                        vorhandene Daten selektiert, normalerweise ein SQL SELECT.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Db_Profiler::TRANSACTION</classname>: jede Transaktionsoperation,
-                        wie zum Beispiel START TRANSACTION, COMMIT oder ROLLBACK.
+                        <classname>Zend_Db_Profiler::TRANSACTION</classname>: jede
+                        Transaktionsoperation, wie zum Beispiel START TRANSACTION, COMMIT oder
+                        ROLLBACK.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -388,8 +394,9 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
         <title>Specialized Profilers</title>
 
         <para>
-            Ein spezialisierter Profiler ist ein Objekt das von <classname>Zend_Db_Profiler</classname> abgeleitet ist.
-            Spezialisierte Profiler behandeln die Profilinginformationen auf speziellen Wegen.
+            Ein spezialisierter Profiler ist ein Objekt das von
+            <classname>Zend_Db_Profiler</classname> abgeleitet ist. Spezialisierte Profiler
+            behandeln die Profilinginformationen auf speziellen Wegen.
         </para>
 
         <xi:include href="Zend_Db_Profiler-Firebug.xml" />

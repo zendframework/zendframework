@@ -11,9 +11,10 @@
     </para>
 
     <para>
-        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname> Komponente gesendet welche
-        HTTP Header verwendet um sicherzustellen das der Seiteninhalt nicht gestört wird. Das Debuggen von
-        AJAX Anfragen die klare JSON und XML Antworten benötigen ist mit diesem Weg möglich.
+        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
+        Komponente gesendet welche HTTP Header verwendet um sicherzustellen das der Seiteninhalt
+        nicht gestört wird. Das Debuggen von AJAX Anfragen die klare JSON und XML Antworten´
+        benötigen ist mit diesem Weg möglich.
     </para>
 
     <para>
@@ -26,14 +27,14 @@
         </para></listitem>
 
         <listitem> <para>
-            Die Firebug Firefox Erweiterung welche unter
-            <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+            Die Firebug Firefox Erweiterung welche unter <ulink
+                url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
             heruntergeladen werden kann.
         </para></listitem>
 
         <listitem><para>
-            Die FirePHP Filefox Erweiterung welche unter
-            <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+            Die FirePHP Filefox Erweiterung welche unter <ulink
+                url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
             heruntergeladen werden kann.
         </para></listitem>
     </itemizedlist>

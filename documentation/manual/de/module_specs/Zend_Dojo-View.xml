@@ -10,9 +10,9 @@
 
     <itemizedlist>
         <listitem><para>
-            <emphasis>dojo():</emphasis> Erstellt die Dojo Umgebung für die eigene Seite, inklusive der
-            Werte für die Dojo Konfiguration, eigene Modulpfade, benötigte Modulstatements, Themenstylesheets,
-            CDN Verwendung, und vieles mehr.
+            <emphasis>dojo():</emphasis> Erstellt die Dojo Umgebung für die eigene Seite, inklusive
+            der Werte für die Dojo Konfiguration, eigene Modulpfade, benötigte Modulstatements,
+            Themenstylesheets, CDN Verwendung, und vieles mehr.
         </para></listitem>
     </itemizedlist>
 
@@ -20,8 +20,8 @@
         <title>Dojo View Helfer verwenden</title>
 
         <para>
-            Um die Dojo View Helfer zu verwenden muß man dem View Objekt mitteilen wo Sie zu finden sind. Das
-            kann durch den Aufruf von <code>addHelperPath()</code> getan werden:
+            Um die Dojo View Helfer zu verwenden muß man dem View Objekt mitteilen wo Sie zu finden
+            sind. Das kann durch den Aufruf von <code>addHelperPath()</code> getan werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -29,8 +29,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
         <para>
-            Alternativ kann <classname>Zend_Dojo</classname>'s <code>enableView()</code> Methode verwendet werden um einem
-            die Arbeit abzunehmen:
+            Alternativ kann <classname>Zend_Dojo</classname>'s <code>enableView()</code> Methode
+            verwendet werden um einem die Arbeit abzunehmen:
         </para>
 
         <programlisting role="php"><![CDATA[

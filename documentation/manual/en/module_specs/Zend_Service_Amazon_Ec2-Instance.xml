@@ -75,7 +75,7 @@
                     <row>
                         <entry><code>Large</code></entry>
                         <entry><para>
-                            4 EC2 Compute Units (2 virtual corse with 2 EC2
+                            4 EC2 Compute Units (2 virtual cores with 2 EC2
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -99,7 +99,7 @@
                     <row>
                         <entry><code>Extra Large</code></entry>
                         <entry><para>
-                            8 EC2 Compute Units (4 virtual corse with 2 EC2
+                            8 EC2 Compute Units (4 virtual cores with 2 EC2
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -123,7 +123,7 @@
                     <row>
                         <entry><code>High-CPU Medium</code></entry>
                         <entry><para>
-                            5 EC2 Compute Units (2 virtual corse with 2.5 EC2
+                            5 EC2 Compute Units (2 virtual cores with 2.5 EC2
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -147,7 +147,7 @@
                     <row>
                         <entry><code>High-CPU Extra Large</code></entry>
                         <entry><para>
-                            20 EC2 Compute Units (8 virtual corse with 2.5 EC2
+                            20 EC2 Compute Units (8 virtual cores with 2.5 EC2
                             Compute Units each)
                         </para></entry>
                         <entry><para>
@@ -398,7 +398,7 @@ $return = $ec2_instance->describe('instanceId');
         <example id="zend.service.amazon.ec2.instance.utility.describebyimageid">
             <title>Describing Instances By Image Id</title>
             <para>
-                <code>describeByImageId</code> is functinoality the same as <code>describe</code>
+                <code>describeByImageId</code> is functionally the same as <code>describe</code>
                 but it will only return the instances that are using the provided imageId.
             </para>
             <para>

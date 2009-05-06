@@ -133,7 +133,7 @@ clean:
 		rm -Rf html/figures ; \
 	fi
 	-rm -f _temp_*.xml
-	-rm -f ./*.pdf
+	-rm -f /*.pdf
 	-rm -f ZendFramework.fo
 
 cleanall: clean

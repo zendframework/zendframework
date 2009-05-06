@@ -6,12 +6,12 @@
 
     <para>
         Wenn man den MVC Layer vom Zend Framework verwendet, sind die Chancen das man
-        <classname>Zend_View</classname> verwendet recht hoch. <classname>Zend_View</classname> ist performant
-        verglichen mit anderen View oder Templating Engines; da View Skripte in PHP geschrieben
-        sind muß man weder den Overhead eines Kompilierungssystems zu PHP auf sich nehmen, noch muß
-        man darauf achten das das kompilierte PHP nicht optimiert ist. Trotzdem zeigt
-        <classname>Zend_View</classname> seine eigenen Probleme: Erweiterungen werden durch überladen (View
-        Helfer) durchgeführt, und eine Anzahl von View Helfern, die dadurch
+        <classname>Zend_View</classname> verwendet recht hoch. <classname>Zend_View</classname> ist
+        performant verglichen mit anderen View oder Templating Engines; da View Skripte in PHP
+        geschrieben sind muß man weder den Overhead eines Kompilierungssystems zu PHP auf sich
+        nehmen, noch muß man darauf achten das das kompilierte PHP nicht optimiert ist. Trotzdem
+        zeigt <classname>Zend_View</classname> seine eigenen Probleme: Erweiterungen werden durch
+        überladen (View Helfer) durchgeführt, und eine Anzahl von View Helfern, die dadurch
         Schlüsselfunktionalitäten bieten machen das auch, mit einem Verlust von Geschwindigkeit.
     </para>
 
@@ -19,23 +19,23 @@
         <title>Wie kann ich die Auflösung von View Helfern schneller machen?</title>
 
         <para>
-            Die meisten <classname>Zend_View</classname> "Methoden" werden in Wirklichkeit durch Überladen
-            des Helfersystems angeboten. Das bietet Zend_View wichtige Flexibilität; statt der
-            Notwendigkeit Zend_View zu erweitern und alle Helfermethoden anzubieten die man in der
-            eigenen Anwendung verwenden will, kann man eigene Helfermethoden in separaten Klassen
-            definieren und Sie bei Bedarf konsumieren wie wenn es direkte Methoden von Zend_View
-            wären. Das hält das View Objekt selbst relativ dünn, und stellt sicher das Objekte nur
-            erstellt werden wenn Sie auch benötigt werden.
+            Die meisten <classname>Zend_View</classname> "Methoden" werden in Wirklichkeit durch
+            Überladen des Helfersystems angeboten. Das bietet Zend_View wichtige Flexibilität; statt
+            der Notwendigkeit Zend_View zu erweitern und alle Helfermethoden anzubieten die man in
+            der eigenen Anwendung verwenden will, kann man eigene Helfermethoden in separaten
+            Klassen definieren und Sie bei Bedarf konsumieren wie wenn es direkte Methoden von
+            Zend_View wären. Das hält das View Objekt selbst relativ dünn, und stellt sicher das
+            Objekte nur erstellt werden wenn Sie auch benötigt werden.
         </para>
 
         <para>
-            Intern verwendet <classname>Zend_View</classname> den
-            <link linkend="zend.loader.pluginloader">PluginLoader</link> um nach Helferklassen zu
-            sehen. Das bedeutet das für jeden Helfer den man aufruft, <classname>Zend_View</classname> den
+            Intern verwendet <classname>Zend_View</classname> den <link
+            linkend="zend.loader.pluginloader">PluginLoader</link> um nach Helferklassen zu sehen.
+            Das bedeutet das für jeden Helfer den man aufruft, <classname>Zend_View</classname> den
             Helfernamen zum PluginLoader übergeben muß, welcher dann den Klassennamen erkennen muß
-            damit er instanziiert werden kann. Nachfolgende Aufrufe des Helfers sind viel
-            schneller, da <classname>Zend_View</classname> eine interne Registry von geladenen Helfern
-            behält, aber wenn man viele Helfer verwendet, werden die Aufrufe hinzuaddiert.
+            damit er instanziiert werden kann. Nachfolgende Aufrufe des Helfers sind viel schneller,
+            da <classname>Zend_View</classname> eine interne Registry von geladenen Helfern behält,
+            aber wenn man viele Helfer verwendet, werden die Aufrufe hinzuaddiert.
         </para>
 
         <para>
@@ -61,11 +61,11 @@
 
             <para>
                 Eine andere Lösung für jene die die Geschwindigkeit sogar noch mehr steigern wollen
-                ist es <classname>Zend_View</classname>zu erweitern um manuell die Helfermethoden die man am
-                meisten in seiner Anwendung verwendet hinzuzufügen. Solche Helfermethoden können
-                einfach manuell die betreffenden Helferklassen instanziiert und auf Sie verwesen
-                wird, oder indem die komplette Implementation des Helfers in die Methode eingefügt
-                wird.
+                ist es <classname>Zend_View</classname>zu erweitern um manuell die Helfermethoden
+                die man am meisten in seiner Anwendung verwendet hinzuzufügen. Solche Helfermethoden
+                können einfach manuell die betreffenden Helferklassen instanziiert und auf Sie
+                verwesen wird, oder indem die komplette Implementation des Helfers in die Methode
+                eingefügt wird.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -169,8 +169,8 @@ class My_View extends Zend_View
                 Grundsätzlich, solange man nicht Variablen an das Partial übergibt und einen reinen
                 Variablenraum benötigt, oder ein Viewskript von einem anderen MVC Modul darstellt,
                 gibt es keinen Grund den Overhead von <code>partial()</code> zu verwenden;
-                stattdessen sollte man <classname>Zend_View</classname>'s eingebaute <code>render()</code>
-                Methode verwendet um das Viewskript darzustellen.
+                stattdessen sollte man <classname>Zend_View</classname>'s eingebaute
+                <code>render()</code> Methode verwendet um das Viewskript darzustellen.
             </para>
         </sect3>
     </sect2>

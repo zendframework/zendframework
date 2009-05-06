@@ -6,10 +6,11 @@
 
     <para>
         <classname>Zend_Db</classname> ist ein Datenbank Abstraktion Layer und ist dazu gedacht eine
-        gemeinsame API für SQL Operationen zu bieten. <classname>Zend_Db_Table</classname> ist ein Table
-        Data Bateway, dazu gedacht übliche Tabellen-artige Datenbank Operationen zu abstrahieren.
-        Wegen Ihrer abstrakten Natur und der "Magie" die Sie versteckt haben um Ihre Operationen
-        durchführen zu können, können Sie manchmal auch zu Geschwindigkeitsnachteilen führen.
+        gemeinsame API für SQL Operationen zu bieten. <classname>Zend_Db_Table</classname> ist ein
+        Table Data Bateway, dazu gedacht übliche Tabellen-artige Datenbank Operationen zu
+        abstrahieren. Wegen Ihrer abstrakten Natur und der "Magie" die Sie versteckt haben um Ihre
+        Operationen durchführen zu können, können Sie manchmal auch zu Geschwindigkeitsnachteilen
+        führen.
     </para>
 
     <sect2 id="performance.database.tableMetadata">
@@ -20,11 +21,11 @@
 
         <para>
             Um die Verwendung so einfach wie möglich zu halten, und auch sich konstant ändernde
-            Schemata wärend der Entwicklung zu unterstützen, macht <classname>Zend_Db_Table</classname>
-            einiges an Magie unter seinem Hut: bei der ersten Verwendung, holt es das
-            Tabellenschema und speichert es im Objekt. Diese Operation ist normalerweise sehr
-            teuer, unabhängig von der Datenbank -- das zu einer Schwachstelle in der Produktion
-            führen kann.
+            Schemata wärend der Entwicklung zu unterstützen, macht
+            <classname>Zend_Db_Table</classname> einiges an Magie unter seinem Hut: bei der ersten
+            Verwendung, holt es das Tabellenschema und speichert es im Objekt. Diese Operation ist
+            normalerweise sehr teuer, unabhängig von der Datenbank -- das zu einer Schwachstelle in
+            der Produktion führen kann.
         </para>
 
         <para>
@@ -35,15 +36,16 @@
             <title>Den Metadaten Cache verwenden</title>
 
             <para>
-                <classname>Zend_Db_Table</classname> kann optional <classname>Zend_Cache</classname> verwenden um die
-                Metadaten der Tabelle zu cachen. Dieser ist typischerweise schneller im Zugriff
-                und nicht so teuer wie das holen der Metadaten von der Tabelle selbst.
+                <classname>Zend_Db_Table</classname> kann optional <classname>Zend_Cache</classname>
+                verwenden um die Metadaten der Tabelle zu cachen. Dieser ist typischerweise
+                schneller im Zugriff und nicht so teuer wie das holen der Metadaten von der Tabelle
+                selbst.
             </para>
 
             <para>
-                Die Dokumentation von <link linkend="zend.db.table.metadata.caching">
-                <classname>Zend_Db_Table</classname> enthält Informationen über das Cachen der Metadaten
-                </link>.
+                Die Dokumentation von <link
+                    linkend="zend.db.table.metadata.caching"><classname>Zend_Db_Table</classname>
+                    enthält Informationen über das Cachen der Metadaten</link>.
             </para>
         </sect3>
 
@@ -68,18 +70,19 @@
         </title>
 
         <para>
-            <classname>Zend_Db_Select</classname> ist relativ gut in seinem Job. Trotzdem kann es, wenn man
-            komplexe Abfragen benötigt die Joins oder Unterabfragen enthalten, sehr naiv sein.
+            <classname>Zend_Db_Select</classname> ist relativ gut in seinem Job. Trotzdem kann es,
+            wenn man komplexe Abfragen benötigt die Joins oder Unterabfragen enthalten, sehr naiv
+            sein.
         </para>
 
         <sect3 id="performance.database.select.writeyourown">
             <title>Selbst getuntes SQL schreiben</title>
 
             <para>
-                Die einzige echte Antwort ist es eigenes SQL zu schreiben; <classname>Zend_Db</classname>
-                erfordert nicht die Verwendung von <classname>Zend_Db_Select</classname>, als ist die
-                Verwendung von eigenen, getunten SQL Select Statements, eine perfekte und legitime
-                Anwendung.
+                Die einzige echte Antwort ist es eigenes SQL zu schreiben;
+                <classname>Zend_Db</classname> erfordert nicht die Verwendung von
+                <classname>Zend_Db_Select</classname>, als ist die Verwendung von eigenen, getunten
+                SQL Select Statements, eine perfekte und legitime Anwendung.
             </para>
             <para>
                 Lasse <code>EXPLAIN</code> auf den Abfragen laufen, und teste eine Vielzahl von

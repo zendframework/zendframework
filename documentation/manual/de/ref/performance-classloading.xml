@@ -273,8 +273,8 @@ Zend_Loader_Autoloader::getInstance();
             </para></listitem>
 
             <listitem><para>
-                <classname>Zend_Filter_Inflector</classname>: Filter (verwendet vom ViewRenderer Action
-                Helfer und Zend_Layout)
+                <classname>Zend_Filter_Inflector</classname>: Filter (verwendet vom ViewRenderer
+                Action Helfer und Zend_Layout)
             </para></listitem>
 
             <listitem><para>
@@ -282,8 +282,8 @@ Zend_Loader_Autoloader::getInstance();
             </para></listitem>
 
             <listitem><para>
-                <classname>Zend_Form</classname>: Elemente, Prüfungen, Filter, Dekoratore, Captcha und
-                File Transfer Adapter
+                <classname>Zend_Form</classname>: Elemente, Prüfungen, Filter, Dekoratore, Captcha
+                und File Transfer Adapter
             </para></listitem>
 
             <listitem><para>

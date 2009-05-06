@@ -80,9 +80,10 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         parent::__wakeup();
 
         // Find the base channel element and create an alias to it.
-        if ($this->_element->firstChild->nodeName == 'rdf:RDF') {
-            $this->_element = $this->_element->firstChild;
-        } else {
+        $rdfTags = $this->_element->getElementsByTagNameNS('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'RDF');
+        if ($rdfTags->length != 0) {
+        	$this->_element = $rdfTags->item(0);
+        } else  {
             $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
         }
         if (!$this->_element) {

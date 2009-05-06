@@ -4,19 +4,20 @@
 <sect1 id="zend.feed.introduction">
     <title>Einführung</title>
     <para>
-        <classname>Zend_Feed</classname> stellt Funktionalitäten für das Konsumieren von RSS und Atom Feeds.
-        Es stellt eine natürliche Syntax bereit, um auf Elemente und Attribute des Feeds sowie auf
-        die Attribute der Einträge zugreifen zu können. Mit derselben natürlichen Syntax bietet
-        <classname>Zend_Feed</classname> auch eine umfassende Unterstützung für das Ändern von Feed und
-        Eintragsstruktur sowie die Rückgabe der Ergebniss nach XML. In Zukunft könnte diese
-        Modifizierungsunterstützung auch das Atom Publishing Protocol unterstützen.
+        <classname>Zend_Feed</classname> stellt Funktionalitäten für das Konsumieren von RSS und
+        Atom Feeds. Es stellt eine natürliche Syntax bereit, um auf Elemente und Attribute des Feeds
+        sowie auf die Attribute der Einträge zugreifen zu können. Mit derselben natürlichen Syntax
+        bietet <classname>Zend_Feed</classname> auch eine umfassende Unterstützung für das Ändern
+        von Feed und Eintragsstruktur sowie die Rückgabe der Ergebniss nach XML. In Zukunft könnte
+        diese Modifizierungsunterstützung auch das Atom Publishing Protocol unterstützen.
     </para>
 
     <para>
-        <classname>Zend_Feed</classname> besteht aus der Basisklasse <classname>Zend_Feed</classname>, sowie den beiden
-        abstrakten Basisklassen <classname>Zend_Feed_Abstract</classname> und
-        <classname>Zend_Feed_Entry_Abstract</classname> für die Darstellung von Feeds und Einträgen, aus
-        speziellen Implementationen von Feeds und Einträgen für RSS und Atom sowie einem Helfer,
+        <classname>Zend_Feed</classname> besteht aus der Basisklasse
+        <classname>Zend_Feed</classname>, sowie den beiden abstrakten Basisklassen
+        <classname>Zend_Feed_Abstract</classname> und
+        <classname>Zend_Feed_Entry_Abstract</classname> für die Darstellung von Feeds und Einträgen,
+        aus speziellen Implementationen von Feeds und Einträgen für RSS und Atom sowie einem Helfer,
         der hinter den Kulissen die natürliche Syntax ermöglicht.
     </para>
 
@@ -31,8 +32,8 @@
         <title>Achtung</title>
         <para>
             Viele RSS Feeds bieten verschiedene Eigenschaften für Kanäle und Einträge. Die RSS
-            Spezifikation bietet viele optionale Eigenschaften, also sei dir dessen beim Schreiben von
-            Code für die Verarbeitung von RSS Daten bewußt.
+            Spezifikation bietet viele optionale Eigenschaften, also sei dir dessen beim Schreiben
+            von Code für die Verarbeitung von RSS Daten bewußt.
         </para>
     </note>
 

@@ -59,7 +59,7 @@ class FooController extends Zend_Controller_Action
                 Standardmäßig aktiviert der <link linkend="zend.controller.front">Front Kontroller</link> den
                 Aktion Helfer des <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>'s.
                 Dieser Helfer übernimmt das Einfügen des View Objekts in den Kontroller, sowie das automatische
-                Rendern der View. Er kan innerhalb des Aktion Kontrollers mit einer der folgenden Methoden
+                Rendern der View. Er kann innerhalb des Aktion Kontrollers mit einer der folgenden Methoden
                 ausgeschaltet werden:
             </para>
 

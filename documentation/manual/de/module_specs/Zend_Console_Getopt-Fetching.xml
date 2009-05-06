@@ -137,21 +137,23 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
             </listitem>
             <listitem>
                 <para>
-                    Als Zeichenkette welche JSON Daten enthält: verwenden der <code>toJson()</code> Methode.
+                    Als Zeichenkette welche JSON Daten enthält: verwenden der <code>toJson()</code>
+                    Methode.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Als Zeichenkette welche XML Daten enthält: verwenden der <code>toXml()</code> Methode.
+                    Als Zeichenkette welche XML Daten enthält: verwenden der <code>toXml()</code>
+                    Methode.
                 </para>
             </listitem>
         </itemizedlist>
         <para>
             In allen obigen Auflistungsmethoden, ist die Flag-Zeichenkette die erste Zeichenkette
             in der entsprechenden Liste von Aliasen. Wenn zum Beispiel die Aliase der Option als
-            "<code>verbose|v</code>" definiert sind, wird die erste Zeichenkette "<code>verbose</code>"
-            als kanonischer Name der Option verwendet. Der Name des Optionsflags enthält nicht die
-            vorangestellten Bindestriche.
+            "<code>verbose|v</code>" definiert sind, wird die erste Zeichenkette
+            "<code>verbose</code>" als kanonischer Name der Option verwendet. Der Name des
+            Optionsflags enthält nicht die vorangestellten Bindestriche.
         </para>
     </sect2>
 
@@ -159,9 +161,9 @@ $p_parameter = $opts->p; // Null wenn nicht gesetzt
         <title>Nicht-Options Argumente erhalten</title>
         <para>
             Nachdem die Argumente der Option und deren Parameter von der Kommandozeile analysiert
-            wurden, können zusätzliche Argumente zurück bleiben. Diese Argumente können abgefragt werden
-            durch Verwendung der <code>getRemainingArgs()</code> Methode. Diese Methode gibt ein Array
-            von Zeichenketten zurück welche nicht Teil irgendeiner Option waren.
+            wurden, können zusätzliche Argumente zurück bleiben. Diese Argumente können abgefragt
+            werden durch Verwendung der <code>getRemainingArgs()</code> Methode. Diese Methode gibt
+            ein Array von Zeichenketten zurück welche nicht Teil irgendeiner Option waren.
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
             <title>Verwenden von getRemainingArgs()</title>
@@ -172,11 +174,12 @@ $args = $opts->getRemainingArgs(); // Rückgabe array('filename')
 ]]></programlisting>
         </example>
         <para>
-            <classname>Zend_Console_Getopt</classname> unterstützt die GNU Konvention das ein Argument welches auf einem
-            Doppelten Bindestrich besteht das Ende der Optionen bezeichnet. Jedes Argument welches diesem
-            Bezeichner folgt, muß als Nicht-Options-Argument behandelt werden. Das ist nützlich wenn ein
-            Nicht-Options-Argument vorhanden ist welches mit einem Bindestrich anfängt.
-            Zum Beispiel: "<command>rm -- -filename-with-dash</command>".
+            <classname>Zend_Console_Getopt</classname> unterstützt die GNU Konvention das ein
+            Argument welches auf einem Doppelten Bindestrich besteht das Ende der Optionen
+            bezeichnet. Jedes Argument welches diesem Bezeichner folgt, muß als
+            Nicht-Options-Argument behandelt werden. Das ist nützlich wenn ein
+            Nicht-Options-Argument vorhanden ist welches mit einem Bindestrich anfängt. Zum
+            Beispiel: "<command>rm -- -filename-with-dash</command>".
         </para>
     </sect2>
 

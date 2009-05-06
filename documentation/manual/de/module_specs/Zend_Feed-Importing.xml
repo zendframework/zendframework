@@ -6,8 +6,9 @@
     <title>Feeds importieren</title>
 
     <para>
-        <classname>Zend_Feed</classname> ermöglicht es Entwicklern, Feeds sehr einfach abzurufen. Wenn Du die
-        URI eines Feeds kennst, verwende einfach die <classname>Zend_Feed::import()</classname> Methode:
+        <classname>Zend_Feed</classname> ermöglicht es Entwicklern, Feeds sehr einfach abzurufen.
+        Wenn Du die URI eines Feeds kennst, verwende einfach die
+        <classname>Zend_Feed::import()</classname> Methode:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -15,8 +16,8 @@ $feed = Zend_Feed::import('http://feeds.example.com/feedName');
 ]]></programlisting>
 
     <para>
-        Du kannst <classname>Zend_Feed</classname> außerdem verwenden, um Inhalte eines Feeds aus einer Datei
-        oder die Inhalte aus einem PHP String Variable zu abzurufen.
+        Du kannst <classname>Zend_Feed</classname> außerdem verwenden, um Inhalte eines Feeds aus
+        einer Datei oder die Inhalte aus einem PHP String Variable zu abzurufen.
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -29,12 +30,12 @@ $feedFromPHP = Zend_Feed::importString($feedString);
 
     <para>
         In jedem der obigen Beispiele wird bei Erfolg abhängig vom Typ des Feeds ein Objekt einer
-        Klasse zurück gegeben, welche <classname>Zend_Feed_Abstract</classname> erweitert. Wird ein RSS Feed
-        durch eine der obigen Importiermethoden abgerufen, wird eine <classname>Zend_Feed_Rss</classname>
-        Objekt zurückgegeben. Auf der anderen Seite wird beim Importieren eines Atom Feeds ein
-        <classname>Zend_Feed_Atom</classname> Objekt zurückgegeben. Bei Fehlern, wie z.B. ein unlesbarer oder
-        nicht wohlgeformter Feed, werfen die Importiermethoden auch ein
-        <classname>Zend_Feed_Exception</classname> Objekt.
+        Klasse zurück gegeben, welche <classname>Zend_Feed_Abstract</classname> erweitert. Wird ein
+        RSS Feed durch eine der obigen Importiermethoden abgerufen, wird eine
+        <classname>Zend_Feed_Rss</classname> Objekt zurückgegeben. Auf der anderen Seite wird beim
+        Importieren eines Atom Feeds ein <classname>Zend_Feed_Atom</classname> Objekt zurückgegeben.
+        Bei Fehlern, wie z.B. ein unlesbarer oder nicht wohlgeformter Feed, werfen die
+        Importiermethoden auch ein <classname>Zend_Feed_Exception</classname> Objekt.
     </para>
 
     <sect2 id="zend.feed.importing.custom">
@@ -42,11 +43,13 @@ $feedFromPHP = Zend_Feed::importString($feedString);
         <title>Eigene Feeds</title>
 
         <para>
-            <classname>Zend_Feed</classname> ermöglicht es Entwicklern Ihre eigenen Feeds sehr einfach zu erstellen. Man
-            muß nur ein Array erstellen und es in <classname>Zend_Feed</classname> importieren, Dieses Array kann mit
-            <classname>Zend_Feed::importArray()</classname> oder mit <classname>Zend_Feed::importBuilder()</classname>
-            importiert werden. Im letzteren Fall wird das Array on the Fly durch eine eigene Datenquelle
-            berechnet die <classname>Zend_Feed_Builder_Interface</classname> implementiert.
+            <classname>Zend_Feed</classname> ermöglicht es Entwicklern Ihre eigenen Feeds sehr
+            einfach zu erstellen. Man muß nur ein Array erstellen und es in
+            <classname>Zend_Feed</classname> importieren, Dieses Array kann mit
+            <classname>Zend_Feed::importArray()</classname> oder mit
+            <classname>Zend_Feed::importBuilder()</classname> importiert werden. Im letzteren Fall
+            wird das Array on the Fly durch eine eigene Datenquelle berechnet die
+            <classname>Zend_Feed_Builder_Interface</classname> implementiert.
         </para>
 
         <sect3 id="zend.feed.importing.custom.importarray">
@@ -266,25 +269,29 @@ array(
                 <itemizedlist>
                     <listitem>
                         <para>
-                            RSS 2.0 Spezifikation: <ulink url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
+                            RSS 2.0 Spezifikation: <ulink
+                                url="http://blogs.law.harvard.edu/tech/rss">RSS 2.0</ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            Atom Spezifikation: <ulink url="http://tools.ietf.org/html/rfc4287">RFC 4287</ulink>
+                            Atom Spezifikation: <ulink url="http://tools.ietf.org/html/rfc4287">RFC
+                                4287</ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            WFW Spezifikation: <ulink url="http://wellformedweb.org/news/wfw_namespace_elements">Gut
-                            geformtes Web</ulink>
+                            WFW Spezifikation: <ulink
+                                url="http://wellformedweb.org/news/wfw_namespace_elements">Gut
+                                geformtes Web</ulink>
                         </para>
                     </listitem>
                     <listitem>
                         <para>
                             iTunes Spezifikation:
-                            <ulink url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes Technische
-                            Spezifikation</ulink>
+                            <ulink
+                                url="http://www.apple.com/itunes/store/podcaststechspecs.html">iTunes
+                                Technische Spezifikation</ulink>
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -298,27 +305,31 @@ array(
 
             <para>
                 Eine Zend_Feed Instanz kann von jeder Datenquelle erstellt werden die
-                <classname>Zend_Feed_Builder_Interface</classname> implementiert. Die <code>getHeader()</code> und
-                <code>getEntries()</code> Methoden müssen implementiert werden damit das Objekt mit
-                <classname>Zend_Feed::importBuilder()</classname> verwendet werden kann. Als einfache Referenz
-                Implementation kann <classname>Zend_Feed_Builder</classname> verwendet werden, welches ein Array im
-                Kontruktor entgegen nimmt, einige einfache Prüfungen durchführt, und anschließend in der
-                <code>importBuilder()</code> Methode verwendet werden kann. Die <code>getHeader()</code>
-                Methode muß eine Instanz von <classname>Zend_Feed_Builder_Header</classname> zurückgeben, und
-                <code>getEntries()</code> muß ein Array von <classname>Zend_Feed_Builder_Entry</classname> Instanzen
-                zurückgeben.
+                <classname>Zend_Feed_Builder_Interface</classname> implementiert. Die
+                <code>getHeader()</code> und <code>getEntries()</code> Methoden müssen implementiert
+                werden damit das Objekt mit <classname>Zend_Feed::importBuilder()</classname>
+                verwendet werden kann. Als einfache Referenz Implementation kann
+                <classname>Zend_Feed_Builder</classname> verwendet werden, welches ein Array im
+                Kontruktor entgegen nimmt, einige einfache Prüfungen durchführt, und anschließend in
+                der <code>importBuilder()</code> Methode verwendet werden kann. Die
+                <code>getHeader()</code> Methode muß eine Instanz von
+                <classname>Zend_Feed_Builder_Header</classname> zurückgeben, und
+                <code>getEntries()</code> muß ein Array von
+                <classname>Zend_Feed_Builder_Entry</classname> Instanzen zurückgeben.
             </para>
 
             <note>
                 <para>
-                    <classname>Zend_Feed_Builder</classname> arbeitet als konkrete Implementation um die Verwendung zu
-                    demonstrieren. Benutzer sind angehlaten Ihre eigenen Klassen zu Erstellen um
-                    <classname>Zend_Feed_Builder_Interface</classname> zu implementieren.
+                    <classname>Zend_Feed_Builder</classname> arbeitet als konkrete Implementation um
+                    die Verwendung zu demonstrieren. Benutzer sind angehlaten Ihre eigenen Klassen
+                    zu Erstellen um <classname>Zend_Feed_Builder_Interface</classname> zu
+                    implementieren.
                 </para>
             </note>
 
             <para>
-                Hier ist ein Beispiel der Verwendung von <classname>Zend_Feed::importBuilder()</classname>:
+                Hier ist ein Beispiel der Verwendung von
+                <classname>Zend_Feed::importBuilder()</classname>:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -343,8 +354,9 @@ $rssFeedFromArray =
             <title>Ausgeben des Inhalts eines Feeds</title>
 
             <para>
-                Um den Inhalt einer <classname>Zend_Feed_Abstract</classname> Instanz auszugeben können die
-                <code>send()</code> oder <code>saveXml()</code> Methoden verwendet werden.
+                Um den Inhalt einer <classname>Zend_Feed_Abstract</classname> Instanz auszugeben
+                können die <code>send()</code> oder <code>saveXml()</code> Methoden verwendet
+                werden.
             </para>
 
             <programlisting role="php"><![CDATA[

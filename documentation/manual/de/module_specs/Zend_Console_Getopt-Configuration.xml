@@ -83,9 +83,8 @@ $opts->setHelp(
             Aliase sind noch immer in Verwendung.
         </para>
         <para>
-            Ein Alias kann nur einmal definiert werden. Wenn versucht wird einen
-            Alias nochmals zu definieren wird eine <classname>Zend_Console_Getopt_Exception</classname>
-            geworfen.
+            Ein Alias kann nur einmal definiert werden. Wenn versucht wird einen Alias nochmals zu
+            definieren wird eine <classname>Zend_Console_Getopt_Exception</classname> geworfen.
         </para>
         <example id="zend.console.getopt.configuration.addaliases.example">
             <title>Verwenden von setAliases()</title>
@@ -155,16 +154,17 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <note>
             <title>Klarstellung des Ausdrucks "Option"</title>
             <para>
-                Der Ausdruck "Option" wird für die Konfiguration der <classname>Zend_Console_Getopt</classname>
-                Klasse verwendet um der Terminologie zu folgen die überall im Zend Framework benutzt
-                wird. Das ist nicht das selbe wie die Kommandozeilen Optionen die von der
-                <classname>Zend_Console_Getopt</classname> Klasse analysiert werden.
+                Der Ausdruck "Option" wird für die Konfiguration der
+                <classname>Zend_Console_Getopt</classname> Klasse verwendet um der Terminologie zu
+                folgen die überall im Zend Framework benutzt wird. Das ist nicht das selbe wie die
+                Kommandozeilen Optionen die von der <classname>Zend_Console_Getopt</classname>
+                Klasse analysiert werden.
             </para>
         </note>
         <para>
             Die aktuell unterstützten Optionen sind durch Konstanten in der Klasse definiert.
-            Diese Optionen, bzw deren konstanter Bezeichner (mit wörtlichem Wert in Großschreibweise)
-            sind anbei gelistet:
+            Diese Optionen, bzw deren konstanter Bezeichner (mit wörtlichem Wert in
+            Großschreibweise) sind anbei gelistet:
         </para>
         <itemizedlist>
             <listitem>
@@ -189,12 +189,11 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname>
-                    ("ruleMode") kann die Werte <classname>Zend_Console_Getopt::MODE_ZEND</classname>
-                    ("zend") und <classname>Zend_Console_Getopt::MODE_GNU</classname>
-                    ("gnu") haben. Diese Option sollte nicht verwendet werden ausser
-                    die Klasse wird erweiter um zusätzliche Syntax Formen zu
-                    unterstützen. Die zwei Modi die in der Basisklasse
+                    <classname>Zend_Console_Getopt::CONFIG_RULEMODE</classname> ("ruleMode") kann
+                    die Werte <classname>Zend_Console_Getopt::MODE_ZEND</classname> ("zend") und
+                    <classname>Zend_Console_Getopt::MODE_GNU</classname> ("gnu") haben. Diese Option
+                    sollte nicht verwendet werden ausser die Klasse wird erweiter um zusätzliche
+                    Syntax Formen zu unterstützen. Die zwei Modi die in der Basisklasse
                     <classname>Zend_Console_Getopt</classname> unterstützt werden sind
                     eindeutig. Wenn die Angabe eine Zeichenkette ist, nimmt die Klasse
                     <code>MODE_GNU</code> an, sonst wird <code>MODE_ZEND</code> angenommen.

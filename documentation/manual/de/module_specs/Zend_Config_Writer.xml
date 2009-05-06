@@ -4,14 +4,16 @@
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
-        <classname>Zend_Config_Writer</classname> gibt einem die Möglichkeit Configdateien aus <classname>Zend_Config</classname>
-        Objekten heraus zu schreiben. Es arbeitet mit einem Adapter-artigen System und ist deswegen sehr
-        einfach zu verwenden. Standardmäßig wird <classname>Zend_Config_Writer</classname> mit drei Adaptern
-        ausgeliefert, die alle gleich funktionieren. Der Writer wird mit speziellen Optionen instanziert,
-        welche <code>filename</code> und <code>config</code> sein können. Dann wird die <code>write()</code>
-        Methode des Writers aufgerufen und die Configdatei wird erstellt. Man kann <code>$filename</code>
-        und <code>$config</code> auch direkt an die <code>write()</code> Methode übergeben. Aktuell werden
-        die folgenden Writer mit <classname>Zend_Config_Writer</classname> ausgeliefert:
+        <classname>Zend_Config_Writer</classname> gibt einem die Möglichkeit Configdateien aus
+        <classname>Zend_Config</classname> Objekten heraus zu schreiben. Es arbeitet mit einem
+        Adapter-artigen System und ist deswegen sehr einfach zu verwenden. Standardmäßig wird
+        <classname>Zend_Config_Writer</classname> mit drei Adaptern ausgeliefert, die alle gleich
+        funktionieren. Der Writer wird mit speziellen Optionen instanziert, welche
+        <code>filename</code> und <code>config</code> sein können. Dann wird die
+        <code>write()</code> Methode des Writers aufgerufen und die Configdatei wird erstellt. Man
+        kann <code>$filename</code> und <code>$config</code> auch direkt an die <code>write()</code>
+        Methode übergeben. Aktuell werden die folgenden Writer mit
+        <classname>Zend_Config_Writer</classname> ausgeliefert:
     </para>
 
     <itemizedlist>
@@ -33,27 +35,28 @@
     </itemizedlist>
 
     <para>
-        Als Ausnahme hat <classname>Zend_Config_Writer_Ini</classname> einen zusätzlichen optionalen Parameter
-        <code>nestSeparator</code>, welche definiert mit welchem Zeichen die einzelnen Nodes getrennt werden.
-        Der Standard ist ein einzelner Punkt, wie er standardmäßig von <classname>Zend_Config_Ini</classname>
-        akzeptiert wird.
+        Als Ausnahme hat <classname>Zend_Config_Writer_Ini</classname> einen zusätzlichen optionalen
+        Parameter <code>nestSeparator</code>, welche definiert mit welchem Zeichen die einzelnen
+        Nodes getrennt werden. Der Standard ist ein einzelner Punkt, wie er standardmäßig von
+        <classname>Zend_Config_Ini</classname> akzeptiert wird.
     </para>
 
     <para>
-        Wenn ein <classname>Zend_Config</classname> Objekt geändert oder erstellt wird, muß man einige Dinge wissen.
-        Um einen Wert zu erstellen oder zu ändern muß einfach der Parameter des <classname>Zend_Config</classname>
-        Objektes über den Zugriffsaccessor (<code>-&gt;</code>) gesetzt werden. Um eine Sektion im Root
-        oder im Branch zu erstellen muß einfach ein neues Aray erstellt werden
-        (<code>$config-&gt;branch = array();</code>). Um zu definieren welche Sektion eine andere
-        erweitert, muß die <code>setExtend()</code> Methode am Root <classname>Zend_Config</classname> Objekt
-        aufgerufen werden.
+        Wenn ein <classname>Zend_Config</classname> Objekt geändert oder erstellt wird, muß man
+        einige Dinge wissen. Um einen Wert zu erstellen oder zu ändern muß einfach der Parameter des
+        <classname>Zend_Config</classname> Objektes über den Zugriffsaccessor (<code>-&gt;</code>)
+        gesetzt werden. Um eine Sektion im Root oder im Branch zu erstellen muß einfach ein neues
+        Aray erstellt werden (<code>$config-&gt;branch = array();</code>). Um zu definieren welche
+        Sektion eine andere erweitert, muß die <code>setExtend()</code> Methode am Root
+        <classname>Zend_Config</classname> Objekt aufgerufen werden.
     </para>
 
     <example id="zend.config.writer.example.using">
         <title>Verwenden von Zend_Config_Writer</title>
         <para>
-            Dieses Beispiel zeigt die grundsätzliche Verwendung von <classname>Zend_Config_Writer_Xml</classname>
-            um eine neue Konfigurationsdatei zu erstellen:
+            Dieses Beispiel zeigt die grundsätzliche Verwendung von
+            <classname>Zend_Config_Writer_Xml</classname> um eine neue Konfigurationsdatei zu
+            erstellen:
         </para>
         <programlisting role="php"><![CDATA[
 // Ein neues Config Objekt erstellen
@@ -87,8 +90,8 @@ $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
         <para>
-            Das erstellt eine XML Config Datei mit den Sektionen production und staging, wobei staging
-            production erweitert.
+            Das erstellt eine XML Config Datei mit den Sektionen production und staging, wobei
+            staging production erweitert.
         </para>
     </example>
 
@@ -118,10 +121,10 @@ $writer->write();
     <note>
         <title>Laden einer Config Datei</title>
         <para>
-            Beim Laden einer bestehenden Config Datei für eine Änderung ist es sehr wichtig  das alle
+            Beim Laden einer bestehenden Config Datei für eine Änderung ist es sehr wichtig das alle
             Sektionen geladen werden und die Erweiterungen übersprungen werden, sodas keine Werte
-            zusammengefügt werden. Das wird durch die Übergabe von <code>skipExtends</code> als Option
-            an den Constructor durchgeführt.
+            zusammengefügt werden. Das wird durch die Übergabe von <code>skipExtends</code> als
+            Option an den Constructor durchgeführt.
         </para>
     </note>
 </sect1>

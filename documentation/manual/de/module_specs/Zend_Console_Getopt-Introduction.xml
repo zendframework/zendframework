@@ -109,6 +109,7 @@
         </para>
     </note>
     <para>
-        Die folgende Sektion beschreibt die Verwendung von <classname>Zend_Console_Getopt</classname>.
+        Die folgende Sektion beschreibt die Verwendung von
+        <classname>Zend_Console_Getopt</classname>.
     </para>
 </sect1>

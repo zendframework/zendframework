@@ -6,13 +6,13 @@
 
     <para>
         <classname>Zend_Feed_Atom</classname> wird auf die ziemlich genau selbe Weise verwendet wie
-        <classname>Zend_Feed_Rss</classname>. Es stellt die gleichen Zugriffsmöglichkeiten auf Eigenschaften
-        auf Feed Ebene und bei der Iteration über Einträge des Feeds bereit. Der Hauptunterschied
-        ist die Struktur des Atom Protokolls selber. Atom ist ein Nachfolger von RSS; es ist ein
-        mehr verallgemeinertes Protokoll und es wurde gestaltet, um einfacher mit Feeds umzugehen,
-        die ihren kompletten Inhalt innerhalb des Feeds bereit stellen, indem für diesen Zweck der
-        <code>description</code> Tag von RSS in die zwei Elemente <code>summary</code> und
-        <code>content</code> aufgeteilt wird.
+        <classname>Zend_Feed_Rss</classname>. Es stellt die gleichen Zugriffsmöglichkeiten auf
+        Eigenschaften auf Feed Ebene und bei der Iteration über Einträge des Feeds bereit. Der
+        Hauptunterschied ist die Struktur des Atom Protokolls selber. Atom ist ein Nachfolger von
+        RSS; es ist ein mehr verallgemeinertes Protokoll und es wurde gestaltet, um einfacher mit
+        Feeds umzugehen, die ihren kompletten Inhalt innerhalb des Feeds bereit stellen, indem für
+        diesen Zweck der <code>description</code> Tag von RSS in die zwei Elemente
+        <code>summary</code> und <code>content</code> aufgeteilt wird.
     </para>
 
     <example id="zend.feed.consuming-atom.example.usage">
@@ -49,10 +49,10 @@ foreach ($feed as $entry) {
                 <para><code>link</code> - Feeds können mehrere Links enthalten, welche durch ein
                 <code>type</code> Attribut ausgezeichnet werden</para>
                 <para>
-                    In einem RSS Channel wäre dies gleichbedeutend mit <code>type="text/html"</code>.
-                    Wenn der Link auf eine alternative Version des selben Inhalts verweist, der
-                    nicht im Feed enthalten ist, würde es ein <code>rel="alternate"</code> Attribut
-                    enthalten.
+                    In einem RSS Channel wäre dies gleichbedeutend mit
+                    <code>type="text/html"</code>. Wenn der Link auf eine alternative Version des
+                    selben Inhalts verweist, der nicht im Feed enthalten ist, würde es ein
+                    <code>rel="alternate"</code> Attribut enthalten.
                 </para>
             </listitem>
             <listitem>

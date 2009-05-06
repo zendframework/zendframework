@@ -12,9 +12,9 @@
     </para>
 
     <para>
-        Wenn Du einen einzelnen Eintrag liest, wirst du dennoch ein <classname>Zend_Feed_Atom</classname>
-        Objekt erhalten, aber es wird automatisch ein "anonymer" Feed erstellt, welcher den Eintrag
-        enthält.
+        Wenn Du einen einzelnen Eintrag liest, wirst du dennoch ein
+        <classname>Zend_Feed_Atom</classname> Objekt erhalten, aber es wird automatisch ein
+        "anonymer" Feed erstellt, welcher den Eintrag enthält.
     </para>
 
     <example id="zend.feed.consuming-atom-single-entry.example.atom">
@@ -33,7 +33,9 @@ $entry = $feed->current();
     </para>
 
     <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
-        <title>Direkte Verwendung des Eintragsobjekts für einen Atom Feed mit nur einem Eintrag</title>
+        <title>
+            Direkte Verwendung des Eintragsobjekts für einen Atom Feed mit nur einem Eintrag
+        </title>
         <programlisting role="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();

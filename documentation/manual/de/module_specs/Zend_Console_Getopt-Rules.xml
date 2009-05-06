@@ -4,35 +4,33 @@
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
     <para>
-        Der Constructor für die <classname>Zend_Console_Getopt</classname> Klasse nimmt
-        ein bis drei Argumente. Das erste Argument definiert welche Optionen durch
-        die Anwendung unterstützt werden. Diese Klasse unterstützt alternative
-        Syntaxformen für das definieren der Optionen. Die nächsten Sektionen geben
-        Auskunft über das Format und die Verwendung dieser Syntaxformen.
+        Der Constructor für die <classname>Zend_Console_Getopt</classname> Klasse nimmt ein bis drei
+        Argumente. Das erste Argument definiert welche Optionen durch die Anwendung unterstützt
+        werden. Diese Klasse unterstützt alternative Syntaxformen für das definieren der Optionen.
+        Die nächsten Sektionen geben Auskunft über das Format und die Verwendung dieser
+        Syntaxformen.
     </para>
     <para>
-        Der Constructor nimmt zwei weitere Argumente, welche optional sind.
-        Das zweite Argument kann Kommandozeilen Argumente enthalten. Sein
-        Standardwert ist <code>$_SERVER['argv']</code>.
+        Der Constructor nimmt zwei weitere Argumente, welche optional sind. Das zweite Argument kann
+        Kommandozeilen Argumente enthalten. Sein Standardwert ist <code>$_SERVER['argv']</code>.
     </para>
     <para>
-        Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten
-        um das Verhalten von <classname>Zend_Console_Getopt</classname> anzupassen.
-        Siehe <link linkend="zend.console.getopt.configuration.config">Konfiguration hinzufügen</link>
-        für eine Referenz der möglichen Optionen.
+        Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten um das Verhalten
+        von <classname>Zend_Console_Getopt</classname> anzupassen. Siehe <link
+            linkend="zend.console.getopt.configuration.config">Konfiguration hinzufügen</link> für
+        eine Referenz der möglichen Optionen.
     </para>
 
     <sect2 id="zend.console.getopt.rules.short">
         <title>Optionen mit der kurzen Syntax definieren</title>
         <para>
-            <classname>Zend_Console_Getopt</classname> unterstützt eine kompakte Syntax wie Sie durch
-            GNU Getopt verwendet wird (siehe
-            <ulink url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
-            Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen
-            Zeichenkette, wird jeder Buchstabe angegeben der einem Flag entspricht
-            das durch die Anwendung unterstützt wird. Der Buchstabe, gefolgt von einem
-            Doppelpunkt Zeichen ("<code>:</code>") zeigt ein Flag das einen Parameter
-            benötigt.
+            <classname>Zend_Console_Getopt</classname> unterstützt eine kompakte Syntax wie Sie
+            durch GNU Getopt verwendet wird (siehe <ulink
+                url="http://www.gnu.org/software/libc/manual/html_node/Getopt.html">http://www.gnu.org/software/libc/manual/html_node/Getopt.html</ulink>).
+            Diese Syntax unterstützt nur Einzel-Zeichen Flags. In einer einzelnen Zeichenkette, wird
+            jeder Buchstabe angegeben der einem Flag entspricht das durch die Anwendung unterstützt
+            wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen ("<code>:</code>") zeigt ein
+            Flag das einen Parameter benötigt.
         </para>
         <example id="zend.console.getopt.rules.short.example">
             <title>Verwendung der kurzen Syntax</title>

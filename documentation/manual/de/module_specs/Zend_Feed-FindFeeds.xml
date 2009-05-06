@@ -5,19 +5,21 @@
     <title>Feeds von Websites abrufen</title>
     <para>
         Websites beinhalten oft <code>&lt;link&gt;</code> Tags, die auf Feeds mit für diese Seite
-        relevanten Informationen verweisen. <classname>Zend_Feed</classname> ermöglicht Dir, mit einem
-        einfachen Methodenaufruf alle von einer Webseite referenzierten Feeds abzurufen.
+        relevanten Informationen verweisen. <classname>Zend_Feed</classname> ermöglicht Dir, mit
+        einem einfachen Methodenaufruf alle von einer Webseite referenzierten Feeds abzurufen.
     </para>
     <programlisting role="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
 ]]></programlisting>
     <para>
-        Hier gibt die <code>findFeeds()</code> Methode ein Array mit <classname>Zend_Feed_Abstract</classname>
-        Objekten zurück, die durch die <code>&lt;link&gt;</code> Tags der news.html Webseite
-        referenziert worden sind. Abhängig vom Typ jedes Feeds kann jeder einzelne Eintrag in
-        <code>$feedArray</code> eine <classname>Zend_Feed_Rss</classname> oder <classname>Zend_Feed_Atom</classname>
-        Instanz enthalten. Bei Fehlern, wie z.B. ein HTTP 404 Response Code oder ein nicht
-        wohlgeformter Feed, wirft <classname>Zend_Feed</classname> eine <classname>Zend_Feed_Exception</classname>.
+        Hier gibt die <code>findFeeds()</code> Methode ein Array mit
+        <classname>Zend_Feed_Abstract</classname> Objekten zurück, die durch die
+        <code>&lt;link&gt;</code> Tags der news.html Webseite referenziert worden sind. Abhängig vom
+        Typ jedes Feeds kann jeder einzelne Eintrag in <code>$feedArray</code> eine
+        <classname>Zend_Feed_Rss</classname> oder <classname>Zend_Feed_Atom</classname> Instanz
+        enthalten. Bei Fehlern, wie z.B. ein HTTP 404 Response Code oder ein nicht wohlgeformter
+        Feed, wirft <classname>Zend_Feed</classname> eine
+        <classname>Zend_Feed_Exception</classname>.
     </para>
 </sect1>
 <!--

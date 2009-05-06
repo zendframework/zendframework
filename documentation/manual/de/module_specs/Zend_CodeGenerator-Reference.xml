@@ -61,9 +61,9 @@ abstract class Zend_CodeGenerator_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Abstract</classname> erweitert
-                <classname>Zend_CodeGenerator_Abstract</classname>, und fügt einige Eigenschaften hinzu für
-                das Verfolgen ob Inhalte geändert wurden sowie der Anzahl an Einrückungen die
-                vorhanden sein sollten bevor Inhalte erzeugt werden. Die API ist wie folgt:
+                <classname>Zend_CodeGenerator_Abstract</classname>, und fügt einige Eigenschaften
+                hinzu für das Verfolgen ob Inhalte geändert wurden sowie der Anzahl an Einrückungen
+                die vorhanden sein sollten bevor Inhalte erzeugt werden. Die API ist wie folgt:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -82,8 +82,8 @@ abstract class Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Member_Abstract</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> ist eine Basisklasse für die
-                Erstellung von Klassen-Member -- Eigenschaften und Methoden -- und bietet
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> ist eine Basisklasse
+                für die Erstellung von Klassen-Member -- Eigenschaften und Methoden -- und bietet
                 Zugriffs- und Änderungsmethoden für die Ausführung der Sichtbarkeit; ob ein
                 Member Abstrakt, Statisch, oder Final ist; und der Name des Members. Die API ist
                 wie folgt:
@@ -113,10 +113,10 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
             <title>Zend_CodeGenerator_Php_Body</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Body</classname> ist dazu gedacht generellen prozeduralen
-                Code in einer Datei einzufügen. Als solches kann man einfach den Inhalt für das
-                Objekt setzen, und es wird den Inhalt zurückgeben wenn man <code>generate()</code>
-                aufruft.
+                <classname>Zend_CodeGenerator_Php_Body</classname> ist dazu gedacht generellen
+                prozeduralen Code in einer Datei einzufügen. Als solches kann man einfach den Inhalt
+                für das Objekt setzen, und es wird den Inhalt zurückgeben wenn man
+                <code>generate()</code> aufruft.
             </para>
 
             <para>
@@ -137,12 +137,12 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Class</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Class</classname> ist für die Erstellung von PHP Klassen
-                gedacht. Die Basisfunktionalität ist nur die Erstellung der PHP Klasse selbst,
-                sowie optional den betreffenden PHP DocBlock. Klassen können von anderen Klassen
-                abgeleitet sein, oder diese Implementieren, und können als Abstrakt markiert sein.
-                Bei Verwendung von anderen CodeGenerator Klassen kann man auch Klassenkonstanten,
-                Eigenschaften und Methoden hinzufügen.
+                <classname>Zend_CodeGenerator_Php_Class</classname> ist für die Erstellung von PHP
+                Klassen gedacht. Die Basisfunktionalität ist nur die Erstellung der PHP Klasse
+                selbst, sowie optional den betreffenden PHP DocBlock. Klassen können von anderen
+                Klassen abgeleitet sein, oder diese Implementieren, und können als Abstrakt markiert
+                sein. Bei Verwendung von anderen CodeGenerator Klassen kann man auch
+                Klassenkonstanten, Eigenschaften und Methoden hinzufügen.
             </para>
 
             <para>
@@ -182,11 +182,11 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             <para>
                 Die <code>setProperty()</code> Methode akzeptiert ein Array von Informationen,
                 die verwendet werden können um eine Instanz von
-                <classname>Zend_CodeGenerator_Php_Property</classname> zu erstellen -- oder einfach eine
-                Instanz von <classname>Zend_CodeGenerator_Php_Property</classname> selbst. Genauso
-                akzeptiert <code>setMethod()</code> entweder ein Array von Information für die
-                Erstellung einer <classname>Zend_CodeGenerator_Php_Method</classname> Instanz oder eine
-                konkrete Instanz dieser Klasse.
+                <classname>Zend_CodeGenerator_Php_Property</classname> zu erstellen -- oder einfach
+                eine Instanz von <classname>Zend_CodeGenerator_Php_Property</classname> selbst.
+                Genauso akzeptiert <code>setMethod()</code> entweder ein Array von Information für
+                die Erstellung einer <classname>Zend_CodeGenerator_Php_Method</classname> Instanz
+                oder eine konkrete Instanz dieser Klasse.
             </para>
 
             <para>
@@ -199,16 +199,17 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Docblock</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Docblock</classname> kann verwendet werden um PHP DocBlocks
-                zu erstellen, inklusive aller standardmäßigen DocBlock Features: Kurz- und
+                <classname>Zend_CodeGenerator_Php_Docblock</classname> kann verwendet werden um PHP
+                DocBlocks zu erstellen, inklusive aller standardmäßigen DocBlock Features: Kurz- und
                 Langbeschreibung sowie zusätzliche Tags.
             </para>
 
             <para>
                 Zusätzliche Tags können durch Verwendung der <code>setTag()</code> und
                 <code>setTags()</code> Methoden gesetzt werden; diese nehmen entweder ein Array an
-                das das Tag beschreibt das an den <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>
-                Contructor übergeben wird, oder eine Instanz dieser Klasse selbst.
+                das das Tag beschreibt das an den
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> Contructor übergeben
+                wird, oder eine Instanz dieser Klasse selbst.
             </para>
 
             <para>
@@ -237,8 +238,8 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> ist für die Erstellung von
-                eigenen Tags, zum Einfügen in PHP DocBlocks, gedacht. Von Tags wird erwartet
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> ist für die Erstellung
+                von eigenen Tags, zum Einfügen in PHP DocBlocks, gedacht. Von Tags wird erwartet
                 das Sie einen Namen enthalten (Der Teil der unmittelbar dem '@' Symbol folgt)
                 und eine Beschreibung (alles das dem Tag Namen folgt).
             </para>
@@ -267,11 +268,12 @@ class Zend_CodeGenerator_Php_Docblock_Tag
             <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> ist eine spezielle Version
-                von <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>, und repräsentiert einen
-                Parameter einer Methode. Das TagName ist hierbei bekannt ("param"), aber durch die
-                Form des Tags, werden zusätzliche Informationen benötigt um Ihn zu erzeugen: den
-                Namen des Parameter und den Datentyp den dieser repräsentiert.
+                <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname> ist eine spezielle
+                Version von <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>, und
+                repräsentiert einen Parameter einer Methode. Das TagName ist hierbei bekannt
+                ("param"), aber durch die Form des Tags, werden zusätzliche Informationen benötigt
+                um Ihn zu erzeugen: den Namen des Parameter und den Datentyp den dieser
+                repräsentiert.
             </para>
 
             <para>
@@ -299,8 +301,8 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 
             <para>
                 Wie die Variante des Param DocBlock Tags ist
-                <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname> eine Variante eines
-                Tags für die Darstellung eines Rückgabewerts einer Methode. In diesem Fall ist
+                <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname> eine Variante
+                eines Tags für die Darstellung eines Rückgabewerts einer Methode. In diesem Fall ist
                 der Name des Tags bekannt ("return"), aber es benötigt einen Rückgabetyp.
             </para>
 
@@ -326,16 +328,16 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
             <title>Zend_CodeGenerator_Php_File</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_File</classname> wird verwendet um den kompletten Inhalt
-                einer Datei zu erstellen die PHP Code enthalten wird. Die Datei kann Klassen oder
-                eigenen PHP Code enthalten, und wenn gewünscht einen Datei-Level Docblock.
+                <classname>Zend_CodeGenerator_Php_File</classname> wird verwendet um den kompletten
+                Inhalt einer Datei zu erstellen die PHP Code enthalten wird. Die Datei kann Klassen
+                oder eigenen PHP Code enthalten, und wenn gewünscht einen Datei-Level Docblock.
             </para>
 
             <para>
                 Wenn der Datei Klassen hinzugefügt werden, muß man entweder ein Array von
                 Informationen übergeben die an den Constructor von
-                <classname>Zend_CodeGenerator_Php_Class</classname> übergeben werden, oder eine Instanz
-                dieser Klasse. Genau wie bei den DocBlocks, muß man Informationen für den
+                <classname>Zend_CodeGenerator_Php_Class</classname> übergeben werden, oder eine
+                Instanz dieser Klasse. Genau wie bei den DocBlocks, muß man Informationen für den
                 Constructor von <classname>Zend_CodeGenerator_Php_Docblock</classname> übergeben die
                 verwendet werden, oder eine Instanz dieser Klasse.
             </para>
@@ -376,8 +378,8 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 
             <para>
                 <classname>Zend_CodeGenerator_Php_Member_Container</classname> wird intern von
-                <classname>Zend_CodeGenerator_Php_Class</classname> verwendet um die Klassenmember zu
-                erheben -- Eigenschaften sowie Methoden. Diese werden durch den Namen indiziert,
+                <classname>Zend_CodeGenerator_Php_Class</classname> verwendet um die Klassenmember
+                zu erheben -- Eigenschaften sowie Methoden. Diese werden durch den Namen indiziert,
                 indem die konkrete Instanz des Members als Wert verwendet wird.
             </para>
 
@@ -397,19 +399,20 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
             <title>Zend_CodeGenerator_Php_Method</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Method</classname> beschreibt eine Klassenmethode, und kann
-                sowohl Code als auch den DocBlock für diese Methode erstellen. Die Sichtbarkeit und
-                der Status als Statisch, Abstrakt, oder Final kann, über die Eltern-Klasse,
-                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>, angegeben werden. Letztendlich
-                können die Parameter und Rückgabewerte für die Methode spezifiziert werden.
+                <classname>Zend_CodeGenerator_Php_Method</classname> beschreibt eine Klassenmethode,
+                und kann sowohl Code als auch den DocBlock für diese Methode erstellen. Die
+                Sichtbarkeit und der Status als Statisch, Abstrakt, oder Final kann, über die
+                Eltern-Klasse, <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>,
+                angegeben werden. Letztendlich können die Parameter und Rückgabewerte für die
+                Methode spezifiziert werden.
             </para>
 
             <para>
                 Parameter könnnen durch Verwendung von <code>setParameter()</code> oder
                 <code>setParameters()</code> gesetzt werden. In jedem Fall, sollte der Parameter
                 entweder ein Array von Informationen sein die an den Constructor von
-                <classname>Zend_CodeGenerator_Php_Parameter</classname> übergeben werden, oder eine Instanz
-                dieser Klasse.
+                <classname>Zend_CodeGenerator_Php_Parameter</classname> übergeben werden, oder eine
+                Instanz dieser Klasse.
             </para>
 
             <para>
@@ -474,8 +477,8 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
             <title>Zend_CodeGenerator_Php_Property</title>
 
             <para>
-                <classname>Zend_CodeGenerator_Php_Property</classname> beschreibt die Eigenschaft einer
-                Klasse, welche entweder eine Konstante oder eine Variable sein kann. In jedem
+                <classname>Zend_CodeGenerator_Php_Property</classname> beschreibt die Eigenschaft
+                einer Klasse, welche entweder eine Konstante oder eine Variable sein kann. In jedem
                 Fall, kann der Eigenschaft ein optionaler Standardwert assoziiert werden.
                 Zusätzlich kann die Sichtbarkeit von variablen Eigenschaften über die Elternklasse
                 <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> gesetzt werden.

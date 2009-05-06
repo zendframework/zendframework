@@ -6,8 +6,8 @@
     <title>Verwenden von Ausnahmen</title>
 
     <para>
-        <classname>Zend_Exception</classname> ist einfach die Basisklasse für alle Ausnahmen die vom Zend Framework
-        geworfen werden.
+        <classname>Zend_Exception</classname> ist einfach die Basisklasse für alle Ausnahmen die vom
+        Zend Framework geworfen werden.
     </para>
 
     <example id="zend.exception.using.example">
@@ -30,9 +30,10 @@ try {
     </example>
 
     <para>
-        <classname>Zend_Exception</classname> kann als fang-sie-alle Exception Klasse in einem Catch Block verwendet werden
-        um alle Ausnahmen, die von Zend Framework Klassen geworfen werden, zu fangen. Das kann nützlich sein wenn
-        das Programm, durch das Fangen eines speziellen Ausnahmetyps, nicht wiederhergestellt werden kann.
+        <classname>Zend_Exception</classname> kann als fang-sie-alle Exception Klasse in einem Catch
+        Block verwendet werden um alle Ausnahmen, die von Zend Framework Klassen geworfen werden, zu
+        fangen. Das kann nützlich sein wenn das Programm, durch das Fangen eines speziellen
+        Ausnahmetyps, nicht wiederhergestellt werden kann.
     </para>
 
     <para>

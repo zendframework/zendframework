@@ -8,19 +8,21 @@
         Konfigurations-Daten zu vereinfachen. Es stellt diese Konfigurations-Daten innerhalb
         der Applikation über eine verschachtelte Objekt-Struktur zur Verfügung. Die
         Konfigurations-Daten können aus verschiedenen Datenquellen gelesen werden,
-        die hierarchische Datenspeicherung unterstützen. Derzeit stellt <classname>Zend_Config</classname>
-        mit <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> und
-        <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link> Adapter für
-        das Einlesen von Daten aus Textfiles zur Verfügung.
+        die hierarchische Datenspeicherung unterstützen. Derzeit stellt
+        <classname>Zend_Config</classname> mit <link
+        linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> und
+        <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
+        Adapter für das Einlesen von Daten aus Textfiles zur Verfügung.
     </para>
     <example id="zend.config.introduction.example.using">
         <title>Zend-Config verwenden</title>
         <para>
             In der Regel geht man davon aus, dass Anwender eine der Adapter-Klassen wie
-            <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> oder
-            <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
-            verwenden. Wenn die Konfigurations-Daten aber als PHP-Array vorliegen, können diese
-            auch einfach an den <classname>Zend_Config</classname>-Konstruktor übergeben werden, um dann
+            <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
+            oder <link
+            linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
+            verwenden. Wenn die Konfigurations-Daten aber als PHP-Array vorliegen, können diese auch
+            einfach an den <classname>Zend_Config</classname>-Konstruktor übergeben werden, um dann
             über die objektorientierte Schnittstelle auf sie zugreifen zu können:
         </para>
         <programlisting role="php"><![CDATA[
@@ -59,9 +61,9 @@ $db = Zend_Db::factory($config->database);
         einer verschachtelten Objekt-Struktur.
     </para>
     <para>
-        Zusätzlich zum objektorientierten Zugriff auf die Daten Werte hat <classname>Zend_Config</classname>
-        <code>get()</code> welches den unterstützten Standardwert zurückgibt wenn das Daten Element
-        nicht existiert. Zum Beispiel:
+        Zusätzlich zum objektorientierten Zugriff auf die Daten Werte hat
+        <classname>Zend_Config</classname> <code>get()</code> welches den unterstützten Standardwert
+        zurückgibt wenn das Daten Element nicht existiert. Zum Beispiel:
     </para>
     <programlisting role="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
@@ -69,8 +71,8 @@ $host = $config->database->get('host', 'localhost');
     <example id="zend.config.introduction.example.file.php">
         <title>Zend_Config mit einer PHP Konfigurationsdatei verwenden</title>
         <para>
-            Es ist oft gewünscht eine reine PHP-basierende Konfigurationsdatei zu verwenden. Der folgende
-            Code zeigt wie das ganz einfach erreicht werden kann:
+            Es ist oft gewünscht eine reine PHP-basierende Konfigurationsdatei zu verwenden. Der
+            folgende Code zeigt wie das ganz einfach erreicht werden kann:
         </para>
         <programlisting role="php"><![CDATA[
 // config.php

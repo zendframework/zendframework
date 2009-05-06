@@ -131,6 +131,27 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
         $this->assertEquals(dirname(__FILE__), $dir);
     }
 
+    /**
+     * @group ZF-6458
+     */
+    public function testAllControllerDirectoriesShouldBeSetWhenArrayPassedToControllerDirectoryOption()
+    {
+        require_once 'Zend/Application/Resource/Frontcontroller.php';
+        $resource = new Zend_Application_Resource_Frontcontroller(array(
+            'controllerDirectory' => array(
+                'foo' => dirname(__FILE__),
+                'bar' => dirname(__FILE__),
+            ),
+        ));
+        $resource->init();
+        $front = $resource->getFrontController();
+        $dirs  = $front->getControllerDirectory();
+        $this->assertEquals(array(
+            'foo' => dirname(__FILE__),
+            'bar' => dirname(__FILE__),
+        ), $dirs);
+    }
+
     public function testShouldSetModuleControllerDirectoryNameWhenOptionPresent()
     {
         require_once 'Zend/Application/Resource/Frontcontroller.php';

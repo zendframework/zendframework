@@ -52,7 +52,7 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                         $front->setControllerDirectory($value);
                     } elseif (is_array($value)) {
                         foreach ($value as $module => $directory) {
-                            $front->setControllerDirectory($directory, $module);
+                            $front->addControllerDirectory($directory, $module);
                         }
                     }
                     break;

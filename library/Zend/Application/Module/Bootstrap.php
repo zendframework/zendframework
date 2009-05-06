@@ -51,7 +51,7 @@ abstract class Zend_Application_Module_Bootstrap
      */
     public function __construct($application)
     {
-        $this->setApplication($application);
+        parent::__construct($application);
 
         $key = strtolower($this->getModuleName());
         if ($application->hasOption($key)) {

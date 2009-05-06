@@ -63,6 +63,8 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         $this->autoloader = Zend_Loader_Autoloader::getInstance();
 
         $this->application = new Zend_Application('testing');
+
+        Zend_Controller_Front::getInstance()->resetInstance();
     }
 
     public function tearDown()
@@ -119,6 +121,45 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
         $bootstrap = new ZfModule_Bootstrap($this->application);
         $this->assertEquals('baz', $bootstrap->foo);
+    }
+
+    /**
+     * @group ZF-6545
+     */
+    public function testFrontControllerPluginResourceShouldBeRegistered()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
+        $bootstrap = new ZfModule_Bootstrap($this->application);
+        $this->assertTrue($bootstrap->hasPluginResource('FrontController'));
+    }
+
+    /**
+     * @group ZF-6545
+     */
+    public function testFrontControllerStateRemainsSameIfNoOptionsPassedToModuleBootstrap()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
+        $this->application->setOptions(array(
+            'resources' => array(
+                'frontController' => array(
+                    'baseUrl'             => '/foo',
+                    'controllerDirectory' => dirname(__FILE__),
+                ),
+                'bootstrap' => array(
+                    'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
+                    'class' => 'ZfAppBootstrap',
+                )
+            ),
+        ));
+        $appBootstrap = $this->application->getBootstrap();
+        $appBootstrap->bootstrap('FrontController');
+        $front = $appBootstrap->getResource('FrontController');
+        $bootstrap = new ZfModule_Bootstrap($appBootstrap);
+        $bootstrap->bootstrap('FrontController');
+        $test = $bootstrap->getResource('FrontController');
+        $this->assertSame($front, $test);
+        $this->assertEquals('/foo', $test->getBaseUrl());
+        $this->assertEquals(dirname(__FILE__), $test->getControllerDirectory('default'));
     }
 }
 

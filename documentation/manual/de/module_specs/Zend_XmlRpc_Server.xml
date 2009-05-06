@@ -34,14 +34,14 @@ echo $server->handle();
         <title>Server-Struktur</title>
 
         <para>
-            <classname>Zend_XmlRpc_Server</classname> ist aus einer Vielfalt von Komponenten zusammengesetzt,
-            die vom Server selbst über Anfrage-, Antwort- und bis hin zu Fehler-Objekten
-            reicht.
+            <classname>Zend_XmlRpc_Server</classname> ist aus einer Vielfalt von Komponenten
+            zusammengesetzt, die vom Server selbst über Anfrage-, Antwort- und bis hin zu
+            Fehler-Objekten reicht.
         </para>
 
         <para>
-            Um den <classname>Zend_XmlRpc_Server</classname> zu erstellen, muss der Entwickler dem Server
-            eine oder mehrere Klassen oder Funktionen durch die Methoden
+            Um den <classname>Zend_XmlRpc_Server</classname> zu erstellen, muss der Entwickler dem
+            Server eine oder mehrere Klassen oder Funktionen durch die Methoden
             <code>setClass()</code> und <code>addFunction()</code> hinzufügen.
         </para>
 
@@ -189,16 +189,15 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             Die meiste Zeit wird man einfach den Standard-Anfragetyp
-            <classname>Zend_XmlRpc_Request_Http</classname>, welcher im <classname>Zend_XmlRpc_Server</classname> enthalten ist,
-            nutzen. Jedoch gibt es gelegentlich Fälle, in denen XML-RPC über die
-            Kommandozeile (CLI), ein grafisches Benutzerinterface (GUI), eine
-            andere Umgebung oder beim Protokollieren von ankommenden Anfragen
-            erreichbar sein muss. Um dies zu bewerkstelligen, muss man ein
-            eigenes Anfrage-Objekt kreieren, das <classname>Zend_XmlRpc_Request</classname> erweitert.
-            Die wichtigste Sache, die man sich merken muss, ist sicherzustellen,
-            dass die Methoden getMethod() und getParams() implementiert sind,
-            so dass der XML-RPC-Server Informationen erhält, die er für
-            das Abfertigen einer Anfrage benötigt.
+            <classname>Zend_XmlRpc_Request_Http</classname>, welcher im
+            <classname>Zend_XmlRpc_Server</classname> enthalten ist, nutzen. Jedoch gibt es
+            gelegentlich Fälle, in denen XML-RPC über die Kommandozeile (CLI), ein grafisches
+            Benutzerinterface (GUI), eine andere Umgebung oder beim Protokollieren von ankommenden
+            Anfragen erreichbar sein muss. Um dies zu bewerkstelligen, muss man ein eigenes
+            Anfrage-Objekt kreieren, das <classname>Zend_XmlRpc_Request</classname> erweitert.
+            Die wichtigste Sache, die man sich merken muss, ist sicherzustellen, dass die Methoden
+            getMethod() und getParams() implementiert sind, so dass der XML-RPC-Server Informationen
+            erhält, die er für das Abfertigen einer Anfrage benötigt.
         </para>
     </sect2>
 
@@ -206,18 +205,18 @@ $server->addFunction('somefunc', 'funcs');
         <title>Eigene Antwort-Objekte</title>
 
         <para>
-            Ähnlich wie bei den Anfrage-Objekten, kann der <classname>Zend_XmlRpc_Server</classname> auch
-            eigene Antwortobjekte ausliefern; standardmäßig ist dies ein
-            <classname>Zend_XmlRpc_Response_Http-Objekt</classname>, das einen passenden Content-Type HTTP-Header
-            sendet, der für XML-RPC genutzt wird. Mögliche Nutzungen eines eigenen
-            Objekts sind z.B. das Protokollieren von Antworten oder das Senden der
+            Ähnlich wie bei den Anfrage-Objekten, kann der <classname>Zend_XmlRpc_Server</classname>
+            auch eigene Antwortobjekte ausliefern; standardmäßig ist dies ein
+            <classname>Zend_XmlRpc_Response_Http-Objekt</classname>, das einen passenden
+            Content-Type HTTP-Header sendet, der für XML-RPC genutzt wird. Mögliche Nutzungen eines
+            eigenen Objekts sind z.B. das Protokollieren von Antworten oder das Senden der
             Antworten zu STDOUT.
         </para>
 
         <para>
             Um eine eigene Antwortklasse zu nutzen, muss
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> vor dem Aufruf von <code>handle()</code>
-            aufgerufen werden.
+            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> vor dem Aufruf von
+            <code>handle()</code> aufgerufen werden.
         </para>
     </sect2>
 
@@ -225,8 +224,8 @@ $server->addFunction('somefunc', 'funcs');
         <title>Verarbeiten von Exceptions durch Fehler</title>
 
         <para>
-            <classname>Zend_XmlRpc_Server</classname> fängt die, durch eine ausgeführte Methode erzeugten,
-            Exceptions and generiert daraus einen XML-RPC-Fehler als Antwort, wenn
+            <classname>Zend_XmlRpc_Server</classname> fängt die, durch eine ausgeführte Methode
+            erzeugten, Exceptions and generiert daraus einen XML-RPC-Fehler als Antwort, wenn
             eine Exception gefangen wurde. Normalerweise werden die Exceptionnachrichten
             und -codes nicht in der Fehler-Antwort genutzt. Dies ist eine gewollte
             Entscheidung um den Code zu schützen; viele Exceptions entblößen mehr
@@ -238,7 +237,8 @@ $server->addFunction('somefunc', 'funcs');
         <para>
             Exception-Klassen können jedoch anhand einer Weißliste (Whitelist) als
             Fehler-Antworten zurückgegeben werden. Dazu muss man lediglich die gewünschte
-            Exception mittels <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> zur
+            Exception mittels
+            <classname>Zend_XmlRpc_Server_Fault::attachFaultException()</classname> zur
             Weißliste hinzufügen:
         </para>
 
@@ -248,9 +248,9 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 
         <para>
             Abgeleitete Exceptions lassen sich als ganze Familie von Exceptions
-            hinzufügen, indem man deren Basisklasse angibt. <classname>Zend_XmlRpc_Server_Exception</classname>s
-            sind immer auf der Weißliste zu finden, da sie spezielle Serverfehler
-            berichten (undefinierte Methoden, etc.).
+            hinzufügen, indem man deren Basisklasse angibt.
+            <classname>Zend_XmlRpc_Server_Exception</classname>'s sind immer auf der Weißliste zu
+            finden, da sie spezielle Serverfehler berichten (undefinierte Methoden, etc.).
         </para>
 
         <para>
@@ -262,15 +262,15 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
     <sect2 id="zend.xmlrpc.server.caching">
         <title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title>
         <para>
-            Das Hinzufügen einer Vielzahl von Klassen zu einer XML-RPC-Server Instanz
-            kann zu einem großen Ressourcenverbrauch führen; jede Klasse muss via
-            Reflection (<classname>Zend_Server_Reflection</classname>) inspiziert werden, welche eine Liste
+            Das Hinzufügen einer Vielzahl von Klassen zu einer XML-RPC-Server Instanz kann zu einem
+            großen Ressourcenverbrauch führen; jede Klasse muss via Reflection
+            (<classname>Zend_Server_Reflection</classname>) inspiziert werden, welche eine Liste
             von allen möglichen Signaturen, die der Server verwenden kann, zurückgibt.
         </para>
         <para>
-            Um die Einbußen zu reduzieren, kann <classname>Zend_XmlRpc_Server_Cache</classname> genutzt werden,
-            welche die Serverdefinitionen zwischen den Anfragen zwischenspeichert. Wenn
-            dies mit __autoload() kombiniert wird, kann es zu einem großen
+            Um die Einbußen zu reduzieren, kann <classname>Zend_XmlRpc_Server_Cache</classname>
+            genutzt werden, welche die Serverdefinitionen zwischen den Anfragen zwischenspeichert.
+            Wenn dies mit __autoload() kombiniert wird, kann es zu einem großen
             Geschwindigkeitsschub kommen.
         </para>
         <para>

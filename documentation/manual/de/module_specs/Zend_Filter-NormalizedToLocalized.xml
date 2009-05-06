@@ -91,16 +91,16 @@ $filter->filter(123456.78);
 
         <para>
             Nehmen wir an das wir das Gebietsschema 'de' als Anwendungsweites Gebietsschema gesetzt
-            haben. <classname>Zend_Filter_NormalizedToLocalized</classname> nimmt das gesetzte Gebietsschema
-            und verwendet es um zu erkennen welche Art der Eingabe man haben will. In unserem
-            Beispiel wurde ein Wert mit Nachkommastellen angegeben. Jetzt gibt der Filter die
-            lokalisierte Repräsentation für diesen Wert als String zurück.
+            haben. <classname>Zend_Filter_NormalizedToLocalized</classname> nimmt das gesetzte
+            Gebietsschema und verwendet es um zu erkennen welche Art der Eingabe man haben will. In
+            unserem Beispiel wurde ein Wert mit Nachkommastellen angegeben. Jetzt gibt der Filter
+            die lokalisierte Repräsentation für diesen Wert als String zurück.
         </para>
 
         <para>
             Man kann auch kontrollieren wie die lokalisierte Nummer auszusehen hat. Hierfür kann
-            man alle Optionen angeben die auch von <classname>Zend_Locale_Format</classname> verwendet
-            werden. Die üblichsten sind:
+            man alle Optionen angeben die auch von <classname>Zend_Locale_Format</classname>
+            verwendet werden. Die üblichsten sind:
         </para>
 
         <itemizedlist>

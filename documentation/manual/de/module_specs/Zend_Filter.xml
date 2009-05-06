@@ -6,9 +6,9 @@
     <title>Einführung</title>
 
     <para>
-        Die Zend_Filter Komponente bietet ein Set von normalerweise benötigen Datenfiltern. Sie bietet auch
-        einen einfachen Filterketten Mechanismus mit dem mehrere Filter bei einem einfachen Wert in einer
-        benutzerdefinierten Reihenfolge ausgeführt werden können.
+        Die Zend_Filter Komponente bietet ein Set von normalerweise benötigen Datenfiltern. Sie
+        bietet auch einen einfachen Filterketten Mechanismus mit dem mehrere Filter bei einem
+        einfachen Wert in einer benutzerdefinierten Reihenfolge ausgeführt werden können.
     </para>
 
     <sect2 id="zend.filter.introduction.definition">
@@ -16,27 +16,30 @@
         <title>Was ist ein Filter?</title>
 
         <para>
-            In der physikalischen Welt wird ein Filter typischerweise für das entfernen von unerwünschten Teilen
-            einer Eingabe verwendet, und der gewünschte Teil der Eingabe wird zur Ausgabe des Filters weitergeleitet
-            (z.B. Kaffee). In solchen Szenarien ist ein Filter ein Operator der ein Subset von der Eingabe
-            produziert. Diese Art des Filterns ist für Web Anwendungen nützlich - entfernen illegaler Eingaben,
-            trimmen von unnötigen Leerzeichen, usw.
+            In der physikalischen Welt wird ein Filter typischerweise für das entfernen von
+            unerwünschten Teilen einer Eingabe verwendet, und der gewünschte Teil der Eingabe wird
+            zur Ausgabe des Filters weitergeleitet (z.B. Kaffee). In solchen Szenarien ist ein
+            Filter ein Operator der ein Subset von der Eingabe produziert. Diese Art des Filterns
+            ist für Web Anwendungen nützlich - entfernen illegaler Eingaben, trimmen von unnötigen
+            Leerzeichen, usw.
         </para>
 
         <para>
-            Diese Basisdefinition eines Filter kann erweitert werden um generelle Umwandlungen über eine Eingabe
-            zu beinhalten. Eine übliche Umwandlung die in Web Anwendungen durchgeführt wird, ist das auskommentieren
-            von HTML Entititäten. Zum Beispiel, wenn ein Formular Feld automatisch mit einer unsicheren Eingabe
-            übergeben wird (z.B. von einem Web Browser), sollte dieser Wert entweder frei von HTML Entititäten sein
-            oder nur auskommentierte HTML Entititäten enthalten, um unerwünschtes Verhalten und Sicherheitslöcher
-            zu vermeiden. Um diesen Anforderungen gerecht zu werden müssen HTML Entititäten die in der Eingabe
-            vorkommen entweder entfernt oder auskommentiert werden. Natürlich hängt es von der Situation ab welcher
-            Weg mehr zutrifft. Ein Filter der HTML Entititäten entfernt operiert innerhalb der Beschreibung der
-            ersten Definition von Filter - ein Operator der ein Subset von einer Eingabe produziert. Ein Filter
-            der HTML Entititäten auskommentiert, wandelt die Eingabe um (z.B. "<code>&amp;</code>" wird
-            umgewandelt in "<code>&amp;amp;</code>"). Solche Fälle zu unterstützen ist für Web Entwickler sehr
-            wichtig und "zu filtern", im Kontext der Verwendung von Zend_Filter, bedeutet einige Umwandlungen
-            über eingabedaten durchzuführen.
+            Diese Basisdefinition eines Filter kann erweitert werden um generelle Umwandlungen über
+            eine Eingabe zu beinhalten. Eine übliche Umwandlung die in Web Anwendungen durchgeführt
+            wird, ist das auskommentieren von HTML Entititäten. Zum Beispiel, wenn ein Formular Feld
+            automatisch mit einer unsicheren Eingabe übergeben wird (z.B. von einem Web Browser),
+            sollte dieser Wert entweder frei von HTML Entititäten sein oder nur auskommentierte HTML
+            Entititäten enthalten, um unerwünschtes Verhalten und Sicherheitslöcher zu vermeiden. Um
+            diesen Anforderungen gerecht zu werden müssen HTML Entititäten die in der Eingabe
+            vorkommen entweder entfernt oder auskommentiert werden. Natürlich hängt es von der
+            Situation ab welcher Weg mehr zutrifft. Ein Filter der HTML Entititäten entfernt
+            operiert innerhalb der Beschreibung der ersten Definition von Filter - ein Operator der
+            ein Subset von einer Eingabe produziert. Ein Filter der HTML Entititäten auskommentiert,
+            wandelt die Eingabe um (z.B. "<code>&amp;</code>" wird umgewandelt in
+            "<code>&amp;amp;</code>"). Solche Fälle zu unterstützen ist für Web Entwickler sehr
+            wichtig und "zu filtern", im Kontext der Verwendung von Zend_Filter, bedeutet einige
+            Umwandlungen über eingabedaten durchzuführen.
         </para>
 
     </sect2>
@@ -47,13 +50,14 @@
 
         <para>
             Diese Filterdefinition bekanntgegeben zu haben bietet die Grundlage für
-            <classname>Zend_Filter_Interface</classname>, welches eine einzelne Methode benötigt die <code>filter()</code>
-            genannt wird, und von der Filterklasse implementiert werden muß.
+            <classname>Zend_Filter_Interface</classname>, welches eine einzelne Methode benötigt die
+            <code>filter()</code> genannt wird, und von der Filterklasse implementiert werden muß.
         </para>
 
         <para>
-            Nachfolgend ist ein grundsätzliches Beispiel der Verwendung eines Filters über zwei Eingabedaten,
-            einem Undzeichen (<code>&amp;</code>) und einem Hochkommazeichen (<code>&quot;</code>):
+            Nachfolgend ist ein grundsätzliches Beispiel der Verwendung eines Filters über zwei
+            Eingabedaten, einem Undzeichen (<code>&amp;</code>) und einem Hochkommazeichen
+            (<code>&quot;</code>):
 
             <programlisting role="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
@@ -71,12 +75,13 @@ echo $htmlEntities->filter('"'); // &quot;
         <title>Verwenden der statischen get() Methode</title>
 
         <para>
-            Wenn es unbequem ist einen gegebene Filterklasse zu Laden und eine Instanz des Filters zu erstellen,
-            kann die statische <classname>Zend_Filter::get()</classname> Methode als alternativer Aufrufstil verwendet werden.
-            Das erste Argument dieser Methode ist der Eingabewert, der die <code>filter()</code> Methode passieren
-            soll. Das zweite Argument ist ein String, der dem Basisnamen der Filterklasse, relativ zum
-            Zend_Filter Namensraum, entspricht. Die <code>get()</code> Methode läde die Klasse automatisch, erstellt
-            eine Instanz, und führt die Eingabedaten der <code>filter()</code> Methode zu.
+            Wenn es unbequem ist einen gegebene Filterklasse zu Laden und eine Instanz des Filters
+            zu erstellen, kann die statische <classname>Zend_Filter::get()</classname> Methode als
+            alternativer Aufrufstil verwendet werden. Das erste Argument dieser Methode ist der
+            Eingabewert, der die <code>filter()</code> Methode passieren soll. Das zweite Argument
+            ist ein String, der dem Basisnamen der Filterklasse, relativ zum Zend_Filter Namensraum,
+            entspricht. Die <code>get()</code> Methode läde die Klasse automatisch, erstellt eine
+            Instanz, und führt die Eingabedaten der <code>filter()</code> Methode zu.
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
@@ -85,8 +90,8 @@ echo Zend_Filter::get('&', 'HtmlEntities');
         </para>
 
         <para>
-            Es kann auch ein Array von Konstruktor Argumenten übergeben werden, wen diese für die Filterklasse
-            benötigt werden.
+            Es kann auch ein Array von Konstruktor Argumenten übergeben werden, wen diese für die
+            Filterklasse benötigt werden.
 
             <programlisting role="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
@@ -95,15 +100,16 @@ echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
         </para>
 
         <para>
-            Die statische Verwendung kann für das Ad-Hoc aufrufen von Filtern bequem sein, aber wenn man einen
-            Filter über mehrere Eingaben anwenden will ist es effizienter den ersten Beispiel von oben zu folgen,
-            eine Instanz des Filter Objekts zu erstellen und dessen <code>filter()</code> Methode aufzurufen.
+            Die statische Verwendung kann für das Ad-Hoc aufrufen von Filtern bequem sein, aber wenn
+            man einen Filter über mehrere Eingaben anwenden will ist es effizienter den ersten
+            Beispiel von oben zu folgen, eine Instanz des Filter Objekts zu erstellen und dessen
+            <code>filter()</code> Methode aufzurufen.
         </para>
 
         <para>
-            Die Zend_Filter_Imput Klasse erlaubt es also, mehrere Filter zu instanzieren und auszurufen, und wenn
-            benötigt, den Prüfklassen diese Sets von Eingabedaten zu verarbeiten. Siehe
-            <xref linkend="zend.filter.input" />.
+            Die Zend_Filter_Imput Klasse erlaubt es also, mehrere Filter zu instanzieren und
+            auszurufen, und wenn benötigt, den Prüfklassen diese Sets von Eingabedaten zu
+            verarbeiten. Siehe <xref linkend="zend.filter.input" />.
         </para>
 
     </sect2>

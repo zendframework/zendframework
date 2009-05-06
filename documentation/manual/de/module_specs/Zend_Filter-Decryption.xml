@@ -4,33 +4,34 @@
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
     <para>
-        Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür verwendet er
-        Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und <code>OpenSSL</code> Erweiterungen
-        von php.
+        Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
+        verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
+        <code>OpenSSL</code> Erweiterungen von php.
     </para>
 
     <para>
-        Für Details darüber wie man Inhalte verschlüsselt siehe den <code>Encrypt</code> Filter. Da die
-        Grundlegenden Dinge beim <code>Encrypt</code> Filter behandelt werden, beschreiben wir hier nur
-        mehr die zusätzlichen Methoden und Änderungen für die Entschlüsselung.
+        Für Details darüber wie man Inhalte verschlüsselt siehe den <code>Encrypt</code> Filter. Da
+        die Grundlegenden Dinge beim <code>Encrypt</code> Filter behandelt werden, beschreiben wir
+        hier nur mehr die zusätzlichen Methoden und Änderungen für die Entschlüsselung.
     </para>
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Entschlüsselung mit Mcrypt</title>
         <para>
-            Für die Entschlüsselung von Inhalten die vorher mit <code>Mcrypt</code> verschlüsselt wurden
-            muß man die Optionen wissen mit denen die Verschlüsselung aufgerufen wurde.
+            Für die Entschlüsselung von Inhalten die vorher mit <code>Mcrypt</code> verschlüsselt
+            wurden muß man die Optionen wissen mit denen die Verschlüsselung aufgerufen wurde.
         </para>
 
         <para>
-            Es gibt einen wichtigen Unterschied. Wenn man bei der Verschlüsselung keinen Vektor angegeben hat,
-            muß man Ihn nach der Verschlüsselung des Inhalts holen indem die <code>getVector()</code> Methode
-            am Verschlüsselungs-Filter aufgerufen wird. Ohne den richtigen Vektor ist man nicht in der Lage
-            den Inhalt zu entschlüsseln.
+            Es gibt einen wichtigen Unterschied. Wenn man bei der Verschlüsselung keinen Vektor
+            angegeben hat, muß man Ihn nach der Verschlüsselung des Inhalts holen indem die
+            <code>getVector()</code> Methode am Verschlüsselungs-Filter aufgerufen wird. Ohne den
+            richtigen Vektor ist man nicht in der Lage den Inhalt zu entschlüsseln.
         </para>
 
         <para>
-            Sobald man alle Optionen angegeben hat ist die Entschlüsselung so einfach wie die Verschlüsselung.
+            Sobald man alle Optionen angegeben hat ist die Entschlüsselung so einfach wie die
+            Verschlüsselung.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -46,16 +47,16 @@ print $decrypted;
 
         <note>
             <para>
-                Man sollte beachten das man eine Ausnahme erhält wenn die Mcrypt Erweiterung in der eigenen
-                Umgebung nicht vorhanden ist.
+                Man sollte beachten das man eine Ausnahme erhält wenn die Mcrypt Erweiterung in der
+                eigenen Umgebung nicht vorhanden ist.
             </para>
         </note>
 
         <note>
             <para>
-                Man sollte ausserdem beachten das alle Einstellungen geprüft werden wenn man die Instanz
-                erstellt oder wenn man setEncryption() aufruft. Wenn Mcrypt ein Problem mit den Einstellungen
-                erkennt wird eine Ausnahme geworfen.
+                Man sollte ausserdem beachten das alle Einstellungen geprüft werden wenn man die
+                Instanz erstellt oder wenn man setEncryption() aufruft. Wenn Mcrypt ein Problem mit
+                den Einstellungen erkennt wird eine Ausnahme geworfen.
             </para>
         </note>
     </sect3>
@@ -63,8 +64,8 @@ print $decrypted;
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>Entschlüsselung mit OpenSSL</title>
         <para>
-            Entschlüsselung mit <code>OpenSSL</code> ist so einfach die Verschlüsseln. Aber man benötigt alle
-            Daten von der Person die den Inhalt verschlüsselt hat.
+            Entschlüsselung mit <code>OpenSSL</code> ist so einfach die Verschlüsseln. Aber man
+            benötigt alle Daten von der Person die den Inhalt verschlüsselt hat.
         </para>
 
         <para>
@@ -74,17 +75,18 @@ print $decrypted;
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>private</emphasis>: Den eigenen privaten Schlüssel der für die Entschlüsselung
-                    des Inhalts verwendet wird. Der private Schlüssel kann ein Dateiname mit einem Pfad zur
-                    Schlüsseldatei sein, oder einfach der Inhalt der Schlüsseldatei selbst.
+                    <emphasis>private</emphasis>: Den eigenen privaten Schlüssel der für die
+                    Entschlüsselung des Inhalts verwendet wird. Der private Schlüssel kann ein
+                    Dateiname mit einem Pfad zur Schlüsseldatei sein, oder einfach der Inhalt der
+                    Schlüsseldatei selbst.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>envelope</emphasis>: Der verschlüsselte Umschlagschlüssel vom Benutzer der den
-                    Inhalt verschlüsselt hat. Man kann entweder den Pfad mit dem Dateinamen zur
-                    Schlüsseldatei angeben, oder den Inhalt der Schlüsseldatei selbst.
+                    <emphasis>envelope</emphasis>: Der verschlüsselte Umschlagschlüssel vom Benutzer
+                    der den Inhalt verschlüsselt hat. Man kann entweder den Pfad mit dem Dateinamen
+                    zur Schlüsseldatei angeben, oder den Inhalt der Schlüsseldatei selbst.
                 </para>
             </listitem>
         </itemizedlist>
@@ -111,8 +113,8 @@ $filter->setEnvelopeKey(array(
         </note>
 
         <para>
-            Optional könnte es notwendig sein die Passphrase für die Entschlüsselung der Schlüssel selbst
-            anzugeben indem die <code>setPassphrase()</code> Methode verwendet wird.
+            Optional könnte es notwendig sein die Passphrase für die Entschlüsselung der Schlüssel
+            selbst anzugeben indem die <code>setPassphrase()</code> Methode verwendet wird.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -131,8 +133,8 @@ $filter->setPassphrase('mypassphrase');
 ]]></programlisting>
 
         <para>
-            Zum Schluß kann der Inhalt entschlüsselt werden. Unser komplettes Beispiel für den vorher
-            verschlüsselten Inhat sieht nun wie folgt aus.
+            Zum Schluß kann der Inhalt entschlüsselt werden. Unser komplettes Beispiel für den
+            vorher verschlüsselten Inhat sieht nun wie folgt aus.
         </para>
 
         <programlisting role="php"><![CDATA[

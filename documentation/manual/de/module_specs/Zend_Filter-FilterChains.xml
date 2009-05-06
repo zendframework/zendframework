@@ -6,11 +6,11 @@
     <title>Filter Ketten</title>
 
     <para>
-        Oft müssen mehrere Filter auf Werte in einer speziellen Reihenfolge angewendet werden. Zum Beispiel, ein
-        Login Formular das einen Benutzernamen akzeptiert welcher nur kleingeschrieben und alphabetische Zeichen
-        haben sollte. <classname>Zend_Filter</classname> bietet eine einfache Methode mit der Filter zusammengekettet werden
-        können. Der folgende Code zeigt wie eine Verkettung von zwei Filtern für das übermitteln eines
-        Benutzernamens funktioniert:
+        Oft müssen mehrere Filter auf Werte in einer speziellen Reihenfolge angewendet werden. Zum
+        Beispiel, ein Login Formular das einen Benutzernamen akzeptiert welcher nur kleingeschrieben
+        und alphabetische Zeichen haben sollte. <classname>Zend_Filter</classname> bietet eine
+        einfache Methode mit der Filter zusammengekettet werden können. Der folgende Code zeigt wie
+        eine Verkettung von zwei Filtern für das übermitteln eines Benutzernamens funktioniert:
 
         <programlisting role="php"><![CDATA[
 // Eine Filterkette erstellen und die Filter der Kette hinzufügen
@@ -22,14 +22,15 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
 
-        Filter werden in der Reihenfolge ausgeführt in der Sie <classname>Zend_Filter</classname> hinzugefügt werden.
-        Im obigen Beispiel wird dem Benutzernamen zuerst jedes nicht-alphabetische Zeichen entfernt und anschließend
-        jeder Großbuchstabe in einen Kleinbuchstaben umgewandelt.
-
+        Filter werden in der Reihenfolge ausgeführt in der Sie <classname>Zend_Filter</classname>
+        hinzugefügt werden. Im obigen Beispiel wird dem Benutzernamen zuerst jedes
+        nicht-alphabetische Zeichen entfernt und anschließend jeder Großbuchstabe in einen
+        Kleinbuchstaben umgewandelt.
     </para>
 
     <para>
-        Jedes Objekt das <classname>Zend_Filter_Interface</classname> implementiert kann in einer Filterkette verwendet werden.
+        Jedes Objekt das <classname>Zend_Filter_Interface</classname> implementiert kann in einer
+        Filterkette verwendet werden.
     </para>
 
 </sect1>

@@ -4,9 +4,9 @@
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
-        Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür verwendet er
-        Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und <code>OpenSSL</code> Erweiterungen
-        von php.
+        Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
+        verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
+        <code>OpenSSL</code> Erweiterungen von php.
     </para>
 
     <para>
@@ -24,8 +24,8 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
 ]]></programlisting>
 
     <para>
-        Um einen anderen Adapter zu setzen kann man auch <code>setAdapter()</code> verwenden, und die
-        <code>getAdapter()</code> Methode um den aktuell gesetzten Adapter zu erhalten.
+        Um einen anderen Adapter zu setzen kann man auch <code>setAdapter()</code> verwenden, und
+        die <code>getAdapter()</code> Methode um den aktuell gesetzten Adapter zu erhalten.
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -36,63 +36,65 @@ $filter->setAdapter('openssl');
 
     <note>
         <para>
-            Wenn man die <code>adapter</code> Option nicht angibt oder setAdapter nicht verwendet, dann wird
-            standardmäßig der <code>Mcrypt</code> Adapter verwendet.
+            Wenn man die <code>adapter</code> Option nicht angibt oder setAdapter nicht verwendet,
+            dann wird standardmäßig der <code>Mcrypt</code> Adapter verwendet.
         </para>
     </note>
 
     <sect3 id="zend.filter.set.encrypt.mcrypt">
         <title>Verschlüsselung mit Mcrypt</title>
         <para>
-            Wenn man die <code>Mcrypt</code> Erweiterung installiert hat, kann man den <code>Mcrypt</code>
-            Adapter verwenden. Dieser Adapter unterstützt bei der Initialisierung die folgenden Optionen:
+            Wenn man die <code>Mcrypt</code> Erweiterung installiert hat, kann man den
+            <code>Mcrypt</code> Adapter verwenden. Dieser Adapter unterstützt bei der
+            Initialisierung die folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>key</emphasis>: Der Verschlüsselungs-Schlüssel mit dem die Eingabe verschlüsselt
-                    wird. Man benötigt den gleichen Schlüssel für die Entschlüsselung.
+                    <emphasis>key</emphasis>: Der Verschlüsselungs-Schlüssel mit dem die Eingabe
+                    verschlüsselt wird. Man benötigt den gleichen Schlüssel für die Entschlüsselung.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>algorithm</emphasis>: Der Algorithmus der verwendet werden soll. Das sollte einer
-                    der Algorithmus Cipher sein die man unter
-                    <ulink url="http://php.net/mcrypt">PHP's Mcrypt Cipers</ulink> finden kann. Wenn er nicht
-                    gesetzt wird, ist er standardmäßig <code>blowfish</code>.
+                    <emphasis>algorithm</emphasis>: Der Algorithmus der verwendet werden soll. Das
+                    sollte einer der Algorithmus Cipher sein die man unter <ulink
+                        url="http://php.net/mcrypt">PHP's Mcrypt Cipers</ulink> finden kann. Wenn er
+                    nicht gesetzt wird, ist er standardmäßig <code>blowfish</code>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>algorithm_directory</emphasis>: Das Verzeichnis in dem der Algorithmus gefunden
-                    werden kann. Wenn es nicht gesetzt wird, ist es standardmäßig der Pfad der in der
-                    Mcrypt Erweiterung gesetzt wurde.
+                    <emphasis>algorithm_directory</emphasis>: Das Verzeichnis in dem der Algorithmus
+                    gefunden werden kann. Wenn es nicht gesetzt wird, ist es standardmäßig der Pfad
+                    der in der Mcrypt Erweiterung gesetzt wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>mode</emphasis>: Der Verschlüsselungs Modus der verwendet werden soll. Es sollte
-                    einer der Modi sein der unter <ulink url="http://php.net/mcrypt">PHP's Mcrypt Modi</ulink>
-                    gefunden werden kann. Wenn er nicht gesetzt wird, ist er standardmäßig <code>cbc</code>.
+                    <emphasis>mode</emphasis>: Der Verschlüsselungs Modus der verwendet werden soll.
+                    Es sollte einer der Modi sein der unter <ulink url="http://php.net/mcrypt">PHP's
+                    Mcrypt Modi</ulink> gefunden werden kann. Wenn er nicht gesetzt wird, ist er
+                    standardmäßig <code>cbc</code>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>mode_directory</emphasis>: Der Verzeichnis in dem der Modus gefunden werden kann.
-                    Wenn es nicht gesetzt wird, ist es standardmäßig der Pfad der in der <code>mcrypt</code>
-                    Erweiterung gesetzt wurde.
+                    <emphasis>mode_directory</emphasis>: Der Verzeichnis in dem der Modus gefunden
+                    werden kann. Wenn es nicht gesetzt wird, ist es standardmäßig der Pfad der in
+                    der <code>mcrypt</code> Erweiterung gesetzt wurde.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>vector</emphasis>: Der Initialisierungs Vektor der verwendet werden soll. Wenn er
-                    nicht gesetzt wird, wird ein zufälliger Vektor verwende.
+                    <emphasis>vector</emphasis>: Der Initialisierungs Vektor der verwendet werden
+                    soll. Wenn er nicht gesetzt wird, wird ein zufälliger Vektor verwende.
                 </para>
             </listitem>
 
@@ -106,39 +108,41 @@ $filter->setAdapter('openssl');
         </itemizedlist>
 
         <para>
-            Wenn man einen String statt einem Array übergibt, wird dieser String als key Option verwendet.
+            Wenn man einen String statt einem Array übergibt, wird dieser String als key Option
+            verwendet.
         </para>
 
         <para>
-            Man kan die Verschlüsselungswerte auch im Nachhinein mit den Methoden <code>getEncryption()</code>
-            und <code>setEncryption()</code> erhalten und setzen.
+            Man kan die Verschlüsselungswerte auch im Nachhinein mit den Methoden
+            <code>getEncryption()</code> und <code>setEncryption()</code> erhalten und setzen.
         </para>
 
         <note>
             <para>
-                Es ist zu beachten das man eine Ausnahme erhält wenn die mcrypt Erweiterung in der eigenen
-                Umgebung nicht vorhanden ist.
+                Es ist zu beachten das man eine Ausnahme erhält wenn die mcrypt Erweiterung in der
+                eigenen Umgebung nicht vorhanden ist.
             </para>
         </note>
 
         <note>
             <para>
-                Man sollte auch beachten das alle Einstellungen geprüft werden wenn man eine Instanz erstellt
-                oder setEncryption() aufruft. Wenn mcrypt ein Problem mit diesen Einstellungen erkennt wird
-                eine Ausnahme geworfen.
+                Man sollte auch beachten das alle Einstellungen geprüft werden wenn man eine Instanz
+                erstellt oder setEncryption() aufruft. Wenn mcrypt ein Problem mit diesen
+                Einstellungen erkennt wird eine Ausnahme geworfen.
             </para>
         </note>
 
         <para>
             Man kann den Verschlüsselungs Vektor durch den Aufruf von <code>getVector()</code> und
-            <code>setVector()</code> erhalten/setzen. Ein engegebener String wird, je nach benötigter Vektorgröße
-            des verwendeten Algorithmus, abgeschnitten oder aufgefüllt.
+            <code>setVector()</code> erhalten/setzen. Ein engegebener String wird, je nach
+            benötigter Vektorgröße des verwendeten Algorithmus, abgeschnitten oder aufgefüllt.
         </para>
 
         <note>
             <para>
-                Es ist zu beachten das, wenn man keinen eigenen Vektor setzt, man den Vektor holen und speichern
-                muß. Andernfalls ist man nicht in der Lage den verschlüsselten String wieder zu dekodieren.
+                Es ist zu beachten das, wenn man keinen eigenen Vektor setzt, man den Vektor holen
+                und speichern muß. Andernfalls ist man nicht in der Lage den verschlüsselten String
+                wieder zu dekodieren.
             </para>
         </note>
 
@@ -161,34 +165,37 @@ print $encrypted;
     <sect3 id="zend.filter.set.encrypt.openssl">
         <title>Verschlüsselung mit OpenSSL</title>
         <para>
-            Wenn man die <code>OpenSSL</code> Erweiterung installiert hat, kann man den <code>OpenSSL</code>
-            Adapter verwenden. Dieser Adapter unterstützt bei der Instanziierung die folgenden Optionen:
+            Wenn man die <code>OpenSSL</code> Erweiterung installiert hat, kann man den
+            <code>OpenSSL</code> Adapter verwenden. Dieser Adapter unterstützt bei der
+            Instanziierung die folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>public</emphasis>: Der öffentliche Schlüssel des Benutzer dem man verschlüsselte
-                    Inhalte zur Verfügung stellen will. Man kann mehrere öffentliche Schlüssel angeben indem
-                    man ein Array verwendet. Man kann entweder den Pfad und den Dateinamen der Schlüsseldatei
-                    angeben, oder nur den Inhalt der Schlüseldatei selbst.
+                    <emphasis>public</emphasis>: Der öffentliche Schlüssel des Benutzer dem man
+                    verschlüsselte Inhalte zur Verfügung stellen will. Man kann mehrere öffentliche
+                    Schlüssel angeben indem man ein Array verwendet. Man kann entweder den Pfad und
+                    den Dateinamen der Schlüsseldatei angeben, oder nur den Inhalt der Schlüseldatei
+                    selbst.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>private</emphasis>: Der eigene private Schlüssel der für die Verschlüsselung des
-                    Inhalts verwendet wird. Auch der private Schlüssel kann entweder ein Dateiname mit Pfad zur
-                    Schlüsseldatei sein, oder nur der Inhalt der Schlüsseldatei selbst.
+                    <emphasis>private</emphasis>: Der eigene private Schlüssel der für die
+                    Verschlüsselung des Inhalts verwendet wird. Auch der private Schlüssel kann
+                    entweder ein Dateiname mit Pfad zur Schlüsseldatei sein, oder nur der Inhalt der
+                    Schlüsseldatei selbst.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Man kann öffentliche Schlüssel auch im Nachhinein mit den Methoden <code>getPublicKey()</code> und
-            <code>setPublicKey()</code> erhalten und setzen. Auch der private Schlüssel kann mit den
-            entsprechenden Methoden <code>getPrivateKey()</code> und <code>setPrivateKey()</code> geholt und
-            gesetzt werden.
+            Man kann öffentliche Schlüssel auch im Nachhinein mit den Methoden
+            <code>getPublicKey()</code> und <code>setPublicKey()</code> erhalten und setzen. Auch
+            der private Schlüssel kann mit den entsprechenden Methoden <code>getPrivateKey()</code>
+            und <code>setPrivateKey()</code> geholt und gesetzt werden.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -208,16 +215,16 @@ $filter->setPublicKey(array(
 
         <note>
             <para>
-                Es ist zu beachten das der <code>OpenSSL</code> Adapter nicht funktionieren wird wenn keine
-                gültigen Schlüsseln angegeben werden.
+                Es ist zu beachten das der <code>OpenSSL</code> Adapter nicht funktionieren wird
+                wenn keine gültigen Schlüsseln angegeben werden.
             </para>
         </note>
 
         <para>
             Wenn man auch die Schlüssel selbst verschlüsseln will, muß man eine Passphrase mit der
-            <code>setPassphrase()</code> Methode angeben. Wenn man Inhalte entschlüsseln will, die mit einer
-            Passphrase verschlüsselt wurden, muß man nicht nur den öffentlichen Schlüssel, sondern auch die
-            Passphrase um den verschlüsselten Schlüssel zu entschlüsseln.
+            <code>setPassphrase()</code> Methode angeben. Wenn man Inhalte entschlüsseln will, die
+            mit einer Passphrase verschlüsselt wurden, muß man nicht nur den öffentlichen Schlüssel,
+            sondern auch die Passphrase um den verschlüsselten Schlüssel zu entschlüsseln.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -237,8 +244,9 @@ $filter->setPassphrase('mypassphrase');
 ]]></programlisting>
 
         <para>
-            Zum Schluß muß man, wenn OpenSSL verwendet wird, dem Empfänger den verschlüsselten Inhalt, die
-            Passphrase, wenn eine angegeben wurde, und den Umschlagschlüssel für die Entschlüsselung angeben.
+            Zum Schluß muß man, wenn OpenSSL verwendet wird, dem Empfänger den verschlüsselten
+            Inhalt, die Passphrase, wenn eine angegeben wurde, und den Umschlagschlüssel für die
+            Entschlüsselung angeben.
         </para>
 
         <para>
@@ -247,8 +255,8 @@ $filter->setPassphrase('mypassphrase');
         </para>
 
         <para>
-            Unser komplettes Beispiel für die Verschlüsselung von Inhalten mit <code>OpenSSL</code> schaut
-            wie folgt aus.
+            Unser komplettes Beispiel für die Verschlüsselung von Inhalten mit <code>OpenSSL</code>
+            schaut wie folgt aus.
         </para>
 
         <programlisting role="php"><![CDATA[

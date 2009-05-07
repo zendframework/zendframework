@@ -354,6 +354,9 @@ class Zend_Feed_Builder implements Zend_Feed_Builder_Interface
                 }
             }
             $entry = new Zend_Feed_Builder_Entry($row['title'], $row['link'], $row['description']);
+            if (isset($row['author'])) {
+                $entry->setAuthor($row['author']);
+            }
             if (isset($row['guid'])) {
                 $entry->setId($row['guid']);
             }

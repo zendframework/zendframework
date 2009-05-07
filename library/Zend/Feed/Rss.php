@@ -401,6 +401,11 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $title->appendChild($this->_element->createCDATASection($dataentry->title));
             $item->appendChild($title);
 
+            if (isset($dataentry->author)) {
+                $author = $this->_element->createElement('author', $dataentry->author);
+                $item->appendChild($author);
+            }
+
             $link = $this->_element->createElement('link', $dataentry->link);
             $item->appendChild($link);
 

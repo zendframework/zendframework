@@ -102,6 +102,18 @@ class Zend_Feed_Builder_Entry extends ArrayObject
     }
 
     /**
+     * Sets the author of the entry
+     *
+     * @param  string $author
+     * @return Zend_Feed_Builder_Entry
+     */
+    public function setAuthor($author)
+    {
+        $this->offsetSet('author', $author);
+        return $this;
+    }
+
+    /**
      * Sets the id/guid of the entry
      *
      * @param  string $id

@@ -5,9 +5,10 @@
     <title>Db_RecordExists und Db_NoRecordExists</title>
 
     <para>
-        <classname>Zend_Validate_Db_RecordExists</classname> und <classname>Zend_Validate_Db_NoRecordExists</classname>
-        bieten die Möglichkeit zu testen ob ein Eintrag in einer angegebenen Tabelle einer
-        Datenbank, mit einem gegebenen Wert, existiert.
+        <classname>Zend_Validate_Db_RecordExists</classname> und
+        <classname>Zend_Validate_Db_NoRecordExists</classname> bieten die Möglichkeit zu testen ob
+        ein Eintrag in einer angegebenen Tabelle einer Datenbank, mit einem gegebenen Wert,
+        existiert.
     </para>
 
     <sect3 id="zend.validate.db.basic-usage">
@@ -63,10 +64,10 @@ if ($validator->isValid($username)) {
 
         <para>
             <classname>Zend_Validate_Db_RecordExists</classname> und
-            <classname>Zend_Validate_Db_NoRecordExists</classname> bieten auch die Möglichkeit die Datenbank
-            zu testen, wobei Teile der Tabelle hiervon ausgenommen werden, entweder indem eine
-            where Klausel als String angegeben wird, oder ein Array mit den Schlüsseln "field" und
-            "value".
+            <classname>Zend_Validate_Db_NoRecordExists</classname> bieten auch die Möglichkeit die
+            Datenbank zu testen, wobei Teile der Tabelle hiervon ausgenommen werden, entweder indem
+            eine where Klausel als String angegeben wird, oder ein Array mit den Schlüsseln "field"
+            und "value".
         </para>
 
         <para>

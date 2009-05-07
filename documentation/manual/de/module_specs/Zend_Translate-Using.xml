@@ -55,12 +55,13 @@ print $translate->_("Hier ist Zeile zwei") . "\n";
     </example>
 
     <para>
-        Jetzt schauen wir uns genauer an, was getan wurde, und wie <classname>Zend_Translate</classname> in
-        den eigenen Code integriert wird.
+        Jetzt schauen wir uns genauer an, was getan wurde, und wie
+        <classname>Zend_Translate</classname> in den eigenen Code integriert wird.
     </para>
 
     <para>
-        Erstelle ein neues <classname>Zend_Translate</classname> Objekt und definiere den Basis Adapter:
+        Erstelle ein neues <classname>Zend_Translate</classname> Objekt und definiere den Basis
+        Adapter:
 
         <programlisting role="php"><![CDATA[
 $translate = new Zend_Translate(
@@ -88,8 +89,8 @@ print "========\n";
 print $translate->_("Hier ist die Zeile Eins") . "\n";
 ]]></programlisting>
 
-        Einige Strings müssen nicht übersetzt werden. Die Trennlinie wird immer eine Trennlinie sein,
-        auch in den anderen Sprachen.
+        Einige Strings müssen nicht übersetzt werden. Die Trennlinie wird immer eine Trennlinie
+        sein, auch in den anderen Sprachen.
     </para>
 
     <para>
@@ -128,15 +129,15 @@ print $translate->_(2) . "\n";
     <para>
         Es werden auch Probleme auftreten wenn einige Strings nicht übersetzt worden sind. Man muß
         sich immer vor Augen halten wie Übersetzungen funktionieren. Zuerst prüft
-        <classname>Zend_Translate</classname> ob in der gesetzten Sprache, für die angegebene Message ID oder
-        den String, eine Übersetzung vorhanden ist. Wenn kein Übersetzung gefunden wurde, wird in
-        der nächsten tiefer gelegenen Sprache gesucht wie in <classname>Zend_Locale</classname> definiert.
-        "<emphasis>de_AT</emphasis>" wird also zu
+        <classname>Zend_Translate</classname> ob in der gesetzten Sprache, für die angegebene
+        Message ID oder den String, eine Übersetzung vorhanden ist. Wenn kein Übersetzung gefunden
+        wurde, wird in der nächsten tiefer gelegenen Sprache gesucht wie in
+        <classname>Zend_Locale</classname> definiert. "<emphasis>de_AT</emphasis>" wird also zu
         "<emphasis>de</emphasis>". Wenn auch hier keine Übersetzung in der Sprache
         "<emphasis>de</emphasis>" gefunden wurde, wird der Original String zurück
         gegeben. Das bedeutet also das immer eine Ausgabe existiert, selbst wenn für eine Message
-        ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translate</classname> wird niemals
-        eine Exception oder einen Fehler ausgeben wenn ein String übersetzt werden soll.
+        ID keine Übersetzung in der Quelle vorhanden ist. <classname>Zend_Translate</classname> wird
+        niemals eine Exception oder einen Fehler ausgeben wenn ein String übersetzt werden soll.
     </para>
 
     <sect2 id="zend.translate.using.structure">
@@ -152,8 +153,8 @@ print $translate->_(2) . "\n";
 
         <para>
             Zuerst muß entschieden werden wo die Übersetzung Dateien zu speichern sind. Bei der
-            Verwendung von <classname>Zend_Translate</classname> gibt es keinerlei Einschränkungen. Aber die
-            folgenden Strukturen bevorzugt verwendet werden:
+            Verwendung von <classname>Zend_Translate</classname> gibt es keinerlei Einschränkungen.
+            Aber die folgenden Strukturen bevorzugt verwendet werden:
         </para>
 
         <itemizedlist>
@@ -323,9 +324,9 @@ $translate->addTranslation($deutsch, 'de');
 
         <para>
             Seit Release 1.5 wird es auch unterstützt, Arrays die in externen Dateien vorhanden
-            sind einzubauen. Es ist der Dateiname anzugeben und <classname>Zend_Translate</classname> wird
-            diesen automatisch einbauen und nach dem Array schauen. Siehe das folgende Beispiel
-            für Details:
+            sind einzubauen. Es ist der Dateiname anzugeben und
+            <classname>Zend_Translate</classname> wird diesen automatisch einbauen und nach dem
+            Array schauen. Siehe das folgende Beispiel für Details:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -615,8 +616,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </example>
 
         <para>
-            Hier können alle vorhandenen Optionen für die verschiedenen Adapter gefunden werden mit einer
-            Beschreibung Ihrer Verwendung:
+            Hier können alle vorhandenen Optionen für die verschiedenen Adapter gefunden werden mit
+            einer Beschreibung Ihrer Verwendung:
         </para>
 
         <table id="zend.translate.using.options.alloptions">
@@ -669,8 +670,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>log</entry>
                         <entry>all</entry>
                         <entry>
-                            Eine Instanz von <classname>Zend_Log</classname> wohin nicht übersetzbare Meldungen und
-                            Notizen geschrieben werden
+                            Eine Instanz von <classname>Zend_Log</classname> wohin nicht
+                            übersetzbare Meldungen und Notizen geschrieben werden
                         </entry>
                         <entry><emphasis>null</emphasis></entry>
                     </row>
@@ -680,7 +681,9 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             Die Nachricht die in das Log geschrieben werden soll
                         </entry>
-                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry>
+                            <emphasis>Untranslated message within '%locale%': %message%</emphasis>
+                        </entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -695,11 +698,11 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>scan</entry>
                         <entry>all</entry>
                         <entry>
-                            Wenn null gesetzt wird, wird die Verzechnisstruktur nicht gescannt.
-                            Wenn <classname>Zend_Translate::LOCALE_DIRECTORY</classname> gesetzt wird, wird
-                            das Gebietsschema im Verzeichnis gesucht. Wenn
-                            <classname>Zend_Translate::LOCALE_FILENAME</classname> gesetzt wird, wird das
-                            Gebietsschema im Dateinamen gesucht. Siehe
+                            Wenn null gesetzt wird, wird die Verzechnisstruktur nicht gescannt. Wenn
+                            <classname>Zend_Translate::LOCALE_DIRECTORY</classname> gesetzt wird,
+                            wird das Gebietsschema im Verzeichnis gesucht. Wenn
+                            <classname>Zend_Translate::LOCALE_FILENAME</classname> gesetzt wird,
+                            wird das Gebietsschema im Dateinamen gesucht. Siehe
                             <xref linkend="zend.translate.using.detection" /> für Details
                         </entry>
                         <entry><emphasis>null</emphasis></entry>
@@ -707,19 +710,28 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
-                        <entry>Definiert welches Zeichen als Trenner für Quelle und Übersetzung verwendet wird</entry>
+                        <entry>
+                            Definiert welches Zeichen als Trenner für Quelle und Übersetzung
+                            verwendet wird
+                        </entry>
                         <entry><emphasis>;</emphasis></entry>
                     </row>
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
-                        <entry>Definiert die maximale Länge einer CSV Zeile. Auf 0 gesetzt wird sie automatisch erkannt</entry>
+                        <entry>
+                            Definiert die maximale Länge einer CSV Zeile. Auf 0 gesetzt wird sie
+                            automatisch erkannt
+                        </entry>
                         <entry><emphasis>0</emphasis></entry>
                     </row>
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
-                        <entry>Definiert das zu verwendende Einschließungszeichen. Standard ist das doppelte Hochkomma</entry>
+                        <entry>
+                            Definiert das zu verwendende Einschließungszeichen. Standard ist das
+                            doppelte Hochkomma
+                        </entry>
                         <entry><emphasis>"</emphasis></entry>
                     </row>
                 </tbody>
@@ -756,8 +768,8 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             Die <code>getLocale()</code> Methode kann verwendet werden um die aktuell gesetzte
-            Sprache zu erhalten. Sie kann entweder eine Instanz von <classname>Zend_Locale</classname> oder
-            den Bezeichner des Gebietsschemas enthalten.
+            Sprache zu erhalten. Sie kann entweder eine Instanz von
+            <classname>Zend_Locale</classname> oder den Bezeichner des Gebietsschemas enthalten.
         </para>
 
         <para>
@@ -811,12 +823,12 @@ if ($translate->isAvailable("fr")) {
 
             <para>
                 Es gilt zu beachten das, solange man neue Sprachquellen mit der
-                <code>addTranslation()</code> Methode hinzufügt, <classname>Zend_Translate</classname>
-                automatisch die am besten passende Sprache für die eigene Umgebung auswählt wenn
-                man eine der automatischen Gebietsschemata verwendet die '<code>auto</code>' oder
-                '<code>browser</code>' sein können. Man muß normalerweise also
-                <code>setLocale()</code> nicht aufrufen. Das sollte nur in Verbindung mit der
-                automatischen Erkennung von Quellen verwendet werden.
+                <code>addTranslation()</code> Methode hinzufügt,
+                <classname>Zend_Translate</classname> automatisch die am besten passende Sprache für
+                die eigene Umgebung auswählt wenn man eine der automatischen Gebietsschemata
+                verwendet die '<code>auto</code>' oder '<code>browser</code>' sein können. Man muß
+                normalerweise also <code>setLocale()</code> nicht aufrufen. Das sollte nur in
+                Verbindung mit der automatischen Erkennung von Quellen verwendet werden.
             </para>
 
             <para>
@@ -877,15 +889,15 @@ $translate->setLocale('it_IT');
             <para>
                 Wenn man Sie wieder verwenden will, kann die Sprache
                 <emphasis>auto</emphasis> mit <code>setLocale()</code> gesetzt
-                werden, was die automatische Erkennung für <classname>Zend_Translate</classname> wieder
-                reaktiviert.
+                werden, was die automatische Erkennung für <classname>Zend_Translate</classname>
+                wieder reaktiviert.
             </para>
 
             <para>
-                Seit dem Zend Framework 1.7.0 unterstützt <classname>Zend_Translate</classname> auch die
-                Verwendung eines Anwendungsweiten Gebietsschemas. Man kann einfach eine
-                <classname>Zend_Locale</classname> Instanz in der Registry setzen wie unten gezeigt. Mit
-                dieser Schreibweise kann man das manuelle Setzen eines Gebietsschemas mit jeder
+                Seit dem Zend Framework 1.7.0 unterstützt <classname>Zend_Translate</classname> auch
+                die Verwendung eines Anwendungsweiten Gebietsschemas. Man kann einfach eine
+                <classname>Zend_Locale</classname> Instanz in der Registry setzen wie unten gezeigt.
+                Mit dieser Schreibweise kann man das manuelle Setzen eines Gebietsschemas mit jeder
                 Instanz komplett vergessen wenn man das gleiche Gebietsschema mehrere Male
                 verwenden will.
             </para>
@@ -918,10 +930,10 @@ $translate->getLocale();
         <title>Automatische Erkennung von Quellen</title>
 
         <para>
-            <classname>Zend_Translate</classname> kann Übersetzungsquellen automatisch erkennen. Es muß also
-            nicht jede Quelldatei manuell deklariert werden. Man kann diesen Job
-            <classname>Zend_Translate</classname> überlassen welches die komplette Verzeichnisstruktur nach
-            Quelldateien durchsucht.
+            <classname>Zend_Translate</classname> kann Übersetzungsquellen automatisch erkennen. Es
+            muß also nicht jede Quelldatei manuell deklariert werden. Man kann diesen Job
+            <classname>Zend_Translate</classname> überlassen welches die komplette
+            Verzeichnisstruktur nach Quelldateien durchsucht.
         </para>
 
         <note>
@@ -951,13 +963,13 @@ $translate = new Zend_Translate('tmx', '/language');
         </example>
 
         <para>
-            <classname>Zend_Translate</classname> muß also nicht nur das angegebene Verzeichnis durchsuchen,
-            sondern auch alle Unterverzeichnisse nach Dateien für Übersetzungen. Das macht die
-            Verwendung sehr einfach. Aber <classname>Zend_Translate</classname> wird alle Dateien ignorieren,
-            welche keine Quellen sind, oder wärend des Einlesens der Übersetzungsdaten Fehler
-            produzieren. Man sollte also sicherstellen das alle Übersetzungsquellen korrekt sind
-            und gelesen werden können weil man keinen Fehler erhält wenn eine Datei fehlerhaft ist
-            oder nicht gelesen werden kann.
+            <classname>Zend_Translate</classname> muß also nicht nur das angegebene Verzeichnis
+            durchsuchen, sondern auch alle Unterverzeichnisse nach Dateien für Übersetzungen. Das
+            macht die Verwendung sehr einfach. Aber <classname>Zend_Translate</classname> wird alle
+            Dateien ignorieren, welche keine Quellen sind, oder wärend des Einlesens der
+            Übersetzungsdaten Fehler produzieren. Man sollte also sicherstellen das alle
+            Übersetzungsquellen korrekt sind und gelesen werden können weil man keinen Fehler erhält
+            wenn eine Datei fehlerhaft ist oder nicht gelesen werden kann.
         </para>
 
         <note>
@@ -988,9 +1000,9 @@ $translate = new Zend_Translate('tmx', '/language');
             </para>
 
             <para>
-                <classname>Zend_Translate</classname> benötigt die '<code>scan</code>' Option um zu wissen
-                das es die Namen aller Verzeichnisse nach Sprachen durchsuchen soll. Siehe das
-                folgende Beispiel für Details:
+                <classname>Zend_Translate</classname> benötigt die '<code>scan</code>' Option um zu
+                wissen das es die Namen aller Verzeichnisse nach Sprachen durchsuchen soll. Siehe
+                das folgende Beispiel für Details:
             </para>
 
             <example id="zend.translate.using.detection.directory.example">
@@ -1106,10 +1118,11 @@ $translate = new Zend_Translate(
                 <title>Teile von Dateinamen</title>
 
                 <para>
-                    <classname>Zend_Translate</classname> kann die Sprache auch erkennen wenn Sie im Dateinamen enthalten
-                    ist. Aber wenn man diesen Weg nimmt, muß die Sprache mit einem Trennzeichen
-                    seperiert werden. Es gibt drei unterstützte Trennzeichen welche verwendet
-                    werden können. Ein Punkt '.', ein Unterstrich '_', oder ein Bindestrich '-'.
+                    <classname>Zend_Translate</classname> kann die Sprache auch erkennen wenn Sie im
+                    Dateinamen enthalten ist. Aber wenn man diesen Weg nimmt, muß die Sprache mit
+                    einem Trennzeichen seperiert werden. Es gibt drei unterstützte Trennzeichen
+                    welche verwendet werden können. Ein Punkt '.', ein Unterstrich '_', oder ein
+                    Bindestrich '-'.
                 </para>
 
                 <programlisting><![CDATA[
@@ -1207,15 +1220,15 @@ if ($translate->isTranslated('message1', false, 'de')) {
         <title>Wie können nicht gefundene Übersetzungen geloggt werden</title>
 
         <para>
-            Wenn man eine größere Site hat, oder man die Übersetzungsdateien manuell erstellt hat man oft
-            das Problem das einige Meldungen nicht übersetzt werden. Aber es gibt eine einfache Lösung wenn
-            man <classname>Zend_Translate</classname> verwendet.
+            Wenn man eine größere Site hat, oder man die Übersetzungsdateien manuell erstellt hat
+            man oft das Problem das einige Meldungen nicht übersetzt werden. Aber es gibt eine
+            einfache Lösung wenn man <classname>Zend_Translate</classname> verwendet.
         </para>
 
         <para>
-            Man muß den folgenden zwei oder drei einfachen Schritten folgen. Erstens, muß man eine Instanz von
-            <classname>Zend_Log</classname> erstellen. Und dann muß man diese Instanz an <classname>Zend_Translate</classname>
-            übergeben. Siehe das folgende Beispiel:
+            Man muß den folgenden zwei oder drei einfachen Schritten folgen. Erstens, muß man eine
+            Instanz von <classname>Zend_Log</classname> erstellen. Und dann muß man diese Instanz an
+            <classname>Zend_Translate</classname> übergeben. Siehe das folgende Beispiel:
         </para>
 
         <example id="zend.translate.using.logging.example">

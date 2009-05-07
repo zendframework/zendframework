@@ -5,9 +5,9 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Test</classname> bietet Tools um das Unit der eigenen Zend Framework Anwendung durchzuführen.
-        Aktuell bieten wir Funktionalitäten an um das Testen der eigenen Zend Framework MVC Anwendung
-        zu erlauben.
+        <classname>Zend_Test</classname> bietet Tools um das Unit der eigenen Zend Framework
+        Anwendung durchzuführen. Aktuell bieten wir Funktionalitäten an um das Testen der eigenen
+        Zend Framework MVC Anwendung zu erlauben.
     </para>
 </sect1>
 <!--

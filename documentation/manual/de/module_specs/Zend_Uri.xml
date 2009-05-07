@@ -10,19 +10,19 @@
     <para>
         <classname>Zend_Uri</classname> ist eine Komponente, die das Verändern und Validieren von
         <ulink url="http://www.w3.org/Addressing/">Uniform Resource Identifiers</ulink> (URIs)
-        unterstützt. <classname>Zend_Uri</classname> existiert hauptsächlich, um andere Komponenten wie z.B.
-        <classname>Zend_Http_Client</classname> zu unterstützen, aber ist auch als eigenständiges Hilfsmittel
-        nützlich.
+        unterstützt. <classname>Zend_Uri</classname> existiert hauptsächlich, um andere Komponenten
+        wie z.B. <classname>Zend_Http_Client</classname> zu unterstützen, aber ist auch als
+        eigenständiges Hilfsmittel nützlich.
     </para>
 
     <para>
         URIs beginnen immer mit einem Schema, gefolgt von einem Doppelpunkt. Der Aufbau der vielen
-        unterschiedlichen Schemata unterscheidet sich erheblich. Die <classname>Zend_Uri</classname> stellt
-        eine Fabrik (Factory) bereit, die eine Unterklasse von sich selber zurück gibt, die auf das
-        entsprechende Schema spezialisiert ist. Diese Unterklasse heißt
-        <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei <code>&lt;scheme&gt;</code> das Schema in
-        Kleinbuchstaben mit einem Großbuchstaben am Anfang darstellt. Eine Ausnahme dieser Regel ist
-        HTTPS, das auch von <classname>Zend_Uri_Http</classname> verarbeitet wird.
+        unterschiedlichen Schemata unterscheidet sich erheblich. Die <classname>Zend_Uri</classname>
+        stellt eine Fabrik (Factory) bereit, die eine Unterklasse von sich selber zurück gibt, die
+        auf das entsprechende Schema spezialisiert ist. Diese Unterklasse heißt
+        <classname>Zend_Uri_&lt;scheme&gt;</classname>, wobei <code>&lt;scheme&gt;</code> das Schema
+        in Kleinbuchstaben mit einem Großbuchstaben am Anfang darstellt. Eine Ausnahme dieser Regel
+        ist HTTPS, das auch von <classname>Zend_Uri_Http</classname> verarbeitet wird.
     </para>
   </sect2>
 
@@ -47,15 +47,16 @@ $uri = Zend_Uri::factory('http');
 
     <para>
         Um eine neue URI von Grund auf zu erstellen, übergibt man nur das Schema an
-        <classname>Zend_Uri::factory()</classname><footnote><para>Zum Zeitpunkt des Schreiben unterstützt
-        Zend_Uri nur HTTP uznd HTTPS Schemata</para></footnote> . Wenn eine nicht unterstütztes
-        Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
+        <classname>Zend_Uri::factory()</classname><footnote><para>Zum Zeitpunkt des Schreiben
+        unterstützt Zend_Uri nur HTTP uznd HTTPS Schemata</para></footnote> . Wenn eine nicht
+        unterstütztes Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname>
+        ausgeworfen.
     </para>
 
     <para>
         Wenn das Schema oder die übergebene URI unterstützt wird, gibt
-        <classname>Zend_Uri::factory()</classname> eine Unterklasse von sich selbst zurück, die auf das zu
-        erstellende Schema spezialisiert ist.
+        <classname>Zend_Uri::factory()</classname> eine Unterklasse von sich selbst zurück, die auf
+        das zu erstellende Schema spezialisiert ist.
     </para>
   </sect2>
 
@@ -80,9 +81,9 @@ $uri = Zend_Uri::factory('http://www.zend.com');
 
     <para>
         Die URI wird analysiert und validiert. Wenn sie als ungültig erkannt wird, wird sofort eine
-        <classname>Zend_Uri_Exception</classname> geworfen. Andernfalls gibt <classname>Zend_Uri::factory()</classname>
-        eine Unterklasse von sich selbst zurück, die auf das zu verändernde Schema spezialisiert
-        ist.
+        <classname>Zend_Uri_Exception</classname> geworfen. Andernfalls gibt
+        <classname>Zend_Uri::factory()</classname> eine Unterklasse von sich selbst zurück, die auf
+        das zu verändernde Schema spezialisiert ist.
     </para>
   </sect2>
 
@@ -90,8 +91,8 @@ $uri = Zend_Uri::factory('http://www.zend.com');
     <title>URI Validierung</title>
 
     <para>
-        Die <classname>Zend_Uri::check()</classname> Methode kann verwendet werden, wenn nur das Validieren
-        einer vorhandenen URI benötigt wird.
+        Die <classname>Zend_Uri::check()</classname> Methode kann verwendet werden, wenn nur das
+        Validieren einer vorhandenen URI benötigt wird.
     </para>
 
     <example id="zend.uri.validation.example-1">
@@ -114,9 +115,9 @@ $valid = Zend_Uri::check('http://uri.in.question');
         <title>"Unwise" Zeichen in URIs erlauben</title>
 
         <para>
-            Standardmäßig wird Zend_Uri die folgenden Zeichen nicht akzepzieren, da Sie durch die RFC als
-            "unwise" definiert und deshalb ungültig sind: <code>"{", "}", "|", "\", "^", "`"</code>.
-            Trotzdem, akzeptieren viele Implementierungen diese Zeichen als Gültig.
+            Standardmäßig wird Zend_Uri die folgenden Zeichen nicht akzepzieren, da Sie durch die
+            RFC als "unwise" definiert und deshalb ungültig sind: <code>"{", "}", "|", "\", "^",
+            "`"</code>. Trotzdem, akzeptieren viele Implementierungen diese Zeichen als Gültig.
         </para>
 
         <para>
@@ -143,9 +144,9 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         </example>
 
         <note><para>
-            <classname>Zend_Uri::setConfig()</classname> setzt Konfigurationsoptionen global. Es wird empfohlen die
-            'allow_unwise' Option auf 'false' zurückzusetzen wie im obigen Beispiel, solange man unwise
-            Zeichen immer global erlauben will.
+            <classname>Zend_Uri::setConfig()</classname> setzt Konfigurationsoptionen global. Es
+            wird empfohlen die 'allow_unwise' Option auf 'false' zurückzusetzen wie im obigen
+            Beispiel, solange man unwise Zeichen immer global erlauben will.
         </para></note>
     </sect3>
   </sect2>
@@ -154,8 +155,9 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
     <title>Allgemeine Instanzmethoden</title>
 
     <para>
-        Jede Instant einer <classname>Zend_Uri</classname> Unterklasse (z.B. <classname>Zend_Uri_Http</classname>) hat
-        verschiedene Instanzmethoden, die für die Verwendung mit jeglicher URI nützlich sind.
+        Jede Instant einer <classname>Zend_Uri</classname> Unterklasse (z.B.
+        <classname>Zend_Uri_Http</classname>) hat verschiedene Instanzmethoden, die für die
+        Verwendung mit jeglicher URI nützlich sind.
     </para>
 
     <sect3 id="zend.uri.instance-methods.getscheme">
@@ -206,11 +208,11 @@ echo $uri->getUri();  // "http://www.zend.com"
       <title>Die URI validieren</title>
 
       <para>
-          <classname>Zend_Uri::factory()</classname> validiert immer jede übergebene URI und wird keine
-          <classname>Zend_Uri</classname> Unterklasse instantieren, wenn die übergebene URI ungültig ist.
-          Dennoch ist es nach der Instanzierung der <classname>Zend_Uri</classname> Unterklasse für eine neue
-          oder eine bestehende URI möglich, dass die URI später ungültig wird, nachdem sie verändert
-          worden ist.
+          <classname>Zend_Uri::factory()</classname> validiert immer jede übergebene URI und wird
+          keine <classname>Zend_Uri</classname> Unterklasse instantieren, wenn die übergebene URI
+          ungültig ist. Dennoch ist es nach der Instanzierung der <classname>Zend_Uri</classname>
+          Unterklasse für eine neue oder eine bestehende URI möglich, dass die URI später ungültig
+          wird, nachdem sie verändert worden ist.
       </para>
 
       <example id="zend.uri.instance-methods.valid.example-1">

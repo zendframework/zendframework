@@ -5,13 +5,14 @@
     <title>Testen eigener Kontroller und MVC Anwendungen</title>
 
     <para>
-        Sobald man sein Bootstrap hat, kann man mit dem Testen beginnen. Testen funktioniert grundsätzlich wie
-        man es in einer PHPUnit Test Suite erwarten würde, mit ein paar kleinen Unterschieden.
+        Sobald man sein Bootstrap hat, kann man mit dem Testen beginnen. Testen funktioniert
+        grundsätzlich wie man es in einer PHPUnit Test Suite erwarten würde, mit ein paar kleinen
+        Unterschieden.
     </para>
 
     <para>
-        Zuerst muß man eine URL die getestet werden soll ausführen, indem die <code>dispatch()</code> Methode
-        des TestCases ausgeführt wird:
+        Zuerst muß man eine URL die getestet werden soll ausführen, indem die
+        <code>dispatch()</code> Methode des TestCases ausgeführt wird:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -28,8 +29,9 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
 ]]></programlisting>
 
     <para>
-        Es gibt trotzdem Zeiten, , in denen man zusätzliche Informationen angeben muß -- GET und POST Variablen,
-        COOKIE Informationen, usw. Man kann die Anfrage mit diesen Informationen ausstatten:
+        Es gibt trotzdem Zeiten, , in denen man zusätzliche Informationen angeben muß -- GET und
+        POST Variablen, COOKIE Informationen, usw. Man kann die Anfrage mit diesen Informationen
+        ausstatten:
     </para>
 
     <programlisting role="php"><![CDATA[

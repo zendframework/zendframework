@@ -6,10 +6,10 @@
     <title>Kettenprüfungen</title>
 
     <para>
-        Oft sollen mehrere Prüfungen an dem selben Wert in einer bestimmten Reihenfolge durchgeführt werden.
-        Der folgende Code demonstriert einen Weg um das Beispiel der
-        <link linkend="zend.validate.introduction">Einführung</link> zu Lösen, wo ein Benutzername zwischen
-        6 und 12 Alphanumerischen Zeichen lang sein muß:
+        Oft sollen mehrere Prüfungen an dem selben Wert in einer bestimmten Reihenfolge durchgeführt
+        werden. Der folgende Code demonstriert einen Weg um das Beispiel der
+        <link linkend="zend.validate.introduction">Einführung</link> zu Lösen, wo ein Benutzername
+        zwischen 6 und 12 Alphanumerischen Zeichen lang sein muss:
 
         <programlisting role="php"><![CDATA[
 // Eine Prüfkette erstellen und die Prüfungen hinzufügen
@@ -28,23 +28,25 @@ if ($validatorChain->isValid($username)) {
 }
 ]]></programlisting>
 
-        Prüfungen werden in der Reihenfolge durchgeführt in der Sie <classname>Zend_Validate</classname> hinzugefügt
-        wurden. Im obigen Beispiel wird der Benutzername zuerst geprüft um sicherzustellen das die Länge
-        zwischen 6 und 12 Zeichen beträgt, und anschließend wird geprüft um sicherzustellen das er nur
-        alphanumerische Zeichen enthält. Die zweite Prüfung, für alphanumerische Zeichen, wird durchgeführt
-        egal ob die Prüfung der Länge zwischen 6 und 12 Zeichen erfolgreich war oder nicht. Das bedeutet, dass
+        Prüfungen werden in der Reihenfolge durchgeführt in der Sie
+        <classname>Zend_Validate</classname> hinzugefügt wurden. Im obigen Beispiel wird der
+        Benutzername zuerst geprüft um sicherzustellen das die Länge zwischen 6 und 12 Zeichen
+        beträgt, und anschließend wird geprüft um sicherzustellen das er nur alphanumerische Zeichen
+        enthält. Die zweite Prüfung, für alphanumerische Zeichen, wird durchgeführt egal ob die
+        Prüfung der Länge zwischen 6 und 12 Zeichen erfolgreich war oder nicht. Das bedeutet, dass
         wenn beide Prüfungen fehlschlagen, <code>getMessages()</code> die Fehlermeldungen von beiden
-        Prüfungen zurückgibt.
+        Prüfungen zurück gibt.
     </para>
 
     <para>
-        In einigen Fällen macht es Sinn eine Prüfung die Kette abbrechen zu lassen wenn der Prüfprozess
-        fehlschlägt. <classname>Zend_Validate</classname> unterstützt solche Fälle mit dem zweiten Parameter der
-        <code>addValidator()</code> Methode. Durch Setzen von <code>$breakChainOnFailure</code> zu
-        <code>true</code> bricht die hinzugefügte Prüfung die Ausführung der Kette bei einem Fehler ab und
-        verhindert damit die Ausführung von jeglichen anderen Prüfungen welche für diese Situation als
-        unnötig oder nicht richtig erkannt werden. Wenn das obige Beispiel wie folgt geschrieben wird, wird
-        die alphanumerische Prüfung nicht stattfinden wenn die Prüfung der Stringlänge fehlschlägt:
+        In einigen Fällen macht es Sinn eine Prüfung die Kette abbrechen zu lassen wenn der
+        Prüfprozess fehlschlägt. <classname>Zend_Validate</classname> unterstützt solche Fälle mit
+        dem zweiten Parameter der <code>addValidator()</code> Methode. Durch Setzen von
+        <code>$breakChainOnFailure</code> zu <code>true</code> bricht die hinzugefügte Prüfung die
+        Ausführung der Kette bei einem Fehler ab und verhindert damit die Ausführung von jeglichen
+        anderen Prüfungen welche für diese Situation als unnötig oder nicht richtig erkannt werden.
+        Wenn das obige Beispiel wie folgt geschrieben wird, wird die alphanumerische Prüfung nicht
+        stattfinden wenn die Prüfung der Stringlänge fehlschlägt:
 
         <programlisting role="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
@@ -54,8 +56,8 @@ $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
     </para>
 
     <para>
-        Jegliches Objekt welches das <classname>Zend_Validate_Interface</classname> enthält kann in einer Prüfkette
-        verwendet werden.
+        Jegliches Objekt welches das <classname>Zend_Validate_Interface</classname> enthält kann in
+        einer Prüfkette verwendet werden.
     </para>
 
 </sect1>

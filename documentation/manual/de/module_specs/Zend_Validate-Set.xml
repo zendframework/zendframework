@@ -6,7 +6,8 @@
     <title>Standard Prüfklassen</title>
 
     <para>
-        Zend Framework kommt mit einem Standardset von Prüfklassen, welche fertig zur Verwendung sind.
+        Zend Framework kommt mit einem Standardset von Prüfklassen, welche fertig zur Verwendung
+        sind.
     </para>
 
     <sect2 id="zend.validate.set.alnum">
@@ -19,9 +20,10 @@
 
         <note>
             <para>
-                Alphabetische Zeichen bedeuten Zeichen die in jeder Spache Wörter bilden. Trotzdem wird das
-                englische Alphabet in den folgenden Sprachen für alphabethische Zeichen verwendet:
-                Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von Zend_Locale spezifiziert.
+                Alphabetische Zeichen bedeuten Zeichen die in jeder Spache Wörter bilden. Trotzdem
+                wird das englische Alphabet in den folgenden Sprachen für alphabethische Zeichen
+                verwendet: Chinesisch, Japanisch, Koreanisch. Die Sprache wurde von Zend_Locale
+                spezifiziert.
             </para>
         </note>
 
@@ -52,30 +54,30 @@
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> zwischen dem minimalen und
-            maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive (<code>$value</code> kann
-            gleich dem Grenzwert sein), kann aber überschrieben werden um einen strikten Vergleich dort
-            durchzuführen wo <code>$value</code> strikt größer als das Minimum und strikt kleiner als das
-            Maximum sein muß.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> zwischen dem minimalen
+            und maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive
+            (<code>$value</code> kann gleich dem Grenzwert sein), kann aber überschrieben werden um
+            einen strikten Vergleich dort durchzuführen wo <code>$value</code> strikt größer als das
+            Minimum und strikt kleiner als das Maximum sein muß.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> dem Luhn Algorithmus (mod-10
-            Checksumme) für Kreditkarten Nummern folgt.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> dem Luhn Algorithmus
+            (mod-10 Checksumme) für Kreditkarten Nummern folgt.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> ein gültiges Datum im Format
-            <code>YYYY-MM-DD</code> ist. Wenn die optionale <code>locale</code> Option gesetzt ist, dann wird
-            das Datum entsprechend dem gesetzten Gebietsschemas geprüft. Und wenn die optionale
-            <code>format</code> Option gesetzt wird, dann wird dieses Format für die Prüfung herangezogen.
-            Für Details über die optionalen Parametern siehe
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> ein gültiges Datum im
+            Format <code>YYYY-MM-DD</code> ist. Wenn die optionale <code>locale</code> Option
+            gesetzt ist, dann wird das Datum entsprechend dem gesetzten Gebietsschemas geprüft. Und
+            wenn die optionale <code>format</code> Option gesetzt wird, dann wird dieses Format für
+            die Prüfung herangezogen. Für Details über die optionalen Parametern siehe
             <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
         </para>
     </sect2>
@@ -85,7 +87,8 @@
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> nur digitale Zeichen enthält.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> nur digitale Zeichen
+            enthält.
         </para>
     </sect2>
 
@@ -95,25 +98,26 @@
         <title>Float</title>
         <para>
             Gibt nur dann <code>true</code> zurück wenn <code>$value</code> ein Fließkomma Wert ist.
-            Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des Browsers,
-            der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann natürlich die
-            Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema zu verändern oder es
-            bei der Erstellung einer Instanz dieser Prüfung angeben.
+            Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des
+            Browsers, der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann
+            natürlich die Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema
+            zu verändern oder es bei der Erstellung einer Instanz dieser Prüfung angeben.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> größer als die Minimale Grenze ist.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> größer als die Minimale
+            Grenze ist.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.hex">
         <title>Hex</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> nur Hexadezimale Digitale Zeichen
-            enthält.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> nur Hexadezimale
+            Digitale Zeichen enthält.
         </para>
     </sect2>
 
@@ -122,13 +126,14 @@
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
         <para>
-            Gibe nur dann <code>true</code> zurück wenn <code>$value</code> eine gültige IBAN (Internationale
-            Bank Account Nummer) enthält. IBAN Nummern werden gegen ein Land geprüft in dem Sie verwendet
-            werden und durch eine Checksumme.
+            Gibe nur dann <code>true</code> zurück wenn <code>$value</code> eine gültige IBAN
+            (Internationale Bank Account Nummer) enthält. IBAN Nummern werden gegen ein Land geprüft
+            in dem Sie verwendet werden und durch eine Checksumme.
         </para>
         <para>
-            Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema angeben das
-            das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen dieses Land geprüft.
+            Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema
+            angeben das das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen dieses
+            Land geprüft.
         </para>
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
@@ -143,8 +148,9 @@ if ($validator->isValid($iban)) {
 }
 ]]></programlisting>
         <para>
-            Das sollte man tun wenn man IBAN Nummern gegen ein einzelnes Land prüfen will. Der einfachere
-            Weg der Prüfung ist es kein Gebietsschema anzugeben wie im nächsten Beispiel gezeigt.
+            Das sollte man tun wenn man IBAN Nummern gegen ein einzelnes Land prüfen will. Der
+            einfachere Weg der Prüfung ist es kein Gebietsschema anzugeben wie im nächsten Beispiel
+            gezeigt.
         </para>
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
@@ -156,45 +162,48 @@ if ($validator->isValid($iban)) {
 }
 ]]></programlisting>
         <para>
-            Aber das zeigt ein großes Problem: Wenn man nur IBAN Nummern von einem einzelnen Land akzeptieren
-            darf, zum Beispiel Frankreich, sind auch die IBAN Nummer von anderen Ländern gültig. Deshalb als
-            Erinnerung: Wenn man IBAN Nummern gegen ein definiertes Land zu prüfen hat, sollte man ein
-            Gebietsschema angeben. Und wenn man alle IBAN Nummern akzeptieren will unabhängig von irgendeinem
-            Land kann der Einfachheit halber das Gebietsschema unterdrückt werden.
+            Aber das zeigt ein großes Problem: Wenn man nur IBAN Nummern von einem einzelnen Land
+            akzeptieren darf, zum Beispiel Frankreich, sind auch die IBAN Nummer von anderen Ländern
+            gültig. Deshalb als Erinnerung: Wenn man IBAN Nummern gegen ein definiertes Land zu
+            prüfen hat, sollte man ein Gebietsschema angeben. Und wenn man alle IBAN Nummern
+            akzeptieren will unabhängig von irgendeinem Land kann der Einfachheit halber das
+            Gebietsschema unterdrückt werden.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn ein "needle" <code>$value</code> in einem "haystack"
-            Array enthalten ist. Wenn die Strict Option <code>true</code> ist, wird der Typ von
-            <code>$value</code> auch geprüft.
+            Gibt nur dann <code>true</code> zurück wenn ein "needle" <code>$value</code> in einem
+            "haystack" Array enthalten ist. Wenn die Strict Option <code>true</code> ist, wird der
+            Typ von <code>$value</code> auch geprüft.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> ein gültiger Integer ist.
-            Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des Browsers,
-            der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann natürlich die
-            Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema zu verändern oder es
-            bei der Erstellung einer Instanz dieser Prüfung angeben.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> ein gültiger Integer
+            ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle Gebietsschema des
+            Browsers, der Umgebung oder eines anwendungsweit gesetzten Gebietsschemas. Man kann
+            natürlich die Zugriffsmethoden get/setLocale verwenden um das verwendete Gebietsschema
+            zu verändern oder es bei der Erstellung einer Instanz dieser Prüfung angeben.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.ip">
         <title>Ip</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> eine gültige IP Adresse ist.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> eine gültige IP Adresse
+            ist.
         </para>
     </sect2>
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> kleiner als die Maximale Grenze ist.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> kleiner als die Maximale
+            Grenze ist.
         </para>
     </sect2>
 
@@ -208,8 +217,8 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> mit einem Regular Expression Pattern
-            geprüft werden kann.
+            Gibt nur dann <code>true</code> zurück wenn <code>$value</code> mit einem Regular
+            Expression Pattern geprüft werden kann.
         </para>
     </sect2>
 
@@ -218,16 +227,17 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
         <para>
-            Gibt nur dann <code>true</code> zurück wenn die Länge des Strings von <code>$value</code>
-            mindstens ein Minimum und nicht größer als ein Maximum ist (wenn die max Option nicht
-            <code>null</code> ist). Wirft die <code>setMin()</code> Methode eine Ausnahme wenn die minimale
-            Länge auf einen größeren Wert gesetzt wird als die maximale Länge, und die <code>setMax()</code>
-            Methode wirft eine Ausnahme wenn die maximale Länge auf einen kleineren Wert als die minimale
-            Länge gesetzt wird. Seit Version 1.0.2 unterstützt diese Klasse UTF-8 und andere Zeichensätze,
-            basierend auf dem aktuellen Wert von
-            <ulink url="http://www.php.net/manual/de/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
-            Wenn man ein anderes Encoding benötigt kann man es mit den Zugriffsmethoden getEncoding und
-            setEncoding setzen.
+            Gibt nur dann <code>true</code> zurück wenn die Länge des Strings von
+            <code>$value</code> mindstens ein Minimum und nicht größer als ein Maximum ist (wenn die
+            max Option nicht <code>null</code> ist). Wirft die <code>setMin()</code> Methode eine
+            Ausnahme wenn die minimale Länge auf einen größeren Wert gesetzt wird als die maximale
+            Länge, und die <code>setMax()</code> Methode wirft eine Ausnahme wenn die maximale Länge
+            auf einen kleineren Wert als die minimale Länge gesetzt wird. Seit Version 1.0.2
+            unterstützt diese Klasse UTF-8 und andere Zeichensätze, basierend auf dem aktuellen Wert
+            von <ulink
+                url="http://www.php.net/manual/de/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
+            Wenn man ein anderes Encoding benötigt kann man es mit den Zugriffsmethoden getEncoding
+            und setEncoding setzen.
         </para>
     </sect2>
 

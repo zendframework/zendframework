@@ -5,84 +5,88 @@
     <title>Ausnahmen</title>
 
     <para>
-        Ausnahmen sind der Herz vom Unit Testen; Sie können verwendet werden um zu prüfen das die Ergebnisse
-        das sind was man erwartet. Zu diesem Zweck bietet <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
-        eine Anzahl an Ausnahmen um das testen eigene MVC Anwendungen und Kontroller einfacher zu machen.
+        Ausnahmen sind der Herz vom Unit Testen; Sie können verwendet werden um zu prüfen das die
+        Ergebnisse das sind was man erwartet. Zu diesem Zweck bietet
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> eine Anzahl an Ausnahmen um das
+        Testen eigene MVC Anwendungen und Kontroller einfacher zu machen.
     </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
         <title>CSS Selektor Ausnahmen</title>
 
         <para>
-            CSS Selektoren sind ein einfacher Weg um zu Prüfen das bestimmte Teile im Inhalt der Antwort
-            enthalten sind. Mit Ihnen ist es auch trivial sicherzustellen das Elemente die für Javascript UIs
-            und/oder AJAX Integrationen notwendig sind, vorhanden sind; die meisten JS Toolkits bieten einige
-            Mechanismen an für das Abholen von DOM Elementen die auf CSS Selektoren basieren, so das der Syntax
-            der gleiche wäre.
+            CSS Selektoren sind ein einfacher Weg um zu Prüfen das bestimmte Teile im Inhalt der
+            Antwort enthalten sind. Mit Ihnen ist es auch trivial sicherzustellen das Elemente die
+            für Javascript UIs und/oder AJAX Integrationen notwendig sind, vorhanden sind; die
+            meisten JS Toolkits bieten einige Mechanismen an für das Abholen von DOM Elementen die
+            auf CSS Selektoren basieren, so das der Syntax der gleiche wäre.
         </para>
 
         <para>
-            Diese Funktionalität wird über <link linkend="zend.dom.query">Zend_Dom_Query</link> angeboten,
-            und in ein Set von 'Query' Ausnahmen integriert. Jede dieser Ausnahmen nimmt als erstes
-            Argument einen CSS Selektor, mit optional hinzugefügten Argumenten und/oder einer Fehlermeldung,
-            basierend auf dem Ausnahmetyp. Die Regeln für das schreiben der CSS Selektoren kann im
-            <link linkend="zend.dom.query.operation">Kapitel Theorie der Anwendung von Zend_Dom_Query</link>
-            gefunden werden. Abfrageausnahmen enthalten:
+            Diese Funktionalität wird über <link linkend="zend.dom.query">Zend_Dom_Query</link>
+            angeboten, und in ein Set von 'Query' Ausnahmen integriert. Jede dieser Ausnahmen nimmt
+            als erstes Argument einen CSS Selektor, mit optional hinzugefügten Argumenten und/oder
+            einer Fehlermeldung, basierend auf dem Ausnahmetyp. Die Regeln für das schreiben der CSS
+            Selektoren kann im <link linkend="zend.dom.query.operation">Kapitel Theorie der
+            Anwendung von Zend_Dom_Query</link> gefunden werden. Abfrageausnahmen enthalten:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>assertQuery($path, $message = '')</code>: Nimmt an das ein oder mehrere DOM Elemente,
-                die dem gegebenen CSS Selektor entsprechen, vorhanden sind. Wenn eine <code>$message</code>
+                <code>assertQuery($path, $message = '')</code>: Nimmt an das ein oder mehrere DOM
+                Elemente, die dem gegebenen CSS Selektor entsprechen, vorhanden sind. Wenn eine
+                <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen
+                Ausnahmemeldung vorangestellt.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryContentContains($path, $match, $message = '')</code>: Nimmt an das
+                ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor entsprechen,
+                vorhanden sind, und das zumindest einer dem Inhalt, der in <code>$match</code>
+                angegeben wurde, entspricht. Wenn eine <code>$message</code> vorhanden ist, wird
+                diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertQueryContentRegex($path, $pattern, $message = '')</code>: Nimmt an das
+                ein oder mehrere DOM Elemente, die dem angegebenen CSS Selektor entsprechen,
+                vorhanden sind, und das zumindest einer dem Regulären Ausdruck der in
+                <code>$pattern</code> angegeben wurde, entspricht. Wenn eine <code>$message</code>
                 vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung vorangestellt.
-            </para></listitem>
-
-            <listitem><para>
-                <code>assertQueryContentContains($path, $match, $message = '')</code>: Nimmt an das ein oder
-                mehrere DOM Elemente, die dem angegebenen CSS Selektor entsprechen, vorhanden sind, und das
-                zumindest einer dem Inhalt, der in <code>$match</code> angegeben wurde, entspricht. Wenn eine
-                <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung
-                vorangestellt.
-            </para></listitem>
-
-            <listitem><para>
-                <code>assertQueryContentRegex($path, $pattern, $message = '')</code>: Nimmt an das ein oder
-                mehrere DOM Elemente, die dem angegebenen CSS Selektor entsprechen, vorhanden sind, und das
-                zumindest einer dem Regulären Ausdruck der in <code>$pattern</code> angegeben wurde, entspricht.
-                Wenn eine <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung
-                vorangestellt.
             </para></listitem>
 
             <listitem><para>
                 <code>assertQueryCount($path, $count, $message = '')</code>:  Nimmt an das exakt
                 <code>$count</code> DOM Elemente dem angegebenen CSS Selektor entsprechen. Wenn eine
-                <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung
-                vorangestellt.
+                <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen
+                Ausnahmemeldung vorangestellt.
             </para></listitem>
 
             <listitem><para>
-                <code>assertQueryCountMin($path, $count, $message = '')</code>: Nimmt an das zumindest
-                <code>$count</code> DOM Element dem angegebenen CSS Selektor entsprechen. Wenn eine
-                <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung
-                vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
-                <code>$count</code> ist das Gleiche wie die einfache Verwendung von <code>assertQuery()</code>.
+                <code>assertQueryCountMin($path, $count, $message = '')</code>: Nimmt an das
+                zumindest <code>$count</code> DOM Element dem angegebenen CSS Selektor entsprechen.
+                Wenn eine <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen
+                Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung
+                eines Wertes von 1 für <code>$count</code> ist das Gleiche wie die einfache
+                Verwendung von <code>assertQuery()</code>.
             </para></listitem>
 
             <listitem><para>
-                <code>assertQueryCountMax($path, $count, $message = '')</code>: Nimmt an das es nicht
-                mehr als <code>$count</code> DOM Elemente gibt die dem angegebenen CSS Selektor entsprechen.
-                Wenn eine <code>$message</code> vorhanden ist, wird diese jeder fehlgeschlagenen Ausnahmemeldung
-                vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1 für
-                <code>$count</code> ist das Gleiche wie die einfache Verwendung von <code>assertQuery()</code>.
+                <code>assertQueryCountMax($path, $count, $message = '')</code>: Nimmt an das es
+                nicht mehr als <code>$count</code> DOM Elemente gibt die dem angegebenen CSS
+                Selektor entsprechen. Wenn eine <code>$message</code> vorhanden ist, wird diese
+                jeder fehlgeschlagenen Ausnahmemeldung vorangestellt. <emphasis>Achtung:</emphasis>
+                Die Spezifizierung eines Wertes von 1 für <code>$count</code> ist das Gleiche wie
+                die einfache Verwendung von <code>assertQuery()</code>.
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Zusätzlich hat jede der obigen Methoden eine 'Not' Variante die eine negative Ausnahme anbietet:
-            <code>assertNotQuery()</code>, <code>assertNotQueryContentContains()</code>,
+            Zusätzlich hat jede der obigen Methoden eine 'Not' Variante die eine negative Ausnahme
+            anbietet: <code>assertNotQuery()</code>, <code>assertNotQueryContentContains()</code>,
             <code>assertNotQueryContentRegex()</code>, und <code>assertNotQueryCount()</code>.
-            (Es ist zu beachten das die min und max Zählen keine dieser Varianten haben, was aus logischen
-            Gründen so ist.)
+            (Es ist zu beachten das die min und max Zählen keine dieser Varianten haben, was aus
+            logischen Gründen so ist.)
         </para>
     </sect3>
 
@@ -90,9 +94,9 @@
         <title>XPath Ausnahmen</title>
 
         <para>
-            Einige Entwickler sind mit XPath vertrauter als mit CSS Selektoren, und deshalb werden für alle
-            <link linkend="zend.test.phpunit.assertions.query">Query Ausnahmen</link> auch XPath Varianten
-            engeboten. Diese sind:
+            Einige Entwickler sind mit XPath vertrauter als mit CSS Selektoren, und deshalb werden
+            für alle <link linkend="zend.test.phpunit.assertions.query">Query Ausnahmen</link> auch
+            XPath Varianten engeboten. Diese sind:
         </para>
 
         <itemizedlist>
@@ -134,8 +138,8 @@
 
         <para>
             Oft wird eine Aktion umgeleitet. Statt der Umleitung zu folgen erlaubt es
-            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> diese Umleitungen mit einer handvoll von
-            Ausnahmen zu testen.
+            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> diese Umleitungen mit einer
+            handvoll von Ausnahmen zu testen.
         </para>
 
         <itemizedlist>
@@ -150,26 +154,27 @@
             </para></listitem>
 
             <listitem><para>
-                <code>assertRedirectTo($url, $message = '')</code>: Nimmt an das eine Umleitung stattgefunden
-                hat, und das der Wert des Ziel Headers die angegebene <code>$url</code> ist.
-            </para></listitem>
-
-            <listitem><para>
-                <code>assertNotRedirectTo($url, $message = '')</code>: Nimmt an das eine Umleitung entweder
-                NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT die angegebene
+                <code>assertRedirectTo($url, $message = '')</code>: Nimmt an das eine Umleitung
+                stattgefunden hat, und das der Wert des Ziel Headers die angegebene
                 <code>$url</code> ist.
             </para></listitem>
 
             <listitem><para>
-                <code>assertRedirectRegex($pattern, $message = '')</code>: Nimmt an das eine Umleitung
-                stattgefunden hat, und das der Wert des Ziel Headers dem durch <code>$pattern</code>
-                angegebenen regulären Ausdruck entspricht.
+                <code>assertNotRedirectTo($url, $message = '')</code>: Nimmt an das eine Umleitung
+                entweder NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT die
+                angegebene <code>$url</code> ist.
             </para></listitem>
 
             <listitem><para>
-                <code>assertNotRedirectRegex($pattern, $message = '')</code>: Nimmt an das eine Umleitung
-                entweder NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT dem durch
+                <code>assertRedirectRegex($pattern, $message = '')</code>: Nimmt an das eine
+                Umleitung stattgefunden hat, und das der Wert des Ziel Headers dem durch
                 <code>$pattern</code> angegebenen regulären Ausdruck entspricht.
+            </para></listitem>
+
+            <listitem><para>
+                <code>assertNotRedirectRegex($pattern, $message = '')</code>: Nimmt an das eine
+                Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT
+                dem durch <code>$pattern</code> angegebenen regulären Ausdruck entspricht.
             </para></listitem>
         </itemizedlist>
     </sect3>
@@ -178,31 +183,33 @@
         <title>Antwort Header Ausnahmen</title>
 
         <para>
-            Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle HTTP Antwort Codes
-            und Header zu prüfen -- zum Beispiel, um zu erkennen um eine Aktion eine 404 oder 500 Antwort
-            hervorruft, oder um sicherzustellen das JSON Antworten die entsprechenden Content-Type Header
-            enthält. Die folgenden Ausnahmen sind vorhanden.
+            Zusätzlich zur Prüfung auf Umleitungs Header, ist es oft notwendig auf spezielle HTTP
+            Antwort Codes und Header zu prüfen -- zum Beispiel, um zu erkennen um eine Aktion eine
+            404 oder 500 Antwort hervorruft, oder um sicherzustellen das JSON Antworten die
+            entsprechenden Content-Type Header enthält. Die folgenden Ausnahmen sind vorhanden.
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>assertResponseCode($code, $message = '')</code>: Nimmt an das die Antwort zum gegebenen
-                HTTP Antwort Code geführt hat.
+                <code>assertResponseCode($code, $message = '')</code>: Nimmt an das die Antwort zum
+                gegebenen HTTP Antwort Code geführt hat.
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeader($header, $message = '')</code>: Nimmt an das die Antwort den gegebenen
-                Header enthält.
+                <code>assertHeader($header, $message = '')</code>: Nimmt an das die Antwort den
+                gegebenen Header enthält.
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeaderContains($header, $match, $message = '')</code>: Nimmt an das die Antwort
-                den gegebenen Header enthält und das sein Inhalt den gegebenen String enthält.
+                <code>assertHeaderContains($header, $match, $message = '')</code>: Nimmt an das die
+                Antwort den gegebenen Header enthält und das sein Inhalt den gegebenen String
+                enthält.
             </para></listitem>
 
             <listitem><para>
-                <code>assertHeaderRegex($header, $pattern, $message = '')</code>: Nimmt an das die Antwort den
-                gegebenen Header enthält und das sein Inhalt der gegebenen Rexec entspricht.
+                <code>assertHeaderRegex($header, $pattern, $message = '')</code>: Nimmt an das die
+                Antwort den gegebenen Header enthält und das sein Inhalt der gegebenen Regex
+                entspricht.
             </para></listitem>
         </itemizedlist>
 
@@ -215,27 +222,27 @@
         <title>Anfrage Ausnahmen</title>
 
         <para>
-            Es ist oft sinnvoll gegen die letzte Aktion, den Kontroller und das Modul zu prüfen; zusätzlich
-            ist es möglich die genommene Route die prüfen. Die folgenden Ausnahmen können in diesen Fällen
-            helfen:
+            Es ist oft sinnvoll gegen die letzte Aktion, den Kontroller und das Modul zu prüfen;
+            zusätzlich ist es möglich die genommene Route die prüfen. Die folgenden Ausnahmen können
+            in diesen Fällen helfen:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>assertModule($module, $message = '')</code>: Nimmt an das das angegebene Modul in der
-                letzten Dispatch Aktion verwendet wurde.
+                <code>assertModule($module, $message = '')</code>: Nimmt an das das angegebene Modul
+                in der letzten Dispatch Aktion verwendet wurde.
             </para></listitem>
             <listitem><para>
-                <code>assertController($controller, $message = '')</code>: Nimmt an das der angegebene
-                Kontroller in der letzten ausgeführten Aktion ausgewählt wurde.
+                <code>assertController($controller, $message = '')</code>: Nimmt an das der
+                angegebene Kontroller in der letzten ausgeführten Aktion ausgewählt wurde.
             </para></listitem>
             <listitem><para>
-                <code>assertAction($action, $message = '')</code>: Nimmt an das die angegebene Aktion zuletzt
-                ausgeführt wurde.
+                <code>assertAction($action, $message = '')</code>: Nimmt an das die angegebene
+                Aktion zuletzt ausgeführt wurde.
             </para></listitem>
             <listitem><para>
-                <code>assertRoute($route, $message = '')</code>: Nimmt an das die angegebene benannte Route
-                dem Router entsprochen hat.
+                <code>assertRoute($route, $message = '')</code>: Nimmt an das die angegebene
+                benannte Route dem Router entsprochen hat.
             </para></listitem>
         </itemizedlist>
 

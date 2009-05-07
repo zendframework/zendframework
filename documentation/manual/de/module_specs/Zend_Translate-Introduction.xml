@@ -6,7 +6,8 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Translate</classname> ist die Lösung des Framework's für mehrsprachige Applikationen.
+        <classname>Zend_Translate</classname> ist die Lösung des Framework's für mehrsprachige
+        Applikationen.
     </para>
 
     <para>
@@ -51,32 +52,32 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Translate</classname> hat keines der oben angesprochene Probleme. Deswegen wird
-        empfohlen <classname>Zend_Translate</classname> statt der PHP eigenen Funktionen zu verwenden.
-        Die Vorteile von <classname>Zend_Translate</classname> sind unter anderem:
+        <classname>Zend_Translate</classname> hat keines der oben angesprochene Probleme. Deswegen
+        wird empfohlen <classname>Zend_Translate</classname> statt der PHP eigenen Funktionen zu
+        verwenden. Die Vorteile von <classname>Zend_Translate</classname> sind unter anderem:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
                 <emphasis>Unterstützt mehrere Quell Formate:</emphasis>
-                <classname>Zend_Translate</classname> unterstützt verschiedene Quell Formate, natürlich auch
-                die welche von PHP unterstützt werden und andere Formate wie zum
+                <classname>Zend_Translate</classname> unterstützt verschiedene Quell Formate,
+                natürlich auch die welche von PHP unterstützt werden und andere Formate wie zum
                 Beispiel TMX und CSV Quellen.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis>Threadsicheres Gettext:</emphasis>
-                Der Gettext Reader von <classname>Zend_Translate</classname> ist Threadsicher. Er kann ohne
-                Probleme in Multithreaded Umgebungen verwendet werden.
+                Der Gettext Reader von <classname>Zend_Translate</classname> ist Threadsicher. Er
+                kann ohne Probleme in Multithreaded Umgebungen verwendet werden.
             </para>
         </listitem>
         <listitem>
             <para>
                 <emphasis>Einfache und einheitliche API:</emphasis>
-                Die API von <classname>Zend_Translate</classname> ist sehr einfach und benötigt nur eine
-                handvoll von Funktionen. So ist sie einfach zu lernen und einfach
+                Die API von <classname>Zend_Translate</classname> ist sehr einfach und benötigt nur
+                eine handvoll von Funktionen. So ist sie einfach zu lernen und einfach
                 zu warten. Alle Quell Formate werden auf die gleiche Art und Weise
                 gehandhabt, sodas wenn zum Beispiel der Wechsel des Quell Formats
                 von Gettext zu TMX notwendig wird, nur eine einzelne Zeile im Code
@@ -93,8 +94,9 @@
         <listitem>
             <para>
                 <emphasis>Automatische Erkennung der Quelle:</emphasis>
-                <classname>Zend_Translate</classname> kann mehrere Quelldateien erkennen und integrieren und zusätzlich das
-                zu verwendende Gebietsschema erkennen abhängig vom Verzeichnis oder Dateinamen.
+                <classname>Zend_Translate</classname> kann mehrere Quelldateien erkennen und
+                integrieren und zusätzlich das zu verwendende Gebietsschema erkennen abhängig vom
+                Verzeichnis oder Dateinamen.
             </para>
         </listitem>
     </itemizedlist>
@@ -120,7 +122,8 @@
             </listitem>
             <listitem>
                 <para>
-                    Die View erzeugen und <classname>Zend_Translate</classname> in den Code integrieren;
+                    Die View erzeugen und <classname>Zend_Translate</classname> in den Code
+                    integrieren;
                 </para>
             </listitem>
             <listitem>

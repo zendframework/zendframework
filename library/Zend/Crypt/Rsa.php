@@ -1,9 +1,41 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Crypt
+ * @subpackage Rsa
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
 
+/**
+ * @see Zend_Crypt_Rsa_Key_Private
+ */
 require_once 'Zend/Crypt/Rsa/Key/Private.php';
 
+/**
+ * @see Zend_Crypt_Rsa_Key_Public
+ */
 require_once 'Zend/Crypt/Rsa/Key/Public.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_Crypt
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Crypt_Rsa
 {
 
@@ -14,6 +46,9 @@ class Zend_Crypt_Rsa
 
     protected $_publicKey = null;
 
+    /**
+     * @var string
+     */
     protected $_pemString = null;
 
     protected $_pemPath = null;
@@ -69,6 +104,12 @@ class Zend_Crypt_Rsa
         return $this->_publicKey;
     }
 
+    /**
+     * @param string $data
+     * @param Zend_Crypt_Rsa_Key_Private $privateKey
+     * @param string $format
+     * @return string
+     */
     public function sign($data, Zend_Crypt_Rsa_Key_Private $privateKey = null, $format = null)
     {
         $signature = '';
@@ -88,6 +129,12 @@ class Zend_Crypt_Rsa
         return $signature;
     }
 
+    /**
+     * @param string $data
+     * @param string $signature
+     * @param string $format
+     * @return string
+     */
     public function verifySignature($data, $signature, $format = null)
     {
         if ($format == self::BASE64) {
@@ -99,6 +146,12 @@ class Zend_Crypt_Rsa
         return $result;
     }
 
+    /**
+     * @param string $data
+     * @param Zend_Crypt_Rsa_Key $key
+     * @param string $format
+     * @return string
+     */
     public function encrypt($data, Zend_Crypt_Rsa_Key $key, $format = null)
     {
         $encrypted = '';
@@ -113,6 +166,12 @@ class Zend_Crypt_Rsa
         return $encrypted;
     }
 
+    /**
+     * @param string $data
+     * @param Zend_Crypt_Rsa_Key $key
+     * @param string $format
+     * @return string
+     */
     public function decrypt($data, Zend_Crypt_Rsa_Key $key, $format = null)
     {
         $decrypted = '';
@@ -153,6 +212,9 @@ class Zend_Crypt_Rsa
         return $return;
     }
 
+    /**
+     * @param string $value
+     */
     public function setPemString($value)
     {
         $this->_pemString = $value;
@@ -193,6 +255,9 @@ class Zend_Crypt_Rsa
         }
     }
 
+    /**
+     * @return string
+     */
     public function getPemString()
     {
         return $this->_pemString;

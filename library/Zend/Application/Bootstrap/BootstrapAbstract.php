@@ -132,7 +132,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
         }
-        $this->_options = $this->_options + $options;
+        $this->_options = array_merge_recursive($this->_options, $options);
         return $this;
     }
 

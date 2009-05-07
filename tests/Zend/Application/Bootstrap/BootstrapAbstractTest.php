@@ -125,6 +125,32 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->assertEquals('foo', $bootstrap->getArbitrary());
     }
 
+    /**
+     * @group ZF-6459
+     */
+    public function testCallingSetOptionsMultipleTimesShouldMergeOptionsRecursively()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
+        $options = array(
+            'deep' => array(
+                'foo' => 'bar',
+                'bar' => 'baz',
+            ),
+        );
+        $bootstrap = new ZfAppBootstrap($this->application);
+        $bootstrap->setOptions($options);
+        $options2 = array(
+            'deep' => array(
+                'bar' => 'bat',
+                'baz' => 'foo',
+            ),
+        );
+        $bootstrap->setOptions($options2);
+        $expected = array_merge_recursive($options, $options2);
+        $test     = $bootstrap->getOptions();
+        $this->assertEquals($expected, $test);
+    }
+
     public function testPluginPathsOptionKeyShouldAddPrefixPathsToPluginLoader()
     {
         require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';

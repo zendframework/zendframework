@@ -94,7 +94,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
             }
         }
         
-        $this->_options += $options;
+        $this->_options = array_merge_recursive($this->_options, $options);
 
         return $this;
     }

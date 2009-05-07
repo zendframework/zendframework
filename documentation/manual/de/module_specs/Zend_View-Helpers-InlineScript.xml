@@ -5,21 +5,22 @@
     <title>InlineScript Helfer</title>
 
     <para>
-        Das HTML <code>&lt;script&gt;</code> Element wird verwendet um entweder Clientseitige Skriptelemente
-        Inline zu ermöglichen oder um eine entfernte Ressource zu verlinken die Clientseitigen Skriptcode
-        enthält. Der <code>InlineScript</code> Helfer erlaubt es beides zu managen. Er ist von
-        <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> abgeleitet und jede Methode
-        dieses Helfers ist vorhanden; trotzdem, sollte die <code>inlineScript()</code> Methode statt
-        <code>headScript()</code> verwendet werden.
+        Das HTML <code>&lt;script&gt;</code> Element wird verwendet um entweder Clientseitige
+        Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource zu verlinken die
+        Clientseitigen Skriptcode enthält. Der <code>InlineScript</code> Helfer erlaubt es beides zu
+        managen. Er ist von <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+        abgeleitet und jede Methode dieses Helfers ist vorhanden; trotzdem, sollte die
+        <code>inlineScript()</code> Methode statt <code>headScript()</code> verwendet werden.
     </para>
 
     <note>
         <title>InlineScript für HTML Body Skripte verwenden</title>
 
         <para>
-            <code>InlineScript</code>, sollte verwendet werden wenn man Skripte im HTML <code>body</code>
-            inkludieren will. Skripte am Ende des Dokuments zu platzieren ist eine gute Praxis um das
-            Versenden von Seiten schneller zu machen, speziell wen 3rd Party Analyse Skripte verwendet werden.
+            <code>InlineScript</code>, sollte verwendet werden wenn man Skripte im HTML
+            <code>body</code> inkludieren will. Skripte am Ende des Dokuments zu platzieren ist eine
+            gute Praxis um das Versenden von Seiten schneller zu machen, speziell wen 3rd Party
+            Analyse Skripte verwendet werden.
         </para>
 
         <para>

@@ -6,8 +6,9 @@
     <title>Zend_Wildfire</title>
 
     <para>
-        <classname>Zend_Wildfire</classname> ist eine Komponente die die Kommunikation zwischen PHP Code und
-        <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> Client Komponenten ermöglicht.
+        <classname>Zend_Wildfire</classname> ist eine Komponente die die Kommunikation zwischen PHP
+        Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> Client Komponenten
+        rmöglicht.
     </para>
 
     <para>
@@ -19,8 +20,8 @@
     </para>
 
     <para>
-        Für den Zweck des Loggens in Firebug wird die
-        <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
+        Für den Zweck des Loggens in Firebug wird die <link
+            linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
         Komponente angeboten und es wurde ein Kommunikationsprotokoll wurde entwickelt das HTTP
         Requests und Response header verwendet um Daten zwischen dem Server und Client Komponenten
         zu senden. Es ist gut für das Loggen von intelligenten Daten, die wärend der
@@ -31,7 +32,7 @@
 
     <para>
         Es gibt auch eine <link
-        linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
+            linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
         Komponente um Datenbank Profilinginformationen in Firebug zu loggen.
     </para>
 

@@ -61,8 +61,8 @@ $validator->isValid('yesterday'); // false
 
         <para>
             Prüft ob ein String für die Verwendung als 'loc' Element in einem Sitemap XML Dokument
-            gültig ist. Er verwendet intern <classname>Zend_Form::check()</classname>. Mehr darüber kann man
-            unter <link linkend="zend.uri.validation">URI Prüfung</link> lesen.
+            gültig ist. Er verwendet intern <classname>Zend_Form::check()</classname>. Mehr darüber
+            kann man unter <link linkend="zend.uri.validation">URI Prüfung</link> lesen.
         </para>
     </sect3>
 

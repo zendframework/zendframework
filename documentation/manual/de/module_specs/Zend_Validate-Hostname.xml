@@ -6,10 +6,10 @@
     <title>Hostname</title>
 
     <para>
-        Zend_Validate_Hostname erlaubt die Prüfung von Hostnamen mit einem Set von bekannten Spezifikationen.
-        Es ist möglich drei verschiedene Typen von Hostnamen zu Prüfen: einen DNS Hostnamen (z.b. domain.com),
-        IP Adressen (z.B. 1.2.3.4), und lokale Hostnamen (z.B. localhost). Standarmäßig werden nur DNS Hostnamen
-        geprüft.
+        Zend_Validate_Hostname erlaubt die Prüfung von Hostnamen mit einem Set von bekannten
+        Spezifikationen. Es ist möglich drei verschiedene Typen von Hostnamen zu Prüfen: einen DNS
+        Hostnamen (z.b. domain.com), IP Adressen (z.B. 1.2.3.4), und lokale Hostnamen (z.B.
+        localhost). Standarmäßig werden nur DNS Hostnamen geprüft.
     </para>
 
     <para>
@@ -44,16 +44,16 @@ if ($validator->isValid($hostname)) {
     <para>
         Es kann gewünscht sein auch IP Adressen, lokale Hostnamen, oder eine Kombination aller drei
         erlaubten Typen zu prüfen. Das kann gemacht werden durch die Übergabe eines Parameters an
-        Zend_Validate_Hostname wenn dieser initialisiert wird. Der Parameter sollte ein Integer sein,
-        welcher die Typen von Hostnamen auswählt die erlaubt sind. Hierfür können die
+        Zend_Validate_Hostname wenn dieser initialisiert wird. Der Parameter sollte ein Integer
+        sein, welcher die Typen von Hostnamen auswählt die erlaubt sind. Hierfür können die
         Zend_Validate_Hostname Konstanten verwendet werden.
     </para>
 
     <para>
-        Die Zend_Validate_Hostname Konstanten sind: <code>ALLOW_DNS</code> um nur DNS Hostnamen zu erlauben,
-        <code>ALLOW_IP</code> um IP Adressen zu erlauben, <code>ALLOW_LOCAL</code> um lokale Hostnmaen zu erlauben,
-        und <code>ALLOW_ALL</code> um alle drei Typen zu erlauben. Um nur IP Adressen zu prüfen kann das
-        folgende Beispiel verwendet werden:
+        Die Zend_Validate_Hostname Konstanten sind: <code>ALLOW_DNS</code> um nur DNS Hostnamen zu
+        erlauben, <code>ALLOW_IP</code> um IP Adressen zu erlauben, <code>ALLOW_LOCAL</code> um
+        lokale Hostnamen zu erlauben, und <code>ALLOW_ALL</code> um alle drei Typen zu erlauben. Um
+        nur IP Adressen zu prüfen kann das folgende Beispiel verwendet werden:
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
@@ -84,10 +84,10 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        Einige Länder Code Top Level Domains (ccTLDs), wie 'de' (Deutschland), unterstützen internationale
-        Zeichen in Domain Namen. Diese sind als Internationale Domain Namen (IDN) bekannt. Diese Domains können
-        mit Zend_Validate_Hostname geprüft werden, mit Hilfe von erweiterten Zeichen die im Prüfprozess
-        verwendet werden.
+        Einige Länder Code Top Level Domains (ccTLDs), wie 'de' (Deutschland), unterstützen
+        internationale Zeichen in Domain Namen. Diese sind als Internationale Domain Namen (IDN)
+        bekannt. Diese Domains können mit Zend_Validate_Hostname geprüft werden, mit Hilfe von
+        erweiterten Zeichen die im Prüfprozess verwendet werden.
     </para>
 
     <para>
@@ -122,10 +122,10 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        Eine IDN Domain zu prüfen ist genauso einfach wie die Verwendung des standard Hostnamen Prüfers
-        da IDN Prüfung standardmäßig eingeschaltet ist. Wenn IDN Prüfung ausgeschaltet werden soll, kann das
-        entweder durch die Übergabe eines Parameters im Zend_Validate_Hostname Konstruktor, oder über die
-        <code>$validator->setValidateIdn()</code> Methode gemacht werden.
+        Eine IDN Domain zu prüfen ist genauso einfach wie die Verwendung des standard Hostnamen
+        Prüfers da IDN Prüfung standardmäßig eingeschaltet ist. Wenn IDN Prüfung ausgeschaltet
+        werden soll, kann das entweder durch die Übergabe eines Parameters im Zend_Validate_Hostname
+        Konstruktor, oder über die <code>$validator->setValidateIdn()</code> Methode gemacht werden.
     </para>
 
     <para>
@@ -137,17 +137,18 @@ $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
 ]]></programlisting>
 
-        Alternativ kann entweder TRUE oder FALSE an <code>$validator->setValidateIdn()</code> übergeben werden,
-        um die IDN Prüfung ein- oder auszuschalten.
+        Alternativ kann entweder TRUE oder FALSE an <code>$validator->setValidateIdn()</code>
+        übergeben werden, um die IDN Prüfung ein- oder auszuschalten.
 
-        Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist es sicher das die Prüfung
-        fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat. Wo keine ccTLD Datei in
-        Zend/Validate/Hostname existiert, welche die zusätzlichen Zeichen definiert, wird eine normale
-        Hostnamen Prüfung durchgeführt.
+        Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist es sicher das
+        die Prüfung fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat. Wo keine
+        ccTLD Datei in Zend/Validate/Hostname existiert, welche die zusätzlichen Zeichen definiert,
+        wird eine normale Hostnamen Prüfung durchgeführt.
     </para>
 
     <para>
-        Es sollte beachtet werden das IDNs nur geprüft werden wenn es erlaubt ist DNS Hostnamen zu prüfen.
+        Es sollte beachtet werden das IDNs nur geprüft werden wenn es erlaubt ist DNS Hostnamen zu
+        prüfen.
     </para>
 
     <para>
@@ -155,10 +156,11 @@ $validator =
     </para>
 
     <para>
-        Normalerweise wird ein Hostname gegen eine Liste von bekannten TLDs geprüft. Wenn diese Funktionalität
-        nicht benötigt wird kann das, auf die gleiche Art und Weise wie die IDN Unterstützung, ausgeschaltet werden
-        Die TLD Prüfung kann ausgeschaltet werden indem ein dritter Parameter an den Zend_Validate_Hostname
-        Konstruktor übergeben wird. Im folgenden Beispiel wird die IDN Prüfung durch den zweiten Parameter unterstützt.
+        Normalerweise wird ein Hostname gegen eine Liste von bekannten TLDs geprüft. Wenn diese
+        Funktionalität nicht benötigt wird kann das, auf die gleiche Art und Weise wie die IDN
+        Unterstützung, ausgeschaltet werden Die TLD Prüfung kann ausgeschaltet werden indem ein
+        dritter Parameter an den Zend_Validate_Hostname Konstruktor übergeben wird. Im folgenden
+        Beispiel wird die IDN Prüfung durch den zweiten Parameter unterstützt.
 
         <programlisting role="php"><![CDATA[
 $validator =
@@ -167,12 +169,14 @@ $validator =
                                false);
 ]]></programlisting>
 
-        Alternativ kann entweder TRUE oder FALSE übergeben an <code>$validator->setValidateTld()</code>
-        übergeben werden um die TLD Prüfung ein- oder auszuschalten.
+        Alternativ kann entweder TRUE oder FALSE übergeben an
+        <code>$validator->setValidateTld()</code> übergeben werden um die TLD Prüfung ein- oder
+        auszuschalten.
     </para>
 
     <para>
-        Es sollte beachtet werden das TLDs nur geprüft werden wenn es erlaubt ist DNS Hostnamen zu prüfen.
+        Es sollte beachtet werden das TLDs nur geprüft werden wenn es erlaubt ist DNS Hostnamen zu
+        prüfen.
     </para>
 
 </sect2>

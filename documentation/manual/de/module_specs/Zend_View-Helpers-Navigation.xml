@@ -16,7 +16,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                    <link
+                        linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
                     wird für die Darstellung des Pfades der aktuell aktiven Seite verwendet.
                 </para>
             </listitem>
@@ -43,18 +44,20 @@
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
-                    wird für die Weiterleitung von Aufrufen zu anderen Navigations Helfern verwendet.
+                    <link
+                        linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                    wird für die Weiterleitung von Aufrufen zu anderen Navigations Helfern
+                    verwendet.
                 </para>
             </listitem>
         </itemizedlist>
 
         Alle eingebauten Helfer erweitern
-        <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, welches die Integration von
-        <link linkend="zend.acl">ACL</link> und <link linkend="zend.translate">Übersetzung</link>
-        hinzufügt. Die abstrakte Klasse implementiert das Interface
-        <classname>Zend_View_Helper_Navigation_Helper</classname> welches die folgenden
-        Methoden definiert:
+        <classname>Zend_View_Helper_Navigation_HelperAbstract</classname>, welches die Integration
+        von <link linkend="zend.acl">ACL</link> und <link
+            linkend="zend.translate">Übersetzung</link> hinzufügt. Die abstrakte Klasse
+        implementiert das Interface <classname>Zend_View_Helper_Navigation_Helper</classname>
+        welches die folgenden Methoden definiert:
 
         <itemizedlist>
             <listitem>
@@ -131,8 +134,8 @@
                 <para>
                     <code>__call()</code> wird verwendet um Aufrufe zum Container, der im Helfer
                     registriert ist, weiterzuleiten, was bedeutet das man Methoden in einem
-                    Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende
-                    <link linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
+                    Helfer aufrufen kann wie wenn Sie im Container wären. Siehe das folgende <link
+                        linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
                 </para>
             </listitem>
             <listitem>
@@ -179,8 +182,8 @@
         Wenn ein Navigations Container nicht explizit in einem Helfer durch Verwendung von
         <code>$helper->setContainer($nav)</code> gesetzt ist, schaut der Helfer in
         <link linkend="zend.registry">der Registry</link> nach einer Container Instanz mit dem
-        Schlüssel <classname>Zend_Navigation</classname>.  Wenn ein Container nicht explizit gesetzt wurde,
-        oder nicht in der Registry gefunden wird, erstellt der Helfer einen leeren
+        Schlüssel <classname>Zend_Navigation</classname>.  Wenn ein Container nicht explizit gesetzt
+        wurde, oder nicht in der Registry gefunden wird, erstellt der Helfer einen leeren
         <classname>Zend_Navigation</classname> Container wenn <code>$helper->getContainer()</code>
         aufgerufen wird.
     </para>
@@ -531,11 +534,11 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
         <para>
             Breadcrumbs werden verwendet um anzuzeigen wo in einer Sitemap ein Benutzer aktuell
             browst, und werden typischerweise wie folgt angezeigt: "Du bist hier: Home > Produkte
-            > FantastischesProdukt 1.0". Der BreakCrumbs Helfer folgt den Richtlinien von
-            <ulink url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs Pattern - Yahoo! Design Pattern Library</ulink>,
-            und erlaubt eine einfache Anpassung (Minimale/Maximale Tiefe, Einrückung, Trennzeichen,
-            und ob das letzte Element verlinkt sein soll), oder die Darstellung durch Verwendung
-            eines partiellen View Skripts.
+            > FantastischesProdukt 1.0". Der BreakCrumbs Helfer folgt den Richtlinien von <ulink
+                url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
+                Pattern - Yahoo! Design Pattern Library</ulink>, und erlaubt eine einfache Anpassung
+            (Minimale/Maximale Tiefe, Einrückung, Trennzeichen, und ob das letzte Element verlinkt
+            sein soll), oder die Darstellung durch Verwendung eines partiellen View Skripts.
         </para>
 
         <para>
@@ -858,55 +861,89 @@ Produkte, Foo Server, FAQ
         <para>
             <itemizedlist>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname>
+                    </para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -2043,10 +2080,10 @@ echo $this->navigation()
             Der Navigation Helfer ist ein Proxy Helfer der Aufrufe zu anderen Navigations Helfern
             durchführt. Er kann als Einstiegspunkt fpr alle navigations-basierenden View Tasks
             verwendet werden. Die vorher erwähnten Navigations Helfer sind im Namespace
-            <classname>Zend_View_Helper_Navigation</classname> und würden es deshalb benötigen, den Pfad
-            <code>Zend/View/Helper/Navigation</code> als Helfer Pfad der View hinzuzufügen. Mit dem
-            Proxy Helfer der im <classname>Zend_View_Helper</classname> Namespace sitzt, ist er immer
-            vorhanden, ohne das irgendein Helfer Pfad an der View hinzugefügt werden muß.
+            <classname>Zend_View_Helper_Navigation</classname> und würden es deshalb benötigen, den
+            Pfad <code>Zend/View/Helper/Navigation</code> als Helfer Pfad der View hinzuzufügen. Mit
+            dem Proxy Helfer der im <classname>Zend_View_Helper</classname> Namespace sitzt, ist er
+            immer vorhanden, ohne das irgendein Helfer Pfad an der View hinzugefügt werden muß.
         </para>
 
         <para>

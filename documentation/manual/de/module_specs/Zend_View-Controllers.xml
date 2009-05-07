@@ -5,9 +5,9 @@
     <title>Controller Skripte</title>
 
     <para>
-        Der Controller ist der Ort, wo du <classname>Zend_View</classname> instanziieren und konfigurieren kannst. Du
-        übergibst dann die Variablen an den View und teilst ihm mit, welches bestimmte Skript für
-        die Ausgabe benutzt werden soll.
+        Der Controller ist der Ort, wo du <classname>Zend_View</classname> instanziieren und
+        konfigurieren kannst. Du übergibst dann die Variablen an den View und teilst ihm mit,
+        welches bestimmte Skript für die Ausgabe benutzt werden soll.
     </para>
 
     <sect2 id="zend.view.controllers.assign">
@@ -80,10 +80,10 @@ $view->assign('c', "Sea");
 
         <para>
             Sobald du alle notwendigen Variablen übergeben hast, sollte der Controller dem
-            <classname>Zend_View</classname> mitteilen, ein bestimmtes View Skript zu verarbeiten. Dies funktioniert über
-            die render() Methode. Beachte, dass diese Methode die verarbeitete Ausgabe zurück- aber
-            nicht ausgibt, so dass du die Ausgabe selber zur passenden Zeit per echo() oder print()
-            ausgeben musst.
+            <classname>Zend_View</classname> mitteilen, ein bestimmtes View Skript zu verarbeiten.
+            Dies funktioniert über die render() Methode. Beachte, dass diese Methode die
+            verarbeitete Ausgabe zurück- aber nicht ausgibt, so dass du die Ausgabe selber zur
+            passenden Zeit per echo() oder print() ausgeben musst.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -101,16 +101,17 @@ echo $view->render('someView.php');
         <title>Pfade für View Skripte</title>
 
         <para>
-            Standardmäßig erwartet <classname>Zend_View</classname>, dass deine View Skripte im selben Verzeichnis wie
-            das Conntroller Skript liegen. Wenn dein Controller Skript zum Beispiel im Pfad
-            "/path/to/app/controllers" liegt und es $view->render('someView.php') aufruft, wird
-            <classname>Zend_View</classname> nach der Datei "/path/to/app/controllers/someView.php" schauen.
+            Standardmäßig erwartet <classname>Zend_View</classname>, dass deine View Skripte im
+            selben Verzeichnis wie das Conntroller Skript liegen. Wenn dein Controller Skript zum
+            Beispiel im Pfad "/path/to/app/controllers" liegt und es $view->render('someView.php')
+            aufruft, wird <classname>Zend_View</classname> nach der Datei
+            "/path/to/app/controllers/someView.php" schauen.
         </para>
 
         <para>
             Es ist durchaus wahrscheinlich, dass deine View Skripte woanders liegen. Verwende
-            die setScriptPath() Methode, um <classname>Zend_View</classname> mitzuteilen, wo es nach View Skripten
-            schauen soll.
+            die setScriptPath() Methode, um <classname>Zend_View</classname> mitzuteilen, wo es nach
+            View Skripten schauen soll.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -125,8 +126,8 @@ $view->setScriptPath('/path/to/app/views');
 
         <para>
             Durch Verwendung der addScriptPath() Methode können die Pfade "gestapelt" werden. Wenn
-            du Pfade zu diesem Stapelspeicher hinzufügst, wird <classname>Zend_View</classname> im zuletzt
-            hinzugefügten Pfad nach dem angeforderten View Skript schauen. Dies erlaubt dir,
+            du Pfade zu diesem Stapelspeicher hinzufügst, wird <classname>Zend_View</classname> im
+            zuletzt hinzugefügten Pfad nach dem angeforderten View Skript schauen. Dies erlaubt dir,
             Standard Views mit spezialisierten Views zu überschreiben, so dass Du  "Themen"
             oder "Skins" für einige Views erstellen kannst, während du andere bestehen lässt.
         </para>
@@ -146,12 +147,13 @@ $view->addScriptPath('/path/to/custom/');
             <title>Benutze nie Eingaben des Benutzers um den Skriptpfad zu setzen</title>
 
             <para>
-                <classname>Zend_View</classname> verwendet Skriptpfade um Viewskripte zu eruieren und Sie darzustellen.
-                Deshalb sollten diese Verzeichnisse im Vorhinein bekannt sein, und unter der eigenen Kontrolle.
-                <emphasis>Niemals</emphasis> sollten Pfade von Viewskripten basierend auf Benutzereingaben
-                gesetzt werden, da diese dazu führen können das man sich potentiell gegen Local File Inclusion
-                Angriffe öffnet wenn der spezifizierte Pfad den Übergang in das Elternverzeichnis enthält.
-                Die folgende Eingabe könnte zu Beispiel so einen Fall verursachen:
+                <classname>Zend_View</classname> verwendet Skriptpfade um Viewskripte zu eruieren
+                und Sie darzustellen. Deshalb sollten diese Verzeichnisse im Vorhinein bekannt sein,
+                und unter der eigenen Kontrolle. <emphasis>Niemals</emphasis> sollten Pfade von
+                Viewskripten basierend auf Benutzereingaben gesetzt werden, da diese dazu führen
+                können das man sich potentiell gegen Local File Inclusion Angriffe öffnet wenn der
+                spezifizierte Pfad den Übergang in das Elternverzeichnis enthält. Die folgende
+                Eingabe könnte zu Beispiel so einen Fall verursachen:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -161,10 +163,11 @@ $view->render('passwd');
 ]]></programlisting>
 
             <para>
-                Obwohl dieses Beispiel erfunden ist, zeigt es doch sehr klar das potentielle Problem. Wenn man
-                Benutzereingaben vertrauen <emphasis>muß</emphasis> um den eigenen Skriptpfad zu setzen, muß
-                man die Eingabe entsprechend Filtern und prüfen um sicherzustellen das Sie in dem Pfaden
-                existiert die von der eigenen Anwendung kontrolliert werden.
+                Obwohl dieses Beispiel erfunden ist, zeigt es doch sehr klar das potentielle
+                Problem. Wenn man Benutzereingaben vertrauen <emphasis>muß</emphasis> um den eigenen
+                Skriptpfad zu setzen, muß man die Eingabe entsprechend Filtern und prüfen um
+                sicherzustellen das Sie in dem Pfaden existiert die von der eigenen Anwendung
+                kontrolliert werden.
             </para>
         </note>
 

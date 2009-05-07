@@ -5,23 +5,23 @@
     <title>Zend_View_Abstract</title>
 
     <para>
-        <classname>Zend_View_Abstract</classname> ist die Basisklasse auf der <classname>Zend_View</classname>
-        aufbaut; <classname>Zend_View</classname> selbst erweitert Sie einfach und deklariert eine
-        konkrete Implementation der <code>_run()</code> Methode (welche durch <code>render()</code>
-        aufgerufen wird).
+        <classname>Zend_View_Abstract</classname> ist die Basisklasse auf der
+        <classname>Zend_View</classname> aufbaut; <classname>Zend_View</classname> selbst erweitert
+        Sie einfach und deklariert eine konkrete Implementation der <code>_run()</code> Methode
+        (welche durch <code>render()</code> aufgerufen wird).
     </para>
 
     <para>
-        Viele Entwickler finden das Sie <classname>Zend_View_Abstract</classname> erweitern wollen um
-        eigene Funktionalitäten hinzuzufügen und daraus folgend in Probleme mit dessen Design
+        Viele Entwickler finden das Sie <classname>Zend_View_Abstract</classname> erweitern wollen
+        um eigene Funktionalitäten hinzuzufügen und daraus folgend in Probleme mit dessen Design
         laufen, welches eine Anzahl an privaten Membern enthält. Dieses Dokument zielt darauf ab
         die Entscheidung hinter diesem Design zu erklären.
     </para>
 
     <para>
-        <classname>Zend_View</classname> ist etwas wie eine Anti-Template Maschine und verwendet deswegen
-        PHP nativ für sein Templating. Als Ergebnis ist alles von PHP vorhanden und View Skripte
-        erweitern Ihre aufrufendes Objekt.
+        <classname>Zend_View</classname> ist etwas wie eine Anti-Template Maschine und verwendet
+        deswegen PHP nativ für sein Templating. Als Ergebnis ist alles von PHP vorhanden und View
+        Skripte erweitern Ihre aufrufendes Objekt.
     </para>
 
     <para>
@@ -50,10 +50,11 @@ protected function _run()
         Glücklicherweise hat PHP5 eine Anwort auf das mit seiner Deklaration der Sichtbarkeit;
         Auf private Member kann nicht durch Objekte zugegriffen werden wenn eine bestehende Klasse
         erweitert wird. Das führt zum aktuellen Design: Da <classname>Zend_View</classname>
-        <classname>Zend_View_Abstract</classname> <emphasis>erweitert</emphasis> sind View Skripte limitiert
-        auf protected und public Methoden und Member von <classname>Zend_View_Abstract</classname> --
-        was effektiv die Aktionen beschränkt die durchgeführt werden können, und es erlaubt
-        kritische Bereiche vor Missbrauch durch View Skripte zu schützen.
+        <classname>Zend_View_Abstract</classname> <emphasis>erweitert</emphasis> sind View Skripte
+        limitiert auf protected und public Methoden und Member von
+        <classname>Zend_View_Abstract</classname> -- was effektiv die Aktionen beschränkt die
+        durchgeführt werden können, und es erlaubt kritische Bereiche vor Missbrauch durch View
+        Skripte zu schützen.
     </para>
 </sect1>
 <!--

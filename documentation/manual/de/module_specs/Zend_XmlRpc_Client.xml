@@ -8,10 +8,10 @@
         <title>Einführung</title>
 
         <para>
-            Zend Framework bietet Unterstützung, als Client - durch das <classname>Zend_XmlRpc_Client</classname>
-            Paket - entfernte XML-RPC-Dienste zu nutzen. Seine wichtigsten Möglichkeiten
-            beinhalten das automatische Umwandeln zwischen PHP und XML-RPC, ein Server
-            Proxy-Objekt und den Zugriff auf Server-Prüfungsmöglichkeiten.
+            Zend Framework bietet Unterstützung, als Client - durch das
+            <classname>Zend_XmlRpc_Client</classname> Paket - entfernte XML-RPC-Dienste zu nutzen.
+            Seine wichtigsten Möglichkeiten beinhalten das automatische Umwandeln zwischen PHP und
+            XML-RPC, ein Server Proxy-Objekt und den Zugriff auf Server-Prüfungsmöglichkeiten.
         </para>
 
     </sect2>
@@ -163,23 +163,26 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                 <title>Auf welchen Typ werden leere Arrays gecastet?</title>
 
                 <para>
-                    Die Übergabe eines leeren Array an eine XML-RPC Methode ist problematisch, da es entweder
-                    ein Array oder ein Struct repräsentieren könnte. <classname>Zend_XmlRpc_Client</classname> erkennt
-                    solche Konditionen und führt eine Abfrage zur <code>system.methodSignature</code> Methode
-                    des Servers aus, um den richtigen XML-RPC Typ festzustellen auf den gecastet werden soll.
+                    Die Übergabe eines leeren Array an eine XML-RPC Methode ist problematisch, da es
+                    entweder ein Array oder ein Struct repräsentieren könnte.
+                    <classname>Zend_XmlRpc_Client</classname> erkennt solche Konditionen und führt
+                    eine Abfrage zur <code>system.methodSignature</code> Methode des Servers aus, um
+                    den richtigen XML-RPC Typ festzustellen auf den gecastet werden soll.
                 </para>
 
                 <para>
                     Trotzdem kann das selbst sogar zu Problemen führen. Erstens werden Server die
-                    <code>system.methodSignature</code> nicht unterstützen fehlerhafte Anfragen protokollieren,
-                    und <classname>Zend_XmlRpc_Client</classname> wird selbst einen Ausweg nehmen und den Wert auf ein
-                    Array casten. Zusätzlich bedeutet das das jeder Aufruf mit einem Array Argument zu einem
-                    zusätzlichen Aufruf beim Remote Server führt.
+                    <code>system.methodSignature</code> nicht unterstützen fehlerhafte Anfragen
+                    protokollieren, und <classname>Zend_XmlRpc_Client</classname> wird selbst einen
+                    Ausweg nehmen und den Wert auf ein Array casten. Zusätzlich bedeutet das das
+                    jeder Aufruf mit einem Array Argument zu einem zusätzlichen Aufruf beim Remote
+                    Server führt.
                 </para>
 
                 <para>
-                    Um das Nachsehen komplett abzuschalten kann die <code>setSkipSystemLookup()</code>
-                    Methode aufgerufen werden bevor der XML-RPC Aufruf durchgeführt wird:
+                    Um das Nachsehen komplett abzuschalten kann die
+                    <code>setSkipSystemLookup()</code> Methode aufgerufen werden bevor der XML-RPC
+                    Aufruf durchgeführt wird:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -446,11 +449,11 @@ try {
             </example>
 
             <para>
-                Wenn die Methode <code>call()</code> genutzt wird, um eine
-                Anfrage zu starten, wird die <classname>Zend_XmlRpc_Client_FaultException</classname>
-                bei einem Fehler geworfen. Ein <classname>Zend_XmlRpc_Response</classname>-Objekt,
-                das den Fehler enthält, ist allerdings auch verfübar durch die
-                Methode <code>getLastResponse()</code>.
+                Wenn die Methode <code>call()</code> genutzt wird, um eine Anfrage zu starten, wird
+                die <classname>Zend_XmlRpc_Client_FaultException</classname> bei einem Fehler
+                geworfen. Ein <classname>Zend_XmlRpc_Response</classname>-Objekt, das den Fehler
+                enthält, ist allerdings auch verfübar durch die Methode
+                <code>getLastResponse()</code>.
             </para>
 
             <para>
@@ -469,8 +472,8 @@ try {
         <title>Server Selbstüberprüfung</title>
         <para>
             Einige XML-RPC Server bieten de facto Überprüfungsmethoden unter dem XML-RPC
-            Namesraum <code>system.</code>. <classname>Zend_XmlRpc_Client</classname> stellt spezielle
-            Verfahren für Server mit diesen Möglichkeiten zur Verfügung.
+            Namesraum <code>system.</code>. <classname>Zend_XmlRpc_Client</classname> stellt
+            spezielle Verfahren für Server mit diesen Möglichkeiten zur Verfügung.
         </para>
 
         <para>

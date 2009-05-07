@@ -5,15 +5,17 @@
     <title>Partielle Helfer</title>
 
     <para>
-        Der <code>Partial</code> (Partielle) View Helfer wird verwendet um ein spezielles Template innerhalb
-        seines eigenen variablen Bereichs zu rendern. Primär wird er für wiederverwendbare Templatefragmente
-        verwendet bei denen man keine Vorsorge wegen variablen Namenskonflikten aufpassen muß. Zusätzlich
-        erlauben Sie es Teile von View Skripten von speziellen Modulen zu spezifizieren.
+        Der <code>Partial</code> (Partielle) View Helfer wird verwendet um ein spezielles Template
+        innerhalb seines eigenen variablen Bereichs zu rendern. Primär wird er für wiederverwendbare
+        Templatefragmente verwendet bei denen man keine Vorsorge wegen variablen Namenskonflikten
+        aufpassen muß. Zusätzlich erlauben Sie es Teile von View Skripten von speziellen Modulen zu
+        spezifizieren.
     </para>
 
     <para>
-        Ein Geschwisterteil zum <code>Partial</code> ist der <code>PartialLoop</code> View Helfer der es
-        erlaubt Daten zu übergeben die durchlaufen werden können, und einen Abschnitt für jedes Teil auszugeben.
+        Ein Geschwisterteil zum <code>Partial</code> ist der <code>PartialLoop</code> View Helfer
+        der es erlaubt Daten zu übergeben die durchlaufen werden können, und einen Abschnitt für
+        jedes Teil auszugeben.
     </para>
 
     <note>
@@ -31,8 +33,8 @@
         <title>Grundsätzliche Verwendung von Partials</title>
 
         <para>
-            Die grundsätzliche Verwendung von Partials ist die Ausgabe von Templatefragmenten im eigenen
-            Viewbereich. Es wird das folgende teilweise Skript angenommen:
+            Die grundsätzliche Verwendung von Partials ist die Ausgabe von Templatefragmenten im
+            eigenen Viewbereich. Es wird das folgende teilweise Skript angenommen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -77,33 +79,35 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Array</emphasis>. Wenn ein Array übergeben wird, sollte es assoziativ sein,
-                    und seine Schlüssel/Werte Paare werden der View mit dem Schlüssel als View Variable
+                    <emphasis>Array</emphasis>. Wenn ein Array übergeben wird, sollte es assoziativ
+                    sein, und seine Schlüssel/Werte Paare werden der View mit dem Schlüssel als View
+                    Variable zugeordnet.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Objekt das die toArray() Methode implementiert</emphasis>. Wenn ein
+                    Objekt übergeben wird das eine <code>toArray()</code> Methode besitzt, wird das
+                    Ergebnis von <code>toArray()</code> dem View Objekt als View Variablen
                     zugeordnet.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>Objekt das die toArray() Methode implementiert</emphasis>. Wenn ein Objekt
-                    übergeben wird das eine <code>toArray()</code> Methode besitzt, wird das Ergebnis von
-                    <code>toArray()</code> dem View Objekt als View Variablen zugeordnet.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>Standard Objekt</emphasis>. Jedes andere Objekt wird die Ergebnisse von
-                    <code>object_get_vars()</code> (essentiell alle öffentlichen Eigenschaften des
-                    Objektes) dem View Objekt zuordnen.
+                    <emphasis>Standard Objekt</emphasis>. Jedes andere Objekt wird die Ergebnisse
+                    von <code>object_get_vars()</code> (essentiell alle öffentlichen Eigenschaften
+                    des Objektes) dem View Objekt zuordnen.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Wenn das eigene Modell ein Objekt ist, kann es gewünscht sein, es <emphasis>als Objekt</emphasis>
-            an das Partielle Skript zu übergeben, statt es in ein Array von Variablen zu serialisieren. Das
-            kann durch das Setzen der 'objectKey' Eigenschaft des betreffenden Helfers getan werden:
+            Wenn das eigene Modell ein Objekt ist, kann es gewünscht sein, es <emphasis>als
+            Objekt</emphasis> an das Partielle Skript zu übergeben, statt es in ein Array von
+            Variablen zu serialisieren. Das kann durch das Setzen der 'objectKey' Eigenschaft des
+            betreffenden Helfers getan werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -116,10 +120,11 @@ $view->partialLoop()->setObjectKey('model');
 ]]></programlisting>
 
         <para>
-            Diese Technik ist speziell dann sinnvoll wenn <classname>Zend_Db_Table_Rowset</classname>s an
-            <code>partialLoop()</code> übergeben werden, da man dann kompletten Zugriff auf die Zeilenobjekte
-            im View Skript hat, was es einem erlaubt Ihre Methoden auszurufen (wie das empfangen von Werten
-            bei Eltern- oder abhängigen Zeilen).
+            Diese Technik ist speziell dann sinnvoll wenn
+            <classname>Zend_Db_Table_Rowset</classname>s an <code>partialLoop()</code> übergeben
+            werden, da man dann kompletten Zugriff auf die Zeilenobjekte im View Skript hat, was es
+            einem erlaubt Ihre Methoden auszurufen (wie das empfangen von Werten bei Eltern- oder
+            abhängigen Zeilen).
         </para>
     </note>
 
@@ -127,18 +132,20 @@ $view->partialLoop()->setObjectKey('model');
         <title>Verwendung von PartialLoop um iterierbare Modelle darzustellen</title>
 
         <para>
-            Typischerweise, wird man Partials in einer Schleife verwenden um das selbe Inhaltsfragment,
-            viele Male, darzustellen; auf diesem Weg können große Blöcke von wiederholenden Inhalten oder
-            komplexe Anzeigelogik auf einen einzelnen Platz gegeben werden. Trotzdem hat das einen
-            Geschwindigkeitsnachteil, da der partielle Helfer einmal für jede Iteration aufgerufen werden
+            Typischerweise, wird man Partials in einer Schleife verwenden um das selbe
+            Inhaltsfragment, viele Male, darzustellen; auf diesem Weg können große Blöcke von
+            wiederholenden Inhalten oder komplexe Anzeigelogik auf einen einzelnen Platz gegeben
+            werden. Trotzdem hat das einen Geschwindigkeitsnachteil, da der partielle Helfer einmal
+            für jede Iteration aufgerufen werden
             muß.
         </para>
 
         <para>
-            Der <code>PartialLoop</code> View Helfer hilft bei der Lösung dieses Problems. Er erlaubt es einen
-            wiederholenden Teil (Array oder Objekt das einen <code>Iterator</code> implementiert) als Modell
-            zu übergeben. Er iteriert dann darüber, und übergibt dessen Teile dem Partial Skript als Modell.
-            Teil in diesem Iterator kann jedes Modell sein das der <code>Partial</code> View Helfer erlaubt.
+            Der <code>PartialLoop</code> View Helfer hilft bei der Lösung dieses Problems. Er
+            erlaubt es einen wiederholenden Teil (Array oder Objekt das einen <code>Iterator</code>
+            implementiert) als Modell zu übergeben. Er iteriert dann darüber, und übergibt dessen
+            Teile dem Partial Skript als Modell. Teil in diesem Iterator kann jedes Modell sein das
+            der <code>Partial</code> View Helfer erlaubt.
         </para>
 
         <para>
@@ -196,14 +203,15 @@ $model = array(
         <title>Partials in anderen Modulen darstellen</title>
 
         <para>
-            Zeitweise existiert ein Parial in einem anderen Modul. Wenn der Name des Moduls bekannt ist,
-            kann dieses als zweites Argument entweder <code>partial()</code> oder <code>partialLoop()</code>
-            übergeben werden, indem das <code>$model</code> Argument an dritte Stelle verschoben wird.
+            Zeitweise existiert ein Parial in einem anderen Modul. Wenn der Name des Moduls bekannt
+            ist, kann dieses als zweites Argument entweder <code>partial()</code> oder
+            <code>partialLoop()</code> übergeben werden, indem das <code>$model</code> Argument an
+            dritte Stelle verschoben wird.
         </para>
 
         <para>
-            Wenn zum Beispiel, eine Teilseite existiert im 'list' Modul existiert die verwendet werden soll,
-            kann diese wie folgt genommen werden:
+            Wenn zum Beispiel, eine Teilseite existiert im 'list' Modul existiert die verwendet
+            werden soll, kann diese wie folgt genommen werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -211,8 +219,9 @@ $model = array(
 ]]></programlisting>
 
         <para>
-            Auf diesem Weg, können Teile wiederverwendet werden die speziell für andere Module erstellt wurden.
-            Deshalb ist es besser, wiederverwendbare Teile in einen Pfad für geteilt View Skripte zu geben.
+            Auf diesem Weg, können Teile wiederverwendet werden die speziell für andere Module
+            erstellt wurden. Deshalb ist es besser, wiederverwendbare Teile in einen Pfad für
+            geteilt View Skripte zu geben.
         </para>
     </example>
 </sect3>

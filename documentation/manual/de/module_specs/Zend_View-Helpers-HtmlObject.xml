@@ -5,9 +5,9 @@
     <title>HTML Objekt Helfer</title>
 
     <para>
-        Das HTML <code><![CDATA[<object>]]></code> Element wird für das Einbetten von Medien wie Flash oder
-        Quicktime in Webseiten verwendet. Der Object View Helfer übernimmt die Einbettung von Medien mit einem
-        minimalen Aufwand.
+        Das HTML <code><![CDATA[<object>]]></code> Element wird für das Einbetten von Medien wie
+        Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer übernimmt die Einbettung
+        von Medien mit einem minimalen Aufwand.
     </para>
 
     <para>
@@ -42,8 +42,8 @@
     </itemizedlist>
 
     <para>
-        Alle diese Helfer teilen sich das gleiche Interface. Aus diesem Grund enthält diese Dokumentation nur
-        Beispiele für zwei dieser Helfer.
+        Alle diese Helfer teilen sich das gleiche Interface. Aus diesem Grund enthält diese
+        Dokumentation nur Beispiele für zwei dieser Helfer.
     </para>
 
     <example id="zend.view.helpers.initial.object.flash">
@@ -51,8 +51,8 @@
         <title>Flash Helfer</title>
 
         <para>
-            Die Einbettung von Flash in die eigene Seite mit Hilfe des Helfers ist recht direkt. Das einzige
-            benötigte Argument ist die Ressource URI.
+            Die Einbettung von Flash in die eigene Seite mit Hilfe des Helfers ist recht direkt. Das
+            einzige benötigte Argument ist die Ressource URI.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -83,15 +83,17 @@
         <title>Anpassen des Objekts durch die Übergabe von zusätzlichen Argumenten</title>
 
         <para>
-            Das erste Argument des Objekt Helfers wird immer benötigt. Es ist die URI zu der Ressource die man
-            einbetten will. Das zweite Argument wird nur im <code>htmlObject</code> Helfer benötigt. Die anderen
-            Helfer enthalten bereits den wichtigen Wert für dieses Argument. Der dritte Parameter wird für die
-            Übergabe von Argumenten an das Objekt Element verwendet. Es akzeptiert nur ein Array mit
-            Schlüssel-Wert Paaren. Die <code>classid</code> und <code>codebase</code> sind Beispiel für solche
-            Attribute. Das vierte Argument nimmt auch Schlüssel-Wert Paare und verwendet diese für die
-            Erstellung von <code><![CDATA[<param>]]></code> Elementen. Sie sehen in Kürze ein Beispiel hierfür.
-            Letztendlich, gibt es eine Option für das zur Verfügungstellen von zusätzlichen Inhalten beim
-            Objekt. Jetzt folgt ein Beispiel welches alle Argumente verwendet.
+            Das erste Argument des Objekt Helfers wird immer benötigt. Es ist die URI zu der
+            Ressource die man einbetten will. Das zweite Argument wird nur im
+            <code>htmlObject</code> Helfer benötigt. Die anderen Helfer enthalten bereits den
+            wichtigen Wert für dieses Argument. Der dritte Parameter wird für die Übergabe von
+            Argumenten an das Objekt Element verwendet. Es akzeptiert nur ein Array mit
+            Schlüssel-Wert Paaren. Die <code>classid</code> und <code>codebase</code> sind Beispiel
+            für solche Attribute. Das vierte Argument nimmt auch Schlüssel-Wert Paare und verwendet
+            diese für die Erstellung von <code><![CDATA[<param>]]></code> Elementen. Sie sehen in
+            Kürze ein Beispiel hierfür. Letztendlich, gibt es eine Option für das zur
+            Verfügungstellen von zusätzlichen Inhalten beim Objekt. Jetzt folgt ein Beispiel welches
+            alle Argumente verwendet.
         </para>
 
         <programlisting role="php"><![CDATA[

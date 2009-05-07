@@ -5,23 +5,24 @@
     <title>HeadStyle Helfer</title>
 
     <para>
-        Das HTML Element <code>&lt;style&gt;</code> wird verwendet um CSS Stylesheets im HTML Element
-        <code>&lt;head&gt;</code> zu inkludieren.
+        Das HTML Element <code>&lt;style&gt;</code> wird verwendet um CSS Stylesheets im HTML
+        Element <code>&lt;head&gt;</code> zu inkludieren.
     </para>
 
     <note>
         <title>HeadLink verwenden um CSS Dateien zu verlinken</title>
 
         <para>
-            <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> sollte verwendet werden
-            um <code>&lt;link&gt;</code> Elemente zu Erstellen die externe Stylesheets enthalten.
-            <code>HeadScript</code> wird verwendet wenn man Stylesheets inline definieren will.
+            <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> sollte verwendet
+            werden um <code>&lt;link&gt;</code> Elemente zu Erstellen die externe Stylesheets
+            enthalten. <code>HeadScript</code> wird verwendet wenn man Stylesheets inline definieren
+            will.
         </para>
     </note>
 
     <para>
-        Der <code>HeadStyle</code> Helfer unterstützt die folgenden Methoden für das Setzen und Hinzufügen
-        von Stylesheet Deklarationen:
+        Der <code>HeadStyle</code> Helfer unterstützt die folgenden Methoden für das Setzen und
+        Hinzufügen von Stylesheet Deklarationen:
     </para>
 
     <itemizedlist>
@@ -45,9 +46,10 @@
         <title>Abhängige Kommentare setzen</title>
 
         <para>
-            <code>HeadStyle</code> erlaubt es ein Script Tag in abhängige Kommentare zu setzen, das es
-            erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu setzen, muß der
-            abhängige Wert als Teil des <code>$attrs</code> Parameters im Methodenaufruf übergeben werden.
+            <code>HeadStyle</code> erlaubt es ein Script Tag in abhängige Kommentare zu setzen, das
+            es erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu setzen, muß
+            der abhängige Wert als Teil des <code>$attrs</code> Parameters im Methodenaufruf
+            übergeben werden.
         </para>
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
@@ -61,9 +63,9 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </note>
 
     <para>
-        <code>HeadStyle</code> erlaubt auch das Erfassen von Style Deklarationen; das kann nützlich sein wenn
-        eine Deklaration programmtechnisch erstellt werden soll und Sie dann woanders platziert wird. Die
-        Verwendung hierfür wird in einem unten angeführten Beispiel gezeigt.
+        <code>HeadStyle</code> erlaubt auch das Erfassen von Style Deklarationen; das kann nützlich
+        sein wenn eine Deklaration programmtechnisch erstellt werden soll und Sie dann woanders
+        platziert wird. Die Verwendung hierfür wird in einem unten angeführten Beispiel gezeigt.
     </para>
 
     <para>
@@ -75,11 +77,11 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
 
     <para>
         <code>HeadStyle</code> überschreibt jedes <code>append()</code>, <code>offsetSet()</code>,
-        <code>prepend()</code>, und <code>set()</code> um die Verwendung der oben gelisteten speziellen
-        Methoden zu forcieren. Intern wird jeder Teil als <code>stdClass</code> Token gespeichert, welches
-        später serialisiert wird durch Verwendung der <code>itemToString()</code> Methode. Das erlaubt es
-        die Teile im Stack zu Prüfen, und optional auch zu Ändern durch einfaches Modifizieren des
-        zurückgegebenen Objektes.
+        <code>prepend()</code>, und <code>set()</code> um die Verwendung der oben gelisteten
+        speziellen Methoden zu forcieren. Intern wird jeder Teil als <code>stdClass</code> Token
+        gespeichert, welches später serialisiert wird durch Verwendung der
+        <code>itemToString()</code> Methode. Das erlaubt es die Teile im Stack zu Prüfen, und
+        optional auch zu Ändern durch einfaches Modifizieren des zurückgegebenen Objektes.
     </para>
 
     <para>
@@ -101,8 +103,9 @@ $this->headStyle()->appendStyle($styles);
 
         <para>
             Die Reihenfolge ist in CSS sehr wichtig; es könnte sein das man sichergestellen muß das
-            Deklarationen in einer speziellen Reihenfolge geladen werden wegen der Reihenfolge der Kaskade;
-            die verschiedenen append, prepend und offsetSet Direktiven können für diesen Zweck verwendet werden:
+            Deklarationen in einer speziellen Reihenfolge geladen werden wegen der Reihenfolge der
+            Kaskade; die verschiedenen append, prepend und offsetSet Direktiven können für diesen
+            Zweck verwendet werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -119,8 +122,8 @@ $this->headStyle()->prependStyle($firstStyles);
 ]]></programlisting>
 
         <para>
-            Wenn man damit fertig ist und alle Style Deklarationen im Layout Skript ausgegeben werden können
-            kann der Helfer einfach wiederholt werden:
+            Wenn man damit fertig ist und alle Style Deklarationen im Layout Skript ausgegeben
+            werden können kann der Helfer einfach wiederholt werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -132,10 +135,10 @@ $this->headStyle()->prependStyle($firstStyles);
         <title>Den HeadStyle Helfer verwenden um Style Deklarationen zu Erfassen</title>
 
         <para>
-            Hier und da müssen CSS Style Deklarationen programmtechnisch erstellt werden. Wärend String
-            Kopplungen, HereDocs und ähnliches verwendet werden könnte, ist es oft einfacher das durch
-            erstellen der Styles und deren Einfügung in PHP Tags zu machen. <code>HeadStyle</code> lässt
-            das zu indem es in den Stack erfasst wird:
+            Hier und da müssen CSS Style Deklarationen programmtechnisch erstellt werden. Wärend
+            String Kopplungen, HereDocs und ähnliches verwendet werden könnte, ist es oft einfacher
+            das durch erstellen der Styles und deren Einfügung in PHP Tags zu machen.
+            <code>HeadStyle</code> lässt das zu indem es in den Stack erfasst wird:
         </para>
 
         <programlisting role="php"><![CDATA[

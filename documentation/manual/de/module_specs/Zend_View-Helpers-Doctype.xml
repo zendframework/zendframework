@@ -5,10 +5,10 @@
     <title>Doctype Helfer</title>
 
     <para>
-        Gültige HTML und XHTML Dokumente sollten eine <code>DOCTYPE</code> Deklaration enthalten. Neben der
-        Schwierigkeit sich diese zu merken, können Sie auch beeinflussen wie bestimmte Elemente im Dokument
-        dargestellt werden sollen (zum Beispiel, CDATA Kommentierung in <code>&lt;script&gt;</code> und
-        <code>&lt;style&gt;</code> Elementen.
+        Gültige HTML und XHTML Dokumente sollten eine <code>DOCTYPE</code> Deklaration enthalten.
+        Neben der Schwierigkeit sich diese zu merken, können Sie auch beeinflussen wie bestimmte
+        Elemente im Dokument dargestellt werden sollen (zum Beispiel, CDATA Kommentierung in
+        <code>&lt;script&gt;</code> und <code>&lt;style&gt;</code> Elementen.
     </para>
 
     <para>
@@ -73,8 +73,8 @@ $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
         <para>
-            Typischerweise wird man einfach wissen wollen, ob der Doctype XHTML ist oder nicht; hierfür ist
-            die <code>isXhtml()</code> Methode ausreichend:
+            Typischerweise wird man einfach wissen wollen, ob der Doctype XHTML ist oder nicht;
+            hierfür ist die <code>isXhtml()</code> Methode ausreichend:
         </para>
 
         <programlisting role="php"><![CDATA[

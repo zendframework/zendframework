@@ -12,16 +12,17 @@
     </para>
 
     <para>
-        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst PHP als Template
-        Sprache verwenden oder Instanzen anderer Template Systeme erstellen und diese in deinem
-        View Skript verarbeiten.
+        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst PHP als
+        Template Sprache verwenden oder Instanzen anderer Template Systeme erstellen und diese in
+        deinem View Skript verarbeiten.
     </para>
 
     <para>
-        Im Wesentlichen verläuft die Verwendung von <classname>Zend_View</classname> in zwei Hauptschritten:
+        Im Wesentlichen verläuft die Verwendung von <classname>Zend_View</classname> in zwei
+        Hauptschritten:
 
-        1. Dein Controller Skript erstellt eine Instanz von <classname>Zend_View</classname> und übergibt
-        Variablen an diese Instanz.
+        1. Dein Controller Skript erstellt eine Instanz von <classname>Zend_View</classname> und
+        übergibt Variablen an diese Instanz.
 
         2. Der Controller teilt <classname>Zend_View</classname> mit, ein bestimmtes View Skript zu
         verarbeiten. Dabei wird die Kontrolle an das View Skript übergeben, welches die Ausgabe
@@ -72,12 +73,12 @@ echo $view->render('booklist.php');
 
         <para>
             Nun benötigen wir das zugehörige View Skript "booklist.php". Dies ist ein PHP Skript
-            wie jedes andere mit einer Ausnahme: es wird innerhalb der <classname>Zend_View</classname>
-            Instanz ausgeführt, was bedeutet, dass Referenzen auf $this auf die Eigenschaften und
-            Methoden der <classname>Zend_View</classname> Instanz weisen. (Variablen, die vom Controller an
-            die Instanz übergeben wurden, sind öffentliche (public) Eigenschaften der
-            <classname>Zend_View</classname> Instanz.) Dadurch kann ein sehr einfaches View Skript wie folgt
-            aussehen:
+            wie jedes andere mit einer Ausnahme: es wird innerhalb der
+            <classname>Zend_View</classname> Instanz ausgeführt, was bedeutet, dass Referenzen auf
+            $this auf die Eigenschaften und Methoden der <classname>Zend_View</classname> Instanz
+            weisen. (Variablen, die vom Controller an die Instanz übergeben wurden, sind öffentliche
+            (public) Eigenschaften der <classname>Zend_View</classname> Instanz.) Dadurch kann ein
+            sehr einfaches View Skript wie folgt aussehen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -162,9 +163,9 @@ base/path/
             </para></listitem>
 
             <listitem><para>
-                <code>strictVars:</code> zwingt <classname>Zend_View</classname> Notizen und Warnungen
-                auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird. Das kann
-                durch den Aufruf von <code>strictVars(true)</code>, oder der übergabe der
+                <code>strictVars:</code> zwingt <classname>Zend_View</classname> Notizen und
+                Warnungen auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird.
+                Das kann durch den Aufruf von <code>strictVars(true)</code>, oder der Übergabe der
                 <code>strictVars</code> Option im Konstruktor, gesetzt werden.
             </para></listitem>
         </itemizedlist>
@@ -227,9 +228,9 @@ $view->setUseStreamWrapper(true);
 ]]></programlisting>
 
                 <para>
-                    Das registriert <classname>Zend_View_Stream</classname> als Steam Wrapper für View
-                    Skripte, und stellt sicher das der Code weiterhin funktioniert wie wenn Short
-                    Tags eingeschaltet wären.
+                    Das registriert <classname>Zend_View_Stream</classname> als Steam Wrapper für
+                    View Skripte, und stellt sicher das der Code weiterhin funktioniert wie wenn
+                    Short Tags eingeschaltet wären.
                 </para>
             </listitem>
         </itemizedlist>
@@ -253,8 +254,8 @@ $view->setUseStreamWrapper(true);
         <para>
             Typischerweise ist es nur notwendig <code>assign()</code>, <code>render()</code>, oder
             eine der Methoden für das Setzen/Hinzufügen von Filtern, Helfern und Skript-Pfade
-            aufzurufen. Trotzdem, wenn <classname>Zend_View</classname> selbst erweitert werden soll, oder
-            auf einige der Internas zugegriffen werden soll, existieren hierfür einige
+            aufzurufen. Trotzdem, wenn <classname>Zend_View</classname> selbst erweitert werden
+            soll, oder auf einige der Internas zugegriffen werden soll, existieren hierfür einige
             Zugriffsmöglichkeiten:
         </para>
 

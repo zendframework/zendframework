@@ -12,39 +12,46 @@
     </para>
 
     <para>
-        <classname>Zend_Validate_Interface</classname> definiert drei Methoden, <code>isValid()</code>,
-        <code>getMessages()</code>, und <code>getErrors()</code>, welche von Benutzerklassen implementiert
-        werden können um eigene Prüfobjekte zu erstellen. Ein Objekt welches das
-        <classname>Zend_Validate_Interface</classname> Interface implementiert kann einer Prüfkette mit
-        <classname>Zend_Validate::addValidator()</classname> hinzugefügt werden. Solche Objekte können auch mit
-        <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet werden.
+        <classname>Zend_Validate_Interface</classname> definiert drei Methoden,
+        <code>isValid()</code>, <code>getMessages()</code>, und <code>getErrors()</code>, welche von
+        Benutzerklassen implementiert werden können um eigene Prüfobjekte zu erstellen. Ein Objekt
+        welches das <classname>Zend_Validate_Interface</classname> Interface implementiert kann
+        einer Prüfkette mit <classname>Zend_Validate::addValidator()</classname> hinzugefügt werden.
+        Solche Objekte können auch mit <link
+            linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link> verwendet
+        werden.
     </para>
 
     <para>
-        Wie man bereits aus der obigen Beschreibung von <classname>Zend_Validate_Interface</classname> folgern kann,
-        geben die vom Zend Framework bereitgestellten Prüfklassen einen boolschen Wert zurück, ob die Prüfung
-        des Wertes erfolgreich war oder nicht. Sie geben auch darüber Informationen
-        <emphasis role="bold">warum</emphasis> ein Wert die Prüfung nicht bestanden hat. Die Verfügbarkeit der
-        Gründe für fehlgeschlagene Prüfungen kann für eine Anwendung aus vielen Gründen nützlich sein, wie
-        zum Beispiel das zur Verfügung stellen von Statistiken für Useability Analysen.
+        Wie man bereits aus der obigen Beschreibung von
+        <classname>Zend_Validate_Interface</classname> folgern kann, geben die vom Zend Framework
+        bereitgestellten Prüfklassen einen boolschen Wert zurück, ob die Prüfung des Wertes
+        erfolgreich war oder nicht. Sie geben auch darüber Informationen
+        <emphasis role="bold">warum</emphasis> ein Wert die Prüfung nicht bestanden hat. Die
+        Verfügbarkeit der Gründe für fehlgeschlagene Prüfungen kann für eine Anwendung aus vielen
+        Gründen nützlich sein, wie zum Beispiel das zur Verfügung stellen von Statistiken für
+        Useability Analysen.
     </para>
 
     <para>
-        Grundlegende Funktionalitäten für fehlgeschlagene Prüfmeldungen ist in <classname>Zend_Validate_Abstract</classname>
-        implementiert. Um diese Funktionalität einzubinden wenn eine Prüfklasse erstellt wird, muß einfach
-        <classname>Zend_Validate_Abstract</classname> erweitert werden. In der existierenden Klasse wird die Logik der
-        <code>isValid()</code> Methode implementiert und die Variablen für die Nachrichten und
-        Nachrichten-Templates definiert werden die zu den Typen von Prüffehlern passen die auftreten können.
-        Wenn ein Wert die Prüfung nicht besteht, sollte <code>isValid()</code> <code>false</code> zurückgeben.
-        Wenn der Wert die Prüfung besteht, sollte <code>isValid()</code> <code>true</code> zurückgeben.
+        Grundlegende Funktionalitäten für fehlgeschlagene Prüfmeldungen ist in
+        <classname>Zend_Validate_Abstract</classname> implementiert. Um diese Funktionalität
+        einzubinden wenn eine Prüfklasse erstellt wird, muß einfach
+        <classname>Zend_Validate_Abstract</classname> erweitert werden. In der existierenden Klasse
+        wird die Logik der <code>isValid()</code> Methode implementiert und die Variablen für die
+        Nachrichten und Nachrichten-Templates definiert werden die zu den Typen von Prüffehlern
+        passen die auftreten können. Wenn ein Wert die Prüfung nicht besteht, sollte
+        <code>isValid()</code> <code>false</code> zurückgeben. Wenn der Wert die Prüfung besteht,
+        sollte <code>isValid()</code> <code>true</code> zurückgeben.
     </para>
 
     <para>
-        Normalerweise sollte die <code>isValid()</code> Methode keine Ausnahmen werfen, ausser wenn es unmöglich
-        ist festzustellen ob ein Eingabewert gültig ist oder nicht. Einige Beispiele für gute Fälle in denen keine
-        Ausnahme geworfen werden sollte sind, wenn eine Datei nicht geöffnet werden konnte, ein LDAP Server nicht
-        erreicht wurde, oder eine Datenbank Verbindung unerreichbar ist, und wo solche Dinge für Prüfprozesse
-        benötigt werden um zu erkennen ob die Prüfung gültig oder ungültig ist.
+        Normalerweise sollte die <code>isValid()</code> Methode keine Ausnahmen werfen, ausser wenn
+        es unmöglich ist festzustellen ob ein Eingabewert gültig ist oder nicht. Einige Beispiele
+        für gute Fälle in denen keine Ausnahme geworfen werden sollte sind, wenn eine Datei nicht
+        geöffnet werden konnte, ein LDAP Server nicht erreicht wurde, oder eine Datenbank Verbindung
+        unerreichbar ist, und wo solche Dinge für Prüfprozesse benötigt werden um zu erkennen ob die
+        Prüfung gültig oder ungültig ist.
     </para>
 
     <example id="zend.validate.writing_validators.example.simple">
@@ -52,8 +59,9 @@
         <title>Erstellen einer einfachen Prüfklasse</title>
 
         <para>
-            Das folgende Beispiel demonstriert wie ein sehr einfacher eigener Prüfer geschrieben werden könnte.
-            In diesem Fall sind die Prüfregeln sehr einfach und der Eingabewert muß ein Gleitkommawert sein.
+            Das folgende Beispiel demonstriert wie ein sehr einfacher eigener Prüfer geschrieben
+            werden könnte. In diesem Fall sind die Prüfregeln sehr einfach und der Eingabewert muß
+            ein Gleitkommawert sein.
 
             <programlisting role="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
@@ -78,12 +86,13 @@ class MyValid_Float extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Die Klasse definiert ein Template für Ihre einzige Nachricht bei Prüfungsfehlern, welche den eingebauten
-            magischen Parameter <code>%value%</code> inkludiert. Der Aufruf von <code>_setValue()</code> präpariert
-            das Objekt den getesteten Wert automatisch in die Fehlernachricht einzufügen, wenn die Prüfung des Wertes
-            fehlschlägt. Der Aufruf von <code>_error()</code> spürt den Grund für die fehlgeschlagene Prüfung auf.
-            Da diee Klasse nur eine Fehlernachricht definiert, ist es nicht notwendig <code>_error()</code> den
-            Namen des Templates der Fehlernachricht zu geben.
+            Die Klasse definiert ein Template für Ihre einzige Nachricht bei Prüfungsfehlern, welche
+            den eingebauten magischen Parameter <code>%value%</code> inkludiert. Der Aufruf von
+            <code>_setValue()</code> präpariert das Objekt den getesteten Wert automatisch in die
+            Fehlernachricht einzufügen, wenn die Prüfung des Wertes fehlschlägt. Der Aufruf von
+            <code>_error()</code> spürt den Grund für die fehlgeschlagene Prüfung auf. Da diese
+            Klasse nur eine Fehlernachricht definiert, ist es nicht notwendig <code>_error()</code>
+            den Namen des Templates der Fehlernachricht zu geben.
         </para>
 
     </example>
@@ -93,9 +102,10 @@ class MyValid_Float extends Zend_Validate_Abstract
         <title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title>
 
         <para>
-            Das folgende Beispiel demonstriert ein komplexeres Set von Prüfregeln, wobei es notwendig ist das der
-            Eingabewert nummerisch und innerhalb eines Bereiches von Mindest- und Maximalgrenzwerten ist. Bei einem
-            Eingabewert würde die Prüfung wegen exakt einer der folgenden Gründe fehlschlagen:
+            Das folgende Beispiel demonstriert ein komplexeres Set von Prüfregeln, wobei es
+            notwendig ist das der Eingabewert nummerisch und innerhalb eines Bereiches von Mindest-
+            und Maximalgrenzwerten ist. Bei einem Eingabewert würde die Prüfung wegen exakt einer
+            der folgenden Gründe fehlschlagen:
 
             <itemizedlist>
                 <listitem>
@@ -158,21 +168,23 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Die öffentlichen Eigenschaften <code>$minimum</code> und <code>$maximum</code> wurden eingeführt um
-            die Mindest- und Maximalgrenzen anzubieten, beziehungsweise, für einen Wert um die Prüfung erfolgreich
-            zu bestehen. Die Klasse definiert auch zwei Nachrichtenvariablen die zu den öffentlichen Eigenschaften
-            korrespondieren und es erlauben <code>min</code> und <code>max</code> in den Nachrichten Templates als
-            magische Parameter zu verwenden, genauso wie <code>value</code>.
+            Die öffentlichen Eigenschaften <code>$minimum</code> und <code>$maximum</code> wurden
+            eingeführt um die Mindest- und Maximalgrenzen anzubieten, beziehungsweise, für einen
+            Wert um die Prüfung erfolgreich zu bestehen. Die Klasse definiert auch zwei
+            Nachrichtenvariablen die zu den öffentlichen Eigenschaften korrespondieren und es
+            erlauben <code>min</code> und <code>max</code> in den Nachrichten Templates als magische
+            Parameter zu verwenden, genauso wie <code>value</code>.
         </para>
 
         <para>
-            Zu beachten ist, das wenn eine der Prüfungen in <code>isValid()</code> fehlschlägt, eine entsprechende
-            Fehlernachricht vorbereitet wird, und die Methode sofort <code>false</code> zurückgibt. Diese
-            Prüfregeln sind deswegen sequentiell abhängig. Das bedeuted, wenn einer der Tests fehlschlägt, gibt es
-            keinen Grund eine weitere nachfolgende Prüfregel zu testen. Das muß aber trotzdem nicht der Fall sein.
-            Das folgende Beispiel zeigt wie man eine Klasse schreiben kann die unabhängige Prüfregeln besitzt,
-            wo die Prüfobjekte mehrfache Gründe zurückgeben könnten, warum ein spezieller Prüfversuch fehlgeschlagen
-            ist.
+            Zu beachten ist, das wenn eine der Prüfungen in <code>isValid()</code> fehlschlägt, eine
+            entsprechende Fehlernachricht vorbereitet wird, und die Methode sofort
+            <code>false</code> zurückgibt. Diese Prüfregeln sind deswegen sequentiell abhängig. Das
+            bedeuted, wenn einer der Tests fehlschlägt, gibt es keinen Grund eine weitere
+            nachfolgende Prüfregel zu testen. Das muß aber trotzdem nicht der Fall sein. Das
+            folgende Beispiel zeigt wie man eine Klasse schreiben kann die unabhängige Prüfregeln
+            besitzt, wo die Prüfobjekte mehrfache Gründe zurückgeben könnten, warum ein spezieller
+            Prüfversuch fehlgeschlagen ist.
         </para>
 
     </example>
@@ -182,9 +194,10 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title>
 
         <para>
-            Angenommen es wird eine Prüfklasse geschrieben für das Erzwingen von Passwortstärke - wenn ein Benutzer
-            ein Passwort auswählen muß das diversen Kriterien entspricht um zu Helfen das die Benutzerzugänge
-            sicher sind. Angenommen die Passwort Sicherheitskriterien erzwingen das folgende Passwort:
+            Angenommen es wird eine Prüfklasse geschrieben für das Erzwingen von Passwortstärke -
+            wenn ein Benutzer ein Passwort auswählen muß das diversen Kriterien entspricht um zu
+            Helfen das die Benutzerzugänge sicher sind. Angenommen die Passwort Sicherheitskriterien
+            erzwingen das folgende Passwort:
 
             <itemizedlist>
                 <listitem>
@@ -253,11 +266,13 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Zu beachten ist das diese vier Testkriterien in <code>isValid()</code> nicht sofort <code>false</code>
-            zurückgeben. Das erlaubt der Prüfklasse <emphasis role="bold">alle</emphasis> Gründe anzubieten bei denen
-            das Eingabepasswort den Prüfvoraussetzungen nicht entsprochen hat. Wenn, zum Beispiel, ein Benutzer
-            den String "<code>#$%</code>" als Passwort angegeben hat, würde <code>isValid()</code> alle vier
-            Prüfungfehlermeldungen zurückgeben bei einen nachfolgenden Aufruf von <code>getMessages()</code>.
+            Zu beachten ist das diese vier Testkriterien in <code>isValid()</code> nicht sofort
+            <code>false</code> zurückgeben. Das erlaubt der Prüfklasse
+            <emphasis role="bold">alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort
+            den Prüfvoraussetzungen nicht entsprochen hat. Wenn, zum Beispiel, ein Benutzer den
+            String "<code>#$%</code>" als Passwort angegeben hat, würde <code>isValid()</code> alle
+            vier Prüfungfehlermeldungen zurückgeben bei einen nachfolgenden Aufruf von
+            <code>getMessages()</code>.
         </para>
 
     </example>

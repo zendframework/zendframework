@@ -13,13 +13,13 @@
     </para>
 
     <para>
-        Ein Helfer ist einfach eine Klasse. Nehmen wir an wir wollen einen Helfer der 'fooBar' heißt.
-        Standardmäßig wird der Klasse 'Zend_View_Helper_' vorangestellt (Es kann ein
+        Ein Helfer ist einfach eine Klasse. Nehmen wir an wir wollen einen Helfer der 'fooBar'
+        heißt. Standardmäßig wird der Klasse 'Zend_View_Helper_' vorangestellt (Es kann ein
         eigener Prefix definiert werden wenn ein Pfad für die Helfer definiert wird), und das letzte
-        Segment des Klassennamens ist der Name des Helfers; Dieses Segment sollte TitelGroßgeschrieben
-        sein; der volle Klassenname ist dann: <classname>Zend_View_Helper_FooBar</classname>. Diese Klasse
-        sollte mindestens eine einzelne Methode enthalten, die nach dem Helfer benannt und
-        camelCased ist: <code>fooBar()</code>.
+        Segment des Klassennamens ist der Name des Helfers; Dieses Segment sollte Titel
+        Großgeschrieben sein; der volle Klassenname ist dann:
+        <classname>Zend_View_Helper_FooBar</classname>. Diese Klasse sollte mindestens eine einzelne
+        Methode enthalten, die nach dem Helfer benannt und camelCased ist: <code>fooBar()</code>.
     </para>
 
     <note>
@@ -44,11 +44,11 @@
 
     <para>
         Um einen Helfer in deinem View Skript zu verwenden, rufe ihn mittels
-        <code>$this->helperName()</code> auf. Im Hintergrund wird <classname>Zend_View</classname> die Klasse
-        <classname>Zend_View_Helper_HelperName</classname> laden, eine Objektinstanz der Klasse erstellen und
-        deren Methode <code>helperName()</code> aufrufen. Die Objektinstanz bleibt innerhalb der
-        <classname>Zend_View</classname> Instanz bestehen und wird bei allen weiteren Aufrufen von
-        <code>$this->helperName()</code> wiederverwendet.
+        <code>$this->helperName()</code> auf. Im Hintergrund wird <classname>Zend_View</classname>
+        die Klasse <classname>Zend_View_Helper_HelperName</classname> laden, eine Objektinstanz der
+        Klasse erstellen und deren Methode <code>helperName()</code> aufrufen. Die Objektinstanz
+        bleibt innerhalb der <classname>Zend_View</classname> Instanz bestehen und wird bei allen
+        weiteren Aufrufen von <code>$this->helperName()</code> wiederverwendet.
     </para>
 
     <sect2 id="zend.view.helpers.initial">
@@ -56,11 +56,11 @@
         <title>Vorhandene Helfer</title>
 
         <para>
-            <classname>Zend_View</classname> enthält bereits einige vorhandene Helferklassen, die sich alle
-            auf die Erstellung von Formularelementen beziehen und die notwendige Maskierung der
-            Ausgaben automatisch vornehmen. Zusätzlich gibt es Helfer zum Erstellen Routen-basierter
-            URLS and HTML Listen, genauso wie für das Deklarieren von Variablen. Die aktuell
-            gelieferten Helfer beinhalten:
+            <classname>Zend_View</classname> enthält bereits einige vorhandene Helferklassen, die
+            sich alle auf die Erstellung von Formularelementen beziehen und die notwendige
+            Maskierung der Ausgaben automatisch vornehmen. Zusätzlich gibt es Helfer zum Erstellen
+            Routen-basierter URLS and HTML Listen, genauso wie für das Deklarieren von Variablen.
+            Die aktuell gelieferten Helfer beinhalten:
         </para>
 
         <itemizedlist>
@@ -363,14 +363,15 @@ echo $this->formCheckbox('foo',
         <title>Helfer Pfade</title>
 
         <para>
-            Wie bei den View Skripten kann der Controller für <classname>Zend_View</classname> auch einen
-            Stapel an Pfaden festlegen, in dem nach Hilfsklassen gesucht werden soll. Standardmäßig
-            sucht <classname>Zend_View</classname> in "Zend/View/Helper/*" nach Hilfsklassen. Du kannst
-            <classname>Zend_View</classname> mit Hilfe der Methoden <code>setHelperPath()</code> und
-            <code>addHelperPath()</code> mitteilen, auch in anderen Verzeichnissen zu suchen.
-            Zusätzlich kann man einen Klassenpräfix angeben, um Helfer in dem bereit gestellten Pfad
-            verwenden zu können, um eigene Namensräume für die Helferklassen zu verwenden.
-            Standardmäßig wird 'Zend_View_Helper_' angenommen, wenn kein Präfix angegeben wird.
+            Wie bei den View Skripten kann der Controller für <classname>Zend_View</classname> auch
+            einen Stapel an Pfaden festlegen, in dem nach Hilfsklassen gesucht werden soll.
+            Standardmäßig sucht <classname>Zend_View</classname> in "Zend/View/Helper/*" nach
+            Hilfsklassen. Du kannst <classname>Zend_View</classname> mit Hilfe der Methoden
+            <code>setHelperPath()</code> und <code>addHelperPath()</code> mitteilen, auch in anderen
+            Verzeichnissen zu suchen. Zusätzlich kann man einen Klassenpräfix angeben, um Helfer in
+            dem bereit gestellten Pfad verwenden zu können, um eigene Namensräume für die
+            Helferklassen zu verwenden. Standardmäßig wird 'Zend_View_Helper_' angenommen, wenn kein
+            Präfix angegeben wird.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -382,9 +383,10 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
 
         <para>
             Durch Verwendung der <code>addHelperPath()</code> Methode können die Pfade "gestapelt"
-            werden. Wenn du Pfade zu diesem Stapelspeicher hinzufügst, wird <classname>Zend_View</classname>
-            im zuletzt hinzugefügten Pfad nach der angeforderten Hilfsklasse schauen. Dies erlaubt
-            dir, zu den vorhandenen Helfern weitere hinzufügen oder diese durch eigene zu ersetzen.
+            werden. Wenn du Pfade zu diesem Stapelspeicher hinzufügst, wird
+            <classname>Zend_View</classname> im zuletzt hinzugefügten Pfad nach der angeforderten
+            Hilfsklasse schauen. Dies erlaubt dir, zu den vorhandenen Helfern weitere hinzufügen
+            oder diese durch eigene zu ersetzen.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -417,11 +419,12 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             <listitem><para>
                 Wärend das nicht strikt notwendig ist, ist es empfohlen entweder
                 <classname>Zend_View_Helper_Interface</classname> zu implementieren oder
-                <classname>Zend_View_Helper_Abstract</classname> zu erweitern wenn eigene Helfer erstellt werden.
-                Eingeführt mit 1.6.0, definieren diese einfach die <code>setView()</code> Methode;
-                trotzdem, in kommenden Releases, ist es geplant ein Strategy Pattern zu implementieren das
-                vieles der Namensschemas einfacher mach wie anbei beschrieben. Wenn darauf aufgebaut wird
-                hilft das, das der eigene Code Zukunftssicher ist.
+                <classname>Zend_View_Helper_Abstract</classname> zu erweitern wenn eigene Helfer
+                erstellt werden. Eingeführt mit 1.6.0, definieren diese einfach die
+                <code>setView()</code> Methode; trotzdem, in kommenden Releases, ist es geplant ein
+                Strategy Pattern zu implementieren das vieles der Namensschemas einfacher mach wie
+                anbei beschrieben. Wenn darauf aufgebaut wird hilft das, das der eigene Code
+                Zukunftssicher ist.
             </para></listitem>
 
             <listitem><para>
@@ -456,8 +459,8 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 
         <para>
             Platziere die Hilfsklasse irgendwo in deinem Stapelspeicher für Hilfspfade und
-            <classname>Zend_View</classname> wird den Helfer automatisch für dich laden, instanziieren,
-            speichern und ausführen.
+            <classname>Zend_View</classname> wird den Helfer automatisch für dich laden,
+            instanziieren, speichern und ausführen.
         </para>
 
         <para>
@@ -501,10 +504,10 @@ Ich habe 'The Jerk' 3 Mal(e) gesehen.
 ]]></programlisting>
 
         <para>
-            Hier und da ist es notwendig das aufrufende <classname>Zend_View</classname> Objekt aufzurufen --
-            zum Beispiel, wenn es notwendig ist die registrierte Verschöüsselung zu verwenden, oder
-            wenn ein anderes View Skript gerendert werden soll, als Teil des eigenen Helfers. Um
-            Zugriff zum View Objekt zu erhalten, sollte die eigene Helfer Klasse eine
+            Hier und da ist es notwendig das aufrufende <classname>Zend_View</classname> Objekt
+            aufzurufen -- zum Beispiel, wenn es notwendig ist die registrierte Verschöüsselung zu
+            verwenden, oder wenn ein anderes View Skript gerendert werden soll, als Teil des eigenen
+            Helfers. Um Zugriff zum View Objekt zu erhalten, sollte die eigene Helfer Klasse eine
             <code>setView($view)</code> Methode wie folgt besitzen:
         </para>
 
@@ -526,15 +529,15 @@ class My_View_Helper_ScriptPath
 ]]></programlisting>
 
         <para>
-            Wenn die Helfer Klasse eine <code>setView()</code> Methode hat, wird diese aufgerufen wenn die
-            Helfer Klasse das erste Mal instanziert wird, und das aktuelle View Objekt übergeben wird.
-            Es liegt an einem selbst das Objekt in der Klasse zu fixieren, genau so wie herauszufinden
-            wie auf dieses zugegriffen werden sollte.
+            Wenn die Helfer Klasse eine <code>setView()</code> Methode hat, wird diese aufgerufen
+            wenn die Helfer Klasse das erste Mal instanziert wird, und das aktuelle View Objekt
+            übergeben wird. Es liegt an einem selbst das Objekt in der Klasse zu fixieren, genau so
+            wie herauszufinden wie auf dieses zugegriffen werden sollte.
         </para>
 
         <para>
-            Wenn <classname>Zend_View_Helper_Abstract</classname> erweitert wird, muß diese Methode nicht selbst
-            definiert werden da Sie schon vordefiniert ist.
+            Wenn <classname>Zend_View_Helper_Abstract</classname> erweitert wird, muß diese Methode
+            nicht selbst definiert werden da Sie schon vordefiniert ist.
         </para>
     </sect2>
 </sect1>

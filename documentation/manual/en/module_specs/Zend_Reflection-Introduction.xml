@@ -32,7 +32,7 @@
         <listitem><para>
             Files gain a Reflection class, allowing introspection of PHP files.
             This provides the ability to determine what functions and classes
-            are defined in a given file, as well as to instrospect them.
+            are defined in a given file, as well as to introspect them.
         </para></listitem>
 
         <listitem><para>

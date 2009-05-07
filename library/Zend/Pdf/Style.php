@@ -217,7 +217,7 @@ class Zend_Pdf_Style
      */
     public function getLineWidth()
     {
-        $this->_lineWidth->value;
+        return $this->_lineWidth->value;
     }
 
     /**

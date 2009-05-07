@@ -241,7 +241,7 @@ class Zend_Service_Amazon_Ec2_Image extends Zend_Service_Amazon_Ec2_Abstract
                 // break left out
             case 'productcodes':
                 $params['Attribute'] = 'productCodes';
-                $parmas['ProductCode.1'] = $productCode;
+                $params['ProductCode.1'] = $productCode;
                 break;
             default:
                 require_once 'Zend/Service/Amazon/Ec2/Exception.php';

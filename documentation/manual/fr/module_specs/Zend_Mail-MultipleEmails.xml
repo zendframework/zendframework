@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13018 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Envoyer plusieurs émail par connexion SMTP</title>
 

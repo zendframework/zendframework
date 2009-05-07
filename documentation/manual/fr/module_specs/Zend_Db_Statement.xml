@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13846 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
     <title>Zend_Db_Statement</title>
 

@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13732 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
 

@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 12150 -->
+<!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
     <title>EmailAddress</title>
 

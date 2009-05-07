@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13835 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Créer et charger des documents PDF</title>
 

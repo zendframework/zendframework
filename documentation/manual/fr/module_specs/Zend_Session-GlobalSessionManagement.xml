@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 12759 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
     <title>Gestion générale de la session</title>
 

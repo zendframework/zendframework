@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 12819 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.loader.pluginloader">
     <title>Chargeur de Plugins</title>
 

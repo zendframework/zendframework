@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13842 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.gdata.exception">
     <title>Attraper les exceptions Gdata</title>
 

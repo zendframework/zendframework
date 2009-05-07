@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 13846 -->
+<!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profiler avec Firebug</title>
 

@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!-- EN-Revision: 11497 -->
+<!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Amorcer votre TestCase</title>
 

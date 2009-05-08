@@ -128,7 +128,7 @@ echo $config->database->params->dbname; // prints "dbname"
             <classname>Zend_Config_Xml</classname> is able to load an XML string directly,
             such as that retrieved from a database. The string is passed
             as the first parameter to the constructor and must start with the
-            characters <code>'&lt;?xml':</code>
+            characters <code>'&lt;?xml'</code>:
         </para>
         <programlisting role="xml"><![CDATA[
 $string = <<<EOT

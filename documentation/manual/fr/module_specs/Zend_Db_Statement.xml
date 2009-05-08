@@ -1,26 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13846 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15346 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
     <title>Zend_Db_Statement</title>
 
-    <para>En plus des méthodes telles que <code>fetchAll()</code> et <code>insert()</code> documentée dans <xref
-    linkend="zend.db.adapter" />, vous pouvez utiliser un objet statement pour l'analyser de manière plus complète et
-    récupérer vos résultats. Cette section décrit la marche à suivre pour obtenir un statement et utiliser ses méthodes
-    propres.</para>
+    <para>
+        En plus des méthodes telles que <code>fetchAll()</code> et <code>insert()</code>
+        documentée dans <xref linkend="zend.db.adapter" />, vous pouvez utiliser un objet statement
+        pour l'analyser de manière plus complète et récupérer vos résultats. Cette section décrit la
+        marche à suivre pour obtenir un statement et utiliser ses méthodes propres.
+    </para>
 
-    <para>Zend_Db_Statement est basé sur l'objet PDOStatement dans l'extension PHP <ulink
-    url="http://www.php.net/pdo">PHP Data Objects (PDO)</ulink>.</para>
+    <para>
+        Zend_Db_Statement est basé sur l'objet PDOStatement dans l'extension PHP <ulink
+        url="http://www.php.net/pdo">PHP Data Objects (PDO)</ulink>.
+    </para>
 
     <sect2 id="zend.db.statement.creating">
         <title>Créer un statement</title>
 
-        <para>Cet objet est typiquement retourné par la méthode <code>query()</code> de votre objet adaptateur de base
-        de données. Cette méthode prépare un statement SQL : le premier argument est une chaîne représentant la requête
-        préparée, le second, un tableau de paramètres liés.</para>
+        <para>
+            Cet objet est typiquement retourné par la méthode <code>query()</code> de votre
+            objet adaptateur de base de données. Cette méthode prépare un statement SQL : le premier
+            argument est une chaîne représentant la requête préparée, le second, un tableau de
+            paramètres liés.
+        </para>
 
         <example id="zend.db.statement.creating.example1">
-            <title>Création d'un objet statement avec <code>query()</code></title>
+            <title>Création d'un objet statement avec query()</title>
 
             <programlisting role="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
@@ -28,13 +35,18 @@ $stmt = $db->query($sql, array('goofy', 'FIXED'));
 ]]></programlisting>
         </example>
 
-        <para>L'objet statement représente un statement SQL qui a été préparé, et exécuté une fois avec les paramètres
-        de liaison ("bind") spécifiés. S'il s'agissait d'une requête SELECT par exemple, alors les résultats sont prêts
-        à être récupérés.</para>
+        <para>
+            L'objet statement représente un statement SQL qui a été préparé, et exécuté une
+            fois avec les paramètres de liaison ("bind") spécifiés. S'il s'agissait d'une requête
+            SELECT par exemple, alors les résultats sont prêts à être récupérés.
+        </para>
 
-        <para>Vous pouvez créer un statement avec son constructeur, mais c'est assez peu usuel. Passez alors l'objet
-        adaptateur en premier argument, et la chaîne représentant la requête en second. Un fois construit, le statement
-        est préparé automatiquement, mais pas exécuté.</para>
+        <para>
+            Vous pouvez créer un statement avec son constructeur, mais c'est assez peu usuel.
+            Passez alors l'objet adaptateur en premier argument, et la chaîne représentant la
+            requête en second. Un fois construit, le statement est préparé automatiquement, mais pas
+            exécuté.
+        </para>
 
         <example id="zend.db.statement.creating.example2">
             <title>Utilisation du constructeur de statement</title>
@@ -50,12 +62,17 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
     <sect2 id="zend.db.statement.executing">
         <title>Exécuter un statement</title>
 
-        <para>Vous aurez besoin d'exécuter un statement si vous l'avez crée explicitement avec son constructeur.
-        Utilisez sa méthode <code>execute()</code> pour ceci. Le seul argument que cette méthode accepte est le tableau
-        de "binds" (paramètres préparés).</para>
+        <para>
+            Vous aurez besoin d'exécuter un statement si vous l'avez crée explicitement avec
+            son constructeur. Utilisez sa méthode <code>execute()</code> pour ceci. Le seul argument
+            que cette méthode accepte est le tableau de "binds" (paramètres préparés).
+        </para>
 
-        <para>Si vous utilisez les <emphasis>paramètres positionnés</emphasis>, ceux utilisés avec le point
-        d'interrogation (<code>?</code>), passez simplement les valeurs dans le tableau.</para>
+        <para>
+            Si vous utilisez les <emphasis>paramètres positionnés</emphasis>, ceux utilisés
+            avec le point d'interrogation (<code>?</code>), passez simplement les valeurs dans le
+            tableau.
+        </para>
 
         <example id="zend.db.statement.executing.example1">
             <title>Exécuter un statement avec des paramètres positionnés</title>
@@ -69,8 +86,11 @@ $stmt->execute(array('goofy', 'FIXED'));
 ]]></programlisting>
         </example>
 
-        <para>Si vous utilisez les <emphasis>paramètres nommés</emphasis>, ceux définis avec un identifiant chaîne de
-        caractère précédée d'un (<code>:</code>), passez les valeurs liées sous forme de tableau associatif.</para>
+        <para>
+            Si vous utilisez les <emphasis>paramètres nommés</emphasis>, ceux définis avec un
+            identifiant chaîne de caractère précédée d'un (<code>:</code>), passez les valeurs liées
+            sous forme de tableau associatif.
+        </para>
 
         <example id="zend.db.statement.executing.example2">
             <title>Exécution d'un statement avec paramètres nommés</title>
@@ -86,52 +106,73 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 ]]></programlisting>
         </example>
 
-        <para>Les statements PDO acceptent les paramètres positionnés, ou nommés, mais pas les deux types en même temps.
-        Certaines classes Zend_Db_Statement pour les extensions non PDO peuvent ne supporter qu'un seul de ces
-        types.</para>
+        <para>
+            Les statements PDO acceptent les paramètres positionnés, ou nommés, mais pas les
+            deux types en même temps. Certaines classes Zend_Db_Statement pour les extensions non
+            PDO peuvent ne supporter qu'un seul de ces types.
+        </para>
     </sect2>
 
     <sect2 id="zend.db.statement.fetching">
-        <title>Récupérer des résultats depuis un statement <code>SELECT</code></title>
+        <title>Récupérer des résultats depuis un statement SELECT</title>
 
-        <para>Vous disposez de méthodes sur l'objet statement lorsque celui-ci a été exécuté sur une requête SQL de type
-        SELECT, SHOW, DESCRIBE ou EXPLAIN (qui produisent des résultats). Aussi, INSERT, UPDATE et DELETE sont des
-        exemples de requêtes ne produisant pas de résultats. Vous pouvez donc les exécuter avec Zend_Db_Statement, mais
-        vous ne pourrez pas appeler les méthodes de récupération de résultats.</para>
+        <para>
+            Vous disposez de méthodes sur l'objet statement lorsque celui-ci a été exécuté sur
+            une requête SQL de type SELECT, SHOW, DESCRIBE ou EXPLAIN (qui produisent des
+            résultats). Aussi, INSERT, UPDATE et DELETE sont des exemples de requêtes ne produisant
+            pas de résultats. Vous pouvez donc les exécuter avec Zend_Db_Statement, mais vous ne
+            pourrez pas appeler les méthodes de récupération de résultats.
+        </para>
 
         <sect3 id="zend.db.statement.fetching.fetch">
             <title>Récupérer un enregistrement unique depuis un statement</title>
 
-            <para>La méthode <code>fetch()</code> permet de ne récupérer qu'un seul résultat dans le statement
-            précédemment exécuté. Trois paramètres sont disponibles pour cette méthode, tous optionnels :</para>
+            <para>
+                La méthode <code>fetch()</code> permet de ne récupérer qu'un seul résultat
+                dans le statement précédemment exécuté. Trois paramètres sont disponibles pour cette
+                méthode, tous optionnels&#160;:
+            </para>
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis>Fetch style</emphasis> en premier, permet de spécifier le mode de
-                    capture du résultat. C'est la structure dans laquelle celui-ci vous sera retourné. Voyez <xref
-                    linkend="zend.db.adapter.select.fetch-mode" /> pour une description des valeurs valides et de la
-                    forme des résultats alors renvoyés.</para>
+                    <para>
+                        <emphasis>Fetch style</emphasis> en premier, permet de spécifier le
+                        mode de capture du résultat. C'est la structure dans laquelle celui-ci vous
+                        sera retourné. Voyez <xref linkend="zend.db.adapter.select.fetch-mode" />
+                        pour une description des valeurs valides et de la forme des résultats alors
+                        renvoyés.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>Cursor orientation</emphasis> est le second paramètre. Par défaut il
-                    vaut <classname>Zend_Db::FETCH_ORI_NEXT</classname>, ce qui signifie que chaque appel futur à
-                    <code>fetch()</code> retourne l'enregistrement suivant.</para>
+                    <para>
+                        <emphasis>Cursor orientation</emphasis> est le second paramètre. Par
+                        défaut il vaut <classname>Zend_Db::FETCH_ORI_NEXT</classname>, ce qui
+                        signifie que chaque appel futur à <code>fetch()</code> retourne
+                        l'enregistrement suivant.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>Offset</emphasis>, en troisième paramètre. Si le paramètre "cursor
-                    orientation" est réglé sur <classname>Zend_Db::FETCH_ORI_ABS</classname>, alors le numéro d'offset est le
-                    numéro du résultat à retourner, dans le statement. Si c'est <classname>Zend_Db::FETCH_ORI_REL</classname>, le
-                    numéro d'offset est relatif à la position du curseur avant l'appel à <code>fetch()</code>.</para>
+                    <para>
+                        <emphasis>Offset</emphasis>, en troisième paramètre. Si le paramètre
+                        "cursor orientation" est réglé sur
+                        <classname>Zend_Db::FETCH_ORI_ABS</classname>, alors le numéro d'offset est
+                        le numéro du résultat à retourner, dans le statement. Si c'est
+                        <classname>Zend_Db::FETCH_ORI_REL</classname>, le numéro d'offset est
+                        relatif à la position du curseur avant l'appel à
+                        <code>fetch()</code>.
+                    </para>
                 </listitem>
             </itemizedlist>
 
-            <para><code>fetch()</code> retourne <code>false</code> si il n'y a plus de résultats restants dans le
-            statement.</para>
+            <para>
+                <code>fetch()</code> retourne <code>false</code> si il n'y a plus de résultats
+                restants dans le statement.
+            </para>
 
             <example id="zend.db.statement.fetching.fetch.example">
-                <title>Utiliser <code>fetch()</code> dans une boucle</title>
+                <title>Utiliser fetch() dans une boucle</title>
 
                 <programlisting role="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -142,19 +183,26 @@ while ($row = $stmt->fetch()) {
 ]]></programlisting>
             </example>
 
-            <para>Voyez aussi <ulink url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.</para>
+            <para>
+                Voyez aussi <ulink
+                url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
+            </para>
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchall">
             <title>Récupérer un jeu de résultat complet</title>
 
-            <para>Pour récupérer tous les résultats d'un statement, utilisez <code>fetchAll()</code>. Ceci est
-            équivalent à appeler <code>fetch()</code> dans un boucle et retourner tous les résultats dans un tableau. La
-            méthode <code>fetchAll()</code> accepte deux paramètres. Le premier est le mode de capture (fetch style), le
-            deuxième est le numéro de la colonne à retourner, si Zend_Db::FETCH_COLUMN est utilisé.</para>
+            <para>
+                Pour récupérer tous les résultats d'un statement, utilisez
+                <code>fetchAll()</code>. Ceci est équivalent à appeler <code>fetch()</code> dans un
+                boucle et retourner tous les résultats dans un tableau. La méthode
+                <code>fetchAll()</code> accepte deux paramètres. Le premier est le mode de capture
+                (fetch style), le deuxième est le numéro de la colonne à retourner, si
+                Zend_Db::FETCH_COLUMN est utilisé.
+            </para>
 
             <example id="zend.db.statement.fetching.fetchall.example">
-                <title>Utilisation de <code>fetchAll()</code></title>
+                <title>Utilisation de fetchAll()</title>
 
                 <programlisting role="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
@@ -165,20 +213,26 @@ echo $rows[0]['bug_description'];
 ]]></programlisting>
             </example>
 
-            <para>Voyez aussi <ulink
-            url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.</para>
+            <para>
+                Voyez aussi <ulink
+                url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
+            </para>
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetch-mode">
             <title>Changer le mode de capture (Fetch Mode)</title>
 
-            <para>Par défaut l'objet statement retourne les colonnes du jeu de résultat en tant que tableau associatif,
-            en faisant correspondre les noms des colonne et leur valeur. Vous pouvez cependant spécifier un format
-            différent, comme il est possible de faire avec la classe de l'adaptateur. La méthode
-            <code>setFetchMode()</code> permet ceci. Indiquez un mode de capture en utilisant les constantes de la
-            classe Zend_Db : FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN, et FETCH_OBJ. Voyez <xref
-            linkend="zend.db.adapter.select.fetch-mode" /> pour plus d'informations sur ces modes de capture. Les appels
-            suivants à <code>fetch()</code> ou <code>fetchAll()</code> utiliseront le mode spécifié auparavant.</para>
+            <para>
+                Par défaut l'objet statement retourne les colonnes du jeu de résultat en tant
+                que tableau associatif, en faisant correspondre les noms des colonne et leur valeur.
+                Vous pouvez cependant spécifier un format différent, comme il est possible de faire
+                avec la classe de l'adaptateur. La méthode <code>setFetchMode()</code> permet ceci.
+                Indiquez un mode de capture en utilisant les constantes de la classe Zend_Db :
+                FETCH_ASSOC, FETCH_NUM, FETCH_BOTH, FETCH_COLUMN, et FETCH_OBJ. Voyez <xref
+                linkend="zend.db.adapter.select.fetch-mode" /> pour plus d'informations sur ces
+                modes de capture. Les appels suivants à <code>fetch()</code> ou
+                <code>fetchAll()</code> utiliseront le mode spécifié auparavant.
+            </para>
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
                 <title>Paramétrer le mode de capture (fetch mode)</title>
@@ -194,25 +248,32 @@ echo $rows[0][0];
 ]]></programlisting>
             </example>
 
-            <para>Voyez aussi <ulink
-            url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.</para>
+            <para>
+                Voyez aussi <ulink
+                url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
+            </para>
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchcolumn">
             <title>Récupérer une colonne simple depuis un statement exécuté</title>
 
-            <para>Pour retourner une colonne de résultat depuis un statement, utilisez la méthode
-            <code>fetchColumn()</code>. Le paramètre optionnel est un entier représentant l'index de la colonne désirée,
-            par défaut zéro. Cette méthode retourne un type scalaire, ou <code>false</code> s'il n'y a plus de résultats
-            dans le statement.</para>
+            <para>
+                Pour retourner une colonne de résultat depuis un statement, utilisez la
+                méthode <code>fetchColumn()</code>. Le paramètre optionnel est un entier
+                représentant l'index de la colonne désirée, par défaut zéro. Cette méthode retourne
+                un type scalaire, ou <code>false</code> s'il n'y a plus de résultats dans le
+                statement.
+            </para>
 
-            <para>Notez que cette méthode se comporte différemment de <code>fetchCol()</code> de l'adaptateur. La
-            méthode <code>fetchColumn()</code> du statement retourne une seule valeur d'un seul résultat.
-            <code>fetchCol()</code> de l'adaptateur retourne un tableau de valeurs issues de la première colonne du jeu
-            résultat.</para>
+            <para>
+                Notez que cette méthode se comporte différemment de <code>fetchCol()</code> de
+                l'adaptateur. La méthode <code>fetchColumn()</code> du statement retourne une seule
+                valeur d'un seul résultat. <code>fetchCol()</code> de l'adaptateur retourne un
+                tableau de valeurs issues de la première colonne du jeu résultat.
+            </para>
 
             <example id="zend.db.statement.fetching.fetchcolumn.example">
-                <title>Utiliser <code>fetchColumn()</code></title>
+                <title>Utiliser fetchColumn()</title>
 
                 <programlisting role="php"><![CDATA[
 $sql = 'SELECT bug_id, bug_description, bug_status FROM bugs';
@@ -223,21 +284,26 @@ $bug_status = $stmt->fetchColumn(2);
 ]]></programlisting>
             </example>
 
-            <para>Voyez aussi <ulink
-            url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.</para>
+            <para>
+                Voyez aussi <ulink
+                url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
+            </para>
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchobject">
             <title>Récupérer un résultat (Row) sous forme d'objet</title>
 
-            <para>Pour récupérer une colonne de résultat en tant qu'objet, depuis un statement exécuté, utilisez la
-            méthode <code>fetchObject()</code>. Celle-ci prend deux paramètres optionnels. Le premier est une chaîne
-            indiquant le nom de la classe que l'on souhaite se voir retourner, par défaut il s'agit de
-            "<code>stdClass</code>". Le deuxième paramètre est un tableau de paramètres qui sera passé au constructeur
-            de cette classe.</para>
+            <para>
+                Pour récupérer une colonne de résultat en tant qu'objet, depuis un statement
+                exécuté, utilisez la méthode <code>fetchObject()</code>. Celle-ci prend deux
+                paramètres optionnels. Le premier est une chaîne indiquant le nom de la classe que
+                l'on souhaite se voir retourner, par défaut il s'agit de "<code>stdClass</code>". Le
+                deuxième paramètre est un tableau de paramètres qui sera passé au constructeur de
+                cette classe.
+            </para>
 
             <example id="zend.db.statement.fetching.fetchobject.example">
-                <title>Utiliser <code>fetchObject()</code></title>
+                <title>Utiliser fetchObject()</title>
 
                 <programlisting role="php"><![CDATA[
 $sql = 'SELECT bug_id, bug_description, bug_status FROM bugs';
@@ -250,8 +316,10 @@ echo $obj->bug_description;
 ]]></programlisting>
             </example>
 
-            <para>Voyez aussi <ulink
-            url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.</para>
+            <para>
+                Voyez aussi <ulink
+                url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
+            </para>
         </sect3>
     </sect2>
 
@@ -263,6 +331,8 @@ echo $obj->bug_description;
         <title>Binding PHP Variables to Parameters</title>
 
         <para>
+
+
         </para>
 
         <example id="zend.db.statement.binding-param.example">
@@ -272,7 +342,9 @@ echo $obj->bug_description;
         </example>
 
         <para>
-            See also <ulink url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>.
+
+                See also <ulink url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>.
+
         </para>
 
     </sect2>
@@ -285,6 +357,8 @@ echo $obj->bug_description;
         <title>Binding PHP Variables to Query Results</title>
 
         <para>
+
+
         </para>
 
         <example id="zend.db.statement.binding-column.example">
@@ -294,7 +368,9 @@ echo $obj->bug_description;
         </example>
 
         <para>
-            See also <ulink url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>.
+
+                See also <ulink url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>.
+
         </para>
 
     </sect2>

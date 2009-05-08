@@ -1,36 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13846 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profiler avec Firebug</title>
 
-    <para><classname>Zend_Db_Profiler_Firebug</classname> envoie des informations de profilage vers la <ulink
-    url="http://www.getfirebug.com/">console Firebug</ulink>.</para>
+    <para>
+        <classname>Zend_Db_Profiler_Firebug</classname> envoie des informations de profilage
+        vers la <ulink url="http://www.getfirebug.com/">console Firebug</ulink>.
+    </para>
 
-    <para>Toutes les données sont envoyées via le composant <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise
-    les en-têtes HTTP pour s'assurer que le contenu de la page n'est pas perturbé. Déboguer les requêtes AJAX qui
-    requière du JSON "propre" ou un réponse XML est possible avec cette approche.</para>
+    <para>
+        Toutes les données sont envoyées via le composant
+        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise les en-têtes HTTP pour
+        s'assurer que le contenu de la page n'est pas perturbé. Déboguer les requêtes AJAX qui
+        requière du JSON "propre" ou un réponse XML est possible avec cette approche.
+    </para>
 
-    <para>Éléments requis :</para>
+    <para>Éléments requis&#160;:</para>
 
     <itemizedlist>
         <listitem>
-            <para>Navigateur Firefox idéalement en version 3 mais la version 2 est aussi supportée.</para>
+            <para>
+                Navigateur Firefox idéalement en version 3 mais la version 2 est aussi
+                supportée.
+            </para>
         </listitem>
 
         <listitem>
-            <para>L'extension Firefox nommée Firebug qui peut être téléchargée à cette adresse <ulink
-            url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.</para>
+            <para>
+                L'extension Firefox nommée Firebug qui peut être téléchargée à cette adresse
+                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+            </para>
         </listitem>
 
         <listitem>
-            <para>L'extension Firefox nommée FirePHP qui peut être téléchargée à cette adresse <ulink
-            url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.</para>
+            <para>
+                L'extension Firefox nommée FirePHP qui peut être téléchargée à cette adresse
+                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+            </para>
         </listitem>
     </itemizedlist>
 
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
-        <title>Profilage de base de données avec <classname>Zend_Controller_Front</classname></title>
+        <title>Profilage de base de données avec Zend_Controller_Front</title>
 
         <programlisting role="php"><![CDATA[
 // Dans votre fichier d'amorçage
@@ -48,7 +60,7 @@ $db->setProfiler($profiler)
     </example>
 
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
-        <title>Profilage de base de données sans <classname>Zend_Controller_Front</classname></title>
+        <title>Profilage de base de données sans Zend_Controller_Front</title>
 
         <programlisting role="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');

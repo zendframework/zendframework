@@ -5,7 +5,7 @@
     <title>Avancé</title>
 
     <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>Depuis Zend Framework 1.6, gestion des transformations de format d'index.</title>
+        <title>Depuis Zend Framework 1.6, gestion des transformations de format d'index</title>
 
         <para><classname>Zend_Search_Lucene</classname> fonctionne avec les index Lucene Java 1.4-1.9, 2.1 et 2.3.</para>
 

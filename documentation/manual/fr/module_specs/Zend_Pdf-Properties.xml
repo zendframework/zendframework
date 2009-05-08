@@ -4,7 +4,7 @@
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
 
-    <title>Informations du document et métadonnées.</title>
+    <title>Informations du document et métadonnées</title>
 
     <para>Un document PDF peut inclure des informations générales comme le titre du document, l'auteur et les dates de
     création ou de modification.</para>

@@ -56,7 +56,7 @@ $index->addDocument($doc);
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.document-updating">
-        <title>Mise à jour de Documents.</title>
+        <title>Mise à jour de Documents</title>
 
         <para>Le format de fichier d'un index Lucene ne permet pas la mise à jour d'un document. Les documents doivent
         être supprimés puis réinsérés dans l'index afin d'être mis à jour efficacement.</para>

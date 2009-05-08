@@ -215,7 +215,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.types">
-        <title>Correspondance de type.</title>
+        <title>Correspondance de type</title>
 
         <para>Le WSDL de Zend_Soap utilise les correspondances suivantes pour faire correspondre les type SOAP à des
         types PHP : <itemizedlist>
@@ -271,7 +271,7 @@
         un "espace de noms cible" pour le service.</para>
 
         <sect3 id="zend.soap.wsdl.types.retrieve">
-            <title>Récupérer des infos sur les types.</title>
+            <title>Récupérer des infos sur les types</title>
 
             <para><code>getType($type)</code> peut être utilisée pour récupérer la correspondance d'un type PHP spécifié
             : <programlisting role="php"><![CDATA[
@@ -291,7 +291,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         </sect3>
 
         <sect3 id="zend.soap.wsdl.types.add_complex">
-            <title>Ajouter des infos sur les types complexes.</title>
+            <title>Ajouter des infos sur les types complexes</title>
 
             <para><code>addComplexType($type)</code> est utilisée pour ajouter des types complexes (classes PHP) à un
             document WSDL.</para>
@@ -373,7 +373,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.retrieve">
-        <title>Récupérer un document WSDL finalisé.</title>
+        <title>Récupérer un document WSDL finalisé</title>
 
         <para><code>toXML()</code>, <code>toDomDocument()</code> et <code>dump($filename = false)</code> peuvent être
         utilisées pour récupérer un document WSDL sous forme de XML, de structure DOM, ou de fichier.</para>

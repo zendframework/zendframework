@@ -26,7 +26,7 @@
         WSDL ou non.</para>
 
         <sect3 id="zend.soap.server.constructor.wsdl_mode">
-            <title>Constructeur de <classname>Zend_Soap_Server</classname> en mode WSDL.</title>
+            <title>Constructeur de <classname>Zend_Soap_Server</classname> en mode WSDL</title>
 
             <para>Le constructeur de <classname>Zend_Soap_Server</classname> prend 2 paramètres optionnel en mode WSDL:
             <orderedlist>
@@ -117,7 +117,7 @@
     </sect2>
 
     <sect2 id="zend.soap.server.api_define_methods">
-        <title>Méthodes de définitions de l'API du service.</title>
+        <title>Méthodes de définitions de l'API du service</title>
 
         <para>Il existe 2 manières de déclarer l'API de votre serveur SOAP.</para>
 
@@ -197,7 +197,7 @@ $server->handle();
     </sect2>
 
     <sect2 id="zend.soap.server.request_response">
-        <title>Gestion des objets de requête et de réponse.</title>
+        <title>Gestion des objets de requête et de réponse</title>
 
         <note>
             <title>Avancée</title>
@@ -209,7 +209,7 @@ $server->handle();
         possible d'intercepter la requête/réponse pour ajouter du pré ou post processus.</para>
 
         <sect3 id="zend.soap.server.request_response.request">
-            <title>Requête.</title>
+            <title>Requête</title>
 
             <para>La méthode <classname>Zend_Soap_Server::handle()</classname> utilise la requête depuis le flux d'entrée standard
             ('php://input'). Le comportement peut être changé en passant des paramètres à la méthode
@@ -259,7 +259,7 @@ $request = $server->getLastRequest();
         </sect3>
 
         <sect3 id="zend.soap.server.request_response.response">
-            <title>Réponse.</title>
+            <title>Réponse</title>
 
             <para><classname>Zend_Soap_Server::handle()</classname> émet automatiquement la réponse vers le flux standard de
             sortie. Ce comportement peut être changé en utilisant <code>setReturnResponse()</code> avec une valeur

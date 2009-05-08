@@ -73,7 +73,7 @@ $date = Zend_Date::now();
         </para>
 
         <example id="zend.date.creation.database.example-1">
-            <title>Création d'une date depuis une base de données.</title>
+            <title>Création d'une date depuis une base de données</title>
 
             <para>
                 Toutes les bases de données doivent répondre extrêmement rapidement à leurs

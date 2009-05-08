@@ -449,7 +449,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         de celui en cours. Seulement les caractères WinLatin1 seront tracés réellement.</para>
 
         <example id="zend.pdf.drawing.using-fonts.example-7">
-            <title>Combiner les options de polices embarqués.</title>
+            <title>Combiner les options de polices embarqués</title>
 
             <programlisting role="php"><![CDATA[
 ...
@@ -476,7 +476,7 @@ $pdfPage->setFont($font, 36)
         extraire toutes les polices mentionnés à l'intérieur d'un document ou d'une page :</para>
 
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
-            <title>Extraction de polices à partir d'un document chargé.</title>
+            <title>Extraction de polices à partir d'un document chargé</title>
 
             <programlisting role="php"><![CDATA[
 ...
@@ -505,7 +505,7 @@ $firstPageFonts = $firstPage->extractFonts();
         </example>
 
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
-            <title>Extraction d'une police à partir d'un document chargé en spécifiant le nom de police.</title>
+            <title>Extraction d'une police à partir d'un document chargé en spécifiant le nom de police</title>
 
             <programlisting role="php"><![CDATA[
 ...
@@ -773,7 +773,7 @@ public function translate($xShift, $yShift);
         </sect3>
 
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
-            <title>A partir de Zend Framework 1.8, mise en biais.</title>
+            <title>A partir de Zend Framework 1.8, mise en biais</title>
 
             <para>La mise en biais de la page peut être réalisé par la méthode <classname>Zend_Pdf_Page::skew()</classname>
             :</para>
@@ -794,7 +794,7 @@ public function skew($x, $y, $xAngle, $yAngle);
     </sect2>
 
     <sect2 id="zend.pdf.drawing.save-restore">
-        <title>Sauvegarder et restaurer l'état graphique.</title>
+        <title>Sauvegarder et restaurer l'état graphique</title>
 
         <para>L'état graphique (police courante, taille de caractère, couleur de ligne, couleur de remplissage, style de
         ligne, sens de la page, zone de dessin) peut-être sauvegarder à tout moment. L'opération de sauvegarde empile le
@@ -1053,7 +1053,7 @@ public function getFontSize();
     </sect2>
 
     <sect2 id="zend.pdf.drawing.alpha">
-        <title>Transparence.</title>
+        <title>Transparence</title>
 
         <para>Le module <classname>Zend_Pdf</classname> supporte la gestion de la transparence.</para>
 

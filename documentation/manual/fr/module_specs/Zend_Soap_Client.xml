@@ -17,7 +17,7 @@
     <classname>Zend_Soap_Client</classname>.</para>
 
     <sect2 id="zend.soap.client.constructor">
-        <title>Constructeur de <classname>Zend_Soap_Client</classname>.</title>
+        <title>Constructeur de <classname>Zend_Soap_Client</classname></title>
 
         <para>Le constructeur de <classname>Zend_Soap_Client</classname> accepte 2 paramètres: <itemizedlist>
                 <listitem>
@@ -116,7 +116,7 @@ $client = new Zend_Soap_Client("some.wsdl",
     </sect2>
 
     <sect2 id="zend.soap.client.calls">
-        <title>Effectuer des requêtes SOAP.</title>
+        <title>Effectuer des requêtes SOAP</title>
 
         <para>Lorsqu'un objet <classname>Zend_Soap_Client</classname> est crée, nous sommes prêts à créer des requêtes
         SOAP.</para>

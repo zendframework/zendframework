@@ -288,7 +288,7 @@ $serializedRow = serialize($row);
             (<classname>save()</classname>).</para>
 
             <example id="zend.db.table.row.serialize.unserializing.example">
-                <title>Exemple de désérialisation d'un objet Row sérialisé.</title>
+                <title>Exemple de désérialisation d'un objet Row sérialisé</title>
 
                 <programlisting role="php"><![CDATA[
 $rowClone = unserialize($serializedRow);

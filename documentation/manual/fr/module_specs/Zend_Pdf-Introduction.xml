@@ -4,7 +4,7 @@
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
 
-    <title>Introduction.</title>
+    <title>Introduction</title>
 
     <para><classname>Zend_Pdf</classname> est un composant entièrement écrit en PHP5 permettant la manipulation de documents PDF
     (Portable Document Format). Il peut charger des documents, créer, modifier et les sauvegarder. Cela peut aider toute

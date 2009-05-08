@@ -11,6 +11,7 @@ require_once 'Zend/Amf/Value/MessageHeader.php';
 require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
 require_once 'Zend/Amf/Parse/TypeLoader.php';
 require_once 'Contact.php';
+require_once 'ContactVO.php';
 require_once 'Zend/Date.php';
 
 /**
@@ -726,6 +727,43 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
         unset($contact->_explicitType);
         array_push( $data, $contact );
 
+        $newBody = new Zend_Amf_Value_MessageBody('/1/onResult',null,$data);
+        $this->_response->setObjectEncoding(0x00);
+        $this->_response->addAmfBody($newBody);
+        $this->_response->finalize();
+        $testResponse = $this->_response->getResponse();
+        // Load the expected response.
+        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/typedObjectAmf0Response.bin');
+        // Check that the response matches the expected serialized value
+        $this->assertEquals($mockResponse, $testResponse);
+    }
+    
+   /**
+    * The feature test allows for php to just retun it's class name if nothing is specified. Using
+    * _explicitType, setClassMap, getASClassName() should only be used now if you want to override the 
+    * PHP class name for specifying the return type. 
+    * @group ZF-6130
+    */
+    public function testPhpObjectNameSerializedToAmf0ClassName()
+    {
+        $data = array();
+
+        $contact = new ContactVO();
+        $contact->id        = '15';
+        $contact->firstname = 'Joe';
+        $contact->lastname  = 'Smith';
+        $contact->email     = 'jsmith@adobe.com';
+        $contact->mobile    = '123-456-7890';
+        
+        array_push( $data, $contact );
+
+        $contact = new ContactVO();
+        $contact->id        = '23';
+        $contact->firstname = 'Adobe';
+        $contact->lastname  = 'Flex';
+        $contact->email     = 'was@here.com';
+        $contact->mobile    = '123-456-7890';
+        array_push( $data, $contact );
         $newBody = new Zend_Amf_Value_MessageBody('/1/onResult',null,$data);
         $this->_response->setObjectEncoding(0x00);
         $this->_response->addAmfBody($newBody);

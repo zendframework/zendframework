@@ -4,34 +4,37 @@
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
     <para>
-        Es gibt 3 Schlüsselkonzepte in <classname>Zend_Cache</classname>. Eines ist die eindeutige Identifizierung (ein String),
-        die benutzt wird, um Cache Datensätze zu identifizieren. Das zweite ist die <code>'lifetime'</code>
-        Direktive, wie im Beispiel gezeigt; sie definiert, wie lange eine gecachte Ressource als 'frisch'
-        betrachtet wird. Das dritte Konzept ist die bedingte Ausführung, so das Teile des Codes komplett
-        übersprungen werden können, was die Leistung steigert.
-        Die Haupt-Frontend Funktion (eg. <classname>Zend_Cache_Core::get()</classname>) ist immer so gestaltet, das
-        false zurückgegeben wird, wenn ein Cache fehlt. Aber nur, wenn das für die Natur des Frontends Sinn macht.
-        Das erlaubt es Endbenutzern, die Teile des Codes, die gecached (oder übersprungen) werden sollen, in
-        <code>if(){ ... }</code> Anweisungen zu umhüllen, wobei die Bedingung die <classname>Zend_Cache</classname> Methode selbst ist.
-        Am Ende der Blöcke muss das erstellte auf alle Fälle gespeichert werden
-        (z.B. <classname>Zend_Cache_Core::save()</classname>).
+        Es gibt 3 Schlüsselkonzepte in <classname>Zend_Cache</classname>. Eines ist die eindeutige
+        Identifizierung (ein String), die benutzt wird, um Cache Datensätze zu identifizieren. Das
+        zweite ist die <code>'lifetime'</code> Direktive, wie im Beispiel gezeigt; sie definiert,
+        wie lange eine gecachte Ressource als 'frisch' betrachtet wird. Das dritte Konzept ist die
+        bedingte Ausführung, so das Teile des Codes komplett übersprungen werden können, was die
+        Leistung steigert. Die Haupt-Frontend Funktion (eg.
+        <classname>Zend_Cache_Core::get()</classname>) ist immer so gestaltet, das false
+        zurückgegeben wird, wenn ein Cache fehlt. Aber nur, wenn das für die Natur des Frontends
+        Sinn macht. Das erlaubt es Endbenutzern, die Teile des Codes, die gecached (oder
+        übersprungen) werden sollen, in <code>if(){ ... }</code> Anweisungen zu umhüllen, wobei die
+        Bedingung die <classname>Zend_Cache</classname> Methode selbst ist. Am Ende der Blöcke muss
+        das erstellte auf alle Fälle gespeichert werden (z.B.
+        <classname>Zend_Cache_Core::save()</classname>).
     </para>
     <note><para>
-        Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht notwendig
-        (<code>Function</code>, zum Beispiel) wenn die komplette Logik im verwendeten Frontend integriert ist.
+        Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht
+        notwendig (<code>Function</code>, zum Beispiel) wenn die komplette Logik im verwendeten
+        Frontend integriert ist.
     </para></note>
     <note><para>
-        'Cache hit' ist ein Ausdruck für eine Bedingung, wenn ein Cache Datensatz gefunden wurde, er gültig und
-        'frisch' ist (in anderen Worten, er ist noch nicht abgelaufen). 'Cache miss' ist alles andere.
-        Wenn ein 'Cache miss' passiert, müssen die Daten erzeugt werden (wie man es normalerweise tun würde) und
-        anschließend cachen. Wenn ein 'Cache hit' geschieht muß, auf der anderen Seite, das Backend automatisch den
-        Datensatz vom Cache transparent holen.
+        'Cache hit' ist ein Ausdruck für eine Bedingung, wenn ein Cache Datensatz gefunden wurde, er
+        gültig und 'frisch' ist (in anderen Worten, er ist noch nicht abgelaufen). 'Cache miss' ist
+        alles andere. Wenn ein 'Cache miss' passiert, müssen die Daten erzeugt werden (wie man es
+        normalerweise tun würde) und anschließend cachen. Wenn ein 'Cache hit' geschieht muß, auf
+        der anderen Seite, das Backend automatisch den Datensatz vom Cache transparent holen.
     </para></note>
     <sect2 id="zend.cache.factory">
         <title>Die Zend_Cache Factory Methode</title>
         <para>
-            Ein guter Weg, um eine verwendbare Instanz eines <classname>Zend_Cache</classname> Frontends zu erstellen, wird im
-            folgenden Beispiel gegeben:
+            Ein guter Weg, um eine verwendbare Instanz eines <classname>Zend_Cache</classname>
+            Frontends zu erstellen, wird im folgenden Beispiel gegeben:
         </para>
         <programlisting role="php"><![CDATA[
 // Wir wählen ein Backend (zum Beispiel 'File' oder 'Sqlite'...)
@@ -59,39 +62,42 @@ $cache = Zend_Cache::factory($frontendName,
             Parameter an das ausgewählte Backend übergeben werden.
         </para>
         <note><para>
-            Immer <classname>Zend_Cache::factory()</classname> benutzen, um eine Frontend Instanz zu bekommen.
-            Das selbstständige Instantiieren von Frontends und Backends funktioniert nicht so wie
-            erwartet.
+            Immer <classname>Zend_Cache::factory()</classname> benutzen, um eine Frontend Instanz zu
+            bekommen. Das selbstständige Instantiieren von Frontends und Backends funktioniert nicht
+            so wie erwartet.
         </para></note>
     </sect2>
 
     <sect2 id="zend.cache.tags">
         <title>Markierte Datensätze</title>
         <para>
-            Markierungen sind ein Weg um Cache Datensätze zu kategorisieren. Wenn der Cache mit der <code>save()</code>
-            Methode abgespeichert werden soll, kann ein Array mit Markierungen für diesen Datensatz angelegt werden.
-            Dann besteht die Möglichkeit, alle markierten Cache Datensätze mit einer bestimmten Markierung (oder
-            Markierungen), zu löschen:
+            Markierungen sind ein Weg um Cache Datensätze zu kategorisieren. Wenn der Cache mit der
+            <code>save()</code> Methode abgespeichert werden soll, kann ein Array mit Markierungen
+            für diesen Datensatz angelegt werden. Dann besteht die Möglichkeit, alle markierten
+            Cache Datensätze mit einer bestimmten Markierung (oder Markierungen), zu löschen:
         </para>
         <programlisting role="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
-            Man beachte, dass die <code>save()</code> Method einen optionales, viertes Argument akzeptiert:
-            <code>$specificLifetime</code> (wenn != false, setzt es eine spezifische Laufzeit für diesen speziellen Cache Eintrag)
+            Man beachte, dass die <code>save()</code> Method einen optionales, viertes Argument
+            akzeptiert: <code>$specificLifetime</code> (wenn != false, setzt es eine spezifische
+            Laufzeit für diesen speziellen Cache Eintrag)
         </para></note>
     </sect2>
     <sect2 id="zend.cache.clean">
         <title>Löschen des Caches</title>
         <para>
-            Um eine bestimmte Cache ID zu entfernen/annullieren, kann die <code>remove()</code> Methode benutzt werden:
+            Um eine bestimmte Cache ID zu entfernen/annullieren, kann die <code>remove()</code>
+            Methode benutzt werden:
         </para>
              <programlisting role="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
-            Um mehrere Cache IDs mit einer Operation zu entfernen/annulieren, kann die <code>clean()</code> Methode
-            benutzt werden. Zum Beispiel um alle Cache Datensätze zu entfernen :
+            Um mehrere Cache IDs mit einer Operation zu entfernen/annulieren, kann die
+            <code>clean()</code> Methode benutzt werden. Zum Beispiel um alle Cache Datensätze zu
+            entfernen :
         </para>
         <programlisting role="php"><![CDATA[
 // Löschen aller Datensätze
@@ -130,8 +136,8 @@ $cache->clean(
         <para>
             Mögliche Löschmodi sind: <code>CLEANING_MODE_ALL</code>, <code>CLEANING_MODE_OLD</code>,
             <code>CLEANING_MODE_MATCHING_TAG</code>, <code>CLEANING_MODE_NOT_MATCHING_TAG</code> und
-            <code>CLEANING_MODE_MATCHING_ANY_TAG</code>. Die letzteren sind, wie deren Namen vermuten
-            lassen, kombiniert mit einem Array von Markierungen für die Löschoperation.
+            <code>CLEANING_MODE_MATCHING_ANY_TAG</code>. Die letzteren sind, wie deren Namen
+            vermuten lassen, kombiniert mit einem Array von Markierungen für die Löschoperation.
         </para>
     </sect2>
 </sect1>

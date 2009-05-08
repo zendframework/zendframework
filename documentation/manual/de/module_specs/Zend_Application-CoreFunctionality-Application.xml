@@ -5,15 +5,16 @@
     <title>Zend_Application</title>
 
     <para>
-        <classname>Zend_Application</classname> bietet die Basisfunktionalität der Komponente, und ist der
-        Eintrittspunkt zur eigenen Zend Framework Anwendung. Sein Zweck ist zweigeteilt: das
+        <classname>Zend_Application</classname> bietet die Basisfunktionalität der Komponente, und
+        ist der Eintrittspunkt zur eigenen Zend Framework Anwendung. Sein Zweck ist zweigeteilt: das
         Setup der PHP Umgebung (inklusive Autoloading), und das Anwendungs-Bootstrap auszuführen.
     </para>
 
     <para>
-        Typischerweise, wird man die komplette Konfiguration an den <classname>Zend_Application</classname>
-        Konstruktor übergeben, aber man kann das Objekt auch komplett konfigurieren indem dessen
-        eigene Methoden verwendet werden. Diese Referenz dient dazu beide Fälle zu zeigen.
+        Typischerweise, wird man die komplette Konfiguration an den
+        <classname>Zend_Application</classname> Konstruktor übergeben, aber man kann das Objekt auch
+        komplett konfigurieren indem dessen eigene Methoden verwendet werden. Diese Referenz dient
+        dazu beide Fälle zu zeigen.
     </para>
 
     <table id="zend.application.core-functionality.application.api.options">
@@ -101,9 +102,9 @@
                             <itemizedlist>
                                 <listitem><para>
                                     <emphasis>String</emphasis>: Pfad zu einer
-                                    <classname>Zend_Config</classname> Datei für die eigene Anwendung.
-                                    <code>$environment</code> wird verwendet um zu erkennen
-                                    welche Sektion der Konfiguration geholt werden soll.
+                                    <classname>Zend_Config</classname> Datei für die eigene
+                                    Anwendung. <code>$environment</code> wird verwendet um zu
+                                    erkennen welche Sektion der Konfiguration geholt werden soll.
                                 </para></listitem>
 
                                 <listitem><para>
@@ -141,8 +142,8 @@
                     <entry><classname>Zend_Loader_Autoloader</classname></entry>
                     <entry>N/A</entry>
                     <entry><para>
-                        Empfangen der <classname>Zend_Loader_Autoloader</classname> Instanz die wärend der
-                        Instanziierung registriert wurde.
+                        Empfangen der <classname>Zend_Loader_Autoloader</classname> Instanz die
+                        wärend der Instanziierung registriert wurde.
                     </para></entry>
                 </row>
 
@@ -170,8 +171,9 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt alle Optionen die verwendet wurden um das Objekt zu
-                        initialisieren; könnte verwendet werden um <classname>Zend_Config</classname>
-                        Optionen zwischen Anfragen in ein serialisierbares Format zu cachen.
+                        initialisieren; könnte verwendet werden um
+                        <classname>Zend_Config</classname> Optionen zwischen Anfragen in ein
+                        serialisierbares Format zu cachen.
                     </para></entry>
                 </row>
 
@@ -225,9 +227,9 @@
                     </itemizedlist></entry>
                     <entry><para>
                         Setzt Laufzeit php.ini Einstellungen. Punkt-getrennte Einstellungen
-                        können hierarchisch verschachtelt sein (welche in <classname>Zend_Config</classname>
-                        INI Dateien auftreten können) über ein Array-von-Arrays, und wird trotzdem
-                        korrekt aufgelöst.
+                        können hierarchisch verschachtelt sein (welche in
+                        <classname>Zend_Config</classname> INI Dateien auftreten können) über ein
+                        Array-von-Arrays, und wird trotzdem korrekt aufgelöst.
                     </para></entry>
                 </row>
 
@@ -242,8 +244,8 @@
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Registriert den Namespace mit der <classname>Zend_Loader_Autoloader</classname>
-                        Instanz.
+                        Registriert den Namespace mit der
+                        <classname>Zend_Loader_Autoloader</classname> Instanz.
                     </para></entry>
                 </row>
 
@@ -254,10 +256,10 @@
                         <listitem><para>
                             <code>$path</code>: <emphasis>Benötigt</emphasis>.
                             Kann entweder eine Instanz von
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>, ein String Pfad
-                            zur Bootstrap Klasse, ein assoziatives Array von Klassenname =&gt;
-                            Dateiname, oder ein assoziatives Array mit den Schlüsseln 'class' und
-                            'path' sein.
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>, ein
+                            String Pfad zur Bootstrap Klasse, ein assoziatives Array von Klassenname
+                            =&gt; Dateiname, oder ein assoziatives Array mit den Schlüsseln 'class'
+                            und 'path' sein.
                         </para></listitem>
 
                         <listitem><para>

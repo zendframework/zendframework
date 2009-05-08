@@ -5,8 +5,8 @@
     <title>Der Autoloader</title>
 
     <para>
-        <classname>Zend_Loader_Autoloader</classname> ist eine vollständige Autoloader Lösung für den
-        Zend Framework. Sie wurde entwickelt um verschiedene Ziele zu lösen:
+        <classname>Zend_Loader_Autoloader</classname> ist eine vollständige Autoloader Lösung für
+        den Zend Framework. Sie wurde entwickelt um verschiedene Ziele zu lösen:
     </para>
 
     <itemizedlist>
@@ -64,8 +64,8 @@ $autoloader->registerNamespace('My_');
 
             <para>
                 Man sollte beachten das das vorhergehende Beispiel "My_" verwendet und nicht "My".
-                Der Grund ist, das <classname>Zend_Loader_Autoloader</classname> als Autoloader für generelle
-                Anwendungsfälle gedacht ist, und deshalb nicht die Annahme macht das ein
+                Der Grund ist, das <classname>Zend_Loader_Autoloader</classname> als Autoloader für
+                generelle Anwendungsfälle gedacht ist, und deshalb nicht die Annahme macht das ein
                 angegebener Präfix eines Klassen Namespaces einen Unterstrich enthalten muß. Wenn
                 der eigene Klassennamespace einen <emphasis>enhält</emphasis>, dann sollte man Ihn
                 mit dem eigenen Namespace registrieren.
@@ -75,8 +75,8 @@ $autoloader->registerNamespace('My_');
         <para>
             Man kann auch einen eigene Autoloader Callbacks registrieren, optional mit einem
             spezifischen Namespace (oder einer Gruppe von Namespaces).
-            <classname>Zend_Loader_Autoloader</classname> versucht zuerst die passenden zu finden bevor
-            sein interner Autoloading Mechanismus verwendet wird.
+            <classname>Zend_Loader_Autoloader</classname> versucht zuerst die passenden zu finden
+            bevor sein interner Autoloading Mechanismus verwendet wird.
         </para>
 
         <para>
@@ -101,8 +101,8 @@ $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
         </para>
 
         <para>
-            Standmäßig, macht <classname>Zend_Loader_Autoloader</classname> keine Fehlerunterdrückung
-            wenn sein interner Autoloader verwendet wird, der seinerseits
+            Standmäßig, macht <classname>Zend_Loader_Autoloader</classname> keine
+            Fehlerunterdrückung wenn sein interner Autoloader verwendet wird, der seinerseits
             <classname>Zend_Loader::loadClass()</classname> verwendet. Die meiste Zeit ist das genau
             das was man will. Trotzdem, gibt es Fälle in denen man Sie unterdrücken will.
             Man das mit Hilfe von <code>suppressNotFoundWarnings()</code> tun:
@@ -180,9 +180,10 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry>N/A</entry>
                         <entry><para>
-                            empfängt die Singleton Instanz von <classname>Zend_Loader_Autoloader</classname>.
-                            Beim ersten Empfang registriert sich diese selbst bei
-                            <code>spl_autoload</code>. Diese Methode ist statisch.
+                            empfängt die Singleton Instanz von
+                            <classname>Zend_Loader_Autoloader</classname>. Beim ersten Empfang
+                            registriert sich diese selbst bei <code>spl_autoload</code>. Diese
+                            Methode ist statisch.
                         </para></entry>
                     </row>
 

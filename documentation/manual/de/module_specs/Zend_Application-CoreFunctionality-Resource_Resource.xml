@@ -40,7 +40,10 @@
                 </row>
 
                 <row>
-                    <entry><code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</code></entry>
+                    <entry>
+                        <code>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
+                        $bootstrap)</code>
+                    </entry>
                     <entry>
                         <classname>Zend_Application_Resource_Resource</classname>
                     </entry>

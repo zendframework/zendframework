@@ -32,14 +32,14 @@
                         <listitem><para>
                             <code>$application</code>: <emphasis>Benötigt</emphasis>.
                             Akzeptiert entweder ein <classname>Zend_Application</classname> oder ein
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt als sein
-                            einziges Argument.
+                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt
+                            als sein einziges Argument.
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Constructor. Akzeptiert ein einzelnes Argument, welches ein
-                        <classname>Zend_Application</classname> Objekt oder ein anderes Bootstrap Objekt
-                        sein sollte.
+                        <classname>Zend_Application</classname> Objekt oder ein anderes Bootstrap
+                        Objekt sein sollte.
                     </para></entry>
                 </row>
 
@@ -126,7 +126,10 @@
 
                 <row>
                     <entry><code>getApplication()</code></entry>
-                    <entry><classname>Zend_Application | Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>
+                        <classname>Zend_Application |
+                        Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Empfängt das Anwendungs/Bootstrap Objekt das über den Konstruktor übergeben

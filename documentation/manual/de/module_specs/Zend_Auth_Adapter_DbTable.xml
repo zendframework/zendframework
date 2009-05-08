@@ -10,12 +10,13 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Auth_Adapter_DbTable</classname> bietet die Möglichkeit sich gegenüber Zeugnissen zu
-            authentifizieren die in einer Datenbank Tabelle gespeichert sind. Weil
-            <classname>Zend_Auth_Adapter_DbTable</classname> eine Instanz von <classname>Zend_Db_Adapter_Abstract</classname>
-            benötigt, die an den Konstruktor übergeben wird, ist jede Instanz an eine spezielle Datenbank
-            Verbindung verknüpft. Andere Konfigurationsoptionen können durch den Konstruktor gesetzt werden und
-            durch die Methoden der Instanz. Eine für jede Option.
+            <classname>Zend_Auth_Adapter_DbTable</classname> bietet die Möglichkeit sich gegenüber
+            Zeugnissen zu authentifizieren die in einer Datenbank Tabelle gespeichert sind. Weil
+            <classname>Zend_Auth_Adapter_DbTable</classname> eine Instanz von
+            <classname>Zend_Db_Adapter_Abstract</classname> benötigt, die an den Konstruktor
+            übergeben wird, ist jede Instanz an eine spezielle Datenbank Verbindung verknüpft.
+            Andere Konfigurationsoptionen können durch den Konstruktor gesetzt werden und durch die
+            Methoden der Instanz. Eine für jede Option.
         </para>
 
         <para>
@@ -23,36 +24,38 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>tableName</code>: Das ist der Name der Datenbanktabelle welche die Authentifikations
-                        Zeugnisse enthält, und gegen die die Datenbank Authentifikations Abfrage durchgeführt
-                        wird.
+                        <code>tableName</code>: Das ist der Name der Datenbanktabelle welche die
+                        Authentifikations Zeugnisse enthält, und gegen die die Datenbank
+                        Authentifikations Abfrage durchgeführt wird.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>identityColumn</code>: Ist der Name der Spalte der Datenbanktabelle die die
-                        Identität repräsentiert. Die Spalte der Identität muß eindeutige und einmalige Werte
-                        enthalten, wie einen Benutzernamen oder eine Email Adresse.
+                        <code>identityColumn</code>: Ist der Name der Spalte der Datenbanktabelle
+                        die die Identität repräsentiert. Die Spalte der Identität muß eindeutige und
+                        einmalige Werte enthalten, wie einen Benutzernamen oder eine Email Adresse.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialColumn</code>: Das ist der Name der Spalte der Datenbanktabelle die
-                        verwendet wird um die Zeugnisse zu repräsentieren. Bei einem einfachen Identitäts und
-                        Passwort-Authentifizierungs Schema korrespondieren die Zeugnisse mit dem Passwort. Siehe
-                        auch die <code>credentialTreatment</code> Option.
+                        <code>credentialColumn</code>: Das ist der Name der Spalte der
+                        Datenbanktabelle die verwendet wird um die Zeugnisse zu repräsentieren. Bei
+                        einem einfachen Identitäts und Passwort-Authentifizierungs Schema
+                        korrespondieren die Zeugnisse mit dem Passwort. Siehe auch die
+                        <code>credentialTreatment</code> Option.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>credentialTreatment</code>: In vielen Fällen sind Passwörter und andere sensitive
-                        Daten verschlüsselt, gehasht, kodiert, gesalted, verschleiert oder auf andere Weise durch
-                        irgendeine Funktion oder einen Algorithmus behandelt. Durch die Spezifikation eines
-                        parametrisierbaren Behandlungsstrings mit dieser Methode, wie <code>'MD5(?)'</code>
-                        oder <code>'PASSWORD(?)'</code>, könnte ein Entwickler beliebiges SQL an den Eingabe-
-                        Zeugnis-Daten anwenden. Da diese Funktionen der darunter liegenden RDBMS speziell
-                        gehören, sollte das Handbuch der Datenbank auf das Vorhandensein solcher Funktionen
-                        im eigenen Datenbank System geprüft werden.
+                        <code>credentialTreatment</code>: In vielen Fällen sind Passwörter und
+                        andere sensitive Daten verschlüsselt, gehasht, kodiert, gesalted,
+                        verschleiert oder auf andere Weise durch irgendeine Funktion oder einen
+                        Algorithmus behandelt. Durch die Spezifikation eines parametrisierbaren
+                        Behandlungsstrings mit dieser Methode, wie <code>'MD5(?)'</code> oder
+                        <code>'PASSWORD(?)'</code>, könnte ein Entwickler beliebiges SQL an den
+                        Eingabe- Zeugnis-Daten anwenden. Da diese Funktionen der darunter liegenden
+                        RDBMS speziell gehören, sollte das Handbuch der Datenbank auf das
+                        Vorhandensein solcher Funktionen im eigenen Datenbank System geprüft werden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -63,16 +66,18 @@
             <title>Grundsätzliche Verwendung</title>
 
             <para>
-                Wie bereits in der Einführung beschrieben benötigt der <classname>Zend_Auth_Adapter_DbTable</classname>
-                Konstruktor eine Instanz von <classname>Zend_Db_Adapter_Abstract</classname> die als Datenbank Verbindung
-                fungiert zu welcher die Instanz des Authentifizierungs-Adapters gebunden ist. Zuerst sollte die
-                Datenbankverbindung erstellt werden.
+                Wie bereits in der Einführung beschrieben benötigt der
+                <classname>Zend_Auth_Adapter_DbTable</classname> Konstruktor eine Instanz von
+                <classname>Zend_Db_Adapter_Abstract</classname> die als Datenbank Verbindung
+                fungiert zu welcher die Instanz des Authentifizierungs-Adapters gebunden ist. Zuerst
+                sollte die Datenbankverbindung erstellt werden.
             </para>
 
             <para>
-                Der folgende Code erstellt eien Adapter für eine In-Memory Datenbank, erstellt ein einfaches
-                Datenbankschema, und fügt eine Zeile ein gegen die später eine Authentifizierungs-Abfrage
-                durchgeführt werden kann. Dieses Beispiel benötigt die SQLite Erweiterung:
+                Der folgende Code erstellt eien Adapter für eine In-Memory Datenbank, erstellt ein
+                einfaches Datenbankschema, und fügt eine Zeile ein gegen die später eine
+                Authentifizierungs-Abfrage durchgeführt werden kann. Dieses Beispiel benötigt die
+                SQLite Erweiterung:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -101,9 +106,9 @@ $dbAdapter->query($sqlInsert);
 
             <para>
                 Mit der Datenbankverbindung und den vorhandenen Tabellendaten, kann eine Instanz von
-                <classname>Zend_Auth_Adapter_DbTable</classname> erstellt werden. Die Werte der Konfigurationsoptionen
-                können dem Konstruktor übergeben werden, oder als Parameter der setzenden Methoden nach der
-                Instanziierung:
+                <classname>Zend_Auth_Adapter_DbTable</classname> erstellt werden. Die Werte der
+                Konfigurationsoptionen können dem Konstruktor übergeben werden, oder als Parameter
+                der setzenden Methoden nach der Instanziierung:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -125,9 +130,10 @@ $authAdapter
 ]]></programlisting>
 
             <para>
-                An diesem Punkt ist die Instanz des Authentifizierungsadapters bereit um Authentifierungsabfragen
-                zu akzeptieren. Um eine Authentifierungsabfrage zu formulieren, werden die Eingabezeugnis Werte
-                dem Adapter vor dem Aufruf der <code>authenticate()</code> Methode, übergeben:
+                An diesem Punkt ist die Instanz des Authentifizierungsadapters bereit um
+                Authentifierungsabfragen zu akzeptieren. Um eine Authentifierungsabfrage zu
+                formulieren, werden die Eingabezeugnis Werte dem Adapter vor dem Aufruf der
+                <code>authenticate()</code> Methode, übergeben:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -141,8 +147,9 @@ $result = $authAdapter->authenticate();
 ]]></programlisting>
 
             <para>
-                Zusätzlich zum Vorhandensein der <code>getIdentity()</code> Methode über das Authentifizierungs
-                Ergebnisobjekt, unterstützt <classname>Zend_Auth_Adapter_DbTable</classname> auch das empfangen der
+                Zusätzlich zum Vorhandensein der <code>getIdentity()</code> Methode über das
+                Authentifizierungs Ergebnisobjekt, unterstützt
+                <classname>Zend_Auth_Adapter_DbTable</classname> auch das empfangen der
                 Tabellenzeile wenn die Authentifizierung erfolgeich war:
             </para>
 
@@ -167,8 +174,8 @@ Array
 ]]></programlisting>
 
             <para>
-                Da die Zeile der Tabelle die Zeugnis Daten enthält ist es wichtig diese Werte gegenüber
-                unberechtigten Versuchen abzusichern.
+                Da die Zeile der Tabelle die Zeugnis Daten enthält ist es wichtig diese Werte
+                gegenüber unberechtigten Versuchen abzusichern.
             </para>
 
         </example>
@@ -180,12 +187,13 @@ Array
         <title>Fortgeschrittene Verwendung: Ein DbTable Ergebnis Objekt dauerhaft machen</title>
 
         <para>
-            Standardmäßig gibt <classname>Zend_Auth_Adapter_DbTable</classname> die unterstützte Identität an das
-            Auth Objekt bei erfolgreicher Authentifizierung zurück. Ein anderes Verwendungs-Szenario, bei dem
-            Entwickler ein Identitäts Objekt, welches andere nützliche Informationen enthält, in den dauerhaften
-            Speichermechanismus von <classname>Zend_Auth</classname> abspeichern wollen, wird durch die Verwendung der
-            <code>getResultRowObject()</code> Methode gelöst die ein <code>stdClass</code> Objekt zurück gibt.
-            Der folgende Code Abschnitt zeigt diese Verwendung:
+            Standardmäßig gibt <classname>Zend_Auth_Adapter_DbTable</classname> die unterstützte
+            Identität an das Auth Objekt bei erfolgreicher Authentifizierung zurück. Ein anderes
+            Verwendungs-Szenario, bei dem Entwickler ein Identitäts Objekt, welches andere nützliche
+            Informationen enthält, in den dauerhaften Speichermechanismus von
+            <classname>Zend_Auth</classname> abspeichern wollen, wird durch die Verwendung der
+            <code>getResultRowObject()</code> Methode gelöst die ein <code>stdClass</code> Objekt
+            zurück gibt. Der folgende Code Abschnitt zeigt diese Verwendung:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -225,17 +233,18 @@ if ($result->isValid()) {
 
         <para>
             Wärend der primäre Zweck von <classname>Zend_Auth</classname> (und konsequenter Weise
-            <classname>Zend_Auth_Adapter_DbTable</classname>) die <emphasis>Authentifizierung</emphasis>
-            und nicht die <emphasis>Authorisierung</emphasis> ist, gibt es ein paar
-            Instanzen und Probleme auf dem Weg welche Art besser passt. Abhängig davon wie man sich
-            entscheidet ein Problem zu beschreiben, macht es manchmal Sinn, das was wie ein
-            Authorisierungsproblem aussieht im Authentifizierungs-Adapter zu lösen.
+            <classname>Zend_Auth_Adapter_DbTable</classname>) die
+            <emphasis>Authentifizierung</emphasis> und nicht die <emphasis>Authorisierung</emphasis>
+            ist, gibt es ein paar Instanzen und Probleme auf dem Weg welche Art besser passt.
+            Abhängig davon wie man sich entscheidet ein Problem zu beschreiben, macht es manchmal
+            Sinn, das was wie ein Authorisierungsproblem aussieht im Authentifizierungs-Adapter zu
+            lösen.
         </para>
 
         <para>
-            Mit dieser Definition, hat <classname>Zend_Auth_Adapter_DbTable</classname> einige eingebaute
-            Mechanismen die für zusätzliche Checks wärend der Authentifizierungszeit angepasst
-            werden können, um einige übliche Benutzerprobleme zu lösen.
+            Mit dieser Definition, hat <classname>Zend_Auth_Adapter_DbTable</classname> einige
+            eingebaute Mechanismen die für zusätzliche Checks wärend der Authentifizierungszeit
+            angepasst werden können, um einige übliche Benutzerprobleme zu lösen.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -259,11 +268,11 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 ]]></programlisting>
 
         <para>
-            Ein anderes Szenario kann die Implementierung eines Saltingmachanismus sein. Salting ist ein
-            Ausdruck der auf eine Technik verweist die die Sicherheit der Anwendung sehr stark erhöht.
-            Sie basiert auf der Idee das das Anfügen von zufälligen Strings bei jedem Passwort es
-            unmöglich macht eine erfolgreiche Brute-Force Attacke auf die Datenbank durchzuführen bei der
-            vorberechnete Hashwerte aus einem Verzeichnis genommen werden.
+            Ein anderes Szenario kann die Implementierung eines Saltingmachanismus sein. Salting
+            ist ein Ausdruck der auf eine Technik verweist die die Sicherheit der Anwendung sehr
+            stark erhöht. Sie basiert auf der Idee das das Anfügen von zufälligen Strings bei jedem
+            Passwort es unmöglich macht eine erfolgreiche Brute-Force Attacke auf die Datenbank
+            durchzuführen bei der vorberechnete Hashwerte aus einem Verzeichnis genommen werden.
         </para>
 
         <para>
@@ -279,8 +288,8 @@ $dbAdapter->query($sqlAlter);
 ]]></programlisting>
 
         <para>
-            Hier ist ein einfacher Weg um einen Salt String für jeden Benutzer bei der Registrierung zu
-            erstellen:
+            Hier ist ein einfacher Weg um einen Salt String für jeden Benutzer bei der Registrierung
+            zu erstellen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -308,10 +317,10 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         <note>
 
             <para>
-                Die Sicherheit kann sogar noch mehr erhöht werden indem ein statischer Salt Wert hardcoded
-                in der Anwendung verwendet wird. Im Falle das die Datenbank korrumpiert wird (z.B. durch eine
-                SQL Injection Attacke) aber der Webserver intakt bleibt sind die Daten für den Angreifer noch
-                immer nicht verwendbar.
+                Die Sicherheit kann sogar noch mehr erhöht werden indem ein statischer Salt Wert
+                hardcoded in der Anwendung verwendet wird. Im Falle das die Datenbank korrumpiert
+                wird (z.B. durch eine SQL Injection Attacke) aber der Webserver intakt bleibt sind
+                die Daten für den Angreifer noch immer nicht verwendbar.
             </para>
 
         </note>

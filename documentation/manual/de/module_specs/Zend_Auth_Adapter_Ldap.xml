@@ -13,16 +13,16 @@
             <classname>Zend_Auth_Adapter_Ldap</classname> unterstützt Webanwendungen bei der
             Authentifizierung mit LDAP Services. Die Features beinhalten Kanonisierung von
             Benutzernamen und Domainnamen, Mehrfach-Domain Authentifizierung, und Fehlerbehandlungs
-            Features. Es wurde getestet mit
-            <ulink url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
-            Active Directory</ulink> und <ulink url="http://www.openldap.org/">OpenLDAP</ulink>,
+            Features. Es wurde getestet mit <ulink
+                url="http://www.microsoft.com/windowsserver2003/technologies/directory/activedirectory/">Microsoft
+                Active Directory</ulink> und <ulink url="http://www.openldap.org/">OpenLDAP</ulink>,
             sollte auch auch mit anderen LDAP Service Provider zusammenarbeiten.
         </para>
 
         <para>
             Diese Dokumentation enthält eine Anleitung der Verwendung von
-            <classname>Zend_Auth_Adapter_Ldap</classname>, eine Beschreibung der API, eine Ausgabe der
-            verschiedenen Optionen, Diagnostische Informationen für die Fehlerbehandlung bei
+            <classname>Zend_Auth_Adapter_Ldap</classname>, eine Beschreibung der API, eine Ausgabe
+            der verschiedenen Optionen, Diagnostische Informationen für die Fehlerbehandlung bei
             Authentifizierungs Problemen, und Beispiel Optionen für beide, Active Directory und
             OpenLDAP Server.
         </para>
@@ -34,9 +34,9 @@
         <title>Verwendung</title>
 
         <para>
-            Um <classname>Zend_Auth_Adapter_Ldap</classname> Authentifizierung in eigene Anwendungen schnell
-            einzubauen, selbst wenn <classname>Zend_Controller</classname> nicht verwendet wird, sollte das
-            Fleisch des eigenen Codes in etwa wie folgt aussehen:
+            Um <classname>Zend_Auth_Adapter_Ldap</classname> Authentifizierung in eigene Anwendungen
+            schnell einzubauen, selbst wenn <classname>Zend_Controller</classname> nicht verwendet
+            wird, sollte das Fleisch des eigenen Codes in etwa wie folgt aussehen:
             <programlisting role="php"><![CDATA[
 $username = $this->_request->getParam('username');
 $password = $this->_request->getParam('password');
@@ -71,23 +71,24 @@ if ($log_path) {
 }
 ]]></programlisting>
             Natürlich ist der Logging Code optional, aber es wird dringend empfohlen einen Logger
-            zu verwenden. <classname>Zend_Auth_Adapter_Ldap</classname> zeichnet fast jedes Bisschen an
-            Information in <code>$messages</code> auf das irgendwer benötigen können (mehr anbei),
-            was allerdings selbst ein nettes Feature für jemanden als History ist, kann überaus
-            schwierig zu debuggen sein.
+            zu verwenden. <classname>Zend_Auth_Adapter_Ldap</classname> zeichnet fast jedes Bisschen
+            an Information in <code>$messages</code> auf das irgendwer benötigen können (mehr
+            anbei), was allerdings selbst ein nettes Feature für jemanden als History ist, kann
+            überaus schwierig zu debuggen sein.
         </para>
 
         <para>
-            Der <classname>Zend_Config_Ini</classname> wird oben verwendet um die Optionen des Adapters zu
-            laden. Er ist also auch optional. Ein reguläres Array würde genauso gut arbeiten. Das
-            folgende ist eine Beispiel <code>application/config/config.ini</code> Datei die
-            Optionen für zwei separate Server hat. Mit mehreren Sets von Server Optionen versucht
-            der Adapter jede in Reihenfolge bis die Zugangsdaten erfolgreich authentifiziert
-            wurden. Die Namen der Server (z.B., <code>server1</code> und <code>server2</code>) sind
-            sehr verallgemeinert. Für Details betreffend dem Array für Optionen, siehe das Kapitel
-            über <emphasis>Server Optionen</emphasis> weiter unten. Es ist zu beachten das
-            <classname>Zend_Config_Ini</classname> jeden Wert der mit Gleichheitszeichen (<code>=</code>)
-            geschrieben wird auch unter Anführungszeichen gesetzt wird (wie unten bei DNs gezeigt).
+            Der <classname>Zend_Config_Ini</classname> wird oben verwendet um die Optionen des
+            Adapters zu laden. Er ist also auch optional. Ein reguläres Array würde genauso gut
+            arbeiten. Das folgende ist eine Beispiel <code>application/config/config.ini</code>
+            Datei die Optionen für zwei separate Server hat. Mit mehreren Sets von Server Optionen
+            versucht der Adapter jede in Reihenfolge bis die Zugangsdaten erfolgreich
+            authentifiziert wurden. Die Namen der Server (z.B., <code>server1</code> und
+            <code>server2</code>) sind sehr verallgemeinert. Für Details betreffend dem Array für
+            Optionen, siehe das Kapitel über <emphasis>Server Optionen</emphasis> weiter unten. Es
+            ist zu beachten das <classname>Zend_Config_Ini</classname> jeden Wert der mit
+            Gleichheitszeichen (<code>=</code>) geschrieben wird auch unter Anführungszeichen
+            gesetzt wird (wie unten bei DNs gezeigt).
             <programlisting role="ini"><![CDATA[
 [production]
 
@@ -112,10 +113,10 @@ ldap.server2.accountCanonicalForm = 3
 ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
 ]]>
 </programlisting>
-            Die obige Konfiguration instruiert <classname>Zend_Auth_Adapter_Ldap</classname> das es versuchen
-            soll Benutzer zuerst mit dem OpenLDAP Server <code>s0.foo.net</code> authentifizieren
-            soll. Wenn die Authentifizierung auf irgendeinem Grund fehlschlägt, wird der AD Server
-            <code>dc1.w.net</code> versucht.
+            Die obige Konfiguration instruiert <classname>Zend_Auth_Adapter_Ldap</classname> das es
+            versuchen soll Benutzer zuerst mit dem OpenLDAP Server <code>s0.foo.net</code>
+            authentifizieren soll. Wenn die Authentifizierung auf irgendeinem Grund fehlschlägt,
+            wird der AD Server <code>dc1.w.net</code> versucht.
         </para>
 
         <para>
@@ -144,9 +145,10 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
         <para>
             Der <code>$options</code> Parameter wird benötigt und muß ein Array sein das ein oder
             mehrere Sets von Optionen enthält. Es ist zu beachten das es sich um
-            <emphasis>Array von Arrays</emphasis> von <link linkend="zend.ldap"><classname>Zend_Ldap</classname></link>
-            Optionen handelt. Selbst wenn nur ein einzelner LDAP Server verwendet wird, müssen die
-            Optionen trotzdem in einem anderen Array sein.
+            <emphasis>Array von Arrays</emphasis> von <link
+                linkend="zend.ldap"><classname>Zend_Ldap</classname></link> Optionen handelt. Selbst
+            wenn nur ein einzelner LDAP Server verwendet wird, müssen die Optionen trotzdem in einem
+            anderen Array sein.
         </para>
 
         <para>
@@ -207,10 +209,10 @@ Array
         <para>
             Die Namen von Servern (z.B. '<code>server1</code>' und '<code>server2</code>' wie unten
             gezeigt) sind großteils beliebig, aber aus Gründen der Verwendung von
-            <classname>Zend_Config</classname> sollten die Identifikatoren (im Gegensatz dazu das Sie
-            nummerische Indezes sind) vorhanden sein, und sollten keine spezielle Zeichen enthalten
-            die vom assoziierten Dateiformat verwendet werden (z.B. der '<code>.</code>' INI
-            Eigenschafts Separator, '<code>&amp;</code>' für XML Entity Referenzen, usw.).
+            <classname>Zend_Config</classname> sollten die Identifikatoren (im Gegensatz dazu das
+            Sie nummerische Indezes sind) vorhanden sein, und sollten keine spezielle Zeichen
+            enthalten die vom assoziierten Dateiformat verwendet werden (z.B. der '<code>.</code>'
+            INI Eigenschafts Separator, '<code>&amp;</code>' für XML Entity Referenzen, usw.).
         </para>
 
         <para>
@@ -224,26 +226,27 @@ Array
             <para>
                 Wenn die <code>authenticate()</code> Methode aufgerufen wird, iteriert der Adapter
                 über jedes Set von Serveroptione, setzt diese auf der internen
-                <classname>Zend_Ldap</classname> Instanz und ruft die <classname>Zend_Ldap::bind()</classname> Methode,
-                mit dem Benutzernamen und Passwort das authentifiziert werden soll, auf. Die
-                <classname>Zend_Ldap</classname> Klasse prüft um zu sehen ob der Benutzer mit einer Domain
-                qualifiziert ist (hat z.B. eine Domainkomponente wie
-                <emphasis>alice@foo.net</emphasis> oder <emphasis>FOO\alice</emphasis>). Wenn eine
-                Domain vorhanden ist, aber mit keiner der Domainnamen der Server
-                (<emphasis>foo.net</emphasis> oder <emphasis>FOO</emphasis>) übereinstimmt, wird
-                eine spezielle Ausnahme geworfen und durch <classname>Zend_Auth_Adapter_Ldap</classname>
-                gefangen, was bewirkt das der Server ignoriert wird und der nächste, in den
-                Serveroptionen gesetzte Server, ausgewählt wird. Wenn eine Domain
-                <emphasis>doch</emphasis> passt, oder der Benutzer keinen qualifizierten
-                Benutzernamen angegeben hat, fährt <classname>Zend_Ldap</classname> weiter fort und versucht
-                mit den angegebenen Zugangsdaten zu binden. Wenn das Binden nicht erfolgreich war
-                wirft <classname>Zend_Ldap</classname> eine <classname>Zend_Ldap_Exception</classname> welche durch
+                <classname>Zend_Ldap</classname> Instanz und ruft die
+                <classname>Zend_Ldap::bind()</classname> Methode, mit dem Benutzernamen und Passwort
+                das authentifiziert werden soll, auf. Die <classname>Zend_Ldap</classname> Klasse
+                prüft um zu sehen ob der Benutzer mit einer Domain qualifiziert ist (hat z.B. eine
+                Domainkomponente wie <emphasis>alice@foo.net</emphasis> oder
+                <emphasis>FOO\alice</emphasis>). Wenn eine Domain vorhanden ist, aber mit keiner der
+                Domainnamen der Server (<emphasis>foo.net</emphasis> oder <emphasis>FOO</emphasis>)
+                übereinstimmt, wird eine spezielle Ausnahme geworfen und durch
+                <classname>Zend_Auth_Adapter_Ldap</classname> gefangen, was bewirkt das der Server
+                ignoriert wird und der nächste, in den Serveroptionen gesetzte Server, ausgewählt
+                wird. Wenn eine Domain <emphasis>doch</emphasis> passt, oder der Benutzer keinen
+                qualifizierten Benutzernamen angegeben hat, fährt <classname>Zend_Ldap</classname>
+                weiter fort und versucht mit den angegebenen Zugangsdaten zu binden. Wenn das Binden
+                nicht erfolgreich war wirft <classname>Zend_Ldap</classname> eine
+                <classname>Zend_Ldap_Exception</classname> welche durch
                 <classname>Zend_Auth_Adapter_Ldap</classname> gefangen wird, und das nächste Ser von
                 Serveroptionen wird versucht. Wenn das Binden erfolgreich war, wird die Iteration
                 gestoppt, und die <code>authenticate()</code> Methode des Adapters gibt ein
                 erfolgreiches Ergebnis zurück. Wenn alle Serveroptionen ohne erfolg durchprobiert
-                wurden, schlägt die Authentifizierung fehl, und <code>authenticate()</code> gibt
-                ein Fehlerergebnis zurück mit der Fehlermeldung der letzten Iteration.
+                wurden, schlägt die Authentifizierung fehl, und <code>authenticate()</code> gibt ein
+                Fehlerergebnis zurück mit der Fehlermeldung der letzten Iteration.
             </para>
         </note>
 
@@ -262,9 +265,10 @@ Array
         <title>Server Optionen</title>
 
         <para>
-            Jedes Set von Serveroptionen <emphasis>im Kontext von <classname>Zend_Auth_Adapter_Ldap</classname></emphasis>
-            besteht aus den folgenden Optionen welche, großteils ungeändert, an
-            <classname>Zend_Ldap::setOptions()</classname> übergeben werden:
+            Jedes Set von Serveroptionen <emphasis>im Kontext von
+            <classname>Zend_Auth_Adapter_Ldap</classname></emphasis> besteht aus den folgenden
+            Optionen welche, großteils ungeändert, an <classname>Zend_Ldap::setOptions()</classname>
+            übergeben werden:
 
             <table id="zend.auth.adapter.ldap.server-options.table">
               <title>Server Optionen</title>
@@ -296,25 +300,26 @@ Array
                   <row>
                     <entry>useStartTls</entry>
                     <entry>
-                        Ob der LDAP Client einen TSL (aka SSLv2) verschlüsselten Transport verwenden soll
-                        oder nicht. Der Wert <code>true</code> wird in einer Produktionsumgebung strengstens
-                        empfohlen um zu verhindern das Passwörter im Klartext übertragen werden. Der
-                        Standardwert ist <code>false</code>, da Server typischerweise nach deren Installation
-                        erwarten das ein Zertifikat installiert wird. Die <code>useSsl</code> und
-                        <code>useStartTls</code> Optionen schließen sich gegenseitig aus. Die
-                        <code>useStartTls</code> Option sollte über <code>useSsl</code> favorisiert werden,
-                        aber nicht alle Server unterstützen diesen neueren Mechanismus.
+                        Ob der LDAP Client einen TSL (aka SSLv2) verschlüsselten Transport verwenden
+                        soll oder nicht. Der Wert <code>true</code> wird in einer
+                        Produktionsumgebung strengstens empfohlen um zu verhindern das Passwörter im
+                        Klartext übertragen werden. Der Standardwert ist <code>false</code>, da
+                        Server typischerweise nach deren Installation erwarten das ein Zertifikat
+                        installiert wird. Die <code>useSsl</code> und <code>useStartTls</code>
+                        Optionen schließen sich gegenseitig aus. Die <code>useStartTls</code> Option
+                        sollte über <code>useSsl</code> favorisiert werden, aber nicht alle Server
+                        unterstützen diesen neueren Mechanismus.
                     </entry>
                   </row>
                   <row>
                     <entry>useSsl</entry>
                     <entry>
                         Ob der LDAP Client einen SSL verschlüsselten Transport verwenden soll. Die
-                        <code>useSsl</code> und <code>useStartTls</code> Optionen schließen sich gegenseitig
-                        aus, aber <code>useStartTls</code> sollte favorisiert werden wenn der Server und die
-                        LDAP Bibliothek des Clients diese unterstützen. Dieser Wert ändert auch den
-                        Standardwert von <emphasis>port</emphasis> (siehe die
-                        <emphasis>port</emphasis> Beschreibung weiter oben).
+                        <code>useSsl</code> und <code>useStartTls</code> Optionen schließen sich
+                        gegenseitig aus, aber <code>useStartTls</code> sollte favorisiert werden
+                        wenn der Server und die LDAP Bibliothek des Clients diese unterstützen.
+                        Dieser Wert ändert auch den Standardwert von <emphasis>port</emphasis>
+                        (siehe die <emphasis>port</emphasis> Beschreibung weiter oben).
                     </entry>
                   </row>
                   <row>
@@ -345,17 +350,17 @@ Array
                         Einige LDAP Server benötigen den zum Binden verwendeten Benutzernamen in
                         der DN Form wie <emphasis>CN=Alice Baker,OU=Sales,DC=foo,DC=net</emphasis>
                         (grundsätzlich alle Server <emphasis>außer</emphasis> AD). Wenn diese
-                        Option <code>true</code> ist, instuiert dies <classname>Zend_Ldap</classname> das der
-                        DN automatisch empfangen wird, abhängig vom Benutzernamen der
-                        authentifiziert wird, wenn er nicht bereits in DN Form ist, und diesen dann
-                        wieder mit der richtigen DN zu binden. Der Standardwert ist
-                        <code>false</code>. Aktuell ist nur von Microsoft Active Directory Server
-                        (ADS) bekannt das es den Benutzernamen <emphasis>nicht</emphasis> in der DN
-                        Form benötigt wenn gebunden wird, und deswegen kann diese Option mit AD
-                        auch <code>false</code> sein (und sollte das auch, da das Empfangen des DN
-                        eine extra Anfrage zum Server benötigt). Andernfalls muß diese Option auf
-                        <code>true</code> gesetzt werden (z.B. für OpenLDAP). Diese Option
-                        kontrolliert das Standard
+                        Option <code>true</code> ist, instuiert dies
+                        <classname>Zend_Ldap</classname> das der DN automatisch empfangen wird,
+                        abhängig vom Benutzernamen der authentifiziert wird, wenn er nicht bereits
+                        in DN Form ist, und diesen dann wieder mit der richtigen DN zu binden. Der
+                        Standardwert ist <code>false</code>. Aktuell ist nur von Microsoft Active
+                        Directory Server (ADS) bekannt das es den Benutzernamen
+                        <emphasis>nicht</emphasis> in der DN Form benötigt wenn gebunden wird, und
+                        deswegen kann diese Option mit AD auch <code>false</code> sein (und sollte
+                        das auch, da das Empfangen des DN eine extra Anfrage zum Server benötigt).
+                        Andernfalls muß diese Option auf <code>true</code> gesetzt werden (z.B. für
+                        OpenLDAP). Diese Option kontrolliert das Standard
                         <emphasis>acountFilterFormat</emphasis> das verwendet wird
                         wenn nach Accounts gesucht wird. Siehe auch die
                         <emphasis>accountFilterFormat</emphasis> Option.
@@ -387,8 +392,8 @@ Array
                         <emphasis>alice@foo.net</emphasis>). Der Standardwert ist 4 (z.B.,
                         <emphasis>alice@foo.net</emphasis>). Mit einem Wert von 3, z.B., wird die
                         Identität die von <classname>Zend_Auth_Result::getIdentity()</classname>
-                        zurückgegeben wird (und <classname>Zend_Auth::getIdentity()</classname>, wenn
-                        <classname>Zend_Auth</classname> verwendet wird), immer
+                        zurückgegeben wird (und <classname>Zend_Auth::getIdentity()</classname>,
+                        wenn <classname>Zend_Auth</classname> verwendet wird), immer
                         <emphasis>FOO\alice</emphasis> sein, unabhängig von der Form in der Alice
                         angegeben wurde, egal ob es <emphasis>alice</emphasis>,
                         <emphasis>alice@foo.net</emphasis>, <emphasis>FOO\alice</emphasis>,
@@ -454,16 +459,16 @@ Array
                         <code>true</code> gesetzt. In diesem Fall ist der Standardwert
                         '<code>(&amp;(objectClass=posixAccount)(uid=%s))</code>'. Wenn, zum
                         Beispiel, aus irgendeinem Grund <code>bindRequiresDn = true</code> mti AD
-                        verwendet werden soll, muß
-                        <code>accountFilterFormat = '(&amp;(objectClass=user)(sAMAccountName=%s))</code>'
-                        gesetzt werden.
+                        verwendet werden soll, muß <code>accountFilterFormat =
+                        '(&amp;(objectClass=user)(sAMAccountName=%s))</code>' gesetzt werden.
                     </entry>
                   </row>
                   <row>
                     <entry><emphasis>optReferrals</emphasis></entry>
                     <entry>
-                        Wenn sie auf <code>true</code> gesetzt wird, zeigt diese Option dem LDAP Client an,
-                        das Referenzen gefolgt werden soll. Der Standardwert ist <code>false</code>.
+                        Wenn sie auf <code>true</code> gesetzt wird, zeigt diese Option dem LDAP
+                        Client an, das Referenzen gefolgt werden soll. Der Standardwert ist
+                        <code>false</code>.
                     </entry>
                   </row>
                 </tbody>
@@ -496,8 +501,8 @@ Array
             <classname>Zend_Auth_Adapter_Ldap</classname> sammelt Debug Informationen in seiner
             <code>authenticate()</code> Methode. Diese Information wird im
             <classname>Zend_Auth_Result</classname> Objekt als Nachrichten gespeichert. Das von
-            <classname>Zend_Auth_Result::getMessages()</classname> zurückgegebene Array kann wie folgt
-            beschrieben werden:
+            <classname>Zend_Auth_Result::getMessages()</classname> zurückgegebene Array kann wie
+            folgt beschrieben werden:
 
             <table id="zend.auth.adapter.ldap.debugging.table">
               <title>Debug Nachrichten</title>
@@ -581,7 +586,8 @@ Array
                       <row>
                         <entry><emphasis>useSsl</emphasis></entry>
                         <entry>
-                            Möglicherweise als Alternative zu <code>useStartTls</code> zu verwenden (siehe davor).
+                            Möglicherweise als Alternative zu <code>useStartTls</code> zu verwenden
+                            (siehe davor).
                         </entry>
                       </row>
                       <row>
@@ -633,11 +639,12 @@ Array
             <note>
                 <para>
                     Technisch sollte es keine Probleme mit irrtümlichen Domain-übergreifenden
-                    Authentifizierungen mit der aktuellen <classname>Zend_Auth_Adapter_Ldap</classname>
-                    Implementation geben, da Serverdomains explizit geprüft werden, aber das muss
-                    für zukünftige Implementationen, die die Domain wärend der Laufzeit ermitteln,
-                    nicht wahr sein, oder auch wenn ein alternativer Adapter verwendet wird (z.B.,
-                    Kerberos). Generell ist bekannt das die Mehrdeutigkeit von Accountnamen ein
+                    Authentifizierungen mit der aktuellen
+                    <classname>Zend_Auth_Adapter_Ldap</classname> Implementation geben, da
+                    Serverdomains explizit geprüft werden, aber das muss für zukünftige
+                    Implementationen, die die Domain wärend der Laufzeit ermitteln, nicht wahr sein,
+                    oder auch wenn ein alternativer Adapter verwendet wird (z.B., Kerberos).
+                    Generell ist bekannt das die Mehrdeutigkeit von Accountnamen ein
                     Sicherheitsproblem ist. Man sollte deswegen immer versuchen qualifizierte
                     Accountnamen zu verwenden.
                 </para>
@@ -679,7 +686,8 @@ Array
                       <row>
                         <entry><emphasis>useSsl</emphasis></entry>
                         <entry>
-                            Möglicherweise als Alternative zu <code>useStartTls</code> zu verwenden (siehe davor).
+                            Möglicherweise als Alternative zu <code>useStartTls</code> zu verwenden
+                            (siehe davor).
                         </entry>
                       </row>
                       <row>

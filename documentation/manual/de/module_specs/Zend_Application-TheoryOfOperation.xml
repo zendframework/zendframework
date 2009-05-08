@@ -151,48 +151,46 @@ interface Zend_Application_Bootstrap_Bootstrapper
 ]]></programlisting>
 
         <para>
-            This API allows the bootstrap to accept the environment and
-            configuration from the application object, report the resources its
-            responsible for bootstrapping, and then bootstrap and run the
-            application.
+            Diese API erlaubt es dem Bootstrap die Umgebung und die Konfiguration vom Objekt der
+            Anwendung zu akzeptieren, die Ressourcen die für das Bootstrapping verantwortlich sind
+            zu melden, und dann das Bootstrappen ausführen und die Anwendung zu starten.
         </para>
 
         <para>
-            You can implement this interface on your own, extend
-            <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>, or use
-            <classname>Zend_Application_Bootstrap_Bootstrap</classname>.
+            Man kann dieses Interface selbst implementieren,
+            <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> erweitern, oder
+            <classname>Zend_Application_Bootstrap_Bootstrap</classname> verwenden.
         </para>
 
         <para>
-            Besides this functionality, there are a number of other areas of
-            concern you should familiarize yourself with.
+            Neben dieser Funktionalität gibt es eine Anzahl anderer Gebiete von Interesse mit denen
+            man vertraut sein sollte.
         </para>
 
         <sect3 id="zend.application.theory-of-operation.bootstrap.resource-methods">
-            <title>Resource Methods</title>
+            <title>Methoden für Ressourcen</title>
 
             <para>
-                The <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname>
-                implementation provides a simple convention for defining class
-                resource methods. Any protected method beginning with a name
-                prefixed with <code>_init</code> will be considered a resource
-                method.
+                Die Implementation von
+                <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> bietet eine
+                einfache Konvention für die Definition von Methoden für Ressourcen Klassen. Jede
+                geschützte Methode (protected), deren Name mit <code>_init</code> beginnt
+                wird als Ressourcemethode angenommen.
             </para>
 
             <para>
-                To bootstrap a single resource method, use the
-                <code>bootstrap()</code> method, and pass it the name of the
-                resource. The name will be the method name minus the
-                <code>_init</code> prefix.
+                Um eine einzelne Ressource Methode zu bootstrappen, muß die <code>bootstrap()</code>
+                Methode verwendet, und der Name der Ressource übergeben werden. Der Name ist der
+                Name der Methode ohne den <code>_init</code> Präfix.
             </para>
 
             <para>
-                To bootstrap several resource methods, pass an array of names.
-                Too bootstrap all resource methods, pass nothing.
+                Um mehrere Ressourcen Methoden zu bootstrappen, muß ein Array von Namen übergeben
+                werden. Um alle Ressourcen Methoden zu bootstrappen, darf nichts übergeben werden.
             </para>
 
             <para>
-                Take the following bootstrap class:
+                Nehmen wir die folgende Bootstrap Klasse an:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -216,8 +214,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
             <para>
-                $o bootstrap just the <code>_initFoo()</code> method, do the
-                following:
+                Um nur die <code>_initFoo()</code> Methode zu bootstrappen, machen wir das folgende:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -225,8 +222,8 @@ $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
             <para>
-                To bootstrap the <code>_initFoo()</code> and
-                <code>_initBar()</code> methods, do the following:
+                Um die Methoden <code>_initFoo()</code> und <code>_initBar()</code> zu bootstrappen,
+                machen wir das folgende:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -234,8 +231,8 @@ $bootstrap->bootstrap(array('foo', 'bar));
 ]]></programlisting>
 
             <para>
-                To bootstrap all resource methods, call <code>bootstrap()</code>
-                with no arguments:
+                Um alle Ressourcen Methoden zu bootstrappen, rufen wir <code>bootstrap()</code> ohne
+                Argumente auf:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -244,7 +241,7 @@ $bootstrap->bootstrap();
         </sect3>
 
         <sect3 id="zend.application.theory-of-operation.bootstrap.resource-plugins">
-            <title>Bootstraps that use resource plugins</title>
+            <title>Bootstraps die Ressourcen Plugins benutzen</title>
 
             <para>
                 To make your bootstraps more re-usable, we have provided the
@@ -526,8 +523,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Resource Plugins</title>
 
         <para>
-            <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted previously</link>,
-            a good way to create re-usable bootstrap resources and to offload
+            <link linkend="zend.application.theory-of-operation.bootstrap.resource-plugins">As noted
+                previously</link>, a good way to create re-usable bootstrap resources and to offload
             much of your coding to discrete classes is to utilize resource
             plugins. While Zend Framework ships with a number of standard
             resource plugins, the intention is that developers should write

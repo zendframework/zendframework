@@ -10,16 +10,17 @@
         <title>Einführung</title>
 
         <para>
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest Authentifizierung</ulink>
-            ist eine Methode der HTTP Authentifizierung die die
-            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis Authentifizierung</ulink>
-            verbessert indem ein Weg angeboten wird um Authentifizierungen, ohne die Übermittlung des Passwortes
-            als Klartext über das Netzwerk, durchzuführen.
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest
+                Authentifizierung</ulink> ist eine Methode der HTTP Authentifizierung die die
+            <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis
+                Authentifizierung</ulink> verbessert indem ein Weg angeboten wird um
+            Authentifizierungen, ohne die Übermittlung des Passwortes als Klartext über das
+            Netzwerk, durchzuführen.
         </para>
 
         <para>
-            Dieser Adapter erlaubt Authentifizierungen gegen Textdateien die Zeilen enthalten die folgende
-            Basiselemente der Digest Authentifizierung enthalten:
+            Dieser Adapter erlaubt Authentifizierungen gegen Textdateien die Zeilen enthalten die
+            folgende Basiselemente der Digest Authentifizierung enthalten:
             <itemizedlist>
                 <listitem>
                     <para>
@@ -37,8 +38,8 @@
                     </para>
                 </listitem>
             </itemizedlist>
-            Die obigen Elemente werden durch Doppelpunkte getrennt, wie im folgenden Beispiel (in dem das Passwort
-            "<code>irgendeinPasswort</code>" ist):
+            Die obigen Elemente werden durch Doppelpunkte getrennt, wie im folgenden Beispiel (in
+            dem das Passwort "<code>irgendeinPasswort</code>" ist):
         </para>
 
         <programlisting><![CDATA[
@@ -53,12 +54,13 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
         <title>Spezifisches</title>
 
         <para>
-            Der Digest Authentifizierungs Adapter, <classname>Zend_Auth_Adapter_Digest</classname>, benötigt verschiedene
-            Eingabeparameter:
+            Der Digest Authentifizierungs Adapter, <classname>Zend_Auth_Adapter_Digest</classname>,
+            benötigt verschiedene Eingabeparameter:
             <itemizedlist>
                 <listitem>
                     <para>
-                        filename - Der Dateiename gegen den Authentifizierungs-Anfragen durchgeführt werden
+                        filename - Der Dateiename gegen den Authentifizierungs-Anfragen durchgeführt
+                        werden
                     </para>
                 </listitem>
                 <listitem>
@@ -87,11 +89,11 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
         <title>Identität</title>
 
         <para>
-            Der Digest Authentifizierungs Adapter gibt ein <classname>Zend_Auth_Result</classname> Objekt zurück, welches
-            mit der Identität wird wobei dieses als Arry mit Schlüssel von <code>Bereich</code>
-            und <code>Benutzername</code> veröffentlicht wird. Die entsprechenden Array Werte die diesen
-            Schlüsseln zugeordnet sind korrespondieren mit den Werte die vorher durch den Aufruf von
-            <code>authenticate()</code> gesetzt wurden.
+            Der Digest Authentifizierungs Adapter gibt ein <classname>Zend_Auth_Result</classname>
+            Objekt zurück, welches mit der Identität wird wobei dieses als Arry mit Schlüssel von
+            <code>Bereich</code> und <code>Benutzername</code> veröffentlicht wird. Die
+            entsprechenden Array Werte die diesen Schlüsseln zugeordnet sind korrespondieren mit den
+            Werte die vorher durch den Aufruf von <code>authenticate()</code> gesetzt wurden.
         </para>
 
         <programlisting role="php"><![CDATA[

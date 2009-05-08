@@ -24,8 +24,8 @@ $mail->send();  // wieder Standardmethode verwenden
     <note>
         <title>Zusätzliche Versandwege</title>
         <para>
-            Weitere Versandwege können geschrieben werden, indem  <classname>Zend_Mail_Transport_Interface</classname>
-            implementiert wird.
+            Weitere Versandwege können geschrieben werden, indem
+             <classname>Zend_Mail_Transport_Interface</classname> implementiert wird.
         </para>
     </note>
 </sect1>

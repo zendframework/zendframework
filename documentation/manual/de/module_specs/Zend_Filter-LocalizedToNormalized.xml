@@ -195,7 +195,6 @@ $filter->filter('11:22:33');
     </sect3>
 
 </sect2>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

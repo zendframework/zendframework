@@ -8,21 +8,22 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Service_ReCaptcha</classname> bietet einen Client für das
-            <ulink url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>. Laut der reCAPTCHA Seite ist
-            "reCAPTCHA ein freies CAPTCHA Service das hilft Bücher zu digitalisieren." Jedes reCAPTCHA
-            verlangt das der Benutzer zwei Wörter eingibt, das erste ist das aktuelle Captcha, und das
-            zweite ist ein Wort von einem eingescannten Text bei dem Software für optische Zeichenerkennung
-            (OCR) keine Identifizierung durchführen kann. Die Annahme ist das, wenn der Benutzer das erste
-            Wort richtig angegeben hat, dass dann das zweite auch korrekt angegeben wird, und das dieses
-            dann verwendet werden kann um OCR Software für die Digitalisierung von Büchern zu verbessern.
+            <classname>Zend_Service_ReCaptcha</classname> bietet einen Client für das <ulink
+                url="http://recaptcha.net/">reCAPTCHA Web Service</ulink>. Laut der reCAPTCHA Seite
+            ist "reCAPTCHA ein freies CAPTCHA Service das hilft Bücher zu digitalisieren." Jedes
+            reCAPTCHA verlangt das der Benutzer zwei Wörter eingibt, das erste ist das aktuelle
+            Captcha, und das zweite ist ein Wort von einem eingescannten Text bei dem Software für
+            optische Zeichenerkennung (OCR) keine Identifizierung durchführen kann. Die Annahme ist
+            das, wenn der Benutzer das erste Wort richtig angegeben hat, dass dann das zweite auch
+            korrekt angegeben wird, und das dieses dann verwendet werden kann um OCR Software für
+            die Digitalisierung von Büchern zu verbessern.
         </para>
 
         <para>
             Um den reCAPTCHA Service zu verwenden muß man
             <ulink url="http://recaptcha.net/whyrecaptcha.html">einen Account unterzeichnen</ulink>
-            und eine oder mehrere Domains beim Service registrieren um öffentliche und private Schlüssel
-            zu erzeugen.
+            und eine oder mehrere Domains beim Service registrieren um öffentliche und private
+            Schlüssel zu erzeugen.
         </para>
     </sect2>
 
@@ -30,8 +31,8 @@
         <title>Einfachste Verwendung</title>
 
         <para>
-            Ein <classname>Zend_Service_ReCaptcha</classname> Objekt instanzieren, und ihm den öffentlichen und
-            privaten Schlüssel übergeben:
+            Ein <classname>Zend_Service_ReCaptcha</classname> Objekt instanzieren, und ihm den
+            öffentlichen und privaten Schlüssel übergeben:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -39,7 +40,8 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
         <para>
-            Um das reCAPTCHA darzustellen, muß einfach die <code>getHTML()</code> Methode aufgerufen werden:
+            Um das reCAPTCHA darzustellen, muß einfach die <code>getHTML()</code> Methode aufgerufen
+            werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -61,8 +63,8 @@ $result = $recaptcha->verify(
 
         <para>
             Sobald man das Ergebnis hat, kann es getestet werden um zu sehen ob es gültig ist. Das
-            Ergebnis ist ein <classname>Zend_Service_ReCaptcha_Response</classname> Objekt, welche eine
-            <code>isValid()</code> Methode anbietet.
+            Ergebnis ist ein <classname>Zend_Service_ReCaptcha_Response</classname> Objekt, welche
+            eine <code>isValid()</code> Methode anbietet.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -73,10 +75,11 @@ if (!$result->isValid()) {
 
         <para>
             Noch einfacher zu verwenden ist
-            <link linkend="zend.captcha.adapters.recaptcha">der ReCaptcha</link> <classname>Zend_Captcha</classname>
-            Adapter, oder diesen Adapter als Backend für das
-            <link linkend="zend.form.standardElements.captcha">Captcha Formularelement</link> zu verwenden.
-            In jedem Fall werden die Details der Darstellung und Prüfung des reCAPTCHA automatisch durchgeführt.
+            <link linkend="zend.captcha.adapters.recaptcha">der ReCaptcha</link>
+            <classname>Zend_Captcha</classname> Adapter, oder diesen Adapter als Backend für das
+            <link linkend="zend.form.standardElements.captcha">Captcha Formularelement</link> zu
+            verwenden. In jedem Fall werden die Details der Darstellung und Prüfung des reCAPTCHA
+            automatisch durchgeführt.
         </para>
     </sect2>
 </sect1>

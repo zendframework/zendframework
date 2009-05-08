@@ -38,12 +38,13 @@ $client->setConfig(array(
             </example>
 
             <note><para>
-                Zend_Http_Client verwendet Zend_Uri_Http um URLs zu prüfen. Das bedeutet das einige spezielle
-                Zeichen wie das Pipe-Symbol ('|') oder das Karet Symbol ('^') in der URL standardmäßig nicht
-                akzeptiert werden.
+                Zend_Http_Client verwendet Zend_Uri_Http um URLs zu prüfen. Das bedeutet das einige
+                spezielle Zeichen wie das Pipe-Symbol ('|') oder das Karet Symbol ('^') in der URL
+                standardmäßig nicht akzeptiert werden.
 
-                Das kann geändert werden indem die 'allow_unwise' Option von Zend_Uri auf 'true' gesetzt
-                wird. Siehe <xref linkend="zend.uri.validation.allowunwise" /> für mehr Informationen.
+                Das kann geändert werden indem die 'allow_unwise' Option von Zend_Uri auf 'true'
+                gesetzt wird. Siehe <xref linkend="zend.uri.validation.allowunwise" /> für mehr
+                Informationen.
             </para></note>
         </para>
     </sect2>
@@ -101,7 +102,9 @@ $client->setConfig(array(
                         </row>
                         <row>
                             <entry>httpversion</entry>
-                            <entry>Version des HTTP Protokolls (normalerweise '1.1' oder '1.0')</entry>
+                            <entry>
+                                Version des HTTP Protokolls (normalerweise '1.1' oder '1.0')
+                            </entry>
                             <entry>string</entry>
                             <entry>'1.1'</entry>
                         </row>
@@ -114,17 +117,21 @@ $client->setConfig(array(
                         </row>
                         <row>
                             <entry>keepalive</entry>
-                            <entry>Ob keep-alive Verbindungen mit dem Server aktiviert werden
-                            sollen. Nützlich und kann die Performance verbessern, wenn mehrere
-                            aufeinanderfolgend Anfragen an den selben Server ausgeführt werden.</entry>
+                            <entry>
+                                Ob keep-alive Verbindungen mit dem Server aktiviert werden sollen.
+                                Nützlich und kann die Performance verbessern, wenn mehrere
+                                aufeinanderfolgend Anfragen an den selben Server ausgeführt werden.
+                            </entry>
                             <entry>boolean</entry>
                             <entry>false</entry>
                         </row>
                         <row>
                             <entry>storeresponse</entry>
-                            <entry>Ob die letzte Antwort für einen späteren Aufruf von getLastResponse()
-                                gespeichert werden soll. Wird sie auf false gesetzt gibt
-                                getLastResponse() null zurück.</entry>
+                            <entry>
+                                Ob die letzte Antwort für einen späteren Aufruf von
+                                getLastResponse() gespeichert werden soll. Wird sie auf false
+                                gesetzt gibt getLastResponse() null zurück.
+                            </entry>
                             <entry>boolean</entry>
                             <entry>true</entry>
                         </row>
@@ -235,10 +242,10 @@ $client->setParameterPost(array(
         <para>
             Zend_Http_Client bietet Methoden um Zugriff auf die letzte gesendete Anfrage und die
             letzte empfangene Antwort des Client Objekts zu bekommen.
-            <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt die
-            letzte HTTP Anfrage als String zurück die der Client gesendet hat. Auf die gleiche Art
-            und Weise gibt <classname>Zend_Http_Client->getLastResponse()</classname> die letzte HTTP
-            Antwort als <link linkend="zend.http.response">Zend_Http_Response</link> Objekt
+            <classname>Zend_Http_Client->getLastRequest()</classname> hat keine Parameter und gibt
+            die letzte HTTP Anfrage als String zurück die der Client gesendet hat. Auf die gleiche
+            Art und Weise gibt <classname>Zend_Http_Client->getLastResponse()</classname> die letzte
+            HTTP Antwort als <link linkend="zend.http.response">Zend_Http_Response</link> Objekt
             zurück die der Client empfangen hat.
         </para>
     </sect2>

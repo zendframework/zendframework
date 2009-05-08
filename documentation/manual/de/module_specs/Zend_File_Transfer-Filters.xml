@@ -8,7 +8,7 @@
     <para>
         <classname>Zend_File_Transfer</classname> wird mit verschiedenen Datei bezogenen Filtern ausgeliefert die
         verwendet werden können um verschiedene Arbeiten die oft auf Dateien angewendet werden zu automatisieren.
-        Es ist zu beachten das Dateifilter nach der Validierung angewendet werden. Dateifilter verhlaten sich
+        Es ist zu beachten das Dateifilter nach der Validierung angewendet werden. Dateifilter verhalten sich
         auch etwas anders als andere Filter. Sie geben immer den Dateinamen zurück, und nicht den
         geänderten Inhalt (was eine schlechte Idee wäre wenn auf 1GB Dateien gearbeitet wird). Alle Dateifilter
         welche mit <classname>Zend_File_Transfer</classname> angeboten werden können in der <classname>Zend_Filter</classname>

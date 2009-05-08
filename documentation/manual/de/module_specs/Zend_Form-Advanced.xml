@@ -156,10 +156,11 @@
             basiert auf dem Namen des Unterformulars, mit den Schlüsseln basierend auf den
             Elementen, die im Unterformualr enthalten sind. Unterformulare können beliebig tief
             verschachtelt sein, und das erzeugt verschachtelte Arrays um die Struktur zu
-            reflektieren. Zusätzlich beachten die verschiedenen Prüfroutinen in <classname>Zend_Form</classname>
-            die Arraystruktur, und stellen sicher, dass die Form korrekt überprüft wird, egal wie
-            tief verschachtelt die Unterformulare sind. Es muss nichts getan werden, um davon zu
-            profitieren; dieses Verhalten ist standardmäßig aktiviert.
+            reflektieren. Zusätzlich beachten die verschiedenen Prüfroutinen in
+            <classname>Zend_Form</classname> die Arraystruktur, und stellen sicher, dass die form
+            korrekt überprüft wird, egal wie tief verschachtelt die Unterformulare sind. Es muss
+            nichts getan werden, um davon zu profitieren; dieses Verhalten ist standardmäßig
+            aktiviert.
         </para>
 
         <para>
@@ -171,13 +172,13 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Form::setIsArray($flag)</classname>: Durch das Setzen dieses Flags auf
-                    <code>true</code>, kann angezeigt werden, dass das komplette Formular als Array
-                    behandelt werden soll. Standardmäßig wird der Name des Formulars als Name des
-                    Arrays verwendet, solange <code>setElementsBelongTo()</code> aufgerufen wurde.
-                    Wenn das Formular keinen Namen spezifiziert hat, oder <code>setElementsBelongTo()</code>
-                    nicht gesetzt wurde, wird dieses Flag ignoriert (da es kein Arraynamen gibt zu dem
-                    die Elemente gehören).
+                    <classname>Zend_Form::setIsArray($flag)</classname>: Durch das Setzen dieses
+                    Flags auf <code>true</code>, kann angezeigt werden, dass das komplette Formular
+                    als Array behandelt werden soll. Standardmäßig wird der Name des Formulars als
+                    Name des Arrays verwendet, solange <code>setElementsBelongTo()</code> aufgerufen
+                    wurde. Wenn das Formular keinen Namen spezifiziert hat, oder
+                    <code>setElementsBelongTo()</code> nicht gesetzt wurde, wird dieses Flag
+                    ignoriert (da es kein Arraynamen gibt zu dem die Elemente gehören).
                 </para>
 
                 <para>
@@ -187,19 +188,20 @@
             </listitem>
 
             <listitem><para>
-                    <classname>Zend_Form::setElementsBelongTo($array)</classname>: Durch Verwendung dieser
-                    Methode kann der Name eines Arrays spezifiziert werden dem alle Elemente des
-                    Formulars angehören. Der Name kann durch Verwendung der Zugriffsmethode
+                    <classname>Zend_Form::setElementsBelongTo($array)</classname>: Durch Verwendung
+                    dieser Methode kann der Name eines Arrays spezifiziert werden dem alle Elemente
+                    des Formulars angehören. Der Name kann durch Verwendung der Zugriffsmethode
                     <code>getElementsBelongTo()</code> eruiert werden.
             </para></listitem>
         </itemizedlist>
 
         <para>
             Zusätzlich können auf dem Element Level, individuelle Elemente spezifiziert werden die
-            bestimmten Arrays angehören indem die <classname>Zend_Form_Element::setBelongsTo()</classname>
-            Methode verwendet wird. Um herauszufinden welcher Wert gesetzt ist -- egal ob dieser
-            explizit gesetzt wurde oder implzit über das Formular -- kann die Zugriffsmethode
-            <code>getBelongsTo()</code> verwendet werden.
+            bestimmten Arrays angehören indem die
+            <classname>Zend_Form_Element::setBelongsTo()</classname> Methode verwendet wird. Um
+            herauszufinden welcher Wert gesetzt ist -- egal ob dieser explizit gesetzt wurde oder
+            implzit über das Formular -- kann die Zugriffsmethode <code>getBelongsTo()</code>
+            verwendet werden.
         </para>
     </sect2>
 
@@ -431,8 +433,8 @@ class My_Form_Registration extends Zend_Form
                 können wann abgebrochen wird. Zweitens wird etwas Logik benötigt, um festzustellen
                 welche Formularteile bereits übermittelt wurden und welches Unterformular, basierend
                 auf dieser Information, angezeigt werden soll. Wir verwenden
-                <classname>Zend_Session_Namespace</classname> um Daten zu fixieren, was uns auch hilft die
-                Frage zu beantworten welches Formular zu übertragen ist.
+                <classname>Zend_Session_Namespace</classname> um Daten zu fixieren, was uns auch
+                hilft die Frage zu beantworten welches Formular zu übertragen ist.
             </para>
 
             <para>
@@ -568,19 +570,19 @@ class RegistrationController extends Zend_Controller_Action
             <para>
                 Sehen wir uns nun an, wie die verschiedenen Unterformulare bearbeitet und angezeigt
                 werden können. Wir können <code>getCurrentSubForm()</code> verwenden um
-                herauszufinden ob ein Unterformular übertragen wurde (<code>false</code> Rückgabewerte
-                zeigen an, dass keine angezeigt oder übertragen wurden) und <code>getNextSubForm()</code>
-                empfängt die Form die angezeigt werden soll. Wir können die <code>prepareSubForm()</code>
-                Methode des Formulars verwenden, um sicherzustellen, dass das Formular bereit zur Anzeige
-                ist.
+                herauszufinden ob ein Unterformular übertragen wurde (<code>false</code>
+                Rückgabewerte zeigen an, dass keine angezeigt oder übertragen wurden) und
+                <code>getNextSubForm()</code> empfängt die Form die angezeigt werden soll. Wir
+                können die <code>prepareSubForm()</code> Methode des Formulars verwenden, um
+                sicherzustellen, dass das Formular bereit zur Anzeige ist.
             </para>
 
             <para>
-                Wenn ein Formular übertragen wird, kann das Unterformular bestätigt werden, und dann kann
-                geprüft werden, ob das komplette Formular gültig ist. Um diese Arbeiten durchzuführen
-                werden zusätzliche Methoden benötigt die sicherstellen, dass die übermittelten Daten der
-                Session hinzugefügt werden, und, dass, wenn das komplette Formular geprüft wird, die
-                Prüfung gegen alle Teile der Session durchgeführt wird:
+                Wenn ein Formular übertragen wird, kann das Unterformular bestätigt werden, und dann
+                kann geprüft werden, ob das komplette Formular gültig ist. Um diese Arbeiten
+                durchzuführen werden zusätzliche Methoden benötigt die sicherstellen, dass die
+                übermittelten Daten der Session hinzugefügt werden, und, dass, wenn das komplette
+                Formular geprüft wird, die Prüfung gegen alle Teile der Session durchgeführt wird:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -675,10 +677,10 @@ class RegistrationController extends Zend_Controller_Action
                 Wie festzustellen ist, ist der aktuelle Code für die Bearbeitung des Formulars
                 relativ einfach. Wir prüfen, um zu sehen ob wir eine aktuelle Übertragung eines
                 Unterformulars haben, oder nicht, und wir versuchen sie zu prüfen, und sie nochmals
-                darzustellen wenn es fehlschlägt. Wenn das Unterformular gültig ist, muss anschließend
-                geprüft werden, ob das Formular gültig ist, was dann bedeuten würde, dass wir fertig
-                sind; wen nicht muss das nächste Formularsegment angezeigt werden. Letztendlich wird
-                eine Prüfseite mit dem Inhalt der Session angezeigt.
+                darzustellen wenn es fehlschlägt. Wenn das Unterformular gültig ist, muss
+                anschließend geprüft werden, ob das Formular gültig ist, was dann bedeuten würde,
+                dass wir fertig sind; wen nicht muss das nächste Formularsegment angezeigt werden.
+                Letztendlich wird eine Prüfseite mit dem Inhalt der Session angezeigt.
             </para>
 
             <para>

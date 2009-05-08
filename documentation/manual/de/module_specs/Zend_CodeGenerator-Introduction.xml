@@ -5,9 +5,9 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_CodeGenerator</classname> bietet die Möglichkeit jeglichen Code zu erstellen indem
-        ein Objekt Orientiertes Interface verwendet wird, um sowohl neuen Code zu erstellen als
-        auch bestehenden Code upzudaten. Wärend die aktuelle Implementation darin limitiert ist
+        <classname>Zend_CodeGenerator</classname> bietet die Möglichkeit jeglichen Code zu erstellen
+        indem ein Objekt Orientiertes Interface verwendet wird, um sowohl neuen Code zu erstellen
+        als auch bestehenden Code upzudaten. Wärend die aktuelle Implementation darin limitiert ist
         PHP Code zu erstellen, kann die Basisklasse einfach erweitert werden um Code Erzeugung
         für andere Zwecke zu bieten: JavaScript, Konfigurationsdateien, Apache VHosts, usw.
     </para>
@@ -81,8 +81,8 @@ class World
             Ein anderer üblicher Anwendungsfall ist die Aktualisierung von bestehendem Code -- zum
             Beispiel eine Methode zu einer Klasse hinzufügen. In so einem Fall, muß man zuerst
             den bestehenden Code betrachten, indem Reflection verwendet wird, und dann die neue
-            Methode hinzufügen. <classname>Zend_CodeGenerator</classname> macht das sehr trivial, indem
-            <link linkend="zend.reflection">Zend_Reflection</link> verwendet wird.
+            Methode hinzufügen. <classname>Zend_CodeGenerator</classname> macht das sehr trivial,
+            indem <link linkend="zend.reflection">Zend_Reflection</link> verwendet wird.
         </para>
 
         <para>

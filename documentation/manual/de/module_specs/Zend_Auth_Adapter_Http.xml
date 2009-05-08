@@ -10,13 +10,14 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Auth_Adapter_Http</classname> bietet die am meisten entsprechende Implementation von
-            <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
+            <classname>Zend_Auth_Adapter_Http</classname> bietet die am meisten entsprechende
+            Implementation von <ulink url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
             <ulink url="http://en.wikipedia.org/wiki/Basic_authentication_scheme">Basis</ulink> und
-            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink> HTTP
-            Authentifizierung. Digest Authentifizierung ist eine Methode der HTTP Authentifikation die die
-            Basis Authentifizierung erweitert indem ein Weg angeboten wird um sich zu authentifizieren ohne
-            das das Passwort im Klartext über das netzwerk geschickt werden muß.
+            <ulink url="http://en.wikipedia.org/wiki/Digest_access_authentication">Digest</ulink>
+            HTTP Authentifizierung. Digest Authentifizierung ist eine Methode der HTTP
+            Authentifikation die die Basis Authentifizierung erweitert indem ein Weg angeboten wird
+            um sich zu Authentifizieren ohne das das Passwort im Klartext über das Netzwerk
+            geschickt werden muß.
         </para>
 
         <para>
@@ -29,8 +30,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Enthält Aufrufe für alle unterstützten Schemas, damit Klienten mit jedem unterstützten
-                        Schema arbeiten können.
+                        Enthält Aufrufe für alle unterstützten Schemas, damit Klienten mit jedem
+                        unterstützten Schema arbeiten können.
                     </para>
                 </listitem>
                 <listitem>
@@ -40,20 +41,22 @@
                 </listitem>
                 <listitem>
                     <para>
-                        Enthält Unterstützung für die Authentifizierung gegenüber Textdateien und bietet ein
-                        Interface für die Authentifizierung gegenüber anderen Quellen, wie z.B. Datenbanken.
+                        Enthält Unterstützung für die Authentifizierung gegenüber Textdateien und
+                        bietet ein Interface für die Authentifizierung gegenüber anderen Quellen,
+                        wie z.B. Datenbanken.
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
         <para>
-            Es gibt ein paar nennenswerte Features von RFC-2617 die bis jetzt nicht implementiert wurden:
+            Es gibt ein paar nennenswerte Features von RFC-2617 die bis jetzt nicht implementiert
+            wurden:
             <itemizedlist>
                 <listitem>
                     <para>
-                        Einstweilige Verfolgung, welche "stale" Support erlaubt und die Unterstützung bei
-                        wiederholenden Attacken erhöht.
+                        Einstweilige Verfolgung, welche "stale" Support erlaubt und die
+                        Unterstützung bei wiederholenden Attacken erhöht.
                     </para>
                 </listitem>
                 <listitem>
@@ -76,13 +79,13 @@
         <title>Design Übersicht</title>
 
         <para>
-            Dieser Adapter besteht aus zwei Sub-Komponenten, die HTTP Authentifizierungs Klasse selbst, und
-            den sogenannten "Auflöser". Die HTTP Authentifizierungs Klasse kapselt die Logik für die Ausführung
-            beider, sowohl der Basis als auch der Digest Authentifizierung. Sie verwendet einen Auflöser um
-            die Identität eines Klienten in Datenspeichern nachzusehen (standardmäßig eine Textdatei),
-            und die Zeugnisse vom Datenspeicher zu empfangen. Die "aufgelösten" Zeugnisse werden dann
-            mit den Werten verglichen die vom Klienten übermittelt wurden um zu eruieren ob die Authentifizierung
-            erfolgreich war.
+            Dieser Adapter besteht aus zwei Sub-Komponenten, die HTTP Authentifizierungs Klasse
+            selbst, und den sogenannten "Auflöser". Die HTTP Authentifizierungs Klasse kapselt die
+            Logik für die Ausführung beider, sowohl der Basis als auch der Digest Authentifizierung.
+            Sie verwendet einen Auflöser um die Identität eines Klienten in Datenspeichern
+            nachzusehen (standardmäßig eine Textdatei), und die Zeugnisse vom Datenspeicher zu
+            empfangen. Die "aufgelösten" Zeugnisse werden dann mit den Werten verglichen die vom
+            Klienten übermittelt wurden um zu eruieren ob die Authentifizierung erfolgreich war.
         </para>
 
     </sect2>
@@ -92,9 +95,9 @@
         <title>Konfigurations Optionen</title>
 
         <para>
-            Die <classname>Zend_Auth_Adapter_Http</classname> Klasse benötigt ein Konfigurations Array das Ihrem
-            Konstruktor übergeben werden muß. Es sind verschiedene Konfigurations Optionen vorhanden, und einige
-            davon werden benötigt:
+            Die <classname>Zend_Auth_Adapter_Http</classname> Klasse benötigt ein Konfigurations
+            Array das Ihrem Konstruktor übergeben werden muß. Es sind verschiedene Konfigurations
+            Optionen vorhanden, und einige davon werden benötigt:
             <table id="zend.auth.adapter.configuration_options.table">
                 <title>Konfigurations Optionen</title>
                 <tgroup cols="3">
@@ -110,42 +113,46 @@
                             <entry><code>accept_schemes</code></entry>
                             <entry>Ja</entry>
                             <entry>
-                                Ermittelt welches Authentifizierungs Schema der Adapter vom Klienten akzeptiert.
-                                Muß eine Leerzeichen-getrennte Liste sein, die <code>'basic'</code> und/oder
-                                <code>'digest'</code> enthält.
+                                Ermittelt welches Authentifizierungs Schema der Adapter vom Klienten
+                                akzeptiert. Muß eine Leerzeichen-getrennte Liste sein, die
+                                <code>'basic'</code> und/oder <code>'digest'</code> enthält.
                             </entry>
                         </row>
                         <row>
                             <entry><code>realm</code></entry>
                             <entry>Ja</entry>
                             <entry>
-                                Setzt das Authentifizierungs-Bereich; Benutzernamen sollten im angegebenen
-                                Bereich einmalig sein.
+                                Setzt das Authentifizierungs-Bereich; Benutzernamen sollten im
+                                angegebenen Bereich einmalig sein.
                             </entry>
                         </row>
                         <row>
                             <entry><code>digest_domains</code></entry>
-                            <entry>Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält</entry>
                             <entry>
-                                Leerzeichen-getrennte Liste von URIs für die die gleichen Authentifizierungs
-                                Informationen gültig sind. Die URIs müssen nicht alle auf den gleichen Server
-                                zeigen.
+                                Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält
+                            </entry>
+                            <entry>
+                                Leerzeichen-getrennte Liste von URIs für die die gleichen
+                                Authentifizierungs Informationen gültig sind. Die URIs müssen nicht
+                                alle auf den gleichen Server zeigen.
                             </entry>
                         </row>
                         <row>
                             <entry><code>nonce_timeout</code></entry>
-                            <entry>Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält</entry>
                             <entry>
-                                Setzt die Anzahl an Sekunden für die die Verfolgung gültig ist. Siehe
-                                die Notizen anbei.
+                                Ja, wenn <code>'accept_schemes'</code> <code>'digest'</code> enthält
+                            </entry>
+                            <entry>
+                                Setzt die Anzahl an Sekunden für die die Verfolgung gültig ist.
+                                Siehe die Notizen anbei.
                             </entry>
                         </row>
                         <row>
                             <entry><code>proxy_auth</code></entry>
                             <entry>Nein</entry>
                             <entry>
-                                Standardmäßig ausgeschaltet. Einschalten um Proxi Authentifizierung durchzuführen
-                                statt normaler originaler Server Authentifizierung.
+                                Standardmäßig ausgeschaltet. Einschalten um Proxi Authentifizierung
+                                durchzuführen statt normaler originaler Server Authentifizierung.
                             </entry>
                         </row>
                     </tbody>
@@ -155,12 +162,13 @@
 
         <note>
             <para>
-                Die aktuelle Implementation von <code>nonce_timeout</code> hat einige interessante Nebeneffekte.
-                Diese Einstellung soll die gültige Lebenszeit einer gegebenen Verfolgung ermitteln, oder
-                effektiv, wie lange die Authentifizierungs Information eines Klienten akzeptiert wird. Aktuell
-                ist es auf 3600 (zum Beispiel) gesetzt, und führt dazu das der Klient jede Stunde um neue
-                Zeugnisse gebeten wird. Das wird in einem zukünftigen Release behoben werden, sobald
-                Verfolgung und "stale" Support implementiert werden.
+                Die aktuelle Implementation von <code>nonce_timeout</code> hat einige interessante
+                Nebeneffekte. Diese Einstellung soll die gültige Lebenszeit einer gegebenen
+                Verfolgung ermitteln, oder effektiv, wie lange die Authentifizierungs Information
+                eines Klienten akzeptiert wird. Aktuell ist es auf 3600 (zum Beispiel) gesetzt, und
+                führt dazu das der Klient jede Stunde um neue Zeugnisse gebeten wird. Das wird in
+                einem zukünftigen Release behoben werden, sobald Verfolgung und "stale" Support
+                implementiert werden.
             </para>
         </note>
 
@@ -171,17 +179,17 @@
         <title>Auflöser</title>
 
         <para>
-            Der Job des Auflösers ist es einen Benutzernamen und einen Bereich, und gibt eine Art von
-            Zeugnisswert zurück. Basis Authentifizierung erwartet einen Hash des Benutzernamens, des Bereichs,
-            und dessen Passwörter (jedes seperiert durch ein Komma). Aktuell ist der einzige unterstützte
-            Hash Algorithmus MD5.
+            Der Job des Auflösers ist es einen Benutzernamen und einen Bereich, und gibt eine Art
+            von Zeugnisswert zurück. Basis Authentifizierung erwartet einen Hash des Benutzernamens,
+            des Bereichs, und dessen Passwörter (jedes seperiert durch ein Komma). Aktuell ist der
+            einzige unterstützte Hash Algorithmus MD5.
         </para>
 
         <para>
             <classname>Zend_Auth_Adapter_Http</classname> ist darauf angewiesen das Objekte
-            <classname>Zend_Auth_Adapter_Http_Resolver_Interface</classname> implementieren. Eine Textdatei Auflöser Klasse
-            ist mit diesem Adapter inkludiert, aber jede Art von Auflöser kann einfach erstellt werden indem
-            das Resolver Interface implementiert wird.
+            <classname>Zend_Auth_Adapter_Http_Resolver_Interface</classname> implementieren. Eine
+            Textdatei Auflöser Klasse ist mit diesem Adapter inkludiert, aber jede Art von Auflöser
+            kann einfach erstellt werden indem das Resolver Interface implementiert wird.
         </para>
 
         <sect3 id="zend.auth.adapter.http.resolvers.file">
@@ -189,21 +197,21 @@
             <title>Datei Auflöser</title>
 
             <para>
-                Der Datei Auflöser ist eine sehr einfache Klasse. Sie hat eine einzelne Eigenschaft die einen
-                Dateinamen spezifiziert, welcher auch dem Konstruktor übergeben werden kann. Ihre
-                <code>resolve()</code> Methode geht durch die Textdatei, und sucht nach einer Zeile mit einem
-                entsprechenden Benutzernamen und Bereich. Das Format der Textdatei ist ähnlich dem von Apache
-                htpasswd Dateien:
+                Der Datei Auflöser ist eine sehr einfache Klasse. Sie hat eine einzelne Eigenschaft
+                die einen Dateinamen spezifiziert, welcher auch dem Konstruktor übergeben werden
+                kann. Ihre <code>resolve()</code> Methode geht durch die Textdatei, und sucht nach
+                einer Zeile mit einem entsprechenden Benutzernamen und Bereich. Das Format der
+                Textdatei ist ähnlich dem von Apache htpasswd Dateien:
                 <programlisting><![CDATA[
 <benutzername>:<bereich>:<zeugnisse>\n
 ]]>
 </programlisting>
-                Jede Zeile besteht aus drei Feldern - Benutzername, Bereich und Zeugnisse - jede abgeteilt
-                durch einen Doppelpunkt. Das Zeugnis Feld ist für den Datei Auflöser nicht sichtbar; es gibt
-                den Wert einfach, wie er ist, an den Aufrufer zurück. Deswegen kann dieses Dateiformat sowohl
-                Basis als auch Digest Authentifizierung behandeln. In der Basis Authentifizierung sollte
-                das Zeugnis Feld im Klartext stehen. In der Digest Authentifizierung
-                sollte es der oben beschriebene MD5 Hash sein.
+                Jede Zeile besteht aus drei Feldern - Benutzername, Bereich und Zeugnisse - jede
+                abgeteilt durch einen Doppelpunkt. Das Zeugnis Feld ist für den Datei Auflöser nicht
+                sichtbar; es gibt den Wert einfach, wie er ist, an den Aufrufer zurück. Deswegen
+                kann dieses Dateiformat sowohl Basis als auch Digest Authentifizierung behandeln. In
+                der Basis Authentifizierung sollte das Zeugnis Feld im Klartext stehen. In der
+                Digest Authentifizierung sollte es der oben beschriebene MD5 Hash sein.
             </para>
 
             <para>
@@ -239,11 +247,11 @@ $config = array(
     'nonce_timeout'  => 3600,
 );
 ]]></programlisting>
-            Dieses Array bringt den Adapter dazu entwedet Basis oder Digest Authentifizierung zu akzeptieren,
-            und benötigt einen authentifizierten Zugriff auf alle Areale der Site unter <code>/members_only</code>
-            und <code>/my_account</code>. Der Bereichs Wert wird normalerweise durch den Browser in der
-            Passwort Dialog Box angezeigt. <code>nonce_timeout</code> verhält sich natürlich so wie oben
-            beschrieben.
+            Dieses Array bringt den Adapter dazu entwedet Basis oder Digest Authentifizierung zu
+            akzeptieren, und benötigt einen authentifizierten Zugriff auf alle Areale der Site unter
+            <code>/members_only</code> und <code>/my_account</code>. Der Bereichs Wert wird
+            normalerweise durch den Browser in der Passwort Dialog Box angezeigt.
+            <code>nonce_timeout</code> verhält sich natürlich so wie oben beschrieben.
         </para>
 
         <para>
@@ -254,9 +262,9 @@ $adapter = new Zend_Auth_Adapter_Http($config);
         </para>
 
         <para>
-            Da beides, Basis und Digest Authentifizierung, unterstützt werden, werden zwei unterschiedliche
-            Auflösungs-Objekte benötigt. Man könnte das auch einfach durch die Verwendung von zwei
-            unterschiedlichen Klassen bewerkstelligen:
+            Da beides, Basis und Digest Authentifizierung, unterstützt werden, werden zwei
+            unterschiedliche Auflösungs-Objekte benötigt. Man könnte das auch einfach durch die
+            Verwendung von zwei unterschiedlichen Klassen bewerkstelligen:
             <programlisting role="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
@@ -270,8 +278,8 @@ $adapter->setDigestResolver($digestResolver);
         </para>
 
         <para>
-            Letztendlich führen wir die Authentifizierung durch. Der Adapter benötigt eine Referenz zu beidem,
-            dem Anfrage und Antwort Objekten um seinen Job durchführen zu können:
+            Letztendlich führen wir die Authentifizierung durch. Der Adapter benötigt eine Referenz
+            zu beidem, dem Anfrage und Antwort Objekten um seinen Job durchführen zu können:
             <programlisting role="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);

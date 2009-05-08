@@ -40,7 +40,8 @@ $response = Zend_Http_Response::factory($str);
         </para>
         <para>
             <code>
-                public function __construct($code, $headers, $body = null, $version = '1.1', $message = null)
+                public function __construct($code, $headers, $body = null, $version = '1.1',
+                $message = null)
             </code>
         </para>
         <itemizedlist>
@@ -51,7 +52,8 @@ $response = Zend_Http_Response::factory($str);
             </listitem>
             <listitem>
                 <para>
-                    <code>$headers</code>: Ein assoziatives Array mit HTTP Antwort Headers (z.B. 'Host' => 'example.com')
+                    <code>$headers</code>: Ein assoziatives Array mit HTTP Antwort Headers (z.B.
+                    'Host' => 'example.com')
                 </para>
             </listitem>
             <listitem>
@@ -66,8 +68,9 @@ $response = Zend_Http_Response::factory($str);
             </listitem>
             <listitem>
                 <para>
-                    <code>$message</code>: Die HTTP Rückantwort (z.B. 'OK', 'Internal Server Error').
-                    Falls nicht angegeben, wird die Rückantwort anhand des Antwortcode gesetzt.
+                    <code>$message</code>: Die HTTP Rückantwort (z.B. 'OK', 'Internal Server
+                    Error'). Falls nicht angegeben, wird die Rückantwort anhand des Antwortcode
+                    gesetzt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -255,13 +258,13 @@ echo $body;
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 = true)</code>:
-                        Erhalte die Standard HTTP Rückantwort für einen Antwortcode code. Zum
-                        Beispiel wird "Internal Server Error" zurückgegeben, wenn $code gleich 500
-                        ist. Wenn $http11 gleich true ist (Standard), werden die HTTP/1.1
+                        <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 =
+                        true)</code>: Erhalte die Standard HTTP Rückantwort für einen Antwortcode
+                        $code. Zum Beispiel wird "Internal Server Error" zurückgegeben, wenn $code
+                        gleich 500 ist. Wenn $http11 gleich true ist (Standard), werden die HTTP/1.1
                         Standardantworten zurück gegeben, andernfalls die HTTP/1.0 Antworten.
-                        Wird $code nicht angegeben, wird diese Methode alle bekannten HTTP Antwortcodes
-                        als assoziatives Array (code => message) zurückgeben.
+                        Wird $code nicht angegeben, wird diese Methode alle bekannten HTTP
+                        Antwortcodes als assoziatives Array (code => message) zurückgeben.
                     </para>
                 </listitem>
             </itemizedlist>

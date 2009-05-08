@@ -22,8 +22,8 @@
         <title>Registrierung mit Amazon S3</title>
 
         <para>
-            Bevor man mit <classname>Zend_Service_Amazon_S3</classname> beginnen kann, muß man einen Account
-            registrieren. Sehen Sie bitte auf die Amazon Website
+            Bevor man mit <classname>Zend_Service_Amazon_S3</classname> beginnen kann, muß man einen
+            Account registrieren. Sehen Sie bitte auf die Amazon Website
             <ulink url="http://aws.amazon.com/s3/faqs/">S3 FAQ</ulink> für weitere Informationen.
         </para>
 
@@ -37,11 +37,11 @@
         <title>API Dokumentation</title>
 
         <para>
-            Die Klasse <classname>Zend_Service_Amazon_S3</classname> bietet einen PHP Wrapper zum Amazon S3
-            REST Interface. Schauen Sie bitte in die
-            <ulink url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon S3 Dokumentation</ulink>
-            für eine detailierte Beschreibung des Services. Man muß mit dem grundsätzlichen Konzept
-            vertraut sein um dieses Service nutzen zu können.
+            Die Klasse <classname>Zend_Service_Amazon_S3</classname> bietet einen PHP Wrapper zum
+            Amazon S3 REST Interface. Schauen Sie bitte in die <ulink
+                url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon
+                S3 Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß mit
+            dem grundsätzlichen Konzept vertraut sein um dieses Service nutzen zu können.
         </para>
 
     </sect2>
@@ -118,9 +118,9 @@ echo $s3->getObject("my-own-bucket/myobject");
         </example>
 
         <para>
-            Da der <classname>Zend_Service_Amazon_S3</classname> Service eine Authentifizierung benötigt,
-            sollte man seine Zugangsdaten (AWS Schlüssel und Geheimschlüssel) an den Konstruktor
-            übergeben.
+            Da der <classname>Zend_Service_Amazon_S3</classname> Service eine Authentifizierung
+            benötigt, sollte man seine Zugangsdaten (AWS Schlüssel und Geheimschlüssel) an den
+            Konstruktor übergeben.
 
             Wenn man nur einen Account verwendet, kann man Standard-Zugangsdaten für das Service
             setzen:
@@ -172,7 +172,9 @@ $s3 = new Zend_Service_Amazon_S3();
                 </para>
 
                 <example id="zend.service.amazon.s3.buckets.remove.example">
-                    <title>Beispiel für das Entfernen eines Buckets in Zend_Service_Amazon_S3</title>
+                    <title>
+                        Beispiel für das Entfernen eines Buckets in Zend_Service_Amazon_S3
+                    </title>
                     <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -327,7 +329,9 @@ foreach($list as $bucket) {
                             </para>
 
                             <example id="zend.service.amazon.s3.objects.public.example">
-                                <title>Beispiel für ein öffentliches Objekt in Zend_Service_Amazon_S3</title>
+                                <title>
+                                    Beispiel für ein öffentliches Objekt in Zend_Service_Amazon_S3
+                                </title>
                                 <programlisting role="php"><![CDATA[<?php
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -457,8 +461,8 @@ foreach($list as $name) {
 
         <para>
             Zusätzlich zum oben beschriebenen Interface unterstützt
-            <classname>Zend_Service_Amazon_S3</classname> das Arbeiten als Stream Wrapper. Hierfür muß das
-            Client-Objekt als Stream Wrapper registriert werden:
+            <classname>Zend_Service_Amazon_S3</classname> das Arbeiten als Stream Wrapper. Hierfür
+            muß das Client-Objekt als Stream Wrapper registriert werden:
         </para>
 
         <example id="zend.service.amazon.s3.streams.example">

@@ -7,8 +7,8 @@
     <sect2 id="zend.service.amazon.ec2.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Amazon_Ec2</classname> bietet ein Interface zu Amazon's Elastic Clound
-            Computing (EC2).
+            <classname>Zend_Service_Amazon_Ec2</classname> bietet ein Interface zu Amazon's Elastic
+            Clound Computing (EC2).
         </para>
     </sect2>
     <sect2 id="zend.service.amazon.ec2.whatis">

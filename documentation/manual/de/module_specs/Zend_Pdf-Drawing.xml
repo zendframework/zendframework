@@ -22,11 +22,13 @@ $height = $pdfPage->getHeight();
     <sect2 id="zend.pdf.drawing.color">
         <title>Farben</title>
         <para>
-            PDF bietet leistungsfähige Möglichkeiten für die Farbdarstellung. Die <classname>Zend_Pdf</classname>
-            Komponente unterstützt die Grauskala sowie RGB und CYMK Farbräume. Jede kann überall
-            verwendet werden, wo ein <classname>Zend_Pdf_Color</classname> Objekt benötigt wird. Die
-            <classname>Zend_Pdf_Color_GrayScale</classname>, <classname>Zend_Pdf_Color_Rgb</classname> und
-            <classname>Zend_Pdf_Color_Cmyk</classname> Klassen stellen folgende Funktionalitäten bereit:
+            PDF bietet leistungsfähige Möglichkeiten für die Farbdarstellung. Die
+            <classname>Zend_Pdf</classname> Komponente unterstützt die Grauskala sowie RGB und CYMK
+            Farbräume. Jede kann überall verwendet werden, wo ein
+            <classname>Zend_Pdf_Color</classname> Objekt benötigt wird. Die
+            <classname>Zend_Pdf_Color_GrayScale</classname>,
+            <classname>Zend_Pdf_Color_Rgb</classname> und <classname>Zend_Pdf_Color_Cmyk</classname>
+            Klassen stellen folgende Funktionalitäten bereit:
         </para>
             <programlisting role="php"><![CDATA[
 // $grayLevel (Fließkommazahl). 0.0 (schwarz) - 1.0 (weiß)
@@ -55,7 +57,8 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
             Alle Zeichenoperationen können im Kontext einer PDF Seite durchgeführt werden.
         </para>
         <para>
-            Die <classname>Zend_Pdf_Page</classname> Klass stellt einen Satz von einfachen Formen bereit:
+            Die <classname>Zend_Pdf_Page</classname> Klass stellt einen Satz von einfachen Formen
+            bereit:
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -213,8 +216,8 @@ $pdfPage->drawText('Hello world!', 72, 720);
             Zeichenkodierungsmethode verwendet (wie zum Beispiel ein UTF-8 String, der aus einer
             Datei auf der Platte gelesen wurde, oder ein MacRoman String, der aus einer älteren
             Datenbank erhalten wurde), kannst du die Zeichenkodierung zum Zeitpunkt des Zeichnens
-            angeben und <classname>Zend_Pdf</classname> wird die Konvertierung für dich durchführen. Du kannst Quellstrings
-            in jeder Kodierungsmethode übergeben, die von PHP's
+            angeben und <classname>Zend_Pdf</classname> wird die Konvertierung für dich durchführen.
+            Du kannst Quellstrings in jeder Kodierungsmethode übergeben, die von PHP's
             <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
             Funktion unterstützt wird.
         </para>
@@ -235,9 +238,9 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
     <sect2 id="zend.pdf.drawing.using-fonts">
         <title>Verwendung von Zeichensätzen</title>
         <para>
-            <classname>Zend_Pdf_Page::drawText()</classname> verwendet den aktuellen Zeichensatz und die
-            aktuelle Zeichengröße der Seite, die mit der Methode <classname>Zend_Pdf_Page::setFont()</classname>
-            festgelegt werden:
+            <classname>Zend_Pdf_Page::drawText()</classname> verwendet den aktuellen Zeichensatz und
+            die aktuelle Zeichengröße der Seite, die mit der Methode
+            <classname>Zend_Pdf_Page::setFont()</classname> festgelegt werden:
         </para>
             <programlisting role="php"><![CDATA[
 /**
@@ -256,11 +259,12 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             Courier (4 Stile), Helvetica (4 Stile), Times (4 Stile), Symbol und Zapf Dingbats.
         </para>
         <para>
-            Die <classname>Zend_Pdf</classname> Komponente unterstützt derzeit diese 14 Standardzeichensätze sowie deine
-            eigenen TrueType Zeichensätze. Zeichensatzobjekte können über eine der zwei
-            Fabrikmethoden (factory methods) erhalten werden:
-            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname> für die 14 PDF Standardzeichensätze
-            oder <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname> für eigene Zeichensätze.
+            Die <classname>Zend_Pdf</classname> Komponente unterstützt derzeit diese 14
+            Standardzeichensätze sowie deine eigenen TrueType Zeichensätze. Zeichensatzobjekte
+            können über eine der zwei Fabrikmethoden (factory methods) erhalten werden:
+            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname> für die 14 PDF
+            Standardzeichensätze oder <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname>
+            für eigene Zeichensätze.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
             <title>Erstelle einen Standardzeichensatz</title>
@@ -355,7 +359,9 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             eingebettet wird, indem du eine 'nicht einbetten' Option an die Fabrikmethode übergibst:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-3">
-            <title>Erstelle einen TrueType Zeichensatz, aber bette ihn nicht in das PDF Dokument ein.</title>
+            <title>
+                Erstelle einen TrueType Zeichensatz, aber bette ihn nicht in das PDF Dokument ein.
+            </title>
             <programlisting role="php"><![CDATA[
 ...
 // Erstelle einen neuen Zeichensatz
@@ -385,7 +391,9 @@ $pdfPage->setFont($goodDogCoolFont, 36);
             unterdrücken:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-4">
-            <title>Werfe keine Ausnahme für Zeichensätze, die nicht eingebettet werden können.</title>
+            <title>
+                Werfe keine Ausnahme für Zeichensätze, die nicht eingebettet werden können.
+            </title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath(
@@ -438,16 +446,19 @@ $font = Zend_Pdf_Font::fontWithPath(
         <title>Limits der Standard PDF Schriften</title>
         <para>
             Die Standard PDF Schriften verwendetn intern verschiedene Single-Byte Encodings (siehe
-            <ulink url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">PDF Reference, Sixth Edition, version 1.7</ulink>
-            Anhang D für Details). Diese sind generell gleich wie beim Latin1 Zeichensatz (ausser den Symbol und
-            ZapfDingbats Schriften).
+            <ulink url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">PDF
+                Reference, Sixth Edition, version 1.7</ulink> Anhang D für Details). Diese sind
+            generell gleich wie beim Latin1 Zeichensatz (ausser den Symbol und ZapfDingbats
+            Schriften).
         </para>
         <para>
-            <classname>Zend_Pdf</classname> verwendet CP1252 (WinLatin1) für das Zeichnen von Text mit Standardschriften.
+            <classname>Zend_Pdf</classname> verwendet CP1252 (WinLatin1) für das Zeichnen von Text
+            mit Standardschriften.
         </para>
         <para>
-            Text kann trotzdem in jedem anderen Encoding angegeben werden, welches spezifiziert werden muß wenn
-            es sich vom aktuellen Gebietsschema unterscheidet. Nur WinLatin1 Zeichen werden aktuell gezeichnet.
+            Text kann trotzdem in jedem anderen Encoding angegeben werden, welches spezifiziert
+            werden muß wenn es sich vom aktuellen Gebietsschema unterscheidet. Nur WinLatin1 Zeichen
+            werden aktuell gezeichnet.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-7">
             <title>Kombinieren mit in Schriften enthaltenen Optionen</title>
@@ -465,19 +476,20 @@ $pdfPage->setFont($font, 36)
     <sect2 id="zend.pdf.drawing.extracting-fonts">
         <title>Schriften extrahieren</title>
         <para>
-            Das <classname>Zend_Pdf</classname> Modul bietet die Möglichkeit Schriften von geladenen Dokumenten zu
-            extrahieren.
+            Das <classname>Zend_Pdf</classname> Modul bietet die Möglichkeit Schriften von geladenen
+            Dokumenten zu extrahieren.
         </para>
 
         <para>
-            Das kann für aufsteigende Dokumenten Updates nützlich sein. Ohne diese Funktionalität müssen Schriften
-            jedes Mal in ein Dokument hinzugefügt und möglicherweise eingebetten werden, wenn es aktualisiert
-            werden soll.
+            Das kann für aufsteigende Dokumenten Updates nützlich sein. Ohne diese Funktionalität
+            müssen Schriften jedes Mal in ein Dokument hinzugefügt und möglicherweise eingebetten
+            werden, wenn es aktualisiert werden soll.
         </para>
 
         <para>
-            Die <classname>Zend_Pdf</classname> und <classname>Zend_Pdf_Page</classname> Objekte bieten spezielle Methoden um alle
-            genannten Schriften innerhalb eines Dokuments oder einer Seite zu extrahieren:
+            Die <classname>Zend_Pdf</classname> und <classname>Zend_Pdf_Page</classname> Objekte
+            bieten spezielle Methoden um alle genannten Schriften innerhalb eines Dokuments oder
+            einer Seite zu extrahieren:
         </para>
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
             <title>Schriften von einem geladenen Dokument extrahieren</title>
@@ -510,7 +522,10 @@ $firstPageFonts = $firstPage->extractFonts();
 ]]></programlisting>
         </example>
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
-            <title>Eine Schrift von einem geladenen Dokument extrahieren durch die Angabe des Schriftnamens</title>
+            <title>
+                Eine Schrift von einem geladenen Dokument extrahieren durch die Angabe des
+                Schriftnamens
+            </title>
             <programlisting role="php"><![CDATA[
 
 ...
@@ -548,16 +563,17 @@ $pdf->save($docPath, true /* aufsteigender Update Modus */);
         </example>
 
         <para>
-            Extrahierte Schriften können statt jeder anderen Schrift mit den folgenden Einschränkungen
-            verwendet werden:
+            Extrahierte Schriften können statt jeder anderen Schrift mit den folgenden
+            Einschränkungen verwendet werden:
             <itemizedlist>
-                <listitem><para>Eine extrahierte Schrift kann nur im Kontext des Dokuments verwendet werden
-                von dem es extrahiert wurde.</para></listitem>
+                <listitem><para>Eine extrahierte Schrift kann nur im Kontext des Dokuments verwendet
+                werden von dem es extrahiert wurde.</para></listitem>
                 <listitem>
                     <para>
-                        Ein möglicherweise eingebettetes Schriftprogramm wird aktuell nicht extrahiert. Deswegen
-                        können extrahierte Schriften keine richtigen Schriftmaße bieten und die originale
-                        Schrift wird für die Berechnung der Breite verwendet:
+                        Ein möglicherweise eingebettetes Schriftprogramm wird aktuell nicht
+                        extrahiert. Deswegen können extrahierte Schriften keine richtigen
+                        Schriftmaße bieten und die originale Schrift wird für die Berechnung der
+                        Breite verwendet:
             <programlisting role="php"><![CDATA[
 
 ...
@@ -586,8 +602,8 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
     <sect2 id="zend.pdf.drawing.image-drawing">
         <title>Zeichnen von Grafiken</title>
         <para>
-            Die <classname>Zend_Pdf_Page</classname> Klasse stellt die drawImage() Methode für das Zeichnen
-            von Grafiken bereit:
+            Die <classname>Zend_Pdf_Page</classname> Klasse stellt die drawImage() Methode für das
+            Zeichnen von Grafiken bereit:
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -603,8 +619,9 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 public function drawImage(Zend_Pdf_Ressource_Image $image, $x1, $y1, $x2, $y2);
 ]]></programlisting>
         <para>
-            Grafikobjekte sollten mit der Methode <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname>
-            erzeugt werden. (Es werden zur Zeit JPG, PNG und TIFF Grafiken unterstützt):
+            Grafikobjekte sollten mit der Methode
+            <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname> erzeugt werden. (Es
+            werden zur Zeit JPG, PNG und TIFF Grafiken unterstützt):
         </para>
         <example id="zend.pdf.drawing.image-drawing.example-1">
             <title>Zeichnen von Grafiken</title>
@@ -619,13 +636,14 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Wichtig! JPG Support setzt voraus, dass die GD Erweiterung für PHP konfiguriert wurde.</emphasis>
-            <emphasis>Wichtig! PNG Support setzt voraus, dass die ZLIB Erweiterung konfiguriert wurde, um mit Grafiken
-            mit Alphakanal zu arbeiten.</emphasis>
+            <emphasis>Wichtig! JPG Support setzt voraus, dass die GD Erweiterung für PHP
+                konfiguriert wurde.</emphasis>
+            <emphasis>Wichtig! PNG Support setzt voraus, dass die ZLIB Erweiterung konfiguriert
+                wurde, um mit Grafiken mit Alphakanal zu arbeiten.</emphasis>
         </para>
         <para>
-            Wende dich an die PHP Dokumentation für weitere Informationen
-            (<ulink url="http://www.php.net/manual/de/ref.image.php">http://www.php.net/manual/de/ref.image.php</ulink>).
+            Wende dich an die PHP Dokumentation für weitere Informationen (<ulink
+                url="http://www.php.net/manual/de/ref.image.php">http://www.php.net/manual/de/ref.image.php</ulink>).
             (<ulink url="http://www.php.net/manual/de/ref.zlib.php">http://www.php.net/manual/de/ref.zlib.php</ulink>).
         </para>
     </sect2>
@@ -663,9 +681,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
         <title>Füllstil</title>
         <para>
             Die Methoden <classname>Zend_Pdf_Page::drawRectangle()</classname>,
-            <classname>Zend_Pdf_Page::drawPolygon()</classname>, <classname>Zend_Pdf_Page::drawCircle()</classname> und
-            <classname>Zend_Pdf_Page::drawEllipse()</classname> akzeptieren das <code>$fillType</code>
-            Argument als optionalen Parameter. Es kann lauten:
+            <classname>Zend_Pdf_Page::drawPolygon()</classname>,
+            <classname>Zend_Pdf_Page::drawCircle()</classname> und
+            <classname>Zend_Pdf_Page::drawEllipse()</classname> akzeptieren das
+            <code>$fillType</code> Argument als optionalen Parameter. Es kann lauten:
         </para>
 
         <itemizedlist>
@@ -692,29 +711,31 @@ public function setLineDashingPattern($pattern, $phase = 0);
                     <citetitle>Die PDF Referenz</citetitle> beschreibt diese Regel wie folgt:
                     <blockquote>
                     <para>
-                        The nonzero winding number rule determines whether a given point is inside a
-                        path by conceptually drawing a ray from that point to infinity in any direction
-                        and then examining the places where a segment of the path crosses the ray. Starting
-                        with a count of 0, the rule adds 1 each time a path segment crosses the ray
-                        from left to right and subtracts 1 each time a segment crosses from right to left.
-                        After counting all the crossings, if the result is 0 then the point is outside the path;
-                        otherwise it is inside.
+                        The nonzero winding number rule determines whether a given point is inside
+                        a path by conceptually drawing a ray from that point to infinity in any
+                        direction and then examining the places where a segment of the path crosses
+                        the ray. Starting with a count of 0, the rule adds 1 each time a path
+                        segment crosses the ray from left to right and subtracts 1 each time a
+                        segment crosses from right to left. After counting all the crossings, if the
+                        result is 0 then the point is outside the path; otherwise it is inside.
 
-                        Note: The method just described does not specify what to do if a path segment coincides
-                        with or is tangent to the chosen ray. Since the direction of the ray is arbitrary,
-                        the rule simply chooses a ray that does not encounter such problem intersections.
-                        For simple convex paths, the nonzero winding number rule defines the inside
-                        and outside as one would intuitively expect. The more interesting cases are those
-                        involving complex or self-intersecting paths like the ones shown in Figure 4.10
-                        (in a PDF Reference).
+                        Note: The method just described does not specify what to do if a path
+                        segment coincides with or is tangent to the chosen ray. Since the direction
+                        of the ray is arbitrary, the rule simply chooses a ray that does not
+                        encounter such problem intersections. For simple convex paths, the nonzero
+                        winding number rule defines the inside and outside as one would intuitively
+                        expect. The more interesting cases are those involving complex or
+                        self-intersecting paths like the ones shown in Figure 4.10 (in a PDF
+                        Reference).
 
-                        For a path consisting of a five-pointed star, drawn with five connected straight
-                        line segments intersecting each other, the rule considers the inside to be the entire
-                        area enclosed by the star, including the pentagon in the center. For a path composed
-                        of two concentric circles, the areas enclosed by both circles are considered
-                        to be inside, provided that both are drawn in the same direction. If the circles are
-                        drawn in opposite directions, only the "doughnut" shape between them is inside,
-                        according to the rule; the "doughnut hole" is outside.
+                        For a path consisting of a five-pointed star, drawn with five connected
+                        straight line segments intersecting each other, the rule considers the
+                        inside to be the entire area enclosed by the star, including the pentagon in
+                        the center. For a path composed of two concentric circles, the areas
+                        enclosed by both circles are considered to be inside, provided that both are
+                        drawn in the same direction. If the circles are drawn in opposite
+                        directions, only the "doughnut" shape between them is inside, according to
+                        the rule; the "doughnut hole" is outside.
                     </para>
                     </blockquote>
                 </para>
@@ -725,19 +746,20 @@ public function setLineDashingPattern($pattern, $phase = 0);
                     <citetitle>Die PDF Referenz</citetitle> beschreibt diese Regel wie folgt:
                     <blockquote>
                     <para>
-                        An alternative to the nonzero winding number rule is the even-odd rule. This rule
-                        determines the "insideness" of a point by drawing a ray from that point in any
-                        direction and simply counting the number of path segments that cross the ray,
-                        regardless of direction. If this number is odd, the point is inside; if even, the point
-                        is outside. This yields the same results as the nonzero winding number rule for
-                        paths with simple shapes, but produces different results for more complex
-                        shapes.
+                        An alternative to the nonzero winding number rule is the even-odd rule. This
+                        rule determines the "insideness" of a point by drawing a ray from that point
+                        in any direction and simply counting the number of path segments that cross
+                        the ray, regardless of direction. If this number is odd, the point is
+                        inside; if even, the point is outside. This yields the same results as the
+                        nonzero winding number rule for paths with simple shapes, but produces
+                        different results for more complex shapes.
 
-                        Figure 4.11 (in a PDF Reference) shows the effects of applying the even-odd rule
-                        to complex paths. For the five-pointed star, the rule considers the triangular
-                        points to be inside the path, but not the pentagon in the center. For the two
-                        concentric circles, only the "doughnut" shape between the two circles is considered inside,
-                        regardless of the directions in which the circles are drawn.
+                        Figure 4.11 (in a PDF Reference) shows the effects of applying the even-odd
+                        rule to complex paths. For the five-pointed star, the rule considers the
+                        triangular points to be inside the path, but not the pentagon in the center.
+                        For the two concentric circles, only the "doughnut" shape between the two
+                        circles is considered inside, regardless of the directions in which the
+                        circles are drawn.
                     </para>
                 </blockquote>
             </para>
@@ -751,7 +773,8 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Drehungen</title>
             <para>
                 Bevor eine Zeichenoperation angewendet wird, können PDF Seiten gedreht werden. Dies
-                kann mit Hilfe der <classname>Zend_Pdf_Page::rotate()</classname> Methode durchgeführt werden:
+                kann mit Hilfe der <classname>Zend_Pdf_Page::rotate()</classname> Methode
+                durchgeführt werden:
             </para>
             <programlisting role="php"><![CDATA[
 /**
@@ -769,7 +792,8 @@ public function rotate($x, $y, $angle);
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
             <title>Beginnend mit ZF 1.8, Skalierung</title>
             <para>
-                Skalenänderungen werden durch die <classname>Zend_Pdf_Page::scale()</classname> Methode angeboten:
+                Skalenänderungen werden durch die <classname>Zend_Pdf_Page::scale()</classname>
+                Methode angeboten:
             </para>
             <programlisting role="php"><![CDATA[
 /**
@@ -786,8 +810,8 @@ public function scale($xScale, $yScale);
         <sect3 id="zend.pdf.drawing.linear-transformations.translate">
             <title>Beginnend mit ZF 1.8, Bewegungen</title>
             <para>
-                Das bewegen des Koordinationssystem wird von der <classname>Zend_Pdf_Page::translate()</classname>
-                Methode durchgeführt:
+                Das bewegen des Koordinationssystem wird von der
+                <classname>Zend_Pdf_Page::translate()</classname> Methode durchgeführt:
             </para>
             <programlisting role="php"><![CDATA[
 /**
@@ -804,8 +828,8 @@ public function translate($xShift, $yShift);
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
             <title>Beginnend mit ZF 1.8, Drehungen</title>
             <para>
-                Das Drehen der Seite kann durch Verwendung der <classname>Zend_Pdf_Page::skew()</classname> Methode
-                durchgeführt werden:
+                Das Drehen der Seite kann durch Verwendung der
+                <classname>Zend_Pdf_Page::skew()</classname> Methode durchgeführt werden:
             </para>
             <programlisting role="php"><![CDATA[
 /**
@@ -831,7 +855,8 @@ public function skew($x, $y, $xAngle, $yAngle);
             Stapel, Wiederherstelloperationen holen Sie daher zurück.
         </para>
         <para>
-            In der <classname>Zend_Pdf_Page</classname> Klasse gibt es für diese Operationen zwei Methoden:
+            In der <classname>Zend_Pdf_Page</classname> Klasse gibt es für diese Operationen zwei
+            Methoden:
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -857,13 +882,13 @@ public function restoreGS();
     <sect2 id="zend.pdf.drawing.clipping">
         <title>Zeichenbereich</title>
         <para>
-            PDF und die <classname>Zend_Pdf</classname> Komponente unterstützen die Begrenzung des Zeichenbereichs. Der
-            aktuelle Zeichenbereich begrenzt den Seitenbereich, der von Zeichenoperationen
-            beeinflusst werden kann. Zu Beginn ist dies die gesamte Seite.
+            PDF und die <classname>Zend_Pdf</classname> Komponente unterstützen die Begrenzung des
+            Zeichenbereichs. Der aktuelle Zeichenbereich begrenzt den Seitenbereich, der von
+            Zeichenoperationen beeinflusst werden kann. Zu Beginn ist dies die gesamte Seite.
         </para>
         <para>
-            Die <classname>Zend_Pdf_Page</classname> Klasse stellt einen Satz von Methoden für die Begrenzung
-            bereit.
+            Die <classname>Zend_Pdf_Page</classname> Klasse stellt einen Satz von Methoden für die
+            Begrenzung bereit.
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -962,8 +987,8 @@ public function getStyle();
 ]]></programlisting>
 
         <para>
-            Die <classname>Zend_Pdf_Style</classname> Klasse stellt einen Satz von Methoden bereit, um
-            verschiedene Parameter des Grafikstadiums zu setzen und zu holen:
+            Die <classname>Zend_Pdf_Style</classname> Klasse stellt einen Satz von Methoden bereit,
+            um verschiedene Parameter des Grafikstadiums zu setzen und zu holen:
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -1088,7 +1113,8 @@ public function getFontSize();
         </para>
 
         <para>
-            Transparenz kann durch Verwendung der <classname>Zend_Pdf_Page::setAlpha()</classname> Methode gesetzt werden:
+            Transparenz kann durch Verwendung der <classname>Zend_Pdf_Page::setAlpha()</classname>
+            Methode gesetzt werden:
 
             <programlisting role="php"><![CDATA[
 

@@ -8,9 +8,10 @@
         <title>Seitendarstellung von Datensammlungen</title>
 
         <para>
-            Um Elemente in Seiten darzustellen muß <classname>Zend_Paginator</classname> einen generellen Weg des
-            Zugriffs auf diese Daten haben. Für diesen Zweck, läuft jeder Datenzugriff über Datenquellen
-            Adapter. Verschiedene Adapter werden mit dem Zend Framework standardmäßig ausgeliefert:
+            Um Elemente in Seiten darzustellen muß <classname>Zend_Paginator</classname> einen
+            generellen Weg des Zugriffs auf diese Daten haben. Für diesen Zweck, läuft jeder
+            Datenzugriff über Datenquellen Adapter. Verschiedene Adapter werden mit dem Zend
+            Framework standardmäßig ausgeliefert:
         </para>
 
         <table id="zend.paginator.usage.paginating.adapters">
@@ -31,18 +32,20 @@
                     <row>
                         <entry>DbSelect</entry>
                         <entry>
-                            Verwendet eine Instanz von
-                            <link linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
+                            Verwendet eine Instanz von <link
+                                linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
                             welche ein Array zurückgibt
                         </entry>
                     </row>
                     <row>
                         <entry>DbTableSelect</entry>
                         <entry>
-                            Verwendet eine Instanz von
-                            <link linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
-                            welche eine Instanz von <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgibt.
-                            Das gibt zusätzliche Information pber das Ergebnisset, wie z.B. die Namen der Spalten.
+                            Verwendet eine Instanz von <link
+                                linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
+                            welche eine Instanz von
+                            <classname>Zend_Db_Table_Rowset_Abstract</classname> zurückgibt. Das
+                            gibt zusätzliche Information pber das Ergebnisset, wie z.B. die Namen
+                            der Spalten.
                         </entry>
                     </row>
                     <row>
@@ -55,8 +58,9 @@
                     <row>
                         <entry>Null</entry>
                         <entry>
-                            <classname>Zend_Paginator</classname> nicht für das Verwalten von seitenweisen Daten verwenden.
-                            Man kann trotzdem die Vorteile des Features der Seitenkontrolle verwenden.
+                            <classname>Zend_Paginator</classname> nicht für das Verwalten von
+                            seitenweisen Daten verwenden. Man kann trotzdem die Vorteile des
+                            Features der Seitenkontrolle verwenden.
                         </entry>
                     </row>
                 </tbody>
@@ -65,22 +69,22 @@
 
         <note>
             <para>
-                Statt jede passende Zeile einer gegebenen Abfrage auszuwählen, empfangen die DbSelect und
-                DbTableSelect Adapter nur die kleinste Anzahl an Daten die für die Darstellung der aktuellen
-                Seite notwendig sind.
+                Statt jede passende Zeile einer gegebenen Abfrage auszuwählen, empfangen die
+                DbSelect und DbTableSelect Adapter nur die kleinste Anzahl an Daten die für die
+                Darstellung der aktuellen Seite notwendig sind.
             </para>
 
             <para>
-                Deswegen wird dynamisch eine zweite Abfrage erzeugt um die komplette Anzahl an passenden
-                Zeilen festzustellen. Trotzdem ist es möglich die Anzahl oder die Abfrage für die Anzahl
-                selbst direkt zu übergeben. Siehe die <code>setRowCount()</code> Methode im DbSelect
-                Adapter für weitere Informationen.
+                Deswegen wird dynamisch eine zweite Abfrage erzeugt um die komplette Anzahl an
+                passenden Zeilen festzustellen. Trotzdem ist es möglich die Anzahl oder die Abfrage
+                für die Anzahl selbst direkt zu übergeben. Siehe die <code>setRowCount()</code>
+                Methode im DbSelect Adapter für weitere Informationen.
             </para>
         </note>
 
         <para>
-            Um eine Instanz von <classname>Zend_Paginator</classname> zu erstellen, muß ein Adapter an den Konstruktor
-            übergeben werden:
+            Um eine Instanz von <classname>Zend_Paginator</classname> zu erstellen, muß ein Adapter
+            an den Konstruktor übergeben werden:
         </para>
 
         <para>
@@ -90,8 +94,8 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
         </para>
 
         <para>
-            Der Einfachheit halber kann man für die mit dem Zend Framework mitgelieferten Adapter die
-            statische <code>factory()</code> verwenden:
+            Der Einfachheit halber kann man für die mit dem Zend Framework mitgelieferten Adapter
+            die statische <code>factory()</code> verwenden:
         </para>
 
         <para>
@@ -102,15 +106,15 @@ $paginator = Zend_Paginator::factory($array);
 
         <note>
             <para>
-                Im Falle des Null Adapters, muß dem Konstruktor eine Elementanzahl mitgegeben werden da keine
-                Datensammlung vorliegt.
+                Im Falle des Null Adapters, muß dem Konstruktor eine Elementanzahl mitgegeben werden
+                da keine Datensammlung vorliegt.
             </para>
         </note>
 
         <para>
-            Auch wenn die Instanz in diesem Fall technische zu verwenden ist, muß in der Controller Aktion
-            der Seitendarstellung mitgeteilt werden welche Seitennummer der Benutzer angefragt hat. Das
-            erlaubt Ihm auf die seitenweisen Daten zuzugreifen.
+            Auch wenn die Instanz in diesem Fall technische zu verwenden ist, muß in der Controller
+            Aktion der Seitendarstellung mitgeteilt werden welche Seitennummer der Benutzer
+            angefragt hat. Das erlaubt Ihm auf die seitenweisen Daten zuzugreifen.
         </para>
 
         <para>
@@ -120,13 +124,14 @@ $paginator->setCurrentPageNumber($page);
         </para>
 
         <para>
-            Der einfachste Weg um diesen Wert zu verfolgen ist über eine URL. Auch wenn wir empfehlen einen
-            <classname>Zend_Controller_Router_Interface</classname>-kompatiblen Router zu verwenden um dies zu
-            bewerkstelligen, ist das keine Notwendigkeit.
+            Der einfachste Weg um diesen Wert zu verfolgen ist über eine URL. Auch wenn wir
+            empfehlen einen <classname>Zend_Controller_Router_Interface</classname>-kompatiblen
+            Router zu verwenden um dies zu bewerkstelligen, ist das keine Notwendigkeit.
         </para>
 
         <para>
-            Das folgende ist eine Beispielroute die in einer INI Konfigurationsdatei verwendet werden könnte:
+            Das folgende ist eine Beispielroute die in einer INI Konfigurationsdatei verwendet
+            werden könnte:
         </para>
 
         <para>
@@ -141,8 +146,8 @@ routes.example.reqs.page = \d+
         </para>
 
         <para>
-            Mit der obigen Route (und der Verwendung der Zend Framework MVC Komponenten), kann die aktuelle
-            Seitenzahl wie folgt gesetzt werden:
+            Mit der obigen Route (und der Verwendung der Zend Framework MVC Komponenten), kann die
+            aktuelle Seitenzahl wie folgt gesetzt werden:
         </para>
 
         <para>
@@ -153,12 +158,14 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
 
         <para>
             Es sind auch andere Optionen vorhanden; siehe
-            <link linkend="zend.paginator.configuration">Konfiguration</link> für zusätzliche Informationen.
+            <link linkend="zend.paginator.configuration">Konfiguration</link> für zusätzliche
+            Informationen.
         </para>
 
         <para>
-            Schlußendlich muß die Paginator Instanz der View angehängt werden. Wenn <classname>Zend_View</classname> mit
-            dem ViewRenderer Action Helfer verwendet wird, dann funktioniert das folgende:
+            Schlußendlich muß die Paginator Instanz der View angehängt werden. Wenn
+            <classname>Zend_View</classname> mit dem ViewRenderer Action Helfer verwendet wird, dann
+            funktioniert das folgende:
         </para>
 
         <para>
@@ -172,8 +179,9 @@ $this->view->paginator = $paginator;
         <title>Seiten mit View Skripten darstellen</title>
 
         <para>
-            Das View Skript wird verwendet um die Seitenelemente darzustellen (wenn <classname>Zend_Paginator</classname>
-            verwendet wird um das zu tun) und die Seitenkontrollen anzuzeigen.
+            Das View Skript wird verwendet um die Seitenelemente darzustellen (wenn
+            <classname>Zend_Paginator</classname> verwendet wird um das zu tun) und die
+            Seitenkontrollen anzuzeigen.
         </para>
 
         <para>
@@ -204,16 +212,17 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            Der Aufruf des View Helfers fast am Ende ist zu beachten. PaginationControl nimmt bis zu vier
-            Parameter: die Paginator Instanz, einen Scrolling Stil, eine partielle View und ein Array von
-            zusätzlichen Parametern.
+            Der Aufruf des View Helfers fast am Ende ist zu beachten. PaginationControl nimmt bis zu
+            vier Parameter: die Paginator Instanz, einen Scrolling Stil, eine partielle View und ein
+            Array von zusätzlichen Parametern.
         </para>
 
         <para>
-            Die zweiten und dritten Parameter sind sehr wichtig. Wobei die partielle View verwendet wird
-            um festzustellen wie die Seitenkontrollen <emphasis>aussehen</emphasis> sollten, und der
-            Scrolling Stil verwendet wird um zu kontrollieren wie er sich <emphasis>verhalten</emphasis>
-            sollte. Angenommen die partielle View ist im Stil einer Suchseiten Kontrolle, wie anbei:
+            Die zweiten und dritten Parameter sind sehr wichtig. Wobei die partielle View verwendet
+            wird um festzustellen wie die Seitenkontrollen <emphasis>aussehen</emphasis> sollten,
+            und der Scrolling Stil verwendet wird um zu kontrollieren wie er sich
+            <emphasis>verhalten</emphasis> sollte. Angenommen die partielle View ist im Stil einer
+            Suchseiten Kontrolle, wie anbei:
         </para>
 
         <para>
@@ -223,12 +232,12 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            Was passiert wenn der Benutzer den "next" Link ein paar Mal anklickt? Nun, viele Dinge könnten
-            geschehen. Die aktuelle Seitennummer könnte in der Mitte stehen wärend man durchklickt (wie Sie
-            es auf Yahoo macht!), oder Sie könnte bis zum Ende des Seitenbereichs ansteigen und dann auf der
-            linken Seite erscheinen wenn der Benutzer ein weiteres Mal "next" klickt. Die Seitennummer könnte
-            sogar größer und kleiner werden wärend der Benutzer auf sie zugreift (oder "scrollt). (wie es auf
-            Google geschieht).
+            Was passiert wenn der Benutzer den "next" Link ein paar Mal anklickt? Nun, viele Dinge
+            könnten geschehen. Die aktuelle Seitennummer könnte in der Mitte stehen wärend man
+            durchklickt (wie Sie es auf Yahoo macht!), oder Sie könnte bis zum Ende des
+            Seitenbereichs ansteigen und dann auf der linken Seite erscheinen wenn der Benutzer ein
+            weiteres Mal "next" klickt. Die Seitennummer könnte sogar größer und kleiner werden
+            wärend der Benutzer auf sie zugreift (oder "scrollt). (wie es auf Google geschieht).
         </para>
 
         <para>
@@ -249,30 +258,33 @@ $this->view->paginator = $paginator;
                     <row>
                         <entry>All</entry>
                         <entry>
-                            Gibt alle Seiten zurück. Das ist für Seitenkontrollen mit Dropdownmenüs nützlich
-                            wenn Sie relativ wenig Seiten haben. In diesen Fällen ist es oft gewünscht alle
-                            vorhandenen Seiten dem Benutzer auf einmal anzuzeigen.
+                            Gibt alle Seiten zurück. Das ist für Seitenkontrollen mit Dropdownmenüs
+                            nützlich wenn Sie relativ wenig Seiten haben. In diesen Fällen ist es
+                            oft gewünscht alle vorhandenen Seiten dem Benutzer auf einmal
+                            anzuzeigen.
                         </entry>
                     </row>
                     <row>
                         <entry>Elastic</entry>
                         <entry>
-                            Eine Google-artiger Scrolling Stil der sich erweitert und verkleinert wenn ein
-                            Benutzer durch die Seiten scrollt.
+                            Eine Google-artiger Scrolling Stil der sich erweitert und verkleinert
+                            wenn ein Benutzer durch die Seiten scrollt.
                         </entry>
                     </row>
                     <row>
                         <entry>Jumping</entry>
                         <entry>
-                            Wenn Benutzer scrollen, steigt die Seitenzahl bis zum Ende eines gegebenen
-                            Bereichs, und startet anschließend wieder beim Beginn eines neuen Bereichs.
+                            Wenn Benutzer scrollen, steigt die Seitenzahl bis zum Ende eines
+                            gegebenen Bereichs, und startet anschließend wieder beim Beginn eines
+                            neuen Bereichs.
                         </entry>
                     </row>
                     <row>
                         <entry>Sliding</entry>
                         <entry>
-                            Ein Yahoo!-artiger Scrolling Stil der die aktuelle Seitenzahl in der Mitte des
-                            Seitenbereichs platziert, oder so nahe wie möglich. Das ist der Standardstil.
+                            Ein Yahoo!-artiger Scrolling Stil der die aktuelle Seitenzahl in der
+                            Mitte des Seitenbereichs platziert, oder so nahe wie möglich. Das ist
+                            der Standardstil.
                         </entry>
                     </row>
                 </tbody>
@@ -280,14 +292,16 @@ $this->view->paginator = $paginator;
         </table>
 
         <para>
-            Der vierte und letzte Parameter ist reserviert für ein assoziatives Array an zusätzlichen
-            Variablen das in der partiellen View vorhanden sein sill (über <code>$this</code>). Für
-            Instanzen, können diese Werte extra URL Parameter für Seitendarstellungslinks enthalten.
+            Der vierte und letzte Parameter ist reserviert für ein assoziatives Array an
+            zusätzlichen Variablen das in der partiellen View vorhanden sein sill (über
+            <code>$this</code>). Für Instanzen, können diese Werte extra URL Parameter für
+            Seitendarstellungslinks enthalten.
         </para>
 
         <para>
-            Durch das Setzen von einer standardmäßigen partiellen View, einem standardmäßigen Scrolling Stil
-            und einer View Instanz kann dei Aufruf der PaginationControl komplett eliminiert werden:
+            Durch das Setzen von einer standardmäßigen partiellen View, einem standardmäßigen
+            Scrolling Stil und einer View Instanz kann dei Aufruf der PaginationControl komplett
+            eliminiert werden:
         </para>
 
         <para>
@@ -301,8 +315,8 @@ $paginator->setView($view);
         </para>
 
         <para>
-            Wenn alle diese Werte gesetzt sind, kann die Seitenkontrolle im View Skript mit einem einfachen
-            echo Statement dargestellt werden:
+            Wenn alle diese Werte gesetzt sind, kann die Seitenkontrolle im View Skript mit einem
+            einfachen echo Statement dargestellt werden:
         </para>
 
         <para>
@@ -313,8 +327,9 @@ $paginator->setView($view);
 
         <note>
             <para>
-                Natürlich ist es möglich <classname>Zend_Paginator</classname> mit anderen Template Engines zu
-                verwenden. Mit Smarty zum Beispiel, würde man das folgendermaßen bewerkstelligen:
+                Natürlich ist es möglich <classname>Zend_Paginator</classname> mit anderen Template
+                Engines zu verwenden. Mit Smarty zum Beispiel, würde man das folgendermaßen
+                bewerkstelligen:
             </para>
 
             <para>
@@ -518,7 +533,9 @@ $('paginationControl').observe('change', function() {
                         <row>
                             <entry>itemCountPerPage</entry>
                             <entry>integer</entry>
-                            <entry>Maximale Anzahl der Elemente die auf jeder Seite vorhanden sind</entry>
+                            <entry>
+                                Maximale Anzahl der Elemente die auf jeder Seite vorhanden sind
+                            </entry>
                         </row>
                         <row>
                             <entry>last</entry>

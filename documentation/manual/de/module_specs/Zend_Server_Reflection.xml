@@ -8,12 +8,12 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Server_Reflection</classname> stellt einen Standardmechanismus für Funktion und Klassen
-            Introspektion für die Verwendung der Serverklassen bereit. Es basiert auf der PHP 5
-            Reflection API und erweitert es, um Methoden für die Erhaltung von Parameter und
-            Rückgabewerttypen und Beschreibung, eine komplette Liste mit Funktion und Methoden
-            Prototypen (d.h. alle möglichen, gültigen Aufrufkombinationen) sowie Funktions- und
-            Methodenbeschreibungen bereit zu stellen
+            <classname>Zend_Server_Reflection</classname> stellt einen Standardmechanismus für
+            Funktion und Klassen Introspektion für die Verwendung der Serverklassen bereit. Es
+            basiert auf der PHP 5 Reflection API und erweitert es, um Methoden für die Erhaltung von
+            Parameter und Rückgabewerttypen und Beschreibung, eine komplette Liste mit Funktion und
+            Methoden Prototypen (d.h. alle möglichen, gültigen Aufrufkombinationen) sowie Funktions-
+            und Methodenbeschreibungen bereit zu stellen
         </para>
         <para>
             Normalerweise wird diese Funktionalität nur von Entwicklern von Serverklassen für das
@@ -57,10 +57,11 @@ $reflection->getNamespace();
 ]]></programlisting>
 
         <para>
-            <code>reflectFunction()</code> gibt ein  <classname>Zend_Server_Reflection_Function</classname>
-            Objekt zurück; <code>reflectClass</code> gibt ein <classname>Zend_Server_Reflection_Class</classname>
-            Objekt zurück. Bitte die API Documentation beachten, um zu erfahren, welche Methoden
-            für beide Klassen verfügbar sind.
+            <code>reflectFunction()</code> gibt ein
+            <classname>Zend_Server_Reflection_Function</classname> Objekt zurück;
+            <code>reflectClass</code> gibt ein <classname>Zend_Server_Reflection_Class</classname>
+            Objekt zurück. Bitte die API Documentation beachten, um zu erfahren, welche Methoden für
+            beide Klassen verfügbar sind.
         </para>
     </sect2>
 </sect1>

@@ -13,8 +13,8 @@
     </para>
 
     <para>
-        Die typische Methode um Registries mit dem Zend Framework zu verwenden ist
-        durch die statischen Methoden in der <classname>Zend_Registry</classname> Klasse. Alternativ kann die
+        Die typische Methode um Registries mit dem Zend Framework zu verwenden ist durch die
+        statischen Methoden in der <classname>Zend_Registry</classname> Klasse. Alternativ kann die
         Registry als Arrayobjekt verwendet werden, und so können Elemente welche darin gespeichert
         wurden durch ein gewöhnliches Array-artiges Interface verwendet werden.
     </para>
@@ -24,7 +24,8 @@
         <title>Werte in die Registry speichern</title>
 
         <para>
-            Verwende die statische Methode <code>set()</code> um einen Eintrag in der Registry zu Speichern.
+            Verwende die statische Methode <code>set()</code> um einen Eintrag in der Registry zu
+            Speichern.
         </para>
 
         <example id="zend.registry.using.storing.example">
@@ -66,8 +67,8 @@ $value = Zend_Registry::get('index');
 
         <para>
             Die <code>getInstance()</code> Methode gibt ein Singleton Registry Objekt zurück.
-            Dieses Registry Objekt ist durchsuchbar, und erlaubt es auf alle in der Registry gespeicherten
-            Werte einfach zuzugreifen.
+            Dieses Registry Objekt ist durchsuchbar, und erlaubt es auf alle in der Registry
+            gespeicherten Werte einfach zuzugreifen.
         </para>
 
         <example id="zend.registry.using.retrieving.example-iterating">
@@ -102,9 +103,9 @@ foreach ($registry as $index => $value) {
 
         <para>
             Der traditionelle <code>new</code> Operator kann verwendet werden um
-            <classname>Zend_Registry</classname> zu initiieren. Das Initiieren von <classname>Zend_Registry</classname>
-            mit seinem Konstruktor initiiert auch die Einträge in der Registry einfach durch die
-            Verwendung eines assoziativen Arrays als Argument.
+            <classname>Zend_Registry</classname> zu initiieren. Das Initiieren von
+            <classname>Zend_Registry</classname> mit seinem Konstruktor initiiert auch die Einträge
+            in der Registry einfach durch die Verwendung eines assoziativen Arrays als Argument.
         </para>
 
         <example id="zend.registry.using.constructing.example">
@@ -115,8 +116,8 @@ $registry = new Zend_Registry(array('index' => $value));
         </example>
 
         <para>
-            Sobald so ein <classname>Zend_Registry</classname> Objekt initiiert wurde, kann es durch den
-            Aufruf irgendeiner Array Objektmethode verwendet werden, oder indem es als
+            Sobald so ein <classname>Zend_Registry</classname> Objekt initiiert wurde, kann es durch
+            den Aufruf irgendeiner Array Objektmethode verwendet werden, oder indem es als
             Singleton Instanz für <classname>Zend_Registry</classname> mit der statischen Methode
             <code>setInstance()</code> gesetzt wird.
         </para>
@@ -131,8 +132,8 @@ Zend_Registry::setInstance($registry);
         </example>
 
         <para>
-            Die <code>setInstance()</code> Methode wirft eine <classname>Zend_Exception</classname> wenn die
-            statische Registry bereits initialisiert wurde.
+            Die <code>setInstance()</code> Methode wirft eine <classname>Zend_Exception</classname>
+            wenn die statische Registry bereits initialisiert wurde.
         </para>
 
     </sect2>
@@ -182,8 +183,8 @@ var_dump( $registry['index'] );
             <title>Bekannte Probleme mit der ArrayObject::ARRAY_AS_PROPS Option</title>
 
             <para>
-                Einige Versionen von PHP sind bekanntermaßen sehr fehlerhaft wenn die Registry mit der
-                <code>ArrayObject::ARRAY_AS_PROPS</code> Option verwendet wird.
+                Einige Versionen von PHP sind bekanntermaßen sehr fehlerhaft wenn die Registry mit
+                der <code>ArrayObject::ARRAY_AS_PROPS</code> Option verwendet wird.
             </para>
         </warning>
 
@@ -261,10 +262,10 @@ if (isset($registry->index)) {
 
         <para>
             Die statische Registry ist eine Instanz der Klasse <classname>Zend_Registry</classname>.
-            Wenn Funktionalität zur Registry hinzugefügt werden soll, sollte eine
-            Klasse erstellt werden die <classname>Zend_Registry</classname> erweitert und dann kann diese
-            spezielle Klasse definiert werden um das Singleton in der statische Registry zu initiieren.
-            Die statische Methode <code>setClassName()</code> kann verwendet
+            Wenn Funktionalität zur Registry hinzugefügt werden soll, sollte eine Klasse
+            erstellt werden die <classname>Zend_Registry</classname> erweitert und dann kann diese
+            spezielle Klasse definiert werden um das Singleton in der statische Registry zu
+            initiieren. Die statische Methode <code>setClassName()</code> kann verwendet
             werden um die Klasse zu definieren.
             <note>
                 <para>
@@ -283,9 +284,9 @@ Zend_Registry::set('index', $value);
         </example>
 
         <para>
-            Die Registry wirft eine <classname>Zend_Exception</classname> wenn man versucht den Klassennamen
-            zu setzen nachdem die Registry das erste Mal verwendet wurde. Es ist deshalb
-            notwendig den Klassennamen für die statische Registry in der Bootstrap
+            Die Registry wirft eine <classname>Zend_Exception</classname> wenn man versucht den
+            Klassennamen zu setzen nachdem die Registry das erste Mal verwendet wurde. Es ist
+            deshalb notwendig den Klassennamen für die statische Registry in der Bootstrap
             Datei der Anwendung zu definieren.
         </para>
 

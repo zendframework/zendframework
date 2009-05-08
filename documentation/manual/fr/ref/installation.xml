@@ -1,69 +1,107 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13877 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15022 -->
 <!-- Reviewed: no -->
 <sect1 id="introduction.installation">
     <title>Installation</title>
 
-    <para>Veuillez vous reporter à l'annexe concernant <link linkend="requirements">la configuration système requise</link>
-    pour plus d'informations.</para>
+    <para>
+        Veuillez vous reporter à l'annexe concernant <link linkend="requirements">la
+        configuration système requise</link> pour plus d'informations.
+    </para>
 
-    <para>Installer Zend Framework est extrêmement simple. Une fois que vous avez téléchargé et décompressé le
-    framework, vous devez ajouter le dossier "/library" de la distribution en début de votre chemin d'inclusion
-    ("<code>include_path</code>"). Vous pouvez bien entendu aussi déplacer la librairie à tout autre position (partagée
-    ou non) dans votre arborescence de fichiers.<itemizedlist>
+    <para>
+        Installer Zend Framework est extrêmement simple. Une fois que vous avez téléchargé et
+        décompressé le framework, vous devez ajouter le dossier "/library" de la distribution en
+        début de votre chemin d'inclusion ("<code>include_path</code>"). Vous pouvez bien entendu
+        aussi déplacer la librairie à tout autre position (partagée ou non) dans votre arborescence
+        de fichiers.
+        <itemizedlist>
             <listitem>
-                <para><ulink url="http://framework.zend.com/download/latest">Téléchargement de la dernière version stable
-                :</ulink> Cette version, disponible à la fois au format <code>.zip</code> et au format
-                <code>.tar.gz</code>, est un bon choix pour ceux qui débutent avec Zend Framework.</para>
+                <para>
+                    <ulink url="http://framework.zend.com/download/latest">Téléchargement de
+                    la dernière version stable&#160;:</ulink> Cette version, disponible à la fois au
+                    format <code>.zip</code> et au format <code>.tar.gz</code>, est un bon choix
+                    pour ceux qui débutent avec Zend Framework.
+                </para>
             </listitem>
 
             <listitem>
-                <para><ulink url="http://framework.zend.com/download/snapshot">Téléchargement du dernier cliché nocturne
-                :</ulink> Pour ceux qui veulent être à l'avant-garde, les clichés nocturnes représentent le dernier
-                progrès de développement de Zend Framework. Ces clichés sont empaquetés avec la documentation en anglais
-                seulement ou dans toutes les langues disponibles. Si vous prévoyez de travailler avec les derniers
-                développements de Zend Framework, considérez plutôt l'emploi d'un client subversion (SVN).</para>
+                <para>
+                    <ulink url="http://framework.zend.com/download/snapshot">Téléchargement du
+                    dernier cliché nocturne :</ulink> Pour ceux qui veulent être à l'avant-garde,
+                    les clichés nocturnes représentent le dernier progrès de développement de Zend
+                    Framework. Ces clichés sont empaquetés avec la documentation en anglais
+                    seulement ou dans toutes les langues disponibles. Si vous prévoyez de travailler
+                    avec les derniers développements de Zend Framework, considérez plutôt l'emploi
+                    d'un client subversion (SVN).
+                </para>
             </listitem>
 
             <listitem>
-                <para>Utilisation d'un client <ulink url="http://subversion.tigris.org">Subversion</ulink> (SVN) :
-                Zend Framework est un logiciel open-source, et le référentiel Subversion utilisé pour son développement
-                est disponible publiquement. Considérer l'utilisation de SVN pour récupérer Zend Framework si vous
-                utilisez déjà SVN pour vos propres développements, si vous voulez contribuer à l'évolution du framework,
-                ou si vous désirez mettre à jour votre version du framework plus souvent que les sorties stables.</para>
+                <para>
+                    Utilisation d'un client <ulink
+                    url="http://subversion.tigris.org">Subversion</ulink> (SVN)&#160;: Zend
+                    Framework est un logiciel open-source, et le référentiel Subversion utilisé
+                    pour son développement est disponible publiquement. Considérer l'utilisation de
+                    SVN pour récupérer Zend Framework si vous utilisez déjà SVN pour vos propres
+                    développements, si vous voulez contribuer à l'évolution du framework, ou si vous
+                    désirez mettre à jour votre version du framework plus souvent que les sorties
+                    stables.
+                </para>
 
-                <para><ulink
-                url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">L'exportation</ulink> est utile
-                si vous souhaitez obtenir une révision particulière du framework sans les dossiers <code>.svn</code>
-                créé dans une copie de travail.</para>
+                <para>
+                    <ulink
+                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">L'exportation</ulink>
+                    est utile si vous souhaitez obtenir une révision particulière du framework sans
+                    les dossiers <code>.svn</code> créé dans une copie de travail.
+                </para>
 
-                <para><ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">L'extraction d'une
-                copie de travail</ulink> est intéressante si vous contribuez à Zend Framework, et une
-                copie de travail peut être mise à jour à n'importe quel moment avec <ulink
-                url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                update</code></ulink> et les changements peuvent être livrés au référentiel SVN avec la commande
-                <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html"><code>svn commit</code></ulink>.</para>
+                <para>
+                    <ulink
+                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">L'extraction
+                    d'une copie de travail</ulink> est intéressante si vous contribuez à Zend
+                    Framework, et une copie de travail peut être mise à jour à n'importe quel moment
+                    avec <ulink
+                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
+                    update</code></ulink> et les changements peuvent être livrés au référentiel SVN
+                    avec la commande <ulink
+                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html"><code>svn
+                    commit</code></ulink>.
+                </para>
 
-                <para>Une <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">définition
-                externe</ulink> est très pratique pour les développeurs utilisant déjà SVN pour gérer les copies de
-                travail de leurs applications.</para>
+                <para>
+                    Une <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">définition
+                    externe</ulink> est très pratique pour les développeurs utilisant déjà SVN pour
+                    gérer les copies de travail de leurs applications.
+                </para>
 
-                <para>L'URL du tronc du référentiel SVN de Zend Framework est : <ulink
-                url="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink></para>
+                <para>
+                    L'URL du tronc du référentiel SVN de Zend Framework est :
+                    <ulink url="http://framework.zend.com/svn/framework/trunk">http://framework.zend.com/svn/framework/standard/trunk</ulink>
+                </para>
             </listitem>
-        </itemizedlist></para>
+        </itemizedlist>
+    </para>
 
-    <para>Une fois votre copie de Zend Framework disponible, votre application nécessite d'avoir accès aux classes du
-    framework. Bien qu'il y ait <ulink url="http://www.php.net/manual/fr/configuration.changes.php">plusieurs manières
-    de réaliser ceci</ulink>, votre <ulink
-    url="http://www.php.net/manual/fr/ini.core.php#ini.include-path"><code>include_path</code></ulink> de PHP doit
-    contenir le chemin vers la bibliothèque de Zend Framework.</para>
+    <para>
+        Une fois votre copie de Zend Framework disponible, votre application nécessite d'avoir
+        accès aux classes du framework. Bien qu'il y ait
+        <ulink url="http://www.php.net/manual/fr/configuration.changes.php">plusieurs manières de réaliser
+        ceci</ulink>, votre
+        <ulink url="http://www.php.net/manual/fr/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        de PHP doit contenir le chemin vers la bibliothèque de Zend Framework.
+    </para>
 
-    <para>Zend fournit un <ulink url="http://framework.zend.com/docs/quickstart">tutoriel de démarrage rapide
-    ("QuickStart")</ulink> pour vous permettre de démarrer rapidement. Ceci est une excellente manière pour commencer à
-    apprendre le framework avec une présentation de cas concrets que vous pourriez avoir à utiliser.</para>
+    <para>
+        Zend fournit un <ulink url="http://framework.zend.com/docs/quickstart">tutoriel de
+        démarrage rapide ("QuickStart")</ulink> pour vous permettre de démarrer rapidement. Ceci est
+        une excellente manière pour commencer à apprendre le framework avec une présentation de cas
+        concrets que vous pourriez avoir à utiliser.
+    </para>
 
-    <para>Puisque les composants de Zend Framework sont plutôt connectés de manière lâche, divers composants peuvent
-    être choisis pour un usage indépendant si nécessaire. Les chapitres suivants documente l'utilisation de Zend
-    Framework composant par composant.</para>
+    <para>
+        Puisque les composants de Zend Framework sont plutôt connectés de manière lâche,
+        divers composants peuvent être choisis pour un usage indépendant si nécessaire. Les
+        chapitres suivants documente l'utilisation de Zend Framework composant par composant.
+    </para>
 </sect1>

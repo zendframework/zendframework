@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 9630 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
 <!-- Reviewed: no -->
 <appendix id="copyrights">
     <title>Informations de copyright</title>
 
     <para>Les droits ci-dessous sont applicables aux éléments de Zend Framework.</para>
 
-    <para>Copyright © 2005-<?dbtimestamp format="Y"?> Zend Technologies Inc. (<ulink
-    url="http://www.zend.com"></ulink>)</para>
+    <para>
+        Copyright © 2005-<?dbtimestamp format="Y"?> Zend Technologies Inc.
+        (<ulink url="http://www.zend.com"></ulink>)
+    </para>
 </appendix>

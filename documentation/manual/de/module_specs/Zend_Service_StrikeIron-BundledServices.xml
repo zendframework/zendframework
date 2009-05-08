@@ -5,32 +5,35 @@
     <title>Zend_Service_StrikeIron: Mitgelieferte Services</title>
 
     <para>
-      <classname>Zend_Service_StrikeIron</classname> kommt mit Wrapper Klassen für drei populäre StrikeIron Services.
+      <classname>Zend_Service_StrikeIron</classname> kommt mit Wrapper Klassen für drei populäre
+      StrikeIron Services.
     </para>
 
     <sect2 id="zend.service.strikeiron.bundled-services.zip-code-information">
       <title>ZIP Code Informationen</title>
 
       <para>
-        <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> bietet einen Client für StrikeIron's Zip Code Informations
-        Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron Ressourcen nachgesehen
-        werden:
+        <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> bietet einen Client für
+        StrikeIron's Zip Code Informations Service. Für mehr Informationen über dieses Service kann
+        bei diesen StrikeIron Ressourcen nachgesehen werden:
 
         <itemizedlist>
           <listitem>
             <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code Informations Service Seite</ulink>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code Informations
+                  Service Seite</ulink>
             </para>
           </listitem>
           <listitem>
             <para>
-              <ulink url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip Code Informations Service WSDL</ulink>
+              <ulink url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip Code
+                  Informations Service WSDL</ulink>
             </para>
           </listitem>
         </itemizedlist>
 
-        Das Service enthält eine <code>getZipCode()</code> Methode die Informationen über die Amerikanischen
-        ZIP Codes oder Kanadischen Post Codes enthält:
+        Das Service enthält eine <code>getZipCode()</code> Methode die Informationen über die
+        Amerikanischen ZIP Codes oder Kanadischen Post Codes enthält:
 
         <programlisting role="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -76,27 +79,29 @@ $status = $response->serviceStatus;
       <title>U.S. Address-Prüfung</title>
 
       <para>
-        <classname>Zend_Service_StrikeIron_USAddressVerification</classname> bietet einen Client für StrikeIron's U.S.
-        Address-Prüfungs Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron Ressourcen
-        nachgesehen werden:
+        <classname>Zend_Service_StrikeIron_USAddressVerification</classname> bietet einen Client für
+        StrikeIron's U.S. Address-Prüfungs Service. Für mehr Informationen über dieses Service kann
+        bei diesen StrikeIron Ressourcen nachgesehen werden:
 
         <itemizedlist>
           <listitem>
             <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address-Prüfungs Service Seite</ulink>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address-Prüfungs
+                  Service Seite</ulink>
             </para>
           </listitem>
           <listitem>
             <para>
-              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S. Address-Prüfungs Service WSDL</ulink>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S.
+                  Address-Prüfungs Service WSDL</ulink>
             </para>
           </listitem>
         </itemizedlist>
       </para>
 
       <para>
-        Das Service enthält eine <code>verifyAddressUSA()</code> Methode die eine Adresse in den Vereinigten Staaten
-        prüft:
+        Das Service enthält eine <code>verifyAddressUSA()</code> Methode die eine Adresse in den
+        Vereinigten Staaten prüft:
 
         <programlisting role="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
@@ -137,27 +142,30 @@ if ($result->addressErrorNumber != 0) {
       <title>Verkaufs &amp; Steuer Grundlagen</title>
 
       <para>
-        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> bietet einen Client für StrikeIron's Verkaufs &amp;
-        Steuer Grundlagen Service. Für mehr Informationen über dieses Service kann bei diesen StrikeIron
-        Ressourcen nachgesehen werden:
+        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> bietet einen Client für
+        StrikeIron's Verkaufs &amp; Steuer Grundlagen Service. Für mehr Informationen über dieses
+        Service kann bei diesen StrikeIron Ressourcen nachgesehen werden:
 
         <itemizedlist>
           <listitem>
             <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Verkaufs &amp; Steuer Grundlagen Service Seite</ulink>
+              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Verkaufs &amp; Steuer
+                  Grundlagen Service Seite</ulink>
             </para>
           </listitem>
           <listitem>
             <para>
-              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Verkaufs &amp; Steuer Grundlagen Service WSDL</ulink>
+              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Verkaufs &amp;
+                  Steuer Grundlagen Service WSDL</ulink>
             </para>
           </listitem>
         </itemizedlist>
       </para>
 
       <para>
-        Das Service enthält zwei Methoden, <code>getTaxRateUSA()</code> und <code>getTaxRateCanada()</code>,
-        die Verkaufs und Steuer Daten für die Vereinigten Staaten und Kanada enthalten.
+        Das Service enthält zwei Methoden, <code>getTaxRateUSA()</code> und
+        <code>getTaxRateCanada()</code>, die Verkaufs und Steuer Daten für die Vereinigten Staaten
+        und Kanada enthalten.
 
         <programlisting role="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',

@@ -7,20 +7,21 @@
     <sect2 id="zend.search.lucene.extending.analysis">
         <title>Textanalyse</title>
         <para>
-            Die <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> Klasse wird vom Indexer verwendet,
-            um die Textfelder der Dokumente in Abschnitte aufzuteilen.
+            Die <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> Klasse wird vom Indexer
+            verwendet, um die Textfelder der Dokumente in Abschnitte aufzuteilen.
         </para>
 
         <para>
             Die <classname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</classname> und
-            <classname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</classname> Methoden werden verwendet, um
-            den Standardanalysator zu bekommen oder festzulegen.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</classname> Methoden
+            werden verwendet, um den Standardanalysator zu bekommen oder festzulegen.
         </para>
 
         <para>
             Man kann einen eigenen Textanalysator zuordnen oder ihn aus den vordefinierten
-            Analysatoren auswählen: <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname>
-            und <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            Analysatoren auswählen:
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> und
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
             (Standard). Beide interpretieren einen Abschnitt als eine Sequenz aus Buchstaben.
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
             konvertiert alle Abschnitte in Kleinbuchstaben.
@@ -38,16 +39,17 @@ $index->addDocument($doc);
 ]]></programlisting>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Klasse wurde als Anker für alle
-            benutzerdefinierten Analysatoren entwickelt. Benutzer sollten nur die
-            <code>reset()</code> und <code>nextToken()</code> Methoden definieren, welche ihren String
-            von der $_input Eigenschaft nimmt und die Abschnitte Stück für Stück zurückgibt
+            Die <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Klasse wurde als
+            Anker für alle benutzerdefinierten Analysatoren entwickelt. Benutzer sollten nur die
+            <code>reset()</code> und <code>nextToken()</code> Methoden definieren, welche ihren
+            String von der $_input Eigenschaft nimmt und die Abschnitte Stück für Stück zurückgibt
             (ein <code>null</code> Wert indiziert das Ende des Streams).
         </para>
 
         <para>
             Die <code>nextToken()</code> Methode sollte die <code>normalize()</code> Methode auf
-            jedem Token aufrufen. Das erlaubt die Verwendung von Abschnittsfiltern im eigenen Analysator.
+            jedem Token aufrufen. Das erlaubt die Verwendung von Abschnittsfiltern im eigenen
+            Analysator.
         </para>
 
         <para>
@@ -135,18 +137,20 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     <sect2 id="zend.search.lucene.extending.filters">
         <title>Filtern von Tokens</title>
         <para>
-            Der <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Analisator bietet auch einen
-            Mechanismus zum Filtern von Tokens.
+            Der <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Analisator bietet
+            auch einen Mechanismus zum Filtern von Tokens.
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> Klasse bietet ein abstraktes Interface für
-            solche Filter. Eigene Filter sollten diese Klasse direkt oder indirekt erweitern.
+            Die <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> Klasse bietet ein
+            abstraktes Interface für solche Filter. Eigene Filter sollten diese Klasse direkt oder
+            indirekt erweitern.
         </para>
 
         <para>
-            Alle eigenen Filter müssen die <code>normalize()</code> Methode implementieren, welche den
-            Eingabe Token verändern oder signalisieren, dass der Token übersprungen werden sollte.
+            Alle eigenen Filter müssen die <code>normalize()</code> Methode implementieren, welche
+            den Eingabe Token verändern oder signalisieren, dass der Token übersprungen werden
+            sollte.
         </para>
 
         <para>
@@ -172,13 +176,13 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             Der <code>LowerCase</code> Filter wird bereits standardmäßig für den
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname> Analysator
-            verwendet.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            Analysator verwendet.
         </para>
 
         <para>
-            Die <code>ShortWords</code> und <code>StopWords</code> Filter können mit bereits definierten oder
-            eigenen Analysatoren wie folgt verwendet werden:
+            Die <code>ShortWords</code> und <code>StopWords</code> Filter können mit bereits
+            definierten oder eigenen Analysatoren wie folgt verwendet werden:
             <programlisting role="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
@@ -202,9 +206,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> Konstruktor nimmt
-            ein Array mit Stopwörtern als Eingabe entgegen. Aber Stopwörter können auch aus einer
-            Datei geladen werden:
+            Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> Konstruktor
+            nimmt ein Array mit Stopwörtern als Eingabe entgegen. Aber Stopwörter können auch aus
+            einer Datei geladen werden:
             <programlisting role="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
@@ -215,13 +219,14 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-            Die Datei sollte eine normale Textdatei mit einem Wort pro Zeile sein. Das '#' Zeichen markiert eine
-            Zeile als Kommentar.
+            Die Datei sollte eine normale Textdatei mit einem Wort pro Zeile sein. Das '#' Zeichen
+            markiert eine Zeile als Kommentar.
         </para>
 
         <para>
-            Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname> Konstruktor hat ein
-            optionales Argument. Es ist das Limit für die Wortlänge, der standardmäßig 2 ist.
+            Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
+            Konstruktor hat ein optionales Argument. Es ist das Limit für die Wortlänge, der
+            standardmäßig 2 ist.
         </para>
 
     </sect2>
@@ -234,8 +239,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d)  ) *
-            coord(q,d) * queryNorm(q)</code>
+            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) *
+            lengthNorm(t.field in d)  ) * coord(q,d) * queryNorm(q)</code>
         </para>
 
         <para>
@@ -245,8 +250,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</classname> -
-            ein Punktwertfaktor für einen einfachen Begriff mit dem spezifischen Index.
+            idf(t) - <classname>Zend_Search_Lucene_Search_Similarity::tf($term, $reader)</classname>
+            - ein Punktwertfaktor für einen einfachen Begriff mit dem spezifischen Index.
         </para>
 
         <para>
@@ -266,9 +271,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            coord(q,d) - <classname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</classname> -
-            ein Punktwertfaktor, der auf dem Anteil aller Abfragebegriffe basiert, die ein Dokument
-            enthält.
+            coord(q,d) - <classname>Zend_Search_Lucene_Search_Similarity::coord($overlap,
+            $maxOverlap)</classname> - ein Punktwertfaktor, der auf dem Anteil aller Abfragebegriffe
+            basiert, die ein Dokument enthält.
         </para>
 
         <para>
@@ -293,9 +298,10 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         <para>
             Der Algorithmen für die Punktwertermittlung kann durch die Definition einer eigenen
             Ähnlichkeitsklasse angepasst werden. Hierfür muss die
-            <classname>Zend_Search_Lucene_Search_Similarity</classname> Klasse wie unten angegeben erweitert und anschließend die
-            <classname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</classname> Methode verwendet
-            werden um Sie als Standard zu setzen.
+            <classname>Zend_Search_Lucene_Search_Similarity</classname> Klasse wie unten angegeben
+            erweitert und anschließend die
+            <classname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</classname>
+            Methode verwendet werden um Sie als Standard zu setzen.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -337,24 +343,25 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
     <sect2 id="zend.search.lucene.extending.storage">
         <title>Storage Container</title>
         <para>
-            Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_Directory</classname> definiert
-            Funktionalitäten für Verzeichnisse.
+            Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_Directory</classname>
+            definiert Funktionalitäten für Verzeichnisse.
         </para>
 
         <para>
-            Der <classname>Zend_Search_Lucene</classname> Konstruktur verwendet als Eingabe entweder einen
-            String oder ein <classname>Zend_Search_Lucene_Storage_Directory</classname> Objekt.
+            Der <classname>Zend_Search_Lucene</classname> Konstruktur verwendet als Eingabe entweder
+            einen String oder ein <classname>Zend_Search_Lucene_Storage_Directory</classname>
+            Objekt.
         </para>
 
         <para>
-            Die <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> Klasse implementiert
-            Verzeichnisfunktionalitäten für ein Dateisystem.
+            Die <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> Klasse
+            implementiert Verzeichnisfunktionalitäten für ein Dateisystem.
         </para>
 
         <para>
-            Wenn ein String als Eingabe für den <classname>Zend_Search_Lucene</classname> Konstruktur
-            verwendet wird, behandelt der Indexleser (das <classname>Zend_Search_Lucene Objekt</classname>)
-            es wie einen Dateipfad und instanziiert das
+            Wenn ein String als Eingabe für den <classname>Zend_Search_Lucene</classname>
+            Konstruktur verwendet wird, behandelt der Indexleser (das <classname>Zend_Search_Lucene
+            Objekt</classname>) es wie einen Dateipfad und instanziiert das
             <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> Objekt.
         </para>
 
@@ -460,16 +467,16 @@ abstract function getFileObject($filename);
             <classname>Zend_Search_Lucene_Storage_File</classname> Objekt zurück.
         </para>
         <para>
-            Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_File</classname> implementiert einfache
-            Funktionen für Dateiabstraktion und das Lesen von Indexdateien.
+            Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_File</classname>
+            implementiert einfache Funktionen für Dateiabstraktion und das Lesen von Indexdateien.
         </para>
         <para>
             Es muß außerdem <classname>Zend_Search_Lucene_Storage_File</classname> für eine eigene
             Verzeichnisimplementation erweitert werden.
         </para>
         <para>
-            Nur zwei Methoden der <classname>Zend_Search_Lucene_Storage_File</classname> Klasse müssen in
-            der eigenen Implementation überschrieben werden:
+            Nur zwei Methoden der <classname>Zend_Search_Lucene_Storage_File</classname> Klasse
+            müssen in der eigenen Implementation überschrieben werden:
         </para>
 
         <programlisting><![CDATA[

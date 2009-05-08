@@ -101,7 +101,6 @@ $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD, $locale);
 echo $unite; // affiche "1.234 m"
 
-
 $machaine = "The boat is 1,234.50 long.";
 $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD, 'en_US');

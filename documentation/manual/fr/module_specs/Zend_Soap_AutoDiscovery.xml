@@ -282,7 +282,6 @@ $autodiscover->handle();
         service.</para>
     </sect2>
 
-
     <sect2 id="zend.soap.autodiscovery.wsdlstyles">
         <title>Styles de liaisons WSDL</title>
 

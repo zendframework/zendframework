@@ -261,7 +261,6 @@ $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
 
-
 $dbAdapter->query($sqlAlter);
 ]]></programlisting>
 

@@ -307,7 +307,6 @@ dojo.require("custom.TestNameReadStore");
 <?php $this->headScript()->captureEnd() ?>
 ]]></programlisting>
 
-
             <para>
                 Notez les appels aux aides de vue comme <code>headStyle</code> et
                 <code>headScript</code>.

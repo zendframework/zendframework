@@ -29,13 +29,11 @@ foreach ($hits as $hit) {
     // Récupérer le champ de document 'contents'
     $contents = $hit->contents;
 
-
     // Récupérer l'id interne du document Lucene
     $id = $hit->id;
 
     // Récupérer le score de hit
     $score = $hit->score;
-
 
     // Récupérer le champ de document 'id'
     $docId = $hit->getDocument()->id;

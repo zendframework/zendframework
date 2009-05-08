@@ -976,7 +976,6 @@ $cache = Zend_Cache::factory('Core',
 // Puis passons le comme objet de cache par défaut
 Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
 
-
 // Testons avec une classe
 class Bugs extends Zend_Db_Table_Abstract
 {

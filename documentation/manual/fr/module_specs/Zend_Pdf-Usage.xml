@@ -199,7 +199,6 @@ $page2->drawPolygon($x, $y,
                     Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE,
                     Zend_Pdf_Page::FILL_METHOD_EVEN_ODD);
 
-
 // Dessine une ligne
 $page2->setLineWidth(0.5)
       ->drawLine(0, 25, 340, 25);

@@ -121,6 +121,26 @@ class Zend_Tag_ItemListTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($weightValues, $expectedWeightValues);
     }
     
+    public function testSpreadWeightValuesWithSingleValue()
+    {
+        $list = new Zend_Tag_ItemList();
+           
+        $list[] = $this->_getItem('foo', 1);
+        $list[] = $this->_getItem('bar', 5);
+        $list[] = $this->_getItem('baz', 50);
+        
+        $list->spreadWeightValues(array('foobar'));
+        
+        $weightValues = array();
+        foreach ($list as $item) {
+            $weightValues[] = $item->getParam('weightValue');
+        }
+        
+        $expectedWeightValues = array('foobar', 'foobar', 'foobar');
+        
+        $this->assertEquals($weightValues, $expectedWeightValues);
+    }
+    
     public function testSpreadWeightValuesWithEmptyValuesArray()
     {
         $list = new Zend_Tag_ItemList();

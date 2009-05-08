@@ -68,37 +68,44 @@ class Zend_Tag_ItemList implements Countable, SeekableIterator, ArrayAccess
         // Re-index the array
         $values = array_values($values);
         
-        // Calculate min- and max-weight
-        $minWeight = null;
-        $maxWeight = null;
-        
-        foreach ($this->_items as $item) {
-            if ($minWeight === null && $maxWeight === null) {
-                $minWeight = $item->getWeight();
-                $maxWeight = $item->getWeight();
-            } else {
-                $minWeight = min($minWeight, $item->getWeight());
-                $maxWeight = max($maxWeight, $item->getWeight());                
+        // If just a single value is supplied simply assign it to to all tags
+        if (count($values) === 1) {
+            foreach ($this->_items as $item) {
+                $item->setParam('weightValue', $values[0]);
             }
-        }
-        
-        // Calculate the thresholds
-        $steps      = count($values);
-        $delta      = ($maxWeight - $minWeight) / ($steps - 1);
-        $thresholds = array();
-        
-        for ($i = 0; $i < $steps; $i++) {
-            $thresholds[$i] = floor(100 * log(($minWeight + $i * $delta) + 2));
-        }
-
-        // Then assign the weight values 
-        foreach ($this->_items as $item) {
-            $threshold = floor(100 * log($item->getWeight() + 2));
-             
+        } else {
+            // Calculate min- and max-weight
+            $minWeight = null;
+            $maxWeight = null;
+            
+            foreach ($this->_items as $item) {
+                if ($minWeight === null && $maxWeight === null) {
+                    $minWeight = $item->getWeight();
+                    $maxWeight = $item->getWeight();
+                } else {
+                    $minWeight = min($minWeight, $item->getWeight());
+                    $maxWeight = max($maxWeight, $item->getWeight());                
+                }
+            }
+            
+            // Calculate the thresholds
+            $steps      = count($values);
+            $delta      = ($maxWeight - $minWeight) / ($steps - 1);
+            $thresholds = array();
+            
             for ($i = 0; $i < $steps; $i++) {
-                if ($threshold <= $thresholds[$i]) {
-                    $item->setParam('weightValue', $values[$i]);
-                    break;
+                $thresholds[$i] = floor(100 * log(($minWeight + $i * $delta) + 2));
+            }
+    
+            // Then assign the weight values 
+            foreach ($this->_items as $item) {
+                $threshold = floor(100 * log($item->getWeight() + 2));
+                 
+                for ($i = 0; $i < $steps; $i++) {
+                    if ($threshold <= $thresholds[$i]) {
+                        $item->setParam('weightValue', $values[$i]);
+                        break;
+                    }
                 }
             }
         }

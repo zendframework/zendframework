@@ -614,27 +614,29 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                     </row>
                     <row>
                         <entry><emphasis>TerritoryToAlpha3</emphasis></entry>
-                        <entry>Gibt eine Liste von Territorien mit Ihrem 3 stelligen Zeichencode zurück.
-                        Der 3 stellige Zeichencode wird als Arrayschlüssel und das Territorium (Region) als
-                        Arraywert verwendet</entry>
+                        <entry>
+                            Gibt eine Liste von Territorien mit Ihrem 3 stelligen Zeichencode
+                            zurück. Der 3 stellige Zeichencode wird als Arrayschlüssel und das
+                            Territorium (Region) als Arraywert verwendet
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
 
         <para>
-            Wenn nur ein einzelner übersetzter Wert benötigt wird, kann die <code>getTranslation()</code>
-            Methode verwendet werden. Diese gibt immer einen String zurück, akzeptiert aber einige andere Typen
-            als die <code>getTranslationList()</code> Methode. Auch der Wert ist der gleiche wie vorher mit
-            einem Unterschied. Das Detail das man zurückerhalten will muß als zusätzlicher Wert angegeben
-            werden
+            Wenn nur ein einzelner übersetzter Wert benötigt wird, kann die
+            <code>getTranslation()</code> Methode verwendet werden. Diese gibt immer einen String
+            zurück, akzeptiert aber einige andere Typen als die <code>getTranslationList()</code>
+            Methode. Auch der Wert ist der gleiche wie vorher mit einem Unterschied. Das Detail das
+            man zurückerhalten will muß als zusätzlicher Wert angegeben werden
         </para>
 
         <note>
             <para>
-                Weil immer ein Wert als Detail angegeben werden muß, muss dieser Parameter als erster
-                Parameter angegeben werden. Das unterscheidet sich von der <code>getTranslationList()</code>
-                Methode.
+                Weil immer ein Wert als Detail angegeben werden muß, muss dieser Parameter als
+                erster Parameter angegeben werden. Das unterscheidet sich von der
+                <code>getTranslationList()</code> Methode.
             </para>
         </note>
 
@@ -654,267 +656,354 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                 <tbody>
                     <row>
                         <entry><emphasis>Language</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für eine Sprache zurück. Um die gewünschte Übersetzung
-                            auszuwählen muß der Sprachcode als Wert angegeben werden. Der Einfachheit halber
-                            kann auch die <code>getLanguageTranslation($value)</code> Methode verwendet werden
+                        <entry>
+                            Gibt eine Übersetzung für eine Sprache zurück. Um die gewünschte
+                            Übersetzung auszuwählen muß der Sprachcode als Wert angegeben werden.
+                            Der Einfachheit halber kann auch die
+                            <code>getLanguageTranslation($value)</code> Methode verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>Script</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für eine Schrift zurück. Um die gewünschte Übersetzung
-                            auszuwählen muß der Schriftcode als Wert angegeben werden. Der Einfachheit halber
-                            kann auch die <code>getScriptTranslation($value)</code> Methode verwendet werden
+                        <entry>
+                            Gibt eine Übersetzung für eine Schrift zurück. Um die gewünschte
+                            Übersetzung auszuwählen muß der Schriftcode als Wert angegeben werden.
+                            Der Einfachheit halber kann auch die
+                            <code>getScriptTranslation($value)</code> Methode verwendet werden
                         </entry>
                     </row>
                     <row>
-                        <entry><emphasis>Territory</emphasis> oder
-                            <emphasis>Country</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für ein Territorium zurück. Das können Länder, Kontinente
-                            und Territorien sein. Um die gewünschte Variante auszuwählen muß der Territory Code
-                            als Wert angegeben werden. Der Einfachheit halber kann auch die
-                            <code>getCountryTranslation($value)</code> Methode verwendet werden</entry>
+                        <entry>
+                            <emphasis>Territory</emphasis> oder <emphasis>Country</emphasis>
+                        </entry>
+                        <entry>
+                            Gibt eine Übersetzung für ein Territorium zurück. Das können Länder,
+                            Kontinente und Territorien sein. Um die gewünschte Variante auszuwählen
+                            muß der Territory Code als Wert angegeben werden. Der Einfachheit halber
+                            kann auch die <code>getCountryTranslation($value)</code> Methode
+                            verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Variant</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für eine Schriftvariante zurück. Um die gewünschte Variante
-                        auszuwählen muß der Code der Variante als Wert angegeben werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für eine Schriftvariante zurück. Um die gewünschte
+                            Variante auszuwählen muß der Code der Variante als Wert angegeben werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Key</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für einen bekannten Schlüssel zurück. Diese Schlüssel sind
-                            generische Werte die in Übersetzungen verwendet werden. Das sind normalerweise
-                            Kalender, Sammlung und Währung. Um den gewünschten Schlüssel auszuwählen muß der
-                            Schlüsselcode als Wert angegeben werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für einen bekannten Schlüssel zurück. Diese
+                            Schlüssel sind generische Werte die in Übersetzungen verwendet werden.
+                            Das sind normalerweise Kalender, Sammlung und Währung. Um den
+                            gewünschten Schlüssel auszuwählen muß der Schlüsselcode als Wert
+                            angegeben werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DateChars</emphasis></entry>
-                        <entry>Gibt eine Zeichentabelle zurück welche alle Zeichen enthält wenn Daten
-                            angezeigt werden sollen</entry>
+                        <entry>
+                            Gibt eine Zeichentabelle zurück welche alle Zeichen enthält wenn Daten
+                            angezeigt werden sollen
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultCalendar</emphasis></entry>
-                        <entry>Gibt den Standardkalender für das angegebene Gebietsschema zurück. Für die
-                            meisten wird das 'gregorian' (gregorianisch) sein. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt den Standardkalender für das angegebene Gebietsschema zurück. Für
+                            die meisten wird das 'gregorian' (gregorianisch) sein. Der Einfachheit
+                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link>
+                            verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>MonthContext</emphasis></entry>
-                        <entry>Gibt den Standardkontext für Monate zurück der im angegebenen Kalender verwendet
-                            wird. Wenn der Wert nicht angegeben wird, wird der 'gregorian' (gregorianische)
-                            Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt den Standardkontext für Monate zurück der im angegebenen Kalender
+                            verwendet wird. Wenn der Wert nicht angegeben wird, wird der 'gregorian'
+                            (gregorianische) Kalender verwendet. Der Einfachheit halber sollte
+                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultMonth</emphasis></entry>
-                        <entry>Gibt das Standardformat für Monate zurück die im angegebene Kalender verwendet
-                            werden. Wenn der Wert nicht angegeben wird, dann wird der 'gregorian'
-                            (gregorianische) Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt das Standardformat für Monate zurück die im angegebene Kalender
+                            verwendet werden. Wenn der Wert nicht angegeben wird, dann wird der
+                            'gregorian' (gregorianische) Kalender verwendet. Der Einfachheit halber
+                            sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
+                            werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Month</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für ein Monat zurück. Es muß die Nummer des Monats als
-                            Ganzzahlwert angegeben werden. Er muß zwischen 1 und 12 sein. Wenn man die Daten
-                            für andere Kalender, Kontexte oder Formate empfangen will, muß ein Array statt
-                            einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array muß wie
-                            folgt aussehen: <code>array('calendar', 'context', 'format', 'month number')</code>.
-                            Wenn nur ein Ganzzahlwert angegeben wird, sind die Standardwerte der 'gregorian'
-                            (Gregorianische) Kalender, der Kontext 'format' und das Format 'wide'. Der
-                            Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für ein Monat zurück. Es muß die Nummer des Monats
+                            als Ganzzahlwert angegeben werden. Er muß zwischen 1 und 12 sein. Wenn
+                            man die Daten für andere Kalender, Kontexte oder Formate empfangen will,
+                            muß ein Array statt einem Ganzzahlwert mit dem erwarteten Wert angegeben
+                            werden. Das Array muß wie folgt aussehen: <code>array('calendar',
+                            'context', 'format', 'month number')</code>. Wenn nur ein Ganzzahlwert
+                            angegeben wird, sind die Standardwerte der 'gregorian' (Gregorianische)
+                            Kalender, der Kontext 'format' und das Format 'wide'. Der Einfachheit
+                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link>
+                            verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DayContext</emphasis></entry>
-                        <entry>Gibt den Standardkontext für Tage zurück der im angegebenen Kalender verwendet
-                            wird. Wenn der Wert nicht angegeben wird, wird der 'gregorian' (gregorianische)
-                            Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt den Standardkontext für Tage zurück der im angegebenen Kalender
+                            verwendet wird. Wenn der Wert nicht angegeben wird, wird der 'gregorian'
+                            (gregorianische) Kalender verwendet. Der Einfachheit halber sollte
+                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultDay</emphasis></entry>
-                        <entry>Gibt das Standardformat für Tage zurück die im angegebene Kalender verwendet
-                            werden. Wenn der Wert nicht angegeben wird, dann wird der 'gregorian'
-                            (gregorianische) Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt das Standardformat für Tage zurück die im angegebene Kalender
+                            verwendet werden. Wenn der Wert nicht angegeben wird, dann wird der
+                            'gregorian' (gregorianische) Kalender verwendet. Der Einfachheit halber
+                            sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
+                            werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Day</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für einen Tag zurück. Es muß die englische Abkürzung des
-                            Tages als Stringwert angegeben werden ('sun', 'mon', usw.). Wenn man die Daten
-                            für andere Kalender, Kontexte oder Formate empfangen will, muß ein Array statt
-                            einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array muß wie
-                            folgt aussehen: <code>array('calendar', 'context', 'format', 'day abbreviation')</code>.
-                            Wenn nur ein String angegeben wird, sind die Standardwerte der 'gregorian'
-                            (Gregorianische) Kalender, der Kontext 'format' und das Format 'wide'. Der
-                            Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für einen Tag zurück. Es muß die englische
+                            Abkürzung des Tages als Stringwert angegeben werden ('sun', 'mon',
+                            usw.). Wenn man die Daten für andere Kalender, Kontexte oder Formate
+                            empfangen will, muß ein Array statt einem Ganzzahlwert mit dem
+                            erwarteten Wert angegeben werden. Das Array muß wie folgt aussehen:
+                            <code>array('calendar', 'context', 'format', 'day abbreviation')</code>.
+                            Wenn nur ein String angegeben wird, sind die Standardwerte der
+                            'gregorian' (Gregorianische) Kalender, der Kontext 'format' und das
+                            Format 'wide'. Der Einfachheit halber sollte <link
+                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Quarter</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für ein Quartal zurück. Es muß die Nummer des Quartals
-                            Ganzzahl angegeben werden und diese muß zwischen 1 und 4 sein. Wenn man die Daten
-                            für andere Kalender, Kontexte oder Formate empfangen will, muß ein Array statt
-                            einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array muß wie
-                            folgt aussehen: <code>array('calendar', 'context', 'format', 'quarter number')</code>.
-                            Wenn nur ein String angegeben wird, sind die Standardwerte der 'gregorian'
-                            (Gregorianische) Kalender, der Kontext 'format' und das Format 'wide'</entry>
+                        <entry>
+                            Gibt eine Übersetzung für ein Quartal zurück. Es muß die Nummer des
+                            Quartals Ganzzahl angegeben werden und diese muß zwischen 1 und 4 sein.
+                            Wenn man die Daten für andere Kalender, Kontexte oder Formate empfangen
+                            will, muß ein Array statt einem Ganzzahlwert mit dem erwarteten Wert
+                            angegeben werden. Das Array muß wie folgt aussehen:
+                            <code>array('calendar', 'context', 'format', 'quarter number')</code>.
+                            Wenn nur ein String angegeben wird, sind die Standardwerte der
+                            'gregorian' (Gregorianische) Kalender, der Kontext 'format' und das
+                            Format 'wide'
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Am</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für 'AM' in dem erwarteten Gebietsschema zurück. Wenn man
-                            die Daten für andere Kalender empfangen will, muß ein String mit dem erwarteten
-                            Kalender angegeben werden. Wenn der Wert nicht angegeben wird, dann wird der
-                            'gregorian' (Gregorianische) Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für 'AM' in dem erwarteten Gebietsschema zurück.
+                            Wenn man die Daten für andere Kalender empfangen will, muß ein String
+                            mit dem erwarteten Kalender angegeben werden. Wenn der Wert nicht
+                            angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender
+                            verwendet. Der Einfachheit halber sollte <link
+                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Pm</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für 'PM' in dem erwarteten Gebietsschema zurück. Wenn man
-                            die Daten für andere Kalender empfangen will, muß ein String mit dem erwarteten
-                            Kalender angegeben werden. Wenn der Wert nicht angegeben wird, dann wird der
-                            'gregorian' (Gregorianische) Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt eine Übersetzung für 'PM' in dem erwarteten Gebietsschema zurück.
+                            Wenn man die Daten für andere Kalender empfangen will, muß ein String
+                            mit dem erwarteten Kalender angegeben werden. Wenn der Wert nicht
+                            angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender
+                            verwendet. Der Einfachheit halber sollte <link
+                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Era</emphasis></entry>
-                        <entry>Gibt eine Übersetzung für eine Epoche zurück. Es muß die Nummer der Epoche als
-                            Ganzzahl oder String angegeben werden. Wenn man die Daten
+                        <entry>
+                            Gibt eine Übersetzung für eine Epoche zurück. Es muß die Nummer der
+                            Epoche als Ganzzahl oder String angegeben werden. Wenn man die Daten
                             für andere Kalender oder Formate empfangen will, muß ein Array statt
-                            einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array muß wie
-                            folgt aussehen: <code>array('calendar', 'format', 'era number')</code>.
-                            Wenn nur ein String angegeben wird, sind die Standardwerte der 'gregorian'
-                            (Gregorianische) Kalender und das Format 'abbr'</entry>
+                            einem Ganzzahlwert mit dem erwarteten Wert angegeben werden. Das Array
+                            muß wie folgt aussehen: <code>array('calendar', 'format',
+                            'era number')</code>. Wenn nur ein String angegeben wird, sind die
+                            Standardwerte der 'gregorian' (Gregorianische) Kalender und das Format
+                            'abbr'
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultDate</emphasis></entry>
-                        <entry>Gibt das Standard Datumsformat zurück das im angegebenen Kalender verwendet
-                            wird. Wenn der Wert nicht angegeben wird, dann wird der 'gregorian' (Gregorianische)
-                            Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt das Standard Datumsformat zurück das im angegebenen Kalender
+                            verwendet wird. Wenn der Wert nicht angegeben wird, dann wird der
+                            'gregorian' (Gregorianische) Kalender verwendet. Der Einfachheit halber
+                            sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
+                            werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Date</emphasis></entry>
-                        <entry>Gibt das Datumsformat für einen angegebenen Kalender oder Format in einem
-                            Gebietsschema zurück. Wenn kein Wert angegeben wird, dann wird der 'gregorian'
-                            (Gregorianische) Kalender mit dem Format 'medium' verwendet. Wenn ein String
-                            angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender mit dem
-                            angegebenen Format verwendet. Oder es kann auch ein Array angegeben welches wie
-                            folgt aussehen muß: <code>array('calendar', 'format')</code>. Der Einfachheit
-                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
-                            werden</entry>
+                        <entry>
+                            Gibt das Datumsformat für einen angegebenen Kalender oder Format in
+                            einem Gebietsschema zurück. Wenn kein Wert angegeben wird, dann wird der
+                            'gregorian' (Gregorianische) Kalender mit dem Format 'medium' verwendet.
+                            Wenn ein String angegeben wird, dann wird der 'gregorian'
+                            (Gregorianische) Kalender mit dem angegebenen Format verwendet. Oder es
+                            kann auch ein Array angegeben welches wie folgt aussehen muß:
+                            <code>array('calendar', 'format')</code>. Der Einfachheit halber sollte
+                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DefaultTime</emphasis></entry>
-                        <entry>Gibt das Standard Zeitformat zurück das im angegebenen Kalender verwendet
-                            wird. Wenn der Wert nicht angegeben wird, dann wird der 'gregorian' (Gregorianische)
-                            Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt das Standard Zeitformat zurück das im angegebenen Kalender
+                            verwendet wird. Wenn der Wert nicht angegeben wird, dann wird der
+                            'gregorian' (Gregorianische) Kalender verwendet. Der Einfachheit halber
+                            sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
+                            werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Time</emphasis></entry>
-                        <entry>Gibt das Zeitformat für einen angegebenen Kalender oder Format in einem
-                            Gebietsschema zurück. Wenn kein Wert angegeben wird, dann wird der 'gregorian'
-                            (Gregorianische) Kalender mit dem Format 'medium' verwendet. Wenn ein String
-                            angegeben wird, dann wird der 'gregorian' (Gregorianische) Kalender mit dem
-                            angegebenen Format verwendet. Oder es kann auch ein Array angegeben welches wie
-                            folgt aussehen muß: <code>array('calendar', 'format')</code>. Der Einfachheit
-                            halber sollte <link linkend="zend.date.introduction">Zend_Date</link> verwendet
-                            werden</entry>
+                        <entry>
+                            Gibt das Zeitformat für einen angegebenen Kalender oder Format in einem
+                            Gebietsschema zurück. Wenn kein Wert angegeben wird, dann wird der
+                            'gregorian' (Gregorianische) Kalender mit dem Format 'medium' verwendet.
+                            Wenn ein String angegeben wird, dann wird der 'gregorian'
+                            (Gregorianische) Kalender mit dem angegebenen Format verwendet. Oder es
+                            kann auch ein Array angegeben welches wie folgt aussehen muß:
+                            <code>array('calendar', 'format')</code>. Der Einfachheit halber sollte
+                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DateTime</emphasis></entry>
-                        <entry>Gibt das Datums-Zeitformat für ein angegebenes Gebietsschema zurück welches
-                            anzeigt wie Datum und Zeit im selben String des angegebenen Kalenders angezeigt
-                            werden sollten. Wenn kein Wert angegeben wird, dann wird der 'gregorian'
-                            (Gregorianische) Kalender verwendet. Der Einfachheit halber sollte
-                            <link linkend="zend.date.introduction">Zend_Date</link> verwendet werden</entry>
+                        <entry>
+                            Gibt das Datums-Zeitformat für ein angegebenes Gebietsschema zurück
+                            welches anzeigt wie Datum und Zeit im selben String des angegebenen
+                            Kalenders angezeigt werden sollten. Wenn kein Wert angegeben wird, dann
+                            wird der 'gregorian' (Gregorianische) Kalender verwendet. Der
+                            Einfachheit halber sollte <link
+                                linkend="zend.date.introduction">Zend_Date</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Field</emphasis></entry>
-                        <entry>Gibt ein übersetztes Datumsfeld zurück welches verwendet werden kann um
-                            Kalender oder Datumsstrings wie 'Monat' oder 'Jahr' in der gewünschten Sprache
-                            korrekt anzuzeigen. Das Feld das als String zurückgegeben werden soll muß angegeben
-                            werden. In diesem Fall wird der 'gregorian' (Gregorianische) Kalender verwendet.
-                            Wenn man die Felder für andere Kalenderformat erhalten will muß ein Array
-                            angegeben werden das wie folgt auszusehen hat:
-                            <code>array('calendar', 'date field')</code></entry>
+                        <entry>
+                            Gibt ein übersetztes Datumsfeld zurück welches verwendet werden kann um
+                            Kalender oder Datumsstrings wie 'Monat' oder 'Jahr' in der gewünschten
+                            Sprache korrekt anzuzeigen. Das Feld das als String zurückgegeben werden
+                            soll muß angegeben werden. In diesem Fall wird der 'gregorian'
+                            (Gregorianische) Kalender verwendet. Wenn man die Felder für andere
+                            Kalenderformat erhalten will muß ein Array angegeben werden das wie
+                            folgt auszusehen hat: <code>array('calendar', 'date field')</code>
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>Relative</emphasis></entry>
-                        <entry>Gibt ein übersetztes Datums zurück welches relativ zu heute ist. Dieses kann
-                            Strings wie 'Gestern' oder 'Morgen' in einer gewünschten Sprache enthalten. Es muß
-                            die Anzahl der relativen Tage zu heute angegeben werden um den erwarteten String
-                            zu erhalten. Gestern würde '-1' sein, morgen '1' und so weiter. Es wird hierbei der
-                            'gregorian' (Gregorianische) Kalender verwendet. Wenn man die relativen Daten für
-                            andere Kalenderformat erhalten will muß ein Array angegeben werden das wie folgt
-                            auszusehen hat: <code>array('calendar', 'date field')</code></entry>
+                        <entry>
+                            Gibt ein übersetztes Datums zurück welches relativ zu heute ist. Dieses
+                            kann Strings wie 'Gestern' oder 'Morgen' in einer gewünschten Sprache
+                            enthalten. Es muß die Anzahl der relativen Tage zu heute angegeben
+                            werden um den erwarteten String zu erhalten. Gestern würde '-1' sein,
+                            morgen '1' und so weiter. Es wird hierbei der 'gregorian'
+                            (Gregorianische) Kalender verwendet. Wenn man die relativen Daten für
+                            andere Kalenderformat erhalten will muß ein Array angegeben werden das
+                            wie folgt auszusehen hat: <code>array('calendar', 'date field')</code>
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>DecimalNumber</emphasis></entry>
-                        <entry>Gibt das Format für Dezimalzahlen in einem angegebenen Gebietsschema zurück. Der
-                            Einfachheit halber sollte
-                            <link linkend="zend.locale.parsing">Zend_Locale_Format</link> verwendet werden
+                        <entry>
+                            Gibt das Format für Dezimalzahlen in einem angegebenen Gebietsschema
+                            zurück. Der Einfachheit halber sollte <link
+                                linkend="zend.locale.parsing">Zend_Locale_Format</link> verwendet
+                            werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>ScientificNumber</emphasis></entry>
-                        <entry>Gibt das Format für Wissenschaftliche Zahlen im angegebenen Gebietsschema
-                            zurück</entry>
+                        <entry>
+                            Gibt das Format für Wissenschaftliche Zahlen im angegebenen
+                            Gebietsschema zurück
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>PercentNumber</emphasis></entry>
-                        <entry>Gibt das Format für Prozentzahlen im angegebenen Gebietsschema zurück</entry>
+                        <entry>
+                            Gibt das Format für Prozentzahlen im angegebenen Gebietsschema zurück
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyNumber</emphasis></entry>
-                        <entry>Gibt das Format für die Anzeige von Währungszahlen in einem angegebenen
+                        <entry>
+                            Gibt das Format für die Anzeige von Währungszahlen in einem angegebenen
                             Gebietsschema zurück. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>NameToCurrency</emphasis></entry>
-                        <entry>Gibt einen übersetzten Namen für eine angegebene Währung zurück. Die Währung muß
-                            im ISO Format angegeben werden welches zum Beispiel 'EUR' für die Währung 'Euro'
-                            ist. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                        <entry>
+                            Gibt einen übersetzten Namen für eine angegebene Währung zurück. Die
+                            Währung muß im ISO Format angegeben werden welches zum Beispiel 'EUR'
+                            für die Währung 'Euro' ist. Der Einfachheit halber sollte
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyToName</emphasis></entry>
-                        <entry>Gibt eine Währung für einen angegebenen lokalisierten Namen zurück. Der
+                        <entry>
+                            Gibt eine Währung für einen angegebenen lokalisierten Namen zurück. Der
                             Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                            <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencySymbol</emphasis></entry>
-                        <entry>Gibt das für eine Währung verwendete Symbol in einem Gebietsschema zurück. Nicht
-                            für alle Währungen existiert ein Symbol. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                        <entry>
+                            Gibt das für eine Währung verwendete Symbol in einem Gebietsschema
+                            zurück. Nicht für alle Währungen existiert ein Symbol. Der Einfachheit
+                            halber sollte <link
+                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
+                            werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>Question</emphasis></entry>
-                        <entry>Gibt einen lokalisierten String für Akzeptanz ('yes') und Verneinung ('no')
-                            zurück. Es muß entweder 'yes' oder 'no' als Wert angegeben werden um den erwarteten
-                            String zu erhalten. Der Einfachheit halber sollte
-                            <link linkend="zend.locale.getquestion">Zend_Locale's getQuestion Methode</link>
-                            verwendet werden</entry>
+                        <entry>
+                            Gibt einen lokalisierten String für Akzeptanz ('yes') und Verneinung
+                            ('no') zurück. Es muß entweder 'yes' oder 'no' als Wert angegeben werden
+                            um den erwarteten String zu erhalten. Der Einfachheit halber sollte
+                            <link linkend="zend.locale.getquestion">Zend_Locale's getQuestion
+                                Methode</link> verwendet werden
+                        </entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyFraction</emphasis></entry>
-                        <entry>Gibt den Bruch der für eine angegebene Währung zu verwenden ist, zurück. Die
-                            Währung muß als ISO Wert angegeben werden. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                        <entry>
+                            Gibt den Bruch der für eine angegebene Währung zu verwenden ist, zurück.
+                            Die Währung muß als ISO Wert angegeben werden. Der Einfachheit halber
+                            sollte <link linkend="zend.currency.introduction">Zend_Currency</link>
+                            verwendet werden
                         </entry>
                     </row>
                     <row>
                         <entry><emphasis>CurrencyRounding</emphasis></entry>
-                        <entry>Gibt zurück wie eine angegebene Währung gerundet werden muß. Die Währung muß als
-                            ISO Wert angegeben werden. Wenn die Währung nicht angegeben wird das wird die
-                            'DEFAULT' (Standard) Rundung zurückgegeben. Der Einfachheit halber sollte
-                            <link linkend="zend.currency.introduction">Zend_Currency</link> verwendet werden
+                        <entry>
+                            Gibt zurück wie eine angegebene Währung gerundet werden muß. Die Währung
+                            muß als ISO Wert angegeben werden. Wenn die Währung nicht angegeben wird
+                            das wird die 'DEFAULT' (Standard) Rundung zurückgegeben. Der Einfachheit
+                            halber sollte <link
+                                linkend="zend.currency.introduction">Zend_Currency</link> verwendet
+                            werden
                         </entry>
                     </row>
                     <row>

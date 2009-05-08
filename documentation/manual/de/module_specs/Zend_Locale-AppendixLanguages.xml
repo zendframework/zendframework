@@ -6,8 +6,9 @@
     <title>Unterstützte Gebietsschemata</title>
 
     <para>
-        <classname>Zend_Locale</classname> bietet Informationen über verschiedenste Gebietsschemata. Die folgende
-        Tabelle zeigt alle Sprachen und deren zugehörige Gebietsschemata, sortiert nach Sprache:
+        <classname>Zend_Locale</classname> bietet Informationen über verschiedenste Gebietsschemata.
+        Die folgende Tabelle zeigt alle Sprachen und deren zugehörige Gebietsschemata, sortiert nach
+        Sprache:
     </para>
 
     <table id="zend.locale.appendix.table">

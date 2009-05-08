@@ -6,21 +6,23 @@
     <sect2 id="zend.pdf.pages.creation">
         <title>Erstellen von Seiten</title>
         <para>
-            Die Seiten in einem PDF Dokument werden durch <classname>Zend_Pdf_Page</classname> Instanzen in
-            <classname>Zend_Pdf</classname> abgebildet.
+            Die Seiten in einem PDF Dokument werden durch <classname>Zend_Pdf_Page</classname>
+            Instanzen in <classname>Zend_Pdf</classname> abgebildet.
         </para>
 
         <para>
-            PDF Seiten werden entweder aus einem vorhandenen PDF gelesen oder erstellt indem die API von
-            <classname>Zend_Pdf</classname> verwendet wird.
+            PDF Seiten werden entweder aus einem vorhandenen PDF gelesen oder erstellt indem die API
+            von <classname>Zend_Pdf</classname> verwendet wird.
         </para>
 
         <para>
-            Neue Seiten können durch die Instanzierung neuer <classname>Zend_Pdf_Page</classname> Objekte erstellt
-            werden, entweder direkt oder durch den Aufruf der <classname>Zend_Pdf::newPage()</classname> Methode,
-            die ein <classname>Zend_Pdf_Page</classname> Objekt zurückgibt. <classname>Zend_Pdf::newPage()</classname> erstellt
-            eine Seite die bereits an ein Dokument angehängt ist. Ungebundene Seiten können nicht mit
-            verschiedenen PDF Dokumenten verwendet werden, sind aber etwas schneller.
+            Neue Seiten können durch die Instanzierung neuer <classname>Zend_Pdf_Page</classname>
+            Objekte erstellt werden, entweder direkt oder durch den Aufruf der
+            <classname>Zend_Pdf::newPage()</classname> Methode, die ein
+            <classname>Zend_Pdf_Page</classname> Objekt zurückgibt.
+            <classname>Zend_Pdf::newPage()</classname> erstellt eine Seite die bereits an ein
+            Dokument angehängt ist. Ungebundene Seiten können nicht mit verschiedenen PDF Dokumenten
+            verwendet werden, sind aber etwas schneller.
             <footnote>
                 <para>
                 Dies ist eine Einschränkung der aktuellen ZF Version. Sie wird in
@@ -31,10 +33,11 @@
         </para>
 
         <para>
-            Die <classname>Zend_Pdf::newPage()</classname> Methode und der <classname>Zend_Pdf_Page</classname> Konstruktor
-            benötigen die gleichen Parameter welche die Größe der Seite spezifizieren. Sie können entweder
-            die Seitengröße ($x, $y) in Punkten (1/72 Zoll) nehmen oder eine vordefinierte Konstante, die den
-            Seitentyp repräsentiert:
+            Die <classname>Zend_Pdf::newPage()</classname> Methode und der
+            <classname>Zend_Pdf_Page</classname> Konstruktor benötigen die gleichen Parameter welche
+            die Größe der Seite spezifizieren. Sie können entweder die Seitengröße ($x, $y) in
+            Punkten (1/72 Zoll) nehmen oder eine vordefinierte Konstante, die den Seitentyp
+            repräsentiert:
             <itemizedlist>
                 <listitem>
                     <para>Zend_Pdf_Page::SIZE_A4</para>
@@ -52,10 +55,10 @@
         </para>
 
         <para>
-            Dokumentseiten werden im öffentlichen <code>$pages</code> Attribut der <classname>Zend_Pdf</classname>
-            Klasse abgelegt. Das Attribut enthält ein Array mit <classname>Zend_Pdf_Page</classname>
-            Objekten und definiert die komplette Instanz und die Reihenfolge der Seiten. Dieses Array kann
-            wie ein normales Array verändert werden:
+            Dokumentseiten werden im öffentlichen <code>$pages</code> Attribut der
+            <classname>Zend_Pdf</classname> Klasse abgelegt. Das Attribut enthält ein Array mit
+            <classname>Zend_Pdf_Page</classname> Objekten und definiert die komplette Instanz und
+            die Reihenfolge der Seiten. Dieses Array kann wie ein normales Array verändert werden:
         </para>
 
         <example id="zend.pdf.pages.example-1">
@@ -81,8 +84,9 @@ unset($pdf->pages[$id]);
     <sect2 id="zend.pdf.pages.cloning">
         <title>Klonen von Seiten</title>
         <para>
-            Bestehende PDF Seiten können durch das Erstellen eines neuen <classname>Zend_Pdf_Page</classname> Objektes
-            geklont werden indem eine existierende Seite als Parameter angegeben wird:
+            Bestehende PDF Seiten können durch das Erstellen eines neuen
+            <classname>Zend_Pdf_Page</classname> Objektes geklont werden indem eine existierende
+            Seite als Parameter angegeben wird:
         </para>
 
         <example id="zend.pdf.pages.example-2">
@@ -110,14 +114,15 @@ unset($pdf->pages[$templatePageIndex]);
         </example>
 
         <para>
-            Das ist nützlich wenn verschiedene Seite mit Hilfe eines Templates erstellt werden sollen.
+            Das ist nützlich wenn verschiedene Seite mit Hilfe eines Templates erstellt werden
+            sollen.
         </para>
 
         <caution>
             <para>
-                Wichtig! Geklonte Seiten verwenden die gleichen PDF Ressourcen mit der Template Seite.
-                Diese kann also nur innerhalb des gleichen Dokuments als Template Seite verwendet werden.
-                Modifizierte Dokumente können als neue abgespeichert werden.
+                Wichtig! Geklonte Seiten verwenden die gleichen PDF Ressourcen mit der Template
+                Seite. Diese kann also nur innerhalb des gleichen Dokuments als Template Seite
+                verwendet werden. Modifizierte Dokumente können als neue abgespeichert werden.
             </para>
         </caution>
     </sect2>

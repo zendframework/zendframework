@@ -125,7 +125,10 @@
                 </row>
                 <row>
                     <entry><code>resource</code></entry>
-                    <entry><code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> | <code>null</code></entry>
+                    <entry>
+                        <code>string</code> | <classname>Zend_Acl_Resource_Interface</classname> |
+                        <code>null</code>
+                    </entry>
                     <entry><code>null</code></entry>
                     <entry>
                         ACL Ressource die mit der Seite verknüpft werden soll. Lesen Sie mehr im
@@ -165,13 +168,15 @@
                 </row>
                 <row>
                     <entry><code>pages</code></entry>
-                    <entry><code>array</code> | <classname>Zend_Config</classname> | <code>null</code></entry>
+                    <entry>
+                        <code>array</code> | <classname>Zend_Config</classname> | <code>null</code>
+                    </entry>
                     <entry><code>null</code></entry>
                     <entry>
                         Kind Seiten der Seite. Das sollte ein <code>array</code> oder
-                        <classname>Zend_Config</classname> Objekt sein das entweder Seiten Optionen enthält
-                        die in die <code>factory()</code> Methode übergeben werden können, oder
-                        die aktuelle <classname>Zend_Navigation_Page</classname> Instanz, oder
+                        <classname>Zend_Config</classname> Objekt sein das entweder Seiten Optionen
+                        enthält die in die <code>factory()</code> Methode übergeben werden können,
+                        oder die aktuelle <classname>Zend_Navigation_Page</classname> Instanz, oder
                         einen Mix von beiden.
                     </entry>
                 </row>

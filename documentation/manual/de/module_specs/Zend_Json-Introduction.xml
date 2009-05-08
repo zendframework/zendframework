@@ -5,9 +5,10 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Json</classname> stellt komfortable Methoden für das Serialisieren von nativem PHP
-        nach JSON und das Dekodieren von JSON in natives PHP bereit. Für weitere Informationen zu
-        JSON <ulink url="http://www.json.org/">besuche die Website des JSON Projekts</ulink>.
+        <classname>Zend_Json</classname> stellt komfortable Methoden für das Serialisieren von
+        nativem PHP nach JSON und das Dekodieren von JSON in natives PHP bereit. Für weitere
+        Informationen zu JSON <ulink url="http://www.json.org/">besuche die Website des JSON
+            Projekts</ulink>.
     </para>
 
     <para>
@@ -18,13 +19,14 @@
     </para>
 
     <para>
-        Zusätzlich bietet <classname>Zend_Json</classname> einen nützlichen Weg um jeglichen willkürlichen XML formatierten String
-        in einem JSON formatierten String zu konvertieren. Dieses eingebaute Feature ermöglicht es PHP
-        Entwicklern, Enterprise Daten die im XML Format kodiert sind, in das JSON Format zu transformieren bevor
-        es an Browser-basierende Ajax Client Anwendungen gesendet wird. Das bietet einen einfachen Weg um
-        dynamisch Daten mit Server seitigem Code zu konvertieren was unnötiges XML Parsen auf der
-        Browser-seitigen Anwendung verhindert. Das offeriert eine nette nützliche Funktion was wiederum
-        in einfacheren Anwendungs-spezifischer Datenverarbeitungs Techniken resultiert.
+        Zusätzlich bietet <classname>Zend_Json</classname> einen nützlichen Weg um jeglichen
+        willkürlichen XML formatierten String in einem JSON formatierten String zu konvertieren.
+        Dieses eingebaute Feature ermöglicht es PHP Entwicklern, Enterprise Daten die im XML Format
+        kodiert sind, in das JSON Format zu transformieren bevor es an Browser-basierende Ajax
+        Client Anwendungen gesendet wird. Das bietet einen einfachen Weg um dynamisch Daten mit
+        Server seitigem Code zu konvertieren was unnötiges XML Parsen auf der Browser-seitigen
+        Anwendung verhindert. Das offeriert eine nette nützliche Funktion was wiederum in
+        einfacheren Anwendungs-spezifischer Datenverarbeitungs Techniken resultiert.
     </para>
 
 </sect1>

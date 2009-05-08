@@ -5,10 +5,11 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Layout</classname> implementiert ein plassisches Zwei Schritt View Pattern, welches Entwicklern
-        erlaubt Anwendungs Inhalte innerhalb von anderen Views einzupacken, die normalerweise Site Templates
-        repräsentieren. Solche Templates werden oft von anderen Projekten als <emphasis>Layouts</emphasis>
-        bezeichnet, und Zend Framework hat diesen  Begriff der Konsistenz halber übernommen.
+        <classname>Zend_Layout</classname> implementiert ein plassisches Zwei Schritt View Pattern,
+        welches Entwicklern erlaubt Anwendungs Inhalte innerhalb von anderen Views einzupacken, die
+        normalerweise Site Templates repräsentieren. Solche Templates werden oft von anderen
+        Projekten als <emphasis>Layouts</emphasis> bezeichnet, und Zend Framework hat diesen Begriff
+        der Konsistenz halber übernommen.
     </para>
 
     <para>
@@ -18,36 +19,38 @@
     <itemizedlist>
         <listitem>
             <para>
-                Automatische Auswahl und Darstellung von Layouts wenn diese mit den Zend Framework MVC
-                Komponenten verwendet werden.
+                Automatische Auswahl und Darstellung von Layouts wenn diese mit den Zend Framework
+                MVC Komponenten verwendet werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Bietet einen seperierten Bereich für Layouts die auf Variablen und Inhalte bezogen sind.
+                Bietet einen seperierten Bereich für Layouts die auf Variablen und Inhalte bezogen
+                sind.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Erlaubt Konfiguration, inklusive Layout Name, Layout Skript Auflösung (Beugung), und Layout
-                Skript Pfad.
+                Erlaubt Konfiguration, inklusive Layout Name, Layout Skript Auflösung (Beugung), und
+                Layout Skript Pfad.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Erlaubt das Ausschalten von Layouts, die Änderung von Layout Skripts, und andere Stati;
-                erlaubt diese Aktionen von innerhalb des Aktions Kontrollers und von View Skripten.
+                Erlaubt das Ausschalten von Layouts, die Änderung von Layout Skripts, und andere
+                Stati; erlaubt diese Aktionen von innerhalb des Aktions Kontrollers und von View
+                Skripten.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 Folgt den selben Skript Auflösungs Regeln (Beugung) wie der
-                <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, aber erlaubt
-                auch die Verwendung von anderen Regeln.
+                <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>, aber
+                erlaubt auch die Verwendung von anderen Regeln.
             </para>
         </listitem>
 

@@ -52,11 +52,11 @@ $server->handle();
         <title>Aufruf eines Zend_Rest_Server Services</title>
 
         <para>
-            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen muß ein GET/POST <code>method</code> Argument
-            mit einem Wert angegeben werden der der Methode entspricht die aufgerufen werden soll. Es können
-            anschließend beliebig viele Argumente folgen die entweder den Namen des Arguments verwenden (z.B. "wer")
-            oder man kann <code>arg</code> verwenden gefolgt von der nummerischen Position des Arguments
-            (z.B. "arg1").
+            Um ein <classname>Zend_Rest_Server</classname> Service aufzurufen muß ein GET/POST
+            <code>method</code> Argument mit einem Wert angegeben werden der der Methode entspricht
+            die aufgerufen werden soll. Es können anschließend beliebig viele Argumente folgen die
+            entweder den Namen des Arguments verwenden (z.B. "wer") oder man kann <code>arg</code>
+            verwenden gefolgt von der nummerischen Position des Arguments (z.B. "arg1").
         </para>
 
         <note>
@@ -87,8 +87,8 @@ $server->handle();
         <title>Senden eines eigenen Status</title>
 
         <para>
-            Wenn Werte zurückgegeben werden, kann man, um einen eigenen Status zurückzugeben, ein Array mit einem
-            <code>status</code> Schlüssel zurückgeben.
+            Wenn Werte zurückgegeben werden, kann man, um einen eigenen Status zurückzugeben, ein
+            Array mit einem <code>status</code> Schlüssel zurückgeben.
         </para>
 
         <example id="zend.rest.server.customstatus.example-1">

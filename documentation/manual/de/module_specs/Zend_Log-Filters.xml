@@ -12,8 +12,8 @@
       <title>Filter für alle Writer</title>
 
       <para>
-        Um vor allen Writern zu filtern, kann eine beliebige Anzahl von Filtern zu einem Log Objekt hinzugefügt
-        werden indem die <code>addFilter()</code> Methode verwendet wird:
+        Um vor allen Writern zu filtern, kann eine beliebige Anzahl von Filtern zu einem Log Objekt
+        hinzugefügt werden indem die <code>addFilter()</code> Methode verwendet wird:
 
         <programlisting role="php"><![CDATA[
 $logger = new Zend_Log();
@@ -31,8 +31,8 @@ $logger->info('Informative Nachricht');
 $logger->emerg('Notfall Nachricht');
 ]]></programlisting>
 
-        Wenn ein oder mehrere Filter zu einem Log Objekt hinzugefügt werden, muß die Nachricht durch alle Filter
-        hindurch bevor irgendein Filter sie empfängt.
+        Wenn ein oder mehrere Filter zu einem Log Objekt hinzugefügt werden, muß die Nachricht durch
+        alle Filter hindurch bevor irgendein Filter sie empfängt.
       </para>
     </sect2>
 
@@ -40,8 +40,8 @@ $logger->emerg('Notfall Nachricht');
       <title>Filtern für eine Writer Instanz</title>
 
       <para>
-        Um nur auf eine definierte Writer Instanz zu filtern, muß die <code>addFilter</code> Methode dieses Writer's
-        verwendet werden:
+        Um nur auf eine definierte Writer Instanz zu filtern, muß die <code>addFilter</code> Methode
+        dieses Writer's verwendet werden:
 
         <programlisting role="php"><![CDATA[
 $logger = new Zend_Log();

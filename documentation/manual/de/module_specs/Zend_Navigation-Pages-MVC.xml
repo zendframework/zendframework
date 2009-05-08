@@ -88,8 +88,8 @@
 
         <para>
             Die zurückgegebene URI ist relativ zur <code>baseUrl</code> in
-            <classname>Zend_Controller_Front</classname>. Im Beispiel ist die baseUrl der Einfachheit halber
-            '/'.
+            <classname>Zend_Controller_Front</classname>. Im Beispiel ist die baseUrl der
+            Einfachheit halber '/'.
         </para>
     </note>
 
@@ -207,9 +207,9 @@ $page->isActive(); // gibt false zurück
                     <code>isActive()</code> Methode nicht dazu in der Lage zu erkennen ob die Seite
                     aktiv ist oder nicht. Der Grund hierfür ist, das es aktuell keinen Weg gibt
                     die Standardparameter von einem
-                    <classname>Zend_Controller_Router_Route_Interface</classname> Objekt zu erhalten, oder
-                    die aktuelle Route von einem <classname>Zend_Controller_Router_Interface</classname>
-                    Objekt.
+                    <classname>Zend_Controller_Router_Route_Interface</classname> Objekt zu
+                    erhalten, oder die aktuelle Route von einem
+                    <classname>Zend_Controller_Router_Interface</classname> Objekt.
                 </para>
             </note>
         </para>

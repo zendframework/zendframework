@@ -56,14 +56,14 @@ public $language;
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$charset</code>
-                    muß auf den aktuellen Charset des Inhaltes gesetzt werden, wenn dieser ein Texttyp ist (Text oder HTML).
+                    <code>$charset</code> muß auf den aktuellen Charset des Inhaltes gesetzt werden,
+                    wenn dieser ein Texttyp ist (Text oder HTML).
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>$id</code>
-                    kann gesetzt werden für die Erkennung einer Content-ID für Inline Grafiken in einer HTML Nachricht.
+                    <code>$id</code> kann gesetzt werden für die Erkennung einer Content-ID für
+                    Inline Grafiken in einer HTML Nachricht.
                 </para>
             </listitem>
             <listitem>
@@ -74,9 +74,8 @@ public $language;
             </listitem>
             <listitem>
                 <para>
-                    <code>$disposition</code>
-                    definiert ob die Datei als Anhang behandelt werden soll, oder ob sie in einer (HTML-) Nachricht
-                    verwendet wird (Inline).
+                    <code>$disposition</code> definiert ob die Datei als Anhang behandelt werden
+                    soll, oder ob sie in einer (HTML-) Nachricht verwendet wird (Inline).
                 </para>
             </listitem>
             <listitem>

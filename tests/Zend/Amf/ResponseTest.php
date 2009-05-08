@@ -439,6 +439,57 @@ class Zend_Amf_ResponseTest extends PHPUnit_Framework_TestCase
     }
     
     /**
+    * The feature test allows for php to just retun it's class name if nothing is specified. Using
+    * _explicitType, setClassMap, getASClassName() should only be used now if you want to override the 
+    * PHP class name for specifying the return type. 
+    * @group ZF-6130
+    */
+    public function testPhpObjectNameSerializedToAmf3ClassName()
+    {
+        $data = array();
+
+        $contact = new Contact();
+        $contact->id = '15';
+        $contact->firstname = 'Joe';
+        $contact->lastname = 'Smith';
+        $contact->email = 'jsmith@adobe.com';
+        $contact->mobile = '123-456-7890';
+        array_push( $data, $contact );
+
+        $contact = new Contact();
+        $contact->id = '23';
+        $contact->firstname = 'Adobe';
+        $contact->lastname = 'Flex';
+        $contact->email = 'was@here.com';
+        $contact->mobile = '123-456-7890';
+        array_push( $data, $contact );
+
+        // Create an acknowlege message for a response to a RemotingMessage
+        $acknowledgeMessage = new Zend_Amf_Value_Messaging_AcknowledgeMessage(null);
+        $acknowledgeMessage->correlationId = 'C44AE645-4D12-028B-FF5F-D2E42BE5D86C';
+        $acknowledgeMessage->clientId = '40EAAAD2-4A9B-C388-A2FD-00003A809B9E';
+        $acknowledgeMessage->messageId = '275CD08C-6461-BBC8-B27B-000030083B2C';
+        $acknowledgeMessage->destination = null;
+        $acknowledgeMessage->timeToLive = 0;
+        $acknowledgeMessage->timestamp = '122330856000';
+        $acknowledgeMessage->body = $data;
+
+        $newBody = new Zend_Amf_Value_MessageBody($this->responseURI,null,$acknowledgeMessage);
+
+        // serialize the data to an AMF output stream
+        $this->_response->setObjectEncoding(0x03);
+        $this->_response->addAmfBody($newBody);
+        $this->_response->finalize();
+        $testResponse = $this->_response->getResponse();
+
+        // Load the expected response.
+        $mockResponse = file_get_contents(dirname(__FILE__) .'/Response/mock/classMapAmf3Response.bin');
+
+        // Check that the response matches the expected serialized value
+        $this->assertEquals($mockResponse, $testResponse);
+    }    
+    
+    /**
      * Returning a DOMDocument object to AMF is serialized into a XMString ready for E4X
      * 
      * @group ZF-4999

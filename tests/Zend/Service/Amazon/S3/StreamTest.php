@@ -81,8 +81,11 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->_amazon->unregisterStreamWrapper();
-        $this->_amazon->cleanBucket($this->_bucket);
-        $this->_amazon->removeBucket($this->_bucket);
+	$buckets = $this->_amazon->getBuckets();
+	foreach($buckets as $bucket) {
+	        $this->_amazon->cleanBucket($bucket);
+		$this->_amazon->removeBucket($bucket);
+	}
     }
 
     /**

@@ -385,12 +385,12 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.pcre.php"><code>pcre</code></ulink></emphasis></entry>
                             <entry>Forte</entry>
-                            <entry>Virtually all components</entry>
+                            <entry>Virtuellement tous les composants</entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.pdo.php"><code>pdo</code></ulink></emphasis></entry>
                             <entry>Forte</entry>
-                            <entry>All PDO database adapters</entry>
+                            <entry>Tous les adaptateurs PDO pour base de données</entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.pdo-dblib.php"><code>pdo_dblib</code></ulink></emphasis></entry>
@@ -537,7 +537,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.spl.php"><code>SPL</code></ulink></emphasis></entry>
                             <entry>Forte</entry>
-                            <entry>Virtually all components</entry>
+                            <entry>Virtuellement tous les composants</entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.sqlite.php"><code>SQLite</code></ulink></emphasis></entry>
@@ -547,7 +547,7 @@
                         <row>
                             <entry><emphasis><code>standard</code></emphasis></entry>
                             <entry>Forte</entry>
-                            <entry>Virtually all components</entry>
+                            <entry>Virtuellement tous les composants</entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/fr/ref.sybase.php"><code>sybase</code></ulink></emphasis></entry>
@@ -664,7 +664,9 @@
 
                     <tbody>
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis>All Components</emphasis></entry>
+                            <entry morerows="2" valign="middle">
+                                <emphasis>Tous les composants</emphasis>
+                            </entry>
                             <entry morerows="2" valign="middle">Forte</entry>
                             <entry><ulink url="http://www.php.net/manual/fr/ref.pcre.php"><code>pcre</code></ulink></entry>
                         </row>

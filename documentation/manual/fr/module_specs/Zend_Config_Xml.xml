@@ -181,7 +181,7 @@ $string = <<<EOT
     </staging>
 </config>
 EOT;
- 
+
 $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>

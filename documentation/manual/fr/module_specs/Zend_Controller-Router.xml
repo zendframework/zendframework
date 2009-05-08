@@ -165,7 +165,7 @@ $router->addRoute('user',
             </listitem>
             <listitem>
                 <para><xref linkend="zend.controller.router.routes.chain" /></para>
-            </listitem> 
+            </listitem>
             <listitem>
                 <para><xref linkend="zend.controller.router.default-routes"/> *</para>
             </listitem>

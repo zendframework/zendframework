@@ -213,7 +213,7 @@ getElementById()
 widgetFactory()
 ]]></programlisting>
             </para>
-    
+
             <para>
                 Pour la programmation orientée objet, les accesseurs aux objets doivent
                 toujours être préfixés par soit "get" soit "set". Lorsque vous utilisez des motifs
@@ -308,7 +308,7 @@ widgetFactory()
 ?>
 ]]></programlisting>
             </para>
-    
+
             <para>
                 Les balises courtes d'ouvertures ("&lt;?")ne sont pas autorisées. Pour les
                 fichiers ne contenant que du code PHP, la balise de fermeture doit toujours être
@@ -330,17 +330,19 @@ $a = 'Exemple de chaîne de caractères';
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standard.coding-style.strings.literals-containing-apostrophes">
                 <title>Chaînes de caractères littérales avec apostrophes</title>
-    
+
                 <para>
                     Lorsque qu'une chaîne littérale contient des apostrophes, il est permis de
                     les démarquer en utilisant les guillemets doubles. Ceci est particulièrement
-                    conseillé pour les requêtes SQL : <programlisting role="php"><![CDATA[
+                    conseillé pour les requêtes SQL :
+                    <programlisting role="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Eric' OR `name`='Caroline'";
-]]></programlisting> La syntaxe ci-dessus est préférée à l'échappement des apostrophes car elle
+]]></programlisting>
+                    La syntaxe ci-dessus est préférée à l'échappement des apostrophes car elle
                     est plus facile à lire.
                 </para>
             </sect3>
@@ -356,7 +358,7 @@ $greeting = "Bonjour $name, bienvenue !";
 $greeting = "Bonjour {$name}, bienvenue !";
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     Pour des raisons d'uniformité, cette forme n'est pas permise :
                     <programlisting role="php"><![CDATA[
@@ -364,10 +366,10 @@ $greeting = "Bonjour ${name}, bienvenue !";
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standard.coding-style.strings.string-concatenation">
                 <title>Concaténation de chaînes</title>
-    
+
                 <para>
                     Les chaînes peuvent êtres concaténées en utilisant l'opérateur ".". Un
                     espace doit toujours être ajouté avant, et après cet opérateur, cela permet
@@ -375,7 +377,7 @@ $greeting = "Bonjour ${name}, bienvenue !";
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     Lors de la concaténation de chaînes avec l'opérateur ".", il est permis de
                     couper le segment en plusieurs lignes pour améliorer la lisibilité. Dans ces
@@ -388,15 +390,15 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 </para>
             </sect3>
         </sect2>
-    
+
         <sect2 id="coding-standard.coding-style.arrays">
             <title>Tableaux</title>
-    
+
             <sect3 id="coding-standard.coding-style.arrays.numerically-indexed">
                 <title>Tableaux indexés numériquement</title>
-    
+
                 <para>L'utilisation d'indices négatifs n'est pas permise.</para>
-    
+
                 <para>
                     Un tableau indexé peut commencer avec n'importe quel nombre positif,
                     cependant cette méthode est déconseillée. Il est conseillé de commencer
@@ -410,7 +412,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     Il est aussi permis de déclarer des tableaux indexés sur plusieurs lignes
                     en utilisant la construction <code>array</code>. Dans ce cas, chaque nouvelle
@@ -423,10 +425,10 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standard.coding-style.arrays.associative">
                 <title>Tableaux associatifs</title>
-    
+
                 <para>
                     Lorsque de la déclaration de tableaux associatifs avec la construction
                     <code>array</code>, il est conseillé de séparer la définition sur plusieurs
@@ -439,13 +441,13 @@ $sampleArray = array('firstKey'  => 'firstValue',
                 </para>
             </sect3>
         </sect2>
-    
+
         <sect2 id="coding-standard.coding-style.classes">
             <title>Classes</title>
-    
+
             <sect3 id="coding-standard.coding-style.classes.declaration">
                 <title>Déclaration de classes</title>
-    
+
                 <para>
                     Les classes doivent être nommées conformément aux conventions de nommage
                     de Zend Framework.
@@ -485,10 +487,10 @@ class SampleClass
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standard.coding-style.classes.member-variables">
                 <title>Variables membres de la classe</title>
-    
+
                 <para>
                     Les variables membres doivent être nommées en respectant les conventions
                     de nommage de Zend Framework.
@@ -554,7 +556,7 @@ class Foo
 }
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     <emphasis>NOTE :</emphasis> Le passage par référence est permis uniquement
                     dans la déclaration de la fonction : <programlisting role="php"><![CDATA[
@@ -571,9 +573,9 @@ class Foo
 }
 ]]></programlisting>
                 </para>
-    
+
                 <para>L'appel par référence est interdit.</para>
-    
+
                 <para>
                     La valeur de retour ne doit pas être entourée de parenthèses. Ceci peut
                     gêner à la lecture et peut aussi casser le code si une méthode est modifiée plus
@@ -602,10 +604,10 @@ class Foo
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standard.coding-style.functions-and-methods.usage">
                 <title>Usage de fonctions et méthodes</title>
-    
+
                 <para>
                     Les arguments d'une fonction sont séparés par un espace après la virgule
                     de délimitation. Voici un exemple d'un appel de fonction qui prend trois
@@ -613,7 +615,7 @@ class Foo
 threeArguments(1, 2, 3);
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     L'appel par référence est interdit. Référez vous à la section sur la
                     déclaration de fonctions pour la méthode correcte de passage des argument par
@@ -634,13 +636,13 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                 </para>
             </sect3>
         </sect2>
-    
+
         <sect2 id="coding-standard.coding-style.control-statements">
             <title>Structure de contrôle</title>
-    
+
             <sect3 id="coding-standard.coding-style.control-statements.if-else-elseif">
                 <title>If / Else / Elseif</title>
-    
+
                 <para>
                     Les structure de contrôles basées sur les constructions <code>if</code> et
                     <code>elseif</code> doivent avoir un seul espace avant la parenthèse ouvrante de
@@ -664,7 +666,7 @@ if ($a != 2) {
 }
 ]]></programlisting>
                 </para>
-    
+
                 <para>
                     Pour les instruction "if" qui incluent "elseif" ou "else", les conventions
                     de formatage sont similaires à celles de la construction "if". Les exemples
@@ -784,10 +786,10 @@ switch ($numPeople) {
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standards.inline-documentation.classes">
                 <title>Classes</title>
-    
+
                 <para>
                     Chaque classe doit avoir un docblock qui contient au minimum ces balises
                     phpDocumentor : <programlisting role="php"><![CDATA[
@@ -806,10 +808,10 @@ switch ($numPeople) {
 ]]></programlisting>
                 </para>
             </sect3>
-    
+
             <sect3 id="coding-standards.inline-documentation.functions">
                 <title>Fonctions</title>
-    
+
                 <para>
                     Chaque fonction, méthode, doit avoir un docblock contenant au minimum :
                     <itemizedlist>

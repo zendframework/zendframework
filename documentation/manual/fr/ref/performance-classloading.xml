@@ -168,11 +168,11 @@ library
                 <para>
                     Nous emprunterons des idées à chacune des suggestions ci-dessus : nous
                     utiliserons les chemins absolus, déterminé en utilisant le
-                    <code>realpath()</code>&#160;; nous positionnerons Zend Framework au plus tôt dans
-                    l'<code>include_path</code> ; nous avons déjà vérifié les chemins d'inclusions
-                    nécessaires&#160;; et nous mettrons le dossier courant comme dernier chemin. En fait,
-                    nous faisons tout bien ici - nous allons donc terminer avec seulement deux
-                    chemins.
+                    <code>realpath()</code>&#160;; nous positionnerons Zend Framework au plus tôt
+                    dans l'<code>include_path</code> ; nous avons déjà vérifié les chemins
+                    d'inclusions nécessaires&#160;; et nous mettrons le dossier courant comme
+                    dernier chemin. En fait, nous faisons tout bien ici - nous allons donc terminer
+                    avec seulement deux chemins.
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -252,8 +252,8 @@ Zend_Loader_Autoloader::getInstance();
             Certains composants utilisent les plugins, ce qui vous permet de créer vos propres
             classes afin de les utiliser avec le composant, de même que de surcharger les plugins
             standard existants embarqués dans Zend Framework. Ceci fournit une importante
-            flexibilité au framework, mais a un prix&#160;: le chargement des plugins est une tâche assez
-            coûteuse.
+            flexibilité au framework, mais a un prix&#160;: le chargement des plugins est une tâche
+            assez coûteuse.
         </para>
 
         <para>

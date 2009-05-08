@@ -50,15 +50,13 @@
                 </para>
 
                 <para>
-                    <ulink
-                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">L'exportation</ulink>
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">L'exportation</ulink>
                     est utile si vous souhaitez obtenir une révision particulière du framework sans
                     les dossiers <code>.svn</code> créé dans une copie de travail.
                 </para>
 
                 <para>
-                    <ulink
-                    url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">L'extraction
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">L'extraction
                     d'une copie de travail</ulink> est intéressante si vous contribuez à Zend
                     Framework, et une copie de travail peut être mise à jour à n'importe quel moment
                     avec <ulink

@@ -472,7 +472,7 @@ Zend_Controller_Front::run('../application/controllers');
                     <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
                     Réglez ce paramètre à <code>true</code> pour le désactiver.
                 </para>
-            </listitem> 
+            </listitem>
             <listitem>
                 <para>
                     <code>noErrorHandler</code> est utilisée pour désactiver le plugin

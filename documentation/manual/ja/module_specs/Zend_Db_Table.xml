@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15422 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -291,12 +291,13 @@ class Bugs extends Zend_Db_Table_Abstract
                 これは、テーブルのメタデータがすべて処理された後にコールされます。
                 メタデータを変更するつもりがないのなら、<code>__construct</code>
                 メソッドよりもこちらを使用することを推奨します。
+            </para>
 
-                <example id="zend.db.table.defining.init.usage.example">
+            <example id="zend.db.table.defining.init.usage.example">
 
-                    <title>init() メソッドの使用例</title>
+                <title>init() メソッドの使用例</title>
 
-                    <programlisting role="php"><![CDATA[
+                <programlisting role="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -308,9 +309,7 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
 
-                </example>
-
-            </para>
+            </example>
 
         </sect3>
 

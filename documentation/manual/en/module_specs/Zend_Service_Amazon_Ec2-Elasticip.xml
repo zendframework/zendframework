@@ -53,7 +53,7 @@ print $ip;
         </para>
         <para>
             <code>describe</code> returns an array that contains information on each Elastic IP
-            Address which contains the publicIp and the instaceId if it is assocated.
+            Address which contains the publicIp and the instanceId if it is assocated.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -80,7 +80,7 @@ $ip = $ec2_eip->describe('ip1');
 
         <programlisting role="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ec2_eip->release('ipaddress);
+$ec2_eip->release('ipaddress');
 ]]></programlisting>
     </example>
 
@@ -101,11 +101,11 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 ]]></programlisting>
     </example>
 
-    <example id="zend.service.amazon.ec2.elasticip.disassocate">
-        <title>Disassocate an Elastic IP from an instance</title>
+    <example id="zend.service.amazon.ec2.elasticip.disassociate">
+        <title>Disassociate an Elastic IP from an instance</title>
         <para>
-            <code>disassocate</code> will disassocate an Elastic IP from an instance.
-            If you terminate an Instance it will automaticly disassocate the Elastic
+            <code>disassociate</code> will disassociate an Elastic IP from an instance.
+            If you terminate an Instance it will automaticly disassociate the Elastic
             IP address for you.
         </para>
         <para>
@@ -114,7 +114,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 
         <programlisting role="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
-$ec2_eip->disassocate('ipaddress');
+$ec2_eip->disassociate('ipaddress');
 ]]></programlisting>
     </example>
 

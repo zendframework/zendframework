@@ -4,8 +4,7 @@
     <title>Zend_Service_Amazon_Ec2: Amazon Machine Images (AMI)</title>
     <para>
         Amazon Machine Images (AMIs) are preconfigured with an ever-growing list
-        of operating systems. We work with our partners and community to provide
-        you with the most choice possible.
+        of operating systems.
     </para>
 
     <sect2 id="zend.service.amazon.ec2.images.info">
@@ -42,7 +41,7 @@ $ip = $ec2_img->register('imageLocation');
 
             <programlisting role="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
-$ip = $ec2_img->deregister($imageId);
+$ip = $ec2_img->deregister('imageId');
 ]]></programlisting>
         </example>
 
@@ -114,12 +113,12 @@ $ip = $ec2_img->deregister($imageId);
             <para>
                 <code>describe</code> returns an array for all the images that match the critera that was
                 passed in. The array contains the imageId, imageLocation, imageState, imageOwnerId, isPublic,
-                architecture, imageTYpe, kernelId, ramdiskId and platform.
+                architecture, imageType, kernelId, ramdiskId and platform.
             </para>
 
             <programlisting role="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
-$ip = $ec2_img->allocate();
+$ip = $ec2_img->describe();
 ]]></programlisting>
         </example>
     </sect2>
@@ -164,7 +163,7 @@ $ip = $ec2_img->allocate();
             </table>
             </para>
             <para>
-                <code>modifyAttribute</code> returns boolean ture or false.
+                <code>modifyAttribute</code> returns boolean true or false.
             </para>
             <programlisting role="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
@@ -189,7 +188,7 @@ $return = $ec2_img->modifyAttribute('imageId',
         <example id="zend.service.amazon.ec2.images.attribute.reset">
             <title>Reset an AMI Attribute</title>
             <para>
-                <code>resetAttribute</code> will reest the attirbute of an AMI to its default value.
+                <code>resetAttribute</code> will reset the attribute of an AMI to its default value.
                 <emphasis>The productCodes attribute cannot be reset.</emphasis>
             </para>
             <programlisting role="php"><![CDATA[
@@ -206,7 +205,7 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
                 productCodes are supported.
             </para>
             <para>
-                <code>describeAttribute</code> returns an array with the the value of the attirbute
+                <code>describeAttribute</code> returns an array with the value of the attribute
                 that was requested.
             </para>
             <programlisting role="php"><![CDATA[

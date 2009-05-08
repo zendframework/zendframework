@@ -29,7 +29,7 @@
             <title>Instance Types</title>
             <para>
                 The instance types are defined as constants in the code. Column eight
-                in the table is the defined constanc name
+                in the table is the defined constant name
             </para>
         </note>
         <table id="zend.service.amazon.ec2.instance.types-table">
@@ -176,7 +176,7 @@
     <sect2 id="zend.service.amazon.ec2.instance.operations">
         <title>Running Amazon EC2 Instances</title>
         <para>
-            This section describes the operation methods maintaing Amazon EC2 Instances.
+            This section describes the operation methods for maintaining Amazon EC2 Instances.
         </para>
 
         <example id="zend.service.amazon.ec2.instance.operations.run">
@@ -223,8 +223,8 @@
                             <entry><code>keyName</code></entry>
                             <entry><para>
                                 Name of the key pair with which to launch instances.
-                                If you do not provide a key, access to the instance will
-                                leave it inaccessible.
+                                If you do not provide a key, all instances will
+                                be inaccessible.
                             </para></entry>
                             <entry><para>No</para></entry>
                         </row>

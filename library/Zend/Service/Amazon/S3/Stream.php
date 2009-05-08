@@ -113,7 +113,7 @@ class Zend_Service_Amazon_S3_Stream
     {
         $url = parse_url($path);
         if ($url['host']) {
-            return $url['path'] ? $url['host'].'/'.$url['path'] : $url['host'];
+            return $url['path'] ? $url['host'].$url['path'] : $url['host'];
         }
 
         return '';

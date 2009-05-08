@@ -47,14 +47,14 @@
         <para>
             Below is a sample INI snippet showing how to configure the session
             resource. It sets several <classname>Zend_Session</classname> options, as well
-            as configures a <classname>Zend_Session_SaveHandler_Db</classname> instance.
+            as configures a <classname>Zend_Session_SaveHandler_DbTable</classname> instance.
         </para>
 
         <programlisting role="ini"><![CDATA[
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true
 resources.session.remember_me_seconds = 864000
-resources.session.saveHandler.class = "Zend_Session_SaveHandler_Db"
+resources.session.saveHandler.class = "Zend_Session_SaveHandler_DbTable"
 resources.session.saveHandler.options.name = "session"
 resources.session.saveHandler.options.primary.session_id = "session_id"
 resources.session.saveHandler.options.primary.save_path = "save_path"
@@ -67,4 +67,20 @@ resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
     </example>
+
+    <note>
+        <title>Bootstrap your database first!</title>
+
+        <para>
+            If you are configuring the
+            <classname>Zend_Session_SaveHandler_DbTable</classname> session save
+            handler, you must first configure your database connection for it to
+            work. Do this by either using the <link
+                linkend="zend.application.available-resources.db">Db</link>
+            resource -- and make sure the "resources.db" key comes prior to the
+            "resources.session" key -- or by writing your own resource that
+            initializes the database, and specifically sets the default
+            <classname>Zend_Db_Table</classname> adapter.
+        </para>
+    </note>
 </sect2>

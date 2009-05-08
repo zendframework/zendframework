@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15404 -->
 <appendix id="requirements">
 
     <title>Zend Framework のシステム要件</title>
@@ -660,7 +660,7 @@
 
             <table frame='all' id="requirements.zendcomponents.table-1">
                 <title>Zend Framework のコンポーネントと、使用している PHP 拡張モジュール</title>
-                <tgroup cols='4'>
+                <tgroup cols='3'>
                     <thead>
                         <row>
                             <entry>Zend Framework コンポーネント</entry>

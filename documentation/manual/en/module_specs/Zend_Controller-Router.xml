@@ -95,7 +95,8 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
              </rules>
          </rewrite>
      </system.webServer>
-</configuration>]></programlisting>
+</configuration>
+]]></programlisting>
 
         <para>
             If using Lighttpd, the following rewrite rule is valid:

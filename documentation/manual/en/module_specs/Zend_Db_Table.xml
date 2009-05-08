@@ -281,12 +281,13 @@ class Bugs extends Zend_Db_Table_Abstract
                 which is called after all Table metadata has been processed. This is recommended
                 over the <code>__construct</code> method if you do not need to alter the metadata
                 in any programmatic way.
+            </para>
 
-                <example id="zend.db.table.defining.init.usage.example">
+            <example id="zend.db.table.defining.init.usage.example">
 
-                    <title>Example usage of init() method</title>
+                <title>Example usage of init() method</title>
 
-                    <programlisting role="php"><![CDATA[
+                <programlisting role="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -298,9 +299,7 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
 
-                </example>
-
-            </para>
+            </example>
 
         </sect3>
 

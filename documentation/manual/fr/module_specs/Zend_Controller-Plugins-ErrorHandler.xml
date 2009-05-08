@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -149,8 +149,8 @@ class ErrorController extends Zend_Controller_Action
                 // ... ici, de l'affichage (du rendu)
                 break;
             default:
-                // erreur applicative; affiche une page d'erreur, mais sans changer le code de
-                // retour HTTP
+                // erreur applicative; affiche une page d'erreur,
+                // mais sans changer le code de retour HTTP
                 break;
         }
     }

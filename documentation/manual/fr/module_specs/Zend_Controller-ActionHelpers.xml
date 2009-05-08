@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Aides d'action (Helper)</title>
@@ -291,8 +291,8 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
                     portion du nom de la classe qui suit le dernier tiret bas ("_"), ou le nom de
                     la classe entier sinon. Pour exemple, si la classe est nommée
                     <classname>Zend_Controller_Action_Helper_Redirector</classname>, elle retourne
-                    <code>Redirector</code>&#160;; une classe nommée <code>FooMessage</code> retournera
-                    <code>FooMessage</code>.
+                    <code>Redirector</code>&#160;; une classe nommée <code>FooMessage</code>
+                    retournera <code>FooMessage</code>.
                 </para>
             </listitem>
         </itemizedlist>

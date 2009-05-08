@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.findFeeds">
     <title>Obtenir des flux à partir de pages Web</title>
@@ -9,10 +9,14 @@
         référence à des flux dont le contenu est lié à la page. <classname>Zend_Feed</classname>
         vous permet d'obtenir tous les flux référencés par une page Web en appelant simplement une
         méthode&#160;:
+    </para>
+
     <programlisting role="php"><![CDATA[
 $tableauFlux =
     Zend_Feed::findFeeds('http://www.exemple.com/news.html');
 ]]></programlisting>
+
+    <para>
         La méthode <code>findFeeds()</code> renvoie ici un tableau d'objets
         <classname>Zend_Feed_Abstract</classname> associés aux flux référencés par les balises
         <code>&lt;link&gt;</code> de la page Web <code>news.html</code>. Selon le type de chaque

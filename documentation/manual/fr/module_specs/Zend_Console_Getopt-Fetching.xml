@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Extraire les options et les arguments</title>
@@ -21,7 +21,7 @@
     </para>
 
     <sect2 id="zend.console.getopt.fetching.exceptions">
-        <title>Manipuler les exceptions <code>Getopt</code></title>
+        <title>Manipuler les exceptions Getopt</title>
 
         <para>
             Si l'utilisateur a donné des options invalides sur la ligne de commande, la
@@ -37,7 +37,7 @@
         </para>
 
         <example id="zend.console.getopt.fetching.exceptions.example">
-            <title>Récupérer une exception <code>Getopt</code></title>
+            <title>Récupérer une exception Getopt</title>
 
             <programlisting role="php"><![CDATA[
 try {
@@ -80,7 +80,7 @@ try {
         </para>
 
         <example id="zend.console.getopt.fetching.byname.example.setoption">
-            <title>Utiliser <code>getOption()</code></title>
+            <title>Utiliser getOption()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -97,10 +97,7 @@ $p_parameter = $opts->getOption('p');
         </para>
 
         <example id="zend.console.getopt.fetching.byname.example.magic">
-            <title>
-                Utiliser les méthodes magiques <code>__get()</code> and
-                <code>__isset()</code>
-            </title>
+            <title>Utiliser les méthodes magiques __get() et __isset()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -177,7 +174,7 @@ $p_parameter = $opts->p; // null si non fourni
         </para>
 
         <example id="zend.console.getopt.fetching.remainingargs.example">
-            <title>Utiliser <code>getRemainingArgs()</code></title>
+            <title>Utiliser getRemainingArgs()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');

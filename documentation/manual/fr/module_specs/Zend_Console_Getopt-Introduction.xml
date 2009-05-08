@@ -99,7 +99,7 @@
     </para>
 
     <note>
-        <title><code>Getopt</code> n'est pas une application framework</title>
+        <title>Getopt n'est pas une application framework</title>
 
         <para>
             <classname>Zend_Console_Getopt</classname> <emphasis>n'</emphasis>interprète

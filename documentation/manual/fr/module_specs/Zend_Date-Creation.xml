@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15346 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.creation">
     <title>Créer des dates</title>
@@ -164,7 +164,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 En temps normal on utilisera un tableau avec toutes ses clés. Si une clé est
                 absente, la valeur qu'elle représente sera mise à la valeur zéro par défaut. Par
                 exemple une tableau ne comportant pas la clé "<code>hour</code>", donnera naissance
-                à une date ayant une partie heures à la valeur "<code>0</code><emphasis>"</emphasis>.
+                à une date ayant une partie heures à la valeur "<emphasis>0</emphasis>".
             </para>
 
             <programlisting role="php"><![CDATA[

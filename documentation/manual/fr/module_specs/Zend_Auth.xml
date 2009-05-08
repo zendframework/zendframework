@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15346 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.introduction">
     <title>Introduction</title>
@@ -10,7 +10,9 @@
     </para>
 
     <para>
-        <classname>Zend_Auth</classname> est uniquement concerné par <emphasis>le processus d'authentification</emphasis> et non pas par <emphasis>le processus d'autorisation</emphasis>. L'authentification est définie de
+        <classname>Zend_Auth</classname> est uniquement concerné par
+        <emphasis>le processus d'authentification</emphasis> et non pas par
+        <emphasis>le processus d'autorisation</emphasis>. L'authentification est définie de
         manière lâche (souple) afin de déterminer si une entité donnée est bien celle qu'elle
         prétend être (c.-à-d. identification), sur la base d'identifiants fournis. L'autorisation,
         l'action de décider si une entité donnée peut accéder à d'autres entités et/ou exécuter des

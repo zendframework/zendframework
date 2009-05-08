@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-rss">
     <title>Consommer un flux RSS</title>
@@ -7,9 +7,13 @@
     <para>
         Lire un flux RSS se résume à instancier un objet <classname>Zend_Feed_Rss</classname>
         en passant l'URL du flux&#160;:
-        <programlisting role="php"><![CDATA[
+    </para>
+
+    <programlisting role="php"><![CDATA[
 $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
 ]]></programlisting>
+
+    <para>
         Si une erreur a lieu lors de l'obtention du flux, une
         <classname>Zend_Feed_Exception</classname> sera déclenchée.
     </para>
@@ -17,23 +21,31 @@ $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
     <para>
         Une fois que vous disposez d'un objet "flux RSS", vous pouvez accéder aux propriétés
         RSS standard du canal, et ce directement à partir de l'objet&#160;:
-        <programlisting role="php"><![CDATA[
+    </para>
+
+    <programlisting role="php"><![CDATA[
 echo $canal->title();
 ]]></programlisting>
+
+    <para>
         Notez la syntaxe utilisée&#160;: un appel de fonction.
         <classname>Zend_Feed</classname> utilise une convention selon laquelle les propriétés sont
         traitées comme des objets XML si elles sont demandées au moyen de la syntaxe
         <code>$obj-&gt;propriété</code> et comme des chaînes si elles sont demandées au moyen de la
         syntaxe <code>$obj-&gt;propriété()</code>. Ceci permet d'accéder à la totalité du contenu
-    textuel d'un nœud particulier tout comme à l'ensemble des enfants de ce nœud.
+        textuel d'un nœud particulier tout comme à l'ensemble des enfants de ce nœud.
     </para>
 
     <para>
         Si les propriétés du canal possèdent des attributs, ils sont accessibles à l'aide de
         l'indexage PHP&#160;:
-        <programlisting role="php"><![CDATA[
+    </para>
+
+    <programlisting role="php"><![CDATA[
 echo $canal->category['domain'];
 ]]></programlisting>
+
+    <para>
         Comme les attributs XML ne peuvent avoir des enfants, la syntaxe
         <code>$obj-&gt;propriété['attribut']()</code> n'est pas nécessaire pour accéder aux valeurs
         des attributs.
@@ -44,11 +56,15 @@ echo $canal->category['domain'];
         ses entrées. <classname>Zend_Feed_Abstract</classname> implémente l'interface
         <code>iterator</code> de PHP, ce qui résume au code suivant l'affichage des titres de tous
         les articles du canal&#160;:
-        <programlisting role="php"><![CDATA[
+    </para>
+
+    <programlisting role="php"><![CDATA[
 foreach ($canal as $element) {
     echo $element->title() . "\n";
 }
 ]]></programlisting>
+
+    <para>
         Si vous n'êtes pas un familier de RSS, voici les éléments standard associés au
         canal RSS et à ses éléments pris séparément (les entrées).
     </para>
@@ -154,12 +170,13 @@ foreach ($canal as $element) {
     <para>
         Dans votre code vous pouvez toujours tester si un élément est non-vide au moyen du
         test suivant&#160;:
+    </para>
+
     <programlisting role="php"><![CDATA[
 if ($element->nomPropriete()) {
     // ... traitement
 }
 ]]></programlisting>
-    </para>
 
     <para>
         Si vous utilisez à la place de la condition <code>$element-&gt;nomPropriete</code>,
@@ -172,5 +189,4 @@ if ($element->nomPropriete()) {
         l'adresse&#160;: <ulink url="http://blogs.law.harvard.edu/tech/rss">
         http://blogs.law.harvard.edu/tech/rss</ulink>
     </para>
-
 </sect1>

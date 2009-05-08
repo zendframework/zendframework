@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Les frontends Zend_Cache</title>
 
     <sect2 id="zend.cache.frontends.core">
-        <title><classname>Zend_Cache_Core</classname></title>
+        <title>Zend_Cache_Core</title>
 
         <sect3 id="zend.cache.frontends.core.introduction">
             <title>Introduction</title>
@@ -476,9 +476,9 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
         <sect3 id="zend.cache.frontends.class.examples">
             <title>Exemples</title>
 
-            <para>
-                Par exemple, pour mettre en cache des appels statiques&#160;:
-                <programlisting role="php"><![CDATA[
+            <para>Par exemple, pour mettre en cache des appels statiques&#160;:</para>
+
+            <programlisting role="php"><![CDATA[
 class test {
 
     // Méthode statique
@@ -498,8 +498,10 @@ $frontendOptions = array(
 // l'appel caché
 $res = $cache->foobar('1', '2');
 ]]></programlisting>
-                Pour mettre en cache des appels classiques aux méthodes&#160;:
-                <programlisting role="php"><![CDATA[
+
+            <para>Pour mettre en cache des appels classiques aux méthodes&#160;:</para>
+
+            <programlisting role="php"><![CDATA[
 class test {
 
     private $_string = 'hello !';
@@ -521,7 +523,6 @@ $frontendOptions = array(
 // L'appel mis en cache
 $res = $cache->foobar2('1', '2');
 ]]></programlisting>
-            </para>
         </sect3>
     </sect2>
 
@@ -831,7 +832,9 @@ $res = $cache->foobar2('1', '2');
             <para>
                 L'utilisation de <classname>Zend_Cache_Frontend_Page</classname> est vraiment
                 trivial&#160;:
-                <programlisting role="php"><![CDATA[
+            </para>
+
+            <programlisting role="php"><![CDATA[
 // [...] // require, configuration et factory
 
 $cache->start();
@@ -840,13 +843,14 @@ $cache->start();
 
 // reste de la page ...
 ]]></programlisting>
-            </para>
 
             <para>
                 Un exemple plus complexe qui montre un moyen pour obtenir une gestion
                 centralisée du cache dans un fichier d'amorçage (pour utiliser avec
                 <classname>Zend_Controller</classname> par exemple)
-                <programlisting role="php"><![CDATA[
+            </para>
+
+            <programlisting role="php"><![CDATA[
 // vous devriez éviter de mettre trop de lignes avant la section
 // de cache par exemple, pour des performances optimales,
 // "require_once" ou "Zend_Loader::loadClass" devrait être
@@ -896,11 +900,10 @@ $cache->start();
 // [...] la fin du fichier de démarrage
 // (ces lignes ne seront pas exécutées si on trouve un cache)
 ]]></programlisting>
-            </para>
         </sect3>
 
         <sect3 id="zend.cache.frontends.page.cancel">
-            <title>La méthode spécifique <code>cancel</code></title>
+            <title>La méthode spécifique cancel()</title>
 
             <para>
                 A cause de problèmes de design, dans certains cas (par exemple quand on

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Introduction</title>
@@ -26,7 +26,7 @@
     </para>
 
     <example id="zend.cache.introduction.example-1">
-        <title>Créer un frontend avec <classname>Zend_Cache::factory()</classname></title>
+        <title>Créer un frontend avec Zend_Cache::factory()</title>
 
         <para>
             <classname>Zend_Cache::factory()</classname> instancie les objets corrects et les lie
@@ -112,7 +112,9 @@ print_r($result);
             misent en cache quand la méthode <code>end()</code> est appelée. A la prochaine
             exécution, la section complète sera évitée, au profit de la récupération de son cache
             (si le cache est encore valide).
-            <programlisting role="php"><![CDATA[
+        </para>
+
+        <programlisting role="php"><![CDATA[
 $frontendOptions = array(
     // temps de vue du cache de 30 secondes
     'lifetime' => 30,
@@ -140,7 +142,6 @@ if(!$cache->start('mypage')) {
 
 echo "Ceci n' jamais mis en cache (" . time() . ").";
 ]]></programlisting>
-        </para>
 
         <para>
             Notez que nous affichons le résultat de <code>time()</code> deux fois&#160;; c'est

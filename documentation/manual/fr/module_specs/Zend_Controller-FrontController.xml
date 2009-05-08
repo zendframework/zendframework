@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.front">
     <title>Le contrôleur frontal (Front Controller)</title>
@@ -136,8 +136,8 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 Vous pouvez récupérer les réglages courants des répertoires du contrôleur en
-                utilisant <code>getControllerDirectory()</code>&#160;; ceci retournera un tableau des
-                paires modules/chemins.
+                utilisant <code>getControllerDirectory()</code>&#160;; ceci retournera un tableau
+                des paires modules/chemins.
             </para>
         </sect3>
 
@@ -288,7 +288,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>(set|get)Request()</code> vous permet d'indiquer la classe ou
-                    l'objet de  <link linkend="zend.controller.request">requête</link> à utiliser
+                    l'objet de <link linkend="zend.controller.request">requête</link> à utiliser
                     durant le processus de distribution et de rechercher la valeur courante. En
                     réglant l'objet de requête, vous pouvez fournir le nom d'une classe de requête,
                     dans ce cas la méthode chargera le fichier de classe et l'instanciera.
@@ -297,7 +297,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>(set|get)Router()</code> vous permet d'indiquer la classe ou
-                    l'objet de  <link linkend="zend.controller.router">routage</link> à utiliser
+                    l'objet de <link linkend="zend.controller.router">routage</link> à utiliser
                     durant le processus de distribution et de rechercher la valeur courante. En
                     réglant l'objet de routage, vous pouvez fournir le nom d'une classe de routage,
                     dans ce cas la méthode chargera le fichier de classe et l'instanciera.
@@ -319,9 +319,9 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <code>(set|get)Dispatcher()</code> vous permet d'indiquer la classe ou
-                    l'objet  <link linkend="zend.controller.dispatcher">distributeur</link> à
+                    l'objet <link linkend="zend.controller.dispatcher">distributeur</link> à
                     utiliser durant le processus de distribution et de rechercher la valeur
-                    courante. En réglant  l'objet de distribution, vous pouvez fournir le nom
+                    courante. En réglant l'objet de distribution, vous pouvez fournir le nom
                     d'une classe de distribution, dans ce cas la méthode chargera le fichier de
                     classe et l'instanciera.
                 </para>
@@ -464,6 +464,21 @@ Zend_Controller_Front::run('../application/controllers');
                     pas utiliser l'"output buffering" pour capturer le rendu généré par les
                     contrôleurs d'action. Par défaut, le distributeur capture tout rendu et
                     l'ajoute au contenu de l'objet réponse.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>noViewRenderer</code> est utilisée pour désactiver le
+                    <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
+                    Réglez ce paramètre à <code>true</code> pour le désactiver.
+                </para>
+            </listitem> 
+            <listitem>
+                <para>
+                    <code>noErrorHandler</code> est utilisée pour désactiver le plugin
+                    <link
+                        linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>.
+                    Réglez ce paramètre à <code>true</code> pour le désactiver.
                 </para>
             </listitem>
         </itemizedlist>

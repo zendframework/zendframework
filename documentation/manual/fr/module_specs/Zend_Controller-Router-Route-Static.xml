@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.static">
 
@@ -32,10 +32,10 @@ $router->addRoute('login', $route);
         </title>
         <para>
             Puisqu'une route statique ne fournit aucune partie de l'URL à l'objet de requête
-            en tant que paramètres, vous devez fournir par défaut pour la route tous les paramètres
-            nécessaires à la distribution de la requête. Oubliez les valeurs par défaut de
-            "controller" ou "action" entraînera des résultats non attendus, et peut-être une
-            requête non-distribuable.
+            en tant que paramètres, vous <emphasis>devez</emphasis> fournir par défaut pour la
+            route tous les paramètres nécessaires à la distribution de la requête. Oubliez les
+            valeurs par défaut de "controller" ou "action" entraînera des résultats non attendus,
+            et peut-être une requête non-distribuable.
         </para>
         <para>En général, fournissez toujours chacune des valeurs par défaut suivantes :</para>
         <itemizedlist>

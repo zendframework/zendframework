@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Les backends Zend_Cache</title>
@@ -10,7 +10,7 @@
     </para>
 
     <sect2 id="zend.cache.backends.file">
-        <title><classname>Zend_Cache_Backend_File</classname></title>
+        <title>Zend_Cache_Backend_File</title>
 
         <para>
             Ces backends (étendus) stockent les enregistrements de cache dans des fichiers
@@ -256,7 +256,7 @@
 
         <para>
             Ce backend (étendu) stocke les enregistrements de cache en mémoire partagée grâce
-            à l'extension  <ulink url="http://pecl.php.net/package/APC">APC</ulink>
+            à l'extension <ulink url="http://pecl.php.net/package/APC">APC</ulink>
             (Alternative PHP Cache) qui est requise pour utiliser ce backend.
         </para>
 

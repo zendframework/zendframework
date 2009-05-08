@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>L'objet Requête</title>
@@ -143,10 +143,10 @@
                 <para>
                     Afin d'effectuer une partie de son travail, <code>getParam()</code>
                     recherche réellement dans plusieurs sources. Dans l'ordre de priorité, ceux-ci
-                    incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par l'intermédiaire de
-                    <code>setParam()</code>, les paramètres <code>GET</code>, et finalement les
-                    paramètres <code>POST</code>. Faites attention à ceci lorsque vous récupérez
-                    des données par l'intermédiaire de cette méthode.
+                    incluent&#160;: l'ensemble de paramètres d'utilisateur réglés par
+                    l'intermédiaire de <code>setParam()</code>, les paramètres <code>GET</code>, et
+                    finalement les paramètres <code>POST</code>. Faites attention à ceci lorsque
+                    vous récupérez des données par l'intermédiaire de cette méthode.
                 </para>
                 <para>
                     Si vous souhaitez rechercher seulement dans les valeurs que vous avez

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -58,7 +58,7 @@
                 Le <code>ViewRenderer</code> est activé par défaut dans le contrôleur
                 frontal. Pour le désactiver, utilisez le paramètre <code>noViewRenderer</code>
                 (<code>$front-&gt;setParam('noViewRenderer', true)</code>) ou retirez l'objet du
-                gestionnaire d'aides (helper broker)
+                gestionnaire d'aides
                 (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>).
             </para>
             <para>
@@ -293,8 +293,8 @@ $viewRenderer =
             <listitem>
                 <para>
                     <code>setViewBasePathSpec($spec)</code> vous permet de changer le dossier
-                    donnant accès aux dossiers de la vue&#160;: le base path. Par défaut il s'agit de
-                    <code>:moduleDir/views</code>. L'accesseur de récupération est
+                    donnant accès aux dossiers de la vue&#160;: le base path. Par défaut il s'agit
+                    de <code>:moduleDir/views</code>. L'accesseur de récupération est
                     <code>getViewBasePathSpec()</code>.
                 </para>
             </listitem>

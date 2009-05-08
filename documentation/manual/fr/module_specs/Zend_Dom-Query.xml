@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12116 -->
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dom.query">
     <title>Zend_Dom_Query</title>
@@ -84,18 +84,18 @@
                     <listitem>
                         <para>
                             <emphasis>correspondance de mot</emphasis>&#160;: l'attribut contient
-                            un mot correspondant à la chaîne fournie&#160;: "div[bar~="baz"]" trouvera
-                            un élément div qui possède un attribut "bar" dont la valeur contient le
-                            mot "baz". "&lt;div bar="foo baz"&gt;" trouvera, mais pas "&lt;div
-                            bar="foo bazbat"&gt;".
+                            un mot correspondant à la chaîne fournie&#160;: "div[bar~="baz"]"
+                            trouvera un élément div qui possède un attribut "bar" dont la valeur
+                            contient le mot "baz". "&lt;div bar="foo baz"&gt;" trouvera, mais pas
+                            "&lt;div bar="foo bazbat"&gt;".
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
                             <emphasis>correspondance de parties de chaînes</emphasis>&#160;:
-                            l'attribut contient la chaîne fournie&#160;: "div[bar*="baz"]" trouvera un
-                            élément div qui possède un attribut "bar" dont la valeur contient la
+                            l'attribut contient la chaîne fournie&#160;: "div[bar*="baz"]" trouvera
+                            un élément div qui possède un attribut "bar" dont la valeur contient la
                             chaîne "baz".
                         </para>
                     </listitem>

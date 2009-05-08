@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15101 -->
+<!-- EN-Revision: 15346 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Introduction</title>
@@ -110,57 +110,58 @@
             <title>Héritages multiples entre rôles</title>
 
             <para>
-                Le code ci-dessous définit trois rôles de base - "invite", "membre", et
-                "admin" - desquels d'autres rôles peuvent hériter. Ensuite, un rôle identifié par
-                "unUser" est créé et hérite des trois autres rôles. L'ordre selon lequel ces rôles
-                apparaissent dans le tableau
+                Le code ci-dessous définit trois rôles de base - "<code>guest</code>",
+                "<code>member</code>", et "<code>admin</code>" - desquels d'autres rôles peuvent
+                hériter. Ensuite, un rôle identifié par "<code>someUser</code>" est créé et hérite
+                des trois autres rôles. L'ordre selon lequel ces rôles apparaissent dans le tableau
                 <code>$parents</code> est important. Lorsque cela est nécessaire
                 <classname>Zend_Acl</classname> recherche les règles d'accès définies non seulement
-                pour le rôle demandé (ici "unUser"), mais aussi pour les autres rôles desquels le
-                rôle recherché hérite (ici "invite", "membre", et "admin")&#160;:
+                pour le rôle demandé (ici "<code>someUser</code>"), mais aussi pour les autres rôles
+                desquels le rôle recherché hérite (ici "<code>guest</code>",
+                "<code>member</code>", et "<code>admin</code>")&#160;:
             </para>
 
             <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 
-$acl->addRole(new Zend_Acl_Role('invite'))
-    ->addRole(new Zend_Acl_Role('membre'))
+$acl->addRole(new Zend_Acl_Role('guest'))
+    ->addRole(new Zend_Acl_Role('member'))
     ->addRole(new Zend_Acl_Role('admin'));
 
-$parents = array('invite', 'membre', 'admin');
-$acl->addRole(new Zend_Acl_Role('unUtilisateur'), $parents);
+$parents = array('guest', 'member', 'admin');
+$acl->addRole(new Zend_Acl_Role('someUser'), $parents);
 
-$acl->add(new Zend_Acl_Resource('uneResource'));
+$acl->add(new Zend_Acl_Resource('someResource'));
 
-$acl->deny('invite', 'uneResource');
-$acl->allow('membre', 'uneResource');
+$acl->deny('invite', 'someResource');
+$acl->allow('membre', 'someResource');
 
-echo $acl->isAllowed('unUtilisateur', 'uneResource') ? 'autorisé' : 'refusé';
+echo $acl->isAllowed('unUtilisateur', 'someResource') ? 'autorisé' : 'refusé';
 ]]></programlisting>
 
             <para>
                 Puisqu'il n'y a pas de règle spécifiquement définie pour le rôle
                 "unUtilisateur" et "uneRessource", <classname>Zend_Acl</classname> doit rechercher
-                des règles qui pourraient être définies pour des rôles dont "unUtilisateur" hérite.
+                des règles qui pourraient être définies pour des rôles dont "someUser" hérite.
                 Premièrement, le rôle "admin" est contrôlé, et il n'y a pas de règle d'accès
                 définie pour lui. Ensuite, le rôle "membre" est visité, et
                 <classname>Zend_Acl</classname> trouve qu'il y a une règle qui spécifie que
-                "membre" a un accès autorisé à "uneRessource".
+                "member" a un accès autorisé à "someResource".
             </para>
 
             <para>
                 Si <classname>Zend_Acl</classname> continuait à examiner toutes les règles de
-                tous les rôles parents, il trouverait que "invite" est interdit d'accès à
-                "uneRessource". Ceci introduit une ambiguïté puisque maintenant "unUtilisateur" est
-                à la fois autorisé et interdit d'accès à "uneRessource", puisqu'il hérite de règles
+                tous les rôles parents, il trouverait que "someResource" est interdit d'accès à
+                "someResource". Ceci introduit une ambiguïté puisque maintenant "someUser" est
+                à la fois autorisé et interdit d'accès à "someResource", puisqu'il hérite de règles
                 opposées de ses différents parents.
             </para>
 
             <para>
                 <classname>Zend_Acl</classname> résout cette ambiguïté en arrêtant la
                 recherche de règles d'accès dès qu'une première règle est découverte. Dans notre
-                exemple, puisque le rôle "membre" est examiné avant le rôle "invite", le résultat
-                devrait afficher "autorisé".
+                exemple, puisque le rôle "member" est examiné avant le rôle "invite", le résultat
+                devrait afficher "<code>autorisé</code>".
             </para>
         </example>
 

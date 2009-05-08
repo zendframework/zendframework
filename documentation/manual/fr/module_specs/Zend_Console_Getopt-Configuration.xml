@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
-    <title>Configurer <classname>Zend_Console_Getopt</classname></title>
+    <title>Configurer Zend_Console_Getopt</title>
 
     <sect2 id="zend.console.getopt.configuration.addrules">
         <title>Ajouter des règles d'options</title>
@@ -18,8 +18,8 @@
             détails sur la syntaxe de déclaration des options.
         </para>
 
-        <example>
-            <title>Utilisation d'<code>addRules()</code></title>
+        <example id="zend.console.getopt.configuration.addrules.example">
+            <title>Utilisation d'addRules()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -50,8 +50,8 @@ $opts->addRules(
             d'aide correspondant.
         </para>
 
-        <example>
-            <title>Utiliser <code>setHelp()</code></title>
+        <example id="zend.console.getopt.configuration.addhelp.example">
+            <title>Utiliser setHelp()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -92,8 +92,8 @@ $opts->setHelp(
             alias, une <classname>Zend_Console_Getopt_Exception</classname> est levée.
         </para>
 
-        <example>
-            <title>Utiliser <code>setAliases()</code></title>
+        <example id="zend.console.getopt.configuration.addaliases.example">
+            <title>Utiliser setAliases()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -135,10 +135,8 @@ $opts->setAliases(
             courants, et la nouvelle méthode substitue le tableau aux arguments courants.
         </para>
 
-        <example>
-            <title>
-                Utilisation de <code>addArguments()</code> et <code>setArguments()</code>
-            </title>
+        <example id="zend.console.getopt.configuration.addargs.example">
+            <title>Utilisation de addArguments() et setArguments()</title>
 
             <programlisting role="php"><![CDATA[
 // Par défaut, le constructeur utilise $_SERVER['argv']
@@ -228,8 +226,8 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             configuration et une valeur d'option.
         </para>
 
-        <example>
-            <title>Utilisation de <code>setOption()</code></title>
+        <example id="zend.console.getopt.configuration.config.example.setoption">
+            <title>Utilisation de setOption()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
@@ -245,8 +243,8 @@ $opts->setOption('ignoreCase', true);
             avec la configuration courante ; vous n'avez pas à énumérer toutes les options.
         </para>
 
-        <example>
-            <title>Utilisation de <code>setOptions()</code></title>
+        <example id="zend.console.getopt.configuration.config.example.setoptions">
+            <title>Utilisation de setOptions()</title>
 
             <programlisting role="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');

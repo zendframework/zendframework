@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Introduction</title>
@@ -80,9 +80,7 @@ $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
 
     <example id="zend.config.introduction.example.file.php">
-        <title>
-            Utilisez <classname>Zend_Config</classname> avec un fichier de configuration en PHP
-        </title>
+        <title>Utilisez Zend_Config avec un fichier de configuration en PHP</title>
 
         <para>
             Il est souvent souhaitable d'utiliser une fichier de configuration en pur PHP. Le code

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15182 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller - Démarrage rapide</title>
@@ -85,6 +85,19 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
+
+            <note>
+                <title>Connaître mod_rewrite</title>
+
+                <para>
+                    Les règles de réécriture ci-dessus autorisent l'accès à tous fichiers sous la
+                    racine de votre hôte virtuel. Si vous avez des fichiers que vous ne souhaitez
+                    pas exposer, vous pouvez souhaiter restreindre ces règles. Allez sur le site
+                    d'Apache <ulink
+                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">pour en
+                        apprendre davantage concernant mod_rewrite</ulink>.
+                </para>
+            </note>
 
             <para>
                 Si vous avez IIS 7.0, utilisez ceci pour votre configuration de réécriture&#160;:

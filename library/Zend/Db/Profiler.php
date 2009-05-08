@@ -247,7 +247,7 @@ class Zend_Db_Profiler
 
         // make sure we have a query type
         if (null === $queryType) {
-            switch (strtolower(substr($queryText, 0, 6))) {
+            switch (strtolower(substr(ltrim($queryText), 0, 6))) {
                 case 'insert':
                     $queryType = self::INSERT;
                     break;

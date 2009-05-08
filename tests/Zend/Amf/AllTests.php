@@ -7,6 +7,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_AllTests::main');
 }
 
+require_once 'Zend/Amf/Adobe/IntrospectorTest.php';
 require_once 'Zend/Amf/RequestTest.php';
 require_once 'Zend/Amf/ResponseTest.php';
 require_once 'Zend/Amf/ServerTest.php';
@@ -26,6 +27,7 @@ class Zend_Amf_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Amf');
 
+        $suite->addTestSuite('Zend_Amf_Adobe_IntrospectorTest');
         $suite->addTestSuite('Zend_Amf_RequestTest');
         $suite->addTestSuite('Zend_Amf_ResponseTest');
         $suite->addTestSuite('Zend_Amf_ServerTest');
@@ -41,4 +43,3 @@ class Zend_Amf_AllTests
 if (PHPUnit_MAIN_METHOD == 'Zend_Amf_AllTests::main') {
     Zend_Amf_AllTests::main();
 }
-?>

@@ -5,56 +5,61 @@
     <title>ActionStack</title>
 
     <para>
-        Das<code>ActionStack</code> Plugin erlaubt es einen Stack von Anfragen zu verwalten, und operiert
-        als <code>postDispatch</code> Plugin. Wenn eine Weiterleitung (z.B. ein Aufruf zu einer anderen Aktion)
-        bereits im aktuellen Anfrage Objekt gefunden wurde, führt es nicht durch. Trotzdem, wenn nicht,
-        prüft es seinen Stack und entfernt den obersten Teil von Ihm und leitet diesen zu der Aktion weiter
-        die in dieser Anfrage spezifiziert ist. Der Stack wird in der LIFO Reihenfolge bearbeitet.
+        Das<code>ActionStack</code> Plugin erlaubt es einen Stack von Anfragen zu verwalten, und
+        operiert als <code>postDispatch</code> Plugin. Wenn eine Weiterleitung (z.B. ein Aufruf zu
+        einer anderen Aktion) bereits im aktuellen Anfrage Objekt gefunden wurde, führt es nicht
+        durch. Trotzdem, wenn nicht, prüft es seinen Stack und entfernt den obersten Teil von Ihm
+        und leitet diesen zu der Aktion weiter die in dieser Anfrage spezifiziert ist. Der Stack
+        wird in der LIFO Reihenfolge bearbeitet.
     </para>
 
     <para>
         Das Plugin kann jederzeit vom Front Kontroller empfangen werden indem
-        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname> verwendet wird.
-        Sobald das Plugin Objekt vorliegt, gibt es eine Anzahl von Mechanisman die verwendet werden können,
-        um es zu manipulieren.
+        <classname>Zend_Controller_Front::getPlugin('Zend_Controller_Plugin_ActionStack')</classname>
+        verwendet wird. Sobald das Plugin Objekt vorliegt, gibt es eine Anzahl von Mechanisman die
+        verwendet werden können, um es zu manipulieren.
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>getRegistry()</code> und <code>setRegistry()</code>.
-                Intern verwendet <code>ActionStack</code> eine Instanz von <classname>Zend_Registry</classname>
-                um den Stack zu speichern. Diese kann durch eine andere Registry Instanz ersetzt werden
+                <code>getRegistry()</code> und <code>setRegistry()</code>. Intern verwendet
+                <code>ActionStack</code> eine Instanz von <classname>Zend_Registry</classname> um
+                den Stack zu speichern. Diese kann durch eine andere Registry Instanz ersetzt werden
                 oder dieselbe mit diesen Zugriffsmethoden empfangen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>getRegistryKey()</code> und <code>setRegistryKey()</code>.
-                Diese können verwendet werden um anzuzeigen welcher Registryschlüssel verwendet wird wenn
-                der Stack herausgenommen wird. Der Standardwert ist 'Zend_Controller_Plugin_ActionStack'.
+                <code>getRegistryKey()</code> und <code>setRegistryKey()</code>. Diese können
+                verwendet werden um anzuzeigen welcher Registryschlüssel verwendet wird wenn der
+                Stack herausgenommen wird. Der Standardwert ist
+                'Zend_Controller_Plugin_ActionStack'.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>getStack()</code> erlaubt es den Stack von Aktionen in seiner Ganzheit zu empfangen.
+                <code>getStack()</code> erlaubt es den Stack von Aktionen in seiner Ganzheit zu
+                empfangen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>pushStack()</code> und <code>popStack()</code> erlauben es dem Stack etwas hinzuzufügen
-                und auch zu entfernen. <code>pushStack()</code> akzeptiert ein Anfrageobjekt.
+                <code>pushStack()</code> und <code>popStack()</code> erlauben es dem Stack etwas
+                hinzuzufügen und auch zu entfernen. <code>pushStack()</code> akzeptiert ein
+                Anfrageobjekt.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Eine zusätzliche Methode, <code>forward()</code>, erwartet ein Anfrageobjekt, und setzt den Status
-        des aktellen Anfrageobjektes im Front Kontroller auf den Status des angegebenen Anfrageobjekts,
-        und markiert dieses als unerledigt (das forciert einen weiteren Durchlauf der Dispatch Schleife).
+        Eine zusätzliche Methode, <code>forward()</code>, erwartet ein Anfrageobjekt, und setzt den
+        Status des aktellen Anfrageobjektes im Front Kontroller auf den Status des angegebenen
+        Anfrageobjekts, und markiert dieses als unerledigt (das forciert einen weiteren Durchlauf
+        der Dispatch Schleife).
     </para>
 </sect3>
 <!--

@@ -8,20 +8,21 @@
         <title>Einführung</title>
         <para>
             <classname>Zend_Controller</classname> ist das Herz des MVC-Systems des Zend Framework.
-            MVC bedeutet <ulink url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</ulink>
+            MVC bedeutet <ulink
+                url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</ulink>
             und ist ein Entwurfsmuster, das darauf abzielt, Anwendungslogik von Anzeigelogik zu trennen.
             <classname>Zend_Controller_Front</classname> implementiert ein <ulink
-            url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</ulink>-Entwurfsmuster,
-            das vorschreibt, dass alle Anfragen vom Front-Controller abgefangen und abhängig von der angeforderten URL
-            an individuelle Action-Controller weitergeleitet werden.
+                url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</ulink>-Entwurfsmuster,
+            das vorschreibt, dass alle Anfragen vom Front-Controller abgefangen und abhängig von der
+            angeforderten URL an individuelle Action-Controller weitergeleitet werden.
         </para>
         <para>
-            Das <classname>Zend_Controller</classname> System wurde im Sinne der Erweiterungsmöglichkeiten
-            entwickelt, entweder durch Erstellen von Subklassen, welche die bestehenden Klassen
-            erweitern, oder durch Erstellen neuer Klassen, welche die verschiedenen Interfaces
-            und abstrakten Klassen implementieren, welche das Fundament der Controller
-            Klassenfamilie bilden, oder durch das Schreiben von Plugins und Action Helper, um die
-            Funktionalität des Systems zu erweitern oder zu verändern.
+            Das <classname>Zend_Controller</classname> System wurde im Sinne der
+            Erweiterungsmöglichkeiten entwickelt, entweder durch Erstellen von Subklassen, welche
+            die bestehenden Klassen erweitern, oder durch Erstellen neuer Klassen, welche die
+            verschiedenen Interfaces und abstrakten Klassen implementieren, welche das Fundament der
+            Controller Klassenfamilie bilden, oder durch das Schreiben von Plugins und Action
+            Helper, um die Funktionalität des Systems zu erweitern oder zu verändern.
         </para>
     </sect2>
 
@@ -29,16 +30,17 @@
         <title>Schnelleinstieg</title>
 
         <para>
-            Wer mehr und tiefergehende Informationen benötigt, sollte die folgenden Abschnitte lesen.
-            Dieser Abschnitt zeigt, wie man auf dem schnellsten Weg ein System lauffähig bekommt.
+            Wer mehr und tiefergehende Informationen benötigt, sollte die folgenden Abschnitte
+            lesen. Dieser Abschnitt zeigt, wie man auf dem schnellsten Weg ein System lauffähig
+            bekommt.
         </para>
 
         <sect3 id="zend.controller.quickstart.go.directory">
             <title>Ordnerstruktur anlegen</title>
 
             <para>
-                Der erste Schritt ist, die Ordnerstruktur für das Framework anzulegen. Typischerweise ist das
-                die folgende:
+                Der erste Schritt ist, die Ordnerstruktur für das Framework anzulegen.
+                Typischerweise ist das die folgende:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -63,8 +65,8 @@ html/
             <title>Wurzelverzeichnis setzen</title>
 
             <para>
-                Der Webserver ist so zu konfigurieren, dass das Wurzelverzeichnis (Document Root) des Webservers
-                im <code>html</code>-Verzeichnis der obigen Ordnerstruktur liegt.
+                Der Webserver ist so zu konfigurieren, dass das Wurzelverzeichnis (Document Root)
+                des Webservers im <code>html</code>-Verzeichnis der obigen Ordnerstruktur liegt.
             </para>
         </sect3>
 
@@ -72,7 +74,8 @@ html/
             <title>Rewrite-Regeln erstellen</title>
 
             <para>
-                In die Datei <code>html/.htaccess</code> aus der Struktur von oben gehört der folgende Code:
+                In die Datei <code>html/.htaccess</code> aus der Struktur von oben gehört der
+                folgende Code:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -137,8 +140,9 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <note>
                 <para>
-                    Die Rewrite-Regel oben ist für den Apache-Webserver; Beispiele für andere Webserver finden sich
-                    in der <link linkend="zend.controller.router.introduction">Router-Dokumentation</link>.
+                    Die Rewrite-Regel oben ist für den Apache-Webserver; Beispiele für andere
+                    Webserver finden sich in der <link
+                        linkend="zend.controller.router.introduction">Router-Dokumentation</link>.
                 </para>
             </note>
         </sect3>
@@ -166,37 +170,42 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             <title>Den Action-Controller für die Startseite erstellen</title>
 
             <para>
-                Bevor wir von Action-Controllern reden, sollte erst verstanden werden, wie Anfragen im Zend Framework
-                behandelt werden. Standardmäßig zeigt das erste Segment eines URL auf einen Controller und
-                das zweite Segment auf eine Aktion, die dieser Controller ausführen soll.
-                Als Beispiel sei der URL <code>http://framework.zend.com/roadmap/components</code> gegeben.
-                Der Pfad ist <code>/roadmap/components</code>, was die Anfrage zum Controller <code>roadmap</code>
-                und dort in die Aktion <code>components</code> leitet. Wenn keine Aktion angegeben wird, wird
-                <code>index</code> als Standard-Aktion angenommen, und wenn kein Controller angegeben wird,
-                wird auch <code>index</code> als Standard-Controller angenommen. (Das folgt der Apache-Konvention,
-                die einen <code>DirectoryIndex</code> automatisch findet).
+                Bevor wir von Action-Controllern reden, sollte erst verstanden werden, wie Anfragen
+                im Zend Framework behandelt werden. Standardmäßig zeigt das erste Segment eines URL
+                auf einen Controller und das zweite Segment auf eine Aktion, die dieser Controller
+                ausführen soll. Als Beispiel sei der URL
+                <code>http://framework.zend.com/roadmap/components</code> gegeben. Der Pfad ist
+                <code>/roadmap/components</code>, was die Anfrage zum Controller
+                <code>roadmap</code> und dort in die Aktion <code>components</code> leitet. Wenn
+                keine Aktion angegeben wird, wird <code>index</code> als Standard-Aktion angenommen,
+                und wenn kein Controller angegeben wird, wird auch <code>index</code> als
+                Standard-Controller angenommen. (Das folgt der Apache-Konvention, die einen
+                <code>DirectoryIndex</code> automatisch findet).
             </para>
 
             <para>
-                Der Dispatcher von <classname>Zend_Controller</classname> nimmt dann den Wert, der als Controller angegeben
-                ist, und schließt daraus auf eine passende Klasse. In der normalen Einstellung des Dispatchers
-                wird der erste Buchstabe jedes Wortes im Controller-Namen groß geschrieben (Title-case), und dann
-                das Wort <code>Controller</code> angehängt. Das bedeutet für unser Beispiel, dass die Anfrage nach
-                dem Controller <code>roadmap</code> an die Klasse <code>RoadmapController</code> weitergeleitet wird.
+                Der Dispatcher von <classname>Zend_Controller</classname> nimmt dann den Wert, der
+                als Controller angegeben ist, und schließt daraus auf eine passende Klasse. In der
+                normalen Einstellung des Dispatchers wird der erste Buchstabe jedes Wortes im
+                Controller-Namen groß geschrieben (Title-case), und dann das Wort
+                <code>Controller</code> angehängt. Das bedeutet für unser Beispiel, dass die Anfrage
+                nach dem Controller <code>roadmap</code> an die Klasse
+                <code>RoadmapController</code> weitergeleitet wird.
             </para>
 
             <para>
-                Auf ähnliche Art wird die Methode für die Aktion bestimmt, die der Controller ausführen soll.
-                In der Grundeinstellung wird die angefragte Aktion komplett kleingeschrieben und das Wort
-                <code>Action</code> wird angehängt. In unserem Beispiel wird also die Aktion <code>components</code>
-                zu <code>componentsAction</code>, insgesamt wird also die Methode
+                Auf ähnliche Art wird die Methode für die Aktion bestimmt, die der Controller
+                ausführen soll. In der Grundeinstellung wird die angefragte Aktion komplett
+                kleingeschrieben und das Wort <code>Action</code> wird angehängt. In unserem
+                Beispiel wird also die Aktion <code>components</code> zu
+                <code>componentsAction</code>, insgesamt wird also die Methode
                 <code>RoadmapController::componentsAction()</code> aufgerufen.
             </para>
 
             <para>
                 Also, weiter gehts. Jetzt wird ein Startseiten-Controller und eine dazugehörige
-                Standard-Aktionsmethode erstellt. Wie vorhin bereits erwähnt, heißen Standard-Controller und -Aktion
-                beide <code>index</code>. Also gehört in die Datei
+                Standard-Aktionsmethode erstellt. Wie vorhin bereits erwähnt, heißen
+                Standard-Controller und -Aktion beide <code>index</code>. Also gehört in die Datei
                 <code>application/controllers/IndexController.php</code> folgendes:
             </para>
 
@@ -213,18 +222,20 @@ class IndexController extends Zend_Controller_Action
             <para>
                 Normalerweise ist ein Action-Helper namens <link
                     linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
-                eingeschaltet. Das bedeutet, dass sofort, wenn eine leere Aktionsmethode und ein passendes View-Script
-                existieren, Inhalte gerendert werden. Standardmäßig wird die Klasse
-                <classname>Zend_View</classname> als View-Schicht im Zend-Framework MVC verwendet. Der <code>ViewRenderer</code>
-                zaubert ein wenig, und benutzt Controller- (hier: <code>index</code>) und Aktionsname
-                (hier: <code>index</code>), um herauszufinden, welches Template er rendern soll.
-                Ohne dass man dies ändert, haben Templates die Dateiendung <code>.phtml</code>, das heißt also für
-                unser Beispiel, dasss das Template <code>index/index.phtml</code> gerendert wird.
-                Zusätzlich nimmt der <code>ViewRenderer</code> automatisch an, dass das Verzeichnis
-                <code>views</code> auf der selben Ebene wie das Controller Verzeichnis
-                das View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts in dessen Unterverzeichnis
-                <code>views/scripts/</code> liegen. Insgesamt hat also das Template, das gerendert wird,
-                den Pfad <code>application/views/scripts/index/index.phtml</code>.
+                eingeschaltet. Das bedeutet, dass sofort, wenn eine leere Aktionsmethode und ein
+                passendes View-Script existieren, Inhalte gerendert werden. Standardmäßig wird die
+                Klasse <classname>Zend_View</classname> als View-Schicht im Zend-Framework MVC
+                verwendet. Der <code>ViewRenderer</code> zaubert ein wenig, und benutzt Controller-
+                (hier: <code>index</code>) und Aktionsname (hier: <code>index</code>), um
+                herauszufinden, welches Template er rendern soll. Ohne dass man dies ändert, haben
+                Templates die Dateiendung <code>.phtml</code>, das heißt also für unser Beispiel,
+                dass das Template <code>index/index.phtml</code> gerendert wird. Zusätzlich nimmt
+                der <code>ViewRenderer</code> automatisch an, dass das Verzeichnis
+                <code>views</code> auf der selben Ebene wie das Controller Verzeichnis das
+                View-Basisverzeichnis ist, und dass die eigentlichen View-Scripts in dessen
+                Unterverzeichnis <code>views/scripts/</code> liegen. Insgesamt hat also das
+                Template, das gerendert wird, den Pfad
+                <code>application/views/scripts/index/index.phtml</code>.
             </para>
         </sect3>
 
@@ -232,10 +243,12 @@ class IndexController extends Zend_Controller_Action
             <title>Das View-Script erstellen</title>
 
             <para>
-                Wie <link linkend="zend.controller.quickstart.go.controller">oben beschrieben</link>,
-                werden View-Scripts im Verzeichnis <code>application/views/scripts/</code> abgelegt;
-                das View-Script für den Starseiten-Controller und dessen Standard-Aktion hat den Pfad
-                <code>application/views/scripts/index/index.phtml</code>. Da hinein kommt das folgende HTML:
+                Wie <link linkend="zend.controller.quickstart.go.controller">oben
+                    beschrieben</link>, werden View-Scripts im Verzeichnis
+                <code>application/views/scripts/</code> abgelegt; das View-Script für den
+                Starseiten-Controller und dessen Standard-Aktion hat den Pfad
+                <code>application/views/scripts/index/index.phtml</code>. Da hinein kommt das
+                folgende HTML:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -260,9 +273,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 Standardmäßig ist <link
                     linkend="zend.controller.plugins.standard.errorhandler">das
-                Error-Handler-Plugin</link> registriert. Dieses Plugin erwartet, dass ein Controller existiert,
-                der Fehler behandelt. Ohne weitere Einstellungen erwartet es einen <code>ErrorController</code>
-                im Default-Modul mit einer Methode namens <code>errorAction</code>:
+                Error-Handler-Plugin</link> registriert. Dieses Plugin erwartet, dass ein Controller
+                existiert, der Fehler behandelt. Ohne weitere Einstellungen erwartet es einen
+                <code>ErrorController</code> im Default-Modul mit einer Methode namens
+                <code>errorAction</code>:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -277,10 +291,9 @@ class ErrorController extends Zend_Controller_Action
 
             <para>
                 In der bereits angesprochenen Ordnerstruktur gehört dieser Code in die Datei
-                <code>application/controllers/ErrorController.php</code>.
-                Außerdem muss auch ein View-Script
-                <code>application/views/scripts/error/error.phtml</code> erstellt werden; Beispielhaft
-                könnte sein Inhalt so aussehen:
+                <code>application/controllers/ErrorController.php</code>. Außerdem muss auch ein
+                View-Script <code>application/views/scripts/error/error.phtml</code> erstellt
+                werden; Beispielhaft könnte sein Inhalt so aussehen:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -305,10 +318,10 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <title>Die Seite ansehen!</title>
 
             <para>
-                Jetzt, wo der erste Controller und das erste View-Script geschrieben sind, kann der Browser
-                aufgerufen und die Seite angesehen werden. Wäre
-                <code>example.com</code> die Domain der Zend Framework-Installation, dann würde jeder der folgenden
-                URLs auf die Seite zeigen, die wir gerade erstellt haben:
+                Jetzt, wo der erste Controller und das erste View-Script geschrieben sind, kann der
+                Browser aufgerufen und die Seite angesehen werden. Wäre <code>example.com</code> die
+                Domain der Zend Framework-Installation, dann würde jeder der folgenden URLs auf die
+                Seite zeigen, die wir gerade erstellt haben:
             </para>
 
             <itemizedlist>
@@ -318,8 +331,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             </itemizedlist>
 
             <para>
-                Herzlichen Glückwunsch, Sie sind jetzt bereit, weitere Controller und Aktionsmethoden
-                zu erstellen und Ihrer Seite damit Leben einzuhauchen.
+                Herzlichen Glückwunsch, Sie sind jetzt bereit, weitere Controller und
+                Aktionsmethoden zu erstellen und Ihrer Seite damit Leben einzuhauchen.
             </para>
         </sect3>
     </sect2>

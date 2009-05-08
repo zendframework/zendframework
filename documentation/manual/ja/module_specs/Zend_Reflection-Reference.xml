@@ -5,89 +5,87 @@
     <title>Zend_Reflectionリファレンス</title>
 
     <para>
-        The various classes in <code>Zend_Reflection</code> mimic the API of
-        PHP's <ulink url="http://php.net/reflection">Reflection API</ulink> -
-        with one important difference. PHP's Reflection API does not provide
-        introspection into docblock annotation tags, nor into parameter variable
-        types or return types.
+        <code>Zend_Reflection</code>の様々なクラスは、
+        PHPの<ulink url="http://php.net/reflection">Reflection API</ulink>のAPIに良く似ています。
+        しかし、一つ重要な違いがあります。
+        PHPのReflection APIはdocblock注釈タグの内部、パラメータ変数の型も返す型も、
+        参照することができません。
     </para>
 
     <para>
-        <code>Zend_Reflection</code> analyzes method docblock annotations to
-        determine parameter variable types and the return type. Specifically,
-        the <code>@param</code> and <code>@return</code> annotations are used.
-        However, you can also check for any other annotation tags, as well as
-        the standard "short" and "long" descriptions.
+        <code>Zend_Reflection</code>は、
+        パラメーター変数の型や返す型を判断するために、
+        メソッドのdocblock注釈を解析します。
+        特に<code>@param</code>及び<code>@return</code>注釈が使われます。
+        しかしながら、"短い"説明や"長い"説明ばかりではなく、
+        その他の注釈タグも検査することができます。
     </para>
 
     <para>
-        Each reflection object in <code>Zend_Reflection</code> overrides the
-        <code>getDocblock()</code> method to return an instance of
-        <code>Zend_Reflection_Docblock</code>. This class provides introspection
-        into the docblocks and annotation tags.
+        <code>Zend_Reflection</code>のそれぞれのReflectionオブジェクトは、
+        <code>Zend_Reflection_Docblock</code>のインスタンスを返すように、
+        <code>getDocblock()</code>を上書きします。
+        このクラスはdocblock及び注釈タグを参照できるようにします。
     </para>
 
     <para>
-        <code>Zend_Reflection_File</code> is a new reflection class that allows
-        introspection of PHP files. With it, you can retrieve the classes,
-        functions, and global PHP code contained in the file.
+        <code>Zend_Reflection_File</code>はPHPファイルの内部を参照できる新しいReflectionクラスです。
+        それを使って、PHPファイルに含まれるクラスや関数、グローバルなPHPコードを取得できます。
     </para>
 
     <para>
-        Finally, the various methods that return other reflection objects
-        allow a second parameter, the name of the reflection class to use for
-        the returned reflection object.
+        最後に、その他のReflectionオブジェクトを返す様々なメソッドにおいて、
+        ２番目の引数としてクラス名を、
+        返されたReflectionオブジェクトで使用できます。
     </para>
 
     <sect2 id="zend.reflection.reference.docblock">
         <title>Zend_Reflection_Docblock</title>
 
         <para>
-            <code>Zend_Reflection_Docblock</code> is the heart of
-            <code>Zend_Reflection</code>'s value-add over PHP's Reflection API.
-            It provides the following methods:
+            <code>Zend_Reflection_Docblock</code>は
+            PHPのReflection API以上に<code>Zend_Reflection</code>に価値を付与する心臓部です。
+            それには下記のメソッドがあります:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getContents()</code>: docblockの完全な内容を返す
+                <code>getContents()</code>: docblockの完全な内容を返します
             </para></listitem>
 
             <listitem><para>
                 <code>getStartLine()</code>: 定義されたファイル内での
-                docblock開始位置を返す
+                docblock開始位置を返します
             </para></listitem>
 
             <listitem><para>
                 <code>getEndLine()</code>: 定義されたファイル内での
-                docblock終了行を返す
+                docblock終了行を返します
             </para></listitem>
 
             <listitem><para>
-                <code>getShortDescription()</code>: 短い、一行の説明を取得
+                <code>getShortDescription()</code>: 短い、一行の説明を取得します
                 (たいていはdocblockの最初の行)
             </para></listitem>
 
             <listitem><para>
-                <code>getLongDescription()</code>: docblockの長い説明を取得
+                <code>getLongDescription()</code>: docblockの長い説明を取得します
             </para></listitem>
 
             <listitem><para>
                 <code>hasTag($name)</code>: 与えられた注釈タグが
-                docblockにあるかどうか判断する。
+                docblockにあるかどうか判断します
             </para></listitem>
 
             <listitem><para>
-                <code>getTag($name)</code>: Retrieve the given annotation tag
-                reflection object, or a boolean <code>false</code> if it's not
-                present.
+                <code>getTag($name)</code>: 与えられた注釈タグのReflectionオブジェクト、
+                または存在しない場合<code>false</code>を返します
             </para></listitem>
 
             <listitem><para>
-                <code>getTags($filter)</code>: Retrieve all tags, or all tags
-                matching the given <code>$filter</code> string. The tags
-                returned will be an array of
-                <code>Zend_Reflection_Docblock_Tag</code> objects.
+                <code>getTags($filter)</code>: 全てのタグ、
+                または与えられた<code>$filter</code>文字列に一致する全てのタグを取得します。
+                タグは<code>Zend_Reflection_Docblock_Tag</code>オブジェクトの配列として返されます。
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -96,29 +94,28 @@
         <title>Zend_Reflection_Docblock_Tag</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag</code> provides reflection for
-            individual annotation tags. Most tags consist of only a name and a
-            description. In the case of some special tags, the class provides a
-            factory method for retrieving an instance of the appropriate class.
+            <code>Zend_Reflection_Docblock_Tag</code>は個別の注釈タグのためのReflectionを提供します。
+            ほとんどのタグは名前と説明から構成されています。
+            いくつかの特別なタグの場合には、
+            適切なクラスのインスタンスを取得するための、
+            ファクトリーメソッドをクラスで提供します。
         </para>
 
         <para>
-            The following methods are defined for
-            <code>Zend_Reflection_Docblock_Tag</code>:
+            下記のメソッドは<code>Zend_Reflection_Docblock_Tag</code>のために定義されています:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>factory($tagDocblockLine)</code>: instantiate the
-                appropriate tag reflection class and return it.
+                <code>factory($tagDocblockLine)</code>: 注釈タグReflectionクラスをインスタンス化して返します。
             </para></listitem>
 
             <listitem><para>
-                <code>getName()</code>: 注釈タグの名前を返す
+                <code>getName()</code>: 注釈タグの名前を返します
             </para></listitem>
 
             <listitem><para>
-                <code>getDescription()</code>: 注釈の説明を返す
+                <code>getDescription()</code>: 注釈の説明を返します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -127,20 +124,19 @@
         <title>Zend_Reflection_Docblock_Tag_Param</title>
 
         <para>
-            <code>Zend_Reflection_Docblock_Tag_Param</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
-            <code>@param</code> annotation tag description consists of the
-            parameter type, variable name, and variable description. It adds the
-            following methods to <code>Zend_Reflection_Docblock_Tag</code>:
+            <code>Zend_Reflection_Docblock_Tag_Param</code>は
+            <code>Zend_Reflection_Docblock_Tag</code>の特化したバージョンです。
+            <code>@param</code>注釈タグの説明はパラメータの型及び変数名、変数の説明から構成されています。
+            このクラスにより下記のメソッドが<code>Zend_Reflection_Docblock_Tag</code>に追加されます:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: パラメータ変数の型を返す
+                <code>getType()</code>: パラメータ変数の型を返します
             </para></listitem>
 
             <listitem><para>
-                <code>getVariableName()</code>: パラメータ変数の名前を返す
+                <code>getVariableName()</code>: パラメータ変数の名前を返します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -149,17 +145,16 @@
         <title>Zend_Reflection_Docblock_Tag_Return</title>
 
         <para>
-            Like <code>Zend_Reflection_Docblock_Tag_Param</code>,
-            <code>Zend_Reflection_Docblock_Tag_Return</code> is a specialized
-            version of <code>Zend_Reflection_Docblock_Tag</code>. The
-            <code>@return</code> annotation tag description consists of the
-            return type and variable description. It adds the following method
-            to <code>Zend_Reflection_Docblock_Tag</code>:
+            <code>Zend_Reflection_Docblock_Tag_Param</code>のように、
+            <code>Zend_Reflection_Docblock_Tag_Return</code>は
+            <code>Zend_Reflection_Docblock_Tag</code>の特化したバージョンです。
+            <code>@return</code>注釈タグの説明は返す型及び変数の説明から構成されています。
+            このクラスにより下記のメソッドが<code>Zend_Reflection_Docblock_Tag</code>に追加されます:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getType()</code>: 戻す型を返す
+                <code>getType()</code>: 戻す型を返します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -168,51 +163,48 @@
         <title>Zend_Reflection_File</title>
 
         <para>
-            <code>Zend_Reflection_File</code> provides introspection into PHP
-            files. With it, you can introspect the classes, functions, and bare
-            PHP code defined in a file. It defines the following methods:
+            <code>Zend_Reflection_File</code>によりPHPファイル内部を参照できます。
+            それを使って、ファイルで定義されたクラスや関数、生のPHPコードを参照することができます。
+            下記の関数が定義されています:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                <code>getFileName()</code>: reflectionを使用したファイルの名前を取得
+                <code>getFileName()</code>: Reflectionを使用したファイルの名前を取得します
             </para></listitem>
 
             <listitem><para>
-                <code>getStartLine()</code>: ファイルの開始行を返す（常に１）
+                <code>getStartLine()</code>: ファイルの開始行を返します（常に１）
             </para></listitem>
 
             <listitem><para>
-                <code>getEndLine()</code> 最終行、ファイル中の行数を取得
+                <code>getEndLine()</code> 最終行、ファイル中の行数を取得します
             </para></listitem>
 
             <listitem><para>
                 <code>getDocComment($reflectionClass =
-                    'Zend_Reflection_Docblock')</code>: retrive the file-level
-                docblock reflection object.
+                    'Zend_Reflection_Docblock')</code>: ファイルレベルのdocblock Reflectionオブジェクトを取得します
             </para></listitem>
 
             <listitem><para>
                 <code>getClasses($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve an array of
-                reflection objects, one for each class defined in the file.
+                    'Zend_Reflection_Class')</code>: Reflectionオブジェクトの配列を取得します。
+                    ファイルに定義されているそれぞれのクラスです。
             </para></listitem>
 
             <listitem><para>
                 <code>getFunctions($reflectionClass =
-                    'Zend_Reflection_Function')</code>: retrieve an array of
-                reflection objects, one for each function defined in the file.
+                    'Zend_Reflection_Function')</code>: Reflectionオブジェクトの配列を取得します。
+                    ファイルに定義されているそれぞれの関数です。
             </para></listitem>
 
             <listitem><para>
                 <code>getClass($name = null, $reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the reflection
-                object for a single class.
+                    'Zend_Reflection_Class')</code>: 一つのクラスのReflectionオブジェクトの配列を取得します
             </para></listitem>
 
             <listitem><para>
-                <code>getContents()</code>: retrieve the full contents of the
-                file.
+                <code>getContents()</code>: ファイルの全てのコンテンツを取得します。
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -221,17 +213,16 @@
         <title>Zend_Reflection_Class</title>
 
         <para>
-            <code>Zend_Reflection_Class</code> extends
-            <code>ReflectionClass</code>, and follows its API. It adds one
-            additional method, <code>getDeclaringFile()</code>, which may be
-            used to retrieve the <code>Zend_Reflection_File</code> reflection
-            object for the defining file.
+            <code>Zend_Reflection_Class</code>は<code>ReflectionClass</code>を拡張して、
+            そのAPIに追随します。
+            ひとつ追加のメソッド、<code>getDeclaringFile()</code>を追加します。
+            それは定義されたファイルでの<code>Zend_Reflection_File</code> Reflectionオブジェクトを
+            取得するために使われるでしょう。
         </para>
 
         <para>
-            Additionally, the following methods add an additional argument for
-            specifying the reflection class to use when fetching a reflection
-            object:
+            さらに、下記のメソッドはReflectionオブジェクトを取り出すときに使う
+            Reflectionクラスを指定する際に追加の変数を加えます。:
         </para>
 
         <itemizedlist>
@@ -276,25 +267,24 @@
         <title>Zend_Reflection_Extension</title>
 
         <para>
-            <code>Zend_Reflection_Extension</code> extends
-            <code>ReflectionExtension</code>, and follows its API. It overrides
-            the following methods to add an additional argument for specifying
-            the reflection class to use when fetching a reflection object:
+            <code>Zend_Reflection_Extension</code>は<code>ReflectionExtension</code>を拡張して、
+            そのAPIに追随します。
+            それはReflectionオブジェクトを取り出すときに使う
+            Reflectionクラスを指定する際に追加の変数を加えて、
+            下記のメソッドを上書きします。
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>getFunctions($reflectionClass =
-                    'Zend_Reflection_Function')</code>: retrieve an array of
-                reflection objects representing the functions defined by the
-                extension.
+                    'Zend_Reflection_Function')</code>: エクステンションで定義された関数を
+                    示す配列を取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>getClasses($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve an array of
-                reflection objects representing the classes defined by the
-                extension.
+                    'Zend_Reflection_Class')</code>: エクステンションで定義されたクラスを
+                    示す配列を取得します。
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -303,28 +293,27 @@
         <title>Zend_Reflection_Function</title>
 
         <para>
-            <code>Zend_Reflection_Function</code> adds a method for retrieving
-            the function return type, as well as overrides several methods to
-            allow specifying the reflection class to use for returned reflection
-            objects.
+            <code>Zend_Reflection_Function</code>は、
+            返されたReflectionを使ってReflectionクラスを指定できるように、
+            いくつかのメソッドを上書きするばかりではなく、
+            関数の返り値を取得するメソッドを追加します。
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>getDocblock($reflectionClass =
-                    'Zend_Reflection_Docblock')</code>: retrieve the function
-                docblock reflection object.
+                    'Zend_Reflection_Docblock')</code>: 関数docblockの
+                    Reflectionオブジェクトを取得します
             </para></listitem>
 
             <listitem><para>
                 <code>getParameters($reflectionClass =
-                    'Zend_Reflection_Parameter')</code>: retrieve an array of
-                all function parameter reflection objects.
+                    'Zend_Reflection_Parameter')</code>: 関数のパラメータ
+                    Reflectionオブジェクト全ての配列を取得します
             </para></listitem>
 
             <listitem><para>
-                <code>getReturn()</code>: retrieve the return type reflection
-                object.
+                <code>getReturn()</code>: 戻す型のReflectionオブジェクトを取得します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -333,16 +322,14 @@
         <title>Zend_Reflection_Method</title>
 
         <para>
-            <code>Zend_Reflection_Method</code> mirrors
-            <code>Zend_Reflection_Function</code>, and only overrides one
-            additional method:
+            <code>Zend_Reflection_Method</code>は<code>Zend_Reflection_Function</code>を継承して、
+            追加のメソッドを１つだけ上書きします:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>getParentClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the parent class
-                reflection object.
+                    'Zend_Reflection_Class')</code>: 親クラスのReflectionオブジェクトを取得します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -351,32 +338,33 @@
         <title>Zend_Reflection_Parameter</title>
 
         <para>
-            <code>Zend_Reflection_Parameter</code> adds a method for retrieving
-            the parameter type, as well as overrides methods to allow specifying
-            the reflection class to use on returned reflection objects.
+            <code>Zend_Reflection_Parameter</code>は
+            戻されたReflectionオブジェクトで
+            Reflectionを使えるようにする上書きメソッドばかりではなく、
+            パラメータの型を取得するメソッドを追加します。
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>getDeclaringClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: get the declaring class of
-                the parameter as a reflection object (if available).
+                    'Zend_Reflection_Class')</code>: もし可能ならば、
+                    Reflectionオブジェクトとしてパラメータの宣言クラスを取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>getClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: get the class of
-                the parameter as a reflection object (if available).
+                    'Zend_Reflection_Class')</code>: もし可能ならば、
+                    Reflectionオブジェクトとしてパラメータのクラスを取得します。
             </para></listitem>
 
             <listitem><para>
                 <code>getDeclaringFunction($reflectionClass =
-                    'Zend_Reflection_Function')</code>: get the function of
-                the parameter as a reflection object (if available).
+                    'Zend_Reflection_Function')</code>: もし可能ならば、
+                    Reflectionオブジェクトとしてパラメータの関数を取得します。
             </para></listitem>
 
             <listitem><para>
-                <code>getType()</code>: パラメータの型を取得
+                <code>getType()</code>: パラメータの型を取得します
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -385,15 +373,16 @@
         <title>Zend_Reflection_Property</title>
 
         <para>
-            <code>Zend_Reflection_Property</code> overrides a single method in
-            order to allow specifying the returned reflection object class:
+            <code>Zend_Reflection_Property</code>は、
+            戻されたReflectionオブジェクトクラスを指定するための、
+            メソッドを１つ上書きします。:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>getDeclaringClass($reflectionClass =
-                    'Zend_Reflection_Class')</code>: retrieve the declaring
-                class of the property as a reflection object.
+                    'Zend_Reflection_Class')</code>: Reflectionオブジェクトとして
+                    プロパティーの宣言クラスを取得します
             </para></listitem>
         </itemizedlist>
     </sect2>

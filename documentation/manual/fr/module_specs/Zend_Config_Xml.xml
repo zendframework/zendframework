@@ -157,7 +157,7 @@ echo $config->database->params->dbname; // affiche "dbname"
         <para>
             <classname>Zend_Config_Xml</classname> est capable de charger une chaîne de caractères
             XML directement, par exemple si elle est issue d'une base de données. La chaîne est
-            fournie en tanque que premier paramètre du constructeur et doit commencer par les
+            fournie en tant que premier paramètre du constructeur et doit commencer par les
             caractères <code>'&lt;?xml'</code>&#160;:
         </para>
         <programlisting role="xml"><![CDATA[

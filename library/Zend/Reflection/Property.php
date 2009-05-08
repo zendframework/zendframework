@@ -44,4 +44,25 @@ class Zend_Reflection_Property extends ReflectionProperty
         unset($phpReflection);
         return $zendReflection;
     }
+
+    /**
+     * Get docblock comment
+     * 
+     * @param  string $reflectionClass 
+     * @return Zend_Reflection_Docblock|false False if no docblock defined
+     */
+    public function getDocComment($reflectionClass = 'Zend_Reflection_Docblock')
+    {
+        $docblock = parent::getDocComment();
+        if (!$docblock) {
+            return false;
+        }
+
+        $r = new $reflectionClass($docblock);
+        if (!$r instanceof Zend_Reflection_Docblock) {
+            require_once 'Zend/Reflection/Exception.php';
+            throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Docblock');
+        }
+        return $r;
+    }
 }

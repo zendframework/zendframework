@@ -35,6 +35,11 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
 require_once 'Zend/Loader/Autoloader.php';
 
 /**
+ * Zend_Application_Resource_ResourceAbstract
+ */
+require_once 'Zend/Application/Resource/ResourceAbstract.php';
+
+/**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
@@ -487,6 +492,115 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->assertTrue($bootstrap->hasResource('baz'));
         $resource = $bootstrap->getResource('baz');
         $this->assertEquals('Baz', $resource->baz);
+    }
+
+    /**
+     * @group ZF-6543
+     */
+    public function testPassingPluginResourcesByFullClassNameWithMatchingPluginPathShouldRegisterAsShortName()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest_View' => array(),
+            ),
+            'pluginPaths' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest' => dirname(__FILE__),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $this->assertTrue($bootstrap->hasPluginResource('View'), var_export(array_keys($bootstrap->getPluginResources()), 1));
+    }
+
+    /**
+     * @group ZF-6543
+     */
+    public function testPassingFullViewClassNameNotMatchingARegisteredPrefixShouldRegisterAsTheClassName()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest_View' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $this->assertTrue($bootstrap->hasPluginResource('Zend_Application_Bootstrap_BootstrapAbstractTest_View'));
+    }
+
+    /**
+     * @group ZF-6543
+     */
+    public function testPassingFullViewClassNameNotMatchingARegisteredPrefixShouldReturnAppropriateResource()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest_View' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $bootstrap->bootstrap('Zend_Application_Bootstrap_BootstrapAbstractTest_View');
+        $resource = $bootstrap->getResource('Zend_Application_Bootstrap_BootstrapAbstractTest_View');
+        $this->assertTrue($resource instanceof Zend_Application_Bootstrap_BootstrapAbstractTest_View, var_export(array_keys($bootstrap->getPluginResources()), 1));
+    }
+
+    /**
+     * @group ZF-6543
+     */
+    public function testCanMixAndMatchPluginResourcesAndFullClassNames()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest_View' => array(),
+                'view' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $bootstrap->bootstrap('Zend_Application_Bootstrap_BootstrapAbstractTest_View');
+        $resource1 = $bootstrap->getResource('Zend_Application_Bootstrap_BootstrapAbstractTest_View');
+        $bootstrap->bootstrap('view');
+        $resource2 = $bootstrap->getResource('view');
+        $this->assertNotSame($resource1, $resource2);
+        $this->assertTrue($resource1 instanceof Zend_Application_Bootstrap_BootstrapAbstractTest_View, var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $this->assertTrue($resource2 instanceof Zend_View);
+    }
+
+    /**
+     * @group ZF-6543
+     */
+    public function testPluginClassesDefiningExplicitTypeWillBeRegisteredWithThatValue()
+    {
+        $this->application->setOptions(array(
+            'resources' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest_Layout' => array(),
+                'layout' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $bootstrap->bootstrap('BootstrapAbstractTestLayout');
+        $resource1 = $bootstrap->getResource('BootstrapAbstractTestLayout');
+        $bootstrap->bootstrap('layout');
+        $resource2 = $bootstrap->getResource('layout');
+        $this->assertNotSame($resource1, $resource2);
+        $this->assertTrue($resource1 instanceof Zend_Application_Bootstrap_BootstrapAbstractTest_Layout, var_export(array_keys($bootstrap->getPluginResources()), 1));
+        $this->assertTrue($resource2 instanceof Zend_Layout);
+    }
+}
+
+class Zend_Application_Bootstrap_BootstrapAbstractTest_View
+    extends Zend_Application_Resource_ResourceAbstract
+{
+    public function init()
+    {
+        return $this;
+    }
+}
+
+class Zend_Application_Bootstrap_BootstrapAbstractTest_Layout
+    extends Zend_Application_Resource_ResourceAbstract
+{
+    public $_explicitType = 'BootstrapAbstractTestLayout';
+
+    public function init()
+    {
+        return $this;
     }
 }
 

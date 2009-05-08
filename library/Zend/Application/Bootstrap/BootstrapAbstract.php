@@ -226,9 +226,29 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
      */
     public function registerPluginResource($resource, $options = null)
     {
+        if (is_string($resource) && class_exists($resource)) {
+            $options = (array) $options;
+            $options['bootstrap'] = $this;
+            $resource = new $resource($options);
+        }
         if ($resource instanceof Zend_Application_Resource_Resource) {
-            $className  = get_class($resource);
-            $pluginName = strtolower(substr(strrchr($className, '_'), 1)); 
+            $resource->setBootstrap($this);
+
+            $vars = get_object_vars($resource);
+            if (isset($vars['_explicitType'])) {
+                $pluginName = strtolower($vars['_explicitType']);
+            } else  {
+                $className  = get_class($resource);
+                $pluginName = strtolower($className);
+                $loader     = $this->getPluginLoader();
+                foreach ($loader->getPaths() as $prefix => $paths) {
+                    if (0 === strpos($className, $prefix)) {
+                        $pluginName = substr($className, strlen($prefix));
+                        $pluginName = strtolower(trim($pluginName, '_'));
+                    }
+                }
+            }
+
             $this->_pluginResources[$pluginName] = $resource;
             return $this;
         }

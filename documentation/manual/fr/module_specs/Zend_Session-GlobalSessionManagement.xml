@@ -102,7 +102,7 @@ Zend_Session::setOptions($config->toArray());
 
                 <listitem>
                     <para>string <code>save_path</code> : Cette valeur est dépendante du système sur lequel PHP est
-                    lancé. Un <emphasis role="strong">chemin absolu</emphasis> vers un dossier lisible et écrivable à
+                    lancé. Un <emphasis>chemin absolu</emphasis> vers un dossier lisible et écrivable à
                     PHP devrait être utilisé (dans le cas d'utilisation d'un dossier pour le support des sessions). Si
                     le chemin n'est pas pleinement accessible à PHP, <classname>Zend_Session</classname> lancera une exception à
                     son démarrage (lorsque <code>start()</code> est appelée.</para>
@@ -132,8 +132,7 @@ Zend_Session::setOptions($config->toArray());
                 </listitem>
 
                 <listitem>
-                    <para>string <code>name</code> - La valeur doit être choisie de manière <emphasis
-                    role="strong">unique</emphasis> pour chaque application.</para>
+                    <para>string <code>name</code> - La valeur doit être choisie de manière <emphasis>unique</emphasis> pour chaque application.</para>
 
                     <note>
                         <title>Risque de sécurité</title>

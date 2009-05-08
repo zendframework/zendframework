@@ -214,21 +214,21 @@ print "Nombre de diapositives : {$slideshow->getNumViews()}<br/>\n";
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><emphasis role="strong">Diaporamas depuis un compte spécifique</emphasis></para>
+                <para><emphasis>Diaporamas depuis un compte spécifique</emphasis></para>
 
                 <para>La méthode <code>getSlideShowsByUsername()</code> va retourner tous les diaporamas depuis un
                 compte utilisateur.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Diaporamas contenant des tags spécifiques</emphasis></para>
+                <para><emphasis>Diaporamas contenant des tags spécifiques</emphasis></para>
 
                 <para>La méthode <code>getSlideShowsByTag</code> va retourner un ensemble de diaporamas comportant
                 certains tags (mots-clés).</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Diaporamas depuis un groupe</emphasis></para>
+                <para><emphasis>Diaporamas depuis un groupe</emphasis></para>
 
                 <para>La méthode <code>getSlideShowsByGroup</code> récupère tous les diaporamas d'un groupe
                 donné.</para>

@@ -24,7 +24,7 @@
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <emphasis role="strong">Support complet de la régionalisation</emphasis>
+                    <emphasis>Support complet de la régionalisation</emphasis>
                 </para>
 
                 <para>
@@ -37,7 +37,7 @@
 
             <listitem>
                 <para>
-                    <emphasis role="strong">Définition de monnaie réutilisable</emphasis>
+                    <emphasis>Définition de monnaie réutilisable</emphasis>
                 </para>
 
                 <para>
@@ -50,7 +50,7 @@
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Interface fluide</emphasis></para>
+                <para><emphasis>Interface fluide</emphasis></para>
 
                 <para>
                     <classname>Zend_Currency</classname> inclue une interface fluide quand
@@ -59,7 +59,7 @@
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Méthodes additionnelles</emphasis></para>
+                <para><emphasis>Méthodes additionnelles</emphasis></para>
 
                 <para>
                     <classname>Zend_Currency</classname> inclue des méthodes additionnelles

@@ -109,7 +109,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <itemizedlist>
             <listitem>
-                <para><emphasis role="strong">columns</emphasis> =&gt; une chaîne de caractères ou un tableau de chaînes
+                <para><emphasis>columns</emphasis> =&gt; une chaîne de caractères ou un tableau de chaînes
                 désignant le(s) nom(s) des clés étrangères dans la table dépendante (la table actuelle donc).</para>
 
                 <para>Il est courant qu'il s'agisse d'une seule colonne, mais on peut rencontrer le cas de clés
@@ -117,7 +117,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">refTableClass</emphasis> =&gt; désigne la classe de la table parente, liée
+                <para><emphasis>refTableClass</emphasis> =&gt; désigne la classe de la table parente, liée
                 à cette colonne. Utilisez le nom de la classe et non le nom de la table physique.</para>
 
                 <para>Il est courant qu'une table dépendante n'ait qu'une seule référence d'une même table parente.
@@ -129,7 +129,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">refColumns</emphasis> =&gt; c'est une chaîne de caractères ou un tableau
+                <para><emphasis>refColumns</emphasis> =&gt; c'est une chaîne de caractères ou un tableau
                 de chaînes nommant la(es) colonne(s) (clé primaire) de la table parente.</para>
 
                 <para>Si vous devez utiliser de multiples colonnes parentes pour une seule clé, alors veillez à bien les
@@ -140,13 +140,13 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">onDelete</emphasis> =&gt; le nom de l'action à exécuter si un
+                <para><emphasis>onDelete</emphasis> =&gt; le nom de l'action à exécuter si un
                 enregistrement est supprimé de la table parente. Voyez <xref
                 linkend="zend.db.table.relationships.cascading" /> pour plus d'informations.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">onUpdate</emphasis> =&gt; le nom de l'action à exécuter si un
+                <para><emphasis>onUpdate</emphasis> =&gt; le nom de l'action à exécuter si un
                 enregistrement est mis à jour dans la table parente. Voyez<xref
                 linkend="zend.db.table.relationships.cascading" /> pour plus d'informations.</para>
             </listitem>
@@ -513,7 +513,7 @@ $products    = $bug1234->findProductsViaBugsProductsByBug();
             <title>Déclarer l'intégrité référentielle</title>
 
             <para>Déclarer les opérations de cascades dûes à l'intégrité référentielle dans <classname>Zend_Db_Table</classname>
-            directement, ne doit se faire <emphasis role="strong">seulement</emphasis> si votre SGBD ne supporte pas
+            directement, ne doit se faire <emphasis>seulement</emphasis> si votre SGBD ne supporte pas
             nativement ce genre d'opérations.</para>
 
             <para>C'est le cas par exemple de MySQL utilisant le stockage de tables MyISAM, ou encore SQLite. Ces
@@ -596,7 +596,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <sect3 id="zend.db.table.relationships.cascading.notes">
             <title>Notes concernant les opérations de cascade</title>
 
-            <para><emphasis role="strong">Les opérations de cascades déclenchées par Zend_Db_Table ne sont pas
+            <para><emphasis>Les opérations de cascades déclenchées par Zend_Db_Table ne sont pas
             atomiques.</emphasis></para>
 
             <para>Ceci signifie que si votre SGBD possède un moyen de gérer les cascades, comme l'intégrité
@@ -621,7 +621,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             isolantes, c'est d'ailleurs un de leur rôle clé. Cependant certains SGBDs ne supportent pas encore les
             transactions, et autorisent leurs clients à lire des changements incomplets pas validés en totalité.</para>
 
-            <para><emphasis role="strong">Les opérations de cascades de Zend_Db_Table ne sont utilisées que par
+            <para><emphasis>Les opérations de cascades de Zend_Db_Table ne sont utilisées que par
             Zend_Db_Table.</emphasis></para>
 
             <para>Les cascades pour <code>DELETE</code> et <code>UPDATE</code> définies dans vos classes
@@ -632,7 +632,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             les méthodes <code>update()</code> et <code>delete()</code> dans la classe
             <classname>Zend_Db_Adapter</classname>.</para>
 
-            <para><emphasis role="strong">Pas d'<code>INSERT</code> en cascade</emphasis></para>
+            <para><emphasis>Pas d'<code>INSERT</code> en cascade</emphasis></para>
 
             <para>Le support pour les cascades d'<code>INSERT</code> n'est pas assuré. Vous devez explicitement insérer
             les enregistrements dépendants à un enregistrement parent.</para>

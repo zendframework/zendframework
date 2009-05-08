@@ -124,35 +124,35 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
         <para>
             <itemizedlist mark="opencircle">
                 <listitem>
-                        <para><emphasis role="strong">day</emphasis>&#160;: jour de la date, un
+                        <para><emphasis>day</emphasis>&#160;: jour de la date, un
                         nombre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">month</emphasis>&#160;: mois de la date, un
+                        <emphasis>month</emphasis>&#160;: mois de la date, un
                         nombre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">year</emphasis>&#160;: année complète de la
+                        <emphasis>year</emphasis>&#160;: année complète de la
                         date
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">hour</emphasis>&#160;: heures de la date</para>
+                    <para><emphasis>hour</emphasis>&#160;: heures de la date</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">minute</emphasis>&#160;: minutes de la date</para>
+                    <para><emphasis>minute</emphasis>&#160;: minutes de la date</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">second</emphasis>&#160;: secondes de la date</para>
+                    <para><emphasis>second</emphasis>&#160;: secondes de la date</para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -164,8 +164,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 En temps normal on utilisera un tableau avec toutes ses clés. Si une clé est
                 absente, la valeur qu'elle représente sera mise à la valeur zéro par défaut. Par
                 exemple une tableau ne comportant pas la clé "<code>hour</code>", donnera naissance
-                à une date ayant une partie heures à la valeur "<code>0</code><emphasis
-                role="strong">"</emphasis>.
+                à une date ayant une partie heures à la valeur "<code>0</code><emphasis>"</emphasis>.
             </para>
 
             <programlisting role="php"><![CDATA[

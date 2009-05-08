@@ -4,13 +4,11 @@
 <sect1 id="zend.timesync.working">
     <title>Utiliser Zend_TimeSync</title>
 
-    <para><classname>Zend_TimeSync</classname> peut retourner le temps de n'importe quel serveur via <emphasis
-    role="strong">NTP</emphasis> ou <emphasis role="strong">SNTP</emphasis>. Il peut aussi gérer de multiples
+    <para><classname>Zend_TimeSync</classname> peut retourner le temps de n'importe quel serveur via <emphasis>NTP</emphasis> ou <emphasis>SNTP</emphasis>. Il peut aussi gérer de multiples
     serveurs.</para>
 
     <note>
-        <para>Dans tous les exemples qui suivront, nous utiliserons un pool de serveurs générique public : <emphasis
-        role="strong">0.europe.pool.ntp.org</emphasis>. De votre côté, il est conseillé d'utiliser le pool le plus
+        <para>Dans tous les exemples qui suivront, nous utiliserons un pool de serveurs générique public : <emphasis>0.europe.pool.ntp.org</emphasis>. De votre côté, il est conseillé d'utiliser le pool le plus
         proche possible géographiquement de votre position. Lisez <ulink
         url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink> pour plus d'informations.</para>
     </note>
@@ -77,11 +75,11 @@ print $server->getDate()->getIso();
     <sect2 id="zend.timesync.working.protocol">
         <title>Les protocoles des serveurs de temps</title>
 
-        <para>La plupart des serveurs publics de temps utilisent le protocole <emphasis role="strong">NTP</emphasis>.
+        <para>La plupart des serveurs publics de temps utilisent le protocole <emphasis>NTP</emphasis>.
         Mais d'autres protocoles existent.</para>
 
         <para>Vous pouvez spécifier le protocole dans l'adresse du serveur de temps. <classname>Zend_TimeSync</classname> en
-        supporte deux actuellement. Celui par défaut est <emphasis role="strong">NTP</emphasis>. Si vous omettez le
+        supporte deux actuellement. Celui par défaut est <emphasis>NTP</emphasis>. Si vous omettez le
         protocole dans l'adresse, c'est NTP qui sera utilisé.</para>
 
         <programlisting role="php"><![CDATA[
@@ -100,8 +98,7 @@ print $server->getDate()->getIso();
     <sect2 id="zend.timesync.working.ports">
         <title>Utiliser les ports pour les serveurs de temps</title>
 
-        <para>Comme tous les protocoles, <emphasis role="strong">NTP</emphasis> et <emphasis
-        role="strong">SNTP</emphasis> utilisent des ports par défaut.</para>
+        <para>Comme tous les protocoles, <emphasis>NTP</emphasis> et <emphasis>SNTP</emphasis> utilisent des ports par défaut.</para>
 
         <para>Quelque fois il peut être nécessaire de préciser le port à utiliser. Si c'est le cas, rajoutez le
         simplement à l'adresse du serveur à utiliser, sinon <classname>Zend_TimeSync</classname> utilisera celui par
@@ -122,8 +119,8 @@ print $server->getDate()->getIso();
         <para>Actuellement seule une option est utilisée en interne par <classname>Zend_TimeSync</classname>. Mais vous pouvez en
         utiliser autant que vous voulez.</para>
 
-        <para>L'option <emphasis role="strong">timeout</emphasis> définit le nombre de secondes au delà duquel la
-        connexion sera considérée comme cassée. La valeur par défaut est <emphasis role="strong">1</emphasis>, donc
+        <para>L'option <emphasis>timeout</emphasis> définit le nombre de secondes au delà duquel la
+        connexion sera considérée comme cassée. La valeur par défaut est <emphasis>1</emphasis>, donc
         <classname>Zend_TimeSync</classname> changera de serveur si la réponse du serveur actuellement interrogé met plus d'une
         seconde à arriver.</para>
 

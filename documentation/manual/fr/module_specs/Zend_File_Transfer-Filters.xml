@@ -139,7 +139,7 @@ $upload->addFilter('Rename', 'file1', 'C:\picture\newjpg')
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.decrypt">
-        <title>Filtre <emphasis role="strong">Decrypt</emphasis></title>
+        <title>Filtre <emphasis>Decrypt</emphasis></title>
 
         <para>Le filtre <code>Decrypt</code> permet de décrypter un fichier crypté.</para>
 
@@ -182,7 +182,7 @@ $upload->addFilter('Decrypt',
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.encrypt">
-        <title>Filtre <emphasis role="strong">Encrypt</emphasis></title>
+        <title>Filtre <emphasis>Encrypt</emphasis></title>
 
         <para>Le filtre <code>Encrypt</code> permet de crypter un fichier.</para>
 
@@ -224,7 +224,7 @@ $upload->addFilter('Encrypt',
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.lowercase">
-        <title>Filtre <emphasis role="strong">LowerCase</emphasis></title>
+        <title>Filtre <emphasis>LowerCase</emphasis></title>
 
         <para>Le filtre <code>LowerCase</code> vous permet de mettre en minuscule le contenu d'un fichier. Vous devriez
         utiliser ce filtre seulement sur les fichiers texte.</para>
@@ -257,7 +257,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.rename">
-        <title>Filtre <emphasis role="strong">Rename</emphasis></title>
+        <title>Filtre <emphasis>Rename</emphasis></title>
 
         <para>Le filtre <code>Rename</code> vous permet de changer le dossier de destination du fichier uploadé, de
         changer le nom de fichier et aussi d'écraser des fichiers existants. Il supporte les options suivantes :</para>
@@ -359,7 +359,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.uppercase">
-        <title>Filtre <emphasis role="strong">UpperCase</emphasis></title>
+        <title>Filtre <emphasis>UpperCase</emphasis></title>
 
         <para>Le filtre <code>UpperCase</code> vous permet de mettre en minuscule le contenu d'un fichier. Vous devriez
         utiliser ce filtre seulement sur les fichiers texte.</para>

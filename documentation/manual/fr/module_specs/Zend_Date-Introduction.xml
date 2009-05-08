@@ -50,15 +50,14 @@
     date_default_timezone_set('Europe/Berlin');
     ]]></programlisting>
             </example>
-            <emphasis role="strong">Lorsque vous créez des instances de Zend_Date, leur
+            <emphasis>Lorsque vous créez des instances de Zend_Date, leur
             fuseau sera automatiquement mis à celui par défaut&#160;!</emphasis> Ainsi, le
             paramètre de fuseau horaire prendre en compte le DST si besoin, vous n'aurez donc pas
             besoin de leconfigurer.
         </para>
 
         <para>
-            Souvenez vous que les fuseaux <emphasis role="strong">UTC</emphasis> et <emphasis
-            role="strong">GMT</emphasis> n'incluent pas la notion "d'heure d'hiver"(Daylight Saving
+            Souvenez vous que les fuseaux <emphasis>UTC</emphasis> et <emphasis>GMT</emphasis> n'incluent pas la notion "d'heure d'hiver"(Daylight Saving
             Time, DST). Donc même si vous dites à <classname>Zend_Date</classname> de prendre en
             compte le DST, il sera annulé pour les futures instances de
             <classname>Zend_Date</classname> utilisant UTC ou GMT.

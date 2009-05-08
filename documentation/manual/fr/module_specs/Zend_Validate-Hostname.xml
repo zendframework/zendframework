@@ -9,7 +9,7 @@
     domaine qualifié (ex : domaine.com), une adresse IP (ex : 1.2.3.4) ou un nom de domaine local (ex : localhost). Par
     défaut, seul les noms de domaine qualifiés sont acceptés.</para>
 
-    <para><emphasis role="strong">Utilisation basique</emphasis></para>
+    <para><emphasis>Utilisation basique</emphasis></para>
 
     <para>Exemple simple : <programlisting role="php"><![CDATA[
 $validateur = new Zend_Validate_Hostname();
@@ -24,7 +24,7 @@ if ($validateur->isValid($domaine)) {
 ]]></programlisting> Ceci validera le domaine <code>$domaine</code> et, en cas d'échec, fournira des messages d'erreur
     informatifs via <code>$validator-&gt;getMessages()</code>.</para>
 
-    <para><emphasis role="strong">Validation de différents types de noms de domaine</emphasis></para>
+    <para><emphasis>Validation de différents types de noms de domaine</emphasis></para>
 
     <para>Il peut se trouver que vous souhaitez valider des adresses IP, des noms de domaine locaux ou toute combinaison
     de tous les types disponibles. Cette opération peut être effectuée en passant un paramètre à
@@ -55,7 +55,7 @@ $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                          Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting></para>
 
-    <para><emphasis role="strong">Validation de Nom de Domaine International (IDN)</emphasis></para>
+    <para><emphasis>Validation de Nom de Domaine International (IDN)</emphasis></para>
 
     <para>Certains noms de domaines nationaux (Country Code Top Level Domains ou ccTLD), comme .de (Allemagne), supporte
     les caractères internationaux dans leurs noms de domaine. Ceci est connu sous le nom de Nom de Domaine International
@@ -115,7 +115,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
     <para>Notez cependant que les IDNs sont seulement validés si vous autorisez la validation des noms de
     domaine.</para>
 
-    <para><emphasis role="strong">Validation des "Top Level Domains"</emphasis></para>
+    <para><emphasis>Validation des "Top Level Domains"</emphasis></para>
 
     <para>Par défaut un nom de domaine sera vérifié grâce à une liste de TLDs connus. Si cette fonctionnalité n'est pas
     nécessaire, elle peut être désactivée de la même façon que la désactivation du support des IDNs. Vous pouvez

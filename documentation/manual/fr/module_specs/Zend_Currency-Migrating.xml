@@ -31,14 +31,14 @@ $currency = new Zend_Currency($currency, $locale);
             <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
-                        <emphasis role="strong">position</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>position</emphasis>&#160;: Remplacement de l'ancien
                         paramètre "rules"
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">script</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>script</emphasis>&#160;: Remplacement de l'ancien
                         paramètre "script"
                     </para>
 
@@ -46,7 +46,7 @@ $currency = new Zend_Currency($currency, $locale);
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">format</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>format</emphasis>&#160;: Remplacement de l'ancien
                         paramètre "locale" qui n'affecte plus de nouvelle monnaie, mais seulement un
                         format de nombre.
                     </para>
@@ -55,32 +55,32 @@ $currency = new Zend_Currency($currency, $locale);
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">display</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>display</emphasis>&#160;: Remplacement de l'ancien
                         paramètre "rules"
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">precision</emphasis>&#160;: Nouveau paramètre
+                        <emphasis>precision</emphasis>&#160;: Nouveau paramètre
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">name</emphasis>&#160;: Remplacement de l'ancien
+                        <emphasis>name</emphasis>&#160;: Remplacement de l'ancien
                         paramètre "rules". Affecte le nom complet de la monnaie.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">currency</emphasis>&#160;: Nouveau paramètre
+                        <emphasis>currency</emphasis>&#160;: Nouveau paramètre
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">symbol</emphasis>&#160;: Nouveau paramètre</para>
+                    <para><emphasis>symbol</emphasis>&#160;: Nouveau paramètre</para>
                 </listitem>
             </itemizedlist>
         </para>

@@ -16,17 +16,17 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    une <emphasis role="strong">ressource</emphasis> est un objet dont l'accès
+                    une <emphasis>ressource</emphasis> est un objet dont l'accès
                     est contrôlé,
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    un <emphasis role="strong">rôle</emphasis> est un objet qui peut demander
+                    un <emphasis>rôle</emphasis> est un objet qui peut demander
                     l'accès à une ressource.
                 </para>
             </listitem>
-        </itemizedlist>Dit simplement, <emphasis role="strong"> les rôles demandent l'accès à des
+        </itemizedlist>Dit simplement, <emphasis> les rôles demandent l'accès à des
         ressources</emphasis>. Par exemple, si une personne demande l'accès à une voiture, alors la
         personne est le rôle demandeur et la voiture est la ressource, puisque l'accès à la voiture
         est soumis à un contrôle.

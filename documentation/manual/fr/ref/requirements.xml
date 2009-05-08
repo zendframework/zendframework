@@ -59,7 +59,7 @@
 
                     <tbody>
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.apc.php"><code>apc</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -76,7 +76,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.bc.php"><code>bcmath</code></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -86,7 +86,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://pecl.php.net/package/Bitset"><code>bitset</code></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -96,7 +96,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.bzip2.php"><code>bz2</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -105,7 +105,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.calendar.php"><code>calendar</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -114,7 +114,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.com.php"><code>com_dotnet</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -123,7 +123,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ctype.php"><code>ctype</code></ulink></emphasis></entry>
 
                             <entry morerows="8" valign="middle">Forte</entry>
@@ -173,7 +173,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.curl.php"><code>curl</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -183,7 +183,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.datetime.php"><code>date</code></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -193,7 +193,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.dba.php"><code>dba</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -202,7 +202,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.dbase.php"><code>dbase</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -211,7 +211,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="13" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="13" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.dom.php"><code>dom</code></ulink></emphasis></entry>
 
                             <entry morerows="13" valign="middle">Forte</entry>
@@ -286,7 +286,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.exif.php"><code>exif</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -295,7 +295,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.fbsql.php"><code>fbsql</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -304,7 +304,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.fdf.php"><code>fdf</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -313,7 +313,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.filter.php"><code>filter</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -322,7 +322,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ftp.php"><code>ftp</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -331,7 +331,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.image.php"><code>gd</code></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -346,7 +346,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.gettext.php"><code>gettext</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -355,7 +355,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.gmp.php"><code>gmp</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -364,7 +364,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.hash.php"><code>hash</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -374,7 +374,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ibm-db2.php"><code>ibm_db2</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -384,7 +384,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="7" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="7" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.iconv.php"><code>iconv</code></ulink></emphasis></entry>
 
                             <entry morerows="7" valign="middle">Forte</entry>
@@ -429,7 +429,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.imap.php"><code>imap</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -438,7 +438,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ifx.php"><code>informix</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -447,7 +447,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ibase.php"><code>interbase</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -456,7 +456,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.json.php"><code>json</code></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -466,7 +466,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ldap.php"><code>ldap</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -476,7 +476,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.libxml.php"><code>libxml</code></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -496,7 +496,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mbstring.php"><code>mbstring</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -506,7 +506,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mcrypt.php"><code>mcrypt</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -516,7 +516,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.memcache.php"><code>memcache</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -526,7 +526,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mhash.php"><code>mhash</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -535,7 +535,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mime-magic.php"><code>mime_magic</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -545,7 +545,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ming.php"><code>ming</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -554,7 +554,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.msql.php"><code>msql</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -563,7 +563,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mssql.php"><code>mssql</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -572,7 +572,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mysql.php"><code>mysql</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -581,7 +581,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mysqli.php"><code>mysqli</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -591,7 +591,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.ncurses.php"><code>ncurses</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -600,7 +600,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.oci8.php"><code>oci8</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -610,7 +610,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.uodbc.php"><code>odbc</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -619,7 +619,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.openssl.php"><code>openssl</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -628,7 +628,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pcntl.php"><code>pcntl</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -637,7 +637,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pcre.php"><code>pcre</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -646,7 +646,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo.php"><code>pdo</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -655,7 +655,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-dblib.php"><code>pdo_dblib</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -664,7 +664,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-firebird.php"><code>pdo_firebird</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -673,7 +673,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><code>pdo_mssql</code></emphasis></entry>
+                            <entry><emphasis><code>pdo_mssql</code></emphasis></entry>
 
                             <entry>Forte</entry>
 
@@ -682,7 +682,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-mysql.php"><code>pdo_mysql</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -692,7 +692,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-oci.php"><code>pdo_oci</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -702,7 +702,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-pgsql.php"><code>pdo_pgsql</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -712,7 +712,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pdo-sqlite.php"><code>pdo_sqlite</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -722,7 +722,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pgsql.php"><code>pgsql</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -731,7 +731,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.posix.php"><code>posix</code></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -741,7 +741,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.pspell.php"><code>pspell</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -750,7 +750,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.readline.php"><code>readline</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -759,7 +759,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.recode.php"><code>recode</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -768,7 +768,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="9" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="9" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/language.oop5.reflection.php"><code>Reflection</code></ulink></emphasis></entry>
 
                             <entry morerows="9" valign="middle">Forte</entry>
@@ -823,7 +823,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.session.php"><code>session</code></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -838,7 +838,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.shmop.php"><code>shmop</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -847,7 +847,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="6" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="6" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.simplexml.php"><code>SimpleXML</code></ulink></emphasis></entry>
 
                             <entry morerows="5" valign="middle">Forte</entry>
@@ -889,7 +889,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.soap.php"><code>soap</code></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -904,7 +904,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.sockets.php"><code>sockets</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -913,7 +913,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.spl.php"><code>SPL</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -922,7 +922,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.sqlite.php"><code>SQLite</code></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -932,7 +932,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><code>standard</code></emphasis></entry>
+                            <entry><emphasis><code>standard</code></emphasis></entry>
 
                             <entry>Forte</entry>
 
@@ -940,7 +940,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.sybase.php"><code>sybase</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -949,7 +949,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong">sysvmsg</emphasis></entry>
+                            <entry><emphasis>sysvmsg</emphasis></entry>
 
                             <entry>---</entry>
 
@@ -957,7 +957,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong">sysvsem</emphasis></entry>
+                            <entry><emphasis>sysvsem</emphasis></entry>
 
                             <entry>---</entry>
 
@@ -965,7 +965,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong">sysvshm</emphasis></entry>
+                            <entry><emphasis>sysvshm</emphasis></entry>
 
                             <entry>---</entry>
 
@@ -973,7 +973,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.tidy.php"><code>tidy</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -982,7 +982,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.tokenizer.php"><code>tokenizer</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -991,7 +991,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.wddx.php"><code>wddx</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1000,7 +1000,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.xml.php"><code>xml</code></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1020,7 +1020,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.xmlreader.php"><code>XMLReader</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1029,7 +1029,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.xmlrpc.php"><code>xmlrpc</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1038,7 +1038,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.xmlwriter.php"><code>XMLWriter</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1047,7 +1047,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.xsl.php"><code>xsl</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1056,7 +1056,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.zip.php"><code>zip</code></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1065,7 +1065,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.zlib.php"><code>zlib</code></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1113,7 +1113,7 @@
 
                     <tbody>
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong">Tous les
+                            <entry morerows="2" valign="middle"><emphasis>Tous les
                             composants</emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1132,7 +1132,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.acl.html"><classname>Zend_Acl</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1141,7 +1141,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.amf.html"><classname>Zend_Amf</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1163,7 +1163,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.auth.html"><classname>Zend_Auth</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1178,7 +1178,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.cache.html"><classname>Zend_Cache</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -1203,7 +1203,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.captcha.html"><classname>Zend_Captcha</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1213,7 +1213,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.config.html"><classname>Zend_Config</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1228,7 +1228,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.console.getopt.html"><classname>Zend_Console_Getopt</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1237,7 +1237,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.controller.html"><classname>Zend_Controller</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1252,7 +1252,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.currency.html"><classname>Zend_Currency</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1262,7 +1262,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.date.html"><classname>Zend_Date</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1271,7 +1271,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.db.html"><classname>Zend_Db</classname></ulink></emphasis></entry>
 
                             <entry morerows="8" valign="middle">Forte</entry>
@@ -1320,7 +1320,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.debug.html"><classname>Zend_Debug</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1329,7 +1329,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.dojo.html"><classname>Zend_Dojo</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1338,7 +1338,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.dom.html"><classname>Zend_Dom</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1348,7 +1348,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.exception.html"><classname>Zend_Exception</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1357,7 +1357,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.feed.html"><classname>Zend_Feed</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -1382,7 +1382,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.file.transfer.html"><classname>Zend_File_Transfer</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Soft</entry>
@@ -1396,7 +1396,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.filter.html"><classname>Zend_Filter</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1406,7 +1406,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.form.html"><classname>Zend_Form</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1415,7 +1415,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.gdata.html"><classname>Zend_Gdata</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1435,7 +1435,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.http.html"><classname>Zend_Http</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1455,7 +1455,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.infocard.html"><classname>Zend_InfoCard</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1464,7 +1464,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.json.html"><classname>Zend_Json</classname></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -1481,7 +1481,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.layout.html"><classname>Zend_Layout</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1490,7 +1490,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.ldap.html"><classname>Zend_Ldap</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1500,7 +1500,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.loader.html"><classname>Zend_Loader</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1509,7 +1509,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.locale.html"><classname>Zend_Locale</classname></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -1526,7 +1526,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.log.html"><classname>Zend_Log</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1546,7 +1546,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.mail.html"><classname>Zend_Mail</classname></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -1556,7 +1556,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.measure.html"><classname>Zend_Measure</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1565,7 +1565,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.memory.html"><classname>Zend_Memory</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1574,7 +1574,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.mime.html"><classname>Zend_Mime</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1584,7 +1584,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.openid.html"><classname>Zend_OpenId</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1593,7 +1593,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.paginator.html"><classname>Zend_Paginator</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1602,7 +1602,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.pdf.html"><classname>Zend_Pdf</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -1627,7 +1627,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.progressbar.html"><classname>Zend_ProgressBar</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1636,7 +1636,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.registry.html"><classname>Zend_Registry</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1645,7 +1645,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.request.html"><classname>Zend_Request</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1654,7 +1654,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="4" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="4" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.rest.html"><classname>Zend_Rest</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -1684,7 +1684,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="4" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="4" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.search.lucene.html"><classname>Zend_Search_Lucene</classname></ulink></emphasis></entry>
 
                             <entry>Faible</entry>
@@ -1715,7 +1715,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.server.reflection.html"><classname>Zend_Server_Reflection</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1725,7 +1725,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.akismet.html"><classname>Zend_Service_Akismet</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1734,7 +1734,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.amazon.html"><classname>Zend_Service_Amazon</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1749,7 +1749,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.audioscrobbler.html"><classname>Zend_Service_Audioscrobbler</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1769,7 +1769,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.delicious.html"><classname>Zend_Service_Delicious</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1784,7 +1784,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.flickr.html"><classname>Zend_Service_Flickr</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -1804,7 +1804,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.nirvanix.html"><classname>Zend_Service_Nirvanix</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1813,17 +1813,17 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.recaptcha.html"><classname>Zend_Service_ReCaptcha</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
 
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.mcrypt.php"><code>mcrypt</code></ulink></emphasis></entry>
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.simpy.html"><classname>Zend_Service_Simpy</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1838,7 +1838,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.slideshare.html"><classname>Zend_Service_SlideShare</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1847,7 +1847,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.strikeiron.html"><classname>Zend_Service_StrikeIron</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1857,7 +1857,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.technorati.html"><classname>Zend_Service_Technorati</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1866,7 +1866,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.twitter.html"><classname>Zend_Service_Twitter</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1875,7 +1875,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.yahoo.html"><classname>Zend_Service_Yahoo</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1890,7 +1890,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.session.html"><classname>Zend_Session</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1900,12 +1900,12 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.soap.html"><classname>Zend_Soap</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
 
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.dom.php"><code>dom</code></ulink></emphasis></entry>
                         </row>
 
@@ -1915,12 +1915,12 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://www.php.net/manual/fr/ref.soap.php"><code>soap</code></ulink></emphasis></entry>
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.test.html"><classname>Zend_Test</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1929,7 +1929,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.text.html"><classname>Zend_Text</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1938,7 +1938,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.timesync.html"><classname>Zend_TimeSync</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1947,7 +1947,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.translate.html"><classname>Zend_Translate</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1957,7 +1957,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.uri.html"><classname>Zend_Uri</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -1967,7 +1967,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.validate.html"><classname>Zend_Validate</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -1982,7 +1982,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.version.html"><classname>Zend_Version</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -1991,7 +1991,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.validate.html"><classname>Zend_Validate</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2001,7 +2001,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.wildfire.html"><classname>Zend_Wildfire</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -2010,7 +2010,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="4" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="4" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.xmlrpc.html"><classname>Zend_XmlRpc</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -2083,7 +2083,7 @@
 
                     <tbody>
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.acl.html"><classname>Zend_Acl</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2093,7 +2093,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="5" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="5" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.amf.html"><classname>Zend_Amf</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -2132,7 +2132,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="25" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="25" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.auth.html"><classname>Zend_Auth</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2273,7 +2273,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="23" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="23" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.cache.html"><classname>Zend_Cache</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2402,7 +2402,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="12" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="12" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.captcha.html"><classname>Zend_Captcha</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -2476,7 +2476,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.config.html"><classname>Zend_Config</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2486,7 +2486,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.console.getopt.html"><classname>Zend_Console_Getopt</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2515,7 +2515,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="21" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="21" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.controller.html"><classname>Zend_Controller</classname></ulink></emphasis></entry>
 
                             <entry morerows="5" valign="middle">Forte</entry>
@@ -2636,7 +2636,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.currency.html"><classname>Zend_Currency</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -2663,7 +2663,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.date.html"><classname>Zend_Date</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -2690,7 +2690,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="21" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="21" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.db.html"><classname>Zend_Db</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -2809,7 +2809,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.debug.html"><classname>Zend_Debug</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -2818,7 +2818,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="22" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="22" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.dojo.html"><classname>Zend_Dojo</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -2944,7 +2944,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.dom.html"><classname>Zend_Dom</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -2953,7 +2953,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.exception.html"><classname>Zend_Exception</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -2962,7 +2962,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.feed.html"><classname>Zend_Feed</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3016,7 +3016,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.file.transfer.html"><classname>Zend_File_Transfer</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3033,7 +3033,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="5" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="5" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.filter.html"><classname>Zend_Filter</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3072,7 +3072,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="22" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="22" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.form.html"><classname>Zend_Form</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3198,7 +3198,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="10" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="10" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.gdata.html"><classname>Zend_Gdata</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -3264,7 +3264,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="7" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="7" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.http.html"><classname>Zend_Http</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3313,7 +3313,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.infocard.html"><classname>Zend_InfoCard</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -3328,7 +3328,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.json.html"><classname>Zend_Json</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3348,7 +3348,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="22" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="22" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.layout.html"><classname>Zend_Layout</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3474,7 +3474,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.ldap.html"><classname>Zend_Ldap</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3484,7 +3484,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.loader.html"><classname>Zend_Loader</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3494,7 +3494,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="2" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="2" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.locale.html"><classname>Zend_Locale</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3518,7 +3518,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="21" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="21" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.log.html"><classname>Zend_Log</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3637,7 +3637,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="7" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="7" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.mail.html"><classname>Zend_Mail</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -3686,7 +3686,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.measure.html"><classname>Zend_Measure</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -3713,7 +3713,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="24" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="24" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.memory.html"><classname>Zend_Memory</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -3845,7 +3845,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.mime.html"><classname>Zend_Mime</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -3855,7 +3855,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="22" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="22" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.openid.html"><classname>Zend_OpenId</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -3979,7 +3979,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="22" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="22" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.paginator.html"><classname>Zend_Paginator</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4105,7 +4105,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="25" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="25" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.pdf.html"><classname>Zend_Pdf</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4244,7 +4244,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="20" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="20" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.progressbar.html"><classname>Zend_Progressbar</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4360,7 +4360,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.registry.html"><classname>Zend_Registry</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -4377,7 +4377,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.request.html"><classname>Zend_Request</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -4386,7 +4386,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="10" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="10" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.rest.html"><classname>Zend_Rest</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -4450,7 +4450,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.search.lucene.html"><classname>Zend_Search_Lucene</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -4460,7 +4460,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.server.reflection.html"><classname>Zend_Server</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -4470,7 +4470,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="9" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="9" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.akismet.html"><classname>Zend_Service_Akismet</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -4529,7 +4529,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="11" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="11" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.amazon.html"><classname>Zend_Service_Amazon</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4598,7 +4598,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.audioscrobbler.html"><classname>Zend_Service_Audioscrobbler</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -4652,7 +4652,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="12" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="12" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.delicious.html"><classname>Zend_Service_Delicious</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -4726,7 +4726,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="11" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="11" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.flickr.html"><classname>Zend_Service_Flickr</classname></ulink></emphasis></entry>
 
                             <entry morerows="1" valign="middle">Forte</entry>
@@ -4797,7 +4797,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.nirvanix.html"><classname>Zend_Service_Nirvanix</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4851,7 +4851,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="10" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="10" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.recapchta.html"><classname>Zend_Service_ReCaptcha</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4915,7 +4915,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="11" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="11" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.simpy.html"><classname>Zend_Service_Simpy</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -4984,7 +4984,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="24" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="24" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.slideshare.html"><classname>Zend_Service_SlideShare</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5118,7 +5118,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.strikeiron.html"><classname>Zend_Service_StrikeIron</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5172,7 +5172,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="11" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="11" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.technorati.html"><classname>Zend_Service_Technorati</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -5243,7 +5243,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="13" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="13" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.twitter.html"><classname>Zend_Service_Twitter</classname></ulink></emphasis></entry>
 
                             <entry morerows="5" valign="middle">Forte</entry>
@@ -5322,7 +5322,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="11" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="11" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.service.yahoo.html"><classname>Zend_Service_Yahoo</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5393,7 +5393,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="20" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="20" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.session.html"><classname>Zend_Session</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -5507,7 +5507,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="8" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="8" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.soap.html"><classname>Zend_Soap</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5561,7 +5561,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="23" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="23" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.test.html"><classname>Zend_Test</classname></ulink></emphasis></entry>
 
                             <entry morerows="5" valign="middle">Forte</entry>
@@ -5692,7 +5692,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="1" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="1" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.text.html"><classname>Zend_Text</classname></ulink></emphasis></entry>
 
                             <entry>Forte</entry>
@@ -5709,7 +5709,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="4" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="4" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.timesync.html"><classname>Zend_TimeSync</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5743,7 +5743,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="3" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="3" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.translate.html"><classname>Zend_Translate</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5770,7 +5770,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="6" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="6" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.uri.html"><classname>Zend_Uri</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -5812,7 +5812,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="5" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="5" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.validate.html"><classname>Zend_Validate</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>
@@ -5849,7 +5849,7 @@
                         </row>
 
                         <row>
-                            <entry><emphasis role="strong"><ulink
+                            <entry><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.version.html"><classname>Zend_Version</classname></ulink></emphasis></entry>
 
                             <entry>---</entry>
@@ -5858,7 +5858,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="21" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="21" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.view.html"><classname>Zend_View</classname></ulink></emphasis></entry>
 
                             <entry morerows="4" valign="middle">Forte</entry>
@@ -5979,7 +5979,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="21" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="21" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.wildfire.html"><classname>Zend_Wildfire</classname></ulink></emphasis></entry>
 
                             <entry morerows="3" valign="middle">Forte</entry>
@@ -6098,7 +6098,7 @@
                         </row>
 
                         <row>
-                            <entry morerows="9" valign="middle"><emphasis role="strong"><ulink
+                            <entry morerows="9" valign="middle"><emphasis><ulink
                             url="http://framework.zend.com/manual/fr/zend.xmlrpc.html"><classname>Zend_XmlRpc</classname></ulink></emphasis></entry>
 
                             <entry morerows="2" valign="middle">Forte</entry>

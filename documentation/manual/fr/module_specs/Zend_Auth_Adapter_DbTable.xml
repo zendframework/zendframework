@@ -210,9 +210,7 @@ if ($result->isValid()) {
 
         <para>
             Bien que le but initial de <classname>Zend_Auth</classname> (et par extension celui de
-            <classname>Zend_Auth_Adapter_DbTable</classname>) est principalement l'<emphasis
-            role="strong">authentification</emphasis> et non l'<emphasis
-            role="strong">autorisation</emphasis> (ou contrôle d'accès), il existe quelques
+            <classname>Zend_Auth_Adapter_DbTable</classname>) est principalement l'<emphasis>authentification</emphasis> et non l'<emphasis>autorisation</emphasis> (ou contrôle d'accès), il existe quelques
             exemples et problèmes qui franchissent la limite des domaines auxquels ils
             appartiennent. Selon la façon dont vous avez décidé d'expliquer votre problème, il
             semble parfois raisonnable de résoudre ce qui pourrait ressembler à un problème

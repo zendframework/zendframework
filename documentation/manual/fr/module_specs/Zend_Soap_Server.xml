@@ -76,7 +76,7 @@
         <sect3 id="zend.soap.server.wsdl_mode">
             <title>Constructeur de <classname>Zend_Soap_Server</classname> en mode non-WSDL</title>
 
-            <para>Le premier paramètre du constructeur <emphasis role="strong">doit</emphasis> être mis à la valeur
+            <para>Le premier paramètre du constructeur <emphasis>doit</emphasis> être mis à la valeur
             <code>null</code> si vous voulez utiliser <classname>Zend_Soap_Server</classname> en mode non-WSDL.</para>
 
             <para>Vous devez aussi spécifier "uri" dans ce cas (voir juste après).</para>

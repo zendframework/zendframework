@@ -92,7 +92,7 @@ php_value session.auto_start 0
                 <para>Correcte : instanciez simplement <classname>Zend_Session_Namespace()</classname> quand nécessaire, la
                 session PHP sous-jacente sera automatiquement démarrée. Ceci permet un usage extrêmement simple qui
                 fonctionne dans la plupart des cas. Cependant, vous êtes responsable de vous assurer que le premier
-                <code>new Zend_Session_Namespace()</code> intervient <emphasis role="strong">avant</emphasis> que toute
+                <code>new Zend_Session_Namespace()</code> intervient <emphasis>avant</emphasis> que toute
                 sortie (par exemple <ulink url="http://www.php.net/headers_sent">en-têtes HTTP</ulink>) ait été envoyée
                 par PHP au client, si vous utilisez le réglage par défaut, sessions basées sur les cookies (fortement
                 recommandé). Voir <xref linkend="zend.session.global_session_management.headers_sent" /> pour plus
@@ -352,8 +352,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
         <title>Utiliser les sessions avec les tests unitaires</title>
 
         <para>Zend Framework s'appuie sur PHPUnit pour faciliter ses propres tests. Beaucoup de développeurs étendent
-        la suite des tests unitaires pour couvrir le code de leurs applications. L'exception "<emphasis
-        role="strong">Zend_Session is currently marked as read-only</emphasis>" (NDT. : "Zend_Session est actuellement
+        la suite des tests unitaires pour couvrir le code de leurs applications. L'exception "<emphasis>Zend_Session is currently marked as read-only</emphasis>" (NDT. : "Zend_Session est actuellement
         marquée en lecture seule") est levée lors de l'exécution des tests unitaires, si une méthode d'écriture est
         utilisée après la clôture de la session. Cependant les tests unitaires employant <classname>Zend_Session</classname>
         requièrent une attention particulière, car la fermeture (<classname>Zend_Session::writeClose()</classname>), ou la

@@ -305,7 +305,7 @@ $translate = new Zend_Translate('gettext',
 ]]></programlisting>
 
         <note>
-            <para>Vous devez paramétrer le cache <emphasis role="strong">avant</emphasis> d'utiliser ou d'initialiser
+            <para>Vous devez paramétrer le cache <emphasis>avant</emphasis> d'utiliser ou d'initialiser
             tout adaptateur ou instance de <classname>Zend_Translate</classname>. Sinon votre source de traduction ne sera pas
             mise en cache tant que vous n'aurez pas ajouté une nouvelle source avec la méthode
             <code>addTranslation()</code>.</para>

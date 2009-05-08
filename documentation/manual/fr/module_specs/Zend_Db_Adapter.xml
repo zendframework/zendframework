@@ -206,44 +206,44 @@ $db = Zend_Db::factory($config->database);
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis role="strong">host</emphasis> : le nom de l'hôte hébergeant le SGBD. Vous pouvez
+                    <para><emphasis>host</emphasis> : le nom de l'hôte hébergeant le SGBD. Vous pouvez
                     aussi spécifier une adresse IP. Si le SGBD se situe sur la même machine que l'application PHP,
                     "localhost" ou "127.0.0.1" devraient alors être utilisés.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">username </emphasis>: nom d'utilisateur du compte de connexion au
+                    <para><emphasis>username </emphasis>: nom d'utilisateur du compte de connexion au
                     SGBD.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">password</emphasis> : mot de passe de l'utilisateur du compte de
+                    <para><emphasis>password</emphasis> : mot de passe de l'utilisateur du compte de
                     connexion au SGBD.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">dbname</emphasis> : nom de la base de données située dans le
+                    <para><emphasis>dbname</emphasis> : nom de la base de données située dans le
                     SGBD.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">port</emphasis> : Certains SGBDs acceptent que l'on spécifie un port
+                    <para><emphasis>port</emphasis> : Certains SGBDs acceptent que l'on spécifie un port
                     pour d'y connecter. Indiquez le alors ici.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">options</emphasis> : Ce paramètre est un tableau associatif d'options
+                    <para><emphasis>options</emphasis> : Ce paramètre est un tableau associatif d'options
                     génériques à toutes les classes <classname>Zend_Db_Adapter</classname>.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">driver_options</emphasis> : Ce paramètre est un tableau associatif
+                    <para><emphasis>driver_options</emphasis> : Ce paramètre est un tableau associatif
                     d'options spécifiques à une extension de SGBD spécifique. Typiquement, il est possible avec ce
                     paramètre de passer des options (attributs) au driver PDO.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">adapterNamespace</emphasis> : fournit le commencement du nom de la
+                    <para><emphasis>adapterNamespace</emphasis> : fournit le commencement du nom de la
                     classe d'adaptateur, à utiliser la place de "<classname>Zend_Db_Adapter</classname>". Utilisez ceci si vous
                     désirez que <code>factory()</code> charge une classe non Zend.</para>
                 </listitem>
@@ -404,23 +404,23 @@ try {
 
         <itemizedlist>
             <listitem>
-                <para><emphasis role="strong">accounts</emphasis> correspond aux informations sur les utilisateurs qui
+                <para><emphasis>accounts</emphasis> correspond aux informations sur les utilisateurs qui
                 gèrent les bugs.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">products</emphasis> enregistre les produits pour lesquels des bugs vont
+                <para><emphasis>products</emphasis> enregistre les produits pour lesquels des bugs vont
                 être relevés.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">bugs</emphasis> est la table qui contient les bugs, à savoir leur état
+                <para><emphasis>bugs</emphasis> est la table qui contient les bugs, à savoir leur état
                 actuel, la personne ayant relevé le bug, la personne en charge de le corriger, et la personne chargée de
                 vérifier le correctif.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">bugs_products</emphasis> enregistre les relations entre les bugs, et les
+                <para><emphasis>bugs_products</emphasis> enregistre les relations entre les bugs, et les
                 produits. C'est une relation plusieurs à plusieurs car un même bug peut faire partie de plusieurs
                 produits, et un produit peut évidemment posséder plusieurs bugs.</para>
             </listitem>
@@ -506,7 +506,7 @@ $result = $db->fetchAll($sql, 2);
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis role="strong">Zend_Db::FETCH_ASSOC</emphasis>: Retourne un tableau
+                    <para><emphasis>Zend_Db::FETCH_ASSOC</emphasis>: Retourne un tableau
                     d'enregistrements. Chaque enregistrement étant un tableau associatif dont les clés sont les noms des
                     colonnes SQL désirées, ou leurs alias. Il s'agit du mode par défaut utilisé par les classes
                     Zend_Db_Adapter.</para>
@@ -522,26 +522,26 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Zend_Db::FETCH_NUM</emphasis>: Retourne les enregistrements dans un
+                    <para><emphasis>Zend_Db::FETCH_NUM</emphasis>: Retourne les enregistrements dans un
                     tableau de tableaux. Les tableaux nichés sont indexés par des entiers correspondants à la position
                     du champ dans la syntaxe SQL SELECT.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Zend_Db::FETCH_BOTH</emphasis>: Retourne les enregistrements dans un
+                    <para><emphasis>Zend_Db::FETCH_BOTH</emphasis>: Retourne les enregistrements dans un
                     tableau de tableaux. Les tableaux nichés sont indexés à la fois numériquement et lexicalement. C'est
                     un mode qui réunit FETCH_ASSOC et FETCH_NUM. Ainsi, vous avez deux fois plus d'enregistrements,
                     chacun d'entre eux étant doublé.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Zend_Db::FETCH_COLUMN</emphasis>: Retourne les enregistrements dans un
+                    <para><emphasis>Zend_Db::FETCH_COLUMN</emphasis>: Retourne les enregistrements dans un
                     tableau de valeurs. Les valeurs correspondent à une des colonnes utilisées dans la requête SQL
                     SELECT. Par défaut, il s'agit de la colonne à l'index 0.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Zend_Db::FETCH_OBJ</emphasis>: Retourne les enregistrements dans un
+                    <para><emphasis>Zend_Db::FETCH_OBJ</emphasis>: Retourne les enregistrements dans un
                     tableau d'objets. La classe de ces objets par défaut est la classe intégrée à PHP :
                     <code>stdClass</code>. Les colonnes des enregistrements sont représentées par les propriétés
                     publiques des objets.</para>

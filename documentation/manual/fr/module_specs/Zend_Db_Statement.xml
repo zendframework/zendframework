@@ -107,20 +107,20 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis role="strong">Fetch style</emphasis> en premier, permet de spécifier le mode de
+                    <para><emphasis>Fetch style</emphasis> en premier, permet de spécifier le mode de
                     capture du résultat. C'est la structure dans laquelle celui-ci vous sera retourné. Voyez <xref
                     linkend="zend.db.adapter.select.fetch-mode" /> pour une description des valeurs valides et de la
                     forme des résultats alors renvoyés.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Cursor orientation</emphasis> est le second paramètre. Par défaut il
+                    <para><emphasis>Cursor orientation</emphasis> est le second paramètre. Par défaut il
                     vaut <classname>Zend_Db::FETCH_ORI_NEXT</classname>, ce qui signifie que chaque appel futur à
                     <code>fetch()</code> retourne l'enregistrement suivant.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">Offset</emphasis>, en troisième paramètre. Si le paramètre "cursor
+                    <para><emphasis>Offset</emphasis>, en troisième paramètre. Si le paramètre "cursor
                     orientation" est réglé sur <classname>Zend_Db::FETCH_ORI_ABS</classname>, alors le numéro d'offset est le
                     numéro du résultat à retourner, dans le statement. Si c'est <classname>Zend_Db::FETCH_ORI_REL</classname>, le
                     numéro d'offset est relatif à la position du curseur avant l'appel à <code>fetch()</code>.</para>

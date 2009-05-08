@@ -268,7 +268,7 @@ if ($upload->isValid()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.count">
-        <title>Validateur <emphasis role="strong">Count</emphasis></title>
+        <title>Validateur <emphasis>Count</emphasis></title>
 
         <para>Le validateur <code>Count</code> vérifie le nombre de fichiers fournis. Il supporte les clés d'options
         suivantes :</para>
@@ -321,7 +321,7 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.crc32">
-        <title>Validateur <emphasis role="strong">Crc32</emphasis></title>
+        <title>Validateur <emphasis>Crc32</emphasis></title>
 
         <para>Le validateur <code>Crc32</code> vérifie le contenu du fichier transféré en le hachant. Ce validateur
         utilise l'extension de hachage de PHP avec l'algorithme crc32. Il supporte les options suivantes :</para>
@@ -352,7 +352,7 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.excludeextension">
-        <title>Validateur <emphasis role="strong">ExcludeExtension</emphasis></title>
+        <title>Validateur <emphasis>ExcludeExtension</emphasis></title>
 
         <para>Le validateur <code>ExcludeExtension</code> vérifie l'extension des fichiers fournis. Il supporte les
         options suivantes :</para>
@@ -403,7 +403,7 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.excludemimetype">
-        <title>Validateur <emphasis role="strong">ExcludeMimeType</emphasis></title>
+        <title>Validateur <emphasis>ExcludeMimeType</emphasis></title>
 
         <para>Le validateur <code>ExcludeMimeType</code> vérifie le type MIME des fichiers transférés. Il supporte les
         options suivantes :</para>
@@ -452,7 +452,7 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.exists">
-        <title>Validateur <emphasis role="strong">Exists</emphasis></title>
+        <title>Validateur <emphasis>Exists</emphasis></title>
 
         <para>Le validateur <code>Exists</code> l'existence des fichiers fournis. Il supporte les options suivantes
         :</para>
@@ -492,7 +492,7 @@ $upload->addValidator('Exists',
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.extension">
-        <title>Validateur <emphasis role="strong">Extension</emphasis></title>
+        <title>Validateur <emphasis>Extension</emphasis></title>
 
         <para>Le validateur <code>Extension</code> vérifie l'=es extensions des fichiers qui ont été fournis. Il
         supporte les options suivantes :</para>
@@ -546,7 +546,7 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.filessize">
-        <title>Validateur <emphasis role="strong">FilesSize</emphasis></title>
+        <title>Validateur <emphasis>FilesSize</emphasis></title>
 
         <para>Le validateur <code>FilesSize</code> vérifie le poids total de tous les fichiers transférés. Il supporte
         les options suivantes :</para>
@@ -612,7 +612,7 @@ $upload->addValidator('FilesSize', false, array('min' => '10kB',
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.imagesize">
-        <title>Validateur <emphasis role="strong">ImageSize</emphasis></title>
+        <title>Validateur <emphasis>ImageSize</emphasis></title>
 
         <para>Le validateur <code>ImageSize</code> vérifie la taille des images. Il supporte les options suivantes
         :</para>
@@ -667,7 +667,7 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.iscompressed">
-        <title>Validateur <emphasis role="strong">IsCompressed</emphasis></title>
+        <title>Validateur <emphasis>IsCompressed</emphasis></title>
 
         <para>Le validateur <code>IsCompressed</code> vérifie si un fichier transféré est une archive compressée comme
         zip ou arc. Ce validateur est basée sur le validateur <code>MimeType</code> et supportent les mêmes méthodes et
@@ -699,7 +699,7 @@ $upload->addValidator('IsCompressed', false, 'zip');
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.isimage">
-        <title>Validateur <emphasis role="strong">IsImage</emphasis></title>
+        <title>Validateur <emphasis>IsImage</emphasis></title>
 
         <para>Le validateur <code>IsImage</code> vérifie si un fichier transféré est une image comme gif ou jpeg. Ce
         validateur est basée sur le validateur <code>MimeType</code> et supportent les mêmes méthodes et options. Vous
@@ -730,7 +730,7 @@ $upload->addValidator('IsImage', false, 'jpeg');
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.hash">
-        <title>Validateur <emphasis role="strong">Hash</emphasis></title>
+        <title>Validateur <emphasis>Hash</emphasis></title>
 
         <para>Le validateur <code>Hash</code> vérifie le contenu du fichier transféré en le hachant. Ce validateur
         utilise l'extension de hachage de PHP. Il supporte les options suivantes :</para>
@@ -779,7 +779,7 @@ $upload->addValidator('Hash', false, array('315b3cd8273d44912a7', 'algorithm' =>
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.md5">
-        <title>Validateur <emphasis role="strong">Md5</emphasis></title>
+        <title>Validateur <emphasis>Md5</emphasis></title>
 
         <para>Le validateur <code>Md5</code> vérifie le contenu du fichier transféré en le hachant. Ce validateur
         utilise l'extension de hachage de PHP avec l'algorithme md5. Il supporte les options suivantes :</para>
@@ -810,7 +810,7 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.mimetype">
-        <title>Validateur <emphasis role="strong">MimeType</emphasis></title>
+        <title>Validateur <emphasis>MimeType</emphasis></title>
 
         <para>Le validateur <code>MimeType</code> vérifie le type MIME des fichiers transférés. Il supporte les options
         suivantes :</para>
@@ -886,7 +886,7 @@ $upload->addValidator('MimeType', false, array('image', 'magicfile' => '/path/to
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.notexists">
-        <title>Validateur <emphasis role="strong">NotExists</emphasis></title>
+        <title>Validateur <emphasis>NotExists</emphasis></title>
 
         <para>Le validateur <code>NotExists</code> l'existence des fichiers fournis. Il supporte les options suivantes
         :</para>
@@ -927,7 +927,7 @@ $upload->addValidator('NotExists',
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.sha1">
-        <title>Validateur <emphasis role="strong">Sha1</emphasis></title>
+        <title>Validateur <emphasis>Sha1</emphasis></title>
 
         <para>Le validateur <code>Sha1</code> vérifie le contenu du fichier transféré en le hachant. Ce validateur
         utilise l'extension de hachage de PHP avec l'algorithme sha1. Il supporte les options suivantes :</para>
@@ -958,7 +958,7 @@ $upload->addValidator('Sha1', false, array('3b3652f336522365223', 'eb3365f3365dd
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.size">
-        <title>Validateur <emphasis role="strong">Size</emphasis></title>
+        <title>Validateur <emphasis>Size</emphasis></title>
 
         <para>Le validateur <code>Size</code> vérifie le poids d'un fichier unique. Il supporte les options suivantes
         :</para>
@@ -1014,7 +1014,7 @@ $upload->addValidator('Size', false, array('min' => '10kB',
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.wordcount">
-        <title>Validateur <emphasis role="strong">WordCount</emphasis></title>
+        <title>Validateur <emphasis>WordCount</emphasis></title>
 
         <para>Le validateur <code>WordCount</code> vérifie le nombre de mots à l'intérieur des fichiers fournis. Il
         supporte les options suivantes :</para>

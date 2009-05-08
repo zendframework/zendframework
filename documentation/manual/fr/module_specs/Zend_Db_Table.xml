@@ -860,49 +860,49 @@ echo "The table name is " . $info['name'] . "\n";
 
         <itemizedlist>
             <listitem>
-                <para><emphasis role="strong">name</emphasis> =&gt; nom de la table.</para>
+                <para><emphasis>name</emphasis> =&gt; nom de la table.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">cols</emphasis> =&gt; un tableau contenant les colonnes de la
+                <para><emphasis>cols</emphasis> =&gt; un tableau contenant les colonnes de la
                 table.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">primary</emphasis> =&gt; un tableau contenant la(les) colonnes utilisée(s)
+                <para><emphasis>primary</emphasis> =&gt; un tableau contenant la(les) colonnes utilisée(s)
                 pour définir la clé primaire de la table.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">metadata</emphasis> =&gt; un tableau associatif, associant les noms des
+                <para><emphasis>metadata</emphasis> =&gt; un tableau associatif, associant les noms des
                 colonnes de la tables, à leurs informations intrinsèques. Les données sont les mêmes que celles
                 retournée par <code>describeTable()</code>.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">rowClass</emphasis> =&gt; le nom de la classe concrète servant les objets
+                <para><emphasis>rowClass</emphasis> =&gt; le nom de la classe concrète servant les objets
                 représentants les enregistrements de la table. Par défaut : Zend_Db_Table_Row.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">rowsetClass</emphasis> =&gt; le nom de la classe concrète servant de
+                <para><emphasis>rowsetClass</emphasis> =&gt; le nom de la classe concrète servant de
                 conteneur d'objets représentants les enregistrements de la table. Par défaut :
                 Zend_Db_Table_Rowset.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">referenceMap</emphasis> =&gt; un tableau associatif. Il représente les
+                <para><emphasis>referenceMap</emphasis> =&gt; un tableau associatif. Il représente les
                 références de cette table vers ses parents éventuelles. Voyez <xref
                 linkend="zend.db.table.relationships.defining" />.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">dependentTables</emphasis> =&gt; un tableau de noms de classes de tables
+                <para><emphasis>dependentTables</emphasis> =&gt; un tableau de noms de classes de tables
                 qui référencent cette table. Voyez <xref linkend="zend.db.table.relationships.defining" />.</para>
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">schema</emphasis> =&gt; Le nom de la base de données comportant cette
+                <para><emphasis>schema</emphasis> =&gt; Le nom de la base de données comportant cette
                 table.</para>
             </listitem>
         </itemizedlist>
@@ -936,13 +936,13 @@ echo "The table name is " . $info['name'] . "\n";
 
         <para>La mise en cache des méta données des tables peut être contrôlée de deux manières: <itemizedlist>
                 <listitem>
-                    <para><emphasis role="strong">Un appel à la méthode statique
+                    <para><emphasis>Un appel à la méthode statique
                     Zend_Db_Table_Abstract::setDefaultMetadataCache()</emphasis> - Ceci permet d'enregistrer une fois
                     pour toutes l'objet de cache que toutes les tables devront utiliser.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis role="strong">L'appel au constructeur
+                    <para><emphasis>L'appel au constructeur
                     Zend_Db_Table_Abstract::__construct()</emphasis> - Il va permettre de spécifier l'objet de cache
                     pour une table en particulier.</para>
                 </listitem>

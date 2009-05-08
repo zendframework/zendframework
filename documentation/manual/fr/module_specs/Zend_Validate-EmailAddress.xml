@@ -8,7 +8,7 @@
     l'adresse émail entre partie locale et domaine et essaie de valider ces deux parties conformément aux spécifications
     des adresses émail et des noms de domaine.</para>
 
-    <para><emphasis role="strong">Utilisation de base</emphasis></para>
+    <para><emphasis>Utilisation de base</emphasis></para>
 
     <para>Exemple basique : <programlisting role="php"><![CDATA[
 $validateur = new Zend_Validate_EmailAddress();
@@ -23,14 +23,14 @@ if ($validateur->isValid($email)) {
 ]]></programlisting> Ceci validera l'adresse émail <code>$email</code> et, en cas d'échec, fournira des messages
     d'erreur informatifs via <code>$validator-&gt;getMessages()</code>.</para>
 
-    <para><emphasis role="strong">Parties locales complexes</emphasis></para>
+    <para><emphasis>Parties locales complexes</emphasis></para>
 
     <para><classname>Zend_Validate_EmailAddress</classname> validera toute adresse émail conforme à la RFC2822. Comme par exemple
     <code>bob@domaine.com</code>, <code>bob+jones@domaine.fr</code>, <code>"bob@jones"@domaine.com</code> et <code>"bob
     jones"@domaine.com</code>. Quelques formats d'émail obsolètes ne seront pas validés (comme tout émail contenant un
     retour chariot ou un caractère "\").</para>
 
-    <para><emphasis role="strong">Validation de différents types de noms de domaine</emphasis></para>
+    <para><emphasis>Validation de différents types de noms de domaine</emphasis></para>
 
     <para>La partie domaine d'une adresse émail est validée via <link
     linkend="zend.validate.set.hostname"><classname>Zend_Validate_Hostname</classname></link>. Par défaut, seules les domaines
@@ -52,7 +52,7 @@ if ($validateur->isValid($email)) {
 }
 ]]></programlisting></para>
 
-    <para><emphasis role="strong">Vérification que le nom de domaine accepte réellement l'émail</emphasis></para>
+    <para><emphasis>Vérification que le nom de domaine accepte réellement l'émail</emphasis></para>
 
     <para>Le fait qu'une adresse électronique est dans un format correct, ne signifie pas nécessairement que l'adresse
     électronique existe en réalité. Pour aider résoudre ce problème, vous pouvez utiliser la validation MX pour vérifier
@@ -73,7 +73,7 @@ $validator =
     enregistrement MX sur le nom de domaine de l'adresse électronique que vous voulez valider. Faîtes cependant
     attention, cela ralentira probablement votre scénario.</para>
 
-    <para><emphasis role="strong">Valider les noms de domaines internationaux</emphasis></para>
+    <para><emphasis>Valider les noms de domaines internationaux</emphasis></para>
 
     <para><classname>Zend_Validate_EmailAddress</classname> peut aussi vérifier les caractères internationaux qui existent dans
     quelques domaines. Ceci est connu comme le support de Nom de Domaine International (IDN). Celui-ci est activé par
@@ -88,7 +88,7 @@ $validator->hostnameValidator->setValidateIdn(false);
     <para>Notez cependant que les IDNs sont seulement validés si vous autorisez la validation des nom de
     domaines.</para>
 
-    <para><emphasis role="strong">Validation des "Top Level Domains"</emphasis></para>
+    <para><emphasis>Validation des "Top Level Domains"</emphasis></para>
 
     <para>Par défaut un nom de domaine sera vérifié grâce à une liste de TLDs connus. Ceci est activé par défaut,
     quoique vous puissiez le mettre hors service en changeant le paramètre via l'objet

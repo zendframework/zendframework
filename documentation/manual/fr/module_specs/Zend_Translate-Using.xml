@@ -55,7 +55,7 @@ print $translate->_("Correction de la langue ceci est la ligne deux") . "\n";
 $translate = new Zend_Translate('gettext',
                                 '/chemin/vers/source-de.mo',
                                 'de');
-]]></programlisting> Dans cet exemple nous avons décidé d'utiliser <emphasis role="strong">l'adaptateur
+]]></programlisting> Dans cet exemple nous avons décidé d'utiliser <emphasis>l'adaptateur
     Gettext</emphasis>. Nous plaçons notre fichier <code>source-de.mo</code> dans le dossier <code>/chemin/vers</code>.
     Le fichier gettext inclura la traduction allemande. Et nous avons également ajouté un autre fichier de langue pour
     le français.</para>
@@ -91,9 +91,8 @@ print $translate->_(2)."\n";
     <para>En outre vous obtiendrez des problèmes si certaines chaînes ne sont pas traduites. Vous devez toujours
     imaginer comment la traduction fonctionne. Premièrement <classname>Zend_Translate</classname> vérifie si la langue choisie a
     une traduction pour l'identificateur de message ou la chaîne fournie. Si aucune chaîne de traduction n'a été
-    trouvée, elle se reporte sur la langue suivante comme définie dans <classname>Zend_Locale</classname>. Ainsi le "<emphasis
-    role="strong">de_AT</emphasis>" devient seulement "<emphasis role="strong">de</emphasis>". Si aucune
-    traduction n'est trouvée pour le "<emphasis role="strong">de</emphasis>", alors le message original est retourné. De
+    trouvée, elle se reporte sur la langue suivante comme définie dans <classname>Zend_Locale</classname>. Ainsi le "<emphasis>de_AT</emphasis>" devient seulement "<emphasis>de</emphasis>". Si aucune
+    traduction n'est trouvée pour le "<emphasis>de</emphasis>", alors le message original est retourné. De
     cette façon vous avez toujours un affichage, au cas où la traduction de message n'existerait pas dans votre stockage
     des messages. <classname>Zend_Translate</classname> ne lève jamais d'erreur ou d'exception en traduisant les chaînes.</para>
 
@@ -266,7 +265,7 @@ $translate = new Zend_Translate('array',
 
         <para>Des fichiers source Gettext sont créés par la bibliothèque GNU gettext. Il y a plusieurs outils libres
         disponibles qui peuvent analyser vos fichiers de code et créer les fichiers sources nécessaires à gettext. Ces
-        fichiers se terminent par <emphasis role="strong">*.mo</emphasis> et ce sont des fichiers binaires. Un gratuiciel
+        fichiers se terminent par <emphasis>*.mo</emphasis> et ce sont des fichiers binaires. Un gratuiciel
         pour créer ces fichiers est <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>. Cet outil vous
         aide également pour le processus de traduction lui-même.</para>
 
@@ -539,10 +538,10 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
                         <entry><code>ignore</code></entry>
 
-                        <entry><emphasis role="strong">.</emphasis></entry>
+                        <entry><emphasis>.</emphasis></entry>
 
                         <entry>Tous les dossiers et les fichiers commençant par ce caractère seront ignorés dans la recherche
-                        automatique de traductions. La valeur par défaut est <emphasis role="strong">'.'</emphasis>, ce qui signifie
+                        automatique de traductions. La valeur par défaut est <emphasis>'.'</emphasis>, ce qui signifie
                         que tous les fichiers cachés (Unix) seront ignorés. Mettre une valeur par exemple à 'tmp' aura pour effet
                         d'ignorer les dossiers ou fichiers 'tmpImages' ou encore 'tmpFiles' (par exemple), ainsi que tous les
                         sous-dossiers</entry>
@@ -710,7 +709,7 @@ $translate->setLocale('it_IT');
             langue à utiliser sera celle spécifiée par l'appel de la méthode.</para>
 
             <para>Si vous voulez réactiver la détection automatique, réappelez <code>setLocale()</code> et passez lui la valeur
-            <emphasis role="strong">auto</emphasis>.</para>
+            <emphasis>auto</emphasis>.</para>
 
             <para>Depuis Zend Framework 1.7.0 <classname>Zend_Translate</classname> reconnait une locale globale pour l'application.
             Vous pouvez ainsi simplement mettre un objet <classname>Zend_Locale</classname> dans le registre, comme montré ci-après.
@@ -967,7 +966,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
         with the pseudo-locale 'all'. This will return all available translation data for each added locale.</para>
 
         <note>
-            <para>Attention: The returned array can be <emphasis role="strong">very big</emphasis>, depending on the
+            <para>Attention: The returned array can be <emphasis>very big</emphasis>, depending on the
             count of added locales and the amount of translation data.</para>
         </note>
 

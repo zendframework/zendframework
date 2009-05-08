@@ -5,7 +5,7 @@
     <title>Introduction</title>
 
     <para><classname>Zend_TimeSync</classname> est capable de recevoir une information temporelle depuis un serveur de temps, en
-    utilisant les protocoles <emphasis role="strong">NTP</emphasis> ou <emphasis role="strong">SNTP</emphasis>. Avec
+    utilisant les protocoles <emphasis>NTP</emphasis> ou <emphasis>SNTP</emphasis>. Avec
     <classname>Zend_TimeSync</classname>, Zend Framework peut fonctionner sans se soucier de la configuration du temps (de la
     date) du serveur sur lequel il tourne.</para>
 
@@ -35,7 +35,7 @@
 
         <itemizedlist mark="opencircle">
             <listitem>
-                <para><emphasis role="strong">Serveur sans service de synchronisation du temps</emphasis></para>
+                <para><emphasis>Serveur sans service de synchronisation du temps</emphasis></para>
 
                 <para>Si votre application tourne sur un serveur qui ne possède pas de service de synchronisation du
                 temps, alors utiliser <classname>Zend_TimeSync</classname> vous permettra de gérer le temps dans votre
@@ -43,7 +43,7 @@
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Serveurs de base de données séparés</emphasis></para>
+                <para><emphasis>Serveurs de base de données séparés</emphasis></para>
 
                 <para>Si votre serveur de base de données est installé sur un serveur distant, et qu'il n'est pas
                 synchronisé temporellement avec votre serveur applicatif, alors vous rencontrerez des problèmes si vous
@@ -51,7 +51,7 @@
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Serveurs multiples</emphasis></para>
+                <para><emphasis>Serveurs multiples</emphasis></para>
 
                 <para>Si votre application fonctionne au travers de multiples serveurs applicatifs, il est possible que
                 ceux-ci ne soient pas synchronisés au niveau du temps, et entre eux. Des problèmes vont alors apparaître
@@ -59,7 +59,7 @@
             </listitem>
 
             <listitem>
-                <para><emphasis role="strong">Processus de Batch</emphasis></para>
+                <para><emphasis>Processus de Batch</emphasis></para>
 
                 <para>Si vous utilisez des fichiers batchs, ou des applications en ligne de commande, et que celles-ci
                 nécessitent une synchronisation temporelle absente sur votre système.</para>
@@ -73,7 +73,7 @@
     <sect2 id="zend.timesync.introduction.ntp">
         <title>Qu'est ce que NTP ?</title>
 
-        <para>Le <code>Network Time Protocol</code> (<emphasis role="strong">NTP</emphasis>) est un protocole utilisé
+        <para>Le <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) est un protocole utilisé
         pour la synchronisation du temps des systèmes informatiques au travers du réseau. NTP utilise le port UDP 123
         comme couche de transport. Voyez cet <ulink url="http://fr.wikipedia.org/wiki/Network_Time_Protocol"> article
         wikipédia</ulink> pour plus d'informations sur le protocole.</para>
@@ -82,7 +82,7 @@
     <sect2 id="zend.timesync.introduction.sntp">
         <title>Qu'est ce que SNTP?</title>
 
-        <para>Le <code>Simple Network Time Protocol</code> (<emphasis role="strong">SNTP</emphasis>) est un protocole
+        <para>Le <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>) est un protocole
         utilisé pour la synchronisation du temps des systèmes informatiques au travers du réseau. SNTP utilise le port
         UDP 37 comme couche de transport. Il est très semblable à <code>NTP</code>, mais plus simple (comme son nom
         l'indique).</para>

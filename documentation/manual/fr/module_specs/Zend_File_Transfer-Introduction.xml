@@ -356,28 +356,28 @@ while (empty($upload['message'])) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">total</emphasis>: The total filesize of the uploaded files in bytes
+                    <emphasis>total</emphasis>: The total filesize of the uploaded files in bytes
                     as integer.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">current</emphasis>: The current uploaded filesize in bytes
+                    <emphasis>current</emphasis>: The current uploaded filesize in bytes
                     as integer.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">rate</emphasis>: The average upload speed in bytes per second
+                    <emphasis>rate</emphasis>: The average upload speed in bytes per second
                     as integer.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis role="strong">id</emphasis>: The id is the reference to the upload itself. When
+                    <emphasis>id</emphasis>: The id is the reference to the upload itself. When
                     multiple users upload a file, each upload gets it's own id. The actual id of this request
                     will be returned when you call <code>getProgress()</code> the first time.
                 </para>
@@ -385,7 +385,7 @@ while (empty($upload['message'])) {
 
             <listitem>
                 <para>
-                    <emphasis role="strong">message</emphasis>: A helpful message in the case of a problem.
+                    <emphasis>message</emphasis>: A helpful message in the case of a problem.
                     Problems could be, that there is no upload in progress, that there was a failure while
                     retrieving the data for the progress, or that the upload has been canceled.
                 </para>

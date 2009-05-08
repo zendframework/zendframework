@@ -125,7 +125,7 @@ var_dump( $registry['index'] );
         <para>Vous pouvez trouver aussi intéressant d'accéder au registre d'une manière orientée objet en utilisant les
         noms d'index comme des propriétés d'objet. Pour cela, vous devez spécifier au constructeur du registre l'option
         <code>ArrayObject::ARRAY_AS_PROPS</code> et initialiser l'instance statique. Vous devez faire ceci avant
-        d'accéder au registre statique. <emphasis role="strong">Attention</emphasis> en utilisant cette option, puisque
+        d'accéder au registre statique. <emphasis>Attention</emphasis> en utilisant cette option, puisque
         certaines versions de PHP ont des bugs quand il utilise le registre avec cette option.</para>
 
         <warning>

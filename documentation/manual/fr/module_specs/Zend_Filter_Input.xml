@@ -18,19 +18,19 @@
 
     <itemizedlist>
         <listitem>
-            <para><emphasis role="strong">Les filtres</emphasis> transforment les entrées en supprimant ou changeant des
+            <para><emphasis>Les filtres</emphasis> transforment les entrées en supprimant ou changeant des
             caractères dans leurs valeurs. Le but est de "normaliser" les valeurs jusqu'à ce qu'elles correspondent aux
             attentes exigées. Par exemple si une chaine d'entiers (numériques) est attendue, et que la donnée d'entrée
             est "abc123", alors en sortie du filtre la valeur "123" sera proposée.</para>
         </listitem>
 
         <listitem>
-            <para><emphasis role="strong">Les validateurs</emphasis> vérifient la validité d'une donnée, sans la
+            <para><emphasis>Les validateurs</emphasis> vérifient la validité d'une donnée, sans la
             transformer. Si la validation échoue, le validateur renseignera sur les problèmes rencontrés.</para>
         </listitem>
 
         <listitem>
-            <para><emphasis role="strong">Les échappeurs</emphasis> transforment une valeur en supprimant certains
+            <para><emphasis>Les échappeurs</emphasis> transforment une valeur en supprimant certains
             caractères qui peuvent avoir une signification spéciale dans un contexte donné. Par exemple, les caractères
             '&lt;' et '&gt;' délimitent les balises HTML, ainsi si une donnée contenant ces caractères est affichée
             directement dans un navigateur, la sortie peut être corrompue et mener à des problèmes de sécurité. Échapper
@@ -214,19 +214,19 @@ if ($input->isValid('month')) {
 
             <itemizedlist>
                 <listitem>
-                    <para>Les champs <emphasis role="strong">invalides</emphasis> sont ceux qui ne passent pas un ou
+                    <para>Les champs <emphasis>invalides</emphasis> sont ceux qui ne passent pas un ou
                     plusieurs critères définis par les validateurs.</para>
                 </listitem>
 
                 <listitem>
-                    <para>Les champs <emphasis role="strong">absents</emphasis> sont ceux qui ne sont pas présents dans
+                    <para>Les champs <emphasis>absents</emphasis> sont ceux qui ne sont pas présents dans
                     la donnée d'entrée, alors que la méta commande <code>'presence'=&gt;'required'</code> était présente
                     (voyez <link linkend="zend.filter.input.metacommands.presence">la section</link> sur les méta
                     commandes).</para>
                 </listitem>
 
                 <listitem>
-                    <para>Les champs <emphasis role="strong">inconnus</emphasis> sont ceux présents dans la donnée
+                    <para>Les champs <emphasis>inconnus</emphasis> sont ceux présents dans la donnée
                     d'entrée alors que aucun validateur ni filtre ne lui avait attribué de règle.</para>
                 </listitem>
             </itemizedlist>

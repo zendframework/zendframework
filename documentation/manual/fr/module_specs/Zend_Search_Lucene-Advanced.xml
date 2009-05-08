@@ -25,12 +25,12 @@
                 </listitem>
             </itemizedlist></para>
 
-        <para>Les modifications de l'index n'arrivent <emphasis role="strong">que</emphasis> si une mise à jour de
+        <para>Les modifications de l'index n'arrivent <emphasis>que</emphasis> si une mise à jour de
         l'index est faite. Ceci arrive lorsqu'un nouveau document est ajouté à l'index, ou lors de l'optimisation
         manuelle de l'index par <code>$index-&gt;optimize()</code>.</para>
 
         <para>Dans un tel cas, Zend_Search_Lucene peut convertir l'index vers une version plus haute. Ceci arrive
-        <emphasis role="strong">toujours</emphasis> pour le format <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname>,
+        <emphasis>toujours</emphasis> pour le format <classname>Zend_Search_Lucene::FORMAT_PRE_2_1</classname>,
         alors transformé en format 2.1.</para>
 
         <para>Vous pouvez gérer ces conversions et notamment le format d'arrivée avec

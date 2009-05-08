@@ -235,6 +235,17 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         }
         $this->assertFalse($this->_amazon->isObjectAvailable($this->_bucket."/zftestfile"));
     }
+
+    public function testObjectEncoding()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        
+        $this->_amazon->putObject($this->_bucket."/this is a 100% test", "testdata");
+        $this->assertEquals("testdata", $this->_amazon->getObject($this->_bucket."/this is a 100% test"));
+        
+        $this->_amazon->putObject($this->_bucket."/это тоже тест!", "testdata123");
+        $this->assertEquals("testdata123", $this->_amazon->getObject($this->_bucket."/это тоже тест!"));
+    }
     
     public function testBadNames()
     {
@@ -253,20 +264,20 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         try {
             $this->_amazon->putObject("This is a Very Bad Name/And It Gets Worse", "testdata");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Uri_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());       
+        } catch(Zend_Service_Amazon_S3_Exception $e) {
+            $this->assertContains("contains invalid characters", $e->getMessage());       
         }
         try {
             $this->_amazon->getObject("This is a Very Bad Name/And It Gets Worse");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Uri_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());       
+        } catch(Zend_Service_Amazon_S3_Exception $e) {
+            $this->assertContains("contains invalid characters", $e->getMessage());       
         }
         try {
             $this->_amazon->getInfo("This is a Very Bad Name/And It Gets Worse");
             $this->fail("Expected exception not thrown");
-        } catch(Zend_Uri_Exception $e) {
-            $this->assertContains("Invalid URI", $e->getMessage());       
+        } catch(Zend_Service_Amazon_S3_Exception $e) {
+            $this->assertContains("contains invalid characters", $e->getMessage());       
         }
     }
 

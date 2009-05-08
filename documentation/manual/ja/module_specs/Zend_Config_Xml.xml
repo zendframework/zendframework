@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15397 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
@@ -138,7 +138,7 @@ echo $config->database->params->dbname; // "dbname" と出力します
             <classname>Zend_Config_Xml</classname> は、データベースなどから取得した
             XML 文字列を直接読み込むこともできます。
             文字列はコンストラクタの最初のパラメータとして渡し、最初は
-            <code>'&lt;?xml':</code> で始まらなければなりません。
+            <code>'&lt;?xml'</code> で始まらなければなりません。
         </para>
         <programlisting role="xml"><![CDATA[
 $string = <<<EOT

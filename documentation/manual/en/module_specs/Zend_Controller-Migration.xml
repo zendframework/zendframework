@@ -16,10 +16,10 @@
             <title>Standard Route Changes</title>
 
             <para>
-                As translated segements were introduced into the new standard
-                route, the <code>@</code> character is no a special character
+                As translated segments were introduced into the new standard
+                route, the <code>@</code> character is now a special character
                 in the beginning of a route segment. To be able to use it in a
-                static segment, you must escape it by prefixing it with  second
+                static segment, you must escape it by prefixing it with second
                 <code>@</code> character. The same rule now applies for the
                 <code>:</code> character.
             </para>

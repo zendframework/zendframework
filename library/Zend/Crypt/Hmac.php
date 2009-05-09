@@ -14,23 +14,27 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @subpackage Hmac
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Hmac.php 153 2008-06-16 23:01:55Z padraic $
+ * @version    $Id$
  */
 
-require_once('Zend/Crypt.php');
+/**
+ * @see Zend_Crypt
+ */
+require_once 'Zend/Crypt.php';
 
 /**
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
  * algorithm.
  *
  * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
+ * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
  */
 class Zend_Crypt_Hmac extends Zend_Crypt
 {

@@ -317,7 +317,8 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         }
 
         if (!$this->_pluginResources[$resource] instanceof Zend_Application_Resource_Resource) {
-            $options   = $this->_pluginResources[$resource];
+            $options   = (array) $this->_pluginResources[$resource];
+            $options['bootstrap'] = $this;
             $className = $this->getPluginLoader()->load($resource);
             $this->_pluginResources[$resource] = new $className($options);
         }

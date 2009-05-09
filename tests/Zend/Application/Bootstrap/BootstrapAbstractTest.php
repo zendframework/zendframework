@@ -582,6 +582,21 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->assertTrue($resource1 instanceof Zend_Application_Bootstrap_BootstrapAbstractTest_Layout, var_export(array_keys($bootstrap->getPluginResources()), 1));
         $this->assertTrue($resource2 instanceof Zend_Layout);
     }
+
+    public function testBootstrapShouldPassItselfToResourcePluginConstructor()
+    {
+        $this->application->setOptions(array(
+            'pluginPaths' => array(
+                'Zend_Application_Bootstrap_BootstrapAbstractTest' => dirname(__FILE__),
+            ),
+            'resources' => array(
+                'Layout' => array(),
+            ),
+        ));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $resource = $bootstrap->getPluginResource('layout');
+        $this->assertTrue($resource->bootstrapSetInConstructor, var_export(get_object_vars($resource), 1));
+    }
 }
 
 class Zend_Application_Bootstrap_BootstrapAbstractTest_View
@@ -597,6 +612,15 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
     public $_explicitType = 'BootstrapAbstractTestLayout';
+    public $bootstrapSetInConstructor = false;
+
+    public function __construct($options = null)
+    {
+        parent::__construct($options);
+        if (null !== $this->getBootstrap()) {
+            $this->bootstrapSetInConstructor = true;
+        }
+    }
 
     public function init()
     {

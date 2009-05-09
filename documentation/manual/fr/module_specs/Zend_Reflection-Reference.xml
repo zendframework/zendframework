@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.reflection.reference">
+    <title>Réference de Zend_Reflection</title>
+
+    <para>
+        Les classes de <code>Zend_Reflection</code> reprennent l'API de
+        <ulink url="http://php.net/reflection">la Reflection PHP</ulink> - mais avec
+        une différence importante : la Reflection PHP ne propose pas de manière d'introspecter
+        les tags de documentation PHPDoc, ni les types des variables paramètres ou encore
+        les types de retour des fonctions.
+    </para>
+
+    <para>
+        <code>Zend_Reflection</code> analyse les commentaires PHPDoc pour déterminer les types
+        des variables passées en paramètres ou de retour. Plus spécialement, les annotations
+        <code>@param</code> et <code>@return</code> sont utilisées, même s'il reste possible
+        d'analyser les autres blocs de commentaire, ainsi que leurs descriptions respectives.
+    </para>
+
+    <para>
+        Chaque objet de réflexion dans <code>Zend_Reflection</code>, surcharge la méthode
+        <code>getDocblock()</code> pour retourner une instance de
+        <code>Zend_Reflection_Docblock</code>. Cette classe propose alors l'introspection
+        des blocs de commentaires et notamment des tags PHPDoc.
+    </para>
+
+    <para>
+        <code>Zend_Reflection_File</code> est une nouvelle classe qui permet d'introspecter les fichiers PHP
+        à la recherche de classes, fonctions ou encore code global PHP contenu à l'intérieur.
+    </para>
+
+    <para>
+        Enfin, la plupart des méthodes qui retournent des objets réflexion acceptent un second paramètre
+        permettant de spécifier la classe qui sera instanciée pour créer de tels objets.
+    </para>
+
+    <sect2 id="zend.reflection.reference.docblock">
+        <title>Zend_Reflection_Docblock</title>
+
+        <para>
+            <code>Zend_Reflection_Docblock</code> est le coeur de la valeur ajoutée par
+            <code>Zend_Reflection</code> par rapport à la Reflection PHP.
+            Voici les méthodes proposées:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getContents()</code>: retourne tout le contenu du bloc.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStartLine()</code>: retourne la position de départ du bloc dans
+                le fichier.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getEndLine()</code>: retourne la position de fin du bloc dans
+                le fichier.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getShortDescription()</code>: récupère la description courte
+                (en général la première ligne de commentaire).
+            </para></listitem>
+
+            <listitem><para>
+                <code>getLongDescription()</code>: récupère la description longue
+                du bloc.
+            </para></listitem>
+
+            <listitem><para>
+                <code>hasTag($name)</code>: détermine si le bloc possède un tag particulier.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getTag($name)</code>: Récupère un tag particulier ou <code>false</code>
+                si celui-ci est absent.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getTags($filter)</code>: Récupère tous les tags qui correspondent au filtre
+                <code>$filter</code>. Le type de retour est un tableau d'objets
+                <code>Zend_Reflection_Docblock_Tag</code>.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag">
+        <title>Zend_Reflection_Docblock_Tag</title>
+
+        <para>
+            <code>Zend_Reflection_Docblock_Tag</code> propose la réflexion pour un tag individuel.
+            La plupart des tags se composent d'un nom et d'un description. Dans le cas de certains
+            tags spéciaux, la classe propose une méthode de fabrique qui retourne la bonne instance.
+        </para>
+
+        <para>
+            Voici les méthodes de <code>Zend_Reflection_Docblock_Tag</code>:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>factory($tagDocblockLine)</code>: instancie la bonne classe de reflection
+                pour le tag correspondant et en retourne l'objet.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getName()</code>: retourne le nom du tag.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getDescription()</code>: retourne la description du tag.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag-param">
+        <title>Zend_Reflection_Docblock_Tag_Param</title>
+
+        <para>
+            <code>Zend_Reflection_Docblock_Tag_Param</code> est une version spéciale de
+            <code>Zend_Reflection_Docblock_Tag</code>. La description du tag
+            <code>@param</code> consiste en un type, un nom de variable et une description.
+            Elle ajoute les méthodes suivantes à <code>Zend_Reflection_Docblock_Tag</code>:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getType()</code>: Retourne le type de la variable considérée par le tag.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getVariableName()</code>: Retourne le nom de la variable considérée par le tag.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.docblock-tag-return">
+        <title>Zend_Reflection_Docblock_Tag_Return</title>
+
+        <para>
+            Comme <code>Zend_Reflection_Docblock_Tag_Param</code>,
+            <code>Zend_Reflection_Docblock_Tag_Return</code> est une version spéciale de
+            <code>Zend_Reflection_Docblock_Tag</code>. Le tag
+            <code>@return</code> consiste en un type de retour et une description.
+            Elle ajoute les méthodes suivantes à <code>Zend_Reflection_Docblock_Tag</code>:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getType()</code>: retourne le type de retour.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.file">
+        <title>Zend_Reflection_File</title>
+
+        <para>
+            <code>Zend_Reflection_File</code> propose l'introspection de fichiers PHP.
+            Grâce à cela, vous pouvez déterminer les classes, fonctions ou le code pur PHP contenus
+            dans un fichier PHP donné. Voici les méthodes proposées:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getFileName()</code>: Retourne le nom du fichier en cours de réflexion.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getStartLine()</code>: Retourne la ligne de démarrage du fichier (toujours "1").
+            </para></listitem>
+
+            <listitem><para>
+                <code>getEndLine()</code> Retourne la dernière ligne du fichier, donc le nombre de lignes.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getDocComment($reflectionClass =
+                    'Zend_Reflection_Docblock')</code>: Retourne un objet de réflection de commentaire
+                    PHPDoc du fichier en cours d'analyse.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getClasses($reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne un tableau d'objets de réflexion de classe,
+                    pour les classes contenues dans le fichier en cours d'analyse.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getFunctions($reflectionClass =
+                    'Zend_Reflection_Function')</code>:  Retourne un tableau d'objets de réflexion de fonction,
+                    pour les fonctions contenues dans le fichier en cours d'analyse.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getClass($name = null, $reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne l'objet de réflexion pour la classe contenue dans
+                    le fichier en cours d'analyse.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getContents()</code>: Retourne tout le contenu du fichier en cours d'analyse.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.class">
+        <title>Zend_Reflection_Class</title>
+
+        <para>
+            <code>Zend_Reflection_Class</code> étend
+            <code>ReflectionClass</code>, et propose son API. Elle ajoute juste une méthode,
+            <code>getDeclaringFile()</code>, qui peut être utilisée pour créer un objet
+            <code>Zend_Reflection_File</code>.
+        </para>
+
+        <para>
+            Aussi, les méthodes suivantes proposent un argument supplémentaire pour spécifier sa propre
+            classe de réflexion:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getDeclaringFile($reflectionClass = 'Zend_Reflection_File')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getDocblock($reflectionClass = 'Zend_Reflection_Docblock')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getInterfaces($reflectionClass = 'Zend_Reflection_Class')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getMethod($reflectionClass = 'Zend_Reflection_Method')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getMethods($filter = -1, $reflectionClass = 'Zend_Reflection_Method')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getParentClass($reflectionClass = 'Zend_Reflection_Class')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getProperty($name, $reflectionClass =
+                    'Zend_Reflection_Property')</code>
+            </para></listitem>
+
+            <listitem><para>
+                <code>getProperties($filter = -1, $reflectionClass =
+                    'Zend_Reflection_Property')</code>
+            </para></listitem>
+
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.extension">
+        <title>Zend_Reflection_Extension</title>
+
+        <para>
+            <code>Zend_Reflection_Extension</code> étend
+            <code>ReflectionExtension</code> et propose son API. Elle surcharge
+            les méthodes suivantes afin d'ajouter un paramètre permettant de spécifier
+            sa propre classe de réflexion:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getFunctions($reflectionClass =
+                    'Zend_Reflection_Function')</code>: retourne un tableau d'objets réflexion
+                représentants les fonctions définies par l'extension en question.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getClasses($reflectionClass =
+                    'Zend_Reflection_Class')</code>: retourne un tableau d'objets réflexion
+                représentants les classes définies par l'extension en question.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.function">
+        <title>Zend_Reflection_Function</title>
+
+        <para>
+            <code>Zend_Reflection_Function</code> ajoute une méthode pour retrouver le type de retour
+            de la fonction introspéctée, et surcharge d'autres méthodes pour proposer de passer en paramètre
+            une classe de réflexion à utiliser.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getDocblock($reflectionClass =
+                    'Zend_Reflection_Docblock')</code>: Retourne un objet représentant les blocs de documentation.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getParameters($reflectionClass =
+                    'Zend_Reflection_Parameter')</code>: Retourne un tableau représentant les paramètres
+                    de la fonction analysée sous forme d'objets réflexion.
+            </para></listitem>
+
+            <listitem><para>
+                <code>getReturn()</code>: Retourne le type de retour sous forme d'objet réflexion
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.method">
+        <title>Zend_Reflection_Method</title>
+
+        <para>
+            <code>Zend_Reflection_Method</code> reprend l'API de
+            <code>Zend_Reflection_Function</code> et surcharge la méthode suivante:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getParentClass($reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne un objet réflexion de la classe parente
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.parameter">
+        <title>Zend_Reflection_Parameter</title>
+
+        <para>
+            <code>Zend_Reflection_Parameter</code> ajoute une méthode pour retrouver le type
+            d'un paramètre, et aussi surcharge certaines méthodes en rajoutant un paramètre
+            permettant de spécifier sa propre classe de réflexion.
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getDeclaringClass($reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne un objet réflexion représentant la classe
+                    de déclaration du paramètre (si disponible).
+            </para></listitem>
+
+            <listitem><para>
+                <code>getClass($reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne un objet réflexion représentant la classe
+                    de l'objet passé comme paramètre (si disponible).
+            </para></listitem>
+
+            <listitem><para>
+                <code>getDeclaringFunction($reflectionClass =
+                    'Zend_Reflection_Function')</code>: Retourne un objet réflexion représentant la fonction
+                    passée comme paramètre (si disponible).
+            </para></listitem>
+
+            <listitem><para>
+                <code>getType()</code>: Retourne le type du paramètre.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.reflection.reference.property">
+        <title>Zend_Reflection_Property</title>
+
+        <para>
+            <code>Zend_Reflection_Property</code> surcharge une seule méthode afin de pouvoir spécifier
+            le type de classe de retour:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+                <code>getDeclaringClass($reflectionClass =
+                    'Zend_Reflection_Class')</code>: Retourne un objet réflexion représentant la classe
+                    de l'objet passé comme paramètre (si disponible).
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

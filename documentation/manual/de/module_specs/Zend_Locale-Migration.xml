@@ -6,9 +6,10 @@
     <title>Migrieren von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_Locale</classname> wurde von Zeit zu Zeit verändert. Wenn man begonnen hat
-        <classname>Zend_Locale</classname> und seine Unterkomponenten in früheren Versionen dann sollte man
-        den unteren Richtlinien folgen um die Skripte so zu migrieren das sie die neue API verwenden.
+        Die API von <classname>Zend_Locale</classname> wurde von Zeit zu Zeit verändert. Wenn man
+        begonnen hat <classname>Zend_Locale</classname> und seine Unterkomponenten in früheren
+        Versionen dann sollte man den unteren Richtlinien folgen um die Skripte so zu migrieren das
+        sie die neue API verwenden.
     </para>
 
     <sect2 id="zend.locale.migration.fromonesixtooneseven">
@@ -18,17 +19,18 @@
 
             <para>
                 Bezugnehmend auf den Codingstandard mußte isLocale() so geändert werden das es ein
-                Boolean zurückgibt. In vorhergehenden Releases wurde im Erfolgsfall ein String zurückgegeben.
-                Für das Release 1.7 wurde ein Kompatibilitätsmodus hinzugefügt der es erlaubt das alte
-                Verhalten, das ein String zurückgegeben wird, zu verwenden, aber das triggert auch eine
-                User Warning die darauf hinweist das man auf das neue Verhalten wechseln sollte. Das
-                Rerouting welches das alte Verhalten von isLocale() durchgeführt hätte ist nicht länger
-                notwendig, da alle I18N Komponenten jetzt das Rerouting selbst durchführen.
+                Boolean zurückgibt. In vorhergehenden Releases wurde im Erfolgsfall ein String
+                zurückgegeben. Für das Release 1.7 wurde ein Kompatibilitätsmodus hinzugefügt der es
+                erlaubt das alte Verhalten, das ein String zurückgegeben wird, zu verwenden, aber
+                das triggert auch eine User Warning die darauf hinweist das man auf das neue
+                Verhalten wechseln sollte. Das Rerouting welches das alte Verhalten von isLocale()
+                durchgeführt hätte ist nicht länger notwendig, da alle I18N Komponenten jetzt das
+                Rerouting selbst durchführen.
             </para>
 
             <para>
-                Um die Skripte auf die neue API zu migrieren muß die Methode einfach wie anbei gezeigt
-                verwendet werden.
+                Um die Skripte auf die neue API zu migrieren muß die Methode einfach wie anbei
+                gezeigt verwendet werden.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.example">
@@ -51,8 +53,8 @@ if (Zend_Locale::isLocale($locale)) {
 ]]></programlisting>
 
                 <para>
-                    Es ist zu beachten das man den zweiten Parameter verwendet kann um zu sehen ob das
-                    Gebietsschema richtig ist ohne das ein Rerouting durchgeführt wird.
+                    Es ist zu beachten das man den zweiten Parameter verwendet kann um zu sehen ob
+                    das Gebietsschema richtig ist ohne das ein Rerouting durchgeführt wird.
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -84,15 +86,15 @@ if (Zend_Locale::isLocale($locale, false)) {
             <title>Änderungen bei der Verwendung von getDefault()</title>
 
             <para>
-                Die Bedeutung der getDefault() Methode wurde verändert durch den Fakt das Framework-weite
-                Gebietsschemata integriert wurden welche mit setDefault() gesetzt werden können. Deswegen
-                gibe es nicht mehr die Kette der Gebietsschemata zurück sondern nur die gesetzten
-                Framework-weiten Gebietsschemata.
+                Die Bedeutung der getDefault() Methode wurde verändert durch den Fakt das
+                Framework-weite Gebietsschemata integriert wurden welche mit setDefault() gesetzt
+                werden können. Deswegen gibe es nicht mehr die Kette der Gebietsschemata zurück
+                sondern nur die gesetzten Framework-weiten Gebietsschemata.
             </para>
 
             <para>
-                Um die eigenen Skripte auf die neue API zu migrieren, muß einfach die Methode wie unten
-                gezeigt verwendet werden.
+                Um die eigenen Skripte auf die neue API zu migrieren, muß einfach die Methode wie
+                unten gezeigt verwendet werden.
             </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">
@@ -112,16 +114,18 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 ]]></programlisting>
 
                 <para>
-                    Es ist zu beachten das der zweite Parameter der alten getDefault() Implementation nicht
-                    mehr vorhanden ist, aber die zurückgegebenen Werte die gleichen sind.
+                    Es ist zu beachten das der zweite Parameter der alten getDefault()
+                    Implementation nicht mehr vorhanden ist, aber die zurückgegebenen Werte die
+                    gleichen sind.
                 </para>
             </example>
 
             <note>
                 <para>
-                    Standardmäßig ist das alte Verhalten noch immer aktiv, wirft aber eine User Notice. Wenn man
-                    den eigenen Code zum neuen Verhalten geändert hat sollte man auch den Compatibility Mode auf
-                    false setzen damit keine Notices mehr geworfen werden.
+                    Standardmäßig ist das alte Verhalten noch immer aktiv, wirft aber eine User
+                    Notice. Wenn man den eigenen Code zum neuen Verhalten geändert hat sollte man
+                    auch den Compatibility Mode auf false setzen damit keine Notices mehr geworfen
+                    werden.
                 </para>
             </note>
 

@@ -8,7 +8,8 @@
         <title>Dateiformate</title>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> Indexdateiformate sind binär kompatibel mit der Java Lucene Version 1.4 und größer.
+            <classname>Zend_Search_Lucene</classname> Indexdateiformate sind binär kompatibel mit
+            der Java Lucene Version 1.4 und größer.
         </para>
 
         <para>
@@ -16,7 +17,8 @@
             <ulink url="http://lucene.apache.org/java/docs/fileformats.html"/>.
             <footnote>
                 <para>
-                    Die aktuell unterstützte Version des Lucene Index Dateiformats ist 2.3 (beginnend mit ZF 1.6).
+                    Die aktuell unterstützte Version des Lucene Index Dateiformats ist 2.3
+                    (beginnend mit ZF 1.6).
                 </para>
             </footnote>.
         </para>

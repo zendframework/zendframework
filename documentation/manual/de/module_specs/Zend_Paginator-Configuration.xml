@@ -5,7 +5,8 @@
     <title>Konfiguration</title>
 
     <para>
-        <classname>Zend_Paginator</classname> hat verschiedene Konfigurationsmethoden die aufgerufen werden können:
+        <classname>Zend_Paginator</classname> hat verschiedene Konfigurationsmethoden die aufgerufen
+        werden können:
     </para>
 
     <table id="zend.paginator.configuration.table">
@@ -28,17 +29,17 @@
                 <row>
                     <entry>setItemCountPerPage</entry>
                     <entry>
-                        Setzt die maximale Anzahl an Einträgen zu auf einer Seite angezeigt werden sollen
-                        (Standardwert 10).
+                        Setzt die maximale Anzahl an Einträgen zu auf einer Seite angezeigt werden
+                        sollen (Standardwert 10).
                     </entry>
                 </row>
                 <row>
                     <entry>setPageRange</entry>
                     <entry>
-                        Setzt eine Anzahl an Einträgen die im der Seitenkontrolle angezeigt werden sollen
-                        (Standardwert 10). Achtung: Die meiste Zeit wird diese Zahl exakt verwendet, aber
-                        Scrolling Styles haben die Option Sie nur als Richtlinie oder Startwert zu verwenden
-                        (z.B., Elastic).
+                        Setzt eine Anzahl an Einträgen die im der Seitenkontrolle angezeigt werden
+                        sollen (Standardwert 10). Achtung: Die meiste Zeit wird diese Zahl exakt
+                        verwendet, aber Scrolling Styles haben die Option Sie nur als Richtlinie
+                        oder Startwert zu verwenden (z.B., Elastic).
                     </entry>
                 </row>
                 <row>

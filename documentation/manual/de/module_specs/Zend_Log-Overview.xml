@@ -5,32 +5,36 @@
     <title>Übersicht</title>
 
     <para>
-      <classname>Zend_Log</classname> ist eine Komponente für Mehrzweckprotokollierung. Es unterstützt vielfache
-      Log Backends, das Senden von formatierten Nachrichten zum Log, und das Filtern von Nachrichten
-      um nicht protokolliert zu werden. Diese Funktionen sind in die folgenden Objekte seperiert worden:
+      <classname>Zend_Log</classname> ist eine Komponente für Mehrzweckprotokollierung. Es
+      unterstützt vielfache Log Backends, das Senden von formatierten Nachrichten zum Log, und das
+      Filtern von Nachrichten um nicht protokolliert zu werden. Diese Funktionen sind in die
+      folgenden Objekte seperiert worden:
 
       <itemizedlist>
         <listitem>
           <para>
-            Ein Log (Instanz von <classname>Zend_Log</classname>) ist das Objekt das die Anwendung am meisten benutzt. Man
-            kann soviele Log Objekte haben wie man will; Sie interagieren nicht. Ein Log Objekt muß mindestens
-            einen Schreiber beinhalten, und kann optional einen oder mehrere Filter beinhalten.
+            Ein Log (Instanz von <classname>Zend_Log</classname>) ist das Objekt das die Anwendung
+            am meisten benutzt. Man kann soviele Log Objekte haben wie man will; Sie interagieren
+            nicht. Ein Log Objekt muß mindestens einen Schreiber beinhalten, und kann optional einen
+            oder mehrere Filter beinhalten.
           </para>
         </listitem><listitem>
           <para>
-            Ein Writer (Abgeleitet von <classname>Zend_Log_Writer_Abstract</classname>) ist dafür zuständig das Daten in
-            den Speicher geschrieben werden.
+            Ein Writer (Abgeleitet von <classname>Zend_Log_Writer_Abstract</classname>) ist dafür
+            zuständig das Daten in den Speicher geschrieben werden.
           </para>
         </listitem><listitem>
           <para>
-            Ein Filter (implementiert <classname>Zend_Log_Filter_Interface</classname>) blockiert Logdaten vom gespeichert
-            werden. Ein Filter kann einem individuellen Writer hinzugefügt werden, oder an ein Log wo er
-            vor allen Writern hinzugefügt wird. In jedem Fall können Filter verkettet werden.
+            Ein Filter (implementiert <classname>Zend_Log_Filter_Interface</classname>) blockiert
+            Logdaten vom gespeichert werden. Ein Filter kann einem individuellen Writer hinzugefügt
+            werden, oder an ein Log wo er vor allen Writern hinzugefügt wird. In jedem Fall können
+            Filter verkettet werden.
           </para>
         </listitem><listitem>
           <para>
-            Ein Formatter (implementiert <classname>Zend_Log_Formatter_Interface</classname>) kann die Logdaten formatieren
-            bevor diese durch den Writer geschrieben werden. Jeder Writer hat exakt einen Formatter.
+            Ein Formatter (implementiert <classname>Zend_Log_Formatter_Interface</classname>) kann
+            die Logdaten formatieren bevor diese durch den Writer geschrieben werden. Jeder Writer
+            hat exakt einen Formatter.
           </para>
         </listitem>
       </itemizedlist>
@@ -39,7 +43,8 @@
     <sect2 id="zend.log.overview.creating-a-logger">
       <title>Erstellen eines Logs</title>
       <para>
-        Um das protokollieren zu starten, muß ein Writer instanziert werden und einer Log Instanz übergeben werden:
+        Um das protokollieren zu starten, muß ein Writer instanziert werden und einer Log Instanz
+        übergeben werden:
 
         <programlisting role="php"><![CDATA[
 $logger = new Zend_Log();
@@ -48,8 +53,9 @@ $writer = new Zend_Log_Writer_Stream('php://output');
 $logger->addWriter($writer);
 ]]></programlisting>
 
-        Es ist wichtig anzumerken das das Log mindestens einen Writer haben muß. Man kann eine beliebige Anzahl von
-        Writern hinzufügen indem man die <code>addWriter()</code> Methode des Log's verwendet.
+        Es ist wichtig anzumerken das das Log mindestens einen Writer haben muß. Man kann eine
+        beliebige Anzahl von Writern hinzufügen indem man die <code>addWriter()</code> Methode des
+        Log's verwendet.
       </para>
 
       <para>
@@ -68,21 +74,22 @@ $logger = new Zend_Log($writer);
       <title>Nachrichten protokollieren</title>
 
       <para>
-        Um eine Nachricht zu protokollieren, muß die <code>log()</code> Methode einer Log Instanz aufgerufen werden
-        und die Nachricht mit einer entsprechenden Priorität übergeben werden:
+        Um eine Nachricht zu protokollieren, muß die <code>log()</code> Methode einer Log Instanz
+        aufgerufen werden und die Nachricht mit einer entsprechenden Priorität übergeben werden:
 
       <programlisting role="php"><![CDATA[
 $logger->log('Informative Nachricht', Zend_Log::INFO);
 ]]></programlisting>
 
-      Der erste Parameter der <code>log()</code> Methode ist ein <code>message</code> String und der zweite
-      Parameter ist ein <code>priority</code> Integerwert. Die Priorität muß eine der Prioritäten sein die von
-      der Log Instanz erkannt wird. Das wird in der nächsten Sektion beschrieben.
+      Der erste Parameter der <code>log()</code> Methode ist ein <code>message</code> String und der
+      zweite Parameter ist ein <code>priority</code> Integerwert. Die Priorität muß eine der
+      Prioritäten sein die von der Log Instanz erkannt wird. Das wird in der nächsten Sektion
+      beschrieben.
     </para>
 
     <para>
-      Eine Abkürzung ist auch verfügbar. Statt dem Aufruf der <code>log()</code> Methode kann eine Methode des
-      selben Namens wie die Priorität aufgerufen werden:
+      Eine Abkürzung ist auch verfügbar. Statt dem Aufruf der <code>log()</code> Methode kann eine
+      Methode des selben Namens wie die Priorität aufgerufen werden:
 
       <programlisting role="php"><![CDATA[
 $logger->log('Informative Nachricht', Zend_Log::INFO);
@@ -97,16 +104,17 @@ $logger->emerg('Notfall Nachricht');
   <sect2 id="zend.log.overview.destroying-a-logger">
     <title>Ein Log entfernen</title>
     <para>
-      Wenn ein Log Objekt nicht länger benötigt wird, kann die Variable die das Log enthält auf <code>null</code>
-      gesetzt werden um es zu entfernen. Das wird automatisch die Instanzmethode <code>shutdown()</code> von jedem
-      hinzugefügten Writer aufrufen bevor das Log Objekt entfernt wird:
+      Wenn ein Log Objekt nicht länger benötigt wird, kann die Variable die das Log enthält auf
+      <code>null</code> gesetzt werden um es zu entfernen. Das wird automatisch die Instanzmethode
+      <code>shutdown()</code> von jedem hinzugefügten Writer aufrufen bevor das Log Objekt entfernt
+      wird:
 
       <programlisting role="php"><![CDATA[
 $logger = null;
 ]]></programlisting>
 
-      Das explizite entfernen des Logs auf diesem Weg ist optional und wird automatisch durchgeführt wenn PHP
-      herunterfährt.
+      Das explizite entfernen des Logs auf diesem Weg ist optional und wird automatisch durchgeführt
+      wenn PHP herunterfährt.
     </para>
   </sect2>
 
@@ -126,24 +134,24 @@ INFO    = 6;  // Informativ: Informative Nachrichten
 DEBUG   = 7;  // Debug: Debug Nachrichten
 ]]></programlisting>
 
-      Diese Prioritäten sind immer vorhanden und eine komfortable Methode für den selben Namen ist für jede
-      einzelne vorhanden.
+      Diese Prioritäten sind immer vorhanden und eine komfortable Methode für den selben Namen ist
+      für jede einzelne vorhanden.
     </para>
 
     <para>
-      Die Prioritäten sind nicht beliebig. Die kommen vom BSD <code>syslog</code> Protokoll, welches in
-      <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink> beschrieben wird. Die Namen und
-      korrespondierenden Prioritätennummern sind auch mit einem anderen PHP Logging Systeme kompatibel,
-      <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>, welches möglicherweise mit
-      Interoperabilität zwischen Ihm und <classname>Zend_Log</classname> wirbt.
+      Die Prioritäten sind nicht beliebig. Die kommen vom BSD <code>syslog</code> Protokoll, welches
+      in <ulink url="http://tools.ietf.org/html/rfc3164">RFC-3164</ulink> beschrieben wird. Die
+      Namen und korrespondierenden Prioritätennummern sind auch mit einem anderen PHP Logging
+      Systeme kompatibel, <ulink url="http://pear.php.net/package/log">PEAR Log</ulink>, welches
+      möglicherweise mit Interoperabilität zwischen Ihm und <classname>Zend_Log</classname> wirbt.
     </para>
 
     <para>
-      Nummern für Prioritäten sinken in der Reihenfolge ihrer Wichtigkeit. <code>EMERG</code> (0) ist die
-      wichtigste Priorität. <code>DEBUG</code> (7) ist die unwichtigste Priorität der eingebauten Prioritäten.
-      Man kann Prioritäten von niedriger Wichtigkeit als <code>DEBUG</code> definieren. Wenn die Priorität für die
-      Lognachricht ausgewählt wird, sollte auf die Hirarchie der Prioritäten geachtet werden und selbige sorgfältig
-      ausgewählt werden.
+      Nummern für Prioritäten sinken in der Reihenfolge ihrer Wichtigkeit. <code>EMERG</code> (0)
+      ist die wichtigste Priorität. <code>DEBUG</code> (7) ist die unwichtigste Priorität der
+      eingebauten Prioritäten. Man kann Prioritäten von niedriger Wichtigkeit als <code>DEBUG</code>
+      definieren. Wenn die Priorität für die Lognachricht ausgewählt wird, sollte auf die Hirarchie
+      der Prioritäten geachtet werden und selbige sorgfältig ausgewählt werden.
     </para>
   </sect2>
 
@@ -158,8 +166,8 @@ DEBUG   = 7;  // Debug: Debug Nachrichten
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
-      Das obige Codeschnipsel erstellt eine neue Priorität, <code>FOO</code>, dessen Wert <code>8</code> ist.
-      Die neue Priorität steht für die Protokollierung zur Verfügung:
+      Das obige Codeschnipsel erstellt eine neue Priorität, <code>FOO</code>, dessen Wert
+      <code>8</code> ist. Die neue Priorität steht für die Protokollierung zur Verfügung:
 
       <programlisting role="php"><![CDATA[
 $logger->log('Foo Nachricht', 8);
@@ -174,38 +182,41 @@ $logger->foo('Foo Nachricht');
     <title>Log Events verstehen</title>
 
     <para>
-      Wenn die <code>log()</code> Methode oder eine Ihrer Abkürzungen aufgerufen wird, wird ein Log Event erstellt.
-      Das ist einfach ein assoziatives Array mit Daten welche das Event beschreiben das an die Writer übergeben wird.
-      Die folgenden Schlüssel werden immer in diesem Array erstellt: <code>timestamp</code>, <code>message</code>,
-      <code>priority</code>, und <code>priorityName</code>.
+      Wenn die <code>log()</code> Methode oder eine Ihrer Abkürzungen aufgerufen wird, wird ein Log
+      Event erstellt. Das ist einfach ein assoziatives Array mit Daten welche das Event beschreiben
+      das an die Writer übergeben wird. Die folgenden Schlüssel werden immer in diesem Array
+      erstellt: <code>timestamp</code>, <code>message</code>, <code>priority</code>, und
+      <code>priorityName</code>.
     </para>
 
     <para>
-      Die Erstellung des <code>event</code> Arrays ist komplett transparent. Trotzdem wird das Wissen über das
-      <code>event</code> Array für das Hinzufügen von Elementen benötigt, die in dem obigen Standardset nicht
-      existieren.
+      Die Erstellung des <code>event</code> Arrays ist komplett transparent. Trotzdem wird das
+      Wissen über das <code>event</code> Array für das Hinzufügen von Elementen benötigt, die in dem
+      obigen Standardset nicht existieren.
     </para>
 
     <para>
-      Um ein neues Element für jedes zukünftige Event hinzuzufügen, muß die <code>setEventItem()</code>
-      Methode aufgerufen werden wobei ein Schlüssel und ein Wert übergeben wird:
+      Um ein neues Element für jedes zukünftige Event hinzuzufügen, muß die
+      <code>setEventItem()</code> Methode aufgerufen werden wobei ein Schlüssel und ein Wert
+      übergeben wird:
 
       <programlisting role="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
 ]]></programlisting>
 
-      Das obige Beispiel setzt ein neues Element welches <code>pid</code> heißt und veröffentlicht es mit der
-      PID des aktuellen Prozesses. Wenn einmal ein neues Element gesetzt wurde, wird es automatisch für alle
-      Writer verfügbar, zusammen mit allen anderen Daten der Eventdaten wärend des Protokollierens. Ein
-      Element kann jederzeit überschrieben werden durch nochmaligen Aufruf der <code>setEventItem()</code>
-      Methode.
+      Das obige Beispiel setzt ein neues Element welches <code>pid</code> heißt und veröffentlicht
+      es mit der PID des aktuellen Prozesses. Wenn einmal ein neues Element gesetzt wurde, wird es
+      automatisch für alle Writer verfügbar, zusammen mit allen anderen Daten der Eventdaten wärend
+      des Protokollierens. Ein Element kann jederzeit überschrieben werden durch nochmaligen Aufruf
+      der <code>setEventItem()</code> Methode.
     </para>
 
     <para>
-      Das Setzen eines neuen Eventelements mit <code>setEventItem()</code> führt dazu das das neue Element
-      an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht das die Writer das Element aktuell
-      auch aufzeichnet. Und zwar deswegen weil die Writer nicht wissen was zu tun ist solange das Formatter Objekt
-      nicht über das neue Element informiert wurde. Siehe in die Sektion über Formatter um mehr darüber zu lernen.
+      Das Setzen eines neuen Eventelements mit <code>setEventItem()</code> führt dazu das das neue
+      Element an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht das die Writer
+      das Element aktuell auch aufzeichnet. Und zwar deswegen weil die Writer nicht wissen was zu
+      tun ist solange das Formatter Objekt nicht über das neue Element informiert wurde. Siehe in
+      die Sektion über Formatter um mehr darüber zu lernen.
     </para>
   </sect2>
 </sect1>

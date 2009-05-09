@@ -12,12 +12,12 @@
     <tip>
         <title>Zend_Loader vs. require_once()</title>
         <para>
-            Die <classname>Zend_Loader</classname> Methoden werden am Besten verwendet wenn der Dateiname
-            der Verwendet wird variabel ist. Wenn er zum Beispiel auf einem Parameter
+            Die <classname>Zend_Loader</classname> Methoden werden am Besten verwendet wenn der
+            Dateiname der Verwendet wird variabel ist. Wenn er zum Beispiel auf einem Parameter
             einer Benutzereinfabe oder eines Arguments einer Methode basiert. Wenn
             eine Datei oder eine Klasse geladen werden soll deren Name konstant ist,
-            gibt es keinen Vorteil durch die Verwendung von <classname>Zend_Loader</classname> gegenüber
-            traditionellen PHP Funktionen wie
+            gibt es keinen Vorteil durch die Verwendung von <classname>Zend_Loader</classname>
+            gegenüber traditionellen PHP Funktionen wie
             <ulink url="http://php.net/require_once"><code>require_once()</code></ulink>.
         </para>
     </tip>
@@ -109,7 +109,8 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             Wenn die Datei nicht gefunden wird, oder die Klasse nach dem Laden nicht
-            existiert, wirft <classname>Zend_Loader::loadClass()</classname> eine <classname>Zend_Exception</classname>.
+            existiert, wirft <classname>Zend_Loader::loadClass()</classname> eine
+            <classname>Zend_Exception</classname>.
         </para>
 
         <para>
@@ -155,9 +156,9 @@ if (Zend_Loader::isReadable($filename)) {
         <title>Verwenden von Autoloaders</title>
 
         <para>
-            Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im PHP SPL Autoloader
-            registriert werden kann. <classname>Zend_Loader::autoload()</classname> ist die
-            Callback Methode. Als Vereinfachung bietet <classname>Zend_Loader</classname> die
+            Die <classname>Zend_Loader</classname> Klasse enthält eine Methode die im PHP SPL
+            Autoloader registriert werden kann. <classname>Zend_Loader::autoload()</classname> ist
+            die Callback Methode. Als Vereinfachung bietet <classname>Zend_Loader</classname> die
             <code>registerAutoload()</code> Funktion welche die
             <code>autoload()</code> Methode registriert. Wenn die
             <code>spl_autoload</code> Erweiterung in der PHP Umgebung nicht
@@ -181,8 +182,8 @@ Zend_Loader::registerAutoload();
         </para>
 
         <para>
-            Wenn die <classname>Zend_Loader</classname> Klasse erweitert wird, kann ein optionales Argument
-            für <code>registerAutoload()</code> angegeben werden, um die Klasse zu
+            Wenn die <classname>Zend_Loader</classname> Klasse erweitert wird, kann ein optionales
+            Argument für <code>registerAutoload()</code> angegeben werden, um die Klasse zu
             definieren von welcher die <code>autoload()</code> Methode registriert
             werden soll.
         </para>
@@ -196,9 +197,9 @@ Zend_Loader::registerAutoload();
                 Wegen der Semantik der Referenzen von statischen Funktionen in PHP,
                 muß Code für beide <code>loadClass()</code> und <code>autoload()</code>
                 implementiert werden, und <code>autoload()</code> muß <code>self::loadClass()</code>
-                aufrufen. Wenn die <code>autoload()</code> Methode den Aufruf zu <code>self::loadClass()</code>
-                an die Elternklasse delegiert, ruft Sie die Methode des Namens in der Elternklasse und nicht
-                in der Subklasse auf.
+                aufrufen. Wenn die <code>autoload()</code> Methode den Aufruf zu
+                <code>self::loadClass()</code> an die Elternklasse delegiert, ruft Sie die Methode
+                des Namens in der Elternklasse und nicht in der Subklasse auf.
             </para>
             <programlisting role="php"><![CDATA[
 class My_Loader extends Zend_Loader
@@ -224,10 +225,10 @@ Zend_Loader::registerAutoload('My_Loader');
         </example>
 
         <para>
-            Der Callback für den Autoloader kann entfernt werden. Die <code>registerAutoload()</code> Methode hat
-            ein zweites optionales Argument welches standardmäßig <code>true</code> ist. Wenn dieses Argument
-            <code>false</code> ist, wird die Registrierung des Callback des Autoloaders vom SPL Autoload Stack
-            entfernt.
+            Der Callback für den Autoloader kann entfernt werden. Die
+            <code>registerAutoload()</code> Methode hat ein zweites optionales Argument welches
+            standardmäßig <code>true</code> ist. Wenn dieses Argument <code>false</code> ist, wird
+            die Registrierung des Callback des Autoloaders vom SPL Autoload Stack entfernt.
         </para>
 
     </sect2>

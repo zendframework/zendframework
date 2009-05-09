@@ -157,9 +157,8 @@ $memObject->value = substr($memObject->value, $start, $length);
             <title>Verschiebbarer Memory</title>
 
             <para>
-                Verschiebbare Memory Objekte werden transparent geswappt und
-                geladen von und in das Cache Backend durch <classname>Zend_Memory</classname> wenn das
-                notwendig wird.
+                Verschiebbare Memory Objekte werden transparent geswappt und geladen von und in das
+                Cache Backend durch <classname>Zend_Memory</classname> wenn das notwendig wird.
             </para>
 
             <para>

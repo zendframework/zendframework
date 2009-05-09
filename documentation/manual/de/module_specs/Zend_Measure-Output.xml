@@ -34,7 +34,8 @@
         <title>Automatische Ausgabe</title>
 
         <para>
-            <classname>Zend_Measure</classname> unterstützt die automatische Ausgabe von Zeichenketten.
+            <classname>Zend_Measure</classname> unterstützt die automatische Ausgabe von
+            Zeichenketten.
             <example id="zend.measure.output.auto.example-1">
                 <title>Automatische Ausgabe</title>
                 <programlisting role="php"><![CDATA[
@@ -81,9 +82,9 @@ echo $unit->getValue();
         </para>
 
         <para>
-            Die <code>getValue()</code> Methode akzeptiert einen optionalen Parameter '<code>round</code>'
-            der es erlaubt eine Genauigkeit für die erstellte Ausgabe zu definieren. Die Standardgenauigkeit ist
-            '<code>2</code>'.
+            Die <code>getValue()</code> Methode akzeptiert einen optionalen Parameter
+            '<code>round</code>' der es erlaubt eine Genauigkeit für die erstellte Ausgabe zu
+            definieren. Die Standardgenauigkeit ist '<code>2</code>'.
         </para>
     </sect2>
 
@@ -114,9 +115,10 @@ echo $unit->getType();
         <title>Ausgabe als lokalisierte Zeichenkette</title>
 
         <para>
-            Die Ausgabe einer Zeichenkette in einem Format welches in dem Land des Benutzers üblich ist, ist
-            normalerweise gewünscht Die Maßeinheit "1234567.8" würde im Deutschen zum Beispiel zu
-            "1.234.567,8" werden. Diese Funktionalität wird in einem zukünftigen Release unterstützt.
+            Die Ausgabe einer Zeichenkette in einem Format welches in dem Land des Benutzers üblich
+            ist, ist normalerweise gewünscht Die Maßeinheit "1234567.8" würde im Deutschen zum
+            Beispiel zu "1.234.567,8" werden. Diese Funktionalität wird in einem zukünftigen Release
+            unterstützt.
         </para>
 
     </sect2>

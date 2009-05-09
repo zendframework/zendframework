@@ -237,36 +237,37 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Jede Subabfrage in einem Set kann als <emphasis>required</emphasis>, <emphasis>prohibited</emphasis>,
-            oder <emphasis>optional</emphasis> definiert werden.
+            Jede Subabfrage in einem Set kann als <emphasis>required</emphasis>,
+            <emphasis>prohibited</emphasis>, oder <emphasis>optional</emphasis> definiert werden.
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>required</emphasis> bedeutet das Dokumente die dieser Unterabfrage nicht
-                        entsprechen auch der Gesamtabfrage nicht entsprechen;
+                        <emphasis>required</emphasis> bedeutet das Dokumente die dieser Unterabfrage
+                        nicht entsprechen auch der Gesamtabfrage nicht entsprechen;
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>prohibited</emphasis> bedeutet das Dokumente die dieser Unterabfrage entsprechen
-                        auch der Gesamtabfrage nicht entsprechen;
+                        <emphasis>prohibited</emphasis> bedeutet das Dokumente die dieser
+                        Unterabfrage entsprechen auch der Gesamtabfrage nicht entsprechen;
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>optional</emphasis>, in dem Fall das entsprechende Dokumente in der
-                        Unterabfrage weder verboten noch benötigt werden. Ein Dokument muß trotzdem zumindest in 1
-                        Unterabfrage entsprechen damit es der in der Gesamtabfrage entspricht.
+                        <emphasis>optional</emphasis>, in dem Fall das entsprechende Dokumente in
+                        der Unterabfrage weder verboten noch benötigt werden. Ein Dokument muß
+                        trotzdem zumindest in 1 Unterabfrage entsprechen damit es der in der
+                        Gesamtabfrage entspricht.
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
         <para>
-            Wenn optionale Unterabfragen einer Abfrage mit benötigen Unterabfragen hinzugefügt werden,
-            werden beide Abfragen das gleiche Ergebnisset haben, aber die optionale Unterabfrage kann die
-            Wertung der passenden Dokumente beeinflussen.
+            Wenn optionale Unterabfragen einer Abfrage mit benötigen Unterabfragen hinzugefügt
+            werden, werden beide Abfragen das gleiche Ergebnisset haben, aber die optionale
+            Unterabfrage kann die Wertung der passenden Dokumente beeinflussen.
         </para>
 
         <para>
@@ -293,8 +294,8 @@ $hits  = $index->find($query);
             </listitem>
             <listitem>
                 <para>
-                    'field:' Der Prefix wird verwendet um ein Feld des Dokuments für eine Suche zu markieren.
-                    Wenn es nicht angegeben wird, werden alle Felder durchsucht.
+                    'field:' Der Prefix wird verwendet um ein Feld des Dokuments für eine Suche zu
+                    markieren. Wenn es nicht angegeben wird, werden alle Felder durchsucht.
                 </para>
             </listitem>
         </itemizedlist>
@@ -327,7 +328,8 @@ $hits  = $index->find($query);
 ]]></programlisting>
 
         <para>
-            Es ist auch möglich Listen von Unterabfragen im Konstruktor der Boolschen Abfrage zu definieren:
+            Es ist auch möglich Listen von Unterabfragen im Konstruktor der Boolschen Abfrage zu
+            definieren:
             <programlisting role="php"><![CDATA[
 ...
 $subqueries = array($subquery1, $subquery2, $subquery3);
@@ -344,26 +346,29 @@ $hits  = $index->find($query);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>true</code> wird verwendet um eine benötigte Unterabfrage zu definieren.
+                        <code>true</code> wird verwendet um eine benötigte Unterabfrage zu
+                        definieren.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>false</code> wird verwendet um eine verbotene Unterabfrage zu definieren.
+                        <code>false</code> wird verwendet um eine verbotene Unterabfrage zu
+                        definieren.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> wird verwendet um eine Unterabfrage zu definieren die weder benötigt
-                        noch verboten ist.
+                        <code>null</code> wird verwendet um eine Unterabfrage zu definieren die
+                        weder benötigt noch verboten ist.
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
 
         <para>
-            Jede Abfrage die boolsche Operatoren verwendet kann, kann auch auch umgeschrieben werden damit Sie
-            die Vorzeichen-Schreibweise verwendet und mit Hilfe der API erstellt wird. Zum Beispiel:
+            Jede Abfrage die boolsche Operatoren verwendet kann, kann auch auch umgeschrieben werden
+            damit Sie die Vorzeichen-Schreibweise verwendet und mit Hilfe der API erstellt wird. Zum
+            Beispiel:
             <programlisting role="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
@@ -377,8 +382,8 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
     <sect2 id="zend.search.lucene.queries.wildcard">
         <title>Wildcard Abfragen</title>
         <para>
-            Wildcard Abfragen können dazu verwendet werden um nach Dokumenten zu suchen die Strings enthalten
-            welche den spezifizierten Patterns entsprechen.
+            Wildcard Abfragen können dazu verwendet werden um nach Dokumenten zu suchen die Strings
+            enthalten welche den spezifizierten Patterns entsprechen.
         </para>
 
         <para>
@@ -408,8 +413,8 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Die Ausdrucksfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht alle Felder in jedem
-            Dokument wenn kein Feld spezifiziert wurde:
+            Die Ausdrucksfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht
+            alle Felder in jedem Dokument wenn kein Feld spezifiziert wurde:
             <programlisting role="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
@@ -421,8 +426,8 @@ $hits  = $index->find($query);
     <sect2 id="zend.search.lucene.queries.fuzzy">
         <title>Fuzzy Abfragen</title>
         <para>
-            Fuzzy Abfragen können verwendet werden um nach Dokumenten zu Suchen die Strings enthalten welche
-            Ausdrücken entsprechen die den spezifizierten Ausdrücken ähnlich sind.
+            Fuzzy Abfragen können verwendet werden um nach Dokumenten zu Suchen die Strings
+            enthalten welche Ausdrücken entsprechen die den spezifizierten Ausdrücken ähnlich sind.
         </para>
 
         <para>
@@ -467,8 +472,8 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle Felder in jedem Dokument ob ein
-            Feld nicht spezifiziert ist:
+            Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
+            Felder in jedem Dokument ob ein Feld nicht spezifiziert ist:
             <programlisting role="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
@@ -480,12 +485,13 @@ $hits  = $index->find($query);
     <sect2 id="zend.search.lucene.queries.phrase-query">
         <title>Phrasenabfrage</title>
         <para>
-            Phrasenabfragen können für das Suchen einer Phrase innerhalb von Dokumenten verwendet werden.
+            Phrasenabfragen können für das Suchen einer Phrase innerhalb von Dokumenten verwendet
+            werden.
         </para>
 
         <para>
-            Phrasenabfragen sind sehr flexibel und erlauben dem Benutzer oder Entwickler nach exakten Phrasen
-            zu suchen wie auch nach 'ungenauen' Phrasen.
+            Phrasenabfragen sind sehr flexibel und erlauben dem Benutzer oder Entwickler nach
+            exakten Phrasen zu suchen wie auch nach 'ungenauen' Phrasen.
         </para>
 
         <para>
@@ -526,13 +532,13 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             Eine Phrasenabfrage kann in einem Schritt mit einem Klassenkonstruktor erstellt werden
-            oder Schritt für Schritt mit der <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname>
-            Methode.
+            oder Schritt für Schritt mit der
+            <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode.
         </para>
 
         <para>
-            Der <classname>Zend_Search_Lucene_Search_Query_Phrase</classname> Klassenkonstruktor nimmt drei optionale
-            Argumente entgegen:
+            Der <classname>Zend_Search_Lucene_Search_Query_Phrase</classname> Klassenkonstruktor
+            nimmt drei optionale Argumente entgegen:
         </para>
         <programlisting role="php"><![CDATA[
 Zend_Search_Lucene_Search_Query_Phrase(
@@ -541,19 +547,21 @@ Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            Der <code>$terms</code> Parameter ist ein Array von Strings die ein Set von Phrasen Strings
-            enthalten. Wenn er ausgelassen wird oder null ist, wird eine leere Abfrage erstellt.
+            Der <code>$terms</code> Parameter ist ein Array von Strings die ein Set von Phrasen
+            Strings enthalten. Wenn er ausgelassen wird oder null ist, wird eine leere Abfrage
+            erstellt.
         </para>
 
         <para>
-            Der <code>$offsets</code> Parameter ist von ganzen Zahlen, welche den Offset von Begriffen in
-            einer Phrase enthalten. Wenn er ausgelassen wird oder null ist, werden die Positionen der Begriffe
-            als sequentiell, ohne Zwischenräume, angenommen.
+            Der <code>$offsets</code> Parameter ist von ganzen Zahlen, welche den Offset von
+            Begriffen in einer Phrase enthalten. Wenn er ausgelassen wird oder null ist, werden die
+            Positionen der Begriffe als sequentiell, ohne Zwischenräume, angenommen.
         </para>
 
         <para>
-            Der <code>$field</code> Parameter ist ein String, der das zu durchsuchende Dokumentenfeld angibt.
-            Wenn dies ausgelassen wird oder null entspricht, wird das Standardfeld durchsucht.
+            Der <code>$field</code> Parameter ist ein String, der das zu durchsuchende
+            Dokumentenfeld angibt. Wenn dies ausgelassen wird oder null entspricht, wird das
+            Standardfeld durchsucht.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -571,9 +579,9 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform download',
-            'zend studio download', 'zend core download', 'zend framework download' und so weiter
-            werden gefunden.
+            Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform
+            download', 'zend studio download', 'zend core download', 'zend framework download' und
+            so weiter werden gefunden.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -588,9 +596,9 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
 
 
         <para>
-            Die <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode nimmt zwei
-            Argumente entgeben. Ein <classname>Zend_Search_Lucene_Index_Term</classname> Objekt ist
-            erforderlich und die Position optional:
+            Die <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode
+            nimmt zwei Argumente entgeben. Ein <classname>Zend_Search_Lucene_Index_Term</classname>
+            Objekt ist erforderlich und die Position optional:
         </para>
         <programlisting role="php"><![CDATA[
 Zend_Search_Lucene_Search_Query_Phrase::addTerm(
@@ -624,9 +632,9 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);
 ]]></programlisting>
 
         <para>
-            Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform download',
-            'zend studio download', 'zend core download', 'zend framework download' und so weiter
-            werden gefunden.
+            Es wird nach der Phrase 'zend ????? download' gesucht und die Phrasen 'zend platform
+            download', 'zend studio download', 'zend core download', 'zend framework download' und
+            so weiter werden gefunden.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -640,17 +648,18 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
         </para>
 
         <para>
-            Der Ungenauigkeitsfaktor (slop factor) legt die Anzahl der anderen Wörter fest die zwischen den
-            spezifizierten Phrasenabfragen erlaubt sind. Wenn der Wert 0 ist, ist die entsprechende Abfrage
-            eine exakte Suche nach der Phrase. Für größere Werte funktioniert das ähnlich dem WITHIN (innerhalb)
-            oder NEAR (nahe) Operator.
+            Der Ungenauigkeitsfaktor (slop factor) legt die Anzahl der anderen Wörter fest die
+            zwischen den spezifizierten Phrasenabfragen erlaubt sind. Wenn der Wert 0 ist, ist die
+            entsprechende Abfrage eine exakte Suche nach der Phrase. Für größere Werte funktioniert
+            das ähnlich dem WITHIN (innerhalb) oder NEAR (nahe) Operator.
         </para>
         <para>
-            Der Ungenauigkeitsfaktor ist tatsächlich eine veränderbare Distanz, wobei die Veränderung dem
-            Verschieben von Begriffen in der Phrasenabfrage entspricht. Um zum Beispiel die Reihenfolge von
-            zwei Wörtern zu wechseln, werden zwei Verschiebungen benötigt (die erste Verschiebung plaziert die
-            Wörter übereinander). Um also die Neusortierung der Phrasen zu erlauben, muß der
-            Ungenauigkeitsfaktor mindestens zwei sein.
+            Der Ungenauigkeitsfaktor ist tatsächlich eine veränderbare Distanz, wobei die
+            Veränderung dem Verschieben von Begriffen in der Phrasenabfrage entspricht. Um zum
+            Beispiel die Reihenfolge von zwei Wörtern zu wechseln, werden zwei Verschiebungen
+            benötigt (die erste Verschiebung plaziert die Wörter übereinander). Um also die
+            Neusortierung der Phrasen zu erlauben, muß der Ungenauigkeitsfaktor mindestens zwei
+            sein.
         </para>
         <para>
             Exaktere Treffer werden höher bewertet als ungenauere Treffer, so dass die
@@ -680,8 +689,8 @@ $hits2 = $index->find($query);
     <sect2 id="zend.search.lucene.queries.range">
         <title>Bereichsabfragen</title>
         <para>
-            <link linkend="zend.search.lucene.query-language.range">Bereichsabfragen</link> sind dazu gedacht
-            Terme innerhalb eines spezifizierten Intervalls zu suchen.
+            <link linkend="zend.search.lucene.query-language.range">Bereichsabfragen</link> sind
+            dazu gedacht Terme innerhalb eines spezifizierten Intervalls zu suchen.
         </para>
 
         <para>
@@ -707,8 +716,8 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Begriffsfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht alle Felder wenn das Feld nicht spezifiziert
-            wurde:
+            Begriffsfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
+            Felder wenn das Feld nicht spezifiziert wurde:
             <programlisting role="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('Aida');
 $to   = new Zend_Search_Lucene_Index_Term('Carmen');
@@ -720,8 +729,9 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Jede (aber nicht beide) der Begrenzungsausdrücke kann auf null gesetzt werden. <classname>Zend_Search_Lucene</classname> sucht
-            vom Anfang oder bis zum Ende des Verzeichnisses für die spezifizierten Feld(er) für diesen Fall:
+            Jede (aber nicht beide) der Begrenzungsausdrücke kann auf null gesetzt werden.
+            <classname>Zend_Search_Lucene</classname> sucht vom Anfang oder bis zum Ende des
+            Verzeichnisses für die spezifizierten Feld(er) für diesen Fall:
             <programlisting role="php"><![CDATA[
 // Sucht nach ['20020101' TO ...]
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');

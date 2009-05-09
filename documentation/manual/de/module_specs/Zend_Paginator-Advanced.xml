@@ -150,11 +150,11 @@ $paginator->setCacheEnable(false);
         </para>
 
         <para>
-            Wenn ein Cache gesetzt ist, werden Daten automatisch in Ihm gespeichert und von Ihm herausgeholt.
-            Es kann nützlich sein den Cache manuell zu entleeren. Das kann durch den Aufruf von
-            <code>clearPageItemCache($pageNumber)</code> getan werden. Wenn kein Parameter übergeben wird,
-            wird der komplette Cache entleert. Optional kann ein Parameter übergeben werden der die
-            Seitenanzahl repräsentiert die den Cache löschen :
+            Wenn ein Cache gesetzt ist, werden Daten automatisch in Ihm gespeichert und von Ihm
+            herausgeholt. Es kann nützlich sein den Cache manuell zu entleeren. Das kann durch den
+            Aufruf von <code>clearPageItemCache($pageNumber)</code> getan werden. Wenn kein
+            Parameter übergeben wird, wird der komplette Cache entleert. Optional kann ein Parameter
+            übergeben werden der die Seitenanzahl repräsentiert die den Cache löschen :
         </para>
 
         <para>
@@ -175,8 +175,8 @@ $paginator->clearPageItemCache();
         </para>
 
         <para>
-            Das Ändern das Anzahl der Teile pro Seite wird den kompletten Cache leeren, das er ungültig
-            geworden wäre :
+            Das Ändern das Anzahl der Teile pro Seite wird den kompletten Cache leeren, das er
+            ungültig geworden wäre :
         </para>
 
         <para>
@@ -192,8 +192,8 @@ $paginator->setItemCountPerPage(2);
         </para>
 
         <para>
-            Es ist auch möglich zu sehen welche Daten im Cache sind und direkt nach Ihnen zu fragen. Hierfür
-            kann <code>getPageItemCache()</code> verwendet werden:
+            Es ist auch möglich zu sehen welche Daten im Cache sind und direkt nach Ihnen zu fragen.
+            Hierfür kann <code>getPageItemCache()</code> verwendet werden:
         </para>
 
         <para>

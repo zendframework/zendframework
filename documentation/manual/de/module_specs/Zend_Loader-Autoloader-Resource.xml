@@ -64,10 +64,10 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             <para>
                 In <classname>Zend_Loader_Autoloader</classname> wird erwartet das man den endenden
                 Unterstrich ("_") im Namespace angibt wenn der eigene Autoloader verwendet wird
-                um den Namespace zu suchen. <classname>Zend_Loader_Autoloader_Resource</classname> nimmt an
-                das alle Codes die man automatisch laden will ein Unterstrich Trennzeichen zwischen
-                Namespace, Komponente und Klasse verwenden. Als Ergebnis, muß man den endenen
-                Unterstrich nicht verwenden wenn ein Ressource Autoloader registriert wird.
+                um den Namespace zu suchen. <classname>Zend_Loader_Autoloader_Resource</classname>
+                nimmt an das alle Codes die man automatisch laden will ein Unterstrich Trennzeichen
+                zwischen Namespace, Komponente und Klasse verwenden. Als Ergebnis, muß man den
+                endenen Unterstrich nicht verwenden wenn ein Ressource Autoloader registriert wird.
             </para>
         </note>
 
@@ -140,10 +140,11 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
 
         <para>
             Zend Framework wird mit einer konkreten Implementation von
-            <classname>Zend_Loader_Autoloader_Resource</classname> ausgeliefert die Ressourcen Typen enthält
-            welche den notwendigen Standard Verzeichnisstrukturen für Zend Framework MVC
-            Anwendungen entsprechen. Diese Lader, <classname>Zend_Application_Module_Autoloader</classname>,
-            kommt mit den folgenden Mappings:
+            <classname>Zend_Loader_Autoloader_Resource</classname> ausgeliefert die Ressourcen Typen
+            enthält welche den notwendigen Standard Verzeichnisstrukturen für Zend Framework MVC
+            Anwendungen entsprechen. Diese Lader,
+            <classname>Zend_Application_Module_Autoloader</classname>, kommt mit den folgenden
+            Mappings:
         </para>
 
         <programlisting role="text"><![CDATA[

@@ -36,7 +36,8 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
 ]]></programlisting>
 
         <para>
-            <classname>Zend_Memory</classname> verwendet <link linkend="zend.cache.backends"><classname>Zend_Cache Backends</classname></link>
+            <classname>Zend_Memory</classname> verwendet <link
+                linkend="zend.cache.backends"><classname>Zend_Cache Backends</classname></link>
             als Speicheranbieter.
         </para>
 

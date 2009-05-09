@@ -12,13 +12,15 @@
     </para>
 
     <para>
-        <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100" width="310" />
+        <inlinegraphic fileref="figures/zend.wildfire.firebug.console.png" format="PNG" scale="100"
+            width="310" />
     </para>
 
     <para>
-        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname> Komponente gesendet welche
-        HTTP Header verwendet um sicherzustellen das der Seiteninhlat nicht verändert wird. Das Debuggen
-        von AJAX Anfragen die klare JSON und XML Antworten benötigen ist mit diesem Vorgehen möglich.
+        Alle Daten werden über die <classname>Zend_Wildfire_Channel_HttpHeaders</classname>
+        Komponente gesendet welche HTTP Header verwendet um sicherzustellen das der Seiteninhalt
+        nicht verändert wird. Das Debuggen von AJAX Anfragen die klare JSON und XML Antworten
+        benötigen ist mit diesem Vorgehen möglich.
     </para>
 
     <para>
@@ -34,16 +36,16 @@
 
         <listitem>
             <para>
-                Die Firebug Firefox Erweiterung welche unter
-                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+                Die Firebug Firefox Erweiterung welche unter <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
                 heruntergeladen werden kann.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Die FirePHP Filefox Erweiterung welche unter
-                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+                Die FirePHP Filefox Erweiterung welche unter <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
                 heruntergeladen werden kann.
             </para>
         </listitem>
@@ -137,15 +139,22 @@ $writer->setDefaultPriorityStyle('TRACE');
                     </row>
                     <row>
                         <entry><code>ERROR</code></entry>
-                        <entry>Zeigt eine Fehler Lognachricht an die den Fehlerzählen von Firebug erhöht</entry>
+                        <entry>
+                            Zeigt eine Fehler Lognachricht an die den Fehlerzählen von Firebug
+                            erhöht
+                        </entry>
                     </row>
                     <row>
                         <entry><code>TRACE</code></entry>
-                        <entry>Zeigt eine Lognachricht mit einem erweiterbaren Stack Trace an</entry>
+                        <entry>
+                            Zeigt eine Lognachricht mit einem erweiterbaren Stack Trace an
+                        </entry>
                     </row>
                     <row>
                         <entry><code>EXCEPTION</code></entry>
-                        <entry>Zeigt eine lange Fehlernachicht mit erweiterbarem Stack Trace an</entry>
+                        <entry>
+                            Zeigt eine lange Fehlernachicht mit erweiterbarem Stack Trace an
+                        </entry>
                     </row>
                     <row>
                         <entry><code>TABLE</code></entry>
@@ -162,13 +171,14 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>Daten für das Loggen vorbereiten</title>
 
       <para>
-          Wärend jede PHP Variable mit den eingebauten Prioritäten geloggt werden kann, ist eine etwas spezielle
-          Formatierung notwendig wenn einige der spezialisierteren Logstile verwendet werden.
+          Wärend jede PHP Variable mit den eingebauten Prioritäten geloggt werden kann, ist eine
+          etwas spezielle Formatierung notwendig wenn einige der spezialisierteren Logstile
+          verwendet werden.
       </para>
 
       <para>
-          Die <code>LOG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> und <code>TRACE</code>
-          Stile benötigen keine spezielle Formatierung.
+          Die <code>LOG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> und
+          <code>TRACE</code> Stile benötigen keine spezielle Formatierung.
       </para>
     </sect3>
 
@@ -177,9 +187,9 @@ $writer->setDefaultPriorityStyle('TRACE');
       <title>Loggen von Ausnahmen</title>
 
       <para>
-          Um eine <classname>Zend_Exception</classname> zu loggen muß einfach das Exceptionobjekt an den Logger
-          übergeben werden. Es ist egal welche Priorität oder welcher Stil gesetzt wurde, da die Ausnahme
-          automatisch erkannt wird.
+          Um eine <classname>Zend_Exception</classname> zu loggen muß einfach das Exceptionobjekt an
+          den Logger übergeben werden. Es ist egal welche Priorität oder welcher Stil gesetzt wurde,
+          da die Ausnahme automatisch erkannt wird.
       </para>
 
       <programlisting role="php"><![CDATA[
@@ -193,8 +203,8 @@ $logger->err($exception);
       <title>Tabellen loggen</title>
 
       <para>
-          Man kann auch Daten loggen und diese in einem Table Stil formatieren. Spalten werden automatisch
-          erkannt und die erste Zeile der Daten wird automatisch der Header.
+          Man kann auch Daten loggen und diese in einem Table Stil formatieren. Spalten werden
+          automatisch erkannt und die erste Zeile der Daten wird automatisch der Header.
       </para>
 
       <programlisting role="php"><![CDATA[

@@ -7,34 +7,38 @@
     <sect2 id="zend.mime.mime.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Mime</classname> ist eine Hilfsklasse für die Verarbeitung von mehrteiligen MIME
-            Nachrichten. Es wird von <link linkend="zend.mail"><classname>Zend_Mail</classname></link> und
-            <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> verwendet
-            und kann von anderen Anwendungen verwendet werden, die MIME Unterstützung benötigen.
+            <classname>Zend_Mime</classname> ist eine Hilfsklasse für die Verarbeitung von
+            mehrteiligen MIME Nachrichten. Es wird von <link
+                linkend="zend.mail"><classname>Zend_Mail</classname></link> und <link
+                linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
+            verwendet und kann von anderen Anwendungen verwendet werden, die MIME Unterstützung
+            benötigen.
         </para>
     </sect2>
 
     <sect2 id="zend.mime.mime.static">
     <title>Statische Methoden und Konstanten</title>
         <para>
-            <classname>Zend_Mime</classname> stellt einige einfache statische Hilfsmethoden für die MIME
-            Verarbeitung bereit:
+            <classname>Zend_Mime</classname> stellt einige einfache statische Hilfsmethoden für die
+            MIME Verarbeitung bereit:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::isPrintable()</classname>: Gibt TRUE zurück, wenn der String keine
-                        nicht druckbaren Zeichen enthält, ansonsten wird FALSE zurückgegeben.
+                        <classname>Zend_Mime::isPrintable()</classname>: Gibt TRUE zurück, wenn der
+                        String keine nicht druckbaren Zeichen enthält, ansonsten wird FALSE
+                        zurückgegeben.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::encodeBase64()</classname>: Codiert einen String in die base64 Codierung.
+                        <classname>Zend_Mime::encodeBase64()</classname>: Codiert einen String in
+                        die base64 Codierung.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Codiert einen String mit dem
-                        "quoted-printable" Mechanismus.
+                        <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Codiert einen
+                        String mit dem "quoted-printable" Mechanismus.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -45,7 +49,8 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>: 'application/octet-stream'
+                        <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>:
+                        'application/octet-stream'
                     </para>
                 </listitem>
                 <listitem>
@@ -70,7 +75,8 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>: 'quoted-printable'
+                        <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>:
+                        'quoted-printable'
                     </para>
                 </listitem>
                 <listitem>
@@ -111,12 +117,14 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <code>boundaryLine()</code>: Gibt die komplette Zeile der MIME Abgrenzung zurück.
+                        <code>boundaryLine()</code>: Gibt die komplette Zeile der MIME Abgrenzung
+                        zurück.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>mimeEnd()</code>: Gibt die komplette Endzeile der MIME Abgrenzung zurück.
+                        <code>mimeEnd()</code>: Gibt die komplette Endzeile der MIME Abgrenzung
+                        zurück.
                     </para>
                 </listitem>
             </itemizedlist>

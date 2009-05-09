@@ -6,10 +6,11 @@
     <title>Zend_File_Transfer</title>
 
     <para>
-        <classname>Zend_File_Transfer</classname> bietet exzessiven Support für Datei Uploads und Downloads. Es kommt
-        mit eingebauten Prüfungen für Dateien und Funktionslitäten um Dateien mit Filtern zu verändern.
-        Protokoll-Adapter erlauben <classname>Zend_File_Transfer</classname> die selbe API für Transportprotokolle wie
-        HTTP, FTP, WEBDAV und andere zu verwenden.
+        <classname>Zend_File_Transfer</classname> bietet exzessiven Support für Datei Uploads und
+        Downloads. Es kommt mit eingebauten Prüfungen für Dateien und Funktionslitäten um Dateien
+        mit Filtern zu verändern. Protokoll-Adapter erlauben
+        <classname>Zend_File_Transfer</classname> die selbe API für Transportprotokolle wie HTTP,
+        FTP, WEBDAV und andere zu verwenden.
     </para>
 
     <note>
@@ -18,26 +19,28 @@
             Die aktuelle Implementation von <classname>Zend_File_Transfer</classname>
             ist auf HTTP Post Uploads limitiert. Andere Adapter die Downloads und andere Protokolle
             unterstützen werden in zukünftigen Releases hinzugefügt. Aktuell sollte
-            <classname>Zend_File_Transfer_Adapter_Http</classname> direkt verwendet werden. Sobald andere Adapter
-            vorhanden sind, kann ein gemeinsames Interface verwendet werden.
+            <classname>Zend_File_Transfer_Adapter_Http</classname> direkt verwendet werden. Sobald
+            andere Adapter vorhanden sind, kann ein gemeinsames Interface verwendet werden.
         </para>
     </note>
 
     <note>
         <title>Formulare</title>
         <para>
-            Wenn man <classname>Zend_Form</classname> verwendet sollte man die APIs die von <classname>Zend_Form</classname> zur
-            Verfügung gestellt werden, und <classname>Zend_File_Transfer</classname> nicht direkt, verwenden. Der
-            Dateitransfer Support von <classname>Zend_Form</classname> ist in <classname>Zend_File_Transfer</classname>
-            implementiert, weshalb die Informationen in diesem Kapitel für fortgeschrittene Benutzer von
-            <classname>Zend_Form</classname> interessant sind.
+            Wenn man <classname>Zend_Form</classname> verwendet sollte man die APIs die von
+            <classname>Zend_Form</classname> zur Verfügung gestellt werden, und
+            <classname>Zend_File_Transfer</classname> nicht direkt, verwenden. Der Dateitransfer
+            Support von <classname>Zend_Form</classname> ist in
+            <classname>Zend_File_Transfer</classname> implementiert, weshalb die Informationen in
+            diesem Kapitel für fortgeschrittene Benutzer von <classname>Zend_Form</classname>
+            interessant sind.
         </para>
     </note>
 
     <para>
-        Die Verwendung von <classname>Zend_File_Transfer</classname> ist relativ einfach. Es besteht aus zwei Teilen.
-        Dem HTTP Formular, wärend <classname>Zend_File_Transfer</classname> die hochgeladenen Dateien behandelt.
-        Siehe das folgende Beispiel:
+        Die Verwendung von <classname>Zend_File_Transfer</classname> ist relativ einfach. Es besteht
+        aus zwei Teilen. Dem HTTP Formular, wärend <classname>Zend_File_Transfer</classname> die
+        hochgeladenen Dateien behandelt. Siehe das folgende Beispiel:
     </para>
 
     <example id="zend.file.transfer.introduction.example">
@@ -58,14 +61,14 @@
 
         <para>
             Der Bequemlichkeit halber kann
-            <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> verwendet werden
-            statt das HTML manuell zu erstellen.
+            <link linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> verwendet
+            werden statt das HTML manuell zu erstellen.
         </para>
 
         <para>
-            Der nächste Schritt ist die Erstellung des Empfängers des Uploads. In unserem Beispiel ist der
-            Empfänger bei <code>/file/upload</code> zu finden. Als nächstes erstellen wir also den
-            <code>file</code> Controller mit der <code>upload</code> Aktion.
+            Der nächste Schritt ist die Erstellung des Empfängers des Uploads. In unserem Beispiel
+            ist der Empfänger bei <code>/file/upload</code> zu finden. Als nächstes erstellen wir
+            also den <code>file</code> Controller mit der <code>upload</code> Aktion.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -80,10 +83,11 @@ if (!$adapter->receive()) {
 ]]></programlisting>
 
         <para>
-            Dieses Codebeispiel demonstriert die einfachste Verwendung von <classname>Zend_File_Transfer</classname>.
-            Ein lokales Ziel wird mit der <code>setDestination</code> Methode definiert, und anschließend die
-            <code>receive()</code> Methode aufgerufen. Wenn irgendwelche Uploadfehler auftreten werden diese
-            als Ausnahme zurückgegeben.
+            Dieses Codebeispiel demonstriert die einfachste Verwendung von
+            <classname>Zend_File_Transfer</classname>. Ein lokales Ziel wird mit der
+            <code>setDestination</code> Methode definiert, und anschließend die
+            <code>receive()</code> Methode aufgerufen. Wenn irgendwelche Uploadfehler auftreten
+            werden diese als Ausnahme zurückgegeben.
         </para>
 
     </example>
@@ -93,8 +97,8 @@ if (!$adapter->receive()) {
         <para>
             Dieses Beispiel ist nur für die Demonstration der grundsätzlichen API von
             <classname>Zend_File_Transfer</classname>. Man sollte dieses Code Beispiel
-            <emphasis>niemals</emphasis> in einer Produktivumgebung einsetzen da es
-            massive Sicherheitslücken aufweisst. Man sollte immer Prüfungen verwenden um die Sicherheit
+            <emphasis>niemals</emphasis> in einer Produktivumgebung einsetzen da es massive
+            Sicherheitslücken aufweisst. Man sollte immer Prüfungen verwenden um die Sicherheit
             zu erhöhen.
         </para>
     </note>
@@ -104,10 +108,10 @@ if (!$adapter->receive()) {
         <title>Von Zend_File_Transfer unterstützte Adapter</title>
 
         <para>
-            <classname>Zend_File_Transfer</classname> wurde designt um verschiedenste Adapter und auch Richtungen zu
-            unterstützen. Mit <classname>Zend_File_Transfer</classname> kann man Dateien Hochladen, Herunterladen und
-            sogar Weiterleiten (Hochladen mit einem Adapter und Herunterladen mit einem anderen Adapter zur
-            gleichen Zeit).
+            <classname>Zend_File_Transfer</classname> wurde designt um verschiedenste Adapter und
+            auch Richtungen zu unterstützen. Mit <classname>Zend_File_Transfer</classname> kann man
+            Dateien Hochladen, Herunterladen und sogar Weiterleiten (Hochladen mit einem Adapter und
+            Herunterladen mit einem anderen Adapter zur gleichen Zeit).
         </para>
     </sect2>
 
@@ -116,10 +120,11 @@ if (!$adapter->receive()) {
         <title>Optionen für Zend_File_Transfer</title>
 
         <para>
-            <classname>Zend_File_Transfer</classname> und seine Adapter unterstützen verschiedene Optionen. Alle Optionen
-            können gesetzt werden indem Sie entweder dem Constructor übergeben werden, oder durch Aufruf der
-            <code>setOptions($options)</code>. <code>getOptions()</code> gibt die Optionen zurück die aktuell
-            gesetzt sind. Nachfolgend ist eine Liste aller unterstützten Optionen:
+            <classname>Zend_File_Transfer</classname> und seine Adapter unterstützen verschiedene
+            Optionen. Alle Optionen können gesetzt werden indem Sie entweder dem Constructor
+            übergeben werden, oder durch Aufruf der <code>setOptions($options)</code>.
+            <code>getOptions()</code> gibt die Optionen zurück die aktuell gesetzt sind. Nachfolgend
+            ist eine Liste aller unterstützten Optionen:
         </para>
 
         <itemizedlist>
@@ -127,7 +132,8 @@ if (!$adapter->receive()) {
                 <para>
                     <emphasis>ignoreNoFile</emphasis>: Wenn diese Option auf true gesetzt ist,
                     ignorieren alle Prüfer Dateien die nicht vom Formular hochgeladen wurde. Der
-                    Standardwert ist false, was einen Fehler verursacht wenn die Datei nicht spezifiziert wurde.
+                    Standardwert ist false, was einen Fehler verursacht wenn die Datei nicht
+                    spezifiziert wurde.
                 </para>
             </listitem>
         </itemizedlist>
@@ -138,9 +144,9 @@ if (!$adapter->receive()) {
         <title>Dateien prüfen</title>
 
         <para>
-            <classname>Zend_File_Transfer</classname> hat verschiedene Methoden die auf verschiedenste Stati von
-            spezifizierten Dateien prüfen. Diese sind nützlich wenn man Dateien bearbeiten will nachdem
-            Sie empfangen wurden. Diese Methoden beinhalten:
+            <classname>Zend_File_Transfer</classname> hat verschiedene Methoden die auf
+            verschiedenste Stati von spezifizierten Dateien prüfen. Diese sind nützlich wenn man
+            Dateien bearbeiten will nachdem Sie empfangen wurden. Diese Methoden beinhalten:
         </para>
 
         <itemizedlist>
@@ -148,26 +154,27 @@ if (!$adapter->receive()) {
                 <para>
                     <emphasis>isValid($files = null)</emphasis>: Diese Methode prüft ob die
                     angegebene Datei gültig ist, basierend auf den Prüfungen welche dieser Datei
-                    angehängt sind. Wenn keine Dateien spezifiziert wurden, werden alle Dateien geprüft.
-                    Man kann <code>isValid()</code> aufrufen bevor <code>receive()</code> aufgerufen wird;
-                    in diesem Fall ruft <code>receive()</code> intern <code>isValid()</code> nicht mehr auf.
+                    angehängt sind. Wenn keine Dateien spezifiziert wurden, werden alle Dateien
+                    geprüft. Man kann <code>isValid()</code> aufrufen bevor <code>receive()</code>
+                    aufgerufen wird; in diesem Fall ruft <code>receive()</code> intern
+                    <code>isValid()</code> nicht mehr auf.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>isUploaded($files = null)</emphasis>: Diese Methode prüft ob die
-                    spezifizierte Datei vom Benutzer hochgeladen wurde. Das ist nützlich wenn man eine oder
-                    mehrere Dateien definiert hat. Wenn keine Dateien spezifiziert wurden, werden alle
-                    Dateien geprüft.
+                    spezifizierte Datei vom Benutzer hochgeladen wurde. Das ist nützlich wenn man
+                    eine oder mehrere Dateien definiert hat. Wenn keine Dateien spezifiziert wurden,
+                    werden alle Dateien geprüft.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>isReceived($files = null)</emphasis>: Diese Methode prüft ob die
-                    spezifizierte Datei bereits empfangen wurde. Wenn keine Dateien angegeben wurden, werden
-                    alle Dateien geprüft.
+                    spezifizierte Datei bereits empfangen wurde. Wenn keine Dateien angegeben
+                    wurden, werden alle Dateien geprüft.
                 </para>
             </listitem>
         </itemizedlist>
@@ -206,8 +213,8 @@ $upload->receive();
         <title>Zusätzliche Dateiinformationen</title>
 
         <para>
-            <classname>Zend_File_Transfer</classname> kann zusätzliche Informationen über Dateien zurückgeben.
-            Die folgenden Methoden sind vorhanden:
+            <classname>Zend_File_Transfer</classname> kann zusätzliche Informationen über Dateien
+            zurückgeben. Die folgenden Methoden sind vorhanden:
         </para>
 
         <itemizedlist>
@@ -248,16 +255,16 @@ $upload->receive();
         </itemizedlist>
 
         <para>
-            <code>getFileName()</code> akzeptiert den Namen des Elements als ersten Parameter. Wenn kein Name
-            angegeben wird, werden alle bekannten Dateinamen in einem Array zurückgegeben. Wenn die Datei
-            eine MultiDatei ist, wird auch ein Array zurückgegeben. Wenn nur eine einzelne Datei vorhanden ist
-            wird nur ein String zurückgegeben.
+            <code>getFileName()</code> akzeptiert den Namen des Elements als ersten Parameter. Wenn
+            kein Name angegeben wird, werden alle bekannten Dateinamen in einem Array zurückgegeben.
+            Wenn die Datei eine MultiDatei ist, wird auch ein Array zurückgegeben. Wenn nur eine
+            einzelne Datei vorhanden ist wird nur ein String zurückgegeben.
         </para>
 
         <para>
-            Standardmäßig werden Dateinamen mit dem kompletten Pfad zurückgegeben. Wenn man nur den Dateinamen
-            ohne Pfad benötigt, kann der zweite Parameter <code>$path</code> gesetzt werden, welcher den
-            Dateinamen ausschneidet wenn er auf false gesetzt wird.
+            Standardmäßig werden Dateinamen mit dem kompletten Pfad zurückgegeben. Wenn man nur den
+            Dateinamen ohne Pfad benötigt, kann der zweite Parameter <code>$path</code> gesetzt
+            werden, welcher den Dateinamen ausschneidet wenn er auf false gesetzt wird.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example1">
@@ -278,17 +285,17 @@ $names = $upload->getFileName('foo');
 
         <note>
             <para>
-                Es ist zu beachten das sich der Dateinamen ändern kann nachdem die Datei empfangen wurde
-                (receive) weil alle Filter angewendet werden, sobald die Datei empfangen wurde.
-                Deswegen sollte man <code>getFileName()</code> immer ausführen nachdem die Dateien
-                empfangen wurden.
+                Es ist zu beachten das sich der Dateinamen ändern kann nachdem die Datei empfangen
+                wurde (receive) weil alle Filter angewendet werden, sobald die Datei empfangen
+                wurde. Deswegen sollte man <code>getFileName()</code> immer ausführen nachdem die
+                Dateien empfangen wurden.
             </para>
         </note>
 
         <para>
-            <code>getFileSize()</code> gibt standardmäßig die echte Dateigröße in SI Schreibweise zurück
-            was bedeutet das man <code>2kB</code> statt <code>2048</code> erhält. Wenn man die reine
-            Größe benötigt muß man die <code>useByteString</code> Option auf false setzen.
+            <code>getFileSize()</code> gibt standardmäßig die echte Dateigröße in SI Schreibweise
+            zurück was bedeutet das man <code>2kB</code> statt <code>2048</code> erhält. Wenn man
+            die reine Größe benötigt muß man die <code>useByteString</code> Option auf false setzen.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -310,10 +317,11 @@ $size = $upload->getFileSize();
         </example>
 
         <para>
-            <code>getHash()</code> akzeptiert den Namen eines Hash Algorithmus als ersten Parameter. Für eine
-            Liste bekannter Algorithmen kann in
-            <ulink url="http://php.net/hash_algos">PHP's hash_algos Methode</ulink> gesehen werden. Wenn kein
-            Algorithmus spezifiziert wird, wird <code>crc32</code> als Standardalgorithmus verwendet.
+            <code>getHash()</code> akzeptiert den Namen eines Hash Algorithmus als ersten Parameter.
+            Für eine Liste bekannter Algorithmen kann in
+            <ulink url="http://php.net/hash_algos">PHP's hash_algos Methode</ulink> gesehen werden.
+            Wenn kein Algorithmus spezifiziert wird, wird <code>crc32</code> als Standardalgorithmus
+            verwendet.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example2">
@@ -335,14 +343,14 @@ $names = $upload->getHash('crc32', 'foo');
 
         <note>
             <para>
-                Es ist zu beachten das der zurückgegebene Wert ein Array ist, wenn die Datei oder der
-                Formularname mehr als eine Datei enthält.
+                Es ist zu beachten das der zurückgegebene Wert ein Array ist, wenn die Datei oder
+                der Formularname mehr als eine Datei enthält.
             </para>
         </note>
 
         <para>
-            <code>getMimeType()</code> gibt den Mimetyp einer Datei zurück. Wenn mehr als eine Datei hochgeladen
-            wurde wird ein Array zurückgegeben, andernfalls ein String.
+            <code>getMimeType()</code> gibt den Mimetyp einer Datei zurück. Wenn mehr als eine Datei
+            hochgeladen wurde wird ein Array zurückgegeben, andernfalls ein String.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.getmimetype">
@@ -362,10 +370,10 @@ $names = $upload->getMimeType('foo');
 
         <note>
             <para>
-                Beachte das diese Methode die fileinfo Erweiterung verwendet wenn Sie vorhanden ist. Wenn diese
-                Erweiterung nicht gefunden werden kann wird die mimemagic Erweiterung verwendet. Wenn keine
-                Erweiterung gefunden wird, dann wird der Mimetyp verwendet der vom Dateiserver wärend des
-                Hochladens der Datei angegeben wurde.
+                Beachte das diese Methode die fileinfo Erweiterung verwendet wenn Sie vorhanden ist.
+                Wenn diese Erweiterung nicht gefunden werden kann wird die mimemagic Erweiterung
+                verwendet. Wenn keine Erweiterung gefunden wird, dann wird der Mimetyp verwendet der
+                vom Dateiserver wärend des Hochladens der Datei angegeben wurde.
             </para>
         </note>
     </sect2>
@@ -375,29 +383,31 @@ $names = $upload->getMimeType('foo');
         <title>Fortschritt für Datei Uploads</title>
 
         <para>
-            <classname>Zend_File_Transfer</classname> kann den aktuellen Status eines gerade stattfindenden Datei Uploads
-            erheben. Um dieses Feature zu verwenden muß man entweder die <code>APC</code> Erweiterung
-            verwenden, die mit den meisten standardmäßigen PHP Installationen vorhanden ist, oder die
-            <code>uploadprogress</code> Erweiterung. Beide Erweiterungen werden erkannt und automatisch
-            verwendet. Um den Fortschritt zu erhalten muß man einige Voraussetzungen erfüllen.
+            <classname>Zend_File_Transfer</classname> kann den aktuellen Status eines gerade
+            stattfindenden Datei Uploads erheben. Um dieses Feature zu verwenden muß man entweder
+            die <code>APC</code> Erweiterung verwenden, die mit den meisten standardmäßigen PHP
+            Installationen vorhanden ist, oder die <code>uploadprogress</code> Erweiterung. Beide
+            Erweiterungen werden erkannt und automatisch verwendet. Um den Fortschritt zu erhalten
+            muß man einige Voraussetzungen erfüllen.
         </para>
 
         <para>
-            Erstens, muß man entweder <code>APC</code> oder <code>uploadprogress</code> aktiviert haben.
-            Es ist zu beachten das dieses Feature von <code>APC</code> in der eigenen php.ini ausgeschaltet
-            werden kann.
+            Erstens, muß man entweder <code>APC</code> oder <code>uploadprogress</code> aktiviert
+            haben. Es ist zu beachten das dieses Feature von <code>APC</code> in der eigenen php.ini
+            ausgeschaltet werden kann.
         </para>
 
         <para>
-            Zweitens, muß man die richtigen unsichtbaren Felder im Formular hinzugefügt haben das die Dateien
-            sendet. Wenn man <classname>Zend_Form_Element_File</classname> verwendet werden diese unsichtbaren Felder
-            automatisch von <classname>Zend_Form</classname> hinzugefügt.
+            Zweitens, muß man die richtigen unsichtbaren Felder im Formular hinzugefügt haben das
+            die Dateien sendet. Wenn man <classname>Zend_Form_Element_File</classname> verwendet
+            werden diese unsichtbaren Felder automatisch von <classname>Zend_Form</classname>
+            hinzugefügt.
         </para>
 
         <para>
-            Wenn die oberen zwei Punkte vorhanden sind dann ist man in der Lage den aktuellen Fortschritt des
-            Datei uploads zu erhalten indem man die <code>getProgress</code> Methode verwendet. Aktuell gibt
-            es 2 offizielle Wege um das hand zu haben.
+            Wenn die oberen zwei Punkte vorhanden sind dann ist man in der Lage den aktuellen
+            Fortschritt des Datei uploads zu erhalten indem man die <code>getProgress</code> Methode
+            verwendet. Aktuell gibt es 2 offizielle Wege um das hand zu haben.
         </para>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">
@@ -405,20 +415,25 @@ $names = $upload->getMimeType('foo');
             <title>Verwenden eines Progressbar Adapters</title>
 
             <para>
-                Man kann einen bequemen <emphasis>Zend_ProgressBar</emphasis> verwenden um den aktuellen
-                Fortschritt zu erhalten und kann Ihn dann auf einfachem Wege dem Benutzer zeigen.
+                Man kann einen bequemen <emphasis>Zend_ProgressBar</emphasis> verwenden um den
+                aktuellen Fortschritt zu erhalten und kann Ihn dann auf einfachem Wege dem Benutzer
+                zeigen.
             </para>
 
             <para>
-                Um das zu ermöglichen, muß man den gewünschten <emphasis>Zend_ProgressBar_Adapter</emphasis>
-                bei <code>getProgress()</code> hinzufügen wenn es das erste Mal aufgerufen wird. Für Details
-                über den zu verwendenden Adapter, bitte im Kapitel
-                <link linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link> nachsehen.
+                Um das zu ermöglichen, muß man den gewünschten
+                <emphasis>Zend_ProgressBar_Adapter</emphasis> bei <code>getProgress()</code>
+                hinzufügen wenn es das erste Mal aufgerufen wird. Für Details über den zu
+                verwendenden Adapter, bitte im Kapitel <link
+                    linkend="zend.progressbar.adapters">Zend_ProgressBar Standard Adapters</link>
+                nachsehen.
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
 
-                <title>Verwenden eines Progressbar Adapters um den aktuellen Status zu erhalten</title>
+                <title>
+                    Verwenden eines Progressbar Adapters um den aktuellen Status zu erhalten
+                </title>
 
                 <programlisting role="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
@@ -433,7 +448,8 @@ while (!$upload['done']) {
             </example>
 
             <para>
-                Die komplette Handhabung wird von <code>getProgress()</code> im Hintergrund durchgeführt.
+                Die komplette Handhabung wird von <code>getProgress()</code> im Hintergrund
+                durchgeführt.
             </para>
 
         </sect3>
@@ -443,22 +459,23 @@ while (!$upload['done']) {
             <title>getProgress() händisch verwenden</title>
 
             <para>
-                Man kann mit <code>getProgress()</code> auch händisch arbeiten, also ohne ie Verwendung von
-                <classname>Zend_ProgressBar</classname>.
+                Man kann mit <code>getProgress()</code> auch händisch arbeiten, also ohne die
+                Verwendung von <classname>Zend_ProgressBar</classname>.
             </para>
 
             <para>
-                <code>getProgress()</code> muß ohne Einstellungen aufgerufen werden. Es gibt anschließend ein
-                Array mit verschiedenen Schlüssel zurück. Sie unterscheiden sich, abhängig von der verwendeten
-                PHP Extension. Aber die folgenden Schlüssel werden unabhängig von der Extension zurück gegeben:
+                <code>getProgress()</code> muß ohne Einstellungen aufgerufen werden. Es gibt
+                anschließend ein Array mit verschiedenen Schlüssel zurück. Sie unterscheiden sich,
+                abhängig von der verwendeten PHP Extension. Aber die folgenden Schlüssel werden
+                unabhängig von der Extension zurück gegeben:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
                         <emphasis>id</emphasis>: Die ID dieses Uploads. Die ID identifiziert den
-                        Upload in der Extension. Sie wird automatisch geschrieben. Man sollte Sie nie ändern
-                        oder den Wert selbst setzen.
+                        Upload in der Extension. Sie wird automatisch geschrieben. Man sollte Sie
+                        nie ändern oder den Wert selbst setzen.
                     </para>
                 </listitem>
 
@@ -494,33 +511,34 @@ while (!$upload['done']) {
                     <para>
                         <emphasis>message</emphasis>: Die aktuelle Meldung. Entweder der
                         Fortschritt als Text in der Form <emphasis>10kB / 200kB</emphasis>, oder
-                        eine hilfreiche Nachricht im Fall eines Problems. Probleme könnten sein, das kein
-                        Upload durchgeführt wird, das ein Fehler wärend des Empfangens der Daten, für den
-                        Fortschritt, aufgetreten ist, oder das der Upload abgebrochen wurde.
+                        eine hilfreiche Nachricht im Fall eines Problems. Probleme könnten sein,
+                        das kein Upload durchgeführt wird, das ein Fehler wärend des Empfangens der
+                        Daten, für den Fortschritt, aufgetreten ist, oder das der Upload abgebrochen
+                        wurde.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>progress</emphasis>: Dieser optionale Schlüssel nimmt eine
-                        Instanz von Zend_ProgressBar_Adapter oder Zend_ProgressBar, und erlaubt es, den aktuellen
-                        Status des Uploads, in einer Progressbar zu erhalten
+                        Instanz von Zend_ProgressBar_Adapter oder Zend_ProgressBar, und erlaubt es,
+                        den aktuellen Status des Uploads, in einer Progressbar zu erhalten
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>session</emphasis>: Dieser optionale Schlüssel nimmt den Namen
-                        eines Session Namespaces entgegen der in Zend_ProgressBar verwendet wird. Wenn dieser
-                        Schlüssel nicht angegeben wird, ist er standardmäßig
+                        eines Session Namespaces entgegen der in Zend_ProgressBar verwendet wird.
+                        Wenn dieser Schlüssel nicht angegeben wird, ist er standardmäßig
                         <classname>Zend_File_Transfer_Adapter_Http_ProgressBar</classname>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Alle anderen zurückgegebenen Schlüssel werden direkt von den Extensions übernommen und werden
-                nicht geprüft.
+                Alle anderen zurückgegebenen Schlüssel werden direkt von den Extensions übernommen
+                und werden nicht geprüft.
             </para>
 
             <para>

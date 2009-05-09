@@ -6,19 +6,20 @@
     <sect2 id="zend.service.simpy.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Simpy</classname> ist ein schlanker Wrapper für das freie REST API des
-            Simpy Lesezeichen-Services.
+            <classname>Zend_Service_Simpy</classname> ist ein schlanker Wrapper für das freie REST
+            API des Simpy Lesezeichen-Services.
         </para>
         <para>
-            Um <classname>Zend_Service_Simpy</classname> zu nutzen, solltest du bereits ein Simpy-Konto besitzen.
-            Falls dies nicht der Fall ist, kannst du dies auf der
-            <ulink url="http://simpy.com">Simpy Webseite</ulink> tun. Für weitere Informationen über das
-            Simpy REST API, kannst du in der
-            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST API Dokumentation</ulink> nachlesen.
+            Um <classname>Zend_Service_Simpy</classname> zu nutzen, solltest du bereits ein
+            Simpy-Konto besitzen. Falls dies nicht der Fall ist, kannst du dies auf der
+            <ulink url="http://simpy.com">Simpy Webseite</ulink> tun. Für weitere Informationen über
+            das Simpy REST API, kannst du in der
+            <ulink url="http://www.simpy.com/doc/api/rest">Simpy REST API Dokumentation</ulink>
+            nachlesen.
         </para>
         <para>
-            Das Simpy REST API erlaubt es dem Entwickler, mit verschiedenen Aspekten des Services, welche die
-            Simpy Webseite bietet, zu interagieren. Diese Sektionen zeigen dir, wie man
+            Das Simpy REST API erlaubt es dem Entwickler, mit verschiedenen Aspekten des Services,
+            welche die Simpy Webseite bietet, zu interagieren. Diese Sektionen zeigen dir, wie man
             <classname>Zend_Service_Simpy</classname> in jedem dieser Bereiche nutzen kann.
             <itemizedlist>
                 <listitem>

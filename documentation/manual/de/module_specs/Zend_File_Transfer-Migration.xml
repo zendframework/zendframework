@@ -6,10 +6,10 @@
     <title>Migration von vorhergehenden Versionen</title>
 
     <para>
-        Die API von <classname>Zend_File_Transfer</classname> wurde von Zeit zu Zeit verändert. Wenn man bereits
-        angefangen hat <classname>Zend_File_Transfer</classname> und dessen Subkomponenten in vorhergehenden Versionen
-        zu verwenden sollte man den anbei beschriebenen Richtlinien folgen um eigene Skripts auf die neue
-        API zu migrieren.
+        Die API von <classname>Zend_File_Transfer</classname> wurde von Zeit zu Zeit verändert. Wenn
+        man bereits angefangen hat <classname>Zend_File_Transfer</classname> und dessen
+        Subkomponenten in vorhergehenden Versionen zu verwenden sollte man den anbei beschriebenen
+        Richtlinien folgen um eigene Skripts auf die neue API zu migrieren.
     </para>
 
     <sect2 id="zend.file.transfer.migration.fromonesixtooneseven">
@@ -18,20 +18,22 @@
             <title>Änderungen bei der Verwendung von Filtern und Prüfungen</title>
 
             <para>
-                Wie von Benutzern erwähnt, arbeiteten die Prüfungen von <classname>Zend_File_Transfer</classname>
-                nicht in Verbindung mit <classname>Zend_Config</classname> zusammen, durch den Fakt das Sie keine
-                benannten Arrays verwendet haben.
+                Wie von Benutzern erwähnt, arbeiteten die Prüfungen von
+                <classname>Zend_File_Transfer</classname> nicht in Verbindung mit
+                <classname>Zend_Config</classname> zusammen, durch den Fakt das Sie keine benannten
+                Arrays verwendet haben.
             </para>
 
             <para>
-                Deswegen wurden alle Filter und Prüfungen für <classname>Zend_File_Transfer</classname> überarbeitet.
-                Wärend die alten Signaturen weiterhin funktionieren, wurden sie als veraltet markiert, und
-                werfen eine PHP Notiz mit der Aufforderung das zu beheben.
+                Deswegen wurden alle Filter und Prüfungen für
+                <classname>Zend_File_Transfer</classname> überarbeitet. Wärend die alten Signaturen
+                weiterhin funktionieren, wurden sie als veraltet markiert, und werfen eine PHP Notiz
+                mit der Aufforderung das zu beheben.
             </para>
 
             <para>
-                Die folgende Liste zeigt die Änderungen und was für die richtige Verwendung der Parameter
-                getan werden muß.
+                Die folgende Liste zeigt die Änderungen und was für die richtige Verwendung der
+                Parameter getan werden muß.
             </para>
 
             <sect4 id="zend.file.transfer.migration.fromonesixtooneseven.validators.rename">
@@ -39,11 +41,13 @@
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Filter_File_Rename($oldfile, $newfile, $overwrite)</classname>
+                        Alte API der Methode: <classname>Zend_Filter_File_Rename($oldfile, $newfile,
+                        $overwrite)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Filter_File_Rename($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Filter_File_Rename($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>source</emphasis> identisch mit $oldfile,
                         <emphasis>target</emphasis> identisch mit $newfile,
@@ -75,11 +79,13 @@ $upload->addFilter('Rename',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_Count($min, $max)</classname>
+                        Alte API der Methode: <classname>Zend_Validate_File_Count($min,
+                        $max)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_Count($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_Count($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
                         <emphasis>max</emphasis> identisch mit $max,
@@ -110,14 +116,16 @@ $upload->addValidator('Count',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_Extension($extension, $case)</classname>
+                        Alte API der Methode:
+                        <classname>Zend_Validate_File_Extension($extension, $case)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_Extension($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_Extension($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
-                        <emphasis>*</emphasis> identisch mit $extension und kann jeden anderen Schlüssel haben
-                        <emphasis>case</emphasis> identisch mit $case,
+                        <emphasis>*</emphasis> identisch mit $extension und kann jeden anderen
+                        Schlüssel haben <emphasis>case</emphasis> identisch mit $case,
                     </para></listitem>
                 </itemizedlist>
 
@@ -145,11 +153,13 @@ $upload->addValidator('Extension',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
+                        Alte API der Methode:
+                        <classname>Zend_Validate_File_FilesSize($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
                         <emphasis>max</emphasis> identisch mit $max,
@@ -158,10 +168,10 @@ $upload->addValidator('Extension',
                 </itemizedlist>
 
                 <para>
-                    Zustätzlich wurde die Signatur der <code>useByteString()</code> Methode geändert. Sie kann
-                    nur verwendet werden um zu testen ob die Prüfung ByteStrings in den erzeugten Meldungen
-                    verwendet oder ncht. Um den Wert dieses Flags zu setzen muß die
-                    <code>setUseByteString()</code> Methode verwendet werden.
+                    Zustätzlich wurde die Signatur der <code>useByteString()</code> Methode
+                    geändert. Sie kann nur verwendet werden um zu testen ob die Prüfung ByteStrings
+                    in den erzeugten Meldungen verwendet oder ncht. Um den Wert dieses Flags zu
+                    setzen muß die <code>setUseByteString()</code> Methode verwendet werden.
                 </para>
 
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
@@ -195,14 +205,16 @@ $upload->setUseByteSting(true); // Flag setzen
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
+                        Alte API der Methode:
+                        <classname>Zend_Validate_File_Hash($hash, $algorithm)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_Hash($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_Hash($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
-                        <emphasis>*</emphasis> identisch mit $hash und kann jeden anderen Schlüssel haben
-                        <emphasis>algorithm</emphasis> identisch mit $algorithm,
+                        <emphasis>*</emphasis> identisch mit $hash und kann jeden anderen Schlüssel
+                        haben <emphasis>algorithm</emphasis> identisch mit $algorithm,
                     </para></listitem>
                 </itemizedlist>
 
@@ -230,11 +242,13 @@ $upload->addValidator('Hash',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth, $maxheight)</classname>
+                        Alte API der Methode: <classname>Zend_Validate_File_ImageSize($minwidth,
+                            $minheight, $maxwidth, $maxheight)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_FilesSize($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>minwidth</emphasis> identisch mit $minwidth,
                         <emphasis>maxwidth</emphasis> identisch mit $maxwidth,
@@ -269,11 +283,13 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Alte API der Methode: <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
+                        Alte API der Methode:
+                        <classname>Zend_Validate_File_Size($min, $max, $bytestring)</classname>
                     </para></listitem>
 
                     <listitem><para>
-                        Neue API der Methode: <classname>Zend_Validate_File_Size($options)</classname> wobei $options
+                        Neue API der Methode:
+                        <classname>Zend_Validate_File_Size($options)</classname> wobei $options
                         die folgenden Schlüssel für das Array akzeptiert:
                         <emphasis>min</emphasis> identisch mit $min,
                         <emphasis>max</emphasis> identisch mit $max,
@@ -309,15 +325,17 @@ $upload->addValidator('Size',
             <title>Änderungen bei der Verwendung von Prüfungen</title>
 
             <para>
-                Wie von Benutzern festgestellt wurde, haben die Prüfungen von <classname>Zend_File_Transfer</classname>
-                nicht auf die gleiche Art und Weise funktioniert wie standardmäßigen von <classname>Zend_Form</classname>.
-                <classname>Zend_Form</classname> erlaubt die Verwendung eines <code>breakChainOnFailure</code> Parameters
-                der die Prüfung für alle weitere Prüfer unterbricht wenn ein Prüffehler aufgetreten ist.
+                Wie von Benutzern festgestellt wurde, haben die Prüfungen von
+                <classname>Zend_File_Transfer</classname> nicht auf die gleiche Art und Weise
+                funktioniert wie standardmäßigen von <classname>Zend_Form</classname>.
+                <classname>Zend_Form</classname> erlaubt die Verwendung eines
+                <code>breakChainOnFailure</code> Parameters der die Prüfung für alle weitere Prüfer
+                unterbricht wenn ein Prüffehler aufgetreten ist.
             </para>
 
             <para>
-                Deshalb wurde dieser Parameter bei allen bestehenden Prüfungen von <classname>Zend_File_Transfer</classname>
-                hinzugefügt.
+                Deshalb wurde dieser Parameter bei allen bestehenden Prüfungen von
+                <classname>Zend_File_Transfer</classname> hinzugefügt.
             </para>
 
             <itemizedlist>
@@ -326,13 +344,14 @@ $upload->addValidator('Size',
                 </para></listitem>
 
                 <listitem><para>
-                    Neue API der Methode: <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
+                    Neue API der Methode:
+                    <code>addValidator($validator, $breakChainOnFailure, $options, $files)</code>.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                Um also eigene Skripte auf die neue API zu migrieren, muß einfach ein <code>false</code> nach
-                der Definition der gewünschten Prüfung hinzugefügt werden.
+                Um also eigene Skripte auf die neue API zu migrieren, muß einfach ein
+                <code>false</code> nach der Definition der gewünschten Prüfung hinzugefügt werden.
             </para>
 
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">

@@ -6,14 +6,15 @@
     <sect2 id="zend.service.flickr.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> ist eine einfache API um den Flickr REST Web Service zu nutzen.
-            Für die Benutzung des Flickr Web Service, benötigt man einen API Schlüssel.
-            Um diesen Schlüssel zu bekommen und für weitergehende Informationen über den Flickr REST Web Service
-            besuchen Sie bitte die <ulink url="http://www.flickr.com/services/api/">Flickr API Dokumentation</ulink>.
+            <classname>Zend_Service_Flickr</classname> ist eine einfache API um den Flickr REST Web
+            Service zu nutzen. Für die Benutzung des Flickr Web Service, benötigt man einen API
+            Schlüssel. Um diesen Schlüssel zu bekommen und für weitergehende Informationen über den
+            Flickr REST Web Service besuchen Sie bitte die <ulink
+                url="http://www.flickr.com/services/api/">Flickr API Dokumentation</ulink>.
         </para>
         <para>
-            Im folgenden Bespiel benutzen wir die <code>tagSearch()</code> Methode um Photos zu suchen welche
-            "php" im Tag haben.
+            Im folgenden Bespiel benutzen wir die <code>tagSearch()</code> Methode um Photos zu
+            suchen welche "php" im Tag haben.
         </para>
         <example id="zend.service.flickr.introduction.example-1">
             <title>Simple Flickr Photo Suche</title>
@@ -29,42 +30,47 @@ foreach ($results as $result) {
         <note>
             <title>Optionale Parameter</title>
             <para>
-                <code>tagSearch()</code> aktepziert als optionalen zweiten Parameter ein Array mit Optionen.
+                <code>tagSearch()</code> aktepziert als optionalen zweiten Parameter ein Array mit
+                Optionen.
             </para>
         </note>
     </sect2>
     <sect2 id="zend.service.flickr.finding-users">
         <title>Bilder und Informationen von Flickr Benutzern finden</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> stellt verschiedene unterschiedliche Wege zur Verfügung um
-            Informationen von Flickr Benutzern zu bekommen:
+            <classname>Zend_Service_Flickr</classname> stellt verschiedene unterschiedliche Wege zur
+            Verfügung um Informationen von Flickr Benutzern zu bekommen:
         </para>
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>userSearch()</code>: Akzeptiert ein String Abfrage von mit Leerzeichen getrennten Tags
-                    und als optionalen zweiten Parameter ein Array mit Such Optionen. Zurückgegeben wird ein
-                    Set von Photos als <classname>Zend_Service_Flickr_ResultSet</classname> Objekt.
+                    <code>userSearch()</code>: Akzeptiert ein String Abfrage von mit Leerzeichen
+                    getrennten Tags und als optionalen zweiten Parameter ein Array mit Such
+                    Optionen. Zurückgegeben wird ein Set von Photos als
+                    <classname>Zend_Service_Flickr_ResultSet</classname> Objekt.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByUsername()</code>: Gibt die Benutzer ID als String zurück, welcher mit dem
-                    übergebenen String des Benutzernamens verknüpft ist.
+                    <code>getIdByUsername()</code>: Gibt die Benutzer ID als String zurück, welcher
+                    mit dem übergebenen String des Benutzernamens verknüpft ist.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <code>getIdByEmail()</code>: Gibt die Benutzer ID als String zurück, welcher mit dem übergebenen
-                    String der Email Adresse verknüpft ist.
+                    <code>getIdByEmail()</code>: Gibt die Benutzer ID als String zurück, welcher mit
+                    dem übergebenen String der Email Adresse verknüpft ist.
                 </para>
             </listitem>
         </itemizedlist>
         <example id="zend.service.flickr.finding-users.example-1">
-            <title>Finden von öffentlichen Photos eines Flickr Benutzers durch seine E-Mail Adresse</title>
+            <title>
+                Finden von öffentlichen Photos eines Flickr Benutzers durch seine E-Mail Adresse
+            </title>
             <para>
-                In diesem Beispiel haben wir die E-Mail adresse eines Flickr Benutzers und wir holen uns die
-                öffentlichen Photos eines Benutzer durch Verwendung der <code>userSearch()</code> Methode:
+                In diesem Beispiel haben wir die E-Mail adresse eines Flickr Benutzers und wir holen
+                uns die öffentlichen Photos eines Benutzer durch Verwendung der
+                <code>userSearch()</code> Methode:
             </para>
             <programlisting role="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
@@ -79,9 +85,9 @@ foreach ($results as $result) {
     <sect2 id="zend.service.flickr.grouppoolgetphotos">
         <title>Photos in einem Gruppenpool finden</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> erlaubt es Photos eines Gruppenpools basierend auf der
-            ID zu empfangen. Hierfür kann die <code>groupPoolGetPhotos()</code> Methode verwendet
-            werden:
+            <classname>Zend_Service_Flickr</classname> erlaubt es Photos eines Gruppenpools
+            basierend auf der ID zu empfangen. Hierfür kann die <code>groupPoolGetPhotos()</code>
+            Methode verwendet werden:
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Empfangen von Photos aus einem Gruppenpool durch die Gruppen ID</title>
@@ -106,9 +112,9 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
     <sect2 id="zend.service.flickr.getimagedetails">
         <title>Empfangen von Details zu Bildern durch Flickr</title>
         <para>
-            <classname>Zend_Service_Flickr</classname> erlaubt es schnell und einfach an Details zu Bilders zu kommen,
-            basieren auf einer übergebenen ID des Bildes. Einfach durch benutzen der  <code>getImageDetails()</code> Methode,
-            wie im folgenden Beispiel:
+            <classname>Zend_Service_Flickr</classname> erlaubt es schnell und einfach an Details zu
+            Bilders zu kommen, basieren auf einer übergebenen ID des Bildes. Einfach durch benutzen
+            der <code>getImageDetails()</code> Methode, wie im folgenden Beispiel:
         </para>
         <example id="zend.service.flickr.getimagedetails.example-1">
             <title>Empfangen von Details zu Bildern durch Flickr</title>
@@ -128,11 +134,24 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
     <sect2 id="zend.service.flickr.classes">
         <title>Zend_Service_Flickr Ergebnis Klassen</title>
         <para>
-            Die folgenden Klassen werden durch <code>tagSearch()</code> und <code>userSearch()</code> zurückgegeben:
+            Die folgenden Klassen werden durch <code>tagSearch()</code> und
+            <code>userSearch()</code> zurückgegeben:
             <itemizedlist>
-                <listitem><para><link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link></para></listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <link linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link>
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
         <sect3 id="zend.service.flickr.classes.resultset">
@@ -245,12 +264,17 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                             <row>
                                 <entry>isfriend</entry>
                                 <entry>string</entry>
-                                <entry>Das Bild ist sichtbar, weil man ein Freund des Eigentümers ist.</entry>
+                                <entry>
+                                    Das Bild ist sichtbar, weil man ein Freund des Eigentümers ist.
+                                </entry>
                             </row>
                             <row>
                                 <entry>isfamily</entry>
                                 <entry>string</entry>
-                                <entry>Das Bild ist sichtbar, weil man Familienmitglied des Eigentümers ist.</entry>
+                                <entry>
+                                    Das Bild ist sichtbar, weil man Familienmitglied des Eigentümers
+                                    ist.
+                                </entry>
                             </row>
                             <row>
                                 <entry>license</entry>
@@ -275,36 +299,50 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
-                                <entry>Der Server welcher benutzt wurde um die Icon URL zu erstellen.</entry>
+                                <entry>
+                                    Der Server welcher benutzt wurde um die Icon URL zu erstellen.
+                                </entry>
                             </row>
                             <row>
                                 <entry>Square</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Ein 75x75 Thumbnail des Bildes.</entry>
                             </row>
                             <row>
                                 <entry>Thumbnail</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Ein 100 Pixel Thumbnail des Bildes.</entry>
                             </row>
                             <row>
                                 <entry>Small</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Eine 240 Pixel Version des Bildes.</entry>
                             </row>
                             <row>
                                 <entry>Medium</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Eine 500 Pixel Version des Bildes.</entry>
                             </row>
                             <row>
                                 <entry>Large</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Eine 640 Pixel Version des Bildes.</entry>
                             </row>
                             <row>
                                 <entry>Original</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+                                <entry>
+                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
                                 <entry>Das Original Bild.</entry>
                             </row>
                         </tbody>

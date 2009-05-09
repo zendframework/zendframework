@@ -5,9 +5,10 @@
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
 
     <para>
-        Die Darstellung eines Form Objektes ist komplett optional -- <classname>Zend_Form</classname>'s
-        render() Methoden müssen nicht einmal verwendet werden. Wenn es trotzdem so gemacht wird,
-        dann werden Dekoratoren verwendet, um die verschiedenen Form Objekte darzustellen.
+        Die Darstellung eines Form Objektes ist komplett optional --
+        <classname>Zend_Form</classname>'s render() Methoden müssen nicht einmal verwendet werden.
+        Wenn es trotzdem so gemacht wird, dann werden Dekoratoren verwendet, um die verschiedenen
+        Form Objekte darzustellen.
     </para>
 
     <para>
@@ -33,7 +34,8 @@
         Element dargestellt werden soll. Das erlaubt es Dekoratoren zu erstellen, die nur spezielle
         Abschnitte eines Elements darstellen -- wie das Label, den Wert, Fehlermeldungen, usw. Durch
         die Verbindung von verschiedenen Dekoratoren, die ein spezielles Segment des Elements
-        darstellen, kann ein komplexes Markup gebaut werden, das das komplette Element repräsentiert.
+        darstellen, kann ein komplexes Markup gebaut werden, das das komplette Element
+        repräsentiert.
     </para>
 
     <sect2 id="zend.form.decorators.operation">
@@ -41,9 +43,9 @@
 
         <para>
             Um einen Dekorator zu konfigurieren, kann ein Array von Optionen, oder ein
-            <classname>Zend_Config</classname> Objekt an dessen Konstruktor übergeben werden, ein Array an
-            <code>setOptions()</code>, oder ein <classname>Zend_Config</classname> Objekt an
-            <code>setConfig()</code>.
+            <classname>Zend_Config</classname> Objekt an dessen Konstruktor übergeben werden, ein
+            Array an <code>setOptions()</code>, oder ein <classname>Zend_Config</classname> Objekt
+            an <code>setConfig()</code>.
         </para>
 
         <para>
@@ -98,11 +100,11 @@
 
         <para>
             Dekoratoren sollen mit den verschiedenen <classname>Zend_Form</classname> Klassentypen
-            interagieren: <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>,
-            <classname>Zend_Form_DisplayGroup</classname>, und allen von ihnen abgeleiteten Klassen. Die
-            Methode <code>setElement()</code> erlaubt es, das Objekt des Dekorators, mit den
-            aktuell gearbeitet wird, zu setzen und <code>getElement()</code> wird verwendet
-            um es zu empfangen.
+            interagieren: <classname>Zend_Form</classname>,
+            <classname>Zend_Form_Element</classname>, <classname>Zend_Form_DisplayGroup</classname>,
+            und allen von ihnen abgeleiteten Klassen. Die Methode <code>setElement()</code> erlaubt
+            es, das Objekt des Dekorators, mit den aktuell gearbeitet wird, zu setzen und
+            <code>getElement()</code> wird verwendet um es zu Empfangen.
         </para>
 
         <para>
@@ -119,9 +121,9 @@
         <title>Standard Dekoratoren</title>
 
         <para>
-            <classname>Zend_Form</classname> wird mit vielen Standard Dekoratoren ausgeliefert; siehe
-            <link linkend="zend.form.standardDecorators">das Kapitel über Standard Dekoratoren</link>
-            für Details.
+            <classname>Zend_Form</classname> wird mit vielen Standard Dekoratoren ausgeliefert;
+            siehe <link linkend="zend.form.standardDecorators">das Kapitel über
+                Standard Dekoratoren</link> für Details.
         </para>
     </sect2>
 
@@ -135,8 +137,8 @@
         </para>
 
         <para>
-            Dekoratoren implementieren nur <classname>Zend_Decorator_Interface</classname>. Das Interface
-            spezifiziert folgendes:
+            Dekoratoren implementieren nur <classname>Zend_Decorator_Interface</classname>. Das
+            Interface spezifiziert folgendes:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -290,9 +292,9 @@ $element->setDecorators(array('Composite'));
         </para>
 
         <para>
-            Wenn man, zum Beispiel, eine einfache Anzeige benötigt, welche die, während der Validierung
-            aufgetretenen, Fehlermeldungen ignoriert und dafür eine eigene Fehlermeldung anzeigt, kann
-            man sich einen eigenen 'Errors' Dekorator erstellen:
+            Wenn man, zum Beispiel, eine einfache Anzeige benötigt, welche die, während der
+            Validierung aufgetretenen, Fehlermeldungen ignoriert und dafür eine eigene Fehlermeldung
+            anzeigt, kann man sich einen eigenen 'Errors' Dekorator erstellen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -319,11 +321,11 @@ class My_Decorator_Errors
 
         <para>
             In diesem speziellen Beispiel, weil das letzte Segment 'Errors' des Dekorators auf
-            <classname>Zend_Form_Decorator_Errors</classname> passt, wird er <emphasis>statt</emphasis> diesem
-            Dekorator dargestellt -- was bedeutet, dass kein Dekorator verändert werden muß um die
-            Ausgabe anzupassen. Durch die Benennung des Dekorators nach dem bestehenden Standard
-            Dekorator, kann die Dekoration verändert werden ohne, dass der Dekorator des Elements
-            verändert werden muss.
+            <classname>Zend_Form_Decorator_Errors</classname> passt, wird er
+            <emphasis>statt</emphasis> diesem Dekorator dargestellt -- was bedeutet, dass kein
+            Dekorator verändert werden muß um die Ausgabe anzupassen. Durch die Benennung des
+            Dekorators nach dem bestehenden Standard Dekorator, kann die Dekoration verändert werden
+            ohne, dass der Dekorator des Elements verändert werden muss.
         </para>
     </sect2>
 
@@ -340,8 +342,8 @@ class My_Decorator_Errors
 
         <para>
             Um das zu tun muss einfach <code>render[DecoratorName]()</code> aufgerufen werden, wobei
-            "[DecoratorName]" der "Kurzname" des eigenen Dekorators ist; optional kann Inhalt eingefügt
-            werden der dargestellt werden soll. Zum Beispiel:
+            "[DecoratorName]" der "Kurzname" des eigenen Dekorators ist; optional kann Inhalt
+            eingefügt werden der dargestellt werden soll. Zum Beispiel:
         </para>
 
         <programlisting role="php"><![CDATA[

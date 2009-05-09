@@ -6,17 +6,19 @@
 
     <para>
         Immer mehr Entwickler müssen ihren Inhalt für mehere Sprachen und Regionen zur Verfügung
-        stellen. <classname>Zend_Form</classname> versucht so einen Arbeitsschritt so einfach wie möglich zu machen und
-        verwendet Funktionalitäten sowohl in <link linkend="zend.translate">Zend_Translate</link>,
-        als auch in <link linkend="zend.validate">Zend_Validate</link> um das zu tun.
+        stellen. <classname>Zend_Form</classname> versucht so einen Arbeitsschritt so einfach wie
+        möglich zu machen und verwendet Funktionalitäten sowohl in <link
+            linkend="zend.translate">Zend_Translate</link>, als auch in <link
+            linkend="zend.validate">Zend_Validate</link> um das zu tun.
     </para>
 
     <para>
         Standardmäßig wird keine Internationalisiernug (I18n) durchgeführt. Um I18n Features in
-        <classname>Zend_Form</classname> einzuschalten, muss ein <classname>Zend_Translate</classname> Objekt mit einem
-        gewünschten Adapter instanziert werden, und es mit <classname>Zend_Form</classname> und/oder
-        <classname>Zend_Validate</classname> verbunden werden. Für weitere Informationen darüber, wie ein
-        Übersetzungsobjekt und Übersetzungsdateien erstellt werden, sehen Sie bite in die
+        <classname>Zend_Form</classname> einzuschalten, muss ein
+        <classname>Zend_Translate</classname> Objekt mit einem gewünschten Adapter instanziert
+        werden, und es mit <classname>Zend_Form</classname> und/oder
+        <classname>Zend_Validate</classname> verbunden werden. Für weitere Informationen darüber,
+        wie ein Übersetzungsobjekt und Übersetzungsdateien erstellt werden, sehen Sie bite in die
         <link linkend="zend.translate">Dokumentation zu Zend_Translate</link>.
     </para>
 
@@ -36,8 +38,9 @@
         <title>I18n in Formularen initialisieren</title>
 
         <para>
-            Um I18n in Formularen zu initialisieren, muss man entweder ein <classname>Zend_Translate</classname>
-            Objekt oder ein <classname>Zend_Translate_Adapter</classname> haben, wie in der
+            Um I18n in Formularen zu initialisieren, muss man entweder ein
+            <classname>Zend_Translate</classname> Objekt oder ein
+            <classname>Zend_Translate_Adapter</classname> haben, wie in der
             <classname>Zend_Translate</classname> Dokumentation beschrieben. Sobald man ein
             Übersetzungsobjekt hat, besitzt man verschiedene Möglichkeiten:
         </para>
@@ -57,7 +60,8 @@ Zend_Registry::set('Zend_Translate', $translate);
 ]]></programlisting>
 
                 <para>
-                    Das wird von <classname>Zend_Form</classname>, <classname>Zend_Validate</classname>, und
+                    Das wird von <classname>Zend_Form</classname>,
+                    <classname>Zend_Validate</classname>, und
                     <classname>Zend_View_Helper_Translate</classname> aufgegriffen.
                 </para>
             </listitem>
@@ -65,7 +69,8 @@ Zend_Registry::set('Zend_Translate', $translate);
             <listitem>
                 <para>
                     Wenn man besorgt ist wegen der Übersetzung von Fehlermeldungen, kann das
-                    Übersetzungsobjekt in <classname>Zend_Validate_Abstract</classname> registriert werden:
+                    Übersetzungsobjekt in <classname>Zend_Validate_Abstract</classname> registriert
+                    werden:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -76,9 +81,9 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
 
             <listitem>
                 <para>
-                    Alternativ kann das <classname>Zend_Form</classname> Objekt als globaler Übersetzer
-                    angefügt werden. Das hat auch einen Nebeneffekt auf die Übersetzung von
-                    Fehlermeldungen:
+                    Alternativ kann das <classname>Zend_Form</classname> Objekt als globaler
+                    Übersetzer angefügt werden. Das hat auch einen Nebeneffekt auf die Übersetzung
+                    von Fehlermeldungen:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -124,23 +129,24 @@ $element->setTranslator($translate);
                 <para>
                     <emphasis>Prüfungsfehlermeldungen.</emphasis> Prüfungsfehlermeldungen können
                     übersetzt werden. Um das zu tun, müssen die verschiedenen Konstanten der
-                    Fehlercodes von den <classname>Zend_Validate</classname> Prüfungsklassen als Message IDs
-                    verwendet werden. Für weitere Details über diese Codes, kann in die Dokumentation
-                    zu <link linkend="zend.validate">Zend_Validate</link> gesehen werden.
+                    Fehlercodes von den <classname>Zend_Validate</classname> Prüfungsklassen als
+                    Message IDs verwendet werden. Für weitere Details über diese Codes, kann in die
+                    Dokumentation zu <link linkend="zend.validate">Zend_Validate</link> gesehen
+                    werden.
                 </para>
 
                 <para>
-                    Zusätzlich können ab Version 1.6.0, Übersetzungen angegeben werden, indem die aktuelle
-                    Fehlermeldung als Identifikator der Meldung verwendet wird. Das ist die bevorzugte
-                    Verwendung für 1.6.0 und höher, da die Übersetzung der Nachrichtenschlüssel in
-                    zukünftigen Releases veraltet sein wird.
+                    Zusätzlich können ab Version 1.6.0, Übersetzungen angegeben werden, indem die
+                    aktuelle Fehlermeldung als Identifikator der Meldung verwendet wird. Das ist die
+                    bevorzugte Verwendung für 1.6.0 und höher, da die Übersetzung der
+                    Nachrichtenschlüssel in zukünftigen Releases veraltet sein wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>Labels.</emphasis> Element Labels werden übersetzt, wenn eine Übersetzung
-                    existiert.
+                    <emphasis>Labels.</emphasis> Element Labels werden übersetzt, wenn eine
+                    Übersetzung existiert.
                 </para>
             </listitem>
 
@@ -154,20 +160,22 @@ $element->setTranslator($translate);
 
             <listitem>
                 <para>
-                    <emphasis>Formulare- und Elementbeschreibungen.</emphasis> Alle Formtypen (Elemente,
-                    Formulare, Anzeigegruppen, Unterformulare) erlauben die Spezifikation von optionalen
-                    Elementbeschreibungen. Der Beschreibungs Dekorator kann verwendet werden, um sie
-                    darzustellen und standardmäßig nimmt er den Wert und versucht ihn zu übersetzen.
+                    <emphasis>Formulare- und Elementbeschreibungen.</emphasis> Alle Formtypen
+                    (Elemente, Formulare, Anzeigegruppen, Unterformulare) erlauben die Spezifikation
+                    von optionalen Elementbeschreibungen. Der Beschreibungs Dekorator kann verwendet
+                    werden, um sie darzustellen und standardmäßig nimmt er den Wert und versucht ihn
+                    zu übersetzen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>Multi-Option Werte.</emphasis> Für die verschiedenen Elemente die von
-                    <classname>Zend_Form_Element_Multi</classname> abgeleitet sind (enthält die MultiCheckbox,
-                    Multiselect, und Radio Elemente), werden die Optionswerte (nicht die Schlüssel)
-                    übersetzt, wenn eine Übersetzung vorhanden ist; das bedeutet, dass die Label der
-                    vorhandenen Optionen die dem Benutzer angezeigt werden, übersetzt werden.
+                    <classname>Zend_Form_Element_Multi</classname> abgeleitet sind (enthält die
+                    MultiCheckbox, Multiselect, und Radio Elemente), werden die Optionswerte (nicht
+                    die Schlüssel) übersetzt, wenn eine Übersetzung vorhanden ist; das bedeutet,
+                    dass die Label der vorhandenen Optionen die dem Benutzer angezeigt werden,
+                    übersetzt werden.
                 </para>
             </listitem>
 

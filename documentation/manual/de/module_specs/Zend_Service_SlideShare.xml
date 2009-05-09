@@ -18,19 +18,19 @@
         <title>Mit Zend_Service_SlideShare beginnen</title>
 
         <para>
-            Um die <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden muß zuerst ein Account auf
-            den slideshare.net Servern erstellt werden (mehr Informationen können
+            Um die <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden muß zuerst
+            ein Account auf den slideshare.net Servern erstellt werden (mehr Informationen können
             <ulink url="http://www.slideshare.net/developers/">hier</ulink> gefunden werden) um
             einen API Schlüssel, Benutzername, Passwort und einen geteilten geheimen Wert zu
-            erhalten -- diese werden alle benötigt um die <classname>Zend_Service_SlideShare</classname>
-            Komponente zu verwenden.
+            erhalten -- diese werden alle benötigt um die
+            <classname>Zend_Service_SlideShare</classname> Komponente zu verwenden.
         </para>
 
         <para>
-            Sobald ein Account erstellt wurde, kann die <classname>Zend_Service_SlideShare</classname>
-            Komponente verwendet werden durch die Erstellung eines
-            <classname>Zend_Service_SlideShare</classname> Objektes und dem anbieten dieser Werte wie
-            anbei gezeigt:
+            Sobald ein Account erstellt wurde, kann die
+            <classname>Zend_Service_SlideShare</classname> Komponente verwendet werden durch die
+            Erstellung eines <classname>Zend_Service_SlideShare</classname> Objektes und dem
+            anbieten dieser Werte wie anbei gezeigt:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -48,10 +48,11 @@ $ss = new Zend_Service_SlideShare('APIKEY',
         <title>Das SlideShow Objekt</title>
 
         <para>
-            Alle Slideshows in der <classname>Zend_Service_SlideShare</classname> werden repräsentiert durch
-            die Verwendung des <classname>Zend_Service_SlideShare_SlideShow</classname> Objektes (sowohl beim
-            Empfangen als auch beim Hochladen neuer Slideshows). Zur Referenz ist eine Pseudo-Code
-            Version dieser Klasse anbei zu sehen.
+            Alle Slideshows in der <classname>Zend_Service_SlideShare</classname> werden
+            repräsentiert durch die Verwendung des
+            <classname>Zend_Service_SlideShare_SlideShow</classname> Objektes (sowohl beim Empfangen
+            als auch beim Hochladen neuer Slideshows). Zur Referenz ist eine Pseudo-Code Version
+            dieser Klasse anbei zu sehen.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -216,12 +217,13 @@ class Zend_Service_SlideShare_SlideShow {
         <title>Empfangen einer einzelnen Slideshow</title>
 
         <para>
-            Die einfachste Verwendung der <classname>Zend_Service_SlideShare</classname> Komponente ist
-            der Empfang einer einzelnen Slideshow durch die Slideshow ID die von der
+            Die einfachste Verwendung der <classname>Zend_Service_SlideShare</classname> Komponente
+            ist der Empfang einer einzelnen Slideshow durch die Slideshow ID die von der
             slideshare.net Anwendung angeboten wird und kann durch den Aufruf der
-            <code>getSlideShow()</code> auf einem <classname>Zend_Service_SlideShare</classname> Objekt
-            und der Verwendung des resultierenden <classname>Zend_Service_SlideShare_SlideShow</classname>
-            Objektes wie gezeigt durchgeführt werden.
+            <code>getSlideShow()</code> auf einem <classname>Zend_Service_SlideShare</classname>
+            Objekt und der Verwendung des resultierenden
+            <classname>Zend_Service_SlideShare_SlideShow</classname> Objektes wie gezeigt
+            durchgeführt werden.
         </para>
 
         <programlisting role="php"><![CDATA[

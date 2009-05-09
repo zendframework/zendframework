@@ -10,13 +10,15 @@
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> ist eine einfache API für die Verwendung des Audioscrobbler REST
-            Web Services. Der Audioscrobbler Web Service bietet Zugang zu seinen Datenbanken von Benutzern, Artisten,
-            Albums, Lieder, tags, Gruppen und Foren. Die Methoden der <classname>Zend_Service_Audioscrobbler</classname> Klasse
-            beginnt mit einem dieser Bezeichner. Der Syntax und der Namensraum des Audioscrobbler Web Services sind in
-            <classname>Zend_Service_Audioscrobbler</classname> gespiegelt. Für weitere Informationen über das Audioscrobbler
-            REST Web Service, siehe die
-            <ulink url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service Seite</ulink>.
+            <classname>Zend_Service_Audioscrobbler</classname> ist eine einfache API für die
+            Verwendung des Audioscrobbler REST Web Services. Der Audioscrobbler Web Service bietet
+            Zugang zu seinen Datenbanken von Benutzern, Artisten, Albums, Lieder, tags, Gruppen und
+            Foren. Die Methoden der <classname>Zend_Service_Audioscrobbler</classname> Klasse
+            beginnt mit einem dieser Bezeichner. Der Syntax und der Namensraum des Audioscrobbler
+            Web Services sind in <classname>Zend_Service_Audioscrobbler</classname> gespiegelt. Für
+            weitere Informationen über das Audioscrobbler REST Web Service, siehe die <ulink
+                url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
+                Seite</ulink>.
         </para>
 
     </sect2>
@@ -26,144 +28,155 @@
         <title>Benutzer</title>
 
         <para>
-            Um Informationen über einen bestimmten Benutzer zu erhalten, wird zuerst die <code>setUser()</code>
-            Methode verwendet um den Benutzer zu selektieren für den Daten empfangen werden sollen.
-            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden für das empfangen von Daten eines
-            einzelnen Benutzers:
+            Um Informationen über einen bestimmten Benutzer zu erhalten, wird zuerst die
+            <code>setUser()</code> Methode verwendet um den Benutzer zu selektieren für den Daten
+            empfangen werden sollen. <classname>Zend_Service_Audioscrobbler</classname> bietet
+            verschiedene Methoden für das empfangen von Daten eines einzelnen Benutzers:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>userGetProfileInformation()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        aktuellen Profilinformationen des Benutzers enthält.
+                        <code>userGetProfileInformation()</code>: Gibt ein SimpleXML Objekt zurück
+                        das die aktuellen Profilinformationen des Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetTopArtists()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        aktuell am meisten gelisteten Artisten des Benutzers enthält.
+                        <code>userGetTopArtists()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der aktuell am meisten gelisteten Artisten des Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        aktuell am meisten gelisteten Alben des Benutzer enthält.
+                        <code>userGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der aktuell am meisten gelisteten Alben des Benutzer enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das das aktuell am
-                        meisten gelistete Lied des Benutzers enthält.
+                        <code>userGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das das
+                        aktuell am meisten gelistete Lied des Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        Tags enthält die am meisten vom aktuellen Benutzer zugeordnet wurden.
+                        <code>userGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der Tags enthält die am meisten vom aktuellen Benutzer zugeordnet
+                        wurden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>userGetTopTagsForArtist()</code>: Erfordert das ein Artist über
-                        <code>setArtist()</code> gesetzt wurde. Gibt ein SimpleXML Objekt zurück das die Tags
-                        enthält die am meisten dem aktuellen Artisten durch den aktuellen Benutzer zugeordnet
-                        worden sind.
+                        <code>setArtist()</code> gesetzt wurde. Gibt ein SimpleXML Objekt zurück das
+                        die Tags enthält die am meisten dem aktuellen Artisten durch den aktuellen
+                        Benutzer zugeordnet worden sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>userGetTopTagsForAlbum()</code>: Erfordert das ein Album über
-                        <code>setAlbum()</code> gesetzt wurde. Gibt ein SimpleXML Objekt zurück das die Tags
-                        enthält die am meisten dem aktuellen Album durch den aktuellen Benutzer zugeordnet
-                        worden sind.
+                        <code>setAlbum()</code> gesetzt wurde. Gibt ein SimpleXML Objekt zurück das
+                        die Tags enthält die am meisten dem aktuellen Album durch den aktuellen
+                        Benutzer zugeordnet worden sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetTopTagsForTrack()</code>: Erfordert das ein Lied über <code>setTrack()</code>
-                        gesetzt wurde. Gibt ein SimpleXML Objekt zurück das die Tags enthält die am meisten dem
-                        aktuellen Lied vom aktuellen Benutzer zugeordnet worden sind.
+                        <code>userGetTopTagsForTrack()</code>: Erfordert das ein Lied über
+                        <code>setTrack()</code> gesetzt wurde. Gibt ein SimpleXML Objekt zurück das
+                        die Tags enthält die am meisten dem aktuellen Lied vom aktuellen Benutzer
+                        zugeordnet worden sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetFriends()</code>: Gibt ein SimpleXML Objekt zurück das die Benutzernamen der
-                        Freunde des aktuellen Benutzers enthält.
+                        <code>userGetFriends()</code>: Gibt ein SimpleXML Objekt zurück das die
+                        Benutzernamen der Freunde des aktuellen Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetNeighbours()</code>: Gibt ein SimpleXML Objekt zurück das die Benutzernamen
-                        der Personen enthält die ähnliche Unterhaltungs-Gewohnheiten wie der aktuelle Benutzer
-                        haben.
+                        <code>userGetNeighbours()</code>: Gibt ein SimpleXML Objekt zurück das die
+                        Benutzernamen der Personen enthält die ähnliche Unterhaltungs-Gewohnheiten
+                        wie der aktuelle Benutzer haben.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        10 zuletzt gespielten Lieder des aktuellen Benutzers enthält.
+                        <code>userGetRecentTracks()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der 10 zuletzt gespielten Lieder des aktuellen Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentBannedTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        der 10 zuletzt verbannten Lieder des aktuellen Benutzers enthält.
+                        <code>userGetRecentBannedTracks()</code>: Gibt ein SimpleXML Objekt zurück
+                        das eine Liste der 10 zuletzt verbannten Lieder des aktuellen Benutzers
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentLovedTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        der 10 zuletzt geliebten Lieder des aktuellen Benutzers enthält.
+                        <code>userGetRecentLovedTracks()</code>: Gibt ein SimpleXML Objekt zurück
+                        das eine Liste der 10 zuletzt geliebten Lieder des aktuellen Benutzers
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentJournals()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        der letzten Journaleintröge des aktuellen Benutzers enthält.
+                        <code>userGetRecentJournals()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der letzten Journaleintröge des aktuellen Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetWeeklyChartList()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        der Wochen enthält für die ein Wochenchart des aktuellen Benutzers existiert.
+                        <code>userGetWeeklyChartList()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der Wochen enthält für die ein Wochenchart des aktuellen
+                        Benutzers existiert.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentWeeklyArtistChart()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        letzten wöchentlichen Artistencharts des aktuellen Benutzers enthält.
+                        <code>userGetRecentWeeklyArtistChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Artistencharts des aktuellen Benutzers
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentWeeklyAlbumChart()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        letzten wöchentlichen Albumcharts des aktuellen Benutzers enthält.
+                        <code>userGetRecentWeeklyAlbumChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Albumcharts des aktuellen Benutzers
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetRecentWeeklyTrackChart()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        letzten wöchentlichen Liedercharts des aktuellen Benutzers enthält.
+                        <code>userGetRecentWeeklyTrackChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Liedercharts des aktuellen Benutzers
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>: Gibt ein SimpleXML
-                        Objekt zurück das die wöchentliche Artistencharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        <code>userGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>: Gibt ein
+                        SimpleXML Objekt zurück das die wöchentliche Artistencharts von
+                        <code>$fromDate</code> bis <code>$toDate</code> für den aktuellen Benutzer
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>: Gibt ein SimpleXML
-                        Objekt zurück das die wöchentlichen Albumcharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        <code>userGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>: Gibt ein
+                        SimpleXML Objekt zurück das die wöchentlichen Albumcharts von
+                        <code>$fromDate</code> bis <code>$toDate</code> für den aktuellen Benutzer
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>userGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Gibt ein SimpleXML
-                        Objekt zurück das die wöchentlichen Liedercharts von <code>$fromDate</code> bis
-                        <code>$toDate</code> für den aktuellen Benutzer enthält.
+                        <code>userGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Gibt ein
+                        SimpleXML Objekt zurück das die wöchentlichen Liedercharts von
+                        <code>$fromDate</code> bis <code>$toDate</code> für den aktuellen Benutzer
+                        enthält.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -174,8 +187,9 @@
             <title>Informationen von Benutzerprofilen erhalten</title>
 
             <para>
-                In diesem Beispiel werden die <code>setUser()</code> und <code>userGetProfileInformation()</code>
-                Methoden verwendet um Informationen über ein spezielles Benutzerprofil zu erhalten:
+                In diesem Beispiel werden die <code>setUser()</code> und
+                <code>userGetProfileInformation()</code> Methoden verwendet um Informationen über
+                ein spezielles Benutzerprofil zu erhalten:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -230,37 +244,39 @@ foreach ($previousWeeklyArtists as $artist) {
         <title>Artisten</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten über einen speziellen
-            Artisten zu empfangen, der über die <code>setArtist()</code> Methode spezifiziert wurde:
+            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
+            über einen speziellen Artisten zu empfangen, der über die <code>setArtist()</code>
+            Methode spezifiziert wurde:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>artistGetRelatedArtists()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        von Artisten enthält die dem aktuellen Artisten ähnlich sind.
+                        <code>artistGetRelatedArtists()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste von Artisten enthält die dem aktuellen Artisten ähnlich sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>artistGetTopFans()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste von
-                        Benutzern enthält die den aktuellen Artisten am meisten hören.
+                        <code>artistGetTopFans()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste von Benutzern enthält die den aktuellen Artisten am meisten hören.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>artistGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        am meisten gewählten Lieder des aktuellen Artisten enthält.
+                        <code>artistGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der am meisten gewählten Lieder des aktuellen Artisten enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>artistGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        aktuell am meisten gewählten Alben des aktuellen Artisten enthält.
+                        <code>artistGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der aktuell am meisten gewählten Alben des aktuellen Artisten enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>artistGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        Tags enthält die dem aktuellen Artisten am meisten zugeordnet werden.
+                        <code>artistGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der Tags enthält die dem aktuellen Artisten am meisten zugeordnet
+                        werden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -291,19 +307,21 @@ foreach ($relatedArtists as $artist) {
         <title>Lieder</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> bietet zwei Methoden für das empfangen von Daten für ein
-            einzelnes Lied, das über die <code>setTrack()</code> Methode spezifiziert wurde:
+            <classname>Zend_Service_Audioscrobbler</classname> bietet zwei Methoden für das
+            Empfangen von Daten für ein einzelnes Lied, das über die <code>setTrack()</code> Methode
+            spezifiziert wurde:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>trackGetTopFans()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste mit den
-                        Benutzern enthält die das aktuelle Lied am meisten gehört haben.
+                        <code>trackGetTopFans()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste mit den Benutzern enthält die das aktuelle Lied am meisten gehört
+                        haben.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>trackGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der Tags
-                        enthält die dem aktuellen Tag am meisten hinzugefügt werden.
+                        <code>trackGetTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste der Tags enthält die dem aktuellen Tag am meisten hinzugefügt werden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -316,31 +334,35 @@ foreach ($relatedArtists as $artist) {
         <title>Tags</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden für das empfangen von Daten die
-            einem einzelnen Tag zugeordnet sind, welches über die <code>setTag()</code> Methode zugeordnet werden:
+            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden für das
+            Empfangen von Daten die einem einzelnen Tag zugeordnet sind, welches über die
+            <code>setTag()</code> Methode zugeordnet werden:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>tagGetOverallTopTags()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste von
-                        Tags enthält die am meisten in Audioscrobbler verwendet werden.
+                        <code>tagGetOverallTopTags()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste von Tags enthält die am meisten in Audioscrobbler verwendet
+                        werden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>tagGetTopArtists()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste von
-                        Artisten enthält denen das aktuelle Tag am meisten zugeordnet wurden.
+                        <code>tagGetTopArtists()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste von Artisten enthält denen das aktuelle Tag am meisten zugeordnet
+                        wurden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>tagGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste von Alben
-                        enthält die dem aktuellen Tag am meisten zugeordnet wurden.
+                        <code>tagGetTopAlbums()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste von Alben enthält die dem aktuellen Tag am meisten zugeordnet wurden.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>tagGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste von
-                        Liedern enthält die dem aktuellen Tag am meisten zugeordnet wurden.
+                        <code>tagGetTopTracks()</code>: Gibt ein SimpleXML Objekt zurück das eine
+                        Liste von Liedern enthält die dem aktuellen Tag am meisten zugeordnet
+                        wurden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -353,60 +375,66 @@ foreach ($relatedArtists as $artist) {
         <title>Gruppen</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten zu erhalten die einer
-            speziellen Gruppe gehören, die über die <code>setGroup()</code> Methode zugeordnet wurde:
+            <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
+            zu erhalten die einer speziellen Gruppe gehören, die über die <code>setGroup()</code>
+            Methode zugeordnet wurde:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>groupGetRecentJournals()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste
-                        der letzten Journalbeiträge der Benutzer der aktuellen Gruppe enthält.
+                        <code>groupGetRecentJournals()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der letzten Journalbeiträge der Benutzer der aktuellen Gruppe
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetWeeklyChart()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        Wochen enthält für die ein wöchentliches Chart der aktuellen Gruppe existiert.
+                        <code>groupGetWeeklyChart()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der Wochen enthält für die ein wöchentliches Chart der aktuellen
+                        Gruppe existiert.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetRecentWeeklyArtistChart()</code>: Gibt ein SimpleXML Objekt zurück das
-                        die letzten wöchentlichen Artistencharts der aktuellen Gruppe enthält.
+                        <code>groupGetRecentWeeklyArtistChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Artistencharts der aktuellen Gruppe
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetRecentWeeklyAlbumChart()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        letzten wöchentlichen Albumcharts der aktuellen Gruppe enthält.
+                        <code>groupGetRecentWeeklyAlbumChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Albumcharts der aktuellen Gruppe
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetRecentWeeklyTrackChart()</code>: Gibt ein SimpleXML Objekt zurück das die
-                        letzten wöchentlichen Liedercharts der aktuellen Gruppe enthält.
+                        <code>groupGetRecentWeeklyTrackChart()</code>: Gibt ein SimpleXML Objekt
+                        zurück das die letzten wöchentlichen Liedercharts der aktuellen Gruppe
+                        enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>: Erfordert
-                        <code>setFromDate()</code> und <code>setToDate()</code>. Gibt ein SimpleXML Objekt zurück
-                        das die wöchentlichen Artistencharts vom aktuellen fromDate bis zum aktuellen toDate
-                        der aktuellen Gruppe enthält.
+                        <code>groupGetPreviousWeeklyArtistChart($fromDate, $toDate)</code>:
+                        Erfordert <code>setFromDate()</code> und <code>setToDate()</code>. Gibt ein
+                        SimpleXML Objekt zurück das die wöchentlichen Artistencharts vom aktuellen
+                        fromDate bis zum aktuellen toDate der aktuellen Gruppe enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <code>groupGetPreviousWeeklyAlbumChart($fromDate, $toDate)</code>: Erfordert
-                        <code>setFromDate()</code> und <code>setToDate()</code>. Gibt ein SimpleXML Objekt
-                        zurück das die wöchentlichen Albumcharts vom aktuellen fromDate bis zum aktuellen toDate
-                        der aktuellen Gruppe enthält.
+                        <code>setFromDate()</code> und <code>setToDate()</code>. Gibt ein SimpleXML
+                        Objekt zurück das die wöchentlichen Albumcharts vom aktuellen fromDate bis
+                        zum aktuellen toDate der aktuellen Gruppe enthält.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>groupGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Gibt ein SimpleXML
-                        Objekt zurück das die wöchentlichen Liedercharts vom aktuellen fromDate bis zum
-                        aktuellen toDate für die aktuelle Gruppe enthält.
+                        <code>groupGetPreviousWeeklyTrackChart($fromDate, $toDate)</code>: Gibt ein
+                        SimpleXML Objekt zurück das die wöchentlichen Liedercharts vom aktuellen
+                        fromDate bis zum aktuellen toDate für die aktuelle Gruppe enthält.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -419,13 +447,14 @@ foreach ($relatedArtists as $artist) {
         <title>Foren</title>
 
         <para>
-            <classname>Zend_Service_Audioscrobbler</classname> bietet eine Methode für das Empfangen von Daten eines
-            einzelnen Forums, das über die <code>setForum()</code> Methode spezifiziert wurde:
+            <classname>Zend_Service_Audioscrobbler</classname> bietet eine Methode für das Empfangen
+            von Daten eines einzelnen Forums, das über die <code>setForum()</code> Methode
+            spezifiziert wurde:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>forumGetRecentPosts()</code>: Gibt ein SimpleXML Objekt zurück das eine Liste der
-                        letzten Beiträge im aktuellen Forum enthält.
+                        <code>forumGetRecentPosts()</code>: Gibt ein SimpleXML Objekt zurück das
+                        eine Liste der letzten Beiträge im aktuellen Forum enthält.
                     </para>
                 </listitem>
             </itemizedlist>

@@ -7,21 +7,22 @@
     <sect2 id="zend.progressbar.whatisit">
         <title>Einführung</title>
         <para>
-            <classname>Zend_ProgressBar</classname> ist eine Komponente um Fortschrittsbalken in verschiedenen
-            Umgebungen zu erstellen und zu aktualisieren. Sie besteht aus einem einzelnen Backend, welches
-            des Fortschritt durch eines der verschiedenen Backends ausgibt. Bei jedem Update nimmt es einen
-            absoluten Wert und optional eine Statusmeldung und ruft dann den Adapter mit einigen
-            vorkalkulierten Werten, wie Prozentwerte und voraussichtliche Restzeit, auf.
+            <classname>Zend_ProgressBar</classname> ist eine Komponente um Fortschrittsbalken in
+            verschiedenen Umgebungen zu erstellen und zu aktualisieren. Sie besteht aus einem
+            einzelnen Backend, welches des Fortschritt durch eines der verschiedenen Backends
+            ausgibt. Bei jedem Update nimmt es einen absoluten Wert und optional eine Statusmeldung
+            und ruft dann den Adapter mit einigen vorkalkulierten Werten, wie Prozentwerte und
+            voraussichtliche Restzeit, auf.
         </para>
     </sect2>
 
     <sect2 id="zend.progressbar.basic">
         <title>Grundsätzliche Verwendung von Zend_Progressbar</title>
         <para>
-            <classname>Zend_ProgressBar</classname> ist sehr einfach in seiner Verwendung. Man erstellt einfach eine
-            neue Instanz von <classname>Zend_Progressbar</classname>, definiert einen minimalen und einen maximalan Wert, und wählt
-            den Adapter der die Daten ausgibt. Wenn man die Datei ausführen will, muß man etwas ähnliches
-            wie folgt machen:
+            <classname>Zend_ProgressBar</classname> ist sehr einfach in seiner Verwendung. Man
+            erstellt einfach eine neue Instanz von <classname>Zend_Progressbar</classname>,
+            definiert einen minimalen und einen maximalan Wert, und wählt den Adapter der die Daten
+            ausgibt. Wenn man die Datei ausführen will, muß man etwas ähnliches wie folgt machen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -37,27 +38,29 @@ $progressBar->finish();
 ]]></programlisting>
 
         <para>
-            Im ersten Schritt, wird eine Instanz von <classname>Zend_ProgressBar</classname> erstellt, mit einem
-            speziellen Adapter, einem minimalen Wert von 0 und einem maximalen Wert der kompletten
-            Dateigröße. Dann wird die Datei ausgeführt und bei jeder Schleife wird der Fortschrittsbalken
-            mit der aktuellen Byteanzahl aktualisiert. Am Ende der Schreife, wird der Status des
-            Fortschrittsbalken auf fertig gestellt.
+            Im ersten Schritt, wird eine Instanz von <classname>Zend_ProgressBar</classname>
+            erstellt, mit einem speziellen Adapter, einem minimalen Wert von 0 und einem maximalen
+            Wert der kompletten Dateigröße. Dann wird die Datei ausgeführt und bei jeder Schleife
+            wird der Fortschrittsbalken mit der aktuellen Byteanzahl aktualisiert. Am Ende der
+            Schleife, wird der Status des Fortschrittsbalken auf fertig gestellt.
         </para>
         <para>
-            Man kann auch die <code>update()</code> Methode von <classname>Zend_ProgressBar</classname> ohne Argumente
-            aufrufen, das die ETA einfach neu berechnet und den Adapter aktualisiert. Das ist nützlich
-            wenn kein Update der Daten war, man aber den Fortschrittsbalken aktualisieren will.
+            Man kann auch die <code>update()</code> Methode von
+            <classname>Zend_ProgressBar</classname> ohne Argumente aufrufen, das die ETA einfach neu
+            berechnet und den Adapter aktualisiert. Das ist nützlich wenn kein Update der Daten war,
+            man aber den Fortschrittsbalken aktualisieren will.
         </para>
     </sect2>
 
     <sect2 id="zend.progressbar.persistent">
         <title>Persistenter Fortschritt</title>
         <para>
-            Wenn man den Fortschrittsbalken über mehrere Aufrufe hinweg persistent haben will, kann man den
-            Namen eines Session Namespaces als viertes Argument an den Constructor angeben. In diesem Fall
-            wird der Fortschrittsbalken den Adapter nicht im Constructor benachrichtigen, sondern nur wenn
-            man <code>update()</code> oder <code>finish()</code> aufruft. Auch der aktuelle Wert, der Statustext
-            und die Startzeit für die ETA Kalkulation werden im nächsten Ablauf erneut geholt.
+            Wenn man den Fortschrittsbalken über mehrere Aufrufe hinweg persistent haben will, kann
+            man den Namen eines Session Namespaces als viertes Argument an den Constructor angeben.
+            In diesem Fall wird der Fortschrittsbalken den Adapter nicht im Constructor
+            benachrichtigen, sondern nur wenn man <code>update()</code> oder <code>finish()</code>
+            aufruft. Auch der aktuelle Wert, der Statustext und die Startzeit für die ETA
+            Kalkulation werden im nächsten Ablauf erneut geholt.
         </para>
     </sect2>
 
@@ -67,7 +70,9 @@ $progressBar->finish();
             <classname>Zend_ProgressBar</classname> kommt mit den folgenden zwei Adaptern:
 
             <itemizedlist mark="opencircle">
-                <listitem><para><xref linkend="zend.progressbar.adapter.console" /></para></listitem>
+                <listitem>
+                    <para><xref linkend="zend.progressbar.adapter.console" /></para>
+                </listitem>
                 <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
                 <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
             </itemizedlist>

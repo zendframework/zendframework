@@ -5,8 +5,8 @@
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
 
     <para>
-        Die <classname>Zend_Form</classname> Klasse wird verwendet um Form Element, Anzeigegruppen und
-        Unterforms zu gruppieren. Sie kann die folgenden Aktionen an diesen Elementen vornehmen:
+        Die <classname>Zend_Form</classname> Klasse wird verwendet um Form Element, Anzeigegruppen
+        und Unterforms zu gruppieren. Sie kann die folgenden Aktionen an diesen Elementen vornehmen:
     </para>
 
     <itemizedlist>
@@ -31,8 +31,8 @@
     </itemizedlist>
 
     <para>
-        Wärend Formen die mit <classname>Zend_Form</classname> erstellt werden komplex sein können, ist
-        der warscheinlich beste Verwendungzweck eine einfache Form; die beste Verwendung ist für
+        Wärend Formen die mit <classname>Zend_Form</classname> erstellt werden komplex sein können,
+        ist der warscheinlich beste Verwendungzweck eine einfache Form; die beste Verwendung ist für
         Rapid Application Development (RAD) und Prototyping.
     </para>
 
@@ -49,8 +49,9 @@ $form = new My_Form()
 ]]></programlisting>
 
     <para>
-        Es kann optional eine Instanz von <classname>Zend_Config</classname> oder ein Array übergeben werden, welches verwendet
-        wird um den Status des Objektes zu setzen sowie potentiell neue Elemente zu erstellen:
+        Es kann optional eine Instanz von <classname>Zend_Config</classname> oder ein Array
+        übergeben werden, welches verwendet wird um den Status des Objektes zu setzen sowie
+        potentiell neue Elemente zu erstellen:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -59,10 +60,10 @@ $form = new Zend_Form($config);
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Form</classname> ist iterierbarm und iteriert durch die Elemente, Anzeigegruppen und
-        Subforms, indem es die Reihenfolge in der diese registriert wurde verwendet und jede
-        Reihenfolge die der Index hat. Das ist nützlich in den Fällen in denen Elemente manuell in
-        einer bestimmten Reihenfolge dargestellt werden sollen.
+        <classname>Zend_Form</classname> ist iterierbarm und iteriert durch die Elemente,
+        Anzeigegruppen und Subforms, indem es die Reihenfolge in der diese registriert wurde
+        verwendet und jede Reihenfolge die der Index hat. Das ist nützlich in den Fällen in denen
+        Elemente manuell in einer bestimmten Reihenfolge dargestellt werden sollen.
     </para>
 
     <para>
@@ -74,10 +75,11 @@ $form = new Zend_Form($config);
     <sect2 id="zend.form.forms.plugins">
         <title>Plugin Loader</title>
         <para>
-            <classname>Zend_Form</classname> verwendet <classname>Zend_Loader_PluginLoader</classname> um es
-            Entwicklern zu erlauben Orte von alternativen Elementen und Dekoratoren zu
-            spezifizieren. Jeder hat seinen eigenen mit Ihm assoziierten Plugin Loader, und
-            generelle Zugriffspunkte werden verwendet um jeden zu empfangen und zu ändern.
+            <classname>Zend_Form</classname> verwendet
+            <classname>Zend_Loader_PluginLoader</classname> um es Entwicklern zu erlauben Orte von
+            alternativen Elementen und Dekoratoren zu spezifizieren. Jeder hat seinen eigenen mit
+            Ihm assoziierten Plugin Loader, und generelle Zugriffspunkte werden verwendet um jeden
+            zu empfangen und zu ändern.
         </para>
 
         <para>
@@ -98,7 +100,8 @@ $form = new Zend_Form($config);
             </para></listitem>
 
             <listitem><para>
-                <code>getPluginLoader($type)</code>: Empfängt den mit $type assoziierten Plugin Loader.
+                <code>getPluginLoader($type)</code>: Empfängt den mit $type assoziierten Plugin
+                Loader.
             </para></listitem>
 
             <listitem><para>
@@ -119,16 +122,16 @@ $form = new Zend_Form($config);
 
         <para>
             Zusätzlich kann ein Präfixpfad für alle Elemente und Anzeigegruppen die durch eine
-            <classname>Zend_Form</classname> Instanz erstellt wurden, spezifiziert werden, durch Verwendung
-            der folgenden Methoden:
+            <classname>Zend_Form</classname> Instanz erstellt wurden, spezifiziert werden, durch
+            Verwendung der folgenden Methoden:
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>addElementPrefixPath($prefix, $path, $type = null)</code>: Wie
                 <code>addPrefixPath()</code>, nur das ein Klassenpräfix und ein Pfad spezifiziert
-                werden muß. Wenn <code>$type</code> spezifiziert wurde, muß er einer der
-                Plugin Loader Typen sein die in <classname>Zend_Form_Element</classname> spezifiziert sind;
+                werden muß. Wenn <code>$type</code> spezifiziert wurde, muß er einer der Plugin
+                Loader Typen sein die in <classname>Zend_Form_Element</classname> spezifiziert sind;
                 siehe das <link linkend="zend.form.elements.loaders">Kapitel Element Plugins</link>
                 für weitere Informationen über gültige <code>$type</code> Werte. Wenn kein
                 <code>$type</code> spezifiziert wurde, nimmt diese Methode an das ein genereller
@@ -155,8 +158,8 @@ $form = new Zend_Form($config);
     <sect2 id="zend.form.forms.elements">
         <title>Elemente</title>
         <para>
-            <classname>Zend_Form</classname> bietet verschiedene Zugriffsmethoden für das Hinzufügen und
-            Entfernen von Elementen aus einer Form. Diese können Instanzen von Elemente Objekten
+            <classname>Zend_Form</classname> bietet verschiedene Zugriffsmethoden für das Hinzufügen
+            und Entfernen von Elementen aus einer Form. Diese können Instanzen von Elemente Objekten
             nehmen oder als Factories für das Instanzieren der Element Objekte selbe herhalten.
         </para>
 
@@ -164,8 +167,9 @@ $form = new Zend_Form($config);
             Die grundsätzlichste Methode für das Hinzufügen eines Elements ist
             <code>addElement()</code>. Diese Methode kann entweder ein Objekt vom Typ
             <classname>Zend_Form_Element</classname> sein (oder einer Klasse die
-            <classname>Zend_Form_Element</classname> erweitert), oder Argumente für das Erstellen eines neuen
-            Elements -- inklusive dem Elementtyp, Namen, und jegliche Konfigurationsoption.
+            <classname>Zend_Form_Element</classname> erweitert), oder Argumente für das Erstellen
+            eines neuen Elements -- inklusive dem Elementtyp, Namen, und jegliche
+            Konfigurationsoption.
         </para>
 
         <para>
@@ -192,10 +196,10 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
 
             <para>
                 <code>addElement()</code> implementiert das Fluent Interface; das heißt es gibt das
-                <classname>Zend_Form</classname> Objekt zurück und nicht das Element. Das wird getan um es zu
-                erlauben das mehrere addElement() Methoden gekettet werden können oder andere
-                Methoden die das Fluent Interface implementieren (alle Setzer in <classname>Zend_Form</classname>
-                implementieren dieses Pattern).
+                <classname>Zend_Form</classname> Objekt zurück und nicht das Element. Das wird getan
+                um es zu erlauben das mehrere addElement() Methoden gekettet werden können oder
+                andere Methoden die das Fluent Interface implementieren (alle Setzer in
+                <classname>Zend_Form</classname> implementieren dieses Pattern).
             </para>
 
             <para>
@@ -269,9 +273,9 @@ $form->populate($data);
 ]]></programlisting>
 
             <para>
-                Auf der anderen Seiten kann es gewünscht sein ein Formular, nach der Übertragung oder
-                der Prüfung, zu löschen; das kann durch Verwendung der <code>reset()</code> Methode
-                durchgeführt werden:
+                Auf der anderen Seiten kann es gewünscht sein ein Formular, nach der Übertragung
+                oder der Prüfung, zu löschen; das kann durch Verwendung der <code>reset()</code>
+                Methode durchgeführt werden:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -345,18 +349,19 @@ $form->setElementDecorators(array(
                 <para>
                     Man kann Dekoratore auch für ein Subset von Elementen setzen, entweder durch
                     Ausbeziehung oder durch Ausgrenzung. Das zweite Argument von
-                    <code>setElementDecorators()</code> kann ein Array von Elementnamen sein; standardmäßig
-                    setzt so ein Array den spezifizierten Dekrator nur auf diese Elemente. Man kann auch
-                    einen dritten Parameter angeben, ein Flag das anzeigt ob diese Liste von Elementen
-                    einbezogen oder ausgegrenzt werden sollen. Wenn das Flag false ist, werden alle Elemente
-                    dekoriert <emphasis>ausser</emphasis> denen die in der Liste übergeben wurden.
-                    Die normale Verwendung der Methode besteht darin, das alle übergebenen Dekoratore
-                    alle vorher gesetzten Dekoratore in jedem element überschreiben.
+                    <code>setElementDecorators()</code> kann ein Array von Elementnamen sein;
+                    standardmäßig setzt so ein Array den spezifizierten Dekrator nur auf diese
+                    Elemente. Man kann auch einen dritten Parameter angeben, ein Flag das anzeigt ob
+                    diese Liste von Elementen einbezogen oder ausgegrenzt werden sollen. Wenn das
+                    Flag false ist, werden alle Elemente dekoriert <emphasis>ausser</emphasis> denen
+                    die in der Liste übergeben wurden. Die normale Verwendung der Methode besteht
+                    darin, das alle übergebenen Dekoratore alle vorher gesetzten Dekoratore in jedem
+                    Element überschreiben.
                 </para>
 
                 <para>
-                    Im folgenden Schnipsel, sagen wir das wir nur die ViewHelper und Label Dekoratore
-                    für die 'foo' und 'bar' Elemente haben wollen:
+                    Im folgenden Schnipsel, sagen wir das wir nur die ViewHelper und Label
+                    Dekoratore für die 'foo' und 'bar' Elemente haben wollen:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -373,9 +378,9 @@ $form->setElementDecorators(
 ]]></programlisting>
 
                 <para>
-                    Auf der anderen Seite zeigt dieses Schnipsel jetzt an das nur nur die ViewHelper und Label
-                    Dekoratore für jedes Element verwenden wollen <emphasis>ausgenommen</emphasis> die
-                    'foo' und 'bar' Elemente:
+                    Auf der anderen Seite zeigt dieses Schnipsel jetzt an das nur nur die ViewHelper
+                    und Label Dekoratore für jedes Element verwenden wollen
+                    <emphasis>ausgenommen</emphasis> die 'foo' und 'bar' Elemente:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -527,13 +532,13 @@ $form->setElementFilters(array('StringTrim'));
         </para>
 
         <para>
-            Die Basisklasse für Anzeigegruppen ist <classname>Zend_Form_DisplayGroup</classname>. Wärend Sie
-            direkt Instanziert werden kann, ist es normalerweise am besten die
-            <code>addDisplayGroup()</code> Methode von <classname>Zend_Form</classname> zu verwenden um das
-            zu erledigen. Diese Methode nimmt ein Array von Elementen als erstes Argument, und
-            einen Namen für die Anzeigegruppe als zweites Argument. Es kann optional ein Array von
-            Optionen oder ein <classname>Zend_Config</classname> Objekt als drittes Argument übergeben
-            werden.
+            Die Basisklasse für Anzeigegruppen ist <classname>Zend_Form_DisplayGroup</classname>.
+            Wärend Sie direkt Instanziert werden kann, ist es normalerweise am besten die
+            <code>addDisplayGroup()</code> Methode von <classname>Zend_Form</classname> zu verwenden
+            um das zu erledigen. Diese Methode nimmt ein Array von Elementen als erstes Argument,
+            und einen Namen für die Anzeigegruppe als zweites Argument. Es kann optional ein Array
+            von Optionen oder ein <classname>Zend_Config</classname> Objekt als drittes Argument
+            übergeben werden.
         </para>
 
         <para>
@@ -631,8 +636,8 @@ $form->setDisplayGroupDecorators(array(
 
             <para>
                 Standardmäßig verwendet <classname>Zend_Form</classname> die
-                <classname>Zend_Form_DisplayGroup</classname> Klasse für Anzeigegruppen. Man kann diese
-                Klasse erweitern um eigene Funktionalitäten anzubieten.
+                <classname>Zend_Form_DisplayGroup</classname> Klasse für Anzeigegruppen. Man kann
+                diese Klasse erweitern um eigene Funktionalitäten anzubieten.
                 <code>addDisplayGroup()</code> erlaubt es nicht eine konkrete Instanz zu
                 übergeben, aber sie erlaubt es eine Klasse zu spezifizieren die als eine
                 Ihrer Optionen verwendet wird, indem der 'displayGroupClass' Schlüssel verwendet
@@ -649,8 +654,8 @@ $form->addDisplayGroup(
 ]]></programlisting>
 
             <para>
-                Wenn die Klasse noch nicht geladen wurde, versucht <classname>Zend_Form</classname> das zu
-                tun, indem <classname>Zend_Loader</classname> verwendet wird.
+                Wenn die Klasse noch nicht geladen wurde, versucht <classname>Zend_Form</classname>
+                das zu tun, indem <classname>Zend_Loader</classname> verwendet wird.
             </para>
 
             <para>
@@ -730,7 +735,8 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             <title>Methoden von Zend_Form_DisplayGroup</title>
 
             <para>
-                <classname>Zend_Form_DisplayGroup</classname> hat die folgenden Methoden, gruppiert nach Typ:
+                <classname>Zend_Form_DisplayGroup</classname> hat die folgenden Methoden, gruppiert
+                nach Typ:
             </para>
 
             <itemizedlist>
@@ -738,7 +744,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     <itemizedlist>
                         <listitem><para><code>setOptions(array $options)</code></para></listitem>
 
-                        <listitem><para><code>setConfig(Zend_Config $config)</code></para></listitem>
+                        <listitem>
+                            <para><code>setConfig(Zend_Config $config)</code></para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
 
@@ -778,9 +786,18 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Elemente:</para>
                     <itemizedlist>
-                        <listitem><para><code>createElement($type, $name, array $options = array())</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>createElement($type, $name, array $options = array())</code>
+                            </para>
+                        </listitem>
 
-                        <listitem><para><code>addElement($typeOrElement, $name, array $options = array())</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>addElement($typeOrElement, $name, array $options =
+                                array())</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>addElements(array $elements)</code></para></listitem>
 
@@ -798,7 +815,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Plugin Loader:</para>
                     <itemizedlist>
-                        <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader $loader)</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>setPluginLoader(Zend_Loader_PluginLoader $loader)</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>getPluginLoader()</code></para></listitem>
 
@@ -810,11 +831,17 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Dekoratore:</para>
                     <itemizedlist>
-                        <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>addDecorator($decorator, $options = null)</code></para>
+                        </listitem>
 
-                        <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
+                        <listitem>
+                            <para><code>addDecorators(array $decorators)</code></para>
+                        </listitem>
 
-                        <listitem><para><code>setDecorators(array $decorators)</code></para></listitem>
+                        <listitem>
+                            <para><code>setDecorators(array $decorators)</code></para>
+                        </listitem>
 
                         <listitem><para><code>getDecorator($name)</code></para></listitem>
 
@@ -828,17 +855,26 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 
                 <listitem><para>Darstellung:</para>
                     <itemizedlist>
-                        <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                        </listitem>
 
                         <listitem><para><code>getView()</code></para></listitem>
 
-                        <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                        <listitem>
+                            <para><code>render(Zend_View_Interface $view = null)</code></para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
 
                 <listitem><para>I18n:</para>
                     <itemizedlist>
-                        <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                        <listitem>
+                            <para>
+                                <code>setTranslator(Zend_Translate_Adapter $translator =
+                                null)</code>
+                            </para>
+                        </listitem>
 
                         <listitem><para><code>getTranslator()</code></para></listitem>
 
@@ -880,11 +916,11 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         </itemizedlist>
 
         <para>
-            Eine Subform kann ein <classname>Zend_Form</classname> Objekt sein, oder typischerweise ein
-            <classname>Zend_Form_SubForm</classname> Objekt. Das zweitere enthält Dekoratore die für das
-            Einfügen in größere Formen passen (z.B. gibt es keine zusätzlichen HTML Form Tags aus,
-            gruppiert aber Elemente). Um eine Subform anzuhängen, muß diese einfach der Form
-            hinzugefügt und ein Name vergeben werden:
+            Eine Subform kann ein <classname>Zend_Form</classname> Objekt sein, oder typischerweise
+            ein <classname>Zend_Form_SubForm</classname> Objekt. Das zweitere enthält Dekoratore die
+            für das Einfügen in größere Formen passen (z.B. gibt es keine zusätzlichen HTML form
+            Tags aus, gruppiert aber Elemente). Um eine Subform anzuhängen, muß diese einfach der
+            Form hinzugefügt und ein Name vergeben werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -905,7 +941,8 @@ $subForm = $form->subform;
 ]]></programlisting>
 
         <para>
-            Subformen sind bei der Iteration der Form enthalten, aber die Elemente die Sie enthalten nicht.
+            Subformen sind bei der Iteration der Form enthalten, aber die Elemente die Sie enthalten
+            nicht.
         </para>
 
         <sect3 id="zend.form.forms.subforms.global">
@@ -1009,11 +1046,12 @@ $form->setAction('/user/login')
 ]]></programlisting>
 
         <para>
-            Man kann auch den Encoding Typ des Formulars spezifizieren indem die Enctype Zugriffsmethode
-            verwendet wird. <classname>Zend_Form</classname> definiert zwei Konstanten, <classname>Zend_Form::ENCTYPE_URLENCODED</classname>
-            und <classname>Zend_Form::ENCTYPE_MULTIPART</classname>, die den Werten 'application/x-www-form-urlencoded'
-            und 'multipart/form-data' entsprechen; trotzdem kann das auf jeden gewünschten Encodingtyp
-            gesetzt werden.
+            Man kann auch den Encoding Typ des Formulars spezifizieren indem die Enctype
+            Zugriffsmethode verwendet wird. <classname>Zend_Form</classname> definiert zwei
+            Konstanten, <classname>Zend_Form::ENCTYPE_URLENCODED</classname> und
+            <classname>Zend_Form::ENCTYPE_MULTIPART</classname>, die den Werten
+            'application/x-www-form-urlencoded' und 'multipart/form-data' entsprechen; trotzdem kann
+            das auf jeden gewünschten Encodingtyp gesetzt werden.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -1031,8 +1069,8 @@ $form->setAction('/user/login')
         </note>
 
         <para>
-            <classname>Zend_Form</classname> implementiert das <code>Countable</code> Interface, welches es
-            erlaubt es als Argument fürs Zählen zu übergeben:
+            <classname>Zend_Form</classname> implementiert das <code>Countable</code> Interface,
+            welches es erlaubt es als Argument fürs Zählen zu übergeben:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -1041,8 +1079,9 @@ $numItems = count($form);
 
         <para>
             Das Setzen von eigenen Metadaten wird durch die attribs Zugriffsmethode durchgeführt.
-            Da Überladen in <classname>Zend_Form</classname> verwendet wird um auf Elemente, Anzeigegruppen,
-            und Subformen zuzugreifen ist das die einzige Methode für den Zugriff auf Metadaten.
+            Da Überladen in <classname>Zend_Form</classname> verwendet wird um auf Elemente,
+            Anzeigegruppen, und Subformen zuzugreifen ist das die einzige Methode für den Zugriff
+            auf Metadaten.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -1071,22 +1110,22 @@ $form->clearAttribs();
         <para>
             Das Erstellen des Markups für eine Form ist oft ein zeitintensiver Arbeitsschritt,
             speziell wenn man plant das selbe Markup wiederzuverwenden um Dinge zu zeigen wie
-            Prüffehler, übermittelte Werte, usw. <classname>Zend_Form</classname>'s Antwort hierfür sind
-            <emphasis>Dekoratore</emphasis>.
+            Prüffehler, übermittelte Werte, usw. <classname>Zend_Form</classname>'s Antwort hierfür
+            sind <emphasis>Dekoratore</emphasis>.
         </para>
 
         <para>
-            Dekoratore für <classname>Zend_Form</classname> Objekte können verwendet werden um eine Form
-            darzustellen. Der FormElements Dekorator iteriert durch alle Elemente in einer Form --
-            Elemente, Anzeigegruppen, und Subformen -- stellt sie dar, und gibt das Ergebnis
+            Dekoratore für <classname>Zend_Form</classname> Objekte können verwendet werden um eine
+            Form darzustellen. Der FormElements Dekorator iteriert durch alle Elemente in einer form
+            -- Elemente, Anzeigegruppen, und Subformen -- stellt sie dar, und gibt das Ergebnis
             zurück. Zusätzliche Dekoratore können dann verwendet werden um diese Inhalte zu
             wrappen, sie anzufügen oder sie voranzustellen.
         </para>
 
         <para>
-            Die Standarddekoratore für <classname>Zend_Form</classname> sind FormElemente, HtmlTag (wrappt in
-            einer Definitionsliste), und Form; der entsprechende Code für deren Erstellung ist wie
-            folgt:
+            Die Standarddekoratore für <classname>Zend_Form</classname> sind FormElemente, HtmlTag
+            (wrappt in einer Definitionsliste), und Form; der entsprechende Code für deren
+            Erstellung ist wie folgt:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -1137,10 +1176,10 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
             <title>Verwenden mehrerer Dekoratore des gleichen Typs</title>
 
             <para>
-                Intern verwendet <classname>Zend_Form</classname> eine Dekorator Klasse als Mechsnismus für
-                das nachsehen wenn Dekoratore empfangen werden. Als Ergebnis können mehrere
-                Dekoratore nicht zur gleichen Zeit registriert werden; nachfolgende Dekoratore
-                würden einfach die vorher existierenden überschreiben.
+                Intern verwendet <classname>Zend_Form</classname> eine Dekorator Klasse als
+                Mechsnismus für das nachsehen wenn Dekoratore empfangen werden. Als Ergebnis können
+                mehrere Dekoratore nicht zur gleichen Zeit registriert werden; nachfolgende
+                Dekoratore würden einfach die vorher existierenden überschreiben.
             </para>
 
             <para>
@@ -1221,12 +1260,12 @@ $fooBar  = $form->getDecorator('FooBar');
         </itemizedlist>
 
         <para>
-            <classname>Zend_Form</classname> verwendet auch das Überladen um die Darstellung von speziellen
-            Dekoratoren zu erlauben. <code>__call()</code> interagiert mit Methoden die mit dem Text
-            'render' beginnen und verwendet den Rest des Methodennamens um nach einem Dekorator zu suchen;
-            wenn er gefunden wird, wird dieser <emphasis>einzelne</emphasis> Dekorator dargestellt. Jedes
-            Argument das dem Methodenaufruf übergeben wird, wird als Inhalt an die <code>render()</code>
-            Methode des Dekorators übergeben. Als Beispiel:
+            <classname>Zend_Form</classname> verwendet auch das Überladen um die Darstellung von
+            speziellen Dekoratoren zu erlauben. <code>__call()</code> interagiert mit Methoden die
+            mit dem Text 'render' beginnen und verwendet den Rest des Methodennamens um nach einem
+            Dekorator zu suchen; wenn er gefunden wird, wird dieser <emphasis>einzelne</emphasis>
+            Dekorator dargestellt. Jedes Argument das dem Methodenaufruf übergeben wird, wird als
+            Inhalt an die <code>render()</code> Methode des Dekorators übergeben. Als Beispiel:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -1247,8 +1286,8 @@ echo $form->renderFieldset("<p>Das ist der Fieldset Inhalt</p>");
 
         <para>
             Ein primärer Verwendungszweck für Forms ist die Überprüfung von übermittelten Daten.
-            <classname>Zend_Form</classname> erlaubt es eine komplette Form, eine teilweise Form, oder
-            Antworten von XmlHttpRequests (AJAX) zu prüfen. Wenn die übertragenen Daten nicht
+            <classname>Zend_Form</classname> erlaubt es eine komplette Form, eine teilweise Form,
+            oder Antworten von XmlHttpRequests (AJAX) zu prüfen. Wenn die übertragenen Daten nicht
             gültig sind, hat es Methoden für das Empfangen der verschiedenen Fehlercodes und
             Nachrichten für Elemente und Subformen.
         </para>
@@ -1333,10 +1372,10 @@ $messages = $form->getMessages('username');
 
         <note>
             <para>
-                Notiz: Wenn Elemente geprüft werden, sendet <classname>Zend_Form</classname> ein zweites
-                Argument zu jeder <code>isValid()</code> Methode der Elemente: Das Array der Daten
-                die geprüft werden sollen. Das kann von individuellen Prüfern verwendet werden um
-                Ihnen zu erlauben andere übertragene Werte zu verwenden wenn die Gültigkeit der
+                Notiz: Wenn Elemente geprüft werden, sendet <classname>Zend_Form</classname> ein
+                zweites Argument zu jeder <code>isValid()</code> Methode der Elemente: Das Array der
+                Daten die geprüft werden sollen. Das kann von individuellen Prüfern verwendet werden
+                um Ihnen zu erlauben andere übertragene Werte zu verwenden wenn die Gültigkeit der
                 Daten ermittelt wird. Ein Beispiel wäre eine Registrations Form die beide benötigt,
                 ein Passwort und eine Passwort Bestätigung; das Passwort Element könnte die
                 Passwort Bestätigung als Teil seiner Prüfung verwenden.
@@ -1347,10 +1386,11 @@ $messages = $form->getMessages('username');
             <title>Selbst definierte Fehlermeldungen</title>
 
             <para>
-                Von Zeit zu Zeit ist es gewünscht ein oder mehrere spezielle Fehlermeldungen zu spezifizieren
-                die statt den Fehlermeldungen verwendet werden sollen die von den Validatoren verwendet werden
-                die dem Element angehängt sind. Zusätzlich will man von Zeit zu Zeit ein Element selbst als
-                ungültig markieren. Diese Funktionalität ist über die folgenden Methoden ermöglicht.
+                Von Zeit zu Zeit ist es gewünscht ein oder mehrere spezielle Fehlermeldungen zu
+                spezifizieren die statt den Fehlermeldungen verwendet werden sollen die von den
+                Validatoren verwendet werden die dem Element angehängt sind. Zusätzlich will man von
+                Zeit zu Zeit ein Element selbst als ungültig markieren. Diese Funktionalität ist
+                über die folgenden Methoden ermöglicht.
             </para>
 
             <itemizedlist>
@@ -1361,44 +1401,45 @@ $messages = $form->getMessages('username');
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addErrorMessages(array $messages)</code>: Fügt mehrere Fehlermeldungen hinzu
-                    die bei Form-Überprüfungs-Fehlern angezeigt werden.
+                    <code>addErrorMessages(array $messages)</code>: Fügt mehrere Fehlermeldungen
+                    hinzu die bei Form-Überprüfungs-Fehlern angezeigt werden.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrorMessages(array $messages)</code>: Fügt mehrere Fehlermeldungen hinzu die
-                    bei Form-Überprüfungs-Fehlern angezeigt werden, und überschreibt alle vorher gesetzten
-                    Fehlermeldungen.
+                    <code>setErrorMessages(array $messages)</code>: Fügt mehrere Fehlermeldungen
+                    hinzu die bei Form-Überprüfungs-Fehlern angezeigt werden, und überschreibt alle
+                    vorher gesetzten Fehlermeldungen.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getErrorMessages()</code>: Empfängt eine Liste von selbstdefinierten Fehlermeldungen
-                    die vorher definiert wurden.
+                    <code>getErrorMessages()</code>: Empfängt eine Liste von selbstdefinierten
+                    Fehlermeldungen die vorher definiert wurden.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>clearErrorMessages()</code>: Entfernt alle eigenen Fehlermeldungen die vorher
-                    definiert wurden.
+                    <code>clearErrorMessages()</code>: Entfernt alle eigenen Fehlermeldungen die
+                    vorher definiert wurden.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>markAsError()</code>: Markiert das Element wie wenn die Überprüfung fehlgeschlagen
-                    wäre.
+                    <code>markAsError()</code>: Markiert das Element wie wenn die Überprüfung
+                    fehlgeschlagen wäre.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>addError($message)</code>: Fügt einen Fehler zum eigenen Stack der Fehlermeldungen
-                    hinzu und markiert das Element als ungültig.
-                </para></listitem>
-
-                <listitem><para>
-                    <code>addErrors(array $messages)</code>: Fügt mehrere Nachrichten zum eigenen Stack der
+                    <code>addError($message)</code>: Fügt einen Fehler zum eigenen Stack der
                     Fehlermeldungen hinzu und markiert das Element als ungültig.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>setErrors(array $messages)</code>: Überschreibt den eigenen Stack der Fehlermeldungen
-                    mit den angegebenen Meldungen und markiert das Element als ungültig.
+                    <code>addErrors(array $messages)</code>: Fügt mehrere Nachrichten zum eigenen
+                    Stack der Fehlermeldungen hinzu und markiert das Element als ungültig.
+                </para></listitem>
+
+                <listitem><para>
+                    <code>setErrors(array $messages)</code>: Überschreibt den eigenen Stack der
+                    Fehlermeldungen mit den angegebenen Meldungen und markiert das Element als
+                    ungültig.
                 </para></listitem>
             </itemizedlist>
 
@@ -1427,19 +1468,32 @@ $messages = $form->getMessages('username');
 
             <listitem><para>Plugin Loader und Pfade:</para>
                 <itemizedlist>
-                    <listitem><para><code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type
+                            = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>getPluginLoader($type = null)</code></para></listitem>
 
-                    <listitem><para><code>addPrefixPath($prefix, $path, $type = null) </code></para></listitem>
+                    <listitem>
+                        <para><code>addPrefixPath($prefix, $path, $type = null) </code></para>
+                    </listitem>
 
                     <listitem><para><code>addPrefixPaths(array $spec)</code></para></listitem>
 
-                    <listitem><para><code>addElementPrefixPath($prefix, $path, $type = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addElementPrefixPath($prefix, $path, $type = null)</code></para>
+                    </listitem>
 
-                    <listitem><para><code>addElementPrefixPaths(array $spec)</code></para></listitem>
+                    <listitem>
+                        <para><code>addElementPrefixPaths(array $spec)</code></para>
+                    </listitem>
 
-                    <listitem><para><code>addDisplayGroupPrefixPath($prefix, $path)</code></para></listitem>
+                    <listitem>
+                        <para><code>addDisplayGroupPrefixPath($prefix, $path)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
@@ -1475,7 +1529,11 @@ $messages = $form->getMessages('username');
 
             <listitem><para>Elemente:</para>
                 <itemizedlist>
-                    <listitem><para><code>addElement($element, $name = null, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>addElement($element, $name = null, $options = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>addElements(array $elements)</code></para></listitem>
 
@@ -1503,13 +1561,17 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>setElementFilters(array $filters)</code></para></listitem>
 
-                    <listitem><para><code>setElementDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setElementDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Subformen:</para>
                 <itemizedlist>
-                    <listitem><para><code>addSubForm(Zend_Form $form, $name, $order = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addSubForm(Zend_Form $form, $name, $order = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>addSubForms(array $subForms)</code></para></listitem>
 
@@ -1523,13 +1585,19 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearSubForms()</code></para></listitem>
 
-                    <listitem><para><code>setSubFormDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setSubFormDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>Anzeigegruppen:</para>
                 <itemizedlist>
-                    <listitem><para><code>addDisplayGroup(array $elements, $name, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>addDisplayGroup(array $elements, $name, $options = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>addDisplayGroups(array $groups)</code></para></listitem>
 
@@ -1543,7 +1611,9 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearDisplayGroups()</code></para></listitem>
 
-                    <listitem><para><code>setDisplayGroupDecorators(array $decorators)</code></para></listitem>
+                    <listitem>
+                        <para><code>setDisplayGroupDecorators(array $decorators)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
@@ -1567,11 +1637,15 @@ $messages = $form->getMessages('username');
 
             <listitem><para>Darstellung:</para>
                 <itemizedlist>
-                    <listitem><para><code>setView(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>setView(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>getView()</code></para></listitem>
 
-                    <listitem><para><code>addDecorator($decorator, $options = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>addDecorator($decorator, $options = null)</code></para>
+                    </listitem>
 
                     <listitem><para><code>addDecorators(array $decorators)</code></para></listitem>
 
@@ -1585,13 +1659,19 @@ $messages = $form->getMessages('username');
 
                     <listitem><para><code>clearDecorators()</code></para></listitem>
 
-                    <listitem><para><code>render(Zend_View_Interface $view = null)</code></para></listitem>
+                    <listitem>
+                        <para><code>render(Zend_View_Interface $view = null)</code></para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem><para>I18n:</para>
                 <itemizedlist>
-                    <listitem><para><code>setTranslator(Zend_Translate_Adapter $translator = null)</code></para></listitem>
+                    <listitem>
+                        <para>
+                            <code>setTranslator(Zend_Translate_Adapter $translator = null)</code>
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>getTranslator()</code></para></listitem>
 
@@ -1607,17 +1687,18 @@ $messages = $form->getMessages('username');
         <title>Konfiguration</title>
 
         <para>
-            <classname>Zend_Form</classname> ist über <code>setOptions()</code> und <code>setConfig()</code>
-            vollständig konfigurierbar (oder durch die Übergabe von Optionen oder einem
-            <classname>Zend_Config</classname> Objekt an den Konstruktor). Durch Verwendung dieser Methoden
-            können Form Elemente, Anzeigegruppen, Dekoratore, und Metadaten spezifiziert werden.
+            <classname>Zend_Form</classname> ist über <code>setOptions()</code> und
+            <code>setConfig()</code> vollständig konfigurierbar (oder durch die Übergabe von
+            Optionen oder einem <classname>Zend_Config</classname> Objekt an den Konstruktor). Durch
+            Verwendung dieser Methoden können Form Elemente, Anzeigegruppen, Dekoratore, und
+            Metadaten spezifiziert werden.
         </para>
 
         <para>
-            Als generelle Regel, wenn 'set' + der Optionsschlüssel zu einer <classname>Zend_Form</classname>
-            Methode referieren, wird der angebotene Wert zu dieser Methode übergeben. Wenn die
-            Methode nicht existiert, wird angenommen das der Schlüssel eine Referenz zu einem
-            Attribut ist, und wird an <code>setAttrib()</code> übergeben.
+            Als generelle Regel, wenn 'set' + der Optionsschlüssel zu einer
+            <classname>Zend_Form</classname> Methode referieren, wird der angebotene Wert zu dieser
+            Methode übergeben. Wenn die Methode nicht existiert, wird angenommen das der Schlüssel
+            eine Referenz zu einem Attribut ist, und wird an <code>setAttrib()</code> übergeben.
         </para>
 
         <para>
@@ -1644,7 +1725,9 @@ $messages = $form->getMessages('username');
                 <para>die folgenden Setter können nicht auf diesem Weg gesetzt werden:</para>
 
                 <itemizedlist>
-                    <listitem><para><code>setAttrib (da setAttribs *wird* funktionieren)</code></para></listitem>
+                    <listitem>
+                        <para><code>setAttrib (da setAttribs *wird* funktionieren)</code></para>
+                    </listitem>
 
                     <listitem><para><code>setConfig</code></para></listitem>
 

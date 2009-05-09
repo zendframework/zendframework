@@ -6,9 +6,10 @@
     <sect2 id="zend.service.delicious.introduction">
         <title>Einführung</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> ist eine simple API, um die XML- und JSON-Webservices von
-            <ulink url="http://del.icio.us">del.icio.us</ulink> nutzen zu können. Diese Komponente bietet
-            Lese- und Schreibzugriff auf Beiträge bei del.icio.us, sofern man die nötigen Zugrffisrechte vorweist.
+            <classname>Zend_Service_Delicious</classname> ist eine simple API, um die XML- und
+            JSON-Webservices von <ulink url="http://del.icio.us">del.icio.us</ulink> nutzen zu
+            können. Diese Komponente bietet Lese- und Schreibzugriff auf Beiträge bei del.icio.us,
+            sofern man die nötigen Zugrffisrechte vorweist.
         </para>
         <example id="zend.service.delicious.introduction.getAllPosts">
             <title>Alle Beiträge abrufen</title>
@@ -27,10 +28,11 @@ foreach ($posts as $post) {
     <sect2 id="zend.service.delicious.retrieving_posts">
         <title>Beiträge abrufen</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> bietet drei Möglichkeiten, um Beiträge von del.icio.us abzurufen:
-            <code>getPosts()</code>, <code>getRecentPosts()</code> und <code>getAllPosts()</code>. Jede dieser Methoden
-            liefert eine Instanz der Klasse <classname>Zend_Service_Delicious_PostList</classname>, welche die abgerufenen
-            Beiträge beinhaltet.
+            <classname>Zend_Service_Delicious</classname> bietet drei Möglichkeiten, um Beiträge von
+            del.icio.us abzurufen: <code>getPosts()</code>, <code>getRecentPosts()</code> und
+            <code>getAllPosts()</code>. Jede dieser Methoden liefert eine Instanz der Klasse
+            <classname>Zend_Service_Delicious_PostList</classname>, welche die abgerufenen Beiträge
+            beinhaltet.
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -67,13 +69,14 @@ public function getAllPosts($tag = null);
     <sect2 id="zend.service.delicious.postlist">
         <title>Zend_Service_Delicious_PostList</title>
         <para>
-            Instanzen dieser Klasse werden von den Methoden <code>getPosts()</code>, <code>getAllPosts()</code>,
-            <code>getRecentPosts()</code> und <code>getUserPosts()</code> der Klasse <classname>Zend_Service_Delicious</classname>
+            Instanzen dieser Klasse werden von den Methoden <code>getPosts()</code>,
+            <code>getAllPosts()</code>, <code>getRecentPosts()</code> und
+            <code>getUserPosts()</code> der Klasse <classname>Zend_Service_Delicious</classname>
             zurückgegeben.
         </para>
         <para>
-            Für den leichteren Zugriff implementiert diese Klasse die Interfaces <code>Countable</code>,
-            <code>Iterator</code> and<code>ArrayAccess</code>.
+            Für den leichteren Zugriff implementiert diese Klasse die Interfaces
+            <code>Countable</code>, <code>Iterator</code> and<code>ArrayAccess</code>.
         </para>
         <example id="zend.service.delicious.postlist.accessing_post_lists">
             <title>Zugriff auf Beitragslisten</title>
@@ -97,22 +100,24 @@ echo $posts[0]->getTitle();
         </example>
         <note>
             <para>
-              Die Methoden <code>ArrayAccess::offsetSet()</code> und <code>ArrayAccess::offsetUnset()</code>
-              werfen in dieser Implementierung Ausnahmen (Exceptions). Dadurch werfen Codes, wie z.B.
-              <code>unset($posts[0]);</code> oder <code>$posts[0] = 'A';</code> Exceptions, da nur
-              Leserechte für die Eigenschaften bestehen.
+              Die Methoden <code>ArrayAccess::offsetSet()</code> und
+              <code>ArrayAccess::offsetUnset()</code> werfen in dieser Implementierung Ausnahmen
+              (Exceptions). Dadurch werfen Codes, wie z.B. <code>unset($posts[0]);</code> oder
+              <code>$posts[0] = 'A';</code> Exceptions, da nur Leserechte für die Eigenschaften
+              bestehen.
             </para>
         </note>
         <para>
-            Beitragslisten-Objekte haben zwei integrierte Filter-Möglichkenten. Die Listen können nach tags und
-            nach URLs gefiltert werden.
+            Beitragslisten-Objekte haben zwei integrierte Filter-Möglichkenten. Die Listen können
+            nach Tags und nach URLs gefiltert werden.
         </para>
         <example id="zend.service.delicious.postlist.example.withTags">
             <title>Eine Beitragsliste nach gewissen tags filtern</title>
             <para>
-               Beiträge mit speziellen tags können durch die Methode <code>withTags()</code> aus der Liste herausgefiltert
-               werden. Der Einfachheit halber, kann die Methode <code>withTag()</code> verwendet werden, wenn nur nach
-               einem einzigen tag gefiltert werden soll.
+               Beiträge mit speziellen tags können durch die Methode <code>withTags()</code> aus der
+               Liste herausgefiltert werden. Der Einfachheit halber, kann die Methode
+               <code>withTag()</code> verwendet werden, wenn nur nach einem einzigen tag gefiltert
+               werden soll.
             </para>
             <programlisting role="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -128,9 +133,9 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
         <example id="zend.service.delicious.postlist.example.byUrl">
             <title>Eine Beitragsliste nach URLs filtern</title>
             <para>
-              Beiträge können mit Hilfe der Methode <code>withUrl()</code> nach einem speziellen URL gefiltert werden.
-              Dabei wird ein regulärer Ausdruck  verwendet, um nach Bestandteilen innerhalb des URL zu suchen
-              bzw. zu filtern.
+              Beiträge können mit Hilfe der Methode <code>withUrl()</code> nach einem speziellen URL
+              gefiltert werden. Dabei wird ein regulärer Ausdruck  verwendet, um nach Bestandteilen
+              innerhalb des URL zu suchen bzw. zu filtern.
             </para>
             <programlisting role="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -161,7 +166,8 @@ $posts[0]->save();
         <example id="zend.service.delicious.editing_posts.method_call_chaining">
             <title>Verkettung von Methodenaufrufen</title>
             <para>
-              Jede set-Methode gibt das Beitragsobjekt zurück, so dass man die Methodenaufrufe verketten kann.
+              Jede set-Methode gibt das Beitragsobjekt zurück, so dass man die Methodenaufrufe
+              verketten kann.
             </para>
             <programlisting role="php"><![CDATA[
 $delicious = new Zend_Service_Delicious('username', 'password');
@@ -176,9 +182,9 @@ $posts[0]->setTitle('New title')
     <sect2 id="zend.service.delicious.deleting_posts">
         <title>Das Löschen von Beiträgen</title>
         <para>
-            Es existieren zwei Wege, um einen Beitrag zu löschen. Zum Einen explizit über den Beitrags-URL
-            oder zum Anderen durch den Aufruf der Methode <code>delete()</code> mit dem Objekt, welches den
-            zu löschenden Beitrag repräsentiert.
+            Es existieren zwei Wege, um einen Beitrag zu löschen. Zum Einen explizit über den
+            Beitrags-URL oder zum Anderen durch den Aufruf der Methode <code>delete()</code> mit dem
+            Objekt, welches den zu löschenden Beitrag repräsentiert.
         </para>
         <example id="zend.service.delicious.deleting_posts.deleting_posts">
             <title>Beiträge löschen</title>
@@ -200,10 +206,12 @@ $delicious->deletePost($posts[0]->getUrl());
     <sect2 id="zend.service.delicious.adding_posts">
         <title>Das Hinzufügen von neuen Beiträgen</title>
         <para>
-          Um einen Beitrag hinzuzufügen, muss zu Beginn die Methode <code>createNewPost()</code> aufgerufen werden,
-          welche eine Instanz der Klasse <classname>Zend_Service_Delicious_Post</classname> zurückgibt. Danach kann mit
-          Hilfe des erhaltenen Objekts der Beitrag verändert werden. Nach der Änderung muss die <code>save()</code>-Methode
-          aufgerufen werden, damit die Änderungen in die del.icio.us-Datenbank übernommen werden.
+          Um einen Beitrag hinzuzufügen, muss zu Beginn die Methode <code>createNewPost()</code>
+          aufgerufen werden, welche eine Instanz der Klasse
+          <classname>Zend_Service_Delicious_Post</classname> zurückgibt. Danach kann mit Hilfe des
+          erhaltenen Objekts der Beitrag verändert werden. Nach der Änderung muss die
+          <code>save()</code>-Methode aufgerufen werden, damit die Änderungen in die
+          del.icio.us-Datenbank übernommen werden.
         </para>
         <example id="zend.service.delicious.adding_posts.adding_a_post">
             <title>Einen Beitrag hinzufügen</title>
@@ -299,8 +307,9 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
         </table>
         <note>
             <para>
-                Sollten nur diese Methoden verwendet werden, ist dem Konstruktor der Klasse <classname>Zend_Service_Delicious</classname>
-                bei der Instanzierung kein Nutzername in Kombination mit dem entsprechenden Passwort zu übergeben.
+                Sollten nur diese Methoden verwendet werden, ist dem Konstruktor der Klasse
+                <classname>Zend_Service_Delicious</classname> bei der Instanzierung kein Nutzername
+                in Kombination mit dem entsprechenden Passwort zu übergeben.
             </para>
         </note>
         <example id="zend.service.delicious.public_data.retrieving_public_data">
@@ -322,11 +331,12 @@ print_r($delicious->getUserTags('someUser'));
         <sect3 id="zend.service.delicious.public_data.posts">
             <title>Öffentliche Beiträge</title>
             <para>
-                Wenn öffentliche Beiträge über die Methode <code>getUserPosts()</code> bezogen werden wird ein
-                <classname>Zend_Service_Delicious_PostList</classname>-Objekt zurückgegeben, welches die einzelnen Beiträge
-                in einer Liste von <classname>Zend_Service_Delicious_SimplePost</classname>-Objekten speichert. Diese
-                Objekte enthalten Basisinformationen über den Beitrag, wie z.B. den URL, den Titel, die Notizen und
-                tags.
+                Wenn öffentliche Beiträge über die Methode <code>getUserPosts()</code> bezogen
+                werden wird ein <classname>Zend_Service_Delicious_PostList</classname>-Objekt
+                zurückgegeben, welches die einzelnen Beiträge in einer Liste von
+                <classname>Zend_Service_Delicious_SimplePost</classname>-Objekten speichert. Diese
+                Objekte enthalten Basisinformationen über den Beitrag, wie z.B. den URL, den Titel,
+                die Notizen und Tags.
             </para>
             <table id="zend.service.delicious.public_data.posts.SimplePost_methods">
                 <title>Methoden der Klasse Zend_Service_Delicious_SimplePost</title>
@@ -367,9 +377,11 @@ print_r($delicious->getUserTags('someUser'));
     <sect2 id="zend.service.delicious.httpclient">
         <title>HTTP client</title>
         <para>
-            <classname>Zend_Service_Delicious</classname> verwendet die Klasse <classname>Zend_Rest_Client</classname>, um HTTP-Request
-            an den del.icio.us webservice zu schicken. Um einzustellen, welchen HTTP client <classname>Zend_Service_Delicious</classname>
-            verwenden soll, muss der HTTP client der Klasse <classname>Zend_Rest_Client</classname> geändert werden.
+            <classname>Zend_Service_Delicious</classname> verwendet die Klasse
+            <classname>Zend_Rest_Client</classname>, um HTTP-Request an den del.icio.us Webservice
+            zu schicken. Um einzustellen, welchen HTTP Client
+            <classname>Zend_Service_Delicious</classname> verwenden soll, muss der HTTP Client der
+            Klasse <classname>Zend_Rest_Client</classname> geändert werden.
         </para>
         <example id="zend.service.delicious.httpclient.changing">
             <title>Veränderung des HTTP clients der Klasse Zend_Rest_Client</title>
@@ -379,9 +391,9 @@ Zend_Rest_Client::setHttpClient($myHttpClient);
 ]]></programlisting>
         </example>
         <para>
-            Sollte man mehr als einen Request mit <classname>Zend_Service_Delicious</classname> senden, ist es sinnvoll den
-            HTTP client so zu konfigurieren, dass die Verbindungen offen gehalten werden, um die Geschwindigkeit der
-            Requests zu erhöhen.
+            Sollte man mehr als einen Request mit <classname>Zend_Service_Delicious</classname>
+            senden, ist es sinnvoll den HTTP client so zu konfigurieren, dass die Verbindungen offen
+            gehalten werden, um die Geschwindigkeit der Requests zu erhöhen.
         </para>
         <example id="zend.service.delicious.httpclient.keepalive">
             <title>Konifguration des HTTP clients, so dass Verbindungen geöffnet bleiben</title>
@@ -393,9 +405,10 @@ Zend_Rest_Client::getHttpClient()->setConfig(array(
         </example>
         <note>
             <para>
-                Bei der Instanzierung eines <classname>Zend_Service_Delicious</classname> Objekts wird der SSL Transport
-                der Klasse <classname>Zend_Rest_Client</classname> auf <code>'ssl'</code> anstatt auf <code>'ssl2'</code> gesetzt,
-                da del.icio.us einige Probleme mit <code>'ssl2'</code> hat. So kann es vorkommen, dass die
+                Bei der Instanzierung eines <classname>Zend_Service_Delicious</classname> Objekts
+                wird der SSL Transport der Klasse <classname>Zend_Rest_Client</classname> auf
+                <code>'ssl'</code> anstatt auf <code>'ssl2'</code> gesetzt, da del.icio.us einige
+                Probleme mit <code>'ssl2'</code> hat. So kann es vorkommen, dass die
                 Vervollständigung eines Request sehr lange (um die zwei Sekunden) dauert.
             </para>
         </note>

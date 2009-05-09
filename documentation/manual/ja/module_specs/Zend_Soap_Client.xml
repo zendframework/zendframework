@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 15341 -->
+<sect1 id="zend.soap.client">
+    <title>Zend_Soap_Client</title>
+
+    <para>
+        <classname>Zend_Soap_Client</classname>によりPHPプログラマーにとってSOAPクライアントの開発が簡単になります。
+    </para>
+
+    <para>
+        WSDLモードまたは非WSDLモードで使用できるでしょう。
+    </para>
+
+    <para>
+        WSDLモードでは、Zend_Soap_Clientコンポーネントは
+        トランスポート層オプションを定めるためにWSDLドキュメントを使います。
+    </para>
+
+    <para>
+        WSDL記述は通常、クライアントがアクセスするウェブ・サービスによって提供されます。
+        WSDL記述が利用できるようにならなければ、非WSDLモードでZend_Soap_Clientを使いたいかもしれません。
+        すべてのSOAPプロトコル・オプションは、
+        このモードで明示的にZend_Soap_Clientクラス上に設定されなければなりません。
+    </para>
+
+    <sect2 id="zend.soap.client.constructor">
+        <title>Zend_Soap_Clientコンストラクタ</title>
+        <para>
+            <classname>Zend_Soap_Client</classname>コンストラクタには引数が２つあります:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>$wsdl</code> - WSDLファイルのURI
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <code>$options</code> - SOAPクライアントオブジェクトを作成するためのオプション
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            これらのパラメータは両方とも、
+            それぞれ<code>setWsdl($wsdl)</code>や<code>setOptions($options)</code>メソッドで、
+            後から設定されるかもしれません。
+        </para>
+
+        <note>
+            <title>重要</title>
+            <para>
+                もし非WSDLモードでZend_Soap_Clientコンポーネントを使う場合、
+                'location' および 'uri' オプションを設定し<emphasis>なければなりません</emphasis>。
+            </para>
+        </note>
+
+        <para>
+            下記のオプションが許されています:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        'soap_version' ('soapVersion') - 使用するSOAPバージョン (SOAP_1_1 または SOAP_1_2).
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'classmap' ('classMap') - <!-- TODO -->some
+                        WSDL型をPHPクラスにマップするために使われます。
+                    </para>
+                    <para>
+                        このオプションは、キーとしてWSDL型、値としてPHPクラス名をもつ配列でなければなりません。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'encoding' - 内部文字エンコーディング。 (対外的なエンコーディングとしてUTF-8が常に使われます)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'wsdl' <code>setWsdl($wsdlValue)</code>呼び出しと同じです。
+                    </para>
+                    <para>
+                        このオプションを変更すると、
+                        Zend_Soap_ClientオブジェクトをWSDLモードに、または、から切り替えるかもしれません。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'uri' - SOAPサービスのためのターゲットのネームスペース (非WSDLモードで必要です。WSDLモードでは動作しません)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'location' - 要求するURL (非WSDLモードで必要です。WSDLモードでは動作しません)
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'style' - 要求形式 (WSDLモードでは動作しません): <code>SOAP_RPC</code> または <code>SOAP_DOCUMENT</code>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'use' - メッセージをエンコードするメソッド (WSDLモードでは動作しません): <code>SOAP_ENCODED</code> または
+                        <code>SOAP_LITERAL</code>
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'login' および 'password' - HTTP認証のための login および password
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'proxy_host', 'proxy_port', 'proxy_login' および 'proxy_password' - プロキシ・サーバ経由のHTTP接続
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'local_cert' および 'passphrase' - HTTPクライアント証明書認証オプション。
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        'compression' - 圧縮オプション; 
+                        <code>SOAP_COMPRESSION_ACCEPT</code>や<code>SOAP_COMPRESSION_GZIP</code>、
+                        <code>SOAP_COMPRESSION_DEFLATE</code>の組み合わせです。
+                        下記のように使われるでしょう:
+                        <programlisting role="php"><![CDATA[
+// レスポンスの圧縮を受け付けます
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' => SOAP_COMPRESSION_ACCEPT));
+...
+
+// 圧縮レベル５でqzipを使ってリクエストを圧縮します
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5));
+...
+
+// deflate 圧縮を使ってリクエストを圧縮します
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
+]]></programlisting>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+
+    <sect2 id="zend.soap.client.calls">
+        <title>SOAPリクエストの実行</title>
+
+        <para>
+            <classname>Zend_Soap_Client</classname>オブジェクトを作成したら、SOAPリクエストを実行する準備ができます。
+        </para>
+        <para>
+            ウェブ・サービス・メソッドそれぞれで、
+            一般的なPHP型のパラメータを持つ仮想<classname>Zend_Soap_Client</classname>オブジェクト・メソッドにマップされます。
+        </para>
+
+        <para>
+            それを下記の例のように使います:
+            <programlisting role="php"><![CDATA[
+//****************************************************************
+//                サーバのコード
+//****************************************************************
+// class MyClass {
+//     /**
+//      * このメソッドは ...
+//      *
+//      * @param integer $inputParam
+//      * @return string
+//      */
+//     public function method1($inputParam) {
+//         ...
+//     }
+//
+//     /**
+//      * このメソッドは ...
+//      *
+//      * @param integer $inputParam1
+//      * @param string  $inputParam2
+//      * @return float
+//      */
+//     public function method2($inputParam1, $inputParam2) {
+//         ...
+//     }
+//
+//     ...
+// }
+// ...
+// $server = new Zend_Soap_Server(null, $options);
+// $server->setClass('MyClass');
+// ...
+// $server->handle();
+//
+//****************************************************************
+//                サーバのコード終了
+//****************************************************************
+
+$client = new Zend_Soap_Client("MyService.wsdl");
+...
+
+// $result1 は string です。
+$result1 = $client->method1(10);
+...
+
+// $result2 は float です。
+$result2 = $client->method2(22, 'some string');
+]]></programlisting>
+        </para>
+    </sect2>
+</sect1>

@@ -156,7 +156,8 @@ $validators = array(
                     dieses Arrays können Strings sein die Klassennamen entsprechen oder
                     Filter/Prüfobjekte, wie in den oben beschriebenen Fällen. Zusätzlich kann eine
                     dritte Wahl verwendet werden: Ein Array das einen String enthält der dem
-                    Klassennamen entspricht gefolgt von Argumenten die dessen Konstruktor übergeben werden.
+                    Klassennamen entspricht gefolgt von Argumenten die dessen Konstruktor übergeben
+                    werden.
 
                     <programlisting role="php"><![CDATA[
 $validators = array(

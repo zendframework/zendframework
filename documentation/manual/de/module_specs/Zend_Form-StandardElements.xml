@@ -46,22 +46,23 @@
         <title>Zend_Form_Element_Captcha</title>
 
         <para>
-            CAPTCHAs werden verwendet um automatische Übermittlung von Formularen durch Bots und andere
-            automatische Prozesse zu verhindern.
+            CAPTCHAs werden verwendet um automatische Übermittlung von Formularen durch Bots und
+            andere automatische Prozesse zu verhindern.
         </para>
 
         <para>
-            Das Captcha Formularelement erlaubt es den
-            <link linkend="zend.captcha.adapters">Zend_Captcha Adapter</link> der als Formular CAPTCHA
-            verwendet werden soll anzupassen. Er setzt dann diesen Adapter als Prüfung für das Objekt,
-            und verwendet den Captcha Dekorator für die Darstellung (welche den CAPTCHA Adapter aufruft).
+            Das Captcha Formularelement erlaubt es den <link
+                linkend="zend.captcha.adapters">Zend_Captcha Adapter</link> der als Formular CAPTCHA
+            verwendet werden soll anzupassen. Er setzt dann diesen Adapter als Prüfung für das
+            Objekt, und verwendet den Captcha Dekorator für die Darstellung (welche den CAPTCHA
+            Adapter aufruft).
         </para>
 
         <para>
-            Adapter können alle Adapter in <classname>Zend_Captcha</classname> sein, sowie jeder eigene Adapter
-            der irgendwo anders definiert wurde. Um das z uerlauben, kann ein zusätzlicher Schlüssel für
-            den Plugin Ladetyp, 'CAPTCHA' oder 'captcha' übergeben werden, wenn der Plugin Loader Präfixpfad
-            spezifiziert wird:
+            Adapter können alle Adapter in <classname>Zend_Captcha</classname> sein, sowie jeder
+            eigene Adapter der irgendwo anders definiert wurde. Um das z uerlauben, kann ein
+            zusätzlicher Schlüssel für den Plugin Ladetyp, 'CAPTCHA' oder 'captcha' übergeben
+            werden, wenn der Plugin Loader Präfixpfad spezifiziert wird:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -69,8 +70,9 @@ $element->addPrefixPath('My_Captcha', 'My/Captcha/', 'captcha');
 ]]></programlisting>
 
         <para>
-            Captcha's können dann durch Verwendung der <code>setCaptcha()</code> Methode registriert werden,
-            welche entweder eine konkrete CAPTCHA Instanz, oder den Kurznamen des CAPTCHA Adapters nimmt:
+            Captcha's können dann durch Verwendung der <code>setCaptcha()</code> Methode registriert
+            werden, welche entweder eine konkrete CAPTCHA Instanz, oder den Kurznamen des CAPTCHA
+            Adapters nimmt:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -83,8 +85,8 @@ $element->setCaptcha('Dumb');
 
         <para>
             Wenn das Element über die Konfiguration geladen werden soll, kann entweder der Schlüssel
-            'captcha' mit einem Array das den Schlüssel 'captcha' enthält spezifiziert werden, oder beide
-            Schlüssel 'captcha' und 'captchaOptions':
+            'captcha' mit einem Array das den Schlüssel 'captcha' enthält spezifiziert werden, oder
+            beide Schlüssel 'captcha' und 'captchaOptions':
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -111,16 +113,17 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 ]]></programlisting>
 
         <para>
-            Der verwendete Dekorator wird durch die Abfrage des Captcha Adapters erkannt. Standardmäßig wird
-            der <link linkend="zend.form.standardDecorators.captcha">Captcha Dekorator</link> verwendet,
-            aber ein Adapter kann einen anderen über die <code>getDecorator()</code> Methode spezifizieren.
+            Der verwendete Dekorator wird durch die Abfrage des Captcha Adapters erkannt.
+            Standardmäßig wird der <link linkend="zend.form.standardDecorators.captcha">Captcha
+                Dekorator</link> verwendet, aber ein Adapter kann einen anderen über die
+            <code>getDecorator()</code> Methode spezifizieren.
         </para>
 
         <para>
-            Wie beschrieben, fungiert der Captcha Adapter selbst als Prüfnug für das Element. Zusätzlich
-            wird die NotEmpty Prüfung nicht verwendet, und das Element wird als benötigt markiert. In
-            den meisten Fällen sollte sonst nichts anderes mehr notwendig sein um das Captcha im
-            eigenen Formular zu haben.
+            Wie beschrieben, fungiert der Captcha Adapter selbst als Prüfnug für das Element.
+            Zusätzlich wird die NotEmpty Prüfung nicht verwendet, und das Element wird als benötigt
+            markiert. In den meisten Fällen sollte sonst nichts anderes mehr notwendig sein um das
+            Captcha im eigenen Formular zu haben.
         </para>
     </sect2>
 
@@ -129,8 +132,8 @@ $element = new Zend_Form_Element_Captcha('foo', array(
 
         <para>
             HTML Checkboxen erlauben es spezifische Werte zurückzugeben, arbeiten aber
-            grundsätzlich als Boolean. Wenn Sie angehackt sind, wird der Wert der Checkbox übertragen. Wenn Sie
-            nicht angehackt sind, wird nichts übertragen. Intern erzwingt
+            grundsätzlich als Boolean. Wenn Sie angehackt sind, wird der Wert der Checkbox
+            übertragen. Wenn Sie nicht angehackt sind, wird nichts übertragen. Intern erzwingt
             <classname>Zend_Form_Element_Checkbox</classname> diesen Status.
         </para>
 
@@ -154,8 +157,8 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         </para>
 
         <para>
-            <classname>Zend_Form_Element_Checkbox</classname> verwendet den 'formCheckbox' View Helfer. Der
-            angehackte Wert wird immer verwendet um Sie zu veröffentlichen.
+            <classname>Zend_Form_Element_Checkbox</classname> verwendet den 'formCheckbox' View
+            Helfer. Der angehackte Wert wird immer verwendet um Sie zu veröffentlichen.
         </para>
     </sect2>
 
@@ -163,25 +166,26 @@ $element = new Zend_Form_Element_Captcha('foo', array(
         <title>Zend_Form_Element_File</title>
 
         <para>
-            Das File Formularelement bietet einen Mechanismus um File Upload-felder in eigenen Formularen
-            zu Unterstützen. Es verwendet intern
-            <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link> um diese Funktionalität
-            zu bieten, und den <code>FormFile</code> Viewhelfer sowie den <code>File</code> Decorator um das
-            Formularelement anzuzeigen.
+            Das File Formularelement bietet einen Mechanismus um File Upload-felder in eigenen
+            Formularen zu Unterstützen. Es verwendet intern
+            <link linkend="zend.file.transfer.introduction">Zend_File_Transfer</link> um diese
+            Funktionalität zu bieten, und den <code>FormFile</code> Viewhelfer sowie den
+            <code>File</code> Decorator um das Formularelement anzuzeigen.
         </para>
 
         <para>
-            Standardmäßig verwendet es den <code>Http</code> Transferadapter, welcher das <code>$_FILES</code>
-            Array prüft und es erlaubt Prüfungen und Filter hinzuzufügen. Prüfungen und Filter die dem
-            Formularelement hinzugefügt werden, werden dem Transferadapter hinzugefügt.
+            Standardmäßig verwendet es den <code>Http</code> Transferadapter, welcher das
+            <code>$_FILES</code> Array prüft und es erlaubt Prüfungen und Filter hinzuzufügen.
+            Prüfungen und Filter die dem Formularelement hinzugefügt werden, werden dem
+            Transferadapter hinzugefügt.
         </para>
 
         <example id="zend.form.standardElements.file.usage">
             <title>Verwendung des File Formularelements</title>
 
             <para>
-                Die obige Erklärung der Verwendung des File Formularelements mag geheimnisvoll erscheinen,
-                aber die aktuelle Verwendung ist relativ trivial:
+                Die obige Erklärung der Verwendung des File Formularelements mag geheimnisvoll
+                erscheinen, aber die aktuelle Verwendung ist relativ trivial:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -198,8 +202,9 @@ $form->addElement($element, 'foo');
 ]]></programlisting>
 
             <para>
-                Man sollte auch den richtigen Encodingtyp sicherstellen in dem das Formular angeboten wird.
-                Das kann getan werden indem das 'enctype' Attribut des Formulars gesetzt wird:
+                Man sollte auch den richtigen Encodingtyp sicherstellen in dem das Formular
+                angeboten wird. Das kann getan werden indem das 'enctype' Attribut des Formulars
+                gesetzt wird:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -207,9 +212,10 @@ $form->setAttrib('enctype', 'multipart/form-data');
 ]]></programlisting>
 
             <para>
-                Nachdem das Formular erfolgreich geprüft wurde, muß die Datei empfangen werden um Sie an Ihrem
-                endgültigen Ziel zu speichern indem <code>receive()</code> verwendet wird. Zusätzlich kann man
-                das endgültige Ziel ermittelt werden indem <code>getFileName()</code> verwendet wird:
+                Nachdem das Formular erfolgreich geprüft wurde, muß die Datei empfangen werden um
+                Sie an Ihrem endgültigen Ziel zu speichern indem <code>receive()</code> verwendet
+                wird. Zusätzlich kann man das endgültige Ziel ermittelt werden indem
+                <code>getFileName()</code> verwendet wird:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -238,11 +244,11 @@ $location = $form->foo->getFileName();
             <title>Datei Werte</title>
 
             <para>
-                In HTTP hat das File Element keinen Wert. Aus diesem Grund, und aus Gründen der Sicherheit
-                erhält gibt <code>getValue()</code> nur den Dateinamen der hochgeladenen Datei zurück und
-                nicht den kompletten Pfad. Wenn man die kompletten Informationen benötigt kann
-                <code>getFileName()</code> aufgerufen werden, welches sowohl den Pfad als auch den Namen
-                der Datei zurückgibt.
+                In HTTP hat das File Element keinen Wert. Aus diesem Grund, und aus Gründen der
+                Sicherheit erhält gibt <code>getValue()</code> nur den Dateinamen der hochgeladenen
+                Datei zurück und nicht den kompletten Pfad. Wenn man die kompletten Informationen
+                benötigt kann <code>getFileName()</code> aufgerufen werden, welches sowohl den Pfad
+                als auch den Namen der Datei zurückgibt.
             </para>
         </note>
 
@@ -260,8 +266,8 @@ $form->getValues();
             <para>
                 Deshalb hat ein weiterer Aufruf von <code>receive()</code> nach dem Aufruf von
                 <code>getValues()</code> keinen Effekt. Auch die Erstellung einer Instanz von
-                <classname>Zend_File_Transfer</classname> wird keinen Effekt haben da es keine weitere
-                Datei zum Empfangen gibt.
+                <classname>Zend_File_Transfer</classname> wird keinen Effekt haben da es keine
+                weitere Datei zum Empfangen gibt.
             </para>
         </note>
 
@@ -311,7 +317,8 @@ if ($form->isValid($form->getPost())) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>isUploaded()</code>: Prüft ob das Dateielement hochgeladen wurde oder nicht.
+                    <code>isUploaded()</code>: Prüft ob das Dateielement hochgeladen wurde oder
+                    nicht.
                 </para>
             </listitem>
 
@@ -348,18 +355,19 @@ if ($form->foo->isUploaded()) {
         </example>
 
         <para>
-            <classname>Zend_Form_Element_File</classname> unterstützt auch mehrere Dateien. Durch den Aufruf der
-            <code>setMultiFile($count)</code> Methode kann die Anzahl an File Elementen die man erstellen
-            will festgelegt werden. Das verhindert das die selben Einstellungen mehrere Male durchgeführt
-            werden müssen.
+            <classname>Zend_Form_Element_File</classname> unterstützt auch mehrere Dateien. Durch
+            den Aufruf der <code>setMultiFile($count)</code> Methode kann die Anzahl an File
+            Elementen die man erstellen will festgelegt werden. Das verhindert das die selben
+            Einstellungen mehrere Male durchgeführt werden müssen.
         </para>
 
         <example id="zend.form.standardElements.file.multiusage">
             <title>Mehrere Dateien setzen</title>
 
             <para>
-                Die Erstellung eines Multifile Elements ist das gleiche wie das Erstellen eines einzelnen
-                Elements. Man muß nur <code>setMultiFile()</code> aufrufen nachdem das Element erstellt wurde:
+                Die Erstellung eines Multifile Elements ist das gleiche wie das Erstellen eines
+                einzelnen Elements. Man muß nur <code>setMultiFile()</code> aufrufen nachdem das
+                Element erstellt wurde:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -378,9 +386,9 @@ $form->addElement($element, 'foo');
 ]]></programlisting>
 
             <para>
-                In der View erhält man nun 3 identische File Upload Elemente welche alle die gleichen
-                Einstellungen verwenden. Um die Multifile Anzahl zu erhalten kann man einfach
-                <code>getMultiFile()</code> aufrufen.
+                In der View erhält man nun 3 identische File Upload Elemente welche alle die
+                gleichen Einstellungen verwenden. Um die Multifile Anzahl zu erhalten kann man
+                einfach <code>getMultiFile()</code> aufrufen.
             </para>
 
         </example>
@@ -389,9 +397,9 @@ $form->addElement($element, 'foo');
             <title>File Elemente in Subformularen</title>
 
             <para>
-                Wenn File Elemente in Subformularen verwendet werden muß man eindeutige Namen setzen.
-                Wenn man zum Beispiel ein File Element in Subform1 "file" benennt, muß es in Subform2
-                einen anderen Namen erhalten.
+                Wenn File Elemente in Subformularen verwendet werden muß man eindeutige Namen
+                setzen. Wenn man zum Beispiel ein File Element in Subform1 "file" benennt, muß es in
+                Subform2 einen anderen Namen erhalten.
             </para>
 
             <para>
@@ -403,8 +411,9 @@ $form->addElement($element, 'foo');
         <para>
             Um die Größe der Datei zu begrenzen, die vom Client hochgeladen wird, kann die maximale
             Dateigröße spezifiziert werden indem die <code>MAX_FILE_SIZE</code> Option im Formular
-            gesetzt wird. Sobald der Wert, durch die Verwendung der <code>setMaxFileSize($size)</code>
-            Methode, gesetzt ist, wird er mit dem File Element dargestellt.
+            gesetzt wird. Sobald der Wert, durch die Verwendung der
+            <code>setMaxFileSize($size)</code> Methode, gesetzt ist, wird er mit dem File Element
+            dargestellt.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -420,8 +429,9 @@ $form->addElement($element, 'foo');
             <title>MaxFileSize mit mehreren File Elementen</title>
 
             <para>
-                Wenn mehrere File Elemente im Formular verwendet werden sollte man <code>MAX_FILE_SIZE</code>
-                nur einmal setzen. Wird es nochmals gesetzt überschreibt es den vorherigen Wert.
+                Wenn mehrere File Elemente im Formular verwendet werden sollte man
+                <code>MAX_FILE_SIZE</code> nur einmal setzen. Wird es nochmals gesetzt überschreibt
+                es den vorherigen Wert.
             </para>
 
             <para>
@@ -435,8 +445,8 @@ $form->addElement($element, 'foo');
 
         <para>
             Versteckte Elemente fügen Daten ein die übertragen werden sollen, welche der Benutzer
-            aber nicht manipulieren soll. <classname>Zend_Form_Element_Hidden</classname> ermöglicht das
-            mit dem 'formHidden' View Helfers.
+            aber nicht manipulieren soll. <classname>Zend_Form_Element_Hidden</classname> ermöglicht
+            das mit dem 'formHidden' View Helfers.
         </para>
     </sect2>
 
@@ -467,8 +477,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         <para>
             Intern speichert das Element einen eindeutigen Identifikator indem es
-            <classname>Zend_Session_Namespace</classname> verwendet, und danach bei der Übertragung checkt
-            (es wird geprüft das die TTL nicht abgelaufen ist). Die 'Identical' Prüfung wird
+            <classname>Zend_Session_Namespace</classname> verwendet, und danach bei der Übertragung
+            checkt (es wird geprüft das die TTL nicht abgelaufen ist). Die 'Identical' Prüfung wird
             Internally, the element stores a unique identifier using
             <classname>Zend_Session_Namespace</classname>, and checks for it at
             submission (checking that the TTL has not expired). The 'Identical'
@@ -485,15 +495,15 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         <title>Zend_Form_Element_Image</title>
 
         <para>
-            Bilder können als Form Elemente verwendet werden und man kann diese Bilder als graphische
-            Elemente auf Form Buttons verwenden.
+            Bilder können als Form Elemente verwendet werden und man kann diese Bilder als
+            graphische Elemente auf Form Buttons verwenden.
         </para>
 
         <para>
-            Bilder benötigen eine Bildquelle. <classname>Zend_Form_Element_Image</classname> erlaube dessen
-            Spezifikation durch Verwendung der <code>setImage()</code> Zugriffsmethode (oder des
-            'image' Konfigurations Schlüssels). Es kann auch optional ein Wert spezifiziert werden
-            der zu verwenden ist wenn das Bild übertragen wird indem die Zugriffsmethode
+            Bilder benötigen eine Bildquelle. <classname>Zend_Form_Element_Image</classname> erlaube
+            dessen Spezifikation durch Verwendung der <code>setImage()</code> Zugriffsmethode (oder
+            des 'image' Konfigurations Schlüssels). Es kann auch optional ein Wert spezifiziert
+            werden der zu verwenden ist wenn das Bild übertragen wird indem die Zugriffsmethode
             <code>setImageValue()</code> verwendet wird (oder der 'imageValue Konfigurations
             Schlüssel). Wenn der Wert der für das Element gesetzt ist, mit <code>imageValue</code>
             übereinstimmt, gibt <code>isChecked()</code> true zurück.
@@ -519,8 +529,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </para>
 
         <para>
-            <classname>Zend_Form_Element_MultiCheckbox</classname> macht das in einem Rutsch. Wie alle
-            anderen Elemente kann mit der Erweiterung des Basis MultiElements eine Liste von
+            <classname>Zend_Form_Element_MultiCheckbox</classname> macht das in einem Rutsch. Wie
+            alle anderen Elemente kann mit der Erweiterung des Basis MultiElements eine Liste von
             Optionen spezifiziert werden und einfach gegen die selbe Liste geprüft werden. Der
             'formMultiCheckbox' View Helfer stellt sicher das Sie als Array bei der Übermittlung
             der Form zurückgegeben werden.
@@ -528,10 +538,10 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert werden
-            indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder indem
-            ein false Wert an den <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben
-            wird.
+            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
+            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
+            indem ein false Wert an den <code>registerInArrayValidator</code>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -557,8 +567,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
         </itemizedlist>
 
         <para>
-            Um gecheckte Elemente zu markieren, muß ein Array an Werte an <code>setValue()</code> übergeben
-            werden. Der folgende Code prüft die Werte "bar" und "bat":
+            Um gecheckte Elemente zu markieren, muß ein Array an Werte an <code>setValue()</code>
+            übergeben werden. Der folgende Code prüft die Werte "bar" und "bat":
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -588,8 +598,8 @@ $element->setValue(array('bar', 'bat'));
             nur eines. <classname>Zend_Form_Element_Multiselect</classname> erweitert
             <link linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link> und
             setzt das <code>multiple</code> Attribut auf 'multiple'. Wie andere Klassen die von der
-            Basisklasse <classname>Zend_Form_Element_Multi</classname> abgeleitet werden, können die Optionen
-            für die Auswahl wie folgt verändert werden:
+            Basisklasse <classname>Zend_Form_Element_Multi</classname> abgeleitet werden, können die
+            Optionen für die Auswahl wie folgt verändert werden:
         </para>
 
         <itemizedlist>
@@ -616,10 +626,10 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert werden
-            indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder indem
-            ein false Wert an den <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben
-            wird.
+            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
+            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
+            indem ein false Wert an den <code>registerInArrayValidator</code>
+            Konfigurationsschlüssel übergeben wird.
         </para>
     </sect2>
 
@@ -645,18 +655,18 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             Radio Elemente erlauben es verschiedene Optionen zu spezifizieren, von denen ein
-            einzelner Wert zurückgegeben wird. <classname>Zend_Form_Element_Radio</classname> erweitert die
-            Basisklasse <classname>Zend_Form_Element_Multi</classname> und erlaubt es eine Anzahl von
-            Optionen zu spezifizieren, und verwendet dann den <code>formRadio</code> View Helfer
-            um diese darzustellen.
+            einzelner Wert zurückgegeben wird. <classname>Zend_Form_Element_Radio</classname>
+            erweitert die Basisklasse <classname>Zend_Form_Element_Multi</classname> und erlaubt es
+            eine Anzahl von Optionen zu spezifizieren, und verwendet dann den <code>formRadio</code>
+            View Helfer um diese darzustellen.
         </para>
 
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert werden
-            indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder indem
-            ein false Wert an den <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben
-            wird.
+            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
+            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
+            indem ein false Wert an den <code>registerInArrayValidator</code>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -713,10 +723,10 @@ $element->setValue(array('bar', 'bat'));
 
         <para>
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
-            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert werden
-            indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder indem
-            ein false Wert an den <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben
-            wird.
+            Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
+            werden indem entweder <code>setRegisterInArrayValidator(false)</code> aufgerufen, oder
+            indem ein false Wert an den <code>registerInArrayValidator</code>
+            Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -742,8 +752,8 @@ $element->setValue(array('bar', 'bat'));
         </itemizedlist>
 
         <para>
-            <classname>Zend_Form_Element_Select</classname> verwendet den 'formSelect' View Helfer für
-            die Dekoration.
+            <classname>Zend_Form_Element_Select</classname> verwendet den 'formSelect' View Helfer
+            für die Dekoration.
         </para>
     </sect2>
 
@@ -754,10 +764,10 @@ $element->setValue(array('bar', 'bat'));
             Sendebuttons (Submit) werden verwendet um eine Form zu senden. Es kann gewünscht sein
             mehrere Sendebuttons zu verwendetn; die Buttons zur Übermittlung der Form können
             verwendet werden um auszuwählen welche Aktion mit den übermittelten Daten genommen
-            werden soll. <classname>Zend_Form_Element_Submit</classname> macht die Entscheidung einfach,
-            durch das Hinzufügen einer <code>isChecked()</code> Methode; da nur ein Button Element
-            von der Form übermittelt wird, nachdem die Form übermittelt oder geprüft wurde, kann
-            diese Methode auf jedem Sendebutton ausgerufen werden um festzustellen welcher
+            werden soll. <classname>Zend_Form_Element_Submit</classname> macht die Entscheidung
+            einfach, durch das Hinzufügen einer <code>isChecked()</code> Methode; da nur ein Button
+            Element von der Form übermittelt wird, nachdem die Form übermittelt oder geprüft wurde,
+            kann diese Methode auf jedem Sendebutton ausgerufen werden um festzustellen welcher
             verwendet wurde.
         </para>
 
@@ -783,8 +793,8 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Der nützlichste Typ von Form Element ist das Text Element, das begrenzte Texteinträge
             erlaubt; es ist ein ideales Element für die meisten Dateneinträge.
-            <classname>Zend_Form_Element_Text</classname> verwendet einfach den 'formText' View Helfer um das
-            Element darzustellen.
+            <classname>Zend_Form_Element_Text</classname> verwendet einfach den 'formText' View
+            Helfer um das Element darzustellen.
         </para>
     </sect2>
 
@@ -795,8 +805,8 @@ $element->setValue(array('bar', 'bat'));
             Textbereiche werden verwendet wenn große Mengen von Text erwartet werden, und keine
             Begrenzung in der Anzahl des übermittelten Textes vorhanden sind (anders als das Limit
             der Maximalgröße wie vom Server von PHP diktiert).
-            <classname>Zend_Form_Element_Textarea</classname> verwendet den 'textArea' View Helfer um solche
-            Element darzustellen, und platziert den Wert als Inhalt des Elements.
+            <classname>Zend_Form_Element_Textarea</classname> verwendet den 'textArea' View Helfer
+            um solche Element darzustellen, und platziert den Wert als Inhalt des Elements.
         </para>
     </sect2>
 </sect1>

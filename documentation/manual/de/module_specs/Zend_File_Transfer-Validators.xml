@@ -6,153 +6,154 @@
     <title>Prüfungen für Zend_File_Transfer</title>
 
     <para>
-        <classname>Zend_File_Transfer</classname> wird mit verschiedenen Datei-relevanten Prüfungen ausgeliefert
-        welche verwendet werden können um die Sicherheit zu erhöhen und mögliche Attacken zu verhindern.
-        Es ist zu beachten das diese Prüfungen nur so effektiv sind wie Sie effektiv angewendet verwendet.
-        Alle Prüfungen die mit <classname>Zend_File_Transfer</classname> angeboten werden können in der
-        <classname>Zend_Validator</classname> Komponente gefunden werden und heißen <classname>Zend_Validate_File_*</classname>.
-        Die folgenden Prüfungen sind vorhanden:
+        <classname>Zend_File_Transfer</classname> wird mit verschiedenen Datei-relevanten Prüfungen
+        ausgeliefert welche verwendet werden können um die Sicherheit zu erhöhen und mögliche
+        Attacken zu verhindern. Es ist zu beachten das diese Prüfungen nur so effektiv sind wie Sie
+        effektiv angewendet verwendet. Alle Prüfungen die mit
+        <classname>Zend_File_Transfer</classname> angeboten werden können in der
+        <classname>Zend_Validator</classname> Komponente gefunden werden und heißen
+        <classname>Zend_Validate_File_*</classname>. Die folgenden Prüfungen sind vorhanden:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>Count</code>: Diese Prüfung checkt die Anzahl der Dateien. Es kann ein Minimum und ein
-                Maximum spezifiziert werden. Ein Fehler wird geworfen wenn einer der zwei Werte
-                überschritten wird.
+                <code>Count</code>: Diese Prüfung checkt die Anzahl der Dateien. Es kann ein Minimum
+                und ein Maximum spezifiziert werden. Ein Fehler wird geworfen wenn einer der zwei
+                Werte überschritten wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Crc32</code>: Diese Prüfung checkt den Crc32 Hashwert vom Inhalt einer Datei. Sie basiert
-                auf der <code>Hash</code> Prüfung und  bietet eine bequeme und einfache Prüfung die nur Crc32
-                unterstützt.
+                <code>Crc32</code>: Diese Prüfung checkt den Crc32 Hashwert vom Inhalt einer Datei.
+                Sie basiert auf der <code>Hash</code> Prüfung und  bietet eine bequeme und einfache
+                Prüfung die nur Crc32 unterstützt.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>ExcludeExtension</code>: Diese Prüfung checkt die Dateierweiterung. Sie wirft einen Fehler
-                wenn die angegebene Datei eine definierte Erweiterung hat. Mit dieser Prüfung können definierte
-                Erweiterungen von der Prüfung ausgenommen werden.
+                <code>ExcludeExtension</code>: Diese Prüfung checkt die Dateierweiterung. Sie wirft
+                einen Fehler wenn die angegebene Datei eine definierte Erweiterung hat. Mit dieser
+                Prüfung können definierte Erweiterungen von der Prüfung ausgenommen werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>ExcludeMimeType</code>: Diese Prüfung prüft den MIME Typ von Dateien. Sie kann auch
-                Arten von MIME Typen prüfen und wirft einen Fehler wenn der MIME Typ einer spezifizierten
-                Datei passt.
+                <code>ExcludeMimeType</code>: Diese Prüfung prüft den MIME Typ von Dateien. Sie kann
+                auch Arten von MIME Typen prüfen und wirft einen Fehler wenn der MIME Typ einer
+                spezifizierten Datei passt.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Exists</code>: Diese Prüfung checkt ob Dateien existieren. Sie wirft einen Fehler wenn
-                eine spezifizierte Datei nicht existiert.
+                <code>Exists</code>: Diese Prüfung checkt ob Dateien existieren. Sie wirft einen
+                Fehler wenn eine spezifizierte Datei nicht existiert.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Extension</code>: Diese Prüfung checkt die Dateierweiterung. Sie wirft einen Fehler
-                wenn eine spezifizierte Datei eine undefinierte Erweiterung hat.
+                <code>Extension</code>: Diese Prüfung checkt die Dateierweiterung. Sie wirft einen
+                Fehler wenn eine spezifizierte Datei eine undefinierte Erweiterung hat.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <code>FilesSize</code>: Diese Prüfung checkt die Größe von geprüften Dateien.
-                Sie merkt sich intern die Größe aller geprüften Dateien und wirft einen Fehler wenn die
-                Summe aller spezifizierten Dateien die definierte Größe überschreitet. Sie bietet auch
-                Mindest- und Maximalwerte an.
+                Sie merkt sich intern die Größe aller geprüften Dateien und wirft einen Fehler wenn
+                die Summe aller spezifizierten Dateien die definierte Größe überschreitet. Sie
+                bietet auch Mindest- und Maximalwerte an.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>ImageSize</code>: Diese Prüfung checkt die Größe von Bildern. Sie prüft die Breite
-                und Höhe und erzwingt sowohl eine Mindest- als auch eine Maximalegröße.
+                <code>ImageSize</code>: Diese Prüfung checkt die Größe von Bildern. Sie prüft die
+                Breite und Höhe und erzwingt sowohl eine Mindest- als auch eine Maximalegröße.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>IsCompressed</code>: Diese Prüfung checkt ob die Datei komprimiert ist. Sie basiert
-                auf der <code>MimeType</code> Prüfung und validiert Komprimierungsarchiven wie Zip
-                oder Arc. Sie kann auch auf andere Archive begrenzt werden.
+                <code>IsCompressed</code>: Diese Prüfung checkt ob die Datei komprimiert ist. Sie
+                basiert auf der <code>MimeType</code> Prüfung und validiert Komprimierungsarchiven
+                wie Zip oder Arc. Sie kann auch auf andere Archive begrenzt werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>IsImage</code>: Diese Prüfung checkt ob die Datei ein Bild ist. Sie basiert auf der
-                <code>MimeType</code> Prüfung und validiert Bildedateien wie Jpg oder Gif. Sie kann auch
-                auf andere Bildtypen begrenzt werden.
+                <code>IsImage</code>: Diese Prüfung checkt ob die Datei ein Bild ist. Sie basiert
+                auf der <code>MimeType</code> Prüfung und validiert Bildedateien wie Jpg oder Gif.
+                Sie kann auch auf andere Bildtypen begrenzt werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Hash</code>: Diese Prüfung check den Hashwert des Inhalts einer Datei. Sie unterstützt
-                mehrere Algorithmen.
+                <code>Hash</code>: Diese Prüfung check den Hashwert des Inhalts einer Datei. Sie
+                unterstützt mehrere Algorithmen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Md5</code>: Diese Prüfung checkt den Md5 Hashwert vom Inhalt einer Datei. Sie basiert
-                auf der <code>Hash</code> Prüfung und bietet eine bequeme und einfache Prüfung die nur
-                Md5 unterstützt.
+                <code>Md5</code>: Diese Prüfung checkt den Md5 Hashwert vom Inhalt einer Datei. Sie
+                basiert auf der <code>Hash</code> Prüfung und bietet eine bequeme und einfache
+                Prüfung die nur Md5 unterstützt.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <code>MimeType</code>: Diese Prüfung prüft den MIME Typ von Dateien. Sie kann auch
-                Arten von MIME Typen prüfen und wirft einen Fehler wenn der MIME Typ einer spezifizierten
-                Datei nicht passt.
+                Arten von MIME Typen prüfen und wirft einen Fehler wenn der MIME Typ einer
+                spezifizierten Datei nicht passt.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>NotExists</code>: Diese Prüfung checkt ob Dateien existieren. Sie wirft einen Fehler
-                wenn eine angegebene Datei existiert.
+                <code>NotExists</code>: Diese Prüfung checkt ob Dateien existieren. Sie wirft einen
+                Fehler wenn eine angegebene Datei existiert.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Sha1</code>: Diese Prüfung checkt den Sha1 Hashwert vom Inhalt einer Datei. Sie basiert
-                auf der <code>Hash</code> Prüfung und bietet eine bequeme und einfache Prüfung die nur Sha1
-                unterstützt.
+                <code>Sha1</code>: Diese Prüfung checkt den Sha1 Hashwert vom Inhalt einer Datei.
+                Sie basiert auf der <code>Hash</code> Prüfung und bietet eine bequeme und einfache
+                Prüfung die nur Sha1 unterstützt.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Size</code>: Diese Prüfung ist fähig Dateien auf Ihre Dateigröße zu prüfen. Sie
-                bietet eine Mindest- und eine Maximalgröße an und wirft einen Fehler wenn eine der
-                beiden Grenzen überschritten wird.
+                <code>Size</code>: Diese Prüfung ist fähig Dateien auf Ihre Dateigröße zu prüfen.
+                Sie bietet eine Mindest- und eine Maximalgröße an und wirft einen Fehler wenn eine
+                der beiden Grenzen überschritten wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>Upload</code>: Diese Prüfung ist eine interne. Sie prüft ob ein Upload zu einem
-                Fehler geführt hat. Dieser darf nicht gesetzt werden, da er automatisch durch
-                <classname>Zend_File_Transfer</classname> selbst gesetzt wird. Deshalb darf diese Prüfung nicht
-                direkt verwendet werden. Man sollte nur wissen das Sie existiert.
+                <code>Upload</code>: Diese Prüfung ist eine interne. Sie prüft ob ein Upload zu
+                einem Fehler geführt hat. Dieser darf nicht gesetzt werden, da er automatisch durch
+                <classname>Zend_File_Transfer</classname> selbst gesetzt wird. Deshalb darf diese
+                Prüfung nicht direkt verwendet werden. Man sollte nur wissen das Sie existiert.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <code>WordCount</code>: Diese Prüfung ist fähig die Anzahl von Wörtern in Dateien zu
-                prüfen. Sie bietet eine Mindest- und Maximalanzahl und wirft einen Fehler wenn eine der
-                Grenzen überschritten wird.
+                prüfen. Sie bietet eine Mindest- und Maximalanzahl und wirft einen Fehler wenn eine
+                der Grenzen überschritten wird.
             </para>
         </listitem>
     </itemizedlist>
@@ -169,34 +170,36 @@
             <listitem>
                 <para>
                     <code>isValid($files = null)</code>: Prüft die spezifizierten Dateien indem alle
-                    Prüfungen verwendet werden. <code>$files</code> kann entweder ein richtiger Dateiname,
-                    der Name des Elements, oder der Name der temporären Datei sein.
+                    Prüfungen verwendet werden. <code>$files</code> kann entweder ein richtiger
+                    Dateiname, der Name des Elements, oder der Name der temporären Datei sein.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addValidator($validator, $breakChainOnFailure, $options = null, $files = null)</code>:
-                    Fügt die spezifizierte Prüfung zu den Prüfungsstapel hinzu (optional nur zu den Datei(en)
-                    die spezifiziert wurden). <code>$validator</code> kann entweder eine aktuelle
-                    Prüfinstanz sein oder ein Kurzname der den Prüfungstyp spezifiziert (z.B. 'Count').
+                    <code>addValidator($validator, $breakChainOnFailure, $options = null, $files =
+                    null)</code>: Fügt die spezifizierte Prüfung zu den Prüfungsstapel hinzu
+                    (optional nur zu den Datei(en) die spezifiziert wurden). <code>$validator</code>
+                    kann entweder eine aktuelle Prüfinstanz sein oder ein Kurzname der den
+                    Prüfungstyp spezifiziert (z.B. 'Count').
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>addValidators(array $validators, $files = null)</code>: Fügt die spezifizierten
-                    Prüfungen zum Prüfungsstapel hinzu. Jeder Eintrag kann entweder ein Prüfungstyp/-options
-                    Paar sein oder ein Array mit dem Schlüssel 'validator' das die Prüfung spezifiziert.
-                    Alle anderen Optionen werden als Optionen für die Instanzierung der Prüfung angenommen.
+                    <code>addValidators(array $validators, $files = null)</code>: Fügt die
+                    spezifizierten Prüfungen zum Prüfungsstapel hinzu. Jeder Eintrag kann entweder
+                    ein Prüfungstyp/-options Paar sein oder ein Array mit dem Schlüssel 'validator'
+                    das die Prüfung spezifiziert. Alle anderen Optionen werden als Optionen für die
+                    Instanzierung der Prüfung angenommen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setValidators(array $validators, $files = null)</code>: Überschreibt alle bestehenden
-                    Prüfungen mit den spezifizierten Prüfungen. Die Prüfungen sollten der Syntax folgen die
-                    für <code>addValidators()</code> definiert ist.
+                    <code>setValidators(array $validators, $files = null)</code>: Überschreibt alle
+                    bestehenden Prüfungen mit den spezifizierten Prüfungen. Die Prüfungen sollten
+                    der Syntax folgen die für <code>addValidators()</code> definiert ist.
                 </para>
             </listitem>
 
@@ -214,9 +217,9 @@
 
             <listitem>
                 <para>
-                    <code>getValidators($files = null)</code>: Gibt registrierte Prüfungen zurück. Wenn
-                    <code>$files</code> spezifiziert wurde, werden die Prüfungen für die betreffende Datei
-                    oder das Set an Dateien zurückgegeben.
+                    <code>getValidators($files = null)</code>: Gibt registrierte Prüfungen zurück.
+                    Wenn <code>$files</code> spezifiziert wurde, werden die Prüfungen für die
+                    betreffende Datei oder das Set an Dateien zurückgegeben.
                 </para>
             </listitem>
 
@@ -258,10 +261,10 @@ $upload->setValidators(array(
             <title>Prüfungen auf eine einzelne Datei limitieren</title>
 
             <para>
-                <code>addValidator()</code>, <code>addValidators()</code>, und <code>setValidators()</code>
-                akzeptieren ein endendes Argument <code>$files</code>. Dieses Argument kann verwendet werden
-                um eine Datei oder ein Array von Dateien zu spezifizieren auf dem die angegebene Prüfung
-                gesetzt werden soll.
+                <code>addValidator()</code>, <code>addValidators()</code>, und
+                <code>setValidators()</code> akzeptieren ein endendes Argument <code>$files</code>.
+                Dieses Argument kann verwendet werden um eine Datei oder ein Array von Dateien zu
+                spezifizieren auf dem die angegebene Prüfung gesetzt werden soll.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -281,10 +284,10 @@ $upload->addValidator('Size', false, 20000, 'file2');
             <title>Mehrere Prüfungen hinzufügen</title>
 
             <para>
-                Oft ist es einfacher <code>addValidator()</code> mehrere Male aufzurufen mit einem Aufruf für
-                jede Prüfung. Das erhöht auch die Lesbarkeit und macht den Code wartbarer. Alle Methoden
-                implementieren das Fluent-Interface, deshalb können Aufrufe einfach wie anbei gezeigt
-                gekoppelt werden:
+                Oft ist es einfacher <code>addValidator()</code> mehrere Male aufzurufen mit einem
+                Aufruf für jede Prüfung. Das erhöht auch die Lesbarkeit und macht den Code
+                wartbarer. Alle Methoden implementieren das Fluent-Interface, deshalb können Aufrufe
+                einfach wie anbei gezeigt gekoppelt werden:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -301,22 +304,24 @@ $upload->addValidator('Size', false, 20000)
         <note>
             <para>
                 Es ist zu beachten, dass das mehrfache Setzen der gleichen Prüfung erlaubt
-                ist, dass das aber zu Problemen führen kann wenn verschiedene Optionen für die gleiche
-                Prüfung verwendet werden.
+                ist, dass das aber zu Problemen führen kann wenn verschiedene Optionen für die
+                gleiche Prüfung verwendet werden.
             </para>
         </note>
 
         <para>
-            Letztendlich können Dateien einfach geprüft werden indem <code>isValid()</code> verwendet wird.
+            Letztendlich können Dateien einfach geprüft werden indem <code>isValid()</code>
+            verwendet wird.
         </para>
 
         <example id="zend.file.transfer.validators.usage.exampleisvalid">
             <title>Prüfen der Dateien</title>
 
             <para>
-                <code>isValid()</code> akzeptiert den Dateinamen der hochgeladenen oder heruntergeladenen
-                Datei, den temporären Dateinamen oder den Namen des Formularelements. Wenn kein Parameter
-                oder null angegeben wird, werden alle gefundenen Dateien geprüft.
+                <code>isValid()</code> akzeptiert den Dateinamen der hochgeladenen oder
+                heruntergeladenen Datei, den temporären Dateinamen oder den Namen des
+                Formularelements. Wenn kein Parameter oder null angegeben wird, werden alle
+                gefundenen Dateien geprüft.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -336,8 +341,8 @@ if ($upload->isValid()) {
 
         <note>
             <para>
-                Es ist zu beachten das <code>isValid()</code> automatisch aufgerufen wird, wenn die Dateien
-                empfangen werden und es zuvor noch nicht aufgerufen wurde.
+                Es ist zu beachten das <code>isValid()</code> automatisch aufgerufen wird, wenn die
+                Dateien empfangen werden und es zuvor noch nicht aufgerufen wurde.
             </para>
         </note>
 
@@ -345,8 +350,9 @@ if ($upload->isValid()) {
             Wenn Prüfungen fehlgeschlagen sind, ist es eine gute Idee Informationen über die
             gefundenen Probleme zu erhalten. Um diese Information zu erhalten können die Methoden
             <code>getMessages()</code>, welche alle Prüfmeldungen als Array zurückgibt,
-            <code>getErrors()</code> welche alle Fehlercodes zurückgibt, und <code>hasErrors()</code>
-            welche true zurückgibt sobald ein Prüffehler gefunden wurde, verwendet werden.
+            <code>getErrors()</code> welche alle Fehlercodes zurückgibt, und
+            <code>hasErrors()</code> welche true zurückgibt sobald ein Prüffehler gefunden wurde,
+            verwendet werden.
         </para>
 
     </sect2>
@@ -355,8 +361,8 @@ if ($upload->isValid()) {
         <title>Count Prüfung</title>
 
         <para>
-            Die <code>Count</code> Prüfung checkt die Anzahl der Dateien die angegeben wurde. Sie unterstützt
-            die folgenden Schlüssel für Optionen:
+            Die <code>Count</code> Prüfung checkt die Anzahl der Dateien die angegeben wurde. Sie
+            unterstützt die folgenden Schlüssel für Optionen:
         </para>
 
         <itemizedlist>
@@ -368,13 +374,14 @@ if ($upload->isValid()) {
                 <note>
                     <para>
                         Wenn diese Option verwendet wird, muß die minimale Anzahl an Dateien
-                        übergeben werden wenn die Prüfung das erste Mal aufgerufen wird; sonst wird ein
-                        Fehler zurückgegeben.
+                        übergeben werden wenn die Prüfung das erste Mal aufgerufen wird; sonst wird
+                        ein Fehler zurückgegeben.
                     </para>
                 </note>
 
                 <para>
-                    Mit dieser Option kann die Mindestanzahl an Dateien definiert werden die man Empfangen sollte.
+                    Mit dieser Option kann die Mindestanzahl an Dateien definiert werden die man
+                    Empfangen sollte.
                 </para>
             </listitem>
 
@@ -384,9 +391,9 @@ if ($upload->isValid()) {
                 </para>
 
                 <para>
-                    Mit dieser Option kann die Anzahl der Dateien limitiert werden die man akzeptiert,
-                    aber genauso eine mögliche Attacke erkennen wenn mehr Dateien übertragen werden als
-                    im Formular definiert wurden.
+                    Mit dieser Option kann die Anzahl der Dateien limitiert werden die man
+                    akzeptiert, aber genauso eine mögliche Attacke erkennen wenn mehr Dateien
+                    übertragen werden als im Formular definiert wurden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -395,7 +402,8 @@ if ($upload->isValid()) {
             Wenn diese Prüfung mit einem String oder Integer initiiert wird, wird Sie als
             <code>max</code> verwendet. Es können aber auch die Methoden <code>setMin()</code> und
             <code>setMax()</code> verwendet werden um beide Optionen im Nachhinein zu setzen und
-            <code>getMin()</code> und <code>getMax()</code> um die aktuell gesetzten Werte zu erhalten.
+            <code>getMin()</code> und <code>getMax()</code> um die aktuell gesetzten Werte zu
+            erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.count.example">
@@ -415,8 +423,8 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <note>
             <para>
-                Beachte das diese Prüfung die Anzahl der geprüften Dateien intern speichert. Die Datei
-                welche das Maximum überschrietet wird als Fehler zurückgegeben.
+                Beachte das diese Prüfung die Anzahl der geprüften Dateien intern speichert. Die
+                Datei welche das Maximum überschrietet wird als Fehler zurückgegeben.
             </para>
         </note>
     </sect2>
@@ -425,9 +433,9 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
         <title>Crc32 Prüfung</title>
 
         <para>
-            Die <code>Crc32</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen. Diese
-            Prüfung verwendet die Hash Erweiterung von PHP mit dem Crc32 Algorithmus. Sie unterstützt die
-            folgenden Optionen:
+            Die <code>Crc32</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen.
+            Diese Prüfung verwendet die Hash Erweiterung von PHP mit dem Crc32 Algorithmus. Sie
+            unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -438,9 +446,9 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
                 </para>
 
                 <para>
-                    Man kann mehrere Hashes setzen indem unterschiedliche Schlüssel angegeben werden.
-                    Jeder von Ihnen wird geprüft und die Prüfung schlägt nur fehl wenn  alle Werte
-                    fehlschlagen.
+                    Man kann mehrere Hashes setzen indem unterschiedliche Schlüssel angegeben
+                    werden. Jeder von Ihnen wird geprüft und die Prüfung schlägt nur fehl wenn alle
+                    Werte fehlschlagen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -464,38 +472,40 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <title>ExcludeExtension Prüfung</title>
 
         <para>
-            Die <code>ExcludeExtension</code> Prüfung checkt die Dateierweiterung der angegebenen Dateien.
-            Sie unterstützt die folgenden Optionen:
+            Die <code>ExcludeExtension</code> Prüfung checkt die Dateierweiterung der angegebenen
+            Dateien. Sie unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <code>*</code>: Setzt einen beliebigen Schlüssel oder ein nummerisches Array.
-                    Dieser Wert wird verwendet um zu prüfen ob die angegebene Datei diese Dateierweiterung
-                    nicht verwendet.
+                    Dieser Wert wird verwendet um zu prüfen ob die angegebene Datei diese
+                    Dateierweiterung nicht verwendet.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>case</code>: Setzt ein Boolean der anzeigt ob die Prüfung auf die
-                    Klein/Großschreibung achten soll. Standardmäßig ist die Klein/Großschreibung egal.
-                    Beachte das dieser Schlüssel für alle vorhandenen Erweiterungen angewendet werden kann.
+                    Klein/Großschreibung achten soll. Standardmäßig ist die Klein/Großschreibung
+                    egal. Beachte das dieser Schlüssel für alle vorhandenen Erweiterungen angewendet
+                    werden kann.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String, oder als
-            ein Array. Man kann auch die <code>setExtension()</code>, <code>addExtension()</code> und
-            <code>getExtension()</code> Methoden verwenden um Erweiterungen zu setzen und zu erhalten.
+            Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String,
+            oder als ein Array. Man kann auch die <code>setExtension()</code>,
+            <code>addExtension()</code> und <code>getExtension()</code> Methoden verwenden um
+            Erweiterungen zu setzen und zu erhalten.
         </para>
 
         <para>
-            In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Deshalb erlaubt
-            der Constructor einen zweiten Parameter <code>$case</code> der, wenn er auf true gesetzt
-            wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
+            In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Deshalb
+            erlaubt der Constructor einen zweiten Parameter <code>$case</code> der, wenn er auf true
+            gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
         </para>
 
         <example id="zend.file.transfer.validators.excludeextension.example">
@@ -530,8 +540,8 @@ $upload->addValidator('ExcludeExtension',
         <title>ExcludeMimeType Prüfung</title>
 
         <para>
-            Die <code>MimeType</code> Prüfung checkt den MIME Typ von übertragenen Dateien. Sie unterstützt
-            die folgenden Optionen:
+            Die <code>MimeType</code> Prüfung checkt den MIME Typ von übertragenen Dateien. Sie
+            unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -542,7 +552,8 @@ $upload->addValidator('ExcludeExtension',
                 </para>
 
                 <para>
-                    Mit dieser Option kann der MIME Typ von Dateien definiert werden die nicht akzeptiert werden.
+                    Mit dieser Option kann der MIME Typ von Dateien definiert werden die nicht
+                    akzeptiert werden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -573,18 +584,18 @@ $upload->setValidator('ExcludeMimeType', 'image');
 
         <para>
             Das obige Beispiel zeigt das es auch möglich ist Gruppen von MIME Typen zu verweigern.
-            Um, zum Beispiel, alle Bilder zu verweigern, muß nur 'image' als MIME Typ verwendet werden.
-            Das kann für alle Gruppen von MIME Typen wie 'image', 'audio', 'video', 'test', und so weiter
-            verwendet werden.
+            Um, zum Beispiel, alle Bilder zu verweigern, muß nur 'image' als MIME Typ verwendet
+            werden. Das kann für alle Gruppen von MIME Typen wie 'image', 'audio', 'video', 'test',
+            und so weiter verwendet werden.
         </para>
 
         <note>
             <para>
-                Es ist zu beachten das bei Verwendung von MIME Typ-Gruppen alle Mitglieder dieser Gruppe
-                verweigert werden, selbst wenn das nicht gewünscht ist. Wenn man 'image' verweigert,
-                werden alle Typen von Bildern verweigert wie 'image/jpeg' oder 'image/vasa'. Wenn man
-                nicht sicher ist ob man alle Typen verweigern will sollte man nur
-                definierte MIME Typen zu verweigern statt der kompletten Gruppe.
+                Es ist zu beachten das bei Verwendung von MIME Typ-Gruppen alle Mitglieder dieser
+                Gruppe verweigert werden, selbst wenn das nicht gewünscht ist. Wenn man 'image'
+                verweigert, werden alle Typen von Bildern verweigert wie 'image/jpeg' oder
+                'image/vasa'. Wenn man nicht sicher ist ob man alle Typen verweigern will sollte man
+                nur definierte MIME Typen zu verweigern statt der kompletten Gruppe.
             </para>
         </note>
     </sect2>
@@ -593,23 +604,24 @@ $upload->setValidator('ExcludeMimeType', 'image');
         <title>Exists Prüfung</title>
 
         <para>
-            Die <code>Exists</code> Prüfung checkt ob Dateien die spezifiziert werden existieren. Sie unterstützt
-            die folgenden Optionen:
+            Die <code>Exists</code> Prüfung checkt ob Dateien die spezifiziert werden existieren.
+            Sie unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Setzt einen beliebigen Schlüssel oder ein nummerisches Array um zu prüfen
-                    ob die spezifizierte Datei im gegebenen Verzeichnis existiert.
+                    <code>*</code>: Setzt einen beliebigen Schlüssel oder ein nummerisches Array um
+                    zu prüfen ob die spezifizierte Datei im gegebenen Verzeichnis existiert.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String, oder als
-            Array. Es können aber auch die Methoden <code>setDirectory()</code>, <code>addDirectory()</code>,
-            und <code>getDirectory()</code> verwendet werden um die Verzeichnisse zu setzen und zu erhalten.
+            Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String,
+            oder als Array. Es können aber auch die Methoden <code>setDirectory()</code>,
+            <code>addDirectory()</code>, und <code>getDirectory()</code> verwendet werden um die
+            Verzeichnisse zu setzen und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.exists.example">
@@ -630,9 +642,9 @@ $upload->addValidator('Exists',
         </example>
         <note>
             <para>
-                Beachte das diese Prüfung checkt ob die spezifizierte Datei in allen angegebenen Verzeichnissen
-                existiert. Die Prüfung schlägt fehl, wenn die Datei in irgendeinem der angegebenen
-                Verzeichnisse nicht existiert.
+                Beachte das diese Prüfung checkt ob die spezifizierte Datei in allen angegebenen
+                Verzeichnissen existiert. Die Prüfung schlägt fehl, wenn die Datei in irgendeinem
+                der angegebenen Verzeichnisse nicht existiert.
             </para>
         </note>
     </sect2>
@@ -648,24 +660,25 @@ $upload->addValidator('Exists',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Setzt einen beliebigen Schlüssel oder ein nummerisches Array um zu prüfen
-                    ob die angegebene Datei diese Dateierweiterung verwendet.
+                    <code>*</code>: Setzt einen beliebigen Schlüssel oder ein nummerisches Array um
+                    zu prüfen ob die angegebene Datei diese Dateierweiterung verwendet.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>case</code>: Definiert of die Prüfung auf die Klein/Großschreibung achten soll.
-                    Standardmäßig ist die Klein/Großschreibung egal. Es ist zu beachten das dieser Schlüssel
-                    für alle verwendeten Erweiterungen angegeben wird.
+                    <code>case</code>: Definiert of die Prüfung auf die Klein/Großschreibung achten
+                    soll. Standardmäßig ist die Klein/Großschreibung egal. Es ist zu beachten das
+                    dieser Schlüssel für alle verwendeten Erweiterungen angegeben wird.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String, oder als
-            ein Array. Man kann auch die <code>setExtension()</code>, <code>addExtension()</code> und
-            <code>getExtension()</code> Methoden verwenden um Erweiterungs Werte zu setzen und zu erhalten.
+            Dieser Prüfer akzeptiert mehrere Erweiterungen entweder als komma-getrennten String,
+            oder als ein Array. Man kann auch die <code>setExtension()</code>,
+            <code>addExtension()</code> und <code>getExtension()</code> Methoden verwenden um
+            Erweiterungs Werte zu setzen und zu erhalten.
         </para>
 
         <para>
@@ -708,15 +721,15 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
         <title>FilesSize Prüfung</title>
 
         <para>
-            Die <code>FilesSize</code> Prüfung checkt die komplette Größe aller übertragenen Dateien.
-            Sie unterstützt die folgenden Optionen:
+            Die <code>FilesSize</code> Prüfung checkt die komplette Größe aller übertragenen
+            Dateien. Sie unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>min</code>: Setzt die minimale gemeinsame Dateigröße. Diese Option definiert
-                    die mindeste gemeinsame Größe die übertragen werden soll.
+                    <code>min</code>: Setzt die minimale gemeinsame Dateigröße. Diese Option
+                    definiert die mindeste gemeinsame Größe die übertragen werden soll.
                 </para>
             </listitem>
 
@@ -726,38 +739,40 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
                 </para>
 
                 <para>
-                    Diese Option begrenzt die gemeinsame Dateigröße aller Dateien die übertragen werden,
-                    aber nicht die Dateigröße von einzelnen Dateien.
+                    Diese Option begrenzt die gemeinsame Dateigröße aller Dateien die übertragen
+                    werden, aber nicht die Dateigröße von einzelnen Dateien.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>bytestring</code>: Definiert ob im Fehlerfall eine Benutzerfreundliche Nummer, oder
-                    die reine Dateigröße zurückgegeben wird.
+                    <code>bytestring</code>: Definiert ob im Fehlerfall eine Benutzerfreundliche
+                    Nummer, oder die reine Dateigröße zurückgegeben wird.
                 </para>
 
                 <para>
                     Diese Option definiert ob der Benutzer '10864' oder '10MB' sieht. Der
-                    Standardwert ist true weshalb '10MB' zurückgegeben wird wenn nicht anders angegeben.
+                    Standardwert ist true weshalb '10MB' zurückgegeben wird wenn nicht anders
+                    angegeben.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Diese Prüfung kann auch mit einem String initiiert werden, der dann verwendet wird um die
-            <code>max</code> Option zu setzen. Man kann auch die Methoden <code>setMin()</code> und
-            <code>setMax()</code> verwenden um beide Optionen nach den Contrucor zu setzen, zusammen mit
-            <code>getMin()</code> und <code>getMax()</code> um die Werte zu erhalten die vorher gesetzt wurden.
+            Diese Prüfung kann auch mit einem String initiiert werden, der dann verwendet wird um
+            die <code>max</code> Option zu setzen. Man kann auch die Methoden <code>setMin()</code>
+            und <code>setMax()</code> verwenden um beide Optionen nach den Contrucor zu setzen,
+            zusammen mit <code>getMin()</code> und <code>getMax()</code> um die Werte zu erhalten
+            die vorher gesetzt wurden.
         </para>
 
         <para>
             Die Größe selbst wird auch in der SI Schreibweise akzeptiert wie Sie die meisten
             Betriebsystemen verwenden. Statt <emphasis>20000 bytes</emphasis> kann auch
-            <emphasis>20kB</emphasis> angeben werden. Alle Einheiten werden mit dem Basiswert
-            1024 konvertiert. Die folgenden Einheiten werden akzeptiert: <code>kB</code>, <code>MB</code>,
-            <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>. Beachte das 1kB gleich
-            1024 Bytes ist, 1MB gleich 1024kB, und so weiter.
+            <emphasis>20kB</emphasis> angeben werden. Alle Einheiten werden mit dem Basiswert 1024
+            konvertiert. Die folgenden Einheiten werden akzeptiert: <code>kB</code>,
+            <code>MB</code>, <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>.
+            Beachte das 1kB gleich 1024 Bytes ist, 1MB gleich 1024kB, und so weiter.
         </para>
 
         <example id="zend.file.transfer.validators.filessize.example">
@@ -798,8 +813,8 @@ $upload->addValidator('FilesSize',
         <title>ImageSize Prüfung</title>
 
         <para>
-            Die <code>ImageSize</code> Prüfung checkt die Größe von Bildern. Sie unterstützt die folgenden
-            Optionen:
+            Die <code>ImageSize</code> Prüfung checkt die Größe von Bildern. Sie unterstützt die
+            folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -835,15 +850,15 @@ $upload->addValidator('FilesSize',
         </para>
 
         <para>
-            Der Bequemlichkeit halber gibt es auch eine <code>setImageWidth</code> und <code>setImageHeight</code>
-            Methode welche die Mindest- und Maximalhöhe und -Breite der Bilddatei setzen. Sie haben auch
-            passende <code>getImageWidth</code> und <code>getImageHeight</code> Methoden um die aktuell
-            gesetzten Werte zu erhalten.
+            Der Bequemlichkeit halber gibt es auch eine <code>setImageWidth</code> und
+            <code>setImageHeight</code> Methode welche die Mindest- und Maximalhöhe und -Breite der
+            Bilddatei setzen. Sie haben auch passende <code>getImageWidth</code> und
+            <code>getImageHeight</code> Methoden um die aktuell gesetzten Werte zu erhalten.
         </para>
 
         <para>
-            Um die Prüfung einer betreffenden Dimension zu gestatten, muß die relevante Option einfach
-            nicht gesetzt werden.
+            Um die Prüfung einer betreffenden Dimension zu gestatten, muß die relevante Option
+            einfach nicht gesetzt werden.
         </para>
 
         <example id="zend.file.transfer.validators.imagesize.example">
@@ -871,10 +886,10 @@ $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
         <title>IsCompressed Prüfung</title>
 
         <para>
-            Die <code>IsCompressed</code> Prüfung checkt ob eine übertragene Datei komprimiert ist wie zum
-            Beispiel Zip oder Arc. Diese Prüfung basiert auf der <code>MimeType</code> Prüfung und unterstützt
-            die gleichen Methoden und Optionen. Diese Prüfung kann mit den dort beschriebenen Methoden auf
-            gewünschte Komprimierungstypen limitiert werden.
+            Die <code>IsCompressed</code> Prüfung checkt ob eine übertragene Datei komprimiert ist
+            wie zum Beispiel Zip oder Arc. Diese Prüfung basiert auf der <code>MimeType</code>
+            Prüfung und unterstützt die gleichen Methoden und Optionen. Diese Prüfung kann mit den
+            dort beschriebenen Methoden auf gewünschte Komprimierungstypen limitiert werden.
         </para>
 
         <example id="zend.file.transfer.validators.iscompressed.example">
@@ -897,10 +912,10 @@ $upload->addValidator('IsCompressed', false, 'zip');
 
         <note>
             <para>
-                Es ist zu beachten das nicht geprüft wird ob ein gesetzter MIME Typ ein Komprimierungstyp ist
-                oder nicht. Man könnte zum Beispiel definieren das Gif Dateien von dieser Prüfung akzeptiert
-                werden. Die Verwendung der 'MimeType' Prüfung für Dateien welche nicht archiviert sind,
-                führt zu besser lesbarem Code.
+                Es ist zu beachten das nicht geprüft wird ob ein gesetzter MIME Typ ein
+                Komprimierungstyp ist oder nicht. Man könnte zum Beispiel definieren das Gif Dateien
+                von dieser Prüfung akzeptiert werden. Die Verwendung der 'MimeType' Prüfung für
+                Dateien welche nicht archiviert sind, führt zu besser lesbarem Code.
             </para>
         </note>
     </sect2>
@@ -909,10 +924,10 @@ $upload->addValidator('IsCompressed', false, 'zip');
         <title>IsImage Prüfung</title>
 
         <para>
-            Die <code>IsImage</code> Prüfung checkt ob eine übertragene Datei eine Bilddatei ist, wie zum
-            Beispiel Gif oder Jpeg. Diese Prüfung basiert auf der <code>MimeType</code> Prüfung und unterstützt
-            die gleichen Methoden und Optionen. Diese Prüfung kann mit den dort beschriebenen Methoden auf
-            gewünschte Bildarten limitiert werden.
+            Die <code>IsImage</code> Prüfung checkt ob eine übertragene Datei eine Bilddatei ist,
+            wie zum Beispiel Gif oder Jpeg. Diese Prüfung basiert auf der <code>MimeType</code>
+            Prüfung und unterstützt die gleichen Methoden und Optionen. Diese Prüfung kann mit den
+            dort beschriebenen Methoden auf gewünschte Bildarten limitiert werden.
         </para>
 
         <example id="zend.file.transfer.validators.isimage.example">
@@ -947,8 +962,9 @@ $upload->addValidator('IsImage', false, 'jpeg');
         <title>Hash Prüfung</title>
 
         <para>
-            Die <code>Hash</code> Prüfung checkt den Inhalt einer übertragenen Datei indem Sie gehasht wird.
-            Diese Prüfung verwendet die Hash Erweiterung von PHP. Sie unterstützt die folgenden Optionen:
+            Die <code>Hash</code> Prüfung checkt den Inhalt einer übertragenen Datei indem Sie
+            gehasht wird. Diese Prüfung verwendet die Hash Erweiterung von PHP. Sie unterstützt die
+            folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -959,21 +975,21 @@ $upload->addValidator('IsImage', false, 'jpeg');
                 </para>
 
                 <para>
-                    Man kann mehrere Hashes setzen indem Sie als Array angegeben werden. Jede Datei wird
-                    geprüft, und die Prüfung wird nur fehlschlagen wenn alle Dateien die Prüfung nicht
-                    bestehen.
+                    Man kann mehrere Hashes setzen indem Sie als Array angegeben werden. Jede Datei
+                    wird geprüft, und die Prüfung wird nur fehlschlagen wenn alle Dateien die
+                    Prüfung nicht bestehen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>algorithm</code>: Setzt den Algorithmus der für das Hashen des Inhalts verwendet
-                    wird.
+                    <code>algorithm</code>: Setzt den Algorithmus der für das Hashen des Inhalts
+                    verwendet wird.
                 </para>
 
                 <para>
-                    Man kann mehrere Algorithmen setzen indem die <code>addHash()</code> Methode mehrere
-                    Male aufgerufen wird.
+                    Man kann mehrere Algorithmen setzen indem die <code>addHash()</code> Methode
+                    mehrere Male aufgerufen wird.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1000,9 +1016,10 @@ $upload->addValidator('Hash',
 
         <note>
             <para>
-                Diese Prüfung unterstützt über 34 verschiedene Hash Algorithmen. Die bekanntesten sind
-                'crc32', 'md5' und 'sha1'. Eine gesammelte Liste aller unterstützten Hash Algorithmen kann in
-                PHP's <ulink url="http://php.net/hash_algos">hash_algos Methode</ulink> auf der
+                Diese Prüfung unterstützt über 34 verschiedene Hash Algorithmen. Die bekanntesten
+                sind 'crc32', 'md5' und 'sha1'. Eine gesammelte Liste aller unterstützten Hash
+                Algorithmen kann in PHP's <ulink
+                    url="http://php.net/hash_algos">hash_algos Methode</ulink> auf der
                 <ulink url="http://php.net">php.net Seite</ulink> gefunden werden.
             </para>
         </note>
@@ -1012,9 +1029,9 @@ $upload->addValidator('Hash',
         <title>Md5 Prüfung</title>
 
         <para>
-            Die <code>Md5</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen. Diese
-            Prüfung verwendet die Hash Erweiterung von PHP mit dem Md5 Algorithmus. Sie unterstützt die
-            folgenden Optionen:
+            Die <code>Md5</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen.
+            Diese Prüfung verwendet die Hash Erweiterung von PHP mit dem Md5 Algorithmus. Sie
+            unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1024,8 +1041,9 @@ $upload->addValidator('Hash',
                 </para>
 
                 <para>
-                    Man kann mehrere Hashes setzen indem Sie als Array übergeben werden. Jede Datei wird
-                    geprüft und die Prüfung schlägt nur dann fehl wenn die Prüfung alle Dateien fehlschlägt.
+                    Man kann mehrere Hashes setzen indem Sie als Array übergeben werden. Jede Datei
+                    wird geprüft und die Prüfung schlägt nur dann fehl wenn die Prüfung alle Dateien
+                    fehlschlägt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1052,8 +1070,8 @@ $upload->addValidator('Md5',
         <title>MimeType Prüfung</title>
 
         <para>
-            Die <code>MimeType</code> Prüfung checkt den Mimetyp von übertragenen Dateien. Sie unterstützt
-            die folgenden Optionen:
+            Die <code>MimeType</code> Prüfung checkt den Mimetyp von übertragenen Dateien. Sie
+            unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1074,9 +1092,9 @@ $upload->addValidator('Md5',
                 </para>
 
                 <para>
-                    Mit dieser Option kann definiert werden welches Magicfile zu verwenden ist. Wenn es nicht
-                    gesetzt wird, oder leer ist, wird stattdessen die MAGIC Konstante verwendet. Diese
-                    Option ist seit dem Zend Framework 1.7.1 vorhanden.
+                    Mit dieser Option kann definiert werden welches Magicfile zu verwenden ist. Wenn
+                    es nicht gesetzt wird, oder leer ist, wird stattdessen die MAGIC Konstante
+                    verwendet. Diese Option ist seit dem Zend Framework 1.7.1 vorhanden.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1088,10 +1106,11 @@ $upload->addValidator('Md5',
         </para>
 
         <para>
-            Man kann mit der 'magicfile' Option auch die Magicdatei setzen die von Fileinfo verwendet
-            werden soll. Zusätzlich gibt es die komfortablen <code>setMagicFile()</code> und
-            <code>getMagicFile()</code> Methoden die das spätere Setzen und Empfangen des Magicfile
-            Parameters erlauben. Diese Methoden sind seit dem Zend Framework 1.7.1 vorhanden.
+            Man kann mit der 'magicfile' Option auch die Magicdatei setzen die von Fileinfo
+            verwendet werden soll. Zusätzlich gibt es die komfortablen <code>setMagicFile()</code>
+            und <code>getMagicFile()</code> Methoden die das spätere Setzen und Empfangen des
+            Magicfile Parameters erlauben. Diese Methoden sind seit dem Zend Framework 1.7.1
+            vorhanden.
         </para>
 
         <example id="zend.file.transfer.validators.mimetype.example">
@@ -1118,33 +1137,35 @@ $upload->addValidator('MimeType',
         </example>
 
         <para>
-            Das obige Beispiel zeigt das es auch möglich ist den akzeptierten MIME Typ auf eine Gruppe von
-            MIME Typen zu begrenzen. Um alle Bilder zu erlauben kann einfach 'image' als MIME Typ verwendet
-            werden. Das kann für alle Gruppen von MIME Typen wie 'image', 'audio', 'video', 'test', und so
-            weiter gemacht werden.
+            Das obige Beispiel zeigt das es auch möglich ist den akzeptierten MIME Typ auf eine
+            Gruppe von MIME Typen zu begrenzen. Um alle Bilder zu erlauben kann einfach 'image' als
+            MIME Typ verwendet werden. Das kann für alle Gruppen von MIME Typen wie 'image',
+            'audio', 'video', 'test', und so weiter gemacht werden.
         </para>
 
         <note>
             <para>
-                Es ist zu beachten das die Verwendung von MIME Typ-Gruppen alle Mitglieder dieser Gruppe
-                akzeptiert, selbst wenn die Anwendung diese nicht unterstützt. Wenn man 'image' erlaubt,
-                erhält man auch 'image/xpixmap' oder 'image/vasa' was problematisch sein könnte. Wenn man
-                nicht sicher ist ob die eigene Anwendung alle Typen unterstützt ist es besser nur
-                definierte MIME Typen zu erlauben statt der kompletten Gruppe.
+                Es ist zu beachten das die Verwendung von MIME Typ-Gruppen alle Mitglieder dieser
+                Gruppe akzeptiert, selbst wenn die Anwendung diese nicht unterstützt. Wenn man
+                'image' erlaubt, erhält man auch 'image/xpixmap' oder 'image/vasa' was problematisch
+                sein könnte. Wenn man nicht sicher ist ob die eigene Anwendung alle Typen
+                unterstützt ist es besser nur definierte MIME Typen zu erlauben statt der kompletten
+                Gruppe.
             </para>
         </note>
 
         <note>
             <para>
-                Diese Komponente verwendet die <code>fileinfo</code> Erweiterung wenn Sie vorhanden ist.
-                Wenn nicht wird Sie die <code>mime_content_type</code> Funktion verwenden. Und wenn dieser
-                Funktionsaufruf fehlschlägt wird der MIME Typ verwendet der von HTTP angegeben wurde.
+                Diese Komponente verwendet die <code>fileinfo</code> Erweiterung wenn Sie vorhanden
+                ist. Wenn nicht wird Sie die <code>mime_content_type</code> Funktion verwenden. Und
+                wenn dieser Funktionsaufruf fehlschlägt wird der MIME Typ verwendet der von HTTP
+                angegeben wurde.
             </para>
 
             <para>
-                Man sollte sich vor möglichen Sicherheitsproblemen vorsehen wenn weder <code>fileinfo</code>
-                noch <code>mime_content_type</code> vorhanden sind. Der von HTTP angegebene MIME Typ ist nicht
-                sicher und kann einfach manipuliert werden.
+                Man sollte sich vor möglichen Sicherheitsproblemen vorsehen wenn weder
+                <code>fileinfo</code> noch <code>mime_content_type</code> vorhanden sind. Der von
+                HTTP angegebene MIME Typ ist nicht sicher und kann einfach manipuliert werden.
             </para>
         </note>
     </sect2>
@@ -1153,8 +1174,8 @@ $upload->addValidator('MimeType',
         <title>NotExists Prüfung</title>
 
         <para>
-            Die <code>NotExists</code> Prüfung checkt ob Dateien die angegeben werden existieren. Sie unterstützt
-            die folgenden Optionen:
+            Die <code>NotExists</code> Prüfung checkt ob Dateien die angegeben werden existieren.
+            Sie unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1167,9 +1188,10 @@ $upload->addValidator('MimeType',
         </itemizedlist>
 
         <para>
-            Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String, oder als
-            Array. Es können aber auch die Methoden <code>setDirectory()</code>, <code>addDirectory()</code>,
-            und <code>getDirectory()</code> verwendet werden um die Verzeichnisse zu setzen und zu erhalten.
+            Diese Prüfung akzeptiert mehrere Verzeichnisse, entweder als Komma-getrennter String,
+            oder als Array. Es können aber auch die Methoden <code>setDirectory()</code>,
+            <code>addDirectory()</code>, und <code>getDirectory()</code> verwendet werden um die
+            Verzeichnisse zu setzen und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.notexists.example">
@@ -1191,9 +1213,9 @@ $upload->addValidator('NotExists',
         </example>
         <note>
             <para>
-                Beachte das diese Prüfung checkt ob die Datei in allen angegebenen Verzeichnissen nicht
-                existiert. Die Prüfung schlägt fehl, wenn die Datei in irgendeinem der angegebenen Verzeichnisse
-                existiert.
+                Beachte das diese Prüfung checkt ob die Datei in allen angegebenen Verzeichnissen
+                nicht existiert. Die Prüfung schlägt fehl, wenn die Datei in irgendeinem der
+                angegebenen Verzeichnisse existiert.
             </para>
         </note>
     </sect2>
@@ -1202,9 +1224,9 @@ $upload->addValidator('NotExists',
         <title>Sha1 Prüfung</title>
 
         <para>
-            Die <code>Sha1</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen. Diese
-            Prüfung verwendet die Hash Erweiterung von PHP mit dem Sha1 Algorithmus. Sie unterstützt die
-            folgenden Optionen:
+            Die <code>Sha1</code> Prüfung checkt den Inhalt einer übertragenen Datei durch hashen.
+            Diese Prüfung verwendet die Hash Erweiterung von PHP mit dem Sha1 Algorithmus. Sie
+            unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1214,8 +1236,9 @@ $upload->addValidator('NotExists',
                 </para>
 
                 <para>
-                    Man kann mehrere Hashes setzen indem Sie als Array übergeben werden. Jeder Datei wird
-                    geprüft und die Prüfung schlägt nur dann fehl wenn alle Dateien fehlschlagen.
+                    Man kann mehrere Hashes setzen indem Sie als Array übergeben werden. Jeder Datei
+                    wird geprüft und die Prüfung schlägt nur dann fehl wenn alle Dateien
+                    fehlschlagen.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1241,8 +1264,8 @@ $upload->addValidator('Sha1',
         <title>Size Prüfung</title>
 
         <para>
-            Die <code>Size</code> Prüfung checkt die Größe von einzelnen Dateien. Sie unterstützt die
-            folgenden Optionen:
+            Die <code>Size</code> Prüfung checkt die Größe von einzelnen Dateien. Sie unterstützt
+            die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1260,31 +1283,33 @@ $upload->addValidator('Sha1',
 
             <listitem>
                 <para>
-                    <code>bytestring</code>: Definiert ob ein Fehler mit einer Benutzerfreundlichen Nummer
-                    zurückgegeben wird, oder mit der reinen Dateigröße.
+                    <code>bytestring</code>: Definiert ob ein Fehler mit einer Benutzerfreundlichen
+                    Nummer zurückgegeben wird, oder mit der reinen Dateigröße.
                 </para>
 
                 <para>
-                    Mit dieser Option kann definiert werden ob der Benutzer '10864' oder '10MB' erhält.
-                    Der Standardwert ist true was '10MB' zurückgibt.
+                    Mit dieser Option kann definiert werden ob der Benutzer '10864' oder '10MB'
+                    erhält. Der Standardwert ist true was '10MB' zurückgibt.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Man kann diese Prüfung auch nur mit einem String initialisieren, der dann verwendet wird um die
-            <code>max</code> Option zu setzen. Man kann auch die Methoden <code>setMin()</code> und
-            <code>setMax()</code> verwenden um beide Optionen nach der Instanziierung setzen, zusammen mit
-            <code>getMin()</code> und <code>getMax()</code> um die Werte zu setzen die vorher gesetzt wurden.
+            Man kann diese Prüfung auch nur mit einem String initialisieren, der dann verwendet wird
+            um die <code>max</code> Option zu setzen. Man kann auch die Methoden
+            <code>setMin()</code> und <code>setMax()</code> verwenden um beide Optionen nach der
+            Instanziierung setzen, zusammen mit <code>getMin()</code> und <code>getMax()</code> um
+            die Werte zu setzen die vorher gesetzt wurden.
         </para>
 
         <para>
             Die Größe selbst wird auch in der SI Schreibweise akzeptiert wie Sie von den meisten
             Betriebsystemen verwendet wird. Statt <emphasis>20000 bytes</emphasis> kann man auch
             <emphasis>20kB</emphasis> angeben. Alle Einheiten werden konvertiert wobei 1024 als
-            Basiswert verwendet wird. Die folgenden Einheiten werden akzeptiert: <code>kB</code>, <code>MB</code>,
-            <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>. Beachte das 1kB identisch
-            mit 1024 Bytes ist, 1MB identisch mit 1024kB ist, und so weiter.
+            Basiswert verwendet wird. Die folgenden Einheiten werden akzeptiert: <code>kB</code>,
+            <code>MB</code>, <code>GB</code>, <code>TB</code>, <code>PB</code> und <code>EB</code>.
+            Beachte das 1kB identisch mit 1024 Bytes ist, 1MB identisch mit 1024kB ist, und so
+            weiter.
         </para>
 
         <example id="zend.file.transfer.validators.size.example">
@@ -1312,8 +1337,8 @@ $upload->addValidator('Size',
         <title>WordCount Prüfung</title>
 
         <para>
-            Die <code>WordCount</code> Prüfung checkt die Anzahl von Wörtern in angegebenen Dateien. Sie
-            Unterstützt die folgenden Optionen:
+            Die <code>WordCount</code> Prüfung checkt die Anzahl von Wörtern in angegebenen Dateien.
+            Sie Unterstützt die folgenden Optionen:
         </para>
 
         <itemizedlist>
@@ -1332,9 +1357,10 @@ $upload->addValidator('Size',
 
         <para>
             Wenn man diese Prüfung mit einem String oder Integer initiiert, wird der Wert als
-            <code>max</code> verwendet. Oder man verwendet die <code>setMin()</code> und <code>setMax()</code>
-            Methoden um beide Optionen im Nachhinein zu setzen und <code>getMin()</code> sowie
-            <code>getMax()</code> um die aktuell gesetzten Werte zu erhalten.
+            <code>max</code> verwendet. Oder man verwendet die <code>setMin()</code> und
+            <code>setMax()</code> Methoden um beide Optionen im Nachhinein zu setzen und
+            <code>getMin()</code> sowie <code>getMax()</code> um die aktuell gesetzten Werte zu
+            erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.wordcount.example">

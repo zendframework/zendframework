@@ -5,9 +5,10 @@
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Dom</classname> bietet Tools für das Arbeiten mit DOM Dokumenten und Strukturen. Aktuell bieten
-        wir <classname>Zend_Dom_Query</classname> an, welche ein vereinheitlichtes Interface für das Abfragen von DOM
-        Dokumenten anbietet und beide, XPath und CSS Selektoren verwendet.
+        <classname>Zend_Dom</classname> bietet Tools für das Arbeiten mit DOM Dokumenten und
+        Strukturen. Aktuell bieten wir <classname>Zend_Dom_Query</classname> an, welche ein
+        vereinheitlichtes Interface für das Abfragen von DOM Dokumenten anbietet und beide, XPath
+        und CSS Selektoren verwendet.
     </para>
 </sect1>
 <!--

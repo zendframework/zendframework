@@ -5,8 +5,8 @@
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
 
     <para>
-        <classname>Zend_Form</classname> wird mit verschiedenen Standard Dekoratoren ausgeliefert. Für
-        weitere Informationen über die generelle Verwendung von Dekoratoren, siehe das
+        <classname>Zend_Form</classname> wird mit verschiedenen Standard Dekoratoren ausgeliefert.
+        Für weitere Informationen über die generelle Verwendung von Dekoratoren, siehe das
         <link linkend="zend.form.decorators">Kapitel über Dekoratoren</link>.
     </para>
 
@@ -52,15 +52,16 @@ class Util
 
         <para>
             Der Captcha Dekorator ist für die Verwendung mit dem
-            <link linkend="zend.form.standardElements.captcha">CAPTCHA Formularelement</link>. Es verwendet
-            die <code>render()</code> Methode des CAPTCHA Adapters um die Ausgabe zu erzeugen.
+            <link linkend="zend.form.standardElements.captcha">CAPTCHA Formularelement</link>. Es
+            verwendet die <code>render()</code> Methode des CAPTCHA Adapters um die Ausgabe zu
+            erzeugen.
         </para>
 
         <para>
-            Eine Variante des Captcha Dekorators, 'Captcha_Word', wird auch üblicherweise verwendet, und
-            erstellt zwei Elemente, eine Id und eine Eingabe. Die Id zeigt den Identifikator der Session
-            gegen den verglichen wird, und die Eingabe ist für die Benutzerverifikation des CAPTCHA.
-            Beide werden als einzelnes Element geprüft.
+            Eine Variante des Captcha Dekorators, 'Captcha_Word', wird auch üblicherweise verwendet,
+            und erstellt zwei Elemente, eine Id und eine Eingabe. Die Id zeigt den Identifikator der
+            Session gegen den verglichen wird, und die Eingabe ist für die Benutzerverifikation des
+            CAPTCHA. Beide werden als einzelnes Element geprüft.
         </para>
     </sect2>
 
@@ -70,19 +71,19 @@ class Util
         <para>
             Der Description Dekorator kann verwendet werden, um eine Beschreibung in einem
             <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>, oder
-            <classname>Zend_Form_DisplayGroup</classname> Element anzuzeigen; es holt die Beschreibung,
-            indem es die <code>getDescription()</code> Methode des Objektes verwendet.
+            <classname>Zend_Form_DisplayGroup</classname> Element anzuzeigen; es holt die
+            Beschreibung, indem es die <code>getDescription()</code> Methode des Objektes verwendet.
             Übliche Anwendungsfälle sind das Anbieten von UI Hinweisen für Elemente.
         </para>
 
         <para>
-            Standardmäßig, wenn keine Beschreibung vorhanden ist, wird keine Ausgabe erzeugt.
-            Wenn die Beschreibung vorhanden ist, wird sie standardmäßig in ein HTML <code>&lt;p&gt;</code>
-            Tag eingebunden, es kann aber ein Tag durch die Übergabe einer <code>tag</code>
-            Option spezifiziert werden, bei der Erstellung des Dekorators, oder durch Aufruf von
-            <code>setTag()</code>. Zusätzlich kann eine Klasse für das Tag spezifiziert werden,
-            indem die <code>class</code> Option verwendet wird, oder durch den Aufruf von
-            <code>setClass()</code>; standardmäßig wird die Klasse 'hint' verwendet.
+            Standardmäßig, wenn keine Beschreibung vorhanden ist, wird keine Ausgabe erzeugt. Wenn
+            die Beschreibung vorhanden ist, wird sie standardmäßig in ein HTML
+            <code>&lt;p&gt;</code> Tag eingebunden, es kann aber ein Tag durch die Übergabe einer
+            <code>tag</code> Option spezifiziert werden, bei der Erstellung des Dekorators, oder
+            durch Aufruf von <code>setTag()</code>. Zusätzlich kann eine Klasse für das Tag
+            spezifiziert werden, indem die <code>class</code> Option verwendet wird, oder durch den
+            Aufruf von <code>setClass()</code>; standardmäßig wird die Klasse 'hint' verwendet.
         </para>
 
         <para>
@@ -98,12 +99,12 @@ class Util
 
         <para>
             Der Standarddekorator verwendet Definitionslisten (<code>&lt;dl&gt;</code>) um
-            Formularelemente darzustellen. Da Formularelemente in jeder Reihenfolge vorkommen können,
-            werden Gruppen und Unterformulare angezeigt und können mit anderen Formularelementen
-            interagieren. Um diese speziellen Elementtypen in der Definitionsliste zu behalten,
-            erstellt der DtDdWrapper einen neuen, leeren Definitionsausdruck (<code>&lt;dt&gt;</code>) und
-            bettet dessen Inhalt in ein neues Definitionsdatum (<code>&lt;dd&gt;</code>) ein. Die Ausgabe
-            sieht dann wie folgt aus:
+            Formularelemente darzustellen. Da Formularelemente in jeder Reihenfolge vorkommen
+            können, werden Gruppen und Unterformulare angezeigt und können mit anderen
+            Formularelementen interagieren. Um diese speziellen Elementtypen in der Definitionsliste
+            zu behalten, erstellt der DtDdWrapper einen neuen, leeren Definitionsausdruck
+            (<code>&lt;dt&gt;</code>) und bettet dessen Inhalt in ein neues Definitionsdatum
+            (<code>&lt;dd&gt;</code>) ein. Die Ausgabe sieht dann wie folgt aus:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -140,8 +141,8 @@ class Util
         <title>Zend_Form_Decorator_Fieldset</title>
 
         <para>
-            Anzeigegruppen und Unterformulare zeigen ihren Inhalt standardmäßig in einem Fieldset an.
-            Der Fieldset Dekorator prüft, ob entweder eine 'legend' Option oder eine
+            Anzeigegruppen und Unterformulare zeigen ihren Inhalt standardmäßig in einem Fieldset
+            an. Der Fieldset Dekorator prüft, ob entweder eine 'legend' Option oder eine
             <code>getLegend()</code> Methode in dem registrierten Element vorhanden ist, und
             verwendet dieses als Legende, wenn es nicht leer ist. Jeder Inhalt der übergeben wird,
             wird in ein HTML Fieldset eingebettet, wobei der originale Inhalt ersetzt wird. Alle
@@ -154,10 +155,11 @@ class Util
         <title>Zend_Form_Decorator_File</title>
 
         <para>
-            File Elemente haben eine spezielle Schreibweise wenn man mehrere File Elemente oder Unterformulare
-            verwendet. Der File Decorator wird von <classname>Zend_Form_Element_File</classname> verwendet und erlaubt
-            es mehrere File Elemente, mit einem einzelnen Methodenaufruf, zu setzen. Er wird automatisch
-            verwendet und bestimmt den Namen des Elements.
+            File Elemente haben eine spezielle Schreibweise wenn man mehrere File Elemente oder
+            Unterformulare verwendet. Der File Decorator wird von
+            <classname>Zend_Form_Element_File</classname> verwendet und erlaubt es mehrere File
+            Elemente, mit einem einzelnen Methodenaufruf, zu setzen. Er wird automatisch verwendet
+            und bestimmt den Namen des Elements.
         </para>
     </sect2>
 
@@ -165,10 +167,11 @@ class Util
         <title>Zend_Form_Decorator_Form</title>
 
         <para>
-            <classname>Zend_Form</classname> Objekte müssen typischerweise ein HTML <code>&lt;form&gt;</code> Tag
-            darstellen. Der Formular Dekorator verweist auf den Formular View Helfer. Er bettet jeden
-            angebotenen Inhalt in ein HTML Formular Element ein, indem die Aktionen und Methoden des
-            <classname>Zend_Form</classname> Objektes verwendet werden, und jedes Attribut als HTML Attribut.
+            <classname>Zend_Form</classname> Objekte müssen typischerweise ein HTML
+            <code>&lt;form&gt;</code> Tag darstellen. Der Formular Dekorator verweist auf den
+            Formular View Helfer. Er bettet jeden angebotenen Inhalt in ein HTML Formular Element
+            ein, indem die Aktionen und Methoden des <classname>Zend_Form</classname> Objektes
+            verwendet werden, und jedes Attribut als HTML Attribut.
         </para>
     </sect2>
 
@@ -188,8 +191,8 @@ class Util
         <title>Zend_Form_Decorator_FormErrors</title>
 
         <para>
-            Einige Entwickler und Designer bevorzugen es, alle Fehlermeldungen am Beginn des Formulars zu
-            gruppieren. Der FormErrors Dekorator erlaubt dies zu tun.
+            Einige Entwickler und Designer bevorzugen es, alle Fehlermeldungen am Beginn des
+            Formulars zu gruppieren. Der FormErrors Dekorator erlaubt dies zu tun.
         </para>
 
         <para>
@@ -219,42 +222,43 @@ class Util
 
         <itemizedlist>
             <listitem><para>
-                <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet werden soll
-                oder nicht. Standardwert: false (erlaubt Rekursion).
+                <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet werden
+                soll oder nicht. Standardwert: false (erlaubt Rekursion).
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelEnd</code>: Markup der der Elementüberschrift angehängt wird.
-                Standardwert: '&lt;/b&gt;'
+                <code>markupElementLabelEnd</code>: Markup der der Elementüberschrift angehängt
+                wird. Standardwert: '&lt;/b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelStart</code>: Markup der der Elementüberschrift vorangestellt wird.
-                Standardwert: '&lt;b&gt;'
+                <code>markupElementLabelStart</code>: Markup der der Elementüberschrift
+                vorangestellt wird. Standardwert: '&lt;b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListEnd</code>: Markup der der Nachrichtenliste angehängt wird. Standardwert:
-                '&lt;/ul&gt;'.
+                <code>markupListEnd</code>: Markup der der Nachrichtenliste angehängt wird.
+                Standardwert: '&lt;/ul&gt;'.
             </para></listitem>
             <listitem><para>
-                <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen angehängt wird.
-                Standardwert: '&lt;/li&gt;'
-            </para></listitem>
-
-            <listitem><para>
-                <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen vorangestellt wird.
-                Standardwert: '&lt;li&gt;'
+                <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen angehängt
+                wird. Standardwert: '&lt;/li&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListStart</code>: Markup der der Nachrichtenliste vorangestellt wird. Standardwert:
-                '&lt;ul class="form-errors"&gt;'
+                <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen
+                vorangestellt wird. Standardwert: '&lt;li&gt;'
+            </para></listitem>
+
+            <listitem><para>
+                <code>markupListStart</code>: Markup der der Nachrichtenliste vorangestellt wird.
+                Standardwert: '&lt;ul class="form-errors"&gt;'
             </para></listitem>
         </itemizedlist>
 
         <para>
-            Der FormErrors Dekorator kann entweder angehängt oder dem Inhalt, dem er angehört, vorangestellt werden.
+            Der FormErrors Dekorator kann entweder angehängt oder dem Inhalt, dem er angehört,
+            vorangestellt werden.
         </para>
     </sect2>
 
@@ -365,11 +369,12 @@ class Util
 
         <para>
             Formulare, Anzeigegruppen, und Unterformulare sind Kollektionen von Elementen. Wenn der
-            <link linkend="zend.form.standardDecorators.viewScript">ViewScript Dekorator</link> verwendet
-            wird, ist es nützlich die Möglichkeit zu haben, das View Objekt, die Übersetzung, und alle komplett
-            qualifizierten Namen (wie sie von der Array Schreibweise der Unterformulare erkannt werden),
-            rekursiv setzen zu können. Der 'PrepareElements' Dekorator kann das für einen erledigen.
-            Typischerweise setzt man ihn als ersten Dekorator in der Liste.
+            <link linkend="zend.form.standardDecorators.viewScript">ViewScript Dekorator</link>
+            verwendet wird, ist es nützlich die Möglichkeit zu haben, das View Objekt, die
+            Übersetzung, und alle komplett qualifizierten Namen (wie sie von der Array Schreibweise
+            der Unterformulare erkannt werden), rekursiv setzen zu können. Der 'PrepareElements'
+            Dekorator kann das für einen erledigen. Typischerweise setzt man ihn als ersten
+            Dekorator in der Liste.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -384,12 +389,12 @@ $form->setDecorators(array(
         <title>Zend_Form_Decorator_ViewHelper</title>
 
         <para>
-            Die meisten Elemente verwenden <classname>Zend_View</classname> Helfer für die Darstellung und
-            das wird mit dem View Helfer Dekorator getan. Mit ihm kann ein 'helper' Tag spezifiziert
-            werden der explizit den View Helfer setzt, der anzupassen ist; wenn keiner angegeben
-            wird, verwendet er das letzte Segment des Klassennamens des Elements um den Helfer
-            zu ermitteln, und stellt den String 'form' voran: z.B. 'Zend_Form_Element_Text' würde
-            nach einem View Helfer 'formText' schauen.
+            Die meisten Elemente verwenden <classname>Zend_View</classname> Helfer für die
+            Darstellung und das wird mit dem View Helfer Dekorator getan. Mit ihm kann ein 'helper'
+            Tag spezifiziert werden der explizit den View Helfer setzt, der anzupassen ist; wenn
+            keiner angegeben wird, verwendet er das letzte Segment des Klassennamens des Elements um
+            den Helfer zu ermitteln, und stellt den String 'form' voran: z.B.
+            'Zend_Form_Element_Text' würde nach einem View Helfer 'formText' schauen.
         </para>
 
         <para>
@@ -515,4 +520,3 @@ $this->decorator->setOption('placement', false);
 <!--
 vim:se ts=4 sw=4 tw=80 et:
 -->
-

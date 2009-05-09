@@ -5,26 +5,28 @@
     <title>Einführung</title>
 
     <para>
-        Die <classname>Zend_InfoCard</classname> Komponente implementiert die Unterstützung vertrauender Forderungen
-        für Informationskarten. Informationskarten werden für Identitätsmanagement im Internet verwendet
-        und zur Authentifikation von Benutzern auf Webseiten. Die Webseiten bei denen sich die Benutzer
-        im Endeffekt authentifizieren werden <emphasis>vertrauende Seiten</emphasis> genannt.
+        Die <classname>Zend_InfoCard</classname> Komponente implementiert die Unterstützung
+        vertrauender Forderungen für Informationskarten. Informationskarten werden für
+        Identitätsmanagement im Internet verwendet und zur Authentifikation von Benutzern auf
+        Webseiten. Die Webseiten bei denen sich die Benutzer im Endeffekt authentifizieren werden
+        <emphasis>vertrauende Seiten</emphasis> genannt.
     </para>
 
     <para>
-        Detailierte Informationen über Informationskarten und Ihre Wichtigkeit für Internet Identitätsmetasysteme
-        können im <ulink url="http://www.identityblog.com/">IdentityBlog</ulink> gefunden werden.
+        Detailierte Informationen über Informationskarten und Ihre Wichtigkeit für Internet
+        Identitätsmetasysteme können im <ulink
+            url="http://www.identityblog.com/">IdentityBlog</ulink> gefunden werden.
     </para>
 
     <sect2 id="zend.infocard.basics.theory">
         <title>Grundsätzliche Theorie der Verwendung</title>
 
         <para>
-            <classname>Zend_InfoCard</classname> kann auf einem von zwei Wegen verwendet werden: Entweder als Teil der
-            größeren <classname>Zend_Auth</classname> Komponente über den <classname>Zend_InfoCard</classname>
-            Authentifikationsadapter order als eigenständige Komponente. In beiden Fällen kann eine
-            Informationskarte von einem Benutzer angefragt werden durch Verwenden des folgenden HTML Blocks im
-            eigenen HTML Anmeldeformular:
+            <classname>Zend_InfoCard</classname> kann auf einem von zwei Wegen verwendet werden:
+            Entweder als Teil der größeren <classname>Zend_Auth</classname> Komponente über den
+            <classname>Zend_InfoCard</classname> Authentifikationsadapter order als eigenständige
+            Komponente. In beiden Fällen kann eine Informationskarte von einem Benutzer angefragt
+            werden durch Verwenden des folgenden HTML Blocks im eigenen HTML Anmeldeformular:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -44,27 +46,29 @@
 ]]></programlisting>
 
         <para>
-            Im obigen Beispiel wird das <code>requiredClaims</code> <code>&lt;param&gt;</code> Tag verwendet
-            um Teile von Informationen zu identifizieren die als Forderung bekannt sind (z.B. der Vorname und
-            Nachname einer Person) welche eine Webseite (genannt "vertrauende Forderung) benötigt um einen
-            Benutzer authentifizieren zu können der eine Informationskarte verwendet. Zur Referenz, ist die
-            komplette URI (zum Beispiel die <code>givename</code> Anforderung) wie folgt:
+            Im obigen Beispiel wird das <code>requiredClaims</code> <code>&lt;param&gt;</code> Tag
+            verwendet um Teile von Informationen zu identifizieren die als Forderung bekannt sind
+            (z.B. der Vorname und Nachname einer Person) welche eine Webseite (genannt "vertrauende
+            Forderung) benötigt um einen Benutzer authentifizieren zu können der eine
+            Informationskarte verwendet. Zur Referenz, ist die komplette URI (zum Beispiel die
+            <code>givename</code> Anforderung) wie folgt:
             <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname</code>
         </para>
 
         <para>
-            Wenn das obige HTML durch einen Benutzer aktiviert wird (angeklickt), zeigt der Browser ein
-            Kartenauswahlprogramm an, welche Ihm nicht nur die Informationskarten anzeigt die den Anforderungen
-            der Seite entsprechen, sondern es auch erlaubt welche Informationskarte verwendet werden soll wenn
-            mehrere den Kriterien entsprechen. Diese Informationskarte wird als XML Dokument zu der
-            spezifizierten <code>POST</code> URL übertragen und steht dann zur Bearbeitung der
-            <classname>Zend_InfoCard</classname> Komponente zur Verfügung.
+            Wenn das obige HTML durch einen Benutzer aktiviert wird (angeklickt), zeigt der Browser
+            ein Kartenauswahlprogramm an, welche Ihm nicht nur die Informationskarten anzeigt die
+            den Anforderungen der Seite entsprechen, sondern es auch erlaubt welche
+            Informationskarte verwendet werden soll wenn mehrere den Kriterien entsprechen. Diese
+            Informationskarte wird als XML Dokument zu der spezifizierten <code>POST</code> URL
+            übertragen und steht dann zur Bearbeitung der <classname>Zend_InfoCard</classname>
+            Komponente zur Verfügung.
         </para>
 
         <para>
-            Beachte das Informationskarten nur zu SSL-verschlüsselten URLs <code>HTTP POST</code>et werden
-            können. Die Dokumentation des WebServers sollte konsultiert werden für Details zum Einrichten einer
-            SSL Verschlüsselung.
+            Beachte das Informationskarten nur zu SSL-verschlüsselten URLs <code>HTTP POST</code>et
+            werden können. Die Dokumentation des WebServers sollte konsultiert werden für Details
+            zum Einrichten einer SSL Verschlüsselung.
         </para>
     </sect2>
 
@@ -72,9 +76,10 @@
         <title>Verwendung als Teil von Zend_Auth</title>
 
         <para>
-            Um diese Komponente als Teil des <classname>Zend_Auth</classname> Authentifikationssystems zu verwenden,
-            muß die angebotene <classname>Zend_Auth_Adapter_InfoCard</classname> verwendet werden (in der
-            standalone Distribution von <classname>Zend_InfoCard</classname> nicht enthalten). Ein Beispiel der
+            Um diese Komponente als Teil des <classname>Zend_Auth</classname>
+            Authentifikationssystems zu verwenden, muß die angebotene
+            <classname>Zend_Auth_Adapter_InfoCard</classname> verwendet werden (in der standalone
+            Distribution von <classname>Zend_InfoCard</classname> nicht enthalten). Ein Beispiel der
             Verwendung wird anbei gezeigt:
         </para>
 
@@ -137,19 +142,20 @@ if (isset($_POST['xmlToken'])) {
 ]]></programlisting>
 
         <para>
-            Im obigen Beispiel wurde zuerst eine Instanz von <classname>Zend_Auth_Adapter_InfoCard</classname> erstellt
-            und die durch die Kartenauswahl geschickten XML Daten an Ihn übergeben. Sobald die Instanz
-            erstellt wurde muß zumindest ein SSL Zertifizieruntsschlüssel, ein Paar öffentlich/privat der vom
-            Webserver verwendet wird, übergeben werden der mit <code>HTTP POST</code> empfangen wurde.
-            Diese Dateien werden verwendet um das Ziel der Information das an den Server geschickt wurde zu
-            überprüfen und sind eine Notwendigkeit wenn Informationskarten verwendet werden.
+            Im obigen Beispiel wurde zuerst eine Instanz von
+            <classname>Zend_Auth_Adapter_InfoCard</classname> erstellt und die durch die
+            Kartenauswahl geschickten XML Daten an Ihn übergeben. Sobald die Instanz erstellt wurde
+            muß zumindest ein SSL Zertifizieruntsschlüssel, ein Paar öffentlich/privat der vom
+            Webserver verwendet wird, übergeben werden der mit <code>HTTP POST</code> empfangen
+            wurde. Diese Dateien werden verwendet um das Ziel der Information das an den Server
+            geschickt wurde zu überprüfen und sind eine Notwendigkeit wenn Informationskarten verwendet werden.
         </para>
 
         <para>
-            Sobald der Adapter konfiguriert wurde können die normalen Fähigkeiten von <classname>Zend_Auth</classname>
-            verwendet werden um das angegebene Token der Informationskarte zu prüfen und den Benutzer,
-            durch Betrachten der Identität die von der <code>getIdentity()</code> Methode geboten wird,
-            zu authentifizieren.
+            Sobald der Adapter konfiguriert wurde können die normalen Fähigkeiten von
+            <classname>Zend_Auth</classname> verwendet werden um das angegebene Token der
+            Informationskarte zu prüfen und den Benutzer, durch Betrachten der Identität die von der
+            <code>getIdentity()</code> Methode geboten wird, zu authentifizieren.
         </para>
     </sect2>
 
@@ -157,10 +163,11 @@ if (isset($_POST['xmlToken'])) {
         <title>Die Zend_InfoCard Komponente alleine verwenden</title>
 
         <para>
-            Es ist auch möglich die Zend_InfoCard Komponente als alleinstehende Komponente zu verwenden durch
-            direkte Interaktion mit der <classname>Zend_InfoCard</classname> Klasse. Die Verwendung der Zend_InfoCard
-            Klasse ist ähnlich der Verwendung durch die <classname>Zend_Auth</classname> Komponente. Ein Beispiel
-            dieser Verwendung wird anbei gezeigt:
+            Es ist auch möglich die Zend_InfoCard Komponente als alleinstehende Komponente zu
+            verwenden durch direkte Interaktion mit der <classname>Zend_InfoCard</classname> Klasse.
+            Die Verwendung der Zend_InfoCard Klasse ist ähnlich der Verwendung durch die
+            <classname>Zend_Auth</classname> Komponente. Ein Beispiel dieser Verwendung wird anbei
+            gezeigt:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -201,12 +208,13 @@ if (isset($_POST['xmlToken'])) {
 ]]></programlisting>
 
         <para>
-            Im obigen Beispiel wird die <classname>Zend_InfoCard</classname> Komponente unabhängig verwendet um den vom
-            Benutzer angebotenen Token zu überprüfen. Die auch mit <classname>Zend_Auth_Adapter_InfoCard</classname>, wird
-            zuerst eine Instanz von <classname>Zend_InfoCard</classname> erstellt und dann ein oder mehrere SSL
-            Zertifikatschlüssel, ein Paar öffentlich/privat die vom Webserver verwendet werden. Sobald sie
-            konfiguriert ist kann die <code>process()</code> Methode verwendet werden um die Informationskarte
-            zu bearbeiten und die Ergebnisse zurückzugeben.
+            Im obigen Beispiel wird die <classname>Zend_InfoCard</classname> Komponente unabhängig
+            verwendet um den vom Benutzer angebotenen Token zu überprüfen. Die auch mit
+            <classname>Zend_Auth_Adapter_InfoCard</classname>, wird zuerst eine Instanz von
+            <classname>Zend_InfoCard</classname> erstellt und dann ein oder mehrere SSL
+            Zertifikatschlüssel, ein Paar öffentlich/privat die vom Webserver verwendet werden.
+            Sobald sie konfiguriert ist kann die <code>process()</code> Methode verwendet werden um
+            die Informationskarte zu bearbeiten und die Ergebnisse zurückzugeben.
         </para>
     </sect2>
 
@@ -214,35 +222,39 @@ if (isset($_POST['xmlToken'])) {
         <title>Mit einem Forderungs Objekt arbeiten</title>
 
         <para>
-            Egal ob die <classname>Zend_InfoCard</classname> Komponente als alleinstehende Komponente oder als Teil von
-            <classname>Zend_Auth</classname> über <classname>Zend_Auth_Adapter_InfoCard</classname> verwendet wird, ist das
-            endgültige Ergebnis der Bearbeitung einer Informationskarte ein <classname>Zend_InfoCard_Claims</classname>
-            Objekt. Dieses Objekt enthält die Annahmen (auch Forderungen genannt) die vom schickenden Benutzer
-            gemacht wurden, basierend auf den Daten die von der Webseite angefragt wurden als sich der Benutzer
-            authentifiziert hat. Wie im obigen Beispiel gezeigt, kann die Gültigkeit der Informationskarte
-            sichergestellt werden indem die <classname>Zend_InfoCard_Claims::isVaild()</classname> Methode aufgerufen
-            wird. Forderungen ihrerseits können entweder empfangen werden indem auf den gewünschten Identikator
-            zugegriffen wird (z.B. <code>givenname</code>) als eine Eigenschaft des Objekts oder durch die
-            <code>getClaim()</code> Methode.
+            Egal ob die <classname>Zend_InfoCard</classname> Komponente als alleinstehende
+            Komponente oder als Teil von <classname>Zend_Auth</classname> über
+            <classname>Zend_Auth_Adapter_InfoCard</classname> verwendet wird, ist das endgültige
+            Ergebnis der Bearbeitung einer Informationskarte ein
+            <classname>Zend_InfoCard_Claims</classname> Objekt. Dieses Objekt enthält die Annahmen
+            (auch Forderungen genannt) die vom schickenden Benutzer gemacht wurden, basierend auf
+            den Daten die von der Webseite angefragt wurden als sich der Benutzer authentifiziert
+            hat. Wie im obigen Beispiel gezeigt, kann die Gültigkeit der Informationskarte
+            sichergestellt werden indem die <classname>Zend_InfoCard_Claims::isVaild()</classname>
+            Methode aufgerufen wird. Forderungen ihrerseits können entweder empfangen werden indem
+            auf den gewünschten Identikator zugegriffen wird (z.B. <code>givenname</code>) als eine
+            Eigenschaft des Objekts oder durch die <code>getClaim()</code> Methode.
         </para>
 
         <para>
-            In den meisten Fällen ist es nicht notwendig die <code>getClaim()</code> Methode zu verwenden.
-            Wenn es <code>requiredClaims</code> trotzdem erfordert das Forderungen von verschiedenen
-            unterschiedlichen Quellen/Namensräumen angefragt werden ist es notwendig diese explizit durch
-            Verwendung dieser Methode zu extrahieren (indem einfach die komplette URI der Forderung übergeben
-            wird, damit der Wert von der Informationskarte empfangen werden kann). Generell gesprochen, wird
-            die <classname>Zend_InfoCard</classname> Komponente die Standard URI für Forderungen auf eine Setzen die am
-            häufigsten in der Informationskarte selbst verwendet wird, und damit die vereinfachte
-            Eigenschaft-Zugriffs Methode verwendet werden kann.
+            In den meisten Fällen ist es nicht notwendig die <code>getClaim()</code> Methode zu
+            verwenden. Wenn es <code>requiredClaims</code> trotzdem erfordert das Forderungen von
+            verschiedenen unterschiedlichen Quellen/Namensräumen angefragt werden ist es notwendig
+            diese explizit durch Verwendung dieser Methode zu extrahieren (indem einfach die
+            komplette URI der Forderung übergeben wird, damit der Wert von der Informationskarte
+            empfangen werden kann). Generell gesprochen, wird die
+            <classname>Zend_InfoCard</classname> Komponente die Standard URI für Forderungen auf
+            eine Setzen die am häufigsten in der Informationskarte selbst verwendet wird, und damit
+            die vereinfachte Eigenschaft-Zugriffs Methode verwendet werden kann.
         </para>
 
         <para>
-            Als Teil des Prüfprozesses ist es am Entwickler die ausgebende Quelle der Forderung zu prüfen die in
-            der Informationskarte enthalten sind, und zu entscheiden ob diese Quelle eine vertrauenswürdige
-            Quelle von Informationen ist. Um das zu tun gibt es die <code>getIssuer()</code> Methode die im
-            <classname>Zend_InfoCard_Claims</classname> Objekt angeboten wird und die URI des Ausstellers der Forderung
-            der Informationskarte zurückgibt.
+            Als Teil des Prüfprozesses ist es am Entwickler die ausgebende Quelle der Forderung zu
+            prüfen die in der Informationskarte enthalten sind, und zu entscheiden ob diese Quelle
+            eine vertrauenswürdige Quelle von Informationen ist. Um das zu tun gibt es die
+            <code>getIssuer()</code> Methode die im <classname>Zend_InfoCard_Claims</classname>
+            Objekt angeboten wird und die URI des Ausstellers der Forderung der Informationskarte
+            zurückgibt.
         </para>
     </sect2>
 
@@ -250,19 +262,19 @@ if (isset($_POST['xmlToken'])) {
         <title>Informationskarten an bestehende Konten anhängen</title>
 
         <para>
-            Es ist möglich Unterstützung für Informationskarten zu einem bestehenden Authentifizierungssystem
-            hinzuzufügen durch Speicherung des privaten persönlichen Identifikators (PPI) zum vorher
-            traditionell-authentifizierten Zugang und zumindest die
+            Es ist möglich Unterstützung für Informationskarten zu einem bestehenden
+            Authentifizierungssystem hinzuzufügen durch Speicherung des privaten persönlichen
+            Identifikators (PPI) zum vorher traditionell-authentifizierten Zugang und zumindest die
             <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/privatepersonalidentifier</code>
-            Forderung als Teil der <code>requiredClaims</code> der Anfrage zu inkludieren. Wenn diese Forderung
-            angefragt wird, biete das <classname>Zend_InfoCard_Claims</classname> Objekt einen eideutigen Identifikator
-            für diese spezielle Karte anzubieten die durch den Aufruf der <code>getCardID()</code> Methode
-            übermittelt wurde.
+            Forderung als Teil der <code>requiredClaims</code> der Anfrage zu inkludieren. Wenn
+            diese Forderung angefragt wird, biete das <classname>Zend_InfoCard_Claims</classname>
+            Objekt einen eideutigen Identifikator für diese spezielle Karte anzubieten die durch den
+            Aufruf der <code>getCardID()</code> Methode übermittelt wurde.
         </para>
 
         <para>
-            Ein Beispiel wie eine Informationskarte an einen traditionell-authentifizierten Zugang angehängt
-            werden kann wird hier gezeigt:
+            Ein Beispiel wie eine Informationskarte an einen traditionell-authentifizierten Zugang
+            angehängt werden kann wird hier gezeigt:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -317,28 +329,31 @@ public function submitinfocardAction()
         <title>Erstellung von Zend_InfoCard Adapter</title>
 
         <para>
-            Die <classname>Zend_InfoCard</classname> Komponente wurde entwickelt um den Wachstum im Standard der
-            Informationskarten durch die Verwendung einer modularen Architektur zu erlauben. Aktuell werden
-            viele dieser Hooks nicht verwendet und können ignoriert werden. Aber es gibt einen Aspekt der
-            in jeder seriösen Implementation von Informationskarten geschrieben werden sollte: Der
-            <classname>Zend_InfoCard</classname> Adapter.
+            Die <classname>Zend_InfoCard</classname> Komponente wurde entwickelt um den Wachstum im
+            Standard der Informationskarten durch die Verwendung einer modularen Architektur zu
+            erlauben. Aktuell werden viele dieser Hooks nicht verwendet und können ignoriert werden.
+            Aber es gibt einen Aspekt der in jeder seriösen Implementation von Informationskarten
+            geschrieben werden sollte: Der <classname>Zend_InfoCard</classname> Adapter.
         </para>
 
         <para>
-            Der <classname>Zend_InfoCard</classname> Adapter wird als Callback Mechanismus innerhalb der Komponente
-            verwendet um verschiedenste Aufgaben durchzuführen, wie das Speichern und Empfangen von Assertion IDs
-            für Informationskarten wenn diese von der Komponente bearbeitet werden. Wärend das Speichern der
-            Assertion IDs von übertragenen Informationskarten nicht notwendig ist, kann das nicht Durchführen
-            die Möglichkeit eröffnen, das das Authentifizierungs Schema durch eine Replay Attacke kompromitiert
+            Der <classname>Zend_InfoCard</classname> Adapter wird als Callback Mechanismus innerhalb
+            der Komponente verwendet um verschiedenste Aufgaben durchzuführen, wie das Speichern und
+            Empfangen von Assertion IDs für Informationskarten wenn diese von der Komponente
+            bearbeitet werden. Wärend das Speichern der Assertion IDs von übertragenen
+            Informationskarten nicht notwendig ist, kann das nicht Durchführen die Möglichkeit
+            eröffnen, das das Authentifizierungs Schema durch eine Replay Attacke kompromitiert
             wird.
         </para>
 
         <para>
-            Um das zu verhindern muß <classname>Zend_InfoCard_Adapter_Interface</classname> implementiert werden und dann
-            eine Instanz dieses Adapters vor dem Aufruf der <code>process()</code> (alleinstehend) oder
-            <code>authenticate()</code> Methode (als ein <classname>Zend_Auth</classname> Adapter) gesetzt werden.
-            Um dieses Interface zu setzen wird die <code>setAdapter()</code> Methode verwendet. Im Beispiel
-            anbei wird ein <classname>Zend_InfoCard</classname> Adapter gesetzt und innerhalb der Anwendung verwendet:
+            Um das zu verhindern muß <classname>Zend_InfoCard_Adapter_Interface</classname>
+            implementiert werden und dann eine Instanz dieses Adapters vor dem Aufruf der
+            <code>process()</code> (alleinstehend) oder <code>authenticate()</code> Methode (als ein
+            <classname>Zend_Auth</classname> Adapter) gesetzt werden. Um dieses Interface zu setzen
+            wird die <code>setAdapter()</code> Methode verwendet. Im Beispiel anbei wird ein
+            <classname>Zend_InfoCard</classname> Adapter gesetzt und innerhalb der Anwendung
+            verwendet:
         </para>
 
         <programlisting role="php"><![CDATA[

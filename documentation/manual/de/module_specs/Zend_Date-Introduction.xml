@@ -6,29 +6,30 @@
     <title>Einführung</title>
 
     <para>
-        Die <classname>Zend_Date</classname> Komponente bietet eine umfangreiche aber einfache API zur Manipulation
-        von Datum und Zeit. Die Methoden verarbeiten eine große Auswahl von Datentypen in vielen
-        Kombinationen und erweitern die vorhandenen PHP Datumsfunktionen um eine Vielzahl von Möglichkeiten.
-        Die aktuellste Version der Dokumentation kann in unserer
+        Die <classname>Zend_Date</classname> Komponente bietet eine umfangreiche aber einfache API
+        zur Manipulation von Datum und Zeit. Die Methoden verarbeiten eine große Auswahl von
+        Datentypen in vielen Kombinationen und erweitern die vorhandenen PHP Datumsfunktionen um
+        eine Vielzahl von Möglichkeiten. Die aktuellste Version der Dokumentation kann in unserer
         <ulink url="http://framework.zend.com/wiki/display/ZFDOCDEV/Home">Online Dokumentation
         ( regelmäßig mit SVN syncronisiert )</ulink> gefunden werden.
     </para>
 
     <para>
         Auch wenn Einfachheit das höchste Ziel bleibt, ist die Arbeit beim Umgang mit lokalisierten
-        Datums- und Zeitangaben unweigerlich mit einer gewissen Komplexität verbunden. Daten als auch
-        Zeitangaben werden in verschiedenen Datums- und Zeitzonen oft unterschiedlich dargestellt.
-        Beispielsweise stellen manche die Monatsangabe voran, während andere das Jahr an erste Stelle
-        schreiben um ein Kalenderdatum darzustellen. Für weiterführende Informationen über die
-        Handhabung von Lokalisierung und Normalisierung kann im Abschnitt
-        <link linkend="zend.locale.date.datesandtimes"><classname>Zend_Locale</classname></link> nachgelesen werden.
+        Datums- und Zeitangaben unweigerlich mit einer gewissen Komplexität verbunden. Daten als
+        auch Zeitangaben werden in verschiedenen Datums- und Zeitzonen oft unterschiedlich
+        dargestellt. Beispielsweise stellen manche die Monatsangabe voran, während andere das Jahr
+        an erste Stelle schreiben um ein Kalenderdatum darzustellen. Für weiterführende
+        Informationen über die Handhabung von Lokalisierung und Normalisierung kann im Abschnitt
+        <link linkend="zend.locale.date.datesandtimes"><classname>Zend_Locale</classname></link>
+        nachgelesen werden.
     </para>
 
     <para>
         <classname>Zend_Date</classname> unterstützt auch abgekürzte Monatsnamen in vielen Sprachen.
-        <classname>Zend_Locale</classname> erleichert die Normalisierung von lokalisierten Monatsnamen
-        und Wochentagen zu Zeitpunkten die umgekehrt auch wieder lokalisiert für andere Regionen
-        übersetzt werden können.
+        <classname>Zend_Locale</classname> erleichert die Normalisierung von lokalisierten
+        Monatsnamen und Wochentagen zu Zeitpunkten die umgekehrt auch wieder lokalisiert für andere
+        Regionen übersetzt werden können.
     </para>
 
     <sect2 id="zend.date.setdefaulttimezone">
@@ -36,19 +37,19 @@
         <title>Immer eine Standard-Zeitzone definieren</title>
 
         <para>
-            Bevor beliebige datumsrelevante Funktionen in PHP oder dem Zend Framework verwendet werden können,
-            sollten sichergestellt werden, dass die Standard-Zeitzone in der Anwendung korrekt definiert wurde.
-            Das kann wahlweise mit dem Definieren einer TZ Umgebungsvariablen, der <code>date.timezone</code>
-            Einstellung in der php.ini oder durch die Funktion
-            <ulink url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>
+            Bevor beliebige datumsrelevante Funktionen in PHP oder dem Zend Framework verwendet
+            werden können, sollten sichergestellt werden, dass die Standard-Zeitzone in der
+            Anwendung korrekt definiert wurde. Das kann wahlweise mit dem Definieren einer TZ
+            Umgebungsvariablen, der <code>date.timezone</code> Einstellung in der php.ini oder durch
+            die Funktion <ulink
+                url="http://php.net/date_default_timezone_set">date_default_timezone_set()</ulink>
             durchgeführt werden.
 
-            Durch das Setzen einer Standard-Zeitzone können in PHP können alle datums- und zeitabhängigen
-            Funktionen für einen bestimmten Benutzer angepasst werden. Eine vollständige Auflistung
-            der Zeitzoneneinstellungen kann in  der
-            <ulink url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">
-                CLDR Zeitzonen Liste
-            </ulink> ( Englisch ) gefunden werden.
+            Durch das Setzen einer Standard-Zeitzone können in PHP können alle datums- und
+            zeitabhängigen Funktionen für einen bestimmten Benutzer angepasst werden. Eine
+            vollständige Auflistung der Zeitzoneneinstellungen kann in  der <ulink
+                url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">
+                CLDR Zeitzonen Liste</ulink> ( Englisch ) gefunden werden.
             <example id="zend.date.setdefaulttimezone.example-1">
                 <title>Definieren einer Standard-Zeitzone</title>
                 <programlisting role="php"><![CDATA[
@@ -58,17 +59,18 @@ date_default_timezone_set('America/Los_Angeles');
 date_default_timezone_set('Europe/Berlin');
 ]]></programlisting>
             </example>
-            <emphasis>Wenn eine Zend_Date Instanz erzeugt wird, wird die
-            Zeitzone des aktuellen Benutzers automatisch als aktuelle Standardzeitzone übernommen</emphasis>.
+            <emphasis>Wenn eine Zend_Date Instanz erzeugt wird, wird die Zeitzone des aktuellen
+            Benutzers automatisch als aktuelle Standardzeitzone übernommen</emphasis>.
             Das erspart das explizite setzen der Sommer-/Winterzeitumstellung (DST).
         </para>
 
         <para>
             Es gilt zu beachten das die Zeitzonen <emphasis>UTC</emphasis> und
             <emphasis>GMT</emphasis> keine Sommer-/Winterzeitumstellung enthalten. Das bedeutet
-            das selbst wenn per Hand definiert wurde das <classname>Zend_Date</classname> die DST berücksichtigen soll,
-            das automatisch für alle Instanzen von <classname>Zend_Date</classname> zurückgeschaltet wird die auf
-            UTC oder GMT eingestellt wurden.
+            das selbst wenn per Hand definiert wurde das <classname>Zend_Date</classname> die DST
+            berücksichtigen soll, das automatisch für alle Instanzen von
+            <classname>Zend_Date</classname> zurückgeschaltet wird die auf UTC oder GMT eingestellt
+            wurden.
         </para>
     </sect2>
 
@@ -77,7 +79,8 @@ date_default_timezone_set('Europe/Berlin');
         <title>Warum soll Zend_Date verwendet werden ?</title>
 
         <para>
-            <classname>Zend_Date</classname> erweitert die Möglichkeiten der PHP Datumsfunktionen um folgende Features:
+            <classname>Zend_Date</classname> erweitert die Möglichkeiten der PHP Datumsfunktionen um
+            folgende Features:
         </para>
 
         <itemizedlist mark='opencircle'>
@@ -86,9 +89,10 @@ date_default_timezone_set('Europe/Berlin');
                     Einfache API
                 </para>
                 <para>
-                    <classname>Zend_Date</classname> bietet eine sehr einfache API, welche die besten Datums- und
-                    Zeitfunktionen aus vier Programmiersprachen vereint. Beispielsweise ist es möglich,
-                    in nur einer Zeile zwei Zeiten miteinander zu vergleichen oder zu addieren.
+                    <classname>Zend_Date</classname> bietet eine sehr einfache API, welche die
+                    besten Datums- und Zeitfunktionen aus vier Programmiersprachen vereint.
+                    Beispielsweise ist es möglich, in nur einer Zeile zwei Zeiten miteinander zu
+                    vergleichen oder zu addieren.
                 </para>
             </listitem>
             <listitem>
@@ -97,8 +101,8 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Alle vollen und abgekürzten Monatsnamen und Wochentage aus mehr als 130 Sprachen
-                    werden unterstützt. Die Methoden ermöglichen die Ein- und Ausgabe von Daten im Format
-                    des jeweiligen Gebietsschemas.
+                    werden unterstützt. Die Methoden ermöglichen die Ein- und Ausgabe von Daten im
+                    Format des jeweiligen Gebietsschemas.
                 </para>
             </listitem>
             <listitem>
@@ -106,16 +110,17 @@ date_default_timezone_set('Europe/Berlin');
                     Unlimitierte Zeitpunkte
                 </para>
                 <para>
-                    Obwohl die PHP 5.2 Dokumentation erklärt: "Die gültige Spanne eines Zeitpunktes geht von
-                    Fr, 13. Dez 1901 20:45:54 GMT bis Di, 19. Jan 2038 03:14:07 GMT", ermöglicht
-                    <classname>Zend_Date</classname> mit Unterstützung der BCMath Erweiterung eine fast unbegrenzte
-                    Zeitspanne. Wenn BCMath nicht verfügbar ist, bietet Zend_Date eine Spanne innerhalb
-                    des <code>float</code>-Datentyps des verwendeten Servers. "Die Größe von float ist
-                    Plattformabhängig, allerdings ist das Maximum von ~1.8e308 mit einer Genauigkeit von
-                    ca. 14 Dezimalstellen ein Standardwert. (das 64 bit IEEE Format)."
-                    [<ulink url="http://www.php.net/float">http://www.php.net/float</ulink>].
-                    Zusätzlich können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler
-                    von Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
+                    Obwohl die PHP 5.2 Dokumentation erklärt: "Die gültige Spanne eines Zeitpunktes
+                    geht von Fr, 13. Dez 1901 20:45:54 GMT bis Di, 19. Jan 2038 03:14:07 GMT",
+                    ermöglicht <classname>Zend_Date</classname> mit Unterstützung der BCMath
+                    Erweiterung eine fast unbegrenzte Zeitspanne. Wenn BCMath nicht verfügbar ist,
+                    bietet Zend_Date eine Spanne innerhalb des <code>float</code>-Datentyps des
+                    verwendeten Servers. "Die Größe von float ist Plattformabhängig, allerdings ist
+                    das Maximum von ~1.8e308 mit einer Genauigkeit von ca. 14 Dezimalstellen ein
+                    Standardwert. (das 64 bit IEEE Format)." [<ulink
+                        url="http://www.php.net/float">http://www.php.net/float</ulink>]. Zusätzlich
+                    können inhärente Beschränkungen der Float-Datentypen sowie Rundungsfehler von
+                    Fließkommazahlen Berechnungsfehler verursachen. Um diese Probleme zu vermeiden,
                     verwenden die ZF I18n Komponenten die BCMatch Extension, wenn verfügbar.
                 </para>
             </listitem>
@@ -124,14 +129,15 @@ date_default_timezone_set('Europe/Berlin');
                     Unterstützung der ISO_8601 Datumsspezifikation
                 </para>
                 <para>
-                    Die ISO_8601 Datumsspezifikationen werden unterstützt. Sogar teilkonforme ISO_8601
-                    Datumsspezifikationen werden erkannt. Diese Zeitformate sind vor allem bei der Arbeit mit
-                    Datenbanken sinnvoll. Selbst wenn zum Beispiel MsSQL und
+                    Die ISO_8601 Datumsspezifikationen werden unterstützt. Sogar teilkonforme
+                    ISO_8601 Datumsspezifikationen werden erkannt. Diese Zeitformate sind vor allem
+                    bei der Arbeit mit Datenbanken sinnvoll. Selbst wenn zum Beispiel MsSQL und
                     <ulink url="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">MySQL</ulink>
-                    leicht unterschiedlich mit Datum und Zeit umgehen, werden beide von <classname>Zend_Date</classname>
-                    unterstützt, wenn die <link linkend="zend.date.constants.list">Zend_Date::ISO_8601</link>
-                    Format Konstante verwendet wird. Wenn Datumszeichen mit den PHP date() Formaten "Y/m/d" oder
-                    "Y-m-d H:i:s" übereinstimmen, sollte die in Zend_Date eingebaute
+                    leicht unterschiedlich mit Datum und Zeit umgehen, werden beide von
+                    <classname>Zend_Date</classname> unterstützt, wenn die <link
+                        linkend="zend.date.constants.list">Zend_Date::ISO_8601</link> Format
+                    Konstante verwendet wird. Wenn Datumszeichen mit den PHP date() Formaten "Y/m/d"
+                    oder "Y-m-d H:i:s" übereinstimmen, sollte die in Zend_Date eingebaute
                     Unterstützung für ISO 8601 formatierte Daten verwendet werden.
                 </para>
             </listitem>
@@ -140,8 +146,9 @@ date_default_timezone_set('Europe/Berlin');
                     Sonnenauf- und Untergang errechnen
                 </para>
                 <para>
-                    Sonnenauf-und Untergang können für jeden beliebigen Ort und Tag anzeigen werden, so dass
-                    keine einzige Sekunde Tageslicht für das Lieblings-PHP Projekt verpasset werden muß :)
+                    Sonnenauf-und Untergang können für jeden beliebigen Ort und Tag anzeigen werden,
+                    so dass keine einzige Sekunde Tageslicht für das Lieblings-PHP Projekt verpasset
+                    werden muß :)
                 </para>
             </listitem>
         </itemizedlist>

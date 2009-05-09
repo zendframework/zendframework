@@ -94,7 +94,7 @@ class Zend_Controller_Router_Route_Static extends Zend_Controller_Router_Route_A
      * @param array $data An array of variable and value pairs used as parameters
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         return $this->_route;
     }

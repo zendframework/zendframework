@@ -182,6 +182,18 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('val', $res['var']);
     }
     
+    public function testVariableOmittingWhenPartial()
+    {
+        $foo = new Zend_Controller_Router_Route(':foo', array('foo' => 'foo'));
+        $bar = new Zend_Controller_Router_Route(':bar', array('bar' => 'bar'));
+
+        $chain = $foo->chain($bar);
+
+        $path = $chain->assemble(array());
+
+        $this->assertEquals('foo/', $path);
+    }
+    
     public function testVariableUnsettingRoute()
     {
         $foo = new Zend_Controller_Router_Route(':foo');

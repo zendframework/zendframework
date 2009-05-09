@@ -302,7 +302,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * @param  boolean $reset Whether or not to set route defaults with those provided in $data
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         if ($this->_isTranslated) {
             $translator = $this->getTranslator();
@@ -377,7 +377,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 }
             }
                 
-            if ($flag || $value !== $defaultValue) {
+            if ($flag || $value !== $defaultValue || $partial) {
                 if ($encode) $value = urlencode($value);
                 $return = $this->_urlDelimiter . $value . $return;
                 $flag = true;

@@ -126,14 +126,15 @@ class Zend_Controller_Router_Route_Chain extends Zend_Controller_Router_Route_Ab
      */
     public function assemble($data = array(), $reset = false, $encode = false)
     {
-        $value = '';
-
+        $value     = '';
+        $numRoutes = count($this->_routes);
+        
         foreach ($this->_routes as $key => $route) {
             if ($key > 0) {
                 $value .= $this->_separators[$key];
             }
             
-            $value .= $route->assemble($data, $reset, $encode, true);
+            $value .= $route->assemble($data, $reset, $encode, (($numRoutes - 1) > $key));
             
             if (method_exists($route, 'getVariables')) {
                 $variables = $route->getVariables();

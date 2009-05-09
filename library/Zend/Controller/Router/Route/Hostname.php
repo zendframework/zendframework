@@ -248,7 +248,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
      * @param  boolean $reset Whether or not to set route defaults with those provided in $data
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array(), $reset = false, $encode = false, $partial = false)
     {
         $host = array();
         $flag = false;
@@ -281,7 +281,7 @@ class Zend_Controller_Router_Route_Hostname extends Zend_Controller_Router_Route
         $return = '';
 
         foreach (array_reverse($host, true) as $key => $value) {
-            if ($flag || !isset($this->_variables[$key]) || $value !== $this->getDefault($this->_variables[$key])) {
+            if ($flag || !isset($this->_variables[$key]) || $value !== $this->getDefault($this->_variables[$key]) || $partial) {
                 if ($encode) $value = urlencode($value);
                 $return = '.' . $value . $return;
                 $flag = true;

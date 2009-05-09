@@ -78,8 +78,13 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
      */
     public static function getInstance(Zend_Config $config)
     {
-        $defs = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
-        return new self($defs);
+        $frontController = Zend_Controller_Front::getInstance();
+        
+        $defs       = ($config->defaults instanceof Zend_Config) ? $config->defaults->toArray() : array();
+        $dispatcher = $frontController->getDispatcher();
+        $request    = $frontController->getRequest();
+        
+        return new self($defs, $dispatcher, $request);
     }
 
     /**

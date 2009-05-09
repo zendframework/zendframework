@@ -439,6 +439,22 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $token['foo'][0]);
         $this->assertEquals('baz', $token['foo'][1]);
     }
+    
+    public function testGetInstanceMatching()
+    {
+        $this->route = Zend_Controller_Router_Route_Module::getInstance(new Zend_Config(array()));
+        
+        $this->_request->setModuleKey('m');
+        $this->_request->setControllerKey('c');
+        $this->_request->setActionKey('a');
+
+        $values = $this->route->match('mod/ctrl');
+
+        $this->assertType('array', $values);
+        $this->assertSame('mod', $values['m'], var_export(array_keys($values), 1));
+        $this->assertSame('ctrl', $values['c'], var_export(array_keys($values), 1));
+        $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
+    }
 }
 
 // Call Zend_Controller_Router_Route_ModuleTest::main() if this source file is executed directly.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15467 -->
 <sect1 id="zend.controller.migration">
     <title>以前のバージョンからの移行</title>
 
@@ -10,6 +10,22 @@
         以下のガイドラインにしたがってスクリプトを変更し、
         新しい仕組みに対応させてください。
     </para>
+
+    <sect2 id="zend.controller.migration.fromoneseventooneeight">
+        <title>1.7.x から 1.8.0 以降への移行</title>
+
+        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
+            <title>標準のルートの変更</title>
+
+            <para>
+                新しい標準ルートでは翻訳セグメントが使用できるようになったため、
+                ルートのセグメントの先頭にある <code>@</code> は特殊文字と解釈されるようになりました。
+                この文字を静的セグメント内で使用するには、前にもうひとつ
+                <code>@</code> をつけてエスケープする必要があります。
+                また、<code>:</code> も同様です。
+            </para>
+        </sect3>
+    </sect2>
 
     <sect2 id="zend.controller.migration.fromonesixtooneseven">
         <title>1.6.x から 1.7.0 以降への移行</title>

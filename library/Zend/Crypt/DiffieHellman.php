@@ -14,12 +14,11 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @subpackage DiffieHellman
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DiffieHellman.php 147 2008-06-14 00:23:28Z padraic $
+ * @version    $Id$
  */
-
-require_once 'Zend/Crypt/Math.php';
 
 /**
  * PHP implementation of the Diffie-Hellman public key encryption algorithm.
@@ -28,7 +27,7 @@ require_once 'Zend/Crypt/Math.php';
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Crypt_DiffieHellman
@@ -66,9 +65,9 @@ class Zend_Crypt_DiffieHellman
     private $_privateKey = null;
 
     /**
-     * BigInteger support object courtesy of Zend_Math
+     * BigInteger support object courtesy of Zend_Crypt_Math
      *
-     * @var Zend_Math_BigInteger
+     * @var Zend_Crypt_Math_BigInteger
      */
     private $_math = null;
 
@@ -356,6 +355,10 @@ class Zend_Crypt_DiffieHellman
      */
     public function setBigIntegerMath($extension = null)
     {
+        /**
+         * @see Zend_Crypt_Math
+         */
+        require_once 'Zend/Crypt/Math.php';
         $this->_math = new Zend_Crypt_Math($extension);
     }
 

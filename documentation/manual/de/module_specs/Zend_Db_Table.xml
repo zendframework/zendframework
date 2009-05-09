@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15422 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -280,12 +280,13 @@ class Bugs extends Zend_Db_Table_Abstract
                 verschieben, die aufgerufen wird nachdem alle Tabellen Metadaten bearbeitet wurden. Das
                 ist besser als die <code>__construct</code> Methode wenn die Metadaten nicht
                 programmtechnisch verändert werden sollen.
+            </para>
 
-                <example id="zend.db.table.defining.init.usage.example">
+            <example id="zend.db.table.defining.init.usage.example">
 
-                    <title>Beispielverwendung der init() Methode</title>
+                <title>Beispielverwendung der init() Methode</title>
 
-                    <programlisting role="php"><![CDATA[
+                <programlisting role="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
 {
     protected $_observer;
@@ -297,9 +298,7 @@ class Bugs extends Zend_Db_Table_Abstract
 }
 ]]></programlisting>
 
-                </example>
-
-            </para>
+            </example>
 
         </sect3>
 

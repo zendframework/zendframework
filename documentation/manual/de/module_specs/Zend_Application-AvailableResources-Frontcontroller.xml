@@ -85,7 +85,7 @@
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.moduleControllerDirectoryName = "actions"
-resources.frontController.moduleController = APPLICATION_PATH "/modules"
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
 resources.frontController.defaultControllerName = "site"
 resources.frontController.defaultAction = "home"
 resources.frontController.defaultModule = "static"

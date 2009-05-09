@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15421 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.session">
     <title>Zend_Application_Resource_Session</title>
@@ -48,7 +48,7 @@
         <para>
             Anbei ist das Beispiel eines INI Abschnitts der zeigt wie die Session Ressource
             konfiguriert werden kann. Er setzt verschiedene <classname>Zend_Session</classname>
-            Optionen, und konfiguriert eine <classname>Zend_Session_SaveHandler_Db</classname>
+            Optionen, und konfiguriert eine <classname>Zend_Session_SaveHandler_DbTable</classname>
             Instanz.
         </para>
 
@@ -56,7 +56,7 @@
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true
 resources.session.remember_me_seconds = 864000
-resources.session.saveHandler.class = "Zend_Session_SaveHandler_Db"
+resources.session.saveHandler.class = "Zend_Session_SaveHandler_DbTable"
 resources.session.saveHandler.options.name = "session"
 resources.session.saveHandler.options.primary.session_id = "session_id"
 resources.session.saveHandler.options.primary.save_path = "save_path"
@@ -69,4 +69,19 @@ resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
     </example>
+
+    <note>
+        <title>Die Datenbank zuerst bootstrappen!</title>
+
+        <para>
+            Wenn man den <classname>Zend_Session_SaveHandler_DbTable</classname> Session Save
+            Handler konfiguriert, muß man für diesen zuerst die Datenbank Verbindung konfigurieren
+            damit er arbeitet. Das kann entweder durch Verwendung der <link
+                linkend="zend.application.available-resources.db">Db</link> Ressource getan werden
+            -- und indem man sicherstellt das der "resources.db" Schlüssel vor dem
+            "resources.session" Schlüssel kommt -- oder durch Schreiben einer eigenen Ressource die
+            die Datenbank initialisiert, und im speziellen den Standardmäßigen
+            <classname>Zend_Db_Table</classname> Adapter setzt.
+        </para>
+    </note>
 </sect2>

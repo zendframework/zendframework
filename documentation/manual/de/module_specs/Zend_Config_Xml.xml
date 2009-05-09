@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15207 -->
+<!-- EN-Revision: 15397 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
@@ -139,7 +139,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         <para>
             <classname>Zend_Config_Xml</classname> ist dazu in der Lage XML Strings direkt zu laden,
             wie z.B. deren Empfang von einer Datenbank. Der String wird als erster Parameter an den
-            Konstruktor übergeben und muß mit den Zeichen <code>'&lt;?xml':</code> beginnen
+            Konstruktor übergeben und muß mit den Zeichen <code>'&lt;?xml'</code> beginnen:
         </para>
         <programlisting role="xml"><![CDATA[
 $string = <<<EOT

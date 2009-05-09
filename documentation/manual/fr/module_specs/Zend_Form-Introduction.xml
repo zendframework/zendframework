@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13843 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.introduction">
     <title>Zend_Form</title>
 
-    <para><classname>Zend_Form</classname> simplifie la création et la gestion des formulaires dans vos applications Web. Il
-    accomplit les buts suivants :</para>
+    <para>
+        <classname>Zend_Form</classname> simplifie la création et la gestion des formulaires
+        dans vos applications Web. Il accomplit les buts suivants&#160;:
+    </para>
 
     <itemizedlist>
         <listitem>
@@ -29,7 +31,10 @@
         </listitem>
     </itemizedlist>
 
-    <para>Il utilise fortement d'autres composants de Zend Framework pour accomplir ses buts, incluant
-    <classname>Zend_Config</classname>, <classname>Zend_Validate</classname>, <classname>Zend_Filter</classname>,
-    <classname>Zend_Loader_PluginLoader</classname>, et optionnellement <classname>Zend_View</classname>.</para>
+    <para>
+        Il utilise fortement d'autres composants de Zend Framework pour accomplir ses buts,
+        incluant <classname>Zend_Config</classname>, <classname>Zend_Validate</classname>,
+        <classname>Zend_Filter</classname>, <classname>Zend_Loader_PluginLoader</classname>, et
+        optionnellement <classname>Zend_View</classname>.
+    </para>
 </sect1>

@@ -1,108 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13843 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Créer un visuel personnalisé en utilisant Zend_Form_Decorator</title>
 
-    <para>Rendre visuellement un objet de formulaire est complètement optionnel -- il n'est pas obligatoire d'utiliser
-    la méthode <code>render()</code> de <classname>Zend_Form</classname>. Cependant, si vous l'utilisez, alors des décorateurs
-    sont utilisés pour rendre les différents objets du formulaire.</para>
+    <para>
+        Rendre visuellement un objet de formulaire est complètement optionnel -- il n'est pas
+        obligatoire d'utiliser la méthode <code>render()</code> de <classname>Zend_Form</classname>.
+        Cependant, si vous l'utilisez, alors des décorateurs sont utilisés pour rendre les
+        différents objets du formulaire.
+    </para>
 
-    <para>Un nombre arbitraire de décorateurs peut être attaché à chaque objet du formulaire (élément, groupe
-    d'affichage, sous-formulaires ou encore l'objet formulaire lui-même) ; cependant seul un décorateur par type peut
-    être attaché. Les décorateurs sont appelés dans l'ordre dans lequel ils ont été enregistrés. En fonction du
-    décorateur en question, celui-ci peut remplacer le contenu qui lui est passé, ou alors le faire précédé ou
-    suivre.</para>
+    <para>
+        Un nombre arbitraire de décorateurs peut être attaché à chaque objet du formulaire
+        (élément, groupe d'affichage, sous-formulaires ou encore l'objet formulaire lui-même) ;
+        cependant seul un décorateur par type peut être attaché. Les décorateurs sont appelés dans
+        l'ordre dans lequel ils ont été enregistrés. En fonction du décorateur en question, celui-ci
+        peut remplacer le contenu qui lui est passé, ou alors le faire précédé ou suivre.
+    </para>
 
-    <para>La configuration du décorateur est effectuée via son constructeur ou sa méthode <code>setOptions()</code>.
-    Lorsque vous créez des décorateurs au travers de méthodes comme <code>addDecorator()</code>, alors sa configuration
-    doit être passée en tant que tableau à ladite méthode. Ces options de configuration peuvent être utilisées pour
-    indiquer le placement du décorateur, le séparateur inter-éléments ou toute autre option acceptable.</para>
+    <para>
+        La configuration du décorateur est effectuée via son constructeur ou sa méthode
+        <code>setOptions()</code>. Lorsque vous créez des décorateurs au travers de méthodes comme
+        <code>addDecorator()</code>, alors sa configuration doit être passée en tant que tableau à
+        ladite méthode. Ces options de configuration peuvent être utilisées pour indiquer le
+        placement du décorateur, le séparateur inter-éléments ou toute autre option
+        acceptable.
+    </para>
 
-    <para>Avant le rendu d'un décorateur, au travers de sa méthode <code>render()</code>, l'objet sur lequel il agit lui
-    est passé en argument, grâce à <code>setElement()</code>, et ainsi le décorateur peut piloter l'élément sur lequel
-    il agit. Ceci permet de créer des décorateurs qui n'agissent que sur un petit paramètre de l'élément auquel ils sont
-    rattachés, comme le label, les messages d'erreur, etc... En chaînant des décorateurs qui rendent chacun
-    individuellement un petit morceau d'un élément, vous pouvez créer une mise en forme complexe représentant l'objet
-    (élément) dans son intégralité.</para>
+    <para>
+        Avant le rendu d'un décorateur, au travers de sa méthode <code>render()</code>,
+        l'objet sur lequel il agit lui est passé en argument, grâce à <code>setElement()</code>, et
+        ainsi le décorateur peut piloter l'élément sur lequel il agit. Ceci permet de créer des
+        décorateurs qui n'agissent que sur un petit paramètre de l'élément auquel ils sont
+        rattachés, comme le label, les messages d'erreur, etc... En chaînant des décorateurs qui
+        rendent chacun individuellement un petit morceau d'un élément, vous pouvez créer une mise en
+        forme complexe représentant l'objet (élément) dans son intégralité.
+    </para>
 
     <sect2 id="zend.form.decorators.operation">
         <title>Configuration</title>
 
-        <para>Pour configurer un décorateur, passez un tableau d'options ou un objet <classname>Zend_Config</classname> à son
-        constructeur. Aussi, un tableau peut être passé à <code>setOptions()</code>, ou un objet
-        <classname>Zend_Config</classname> à <code>setConfig()</code>.</para>
+        <para>
+            Pour configurer un décorateur, passez un tableau d'options ou un objet
+            <classname>Zend_Config</classname> à son constructeur. Aussi, un tableau peut être passé
+            à <code>setOptions()</code>, ou un objet <classname>Zend_Config</classname> à
+            <code>setConfig()</code>.
+        </para>
 
         <para>Options de base:</para>
 
         <itemizedlist>
             <listitem>
-                <para><code>placement</code> : le placement peut être 'append' ou 'prepend' (insensible à la casse), et
-                indique sur le contenu passé à <code>render()</code> doit être ajouté après ou avant, respectivement.
-                Dans le cas où le décorateur remplace le contenu, cette directive de placement est ignorée. La directive
-                par défaut est 'append'.</para>
+                <para>
+                    <code>placement</code>&#160;: le placement peut être 'append' ou 'prepend'
+                    (insensible à la casse), et indique sur le contenu passé à <code>render()</code>
+                    doit être ajouté après ou avant, respectivement. Dans le cas où le décorateur
+                    remplace le contenu, cette directive de placement est ignorée. La directive par
+                    défaut est 'append'.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>separator</code> : Le séparateur est utilisé entre le contenu passé à <code>render()</code>
-                et le nouveau contenu généré par le décorateur, ou encore entre les éléments rendus (par exemple
-                FormElements utilise le séparateur entre chaque objet rendu). Dans le cas où le décorateur remplace son
-                contenu, cette option est ignorée. Par défaut, elle vaut <code>PHP_EOL</code>.</para>
+                <para>
+                    <code>separator</code>&#160;: le séparateur est utilisé entre le contenu passé
+                    à <code>render()</code> et le nouveau contenu généré par le décorateur, ou
+                    encore entre les éléments rendus (par exemple FormElements utilise le séparateur
+                    entre chaque objet rendu). Dans le cas où le décorateur remplace son contenu,
+                    cette option est ignorée. Par défaut, elle vaut <code>PHP_EOL</code>.
+                </para>
             </listitem>
         </itemizedlist>
 
-        <para>L'interface des décorateurs spécifie les méthodes pour agir sur les options. Les voici:</para>
+        <para>
+            L'interface des décorateurs spécifie les méthodes pour agir sur les options. Les
+            voici&#160;:
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>setOption($key, $value)</code> : affecte une option.</para>
+                <para><code>setOption($key, $value)</code>&#160;: affecte une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>getOption($key)</code> : récupère une option.</para>
+                <para><code>getOption($key)</code>&#160;: récupère une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>getOptions()</code> : récupère toutes les options.</para>
+                <para><code>getOptions()</code>&#160;: récupère toutes les options.</para>
             </listitem>
 
             <listitem>
-                <para><code>removeOption($key)</code> : supprime une option.</para>
+                <para><code>removeOption($key)</code>&#160;: supprime une option.</para>
             </listitem>
 
             <listitem>
-                <para><code>clearOptions()</code> : supprime toutes les options.</para>
+                <para><code>clearOptions()</code>&#160;: supprime toutes les options.</para>
             </listitem>
         </itemizedlist>
 
-        <para>Les décorateurs sont destinés à agir avec tous les objets du formulaire, <classname>Zend_Form</classname>,
-        <classname>Zend_Form_Element</classname>, <classname>Zend_Form_DisplayGroup</classname>, et toute classe en dérivant. La méthode
-        <code>setElement()</code> vous permet de passer l'objet au décorateur sur lequel il travaille.
-        <code>getElement()</code> vous permet de récupérer cet objet depuis le décorateur.</para>
+        <para>
+            Les décorateurs sont destinés à agir avec tous les objets du formulaire,
+            <classname>Zend_Form</classname>, <classname>Zend_Form_Element</classname>,
+            <classname>Zend_Form_DisplayGroup</classname>, et toute classe en dérivant. La méthode
+            <code>setElement()</code> vous permet de passer l'objet au décorateur sur lequel il
+            travaille. <code>getElement()</code> vous permet de récupérer cet objet depuis le
+            décorateur.
+        </para>
 
-        <para>Chaque méthode <code>render()</code> des décorateurs accepte en paramètre une chaîne
-        <code>$content</code>. Lorsque le premier décorateur est appelé, cette chaîne est en toute logique vide, alors
-        que tous les appels successifs travailleront sur le contenu précédent. Selon le type de décorateur et ses
-        options, la chaîne sera alors remplacée, précédée ou suivie du nouveau contenu décoré. Dans ces deux derniers
-        cas, un séparateur optionnel peut être utilisé.</para>
+        <para>
+            Chaque méthode <code>render()</code> des décorateurs accepte en paramètre une
+            chaîne <code>$content</code>. Lorsque le premier décorateur est appelé, cette chaîne est
+            en toute logique vide, alors que tous les appels successifs travailleront sur le contenu
+            précédent. Selon le type de décorateur et ses options, la chaîne sera alors remplacée,
+            précédée ou suivie du nouveau contenu décoré. Dans ces deux derniers cas, un séparateur
+            optionnel peut être utilisé.
+        </para>
     </sect2>
 
     <sect2 id="zend.form.decorators.standard">
         <title>Décorateurs standards</title>
 
-        <para><classname>Zend_Form</classname> est fourni avec quelques décorateurs de base, voyez <link
-        linkend="zend.form.standardDecorators">le chapitre sur les décorateurs standards</link> pour plus de
-        détails.</para>
+        <para>
+            <classname>Zend_Form</classname> est fourni avec quelques décorateurs de base,
+            voyez <link linkend="zend.form.standardDecorators">le chapitre sur les décorateurs
+            standards</link> pour plus de détails.
+        </para>
     </sect2>
 
     <sect2 id="zend.form.decorators.custom">
         <title>Décorateurs personnalisés</title>
 
-        <para>Si vos rendus HTML sont complexes, ou si vous avez besoin de beaucoup de personnalisation, vous pouvez
-        alors créer vos propres décorateurs.</para>
+        <para>
+            Si vos rendus HTML sont complexes, ou si vous avez besoin de beaucoup de
+            personnalisation, vous pouvez alors créer vos propres décorateurs.
+        </para>
 
-        <para>Les décorateurs ont juste besoin d'implémenter l'interface <classname>Zend_Decorator_Interface</classname>. Celle-ci
-        spécifie les méthodes suivantes :</para>
+        <para>
+            Les décorateurs ont juste besoin d'implémenter l'interface
+            <classname>Zend_Decorator_Interface</classname>. Celle-ci spécifie les méthodes
+            suivantes&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 interface Zend_Decorator_Interface
@@ -121,14 +159,19 @@ interface Zend_Decorator_Interface
 }
 ]]></programlisting>
 
-        <para>Pour vous simplifier la tâche, vous pourriez considérer le fait d'étendre
-        <classname>Zend_Decorator_Abstract</classname>, qui implémente toutes les méthodes de l'interface sauf
-        <code>render()</code>.</para>
+        <para>
+            Pour vous simplifier la tâche, vous pourriez considérer le fait d'étendre
+            <classname>Zend_Decorator_Abstract</classname>, qui implémente toutes les méthodes de
+            l'interface sauf <code>render()</code>.
+        </para>
 
-        <para>Par exemple, imaginons que vous ne souhaitiez pas vous encombrer avec un nombre important de décorateurs,
-        et que vous vouliez afficher les principale caractéristiques d'un élément grâce à un seul décorateur (label,
-        élément, messages d'erreur et description), le tout dans une <code>div</code>. Voici comment vous pourriez
-        procéder :</para>
+        <para>
+            Par exemple, imaginons que vous ne souhaitiez pas vous encombrer avec un nombre
+            important de décorateurs, et que vous vouliez afficher les principale caractéristiques
+            d'un élément grâce à un seul décorateur (label, élément, messages d'erreur et
+            description), le tout dans une <code>div</code>. Voici comment vous pourriez
+            procéder&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
@@ -216,7 +259,9 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
 }
 ]]></programlisting>
 
-        <para>Vous pouvez maintenant placer ce décorateur dans les chemins des décorateurs :</para>
+        <para>
+            Vous pouvez maintenant placer ce décorateur dans les chemins des décorateurs&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 // pour un élément:
@@ -230,20 +275,29 @@ $form->addElementPrefixPath('My_Decorator',
                             'decorator');
 ]]></programlisting>
 
-        <para>Dès à présent, vous pouvez indiquer que vous voulez utiliser le décorateur 'Composite', (c'est son nom de
-        classe sans le préfixe) et l'attacher à un élément :</para>
+        <para>
+            Dès à présent, vous pouvez indiquer que vous voulez utiliser le décorateur
+            'Composite', (c'est son nom de classe sans le préfixe) et l'attacher à un
+            élément&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 // Ecrase les éventuels décorateurs de cet élément avec le notre:
 $element->setDecorators(array('Composite'));
 ]]></programlisting>
 
-        <para>Cet exemple vous montre comment rendre un contenu HTML complexe à partir de propriétés d'un élément, en
-        une seule passe. Il existe des décorateurs qui ne s'occupent que d'une propriété de l'élément auquel ils sont
-        rattachés, 'Errors' et 'Label' en sont d'excellents exemples qui permettent un placement fin.</para>
+        <para>
+            Cet exemple vous montre comment rendre un contenu HTML complexe à partir de
+            propriétés d'un élément, en une seule passe. Il existe des décorateurs qui ne s'occupent
+            que d'une propriété de l'élément auquel ils sont rattachés, 'Errors' et 'Label' en sont
+            d'excellents exemples qui permettent un placement fin.
+        </para>
 
-        <para>Par exemple, si vous souhaitez simplement informer l'utilisateur d'une erreur, mais sans lui montrer les
-        messages d'erreurs, vous pouvez créer votre propre décorateur 'Errors' :</para>
+        <para>
+            Par exemple, si vous souhaitez simplement informer l'utilisateur d'une erreur,
+            mais sans lui montrer les messages d'erreurs, vous pouvez créer votre propre décorateur
+            'Errors'&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 class My_Decorator_Errors
@@ -266,24 +320,33 @@ class My_Decorator_Errors
 }
 ]]></programlisting>
 
-        <para>Dans cet exemple particulier, comme le segment final du nom de la classe, 'Errors', respecte la syntaxe de
-        <classname>Zend_Form_Decorator_Errors</classname>, il sera alors utilisé <emphasis>à la place du</emphasis> décorateur par
-        défaut -- ceci signifie que vous n'avez pas besoin de l'injecter dans un élément particulier. En nommant vos
-        fins de classes de décorateurs comme celles des décorateurs standards, vous pouvez changer la décoration sans
-        agir sur les éléments en question.</para>
+        <para>
+            Dans cet exemple particulier, comme le segment final du nom de la classe,
+            'Errors', respecte la syntaxe de <classname>Zend_Form_Decorator_Errors</classname>, il
+            sera alors utilisé <emphasis>à la place du</emphasis> décorateur par défaut -- ceci
+            signifie que vous n'avez pas besoin de l'injecter dans un élément particulier. En
+            nommant vos fins de classes de décorateurs comme celles des décorateurs standards, vous
+            pouvez changer la décoration sans agir sur les éléments en question.
+        </para>
     </sect2>
 
     <sect2 id="zend.form.decorators.individual">
         <title>Rendre des décorateurs individuellement</title>
 
-        <para>Comme les décorateurs agissent souvent sur une propriété d'un élément, et en fonction de la décoration
-        précédente, il peut être utile d'afficher juste le rendu d'un décorateur particulier, sur un élément. Ceci est
-        possible par la surcharge des méthodes dans les classes principales de Zend_Form (formulaires, sous-formulaires,
-        groupes d'affichage, éléments).</para>
+        <para>
+            Comme les décorateurs agissent souvent sur une propriété d'un élément, et en
+            fonction de la décoration précédente, il peut être utile d'afficher juste le rendu d'un
+            décorateur particulier, sur un élément. Ceci est possible par la surcharge des méthodes
+            dans les classes principales de Zend_Form (formulaires, sous-formulaires, groupes
+            d'affichage, éléments).
+        </para>
 
-        <para>Pour effectuer ceci, appelez simplement <code>render[nom-du-décorateur]()</code>, où "[nom-du-décorateur]"
-        est le nom court de votre décorateur (sans son préfixe de classe). Il est aussi possible de lui passer
-        optionnellement du contenu, par exemple :</para>
+        <para>
+            Pour effectuer ceci, appelez simplement <code>render[nom-du-décorateur]()</code>,
+            où "[nom-du-décorateur]" est le nom court de votre décorateur (sans son préfixe de
+            classe). Il est aussi possible de lui passer optionnellement du contenu, par
+            exemple&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 // rend juste le décorateur Label de cet élément:
@@ -298,8 +361,11 @@ echo $form->renderHtmlTag('wrap this content');
 
         <para>Si le décorateur n'existe pas, une exception sera levée.</para>
 
-        <para>Ceci peut être particulièrement utile lors du rendu d'un formulaire avec le décorateur ViewScript ; là où
-        chaque élément utilise ses décorateurs pour rendre du contenu, mais de manière très fine.</para>
+        <para>
+            Ceci peut être particulièrement utile lors du rendu d'un formulaire avec le
+            décorateur ViewScript&#160;; là où chaque élément utilise ses décorateurs pour rendre du
+            contenu, mais de manière très fine.
+        </para>
     </sect2>
 </sect1>
 <!--

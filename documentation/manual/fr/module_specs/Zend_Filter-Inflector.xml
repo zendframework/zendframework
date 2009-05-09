@@ -1,21 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12116 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
 
-    <para><classname>Zend_Filter_Inflector</classname> est un outil de conversion de règles (sous forme de chaîne de caractères),
-    vers une cible. Ce procédé est appelé inflexion.</para>
+    <para>
+        <classname>Zend_Filter_Inflector</classname> est un outil de conversion de règles
+        (sous forme de chaîne de caractères), vers une cible. Ce procédé est appelé
+        inflexion.
+    </para>
 
-    <para>Par exemple, transformer des MotsEncasseMélangée ou des motsEnCamelCase vers un chemin. Vous pourriez avoir
-    besoin de passer les caractères en minuscules, et séparer les mots en utilisant un tiret ("-"). Un inflecteur sert à
-    ceci.</para>
+    <para>
+        Par exemple, transformer des MotsEncasseMélangée ou des motsEnCamelCase vers un
+        chemin. Vous pourriez avoir besoin de passer les caractères en minuscules, et séparer les
+        mots en utilisant un tiret ("-"). Un inflecteur sert à ceci.
+    </para>
 
-    <para><classname>Zend_Filter_Inflector</classname> implémente <classname>Zend_Filter_Interface</classname> ; pour utiliser l'inflexion,
-    vous appelez <code>filter()</code> sur votre instance.</para>
+    <para>
+        <classname>Zend_Filter_Inflector</classname> implémente
+        <classname>Zend_Filter_Interface</classname>&#160;; pour utiliser l'inflexion, vous appelez
+        <code>filter()</code> sur votre instance.
+    </para>
 
     <example id="zend.filter.inflector.camel_case_example">
-        <title>Transformer du texteEncasseMelangée ou du texteCamelCase vers un autre format</title>
+        <title>
+            Transformer du texteEncasseMelangée ou du texteCamelCase vers un autre format
+        </title>
 
         <programlisting role="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
@@ -37,64 +47,91 @@ $filtered = $inflector->filter(array('page' => $string));
     <sect2 id="zend.filter.inflector.operation">
         <title>Opération</title>
 
-        <para>Un inflecteur a besoin d'une <emphasis>cible</emphasis> et d'une ou plusieurs <emphasis>règles</emphasis>.
-        Une cible est une chaîne dans laquelle des jokers pour les variables à remplacer sont présents. Ils sont
-        préfixés de doubles-points, par exemple <code>:script</code>.</para>
+        <para>
+            Un inflecteur a besoin d'une <emphasis>cible</emphasis> et d'une ou plusieurs
+            <emphasis>règles</emphasis>. Une cible est une chaîne dans laquelle des jokers pour les
+            variables à remplacer sont présents. Ils sont préfixés de doubles-points, par exemple
+            <code>:script</code>.
+        </para>
 
-        <para>L'appel à <code>filter()</code>, nécessite un tableau de clés/valeurs pour les jokers présents dans la
-        cible.</para>
+        <para>
+            L'appel à <code>filter()</code>, nécessite un tableau de clés/valeurs pour les
+            jokers présents dans la cible.
+        </para>
 
-        <para>Chaque variable dans la cible peut avoir zéro ou plusieurs règles associées. Les règles peuvent être
-        <emphasis>statiques</emphasis> ou faire référence à une classe <classname>Zend_Filter</classname>. Les règles statiques
-        sont des remplacements purs et simples. Sinon, la classe qui correspond à la règle sera utilisée pour analyser
-        le texte. Ces classes sont spécifiées par leur nom (du filtre), non préfixé.</para>
+        <para>
+            Chaque variable dans la cible peut avoir zéro ou plusieurs règles associées. Les
+            règles peuvent être <emphasis>statiques</emphasis> ou faire référence à une classe
+            <classname>Zend_Filter</classname>. Les règles statiques sont des remplacements purs et
+            simples. Sinon, la classe qui correspond à la règle sera utilisée pour analyser le
+            texte. Ces classes sont spécifiées par leur nom (du filtre), non préfixé.
+        </para>
 
-        <para>Par exemple, vous pouvez utiliser n'importe quelle instance de <classname>Zend_Filter</classname>. Cependant, plutôt
-        que d'y faire référence via "<classname>Zend_Filter_Alpha</classname>" ou "<classname>Zend_Filter_StringToLower</classname>", vous
-        spécifierez seulement "<code>Alpha</code>" ou encore "<code>StringToLower</code>".</para>
+        <para>
+            Par exemple, vous pouvez utiliser n'importe quelle instance de
+            <classname>Zend_Filter</classname>. Cependant, plutôt que d'y faire référence via
+            "<classname>Zend_Filter_Alpha</classname>" ou
+            "<classname>Zend_Filter_StringToLower</classname>", vous spécifierez seulement
+            "<code>Alpha</code>" ou encore "<code>StringToLower</code>".
+        </para>
     </sect2>
 
     <sect2 id="zend.filter.inflector.paths">
         <title>Créer des chemins vers des filtres alternatifs</title>
 
-        <para><classname>Zend_Filter_Inflector</classname> utilise <classname>Zend_Loader_PluginLoader</classname> pour gérer les filtres
-        chargés. Par défaut, n'importe quel filtre préfixé par <classname>Zend_Filter</classname> sera disponible. Pour accéder
-        aux filtres ayant d'autres préfixes plus profonds, enlevez leur préfixe "<classname>Zend_Filter</classname>" tout
-        simplement :</para>
+        <para>
+            <classname>Zend_Filter_Inflector</classname> utilise
+            <classname>Zend_Loader_PluginLoader</classname> pour gérer les filtres chargés. Par
+            défaut, n'importe quel filtre préfixé par <classname>Zend_Filter</classname> sera
+            disponible. Pour accéder aux filtres ayant d'autres préfixes plus profonds, enlevez leur
+            préfixe "<classname>Zend_Filter</classname>" tout simplement&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 // utilise Zend_Filter_Word_CamelCaseToDash comme règle
 $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 ]]></programlisting>
 
-        <para>Pour spécifier d'autres chemins, <classname>Zend_Filter_Inflector</classname> possède une méthode qui proxie vers le
-        plugin loader, <code>addFilterPrefixPath()</code> :</para>
+        <para>
+            Pour spécifier d'autres chemins, <classname>Zend_Filter_Inflector</classname>
+            possède une méthode qui proxie vers le plugin loader,
+            <code>addFilterPrefixPath()</code>&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 $inflector->addFilterPrefixPath('Mes_Filtres', 'Mes/Filtres/');
 ]]></programlisting>
 
-        <para>Il est possible également de récupérer le plugin loader, et d'intervenir sur son instance de manière
-        directe :</para>
+        <para>
+            Il est possible également de récupérer le plugin loader, et d'intervenir sur son
+            instance de manière directe&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 $loader = $inflector->getPluginLoader();
 $loader->addPrefixPath('Mes_Filtres', 'Mes/Filtres/');
 ]]></programlisting>
 
-        <para>Pour plus d'informations sur la modification des chemins vers les filtres voyez <link
-        linkend="zend.loader.pluginloader">la documentation de PluginLoader</link>.</para>
+        <para>
+            Pour plus d'informations sur la modification des chemins vers les filtres voyez
+            <link linkend="zend.loader.pluginloader">la documentation de PluginLoader</link>.
+        </para>
     </sect2>
 
     <sect2 id="zend.filter.inflector.targets">
         <title>Paramétrer la cible de l'inflecteur</title>
 
-        <para>La cible de l'inflecteur est un mot joker (ou un identifiant), précédé du caractère spécial, double-point.
-        ":script", ":path", etc. La méthode <code>filter()</code> cherche ces identifiants pour les traiter (les
-        remplacer).</para>
+        <para>
+            La cible de l'inflecteur est un mot joker (ou un identifiant), précédé du
+            caractère spécial, double-point. ":script", ":path", etc. La méthode
+            <code>filter()</code> cherche ces identifiants pour les traiter (les remplacer).
+        </para>
 
-        <para>Il est possible de changer le caractère spécial double-point avec
-        <code>setTargetReplacementIdentifier()</code>, ou en troisième paramètre de constructeur :</para>
+        <para>
+            Il est possible de changer le caractère spécial double-point avec
+            <code>setTargetReplacementIdentifier()</code>, ou en troisième paramètre de
+            constructeur&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 // Via le constructeur :
@@ -104,18 +141,24 @@ $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 $inflector->setTargetReplacementIdentifier('#');
 ]]></programlisting>
 
-        <para>En général, concernant la cible, on la passe en constructeur. C'est le cas classique. Il peut être en
-        revanche nécessaire de pouvoir passer une cible après la construction de l'objet. (Par exemple modifier
-        l'inflecteur des composants Zend intégrés tels que <code>ViewRenderer</code> ou <classname>Zend_Layout</classname>).
-        <code>setTarget()</code> peut vous y aider :</para>
+        <para>
+            En général, concernant la cible, on la passe en constructeur. C'est le cas
+            classique. Il peut être en revanche nécessaire de pouvoir passer une cible après la
+            construction de l'objet. (Par exemple modifier l'inflecteur des composants Zend intégrés
+            tels que <code>ViewRenderer</code> ou <classname>Zend_Layout</classname>).
+            <code>setTarget()</code> peut vous y aider&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 $inflector = $layout->getInflector();
 $inflector->setTarget('layouts/:script.phtml');
 ]]></programlisting>
 
-        <para>De plus, vous pouvez agréger la cible dans un membre de votre classe, si cela vous permet d'éviter trop
-        d'appels de méthodes. <code>setTargetReference()</code> permet ceci :</para>
+        <para>
+            De plus, vous pouvez agréger la cible dans un membre de votre classe, si cela vous
+            permet d'éviter trop d'appels de méthodes. <code>setTargetReference()</code> permet
+            ceci&#160;:
+        </para>
 
         <programlisting role="php"><![CDATA[
 class Foo
@@ -153,20 +196,29 @@ class Foo
     <sect2 id="zend.filter.inflector.rules">
         <title>Règles d'inflexion</title>
 
-        <para>Comme dit en introduction, il existe 2 types de règles : statiques et basées sur des filtres.</para>
+        <para>
+            Comme dit en introduction, il existe 2 types de règles&#160;: statiques et basées sur
+            des filtres.
+        </para>
 
         <note>
-            <para>Notez bien que quelle que soit la méthode que vous utilisez pour spécifier vos règles dans
-            l'inflecteur, leur ordre est très important. Vous devez ajouter de la règle la plus spécifique, à la plus
-            générique. Par exemple, 2 règles nommées "moduleDir" et "module", la règle "moduleDir" devrait être ajoutée
-            avant la règle "module", car cette dernière est contenue dans "moduleDir".</para>
+            <para>
+                Notez bien que quelle que soit la méthode que vous utilisez pour spécifier vos
+                règles dans l'inflecteur, leur ordre est très important. Vous devez ajouter de la
+                règle la plus spécifique, à la plus générique. Par exemple, 2 règles nommées
+                "moduleDir" et "module", la règle "moduleDir" devrait être ajoutée avant la règle
+                "module", car cette dernière est contenue dans "moduleDir".
+            </para>
         </note>
 
         <sect3 id="zend.filter.inflector.rules.static">
             <title>Règles statiques</title>
 
-            <para>Les règles statiques permettent des remplacements simples. Si vous avez un segment statique dans votre
-            cible, ce type de règle est idéal. <code>setStaticRule()</code> permet de les manipuler :</para>
+            <para>
+                Les règles statiques permettent des remplacements simples. Si vous avez un
+                segment statique dans votre cible, ce type de règle est idéal.
+                <code>setStaticRule()</code> permet de les manipuler&#160;:
+            </para>
 
             <programlisting role="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
@@ -177,10 +229,13 @@ $inflector->setStaticRule('suffix', 'phtml');
 $inflector->setStaticRule('suffix', 'php');
 ]]></programlisting>
 
-            <para>Bien sur il est possible d'agréger la règle dans une propriété de classe, ceci permettra d'éviter
-            l'appel de méthodes. Ce cas se produit typiquement lorsque l'inflecteur est embarqué (encapsulé) dans une
-            classe. Vous pouvez à ce moment là interdire la récupération de l'inflecteur depuis l'extérieur de la
-            classe, par exemple. La méthode <code>setStaticRuleReference()</code> vous y aidera :</para>
+            <para>
+                Bien sur il est possible d'agréger la règle dans une propriété de classe, ceci
+                permettra d'éviter l'appel de méthodes. Ce cas se produit typiquement lorsque
+                l'inflecteur est embarqué (encapsulé) dans une classe. Vous pouvez à ce moment là
+                interdire la récupération de l'inflecteur depuis l'extérieur de la classe, par
+                exemple. La méthode <code>setStaticRuleReference()</code> vous y aidera&#160;:
+            </para>
 
             <programlisting role="php"><![CDATA[
 class Foo
@@ -218,30 +273,43 @@ class Foo
         </sect3>
 
         <sect3 id="zend.filter.inflector.rules.filters">
-            <title>Règles non statiques : basées sur des filtres</title>
+            <title>Règles non statiques&#160;: basées sur des filtres</title>
 
-            <para>Des filtres de type <classname>Zend_Filter</classname> peuvent être utilisés comme règles dans l'inflecteur. Ils
-            sont donc liés à des variables cibles, mais vous pouvez lier plusieurs filtres pour une même cible. Ils sont
-            alors procédés dans l'ordre (FIFO), prenez donc garde à ceci.</para>
+            <para>
+                Des filtres de type <classname>Zend_Filter</classname> peuvent être utilisés
+                comme règles dans l'inflecteur. Ils sont donc liés à des variables cibles, mais vous
+                pouvez lier plusieurs filtres pour une même cible. Ils sont alors procédés dans
+                l'ordre (FIFO), prenez donc garde à ceci.
+            </para>
 
-            <para>Les règles des filtres sont ajoutées avec <code>setFilterRule()</code>. Cette méthode écrase toute
-            règle déjà définie.<code>addFilterRule()</code> au contraire, n'écrase pas mais gère une pile de filtres
-            pour une variable. Les noms des filtres passés à ces 2 méthodes sont de la forme :</para>
+            <para>
+                Les règles des filtres sont ajoutées avec <code>setFilterRule()</code>. Cette
+                méthode écrase toute règle déjà définie.<code>addFilterRule()</code> au contraire,
+                n'écrase pas mais gère une pile de filtres pour une variable. Les noms des filtres
+                passés à ces 2 méthodes sont de la forme&#160;:
+            </para>
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis>String</emphasis> : une chaîne de caractères représentant le nom de la classe du
-                    filtre, ou alors le nom de la classe moins le préfixe utilisé par le plugin loader. (le préfixe par
-                    défaut étant "Zend_Filter").</para>
+                    <para>
+                        <emphasis>String</emphasis>&#160;: une chaîne de caractères représentant le
+                        nom de la classe du filtre, ou alors le nom de la classe moins le préfixe
+                        utilisé par le plugin loader. (le préfixe par défaut étant
+                        "Zend_Filter").
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>Objet filtre</emphasis> : une instance d'objet implémentant
-                    <classname>Zend_Filter_Interface</classname>.</para>
+                    <para>
+                        <emphasis>Objet filtre</emphasis>&#160;: une instance d'objet implémentant
+                        <classname>Zend_Filter_Interface</classname>.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>Array</emphasis> : un tableau de chaînes ou d'objets.</para>
+                    <para>
+                        <emphasis>Array</emphasis>&#160;: un tableau de chaînes ou d'objets.
+                    </para>
                 </listitem>
             </itemizedlist>
 
@@ -266,21 +334,27 @@ $inflector->setFilterRule('script', array(
         <sect3 id="zend.filter.inflector.rules.multiple">
             <title>Paramétrer plusieurs règles en une seule fois</title>
 
-            <para>En temps normal il est plus pratique de spécifier ses règles (statiques et/ou filtres) en une seule
-            fois, plutôt qu'en plusieurs étapes. Les méthodes de <classname>Zend_Filter_Inflector</classname> comme
-            <code>addRules()</code> et <code>setRules()</code> permettent ceci.</para>
+            <para>
+                En temps normal il est plus pratique de spécifier ses règles (statiques et/ou
+                filtres) en une seule fois, plutôt qu'en plusieurs étapes. Les méthodes de
+                <classname>Zend_Filter_Inflector</classname> comme <code>addRules()</code> et
+                <code>setRules()</code> permettent ceci.
+            </para>
 
-            <para>Chacune de ces 2 méthodes prend en paramètre un tableau de variable/règle. La règle peut être
-            n'importe quel type accepté (string, objet filtre ou array). Les noms des variables proposent une syntaxe
-            spéciale pour différencier les règles statiques des filtres :</para>
+            <para>
+                Chacune de ces 2 méthodes prend en paramètre un tableau de variable/règle. La
+                règle peut être n'importe quel type accepté (string, objet filtre ou array). Les
+                noms des variables proposent une syntaxe spéciale pour différencier les règles
+                statiques des filtres&#160;:
+            </para>
 
             <itemizedlist>
                 <listitem>
-                    <para><emphasis>":" prefix</emphasis> : règle à base de filtre.</para>
+                    <para><emphasis>":" prefix</emphasis>&#160;: règle à base de filtre.</para>
                 </listitem>
 
                 <listitem>
-                    <para><emphasis>Pas de prefix</emphasis> : règle statique.</para>
+                    <para><emphasis>Pas de prefix</emphasis>&#160;: règle statique.</para>
                 </listitem>
             </itemizedlist>
 
@@ -305,35 +379,49 @@ $inflector->addRules(array(
     <sect2 id="zend.filter.inflector.utility">
         <title>Autres méthodes utilitaires</title>
 
-        <para><classname>Zend_Filter_Inflector</classname> possède d'autres méthodes pour changer le plugin loader, manipuler des
-        règles, et contrôler les exceptions.</para>
+        <para>
+            <classname>Zend_Filter_Inflector</classname> possède d'autres méthodes pour
+            changer le plugin loader, manipuler des règles, et contrôler les exceptions.
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>setPluginLoader()</code> peut être utile si vous avez configuré votre propre chargeur de
-                plugins (plugin loader) et que vous voulez l'utiliser avec <classname>Zend_Filter_Inflector</classname> ;
-                <code>getPluginLoader()</code> retourne cette valeur.</para>
+                <para>
+                    <code>setPluginLoader()</code> peut être utile si vous avez configuré
+                    votre propre chargeur de plugins (plugin loader) et que vous voulez l'utiliser
+                    avec <classname>Zend_Filter_Inflector</classname> ;
+                    <code>getPluginLoader()</code> retourne cette valeur.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>setThrowTargetExceptionsOn()</code> accepte un booléen. Ceci spécifie qu'une exception doit
-                être lancée si une variable est toujours présente dans la cible après le passage de l'inflecteur. Par
-                défaut, ça n'est pas le cas. <code>isThrowTargetExceptionsOn()</code> retourne la valeur
-                actuelle.</para>
+                <para>
+                    <code>setThrowTargetExceptionsOn()</code> accepte un booléen. Ceci
+                    spécifie qu'une exception doit être lancée si une variable est toujours présente
+                    dans la cible après le passage de l'inflecteur. Par défaut, ça n'est pas le cas.
+                    <code>isThrowTargetExceptionsOn()</code> retourne la valeur actuelle.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>getRules($spec = null)</code> récupère toutes les règles, ou les règles d'une certaine
-                variable.</para>
+                <para>
+                    <code>getRules($spec = null)</code> récupère toutes les règles, ou les
+                    règles d'une certaine variable.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>getRule($spec, $index)</code> récupère une règle précise, même dans une chaîne de
-                filtre.<code>$index</code> doit être précisé.</para>
+                <para>
+                    <code>getRule($spec, $index)</code> récupère une règle précise, même dans
+                    une chaîne de filtre.<code>$index</code> doit être précisé.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>clearRules()</code> va effacer toutes les règles fixées préalablement.</para>
+                <para>
+                    <code>clearRules()</code> va effacer toutes les règles fixées
+                    préalablement.
+                </para>
             </listitem>
         </itemizedlist>
     </sect2>
@@ -341,9 +429,12 @@ $inflector->addRules(array(
     <sect2 id="zend.filter.inflector.config">
         <title>Zend_Config avec Zend_Filter_Inflector</title>
 
-        <para><classname>Zend_Config</classname> peut être utilisé pour spécifier les règles, les préfixes des filtres et d'autres
-        choses dans vos inflecteurs. Passez un objet <classname>Zend_Config</classname> au constructeur ou à la méthode
-        <code>setConfig()</code> :</para>
+        <para>
+            <classname>Zend_Config</classname> peut être utilisé pour spécifier les règles,
+            les préfixes des filtres et d'autres choses dans vos inflecteurs. Passez un objet
+            <classname>Zend_Config</classname> au constructeur ou à la méthode
+            <code>setConfig()</code>&#160;:
+        </para>
 
         <itemizedlist>
             <listitem>
@@ -351,22 +442,32 @@ $inflector->addRules(array(
             </listitem>
 
             <listitem>
-                <para><code>filterPrefixPath</code> définit le préfixe/chemins des filtres.</para>
+                <para>
+                    <code>filterPrefixPath</code> définit le préfixe/chemins des
+                    filtres.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>throwTargetExceptionsOn</code> est un booléen. Ceci spécifie qu'une exception doit être
-                lancée si une variable est toujours présente dans la cible après le passage de l'inflecteur.</para>
+                <para>
+                    <code>throwTargetExceptionsOn</code> est un booléen. Ceci spécifie qu'une
+                    exception doit être lancée si une variable est toujours présente dans la cible
+                    après le passage de l'inflecteur.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>targetReplacementIdentifier</code> spécifie le caractère à utiliser pour définir les
-                variables de remplacement.</para>
+                <para>
+                    <code>targetReplacementIdentifier</code> spécifie le caractère à utiliser
+                    pour définir les variables de remplacement.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>rules</code> spécifie un tableau de règles, comme accepté par
-                <code>addRules()</code>.</para>
+                <para>
+                    <code>rules</code> spécifie un tableau de règles, comme accepté par
+                    <code>addRules()</code>.
+                </para>
             </listitem>
         </itemizedlist>
 

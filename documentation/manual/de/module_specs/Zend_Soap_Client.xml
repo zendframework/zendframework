@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15234 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -153,7 +153,6 @@ $client = new Zend_Soap_Client("some.wsdl",
             </itemizedlist>
         </para>
     </sect2>
-
 
     <sect2 id="zend.soap.client.calls">
         <title>SOAP Anfragen durchführen.</title>

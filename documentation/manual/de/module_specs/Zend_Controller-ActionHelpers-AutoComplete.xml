@@ -120,8 +120,8 @@ class FooController extends Zend_Controller_Action
             Dojo hat per se keinen AutoCompletion Wizard, hat aber zwei Wizards die AutoCompletion
             ausführen können: ComboBox und FilteringSelect. In beiden Fällen benötigen Sie einen
             Datenspeicher der QueryReadStore implementiert; für mehr Informationen über dieses
-            Thema siehe die
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
+            Thema siehe die <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-3-programmatic-dijit-and-dojo/data-retrieval-dojo-data-0">dojo.data</ulink>
             Dokumentation.
         </para>
 

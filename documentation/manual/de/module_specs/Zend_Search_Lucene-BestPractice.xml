@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Die besten Anwendungen</title>
@@ -34,13 +34,11 @@ foreach ($hits as $hit) {
     // Das 'contents' Dokumentfeld erhalten
     $contents = $hit->contents;
 
-
     // Die interne Lucene Dokument ID erhalten
     $id = $hit->id;
 
     // Die Anzahl der Abfragetreffer erhalten
     $score = $hit->score;
-
 
     // Das 'id' Dokumentfeld erhalten
     $docId = $hit->getDocument()->id;
@@ -54,7 +52,6 @@ foreach ($hits as $hit) {
 ]]></programlisting>
         </para>
     </sect2>
-
 
     <sect2 id="zend.search.lucene.best-practice.indexing-performance">
         <title>Geschwindigkeit von Indezes</title>
@@ -270,7 +267,6 @@ $index->optimize();
             erlaubt es dem gewünschten Faktor für das Zusammenführen eine erwünschte Anzahl an
             Segmenten zu erhalten.
         </para>
-
 
         <para>
             Das Tunen des <emphasis>MergeFactor</emphasis> Parameters ist effektiver für die

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -246,7 +246,6 @@ foreach($list as $bucket) {
             spezifizieren, wodurch man auf Sie mit der folgenden URL zugreifen kann:
             <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
         </para>
-
 
         <itemizedlist>
             <listitem>

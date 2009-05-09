@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Erweiterte Verwendung von Zend_Layout</title>
 
     <para>
-        <classname>Zend_Layout</classname> hat eine Vielzahl an Verwendungsmöglichkeiten für den fortgeschrittenen
-        Entwickler der es für seine unterschiedlichen View Implementationen, Dateisystem Layouts, und anderes
-        adaptieren will.
+        <classname>Zend_Layout</classname> hat eine Vielzahl an Verwendungsmöglichkeiten für den
+        fortgeschrittenen Entwickler der es für seine unterschiedlichen View Implementationen,
+        Dateisystem Layouts, und anderes adaptieren will.
     </para>
 
     <para>
@@ -17,33 +17,36 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Eigene View Objekte.</emphasis> <classname>Zend_Layout</classname> erlaubt es jede Klasse
-                zu verwenden die <classname>Zend_View_Interface</classname> implementiert.
+                <emphasis>Eigene View Objekte.</emphasis> <classname>Zend_Layout</classname> erlaubt
+                es jede Klasse zu verwenden die <classname>Zend_View_Interface</classname>
+                implementiert.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Eigene Front Kontroller Plugins.</emphasis> <classname>Zend_Layout</classname> wird mit einem
-                Standard Front Kontroller Plugin ausgeliefert der das Layout automatisch darstellt bevor die
-                Antwort zurückgegeben wird. Es kann ein eigenes Plugin verwendet werden.
+                <emphasis>Eigene Front Kontroller Plugins.</emphasis>
+                <classname>Zend_Layout</classname> wird mit einem Standard Front Kontroller Plugin
+                ausgeliefert der das Layout automatisch darstellt bevor die Antwort zurückgegeben
+                wird. Es kann ein eigenes Plugin verwendet werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Eigene Action Helfer.</emphasis> <classname>Zend_Layout</classname> wird mit einem Standard
-                Action Helfer ausgeliefert der für die meiden Zwecke ausreichend sein sollte da er ein dummer
-                Proxy für das Layout Objekt selbst ist.
+                <emphasis>Eigene Action Helfer.</emphasis> <classname>Zend_Layout</classname> wird
+                mit einem Standard Action Helfer ausgeliefert der für die meiden Zwecke ausreichend
+                sein sollte da er ein dummer Proxy für das Layout Objekt selbst ist.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Eigene Auflösung von Layout Skript Pfaden</emphasis>. <classname>Zend_Layout</classname> erlaubt
-                es einen eigenen <link linkend="zend.filter.inflector">Beugungsmechanismum</link> für die
-                Auflösung der Layout Skript Pfade zu verwenden, oder einfach die beigefügte Beugung zu verändern
-                und eigene Beugungsregeln zu spezifizieren.
+                <emphasis>Eigene Auflösung von Layout Skript Pfaden</emphasis>.
+                <classname>Zend_Layout</classname> erlaubt es einen eigenen <link
+                    linkend="zend.filter.inflector">Beugungsmechanismum</link> für die Auflösung
+                der Layout Skript Pfade zu verwenden, oder einfach die beigefügte Beugung zu
+                verändern und eigene Beugungsregeln zu spezifizieren.
             </para>
         </listitem>
     </itemizedlist>
@@ -52,10 +55,11 @@
         <title>Eigene View Objekte</title>
 
         <para>
-            <classname>Zend_Layout</classname> erlaubt es jede Klasse für die Darstellung der Layout Skripte zu verwenden
-            die <classname>Zend_View_Interface</classname> implementiert oder <classname>Zend_View_Abstract</classname> erweitert.
-            Es muß einfach das eigene View Objekt als Parameter dem Konstruktor/<code>startMvc()</code>
-            übergeben werden, oder es mit der <code>setView()</code> Zugriffsmethode gesetzt werden:
+            <classname>Zend_Layout</classname> erlaubt es jede Klasse für die Darstellung der Layout
+            Skripte zu verwenden die <classname>Zend_View_Interface</classname> implementiert oder
+            <classname>Zend_View_Abstract</classname> erweitert. Es muß einfach das eigene View
+            Objekt als Parameter dem Konstruktor/<code>startMvc()</code> übergeben werden, oder es
+            mit der <code>setView()</code> Zugriffsmethode gesetzt werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -68,26 +72,30 @@ $layout->setView($view);
 
             <para>
                 Wärend es <classname>Zend_Layout</classname> erlaubt jede Klasse zu verwenden die
-                <classname>Zend_View_Interface</classname> implementiert, können Fälle auftreten in denen es nicht
-                möglich ist die verschiedenen <classname>Zend_View</classname> Helfer anzupassen, speziell die
-                Layout und <link linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> Helfer.
-                Das ist weil <classname>Zend_Layout</classname> die Variablen die im Objekt gesetzt werden über
-                sich selbst und <link linkend="zend.view.helpers.initial.placeholder">Platzhalter</link>
-                bereitstellt.
+                <classname>Zend_View_Interface</classname> implementiert, können Fälle auftreten in
+                denen es nicht möglich ist die verschiedenen <classname>Zend_View</classname> Helfer
+                anzupassen, speziell die Layout und <link
+                    linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> Helfer. Das
+                ist weil <classname>Zend_Layout</classname> die Variablen die im Objekt gesetzt
+                werden über sich selbst und <link
+                    linkend="zend.view.helpers.initial.placeholder">Platzhalter</link> bereitstellt.
             </para>
 
             <para>
-                Wenn eine eigene <classname>Zend_View</classname> Implementation verwendet werden soll die diese Helfer
-                nicht unterstützt, muß ein Weg gefunden werden um die Layout Variablen in die View zu bekommen.
-                Das kann entweder durch die Erweiterung vom <classname>Zend_Layout</classname> Objekt und der Anpassung
-                der <code>render()</code> Methode zur Übergabe von Variablen zur View geschehen, oder durch
-                die Erstellung einer eigenen Plugin Klasse die diese vor der Darstellung des Layouts übergibt.
+                Wenn eine eigene <classname>Zend_View</classname> Implementation verwendet werden
+                soll die diese Helfer nicht unterstützt, muß ein Weg gefunden werden um die Layout
+                Variablen in die View zu bekommen. Das kann entweder durch die Erweiterung vom
+                <classname>Zend_Layout</classname> Objekt und der Anpassung der
+                <code>render()</code> Methode zur Übergabe von Variablen zur View geschehen, oder
+                durch die Erstellung einer eigenen Plugin Klasse die diese vor der Darstellung des
+                Layouts übergibt.
             </para>
 
             <para>
-                Alternativ kann auf diese Variablen, wenn die View Implementation jegliche Art von Plugin
-                Möglichkeiten unterstützt, über die 'Zend_Layout' Platzhalter zugegriffen werden, indem der
-                <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfer</link> verwendet wird:
+                Alternativ kann auf diese Variablen, wenn die View Implementation jegliche Art von
+                Plugin Möglichkeiten unterstützt, über die 'Zend_Layout' Platzhalter zugegriffen
+                werden, indem der <link linkend="zend.view.helpers.initial.placeholder">Platzhalter
+                    Helfer</link> verwendet wird:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -101,23 +109,25 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Eigene Front Controller Plugins</title>
 
         <para>
-            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird, registriert es ein Front
-            Kontroller Plugin das das Layout als letzte Aktion darstellt bevor die Bearbeitungsschleife
-            beendet wird. In den meisten Fällen, wird das Standardplugin ausreichen, aber sollte es gewünscht
-            sein ein eigenes zu schreiben, kann der Name der Pluginklasse die geladen werden soll durch die
-            übergabe der <code>pluginClass</code> Option an die <code>startMvc()</code> Methode spezifiziert
+            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird,
+            registriert es ein Front Kontroller Plugin das das Layout als letzte Aktion darstellt
+            bevor die Bearbeitungsschleife beendet wird. In den meisten Fällen, wird das
+            Standardplugin ausreichen, aber sollte es gewünscht sein ein eigenes zu schreiben, kann
+            der Name der Pluginklasse die geladen werden soll durch die übergabe der
+            <code>pluginClass</code> Option an die <code>startMvc()</code> Methode spezifiziert
             werden.
         </para>
 
         <para>
             Jede Plugin Klasse die für diesen Zweck geschrieben wird, muß
-            <classname>Zend_Controller_Plugin_Abstract</classname> erweitern, und sollte eine Instanz eines Layout Objektes
-            als Instanz für den Konstruktor akzeptieren. Andernfalls sind die Details der Implementation in
-            eigenen Händen.
+            <classname>Zend_Controller_Plugin_Abstract</classname> erweitern, und sollte eine
+            Instanz eines Layout Objektes als Instanz für den Konstruktor akzeptieren. Andernfalls
+            sind die Details der Implementation in eigenen Händen.
         </para>
 
         <para>
-            Die Standardmäßig verwendete Plugin Klasse ist <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
+            Die Standardmäßig verwendete Plugin Klasse ist
+            <classname>Zend_Layout_Controller_Plugin_Layout</classname>.
         </para>
     </sect2>
 
@@ -125,17 +135,19 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Eigene Action Helfer</title>
 
         <para>
-            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird, registriert es einen Action
-            Controller Helfer mit dem Helfer Broker. Der Standardhelfer,
-            <classname>Zend_Layout_Controller_Action_Helper_Layout</classname> arbeitet als dummer Proxy zur Layout
-            Objekt Instanz selbst, und sollte für die meisten Zwecke ausreichend sein.
+            Wenn <classname>Zend_Layout</classname> mit den MVC Komponenten verwendet wird,
+            registriert es einen Action Controller Helfer mit dem Helfer Broker. Der Standardhelfer,
+            <classname>Zend_Layout_Controller_Action_Helper_Layout</classname> arbeitet als dummer
+            Proxy zur Layout Objekt Instanz selbst, und sollte für die meisten Zwecke ausreichend
+            sein.
         </para>
 
         <para>
-            Sollte es gewünscht sein eigene Funktionalitäten zu schreiben, kann einfach eine Action Helfer Klasse
-            geschrieben werden die <classname>Zend_Controller_Action_Helper_Abstract</classname> erweitert und den
-            Klassennamen als <code>helperClass</code> Option an die <code>startMvc()</code> Methode übergeben
-            werden. Details der Implementiert oblieben jedem selbst.
+            Sollte es gewünscht sein eigene Funktionalitäten zu schreiben, kann einfach eine Action
+            Helfer Klasse geschrieben werden die
+            <classname>Zend_Controller_Action_Helper_Abstract</classname> erweitert und den
+            Klassennamen als <code>helperClass</code> Option an die <code>startMvc()</code> Methode
+            übergeben werden. Details der Implementiert oblieben jedem selbst.
         </para>
     </sect2>
 
@@ -143,9 +155,10 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         <title>Auflösung eigener Layout Skript Pfade: Verwenden der Beugung</title>
 
         <para>
-            <classname>Zend_Layout</classname> verwendet <classname>Zend_Filter_Inflector</classname> um eine Filterkette zu
-            erstellen für die Übersetzung eines Layout Namens zu einem Layout Skript Pfad. Standardmäßig
-            verwendet es die 'Word_CamelCaseToDash' Regeln gefolgt von 'StringToLower' und dem Anhang 'phtml' um
+            <classname>Zend_Layout</classname> verwendet
+            <classname>Zend_Filter_Inflector</classname> um eine Filterkette zu erstellen für die
+            Übersetzung eines Layout Namens zu einem Layout Skript Pfad. Standardmäßig verwendet es
+            die 'Word_CamelCaseToDash' Regeln gefolgt von 'StringToLower' und dem Anhang 'phtml' um
             den Namen in einen Pfad zu transformieren. Einige Beispiele:
         </para>
 
@@ -164,19 +177,20 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </itemizedlist>
 
         <para>
-            Es gibt drei Optionen für die Änderung der Beugung: Änderung des Beuzungszieles und/oder des
-            View Suffix über <classname>Zend_Layout</classname> Zugriffsmethoden, änderung der Beugungsregeln und des Ziels
-            der Beugung die mit der <classname>Zend_Layout</classname> Instanz gekoppelt ist, oder Erstellung einer
-            eigenen Beugungsinstanz und dessen Übergabe an <classname>Zend_Layout::setInflector()</classname>.
+            Es gibt drei Optionen für die Änderung der Beugung: Änderung des Beuzungszieles und/oder
+            des View Suffix über <classname>Zend_Layout</classname> Zugriffsmethoden, änderung der
+            Beugungsregeln und des Ziels der Beugung die mit der <classname>Zend_Layout</classname>
+            Instanz gekoppelt ist, oder Erstellung einer eigenen Beugungsinstanz und dessen Übergabe
+            an <classname>Zend_Layout::setInflector()</classname>.
          </para>
 
         <example id="zend.layout.advanced.inflector.accessors">
             <title>Verwenden von Zend_Layout Zugriffsmethoden zur Änderung der Beugung</title>
 
             <para>
-                Der standardmäßige <classname>Zend_Layout</classname> Beugungsmechanismus verwendet statische
-                Referenzen für das Ziel und View Skript Suffix, und besitzt Zugriffsmethoden für das setzen
-                dieser Werte.
+                Der standardmäßige <classname>Zend_Layout</classname> Beugungsmechanismus verwendet
+                statische Referenzen für das Ziel und View Skript Suffix, und besitzt
+                Zugriffsmethoden für das setzen dieser Werte.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -193,8 +207,9 @@ $layout->setViewSuffix('php');
 
             <para>
                 Beugung hat ein Ziel und ein oder mehrere Regeln. Das Standardziel das von
-                <classname>Zend_Layout</classname> verwendet wird ist: ':script.:suffix'; ':script' wird als registrierter
-                Layoutname übergeben, wärend ':suffix' eine statische Regel der Beugung ist.
+                <classname>Zend_Layout</classname> verwendet wird ist: ':script.:suffix'; ':script'
+                wird als registrierter Layoutname übergeben, wärend ':suffix' eine statische Regel
+                der Beugung ist.
             </para>
 
             <para>
@@ -215,9 +230,10 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
             <title>Eigene Beugung</title>
 
             <para>
-                In den meisten Fällen ist es ausreichend den bestehenden Beugungsmechanismus zu verändern.
-                Trotzdem kann man eine Beugung haben die in verschiedenen Orten verwendet werden soll, mit
-                unterschiedlichen Objekten von unterschiedlichen Typen. <classname>Zend_Layout</classname> unterstützt das.
+                In den meisten Fällen ist es ausreichend den bestehenden Beugungsmechanismus zu
+                verändern. Trotzdem kann man eine Beugung haben die in verschiedenen Orten verwendet
+                werden soll, mit unterschiedlichen Objekten von unterschiedlichen Typen.
+                <classname>Zend_Layout</classname> unterstützt das.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -234,12 +250,12 @@ $layout->setInflector($inflector);
             <title>Beugung kann ausgeschaltet werden</title>
 
             <para>
-                Beugung kann ausgeschaltet und eingeschaltet werden indem eine zugriffsmethode auf dem
-                <classname>Zend_Layout</classname> Objekt verwendet wird. Das kann nützlich sein wenn man einen
-                absoluten Pfad für ein Layout Skript spezifizieren will, oder man weiß das der Mechanismus
-                den man für die Spezifikation des Layout Skripts verwenden will, keine Beugung benötigt.
-                Es können einfach die <code>enableInflection()</code> und <code>disableInflection()</code>
-                Methoden verwendet werden.
+                Beugung kann ausgeschaltet und eingeschaltet werden indem eine zugriffsmethode auf
+                dem <classname>Zend_Layout</classname> Objekt verwendet wird. Das kann nützlich sein
+                wenn man einen absoluten Pfad für ein Layout Skript spezifizieren will, oder man
+                weiß das der Mechanismus den man für die Spezifikation des Layout Skripts verwenden
+                will, keine Beugung benötigt. Es können einfach die <code>enableInflection()</code>
+                und <code>disableInflection()</code> Methoden verwendet werden.
             </para>
         </note>
     </sect2>

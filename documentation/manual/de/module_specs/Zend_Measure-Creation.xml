@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
 
@@ -121,7 +121,6 @@ $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
 echo $unit; // Ausgabe "1.234 m"
-
 
 $mystring = "Das Boot ist 1,234.50 lang.";
 $unit = new Zend_Measure_Length($mystring,

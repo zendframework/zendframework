@@ -7,14 +7,16 @@
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>Einführung</title>
         <para>
-            Der <code>FlashMessenger</code> Helfer erlaubt es Nachrichten zu übergeben die ein Benutzer bei der
-            nächsten Anfrage sehen können soll. Um das durchführen zu können, berwendet <code>FlashMessenger</code>
-            den <classname>Zend_Session_Namespace</classname> um Nachrichten für die Zukunft oder den nächsten Empfang einer
-            Anfrage zu speichern. Es ist generell eine gute Idee, das wenn man plant <classname>Zend_Session</classname> oder
-            <classname>Zend_Session_Namespace</classname> zu verwenden, diese mit <classname>Zend_Session::start()</classname> in der
-            Bootstrap Datei zu initialisieren. (Siehe die
-            <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link> Dokumentation für
-            weitere Details über die Verwendung)
+            Der <code>FlashMessenger</code> Helfer erlaubt es Nachrichten zu übergeben die ein
+            Benutzer bei der nächsten Anfrage sehen können soll. Um das durchführen zu können,
+            verwendet <code>FlashMessenger</code> den <classname>Zend_Session_Namespace</classname>
+            um Nachrichten für die Zukunft oder den nächsten Empfang einer Anfrage zu speichern. Es
+            ist generell eine gute Idee, das wenn man plant <classname>Zend_Session</classname> oder
+            <classname>Zend_Session_Namespace</classname> zu verwenden, diese mit
+            <classname>Zend_Session::start()</classname> in der Bootstrap Datei zu initialisieren.
+            (Siehe die <link
+                linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
+            Dokumentation für weitere Details über die Verwendung)
         </para>
 
     </sect4>
@@ -22,10 +24,10 @@
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>Beispiel einer standardmäßigen Verwendung</title>
         <para>
-            Das Anwendungsbeispiel von unten zeigt die Verwendung einer Flash Nachricht und Ihre Grundlagen. Wenn
-            die Aktion <code>/some/my</code> aufgerufen wird, fügt Sie die Flash Nachricht "Eintrag gespeichert!"
-            hinzu. Eine weitere Anfrage zu der Aktion <code>/some/my-next-request</code> empfängt Sie (und löscht
-            Sie auch).
+            Das Anwendungsbeispiel von unten zeigt die Verwendung einer Flash Nachricht und Ihre
+            Grundlagen. Wenn die Aktion <code>/some/my</code> aufgerufen wird, fügt Sie die Flash
+            Nachricht "Eintrag gespeichert!" hinzu. Eine weitere Anfrage zu der Aktion
+            <code>/some/my-next-request</code> empfängt Sie (und löscht Sie auch).
         </para>
 
         <programlisting role="php"><![CDATA[

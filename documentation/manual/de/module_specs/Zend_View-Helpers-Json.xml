@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON Helfer</title>
@@ -56,7 +56,6 @@ echo $this->json($this->data, true);
 // Oder ein boolsches true als "keepLayouts" Schlüssel:
 echo $this->json($this->data, array('keepLayouts' => true));
 ]]></programlisting>
-
 
         <para>
             <classname>Zend_Json::encode</classname> erlaubt es native JSON Ausdrücke zu kodieren

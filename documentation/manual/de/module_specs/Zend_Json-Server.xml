@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC server</title>
 
     <para>
         <classname>Zend_Json_Server</classname> ist eine
-        <ulink url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink> Server Implementierung. Sie
-        unterstützt sowohl <ulink url="http://json-rpc.org/wiki/specification">dieSpezifikation von JSON-RPC Version 1</ulink>
-        als auch die <ulink url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">Spezifikation der Version 2</ulink>;
-        zusätzlich bietet Sie eine PHP Implementierung der
-        <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Spezifikation für Service Mapping Description (SMD)</ulink>
-        Um Kunden von Services deren Metadaten anzubieten.
+        <ulink url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink> Server
+        Implementierung. Sie unterstützt sowohl <ulink
+            url="http://json-rpc.org/wiki/specification">die Spezifikation von JSON-RPC Version
+            1</ulink> als auch die <ulink
+            url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">Spezifikation
+            der Version 2</ulink>; zusätzlich bietet Sie eine PHP Implementierung der <ulink
+            url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Spezifikation
+            für Service Mapping Description (SMD)</ulink> Um Kunden von Services deren Metadaten
+        anzubieten.
     </para>
 
     <para>
-        JSON-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das JSON für seine Nachrichten
-        verwendet. Diese JSON-RPC Implementierung folgt PHP's
-        <ulink url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink> API.
-        Das bedeutet das in einer typischen Situation einfach folgendes getan wird:
+        JSON-RPC ist ein leichgewichtiges Remoce Procedure Call Protokoll das JSON für seine
+        Nachrichten verwendet. Diese JSON-RPC Implementierung folgt PHP's <ulink
+            url="http://us.php.net/manual/en/function.soap-soapserver-construct.php">SoapServer</ulink>
+        API. Das bedeutet das in einer typischen Situation einfach folgendes getan wird:
     </para>
 
     <itemizedlist>
         <listitem><para>Instanzieren des Server Objekts</para></listitem>
-        <listitem><para>Eine oder mehrere Funktionen und/oder Klassen/Objekte dem Server Objekt hinzufügen</para></listitem>
+        <listitem>
+            <para>
+                Eine oder mehrere Funktionen und/oder Klassen/Objekte dem Server Objekt hinzufügen
+            </para>
+        </listitem>
         <listitem><para>Die Anfrage mit handle() ausführen</para></listitem>
     </itemizedlist>
 
     <para>
-        <classname>Zend_Json_Server</classname> verwendet <xref linkend="zend.server.reflection" /> um Reflektion
-        durchzuführen um den SMD zu erstellen und die Signaturen der Methodenaufrufe zu erzwingen. Als solche,
-        ist es zwingend notwendig das alle hinzugefügten Funktionen und/oder Klassenmethoden komplette PHP
-        Docblocks dokumentiert haben mindestens aber:
+        <classname>Zend_Json_Server</classname> verwendet <xref linkend="zend.server.reflection" />
+        um Reflektion durchzuführen um den SMD zu erstellen und die Signaturen der Methodenaufrufe
+        zu erzwingen. Als solche, ist es zwingend notwendig das alle hinzugefügten Funktionen
+        und/oder Klassenmethoden komplette PHP Docblocks dokumentiert haben mindestens aber:
     </para>
 
     <itemizedlist>
@@ -40,19 +47,19 @@
     </itemizedlist>
 
     <para>
-        <classname>Zend_Json_Server</classname> hört aktuell nur auf POST Anfragen; glücklicherweise bieten die meisten
-        JSON-RPC Client Implementierungen die zur aktuell vorhanden sind nur POST Anfragen. Das macht es einfach
-        den gleichen Endpunkt des Servers so zu verwenden das er beide Anfragen behandelt sowie die Service SMD
-        liefert, wie im nächsten Beispiel gezeigt.
+        <classname>Zend_Json_Server</classname> hört aktuell nur auf POST Anfragen; glücklicherweise
+        bieten die meisten JSON-RPC Client Implementierungen die zur aktuell vorhanden sind nur POST
+        Anfragen. Das macht es einfach den gleichen Endpunkt des Servers so zu verwenden das er
+        beide Anfragen behandelt sowie die Service SMD liefert, wie im nächsten Beispiel gezeigt.
     </para>
 
     <example id="zend.json.server.usage">
         <title>Zend_Json_Server Verwendung</title>
 
         <para>
-            Zuerst müssen wir eine Klasse definieren die wir über den JSON-RPC Server ausliefern wollen.
-            Wir nennen die Klasse 'Calculator', und definieren die Methoden 'add', 'substract', 'multiple',
-            und 'divide':
+            Zuerst müssen wir eine Klasse definieren die wir über den JSON-RPC Server ausliefern
+            wollen. Wir nennen die Klasse 'Calculator', und definieren die Methoden 'add',
+            'substract', 'multiple', und 'divide':
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -112,10 +119,11 @@ class Calculator
 ]]></programlisting>
 
         <para>
-            Es ist zu beachten das jede Methode einen Docblock mit Einträgen besitzt die jeden Parameter und
-            seinen Typ beschreiben, sowie einen Eintrag für den Rückgabewert. Das ist
-            <emphasis>absolut kritisch</emphasis> wenn <classname>Zend_Json_Server</classname> verwendet wird -- oder auch
-            jede andere Server Komponente für diesen Zweck im Zend Framework.
+            Es ist zu beachten das jede Methode einen Docblock mit Einträgen besitzt die jeden
+            Parameter und seinen Typ beschreiben, sowie einen Eintrag für den Rückgabewert. Das ist
+            <emphasis>absolut kritisch</emphasis> wenn <classname>Zend_Json_Server</classname>
+            verwendet wird -- oder auch jede andere Server Komponente für diesen Zweck im Zend
+            Framework.
         </para>
 
         <para>
@@ -133,9 +141,10 @@ $server->handle();
 ]]></programlisting>
 
         <para>
-            Trotzdem behandelt das noch immer nicht das Problem der Rückgabe eines SMD damit der JSON-RPC
-            Client die Methoden selbstständig erkennen kann. Das kann getan werden indem die HTTP Anfragemethode
-            erkannt wird, und anschließend einige Metadaten des Servers spezifiziert werden:
+            Trotzdem behandelt das noch immer nicht das Problem der Rückgabe eines SMD damit der
+            JSON-RPC Client die Methoden selbstständig erkennen kann. Das kann getan werden indem
+            die HTTP Anfragemethode erkannt wird, und anschließend einige Metadaten des Servers
+            spezifiziert werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -161,7 +170,8 @@ $server->handle();
 
         <para>
             Wenn der JSON-RPC Server mit dem Dojo Toolkit verwendet wird muß auch ein spezielles
-            Kompatibilitätsflag gesetzt werden um sicherzustellen das die zwei korrekt miteinander arbeiten:
+            Kompatibilitätsflag gesetzt werden um sicherzustellen das die zwei korrekt miteinander
+            arbeiten:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -190,21 +200,26 @@ $server->handle();
 
         <para>
             Obwohl das meiste an Funktionalität für <classname>Zend_Json_Server</classname> in
-            <xref linkend="zend.json.server.usage" /> beschrieben wurde, ist noch weitere fortgeschrittenere
-            Funktionalität vorhanden.
+            <xref linkend="zend.json.server.usage" /> beschrieben wurde, ist noch weitere
+            fortgeschrittenere Funktionalität vorhanden.
         </para>
 
         <sect3 id="zend.json.server.details.zendjsonserver">
             <title>Zend_Json_Server</title>
 
             <para>
-                <classname>Zend_Json_Server</classname> ist die Kernklasse von JSON-RPC; die bearbeitet alle Anfragen und
-                gibt den Antwort Payload zurück. Sie hat die folgenden Methoden:
+                <classname>Zend_Json_Server</classname> ist die Kernklasse von JSON-RPC; die
+                bearbeitet alle Anfragen und gibt den Antwort Payload zurück. Sie hat die folgenden
+                Methoden:
             </para>
 
             <itemizedlist>
-                <listitem><para><code>addFunction($function)</code>: Spezifiziert eine benutzerdefinierte
-                        Funktion die dem Server hinzugefügt werden soll.</para></listitem>
+                <listitem>
+                    <para>
+                        <code>addFunction($function)</code>: Spezifiziert eine benutzerdefinierte
+                        Funktion die dem Server hinzugefügt werden soll.
+                    </para>
+                </listitem>
                 <listitem><para><code>setClass($class)</code>: Spezifiziert eine Klasse oder ein Objekt das dem
                         Server hinzugefügt werden soll; alle öffentlichen Methoden dieses Elemente werden als
                         JSON-RPC Methoden bekanntgegeben.</para></listitem>

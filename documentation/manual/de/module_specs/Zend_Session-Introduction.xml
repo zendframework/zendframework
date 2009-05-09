@@ -24,7 +24,7 @@
             url="http://www.php.net/manual/de/reserved.variables.php#reserved.variables.session"><code>$_SESSION[]</code></ulink>
         gespeichert, durch <classname>Zend_Session</classname> verwaltet und durch
         <classname>Zend_Session_Namespace</classname> Zugriffsobjekte individuell verändert werden.
-        <emphasis role="bold">Session Namensräume</emphasis> gestatten den Zugriff auf Session Daten
+        <emphasis>Session Namensräume</emphasis> gestatten den Zugriff auf Session Daten
         durch Verwendung klassischer <ulink
             url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">Namensräume</ulink>
         welche durch logische, namentlich gruppierte, assoziative Arrays, dessen Schlüssel mit

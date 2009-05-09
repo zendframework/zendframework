@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.images">
     <title>Zend_Service_Amazon_Ec2: Amazon Maschinen Images (AMI)</title>
@@ -73,7 +73,7 @@ $ip = $ec2_img->deregister($imageId);
                             <entry><code>public</code></entry>
                             <entry><para>
                                 Der Eigentümer des AMI gibt allen Gruppen das Recht das AMI zu
-                                starten.  Alle Benutzer haben Startberechtigung für diese AMIs.
+                                starten. Alle Benutzer haben Startberechtigung für diese AMIs.
                             </para></entry>
                         </row>
                         <row>

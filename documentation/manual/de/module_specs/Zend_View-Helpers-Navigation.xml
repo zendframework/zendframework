@@ -182,7 +182,7 @@
         Wenn ein Navigations Container nicht explizit in einem Helfer durch Verwendung von
         <code>$helper->setContainer($nav)</code> gesetzt ist, schaut der Helfer in
         <link linkend="zend.registry">der Registry</link> nach einer Container Instanz mit dem
-        Schlüssel <classname>Zend_Navigation</classname>.  Wenn ein Container nicht explizit gesetzt
+        Schlüssel <classname>Zend_Navigation</classname>. Wenn ein Container nicht explizit gesetzt
         wurde, oder nicht in der Registry gefunden wird, erstellt der Helfer einen leeren
         <classname>Zend_Navigation</classname> Container wenn <code>$helper->getContainer()</code>
         aufgerufen wird.

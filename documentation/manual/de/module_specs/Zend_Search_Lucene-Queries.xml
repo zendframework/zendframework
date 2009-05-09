@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -593,7 +593,6 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
         <para>
             Wird nach der Phrase 'zend framework' im 'title' Feld suchen.
         </para>
-
 
         <para>
             Die <classname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</classname> Methode

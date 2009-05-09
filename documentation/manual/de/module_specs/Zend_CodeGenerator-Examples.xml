@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15190 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGenerator Beispiele</title>
@@ -49,7 +49,6 @@ echo $foo->generate();
  */
 class Foo
 {
-
 
 }
 ]]></programlisting>
@@ -124,7 +123,6 @@ class Foo
     public $baz = 'bat';
 
     const bat = 'foobarbazbat';
-
 
 }
 ]]></programlisting>
@@ -248,7 +246,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * Empfängt die bar Eigenschaft
      *
@@ -258,8 +255,6 @@ class Foo
     {
         return $this->_bar;
     }
-
-
 
 }
 ]]></programlisting>
@@ -320,7 +315,6 @@ file_put_contents('Foo.php', $code);
  * @license New BSD
  */
 
-
 /**
  * Beispiel einer erzeugten Klasse
  *
@@ -350,7 +344,6 @@ class Foo
         return $this;
     }
 
-
     /**
      * Retrieve the bar property
      *
@@ -361,10 +354,7 @@ class Foo
         return $this->_bar;
     }
 
-
-
 }
-
 
 define('APPLICATION_ENV', 'testing');
 ]]></programlisting>

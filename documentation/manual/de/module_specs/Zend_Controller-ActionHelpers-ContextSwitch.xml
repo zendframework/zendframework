@@ -201,9 +201,11 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             </listitem>
 
             <listitem>
-                <para><emphasis>callbacks</emphasis>: Ein Array das ein oder mehrere der Schlüssel
-                'init' oder 'post' enthält, die auf gültige PHP Callbacks zeigen und die für die
-                Initialisierung des Contextes und die Nachbearbeitung verwendet werden können.</para>
+                <para>
+                    <emphasis>callbacks</emphasis>: Ein Array das ein oder mehrere der Schlüssel
+                    'init' oder 'post' enthält, die auf gültige PHP Callbacks zeigen und die für die
+                    Initialisierung des Contextes und die Nachbearbeitung verwendet werden können.
+                </para>
 
                 <para>Initialisierungs Callbacks treten auf wenn der Kontext durch
                 <code>ContextSwitch</code> erkannt wird. Sie können verwendet werden um spezielle

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
@@ -383,7 +383,6 @@ abstract class Zend_Search_Lucene_Storage_Directory {
  */
 abstract function close();
 
-
 /**
  * Erstellt im Verzeichnis eine neue, leere Datei mit dem übergebenen Dateinamen $filename.
  *
@@ -391,7 +390,6 @@ abstract function close();
  * @return void
  */
 abstract function createFile($filename);
-
 
 /**
  * Entfernt eine vorhande Datei $filename aus dem Verzeichnis.
@@ -401,7 +399,6 @@ abstract function createFile($filename);
  */
 abstract function deleteFile($filename);
 
-
 /**
  * Gibt true zurück, wenn eine Datei mit dem übergebenen Dateinamen $filename existiert
  *
@@ -409,7 +406,6 @@ abstract function deleteFile($filename);
  * @return boolean
  */
 abstract function fileExists($filename);
-
 
 /**
  * Gibt die länge eine Datei $filename im Verzeichnis zurück
@@ -419,7 +415,6 @@ abstract function fileExists($filename);
  */
 abstract function fileLength($filename);
 
-
 /**
  * Gibt den UNIX Zeitstempel für die letzte Änderung der Datei $filename zurück.
  *
@@ -427,7 +422,6 @@ abstract function fileLength($filename);
  * @return integer
  */
 abstract function fileModified($filename);
-
 
 /**
  * Benennt eine vorhandene Datei im Verzeichnis um.
@@ -438,7 +432,6 @@ abstract function fileModified($filename);
  */
 abstract function renameFile($from, $to);
 
-
 /**
  * Ändert die Änderungstzeit der Datei $filename auf jetzt um
  *
@@ -446,7 +439,6 @@ abstract function renameFile($from, $to);
  * @return void
  */
 abstract function touchFile($filename);
-
 
 /**
  * Gibt ein Zend_Search_Lucene_Storage_File Objekt für den^

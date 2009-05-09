@@ -27,7 +27,7 @@
         <classname>Zend_Validate_Interface</classname> folgern kann, geben die vom Zend Framework
         bereitgestellten Prüfklassen einen boolschen Wert zurück, ob die Prüfung des Wertes
         erfolgreich war oder nicht. Sie geben auch darüber Informationen
-        <emphasis role="bold">warum</emphasis> ein Wert die Prüfung nicht bestanden hat. Die
+        <emphasis>warum</emphasis> ein Wert die Prüfung nicht bestanden hat. Die
         Verfügbarkeit der Gründe für fehlgeschlagene Prüfungen kann für eine Anwendung aus vielen
         Gründen nützlich sein, wie zum Beispiel das zur Verfügung stellen von Statistiken für
         Useability Analysen.
@@ -268,7 +268,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 
             Zu beachten ist das diese vier Testkriterien in <code>isValid()</code> nicht sofort
             <code>false</code> zurückgeben. Das erlaubt der Prüfklasse
-            <emphasis role="bold">alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort
+            <emphasis>alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort
             den Prüfvoraussetzungen nicht entsprochen hat. Wenn, zum Beispiel, ein Benutzer den
             String "<code>#$%</code>" als Passwort angegeben hat, würde <code>isValid()</code> alle
             vier Prüfungfehlermeldungen zurückgeben bei einen nachfolgenden Aufruf von

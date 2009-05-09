@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15346 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.advanced">
     <title>Erweitert</title>
@@ -126,7 +126,6 @@ class Searcher {
 Searcher::initIndex();
 ]]></programlisting>
         </para>
-
 
         <para>
             Auf die gleiche Art und Weise wird der Objektdestruktor für statische Eigenschaften an

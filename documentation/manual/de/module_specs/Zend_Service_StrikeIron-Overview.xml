@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.strikeiron">
     <title>Zend_Service_StrikeIron</title>
@@ -258,7 +258,6 @@ $taxBasic = $strikeIron->getService(array('class' => 'SalesUseTaxBasic'));
 $rateInfo = $taxBasic->getTaxRateCanada(array('province' => 'ontario'));
 print_r($rateInfo);
 ?>
-
 
 Zend_Service_StrikeIron_Decorator Object
 (

@@ -55,15 +55,15 @@
             esperluette (<code>&amp;</code>, "ampersand" en anglais) et guillemet double
             (<code>"</code>) : <programlisting role="php"><![CDATA[
     $htmlEntities = new Zend_Filter_HtmlEntities();
-    
+
     echo $htmlEntities->filter('&'); // &amp;
     echo $htmlEntities->filter('"'); // &quot;
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.filter.introduction.static">
             <title>Utilisation de la méthode statique get()</title>
-    
+
         <para>
             S'il est peu pratique de charger une classe de filtre donnée et créer une instance
             du filtre, vous pouvez utiliser la méthode statique
@@ -76,14 +76,14 @@
             saisie. <programlisting role="php"><![CDATA[
     echo Zend_Filter::get('&', 'HtmlEntities');
     ]]></programlisting></para>
-    
+
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
             classe, s'ils sont nécessaires pour votre classe de filtre. <programlisting
             role="php"><![CDATA[
     echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
     ]]></programlisting></para>
-    
+
         <para>
             L'utilisation statique peut être pratique pour invoquer un filtre ad hoc, mais si
             vous avez besoin d'exécuter un filtre pour des saisies multiples, il est plus efficace

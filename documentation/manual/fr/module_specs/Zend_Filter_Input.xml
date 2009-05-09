@@ -162,7 +162,7 @@ $validators = array(
                 </para>
             </listitem>
         </itemizedlist>
-    
+
         <note>
             <para>
                 Si vous choisissez de déclarer un filtre ou validateur avec des arguments de

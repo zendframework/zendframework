@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.introduction">
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_CodeGenerator</classname> est un outils permettant de générer du code PHP
-        en utilisant une interface orientée objet. Il peut générer ou mettre à jour du code.
-        Il est aussi possible d'étendre ces classes afin de changer le langage de référence
-        pour générer du Javascript, des hôtes virtuels Apache ..., par exemple.
+        <classname>Zend_CodeGenerator</classname> est un outils permettant de générer du code
+        PHP en utilisant une interface orientée objet. Il peut générer ou mettre à jour du code. Il
+        est aussi possible d'étendre ces classes afin de changer le langage de référence pour
+        générer du Javascript, des hôtes virtuels Apache ..., par exemple.
     </para>
 
     <sect2 id="zend.codegenerator.introduction.theory">
         <title>Théorie</title>
 
         <para>
-            Dans la plupart des cas, vous crérez une instance du générateur de code, et vous le configurez.
-            Pour afficher le code généré, un simple echo suffira, ou l'appel à sa méthode <code>generate()</code>.
+            Dans la plupart des cas, vous crérez une instance du générateur de code, et vous
+            le configurez. Pour afficher le code généré, un simple echo suffira, ou l'appel à sa
+            méthode <code>generate()</code>.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -53,9 +55,7 @@ echo $file;
 file_put_contents('World.php', $file->generate());
 ]]></programlisting>
 
-        <para>
-            Les 2 exemples ci-dessus vont rendre le même résultat:
-        </para>
+        <para>Les 2 exemples ci-dessus vont rendre le même résultat&#160;:</para>
 
         <programlisting role="php"><![CDATA[
 <?php
@@ -72,17 +72,17 @@ class World
 ]]></programlisting>
 
         <para>
-            Il est aussi possible de mettre à jour un code existant, par exemple, ajouter une méthode
-            à une classe. Dans ce cas, vous devez inspecter le code existant en utilisant la réflexion,
-            puis ajouter une nouvelle méthode.
-            <classname>Zend_CodeGenerator</classname> rend ceci très simple en utilisant
-            <link linkend="zend.reflection">Zend_Reflection</link>.
+            Il est aussi possible de mettre à jour un code existant, par exemple, ajouter une
+            méthode à une classe. Dans ce cas, vous devez inspecter le code existant en utilisant la
+            réflexion, puis ajouter une nouvelle méthode. <classname>Zend_CodeGenerator</classname>
+            rend ceci très simple en utilisant <link
+            linkend="zend.reflection">Zend_Reflection</link>.
         </para>
 
         <para>
             Par exemple, imaginons que nous avons sauvegardé le code de l'exemple ci-dessus
-            dans un fichier "World.php" que nous avons alors inclus. Nous pourrions dès lors agir comme
-            suit:
+            dans un fichier "World.php" que nous avons alors inclus. Nous pourrions dès lors agir
+            comme suit&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -105,9 +105,7 @@ echo $file;
 file_put_contents('World.php', $file->generate());
 ]]></programlisting>
 
-        <para>
-            La nouvelle classe ressemblera à cà:
-        </para>
+        <para>La nouvelle classe ressemblera à ça&#160;:</para>
 
         <programlisting role="php"><![CDATA[
 <?php

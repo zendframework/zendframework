@@ -33,7 +33,7 @@ class MonFiltre implements Zend_Filter_Interface
 }
 ]]></programlisting>
     </para>
-    
+
     <para>
         Pour ajouter une instance du filtre défini ci-dessus à une chaîne de filtrage&#160;:
         <programlisting role="php"><![CDATA[

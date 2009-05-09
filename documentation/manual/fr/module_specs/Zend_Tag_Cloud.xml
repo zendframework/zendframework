@@ -1,77 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15234 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tag.cloud">
-
     <title>Zend_Tag_Cloud</title>
 
     <para>
         <classname>Zend_Tag_Cloud</classname> est la partie qui s'occupe du rendu dans
-        <classname>Zend_Tag</classname>. par défaut, elle utilise un ensemble de décorateurs HTML
-        , ce qui permet de créer des nuages de tags pour un site, mais elle met aussi à votre
-        disposition 2 classes abstraites vous permettant de créer vos propres rendus, par exemple pour
-        créer des tags rendus en PDF.
+        <classname>Zend_Tag</classname>. par défaut, elle utilise un ensemble de décorateurs HTML ,
+        ce qui permet de créer des nuages de tags pour un site, mais elle met aussi à votre
+        disposition 2 classes abstraites vous permettant de créer vos propres rendus, par exemple
+        pour créer des tags rendus en PDF.
     </para>
 
     <para>
-        Vous pouvez instancier et configurer <classname>Zend_Tag_Cloud</classname> de manière classique,
-        ou via un tableau ou un objet <classname>Zend_Config</classname>. Voici les options disponibles:
+        Vous pouvez instancier et configurer <classname>Zend_Tag_Cloud</classname> de manière
+        classique, ou via un tableau ou un objet <classname>Zend_Config</classname>. Voici les
+        options disponibles:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>cloudDecorator</code>: défini le décorateur du nuage. Ceci peut être un objet,
-                un nom de classe qui sera chargée par pluginloader, une instance de
-                <classname>Zend_Tag_Cloud_Decorator_Cloud</classname> ou un tableau contenant les clés
-                <code>decorator</code> et optionnellement <code>options</code>, qui est elle-même
-                un tableau passé comme options au constructeur du décorateur.
+                <code>cloudDecorator</code>&#160;: défini le décorateur du nuage. Ceci peut être un
+                objet, un nom de classe qui sera chargée par pluginloader, une instance de
+                <classname>Zend_Tag_Cloud_Decorator_Cloud</classname> ou un tableau contenant les
+                clés <code>decorator</code> et optionnellement <code>options</code>, qui est
+                elle-même un tableau passé comme options au constructeur du décorateur.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>tagDecorator</code>: Le décorateur d'un tag individuel. Ceci peut être un objet,
-                un nom de classe qui sera chargée par pluginloader, une instance de
-                <classname>Zend_Tag_Cloud_Decorator_Cloud</classname> ou un tableau contenant les clés
-                <code>decorator</code> et optionnellement <code>options</code>, qui est elle-même
-                un tableau passé comme options au constructeur du décorateur.
+                <code>tagDecorator</code>&#160;: le décorateur d'un tag individuel. Ceci peut être
+                un objet, un nom de classe qui sera chargée par pluginloader, une instance de
+                <classname>Zend_Tag_Cloud_Decorator_Cloud</classname> ou un tableau contenant les
+                clés <code>decorator</code> et optionnellement <code>options</code>, qui est
+                elle-même un tableau passé comme options au constructeur du décorateur.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>pluginLoader</code>: un chargeur de classe à utiliser.
-                Doit implémenter l'interface <classname>Zend_Loader_PluginLoader_Interface</classname>.
+                <code>pluginLoader</code>&#160;: un chargeur de classe à utiliser. Doit implémenter
+                l'interface <classname>Zend_Loader_PluginLoader_Interface</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>prefixPath</code>: prefixes de chemins à ajouter au chargeur de classes.
+                <code>prefixPath</code>&#160;: préfixes de chemins à ajouter au chargeur de classes.
                 Doit être un tableau contenant les préfixes et les chemins. Les éléments invalides
                 seront ignorés.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>itemList</code>: une liste d'entités à utiliser. Doit être instance de
-                <classname>Zend_Tag_ItemList</classname>.
+                <code>itemList</code>&#160;: une liste d'entités à utiliser. Doit être une instance
+                de <classname>Zend_Tag_ItemList</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>tags</code>: une liste de tags à assigner au nuage. Chacun doit implémenter
-                <classname>Zend_Tag_Taggable</classname> ou être un tableau qui pourra être utilisé pour
-                instancier <classname>Zend_Tag_Item</classname>.
+                <code>tags</code>&#160;: une liste de tags à assigner au nuage. Chacun doit
+                implémenter <classname>Zend_Tag_Taggable</classname> ou être un tableau qui pourra
+                être utilisé pour instancier <classname>Zend_Tag_Item</classname>.
             </para>
         </listitem>
     </itemizedlist>
 
     <example id="zend.tag.cloud.example.using">
-
         <title>Utiliser Zend_Tag_Cloud</title>
 
         <para>
-            Cet exemple illustre les manipulations de base pour créer un nuage de tags, ajouter des tags et afficher
-            le rendu.
+            Cet exemple illustre les manipulations de base pour créer un nuage de tags,
+            ajouter des tags et afficher le rendu.
         </para>
+
         <programlisting role="php"><![CDATA[
 // Crée un nuage et assigne des tags statiques
 $cloud = new Zend_Tag_Cloud(array(
@@ -88,105 +94,111 @@ $cloud = new Zend_Tag_Cloud(array(
 // Rendu du nuage
 echo $cloud;
 ]]></programlisting>
-        <para>
-            Ceci affichera le nuage de tags, avec les polices par défaut.
-        </para>
+
+        <para>Ceci affichera le nuage de tags, avec les polices par défaut.</para>
     </example>
 
     <sect2 id="zend.tag.cloud.decorators">
-
         <title>Decorateurs</title>
 
         <para>
-            <classname>Zend_Tag_Cloud</classname> a besoin de 2 types de décorateurs afin de rendre
-            le nuage. Un décorateur pour rendre chacun des tags, et un décorateur pour rendre le nuage lui-même.
-            <classname>Zend_Tag_Cloud</classname> propose un décorateur par défaut qui formate le nuage en HTML.
-            Il utilise par défaut des listes ul/li et des tailles de polices différentes selon les poids des tags.
+            <classname>Zend_Tag_Cloud</classname> a besoin de 2 types de décorateurs afin de
+            rendre le nuage. Un décorateur pour rendre chacun des tags, et un décorateur pour rendre
+            le nuage lui-même. <classname>Zend_Tag_Cloud</classname> propose un décorateur par
+            défaut qui formate le nuage en HTML. Il utilise par défaut des listes ul/li et des
+            tailles de polices différentes selon les poids des tags.
         </para>
 
         <sect3 id="zend.tag.cloud.decorators.htmltag">
-
             <title>Décorateur HTML</title>
 
             <para>
-                Le décorateur HTML va rendre chaque tag dans un élément ancré, entouré d'un élément li.
-                L'ancre est fixe et ne peut être changée, mais l'élément peut lui l'être.
+                Le décorateur HTML va rendre chaque tag dans un élément ancré, entouré d'un
+                élément li. L'ancre est fixe et ne peut être changée, mais l'élément peut lui
+                l'être.
             </para>
 
             <note>
                 <title>Paramètre d'URL</title>
+
                 <para>
-                    Une ancre étant ajoutée à chaque tag, vous devez spécifier une URL pour chacun d'eux.
+                    Une ancre étant ajoutée à chaque tag, vous devez spécifier une URL pour
+                    chacun d'eux.
                 </para>
             </note>
 
             <para>
-                Le décorateur de tags peut utiliser des tailles de police différentes pour chaque ancre,
-                ou pour chaque classe de liste. Les options suivantes sont disponibles:
+                Le décorateur de tags peut utiliser des tailles de police différentes pour
+                chaque ancre, ou pour chaque classe de liste. Les options suivantes sont
+                disponibles:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>fontSizeUnit</code>: définit l'unité utilisée dans la taille des polices.
-                        em, ex, px, in, cm, mm, pt, pc et &#37;.
+                        <code>fontSizeUnit</code>&#160;: définit l'unité utilisée dans la taille des
+                        polices. em, ex, px, in, cm, mm, pt, pc et %.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>minFontSize</code>: Taille minimale de la police (poids le plus faible)
-                        (doit être un entier).
+                        <code>minFontSize</code>&#160;: Taille minimale de la police (poids le plus
+                        faible) (doit être un entier).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>maxFontSize</code>: Taille maximale de la police (poids le plus fort)
-                        (doit être un entier).
+                        <code>maxFontSize</code>&#160;: Taille maximale de la police (poids le plus
+                        fort) (doit être un entier).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>classList</code>: un tableau de classes utilisées dans les tags.
+                        <code>classList</code>&#160;: un tableau de classes utilisées dans les
+                        tags.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: un tableau de tags HTML entourant l'ancre. Chaque élément
-                        peut être une chaine de caractères, utilisée comme type d'élément, ou un tableau
-                        contenant une liste d'attributs pour l'élément. La clé du tableau est alors utlisée
-                        pour définir le type de l'élément.
+                        <code>htmlTags</code>&#160;: un tableau de tags HTML entourant l'ancre.
+                        Chaque élément peut être une chaine de caractères, utilisée comme type
+                        d'élément, ou un tableau contenant une liste d'attributs pour l'élément. La
+                        clé du tableau est alors utlisée pour définir le type de l'élément.
                     </para>
                 </listitem>
             </itemizedlist>
         </sect3>
 
         <sect3 id="zend.tag.cloud.decorators.htmlcloud">
-
             <title>Décorateur HTML de nuage</title>
 
             <para>
-                Le décorateur HTML de nuage va entourer les tags avec une balise ul.
-                Vous pouvez changer la balise, en utiliser plusieurs, utiliser un séparateur.
-                Voici les options:
+                Le décorateur HTML de nuage va entourer les tags avec une balise ul. Vous
+                pouvez changer la balise, en utiliser plusieurs, utiliser un séparateur. Voici les
+                options:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>separator</code>: définit le séparateur utilisé entre chaque tag.
+                        <code>separator</code>&#160;: définit le séparateur utilisé entre chaque
+                        tag.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: un tableau de balises HTML entourant chaque tag.
-                        Chaque élément peut être une chaine de caractères, utilisée comme type
-                        d'élément, ou un tableau contenant une liste d'attributs pour l'élément.
-                        La clé du tableau est alors utlisée pour définir le type de l'élément.
+                        <code>htmlTags</code>&#160;: un tableau de balises HTML entourant chaque
+                        tag. Chaque élément peut être une chaine de caractères, utilisée comme type
+                        d'élément, ou un tableau contenant une liste d'attributs pour l'élément. La
+                        clé du tableau est alors utlisée pour définir le type de l'élément.
                     </para>
                 </listitem>
             </itemizedlist>
         </sect3>
-
     </sect2>
-
 </sect1>

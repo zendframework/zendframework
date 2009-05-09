@@ -744,6 +744,28 @@ class Zend_Controller_Router_RouteTest extends PHPUnit_Framework_TestCase
             $this->assertEquals('Could not find a translator', $e->getMessage());
         }
     }
+    
+    public function testEscapedSpecialCharsWithoutTranslation()
+    {
+        $route = new Zend_Controller_Router_Route('::foo/@@bar/:foo');
+        
+        $path = $route->assemble(array('foo' => 'bar'));
+        $this->assertEquals($path, ':foo/@bar/bar');
+        
+        $values = $route->match(':foo/@bar/bar');
+        $this->assertEquals($values['foo'], 'bar');
+    }
+    
+    public function testEscapedSpecialCharsWithTranslation()
+    {
+        $route = new Zend_Controller_Router_Route('::foo/@@bar/:@myvar');
+        
+        $path = $route->assemble(array('myvar' => 'foo'));
+        $this->assertEquals($path, ':foo/@bar/en_foo');
+        
+        $values = $route->match(':foo/@bar/en_foo');
+        $this->assertEquals($values['myvar'], 'foo');
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Controller_Router_RouteTests::main') {

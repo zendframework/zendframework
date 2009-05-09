@@ -9,6 +9,23 @@
         migrate your scripts to use the new architecture.
     </para>
 
+    <sect2 id="zend.controller.migration.fromoneseventooneeight">
+        <title>Migrating from 1.7.x to 1.8.0 or newer</title>
+
+        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
+            <title>Standard Route Changes</title>
+
+            <para>
+                As translated segements were introduced into the new standard
+                route, the <code>@</code> character is no a special character
+                in the beginning of a route segment. To be able to use it in a
+                static segment, you must escape it by prefixing it with  second
+                <code>@</code> character. The same rule now applies for the
+                <code>:</code> character.
+            </para>
+        </sect3>
+    </sect2>
+
     <sect2 id="zend.controller.migration.fromonesixtooneseven">
         <title>Migrating from 1.6.x to 1.7.0 or newer</title>
 

@@ -165,10 +165,10 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
         if ($route !== '') {
             foreach (explode($this->_urlDelimiter, $route) as $pos => $part) {
-                if (substr($part, 0, 1) == $this->_urlVariable) {
+                if (substr($part, 0, 1) == $this->_urlVariable && substr($part, 1, 1) != $this->_urlVariable) {
                     $name = substr($part, 1);
 
-                    if (substr($name, 0, 1) === '@') {
+                    if (substr($name, 0, 1) === '@' && substr($name, 1, 1) !== '@') {
                         $name                  = substr($name, 1);
                         $this->_translatable[] = $name;
                         $this->_isTranslated   = true;
@@ -177,7 +177,11 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                     $this->_parts[$pos]     = (isset($reqs[$name]) ? $reqs[$name] : $this->_defaultRegex);
                     $this->_variables[$pos] = $name;
                 } else {
-                    if (substr($part, 0, 1) === '@') {
+                    if (substr($part, 0, 1) == $this->_urlVariable) {
+                        $part = substr($part, 1);
+                    }
+                    
+                    if (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@') {
                         $this->_isTranslated = true;
                     }
                     
@@ -244,14 +248,18 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
                 // Translate value if required
                 $part = $this->_parts[$pos];
-                if ($this->_isTranslated && (substr($part, 0, 1) === '@' && $name === null) || $name !== null && in_array($name, $this->_translatable)) {
+                if ($this->_isTranslated && (substr($part, 0, 1) === '@' && substr($part, 1, 1) !== '@' && $name === null) || $name !== null && in_array($name, $this->_translatable)) {
                     if (substr($part, 0, 1) === '@') {
                         $part = substr($part, 1);
                     }
-
+                    
                     if (($originalPathPart = array_search($pathPart, $translateMessages)) !== false) {
                         $pathPart = $originalPathPart;
                     }
+                }
+                
+                if (substr($part, 0, 2) === '@@') {
+                    $part = substr($part, 1);
                 }
 
                 // If it's a static part, match directly
@@ -348,8 +356,16 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 } 
             } elseif ($part != '*') {
                 if ($this->_isTranslated && substr($part, 0, 1) === '@') {
-                    $url[$key] = $translator->translate(substr($part, 1), $locale);
+                    if (substr($part, 1, 1) !== '@') {
+                        $url[$key] = $translator->translate(substr($part, 1), $locale);
+                    } else {
+                        $url[$key] = substr($part, 1);
+                    }
                 } else {
+                    if (substr($part, 0, 2) === '@@') {
+                        $part = substr($part, 1);
+                    }
+                    
                     $url[$key] = $part;
                 }
             } else {

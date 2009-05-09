@@ -5,12 +5,13 @@
     <title>Abfrage Erzeugungs API</title>
 
     <para>
-        Zusätzlich zum automatischen Analysieren vom Abfragen ist es auch möglich diese durch eine API zu erzeugen.
+        Zusätzlich zum automatischen Analysieren vom Abfragen ist es auch möglich diese durch eine
+        API zu erzeugen.
     </para>
 
     <para>
-        Benutzerabfragen können mit Abfragen die durch die API erstellte wurden kombiniert werden. Einfach den
-        Abfrageparser verwenden um eine Abfrage von einem String zu erstellen:
+        Benutzerabfragen können mit Abfragen die durch die API erstellte wurden kombiniert werden.
+        Einfach den Abfrageparser verwenden um eine Abfrage von einem String zu erstellen:
         <programlisting role="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
@@ -23,18 +24,19 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene_Exception</classname> wird geworfen wenn irgendwas im Abfrageparser
-                        selbst falsch läuft.
+                        <classname>Zend_Search_Lucene_Exception</classname> wird geworfen wenn
+                        irgendwas im Abfrageparser selbst falsch läuft.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <classname>Zend_Search_Lucene_Search_QueryParserException</classname> wird geworfen wenn ein
-                        Fehler im Syntax der Abfrage ist.
+                        <classname>Zend_Search_Lucene_Search_QueryParserException</classname> wird
+                        geworfen wenn ein Fehler im Syntax der Abfrage ist.
                     </para>
                 </listitem>
             </itemizedlist>
-            Es ist eine gute Idee die <classname>Zend_Search_Lucene_Search_QueryParserException</classname>s abzufangen und
+            Es ist eine gute Idee die
+            <classname>Zend_Search_Lucene_Search_QueryParserException</classname>s abzufangen und
             richtig abzuarbeiten:
             <programlisting role="php"><![CDATA[
 try {
@@ -46,18 +48,21 @@ try {
         </para>
 
         <para>
-            Die selbe Technik sollte für die find() Methode des <classname>Zend_Search_Lucene</classname> Objektes verwendet werden.
+            Die selbe Technik sollte für die find() Methode des
+            <classname>Zend_Search_Lucene</classname> Objektes verwendet werden.
         </para>
 
         <para>
-            Beginnend mit 1.5 werden Abfrageparser Exceptions standardmäßig unterdrückt. Wenn eine Abfrage
-            nicht konform mit der Abfragesprache ist, dann wird Sie mithilfe des aktuellen Standardanalysators
-            gestückelt und alle Begriffsstücke werden für die Suche verwendet.
-            Die <classname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</classname> Methode
-            kann verwendet werden um Exceptions einzuschalten. Die
-            <classname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</classname> und
-            <classname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</classname> Methoden
-            sind auch dazu gedacht das Verhalten der Exceptionsbehandlung zu verwalten.
+            Beginnend mit 1.5 werden Abfrageparser Exceptions standardmäßig unterdrückt. Wenn eine
+            Abfrage nicht konform mit der Abfragesprache ist, dann wird Sie mithilfe des aktuellen
+            Standardanalysators gestückelt und alle Begriffsstücke werden für die Suche verwendet.
+            Die
+            <classname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</classname>
+            Methode kann verwendet werden um Exceptions einzuschalten. Die
+            <classname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</classname>
+            und
+            <classname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</classname>
+            Methoden sind auch dazu gedacht das Verhalten der Exceptionsbehandlung zu verwalten.
         </para>
 
     </sect2>
@@ -87,8 +92,8 @@ $hits  = $index->find($query);
 ]]></programlisting>
 
         <para>
-            Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle indizierten Felder in jedem
-            Dokument wenn das Feld nicht spezifiziert
+            Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
+            indizierten Felder in jedem Dokument wenn das Feld nicht spezifiziert
             wurde:
             <programlisting role="php"><![CDATA[
 // Sucht nach 'word1' in allen indizierten Feldern
@@ -135,9 +140,9 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Wenn einer Abfrage mit notwendigen Begriffen optionale Betriffe hinzugefügt werden, werden beide
-            Abfragen das gleiche Set an Ergebnissen haben, aber der optionale Begriff kann die Bewertung
-            der passenden Dokumente beeinflussen.
+            Wenn einer Abfrage mit notwendigen Begriffen optionale Betriffe hinzugefügt werden,
+            werden beide Abfragen das gleiche Set an Ergebnissen haben, aber der optionale Begriff
+            kann die Bewertung der passenden Dokumente beeinflussen.
         </para>
 
         <para>
@@ -164,8 +169,8 @@ $hits  = $index->find($query);
             </listitem>
             <listitem>
                 <para>
-                    Der 'field:' Präfix wird für die Angabe des Dokumentenfelds für die Suche verwendet.
-                    Wenn er weggelassen wird, werden alle Felder durchsucht.
+                    Der 'field:' Präfix wird für die Angabe des Dokumentenfelds für die Suche
+                    verwendet. Wenn er weggelassen wird, werden alle Felder durchsucht.
                 </para>
             </listitem>
         </itemizedlist>
@@ -187,7 +192,8 @@ $hits  = $index->find($query);
 ]]></programlisting>
 
         <para>
-            Es ist auch möglich Begriffslisten in einem MultiTerm Anfrage Konstruktor zu spezifizieren:
+            Es ist auch möglich Begriffslisten in einem MultiTerm Anfrage Konstruktor zu
+            spezifizieren:
             <programlisting role="php"><![CDATA[
 $terms = array(new Zend_Search_Lucene_Index_Term('word1'),
                new Zend_Search_Lucene_Index_Term('word2', 'author'),
@@ -215,7 +221,8 @@ $hits  = $index->find($query);
                 </listitem>
                 <listitem>
                     <para>
-                        <code>null</code> wird für weder notwendige noch verbotene Begriffe verwendet.
+                        <code>null</code> wird für weder notwendige noch verbotene Begriffe
+                        verwendet.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -225,8 +232,8 @@ $hits  = $index->find($query);
     <sect2 id="zend.search.lucene.queries.boolean-query">
         <title>Boolsche Abfragen</title>
         <para>
-            Boolsche Abfragen erlauben die Erstellung von Abfragen die andere Abfragen und boolsche Operatoren
-            verwenden.
+            Boolsche Abfragen erlauben die Erstellung von Abfragen die andere Abfragen und boolsche
+            Operatoren verwenden.
         </para>
 
         <para>

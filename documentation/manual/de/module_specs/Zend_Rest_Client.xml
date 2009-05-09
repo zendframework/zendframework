@@ -6,11 +6,12 @@
     <sect2 id="zend.rest.client.introduction">
         <title>Einführung</title>
         <para>
-            Die Verwendung von <classname>Zend_Rest_Client</classname> ist sehr Ähnlich der Verwendung von
-            <code>SoapClient</code> Objekten (
-            <ulink url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>). Man kann einfach die REST
-            Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden aufrufen. Spezifiziere die komplette
-            Adresse des Services im Constructor von <classname>Zend_Rest_Client</classname>.
+            Die Verwendung von <classname>Zend_Rest_Client</classname> ist sehr Ähnlich der
+            Verwendung von <code>SoapClient</code> Objekten (
+            <ulink url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>). Man kann
+            einfach die REST Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden
+            aufrufen. Spezifiziere die komplette Adresse des Services im Constructor von
+            <classname>Zend_Rest_Client</classname>.
         </para>
 
         <example id="zend.rest.client.introduction.example-1">
@@ -29,10 +30,11 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
         <note>
             <title>Unterschiede im Aufruf</title>
             <para>
-                <classname>Zend_Rest_Client</classname> versucht das die entfernten Methoden, so weit wie möglich, wie die
-                nativen Methoden aussehen, wobei der einzige Unterschied darin besteht das der Methodenaufruf mit
-                <code>get()</code>, <code>post()</code>, <code>put()</code> oder <code>delete()</code> erfolgen muß.
-                Dieser Aufruf kann entweder über Methoden Verkettung oder in eigenen Methodenaufrufen erfolgen:
+                <classname>Zend_Rest_Client</classname> versucht das die entfernten Methoden, so
+                weit wie möglich, wie die nativen Methoden aussehen, wobei der einzige Unterschied
+                darin besteht das der Methodenaufruf mit <code>get()</code>, <code>post()</code>,
+                <code>put()</code> oder <code>delete()</code> erfolgen muß. Dieser Aufruf kann
+                entweder über Methoden Verkettung oder in eigenen Methodenaufrufen erfolgen:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -46,15 +48,15 @@ echo $client->get();
         <title>Antworten</title>
 
         <para>
-            Alle Anfragen die über <classname>Zend_Rest_Client</classname> gemacht wurden, retournieren ein
-            <classname>Zend_Rest_Client_Response</classname> Objekt. Dieses Objekt hat viele Eigenschaften was es einfacher
-            macht auf die Ergebnisse zuzugreifen.
+            Alle Anfragen die über <classname>Zend_Rest_Client</classname> gemacht wurden,
+            retournieren ein <classname>Zend_Rest_Client_Response</classname> Objekt. Dieses Objekt
+            hat viele Eigenschaften was es einfacher macht auf die Ergebnisse zuzugreifen.
         </para>
 
         <para>
-            Wenn ein Service auf <classname>Zend_Rest_Server</classname> basiert, kann <classname>Zend_Rest_Client</classname> einige
-            Annahmen über die Antwort treffen, inklusive dem Antwort Status (erfolgreich oder fehlerhaft) und den
-            Rückgabetyp.
+            Wenn ein Service auf <classname>Zend_Rest_Server</classname> basiert, kann
+            <classname>Zend_Rest_Client</classname> einige Annahmen über die Antwort treffen,
+            inklusive dem Antwort Status (erfolgreich oder fehlerhaft) und den Rückgabetyp.
         </para>
 
         <example id="zend.rest.client.return.example-1">
@@ -70,18 +72,21 @@ if ($result->isSuccess()) {
 
         <para>
             Im obigen Beispiel kann man sehen das das Anfrage Ergebnis als Objekt verwendet wird, um
-            <code>isSuccess()</code> aufzurufen, und dann kann das Objekt wegen <code>__toString()</code> einfach
-            ausgegeben (<code>echo</code>) werden um das Ergebnis zu erhalten. <classname>Zend_Rest_Client_Response</classname>
-            erlaubt die Ausgabe jedes skalaren Wertes. Für komplexe Typen, kann entweder die Array oder die Objekt
+            <code>isSuccess()</code> aufzurufen, und dann kann das Objekt wegen
+            <code>__toString()</code> einfach ausgegeben (<code>echo</code>) werden um das Ergebnis
+            zu erhalten. <classname>Zend_Rest_Client_Response</classname> erlaubt die Ausgabe jedes
+            skalaren Wertes. Für komplexe Typen, kann entweder die Array oder die Objekt
             Schreibweise verwendet werden.
         </para>
 
         <para>
-            Wenn trotzdem, ein Service abgefragt wird der nicht <classname>Zend_Rest_Server</classname> verwendet, wird sich
-            das <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie ein <code>SimpleXMLElement</code> verhalten.
-            Um die Dinge trotzdem einfacher zu gestalten, wird das XML automatisch abgefragt, indem XPath verwendet
-            wird wenn die Eigenschaft nicht von direkter Abstammung des Dokument Root Elements ist. Zusätzlich,
-            wenn auf eine Eigenschaft als Methode zugegriffen wird, empfängt man den PHP Wert für das Objekt, oder
+            Wenn trotzdem, ein Service abgefragt wird der nicht
+            <classname>Zend_Rest_Server</classname> verwendet, wird sich das
+            <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie ein
+            <code>SimpleXMLElement</code> verhalten. Um die Dinge trotzdem einfacher zu gestalten,
+            wird das XML automatisch abgefragt, indem XPath verwendet wird wenn die Eigenschaft
+            nicht von direkter Abstammung des Dokument Root Elements ist. Zusätzlich, wenn auf eine
+            Eigenschaft als Methode zugegriffen wird, empfängt man den PHP Wert für das Objekt, oder
             ein Array mit den PHP Wert Ergebnissen.
         </para>
 
@@ -137,18 +142,18 @@ echo $result->firstname() .' '. $result->lastname();
         </example>
 
         <para>
-            Hier greifen wir auf die <code>firstname</code> und <code>lastname</code> Eigenschaften zu. Selbst wenn
-            diese keine Top-Level Elemente sind, werden Sie automatisch zurückgegeben wenn auf Sie durch Ihren Namen
-            zugegriffen wird.
+            Hier greifen wir auf die <code>firstname</code> und <code>lastname</code> Eigenschaften
+            zu. Selbst wenn diese keine Top-Level Elemente sind, werden Sie automatisch
+            zurückgegeben wenn auf Sie durch Ihren Namen zugegriffen wird.
         </para>
 
         <note>
             <title>Mehrfache Teile</title>
 
             <para>
-                Wenn mehrfache Teile gefunden werden wenn auf man einen Wert durch seinen Namen zugreift, wird ein
-                Array von SimpleXMLElementen zurückgegeben; beim Zugriff über die Methodenschreibweise wird ein
-                Array von PHP Werten zurückgegeben.
+                Wenn mehrfache Teile gefunden werden wenn auf man einen Wert durch seinen Namen
+                zugreift, wird ein Array von SimpleXMLElementen zurückgegeben; beim Zugriff über die
+                Methodenschreibweise wird ein Array von PHP Werten zurückgegeben.
             </para>
         </note>
     </sect2>
@@ -157,13 +162,14 @@ echo $result->firstname() .' '. $result->lastname();
         <title>Anfrage Argumente</title>
 
         <para>
-            Wenn man keine Anfrage an einen <classname>Zend_Rest_Server</classname> basierenden Server durchführt, sind die
-            Chancen groß das man mehrere Argumente mit der Anfrage senden muß. Das wird durchgeführt indem man eine
-            Methode mit dem Namen des Arguments aufruft, und den Wert als das erste (und einzige) Argument übergibt.
-            Jeder dieser Methodenaufrufe gibt das Objekt selbst zurück, was Verkettung oder "flüssige" Verwendung
-            erlaubt. Der erste Aufruf, oder das erste Argument das übergeben wird, wenn man mehr als ein Argument
-            übergeben will, wird immer als die Methode angenommen wenn ein <classname>Zend_Rest_Server</classname> Service
-            aufgerufen wird.
+            Wenn man keine Anfrage an einen <classname>Zend_Rest_Server</classname> basierenden
+            Server durchführt, sind die Chancen groß das man mehrere Argumente mit der Anfrage
+            senden muß. Das wird durchgeführt indem man eine Methode mit dem Namen des Arguments
+            aufruft, und den Wert als das erste (und einzige) Argument übergibt. Jeder dieser
+            Methodenaufrufe gibt das Objekt selbst zurück, was Verkettung oder "flüssige" Verwendung
+            erlaubt. Der erste Aufruf, oder das erste Argument das übergeben wird, wenn man mehr als
+            ein Argument übergeben will, wird immer als die Methode angenommen wenn ein
+            <classname>Zend_Rest_Server</classname> Service aufgerufen wird.
         </para>
 
         <example id="zend.rest.client.args.example-1">
@@ -188,19 +194,20 @@ $client->arg('value1')->arg2('value2')->get();
         </para>
 
         <para>
-            Es gilt zu bemerken das der erste Aufruf von <code>$client->arg('value1');</code> in beidem resultiert
-            <code>method=arg&amp;arg1=value1</code> und <code>arg=value1</code>; Es ist so das
-            <classname>Zend_Rest_Server</classname> die Anfrage korrekt versteht, anstatt das vor-definiertes Wissen über das
-            Service benötigt wird.
+            Es gilt zu bemerken das der erste Aufruf von <code>$client->arg('value1');</code> in
+            beidem resultiert <code>method=arg&amp;arg1=value1</code> und <code>arg=value1</code>;
+            Es ist so das <classname>Zend_Rest_Server</classname> die Anfrage korrekt versteht,
+            anstatt das vor-definiertes Wissen über das Service benötigt wird.
         </para>
 
         <warning>
             <title>Striktheit von Zend_Rest_Client</title>
 
             <para>
-                Jeder REST Service der strikt in seinen Argumenten ist die er empfängt wird wegen dem oben
-                beschriebenen Verhalten bei der Verwendung von <classname>Zend_Rest_Client</classname> fehlschlagen.
-                Das ist keine gewöhnliche Praxis und sollte keine Probleme verursachen.
+                Jeder REST Service der strikt in seinen Argumenten ist die er empfängt wird wegen
+                dem oben beschriebenen Verhalten bei der Verwendung von
+                <classname>Zend_Rest_Client</classname> fehlschlagen. Das ist keine gewöhnliche
+                Praxis und sollte keine Probleme verursachen.
             </para>
         </warning>
     </sect2>

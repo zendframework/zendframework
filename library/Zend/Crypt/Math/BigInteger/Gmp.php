@@ -12,19 +12,17 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * This class forms part of a proposal for the Zend Framework. The attached
- * copyright will be transferred to Zend Technologies USA Inc. upon future
- * acceptance of that proposal:
- *      http://framework.zend.com/wiki/pages/viewpage.action?pageId=20369
- *
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage Math
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-/** Zend_Crypt_Math_BigInteger_Interface */
+/**
+ * @see Zend_Crypt_Math_BigInteger_Interface
+ */
 require_once 'Zend/Crypt/Math/BigInteger/Interface.php';
 
 /**
@@ -35,8 +33,7 @@ require_once 'Zend/Crypt/Math/BigInteger/Interface.php';
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Math
- * @author     Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Crypt_Math_BigInteger_Gmp implements Zend_Crypt_Math_BigInteger_Interface

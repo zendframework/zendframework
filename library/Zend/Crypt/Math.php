@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -15,14 +14,23 @@
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @subpackage Math
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Math.php 151 2008-06-16 16:50:42Z padraic $
+ * @version    $Id$
  */
 
-/** Zend_Crypt_Math_BigInteger */
+/**
+ * @see Zend_Crypt_Math_BigInteger
+ */
 require_once 'Zend/Crypt/Math/BigInteger.php';
 
+/**
+ * @category   Zend
+ * @package    Zend_Crypt
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
 class Zend_Crypt_Math extends Zend_Crypt_Math_BigInteger
 {
 

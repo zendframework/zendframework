@@ -12,21 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * This class forms part of a proposal for the Zend Framework. The attached
- * copyright will be transferred to Zend Technologies USA Inc. upon future
- * acceptance of that proposal:
- *      http://framework.zend.com/wiki/pages/viewpage.action?pageId=20369
- *
  * @category   Zend
  * @package    Zend_Crypt
  * @subpackage Math
- * @copyright  Copyright (c) 2007 Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
-
-
-/** Zend_Crypt_Math_BigInteger_Interface */
-require_once 'Zend/Crypt/Math/BigInteger/Interface.php';
 
 /**
  * Support for arbitrary precision mathematics in PHP.
@@ -46,8 +38,7 @@ require_once 'Zend/Crypt/Math/BigInteger/Interface.php';
  *
  * @category   Zend
  * @package    Zend_Crypt
- * @subpackage Math
- * @author     Pádraic Brady (http://blog.astrumfutura.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Crypt_Math_BigInteger
@@ -56,7 +47,7 @@ class Zend_Crypt_Math_BigInteger
     /**
      * Holds an instance of one of the three arbitrary precision wrappers.
      *
-     * @var Zend_Math_BigInteger_Interface
+     * @var Zend_Crypt_Math_BigInteger_Interface
      */
     protected $_math = null;
 
@@ -65,7 +56,8 @@ class Zend_Crypt_Math_BigInteger
      * arbitrary precision math and instantiates the suitable wrapper
      * object.
      *
-     * @throws  Zend_Math_BigInteger_Exception
+     * @param string $extension
+     * @throws  Zend_Crypt_Math_BigInteger_Exception
      */
     public function __construct($extension = null)
     {
@@ -92,6 +84,10 @@ class Zend_Crypt_Math_BigInteger
         return call_user_func_array(array($this->_math, $methodName), $args);
     }
 
+    /**
+     * @param string $extension
+     * @throws  Zend_Crypt_Math_BigInteger_Exception
+     */
     protected function _loadAdapter($extension = null)
     {
         if (is_null($extension)) {

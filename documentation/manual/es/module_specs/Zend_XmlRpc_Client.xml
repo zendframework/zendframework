@@ -450,16 +450,16 @@ try {
             <para>
                 Cuando el método <code>call()</code> es usado para realizar la
                 petición, <code>Zend_XmlRpc_Client_FaultException</code> será
-				lanzado como error. Un objeto <code>Zend_XmlRpc_Response</code> conteniendo
-				el error estará disponible llamando a
+                lanzado como error. Un objeto <code>Zend_XmlRpc_Response</code> conteniendo
+                el error estará disponible llamando a
                 <code>getLastResponse()</code>.
             </para>
 
             <para>
                 Cuando el método <code>doRequest()</code> sea usado para realizar una
-				petición, no lanzará una excepción. En vez de eso, devolverá un objeto
-				<code>Zend_XmlRpc_Response</code> que contendrá el error.
-				Esto puede comprobarse con
+                petición, no lanzará una excepción. En vez de eso, devolverá un objeto
+                <code>Zend_XmlRpc_Response</code> que contendrá el error.
+                Esto puede comprobarse con
                 <code>isFault()</code> método instancia de
                 <code>Zend_XmlRpc_Response</code>.
             </para>

@@ -11,12 +11,12 @@
         <title>Notación de array</title>
 
         <para>
-        	Muchos desarroladores web experimentados les gusta agrupar relacionados elementos de formulario
-        	usando notación de array en los nombres del elemento. Por ejemplo, si se tiene
-        	dos direcciones que se desea capturar, un envio y una dirección de facturación,
-        	se puede tener elementos idénticos; agrupandolos en un array se puede
-        	asegurar que son capturados por separado. Notese el siguiente formulario
-        	por ejemplo:
+            Muchos desarroladores web experimentados les gusta agrupar relacionados elementos de formulario
+            usando notación de array en los nombres del elemento. Por ejemplo, si se tiene
+            dos direcciones que se desea capturar, un envio y una dirección de facturación,
+            se puede tener elementos idénticos; agrupandolos en un array se puede
+            asegurar que son capturados por separado. Notese el siguiente formulario
+            por ejemplo:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -73,11 +73,11 @@
 </programlisting>
 
         <para>
-        	En este ejemplo, la facturación y la dirección de envío contienen algunos
-        	campos idénticos, eso significa uno puede sobre escribir al otro. Nosotros podemos
-        	resolver esta solución usando una notación de array:
+            En este ejemplo, la facturación y la dirección de envío contienen algunos
+            campos idénticos, eso significa uno puede sobre escribir al otro. Nosotros podemos
+            resolver esta solución usando una notación de array:
 
-        	In this example, the billing and shipping address contain some
+            In this example, the billing and shipping address contain some
             identical fields, which means one would overwrite the other. We can
             solve this solution using array notation:
         </para>
@@ -146,14 +146,14 @@
 </programlisting>
 
         <para>
-        	En el ejemplo anterior, obtenemos separadas direcciones. En el formulario
-        	sometido, ahora tenemos tres elementos, 'guardar' elemento para someterlo,
-        	y dos arrays, 'envio' y 'cuenta', cada uno con
-        	llaves para los variados elementos.
+            En el ejemplo anterior, obtenemos separadas direcciones. En el formulario
+            sometido, ahora tenemos tres elementos, 'guardar' elemento para someterlo,
+            y dos arrays, 'envio' y 'cuenta', cada uno con
+            llaves para los variados elementos.
         </para>
 
         <para>
-        	<code>Zend_Form</code> intenta automatizar este proceso con los
+            <code>Zend_Form</code> intenta automatizar este proceso con los
             <link linkend="zend.form.forms.subforms">sub formularios</link>. Por
             defecto, los sub formularios son generados usando la notación de array como se muestra
             en el anterior formulario HTML listado completo con identificadores. El nombre del array
@@ -168,18 +168,18 @@
         </para>
 
         <para>
-        	Adicionalmente, existen facilidades que le permiten activar condicionalmente la notación
-        	de un array, así como también especificar el específico array al
-        	cual un elemento o coleccion pertenece:
+            Adicionalmente, existen facilidades que le permiten activar condicionalmente la notación
+            de un array, así como también especificar el específico array al
+            cual un elemento o coleccion pertenece:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                	<code>Zend_Form::setIsArray($flag)</code>: Definiendo la
-                	bandera a verdadero, se puede indicar que un entero formulario deberia ser
-                	tratado como un array. Por defecto, el nombre del formulario será
-                	usado como el nombre del array, a no ser que
+                    <code>Zend_Form::setIsArray($flag)</code>: Definiendo la
+                    bandera a verdadero, se puede indicar que un entero formulario deberia ser
+                    tratado como un array. Por defecto, el nombre del formulario será
+                    usado como el nombre del array, a no ser que
                     <code>setElementsBelongTo()</code> haya sido llamado. si el
                     formulario no tiene un específico nombre, o si
                     <code>setElementsBelongTo()</code> no ha sido definido, esta bandera
@@ -188,13 +188,13 @@
                 </para>
 
                 <para>
-                	Se deberá determinar si un formulario esta siendo tratado como un array
-                	usando el acceso <code>isArray()</code>.
+                    Se deberá determinar si un formulario esta siendo tratado como un array
+                    usando el acceso <code>isArray()</code>.
                 </para>
             </listitem>
 
             <listitem><para>
-            		<code>Zend_Form::setElementsBelongTo($array)</code>:
+                    <code>Zend_Form::setElementsBelongTo($array)</code>:
                     Usando este método, se puede especificar el nombre de un array al
                     cual todos los elementos del formulario pertenecen. Se puede determinar el
                     nombre usando el accesor <code>getElementsBelongTo()</code>.
@@ -202,8 +202,8 @@
         </itemizedlist>
 
         <para>
-        	Adicionalmente, sobre el nivel del elemento, se puede especificar
-        	elementos individuales que puedan pertenecer a arrays particulares usando
+            Adicionalmente, sobre el nivel del elemento, se puede especificar
+            elementos individuales que puedan pertenecer a arrays particulares usando
             el método <code>Zend_Form_Element::setBelongsTo()</code>.
             Para descubrir el valor que tiene -- sea o no sea definido explicitamente o
             implicitamente a través del formulario -- se puede usar el
@@ -215,31 +215,31 @@
         <title>Formularioss Multi-Página</title>
 
         <para>
-        	Actualmente, los formularios multi-página no son oficialmente soportados in
+            Actualmente, los formularios multi-página no son oficialmente soportados in
             <code>Zend_Form</code>; sin embargo, mas soporte para implementarlos
             esta disponible y puede ser utilizado con una pequeña ayuda.
         </para>
 
         <para>
-        	La clave para crear fomrularios multi-página es utilizar sub formularios, pero
-        	solo para desplegar un solo sub formulario por página. Esto le permite
-        	someter un solo sub formulario a la vez y validarlo, pero no procesar
-        	el formulario hasta que todos los sub formularios esten completos.
+            La clave para crear fomrularios multi-página es utilizar sub formularios, pero
+            solo para desplegar un solo sub formulario por página. Esto le permite
+            someter un solo sub formulario a la vez y validarlo, pero no procesar
+            el formulario hasta que todos los sub formularios esten completos.
         </para>
 
         <example id="zend.form.advanced.multiPage.registration">
             <title>Ejemplo de formulario registración</title>
             <para>
-            	Vamos a usar un formulario registración como un ejemplo. para nuestros propósitos,
-            	nosotros queremos capturar el nombre del usuario y la contraseña en la
-            	primera página, despues la información del usuario -- nombre, apellido,
-            	y ubicación -- y finalmente prmitirles decidir que lista de correo,
-            	si ellos desean suscribirse.
+                Vamos a usar un formulario registración como un ejemplo. para nuestros propósitos,
+                nosotros queremos capturar el nombre del usuario y la contraseña en la
+                primera página, despues la información del usuario -- nombre, apellido,
+                y ubicación -- y finalmente prmitirles decidir que lista de correo,
+                si ellos desean suscribirse.
             </para>
 
             <para>
-            	Primero, vamos a crear nuestro propio formulario, y definir varios subformularios
-            	dentro del mismo:
+                Primero, vamos a crear nuestro propio formulario, y definir varios subformularios
+                dentro del mismo:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -345,13 +345,13 @@ class My_Form_Registration extends Zend_Form
             </programlisting>
 
             <para>
-            	Note que hay botones de sometimiento, y que ni hemos hecho
-            	nada con el decorador de sub formularios -- lo que significa que por
-            	defecto serán desplegados como campos. Necesitaremos hacer
-            	algo con ellos mientras desplegamos cada sub formulario indivisualmente,
-            	y adicionar botones demanera que podamos actualmente procesarlos --
-            	el cual requerira las propiedades acción y método. vamos adicionar
-            	algunos scaffolding a nuestras clases para proveer esa información:
+                Note que hay botones de sometimiento, y que ni hemos hecho
+                nada con el decorador de sub formularios -- lo que significa que por
+                defecto serán desplegados como campos. Necesitaremos hacer
+                algo con ellos mientras desplegamos cada sub formulario indivisualmente,
+                y adicionar botones demanera que podamos actualmente procesarlos --
+                el cual requerira las propiedades acción y método. vamos adicionar
+                algunos scaffolding a nuestras clases para proveer esa información:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -434,20 +434,20 @@ class My_Form_Registration extends Zend_Form
             </programlisting>
 
             <para>
-            	Siguiente, necesitamos adicionar scaffolding en nuestro controlador acción,
+                Siguiente, necesitamos adicionar scaffolding en nuestro controlador acción,
 
-            	y tener muchas consideraciones. Primero, necesitamos asegurar que
-            	persiste la información del formulario entre los requerimientos, de esa manera determinar
-            	cuadno terminar. Segundo, necesitamos alguna lógica para determinar que segmentos
-            	del formulario han sido sometidos, y que sub formulario
-            	desplegar de acuerdo a la información. Usaremos
+                y tener muchas consideraciones. Primero, necesitamos asegurar que
+                persiste la información del formulario entre los requerimientos, de esa manera determinar
+                cuadno terminar. Segundo, necesitamos alguna lógica para determinar que segmentos
+                del formulario han sido sometidos, y que sub formulario
+                desplegar de acuerdo a la información. Usaremos
                 <code>Zend_Session_Namespace</code> para persistir la información, el cual
                 nos ayudará a responder la pregunta de cual formulario someter.
             </para>
 
             <para>
-            	Vamos a crear nuestro controlador, y adicionar un método para recuperar un
-            	formulario instanciado:
+                Vamos a crear nuestro controlador, y adicionar un método para recuperar un
+                formulario instanciado:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -467,13 +467,13 @@ class RegistrationController extends Zend_Controller_Action
             </programlisting>
 
             <para>
-            	Ahora, vamos adicionar algunas funcionalidades para determinar cual formulario
-            	desplegar. Basicamente, hasta que el entero formulario sea considerado válido,
-            	necesitamos continuar desplegando segmentos de formulario. Adicionalmente,
-            	queremos asegurar que estan en un orden particular: usuario,
-            	demog, y despues las listas. Podemos determinar que información ha sido
-            	sometida verificando nuestra sesión namespace para claves particulares
-            	representando cada sub formulario.
+                Ahora, vamos adicionar algunas funcionalidades para determinar cual formulario
+                desplegar. Basicamente, hasta que el entero formulario sea considerado válido,
+                necesitamos continuar desplegando segmentos de formulario. Adicionalmente,
+                queremos asegurar que estan en un orden particular: usuario,
+                demog, y despues las listas. Podemos determinar que información ha sido
+                sometida verificando nuestra sesión namespace para claves particulares
+                representando cada sub formulario.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -571,7 +571,7 @@ class RegistrationController extends Zend_Controller_Action
             </programlisting>
 
             <para>
-            	El método de arriba nos permite usar notaciones tal como "<code>$subForm =
+                El método de arriba nos permite usar notaciones tal como "<code>$subForm =
                     $this-&gt;getCurrentSubForm();</code>" recuperar el actual
                 sub formulario para la validación, o "<code>$next =
                     $this-&gt;getNextSubForm();</code>" obtener el siguiente para
@@ -579,22 +579,22 @@ class RegistrationController extends Zend_Controller_Action
             </para>
 
             <para>
-            	Ahora, vamos a encontrar la manera para procesar y desplegar varios
-            	sub formularios. pdemos usar <code>getCurrentSubForm()</code> para determianr
-            	si algún sub formulario ha sido sometido (falso retorna ningún valor
-            	ha sido desplegado o sometido), y
+                Ahora, vamos a encontrar la manera para procesar y desplegar varios
+                sub formularios. pdemos usar <code>getCurrentSubForm()</code> para determianr
+                si algún sub formulario ha sido sometido (falso retorna ningún valor
+                ha sido desplegado o sometido), y
                 <code>getNextSubForm()</code> recupera el formulario a desplegar. Podemos
                 entonces usar el método del formulario <code>prepareSubForm()</code> para asegurar
                 que el formulario esta listo para desplegar.
             </para>
 
             <para>
-            	Cuando tenemos un formulario sometido, podemos validar el sub formulario,
-            	y luego verificar si el entero formulario es válido ahora. Para hacer
-            	esas tareas, necesitamos métodos adicionales que aseguren que la
-            	información sometida es adicionada a la sesión, y que cuando validamos
-            	el entero formulario, nosotros validamos contra todos los segmentos de
-            	la sesión:
+                Cuando tenemos un formulario sometido, podemos validar el sub formulario,
+                y luego verificar si el entero formulario es válido ahora. Para hacer
+                esas tareas, necesitamos métodos adicionales que aseguren que la
+                información sometida es adicionada a la sesión, y que cuando validamos
+                el entero formulario, nosotros validamos contra todos los segmentos de
+                la sesión:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -640,9 +640,9 @@ class RegistrationController extends Zend_Controller_Action
             </programlisting>
 
             <para>
-            	Ahora que tenemos el trabajo preparado, vamos a construir las
-            	acciones para este controlador. Necesitaremos una página landing
-            	para el formulario, y luego un 'proceso' acción para procesar el formulario.
+                Ahora que tenemos el trabajo preparado, vamos a construir las
+                acciones para este controlador. Necesitaremos una página landing
+                para el formulario, y luego un 'proceso' acción para procesar el formulario.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -688,18 +688,18 @@ class RegistrationController extends Zend_Controller_Action
             </programlisting>
 
             <para>
-            	Como se ha notado, el código actual para procesar el formulario es
-            	relativamente simple. Verificamos si tenemos un actual sub formulario
-            	sometido y si no, retornamos a la página landing. Si tenemos
-            	un sub formulario, intentaremos validarlo, redesplagandolo si tiene
-            	fallas. Si el sub formulario es válido, entonces verificaremos si
-            	el formulario es válido, lo que debería indicar hemos terminado; si no,
-            	desplegaremos el siguiente segmento del formulario. Finalmente, desplegaremos una
-            	página de verificación con el contenido de la sesión.
+                Como se ha notado, el código actual para procesar el formulario es
+                relativamente simple. Verificamos si tenemos un actual sub formulario
+                sometido y si no, retornamos a la página landing. Si tenemos
+                un sub formulario, intentaremos validarlo, redesplagandolo si tiene
+                fallas. Si el sub formulario es válido, entonces verificaremos si
+                el formulario es válido, lo que debería indicar hemos terminado; si no,
+                desplegaremos el siguiente segmento del formulario. Finalmente, desplegaremos una
+                página de verificación con el contenido de la sesión.
             </para>
 
             <para>
-            	La vista de scripts son muy simples:
+                La vista de scripts son muy simples:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -737,10 +737,10 @@ endforeach ?>
             </programlisting>
 
             <para>
-            	Próximas novedades de Zend Framework incluirán componentes
-            	para hacer formularios multi páginas mas simple extrayendo la sesión y
-            	el lógico orden. Mientras tanto, el ejemplo de arriba debería servir
-            	como guia razonable en como alcanzar la tarea para su sitio.
+                Próximas novedades de Zend Framework incluirán componentes
+                para hacer formularios multi páginas mas simple extrayendo la sesión y
+                el lógico orden. Mientras tanto, el ejemplo de arriba debería servir
+                como guia razonable en como alcanzar la tarea para su sitio.
             </para>
         </example>
     </sect2>

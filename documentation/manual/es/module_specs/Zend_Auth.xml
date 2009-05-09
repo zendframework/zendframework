@@ -107,7 +107,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
                         de autenticación. Esto permite a los desarrolladores, por ejemplo, mantener estadísticas
                         detalladas de los resultados de autenticación. Otro uso de esta característica es: proporcionar
                         al usuario mensajes específicos detallados por razones de usabilidad, aunque los desarrolladores
-                        son	exhortados a considerar el riesgo de proporcionar tales detalles a los usuarios, en vez de
+                        son    exhortados a considerar el riesgo de proporcionar tales detalles a los usuarios, en vez de
                         un mensaje general de fallo en la autenticación. Para más información, vea las siguientes notas:
                     </para>
                 </listitem>
@@ -252,7 +252,7 @@ $result = $auth->authenticate($authAdapter);
             <title>Implementando Almacenamiento Personalizado</title>
 
             <para>
-                En ocaciones los desarrolladores podrían necesitar usar un diferente comportamiento de persistencia	de identidad
+                En ocaciones los desarrolladores podrían necesitar usar un diferente comportamiento de persistencia    de identidad
                 que el provisto por <code>Zend_Auth_Storage_Session</code>. Para esos casos los desarrolladores podrían simplemente
                 implementar <code>Zend_Auth_Storage_Interface</code> y suplir una instancia de la clase a
                 <code>Zend_Auth::setStorage()</code>.

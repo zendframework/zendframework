@@ -6,9 +6,9 @@
 
     <para>
         <classname>Zend_Dom</classname> provee herramientas para trabajar con documentos y
-		estructuras DOM. Actualmente, ofrecemos <classname>Zend_Dom_Query</classname>, el cual
-		provee una interfaz unificada para consultar documentos DOM utilizando selectores
-		XPath y CSS.
+        estructuras DOM. Actualmente, ofrecemos <classname>Zend_Dom_Query</classname>, el cual
+        provee una interfaz unificada para consultar documentos DOM utilizando selectores
+        XPath y CSS.
     </para>
 </sect1>
 <!--

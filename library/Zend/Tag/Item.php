@@ -121,7 +121,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     }
     
     /**
-     * Defined by Zend_Tag_IItem
+     * Defined by Zend_Tag_Taggable
      *
      * @return string
      */
@@ -149,7 +149,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     }
     
     /**
-     * Defined by Zend_Tag_IItem
+     * Defined by Zend_Tag_Taggable
      *
      * @return float
      */
@@ -192,7 +192,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     }
     
     /**
-     * Defined by Zend_Tag_IItem
+     * Defined by Zend_Tag_Taggable
      *
      * @param  string $name
      * @param  mixed  $value
@@ -205,7 +205,7 @@ class Zend_Tag_Item implements Zend_Tag_Taggable
     }
     
     /**
-     * Defined by Zend_Tag_IItem
+     * Defined by Zend_Tag_Taggable
      *
      * @param  string $name
      * @return mixed

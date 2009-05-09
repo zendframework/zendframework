@@ -161,7 +161,7 @@ class Zend_Tag_Cloud
     /**
      * Append a single tag to the cloud
      *
-     * @param  Zend_Tag_IItem|array $tag
+     * @param  Zend_Tag_Taggable|array $tag
      * @return Zend_Tag_Cloud
      */
     public function appendTag($tag)

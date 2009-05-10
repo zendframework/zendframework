@@ -67,8 +67,8 @@ $currency = new Zend_Currency($currency, $locale);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>name</emphasis>:
-                        Ersetzt den alten 'rules' Parameter. Setzt den vollständigen Namen der Währung.
+                        <emphasis>name</emphasis>: Ersetzt den alten 'rules' Parameter. Setzt den
+                        vollständigen Namen der Währung.
                     </para>
                 </listitem>
                 <listitem>
@@ -92,9 +92,9 @@ $currency->setFormat(array $options);
 ]]></programlisting>
 
         <para>
-            Die <code>toCurrency()</code> Methode unterstützt die optionalen 'script' und 'locale' Parameter
-            nicht mehr. Stattdessen nimmt sie ein Array von Optionen welche die selben Schlüssel enthalten
-            können wie die <code>setFormat</code> Methode.
+            Die <code>toCurrency()</code> Methode unterstützt die optionalen 'script' und 'locale'
+            Parameter nicht mehr. Stattdessen nimmt sie ein Array von Optionen welche die selben
+            Schlüssel enthalten können wie die <code>setFormat</code> Methode.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -102,10 +102,10 @@ $currency->toCurrency($value, array $options);
 ]]></programlisting>
 
         <para>
-            Die Methoden <code>getSymbol()</code>, <code>getShortName()</code>, <code>getName()</code>,
-            <code>getRegionList()</code> und <code>getCurrencyList()</code> sind nicht länger statisch
-            und können vom Objekt aus aufgerufen werden. Die geben den aktuell gesetzten Wert des Objekts
-            zurück wenn kein Parameter gesetzt wurde.
+            Die Methoden <code>getSymbol()</code>, <code>getShortName()</code>,
+            <code>getName()</code>, <code>getRegionList()</code> und <code>getCurrencyList()</code>
+            sind nicht länger statisch und können vom Objekt aus aufgerufen werden. Die geben den
+            aktuell gesetzten Wert des Objekts zurück wenn kein Parameter gesetzt wurde.
         </para>
 
     </sect2>

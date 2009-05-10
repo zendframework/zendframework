@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13833 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
@@ -7,14 +7,20 @@
     <sect2 id="zend.server.reflection.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_Server_Reflection</classname> fournit un mécanisme standard pour exécuter l'introspection de
-        fonction et de classe pour utiliser avec des classes serveur. Il est basé sur l'API de réflexion de PHP 5, et
-        l'améliore pour fournir des méthodes de recherche des types et des descriptions de paramètre et de valeur de
-        retour, une liste complète des prototypes de fonction et de méthode (c.-à-d., toutes les combinaisons d'appels
-        valides possibles), et des descriptions de fonction/méthode.</para>
+        <para>
+            <classname>Zend_Server_Reflection</classname> fournit un mécanisme standard pour
+            exécuter l'introspection de fonction et de classe pour utiliser avec des classes
+            serveur. Il est basé sur l'API de réflexion de PHP 5, et l'améliore pour fournir des
+            méthodes de recherche des types et des descriptions de paramètre et de valeur de retour,
+            une liste complète des prototypes de fonction et de méthode (c.-à-d., toutes les
+            combinaisons d'appels valides possibles), et des descriptions de
+            fonction/méthode.
+        </para>
 
-        <para>Typiquement, cette fonctionnalité sera seulement utilisée par les développeurs des classes serveur pour le
-        framework.</para>
+        <para>
+            Typiquement, cette fonctionnalité sera seulement utilisée par les développeurs des
+            classes serveur pour le framework.
+        </para>
     </sect2>
 
     <sect2 id="zend.server.reflection.usage">
@@ -51,8 +57,12 @@ foreach ($prototypes as $prototype) {
 $reflection->getNamespace();
 ]]></programlisting>
 
-        <para><code>reflectFunction()</code> retourne un objet <classname>Zend_Server_Reflection_Function</classname>.
-        <code>reflectClass</code> retourne un objet <classname>Zend_Server_Reflection_Class</classname>. Veuillez vous référer à
-        la documentation d'API pour voir quelles méthodes sont disponibles pour chacun.</para>
+        <para>
+            <code>reflectFunction()</code> retourne un objet
+            <classname>Zend_Server_Reflection_Function</classname>. <code>reflectClass</code>
+            retourne un objet <classname>Zend_Server_Reflection_Class</classname>. Veuillez vous
+            référer à la documentation d'API pour voir quelles méthodes sont disponibles pour
+            chacun.
+        </para>
     </sect2>
 </sect1>

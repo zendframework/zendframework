@@ -1,18 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13830 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.introduction">
     <title>Introduction</title>
 
-    <para><classname>Zend_Service</classname> est une classe abstraite qui sert de fondation à l'implémentation des services Web,
-    comme SOAP ou REST.</para>
+    <para>
+        <classname>Zend_Service</classname> est une classe abstraite qui sert de fondation
+        à l'implémentation des services Web, comme SOAP ou REST.
+    </para>
 
-    <para><classname>Zend_Service</classname> offre un support pour tout service Web basé sur REST à travers <link
-    linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.</para>
+    <para>
+        <classname>Zend_Service</classname> offre un support pour tout service Web basé sur
+        REST à travers <link
+        linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
+    </para>
 
-    <para>En plus d'être capable d'étendre <classname>Zend_Service</classname> et d'utiliser <classname>Zend_Rest_Client</classname> pour
-    des services Web basé sur REST, Zend Framework fournit un support pour les services Web populaires. Consultez les
-    sections suivantes pour des informations spécifiques à chaque service Web supporté.</para>
+    <para>
+        En plus d'être capable d'étendre <classname>Zend_Service</classname> et d'utiliser
+        <classname>Zend_Rest_Client</classname> pour des services Web basé sur REST, Zend Framework
+        fournit un support pour les services Web populaires. Consultez les sections suivantes pour
+        des informations spécifiques à chaque service Web supporté.
+    </para>
 
     <itemizedlist>
         <listitem>

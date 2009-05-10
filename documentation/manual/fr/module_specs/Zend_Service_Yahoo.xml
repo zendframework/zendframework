@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13170 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
@@ -7,22 +7,29 @@
     <sect2 id="zend.service.yahoo.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_Service_Yahoo</classname> est une API simple pour utiliser les APIs REST de Yahoo!
-        <classname>Zend_Service_Yahoo</classname> vous permet de rechercher dans Yahoo! Web Search, Yahoo! News, Yahoo! Local et
-        Yahoo! Images. Pour pouvoir utiliser l'API REST de Yahoo!, vous devez avoir un identifiant Yahoo Application.
-        Pour obtenir un identifiant Yahoo Application, veuillez compléter et soumettre le <ulink
-        url="https://developer.yahoo.com/wsregapp/">formulaire de demande d'identifiant Yahoo!
-        Application</ulink>.</para>
+        <para>
+            <classname>Zend_Service_Yahoo</classname> est une API simple pour utiliser les
+            APIs REST de Yahoo! <classname>Zend_Service_Yahoo</classname> vous permet de rechercher
+            dans Yahoo! Web Search, Yahoo! News, Yahoo! Local et Yahoo! Images. Pour pouvoir
+            utiliser l'API REST de Yahoo!, vous devez avoir un identifiant Yahoo Application. Pour
+            obtenir un identifiant Yahoo Application, veuillez compléter et soumettre le <ulink
+            url="https://developer.yahoo.com/wsregapp/">formulaire de demande d'identifiant Yahoo!
+            Application</ulink>.
+        </para>
     </sect2>
 
     <sect2 id="zend.service.yahoo.websearch">
         <title>Rechercher sur le Web avec Yahoo!</title>
 
-        <para><classname>Zend_Service_Yahoo</classname> vous permet d'effectuer des recherches sur le net avec Yahoo! en utilisant
-        la méthode <code>webSearch()</code>, qui accepte une chaîne de requête en paramètre, et un tableau d'options de
-        recherche comme second paramètre. Pour la liste détaillée des options, veuillez vous référer à la documentation
-        <ulink url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web Search</ulink>. La méthode
-        <code>webSearch()</code> retourne un objet <classname>Zend_Service_Yahoo_WebResultSet</classname>.</para>
+        <para>
+            <classname>Zend_Service_Yahoo</classname> vous permet d'effectuer des recherches
+            sur le net avec Yahoo! en utilisant la méthode <code>webSearch()</code>, qui accepte une
+            chaîne de requête en paramètre, et un tableau d'options de recherche comme second
+            paramètre. Pour la liste détaillée des options, veuillez vous référer à la documentation
+            <ulink url="http://developer.yahoo.com/search/web/V1/webSearch.html">Yahoo! Web
+            Search</ulink>. La méthode <code>webSearch()</code> retourne un objet
+            <classname>Zend_Service_Yahoo_WebResultSet</classname>.
+        </para>
 
         <example id="zend.service.yahoo.websearch.example-1">
             <title>Rechercher sur le Web avec Yahoo!</title>
@@ -40,11 +47,14 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.imagesearch">
         <title>Trouver des images avec Yahoo!</title>
 
-        <para>Vous pouvez rechercher des images avec Yahoo! en utilisant la méthode <code>imageSearch()</code> de
-        <classname>Zend_Service_Yahoo</classname>. Cette méthode accepte une chaîne de requête en paramètres, et un tableau
-        d'options en second paramètre optionnel. Pour la liste complète des options, veuillez vous référer à la
-        documentation <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Image
-        Search</ulink>.</para>
+        <para>
+            Vous pouvez rechercher des images avec Yahoo! en utilisant la méthode
+            <code>imageSearch()</code> de <classname>Zend_Service_Yahoo</classname>. Cette méthode
+            accepte une chaîne de requête en paramètres, et un tableau d'options en second paramètre
+            optionnel. Pour la liste complète des options, veuillez vous référer à la documentation
+            <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Image
+            Search</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.imagesearch.example-1">
             <title>Trouver des images avec Yahoo!</title>
@@ -62,9 +72,13 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.videosearch">
         <title>Trouver des vidéos avec Yahoo!</title>
 
-        <para>Vous pouvez rechercher des vidéos avec Yahoo! en utilisant la méthode <code>videoSearch()</code> de
-        <classname>Zend_Service_Yahoo</classname>. Pour la liste complète des options, veuillez vous référer à la documentation
-        <ulink url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video Search</ulink>.</para>
+        <para>
+            Vous pouvez rechercher des vidéos avec Yahoo! en utilisant la méthode
+            <code>videoSearch()</code> de <classname>Zend_Service_Yahoo</classname>. Pour la liste
+            complète des options, veuillez vous référer à la documentation <ulink
+            url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video
+            Search</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.videosearch.example-1">
             <title>Trouver des vidéos avec Yahoo!</title>
@@ -82,9 +96,13 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.localsearch">
         <title>Trouver des entreprises et des services locaux avec Yahoo!</title>
 
-        <para>Vous pouvez rechercher des entreprises et des services locaux avec Yahoo!, en utilisant la méthode
-        <code>localSearch()</code>. Pour plus de détails, veuillez vous référer à la documentation <ulink
-        url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local Search</ulink>.</para>
+        <para>
+            Vous pouvez rechercher des entreprises et des services locaux avec Yahoo!, en
+            utilisant la méthode <code>localSearch()</code>. Pour plus de détails, veuillez vous
+            référer à la documentation <ulink
+            url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo! Local
+            Search</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.localsearch.example-1">
             <title>Trouver des entreprises locales et des services avec Yahoo!</title>
@@ -102,10 +120,13 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.newssearch">
         <title>Rechercher dans Yahoo! News</title>
 
-        <para>Rechercher dans Yahoo! News est simple, il vous suffit simplement d'utiliser la méthode
-        <code>newsSearch()</code>, comme le montre l'exemple suivant. Pour plus de détails, veuillez vous référer à la
-        documentation <ulink url="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News
-        Search</ulink>.</para>
+        <para>
+            Rechercher dans Yahoo! News est simple, il vous suffit simplement d'utiliser la
+            méthode <code>newsSearch()</code>, comme le montre l'exemple suivant. Pour plus de
+            détails, veuillez vous référer à la documentation <ulink
+            url="http://developer.yahoo.net/search/news/V1/newsSearch.html">Yahoo! News
+            Search</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.newssearch.example-1">
             <title>Recherche dans Yahoo! News</title>
@@ -123,10 +144,13 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.inlinkdatasearch">
         <title>Rechercher avec Yahoo! Site Explorer Inbound Links</title>
 
-        <para>Rechercher avec Yahoo! Site Explorer Inbound Links est simple, il vous suffit simplement d'utiliser la
-        méthode <code>inlinkDataSearch()</code> comme le montre l'exemple suivant. Pour plus de détails, veuillez vous
-        référer à la documentation <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
-        Site Explorer Inbound Links Documentation</ulink>.</para>
+        <para>
+            Rechercher avec Yahoo! Site Explorer Inbound Links est simple, il vous suffit
+            simplement d'utiliser la méthode <code>inlinkDataSearch()</code> comme le montre
+            l'exemple suivant. Pour plus de détails, veuillez vous référer à la documentation <ulink
+            url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo! Site
+            Explorer Inbound Links Documentation</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.inlinkdatasearch.example-1">
             <title>Recherche avec Yahoo! Site Explorer Inbound Links</title>
@@ -144,10 +168,13 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.pagedatasearch">
         <title>Rechercher avec Yahoo! Site Explorer's PageData</title>
 
-        <para>Rechercher avec Yahoo! Site Explorer's PageData est simple, il vous suffit simplement d'utiliser la
-        méthode <code>pageDataSearch()</code> comme le montre l'exemple suivant. Pour plus de détails, veuillez vous
-        référer à la documentation <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
-        Site Explorer PageData Documentation</ulink>.</para>
+        <para>
+            Rechercher avec Yahoo! Site Explorer's PageData est simple, il vous suffit
+            simplement d'utiliser la méthode <code>pageDataSearch()</code> comme le montre l'exemple
+            suivant. Pour plus de détails, veuillez vous référer à la documentation <ulink
+            url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo! Site
+            Explorer PageData Documentation</ulink>.
+        </para>
 
         <example id="zend.service.yahoo.pagedatasearch.example-1">
             <title>Recherche avec Yahoo! Site Explorer's PageData</title>
@@ -165,116 +192,159 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.classes">
         <title>Classes Zend_Service_Yahoo</title>
 
-        <para>Les classes sont toutes retournées par les diverses recherches Yahoo!. Chaque type de recherche retourne
-        un jeu de résultat spécifique sur lequel on peut facilement itérer, avec chaque résultat contenu dans un
-        résultat du type de l'objet. Toutes les classes de jeu de résultat implémentent l'interface
-        <code>SeekableIterator</code>, permettant des itérations et une recherche sur un résultat particulier.
-        <itemizedlist>
-                <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.resultset"><classname>Zend_Service_Yahoo_ResultSet</classname></link></para>
+        <para>
+            Les classes sont toutes retournées par les diverses recherches Yahoo!. Chaque type
+            de recherche retourne un jeu de résultat spécifique sur lequel on peut facilement
+            itérer, avec chaque résultat contenu dans un résultat du type de l'objet. Toutes les
+            classes de jeu de résultat implémentent l'interface <code>SeekableIterator</code>,
+            permettant des itérations et une recherche sur un résultat particulier. <itemizedlist>
+                    <listitem>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.resultset"><classname>Zend_Service_Yahoo_ResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.webresultset"><classname>Zend_Service_Yahoo_WebResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.webresultset"><classname>Zend_Service_Yahoo_WebResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.imageresultset"><classname>Zend_Service_Yahoo_ImageResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.imageresultset"><classname>Zend_Service_Yahoo_ImageResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.videoresultset"><classname>Zend_Service_Yahoo_VideoResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.videoresultset"><classname>Zend_Service_Yahoo_VideoResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.localresultset"><classname>Zend_Service_Yahoo_LocalResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.localresultset"><classname>Zend_Service_Yahoo_LocalResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.newsresultset"><classname>Zend_Service_Yahoo_NewsResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.newsresultset"><classname>Zend_Service_Yahoo_NewsResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.inlinkdataresultset"><classname>Zend_Service_Yahoo_InlinkDataResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.inlinkdataresultset"><classname>Zend_Service_Yahoo_InlinkDataResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.pagedataresultset"><classname>Zend_Service_Yahoo_PageDataResultSet</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.pagedataresultset"><classname>Zend_Service_Yahoo_PageDataResultSet</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.result"><classname>Zend_Service_Yahoo_Result</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.result"><classname>Zend_Service_Yahoo_Result</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.webresult"><classname>Zend_Service_Yahoo_WebResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.webresult"><classname>Zend_Service_Yahoo_WebResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.imageresult"><classname>Zend_Service_Yahoo_ImageResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.imageresult"><classname>Zend_Service_Yahoo_ImageResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.videoresult"><classname>Zend_Service_Yahoo_VideoResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.videoresult"><classname>Zend_Service_Yahoo_VideoResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.localresult"><classname>Zend_Service_Yahoo_LocalResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.localresult"><classname>Zend_Service_Yahoo_LocalResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.newsresult"><classname>Zend_Service_Yahoo_NewsResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.newsresult"><classname>Zend_Service_Yahoo_NewsResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.inlinkdataresult"><classname>Zend_Service_Yahoo_InlinkDataResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.inlinkdataresult"><classname>Zend_Service_Yahoo_InlinkDataResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.pagedataresult"><classname>Zend_Service_Yahoo_PageDataResult</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.pagedataresult"><classname>Zend_Service_Yahoo_PageDataResult</classname></link>
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><link
-                    linkend="zend.service.yahoo.classes.image"><classname>Zend_Service_Yahoo_Image</classname></link></para>
+                    <para>
+                        <link
+                        linkend="zend.service.yahoo.classes.image"><classname>Zend_Service_Yahoo_Image</classname></link>
+                    </para>
                 </listitem>
-            </itemizedlist></para>
+                </itemizedlist>
+            </para>
 
         <sect3 id="zend.service.yahoo.classes.resultset">
             <title>Zend_Service_Yahoo_ResultSet</title>
 
-            <para>Chaque jeu de résultat spécifique à la recherche est étendu de cette classe de base.</para>
+            <para>
+                Chaque jeu de résultat spécifique à la recherche est étendu de cette classe de
+                base.
+            </para>
 
-            <para>Chaque jeu de résultat spécifique à la recherche retourne un objet <link
-            linkend="zend.service.yahoo.classes.result">Zend_Service_Yahoo_Result</link> spécifique à la
-            recherche.</para>
+            <para>
+                Chaque jeu de résultat spécifique à la recherche retourne un objet <link
+                linkend="zend.service.yahoo.classes.result">Zend_Service_Yahoo_Result</link>
+                spécifique à la recherche.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.resultset.totalResults">
                 <title>Zend_Service_Yahoo_ResultSet::totalResults()</title>
 
-                <para><methodsynopsis>
-                        <type>int</type>
-
-                        <methodname>totalResults</methodname>
-
-                        <void />
-                    </methodsynopsis></para>
+                <para>
+                    <methodsynopsis>
+                            <type>int</type>
+    
+                            <methodname>totalResults</methodname>
+    
+                            <void />
+                        </methodsynopsis>
+                    </para>
 
                 <para>Retourne le nombre de résultats retourné par la recherche.</para>
             </sect4>
@@ -310,7 +380,8 @@ foreach ($results as $result) {
 
                                 <entry>int</entry>
 
-                                <entry>Nombre de résultats pour le jeu de résultat courant.</entry>
+                                <entry>Nombre de résultats pour le jeu de résultat
+                                courant.</entry>
                             </row>
 
                             <row>
@@ -318,63 +389,90 @@ foreach ($results as $result) {
 
                                 <entry>int</entry>
 
-                                <entry>Position du premier résultat dans ce jeu, par rapport au nombre total des
-                                résultats.</entry>
+                                <entry>Position du premier résultat dans ce jeu, par rapport au
+                                nombre total des résultats.</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.webresultset">
             <title>Zend_Service_Yahoo_WebResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_WebResultSet</classname> représente un jeu de résultat Yahoo! Web Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_WebResultSet</classname> représente un jeu de
+                résultat Yahoo! Web Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_WebResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>.</para>
+                <para>
+                    <classname>Zend_Service_Yahoo_WebResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>.
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.imageresultset">
             <title>Zend_Service_Yahoo_ImageResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_ImageResultSet</classname> représente un jeu de résultat Yahoo! Image
-            Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_ImageResultSet</classname> représente un jeu de
+                résultat Yahoo! Image Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_ImageResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_ImageResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.videoresultset">
             <title>Zend_Service_Yahoo_VideoResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_VideoResultSet</classname> représente un jeu de résultat Yahoo! Video
-            Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_VideoResultSet</classname> représente un jeu de
+                résultat Yahoo! Video Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_VideoResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_VideoResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.localresultset">
             <title>Zend_Service_Yahoo_LocalResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_LocalResultSet</classname> représente un jeu de résultats Yahoo! Local
-            Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_LocalResultSet</classname> représente un jeu de
+                résultats Yahoo! Local Search.
+            </para>
 
             <table id="zend.service.yahoo.classes.localresultset.table-1">
                 <title>Propriétés de Zend_Service_Yahoo_LocalResultSet</title>
@@ -396,66 +494,96 @@ foreach ($results as $result) {
 
                             <entry>string</entry>
 
-                            <entry>L'URL de la page Web contenant une carte graphique contenant tous les résultats
-                            affichés dessus.</entry>
+                            <entry>L'URL de la page Web contenant une carte graphique contenant
+                            tous les résultats affichés dessus.</entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_LocalResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_LocalResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.newsresultset">
             <title>Zend_Service_Yahoo_NewsResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_NewsResultSet</classname> représente un jeu de résultat Yahoo! News Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_NewsResultSet</classname> représente un jeu de
+                résultat Yahoo! News Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_NewsResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_NewsResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.inlinkdataresultset">
             <title>Zend_Service_Yahoo_InlinkDataResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_InlinkDataResultSet</classname> représente un jeu de résultat Yahoo! Inbound Link
-            Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_InlinkDataResultSet</classname> représente un
+                jeu de résultat Yahoo! Inbound Link Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_InlinkDataResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_InlinkDataResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.pagedataresultset">
             <title>Zend_Service_Yahoo_PageDataResultSet</title>
 
-            <para><classname>Zend_Service_Yahoo_PageDataResultSet</classname> représente un jeu de résultat Yahoo! PageData
-            Search.</para>
+            <para>
+                <classname>Zend_Service_Yahoo_PageDataResultSet</classname> représente un jeu
+                de résultat Yahoo! PageData Search.
+            </para>
 
             <note>
-                <para><classname>Zend_Service_Yahoo_PageDataResultSet</classname> étend <link
-                linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link></para>
+                <para>
+                    <classname>Zend_Service_Yahoo_PageDataResultSet</classname> étend <link
+                    linkend="zend.service.yahoo.classes.resultset">Zend_Service_Yahoo_ResultSet</link>
+                </para>
             </note>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.result">
             <title>Zend_Service_Yahoo_Result</title>
 
-            <para>Chaque résultat spécifique à la recherche est étendu de cette classe de base.</para>
+            <para>
+                Chaque résultat spécifique à la recherche est étendu de cette classe de
+                base.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.result.properties">
                 <title>Propriétés</title>
@@ -502,15 +630,20 @@ foreach ($results as $result) {
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.webresult">
             <title>Zend_Service_Yahoo_WebResult</title>
 
-            <para>Chaque résultat d'une recherche Web est retourné comme un objet
-            <classname>Zend_Service_Yahoo_WebResult</classname>.</para>
+            <para>
+                Chaque résultat d'une recherche Web est retourné comme un objet
+                <classname>Zend_Service_Yahoo_WebResult</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.webresult.properties">
                 <title>Propriétés</title>
@@ -551,7 +684,8 @@ foreach ($results as $result) {
 
                                 <entry>string</entry>
 
-                                <entry>Timestamp UNIX de la date de la dernière modification du résultat.</entry>
+                                <entry>Timestamp UNIX de la date de la dernière modification du
+                                résultat.</entry>
                             </row>
 
                             <row>
@@ -573,15 +707,20 @@ foreach ($results as $result) {
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.imageresult">
             <title>Zend_Service_Yahoo_ImageResult</title>
 
-            <para>Chaque recherche d'image est retournée comme un objet
-            <classname>Zend_Service_Yahoo_ImageResult</classname>.</para>
+            <para>
+                Chaque recherche d'image est retournée comme un objet
+                <classname>Zend_Service_Yahoo_ImageResult</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.imageresult.properties">
                 <title>Propriétés</title>
@@ -661,15 +800,20 @@ foreach ($results as $result) {
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.videoresult">
             <title>Zend_Service_Yahoo_VideoResult</title>
 
-            <para>Chaque recherche de vidéo est retournée comme un objet
-            <classname>Zend_Service_Yahoo_VideoResult</classname>.</para>
+            <para>
+                Chaque recherche de vidéo est retournée comme un objet
+                <classname>Zend_Service_Yahoo_VideoResult</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.videoresult.properties">
                 <title>Propriétés</title>
@@ -718,8 +862,8 @@ foreach ($results as $result) {
 
                                 <entry>string</entry>
 
-                                <entry>Le format de la vidéo (avi, flash, mpeg, msmedia, quicktime, realmedia,
-                                etc.)</entry>
+                                <entry>Le format de la vidéo (avi, flash, mpeg, msmedia,
+                                quicktime, realmedia, etc.)</entry>
                             </row>
 
                             <row>
@@ -774,15 +918,20 @@ foreach ($results as $result) {
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.localresult">
             <title>Zend_Service_Yahoo_LocalResult</title>
 
-            <para>Chaque résultat de recherche locale est retourné dans un objet
-            <classname>Zend_Service_Yahoo_LocalResult</classname>.</para>
+            <para>
+                Chaque résultat de recherche locale est retourné dans un objet
+                <classname>Zend_Service_Yahoo_LocalResult</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.localresult.properties">
                 <title>Propriétés</title>
@@ -847,7 +996,8 @@ foreach ($results as $result) {
 
                                 <entry>float</entry>
 
-                                <entry>Distance entre l'endroit où vous vous trouvez et le résultat</entry>
+                                <entry>Distance entre l'endroit où vous vous trouvez et le
+                                résultat</entry>
                             </row>
 
                             <row>
@@ -871,21 +1021,27 @@ foreach ($results as $result) {
 
                                 <entry>string</entry>
 
-                                <entry>L'URL pour faire un lien sur le site de l'entreprise, s'il est connu</entry>
+                                <entry>L'URL pour faire un lien sur le site de l'entreprise,
+                                s'il est connu</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.newsresult">
             <title>Zend_Service_Yahoo_NewsResult</title>
 
-            <para>Chaque résultat de News Search est retourné comme un objet
-            <classname>Zend_Service_Yahoo_NewsResult</classname>.</para>
+            <para>
+                Chaque résultat de News Search est retourné comme un objet
+                <classname>Zend_Service_Yahoo_NewsResult</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.newsresult.properties">
                 <title>Propriétés</title>
@@ -942,7 +1098,8 @@ foreach ($results as $result) {
 
                                 <entry>string</entry>
 
-                                <entry>La date de publication de l'article, au format timestamp UNIX</entry>
+                                <entry>La date de publication de l'article, au format timestamp
+                                UNIX</entry>
                             </row>
 
                             <row>
@@ -950,8 +1107,8 @@ foreach ($results as $result) {
 
                                 <entry>string</entry>
 
-                                <entry>La date de la dernière modification de l'article, au format timestamp
-                                UNIX</entry>
+                                <entry>La date de la dernière modification de l'article, au
+                                format timestamp UNIX</entry>
                             </row>
 
                             <row>
@@ -960,39 +1117,56 @@ foreach ($results as $result) {
                                 <entry><link
                                 linkend="zend.service.yahoo.classes.image">Zend_Service_Yahoo_Image</link></entry>
 
-                                <entry>Miniature de l'image pour cet article, si elle existe</entry>
+                                <entry>Miniature de l'image pour cet article, si elle
+                                existe</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.inlinkdataresult">
             <title>Zend_Service_Yahoo_InlinkDataResult</title>
 
-            <para>Chaque résultat de Inbound Link Search est retourné comme un objet
-            <classname>Zend_Service_Yahoo_InlinkDatabResult</classname>.</para>
+            <para>
+                Chaque résultat de Inbound Link Search est retourné comme un objet
+                <classname>Zend_Service_Yahoo_InlinkDatabResult</classname>.
+            </para>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.pagedataresult">
             <title>Zend_Service_Yahoo_PageDataResult</title>
 
-            <para>Chaque résultat de Page Data Search est retourné comme un objet
-            <classname>Zend_Service_Yahoo_PageDataResult</classname>.</para>
+            <para>
+                Chaque résultat de Page Data Search est retourné comme un objet
+                <classname>Zend_Service_Yahoo_PageDataResult</classname>.
+            </para>
 
-            <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+            <para>
+                <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                classes</link>
+            </para>
         </sect3>
 
         <sect3 id="zend.service.yahoo.classes.image">
             <title>Zend_Service_Yahoo_Image</title>
 
-            <para>Toutes les images retournées, par Yahoo! Image Search ou Yahoo! News Search sont représentées par un
-            objet <classname>Zend_Service_Yahoo_Image</classname>.</para>
+            <para>
+                Toutes les images retournées, par Yahoo! Image Search ou Yahoo! News Search
+                sont représentées par un objet
+                <classname>Zend_Service_Yahoo_Image</classname>.
+            </para>
 
             <sect4 id="zend.service.yahoo.classes.image.properties">
                 <title>Propriétés</title>
@@ -1039,7 +1213,10 @@ foreach ($results as $result) {
                     </tgroup>
                 </table>
 
-                <para><link linkend="zend.service.yahoo.classes">Retour à la liste des classes</link></para>
+                <para>
+                    <link linkend="zend.service.yahoo.classes">Retour à la liste des
+                    classes</link>
+                </para>
             </sect4>
         </sect3>
     </sect2>

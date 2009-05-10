@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13170 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
 
-    <para>Le paramétrage basique pour <classname>Zend_Session_SaveHandler_DbTable</classname> doit contenir au moins quatre
-    colonnes, décrites dans une configuration de type <code>array</code> ou objet <classname>Zend_Config</classname> : "primary"
-    qui est la clé primaire et reçoit par défaut l'ID de session dont le format est par défaut une chaîne de 32
-    caractères ; "modifiedColumn" qui est le timestamp Unix de la date de dernière modification ; "lifetimeColumn" qui
-    est la durée de vie de la session ("modified" + "lifetime" doit être supérieur à "time()") ; et "dataColumn" qui est
-    la donnée sérialisée stockée en session.</para>
+    <para>
+        Le paramétrage basique pour <classname>Zend_Session_SaveHandler_DbTable</classname>
+        doit contenir au moins quatre colonnes, décrites dans une configuration de type
+        <code>array</code> ou objet <classname>Zend_Config</classname> : "primary" qui est la clé
+        primaire et reçoit par défaut l'ID de session dont le format est par défaut une chaîne de 32
+        caractères ; "modifiedColumn" qui est le timestamp Unix de la date de dernière modification
+        ; "lifetimeColumn" qui est la durée de vie de la session ("modified" + "lifetime" doit être
+        supérieur à "time()") ; et "dataColumn" qui est la donnée sérialisée stockée en
+        session.
+    </para>
 
     <example id="zend.session.savehandler.dbtable.basic">
         <title>Paramétrage basique</title>
@@ -55,8 +59,10 @@ Zend_Session::start();
 ]]></programlisting>
     </example>
 
-    <para>Vous pouvez aussi utiliser des colonnes multiples pour votre clé primaire de
-    <classname>Zend_Session_SaveHandler_DbTable</classname>.</para>
+    <para>
+        Vous pouvez aussi utiliser des colonnes multiples pour votre clé primaire de
+        <classname>Zend_Session_SaveHandler_DbTable</classname>.
+    </para>
 
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>Utilisation d'une clé primaire multi-colonnes</title>

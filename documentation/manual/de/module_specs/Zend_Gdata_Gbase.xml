@@ -19,83 +19,88 @@
         </itemizedlist>
     </para>
     <para>
-        Es gibt zwei Feeds an Elementen: Feed Fetzen und benutzerdefinierte Feeds für Elemente. Der Feed Fetzen
-        enthält alle Google Base Daten und ist für jeden lesbar um Abfragen darauf durchzuführen ohne der
-        Notwendigkeit sich zu Authentifizieren. Der benutzerdefinierte Feed für Elemente ist ein benutzer
-        spezifisches Subset an Daten und nur ein Benutzer/Eigentümer kann auf diesen Feed zugreifen um
-        eigene Daten einzufügen, zu aktualisieren oder zu löschen. Abfragen werden für beide Typen von Feeds
-        auf dem selben Weg erstellt.
+        Es gibt zwei Feeds an Elementen: Feed Fetzen und benutzerdefinierte Feeds für Elemente. Der
+        Feed Fetzen enthält alle Google Base Daten und ist für jeden lesbar um Abfragen darauf
+        durchzuführen ohne der Notwendigkeit sich zu Authentifizieren. Der benutzerdefinierte Feed
+        für Elemente ist ein benutzer spezifisches Subset an Daten und nur ein Benutzer/Eigentümer
+        kann auf diesen Feed zugreifen um eigene Daten einzufügen, zu aktualisieren oder zu löschen.
+        Abfragen werden für beide Typen von Feeds auf dem selben Weg erstellt.
     </para>
     <para>
-        Siehe <ulink url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink> für
+        Siehe <ulink
+            url="http://code.google.com/apis/base/">http://code.google.com/apis/base</ulink> für
         weitere Informationen über die Google Base API.
     </para>
     <sect2 id="zend.gdata.gbase.connect">
         <title>Verbinden zum Base Service</title>
         <para>
-            Die Google Base API basiert, wie alle GData APIs, auf dem Atom Publishing Protokoll (APP),
-            einem XML basierenden Format für gemanagte Web-basierende Ressourcen. Der Verkehr zwischen einem
-            Client und den Google Base Servern findet über HTTP statt, und erlaubt sowohl authentifizierte
-            als auch nicht authentifizierte Verbindungen.
+            Die Google Base API basiert, wie alle GData APIs, auf dem Atom Publishing Protokoll
+            (APP), einem XML basierenden Format für gemanagte Web-basierende Ressourcen. Der Verkehr
+            zwischen einem Client und den Google Base Servern findet über HTTP statt, und erlaubt
+            sowohl authentifizierte als auch nicht authentifizierte Verbindungen.
         </para>
         <para>
-            Bevor irgendeine Transaktion stattfinden kann, muß diese Verbindung hergestellt werden. Das
-            Erstellen einer Verbindung zu den Base Server enthält zwei Schritte: Erstellen eines HTTP Clients
-            und das Binden einer <classname>Zend_Gdata_Gbase</classname> Serviceinstanz an diesen Client.
+            Bevor irgendeine Transaktion stattfinden kann, muß diese Verbindung hergestellt werden.
+            Das Erstellen einer Verbindung zu den Base Server enthält zwei Schritte: Erstellen eines
+            HTTP Clients und das Binden einer <classname>Zend_Gdata_Gbase</classname> Serviceinstanz
+            an diesen Client.
         </para>
         <sect3 id="zend.gdata.gbase.connect.authentication">
             <title>Authentifizierung</title>
             <para>
-                Die Google Base API erlaubt Zugriff auf beide, sowohl öffentliche als auch private Base Feeds.
-                Öffentliche Feeds benötigen keine Authentifizierung, sind aber nur lesbar und bieten nur
-                reduzierte Funktionalität. Private Feeds bieten die größte Funktionalität benötigen aber eine
-                authentifizierte Verbindung zu den Base Servern. Es gibt drei authentifizierung Schematas die
-                von Google Base unterstützt werden:
+                Die Google Base API erlaubt Zugriff auf beide, sowohl öffentliche als auch private
+                Base Feeds. Öffentliche Feeds benötigen keine Authentifizierung, sind aber nur
+                lesbar und bieten nur reduzierte Funktionalität. Private Feeds bieten die größte
+                Funktionalität benötigen aber eine authentifizierte Verbindung zu den Base Servern.
+                Es gibt drei authentifizierung Schematas die von Google Base unterstützt werden:
             </para>
             <itemizedlist>
                 <listitem>
                     <para>
                         <firstterm>ClientAuth</firstterm>
-                        bietet dirakte Benutzername/Passwort Authentifizierung zu den Base Servern. Da es dieses
-                        Schema notwendig macht das Benutzer die Anwendung mit Ihrem Passwort versorgen, ist diese
-                        Authentifizierung nur dann notwendig wenn andere Authentifizierung Schemata unzureichend
-                        sind.
+                        bietet dirakte Benutzername/Passwort Authentifizierung zu den Base Servern.
+                        Da es dieses Schema notwendig macht das Benutzer die Anwendung mit Ihrem
+                        Passwort versorgen, ist diese Authentifizierung nur dann notwendig wenn
+                        andere Authentifizierung Schemata unzureichend sind.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <firstterm>AuthSub</firstterm>
-                        erlaubt die Authentifizierung zu den Base Servern über einen Google Proxy Server. Das
-                        bietet das gleiche Level an Bequemlichkeit wie ClientAuth, aber ohne die Sicherheitsrisiken
-                        was es zu einer idealen Wahl für Web-basierte Anwendungen macht.
+                        erlaubt die Authentifizierung zu den Base Servern über einen Google Proxy
+                        Server. Das bietet das gleiche Level an Bequemlichkeit wie ClientAuth, aber
+                        ohne die Sicherheitsrisiken was es zu einer idealen Wahl für Web-basierte
+                        Anwendungen macht.
                     </para>
                 </listitem>
             </itemizedlist>
             <para>
-                Die <classname>Zend_Gdata</classname> Bibliothek bietet Unterstützung für alle drei Authentifizierungs
-                Schemata. Im Rest dieses Kapitels wird angenommen das man mit den Authentifizierungs Schemata
-                umgehen kann und wie eine notwendige Authentifizierte Verbindung erstellt wird. Für weitere
-                Informationen kann in das Kapitel <xref linkend="zend.gdata.introduction.authentication" />
-                oder die <ulink url="http://code.google.com/apis/gdata/auth.html">Übersicht der Authentifizierung
-                im Entwickler Guide der Google Data API</ulink>
+                Die <classname>Zend_Gdata</classname> Bibliothek bietet Unterstützung für alle drei
+                Authentifizierungs Schemata. Im Rest dieses Kapitels wird angenommen das man mit den
+                Authentifizierungs Schemata umgehen kann und wie eine notwendige Authentifizierte
+                Verbindung erstellt wird. Für weitere Informationen kann in das Kapitel <xref
+                    linkend="zend.gdata.introduction.authentication" /> oder die <ulink
+                    url="http://code.google.com/apis/gdata/auth.html">Übersicht der
+                    Authentifizierung im Entwickler Guide der Google Data API</ulink>
                 gesehen werden.
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.connect.service">
             <title>Eine Service Instanz erstellen</title>
             <para>
-                Im mit Google Base zu interagieren, bietet diese Bibliothek die <classname>Zend_Gdata_Gbase</classname>
-                Service Klasse. Diese klasse bietet ein standardmäßiges Interface zu Google Data und den
-                Atom Publishing Protokoll Modellen und unterstützt in der Durchführung von Anfragen von und
-                zu den Base Servern.
+                Im mit Google Base zu interagieren, bietet diese Bibliothek die
+                <classname>Zend_Gdata_Gbase</classname> Service Klasse. Diese klasse bietet ein
+                standardmäßiges Interface zu Google Data und den Atom Publishing Protokoll Modellen
+                und unterstützt in der Durchführung von Anfragen von und zu den Base Servern.
             </para>
             <para>
-                Sobald ein Authentifizierungs Schema ausgewählt wurde, besteht der nächste Schritt darin
-                eine Instanz von <classname>Zend_Gdata_Gbase</classname> zu erstellen. Diese Klasse nimmt eine Instanz
-                von <classname>Zend_Http_Client</classname> als einziges Argument. Das bietet ein Interface für
-                AuthSub und ClientAuth Authentifizierungen, da beide einen speziellen authentifizierten
-                HTTP Client für die Erstellung benötigen. Wenn keine Argumente angegeben wurden, wird
-                automatisch eine nicht authentifizierte Instanz von <classname>Zend_Http_Client</classname> erstellt.
+                Sobald ein Authentifizierungs Schema ausgewählt wurde, besteht der nächste Schritt
+                darin eine Instanz von <classname>Zend_Gdata_Gbase</classname> zu erstellen. Diese
+                Klasse nimmt eine Instanz von <classname>Zend_Http_Client</classname> als einziges
+                Argument. Das bietet ein Interface für AuthSub und ClientAuth Authentifizierungen,
+                da beide einen speziellen authentifizierten HTTP Client für die Erstellung
+                benötigen. Wenn keine Argumente angegeben wurden, wird automatisch eine nicht
+                authentifizierte Instanz von <classname>Zend_Http_Client</classname> erstellt.
             </para>
             <para>
                 Das nachfolgende Beispiel zeigt wir eine Base Service Klasse erstellt wird indem die
@@ -114,8 +119,8 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Gbase($client);
 ]]></programlisting>
             <para>
-                Ein Base Service der AuthSub verwendet kann ähnlich erstellt werden, durch einen etwas
-                längeren Code:
+                Ein Base Service der AuthSub verwendet kann ähnlich erstellt werden, durch einen
+                etwas längeren Code:
             </para>
             <programlisting role="php"><![CDATA[
 /*
@@ -206,8 +211,8 @@ session_start();
 $service = new Zend_Gdata_Gbase(getAuthSubHttpClient());
 ]]></programlisting>
             <para>
-                Letztendlich kann ein nicht authentifizierter Server erstellt werden für die Verwendung mit
-                Feed Fetzen:
+                Letztendlich kann ein nicht authentifizierter Server erstellt werden für die
+                Verwendung mit Feed Fetzen:
             </para>
             <programlisting role="php"><![CDATA[
 // Erstellt eine Instanz des Base Services und verwendet einen nicht authentifizierten HTTP Client
@@ -218,21 +223,23 @@ $service = new Zend_Gdata_Gbase();
     <sect2 id="zend.gdata.gbase.retrieve">
         <title>Elemente empfangen</title>
         <para>
-            Benutzerdefinierte Feeds oder Feed Fetzen können abgefragt werden um Elemente zu erhalten. Es
-            benötigt zwei Schritte um eine Abfrage zu senden und über den zurückgegebenen Feed zu iterieren.
+            Benutzerdefinierte Feeds oder Feed Fetzen können abgefragt werden um Elemente zu
+            erhalten. Es benötigt zwei Schritte um eine Abfrage zu senden und über den
+            zurückgegebenen Feed zu iterieren.
         </para>
         <sect3 id="zend.gdata.gbase.retrieve.query">
             <title>Eine strukturierte Anfrage senden</title>
             <para>
-                Eine strukturierte Anfrage kann gesendet werden um Elemente vom eigenen benutzerdefinierten
-                Feed oder von einem öffentlichen Feed Fetzen zu erhalten.
+                Eine strukturierte Anfrage kann gesendet werden um Elemente vom eigenen
+                benutzerdefinierten Feed oder von einem öffentlichen Feed Fetzen zu erhalten.
             </para>
             <para>
                 Wenn Elemente empfangen werden indem die Base API verwendet wird, werden speziell
-                konstruierte Abfrage URLs verwendet um  zu beschreiben welche Evente zurückgegeben werden sollen.
-                Die <classname>Zend_Gdata_Gbase_ItemQuery</classname> und <classname>Zend_Gdata_Gbase_SnippetQuery</classname>
-                Klassen vereinfachen diese Aufgabe durch die automatische Erstellung einer Anfrage URL basierend
-                auf den angegebenen Parametern.
+                konstruierte Abfrage URLs verwendet um  zu beschreiben welche Evente zurückgegeben
+                werden sollen. Die <classname>Zend_Gdata_Gbase_ItemQuery</classname> und
+                <classname>Zend_Gdata_Gbase_SnippetQuery</classname> Klassen vereinfachen diese
+                Aufgabe durch die automatische Erstellung einer Anfrage URL basierend auf den
+                angegebenen Parametern.
             </para>
             <sect4 id="zend.gdata.gbase.retrieve.query.customeritems">
                 <title>Benutzerdefinierte Feed Elemente Anfragen</title>
@@ -250,9 +257,10 @@ $query->setMaxResults('5');
 $feed = $service->getGbaseItemFeed($query);
 ]]></programlisting>
                 <para>
-                    Eine komplette Liste dieser Parameter ist im
-                    <ulink url="http://code.google.com/apis/base/items-feed.html#QueParameters">Abfrage Parameter Kapitel</ulink>
-                    der Benutzerdefinierten Feed Elemente Dokumentation vorhanden.
+                    Eine komplette Liste dieser Parameter ist im <ulink
+                        url="http://code.google.com/apis/base/items-feed.html#QueParameters">Abfrage
+                        Parameter Kapitel</ulink> der Benutzerdefinierten Feed Elemente
+                    Dokumentation vorhanden.
                 </para>
             </sect4>
             <sect4 id="zend.gdata.gbase.retrieve.query.snippets">
@@ -271,9 +279,9 @@ $query->setMaxResults('5');
 $feed = $service->getGbaseSnippetFeed($query);
 ]]></programlisting>
                 <para>
-                    Eine komplette Liste dieser Parameter ist im
-                    <ulink url="http://code.google.com/apis/base/items-feed.html#QueParameters">Abfrage Parameter Kapitel</ulink>
-                    der Feed Fetzen Dokumentation vorhanden.
+                    Eine komplette Liste dieser Parameter ist im <ulink
+                        url="http://code.google.com/apis/base/items-feed.html#QueParameters">Abfrage
+                        Parameter Kapitel</ulink> der Feed Fetzen Dokumentation vorhanden.
                 </para>
             </sect4>
         </sect3>
@@ -298,8 +306,8 @@ foreach ($feed->entries as $entry) {
 }
 ]]></programlisting>
             <para>
-                Oder es kann auf spezielle Attributnamen gesehen werden und über die passenden Ergebnisse
-                iteriert werden:
+                Oder es kann auf spezielle Attributnamen gesehen werden und über die passenden
+                Ergebnisse iteriert werden:
             </para>
             <programlisting role="php"><![CDATA[
 foreach ($feed->entries as $entry) {
@@ -315,21 +323,21 @@ foreach ($feed->entries as $entry) {
     <sect2 id="zend.gdata.gbase.crud">
         <title>Benutzerdefinierte Elemente einfügen, aktualisieren und löschen</title>
         <para>
-            Ein Benutzer/Eigentümer kann auf seine eigenen Benutzerdefinierten Feed Elemente zugreifen um
-            Sie hinzuzufügen, zu aktualisieren oder Ihre Elemente zu löschen. Diese Operationen sind
-            für den öffentlichen Feed Fetzen nicht vorhanden.
+            Ein Benutzer/Eigentümer kann auf seine eigenen Benutzerdefinierten Feed Elemente
+            zugreifen um Sie hinzuzufügen, zu aktualisieren oder Ihre Elemente zu löschen. Diese
+            Operationen sind für den öffentlichen Feed Fetzen nicht vorhanden.
         </para>
         <para>
-            Eine Feed Operation kann getestet werden bevor diese wirklich ausgeführt wird durch das setzen
-            des Dry-Run Flags (<code>$dryRun</code>) auf <code>true</code>. Sobald sichergestellt ist das die
-            Daten übertragen werden sollen, muß es auf <code>false</code> gesetzt werden um die Operation
-            durchzuführen.
+            Eine Feed Operation kann getestet werden bevor diese wirklich ausgeführt wird durch das
+            setzen des Dry-Run Flags (<code>$dryRun</code>) auf <code>true</code>. Sobald
+            sichergestellt ist das die Daten übertragen werden sollen, muß es auf <code>false</code>
+            gesetzt werden um die Operation durchzuführen.
         </para>
         <sect3 id="zend.gdata.gbase.crud.insert">
             <title>Ein Element einfügen</title>
             <para>
-                Elemente können hinzugefügt werden durch Verwenden der <code>insertGbaseItem()</code>
-                Methode des Base Services:
+                Elemente können hinzugefügt werden durch Verwenden der
+                <code>insertGbaseItem()</code> Methode des Base Services:
             </para>
             <programlisting role="php"><![CDATA[
 $service = new Zend_Gdata_Gbase($client);
@@ -414,24 +422,26 @@ $entry->save($dryRun);
 // $service->updateGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                Nach der Durchführung der Änderungen, muß entweder die <code>save($dryRun)</code> Methode am
-                <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt oder die
-                <code>updateGbaseItem($entry, $dryRun)</code> Methode am <classname>Zend_Gdata_Gbase</classname>
-                Objekt aufgerufen werden um die Änderungen abzuspeichern.
+                Nach der Durchführung der Änderungen, muß entweder die <code>save($dryRun)</code>
+                Methode am <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt oder die
+                <code>updateGbaseItem($entry, $dryRun)</code> Methode am
+                <classname>Zend_Gdata_Gbase</classname> Objekt aufgerufen werden um die Änderungen
+                abzuspeichern.
             </para>
         </sect3>
         <sect3 id="zend.gdata.gbase.crud.delete">
             <title>Ein Element löschen</title>
             <para>
-                ein Element kann gelöscht werden indem die <code>deleteGbaseItem()</code> Methode aufgerufen wird:
+                ein Element kann gelöscht werden indem die <code>deleteGbaseItem()</code> Methode
+                aufgerufen wird:
             </para>
             <programlisting role="php"><![CDATA[
 $dryRun = false;
 $service->deleteGbaseItem($entry, $dryRun);
 ]]></programlisting>
             <para>
-                Alternativ kann <code>delete()</code> auf dem <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt
-                aufgerufen werden:
+                Alternativ kann <code>delete()</code> auf dem
+                <classname>Zend_Gdata_Gbase_ItemEntry</classname> Objekt aufgerufen werden:
             </para>
             <programlisting role="php"><![CDATA[
 $dryRun = false;

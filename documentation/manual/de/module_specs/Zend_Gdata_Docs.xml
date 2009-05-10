@@ -5,10 +5,10 @@
     <title>Verwenden der Google Dokumente Listen Daten API</title>
 
     <para>
-        Die Google Dokumente Listen Daten API erlaubt es Client Anwendungen Dokumente zu Google Dokumente
-        hochzuladen und diese in der Form von Google Daten API ("GData") Feeds aufzulisten. Die Client
-        Anwendung kann eine Liste von Benutzer Dokumenten anfragen, und den Inhalt in einem existierenden
-        Dokument abfragen.
+        Die Google Dokumente Listen Daten API erlaubt es Client Anwendungen Dokumente zu Google
+        Dokumente hochzuladen und diese in der Form von Google Daten API ("GData") Feeds
+        aufzulisten. Die Client Anwendung kann eine Liste von Benutzer Dokumenten anfragen, und den
+        Inhalt in einem existierenden Dokument abfragen.
     </para>
 
     <para>
@@ -20,10 +20,11 @@
     <sect2 id="zend.gdata.docs.listdocuments">
         <title>Eine Liste von Dokumenten erhalten</title>
         <para>
-            Man kann eine Liste von den Google Dokumenten für einen bestimmten Benutzer erhalten  indem die
-            <code>getDocumentListFeed</code> Methode des Docs Services verwendet wird. Das Service gibt ein
-            <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt zurück das eine Liste von dokumenten enthält
-            die mit dem authentifizierten Benutzer assoziiert sind.
+            Man kann eine Liste von den Google Dokumenten für einen bestimmten Benutzer erhalten
+            indem die <code>getDocumentListFeed</code> Methode des Docs Services verwendet wird.
+            Das Service gibt ein <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt
+            zurück das eine Liste von dokumenten enthält die mit dem authentifizierten Benutzer
+            assoziiert sind.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -34,9 +35,10 @@ $feed = $docs->getDocumentListFeed();
 ]]></programlisting>
 
         <para>
-            Das sich ergebende <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt repräsentiert die Antwort
-            des Servers. Dieser Feed enthält eine Liste von <classname>Zend_Gdata_Docs_DocumentListEntry</classname>
-            Objekten (<code>$feed->entries</code>), wobei jeder von Ihnen ein einzelnes Google Dokument
+            Das sich ergebende <classname>Zend_Gdata_Docs_DocumentListFeed</classname> Objekt
+            repräsentiert die Antwort des Servers. Dieser Feed enthält eine Liste von
+            <classname>Zend_Gdata_Docs_DocumentListEntry</classname> Objekten
+            (<code>$feed->entries</code>), wobei jeder von Ihnen ein einzelnes Google Dokument
             repräsentiert.
         </para>
     </sect2>
@@ -45,9 +47,9 @@ $feed = $docs->getDocumentListFeed();
         <title>Ein Dokument hochladen</title>
         <para>
             Man kann ein neues Google Dokument erstellen indem ein Wortverarbeitungs Dokument, eine
-            Tabellenkalkulation oder eine Präsentation hochgeladen wird. Dieses Beispiel ist vom interaktiven
-            Docs.php Beispiel welches mit der Bibliothek kommt. Es demonstriert das Hochladen einer Datei und
-            das Ausdrucken der Information über das Ergebnis vom Server.
+            Tabellenkalkulation oder eine Präsentation hochgeladen wird. Dieses Beispiel ist vom
+            interaktiven Docs.php Beispiel welches mit der Bibliothek kommt. Es demonstriert das
+            Hochladen einer Datei und das Ausdrucken der Information über das Ergebnis vom Server.
         </para>
         <programlisting role="php"><![CDATA[
 /**
@@ -110,20 +112,20 @@ function uploadDocument($docs, $html, $originalFileName,
         <para>
             Die Dokumenten Liste kann durchsucht werden indem einer der
             <ulink url="http://code.google.com/apis/gdata/reference.html#Queries">standardmäßigen
-            Google Daten API Abfrageparameter</ulink> verwendet wird. Kategorien werden verwendet um den
-            Typ des Dokuments das zurückgegeben wird (Wortverarbeitungs Dokument, Tabellenkalkulation)
-            einzuschränken. Detailiertere Informationen über Parameter die speziell in der Dokumenten Liste
-            vorhanden sind können in der
-            <ulink url="http://code.google.com/apis/documents/reference.html#Parameters">Dokumenten Listen Daten API Referenz Anleitung</ulink>
-            gefunden werden.
+            Google Daten API Abfrageparameter</ulink> verwendet wird. Kategorien werden verwendet um
+            den Typ des Dokuments das zurückgegeben wird (Wortverarbeitungs Dokument,
+            Tabellenkalkulation) einzuschränken. Detailiertere Informationen über Parameter die
+            speziell in der Dokumenten Liste vorhanden sind können in der
+            <ulink url="http://code.google.com/apis/documents/reference.html#Parameters">Dokumenten
+                Listen Daten API Referenz Anleitung</ulink> gefunden werden.
         </para>
 
         <sect3 id="zend.gdata.docs.listwpdocuments">
             <title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title>
             <para>
-                Ein Feed der alle Dokumente eines speziellen Typs enthält kann auch angefragt werden.
-                Um zum Beispiel eine Liste von eigenen Wortverarbeitungs Dokumenten zu sehen, würde man eine
-                Kategorieanfrage wie folgt durchführen.
+                Ein Feed der alle Dokumente eines speziellen Typs enthält kann auch angefragt
+                werden. Um zum Beispiel eine Liste von eigenen Wortverarbeitungs Dokumenten zu
+                sehen, würde man eine Kategorieanfrage wie folgt durchführen.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -135,8 +137,8 @@ $feed = $docs->getDocumentListFeed(
         <sect3 id="zend.gdata.docs.listspreadsheets">
             <title>Eine Liste von Tabellenkalkulationen erhalten</title>
             <para>
-                Um eine Liste aller eigenen Google Tabellenkalkulationen zu erhalten kann die folgende
-                Abfrage verwendet werden:
+                Um eine Liste aller eigenen Google Tabellenkalkulationen zu erhalten kann die
+                folgende Abfrage verwendet werden:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -148,10 +150,11 @@ $feed = $docs->getDocumentListFeed(
         <sect3 id="zend.gdata.docs.textquery">
             <title>Eine Textabfrage durchführen</title>
             <para>
-                Der Inhalt von Dokumenten kann durch Verwendung von <classname>Zend_Gdata_Docs_Query</classname> in der
-                Abfrage durchsucht werden. Ein Abfrage Objekt kann verwendet werden um eine Abfrage URI zu
-                erstellen, wobei der Suchbegriff als Parameter übergeben wird. Hier ist eine Beispielmethode
-                welche die Dokumenten Liste nach Dokumenten abfrage die den Suchstring enthalten:
+                Der Inhalt von Dokumenten kann durch Verwendung von
+                <classname>Zend_Gdata_Docs_Query</classname> in der Abfrage durchsucht werden. Ein
+                Abfrage Objekt kann verwendet werden um eine Abfrage URI zu erstellen, wobei der
+                Suchbegriff als Parameter übergeben wird. Hier ist eine Beispielmethode welche die
+                Dokumenten Liste nach Dokumenten abfrage die den Suchstring enthalten:
             </para>
             <programlisting role="php"><![CDATA[
 $docsQuery = new Zend_Gdata_Docs_Query();

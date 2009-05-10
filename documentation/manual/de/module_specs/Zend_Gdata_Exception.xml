@@ -5,8 +5,9 @@
     <title>Gdata Ausnahmen auffangen</title>
 
     <para>
-        Die <classname>Zend_Gdata_App_Exception</classname> Klasse ist eine Basis Klasse für Ausnahmen die durch <classname>Zend_Gdata</classname>
-        geworfen werden. Man kann jede durch <classname>Zend_Gdata</classname> geworfene Ausnahme auffangen indem
+        Die <classname>Zend_Gdata_App_Exception</classname> Klasse ist eine Basis Klasse für
+        Ausnahmen die durch <classname>Zend_Gdata</classname> geworfen werden. Man kann jede durch
+        <classname>Zend_Gdata</classname> geworfene Ausnahme auffangen indem
         <classname>Zend_Gdata_App_Exception</classname> aufgefangen wird.
     </para>
 
@@ -26,54 +27,58 @@ try {
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_AuthException</classname> indiziert das die Benutzer Account Daten nicht
-                    gültig sind.
+                    <classname>Zend_Gdata_App_AuthException</classname> indiziert das die Benutzer
+                    Account Daten nicht gültig sind.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_BadMethodCallException</classname> indiziert das eine Methode für ein
-                    Service aufgerufen wurde der diese Methode nicht unterstützt. Zum Beispiel unterstützt
-                    der CodeSearch Service <code>post()</code> nicht.
+                    <classname>Zend_Gdata_App_BadMethodCallException</classname> indiziert das eine
+                    Methode für ein Service aufgerufen wurde der diese Methode nicht unterstützt.
+                    Zum Beispiel unterstützt der CodeSearch Service <code>post()</code> nicht.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_HttpException</classname> indiziert das eine HTTP Anfrage nicht erfolgreich
-                    war. Bietet die Möglichkeit das komplette <classname>Zend_Http_Request</classname> Objekt zu erhalten um den
-                    exakten Grund des Fehlers festzustellen in den Fällen in denen <code>$e->getMessage()</code>
+                    <classname>Zend_Gdata_App_HttpException</classname> indiziert das eine HTTP
+                    Anfrage nicht erfolgreich war. Bietet die Möglichkeit das komplette
+                    <classname>Zend_Http_Request</classname> Objekt zu erhalten um den exakten Grund
+                    des Fehlers festzustellen in den Fällen in denen <code>$e->getMessage()</code>
                     nicht genug Details liefert.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_InvalidArgumentException</classname> wird geworfen wenn eine Anwendung einen
-                    Wert bietet der in dem gegebenen Kontext nicht gültig ist. Zum Beispiel wenn ein Kalender
-                    Sichtbarkeits Wert von "banana" spezifiziert wird, oder ein Blogger Feed geholt werden
-                    soll ohne einen Blog Namen zu spezifizieren.
+                    <classname>Zend_Gdata_App_InvalidArgumentException</classname> wird geworfen
+                    wenn eine Anwendung einen Wert bietet der in dem gegebenen Kontext nicht gültig
+                    ist. Zum Beispiel wenn ein Kalender Sichtbarkeits Wert von "banana" spezifiziert
+                    wird, oder ein Blogger Feed geholt werden soll ohne einen Blog Namen zu
+                    spezifizieren.
                 </para>
             </listitem>
               <listitem>
                 <para>
-                    <classname>Zend_Gdata_App_CaptchaRequiredException</classname> wird geworfen wenn ein ClientLogin
-                    Versuch stattfindet und eine <trademark>CAPTCHA</trademark> Challenge vom Authentifikations
-                    Service empfangen wird. Diese Ausnahme enthält eine Token ID und eine URL zu einem
-                    <trademark>CAPTCHA</trademark> Challenge Bild. Dieses Bild ist ein visuelles Puzzle das dem
-                    Benutzer angezeigt werden sollte. Nachdem die Antwort des Benutzers auf dieses Challenge
-                    Bild gesammelt wurde, kann die Antwort im nächsten ClientLogin Versuch inkludiert werden.
+                    <classname>Zend_Gdata_App_CaptchaRequiredException</classname> wird geworfen
+                    wenn ein ClientLogin Versuch stattfindet und eine <trademark>CAPTCHA</trademark>
+                    Challenge vom Authentifikations Service empfangen wird. Diese Ausnahme enthält
+                    eine Token ID und eine URL zu einem <trademark>CAPTCHA</trademark> Challenge
+                    Bild. Dieses Bild ist ein visuelles Puzzle das dem Benutzer angezeigt werden
+                    sollte. Nachdem die Antwort des Benutzers auf dieses Challenge Bild gesammelt
+                    wurde, kann die Antwort im nächsten ClientLogin Versuch inkludiert werden.
                     Alternativ kann der Benutzer direkt zu dieser Webseite geleitet werden:
                     <ulink url="https://www.google.com/accounts/DisplayUnlockCaptcha"/>
                     Weitere Informationen können in der
-                    <link linkend="zend.gdata.clientlogin">ClientLogin Dokumentation</link> gefunden werden.
+                    <link linkend="zend.gdata.clientlogin">ClientLogin Dokumentation</link> gefunden
+                    werden.
                 </para>
             </listitem>
         </itemizedlist>
     </para>
 
     <para>
-        Man kann diese Ausnahme Subklassen verwenden um spezielle Ausnahmen unterschiedlich zu handhaben. Siehe
-        die API Dokumentation für Informationen darüber welche Ausnahme Subklassen durch welche Methoden in
-        <classname>Zend_Gdata</classname> geworfen werden.
+        Man kann diese Ausnahme Subklassen verwenden um spezielle Ausnahmen unterschiedlich zu
+        handhaben. Siehe die API Dokumentation für Informationen darüber welche Ausnahme Subklassen
+        durch welche Methoden in <classname>Zend_Gdata</classname> geworfen werden.
     </para>
 
     <programlisting role="php"><![CDATA[

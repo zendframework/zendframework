@@ -1,27 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 14385 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>L'aide de vue HeadTitle</title>
 
-    <para>L'élément HTML <code>&lt;title&gt;</code> est utilisé pour fournir un titre à un document HTML. L'aide
-    <code>HeadTitle</code> vous permet par programme de créer et de stocker le titre afin de le récupérer plus tard et
-    de l'afficher.</para>
+    <para>
+        L'élément HTML <code>&lt;title&gt;</code> est utilisé pour fournir un titre à un
+        document HTML. L'aide <code>HeadTitle</code> vous permet par programme de créer et de
+        stocker le titre afin de le récupérer plus tard et de l'afficher.
+    </para>
 
-    <para>L'aide <code>HeadTitle</code> est une implémentation concrète de l'aide <link
-    linkend="zend.view.helpers.initial.placeholder">Placeholder</link>. Elle surcharge la méthode
-    <code>toString()</code> pour forcer la génération d'un élément <code>&lt;title&gt;</code>, et ajoute une méthode
-    <code>headTitle()</code> pour des réglages faciles et rapides et pour l'aggrégation des éléments du titre. La
-    signature de la méthode est <code>headTitle($title, $setType = 'APPEND')</code> ; par défaut, la valeur est ajoutée
-    en fin de pile (pour aggréger les segments du titre), mais vous pouvez aussi spécifier "<code>PREPEND</code>" (pour
-    l'ajouter en début de pile) ou "<code>SET</code>" (pour remplacer la pile existante).</para>
+    <para>
+        L'aide <code>HeadTitle</code> est une implémentation concrète de l'aide <link
+        linkend="zend.view.helpers.initial.placeholder">Placeholder</link>. Elle surcharge la
+        méthode <code>toString()</code> pour forcer la génération d'un élément
+        <code>&lt;title&gt;</code>, et ajoute une méthode <code>headTitle()</code> pour des réglages
+        faciles et rapides et pour l'aggrégation des éléments du titre. La signature de la méthode
+        est <code>headTitle($title, $setType = 'APPEND')</code> ; par défaut, la valeur est ajoutée
+        en fin de pile (pour aggréger les segments du titre), mais vous pouvez aussi spécifier
+        "<code>PREPEND</code>" (pour l'ajouter en début de pile) ou "<code>SET</code>" (pour
+        remplacer la pile existante).
+    </para>
 
     <example id="zend.view.helpers.initial.headtitle.basicusage">
         <title>Utilisation basique de l'aide HeadTitle</title>
 
-        <para>Vous pouvez spécifier la balise de titre à n'importe quel moment. Un usage typique serait de paramètrer
-        les différents segments du titre à chaque niveau de profondeur de votre application : site, module, contrôleur,
-        action et ressources potentielles.</para>
+        <para>
+            Vous pouvez spécifier la balise de titre à n'importe quel moment. Un usage typique
+            serait de paramètrer les différents segments du titre à chaque niveau de profondeur de
+            votre application : site, module, contrôleur, action et ressources potentielles.
+        </para>
 
         <programlisting role="php"><![CDATA[
 // Paramétrage des noms de contrôleurs et d'action
@@ -38,8 +46,10 @@ $this->headTitle('Zend Framework');
 $this->headTitle()->setSeparator(' / ');
 ]]></programlisting>
 
-        <para>Quand vous êtes finalement prêt à afficher le titre dans votre script de disposition, faîtes simplement un
-        <code>echo</code> de l'aide :</para>
+        <para>
+            Quand vous êtes finalement prêt à afficher le titre dans votre script de
+            disposition, faîtes simplement un <code>echo</code> de l'aide :
+        </para>
 
         <programlisting role="php"><![CDATA[
 <!-- Affiche <action> / <controller> / Zend Framework -->

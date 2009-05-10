@@ -1,40 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12116 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>L'aide de vue HTML Object</title>
 
-    <para>L'élément HTML <code>&lt;object&gt;</code> est utilisé pour inclure un média comme Flash ou QuickTime dans les
-    pages Web. L'aide de vue <code>Object</code> vous aide à réaliser ceci avec un minimum d'effort.</para>
+    <para>
+        L'élément HTML <code>&lt;object&gt;</code> est utilisé pour inclure un média comme
+        Flash ou QuickTime dans les pages Web. L'aide de vue <code>Object</code> vous aide à
+        réaliser ceci avec un minimum d'effort.
+    </para>
 
     <para>Il existe quatre aides de vue <code>Object</code> initiaux :</para>
 
     <itemizedlist>
         <listitem>
-            <para><code>formFlash</code> : génère le balisage pour l'inclusion de fichiers Flash.</para>
+            <para>
+                <code>formFlash</code> : génère le balisage pour l'inclusion de fichiers
+                Flash.
+            </para>
         </listitem>
 
         <listitem>
-            <para><code>formObject</code> : génère le balisage pour l'inclusion d'objets personnalisés.</para>
+            <para>
+                <code>formObject</code> : génère le balisage pour l'inclusion d'objets
+                personnalisés.
+            </para>
         </listitem>
 
         <listitem>
-            <para><code>formPage</code> : génère le balisage pour l'inclusion d'autres pages (X)HTML.</para>
+            <para>
+                <code>formPage</code> : génère le balisage pour l'inclusion d'autres pages
+                (X)HTML.
+            </para>
         </listitem>
 
         <listitem>
-            <para><code>formQuicktime</code> : génère le balisage pour l'inclusion de fichiers QuickTime.</para>
+            <para>
+                <code>formQuicktime</code> : génère le balisage pour l'inclusion de fichiers
+                QuickTime.
+            </para>
         </listitem>
     </itemizedlist>
 
-    <para>Toutes ces aides partagent une interface similaire. Pour cette raison, cette documentation ne présentera des
-    exemples que pour deux de ces aides.</para>
+    <para>
+        Toutes ces aides partagent une interface similaire. Pour cette raison, cette
+        documentation ne présentera des exemples que pour deux de ces aides.
+    </para>
 
     <example id="zend.view.helpers.initial.object.flash">
         <title>Aide de vue Flash</title>
 
-        <para>Inclure du Flash dans votre page est assez simple. Le seul argument requis est l'URI de la
-        ressource.</para>
+        <para>
+            Inclure du Flash dans votre page est assez simple. Le seul argument requis est
+            l'URI de la ressource.
+        </para>
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
@@ -50,20 +69,27 @@
 ]]></programlisting>
     </example>
 
-    <para>Cependant vous pouvez aussi spécifier des attributs, des paramètres et du contenu qui peuvent être affichés
-    avec la balise <code>&lt;object&gt;</code>. Ceci peut être montré avec l'aide de vue <code>htmlObject</code>.</para>
+    <para>
+        Cependant vous pouvez aussi spécifier des attributs, des paramètres et du contenu qui
+        peuvent être affichés avec la balise <code>&lt;object&gt;</code>. Ceci peut être montré avec
+        l'aide de vue <code>htmlObject</code>.
+    </para>
 
     <example id="zend.view.helpers.initial.object.object">
         <title>Personnalisation d'un objet en fournissant des arguments additionnels</title>
 
-        <para>Le premier argument de l'aide <code>Object</code> est toujours requis. Il s'agit de l'URI de la ressource
-        à inclure. Le second argument est seulement requis par l'aide <code>htmlObject</code>. Les autres aides
-        contiennent déjà la bonne valeur pour cet argument. Le troisième argument est utilisé pour fournir des attributs
-        à l'élément <code>object</code>. Seul un tableau de paires clé/valeur est accepté. <code>classid</code> ou
-        <code>codebase</code> sont des exemples de tels attributs. Le quatrième paramètre ne prend aussi qu'un tableau
-        de paires clé/valeur est les utilise pour créer des éléments <code>&lt;param&gt;</code>. Enfin, vous avez la
-        possibilité de fournir un contenu additionnel à l'objet en cinquième paramètre. Voici donc un exemple qui
-        utilise tous le paramètres :</para>
+        <para>
+            Le premier argument de l'aide <code>Object</code> est toujours requis. Il s'agit
+            de l'URI de la ressource à inclure. Le second argument est seulement requis par l'aide
+            <code>htmlObject</code>. Les autres aides contiennent déjà la bonne valeur pour cet
+            argument. Le troisième argument est utilisé pour fournir des attributs à l'élément
+            <code>object</code>. Seul un tableau de paires clé/valeur est accepté.
+            <code>classid</code> ou <code>codebase</code> sont des exemples de tels attributs. Le
+            quatrième paramètre ne prend aussi qu'un tableau de paires clé/valeur est les utilise
+            pour créer des éléments <code>&lt;param&gt;</code>. Enfin, vous avez la possibilité de
+            fournir un contenu additionnel à l'objet en cinquième paramètre. Voici donc un exemple
+            qui utilise tous le paramètres :
+        </para>
 
         <programlisting role="php"><![CDATA[
 <?php echo $this->htmlObject(
@@ -83,13 +109,14 @@
 
         <para>Ceci affichera le code HTML suivant :</para>
 
-        <para><programlisting><![CDATA[
-<object data="/path/to/file.ext" type="mime/type"
-        attr1="aval1" attr2="aval2">
-    <param name="param1" value="pval1" />
-    <param name="param2" value="pval2" />
-    some content
-</object>
-]]></programlisting></para>
-    </example>
-</sect3>
+        <para>
+            <programlisting><![CDATA[
+    <object data="/path/to/file.ext" type="mime/type"
+            attr1="aval1" attr2="aval2">
+        <param name="param1" value="pval1" />
+        <param name="param2" value="pval2" />
+        some content
+    </object>
+    ]]></programlisting></para>
+        </example>
+    </sect3>

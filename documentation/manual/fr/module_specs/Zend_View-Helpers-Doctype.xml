@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 14448 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>L'aide de vue Doctype</title>
 
-    <para>Les documents HTML et XHTML valides doivent inclure une déclaration <code>DOCTYPE</code>. Sans compter qu'ils
-    sont difficiles à garder en mémoire, ceux-ci peuvent aussi affecter la façon dont certains éléments du document
-    peuvent être rendus (par exemple, les échappements CDATA dans <code>&lt;script&gt;</code> et les éléments
-    <code>&lt;style&gt;</code>.</para>
+    <para>
+        Les documents HTML et XHTML valides doivent inclure une déclaration
+        <code>DOCTYPE</code>. Sans compter qu'ils sont difficiles à garder en mémoire, ceux-ci
+        peuvent aussi affecter la façon dont certains éléments du document peuvent être rendus (par
+        exemple, les échappements CDATA dans <code>&lt;script&gt;</code> et les éléments
+        <code>&lt;style&gt;</code>.
+    </para>
 
     <para>L'aide <code>Doctype</code> vous permet de spécifier un des types suivants :</para>
 
@@ -49,17 +52,25 @@
         </listitem>
     </itemizedlist>
 
-    <para>Vous pouvez aussi spécifier un doctype personnalisé du moment que celui-ci soit correctement formé.</para>
+    <para>
+        Vous pouvez aussi spécifier un doctype personnalisé du moment que celui-ci soit
+        correctement formé.
+    </para>
 
-    <para>L'aide <code>Doctype</code> est une implémentation concrète de l'<link
-    linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.</para>
+    <para>
+        L'aide <code>Doctype</code> est une implémentation concrète de l'<link
+        linkend="zend.view.helpers.initial.placeholder">aide Conteneur</link>.
+    </para>
 
     <example id="zend.view.helpers.initial.doctype.basicusage">
         <title>Utilisation basique de l'aide Doctype</title>
 
-        <para>Vous pouvez spécifier le doctype à n'importe quel moment. Cependant, les aides de vues qui utilisent pour
-        leur affichage ne le reconnaissent qu'une fois qu'il a été paramètré, donc la manière la plus simple est de le
-        spécifier dans votre fichier d'amorçage :</para>
+        <para>
+            Vous pouvez spécifier le doctype à n'importe quel moment. Cependant, les aides de
+            vues qui utilisent pour leur affichage ne le reconnaissent qu'une fois qu'il a été
+            paramètré, donc la manière la plus simple est de le spécifier dans votre fichier
+            d'amorçage :
+        </para>
 
         <programlisting role="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
@@ -76,15 +87,19 @@ $doctypeHelper->doctype('XHTML1_STRICT');
     <example id="zend.view.helpers.initial.doctype.retrieving">
         <title>Récupérer le Doctype</title>
 
-        <para>Si vous avez besoin du doctype, vous pouvez le récupérer par l'appel de <code>getDoctype()</code> sur
-        l'objet.</para>
+        <para>
+            Si vous avez besoin du doctype, vous pouvez le récupérer par l'appel de
+            <code>getDoctype()</code> sur l'objet.
+        </para>
 
         <programlisting role="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
-        <para>Typiquement, vous pouvez simplement vouloir savoir si le doctype est XHTML ou non ; pour ceci, la méthode
-        <code>isXhtml()</code> vous suffira :</para>
+        <para>
+            Typiquement, vous pouvez simplement vouloir savoir si le doctype est XHTML ou non
+            ; pour ceci, la méthode <code>isXhtml()</code> vous suffira :
+        </para>
 
         <programlisting role="php"><![CDATA[
 if ($view->doctype()->isXhtml()) {

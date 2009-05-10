@@ -1,25 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 14385 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>L'aide de vue Placeholder</title>
 
     <note>
-        <para>NDT. : Le terme "placeholder est conservé car sa signification varie en fonction du contexte : conteneur
-        générique ou emplacement réservé.</para>
+        <para>
+            NDT. : Le terme "placeholder est conservé car sa signification varie en fonction
+            du contexte : conteneur générique ou emplacement réservé.
+        </para>
     </note>
 
-    <para>L'aide de vue <code>Placeholder</code> est utilisé pour faire persister le contenu entre les scripts de vues
-    et les instances de vues. Il offre aussi des fonctionnalités utiles comme l'agrégation de contenu, la capture de
-    contenu de scripts de vues pour une utilisation ultérieure, et l'ajout de texte pré ou post contenu (et la
-    personnalisation des séparateurs de contenu).</para>
+    <para>
+        L'aide de vue <code>Placeholder</code> est utilisé pour faire persister le contenu
+        entre les scripts de vues et les instances de vues. Il offre aussi des fonctionnalités
+        utiles comme l'agrégation de contenu, la capture de contenu de scripts de vues pour une
+        utilisation ultérieure, et l'ajout de texte pré ou post contenu (et la personnalisation des
+        séparateurs de contenu).
+    </para>
 
     <example id="zend.view.helpers.initial.placeholder.usage">
         <title>Utilisation basique des Placeholders</title>
 
-        <para>L'utilisation basique des placeholders est la persistance des données de vue. Chaque appel de l'aide
-        <code>Placeholder</code> attend un nom de placeholder ; l'aide retourne un objet conteneur que vous pouvez soit
-        manipuler ou simplement envoyé à l'affichage.</para>
+        <para>
+            L'utilisation basique des placeholders est la persistance des données de vue.
+            Chaque appel de l'aide <code>Placeholder</code> attend un nom de placeholder ; l'aide
+            retourne un objet conteneur que vous pouvez soit manipuler ou simplement envoyé à
+            l'affichage.
+        </para>
 
         <programlisting role="php"><![CDATA[
 <?php $this->placeholder('foo')->set("Du texte pour plus tard") ?>
@@ -34,36 +42,53 @@
     <example id="zend.view.helpers.initial.placeholder.aggregation">
         <title>Utilisation des Placeholders pour agréger du contenu</title>
 
-        <para>L'agrégation du contenu via les placeholders peut être aussi utile parfois. Par exemple, votre script de
-        vue peut avoir une variable sous forme de tableau à partir de laquelle vous souhaitez récupérer des messages à
-        afficher plus tard ; un autre script de vue peut ensuite déterminer de la manière suivant laquelle ils seront
-        affichés.</para>
+        <para>
+            L'agrégation du contenu via les placeholders peut être aussi utile parfois. Par
+            exemple, votre script de vue peut avoir une variable sous forme de tableau à partir de
+            laquelle vous souhaitez récupérer des messages à afficher plus tard ; un autre script de
+            vue peut ensuite déterminer de la manière suivant laquelle ils seront affichés.
+        </para>
 
-        <para>L'aide de vue <code>Placeholder</code> utilise des conteneurs qui étendent <code>ArrayObject</code>,
-        fournissant de riches fonctionnalités de manipulations des tableaux. De plus, il offre une variété de méthodes
-        pour le formatage du contenu stockée dans le conteneur :</para>
+        <para>
+            L'aide de vue <code>Placeholder</code> utilise des conteneurs qui étendent
+            <code>ArrayObject</code>, fournissant de riches fonctionnalités de manipulations des
+            tableaux. De plus, il offre une variété de méthodes pour le formatage du contenu stockée
+            dans le conteneur :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>setPrefix($prefix)</code> paramètre le texte qui sera placé préalablement à tout le contenu.
-                Utilisez <code>getPrefix()</code> à tout moment pour déterminer le réglage courant.</para>
+                <para>
+                    <code>setPrefix($prefix)</code> paramètre le texte qui sera placé
+                    préalablement à tout le contenu. Utilisez <code>getPrefix()</code> à tout moment
+                    pour déterminer le réglage courant.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>setPostfix($prefix)</code> paramètre le texte qui sera placé après tout le contenu. Utilisez
-                <code>getPostfix()</code> à tout moment pour déterminer le réglage courant.</para>
+                <para>
+                    <code>setPostfix($prefix)</code> paramètre le texte qui sera placé après
+                    tout le contenu. Utilisez <code>getPostfix()</code> à tout moment pour
+                    déterminer le réglage courant.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>setSeparator($prefix)</code> paramètre le texte qui sera placé entre chaque élément de
-                contenu. Utilisez <code>getSeparator()</code> à tout moment pour déterminer le réglage courant.</para>
+                <para>
+                    <code>setSeparator($prefix)</code> paramètre le texte qui sera placé entre
+                    chaque élément de contenu. Utilisez <code>getSeparator()</code> à tout moment
+                    pour déterminer le réglage courant.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>setIndent($prefix)</code> peut être utilisé pour paramétrer une indentation pour chaque
-                élément du contenu. Si un entier est fourni, il s'agira du nombre d'espaces à utiliser ; si une chaîne
-                est fournie, elle sera utilisée. Utilisez <code>getIndent()</code> à tout moment pour déterminer le
-                réglage courant.</para>
+                <para>
+                    <code>setIndent($prefix)</code> peut être utilisé pour paramétrer une
+                    indentation pour chaque élément du contenu. Si un entier est fourni, il s'agira
+                    du nombre d'espaces à utiliser ; si une chaîne est fournie, elle sera utilisée.
+                    Utilisez <code>getIndent()</code> à tout moment pour déterminer le réglage
+                    courant.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -87,10 +112,13 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
 ?>
 ]]></programlisting>
 
-        <para>Puisque l'objet conteneur <code>Placeholder</code> étend <code>ArrayObject</code>, vous pouvez ainsi
-        facilement assigner du contenu à une clé du conteneur en particulier, plutôt que de simplement de les envoyer
-        les unes après les autres ("push"). Les clés peuvent être accédées soit en utilisant les propriétés d'objet ou
-        comme les clés d'un tableau.</para>
+        <para>
+            Puisque l'objet conteneur <code>Placeholder</code> étend <code>ArrayObject</code>,
+            vous pouvez ainsi facilement assigner du contenu à une clé du conteneur en particulier,
+            plutôt que de simplement de les envoyer les unes après les autres ("push"). Les clés
+            peuvent être accédées soit en utilisant les propriétés d'objet ou comme les clés d'un
+            tableau.
+        </para>
 
         <programlisting role="php"><![CDATA[
 <?php $this->placeholder('foo')->bar = $this->data ?>
@@ -106,31 +134,49 @@ echo $foo['bar'];
     <example id="zend.view.helpers.initial.placeholder.capture">
         <title>Utilisation des Placeholders pour capturer le contenu</title>
 
-        <para>Occasionnellement vous pouvez avoir du contenu pour un placeholder dans un script de vue qui est simple à
-        mettre sous forme de modèle ("template") ; l'aide de vue <code>Placeholder</code> vous permet de capturer tout
-        contenu arbitraire pour un rendu ultérieur en utilisant l'API suivante.</para>
+        <para>
+            Occasionnellement vous pouvez avoir du contenu pour un placeholder dans un script
+            de vue qui est simple à mettre sous forme de modèle ("template") ; l'aide de vue
+            <code>Placeholder</code> vous permet de capturer tout contenu arbitraire pour un rendu
+            ultérieur en utilisant l'API suivante.
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>captureStart($type, $key)</code> commence la capture de contenu.</para>
+                <para>
+                    <code>captureStart($type, $key)</code> commence la capture de
+                    contenu.
+                </para>
 
-                <para><code>$type</code> doit être une des constantes de <code>Placeholder</code> : <code>APPEND</code>
-                ou <code>SET</code>. Si c'est <code>APPEND</code>, le contenu capturé est ajouté à la liste de contenu
-                courant dans le placeholder ; si c'est <code>SET</code>, le contenu capturé remplace toute valeur
-                existante dans le placeholder (potentiellement permet de remplacer tout contenu préalable). Par défaut,
-                <code>$type</code> vaut <code>APPEND</code>.</para>
+                <para>
+                    <code>$type</code> doit être une des constantes de
+                    <code>Placeholder</code> : <code>APPEND</code> ou <code>SET</code>. Si c'est
+                    <code>APPEND</code>, le contenu capturé est ajouté à la liste de contenu courant
+                    dans le placeholder ; si c'est <code>SET</code>, le contenu capturé remplace
+                    toute valeur existante dans le placeholder (potentiellement permet de remplacer
+                    tout contenu préalable). Par défaut, <code>$type</code> vaut
+                    <code>APPEND</code>.
+                </para>
 
-                <para><code>$key</code> peut être utilisé pour spécifier une clé en particulier dans le conteneur
-                placeholder dans laquelle vous souhaitez capturer le contenu.</para>
+                <para>
+                    <code>$key</code> peut être utilisé pour spécifier une clé en particulier
+                    dans le conteneur placeholder dans laquelle vous souhaitez capturer le
+                    contenu.
+                </para>
 
-                <para><code>captureStart()</code> verrouille la capture jusqu'à l'appel de <code>captureEnd()</code> ;
-                vous ne pouvez pas imbriquer des captures avec le même conteneur placeholder. Le faire entraînera la
-                levée d'une exception.</para>
+                <para>
+                    <code>captureStart()</code> verrouille la capture jusqu'à l'appel de
+                    <code>captureEnd()</code> ; vous ne pouvez pas imbriquer des captures avec le
+                    même conteneur placeholder. Le faire entraînera la levée d'une exception.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>captureEnd()</code> stoppe la capture de contenu, et le place dans l'objet conteneur suivant
-                la manière utilisée pour appeler <code>captureStart()</code>.</para>
+                <para>
+                    <code>captureEnd()</code> stoppe la capture de contenu, et le place dans
+                    l'objet conteneur suivant la manière utilisée pour appeler
+                    <code>captureStart()</code>.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -166,11 +212,17 @@ foreach ($this->data as $datum): ?>
     <sect4 id="zend.view.helpers.initial.placeholder.implementations">
         <title>Implémentation concrète des Placeholder</title>
 
-        <para>Zend Framework embarque certaines implémentations concrètes de placeholders. Celles-ci sont destinées à
-        des placeholders communément utilisés : doctype, titre de page, et les différents éléments &lt;head&gt;. Dans
-        tous les cas, appeler le placeholder sans arguments retournera l'élément lui-même.</para>
+        <para>
+            Zend Framework embarque certaines implémentations concrètes de placeholders.
+            Celles-ci sont destinées à des placeholders communément utilisés : doctype, titre de
+            page, et les différents éléments &lt;head&gt;. Dans tous les cas, appeler le placeholder
+            sans arguments retournera l'élément lui-même.
+        </para>
 
-        <para>La documentation pour chacun des éléments existe séparément, suivez les liens ci-dessous :</para>
+        <para>
+            La documentation pour chacun des éléments existe séparément, suivez les liens
+            ci-dessous :
+        </para>
 
         <itemizedlist>
             <listitem>
@@ -186,19 +238,31 @@ foreach ($this->data as $datum): ?>
             </listitem>
 
             <listitem>
-                <para><link linkend="zend.view.helpers.initial.headscript">HeadScript</link></para>
+                <para>
+                    <link
+                    linkend="zend.view.helpers.initial.headscript">HeadScript</link>
+                </para>
             </listitem>
 
             <listitem>
-                <para><link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link></para>
+                <para>
+                    <link
+                    linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
+                </para>
             </listitem>
 
             <listitem>
-                <para><link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link></para>
+                <para>
+                    <link
+                    linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
+                </para>
             </listitem>
 
             <listitem>
-                <para><link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link></para>
+                <para>
+                    <link
+                    linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
+                </para>
             </listitem>
         </itemizedlist>
     </sect4>

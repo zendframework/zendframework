@@ -1,18 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13947 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15207 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
-    <title>Lire la version du Zend Framework</title>
+    <title>Lire la version de Zend Framework</title>
 
-    <para><classname>Zend_Version</classname> fournit la constante de classe <classname>Zend_Version::VERSION</classname> qui contient une
-    chaîne identifiant la version courante de Zend Framework. <classname>Zend_Version::VERSION</classname> contient "1.7.2", par
-    exemple.</para>
+    <para>
+        <classname>Zend_Version</classname> fournit la constante de classe
+        <classname>Zend_Version::VERSION</classname> qui contient une chaîne identifiant la version
+        courante de Zend Framework. <classname>Zend_Version::VERSION</classname> contient "1.7.2",
+        par exemple.
+    </para>
 
-    <para>La méthode statique <classname>Zend_Version::compareVersion($version)</classname> est basée sur la fonction PHP <ulink
-    url="http://www.php.net/manual/fr/ref.version_compare.php"><code>version_compare()</code></ulink>. La méthode
-    retourne <code>-1</code> si la <code>$version</code> fournie est plus ancienne que la version courante de Zend
-    Framework, <code>0</code> si c'est la même, et <code>+1</code> si la <code>$version</code> fournie est plus récente
-    que la version courante de Zend Framework.</para>
+    <para>
+        La méthode statique <classname>Zend_Version::compareVersion($version)</classname> est
+        basée sur la fonction PHP <ulink
+        url="http://www.php.net/manual/fr/ref.version_compare.php"><code>version_compare()</code></ulink>.
+        La méthode retourne <code>-1</code> si la <code>$version</code> fournie est plus ancienne
+        que la version courante de Zend Framework, <code>0</code> si c'est la même, et
+        <code>+1</code> si la <code>$version</code> fournie est plus récente que la version courante
+        de Zend Framework.
+    </para>
 
     <example id="zend.version.reading.example">
         <title>Exemple avec la méthode <code>compareVersion()</code></title>

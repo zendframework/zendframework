@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12116 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Tester vos contrôleurs et vos applications MVC</title>
 
-    <para>Une fois , votre fichier d'amorçage en place, vous pouvez commencer à tester. Tester est typiquement ce que
-    vous auriez pu faire avec une suite de test PHPUnit ("test suite"), avec quelques petites différences
-    mineures.</para>
+    <para>
+        Une fois , votre fichier d'amorçage en place, vous pouvez commencer à tester. Tester
+        est typiquement ce que vous auriez pu faire avec une suite de test PHPUnit ("test suite"),
+        avec quelques petites différences mineures.
+    </para>
 
-    <para>Premièrement, vous devez distribuer l'URL à tester en utilisant la méthode <code>dispatch()</code> de TestCase
-    :</para>
+    <para>
+        Premièrement, vous devez distribuer l'URL à tester en utilisant la méthode
+        <code>dispatch()</code> de TestCase :
+    </para>
 
     <programlisting role="php"><![CDATA[
 class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
@@ -24,8 +28,11 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
 }
 ]]></programlisting>
 
-    <para>Il y a des moments, cependant, où vous devez fournir des informations supplémentaires - des variables GET et
-    POST, des informations de COOKIE, etc. Vous pouvez peupler la requête avec ces informations :</para>
+    <para>
+        Il y a des moments, cependant, où vous devez fournir des informations supplémentaires
+        - des variables GET et POST, des informations de COOKIE, etc. Vous pouvez peupler la requête
+        avec ces informations :
+    </para>
 
     <programlisting role="php"><![CDATA[
 class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase

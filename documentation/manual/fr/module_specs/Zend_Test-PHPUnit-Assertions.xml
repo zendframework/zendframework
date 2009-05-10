@@ -1,85 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13829 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Assertions</title>
 
-    <para>Les assertions sont le coeur des tests unitaires; vous les utilisez pour vérifier que le résultat est bien
-    celui que vous attendiez. A cette fin, <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> fournit un certain nombre
-    d'assertions pour simplifier le test de vos applications et contrôleurs MVC.</para>
+    <para>
+        Les assertions sont le coeur des tests unitaires; vous les utilisez pour vérifier que
+        le résultat est bien celui que vous attendiez. A cette fin,
+        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> fournit un certain nombre
+        d'assertions pour simplifier le test de vos applications et contrôleurs MVC.
+    </para>
 
     <sect3 id="zend.test.phpunit.assertions.query">
         <title>Les assertions par sélecteurs CSS</title>
 
-        <para>Les sélecteurs CSS sont une manière simple de vérifier que certaines constructions sont bien présentes
-        dans le contenu de votre réponse. Cela rend aussi plus simple de s'assurer que les éléments nécessaires pour les
-        librairies Javascript et/ou l'intégration d'AJAX sont présents ; la plupart des bibliothèques Javascript
-        fournissent des mécanismes pour charger des éléments DOM sur la base des sélecteurs CSS, ainsi la syntaxe sera
-        identique.</para>
+        <para>
+            Les sélecteurs CSS sont une manière simple de vérifier que certaines constructions
+            sont bien présentes dans le contenu de votre réponse. Cela rend aussi plus simple de
+            s'assurer que les éléments nécessaires pour les librairies Javascript et/ou
+            l'intégration d'AJAX sont présents ; la plupart des bibliothèques Javascript fournissent
+            des mécanismes pour charger des éléments DOM sur la base des sélecteurs CSS, ainsi la
+            syntaxe sera identique.
+        </para>
 
-        <para>Cette fonctionnalité est fournie via <link linkend="zend.dom.query">Zend_Dom_Query</link>, et intégré à un
-        jeu d'assertions de type "<code>Query*</code>". Chacune de ces assertions prend un sélecteur CSS en tant que
-        premier argument, avec optionnellement des arguments additionnels et/ou un message d'erreur, basé sur le type
-        d'assertion. Vous pouvez trouver les règles d'écriture des électeurs CSS dans le chapitre <link
-        linkend="zend.dom.query.operation">Zend_Dom_Query - Aspect théorique</link>. Les assertion "<code>Query*</code>"
-        incluent :</para>
+        <para>
+            Cette fonctionnalité est fournie via <link
+            linkend="zend.dom.query">Zend_Dom_Query</link>, et intégré à un jeu d'assertions de type
+            "<code>Query*</code>". Chacune de ces assertions prend un sélecteur CSS en tant que
+            premier argument, avec optionnellement des arguments additionnels et/ou un message
+            d'erreur, basé sur le type d'assertion. Vous pouvez trouver les règles d'écriture des
+            électeurs CSS dans le chapitre <link linkend="zend.dom.query.operation">Zend_Dom_Query -
+            Aspect théorique</link>. Les assertion "<code>Query*</code>" incluent :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>assertQuery($path, $message = '')</code> : vérifie qu'un ou plusieurs éléments DOM
-                correspondant au sélecteur CSS fourni sont présents. Si un <code>$message</code> est présent, il sera
-                ajouté en cas d'échec de l'assertion.</para>
+                <para>
+                    <code>assertQuery($path, $message = '')</code> : vérifie qu'un ou
+                    plusieurs éléments DOM correspondant au sélecteur CSS fourni sont présents. Si
+                    un <code>$message</code> est présent, il sera ajouté en cas d'échec de
+                    l'assertion.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertQueryContentContains($path, $match, $message = '')</code> : vérifie qu'un ou plusieurs
-                éléments DOM correspondant au sélecteur CSS fourni sont présents, et qu'au moins un de ceux-ci contient
-                le contenu fournit dans <code>$match</code>. Si un <code>$message</code> est présent, il sera ajouté en
-                cas d'échec de l'assertion.</para>
+                <para>
+                    <code>assertQueryContentContains($path, $match, $message = '')</code> :
+                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
+                    sont présents, et qu'au moins un de ceux-ci contient le contenu fournit dans
+                    <code>$match</code>. Si un <code>$message</code> est présent, il sera ajouté en
+                    cas d'échec de l'assertion.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertQueryContentRegex($path, $pattern, $message = '')</code> : vérifie qu'un ou plusieurs
-                éléments DOM correspondant au sélecteur CSS fourni sont présents, et qu'au moins un de ceux-ci
-                correspond à l'expression régulière fournie dans <code>$pattern</code>. Si un <code>$message</code> est
-                présent, il sera ajouté en cas d'échec de l'assertion.</para>
+                <para>
+                    <code>assertQueryContentRegex($path, $pattern, $message = '')</code> :
+                    vérifie qu'un ou plusieurs éléments DOM correspondant au sélecteur CSS fourni
+                    sont présents, et qu'au moins un de ceux-ci correspond à l'expression régulière
+                    fournie dans <code>$pattern</code>. Si un <code>$message</code> est présent, il
+                    sera ajouté en cas d'échec de l'assertion.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertQueryCount($path, $count, $message = '')</code> : vérifie qu'un nombre exact
-                <code>$count</code> d'éléments DOM correspondant au sélecteur CSS fourni sont présents. Si un
-                <code>$message</code> est présent, il sera ajouté en cas d'échec de l'assertion.</para>
+                <para>
+                    <code>assertQueryCount($path, $count, $message = '')</code> : vérifie
+                    qu'un nombre exact <code>$count</code> d'éléments DOM correspondant au sélecteur
+                    CSS fourni sont présents. Si un <code>$message</code> est présent, il sera
+                    ajouté en cas d'échec de l'assertion.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertQueryCountMin($path, $count, $message = '')</code> : vérifie qu'au moins un
-                nombre <code>$count</code> d'éléments DOM correspondant au sélecteur CSS fourni sont présents. Si un
-                <code>$message</code> est présent, il sera ajouté en cas d'échec de l'assertion. <emphasis>Note
-                :</emphasis> spécifier une valeur de 1 pour <code>$count</code> est la même chose qu'un simple
-                <code>assertQuery()</code>.</para>
+                <para>
+                    <code>assertQueryCountMin($path, $count, $message = '')</code> : vérifie
+                    qu'au moins un nombre <code>$count</code> d'éléments DOM correspondant au
+                    sélecteur CSS fourni sont présents. Si un <code>$message</code> est présent, il
+                    sera ajouté en cas d'échec de l'assertion. <emphasis>Note :</emphasis> spécifier
+                    une valeur de 1 pour <code>$count</code> est la même chose qu'un simple
+                    <code>assertQuery()</code>.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertQueryCountMax($path, $count, $message = '')</code> : vérifie qu'il n'y a pas
-                plus d'un nombre <code>$count</code> d'éléments DOM correspondant au sélecteur CSS fourni sont présents.
-                Si un <code>$message</code> est présent, il sera ajouté en cas d'échec de l'assertion. <emphasis>Note
-                :</emphasis> spécifier une valeur de 1 pour <code>$count</code> est la même chose qu'un simple
-                <code>assertQuery()</code>.</para>
+                <para>
+                    <code>assertQueryCountMax($path, $count, $message = '')</code> : vérifie
+                    qu'il n'y a pas plus d'un nombre <code>$count</code> d'éléments DOM
+                    correspondant au sélecteur CSS fourni sont présents. Si un <code>$message</code>
+                    est présent, il sera ajouté en cas d'échec de l'assertion. <emphasis>Note
+                    :</emphasis> spécifier une valeur de 1 pour <code>$count</code> est la même
+                    chose qu'un simple <code>assertQuery()</code>.
+                </para>
             </listitem>
         </itemizedlist>
 
-        <para>De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>" qui correspond à
-        l'assertion négative : <code>assertNotQuery()</code>, <code>assertNotQueryContentContains()</code>,
-        <code>assertNotQueryContentRegex()</code>, et <code>assertNotQueryCount()</code>. (Notez que les versions
-        <code>CountMin</code> et <code>CountMax</code> n'ont pas de variantes pour des raisons évidentes).</para>
+        <para>
+            De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
+            qui correspond à l'assertion négative : <code>assertNotQuery()</code>,
+            <code>assertNotQueryContentContains()</code>, <code>assertNotQueryContentRegex()</code>,
+            et <code>assertNotQueryCount()</code>. (Notez que les versions <code>CountMin</code> et
+            <code>CountMax</code> n'ont pas de variantes pour des raisons évidentes).
+        </para>
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.xpath">
         <title>Les assertions XPath</title>
 
-        <para>Certains développeurs sont plus familiers avec XPath qu'avec des sélecteurs CSS, ainsi les variantes XPath
-        des toutes les <link linkend="zend.test.phpunit.assertions.query">assertions Query</link> sont aussi fournies.
-        Il s'agit de :</para>
+        <para>
+            Certains développeurs sont plus familiers avec XPath qu'avec des sélecteurs CSS,
+            ainsi les variantes XPath des toutes les <link
+            linkend="zend.test.phpunit.assertions.query">assertions Query</link> sont aussi
+            fournies. Il s'agit de :
+        </para>
 
         <itemizedlist>
             <listitem>
@@ -91,19 +124,31 @@
             </listitem>
 
             <listitem>
-                <para><code>assertXpathContentContains($path, $match, $message = '')</code></para>
+                <para>
+                    <code>assertXpathContentContains($path, $match, $message =
+                    '')</code>
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotXpathContentContains($path, $match, $message = '')</code></para>
+                <para>
+                    <code>assertNotXpathContentContains($path, $match, $message =
+                    '')</code>
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertXpathContentRegex($path, $pattern, $message = '')</code></para>
+                <para>
+                    <code>assertXpathContentRegex($path, $pattern, $message =
+                    '')</code>
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotXpathContentRegex($path, $pattern, $message = '')</code></para>
+                <para>
+                    <code>assertNotXpathContentRegex($path, $pattern, $message =
+                    '')</code>
+                </para>
             </listitem>
 
             <listitem>
@@ -127,42 +172,58 @@
     <sect3 id="zend.test.phpunit.assertions.redirect">
         <title>Les assertions de redirections</title>
 
-        <para>Souvent une action va redirigé le visiteur. Plutôt que de suivre cette redirection,
-        <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> vous permet de tester ces redirections avec un jeu
-        d'assertions :</para>
+        <para>
+            Souvent une action va redirigé le visiteur. Plutôt que de suivre cette
+            redirection, <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> vous permet de
+            tester ces redirections avec un jeu d'assertions :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>assertRedirect($message = '')</code> : vérifie simplement qu'une redirection est
-                apparue.</para>
+                <para>
+                    <code>assertRedirect($message = '')</code> : vérifie simplement qu'une
+                    redirection est apparue.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotRedirect($message = '') </code>: vérifie qu'aucune redirection n'est
-                apparue.</para>
+                <para>
+                    <code>assertNotRedirect($message = '') </code>: vérifie qu'aucune
+                    redirection n'est apparue.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertRedirectTo($url, $message = '')</code> : vérifie qu'une redirection est apparue, et
-                que la valeur de l'en-tête "<code>Location</code>" est l' <code>$url</code> fourni.</para>
+                <para>
+                    <code>assertRedirectTo($url, $message = '')</code> : vérifie qu'une
+                    redirection est apparue, et que la valeur de l'en-tête "<code>Location</code>"
+                    est l' <code>$url</code> fourni.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotRedirectTo($url, $message = '') </code>: vérifie soit qu'aucune redirection n'est
-                apparue, ou que la valeur de l'en-tête "<code>Location</code>" n'est pas l' <code>$url</code>
-                fourni.</para>
+                <para>
+                    <code>assertNotRedirectTo($url, $message = '') </code>: vérifie soit
+                    qu'aucune redirection n'est apparue, ou que la valeur de l'en-tête
+                    "<code>Location</code>" n'est pas l' <code>$url</code> fourni.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertRedirectRegex($pattern, $message = '') </code>: vérifie qu'une redirection est
-                apparue, et que la valeur de l'en-tête "<code>Location</code>" correspond à l'expression régulière fourni
-                dans <code>$pattern</code>.</para>
+                <para>
+                    <code>assertRedirectRegex($pattern, $message = '') </code>: vérifie qu'une
+                    redirection est apparue, et que la valeur de l'en-tête "<code>Location</code>"
+                    correspond à l'expression régulière fourni dans <code>$pattern</code>.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertNotRedirectRegex($pattern, $message = '')</code> : vérifie soit qu'aucune redirection
-                n'est apparue, ou que la valeur de l'en-tête "<code>Location</code>" ne correspond pas à l'expression
-                régulière fourni dans <code>$pattern</code>.</para>
+                <para>
+                    <code>assertNotRedirectRegex($pattern, $message = '')</code> : vérifie
+                    soit qu'aucune redirection n'est apparue, ou que la valeur de l'en-tête
+                    "<code>Location</code>" ne correspond pas à l'expression régulière fourni dans
+                    <code>$pattern</code>.
+                </para>
             </listitem>
         </itemizedlist>
     </sect3>
@@ -170,67 +231,94 @@
     <sect3 id="zend.test.phpunit.assertions.header">
         <title>Les assertions d'en-têtes de réponses</title>
 
-        <para>En plus de vérifier les en-têtes de redirection, vous avez souvent besoin de vérifier des codes de réponse
-        HTTP et des en-têtes spécifiques - par exemple, pour déterminer si une action entraînera une réponse 404 ou 500,
-        ou pour s'assurer qu'une réponse JSON contient bien l'en-tête <code>Content-Type</code> approprié. Les assertions
-        suivantes sont disponibles :</para>
+        <para>
+            En plus de vérifier les en-têtes de redirection, vous avez souvent besoin de
+            vérifier des codes de réponse HTTP et des en-têtes spécifiques - par exemple, pour
+            déterminer si une action entraînera une réponse 404 ou 500, ou pour s'assurer qu'une
+            réponse JSON contient bien l'en-tête <code>Content-Type</code> approprié. Les assertions
+            suivantes sont disponibles :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>assertResponseCode($code, $message = '') </code>: vérifie qu'une réponse renvoie le code de
-                réponse HTTP fourni.</para>
+                <para>
+                    <code>assertResponseCode($code, $message = '') </code>: vérifie qu'une
+                    réponse renvoie le code de réponse HTTP fourni.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertHeader($header, $message = '')</code> : vérifie qu'une réponse renvoie l'en-tête
-                fourni.</para>
+                <para>
+                    <code>assertHeader($header, $message = '')</code> : vérifie qu'une réponse
+                    renvoie l'en-tête fourni.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertHeaderContains($header, $match, $message = '')</code> : vérifie qu'une réponse renvoie
-                l'en-tête fourni et que son contenu vaut la chaîne fournie.</para>
+                <para>
+                    <code>assertHeaderContains($header, $match, $message = '')</code> :
+                    vérifie qu'une réponse renvoie l'en-tête fourni et que son contenu vaut la
+                    chaîne fournie.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertHeaderRegex($header, $pattern, $message = '') </code>: vérifie qu'une réponse renvoie
-                l'en-tête fourni et que son contenu correspond à l'expression régulière fournie.</para>
+                <para>
+                    <code>assertHeaderRegex($header, $pattern, $message = '') </code>: vérifie
+                    qu'une réponse renvoie l'en-tête fourni et que son contenu correspond à
+                    l'expression régulière fournie.
+                </para>
             </listitem>
         </itemizedlist>
 
-        <para>De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>" qui correspond à
-        l'assertion négative.</para>
+        <para>
+            De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
+            qui correspond à l'assertion négative.
+        </para>
     </sect3>
 
     <sect3 id="zend.test.phpunit.assertions.request">
         <title>Les assertions de requêtes</title>
 
-        <para>Il est souvent pratique de vérifier l'action, le contrôleur et le module dernièrement exécuté ; ou, vous
-        pouvez vouloir vérifier quelle route a été utilisée. Les assertions suivantes peuvent vous aider dans ce cas
-        :</para>
+        <para>
+            Il est souvent pratique de vérifier l'action, le contrôleur et le module
+            dernièrement exécuté ; ou, vous pouvez vouloir vérifier quelle route a été utilisée. Les
+            assertions suivantes peuvent vous aider dans ce cas :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><code>assertModule($module, $message = '') </code>: vérifie que le module fourni a été utilisé
-                lors de la dernière action distribuée.</para>
+                <para>
+                    <code>assertModule($module, $message = '') </code>: vérifie que le module
+                    fourni a été utilisé lors de la dernière action distribuée.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertController($controller, $message = '')</code> : vérifie que le contrôleur fourni a été
-                utilisé lors de la dernière action distribuée.</para>
+                <para>
+                    <code>assertController($controller, $message = '')</code> : vérifie que le
+                    contrôleur fourni a été utilisé lors de la dernière action distribuée.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertAction($action, $message = '')</code> : vérifie que l'action fournie est bien la
-                dernière distribuée.</para>
+                <para>
+                    <code>assertAction($action, $message = '')</code> : vérifie que l'action
+                    fournie est bien la dernière distribuée.
+                </para>
             </listitem>
 
             <listitem>
-                <para><code>assertRoute($route, $message = '') </code>: vérifie que la route nommée fournie a été
-                utilisée par le routeur.</para>
+                <para>
+                    <code>assertRoute($route, $message = '') </code>: vérifie que la route
+                    nommée fournie a été utilisée par le routeur.
+                </para>
             </listitem>
         </itemizedlist>
 
-        <para>De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>" qui correspond à
-        l'assertion négative.</para>
+        <para>
+            De plus, toutes les méthodes ci-dessus possèdent une variante "<code>Not</code>"
+            qui correspond à l'assertion négative.
+        </para>
     </sect3>
 </sect2>

@@ -1,64 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13910 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Exemples</title>
 
-    <para>Savoir comment configurer votre infrastructure de tests et comment faire des assertions est seulement la
-    moitié du travail ; maintenant il est temps de commencer à regarder quelques scénarios réels de test pour voir
-    comment vous pouvez les étendre. </para>
+    <para>
+        Savoir comment configurer votre infrastructure de tests et comment faire des
+        assertions est seulement la moitié du travail ; maintenant il est temps de commencer à
+        regarder quelques scénarios réels de test pour voir comment vous pouvez les étendre.
+    </para>
 
     <example id="zend.test.phpunit.examples.userController">
         <title>Test d'un contrôleur "UserController"</title>
 
-        <para>Considérons une tâche habituelle d'un site Web : l'authentification et l'enregistrement d'utilisateurs.
-        Dans notre exemple, nous avons défini un contrôleur "<code>UserController</code>" pour gérer ceci, il requiert
-        le conditions suivantes :</para>
+        <para>
+            Considérons une tâche habituelle d'un site Web : l'authentification et
+            l'enregistrement d'utilisateurs. Dans notre exemple, nous avons défini un contrôleur
+            "<code>UserController</code>" pour gérer ceci, il requiert le conditions suivantes
+            :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para>Si un utilisateur n'est pas authentifié, il sera toujours redirigé vers la page de login, sans se
-                soucier de l'action demandée.</para>
+                <para>
+                    Si un utilisateur n'est pas authentifié, il sera toujours redirigé vers la
+                    page de login, sans se soucier de l'action demandée.
+                </para>
             </listitem>
 
             <listitem>
-                <para>La page avec le formulaire de login présente à la fois le formulaire de login et le formulaire
-                d'enregistrement.</para>
+                <para>
+                    La page avec le formulaire de login présente à la fois le formulaire de
+                    login et le formulaire d'enregistrement.
+                </para>
             </listitem>
 
             <listitem>
-                <para>Fournir une identification invalide entraîne un retour au formulaire de login.</para>
+                <para>
+                    Fournir une identification invalide entraîne un retour au formulaire de
+                    login.
+                </para>
             </listitem>
 
             <listitem>
-                <para>Une identification valide entraîne une redirection vers la page avec le profil de
-                l'utilisateur.</para>
+                <para>
+                    Une identification valide entraîne une redirection vers la page avec le
+                    profil de l'utilisateur.
+                </para>
             </listitem>
 
             <listitem>
-                <para>La page de profil peut être personnalisée pour contenir le nom d'utilisateur.</para>
+                <para>
+                    La page de profil peut être personnalisée pour contenir le nom
+                    d'utilisateur.
+                </para>
             </listitem>
 
             <listitem>
-                <para>Les utilisateurs déjà authentifiés qui accèdent à la page de login sont redirigés vers leur page
-                de profil.</para>
+                <para>
+                    Les utilisateurs déjà authentifiés qui accèdent à la page de login sont
+                    redirigés vers leur page de profil.
+                </para>
             </listitem>
 
             <listitem>
-                <para>En cas de déconnexion, un utilisateur est redirigé vers la page de login.</para>
+                <para>
+                    En cas de déconnexion, un utilisateur est redirigé vers la page de
+                    login.
+                </para>
             </listitem>
 
             <listitem>
-                <para>Avec des données invalides, l'enregistrement doit entraîner un échec.</para>
+                <para>
+                    Avec des données invalides, l'enregistrement doit entraîner un
+                    échec.
+                </para>
             </listitem>
         </itemizedlist>
 
-        <para>Nous pourrions, et devrions définir d'autres tests, mais ceux-ci suffiront pour l'instant.</para>
+        <para>
+            Nous pourrions, et devrions définir d'autres tests, mais ceux-ci suffiront pour
+            l'instant.
+        </para>
 
-        <para>Pour notre application, nous définirons un plugin "<code>Initialize</code>", qui fonctionne en
-        <code>routeStartup()</code>. Ceci nous permet d'encapsuler notre fichier d'amorçage dans une interface POO, et
-        qui nous permet aussi de fournir par une solution simple une fonction de rappel ("callback"). Regardons d'abord
-        les bases de cette classe :</para>
+        <para>
+            Pour notre application, nous définirons un plugin "<code>Initialize</code>", qui
+            fonctionne en <code>routeStartup()</code>. Ceci nous permet d'encapsuler notre fichier
+            d'amorçage dans une interface POO, et qui nous permet aussi de fournir par une solution
+            simple une fonction de rappel ("callback"). Regardons d'abord les bases de cette classe
+            :
+        </para>
 
         <programlisting role="php"><![CDATA[
 class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
@@ -147,10 +178,13 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 }
 ]]></programlisting>
 
-        <para>Une fois ceci en place, nous pouvons écrire nos tests. Cependant, combien de ces tests nécessiteront qu'un
-        utilisateur soit connecté ? La solution la plus simple est d'utiliser la logique de votre application pour faire
-        ceci... et d'esquiver un peu par l'utilisation des méthodes <code>resetResponse()</code> et
-        <code>resetResponse()</code>, qui vous permettront de distribuer une nouvelle requête.</para>
+        <para>
+            Une fois ceci en place, nous pouvons écrire nos tests. Cependant, combien de ces
+            tests nécessiteront qu'un utilisateur soit connecté ? La solution la plus simple est
+            d'utiliser la logique de votre application pour faire ceci... et d'esquiver un peu par
+            l'utilisation des méthodes <code>resetResponse()</code> et <code>resetResponse()</code>,
+            qui vous permettront de distribuer une nouvelle requête.
+        </para>
 
         <programlisting role="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
@@ -260,24 +294,34 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 }
 ]]></programlisting>
 
-        <para>Notez que ces tests sont laconiques, et, pour la plupart, ne recherchent pas le contenu réel. Au lieu de
-        cela, ils recherchent des objets construits dans la réponse - codes et en-têtes de réponse, et noeuds DOM. Ceci
-        vous permet de vérifier que la structure est comme prévue - sans entraîner un échec dans vos tests à chaque fois
-        qu'un contenu est ajouté au site. </para>
+        <para>
+            Notez que ces tests sont laconiques, et, pour la plupart, ne recherchent pas le
+            contenu réel. Au lieu de cela, ils recherchent des objets construits dans la réponse -
+            codes et en-têtes de réponse, et noeuds DOM. Ceci vous permet de vérifier que la
+            structure est comme prévue - sans entraîner un échec dans vos tests à chaque fois qu'un
+            contenu est ajouté au site.
+        </para>
 
-        <para>Notez également que nous utilisons la structure du document dans nos essais. Par exemple, dans le test
-        final, nous recherchons un formulaire qui a un noeud avec la classe "errors" ; ceci nous permet de déterminer
-        simplement la présence des erreurs de validation de formulaire, et sans nous inquiéter de quelles erreurs
-        spécifiques pourraient avoir été levées. </para>
+        <para>
+            Notez également que nous utilisons la structure du document dans nos essais. Par
+            exemple, dans le test final, nous recherchons un formulaire qui a un noeud avec la
+            classe "errors" ; ceci nous permet de déterminer simplement la présence des erreurs de
+            validation de formulaire, et sans nous inquiéter de quelles erreurs spécifiques
+            pourraient avoir été levées.
+        </para>
 
-        <para>Cette application <emphasis>peut</emphasis> utiliser une base de données. Si oui, vous aurez besoin
-        probablement d'un certain échafaudage pour s'assurer que la base de données est dans une configuration initiale
-        et testable au début de chaque essai. PHPUnit fournit déjà une fonctionnalité pour faire ceci ; <ulink
-        url="http://www.phpunit.de/pocket_guide/3.3/en/database.html">lisez ceci dans la documentation PHPUnit</ulink>.
-        Nous recommandons d'utiliser une base de données séparée pour les tests et pour la production, et recommandons
-        en particulier d'employer un fichier SQLite ou une base de données en mémoire, d'autant que les deux options
-        s'exécutent très bien, sans nécessité d'un serveur séparé, et peuvent utiliser la plupart de la syntaxe
-        SQL</para>
+        <para>
+            Cette application <emphasis>peut</emphasis> utiliser une base de données. Si oui,
+            vous aurez besoin probablement d'un certain échafaudage pour s'assurer que la base de
+            données est dans une configuration initiale et testable au début de chaque essai.
+            PHPUnit fournit déjà une fonctionnalité pour faire ceci ; <ulink
+            url="http://www.phpunit.de/pocket_guide/3.3/en/database.html">lisez ceci dans la
+            documentation PHPUnit</ulink>. Nous recommandons d'utiliser une base de données séparée
+            pour les tests et pour la production, et recommandons en particulier d'employer un
+            fichier SQLite ou une base de données en mémoire, d'autant que les deux options
+            s'exécutent très bien, sans nécessité d'un serveur séparé, et peuvent utiliser la
+            plupart de la syntaxe SQL
+        </para>
     </example>
 </sect2>
 <!--

@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 11089 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Utilisation de base</title>
 
-    <para>L'utilisation de <classname>Zend_Json</classname> implique l'emploi des deux méthodes statiques publiques disponibles :
-    <classname>Zend_Json::encode()</classname> et <classname>Zend_Json::decode()</classname>. <programlisting role="php"><![CDATA[
-// Obtention d'une valeur
-$phpNatif = Zend_Json::decode($valeurCodee);
-
-// Codage pour renvoi au client :
-$json = Zend_Json::encode($phpNatif);
-]]></programlisting></para>
-</sect1>
+    <para>
+        L'utilisation de <classname>Zend_Json</classname> implique l'emploi des deux méthodes
+        statiques publiques disponibles : <classname>Zend_Json::encode()</classname> et
+        <classname>Zend_Json::decode()</classname>. <programlisting role="php"><![CDATA[
+    // Obtention d'une valeur
+    $phpNatif = Zend_Json::decode($valeurCodee);
+    
+    // Codage pour renvoi au client :
+    $json = Zend_Json::encode($phpNatif);
+    ]]></programlisting></para>
+    </sect1>

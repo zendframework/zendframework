@@ -1,80 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13842 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.photos">
     <title>Utilisation des albums Web Picasa</title>
 
-    <para>Les albums Web Picasa représentent un service Google permettant de maintenir à jour des albums photos, tout en
-    pouvant récupérer des photos de l'album d'un membre. L'API propose des services pour ajouter, mettre à jour ou
-    supprimer des photos d'un album, de même que gérer des mots-clés ou des commentaires sur des images(photos).</para>
+    <para>
+        Les albums Web Picasa représentent un service Google permettant de maintenir à jour
+        des albums photos, tout en pouvant récupérer des photos de l'album d'un membre. L'API
+        propose des services pour ajouter, mettre à jour ou supprimer des photos d'un album, de même
+        que gérer des mots-clés ou des commentaires sur des images(photos).
+    </para>
 
-    <para>L'accès public à un album, en lecture donc, n'est pas sujet à demande d'authentification. En revanche, toute
-    autre manipulation telle que la mise à jour ou la suppression, nécessitera que vous vous authentifiez.</para>
+    <para>
+        L'accès public à un album, en lecture donc, n'est pas sujet à demande
+        d'authentification. En revanche, toute autre manipulation telle que la mise à jour ou la
+        suppression, nécessitera que vous vous authentifiez.
+    </para>
 
-    <para>Pour plus d'informations sur l'API, voyez <ulink
-    url="http://code.google.com/apis/picasaweb/overview.html">l'API Picasa Web Albums</ulink>.</para>
+    <para>
+        Pour plus d'informations sur l'API, voyez <ulink
+        url="http://code.google.com/apis/picasaweb/overview.html">l'API Picasa Web
+        Albums</ulink>.
+    </para>
 
     <note>
         <title>Authentification</title>
 
-        <para>L'API propose les deux modes d'authentification, AuthSub (recommandé) et ClientAuth. Pour toute opération
-        d'écriture vers le service, une authentification sera demandée, la lecture est elle, libre, au regard de
-        l'API.</para>
+        <para>
+            L'API propose les deux modes d'authentification, AuthSub (recommandé) et
+            ClientAuth. Pour toute opération d'écriture vers le service, une authentification sera
+            demandée, la lecture est elle, libre, au regard de l'API.
+        </para>
     </note>
 
     <sect2 id="zend.gdata.photos.connecting">
         <title>Se connecter au service</title>
 
-        <para>L'API Picasa, comme tous les autres services Web Google Gdata, est basée sur le protocole Atom Publishing
-        Protocol (APP), et le XML. Le trafic entre le client et le serveur se fait sur HTTP, et autorise des connexions
-        authentifiées, ou non.</para>
+        <para>
+            L'API Picasa, comme tous les autres services Web Google Gdata, est basée sur le
+            protocole Atom Publishing Protocol (APP), et le XML. Le trafic entre le client et le
+            serveur se fait sur HTTP, et autorise des connexions authentifiées, ou non.
+        </para>
 
-        <para>Avant tout, il faut donc se connecter. Ceci se fait en deux étapes : créer un client HTTP, et insérer un
-        <classname>Zend_Gdata_Photos</classname> dans celui-ci.</para>
+        <para>
+            Avant tout, il faut donc se connecter. Ceci se fait en deux étapes : créer un
+            client HTTP, et insérer un <classname>Zend_Gdata_Photos</classname> dans
+            celui-ci.
+        </para>
 
         <sect3 id="zend.gdata.photos.connecting.authentication">
             <title>Authentification</title>
 
-            <para>L'API propose un accès à la fois aux données publiques, et aux données privées. Les données publiques
-            ne requièrent pas d'authentification, mais ne sont accessibles qu'en lecture seule. L'écriture et l'accès
-            aux données privées requièrent une authentification, qui peut s'effectuer de trois manières différentes
-            :</para>
+            <para>
+                L'API propose un accès à la fois aux données publiques, et aux données
+                privées. Les données publiques ne requièrent pas d'authentification, mais ne sont
+                accessibles qu'en lecture seule. L'écriture et l'accès aux données privées
+                requièrent une authentification, qui peut s'effectuer de trois manières différentes
+                :
+            </para>
 
             <itemizedlist>
                 <listitem>
-                    <para><firstterm>ClientAuth</firstterm> permet une authentification directe en donnant un couple
-                    login/password. Les utilisateurs devront donc renseigner ces 2 paramètres sur votre site
-                    directement.</para>
+                    <para>
+                        <firstterm>ClientAuth</firstterm> permet une authentification directe
+                        en donnant un couple login/password. Les utilisateurs devront donc
+                        renseigner ces 2 paramètres sur votre site directement.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><firstterm>AuthSub</firstterm> permet l'authentification en passant par un serveur proxy de
-                    Google. Les risques liés à la sécurité sont donc moindre avec cette méthode.</para>
+                    <para>
+                        <firstterm>AuthSub</firstterm> permet l'authentification en passant
+                        par un serveur proxy de Google. Les risques liés à la sécurité sont donc
+                        moindre avec cette méthode.
+                    </para>
                 </listitem>
             </itemizedlist>
 
-            <para>La librairie <classname>Zend_Gdata</classname> permet ces 2 types d'authentification. Le reste de ce chapitre
-            supposera que vous soyez habitué à l'authentification avec les service Web Google GData. Si ce n'est pas le
-            cas, nous vous conseillons de consulter <link linkend="zend.gdata.introduction.authentication">la section
-            authentification</link> de ce manuel, ou encore <ulink url="http://code.google.com/apis/gdata/auth.html">le
-            guide d'authentification Google GData webservices API</ulink>.</para>
+            <para>
+                La librairie <classname>Zend_Gdata</classname> permet ces 2 types
+                d'authentification. Le reste de ce chapitre supposera que vous soyez habitué à
+                l'authentification avec les service Web Google GData. Si ce n'est pas le cas, nous
+                vous conseillons de consulter <link
+                linkend="zend.gdata.introduction.authentication">la section authentification</link>
+                de ce manuel, ou encore <ulink url="http://code.google.com/apis/gdata/auth.html">le
+                guide d'authentification Google GData webservices API</ulink>.
+            </para>
         </sect3>
 
         <sect3 id="zend.gdata.photos.connecting.service">
             <title>Créer une instance du service</title>
 
-            <para>Pour interagir avec les serveurs, la classe <classname>Zend_Gdata_Photos</classname> sera nécessaire. Elle
-            abstrait toute la logique de communication avec le Protocol Atom Publishing vers les serveurs de
-            Google.</para>
+            <para>
+                Pour interagir avec les serveurs, la classe
+                <classname>Zend_Gdata_Photos</classname> sera nécessaire. Elle abstrait toute la
+                logique de communication avec le Protocol Atom Publishing vers les serveurs de
+                Google.
+            </para>
 
-            <para>Une fois que vous avez choisi une méthode d'authentification, vous devez créer une instance de
-            <classname>Zend_Gdata_Photos</classname>. Le constructeur prend en paramètre une instance de
-            <classname>Zend_Http_Client</classname>. Cette classe est l'interface AuthSub ou ClientAuth authentification. Si vous
-            ne passez pas cette instance en argument, alors une instance de <classname>Zend_Http_Client</classname> sera crée
-            automatiquement, mais en mode non authentifié.</para>
+            <para>
+                Une fois que vous avez choisi une méthode d'authentification, vous devez créer
+                une instance de <classname>Zend_Gdata_Photos</classname>. Le constructeur prend en
+                paramètre une instance de <classname>Zend_Http_Client</classname>. Cette classe est
+                l'interface AuthSub ou ClientAuth authentification. Si vous ne passez pas cette
+                instance en argument, alors une instance de <classname>Zend_Http_Client</classname>
+                sera crée automatiquement, mais en mode non authentifié.
+            </para>
 
-            <para>Voici un exemple qui démontre comment créer une classe vers le service avec le procédé
-            d'authentification ClientAuth :</para>
+            <para>
+                Voici un exemple qui démontre comment créer une classe vers le service avec le
+                procédé d'authentification ClientAuth :
+            </para>
 
             <programlisting role="php"><![CDATA[
 // Paramètres pour ClientAuth authentification
@@ -197,22 +233,32 @@ $service = new Zend_Gdata_Photos();
     <sect2 id="zend.gdata.photos.queries">
         <title>Comprendre et construire des requêtes</title>
 
-        <para>Pour créer des requêtes vers le service Web, vous devrez utiliser une de ces classes :</para>
+        <para>
+            Pour créer des requêtes vers le service Web, vous devrez utiliser une de ces
+            classes :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><firstterm>User</firstterm> Cette classe requêtera tout ce qui concerne un utilisateur du service.
-                Sans spécifier d'utilisateur, "default" sera utilisé.</para>
+                <para>
+                    <firstterm>User</firstterm> Cette classe requêtera tout ce qui concerne un
+                    utilisateur du service. Sans spécifier d'utilisateur, "default" sera
+                    utilisé.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Album</firstterm> Cette classe va servir de base pour toutes les requêtes concernant
-                les albums Picasa.</para>
+                <para>
+                    <firstterm>Album</firstterm> Cette classe va servir de base pour toutes
+                    les requêtes concernant les albums Picasa.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Photo</firstterm> Cette classe va servir de base pour toutes les requêtes concernant
-                les photos Picasa.</para>
+                <para>
+                    <firstterm>Photo</firstterm> Cette classe va servir de base pour toutes
+                    les requêtes concernant les photos Picasa.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -227,65 +273,93 @@ $query = new Zend_Gdata_Photos_UserQuery();
 $query->setUser("sample.user");
 ]]></programlisting>
 
-        <para>Pour chaque requête, des paramètres de limitations de la recherche peuvent être passés grâce aux méthodes
-        get(Paramètre) and set(Paramètre) :</para>
+        <para>
+            Pour chaque requête, des paramètres de limitations de la recherche peuvent être
+            passés grâce aux méthodes get(Paramètre) and set(Paramètre) :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para><firstterm>Projection</firstterm> spécifie le format de retour des données dans le flux. Peut être
-                "api" ou "base". En temps normal, "api" est conseillé, c'est la valeur par défaut d'ailleurs.</para>
+                <para>
+                    <firstterm>Projection</firstterm> spécifie le format de retour des données
+                    dans le flux. Peut être "api" ou "base". En temps normal, "api" est conseillé,
+                    c'est la valeur par défaut d'ailleurs.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Type</firstterm> détermine le type des éléments retournés, "feed"(défaut) ou
-                "entry".</para>
+                <para>
+                    <firstterm>Type</firstterm> détermine le type des éléments retournés,
+                    "feed"(défaut) ou "entry".
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Access</firstterm> détermine la visibilité des éléments retournés, "all"(défaut),
-                "public", ou "private". Les éléments non publics ne seront retournés que si le client est
-                authentifié.</para>
+                <para>
+                    <firstterm>Access</firstterm> détermine la visibilité des éléments
+                    retournés, "all"(défaut), "public", ou "private". Les éléments non publics ne
+                    seront retournés que si le client est authentifié.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Tag</firstterm> fournit un filtre par mots-clés sur les éléments retournés.</para>
+                <para>
+                    <firstterm>Tag</firstterm> fournit un filtre par mots-clés sur les
+                    éléments retournés.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Kind</firstterm> détermine un filtre sur la sorte (le type) d'éléments
-                retournés.</para>
+                <para>
+                    <firstterm>Kind</firstterm> détermine un filtre sur la sorte (le type)
+                    d'éléments retournés.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>ImgMax</firstterm> spécifie un filtre par dimension maximale sur les éléments
-                retournés.</para>
+                <para>
+                    <firstterm>ImgMax</firstterm> spécifie un filtre par dimension maximale
+                    sur les éléments retournés.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>Thumbsize</firstterm> spécifie un filtre par dimension maximale des miniatures
-                retournées.</para>
+                <para>
+                    <firstterm>Thumbsize</firstterm> spécifie un filtre par dimension maximale
+                    des miniatures retournées.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>User</firstterm> spécifie l'utilisateur dont les éléments sont recherchés. Par défaut,
-                "default".</para>
+                <para>
+                    <firstterm>User</firstterm> spécifie l'utilisateur dont les éléments sont
+                    recherchés. Par défaut, "default".
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>AlbumId</firstterm> spécifie l'identifiant de l'album recherché. Ceci ne s'applique
-                qu'aux requêtes album et photo. Dans le cas d'une recherche de photo, ceci indique l'album dans lequel
-                effectuer la requête de recherche. Ce paramètre annule et remplace AlbumName, si spécifié.</para>
+                <para>
+                    <firstterm>AlbumId</firstterm> spécifie l'identifiant de l'album
+                    recherché. Ceci ne s'applique qu'aux requêtes album et photo. Dans le cas d'une
+                    recherche de photo, ceci indique l'album dans lequel effectuer la requête de
+                    recherche. Ce paramètre annule et remplace AlbumName, si spécifié.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>AlbumName</firstterm> spécifie le nom de l'album recherché. Ceci ne s'applique qu'aux
-                requêtes album et photo. Dans le cas d'une recherche de photo, ceci indique l'album dans lequel
-                effectuer la requête de recherche. Ce paramètre annule et remplace AlbumId, si spécifié.</para>
+                <para>
+                    <firstterm>AlbumName</firstterm> spécifie le nom de l'album recherché.
+                    Ceci ne s'applique qu'aux requêtes album et photo. Dans le cas d'une recherche
+                    de photo, ceci indique l'album dans lequel effectuer la requête de recherche. Ce
+                    paramètre annule et remplace AlbumId, si spécifié.
+                </para>
             </listitem>
 
             <listitem>
-                <para><firstterm>PhotoId</firstterm> spécifie l'identifiant de la photo recherchée. Ceci ne s'applique
-                qu'aux requêtes photo.</para>
+                <para>
+                    <firstterm>PhotoId</firstterm> spécifie l'identifiant de la photo
+                    recherchée. Ceci ne s'applique qu'aux requêtes photo.
+                </para>
             </listitem>
         </itemizedlist>
     </sect2>
@@ -293,18 +367,25 @@ $query->setUser("sample.user");
     <sect2 id="zend.gdata.photos.retrieval">
         <title>Récupérer des flux et des éléments</title>
 
-        <para>Le service propose des méthodes de récupération de flux, ou d'éléments simples, concernant les
-        utilisateurs, albums, ou photos.</para>
+        <para>
+            Le service propose des méthodes de récupération de flux, ou d'éléments simples,
+            concernant les utilisateurs, albums, ou photos.
+        </para>
 
         <sect3 id="zend.gdata.photos.user_retrieval">
             <title>Récupérer un utilisateur</title>
 
-            <para>Le service propose de récupérer un utilisateur, et toutes les infos de son flux, comme ses photos, ses
-            albums.... Si le client est authentifié et demande des informations sur son propre compte, alors les
-            éléments marqués comme "<code>hidden</code>" seront aussi retournés.</para>
+            <para>
+                Le service propose de récupérer un utilisateur, et toutes les infos de son
+                flux, comme ses photos, ses albums.... Si le client est authentifié et demande des
+                informations sur son propre compte, alors les éléments marqués comme
+                "<code>hidden</code>" seront aussi retournés.
+            </para>
 
-            <para>Le flux de l'utilisateur est accessible en passant son nom à la méthode <code>getUserFeed</code>
-            :</para>
+            <para>
+                Le flux de l'utilisateur est accessible en passant son nom à la méthode
+                <code>getUserFeed</code> :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -335,7 +416,10 @@ try {
 }
 ]]></programlisting>
 
-            <para>Construire une requête donne aussi accès aux éléments d'un utilisateur :</para>
+            <para>
+                Construire une requête donne aussi accès aux éléments d'un utilisateur
+                :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -359,8 +443,10 @@ try {
 
             <para>Le service donne accès aux flux d'albums et à leurs contenus.</para>
 
-            <para>Le flux d'albums est disponible en construisant un objet de requête et en le passant à
-            <code>getAlbumFeed</code> :</para>
+            <para>
+                Le flux d'albums est disponible en construisant un objet de requête et en le
+                passant à <code>getAlbumFeed</code> :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -378,8 +464,11 @@ try {
 }
 ]]></programlisting>
 
-            <para>L'objet de requête accepte aussi un nom d'album avec <code>setAlbumName</code>. Attention, ceci annule
-            un identifiant d'album éventuellement précédemment spécifié.</para>
+            <para>
+                L'objet de requête accepte aussi un nom d'album avec
+                <code>setAlbumName</code>. Attention, ceci annule un identifiant d'album
+                éventuellement précédemment spécifié.
+            </para>
 
             <para>Construire une requête donne aussi accès au requêtage d'un album :</para>
 
@@ -404,11 +493,15 @@ try {
         <sect3 id="zend.gdata.photos.photo_retrieval">
             <title>Récupérer une Photo</title>
 
-            <para>Le service permet la récupération de flux de photos, et des commentaires et/ou mots-clés
-            associés</para>
+            <para>
+                Le service permet la récupération de flux de photos, et des commentaires et/ou
+                mots-clés associés
+            </para>
 
-            <para>Le flux de photos est accessible en construisant un objet de requête et en le passant à la méthode
-            <code>getPhotoFeed</code> :</para>
+            <para>
+                Le flux de photos est accessible en construisant un objet de requête et en le
+                passant à la méthode <code>getPhotoFeed</code> :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -451,11 +544,16 @@ try {
         <sect3 id="zend.gdata.photos.comment_retrieval">
             <title>Récupérer des commentaires</title>
 
-            <para>Vous pouvez récupérer des commentaires depuis des éléments divers de flux. En spécifiant à votre
-            requête un paramètre de "comment", celle-ci retournera les mots-clés associés à la ressource demandée (user,
-            album ou photo)</para>
+            <para>
+                Vous pouvez récupérer des commentaires depuis des éléments divers de flux. En
+                spécifiant à votre requête un paramètre de "comment", celle-ci retournera les
+                mots-clés associés à la ressource demandée (user, album ou photo)
+            </para>
 
-            <para>Voici comment effectuer des actions sur les commentaires récupérés d'une photo :</para>
+            <para>
+                Voici comment effectuer des actions sur les commentaires récupérés d'une photo
+                :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -485,10 +583,16 @@ try {
         <sect3 id="zend.gdata.photos.tag_retrieval">
             <title>Récupérer des mots-clés</title>
 
-            <para>Vous pouvez récupérer des mots-clés depuis des éléments divers de flux. En spécifiant à votre requête
-            un paramètre de "tag", celle-ci retournera les mots-clés associés à la ressource demandée.</para>
+            <para>
+                Vous pouvez récupérer des mots-clés depuis des éléments divers de flux. En
+                spécifiant à votre requête un paramètre de "tag", celle-ci retournera les mots-clés
+                associés à la ressource demandée.
+            </para>
 
-            <para>Voici comment effectuer des actions sur les mots-clés récupérés d'une photo :</para>
+            <para>
+                Voici comment effectuer des actions sur les mots-clés récupérés d'une photo
+                :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -519,8 +623,10 @@ try {
     <sect2 id="zend.gdata.photos.creation">
         <title>Créer des ressources</title>
 
-        <para>Des opérations de création sont possible, qu'il s'agisse d'albums, photos, commentaires, ou
-        mots-clés.</para>
+        <para>
+            Des opérations de création sont possible, qu'il s'agisse d'albums, photos,
+            commentaires, ou mots-clés.
+        </para>
 
         <sect3 id="zend.gdata.photos.album_creation">
             <title>Créer un album</title>
@@ -542,7 +648,10 @@ $service->insertAlbumEntry($entry);
         <sect3 id="zend.gdata.photos.photo_creation">
             <title>Créer une photo</title>
 
-            <para>Créer une photo est possible pour les clients authentifiés, procédez comme suit :</para>
+            <para>
+                Créer une photo est possible pour les clients authentifiés, procédez comme
+                suit :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -571,7 +680,10 @@ $service->insertPhotoEntry($entry, $albumEntry);
         <sect3 id="zend.gdata.photos.comment_creation">
             <title>Créer un commentaire pour une photo</title>
 
-            <para>Il est possible de créer un commentaire pour une photo, voici un exemple :</para>
+            <para>
+                Il est possible de créer un commentaire pour une photo, voici un exemple
+                :
+            </para>
 
             <programlisting role="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -726,13 +838,19 @@ $service->deleteTagEntry($tagEntry, true);
         <sect3 id="zend.gdata.photos.optimistic_concurrenty">
             <title>Gestion des accès concurrents</title>
 
-            <para>Les flux GData, dont ceux de Picasa Web Albums, implémentent un système d'accès concurrent qui empêche
-            les changements avec écrasements par inadvertance. Si vous demandez l'effacement d'une ressource qui a été
-            modifiée depuis votre dernière requête, alors une exception sera levée, sauf si vous demandez le contraire
-            explicitement (dans un tel cas, la procédure d'effacement sera réessayée sur l'élément mis à jour).</para>
+            <para>
+                Les flux GData, dont ceux de Picasa Web Albums, implémentent un système
+                d'accès concurrent qui empêche les changements avec écrasements par inadvertance. Si
+                vous demandez l'effacement d'une ressource qui a été modifiée depuis votre dernière
+                requête, alors une exception sera levée, sauf si vous demandez le contraire
+                explicitement (dans un tel cas, la procédure d'effacement sera réessayée sur
+                l'élément mis à jour).
+            </para>
 
-            <para>Voici un exemple de gestion des versions et accès concurrent sur un effacement avec
-            <code>deleteAlbumEntry</code>:</para>
+            <para>
+                Voici un exemple de gestion des versions et accès concurrent sur un effacement
+                avec <code>deleteAlbumEntry</code>:
+            </para>
 
             <programlisting role="php"><![CDATA[
     // $album est l'albumEntry à effacer

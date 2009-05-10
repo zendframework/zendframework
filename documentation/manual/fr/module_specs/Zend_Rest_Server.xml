@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 11089 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15235 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.server">
     <title>Zend_Rest_Server</title>
@@ -7,8 +7,10 @@
     <sect2 id="zend.rest.server.introduction">
         <title>Introduction</title>
 
-        <para>Zend_Rest_Server est prévu comme un serveur supportant l'ensemble des fonctionnalités d'un serveur
-        REST.</para>
+        <para>
+            Zend_Rest_Server est prévu comme un serveur supportant l'ensemble des
+            fonctionnalités d'un serveur REST.
+        </para>
     </sect2>
 
     <sect2 id="zend.rest.server.usage">
@@ -50,10 +52,13 @@ $server->handle();
     <sect2 id="zend.rest.server.args">
         <title>Appelé un service Zend_Rest_Server</title>
 
-        <para>Pour appeler un service <classname>Zend_Rest_Server</classname>, vous devez fournir un argument de
-        <code>method</code> GET/POST avec une valeur qui est la méthode que vous souhaitez appeler. Vous pouvez alors
-        ajouter tout nombre d'arguments en utilisant le nom de l'argument (c.-à-d. "qui ") ou en utilisant 'arg' suivi
-        de la position numérique de l'argument (c.-à-d. "arg1").</para>
+        <para>
+            Pour appeler un service <classname>Zend_Rest_Server</classname>, vous devez
+            fournir un argument de <code>method</code> GET/POST avec une valeur qui est la méthode
+            que vous souhaitez appeler. Vous pouvez alors ajouter tout nombre d'arguments en
+            utilisant le nom de l'argument (c.-à-d. "qui ") ou en utilisant 'arg' suivi de la
+            position numérique de l'argument (c.-à-d. "arg1").
+        </para>
 
         <note>
             <title>Index numérique</title>
@@ -61,7 +66,10 @@ $server->handle();
             <para>Les arguments numériques utilisent 1 comme point de départ.</para>
         </note>
 
-        <para>Pour appeler le <code>ditBonjour</code> de l'exemple ci-dessus, vous pouvez employer soit :</para>
+        <para>
+            Pour appeler le <code>ditBonjour</code> de l'exemple ci-dessus, vous pouvez
+            employer soit :
+        </para>
 
         <para><code>?method=ditBonjour&amp;qui=Davey&amp;quand=journée</code></para>
 
@@ -73,8 +81,10 @@ $server->handle();
     <sect2 id="zend.rest.server.customstatus">
         <title>Envoyer un statut personnalisé</title>
 
-        <para>En envoyant des valeurs, pour ajouter un statut personnalisé, vous pouvez envoyer un tableau avec une clé
-        <code>status</code>.</para>
+        <para>
+            En envoyant des valeurs, pour ajouter un statut personnalisé, vous pouvez envoyer
+            un tableau avec une clé <code>status</code>.
+        </para>
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>Renvoyer un statut personnalisé</title>
@@ -102,8 +112,11 @@ $server->handle();
     <sect2 id="zend.rest.server.customxml">
         <title>Renvoyer une réponse XML personnalisée</title>
 
-        <para>Si vous voulez retourner du XML personnalisé, retournez simplement un objet <code>DOMDocument</code>,
-        <code>DOMElement</code> ou <code>SimpleXMLElement</code>.</para>
+        <para>
+            Si vous voulez retourner du XML personnalisé, retournez simplement un objet
+            <code>DOMDocument</code>, <code>DOMElement</code> ou
+            <code>SimpleXMLElement</code>.
+        </para>
 
         <example id="zend.rest.server.customxml.example-1">
             <title>Renvoyer une réponse XML personnalisée</title>

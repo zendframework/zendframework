@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13910 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15341 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Exemple d'utilisation du module Zend_Pdf</title>
 
-    <para>Cette section propose un exemple d'utilisation du module <classname>Zend_Pdf</classname>.</para>
+    <para>
+        Cette section propose un exemple d'utilisation du module
+        <classname>Zend_Pdf</classname>.
+    </para>
 
-    <para>Le code source de l'exemple est disponible dans le fichier
-    <filename>demos/Zend/Pdf/demo.php</filename>.</para>
+    <para>
+        Le code source de l'exemple est disponible dans le fichier
+        <filename>demos/Zend/Pdf/demo.php</filename>.
+    </para>
 
-    <para>Il y a aussi un fichier <filename>test.pdf</filename>, qui peut être utilisé pour réaliser des tests.</para>
+    <para>
+        Il y a aussi un fichier <filename>test.pdf</filename>, qui peut être utilisé pour
+        réaliser des tests.
+    </para>
 
     <example id="zend.pdf.usage.example-1">
         <title>Exemple d'utilisation du module Zend_Pdf</title>

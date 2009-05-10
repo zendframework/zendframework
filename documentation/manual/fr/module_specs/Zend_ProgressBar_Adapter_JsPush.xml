@@ -1,36 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13910 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
 
-    <para><classname>Zend_ProgressBar_Adapter_JsPush</classname> est un adaptateur qui vous permet de mettre à jour une barre de
-    progression dans un navigateur au travers de Javascript. Ceci veut dire qu'une seconde connexion n'est pas
-    nécessaire pour recueillir le statut du processus courant, mais que le processus lui-même envoie son statut
-    directement au navigateur.</para>
+    <para>
+        <classname>Zend_ProgressBar_Adapter_JsPush</classname> est un adaptateur qui vous
+        permet de mettre à jour une barre de progression dans un navigateur au travers de
+        Javascript. Ceci veut dire qu'une seconde connexion n'est pas nécessaire pour recueillir le
+        statut du processus courant, mais que le processus lui-même envoie son statut directement au
+        navigateur.
+    </para>
 
-    <para>Vous pouvez paramétrer les options de l'adaptateur soit avec les méthodes <code>set*</code> soit en
-    fournissant un tableau ("array") ou une instance de <classname>Zend_Config</classname> contenant les options en tant que
-    premier paramètre du constructeur. Les options disponibles sont :</para>
+    <para>
+        Vous pouvez paramétrer les options de l'adaptateur soit avec les méthodes
+        <code>set*</code> soit en fournissant un tableau ("array") ou une instance de
+        <classname>Zend_Config</classname> contenant les options en tant que premier paramètre du
+        constructeur. Les options disponibles sont :
+    </para>
 
     <itemizedlist>
         <listitem>
-            <para><code>updateMethodName</code> : la méthode Javascript qui sera appelée à chaque mise à jour. La valeur
-            par défaut est <classname>Zend_ProgressBar_Update</classname>.</para>
+            <para>
+                <code>updateMethodName</code> : la méthode Javascript qui sera appelée à
+                chaque mise à jour. La valeur par défaut est
+                <classname>Zend_ProgressBar_Update</classname>.
+            </para>
         </listitem>
 
         <listitem>
-            <para><code>finishMethodName</code> : la méthode Javascript qui sera appelée lorsque le statut terminé sera
-            atteint. La valeur par défaut est <code>NULL</code>, qui veut dire que rien n'est fait.</para>
+            <para>
+                <code>finishMethodName</code> : la méthode Javascript qui sera appelée lorsque
+                le statut terminé sera atteint. La valeur par défaut est <code>NULL</code>, qui veut
+                dire que rien n'est fait.
+            </para>
         </listitem>
     </itemizedlist>
 
-    <para>L'utilisation de cet adaptateur est assez simple. Premièrement vous créez une barre de progression pour le
-    navigateur, soit avec Javascript ou auparavant en pur HTML. Ensuite vous définissez une méthode de mise à jour et
-    optionnellement une méthode de finalisation en Javascript, les deux acceptant un objet JSON en tant qu'unique
-    argument. Ensuite vous appelez une page Web avec un processus chronophage dans une balise <code>iframe</code> ou
-    <code>object</code> masqué. Pendant que le processus tourne, l'adaptateur appelle la méthode de mise à jour à chaque
-    mise à jour avec un objet JSON, contenant le paramètres suivants :</para>
+    <para>
+        L'utilisation de cet adaptateur est assez simple. Premièrement vous créez une barre de
+        progression pour le navigateur, soit avec Javascript ou auparavant en pur HTML. Ensuite vous
+        définissez une méthode de mise à jour et optionnellement une méthode de finalisation en
+        Javascript, les deux acceptant un objet JSON en tant qu'unique argument. Ensuite vous
+        appelez une page Web avec un processus chronophage dans une balise <code>iframe</code> ou
+        <code>object</code> masqué. Pendant que le processus tourne, l'adaptateur appelle la méthode
+        de mise à jour à chaque mise à jour avec un objet JSON, contenant le paramètres suivants
+        :
+    </para>
 
     <itemizedlist>
         <listitem>
@@ -46,11 +62,17 @@
         </listitem>
 
         <listitem>
-            <para><code>timeTaken</code> : le temps depuis quand le processus courant est en marche</para>
+            <para>
+                <code>timeTaken</code> : le temps depuis quand le processus courant est en
+                marche
+            </para>
         </listitem>
 
         <listitem>
-            <para><code>timeRemaining</code> : le temps estimé pour que le processus se termine</para>
+            <para>
+                <code>timeRemaining</code> : le temps estimé pour que le processus se
+                termine
+            </para>
         </listitem>
 
         <listitem>
@@ -61,7 +83,10 @@
     <example id="zend.progressbar-adapter.jspush.example">
         <title>Exemple basique du fonctionnement côté-client</title>
 
-        <para>Cet exemple illustre un paramétrage basique du HTML, CSS et JavaScript pour l'adaptateur JsPush :</para>
+        <para>
+            Cet exemple illustre un paramétrage basique du HTML, CSS et JavaScript pour
+            l'adaptateur JsPush :
+        </para>
 
         <programlisting role="html"><![CDATA[
 <div id="zend-progressbar-container">
@@ -104,29 +129,46 @@ function Zend_ProgressBar_Update(data)
 }
 ]]></programlisting>
 
-        <para>Ceci créera un simple conteneur avec une bordure noire et un bloc qui indique le niveau du processus
-        courant. Vous ne devez pas masquer l'<code>iframe</code> ou l'<code>object</code> par <code>display:
-        none;</code>, car dans ce cas les navigateurs comme Safari 2 ne chargeront pas le contenu réel.</para>
+        <para>
+            Ceci créera un simple conteneur avec une bordure noire et un bloc qui indique le
+            niveau du processus courant. Vous ne devez pas masquer l'<code>iframe</code> ou
+            l'<code>object</code> par <code>display: none;</code>, car dans ce cas les navigateurs
+            comme Safari 2 ne chargeront pas le contenu réel.
+        </para>
 
-        <para>Plutôt que de créer votre barre de progression personnalisée, vous pouvez utiliser une de celles
-        disponibles dans les librairies JavaScript comme Dojo, jQuery etc. Par exemple, il existe :</para>
+        <para>
+            Plutôt que de créer votre barre de progression personnalisée, vous pouvez utiliser
+            une de celles disponibles dans les librairies JavaScript comme Dojo, jQuery etc. Par
+            exemple, il existe :
+        </para>
 
         <itemizedlist>
             <listitem>
-                <para>Dojo : <ulink
-                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar"></ulink></para>
+                <para>
+                    Dojo : <ulink
+                    url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar"></ulink>
+                </para>
             </listitem>
 
             <listitem>
-                <para>jQuery : <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/"></ulink></para>
+                <para>
+                    jQuery : <ulink
+                    url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/"></ulink>
+                </para>
             </listitem>
 
             <listitem>
-                <para>MooTools : <ulink url="http://davidwalsh.name/dw-content/progress-bar.php"></ulink></para>
+                <para>
+                    MooTools : <ulink
+                    url="http://davidwalsh.name/dw-content/progress-bar.php"></ulink>
+                </para>
             </listitem>
 
             <listitem>
-                <para>Prototype : <ulink url="http://livepipe.net/control/progressbar"></ulink></para>
+                <para>
+                    Prototype : <ulink
+                    url="http://livepipe.net/control/progressbar"></ulink>
+                </para>
             </listitem>
         </itemizedlist>
     </example>
@@ -134,8 +176,11 @@ function Zend_ProgressBar_Update(data)
     <note>
         <title>Intervalle de mise à jour</title>
 
-        <para>Vous devez faire attention à ne pas envoyer trop de mises à jour, puisque chaque mise à jour a une taille
-        minimum de 1ko. Ceci est requis par le navigateur Safari pour rendre et exécuter l'appel de fonction. Internet
-        Explorer possède une limitation similaire mais à 256 octets.</para>
+        <para>
+            Vous devez faire attention à ne pas envoyer trop de mises à jour, puisque chaque
+            mise à jour a une taille minimum de 1ko. Ceci est requis par le navigateur Safari pour
+            rendre et exécuter l'appel de fonction. Internet Explorer possède une limitation
+            similaire mais à 256 octets.
+        </para>
     </note>
 </sect3>

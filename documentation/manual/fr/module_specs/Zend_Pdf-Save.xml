@@ -1,19 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13835 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Sauvegarder les changement dans un document PDF</title>
 
-    <para>Il y a deux méthodes qui permettent la sauvegarde dans un document PDF. Ce sont <classname>Zend_Pdf::save()</classname>
-    et <classname>Zend_Pdf::render()</classname>.</para>
+    <para>
+        Il y a deux méthodes qui permettent la sauvegarde dans un document PDF. Ce sont
+        <classname>Zend_Pdf::save()</classname> et <classname>Zend_Pdf::render()</classname>.
+    </para>
 
-    <para>La méthode <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname> sauvegarde un document dans un fichier.
-    Si <code>$updateOnly</code> est à <code>true</code>, alors seulement les nouvelles sections PDF sont ajoutées au
-    fichier. Sinon le fichier est écrasé.</para>
+    <para>
+        La méthode <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname>
+        sauvegarde un document dans un fichier. Si <code>$updateOnly</code> est à <code>true</code>,
+        alors seulement les nouvelles sections PDF sont ajoutées au fichier. Sinon le fichier est
+        écrasé.
+    </para>
 
-    <para>La méthode <classname>Zend_Pdf::render($filename, $newSegmentOnly = false)</classname> retourne le document PDF dans une
-    chaîne. Si <code>$newSegmentOnly</code> est à <code>true</code>, alors seulement les nouvelles sections du PDF sont
-    retournées.</para>
+    <para>
+        La méthode <classname>Zend_Pdf::render($filename, $newSegmentOnly = false)</classname>
+        retourne le document PDF dans une chaîne. Si <code>$newSegmentOnly</code> est à
+        <code>true</code>, alors seulement les nouvelles sections du PDF sont retournées.
+    </para>
 
     <example id="zend.pdf.save.example-1">
         <title>Sauvegarder un document PDF</title>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13832 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
@@ -7,10 +7,14 @@
     <sect2 id="zend.rest.client.introduction">
         <title>Introduction</title>
 
-        <para>Utiliser le <classname>Zend_Rest_Client</classname> est très semblable à l'utilisation des objets de
-        <code>SoapClient</code> (<ulink url="http://www.php.net/soap">SOAP web service extension</ulink>). Vous pouvez
-        simplement appeler les procédures de service de REST comme méthodes de <classname>Zend_Rest_Client</classname>. Vous devez
-        indiquer l'adresse complète du service dans le constructeur de <classname>Zend_Rest_Client</classname>.</para>
+        <para>
+            Utiliser le <classname>Zend_Rest_Client</classname> est très semblable à
+            l'utilisation des objets de <code>SoapClient</code> (<ulink
+            url="http://www.php.net/soap">SOAP web service extension</ulink>). Vous pouvez
+            simplement appeler les procédures de service de REST comme méthodes de
+            <classname>Zend_Rest_Client</classname>. Vous devez indiquer l'adresse complète du
+            service dans le constructeur de <classname>Zend_Rest_Client</classname>.
+        </para>
 
         <example id="zend.rest.client.introduction.example-1">
             <title>Une requête REST basique</title>
@@ -31,10 +35,14 @@ echo $client->sayHello('Davey', 'Day')->get();
         <note>
             <title>Différences dans les appels</title>
 
-            <para><classname>Zend_Rest_Client</classname> tente de rendre les méthodes distantes de la même manière que ses
-            propres méthodes, la seule différence étant que vous devez suivre l'appel de méthode <code>get()</code>,
-            <code>post()</code>, <code>put()</code> ou <code>delete()</code>. Cet appel peut être fait par
-            l'intermédiaire de méthodes enchaînées ou dans des appels séparés de méthode :</para>
+            <para>
+                <classname>Zend_Rest_Client</classname> tente de rendre les méthodes distantes
+                de la même manière que ses propres méthodes, la seule différence étant que vous
+                devez suivre l'appel de méthode <code>get()</code>, <code>post()</code>,
+                <code>put()</code> ou <code>delete()</code>. Cet appel peut être fait par
+                l'intermédiaire de méthodes enchaînées ou dans des appels séparés de méthode
+                :
+            </para>
 
             <programlisting role="php"><![CDATA[
 $client->sayHello('Davey', 'Day');
@@ -46,13 +54,17 @@ echo $client->get();
     <sect2 id="zend.rest.client.return">
         <title>Réponses</title>
 
-        <para>Toutes les demandes faites en utilisant <classname>Zend_Rest_Client</classname> retourne un objet
-        <classname>Zend_Rest_Client_Response</classname>. Cet objet a beaucoup de propriétés qui facilitent l'accès aux
-        résultats.</para>
+        <para>
+            Toutes les demandes faites en utilisant <classname>Zend_Rest_Client</classname>
+            retourne un objet <classname>Zend_Rest_Client_Response</classname>. Cet objet a beaucoup
+            de propriétés qui facilitent l'accès aux résultats.
+        </para>
 
-        <para>Quand le service est basé sur <classname>Zend_Rest_Server</classname>, Zend_Rest_Client peut faire plusieurs
-        suppositions au sujet de la réponse, y compris le statut de réponse (succès ou échec) et le type de
-        retour.</para>
+        <para>
+            Quand le service est basé sur <classname>Zend_Rest_Server</classname>,
+            Zend_Rest_Client peut faire plusieurs suppositions au sujet de la réponse, y compris le
+            statut de réponse (succès ou échec) et le type de retour.
+        </para>
 
         <example id="zend.rest.client.return.example-1">
             <title>État de la réponse</title>
@@ -66,17 +78,24 @@ if ($result->isSuccess()) {
 ]]></programlisting>
         </example>
 
-        <para>Dans l'exemple ci-dessus, vous pouvez voir que nous utilisons le résultat de la demande comme un objet,
-        pour appeler <code>isSuccess()</code>, et puis grâce à <code>__toString()</code>, nous pouvons simplement faire
-        <code>echo</code> sur l'objet pour récupérer le résultat. <classname>Zend_Rest_Client_Response</classname> vous permettra
-        de afficher n'importe quelle valeur scalaire. Pour les types complexes, vous pouvez employer la notation type
-        objet ou type tableau.</para>
+        <para>
+            Dans l'exemple ci-dessus, vous pouvez voir que nous utilisons le résultat de la
+            demande comme un objet, pour appeler <code>isSuccess()</code>, et puis grâce à
+            <code>__toString()</code>, nous pouvons simplement faire <code>echo</code> sur l'objet
+            pour récupérer le résultat. <classname>Zend_Rest_Client_Response</classname> vous
+            permettra de afficher n'importe quelle valeur scalaire. Pour les types complexes, vous
+            pouvez employer la notation type objet ou type tableau.
+        </para>
 
-        <para>Si cependant, vous souhaitez questionner un service n'employant pas <classname>Zend_Rest_Server</classname> l'objet
-        de <classname>Zend_Rest_Client_Response</classname> se comportera comme un <code>SimpleXMLElement</code>. Cependant, pour
-        faciliter les choses, il questionnera automatiquement le XML en utilisant XPath si la propriété n'est pas un
-        descendant direct de l'élément racine du document. En plus, si vous accédez à une propriété comme à une méthode,
-        vous recevrez la valeur de PHP pour l'objet, ou un tableau de résultats.</para>
+        <para>
+            Si cependant, vous souhaitez questionner un service n'employant pas
+            <classname>Zend_Rest_Server</classname> l'objet de
+            <classname>Zend_Rest_Client_Response</classname> se comportera comme un
+            <code>SimpleXMLElement</code>. Cependant, pour faciliter les choses, il questionnera
+            automatiquement le XML en utilisant XPath si la propriété n'est pas un descendant direct
+            de l'élément racine du document. En plus, si vous accédez à une propriété comme à une
+            méthode, vous recevrez la valeur de PHP pour l'objet, ou un tableau de résultats.
+        </para>
 
         <example id="zend.rest.client.return.example-2">
             <title>Utiliser le service REST Technorati</title>
@@ -125,27 +144,36 @@ echo $result->firstname() .' '. $result->lastname();
 ]]></programlisting>
         </example>
 
-        <para>Ici nous accédons aux propriétés <code>firstname</code> et <code>lastname</code>.Bien que ce ne soient pas
-        les éléments supérieurs, elles sont automatiquement retournées quand on accède par le nom.</para>
+        <para>
+            Ici nous accédons aux propriétés <code>firstname</code> et
+            <code>lastname</code>.Bien que ce ne soient pas les éléments supérieurs, elles sont
+            automatiquement retournées quand on accède par le nom.
+        </para>
 
         <note>
             <title>Éléments multiples</title>
 
-            <para>Si des éléments multiples sont trouvés en accédant à une valeur de nom, un tableau d'élément
-            SimpleXMLElement sera retourné ; l'accès par l'intermédiaire de la notation de méthode retournera un tableau
-            de valeurs.</para>
+            <para>
+                Si des éléments multiples sont trouvés en accédant à une valeur de nom, un
+                tableau d'élément SimpleXMLElement sera retourné ; l'accès par l'intermédiaire de la
+                notation de méthode retournera un tableau de valeurs.
+            </para>
         </note>
     </sect2>
 
     <sect2 id="zend.rest.client.args">
         <title>Arguments de requêtes</title>
 
-        <para>A moins que vous ne fassiez une demande à un service basé sur <classname>Zend_Rest_Server</classname>, il y a des
-        chances que vous devez envoyer des arguments multiples avec votre requête. Ceci est fait en appelant une méthode
-        avec le nom de l'argument, en passant la valeur comme premier (et seul) argument. Chacun de ces appels de
-        méthode renvoie l'objet lui-même, tenant compte de l'enchaînement, ou de l'utilisation habituelle. Le premier
-        appel, ou le premier argument si vous passez plus d'un argument, est toujours considéré comme la méthode en
-        appelant un service <classname>Zend_Rest_Server</classname>.</para>
+        <para>
+            A moins que vous ne fassiez une demande à un service basé sur
+            <classname>Zend_Rest_Server</classname>, il y a des chances que vous devez envoyer des
+            arguments multiples avec votre requête. Ceci est fait en appelant une méthode avec le
+            nom de l'argument, en passant la valeur comme premier (et seul) argument. Chacun de ces
+            appels de méthode renvoie l'objet lui-même, tenant compte de l'enchaînement, ou de
+            l'utilisation habituelle. Le premier appel, ou le premier argument si vous passez plus
+            d'un argument, est toujours considéré comme la méthode en appelant un service
+            <classname>Zend_Rest_Server</classname>.
+        </para>
 
         <example id="zend.rest.client.args.example-1">
             <title>Affecter des arguments de requêtes</title>
@@ -163,19 +191,28 @@ $client->arg('value1')->arg2('value2')->get();
 ]]></programlisting>
         </example>
 
-        <para>Les deux méthodes dans l'exemple ci-dessus, auront comme conséquence l'obtention des arguments suivants :
-        <code>?method=arg&amp;arg1=value1&amp;arg=value1&amp;arg2=value2</code></para>
+        <para>
+            Les deux méthodes dans l'exemple ci-dessus, auront comme conséquence l'obtention
+            des arguments suivants :
+            <code>?method=arg&amp;arg1=value1&amp;arg=value1&amp;arg2=value2</code>
+        </para>
 
-        <para>Vous noterez que le premier appel de <code>$client-&gt;arg('value1');</code> a eu comme conséquence
-        <code>method=arg&amp;arg1=value1</code> et <code>arg=value1</code> ; ceci afin que <classname>Zend_Rest_Server</classname>
-        puisse comprendre la demande correctement, plutôt que d'exiger la connaissance préalable du service.</para>
+        <para>
+            Vous noterez que le premier appel de <code>$client-&gt;arg('value1');</code> a eu
+            comme conséquence <code>method=arg&amp;arg1=value1</code> et <code>arg=value1</code> ;
+            ceci afin que <classname>Zend_Rest_Server</classname> puisse comprendre la demande
+            correctement, plutôt que d'exiger la connaissance préalable du service.
+        </para>
 
         <warning>
             <title>Sévérité de Zend_Rest_Client</title>
 
-            <para>Tout service REST qui est strict au sujet des arguments qu'il reçoit échouera probablement en
-            utilisant <classname>Zend_Rest_Client</classname>, en raison du comportement décrit ci-dessus. Ce n'est pas une
-            pratique courante et ne devrait pas poser des problèmes.</para>
+            <para>
+                Tout service REST qui est strict au sujet des arguments qu'il reçoit échouera
+                probablement en utilisant <classname>Zend_Rest_Client</classname>, en raison du
+                comportement décrit ci-dessus. Ce n'est pas une pratique courante et ne devrait pas
+                poser des problèmes.
+            </para>
         </warning>
     </sect2>
 </sect1>

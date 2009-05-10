@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12739 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Adaptateurs de connexion</title>
@@ -7,129 +7,158 @@
     <sect2 id="zend.http.client.adapters.overview">
         <title>Présentation globale</title>
 
-        <para><classname>Zend_Http_Client</classname> accepte des objets adaptateurs. Ces objets ont la responsabilité de soutenir
-        la connexion vers un serveur, à savoir écrire des requêtes et lire des réponses L'adaptateur peut donc être
-        changé, et même écrit ou réécrit pour correspondre à vos besoins, sans avoir l'obligation de toucher à toute la
-        classe dite "client". Vous vous connectez et manipulez votre connexion toujours de la même manière quelque soit
-        l'adaptateur situé dessous.</para>
+        <para>
+            <classname>Zend_Http_Client</classname> accepte des objets adaptateurs. Ces objets
+            ont la responsabilité de soutenir la connexion vers un serveur, à savoir écrire des
+            requêtes et lire des réponses L'adaptateur peut donc être changé, et même écrit ou
+            réécrit pour correspondre à vos besoins, sans avoir l'obligation de toucher à toute la
+            classe dite "client". Vous vous connectez et manipulez votre connexion toujours de la
+            même manière quelque soit l'adaptateur situé dessous.
+        </para>
 
-        <para>Actuellement, la classe cliente <classname>Zend_Http_Client</classname> est fournie avec trois adaptateurs :
-        <itemizedlist>
-                <listitem>
-                    <para><classname>Zend_Http_Client_Adapter_Socket</classname> (défaut)</para>
-                </listitem>
+        <para>
+            Actuellement, la classe cliente <classname>Zend_Http_Client</classname> est
+            fournie avec trois adaptateurs : <itemizedlist>
+                    <listitem>
+                        <para><classname>Zend_Http_Client_Adapter_Socket</classname> (défaut)</para>
+                    </listitem>
+    
+                    <listitem>
+                        <para><classname>Zend_Http_Client_Adapter_Proxy</classname></para>
+                    </listitem>
+    
+                    <listitem>
+                        <para><classname>Zend_Http_Client_Adapter_Test</classname></para>
+                    </listitem>
+    
+                    <listitem>
+                        <para><classname>Zend_Http_Client_Adapter_Curl</classname></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
 
-                <listitem>
-                    <para><classname>Zend_Http_Client_Adapter_Proxy</classname></para>
-                </listitem>
-
-                <listitem>
-                    <para><classname>Zend_Http_Client_Adapter_Test</classname></para>
-                </listitem>
-            </itemizedlist></para>
-
-        <para>L'objet Zend_Http_Client se voit spécifié un adaptateur via son constructeur avec le tableau d'options, à
-        l'index 'adapter'. Fournissez alors une chaîne représentant la classe d'adaptateur à utiliser (par exemple
-        'Zend_Http_Client_Adapter_Socket'), ou un objet directement (par exemple <code> new
-        Zend_Http_Client_Adapter_Test</code>). Vous pouvez de même passer un adaptateur plus tard, avec la méthode
-        <classname>Zend_Http_Client-&gt;setConfig()</classname>.</para>
+        <para>
+            L'objet Zend_Http_Client se voit spécifié un adaptateur via son constructeur avec
+            le tableau d'options, à l'index 'adapter'. Fournissez alors une chaîne représentant la
+            classe d'adaptateur à utiliser (par exemple 'Zend_Http_Client_Adapter_Socket'), ou un
+            objet directement (par exemple <code> new Zend_Http_Client_Adapter_Test</code>). Vous
+            pouvez de même passer un adaptateur plus tard, avec la méthode
+            <classname>Zend_Http_Client-&gt;setConfig()</classname>.
+        </para>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.socket">
         <title>Adaptateur Socket</title>
 
-        <para>L'adaptateur par défaut est Zend_Http_Client_Adapter_Socket. Il est basé sur les fonctions PHP
-        <code>fsockopen()</code> et soeurs. Il ne nécessite donc aucune extension particulière ni option de compilation
-        de PHP.</para>
+        <para>
+            L'adaptateur par défaut est Zend_Http_Client_Adapter_Socket. Il est basé sur les
+            fonctions PHP <code>fsockopen()</code> et soeurs. Il ne nécessite donc aucune extension
+            particulière ni option de compilation de PHP.
+        </para>
 
-        <para>L'adaptateur Socket peut être configuré avec des options, passées par
-        <classname>Zend_Http_Client-&gt;setConfig()</classname> ou au constructeur du client. <table
-                id="zend.http.client.adapter.socket.configuration.table">
-                <title>Zend_Http_Client_Adapter_Socket configuration</title>
+        <para>
+            L'adaptateur Socket peut être configuré avec des options, passées par
+            <classname>Zend_Http_Client-&gt;setConfig()</classname> ou au constructeur du client.
+            <table id="zend.http.client.adapter.socket.configuration.table">
+                    <title>Zend_Http_Client_Adapter_Socket configuration</title>
+    
+                    <tgroup cols="4">
+                        <thead>
+                            <row>
+                                <entry>Paramètre</entry>
+    
+                                <entry>Description</entry>
+    
+                                <entry>Types attendus</entry>
+    
+                                <entry>Valeur par défaut</entry>
+                            </row>
+                        </thead>
+    
+                        <tbody>
+                            <row>
+                                <entry>persistent</entry>
+    
+                                <entry>Utilise ou non les connexions TCP persistantes</entry>
+    
+                                <entry>booléen</entry>
+    
+                                <entry>false</entry>
+                            </row>
+    
+                            <row>
+                                <entry>ssltransport</entry>
+    
+                                <entry>Couche de transport SSL ('sslv2', 'tls')</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>ssl</entry>
+                            </row>
+    
+                            <row>
+                                <entry>sslcert</entry>
+    
+                                <entry>Chemin vers le certificat SSL encodé PEM</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>null</entry>
+                            </row>
+    
+                            <row>
+                                <entry>sslpassphrase</entry>
+    
+                                <entry>Phrase de passe pour le fichier de certificat SSL</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>null</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table> <note>
+                    <title>Connexions TCP persistantes</title>
+    
+                <para>
+                    L'utilisation de connexions TCP persistantes peut potentiellement
+                    accélérer vos requêtes HTTP mais n'a, dans la plupart des cas, qu'un petit effet
+                    positif et peut surcharger le serveur HTTP auquel vous êtes connecté.
+                </para>
 
-                <tgroup cols="4">
-                    <thead>
-                        <row>
-                            <entry>Paramètre</entry>
+                <para>
+                    Il est recommandé d'utiliser les connexions TCP persistantes seulement si
+                    vous vous connectez au même serveur très fréquemment, et que vous êtes sûr que
+                    le serveur est capable de gérer un nombre élevé de connections concurrentes.
+                    Dans tous les cas vous êtes encouragés à tester l'effet des connections
+                    persistantes à la fois sur l'accélération du client et sur la charge du serveur
+                    avant d'activer cette option.
+                </para>
 
-                            <entry>Description</entry>
-
-                            <entry>Types attendus</entry>
-
-                            <entry>Valeur par défaut</entry>
-                        </row>
-                    </thead>
-
-                    <tbody>
-                        <row>
-                            <entry>persistent</entry>
-
-                            <entry>Utilise ou non les connexions TCP persistantes</entry>
-
-                            <entry>booléen</entry>
-
-                            <entry>false</entry>
-                        </row>
-
-                        <row>
-                            <entry>ssltransport</entry>
-
-                            <entry>Couche de transport SSL ('sslv2', 'tls')</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>ssl</entry>
-                        </row>
-
-                        <row>
-                            <entry>sslcert</entry>
-
-                            <entry>Chemin vers le certificat SSL encodé PEM</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>null</entry>
-                        </row>
-
-                        <row>
-                            <entry>sslpassphrase</entry>
-
-                            <entry>Phrase de passe pour le fichier de certificat SSL</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>null</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table> <note>
-                <title>Connexions TCP persistantes</title>
-
-                <para>L'utilisation de connexions TCP persistantes peut potentiellement accélérer vos requêtes HTTP mais
-                n'a, dans la plupart des cas, qu'un petit effet positif et peut surcharger le serveur HTTP auquel vous
-                êtes connecté.</para>
-
-                <para>Il est recommandé d'utiliser les connexions TCP persistantes seulement si vous vous connectez au
-                même serveur très fréquemment, et que vous êtes sûr que le serveur est capable de gérer un nombre élevé
-                de connections concurrentes. Dans tous les cas vous êtes encouragés à tester l'effet des connections
-                persistantes à la fois sur l'accélération du client et sur la charge du serveur avant d'activer cette
-                option.</para>
-
-                <para>De plus, quand vous utilisez des connexions persistantes, il est recommandé d'activer l'option
-                "Keep-Alive" décrite dans <xref linkend="zend.http.client.configuration" />, sinon les connexions
-                persistantes n'auront que peu ou pas d'effet.</para>
+                <para>
+                    De plus, quand vous utilisez des connexions persistantes, il est
+                    recommandé d'activer l'option "Keep-Alive" décrite dans <xref
+                    linkend="zend.http.client.configuration" />, sinon les connexions persistantes
+                    n'auront que peu ou pas d'effet.
+                </para>
             </note> <note>
                 <title>HTTPS SSL Paramètres de flux</title>
 
-                <para><code>ssltransport, sslcert</code> and <code>sslpassphrase</code> sont seulement appropriées lors
-                de l'utilisation d'HTTPS.</para>
+                <para>
+                    <code>ssltransport, sslcert</code> and <code>sslpassphrase</code> sont
+                    seulement appropriées lors de l'utilisation d'HTTPS.
+                </para>
 
-                <para>Bien que les réglages par défaut du mode SSL fonctionneront pour la plupart des applications, vous
-                pourrez avoir besoin de les changer si le serveur, auquel vous vous connectez, requière un paramétrage
-                particulier du client. Dans ce cas, vous devriez lire les sections sur la couche de transport SSL et ses
-                options à cette <ulink
-                url="http://www.php.net/manual/en/transports.php#transports.inet">adresse</ulink>.</para>
-            </note></para>
+                <para>
+                    Bien que les réglages par défaut du mode SSL fonctionneront pour la
+                    plupart des applications, vous pourrez avoir besoin de les changer si le
+                    serveur, auquel vous vous connectez, requière un paramétrage particulier du
+                    client. Dans ce cas, vous devriez lire les sections sur la couche de transport
+                    SSL et ses options à cette <ulink
+                    url="http://www.php.net/manual/en/transports.php#transports.inet">adresse</ulink>.
+                </para>
+                </note>
+            </para>
 
         <example id="zend.http.client.adapters.socket.example-1">
             <title>Changer la couche de transport HTTPS</title>
@@ -149,8 +178,10 @@ $response = $client->request();
 ]]></programlisting>
         </example>
 
-        <para>Le résultat ci-dessus sera similaire à l'ouverture d'une connexion TCP avec la commande PHP suivante
-        :</para>
+        <para>
+            Le résultat ci-dessus sera similaire à l'ouverture d'une connexion TCP avec la
+            commande PHP suivante :
+        </para>
 
         <para><code>fsockopen('tls://www.example.com', 443)</code></para>
     </sect2>
@@ -158,91 +189,104 @@ $response = $client->request();
     <sect2 id="zend.http.client.adapters.proxy">
         <title>Adaptateur Proxy</title>
 
-        <para>L'adaptateur Zend_Http_Client_Adapter_Proxy est identique à celui par défaut, Socket, sauf que Proxy se
-        connectera au serveur via un serveur Proxy (mandataire). Cette utilisation peut être rencontrée pour des raisons
-        de performances ou de sécurité.</para>
+        <para>
+            L'adaptateur Zend_Http_Client_Adapter_Proxy est identique à celui par défaut,
+            Socket, sauf que Proxy se connectera au serveur via un serveur Proxy (mandataire). Cette
+            utilisation peut être rencontrée pour des raisons de performances ou de sécurité.
+        </para>
 
-        <para>En utilisant l'adaptateur Proxy, quelques paramètres de configuration seront nécessaires en plus du
-        paramètre 'adapter' : <table id="zend.http.client.adapters.proxy.table">
-                <title>Zend_Http_Client paramètres de configuration</title>
+        <para>
+            En utilisant l'adaptateur Proxy, quelques paramètres de configuration seront
+            nécessaires en plus du paramètre 'adapter' : <table
+                    id="zend.http.client.adapters.proxy.table">
+                    <title>Zend_Http_Client paramètres de configuration</title>
+    
+                    <tgroup cols="4">
+                        <thead>
+                            <row>
+                                <entry>Paramètre</entry>
+    
+                                <entry>Description</entry>
+    
+                                <entry>Valeurs attendues</entry>
+    
+                                <entry>Valeur par défaut</entry>
+                            </row>
+                        </thead>
+    
+                        <tbody>
+                            <row>
+                                <entry>proxy_host</entry>
+    
+                                <entry>Adresse du serveur Proxy</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>'proxy.myhost.com' ou '10.1.2.3'</entry>
+                            </row>
+    
+                            <row>
+                                <entry>proxy_port</entry>
+    
+                                <entry>Port du serveur Proxy</entry>
+    
+                                <entry>entier</entry>
+    
+                                <entry>8080 (défaut) ou 81</entry>
+                            </row>
+    
+                            <row>
+                                <entry>proxy_user</entry>
+    
+                                <entry>nom d'utilisateur pour le Proxy, si requis</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>'shahar' ou '' pour aucun (défaut)</entry>
+                            </row>
+    
+                            <row>
+                                <entry>proxy_pass</entry>
+    
+                                <entry>Mot de passe du Proxy, si requis</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>'secret' ou '' pour aucun (défaut)</entry>
+                            </row>
+    
+                            <row>
+                                <entry>proxy_auth</entry>
+    
+                                <entry>Type d'authentification HTTP du Proxy</entry>
+    
+                                <entry>chaîne</entry>
+    
+                                <entry>Zend_Http_Client::AUTH_BASIC (défaut)</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
 
-                <tgroup cols="4">
-                    <thead>
-                        <row>
-                            <entry>Paramètre</entry>
+        <para>
+            <code>proxy_host</code> devrait toujours être fourni. Si ça n'est pas le cas,
+            alors le client retournera sur une connexion Socket par défaut. <code>proxy_port</code>
+            est par défaut à "8080".
+        </para>
 
-                            <entry>Description</entry>
+        <para>
+            <code>proxy_user</code> et <code>proxy_pass</code> ne sont requis que si le
+            serveur Proxy demande une authentification. Si vous remplissez ces options, alors un
+            champ d'en-tête HTTP "Proxy-Authentication" sera ajouté à vos requêtes, via votre
+            client.
+        </para>
 
-                            <entry>Valeurs attendues</entry>
-
-                            <entry>Valeur par défaut</entry>
-                        </row>
-                    </thead>
-
-                    <tbody>
-                        <row>
-                            <entry>proxy_host</entry>
-
-                            <entry>Adresse du serveur Proxy</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>'proxy.myhost.com' ou '10.1.2.3'</entry>
-                        </row>
-
-                        <row>
-                            <entry>proxy_port</entry>
-
-                            <entry>Port du serveur Proxy</entry>
-
-                            <entry>entier</entry>
-
-                            <entry>8080 (défaut) ou 81</entry>
-                        </row>
-
-                        <row>
-                            <entry>proxy_user</entry>
-
-                            <entry>nom d'utilisateur pour le Proxy, si requis</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>'shahar' ou '' pour aucun (défaut)</entry>
-                        </row>
-
-                        <row>
-                            <entry>proxy_pass</entry>
-
-                            <entry>Mot de passe du Proxy, si requis</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>'secret' ou '' pour aucun (défaut)</entry>
-                        </row>
-
-                        <row>
-                            <entry>proxy_auth</entry>
-
-                            <entry>Type d'authentification HTTP du Proxy</entry>
-
-                            <entry>chaîne</entry>
-
-                            <entry>Zend_Http_Client::AUTH_BASIC (défaut)</entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table></para>
-
-        <para><code>proxy_host</code> devrait toujours être fourni. Si ça n'est pas le cas, alors le client retournera
-        sur une connexion Socket par défaut. <code>proxy_port</code> est par défaut à "8080".</para>
-
-        <para><code>proxy_user</code> et <code>proxy_pass</code> ne sont requis que si le serveur Proxy demande une
-        authentification. Si vous remplissez ces options, alors un champ d'en-tête HTTP "Proxy-Authentication" sera
-        ajouté à vos requêtes, via votre client.</para>
-
-        <para><code>proxy_auth</code> définit le type d'authentification à utiliser, si le serveur Proxy demande une
-        authentification. Actuellement, seule la méthode "basic" (<classname>Zend_Http_Client::AUTH_BASIC</classname>) est
-        supportée.</para>
+        <para>
+            <code>proxy_auth</code> définit le type d'authentification à utiliser, si le
+            serveur Proxy demande une authentification. Actuellement, seule la méthode "basic"
+            (<classname>Zend_Http_Client::AUTH_BASIC</classname>) est supportée.
+        </para>
 
         <example id="zend.http.client.adapters.proxy.example-1">
             <title>Utiliser Zend_Http_Client derrière un serveur Proxy</title>
@@ -264,26 +308,36 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
 ]]></programlisting>
         </example>
 
-        <para>Comme déjà dit, si proxy_host n'est pas rempli ou défini en tant que chaîne vide, alors le client
-        utilisera l'adaptateur Socket par défaut. Ceci est utile si le proxy est utilisé optionnellement, ou par
-        intermittence.</para>
+        <para>
+            Comme déjà dit, si proxy_host n'est pas rempli ou défini en tant que chaîne vide,
+            alors le client utilisera l'adaptateur Socket par défaut. Ceci est utile si le proxy est
+            utilisé optionnellement, ou par intermittence.
+        </para>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.test">
         <title>Adaptateur Test</title>
 
-        <para>Il est quelque fois difficile de tester une application qui a besoin d'une connexion HTTP. Par exemple,
-        une application qui est en charge de lire un flux RSS aura besoin d'une connexion, qui n'est pas tout le temps
-        disponible.</para>
+        <para>
+            Il est quelque fois difficile de tester une application qui a besoin d'une
+            connexion HTTP. Par exemple, une application qui est en charge de lire un flux RSS aura
+            besoin d'une connexion, qui n'est pas tout le temps disponible.
+        </para>
 
-        <para>C'est pour cette raison que l'adaptateur <classname>Zend_Http_Client_Adapter_Test</classname> est présent. Vous
-        pouvez de cette manière écrire vos applications, et lors de la phase de tests, passer votre connexion sur
-        l'adaptateur Test (objet mock).</para>
+        <para>
+            C'est pour cette raison que l'adaptateur
+            <classname>Zend_Http_Client_Adapter_Test</classname> est présent. Vous pouvez de cette
+            manière écrire vos applications, et lors de la phase de tests, passer votre connexion
+            sur l'adaptateur Test (objet mock).
+        </para>
 
-        <para>La classe <classname>Zend_Http_Client_Adapter_Test</classname> possède une méthode supplémentaire,
-        <code>setResponse()</code>. Elle prend en paramètre un objet <classname>Zend_Http_Response</classname> ou une chaîne. Une
-        fois cet objet de réponse déterminé, l'adaptateur de Test retournera toujours cette réponse, sans effectuer de
-        réelle requête HTTP.</para>
+        <para>
+            La classe <classname>Zend_Http_Client_Adapter_Test</classname> possède une méthode
+            supplémentaire, <code>setResponse()</code>. Elle prend en paramètre un objet
+            <classname>Zend_Http_Response</classname> ou une chaîne. Une fois cet objet de réponse
+            déterminé, l'adaptateur de Test retournera toujours cette réponse, sans effectuer de
+            réelle requête HTTP.
+        </para>
 
         <example id="zend.http.client.adapters.test.example-1">
             <title>Tester avec un objet de réponse HTTP unique</title>
@@ -314,13 +368,19 @@ $response = $client->request('GET');
 ]]></programlisting>
         </example>
 
-        <para>L'exemple ci dessus montre comment préconfigurer la réponse qui sera retournée lors d'une requête de votre
-        objet client. Ainsi lors des tests, votre application continuera de se comporter normalement, elle aura tout
-        simplement été trompée (mock). Aucune connexion HTTP n'est dans ce cas là nécessaire.</para>
+        <para>
+            L'exemple ci dessus montre comment préconfigurer la réponse qui sera retournée
+            lors d'une requête de votre objet client. Ainsi lors des tests, votre application
+            continuera de se comporter normalement, elle aura tout simplement été trompée (mock).
+            Aucune connexion HTTP n'est dans ce cas là nécessaire.
+        </para>
 
-        <para>Quelques fois, plusieurs transactions HTTP peuvent être nécessaires. Une réponse peut demander une
-        redirection, vers une autre. Dans ce cas, utiliser <code>setResponse()</code> toute seule n'est pas possible car
-        il ne sera pas possible de spécifier les réponses suivantes, nécessaires alors à l'application.</para>
+        <para>
+            Quelques fois, plusieurs transactions HTTP peuvent être nécessaires. Une réponse
+            peut demander une redirection, vers une autre. Dans ce cas, utiliser
+            <code>setResponse()</code> toute seule n'est pas possible car il ne sera pas possible de
+            spécifier les réponses suivantes, nécessaires alors à l'application.
+        </para>
 
         <example id="zend.http.client.adapters.test.example-2">
             <title>Tester avec plusieurs réponses HTTP</title>
@@ -358,30 +418,99 @@ $adapter->addResponse(
 ]]></programlisting>
         </example>
 
-        <para>La méthode <code>setResponse()</code> détruit toutes les réponses dans le buffer de
-        <classname>Zend_Http_Client_Adapter_Test</classname> et définit la première réponse qui sera retournée. La méthode
-        <code>addResponse()</code> définit les réponses suivantes.</para>
+        <para>
+            La méthode <code>setResponse()</code> détruit toutes les réponses dans le buffer
+            de <classname>Zend_Http_Client_Adapter_Test</classname> et définit la première réponse
+            qui sera retournée. La méthode <code>addResponse()</code> définit les réponses
+            suivantes.
+        </para>
 
         <para>Les réponses seront rejouées dans leur ordre d'ajout.</para>
 
-        <para>Dans l'exemple ci-dessus, l'adaptateur est configuré pour un scénario de test de redirections 302. En
-        fonction de votre application, le suivi d'une redirection peut être ou non désiré. Dans notre exemple, nous nous
-        attendons à ce que la redirection soit suivie et nous configurons notre adaptateur de tests pour ceci. La
-        réponse de redirection originelle (302) est définie avec la méthode <code>setResponse()</code>, quant à la
-        réponse non redirigeante (200) suivante, elles est définie avec la méthode <code>addResponse()</code>. Lorsque
-        votre objet client est configuré, vous pouvez l'injecter dans votre application à tester, et voir le résultat et
-        les comportements.</para>
+        <para>
+            Dans l'exemple ci-dessus, l'adaptateur est configuré pour un scénario de test de
+            redirections 302. En fonction de votre application, le suivi d'une redirection peut être
+            ou non désiré. Dans notre exemple, nous nous attendons à ce que la redirection soit
+            suivie et nous configurons notre adaptateur de tests pour ceci. La réponse de
+            redirection originelle (302) est définie avec la méthode <code>setResponse()</code>,
+            quant à la réponse non redirigeante (200) suivante, elles est définie avec la méthode
+            <code>addResponse()</code>. Lorsque votre objet client est configuré, vous pouvez
+            l'injecter dans votre application à tester, et voir le résultat et les
+            comportements.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.http.client.adapters.curl">
+        <title>The cURL Adapter</title>
+
+        <para>
+            cURL is a standard HTTP client library that is distributed with many
+            operating systems and can be used in PHP via the cURL extension. It
+            offers functionality for many special cases which can occur for a HTTP
+            client and make it a perfect choice for a HTTP adapter. It supports
+            secure connections, proxy, all sorts of authentication mechanisms
+            and shines in applications that move large files around between servers.
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-1">
+            <title>Setting cURL options</title>
+
+            <programlisting role="php"><![CDATA[
+$config = array(
+    'adapter'   => 'Zend_Http_Client_Adapter_Curl',
+    'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
+);
+$client = new Zend_Http_Client($uri, $config);
+]]>
+            </programlisting>
+        </example>
+
+        <para>
+            By default the cURL adapter is configured to behave exactly like
+            the Socket Adapter. You can change the cURL options by either specifying
+            the 'curloptions' key in the constructor of the adapter or by calling
+            <code>setCurlOption($name, $value)</code>. The <code>$name</code> key
+            corresponds to the CURL_* constants of the cURL extension.
+        </para>
+
+        <example id="zend.http.client.adapters.curl.example-2">
+            <title>Transfering Files by Handle</title>
+
+            <para>
+                You can use cURL to transfer very large files over HTTP by filehandle.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+$putFileSize   = filesize("filepath");
+$putFileHandle = fopen("filepath", "r");
+
+$adapter = new Zend_Http_Client_Adapter_Curl();
+$client = new Zend_Http_Client();
+$client->setAdapter($adapter);
+$adapter->setConfig(array(
+    'curloptions' => array(CURLOPT_INFILE => $putFileHandle,
+                           CURLOPT_INFILESIZE => $putFileSize)
+));
+$client->request("PUT");
+]]>
+            </programlisting>
+        </example>
     </sect2>
 
     <sect2 id="zend.http.client.adapters.extending">
         <title>Créer vos propres adaptateurs de connexion</title>
 
-        <para>Vous pouvez créer vos propres adaptateurs, si vous avez un besoin spécial à utiliser. Par exemple, des
-        possibilités de cache, ou des sockets persistantes.</para>
+        <para>
+            Vous pouvez créer vos propres adaptateurs, si vous avez un besoin spécial à
+            utiliser. Par exemple, des possibilités de cache, ou des sockets persistantes.
+        </para>
 
-        <para>Pour ceci, votre classe d'adaptateur doit implémenter l'interface
-        <classname>Zend_Http_Client_Adapter_Interface</classname>. L'exemple suivant montre un squelette de classe. Toutes les
-        méthodes publiques, ici, sont indispensables à la classe, elles sont issues de l'interface :</para>
+        <para>
+            Pour ceci, votre classe d'adaptateur doit implémenter l'interface
+            <classname>Zend_Http_Client_Adapter_Interface</classname>. L'exemple suivant montre un
+            squelette de classe. Toutes les méthodes publiques, ici, sont indispensables à la
+            classe, elles sont issues de l'interface :
+        </para>
 
         <example id="zend.http.client.adapters.extending.example-1">
             <title>Création de votre propre adaptateur de connexion</title>

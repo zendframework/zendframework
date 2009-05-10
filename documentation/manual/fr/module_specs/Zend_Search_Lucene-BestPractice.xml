@@ -25,31 +25,31 @@
             linkend="zend.search.lucene.searching.results-scoring">score</link> de hit. Si le
             document indexé possède les mêmes champs stockés, vous devrez utiliser la méthode
             <code>getDocument()</code> pour y accéder :<programlisting role="php"><![CDATA[
-    $hits = $index->find($query);
-    
-    foreach ($hits as $hit) {
-        // Récupérer le champ de document 'title'
-        $title = $hit->title;
-    
-        // Récupérer le champ de document 'contents'
-        $contents = $hit->contents;
-    
-        // Récupérer l'id interne du document Lucene
-        $id = $hit->id;
-    
-        // Récupérer le score de hit
-        $score = $hit->score;
-    
-        // Récupérer le champ de document 'id'
-        $docId = $hit->getDocument()->id;
-    
-        // Récupérer le champ de document 'score'
-        $docId = $hit->getDocument()->score;
-    
-        // Un autre moyen de récupérer le champ 'title'
-        $title = $hit->getDocument()->title;
-    }
-    ]]></programlisting></para>
+$hits = $index->find($query);
+
+foreach ($hits as $hit) {
+    // Récupérer le champ de document 'title'
+    $title = $hit->title;
+
+    // Récupérer le champ de document 'contents'
+    $contents = $hit->contents;
+
+    // Récupérer l'id interne du document Lucene
+    $id = $hit->id;
+
+    // Récupérer le score de hit
+    $score = $hit->score;
+
+    // Récupérer le champ de document 'id'
+    $docId = $hit->getDocument()->id;
+
+    // Récupérer le champ de document 'score'
+    $docId = $hit->getDocument()->score;
+
+    // Un autre moyen de récupérer le champ 'title'
+    $title = $hit->getDocument()->title;
+}
+]]></programlisting></para>
         </sect2>
     
         <sect2 id="zend.search.lucene.best-practice.indexing-performance">
@@ -80,10 +80,10 @@
         <para>
             L'optimisation complète de l'index peut être effectuée avec la méthode
             <code>optimize()</code> :<programlisting role="php"><![CDATA[
-    $index = Zend_Search_Lucene::open($indexPath);
-    
-    $index->optimize();
-    ]]></programlisting></para>
+$index = Zend_Search_Lucene::open($indexPath);
+
+$index->optimize();
+]]></programlisting></para>
     
         <para>
             L'optimisation d'index fonctionne avec des "data streams" et ne consomme pas pas
@@ -321,20 +321,20 @@
         <para>
             Le premier est de forcer l'index à sortir de la portée (du scope) :<programlisting
             role="php"><![CDATA[
-    $index = Zend_Search_Lucene::open($indexPath);
-    
-    ...
-    
-    unset($index);
-    ]]></programlisting></para>
+$index = Zend_Search_Lucene::open($indexPath);
+
+...
+
+unset($index);
+]]></programlisting></para>
     
         <para>
             Le second est d'effectuer une opération de commit avant la fin du script exécution
             :<programlisting role="php"><![CDATA[
-    $index = Zend_Search_Lucene::open($indexPath);
-    
-    $index->commit();
-    ]]></programlisting> Cette possibilité est également décrite dans la section "<link
+$index = Zend_Search_Lucene::open($indexPath);
+
+$index->commit();
+]]></programlisting> Cette possibilité est également décrite dans la section "<link
             linkend="zend.search.lucene.advanced.static">Avancé - Utiliser les propriétés statiques
             de l'index</link>".
         </para>
@@ -358,40 +358,40 @@
         <para>
             C'est plus efficace que d'utiliser la méthode <code>find()</code> :<programlisting
             role="php"><![CDATA[
-    // Récupération de documents avec la méthode find()
-    // en utilisant une querystring
-    $query = $idFieldName . ':' . $docId;
-    $hits  = $index->find($query);
-    foreach ($hits as $hit) {
-        $title    = $hit->title;
-        $contents = $hit->contents;
-        ...
-    }
+// Récupération de documents avec la méthode find()
+// en utilisant une querystring
+$query = $idFieldName . ':' . $docId;
+$hits  = $index->find($query);
+foreach ($hits as $hit) {
+    $title    = $hit->title;
+    $contents = $hit->contents;
     ...
-    
-    // Récupération de documents avec la méthode find()
-    // en utilisant l'API de requête.
-    $term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
-    $query = new Zend_Search_Lucene_Search_Query_Term($term);
-    $hits  = $index->find($query);
-    foreach ($hits as $hit) {
-        $title    = $hit->title;
-        $contents = $hit->contents;
-        ...
-    }
-    
+}
+...
+
+// Récupération de documents avec la méthode find()
+// en utilisant l'API de requête.
+$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$query = new Zend_Search_Lucene_Search_Query_Term($term);
+$hits  = $index->find($query);
+foreach ($hits as $hit) {
+    $title    = $hit->title;
+    $contents = $hit->contents;
     ...
-    
-    // Récupération de documents avec la méthode termDocs()
-    $term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
-    $docIds  = $index->termDocs($term);
-    foreach ($docIds as $id) {
-        $doc = $index->getDocument($id);
-        $title    = $doc->title;
-        $contents = $doc->contents;
-        ...
-    }
-    ]]></programlisting></para>
+}
+
+...
+
+// Récupération de documents avec la méthode termDocs()
+$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$docIds  = $index->termDocs($term);
+foreach ($docIds as $id) {
+    $doc = $index->getDocument($id);
+    $title    = $doc->title;
+    $contents = $doc->contents;
+    ...
+}
+]]></programlisting></para>
         </sect2>
     
         <sect2 id="zend.search.lucene.best-practice.memory-usage">
@@ -476,14 +476,14 @@
         <para>
             L'encodage peut être explicitement spécifié en passant un paramètre optionnel à la
             méthode de création d'un champ :<programlisting role="php"><![CDATA[
-    $doc = new Zend_Search_Lucene_Document();
-    $doc->addField(Zend_Search_Lucene_Field::Text('title',
-                                                  $title,
-                                                  'iso-8859-1'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
-                                                      $contents,
-                                                      'utf-8'));
-    ]]></programlisting> C'est le meilleur moyen d'éviter toute ambiguïté dans les encodages
+$doc = new Zend_Search_Lucene_Document();
+$doc->addField(Zend_Search_Lucene_Field::Text('title',
+                                              $title,
+                                              'iso-8859-1'));
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
+                                                  $contents,
+                                                  'utf-8'));
+]]></programlisting> C'est le meilleur moyen d'éviter toute ambiguïté dans les encodages
             utilisés.
         </para>
 
@@ -491,15 +491,15 @@
             Si le paramètre optionnel de l'encodage est omis, la locale courante est utilisée.
             La locale courante peut contenir des données d'encodage en plus des spécification de
             langue :<programlisting role="php"><![CDATA[
-    setlocale(LC_ALL, 'fr_FR');
-    ...
-    
-    setlocale(LC_ALL, 'de_DE.iso-8859-1');
-    ...
-    
-    setlocale(LC_ALL, 'ru_RU.UTF-8');
-    ...
-    ]]></programlisting></para>
+setlocale(LC_ALL, 'fr_FR');
+...
+
+setlocale(LC_ALL, 'de_DE.iso-8859-1');
+...
+
+setlocale(LC_ALL, 'ru_RU.UTF-8');
+...
+]]></programlisting></para>
     
         <para>
             La même approche est utilisée pour définir l'encodage des chaînes de
@@ -514,20 +514,20 @@
         <para>
             L'encodage peut être passée comme paramètre optionnel si la requête est analysée
             explicitement avant la recherche :<programlisting role="php"><![CDATA[
-    $query =
-        Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
-    $hits = $index->find($query);
-    ...
-    ]]></programlisting></para>
+$query =
+    Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
+$hits = $index->find($query);
+...
+]]></programlisting></para>
     
         <para>
             L'encodage par défaut peut également être spécifié avec la méthode
             <code>setDefaultEncoding()</code> :<programlisting role="php"><![CDATA[
-    Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
-    $hits = $index->find($queryStr);
-    ...
-     chaîne vide sous-entend "locale courante".
- </para>
+Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
+$hits = $index->find($queryStr);
+...
+ chaîne vide sous-entend "locale courante".
+]]></programlisting></para>
 
         <para>
             Si l'encodage correct est spécifié, il pourra être correctement interprété par

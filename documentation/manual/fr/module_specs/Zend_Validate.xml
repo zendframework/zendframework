@@ -1,170 +1,286 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12116 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Introduction</title>
 
-    <para>Le composant <classname>Zend_Validate</classname> fournit un ensemble de validateurs usuels. Il fournit également un
-    mécanisme simple de chaînage permettant d'appliquer de multiples validateurs à une donnée dans un ordre défini par
-    l'utilisateur.</para>
+    <para>
+        Le composant <classname>Zend_Validate</classname> fournit un ensemble de validateurs
+        usuels. Il fournit également un mécanisme simple de chaînage permettant d'appliquer de
+        multiples validateurs à une donnée dans un ordre défini par l'utilisateur.
+    </para>
 
     <sect2 id="zend.validate.introduction.definition">
         <title>Qu'est-ce qu'un validateur ?</title>
 
-        <para>Un validateur examine ce qui lui est soumis suivant certaines règles et retourne un résultat booléen, si
-        la donnée est conforme aux exigences. Si ce n'est pas le cas, un validateur peut de manière optionnelle fournir
-        des informations concernant la (ou les) règle(s) non remplie(s).</para>
+        <para>
+            Un validateur examine ce qui lui est soumis suivant certaines règles et retourne
+            un résultat booléen, si la donnée est conforme aux exigences. Si ce n'est pas le cas, un
+            validateur peut de manière optionnelle fournir des informations concernant la (ou les)
+            règle(s) non remplie(s).
+        </para>
 
-        <para>Par exemple, une application Web peut réclamer qu'un identifiant comprennent entre six et douze caractères
-        et ne contiennent que des caractères alphanumériques. Un validateur peut être utilisé pour s'assurer que les
-        identifiants remplissent ces règles. Si un identifiant donné ne respecte pas l'une ou plusieurs de ces règles,
-        il sera utile de savoir laquelle ou lesquelles en particulier.</para>
+        <para>
+            Par exemple, une application Web peut réclamer qu'un identifiant comprennent entre
+            six et douze caractères et ne contiennent que des caractères alphanumériques. Un
+            validateur peut être utilisé pour s'assurer que les identifiants remplissent ces règles.
+            Si un identifiant donné ne respecte pas l'une ou plusieurs de ces règles, il sera utile
+            de savoir laquelle ou lesquelles en particulier.
+        </para>
     </sect2>
 
     <sect2 id="zend.validate.introduction.using">
         <title>Utilisation basique des validateurs</title>
 
-        <para>Avoir défini la validation de cette manière fournit la fondation de <classname>Zend_Validate_Interface</classname>,
-        qui définit deux méthodes, <code>isValid()</code> et <code>getMessages()</code>. La méthode
-        <code>isValid()</code> réalise la validation sur la valeur fournie, en retournant <code>true</code> si et
-        seulement si la valeur respecte les critères de validation.</para>
+        <para>
+            Avoir défini la validation de cette manière fournit la fondation de
+            <classname>Zend_Validate_Interface</classname>, qui définit deux méthodes,
+            <code>isValid()</code> et <code>getMessages()</code>. La méthode <code>isValid()</code>
+            réalise la validation sur la valeur fournie, en retournant <code>true</code> si et
+            seulement si la valeur respecte les critères de validation.
+        </para>
 
-        <para>Si <code>isValid()</code> retourne <code>false</code>, <code>getMessages()</code> retourne un tableau de
-        messages expliquant la(es) raison(s) de l'échec de la validation. Les clés du tableau sont des chaînes courtes
-        qui identifient les raisons de l'échec de la validation, et les valeurs du tableau sont les chaînes de messages
-        humainement lisibles correspondantes. Les clés et les valeurs sont dépendantes de la classe ; chaque classe de
-        validation définit son propre jeu de messages d'échec de validation et les clés uniques qui les identifient.
-        Chaque classe possède aussi une définition de constantes ("<code>const</code>") qui rattachent tout
-        identificateur à une cause d'échec de validation.</para>
+        <para>
+            Si <code>isValid()</code> retourne <code>false</code>, <code>getMessages()</code>
+            retourne un tableau de messages expliquant la(es) raison(s) de l'échec de la validation.
+            Les clés du tableau sont des chaînes courtes qui identifient les raisons de l'échec de
+            la validation, et les valeurs du tableau sont les chaînes de messages humainement
+            lisibles correspondantes. Les clés et les valeurs sont dépendantes de la classe ; chaque
+            classe de validation définit son propre jeu de messages d'échec de validation et les
+            clés uniques qui les identifient. Chaque classe possède aussi une définition de
+            constantes ("<code>const</code>") qui rattachent tout identificateur à une cause d'échec
+            de validation.
+        </para>
 
-        <para>La méthode <code>getErrors()</code> retourne un tableau d'informations courtes qui identifient la(es)
-        raison(s) de l'échec de la validation. Ces chaînes sont fournies pour identifier les erreurs. Elles sont
-        destinées à votre code d'application, et non à être affichées pour l'utilisateur. Ces chaînes sont dépendantes
-        de la classe ; chaque classe de validation définit ces propres chaînes pour identifier la cause des erreurs.
-        Chaque classe fournit de plus des constantes (<code>const</code>) qui correspondent aux identificateurs
-        d'erreur.</para>
+        <para>
+            La méthode <code>getErrors()</code> retourne un tableau d'informations courtes qui
+            identifient la(es) raison(s) de l'échec de la validation. Ces chaînes sont fournies pour
+            identifier les erreurs. Elles sont destinées à votre code d'application, et non à être
+            affichées pour l'utilisateur. Ces chaînes sont dépendantes de la classe ; chaque classe
+            de validation définit ces propres chaînes pour identifier la cause des erreurs. Chaque
+            classe fournit de plus des constantes (<code>const</code>) qui correspondent aux
+            identificateurs d'erreur.
+        </para>
 
         <note>
-            <para>La méthode <code>getMessages()</code> retourne des informations sur l'échec de validation seulement
-            pour l'appel le plus récent de <code>isValid()</code>. Chaque appel de <code>isValid()</code> efface les
-            messages et les erreurs déclenchées par l'appel précédent, car il est probable que chaque appel de
-            <code>isValid()</code> est réalisé pour des données d'entrée différentes.</para>
+            <para>
+                La méthode <code>getMessages()</code> retourne des informations sur l'échec de
+                validation seulement pour l'appel le plus récent de <code>isValid()</code>. Chaque
+                appel de <code>isValid()</code> efface les messages et les erreurs déclenchées par
+                l'appel précédent, car il est probable que chaque appel de <code>isValid()</code>
+                est réalisé pour des données d'entrée différentes.
+            </para>
         </note>
 
-        <para>L'exemple suivant illustre la validation d'une adresse émail : <programlisting role="php"><![CDATA[
-$validator = new Zend_Validate_EmailAddress();
-
-if ($validator->isValid($email)) {
-    // l'email est valide
-} else {
-    // l'email est invalide ; affichons pourquoi
-    foreach ($validator->getMessages() as $messageId => $message) {
-        echo "Echec de validation '$messageId' : $message\n";
+        <para>
+            L'exemple suivant illustre la validation d'une adresse émail : <programlisting
+            role="php"><![CDATA[
+    $validator = new Zend_Validate_EmailAddress();
+    
+    if ($validator->isValid($email)) {
+        // l'email est valide
+    } else {
+        // l'email est invalide ; affichons pourquoi
+        foreach ($validator->getMessages() as $messageId => $message) {
+            echo "Echec de validation '$messageId' : $message\n";
+        }
     }
-}
-]]></programlisting></para>
+    ]]></programlisting></para>
+        </sect2>
+    
+        <sect2 id="zend.validate.introduction.messages">
+            <title>Messages personnalisés</title>
+    
+        <para>
+            Les classes de validation fournissent une méthode <code>setMessage()</code> avec
+            laquelle vous pouvez spécifier le format du message retourné par
+            <code>getMessages()</code> dans le cas d'un échec de validation. Le premier argument de
+            cette méthode est une chaîne contenant le message d'erreur. Vous pouvez inclure des
+            balises dans cette chaîne qui seront substituées avec les données appropriées du
+            validateur. La balise <code>%value%</code> est supportée par tous les validateurs ; elle
+            est substituée par la valeur fournie à <code>isValid()</code>. D'autres balises peuvent
+            être supportées aux cas par cas par chaque classe de validation. Par exemple,
+            <code>%max%</code> est une balise supportée par
+            <classname>Zend_Validate_LessThan</classname>. La méthode
+            <code>getMessageVariables()</code> retourne un tableau des balises de variables
+            supportées par le validateur.
+        </para>
+
+        <para>
+            Le second paramètre optionnel est une chaîne qui identifie le modèle de message
+            d'échec de validation qui doit être paramètré, ce qui est pratique quand une classe de
+            validation définit plus d'une cause d'échec. Si vous omettez ce second argument,
+            <code>setMessage()</code> considère que le message, que vous spécifiez, s'applique au
+            premier message déclaré dans la classe de validation. La plupart des classes de
+            validation n'ayant qu'un seul message d'erreur, il n'est pas nécessaire de spécifier
+            distinctement dans ce cas quel message vous affectez.
+        </para>
+
+        <para>
+            <programlisting role="php"><![CDATA[
+    $validator = new Zend_Validate_StringLength(8);
+    
+    $validator->setMessage(
+        'La chaîne \'%value%\' est trop courte ; '
+      . 'elle doit être au moins de %min% caractères',
+        Zend_Validate_StringLength::TOO_SHORT);
+    
+    if (!$validator->isValid('word')) {
+        $messages = $validator->getMessages();
+        echo current($messages);
+    
+        // affiche "La chaîne 'word' est trop courte ;
+        // elle doit être au moins de 8 caractères"
+    }
+    ]]></programlisting></para>
+    
+        <para>
+            Vous pouvez régler des messages multiples en utilisant la méthode
+            <code>setMessages()</code>. Son argument dans ce cas est un tableau de paires
+            clé/message. <programlisting role="php"><![CDATA[
+    $validator = new Zend_Validate_StringLength(8, 12);
+    
+    $validator->setMessages( array(
+        Zend_Validate_StringLength::TOO_SHORT =>
+                'La chaîne \'%value%\' est trop courte',
+        Zend_Validate_StringLength::TOO_LONG  =>
+                'La chaîne \'%value%\' est trop longue'
+    ));
+    ]]></programlisting></para>
+    
+        <para>
+            Si votre application exige une flexibilité encore plus grande avec laquelle elle
+            rapporte les échecs de validation, vous pouvez accéder aux propriétés par le même nom
+            que les balises de message supportées par une classe de validation donnée. La propriété
+            <code>value</code> est toujours accessible dans un validateur ; il s'agit de la valeur
+            fournie comme argument à <code>isValid()</code>. D'autres propriétés peuvent être
+            supportées au cas par cas par chaque classe de validation. <programlisting
+            role="php"><![CDATA[
+    $validator = new Zend_Validate_StringLength(8, 12);
+    
+    if (!validator->isValid('word')) {
+        echo 'Echec du mot : '
+            . $validator->value
+            . ' ; sa longueur n\'est pas compris entre '
+            . $validator->min
+            . ' et '
+            . $validator->max
+            . "\n";
+    }
+    ]]></programlisting></para>
+        </sect2>
+    
+        <sect2 id="zend.validate.introduction.static">
+            <title>Utilisation de la méthode statique <code>is()</code></title>
+    
+        <para>
+            S'il est peu pratique de charger une classe de validation donnée et créer une
+            instance de validateur, vous pouvez utiliser la méthode statique
+            <classname>Zend_Validate::is()</classname> comme appel alternatif. Le premier argument
+            de cette méthode est la donnée d'entrée, que vous passeriez à la méthode
+            <code>isValid()</code>. Le deuxième argument est une chaîne, qui correspond au nom de
+            base de la classe de validation, relativement dans l'espace de noms
+            <classname>Zend_Validate</classname>. La méthode <code>is()</code> charge
+            automatiquement la classe, crée une instance et applique la méthode
+            <code>isValid()</code> à la donnée d'entrée. <programlisting role="php"><![CDATA[
+    if (Zend_Validate::is($email, 'EmailAddress')) {
+        // l'email est valide
+    }
+    ]]></programlisting></para>
+    
+        <para>
+            Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
+            classe, s'ils sont nécessaires pour votre classe de validation. <programlisting
+            role="php"><![CDATA[
+    if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+        // $value est compris entre 1 et 12
+    }
+    ]]></programlisting></para>
+    
+        <para>
+            La méthode <code>is()</code> retourne une valeur booléenne, la même que la méthode
+            <code>isValid()</code>. Lors de l'utilisation de la méthode statique <code>is()</code>,
+            les messages d'échec de validation ne sont pas disponibles.
+        </para>
+
+        <para>
+            L'utilisation statique peut être pratique pour invoquer un validateur ad hoc, mais
+            si vous avez besoin d'exécuter un validateur pour des données multiples, il est plus
+            efficace de suivre le premier exemple ci-dessus, créant une instance de l'objet de
+            validation et appelant sa méthode <code>isValid()</code>.
+        </para>
+
+        <para>
+            De plus, la classe <classname>Zend_Filter_Input</classname> vous permet
+            d'instancier et d'exécuter des filtres multiples et des classes de validateurs sur
+            demande pour traiter l'ensemble de données saisies. Voir <xref
+            linkend="zend.filter.input" />.
+        </para>
     </sect2>
 
-    <sect2 id="zend.validate.introduction.messages">
-        <title>Messages personnalisés</title>
+    <sect2 id="zend.validate.introduction.translation">
+        <title>Translating messages</title>
 
-        <para>Les classes de validation fournissent une méthode <code>setMessage()</code> avec laquelle vous pouvez
-        spécifier le format du message retourné par <code>getMessages()</code> dans le cas d'un échec de validation. Le
-        premier argument de cette méthode est une chaîne contenant le message d'erreur. Vous pouvez inclure des balises
-        dans cette chaîne qui seront substituées avec les données appropriées du validateur. La balise
-        <code>%value%</code> est supportée par tous les validateurs ; elle est substituée par la valeur fournie à
-        <code>isValid()</code>. D'autres balises peuvent être supportées aux cas par cas par chaque classe de
-        validation. Par exemple, <code>%max%</code> est une balise supportée par <classname>Zend_Validate_LessThan</classname>. La
-        méthode <code>getMessageVariables()</code> retourne un tableau des balises de variables supportées par le
-        validateur.</para>
+        <para>
+            Validate classes provide a <code>setTranslator()</code> method with
+            which you can specify a instance of <classname>Zend_Translate</classname> which
+            will translate the messages in case of a validation failure. The
+            <code>getTranslator()</code> method returns the set translator instance.
+        </para>
 
-        <para>Le second paramètre optionnel est une chaîne qui identifie le modèle de message d'échec de validation qui
-        doit être paramètré, ce qui est pratique quand une classe de validation définit plus d'une cause d'échec. Si
-        vous omettez ce second argument, <code>setMessage()</code> considère que le message, que vous spécifiez,
-        s'applique au premier message déclaré dans la classe de validation. La plupart des classes de validation n'ayant
-        qu'un seul message d'erreur, il n'est pas nécessaire de spécifier distinctement dans ce cas quel message vous
-        affectez.</para>
-
-        <para><programlisting role="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8);
-
-$validator->setMessage(
-    'La chaîne \'%value%\' est trop courte ; '
-  . 'elle doit être au moins de %min% caractères',
-    Zend_Validate_StringLength::TOO_SHORT);
-
-if (!$validator->isValid('word')) {
-    $messages = $validator->getMessages();
-    echo current($messages);
-
-    // affiche "La chaîne 'word' est trop courte ;
-    // elle doit être au moins de 8 caractères"
-}
-]]></programlisting></para>
-
-        <para>Vous pouvez régler des messages multiples en utilisant la méthode <code>setMessages()</code>. Son argument
-        dans ce cas est un tableau de paires clé/message. <programlisting role="php"><![CDATA[
+        <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
+$translate = new Zend_Translate(
+    'array',
+    array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
+    'en'
+);
 
-$validator->setMessages( array(
-    Zend_Validate_StringLength::TOO_SHORT =>
-            'La chaîne \'%value%\' est trop courte',
-    Zend_Validate_StringLength::TOO_LONG  =>
-            'La chaîne \'%value%\' est trop longue'
-));
-]]></programlisting></para>
+$validator->setTranslator($translate);
+]]></programlisting>
 
-        <para>Si votre application exige une flexibilité encore plus grande avec laquelle elle rapporte les échecs de
-        validation, vous pouvez accéder aux propriétés par le même nom que les balises de message supportées par une
-        classe de validation donnée. La propriété <code>value</code> est toujours accessible dans un validateur ; il
-        s'agit de la valeur fournie comme argument à <code>isValid()</code>. D'autres propriétés peuvent être supportées
-        au cas par cas par chaque classe de validation. <programlisting role="php"><![CDATA[
+        <para>
+            With the static <code>setDefaultTranslator()</code> method you can set
+            a instance of <classname>Zend_Translate</classname> which will be used for all
+            validation classes, and can be retrieved with <code>getDefaultTranslator()</code>.
+            This prevents you from setting a translator manually for all validator classes,
+            and simplifies your code.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$translate = new Zend_Translate(
+    'array',
+    array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
+    'en'
+);
+Zend_Validate::setDefaultTranslator($translate);
+]]></programlisting>
+
+        <note>
+            <para>
+                When you have set an application wide locale within your registry, then this
+                locale will be used as default translator.
+            </para>
+        </note>
+
+        <para>
+            Sometimes it is necessary to disable the translator within a validator.
+            To archive this you can use the <code>setDisableTranslator()</code> method,
+            which accepts a boolean parameter, and <code>translatorIsDisabled()</code>
+            to get the set value.
+        </para>
+
+        <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
-
-if (!validator->isValid('word')) {
-    echo 'Echec du mot : '
-        . $validator->value
-        . ' ; sa longueur n\'est pas compris entre '
-        . $validator->min
-        . ' et '
-        . $validator->max
-        . "\n";
+if (!$validator->isTranslatorDisabled()) {
+    $validator->setDisableTranslator();
 }
-]]></programlisting></para>
-    </sect2>
+]]></programlisting>
 
-    <sect2 id="zend.validate.introduction.static">
-        <title>Utilisation de la méthode statique <code>is()</code></title>
-
-        <para>S'il est peu pratique de charger une classe de validation donnée et créer une instance de validateur, vous
-        pouvez utiliser la méthode statique <classname>Zend_Validate::is()</classname> comme appel alternatif. Le premier argument
-        de cette méthode est la donnée d'entrée, que vous passeriez à la méthode <code>isValid()</code>. Le deuxième
-        argument est une chaîne, qui correspond au nom de base de la classe de validation, relativement dans l'espace de
-        noms <classname>Zend_Validate</classname>. La méthode <code>is()</code> charge automatiquement la classe, crée une
-        instance et applique la méthode <code>isValid()</code> à la donnée d'entrée. <programlisting
-        role="php"><![CDATA[
-if (Zend_Validate::is($email, 'EmailAddress')) {
-    // l'email est valide
-}
-]]></programlisting></para>
-
-        <para>Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la classe, s'ils sont
-        nécessaires pour votre classe de validation. <programlisting role="php"><![CDATA[
-if (Zend_Validate::is($value, 'Between', array(1, 12))) {
-    // $value est compris entre 1 et 12
-}
-]]></programlisting></para>
-
-        <para>La méthode <code>is()</code> retourne une valeur booléenne, la même que la méthode <code>isValid()</code>.
-        Lors de l'utilisation de la méthode statique <code>is()</code>, les messages d'échec de validation ne sont pas
-        disponibles.</para>
-
-        <para>L'utilisation statique peut être pratique pour invoquer un validateur ad hoc, mais si vous avez besoin
-        d'exécuter un validateur pour des données multiples, il est plus efficace de suivre le premier exemple
-        ci-dessus, créant une instance de l'objet de validation et appelant sa méthode <code>isValid()</code>.</para>
-
-        <para>De plus, la classe <classname>Zend_Filter_Input</classname> vous permet d'instancier et d'exécuter des filtres
-        multiples et des classes de validateurs sur demande pour traiter l'ensemble de données saisies. Voir <xref
-        linkend="zend.filter.input" />.</para>
+        <para>
+            It is also possible to use a translator instead of setting own messages with
+            <code>setMessage()</code>. But doing so, you should keep in mind, that the
+            translator works also on messages you set your own.
+        </para>
     </sect2>
 </sect1>

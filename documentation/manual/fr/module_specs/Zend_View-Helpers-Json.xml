@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 14385 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>L'aide de vue JSON</title>
 
-    <para>Quand vous créez des vues qui retournent du JSON, il est important de paramétrer aussi les en-têtes de réponse
-    appropriés. L'aide vue JSON réalise exactement cela. De plus, par défaut, elle désactive l'éventuel layout (s'il est
-    activé), puisque les layouts sont rarement utilisés dans les réponses JSON.</para>
+    <para>
+        Quand vous créez des vues qui retournent du JSON, il est important de paramétrer aussi
+        les en-têtes de réponse appropriés. L'aide vue JSON réalise exactement cela. De plus, par
+        défaut, elle désactive l'éventuel layout (s'il est activé), puisque les layouts sont
+        rarement utilisés dans les réponses JSON.
+    </para>
 
     <para>L'aide de vue JSON ajoute l'en-tête suivant :</para>
 
@@ -14,12 +17,55 @@
 Content-Type: application/json
 ]]></programlisting>
 
-    <para>Beaucoup de librairies AJAX recherche cet en-tête quand elles analysent les réponses pour déterminer comment le
-    contenu doit être géré.</para>
+    <para>
+        Beaucoup de librairies AJAX recherche cet en-tête quand elles analysent les réponses
+        pour déterminer comment le contenu doit être géré.
+    </para>
 
     <para>L'utilisation de l'aide de vue JSON est très simple :</para>
 
     <programlisting role="php"><![CDATA[
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
+
+    <note>
+        <title>Keeping layouts and enabling encoding using Zend_Json_Expr</title>
+
+        <para>
+            Each method in the JSON helper accepts a second, optional argument.
+            This second argument can be a boolean flag to enable or disable
+            layouts, or an array of options that will be passed to
+            <classname>Zend_Json::encode()</classname> and used internally to encode data.
+        </para>
+
+        <para>
+            To keep layouts, the second parameter needs to be boolean
+            <code>true</code>. When the second parameter is an array, keeping
+            layouts can be achieved by including a <code>keepLayouts</code> key
+            with a value of a boolean <code>true</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Boolean true as second argument enables layouts:
+echo $this->json($this->data, true);
+
+// Or boolean true as "keepLayouts" key:
+echo $this->json($this->data, array('keepLayouts' => true));
+]]></programlisting>
+
+        <para>
+            <classname>Zend_Json::encode</classname> allows the encoding of native JSON
+            expressions using <classname>Zend_Json_Expr</classname> objects. This option
+            is disabled by default. To enable this option, pass a boolean
+            <code>true</code> to the <code>enableJsonExprFinder</code> key of
+            the options array:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+<?php echo $this->json($this->data, array(
+    'enableJsonExprFinder' => true,
+    'keepLayouts'          => true,
+)) ?>
+]]></programlisting>
+    </note>
 </sect3>

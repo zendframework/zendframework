@@ -68,6 +68,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->autoloader = Zend_Loader_Autoloader::getInstance();
 
         $this->application = new Zend_Application('testing');
+        $this->error = false;
     }
 
     public function tearDown()
@@ -81,6 +82,12 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         foreach ($this->loaders as $loader) {
             spl_autoload_register($loader);
         }
+    }
+
+    public function handleError($errno, $errstr)
+    {
+        $this->error = $errstr;
+        return true;
     }
 
     public function testConstructorShouldPopulateApplication()
@@ -583,6 +590,9 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $this->assertTrue($resource2 instanceof Zend_Layout);
     }
 
+    /**
+     * @group ZF-6471
+     */
     public function testBootstrapShouldPassItselfToResourcePluginConstructor()
     {
         $this->application->setOptions(array(
@@ -596,6 +606,25 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
         $resource = $bootstrap->getPluginResource('layout');
         $this->assertTrue($resource->bootstrapSetInConstructor, var_export(get_object_vars($resource), 1));
+    }
+
+    /**
+     * @group ZF-6591
+     */
+    public function testRequestingPluginsByShortNameShouldNotRaiseFatalErrors()
+    {
+        $this->autoloader->setFallbackAutoloader(true)
+                         ->suppressNotFoundWarnings(false);
+        $this->application->setOptions(array(
+            'resources' => array(
+                'FrontController' => array(),
+            ),
+        ));
+        set_error_handler(array($this, 'handleError'));
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $resource = $bootstrap->getPluginResource('FrontController');
+        restore_error_handler();
+        $this->assertTrue(false !== $this->error);
     }
 }
 

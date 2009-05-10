@@ -436,15 +436,16 @@ class Zend_Loader_Autoloader
     protected function _autoload($class)
     {
         $callback = $this->getDefaultAutoloader();
-        if ($this->suppressNotFoundWarnings()) {
-            try {
+        try {
+            if ($this->suppressNotFoundWarnings()) {
                 @call_user_func($callback, $class);
-                return $class;
-            } catch (Zend_Exception $e) {
-                return false;
+            } else {
+                call_user_func($callback, $class);
             }
+            return $class;
+        } catch (Zend_Exception $e) {
+            return false;
         }
-        return call_user_func($callback, $class);
     }
 
     /**

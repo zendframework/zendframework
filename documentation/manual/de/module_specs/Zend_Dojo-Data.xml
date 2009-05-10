@@ -93,17 +93,23 @@ $data->addItems($someMoreItems);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Assoziative Arrays
-            </para></listitem>
+            <listitem>
+                <para>
+                    Assoziative Arrays
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Objekte die eine <code>toArray()</code> Methode implementieren
-            </para></listitem>
+            <listitem>
+                <para>
+                    Objekte die eine <code>toArray()</code> Methode implementieren
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Jedes andere Objekt (wird über get_object_vars() serialisiert)
-            </para></listitem>
+            <listitem>
+                <para>
+                    Jedes andere Objekt (wird über get_object_vars() serialisiert)
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -113,14 +119,18 @@ $data->addItems($someMoreItems);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Arrays
-            </para></listitem>
+            <listitem>
+                <para>
+                    Arrays
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Objekte die das <code>Traversable</code> implementieren, welches die Interfaces
-                <code>Iterator</code> und <code>ArrayAccess</code> enthält.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Objekte die das <code>Traversable</code> implementieren, welches die Interfaces
+                    <code>Iterator</code> und <code>ArrayAccess</code> enthält.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -281,85 +291,115 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <code>setItems($items)</code>: Setzt mehrere Elemente auf einmal, und überschreibt alle
-                    vorher im Objekt gesetzten. <code>$items</code> sollte ein Array oder ein
-                    <code>Traversable</code> Objekt sein.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>setItems($items)</code>: Setzt mehrere Elemente auf einmal, und überschreibt alle
+                        vorher im Objekt gesetzten. <code>$items</code> sollte ein Array oder ein
+                        <code>Traversable</code> Objekt sein.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>setItem($item, $id = null)</code>: Setzt ein individuelles Element, indem optional ein
-                    expliziter Identifikator übergeben wird. Überschreibt das Element wenn es bereits in der
-                    Kollektion ist. Gültige Elemente enthalten assoziative Arrays, Objekte die
-                    <code>toArray()</code> implementieren, oder jedes Objekt mit öffentlichen Eigenschaften.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>setItem($item, $id = null)</code>: Setzt ein individuelles Element, indem optional ein
+                        expliziter Identifikator übergeben wird. Überschreibt das Element wenn es bereits in der
+                        Kollektion ist. Gültige Elemente enthalten assoziative Arrays, Objekte die
+                        <code>toArray()</code> implementieren, oder jedes Objekt mit öffentlichen Eigenschaften.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>addItem($item, $id = null)</code>: Fügt ein individuelles Element hinzu, indem optional
-                    ein expliziter Identifikator übergeben wird. Wirft eine Ausnahme wenn das Element bereits
-                    in der Kollektion existiert. Gültige Elemente enthalten assoziative Arrays, Objekte die
-                    <code>toArray()</code> implementieren, oder jedes Objekt mit öffentlichen Eigenschaften.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>addItem($item, $id = null)</code>: Fügt ein individuelles Element hinzu, indem optional
+                        ein expliziter Identifikator übergeben wird. Wirft eine Ausnahme wenn das Element bereits
+                        in der Kollektion existiert. Gültige Elemente enthalten assoziative Arrays, Objekte die
+                        <code>toArray()</code> implementieren, oder jedes Objekt mit öffentlichen Eigenschaften.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>addItems($items)</code>: Fügt mehrere Elemente auf einmal hinzu, indem Sie allen
-                    aktuellen Elementen angefügt werden. Wirft eine Ausnahme wenn irgendeines der neuen
-                    Elemente einen Identifikator hat der zu einem bereits in der Kollektion vorhandenen
-                    Identifikator passt. <code>$items</code> sollte ein Array oder ein
-                    <code>Traversable</code> Objekt sein.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>addItems($items)</code>: Fügt mehrere Elemente auf einmal hinzu, indem Sie allen
+                        aktuellen Elementen angefügt werden. Wirft eine Ausnahme wenn irgendeines der neuen
+                        Elemente einen Identifikator hat der zu einem bereits in der Kollektion vorhandenen
+                        Identifikator passt. <code>$items</code> sollte ein Array oder ein
+                        <code>Traversable</code> Objekt sein.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>getItems()</code>: Gibt alle Elemente als Array von Arrays zurück.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>getItems()</code>: Gibt alle Elemente als Array von Arrays zurück.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>hasItem($id)</code>: Erkennt ob ein Element mit dem angegebenen Identifikator in
-                    der Kollektion existiert oder nicht.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>hasItem($id)</code>: Erkennt ob ein Element mit dem angegebenen Identifikator in
+                        der Kollektion existiert oder nicht.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>getItem($id)</code>: Gibt ein Element mit dem angegebenen Identifikator von der
-                    Kollektion zurück; das zurückgegebene Element ist ein assoziatives Array. Wenn kein Element
-                    passt, wird ein null Wert zurückgegeben.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>getItem($id)</code>: Gibt ein Element mit dem angegebenen Identifikator von der
+                        Kollektion zurück; das zurückgegebene Element ist ein assoziatives Array. Wenn kein Element
+                        passt, wird ein null Wert zurückgegeben.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>removeItem($id)</code>: Entfernt ein Element mit dem angegebenen Identifikator von
-                    der Kollektion.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>removeItem($id)</code>: Entfernt ein Element mit dem angegebenen Identifikator von
+                        der Kollektion.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>clearItems()</code>: Entfernt alle Elemente von der Kollektion.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>clearItems()</code>: Entfernt alle Elemente von der Kollektion.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>setIdentifier($identifier)</code>: Setzt den Namen des Feldes das den eindeutigen
-                    Identifikator repräsentiert für jedes Element in der Kollektion.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>setIdentifier($identifier)</code>: Setzt den Namen des Feldes das den eindeutigen
+                        Identifikator repräsentiert für jedes Element in der Kollektion.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>getIdentifier()</code>: Gibt den Namen des Identifikatorfeldes zurück.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>getIdentifier()</code>: Gibt den Namen des Identifikatorfeldes zurück.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>setLabel($label)</code>: Setzt den Namen eines Feldes das als Anzeigelabel für ein
-                    Element verwendet wird.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>setLabel($label)</code>: Setzt den Namen eines Feldes das als Anzeigelabel für ein
+                        Element verwendet wird.
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                     <code>getLabel()</code>: Gibt den Namen des Labelfeldes zurück.
-                </para></listitem>
+                </para>
+            </listitem>
 
-                <listitem><para>
-                    <code>toArray()</code>: Castet das Objekt zu einem Array. Das Array enthält mindestens
-                    die Schlüssel 'identifier' und 'items', und den Schlüssel 'label' wenn ein Labelfeld im
-                    Objekt gesetzt wurde.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>toArray()</code>: Castet das Objekt zu einem Array. Das Array enthält mindestens
+                        die Schlüssel 'identifier' und 'items', und den Schlüssel 'label' wenn ein Labelfeld im
+                        Objekt gesetzt wurde.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <code>toJson()</code>: Castet das Objekt zu einer JSON Repräsentation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <code>toJson()</code>: Castet das Objekt zu einer JSON Repräsentation.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>

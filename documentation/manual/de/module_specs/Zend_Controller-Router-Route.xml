@@ -5,16 +5,17 @@
     <title>Zend_Controller_Router_Route</title>
 
     <para>
-        <classname>Zend_Controller_Router_Route</classname> ist die standardmäßige Framework Route. Sie kombiniert einfache
-        Verwendung mit einer flexiblen Routendefinition. Jede Route besteht primär aus URL Übereinstimmungen
-        (von statischen und dynamischen Teilen (Variablen)) und kann mit Standardwerten initialisiert werden
-        wie auch mit variablen Notwendigkeiten.
+        <classname>Zend_Controller_Router_Route</classname> ist die standardmäßige Framework Route.
+        Sie kombiniert einfache Verwendung mit einer flexiblen Routendefinition. Jede Route besteht
+        primär aus URL Übereinstimmungen (von statischen und dynamischen Teilen (Variablen)) und
+        kann mit Standardwerten initialisiert werden wie auch mit variablen Notwendigkeiten.
     </para>
 
     <para>
-        Angenommen unsere fiktive Anwendung benötigt eine informelle Seite über den Seitenauthor. Es soll möglich
-        sein mit dem Browser auf <code>http://domain.com/author/martel</code> zu verweisen um die Informationen über
-        diesen "martel" Typ zu sehen. Und die Route für so eine Funktionalität würde so aussehen:
+        Angenommen unsere fiktive Anwendung benötigt eine informelle Seite über den Seitenauthor. Es
+        soll möglich sein mit dem Browser auf <code>http://domain.com/author/martel</code> zu
+        verweisen um die Informationen über diesen "martel" Typ zu sehen. Und die Route für so eine
+        Funktionalität würde so aussehen:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -30,29 +31,32 @@ $router->addRoute('user', $route);
 ]]></programlisting>
 
     <para>
-        Der ersten Parameter im Konstruktor von <code>http://domain.com/author/martel</code> ist eine
-        Routendefinition die einer URL entspricht. Routendefinitionen bestehen aus statischen und dynamischen
-        Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile sind nur einfacher Text:
-        <code>author</code>. Dynamische Teile, Variablen genannt, werden durch einen vorangestellten
-        Doppelpunkt, zum variablen Namen, markiert: <code>:username</code>.
+        Der ersten Parameter im Konstruktor von <code>http://domain.com/author/martel</code> ist
+        eine Routendefinition die einer URL entspricht. Routendefinitionen bestehen aus statischen
+        und dynamischen Teilen die durch einen Schrägstrich ('/') seperiert sind. Statische Teile
+        sind nur einfacher Text: <code>author</code>. Dynamische Teile, Variablen genannt, werden
+        durch einen vorangestellten Doppelpunkt, zum variablen Namen, markiert:
+        <code>:username</code>.
     </para>
 
     <note>
         <title>Zeichen verwenden</title>
         <para>
-            Die aktuelle Implementation erlaubt die Verwendung von allen Zeichen (außer einem Schrägstrich) als
-            variablen Identifikator, aber es wird dringend empfohlen das nur Zeichen verwendet werden die auch für
-            PHP Veriablen Identifikatoren gültig sind. Zukünftige Implementationen können dieses Verhlaten ändern,
-            was zu versteckten Bugs im eigenen Code führen würde.
+            Die aktuelle Implementation erlaubt die Verwendung von allen Zeichen (außer einem
+            Schrägstrich) als variablen Identifikator, aber es wird dringend empfohlen das nur
+            Zeichen verwendet werden die auch für PHP Veriablen Identifikatoren gültig sind.
+            Zukünftige Implementationen können dieses Verhlaten ändern, was zu versteckten Bugs im
+            eigenen Code führen würde.
         </para>
     </note>
 
     <para>
-        Diese Beispielroute wird verglichen wenn der Browser auf <code>http://domain.com/author/martel</code>
-        zeigt. In diesem Fall werden alle seine Variablen dem <classname>Zend_Controller_Request</classname> Objekt
-        injiziiert und es kann im <code>ProfileController</code> darauf zugegriffen werden. Variablen die von diesem
-        Beispiel zurückgegeben werden können als Array mit den folgenden Schlüssel- und Wertepaaren repräsentiert
-        werden:
+        Diese Beispielroute wird verglichen wenn der Browser auf
+        <code>http://domain.com/author/martel</code> zeigt. In diesem Fall werden alle seine
+        Variablen dem <classname>Zend_Controller_Request</classname> Objekt injiziiert und es kann
+        im <code>ProfileController</code> darauf zugegriffen werden. Variablen die von diesem
+        Beispiel zurückgegeben werden können als Array mit den folgenden Schlüssel- und Wertepaaren
+        repräsentiert werden:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -64,10 +68,11 @@ $values = array(
 ]]></programlisting>
 
     <para>
-        Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die <code>userinfoAction()</code> Methode
-        der eigenen <code>ProfileController</code> Klasse aufrufen (im Standardmodul) basierend auf diesen
-        Werten. Dort ist es möglich alle Variablen durch die <classname>Zend_Controller_Action::_getParam()</classname>
-        oder <classname>Zend_Controller_Request::getParam()</classname> Methoden zuzugreifen:
+        Später sollte <classname>Zend_Controller_Dispatcher_Standard</classname> die
+        <code>userinfoAction()</code> Methode der eigenen <code>ProfileController</code> Klasse
+        aufrufen (im Standardmodul) basierend auf diesen Werten. Dort ist es möglich alle Variablen
+        durch die <classname>Zend_Controller_Action::_getParam()</classname> oder
+        <classname>Zend_Controller_Request::getParam()</classname> Methoden zuzugreifen:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -81,9 +86,10 @@ public function userinfoAction()
 ]]></programlisting>
 
     <para>
-        Eine Routendefinition kann ein weiteres spezielles Zeichen enthalten - eine Wildcard - dargestellt durch ein
-        '*' Symbol. Es wird verwendet um Parameter genauso wie im standard Modulrouter zu erhalten (var => Wertepaare
-        definiert in der URI). Die folgende Route imitiert mehr oder weniger das Verhalten des Modulrouters:
+        Eine Routendefinition kann ein weiteres spezielles Zeichen enthalten - eine Wildcard -
+        dargestellt durch ein '*' Symbol. Es wird verwendet um Parameter genauso wie im standard
+        Modulrouter zu erhalten (var => Wertepaare definiert in der URI). Die folgende Route
+        imitiert mehr oder weniger das Verhalten des Modulrouters:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -98,9 +104,10 @@ $router->addRoute('default', $route);
         <title>Variable Standards</title>
 
         <para>
-            Jede Variable im Router kann einen Standardwert haben und das ist für was der zweite Parameter des
-            Konstruktors von <classname>Zend_Controller_Router_Route</classname> verwendet wird. Dieser Parameter ist ein
-            Array mit Schlüsseln die Variablennamen repräsentieren und mit Werten als gewünschte Standards:
+            Jede Variable im Router kann einen Standardwert haben und das ist für was der zweite
+            Parameter des Konstruktors von <classname>Zend_Controller_Router_Route</classname>
+            verwendet wird. Dieser Parameter ist ein Array mit Schlüsseln die Variablennamen
+            repräsentieren und mit Werten als gewünschte Standards:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -113,17 +120,18 @@ $router->addRoute('archive', $route);
 
         <para>
             Die obige Route entspricht URLs wie <code>http://domain.com/archive/2005</code> und
-            <code>http://example.com/archive</code>. Im späteren Fall wird die Variable year einen initialen
-            Standardwert von 2006 haben.
+            <code>http://example.com/archive</code>. Im späteren Fall wird die Variable year einen
+            initialen Standardwert von 2006 haben.
         </para>
 
         <para>
-            Dieses Beispiel resultiert darin das eine year Variable in das Anfrage Objekt injiziiert wird. Da keine
-            Routinginformation vorhanden ist (es sind keine Kontroller und Aktionsparameter definiert), wird die
-            Anwendung zum Standardkontroller und der Aktionsmethode (welche beide in
-            <classname>Zend_Controller_Dispatcher_Abstract</classname> definiert sind) weitergeleitet. Um es verwendbarer
-            zu machen muß ein gültiger Kontroller und eine gültige aktion als Standard für die Route angegeben
-            werden:
+            Dieses Beispiel resultiert darin das eine year Variable in das Anfrage Objekt injiziiert
+            wird. Da keine Routinginformation vorhanden ist (es sind keine Kontroller und
+            Aktionsparameter definiert), wird die Anwendung zum Standardkontroller und der
+            Aktionsmethode (welche beide in
+            <classname>Zend_Controller_Dispatcher_Abstract</classname> definiert sind)
+            weitergeleitet. Um es verwendbarer zu machen muß ein gültiger Kontroller und eine
+            gültige aktion als Standard für die Route angegeben werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -149,9 +157,9 @@ $router->addRoute('archive', $route);
         <title>Variable Anforderungen</title>
 
         <para>
-            Man kann einen dritten Parameter dem <classname>Zend_Controller_Router_Route</classname> Konstruktor hinzufügen
-            wo variable Anforderungen gesetzt werden können. Diese werden als Teil eines regulären Ausdrucks
-            definiert:
+            Man kann einen dritten Parameter dem <classname>Zend_Controller_Router_Route</classname>
+            Konstruktor hinzufügen wo variable Anforderungen gesetzt werden können. Diese werden als
+            Teil eines regulären Ausdrucks definiert:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -168,10 +176,11 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            Mit einer Route die wie oben definiert ist, wird das Routing nur dann stattfinden wenn die year
-            Variable nummerische Daten enthält, z.B. <code>http://domain.com/archive/2345</code>.
-            Eine URL wie <code>http://example.com/archive/test</code> wird nicht zugeordnet und die Kontrolle wird
-            stattdessen an die nächste Route in der Kette übertragen.
+            Mit einer Route die wie oben definiert ist, wird das Routing nur dann stattfinden wenn
+            die year Variable nummerische Daten enthält, z.B.
+            <code>http://domain.com/archive/2345</code>. Eine URL wie
+            <code>http://example.com/archive/test</code> wird nicht zugeordnet und die Kontrolle
+            wird stattdessen an die nächste Route in der Kette übertragen.
         </para>
     </sect4>
 
@@ -179,9 +188,9 @@ $router->addRoute('archive', $route);
         <title>Übersetzte Segmente</title>
 
         <para>
-            Die Standardroute unterstützt übersetzte Segmente. Um dieses Feature zu verwenden muß zumindest
-            ein Übersetzer (eine Instanz von <classname>Zend_Translate</classname>) auf einem der folgenden Wege
-            definiert werden:
+            Die Standardroute unterstützt übersetzte Segmente. Um dieses Feature zu verwenden muß
+            zumindest ein Übersetzer (eine Instanz von <classname>Zend_Translate</classname>) auf
+            einem der folgenden Wege definiert werden:
         </para>
 
         <itemizedlist>
@@ -193,7 +202,8 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Über die statische Methode
-                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname> setzen.
+                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname>
+                    setzen.
                 </para>
             </listitem>
             <listitem>
@@ -204,9 +214,10 @@ $router->addRoute('archive', $route);
         </itemizedlist>
 
         <para>
-            Standardmäßig wird das Gebietsschema verwendet das in der Instanz von <classname>Zend_Translate</classname>
-            verwendet wird. Um es zu überschreiben, kann es (als Instanz von <classname>Zend_Locale</classname> oder
-            einem Gebietsschema-String) auf einem der folgenden Wege gesetzt werden:
+            Standardmäßig wird das Gebietsschema verwendet das in der Instanz von
+            <classname>Zend_Translate</classname> verwendet wird. Um es zu überschreiben, kann es
+            (als Instanz von <classname>Zend_Locale</classname> oder einem Gebietsschema-String) auf
+            einem der folgenden Wege gesetzt werden:
         </para>
 
         <itemizedlist>
@@ -235,26 +246,26 @@ $router->addRoute('archive', $route);
 
         <para>
             Übersetzte Segmente werden in zwei Teile getrennt. Ein fixes Segment dem ein einzelnes
-            <code>@</code>-Zeichen vorangestellt wird, der anhand des aktuellen Gebietsschemas übersetzt wird
-            und auf der Position des Parameters eingefügt wird. Dynamischen Segmenten wird ein
-            <code>:@</code> vorangestellt. Beim Zusammenbauen, wird der gegebene Parameter übersetzt und an der
-            Position des Parameters eingefügt. Bei der Überprüfung, wird der übersetzte Parameter von der
-            URL wieder in die Nachrichten ID umgewandelt.
+            <code>@</code>-Zeichen vorangestellt wird, der anhand des aktuellen Gebietsschemas
+            übersetzt wird und auf der Position des Parameters eingefügt wird. Dynamischen Segmenten
+            wird ein <code>:@</code> vorangestellt. Beim Zusammenbauen, wird der gegebene Parameter
+            übersetzt und an der Position des Parameters eingefügt. Bei der Überprüfung, wird der
+            übersetzte Parameter von der URL wieder in die Nachrichten ID umgewandelt.
         </para>
 
         <note>
             <title>Nachrichten IDs und eigene Sprachdateien</title>
             <para>
-                Normalerweise werden Nachrichten IDs die man in einer seiner Routen verwenden will, bereits in
-                einem View Skript oder irgendwo anders verwendet. Um die komplette Kontrolle über sichere
-                URLs zu haben, sollte man eine eigene Sprachdatei für die Nachrichten haben die in einer
-                Route verwendet werden.
+                Normalerweise werden Nachrichten IDs die man in einer seiner Routen verwenden will,
+                bereits in einem View Skript oder irgendwo anders verwendet. Um die komplette
+                Kontrolle über sichere URLs zu haben, sollte man eine eigene Sprachdatei für die
+                Nachrichten haben die in einer Route verwendet werden.
             </para>
         </note>
 
         <para>
-            Nachfolgend ist die einfachste Verwendung gezeigt um eine Standardroute für übersetzte Segmente
-            zu Verwenden:
+            Nachfolgend ist die einfachste Verwendung gezeigt um eine Standardroute für übersetzte
+            Segmente zu Verwenden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -296,8 +307,8 @@ $route->assemble(array());
 ]]></programlisting>
 
         <para>
-            Man kann dynamische Segmente verwenden um eine Modul-Route, so wie die übersetzte Version,
-            zu erstellen:
+            Man kann dynamische Segmente verwenden um eine Modul-Route, so wie die übersetzte
+            Version, zu erstellen:
         </para>
 
         <programlisting role="php"><![CDATA[

@@ -5,42 +5,53 @@
     <title>dojo() View Helfer</title>
 
     <para>
-        Der <code>dojo()</code> View Helfer ist dazu gedacht das konfigurieren der Dojo Umgebung zu vereinfachen,
-        was die folgenden Notwendigkeiten beinhaltet:
+        Der <code>dojo()</code> View Helfer ist dazu gedacht das konfigurieren der Dojo Umgebung zu
+        vereinfachen, was die folgenden Notwendigkeiten beinhaltet:
     </para>
 
     <itemizedlist>
-        <listitem><para>Spezifizieren eines CDN oder lokalen Pfades zu einer Dojo Installation.</para></listitem>
-        <listitem><para>Spezifizieren von Pfaden zu eigenen Dojo Modulen.</para></listitem>
-        <listitem><para>Spezifizieren von dojo.require Statements.</para></listitem>
-        <listitem><para>Spezifizieren von Dijit Stylesheet Themen zur Verwendung.</para></listitem>
-        <listitem><para>Spezifizieren von dojo.addOnLoad() Events.</para></listitem>
+        <listitem>
+            <para>Spezifizieren eines CDN oder lokalen Pfades zu einer Dojo Installation.</para>
+        </listitem>
+        <listitem>
+            <para>Spezifizieren von Pfaden zu eigenen Dojo Modulen.</para>
+        </listitem>
+        <listitem>
+            <para>Spezifizieren von dojo.require Statements.</para>
+        </listitem>
+        <listitem>
+            <para>Spezifizieren von Dijit Stylesheet Themen zur Verwendung.</para>
+        </listitem>
+        <listitem>
+            <para>Spezifizieren von dojo.addOnLoad() Events.</para>
+        </listitem>
     </itemizedlist>
 
     <para>
-        Die <code>dojo()</code> View Helfer Implementation ist ein Beispiel einer Platzhalter Implementation.
-        Das Datenset in Ihm ist persistent zwischen den View Objekten, und kann direkt im eigenen
-        Layout Skript ausgegeben werden.
+        Die <code>dojo()</code> View Helfer Implementation ist ein Beispiel einer Platzhalter
+        Implementation. Das Datenset in Ihm ist persistent zwischen den View Objekten, und kann
+        direkt im eigenen Layout Skript ausgegeben werden.
     </para>
 
     <example id="zend.dojo.view.dojo.usage">
         <title>Beispiel für die Verwendung des dojo() View Helfers</title>
 
         <para>
-            Für dieses Beispiel nehmen wir an das der Entwickler Dojo von einem lokalen Pfad aus verwenden
-            wird, verschiedene Dijits benötigt, und das Tundra Dijit Thema anpasst.
+            Für dieses Beispiel nehmen wir an das der Entwickler Dojo von einem lokalen Pfad aus
+            verwenden wird, verschiedene Dijits benötigt, und das Tundra Dijit Thema anpasst.
         </para>
 
         <para>
-            Auf vielen Seiten, kann der Entwickler Dojo nicht einmal verwenden. Deshalb werden wir uns zuerst
-            auf ein View Skript fokusieren indem Dojo benötigt wird, und dann auf das Layout Skript, indem wir
-            einiges der Dojo Umgebung einstellen und anschließend darstellen werden.
+            Auf vielen Seiten, kann der Entwickler Dojo nicht einmal verwenden. Deshalb werden wir
+            uns zuerst auf ein View Skript fokusieren indem Dojo benötigt wird, und dann auf das
+            Layout Skript, indem wir einiges der Dojo Umgebung einstellen und anschließend
+            darstellen werden.
         </para>
 
         <para>
-            Zuerst müssen wir unserem View Objekt mitteilen das es die Dojo View Helferpfade verwenden soll.
-            Das kann in der eigenen Bootstrap Datei getan werden oder in einem Plugin das früh abläuft;
-            einfach das View Objekt nehmen und das folgende ausführen:
+            Zuerst müssen wir unserem View Objekt mitteilen das es die Dojo View Helferpfade
+            verwenden soll. Das kann in der eigenen Bootstrap Datei getan werden oder in einem
+            Plugin das früh abläuft; einfach das View Objekt nehmen und das folgende ausführen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -48,9 +59,10 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
         <para>
-            Als nächstes das View Skript. In diesem Fall werden die spezifizieren das ein FilterSelect
-            verwendet werden soll -- welcher einen eigenen Speicher basierend auf QueryReadStore verwenden
-            wird, und den wir 'PairedStore' nennen und in unserem 'custom' Modul speichern.
+            Als nächstes das View Skript. In diesem Fall werden die spezifizieren das ein
+            FilterSelect verwendet werden soll -- welcher einen eigenen Speicher basierend auf
+            QueryReadStore verwenden wird, und den wir 'PairedStore' nennen und in unserem 'custom'
+            Modul speichern.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -72,8 +84,8 @@ $this->dojo()->enable()
 ]]></programlisting>
 
         <para>
-            In unserem Layout Skript, prüfen wir anschließend ob Dojo aktiviert ist, und wenn das der Fall ist,
-            erledigen wir einige generelle Konfigurationen und fügen Sie hinzu:
+            In unserem Layout Skript, prüfen wir anschließend ob Dojo aktiviert ist, und wenn das
+            der Fall ist, erledigen wir einige generelle Konfigurationen und fügen Sie hinzu:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -100,8 +112,8 @@ $this->dojo()->enable()
 ]]></programlisting>
 
         <para>
-            An diesem Punkt muß man nur sicherstellen das die Dateien am richtigen Ort vorhanden sind und
-            das man die Aktion des Endpunktes für das FilteringSelect erstellt hat!
+            An diesem Punkt muß man nur sicherstellen das die Dateien am richtigen Ort vorhanden
+            sind und das man die Aktion des Endpunktes für das FilteringSelect erstellt hat!
         </para>
     </example>
 
@@ -111,40 +123,43 @@ $this->dojo()->enable()
         <para>
             Dojo erlaubt sowohl die <emphasis>deklarative</emphasis> als auch die
             <emphasis>programmtechnische</emphasis> Verwendung von vielen Ihrer Features.
-            <emphasis>Deklarative</emphasis> Verwendung verwendet Standard HTML Elemente mit nicht-standard
-            Attributen die geparst werden wenn die Seite geladen wird. Wärend das eine mächtige und einfach
-            verwendbare Syntax ist, kann Sie für viele Entwickler Probleme bei der Überprüfung einer Seite
-            verursachen.
+            <emphasis>Deklarative</emphasis> Verwendung verwendet Standard HTML Elemente mit
+            nicht-standard Attributen die geparst werden wenn die Seite geladen wird. Wärend das
+            eine mächtige und einfach verwendbare Syntax ist, kann Sie für viele Entwickler Probleme
+            bei der Überprüfung einer Seite verursachen.
         </para>
 
         <para>
-            <emphasis>Programmtechnische</emphasis> Verwendung erlaubt dem Entwickler existierende Elemente
-            zu dekorieren indem Sie anhand von ID oder CSS Selektoren geholt werden und dem entsprechenden
-            Objektkonstruktoren in Dojo übergeben werden. Weil keine nicht-standard HTML Attribute verwendet
-            werden, bleiben Seiten hiermit gültig.
+            <emphasis>Programmtechnische</emphasis> Verwendung erlaubt dem Entwickler existierende
+            Elemente zu dekorieren indem Sie anhand von ID oder CSS Selektoren geholt werden und dem
+            entsprechenden Objektkonstruktoren in Dojo übergeben werden. Weil keine nicht-standard
+            HTML Attribute verwendet werden, bleiben Seiten hiermit gültig.
         </para>
 
         <para>
-            In der Praxis, erlauben beide Fälle eine zierliche Degeneration wenn Javascript ausgeschaltet ist,
-            oder die verschiedenen Dojo Skriptresourcen nicht erreichbar sind. Um Standards und
-            Dokumentüberprüfungen zu gestatten verwendet Zend Framework standardmäßig die programmtechnische
-            Verwendung; die verschiedenen Viewhelfer erzeugen Javascript und übergeben dieses an den
-            <code>dojo()</code> Viewhelfer für die Einbeziehung wenn er dargestellt wird.
+            In der Praxis, erlauben beide Fälle eine zierliche Degeneration wenn Javascript
+            ausgeschaltet ist, oder die verschiedenen Dojo Skriptresourcen nicht erreichbar sind. Um
+            Standards und Dokumentüberprüfungen zu gestatten verwendet Zend Framework standardmäßig
+            die programmtechnische Verwendung; die verschiedenen Viewhelfer erzeugen Javascript und
+            übergeben dieses an den <code>dojo()</code> Viewhelfer für die Einbeziehung wenn er
+            dargestellt wird.
         </para>
 
         <para>
-            Entwickler die diese Technik verwenden wollen eventuell auch die Option kennenlernen mit der Sie
-            Ihre eigene programmtechnische Deklaration auf der Seite schreiben können. Ein Vorteil wäre die
-            Möglichkeit Handler für Dijit Events zu spezifizieren.
+            Entwickler die diese Technik verwenden wollen eventuell auch die Option kennenlernen mit
+            der Sie Ihre eigene programmtechnische Deklaration auf der Seite schreiben können. Ein
+            Vorteil wäre die Möglichkeit Handler für Dijit Events zu spezifizieren.
         </para>
 
         <para>
-            Um das zu erlauben, wie auch die Möglichkeit die deklarative Syntax zu verwenden, sind es eine
-            Anzahl von statischen Methoden vorhanden die dieses Verhalten global setzen.
+            Um das zu erlauben, wie auch die Möglichkeit die deklarative Syntax zu verwenden, sind
+            es eine Anzahl von statischen Methoden vorhanden die dieses Verhalten global setzen.
         </para>
 
         <example id="zend.dojo.view.dojo.declarative.usage">
-            <title>Spezifizieren der deklarativen und programmtechnischen Verwendung von Dojo</title>
+            <title>
+                Spezifizieren der deklarativen und programmtechnischen Verwendung von Dojo
+            </title>
 
             <para>
                 Um die deklarative Verwendung zu spezifizieren muß einfach die statische
@@ -156,8 +171,8 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 ]]></programlisting>
 
             <para>
-                Wenn man stattdessen die programmtechnische Verwendung verwenden will, muß die statische
-                <code>setUseProgrammatic()</code> Methode aufgerufen werden:
+                Wenn man stattdessen die programmtechnische Verwendung verwenden will, muß die
+                statische <code>setUseProgrammatic()</code> Methode aufgerufen werden:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -165,9 +180,10 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 ]]></programlisting>
 
             <para>
-                Letztendlich, wenn man programmtechnische Regeln selbst erstellen will, sollte man die
-                programmtechnische Verwendung spezifizieren, aber den Wert '-1' übergeben; in diesem Fall
-                wird kein Javascript, für die Dekoration von verwendeten Dijits, erstellt.
+                Letztendlich, wenn man programmtechnische Regeln selbst erstellen will, sollte man
+                die programmtechnische Verwendung spezifizieren, aber den Wert '-1' übergeben; in
+                diesem Fall wird kein Javascript, für die Dekoration von verwendeten Dijits,
+                erstellt.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -180,8 +196,8 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
         <title>Themen</title>
 
         <para>
-            Dojo erlaubt die Erstellung von Themen für seine Dijits (Widgets). Man kann eines auswählen indem
-            ein Modulpfad übergeben wird:
+            Dojo erlaubt die Erstellung von Themen für seine Dijits (Widgets). Man kann eines
+            auswählen indem ein Modulpfad übergeben wird:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -189,16 +205,16 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 ]]></programlisting>
 
         <para>
-            Der Modulpfad wird durch die Verwendung des Zeichens '.' als Trennzeichen vom Verzeichnis erkannt
-            und der Verwendung des letzten Wertes in der Liste als den Namen der CSS Datei die im
-            Themenverzeichnis verwendet wird; im obigen Beispiel sucht Dojo das Thema in
-            'dijit/themes/tundra/tundra.css'.
+            Der Modulpfad wird durch die Verwendung des Zeichens '.' als Trennzeichen vom
+            Verzeichnis erkannt und der Verwendung des letzten Wertes in der Liste als den Namen der
+            CSS Datei die im Themenverzeichnis verwendet wird; im obigen Beispiel sucht Dojo das
+            Thema in 'dijit/themes/tundra/tundra.css'.
         </para>
 
         <para>
-            Wenn ein Thema verwendet wird ist es wichtig daran zu denken die Themenklasse, zumindest an den
-            Container der jedes Dijit das verwendet wird umgibt, zu übergeben; im üblichsten Fällen wird es
-            an den Body übergeben:
+            Wenn ein Thema verwendet wird ist es wichtig daran zu denken die Themenklasse, zumindest
+            an den Container der jedes Dijit das verwendet wird umgibt, zu übergeben; im üblichsten
+            Fällen wird es an den Body übergeben:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -211,42 +227,51 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         <title>Layer verwenden (eigene Builds)</title>
 
         <para>
-            Wenn ein dojo.require Statement verwendet wird, wird Dojo standardmäßig eine Anfrage an den
-            Server zurücksenden um die richtige Javascript Datei zu holen. Wenn man viele Dijits verwendet,
-            resultiert das in vielen Anfragen an den Server -- was nicht optimal ist.
+            Wenn ein dojo.require Statement verwendet wird, wird Dojo standardmäßig eine Anfrage an
+            den Server zurücksenden um die richtige Javascript Datei zu holen. Wenn man viele Dijits
+            verwendet, resultiert das in vielen Anfragen an den Server -- was nicht optimal ist.
         </para>
 
         <para>
-            Dojo's Antwort darauf ist es die Möglichkeit anzubieten <emphasis>eigene Builds</emphasis>
-            zu erstellen. Builds machen verschiedene Dinge:
+            Dojo's Antwort darauf ist es die Möglichkeit anzubieten
+            <emphasis>eigene Builds</emphasis> zu erstellen. Builds machen verschiedene Dinge:
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Benötigte Dateien in <emphasis>Layern</emphasis> gruppieren; ein Layer sammelt alle
-                benötigten Dateien in eine einzelne JS Datei. (Daher der Name dieses Kapitels)
-            </para></listitem>
+            <listitem>
+                <para>
+                    Benötigte Dateien in <emphasis>Layern</emphasis> gruppieren; ein Layer sammelt
+                    alle benötigten Dateien in eine einzelne JS Datei. (Daher der Name dieses
+                    Kapitels)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                "Interne" nicht-javascript Dateien die von Dijits verwendet werden (typischerweise
-                Templatedateien). Diese werden auch in der gleichen JS Datei gruppiert wie der Layer.
-            </para></listitem>
+            <listitem>
+                <para>
+                    "Interne" nicht-javascript Dateien die von Dijits verwendet werden
+                    (typischerweise Templatedateien). Diese werden auch in der gleichen JS Datei
+                    gruppiert wie der Layer.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Die Datei wird an ShrinkSafe übergeben, welches Leerzeichen und Kommentare entfernt, sowie
-                Variablennamen verkleinert.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Datei wird an ShrinkSafe übergeben, welches Leerzeichen und Kommentare
+                    entfernt, sowie Variablennamen verkleinert.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
-            Einige Dateien können nicht in einen Layer gelegt werden, aber der Buildprozess wird ein spezielles
-            Releaseverzeichnis mit der Layerdatei und allen anderen Dateien erstellen. Das erlaubt es eine
-            verkleinerte eigene Distribution für die eigene Site oder Anwendungen zu erhalten.
+            Einige Dateien können nicht in einen Layer gelegt werden, aber der Buildprozess wird
+            ein spezielles Releaseverzeichnis mit der Layerdatei und allen anderen Dateien
+            erstellen. Das erlaubt es eine verkleinerte eigene Distribution für die eigene Site oder
+            Anwendungen zu erhalten.
         </para>
 
         <para>
-            Um einen Layer zu verwenden, hat der <code>dojo()</code> Viewhelfer eine <code>addLayer()</code>
-            Methode für das hinzufügen von Pfaden zu benötigten Layern:
+            Um einen Layer zu verwenden, hat der <code>dojo()</code> Viewhelfer eine
+            <code>addLayer()</code> Methode für das hinzufügen von Pfaden zu benötigten Layern:
         </para>
 
         <programlisting role="html"><![CDATA[
@@ -255,8 +280,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
         <para>
             Für weitere Informationen über die Erstellung von eigenen Build, schauen Sie bitte
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">
-            in die Dojo Builddokumentation</ulink>.
+            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">in
+                die Dojo Builddokumentation</ulink>.
         </para>
     </sect3>
 
@@ -264,86 +289,232 @@ $view->dojo()->addLayer('/js/foo/foo.js');
         <title>Vorhandene Methoden</title>
 
         <para>
-            Der <code>dojo()</code> Viewhelfer gibt immer eine Instanz des Dojo Platzhaltercontainers zurück.
-            Dieses Containerobjekt bietet die folgenden Methoden an:
+            Der <code>dojo()</code> Viewhelfer gibt immer eine Instanz des Dojo
+            Platzhaltercontainers zurück. Dieses Containerobjekt bietet die folgenden Methoden an:
         </para>
 
         <itemizedlist>
-            <listitem><para><code>setView(Zend_View_Interface $view)</code>: Setzt eine Viewinstanz
-                    im Container</para></listitem>
-            <listitem><para><code>enable()</code>: Die Dojo Integration explizit einschalten.</para></listitem>
-            <listitem><para><code>disable()</code>: Die Dojo Integration ausschalten.</para></listitem>
-            <listitem><para><code>isEnabled()</code>: Ermitteln ob die Dojo Integration eingeschaltet
-                    ist oder nicht.</para></listitem>
-            <listitem><para><code>requireModule($module)</code>: Ein <code>dojo.require</code>
-                    Statement konfigurieren.</para></listitem>
-            <listitem><para><code>getModules()</code>: Erkennen welche Module benötigt werden.</para></listitem>
-            <listitem><para><code>registerModulePath($module, $path)</code>:
-                    Einen Dojo Modulpfad registrieren.</para></listitem>
-            <listitem><para><code>getModulePaths()</code>: Eine Liste von registrierten Modulpfaden
-                    erhalten.</para></listitem>
-            <listitem><para><code>addLayer($path)</code>: Einen Layerpfad (eigenen Build) für die
-                    Verwendung hinzufügen.</para></listitem>
-            <listitem><para><code>getLayers()</code>: Eine Liste von allen registrierten Layerpfaden (eigene
-                    Builds) erhalten.</para></listitem>
-            <listitem><para><code>removeLayer($path)</code>: Den Layer der <code>$path</code> entspricht
-                    von der Liste der registrierten Layer (eigene Builds) entfernen.</para></listitem>
-            <listitem><para><code>setCdnBase($url)</code>: Den Basis URL für ein CDN setzen; typischerweise
+            <listitem>
+                <para>
+                    <code>setView(Zend_View_Interface $view)</code>: Setzt eine Viewinstanz
+                    im Container
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>enable()</code>: Die Dojo Integration explizit einschalten.</para>
+            </listitem>
+            <listitem>
+                <para><code>disable()</code>: Die Dojo Integration ausschalten.</para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>isEnabled()</code>: Ermitteln ob die Dojo Integration eingeschaltet
+                    ist oder nicht.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>requireModule($module)</code>: Ein <code>dojo.require</code>
+                    Statement konfigurieren.
+                </para>
+            </listitem>
+            <listitem>
+                <para><code>getModules()</code>: Erkennen welche Module benötigt werden.</para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>registerModulePath($module, $path)</code>: Einen Dojo Modulpfad
+                    registrieren.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getModulePaths()</code>: Eine Liste von registrierten Modulpfaden
+                    erhalten.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addLayer($path)</code>: Einen Layerpfad (eigenen Build) für die
+                    Verwendung hinzufügen.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getLayers()</code>: Eine Liste von allen registrierten Layerpfaden (eigene
+                    Builds) erhalten.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>removeLayer($path)</code>: Den Layer der <code>$path</code> entspricht
+                    von der Liste der registrierten Layer (eigene Builds) entfernen.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setCdnBase($url)</code>: Den Basis URL für ein CDN setzen; typischerweise
                     ist das <classname>Zend_Dojo::CDN_BASE_AOL</classname> oder
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, aber es wird der URL String vor der Versionsnummer
-                    benötigt.</para></listitem>
-            <listitem><para><code>getCdnBase()</code>: Den Basis CDN URL empfangen.</para></listitem>
-            <listitem><para><code>setCdnVersion($version = null)</code>: Setzen selche Version von Dojo vom
-                    CDN verwendet wird.</para></listitem>
-            <listitem><para><code>getCdnVersion()</code>: Die Dojo Version vom CDN erhalten die verwendet
-                    wird.</para></listitem>
-            <listitem><para><code>setCdnDojoPath($path)</code>: Setzt den relativen Pfad zur dojo.js oder
+                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>, aber es wird der URL String
+                    vor der Versionsnummer benötigt.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCdnBase()</code>: Den Basis CDN URL empfangen.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setCdnVersion($version = null)</code>: Setzen selche Version von Dojo vom
+                    CDN verwendet wird.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCdnVersion()</code>: Die Dojo Version vom CDN erhalten die verwendet
+                    wird.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setCdnDojoPath($path)</code>: Setzt den relativen Pfad zur dojo.js oder
                     dojo.xd.js Datei am CDN; typischerweise ist das entweder
-                    <classname>Zend_Dojo::CDN_DOJO_PATH_AOL</classname> oder <classname>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</classname>,
-                    aber es wird der Pfadstring nach der Versionsnummer benötigt.</para></listitem>
-            <listitem><para><code>getCdnDojoPath()</code>: Das letzte Pfadsegment der CDN URL erhalten das auf
-                    die dojo.js Datei zeigt.</para></listitem>
-            <listitem><para><code>useCdn()</code>: Dem Container mitteilen das CDN verwendet werden soll;
-                    aktiviert die Integration implizit.</para></listitem>
-            <listitem><para><code>setLocalPath($path)</code>: Dem Container den Pfad zu einer lokalen Dojo
-                    Installation mitteilen (sollte ein Pfad relativ zum Server sein, und die dojo.js Datei
-                    selbst enthalten); aktiviert die Integration implizit.</para></listitem>
-            <listitem><para><code>getLocalPath()</code>: Erkennen welches lokale Pfad zu Dojo verwendet wird.</para></listitem>
-            <listitem><para><code>useLocalPath()</code>: Verwendet die Integration einen lokalen Dojopfad?</para></listitem>
-            <listitem><para><code>setDjConfig(array $config)</code>: Setzt Dojo/Dijit Konfigurationswerte
-                    (erwartet ein assoziatives Array).</para></listitem>
-            <listitem><para><code>setDjConfigOption($option, $value)</code>: Setzt einen einzelnen
-                    Dojo/Dijit Konfigurationswert.</para></listitem>
-            <listitem><para><code>getDjConfig()</code>: Retourniert alle Dojo/Dijit Konfigurationswerte.</para></listitem>
-            <listitem><para><code>getDjConfigOption($option, $default = null)</code>: Retourniert einen
-                    einzelnen Dojo/Dijit Konfigurationswert.</para></listitem>
-            <listitem><para><code>addStylesheetModule($module)</code>: Fügt ein Stylesheet hinzu basierend auf
-                    einem Modulthema.</para></listitem>
-            <listitem><para><code>getStylesheetModules()</code>: Retourniert die als Modulthema registrierten
-                    Modulthemen.</para></listitem>
-            <listitem><para><code>addStylesheet($path)</code>: Fügt einen lokalen Stylesheet zur Verwendung
-                    mit Dojo hinzu.</para></listitem>
-            <listitem><para><code>getStylesheets()</code>: Retourniert die lokalen Dojo Stylesheets.</para></listitem>
-            <listitem><para><code>addOnLoad($spec, $function = null)</code>: Fügt ein Lambda für dojo.onLoad
-                    hinzu das dieses aufruft. Wenn ein Argument übergeben wird, wird dieses entweder als
-                    Funktionsname oder als Javascriptabschluss angenommen. Wenn zwei Argumente übergeben werden,
-                    wird das erste als Name der Variablen der Objektinstanz angenommen und der zweite entweder
-                    als Methodenname in diesem Objekt oder ein Abschluß um dieses Objekt zu verwenden.</para></listitem>
-            <listitem><para><code>prependOnLoad($spec, $function = null)</code>:
-                    genau wie <code>addOnLoad()</code>, außer das vor den Anfang des onLoad Stacks
-                    angefügt wird.</para></listitem>
-            <listitem><para><code>getOnLoadActions()</code>: Gibt alle im Container registrierten
-                    dojo.onLoad Aktionen zurück. Das ist ein Array von Arrays.</para></listitem>
-            <listitem><para><code>onLoadCaptureStart($obj = null)</code>: Empfange Daten die als Lambda für
-                    dojo.onLoad() verwendet werden sollen. Wenn $obj angegeben wird, wird der bekommene JS Code
-                    als Abschluß angenommen der mit diesem Javascript Objekt verwendet werden soll.</para></listitem>
-            <listitem><para><code>onLoadCaptureEnd($obj = null)</code>: Beendet das Empfangen von Daten für
-                    die Verwendung mit dojo.onLoad().</para></listitem>
-            <listitem><para><code>javascriptCaptureStart()</code>: Empfange Javascript das im Dojo JS inkludiert
-                    werden soll (onLoad, require, und andere Anweisungen).</para></listitem>
-            <listitem><para><code>javascriptCaptureEnd()</code>: Beende das Empfangen von Javascript.</para></listitem>
-            <listitem><para><code>__toString()</code>: Castet den Container zu einem String; stellt alle HTML
-                    Stile und Skriptelemente dar.</para></listitem>
+                    <classname>Zend_Dojo::CDN_DOJO_PATH_AOL</classname> oder
+                    <classname>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</classname>, aber es wird der
+                    Pfadstring nach der Versionsnummer benötigt.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getCdnDojoPath()</code>: Das letzte Pfadsegment der CDN URL erhalten das
+                    auf die dojo.js Datei zeigt.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>useCdn()</code>: Dem Container mitteilen das CDN verwendet werden soll;
+                    aktiviert die Integration implizit.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setLocalPath($path)</code>: Dem Container den Pfad zu einer lokalen Dojo
+                    Installation mitteilen (sollte ein Pfad relativ zum Server sein, und die dojo.js
+                    Datei selbst enthalten); aktiviert die Integration implizit.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getLocalPath()</code>: Erkennen welches lokale Pfad zu Dojo verwendet
+                    wird.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>useLocalPath()</code>: Verwendet die Integration einen lokalen Dojopfad?
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setDjConfig(array $config)</code>: Setzt Dojo/Dijit Konfigurationswerte
+                    (erwartet ein assoziatives Array).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setDjConfigOption($option, $value)</code>: Setzt einen einzelnen
+                    Dojo/Dijit Konfigurationswert.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getDjConfig()</code>: Retourniert alle Dojo/Dijit Konfigurationswerte.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getDjConfigOption($option, $default = null)</code>: Retourniert einen
+                    einzelnen Dojo/Dijit Konfigurationswert.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addStylesheetModule($module)</code>: Fügt ein Stylesheet hinzu basierend
+                    auf einem Modulthema.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getStylesheetModules()</code>: Retourniert die als Modulthema
+                    registrierten Modulthemen.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addStylesheet($path)</code>: Fügt einen lokalen Stylesheet zur Verwendung
+                    mit Dojo hinzu.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getStylesheets()</code>: Retourniert die lokalen Dojo Stylesheets.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>addOnLoad($spec, $function = null)</code>: Fügt ein Lambda für dojo.onLoad
+                    hinzu das dieses aufruft. Wenn ein Argument übergeben wird, wird dieses entweder
+                    als Funktionsname oder als Javascriptabschluss angenommen. Wenn zwei Argumente
+                    übergeben werden, wird das erste als Name der Variablen der Objektinstanz
+                    angenommen und der zweite entweder als Methodenname in diesem Objekt oder ein
+                    Abschluß um dieses Objekt zu verwenden.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>prependOnLoad($spec, $function = null)</code>: genau wie
+                    <code>addOnLoad()</code>, außer das vor den Anfang des onLoad Stacks angefügt
+                    wird.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>getOnLoadActions()</code>: Gibt alle im Container registrierten
+                    dojo.onLoad Aktionen zurück. Das ist ein Array von Arrays.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>onLoadCaptureStart($obj = null)</code>: Empfange Daten die als Lambda für
+                    dojo.onLoad() verwendet werden sollen. Wenn $obj angegeben wird, wird der
+                    bekommene JS Code als Abschluß angenommen der mit diesem Javascript Objekt
+                    verwendet werden soll.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>onLoadCaptureEnd($obj = null)</code>: Beendet das Empfangen von Daten für
+                    die Verwendung mit dojo.onLoad().
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>javascriptCaptureStart()</code>: Empfange Javascript das im Dojo JS
+                    inkludiert werden soll (onLoad, require, und andere Anweisungen).
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>javascriptCaptureEnd()</code>: Beende das Empfangen von Javascript.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>__toString()</code>: Castet den Container zu einem String; stellt alle
+                    HTML Stile und Skriptelemente dar.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 </sect2>

@@ -8,10 +8,11 @@
         <title>Zend_Dojo_Form verwenden</title>
 
         <para>
-            Der einfachste Weg um Dojo mit <classname>Zend_Form</classname> zu verwenden besteht darin
-            <classname>Zend_Dojo_Form</classname> zu verwenden, entweder durch direkte Verwendung oder indem Sie erweitert
-            wird. Dieses Beispiel zeigt die Erweiterung von <classname>Zend_Dojo_Form</classname> und die Verwendung aller Dijit
-            Elemente. Es erstellt vier Unterformulare, und dekoriert das Formular damit ein TabContainer
+            Der einfachste Weg um Dojo mit <classname>Zend_Form</classname> zu verwenden besteht
+            darin <classname>Zend_Dojo_Form</classname> zu verwenden, entweder durch direkte
+            Verwendung oder indem Sie erweitert wird. Dieses Beispiel zeigt die Erweiterung von
+            <classname>Zend_Dojo_Form</classname> und die Verwendung aller Dijit Elemente. Es
+            erstellt vier Unterformulare, und dekoriert das Formular damit ein TabContainer
             verwendet wird, welcher jedes Unterformular in seinem eigenen Tab zeigt.
         </para>
 
@@ -360,7 +361,8 @@ class My_Form_Test extends Zend_Dojo_Form
         </para>
 
         <para>
-            Dieses erste Beispiel zeigt die eine bestehende Instanz eines Formulars dekoriert werden kann:
+            Dieses erste Beispiel zeigt die eine bestehende Instanz eines Formulars dekoriert werden
+            kann:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -402,9 +404,9 @@ class My_Custom_Form extends Zend_Form
 ]]></programlisting>
 
         <para>
-            Natürlich kann auch das getan werden... man könnte und sollte einfach die Klasse so verändern das
-            Sie <classname>Zend_Dojo_Form</classname> ableitet, was eine eins-zu-eins Ersetzung von <classname>Zend_Form</classname> ist, die bereits
-            Dojo versteht...
+            Natürlich kann auch das getan werden... man könnte und sollte einfach die Klasse so
+            verändern das Sie <classname>Zend_Dojo_Form</classname> ableitet, was eine eins-zu-eins
+            Ersetzung von <classname>Zend_Form</classname> ist, die bereits Dojo versteht...
         </para>
     </example>
 </sect2>

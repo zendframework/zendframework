@@ -17,8 +17,8 @@
 
         <para>
             Die Ereignismethoden sind in der abstrakten Klasse
-            <classname>Zend_Controller_Plugin_Abstract</classname> definiert, von dem User Plugin Klassen
-            angeleitet werden müssen:
+            <classname>Zend_Controller_Plugin_Abstract</classname> definiert, von dem User Plugin
+            Klassen angeleitet werden müssen:
         </para>
 
         <itemizedlist>
@@ -53,8 +53,8 @@
                     aufgerufen, bevor eine Aktion verarbeitet wird. Dieser Callback erlaubt ein
                     Proxy oder Filter Verhalten. Durch Verändern des Requests und Zurücksetzen
                     des Verarbeitungsstatus (mittels
-                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>) kann
-                    die aktuelle Aktion abgebrochen oder ersetzt werden.
+                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>)
+                    kann die aktuelle Aktion abgebrochen oder ersetzt werden.
                 </para>
             </listitem>
 
@@ -65,8 +65,8 @@
                     aufgerufen, nachdem eine Aktion verarbeitet wurde. Dieser Callback erlaubt ein
                     Proxy oder Filter Verhalten. Durch Verändern des Requests und Zurücksetzen
                     des Verarbeitungsstatus (mittels
-                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>) kann
-                    eine neue Aktion für die Verarbeitung angegeben werden.
+                    <classname>Zend_Controller_Request_Abstract::setDispatched(false)</classname>)
+                    kann eine neue Aktion für die Verarbeitung angegeben werden.
                 </para>
             </listitem>
 
@@ -95,16 +95,16 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
         <para>
-            Keine der Methoden von <classname>Zend_Controller_Plugin_Abstract</classname> ist abstrakt, so
-            dass Plugin Klassen nicht gezwungen werden, irgend einen der vorhandenen
+            Keine der Methoden von <classname>Zend_Controller_Plugin_Abstract</classname> ist
+            abstrakt, so dass Plugin Klassen nicht gezwungen werden, irgend einen der vorhandenen
             Ereignismethoden zu implemetieren, die oben gelistet wurden. Schreiber von Plugins
             brauchen nur die Methoden zu implementieren, die sie für ihre speziellen Bedürfnisse
             benötigen.
         </para>
 
         <para>
-            <classname>Zend_Controller_Plugin_Abstract</classname> stellt den Controller Plugins außerdem die
-            Request und Response Objekte über die <code>getRequest()</code> und
+            <classname>Zend_Controller_Plugin_Abstract</classname> stellt den Controller Plugins
+            außerdem die Request und Response Objekte über die <code>getRequest()</code> und
             <code>getResponse()</code> Methoden zur Verfügung.
         </para>
     </sect2>
@@ -167,8 +167,9 @@ $front->dispatch();
 ]]></programlisting>
 
         <para>
-            Angenommen das keine der Aktionen igendeine Ausgabe produzieren, und nur eine Aktion aufgerufen wurde,
-            dann erzeugt die Funktionalität des obigen Plugins trotzdem die folgende Ausgabe:
+            Angenommen das keine der Aktionen igendeine Ausgabe produzieren, und nur eine Aktion
+            aufgerufen wurde, dann erzeugt die Funktionalität des obigen Plugins trotzdem die
+            folgende Ausgabe:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -182,9 +183,9 @@ $front->dispatch();
 
         <note>
             <para>
-                Plugins können jederzeit wärend der Ausführung des Frontkontrollers registriert werden. Wenn
-                trotzdem ein Event ausgeführt wurde für das das Plugin eine registrierte Eventmethode enthält,
-                wird diese Methode nicht getriggert.
+                Plugins können jederzeit wärend der Ausführung des Frontkontrollers registriert
+                werden. Wenn trotzdem ein Event ausgeführt wurde für das das Plugin eine
+                registrierte Eventmethode enthält, wird diese Methode nicht getriggert.
             </para>
         </note>
     </sect2>
@@ -193,15 +194,15 @@ $front->dispatch();
         <title>Empfangen und Manipulieren von Plugins</title>
 
         <para>
-            Fallweise kann es notwendig sein ein Plugin zu entfernen oder empfangen. Die folgenden Methoden des
-            Frontkontrollers erlauben dies:
+            Fallweise kann es notwendig sein ein Plugin zu entfernen oder empfangen. Die folgenden
+            Methoden des Frontkontrollers erlauben dies:
         </para>
 
         <itemizedlist>
             <listitem><para>
-                    <code>getPlugin($class)</code> erlaubt es ein Plugin durch den Klassennamen zu empfangen. Wenn
-                    kein Plugin entspricht, wird false zurückgegeben. Wenn mehr als ein Plugin dieser Klasse
-                    registriert ist, wird ein Array zurückgegeben.
+                    <code>getPlugin($class)</code> erlaubt es ein Plugin durch den Klassennamen zu
+                    empfangen. Wenn kein Plugin entspricht, wird false zurückgegeben. Wenn mehr als
+                    ein Plugin dieser Klasse registriert ist, wird ein Array zurückgegeben.
             </para></listitem>
 
             <listitem><para>
@@ -209,9 +210,10 @@ $front->dispatch();
             </para></listitem>
 
             <listitem><para>
-                    <code>unregisterPlugin($plugin)</code> erlaubt die Entfernung eines Plugins vom Stack. Es kann
-                    ein Plugin Objekt oder der Klassenname des Plugins, das entfernt werden soll, übergeben werden.
-                    Wenn der Klassenname übergeben wird, wird jedes Plugin dieser Klasse entfernt.
+                    <code>unregisterPlugin($plugin)</code> erlaubt die Entfernung eines Plugins vom
+                    Stack. Es kann ein Plugin Objekt oder der Klassenname des Plugins, das entfernt
+                    werden soll, übergeben werden. Wenn der Klassenname übergeben wird, wird jedes
+                    Plugin dieser Klasse entfernt.
             </para></listitem>
         </itemizedlist>
     </sect2>

@@ -5,11 +5,11 @@
     <title>Zend_Controller Grundlagen</title>
 
     <para>
-        Das <classname>Zend_Controller</classname> System wurde leichtgewichtig, modular und erweiterbar
-        aufgebaut. Das Design ist einfach, um den Benutzern viel Flexibilität und Freiheiten zu
-        ermöglichen. Dennoch bietet es ausreichend Struktur, damit Systeme, die auf den
-        <classname>Zend_Controller</classname> aufbauen, gemeinsame Konventionen befolgen und einen
-        ähnlichen Code Aufbau verwenden.
+        Das <classname>Zend_Controller</classname> System wurde leichtgewichtig, modular und
+        erweiterbar aufgebaut. Das Design ist einfach, um den Benutzern viel Flexibilität und
+        Freiheiten zu ermöglichen. Dennoch bietet es ausreichend Struktur, damit Systeme, die auf
+        den <classname>Zend_Controller</classname> aufbauen, gemeinsame Konventionen befolgen und
+        einen ähnlichen Code Aufbau verwenden.
     </para>
 
     <para>
@@ -43,8 +43,8 @@
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Request_Abstract</classname> (oft als das <code>Request
-                    Objekt</code> bezeichnet) repräsentiert die Umgebung
+                    <classname>Zend_Controller_Request_Abstract</classname> (oft als das
+                    <code>Request Objekt</code> bezeichnet) repräsentiert die Umgebung
                     der Anfrage und stellt Methoden für das Setzen und Abfragen der Namen für
                     Controller und Aktion sowie jeder Anfrageparameter bereit. Zusätzlich
                     behält es die Übersicht darüber, ob die enthaltene Aktion von
@@ -56,16 +56,17 @@
                 </para>
 
                 <para>
-                    Standardmäßig wird <classname>Zend_Controller_Request_Http</classname> verwendet,
-                    welches den Zugriff auf die komplette HTTP Anfrageumgebung ermöglicht.
+                    Standardmäßig wird <classname>Zend_Controller_Request_Http</classname>
+                    verwendet, welches den Zugriff auf die komplette HTTP Anfrageumgebung
+                    ermöglicht.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Router_Interface</classname> wird verwendet, um Router zu
-                    definieren. Routing ist der Prozess, bei dem die Anfrageumgebung untersucht
-                    wird, um zu ermitteln, welcher Controller und welche Aktion dieses
+                    <classname>Zend_Controller_Router_Interface</classname> wird verwendet, um
+                    Router zu definieren. Routing ist der Prozess, bei dem die Anfrageumgebung
+                    untersucht wird, um zu ermitteln, welcher Controller und welche Aktion dieses
                     Controllers diese Anfrage verarbeiten soll. Dieser Controller, diese Aktion
                     und optionale Parameter werden dann im Request Object gesetzt, das vom
                     <classname>Zend_Controller_Dispatcher_Standard</classname> verarbeitet wird. Das
@@ -74,20 +75,20 @@
                 </para>
 
                 <para>
-                    Der Standardrouter <classname>Zend_Controller_Router_Rewrite</classname> nimmt den
-                    URI Endpunkt entgegen, der in <classname>Zend_Controller_Request_Http</classname>
-                    angegeben ist, und zerlegt ihn in einen Controller, eine Aktion und die
-                    Parameter basierend auf den Pfadinformationen der URL. Zum Beispiel würde
-                    die URL <code>http://localhost/foo/bar/key/value</code> übersetzt, um den
+                    Der Standardrouter <classname>Zend_Controller_Router_Rewrite</classname> nimmt
+                    den URI Endpunkt entgegen, der in
+                    <classname>Zend_Controller_Request_Http</classname> angegeben ist, und zerlegt
+                    ihn in einen Controller, eine Aktion und die Parameter basierend auf den
+                    Pfadinformationen der URL. Zum Beispiel würde die URL
+                    <code>http://localhost/foo/bar/key/value</code> übersetzt, um den
                     <code>foo</code> Controller und die <code>bar</code> Aktion zu verwenden und
                     einen Parameter <code>key</code> mit dem Wert <code>value</code> anzugeben.
                 </para>
 
                 <para>
-                    <classname>Zend_Controller_Router_Rewrite</classname> kann auch für beliebige Pfade
-                    verwendet werden; man beachte <link
-                        linkend="zend.controller.router">die
-                    Rewrite Router Dokumentation</link> für weitere Informationen.
+                    <classname>Zend_Controller_Router_Rewrite</classname> kann auch für beliebige
+                    Pfade verwendet werden; man beachte <link linkend="zend.controller.router">die
+                        Rewrite Router Dokumentation</link> für weitere Informationen.
                 </para>
             </listitem>
 
@@ -113,22 +114,24 @@
                 </para>
 
                 <para>
-                    Der Standarddispatcher ist <classname>Zend_Controller_Dispatcher_Standard</classname>.
-                    Er definiert Controller als MixedCasedKlassen, die auf das Wort Controller
-                    enden, und Aktionsmethoden als camelCasedMethoden, die auf das Wort Action
-                    enden: <code>SomeFooController::barAction</code>. In diesem Fall wird auf
-                    den Controller über <code>somefoo</code> und auf die Aktion über
-                    <code>bar</code> zugegriffen.
+                    Der Standarddispatcher ist
+                    <classname>Zend_Controller_Dispatcher_Standard</classname>. Er definiert
+                    Controller als MixedCasedKlassen, die auf das Wort Controller enden, und
+                    Aktionsmethoden als camelCasedMethoden, die auf das Wort Action enden:
+                    <code>SomeFooController::barAction</code>. In diesem Fall wird auf den
+                    Controller über <code>somefoo</code> und auf die Aktion über <code>bar</code>
+                    zugegriffen.
                 </para>
 
                 <note>
                     <title>Konventionen von Namens-Schreibweisen</title>
 
                     <para>
-                        Da Menschen grundsätzlich inkonsistent sind im Behandeln und der Gründlichkeit beim
-                        Tippen von Links, normalisiert Zend Framework die Pfad Informationen zur
-                        Kleinschreibung. Das beeinflut natürlich wie Kontroller und Aktionen benannt werden
-                        ... oder wie auf diese in Links referiert werden kann.
+                        Da Menschen grundsätzlich inkonsistent sind im Behandeln und der
+                        Gründlichkeit beim Tippen von Links, normalisiert Zend Framework die Pfad
+                        Informationen zur Kleinschreibung. Das beeinflut natürlich wie Kontroller
+                        und Aktionen benannt werden ... oder wie auf diese in Links referiert werden
+                        kann.
                     </para>
 
                     <para>
@@ -140,9 +143,10 @@
                     </para>
 
                     <para>
-                        Als Beispiel, wenn man zur Aktion in <code>FooBarController::bazBatAction()</code>
-                        kommen will, muß zu Ihr mit der URL as <code>/foo-bar/baz-bat</code> oder
-                        <code>/foo.bar/baz.bat</code> referiert werden.
+                        Als Beispiel, wenn man zur Aktion in
+                        <code>FooBarController::bazBatAction()</code> kommen will, muß zu Ihr mit
+                        der URL as <code>/foo-bar/baz-bat</code> oder <code>/foo.bar/baz.bat</code>
+                        referiert werden.
                     </para>
                 </note>
             </listitem>
@@ -151,42 +155,43 @@
                 <para>
                     <classname>Zend_Controller_Action</classname> ist die elementare Controller
                     Komponente. Jeder Controller ist eine einzelne Klasse, welche die
-                    <classname>Zend_Controller_Action</classname> Klasse erweitert und Methoden für die
-                    Aktionen enthält.
+                    <classname>Zend_Controller_Action</classname> Klasse erweitert und Methoden für
+                    die Aktionen enthält.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Response_Abstract</classname> definiert eine grundlegende
-                    Response Klasse, um Antworten der Aktion aus den Controllern zu sammeln und
-                    zurück zu geben. Es sammelt sowohl Header als auch Inhalte.
+                    <classname>Zend_Controller_Response_Abstract</classname> definiert eine
+                    grundlegende Response Klasse, um Antworten der Aktion aus den Controllern zu
+                    sammeln und zurück zu geben. Es sammelt sowohl Header als auch Inhalte.
                 </para>
 
                 <para>
-                    Die Standard Response Klasse ist <classname>Zend_Controller_Response_Http</classname>,
-                    welches in einer HTTP Umgebung verwendet werden kann.
+                    Die Standard Response Klasse ist
+                    <classname>Zend_Controller_Response_Http</classname>, welches in einer HTTP
+                    Umgebung verwendet werden kann.
                 </para>
             </listitem>
         </itemizedlist>
 
     <para>
-        Der Ablauf vom <classname>Zend_Controller</classname> ist relativ einfach. Eine Anfrage wird vom
-        <classname>Zend_Controller_Front</classname> empfangen, der wiederum
-        <classname>Zend_Controller_Router_Rewrite</classname> aufruft, um zu ermitteln, welcher Controller
-        (und welche Aktion in dem Controller) ausgeführt werden soll.
-        <classname>Zend_Controller_Router_Rewrite</classname> zerteilt die URI um den Namen des Controllers
-        und der Aktion für den Request zu setzen. <classname>Zend_Controller_Front</classname> durchläuft
-        dann eine Dispatcher Schleife. Er ruft <classname>Zend_Controller_Dispatcher_Standard</classname>
-        auf und übergibt den Request, um den Controller und die Aktion auszuführen, die im Request
-        spezifiziert wurden (oder verwendet die  Standardwerte). Wenn der Controller fertig ist,
-        wird die Kontrolle wieder an <classname>Zend_Controller_Front</classname> übergeben. Wenn der
-        Controller durch das Zurücksetzen des Dispatch Status des Requests angezeigt hat, dass
-        ein weiterer Controller ausgeführt werden soll, wird der Durchlauf fortgesetzt und ein
-        weiterer Dispatcher Prozess wird durchlaufen. Andernfalls endet der Prozess.
+        Der Ablauf vom <classname>Zend_Controller</classname> ist relativ einfach. Eine Anfrage wird
+        vom <classname>Zend_Controller_Front</classname> empfangen, der wiederum
+        <classname>Zend_Controller_Router_Rewrite</classname> aufruft, um zu ermitteln, welcher
+        Controller (und welche Aktion in dem Controller) ausgeführt werden soll.
+        <classname>Zend_Controller_Router_Rewrite</classname> zerteilt die URI um den Namen des
+        Controllers und der Aktion für den Request zu setzen.
+        <classname>Zend_Controller_Front</classname> durchläuft dann eine Dispatcher Schleife. Er
+        ruft <classname>Zend_Controller_Dispatcher_Standard</classname> auf und übergibt den
+        Request, um den Controller und die Aktion auszuführen, die im Request spezifiziert wurden
+        (oder verwendet die  Standardwerte). Wenn der Controller fertig ist, wird die Kontrolle
+        wieder an <classname>Zend_Controller_Front</classname> übergeben. Wenn der Controller durch
+        das Zurücksetzen des Dispatch Status des Requests angezeigt hat, dass ein weiterer
+        Controller ausgeführt werden soll, wird der Durchlauf fortgesetzt und ein weiterer
+        Dispatcher Prozess wird durchlaufen. Andernfalls endet der Prozess.
     </para>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

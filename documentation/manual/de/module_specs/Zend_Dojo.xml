@@ -12,10 +12,18 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>JSON-RPC Unterstützung</para></listitem>
-        <listitem><para>dojo.data Kompatibilität</para></listitem>
-        <listitem><para>View Helfer um beim Setup der Dojo Umgebung zu helfen</para></listitem>
-        <listitem><para>Dijit-spezifische <classname>Zend_View</classname> Helfer</para></listitem>
+        <listitem>
+            <para>JSON-RPC Unterstützung</para>
+        </listitem>
+        <listitem>
+            <para>dojo.data Kompatibilität</para>
+        </listitem>
+        <listitem>
+            <para>View Helfer um beim Setup der Dojo Umgebung zu helfen</para>
+        </listitem>
+        <listitem>
+            <para>Dijit-spezifische <classname>Zend_View</classname> Helfer</para>
+        </listitem>
         <listitem>
             <para>Dijit-spezifische <classname>Zend_Form</classname> Elemente und Dekoratore</para>
         </listitem>

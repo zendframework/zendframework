@@ -6,10 +6,10 @@
     <title>Konstanten für generelle Datums Funktionen</title>
 
     <para>
-        Wo auch immer eine <classname>Zend_Date</classname> Methode einen <code>$parts</code> Parameter besitzt,
-        kann eine der nachfolgenden Konstanten als Argument für diesen Parameter benutzt werden, um einen
-        speziellen Teil des Datums auszuwählen, oder um anzuzeigen das ein bestimmtes Datumsformat benutzt werden
-        oder gewünscht ist (z.B. RFC 822).
+        Wo auch immer eine <classname>Zend_Date</classname> Methode einen <code>$parts</code>
+        Parameter besitzt, kann eine der nachfolgenden Konstanten als Argument für diesen Parameter
+        benutzt werden, um einen speziellen Teil des Datums auszuwählen, oder um anzuzeigen das ein
+        bestimmtes Datumsformat benutzt werden oder gewünscht ist (z.B. RFC 822).
     </para>
 
     <sect2 id="zend.date.constants.using">
@@ -17,14 +17,16 @@
         <title>Konstanten benutzen</title>
 
         <para>
-            Zum Beispiel kann die Konstante <classname>Zend_Date::HOUR</classname> in den anbei gezeigten Arten
-            benutzt werden. Wenn mit Wochentagen, Kalendardaten, Stunden, Minuten, Sekunden oder jedem anderen
-            Datumsabschnitt gearbeitet wird die in verschiedenen Teilen der Welt unterschiedlich dargestellt werden,
-            wird die Zeitzone des Objektes automatisch benutzt um den richtigen Wert zu berechnen selbst wenn der
-            interne Zeitpunkt der gleiche ist für den gleichen Moment der Zeit, unabhängig davon wo auf der Welt
-            sich der Benutzer befindet. Unabhängig von der Einheit die involviert ist muß die Ausgabe entweder als
-            GMT/UTC ausgedrückt werden oder lokalisiert anhand des Gebietsschemas. Die unten angeführte
-            Beispielausgabe zeigt eine Lokalisierung mit Europe/GMT+1 Stunden (z.B. Österreich, Deutschland, Frankreich).
+            Zum Beispiel kann die Konstante <classname>Zend_Date::HOUR</classname> in den anbei
+            gezeigten Arten benutzt werden. Wenn mit Wochentagen, Kalendardaten, Stunden, Minuten,
+            Sekunden oder jedem anderen Datumsabschnitt gearbeitet wird die in verschiedenen Teilen
+            der Welt unterschiedlich dargestellt werden, wird die Zeitzone des Objektes automatisch
+            benutzt um den richtigen Wert zu berechnen selbst wenn der interne Zeitpunkt der gleiche
+            ist für den gleichen Moment der Zeit, unabhängig davon wo auf der Welt sich der Benutzer
+            befindet. Unabhängig von der Einheit die involviert ist muß die Ausgabe entweder als
+            GMT/UTC ausgedrückt werden oder lokalisiert anhand des Gebietsschemas. Die unten
+            angeführte Beispielausgabe zeigt eine Lokalisierung mit Europe/GMT+1 Stunden (z.B.
+            Österreich, Deutschland, Frankreich).
         </para>
 
         <table id="zend.date.constants.using.table">
@@ -104,8 +106,9 @@
         <title>Liste aller Konstanten</title>
 
         <para>
-            Jeder Teil von Datum/Zeit hat eine eindeutige Konstante in <classname>Zend_Date</classname>. Alle durch
-            <classname>Zend_Date</classname> unterstützten Konstanten sind anbei aufgelistet.
+            Jeder Teil von Datum/Zeit hat eine eindeutige Konstante in
+            <classname>Zend_Date</classname>. Alle durch <classname>Zend_Date</classname>
+            unterstützten Konstanten sind anbei aufgelistet.
         </para>
 
         <table id="zend.date.constants.list.table-1">
@@ -141,19 +144,28 @@
                     </row>
                     <row>
                         <entry>Zend_Date::WEEKDAY_SHORT</entry>
-                        <entry>Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten drei Zeichen)</entry>
+                        <entry>
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten drei
+                            Zeichen)
+                        </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>Fre</emphasis> für Freitag</entry>
                     </row>
                     <row>
                         <entry>Zend_Date::WEEKDAY_NAME</entry>
-                        <entry>Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten zwei Zeichen)</entry>
+                        <entry>
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten zwei
+                            Zeichen)
+                        </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>Fr</emphasis> für Freitag</entry>
                     </row>
                     <row>
                         <entry>Zend_Date::WEEKDAY_NARROW</entry>
-                        <entry>Wochentag (Name des Tages, Lokalisiert, Abgekürzt, nur das erste Zeichen)</entry>
+                        <entry>
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, nur das erste
+                            Zeichen)
+                        </entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis> für Freitag</entry>
                     </row>
@@ -490,7 +502,9 @@
                     <row>
                         <entry>Zend_Date::TIMESTAMP</entry>
                         <entry>
-                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix Zeit</ulink> (Sekunden seit 1.1.1970, gemischt)</entry>
+                            <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Unix Zeit</ulink>
+                            (Sekunden seit 1.1.1970, gemischt)
+                        </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>1234533207</emphasis>
                         </entry>
@@ -556,13 +570,14 @@
         </table>
 
         <para>
-            Auf <classname>Zend_Date::DATES</classname> sollte speziell geachtet werden, da dieser Formatbezeichner
-            eine besondere Bedeutung innerhalb von <classname>Zend_Date</classname> als
-            <emphasis>Eingabe</emphasis>-Formatbezeichner. Wenn dieser Bezeichner als Eingabeformat
-            für <code>$part</code> benutzt wird, erlaubt diese Konstante die beste und flexibelste Art um viele
-            ähnliche Datumsformate zu akzeptieren. Heuristik wird benutzt um Daten automatisch von einer
-            Eingabe-Zeichenkette zu extrahieren und dann einfache Fehler zu "beheben" (wenn vorhanden), wie zum
-            Beispiel Jahre, Monate und Tage wenn möglich.
+            Auf <classname>Zend_Date::DATES</classname> sollte speziell geachtet werden, da dieser
+            Formatbezeichner eine besondere Bedeutung innerhalb von <classname>Zend_Date</classname>
+            als <emphasis>Eingabe</emphasis>-Formatbezeichner. Wenn dieser Bezeichner als
+            Eingabeformat für <code>$part</code> benutzt wird, erlaubt diese Konstante die beste und
+            flexibelste Art um viele ähnliche Datumsformate zu akzeptieren. Heuristik wird benutzt
+            um Daten automatisch von einer Eingabe-Zeichenkette zu extrahieren und dann einfache
+            Fehler zu "beheben" (wenn vorhanden), wie zum Beispiel Jahre, Monate und Tage wenn
+            möglich.
         </para>
 
         <table id="zend.date.constants.list.table-8">
@@ -671,20 +686,21 @@
         <title>Selbst-Definierte AUSGABE Formate mit ISO</title>
 
         <para>
-            Wenn ein Datumsformat benötigt wird, das oben nicht angeführt ist, kann auch ein selbst-definiertes
-            Format erstellt werden, mit Hilfe der unten engeführten ISO Formatsbezeichner. Die folgenden Beispiele
-            zeigen die Verwendung der Konstanten dieser Tabelle um selbst-definierte ISO Formate zu erstelen.
-            Die Länge des Formats ist unlimitiert. Auch die mehrfache Verwendung von Format Konstanten ist
-            gestattet.
+            Wenn ein Datumsformat benötigt wird, das oben nicht angeführt ist, kann auch ein
+            selbst-definiertes Format erstellt werden, mit Hilfe der unten engeführten ISO
+            Formatsbezeichner. Die folgenden Beispiele zeigen die Verwendung der Konstanten dieser
+            Tabelle um selbst-definierte ISO Formate zu erstelen. Die Länge des Formats ist
+            unlimitiert. Auch die mehrfache Verwendung von Format Konstanten ist gestattet.
         </para>
 
         <para>
-            Die akzeptierten Formatbezeichner können vom ISO Format zu PHP's date Format geändert werden, wenn
-            man damit mehr Erfahrung hat. Wie auch immer, nicht alle Format welche in der ISO Norm definiert sind,
-            werden durch PHP's date Formatbezeichner unterstützt. Die Verwendung der
-            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> Methode erlaubt es, für alle
-            Zend_Date Methoden, zwischen der Unterstützung von ISO Formatbezeichnern und PHP date() Typbezeichner
-            zu wählen (siehe <xref linkend="zend.date.constants.phpformats" />).
+            Die akzeptierten Formatbezeichner können vom ISO Format zu PHP's date Format geändert
+            werden, wenn man damit mehr Erfahrung hat. Wie auch immer, nicht alle Format welche in
+            der ISO Norm definiert sind, werden durch PHP's date Formatbezeichner unterstützt. Die
+            Verwendung der <classname>Zend_Date::setOptions(array('format_type' =>
+            'php'))</classname> Methode erlaubt es, für alle Zend_Date Methoden, zwischen der
+            Unterstützung von ISO Formatbezeichnern und PHP date() Typbezeichner zu wählen (siehe
+            <xref linkend="zend.date.constants.phpformats" />).
         </para>
 
         <example id="zend.date.constants.selfdefinedformats.example-1">
@@ -1118,21 +1134,26 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
 
     <sect2 id="zend.date.constants.phpformats">
 
-        <title>Selbst-definierte AUSGABE Formate welche PHP's date() Formatdefinition verwenden</title>
+        <title>
+            Selbst-definierte AUSGABE Formate welche PHP's date() Formatdefinition verwenden
+        </title>
 
         <para>
-            Wenn man mit PHP's date Formatdefinition vertrauter ist als mit den ISO Formatdefinitionen, dann kann
-            man durch Verwendung der Methode <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> das Wechseln
-            von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle Zend_Date Methoden verwendet
-            werden wechseln. Danach müssen alle Format Parameter in
-            <ulink url="http://php.net/date">PHP's <code>date()</code> Formatdefintion</ulink> angegeben werden.
-            Das PHP date Format vermisst einige der Formate welche durch PHP unterstützt werden und
-            umgekehrt. Wenn keine Erfahrung damit besteht sollte auf alle Fälle das ISO Format genommen werden.
-            Und wenn Altlast-Code vorhanden ist der PHP's date Format verwendet, kann dieser entweder manuell
-            in das ISO Format konvertiert werden indem
-            <link linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
-            verwendet wird, oder durch Verwendung von <code>setOptions()</code>. Die folgenden Beispiel zeigen die
-            Verwendung der Konstanten anhand der unteren Tabelle für die Erstellung von selbst-definierten Formaten.
+            Wenn man mit PHP's date Formatdefinition vertrauter ist als mit den ISO
+            Formatdefinitionen, dann kann man durch Verwendung der Methode
+            <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname> das Wechseln
+            von ISO Formatdefinition zu PHP date Formatdefinition welche dann für alle Zend_Date
+            Methoden verwendet werden wechseln. Danach müssen alle Format Parameter in
+            <ulink url="http://php.net/date">PHP's <code>date()</code> Formatdefintion</ulink>
+            angegeben werden. Das PHP date Format vermisst einige der Formate welche durch PHP
+            unterstützt werden und umgekehrt. Wenn keine Erfahrung damit besteht sollte auf alle
+            Fälle das ISO Format genommen werden. Und wenn Altlast-Code vorhanden ist der PHP's date
+            Format verwendet, kann dieser entweder manuell in das ISO Format konvertiert werden
+            indem <link
+                linkend="zend.locale.date.normalize">Zend_Locale_Format::convertPhpToIsoFormat()</link>
+            verwendet wird, oder durch Verwendung von <code>setOptions()</code>. Die folgenden
+            Beispiel zeigen die Verwendung der Konstanten anhand der unteren Tabelle für die
+            Erstellung von selbst-definierten Formaten.
         </para>
 
         <example id="zend.date.constants.phpformats.example-1">
@@ -1150,11 +1171,12 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
         </example>
 
         <para>
-            Die folgende Tabelle zeit die Liste der PHP date Formatdefinitionen mit Ihrem Äquivalent in
-            Zend_Date Konstanten und der im CLDR/ISO äquivalenten Formatdefintion. In den meisten Fällen
-            wenn das CLDR/ISO Format keine entsprechende Formardefinition enthält, wird die PHP
-            Formatdefinition nicht durch <classname>Zend_Locale_Format::convertPhpToIsoFormat()</classname> geändert,
-            und die Zend_Date Methoden erkennen dann diese "besonderen" PHP Formatdefinitionen, selbst im
+            Die folgende Tabelle zeit die Liste der PHP date Formatdefinitionen mit Ihrem Äquivalent
+            in Zend_Date Konstanten und der im CLDR/ISO äquivalenten Formatdefintion. In den meisten
+            Fällen wenn das CLDR/ISO Format keine entsprechende Formardefinition enthält, wird die
+            PHP Formatdefinition nicht durch
+            <classname>Zend_Locale_Format::convertPhpToIsoFormat()</classname> geändert, und die
+            Zend_Date Methoden erkennen dann diese "besonderen" PHP Formatdefinitionen, selbst im
             Standardmäßigen "ISO" Formatcode.
         </para>
 
@@ -1327,7 +1349,9 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>A</entry>
                         <entry>Tageszeit, Lokalisiert</entry>
                         <entry>Zend_Date::MERIDIEM</entry>
-                        <entry>a (Ähnlich, aber keine Garantie das das Format Großgeschrieben ist)</entry>
+                        <entry>
+                            a (Ähnlich, aber keine Garantie das das Format Großgeschrieben ist)
+                        </entry>
                         <entry><emphasis>VORM.</emphasis>
                         </entry>
                     </row>

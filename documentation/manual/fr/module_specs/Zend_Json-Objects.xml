@@ -3,7 +3,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.json.objects">
     <title>Utilisation avancée de Zend_Json</title>
-    
+
     <sect2 id="zend.json.advanced.objects1">
         <title>Objets JSON</title>
 

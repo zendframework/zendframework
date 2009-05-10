@@ -339,9 +339,9 @@ foreach ($results as $result) {
                 <para>
                     <methodsynopsis>
                             <type>int</type>
-    
+
                             <methodname>totalResults</methodname>
-    
+
                             <void />
                         </methodsynopsis>
                     </para>

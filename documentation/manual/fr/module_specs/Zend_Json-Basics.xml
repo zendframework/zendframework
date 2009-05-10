@@ -10,7 +10,7 @@
         <classname>Zend_Json::decode()</classname>. <programlisting role="php"><![CDATA[
     // Obtention d'une valeur
     $phpNatif = Zend_Json::decode($valeurCodee);
-    
+
     // Codage pour renvoi au client :
     $json = Zend_Json::encode($phpNatif);
     ]]></programlisting></para>

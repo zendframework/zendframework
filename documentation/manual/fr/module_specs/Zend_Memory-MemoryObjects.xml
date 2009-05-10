@@ -13,7 +13,7 @@
             role="php"><![CDATA[
     $memObject = $memoryManager->create($data);
     ]]></programlisting></para>
-    
+
         <para>
             "Mobile" signifie que de tels objets peuvent être mis en cache et déchargés de la
             mémoire et chargés ensuite quand le code de l'application accède à l'objet.
@@ -29,7 +29,7 @@
             role="php"><![CDATA[
     $memObject = $memoryManager->createLocked($data);
     ]]></programlisting></para>
-    
+
         <para>
             "Verrouillé" signifie que de tels objets ne sont jamais mis en cache et déchargés
             de la mémoire.
@@ -68,18 +68,18 @@
             verrouillé) pour travailler avec les données des objets mémoire : <programlisting
             role="php"><![CDATA[
     $memObject = $memoryManager->create($data);
-    
+
     echo $memObject->value;
-    
+
     $memObject->value = $newValue;
-    
+
     $memObject->value[$index] = '_';
-    
+
     echo ord($memObject->value[$index1]);
-    
+
     $memObject->value = substr($memObject->value, $start, $length);
     ]]></programlisting></para>
-    
+
         <para>
             Une autre manière d'accéder aux données d'objet mémoire est d'utiliser la méthode
             <link linkend="zend.memory.memory-objects.api.getRef"><code>getRef()</code></link>.
@@ -125,32 +125,32 @@ public function &getRef();
                 une bonne idée d'utiliser la méthode <code>getRef()</code> pour le traitement des
                 données : <programlisting role="php"><![CDATA[
     $memObject = $memoryManager->create($data);
-    
+
     $value = &$memObject->getRef();
-    
+
     for ($count = 0; $count < strlen($value); $count++) {
         $char = $value[$count];
         ...
     }
     ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.memory.memory-objects.api.touch">
                 <title>La méthode touch()</title>
-    
+
                 <programlisting role="php"><![CDATA[
     public function touch();
     ]]></programlisting>
-    
+
             <para>
                 La méthode <code>touch()</code> devrait être employée en commun avec
                 <code>getRef()</code>. Elle signale que la valeur d'objet a été changé :
                 <programlisting role="php"><![CDATA[
     $memObject = $memoryManager->create($data);
     ...
-    
+
     $value = &$memObject->getRef();
-    
+
     for ($count = 0; $count < strlen($value); $count++) {
         ...
         if ($condition) {
@@ -158,18 +158,18 @@ public function &getRef();
         }
         ...
     }
-    
+
     $memObject->touch();
     ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.memory.memory-objects.api.lock">
                 <title>La méthode lock()</title>
-    
+
                 <programlisting role="php"><![CDATA[
     public function lock();
     ]]></programlisting>
-    
+
             <para>
                 La méthode <code>lock()</code> verrouille l'objet en mémoire. Elle devrait
                 être utilisé pour empêcher la mise en cache des objets que vous choisissez.
@@ -186,30 +186,30 @@ public function &getRef();
     $memObject1 = $memoryManager->create($data1);
     $memObject2 = $memoryManager->create($data2);
     ...
-    
+
     $memObject1->lock();
     $memObject2->lock();
-    
+
     $value1 = &$memObject1->getRef();
     $value2 = &$memObject2->getRef();
-    
+
     for ($count = 0; $count < strlen($value2); $count++) {
         $value1 .= $value2[$count];
     }
-    
+
     $memObject1->touch();
     $memObject1->unlock();
     $memObject2->unlock();
     ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.memory.memory-objects.api.unlock">
                 <title>La méthode unlock()</title>
-    
+
                 <programlisting role="php"><![CDATA[
     public function unlock();
     ]]></programlisting>
-    
+
             <para>
                 La méthode <code>unlock()</code> déverrouille l'objet quand il n'est plus
                 nécessaire de maintenir verrouillé. Voir l'exemple ci-dessus.

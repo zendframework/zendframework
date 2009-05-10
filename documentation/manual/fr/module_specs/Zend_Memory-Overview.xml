@@ -74,15 +74,15 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                     <listitem>
                         <para>Manager de mémoire</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Conteneur de mémoire</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Objet de mémoire verrouillé</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Objet de mémoire mobile</para>
                     </listitem>
@@ -112,18 +112,18 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                 Vous pouvez exploiter cet attribut <code>value</code> comme une propriété
                 d'objet : <programlisting role="php"><![CDATA[
     $memObject = $memoryManager->create($data);
-    
+
     echo $memObject->value;
-    
+
     $memObject->value = $newValue;
-    
+
     $memObject->value[$index] = '_';
-    
+
     echo ord($memObject->value[$index1]);
-    
+
     $memObject->value = substr($memObject->value, $start, $length);
     ]]></programlisting></para>
-    
+
                 <note>
                 <para>
                     Si vous utilisez une version de PHP inférieure à 5.2, utilisez la méthode

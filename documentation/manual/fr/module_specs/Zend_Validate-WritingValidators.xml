@@ -63,20 +63,20 @@
     class MonValidateur_Float extends Zend_Validate_Abstract
     {
         const FLOAT = 'float';
-    
+
         protected $_messageTemplates = array(
             self::FLOAT => "'%value%' n'est pas une valeur en virgule flottante"
         );
-    
+
         public function isValid($value)
         {
             $this->_setValue($value);
-    
+
             if (!is_float($value)) {
                 $this->_error();
                 return false;
             }
-    
+
             return true;
         }
     }
@@ -101,7 +101,7 @@
                     <listitem>
                         <para>La valeur d'entrée n'est pas numérique.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         La valeur d'entrée est inférieure que la valeur permise
@@ -126,40 +126,40 @@
         const MSG_NUMERIC = 'msgNumeric';
         const MSG_MINIMUM = 'msgMinimum';
         const MSG_MAXIMUM = 'msgMaximum';
-    
+
         public $minimum = 0;
         public $maximum = 100;
-    
+
         protected $_messageVariables = array(
             'min' => 'minimum',
             'max' => 'maximum'
         );
-    
+
         protected $_messageTemplates = array(
             self::MSG_NUMERIC => "'%value%' n'est pas numérique",
             self::MSG_MINIMUM => "'%value%' doit être supérieure à '%min%'",
             self::MSG_MAXIMUM => "'%value%' doit être inférieure à '%max%'"
         );
-    
+
         public function isValid($value)
         {
             $this->_setValue($value);
-    
+
             if (!is_numeric($value)) {
                 $this->_error(self::MSG_NUMERIC);
                 return false;
             }
-    
+
             if ($value < $this->minimum) {
                 $this->_error(self::MSG_MINIMUM);
                 return false;
             }
-    
+
             if ($value > $this->maximum) {
                 $this->_error(self::MSG_MAXIMUM);
                 return false;
             }
-    
+
             return true;
         }
     }
@@ -196,15 +196,15 @@
                     <listitem>
                         <para>est au moins une longueur de 8 caractères,</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>contient au moins une lettre majuscule,</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>contient au moins une lettre minuscule,</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>et contient au moins un caractère de chiffre.</para>
                     </listitem>
@@ -220,7 +220,7 @@
         const UPPER  = 'upper';
         const LOWER  = 'lower';
         const DIGIT  = 'digit';
-    
+
         protected $_messageTemplates = array(
             self::LENGTH =>
                 "'%value%' doit avoir une longueur d'au moins 8 caractères",
@@ -231,33 +231,33 @@
             self::DIGIT  =>
                 "'%value%' doit contenir au moins un chiffre"
         );
-    
+
         public function isValid($value)
         {
             $this->_setValue($value);
-    
+
             $isValid = true;
-    
+
             if (strlen($value) < 8) {
                 $this->_error(self::LENGTH);
                 $isValid = false;
             }
-    
+
             if (!preg_match('/[A-Z]/', $value)) {
                 $this->_error(self::UPPER);
                 $isValid = false;
             }
-    
+
             if (!preg_match('/[a-z]/', $value)) {
                 $this->_error(self::LOWER);
                 $isValid = false;
             }
-    
+
             if (!preg_match('/\d/', $value)) {
                 $this->_error(self::DIGIT);
                 $isValid = false;
             }
-    
+
             return $isValid;
         }
     }

@@ -22,12 +22,12 @@
             peuvent aussi être définis avec des méthodes plus tard : <code>setUri()</code> et
             <code>setConfig()</code>. <example id="zend.http.client.introduction.example-1">
                     <title>Instanciation d'un objet Zend_Http_Client</title>
-    
+
                     <programlisting role="php"><![CDATA[
     $client = new Zend_Http_Client('http://example.org', array(
         'maxredirects' => 0,
         'timeout'      => 30));
-    
+
     // OU
     $client = new Zend_Http_Client();
     $client->setUri('http://example.org');
@@ -59,119 +59,119 @@
             paramètre de configuration. Fixer ces paramètres est optionnel, ils ont tous une valeur
             par défaut. <table id="zend.http.client.configuration.table">
                     <title>Zend_Http_Client : paramètres de configuration</title>
-    
+
                     <tgroup cols="4">
                         <thead>
                             <row>
                                 <entry>Paramètre</entry>
-    
+
                                 <entry>Description</entry>
-    
+
                                 <entry>Valeur attendue</entry>
-    
+
                                 <entry>Valeur par défaut</entry>
                             </row>
                         </thead>
-    
+
                         <tbody>
                             <row>
                                 <entry>maxredirects</entry>
-    
+
                                 <entry>Nombre maximum de redirections à suivre (0 = aucune)</entry>
-    
+
                                 <entry>entier</entry>
-    
+
                                 <entry>5</entry>
                             </row>
-    
+
                             <row>
                                 <entry>strict</entry>
-    
+
                                 <entry>Validation faite ou non sur les noms d'en-têtes. Si à
                                 <code>false</code>, des fonctions de validation n'interviendront
                                 pas. Habituellement ceci ne devrait pas être changé</entry>
-    
+
                                 <entry>booléen</entry>
-    
+
                                 <entry><code>true</code></entry>
                             </row>
-    
+
                             <row>
                                 <entry>strictredirects</entry>
-    
+
                                 <entry>Est ce que le client doit suivre strictement les redirections
                                 selon la RFC2616 ? (voyez <xref
                                 linkend="zend.http.client.redirections" />)</entry>
-    
+
                                 <entry>booléen</entry>
-    
+
                                 <entry><code>false</code></entry>
                             </row>
-    
+
                             <row>
                                 <entry>useragent</entry>
-    
+
                                 <entry>La chaîne User Agent du client (envoyée en en-tête de
                                 requête)</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>'Zend_Http_Client'</entry>
                             </row>
-    
+
                             <row>
                                 <entry>timeout</entry>
-    
+
                                 <entry>Connexion timeout (secondes)</entry>
-    
+
                                 <entry>entier</entry>
-    
+
                                 <entry>10</entry>
                             </row>
-    
+
                             <row>
                                 <entry>httpversion</entry>
-    
+
                                 <entry>Version du protocole HTTP à utiliser ('1.1', '1.0' ou
                                 '0.9')</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>'1.1'</entry>
                             </row>
-    
+
                             <row>
                                 <entry>adapter</entry>
-    
+
                                 <entry>Classe adaptateur à utiliser (voyez <xref
                                 linkend="zend.http.client.adapters" />)</entry>
-    
+
                                 <entry>mixed</entry>
-    
+
                                 <entry>'Zend_Http_Client_Adapter_Socket'</entry>
                             </row>
-    
+
                             <row>
                                 <entry>keepalive</entry>
-    
+
                                 <entry>Utilisation du pipelining HTTP (connexion ouverte après
                                 déconnexion du client)</entry>
-    
+
                                 <entry>booléen</entry>
-    
+
                                 <entry><code>false</code></entry>
                             </row>
-    
+
                             <row>
                                 <entry>storeresponse</entry>
-    
+
                                 <entry>Stockage ou non de la dernière réponse pour une récupération
                                 ultérieure avec <code>getLastResponse()</code>. Si réglez à
                                 <code>false</code>, <code>getLastResponse()</code> retournera
                                 <code>null</code>.</entry>
-    
+
                                 <entry>booléen</entry>
-    
+
                                 <entry><code>true</code></entry>
                             </row>
                         </tbody>
@@ -188,7 +188,7 @@
             <code>request()</code>, et ceci nécessite rarement plus d'une ligne de code : <example
                     id="zend.http.client.basic-requests.example-1">
                     <title>Requête GET simple</title>
-    
+
                     <programlisting role="php"><![CDATA[
     $client = new Zend_Http_Client('http://example.org');
     $response = $client->request();
@@ -210,11 +210,11 @@
             appelée, GET est alors utilisée par défaut. <example
                     id="zend.http.client.basic-requests.example-2">
                     <title>Requêtes d'autres types que GET</title>
-    
+
                     <programlisting role="php"><![CDATA[
     // requête POST
     $response = $client->request('POST');
-    
+
     // autre manière de faire :
     $client->setMethod(Zend_Http_Client::POST);
     $response = $client->request();
@@ -233,14 +233,14 @@
             GET, et en second sa valeur. Un tableau associatif peut aussi être utilisé. <example
                     id="zend.http.client.parameters.example-1">
                     <title>Ajouts de paramètres GET</title>
-    
+
                     <programlisting role="php"><![CDATA[
     // Avec la méthode setParameterGet
     $client->setParameterGet('knight', 'lancelot');
-    
+
     // Ce qui est équivalent à :
     $client->setUri('http://example.com/index.php?knight=lancelot');
-    
+
     // Ajout de plusieurs paramètres en un appel
     $client->setParameterGet(array(
         'first_name'  => 'Bender',
@@ -257,11 +257,11 @@
             Utilisez simplement <code>setParameterPost()</code> de la même manière que sa soeur
             <code>setParameterGet()</code>. <example id="zend.http.client.parameters.example-2">
                     <title>Ajout de paramètres POST</title>
-    
+
                     <programlisting role="php"><![CDATA[
     // passage de paramètre POST simple
     $client->setParameterPost('language', 'fr');
-    
+
     // Plusieurs paramètres, dont un avec plusieurs valeurs
     $client->setParameterPost(array(
         'language'  => 'es',

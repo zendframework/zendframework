@@ -24,12 +24,12 @@
                         <simpara>SOAP serveur application PHP &lt;---&gt; SOAP client application
                         PHP</simpara>
                     </listitem>
-    
+
                     <listitem>
                         <simpara>SOAP serveur application non PHP &lt;---&gt; SOAP client
                         application PHP</simpara>
                     </listitem>
-    
+
                     <listitem>
                         <simpara>SOAP serveur application PHP &lt;---&gt; SOAP client application
                         non PHP</simpara>
@@ -68,7 +68,7 @@
                     <listitem>
                         <para>Utiliser des classes.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Utiliser des fonctions.</para>
                     </listitem>
@@ -92,12 +92,12 @@
     class My_SoapServer_Class {
     ...
     }
-    
+
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('My_SoapServer_Class');
     $autodiscover->handle();
     ]]></programlisting></para>
-    
+
         <para>
             Si vous avez besoin d'accéder au fichier WSDL généré soit pour le sauvegarder dans
             un fichier ou en tant que chaîne de caractères, vous pouvez utiliser les méthodes
@@ -138,10 +138,10 @@
     ]]></programlisting></para>
             </note>
         </sect2>
-    
+
         <sect2 id="zend.soap.autodiscovery.class">
             <title>Auto découverte de classe</title>
-    
+
         <para>
             Si une classe est utilisée dans un serveur SOAP, alors celle-ci devrait aussi être
             fournie à <classname>Zend_Soap_AutoDiscovery</classname> afin d'en générer le fichier
@@ -150,18 +150,18 @@
     $autodiscover->setClass('My_SoapServer_Class');
     $autodiscover->handle();
     ]]></programlisting></para>
-    
+
         <para>
             Les règles suivantes sont utilisées lors de la génération du fichier WSDL :
             <itemizedlist>
                     <listitem>
                         <para>Le fichier WSDL généré décrit un service Web de type RPC.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Le nom du service crée sera le nom de la classe utilisée.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] .
@@ -243,18 +243,18 @@
     ...
     $autodiscover->handle();
     ]]></programlisting></para>
-    
+
         <para>
             Les règles suivantes sont utilisées lors de la génération du fichier WSDL :
             <itemizedlist>
                     <listitem>
                         <para>Le fichier WSDL généré décrit un service web de type RPC.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Le nom du service crée sera le nom du script analysé (utilisé).</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         <code>'http://' .$_SERVER['HTTP_HOST'] .
@@ -327,27 +327,27 @@
                     <listitem>
                         <para>Chaînes strings &lt;-&gt; <code>xsd:string</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Entiers PHP &lt;-&gt; <code>xsd:int</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Flottants PHP (décimaux) &lt;-&gt; <code>xsd:float</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Booléens PHP &lt;-&gt; <code>xsd:boolean</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Tableaux PHP &lt;-&gt; <code>soap-enc:Array</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>Objets PHP &lt;-&gt; <code>xsd:struct</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         Classe PHP &lt;-&gt; basé sur la stratégie des types complexes (Voir :
@@ -414,14 +414,14 @@
     // Par défaut il s'agit de 'use' => 'encoded'
     // et 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'
     $autodiscover->setOperationBodyStyle(array('use' => 'literal', 'namespace' => 'http://framework.zend.com'));
-    
+
     // Par défaut il s'agit de 'style' => 'rpc'
     // et 'transport' => 'http://schemas.xmlsoap.org/soap/http'
     $autodiscover->setBindingStyle(array('style' => 'document', 'transport' => 'http://framework.zend.com'));
     ...
     $autodiscover->addFunction('myfunc1');
     $autodiscover->handle();
-    
+
                 ]]></programlisting>
             </para>
     </sect2>

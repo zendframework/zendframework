@@ -28,12 +28,12 @@
                     <listitem>
                         <simpara><code>$name</code> - nom du service Web décrit.</simpara>
                     </listitem>
-    
+
                     <listitem>
                         <simpara><code>$uri</code> - URI d'accès au fichier WSDL. (Une référence
                         dans le système de fichier local est possible.)</simpara>
                     </listitem>
-    
+
                     <listitem>
                         <simpara><code>$strategy</code> - identifiant optionnel pour identifier la
                         détection de stratégie des types complexes. Ceci est un booléen
@@ -297,11 +297,11 @@
                     <listitem>
                         <para><code>$name . 'Service'</code> comme nom du Web Service,</para>
                     </listitem>
-    
+
                     <listitem>
                         <para><code>$name . 'Port'</code> comme nom de portage des types,</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         <code>'tns:' . $name . 'Binding'</code> <footnote>
@@ -345,27 +345,27 @@
                     <listitem>
                         <para>chaînes PHP &lt;-&gt; <code>xsd:string</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>entiers PHP &lt;-&gt; <code>xsd:int</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>flottants PHP &lt;-&gt; <code>xsd:float</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>booléens PHP &lt;-&gt; <code>xsd:boolean</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>tableaux PHP &lt;-&gt; <code>soap-enc:Array</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para>objets PHP &lt;-&gt; <code>xsd:struct</code>.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         Classe PHP &lt;-&gt; basé sur la stratégie des types complexes (Voir :
@@ -413,10 +413,10 @@
                 correspondance d'un type PHP spécifié : <programlisting role="php"><![CDATA[
     ...
     $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
-    
+
     ...
     $soapIntType = $wsdl->getType('int');
-    
+
     ...
     class MyClass {
         ...
@@ -425,10 +425,10 @@
     $soapMyClassType = $wsdl->getType('MyClass');
     ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.soap.wsdl.types.add_complex">
                 <title>Ajouter des infos sur les types complexes</title>
-    
+
             <para>
                 <code>addComplexType($type)</code> est utilisée pour ajouter des types
                 complexes (classes PHP) à un document WSDL.

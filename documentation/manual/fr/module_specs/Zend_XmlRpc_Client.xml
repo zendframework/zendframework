@@ -327,7 +327,7 @@ $result = $client->call('foo.bar', array(array()));
             <para>
                 <note>
                         <title>Conversion automatique</title>
-    
+
                     <para>
                         Lorsque vous créez un objet <classname>Zend_XmlRpc_Value</classname>,
                         sa valeur est déterminée par un type PHP. Celui-ci va être converti vers le

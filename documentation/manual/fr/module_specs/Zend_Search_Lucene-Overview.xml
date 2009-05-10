@@ -133,7 +133,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                       $contents,
                                                       'utf-8'));
     ]]></programlisting></para>
-    
+
         <para>
             Si le paramètre d'encodage est omis, la locale courante est alors utilisée pour le
             déterminer à l'exécution. Par exemple : <programlisting role="php"><![CDATA[
@@ -141,7 +141,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     ...
     $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
     ]]></programlisting></para>
-    
+
         <para>
             Les champs sont toujours stockés et retournés depuis l'index en UTF-8. Toute
             conversion requise vers UTF-8 est effectuée automatiquement.
@@ -324,7 +324,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
     $index->addDocument($doc);
     ]]></programlisting></para>
-    
+
         <para>
             La classe <classname>Zend_Search_Lucene_Document_Html</classname> utilise les
             méthodes <code>DOMDocument::loadHTML()</code> et
@@ -384,7 +384,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
                                                   'Document annotation text'));
     $index->addDocument($doc);
     ]]></programlisting></para>
-    
+
         <para>
             Les liens des documents ne sont pas inclus dans le document généré, mais ils
             peuvent être récupérés avec les méthodes
@@ -395,7 +395,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $linksArray = $doc->getLinks();
     $headerLinksArray = $doc->getHeaderLinks();
     ]]></programlisting></para>
-    
+
         <para>
             A partir de Zend Framework 1.6, il est également possible d'exclure les balises
             "link" dont l'attribut <code>rel</code> vaut <code>'nofollow'</code>. Utilisez
@@ -420,7 +420,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
     $index->addDocument($doc);
     ]]></programlisting></para>
-    
+
         <para>
             La classe <classname>Zend_Search_Lucene_Document_Docx</classname> utilise la
             classe <code>ZipArchive</code> et les méthodes de <code>simplexml</code> pour analyser
@@ -488,10 +488,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $index->addDocument($doc);
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.search.lucene.index-creation.pptx-documents">
             <title>Document Powerpoint 2007</title>
-    
+
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse de
             documents Powerpoint 2007. On peut créer directement un document depuis un fichier
@@ -499,7 +499,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
     $index->addDocument($doc);
     ]]></programlisting></para>
-    
+
         <para>
             La classe <classname>Zend_Search_Lucene_Document_Pptx</classname> utilise la
             classe <code>ZipArchive</code> et les méthodes de <code>simplexml</code> pour analyser
@@ -565,10 +565,10 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $index->addDocument($doc);
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.search.lucene.index-creation.xlsx-documents">
             <title>Documents Excel 2007</title>
-    
+
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse de
             documents Excel 2007. On peut créer directement un document depuis un fichier Excel 2007
@@ -576,7 +576,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
     $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
     $index->addDocument($doc);
     ]]></programlisting></para>
-    
+
         <para>
             La classe <classname>Zend_Search_Lucene_Document_Xlsx</classname> utilise la
             classe <code>ZipArchive</code> et les méthodes de <code>simplexml</code> pour analyser

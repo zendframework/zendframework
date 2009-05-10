@@ -96,7 +96,7 @@
             <programlisting role="php"><![CDATA[
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 ]]></programlisting></para>
-    
+
         <para>
             Pour une meilleure intégration, vous pouvez utiliser la fabrique
             <code>factory()</code>:
@@ -106,7 +106,7 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
             <programlisting role="php"><![CDATA[
 $paginator = Zend_Paginator::factory($array);
 ]]></programlisting></para>
-    
+
             <note>
             <para>
                 Pour l'adaptateur <code>Null</code>, il faut spécifier un chiffre à son
@@ -124,7 +124,7 @@ $paginator = Zend_Paginator::factory($array);
             <programlisting role="php"><![CDATA[
 $paginator->setCurrentPageNumber($page);
 ]]></programlisting></para>
-    
+
         <para>
             La manière la plus simple de suivre et scruter cette valeur est via l'URL. Nous
             recommandons l'utilisation d'un routeur compatible avec
@@ -146,7 +146,7 @@ routes.example.defaults.page = 1
 routes.example.reqs.articleName = \w+
 routes.example.reqs.page = \d+
 ]]></programlisting></para>
-    
+
         <para>
             Avec une telle route (et en utilisant les composants MVC de Zend Framework), vous
             pourriez spécifier le numéro de la page de cette manière :
@@ -156,7 +156,7 @@ routes.example.reqs.page = \d+
             <programlisting role="php"><![CDATA[
 $paginator->setCurrentPageNumber($this->_getParam('page'));
 ]]></programlisting></para>
-    
+
         <para>
             Il y a d'autres options disponibles, voyez <link
             linkend="zend.paginator.configuration">la configuration</link> pour plus de
@@ -174,10 +174,10 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
 $this->view->paginator = $paginator;
 ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.paginator.rendering">
             <title>Rendre des pages avec les scripts de vue</title>
-    
+
         <para>
             Le script de vue va être utilisé pour rendre les éléments de la page (bien sûr si
             <classname>Zend_Paginator</classname> est utilisé à cet effet), et pour afficher les
@@ -209,7 +209,7 @@ $this->view->paginator = $paginator;
 </body>
 </html>
 ]]></programlisting></para>
-    
+
         <para>
             Notez l'appel à l'aide de vue en fin de script. <code>PaginationControl</code>
             accepte jusqu'à quatre paramètres : l'instance du paginateur, un type de défilement
@@ -309,7 +309,7 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial(
 );
 $paginator->setView($view);
 ]]></programlisting></para>
-    
+
         <para>
             Utilisez dès lors un simple <code>echo</code> dans le script de vue pour le rendu
             du paginateur complet:
@@ -319,7 +319,7 @@ $paginator->setView($view);
             <programlisting role="php"><![CDATA[
 <?php echo $this->paginator; ?>
 ]]></programlisting></para>
-    
+
             <note>
             <para>
                 Bien sûr, il est possible d'utiliser Zend_paginator avec d'autres moteurs de
@@ -330,7 +330,7 @@ $paginator->setView($view);
                 <programlisting role="php"><![CDATA[
 $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting></para>
-    
+
             <para>
                 Vous pouvez ainsi accéder aux valeurs du paginateur grâce à un template comme
                 ceci :
@@ -341,10 +341,10 @@ $smarty->assign('pages', $paginator->getPages());
 {$pages.pageCount}
 ]]></programlisting></para>
             </note>
-    
+
             <sect3 id="zend.paginator.usage.rendering.example-controls">
                 <title>Exemples de contrôles de pagination</title>
-    
+
             <para>
                 Voici quelques exemples qui vous aideront à démarrer avec le
                 paginateur:
@@ -389,7 +389,7 @@ Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 </div>
 <?php endif; ?>
 ]]></programlisting></para>
-    
+
             <para>
                 Pagination d'objets :<programlisting role="php"><![CDATA[
 <!--
@@ -438,7 +438,7 @@ of <?= $this->totalItemCount; ?>
 </div>
 <?php endif; ?>
 ]]></programlisting></para>
-    
+
             <para>
                 Pagination Dropdown :<programlisting role="php"><![CDATA[
 <?php if ($this->pageCount): ?>
@@ -463,10 +463,10 @@ $('paginationControl').observe('change', function() {
 </script>
 ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.paginator.usage.rendering.properties">
                 <title>Liste des propriétés</title>
-    
+
             <para>
                 Les options suivantes sont disponibles pour contrôler la pagination dans les
                 partials de vue :

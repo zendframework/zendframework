@@ -56,7 +56,7 @@
             <programlisting role="php"><![CDATA[
     return array_slice($this->_array, $offset, $itemCountPerPage);
     ]]></programlisting></para>
-    
+
         <para>
             Regardez les adaptateurs fournis par défaut (ils implémentent tous
             <classname>Zend_Paginator_Adapter_Interface</classname>) pour avoir une idée de la
@@ -77,7 +77,7 @@
             <programlisting role="php"><![CDATA[
     public function getPages(Zend_Paginator $paginator, $pageRange = null);
     ]]></programlisting></para>
-    
+
         <para>
             Cette méthode doit calculer des bornes inférieures et supérieures des numéros de
             page dans la plage des pages dites "local" (c'est-à-dire qui sont proches de la page
@@ -95,7 +95,7 @@
             <programlisting role="php"><![CDATA[
     return $paginator->getPagesInRange($lowerBound, $upperBound);
     ]]></programlisting></para>
-    
+
         <para>
             Il n'y a rien de spécial au sujet de cet appel ; c'est simplement une méthode
             pratique pour vérifier la validité de la limite inférieure et supérieure et pour
@@ -115,10 +115,10 @@
     Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.paginator.advanced.caching">
             <title>Fonctionnalité de mise en cache</title>
-    
+
         <para>
             <classname>Zend_Paginator</classname> peut mettre en cache les données qu'il a
             déjà fourni, empêchant ainsi l'adaptateur de les rechercher chaque fois qu'ils sont
@@ -135,7 +135,7 @@
     $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
     Zend_Paginator::setCache($cache);
     ]]></programlisting></para>
-    
+
         <para>
             Tant que Zend_Paginator possède une instance de Zend_Cache_Core, les données
             seront mises en cache. Parfois vous ne voudrez pas mettre en cache les données même si
@@ -152,7 +152,7 @@
     $paginator->setCacheEnable(false);
     // le cache est maintenant désactivé
     ]]></programlisting></para>
-    
+
         <para>
             Quand un cache est paramétré, les données y sont automatiquement stockées et
             extraites. Il peut alors être utile de vider le cache manuellement. Vous pouvez réaliser
@@ -169,14 +169,14 @@
     // la page 1 est maintenant en cache
     $page3Items = $paginator->getItemsByPage(3);
     // la page 3 est maintenant en cache
-    
+
     // effacer le cache associé à la page 3
     $paginator->clearPageItemCache(3);
-    
+
     // effacer tout le cache
     $paginator->clearPageItemCache();
     ]]></programlisting></para>
-    
+
         <para>
             Changer le nombre d'éléments par page videra tout le cache comme s'il était devenu
             invalide :
@@ -188,11 +188,11 @@
     Zend_Paginator::setCache($cache);
     // récupérer des éléments
     $items = $paginator->getCurrentItems();
-    
+
     // toutes les données vont être effacées du cache :
     $paginator->setItemCountPerPage(2);
     ]]></programlisting></para>
-    
+
         <para>
             Il est aussi possible de voir les données en cache et de les appeler directement
             grâce à la méthode <code>getPageItemCache()</code> :
@@ -203,11 +203,11 @@
     $paginator = Zend_Paginator::factory($someData);
     $paginator->setItemCountPerPage(3);
     Zend_Paginator::setCache($cache);
-    
+
     // récupérer des éléments
     $items = $paginator->getCurrentItems();
     $otherItems = $paginator->getItemsPerPage(4);
-    
+
     // voir ces éléments sous la forme d'un tableau à 2-dimensions :
     var_dump($paginator->getPageItemCache());
     ]]></programlisting></para>

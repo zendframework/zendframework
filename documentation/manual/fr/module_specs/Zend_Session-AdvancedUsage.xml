@@ -55,7 +55,7 @@ Zend_Session::start();
     php_value session.auto_start 0
     ]]></programlisting></para>
                 </listitem>
-    
+
                 <listitem>
                 <para>
                     Mauvaise : n'utilisez pas la fonction <ulink

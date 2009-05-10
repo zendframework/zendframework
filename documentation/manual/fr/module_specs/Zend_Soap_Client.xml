@@ -33,7 +33,7 @@
                     <listitem>
                         <para><code>$wsdl</code> : l'URI du fichier WSDL.</para>
                     </listitem>
-    
+
                     <listitem>
                         <para><code>$options</code> : options de création.</para>
                     </listitem>
@@ -218,7 +218,7 @@
     //****************************************************************
     //                Fin du code du serveur
     //****************************************************************
-    
+
     $client = new Zend_Soap_Client("MyService.wsdl");
     ...
     // $result1 est une chaine

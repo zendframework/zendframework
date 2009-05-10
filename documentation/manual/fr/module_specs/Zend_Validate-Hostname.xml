@@ -57,7 +57,7 @@
         }
     }
     ]]></programlisting></para>
-    
+
     <para>
         Vous pouvez utiliser <code>ALLOW_ALL</code> pour accepter tous les types de domaines.
         De même, vous pouvez créer des configurations combinant ces différents types. Par exemple,
@@ -67,9 +67,9 @@
     $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                              Zend_Validate_Hostname::ALLOW_IP);
     ]]></programlisting></para>
-    
+
         <para><emphasis>Validation de Nom de Domaine International (IDN)</emphasis></para>
-    
+
     <para>
         Certains noms de domaines nationaux (Country Code Top Level Domains ou ccTLD), comme
         .de (Allemagne), supporte les caractères internationaux dans leurs noms de domaine. Ceci est
@@ -83,31 +83,31 @@
                 <listitem>
                     <para>at (Autriche)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>ch (Suisse)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>li (Liechtenstein)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>de (Allemagne)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>fi (Finlande)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>hu (Hongrie)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>no (Norvège)</para>
                 </listitem>
-    
+
                 <listitem>
                     <para>se (Suède)</para>
                 </listitem>

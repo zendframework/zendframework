@@ -14,7 +14,7 @@
     $validateurChaine = new Zend_Validate();
     $validateurChaine->addValidator(new Zend_Validate_StringLength(6, 12))
                      ->addValidator(new Zend_Validate_Alnum());
-    
+
     // Validation de l'identifiant
     if ($validateurChaine->isValid($identifiant)) {
         // l'identifiant est testé avec succès
@@ -45,7 +45,7 @@
     $validateurChaine->addValidator(new Zend_Validate_StringLength(6, 12), true)
                      ->addValidator(new Zend_Validate_Alnum());
     ]]></programlisting></para>
-    
+
     <para>
         Tout objet qui implémente <classname>Zend_Validate_Interface</classname> peut être
         utilisé dans une chaîne de validation.

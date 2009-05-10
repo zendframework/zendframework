@@ -22,15 +22,15 @@
                     <listitem>
                         <para><classname>Zend_Http_Client_Adapter_Socket</classname> (défaut)</para>
                     </listitem>
-    
+
                     <listitem>
                         <para><classname>Zend_Http_Client_Adapter_Proxy</classname></para>
                     </listitem>
-    
+
                     <listitem>
                         <para><classname>Zend_Http_Client_Adapter_Test</classname></para>
                     </listitem>
-    
+
                     <listitem>
                         <para><classname>Zend_Http_Client_Adapter_Curl</classname></para>
                     </listitem>
@@ -61,65 +61,65 @@
             <classname>Zend_Http_Client-&gt;setConfig()</classname> ou au constructeur du client.
             <table id="zend.http.client.adapter.socket.configuration.table">
                     <title>Zend_Http_Client_Adapter_Socket configuration</title>
-    
+
                     <tgroup cols="4">
                         <thead>
                             <row>
                                 <entry>Paramètre</entry>
-    
+
                                 <entry>Description</entry>
-    
+
                                 <entry>Types attendus</entry>
-    
+
                                 <entry>Valeur par défaut</entry>
                             </row>
                         </thead>
-    
+
                         <tbody>
                             <row>
                                 <entry>persistent</entry>
-    
+
                                 <entry>Utilise ou non les connexions TCP persistantes</entry>
-    
+
                                 <entry>booléen</entry>
-    
+
                                 <entry>false</entry>
                             </row>
-    
+
                             <row>
                                 <entry>ssltransport</entry>
-    
+
                                 <entry>Couche de transport SSL ('sslv2', 'tls')</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>ssl</entry>
                             </row>
-    
+
                             <row>
                                 <entry>sslcert</entry>
-    
+
                                 <entry>Chemin vers le certificat SSL encodé PEM</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>null</entry>
                             </row>
-    
+
                             <row>
                                 <entry>sslpassphrase</entry>
-    
+
                                 <entry>Phrase de passe pour le fichier de certificat SSL</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>null</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table> <note>
                     <title>Connexions TCP persistantes</title>
-    
+
                 <para>
                     L'utilisation de connexions TCP persistantes peut potentiellement
                     accélérer vos requêtes HTTP mais n'a, dans la plupart des cas, qu'un petit effet
@@ -200,68 +200,68 @@ $response = $client->request();
             nécessaires en plus du paramètre 'adapter' : <table
                     id="zend.http.client.adapters.proxy.table">
                     <title>Zend_Http_Client paramètres de configuration</title>
-    
+
                     <tgroup cols="4">
                         <thead>
                             <row>
                                 <entry>Paramètre</entry>
-    
+
                                 <entry>Description</entry>
-    
+
                                 <entry>Valeurs attendues</entry>
-    
+
                                 <entry>Valeur par défaut</entry>
                             </row>
                         </thead>
-    
+
                         <tbody>
                             <row>
                                 <entry>proxy_host</entry>
-    
+
                                 <entry>Adresse du serveur Proxy</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>'proxy.myhost.com' ou '10.1.2.3'</entry>
                             </row>
-    
+
                             <row>
                                 <entry>proxy_port</entry>
-    
+
                                 <entry>Port du serveur Proxy</entry>
-    
+
                                 <entry>entier</entry>
-    
+
                                 <entry>8080 (défaut) ou 81</entry>
                             </row>
-    
+
                             <row>
                                 <entry>proxy_user</entry>
-    
+
                                 <entry>nom d'utilisateur pour le Proxy, si requis</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>'shahar' ou '' pour aucun (défaut)</entry>
                             </row>
-    
+
                             <row>
                                 <entry>proxy_pass</entry>
-    
+
                                 <entry>Mot de passe du Proxy, si requis</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>'secret' ou '' pour aucun (défaut)</entry>
                             </row>
-    
+
                             <row>
                                 <entry>proxy_auth</entry>
-    
+
                                 <entry>Type d'authentification HTTP du Proxy</entry>
-    
+
                                 <entry>chaîne</entry>
-    
+
                                 <entry>Zend_Http_Client::AUTH_BASIC (défaut)</entry>
                             </row>
                         </tbody>

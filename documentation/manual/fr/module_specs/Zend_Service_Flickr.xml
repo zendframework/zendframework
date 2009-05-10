@@ -256,9 +256,9 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                 <para>
                     <methodsynopsis>
                             <type>int</type>
-    
+
                             <methodname>totalResults</methodname>
-    
+
                             <void />
                         </methodsynopsis>
                     </para>

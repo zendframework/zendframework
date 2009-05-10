@@ -51,10 +51,10 @@ foreach ($hits as $hit) {
 }
 ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.search.lucene.best-practice.indexing-performance">
             <title>Performance de l'indexation</title>
-    
+
         <para>
             La performance de l'indexation est un compromis entre les ressources utilisées, le
             temps d'indexation et la qualité de l'index.
@@ -84,7 +84,7 @@ $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
 ]]></programlisting></para>
-    
+
         <para>
             L'optimisation d'index fonctionne avec des "data streams" et ne consomme pas pas
             une grande quantité de mémoire, mais nécessite des ressources de processeur et du
@@ -213,7 +213,7 @@ $index->optimize();
                     <listitem>
                         <para>Pas plus grand que <emphasis>MaxBufferedDocs</emphasis>.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         Plus grand que <emphasis>MaxBufferedDocs</emphasis>, mais pas plus
@@ -327,7 +327,7 @@ $index = Zend_Search_Lucene::open($indexPath);
 
 unset($index);
 ]]></programlisting></para>
-    
+
         <para>
             Le second est d'effectuer une opération de commit avant la fin du script exécution
             :<programlisting role="php"><![CDATA[
@@ -393,10 +393,10 @@ foreach ($docIds as $id) {
 }
 ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.search.lucene.best-practice.memory-usage">
             <title>Utilisation de la mémoire</title>
-    
+
         <para>
             <classname>Zend_Search_Lucene</classname> est un module relativement gourmand en
             mémoire.
@@ -500,7 +500,7 @@ setlocale(LC_ALL, 'de_DE.iso-8859-1');
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 ...
 ]]></programlisting></para>
-    
+
         <para>
             La même approche est utilisée pour définir l'encodage des chaînes de
             requête.
@@ -519,7 +519,7 @@ $query =
 $hits = $index->find($query);
 ...
 ]]></programlisting></para>
-    
+
         <para>
             L'encodage par défaut peut également être spécifié avec la méthode
             <code>setDefaultEncoding()</code> :<programlisting role="php"><![CDATA[

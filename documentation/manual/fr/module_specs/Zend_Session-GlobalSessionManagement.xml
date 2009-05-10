@@ -189,7 +189,7 @@ Zend_Session::setOptions($config->toArray());
                         bool <code>use_only_cookies</code> - Afin d'éviter d'autres failles de
                         sécurité (concernant le trans-sid), ne changez pas cette option. <note>
                                 <title>Risque de sécurité</title>
-    
+
                             <para>
                                 Si cette option n'est pas activée, un attaquant peut
                                 facilement fixer un id de session d'une victime en lui envoyant des

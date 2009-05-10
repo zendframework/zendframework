@@ -33,16 +33,16 @@ $mail->createAttachment($monImage,
         La méthodes <code>createAttachment()</code> retourne un objet de type
         <classname>Zend_Mime_Part</classname> : <programlisting role="php"><![CDATA[
     $mail = new Zend_Mail();
-    
+
     $at = $mail->createAttachment($monImage);
     $at->type        = 'image/gif';
     $at->disposition = Zend_Mime::DISPOSITION_INLINE;
     $at->encoding    = Zend_Mime::ENCODING_8BIT;
     $at->filename    = 'test.gif';
-    
+
     $mail->send();
     ]]></programlisting></para>
-    
+
     <para>
         Une façon alternative est de créer une instance de
         <classname>Zend_Mime_Part</classname> et de l'ajouter avec la méthode

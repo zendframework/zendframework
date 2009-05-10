@@ -25,17 +25,17 @@
             (<code>php://stderr</code>). <programlisting role="php"><![CDATA[
     $redacteur = new Zend_Log_Writer_Stream('php://output');
     $logger = new Zend_Log($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting></para>
-    
+
         <para>
             Pour écrire des données dans un fichier, employer un des <ulink
             url="http://www.php.net/manual/fr/wrappers.php#wrappers.file">Filesystem URLs</ulink>:
             <programlisting role="php"><![CDATA[
     $redacteur = new Zend_Log_Writer_Stream('/chemin/vers/fichierdelog');
     $logger = new Zend_Log($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting> Par défaut, le flux s'ouvre en mode d'ajout (<code>"a"</code>). Pour
             l'ouvrir avec un mode différent, le constructeur de
@@ -50,10 +50,10 @@
     if (! $flux) {
         throw new Exception('Impossible d\'ouvrir le flux');
     }
-    
+
     $redacteur = new Zend_Log_Writer_Stream($flux);
     $logger = new Zend_Log($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting> Vous ne pouvez pas indiquer le mode pour des ressources existantes de flux.
             Le faire entraînera une <classname>Zend_Log_Exception</classname>.
@@ -75,14 +75,14 @@
                      'password' => '******',
                      'dbname'   => 'camelot');
     $db = Zend_Db::factory('PDO_MYSQL', $parametres);
-    
+
     $planDeCorrespondance = array('niveau' => 'priority', 'msg' => 'message');
     $redacteur = new Zend_Log_Writer_Db($db,
                                         'nom_de_la_table_de_log',
                                         $planDeCorrespondance);
-    
+
     $logger = new Zend_Log($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting> L'exemple ci-dessus écrit une ligne unique de données de log dans la table
             appelée <code>nom_de_la_table_de_log</code>. La colonne de base de données appelée
@@ -107,26 +107,26 @@
             pendant les essais :<programlisting role="php"><![CDATA[
     $redacteur = new Zend_Log_Writer_Null;
     $logger = new Zend_Log($redacteur);
-    
+
     // va nulle part
     $logger->info("Message d'information");
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.log.writers.mock">
             <title>Tester avec un simulacre</title>
-    
+
         <para>
             Le <classname>Zend_Log_Writer_Mock</classname> est un rédacteur très simple qui
             enregistre les données brutes qu'il reçoit dans un tableau exposé comme propriété
             publique. <programlisting role="php"><![CDATA[
     $simulacre = new Zend_Log_Writer_Mock;
     $logger = new Zend_Log($simulacre);
-    
+
     $logger->info("Message d'information");
-    
+
     var_dump($mock->events[0]);
-    
+
     // Array
     // (
     //    [timestamp] => 2007-04-06T07:16:37-07:00
@@ -135,7 +135,7 @@
     //    [priorityName] => INFO
     // )
     ]]></programlisting></para>
-    
+
         <para>
             Pour effacer les événements notés dans le simulacre, il faut simplement réaliser
             <code>$simulacre-&gt;events = array()</code>.
@@ -153,11 +153,11 @@
         new Zend_Log_Writer_Stream('/chemin/vers/premier/fichierdelog');
     $redacteur2 =
         new Zend_Log_Writer_Stream('/chemin/vers/second/fichierdelog');
-    
+
     $logger = new Zend_Log();
     $logger->addWriter($redacteur1);
     $logger->addWriter($redacteur2);
-    
+
     // va dans les 2 rédacteurs
     $logger->info("Message d'information");
     ]]></programlisting></para>

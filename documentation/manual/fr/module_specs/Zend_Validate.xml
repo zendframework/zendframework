@@ -76,7 +76,7 @@
             L'exemple suivant illustre la validation d'une adresse émail : <programlisting
             role="php"><![CDATA[
     $validator = new Zend_Validate_EmailAddress();
-    
+
     if ($validator->isValid($email)) {
         // l'email est valide
     } else {
@@ -87,10 +87,10 @@
     }
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.validate.introduction.messages">
             <title>Messages personnalisés</title>
-    
+
         <para>
             Les classes de validation fournissent une méthode <code>setMessage()</code> avec
             laquelle vous pouvez spécifier le format du message retourné par
@@ -119,27 +119,27 @@
         <para>
             <programlisting role="php"><![CDATA[
     $validator = new Zend_Validate_StringLength(8);
-    
+
     $validator->setMessage(
         'La chaîne \'%value%\' est trop courte ; '
       . 'elle doit être au moins de %min% caractères',
         Zend_Validate_StringLength::TOO_SHORT);
-    
+
     if (!$validator->isValid('word')) {
         $messages = $validator->getMessages();
         echo current($messages);
-    
+
         // affiche "La chaîne 'word' est trop courte ;
         // elle doit être au moins de 8 caractères"
     }
     ]]></programlisting></para>
-    
+
         <para>
             Vous pouvez régler des messages multiples en utilisant la méthode
             <code>setMessages()</code>. Son argument dans ce cas est un tableau de paires
             clé/message. <programlisting role="php"><![CDATA[
     $validator = new Zend_Validate_StringLength(8, 12);
-    
+
     $validator->setMessages( array(
         Zend_Validate_StringLength::TOO_SHORT =>
                 'La chaîne \'%value%\' est trop courte',
@@ -147,7 +147,7 @@
                 'La chaîne \'%value%\' est trop longue'
     ));
     ]]></programlisting></para>
-    
+
         <para>
             Si votre application exige une flexibilité encore plus grande avec laquelle elle
             rapporte les échecs de validation, vous pouvez accéder aux propriétés par le même nom
@@ -157,7 +157,7 @@
             supportées au cas par cas par chaque classe de validation. <programlisting
             role="php"><![CDATA[
     $validator = new Zend_Validate_StringLength(8, 12);
-    
+
     if (!validator->isValid('word')) {
         echo 'Echec du mot : '
             . $validator->value
@@ -169,10 +169,10 @@
     }
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.validate.introduction.static">
             <title>Utilisation de la méthode statique <code>is()</code></title>
-    
+
         <para>
             S'il est peu pratique de charger une classe de validation donnée et créer une
             instance de validateur, vous pouvez utiliser la méthode statique
@@ -187,7 +187,7 @@
         // l'email est valide
     }
     ]]></programlisting></para>
-    
+
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
             classe, s'ils sont nécessaires pour votre classe de validation. <programlisting
@@ -196,7 +196,7 @@
         // $value est compris entre 1 et 12
     }
     ]]></programlisting></para>
-    
+
         <para>
             La méthode <code>is()</code> retourne une valeur booléenne, la même que la méthode
             <code>isValid()</code>. Lors de l'utilisation de la méthode statique <code>is()</code>,

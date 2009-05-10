@@ -28,22 +28,22 @@
     $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
     $formatter = new Zend_Log_Formatter_Simple($format);
     ]]></programlisting></para>
-    
+
         <para>
             Un formateur est affecté à un objet individuel de rédacteur en utilisant la
             méthode <code>setFormatter()</code> du rédacteur : <programlisting role="php"><![CDATA[
     $redacteur = new Zend_Log_Writer_Stream('php://output');
     $formateur = new Zend_Log_Formatter_Simple('Bonjour %message%' . PHP_EOL);
     $redacteur->setFormatter($formateur);
-    
+
     $logger = new Zend_Log();
     $logger->addWriter($redacteur);
-    
+
     $logger->info('Monde');
-    
+
     // affiche "Bonjour Monde"
     ]]></programlisting></para>
-    
+
         <para>
             Le constructeur de <classname>Zend_Log_Formatter_Simple</classname> accepte un
             paramètre unique : la chaîne de formatage. Cette chaîne contient des clés entourées par
@@ -64,13 +64,13 @@
     $redacteur = new Zend_Log_Writer_Stream('php://output');
     $formateur = new Zend_Log_Formatter_Xml();
     $redacteur->setFormatter($formateur);
-    
+
     $logger = new Zend_Log();
     $logger->addWriter($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting></para>
-    
+
         <para>
             Le code ci-dessus affiche le XML suivant (des espaces supplémentaires sont ajoutés
             pour la clarté) : <programlisting role="xml"><![CDATA[
@@ -81,7 +81,7 @@
       <priorityName>INFO</priorityName>
     </logEntry>
     ]]></programlisting></para>
-    
+
         <para>
             Il est possible d'adapter l'élément racine comme indiquent faire correspondre les
             éléments XML au tableau de données d'évènements. Le constructeur de
@@ -93,10 +93,10 @@
                                             array('msg' => 'message',
                                                   'niveau' => 'priorityName'));
     $redacteur->setFormatter($formateur);
-    
+
     $logger = new Zend_Log();
     $logger->addWriter($redacteur);
-    
+
     $logger->info("Message d'information");
     ]]></programlisting> Le code ci-dessus change l'élément racine par défaut de
             <code>logEntry</code> en <code>log</code>. Il fait correspondre également les éléments

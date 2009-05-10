@@ -117,15 +117,15 @@
             dernière ligne de code exécutée. <programlisting role="php"><![CDATA[
     class Searcher {
         private static $_index;
-    
+
         public static function initIndex() {
             self::$_index = Zend_Search_Lucene::open('path/to/index');
         }
     }
-    
+
     Searcher::initIndex();
     ]]></programlisting></para>
-    
+
         <para>
             Aussi, le destructeur est correctement invoqué à ce point de l'exécution du
             programme.
@@ -154,22 +154,22 @@
             <classname>Zend_Search_Lucene</classname> :<programlisting role="php"><![CDATA[
     class Searcher {
         private static $_index;
-    
+
         public static function initIndex() {
             self::$_index = Zend_Search_Lucene::open('path/to/index');
         }
-    
+
         ...
-    
+
         public static function commit() {
             self::$_index->commit();
         }
     }
-    
+
     Searcher::initIndex();
-    
+
     ...
-    
+
     // Script shutdown routine
     ...
     Searcher::commit();

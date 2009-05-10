@@ -199,7 +199,7 @@
         public function method1($inputParam) {
             ...
         }
-    
+
         /**
          * Cette méthode accepte ...
          *
@@ -210,7 +210,7 @@
         public function method2($inputParam1, $inputParam2) {
             ...
         }
-    
+
         ...
     }
     ...
@@ -223,7 +223,7 @@
     $server->handle();
     ]]></programlisting> <note>
                     <title>Important!</title>
-    
+
                 <para>
                     Vous devriez complètement décrire chaque méthode grâce aux blocs de
                     commentaires PHPDoc dans le cas où vous souhaitez utiliser l'auto découverte du
@@ -246,7 +246,7 @@
     function function1($inputParam) {
         ...
     }
-    
+
     /**
      * Cette fonction ...
      *
@@ -265,13 +265,13 @@
     $server->handle();
     ]]></programlisting></para>
         </sect2>
-    
+
         <sect2 id="zend.soap.server.request_response">
             <title>Gestion des objets de requête et de réponse</title>
-    
+
             <note>
                 <title>Avancée</title>
-    
+
             <para>
                 Cette section décrit la gestion avancée des requêtes et réponses SOAP et
                 pourra être évitée.
@@ -303,14 +303,14 @@
     $server->setRequest();
     $server->handle();
     ]]></programlisting></para>
-    
+
             <para>
                 Un objet de requête peut être représenté de plusieurs manières différentes
                 :<itemizedlist>
                         <listitem>
                             <para>DOMDocument (casté en XML)</para>
                         </listitem>
-    
+
                         <listitem>
                         <para>
                             DOMNode (le DOMDocument attaché est extrait et casté en
@@ -345,10 +345,10 @@
     $request = $server->getLastRequest();
     ]]></programlisting></para>
             </sect3>
-    
+
             <sect3 id="zend.soap.server.request_response.response">
                 <title>Réponse</title>
-    
+
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> émet automatiquement la
                 réponse vers le flux standard de sortie. Ce comportement peut être changé en

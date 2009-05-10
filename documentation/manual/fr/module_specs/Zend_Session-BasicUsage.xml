@@ -23,7 +23,7 @@
         entrée dans le tableau de la superglobale <code>$_SESSION</code>, où l'espace de noms est
         utilisée comme une clé. <programlisting role="php"><![CDATA[
     $monNamespace = new Zend_Session_Namespace('monNamespace');
-    
+
     // $monNamespace corresponds to $_SESSION['monNamespace']
     ]]></programlisting> Il est possible d'utiliser <classname>Zend_Session</classname>
         conjointement avec d'autre code utilisant directement <code>$_SESSION</code>. Cependant,

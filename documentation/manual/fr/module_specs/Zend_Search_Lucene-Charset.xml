@@ -117,7 +117,7 @@
         echo "support UTF-8 pour PCRE désactivé.\n";
     }
     ]]></programlisting></para>
-    
+
         <para>
             Les analyseurs UTF-8 insensibles à la casse ont aussi besoin de l'extension <ulink
             url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> pour être
@@ -131,38 +131,38 @@
             role="php"><![CDATA[
     // Indexation
     setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
-    
+
     ...
-    
+
     Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-    
+
     ...
-    
+
     $doc = new Zend_Search_Lucene_Document();
-    
+
     $doc->addField(Zend_Search_Lucene_Field::UnStored(
                         'contents', strtolower($contents))
                   );
-    
+
     // champ titre (indexed, unstored)
     $doc->addField(Zend_Search_Lucene_Field::UnStored(
                         'title', strtolower($title))
                   );
-    
+
     // champ titre (unindexed, stored)
     $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
                 ]]></programlisting> <programlisting role="php"><![CDATA[
     // Recherche
     setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
-    
+
     ...
-    
+
     Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
-    
+
     ...
-    
+
     $hits = $index->find(strtolower($query));
     ]]></programlisting></para>
         </sect2>

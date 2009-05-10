@@ -332,7 +332,6 @@ echo $obj->bug_description;
 
         <para>
 
-
         </para>
 
         <example id="zend.db.statement.binding-param.example">
@@ -357,7 +356,6 @@ echo $obj->bug_description;
         <title>Binding PHP Variables to Query Results</title>
 
         <para>
-
 
         </para>
 

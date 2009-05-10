@@ -21,7 +21,7 @@
             : <example id="zend.http.response.introduction.example-1">
                     <title>Instancier un objet Zend_Http_Response en utilisant la méthode
                     factory</title>
-    
+
                     <programlisting role="php"><![CDATA[
     $str = '';
     $sock = fsockopen('www.exemple.com', 80);
@@ -29,11 +29,11 @@
             "Host: www.exemple.com\r\n" .
             "Connection: close\r\n" .
             "\r\n";
-    
+
     fwrite($sock, $req);
     while ($buff = fread($sock, 1024))
         $str .= $sock;
-    
+
     $response = Zend_Http_Response::factory($str);
     ]]></programlisting>
                 </example>

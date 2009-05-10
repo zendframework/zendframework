@@ -114,7 +114,7 @@
                     <listitem>
                         <para><code>boundary()</code>: retourne la frontière MIME.</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         <code>boundaryLine()</code>: retourne la ligne complète de la

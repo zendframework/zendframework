@@ -139,7 +139,7 @@ $cookie = Zend_Http_Cookie::fromString(
             terminée par un point-virgule (;) : <example
                     id="zend.http.cookies.cookie.instantiating.example-2">
                     <title>Passer de l'objet Zend_Http_Cookie à la chaîne</title>
-    
+
                     <programlisting role="php"><![CDATA[
     // Création d'un nouveau cookie
     $cookie = new Zend_Http_Cookie('foo',
@@ -147,13 +147,13 @@ $cookie = Zend_Http_Cookie::fromString(
                                    '.example.com',
                                    time() + 7200,
                                    '/path');
-    
+
     // Va afficher 'foo=two+words;' :
     echo $cookie->__toString();
-    
+
     // Ceci est la même chose
     echo (string) $cookie;
-    
+
     // En PHP 5.2 et plus, ceci fonctionne aussi :
     echo $cookie;
     ]]></programlisting>
@@ -170,7 +170,7 @@ $cookie = Zend_Http_Cookie::fromString(
                     <listitem>
                         <para><code>string getName()</code>: Retourne le nom du cookie</para>
                     </listitem>
-    
+
                     <listitem>
                     <para>
                         <code>string getValue()</code>: Retourne la valeur réelle (décodée),
@@ -232,7 +232,7 @@ $cookie = Zend_Http_Cookie::fromString(
         <para>
             <example id="zend.http.cookies.cookie.accessors.example-1">
                     <title>Utilisation des méthodes getter de Zend_Http_Cookie</title>
-    
+
                     <programlisting role="php"><![CDATA[
     // Création d'un cookie
     $cookie =
@@ -241,21 +241,21 @@ $cookie = Zend_Http_Cookie::fromString(
                                    . ' path=/somedir;'
                                    . 'secure;'
                                    . 'expires=Wednesday, 28-Feb-05 20:41:22 UTC');
-    
+
     echo $cookie->getName();   // Affiche 'foo'
     echo $cookie->getValue();  // Affiche 'two words'
     echo $cookie->getDomain(); // Affiche '.example.com'
     echo $cookie->getPath();   // Affiche '/'
-    
+
     echo date('Y-m-d', $cookie->getExpiryTime());
     // Affiche '2005-02-28'
-    
+
     echo ($cookie->isExpired() ? 'Yes' : 'No');
     // Affiche 'Yes'
-    
+
     echo ($cookie->isExpired(strtotime('2005-01-01') ? 'Yes' : 'No');
     // Affiche 'No'
-    
+
     echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
     // Affiche 'No'
     ]]></programlisting>

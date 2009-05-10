@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 12047 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15157 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
@@ -7,21 +7,27 @@
     <sect2 id="zend.mime.part.introduction">
         <title>Introduction</title>
 
-        <para>Cette classe représente une seule partie d'un message MIME. Elle contient le contenu actuel de la partie
-        du message ainsi que des informations sur son encodage, le type de contenu ("content-type") et le nom de fichier
-        original. Elle fournie une méthode pour générer une chaîne de caractères à partir des données stockées. Les
-        objets <classname>Zend_Mime_Part</classname> peuvent-être ajoutés à <link
-        linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> pour assembler un message multipart
-        complet.</para>
+        <para>
+            Cette classe représente une seule partie d'un message MIME. Elle contient le
+            contenu actuel de la partie du message ainsi que des informations sur son encodage, le
+            type de contenu ("content-type") et le nom de fichier original. Elle fournie une méthode
+            pour générer une chaîne de caractères à partir des données stockées. Les objets
+            <classname>Zend_Mime_Part</classname> peuvent-être ajoutés à <link
+            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link> pour
+            assembler un message multipart complet.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.part.instantiation">
         <title>Instanciation</title>
 
-        <para><classname>Zend_Mime_Part</classname> est instanciée avec une chaîne de caractères qui représente le contenu de
-        cette nouvelle partie. Le type doit être <code>OCTET-STREAM</code>, et l'encodage 8 bits. Après instanciation de
-        <classname>Zend_Mime_Part</classname>, les métas-informations peuvent être définies en accédant directement aux attributs
-        :</para>
+        <para>
+            <classname>Zend_Mime_Part</classname> est instanciée avec une chaîne de caractères
+            qui représente le contenu de cette nouvelle partie. Le type doit être
+            <code>OCTET-STREAM</code>, et l'encodage 8 bits. Après instanciation de
+            <classname>Zend_Mime_Part</classname>, les métas-informations peuvent être définies en
+            accédant directement aux attributs :
+        </para>
 
         <programlisting role="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
@@ -40,30 +46,43 @@ public $language;
     <sect2 id="zend.mime.part.methods">
         <title>Méthodes pour retourner la partie du message en une chaîne de caractères</title>
 
-        <para><code>getContent()</code> retourne le contenu encodé de MimePart en une chaîne de caractères en utilisant
-        l'encodage spécifié dans l'attribut <code>$encoding</code>. Les valeurs valides sont
-        <classname>Zend_Mime::ENCODING_*</classname>, les conversions de jeux de caractères ne sont pas effectuées.</para>
+        <para>
+            <code>getContent()</code> retourne le contenu encodé de MimePart en une chaîne de
+            caractères en utilisant l'encodage spécifié dans l'attribut <code>$encoding</code>. Les
+            valeurs valides sont <classname>Zend_Mime::ENCODING_*</classname>, les conversions de
+            jeux de caractères ne sont pas effectuées.
+        </para>
 
-        <para><code>getHeaders()</code> retourne les Mime-Headers d'un MimePart générés à partir des attributs
-        accessibles publiquement. Les attributs de l'objet doivent être paramétrés correctement avant que cette méthode
-        ne soit appelée. <itemizedlist>
-                <listitem>
-                    <para><code>$charset</code> doit définir l'encodage actuel du contenu, si c'est un type texte (Texte
-                    ou HTML).</para>
+        <para>
+            <code>getHeaders()</code> retourne les Mime-Headers d'un MimePart générés à partir
+            des attributs accessibles publiquement. Les attributs de l'objet doivent être paramétrés
+            correctement avant que cette méthode ne soit appelée. <itemizedlist>
+                    <listitem>
+                    <para>
+                        <code>$charset</code> doit définir l'encodage actuel du contenu, si
+                        c'est un type texte (Texte ou HTML).
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$id</code> doit être défini pour identifier un content-id pour les images d'un mail
-                    HTML.</para>
+                    <para>
+                        <code>$id</code> doit être défini pour identifier un content-id pour
+                        les images d'un mail HTML.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$filename</code> contient le nom que le fichier aura lors de son téléchargement.</para>
+                    <para>
+                        <code>$filename</code> contient le nom que le fichier aura lors de son
+                        téléchargement.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>$disposition</code> définit si le fichier doit être traité comme une pièce jointe ou
-                    s'il est inclus dans le mail (HTML).</para>
+                    <para>
+                        <code>$disposition</code> définit si le fichier doit être traité comme
+                        une pièce jointe ou s'il est inclus dans le mail (HTML).
+                    </para>
                 </listitem>
 
                 <listitem>
@@ -75,13 +94,16 @@ public $language;
                 </listitem>
 
                 <listitem>
-                    <para><code>$location</code> peut être utilisé comme URI d'une ressource URI qui a une relation avec
-                    le contenu.</para>
+                    <para>
+                        <code>$location</code> peut être utilisé comme URI d'une ressource URI
+                        qui a une relation avec le contenu.
+                    </para>
                 </listitem>
 
                 <listitem>
                     <para><code>$language</code> définit la langue du contenu.</para>
                 </listitem>
-            </itemizedlist></para>
+                </itemizedlist>
+            </para>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 5318 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -7,37 +7,53 @@
     <sect2 id="zend.mime.mime.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_Mime</classname> est une classe de support pour gérer les messages MIME en plusieurs parties. Elle
-        est utilisé par <link linkend="zend.mail"><classname>Zend_Mail</classname></link> et <link
-        linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>, est peut-être utilisée dans l'application qui
-        nécessite un support MIME.</para>
+        <para>
+            <classname>Zend_Mime</classname> est une classe de support pour gérer les messages
+            MIME en plusieurs parties. Elle est utilisé par <link
+            linkend="zend.mail"><classname>Zend_Mail</classname></link> et <link
+            linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>, est
+            peut-être utilisée dans l'application qui nécessite un support MIME.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.mime.static">
         <title>Méthodes statiques et constantes</title>
 
-        <para><classname>Zend_Mime</classname> fournit un jeu simple de méthodes statiques pour fonctionner avec MIME :
-        <itemizedlist>
-                <listitem>
-                    <para><classname>Zend_Mime::isPrintable()</classname>: retourne <code>TRUE</code> si la chaine données
-                    contient des caractères non imprimables. <code>FALSE</code> dans les autres cas.</para>
+        <para>
+            <classname>Zend_Mime</classname> fournit un jeu simple de méthodes statiques pour
+            fonctionner avec MIME : <itemizedlist>
+                    <listitem>
+                    <para>
+                        <classname>Zend_Mime::isPrintable()</classname>: retourne
+                        <code>TRUE</code> si la chaine données contient des caractères non
+                        imprimables. <code>FALSE</code> dans les autres cas.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><classname>Zend_Mime::encodeBase64()encodeBase64()</classname>: encode une chaîne en utilisant
-                    base64.</para>
+                    <para>
+                        <classname>Zend_Mime::encodeBase64()encodeBase64()</classname>: encode
+                        une chaîne en utilisant base64.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><classname>Zend_Mime::encodeQuotedPrintable()</classname>: Encode une chaîne avec le mécanisme
-                    quoted-printable.</para>
+                    <para>
+                        <classname>Zend_Mime::encodeQuotedPrintable()</classname>: Encode une
+                        chaîne avec le mécanisme quoted-printable.
+                    </para>
                 </listitem>
-            </itemizedlist></para>
+                </itemizedlist>
+            </para>
 
-        <para><classname>Zend_Mime</classname> définit un jeu de constantes communément utilisé avec des messages MIME :
-        <itemizedlist>
-                <listitem>
-                    <para><classname>Zend_Mime::TYPE_OCTETSTREAM</classname>: "application/octet-stream"</para>
+        <para>
+            <classname>Zend_Mime</classname> définit un jeu de constantes communément utilisé
+            avec des messages MIME : <itemizedlist>
+                    <listitem>
+                    <para>
+                        <classname>Zend_Mime::TYPE_OCTETSTREAM</classname>:
+                        "application/octet-stream"
+                    </para>
                 </listitem>
 
                 <listitem>
@@ -57,7 +73,10 @@
                 </listitem>
 
                 <listitem>
-                    <para><classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>: "quoted-printable"</para>
+                    <para>
+                        <classname>Zend_Mime::ENCODING_QUOTEDPRINTABLE</classname>:
+                        "quoted-printable"
+                    </para>
                 </listitem>
 
                 <listitem>
@@ -65,35 +84,51 @@
                 </listitem>
 
                 <listitem>
-                    <para><classname>Zend_Mime::DISPOSITION_ATTACHMENT</classname>: "attachment"</para>
+                    <para>
+                        <classname>Zend_Mime::DISPOSITION_ATTACHMENT</classname>:
+                        "attachment"
+                    </para>
                 </listitem>
 
                 <listitem>
                     <para><classname>Zend_Mime::DISPOSITION_INLINE</classname>: "inline"</para>
                 </listitem>
-            </itemizedlist></para>
+                </itemizedlist>
+            </para>
     </sect2>
 
     <sect2 id="zend.mime.mime.instatiation">
         <title>Instancier Zend_Mime</title>
 
-        <para>Lors de l'instanciation d'un objet <classname>Zend_Mime</classname>, une frontière MIME est stockée pour qu'elle
-        soit utilisée pour tous les appels aux méthodes statiques suivant, sur cet objet. Si le constructeur est appelé
-        avec une chaîne en paramètre, cette valeur sera utilisée comme frontière MIME. Sinon, une frontière MIME
-        aléatoire sera générée lors de la construction.</para>
+        <para>
+            Lors de l'instanciation d'un objet <classname>Zend_Mime</classname>, une frontière
+            MIME est stockée pour qu'elle soit utilisée pour tous les appels aux méthodes statiques
+            suivant, sur cet objet. Si le constructeur est appelé avec une chaîne en paramètre,
+            cette valeur sera utilisée comme frontière MIME. Sinon, une frontière MIME aléatoire
+            sera générée lors de la construction.
+        </para>
 
-        <para>Un objet <classname>Zend_Mime</classname> contient les méthodes suivantes : <itemizedlist>
-                <listitem>
-                    <para><code>boundary()</code>: retourne la frontière MIME.</para>
+        <para>
+            Un objet <classname>Zend_Mime</classname> contient les méthodes suivantes :
+            <itemizedlist>
+                    <listitem>
+                        <para><code>boundary()</code>: retourne la frontière MIME.</para>
+                    </listitem>
+    
+                    <listitem>
+                    <para>
+                        <code>boundaryLine()</code>: retourne la ligne complète de la
+                        frontière MIME.
+                    </para>
                 </listitem>
 
                 <listitem>
-                    <para><code>boundaryLine()</code>: retourne la ligne complète de la frontière MIME.</para>
+                    <para>
+                        <code>mimeEnd()</code>: retourne la fin de la frontière MIME
+                        complète.
+                    </para>
                 </listitem>
-
-                <listitem>
-                    <para><code>mimeEnd()</code>: retourne la fin de la frontière MIME complète.</para>
-                </listitem>
-            </itemizedlist></para>
+                </itemizedlist>
+            </para>
     </sect2>
 </sect1>

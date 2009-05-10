@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13837 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15215 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.types">
     <title>Types de mesures</title>
 
-    <para>Tous les types de mesures supportées sont listées ci-dessous, chacun avec une exemple d'utilisation standard
-    pour ce type de mesure.</para>
+    <para>
+        Tous les types de mesures supportées sont listées ci-dessous, chacun avec une exemple
+        d'utilisation standard pour ce type de mesure.
+    </para>
 
     <table id="zend.measure.types.table-1">
         <title>Liste des types de mesure</title>
@@ -31,7 +33,8 @@
 
                     <entry>Mètres par seconde carré | <code>m/s²</code></entry>
 
-                    <entry><classname>Zend_Measure_Acceleration</classname> couvre le facteur physique d'accélération.</entry>
+                    <entry><classname>Zend_Measure_Acceleration</classname> couvre le facteur
+                    physique d'accélération.</entry>
                 </row>
 
                 <row>
@@ -41,7 +44,8 @@
 
                     <entry>Radiant | <code>rad</code></entry>
 
-                    <entry><classname>Zend_Measure_Angle</classname> couvre les dimensions angulaires.</entry>
+                    <entry><classname>Zend_Measure_Angle</classname> couvre les dimensions
+                    angulaires.</entry>
                 </row>
 
                 <row>
@@ -51,7 +55,8 @@
 
                     <entry>Mètres carré | <code>m²</code></entry>
 
-                    <entry><classname>Zend_Measure_Area</classname> couvre les superficies.</entry>
+                    <entry><classname>Zend_Measure_Area</classname> couvre les
+                    superficies.</entry>
                 </row>
 
                 <row>
@@ -61,7 +66,8 @@
 
                     <entry>Bit | <code>b</code></entry>
 
-                    <entry><classname>Zend_Measure_Binary</classname> couvre les conversions binaires.</entry>
+                    <entry><classname>Zend_Measure_Binary</classname> couvre les conversions
+                    binaires.</entry>
                 </row>
 
                 <row>
@@ -71,8 +77,8 @@
 
                     <entry>Farad | <code>F</code></entry>
 
-                    <entry><classname>Zend_Measure_Capacitance</classname> couvre le facteur physique de capacité
-                    électrique.</entry>
+                    <entry><classname>Zend_Measure_Capacitance</classname> couvre le facteur
+                    physique de capacité électrique.</entry>
                 </row>
 
                 <row>
@@ -82,8 +88,8 @@
 
                     <entry>Mètre au cube | <code>m³</code></entry>
 
-                    <entry><classname>Zend_Measure_Cooking_Volume</classname> couvre les volumes (principalement pour la cuisine
-                    ou les livres de cuisine).</entry>
+                    <entry><classname>Zend_Measure_Cooking_Volume</classname> couvre les volumes
+                    (principalement pour la cuisine ou les livres de cuisine).</entry>
                 </row>
 
                 <row>
@@ -93,8 +99,8 @@
 
                     <entry>Gramme | <code>g</code></entry>
 
-                    <entry><classname>Zend_Measure_Cooking_Weight</classname> couvre les poids (principalement pour la cuisine ou
-                    les livres de cuisine).</entry>
+                    <entry><classname>Zend_Measure_Cooking_Weight</classname> couvre les poids
+                    (principalement pour la cuisine ou les livres de cuisine).</entry>
                 </row>
 
                 <row>
@@ -104,7 +110,8 @@
 
                     <entry>Ampère | <code>A</code></entry>
 
-                    <entry><classname>Zend_Measure_Current</classname> couvre le facteur physique de courant électrique.</entry>
+                    <entry><classname>Zend_Measure_Current</classname> couvre le facteur
+                    physique de courant électrique.</entry>
                 </row>
 
                 <row>
@@ -114,8 +121,8 @@
 
                     <entry>Kilogramme par mètre au cube | <code>kg/m³</code></entry>
 
-                    <entry><classname>Zend_Measure_Density</classname> couvre le facteur physique de la masse volumique
-                    (densité).</entry>
+                    <entry><classname>Zend_Measure_Density</classname> couvre le facteur
+                    physique de la masse volumique (densité).</entry>
                 </row>
 
                 <row>
@@ -125,7 +132,8 @@
 
                     <entry>Joule | <code>J</code></entry>
 
-                    <entry><classname>Zend_Measure_Energy</classname> couvre le facteur physique de l'énergie.</entry>
+                    <entry><classname>Zend_Measure_Energy</classname> couvre le facteur physique
+                    de l'énergie.</entry>
                 </row>
 
                 <row>
@@ -135,7 +143,8 @@
 
                     <entry>Newton | <code>N</code></entry>
 
-                    <entry><classname>Zend_Measure_Force</classname> couvre le facteur physique de la force.</entry>
+                    <entry><classname>Zend_Measure_Force</classname> couvre le facteur physique
+                    de la force.</entry>
                 </row>
 
                 <row>
@@ -145,8 +154,9 @@
 
                     <entry>Kilogramme par seconde | <code>kg/s</code></entry>
 
-                    <entry><classname>Zend_Measure_Flow_Mass</classname> couvre le facteur physique de débit massique. Le poids de
-                    la masse en écoulement est utilisé comme point de référence de la classe.</entry>
+                    <entry><classname>Zend_Measure_Flow_Mass</classname> couvre le facteur
+                    physique de débit massique. Le poids de la masse en écoulement est utilisé
+                    comme point de référence de la classe.</entry>
                 </row>
 
                 <row>
@@ -156,8 +166,9 @@
 
                     <entry>Mole par seconde | <code>mol/s</code></entry>
 
-                    <entry><classname>Zend_Measure_Flow_Mole</classname> couvre le facteur physique de débit massique. La densité
-                    de la masse en écoulement est utilisée comme point de référence de la classe.</entry>
+                    <entry><classname>Zend_Measure_Flow_Mole</classname> couvre le facteur
+                    physique de débit massique. La densité de la masse en écoulement est
+                    utilisée comme point de référence de la classe.</entry>
                 </row>
 
                 <row>
@@ -167,8 +178,9 @@
 
                     <entry>Mètres au cube par seconde | <code>m³/s</code></entry>
 
-                    <entry><classname>Zend_Measure_Flow_Volume</classname> couvre le facteur physique de débit massique. Le volume
-                    de la masse en écoulement est utilisé comme point de référence de la classe.</entry>
+                    <entry><classname>Zend_Measure_Flow_Volume</classname> couvre le facteur
+                    physique de débit massique. Le volume de la masse en écoulement est utilisé
+                    comme point de référence de la classe.</entry>
                 </row>
 
                 <row>
@@ -178,7 +190,8 @@
 
                     <entry>Hertz | <code>Hz</code></entry>
 
-                    <entry><classname>Zend_Measure_Frequency</classname> couvre le facteur physique de fréquence.</entry>
+                    <entry><classname>Zend_Measure_Frequency</classname> couvre le facteur
+                    physique de fréquence.</entry>
                 </row>
 
                 <row>
@@ -188,8 +201,8 @@
 
                     <entry>Lux | <code>lx</code></entry>
 
-                    <entry><classname>Zend_Measure_Illumination</classname> couvre le facteur physique de l'éclairement
-                    lumineux.</entry>
+                    <entry><classname>Zend_Measure_Illumination</classname> couvre le facteur
+                    physique de l'éclairement lumineux.</entry>
                 </row>
 
                 <row>
@@ -199,7 +212,8 @@
 
                     <entry>Mètres | <code>m</code></entry>
 
-                    <entry><classname>Zend_Measure_Length</classname> couvre le facteur physique de longueur.</entry>
+                    <entry><classname>Zend_Measure_Length</classname> couvre le facteur physique
+                    de longueur.</entry>
                 </row>
 
                 <row>
@@ -209,7 +223,8 @@
 
                     <entry>Candela par mètre carré | <code>cd/m²</code></entry>
 
-                    <entry><classname>Zend_Measure_Ligntness</classname> couvre le facteur physique de luminosité.</entry>
+                    <entry><classname>Zend_Measure_Ligntness</classname> couvre le facteur
+                    physique de luminosité.</entry>
                 </row>
 
                 <row>
@@ -219,7 +234,8 @@
 
                     <entry>Décimal | <code>(10)</code></entry>
 
-                    <entry><classname>Zend_Measure_Number</classname> permet la conversion entre les formats numériques.</entry>
+                    <entry><classname>Zend_Measure_Number</classname> permet la conversion entre
+                    les formats numériques.</entry>
                 </row>
 
                 <row>
@@ -229,7 +245,8 @@
 
                     <entry>Watt | <code>W</code></entry>
 
-                    <entry><classname>Zend_Measure_Power</classname> couvre le facteur physique de puissance.</entry>
+                    <entry><classname>Zend_Measure_Power</classname> couvre le facteur physique
+                    de puissance.</entry>
                 </row>
 
                 <row>
@@ -239,7 +256,8 @@
 
                     <entry>Newton par mètre carré | <code>N/m²</code></entry>
 
-                    <entry><classname>Zend_Measure_Pressure</classname> couvre le facteur physique de pression.</entry>
+                    <entry><classname>Zend_Measure_Pressure</classname> couvre le facteur
+                    physique de pression.</entry>
                 </row>
 
                 <row>
@@ -249,7 +267,8 @@
 
                     <entry>Mètre par seconde | <code>m/s</code></entry>
 
-                    <entry><classname>Zend_Measure_Speed</classname> couvre le facteur physique de vitesse</entry>
+                    <entry><classname>Zend_Measure_Speed</classname> couvre le facteur physique
+                    de vitesse</entry>
                 </row>
 
                 <row>
@@ -259,7 +278,8 @@
 
                     <entry>Kelvin | <code>K</code></entry>
 
-                    <entry><classname>Zend_Measure_Temperature</classname> couvre le facteur physique de température</entry>
+                    <entry><classname>Zend_Measure_Temperature</classname> couvre le facteur
+                    physique de température</entry>
                 </row>
 
                 <row>
@@ -269,7 +289,8 @@
 
                     <entry>Seconde | <code>s</code></entry>
 
-                    <entry><classname>Zend_Measure_Time</classname> couvre le facteur physique de la durée.</entry>
+                    <entry><classname>Zend_Measure_Time</classname> couvre le facteur physique
+                    de la durée.</entry>
                 </row>
 
                 <row>
@@ -279,7 +300,8 @@
 
                     <entry>Newton mètre | <code>Nm</code></entry>
 
-                    <entry><classname>Zend_Measure_Torque</classname> couvre le facteur physique du couple</entry>
+                    <entry><classname>Zend_Measure_Torque</classname> couvre le facteur physique
+                    du couple</entry>
                 </row>
 
                 <row>
@@ -289,8 +311,9 @@
 
                     <entry>Kilogramme par mètre seconde | <code>kg/ms</code></entry>
 
-                    <entry><classname>Zend_Measure_Viscosity_Dynamic</classname> couvre le facteur physique de viscosité. La masse
-                    du fluide est utilisée comme le point de référence de la classe.</entry>
+                    <entry><classname>Zend_Measure_Viscosity_Dynamic</classname> couvre le
+                    facteur physique de viscosité. La masse du fluide est utilisée comme le
+                    point de référence de la classe.</entry>
                 </row>
 
                 <row>
@@ -300,9 +323,9 @@
 
                     <entry>Mètres carré par seconde | <code>m²/s</code></entry>
 
-                    <entry><classname>Zend_Measure_Viscosity_Kinematic</classname> couvre le facteur physique de viscosité. La
-                    distance parcouru par la masse en écoulement est utilisée comme le point de référence de la
-                    classe.</entry>
+                    <entry><classname>Zend_Measure_Viscosity_Kinematic</classname> couvre le
+                    facteur physique de viscosité. La distance parcouru par la masse en
+                    écoulement est utilisée comme le point de référence de la classe.</entry>
                 </row>
 
                 <row>
@@ -312,7 +335,8 @@
 
                     <entry>Mètre au cube | <code>m³</code></entry>
 
-                    <entry><classname>Zend_Measure_Volume</classname> couvre le facteur physique de volume (contenu).</entry>
+                    <entry><classname>Zend_Measure_Volume</classname> couvre le facteur physique
+                    de volume (contenu).</entry>
                 </row>
 
                 <row>
@@ -322,7 +346,8 @@
 
                     <entry>Kilogramme | <code>kg</code></entry>
 
-                    <entry><classname>Zend_Measure_Weight</classname> couvre le facteur physique de masse.</entry>
+                    <entry><classname>Zend_Measure_Weight</classname> couvre le facteur physique
+                    de masse.</entry>
                 </row>
             </tbody>
         </tgroup>
@@ -331,35 +356,46 @@
     <sect2 id="zend.measure.types.binary">
         <title>Conseils pour Zend_Measure_Binary</title>
 
-        <para>Quelques conventions binaires populaires, incluent des termes comme le kilo-, le mega-, le giga, etc. dans
-        les langues utilisant implicitement la base 10, tels que 1000 ou 10³. Cependant, dans le format binaire des
-        ordinateurs, ces limites doivent être vues comme un facteur de conversion de 1024 au lieu de 1000. Pour exclure
-        des confusions il y a quelques années, la notation BI a été introduite. Au lieu du "kilobyte", le kibibyte pour
-        le "kilo-binary-byte" devrait être employé.</para>
+        <para>
+            Quelques conventions binaires populaires, incluent des termes comme le kilo-, le
+            mega-, le giga, etc. dans les langues utilisant implicitement la base 10, tels que 1000
+            ou 10³. Cependant, dans le format binaire des ordinateurs, ces limites doivent être vues
+            comme un facteur de conversion de 1024 au lieu de 1000. Pour exclure des confusions il y
+            a quelques années, la notation BI a été introduite. Au lieu du "kilobyte", le kibibyte
+            pour le "kilo-binary-byte" devrait être employé.
+        </para>
 
-        <para>Dans la classe BINARY les deux notations peuvent être trouvées, comme <code>KILOBYTE = 1024 - binary
-        computer conversion KIBIBYTE = 1024 - new notation KILO_BINARY_BYTE = 1024 - new</code>, ou la notation, en
-        format long <code>KILOBYTE_SI = 1000 - SI notation for kilo (1000)</code>. Les DVDs par exemple sont identifiés
-        par la SI-notation, mais presque tous les disques durs sont marqués dans la numérotation binaire des
-        ordinateurs.</para>
+        <para>
+            Dans la classe BINARY les deux notations peuvent être trouvées, comme
+            <code>KILOBYTE = 1024 - binary computer conversion KIBIBYTE = 1024 - new notation
+            KILO_BINARY_BYTE = 1024 - new</code>, ou la notation, en format long <code>KILOBYTE_SI =
+            1000 - SI notation for kilo (1000)</code>. Les DVDs par exemple sont identifiés par la
+            SI-notation, mais presque tous les disques durs sont marqués dans la numérotation
+            binaire des ordinateurs.
+        </para>
     </sect2>
 
     <sect2 id="zend.measure.types.decimal">
         <title>Conseils pour Zend_Measure_Number</title>
 
-        <para>Le format de nombre le plus connu est le système décimal. De manière additionnelle, cette classe supporte
-        le système octal, le système hexadécimal, le système binaire, le système des chiffres romains et quelques autres
-        systèmes moins populaires. Noter que seulement la partie décimale des nombres est manipulée. Toute partie
-        fractionnelle sera effacée.</para>
+        <para>
+            Le format de nombre le plus connu est le système décimal. De manière
+            additionnelle, cette classe supporte le système octal, le système hexadécimal, le
+            système binaire, le système des chiffres romains et quelques autres systèmes moins
+            populaires. Noter que seulement la partie décimale des nombres est manipulée. Toute
+            partie fractionnelle sera effacée.
+        </para>
     </sect2>
 
     <sect2 id="zend.measure.types.roman">
         <title>Chiffres romains</title>
 
-        <para>Les chiffres romains plus grands que 4000 sont supportés. <ulink
-        url="http://fr.wikipedia.org/wiki/Num%C3%A9ration_romaine#Extensions_classiques">Ces nombres sont écrits avec
-        une barre au dessus</ulink>. Comme cette barre ne peut pas être représentée sur l'ordinateur, il faut utiliser
-        un tiret bas en début de chaîne.</para>
+        <para>
+            Les chiffres romains plus grands que 4000 sont supportés. <ulink
+            url="http://fr.wikipedia.org/wiki/Num%C3%A9ration_romaine#Extensions_classiques">Ces
+            nombres sont écrits avec une barre au dessus</ulink>. Comme cette barre ne peut pas être
+            représentée sur l'ordinateur, il faut utiliser un tiret bas en début de chaîne.
+        </para>
 
         <programlisting role="php"><![CDATA[
 $valeur_grande = '_X';

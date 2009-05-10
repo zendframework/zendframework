@@ -273,11 +273,11 @@ class Zend_Amf_Adobe_Introspector
         }
 
         // Standard types
-        if (in_array($typename, array('null', 'mixed', 'unknown_type'))) {
+        if (in_array($typename, array('void', 'null', 'mixed', 'unknown_type'))) {
             return 'Unknown';
         }
 
-        if (in_array($typename, array('void', 'string', 'object', 'Unknown', 'stdClass', 'array'))) {
+        if (in_array($typename, array('string', 'object', 'Unknown', 'stdClass', 'array'))) {
             return $typename;
         }
 

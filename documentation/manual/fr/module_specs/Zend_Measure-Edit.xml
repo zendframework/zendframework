@@ -111,15 +111,15 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
                     <title>Ajouter des mesures</title>
 
                     <programlisting role="php"><![CDATA[
-    // Définition des objets
-    $unite1 = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
-    $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+// Définition des objets
+$unite1 = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
+$unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 
-    // ajouter l'$unite2 à l'$unite1
-    $somme = $unite1->add($unite2);
+// ajouter l'$unite2 à l'$unite1
+$somme = $unite1->add($unite2);
 
-    echo $somme; // affiche "300 cm"
-    ]]></programlisting>
+echo $somme; // affiche "300 cm"
+]]></programlisting>
                 </example>
             </para>
 
@@ -141,16 +141,16 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
                     <para>La soustraction des mesures fonctionne comme l'addition.</para>
 
                     <programlisting role="php"><![CDATA[
-    // Définition des objets
-    $unite1 = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
-    $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+// Définition des objets
+$unite1 = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
+$unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 
-    // soustriare l'$unite2 de l'$unite1
-    $somme = $unite1->sub($unite2);
+// soustriare l'$unite2 de l'$unite1
+$somme = $unite1->sub($unite2);
 
-    echo $somme; // affiche "100 cm"
-    ]]></programlisting>
-                </example>
+echo $somme; // affiche "100 cm"
+]]></programlisting>
+            </example>
             </para>
     </sect2>
 
@@ -168,33 +168,33 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
                     <title>Mesures différentes</title>
 
                     <programlisting role="php"><![CDATA[
-    // Définition des mesures
-    $unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
-    $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+// Définition des mesures
+$unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 
-    if ($unite1->equals($unite2)) {
-        print "Les mesures sont identiques";
-    } else {
-        print "Les mesures sont différentes";
-    }
-    // affiche "Les mesures sont différentes"
-    ]]></programlisting>
+if ($unite1->equals($unite2)) {
+    print "Les mesures sont identiques";
+} else {
+    print "Les mesures sont différentes";
+}
+// affiche "Les mesures sont différentes"
+]]></programlisting>
                 </example> <example id="zend.measure.edit.equal.example-2">
                     <title>Mesures identiques</title>
 
                     <programlisting role="php"><![CDATA[
-    // Définition des mesures
-    $unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
-    $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+// Définition des mesures
+$unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 
-    $unite2->setType(Zend_Measure_Length::CENTIMETER);
+$unite2->setType(Zend_Measure_Length::CENTIMETER);
 
-    if ($unite1->equals($unite2)) {
-        print "Les mesures sont identiques";
-    } else {
-        print "Les mesures sont différentes";
-    } // affiche "Les mesures sont identiques"
-    ]]></programlisting>
+if ($unite1->equals($unite2)) {
+    print "Les mesures sont identiques";
+} else {
+    print "Les mesures sont différentes";
+} // affiche "Les mesures sont identiques"
+]]></programlisting>
                 </example>
             </para>
     </sect2>
@@ -214,17 +214,17 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
                     <title>Différence</title>
 
                     <programlisting role="php"><![CDATA[
-    $unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
-    $unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
-    $unite3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
+$unite1 = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
+$unite2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
+$unite3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
 
-    print "Egalité : ".$unite2->compare($unite1);
-    // affiche "Egalité : 0"
-    print "Plus petit que : ".$unite2->compare($unite3);
-    // affiche "Plus petit que : -1"
-    print "Plus grand que : ".$unite3->compare($unite2);
-    // affiche "Plus grand que : 1"
-    ]]></programlisting>
+print "Egalité : ".$unite2->compare($unite1);
+// affiche "Egalité : 0"
+print "Plus petit que : ".$unite2->compare($unite3);
+// affiche "Plus petit que : -1"
+print "Plus grand que : ".$unite3->compare($unite2);
+// affiche "Plus grand que : 1"
+]]></programlisting>
                 </example>
             </para>
     </sect2>
@@ -243,18 +243,18 @@ print "Tonne :".$unit->convertTo(Zend_Measure_Weight::TON, 3);
                     <title>Changer une valeur</title>
 
                     <programlisting role="php"><![CDATA[
-    $locale = new Zend_Locale('de_AT');
-    $unite = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
+$locale = new Zend_Locale('de_AT');
+$unite = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 
-    $unite->setValue(1.2);
-    echo $unite; // affiche "1.2 m"
+$unite->setValue(1.2);
+echo $unite; // affiche "1.2 m"
 
-    $unite->setValue(1.2, Zend_Measure_Length::KILOMETER);
-    echo $unite; // affiche "1200 km"
+$unite->setValue(1.2, Zend_Measure_Length::KILOMETER);
+echo $unite; // affiche "1200 km"
 
-    $unite->setValue("1.234,56", Zend_Measure_Length::MILLIMETER,$locale);
-    echo $unite; // affiche "1234.56 mm"
-    ]]></programlisting>
+$unite->setValue("1.234,56", Zend_Measure_Length::MILLIMETER,$locale);
+echo $unite; // affiche "1234.56 mm"
+]]></programlisting>
                 </example>
             </para>
     </sect2>

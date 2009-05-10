@@ -411,19 +411,19 @@
             <para>
                 <code>getType($type)</code> peut être utilisée pour récupérer la
                 correspondance d'un type PHP spécifié : <programlisting role="php"><![CDATA[
-    ...
-    $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
+...
+$wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
-    ...
-    $soapIntType = $wsdl->getType('int');
+...
+$soapIntType = $wsdl->getType('int');
 
+...
+class MyClass {
     ...
-    class MyClass {
-        ...
-    }
-    ...
-    $soapMyClassType = $wsdl->getType('MyClass');
-    ]]></programlisting></para>
+}
+...
+$soapMyClassType = $wsdl->getType('MyClass');
+]]></programlisting></para>
             </sect3>
 
             <sect3 id="zend.soap.wsdl.types.add_complex">

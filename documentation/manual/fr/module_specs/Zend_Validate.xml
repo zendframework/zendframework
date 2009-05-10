@@ -75,17 +75,17 @@
         <para>
             L'exemple suivant illustre la validation d'une adresse émail : <programlisting
             role="php"><![CDATA[
-    $validator = new Zend_Validate_EmailAddress();
+$validator = new Zend_Validate_EmailAddress();
 
-    if ($validator->isValid($email)) {
-        // l'email est valide
-    } else {
-        // l'email est invalide ; affichons pourquoi
-        foreach ($validator->getMessages() as $messageId => $message) {
-            echo "Echec de validation '$messageId' : $message\n";
-        }
+if ($validator->isValid($email)) {
+    // l'email est valide
+} else {
+    // l'email est invalide ; affichons pourquoi
+    foreach ($validator->getMessages() as $messageId => $message) {
+        echo "Echec de validation '$messageId' : $message\n";
     }
-    ]]></programlisting></para>
+}
+]]></programlisting></para>
         </sect2>
 
         <sect2 id="zend.validate.introduction.messages">
@@ -118,35 +118,35 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $validator = new Zend_Validate_StringLength(8);
+$validator = new Zend_Validate_StringLength(8);
 
-    $validator->setMessage(
-        'La chaîne \'%value%\' est trop courte ; '
-      . 'elle doit être au moins de %min% caractères',
-        Zend_Validate_StringLength::TOO_SHORT);
+$validator->setMessage(
+    'La chaîne \'%value%\' est trop courte ; '
+  . 'elle doit être au moins de %min% caractères',
+    Zend_Validate_StringLength::TOO_SHORT);
 
-    if (!$validator->isValid('word')) {
-        $messages = $validator->getMessages();
-        echo current($messages);
+if (!$validator->isValid('word')) {
+    $messages = $validator->getMessages();
+    echo current($messages);
 
-        // affiche "La chaîne 'word' est trop courte ;
-        // elle doit être au moins de 8 caractères"
-    }
-    ]]></programlisting></para>
+    // affiche "La chaîne 'word' est trop courte ;
+    // elle doit être au moins de 8 caractères"
+}
+]]></programlisting></para>
 
         <para>
             Vous pouvez régler des messages multiples en utilisant la méthode
             <code>setMessages()</code>. Son argument dans ce cas est un tableau de paires
             clé/message. <programlisting role="php"><![CDATA[
-    $validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(8, 12);
 
-    $validator->setMessages( array(
-        Zend_Validate_StringLength::TOO_SHORT =>
-                'La chaîne \'%value%\' est trop courte',
-        Zend_Validate_StringLength::TOO_LONG  =>
-                'La chaîne \'%value%\' est trop longue'
-    ));
-    ]]></programlisting></para>
+$validator->setMessages( array(
+    Zend_Validate_StringLength::TOO_SHORT =>
+            'La chaîne \'%value%\' est trop courte',
+    Zend_Validate_StringLength::TOO_LONG  =>
+            'La chaîne \'%value%\' est trop longue'
+));
+]]></programlisting></para>
 
         <para>
             Si votre application exige une flexibilité encore plus grande avec laquelle elle
@@ -156,18 +156,18 @@
             fournie comme argument à <code>isValid()</code>. D'autres propriétés peuvent être
             supportées au cas par cas par chaque classe de validation. <programlisting
             role="php"><![CDATA[
-    $validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(8, 12);
 
-    if (!validator->isValid('word')) {
-        echo 'Echec du mot : '
-            . $validator->value
-            . ' ; sa longueur n\'est pas compris entre '
-            . $validator->min
-            . ' et '
-            . $validator->max
-            . "\n";
-    }
-    ]]></programlisting></para>
+if (!validator->isValid('word')) {
+    echo 'Echec du mot : '
+        . $validator->value
+        . ' ; sa longueur n\'est pas compris entre '
+        . $validator->min
+        . ' et '
+        . $validator->max
+        . "\n";
+}
+]]></programlisting></para>
         </sect2>
 
         <sect2 id="zend.validate.introduction.static">
@@ -183,19 +183,19 @@
             <classname>Zend_Validate</classname>. La méthode <code>is()</code> charge
             automatiquement la classe, crée une instance et applique la méthode
             <code>isValid()</code> à la donnée d'entrée. <programlisting role="php"><![CDATA[
-    if (Zend_Validate::is($email, 'EmailAddress')) {
-        // l'email est valide
-    }
-    ]]></programlisting></para>
+if (Zend_Validate::is($email, 'EmailAddress')) {
+    // l'email est valide
+}
+]]></programlisting></para>
 
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
             classe, s'ils sont nécessaires pour votre classe de validation. <programlisting
             role="php"><![CDATA[
-    if (Zend_Validate::is($value, 'Between', array(1, 12))) {
-        // $value est compris entre 1 et 12
-    }
-    ]]></programlisting></para>
+if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+    // $value est compris entre 1 et 12
+}
+]]></programlisting></para>
 
         <para>
             La méthode <code>is()</code> retourne une valeur booléenne, la même que la méthode

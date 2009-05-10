@@ -54,8 +54,8 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    return array_slice($this->_array, $offset, $itemCountPerPage);
-    ]]></programlisting></para>
+return array_slice($this->_array, $offset, $itemCountPerPage);
+]]></programlisting></para>
 
         <para>
             Regardez les adaptateurs fournis par défaut (ils implémentent tous
@@ -75,8 +75,8 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    public function getPages(Zend_Paginator $paginator, $pageRange = null);
-    ]]></programlisting></para>
+public function getPages(Zend_Paginator $paginator, $pageRange = null);
+]]></programlisting></para>
 
         <para>
             Cette méthode doit calculer des bornes inférieures et supérieures des numéros de
@@ -93,8 +93,8 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    return $paginator->getPagesInRange($lowerBound, $upperBound);
-    ]]></programlisting></para>
+return $paginator->getPagesInRange($lowerBound, $upperBound);
+]]></programlisting></para>
 
         <para>
             Il n'y a rien de spécial au sujet de cet appel ; c'est simplement une méthode
@@ -110,10 +110,10 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $prefix = 'Mon_Paginator_StyleDefilement';
-    $path   = 'Mon/Paginator/StyleDefilement/';
-    Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
-    ]]></programlisting></para>
+$prefix = 'Mon_Paginator_StyleDefilement';
+$path   = 'Mon/Paginator/StyleDefilement/';
+Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
+]]></programlisting></para>
         </sect2>
 
         <sect2 id="zend.paginator.advanced.caching">
@@ -129,12 +129,12 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $paginator = Zend_Paginator::factory($someData);
-    $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
-    $bO = array('cache_dir'=>'/tmp');
-    $cache = Zend_cache::factory('Core', 'File', $fO, $bO);
-    Zend_Paginator::setCache($cache);
-    ]]></programlisting></para>
+$paginator = Zend_Paginator::factory($someData);
+$fO = array('lifetime' => 3600, 'automatic_serialization' => true);
+$bO = array('cache_dir'=>'/tmp');
+$cache = Zend_cache::factory('Core', 'File', $fO, $bO);
+Zend_Paginator::setCache($cache);
+]]></programlisting></para>
 
         <para>
             Tant que Zend_Paginator possède une instance de Zend_Cache_Core, les données
@@ -145,13 +145,13 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $paginator = Zend_Paginator::factory($someData);
-    // $cache est une instance de Zend_Cache_Core
-    Zend_Paginator::setCache($cache);
-    // ... plus loin dans le script
-    $paginator->setCacheEnable(false);
-    // le cache est maintenant désactivé
-    ]]></programlisting></para>
+$paginator = Zend_Paginator::factory($someData);
+// $cache est une instance de Zend_Cache_Core
+Zend_Paginator::setCache($cache);
+// ... plus loin dans le script
+$paginator->setCacheEnable(false);
+// le cache est maintenant désactivé
+]]></programlisting></para>
 
         <para>
             Quand un cache est paramétré, les données y sont automatiquement stockées et
@@ -163,19 +163,19 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $paginator = Zend_Paginator::factory($someData);
-    Zend_Paginator::setCache($cache);
-    $items = $paginator->getCurrentItems();
-    // la page 1 est maintenant en cache
-    $page3Items = $paginator->getItemsByPage(3);
-    // la page 3 est maintenant en cache
+$paginator = Zend_Paginator::factory($someData);
+Zend_Paginator::setCache($cache);
+$items = $paginator->getCurrentItems();
+// la page 1 est maintenant en cache
+$page3Items = $paginator->getItemsByPage(3);
+// la page 3 est maintenant en cache
 
-    // effacer le cache associé à la page 3
-    $paginator->clearPageItemCache(3);
+// effacer le cache associé à la page 3
+$paginator->clearPageItemCache(3);
 
-    // effacer tout le cache
-    $paginator->clearPageItemCache();
-    ]]></programlisting></para>
+// effacer tout le cache
+$paginator->clearPageItemCache();
+]]></programlisting></para>
 
         <para>
             Changer le nombre d'éléments par page videra tout le cache comme s'il était devenu
@@ -184,14 +184,14 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $paginator = Zend_Paginator::factory($someData);
-    Zend_Paginator::setCache($cache);
-    // récupérer des éléments
-    $items = $paginator->getCurrentItems();
+$paginator = Zend_Paginator::factory($someData);
+Zend_Paginator::setCache($cache);
+// récupérer des éléments
+$items = $paginator->getCurrentItems();
 
-    // toutes les données vont être effacées du cache :
-    $paginator->setItemCountPerPage(2);
-    ]]></programlisting></para>
+// toutes les données vont être effacées du cache :
+$paginator->setItemCountPerPage(2);
+]]></programlisting></para>
 
         <para>
             Il est aussi possible de voir les données en cache et de les appeler directement
@@ -200,16 +200,16 @@
 
         <para>
             <programlisting role="php"><![CDATA[
-    $paginator = Zend_Paginator::factory($someData);
-    $paginator->setItemCountPerPage(3);
-    Zend_Paginator::setCache($cache);
+$paginator = Zend_Paginator::factory($someData);
+$paginator->setItemCountPerPage(3);
+Zend_Paginator::setCache($cache);
 
-    // récupérer des éléments
-    $items = $paginator->getCurrentItems();
-    $otherItems = $paginator->getItemsPerPage(4);
+// récupérer des éléments
+$items = $paginator->getCurrentItems();
+$otherItems = $paginator->getItemsPerPage(4);
 
-    // voir ces éléments sous la forme d'un tableau à 2-dimensions :
-    var_dump($paginator->getPageItemCache());
-    ]]></programlisting></para>
+// voir ces éléments sous la forme d'un tableau à 2-dimensions :
+var_dump($paginator->getPageItemCache());
+]]></programlisting></para>
         </sect2>
     </sect1>

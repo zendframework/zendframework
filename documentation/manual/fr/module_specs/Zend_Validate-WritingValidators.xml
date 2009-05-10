@@ -60,27 +60,27 @@
             L'exemple suivant démontre comment un validateur personnalisé très simple pourrait
             être écrit. Dans ce cas-ci les règles de validation sont simplement que la valeur
             d'entrée doit être une valeur en virgule flottante. <programlisting role="php"><![CDATA[
-    class MonValidateur_Float extends Zend_Validate_Abstract
+class MonValidateur_Float extends Zend_Validate_Abstract
+{
+    const FLOAT = 'float';
+
+    protected $_messageTemplates = array(
+        self::FLOAT => "'%value%' n'est pas une valeur en virgule flottante"
+    );
+
+    public function isValid($value)
     {
-        const FLOAT = 'float';
+        $this->_setValue($value);
 
-        protected $_messageTemplates = array(
-            self::FLOAT => "'%value%' n'est pas une valeur en virgule flottante"
-        );
-
-        public function isValid($value)
-        {
-            $this->_setValue($value);
-
-            if (!is_float($value)) {
-                $this->_error();
-                return false;
-            }
-
-            return true;
+        if (!is_float($value)) {
+            $this->_error();
+            return false;
         }
+
+        return true;
     }
-    ]]></programlisting> La classe définit un modèle pour son message unique d'échec de validation,
+}
+]]></programlisting> La classe définit un modèle pour son message unique d'échec de validation,
             qui inclut le paramètre magique intégré, <code>%value%</code>. L'appel à
             <code>_setValue()</code> prépare l'objet pour insérer automatiquement la valeur examinée
             dans le message d'échec, si la validation de la valeur échoue. L'appel à
@@ -121,49 +121,49 @@
         <para>
             Ces raisons d'échec de validation sont alors traduites dans les définitions de la
             classe : <programlisting role="php"><![CDATA[
-    class MonValidateur_NumericBetween extends Zend_Validate_Abstract
+class MonValidateur_NumericBetween extends Zend_Validate_Abstract
+{
+    const MSG_NUMERIC = 'msgNumeric';
+    const MSG_MINIMUM = 'msgMinimum';
+    const MSG_MAXIMUM = 'msgMaximum';
+
+    public $minimum = 0;
+    public $maximum = 100;
+
+    protected $_messageVariables = array(
+        'min' => 'minimum',
+        'max' => 'maximum'
+    );
+
+    protected $_messageTemplates = array(
+        self::MSG_NUMERIC => "'%value%' n'est pas numérique",
+        self::MSG_MINIMUM => "'%value%' doit être supérieure à '%min%'",
+        self::MSG_MAXIMUM => "'%value%' doit être inférieure à '%max%'"
+    );
+
+    public function isValid($value)
     {
-        const MSG_NUMERIC = 'msgNumeric';
-        const MSG_MINIMUM = 'msgMinimum';
-        const MSG_MAXIMUM = 'msgMaximum';
+        $this->_setValue($value);
 
-        public $minimum = 0;
-        public $maximum = 100;
-
-        protected $_messageVariables = array(
-            'min' => 'minimum',
-            'max' => 'maximum'
-        );
-
-        protected $_messageTemplates = array(
-            self::MSG_NUMERIC => "'%value%' n'est pas numérique",
-            self::MSG_MINIMUM => "'%value%' doit être supérieure à '%min%'",
-            self::MSG_MAXIMUM => "'%value%' doit être inférieure à '%max%'"
-        );
-
-        public function isValid($value)
-        {
-            $this->_setValue($value);
-
-            if (!is_numeric($value)) {
-                $this->_error(self::MSG_NUMERIC);
-                return false;
-            }
-
-            if ($value < $this->minimum) {
-                $this->_error(self::MSG_MINIMUM);
-                return false;
-            }
-
-            if ($value > $this->maximum) {
-                $this->_error(self::MSG_MAXIMUM);
-                return false;
-            }
-
-            return true;
+        if (!is_numeric($value)) {
+            $this->_error(self::MSG_NUMERIC);
+            return false;
         }
+
+        if ($value < $this->minimum) {
+            $this->_error(self::MSG_MINIMUM);
+            return false;
+        }
+
+        if ($value > $this->maximum) {
+            $this->_error(self::MSG_MAXIMUM);
+            return false;
+        }
+
+        return true;
     }
-    ]]></programlisting> Les propriétés publiques <code>$minimum</code> et <code>$maximum</code> ont
+}
+]]></programlisting> Les propriétés publiques <code>$minimum</code> et <code>$maximum</code> ont
             été établies pour fournir les frontières minimum et maximum d'une valeur pour qu'elle
             soit validée avec succès. La classe définit également deux variables de message qui
             correspondent aux propriétés publiques et permettent que <code>min</code> et
@@ -214,54 +214,54 @@
         <para>
             La classe suivante implémente ces critères de validation : <programlisting
             role="php"><![CDATA[
-    class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
+class MonValidateur_PasswordStrength extends Zend_Validate_Abstract
+{
+    const LENGTH = 'length';
+    const UPPER  = 'upper';
+    const LOWER  = 'lower';
+    const DIGIT  = 'digit';
+
+    protected $_messageTemplates = array(
+        self::LENGTH =>
+            "'%value%' doit avoir une longueur d'au moins 8 caractères",
+        self::UPPER  =>
+            "'%value%' doit contenir au moins une lettre majuscule",
+        self::LOWER  =>
+            "'%value%' doit contenir au moins une lettre minuscule",
+        self::DIGIT  =>
+            "'%value%' doit contenir au moins un chiffre"
+    );
+
+    public function isValid($value)
     {
-        const LENGTH = 'length';
-        const UPPER  = 'upper';
-        const LOWER  = 'lower';
-        const DIGIT  = 'digit';
+        $this->_setValue($value);
 
-        protected $_messageTemplates = array(
-            self::LENGTH =>
-                "'%value%' doit avoir une longueur d'au moins 8 caractères",
-            self::UPPER  =>
-                "'%value%' doit contenir au moins une lettre majuscule",
-            self::LOWER  =>
-                "'%value%' doit contenir au moins une lettre minuscule",
-            self::DIGIT  =>
-                "'%value%' doit contenir au moins un chiffre"
-        );
+        $isValid = true;
 
-        public function isValid($value)
-        {
-            $this->_setValue($value);
-
-            $isValid = true;
-
-            if (strlen($value) < 8) {
-                $this->_error(self::LENGTH);
-                $isValid = false;
-            }
-
-            if (!preg_match('/[A-Z]/', $value)) {
-                $this->_error(self::UPPER);
-                $isValid = false;
-            }
-
-            if (!preg_match('/[a-z]/', $value)) {
-                $this->_error(self::LOWER);
-                $isValid = false;
-            }
-
-            if (!preg_match('/\d/', $value)) {
-                $this->_error(self::DIGIT);
-                $isValid = false;
-            }
-
-            return $isValid;
+        if (strlen($value) < 8) {
+            $this->_error(self::LENGTH);
+            $isValid = false;
         }
+
+        if (!preg_match('/[A-Z]/', $value)) {
+            $this->_error(self::UPPER);
+            $isValid = false;
+        }
+
+        if (!preg_match('/[a-z]/', $value)) {
+            $this->_error(self::LOWER);
+            $isValid = false;
+        }
+
+        if (!preg_match('/\d/', $value)) {
+            $this->_error(self::DIGIT);
+            $isValid = false;
+        }
+
+        return $isValid;
     }
-    ]]></programlisting>Noter que les quatre critères d'essais dans <code>isValid()</code> ne
+}
+]]></programlisting>Noter que les quatre critères d'essais dans <code>isValid()</code> ne
             renvoient pas immédiatement <code>false</code>. Ceci permet à la classe de validation de
             fournir toutes les raisons pour lesquelles le mot de passe d'entrée n'a pas réussi à
             remplir les conditions de validation. Si, par exemple, un utilisateur entre la chaîne

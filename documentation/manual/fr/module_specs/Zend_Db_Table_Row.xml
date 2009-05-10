@@ -444,16 +444,16 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                         <title>Exemple d'utilisation de la méthode init()</title>
 
                         <programlisting role="php"><![CDATA[
-    class MyApplicationRow extends Zend_Db_Table_Row_Abstract
-    {
-        protected $_role;
+class MyApplicationRow extends Zend_Db_Table_Row_Abstract
+{
+    protected $_role;
 
-        public function init()
-        {
-            $this->_role = new MyRoleClass();
-        }
+    public function init()
+    {
+        $this->_role = new MyRoleClass();
     }
-    ]]></programlisting>
+}
+]]></programlisting>
                     </example>
                 </para>
         </sect3>

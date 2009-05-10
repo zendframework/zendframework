@@ -52,8 +52,8 @@ Zend_Session::start();
                     déjà activé dans le <code>php.ini</code>, alors ajoutez le code suivant à votre
                     fichier <code>.htaccess</code> (habituellement votre dossier de démarrage HTML)
                     : <programlisting role="httpd.conf"><![CDATA[
-    php_value session.auto_start 0
-    ]]></programlisting></para>
+php_value session.auto_start 0
+]]></programlisting></para>
                 </listitem>
 
                 <listitem>

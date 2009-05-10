@@ -19,13 +19,9 @@
             <thead>
                 <row>
                     <entry>Fonctionnalité</entry>
-
                     <entry>Mbox</entry>
-
                     <entry>Maildir</entry>
-
                     <entry>Pop3</entry>
-
                     <entry>IMAP</entry>
                 </row>
             </thead>
@@ -33,85 +29,57 @@
             <tbody>
                 <row>
                     <entry>Type de stockage</entry>
-
                     <entry>local</entry>
-
                     <entry>local</entry>
-
                     <entry>distant</entry>
-
                     <entry>distant</entry>
                 </row>
 
                 <row>
                     <entry>Extraction des messages</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Oui</entry>
                 </row>
 
                 <row>
                     <entry>Extraction des parties mimes</entry>
-
                     <entry>émulé</entry>
-
                     <entry>émulé</entry>
-
                     <entry>émulé</entry>
-
                     <entry>émulé</entry>
                 </row>
 
                 <row>
                     <entry>Dossiers</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Non</entry>
-
                     <entry>Oui</entry>
                 </row>
 
                 <row>
                     <entry>Créer des messages/dossiers</entry>
-
                     <entry>Non</entry>
-
                     <entry>A faire</entry>
-
                     <entry>Non</entry>
-
                     <entry>A faire</entry>
                 </row>
 
                 <row>
                     <entry>Flags</entry>
-
                     <entry>Non</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Non</entry>
-
                     <entry>Oui</entry>
                 </row>
 
                 <row>
                     <entry>Quota</entry>
-
                     <entry>Non</entry>
-
                     <entry>Oui</entry>
-
                     <entry>Non</entry>
-
                     <entry>Non</entry>
                 </row>
             </tbody>
@@ -575,7 +543,6 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
                 <thead>
                     <row>
                         <entry>Nom global</entry>
-
                         <entry>Nom local</entry>
                     </row>
                 </thead>
@@ -583,19 +550,16 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
                 <tbody>
                     <row>
                         <entry>/INBOX</entry>
-
                         <entry>INBOX</entry>
                     </row>
 
                     <row>
                         <entry>/Archive/2005</entry>
-
                         <entry>2005</entry>
                     </row>
 
                     <row>
                         <entry>List.ZF.General</entry>
-
                         <entry>General</entry>
                     </row>
                 </tbody>

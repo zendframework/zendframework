@@ -15,16 +15,16 @@
 
     <para>
         Exemple basique : <programlisting role="php"><![CDATA[
-    $validateur = new Zend_Validate_EmailAddress();
-    if ($validateur->isValid($email)) {
-        // l'email est valide
-    } else {
-        // l'email est invalide ; afficher pourquoi
-        foreach ($validateur->getMessages() as $message) {
-            echo "$message\n";
-        }
+$validateur = new Zend_Validate_EmailAddress();
+if ($validateur->isValid($email)) {
+    // l'email est valide
+} else {
+    // l'email est invalide ; afficher pourquoi
+    foreach ($validateur->getMessages() as $message) {
+        echo "$message\n";
     }
-    ]]></programlisting> Ceci validera l'adresse émail <code>$email</code> et, en cas d'échec,
+}
+]]></programlisting> Ceci validera l'adresse émail <code>$email</code> et, en cas d'échec,
         fournira des messages d'erreur informatifs via
         <code>$validator-&gt;getMessages()</code>.
     </para>
@@ -56,16 +56,16 @@
         <classname>Zend_Validate_EmailAddress</classname> mais vous trouverez ci-dessous un exemple
         illustrant comment accepter les noms de domaines qualifiés et les hôtes locaux :
         <programlisting role="php"><![CDATA[
-    $validateur = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_LOCAL);
-    if ($validateur->isValid($email)) {
-        // l'email est valide
-    } else {
-        // l'email est invalide ; afficher pourquoi
-        foreach ($validateur->getMessages() as $message) {
-            echo "$message\n";
-        }
+$validateur = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_LOCAL);
+if ($validateur->isValid($email)) {
+    // l'email est valide
+} else {
+    // l'email est invalide ; afficher pourquoi
+    foreach ($validateur->getMessages() as $message) {
+        echo "$message\n";
     }
-    ]]></programlisting></para>
+}
+]]></programlisting></para>
 
     <para>
         <emphasis>Vérification que le nom de domaine accepte réellement
@@ -86,10 +86,10 @@
         plates-formes UNIX pour l'instant. Pour activer la vérification MX vous pouvez passer un
         deuxième paramètre au constructeur <classname>Zend_Validate_EmailAddress</classname>.
         <programlisting role="php"><![CDATA[
-    $validator =
-        new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
-                                       true);
-    ]]></programlisting> Alternativement vous pouvez passer soit <code>true</code> soit
+$validator =
+    new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
+                                   true);
+]]></programlisting> Alternativement vous pouvez passer soit <code>true</code> soit
         <code>false</code> à <code>$validator-&gt;setValidateMx()</code> pour activer ou désactiver
         la validation MX.
     </para>
@@ -110,8 +110,8 @@
         mettre hors service en changeant le paramètre via l'objet interne
         <classname>Zend_Validate_Hostname</classname> qui existe dans
         <classname>Zend_Validate_EmailAddress</classname>. <programlisting role="php"><![CDATA[
-    $validator->hostnameValidator->setValidateIdn(false);
-    ]]></programlisting> De plus amples informations concernant l'utilisation de
+$validator->hostnameValidator->setValidateIdn(false);
+]]></programlisting> De plus amples informations concernant l'utilisation de
         <code>setValidateIdn()</code> sont présentes dans la <link
         linkend="zend.validate.set.hostname">documentation de
         <classname>Zend_Validate_Hostname</classname></link>.
@@ -129,8 +129,8 @@
         activé par défaut, quoique vous puissiez le mettre hors service en changeant le paramètre
         via l'objet <classname>Zend_Validate_Hostname</classname> interne qui existe dans
         <classname>Zend_Validate_EmailAddress</classname>. <programlisting role="php"><![CDATA[
-    $validator->hostnameValidator->setValidateTld(false);
-    ]]></programlisting> De plus amples informations concernant l'utilisation de
+$validator->hostnameValidator->setValidateTld(false);
+]]></programlisting> De plus amples informations concernant l'utilisation de
         <code>setValidateTld()</code> sont présentes dans la <link
         linkend="zend.validate.set.hostname">documentation de
         <classname>Zend_Validate_Hostname</classname></link>.

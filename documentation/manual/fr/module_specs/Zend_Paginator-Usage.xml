@@ -21,7 +21,6 @@
                 <thead>
                     <row>
                         <entry>Adaptateur</entry>
-
                         <entry>Description</entry>
                     </row>
                 </thead>
@@ -29,13 +28,11 @@
                 <tbody>
                     <row>
                         <entry><code>Array</code></entry>
-
                         <entry>Utilise un tableau PHP</entry>
                     </row>
 
                     <row>
                         <entry><code>DbSelect</code></entry>
-
                         <entry>Utilise une instance de <link
                         linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
                         qui retourne un tableau</entry>
@@ -43,7 +40,6 @@
 
                     <row>
                         <entry><code>DbTableSelect</code></entry>
-
                         <entry>Utilise une instance <link
                         linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
                         qui retournera une instance de
@@ -54,14 +50,12 @@
 
                     <row>
                         <entry><code>Iterator</code></entry>
-
                         <entry>Utilise une instance implémentant <ulink
                         url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><code>Iterator</code></ulink></entry>
                     </row>
 
                     <row>
                         <entry><code>Null</code></entry>
-
                         <entry>N'utilise pas <classname>Zend_Paginator</classname> pour la
                         pagination. En revanche, les options et capacités de contrôle de la
                         pagination restent disponibles.</entry>
@@ -248,7 +242,6 @@ $this->view->paginator = $paginator;
                 <thead>
                     <row>
                         <entry>Type de défilement</entry>
-
                         <entry>Description</entry>
                     </row>
                 </thead>
@@ -256,14 +249,12 @@ $this->view->paginator = $paginator;
                 <tbody>
                     <row>
                         <entry>All</entry>
-
                         <entry>Retourne toutes les pages. Très pratique lorsqu'il y a peu de
                         pages totales.</entry>
                     </row>
 
                     <row>
                         <entry>Elastic</entry>
-
                         <entry>Un défilement de type Google qui s'étend et se contracte au fur
                         et à mesure que l'utilisateur avance dans les pages de
                         résultats.</entry>
@@ -271,7 +262,6 @@ $this->view->paginator = $paginator;
 
                     <row>
                         <entry>Jumping</entry>
-
                         <entry>Alors que l'utilisateur défile, le nombre de pages avance à la
                         fin d'une échelle donnée, puis recommence au début de l'échelle
                         suivante.</entry>
@@ -279,7 +269,6 @@ $this->view->paginator = $paginator;
 
                     <row>
                         <entry>Sliding</entry>
-
                         <entry>Un défilement de type Yahoo! qui positionne la page en cours au
                         centre d'une échelle de pages, le plus justement et près possible. Ce
                         type de défilement est le type par défaut.</entry>
@@ -479,9 +468,7 @@ $('paginationControl').observe('change', function() {
                     <thead>
                         <row>
                             <entry>Propriété</entry>
-
                             <entry>Type</entry>
-
                             <entry>Description</entry>
                         </row>
                     </thead>
@@ -489,116 +476,88 @@ $('paginationControl').observe('change', function() {
                     <tbody>
                         <row>
                             <entry>first</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro de la première page</entry>
                         </row>
 
                         <row>
                             <entry>firstItemNumber</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro absolu du premier objet(item) dans cette page</entry>
                         </row>
 
                         <row>
                             <entry>firstPageInRange</entry>
-
                             <entry>entier</entry>
-
                             <entry>Première page dans l'échelle retournée par le type de
                             défilement</entry>
                         </row>
 
                         <row>
                             <entry>current</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro de la page en cours</entry>
                         </row>
 
                         <row>
                             <entry>currentItemCount</entry>
-
                             <entry>entier</entry>
-
                             <entry>Nombre d'objets sur cette page</entry>
                         </row>
 
                         <row>
                             <entry>itemCountPerPage</entry>
-
                             <entry>integer</entry>
-
                             <entry>Nombre d'objets maximum à afficher par page</entry>
                         </row>
 
                         <row>
                             <entry>last</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro de la dernière page</entry>
                         </row>
 
                         <row>
                             <entry>lastItemNumber</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro absolu du dernier objet sur cette page</entry>
                         </row>
 
                         <row>
                             <entry>lastPageInRange</entry>
-
                             <entry>entier</entry>
-
                             <entry>Dernière page dans l'échelle retournée par le type de
                             défilement</entry>
                         </row>
 
                         <row>
                             <entry>next</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro de la page suivante</entry>
                         </row>
 
                         <row>
                             <entry>pageCount</entry>
-
                             <entry>entier</entry>
-
                             <entry>Nombre de pages</entry>
                         </row>
 
                         <row>
                             <entry>pagesInRange</entry>
-
                             <entry>tableau (array)</entry>
-
                             <entry>Tableau des pages retournées par le type de
                             défilement</entry>
                         </row>
 
                         <row>
                             <entry>previous</entry>
-
                             <entry>entier</entry>
-
                             <entry>Numéro de la page précédente</entry>
                         </row>
 
                         <row>
                             <entry>totalItemCount</entry>
-
                             <entry>entier</entry>
-
                             <entry>Nombre total d'objets</entry>
                         </row>
                     </tbody>

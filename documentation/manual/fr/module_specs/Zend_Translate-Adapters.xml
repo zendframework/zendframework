@@ -18,9 +18,7 @@
             <thead>
                 <row>
                     <entry>Adaptateur</entry>
-
                     <entry>Description</entry>
-
                     <entry>Utilisation</entry>
                 </row>
             </thead>
@@ -28,90 +26,70 @@
             <tbody>
                 <row>
                     <entry>Tableau (array)</entry>
-
                     <entry>Utilise les tableaux PHP</entry>
-
                     <entry>Petites pages ; l'utilisation la plus simple ; seulement pour les
                     programmeurs</entry>
                 </row>
 
                 <row>
                     <entry>Csv</entry>
-
                     <entry>Utilise les fichiers à séparation par virgule (*.csv/*.txt)</entry>
-
                     <entry>Format simple de fichier texte ; rapide ; problèmes possibles avec
                     les caractères Unicode</entry>
                 </row>
 
                 <row>
                     <entry>Gettext</entry>
-
                     <entry>Utilise les fichiers binaires gettext (*.mo)</entry>
-
                     <entry>Norme GNU pour Linux ; thread-safe ; besoin d'outils pour la
                     traduction</entry>
                 </row>
 
                 <row>
                     <entry>Ini</entry>
-
                     <entry>Utilise de simples fichiers ini (*.ini)</entry>
-
                     <entry>Format simple de fichier texte ; rapide ; problèmes possibles avec
                     les caractères Unicode</entry>
                 </row>
 
                 <row>
                     <entry>Tbx</entry>
-
                     <entry>Utilise les fichiers d'échange termbase (*.tbx/*.XML)</entry>
-
                     <entry>Standard industriel pour des chaînes partagées entre les applications
                     ; format XML</entry>
                 </row>
 
                 <row>
                     <entry>Tmx</entry>
-
                     <entry>Utilise les fichiers tmx (*.tmx/*.XML)</entry>
-
                     <entry>Industriellement compatible avec la traduction partagée d'application
                     ; format XML ; lisible par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>Qt</entry>
-
                     <entry>Utilise les fichiers qt linguist (*.ts)</entry>
-
                     <entry>Framework pour les applications mutualisées ; format XML ; lisible
                     par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>Xliff</entry>
-
                     <entry>Utilise les fichiers xliff (*.xliff/*.XML)</entry>
-
                     <entry>Un format plus simple que TMX mais lié à lui ; format XML ; lisible
                     par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>XmlTm</entry>
-
                     <entry>Use xmltm (*.XML) files</entry>
-
                     <entry>Standard industriel pour la traduction de type XML ; format XML ;
                     lisible par l'homme</entry>
                 </row>
 
                 <row>
                     <entry>Autres</entry>
-
                     <entry>*.sql</entry>
-
                     <entry>Différents adaptateurs pourront être implémentés dans
                     l'avenir.</entry>
                 </row>

@@ -115,16 +115,16 @@
         <para>
             Les propriétés statiques d'un objet sont détruites <emphasis>après</emphasis> la
             dernière ligne de code exécutée. <programlisting role="php"><![CDATA[
-    class Searcher {
-        private static $_index;
+class Searcher {
+    private static $_index;
 
-        public static function initIndex() {
-            self::$_index = Zend_Search_Lucene::open('path/to/index');
-        }
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
     }
+}
 
-    Searcher::initIndex();
-    ]]></programlisting></para>
+Searcher::initIndex();
+]]></programlisting></para>
 
         <para>
             Aussi, le destructeur est correctement invoqué à ce point de l'exécution du
@@ -152,28 +152,28 @@
             (validation). L'appel à <code>commit()</code> est simplement une sécurité pour éviter
             les problème d'exception dans le destructeur de
             <classname>Zend_Search_Lucene</classname> :<programlisting role="php"><![CDATA[
-    class Searcher {
-        private static $_index;
+class Searcher {
+    private static $_index;
 
-        public static function initIndex() {
-            self::$_index = Zend_Search_Lucene::open('path/to/index');
-        }
-
-        ...
-
-        public static function commit() {
-            self::$_index->commit();
-        }
+    public static function initIndex() {
+        self::$_index = Zend_Search_Lucene::open('path/to/index');
     }
 
-    Searcher::initIndex();
-
     ...
 
-    // Script shutdown routine
-    ...
-    Searcher::commit();
-    ...
-    ]]></programlisting></para>
+    public static function commit() {
+        self::$_index->commit();
+    }
+}
+
+Searcher::initIndex();
+
+...
+
+// Script shutdown routine
+...
+Searcher::commit();
+...
+]]></programlisting></para>
         </sect2>
     </sect1>

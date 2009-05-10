@@ -44,11 +44,11 @@
                 <title>Spécifier un fuseau par défaut </title>
 
                 <programlisting role="php"><![CDATA[
-    // timezone pour un américain en Californie
-    date_default_timezone_set('America/Los_Angeles');
-    // timezone pour un allemand en Allemagne
-    date_default_timezone_set('Europe/Berlin');
-    ]]></programlisting>
+// timezone pour un américain en Californie
+date_default_timezone_set('America/Los_Angeles');
+// timezone pour un allemand en Allemagne
+date_default_timezone_set('Europe/Berlin');
+]]></programlisting>
             </example>
             <emphasis>Lorsque vous créez des instances de Zend_Date, leur
             fuseau sera automatiquement mis à celui par défaut&#160;!</emphasis> Ainsi, le

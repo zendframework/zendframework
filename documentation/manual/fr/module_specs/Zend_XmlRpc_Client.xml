@@ -112,7 +112,6 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     <thead>
                         <row>
                             <entry>Type PHP natif</entry>
-
                             <entry>XML-RPC type</entry>
                         </row>
                     </thead>
@@ -120,43 +119,36 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     <tbody>
                         <row>
                             <entry>integer</entry>
-
                             <entry>int</entry>
                         </row>
 
                         <row>
                             <entry>double</entry>
-
                             <entry>double</entry>
                         </row>
 
                         <row>
                             <entry>boolean</entry>
-
                             <entry>boolean</entry>
                         </row>
 
                         <row>
                             <entry>string</entry>
-
                             <entry>string</entry>
                         </row>
 
                         <row>
                             <entry>array</entry>
-
                             <entry>array</entry>
                         </row>
 
                         <row>
                             <entry>associative array</entry>
-
                             <entry>struct</entry>
                         </row>
 
                         <row>
                             <entry>object</entry>
-
                             <entry>array</entry>
                         </row>
                     </tbody>
@@ -249,9 +241,7 @@ $result = $client->call('foo.bar', array(array()));
                     <thead>
                         <row>
                             <entry>XML-RPC Type</entry>
-
                             <entry><classname>Zend_XmlRpc_Value</classname> Constante</entry>
-
                             <entry><classname>Zend_XmlRpc_Value</classname> Objet</entry>
                         </row>
                     </thead>
@@ -259,65 +249,49 @@ $result = $client->call('foo.bar', array(array()));
                     <tbody>
                         <row>
                             <entry>int</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
 
                         <row>
                             <entry>double</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
                         </row>
 
                         <row>
                             <entry>boolean</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Boolean</classname></entry>
                         </row>
 
                         <row>
                             <entry>string</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
                         </row>
 
                         <row>
                             <entry>base64</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Base64</classname></entry>
                         </row>
 
                         <row>
                             <entry>dateTime.iso8601</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_DateTime</classname></entry>
                         </row>
 
                         <row>
                             <entry>array</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Array</classname></entry>
                         </row>
 
                         <row>
                             <entry>struct</entry>
-
                             <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname></entry>
-
                             <entry><classname>Zend_XmlRpc_Value_Struct</classname></entry>
                         </row>
                     </tbody>

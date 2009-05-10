@@ -146,20 +146,20 @@
                         <code>SOAP_COMPRESSION_ACCEPT</code>, <code>SOAP_COMPRESSION_GZIP</code> et
                         <code>SOAP_COMPRESSION_DEFLATE</code>, qui peuvent être utilisées de cette
                         manière : <programlisting role="php"><![CDATA[
-    // Accepte une response compressée
-    $client = new Zend_Soap_Client("some.wsdl",
-      array('compression' => SOAP_COMPRESSION_ACCEPT));
-    ...
-    // Compresse les requêtes avec gzip et un taux de 5
-    $client = new Zend_Soap_Client("some.wsdl",
-      array('compression' =>
-                SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5));
-    ...
-    // Compresse les requêtes en utilisant deflate
-    $client = new Zend_Soap_Client("some.wsdl",
-      array('compression' =>
-                SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
-    ]]></programlisting></para>
+// Accepte une response compressée
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' => SOAP_COMPRESSION_ACCEPT));
+...
+// Compresse les requêtes avec gzip et un taux de 5
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' =>
+            SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 5));
+...
+// Compresse les requêtes en utilisant deflate
+$client = new Zend_Soap_Client("some.wsdl",
+  array('compression' =>
+            SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE));
+]]></programlisting></para>
                     </listitem>
                 </itemizedlist>
             </para>
@@ -181,51 +181,51 @@
 
         <para>
             Voici un exemple : <programlisting role="php"><![CDATA[
-    ...
-    //****************************************************************
-    //                Code du serveur
-    //****************************************************************
-    // class MyClass {
-    //     /**
-    //      * Cette méthode utilise ...
-    //      *
-    //      * @param integer $inputParam
-    //      * @return string
-    //      */
-    //     public function method1($inputParam) {
-    //         ...
-    //     }
-    //
-    //     /**
-    //      * Cette méthode utilise ...
-    //      *
-    //      * @param integer $inputParam1
-    //      * @param string  $inputParam2
-    //      * @return float
-    //      */
-    //     public function method2($inputParam1, $inputParam2) {
-    //         ...
-    //     }
-    //
-    //     ...
-    // }
-    // ...
-    // $server = new Zend_Soap_Server(null, $options);
-    // $server->setClass('MyClass');
-    // ...
-    // $server->handle();
-    //
-    //****************************************************************
-    //                Fin du code du serveur
-    //****************************************************************
+...
+//****************************************************************
+//                Code du serveur
+//****************************************************************
+// class MyClass {
+//     /**
+//      * Cette méthode utilise ...
+//      *
+//      * @param integer $inputParam
+//      * @return string
+//      */
+//     public function method1($inputParam) {
+//         ...
+//     }
+//
+//     /**
+//      * Cette méthode utilise ...
+//      *
+//      * @param integer $inputParam1
+//      * @param string  $inputParam2
+//      * @return float
+//      */
+//     public function method2($inputParam1, $inputParam2) {
+//         ...
+//     }
+//
+//     ...
+// }
+// ...
+// $server = new Zend_Soap_Server(null, $options);
+// $server->setClass('MyClass');
+// ...
+// $server->handle();
+//
+//****************************************************************
+//                Fin du code du serveur
+//****************************************************************
 
-    $client = new Zend_Soap_Client("MyService.wsdl");
-    ...
-    // $result1 est une chaine
-    $result1 = $client->method1(10);
-    ...
-    // $result2 est un flottant
-    $result2 = $client->method2(22, 'some string');
-    ]]></programlisting></para>
+$client = new Zend_Soap_Client("MyService.wsdl");
+...
+// $result1 est une chaine
+$result1 = $client->method1(10);
+...
+// $result2 est un flottant
+$result2 = $client->method2(22, 'some string');
+]]></programlisting></para>
         </sect2>
     </sect1>

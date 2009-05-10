@@ -119,7 +119,6 @@ $writer->setDefaultPriorityStyle('TRACE');
                         <thead>
                             <row>
                                 <entry>Style</entry>
-
                                 <entry>Description</entry>
                             </row>
                         </thead>
@@ -127,48 +126,41 @@ $writer->setDefaultPriorityStyle('TRACE');
                         <tbody>
                             <row>
                                 <entry><code>LOG</code></entry>
-
                                 <entry>Affiche un message d'historisation basique</entry>
                             </row>
 
                             <row>
                                 <entry><code>INFO</code></entry>
-
                                 <entry>Affiche un message d'historisation de type
                                 information</entry>
                             </row>
 
                             <row>
                                 <entry><code>WARN</code></entry>
-
                                 <entry>Affiche un message d'historisation de type
                                 avertissement</entry>
                             </row>
 
                             <row>
                                 <entry><code>ERROR</code></entry>
-
                                 <entry>Affiche un message d'historisation de type erreur (celui-ci
                                 incrémente le compteur d'erreur de Firebug)</entry>
                             </row>
 
                             <row>
                                 <entry><code>TRACE</code></entry>
-
                                 <entry>Affiche un message d'historisation avec une trace
                                 extensible</entry>
                             </row>
 
                             <row>
                                 <entry><code>EXCEPTION</code></entry>
-
                                 <entry>Affiche un message d'historisation de type erreur avec une
                                 trace extensible</entry>
                             </row>
 
                             <row>
                                 <entry><code>TABLE</code></entry>
-
                                 <entry>Affiche un message d'historisation avec une table
                                 extensible</entry>
                             </row>

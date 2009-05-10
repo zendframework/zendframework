@@ -11,8 +11,8 @@
             Créer des objets mémoires mobiles en utilisant la méthode
             <code>create([$data])</code> du manager de mémoire : <programlisting
             role="php"><![CDATA[
-    $memObject = $memoryManager->create($data);
-    ]]></programlisting></para>
+$memObject = $memoryManager->create($data);
+]]></programlisting></para>
 
         <para>
             "Mobile" signifie que de tels objets peuvent être mis en cache et déchargés de la
@@ -27,8 +27,8 @@
             Créer des objets mémoires verrouillés en utilisant la méthode
             <code>createLocked([$data])</code> du manager de mémoire : <programlisting
             role="php"><![CDATA[
-    $memObject = $memoryManager->createLocked($data);
-    ]]></programlisting></para>
+$memObject = $memoryManager->createLocked($data);
+]]></programlisting></para>
 
         <para>
             "Verrouillé" signifie que de tels objets ne sont jamais mis en cache et déchargés
@@ -67,18 +67,18 @@
             Utilisez la propriété "<code>value</code>" du conteneur de mémoire (mobile ou
             verrouillé) pour travailler avec les données des objets mémoire : <programlisting
             role="php"><![CDATA[
-    $memObject = $memoryManager->create($data);
+$memObject = $memoryManager->create($data);
 
-    echo $memObject->value;
+echo $memObject->value;
 
-    $memObject->value = $newValue;
+$memObject->value = $newValue;
 
-    $memObject->value[$index] = '_';
+$memObject->value[$index] = '_';
 
-    echo ord($memObject->value[$index1]);
+echo ord($memObject->value[$index1]);
 
-    $memObject->value = substr($memObject->value, $start, $length);
-    ]]></programlisting></para>
+$memObject->value = substr($memObject->value, $start, $length);
+]]></programlisting></para>
 
         <para>
             Une autre manière d'accéder aux données d'objet mémoire est d'utiliser la méthode
@@ -124,51 +124,51 @@ public function &getRef();
                 chaîne, qui est changé directement par l'utilisateur de l'application. Ainsi, c'est
                 une bonne idée d'utiliser la méthode <code>getRef()</code> pour le traitement des
                 données : <programlisting role="php"><![CDATA[
-    $memObject = $memoryManager->create($data);
+$memObject = $memoryManager->create($data);
 
-    $value = &$memObject->getRef();
+$value = &$memObject->getRef();
 
-    for ($count = 0; $count < strlen($value); $count++) {
-        $char = $value[$count];
-        ...
-    }
-    ]]></programlisting></para>
+for ($count = 0; $count < strlen($value); $count++) {
+    $char = $value[$count];
+    ...
+}
+]]></programlisting></para>
             </sect3>
 
             <sect3 id="zend.memory.memory-objects.api.touch">
                 <title>La méthode touch()</title>
 
                 <programlisting role="php"><![CDATA[
-    public function touch();
-    ]]></programlisting>
+public function touch();
+]]></programlisting>
 
             <para>
                 La méthode <code>touch()</code> devrait être employée en commun avec
                 <code>getRef()</code>. Elle signale que la valeur d'objet a été changé :
                 <programlisting role="php"><![CDATA[
-    $memObject = $memoryManager->create($data);
+$memObject = $memoryManager->create($data);
+...
+
+$value = &$memObject->getRef();
+
+for ($count = 0; $count < strlen($value); $count++) {
     ...
-
-    $value = &$memObject->getRef();
-
-    for ($count = 0; $count < strlen($value); $count++) {
-        ...
-        if ($condition) {
-            $value[$count] = $char;
-        }
-        ...
+    if ($condition) {
+        $value[$count] = $char;
     }
+    ...
+}
 
-    $memObject->touch();
-    ]]></programlisting></para>
+$memObject->touch();
+]]></programlisting></para>
             </sect3>
 
             <sect3 id="zend.memory.memory-objects.api.lock">
                 <title>La méthode lock()</title>
 
                 <programlisting role="php"><![CDATA[
-    public function lock();
-    ]]></programlisting>
+public function lock();
+]]></programlisting>
 
             <para>
                 La méthode <code>lock()</code> verrouille l'objet en mémoire. Elle devrait
@@ -183,32 +183,32 @@ public function &getRef();
                 Le verrouillage d'objets dans la mémoire garantit aussi que la référence
                 retournée par la méthode <code>getRef()</code> est valable jusqu'à ce que vous
                 déverrouiller l'objet : <programlisting role="php"><![CDATA[
-    $memObject1 = $memoryManager->create($data1);
-    $memObject2 = $memoryManager->create($data2);
-    ...
+$memObject1 = $memoryManager->create($data1);
+$memObject2 = $memoryManager->create($data2);
+...
 
-    $memObject1->lock();
-    $memObject2->lock();
+$memObject1->lock();
+$memObject2->lock();
 
-    $value1 = &$memObject1->getRef();
-    $value2 = &$memObject2->getRef();
+$value1 = &$memObject1->getRef();
+$value2 = &$memObject2->getRef();
 
-    for ($count = 0; $count < strlen($value2); $count++) {
-        $value1 .= $value2[$count];
-    }
+for ($count = 0; $count < strlen($value2); $count++) {
+    $value1 .= $value2[$count];
+}
 
-    $memObject1->touch();
-    $memObject1->unlock();
-    $memObject2->unlock();
-    ]]></programlisting></para>
+$memObject1->touch();
+$memObject1->unlock();
+$memObject2->unlock();
+]]></programlisting></para>
             </sect3>
 
             <sect3 id="zend.memory.memory-objects.api.unlock">
                 <title>La méthode unlock()</title>
 
                 <programlisting role="php"><![CDATA[
-    public function unlock();
-    ]]></programlisting>
+public function unlock();
+]]></programlisting>
 
             <para>
                 La méthode <code>unlock()</code> déverrouille l'objet quand il n'est plus

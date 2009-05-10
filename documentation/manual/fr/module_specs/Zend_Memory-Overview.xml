@@ -111,18 +111,18 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
             <para>
                 Vous pouvez exploiter cet attribut <code>value</code> comme une propriété
                 d'objet : <programlisting role="php"><![CDATA[
-    $memObject = $memoryManager->create($data);
+$memObject = $memoryManager->create($data);
 
-    echo $memObject->value;
+echo $memObject->value;
 
-    $memObject->value = $newValue;
+$memObject->value = $newValue;
 
-    $memObject->value[$index] = '_';
+$memObject->value[$index] = '_';
 
-    echo ord($memObject->value[$index1]);
+echo ord($memObject->value[$index1]);
 
-    $memObject->value = substr($memObject->value, $start, $length);
-    ]]></programlisting></para>
+$memObject->value = substr($memObject->value, $start, $length);
+]]></programlisting></para>
 
                 <note>
                 <para>

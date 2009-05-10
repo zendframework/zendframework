@@ -54,11 +54,11 @@
             L'exemple simple ci-dessous démontre l'utilisation d'un filtre sur les caractères
             esperluette (<code>&amp;</code>, "ampersand" en anglais) et guillemet double
             (<code>"</code>) : <programlisting role="php"><![CDATA[
-    $htmlEntities = new Zend_Filter_HtmlEntities();
+$htmlEntities = new Zend_Filter_HtmlEntities();
 
-    echo $htmlEntities->filter('&'); // &amp;
-    echo $htmlEntities->filter('"'); // &quot;
-    ]]></programlisting></para>
+echo $htmlEntities->filter('&'); // &amp;
+echo $htmlEntities->filter('"'); // &quot;
+]]></programlisting></para>
         </sect2>
 
         <sect2 id="zend.filter.introduction.static">
@@ -74,15 +74,15 @@
             <classname>Zend_Filter</classname>. La méthode <code>get()</code> charge automatiquement
             la classe, crée une instance et applique la méthode <code>filter()</code> à la donnée
             saisie. <programlisting role="php"><![CDATA[
-    echo Zend_Filter::get('&', 'HtmlEntities');
-    ]]></programlisting></para>
+echo Zend_Filter::get('&', 'HtmlEntities');
+]]></programlisting></para>
 
         <para>
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
             classe, s'ils sont nécessaires pour votre classe de filtre. <programlisting
             role="php"><![CDATA[
-    echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
-    ]]></programlisting></para>
+echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+]]></programlisting></para>
 
         <para>
             L'utilisation statique peut être pratique pour invoquer un filtre ad hoc, mais si

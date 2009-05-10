@@ -499,11 +499,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
                 <thead>
                     <row>
                         <entry>Adaptateur</entry>
-
                         <entry>Option</entry>
-
                         <entry>Valeur standard</entry>
-
                         <entry>Description</entry>
                     </row>
                 </thead>
@@ -511,11 +508,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
                 <tbody>
                     <row>
                         <entry>Tous</entry>
-
                         <entry><code>clear</code></entry>
-
                         <entry><code>false</code></entry>
-
                         <entry>Si réglé à <code>true</code>, les traductions déjà lues seront effacées. Ceci peut être
                         utilisé au lieu de créer une nouvelle instance quand on lit de nouvelles données de
                         traduction.</entry>
@@ -523,11 +517,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
                     <row>
                         <entry>Tous</entry>
-
                         <entry><code>disableNotices</code></entry>
-
                         <entry><code>false</code></entry>
-
                         <entry>Si réglé à <code>true</code>, toutes les notices concernant la non-disponibilité des
                         traductions seront désactivées. Vous devriez mettre cette option à <code>true</code> dans votre
                         environnement de production.</entry>
@@ -535,11 +526,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
                     <row>
                         <entry>Tous</entry>
-
                         <entry><code>ignore</code></entry>
-
                         <entry><emphasis>.</emphasis></entry>
-
                         <entry>Tous les dossiers et les fichiers commençant par ce caractère seront ignorés dans la recherche
                         automatique de traductions. La valeur par défaut est <emphasis>'.'</emphasis>, ce qui signifie
                         que tous les fichiers cachés (Unix) seront ignorés. Mettre une valeur par exemple à 'tmp' aura pour effet
@@ -549,11 +537,8 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
                     <row>
                         <entry>Tous</entry>
-
                         <entry><code>scan</code></entry>
-
                         <entry><code>null</code></entry>
-
                         <entry>Si réglé à <code>null</code>, aucun scan de la structure de répertoire ne sera effectué.
                         Si réglé à <classname>Zend_Translate::LOCALE_DIRECTORY</classname>, la localisation sera détectée dans le
                         répertoire. Si réglé à <classname>Zend_Translate::LOCALE_FILENAME</classname>, la localisation sera
@@ -563,33 +548,24 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
 
                     <row>
                         <entry>Csv</entry>
-
                         <entry><code>delimiter</code></entry>
-
                         <entry><code>;</code></entry>
-
                         <entry>Définit quel signe est utilisé pour la séparation de la source et de la
                         traduction.</entry>
                     </row>
 
                     <row>
                         <entry>Csv</entry>
-
                         <entry><code>length</code></entry>
-
                         <entry><code>0</code></entry>
-
                         <entry>Définit la longueur maximum d'une ligne de fichier. Réglé à 0, la recherche sera
                         automatique.</entry>
                     </row>
 
                     <row>
                         <entry>Csv</entry>
-
                         <entry><code>enclosure</code></entry>
-
                         <entry><code>"</code></entry>
-
                         <entry>Définit le caractère d'échappement.</entry>
                     </row>
                 </tbody>

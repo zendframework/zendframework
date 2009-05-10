@@ -16,14 +16,14 @@
         structure est disponible en lecture/écriture sous la forme d'un tableau associatif en
         utilisant la propriété publique <code>properties</code> des objets
         <classname>Zend_Pdf</classname> : <programlisting role="php"><![CDATA[
-    $pdf = Zend_Pdf::load($pdfPath);
+$pdf = Zend_Pdf::load($pdfPath);
 
-    echo $pdf->properties['Title'] . "\n";
-    echo $pdf->properties['Author'] . "\n";
+echo $pdf->properties['Title'] . "\n";
+echo $pdf->properties['Author'] . "\n";
 
-    $pdf->properties['Title'] = 'Nouveau Titre.';
-    $pdf->save($pdfPath);
-    ]]></programlisting></para>
+$pdf->properties['Title'] = 'Nouveau Titre.';
+$pdf->save($pdfPath);
+]]></programlisting></para>
 
     <para>
         Les clés suivantes sont définies par la norme PDF v1.4 (Acrobat 5) : <itemizedlist>
@@ -190,26 +190,26 @@
         <classname>Zend_Pdf::getMetadata()</classname> et
         <classname>Zend_Pdf::setMetadata($metadata)</classname> : <programlisting
         role="php"><![CDATA[
-    $pdf = Zend_Pdf::load($pdfPath);
-    $metadata = $pdf->getMetadata();
-    $metadataDOM = new DOMDocument();
-    $metadataDOM->loadXML($metadata);
+$pdf = Zend_Pdf::load($pdfPath);
+$metadata = $pdf->getMetadata();
+$metadataDOM = new DOMDocument();
+$metadataDOM->loadXML($metadata);
 
-    $xpath = new DOMXPath($metadataDOM);
-    $pdfPreffixNamespaceURI = $xpath->query('/rdf:RDF/rdf:Description')
-                                    ->item(0)
-                                    ->lookupNamespaceURI('pdf');
-    $xpath->registerNamespace('pdf', $pdfPreffixNamespaceURI);
+$xpath = new DOMXPath($metadataDOM);
+$pdfPreffixNamespaceURI = $xpath->query('/rdf:RDF/rdf:Description')
+                                ->item(0)
+                                ->lookupNamespaceURI('pdf');
+$xpath->registerNamespace('pdf', $pdfPreffixNamespaceURI);
 
-    $titleNode = $xpath->query('/rdf:RDF/rdf:Description/pdf:Title')
-                       ->item(0);
-    $title = $titleNode->nodeValue;
-    ...
+$titleNode = $xpath->query('/rdf:RDF/rdf:Description/pdf:Title')
+                   ->item(0);
+$title = $titleNode->nodeValue;
+...
 
-    $titleNode->nodeValue = 'Nouveau titre';
-    $pdf->setMetadata($metadataDOM->saveXML());
-    $pdf->save($pdfPath);
-    ]]></programlisting></para>
+$titleNode->nodeValue = 'Nouveau titre';
+$pdf->setMetadata($metadataDOM->saveXML());
+$pdf->save($pdfPath);
+]]></programlisting></para>
 
     <para>
         Les propriétés communes du document sont dupliquées dans la structure Info et dans le

@@ -23,19 +23,19 @@
                     factory</title>
 
                     <programlisting role="php"><![CDATA[
-    $str = '';
-    $sock = fsockopen('www.exemple.com', 80);
-    $req =     "GET / HTTP/1.1\r\n" .
-            "Host: www.exemple.com\r\n" .
-            "Connection: close\r\n" .
-            "\r\n";
+$str = '';
+$sock = fsockopen('www.exemple.com', 80);
+$req =     "GET / HTTP/1.1\r\n" .
+        "Host: www.exemple.com\r\n" .
+        "Connection: close\r\n" .
+        "\r\n";
 
-    fwrite($sock, $req);
-    while ($buff = fread($sock, 1024))
-        $str .= $sock;
+fwrite($sock, $req);
+while ($buff = fread($sock, 1024))
+    $str .= $sock;
 
-    $response = Zend_Http_Response::factory($str);
-    ]]></programlisting>
+$response = Zend_Http_Response::factory($str);
+]]></programlisting>
                 </example>
             </para>
 

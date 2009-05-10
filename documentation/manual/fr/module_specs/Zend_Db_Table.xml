@@ -748,17 +748,17 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
                         <programlisting role="php"><![CDATA[
-    // Récupérer un rowset
-    $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
-    $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
-                                             ->order('bug_id ASC')
-                                             ->limit(10, 0));
+// Récupérer un rowset
+$rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
+$rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
+                                         ->order('bug_id ASC')
+                                         ->limit(10, 0));
 
-    // Récupérer un row
-    $row = $table->fetchRow('bug_status = "NEW"', 'bug_id ASC');
-    $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
-                                            ->order('bug_id ASC'));
-    ]]></programlisting></para>
+// Récupérer un row
+$row = $table->fetchRow('bug_status = "NEW"', 'bug_id ASC');
+$row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
+                                        ->order('bug_id ASC'));
+]]></programlisting></para>
                     </warning>
                 </para>
 

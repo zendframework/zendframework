@@ -188,40 +188,40 @@
             La première consiste à attacher des classes à l'objet
             <classname>Zend_Soap_Server</classname>, celles-ci devront alors décrire l'API du
             service en totalité : <programlisting role="php"><![CDATA[
-    ...
-    class MyClass {
-        /**
-         * Cette méthode accepte ...
-         *
-         * @param integer $inputParam
-         * @return string
-         */
-        public function method1($inputParam) {
-            ...
-        }
-
-        /**
-         * Cette méthode accepte ...
-         *
-         * @param integer $inputParam1
-         * @param string  $inputParam2
-         * @return float
-         */
-        public function method2($inputParam1, $inputParam2) {
-            ...
-        }
-
+...
+class MyClass {
+    /**
+     * Cette méthode accepte ...
+     *
+     * @param integer $inputParam
+     * @return string
+     */
+    public function method1($inputParam) {
         ...
     }
+
+    /**
+     * Cette méthode accepte ...
+     *
+     * @param integer $inputParam1
+     * @param string  $inputParam2
+     * @return float
+     */
+    public function method2($inputParam1, $inputParam2) {
+        ...
+    }
+
     ...
-    $server = new Zend_Soap_Server(null, $options);
-    // Connecte la classe au serveur Soap
-    $server->setClass('MyClass');
-    // Connecte un objet déjà initialisé au serveur Soap
-    $server->setObject(new MyClass());
-    ...
-    $server->handle();
-    ]]></programlisting> <note>
+}
+...
+$server = new Zend_Soap_Server(null, $options);
+// Connecte la classe au serveur Soap
+$server->setClass('MyClass');
+// Connecte un objet déjà initialisé au serveur Soap
+$server->setObject(new MyClass());
+...
+$server->handle();
+]]></programlisting> <note>
                     <title>Important!</title>
 
                 <para>
@@ -236,34 +236,34 @@
             La seconde manière de décrire l'API de votre service Web est d'utiliser des
             fonctions PHP conjointement avec les méthodes <code>addFunction()</code> ou
             <code>loadFunctions()</code> :<programlisting role="php"><![CDATA[
+...
+/**
+ * Cette fonction ...
+ *
+ * @param integer $inputParam
+ * @return string
+ */
+function function1($inputParam) {
     ...
-    /**
-     * Cette fonction ...
-     *
-     * @param integer $inputParam
-     * @return string
-     */
-    function function1($inputParam) {
-        ...
-    }
+}
 
-    /**
-     * Cette fonction ...
-     *
-     * @param integer $inputParam1
-     * @param string  $inputParam2
-     * @return float
-     */
-    function function2($inputParam1, $inputParam2) {
-        ...
-    }
+/**
+ * Cette fonction ...
+ *
+ * @param integer $inputParam1
+ * @param string  $inputParam2
+ * @return float
+ */
+function function2($inputParam1, $inputParam2) {
     ...
-    $server = new Zend_Soap_Server(null, $options);
-    $server->addFunction('function1');
-    $server->addFunction('function2');
-    ...
-    $server->handle();
-    ]]></programlisting></para>
+}
+...
+$server = new Zend_Soap_Server(null, $options);
+$server->addFunction('function1');
+$server->addFunction('function2');
+...
+$server->handle();
+]]></programlisting></para>
         </sect2>
 
         <sect2 id="zend.soap.server.request_response">
@@ -293,16 +293,16 @@
                 changé en passant des paramètres à la méthode <code>handle()</code> ou en spécifiant
                 sa propre requête grâce à la méthode <code>setRequest()</code> :<programlisting
                 role="php"><![CDATA[
-    ...
-    $server = new Zend_Soap_Server(...);
-    ...
-    // Affecte une requête personnalisée
-    $server->handle($request);
-    ...
-    // Affecte une requête personnalisée
-    $server->setRequest();
-    $server->handle();
-    ]]></programlisting></para>
+...
+$server = new Zend_Soap_Server(...);
+...
+// Affecte une requête personnalisée
+$server->handle($request);
+...
+// Affecte une requête personnalisée
+$server->setRequest();
+$server->handle();
+]]></programlisting></para>
 
             <para>
                 Un objet de requête peut être représenté de plusieurs manières différentes
@@ -338,12 +338,12 @@
             <para>
                 La dernière requête utilisée et traitée peut être récupérée en utilisant la
                 méthode <code>getLastRequest()</code> :<programlisting role="php"><![CDATA[
-    ...
-    $server = new Zend_Soap_Server(...);
-    ...
-    $server->handle();
-    $request = $server->getLastRequest();
-    ]]></programlisting></para>
+...
+$server = new Zend_Soap_Server(...);
+...
+$server->handle();
+$request = $server->getLastRequest();
+]]></programlisting></para>
             </sect3>
 
             <sect3 id="zend.soap.server.request_response.response">
@@ -373,13 +373,13 @@ $response = $server->handle();
             <para>
                 Autrement, la dernière réponse peut être récupérer avec la méthode
                 <code>getLastResponse()</code> :<programlisting role="php"><![CDATA[
-    ...
-    $server = new Zend_Soap_Server(...);
-    ...
-    $server->handle();
-    $response = $server->getLastResponse();
-    ...
-    ]]></programlisting></para>
+...
+$server = new Zend_Soap_Server(...);
+...
+$server->handle();
+$response = $server->getLastResponse();
+...
+]]></programlisting></para>
             </sect3>
         </sect2>
     </sect1>

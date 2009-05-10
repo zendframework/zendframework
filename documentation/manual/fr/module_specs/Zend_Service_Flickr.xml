@@ -213,9 +213,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <thead>
                             <row>
                                 <entry>Nom</entry>
-
                                 <entry>Type</entry>
-
                                 <entry>Description</entry>
                             </row>
                         </thead>
@@ -223,25 +221,19 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <tbody>
                             <row>
                                 <entry>totalResultsAvailable</entry>
-
                                 <entry>int</entry>
-
                                 <entry>Nombre total de résultats disponibles</entry>
                             </row>
 
                             <row>
                                 <entry>totalResultsReturned</entry>
-
                                 <entry>int</entry>
-
                                 <entry>Nombre total de résultats retournés</entry>
                             </row>
 
                             <row>
                                 <entry>firstResultPosition</entry>
-
                                 <entry>int</entry>
-
                                 <entry>??? The offset in the total result set of this result set
                                 ???</entry>
                             </row>
@@ -287,9 +279,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <thead>
                             <row>
                                 <entry>Nom</entry>
-
                                 <entry>Type</entry>
-
                                 <entry>Description</entry>
                             </row>
                         </thead>
@@ -297,164 +287,126 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <tbody>
                             <row>
                                 <entry>id</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Identifiant de l'image</entry>
                             </row>
 
                             <row>
                                 <entry>owner</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Le NSID du propriétaire de la photo.</entry>
                             </row>
 
                             <row>
                                 <entry>secret</entry>
-
                                 <entry>string</entry>
-
                                 <entry>La clé utilisée dans la construction de l'URL.</entry>
                             </row>
 
                             <row>
                                 <entry>server</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Le nom du serveur à utiliser pour construire
                                 l'URL.</entry>
                             </row>
 
                             <row>
                                 <entry>title</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Le titre de la photo.</entry>
                             </row>
 
                             <row>
                                 <entry>ispublic</entry>
-
                                 <entry>string</entry>
-
                                 <entry>La photo est publique.</entry>
                             </row>
 
                             <row>
                                 <entry>isfriend</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Vous pouvez voir la photo parce que vous êtes un ami du
                                 propriétaire de cette photo.</entry>
                             </row>
 
                             <row>
                                 <entry>isfamily</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Vous pouvez voir la photo parce que vous êtes de la
                                 famille du propriétaire de cette photo.</entry>
                             </row>
 
                             <row>
                                 <entry>license</entry>
-
                                 <entry>string</entry>
-
                                 <entry>La licence sous laquelle cette photo est
                                 disponible.</entry>
                             </row>
 
                             <row>
                                 <entry>dateupload</entry>
-
                                 <entry>string</entry>
-
                                 <entry>La date à laquelle la photo a été uploadée.</entry>
                             </row>
 
                             <row>
                                 <entry>datetaken</entry>
-
                                 <entry>string</entry>
-
                                 <entry>La date à laquelle la photo a été prise.</entry>
                             </row>
 
                             <row>
                                 <entry>ownername</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Le screenname du propriétaire de la photo.</entry>
                             </row>
 
                             <row>
                                 <entry>iconserver</entry>
-
                                 <entry>string</entry>
-
                                 <entry>Le serveur utilisé pour l'assemblage des ??? icon URLs
                                 ???.</entry>
                             </row>
 
                             <row>
                                 <entry>Square</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>Une miniature de l'image au format 75x75 pixels.</entry>
                             </row>
 
                             <row>
                                 <entry>Thumbnail</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>Une miniature de l'image de 100 pixels.</entry>
                             </row>
 
                             <row>
                                 <entry>Small</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>Une version en 240 pixels de l'image.</entry>
                             </row>
 
                             <row>
                                 <entry>Medium</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>Une version en 500 pixel version de l'image.</entry>
                             </row>
 
                             <row>
                                 <entry>Large</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>Une version en 640 pixel version de l'image.</entry>
                             </row>
 
                             <row>
                                 <entry>Original</entry>
-
                                 <entry><link
                                 linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
-
                                 <entry>L'image originale.</entry>
                             </row>
                         </tbody>
@@ -483,9 +435,7 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <thead>
                             <row>
                                 <entry>Nom</entry>
-
                                 <entry>Type</entry>
-
                                 <entry>Description</entry>
                             </row>
                         </thead>
@@ -493,33 +443,25 @@ echo "<a href=\"$image->clickUri\">Clicker pour l'image</a>\n";
                         <tbody>
                             <row>
                                 <entry>uri</entry>
-
                                 <entry>string</entry>
-
                                 <entry>URI de l'image originale.</entry>
                             </row>
 
                             <row>
                                 <entry>clickUri</entry>
-
                                 <entry>string</entry>
-
                                 <entry>URI cliquable (ie la page Flickr) de l'image.</entry>
                             </row>
 
                             <row>
                                 <entry>width</entry>
-
                                 <entry>int</entry>
-
                                 <entry>Largeur de l'image.</entry>
                             </row>
 
                             <row>
                                 <entry>height</entry>
-
                                 <entry>int</entry>
-
                                 <entry>Hauteur de l'image.</entry>
                             </row>
                         </tbody>

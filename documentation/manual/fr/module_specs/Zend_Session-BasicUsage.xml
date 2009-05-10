@@ -22,10 +22,10 @@
         Chaque instance de <classname>Zend_Session_Namespace</classname> correspond à une
         entrée dans le tableau de la superglobale <code>$_SESSION</code>, où l'espace de noms est
         utilisée comme une clé. <programlisting role="php"><![CDATA[
-    $monNamespace = new Zend_Session_Namespace('monNamespace');
+$monNamespace = new Zend_Session_Namespace('monNamespace');
 
-    // $monNamespace corresponds to $_SESSION['monNamespace']
-    ]]></programlisting> Il est possible d'utiliser <classname>Zend_Session</classname>
+// $monNamespace corresponds to $_SESSION['monNamespace']
+]]></programlisting> Il est possible d'utiliser <classname>Zend_Session</classname>
         conjointement avec d'autre code utilisant directement <code>$_SESSION</code>. Cependant,
         pour éviter les problèmes, il est fortement recommandé que ce code utilise seulement les
         parties de <code>$_SESSION</code> ne correspondant pas aux instances de

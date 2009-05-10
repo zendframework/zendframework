@@ -27,12 +27,12 @@
                     code statut 301 and 302</title>
 
                     <programlisting role="php"><![CDATA[
-    // Redirections strictes
-    $client->setConfig(array('strictredirects' => true)
+// Redirections strictes
+$client->setConfig(array('strictredirects' => true)
 
-    // Redirections non strictes
-    $client->setConfig(array('strictredirects' => false)
-    ]]></programlisting>
+// Redirections non strictes
+$client->setConfig(array('strictredirects' => false)
+]]></programlisting>
                 </example>
             </para>
 
@@ -54,18 +54,18 @@
                     <title>Définition de cookies via setCookie()</title>
 
                     <programlisting role="php"><![CDATA[
-    // Simple et facile : en fournissant un nom de cookie et une valeur
-    $client->setCookie('parfum', 'pépites de chocolat');
+// Simple et facile : en fournissant un nom de cookie et une valeur
+$client->setCookie('parfum', 'pépites de chocolat');
 
-    // en fournissant directement une chaîne de cookie encodée (nom=valeur)
-    // Notez que la valeur doit être déjà encodée au format URL
-    $client->setCookie('parfum=p%C3%A9pites%20de%20chocolat');
+// en fournissant directement une chaîne de cookie encodée (nom=valeur)
+// Notez que la valeur doit être déjà encodée au format URL
+$client->setCookie('parfum=p%C3%A9pites%20de%20chocolat');
 
-    // En fournissant un objet Zend_Http_Cookie
-    $cookie =
-        Zend_Http_Cookie::fromString('parfum=p%C3%A9pites%20de%20chocolat');
-    $client->setCookie($cookie);
-    ]]></programlisting>
+// En fournissant un objet Zend_Http_Cookie
+$cookie =
+    Zend_Http_Cookie::fromString('parfum=p%C3%A9pites%20de%20chocolat');
+$client->setCookie($cookie);
+]]></programlisting>
                 </example> Pour plus d'information sur les objets
             <classname>Zend_Http_Cookie</classname>, voir <xref
             linkend="zend.http.cookies" />.
@@ -81,24 +81,24 @@
                     <title>Activer la persistance des cookies</title>
 
                     <programlisting role="php"><![CDATA[
-    // Pour activer la persistance des cookies,
-    // définissez un Magasin de cookie "Cookie Jar"
-    $client->setCookieJar();
+// Pour activer la persistance des cookies,
+// définissez un Magasin de cookie "Cookie Jar"
+$client->setCookieJar();
 
-    // Première requête : s'identifier et démarrer une session
-    $client->setUri('http://exemple.com/login.php');
-    $client->setParameterPost('user', 'h4x0r');
-    $client->setParameterPost('password', '1337');
-    $client->request('POST');
+// Première requête : s'identifier et démarrer une session
+$client->setUri('http://exemple.com/login.php');
+$client->setParameterPost('user', 'h4x0r');
+$client->setParameterPost('password', '1337');
+$client->request('POST');
 
-    // Le magasin de cookies stocke automatiquement les
-    // cookies transmis dans la réponse, un cookie de session par exemple
+// Le magasin de cookies stocke automatiquement les
+// cookies transmis dans la réponse, un cookie de session par exemple
 
-    // Maintenant nous pouvons envoyer notre requête suivante
-    // les cookies stockés seront transmis automatiquement.
-    $client->setUri('http://exemple.com/lire_actualite_membres.php');
-    $client->request('GET');
-    ]]></programlisting>
+// Maintenant nous pouvons envoyer notre requête suivante
+// les cookies stockés seront transmis automatiquement.
+$client->setUri('http://exemple.com/lire_actualite_membres.php');
+$client->request('GET');
+]]></programlisting>
                 </example> Pour plus d'information sur la classe
             <classname>Zend_Http_CookieJar</classname>, voir <xref
             linkend="zend.http.cookies.cookiejar" />.
@@ -116,20 +116,20 @@
                     <title>Définir un en-tête personnalisé unique</title>
 
                     <programlisting role="php"><![CDATA[
-    // Définition d'un en-tête unique,
-    // écrasant toute valeur précédemment définie
-    $client->setHeaders('Host', 'www.exemple.com');
+// Définition d'un en-tête unique,
+// écrasant toute valeur précédemment définie
+$client->setHeaders('Host', 'www.exemple.com');
 
-    // La même chose d'une autre manière
-    $client->setHeaders('Host: www.example.com');
+// La même chose d'une autre manière
+$client->setHeaders('Host: www.example.com');
 
-    // Définition de plusieurs valeurs pour le même en-tête
-    // (surtout utile pour les en-têtes de cookies)
-    $client->setHeaders('Cookie', array(
-        'PHPSESSID=1234567890abcdef1234567890abcdef',
-        'language=fr'
-    ));
-    ]]></programlisting>
+// Définition de plusieurs valeurs pour le même en-tête
+// (surtout utile pour les en-têtes de cookies)
+$client->setHeaders('Cookie', array(
+    'PHPSESSID=1234567890abcdef1234567890abcdef',
+    'language=fr'
+));
+]]></programlisting>
                 </example>
             </para>
 
@@ -140,19 +140,19 @@
                     <title>Définition de plusieurs en-têtes personnalisés</title>
 
                     <programlisting role="php"><![CDATA[
-    // Définition de plusieurs en-têtes,
-    // écrasant toute valeur précédemment définie
-    $client->setHeaders(array(
-        'Host' => 'www.exemple.com',
-        'Accept-encoding' => 'gzip,deflate',
-        'X-Powered-By' => 'Zend Framework'));
+// Définition de plusieurs en-têtes,
+// écrasant toute valeur précédemment définie
+$client->setHeaders(array(
+    'Host' => 'www.exemple.com',
+    'Accept-encoding' => 'gzip,deflate',
+    'X-Powered-By' => 'Zend Framework'));
 
-    // Le tableau peut contenir uniquement des valeurs
-    $client->setHeaders(array(
-        'Host: www.exemple.com',
-        'Accept-encoding: gzip,deflate',
-        'X-Powered-By: Zend Framework'));
-    ]]></programlisting>
+// Le tableau peut contenir uniquement des valeurs
+$client->setHeaders(array(
+    'Host: www.exemple.com',
+    'Accept-encoding: gzip,deflate',
+    'X-Powered-By: Zend Framework'));
+]]></programlisting>
                 </example>
             </para>
     </sect2>
@@ -179,16 +179,16 @@
                     <title>Utilisation de setFileUpload pour envoyer des fichiers</title>
 
                     <programlisting role="php"><![CDATA[
-    // Envoi de données arbitraires comme fichier
-    $texte = 'ceci est un texte ordinaire';
-    $client->setFileUpload('du_texte.txt', 'upload', $texte, 'text/plain');
+// Envoi de données arbitraires comme fichier
+$texte = 'ceci est un texte ordinaire';
+$client->setFileUpload('du_texte.txt', 'upload', $texte, 'text/plain');
 
-    // envoi d'un fichier existant
-    $client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
+// envoi d'un fichier existant
+$client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
 
-    // envoi des fichiers
-    $client->request('POST');
-    ]]></programlisting>
+// envoi des fichiers
+$client->request('POST');
+]]></programlisting>
                 </example> Dans le premier exemple, la variable $texte est envoyée et sera
             disponible dans <code>$_FILES['upload']</code> côté serveur. Dans le second exemple, le
             fichier existant "<filename>/tmp/Backup.tar.gz</filename>" est envoyé au serveur et sera
@@ -222,17 +222,17 @@
                     <title>Envoi de données brutes via POST</title>
 
                     <programlisting role="php"><![CDATA[
-    $xml = '<book>' .
-           '  <title>Islands in the Stream</title>' .
-           '  <author>Ernest Hemingway</author>' .
-           '  <year>1970</year>' .
-           '</book>';
+$xml = '<book>' .
+       '  <title>Islands in the Stream</title>' .
+       '  <author>Ernest Hemingway</author>' .
+       '  <year>1970</year>' .
+       '</book>';
 
-    $client->setRawData($xml, 'text/xml')->request('POST');
+$client->setRawData($xml, 'text/xml')->request('POST');
 
-    // Une autre manière de faire la même chose :
-    $client->setRawData($xml)->setEncType('text/xml')->request('POST');
-    ]]></programlisting>
+// Une autre manière de faire la même chose :
+$client->setRawData($xml)->setEncType('text/xml')->request('POST');
+]]></programlisting>
                 </example> Les données seront disponible côté serveur via la variable PHP
             <code>$HTTP_RAW_POST_DATA</code> ou via le flux php://input.
         </para>
@@ -263,15 +263,15 @@
                     HTTP</title>
 
                     <programlisting role="php"><![CDATA[
-    // Utilisation de l'authentification 'basic'
-    $client->setAuth('shahar',
-                     'monMotdePasse!',
-                     Zend_Http_Client::AUTH_BASIC);
+// Utilisation de l'authentification 'basic'
+$client->setAuth('shahar',
+                 'monMotdePasse!',
+                 Zend_Http_Client::AUTH_BASIC);
 
-    // L'authentification 'basic' étant le comportement par défaut,
-    // on peut aussi écrire ceci :
-    $client->setAuth('shahar', 'monMotdePasse!');
-    ]]></programlisting>
+// L'authentification 'basic' étant le comportement par défaut,
+// on peut aussi écrire ceci :
+$client->setAuth('shahar', 'monMotdePasse!');
+]]></programlisting>
                 </example>
             </para>
     </sect2>

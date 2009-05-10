@@ -16,7 +16,6 @@
             <thead>
                 <row>
                     <entry>Méthode</entry>
-
                     <entry>Description</entry>
                 </row>
             </thead>
@@ -24,20 +23,17 @@
             <tbody>
                 <row>
                     <entry>setCurrentPageNumber</entry>
-
                     <entry>Règle le numéro de la page courante (par défaut à 1).</entry>
                 </row>
 
                 <row>
                     <entry>setItemCountPerPage</entry>
-
                     <entry>Règle le nombre maximum d'éléments à afficher par page (par défaut à
                     10).</entry>
                 </row>
 
                 <row>
                     <entry>setPageRange</entry>
-
                     <entry>Règle le nombre d'éléments à afficher dans le contrôle de pagination
                     (par défaut à 10). Note : la plupart du temps ce nombre sera considéré comme
                     exact, mais les styles de défilement ont cette option seulement si ils ont
@@ -46,7 +42,6 @@
 
                 <row>
                     <entry>setView</entry>
-
                     <entry>Règle l'instance de la vue, pour une facilité de rendu.</entry>
                 </row>
             </tbody>

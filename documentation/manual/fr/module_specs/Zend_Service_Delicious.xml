@@ -325,9 +325,7 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
                 <thead>
                     <row>
                         <entry>Nom</entry>
-
                         <entry>Description</entry>
-
                         <entry>Type de retour</entry>
                     </row>
                 </thead>
@@ -335,33 +333,25 @@ $delicious->addBundle('newBundle', array('tag1', 'tag2'));
                 <tbody>
                     <row>
                         <entry><code>getUserFans()</code></entry>
-
                         <entry>Récupère les fans d'un utilisateur</entry>
-
                         <entry>Array</entry>
                     </row>
 
                     <row>
                         <entry><code>getUserNetwork()</code></entry>
-
                         <entry>Récupère le réseau d'un utilisateur</entry>
-
                         <entry>Array</entry>
                     </row>
 
                     <row>
                         <entry><code>getUserPosts()</code></entry>
-
                         <entry>Récupère les entrées d'un utilisateur</entry>
-
                         <entry>Zend_Service_Delicious_PostList</entry>
                     </row>
 
                     <row>
                         <entry><code>getUserTags()</code></entry>
-
                         <entry>Récupère les étiquettes d'un utilisateur</entry>
-
                         <entry>Array</entry>
                     </row>
                 </tbody>
@@ -413,9 +403,7 @@ print_r($delicious->getUserTags('someUser'));
                     <thead>
                         <row>
                             <entry>Nom</entry>
-
                             <entry>Description</entry>
-
                             <entry>Type de retour</entry>
                         </row>
                     </thead>
@@ -423,33 +411,25 @@ print_r($delicious->getUserTags('someUser'));
                     <tbody>
                         <row>
                             <entry><code>getNotes()</code></entry>
-
                             <entry>Récupère les notes de l'entrée</entry>
-
                             <entry>String</entry>
                         </row>
 
                         <row>
                             <entry><code>getTags()</code></entry>
-
                             <entry>Récupère les étiquettes de l'entrée</entry>
-
                             <entry>Array</entry>
                         </row>
 
                         <row>
                             <entry><code>getTitle()</code></entry>
-
                             <entry>Récupère le titre de l'entrée</entry>
-
                             <entry>String</entry>
                         </row>
 
                         <row>
                             <entry><code>getUrl()</code></entry>
-
                             <entry>Récupère l'URL de l'entrée</entry>
-
                             <entry>String</entry>
                         </row>
                     </tbody>

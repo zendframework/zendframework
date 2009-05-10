@@ -1,18 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 5318 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.character-sets">
     <title>Jeux de caractères</title>
 
-    <para><classname>Zend_Mail</classname> ne recherche pas le jeu de caractères des parties de l'émail. Lorsque vous instanciez
-    <classname>Zend_Mail</classname>, un jeu de caractères pour l'émail peut être fournit. La valeur par défaut est
-    <code>iso-8859-1</code>. L'application doit vérifier que toutes les parties ajoutées à cet émail ont leurs contenus
-    encodés avec le bon jeu de caractères. Lors de la création d'une nouvelle partie de l'émail, un jeu de caractères
-    différent peut-être définit pour chaque partie.</para>
+    <para>
+        <classname>Zend_Mail</classname> ne recherche pas le jeu de caractères des parties de
+        l'émail. Lorsque vous instanciez <classname>Zend_Mail</classname>, un jeu de caractères pour
+        l'émail peut être fournit. La valeur par défaut est <code>iso-8859-1</code>. L'application
+        doit vérifier que toutes les parties ajoutées à cet émail ont leurs contenus encodés avec le
+        bon jeu de caractères. Lors de la création d'une nouvelle partie de l'émail, un jeu de
+        caractères différent peut-être définit pour chaque partie.
+    </para>
 
     <note>
         <title>Seulement au format texte</title>
 
-        <para>Les jeux de caractères ne s'appliquent que pour les parties du message au format texte.</para>
+        <para>
+            Les jeux de caractères ne s'appliquent que pour les parties du message au format
+            texte.
+        </para>
     </note>
 </sect1>

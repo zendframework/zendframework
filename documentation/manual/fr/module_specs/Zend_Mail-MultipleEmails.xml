@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13018 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Envoyer plusieurs émail par connexion SMTP</title>
 
-    <para>Par défaut un transport SMTP unique crée une connexion unique et la réutilise pour toute la durée de la vie du
-    script. Vous pouvez envoyer plusieurs émail à travers cette connexion SMTP. Une commande RSET doit être envoyée
-    avant chaque distribution pour garantir que le dialogue SMTP correct est respecté.</para>
+    <para>
+        Par défaut un transport SMTP unique crée une connexion unique et la réutilise pour
+        toute la durée de la vie du script. Vous pouvez envoyer plusieurs émail à travers cette
+        connexion SMTP. Une commande RSET doit être envoyée avant chaque distribution pour garantir
+        que le dialogue SMTP correct est respecté.
+    </para>
 
     <example id="zend.mail.multiple-emails.example-1">
         <title>Envoyer plusieurs émail par connexion SMTP</title>
@@ -29,9 +32,12 @@ for ($i = 0; $i > 5; $i++) {
 ]]></programlisting>
     </example>
 
-    <para>Si vous voulez avoir une connexion SMTP séparée pour chaque distribution d'émail, vous devez créer et détruire
-    votre transport avant et après chaque appel de la méthode <code>send()</code>. Ou sinon, vous pouvez manipuler la
-    connexion entre chaque distribution en accédant à l'objet de protocole de transport.</para>
+    <para>
+        Si vous voulez avoir une connexion SMTP séparée pour chaque distribution d'émail, vous
+        devez créer et détruire votre transport avant et après chaque appel de la méthode
+        <code>send()</code>. Ou sinon, vous pouvez manipuler la connexion entre chaque distribution
+        en accédant à l'objet de protocole de transport.
+    </para>
 
     <example id="zend.mail.multiple-emails.example-2">
         <title>Contrôler manuellement la connexion de transport</title>

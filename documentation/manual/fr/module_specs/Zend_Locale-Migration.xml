@@ -1,12 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 13584 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15156 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.migration">
     <title>Migrer à partir des versions précédentes</title>
 
-    <para>L'API de <classname>Zend_Locale</classname> a changé au cours du temps. Si vous avez commencé à utiliser
-    <classname>Zend_Locale</classname> et ses sous-composants avec les versions précédentes, suivez les lignes directrices
-    ci-dessous pour migrer vos scripts et ainsi utiliser la nouvelle API.</para>
+    <para>
+        L'API de <classname>Zend_Locale</classname> a changé au cours du temps. Si vous avez
+        commencé à utiliser <classname>Zend_Locale</classname> et ses sous-composants avec les
+        versions précédentes, suivez les lignes directrices ci-dessous pour migrer vos scripts et
+        ainsi utiliser la nouvelle API.
+    </para>
 
     <sect2 id="zend.locale.migration.fromonesixtooneseven">
         <title>Migrer de la version 1.6 vers 1.7 ou plus récent</title>
@@ -14,15 +17,21 @@
         <sect3 id="zend.locale.migration.fromonesixtooneseven.islocale">
             <title>Changement dans l'utilisation de isLocale()</title>
 
-            <para>Conformément aux standards de codage <code>isLocale()</code> a été changé pour retourner un booléen.
-            Dans les versions précédentes une chaîne était retournée lors du succès. Pour la version 1.7 un mode de
-            compatibilité a été ajouté qui vous permet d'utiliser l'ancien comportement (avec une chaîne retournée),
-            mais ceci émet un warning pour vous informer de changer vers le nouveau comportement. Le reroutage que
-            l'ancien comportement de <code>isLocale()</code> pouvait avoir à faire n'est plus nécessaire car tous les
-            composants de l'I18N traiteront maintenant eux-mêmes le reroutage.</para>
+            <para>
+                Conformément aux standards de codage <code>isLocale()</code> a été changé pour
+                retourner un booléen. Dans les versions précédentes une chaîne était retournée lors
+                du succès. Pour la version 1.7 un mode de compatibilité a été ajouté qui vous permet
+                d'utiliser l'ancien comportement (avec une chaîne retournée), mais ceci émet un
+                warning pour vous informer de changer vers le nouveau comportement. Le reroutage que
+                l'ancien comportement de <code>isLocale()</code> pouvait avoir à faire n'est plus
+                nécessaire car tous les composants de l'I18N traiteront maintenant eux-mêmes le
+                reroutage.
+            </para>
 
-            <para>Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode décrite
-            ci-dessous.</para>
+            <para>
+                Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode
+                décrite ci-dessous.
+            </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.example">
                 <title>Comment changer l'appel de isLocale() de 1.6 vers 1.7 ?</title>
@@ -43,8 +52,10 @@ if (Zend_Locale::isLocale($locale)) {
 }
 ]]></programlisting>
 
-                <para>Notez que vous pouvez utiliser le second paramètre pour voir si la locale est correcte sans
-                nécessiter de reroutage.</para>
+                <para>
+                    Notez que vous pouvez utiliser le second paramètre pour voir si la locale
+                    est correcte sans nécessiter de reroutage.
+                </para>
 
                 <programlisting role="php"><![CDATA[
 // Exemple pour ZF 1.6
@@ -72,12 +83,17 @@ if (Zend_Locale::isLocale($locale, false)) {
         <sect3 id="zend.locale.migration.fromonesixtooneseven.getdefault">
             <title>Changement dans l'utilisation de getDefault()</title>
 
-            <para>La signification de la méthode <code>getDefault()</code> a été changé étant donné que nous avons
-            intégré une locale de framework qui peut être paramétrée avec <code>setDefault()</code>. Ceci ne renvoie
-            plus la chaîne de la locale mais seulement la locale du framework.</para>
+            <para>
+                La signification de la méthode <code>getDefault()</code> a été changé étant
+                donné que nous avons intégré une locale de framework qui peut être paramétrée avec
+                <code>setDefault()</code>. Ceci ne renvoie plus la chaîne de la locale mais
+                seulement la locale du framework.
+            </para>
 
-            <para>Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode décrite
-            ci-dessous.</para>
+            <para>
+                Pour migrer vos scripts vers la nouvelle API, utilisez simplement la méthode
+                décrite ci-dessous.
+            </para>
 
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">
                 <title>Comment changer l'appel de getDefaut() de 1.6 vers 1.7 ?</title>
@@ -95,14 +111,20 @@ Zend_Locale::$compatibilityMode = false;
 $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 ]]></programlisting>
 
-                <para>Notez que le second paramètre de l'ancienne implémentation de <code>getDefault()</code> n'est plus
-                disponible non plus, mais les valeurs retournées sont les mêmes.</para>
+                <para>
+                    Notez que le second paramètre de l'ancienne implémentation de
+                    <code>getDefault()</code> n'est plus disponible non plus, mais les valeurs
+                    retournées sont les mêmes.
+                </para>
             </example>
 
             <note>
-                <para>Par défaut l'ancien comportement est toujours actif, mais émet un warning. Quand vous avez changé
-                votre code vers le nouveau comportement, vous devriez aussi changer le mode de compatibilité à
-                <code>false</code> ainsi aucun nouveau warning ne sera émis.</para>
+                <para>
+                    Par défaut l'ancien comportement est toujours actif, mais émet un warning.
+                    Quand vous avez changé votre code vers le nouveau comportement, vous devriez
+                    aussi changer le mode de compatibilité à <code>false</code> ainsi aucun nouveau
+                    warning ne sera émis.
+                </para>
             </note>
         </sect3>
     </sect2>

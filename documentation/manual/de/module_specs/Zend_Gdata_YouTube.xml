@@ -6,42 +6,46 @@
 
     <para>
         Die YouTube Daten API bietet einen Lese- und Schreibzugriff auf YouTube Inhalte.
-        Benutzer können nicht authentifizierte Anfragen zu Google Daten Feeds durchführen um Feeds von
-        populären Videos, Kommentare, öffentliche Informationen über YouTube Benutzerprofilen,
+        Benutzer können nicht authentifizierte Anfragen zu Google Daten Feeds durchführen um Feeds
+        von populären Videos, Kommentare, öffentliche Informationen über YouTube Benutzerprofilen,
         Benutzer PlayListen, Favoriten, Einschreibungen und so weiter zu erhalten.
     </para>
 
     <para>
         Für weitere Informationen über die YouTube Daten API schauen Sie in die offizielle
-        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Entwickler Dokumentation</ulink>
-        auf code.google.com.
+        <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP Entwickler
+            Dokumentation</ulink> auf code.google.com.
     </para>
 
     <sect2 id="zend.gdata.youtube.authentication">
         <title>Authentifizierung</title>
         <para>
-            Die YouTube Daten API erlaubt aktuell einen nur-lesenden Zugriff auf öffentliche Daten, welcher
-            keine Authentifizierung benötigt. Für alle schreibenden Anfragen muß sich ein Benutzer entweder
-            mit ClientLogin oder AuthSub authentifizieren. Schauen Sie bitte in das
-            <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Kapitel über Authentifizierung in der PHP Entwickler Dokumentation</ulink>
-            für weitere Detail.
+            Die YouTube Daten API erlaubt aktuell einen nur-lesenden Zugriff auf öffentliche Daten,
+            welcher keine Authentifizierung benötigt. Für alle schreibenden Anfragen muß sich ein
+            Benutzer entweder mit ClientLogin oder AuthSub authentifizieren. Schauen Sie bitte in
+            das <ulink
+                url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Kapitel
+                über Authentifizierung in der PHP Entwickler Dokumentation</ulink> für weitere
+            Detail.
         </para>
     </sect2>
 
     <sect2 id="zend.gdata.youtube.developer_key">
         <title>Entwickler Schlüssel und Client ID</title>
         <para>
-            Ein Entwickler Schlüssel identifiziert den QouTube Entwickler der die API Anfrage schickt.
-            Eine Client ID identifiziert die Anwendung für Logging und Debugging Zwecke. Schauen Sie
-            bitte auf
-            <ulink url="http://code.google.com/apis/youtube/dashboard/">http://code.google.com/apis/youtube/dashboard/</ulink>
-            um einen Entwickler Schlüssel und eine Client ID zu erhalten. Das angefügte Beispiel demonstriert
-            wie der Entwickler Schlüssel und die Client ID an das
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
+            Ein Entwickler Schlüssel identifiziert den QouTube Entwickler der die API Anfrage
+            schickt. Eine Client ID identifiziert die Anwendung für Logging und Debugging Zwecke.
+            Schauen Sie bitte auf <ulink
+                url="http://code.google.com/apis/youtube/dashboard/">http://code.google.com/apis/youtube/dashboard/</ulink>
+            um einen Entwickler Schlüssel und eine Client ID zu erhalten. Das angefügte Beispiel
+            demonstriert wie der Entwickler Schlüssel und die Client ID an das <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
             Service Pbjekt übergeben werden.
         </para>
         <example id="zend.gdata.youtube.developer_key.example">
-            <title>Einen Entwicklerschlüssel und eine ClientID an Zend_Gdata_YouTube übergeben</title>
+            <title>
+                Einen Entwicklerschlüssel und eine ClientID an Zend_Gdata_YouTube übergeben
+            </title>
             <programlisting role="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient,
                              $applicationId,

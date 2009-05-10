@@ -18,17 +18,17 @@
 
             <para>
                 Benutzer haben uns darauf aufmerksam gemacht das
-                <classname>Zend_Controller_Action_Helper_ViewRenderer</classname> Methoden auf der abstrakten
-                Dispatcher Klasse verwendet hat die nicht im Dispatcher Interface waren. Die folgenden
-                Methoden wurden hinzugefügt um sicherzustellen das eigene Dispatcher weiterhin mit den
-                ausgelieferten Implementierungen funktionieren:
+                <classname>Zend_Controller_Action_Helper_ViewRenderer</classname> Methoden auf der
+                abstrakten Dispatcher Klasse verwendet hat die nicht im Dispatcher Interface waren.
+                Die folgenden Methoden wurden hinzugefügt um sicherzustellen das eigene Dispatcher
+                weiterhin mit den ausgelieferten Implementierungen funktionieren:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>formatModuleName()</code>: sollte verwendet werden um einen rohen Controllernamen
-                    zu nehmen, wie den einen der in einem Anfrageobjekt gepackt ist, und Ihn in einen
-                    richtigen Klassennamen zu reformatieren den eine Klasse, die
+                    <code>formatModuleName()</code>: sollte verwendet werden um einen rohen
+                    Controllernamen zu nehmen, wie den einen der in einem Anfrageobjekt gepackt ist,
+                    und Ihn in einen richtigen Klassennamen zu reformatieren den eine Klasse, die
                     <classname>Zend_Controller_Action</classname> erweitert, verwenden würde
                 </para></listitem>
             </itemizedlist>
@@ -42,24 +42,28 @@
             <title>Änderungen im Dispatcher Interface</title>
 
             <para>
-                Benutzer haben uns darauf aufmerksam gemacht das sowohl <classname>Zend_Controller_Front</classname>
-                als auch <classname>Zend_Controller_Router_Route_Module</classname> Methoden des Dispatchers verwenden
-                die nicht im Dispatcher Interface waren. Wir haben jetzt die folgenden drei Methoden
-                hinzugefügt um sicherzustellen das eigene Dispatcher weiterhin mit der ausgelieferten
-                Implementation arbeiten:
+                Benutzer haben uns darauf aufmerksam gemacht das sowohl
+                <classname>Zend_Controller_Front</classname> als auch
+                <classname>Zend_Controller_Router_Route_Module</classname> Methoden des Dispatchers
+                verwenden die nicht im Dispatcher Interface waren. Wir haben jetzt die folgenden
+                drei Methoden hinzugefügt um sicherzustellen das eigene Dispatcher weiterhin mit der
+                ausgelieferten Implementation arbeiten:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>getDefaultModule()</code>: Sollte den Namen des Standardmoduls zurückgeben.
+                    <code>getDefaultModule()</code>: Sollte den Namen des Standardmoduls
+                    zurückgeben.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultControllerName()</code>: Sollte den Namen des Standardcontrollers zurückgeben.
+                    <code>getDefaultControllerName()</code>: Sollte den Namen des
+                    Standardcontrollers zurückgeben.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>getDefaultAction()</code>: Sollte den Namen der Standardaktion zurückgeben.
+                    <code>getDefaultAction()</code>: Sollte den Namen der Standardaktion
+                    zurückgeben.
                 </para></listitem>
             </itemizedlist>
         </sect3>
@@ -123,8 +127,8 @@
             <listitem>
                 <para>
                     Zweitbeste Option: Der ViewRenderer delegiert nun die Auflösung von View
-                    Skripten zu <classname>Zend_Filter_Inflector</classname>; man kann die Regeln des
-                    Inflectors ändern damit er nicht länger die Wörter der Aktion mit einem
+                    Skripten zu <classname>Zend_Filter_Inflector</classname>; man kann die Regeln
+                    des Inflectors ändern damit er nicht länger die Wörter der Aktion mit einem
                     Bindestrich trennt:
                 </para>
 
@@ -186,18 +190,21 @@ $front->setParam('useCaseSensitiveActions', true);
         <title>Migration von 0.9.3 nach 1.0.0RC1 oder neuer</title>
 
         <para>
-            Die prinzipiellen Änderungen die durch 1.0.0RC1 angeboten werden sind die Einführung und standardmäßige
-            Aktivierung des <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
-            Plugins und den <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
-            Aktionhelfer. Bitte lies die Dokumentation jedes einzelnen gründlich um zu sehen wie sie arbeiten und
-            welchen Effekt Sie auf die eigene Anwendung haben können.
+            Die prinzipiellen Änderungen die durch 1.0.0RC1 angeboten werden sind die Einführung und
+            standardmäßige Aktivierung des
+            <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
+            Plugins und den
+            <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+            Aktionhelfer. Bitte lies die Dokumentation jedes einzelnen gründlich um zu sehen wie sie
+            arbeiten und welchen Effekt Sie auf die eigene Anwendung haben können.
         </para>
 
         <para>
-            Der <code>ErrorHandler</code> Plugin läuft wärend der <code>postDispatch()</code> Prüfung auf
-            Ausnahmen, und leitet zu einem spezifizierten Fehlerhandler Kontroller weiter. Solch ein Kontroller
-            sollte in der eigenen Anwendung inkludiert werden. Er kann deaktiviert werden durch das setzen des
-            Frontkontroller Parameters <code>noErrorHandler</code>:
+            Der <code>ErrorHandler</code> Plugin läuft wärend der <code>postDispatch()</code>
+            Prüfung auf Ausnahmen, und leitet zu einem spezifizierten Fehlerhandler Kontroller
+            weiter. Solch ein Kontroller sollte in der eigenen Anwendung inkludiert werden. Er kann
+            deaktiviert werden durch das setzen des Frontkontroller Parameters
+            <code>noErrorHandler</code>:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -205,17 +212,18 @@ $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
         <para>
-            Der <code>ViewRenderer</code> Aktionhelfer automatisiert die Injizierung der View in den Aktionkontroller
-            genauso wie das autorendern von Viewskripten basierend auf die aktuelle Aktion. Das primäre Problem
-            dem man begegnen kann ist, wenn man Aktionen hat die keine View Skripte rendern und weder vorwärts- noch
-            weiterleiten, da der <code>ViewRenderer</code> versucht ein View Skript zu Rendern basierend auf dem
+            Der <code>ViewRenderer</code> Aktionhelfer automatisiert die Injizierung der View in den
+            Aktionkontroller genauso wie das autorendern von Viewskripten basierend auf die aktuelle
+            Aktion. Das primäre Problem dem man begegnen kann ist, wenn man Aktionen hat die keine
+            View Skripte rendern und weder vorwärts- noch weiterleiten, da der
+            <code>ViewRenderer</code> versucht ein View Skript zu Rendern basierend auf dem
             Aktionnamen.
         </para>
 
         <para>
-            Es gibt verschiedene Strategien die man anwenden kann um den eigenen Code upzudaten. In kurzer Form,
-            kann man global den <code>ViewRenderer</code> im eigenen Frontkontroller Bootstrap vor dem
-            Abarbeiten ausschalten:
+            Es gibt verschiedene Strategien die man anwenden kann um den eigenen Code upzudaten. In
+            kurzer Form, kann man global den <code>ViewRenderer</code> im eigenen Frontkontroller
+            Bootstrap vor dem Abarbeiten ausschalten:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -224,14 +232,16 @@ $front->setParam('noViewRenderer', true);
 ]]></programlisting>
 
         <para>
-            Trotzdem ist es keine gute Langzeitstrategie, da es auch bedeutet das man mehr Code schreiben muß.
+            Trotzdem ist es keine gute Langzeitstrategie, da es auch bedeutet das man mehr Code
+            schreiben muß.
         </para>
 
         <para>
-            Wenn man bereit ist damit zu beginnen die <code>ViewRenderer</code> Funktionalität zu verwenden, gibt
-            es verschiedene Dinge die man im eigenen Kontrollercode beachten muß. Zuerst muß auf die Aktionmethoden
-            (die Methoden die mit 'Action' enden) geachtet werden, und ausgesucht werden was eine jede machen soll.
-            Wenn nichts vom folgenden passiert, muß man Änderungen durchführen:
+            Wenn man bereit ist damit zu beginnen die <code>ViewRenderer</code> Funktionalität zu
+            verwenden, gibt es verschiedene Dinge die man im eigenen Kontrollercode beachten muß.
+            Zuerst muß auf die Aktionmethoden (die Methoden die mit 'Action' enden) geachtet werden,
+            und ausgesucht werden was eine jede machen soll. Wenn nichts vom folgenden passiert, muß
+            man Änderungen durchführen:
         </para>
 
         <itemizedlist>
@@ -250,9 +260,9 @@ $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
         <para>
-            Wenn man herausfindet das keine der eigenen Aktionmethoden rendern, weiterleiten oder umleiten, wird man
-            voraussichtlich die oben angeführte Zeile in die eigene <code>preDispatch()</code> oder
-            <code>init()</code> Methode einfügen wollen:
+            Wenn man herausfindet das keine der eigenen Aktionmethoden rendern, weiterleiten oder
+            umleiten, wird man voraussichtlich die oben angeführte Zeile in die eigene
+            <code>preDispatch()</code> oder <code>init()</code> Methode einfügen wollen:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -266,43 +276,47 @@ public function preDispatch()
 
         <para>
             Wenn <code>render()</code> aufgerufen wird, und man
-            <link linkend="zend.controller.modular">die konventionelle Modulare Verzeichnis Struktur</link>
-            verwendet, wird man den Code ändern wollen um Autorendern zu Verwenden:
+            <link linkend="zend.controller.modular">die konventionelle Modulare Verzeichnis
+                Struktur</link> verwendet, wird man den Code ändern wollen um Autorendern zu
+            Verwenden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Wenn man mehrere View Skripte in einer einzelnen Aktion rendert muß nichts geändert werden.
+                    Wenn man mehrere View Skripte in einer einzelnen Aktion rendert muß nichts
+                    geändert werden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Wenn man einfach <code>render()</code> ohne Argumente aufruft, können diese Zeilen entfernt
+                    Wenn man einfach <code>render()</code> ohne Argumente aufruft, können diese
+                    Zeilen entfernt
                     werden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    Wenn man <code>render()</code> mit Argumenten aufruft, und danach nicht irgendeine Bearbeitung
-                    durchführt oder mehrere View sktipe rendert, können diese Aufrufe zu
-                    <code>$this-&gt;_helper-&gt;viewRenderer()</code> geändert werden.
+                    Wenn man <code>render()</code> mit Argumenten aufruft, und danach nicht
+                    irgendeine Bearbeitung durchführt oder mehrere View sktipe rendert, können diese
+                    Aufrufe zu <code>$this-&gt;_helper-&gt;viewRenderer()</code> geändert werden.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Wenn die konventionelle modulare Verzeichnisstruktur nicht verwendet wird, gibt es eine Vielzahl von
-            Methoden für das Setzen des View Basispfades und der Skript Pfadspezifikationen so das man den
-            <code>ViewRenderer</code> verwenden kann. Bitte lies die
-            <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer Dokumentation</link> für
-            Informationen über diese Methoden.
+            Wenn die konventionelle modulare Verzeichnisstruktur nicht verwendet wird, gibt es eine
+            Vielzahl von Methoden für das Setzen des View Basispfades und der Skript
+            Pfadspezifikationen so das man den <code>ViewRenderer</code> verwenden kann. Bitte lies
+            die <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
+                Dokumentation</link> für Informationen über diese Methoden.
         </para>
 
         <para>
-            Wenn ein View Objekt von der Registry verwendet, oder das eigene View Objekt verändert, oder
-            eine andere View Implementation verwendet wird wird man den <code>ViewRenderer</code> in diesem
-            Objekt injiziieren wollen. Das kann ganz einfach jederzeit durchgeführt werden.
+            Wenn ein View Objekt von der Registry verwendet, oder das eigene View Objekt verändert,
+            oder eine andere View Implementation verwendet wird wird man den
+            <code>ViewRenderer</code> in diesem Objekt injiziieren wollen. Das kann ganz einfach
+            jederzeit durchgeführt werden.
         </para>
 
         <itemizedlist>
@@ -332,11 +346,12 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-            Es gibt viele Wege den <code>ViewRenderer</code> zu modifizieren inklusive dem Setzen eines anderen
-            View Skripts zum Rendern, dem Spezifizieren von Veränderungen für alle veränderbaren Elemente eines
-            View Skript Pfades (inklusive der Endung), dem Auswählen eines Antwort-benannten Segments zur
-            Anpassung und mehr. Wenn die konventionelle modulare Verzeichnisstruktur nicht verwendet wird, kann
-            noch immer eine andere Pfad Spezifikation mit dem <code>ViewRenderer</code> zugeordnet werden.
+            Es gibt viele Wege den <code>ViewRenderer</code> zu modifizieren inklusive dem Setzen
+            eines anderen View Skripts zum Rendern, dem Spezifizieren von Veränderungen für alle
+            veränderbaren Elemente eines View Skript Pfades (inklusive der Endung), dem Auswählen
+            eines Antwort-benannten Segments zur Anpassung und mehr. Wenn die konventionelle
+            modulare Verzeichnisstruktur nicht verwendet wird, kann noch immer eine andere Pfad
+            Spezifikation mit dem <code>ViewRenderer</code> zugeordnet werden.
         </para>
 
         <para>
@@ -350,9 +365,9 @@ $viewRenderer->setView($view);
 
         <para>
             0.9.3 bietet <link linkend="zend.controller.actionhelpers">Aktionhelfer</link> neu an.
-            Als Teil dieser Änderung wurden die folgenden Methoden entfernt da Sie nun im
-            <link linkend="zend.controller.actionhelpers.redirector">Weiterleitungs Aktionhelfer</link> inkludiert
-            sind:
+            Als Teil dieser Änderung wurden die folgenden Methoden entfernt da Sie nun im <link
+                linkend="zend.controller.actionhelpers.redirector">Weiterleitungs
+                Aktionhelfer</link> inkludiert sind:
         </para>
 
         <itemizedlist>
@@ -377,11 +392,11 @@ $viewRenderer->setView($view);
         </itemizedlist>
 
         <para>
-            Lese die <link linkend="zend.controller.actionhelpers">Aktionhelfer Dokumentation</link> für nähere
-            Informationen über das empfangen und manipulieren von Helfer Objekten und die
-            <link linkend="zend.controller.actionhelpers.redirector">Weiterleitungshelfer Dokumentation</link> für
-            weitere Information über das setzen von Weiterleitungsoptionen (sowie alternative Methoden des
-            weiterleitens).
+            Lese die <link linkend="zend.controller.actionhelpers">Aktionhelfer Dokumentation</link>
+            für nähere Informationen über das empfangen und manipulieren von Helfer Objekten und die
+            <link linkend="zend.controller.actionhelpers.redirector">Weiterleitungshelfer
+                Dokumentation</link> für weitere Information über das setzen von
+            Weiterleitungsoptionen (sowie alternative Methoden des weiterleitens).
         </para>
     </sect2>
 
@@ -405,27 +420,28 @@ Zend_Controller_Front::run('/path/to/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Router</classname> wurde entfernt für den Rewrite Router
-                    entfernt.
+                    <classname>Zend_Controller_Router</classname> wurde entfernt für den Rewrite
+                    Router entfernt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <classname>Zend_Controller_RewriteRouter</classname> wurde in
-                    <classname>Zend_Controller_Router_Rewrite</classname> umbenannt und zum Standard Router
-                    befördert, der mit dem Framework ausgeliefert wird;
-                    <classname>Zend_Controller_Front</classname> wird ihn als Standard verwenden, wenn kein
-                    anderer Router übergeben wird.
+                    <classname>Zend_Controller_Router_Rewrite</classname> umbenannt und zum Standard
+                    Router befördert, der mit dem Framework ausgeliefert wird;
+                    <classname>Zend_Controller_Front</classname> wird ihn als Standard verwenden,
+                    wenn kein anderer Router übergeben wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     Eine neue Route Klasse für die Verwendung mit dem Rewrite Router wurde
-                    eingeführt: <classname>Zend_Controller_Router_Route_Module</classname>; sie deckt die
-                    Standardrouten ab, die vom MVC verwendet werden und bietet die Unterstützung
-                    für <link linkend="zend.controller.modular">Controller Module</link>.
+                    eingeführt: <classname>Zend_Controller_Router_Route_Module</classname>; sie
+                    deckt die Standardrouten ab, die vom MVC verwendet werden und bietet die
+                    Unterstützung für <link linkend="zend.controller.modular">Controller
+                        Module</link>.
                 </para>
             </listitem>
 
@@ -445,8 +461,8 @@ Zend_Controller_Front::run('/path/to/controllers');
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::_forward()</classname>'s Argumente wurden geändert.
-                    Die Signatur ist nun:
+                    <classname>Zend_Controller_Action::_forward()</classname>'s Argumente wurden
+                    geändert. Die Signatur ist nun:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -522,10 +538,10 @@ $ctrl->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::dispatch()</classname> fängt standardmäßig die Ausnahmen
-                    im Response Objekt ab und gibt sie nicht aus, um sicherzugehen, dass keine
-                    sensitiven Systeminformationen ausgegeben werden. Man kann dies auf mehrere
-                    Arten überschreiben:
+                    <classname>Zend_Controller_Front::dispatch()</classname> fängt standardmäßig die
+                    Ausnahmen im Response Objekt ab und gibt sie nicht aus, um sicherzugehen, dass
+                    keine sensitiven Systeminformationen ausgegeben werden. Man kann dies auf
+                    mehrere Arten überschreiben:
                 </para>
 
                 <itemizedlist>
@@ -578,10 +594,10 @@ echo $response;
                         <classname>Zend_Controller_Request_Abstract $request</classname>,
                         <classname>Zend_Controller_Response_Abstract $response</classname>, und
                         <code>array $params (optional)</code>.
-                        <classname>Zend_Controller_Action::__construct()</classname> verwendet diese, um die
-                        Request, Response und invokeArgs Eigenschaften für das Objekt zu setzen, und
-                        beim Überschreiben des Konstrukturs sollte man dies ebenfalls tun. Besser
-                        ist es, die <code>init()</code> Methode zu verwenden, um jedwede
+                        <classname>Zend_Controller_Action::__construct()</classname> verwendet
+                        diese, um die Request, Response und invokeArgs Eigenschaften für das Objekt
+                        zu setzen, und beim Überschreiben des Konstrukturs sollte man dies ebenfalls
+                        tun. Besser ist es, die <code>init()</code> Methode zu verwenden, um jedwede
                         Instanzkonfiguration durchzuführen, weil diese Methode als letzte Methode
                         des Konstrukturs aufgerufen wird.
                     </para></listitem>
@@ -617,11 +633,12 @@ echo $response;
                     <listitem>
                         <para>
                             Die <code>_action</code> Eigenschaft wird nicht mehr gesetzt. Diese
-                            Eigenschaft war ein <classname>Zend_Controller_Dispatcher_Token</classname>, der
-                            in der aktuellen Inkarnation nicht mehr länger existiert. Der einzige
-                            Zweck des Tokens war, Informationen über angeforderte Controller,
-                            Aktion und URL Parameter bereit zu stellen. Diese Infrmationen ist nun
-                            im Request Objekt verfügbar und kann wie folgt abgerufen werden:
+                            Eigenschaft war ein
+                            <classname>Zend_Controller_Dispatcher_Token</classname>, der in der
+                            aktuellen Inkarnation nicht mehr länger existiert. Der einzige Zweck des
+                            Tokens war, Informationen über angeforderte Controller, Aktion und URL
+                            Parameter bereit zu stellen. Diese Infrmationen ist nun im Request
+                            Objekt verfügbar und kann wie folgt abgerufen werden:
                         </para>
 
                         <programlisting role="php"><![CDATA[
@@ -672,16 +689,17 @@ public function __call($method, $args)
             </listitem>
 
             <listitem><para>
-                <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> wurde entfernt.
-                Stattdessen soll <classname>Zend_Controller_Front::setBaseUrl()</classname> verwendet werden
-                (oder <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, wenn die Request Klasse verwendet
-                wird).
+                <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> wurde
+                entfernt. Stattdessen soll
+                <classname>Zend_Controller_Front::setBaseUrl()</classname> verwendet werden (oder
+                <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, wenn die Request
+                Klasse verwendet wird).
             </para></listitem>
 
             <listitem><para>
                 <classname>Zend_Controller_Plugin_Interface</classname> wurde durch
-                by <classname>Zend_Controller_Plugin_Abstract</classname> ersetzt. Alle Methoden nehmen nun
-                ein <xref linkend="zend.controller.request" /> Objekt statt eines
+                by <classname>Zend_Controller_Plugin_Abstract</classname> ersetzt. Alle Methoden
+                nehmen nun ein <xref linkend="zend.controller.request" /> Objekt statt eines
                 Dispatcher Tokens entgegen bzw. geben es zurück.
             </para></listitem>
         </itemizedlist>

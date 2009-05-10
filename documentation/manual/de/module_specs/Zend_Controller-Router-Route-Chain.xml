@@ -5,8 +5,8 @@
     <title>Zend_Controller_Router_Route_Chain</title>
 
     <para>
-        <classname>Zend_Controller_Router_Route_Chain</classname> ist eine Route die es erlaubt mehrere
-        Routen miteinander zu verketten. Das erlaubt es Hostname-Routen und Pfad-Routen zu
+        <classname>Zend_Controller_Router_Route_Chain</classname> ist eine Route die es erlaubt
+        mehrere Routen miteinander zu verketten. Das erlaubt es Hostname-Routen und Pfad-Routen zu
         verketten, oder zum Beispiel mehrere Pfad-Routen. Verkettung kann entweder
         program-technisch oder mit einer Konfigurationsdatei durchgeführt werden.
     </para>
@@ -23,13 +23,13 @@
 
     <para>
         Wenn Programmtechnisch verkettet wird, gibt es zwei Wege das zu tun. Der erste besteht
-        darin eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zu erstellen
-        und dann die <code>chain</code> Methode mehrere Male mit allen Routen aufzurufen die
-        zusammen verkettet werden sollen. Der andere Weg besteht darin die erste Route zu nehmen,
-        z.B. eine Hostname Route, und die <code>chain</code> Methode mit der Route auf Ihr
+        darin eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zu
+        erstellen und dann die <code>chain</code> Methode mehrere Male mit allen Routen aufzurufen
+        die zusammen verkettet werden sollen. Der andere Weg besteht darin die erste Route zu
+        nehmen, z.B. eine Hostname Route, und die <code>chain</code> Methode mit der Route auf Ihr
         aufzurufen, die angehängt werden soll. Das verändert die Hostname Route nicht, gibt aber
-        eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zurück, die dann
-        beide Routen verkettet hat:
+        eine neue Instanz von <classname>Zend_Controller_Router_Route_Chain</classname> zurück, die
+        dann beide Routen verkettet hat:
     </para>
 
     <programlisting role="php"><![CDATA[

@@ -94,7 +94,7 @@ class Zend_Amf_Adobe_Introspector
             Zend_Loader::loadClass($serviceClass, $this->_getServicePath());
         }
         
-        $serv = $this->_xml->createElement('operations');
+        $serv = $this->_xml->createElement('service-description');
         $serv->setAttribute('xmlns', 'http://ns.adobe.com/flex/service-description/2008');
 
         $this->_types = $this->_xml->createElement('types');

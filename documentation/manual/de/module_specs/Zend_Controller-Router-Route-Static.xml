@@ -5,9 +5,10 @@
     <title>Zend_Controller_Router_Route_Static</title>
 
     <para>
-        Die oben angeführten Beispiele verwenden alle dynamische Routen -- Routen die einem Pattern entsprechen.
-        Trotzdem wird manchmal eine spezielle Route in Stein gegossen, und das Starten der Regular Expression
-        Maschine wäre ein Overkill. Die Lösung zu dieser Situation ist die Verwendung von statischen Routen:
+        Die oben angeführten Beispiele verwenden alle dynamische Routen -- Routen die einem Pattern
+        entsprechen. Trotzdem wird manchmal eine spezielle Route in Stein gegossen, und das Starten
+        der Regular Expression Maschine wäre ein Overkill. Die Lösung zu dieser Situation ist die
+        Verwendung von statischen Routen:
     </para>
 
     <programlisting role="php"><![CDATA[
@@ -19,8 +20,8 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        Die obige Route passt zu einer URL von <code>http://domain.com/login</code>, und leitet weiter zu
-        <code>AuthController::loginAction()</code>.
+        Die obige Route passt zu einer URL von <code>http://domain.com/login</code>, und leitet
+        weiter zu <code>AuthController::loginAction()</code>.
     </para>
 
     <note id="zend.controller.router.routes.static.warning">
@@ -28,10 +29,10 @@ $router->addRoute('login', $route);
 
         <para>
             Da eine statische Route keinen Teil der URL an das Requestobjekt als Parameter übergibt,
-            <emphasis>muss</emphasis> man alle Parameter die für das Bearbeiten eines Requests notwendig sind
-            als Standards an die Route übergeben. Das unterdrücken der Standardwerte von "controller" oder
-            "action" kann zu unerwarteten Ergebnissen führen, und wird dazu führen das der Request nicht
-            bearbeitet werden kann.
+            <emphasis>muss</emphasis> man alle Parameter die für das Bearbeiten eines Requests
+            notwendig sind als Standards an die Route übergeben. Das unterdrücken der Standardwerte
+            von "controller" oder "action" kann zu unerwarteten Ergebnissen führen, und wird dazu
+            führen das der Request nicht bearbeitet werden kann.
         </para>
 
         <para>
@@ -45,8 +46,8 @@ $router->addRoute('login', $route);
         </itemizedlist>
 
         <para>
-            Optional kann auch der "useDefaultControllerAlways" Parameter an den Frontkontroller wärend des
-            Bootstrappings übergeben werden:
+            Optional kann auch der "useDefaultControllerAlways" Parameter an den Frontkontroller
+            wärend des Bootstrappings übergeben werden:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -54,8 +55,8 @@ $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
 
         <para>
-            Trotzdem ist das als Workaround anzusehen; es ist immer besser vernünftige Standards explizit zu
-            definieren.
+            Trotzdem ist das als Workaround anzusehen; es ist immer besser vernünftige Standards
+            explizit zu definieren.
         </para>
     </note>
 </sect3>

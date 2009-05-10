@@ -118,7 +118,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                 <para>
                     <code>addPrefix()</code> nimmt einen Klassenprefix und verwendet Ihn um einen
                     Pfad zu ermitteln wo Helferklassen definiert wurden. Er nimmt an das der Prefix
-                    den Konventionen der Benamung von Klassen im Zend Frameworks folgt.
+                    den Konventionen der Benamung von Klassen im Zend Framework folgt.
                 </para>
 
                 <programlisting role="php"><![CDATA[

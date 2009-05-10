@@ -6,7 +6,7 @@
     <title>Einführung in Zend_Currency</title>
 
     <para>
-        <classname>Zend_Currency</classname> ist Teil starken Supports für I18n im Zend Frameworks.
+        <classname>Zend_Currency</classname> ist Teil starken Supports für I18n des Zend Frameworks.
         Es behandelt alle Arbeiten betreffend Währungen, Geld Darstellung und Formatierung.
         Ausserdem bietet es zusätzliche informative Methoden welche lokalisierte Informationen zu
         Währungen und Informationen darüber enthalten welche Währung in welcher Region verwendet

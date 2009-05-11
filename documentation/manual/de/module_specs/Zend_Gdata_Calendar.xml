@@ -90,7 +90,7 @@
                 Klassen Konstruktor nimmt eine Instanz von <classname>Zend_Http_Client</classname>
                 als einzelnes Argument. Das bietet ein Interface für AuthSub und ClientAuth
                 Authentifizierungen, da beide von Ihnen die Erstellung eines speziellen
-                authentifizierten  HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
+                authentifizierten HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
                 wird automatisch eine unauthentifizierte Instanz von
                 <classname>Zend_Http_Client</classname> erstellt.
             </para>
@@ -292,7 +292,7 @@ echo "</ul>";
                         <firstterm>User</firstterm> wird verwendet um den Benutzer zu spezifizieren
                         dessen Kalender gesucht wird, und wird als EMail Adresse spezifiziert. Wenn
                         kein Benutzer angegeben wurde, wird stattdessen "default" verwendet um den
-                        aktuellen authentifizierten Benutzer anzuzeigen  (wenn er authentifiziert
+                        aktuellen authentifizierten Benutzer anzuzeigen (wenn er authentifiziert
                         wurde).
                     </para>
                 </listitem>
@@ -389,7 +389,7 @@ $query->setStartMax('2006-12-16');
             <title>Events durch eine Volltext Abfrage erhalten</title>
             <para>
                 Um alle Events auszugeben welche ein spezielles Wort, zum Beispiel "Hundefutter"
-                enthalten, muß die  <code>setQuery()</code> Methode verwendet werden wenn die
+                enthalten, muß die <code>setQuery()</code> Methode verwendet werden wenn die
                 Abfrage erstellt wird.
             </para>
             <programlisting role="php"><![CDATA[

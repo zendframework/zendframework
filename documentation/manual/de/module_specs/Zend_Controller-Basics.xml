@@ -52,7 +52,7 @@
                     Erweiterungen dieses abstrakten Request Objektes können verwendet werden,
                     um die gesamte Anfrageumgebung zu kapseln und Routern zu erlauben,
                     Informationen aus der Anfrageumgebung abzufragen, um die Namen für
-                    Controller und Aktion zu setzen..
+                    Controller und Aktion zu setzen.
                 </para>
 
                 <para>
@@ -185,7 +185,7 @@
         <classname>Zend_Controller_Front</classname> durchläuft dann eine Dispatcher Schleife. Er
         ruft <classname>Zend_Controller_Dispatcher_Standard</classname> auf und übergibt den
         Request, um den Controller und die Aktion auszuführen, die im Request spezifiziert wurden
-        (oder verwendet die  Standardwerte). Wenn der Controller fertig ist, wird die Kontrolle
+        (oder verwendet die Standardwerte). Wenn der Controller fertig ist, wird die Kontrolle
         wieder an <classname>Zend_Controller_Front</classname> übergeben. Wenn der Controller durch
         das Zurücksetzen des Dispatch Status des Requests angezeigt hat, dass ein weiterer
         Controller ausgeführt werden soll, wird der Durchlauf fortgesetzt und ein weiterer

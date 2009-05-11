@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 <a href="<?php echo htmlspecialchars($server->getSiteRoot($_GET));?>
 <?php echo htmlspecialchars($server->getSiteRoot($_GET));?>
 </a>
-identifiziert hat uns nach Bestätigung  gefragt ob
+identifiziert hat uns nach Bestätigung gefragt ob
 <a href="<?php echo htmlspecialchars($server->getLoggedInUser());?>">
 <?php echo htmlspecialchars($server->getLoggedInUser());?>
 </a>

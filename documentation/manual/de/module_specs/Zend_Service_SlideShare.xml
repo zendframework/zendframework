@@ -237,7 +237,6 @@ $slideshow = $ss->getSlideShow(123456);
 
 print "Slide Show Titel: {$slideshow->getTitle()}<br/>\n";
 print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
-
 ]]></programlisting>
 
     </sect2>
@@ -316,7 +315,6 @@ $ss_group = $ss->getSlideShowsByGroup('mygroup', $starting_offset, $limit);
 foreach($ss_user as $slideshow) {
    print "Slide Show Titel: {$slideshow->getTitle}<br/>\n";
 }
-
 ]]></programlisting>
 
     </sect2>
@@ -352,7 +350,6 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
-
 ]]></programlisting>
 
     </sect2>
@@ -380,7 +377,6 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'PASSWORD');
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
-
 ]]></programlisting>
 
     </sect2>

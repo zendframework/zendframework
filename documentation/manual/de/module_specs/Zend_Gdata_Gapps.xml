@@ -117,7 +117,7 @@ $gdata->createUser('foo', 'Random', 'User', '••••••••');
 ]]></programlisting>
 
             <para>
-                Benutzer können durch das instanzieren eines  UserEntry erstellt werden, indem ein
+                Benutzer können durch das Instanzieren eines UserEntry erstellt werden, indem ein
                 Benutzername, ein Name, ein Familienname und ein Passwort angegeben werden und
                 anschließend <code>insertUser()</code> am Serviceobjekt aufgerufen wird um den
                 Eintrag zum Server zu laden.
@@ -445,7 +445,7 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
                 Individuelle Spitznamen können durch Erstellung einer
                 <classname>Zend_Gdata_Gapps_NicknameQuery</classname> Instanz erhalten werden, indem
                 dessen nickname Eigenschaft dem Spitznamen gleichgesetzt wird der empfangen werden
-                soll, und  <code>getNicknameEntry()</code> auf einem Server Objekt mit dieser
+                soll, und <code>getNicknameEntry()</code> auf einem Server Objekt mit dieser
                 Abfrage aufgerufen wird.
             </para>
 

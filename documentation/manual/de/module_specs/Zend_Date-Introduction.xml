@@ -47,7 +47,7 @@
 
             Durch das Setzen einer Standard-Zeitzone können in PHP können alle datums- und
             zeitabhängigen Funktionen für einen bestimmten Benutzer angepasst werden. Eine
-            vollständige Auflistung der Zeitzoneneinstellungen kann in  der <ulink
+            vollständige Auflistung der Zeitzoneneinstellungen kann in der <ulink
                 url="http://unicode.org/cldr/data/diff/supplemental/territory_containment_un_m_49.html">
                 CLDR Zeitzonen Liste</ulink> ( Englisch ) gefunden werden.
             <example id="zend.date.setdefaulttimezone.example-1">

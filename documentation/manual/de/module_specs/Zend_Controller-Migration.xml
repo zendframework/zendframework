@@ -108,7 +108,7 @@
             Dispatcher nun die Groß-/Kleinschreibung in Aktionsnamen. Das bedeutet das das
             hinleiten zu eigenen Aktionen über die URL durch Verwendung von camelCase nicht länger
             auf die gleiche Methode aufgelöst wird wie mit Trennzeichen (z.B. 'camel-casing').
-            Das führt dazu das der  ViewRenderer jetzt nur mehr zeichen-getrennte Aktionen
+            Das führt dazu das der ViewRenderer jetzt nur mehr zeichen-getrennte Aktionen
             honoriert wenn er View Skripte auflöst.
         </para>
 

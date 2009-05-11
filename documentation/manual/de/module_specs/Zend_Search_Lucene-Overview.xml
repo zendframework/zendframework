@@ -325,7 +325,7 @@ $index->addDocument($doc);
             Der dritte Parameter der <code>loadHTML()</code> und <code>loadHTMLFile()</code>
             Methoden spezifiziert optional die Kodierung des Quell- HTML Dokuments. Er wird
             verwendet wenn die Kodierung nicht durch die Angabe des Content-type MetaTags
-            HTTP-EQUIV  spezifiziert ist.
+            HTTP-EQUIV spezifiziert ist.
         </para>
 
         <para>

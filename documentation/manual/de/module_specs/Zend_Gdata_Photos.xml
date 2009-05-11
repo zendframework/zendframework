@@ -107,7 +107,7 @@
                 Klassen Konstruktor nimmt eine Instanz von <classname>Zend_Http_Client</classname>
                 als einzelnes Argument. Das bietet ein Interface für AuthSub und ClientAuth
                 Authentifizierungen, da beide von Ihnen die Erstellung eines speziellen
-                authentifizierten  HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
+                authentifizierten HTTP Clients benötigen. Wenn keine Argumente angegeben werden,
                 wird automatisch eine unauthentifizierte Instanz von
                 <classname>Zend_Http_Client</classname> erstellt.
             </para>
@@ -249,7 +249,7 @@ $service = new Zend_Gdata_Photos();
                     <firstterm>User</firstterm> wird verwendet um den Benutzer zu spezifizieren
                     dessen Daten gesucht werden, und wird als EMail Adresse spezifiziert. Wenn kein
                     Benutzer angegeben wurde, wird stattdessen "default" verwendet um den aktuellen
-                    authentifizierten Benutzer zu bezeichnen  (wenn er authentifiziert wurde).
+                    authentifizierten Benutzer zu bezeichnen (wenn er authentifiziert wurde).
                 </para>
             </listitem>
             <listitem>

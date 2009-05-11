@@ -24,7 +24,7 @@
         Instanzen. Jede elastische IP Adresse die man mit dem eigenen Account assoziiert bleibt
         mit dem eigenen Account verknüpft bis man diese explizit freigibt. Anders als traditionelle
         IP Adressen erlauben es elastische IP Adressen Instanzen zu maskieren oder Zonen Fehler
-        sichtbar zu machen indem die eigene  öffentliche IP Adresse schnell auf jede Instanz im
+        sichtbar zu machen indem die eigene öffentliche IP Adresse schnell auf jede Instanz im
         eigenen Account verknüpft werden kann.
     </para>
 
@@ -100,7 +100,6 @@ $ec2_eip->release('ipaddress);
         <programlisting role="php"><![CDATA[
 $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->associate('instance_id', 'ipaddress');
-
 ]]></programlisting>
     </example>
 

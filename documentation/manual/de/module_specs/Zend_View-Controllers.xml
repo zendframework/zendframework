@@ -128,7 +128,7 @@ $view->setScriptPath('/path/to/app/views');
             Durch Verwendung der addScriptPath() Methode können die Pfade "gestapelt" werden. Wenn
             du Pfade zu diesem Stapelspeicher hinzufügst, wird <classname>Zend_View</classname> im
             zuletzt hinzugefügten Pfad nach dem angeforderten View Skript schauen. Dies erlaubt dir,
-            Standard Views mit spezialisierten Views zu überschreiben, so dass Du  "Themen"
+            Standard Views mit spezialisierten Views zu überschreiben, so dass Du "Themen"
             oder "Skins" für einige Views erstellen kannst, während du andere bestehen lässt.
         </para>
 

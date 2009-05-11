@@ -25,7 +25,7 @@
 
         <para>
             Eine WebAnwendung, zum Beispiel, könnte erfordern das ein Benutzername zwischen sechs
-            und zwölf Zeichen lang ist und dürfte nur alphanummerische Zeichen  enthalten. Eine
+            und zwölf Zeichen lang ist und dürfte nur alphanummerische Zeichen enthalten. Eine
             Prüfung kann dafür verwendet werden um sicherzustellen das Benutzernamen diesen
             Anforderungen entsprechen. Wenn ein gewählter Benutzername einer oder beiden
             Anforderungen nicht entspricht, wäre es nützlich zu wissen welche der Anforderungen der

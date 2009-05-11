@@ -360,7 +360,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-3">
             <title>
-                Erstelle einen TrueType Zeichensatz, aber bette ihn nicht in das PDF Dokument ein.
+                Erstelle einen TrueType Zeichensatz, aber bette ihn nicht in das PDF Dokument ein
             </title>
             <programlisting role="php"><![CDATA[
 ...
@@ -392,7 +392,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-4">
             <title>
-                Werfe keine Ausnahme für Zeichensätze, die nicht eingebettet werden können.
+                Werfe keine Ausnahme für Zeichensätze, die nicht eingebettet werden können
             </title>
             <programlisting role="php"><![CDATA[
 ...
@@ -494,7 +494,6 @@ $pdfPage->setFont($font, 36)
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
             <title>Schriften von einem geladenen Dokument extrahieren</title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($documentPath);
 ...
@@ -527,7 +526,6 @@ $firstPageFonts = $firstPage->extractFonts();
                 Schriftnamens
             </title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = new Zend_Pdf();
 ...
@@ -546,7 +544,6 @@ $pdf->save($docPath);
 ...
 ]]></programlisting>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($docPath);
 ...
@@ -575,7 +572,6 @@ $pdf->save($docPath, true /* aufsteigender Update Modus */);
                         Schriftmaße bieten und die originale Schrift wird für die Berechnung der
                         Breite verwendet:
             <programlisting role="php"><![CDATA[
-
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -1117,7 +1113,6 @@ public function getFontSize();
             Methode gesetzt werden:
 
             <programlisting role="php"><![CDATA[
-
 /**
  * Setzt die Transparenz
  *

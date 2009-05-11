@@ -15,7 +15,7 @@
         <title>Was ist Amazon Ec2?</title>
         <para>
             Amazon EC2 ist ein Web Service der es erlaubt Server Instanzen in Amazon's Data Centern
-            zu starten und zu  managen indem APIs oder vorhandenen Tools und Utilities verwendet
+            zu starten und zu managen indem APIs oder vorhandenen Tools und Utilities verwendet
             werden. Man kann Amazon EC2 Server Instanzen jederzeit verwenden, solange man Sie
             benötigt, und für jeden legalen Zweck.
         </para>

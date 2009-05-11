@@ -43,7 +43,7 @@
                 "Flag": Der erste Teil einer Option, identifiziert den Zweck
                 der Option. Einem Flag werden normalerweise ein oder zwei Bindestriche
                 vorangestellt ("<code>-</code>" oder "<code>--</code>").
-                Ein einzelner  wird einem Einzel-Zeichen Flag vorangestellt oder einem
+                Ein einzelner wird einem Einzel-Zeichen Flag vorangestellt oder einem
                 Verbund von Einzel-Zeichen Flags. Ein doppelter Bindestrich wird einem
                 Mehr-Zeichen Flag vorangestellt. Lange Flags können nicht gebündelt werden.
             </para>

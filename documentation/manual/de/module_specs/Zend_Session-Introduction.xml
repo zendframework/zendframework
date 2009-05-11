@@ -45,7 +45,7 @@
         den authentifizierten Benutzern verbunden sind, innerhalb des "Zend_Auth" Namensraums zu
         speichern. Da <classname>Zend_Session</classname> intern die normalen PHP ext/session
         Funktionen verwendet, sind alle bekannten Konfigurationsoptionen und Einstellungen vorhanden
-        (siehe  <ulink url="http://www.php.net/session">http://www.php.net/session</ulink>), mit dem
+        (siehe <ulink url="http://www.php.net/session">http://www.php.net/session</ulink>), mit dem
         Bonus und Komfort durch ein Objekt-orientiertes Interface und unterstützt standardmäßig
         beides, sowohl die beste Lösung als auch eine reibungslose Integration innerhalb des Zend
         Frameworks. Deshalb hält eine standardmäßige PHP Session Identifizierer, welche entweder in

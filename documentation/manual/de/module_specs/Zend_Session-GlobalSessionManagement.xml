@@ -536,7 +536,7 @@ if (!isset($defaultNamespace->initialized)) {
             für dieses Feature. Potentielle Nicht-/Verwendung könnte temporär bei Verwendung von
             <classname>Zend_Session_Namespace</classname> Instanzen oder
             <classname>Zend_Session</classname> Methoden verhindern das auf den Session Daten
-            Speicher geschrieben wird, wärend deren  Ausführung zum Code der View transferiert wird.
+            Speicher geschrieben wird, wärend deren Ausführung zum Code der View transferiert wird.
             Versuche Aktionen auszuführen welche das Schreiben über diese Instanzen oder Methoden
             inkludieren werden eine Ausnahme werfen.
         </para>
@@ -599,7 +599,7 @@ if (!isset($defaultNamespace->initialized)) {
         <title>namespaceIsset($namespace)</title>
 
         <para>
-            Diese Methode kann dazu verwendet werden um  herauszufinden ob ein Session Namensraum
+            Diese Methode kann dazu verwendet werden um herauszufinden ob ein Session Namensraum
             existiert, oder ob ein bestimmter Index in einem bestimmten Namensraum existiert.
         </para>
 

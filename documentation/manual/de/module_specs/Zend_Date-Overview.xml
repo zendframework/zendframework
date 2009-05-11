@@ -20,7 +20,7 @@
             <title>Auswahl der Art des Datumsformats</title>
 
             <para>
-                Viele Methoden  benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's
+                Viele Methoden benutzen Zeichenketten für Datumsformate so ähnlich wie PHP's
                 <code>date()</code>. Wenn man mit den Zeichen von PHP's Datumsformaten mehr
                 Erfahrung hat als mit den ISO Zeichen für Formate dann kann man
                 <classname>Zend_Date::setOptions(array('format_type' => 'php'))</classname>

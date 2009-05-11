@@ -74,7 +74,7 @@
                         <listitem>
                             <para>
                                 <code>$secure</code>: Boolean, ob der Cookie nur über sichere
-                                Verbindungen (HTTPS) gesendet werden darf  (optional, standardmäßig
+                                Verbindungen (HTTPS) gesendet werden darf (optional, standardmäßig
                                 boolean FALSE)
                             </para>
                         </listitem>

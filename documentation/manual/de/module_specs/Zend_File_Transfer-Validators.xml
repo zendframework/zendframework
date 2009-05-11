@@ -27,7 +27,7 @@
         <listitem>
             <para>
                 <code>Crc32</code>: Diese Prüfung checkt den Crc32 Hashwert vom Inhalt einer Datei.
-                Sie basiert auf der <code>Hash</code> Prüfung und  bietet eine bequeme und einfache
+                Sie basiert auf der <code>Hash</code> Prüfung und bietet eine bequeme und einfache
                 Prüfung die nur Crc32 unterstützt.
             </para>
         </listitem>
@@ -561,7 +561,7 @@ $upload->addValidator('ExcludeExtension',
         <para>
             Diese Prüfung akzeptiert viele MIME Typ entweder als Komma-getrennter String, oder als
             Array. Man kan auch die Methoden <code>setMimeType()</code>, <code>addMimeType()</code>,
-            und  <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
+            und <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -1102,7 +1102,7 @@ $upload->addValidator('Md5',
         <para>
             Diese Prüfung akzeptiert viele MIME Typen entweder als Komma-getrennter String, oder als
             Array. Man kan auch die Methoden <code>setMimeType()</code>, <code>addMimeType()</code>,
-            und  <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
+            und <code>getMimeType()</code> verwenden um MIME Typen zu setzen und zu erhalten.
         </para>
 
         <para>

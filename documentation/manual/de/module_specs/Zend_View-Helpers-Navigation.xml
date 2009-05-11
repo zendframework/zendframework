@@ -119,7 +119,7 @@
             <listitem>
                 <para>
                     <code>{get|set}MinDepth()</code> empfängt/setzt die minimale Tiefe die eine
-                    Seite  haben muß um vom Helfer eingefügt zu werden. Das Setzen von
+                    Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
                     <code>null</code> bedeutet keine minimale Tiefe.
                 </para>
             </listitem>

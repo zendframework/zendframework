@@ -457,7 +457,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
         </para>
 
         <para>
-            Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann  die Option
+            Wenn man nur spezielle Sprache aus der Quelle übersetzen will, kann die Option
             '<code>defined_language</code>' auf <code>true</code> gesetzt werden. Mit dieser
             Option können gewünschte Sprachen explizit mit <code>addLanguage()</code>
             hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
@@ -778,7 +778,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
             mehr als einmal gesetzt werden muß. Wenn die angegebene Sprache nicht existiert, oder
             keine Übersetzten Daten für diese Sprache vorhanden sind, versucht
             <code>setLocale()</code> auf die Sprache ohne Region downzugraden wenn diese angegeben
-            wurde. Die Sprache <code>en_US</code> würde zum Beispiel zu  <code>en</code>
+            wurde. Die Sprache <code>en_US</code> würde zum Beispiel zu <code>en</code>
             downgegradet werden. Wenn sogar nach dem Downgraden die Sprache nicht gefunden werden
             konnte, wird eine Ausnahme geworfen.
         </para>

@@ -134,7 +134,7 @@ foreach ($posts->withTags(array('php', 'zend')) as $post) {
             <title>Eine Beitragsliste nach URLs filtern</title>
             <para>
               Beiträge können mit Hilfe der Methode <code>withUrl()</code> nach einem speziellen URL
-              gefiltert werden. Dabei wird ein regulärer Ausdruck  verwendet, um nach Bestandteilen
+              gefiltert werden. Dabei wird ein regulärer Ausdruck verwendet, um nach Bestandteilen
               innerhalb des URL zu suchen bzw. zu filtern.
             </para>
             <programlisting role="php"><![CDATA[

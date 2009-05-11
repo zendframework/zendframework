@@ -104,7 +104,7 @@
             Wenn ein <classname>Zend_Mime</classname> instanziiert wird, wird eine MIME Abgrenzung
             gespeichert, die von allen nachfolgenden nicht statischen Methodenaufrufen für dieses
             Objekt verwendet wird. Wenn der Konstruktur mit einem String Parameter aufgerufen wird,
-            wird dieser Wert als MIME Abgrenzung  verwendet. Anderfalls wird eine zufällige MIME
+            wird dieser Wert als MIME Abgrenzung verwendet. Anderfalls wird eine zufällige MIME
             Abgrenzung während der Konstruktionsphase generiert.
         </para>
         <para>

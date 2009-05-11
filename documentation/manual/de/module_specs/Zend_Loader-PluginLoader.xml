@@ -115,7 +115,7 @@ $loader = new Zend_Loader_PluginLoader(array(
         </note>
 
         <para>
-            <classname>Zend_Loader_PluginLoader</classname> erlaubt es auch optional Plugins  über
+            <classname>Zend_Loader_PluginLoader</classname> erlaubt es auch optional Plugins über
             Plugin-fähige Objekte zu teilen, ohne das eine Singleton Instanz verwendet werden muß.
             Das wird durch eine statische Registrierung ermöglicht. Der Name des Registry muß bei
             der Instanziierung als zweiter Parameter an den Konstruktor übergeben werden:

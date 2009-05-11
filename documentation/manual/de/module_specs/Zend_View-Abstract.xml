@@ -41,7 +41,7 @@ protected function _run()
         <emphasis>und jede Methode oder jeden Member dieses Objekts</emphasis>. Da viele
         Operationen von Membern mit limitierter Sichtbarkeit abhängen, führt das zu einem Problem:
         Das View Skript können potentiell Aufrufe zu solchen Methoden tätigen, oder kritische
-        Eigenschaften direkt ändern. Angenommen ein Skript überschreibt  <code>$_path</code> oder
+        Eigenschaften direkt ändern. Angenommen ein Skript überschreibt <code>$_path</code> oder
         <code>$_file</code> unabsichtlich -- jeder weitere Aufruf zu <code>render()</code> oder
         View Helfern würde fehlschlagen!
     </para>

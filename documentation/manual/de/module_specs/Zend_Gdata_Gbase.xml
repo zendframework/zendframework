@@ -235,7 +235,7 @@ $service = new Zend_Gdata_Gbase();
             </para>
             <para>
                 Wenn Elemente empfangen werden indem die Base API verwendet wird, werden speziell
-                konstruierte Abfrage URLs verwendet um  zu beschreiben welche Evente zurückgegeben
+                konstruierte Abfrage URLs verwendet um zu beschreiben welche Evente zurückgegeben
                 werden sollen. Die <classname>Zend_Gdata_Gbase_ItemQuery</classname> und
                 <classname>Zend_Gdata_Gbase_SnippetQuery</classname> Klassen vereinfachen diese
                 Aufgabe durch die automatische Erstellung einer Anfrage URL basierend auf den

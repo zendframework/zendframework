@@ -359,7 +359,7 @@ $adapter->addResponse(
     "Content-Type: text/html" . "\r\n" .
                                     "\r\n" .
     '<html>' .
-    '  <head><title>Meine Haustierseite...</title></head>' .
+    '  <head><title>Meine Haustierseite</title></head>' .
     '  <body><p>...</p></body>' .
     '</html>');
 
@@ -376,7 +376,7 @@ $adapter->addResponse(
         <para>
             Das oben angeführte Beispiel kann dazu benutzt werden, um die Reaktion
             der eigenen Anwendung auf einen 302 Redirect (Weiterleitung) zu testen.
-            Abhängig  von Ihrer Anwendung, kann es gewollt oder nicht gewollt sein,
+            Abhängig von Ihrer Anwendung, kann es gewollt oder nicht gewollt sein,
             dass dem Redirect gefolgt wird.
         </para>
     </sect2>

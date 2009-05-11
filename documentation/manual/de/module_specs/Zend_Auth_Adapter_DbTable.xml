@@ -125,8 +125,7 @@ $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
 $authAdapter
     ->setTableName('users')
     ->setIdentityColumn('username')
-    ->setCredentialColumn('password')
-;
+    ->setCredentialColumn('password');
 ]]></programlisting>
 
             <para>
@@ -356,7 +355,6 @@ $select->where('active = "TRUE"');
 
 // Authentifizieren, das stellt sicher das users.active = TRUE
 $adapter->authenticate();
-
 ]]></programlisting>
 
     </sect2>

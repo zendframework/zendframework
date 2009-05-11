@@ -114,7 +114,7 @@ class FooController extends Zend_Controller_Action
             <para>
                 Der primäre Grund um den <code>ViewRenderer</code> auszuschalten ist, wenn einfach
                 kein View Objekt benötigt wird, oder wenn nicht über ein View Skript gerendert
-                werden soll (zum Beispiel wenn ein Aktion Kontroller  verwendet wird um Web Service
+                werden soll (zum Beispiel wenn ein Aktion Kontroller verwendet wird um Web Service
                 Protokolle wie SOAP, XML-RPC oder REST anzubieten. In den meisten Fällen wird man
                 den <code>ViewRenderer</code> nie global ausschalten müssen, nur selektiv innerhalb
                 einzelner Kontroller oder Aktionen.
@@ -137,7 +137,7 @@ class FooController extends Zend_Controller_Action
         <para>
             Der bessere Weg als die Instanzierung zu ändern ist die Verwendung der
             <code>init()</code> Methode, welche nach der letzten Aufgabe von
-            <code>__construct()</code> aufgerufen wird. Zum Beispiel wenn  man sich zu einer
+            <code>__construct()</code> aufgerufen wird. Zum Beispiel wenn man sich zu einer
             Datenbank bei der Instanzierung verbinden will:
         </para>
 

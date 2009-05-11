@@ -52,7 +52,7 @@
             <code>isDate();</code> prüft natürlich auch ob ein Datum existiert.
             <classname>Zend_Date</classname> selbst prüft die Daten nicht. Deshalb ist es möglich
             ein Datum wie zum Beispiel '31.Februar.2000' mit <classname>Zend_Date</classname> zu
-            erstellen  weil <classname>Zend_Date</classname> das Datum automatisch korrigiert und
+            erstellen weil <classname>Zend_Date</classname> das Datum automatisch korrigiert und
             ein gültiges Datum zurück gibt. In unserem Fall den '03.März.2000'. Auf der anderen
             Seite führt <code>isDate()</code> diese Prüfung durch und gibt beim '31.Februar.2000'
             falsch zurück, weil sie weiß das dieses Datum unmöglich ist.

@@ -42,7 +42,7 @@
         <title>Barcode</title>
         <para>
             Dieser Prüfer wird mit einem Barcode Typ instanziert gegen den ein Barcode Wert geprüft
-            werden soll. Aktuell werden die  "<code>UPC-A</code>" (Universal Product Code) und
+            werden soll. Aktuell werden die "<code>UPC-A</code>" (Universal Product Code) und
             "<code>EAN-13</code>" (European Article Number) Barcode Typen unterstützt, und die
             <code>isValid()</code> Methode gibt dann und nur dann true zurück wenn die Eingabe
             erfolgreich gegen den Barcode Prüfalgorithmus geprüft wurde. Es sollten alle von den

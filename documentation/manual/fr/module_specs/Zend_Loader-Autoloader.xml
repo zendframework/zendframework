@@ -1,46 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>L'autoloader</title>
 
     <para>
-        <classname>Zend_Loader_Autoloader</classname> propose une solution intelligente et souple
-        d'auto-chargement (autoload) pour Zend Framework. Il a été conçu pour remplir plusieurs
-        objectifs:
+        <classname>Zend_Loader_Autoloader</classname> propose une solution intelligente et
+        souple d'auto-chargement (autoload) pour Zend Framework. Il a Ã©tÃ© conÃ§u pour remplir
+        plusieurs objectifs&#160;:
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Proposer un autoloader à base d'espaces de noms. (Auparavant, les espaces de noms étaient
-            intercéptés.)
-        </para></listitem>
+        <listitem>
+            <para>
+                Proposer un autoloader Ã  base d'espaces de noms (auparavant, les espaces de
+                noms Ã©taient interceptÃ©s).
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Proposer d'enregistrer des autoloads personnalisés, et les gérer comme une pile.
-            (A l'heure actuelle, ceci permet de s'affranchir de certaines contraintes avec
-            <code>spl_autoload</code>, qui ne permet pas le réenregistrement d'une fonction
-            Ã  base d'objet).
-        </para></listitem>
+        <listitem>
+            <para>
+                Proposer d'enregistrer des autoloads personnalisÃ©s, et les gÃ©rer comme une
+                pile. (A l'heure actuelle, ceci permet de s'affranchir de certaines contraintes avec
+                <code>spl_autoload</code>, qui ne permet pas le rÃ©-enregistrement d'une fonction Ã Â 
+                base d'objet).
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Proposer un autoload optimisé pour les espaces de noms, qui permet une meilleure
-            résolution des noms de classes.
-        </para></listitem>
+        <listitem>
+            <para>
+                Proposer un autoload optimisÃ© pour les espaces de noms, qui permet une
+                meilleure rÃ©solution des noms de classes.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
         <classname>Zend_Loader_Autoloader</classname> est un singleton, il est donc
-        universellement accessible. Ceci permet d'enregistrer des autoload depuis n'importe
-        où dans votre code.
+        universellement accessible. Ceci permet d'enregistrer des autoload depuis n'importe oÃ¹ dans
+        votre code.
     </para>
 
     <sect2 id="zend.loader.autoloader.usage">
-        <title>Utiler le chargeur automatique (autoloadeur)</title>
+        <title>Utiliser le chargeur automatique (autoloader)</title>
 
         <para>
-            La première fois qu'une instance de l'autoloader est créee, il s'enregistre lui-même sur la
-            fonction <code>spl_autoload</code>. Vous récupérez son instance via la méthode
-            <code>getInstance()</code>:
+            La premiÃ¨re fois qu'une instance de l'autoloader est crÃ©Ã©e, il s'enregistre
+            lui-mÃªme sur la fonction <code>spl_autoload</code>. Vous rÃ©cupÃ©rez son instance via la
+            mÃ©thode <code>getInstance()</code>&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -48,11 +55,11 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
 
         <para>
-            Par défaut, l'autoloader est configurer pour capturer les espaces de noms "Zend_" et
-            "ZendX_". Si votre propre librairie de code utilise un espace de noms différent, vous
-            devez alors enregistrer celui-ci avec la méthode <code>registerNamespace()</code>.
-            Par exemple, si votre librairie possède l'espace de noms "My_", vous devriez agir
-            comme cela::
+            Par dÃ©faut, l'autoloader est configurer pour capturer les espaces de noms "Zend_"
+            et "ZendX_". Si votre propre librairie de code utilise un espace de noms diffÃ©rent, vous
+            devez alors enregistrer celui-ci avec la mÃ©thode <code>registerNamespace()</code>. Par
+            exemple, si votre librairie possÃ¨de l'espace de noms "My_", vous devriez agir comme
+            cela&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -60,28 +67,28 @@ $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
         <note>
-            <title>Préfixes des espaces de noms</title>
+            <title>PrÃ©fixes des espaces de noms</title>
 
             <para>
-                Notez que l'exemple précédent enregistre "My_" et non "My".
-                Ceci car <classname>Zend_Loader_Autoloader</classname> est un autoloader
-                global, et n'a aucune idée qu'un préfixe de classe possède un underscore.
-                Si c'est <emphasis>votre </emphasis> cas, alors faites le apparaitre lors
-                de son enregistrement dans l'autoloader.
+                Notez que l'exemple prÃ©cÃ©dent enregistre "My_" et non "My". Ceci car
+                <classname>Zend_Loader_Autoloader</classname> est un autoloader global, et n'a
+                aucune idÃ©e qu'un prÃ©fixe de classe possÃ¨de un underscore. Si c'est <emphasis>votre
+                </emphasis> cas, alors faites le apparaÃ®tre lors de son enregistrement dans
+                l'autoloader.
             </para>
         </note>
 
         <para>
             Il est aussi possible que vous enregistriez vos propres fonctions d'autoload,
-            optionnellement avec un espace de noms spécifique,
+            optionnellement avec un espace de noms spÃ©cifique,
             <classname>Zend_Loader_Autoloader</classname> va alors tenter de l'utiliser lorsque
-            nécessaire (lors de l'auto-chargement).
+            nÃ©cessaire (lors de l'auto-chargement).
         </para>
 
         <para>
             Par exemple, vous pourriez avoir besoin d'un ou plusieurs composants eZcomponents
-            avec votre application Zend Framework. Pour utiliser ses capacités d'autoload,
-            ajoutez son autoloader Ã  votre pile grâce Ã  <code>pushAutoloader()</code>:
+            avec votre application Zend Framework. Pour utiliser ses capacitÃ©s d'autoload, ajoutez
+            son autoloader Ã Â votre pile grÃ¢ce Ã Â <code>pushAutoloader()</code>&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -94,15 +101,16 @@ $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
         </para>
 
         <para>
-            <code>unshiftAutoloader()</code>, elle, rajoute la méthode d'autoload au début de la pile.
+            <code>unshiftAutoloader()</code>, elle, rajoute la mÃ©thode d'autoload au dÃ©but de
+            la pile.
         </para>
 
         <para>
-            Par défaut, <classname>Zend_Loader_Autoloader</classname> ne supprime aucune erreur
-            lorsqu'il utilise son autoloader interne, s'appuyant sur
+            Par dÃ©faut, <classname>Zend_Loader_Autoloader</classname> ne supprime aucune
+            erreur lorsqu'il utilise son autoloader interne, s'appuyant sur
             <classname>Zend_Loader::loadClass()</classname>. La plupart du temps, c'est le
-            comportement recherché. Cependant, si vous voulez faire apparaitre les éventuelles
-            erreurs de chargement, appelez alors <code>suppressNotFoundWarnings()</code>:
+            comportement recherchÃ©. Cependant, si vous voulez faire apparaÃ®tre les Ã©ventuelles
+            erreurs de chargement, appelez alors <code>suppressNotFoundWarnings()</code>&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -110,12 +118,11 @@ $autoloader->suppressNotFoundWarnings(true);
 ]]></programlisting>
 
         <para>
-            Enfin, il se peut que vous vouliez que l'autoloader par défaut charge toutes
-            les classes de tous les espaces de noms. Par exemple, les librairies PEAR
-            ne partagent pas un espace de noms commun, ce qui rend la tâche difficile
-            si on veut associer chacun des espaces de noms internes. Utilisez alors
-            <code>setFallbackAutoloader()</code> pour rendre l'autoloader "global"
-            et charger tous les espaces de noms:
+            Enfin, il se peut que vous vouliez que l'autoloader par dÃ©faut charge toutes les
+            classes de tous les espaces de noms. Par exemple, les librairies PEAR ne partagent pas
+            un espace de noms commun, ce qui rend la tÃ¢che difficile si on veut associer chacun des
+            espaces de noms internes. Utilisez alors <code>setFallbackAutoloader()</code> pour
+            rendre l'autoloader "global" et charger tous les espaces de noms&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -127,9 +134,9 @@ $autoloader->setFallbackAutoloader(true);
         <title>L'interface de l'autoloader</title>
 
         <para>
-            Vous pouvez donc ajouter des fonctions de chargement par espace de noms, mais
-            Zend Framework définit aussi une interface pour l'autoload,
-            <classname>Zend_Loader_Autoloader_Interface</classname>:
+            Vous pouvez donc ajouter des fonctions de chargement par espace de noms, mais Zend
+            Framework dÃ©finit aussi une interface pour l'autoload,
+            <classname>Zend_Loader_Autoloader_Interface</classname>&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -140,13 +147,13 @@ interface Zend_Loader_Autoloader_Interface
 ]]></programlisting>
 
         <para>
-            L'utilisation de l'interface vous permet de passer un objet aux méthodes 
+            L'utilisation de l'interface vous permet de passer un objet aux mÃ©thodes
             <code>pushAutoloader()</code> et <code>unshiftAutoloader()</code> de
-            <classname>Zend_Loader_Autoloader</classname>:
+            <classname>Zend_Loader_Autoloader</classname>&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
-// Foo_Autoloader implémente Zend_Loader_Autoloader_Interface:
+// Foo_Autoloader implÃ©mente Zend_Loader_Autoloader_Interface:
 $foo = new Foo_Autoloader();
 
 $autoloader->pushAutoloader($foo, 'Foo_');
@@ -154,279 +161,372 @@ $autoloader->pushAutoloader($foo, 'Foo_');
     </sect2>
 
     <sect2 id="zend.loader.autoloader.reference">
-        <title>Référence de l'autoloader</title>
+        <title>RÃ©fÃ©rence de l'autoloader</title>
 
         <para>
-            Voici un guide des méthodes de <classname>Zend_Loader_Autoloader</classname>.
+            Voici un guide des mÃ©thodes de
+            <classname>Zend_Loader_Autoloader</classname>.
         </para>
 
         <table id="zend.loader.autoloader.reference.api">
-            <title>Zend_Loader_Autoloader Methods</title>
+            <title>MÃ©thodes de Zend_Loader_Autoloader</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
-                        <entry>Méthode</entry>
+                        <entry>MÃ©thode</entry>
                         <entry>Valeur de retour</entry>
-                        <entry>Paramètres</entry>
+                        <entry>ParamÃ¨tres</entry>
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><code>getInstance()</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Retourne l'instance singleton de <classname>Zend_Loader_Autoloader</classname>
-                            Au premier appel, enregistre l'autoloader avec <code>spl_autoload</code>.
-                            Cette méthode est statique.
-                        </para></entry>
+                        <entry>
+                            <para>
+                                Retourne l'instance singleton de
+                                <classname>Zend_Loader_Autoloader</classname> Au premier appel,
+                                enregistre l'autoloader avec <code>spl_autoload</code>. Cette
+                                mÃ©thode est statique.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>resetInstance()</code></entry>
                         <entry><code>void</code></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Remet à zéro l'état interne de <classname>Zend_Loader_Autoloader</classname>
-                            en désenregistrant les fonctions d'autoload éventuellement présentes, ainsi que
-                            tous les espaces de noms.
-                        </para></entry>
+                        <entry>
+                            <para>
+                                Remet Ã  zÃ©ro l'Ã©tat interne de
+                                <classname>Zend_Loader_Autoloader</classname> en dÃ©senregistrant les
+                                fonctions d'autoload Ã©ventuellement prÃ©sentes, ainsi que tous les
+                                espaces de noms.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>autoload($class)</code></entry>
                         <entry><code>string|false</code></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$class</code>, <emphasis>requis</emphasis>.
-                                Une classe à charger.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Essaye de résoudre un nom de classe en fichier, et tente de la charger.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$class</code>, <emphasis>requis</emphasis>. Une
+                                        classe Ã  charger.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Essaye de rÃ©soudre un nom de classe en fichier, et tente de la
+                                charger.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>setDefaultAutoloader($callback)</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$callback</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Spécifie une fonction PHP à utiliser comme autoloader par défaut.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$callback</code>,
+                                        <emphasis>requis</emphasis>.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                SpÃ©cifie une fonction PHP Ã  utiliser comme autoloader par dÃ©faut.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>getDefaultAutoloader()</code></entry>
                         <entry><code>callback</code></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Retourne la fonction d'autoload par défaut, il s'agit par défaut de
-                            <classname>Zend_Loader::loadClass()</classname>.
-                        </para></entry>
+                        <entry>
+                            <para>
+                                Retourne la fonction d'autoload par dÃ©faut, il s'agit par
+                                dÃ©faut de <classname>Zend_Loader::loadClass()</classname>.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>setAutoloaders(array $autoloaders)</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$autoloaders</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Passe une liste d'autoloaders (sous forme de noms
-                            de fonctions PHP) Ã  ajouter Ã  la pile de ceux déja présents.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$autoloaders</code>,
+                                        <emphasis>requis</emphasis>.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Passe une liste d'autoloaders (sous forme de noms de
+                                fonctions PHP) ÃƒÂ  ajouter ÃƒÂ  la pile de ceux dÃ©jÃ  prÃ©sents.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>getAutoloaders()</code></entry>
                         <entry><code>array</code></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Récupère la pile d'autoloaders interne.
-                        </para></entry>
+                        <entry><para>RÃ©cupÃ¨re la pile d'autoloaders interne.</para></entry>
                     </row>
 
                     <row>
                         <entry><code>getNamespaceAutoloaders($namespace)</code></entry>
                         <entry><code>array</code></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>requis</emphasis>
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Récupère tous les autoloaders qui sont associés à un certain
-                            espace de noms.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>,
+                                        <emphasis>requis</emphasis>
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                RÃ©cupÃ¨re tous les autoloaders qui sont associÃ©s Ã  un
+                                certain espace de noms.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>registerNamespace($namespace)</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Enregistre un ou plusieurs espaces de noms, avec l'autoloader
-                            par défaut. Si <code>$namespace</code> est une chaine, c'est cet
-                            espace de noms qui sera enregistré, si c'est un tableau de chaines,
-                            ils le seront tous.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>,
+                                        <emphasis>requis</emphasis>.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Enregistre un ou plusieurs espaces de noms, avec
+                                l'autoloader par dÃ©faut. Si <code>$namespace</code> est une chaÃ®ne,
+                                c'est cet espace de noms qui sera enregistrÃ©, si c'est un tableau de
+                                chaÃ®nes, ils le seront tous.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>unregisterNamespace($namespace)</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Désenregistre (supprime) un espace de noms depuis l'autoloader
-                            par défaut. Si <code>$namespace</code> est une chaine, c'est cet
-                            espace de noms qui sera désenregistré, si c'est un tableau de chaines,
-                            ils le seront tous.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>,
+                                        <emphasis>requis</emphasis>.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                DÃ©senregistre (supprime) un espace de noms depuis
+                                l'autoloader par dÃ©faut. Si <code>$namespace</code> est une chaÃ®ne,
+                                c'est cet espace de noms qui sera dÃ©senregistrÃ©, si c'est un tableau
+                                de chaÃ®nes, ils le seront tous.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>getRegisteredNamespace()</code></entry>
                         <entry><code>array</code></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Retourne un tableau comportant tous les espaces de noms enregistrés
-                            avec l'autoloader par défaut.
-                        </para></entry>
+                        <entry>
+                            <para>
+                                Retourne un tableau comportant tous les espaces de noms
+                                enregistrÃ©s avec l'autoloader par dÃ©faut.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>suppressNotFoundWarnings($flag = null)</code></entry>
                         <entry><code>boolean|Zend_Loader_Autoloader</code></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$flag</code>, <emphasis>optionnel</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Affecte ou récupère la valeur du paramètre indiquant si l'autoloader
-                            par défaut doit supprimer les warnings "file not found". Si aucun argument
-                            (ou null) lui est passé, il retourne sa valeur actuelle, dans le cas contraire,
-                            il retournera l'instance de l'autoloader permettant le chainage des méthodes.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para><code>$flag</code>, <emphasis>optionnel</emphasis>.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Affecte ou rÃ©cupÃ¨re la valeur du paramÃ¨tre indiquant si l'autoloader
+                                par dÃ©faut doit supprimer les warnings "file not found". Si aucun
+                                argument (ou null) lui est passÃ©, il retourne sa valeur actuelle,
+                                dans le cas contraire, il retournera l'instance de l'autoloader
+                                permettant le chainage des mÃ©thodes.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>setFallbackAutoloader($flag)</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$flag</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Affecte la valeur du drapeau utilisé pour déterminer si l'autoloader par défaut
-                            doit être utilisé comme "catch-all" pour charger tous les espaces de noms.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para><code>$flag</code>, <emphasis>requis</emphasis>.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Affecte la valeur du drapeau utilisÃ© pour dÃ©terminer si
+                                l'autoloader par dÃ©faut doit Ãªtre utilisÃ© comme "catch-all" pour
+                                charger tous les espaces de noms.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>isFallbackAutoloader()</code></entry>
                         <entry><code>boolean</code></entry>
                         <entry>N/A</entry>
-                        <entry><para>
-                            Retourne la valeur du drapeau utilisé pour déterminer si l'autoloader par défaut
-                            doit être utilisé comme "catch-all" pour charger tous les espaces de noms.
-                        </para></entry>
+                        <entry>
+                            <para>
+                                Retourne la valeur du drapeau utilisÃ© pour dÃ©terminer si
+                                l'autoloader par dÃ©faut doit Ãªtre utilisÃ© comme "catch-all" pour
+                                charger tous les espaces de noms.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>getClassAutoloaders($class)</code></entry>
                         <entry><code>array</code></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$class</code>, <emphasis>requis</emphasis>.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Retourne une liste d'autoloaders d'espaces de noms qui pourraient
-                            correspondre à la classe indiquée. Si aucun ne correspond, la liste de
-                            tous les autoloaders globaux (non associés à des espaces de noms) sera
-                            retournée.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para><code>$class</code>, <emphasis>requis</emphasis>.</para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Retourne une liste d'autoloaders d'espaces de noms qui pourraient
+                                correspondre Ã  la classe indiquÃ©e. Si aucun ne correspond, la
+                                liste de tous les autoloaders globaux (non associÃ©s Ã  des espaces de
+                                noms) sera retournÃ©e.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>unshiftAutoloader($callback, $namespace = '')</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$callback</code>, <emphasis>requis</emphasis>.
-                                Une fonction PHP valide.
-                            </para></listitem>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$callback</code>, <emphasis>requis</emphasis>. Une
+                                        fonction PHP valide.
+                                    </para>
+                                </listitem>
 
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>optionnel</emphasis>.
-                                Une chaine représentant un préfixe de classe.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Ajoute un autoloader au début de la pile des autoloaders internes.
-                            Si un espace de noms est fourni, il sera utilisé pour cet autoloader,
-                            sinon l'autoloader sera global.
-                        </para></entry>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>, <emphasis>optionnel</emphasis>.
+                                        Une chaÃ®ne reprÃ©sentant un prÃ©fixe de classe.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Ajoute un autoloader au dÃ©but de la pile des autoloaders
+                                internes. Si un espace de noms est fourni, il sera utilisÃ© pour cet
+                                autoloader, sinon l'autoloader sera global.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>pushAutoloader($callback, $namespace = '')</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$callback</code>, <emphasis>requis</emphasis>.
-                                Une fonction PHP valide.
-                            </para></listitem>
-
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>optionnel</emphasis>.
-                                Une chaine représentant un préfixe de classe.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Ajoute un autoloader à la fin de la pile des autoloaders internes.
-                            Si un espace de noms est fourni, il sera utilisé pour cet autoloader,
-                            sinon l'autoloader sera global.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$callback</code>, <emphasis>requis</emphasis>. Une
+                                        fonction PHP valide.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>, <emphasis>optionnel</emphasis>.
+                                        Une chaÃ®ne reprÃ©sentant un prÃ©fixe de classe.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Ajoute un autoloader Ã  la fin de la pile des autoloaders
+                                internes. Si un espace de noms est fourni, il sera utilisÃ© pour cet
+                                autoloader, sinon l'autoloader sera global.
+                            </para>
+                        </entry>
                     </row>
 
                     <row>
                         <entry><code>removeAutoloader($callback, $namespace = '')</code></entry>
                         <entry><classname>Zend_Loader_Autoloader</classname></entry>
-                        <entry><itemizedlist>
-                            <listitem><para>
-                                <code>$callback</code>, <emphasis>required</emphasis>.
-                                Une fonction PHP valide.
-                            </para></listitem>
-
-                            <listitem><para>
-                                <code>$namespace</code>, <emphasis>optional</emphasis>.
-                                Une chaine représentant un préfixe de classe, ou un tableau
-                                de chaines.
-                            </para></listitem>
-                        </itemizedlist></entry>
-                        <entry><para>
-                            Supprime un autoloader de la pile interne. Si un espace de noms
-                            est indiqué, supprime l'autoloader pour cet espace de noms uniquement.
-                        </para></entry>
+                        <entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <code>$callback</code>, <emphasis>requis</emphasis>. Une
+                                        fonction PHP valide.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                    <para>
+                                        <code>$namespace</code>, <emphasis>optionnel</emphasis>.
+                                        Une chaÃ®ne reprÃ©sentant un prÃ©fixe de classe, ou un tableau
+                                        de chaÃ®nes.
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>
+                            <para>
+                                Supprime un autoloader de la pile interne. Si un espace de
+                                noms est indiquÃ©, supprime l'autoloader pour cet espace de noms
+                                uniquement.
+                            </para>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

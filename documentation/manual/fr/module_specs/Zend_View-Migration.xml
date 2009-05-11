@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.migration">
     <title>Migration depuis les versions précédentes</title>
 
     <para>
-        Ce chapitre explique les cassures de compatibilités dans
-        Zend_View, et devrait servir de guide de migration pour ce composant.
+        Ce chapitre explique les cassures de compatibilités dans Zend_View, et devrait servir
+        de guide de migration pour ce composant.
     </para>
 
     <sect2 id="zend.view.migration.zf5748">
@@ -13,11 +14,12 @@
 
         <para>
             Avant la version 1.7.5, l'équipe de Zend Framework a été avertie d'une faille
-            potencielle d'inclusion de fichier local ("Local File Inclusion" (LFI)) dans la méthode
+            potentielle d'inclusion de fichier local ("Local File Inclusion" (LFI)) dans la méthode
             <classname>Zend_View::render()</classname>. Avant 1.7.5, la méthode acceptait par défaut
             la possibilité de spécifier des scripts de vue comportant des indications de dossier
-            parent (comme, "../" ou "..\"). Ceci ouvre la possibilité à une attaque LFI si des données
-            utilisateurs non filtrées sont passées directement à la méthode <code>render()</code>:
+            parent (comme, "../" ou "..\"). Ceci ouvre la possibilité à une attaque LFI si des
+            données utilisateurs non filtrées sont passées directement à la méthode
+            <code>render()</code>:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -26,7 +28,8 @@ echo $view->render($_GET['foobar']); // inclusion LFI
 ]]></programlisting>
 
         <para>
-            <classname>Zend_View</classname> emet maintenant une exception dans un tel cas.
+            <classname>Zend_View</classname> émet maintenant une exception dans un tel
+            cas.
         </para>
 
         <sect3 id="zend.view.migration.zf5748.disabling">
@@ -36,7 +39,7 @@ echo $view->render($_GET['foobar']); // inclusion LFI
                 Comme des développeurs utilisaient de telles notations, mais qui n'étaient
                 <emphasis>pas</emphasis> des données en provenance de l'extérieur, un drapeau
                 spécial a été crée, il permet de désactiver la protection. Pour manipuler ce
-                drapeau, il existe 2 moyens : le paramètre 'lfiProtectionOn' du constructeur de
+                drapeau, il existe 2 moyens&#160;: le paramètre 'lfiProtectionOn' du constructeur de
                 votre vue, ou encore la méthode <code>setLfiProtection()</code>.
             </para>
 
@@ -51,6 +54,3 @@ $view->setLfiProtection(false);
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

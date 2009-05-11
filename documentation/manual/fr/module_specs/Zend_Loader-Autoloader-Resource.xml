@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Autoloaders de ressources</title>
 
     <para>
-        Les autoloaders de ressources servent à manipuler du code de librairies dans des espaces de noms,
-        respectant les conventions de codage du Zend Framework, mais n'ayant pas une correspondance
-        1:1 entre le nom de la classe et la structure du dossier. Leur but est de faciliter le chargement
-        du code des ressources de l'application, comme les modèles, les ACLs, les formulaires ...
+        Les autoloaders de ressources servent à manipuler du code de librairies dans des
+        espaces de noms, respectant les conventions de codage du Zend Framework, mais n'ayant pas
+        une correspondance 1:1 entre le nom de la classe et la structure du dossier. Leur but est de
+        faciliter le chargement du code des ressources de l'application, comme les modèles, les
+        ACLs, les formulaires...
     </para>
 
     <para>
         Les autoloaders de ressources s'enregistrent dans l'<link
-            linkend="zend.loader.autoloader">autoloader</link> à leur instanciation, avec l'espace de noms
-        auquels ils sont rattachés. Ceci permet de facilement isoler du code dans des dossiers, sous l'espace
-        de noms, tout en gardant les bénéfices de l'autoload.
+        linkend="zend.loader.autoloader">autoloader</link> à leur instanciation, avec l'espace de
+        noms auxquels ils sont rattachés. Ceci permet de facilement isoler du code dans des
+        dossiers, sous l'espace de noms, tout en gardant les bénéfices de l'autoload.
     </para>
 
     <sect2 id="zend.loader.autoloader-resource.usage">
         <title>Utilisation de l'autoloader de ressources</title>
 
-        <para>
-            Soit la structure de répertoires suivante:
-        </para>
+        <para>Soit la structure de répertoires suivante&#160;:</para>
 
         <programlisting role="text"><![CDATA[
 path/to/some/directory/
@@ -36,15 +36,15 @@ path/to/some/directory/
 
         <para>
             Au sein de ce répertoire, toutes les classes sont préfixées par l'espace de noms
-            "My_". Dans le dossier "acls", le préfixe de composant "Acl_" est ajouté, ce qui
-            donne un nom de classe final "My_Acl_Site". Aussi, le dossier "forms" 
-            correspond à "Form_", ce qui donne "My_Form_Login". Le dossier "models" n'a pas 
-            d'espace de noms particulier, donnant donc "My_User".
+            "My_". Dans le dossier "acls", le préfixe de composant "Acl_" est ajouté, ce qui donne
+            un nom de classe final "My_Acl_Site". Aussi, le dossier "forms" correspond à "Form_", ce
+            qui donne "My_Form_Login". Le dossier "models" n'a pas d'espace de noms particulier,
+            donnant donc "My_User".
         </para>
 
         <para>
-            Pour instancier un autoloader de ressoucres, il faut au minimum lui passer son dossier
-            de travail (base path), et le nom de l'espace de noms correspondant:
+            Pour instancier un autoloader de ressoucres, il faut au minimum lui passer son
+            dossier de travail (base path), et le nom de l'espace de noms correspondant&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -60,19 +60,18 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             <para>
                 Dans <classname>Zend_Loader_Autoloader</classname>, vous devez spécifier le
                 underscore final ("_") dans votre espace de noms.
-                <classname>Zend_Loader_Autoloader_Resource</classname> suppose par contre
-                que tout le code à auto-charger utilisera le séparateur d'espaces de noms
-                underscore. Ainsi, vous n'avez pas besoin de le préciser avec l'autoloader
-                de ressources.
+                <classname>Zend_Loader_Autoloader_Resource</classname> suppose par contre que tout
+                le code à auto-charger utilisera le séparateur d'espaces de noms underscore. Ainsi,
+                vous n'avez pas besoin de le préciser avec l'autoloader de ressources.
             </para>
         </note>
 
         <para>
             Maintenant que notre autoloader est configuré, nous pouvons ajouter des composants
             à auto-charger. Ceci se fait via la méthode <code>addResourceType()</code>, qui accepte
-            3 arguments : un "type" de ressource, utiliser en interne comme nom de référence; le sous
-            dossier dans lequel la ressource en question est logé, et l'espace de noms du composant
-            à rajouter à l'espace de noms général. Voici un exemple:
+            3 arguments : un "type" de ressource, utiliser en interne comme nom de référence&#160;;
+            le sous dossier dans lequel la ressource en question est logé, et l'espace de noms du
+            composant à rajouter à l'espace de noms général. Voici un exemple&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -83,7 +82,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
 
         <para>
             Aussi, vous auriez pu effectuer la même action avec un tableau PHP.
-            <code>addResourceTypes()</code> est alors appropriée:
+            <code>addResourceTypes()</code> est alors appropriée&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -103,8 +102,8 @@ $resourceLoader->addResourceTypes(array(
 ]]></programlisting>
 
         <para>
-            Enfin, vous pouvez spécifier tout cela d'un seul coup avec des tableaux nichés.
-            La clé doit alors être "resourceTypes":
+            Enfin, vous pouvez spécifier tout cela d'un seul coup avec des tableaux nichés. La
+            clé doit alors être "resourceTypes"&#160;:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -134,9 +133,10 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         <para>
             Zend Framework fournit une implémentation concrète de
             <classname>Zend_Loader_Autoloader_Resource</classname> qui contient des correspondances
-            de ressources pour mettre en avant la structure modulaire par défaut que propose le
-            Zend Framework dans ses applications MVC. Ce chargeur,
-            <classname>Zend_Application_Module_Autoloader</classname>, propose le mapping suivant:
+            de ressources pour mettre en avant la structure modulaire par défaut que propose le Zend
+            Framework dans ses applications MVC. Ce chargeur,
+            <classname>Zend_Application_Module_Autoloader</classname>, propose le mapping
+            suivant&#160;:
         </para>
 
         <programlisting role="text"><![CDATA[
@@ -148,26 +148,31 @@ plugins/     => Plugin
 ]]></programlisting>
 
         <para>
-            Par exemple, avec un module dont le préfixe est "Blog_", le chargement de 
-            la classe "Blog_Form_Entry" mènerait au chargement du fichier "forms/Entry.php".
+            Par exemple, avec un module dont le préfixe est "Blog_", le chargement de la
+            classe "Blog_Form_Entry" mènerait au chargement du fichier "forms/Entry.php".
         </para>
 
         <para>
-            En utilisant les bootstraps de modules avec <classname>Zend_Application</classname>, une
-            instance de <classname>Zend_Application_Module_Autoloader</classname> sera crée pour chaque module
+            En utilisant les bootstraps de modules avec
+            <classname>Zend_Application</classname>, une instance de
+            <classname>Zend_Application_Module_Autoloader</classname> sera crée pour chaque module
             utilisé.
         </para>
     </sect2>
 
     <sect2 id="zend.loader.autoloader-resource.factory">
         <title>Utiliser les autoloaders de ressources comme fabriques d'objets</title>
+
         <para></para>
+
         <!-- @todo -->
     </sect2>
 
     <sect2 id="zend.loader.autoloader-resource.reference">
         <title>Référence de l'autoloader de ressources</title>
+
         <para></para>
+
         <!-- @todo -->
     </sect2>
 

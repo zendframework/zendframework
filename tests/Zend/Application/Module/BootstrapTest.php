@@ -145,11 +145,11 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
                     'baseUrl'             => '/foo',
                     'controllerDirectory' => dirname(__FILE__),
                 ),
-                'bootstrap' => array(
-                    'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
-                    'class' => 'ZfAppBootstrap',
-                )
             ),
+            'bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
+                'class' => 'ZfAppBootstrap',
+            )
         ));
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('FrontController');
@@ -160,6 +160,34 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         $this->assertSame($front, $test);
         $this->assertEquals('/foo', $test->getBaseUrl());
         $this->assertEquals(dirname(__FILE__), $test->getControllerDirectory('default'));
+    }
+
+    /**
+     * @group ZF-6545
+     */
+    public function testModuleBootstrapsShouldNotAcceptModuleResourceInOrderToPreventRecursion()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
+        $this->application->setOptions(array(
+            'resources' => array(
+                'modules' => array(),
+                'frontController' => array(
+                    'baseUrl'             => '/foo',
+                    'moduleDirectory'     => dirname(__FILE__) . '/../_files/modules',
+                ),
+            ),
+            'bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
+                'class' => 'ZfAppBootstrap',
+            )
+        ));
+        $appBootstrap = $this->application->getBootstrap();
+        $appBootstrap->bootstrap('Modules');
+        $modules = $appBootstrap->getResource('Modules');
+        foreach ($modules as $bootstrap) {
+            $resources = $bootstrap->getPluginResourceNames();
+            $this->assertFalse($bootstrap->hasPluginResource('Modules'), var_export($resources, 1));
+        }
     }
 }
 

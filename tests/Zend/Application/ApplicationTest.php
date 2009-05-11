@@ -295,7 +295,7 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
     public function testPassingArrayOptionsWithConfigKeyShouldLoadOptionsAndOverride()
     {
         $application = new Zend_Application('testing', array('foo' => 'baz', 'config' => dirname(__FILE__) . '/_files/appconfig.inc'));
-        $this->assertEquals('baz', $application->getOption('foo'));
+        $this->assertEquals('bar', $application->getOption('foo'));
     }
 
     /**

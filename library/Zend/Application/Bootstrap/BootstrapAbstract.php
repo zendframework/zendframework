@@ -398,7 +398,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         ) {
             $this->_application = $application;
         } else {
-            throw new Zend_Application_Bootstrap_Exception('Invalid application provided to bootstrap constructor');
+            throw new Zend_Application_Bootstrap_Exception('Invalid application provided to bootstrap constructor (received "' . get_class($application) . '" instance)');
         }
         return $this;
     }

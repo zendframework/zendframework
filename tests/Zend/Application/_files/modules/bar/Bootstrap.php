@@ -1,5 +1,5 @@
 <?php
-class Bar_Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
+class Bar_Bootstrap extends Zend_Application_Module_Bootstrap
 {
     public $bootstrapped = false;
 

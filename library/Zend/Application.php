@@ -119,7 +119,7 @@ class Zend_Application
         $options = array_change_key_case($options, CASE_LOWER);
 
         if (!empty($options['config'])) {
-            $options += $this->_loadConfig($options['config']);
+            $options = array_merge($options, $this->_loadConfig($options['config']));
         }
         
         $this->_options = $options;
@@ -263,7 +263,9 @@ class Zend_Application
             $class = 'Bootstrap';
         }
 
-        require_once $path;
+        if (!class_exists($class)) {
+            require_once $path;
+        }
         $this->_bootstrap = new $class($this);
         
         return $this;

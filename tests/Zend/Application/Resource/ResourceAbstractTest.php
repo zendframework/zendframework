@@ -120,7 +120,7 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
         $options3  = array(
             'foo' => 'BAR',
         );
-        $expected = $options1 + $options2 + $options3;
+        $expected = array_merge_recursive($options1, $options2, $options3);
         $resource->setOptions($options1)
                  ->setOptions($options2)
                  ->setOptions($options3);

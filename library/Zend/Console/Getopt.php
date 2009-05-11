@@ -126,6 +126,7 @@
  */
 class Zend_Console_Getopt
 {
+
     /**
      * The options for a given application can be in multiple formats.
      * modeGnu is for traditional 'ab:c:' style getopt format.
@@ -149,23 +150,26 @@ class Zend_Console_Getopt
      * ruleMode is either 'zend' or 'gnu' or a user-defined mode.
      * dashDash is true if '--' signifies the end of command-line options.
      * ignoreCase is true if '--opt' and '--OPT' are implicitly synonyms.
+     * parseAll is true if all options on the command line should be parsed, regardless of
+     * whether an argument appears before them.
      */
     const CONFIG_RULEMODE                   = 'ruleMode';
     const CONFIG_DASHDASH                   = 'dashDash';
     const CONFIG_IGNORECASE                 = 'ignoreCase';
+    const CONFIG_PARSEALL                   = 'parseAll';
 
     /**
      * Defaults for getopt configuration are:
      * ruleMode is 'zend' format,
      * dashDash (--) token is enabled,
-     * ignoreCase is not enabled.
-     *
-     * @var array Config
+     * ignoreCase is not enabled,
+     * parseAll is enabled.
      */
     protected $_getoptConfig = array(
         self::CONFIG_RULEMODE   => self::MODE_ZEND,
         self::CONFIG_DASHDASH   => true,
-        self::CONFIG_IGNORECASE => false
+        self::CONFIG_IGNORECASE => false,
+        self::CONFIG_PARSEALL => true
     );
 
     /**
@@ -699,8 +703,15 @@ class Zend_Console_Getopt
                 $this->_parseLongOption($argv);
             } else if (substr($argv[0], 0, 1) == '-' && ('-' != $argv[0] || count($argv) >1))  {
                 $this->_parseShortOptionCluster($argv);
-            } else {
+            } else if($this->_getoptConfig[self::CONFIG_PARSEALL]) {
                 $this->_remainingArgs[] = array_shift($argv);
+            } else {
+                /*
+                 * We should put all other arguments in _remainingArgs and stop parsing
+                 * since CONFIG_PARSEALL is false.
+                 */
+                $this->_remainingArgs = array_merge($this->_remainingArgs, $argv);
+                break;
             }
         }
         $this->_parsed = true;

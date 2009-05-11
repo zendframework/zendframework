@@ -15,7 +15,7 @@
     <para>
         <classname>Zend_Tag_Item</classname> est un composant proposant les fonctionnalités
         basiques pour traiter des tags dans <classname>Zend_Tag</classname>. Une entités taguables
-        consiste en un titre et un poids (nombre d'occurences). Il existe aussi d'autres paramètres
+        consiste en un titre et un poids (nombre d'occurrences). Il existe aussi d'autres paramètres
         utilisés par <classname>Zend_Tag</classname>.
     </para>
 

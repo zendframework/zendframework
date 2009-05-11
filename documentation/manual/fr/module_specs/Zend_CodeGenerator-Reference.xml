@@ -31,15 +31,15 @@ abstract class Zend_CodeGenerator_Abstract
 
             <para>
                 Le constructeur appelle <code>_init()</code> (restée vide, à écrire dans les
-                classes concrêtes), puis passe le paramètre <code>$options</code> à
+                classes concrètes), puis passe le paramètre <code>$options</code> à
                 <code>setOptions()</code>, et enfin appelle <code>_prepare()</code> (encore une
-                fois, vide, à écrire dans les classes concrêtes).
+                fois, vide, à écrire dans les classes concrètes).
             </para>
 
             <para>
-                Comme partout dans le Zend Framework, <code>setOptions()</code> compare les
+                Comme partout dans Zend Framework, <code>setOptions()</code> compare les
                 clés du tableau passé comme paramètre à des setters de la classe, et passe donc la
-                valeur à la bonne méhode si trouvée.
+                valeur à la bonne méthode si trouvée.
             </para>
 
             <para>
@@ -112,7 +112,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
             <para>
                 <classname>Zend_CodeGenerator_Php_Body</classname> est utilisée pour générer
                 du code PHP procédural à inclure dans un fichier. Vous passez donc simplement du
-                contenu à cet objet, qui vous le resortira une fois son <code>generate()</code>
+                contenu à cet objet, qui vous le ressortira une fois son <code>generate()</code>
                 appelé.
             </para>
 

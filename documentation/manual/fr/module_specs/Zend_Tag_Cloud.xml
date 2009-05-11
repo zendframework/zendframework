@@ -165,9 +165,9 @@ echo $cloud;
                 <listitem>
                     <para>
                         <code>htmlTags</code>&#160;: un tableau de tags HTML entourant l'ancre.
-                        Chaque élément peut être une chaine de caractères, utilisée comme type
+                        Chaque élément peut être une chaîne de caractères, utilisée comme type
                         d'élément, ou un tableau contenant une liste d'attributs pour l'élément. La
-                        clé du tableau est alors utlisée pour définir le type de l'élément.
+                        clé du tableau est alors utilisée pour définir le type de l'élément.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -193,9 +193,9 @@ echo $cloud;
                 <listitem>
                     <para>
                         <code>htmlTags</code>&#160;: un tableau de balises HTML entourant chaque
-                        tag. Chaque élément peut être une chaine de caractères, utilisée comme type
+                        tag. Chaque élément peut être une chaîne de caractères, utilisée comme type
                         d'élément, ou un tableau contenant une liste d'attributs pour l'élément. La
-                        clé du tableau est alors utlisée pour définir le type de l'élément.
+                        clé du tableau est alors utilisée pour définir le type de l'élément.
                     </para>
                 </listitem>
             </itemizedlist>

@@ -52,7 +52,7 @@ class Foo
     </example>
 
     <example id="zend.codegenerator.examples.class-properties">
-        <title>Generer des classes PHP avec des attributs de classe</title>
+        <title>Générer des classes PHP avec des attributs de classe</title>
 
         <para>
             Suivant l'exemple précédant, nous ajoutons maintenant des attributs à la
@@ -262,8 +262,8 @@ class Foo
         </para>
 
         <para>
-            Dans l'exemple suivant, nous supposonsque vous avez défini <code>$foo</code> comme
-            étant le code d'une des classes des exemples précédants.
+            Dans l'exemple suivant, nous supposons que vous avez défini <code>$foo</code> comme
+            étant le code d'une des classes des exemples précédents.
         </para>
 
         <programlisting role="php"><![CDATA[

@@ -15,7 +15,7 @@
         <title>Théorie</title>
 
         <para>
-            Dans la plupart des cas, vous crérez une instance du générateur de code, et vous
+            Dans la plupart des cas, vous créerez une instance du générateur de code, et vous
             le configurez. Pour afficher le code généré, un simple echo suffira, ou l'appel à sa
             méthode <code>generate()</code>.
         </para>

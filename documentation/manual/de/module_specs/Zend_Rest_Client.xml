@@ -137,8 +137,7 @@ echo $result->firstname() .' '. $result->lastname();
         </result>
     </document>
 </tapi>
-]]>
-</programlisting>
+]]></programlisting>
         </example>
 
         <para>

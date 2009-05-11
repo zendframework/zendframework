@@ -5,7 +5,7 @@
     <title>Erweitert</title>
 
     <sect2 id="zend.search.lucene.advanced.format_migration">
-        <title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen.</title>
+        <title>Beginnend mit 1.6, Behandlung von Index Format Veränderungen</title>
 
         <para>
             Die <classname>Zend_Search_Lucene</classname> Komponente arbeitet mit den Index Formaten

@@ -360,7 +360,7 @@ $row->delete();
 
             <example id="zend.db.table.row.serialize.serializing.example">
 
-                <title>Beispiel: Eine Zeile serialisieren.</title>
+                <title>Beispiel: Eine Zeile serialisieren</title>
 
                 <programlisting role="php"><![CDATA[
 $bugs = new Bugs();
@@ -611,7 +611,7 @@ if ($loggingEnabled) {
 
             <example id="zend.db.table.row.extending.overriding-example2">
 
-                <title>Zeilenklasse, die Insert Daten für verschiedene Tabellen loggt.</title>
+                <title>Zeilenklasse, die Insert Daten für verschiedene Tabellen loggt</title>
 
                 <para>
                     Es könnte sein, dass eigene Anwendungslogik für mehrere Tabellen angewendet

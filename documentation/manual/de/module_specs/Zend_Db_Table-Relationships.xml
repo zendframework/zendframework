@@ -17,8 +17,8 @@
         </para>
 
         <para>
-            Die <classname>Zend_Db_Table_Row</classname> Klasse besitzt Methoden für die Abfrage von verknüpften Zeilen in
-            anderen Tabellen.
+            Die <classname>Zend_Db_Table_Row</classname> Klasse besitzt Methoden für die Abfrage von
+            verknüpften Zeilen in anderen Tabellen.
         </para>
 
     </sect2>
@@ -29,10 +29,10 @@
 
         <para>
             Die Klassen für jede eigene Tabelle müssen durch das Erweitern der abstrakten Klasse
-            <classname>Zend_Db_Table_Abstract</classname>, wie in <xref linkend="zend.db.table.defining" /> beschrieben,
-            definiert werden. Siehe auch unter <xref linkend="zend.db.adapter.example-database" />
-            für eine Beschreibug einer Beispieldatenbank für welche der folgende Beispielcode
-            designed wurde.
+            <classname>Zend_Db_Table_Abstract</classname>, wie in
+            <xref linkend="zend.db.table.defining" /> beschrieben, definiert werden. Siehe auch
+            unter <xref linkend="zend.db.adapter.example-database" /> für eine Beschreibug einer
+            Beispieldatenbank für welche der folgende Beispielcode designed wurde.
         </para>
 
         <para>
@@ -98,11 +98,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
 ]]></programlisting>
 
         <para>
-            Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende UPDATE und DELETE Operationen zu
-            emulieren, muß das <code>$_dependentTables</code> Array in der Klasse für die
-            Eltern-Tabelle definiert werden. Der Klassenname muß für jede abhängige Komponente
-            aufgelistet werden. Hierbei muß der Klassenname und nicht der physikalische Name der
-            SQL Tabelle verwendet werden.
+            Wenn <classname>Zend_Db_Table</classname> verwendet wird um kaskadierende UPDATE und
+            DELETE Operationen zu emulieren, muß das <code>$_dependentTables</code> Array in der
+            Klasse für die Eltern-Tabelle definiert werden. Der Klassenname muß für jede abhängige
+            Komponente aufgelistet werden. Hierbei muß der Klassenname und nicht der physikalische
+            Name der SQL Tabelle verwendet werden.
         </para>
 
         <note>
@@ -233,9 +233,9 @@ $row->findDependentRowset($table, [$rule]);
 ]]></programlisting>
 
         <para>
-            Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> Objekt zurück, welche ein Set von
-            Zeilen der abhängigen Tabelle <code>$table</code> enthält die die Zeile referenzieren
-            die durch das <code>$row</code> Objekt identifiziert werden.
+            Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> Objekt
+            zurück, welche ein Set von Zeilen der abhängigen Tabelle <code>$table</code> enthält die
+            die Zeile referenzieren die durch das <code>$row</code> Objekt identifiziert werden.
         </para>
 
         <para>
@@ -309,7 +309,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
 
             <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
 
-                <title>Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird</title>
+                <title>
+                    Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
+                </title>
 
                 <para>
                     Dieses Beispiel zeigt wir ein Zeilenobjekt von der Tabelle
@@ -367,9 +369,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 Einige Applikationsframeworks, wie Ruby on Rails, verwenden einen Mechanismus der
                 "inflection" genannt wird um die Änderung der Schreibweise von Identifizierern
                 abhängig von der Verwendung zu erlauben. Der Einfachheit halber, bietet
-                <classname>Zend_Db_Table_Row</classname> keinen Inflection Mechanismus an. Die Identität der Tabelle und
-                der Regelschlüssel die im Methodenaufruf genannt werden müssen der Schreibweise der
-                Klasse und des Regelschlüssels exakt entsprechen.
+                <classname>Zend_Db_Table_Row</classname> keinen Inflection Mechanismus an. Die
+                Identität der Tabelle und der Regelschlüssel die im Methodenaufruf genannt werden
+                müssen der Schreibweise der Klasse und des Regelschlüssels exakt entsprechen.
             </para>
 
         </note>
@@ -484,9 +486,10 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
 
         <para>
             Alternativ, können Zeilen von der Elterntabelle abgefragt werden indem eine
-            "magische Methode" verwendet wird. <classname>Zend_Db_Table_Row_Abstract</classname> ruft die Methode:
-            <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> auf wenn eine Methode
-            auf dem Zeilenobjekt aufgerufen wird die einer der folgenden Pattern entspricht:
+            "magische Methode" verwendet wird. <classname>Zend_Db_Table_Row_Abstract</classname>
+            ruft die Methode: <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> auf
+            wenn eine Methode auf dem Zeilenobjekt aufgerufen wird die einer der folgenden Pattern
+            entspricht:
         </para>
 
         <itemizedlist>
@@ -570,11 +573,11 @@ $row->findManyToManyRowset($table,
 ]]></programlisting>
 
         <para>
-            Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück welches Zeilen von der
-            Tabelle <code>$table</code> enthält, und der Viele-Zu-Viele Abhängigkeit entspricht.
-            Das aktuelle Zeilenobjekt <code>$row</code> von der originalen Tabelle wird verwendet
-            um Zeilen in der Verknüpfungstabelle zu finden, und es ist mit der Zieltabelle
-            verbunden.
+            Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück
+            welches Zeilen von der Tabelle <code>$table</code> enthält, und der Viele-Zu-Viele
+            Abhängigkeit entspricht. Das aktuelle Zeilenobjekt <code>$row</code> von der originalen
+            Tabelle wird verwendet um Zeilen in der Verknüpfungstabelle zu finden, und es ist mit
+            der Zieltabelle verbunden.
         </para>
 
         <para>
@@ -645,7 +648,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
 
-            <title>Ein Zeilenset mit einer Viele-Zu-Viele Methode durch eine spezielle Regel holen</title>
+            <title>
+                Ein Zeilenset mit einer Viele-Zu-Viele Methode durch eine spezielle Regel holen
+            </title>
 
             <para>
                 Dieses Beispiel zeigt wie man ein Zeilenobjekt von der Originaltabelle
@@ -751,9 +756,9 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <title>Deklarieren von DRI in der Datenbank:</title>
 
             <para>
-                Die Deklaration von kaskadierenden Operationen in <classname>Zend_Db_Table</classname>
-                <emphasis>nur</emphasis> für RDBMS Marken gedacht die keine
-                deklarative referentielle Integrität unterstützen (DRI).
+                Die Deklaration von kaskadierenden Operationen in
+                <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> für RDBMS Marken
+                gedacht die keine deklarative referentielle Integrität unterstützen (DRI).
             </para>
 
             <para>
@@ -765,9 +770,10 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <para>
                 Wenn die eigene RDBMS DRI implementiert sowie die <code>ON DELETE</code> und
                 <code>ON UPDATE</code> Klauseln, sollten diese Klauseln im eigenen Datenbank Schema
-                deklariert werden, anstatt das kaskadierende Feature von <classname>Zend_Db_Table</classname> zu
-                verwenden. Die Deklaration von DRI Regeln in der RDBMS ist besser für die
-                Geschwindigkeit der Datenbank, Konsistenz und Integrität.
+                deklariert werden, anstatt das kaskadierende Feature von
+                <classname>Zend_Db_Table</classname> zu verwenden. Die Deklaration von DRI Regeln in
+                der RDBMS ist besser für die Geschwindigkeit der Datenbank, Konsistenz und
+                Integrität.
             </para>
 
             <para>
@@ -820,13 +826,13 @@ $product1234->delete();
         </para>
 
         <para>
-            Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu deklarieren, müssen die Regeln
-            in <code>$_referenceMap</code> bearbeitet werden. Die assoziativen Arrayschlüssel
-            <code>'onDelete'</code> und <code>'onUpdate'</code> müssen auf den String 'cascade'
-            (oder die Konstante <code>self::CASCADE</code>) gesetzt werden. Bevor eine Zeile von
-            der Elterntabelle gelöscht wird oder dessen Wert des primären Schlüssels aktualisiert
-            wird, werden alle Zeilen in der abhängigen Tabelle, die die Eltern-Zeilen
-            referenzieren, zuerst gelöscht oder aktualisiert.
+            Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu
+            deklarieren, müssen die Regeln in <code>$_referenceMap</code> bearbeitet werden. Die
+            assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code> müssen
+            auf den String 'cascade' (oder die Konstante <code>self::CASCADE</code>) gesetzt werden.
+            Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert des primären
+            Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle, die die
+            Eltern-Zeilen referenzieren, zuerst gelöscht oder aktualisiert.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
@@ -879,10 +885,11 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <para>
                 Das bedeutet, das wenn die eigene Datenbank referentielle integrative Verknüpfungen
                 implementiert und erzwingt, ein kaskadierends <code>UPDATE</code> das durch eine
-                <classname>Zend_Db_Table</classname> Klasse ausgeführt wird mit der Verknüpfung kollidiert, und in einem
-                referentiellen integrativen Verstoß mündet. Ein kaskadierendes <code>UPDATE</code>
-                kann in <classname>Zend_Db_Table</classname> <emphasis>nur</emphasis> dann verwendet werden wenn die
-                eigene Datenbank die referentielle integrative Verknüpfung nicht erzwingt.
+                <classname>Zend_Db_Table</classname> Klasse ausgeführt wird mit der Verknüpfung
+                kollidiert, und in einem referentiellen integrativen Verstoß mündet. Ein
+                kaskadierendes <code>UPDATE</code> kann in <classname>Zend_Db_Table</classname>
+                <emphasis>nur</emphasis> dann verwendet werden wenn die eigene Datenbank die
+                referentielle integrative Verknüpfung nicht erzwingt.
             </para>
 
             <para>
@@ -913,20 +920,21 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis>Kaskadierende Operationen in <classname>Zend_Db_Table</classname> werden nur durch
-                <classname>Zend_Db_Table</classname> aufgerufen.</emphasis>
+                <emphasis>Kaskadierende Operationen in <classname>Zend_Db_Table</classname> werden
+                nur durch <classname>Zend_Db_Table</classname> aufgerufen.</emphasis>
             </para>
 
             <para>
-                Kaskadierendes Löschen und Aktualisieren welches in den eigenen <classname>Zend_Db_Table</classname> Klassen
-                definiert wurde werden ausgeführt wenn die <code>save()</code> oder
-                <code>delete()</code> Methoden der Zeilenklasse ausgeführt werden. Trotzdem, wenn
-                ein Update oder Löschen von Daten durch Verwendung eines anderen Interfaces
-                durchgeführt wird, wie durch ein Abfragetool oder eine andere Anwendung, werden die
-                kaskadierenden Operationen nicht ausgeführt. Selbst wenn die <code>update()</code>
-                und <code>delete()</code> Methoden in der <classname>Zend_Db_Adapter</classname> Klasse verwendet werden,
-                werden die kaskadierenden Operationen die in der eigenen <classname>Zend_Db_Table</classname> Klasse
-                definiert wurden, nicht ausgeführt.
+                Kaskadierendes Löschen und Aktualisieren welches in den eigenen
+                <classname>Zend_Db_Table</classname> Klassen definiert wurde werden ausgeführt wenn
+                die <code>save()</code> oder <code>delete()</code> Methoden der Zeilenklasse
+                ausgeführt werden. Trotzdem, wenn ein Update oder Löschen von Daten durch Verwendung
+                eines anderen Interfaces durchgeführt wird, wie durch ein Abfragetool oder eine
+                andere Anwendung, werden die kaskadierenden Operationen nicht ausgeführt. Selbst
+                wenn die <code>update()</code> und <code>delete()</code> Methoden in der
+                <classname>Zend_Db_Adapter</classname> Klasse verwendet werden, werden die
+                kaskadierenden Operationen die in der eigenen <classname>Zend_Db_Table</classname>
+                Klasse definiert wurden, nicht ausgeführt.
             </para>
 
             <para>

@@ -27,7 +27,6 @@ echo "     Sie hat " . count($functions) . ":\n";
 foreach ($functions as $function) {
     echo "         " . $function->getName() . "\n";
 }
-
 ]]></programlisting>
     </example>
 

@@ -19,7 +19,7 @@
     </note>
 
     <sect2 id="zend.soap.wsdl.constructor">
-        <title>Zend_Soap_Wsdl Konstruktor.</title>
+        <title>Zend_Soap_Wsdl Konstruktor</title>
         <para>
             Der <classname>Zend_Soap_Wsdl</classname> Konstruktor nimmt drei Parameter:
             <orderedlist>
@@ -50,7 +50,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.addmessage">
-        <title>Die addMessage() Methode.</title>
+        <title>Die addMessage() Methode</title>
         <para>
             Die <code>addMessage($name, $parts)</code> Methode fügt eine neue Nachrichten
             Beschreibung zu einem WSDL Dokumetn hinzu (/definitions/message Element).
@@ -100,7 +100,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_type">
-        <title>Die addPortType() Methode.</title>
+        <title>Die addPortType() Methode</title>
         <para>
             Die <code>addPortType($name)</code> Methode fügt neue Port Typen zu einem WSDL Dokument
             (/definitions/portType) mit dem spezifizierten Port Typ Namen hinzu.
@@ -115,7 +115,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_port_operation">
-        <title>Die addPortOperation() Methode.</title>
+        <title>Die addPortOperation() Methode</title>
         <para>
             Die <code>addPortOperation($portType, $name, $input = false, $output = false, $fault =
             false)</code> Methode fügt eine neue Port Operation zum spezifizierten Port Typ des WSDL
@@ -159,7 +159,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding">
-        <title>Die addBinding() Methode.</title>
+        <title>Die addBinding() Methode</title>
         <para>
             Die <code>addBinding($name, $portType)</code> Methode fügt neue Bindungen in das WSDL
             Dokument ein (/definitions/binding).
@@ -181,7 +181,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding_operation">
-        <title>Die addBindingOperation() Methode.</title>
+        <title>Die addBindingOperation() Methode</title>
         <para>
             Die <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault =
             false)</code> Methode fügt eine Operation zu einem gebundenen Element mit dem
@@ -205,7 +205,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_binding">
-        <title>Die addSoapBinding() Methode.</title>
+        <title>Die addSoapBinding() Methode</title>
         <para>
             Die <code>addSoapBinding($binding, $style = 'document', $transport =
             'http://schemas.xmlsoap.org/soap/http')</code> Methode fügt einen SOAP Bindung Eintrag
@@ -223,7 +223,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_soap_operation">
-        <title>Die addSoapOperation() Methode.</title>
+        <title>Die addSoapOperation() Methode</title>
         <para>
             Die <code>addSoapOperation($binding, $soap_action)</code> Methode fügt einen SOAP
             Operations Eintrag ('soap:operation') zum Bindungs Element mit den spezifizierten
@@ -247,7 +247,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_service">
-        <title>Die addService() Methode.</title>
+        <title>Die addService() Methode</title>
         <para>
             Die <code>addService($name, $port_name, $binding, $location)</code> Methode fügt dem
             WSDL Dokument ein '/definitions/service' Element mit dem spezifizierten Web Service
@@ -302,7 +302,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.types">
-        <title>Typ Entsprechung.</title>
+        <title>Typ Entsprechung</title>
         <para>
             Die Zend_Soap WSDL Implementation der Zugriffsmethoden verwendet die folgenden Typ
             Entsprechungen zwischen PHP und SOAP Typen:
@@ -365,7 +365,7 @@
         </para>
 
         <sect3 id="zend.soap.wsdl.types.retrieve">
-            <title>Empfangen von Typ Informationen.</title>
+            <title>Empfangen von Typ Informationen</title>
             <para>
                 Die <code>getType($type)</code> Methode kann verwendet werden um ein Mapping für
                 einen spezifizierten PHP Typ zu erhalten:
@@ -388,7 +388,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         </sect3>
 
         <sect3 id="zend.soap.wsdl.types.add_complex">
-            <title>Hinzufügen komplexer Typ Informationen.</title>
+            <title>Hinzufügen komplexer Typ Informationen</title>
             <para>
                 Die <code>addComplexType($type)</code> Methode wird verwendet um komplexe Typen
                 (PHP Klassen) zu einem WSDL Dokument hinzuzufügen.
@@ -482,7 +482,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_documentation">
-        <title>Die addDocumentation() Methode.</title>
+        <title>Die addDocumentation() Methode</title>
         <para>
             Die <code>addDocumentation($input_node, $documentation)</code> Methode fügt menschlich
             lesbare Dokumentation hinzu indem das optionale 'wsdl:document' Element verwendet wird.
@@ -497,7 +497,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.retrieve">
-        <title>Das endgültige WSDL Dokument erhalten.</title>
+        <title>Das endgültige WSDL Dokument erhalten</title>
         <para>
             Die <code>toXML()</code>, <code>toDomDocument()</code> und <code>dump($filename =
             false)</code> Methoden können verwendet werden um das WSDL Dokument als XML, DOM

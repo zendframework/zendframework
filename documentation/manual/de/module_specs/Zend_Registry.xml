@@ -91,7 +91,7 @@ foreach ($registry as $index => $value) {
 
         <para>
             Zusätzlich zur Verwendung der statischen Registry über die statischen Methoden,
-            kann eine  Instanz direkt erzeugt werden und als Objekt verwendet werden.
+            kann eine Instanz direkt erzeugt werden und als Objekt verwendet werden.
         </para>
 
         <para>

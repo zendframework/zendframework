@@ -293,7 +293,7 @@ print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
         </itemizedlist>
 
         <para>
-            Jede der obigen Methoden des empfangens mehrerer Slideshows zeigt das ein ähnlicher
+            Jede der obigen Methoden des Empfangens mehrerer Slideshows zeigt das ein ähnlicher
             Ansatz verwendet wird. Ein Beispiel der Verwendung jeder Methode wird anbei gezeigt:
         </para>
 
@@ -365,7 +365,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             Wenn das Verhalten des HTTP Clients, aus welchen Gründen auch immer, geändert werden
             soll wenn eine Anfrage an den Webservice durchgeführt wird, kann das durch die
             Erstellung einer eigenen Instanz eines <classname>Zend_Http_Client</classname> Objektes
-            durchgeführt werden (siehe  <xref linkend="zend.http" />). Das ist zum Beispiel
+            durchgeführt werden (siehe <xref linkend="zend.http" />). Das ist zum Beispiel
             nützlich wenn es gewünscht ist das Timeout für die Verbindung auf etwas anderes als
             den Standardwert zu setzen wie anbei gezeigt:
         </para>

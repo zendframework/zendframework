@@ -71,7 +71,7 @@ $memObject = $memoryManager->createLocked($data);
 
     <sect2 id="zend.memory.memory-objects.value">
 
-        <title>Memory Container 'value' Eigenschaft.</title>
+        <title>Memory Container 'value' Eigenschaft</title>
 
         <para>
             Die '<code>value</code>' Eigenschaft des Memory Containers (gesperrt oder verschiebbar)

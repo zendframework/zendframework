@@ -10,9 +10,9 @@
         <title>Einführung</title>
 
         <para>
-            Die <classname>Zend_Db_Table</classname> Klasse ist eine Objekt-Orientierte Schnittstelle zu Datenbank
-            Tabellen. Sie bietet Methoden für viele gängige Operationen an Tabellen. Die
-            Basisklasse ist erweiterbar, daher kann eigene Logik eingeführt werden.
+            Die <classname>Zend_Db_Table</classname> Klasse ist eine Objekt-Orientierte
+            Schnittstelle zu Datenbank Tabellen. Sie bietet Methoden für viele gängige Operationen
+            an Tabellen. Die Basisklasse ist erweiterbar, daher kann eigene Logik eingeführt werden.
         </para>
 
         <para>
@@ -78,10 +78,11 @@ class bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Es kann auch ein Schema für die Tabelle angegeben werden. Entweder mit der protected Variablen
-                <code>$_schema</code> oder mit dem Schema vorangestellt in der <code>$_name</code> Eigenschaft.
-                Jedes Schema welches in der <code>$_name</code> Eigenschatf angegeben ist wird vorrangig gegenüber
-                dem Schema der <code>$_schema</code> Eigenschaft behandelt. In einigen RDBMS Marken ist die
+                Es kann auch ein Schema für die Tabelle angegeben werden. Entweder mit der protected
+                Variablen <code>$_schema</code> oder mit dem Schema vorangestellt in der
+                <code>$_name</code> Eigenschaft. Jedes Schema welches in der <code>$_name</code>
+                Eigenschaft angegeben ist wird vorrangig gegenüber dem Schema der
+                <code>$_schema</code> Eigenschaft behandelt. In einigen RDBMS Marken ist die
                 Bezeichnung für Schema "database" oder "tablespace", wird aber ähnlich verwendet.
             </para>
 
@@ -115,10 +116,11 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Die Schema und Tabellennamen können auch mit Konstruktor Konfigurationsdirektiven angegeben werden,
-                welche jegliche Standardwerte, angegeben in den <code>$_name</code> und <code>$_schema</code>
-                Eigenschaften, überschreiben. Eine Schema Angabe welche mit der <code>name</code> Directive
-                angegeben wurde überschreibt jeglichen Wert welcher von der <code>schema</code> Option
+                Die Schema und Tabellennamen können auch mit Konstruktor Konfigurationsdirektiven
+                angegeben werden, welche jegliche Standardwerte, angegeben in den
+                <code>$_name</code> und <code>$_schema</code> Eigenschaften, überschreiben. Eine
+                Schema Angabe welche mit der <code>name</code> Directive angegeben wurde
+                überschreibt jeglichen Wert welcher von der <code>schema</code> Option
                 bereitgestellt ist.
             </para>
 
@@ -149,8 +151,8 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
             </example>
 
             <para>
-                Wenn kein Schemaname angegeben wird, so wird als Standard der Schemaname des Datenbankadapters
-                verwendet.
+                Wenn kein Schemaname angegeben wird, so wird als Standard der Schemaname des
+                Datenbankadapters verwendet.
             </para>
 
         </sect3>
@@ -160,10 +162,10 @@ $tableBugs = new Bugs(array('name' => 'bug_db.bugs',
             <title>Angeben des Primärschlüssels der Tabelle</title>
 
             <para>
-                Jede Tabelle muss einen Primärschlüssel haben. Die Spalte des Primärschlüssels kann mit der
-                protected Variablen <code>$_primary</code> angegeben werden. Sie enthält entweder einen String,
-                welcher die einzelen Spalte benennt, oder ein Array von Spaltennamen, wenn der Primärschlüssel
-                ein zusammengesetzter Schlüssel ist.
+                Jede Tabelle muss einen Primärschlüssel haben. Die Spalte des Primärschlüssels kann
+                mit der protected Variablen <code>$_primary</code> angegeben werden. Sie enthält
+                entweder einen String, welcher die einzelen Spalte benennt, oder ein Array von
+                Spaltennamen, wenn der Primärschlüssel ein zusammengesetzter Schlüssel ist.
             </para>
 
             <example id="zend.db.table.defining.primary-key.example">
@@ -181,17 +183,19 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Wenn kein Primärschlüssel angegeben wird, versucht <classname>Zend_Db_Table_Abstract</classname> den Primärschlüssel mit
-                Hilfe der <code>describeTable()</code> Methode zu ermitteln.
+                Wenn kein Primärschlüssel angegeben wird, versucht
+                <classname>Zend_Db_Table_Abstract</classname> den Primärschlüssel mit Hilfe der
+                <code>describeTable()</code> Methode zu ermitteln.
             </para>
 
             <note>
 
                 <para>
-                    Jede Table Klasse muss wissen mit welche(r/n) Spalte(n) Zeilen eindeutig identifiziert werden
-                    können. Wenn keine Primärschlüssel Spalte(n) in der Klassendefinition oder als Argument für den
-                    Konstruktor angegeben wurde und nicht aus den Metadaten der Tabelle mit Hilfe der
-                    <code>describeTable()</code> Methode ermittelt werden kann, dann kann die Tabelle nicht mit
+                    Jede Table Klasse muss wissen mit welche(r/n) Spalte(n) Zeilen eindeutig
+                    identifiziert werden können. Wenn keine Primärschlüssel Spalte(n) in der
+                    Klassendefinition oder als Argument für den Konstruktor angegeben wurde und
+                    nicht aus den Metadaten der Tabelle mit Hilfe der <code>describeTable()</code>
+                    Methode ermittelt werden kann, dann kann die Tabelle nicht mit
                     <classname>Zend_Db_Table</classname> verwendet werden.
                 </para>
 
@@ -204,10 +208,11 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Überschreiben von Table Setup Methoden</title>
 
             <para>
-                Wenn eine Instanz einer Table Klasse erzeugt wird, ruft der Konstruktor einige protected Methoden
-                auf, die Metadaten der Tabelle initialisieren. Jede dieser Methoden kann erweitert werden um
-                Metadaten explizit anzugeben. Dabei darf nicht vergessen werden am Ende der eigenen Methode die
-                gleichnamige Methode der Parentklasse aufzurufen.
+                Wenn eine Instanz einer Table Klasse erzeugt wird, ruft der Konstruktor einige
+                protected Methoden auf, die Metadaten der Tabelle initialisieren. Jede dieser
+                Methoden kann erweitert werden um Metadaten explizit anzugeben. Dabei darf nicht
+                vergessen werden am Ende der eigenen Methode die gleichnamige Methode der
+                Parentklasse aufzurufen.
             </para>
 
             <example id="zend.db.table.defining.setup.example">
@@ -234,36 +239,38 @@ class Bugs extends Zend_Db_Table_Abstract
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>_setupDatabaseAdapter()</code> überprüft ob ein Adapter bereitgestellt wird; nimmt
-                        einen Standardadapter aus der Registry, wenn benötigt. Durch das Überschreiben dieser
-                        Methode kann ein Datenbankadapter aus einer anderen Quelle gesetzt werden.
+                        <code>_setupDatabaseAdapter()</code> überprüft ob ein Adapter bereitgestellt
+                        wird; nimmt einen Standardadapter aus der Registry, wenn benötigt. Durch das
+                        Überschreiben dieser Methode kann ein Datenbankadapter aus einer anderen
+                        Quelle gesetzt werden.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>_setupTableName()</code> setzt den standard Tabellennamen auf den Namen der Klasse.
-                        Durch das Überschreiben dieser Methode kann der Tabellenname gesetzt werden bevor dieses
-                        Standardverhalten abläuft.
+                        <code>_setupTableName()</code> setzt den standard Tabellennamen auf den
+                        Namen der Klasse. Durch das Überschreiben dieser Methode kann der
+                        Tabellenname gesetzt werden bevor dieses Standardverhalten abläuft.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>_setupMetadata()</code> setzt das Schema wenn der Tabellenname dem Muster
-                        "schema.table" entspricht; ruft <code>describeTable()</code> auf um Metadaten
-                        Informationen zu erhalten; Standardisiert das <code>$_cols</code> Array auf die
-                        Spalten wie von <code>describeTable()</code> geliefert. Durch das Überschreiben dieser
-                        Methode können die Spalten angegeben werden.
+                        <code>_setupMetadata()</code> setzt das Schema wenn der Tabellenname dem
+                        Muster "schema.table" entspricht; ruft <code>describeTable()</code> auf um
+                        Metadaten Informationen zu erhalten; Standardisiert das <code>$_cols</code>
+                        Array auf die Spalten wie von <code>describeTable()</code> geliefert. Durch
+                        das Überschreiben dieser Methode können die Spalten angegeben werden.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <code>_setupPrimaryKey()</code> standardisiert die Primärschlüssel Spalten zu denen
-                        geliefert von <code>describeTable()</code>; prüft ob die Primärschlüssel Spalten
-                        im <code>$_cols</code> Array enthalten sind. Durch das Überschreiben dieser Methode
-                        können die Primärschlüssel Spalten angegeben werden.
+                        <code>_setupPrimaryKey()</code> standardisiert die Primärschlüssel Spalten
+                        zu denen geliefert von <code>describeTable()</code>; prüft ob die
+                        Primärschlüssel Spalten im <code>$_cols</code> Array enthalten sind. Durch
+                        das Überschreiben dieser Methode können die Primärschlüssel Spalten
+                        angegeben werden.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -276,10 +283,10 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Wenn Anwendungs-spezifische Logik initialisiert werden soll wenn eine Tabellenklasse
-                erstellt wird, kann man entscheiden die Aufgaben in die <code>init()</code> Methode zu
-                verschieben, die aufgerufen wird nachdem alle Tabellen Metadaten bearbeitet wurden. Das
-                ist besser als die <code>__construct</code> Methode wenn die Metadaten nicht
-                programmtechnisch verändert werden sollen.
+                erstellt wird, kann man entscheiden die Aufgaben in die <code>init()</code> Methode
+                zu verschieben, die aufgerufen wird nachdem alle Tabellen Metadaten bearbeitet
+                wurden. Das ist besser als die <code>__construct</code> Methode wenn die Metadaten
+                nicht programmtechnisch verändert werden sollen.
             </para>
 
             <example id="zend.db.table.defining.init.usage.example">
@@ -309,11 +316,11 @@ class Bugs extends Zend_Db_Table_Abstract
         <title>Erzeugen einer Instanz einer Tabelle</title>
 
         <para>
-            Bevor eine Table Klasse verwendet werden kann muss eine Instanz mit dem Konstruktor erzeugt werden. Das
-            Konstruktor Argument ist ein Array von Optionen. Die wichtigste Option für einen Tabellenkonstruktor
-            ist die Instanz der Adapterklasse, welche eine live Verbindung zu einem RDBMS repräsentiert. Es gibt
-            drei Möglichkeiten den Datenbankadapter einer Tabellenklasse anzugeben und diese sind unten
-            beschrieben:
+            Bevor eine Table Klasse verwendet werden kann muss eine Instanz mit dem Konstruktor
+            erzeugt werden. Das Konstruktor Argument ist ein Array von Optionen. Die wichtigste
+            Option für einen Tabellenkonstruktor ist die Instanz der Adapterklasse, welche eine live
+            Verbindung zu einem RDBMS repräsentiert. Es gibt drei Möglichkeiten den Datenbankadapter
+            einer Tabellenklasse anzugeben und diese sind unten beschrieben:
         </para>
 
         <sect3 id="zend.db.table.constructing.adapter">
@@ -321,14 +328,16 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Angeben eines Datenbankadapters</title>
 
             <para>
-                Der erste Weg einen Datenbankadapter an eine Table Klasse bereitzustellen ist, ein Objekt des Typs
-                <classname>Zend_Db_Adapter_Abstract</classname> im Options Array, bezeichnet mit dem Schlüssel <code>'db'</code>, zu
-                übergeben.
+                Der erste Weg einen Datenbankadapter an eine Table Klasse bereitzustellen ist, ein
+                Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> im Options Array,
+                bezeichnet mit dem Schlüssel <code>'db'</code>, zu übergeben.
             </para>
 
             <example id="zend.db.table.constructing.adapter.example">
 
-                <title>Beispiel für das erzeugen einer Tabelle mit Nutzung eines Adapterobjekts</title>
+                <title>
+                    Beispiel für das Erzeugen einer Tabelle mit Nutzung eines Adapterobjekts
+                </title>
 
                 <programlisting role="php"><![CDATA[
 $db = Zend_Db::factory('PDO_MYSQL', $options);
@@ -345,11 +354,12 @@ $table = new Bugs(array('db' => $db));
             <title>Setzen eines Standard-Datenbankadapters</title>
 
             <para>
-                Der zweite Weg einer Table Klasse einen Datenbankadapter bereit zu stellen ist es, ein Objekt des
-                Typs <classname>Zend_Db_Adapter_Abstract</classname> zu deklarieren und als Standard für alle nachfolgenden Instanzen von
-                Table der Applikation zu setzen. Dies kann mit der static Methode
-                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname> getan werden. Das Argument ist ein
-                Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname>.
+                Der zweite Weg einer Table Klasse einen Datenbankadapter bereit zu stellen ist es,
+                ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> zu deklarieren
+                und als Standard für alle nachfolgenden Instanzen von Table der Applikation zu
+                setzen. Dies kann mit der static Methode
+                <classname>Zend_Db_Table_Abstract::setDefaultAdapter()</classname> getan werden. Das
+                Argument ist ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname>.
             </para>
 
             <example id="zend.db.table.constructing.default-adapter.example">
@@ -368,10 +378,11 @@ $table = new Bugs();
             </example>
 
             <para>
-                Es kann geeignet sein den Datenbankadapter an einer zentralen Stelle der Anwendung, wie dem
-                Bootstrap, zu erzeugen, und als Standardadapter zu speichern.
-                Dies hilft sicher zu stellen, das der verwendete Adapter in der gesamten Anwendung der gleiche
-                ist. Allerdings kann nur eine einzelne Adapterinstanz als Standardadapter verwendet werden.
+                Es kann geeignet sein den Datenbankadapter an einer zentralen Stelle der Anwendung,
+                wie dem Bootstrap, zu erzeugen, und als Standardadapter zu speichern. Dies hilft
+                sicher zu stellen, das der verwendete Adapter in der gesamten Anwendung der gleiche
+                ist. Allerdings kann nur eine einzelne Adapterinstanz als Standardadapter verwendet
+                werden.
             </para>
 
         </sect3>
@@ -381,10 +392,11 @@ $table = new Bugs();
             <title>Speichern eines Datenbankadapters in der Registry</title>
 
             <para>
-                Der dritte Weg einer Table Klasse einen Datenbankadapter bereit zu stellen ist es einen String in
-                dem Optionsarray zu übergeben, auch mit dem <code>'db'</code> Schlüssel identifiziert. Der String
-                wird als Schlüssel der statischen <classname>Zend_Registry</classname> Instanz verwendet, wo der Eintrag mit dem Schlüssel
-                ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> ist.
+                Der dritte Weg einer Table Klasse einen Datenbankadapter bereit zu stellen ist es
+                einen String in dem Optionsarray zu übergeben, auch mit dem <code>'db'</code>
+                Schlüssel identifiziert. Der String wird als Schlüssel der statischen
+                <classname>Zend_Registry</classname> Instanz verwendet, wo der Eintrag mit dem
+                Schlüssel ein Objekt des Typs <classname>Zend_Db_Adapter_Abstract</classname> ist.
             </para>
 
             <example id="zend.db.table.constructing.registry.example">
@@ -403,11 +415,12 @@ $table = new Bugs(array('db' => 'my_db'));
             </example>
 
             <para>
-                Wie das Setzen eines Standardadapters, bietet auch dieses sicher zu stellen das die gleiche Adapter
-                Instanz in der gesamten Anwendung verwendet wird. Nutzen der Registry ist flexibler, da mehr als
-                eine Adapterinstanz gepeichert werden kann. Eine angegebene Adapterinstanz ist spezifisch für eine
-                bestimmte RDBMS Marke und Datenbankinstanz. Wenn die Anwendung Zugriff auf mehrere Datenbanken
-                benötigt oder auch mehrere Datenbank Marken, dann müssen mehrere Adapter verwendet werden.
+                Wie das Setzen eines Standardadapters, bietet auch dieses sicher zu stellen das die
+                gleiche Adapter Instanz in der gesamten Anwendung verwendet wird. Nutzen der
+                Registry ist flexibler, da mehr als eine Adapterinstanz gepeichert werden kann. Eine
+                angegebene Adapterinstanz ist spezifisch für eine bestimmte RDBMS Marke und
+                Datenbankinstanz. Wenn die Anwendung Zugriff auf mehrere Datenbanken benötigt oder
+                auch mehrere Datenbank Marken, dann müssen mehrere Adapter verwendet werden.
             </para>
 
         </sect3>
@@ -419,9 +432,10 @@ $table = new Bugs(array('db' => 'my_db'));
         <title>Zeilen in eine Tabelle einfügen</title>
 
         <para>
-            Table Objekte können verwendet werden um Zeilen in die Datenbank Tabelle einzufügen auf der das
-            Table Objekt basiert. Hierzu kann die <code>insert()</code> Methode des Table Objektes
-            verwendet werden. Das Argument ist ein assoziatives Array, das Spalten Namen mit Werten verbindet.
+            Table Objekte können verwendet werden um Zeilen in die Datenbank Tabelle einzufügen auf
+            der das Table Objekt basiert. Hierzu kann die <code>insert()</code> Methode des Table
+            Objektes verwendet werden. Das Argument ist ein assoziatives Array, das Spalten Namen
+            mit Werten verbindet.
         </para>
 
         <example id="zend.db.table.insert.example">
@@ -443,10 +457,11 @@ $table->insert($data);
         </example>
 
         <para>
-            Standardmäßig werden Werte im Daten Array als literale Werte eingefügt durch das Verwenden von
-            Parametern. Wenn es notwendig ist das diese als SQL Ausdruck behandelt werden, muß sichergestellt
-            werden das Sie sich von reinen Strings unterscheiden. Es kann ein Objekt vom Typ <classname>Zend_Db_Expr</classname>
-            verwendet werden um das zu bewerkstelligen.
+            Standardmäßig werden Werte im Daten Array als literale Werte eingefügt durch das
+            Verwenden von Parametern. Wenn es notwendig ist das diese als SQL Ausdruck behandelt
+            werden, muß sichergestellt werden das Sie sich von reinen Strings unterscheiden. Es kann
+            ein Objekt vom Typ <classname>Zend_Db_Expr</classname> verwendet werden um das zu
+            bewerkstelligen.
         </para>
 
         <example id="zend.db.table.insert.example-expr">
@@ -489,7 +504,10 @@ $data = array(
 
             <example id="zend.db.table.insert.key-auto.example">
 
-                <title>Beispiel für das Deklarierens einer Tabelle mit einem automatischen Primärschlüssel</title>
+                <title>
+                    Beispiel für das Deklarierens einer Tabelle mit einem automatischen
+                    Primärschlüssel
+                </title>
 
                 <programlisting role="php"><![CDATA[
 class Bugs extends Zend_Db_Table_Abstract
@@ -505,17 +523,18 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                MySQL, Microsoft SQL Server, und SQLite sind Beispiele von RDBMS Marken die automatische
-                Primärschlüssel unterstützen.
+                MySQL, Microsoft SQL Server, und SQLite sind Beispiele von RDBMS Marken die
+                automatische Primärschlüssel unterstützen.
             </para>
 
             <para>
-                PostgreSQL hat eine <code>SERIAL</code> Notation die implizit eine Sequenz definiert die auf den
-                Tabellen- und Spaltennamen basiert, und diese Sequenz verwendet, um einen Schlüsselwert für neue
-                Zeilen zu erstellen. IBM DB2 hat eine <code>IDENTITY</code> Notation die ähnlich arbeitet.
-                Wenn eine dieser Notationen verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse mitgeteilt werden das
-                Sie eine automatische Spalte hat, indem <code>$_sequence</code> auf <code>true</code>
-                gesetzt wird.
+                PostgreSQL hat eine <code>SERIAL</code> Notation die implizit eine Sequenz definiert
+                die auf den Tabellen- und Spaltennamen basiert, und diese Sequenz verwendet, um
+                einen Schlüsselwert für neue Zeilen zu erstellen. IBM DB2 hat eine
+                <code>IDENTITY</code> Notation die ähnlich arbeitet. Wenn eine dieser Notationen
+                verwendet wird, muß der <classname>Zend_Db_Table</classname> Klasse mitgeteilt
+                werden das Sie eine automatische Spalte hat, indem <code>$_sequence</code> auf
+                <code>true</code> gesetzt wird.
             </para>
 
         </sect3>
@@ -526,13 +545,15 @@ class Bugs extends Zend_Db_Table_Abstract
 
             <para>
                 Eine Sequenz ist ein Datenbank Objekt das einen eindeutigen Wert erstellt, der als
-                Wert des Primärschlüssels in einer oder mehreren Tabellen der Datenbank verwendet werden kann.
+                Wert des Primärschlüssels in einer oder mehreren Tabellen der Datenbank verwendet
+                werden kann.
             </para>
 
             <para>
-                Wenn <code>$_sequence</code> als String definiert wird, nimmt <classname>Zend_Db_Table_Abstract</classname> an das der
-                String den Namen des Sequenz Objektes in der Datenbank benennt. Die Sequenz wird aufgerufen um
-                einen neuen Wert zu erstellen, und dieser Wert wird in der <code>INSERT</code> Operation
+                Wenn <code>$_sequence</code> als String definiert wird, nimmt
+                <classname>Zend_Db_Table_Abstract</classname> an das der String den Namen des
+                Sequenz Objektes in der Datenbank benennt. Die Sequenz wird aufgerufen um einen
+                neuen Wert zu erstellen, und dieser Wert wird in der <code>INSERT</code> Operation
                 verwendet.
             </para>
 
@@ -552,16 +573,16 @@ class Bugs extends Zend_Db_Table_Abstract
             </example>
 
             <para>
-                Oracle, PostgreSQL, und IBM DB2 sind Beispiele von RDBMS Marken die Sequenz Objekte in der
-                Datenbank unterstützen.
+                Oracle, PostgreSQL, und IBM DB2 sind Beispiele von RDBMS Marken die Sequenz Objekte
+                in der Datenbank unterstützen.
             </para>
 
             <para>
-                PostgreSQL und IBM DB2 haben auch einen Syntax der Sequenzen implizit definiert und diese
-                mit Spalten assoziiert. Wenn diese Notation verwendet wird, muß der Tabelle gesagt werden
-                das Sie eine automatische Schlüsselspalte besitzt. Der Name der Sequenz muß
-                nur in den Fällen als String definiert werden in denen die Sequenz explizit aufgerufen
-                wird um den nächsten Schlüsselwert zu erhalten.
+                PostgreSQL und IBM DB2 haben auch einen Syntax der Sequenzen implizit definiert und
+                diese mit Spalten assoziiert. Wenn diese Notation verwendet wird, muß der Tabelle
+                gesagt werden das Sie eine automatische Schlüsselspalte besitzt. Der Name der
+                Sequenz muß nur in den Fällen als String definiert werden in denen die Sequenz
+                explizit aufgerufen wird um den nächsten Schlüsselwert zu erhalten.
             </para>
 
         </sect3>
@@ -571,22 +592,25 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Eine Tabelle mit einem natürlichen Schlüssel verwenden</title>
 
             <para>
-                Einige Tabellen haben natürliche Schlüssel. Das bedeutet das der Schlüssel nicht automatisch
-                durch die Tabelle oder eine Sequenz erstellt wird. Der Wert für den Primärschlüssel muß
-                in diesem Fall selbst definiert werden.
+                Einige Tabellen haben natürliche Schlüssel. Das bedeutet das der Schlüssel nicht
+                automatisch durch die Tabelle oder eine Sequenz erstellt wird. Der Wert für den
+                Primärschlüssel muß in diesem Fall selbst definiert werden.
             </para>
 
             <para>
                 Wenn <code>$_sequence</code> als boolsches <code>false</code> definiert wird, nimmt
-                <classname>Zend_Db_Table_Abstract</classname> an das die Tabelle einen natürlichen Primärschlüssel hat. Es
-                müssen Werte für die Spalte des Primärschlüssels im Array der Daten definiert werden die
-                an die <code>insert()</code> Methode übergeben werden, andernfalls wird diese Methode eine
+                <classname>Zend_Db_Table_Abstract</classname> an das die Tabelle einen natürlichen
+                Primärschlüssel hat. Es müssen Werte für die Spalte des Primärschlüssels im Array
+                der Daten definiert werden die an die <code>insert()</code> Methode übergeben
+                werden, andernfalls wird diese Methode eine
                 <classname>Zend_Db_Table_Exception</classname> werfen.
             </para>
 
             <example id="zend.db.table.insert.key-natural.example">
 
-                <title>Beispiel für das Definieren einer Tabelle mit einem natürlichen Schlüssel</title>
+                <title>
+                    Beispiel für das Definieren einer Tabelle mit einem natürlichen Schlüssel
+                </title>
 
                 <programlisting role="php"><![CDATA[
 class BugStatus extends Zend_Db_Table_Abstract
@@ -602,10 +626,10 @@ class BugStatus extends Zend_Db_Table_Abstract
             <note>
 
                 <para>
-                    Alle RDBMS Marken unterstützen Tabellen mit natürlichen Schlüsseln. Beispiele von Tabellen
-                    die oft so definiert werden das Sie natürliche Schlüssel besitzen sind Lookup Tabellen,
-                    Durchschnitts Tabellen in viele-zu-viele Beziehungen, oder die meisten Tabellen mit
-                    komponierten Primärschlüsseln.
+                    Alle RDBMS Marken unterstützen Tabellen mit natürlichen Schlüsseln. Beispiele
+                    von Tabellen die oft so definiert werden das Sie natürliche Schlüssel besitzen
+                    sind Lookup Tabellen, Durchschnitts Tabellen in viele-zu-viele Beziehungen, oder
+                    die meisten Tabellen mit komponierten Primärschlüsseln.
                 </para>
 
             </note>
@@ -621,9 +645,10 @@ class BugStatus extends Zend_Db_Table_Abstract
         <para>
             Spalten können in der Datenbanktabelle aktualisiert werden indem die <code>update</code>
             Methode der Table Klasse verwendet wird. Diese Methode nimmt zwei Argumente: ein
-            assoziatives Array von Spalten die geändert werden sollen und neue Werte die diesen Spalten
-            hinzugefügt werden; und einen SQL Ausdruck der in der <code>WHERE</code> Klausel verwendet wird,
-            als Kriterium für die Zeilen die in der <code>UPDATE</code> Operation geändert werden sollen.
+            assoziatives Array von Spalten die geändert werden sollen und neue Werte die diesen
+            Spalten hinzugefügt werden; und einen SQL Ausdruck der in der <code>WHERE</code> Klausel
+            verwendet wird, als Kriterium für die Zeilen die in der <code>UPDATE</code> Operation
+            geändert werden sollen.
         </para>
 
         <example id="zend.db.table.update.example">
@@ -648,19 +673,19 @@ $table->update($data, $where);
         <para>
             Da die <code>update()</code> Methode der Tabelle zur
             <link linkend="zend.db.adapter.write.update"><code>update()</code></link> Methode des
-            Datenbank Adapters weiterleitet, kann das zweite Argument ein Array von SQL Ausdrücken sein.
-            Diese Ausdrücke werden als Boolsche Terme kombiniert indem ein <code>AND</code> Operator
-            verwendet wird.
+            Datenbank Adapters weiterleitet, kann das zweite Argument ein Array von SQL Ausdrücken
+            sein. Diese Ausdrücke werden als Boolsche Terme kombiniert indem ein <code>AND</code>
+            Operator verwendet wird.
         </para>
 
         <note>
 
             <para>
-                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen gesetzt.
-                Wenn Werte oder Identifizierer vorhanden sind die das Setzen in Anführungszeichen
-                benötigen, ist man selbst dafür zuständig das das getan wird. Die <code>quote()</code>,
-                <code>quoteInto()</code> und <code>quoteIdentifier()</code> Methoden des Datenbank Adapters
-                können dafür verwendet werden.
+                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen
+                gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das Setzen in
+                Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan wird. Die
+                <code>quote()</code>, <code>quoteInto()</code> und <code>quoteIdentifier()</code>
+                Methoden des Datenbank Adapters können dafür verwendet werden.
             </para>
 
         </note>
@@ -694,19 +719,20 @@ $table->delete($where);
 
         <para>
             Da die <code>delete()</code> Methode der Tabelle zur
-            <link linkend="zend.db.adapter.write.delete"><code>delete()</code></link> Methode des Datenbank
-            Adapters weiterleitet, kann das Argument ein Array von SQL Ausdrücken sein. Diese
-            Ausdrücke werden als boolsche Terme kombiniert indem ein <code>AND</code> Operator verwendet wird.
+            <link linkend="zend.db.adapter.write.delete"><code>delete()</code></link> Methode des
+            Datenbank Adapters weiterleitet, kann das Argument ein Array von SQL Ausdrücken sein.
+            Diese Ausdrücke werden als boolsche Terme kombiniert indem ein <code>AND</code> Operator
+            verwendet wird.
         </para>
 
         <note>
 
             <para>
-                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen gesetzt.
-                Wenn Werte oder Identifizierer vorhanden sind die das Setzen in Anführungszeichen
-                benötigen, ist man selbst dafür zuständig das das getan wird. Die <code>quote()</code>,
-                <code>quoteInto()</code> und <code>quoteIdentifier()</code> Methoden des Datenbank Adapters
-                können dafür verwendet werden.
+                Die Werte und Identifizierer im SQL Ausdruck werden nicht in Anführungszeichen
+                gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das Setzen in
+                Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan wird. Die
+                <code>quote()</code>, <code>quoteInto()</code> und <code>quoteIdentifier()</code>
+                Methoden des Datenbank Adapters können dafür verwendet werden.
             </para>
 
         </note>
@@ -718,10 +744,10 @@ $table->delete($where);
         <title>Zeilen durch den Primärschlüssel finden</title>
 
         <para>
-            Die Datenbanktabelle kann nach passenden Zeilen für spezifizierte Werte im Primärschlüssel
-            abgefragt werden, indem die <code>find()</code> Methode verwendet wird. Das erste Argument dieser
-            Methode ist entweder ein einzelner Wert oder ein Array von Werten die dem Primärschlüssel dieser
-            Tabelle entsprechen.
+            Die Datenbanktabelle kann nach passenden Zeilen für spezifizierte Werte im
+            Primärschlüssel abgefragt werden, indem die <code>find()</code> Methode verwendet wird.
+            Das erste Argument dieser Methode ist entweder ein einzelner Wert oder ein Array von
+            Werten die dem Primärschlüssel dieser Tabelle entsprechen.
         </para>
 
         <example id="zend.db.table.find.example">
@@ -743,45 +769,48 @@ $rows = $table->find(array(1234, 5678));
         </example>
 
         <para>
-            Wenn ein einzelner Wert spezifiziert wird, gibt die Methode auch maximal eine Zeile zurück, weil ein
-            Primärschlüssel keinen doppelten Wert haben kann und es maximal eine Zeile in der Datenbank
-            gibt die dem spezifizierten Wert entspricht. Wenn mehrere Werte in einem Array spezifiziert werden,
-            gibt die Methode maximal soviele Zeilen zurück wie die Anzahl an unterschiedlichen Werten die
-            spezifiziert wurden.
+            Wenn ein einzelner Wert spezifiziert wird, gibt die Methode auch maximal eine Zeile
+            zurück, weil ein Primärschlüssel keinen doppelten Wert haben kann und es maximal eine
+            Zeile in der Datenbank gibt die dem spezifizierten Wert entspricht. Wenn mehrere Werte
+            in einem Array spezifiziert werden, gibt die Methode maximal soviele Zeilen zurück wie
+            die Anzahl an unterschiedlichen Werten die spezifiziert wurden.
         </para>
 
         <para>
-            Die <code>find()</code> Methode kann weniger Zeilen zurückgeben als die Anzahl an Werten die für
-            den Primärschlüssel definiert wurden, wenn einige der Werte keiner Zeile in der Datenbank
-            Tabelle entsprechen. Die Methode kann sogar null Zeilen zurückgeben. Weil die Anzahl an
-            zurückgegebenen Zeilen variabel ist, gibt die <code>find()</code> Methode ein Objekt vom
-            Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück.
+            Die <code>find()</code> Methode kann weniger Zeilen zurückgeben als die Anzahl an Werten
+            die für den Primärschlüssel definiert wurden, wenn einige der Werte keiner Zeile in der
+            Datenbank Tabelle entsprechen. Die Methode kann sogar null Zeilen zurückgeben. Weil die
+            Anzahl an zurückgegebenen Zeilen variabel ist, gibt die <code>find()</code> Methode ein
+            Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück.
         </para>
 
         <para>
-            Wenn der Primärschlüssel ein komponierter Schlüssel ist, als einer der aus mehreren Spalten
-            besteht, können die zusätzlichen Spalten als zusätzliche Argumente in der <code>find()</code>
-            Methode definiert werden. Es müssen soviele Argumente angegeben werden wie Spalten im
-            Primärschlüssel der Tabelle existieren.
+            Wenn der Primärschlüssel ein komponierter Schlüssel ist, als einer der aus mehreren
+            Spalten besteht, können die zusätzlichen Spalten als zusätzliche Argumente in der
+            <code>find()</code> Methode definiert werden. Es müssen soviele Argumente angegeben
+            werden wie Spalten im Primärschlüssel der Tabelle existieren.
         </para>
 
         <para>
             Um mehrere Zeilen von einer Tabelle mit einem kombinierten Primärschlüssel zu finden,
-            muß ein Array für jedes der Argumente übergeben werden. Alle dieser Arrays müssen die gleiche
-            Anzahl an Elementen haben. Die Werte in jedem Array werden in Tupeln geformt und gereiht; zum
-            Beispiel definiert das erste Element in allen Array Argumenten den ersten kombinierten Wert
-            des Primärschlüssels, das zweite Element von allen Arrays definiert den zweiten kombinierten
-            Wert des Primärschlüssels, und so weiter.
+            muß ein Array für jedes der Argumente übergeben werden. Alle dieser Arrays müssen die
+            gleiche Anzahl an Elementen haben. Die Werte in jedem Array werden in Tupeln geformt und
+            gereiht; zum Beispiel definiert das erste Element in allen Array Argumenten den ersten
+            kombinierten Wert des Primärschlüssels, das zweite Element von allen Arrays definiert
+            den zweiten kombinierten Wert des Primärschlüssels, und so weiter.
         </para>
 
         <example id="zend.db.table.find.example-compound">
 
-            <title>Beispiel für das Finden von Zeilen durch Werte von kombinierten Primärschlüsseln</title>
+            <title>
+                Beispiel für das Finden von Zeilen durch Werte von kombinierten Primärschlüsseln
+            </title>
 
             <para>
-                Der Aufruf von <code>find()</code> anbei um mehreren Zeilen zu entsprechen kann zwei Zeilen
-                in der Datenbank entsprechen. Die erste Zeile muß den Wert des Primärenschlüssels (1234, 'ABC')
-                haben, und die zweite Zeile den Wert des Primärschlüssels (5678, 'DEF').
+                Der Aufruf von <code>find()</code> anbei um mehreren Zeilen zu entsprechen kann zwei
+                Zeilen in der Datenbank entsprechen. Die erste Zeile muß den Wert des
+                Primärenschlüssels (1234, 'ABC') haben, und die zweite Zeile den Wert des
+                Primärschlüssels (5678, 'DEF').
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -820,9 +849,10 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
 
                     <para>
                         Die API für die Hol-Operationen wurde ausgeweitet um einem
-                        <classname>Zend_Db_Table_Select</classname> Objekt zu erlauben die Abfrage zu modifizieren.
-                        Trotzdem wird die veraltete Verwendung der <code>fetchRow()</code> und
-                        <code>fetchAll()</code> Methoden weiterhin ohne Änderungen funktionieren.
+                        <classname>Zend_Db_Table_Select</classname> Objekt zu erlauben die Abfrage
+                        zu modifizieren. Trotzdem wird die veraltete Verwendung der
+                        <code>fetchRow()</code> und <code>fetchAll()</code> Methoden weiterhin ohne
+                        Änderungen funktionieren.
                     </para>
 
                     <para>
@@ -870,12 +900,13 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
 
                 <listitem>
                     <para>
-                        Man <emphasis>kann</emphasis> Zeilen spezifizieren die Ausdrücke innerhalb der
-                        ausgewählten Tabelle evaluieren. Trotzdem bedeutet das, das die zurückgegebene Zeile
-                        oder Zeilenset <property>readOnly</property> (nur lesbar) ist und nicht für
-                        save() Operationen verwendet werden kann. Eine <classname>Zend_Db_Table_Row</classname>
-                        mit <property>readOnly</property> Status wird eine Exception werfen wenn eine
-                        <code>save()</code> Operation versucht wird.
+                        Man <emphasis>kann</emphasis> Zeilen spezifizieren die Ausdrücke innerhalb
+                        der ausgewählten Tabelle evaluieren. Trotzdem bedeutet das, das die
+                        zurückgegebene Zeile oder Zeilenset <property>readOnly</property> (nur
+                        lesbar) ist und nicht für save() Operationen verwendet werden kann. Eine
+                        <classname>Zend_Db_Table_Row</classname> mit <property>readOnly</property>
+                        Status wird eine Exception werfen wenn eine <code>save()</code> Operation
+                        versucht wird.
                     </para>
                 </listitem>
 
@@ -892,8 +923,8 @@ $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                         spezifizieren damit Sie in einer Zeile/Zeilenset zurückgegeben werden. Wenn
                         das versucht wird, wird ein PHP Fehler getriggert. Das wurde getan um
                         Sicherzustellen das die Integrität von <classname>Zend_Db_Table gewahrt
-                        bleibt</classname>. z.B. ein <classname>Zend_Db_Table_Row</classname> sollte nur Spalten
-                        referenzieren die von seiner Elterntabelle abgeleitet sind.
+                        bleibt</classname>. z.B. ein <classname>Zend_Db_Table_Row</classname> sollte
+                        nur Spalten referenzieren die von seiner Elterntabelle abgeleitet sind.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -918,8 +949,8 @@ $rows = $table->fetchAll($select);
             </para>
 
             <para>
-                Flüssige Interfaces sind über alle Komponenten hinweg implementiert, sodas das zu einer
-                mehr abgekürzteren Form umgeschrieben werden kann.
+                Flüssige Interfaces sind über alle Komponenten hinweg implementiert, sodas das zu
+                einer mehr abgekürzteren Form umgeschrieben werden kann.
             </para>
 
             <para>
@@ -946,10 +977,10 @@ $rows =
             <title>Ein Set von Zeilen abfragen</title>
 
             <para>
-                Ein Set von Zeilen kann abgefragt werden indem irgendein Kriterium verwendet wird, das anders als
-                die Werte des Primärschlüssels sind, indem die <code>fetchAll()</code> Methode der Tabellen
-                Klasse verwendet wird. Diese Methode gibt ein Objekt vom Typ
-                <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück.
+                Ein Set von Zeilen kann abgefragt werden indem irgendein Kriterium verwendet wird,
+                das anders als die Werte des Primärschlüssels sind, indem die
+                <code>fetchAll()</code> Methode der Tabellen Klasse verwendet wird. Diese Methode
+                gibt ein Objekt vom Typ <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück.
             </para>
 
             <example id="zend.db.table.qry.rows.set.finding.row.example">
@@ -1013,9 +1044,9 @@ $rows = $table->fetchAll($select);
                 Für speziellere und optimierte Ergebnisse, kann es gewünscht sein die Anzahl der
                 zurückgegebenen Zeilen/Sets zu limitieren. Das kann durch die Übergabe einer FROM
                 Klausel an das Select Objekt getan werden. Das erste Argument in der FROM Klausel
-                ist identisch mit den des <classname>Zend_Db_Select</classname> Objekts wobei man zusätzlich eine Instanz
-                von <classname>Zend_Db_Table_Abstract</classname> übergeben und damit den Tabellen Namen automatisch
-                ermitteln lassen kann.
+                ist identisch mit den des <classname>Zend_Db_Select</classname> Objekts wobei man
+                zusätzlich eine Instanz von <classname>Zend_Db_Table_Abstract</classname> übergeben
+                und damit den Tabellen Namen automatisch ermitteln lassen kann.
             </para>
 
             <para>
@@ -1108,17 +1139,20 @@ $rows = $table->fetchAll($select);
             <para>
                 <classname>Zend_Db_Table_Select</classname> wird primär verwendet um zu verbinden
                 und zu prüfen um die Kriterien für einen legalen SELECT Query sicherzustellen.
-                Trotzdem gibt es viele Fälle in denen man die Flexibilität der <classname>Zend_Db_Table_Row</classname>
-                benötigt und Zeilen nicht geschrieben oder gelöscht werden müssen. Für diesen
-                speziellen Fall ist es möglich Zeilen/-sets durch die Übergabe eines false Wertes
-                an setIntegrityCheck zu erhalten. Das resultierende Zeilen/-set wird als eine
-                'locked' Zeile zurückgegeben (das bedeutet das save(), delete() und jede andere
-                Mothode die Felder setzt wird eine Ausnahme werfen).
+                Trotzdem gibt es viele Fälle in denen man die Flexibilität der
+                <classname>Zend_Db_Table_Row</classname> benötigt und Zeilen nicht geschrieben oder
+                gelöscht werden müssen. Für diesen speziellen Fall ist es möglich Zeilen/-sets durch
+                die Übergabe eines false Wertes an setIntegrityCheck zu erhalten. Das resultierende
+                Zeilen/-set wird als eine 'locked' Zeile zurückgegeben (das bedeutet das save(),
+                delete() und jede andere Mothode die Felder setzt wird eine Ausnahme werfen).
             </para>
 
             <example id="zend.db.table.qry.rows.set.integrity.example">
 
-                <title>Entfernen des Integritäts Checks von Zend_Db_Table_Select um geJOINte Zeilen zu erlauben</title>
+                <title>
+                    Entfernen des Integritäts Checks von Zend_Db_Table_Select um geJOINte Zeilen zu
+                    erlauben
+                </title>
 
                 <programlisting><![CDATA[
 $table = new Bugs();
@@ -1144,8 +1178,8 @@ $rows = $table->fetchAll($select);
         <title>Eine einzelne Zeilen abfragen</title>
 
         <para>
-            Eine einzelne Zeile kann abgefragt werden indem Kriterien verwendet werden die ähnlich denen
-            der <code>fetchAll()</code> Methode sind.
+            Eine einzelne Zeile kann abgefragt werden indem Kriterien verwendet werden die ähnlich
+            denen der <code>fetchAll()</code> Methode sind.
         </para>
 
         <example id="zend.db.table.fetch-row.example1">
@@ -1164,9 +1198,9 @@ $row = $table->fetchRow($select);
         </example>
 
         <para>
-            Diese Methode gibt ein Objekt vom Typ <classname>Zend_Db_Table_Row_Abstract</classname> zurück. Wenn die spezifizierten
-            Sortier-Kriterien keiner Zeile in der Datenbank Tabelle entsprechen gibt <code>fetchRow()</code>
-            PHP's <code>null</code> Wert zurück.
+            Diese Methode gibt ein Objekt vom Typ <classname>Zend_Db_Table_Row_Abstract</classname>
+            zurück. Wenn die spezifizierten Sortier-Kriterien keiner Zeile in der Datenbank Tabelle
+            entsprechen gibt <code>fetchRow()</code> PHP's <code>null</code> Wert zurück.
         </para>
 
     </sect2>
@@ -1176,9 +1210,10 @@ $row = $table->fetchRow($select);
         <title>Informationen der Tabellen Metadaten erhalten</title>
 
         <para>
-            Die <classname>Zend_Db_Table_Abstract</classname> Klasse bietet einige Informationen über Ihre Metadaten. Die
-            <code>info()</code> Methode gibt eine Array Struktur mit Informationen über die Tabelle, Ihre
-            Spalten und Primärschlüssel zurück, sowie andere Metadaten.
+            Die <classname>Zend_Db_Table_Abstract</classname> Klasse bietet einige Informationen
+            über Ihre Metadaten. Die <code>info()</code> Methode gibt eine Array Struktur mit
+            Informationen über die Tabelle, Ihre Spalten und Primärschlüssel zurück, sowie andere
+            Metadaten.
         </para>
 
         <example id="zend.db.table.info.example">
@@ -1223,23 +1258,24 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
             <listitem>
                 <para>
                     <emphasis>metadata</emphasis> => ein assoziatives Array das die Spaltennamen
-                    mit Informationen über die Spalten zusammenführt. Das ist die Information die durch die
-                    <code>describeTable()</code> Methode zurückgegeben wird.
+                    mit Informationen über die Spalten zusammenführt. Das ist die Information die
+                    durch die <code>describeTable()</code> Methode zurückgegeben wird.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <emphasis>rowClass</emphasis> => der Name der konkreten Klasse die für
-                    Zeilen Objekte verwendet wird und von den Methoden dieser Table Instanz zurückgegeben
-                    wird. Der Standardwert ist <classname>Zend_Db_Table_Row</classname>.
+                    Zeilen Objekte verwendet wird und von den Methoden dieser Table Instanz
+                    zurückgegeben wird. Der Standardwert ist
+                    <classname>Zend_Db_Table_Row</classname>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>rowsetClass</emphasis> => Name der konkreten Klasse für für
-                    Rowset Objekte verwendet wird und von den Methoden dieser Table Instanz zurückgegeben
+                    <emphasis>rowsetClass</emphasis> => Name der konkreten Klasse für für Rowset
+                    Objekte verwendet wird und von den Methoden dieser Table Instanz zurückgegeben
                     wird. Der Standardwert ist <classname>Zend_Db_Table_Rowset</classname>.
                 </para>
             </listitem>
@@ -1275,11 +1311,12 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
         <title>Tabellen Metadaten cachen</title>
 
         <para>
-            Standardmäßig fragt <classname>Zend_Db_Table_Abstract</classname> die darunterliegende Datenbank für die
-            <link linkend="zend.db.table.info">Metadaten der Tabelle</link> ab immer wenn diese diese Daten
-            benötigt werden um Tabellenoperationen durchzuführen. Das Tableobjekt holt die Metadaten der
-            Tabelle von der Datenbank indem es die <code>describeTable()</code> Methode des Adapters
-            verwendet. Operationen die diese Einsicht benötigten sind:
+            Standardmäßig fragt <classname>Zend_Db_Table_Abstract</classname> die darunterliegende
+            Datenbank für die <link linkend="zend.db.table.info">Metadaten der Tabelle</link> ab
+            immer wenn diese diese Daten benötigt werden um Tabellenoperationen durchzuführen. Das
+            Tableobjekt holt die Metadaten der Tabelle von der Datenbank indem es die
+            <code>describeTable()</code> Methode des Adapters verwendet. Operationen die diese
+            Einsicht benötigten sind:
         </para>
 
         <itemizedlist>
@@ -1291,49 +1328,54 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
         </itemizedlist>
 
         <para>
-            In einigen Fällen, speziell wenn viele Table Objekte auf der gleichen Datenbanktabelle instanziert
-            werden kann das Abfragen der Datenbank nach den Metadaten der Tabelle für jede Instanz unerwünscht
-            sein wegen der Geschwindigkeit. In solchen Fällen, können Benutzer davon profitieren das
-            die Metadaten der Tabelle, die von der Datenbank empfangen werden, gecached werden.
+            In einigen Fällen, speziell wenn viele Table Objekte auf der gleichen Datenbanktabelle
+            instanziert werden kann das Abfragen der Datenbank nach den Metadaten der Tabelle für
+            jede Instanz unerwünscht sein wegen der Geschwindigkeit. In solchen Fällen, können
+            Benutzer davon profitieren das die Metadaten der Tabelle, die von der Datenbank
+            empfangen werden, gecached werden.
         </para>
 
         <para>
-            Es gibt zwei grundsätzliche Wege bei denen ein Benutzer Vorteile davon haben kann wenn die
-            Metadaten der Tabelle gecached werden:
+            Es gibt zwei grundsätzliche Wege bei denen ein Benutzer Vorteile davon haben kann wenn
+            die Metadaten der Tabelle gecached werden:
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>Aufruf von <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis> -
-                        Das erlaubt es Entwicklern das Standardcacheobjekt zu setzen das für alle Tabellenklassen
-                        verwendet werden soll.
+                        <emphasis>Aufruf von
+                        <classname>Zend_Db_Table_Abstract::setDefaultMetadataCache()</classname></emphasis>
+                        - Das erlaubt es Entwicklern das Standardcacheobjekt zu setzen das für alle
+                        Tabellenklassen verwendet werden soll.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>Konfigurieren von <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
-                        Das erlaubt es Entwicklern das Cacheobjekt zu setzen das für eine spezielle Instanz
-                        der Tabellenklasse verwendet werden soll.
+                        <emphasis>Konfigurieren von
+                        <classname>Zend_Db_Table_Abstract::__construct()</classname></emphasis> -
+                        Das erlaubt es Entwicklern das Cacheobjekt zu setzen das für eine spezielle
+                        Instanz der Tabellenklasse verwendet werden soll.
                     </para>
                 </listitem>
             </itemizedlist>
 
-            In beiden Fällen muß die Spezifikation des Caches entweder <code>null</code> (wenn kein Cache
-            verwendet wird) oder eine Instanz von
-            <link linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link> sein. Die Methoden
-            können in Verbindung zueinander verwendet werden wenn es gewünscht ist beides zu haben, einen
-            standardmäßigen Cache für die Metadaten und die Möglichkeit den Cache eines individuellen
-            Tabellenobjektes zu ändern.
+            In beiden Fällen muß die Spezifikation des Caches entweder <code>null</code> (wenn kein
+            Cache verwendet wird) oder eine Instanz von
+            <link linkend="zend.cache.frontends.core"><classname>Zend_Cache_Core</classname></link>
+            sein. Die Methoden können in Verbindung zueinander verwendet werden wenn es gewünscht
+            ist beides zu haben, einen standardmäßigen Cache für die Metadaten und die Möglichkeit
+            den Cache eines individuellen Tabellenobjektes zu ändern.
         </para>
 
         <example id="zend.db.table.metadata.caching-default">
 
-            <title>Verwenden eines standardmäßigen Caches für Metadaten für alle Tabellenobjekte</title>
+            <title>
+                Verwenden eines standardmäßigen Caches für Metadaten für alle Tabellenobjekte
+            </title>
 
             <para>
-                Der folgende Code demonstriert wie ein standardmäßiger Cache für die Metadaten gesetzt werden
-                kann der für alle Tabellenobjekte verwendet wird:
+                Der folgende Code demonstriert wie ein standardmäßiger Cache für die Metadaten
+                gesetzt werden kann der für alle Tabellenobjekte verwendet wird:
             </para>
 
             <programlisting role="php"><![CDATA[<
@@ -1371,8 +1413,8 @@ $bugs = new Bugs();
             <title>Einen Metadaten Cache für ein spezielles Tabellenobjekt verwenden</title>
 
             <para>
-                Der folgende Code demonstriert wie ein Cache für Metadaten für eine spezielle Instanz
-                eines Tabellenobjektes gesetzt werden kann:
+                Der folgende Code demonstriert wie ein Cache für Metadaten für eine spezielle
+                Instanz eines Tabellenobjektes gesetzt werden kann:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -1407,27 +1449,29 @@ $bugs = new Bugs(array('metadataCache' => $cache));
             <title>Automatische Serialisierung mit dem Cache Frontend</title>
 
             <para>
-                Da die Information die von der describeTable() Methode des Adapters zurückgegeben wird, ein
-                Array ist, muß sichergestellt werden das die <code>automatic_serialization</code> Option für das
+                Da die Information die von der describeTable() Methode des Adapters zurückgegeben
+                wird, ein Array ist, muß sichergestellt werden das die
+                <code>automatic_serialization</code> Option für das
                 <classname>Zend_Cache_Core</classname> Frontend auf <code>true</code> gesetzt wird.
             </para>
 
         </note>
 
         <para>
-            Obwohl die obigen Beispiele <classname>Zend_Cache_Backend_File</classname> verwenden, können Entwickler
-            jegliches Cache Backend verwenden das der Situation am besten entspricht. Siehe
-            <link linkend="zend.cache">Zend_Cache</link> für weitere Informationen.
+            Obwohl die obigen Beispiele <classname>Zend_Cache_Backend_File</classname> verwenden,
+            können Entwickler jegliches Cache Backend verwenden das der Situation am besten
+            entspricht. Siehe <link linkend="zend.cache">Zend_Cache</link> für weitere
+            Informationen.
         </para>
 
         <sect3 id="zend.db.table.metadata.caching.hardcoding">
             <title>Tabellen Metadaten hardcoden</title>
 
             <para>
-                Um das Cachen von Metadaten einen weiteren Schritt weiterzubringen, kann man sich auch
-                entscheiden die Metadaten hardzucoden. In diesem speziellen Fall benötigt jede Änderung
-                trotzdem eine Änderung im Code. Als solches, ist es nur empfohlen für jene die eine
-                Produktionsumgebung optimieren wollen.
+                Um das Cachen von Metadaten einen weiteren Schritt weiterzubringen, kann man sich
+                auch entscheiden die Metadaten hardzucoden. In diesem speziellen Fall benötigt jede
+                Änderung trotzdem eine Änderung im Code. Als solches, ist es nur empfohlen für jene
+                die eine Produktionsumgebung optimieren wollen.
             </para>
 
             <para>
@@ -1457,13 +1501,13 @@ protected $_metadata = array(
 ]]></programlisting>
 
             <para>
-                Ein einfacher Weg um die richtigen Werte zu erhalten ist es den Metadaten Cache zu verwenden,
-                und dann die Werte die im Cache gespeichert sind, zu deserialisieren.
+                Ein einfacher Weg um die richtigen Werte zu erhalten ist es den Metadaten Cache zu
+                verwenden, und dann die Werte die im Cache gespeichert sind, zu deserialisieren.
             </para>
 
             <para>
-                Diese Optimierung kann ausgeschaltet werden indem das <code>metadataCacheInClass</code>
-                Flag ausgeschaltet wird:
+                Diese Optimierung kann ausgeschaltet werden indem das
+                <code>metadataCacheInClass</code> Flag ausgeschaltet wird:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -1475,8 +1519,8 @@ $bugs->setMetadataCacheInClass(false);
 ]]></programlisting>
 
             <para>
-                Das Flag ist standardmäßig aktiviert, was sicherstellt das das <code>$_metadata</code>
-                Array nur einmal pro Instanz ausgeliefert wird.
+                Das Flag ist standardmäßig aktiviert, was sicherstellt das das
+                <code>$_metadata</code> Array nur einmal pro Instanz ausgeliefert wird.
             </para>
         </sect3>
     </sect2>
@@ -1490,23 +1534,27 @@ $bugs->setMetadataCacheInClass(false);
             <title>Verwenden eigener Zeilen oder Rowset Klassen</title>
 
             <para>
-                Standardmäßig geben die Methoden der Table Klasse ein Rowset als Instanzen der konkreten Klasse
-                <classname>Zend_Db_Table_Rowset</classname>, und Rowsets enthalten eine Kollektion von Instanzen der konkreten Klasse
-                <classname>Zend_Db_Table_Row</classname>. Eine alternative Klasse kann für jede von Ihnen als alternative Klasse
-                definiert werden die verwendet werden soll, aber es müssen Klassen sein die
-                <classname>Zend_Db_Table_Rowset_Abstract</classname> erweitern und respektiv <classname>Zend_Db_Table_Row_Abstract</classname>.
+                Standardmäßig geben die Methoden der Table Klasse ein Rowset als Instanzen der
+                konkreten Klasse <classname>Zend_Db_Table_Rowset</classname>, und Rowsets enthalten
+                eine Kollektion von Instanzen der konkreten Klasse
+                <classname>Zend_Db_Table_Row</classname>. Eine alternative Klasse kann für jede von
+                Ihnen als alternative Klasse definiert werden die verwendet werden soll, aber es
+                müssen Klassen sein die <classname>Zend_Db_Table_Rowset_Abstract</classname>
+                erweitern und respektiv <classname>Zend_Db_Table_Row_Abstract</classname>.
             </para>
 
             <para>
-                Es können Zeilen und Rowset Klassen definiert werden indem das Optionsarray des Table
-                Konstruktors verwendet wird, respektiv die Schlüssel <code>'rowClass'</code> und
-                <code>'rowsetClass'</code>. Die Namen der Klassen müssen spezifiziert werden indem Strings
-                verwendet werden.
+                Es können Zeilen und Rowset Klassen definiert werden indem das Optionsarray des
+                Table Konstruktors verwendet wird, respektiv die Schlüssel <code>'rowClass'</code>
+                und <code>'rowsetClass'</code>. Die Namen der Klassen müssen spezifiziert werden
+                indem Strings verwendet werden.
             </para>
 
             <example id="zend.db.table.extending.row-rowset.example">
 
-                <title>Beispiel dafür wie die Zeilen und Rowset Klassen spezifiziert werden können</title>
+                <title>
+                    Beispiel dafür wie die Zeilen und Rowset Klassen spezifiziert werden können
+                </title>
 
                 <programlisting role="php"><![CDATA[
 class My_Row extends Zend_Db_Table_Row_Abstract
@@ -1537,9 +1585,9 @@ $rows = $table->fetchAll($where);
 
             <para>
                 Die Klassen können geändert werden indem Sie mit den <code>setRowClass()</code> und
-                <code>setRowsetClass()</code> Methoden spezifiziert werden. Das entspricht den Zeilen
-                und Rowsets die nachfolgend erstellt werden; es ändert aber nicht die Klasse von Zeilen-
-                oder Rowsetobjekten die bereits davor erstellt wurden.
+                <code>setRowsetClass()</code> Methoden spezifiziert werden. Das entspricht den
+                Zeilen und Rowsets die nachfolgend erstellt werden; es ändert aber nicht die Klasse
+                von Zeilen- oder Rowsetobjekten die bereits davor erstellt wurden.
             </para>
 
             <example id="zend.db.table.extending.row-rowset.example2">
@@ -1579,10 +1627,11 @@ $rowsCustom = $table->fetchAll($where);
             <title>Selbst definierte Logik für das Einfügen, Aktualisieren und Löschen</title>
 
             <para>
-                Die <code>insert()</code> und <code>update()</code> Methoden in der Table Klasse können
-                überschrieben werden. Das bietet die Möglichkeit eigenen Code einzufügen der ausgeführt
-                wird bevor die Datenbank Operation durchgeführt wird. Es muß sichergestellt werden das die
-                Methode der Elternklasse aufgerufen wird wenn man fertig ist.
+                Die <code>insert()</code> und <code>update()</code> Methoden in der Table Klasse
+                können überschrieben werden. Das bietet die Möglichkeit eigenen Code einzufügen der
+                ausgeführt wird bevor die Datenbank Operation durchgeführt wird. Es muß
+                sichergestellt werden das die Methode der Elternklasse aufgerufen wird wenn man
+                fertig ist.
             </para>
 
             <example id="zend.db.table.extending.insert-update.example">
@@ -1627,12 +1676,13 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Eigene Such Methoden in Zend_Db_Table definieren</title>
 
             <para>
-                Es können eigene Abfrage Methoden in der Table Klasse implementiert werden, wenn oft die
-                Notwendigkeit besteht Abragen mit speziellen Kriterien auf der Table Klasse durchzuführen.
-                Die meisten Abfragen können mit <code>fetchAll()</code> geschrieben werden, das bedeutet aber
-                das Code dupliziert werden muß um Abfragekonditionen zu formen die Abfrage in verschiedenen
-                Orten der Anwendung auszuführen. Hierfür kann es nützlich sein eine Methode in der Table Klasse
-                zu definieren um oft benutzte Abfragen an dieser Tabelle durchzuführen.
+                Es können eigene Abfrage Methoden in der Table Klasse implementiert werden, wenn oft
+                die Notwendigkeit besteht Abragen mit speziellen Kriterien auf der Table Klasse
+                durchzuführen. Die meisten Abfragen können mit <code>fetchAll()</code> geschrieben
+                werden, das bedeutet aber das Code dupliziert werden muß um Abfragekonditionen zu
+                formen die Abfrage in verschiedenen Orten der Anwendung auszuführen. Hierfür kann es
+                nützlich sein eine Methode in der Table Klasse zu definieren um oft benutzte
+                Abfragen an dieser Tabelle durchzuführen.
             </para>
 
             <example id="zend.db.table.extending.finders.example">
@@ -1661,44 +1711,48 @@ class Bugs extends Zend_Db_Table_Abstract
             <title>Inflection (Beugung) in Zend_Db_Table definieren</title>
 
             <para>
-                Einige Leute bevorzugen das der Name der Table Klasse einem Tabellennamen in der RDBMS, durch
-                eine Stringumwandlung die <emphasis>Inflection</emphasis> (Beugung) genannt wird, entspricht.
+                Einige Leute bevorzugen das der Name der Table Klasse einem Tabellennamen in der
+                RDBMS, durch eine Stringumwandlung die <emphasis>Inflection</emphasis> (Beugung)
+                genannt wird, entspricht.
             </para>
 
             <para>
-                Wenn zum Beispiel der Name der Table Klasse "<code>BugsProducts</code>" ist, würde Sie der
-                physikalischen Tabelle in der Datenbank entsprechen die "<code>bugs_products</code>" heißt,
-                wenn die explizite Definition der <code>$_name</code> Eigenschaft der Klasse unterdrückt wird.
-                In dieser Übereinstimmung der Beugung, wird der Klassenname im "CamelCase" Format geschrieben
+                Wenn zum Beispiel der Name der Table Klasse "<code>BugsProducts</code>" ist, würde
+                Sie der physikalischen Tabelle in der Datenbank entsprechen die
+                "<code>bugs_products</code>" heißt, wenn die explizite Definition der
+                <code>$_name</code> Eigenschaft der Klasse unterdrückt wird. In dieser
+                Übereinstimmung der Beugung, wird der Klassenname im "CamelCase" Format geschrieben
                 und in Kleinschreibung transformiert, und Wörter mit einem Unterstrich seperiert.
             </para>
 
             <para>
-                Der Tabellenname der Datenbank kann unabhängig vom Klassennamen spezifiziert werden indem der
-                Tabellenname mit der Klasseneigenschaft <code>$_name</code> in jeder der eigenen Tabellenklassen
-                deklariert wird.
+                Der Tabellenname der Datenbank kann unabhängig vom Klassennamen spezifiziert werden
+                indem der Tabellenname mit der Klasseneigenschaft <code>$_name</code> in jeder der
+                eigenen Tabellenklassen deklariert wird.
             </para>
 
             <para>
-                <classname>Zend_Db_Table_Abstract</classname> führt keine Beugung durch um die Klassennamen mit den Tabellennamen
-                in Übereinstimmung zu bringen. Wenn die Deklaration von <code>$_name</code> in der eigenen
-                Tabellenklasse unterdrückt wird, wird die Klasse mit der Datenbanktabelle in Verbindung
-                gebracht die der Schreibweise des Klassennamens exakt entspricht.
+                <classname>Zend_Db_Table_Abstract</classname> führt keine Beugung durch um die
+                Klassennamen mit den Tabellennamen in Übereinstimmung zu bringen. Wenn die
+                Deklaration von <code>$_name</code> in der eigenen Tabellenklasse unterdrückt wird,
+                wird die Klasse mit der Datenbanktabelle in Verbindung gebracht die der Schreibweise
+                des Klassennamens exakt entspricht.
             </para>
 
             <para>
                 Es ist unzureichend Identifizierer von der Datenbank zu transformieren, da das zu
                 Doppeldeutigkeiten führen kann oder einige Identifizierer sogar unerreichbar macht.
-                Die Verwendung der SQL Identifizierer exakt so wie Sie in der Datenbank vorhanden sind,
-                macht <classname>Zend_Db_Table_Abstract</classname> sowohl einfacher als auch flexibler.
+                Die Verwendung der SQL Identifizierer exakt so wie Sie in der Datenbank vorhanden
+                sind, macht <classname>Zend_Db_Table_Abstract</classname> sowohl einfacher als auch
+                flexibler.
             </para>
 
             <para>
                 Wenn man es vorzieht Beugung zu verwenden, muß die Transformation selbst durch das
-                Überschreiben der <code>_setupTableName()</code> Methode in der eigenen Tabellenklasse
-                implementiert werden. Ein Weg um das zu tun ist die Definition einer abstrakten Klase die
-                <classname>Zend_Db_Table_Abstract</classname> erweitert. Der Rest der eigenen Klassen erweitert dann die eigene
-                neue abstrakte Klasse.
+                Überschreiben der <code>_setupTableName()</code> Methode in der eigenen
+                Tabellenklasse implementiert werden. Ein Weg um das zu tun ist die Definition einer
+                abstrakten Klase die <classname>Zend_Db_Table_Abstract</classname> erweitert. Der
+                Rest der eigenen Klassen erweitert dann die eigene neue abstrakte Klasse.
             </para>
 
             <example id="zend.db.table.extending.inflection.example">
@@ -1725,8 +1779,8 @@ class BugsProducts extends MyAbstractTable
             </example>
 
             <para>
-                Man ist selbst für das Schreiben von Funktionen verantwortlich um die Transformation der
-                Beugung auszuführen. Zend Framework bietet solche Funktionen nicht an.
+                Man ist selbst für das Schreiben von Funktionen verantwortlich um die Transformation
+                der Beugung auszuführen. Zend Framework bietet solche Funktionen nicht an.
             </para>
 
         </sect3>

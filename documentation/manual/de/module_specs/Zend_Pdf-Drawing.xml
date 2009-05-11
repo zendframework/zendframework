@@ -416,7 +416,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             kompimiert wird, kannst du dies mit einer Option abschalten:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-5">
-            <title>Komprimiere einen eingebetten Zeichensatz nicht.</title>
+            <title>Komprimiere einen eingebetten Zeichensatz nicht</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
@@ -429,7 +429,7 @@ $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
             wenn notwendig:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-6">
-            <title>Kombiniere die Zeichensatz Einbettungsoptionen.</title>
+            <title>Kombiniere die Zeichensatz Einbettungsoptionen</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath(

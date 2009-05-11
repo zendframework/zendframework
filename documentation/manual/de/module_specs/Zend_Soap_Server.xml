@@ -34,14 +34,14 @@
     </para>
 
     <sect2 id="zend.soap.server.constructor">
-        <title>Der Zend_Soap_Server Konstruktor.</title>
+        <title>Der Zend_Soap_Server Konstruktor</title>
         <para>
             Der Contructor von <classname>Zend_Soap_Server</classname> sollte für WSDL und
             nicht-WSDL Modi unterschiedlich verwendet werden.
         </para>
 
         <sect3 id="zend.soap.server.constructor.wsdl_mode">
-            <title>Der Zend_Soap_Server Konstruktor für den WSDL Modus.</title>
+            <title>Der Zend_Soap_Server Konstruktor für den WSDL Modus</title>
             <para>
                 Der <classname>Zend_Soap_Server</classname> Konstruktor nimmt zwei optionale
                 Parameter wenn er im WSDL Modus arbeitet:
@@ -112,7 +112,7 @@
         </sect3>
 
         <sect3 id="zend.soap.server.wsdl_mode">
-            <title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus.</title>
+            <title>Der Zend_Soap_Server Konstruktor für den nicht-WSDL Modus</title>
             <para>
                 Der erste Parameter des Konstruktors <emphasis>muß</emphasis> auf
                 <code>null</code> gesetzt werden wenn man plant die Funktionalität von
@@ -173,7 +173,7 @@
     </sect2>
 
     <sect2 id="zend.soap.server.api_define_methods">
-        <title>Methoden um eine Web Service API zu definieren.</title>
+        <title>Methoden um eine Web Service API zu definieren</title>
 
         <para>
             Es gibt zwei Wege um eine Web Service API zu definieren wenn man Zugriff auf den eigenen
@@ -265,7 +265,7 @@ $server->handle();
     </sect2>
 
     <sect2 id="zend.soap.server.request_response">
-        <title>Anfragen und Antwort Objekte behandeln.</title>
+        <title>Anfragen und Antwort Objekte behandeln</title>
         <note>
             <title>Fortgeschritten</title>
             <para>
@@ -280,7 +280,7 @@ $server->handle();
         </para>
 
         <sect3 id="zend.soap.server.request_response.request">
-            <title>Anfrage Bearbeitung.</title>
+            <title>Anfrage Bearbeitung</title>
 
             <para>
                 Die <classname>Zend_Soap_Server::handle()</classname> Methode nimmt Anfragen vom
@@ -347,7 +347,7 @@ $request = $server->getLastRequest();
         </sect3>
 
         <sect3 id="zend.soap.server.request_response.response">
-            <title>Antworten vor-bearbeiten.</title>
+            <title>Antworten vor-bearbeiten</title>
 
             <para>
                 Die <classname>Zend_Soap_Server::handle()</classname> Methode wirft die erzeugte

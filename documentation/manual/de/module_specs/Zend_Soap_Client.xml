@@ -26,7 +26,7 @@
     </para>
 
     <sect2 id="zend.soap.client.constructor">
-        <title>Der Zend_Soap_Client Konstruktor.</title>
+        <title>Der Zend_Soap_Client Konstruktor</title>
         <para>
             Der <classname>Zend_Soap_Client</classname> Konstruktor nimmt zwei Parameter:
             <itemizedlist>
@@ -155,7 +155,7 @@ $client = new Zend_Soap_Client("some.wsdl",
     </sect2>
 
     <sect2 id="zend.soap.client.calls">
-        <title>SOAP Anfragen durchführen.</title>
+        <title>SOAP Anfragen durchführen</title>
 
         <para>
             Nachdem ein <classname>Zend_Soap_Client</classname> Objekt erstellt wurde sind wir bereit um

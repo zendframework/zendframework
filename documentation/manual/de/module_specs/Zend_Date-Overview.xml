@@ -458,9 +458,9 @@ print $date;
                                 unterschiedliche Stunden + Minuten" Format (siehe Sektion 5 von RFC
                                 822). Vor PHP 5.2.2, zeigte die Verwendung der DATE_RFC822 Konstante
                                 mit PHP date Funktionen hier und da <ulink
-                                    url="http://bugs.php.net/bug.php?id=40308">fehlerhafte Ergebnisse</ulink>.
-                                Die Ergebnisse von Zend_Date sind korrekt. Beispiel:
-                                <code>Mon, 31 Dec 06 23:59:59 GMT</code>
+                                    url="http://bugs.php.net/bug.php?id=40308">fehlerhafte
+                                    Ergebnisse</ulink>. Die Ergebnisse von Zend_Date sind korrekt.
+                                Beispiel: <code>Mon, 31 Dec 06 23:59:59 GMT</code>
                             </entry>
                         </row>
                         <row>
@@ -706,7 +706,8 @@ print $date;
                                 aktuelle Objekt ein Schaltjahr ist. Sonst kann
                                 Zend_Date::checkLeapYear($year) benutzt werden um das Jahr $year zu
                                 prüfen, welches eine Zeichenkette, ein Integer oder eine Instanz von
-                                <classname>Zend_Date</classname> sein kann. Ist das Jahr ein Schaltjahr ?
+                                <classname>Zend_Date</classname> sein kann. Ist das Jahr ein
+                                Schaltjahr ?
                             </para>
                         </entry>
                     </row>

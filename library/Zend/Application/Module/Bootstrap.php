@@ -53,6 +53,11 @@ abstract class Zend_Application_Module_Bootstrap
     {
         parent::__construct($application);
 
+        // Use same plugin loader as parent bootstrap
+        if ($application instanceof Zend_Application_Bootstrap_ResourceBootstrapper) {
+            $this->setPluginLoader($application->getPluginLoader());
+        }
+
         $key = strtolower($this->getModuleName());
         if ($application->hasOption($key)) {
             // Don't run via setOptions() to prevent duplicate initialization
@@ -64,7 +69,6 @@ abstract class Zend_Application_Module_Bootstrap
                 'resourceloader' => $application->getOption('resourceloader')
             ));
         }
-
         $this->initResourceLoader();
 
         // ZF-6545: prevent recursive registration of modules

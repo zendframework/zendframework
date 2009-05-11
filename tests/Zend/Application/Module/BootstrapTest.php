@@ -189,6 +189,38 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             $this->assertFalse($bootstrap->hasPluginResource('Modules'), var_export($resources, 1));
         }
     }
+
+    /**
+     * @group ZF-6567
+     */
+    public function testModuleBootstrapShouldInheritApplicationBootstrapPluginPaths()
+    {
+        require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
+        $this->application->setOptions(array(
+            'resources' => array(
+                'modules' => array(),
+                'frontController' => array(
+                    'baseUrl'             => '/foo',
+                    'moduleDirectory'     => dirname(__FILE__) . '/../_files/modules',
+                ),
+            ),
+            'pluginPaths' => array(
+                'ZfModuleBootstrap_Resource' => dirname(__FILE__),
+            ),
+            'bootstrap' => array(
+                'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
+                'class' => 'ZfAppBootstrap',
+            )
+        ));
+        $appBootstrap = $this->application->getBootstrap();
+        $appBootstrap->bootstrap('Modules');
+        $modules = $appBootstrap->getResource('Modules');
+        foreach ($modules as $bootstrap) {
+            $loader = $bootstrap->getPluginLoader();
+            $paths  = $loader->getPaths();
+            $this->assertTrue(array_key_exists('ZfModuleBootstrap_Resource_', $paths));
+        }
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Module_BootstrapTest::main') {

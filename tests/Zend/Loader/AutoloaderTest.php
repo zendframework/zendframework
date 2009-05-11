@@ -192,15 +192,18 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->autoloader->unregisterNamespace($o);
     }
 
-    public function testAutoloaderSuppressNotFoundWarningsFlagShouldBeEnabledByDefault()
+    /**
+     * @group ZF-6536
+     */
+    public function testWarningSuppressionShouldBeDisabledByDefault()
     {
-        $this->assertTrue($this->autoloader->suppressNotFoundWarnings());
+        $this->assertFalse($this->autoloader->suppressNotFoundWarnings());
     }
 
     public function testAutoloaderSuppressNotFoundWarningsFlagShouldBeMutable()
     {
-        $this->autoloader->suppressNotFoundWarnings(false);
-        $this->assertFalse($this->autoloader->suppressNotFoundWarnings());
+        $this->autoloader->suppressNotFoundWarnings(true);
+        $this->assertTrue($this->autoloader->suppressNotFoundWarnings());
     }
 
     public function testFallbackAutoloaderFlagShouldBeOffByDefault()
@@ -344,12 +347,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
         $this->autoloader->suppressNotFoundWarnings(false);
         $this->autoloader->registerNamespace('ZendLoaderAutoloader');
         set_error_handler(array($this, 'handleErrors'));
-        try {
-            Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Bar');
-            $this->fail('No exception raised when error suppression was disabled');
-        } catch (Zend_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
-        }
+        $this->assertFalse(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Bar'));
         restore_error_handler();
         $this->assertNotNull($this->error);
     }

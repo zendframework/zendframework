@@ -75,7 +75,7 @@ class Zend_Loader_Autoloader
     /**
      * @var bool Whether or not to suppress file not found warnings
      */
-    protected $_suppressNotFoundWarnings = true;
+    protected $_suppressNotFoundWarnings = false;
 
     /**
      * Retrieve singleton instance

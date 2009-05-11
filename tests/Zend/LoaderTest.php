@@ -36,6 +36,11 @@ require_once dirname(__FILE__) . '/../TestHelper.php';
 require_once 'Zend/Loader.php';
 
 /**
+ * Zend_Loader_Autoloader
+ */
+require_once 'Zend/Loader/Autoloader.php';
+
+/**
  * @category   Zend
  * @package    Zend_Loader
  * @subpackage UnitTests
@@ -61,6 +66,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
     {
         $this->error = null;
         $this->errorHandler = null;
+        Zend_Loader_Autoloader::resetInstance();
     }
 
     public function tearDown()
@@ -255,17 +261,18 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('deprecated', $this->error);
 
         $autoloaders = spl_autoload_functions();
-        $expected    = array('Zend_Loader', 'autoload');
         $found       = false;
         foreach($autoloaders as $function) {
-            if ($expected == $function) {
-                $found = true;
-                break;
+            if (is_array($function)) {
+                $class = array_shift($function);
+                if ($class == 'Zend_Loader_Autoloader') {
+                    $found = true;
+                    spl_autoload_unregister($function);
+                    break;
+                }
             }
         }
-        $this->assertTrue($found, "Failed to register Zend_Loader::autoload() with spl_autoload");
-
-        spl_autoload_unregister($expected);
+        $this->assertTrue($found, "Failed to register Zend_Loader_Autoloader with spl_autoload");
     }
 
     public function testLoaderRegisterAutoloadExtendedClassNeedsAutoloadMethod()
@@ -303,15 +310,22 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $this->assertContains('deprecated', $this->error);
 
         $autoloaders = spl_autoload_functions();
-        $expected    = array('Zend_Loader_MyOverloader', 'autoload');
         $found       = false;
         foreach ($autoloaders as $function) {
-            if ($expected == $function) {
-                $found = true;
-                break;
+            if (is_array($function)) {
+                $class = array_shift($function);
+                if ($class == 'Zend_Loader_Autoloader') {
+                    $found = true;
+                    break;
+                }
             }
         }
-        $this->assertTrue($found, "Failed to register Zend_Loader_MyOverloader::autoload() with spl_autoload");
+        $this->assertTrue($found, "Failed to register Zend_Loader_Autoloader with spl_autoload");
+
+        $autoloaders = Zend_Loader_Autoloader::getInstance()->getAutoloaders();
+        $found       = false;
+        $expected    = array('Zend_Loader_MyOverloader', 'autoload');
+        $this->assertTrue(in_array($expected, $autoloaders, true), 'Failed to register My_Loader_MyOverloader with Zend_Loader_Autoloader: ' . var_export($autoloaders, 1));
 
         // try to instantiate a class that is known not to be loaded
         $obj = new Zend_Loader_AutoloadableClass();
@@ -324,7 +338,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $this->assertType('Zend_Loader_AutoloadableClass', $obj,
             'Expected to instantiate Zend_Loader_AutoloadableClass, got '.get_class($obj));
 
-        spl_autoload_unregister($expected);
+        spl_autoload_unregister($function);
     }
 
     public function testLoaderRegisterAutoloadFailsWithoutSplAutoload()
@@ -363,31 +377,53 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         }
 
         $this->setErrorHandler();
+        Zend_Loader::registerAutoload('Zend_Loader_MyOverloader');
+        $this->assertContains('deprecated', $this->error);
+
+        $expected    = array('Zend_Loader_MyOverloader', 'autoload');
+        $autoloaders = Zend_Loader_Autoloader::getInstance()->getAutoloaders();
+        $this->assertTrue(in_array($expected, $autoloaders, true), 'Failed to register autoloader');
+
+        Zend_Loader::registerAutoload('Zend_Loader_MyOverloader', false);
+        $autoloaders = Zend_Loader_Autoloader::getInstance()->getAutoloaders();
+        $this->assertFalse(in_array($expected, $autoloaders, true), 'Failed to unregister autoloader');
+
+        foreach (spl_autoload_functions() as $function) {
+            if (is_array($function)) {
+                $class = array_shift($function);
+                if ($class == 'Zend_Loader_Autoloader') {
+                    spl_autoload_unregister($function);
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * @group ZF-6605
+     */
+    public function testRegisterAutoloadShouldEnableZendLoaderAutoloaderAsFallbackAutoloader()
+    {
+        if (!function_exists('spl_autoload_register')) {
+            $this->markTestSkipped("spl_autoload() not installed on this PHP installation");
+        }
+
+        $this->setErrorHandler();
         Zend_Loader::registerAutoload();
         $this->assertContains('deprecated', $this->error);
 
-        $autoloaders = spl_autoload_functions();
-        $expected    = array('Zend_Loader', 'autoload');
-        $found       = false;
-        foreach($autoloaders as $function) {
-            if ($expected == $function) {
-                $found = true;
-                break;
-            }
-        }
-        $this->assertTrue($found, "Failed to register Zend_Loader::autoload() with spl_autoload");
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $this->assertTrue($autoloader->isFallbackAutoloader());
 
-        Zend_Loader::registerAutoload('Zend_Loader', false);
-        $autoloaders = spl_autoload_functions();
-        $expected    = array('Zend_Loader', 'autoload');
-        $found       = false;
-        foreach($autoloaders as $function) {
-            if ($expected == $function) {
-                $found = true;
-                break;
+        foreach (spl_autoload_functions() as $function) {
+            if (is_array($function)) {
+                $class = array_shift($function);
+                if ($class == 'Zend_Loader_Autoloader') {
+                    spl_autoload_unregister($function);
+                    break;
+                }
             }
         }
-        $this->assertFalse($found, "Failed to unregister Zend_Loader::autoload() with spl_autoload");
     }
 
     /**

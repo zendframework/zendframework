@@ -205,22 +205,25 @@ class Zend_Loader
     public static function registerAutoload($class = 'Zend_Loader', $enabled = true)
     {
         trigger_error(__CLASS__ . '::' . __METHOD__ . ' is deprecated as of 1.8.0 and will be removed with 2.0.0; use Zend_Loader_Autoloader instead', E_USER_NOTICE);
-        if (!function_exists('spl_autoload_register')) {
-            require_once 'Zend/Exception.php';
-            throw new Zend_Exception('spl_autoload does not exist in this PHP installation');
-        }
+        require_once 'Zend/Loader/Autoloader.php';
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->setFallbackAutoloader(true);
 
-        self::loadClass($class);
-        $methods = get_class_methods($class);
-        if (!in_array('autoload', (array) $methods)) {
-            require_once 'Zend/Exception.php';
-            throw new Zend_Exception("The class \"$class\" does not have an autoload() method");
-        }
+        if ('Zend_Loader' != $class) {
+            self::loadClass($class);
+            $methods = get_class_methods($class);
+            if (!in_array('autoload', (array) $methods)) {
+                require_once 'Zend/Exception.php';
+                throw new Zend_Exception("The class \"$class\" does not have an autoload() method");
+            }
 
-        if ($enabled === true) {
-            spl_autoload_register(array($class, 'autoload'));
-        } else {
-            spl_autoload_unregister(array($class, 'autoload'));
+            $callback = array($class, 'autoload');
+
+            if ($enabled) {
+                $autoloader->pushAutoloader($callback);
+            } else {
+                $autoloader->removeAutoloader($callback);
+            }
         }
     }
 

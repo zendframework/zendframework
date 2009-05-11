@@ -242,7 +242,7 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         $provider = $providerSignature->getProvider();
 
         // ensure that we can pretend if this is a pretend request
-        if ($request->isPretend() && (!$provider instanceof Zend_Tool_Project_Provider_Pretendable)) {
+        if ($request->isPretend() && (!$provider instanceof Zend_Tool_Framework_Provider_Pretendable)) {
             require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Dispatcher error - provider does not support pretend');  
         }

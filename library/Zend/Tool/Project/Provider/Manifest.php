@@ -51,6 +51,11 @@ require_once 'Zend/Tool/Project/Provider/Action.php';
 require_once 'Zend/Tool/Project/Provider/View.php';
 
 /**
+ * @see Zend_Tool_Project_Provider_Module
+ */
+require_once 'Zend/Tool/Project/Provider/Module.php';
+
+/**
  * @see Zend_Tool_Project_Provider_ProjectProvider
  */
 require_once 'Zend/Tool/Project/Provider/ProjectProvider.php';
@@ -78,6 +83,7 @@ class Zend_Tool_Project_Provider_Manifest implements
             new Zend_Tool_Project_Provider_Controller(),
             new Zend_Tool_Project_Provider_Action(),
             new Zend_Tool_Project_Provider_View(),
+            new Zend_Tool_Project_Provider_Module(),
             new Zend_Tool_Project_Provider_ProjectProvider()
         );
     }

@@ -152,7 +152,7 @@ class Zend_Tool_Framework_Client_Console
             require_once 'Zend/Tool/Framework/Client/Console/HelpSystem.php';
             $helpSystem = new Zend_Tool_Framework_Client_Console_HelpSystem();
             $helpSystem->setRegistry($this->_registry)
-                ->respondWithErrorMessage($response->getException()->getMessage())
+                ->respondWithErrorMessage($response->getException()->getMessage(), $response->getException())
                 ->respondWithSpecialtyAndParamHelp(
                     $request->getProviderName(),
                     $request->getActionName()

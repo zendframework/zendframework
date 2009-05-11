@@ -41,12 +41,19 @@ require_once 'Zend/Tool/Project/Provider/View.php';
 require_once 'Zend/Tool/Project/Provider/Exception.php';
 
 /**
+ * @see Zend_Tool_Framework_Provider_Pretendable
+ */
+require_once 'Zend/Tool/Framework/Provider/Pretendable.php';
+
+/**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Controller extends Zend_Tool_Project_Provider_Abstract
+class Zend_Tool_Project_Provider_Controller 
+    extends Zend_Tool_Project_Provider_Abstract
+    implements Zend_Tool_Framework_Provider_Pretendable
 {
 
     /**
@@ -65,7 +72,15 @@ class Zend_Tool_Project_Provider_Controller extends Zend_Tool_Project_Provider_A
             throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"controllerName\" is the name of a controller resource to create.');
         }
         
-        $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
+        if (!($controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName))) {
+            if ($moduleName) {
+                $exceptionMessage = 'A controller directory for module "' . $moduleName . '" was not found.';
+            } else {
+                $exceptionMessage = 'A controller directory was not found.';
+            }
+            throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
+        }
+        
         $newController = $controllersDirectory->createResource('controllerFile', array('controllerName' => $controllerName));
 
         return $newController;
@@ -101,7 +116,7 @@ class Zend_Tool_Project_Provider_Controller extends Zend_Tool_Project_Provider_A
         $profileSearchParams = array();
 
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => $moduleName);
+            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
         }
 
         $profileSearchParams[] = 'controllersDirectory';
@@ -115,7 +130,7 @@ class Zend_Tool_Project_Provider_Controller extends Zend_Tool_Project_Provider_A
      * @param string $name The name of the controller to create.
      * @param bool $indexActionIncluded Whether or not to create the index action.
      */
-    public function create($name, $indexActionIncluded = true)
+    public function create($name, $indexActionIncluded = true, $module = null)
     {
         $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
         
@@ -128,10 +143,10 @@ class Zend_Tool_Project_Provider_Controller extends Zend_Tool_Project_Provider_A
         }
         
         try {
-            $controllerResource = self::createResource($this->_loadedProfile, $name);
+            $controllerResource = self::createResource($this->_loadedProfile, $name, $module);
             if ($indexActionIncluded) {
                 $indexActionResource = Zend_Tool_Project_Provider_Action::createResource($this->_loadedProfile, 'index', $name);
-                $indexActionViewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, $name, 'index');
+                $indexActionViewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, 'index', $name);
             }
             if ($testingEnabled) {
                 $testControllerResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index');

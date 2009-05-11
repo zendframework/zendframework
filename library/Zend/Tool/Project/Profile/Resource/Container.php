@@ -62,21 +62,31 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
      * @param Zend_Tool_Project_Profile_Resource_SearchConstraints|string|array $searchParameters
      * @return Zend_Tool_Project_Profile_Resource
      */
-    public function search($searchConstraints)
+    public function search($matchSearchConstraints, $nonMatchSearchConstraints = null)
     {
-        if (!$searchConstraints instanceof Zend_Tool_Project_Profile_Resource_SearchConstraints) {
-            $searchConstraints = new Zend_Tool_Project_Profile_Resource_SearchConstraints($searchConstraints);
+        if (!$matchSearchConstraints instanceof Zend_Tool_Project_Profile_Resource_SearchConstraints) {
+            $matchSearchConstraints = new Zend_Tool_Project_Profile_Resource_SearchConstraints($matchSearchConstraints);
+        }
+                
+        $this->rewind();
+        
+        /**
+         * @todo This should be re-written with better support for a filter iterator, its the way to go
+         */
+        
+        if ($nonMatchSearchConstraints) {
+            $filterIterator = new Zend_Tool_Project_Profile_Iterator_ContextFilter($this, array('denyNames' => $nonMatchSearchConstraints));
+            $riIterator = new RecursiveIteratorIterator($filterIterator, RecursiveIteratorIterator::SELF_FIRST);
+        } else {
+            $riIterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         }
         
-        $this->rewind();
-        $riIterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
-        
         $foundResource     = false;
-        $currentConstraint = $searchConstraints->getConstraint();
+        $currentConstraint = $matchSearchConstraints->getConstraint();
         $foundDepth        = 0;
         
-        while ($currentResource = $riIterator->current()) {
-            
+        foreach ($riIterator as $currentResource) {
+        
             // if current depth is less than found depth, end
             if ($riIterator->getDepth() < $foundDepth) {
                 break;
@@ -89,6 +99,11 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
                 // @todo check to ensure params match (perhaps)
                 if (count($currentConstraint->params) > 0) {
                     $currentResourceAttributes = $currentResource->getAttributes();
+                    if (!is_array($currentConstraint->params)) {
+                        require_once 'Zend/Tool/Project/Profile/Exception.php';
+                        throw new Zend_Tool_Project_Profile_Exception('Search parameter specifics must be in the form of an array for key "' 
+                            . $currentConstraint->name .'"');      
+                    }
                     foreach ($currentConstraint->params as $paramName => $paramValue) {
                         if (!isset($currentResourceAttributes[$paramName]) || $currentResourceAttributes[$paramName] != $paramValue) {
                             $paramsMatch = false;
@@ -100,7 +115,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
                 if ($paramsMatch) {
                     $foundDepth = $riIterator->getDepth();
                     
-                    if (($currentConstraint = $searchConstraints->getConstraint()) == null) {
+                    if (($currentConstraint = $matchSearchConstraints->getConstraint()) == null) {
                         $foundResource = $currentResource;
                         break;
                     }
@@ -108,7 +123,6 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
 
             }
             
-            $riIterator->next();
         }
         
         return $foundResource;
@@ -127,7 +141,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
         if (!$appendResourceOrSearchConstraints instanceof Zend_Tool_Project_Profile_Resource_Container) {
             if (($parentResource = $this->search($appendResourceOrSearchConstraints)) == false) {
                 require_once 'Zend/Tool/Project/Profile/Exception.php';
-                throw new Zend_Tool_Project_Profile_Exception('No node was found to append to.');                
+                throw new Zend_Tool_Project_Profile_Exception('No node was found to append to.');
             }
         } else {
             $parentResource = $appendResourceOrSearchConstraints;

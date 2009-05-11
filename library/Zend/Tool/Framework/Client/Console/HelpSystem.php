@@ -56,8 +56,9 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
      * respondWithErrorMessage()
      *
      * @param string $errorMessage
+     * @param Exception $exception
      */
-    public function respondWithErrorMessage($errorMessage)
+    public function respondWithErrorMessage($errorMessage, Exception $exception = null)
     {
         // break apart the message into wrapped chunks
         $errorMessages = explode(PHP_EOL, wordwrap($errorMessage, 70, PHP_EOL, false));
@@ -68,6 +69,10 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         foreach ($errorMessages as $errorMessage) {
             $errorMessage = sprintf('%-70s', $errorMessage);
             $this->_response->appendContent(' ' . $errorMessage . ' ', array('color' => array('white', 'bgRed')));
+        }
+        
+        if ($exception && $this->_registry->getRequest()->isDebug()) {
+            $this->_response->appendContent($exception->getTraceAsString());
         }
         
         $this->_response->appendContent(null, array('separator' => true));

@@ -26,12 +26,19 @@
 require_once 'Zend/Tool/Project/Provider/Abstract.php';
 
 /**
+ * @see Zend_Tool_Framework_Provider_Pretendable
+ */
+require_once 'Zend/Tool/Framework/Provider/Pretendable.php';
+
+/**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstract
+class Zend_Tool_Project_Provider_Action 
+    extends Zend_Tool_Project_Provider_Abstract
+    implements Zend_Tool_Framework_Provider_Pretendable
 {
 
     /**
@@ -98,7 +105,7 @@ class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstr
         $profileSearchParams = array();
         
         if ($moduleName != null && is_string($moduleName)) {
-            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => $moduleName);
+            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
         }
         
         $profileSearchParams[] = 'controllersDirectory';
@@ -114,7 +121,7 @@ class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstr
      * @param string $controllerName
      * @param bool $viewIncluded
      */
-    public function create($name, $controllerName = 'index', $viewIncluded = true)
+    public function create($name, $controllerName = 'index', $viewIncluded = true, $module = null)
     {
 
         $this->_loadProfile();
@@ -123,7 +130,7 @@ class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstr
             throw new Zend_Tool_Project_Provider_Exception('This controller (' . $controllerName . ') already has an action named (' . $name . ')');
         }
         
-        $actionMethod = self::createResource($this->_loadedProfile, $name, $controllerName);
+        $actionMethod = self::createResource($this->_loadedProfile, $name, $controllerName, $module);
         
         if ($this->_registry->getRequest()->isPretend()) {
             $this->_registry->getResponse()->appendContent(
@@ -140,7 +147,7 @@ class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstr
         }
         
         if ($viewIncluded) {
-            $viewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, $controllerName, $name);
+            $viewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, $name, $controllerName, $module);
             
             if ($this->_registry->getRequest()->isPretend()) {
                 $this->_registry->getResponse()->appendContent(
@@ -151,6 +158,7 @@ class Zend_Tool_Project_Provider_Action extends Zend_Tool_Project_Provider_Abstr
                     'Creating a view script for the ' . $name . ' action method at ' . $viewResource->getContext()->getPath()
                     );
                 $viewResource->create();
+                $this->_storeProfile();
             }
             
         }

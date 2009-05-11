@@ -87,10 +87,10 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      */
     public function getIterator()
     {
-        require_once 'Zend/Tool/Project/Profile/Iterator/EnabledResource.php';
+        require_once 'Zend/Tool/Project/Profile/Iterator/EnabledResourceFilter.php';
 
         return new RecursiveIteratorIterator(
-            new Zend_Tool_Project_Profile_Iterator_EnabledResource($this),
+            new Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter($this),
             RecursiveIteratorIterator::SELF_FIRST
             );
     }

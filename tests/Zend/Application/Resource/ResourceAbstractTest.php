@@ -158,6 +158,21 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
         $resource = new Zend_Application_BootstrapTest_Resource_Foo($config);
         $this->assertEquals($options, $resource->getOptions());
     }
+
+    /**
+     * @group ZF-6593
+     */
+    public function testSetOptionsShouldRemoveBootstrapOptionWhenPassed()
+    {
+        require_once dirname(__FILE__) . '/../_files/resources/Foo.php';
+        $resource = new Zend_Application_BootstrapTest_Resource_Foo();
+        $resource->setOptions(array(
+            'bootstrap' => $this->bootstrap,
+        ));
+        $this->assertSame($this->bootstrap, $resource->getBootstrap());
+        $options = $resource->getOptions();
+        $this->assertNotContains('bootstrap', array_keys($options));
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ResourceAbstractTest::main') {

@@ -92,6 +92,9 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
+            if ('bootstrap' == $key) {
+                unset($options[$key]);
+            }
         }
         
         $this->_options = array_merge_recursive($this->_options, $options);

@@ -176,6 +176,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
         $expected = array(
             'bar'     => dirname(__FILE__) . '/../_files/modules/bar/controllers',
             'default' => dirname(__FILE__) . '/../_files/modules/default/controllers',
+            'foo-bar' => dirname(__FILE__) . '/../_files/modules/foo-bar/controllers',
             'foo'     => dirname(__FILE__) . '/../_files/modules/foo/controllers',
             'baz'     => dirname(__FILE__) . '/../_files/modules/baz/controllers',
             'zfappbootstrap' => dirname(__FILE__) . '/../_files/modules/zfappbootstrap/controllers',

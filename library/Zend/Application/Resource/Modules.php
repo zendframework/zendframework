@@ -67,7 +67,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
                 continue;
             }
 
-            $bootstrapClass = ucfirst($module) . '_Bootstrap';
+            $bootstrapClass = $this->_formatModuleName($module) . '_Bootstrap';
             if (!class_exists($bootstrapClass)) {
                 $bootstrapPath  = $front->getModuleDirectory($module) . '/Bootstrap.php';
                 if (file_exists($bootstrapPath)) {
@@ -96,5 +96,20 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
     public function getExecutedBootstraps()
     {
         return $this->_bootstraps;
+    }
+
+    /**
+     * Format a module name to the module class prefix
+     * 
+     * @param  string $name 
+     * @return string
+     */
+    protected function _formatModuleName($name)
+    {
+        $name = strtolower($name);
+        $name = str_replace(array('-', '.'), ' ', $name);
+        $name = ucwords($name);
+        $name = str_replace(' ', '', ucwords($name));
+        return $name;
     }
 }

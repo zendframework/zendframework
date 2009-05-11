@@ -136,7 +136,7 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource->init();
         $bootstraps = $resource->getExecutedBootstraps();
         $test       = array_keys((array) $bootstraps);
-        $expected   = array('bar', 'foo');
+        $expected   = array('bar', 'foo-bar', 'foo');
         $this->assertEquals($expected, $test);
     }
 
@@ -151,7 +151,7 @@ class Zend_Application_Resource_ModulesTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         $bootstraps = $resource->init();
         $test       = array_keys((array) $bootstraps);
-        $expected   = array('bar', 'foo');
+        $expected   = array('bar', 'foo-bar', 'foo');
         $this->assertEquals($expected, $test);
     }
 }

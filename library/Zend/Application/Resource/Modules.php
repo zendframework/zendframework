@@ -109,7 +109,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
         $name = strtolower($name);
         $name = str_replace(array('-', '.'), ' ', $name);
         $name = ucwords($name);
-        $name = str_replace(' ', '', ucwords($name));
+        $name = str_replace(' ', '', $name);
         return $name;
     }
 }

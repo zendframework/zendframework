@@ -30,11 +30,13 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
     {
         $this->_server = new Zend_Amf_Server();
         $this->_server->setProduction(false);
+        Zend_Amf_Parse_TypeLoader::resetMap();
     }
 
     public function testDown()
     {
         unset($this->_server);
+        //Zend_Amf_Parse_TypeLoader::resetMap();
     }
 
     /**

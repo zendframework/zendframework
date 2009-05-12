@@ -143,8 +143,7 @@ $inflector->setFilterRule(':action', array(
     ),
     'StringToLower'
 ));
-]]>
-</programlisting>
+]]></programlisting>
 
                 <para>
                     Der obige Code ändert den Inflector so, das er Wörter nicht länger mit einem

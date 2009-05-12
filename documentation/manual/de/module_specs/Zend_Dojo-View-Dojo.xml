@@ -219,8 +219,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 
         <programlisting role="html"><![CDATA[
 <body class="tundra">
-]]>
-</programlisting>
+]]></programlisting>
     </sect3>
 
     <sect3 id="zend.dojo.view.dojo.layers">

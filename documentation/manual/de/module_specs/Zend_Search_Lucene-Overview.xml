@@ -623,7 +623,6 @@ $index->addDocument($doc);
             Das Feld 'description' ist die Beschreibung des aktuellen Dokuments.
         </para>
 
-
         <para>
             Das Feld 'lastModifiedBy' ist der Benutzername der Person die das aktuelle Dokument
             als letztes geändert hat.

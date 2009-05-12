@@ -204,8 +204,7 @@
                 Textdatei ist ähnlich dem von Apache htpasswd Dateien:
                 <programlisting><![CDATA[
 <benutzername>:<bereich>:<zeugnisse>\n
-]]>
-</programlisting>
+]]></programlisting>
                 Jede Zeile besteht aus drei Feldern - Benutzername, Bereich und Zeugnisse - jede
                 abgeteilt durch einen Doppelpunkt. Das Zeugnis Feld ist für den Datei Auflöser nicht
                 sichtbar; es gibt den Wert einfach, wie er ist, an den Aufrufer zurück. Deswegen

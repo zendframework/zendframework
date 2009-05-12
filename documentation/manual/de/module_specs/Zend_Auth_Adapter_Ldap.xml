@@ -111,8 +111,7 @@ ldap.server2.accountDomainName = w.net
 ldap.server2.accountDomainNameShort = W
 ldap.server2.accountCanonicalForm = 3
 ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
-]]>
-</programlisting>
+]]></programlisting>
             Die obige Konfiguration instruiert <classname>Zend_Auth_Adapter_Ldap</classname> das es
             versuchen soll Benutzer zuerst mit dem OpenLDAP Server <code>s0.foo.net</code>
             authentifizieren soll. Wenn die Authentifizierung auf irgendeinem Grund fehlschlägt,
@@ -182,8 +181,7 @@ Array
         )
 
 )
-]]>
-</programlisting>
+]]></programlisting>
             Die oben angebotene Information in jedem Set von Optionen ist hauptsächlich deswegen
             unterschiedlich weil AD keinen Benutzernamen wärend des Bindesn in der DN Form benötigt
             (siehe die <code>bindRequiresDn</code> Option des <emphasis>Server Optionen</emphasis>

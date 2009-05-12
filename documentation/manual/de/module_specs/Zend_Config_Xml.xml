@@ -61,8 +61,7 @@
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Nehmen wir weiterhin an, dass der Anwendungs-Entwickler die Staging-Konfiguration aus
             diesem XML-File benötigt. Es ist ein Leichtes, diese Daten zu laden, es muss nur das
@@ -99,8 +98,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Der andere Weg verkürzt die Konfiguration nicht wirklich, macht es aber einfacher in der
             Handhabung das der Tag-Name nicht zweimal geschrieben werden muß. Man erstellt einfach
@@ -131,8 +129,7 @@ echo $config->database->params->dbname; // ausgabe "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
     </example>
     <note>
         <title>XML Strings</title>

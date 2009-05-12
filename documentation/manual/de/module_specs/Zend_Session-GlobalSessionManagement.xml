@@ -93,8 +93,7 @@ save_path = /home/myaccount/zend_sessions/myapp
 use_only_cookies = on
 ; Beim Analysieren von Session ID Cookies, frage nach einer TTL von 10 Tagen
 remember_me_seconds = 864000
-]]>
-</programlisting>
+]]></programlisting>
 
             <para>
                 Als nächstes die Konfigurationsdatei laden und dessen Array Representation

@@ -5,7 +5,7 @@
     <title>Grundlegende Verwendung</title>
     <para>
         Die Verwendung von <classname>Zend_Json</classname> bedingt den Gebrauch der beiden
-        öffentlich verfügbaren,  statischen Methoden <classname>Zend_Json::encode()</classname> und
+        öffentlich verfügbaren, statischen Methoden <classname>Zend_Json::encode()</classname> und
         <classname>Zend_Json::decode()</classname>.
     </para>
     <programlisting role="php"><![CDATA[

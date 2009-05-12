@@ -111,7 +111,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <para>
             Für die Erstellung einer Auswahlbox und der Auswahl einer speziellen Stadt kann die
-            Funktion <classname>Zend_Date_Cities::getCityList</classname>  benutzt werden. Sie gibt
+            Funktion <classname>Zend_Date_Cities::getCityList</classname> benutzt werden. Sie gibt
             die Namen aller verfügbaren vordefinierten Städte der Helferklasse zurück.
         </para>
 

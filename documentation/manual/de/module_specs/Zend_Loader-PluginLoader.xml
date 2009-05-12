@@ -49,8 +49,7 @@ library/
                 FormLabel.php
                 FormSubmit.php
                 FormText.php
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             Jetzt wird ein Plugin Lader erstellt um die verschiedenen vorhandenene View Helfer

@@ -195,8 +195,7 @@ $model = array(
     <dt>Fisch</dt>
     <dd>Flunder</dd>
 </dl>
-]]>
-</programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.view.helpers.initial.partial.modules">

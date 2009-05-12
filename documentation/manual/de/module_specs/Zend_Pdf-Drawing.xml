@@ -31,13 +31,16 @@ $height = $pdfPage->getHeight();
             Klassen stellen folgende Funktionalitäten bereit:
         </para>
             <programlisting role="php"><![CDATA[
-// $grayLevel (Fließkommazahl). 0.0 (schwarz) - 1.0 (weiß)
+// $grayLevel (Fließkommazahl)
+// 0.0 (schwarz) - 1.0 (weiß)
 $color1 = new Zend_Pdf_Color_GrayScale($grayLevel);
 
-// $r, $g, $b (Fließkommazahlen). 0.0 (min Helligkeit) - 1.0 (max Helligkeit)
+// $r, $g, $b (Fließkommazahlen)
+// 0.0 (min Helligkeit) - 1.0 (max Helligkeit)
 $color2 = new Zend_Pdf_Color_Rgb($r, $g, $b);
 
-// $c, $m, $y, $k (Fließkommazahlen). 0.0 (min Helligkeit) - 1.0 (max Helligkeit)
+// $c, $m, $y, $k (Fließkommazahlen)
+// 0.0 (min Helligkeit) - 1.0 (max Helligkeit)
 $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
@@ -98,8 +101,8 @@ public function drawRectangle($x1, $y1, $x2, $y2,
  *
  * Wenn $fillType Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE oder
  * Zend_Pdf_Page::SHAPE_DRAW_FILL ist, wird das Polygon automatisch geschlossen.
- * Für eine detaillierte Beschreibung dieser Methode schaue in eine PDF Dokumentation
- * (Kapitel 4.4.2 Path painting Operators, Filling)
+ * Für eine detaillierte Beschreibung dieser Methode schaue in eine PDF
+ * Dokumentation (Kapitel 4.4.2 Path painting Operators, Filling)
  *
  * @param array $x  - Array mit Floats (die X Koordinaten der Eckpunkte)
  * @param array $y  - Array mit Floats (the Y Koordinaten der Eckpunkte)
@@ -514,7 +517,8 @@ foreach ($fontList as $font) {
     $yPosition -= 30;
 }
 ...
-// Alle Schriften die in der ersten Seite des Dokuments referenziert sind erhalten
+// Alle Schriften, die in der ersten Seite des Dokuments
+// referenziert sind erhalten
 $firstPage = reset($pdf->pages);
 $firstPageFonts = $firstPage->extractFonts();
 ...
@@ -576,7 +580,8 @@ $pdf->save($docPath, true /* aufsteigender Update Modus */);
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
 
-$page->setFont($font /* Die extrahierte Schrift für das Zeichnen verwenden */, $fontSize);
+$page->setFont($font, /* Die extrahierte Schrift für das Zeichnen verwenden */
+               $fontSize);
 $xPosition = $x;
 for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
     $page->drawText($text[$charIndex], xPosition, $y);

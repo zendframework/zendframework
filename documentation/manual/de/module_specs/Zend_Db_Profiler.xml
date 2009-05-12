@@ -98,8 +98,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
-]]>
-</programlisting>
+]]></programlisting>
 
             Diese Konfiguration kann durch den folgenden PHP Code angesprochen werden:
 

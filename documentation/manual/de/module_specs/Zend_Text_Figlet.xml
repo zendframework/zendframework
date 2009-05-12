@@ -115,8 +115,7 @@ echo $figlet->render('Zend');
   / //__   | ||___   | .  || | |__/ ||
  /_____||  |_____||  |_|\_|| |_____//
  `-----`'  `-----`   `-` -`'  -----`
-]]>
-</programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

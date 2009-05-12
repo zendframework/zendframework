@@ -291,7 +291,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                     werden soll um die Währung darzustellen. Es gibt 4 Darstellungen welche
                     verwendet werden können. Sie werden in
                     <link linkend="zend.currency.usage.setformat.constantsdescription">dieser
-                        Tabelle</link>  beschrieben.
+                        Tabelle</link> beschrieben.
                 </para>
             </listitem>
             <listitem>

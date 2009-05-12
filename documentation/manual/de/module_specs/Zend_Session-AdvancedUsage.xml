@@ -56,8 +56,7 @@ Zend_Session::start();
                     (normalerweise im HTML Dokumenten Basisverzeichnis) hinzugefügt werden:
                     <programlisting role="httpd.conf"><![CDATA[
 php_value session.auto_start 0
-]]>
-</programlisting>
+]]></programlisting>
                 </para>
             </listitem>
             <listitem>

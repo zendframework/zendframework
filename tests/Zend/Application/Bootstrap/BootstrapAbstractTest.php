@@ -158,7 +158,7 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
             ),
         );
         $bootstrap->setOptions($options2);
-        $expected = array_merge_recursive($options, $options2);
+        $expected = $bootstrap->mergeOptions($options, $options2);
         $test     = $bootstrap->getOptions();
         $this->assertEquals($expected, $test);
     }

@@ -97,7 +97,7 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
             }
         }
         
-        $this->_options = array_merge_recursive($this->_options, $options);
+        $this->_options = $this->mergeOptions($this->_options, $options);
 
         return $this;
     }
@@ -110,6 +110,29 @@ abstract class Zend_Application_Resource_ResourceAbstract implements Zend_Applic
     public function getOptions()
     {
         return $this->_options;
+    }
+
+    /**
+     * Merge options recursively
+     * 
+     * @param  array $array1 
+     * @param  mixed $array2 
+     * @return array
+     */
+    public function mergeOptions(array $array1, $array2 = null)
+    {
+        if (is_array($array2)) {
+            foreach ($array2 as $key => $val) {
+                if (is_array($array2[$key])) {
+                    $array1[$key] = (array_key_exists($key, $array1) && is_array($array1[$key]))
+                                  ? $this->mergeOptions($array1[$key], $array2[$key]) 
+                                  : $array2[$key];
+                } else {
+                    $array1[$key] = $val;
+                }
+            }
+        }
+        return $array1;
     }
 
     /**

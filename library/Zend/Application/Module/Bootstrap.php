@@ -51,7 +51,7 @@ abstract class Zend_Application_Module_Bootstrap
      */
     public function __construct($application)
     {
-        parent::__construct($application);
+        $this->setApplication($application);
 
         // Use same plugin loader as parent bootstrap
         if ($application instanceof Zend_Application_Bootstrap_ResourceBootstrapper) {
@@ -70,6 +70,11 @@ abstract class Zend_Application_Module_Bootstrap
             ));
         }
         $this->initResourceLoader();
+
+        // ZF-6545: ensure front controller resource is loaded
+        if (!$this->hasPluginResource('FrontController')) {
+            $this->registerPluginResource('FrontController');
+        }
 
         // ZF-6545: prevent recursive registration of modules
         if ($this->hasPluginResource('Modules')) {

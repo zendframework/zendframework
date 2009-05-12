@@ -149,7 +149,12 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             'bootstrap' => array(
                 'path'  => dirname(__FILE__) . '/../_files/ZfAppBootstrap.php',
                 'class' => 'ZfAppBootstrap',
-            )
+            ),
+            'ZfModule' => array(
+                'resources' => array(
+                    'FrontController' => array(),
+                ),
+            ),
         ));
         $appBootstrap = $this->application->getBootstrap();
         $appBootstrap->bootstrap('FrontController');

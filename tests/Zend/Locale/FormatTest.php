@@ -122,6 +122,7 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
     {
         $this->assertTrue( Zend_Locale_Format::isNumber('-1.234.567,12345',  array('locale' => 'de_AT')));
         $this->assertFalse(Zend_Locale_Format::isNumber('textwithoutnumber', array('locale' => 'de_AT')));
+        $this->assertFalse(Zend_Locale_Format::isNumber('', array('locale' => 'de_AT')));
     }
 
     /**

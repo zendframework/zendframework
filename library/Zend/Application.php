@@ -263,7 +263,7 @@ class Zend_Application
             $class = 'Bootstrap';
         }
 
-        if (!class_exists($class)) {
+        if (!class_exists($class, false)) {
             require_once $path;
         }
         $this->_bootstrap = new $class($this);

@@ -336,10 +336,13 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
      * Load a plugin via the name provided
      *
      * @param  string $name
-     * @return string Class name of loaded class
+     * @param  bool $throwExceptions Whether or not to throw exceptions if the 
+     * class is not resolved
+     * @return string|false Class name of loaded class; false if $throwExceptions 
+     * if false and no class found
      * @throws Zend_Loader_Exception if class not found
      */
-    public function load($name)
+    public function load($name, $throwExceptions = true)
     {
         $name = $this->_formatName($name);
         if ($this->isLoaded($name)) {
@@ -382,6 +385,10 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
         }
 
         if (!$found) {
+            if (!$throwExceptions) {
+                return false;
+            }
+
             $message = "Plugin by name '$name' was not found in the registry; used paths:";
             foreach ($registry as $prefix => $paths) {
                 $message .= "\n$prefix: " . implode(PATH_SEPARATOR, $paths);

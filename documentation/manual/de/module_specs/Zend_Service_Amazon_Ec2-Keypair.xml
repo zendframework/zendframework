@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15428 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.keypairs">
     <title>Zend_Service_Amazon_Ec2: Schlüsselpaare</title>
     <para>
-        Schlüsselpaare erlauben es auf Unix Ec2 Instanzen über SSH zuzugreifen.
+        Schlüsselpaare werden verwendet um auf Instanzen zuzugreifen.
     </para>
 
     <example id="zend.service.amazon.ec2.keypairs.create">

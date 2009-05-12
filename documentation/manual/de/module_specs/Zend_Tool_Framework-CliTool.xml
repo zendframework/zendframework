@@ -5,24 +5,23 @@
     <title>Verwenden des CLI Tools</title>
 
     <para>
-        The CLI, or command line tool (internally known as the console tool), is
-        currently the primary interface for dispatching <code>Zend_Tool</code>
-        requests. With the CLI tool, developers can issue tooling requests
-        inside a the "command line windows", also commonly known as a "terminal"
-        window. This environment is predominant in the *nix environment, but
-        also has a common implementation in windows with the
-        <code>cmd.exe</code>, console2 and also with the Cygwin project.
+        Das CLI, oder Kommandozeilen Tool (Intern als Consolen Tool bekannt), ist aktuell das
+        primäre Interface für die  Bearbeitung von <code>Zend_Tool</code> Anfragen. Mit dem CLI
+        Tool können Entwickler werkmäßige Anfragen in einem "Kommandozeilen Fenster", allgemein
+        bekannt als "Terminal", erstellen. Diese Umgebung ist in einer *nix Umgebung vorherrschend,
+        hat aber auch eine bekannte Implementation in Windows, mit <code>cmd.exe</code>, Console2
+        und auch dem Cygwin Projekt.
     </para>
 
     <sect2 id="zend.tool.framework.clitool.setup-general">
-        <title>Setting up the CLI tool</title>
+        <title>Vorbereiten des CLI Tools</title>
 
         <para>
-            To issue tooling requests via the command line client, you first
-            need to setup the client so that your system can handle the "zf"
-            command. The command line client, for all intents and purposes, is
-            the <code>.sh</code> or <code>.bat</code> file that is provided with
-            your Zend Framework distribution. In trunk, it can be found here:
+            Um werkmäßige Anfragen über den Kommandozeilen Client zu erstellen, muß man zuerst den
+            Client einrichten, damit das System das "zf" Kommando behandeln kann. Der Kommandozeilen
+            Client für alle Wünsche und Zwecke, ust die <code>.sh</code> oder <code>.bat</code>
+            Datei die mit der Distribution von Zend Framework ausgeliefert wurde. Im Trunk kann sie
+            hier gefunden werden:
             <ulink url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>
         </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15346 -->
+<!-- EN-Revision: 15501 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
 
@@ -922,7 +922,7 @@ print $date->toString("'Epoche:GGGG='GGGG, ' Datum:yy.MMMM.dd'yy.MMMM.dd");
                     </row>
                     <row>
                         <entry>EE</entry>
-                        <entry>Wochentag, Lokalisiert, Abgekürzt, zwei Zeichen</entry>
+                        <entry>Wochentag, Lokalisiert, Abgekürzt, zwei oder mehrere Zeichen</entry>
                         <entry>Zend_Date::WEEKDAY_NAME</entry>
                         <entry><emphasis>Mo</emphasis>
                         </entry>

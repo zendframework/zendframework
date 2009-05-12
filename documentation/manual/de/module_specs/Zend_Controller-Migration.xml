@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15156 -->
+<!-- EN-Revision: 15467 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.migration">
     <title>Migration von vorhergehenden Versionen</title>
@@ -9,6 +9,22 @@
         in einer früheren Version verwendet hat, folgt dem Leitfaden unten, damit dieSkripte die
         neue Archtitekur verwenden.
     </para>
+
+    <sect2 id="zend.controller.migration.fromoneseventooneeight">
+        <title>Migratiion von 1.7.x zu 1.8.0 oder neuer</title>
+
+        <sect3 id="zend.controller.migration.fromoneseventooneeight.router">
+            <title>Änderungen der Standard Route</title>
+
+            <para>
+                Da übersetzte Segmente in der neuen Standard Route eingeführt wurden, ist das
+                <code>@</code> Zeichen kein spezielles Zeichen am Begin eines Segments der Route.
+                Um es trotzdem in einem statischen Segment verwenden zu können, muß es durch das
+                Voranstellen eines zweiten <code>@</code> Zeichens escapt werden. Die selbe Regel
+                trifft für das <code>:</code> Zeichen zu:
+            </para>
+        </sect3>
+    </sect2>
 
     <sect2 id="zend.controller.migration.fromonesixtooneseven">
         <title>Migration von 1.6.x zu 1.7.0 oder neuer</title>

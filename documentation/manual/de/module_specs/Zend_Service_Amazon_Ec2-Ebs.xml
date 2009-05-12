@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15427 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>
@@ -111,7 +111,7 @@ $return = $ec2_ebs->describeVolume('volumeId');
             <para>
                 Um eine Liste der EBS Volumes, die einer laufenden Instanz aktuell angehängt sind,
                 zurückzugeben kann man diese Methode aufrufen. Sie gibt nur EBS Volumes zurück die
-                der übergebenen instanceId angehängt sind.
+                Instanzen angehängt sind, welche die übergebene instanceId haben.
             </para>
             <para>
                 <code>describeAttachedVolumes</code> gibt die gleichen Informationen wie

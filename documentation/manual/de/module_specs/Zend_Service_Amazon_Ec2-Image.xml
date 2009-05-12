@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15343 -->
+<!-- EN-Revision: 15427 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.images">
     <title>Zend_Service_Amazon_Ec2: Amazon Maschinen Images (AMI)</title>
     <para>
         Amazon Maschinen Images (AMIs) sind mit einer bereits wachsenden Listen von
-        Betriebssystemen vorkonfiguriert. Wir arbeiten mit unseren Partnern und der Community um
-        die best mögliche Auswahl zu bieten.
+        Betriebssystemen vorkonfiguriert.
     </para>
 
     <sect2 id="zend.service.amazon.ec2.images.info">
@@ -43,7 +42,7 @@ $ip = $ec2_img->register('imageLocation');
 
             <programlisting role="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
-$ip = $ec2_img->deregister($imageId);
+$ip = $ec2_img->deregister('imageId');
 ]]></programlisting>
         </example>
 
@@ -129,7 +128,7 @@ $ip = $ec2_img->deregister($imageId);
 
             <programlisting role="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
-$ip = $ec2_img->allocate();
+$ip = $ec2_img->describe();
 ]]></programlisting>
         </example>
     </sect2>

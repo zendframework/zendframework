@@ -9,8 +9,8 @@
         Framework. Between the sheer number of class files that need to be
         loaded for many components, to the use of plugins that do not have a 1:1
         relationship between their class name and the file system, the various
-        calls to <code>include_once</code> and <code>require_once</code> can be
-        problematic. This chapter intends to provide some concrete solutions to
+        calls to <methodname>include_once</methodname> and <methodname>require_once</methodname>
+        can be problematic. This chapter intends to provide some concrete solutions to
         these issues.
     </para>
 
@@ -40,7 +40,7 @@
             <para>
                 There are two easy ways to ensure this. First, you can hardcode
                 the paths in your php.ini, httpd.conf, or .htaccess. Second, you
-                can use PHP's <code>realpath()</code> function when setting your
+                can use PHP's <methodname>realpath()</methodname> function when setting your
                 include_path:
             </para>
 
@@ -68,7 +68,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 However, even so, it's typically a trivial task to simply pass
-                the path to <code>realpath()</code>.
+                the path to <methodname>realpath()</methodname>.
             </para>
         </sect3>
 
@@ -136,7 +136,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 First, we'll create a library directory in our project. Inside
-                that directory, we'll symlink our Zend Framework's library/Zend
+                that directory, we'll symlink our Zend Framework's <filename>library/Zend</filename>
                 directory, as well as the necessary directories from our PEAR
                 installation:
             </para>
@@ -156,14 +156,14 @@ library
 
             <para>
                 Next, we'll opt to create our include_path programmatically
-                within our public/index.php file. This allows us to move our
+                within our <filename>public/index.php</filename> file. This allows us to move our
                 code around on the file system, without needing to edit the
                 include_path every time.
             </para>
 
             <para>
                 We'll borrow ideas from each of the suggestions above: we'll use
-                absolute paths, as determined using <code>realpath()</code>;
+                absolute paths, as determined using <methodname>realpath()</methodname>;
                 we'll include the Zend Framework include path early; we've
                 already consolidated include_paths; and we'll put the current
                 directory as the last path. In fact, we're doing really well
@@ -230,7 +230,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 process trivially, helping boost performance in your production
                 application. It should be noted, however, that if you use this
                 technique, you <emphasis>must</emphasis> utilize autoloading;
-                you can do that from your "public/index.php" file with the
+                you can do that from your "<filename>public/index.php</filename>" file with the
                 following code:
             </para>
 
@@ -284,7 +284,7 @@ Zend_Loader_Autoloader::getInstance();
 
             <listitem><para>
                 <classname>Zend_Filter_Inflector</classname>: filters (used by the
-                ViewRenderer action helper and Zend_Layout)
+                ViewRenderer action helper and <classname>Zend_Layout</classname>)
             </para></listitem>
 
             <listitem><para>

@@ -41,13 +41,13 @@
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: uses <code>fgetcsv()</code> to
+                    <emphasis>CSV</emphasis>: uses <methodname>fgetcsv()</methodname> to
                     parse a CSV file and transform it into a native PHP format.
                 </para></listitem>
 
                 <listitem><para>
                     <emphasis>INI</emphasis>: uses
-                    <code>parse_ini_file()</code> to parse an INI file and
+                    <methodname>parse_ini_file()</methodname> to parse an INI file and
                     transform it into a native PHP format. This and the CSV
                     adapter are roughly equivalent performance-wise.
                 </para></listitem>

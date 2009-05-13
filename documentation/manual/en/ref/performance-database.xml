@@ -79,7 +79,7 @@
                 select statements is a perfectly legitimate approach,
             </para>
             <para>
-                Run <code>EXPLAIN</code> on your queries, and test a variety of
+                Run <constant>EXPLAIN</constant> on your queries, and test a variety of
                 approaches until you can reliably hit your indices in the most
                 performant way -- and then hardcode the SQL as a class property
                 or constant.
@@ -87,8 +87,8 @@
 
             <para>
                 If the SQL requires variable arguments, provide placeholders in
-                the SQL, and utilize a combination of <code>vsprintf</code> and
-                <code>array_walk</code> to inject the values into the SQL:
+                the SQL, and utilize a combination of <methodname>vsprintf()</methodname> and
+                <methodname>array_walk()</methodname> to inject the values into the SQL:
             </para>
 
             <programlisting role="php"><![CDATA[

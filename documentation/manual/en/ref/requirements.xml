@@ -289,7 +289,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/en/ref.ibase.php">interbase</ulink></emphasis></entry>
                             <entry>Hard</entry>
-                            <entry>Zend_Db_Adapter_Firebird</entry>
+                            <entry><classname>Zend_Db_Adapter_Firebird</classname></entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/en/ref.json.php">json</ulink></emphasis></entry>
@@ -541,7 +541,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/en/ref.sqlite.php">SQLite</ulink></emphasis></entry>
                             <entry>Hard</entry>
-                            <entry><ulink url="http://framework.zend.com/manual/en/zend.cache.backends.html">Zend_Cache_Backend_Sqlite</ulink></entry>
+                            <entry><ulink url="http://framework.zend.com/manual/en/zend.cache.backends.html"><classname>Zend_Cache_Backend_Sqlite</classname></ulink></entry>
                         </row>
                         <row>
                             <entry><emphasis>standard</emphasis></entry>
@@ -1211,7 +1211,8 @@
 
             <table frame='all' id="requirements.dependencies.table-1">
                 <title>
-                    Zend Framework Components and their dependency to other Zend Framework Components
+                    Zend Framework Components and their dependency to other Zend Framework
+                    Components
                 </title>
                 <tgroup cols='3'>
                     <colspec colwidth='2in'/>
@@ -1728,7 +1729,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://framework.zend.com/manual/en/zend.dom.html"><classname>Zend_Dom</classname></ulink></emphasis></entry>
                             <entry>Hard</entry>
-                            <entry>Zend_Exception</entry>
+                            <entry><classname>Zend_Exception</classname></entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://framework.zend.com/manual/en/zend.exception.html"><classname>Zend_Exception</classname></ulink></emphasis></entry>
@@ -3596,14 +3597,4 @@
 </appendix>
 <!--
 vim:se ts=4 sw=4 et:
-
-Note:
-Tables related to Release 1.7.2
-
-1Zend_Db
-1Zend_Dojo
-1Zend_Form
-1Zend_Layout
-1Zend_Session
 -->
-

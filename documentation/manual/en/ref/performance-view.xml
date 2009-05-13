@@ -20,13 +20,13 @@
 
         <para>
             Most <classname>Zend_View</classname> "methods" are actually provided via
-            overloading to the helper system. This provides important
-            flexibility to Zend_View; instead of needing to extend Zend_View and
-            provide all the helper methods you may utilize in your application,
-            you can define your helper methods in separate classes and consume
-            them at will as if they were direct methods of Zend_View. This keeps
-            the view object itself relatively thin, and ensures that objects are
-            created only when needed.
+            overloading to the helper system. This provides important flexibility to
+            <classname>Zend_View</classname>; instead of needing to extend
+            <classname>Zend_View</classname> and provide all the helper methods you may
+            utilize in your application, you can define your helper methods in separate
+            classes and consume them at will as if they were direct methods of
+            <classname>Zend_View</classname>. This keeps the view object itself relatively
+            thin, and ensures that objects are created only when needed.
         </para>
 
         <para>
@@ -131,7 +131,7 @@ class My_View extends Zend_View
 
         <para>
             Those who use partials heavily and who profile their applications
-            will often immediately notice that the <code>partial()</code> view
+            will often immediately notice that the <methodname>partial()</methodname> view
             helper incurs a lot of overhead, due to the need to clone the view
             object. Is it possible to speed this up?
         </para>
@@ -140,45 +140,45 @@ class My_View extends Zend_View
             <title>Use partial() only when really necessary</title>
 
             <para>
-                The <code>partial()</code> view helper accepts three arguments:
+                The <methodname>partial()</methodname> view helper accepts three arguments:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>$name</code>: the name of the view script to render
+                    <varname>$name</varname>: the name of the view script to render
                 </para></listitem>
 
                 <listitem><para>
-                    <code>$module</code>: the name of the module in which the
+                    <varname>$module</varname>: the name of the module in which the
                     view script resides; or, if no third argument is provided
                     and this is an array or object, it will be the
-                    <code>$model</code> argument.
+                    <varname>$model</varname> argument.
                 </para></listitem>
 
                 <listitem><para>
-                    <code>$model</code>: an array or object to pass to the
+                    <varname>$model</varname>: an array or object to pass to the
                     partial representing the clean data to assign to the view.
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                The power and use of <code>partial()</code> come from the second
-                and third arguments. The <code>$module</code> argument allows
-                <code>partial()</code> to temporarily add a script path for the
+                The power and use of <methodname>partial()</methodname> come from the second
+                and third arguments. The <varname>$module</varname> argument allows
+                <methodname>partial()</methodname> to temporarily add a script path for the
                 given module so that the partial view script will resolve to
-                that module; the <code>$model</code> argument allows you to
+                that module; the <varname>$model</varname> argument allows you to
                 explicitly pass variables for use with the partial view.
                 If you're not passing either argument, <emphasis>use
-                    <code>render()</code> instead</emphasis>!
+                    <methodname>render()</methodname> instead</emphasis>!
             </para>
 
             <para>
                 Basically, unless you are actually passing variables to the
                 partial and need the clean variable scope, or rendering a view
                 script from another MVC module, there is no reason to incur the
-                overhead of <code>partial()</code>; instead, use
-                <classname>Zend_View</classname>'s built-in <code>render()</code> method
-                to render the view script.
+                overhead of <methodname>partial()</methodname>; instead, use
+                <classname>Zend_View</classname>'s built-in <methodname>render()</methodname>
+                method to render the view script.
             </para>
         </sect3>
     </sect2>
@@ -187,12 +187,12 @@ class My_View extends Zend_View
         <title>How can I speed up calls to the action() view helper?</title>
 
         <para>
-            Version 1.5.0 introduced the <code>action()</code> view helper,
+            Version 1.5.0 introduced the <methodname>action()</methodname> view helper,
             which allows you to dispatch an MVC action and capture its rendered
             content. This provides an important step towards the DRY principle,
             and promotes code reuse. However, as those who profile their
             applications will quickly realize, it, too, is an expensive
-            operation. Internally, the <code>action()</code> view helper needs
+            operation. Internally, the <methodname>action()</methodname> view helper needs
             to clone new request and response objects, invoke the dispatcher,
             invoke the requested controller and action, etc.
         </para>
@@ -205,16 +205,16 @@ class My_View extends Zend_View
             <title>Use the ActionStack when possible</title>
 
             <para>
-                Introduced at the same time as the <code>action()</code> view
+                Introduced at the same time as the <methodname>action()</methodname> view
                 helper, the <link
                     linkend="zend.controller.actionhelpers.actionstack">ActionStack</link>
                 consists of an action helper and a front controller plugin.
                 Together, they allow you to push additional actions to invoke
                 during the dispatch cycle onto a stack. If you are calling
-                <code>action()</code> from your layout view scripts, you may
+                <methodname>action()</methodname> from your layout view scripts, you may
                 want to instead use the ActionStack, and render your views to
                 discrete response segments. As an example, you could write a
-                <code>dispatchLoopStartup()</code> plugin like the following to
+                <methodname>dispatchLoopStartup()</methodname> plugin like the following to
                 add a login form box to each page:
             </para>
 
@@ -252,8 +252,8 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
             <para>
-                The <code>UserController::indexAction()</code> method might then
-                use the <code>responseSegment</code> parameter to indicate which
+                The <methodname>UserController::indexAction()</methodname> method might then
+                use the <varname>$responseSegment</varname> parameter to indicate which
                 response segment to render to. In the layout script, you would
                 then simply render that response segment:
             </para>
@@ -264,9 +264,9 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
 
             <para>
                 While the ActionStack still requires a dispatch cycle, this is
-                still cheaper than the <code>action()</code> view helper as it
+                still cheaper than the <methodname>action()</methodname> view helper as it
                 does not need to clone objects and reset internal state.
-                Additionally, it ensures that all pre/post dispatch plugins are
+                Additionally, it ensures that all pre and post dispatch plugins are
                 invoked, which may be of particular concern if you are using
                 front controller plugins for handling ACLs to particular
                 actions.
@@ -277,7 +277,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             <title>Favor helpers that query the model over action()</title>
 
             <para>
-                In most cases, using <code>action()</code> is simply overkill.
+                In most cases, using <methodname>action()</methodname> is simply overkill.
                 If you have most business logic nested in your models and are
                 simply querying the model and passing the results to a view
                 script, it will typically be faster and cleaner to simply write
@@ -312,7 +312,7 @@ echo "</ul>\n";
 ]]></programlisting>
 
             <para>
-                Using <code>action()</code>, you would then invoke it with the
+                Using <methodname>action()</methodname>, you would then invoke it with the
                 following:
             </para>
 
@@ -355,7 +355,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 
             <para>
                 This has two benefits: it no longer incurs the overhead of the
-                <code>action()</code> view helper, and also presents a more
+                <methodname>action()</methodname> view helper, and also presents a more
                 semantically understandable API.
             </para>
         </sect3>

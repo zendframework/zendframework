@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15022 -->
+<!-- EN-Revision: 15571 -->
 <sect1 id="introduction.installation">
 
     <title>インストール</title>
@@ -13,14 +13,14 @@
     <para>
         Zend Framework のインストールは非常に簡単です。
         フレームワークをダウンロードして展開したら、その中の
-        /library フォルダをインクルードパスの先頭に追加するだけです。
+        <filename>/library</filename> フォルダをインクルードパスの先頭に追加するだけです。
         library フォルダを別の場所 (おそらく共有ライブラリの場所) に移動してもよいでしょう。
 
         <itemizedlist>
             <listitem>
                 <para>
                     <ulink url="http://framework.zend.com/download/latest">最新の安定版をダウンロードする</ulink>。
-                    このバージョンは <code>.zip</code> と <code>.tar.gz</code>
+                    このバージョンは <filename>.zip</filename> と <filename>.tar.gz</filename>
                     の二種類の形式で公開されており、Zend Framework
                     をはじめて使う人におすすめです。
                 </para>
@@ -47,18 +47,18 @@
                 </para>
                 <para>
                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">エクスポート</ulink>
-                    機能を使用すると、フレームワークの特定のリビジョンを <code>.svn</code>
+                    機能を使用すると、フレームワークの特定のリビジョンを <filename>.svn</filename>
                     ディレクトリなしで取得できるので便利です。
                 </para>
                 <para>
                     <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">チェックアウト</ulink>
                     は、Zend Framework に対して何らかの貢献をしたい方にとって便利な方法です。
                     この方法で取得したファイルは、
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html"><code>svn
-                    update</code></ulink> コマンドで常に最新版に更新できます。
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.update.html">svn
+                    update</ulink> コマンドで常に最新版に更新できます。
                     また、変更内容を SVN リポジトリにコミットするには
-                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html"><code>svn
-                    commit</code></ulink> コマンドを使用します。
+                    <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">svn
+                    commit</ulink> コマンドを使用します。
                 </para>
                 <para>
                     すでに SVN を使用して自身のアプリケーションを管理している開発者にとっては、
@@ -79,7 +79,7 @@
         あなたのアプリケーションからフレームワークのクラス群にアクセスできるようにしましょう。これには
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
         いくつかの方法があります</ulink> が、PHP の
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><code>include_path</code></ulink>
+        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path">include_path</ulink>
         に Zend Framework ライブラリへのパスを含める必要があります。
     </para>
 

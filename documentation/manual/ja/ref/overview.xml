@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15571 -->
 <sect1 id="introduction.overview">
 
     <title>概要</title>
@@ -24,7 +24,7 @@
         レンダリング・バリデーション・フィルタリングを実装した HTML
         フォーム用の部品などがあります。
         これらすべての機能を、オブジェクト指向のインターフェイスで簡単に使えるようになります。
-        Zend_Auth や Zend_Acl を使用すると、
+        <classname>Zend_Auth</classname> や <classname>Zend_Acl</classname> を使用すると、
         共通の情報に基づいたユーザ認証や認可の処理を行うことができます。
         また、著名なウェブサービスの多くに簡単にアクセスするためのクライアントライブラリも用意されています。
         作成したいアプリケーションがどんなものであったとしても、

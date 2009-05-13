@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15301 -->
+<!-- EN-Revision: 15571 -->
 <sect1 id="performance.classloading">
     <title>クラスの読み込み</title>
 
@@ -9,7 +9,7 @@
         Zend Frameworkではクラスの読み込みが比較的高くつくことにすぐ気がつくでしょう。
         多くのコンポーネントのために読み込まれる必要があるクラスファイルの本当の数、
         クラス名とファイルシステムとの間に１対１の関係が成立しないプラグインの利用、
-        <code>include_once</code>や<code>require_once</code>などの呼び出し、
+        <methodname>include_once</methodname> や <methodname>require_once</methodname> などの呼び出し、
         これらの間には検討の余地があり得ます。
         この章ではこれらの問題に対して確立したいくつかの解決方法を提示するつもりです。
     </para>
@@ -40,7 +40,7 @@
                 このことを確かめる易しい方法が２つあります。
                 ひとつはパスをphp.iniやhttpd.conf、
                 もしくは .htaccessでハードコーディングすることです。
-                もうひとつはPHPの<code>realpath()</code>関数を使ってinclude_pathを設定することです:
+                もうひとつはPHPの <methodname>realpath()</methodname> 関数を使ってinclude_pathを設定することです:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -67,7 +67,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 しかしながらそうであっても、
-                <code>realpath()</code>にパスを単純に渡すことが一般的にありふれたやり方でしょう。
+                <methodname>realpath()</methodname> にパスを単純に渡すことが一般的にありふれたやり方でしょう。
             </para>
         </sect3>
 
@@ -134,7 +134,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 初めに、プロジェクト内にライブラリのディレクトリを作成します。
-                ディレクトリの中にはZend Frameworkのlibrary/Zendディレクトリをsymlinkで設定し、
+                ディレクトリの中にはZend Frameworkの <filename>library/Zend</filename> ディレクトリをsymlinkで設定し、
                 同様にインストールしたPEARから必要なディレクトリを設定します。
             </para>
 
@@ -152,14 +152,14 @@ library
             </para>
 
             <para>
-                次にpublic/index.phpファイルで予定通りinclude_pathを作成します。
+                次に <filename>public/index.php</filename> ファイルで予定通りinclude_pathを作成します。
                 これでinclude_pathを毎回編集しなくても、
                 コードをファイルシステム内で移動させることができます。
             </para>
 
             <para>
                 それぞれの提案のアイデアは上記から取り入れています。:
-                絶対パスを使います。<code>realpath()</code>を使う判断がされています。;
+                絶対パスを使います。<methodname>realpath()</methodname> を使う判断がされています。;
                 include_pathの先のほうでZend Frameworkをincludeします。;
                 さらにまたinclude_pathを併合します。;
                 そして現行ディレクトリをパスの最後にします。
@@ -232,7 +232,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 しかしながら、もしこの技術を使う場合は、
                 オートローディングを使わ<emphasis>なければいけない</emphasis>、
                 ということを記載しておかなければいけません。;
-                "public/index.php"ファイルで下記のコードを記述することにより実施できます。
+                "<filename>public/index.php</filename>"ファイルで下記のコードを記述することにより実施できます。
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -287,7 +287,7 @@ Zend_Loader_Autoloader::getInstance();
 
             <listitem><para>
                 <classname>Zend_Filter_Inflector</classname>: フィルタ
-                (ViewRendererアクションヘルパおよびZend_Layoutに使用されます)
+                (ViewRendererアクションヘルパおよび <classname>Zend_Layout</classname> に使用されます)
             </para></listitem>
 
             <listitem><para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15099 -->
+<!-- EN-Revision: 15571 -->
 <sect1 id="performance.localization">
     <title>国際化(i18n)とローカライズ(l10n)</title>
 
@@ -41,12 +41,12 @@
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: CSVファイルをパースするために<code>fgetcsv()</code>を使い、
+                    <emphasis>CSV</emphasis>: CSVファイルをパースするために <methodname>fgetcsv()</methodname> を使い、
                     それをネィティブなPHP形式に変換します。
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>INI</emphasis>: INIファイルをパースするために<code>parse_ini_file()</code>を使い、
+                    <emphasis>INI</emphasis>: INIファイルをパースするために <methodname>parse_ini_file()</methodname> を使い、
                     それをネィティブなPHP形式に変換します。
                     このアダプタとCSVアダプタは性能面で概ね等価です。
                 </para></listitem>

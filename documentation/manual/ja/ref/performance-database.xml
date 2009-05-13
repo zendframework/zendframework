@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15099 -->
+<!-- EN-Revision: 15571 -->
 <sect1 id="performance.database">
     <title>Zend_Dbパフォーマンス</title>
 
@@ -79,7 +79,7 @@
                 ことがもっとも完璧に筋の通った道です。
             </para>
             <para>
-                <code>EXPLAIN</code>をクエリに対して実行して、
+                <constant>EXPLAIN</constant> をクエリに対して実行して、
                 最もパフォーマンスのあるインデックスを本当に当てるまで、
                 さまざまな取り組みをテストしてください。
                 それからクラスのプロパティーや定数としてSQLをハードコーディングしてください。
@@ -88,7 +88,8 @@
             <para>
                 もしSQLが変数の引数を必要とする場合、
                 SQLにプレースホルダーを用意してください。
-                そして、SQLに値を挿入するために<code>vsprintf</code>と<code>array_walk</code>の組み合わせを利用してください。
+                そして、SQLに値を挿入するために <methodname>vsprintf</methodname>
+                と <methodname>array_walk</methodname> の組み合わせを利用してください。
             </para>
 
             <programlisting role="php"><![CDATA[

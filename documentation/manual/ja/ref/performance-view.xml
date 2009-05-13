@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15196 -->
+<!-- EN-Revision: 15569 -->
 <sect1 id="performance.view">
     <title>ビューのレンダリング</title>
 
@@ -24,11 +24,11 @@
         <para>
             ほとんどの<classname>Zend_View</classname>の "メソッド" は、
             実際ヘルパ方式でオーバーロード経由で提供されています。
-            これのおかげでZend_Viewに重要な柔軟性が与えられています;
-            Zend_Viewを拡張してアプリケーションで利用するであろう、
+            これのおかげで <classname>Zend_View</classname> に重要な柔軟性が与えられています;
+            <classname>Zend_View</classname> を拡張してアプリケーションで利用するであろう、
             すべてのヘルパメソッドを提供する必要の代わりに、
             分離されたクラスにヘルパメソッドを定義して、
-            まるでZend_Viewそのもののメソッドであるかのように使い切ることができます。
+            まるで <classname>Zend_View</classname> そのもののメソッドであるかのように使い切ることができます。
             このおかげでビューオブジェクト自身は比較的身軽に保たれ、
             オブジェクトが必要なときだけ生成されることが保証されます。
         </para>
@@ -135,7 +135,7 @@ class My_View extends Zend_View
         <para>
             部分的に頻繁に利用したり、アプリケーションのプロファイルを実行したりする人は、
             しばしばすぐにビューオブジェクトのクローンを必要とすることになっている、
-            <code>partial()</code>ビューヘルパがオーバーヘッドの大部分を占めていることに気付くでしょう。
+            <methodname>partial()</methodname> ビューヘルパがオーバーヘッドの大部分を占めていることに気付くでしょう。
             これを速度向上させられるでしょうか？
         </para>
 
@@ -143,41 +143,41 @@ class My_View extends Zend_View
             <title>本当に必要な時だけpartial()を使う</title>
 
             <para>
-                <code>partial()</code>ビューヘルパには３つの引数があります:
+                <methodname>partial()</methodname> ビューヘルパには３つの引数があります:
             </para>
 
             <itemizedlist>
                 <listitem><para>
-                    <code>$name</code>: レンダリングするビュースクリプトの名前
+                    <varname>$name</varname>: レンダリングするビュースクリプトの名前
                 </para></listitem>
 
                 <listitem><para>
-                    <code>$module</code>: 表示スクリプトが位置するモジュールの名前;
+                    <varname>$module</varname>: 表示スクリプトが位置するモジュールの名前;
                     または３番目の引数が渡されない場合、配列またはオブジェクトで、
-                    <code>$model</code>引数
+                    <varname>$model</varname>引数
                 </para></listitem>
 
                 <listitem><para>
-                    <code>$model</code>: ビューにアサインする純粋なデータを示す部分に渡す配列またはオブジェクト
+                    <varname>$model</varname>: ビューにアサインする純粋なデータを示す部分に渡す配列またはオブジェクト
                 </para></listitem>
             </itemizedlist>
 
             <para>
-                <code>partial()</code>の威力や使い道は２番目と３番目の引数に依存します。
-                <code>$module</code>引数のおかげで
+                <methodname>partial()</methodname> の威力や使い道は２番目と３番目の引数に依存します。
+                <varname>$module</varname> 引数のおかげで
                 partialビュースクリプトがモジュールを解決するために、
-                与えられたモジュールに<code>partial()</code>が一時的にスクリプトパスを追加できる。;
-                <code>$model</code>引数のおかげでpartialビューを使うために引数を明示的に渡すことができます。
+                与えられたモジュールに <methodname>partial()</methodname> が一時的にスクリプトパスを追加できる。;
+                <varname>$model</varname> 引数のおかげでpartialビューを使うために引数を明示的に渡すことができます。
                 もしどちらの引数も渡さないのならば、
-                <emphasis>替わりに</emphasis><code>render()</code>を使ってください！
+                <emphasis>替わりに</emphasis> <methodname>render()</methodname> を使ってください！
             </para>
 
             <para>
                 基本的に、あなたが実際に変数をその部分に渡して、純粋な変数の範囲を必要とするか、
                 または他のMVCモジュールからビュースクリプトをレンダリングするまで、
-                <code>partial()</code>のオーバーヘッドを受け入れる理由がありません。;
+                <methodname>partial()</methodname>のオーバーヘッドを受け入れる理由がありません。;
                 その代わり、ビュースクリプトをレンダリングするために、
-                <classname>Zend_View</classname>組込みの<code>render()</code>メソッドを使ってください。
+                <classname>Zend_View</classname>組込みの<methodname>render()</methodname>メソッドを使ってください。
             </para>
         </sect3>
     </sect2>
@@ -186,13 +186,13 @@ class My_View extends Zend_View
         <title>どのようにしたらアクションメソッドのビューヘルパの呼び出しを速くできますか？</title>
 
         <para>
-            バージョン1.5.0で<code>action()</code>ビューヘルパが導入されました。
+            バージョン1.5.0で <methodname>action()</methodname> ビューヘルパが導入されました。
             それによりMVCのアクションをディスパッチして、
             レンダリングされたコンテンツを入手できるようになります。
             これはDRY原則に向かう重要なステップで、コードの再利用を促します。
             しかしながら、アプリケーションをプロファイルする人がすぐ実感するように、
             これも高くつく操作です。
-            内部的に、<code>action()</code>ビューヘルパでは新しいリクエスト及びレスポンスオブジェクトを複製して、
+            内部的に、<methodname>action()</methodname> ビューヘルパでは新しいリクエスト及びレスポンスオブジェクトを複製して、
             ディスパッチャを呼び出し、求められたコントローラとアクションなどを呼び出す必要があります。
         </para>
 
@@ -204,16 +204,16 @@ class My_View extends Zend_View
             <title>可能な場合はアクションスタックを使う</title>
 
             <para>
-                <code>action()</code>ビューヘルパと同時期に導入されましたが、
+                <methodname>action()</methodname> ビューヘルパと同時期に導入されましたが、
                 <link linkend="zend.controller.actionhelpers.actionstack">アクションスタック</link>
                 はアクションヘルパとフロントコントローラプラグインから成り立ちます。
                 共に、それらのおかげでディスパッチサイクルの間に呼び出すべき、
                 追加のアクションをスタックに押し込むことができます。
-                もしレイアウトビュースクリプトから<code>action()</code>を呼び出しているなら、
+                もしレイアウトビュースクリプトから <methodname>action()</methodname> を呼び出しているなら、
                 アクションスタックを使うかわりに、
                 ディスクリートなレスポンスセグメントにビューをレンダリングしたいかもしれません。
                 例えば、各画面にログインフォームの枠を付け加える下記の様な
-                <code>dispatchLoopStartup()</code>プラグインを書けるでしょう。:
+                <methodname>dispatchLoopStartup()</methodname> プラグインを書けるでしょう。:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -250,8 +250,8 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
 ]]></programlisting>
 
             <para>
-                それから<code>UserController::indexAction()</code>メソッドは
-                レンダリングするのがどのレスポンスセグメントかを示す<code>responseSegment</code>パラメータを使うかもしれません。
+                それから <methodname>UserController::indexAction()</methodname> メソッドは
+                レンダリングするのがどのレスポンスセグメントかを示す <varname>$responseSegment</varname> パラメータを使うかもしれません。
                 レイアウトスクリプトでそのレスポンスセグメントを単純にレンダリングするでしょう。
             </para>
 
@@ -262,7 +262,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             <para>
                 アクションスタックがまだディスパッチサイクルを必要とするのに対して、
                 オブジェクトを複製して内部状態をリセットする必要がないので、
-                <code>action()</code>ビューヘルパよりもっと安くつきます。
+                <methodname>action()</methodname> ビューヘルパよりもっと安くつきます。
                 さらに、それはすべてのプレディスパッチ、
                 またはポストディスパッチのプラグインが呼び出されることを保証します。
                 それは、特別なアクションのためにACLを処理するフロントコントローラプラグインをもし使っているなら、
@@ -274,7 +274,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             <title>action()を通じてモデルに問い合わせるお好みヘルパ</title>
 
             <para>
-                ほとんどの場合、<code>action()</code>を使うのは過剰です。
+                ほとんどの場合、<methodname>action()</methodname> を使うのは過剰です。
                 もしモデルの中に業務ロジックをはなはだしく折り重ねていて、
                 モデルに単純に問い合わせて、ビュースクリプトに結果を渡すなら、
                 モデルを引き出してきて問合せを行い、
@@ -309,7 +309,7 @@ echo "</ul>\n";
 ]]></programlisting>
 
             <para>
-                それから<code>action()</code>を使って、
+                それから <methodname>action()</methodname> を使って、
                 下記のようにして呼び出すでしょう:
             </para>
 
@@ -351,7 +351,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 
             <para>
                 これには２つの利点があります:
-                それはもはや<code>action()</code>ビューヘルパのオーバーヘッドを受けず、
+                それはもはや <methodname>action()</methodname> ビューヘルパのオーバーヘッドを受けず、
                 より意味的に理解できるAPIも表現します。
             </para>
         </sect3>

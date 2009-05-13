@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15562 -->
+<!-- EN-Revision: 15569 -->
 <appendix id="requirements">
 
     <title>Zend Framework のシステム要件</title>
@@ -294,7 +294,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/ja/ref.ibase.php">interbase</ulink></emphasis></entry>
                             <entry>ハード</entry>
-                            <entry>Zend_Db_Adapter_Firebird</entry>
+                            <entry><classname>Zend_Db_Adapter_Firebird</classname></entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/ja/ref.json.php">json</ulink></emphasis></entry>
@@ -546,7 +546,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://www.php.net/manual/ja/ref.sqlite.php">SQLite</ulink></emphasis></entry>
                             <entry>ハード</entry>
-                            <entry><ulink url="http://framework.zend.com/manual/ja/zend.cache.backends.html">Zend_Cache_Backend_Sqlite</ulink></entry>
+                            <entry><ulink url="http://framework.zend.com/manual/ja/zend.cache.backends.html"><classname>Zend_Cache_Backend_Sqlite</classname></ulink></entry>
                         </row>
                         <row>
                             <entry><emphasis>standard</emphasis></entry>
@@ -1728,7 +1728,7 @@
                         <row>
                             <entry><emphasis><ulink url="http://framework.zend.com/manual/ja/zend.dom.html"><classname>Zend_Dom</classname></ulink></emphasis></entry>
                             <entry>ハード</entry>
-                            <entry>Zend_Exception</entry>
+                            <entry><classname>Zend_Exception</classname></entry>
                         </row>
                         <row>
                             <entry><emphasis><ulink url="http://framework.zend.com/manual/ja/zend.exception.html"><classname>Zend_Exception</classname></ulink></emphasis></entry>
@@ -3596,14 +3596,4 @@
 </appendix>
 <!--
 vim:se ts=4 sw=4 et:
-
-Note:
-Tables related to Release 1.7.2
-
-1Zend_Db
-1Zend_Dojo
-1Zend_Form
-1Zend_Layout
-1Zend_Session
 -->
-

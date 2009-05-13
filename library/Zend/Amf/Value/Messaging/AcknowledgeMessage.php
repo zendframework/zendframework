@@ -52,7 +52,7 @@ class Zend_Amf_Value_Messaging_AcknowledgeMessage extends Zend_Amf_Value_Messagi
         $this->body        = null;
 
         // correleate the two messages
-        if ($message) {
+        if ($message && isset($message->messageId)) {
             $this->correlationId = $message->messageId;
         }
     }

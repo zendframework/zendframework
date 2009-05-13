@@ -71,14 +71,13 @@ final class Zend_Amf_Parse_TypeLoader
      */
     public static function loadType($className)
     {
-        $class    = false;
-        $callBack = false;
         $class    = self::getMappedClassName($className);
-        if (!class_exists($class)) {
-            require_once 'Zend/Amf/Exception.php';
-            throw new Zend_Amf_Exception($className .' mapped class '. $class . ' is not defined');
+        if(!$class) {
+            $class = str_replace('.', '_', $className);
         }
-
+        if (!class_exists($class)) {
+            return "stdClass";
+        }
         return $class;
     }
 

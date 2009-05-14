@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
-        <code>Zend_Config_Ini</code> дает разработчикам возможность хранить
+        <classname>Zend_Config_Ini</classname> дает разработчикам возможность хранить
         конфигурационные данные в знакомом большинству формате INI и считывать
         их в приложении с использованием синтаксиса вложенных свойств объекта.
         Формат INI специализируется на обеспечении иерархии конфигурационных
@@ -15,11 +17,11 @@
     <note>
         <title>Синтаксический разбор INI-файла</title>
         <para>
-            <code>Zend_Config_Ini</code> использует функцию PHP
+            <classname>Zend_Config_Ini</classname> использует функцию PHP
             <ulink url="http://php.net/parse_ini_file"><code>parse_ini_file()</code></ulink>.
             Пожалуйста, почитайте документацию, чтобы получить представление об
             особенностях ее поведения, которые распространяются и на
-            <code>Zend_Config_Ini</code> — например, о том, как обрабатываются
+            <classname>Zend_Config_Ini</classname> — например, о том, как обрабатываются
             специальные значения <code>true</code>, <code>false</code>, <code>yes</code>,
             <code>no</code> и <code>null</code>.
         </para>
@@ -30,21 +32,20 @@
             По умолчанию разделителем ключей является символ точки
             (<code>.</code>). Он может быть заменен на любой другой путем
             изменения ключа <code>'nestSeparator'</code> в массиве
-            <code>$options</code> при создании объекта <code>Zend_Config_Ini</code>.
+            <code>$options</code> при создании объекта <classname>Zend_Config_Ini</classname>.
             Например:
             <programlisting role="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </note>
     <example id="zend.config.adapters.ini.example.using">
-        <title>Использование <code>Zend_Config_Ini</code></title>
+        <title>Использование Zend_Config_Ini</title>
         <para>
-            Данный пример демонстрирует использование <code>Zend_Config_Ini</code>
+            Данный пример демонстрирует использование <classname>Zend_Config_Ini</classname>
             для загрузки конфигурационных данных из файла INI. В этом примере
             используются конфигурационные данные для производственной и
             промежуточной систем. Поскольку конфигурационные данные для
@@ -72,8 +73,7 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Далее предположим, что разработчику приложения нужны "промежуточные"
             конфигурационные данные из файла INI. Загрузить эти данные,
@@ -84,15 +84,14 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'staging');
 
 echo $config->database->params->host;   // выведет "dev.example.com"
 echo $config->database->params->dbname; // выведет "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <note>
     <table id="zend.config.adapters.ini.table">
         <title>Параметры конструктора Zend_Config_Ini</title>
         <tgroup cols="2">
             <thead>
-                  <row>
+                <row>
                     <entry>Параметр</entry>
                     <entry>Примечание</entry>
                 </row>

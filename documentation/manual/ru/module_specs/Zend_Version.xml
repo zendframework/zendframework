@@ -1,43 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
 
-    <title>Получение версии Zend Framework<!--Reading the Zend Framework Version--></title>
+    <title>Получение версии Zend Framework</title>
 
     <para>
-        Константа класса <code>Zend_Version::VERSION</code> содержит строку,
-        которая показывает номер текущей версии Zend Framework. Например,
-        "0.9.0beta".
-<!--
-        The class constant <code>Zend_Version::VERSION</code>
-        contains a string that identifies the current version
-        number of Zend Framework.  For example, "0.9.0beta".
--->
+        <classname>Zend_Version</classname> имеет константу
+        <code>Zend_Version::VERSION</code>, которая содержит строку
+        с номером версии текущей инсталляции Zend Framework.
+        Например, <classname>Zend_Version::VERSION</classname> может содержать
+        "1.7.4".
     </para>
 
     <para>
         Статический метод <code>Zend_Version::compareVersion($version)</code>
         основан на PHP-функции <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
-        Метод возвращает -1, если версия <code>$version</code>
-        более поздняя, чем текущая версия Zend Framework; 0, если они
-        одинаковые и +1, если версия более ранняя, чем текущая.
-<!--
-        The static method <code>Zend_Version::compareVersion($version)</code>
-        is based on the PHP function
-        <ulink url="http://php.net/version_compare"><code>version_compare()</code></ulink>.
-        The method returns -1 if the specified <code>$version</code>
-        is older than the Zend Framework version, 0 if they are the same,
-        and +1 if the specified <code>$version</code> is newer than the
-        Zend Framework version.
--->
+        Метод возвращает -1, если указанная версия
+        более поздняя, чем версия установленного Zend Framework; 0, если они
+        одинаковые, и +1, если указанная версия более ранняя, чем версия
+        установленного Zend Framework.
     </para>
 
     <example id="zend.version.reading.example">
-        <title>Пример использования метода compareVersion()<!--Example of compareVersion() method--></title>
-        <programlisting role="php"><![CDATA[<?php
-
+        <title>Пример использования метода compareVersion()</title>
+        <programlisting role="php"><![CDATA[
 // возвращает -1, 0 или 1
-$cmp = Zend_Version::compareVersion('1.0.0');
-
-?>]]></programlisting>
+$cmp = Zend_Version::compareVersion('2.0.0');
+]]></programlisting>
     </example>
 
 </sect1>

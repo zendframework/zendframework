@@ -1542,11 +1542,13 @@
                 <xi:include href="../en/module_specs/Zend_Tool_Project-Providers.xml" />
             </xi:fallback>
         </xi:include>
+        <!--
         <xi:include href="module_specs/Zend_Tool_Project-Internals.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Tool_Project-Internals.xml" />
             </xi:fallback>
         </xi:include>
+        -->
     </chapter>
 
     <chapter id="zend.translate">

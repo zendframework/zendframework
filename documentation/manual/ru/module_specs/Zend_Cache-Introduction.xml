@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Введение</title>
     <para>
-        <code>Zend_Cache</code> предназначен для кэширования любых данных.
+        <classname>Zend_Cache</classname> предназначен для кэширования любых данных.
     </para>
     <para>
         Управление кэшированием в Zend Framework производится через фронтэнды
@@ -12,14 +14,14 @@
         (например: "удалить все записи кэша, помеченные данным тегом").
     </para>
     <para>
-        Ядро модуля (<code>Zend_Cache_Core</code>) является гибким,
+        Ядро модуля (<classname>Zend_Cache_Core</classname>) является гибким,
         универсальным и конфигурируемым. Кроме этого, для особых нужд есть
         фронтэнды, расширяющие
-        <code>Zend_Cache_Core</code>: <code>Output</code>, <code>File</code>,
-        <code>Function</code> и <code>Class</code>.
+        <classname>Zend_Cache_Core</classname>: <classname>Output</classname>,
+        <classname>File</classname>, <code>Function</code> и <code>Class</code>.
     </para>
     <example id="zend.cache.introduction.example-1">
-        <title>Получение фронтэнда с помощью <code>Zend_Cache::factory()</code></title>
+        <title>Получение фронтэнда с помощью Zend_Cache::factory()</title>
         <para>
             <code>Zend_Cache::factory()</code> инстанцирует нужные объекты и
             связывает их. В этом первом примере мы будем использовать
@@ -40,8 +42,7 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>
@@ -87,12 +88,11 @@ if(!$result = $cache->load('myresult')) {
 }
 
 print_r($result);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.cache.introduction.example-3">
-        <title>Кэширование вывода с помощью фронтэнда <code>Zend_Cache</code></title>
+        <title>Кэширование вывода с помощью фронтэнда Zend_Cache</title>
         <para>
             Мы размечаем участки, выходные данные которых хотим поместить в кэш,
             добавлением условной логики, окружая участок методами
@@ -129,8 +129,7 @@ if(!$cache->start('mypage')) {
 }
 
 echo 'This is never cached ('.time().').';
-]]>
-       </programlisting>
+]]></programlisting>
        <para>
            Обратите внимание, что мы выводим результат <code>time()</code>
            дважды - это демонстрация на примере динамических данных. Попробуйте
@@ -145,7 +144,7 @@ echo 'This is never cached ('.time().').';
        </para>
     </example>
     <note><para>
-        Когда используете <code>Zend_Cache</code>, уделяйте внимание
+        Когда используете <classname>Zend_Cache</classname>, уделяйте внимание
         идентификатору кэша (передается методам <code>save()</code> и
         <code>start()</code>). Он должен быть уникальным для каждого кэшируемого
         ресурса, иначе не связанные записи кэша могут затирать друг

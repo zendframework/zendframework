@@ -1,69 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
 
     <title>Введение</title>
 
     <para>
-        Компонента Zend_Filter предоставляет набор наиболее часто используемых фильтров данных. Она также предоставляет простой механизм формирования цепочки фильтров данных, посредством которого которому одни и те же данные могут обрабатывать несколько фильтров в порядке, заданном пользователем.
-<!--
-        The Zend_Filter component provides a set of commonly needed data filters. It also provides a simple
-        filter chaining mechanism by which multiple filters may be applied to a single datum in a
-        user-defined order.
--->
+        Компонента <classname>Zend_Filter</classname> предоставляет набор наиболее часто используемых
+        фильтров данных. Она также предоставляет простой механизм формирования
+        цепочек фильтров данных, с использованием которого одни и те же
+        данные могут обрабатываться несколькими фильтрами в порядке, заданном
+        пользователем.
     </para>
 
-    <para>
-        <emphasis role="strong">Что такое фильтр?<!--What is a filter?--></emphasis>
-    </para>
+    <sect2 id="zend.filter.introduction.definition">
 
-    <para>
-        В материальном мире фильтр обычно используется для удаления нежелательных частей ввода. Желаемые части ввода проходят сквозь фильтр как вывод фильтра (например, кофе). В таких сценариях фильтр является опрератором, который выделяет подмножество ввода. Этот тип фильтра полезен для веб-приложений - удаление недопустимого ввода, лишних пробельных символов и т.д.
-<!--
-        In the physical world, a filter is typically used for removing unwanted portions of input, and the
-        desired portion of the input passes through as filter output (e.g., coffee). In such scenarios, a
-        filter is an operator that produces a subset of the input. This type of filtering is useful for web
-        applications - removing illegal input, trimming unnecessary white space, etc.
--->
-    </para>
+        <title>Что есть фильтр?</title>
 
-    <para>
-        Это базовое определение фильтра может быть расширено включением общих преобразований ввода. Часто встречающееся в веб-приложениях преобразование - экранирование сущностей HTML (HTML entities). Например, если поле формы автоматически заполняется ненадежными данными (пример, данными из веб-броузера), то это значение не должно включать в себя сущности HTML, либо эти сущности должны быть экранированы, для предотвращения нежелательного поведения и угроз безопасности. В соответствии с этими требованиями сущности HTML должны быть удалены или экранированы - выбор подхода зависит от ситуации. Фильтр, который экранирует сущности HTML, тем не менее, преобразовывает ввод (например, "<code>&amp;</code>" преобразовывается в "<code>&amp;amp;</code>"). Поддержка таких случаев использования важна для веб-разработчиков и "фильтрация" в контексте использования Zend_Filter подразумевает выполнение некоторых преобразований над входными данными.
-<!--
-        This basic definition of a filter may be extended to include generalized transformations upon input.
-        A common transformation applied in web applications is the escaping of HTML entities. For example, if
-        a form field is automatically populated with untrusted input (e.g., from a web browser), this value
-        should either be free of HTML entities or contain only escaped HTML entities, in order to prevent
-        undesired behavior and security vulnerabilities. To meet this requirement, HTML entities that appear
-        in the input must either be removed or escaped. Of course, which approach is more appropriate depends
-        on the situation. A filter that removes the HTML entities operates within the scope of the first
-        definition of filter - an operator that produces a subset of the input. A filter that escapes the
-        HTML entities, however, transforms the input (e.g., "<code>&amp;</code>" is transformed to
-        "<code>&amp;amp;</code>"). Supporting such use cases for web developers is important, and "to
-        filter," in the context of using Zend_Filter, means to perform some transformations upon input data.
--->
-    </para>
+        <para>
+            В материальном мире фильтр обычно используется для удаления
+            нежелательных частей ввода. Желаемые части ввода проходят сквозь
+            фильтр и являются выводом фильтра. В таких сценариях фильтр
+            является опрератором, который выделяет подмножество ввода. Этот
+            тип фильтра полезен для веб-приложений - удаление недопустимого
+            ввода, лишних пробельных символов и т.д.
+        </para>
+    
+        <para>
+            Это базовое определение фильтра может быть расширено включением
+            общих преобразований ввода. Часто встречающееся в веб-приложениях
+            преобразование - экранирование сущностей HTML (HTML entities).
+            Например, если поле формы автоматически заполняется ненадежными
+            данными (например, данными из веб-броузера), то это значение не
+            должно включать в себя сущности HTML, либо эти сущности должны
+            быть экранированы, для предотвращения нежелательного поведения
+            и угроз безопасности. В соответствии с этими требованиями сущности
+            HTML должны быть удалены или экранированы - выбор подхода зависит
+            от ситуации. Фильтр, который экранирует сущности HTML, тем не
+            менее, преобразовывает ввод (например, "<code>&amp;</code>"
+            преобразовывается в "<code>&amp;amp;</code>"). Поддержка таких
+            случаев использования важна для веб-разработчиков и "фильтрация"
+            в контексте использования <classname>Zend_Filter</classname> подразумевает выполнение
+            некоторых преобразований над входными данными.
+        </para>
 
-    <para>
-        Такое определение фильтра дает основу для <code>Zend_Filter_Interface</code>, который требует от классов фильтров реализации одного метода с именем <code>filter()</code>.
-<!--
-        Having this filter definition established provides the foundation for
-        <code>Zend_Filter_Interface</code>, which requires a single method named <code>filter()</code> to be
-        implemented by a filter class.
--->
-    </para>
+    </sect2>
 
-    <para>
-        Ниже приведен пример использования фильтра с двумя вариантами входных данных - амперсандом (<code>&amp;</code>) и двойными кавычками (<code>&quot;</code>).
-<!--
-        Following is a basic example of using a filter upon two input data, the ampersand (<code>&amp;</code>)
-        and double quote (<code>&quot;</code>) characters:
--->
-        <programlisting role="php"><![CDATA[<?php
-require_once 'Zend/Filter/HtmlEntities.php';
+    <sect2 id="zend.filter.introduction.using">
+
+        <title>Основы использования фильтров</title>
+
+        <para>
+            Такое определение фильтра дает основу для
+            <classname>Zend_Filter_Interface</classname>, который требует
+            от классов фильтров реализации одного метода с именем
+            <code>filter()</code>.
+        </para>
+    
+        <para>
+            Ниже приведен пример использования фильтра с двумя вариантами
+            входных данных - амперсандом (<code>&amp;</code>) и двойными
+            кавычками (<code>&quot;</code>).
+            
+            <programlisting role="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
+
 echo $htmlEntities->filter('&'); // &amp;
-echo $htmlEntities->filter('"'); // &quot;]]></programlisting>
+echo $htmlEntities->filter('"'); // &quot;
+]]></programlisting>
 
     </para>
+
+    </sect2>
+    
+    <sect2 id="zend.filter.introduction.static">
+
+        <title>Использование статического метода get()</title>
+
+        <para>
+            Каждый раз загружать нужный класс фильтра и создавать его экземпляр
+            довольно неудобно, поэтому был создан статический метод
+            <code>Zend_Filter::get()</code>, который можно использовать как
+            альтернативный способ вызова.
+            Первым агрументом этого метода является значение входных данных,
+            которое требуется передать методу <code>filter()</code>. Вторым
+            аргументом является строка, которая соответствует базовому имени
+            класса фильтра относительно пространства имен <classname>Zend_Filter</classname>.
+            Метод <code>get()</code> автоматически загружает класс,
+            создает его экземпляр и применяет метод <code>filter()</code> к
+            входным данным.
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('&', 'HtmlEntities');
+]]></programlisting>
+
+        </para>
+
+        <para>
+            Можно также передавать массив аргументов для конструктора, если это
+            необходимо для используемого класса фильтра.
+
+            <programlisting role="php"><![CDATA[
+echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+]]></programlisting>
+
+        </para>
+
+        <para>
+            Использование метода <code>get()</code> может быть удобным для
+            единичного вызова фильтра. Но если нужно пропустить через один и
+            тот же фильтр несколько значений, то более эффективным будет
+            создавать экземпляр фильтра и вызывать его метод
+            <code>filter()</code>, как это было показано в первом примере.
+        </para>
+
+        <para>
+            <classname>Zend_Filter_Input</classname> также позволяет инстанцировать и запускать
+            несколько фильтров и валидаторов для обработки наборов
+            данных. Более подробную информацию читайте в
+            <xref linkend="zend.filter.input" />.
+        </para>
+
+    </sect2>
 
 </sect1>
 <!--

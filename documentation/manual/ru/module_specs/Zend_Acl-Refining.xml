@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
 
     <title>Настройка управления доступом</title>
@@ -13,7 +15,7 @@
             различные привилегии могут быть разрешены в ACL (ко всем ресурсам).
             Но на практике средства управления доступом
             имеют тенденцию к тому, чтобы иметь исключения из правил и различную
-            степень сложности. Zend_Acl позволяет производить
+            степень сложности. <classname>Zend_Acl</classname> позволяет производить
             детализацию просто и гибко.
         </para>
 
@@ -45,8 +47,7 @@
         <programlisting role="php"><![CDATA[
 // Новая группа 'маркетинг' наследует права от группы 'сотрудник'
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Далее обратите внимание, что указанные выше права доступа имеют
@@ -68,8 +69,7 @@ $acl->add(new Zend_Acl_Resource('latest'), 'news');
 
 // объявления
 $acl->add(new Zend_Acl_Resource('announcement'), 'news');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Затем определяются более точные правила для целевых областей ACL.
@@ -88,8 +88,7 @@ $acl->deny('staff', 'latest', 'revise');
 
 // Всем, включая администраторов, не разрешается удалять объявления
 $acl->deny(null, 'announcement', 'archive');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Теперь мы можем производить запросы к ACL с учетом последних
@@ -128,8 +127,7 @@ echo $acl->isAllowed('editor', 'announcement', 'archive') ?
 echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "разрешен" : "запрещен";
 // запрещен
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 
@@ -167,8 +165,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'publish') ?
 echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
      "разрешен" : "запрещен";
 // запрещен
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Привилегии могут модифицироваться в порядке возрастания, как показано выше, но параметр <code>null</code>
@@ -190,8 +187,7 @@ echo $acl->isAllowed('marketing', 'latest', 'archive') ?
 echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "разрешен" : "запрещен";
 // разрешен
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

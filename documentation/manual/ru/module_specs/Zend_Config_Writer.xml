@@ -1,11 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
     <para>
-        <code>Zend_Config_Writer</code> позволяет создавать конфигурационные
-        файлы из объектов <code>Zend_Config</code>.
+        <classname>Zend_Config_Writer</classname> позволяет создавать конфигурационные
+        файлы из объектов <classname>Zend_Config</classname>.
         Он работает и без использования адаптеров и, таким образом, очень прост
         в использовании.
-        По умолчанию <code>Zend_Config_Writer</code> поставляется с тремя
+        По умолчанию <classname>Zend_Config_Writer</classname> поставляется с тремя
         адаптерами, которые используются одинаково. Вы инстанцируете класс для
         записи с опциями, которыми могут быть <code>filename</code>
         (имя файла) и <code>config</code> (конфигурационные данные).
@@ -13,48 +15,48 @@
         создает конфигурационный файл. Вы можете также передавать
         <code>$filename</code> и <code>$config</code> непосредственно
         методу <code>write()</code>. В настоящее время вместе с
-        <code>Zend_Config_Writer</code> поставляются следующие адаптеры:
+        <classname>Zend_Config_Writer</classname> поставляются следующие адаптеры:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <code>Zend_Config_Writer_Array</code>
+                <classname>Zend_Config_Writer_Array</classname>
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>Zend_Config_Writer_Ini</code>
+                <classname>Zend_Config_Writer_Ini</classname>
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>Zend_Config_Writer_Xml</code>
+                <classname>Zend_Config_Writer_Xml</classname>
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        В качестве исключения <code>Zend_Config_Writer_Ini</code> имеет
+        В качестве исключения <classname>Zend_Config_Writer_Ini</classname> имеет
         еще один опциональный параметр <code>nestSeparator</code>, через
         который указывается символ-разделитель для узлов.
-        По умолчанию это точка, как и в <code>Zend_Config_Ini</code>.
+        По умолчанию это точка, как и в <classname>Zend_Config_Ini</classname>.
     </para>
 
     <para>
-        При изменении или создании объекта <code>Zend_Config</code> следует
-        знать следующее.
+        При изменении или создании объекта <classname>Zend_Config</classname>
+        следует знать следующее.
         Для того, чтобы создать или изменить значение, устанавливайте
-        параметр объекта <code>Zend_Config</code> через аксессор
+        параметр объекта <classname>Zend_Config</classname> через аксессор
         <code>-&gt;</code>. Для того, чтобы создать раздел в корне или
         ветку, создавайте новый массив
         (<code>$config-&gt;branch = array();</code>). Для того, чтобы
         указать, от какого раздела наследует другой, вызывайте метод в корне
-        объекта <code>Zend_Config</code>.
+        объекта <classname>Zend_Config</classname>.
     </para>
 
     <example id="zend.config.writer.example.using">
-        <title>Использование <code>Zend_Config_Writer</code></title>
+        <title>Использование Zend_Config_Writer</title>
         <para>
             Этот пример демонстрирует использование
             <code>Zend_Config_Writer_Xml</code> для создания нового
@@ -90,8 +92,7 @@ $writer->setConfig($config)
 // в)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             В этом примере создается конфигурационный
             XML-файл с "промежуточным" (staging) и "производственным"
@@ -121,8 +122,7 @@ $config->production->hostname = 'foobar';
 $writer = new Zend_Config_Writer_Ini(array('config'   => $config,
                                            'filename' => 'config.ini'));
 $writer->write();
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>

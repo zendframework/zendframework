@@ -1,19 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Фронтэнды Zend_Cache</title>
 
     <sect2 id="zend.cache.frontends.core">
-        <title><code>Zend_Cache_Core</code></title>
+        <title>Zend_Cache_Core</title>
         <sect3 id="zend.cache.frontends.core.introduction">
             <title>Введение</title>
             <para>
-                Фронтэнд <code>Zend_Cache_Core</code> является особым,
+                Фронтэнд <classname>Zend_Cache_Core</classname> является особым,
                 так как это ядро всего модуля. Это фронтэнд общего назначения и
                 он расширяется другими классами.
             </para>
             <note>
                 <para>
                     Все фронтэнды наследуют от класса
-                    <code>Zend_Cache_Core</code>, поэтому его методы и опции,
+                    <classname>Zend_Cache_Core</classname>, поэтому его методы и опции,
                     описанные ниже, должны быть доступны в других фронтэндах и
                     не будут описываться далее.
                 </para>
@@ -26,7 +28,7 @@
                 предыдущих примерах.
             </para>
             <table id="zend.cache.frontends.core.options.table">
-                <title>Опции <code>Zend_Cache_Core</code></title>
+                <title>Опции Zend_Cache_Core</title>
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -81,7 +83,7 @@
                               <entry>
                                  Если установлен в <code>true</code>, то
                                  включается логирование через
-                                 <code>Zend_Log</code> (но система будет
+                                 <classname>Zend_Log</classname> (но система будет
                                  работать медленнее).
                               </entry>
                           </row>
@@ -170,8 +172,7 @@ if (!($data = $cache->load($id))) {
 }
 
 // [...] делаем что-либо с данными (отображение, передача и т.д.)
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Если вы хотите закэшировать несколько блоков или экземпляров
                 данных, то принцип будет тот же:
@@ -210,8 +211,7 @@ if (!($data = $cache->load($id2))) {
     $cache->save($data);
 
 }
-echo($data);]]>
-            </programlisting>
+echo($data);]]></programlisting>
             <para>
                 Если вы хотите кэшировать специальные значения (булево
                 значение через опцию "automatic_serialization") или пустую
@@ -254,17 +254,16 @@ if (!($cache->test($id))) {
 }
 
 // делаем что-либо с данными
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.cache.frontends.output">
-        <title><code>Zend_Cache_Frontend_Output</code></title>
+        <title>Zend_Cache_Frontend_Output</title>
         <sect3 id="zend.cache.frontends.output.introduction">
             <title>Введение</title>
             <para>
-                <code>Zend_Cache_Frontend_Output</code> является фронтэндом,
+                <classname>Zend_Cache_Frontend_Output</classname> является фронтэндом,
                 собирающим выходные данные. Он использует буферизацию вывода
                 (output buffering) в PHP для сохранения всего, что выводится
                 между его методами <code>start()</code> и <code>end()</code>.
@@ -274,7 +273,7 @@ if (!($cache->test($id))) {
             <title>Доступные опции</title>
             <para>
                 Этот фронтэнд не имеет каких-либо специальных опций, отличных
-                от опций <code>Zend_Cache_Core</code>.
+                от опций <classname>Zend_Cache_Core</classname>.
             </para>
         </sect3>
 
@@ -298,8 +297,7 @@ if (!($cache->start('mypage'))) {
 }
 
 echo 'This is never cached ('.time().').';
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Используя эту форму, довольно легко установить кэширование
                 вывода в уже работающем проекте с незначительным рефакторингом
@@ -309,11 +307,11 @@ echo 'This is never cached ('.time().').';
     </sect2>
 
     <sect2 id="zend.cache.frontends.function">
-        <title><code>Zend_Cache_Frontend_Function</code></title>
+        <title>Zend_Cache_Frontend_Function</title>
         <sect3 id="zend.cache.frontends.function.introduction">
             <title>Введение</title>
             <para>
-                <code>Zend_Cache_Frontend_Function</code> сохраняет в кэш
+                <classname>Zend_Cache_Frontend_Function</classname> сохраняет в кэш
                 результаты вызова функции. Он имеет единственный основной метод
                 <code>call()</code>, который принимает имя функции и параметры
                 вызова в виде массива.
@@ -322,7 +320,7 @@ echo 'This is never cached ('.time().').';
         <sect3 id="zend.cache.frontends.function.options">
             <title>Доступные опции</title>
             <table id="zend.cache.frontends.function.options.table">
-                <title>Опции <code>Zend_Cache_Frontend_Function</code></title>
+                <title>Опции Zend_Cache_Frontend_Function</title>
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -378,10 +376,9 @@ $cache->call('veryExpensiveFunc', $params);
 // veryExpensiveFunc(1, 'foo', 'bar'),
 // то вы должны использовать
 // $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'))
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
-                <code>Zend_Cache_Frontend_Function</code> достаточно
+                <classname>Zend_Cache_Frontend_Function</classname> достаточно
                 интеллектуален, чтобы кэшировать как возвращаемое функцией
                 значение, так и данные, выводимые внутри нее.
             </para>
@@ -400,19 +397,19 @@ $cache->call('veryExpensiveFunc', $params);
     </sect2>
 
     <sect2 id="zend.cache.frontends.class">
-        <title><code>Zend_Cache_Frontend_Class</code></title>
+        <title>Zend_Cache_Frontend_Class</title>
         <sect3 id="zend.cache.frontends.class.introduction">
             <title>Введение</title>
             <para>
-                <code>Zend_Cache_Frontend_Class</code> отличается от
-                <code>Zend_Cache_Frontend_Function</code> тем, что позволяет
+                <classname>Zend_Cache_Frontend_Class</classname> отличается от
+                <classname>Zend_Cache_Frontend_Function</classname> тем, что позволяет
                 кэшировать объекты и статические вызовы методов.
             </para>
         </sect3>
         <sect3 id="zend.cache.frontends.class.options">
             <title>Доступные опции</title>
             <table id="zend.cache.frontends.class.options.table">
-                <title>Опции <code>Zend_Cache_Frontend_Class</code></title>
+                <title>Опции Zend_Cache_Frontend_Class</title>
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -491,8 +488,7 @@ $frontendOptions = array(
 
 // Кэшируемый вызов
 $result = $cache->foobar('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Кэширование обычных вызовов методов:
             </para>
@@ -517,17 +513,16 @@ $frontendOptions = array(
 
 // Кэшируемый вызов
 $result = $cache->foobar2('1', '2');
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.cache.frontends.file">
-        <title><code>Zend_Cache_Frontend_File</code></title>
+        <title>Zend_Cache_Frontend_File</title>
         <sect3 id="zend.cache.frontends.file.introduction">
             <title>Введение</title>
             <para>
-                <code>Zend_Cache_Frontend_File</code> является фронтэндом,
+                <classname>Zend_Cache_Frontend_File</classname> является фронтэндом,
                 который управляется временем изменения "ведущего файла".
                 Он очень полезен для кэширования конфигураций или шаблонов.
                 Можно использовать несколько ведущих файлов.
@@ -535,8 +530,8 @@ $result = $cache->foobar2('1', '2');
             <para>
                 Например, у вас есть конфигурационный файл XML. Он парсится
                 функцией, которая возвращает объект конфигурации
-                (наподобие <code>Zend_Config</code>). С помощью
-                <code>Zend_Cache_Frontend_File</code> вы можете сохранять объект
+                (наподобие <classname>Zend_Config</classname>). С помощью
+                <classname>Zend_Cache_Frontend_File</classname> вы можете сохранять объект
                 конфигурации в кэш, чтобы избежать повторного парсинга
                 конфигурационного файла XML. Время жизни кэша будет зависеть
                 от ведущего файла - если конфигурационный
@@ -546,7 +541,7 @@ $result = $cache->foobar2('1', '2');
         <sect3 id="zend.cache.frontends.file.options">
             <title>Доступные опции</title>
             <table id="zend.cache.frontends.file.options.table">
-                <title>Опции <code>Zend_Cache_Frontend_File</code></title>
+                <title>Опции Zend_Cache_Frontend_File</title>
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -558,7 +553,8 @@ $result = $cache->foobar2('1', '2');
                      </thead>
                      <tbody>
                           <row>
-                              <entry><code>master_file</code> (не рекомендуется к использованию)</entry>
+                              <entry><code>master_file</code>
+                                  (не рекомендуется к использованию)</entry>
                               <entry><code>string</code></entry>
                               <entry><code></code></entry>
                               <entry>
@@ -601,7 +597,7 @@ $result = $cache->foobar2('1', '2');
             <title>Примеры</title>
             <para>
                 Этот фронтэнд используется так же, как и
-                <code>Zend_Cache_Core</code>. Специальные примеры не нужны,
+                <classname>Zend_Cache_Core</classname>. Специальные примеры не нужны,
                 единственное, что надо сделать — это указать
                 <code>masterFile</code> при использовании фабрики.
             </para>
@@ -609,14 +605,14 @@ $result = $cache->foobar2('1', '2');
     </sect2>
 
     <sect2 id="zend.cache.frontends.page">
-        <title><code>Zend_Cache_Frontend_Page</code></title>
+        <title>Zend_Cache_Frontend_Page</title>
         <sect3 id="zend.cache.frontends.page.introduction">
             <title>Введение</title>
             <para>
-                <code>Zend_Cache_Frontend_Page</code> похож на
-                <code>Zend_Cache_Frontend_Output</code>,
+                <classname>Zend_Cache_Frontend_Page</classname> похож на
+                <classname>Zend_Cache_Frontend_Output</classname>,
                 но предназначена для кэширования целых страниц.
-                <code>Zend_Cache_Frontend_Page</code>
+                <classname>Zend_Cache_Frontend_Page</classname>
                 нельзя использовать для кэширования отдельных блоков.
             </para>
             <para>
@@ -639,7 +635,7 @@ $result = $cache->foobar2('1', '2');
         <sect3 id="zend.cache.frontends.page.options">
             <title>Доступные опции</title>
             <table id="zend.cache.frontends.page.options.table">
-                <title>Опции <code>Zend_Cache_Frontend_Page</code></title>
+                <title>Опции Zend_Cache_Frontend_Page</title>
                 <tgroup cols="4">
                      <thead>
                           <row>
@@ -835,10 +831,10 @@ $result = $cache->foobar2('1', '2');
                                   этого массива являются регулярные выражения
                                   (PCRE), значениями — ассоциативные массивы со
                                   специальными опциями, которые устанавливаются,
-                                  если $_SERVER['REQUEST_URI']
+                                  если <code>$_SERVER['REQUEST_URI']</code>
                                   соответствует регулярному выражению
                                   (см. default_options в этом списке доступных
-                                  опций). Если $_SERVER['REQUEST_URI']
+                                  опций). Если <code>$_SERVER['REQUEST_URI']</code>
                                   соответствует нескольким регулярным
                                   выражениям, то используется только последнее
                                   из них.
@@ -861,7 +857,7 @@ $result = $cache->foobar2('1', '2');
         <sect3 id="zend.cache.frontends.page.examples">
             <title>Примеры</title>
             <para>
-                Использование <code>Zend_Cache_Frontend_Page</code> довольно
+                Использование <classname>Zend_Cache_Frontend_Page</classname> довольно
                 простое:
             </para>
             <programlisting role="php"><![CDATA[
@@ -872,12 +868,11 @@ $cache->start();
 // и выполнение скрипта на этом прекращается
 
 // остальная часть страницы ...
-]]>
-            </programlisting>
+]]></programlisting>
             <para>
                 Более сложный пример, показывающий способ создания
                 централизованного управления кэшированием в загрузочном файле
-                (например, для использования с <code>Zend_Controller</code>).
+                (например, для использования с <classname>Zend_Controller</classname>).
             </para>
             <programlisting role="php"><![CDATA[
 /*
@@ -928,11 +923,10 @@ $cache->start();
 
 // [...] конец загрузочного файла
 // (этот код не исполняется, если есть попадание в кэш)
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
         <sect3 id="zend.cache.frontends.page.cancel">
-            <title>Специальный метод отмены</title>
+            <title>Отмена кэширования</title>
             <para>
                 В некоторых случаях может потребоваться отменить текущий
                 процесс кэширования - например, если используется код
@@ -952,8 +946,7 @@ if ($someTest) {
 }
 
 // [...]
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
     </sect2>
 </sect1>

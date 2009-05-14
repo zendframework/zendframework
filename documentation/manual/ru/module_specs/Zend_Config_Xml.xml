@@ -1,30 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
-        <code>Zend_Config_Xml</code> дает разработчикам возможность хранить
-        конфигурационные данные в простом формате XML и читать их посредством синтаксиса
-        вложенных свойств объектов. Корневой элемент файла XML не имеет значения
-        и ему может быть дано любое имя. Первый уровень элементов XML
-        соответствует разделам конфигурационных данных. Формат XML поддерживает
-        иерархическую организацию данных через вложенность элементов
-        ниже элементов уровня разделов. Содержимое конечного элемента соответствует
-        значению элемента конфигурационных данных. Наследование разделов
-        поддерживается через специальный атрибут <code>extends</code>, значение
-        атрибута соответствует разделу, данные которого наследуются в
+        <classname>Zend_Config_Xml</classname> дает разработчикам возможность
+        хранить конфигурационные данные в простом формате XML и читать их
+        посредством синтаксиса вложенных свойств объектов.
+        Корневой элемент в файле или строке с XML не имеет значения и ему
+        может быть дано любое имя. Первый уровень
+        элементов XML соответствует разделам конфигурационных данных. Формат
+        XML поддерживает иерархическую организацию данных через вложенность
+        элементов ниже элементов уровня разделов. Содержимое конечного элемента
+        соответствует значению элемента конфигурационных данных. Наследование
+        разделов поддерживается через специальный атрибут <code>extends</code>,
+        значение атрибута соответствует разделу, данные которого наследуются в
         раздел с этим атрибутом.
     </para>
     <note>
         <title>Тип возвращаемых данных</title>
         <para>
-            Конфигурационные данные, прочитанные в <code>Zend_Config_Xml</code>,
+            Конфигурационные данные, прочитанные в <classname>Zend_Config_Xml</classname>,
             всегда возвращаются как строки. Приведение данных из строк к требуемым
             типам предоставляется разработчикам.
         </para>
     </note>
     <example id="zend.config.adapters.xml.example.using">
-        <title>Использование <code>Zend_Config_Xml</code></title>
+        <title>Использование Zend_Config_Xml</title>
         <para>
-            Данный пример демонстрирует основы использования <code>Zend_Config_Xml</code>
+            Данный пример демонстрирует основы использования <classname>Zend_Config_Xml</classname>
             для загрузки конфигурационных данных из файла XML. В этом примере
             используются конфигурационные данные для производственной и
             промежуточной систем. Поскольку конфигурационные данные
@@ -60,8 +63,7 @@
             </params>
         </database>
     </staging>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Далее предположим, что разработчику приложения нужны "промежуточные"
             конфигурационные данные из файла XML. Загрузить эти данные, указав
@@ -72,11 +74,10 @@ $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // выведет "dev.example.com"
 echo $config->database->params->dbname; // выведет "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <example id="zend.config.adapters.xml.example.attributes">
-        <title>Использование тегов в <code>Zend_Config_Xml</code></title>
+        <title>Использование тегов в <classname>Zend_Config_Xml</classname></title>
         <para>
             Zend_Config_Xml также поддерживает два дополнительных способа
             определения узлов в конфигурации. В обоих способах используются
@@ -102,8 +103,7 @@ echo $config->database->params->dbname; // выведет "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Другой способ не делает конфигурацию заметно короче, но
             облегчает ее поддержку благодаря тому, что не нужно писать имена
@@ -135,9 +135,42 @@ echo $config->database->params->dbname; // выведет "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
     </example>
+    <note>
+        <title>Передача строки с XML</title>
+        <para>
+            <classname>Zend_Config_Xml</classname> также может загружать
+            XML непосредственно из строки, которая может быть получена,
+            например, из базы данных. Строка передается конструктору в качестве
+            первого параметра и должна начинаться с символов
+            <code>'&lt;?xml'</code>:
+        </para>
+        <programlisting role="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config>
+    <production>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
+EOT;
+
+$config = new Zend_Config_Xml($string, 'staging');
+]]></programlisting>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

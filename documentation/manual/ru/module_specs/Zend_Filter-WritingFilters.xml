@@ -1,34 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.filter.writing_filters">
 
-    <title>Написание фильтров<!--Writing Filters--></title>
+    <title>Написание фильтров</title>
 
     <para>
-        Zend_Filter предоставляет набор наиболее часто используемых фильтров, но разработчикам для решения определенных задач может потребоваться написать свои фильтры. Написание своих фильтров облегчается реализацией интерфейса <code>Zend_Filter_Interface</code>.
-<!--
-        Zend_Filter supplies a set of commonly needed filters, but developers will often need to write custom
-        filters for their particular use cases. The task of writing a custom filter is facilitated by
-        implementing <code>Zend_Filter_Interface</code>.
--->
+        <classname>Zend_Filter</classname> предоставляет набор наиболее часто
+        используемых фильтров, но в некоторых случаях может потребоваться
+        написание своих фильтров. Эта задача облегчается
+        реализацией интерфейса <classname>Zend_Filter_Interface</classname>.
     </para>
 
     <para>
-        <code>Zend_Filter_Interface</code> определяет единственный метод <code>filter()</code>, который может быть реализован своими классами. Объект класса, реализующего данный интерфейс, может быть добавлен в цепочку фильтров через метод <code>Zend_Filter::addFilter()</code>.
-<!--
-        <code>Zend_Filter_Interface</code> defines a single method, <code>filter()</code>, that may be
-        implemented by user classes. An object that implements this interface may be added to a filter chain
-        with <code>Zend_Filter::addFilter()</code>.
--->
+        <classname>Zend_Filter_Interface</classname> определяет единственный метод
+        <code>filter()</code>, который должен быть реализован классом фильтра.
+        Объект класса, реализующего данный интерфейс, может быть добавлен в
+        цепочку фильтров через метод <code>Zend_Filter::addFilter()</code>.
     </para>
 
     <para>
-        Следующий пример демонстрирует, как можно писать свои фильтры:
-<!--
-        The following example demonstrates how to write a custom filter:
--->
+        Следующий пример демонстрирует, как можно создавать свои фильтры:
 
-        <programlisting role="php"><![CDATA[<?php
-require_once 'Zend/Filter/Interface.php';
-
+        <programlisting role="php"><![CDATA[
 class MyFilter implements Zend_Filter_Interface
 {
     public function filter($value)
@@ -38,19 +31,18 @@ class MyFilter implements Zend_Filter_Interface
 
         return $valueFiltered;
     }
-}]]></programlisting>
+}
+]]></programlisting>
 
     </para>
 
     <para>
         Добавление экземпляра этого фильтра в цепочку фильтров:
-<!--
-        To add an instance of the above filter to a filter chain:
--->
 
-        <programlisting role="php"><![CDATA[<?php
+        <programlisting role="php"><![CDATA[
 $filterChain = new Zend_Filter();
-$filterChain->addFilter(new MyFilter());]]></programlisting>
+$filterChain->addFilter(new MyFilter());
+]]></programlisting>
 
     </para>
 

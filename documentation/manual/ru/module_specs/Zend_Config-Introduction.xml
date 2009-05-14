@@ -1,25 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Введение</title>
     <para>
-        <code>Zend_Config</code> создан для того, чтобы сделать более
+        <classname>Zend_Config</classname> создан для того, чтобы сделать более
         простым доступ к конфигурационным данным и их использование внутри приложения.
         Он предоставляет основанный на вложенных свойствах объектов пользовательский
         интерфейс для доступа к конфигурационным данным внутри приложения.
         Конфигурационные данные могут храниться на различных носителях информации,
         поддерживающих хранение данных в виде иерархии. На данный момент
-        <code>Zend_Config</code> предоставляет адаптеры для конфигурационных
+        <classname>Zend_Config</classname> предоставляет адаптеры для конфигурационных
         данных, хранящихся в текстовых файлах:
-        <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link>
-        и <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
+        <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
+        и <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
     <example id="zend.config.introduction.example.using">
-        <title>Использование <code>Zend_Config</code></title>
+        <title>Использование Zend_Config</title>
         <para>
             Обычно предполагается, что используется один из классов адаптеров, например,
-            <link linkend="zend.config.adapters.ini"><code>Zend_Config_Ini</code></link>
-            или <link linkend="zend.config.adapters.xml"><code>Zend_Config_Xml</code></link>.
+            <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
+            или <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
             Но если конфигурационные данные доступны в виде массива PHP,
-            то можно передавать эти данные конструктору <code>Zend_Config</code>,
+            то можно передавать эти данные конструктору <classname>Zend_Config</classname>,
             чтобы использовать преимущества простого объектно-ориентированного
             интерфейса.
         </para>
@@ -52,30 +54,28 @@ $db = Zend_Db::factory($config->database->adapter,
 // Альтернативный способ - просто передавайте объект Zend_Config.
 // Фабрика Zend_Db знает, как его интерпретировать.
 $db = Zend_Db::factory($config->database);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
-        Как показано в предыдущем примере, в <code>Zend_Config</code> для
+        Как показано в предыдущем примере, в <classname>Zend_Config</classname> для
         доступа к конфигурационным данным, переданным его конструктору,
         используется синтаксис вложенных свойств объектов.
     </para>
     <para>
         Кроме объектно-ориентированного доступа к значениям данных,
-        <code>Zend_Config</code> также предоставляет метод <code>get()</code>,
+        <classname>Zend_Config</classname> также предоставляет метод <code>get()</code>,
         который будет возвращать значение по умолчанию, если элемент
         данных не существует. Например:
     </para>
     <programlisting role="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
-]]>
-    </programlisting>
+]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
-        <title>Использование <code>Zend_Config</code> с конфигурационным файлом PHP</title>
+        <title>Использование Zend_Config с конфигурационным файлом PHP</title>
         <para>
             Часто требуется использовать конфигурационный файл,
             основанный на "чистом" PHP. Следующий код показывает, как просто
-            этого достичь.
+            этого достичь:
         </para>
         <programlisting role="php"><![CDATA[
 // config.php
@@ -93,13 +93,11 @@ return array(
 );]]></programlisting>
         <programlisting role="php"><![CDATA[
 // Использование конфигурации
-require_once 'Zend/Config.php';
 $config = new Zend_Config(require 'config.php');
 
 // Вывод элемента конфигурационных данных (результатом будет 'www.example.com')
 echo $config->webhost;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

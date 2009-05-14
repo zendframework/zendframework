@@ -228,12 +228,16 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         $result = mkdir($this->_bucketName);
         $this->assertTrue($result);
 
+	$this->assertTrue(is_dir($this->_bucketName));
+
         $data = str_repeat('x', 10000);
         $len = strlen($data);
 
         // Write to an object
         $size = file_put_contents($this->_fileName, $data);
         $this->assertEquals($len, $size);
+
+	$this->assertFalse(is_dir($this->_fileName));
 
         // Stat an object
         $info = stat($this->_fileName);

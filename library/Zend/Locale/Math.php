@@ -67,7 +67,8 @@ class Zend_Locale_Math
         if (self::$_bcmathDisabled) {
             return self::normalize(round($op1, $precision));
         }
-        $op1 = trim(self::normalize($op1));
+
+        $op1    = trim(self::normalize($op1));
         $length = strlen($op1);
         if (($decPos = strpos($op1, '.')) === false) {
             $op1 .= '.0';
@@ -77,10 +78,12 @@ class Zend_Locale_Math
         if ($precision < 0 && abs($precision) > $decPos) {
             return '0';
         }
+
         $digitsBeforeDot = $length - ($decPos + 1);
         if ($precision >= ($length - ($decPos + 1))) {
             return $op1;
         }
+
         if ($precision === 0) {
             $triggerPos = 1;
             $roundPos   = -1;
@@ -91,22 +94,31 @@ class Zend_Locale_Math
             $triggerPos = $precision;
             $roundPos   = $precision -1;
         }
+
         $triggerDigit = $op1[$triggerPos + $decPos];
         if ($precision < 0) {
             // zero fill digits to the left of the decimal place
             $op1 = substr($op1, 0, $decPos + $precision) . str_pad('', abs($precision), '0');
         }
+
         if ($triggerDigit >= '5') {
             if ($roundPos + $decPos == -1) {
                 return str_pad('1', $decPos + 1, '0');
             }
+
             $roundUp = str_pad('', $length, '0');
             $roundUp[$decPos] = '.';
             $roundUp[$roundPos + $decPos] = '1';
-            return bcadd($op1, $roundUp, $precision);
+
+            if ($op1 > 0) {
+                return self::Add($op1, $roundUp, $precision);
+            } else {
+                return self::Sub($op1, $roundUp, $precision);
+            }
         } elseif ($precision >= 0) {
             return substr($op1, 0, $decPos + ($precision ? $precision + 1: 0));
         }
+
         return (string) $op1;
     }
 
@@ -186,6 +198,7 @@ class Zend_Locale_Math
     {
         $op1 = self::exponent($op1, $scale);
         $op2 = self::exponent($op2, $scale);
+
         return bcadd($op1, $op2, $scale);
     }
 

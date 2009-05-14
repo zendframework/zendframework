@@ -1635,4 +1635,24 @@ class Zend_Locale_MathTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('-1', Zend_Locale_Math::Comp(2, '1e3'));
         $this->assertEquals('0', Zend_Locale_Math::Comp('1e3', '1e3'));
     }
+
+    public function testNegativeRounding()
+    {
+        $this->assertEquals(               '-3', Zend_Locale_Math::round('-3.4'));
+        $this->assertEquals(        round(-3.4), Zend_Locale_Math::round('-3.4'));
+        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.5'));
+        $this->assertEquals(        round(-3.5), Zend_Locale_Math::round('-3.5'));
+        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.6'));
+        $this->assertEquals(        round(-3.6), Zend_Locale_Math::round('-3.6'));
+        $this->assertEquals(               '-4', Zend_Locale_Math::round('-3.6', 0));
+        $this->assertEquals(      round(-3.6,0), Zend_Locale_Math::round('-3.6', 0));
+        $this->assertEquals(            '-1.96', Zend_Locale_Math::round('-1.95583', 2), '', 0.02);
+        $this->assertEquals(  round(-1.95583,2), Zend_Locale_Math::round('-1.95583', 2), '', 0.02);
+        $this->assertEquals(           -1242000, Zend_Locale_Math::round('-1241757', -3), '', 250);
+        $this->assertEquals(round(-1241757, -3), Zend_Locale_Math::round('-1241757', -3), '', 250);
+        $this->assertEquals(              -5.05, Zend_Locale_Math::round('-5.045', 2), '', 0.02);
+        $this->assertEquals(   round(-5.045, 2), Zend_Locale_Math::round('-5.045', 2), '', 0.02);
+        $this->assertEquals(              -5.06, Zend_Locale_Math::round('-5.055', 2), '', 0.02);
+        $this->assertEquals(   round(-5.055, 2), Zend_Locale_Math::round('-5.055', 2), '', 0.02);
+    }
 }

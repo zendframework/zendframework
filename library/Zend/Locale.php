@@ -440,7 +440,7 @@ class Zend_Locale
     /**
      * Returns the language part of the locale
      *
-     * @return string - language
+     * @return string
      */
     public function getLanguage()
     {

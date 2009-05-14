@@ -45,7 +45,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         self::$sqrt  = array('Zend_Locale_Math_PhpMath', 'Sqrt');
         self::$mod   = array('Zend_Locale_Math_PhpMath', 'Mod');
         self::$scale = array('Zend_Locale_Math_PhpMath', 'Scale');
-        
+
         self::$defaultScale     = 0;
         self::$defaultPrecision = 1;
     }
@@ -53,7 +53,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
     public static $defaultScale;
     public static $defaultPrecision;
 
-    
+
     public static function Add($op1, $op2, $scale = null)
     {
         if ($scale === null) {
@@ -105,14 +105,14 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         if ($scale === null) {
             $scale = Zend_Locale_Math_PhpMath::$defaultScale;
         }
-        
+
         $op1 = self::normalize($op1);
         $op2 = self::normalize($op2);
-        
+
         // BCMath extension doesn't use decimal part of the power
-        // Provide the same behavior 
+        // Provide the same behavior
         $op2 = ($op2 > 0) ? floor($op2) : ceil($op2);
-        
+
         $result = pow($op1, $op2);
         if (is_infinite($result)  or  is_nan($result)) {
             require_once 'Zend/Locale/Math/Exception.php';
@@ -211,7 +211,7 @@ class Zend_Locale_Math_PhpMath extends Zend_Locale_Math
         if ($scale === null) {
             $scale     = Zend_Locale_Math_PhpMath::$defaultScale;
         }
-        
+
         if (empty($op1)) {
             $op1 = 0;
         }

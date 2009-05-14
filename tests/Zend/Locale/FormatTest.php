@@ -297,6 +297,9 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(    '1234567-', Zend_Locale_Format::toInteger(-1234567.12345,   array('locale' => 'ar_QA')));
         $this->assertEquals(  '12,34,567',  Zend_Locale_Format::toInteger( 1234567.12345,   array('locale' => 'dz_BT')));
         $this->assertEquals('-(1.234.567)', Zend_Locale_Format::toInteger(-1234567.12345,   array('locale' => 'mk_MK')));
+
+        $this->assertEquals('-45', Zend_Locale_Format::toInteger(-45.23, $options));
+        $this->assertEquals('-46', Zend_Locale_Format::toInteger(-45.99, $options));
     }
 
 

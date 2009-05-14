@@ -184,7 +184,7 @@ class Zend_Search_Lucene_Search_Query_Preprocessing_Phrase extends Zend_Search_L
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($this->_phrase, $this->_phraseEncoding);
 
         if (count($tokens) == 0) {
-        	$this->_matches = arrray();
+        	$this->_matches = array();
             return new Zend_Search_Lucene_Search_Query_Insignificant();
         }
 

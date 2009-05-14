@@ -20,11 +20,6 @@
  */
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * Abstract class for all Zend_Uri handlers
  *
  * @category  Zend
@@ -128,7 +123,10 @@ abstract class Zend_Uri
                 break;
         }
 
-        Zend_Loader::loadClass($className);
+        if (!class_exists($className)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($className);
+        }
         $schemeHandler = new $className($scheme, $schemeSpecific);
 
         return $schemeHandler;

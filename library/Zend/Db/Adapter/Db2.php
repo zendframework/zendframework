@@ -30,11 +30,6 @@ require_once 'Zend/Db.php';
 require_once 'Zend/Db/Adapter/Abstract.php';
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * @see Zend_Db_Statement_Db2
  */
 require_once 'Zend/Db/Statement/Db2.php';
@@ -226,7 +221,10 @@ class Zend_Db_Adapter_Db2 extends Zend_Db_Adapter_Abstract
     {
         $this->_connect();
         $stmtClass = $this->_defaultStmtClass;
-        Zend_Loader::loadClass($stmtClass);
+        if (!class_exists($stmtClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($stmtClass);
+        }
         $stmt = new $stmtClass($this, $sql);
         $stmt->setFetchMode($this->_fetchMode);
         return $stmt;

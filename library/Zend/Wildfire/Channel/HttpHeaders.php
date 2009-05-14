@@ -81,24 +81,30 @@ class Zend_Wildfire_Channel_HttpHeaders extends Zend_Controller_Plugin_Abstract 
      */
     public static function init($class = null)
     {
-        if (self::$_instance!==null) {
+        if (self::$_instance !== null) {
             require_once 'Zend/Wildfire/Exception.php';
             throw new Zend_Wildfire_Exception('Singleton instance of Zend_Wildfire_Channel_HttpHeaders already exists!');
         }
-        if ($class!==null) {
+        if ($class !== null) {
             if (!is_string($class)) {
                 require_once 'Zend/Wildfire/Exception.php';
                 throw new Zend_Wildfire_Exception('Third argument is not a class string');
             }
-            Zend_Loader::loadClass($class);
+
+            if (!class_exists($class)) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($class);
+            }
+
             self::$_instance = new $class();
+
             if (!self::$_instance instanceof Zend_Wildfire_Channel_HttpHeaders) {
                 self::$_instance = null;
                 require_once 'Zend/Wildfire/Exception.php';
                 throw new Zend_Wildfire_Exception('Invalid class to third argument. Must be subclass of Zend_Wildfire_Channel_HttpHeaders.');
             }
         } else {
-          self::$_instance = new self();
+            self::$_instance = new self();
         }
 
         return self::$_instance;

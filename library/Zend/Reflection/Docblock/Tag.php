@@ -19,9 +19,6 @@
  * @version    $Id$
  */
 
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
-
 /**
  * @category   Zend
  * @package    Zend_Reflection
@@ -67,6 +64,7 @@ class Zend_Reflection_Docblock_Tag implements Reflector
         if (array_key_exists($tagName, self::$_tagClasses)) {
             $tagClass = self::$_tagClasses[$tagName];
             if (!class_exists($tagClass)) {
+                require_once 'Zend/Loader.php';
                 Zend_Loader::loadClass($tagClass);
             }
             return new $tagClass($tagDocblockLine);

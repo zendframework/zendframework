@@ -26,11 +26,6 @@
 require_once 'Zend/InfoCard/Xml/Element/Interface.php';
 
 /**
- * Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * An abstract class representing a an XML data block
  *
  * @category   Zend
@@ -85,8 +80,10 @@ abstract class Zend_InfoCard_Xml_Element
      */
     static public function convertToObject(DOMElement $e, $classname)
     {
-
-        Zend_Loader::loadClass($classname);
+        if (!class_exists($classname)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($classname);
+        }
 
         $reflection = new ReflectionClass($classname);
 

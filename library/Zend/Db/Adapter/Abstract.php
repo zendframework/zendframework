@@ -32,12 +32,6 @@ require_once 'Zend/Db.php';
 require_once 'Zend/Db/Select.php';
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-
-/**
  * Class for connecting to SQL databases and performing common operations.
  *
  * @category   Zend
@@ -381,7 +375,10 @@ abstract class Zend_Db_Adapter_Abstract
         }
 
         if ($profilerInstance === null) {
-            Zend_Loader::loadClass($profilerClass);
+            if (!class_exists($profilerClass)) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($profilerClass);
+            }
             $profilerInstance = new $profilerClass();
         }
 

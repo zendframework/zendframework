@@ -21,11 +21,6 @@
  */
 
 /**
- * Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * Zend_Date
  */
 require_once 'Zend/Date.php';
@@ -298,8 +293,10 @@ class Zend_TimeSync implements IteratorAggregate
         }
 
         $className = 'Zend_TimeSync_' . $protocol;
-
-        Zend_Loader::loadClass($className);
+        if (!class_exists($className)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($className);
+        }
         $timeServerObj = new $className($adress, $port);
 
         $this->_timeservers[$alias] = $timeServerObj;

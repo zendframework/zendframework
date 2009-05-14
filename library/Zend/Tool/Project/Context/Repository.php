@@ -1,6 +1,5 @@
 <?php
 
-require_once 'Zend/Loader.php';
 require_once 'Zend/Tool/Project/Context/System/Interface.php';
 require_once 'Zend/Tool/Project/Context/System/TopLevelRestrictable.php';
 require_once 'Zend/Tool/Project/Context/System/NotOverwritable.php';
@@ -59,7 +58,10 @@ class Zend_Tool_Project_Context_Repository implements Countable
     
     public function addContextClass($contextClass)
     {
-        Zend_Loader::loadClass($contextClass);
+        if (!class_exists($contextClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($contextClass);
+        }
         $context = new $contextClass();
         return $this->addContext($context);
     }

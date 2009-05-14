@@ -190,8 +190,10 @@ abstract class Zend_Navigation_Page extends Zend_Navigation_Container
                         break;
                 }
 
-                require_once 'Zend/Loader.php';
-                @Zend_Loader::loadClass($type);
+                if (!class_exists($type)) {
+                    require_once 'Zend/Loader.php';
+                    @Zend_Loader::loadClass($type);
+                }
 
                 $page = new $type($options);
                 if (!$page instanceof Zend_Navigation_Page) {

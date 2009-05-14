@@ -178,12 +178,14 @@ class Zend_Amf_Server implements Zend_Server_Interface
                     $classPath[] = $dir . $uriclasspath;
                 }
 
-                require_once('Zend/Loader.php');
-                try {
-                    Zend_Loader::loadClass($className, $classPath);
-                } catch (Exception $e) {
-                    require_once 'Zend/Amf/Server/Exception.php';
-                    throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist');
+                if (!class_exists($className)) {
+                    try {
+                        require_once 'Zend/Loader.php';
+                        Zend_Loader::loadClass($className, $classPath);
+                    } catch (Exception $e) {
+                        require_once 'Zend/Amf/Server/Exception.php';
+                        throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist');
+                    }
                 }
                 // Add the new loaded class to the server.
                 $this->setClass($className, $source);

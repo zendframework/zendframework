@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
-
 /** Zend_Controller_Request_Abstract */
 require_once('Zend/Controller/Request/Abstract.php');
 
@@ -176,16 +173,20 @@ class Zend_Wildfire_Plugin_FirePhp implements Zend_Wildfire_Plugin_Interface
      */
     public static function init($class = null)
     {
-        if (self::$_instance!==null) {
+        if (self::$_instance !== null) {
             require_once 'Zend/Wildfire/Exception.php';
             throw new Zend_Wildfire_Exception('Singleton instance of Zend_Wildfire_Plugin_FirePhp already exists!');
         }
-        if ($class!==null) {
+        if ($class !== null) {
             if (!is_string($class)) {
                 require_once 'Zend/Wildfire/Exception.php';
                 throw new Zend_Wildfire_Exception('Third argument is not a class string');
             }
-            Zend_Loader::loadClass($class);
+
+            if (!$class_exists($class)) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($class);
+            }
             self::$_instance = new $class();
             if (!self::$_instance instanceof Zend_Wildfire_Plugin_FirePhp) {
                 self::$_instance = null;

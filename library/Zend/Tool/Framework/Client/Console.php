@@ -108,8 +108,12 @@ class Zend_Tool_Framework_Client_Console
         }
         
         // support setting the loader from the environment
-        if (isset($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']) && Zend_Loader::loadClass($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])) {
-            $this->_registry->setLoader(new $_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']);
+        if (isset($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])) {
+            if (class_exists($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])
+                || Zend_Loader::loadClass($_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS'])
+            ) {
+                $this->_registry->setLoader(new $_ENV['ZEND_TOOL_FRAMEWORK_LOADER_CLASS']);
+            }
         }
 
         return;

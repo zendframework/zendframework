@@ -21,11 +21,6 @@
  */
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table
@@ -116,7 +111,10 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
         if (isset($config['rowClass'])) {
             $this->_rowClass   = $config['rowClass'];
         }
-        Zend_Loader::loadClass($this->_rowClass);
+        if (!class_exists($this->_rowClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($this->_rowClass);
+        }
         if (isset($config['data'])) {
             $this->_data       = $config['data'];
         }

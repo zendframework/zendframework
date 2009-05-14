@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
-
 /** Zend_Controller_Router_Abstract */
 require_once 'Zend/Controller/Router/Abstract.php';
 
@@ -197,7 +194,10 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     protected function _getRouteFromConfig(Zend_Config $info)
     {
         $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
-        Zend_Loader::loadClass($class);
+        if (!class_exists($class)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($class);
+        }
               
         $route = call_user_func(array($class, 'getInstance'), $info);
         

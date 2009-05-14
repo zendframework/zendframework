@@ -721,15 +721,11 @@ class Zend_Session extends Zend_Session_Abstract
      */
     private static function _processValidators()
     {
-        if (count($_SESSION['__ZF']['VALID']) > 0) {
-            /**
-             * @see Zend_Loader
-             */
-            require_once 'Zend/Loader.php';
-        }
-
         foreach ($_SESSION['__ZF']['VALID'] as $validator_name => $valid_data) {
-            Zend_Loader::loadClass($validator_name);
+            if (!class_exists($validator_name)) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($validator_name);
+            }
             $validator = new $validator_name;
             if ($validator->validate() === false) {
                 /** @see Zend_Session_Exception */

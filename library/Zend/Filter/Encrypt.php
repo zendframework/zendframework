@@ -89,7 +89,10 @@ class Zend_Filter_Encrypt implements Zend_Filter_Interface
             $adapter = 'Zend_Filter_Encrypt_' . ucfirst($adapter);
         }
 
-        Zend_Loader::loadClass($adapter);
+        if (!class_exists($adapter)) {
+            Zend_Loader::loadClass($adapter);
+        }
+
         $this->_adapter = new $adapter($options);
         if (!$this->_adapter instanceof Zend_Filter_Encrypt_Interface) {
             require_once 'Zend/Filter/Exception.php';

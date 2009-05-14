@@ -1219,7 +1219,10 @@ abstract class Zend_Db_Table_Abstract
             'stored'   => true
         );
 
-        Zend_Loader::loadClass($this->_rowsetClass);
+        if (!class_exists($this->_rowsetClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($this->_rowsetClass);
+        }
         return new $this->_rowsetClass($data);
     }
 
@@ -1264,7 +1267,10 @@ abstract class Zend_Db_Table_Abstract
             'stored'  => true
         );
 
-        Zend_Loader::loadClass($this->_rowClass);
+        if (!class_exists($this->_rowClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($this->_rowClass);
+        }
         return new $this->_rowClass($data);
     }
 
@@ -1323,7 +1329,10 @@ abstract class Zend_Db_Table_Abstract
             'stored'   => false
         );
 
-        Zend_Loader::loadClass($this->_rowClass);
+        if (!class_exists($this->_rowClass)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($this->_rowClass);
+        }
         $row = new $this->_rowClass($config);
         $row->setFromArray($data);
         return $row;

@@ -21,11 +21,6 @@
  */
 
 /**
- * Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
  * A class to create a transform rule set based on XML URIs and then apply those rules
  * in the correct order to a given XML input
  *
@@ -98,7 +93,10 @@ class Zend_InfoCard_Xml_Security_Transform
     public function applyTransforms($strXmlDocument)
     {
         foreach($this->_transformList as $transform) {
-            Zend_Loader::loadClass($transform['class']);
+            if (!class_exists($transform['class'])) {
+                require_once 'Zend/Loader.php';
+                Zend_Loader::loadClass($transform['class']);
+            }
 
             $transformer = new $transform['class'];
 

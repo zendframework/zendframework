@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Loader.php';
-
 /**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
@@ -79,7 +77,10 @@ class Zend_Service_Amazon_Ec2
                 break;
         }
 
-        Zend_Loader::loadClass($class);
+        if (!class_exists($class)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($class);
+        }
         return new $class($key, $secret_key);
     }
 }

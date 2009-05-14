@@ -158,8 +158,10 @@ class Zend_View_Helper_Placeholder_Registry
      */
     public function setContainerClass($name)
     {
-        require_once 'Zend/Loader.php';
-        Zend_Loader::loadClass($name);
+        if (!class_exists($name)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($name);
+        }
 
         $reflection = new ReflectionClass($name);
         if (!$reflection->isSubclassOf(new ReflectionClass('Zend_View_Helper_Placeholder_Container_Abstract'))) {

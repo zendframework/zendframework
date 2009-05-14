@@ -22,12 +22,6 @@
 
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-
-/**
  * Class for connecting to SQL databases and performing common operations.
  *
  * @category   Zend
@@ -254,7 +248,10 @@ class Zend_Db
          * Load the adapter class.  This throws an exception
          * if the specified class cannot be loaded.
          */
-        Zend_Loader::loadClass($adapterName);
+        if (!class_exists($adapterName)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($adapterName);
+        }
 
         /*
          * Create an instance of the adapter class.

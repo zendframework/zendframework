@@ -373,11 +373,11 @@ class Zend_Feed
     public static function importArray(array $data, $format = 'atom')
     {
         $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
-        /**
-         * @see Zend_Loader
-         */
-        require_once 'Zend/Loader.php';
-        Zend_Loader::loadClass($obj);
+        if (!class_exists($obj)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($obj);
+        }
+
         /**
          * @see Zend_Feed_Builder
          */
@@ -395,12 +395,10 @@ class Zend_Feed
     public static function importBuilder(Zend_Feed_Builder_Interface $builder, $format = 'atom')
     {
         $obj = 'Zend_Feed_' . ucfirst(strtolower($format));
-        /**
-         * @see Zend_Loader
-         */
-        require_once 'Zend/Loader.php';
-        Zend_Loader::loadClass($obj);
-
+        if (!class_exists($obj)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($obj);
+        }
         return new $obj(null, null, $builder);
     }
 }

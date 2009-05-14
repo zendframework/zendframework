@@ -2,22 +2,22 @@
 <!-- EN-Revision: 15343 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.architecture">
-    <title>Architecture</title>
+    <title>Architektur</title>
 
     <sect2 id="zend.tool.framework.architecture.registry">
         <title>Registry</title>
 
         <para>
-            Because providers and manifests may come from anywhere in the
-            <code>include_path</code>, a registry is provided to simplify access
-            to the various pieces of the toolchain. This registry is injected
-            into registry-aware components, which may then pull dependencies
-            from them as necessary. Most dependencies registered with the
-            registry will be sub-component-specific repositories.
+            Weil Provider und Manifeste von überall im <code>include_path</code> kommen können,
+            wird eine Registry angeboten um den Zugriff auf die verschiedenen Teile der Toolchain
+            zu vereinfachen. Diese Registry wird in Komponenten eingefügt die registry-aware sind,
+            und damit Abhängigkeiten entfernen können, wenn das notwendig ist. Die meisten
+            Abhängigkeiten die in der Registry registriert werden sind Unter-Komponenten
+            spezifische Repositories.
         </para>
 
         <para>
-            The interface for the registry consists of the following definition:
+            Das Interface für die Registry besteht aus der folgenden Definition:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -47,15 +47,15 @@ interface Zend_Tool_Framework_Registry_Interface
 ]]></programlisting>
 
         <para>
-            The various objects the registry manages will be discussed in their
-            appropriate sections.
+            Die verschiedenen Objekte welche die Registry managt werden in deren betreffenden
+            Kapiteln besprochen.
         </para>
 
         <para>
-            Classes that should be registry-aware should implement
-            <classname>Zend_Tool_Framework_Registry_EnabledInterface</classname>. This
-            interface merely allows initialization of the registry in the target
-            class.
+            Klassen welche Registry-aware sind sollten
+            <classname>Zend_Tool_Framework_Registry_EnabledInterface</classname> implementieren.
+            Dieses Interface erlaubt hauptsächlich die Initialisierung der Registry in der
+            Zielklasse.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -69,23 +69,22 @@ interface Zend_Tool_Framework_Registry_EnabledInterface
     </sect2>
 
     <sect2 id="zend.tool.framework.architecture.providers">
-        <title>Providers</title>
+        <title>Provider</title>
 
         <para>
-            <classname>Zend_Tool_Framework_Provider</classname> represents the functional
-            or "capability" aspect of the framework. Fundamentally,
-            <classname>Zend_Tool_Framework_Provider</classname> will provide the
-            interfaces necessary to produce "providers", or bits of tooling
-            functionality that can be called and used inside the
-            <classname>Zend_Tool_Framework</classname> toolchain. The simplistic nature of
-            implementing this provider interface allows the developer a
-            "one-stop-shop" of adding functionality/capabilities to
+            <classname>Zend_Tool_Framework_Provider</classname> repräsentiert den funktionalen oder
+            "möglichen" Aspekt des Frameworks. Grundsätzlich bietet
+            <classname>Zend_Tool_Framework_Provider</classname> das Interface um "Provider" zu
+            erstellen, oder Teile für Werkzeug-Funktionalität die aufgerufen werden können und in
+            der <classname>Zend_Tool_Framework</classname> Toolchain verwendet werden. Die einfache
+            Natur der Implementation dieses Provider Interfaces erlaubt es dem Entwickler ein
+            "One-Stop-Shop" für das Hinzufügen von Funktionalitäten/Möglichkeiten zu
             <classname>Zend_Tool_Framework</classname>.
         </para>
 
         <para>
-            The provider interface is an empty interface and enforces no methods
-            (this is the Marker Interface pattern):
+            Das Provider Interface ist ein leeres Interface und erzwingt keine Methoden
+            (das ist das Marker Interface Pattern):
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -94,9 +93,8 @@ interface Zend_Tool_Framework_Provider_Interface
 ]]></programlisting>
 
         <para>
-            Or, if you wish, you can implement the base (or abstract) Provider
-            which will give you access to the
-            <classname>Zend_Tool_Framework_Registry</classname>:
+            Oder, wenn man das will, kann man den Basis (oder Abstrakten) Provider implementieren,
+            welcher einem Zugriff auf <classname>Zend_Tool_Framework_Registry</classname> bietet:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -114,19 +112,18 @@ abstract class Zend_Tool_Framework_Provider_Abstract
     </sect2>
 
     <sect2 id="zend.tool.framework.architecture.loaders">
-        <title>Loaders</title>
+        <title>Loader</title>
 
         <para>
-            The purpose of a Loader is to find Providers and Manifest files that
-            contain classes which implement either
-            Zend_Tool_Framework_Provider_Interface or
-            Zend_Tool_Framework_Manifest_Interface. Once these files are found
-            by a loader, providers are loaded into the Provider Repository and
-            manifest metadata is loaded into the Manifest Repository.
+            Der Zweck eines Loaders ist es Provider und Manifest Datei zu finden die Klassen
+            enthalten welche entweder Zend_Tool_Framework_Provider_Interface oder
+            Zend_Tool_Framework_Manifest_Interface implementieren. Sobald diese Dateien vom
+            Loader gefunden wurden, werden die Provider in das Provider Repository geladen und
+            die Manifest Metadaten in das Manifest Repository.
         </para>
 
         <para>
-            To implement a loader, one must extend the following abstract class:
+            Um einen Loader zu implementieren muß man die folgende abstrakte Klasse erweitern:
         </para>
 
         <programlisting role="php"><![CDATA[

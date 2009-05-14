@@ -273,7 +273,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
      * Read an object from the AMF stream and convert it into a PHP object
      *
      * @todo   Rather than using an array of traitsInfo create Zend_Amf_Value_TraitsInfo
-     * @return object
+     * @return object|array
      */
     public function readObject()
     {
@@ -389,7 +389,18 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
                     $returnObject->$key = $value;
                 }
             }
+			
+		  
         }
+		
+	   if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
+		if(isset($returnObject->externalizedData)) {
+			$returnObject = $returnObject->externalizedData;
+		} else {
+			$returnObject = get_object_vars($returnObject);
+		}
+	   }
+	   
         return $returnObject;
     }
 

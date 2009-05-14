@@ -261,7 +261,7 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
      * Commonly used for Value Objects on the server
      *
      * @todo   implement Typed Class mapping
-     * @return object
+     * @return object|array
      * @throws Zend_Amf_Exception if unable to load type
      */
     public function readTypedObject()
@@ -277,7 +277,9 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
                 $returnObject->$key = $value;
             }
         }
-
+	   if($returnObject instanceof Zend_Amf_Value_Messaging_ArrayCollection) {
+			$returnObject = get_object_vars($returnObject);
+	   }
         return $returnObject;
     }
 

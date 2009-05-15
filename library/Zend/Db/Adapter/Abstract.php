@@ -205,15 +205,15 @@ abstract class Zend_Db_Adapter_Abstract
                 }
             }
         }
-        
+
         if (!isset($config['charset'])) {
             $config['charset'] = null;
         }
-        
+
         $this->_config = array_merge($this->_config, $config);
         $this->_config['options'] = $options;
         $this->_config['driver_options'] = $driverOptions;
-        
+
 
         // obtain the case setting, if there is one
         if (array_key_exists(Zend_Db::CASE_FOLDING, $options)) {
@@ -1177,7 +1177,7 @@ abstract class Zend_Db_Adapter_Abstract
      * Prepare a statement and return a PDOStatement-like object.
      *
      * @param string|Zend_Db_Select $sql SQL query
-     * @return Zend_Db_Statment|PDOStatement
+     * @return Zend_Db_Statement|PDOStatement
      */
     abstract public function prepare($sql);
 

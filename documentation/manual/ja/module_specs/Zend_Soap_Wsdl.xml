@@ -6,10 +6,10 @@
 
     <note>
         <para>
-            WSDLドキュメントによる操作を行なうために、
+            WSDL文書による操作を行なうために、
             内部的にZend_Soap_Serverコンポーネントによって<classname>Zend_Soap_Wsdl</classname>が使われます。
             それでも、このクラスにより提供される機能を独自の必要性によって使うこともできます。
-            Zend_Soap_Wsdlパッケージは、パーサーとWSDLドキュメントのビルダーを含みます。
+            Zend_Soap_Wsdlパッケージは、パーサーとWSDL文書のビルダーを含みます。
         </para>
         <para>
             あなたに使う予定がなければ、この節を読み飛ばすことができます。
@@ -22,21 +22,23 @@
             <classname>Zend_Soap_Wsdl</classname>コンストラクタは３つのパラメータをとります:
             <orderedlist>
                 <listitem>
-                    <simpara><code>$name</code> - name of the Web Service being described.</simpara>
+                    <simpara><code>$name</code> - 記述されたウェブサービスの名前。</simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$uri</code> - URI where the WSDL will be available
-                        (could also be a reference to the file in the filesystem.)
+                        <code>$uri</code> - WSDLが利用できるURI
+                        (ファイルシステムのファイルへのリファレンスでも可)
                     </simpara>
                 </listitem>
                 <listitem>
                     <simpara>
-                        <code>$strategy</code> - optional flag used to identify the strategy for complex types (objects)
-                        detection. This was a boolean <code>$extractComplexTypes</code> before version 1.7 and can
-                        still be set as a boolean for backwards compatibility. By default the 1.6 detection behaviour
-                        is set. To read more on complex type detection strategies go to the section:
-                        <xref linkend="zend.soap.wsdl.types.add_complex" />.
+                        <code>$strategy</code> - 複雑な型（オブジェクト）を検出する方策を
+                        識別するために用いられるオプションのフラグです。
+                        これはバージョン1.7以前はboolean <code>$extractComplexTypes</code>でしたが、
+                        後方互換性のためにbooleanとしてまだ設定できます。
+                        デフォルトで、1.6の検出動作が設定されます。
+                        複雑な型の検出の方策について詳しくは、この節をご覧下さい:
+                        <xref linkend="zend.soap.wsdl.types.add_complex" />
                     </simpara>
                 </listitem>
             </orderedlist>
@@ -46,8 +48,8 @@
     <sect2 id="zend.soap.wsdl.addmessage">
         <title>addMessage()メソッド</title>
         <para>
-            <code>addMessage($name, $parts)</code> method adds new message description to the WSDL document
-            (/definitions/message element).
+            <code>addMessage($name, $parts)</code> メソッドは、新しいメッセージの説明をWSDL文書に加えます。
+            (/definitions/message 要素)
         </para>
         <para>
             Each message correspond to methods in terms of <classname>Zend_Soap_Server</classname> and
@@ -266,7 +268,7 @@
     </sect2>
 
     <sect2 id="zend.soap.wsdl.types">
-        <title>Type mapping.</title>
+        <title>型のマッピング</title>
         <para>
             Zend_Soap WSDL accessor implementation uses the following type mapping between PHP and SOAP types:
 
@@ -318,7 +320,7 @@
         </para>
 
         <sect3 id="zend.soap.wsdl.types.retrieve">
-            <title>Retrieving type information.</title>
+            <title>型情報の取得</title>
             <para>
                 <code>getType($type)</code> method may be used to get mapping for a specified PHP type:
 
@@ -340,7 +342,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
         </sect3>
 
         <sect3 id="zend.soap.wsdl.types.add_complex">
-            <title>Adding complex type information.</title>
+            <title>複雑な型の情報を追加する</title>
             <para>
                 <code>addComplexType($type)</code> method is used to add complex types (PHP classes) to a WSDL document.
             </para>
@@ -434,7 +436,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.retrieve">
-        <title>Get finalized WSDL document.</title>
+        <title>確定したWSDL文書を取得</title>
         <para>
             <code>toXML()</code>, <code>toDomDocument()</code> and <code>dump($filename = false)</code> methods may be used to get
             WSDL document as an XML, DOM structure or a file.
@@ -442,7 +444,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
     </sect2>
 
     <sect2 id="zend.soap.wsdl.parser">
-        <title>Parsing WSDL documents</title>
+        <title>WSDL文書をパース</title>
 
         <para>
             Zend_Soap_Wsdl also contains a parser for WSDL documents that has its main application in unit-testing and code-generation

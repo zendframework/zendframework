@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.viewrenderer">
+    <title>ViewRenderer</title>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.introduction">
+        <title>Introducción</title>
+
+        <para>
+            El ayudante <code>ViewRenderer</code> está diseñado para satisfacer
+            los siguientes objetivos:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Eliminar la necesidad de instanciar objetos de vista dentro
+                    de los controladores; los objetos de vista quedarán
+                    registrados automáticamente con el contralor.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Establece automáticamente el script de vista, el ayudante,
+                    y los paths de los filtros basados en el módulo actual.
+                    Asocia automáticamente el nombre del módulo actual como
+                    un prefijo de clase para las clases ayudante y filtro.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Crea un objeto de vista, disponible globalmente para todos
+                    los controladores y acciones despachados.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Permite al desarrollador establecer por defecto las
+                    opciones de renderizado para todos los controladores.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Agrega la capacidad para renderizar automáticamente los
+                    scripts de vista sin ninguna intervención.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Permite al desarrollador crear sus propias especificaciones
+                    para el path base de vistas y para el path de los scripts
+                    de vista.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <note>
+            <para>
+                Si realiza un <code>_forward()</code>, redirecciona, o
+                <code>render</code> manualmente, el autorendering no se llevará
+                a cabo, como está realizando cualquiera de estas acciones le
+                está diciendo al <code>ViewRenderer</code> que usted está
+                determinando su propia salida.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                El <code>ViewRenderer</code> está habilitado por defecto.
+                Puede desactivarlo vía parámetro del front controller
+                <code>noViewRenderer</code>
+                (<code>$front->setParam('noViewRenderer', true)</code>) o
+                eliminando al ayudante del stack de ayudantes
+                (<classname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</classname>).
+            </para>
+
+            <para>
+                Si desea modificar los settings del <code>ViewRenderer</code>
+                antes de despachar el front controller, puede hacerlo en una
+                de las dos maneras:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Instanciar y registrar su propio objeto
+                        <code>ViewRenderer</code> y pasarlo al ayudante:
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]></programlisting>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Inicializar y/o recuperar un objeto
+                        <code>ViewRenderer</code> por demanda via el ayudante:
+                    </para>
+
+                    <programlisting role="php"><![CDATA[
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$viewRenderer->setView($view)
+             ->setViewSuffix('php');
+]]></programlisting>
+                </listitem>
+            </itemizedlist>
+        </note>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.api">
+        <title>API</title>
+
+        <para>
+            En su uso más básico, simplemente instancie a
+            <code>ViewRenderer</code> y páselo al ayudante de acciones.
+            La forma más fácil para instanciar y registrar de una sola vez es
+            utilizando el método del ayudante <code>getStaticHelper()</code>:
+          </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+]]></programlisting>
+
+        <para>
+            La primera vez que se instancia un controlador de acción, se
+            disparará <code>ViewRenderer</code> para instanciar al objeto
+            vista. Cada vez que el controlador es instanciado, se llama al
+            método <code>init()</code> de <code>ViewRenderer</code>, que lo
+            llevará a establecer la propiedad del controlador de acción, y
+            llama a <code>addScriptPath()</code> con un path relativo al
+            módulo actual; este será llamado con un prefijo de clase nombrada
+            después del módulo actual, haciendo efectivamente el namespacing de
+            todas las clases de ayudantes y filtros que define para el módulo.
+        </para>
+
+        <para>
+            Cad vez que llama a <code>postDispatch()</code>, este llamará a
+            <code>render()</code> para la acción actual.
+        </para>
+
+        <para>
+            Como ejemplo, considere la siguiente clase:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Una clase controlador, módulo foo:
+class Foo_BarController extends Zend_Controller_Action
+{
+    // Render bar/index.phtml por defecto; no se requiere acción
+    public function indexAction()
+    {
+    }
+
+    // Render bar/populate.phtml con la variable 'foo' establecida a 'bar'.
+    // Dado que el objeto vista está definido en preDispatch(),
+    // ya está disponible.
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+}
+
+...
+
+// en uno de sus scripts de vista:
+$this->foo(); // llama a Foo_View_Helper_Foo::foo()
+]]></programlisting>
+
+        <para>
+            El <code>ViewRenderer</code> también define una serie de accededores
+            para permitir establecer y recuperar opciones de vista:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setView($view)</code> le permite establecer el objeto
+                    vista para <code>ViewRenderer</code>. Se vuelve como una
+                    propiedad de clase pública <code>$view</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverRender($flag = true)</code> puede ser
+                    utilizado para activar o desactivar globalmente el
+                    autorendering, es decir, para todos los controladores.
+                    Si es verdadero, <code>postDispatch()</code> no llamará
+                    automáticamente a <code>render()</code> en el controlador
+                    actual. <code>getNeverRender()</code> recupera el valor
+                    actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoRender($flag = true)</code> puede ser utilizado
+                    para activar o desactivar el autorendering.
+                    Si es verdadero, <code>postDispatch()</code> no llamará
+                    automáticamente a <code>render()</code> en el controlador
+                    actual. Este ajuste se reseteará cada vez que se llame a
+                    <code>preDispatch()</code> (es decir, usted necesita
+                    establecer este flag para cada controlador para el cual
+                    no quiera que el autorenderering se ejecute).
+                    <code>getNoRender()</code> recupera el valor actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNoController($flag = true)</code> pude ser usado
+                    para decirle a <code>render()</code> que no busque el
+                    script de acción en un subdirectorio nombrado después de
+                    que el controlador (que es el comportamiento por defecto)
+                    <code>getNoController()</code> recupere el valor actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setNeverController($flag = true)</code> es análogo
+                    a <code>setNoController()</code>, pero trabaja a un nivel
+                    global -- es decir, que no se reseteará por cada acción
+                    ejecutada. <code>getNeverController()</code> recupera el
+                    valor actual.
+                   </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setScriptAction($name)</code> puede ser utilizado para
+                    especificar el script de acción a renderizar.
+                    <code>$name</code> debe ser el nombre del script menos el
+                    sufijo del archivo (y sin el subdirectorio del controlador,
+                    a menos que <code>noController</code> se haya activado).
+                    Si no se ha especificado, busca un script de vista nombrado
+                    después de la acción en el objeto solicitud.
+                    <code>getScriptAction()</code> recupera el valor actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setResponseSegment($name)</code> puede ser utilizado
+                    para especificar qué segmento del objeto respuesta nombrado
+                    renderizar. Si no se especifica, se hace en el segmento por
+                    defecto. <code>getResponseSegment()</code> recupera el
+                    valor actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>initView($path, $prefix, $options)</code> puede ser
+                    llamado para especificar el path base de las vistas,
+                    prefijos de clase para scripts de ayudantes y filtros, y
+                    las opciones de <code>ViewRenderer</code>.
+                    Puede pasar cualquiera de los siguientes flags:
+                    <code>neverRender</code>, <code>noRender</code>,
+                    <code>noController</code>, <code>scriptAction</code>, y
+                    <code>responseSegment</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setRender($action = null, $name = null, $noController
+                        = false)</code> le permite establecer cualquier
+                    <code>scriptAction</code>, <code>responseSegment</code>, y
+                    <code>noController</code> en un pase. <code>direct()</code>
+                    es un alias a este método, permitiéndole llamar a este
+                    método fácilmente dede su controlador:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Render 'foo' en lugar del script de acción actual
+$this->_helper->viewRenderer('foo');
+
+// render form.phtml al segmento de respuesta de 'html', sin usar un
+// subdirectorio de scripts de controladores de acción:
+$this->_helper->viewRenderer('form', 'html', true);
+]]></programlisting>
+
+                <note><para>
+                        <code>setRender()</code> y <code>direct()</code>
+                        realmente no renderiza el script de vista, sino que
+                        establece indicaciones que <code>postDispatch()</code>
+                        y <code>render()</code> utlizarán para renderizar la
+                        vista.
+                 </para></note>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            El constructor le permite opcionalmente pasar el objeto vista y las
+            opciones de <code>ViewRenderer</code>; acepta los mismos flags que
+            <code>initView()</code>:
+         </para>
+
+        <programlisting role="php"><![CDATA[
+$view    = new Zend_View(array('encoding' => 'UTF-8'));
+$options = array('noController' => true, 'neverRender' => true);
+$viewRenderer =
+    new Zend_Controller_Action_Helper_ViewRenderer($view, $options);
+]]></programlisting>
+
+        <para>
+            Hay varios métodos adicionales para personalizar especificaciones
+            del path, usados para determinar el path base del script de vista
+            para añadir al objeto vista, y el path del script de vista a usar
+            cuando esté autodeterminando el script de vista a renderizar.
+            Cada uno de estos métodos toma uno o más de los siguientes
+            localizadores:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>:moduleDir</code> hace referencia a la actual
+                    directorio base del módulo(por convención, el directorio
+                    padre del directorio del módulo controlador).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:module</code> hace referencia al nombre del módulo
+                    actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:controller</code> hace referencia al nombre del
+                    controlador actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:action</code> hace referencia al nombre de la
+                    acción actual.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>:suffix</code> hace referencia al sufijo del script
+                    de vista (que puede ser definido via
+                    <code>setViewSuffix()</code>).
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Los métodos para controlar las especificaciones del path son:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setViewBasePathSpec($spec)</code> le permite cambiar
+                    la especificación del path utilizada para determinar el
+                    path base para añadir al objeto vista.
+                    La especificación por defecto es <code>:moduleDir/views</code>.
+                    Puede recuperar la especificación actual en cualquier
+                    momento usando <code>getViewBasePathSpec()</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathSpec($spec)</code> le permite
+                    cambiar el path de la especificación utilizada para
+                    determinar el path a un script de vista individual
+                    (menos el path de la base del script de vista).
+                    La especificación por defecto es
+                    <code>:controller/:action.:suffix</code>.
+                    Puede recuperar la especificación actual en cualquier
+                    momento usando
+                    <code>getViewScriptPathSpec()</code>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>setViewScriptPathNoControllerSpec($spec)</code>
+                    le permite cambiar el path de la especificación utilizado
+                    para determinar el path a un script de vista individual
+                    cuando <code>noController</code> está activado
+                    (menos el path base del script de vista). La especificación
+                    por defecto es <code>:action.:suffix</code>. Puede
+                    recuperar la especificación actual en cualquier momento
+                    usando <code>getViewScriptPathNoControllerSpec()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Para un control más refinado sobre el path de especificaciones,
+            puede usar
+            <link linkend="zend.filter.inflector">Zend_Filter_Inflector</link>.
+            Bajo el capó, <code>ViewRenderer</code> ya usa un inflector para
+            realizar mapeos del path. Para interactuar con el inflector
+            -- ya sea para establecerlo para uso propio, o para modificar el
+            inflector por defecto, se pueden utilizar los siguientes
+            métodos:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>getInflector()</code> recupera el inflector.
+                    Si no existe todavía en <code>ViewRenderer</code>, se crea
+                    uno utilizando las reglas predeterminadas.
+                </para>
+
+                <para>
+                    Por defecto, utiliza reglas de referencias estáticas para el
+                    sufijo y directorio de módulos, así como una meta estática;
+                    esto permite que diversas propiedades de
+                    <code>ViewRenderer</code> tengan la capacidad de
+                    modificar dinámicamente al inflector.
+                </para>
+            </listitem>
+
+            <listitem><para>
+                    <code>setInflector($inflector, $reference)</code> permite
+                    establecer un inflector personalizado para usar con
+                    <code>ViewRenderer</code>. Si <code>$reference</code> es
+                    verdadero, establecerá el sufijo y directorio de módulos
+                    como referencias estáticas a las propiedades de
+                    <code>ViewRenderer</code>, así como al objetivo.
+            </para></listitem>
+        </itemizedlist>
+
+        <note>
+            <title>Convenciones por Defecto para Lookup</title>
+
+            <para>
+                El <code>ViewRenderer</code> hace algún tipo de normalización
+                del path para facilitar la búsqueda de los scripts de vista.
+                Las reglas predeterminadas son los siguientes:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <code>:module</code>: MixedCase y camelCasedWords
+                        están separados por guiones, y el string completo se
+                        convierte a minúsculas.
+                        Por ejemplo: "FooBarBaz" pasa a ser "foo-bar-baz".
+                    </para>
+
+                    <para>
+                        Internamente, el inflector utiliza los filtros
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>
+                        y <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:controller</code>: MixedCase y camelCasedWords
+                        están separados por guiones; los subrayados se
+                        convierten en separadores de directorio , y el string
+                        emitido a minúsculas.
+                        Ejemplos: "FooBar" pasa a ser "foo-bar";
+                                  "FooBar_Admin" pasa a ser "foo-bar/admin".
+                    </para>
+
+                    <para>
+                        Internamente, el inflector utiliza los filtros
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_Word_UnderscoreToSeparator</classname>,
+                        y <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>:action</code>: MixedCase y camelCasedWords
+                        están separados por guiones; los caracteres
+                        no alfanuméricos son traducidos a guiones,
+                        y el string emitido a minúsculas.
+                        Ejemplos: "fooBar" pasa a ser "foo-bar";
+                        "foo-barBaz" pasa a ser "foo-bar-baz".
+                    </para>
+
+                    <para>
+                        Internamente, el inflector utiliza los filtros
+                        <classname>Zend_Filter_Word_CamelCaseToDash</classname>,
+                        <classname>Zend_Filter_PregReplace</classname>, y
+                        <classname>Zend_Filter_StringToLower</classname>.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
+
+        <para>
+            Los últimos temas en la API de <code>ViewRenderer</code> son los
+            métodos para determinar realmente los paths de los scripts de vista
+            y el rendering de las vistas.
+            Estos incluyen:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>renderScript($script, $name)</code> permite renderizar
+                    un script con una ruta que especifique, opcionalmente a
+                    un segmento nombrado del path. Cuando se utiliza este
+                    método, <code>ViewRenderer</code> no autodetermina el
+                    nombre del script, en cambio pasa directamente a
+                    <code>$script</code> el argumento directamente al método
+                    del objeto vista <code>render()</code>.
+                </para>
+
+                <note><para>
+                    Una vez que la vista ha sido renderizada al objeto respuesta,
+                    se establece <code>noRender</code> para evitar
+                    accidentalmente renderizar el mismo script de vista varias
+                    veces.
+                </para></note>
+
+                <note>
+                    <para>
+                        Por defecto,
+                        <classname>Zend_Controller_Action::renderScript()</classname>
+                        le delega a <code>ViewRenderer</code> el método
+                        <code>renderScript()</code>.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>getViewScript($action, $vars)</code> crea el path a
+                    un script de vista basado en la acción pasada y/o cualquier
+                    variables pasadas en <code>$vars</code>.
+                    Las claves para este array pueden incluir cualquiera de las
+                    claves de especificación de paths ('moduleDir',
+                    'module', 'controller', 'action', y 'suffix').
+                    Se utilizarán cualquiera de la variables pasadas;
+                    de lo contrario, se utilizarán valores basados en la
+                    petición actual.
+                </para>
+
+                <para>
+                    <code>getViewScript()</code> utilizará tanto a
+                    <code>viewScriptPathSpec</code> o
+                    <code>viewScriptPathNoControllerSpec</code> sobre la base
+                    establecida del flag <code>noController</code>.
+                </para>
+
+                <para>
+                    Los delimitadores de palabras encontrados en un módulo,
+                    controlador o nombres de acción serán reemplazados por
+                    guiones ('-'). Así pues, si tiene el nombre de controlador
+                    'foo.bar' y la acción 'baz:bat', utilizando la
+                    especificación por defecto del path se traducirá en un
+                    path al script de vista 'foo-bar/baz-bat.phtml'.
+                </para>
+
+                <note>
+                    <para>
+                        Por defecto,
+                        <classname>Zend_Controller_Action::getViewScript()</classname>
+                        delega el método <code>getViewScript()</code> de
+                        <code>ViewRenderer</code>.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>render($action, $name, $noController)</code>
+                    comprueba primero para ver si bien <code>$name</code> o
+                    <code>$noController</code> se han pasado, y si es así,
+                    establece los flags apropiados (responseSegment y
+                    noController, respectivamente) en ViewRenderer.
+                    A continuación, pasa el argumento <code>$action</code>,
+                    si hay alguno, a <code>getViewScript()</code>.
+                    Por último, pasa el path calculado del script de vista a
+                    <code>renderScript()</code>.
+                </para>
+
+                <note>
+                    <para>
+                        Hay que ser conscientes de los efectos secundarios al
+                        usar render(): los valores que usted pasa para el nombre
+                        del segmento respuesta y para el flag noController
+                        persistirán en el objeto. Además, noRender será
+                        establecido después de completar la renderización.
+                    </para>
+                </note>
+
+                <note>
+                    <para>
+                        Por defecto,
+                        <classname>Zend_Controller_Action::render()</classname>
+                        delega a <code>ViewRenderer</code> el método
+                        <code>render()</code>.
+                    </para>
+                </note>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>renderBySpec($action, $vars, $name)</code>
+                    permite pasar variables de especificación del path a fin de
+                    determinar el path para la creación del script de vista.
+                    Este pasa <code>$action</code> y <code>$vars</code> a
+                    <code>getScriptPath()</code>, y luego pasa el path del
+                    script resultante y <code>$name</code> a
+                    <code>renderScript()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.basicusage">
+        <title>Ejemplos Uso Básico</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-1">
+            <title>Uso Básico</title>
+
+            <para>
+                En lo más básico, usted simplemente inicializa y registra el
+                ayudante <code>ViewRenderer</code> con el ayudante broker
+                en su bootstrap, y luego establecer las variables en sus
+                métodos de acción.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// En su bootstrap:
+Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+
+...
+
+// 'foo' módulo, 'bar' controlador:
+class Foo_BarController extends Zend_Controller_Action
+{
+    // Render bar/index.phtml por defecto; no se requieren acciones
+    public function indexAction()
+    {
+    }
+
+    // Render bar/populate.phtml la variable 'foo' establecida a 'bar'.
+    // Dado que el objeto fue definido en preDispatch(), está disponible.
+    public function populateAction()
+    {
+        $this->view->foo = 'bar';
+    }
+
+    // No hace rendering, ya que salta a otra acción; la nueva acción
+    // realizará cualquier rendering
+    public function bazAction()
+    {
+        $this->_forward('index');
+    }
+
+    // No hace rendering, ya que redirecciona a otra ubicación
+    public function batAction()
+    {
+        $this->_redirect('/index');
+    }
+}
+]]></programlisting>
+        </example>
+
+        <note>
+            <title>Convenciones de Nombres: Delimitadores de Palabras en Controladores y Nombres de Acción</title>
+            <para>
+                Si su controlador o nombre de acción está compuesto por varias
+                palabras, el despachador exige que estos sean separados de la URL
+                por un path específico y caracteres delimitadores de palabras.
+                El <code>ViewRenderer</code> reemplaza cualquier delimitador
+                de paths encontrado en el nombre del controlador con el
+                delimitador actual ('/'), y cualquier delimitador de palabra
+                encontrado con un guión ('-') cuando crea paths.
+                Así, una llamada a la acción
+                <code>/foo.bar/baz.bat</code> despachará a
+                <code>FooBarController::bazBatAction()</code> en
+                FooBarController.php, el cual renderizaría a
+                <code>foo-bar/baz-bat.phtml</code>; una llamada a la acción
+                <code>/bar_baz/baz-bat</code> despachará a
+                <code>Bar_BazController::bazBatAction()</code> en
+                <code>Bar/BazController.php</code> (note la separación del path)
+                y renderiza <code>bar/baz/baz-bat.phtml</code>.
+            </para>
+
+            <para>
+                Tener en cuenta que el en el segundo ejemplo, el módulo es
+                todavía el módulo por defecto, pero que, debido a la
+                existencia de un separador de paths, el controlador recibe el
+                nombre <code>Bar_BazController</code>, en
+                code>Bar/BazController.php</code>.
+                El ViewRenderer imita la jerarquía del directorio del
+                controlador.
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-2">
+            <title>Deshabilitando Autorender</title>
+
+            <para>
+                Para algunas acciones o controladores, usted puede querer apagar
+                el autorendering -- por ejemplo, si quiere emitir un tipo
+                diferente de salida (XML, JSON, etc), o si simplemente no desea
+                emitir nada.
+                Tiene dos opciones: apagar todos los casos de autorendering
+                (<code>setNeverRender()</code>), o simplemente desactivarlo
+                para la acción actual (<code>setNoRender()</code>).
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Baz clase del controlador, bar módulo:
+class Bar_BazController extends Zend_Controller_Action
+{
+    public function fooAction()
+    {
+        // No auto renderize esta acción
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+
+// Bat clase del controlador, bar módulo:
+class Bar_BatController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // Nunca auto renderizar las acciones de este controlador
+        $this->_helper->viewRenderer->setNoRender();
+    }
+}
+]]></programlisting>
+        </example>
+
+        <note>
+            <para>
+                En muchos casos, no tiene sentido desactivar el autorendering
+                globalmente (ala <code>setNeverRender()</code>), y la única
+                cosa que puede ganar de <code>ViewRenderer</code> es el
+                autosetup del objeto de vista.
+            </para>
+        </note>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-3">
+            <title>Eligiendo Un Script de Vista Diferente</title>
+
+            <para>
+                Algunas situaciones requieren renderizar un script diferente
+                al llamado después de la acción. Por ejemplo, si tiene un
+                controlador que tiene tanto las acciones de agregar y de editar,
+                ambos pueden mostrar la misma vista 'form', aunque con diferentes
+                valores establecidos. Puede cambiar fácilmente el nombre
+                del script usado tanto con
+                <code>setScriptAction()</code>, <code>setRender()</code>, o
+                llamando al ayudante como un método, que invocará a
+                <code>setRender()</code>.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bar clase controlador, foo módulo:
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function addAction()
+    {
+        // Render 'bar/form.phtml' en lugar de 'bar/add.phtml'
+        $this->_helper->viewRenderer('form');
+    }
+
+    public function editAction()
+    {
+        // Render 'bar/form.phtml' en lugar de 'bar/edit.phtml'
+        $this->_helper->viewRenderer->setScriptAction('form');
+    }
+
+    public function processAction()
+    {
+        // hacer alguna validación...
+        if (!$valid) {
+            // Render 'bar/form.phtml' en lugar de 'bar/process.phtml'
+            $this->_helper->viewRenderer->setRender('form');
+            return;
+        }
+
+        // de otra manera, continuar procesando...
+    }
+
+}
+]]></programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.basicusage.example-4">
+            <title>Modificando la Vista Registrada</title>
+
+            <para>
+                ¿Y si se necesita modificar el objeto vista --
+                por ejemplo, cambiar el ayudante de paths, o la codificación?.
+                Puede hacerlo ya sea por modificar el objeto vista establecido
+                en su controlador, o arrebatándole el objeto vista a
+                <code>ViewRenderer</code>; ambas son referencias al mismo objeto.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+// Bar clase controlador, foo módulo:
+class Foo_BarController extends Zend_Controller_Action
+{
+    public function preDispatch()
+    {
+        // cambiar la codificavión de la vista
+        $this->view->setEncoding('UTF-8');
+    }
+
+    public function bazAction()
+    {
+        // Obtener el objeto vista y establecer
+        // el callback de escape a 'htmlspecialchars'
+        $view = $this->_helper->viewRenderer->view;
+        $view->setEscape('htmlspecialchars');
+    }
+}
+]]></programlisting>
+        </example>
+    </sect4>
+
+    <sect4 id="zend.controller.actionhelper.viewrenderer.advancedusage">
+        <title>Ejemplos de Uso Avanzado</title>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-1">
+            <title>Cambiando las Especificaciones del Path</title>
+
+            <para>
+                En algunas circunstancias, puede decidir que las
+                especificaciones del path por defecto no se adaptan a su sitio.
+                Por ejemplo, usted puede querer tener un árbol único de
+                plantillas al que puede dar acceso a sus diseñadores
+                (esto es muy típico cuando se utiliza
+                <ulink url="http://smarty.php.net/">Smarty</ulink>, por
+                ejemplo). En ese caso, puede querer embeber los datos de la
+                especificación del path base de la vista, y crear una
+                especificación alternativa para el script de vista del path
+                ellos mismos.
+            </para>
+
+            <para>
+                Para los fines de este ejemplo, supongamos que el path base
+                de las vistas debería ser '/opt/vendor/templates', y que desea
+                para que los scripts de vista sean referenciados por
+                ':moduleDir/:controller/:action.:suffix'; si el flag
+                noController ha sido establecido, quiere renderizar
+                fuera del nivel superior en lugar de en un subdirectorio
+                (':action.:suffix'). Por último, que quiere utilizar 'tpl'
+                como el sufijo del nombre de archivo del script de vista.
+            </para>
+
+            <programlisting role="php"><![CDATA[
+/**
+ * En su bootstrap:
+ */
+
+// Implementación de una vista diferente
+$view = new ZF_Smarty();
+
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
+$viewRenderer->setViewBasePathSpec('/opt/vendor/templates')
+             ->setViewScriptPathSpec(':module/:controller/:action.:suffix')
+             ->setViewScriptPathNoControllerSpec(':action.:suffix')
+             ->setViewSuffix('tpl');
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]></programlisting>
+        </example>
+
+        <example id="zend.controller.actionhelper.viewrenderer.advancedusage.example-2">
+            <title>Rendering Múltiples Scripts de Vista desde una Sola Acción</title>
+
+            <para>
+                A veces, puede que necesite renderizar múltiples scripts de
+                vista desde una sola acción. Esto es muy sencillo --
+                simplemente hacer múltiples llamadas a <code>render()</code>:
+            </para>
+
+            <programlisting role="php"><![CDATA[
+class SearchController extends Zend_Controller_Action
+{
+    public function resultsAction()
+    {
+        // Suponga que $this->model es el modelo actual
+        $this->view->results =
+            $this->model->find($this->_getParam('query', '');
+
+        // render() por defecto lo delega al ViewRenderer
+        // Render primero al from de búsqueda y luego los resultados
+        $this->render('form');
+        $this->render('results');
+    }
+
+    public function formAction()
+    {
+        // No hacer nada; ViewRenderer hace autorender del script de vista
+    }
+}
+]]></programlisting>
+        </example>
+    </sect4>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

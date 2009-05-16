@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.controller.migration">
+    <title>Migración de versiones anteriores</title>
+
+    <para>
+    	La API de los componentes de MVC  ha cambiado en el tiempo. Si usted ha empezado a
+    	usar una versión anterior de Zend Framework, sigua la guía de abajo para
+    	migrar sus acripts para usar la arquitectura nueva.
+    </para>
+
+    <sect2 id="zend.controller.migration.fromonesixtooneseven">
+        <title>Migración de 1.6.x a 1.7.0 o nuevas versiones</title>
+
+        <sect3 id="zend.controller.migration.fromonesixtooneseven.dispatcher">
+            <title>El despachador de la interfaz cambios</title>
+
+            <para>
+				Los usuarios llamaron nuestra atención el hecho de que
+                <classname> Zend_Controller_Action_Helper_ViewRenderer </classname> estaba
+                utilizando un método despachador de la clase abstracta que no está en
+                el despachador de la interfaz. Hemos añadido el siguiente método para
+                garantizar que los despachadores de costumbre seguirán trabajando con las
+                implementaciones enviadas:
+            </para>
+
+            <itemizedlist>
+            	<listitem><para>
+                    <code>formatModuleName()</code>: debe utilizarse para tomar un nuevo
+                nombre de controlador, tal como uno que deberia estar basado dentro de una petición
+                objeto, y cambiarlo a un nombre de clase apropiado que la clase extendida
+                <classname>Zend_Controller_Action</classname> deberia usar
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromoneohtoonesix">
+        <title>Migrando desde 1.5.x to 1.6.0 o versiones posteriores</title>
+
+        <sect3 id="zend.controller.migration.fromoneohtoonesix.dispatcher">
+            <title>El Despachador de la Interfaz de cambios</title>
+
+            <para>            		
+				Los usuarios atrajeron nuestra atención con el hecho de que
+                 <classname> Zend_Controller_Front </classname> y
+                 <classname> Zend_Controller_Router_Route_Module </classname> fueron
+                 utilizando métodos del despachador que no estaban en la interfaz del
+                 despachador. Ahora hemos adicionado los siguientes tres métodos para
+                 asegurar que los despachadores diseñados sigan trabajando con las
+                 implementaciones enviadas:
+            </para>
+
+            <itemizedlist>
+                <listitem><para>
+                    <code>getDefaultModule()</code>: debe retornar el nombre del
+                    módulo por defecto.
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDefaultControllerName()</code>: debe retornar el
+                    nombre del controlador por defecto.
+                </para></listitem>
+
+                <listitem><para>
+                    <code>getDefaultAction()</code>: debe retornar el
+                    nombre de la acción por defecto.
+                </para></listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromoneohtoonefive">
+        <title>Migranado desde 1.0.x a 1.5.0 o versiones posteriores</title>
+
+        <para>        		
+			Aunque la mayoría de la funcionalidad básica sigue siendo la misma, y todas las
+			funcionalidades documentadas siguen siendo la mismas, hay una en particular
+            "característica" <emphasis>undocumented</emphasis> que ha cambiado.
+        </para>
+
+        <para>        		
+			Al escribir las URLs, la manera de escribir la documentada acción camelCased
+            es usar un separador de palabra, que son "." o '-' por defecto,
+            pero pueden ser configurados en el despachador. El despachador internamente
+            convierte en minúsculas el nombre de la acción, y usa estos separadores de palabra para
+            volver a montar el método de la acción camelCasing. Sin embargo, debido a que las
+            funciones de PHP no son sensibles a mayúsculas y minúsculas, usted <emphasis>podría</emphasis>
+            escribir las URLs usando camelCasing, y el despachador los devolvería
+            a la misma ubicación. Por ejemplo, 'camel-cased' se convertirá en
+            'camelCasedAction' por el despachador, mientras que 'camelCased' se
+            convertiría en 'camelCasedAction'; sin embargo, debido a la insensibilidad de
+            PHP, ambos ejecutarán el mismo método.
+        </para>
+
+        <para>        	
+			Esto causa problemas con la vista ViewRenderer cuando devuelve scripts de la
+			vista. El canónico, la documentada forma es que todos los separadores de palabra
+            se conviertan en guiones, y las palabras en minúsculas. Esto crea
+            un lazo semántico entre las acciones y los scripts de las vistas, y la
+            normalización asegura que los scripts puedan ser encontrados. Sin embargo, si la
+            acción "camelCased' es llamada y de hecho retornada, el separador de la palabra
+            no está mas presente, y los ViewRenderer intenta devolver
+            a una ubicación diferente -- 'camelcased.phtml' en vez de
+            'camel-cased.phtml'.
+        </para>
+
+        <para>
+        	Algunos desarrolladores se basarón en esta "característica", que nunca fue la intención.
+            Varios cambios en el árbol 1.5.0 , sin embargo, hizo que la vista
+            ViewRenderer ya no resuelva estas direcciones, la semántica esta ahora
+            forzada. La primera de ellas, el despachador ahora impone
+            la sensibilidad en los nombres de la acción. Lo que esto significa es que la referencia a
+            sus acciones en la url utilisando camelCasing ya no para devolver
+            al mismo método que utilizan los separadores de palabras (es decir, 'camel-casing').
+            Esto nos lleva a la vista ViewRenderer ahora sólo en honor a las acciones
+            palabra-separador cuando se devuleven los scripts vista.
+        </para>
+
+        <para>
+            Si usted nota que estaba dependiendo en esta "caracteristica", usted tiene muchas
+            opciones:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>
+            		Mejor opción: cambiar el nombre de sus scripts de la vistas. Pros:
+                    compatibilidad hacia adelante. Contras: si usted tiene muchos scripts vista que
+                    se basan en la primera vista, una conducta no deseada, tendrá
+                    mucho por hacer.
+            </para></listitem>
+
+            <listitem>
+                <para>                	
+					Segunda mejor opción: La vista ViewRenderer delega ahora resoluciones de scripts
+					de vistas a <classname> Zend_Filter_Inflector </classname>; se puede
+                    modificar las normas del inflector para que ya no separe
+                    las palabras de una acción con un guión:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$inflector = $viewRenderer->getInflector();
+$inflector->setFilterRule(':action', array(
+    new Zend_Filter_PregReplace(
+        '#[^a-z0-9' . preg_quote(DIRECTORY_SEPARATOR, '#') . ']+#i',
+        ''
+    ),
+    'StringToLower'
+));
+]]></programlisting>
+
+                <para>                		
+					El anterior código modificará el inflector para que ya no
+                    separe las palabras con guión, usted puede querer eliminar
+                    el filtro 'StringToLower' si usted desea<emphasis>hacer</emphasis>
+                    el nombre de script de vista actual camelCased también.
+                </para>
+
+                <para>
+					Si cambiar el nombre del script vista sería demasiado tedioso o tiempo
+                    consumido, esta es su mejor opción hasta que pueda encontrar el
+                    tiempo para hacerlo.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                	La opción menos deseable: Usted puede forzar al despachador para
+                	despachar nombres de acción camelCased con un nuevo controlador
+                    bandera, 'useCaseSensitiveActions':
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$front->setParam('useCaseSensitiveActions', true);
+]]></programlisting>
+
+                <para>
+					Esto le permitirá utilizar camelCasing sobre la url y siguir
+                    tieniendo resuelta la misma acción como cuando se utilizaba los separadores
+                    de palabra. Sin embargo, esto significa que los problemas originales
+                    se iran terminando, lo más probable es utilizar la
+                    segunda opción anterior, además de esto para que las cosas funcionen
+                    confiablemente en todo.
+                </para>
+
+                <para>
+                	Note, también, el uso de esta bandera aumentará un aviso de que
+                	este uso es obsoleto.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromzeroninethree">
+        <title>Migrando desde 0.9.3 a 1.0.0RC1 o versiones posteriores</title>
+
+        <para>
+        	Los cambios principales introducidos en 1.0.0RC1 son la introducción de
+        	y la activación por defecto del plugin
+			<link
+                linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler</link>
+        	y de acción ayuda <link
+                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
+            Por favor, lea la documentación de cada uno completamente para ver
+            cómo funcionan y qué efecto pueden tener en sus
+            aplicaciones.
+        </para>
+
+        <para>
+        	El plugin <code>ErrorHandler</code> corre durante
+            <code>postDispatch ()</code> para el control de excepciones, y enviarlo
+            a un especifico controlador de errores. Usted debe incluir tal
+            controlador en su aplicación. Usted puede desactivarlo determinando el
+            parámetro del controlador <code> noErrorHandler </code>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$front->setParam('noErrorHandler', true);
+]]></programlisting>
+
+        <para>
+			La acción de ayuda <code>ViewRenderer</code> automatiza inyección de vistas
+            en controladores de acción así como los autogeneradores de scripts de vistas
+            basados en la acción actual. El principal problema que se puede encontrar es
+            si se tiene acciones que no generan scripts de vista y tampoco llevan
+            o redireccionan, como <code>ViewRenderer</code> intentará generar
+            un scrip de vista basado en el nombre de la acción.
+        </para>
+
+        <para>
+            There are several strategies you can take to update your code. In
+            the short term, you can globally disable the
+            <code>ViewRenderer</code> in your front controller bootstrap prior
+            to dispatching:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+// Assuming $front is an instance of Zend_Controller_Front
+$front->setParam('noViewRenderer', true);
+]]></programlisting>
+
+        <para>
+            However, this is not a good long term strategy, as it means most
+            likely you'll be writing more code.
+        </para>
+
+        <para>
+            When you're ready to start using the <code>ViewRenderer</code>
+            functionality, there are several things to look for in your
+            controller code. First, look at your action methods (the methods
+            ending in 'Action'), and determine what each is doing. If none of
+            the following is happening, you'll need to make changes:
+        </para>
+
+        <itemizedlist>
+            <listitem><para>Calls to <code>$this-&gt;render()</code></para></listitem>
+            <listitem><para>Calls to <code>$this-&gt;_forward()</code></para></listitem>
+            <listitem><para>Calls to <code>$this-&gt;_redirect()</code></para></listitem>
+            <listitem><para>Calls to the <code>Redirector</code> action helper</para></listitem>
+        </itemizedlist>
+
+        <para>
+            The easiest change is to disable auto-rendering for that method:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+$this->_helper->viewRenderer->setNoRender();
+]]></programlisting>
+
+        <para>
+            If you find that none of your action methods are rendering,
+            forwarding, or redirecting, you will likely want to put the above
+            line in your <code>preDispatch()</code> or <code>init()</code>
+            methods:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+public function preDispatch()
+{
+    // disable view script autorendering
+    $this->_helper->viewRenderer->setNoRender()
+    // .. do other things...
+}
+]]></programlisting>
+
+        <para>
+            If you are calling <code>render()</code>, and you're using <link
+                linkend="zend.controller.modular">the Conventional Modular
+                directory structure</link>, you'll want to change your code to
+            make use of autorendering:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    If you're rendering multiple view scripts in a single
+                    action, you don't need to change a thing.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    If you're simply calling <code>render()</code> with no
+                    arguments, you can remove such lines.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    If you're calling <code>render()</code> with arguments, and
+                    not doing any processing afterwards or rendering multiple
+                    view scripts, you can change these calls to read
+                    <code>$this-&gt;_helper-&gt;viewRenderer()</code>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            If you're not using the conventional modular directory structure,
+            there are a variety of methods for setting the view base path and
+            script path specifications so that you can make use of the
+            <code>ViewRenderer</code>. Please read the <link
+                linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer
+                documentation</link> for information on these methods.
+        </para>
+
+        <para>
+            If you're using a view object from the registry, or customizing your
+            view object, or using a different view implementation, you'll want
+            to inject the <code>ViewRenderer</code> with this object. This can
+            be done easily at any time.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Prior to dispatching a front controller instance:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+// Assuming $view has already been defined
+$viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
+Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+]]></programlisting>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Any time during the bootstrap process:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+$viewRenderer->setView($view);
+]]></programlisting>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are many ways to modify the <code>ViewRenderer</code>,
+            including setting a different view script to render, specifying
+            replacements for all replaceable elements of a view script path
+            (including the suffix), choosing a response named segment to
+            utilize, and more. If you aren't using the conventional modular
+            directory structure, you can even associate different path
+            specifications with the <code>ViewRenderer</code>.
+        </para>
+
+        <para>
+            We encourage you to adapt your code to use the
+            <code>ErrorHandler</code> and <code>ViewRenderer</code> as they are
+            now core functionality.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromzeroninetwo">
+        <title>Migrating from 0.9.2 to 0.9.3 or Newer</title>
+
+        <para>
+            0.9.3 introduces <link
+                linkend="zend.controller.actionhelpers">action helpers</link>.
+            As part of this change, the following methods have been removed as
+            they are now encapsulated in the <link
+                linkend="zend.controller.actionhelpers.redirector">redirector
+                action helper</link>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <code>setRedirectCode()</code>; use
+                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setRedirectPrependBase()</code>; use
+                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <code>setRedirectExit()</code>; use
+                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Read the <link linkend="zend.controller.actionhelpers">action
+                helpers documentation</link> for more information on how to
+            retrieve and manipulate helper objects, and the <link
+                linkend="zend.controller.actionhelpers.redirector">redirector
+                helper documentation</link> for more information on setting
+            redirect options (as well as alternate methods for redirecting).
+        </para>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromzerosix">
+        <title>Migrating from 0.6.0 to 0.8.0 or Newer</title>
+
+        <para>
+            Per previous changes, the most basic usage of the MVC components
+            remains the same:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/controllers');
+]]></programlisting>
+
+        <para>
+            However, the directory structure underwent an overhaul, several
+            components were removed, and several others either renamed or added.
+            Changes include:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Router</classname> was removed in favor of
+                    the rewrite router.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_RewriteRouter</classname> was renamed to
+                    <classname>Zend_Controller_Router_Rewrite</classname>, and promoted to
+                    the standard router shipped with the framework;
+                    <classname>Zend_Controller_Front</classname> will use it by default if
+                    no other router is supplied.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    A new route class for use with the rewrite router was
+                    introduced,
+                    <classname>Zend_Controller_Router_Route_Module</classname>; it covers
+                    the default route used by the MVC, and has support for <link
+                        linkend="zend.controller.modular">controller
+                        modules</link>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Router_StaticRoute</classname> was renamed
+                    to <classname>Zend_Controller_Router_Route_Static</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Dispatcher</classname> was renamed
+                    <classname>Zend_Controller_Dispatcher_Standard</classname>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Action::_forward()</classname>'s arguments
+                    have changed. The signature is now:
+                </para>
+
+                <programlisting role="php"><![CDATA[
+final protected function _forward($action,
+                                  $controller = null,
+                                  $module = null,
+                                  array $params = null);
+]]></programlisting>
+
+                <para>
+                    <code>$action</code> is always required; if no controller is
+                    specified, an action in the current controller is assumed.
+                    <code>$module</code> is always ignored unless
+                    <code>$controller</code> is specified. Finally, any
+                    <code>$params</code> provided will be appended to the
+                    request object. If you do not require the controller or
+                    module, but still need to pass parameters, simply specify
+                    null for those values.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.controller.migration.fromzerotwo">
+        <title>Migrating from 0.2.0 or before to 0.6.0</title>
+
+        <para>
+            The most basic usage of the MVC components has not changed; you can
+            still do each of the following:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+Zend_Controller_Front::run('/path/to/controllers');
+]]></programlisting>
+
+        <programlisting role="php"><![CDATA[
+/* -- create a router -- */
+$router = new Zend_Controller_RewriteRouter();
+$router->addRoute('user',
+                  'user/:username',
+                  array('controller' => 'user', 'action' => 'info')
+);
+
+/* -- set it in a controller -- */
+$ctrl = Zend_Controller_Front::getInstance();
+$ctrl->setRouter($router);
+
+/* -- set controller directory and dispatch -- */
+$ctrl->setControllerDirectory('/path/to/controllers');
+$ctrl->dispatch();
+]]></programlisting>
+
+        <para>
+            We encourage use of the Response object to aggregate content and
+            headers. This will allow for more flexible output format switching
+            (for instance, JSON or XML instead of XHTML) in your applications.
+            By default, <code>dispatch()</code> will render the response, sending both
+            headers and rendering any content. You may also have the front
+            controller return the response using <code>returnResponse()</code>,
+            and then render the response using your own logic. A future version
+            of the front controller may enforce use of the response object via
+            output buffering.
+        </para>
+
+        <para>
+            There are many additional features that extend the existing API,
+            and these are noted in the documentation.
+        </para>
+
+        <para>
+            The main changes you will need to be aware of will be found when
+            subclassing the various components. Key amongst these are:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Front::dispatch()</classname> by default
+                    traps exceptions in the response object, and does not render
+                    them, in order to prevent sensitive system information from
+                    being rendered. You can override this in several ways:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            Set <code>throwExceptions()</code> in the front
+                            controller:
+                        </para>
+                        <programlisting role="php"><![CDATA[
+$front->throwExceptions(true);
+]]></programlisting>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            Set <code>renderExceptions()</code> in the response
+                            object:
+                        </para>
+                        <programlisting role="php"><![CDATA[
+$response->renderExceptions(true);
+$front->setResponse($response);
+$front->dispatch();
+
+// or:
+$front->returnResponse(true);
+$response = $front->dispatch();
+$response->renderExceptions(true);
+echo $response;
+]]></programlisting>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem><para>
+                <classname>Zend_Controller_Dispatcher_Interface::dispatch()</classname>
+                now accepts and returns a <xref linkend="zend.controller.request" />
+                object instead of a dispatcher token.
+            </para></listitem>
+
+            <listitem><para>
+                <classname>Zend_Controller_Router_Interface::route()</classname>
+                now accepts and returns a <xref linkend="zend.controller.request" />
+                object instead of a dispatcher token.
+            </para></listitem>
+
+            <listitem>
+                <para><classname>Zend_Controller_Action</classname> changes include:</para>
+
+                <itemizedlist>
+                    <listitem><para>
+                        The constructor now accepts exactly three arguments,
+                        <classname>Zend_Controller_Request_Abstract $request</classname>,
+                        <classname>Zend_Controller_Response_Abstract $response</classname>,
+                        and <code>array $params (optional)</code>.
+                        <classname>Zend_Controller_Action::__construct()</classname> uses
+                        these to set the request, response, and invokeArgs
+                        properties of the object, and if overriding the
+                        constructor, you should do so as well. Better yet, use
+                        the <code>init()</code> method to do any instance
+                        configuration, as this method is called as the final
+                        action of the constructor.
+                    </para></listitem>
+
+                    <listitem><para>
+                        <code>run()</code> is no longer defined as final, but is
+                        also no longer used by the front controller; its sole
+                        purpose is for using the class as a page controller. It
+                        now takes two optional arguments, a
+                        <classname>Zend_Controller_Request_Abstract $request</classname>
+                        and a <classname>Zend_Controller_Response_Abstract $response</classname>.
+                    </para></listitem>
+
+                    <listitem><para>
+                        <code>indexAction()</code> no longer needs to be
+                        defined, but is encouraged as the default action. This
+                        allows using the RewriteRouter and action controllers to
+                        specify different default action methods.
+                    </para></listitem>
+
+                    <listitem><para>
+                        <code>__call()</code> should be overridden to handle any
+                        undefined actions automatically.
+                    </para></listitem>
+
+                    <listitem><para>
+                        <code>_redirect()</code> now takes an optional second
+                        argument, the HTTP code to return with the redirect, and
+                        an optional third argument, <code>$prependBase</code>,
+                        that can indicate that the base URL registered with the
+                        request object should be prepended to the url specified.
+                    </para></listitem>
+
+                    <listitem>
+                        <para>
+                            The <code>_action</code> property is no longer set.
+                            This property was a <classname>Zend_Controller_Dispatcher_Token</classname>,
+                            which no longer exists in the current incarnation.
+                            The sole purpose of the token was to provide
+                            information about the requested controller, action,
+                            and URL parameters. This information is now
+                            available in the request object, and can be accessed
+                            as follows:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+// Retrieve the requested controller name
+// Access used to be via: $this->_action->getControllerName().
+// The example below uses getRequest(), though you may also directly
+// access the $_request property; using getRequest() is recommended as
+// a parent class may override access to the request object.
+$controller = $this->getRequest()->getControllerName();
+
+// Retrieve the requested action name
+// Access used to be via: $this->_action->getActionName().
+$action = $this->getRequest()->getActionName();
+
+// Retrieve the request parameters
+// This hasn't changed; the _getParams() and _getParam() methods simply
+// proxy to the request object now.
+$params = $this->_getParams();
+// request 'foo' parameter, using 'default' as default value if not found
+$foo = $this->_getParam('foo', 'default');
+]]></programlisting>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <code>noRouteAction()</code> has been removed. The
+                            appropriate way to handle non-existent action
+                            methods should you wish to route them to a default
+                            action is using <code>__call()</code>:
+                        </para>
+
+                        <programlisting role="php"><![CDATA[
+public function __call($method, $args)
+{
+    // If an unmatched 'Action' method was requested, pass on to the
+    // default action method:
+    if ('Action' == substr($method, -6)) {
+        return $this->defaultAction();
+    }
+
+    throw new Zend_Controller_Exception('Invalid method called');
+}
+]]></programlisting>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem><para>
+                <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> has
+                been removed. Use <classname>Zend_Controller_Front::setBaseUrl()</classname>
+                instead (or <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, if using
+                that request class).
+            </para></listitem>
+
+            <listitem><para>
+                <classname>Zend_Controller_Plugin_Interface</classname> was replaced
+                by <classname>Zend_Controller_Plugin_Abstract</classname>. All methods now
+                accept and return a <xref linkend="zend.controller.request" />
+                object instead of a dispatcher token.
+            </para></listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

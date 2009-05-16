@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect3 id="zend.controller.actionhelpers.actionstack">
+    <title>ActionStack</title>
+
+    <para>
+        El ayudante <code>ActionStack</code> le permite empujar requerimientos al
+        <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
+        plugin del front controller, el cual le ayuda efectivamente a crear
+        una cola de acciones a ejecutar durante la solicitud.
+        El ayudante le permite añadir acciones ya sea especificando nuevos
+        objetos solicitud o conjuntos acción/controlador/módulo.
+    </para>
+
+    <note>
+        <title>Invocando al Ayudante ActionStack Inicializa el Plugin de ActionStack</title>
+
+        <para>
+            Invocando al ayuudante <code>ActionStack</code> implicitamente
+            registra el plugin de <code>ActionStack</code> -- lo que significa
+            que no necesita registrar explícitamente el plugin de ActionStack
+            para utilizar esta funcionalidad.
+        </para>
+    </note>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple">
+        <title>Agregando una Tarea Usando Nombres de Acción, Controllador y Módulo</title>
+
+        <para>
+            A menudo, es más sencillo simplemente especificar la acción, el
+            controlador y el módulo (y parámetros opcionales de requerimientos),
+            tal como cuando llama a
+            <classname>Zend_Controller_Action::_forward()</classname>:
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Agregar dos acciones a la pila (stack)
+        // Y llamar a  /foo/baz/bar/baz
+        // (FooController::bazAction() con el requrimiento var bar == baz)
+        $this->_helper->actionStack('baz',
+                                    'foo',
+                                    'default',
+                                    array('bar' => 'baz'));
+
+        // Agregar la llamada a /bar/bat
+        // (BarController::batAction())
+        $this->_helper->actionStack('bat', 'bar');
+    }
+}
+]]></programlisting>
+
+    </example>
+
+    <example id="zend.controller.actionhelpers.actionstack.simple2">
+        <title>Agregando una Tarea al Objeto Solicitud (Request)</title>
+
+        <para>
+            A veces la naturaleza OOP de un objeto solicitud tiene más sentido;
+            puede pasar también tal objeto al ayudante <code>ActionStack</code>.
+        </para>
+
+        <programlisting role="php"><![CDATA[
+class FooController extends Zend_Controller_Action
+{
+    public function barAction()
+    {
+        // Agregar dos acciones al stack
+        // Agregar la llamada a /foo/baz/bar/baz
+        // (FooController::bazAction() with request var bar == baz)
+        $request = clone $this->getRequest();
+        // No establezca controlador o módulo; use los valores actuales
+        $request->setActionName('baz')
+                ->setParams(array('bar' => 'baz'));
+        $this->_helper->actionStack($request);
+
+        // Agregar la llamada a /bar/bat
+        // (BarController::batAction())
+        $request = clone $this->getRequest();
+        // no establezca módulo; use el valor actual
+        $request->setActionName('bat')
+                ->setControllerName('bar');
+        $this->_helper->actionStack($request);
+    }
+}
+]]></programlisting>
+    </example>
+</sect3>
+<!--
+vim:se ts=4 sw=4 et:
+-->

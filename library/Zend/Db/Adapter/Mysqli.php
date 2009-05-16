@@ -324,6 +324,8 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
         );
 
         if ($_isConnected === false || mysqli_connect_errno()) {
+
+            $this->closeConnection();
             /**
              * @see Zend_Db_Adapter_Mysqli_Exception
              */

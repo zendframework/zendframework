@@ -106,18 +106,12 @@ RewriteRule ^.*$ index.php [NC,L]
             <programlisting role="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
      <system.webServer>
-
          <rewrite>
-
              <rules>
-
                  <rule name="Imported Rule 1" stopProcessing="true">
-
                      <match url="^.*$" />
                      <conditions logicalGrouping="MatchAny">
-
                          <add input="{REQUEST_FILENAME}"
                              matchType="IsFile" pattern=""
                              ignoreCase="false" />
@@ -125,22 +119,15 @@ RewriteRule ^.*$ index.php [NC,L]
                              matchType="IsDirectory"
                              pattern="" ignoreCase="false" />
                      </conditions>
-
                      <action type="None" />
                  </rule>
-
                  <rule name="Imported Rule 2" stopProcessing="true">
-
                      <match url="^.*$" />
                      <action type="Rewrite" url="index.php" />
                  </rule>
-
              </rules>
-
          </rewrite>
-
      </system.webServer>
-
 </configuration>
 ]]></programlisting>
 
@@ -270,18 +257,12 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>My first Zend Framework App</title>
-
 </head>
-
 <body>
-
     <h1>Hello, World!</h1>
-
 </body>
-
 </html>
 ]]></programlisting>
         </sect3>
@@ -321,20 +302,13 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Erreur</title>
-
 </head>
-
 <body>
-
     <h1>Erreur apparue</h1>
-
     <p>Une erreur est apparue ; veuillez rééssayer plus tard.</p>
-
 </body>
-
 </html>
 ]]></programlisting>
         </sect3>

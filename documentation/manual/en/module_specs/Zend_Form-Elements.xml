@@ -207,7 +207,6 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
         <programlisting role="php"><![CDATA[
 $filtered = $element->getValue();
-
 ]]></programlisting>
 
         <para>

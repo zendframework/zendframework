@@ -36,7 +36,6 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-
 <?php // partial.phtml ?>
 <ul>
     <li>From: <?php echo $this->escape($this->from) ?></li>
@@ -49,7 +48,6 @@
         </para>
 
         <programlisting role="php"><![CDATA[
-
 <?php echo $this->partial('partial.phtml', array(
     'from' => 'Team Framework',
     'subject' => 'view partials')); ?>

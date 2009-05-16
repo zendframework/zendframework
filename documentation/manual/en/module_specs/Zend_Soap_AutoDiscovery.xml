@@ -119,7 +119,8 @@ if(isset($_GET['wsdl'])) {
     $soap = new Zend_Soap_Server("http://example.com/soap.php?wsdl");
     $soap->setClass('HelloWorldService');
     $soap->handle();
-}]]></programlisting>
+}
+]]></programlisting>
             </para>
         </note>
     </sect2>

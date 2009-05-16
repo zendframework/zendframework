@@ -120,7 +120,6 @@ $service = new Zend_Gdata_Calendar($client);
                 lengthy fashion:
             </para>
             <programlisting role="php"><![CDATA[
-
 /*
  * Retrieve the current URL so that the AuthSub server knows where to
  * redirect the user after authentication is complete.

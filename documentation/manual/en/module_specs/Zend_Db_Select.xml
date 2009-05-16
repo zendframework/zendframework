@@ -440,7 +440,8 @@ $select = $db->select()
 $select = $db->select()
              ->from(array('p' => 'products'), 'p.product_id')
              ->columns('product_name', 'p');
-             // Alternatively use columns('p.product_name')]]></programlisting>
+             // Alternatively use columns('p.product_name')
+]]></programlisting>
 
             </example>
 

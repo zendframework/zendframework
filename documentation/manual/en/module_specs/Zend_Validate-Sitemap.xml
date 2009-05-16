@@ -51,7 +51,8 @@ $validator->isValid('1999-11-11t22:23:52-02:00'); // false
 $validator->isValid('2008-05-12T00:42:60+02:00'); // false
 $validator->isValid('1999-13-11'); // false
 $validator->isValid('2008-05-32'); // false
-$validator->isValid('yesterday'); // false]]></programlisting>
+$validator->isValid('yesterday'); // false
+]]></programlisting>
         </example>
     </sect3>
 

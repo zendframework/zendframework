@@ -1322,7 +1322,7 @@ echo "The table name is " . $info['name'] . "\n";
                 all table objects:
             </para>
 
-            <programlisting role="php"><![CDATA[<
+            <programlisting role="php"><![CDATA[
 // First, set up the Cache
 $frontendOptions = array(
     'automatic_serialization' => true

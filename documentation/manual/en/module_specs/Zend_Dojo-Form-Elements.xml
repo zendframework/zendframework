@@ -640,7 +640,8 @@ $form->addElement('editor', 'content', array(
     'height'             => '250px',
     'inheritWidth'       => true,
     'styleSheets'        => array('/js/custom/editor.css'),
-));]]></programlisting>
+));
+]]></programlisting>
         </example>
     </sect3>
 

@@ -457,7 +457,6 @@ $pdfPage->setFont($font, 36)
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
             <title>Extracting fonts from a loaded document.</title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($documentPath);
 ...
@@ -486,7 +485,6 @@ $firstPageFonts = $firstPage->extractFonts();
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
             <title>Extracting font from a loaded document by specifying font name.</title>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = new Zend_Pdf();
 ...
@@ -505,7 +503,6 @@ $pdf->save($docPath);
 ...
 ]]></programlisting>
             <programlisting role="php"><![CDATA[
-
 ...
 $pdf = Zend_Pdf::load($docPath);
 ...
@@ -531,7 +528,6 @@ $pdf->save($docPath, true /* incremental update mode */);
                         Possibly embedded font program is actually not extracted. So extracted font can't provide
                         correct font metrics and original font has to be used for text width calculations:
             <programlisting role="php"><![CDATA[
-
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -1048,7 +1044,6 @@ public function getFontSize();
         <para>
         Transparency may be set using <classname>Zend_Pdf_Page::setAlpha()</classname> method:
         <programlisting role="php"><![CDATA[
-
 /**
  * Set the transparency
  *

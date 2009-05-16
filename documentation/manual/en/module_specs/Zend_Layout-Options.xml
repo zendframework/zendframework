@@ -146,7 +146,6 @@ $layout = Zend_Layout::startMvc($options);
             </para>
 
             <programlisting role="php"><![CDATA[
-
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // Using constructor:

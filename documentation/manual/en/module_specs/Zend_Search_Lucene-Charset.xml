@@ -100,7 +100,6 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
              Use the following code to check, if PCRE UTF-8 support is enabled:
 
             <programlisting role="php"><![CDATA[
-
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "PCRE unicode support is turned on.\n";
 } else {
@@ -118,7 +117,6 @@ if (@preg_match('/\pL/u', 'a') == 1) {
             and query string before searching by converting them to lowercase:
 
             <programlisting role="php"><![CDATA[
-
 // Indexing
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 

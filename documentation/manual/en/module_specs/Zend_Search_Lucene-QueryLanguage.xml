@@ -206,7 +206,7 @@ roam~0.8
     </sect2>
 
     <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
-        <title>Matched terms limitation.</title>
+        <title>Matched terms limitation</title>
 
         <para>
             Wildcard, range and fuzzy search queries may match too many terms. It may cause incredible search performance downgrade.

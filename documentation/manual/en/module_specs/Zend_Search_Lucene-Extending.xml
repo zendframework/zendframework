@@ -52,7 +52,7 @@ $index->addDocument($doc);
             Here is an example of a custom analyzer, which accepts words with digits as terms:
 
             <example id="zend.search.lucene.extending.analysis.example-1">
-                <title>Custom text Analyzer.</title>
+                <title>Custom text Analyzer</title>
                 <programlisting role="php"><![CDATA[
 /**
  * Here is a custom text analyser, which treats words with digits as

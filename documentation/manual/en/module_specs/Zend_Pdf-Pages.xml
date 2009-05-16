@@ -53,7 +53,7 @@
         </para>
 
         <example id="zend.pdf.pages.example-1">
-            <title>PDF document pages management.</title>
+            <title>PDF document pages management</title>
             <programlisting role="php"><![CDATA[
 ...
 // Reverse page order
@@ -73,13 +73,13 @@ unset($pdf->pages[$id]);
     </sect2>
 
     <sect2 id="zend.pdf.pages.cloning">
-        <title>Page cloning.</title>
+        <title>Page cloning</title>
         <para>
             Existing PDF page can be cloned by creating new <classname>Zend_Pdf_Page</classname> object with existing page as a parameter:
         </para>
 
         <example id="zend.pdf.pages.example-2">
-            <title>Cloning existing page.</title>
+            <title>Cloning existing page</title>
             <programlisting role="php"><![CDATA[
 ...
 // Store template page in a separate variable

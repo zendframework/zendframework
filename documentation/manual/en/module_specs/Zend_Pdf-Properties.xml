@@ -2,7 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Document Info and Metadata.</title>
+    <title>Document Info and Metadata</title>
     <para>
         A PDF document may include general information such as the document’s title,
         author, and creation and modification dates.

@@ -27,13 +27,13 @@
     </para>
 
     <sect2 id="zend.soap.server.constructor">
-        <title>Zend_Soap_Server constructor.</title>
+        <title>Zend_Soap_Server constructor</title>
         <para>
             <classname>Zend_Soap_Server</classname> constructor should be used a bit differently for WSDL and non-WSDL modes.
         </para>
 
         <sect3 id="zend.soap.server.constructor.wsdl_mode">
-            <title>Zend_Soap_Server constructor for the WSDL mode.</title>
+            <title>Zend_Soap_Server constructor for the WSDL mode</title>
             <para>
                 <classname>Zend_Soap_Server</classname> constructor takes two optional parameters when it works in WSDL mode:
                 <orderedlist>
@@ -94,7 +94,7 @@
         </sect3>
 
         <sect3 id="zend.soap.server.wsdl_mode">
-            <title>Zend_Soap_Server constructor for the non-WSDL mode.</title>
+            <title>Zend_Soap_Server constructor for the non-WSDL mode</title>
             <para>
                 The first constructor parameter <emphasis>must</emphasis> be set to <code>null</code> if you
                 plan to use <classname>Zend_Soap_Server</classname> functionality in non-WSDL mode.
@@ -148,7 +148,7 @@
     </sect2>
 
     <sect2 id="zend.soap.server.api_define_methods">
-        <title>Methods to define Web Service API.</title>
+        <title>Methods to define Web Service API</title>
 
         <para>
             There are two ways to define Web Service API when your want to give access to your PHP code through SOAP.
@@ -237,7 +237,7 @@ $server->handle();
     </sect2>
 
     <sect2 id="zend.soap.server.request_response">
-        <title>Request and response objects handling.</title>
+        <title>Request and response objects handling</title>
         <note>
             <title>Advanced</title>
             <para>
@@ -251,7 +251,7 @@ $server->handle();
         </para>
 
         <sect3 id="zend.soap.server.request_response.request">
-            <title>Request processing.</title>
+            <title>Request processing</title>
 
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> method takes request from the standard input stream ('php://input').
@@ -315,7 +315,7 @@ $request = $server->getLastRequest();
         </sect3>
 
         <sect3 id="zend.soap.server.request_response.response">
-            <title>Response pre-processing.</title>
+            <title>Response pre-processing</title>
 
             <para>
                 <classname>Zend_Soap_Server::handle()</classname> method automatically emits generated response to the output stream.

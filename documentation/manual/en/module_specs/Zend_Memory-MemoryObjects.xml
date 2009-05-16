@@ -66,7 +66,7 @@ $memObject = $memoryManager->createLocked($data);
 
     <sect2 id="zend.memory.memory-objects.value">
 
-        <title>Memory container 'value' property.</title>
+        <title>Memory container 'value' property</title>
 
         <para>
             Use the memory container (movable or locked) '<code>value</code>'

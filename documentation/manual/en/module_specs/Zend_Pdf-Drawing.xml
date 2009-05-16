@@ -341,7 +341,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         passing a 'do not embed' option to the factory method:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-3">
-            <title>Create a TrueType font, but do not embed it in the PDF document.</title>
+            <title>Create a TrueType font, but do not embed it in the PDF document</title>
             <programlisting role="php"><![CDATA[
 ...
 // Create new font
@@ -368,7 +368,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         or you can simply suppress the exception:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-4">
-            <title>Do not throw an exception for fonts that cannot be embedded.</title>
+            <title>Do not throw an exception for fonts that cannot be embedded</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath(
@@ -388,7 +388,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         If, for some reason, you do not want to compress the font program, you can disable it with an option:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-5">
-            <title>Do not compress an embedded font.</title>
+            <title>Do not compress an embedded font</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
@@ -400,7 +400,7 @@ $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
         Finally, when necessary, you can combine the embedding options by using the bitwise OR operator:
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-6">
-            <title>Combining font embedding options.</title>
+            <title>Combining font embedding options</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithPath(
@@ -413,7 +413,7 @@ $font = Zend_Pdf_Font::fontWithPath(
     </sect2>
 
     <sect2 id="zend.pdf.drawing.standard-fonts-limitations">
-        <title>Standard PDF fonts limitations.</title>
+        <title>Standard PDF fonts limitations</title>
         <para>
             Standard PDF fonts use several single byte encodings internally
             (see <ulink url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">PDF Reference, Sixth Edition, version 1.7</ulink>
@@ -427,7 +427,7 @@ $font = Zend_Pdf_Font::fontWithPath(
             Only WinLatin1 characters will be actually drawn.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-7">
-            <title>Combining font embedding options.</title>
+            <title>Combining font embedding options</title>
             <programlisting role="php"><![CDATA[
 ...
 $font = Zend_Pdf_Font::fontWithName(Zend_Pdf_Font::FONT_COURIER);
@@ -440,7 +440,7 @@ $pdfPage->setFont($font, 36)
     </sect2>
 
     <sect2 id="zend.pdf.drawing.extracting-fonts">
-        <title>Extracting fonts.</title>
+        <title>Extracting fonts</title>
         <para>
             <classname>Zend_Pdf</classname> module provides a possibility to extract fonts from loaded documents.
         </para>
@@ -455,7 +455,7 @@ $pdfPage->setFont($font, 36)
             a document or a page:
         </para>
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
-            <title>Extracting fonts from a loaded document.</title>
+            <title>Extracting fonts from a loaded document</title>
             <programlisting role="php"><![CDATA[
 ...
 $pdf = Zend_Pdf::load($documentPath);
@@ -483,7 +483,7 @@ $firstPageFonts = $firstPage->extractFonts();
 ]]></programlisting>
         </example>
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
-            <title>Extracting font from a loaded document by specifying font name.</title>
+            <title>Extracting font from a loaded document by specifying font name</title>
             <programlisting role="php"><![CDATA[
 ...
 $pdf = new Zend_Pdf();
@@ -712,7 +712,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
     <sect2 id="zend.pdf.drawing.linear-transformations">
         <title>Linear Transformations</title>
         <sect3 id="zend.pdf.drawing.linear-transformations.rotations">
-            <title>Rotations.</title>
+            <title>Rotations</title>
             <para>
             PDF page can be rotated before applying any draw operation.
             It can be done by <classname>Zend_Pdf_Page::rotate()</classname> method:
@@ -731,7 +731,7 @@ public function rotate($x, $y, $angle);
         </sect3>
 
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
-            <title>Starting from ZF 1.8, scaling.</title>
+            <title>Starting from ZF 1.8, scaling</title>
             <para>
             Scaling transformation is provided by <classname>Zend_Pdf_Page::scale()</classname> method:
             </para>
@@ -748,7 +748,7 @@ public function scale($xScale, $yScale);
         </sect3>
 
         <sect3 id="zend.pdf.drawing.linear-transformations.translate">
-            <title>Starting from ZF 1.8, translating.</title>
+            <title>Starting from ZF 1.8, translating</title>
             <para>
                 Coordinate system shifting is performed by <classname>Zend_Pdf_Page::translate()</classname> method:
             </para>
@@ -765,7 +765,7 @@ public function translate($xShift, $yShift);
         </sect3>
 
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
-            <title>Starting from ZF 1.8, skewing.</title>
+            <title>Starting from ZF 1.8, skewing</title>
             <para>
                 Page skewing can be done using <classname>Zend_Pdf_Page::skew()</classname> method:
             </para>

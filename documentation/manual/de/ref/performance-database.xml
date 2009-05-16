@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15099 -->
+<!-- EN-Revision: 15571 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.database">
     <title>Zend_Db Performance</title>
@@ -85,16 +85,17 @@
                 SQL Select Statements, eine perfekte und legitime Anwendung.
             </para>
             <para>
-                Lasse <code>EXPLAIN</code> auf den Abfragen laufen, und teste eine Vielzahl von
-                Möglichkeiten bis man die eigenen Indezes auf dem besten und performantesten Weg
-                trifft -- und dann sollte dieses SQL als Klasseneigenschaft oder Konstante fix
+                Lasse <constant>EXPLAIN</constant> auf den Abfragen laufen, und teste eine Vielzahl
+                von Möglichkeiten bis man die eigenen Indezes auf dem besten und performantesten
+                Weg trifft -- und dann sollte dieses SQL als Klasseneigenschaft oder Konstante fix
                 kodiert werden.
             </para>
 
             <para>
                 Wenn das SQL variable Argumente benötigt, können Platzhalter im SQL verwendet
-                werden und in einer Kombination von <code>vsprintf</code> und
-                <code>array_walk</code> verwendet werden um Werte in das SQL zu injizieren:
+                werden und in einer Kombination von <methodname>vsprintf()</methodname> und
+                <methodname>array_walk()</methodname> verwendet werden um Werte in das SQL zu
+                injizieren:
             </para>
 
             <programlisting role="php"><![CDATA[

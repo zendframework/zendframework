@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15099 -->
+<!-- EN-Revision: 15571 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.localization">
     <title>Internationalisierung (I18n) und Lokalisierung (L10n)</title>
@@ -41,14 +41,14 @@
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>CSV</emphasis>: Verwendet <code>fgetcsv()</code> um eine CSV Datei zu
-                    parsen und transformiert es in ein natives PHP Format.
+                    <emphasis>CSV</emphasis>: Verwendet <methodname>fgetcsv()</methodname> um eine
+                    CSV Datei zu parsen und transformiert es in ein natives PHP Format.
                 </para></listitem>
 
                 <listitem><para>
-                    <emphasis>INI</emphasis>: Verwendet <code>parse_ini_file()</code> um eine INI
-                    Datei zu lesen und Sie in ein natives PHP Format zu transformieren. Dieser und
-                    der CSV Adapter sind in Ihrer Geschwindigkeit ziemlich identisch.
+                    <emphasis>INI</emphasis>: Verwendet <methodname>parse_ini_file()</methodname>
+                    um eine INI Datei zu lesen und Sie in ein natives PHP Format zu transformieren.
+                    Dieser und der CSV Adapter sind in Ihrer Geschwindigkeit ziemlich identisch.
                 </para></listitem>
 
                 <listitem><para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15301 -->
+<!-- EN-Revision: 15571 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Laden von Klassen</title>
@@ -9,9 +9,9 @@
         feststellen das das Laden von Klassen relativ teuer ist im Zend Framework. Zwischen der
         reinen Anzahl von Klassendateien die für viele Komponenten geladen werden müssen, und der
         Verwendung von Plugins die keine 1:1 Verknüpfung zwischen Ihrem Klassennamen und dem
-        Dateisystem haben, können die Aufrufe zu <code>include_once</code> und
-        <code>require_once</code> problematisch sein. Diese Kapitel versucht einige konkrete
-        Lösungen für diese Probleme zu geben.
+        Dateisystem haben, können die Aufrufe zu <methodname>include_once</methodname> und
+        <methodname>require_once</methodname> problematisch sein. Diese Kapitel versucht einige
+        konkrete Lösungen für diese Probleme zu geben.
     </para>
 
     <sect2 id="performance.classloading.includepath">
@@ -38,8 +38,8 @@
             <para>
                 Es gibt zwei einfache Wege um das Sicherzustellen. Erstens, kann man die Pfade in
                 der php.ini, httpd.conf, oder .htaccess Hardcoded hineinschreiben. Zweitens, kann
-                man PHP's <code>realpath()</code> Funktion verwendet wenn man den include_path
-                setzt:
+                man PHP's <methodname>realpath()</methodname> Funktion verwendet wenn man den
+                include_path setzt:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -66,7 +66,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
 
             <para>
                 Wie auch immer, selbst auf diese Art, ist es typischerweise eine triviale Aufgabe
-                um den Pfad einfach an <code>realpath()</code> zu übergeben.
+                um den Pfad einfach an <methodname>realpath()</methodname> zu übergeben.
             </para>
         </sect3>
 
@@ -135,8 +135,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 <para>
                     Zuerst, erstellen wir ein Bibliotheksverzeichnis in unserem Projekt. Innerhalb
                     dieses Verzeichnisses, erstellen wir einen Symlink zu unserer Zend Framework
-                    Bibliothek/Zend Verzeichnis, wie auch dem notwendigen Verzeichnis von unserer
-                    PEAR Installation:
+                    <filename>library/Zend</filename> Verzeichnis, wie auch dem notwendigen
+                    Verzeichnis von unserer PEAR Installation:
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -154,18 +154,19 @@ library
 
                 <para>
                     Als nächstes erstellen wir unseren include_path programmtechnisch in unserer
-                    public/index.php Datei. Das erlaubt es uns unseren Code in unserem Dateisystem
-                    zu verschieben, ohne das es notwendig ist jedesmal den include_path zu
-                    bearbeiten.
+                    <filename>public/index.php</filename> Datei. Das erlaubt es uns unseren Code in
+                    unserem Dateisystem zu verschieben, ohne das es notwendig ist jedesmal den
+                    include_path zu bearbeiten.
                 </para>
 
                 <para>
                     Wir borgen uns Ideen von jedem der obigen Vorschläge aus: Wir verwenden
-                    absolute Pfade, die durch die Verwendung von <code>realpath()</code> erkannt
-                    werden; wir fügen den Zend Framework so früh wie möglich in den include_path
-                    ein; wir haben bereits Include Pfade erstellt; und wir geben das aktuelle
-                    Verzeichnis als letzten Pfad hinein. Faktisch, machen wir es hier sehr gut --
-                    wir werden mit nur zwei Pfaden enden.
+                    absolute Pfade, die durch die Verwendung von
+                    <methodname>realpath()</methodname> erkannt werden; wir fügen den Zend
+                    Framework so früh wie möglich in den include_path ein; wir haben bereits
+                    Include Pfade erstellt; und wir geben das aktuelle Verzeichnis als letzten Pfad
+                    hinein. Faktisch, machen wir es hier sehr gut -- wir werden mit nur zwei Pfaden
+                    enden.
                 </para>
 
                 <programlisting role="php"><![CDATA[
@@ -224,7 +225,8 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 Dieses Kommando sollte in einem automatischen Build oder Release Prozess ganz
                 trivial hinzugefügt werden. Es sollte trotzdem klar sein das man, wenn man diese
                 Technik verwendet, Autoloading verwendetn <emphasis>muss</emphasis>; man kann das
-                von der eigenen "public/index.php" Datei mit dem folgenden Code tun:
+                von der eigenen "<filename>public/index.php</filename>" Datei mit dem folgenden
+                Code tun:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -274,7 +276,7 @@ Zend_Loader_Autoloader::getInstance();
 
             <listitem><para>
                 <classname>Zend_Filter_Inflector</classname>: Filter (verwendet vom ViewRenderer
-                Action Helfer und Zend_Layout)
+                Action Helfer und <classname>Zend_Layout</classname>)
             </para></listitem>
 
             <listitem><para>

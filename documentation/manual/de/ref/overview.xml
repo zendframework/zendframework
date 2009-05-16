@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14978 -->
+<!-- EN-Revision: 15571 -->
 <!-- Reviewed: no -->
 <sect1 id="introduction.overview">
 
@@ -20,12 +20,13 @@
         Datenbank Abstraktion die einfach zu verwenden ist, und eine Form Komponente die HTML Form
         Darstellung, Prüfung und Filterung implementiert, damit Entwickler alle diese Operationen
         konsolidieren können durch Verwendung eines einfach zu verwendenden, objekt-orientierten
-        Interfaces. Andere Komponenten wie Zend_Auth und Zend_Acl, bieten Benutzer
-        Authentifizierung und Authorisierung gegenüber allen üblichen Arten von Zugangspunkten.
-        Andere implementieren Client Bibliotheken um einfach Zugang zu den am meisten üblichen Web
-        Services verfügbar zu machen. Was auch immer die eigene Anwendung benötigt, man findet eine
-        Zend Framework Komponente mit einer durchgehend getesteten Basis, die verwendet werden kann
-        um die Entwicklungszeit drastisch zu reduzieren.
+        Interfaces. Andere Komponenten wie <classname>Zend_Auth</classname> und
+        <classname>Zend_Acl</classname>, bieten Benutzer Authentifizierung und Authorisierung
+        gegenüber allen üblichen Arten von Zugangspunkten. Andere implementieren Client
+        Bibliotheken um einfach Zugang zu den am meisten üblichen Web Services verfügbar zu machen.
+        Was auch immer die eigene Anwendung benötigt, man findet eine Zend Framework Komponente mit
+        einer durchgehend getesteten Basis, die verwendet werden kann um die Entwicklungszeit
+        drastisch zu reduzieren.
     </para>
     <para>
         Der prinzipielle Sponsor des Zend Framework Projektes ist

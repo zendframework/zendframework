@@ -578,4 +578,31 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         Zend_Currency::removeCache();
         $this->assertFalse(Zend_Currency::hasCache());
     }
+
+    /**
+     * @see ZF-6560
+     */
+    public function testPrecisionForCurrency()
+    {
+        $currency = new Zend_Currency(null, 'de_DE');
+
+        $this->assertEquals('75 €', $currency->toCurrency(74.95, array('precision' => 0)));
+        $this->assertEquals('75,0 €', $currency->toCurrency(74.95, array('precision' => 1)));
+        $this->assertEquals('74,95 €', $currency->toCurrency(74.95, array('precision' => 2)));
+        $this->assertEquals('74,950 €', $currency->toCurrency(74.95, array('precision' => 3)));
+        $this->assertEquals('74,9500 €', $currency->toCurrency(74.95, array('precision' => 4)));
+        $this->assertEquals('74,95000 €', $currency->toCurrency(74.95, array('precision' => 5)));
+    }
+
+    /**
+     * @see ZF-6561
+     */
+    public function testNegativeRendering()
+    {
+        $currency = new Zend_Currency(null, 'de_DE');
+        $this->assertEquals('-74,9500 €', $currency->toCurrency(-74.95, array('currency' => 'EUR', 'precision' => 4)));
+
+        $currency = new Zend_Currency(null, 'en_US');
+        $this->assertEquals('-$74.9500', $currency->toCurrency(-74.95, array('currency' => 'USD', 'precision' => 4)));
+    }
 }

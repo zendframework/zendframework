@@ -338,7 +338,12 @@ class Zend_Locale_Format
             $format  = Zend_Locale_Data::getContent($options['locale'], 'decimalnumber');
             if (iconv_strpos($format, ';') !== false) {
                 if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
-                    $format = iconv_substr($format, iconv_strpos($format, ';') + 1);
+                    $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
+                    if ($tmpformat[0] == '(') {
+                        $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
+                    } else {
+                        $format = $tmpformat;
+                    }
                 } else {
                     $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
                 }
@@ -347,7 +352,12 @@ class Zend_Locale_Format
             // seperate negative format pattern when available
             if (iconv_strpos($format, ';') !== false) {
                 if (call_user_func(Zend_Locale_Math::$comp, $value, 0, $options['precision']) < 0) {
-                    $format = iconv_substr($format, iconv_strpos($format, ';') + 1);
+                    $tmpformat = iconv_substr($format, iconv_strpos($format, ';') + 1);
+                    if ($tmpformat[0] == '(') {
+                        $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
+                    } else {
+                        $format = $tmpformat;
+                    }
                 } else {
                     $format = iconv_substr($format, 0, iconv_strpos($format, ';'));
                 }
@@ -357,13 +367,13 @@ class Zend_Locale_Format
                 if (is_numeric($options['precision'])) {
                     $value = Zend_Locale_Math::round($value, $options['precision']);
                 } else {
-                    if (substr($format, strpos($format, '.') + 1, 3) == '###') {
+                    if (substr($format, iconv_strpos($format, '.') + 1, 3) == '###') {
                         $options['precision'] = null;
                     } else {
-                        $options['precision'] = strlen(substr($format, strpos($format, '.') + 1,
-                                                              strrpos($format, '0') - strpos($format, '.')));
-                        $format = substr($format, 0, strpos($format, '.') + 1) . '###'
-                                . substr($format, strrpos($format, '0') + 1);
+                        $options['precision'] = iconv_strlen(iconv_substr($format, iconv_strpos($format, '.') + 1,
+                                                              iconv_strrpos($format, '0') - iconv_strpos($format, '.')));
+                        $format = iconv_substr($format, 0, iconv_strpos($format, '.') + 1) . '###'
+                                . iconv_substr($format, iconv_strrpos($format, '0') + 1);
                     }
                 }
             } else {
@@ -373,7 +383,7 @@ class Zend_Locale_Format
             $value = Zend_Locale_Math::normalize($value);
         }
 
-        if (strpos($format, '0') === false) {
+        if (iconv_strpos($format, '0') === false) {
             require_once 'Zend/Locale/Exception.php';
             throw new Zend_Locale_Exception('Wrong format... missing 0');
         }
@@ -432,22 +442,30 @@ class Zend_Locale_Format
         $point  = iconv_strpos ($format, '0');
         // Add fraction
         $rest = "";
-        if (($value < 0) && (strpos($format, '.'))) {
-            $rest   = substr(substr($format, strpos($format, '.') + 1), -1, 1);
+        if (iconv_strpos($format, '.')) {
+            $rest   = iconv_substr($format, iconv_strpos($format, '.') + 1);
+            $length = iconv_strlen($rest);
+            for($x = 0; $x < $length; ++$x) {
+                if (($rest[0] == '0') || ($rest[0] == '#')) {
+                    $rest = iconv_substr($rest, 1);
+                }
+            }
+            $format = iconv_substr($format, 0, iconv_strlen($format) - iconv_strlen($rest));
         }
 
         if ($options['precision'] == '0') {
-            $format = iconv_substr($format, 0, $point) . iconv_substr($format, iconv_strrpos($format, '#') + 2);
+            if (iconv_strrpos($format, '-') != 0) {
+                $format = iconv_substr($format, 0, $point)
+                        . iconv_substr($format, iconv_strrpos($format, '#') + 2);
+            } else {
+                $format = iconv_substr($format, 0, $point);
+            }
         } else {
             $format = iconv_substr($format, 0, $point) . $symbols['decimal']
-                               . iconv_substr($prec, 2)
-                               . iconv_substr($format, iconv_strrpos($format, '#') + 1 + strlen($prec));
+                               . iconv_substr($prec, 2);
         }
 
-        if (($value < 0) and ($rest != '0') and ($rest != '#')) {
-            $format .= $rest;
-        }
-
+        $format .= $rest;
         // Add seperation
         if ($group == 0) {
             // no seperation

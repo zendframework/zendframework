@@ -149,7 +149,7 @@ class Zend_Currency
         $original = $value;
         $value    = Zend_Locale_Format::toNumber($value, array('locale'        => $locale,
                                                                'number_format' => $format,
-                                                               'precision'     => $options['precision']));
+                                                              'precision'     => $options['precision']));
 
         if ($options['position'] !== self::STANDARD) {
             $value = str_replace('¤', '', $value);

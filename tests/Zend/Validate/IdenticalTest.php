@@ -100,6 +100,19 @@ class Zend_Validate_IdenticalTest extends PHPUnit_Framework_TestCase
         $this->validator->setToken('foo');
         $this->assertTrue($this->validator->isValid('foo'));
     }
+
+    /**
+     * @see ZF-6511
+     */
+    public function testNotSameMessageContainsTokenAndValue()
+    {
+        $this->testValidatingAgainstTokenWithNonMatchingValueReturnsFalse();
+        $messages = $this->validator->getMessages();
+        $this->assertTrue(array_key_exists('notSame', $messages));
+        $this->assertContains('foo', $messages['notSame']);
+        $this->assertContains('bar', $messages['notSame']);
+        $this->assertContains('does not match', $messages['notSame']);
+    }
 }
 
 // Call Zend_Validate_IdenticalTest::main() if this source file is executed directly.

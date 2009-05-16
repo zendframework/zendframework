@@ -30,21 +30,27 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Zend_Validate_Identical extends Zend_Validate_Abstract
 {
-    /**#@+
+    /**
      * Error codes
      * @const string
      */
     const NOT_SAME      = 'notSame';
     const MISSING_TOKEN = 'missingToken';
-    /**#@-*/
 
     /**
      * Error messages
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_SAME      => 'Tokens do not match',
+        self::NOT_SAME      => "The token '%token%' does not match the given token '%value%'",
         self::MISSING_TOKEN => 'No token was provided to match against',
+    );
+
+    /**
+     * @var array
+     */
+    protected $_messageVariables = array(
+        'token' => '_token'
     );
 
     /**
@@ -68,8 +74,8 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
 
     /**
      * Set token against which to compare
-     * 
-     * @param  string $token 
+     *
+     * @param  string $token
      * @return Zend_Validate_Identical
      */
     public function setToken($token)
@@ -80,7 +86,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
 
     /**
      * Retrieve token
-     * 
+     *
      * @return string
      */
     public function getToken()
@@ -91,7 +97,7 @@ class Zend_Validate_Identical extends Zend_Validate_Abstract
     /**
      * Defined by Zend_Validate_Interface
      *
-     * Returns true if and only if a token has been set and the provided value 
+     * Returns true if and only if a token has been set and the provided value
      * matches that token.
      *
      * @param  string $value

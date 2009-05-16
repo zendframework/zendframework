@@ -21,7 +21,7 @@
     <para>
         As you may already have inferred from the above description of <classname>Zend_Validate_Interface</classname>,
         validation classes provided with Zend Framework return a boolean value for whether or not a value validates
-        successfully. They also provide information about <emphasis role="bold">why</emphasis> a value failed
+        successfully. They also provide information about <emphasis>why</emphasis> a value failed
         validation. The availability of the reasons for validation failures may be valuable to an application for
         various purposes, such as providing statistics for usability analysis.
     </para>
@@ -247,7 +247,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]></programlisting>
 
             Note that the four criteria tests in <code>isValid()</code> do not immediately return <code>false</code>.
-            This allows the validation class to provide <emphasis role="bold">all</emphasis> of the reasons that the
+            This allows the validation class to provide <emphasis>all</emphasis> of the reasons that the
             input password failed to meet the validation requirements. If, for example, a user were to input the
             string "<code>#$%</code>" as a password, <code>isValid()</code> would cause all four validation failure
             messages to be returned by a subsequent call to <code>getMessages()</code>.

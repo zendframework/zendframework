@@ -67,9 +67,9 @@ $translate = new Zend_Translate
 ]]></programlisting>
 
         In this example we chose the
-        <emphasis role="strong">Gettext Adapter</emphasis>.
-        We place our file <emphasis role="strong">source-de.mo</emphasis>
-        into the directory <emphasis role="strong">/path/to/translation</emphasis>.
+        <emphasis>Gettext Adapter</emphasis>.
+        We place our file <emphasis>source-de.mo</emphasis>
+        into the directory <emphasis>/path/to/translation</emphasis>.
         The gettext file will have German translation included,
         and we also added another language source for French.
     </para>
@@ -131,10 +131,10 @@ print $translate->_(2) . "\n";
         for the given message ID or string.
         If no translation string has been found it refers to the next lower
         level language as defined within <classname>Zend_Locale</classname>.
-        So "<emphasis role="strong">de_AT</emphasis>" becomes
-        "<emphasis role="strong">de</emphasis>" only.
+        So "<emphasis>de_AT</emphasis>" becomes
+        "<emphasis>de</emphasis>" only.
         If there is no translation found for
-        "<emphasis role="strong">de</emphasis>" either,
+        "<emphasis>de</emphasis>" either,
         then the original message is returned.
         This way you always have an output, even in case the message translation
         does not exist in your message storage.
@@ -358,7 +358,7 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
             Gettext source files are created by GNU's gettext library.
             There are several free tools available that can parse your
             code files and create the needed gettext source files.
-            These have the extension <emphasis role="strong">*.mo</emphasis>
+            These have the extension <emphasis>*.mo</emphasis>
             and they are binary files.
             An open source tool for creating the files is
             <ulink url="http://sourceforge.net/projects/poedit/">poEdit</ulink>.
@@ -374,7 +374,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
         <para>
             As you can see the adapters are used exactly the same way,
             with one small difference:
-            change <emphasis role="strong">array</emphasis> to <emphasis role="strong">gettext</emphasis>. All other usages are exactly
+            change <emphasis>array</emphasis> to <emphasis>gettext</emphasis>. All other usages are exactly
             the same as with all other adapters.
             With the gettext adapter you no longer have to be aware of
             gettext's standard directory structure,
@@ -640,7 +640,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             If set to true, the already read translations will be cleared. This can be used
                             instead of creating a new instance when reading new translation data
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
@@ -649,20 +649,20 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             If set to true, all notices regarding not available translations will be
                             disabled. You should set this option to true in production environment
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
                         <entry>all</entry>
                         <entry>
                             All directories and files beginning with this prefix will be ignored when
-                            searching for files. This value defaults to <emphasis role="strong">'.'</emphasis>
+                            searching for files. This value defaults to <emphasis>'.'</emphasis>
                             which leads to the behavior that all hidden files will be ignored. Setting this
                             value to <code>'tmp'</code> would mean that directories and files like
                             <code>'tmpImages'</code> and <code>'tmpFiles'</code>
                             would be ignored as well as all subsequent directories
                         </entry>
-                        <entry><emphasis role="strong">.</emphasis></entry>
+                        <entry><emphasis>.</emphasis></entry>
                     </row>
                     <row>
                         <entry>log</entry>
@@ -671,7 +671,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             An instance of <classname>Zend_Log</classname> where untranslated messages and notices will be
                             written to
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -679,7 +679,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>
                             The message which will be written into the log
                         </entry>
-                        <entry><emphasis role="strong">Untranslated message within '%locale%': %message%</emphasis></entry>
+                        <entry><emphasis>Untranslated message within '%locale%': %message%</emphasis></entry>
                     </row>
                     <row>
                         <entry>logUntranslated</entry>
@@ -688,7 +688,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             When this option is set to true, all message IDs which can not be
                             translated will be written into the attached log
                         </entry>
-                        <entry><emphasis role="strong">false</emphasis></entry>
+                        <entry><emphasis>false</emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
@@ -700,25 +700,25 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             within the filename. See <xref linkend="zend.translate.using.detection" />
                             for details
                         </entry>
-                        <entry><emphasis role="strong">null</emphasis></entry>
+                        <entry><emphasis>null</emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
                         <entry>Defines which sign is used as delimiter for separating source and translation</entry>
-                        <entry><emphasis role="strong">;</emphasis></entry>
+                        <entry><emphasis>;</emphasis></entry>
                     </row>
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
                         <entry>Defines the enclosure character to be used. Defaults to a doublequote</entry>
-                        <entry><emphasis role="strong">"</emphasis></entry>
+                        <entry><emphasis>"</emphasis></entry>
                     </row>
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
                         <entry>Defines the maximum length of a csv line. When set to 0 it will be detected automatically</entry>
-                        <entry><emphasis role="strong">0</emphasis></entry>
+                        <entry><emphasis>0</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -862,7 +862,7 @@ $translate->setLocale('it_IT');
 
             <para>
                 If you want to use it again, you can set the language
-                <emphasis role="strong">auto</emphasis> with <code>setLocale()</code> which will reactivate
+                <emphasis>auto</emphasis> with <code>setLocale()</code> which will reactivate
                 the automatic detection for <classname>Zend_Translate</classname>.
             </para>
 
@@ -1282,7 +1282,7 @@ $translate->translate('unknown string');
 
         <note>
             <para>
-                Attention: the returned array can be <emphasis role="strong">very big</emphasis>,
+                Attention: the returned array can be <emphasis>very big</emphasis>,
                 depending on the number of added locales and the amount of translation data.
             </para>
         </note>

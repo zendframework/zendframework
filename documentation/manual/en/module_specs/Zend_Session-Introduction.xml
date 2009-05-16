@@ -10,7 +10,7 @@
     </para>
 
     <para>
-        With web applications written using PHP, a <emphasis role="bold">session</emphasis> represents a logical,
+        With web applications written using PHP, a <emphasis>session</emphasis> represents a logical,
         one-to-one connection between server-side, persistent state data and a particular user agent client (e.g., web
         browser). <classname>Zend_Session</classname> helps manage and preserve session data, a logical complement of cookie
         data, across multiple page requests by the same client. Unlike cookie data, session data are not stored on the
@@ -19,7 +19,7 @@
         "session data" refers to the server-side data stored in
         <ulink url="http://www.php.net/manual/en/reserved.variables.php#reserved.variables.session"><code>$_SESSION</code></ulink>,
         managed by <classname>Zend_Session</classname>, and individually manipulated by <classname>Zend_Session_Namespace</classname>
-        accessor objects. <emphasis role="bold">Session namespaces</emphasis> provide access to session data using
+        accessor objects. <emphasis>Session namespaces</emphasis> provide access to session data using
         classic <ulink url="http://en.wikipedia.org/wiki/Namespace_%28computer_science%29">namespaces</ulink>
         implemented logically as named groups of associative arrays, keyed by strings (similar to normal PHP arrays).
     </para>

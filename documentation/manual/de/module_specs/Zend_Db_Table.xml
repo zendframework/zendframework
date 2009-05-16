@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15422 -->
+<!-- EN-Revision: 15602 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
 
@@ -1378,7 +1378,7 @@ echo "Der Name der Tabelle ist " . $info['name'] . "\n";
                 gesetzt werden kann der für alle Tabellenobjekte verwendet wird:
             </para>
 
-            <programlisting role="php"><![CDATA[<
+            <programlisting role="php"><![CDATA[
 // Zuerst muß der Cache vorbereitet werden
 $frontendOptions = array(
     'automatic_serialization' => true

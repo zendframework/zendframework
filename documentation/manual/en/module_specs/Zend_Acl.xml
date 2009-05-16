@@ -10,23 +10,25 @@
     </para>
 
     <para>
-        For the purposes of this documentation,
+        For the purposes of this documentation:
+    </para>
 
-        <itemizedlist>
-            <listitem>
-                <para>
-                    a <emphasis>resource</emphasis> is an object
-                    to which access is controlled.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    a <emphasis>role</emphasis> is an object
-                    that may request access to a Resource.
-                </para>
-            </listitem>
-        </itemizedlist>
+    <itemizedlist>
+        <listitem>
+            <para>
+                a <emphasis>resource</emphasis> is an object
+                to which access is controlled.
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                a <emphasis>role</emphasis> is an object
+                that may request access to a Resource.
+            </para>
+        </listitem>
+    </itemizedlist>
 
+    <para>
         Put simply, <emphasis>roles request access to resources</emphasis>. For
         example, if a parking attendant requests access to a car, then the parking attendant is the
         requesting role, and the car is the resource, since access to the car may not be granted to
@@ -45,10 +47,10 @@
             <classname>Zend_Acl</classname> provides the resource,
             <classname>Zend_Acl_Resource_Interface</classname>, to facilitate creating resources in
             an application. A class need only implement this interface, which consists of a single
-            method, <code>getResourceId()</code>, so <classname>Zend_Acl</classname> to recognize
-            the object as a resource. Additionally, <classname>Zend_Acl_Resource</classname> is
-            provided by <classname>Zend_Acl</classname> as a basic resource implementation for
-            developers to extend as needed.
+            method, <methodname>getResourceId()</methodname>, so <classname>Zend_Acl</classname> to
+            recognize the object as a resource. Additionally,
+            <classname>Zend_Acl_Resource</classname> is provided by <classname>Zend_Acl</classname>
+            as a basic resource implementation for developers to extend as needed.
         </para>
         <para>
             <classname>Zend_Acl</classname> provides a tree structure to which multiple resources
@@ -75,9 +77,9 @@
         <para>
             As with resources, creating a role is also very simple. All roles must implement
             <classname>Zend_Acl_Role_Interface</classname>. This interface consists of a single
-            method, <code>getRoleId()</code>, Additionally, <classname>Zend_Acl_Role</classname> is
-            provided by <classname>Zend_Acl</classname> as a basic role implementation for
-            developers to extend as needed.
+            method, <methodname>getRoleId()</methodname>, Additionally,
+            <classname>Zend_Acl_Role</classname> is provided by <classname>Zend_Acl</classname> as
+            a basic role implementation for developers to extend as needed.
         </para>
         <para>
             In <classname>Zend_Acl</classname>, a role may inherit from one or more roles. This is
@@ -94,15 +96,15 @@
         <example id="zend.acl.introduction.roles.example.multiple_inheritance">
             <title>Multiple Inheritance among Roles</title>
             <para>
-                The following code defines three base roles - "<code>guest</code>",
-                "<code>member</code>", and "<code>admin</code>" - from which other roles may
-                inherit. Then, a role identified by "<code>someUser</code>" is established and
+                The following code defines three base roles - "guest",
+                "member", and "admin" - from which other roles may
+                inherit. Then, a role identified by "someUser" is established and
                 inherits from the three other roles. The order in which these roles appear in the
-                <code>$parents</code> array is important. When necessary,
+                <varname>$parents</varname> array is important. When necessary,
                 <classname>Zend_Acl</classname> searches for access rules defined not only for the
-                queried role (herein, "<code>someUser</code>"), but also upon the roles from which
-                the queried role inherits (herein, "<code>guest</code>", "<code>member</code>", and
-                "<code>admin</code>"):
+                queried role (herein, "someUser"), but also upon the roles from which
+                the queried role inherits (herein, "guest", "member", and
+                "admin"):
             </para>
             <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
@@ -132,7 +134,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             <para>
                 If <classname>Zend_Acl</classname> were to continue examining the rules defined for
                 other parent roles, however, it would find that "guest" is denied access to
-                "<code>someResource</code>". This fact introduces an ambiguity because now
+                "someResource". This fact introduces an ambiguity because now
                 "someUser" is both denied and allowed access to "someResource", by reason of having
                 inherited conflicting rules from different parent roles.
             </para>
@@ -140,7 +142,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 <classname>Zend_Acl</classname> resolves this ambiguity by completing a query when
                 it finds the first rule that is directly applicable to the query. In this case,
                 since the "member" role is examined before the "guest" role, the example code would
-                print "<code>allowed</code>".
+                print "allowed".
             </para>
         </example>
         <note>
@@ -310,8 +312,8 @@ $acl->allow('administrator');
 ]]></programlisting>
 
         <para>
-            The <code>null</code> values in the above <code>allow()</code> calls are used to
-            indicate that the allow rules apply to all resources.
+            The <constant>NULL</constant> values in the above <methodname>allow()</methodname> calls
+            are used to indicate that the allow rules apply to all resources.
         </para>
 
     </sect2>
@@ -322,7 +324,7 @@ $acl->allow('administrator');
         <para>
             We now have a flexible ACL that can be used to determine whether requesters have
             permission to perform functions throughout the web application. Performing queries is
-            quite simple using the <code>isAllowed()</code> method:
+            quite simple using the <methodname>isAllowed()</methodname> method:
         </para>
 
         <programlisting role="php"><![CDATA[

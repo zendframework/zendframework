@@ -131,9 +131,10 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
 
         <para>
             To remove one or more access rules from the ACL, simply use the available
-            <code>removeAllow()</code> or <code>removeDeny()</code> methods. As with
-            <code>allow()</code> and <code>deny()</code>, you may provide a <code>null</code>
-            value to indicate application to all roles, resources, and/or privileges:
+            <methodname>removeAllow()</methodname> or <methodname>removeDeny()</methodname> methods.
+            As with <methodname>allow()</methodname> and <methodname>deny()</methodname>, you may
+            provide a <constant>NULL</constant> value to indicate application to all roles,
+            resources, and/or privileges:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -161,8 +162,8 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 ]]></programlisting>
 
         <para>
-            Privileges may be modified incrementally as indicated above, but a <code>null</code>
-            value for the privileges overrides such incremental changes:
+            Privileges may be modified incrementally as indicated above, but a
+            <constant>NULL</constant> value for the privileges overrides such incremental changes:
         </para>
 
         <programlisting role="php"><![CDATA[

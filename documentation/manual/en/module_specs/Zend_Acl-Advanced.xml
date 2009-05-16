@@ -22,9 +22,9 @@
             Storage of ACL data is therefore left as a task for the developer, since use cases are
             expected to vary widely for various situations. Because <classname>Zend_Acl</classname>
             is serializable, ACL objects may be serialized with PHP's
-            <ulink url="http://php.net/serialize"><code>serialize()</code></ulink> function, and
-            the results may be stored anywhere the developer should desire, such as a file,
-            database, or caching mechanism.
+            <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
+            function, and the results may be stored anywhere the developer should desire, such as a
+            file, database, or caching mechanism.
         </para>
 
     </sect2>
@@ -45,8 +45,8 @@
         <para>
             <classname>Zend_Acl</classname> provides support for conditional rules with
             <classname>Zend_Acl_Assert_Interface</classname>. In order to use the rule assertion
-            interface, a developer writes a class that implements the <code>assert()</code> method
-            of the interface:
+            interface, a developer writes a class that implements the
+            <methodname>assert()</methodname> method of the interface:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -70,7 +70,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         <para>
             Once an assertion class is available, the developer must supply an instance of the
             assertion class when assigning conditional rules. A rule that is created with an
-            assertion only applies when the assertion method returns true.
+            assertion only applies when the assertion method returns <constant>TRUE</constant>.
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -90,10 +90,10 @@ $acl->allow(null, null, null, new CleanIPAssertion());
         </para>
 
         <para>
-            The <code>assert()</code> method of an assertion object is passed the ACL, role,
-            resource, and privilege to which the authorization query (i.e.,
-            <code>isAllowed()</code>) applies, in order to provide a context for the assertion
-            class to determine its conditions where needed.
+            The <methodname>assert()</methodname> method of an assertion object is passed the ACL,
+            role, resource, and privilege to which the authorization query (i.e.,
+            <methodname>isAllowed()</methodname>) applies, in order to provide a context for the
+            assertion class to determine its conditions where needed.
         </para>
 
     </sect2>

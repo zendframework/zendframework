@@ -435,8 +435,7 @@ $params = array(
 );
 
 $db = Zend_Db::factory('Pdo_Mysql', $params);
-
-                ]]></programlisting>
+]]></programlisting>
             </example>
         </sect3>
 

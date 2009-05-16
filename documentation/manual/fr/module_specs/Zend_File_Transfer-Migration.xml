@@ -406,7 +406,8 @@ $upload->addValidator('FilesSize', array('1B', '100kB'));
 // Même exemple pour 1.6.2 et plus récent
 // Notez l'ajout du booléen false
 $upload = new Zend_File_Transfer_Adapter_Http();
-$upload->addValidator('FilesSize', false, array('1B', '100kB'));]]></programlisting>
+$upload->addValidator('FilesSize', false, array('1B', '100kB'));
+]]></programlisting>
             </example>
         </sect3>
     </sect2>

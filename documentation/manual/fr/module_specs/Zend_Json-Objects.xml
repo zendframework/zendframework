@@ -33,9 +33,9 @@
             Par défaut, <classname>Zend_Json</classname> décodera des objets JSON comme en
             tableaux associatifs. Cependant, si vous désirez avoir un objet en retour, vous pouvez le
             spécifier : <programlisting role="php"><![CDATA[
-        // Décode des objets JSON en tant qu'objets PHP
-        $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
-        ]]></programlisting> Tous les objets sont ainsi décodés et retournés comme des objets de type
+// Décode des objets JSON en tant qu'objets PHP
+$phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
+]]></programlisting> Tous les objets sont ainsi décodés et retournés comme des objets de type
             <code>StdClass</code>, avec leurs propriétés correspondantes aux paires clé/valeur de la
             notation JSON.
         </para>

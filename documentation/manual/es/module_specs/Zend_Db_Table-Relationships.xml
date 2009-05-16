@@ -1,4 +1,7 @@
-﻿<sect1 id="zend.db.table.relationships">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.db.table.relationships">
 
     <title>Zend_Db_Table Relationships</title>
 
@@ -13,7 +16,7 @@
         </para>
 
         <para>
-            The Zend_Db_Table_Row class has methods for querying related rows in other tables.
+            The <classname>Zend_Db_Table_Row</classname> class has methods for querying related rows in other tables.
         </para>
 
     </sect2>
@@ -24,7 +27,7 @@
 
         <para>
             Define classes for each of your tables, extending the abstract class
-            Zend_Db_Table_Abstract, as described in <xref linkend="zend.db.table.defining" />. Also
+            <classname>Zend_Db_Table_Abstract</classname>, as described in <xref linkend="zend.db.table.defining" />. Also
             see <xref linkend="zend.db.adapter.example-database" /> for a description of the
             example database for which the following example code is designed.
         </para>
@@ -89,11 +92,10 @@ class BugsProducts extends Zend_Db_Table_Abstract
     );
 
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            If you use Zend_Db_Table to emulate cascading UPDATE and DELETE operations, declare the
+            If you use <classname>Zend_Db_Table</classname> to emulate cascading UPDATE and DELETE operations, declare the
             <code>$_dependentTables</code> array in the class for the parent table. List the class
             name for each dependent table. Use the class name, not the physical name of the SQL
             table.
@@ -137,7 +139,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis role="strong">columns</emphasis> => A string or an array of strings
+                    <emphasis>columns</emphasis> => A string or an array of strings
                     naming the foreign key column name(s) in the dependent table.
                 </para>
 
@@ -149,7 +151,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refTableClass</emphasis> => The class name of the
+                    <emphasis>refTableClass</emphasis> => The class name of the
                     parent table. Use the class name, not the physical name of the SQL table.
                 </para>
 
@@ -165,7 +167,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">refColumns</emphasis> => A string or an array of
+                    <emphasis>refColumns</emphasis> => A string or an array of
                     strings naming the primary key column name(s) in the parent table.
                 </para>
 
@@ -185,7 +187,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onDelete</emphasis> => The rule for an action to
+                    <emphasis>onDelete</emphasis> => The rule for an action to
                     execute if a row is deleted in the parent table. See
                     <xref linkend="zend.db.table.relationships.cascading" /> for more information.
                 </para>
@@ -193,7 +195,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <listitem>
                 <para>
-                    <emphasis role="strong">onUpdate</emphasis> => The rule for an action to
+                    <emphasis>onUpdate</emphasis> => The rule for an action to
                     execute if values in primary key columns are updated in the parent table. See
                     <xref linkend="zend.db.table.relationships.cascading" /> for more information.
                 </para>
@@ -213,11 +215,10 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
         <programlisting role="php"><![CDATA[
 $row->findDependentRowset($table, [$rule]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            This method returns a Zend_Db_Table_Rowset_Abstract object, containing a set of rows
+            This method returns a <classname>Zend_Db_Table_Rowset_Abstract</classname> object, containing a set of rows
             from the dependent table <code>$table</code> that refer to the row identified by the
             <code>$row</code> object.
         </para>
@@ -243,8 +244,7 @@ $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -278,8 +278,7 @@ $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
 
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -310,13 +309,12 @@ $select = $accountsTable->select()->order('name ASC')
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
-]]>
-                </programlisting>
+]]></programlisting>
 
             </example>
 
             Alternatively, you can query rows from a dependent table using a special mechanism
-            called a "magic method". Zend_Db_Table_Row_Abstract invokes the method:
+            called a "magic method". <classname>Zend_Db_Table_Row_Abstract</classname> invokes the method:
             <code>findDependentRowset('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> if you invoke a method on
             the Row object matching either of the following patterns:
         </para>
@@ -346,7 +344,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
             <para>
                 Some application frameworks, such as Ruby on Rails, use a mechanism called
                 "inflection" to allow the spelling of identifiers to change depending on usage. For
-                simplicity, Zend_Db_Table_Row does not provide any inflection mechanism. The table
+                simplicity, <classname>Zend_Db_Table_Row</classname> does not provide any inflection mechanism. The table
                 identity and the rule key named in the method call must match the spelling of the
                 class and rule key exactly.
             </para>
@@ -373,8 +371,7 @@ $bugsReportedBy = $user1234->findBugs();
 
 // Specify the reference rule
 $bugsAssignedTo = $user1234->findBugsByEngineer();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -391,8 +388,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
 
         <programlisting role="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             There always should be exactly one row in the parent table referenced by a dependent
@@ -421,8 +417,7 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $reporter = $bug1->findParentRow('Accounts');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -455,14 +450,13 @@ $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
 
 $engineer = $bug1->findParentRow('Accounts', 'Engineer');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
         <para>
             Alternatively, you can query rows from a parent table using a "magic method".
-            Zend_Db_Table_Row_Abstract invokes the method:
+            <classname>Zend_Db_Table_Row_Abstract</classname> invokes the method:
             <code>findParentRow('&lt;TableClass&gt;', '&lt;Rule&gt;')</code> if you invoke a method
             on the Row object matching either of the following patterns:
         </para>
@@ -517,8 +511,7 @@ $reporter = $bug1->findParentAccounts();
 
 // Specify the reference rule
 $engineer = $bug1->findParentAccountsByEngineer();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -543,11 +536,10 @@ $row->findManyToManyRowset($table,
                                    [Zend_Db_Table_Select $select]
                                ]
                            ]);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            This method returns a Zend_Db_Table_Rowset_Abstract containing rows from the table
+            This method returns a <classname>Zend_Db_Table_Rowset_Abstract</classname> containing rows from the table
             <code>$table</code>, satisfying the many-to-many relationship. The current Row object
             <code>$row</code> from the origin table is used to find rows in the intersection table,
             and that is joined to the destination table.
@@ -583,8 +575,7 @@ $bug1234 = $bugsRowset->current();
 
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -637,14 +628,13 @@ $bug1234 = $bugsRowset->current();
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
         <para>
             Alternatively, you can query rows from the destination table in a many-to-many
-            relationship using a "magic method." Zend_Db_Table_Row_Abstract invokes the method:
+            relationship using a "magic method." <classname>Zend_Db_Table_Row_Abstract</classname> invokes the method:
             <code>findManyToManyRowset('&lt;TableClass&gt;', '&lt;IntersectionTableClass&gt;',
             '&lt;Rule1&gt;', '&lt;Rule2&gt;')</code> if you invoke a method matching any of the
             following patterns:
@@ -710,8 +700,7 @@ $products = $bug1234->findProductsViaBugsProducts();
 
 // Specify the reference rule
 $products = $bug1234->findProductsViaBugsProductsByBug();
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -726,28 +715,28 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             <title>Declare DRI in the database:</title>
 
             <para>
-                Declaring cascading operations in Zend_Db_Table is intended
-                <emphasis role="strong">only</emphasis> for RDBMS brands that do not support
+                Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
+                <emphasis>only</emphasis> for RDBMS brands that do not support
                 declarative referential integrity (DRI).
             </para>
 
             <para>
                 For example, if you use MySQL's MyISAM storage engine, or SQLite, these solutions
                 do not support DRI. You may find it helpful to declare the cascading operations
-                with Zend_Db_Table.
+                with <classname>Zend_Db_Table</classname>.
             </para>
 
             <para>
                 If your RDBMS implements DRI and the <code>ON DELETE</code> and
                 <code>ON UPDATE</code> clauses, you should declare these clauses in your database
-                schema, instead of using the cascading feature in Zend_Db_Table. Declaring
+                schema, instead of using the cascading feature in <classname>Zend_Db_Table</classname>. Declaring
                 cascading DRI rules in the RDBMS is better for database performance, consistency,
                 and integrity.
             </para>
 
             <para>
                 Most importantly, do not declare cascading operations both in the RDBMS and in your
-                Zend_Db_Table class.
+                <classname>Zend_Db_Table</classname> class.
             </para>
 
         </note>
@@ -774,8 +763,7 @@ $product1234 = $productsRowset->current();
 $product1234->delete();
 // Automatically cascades to Bugs table
 // and deletes dependent rows.
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -793,7 +781,7 @@ $product1234->delete();
         </para>
 
         <para>
-            To declare a cascading relationship in the Zend_Db_Table, edit the rules in the
+            To declare a cascading relationship in the <classname>Zend_Db_Table</classname>, edit the rules in the
             <code>$_referenceMap</code>. Set the associative array keys <code>'onDelete'</code> and
             <code>'onUpdate'</code> to the string 'cascade' (or the constant
             <code>self::CASCADE</code>). Before a row is deleted from the parent table, or its
@@ -815,8 +803,8 @@ $product1234->delete();
             <para>
                 No cascading update is done in the example below if the primary key value in the
                 parent class is changed. The <code>'onUpdate'</code> element of the reference map
-                entry is <code>self::RESTRICT</code>. You can get the same result using the value
-                <code>self::NO_ACTION</code>, or by omitting the <code>'onUpdate'</code> entry.
+                entry is <code>self::RESTRICT</code>. You can get the same result by omitting
+                the <code>'onUpdate'</code> entry.
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -834,8 +822,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
         ...
     );
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
         </example>
 
@@ -844,15 +831,15 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <title>Notes Regarding Cascading Operations</title>
 
             <para>
-                <emphasis role="strong">Cascading operations invoked by Zend_Db_Table are not
+                <emphasis>Cascading operations invoked by <classname>Zend_Db_Table</classname> are not
                 atomic.</emphasis>
             </para>
 
             <para>
                 This means that if your database implements and enforces referential integrity
-                constraints, a cascading <code>UPDATE</code> executed by a Zend_Db_Table class
+                constraints, a cascading <code>UPDATE</code> executed by a <classname>Zend_Db_Table</classname> class
                 conflicts with the constraint, and results in a referential integrity violation.
-                You can use cascading <code>UPDATE</code> in Zend_Db_Table
+                You can use cascading <code>UPDATE</code> in <classname>Zend_Db_Table</classname>
                 <emphasis>only</emphasis> if your database does not enforce that referential
                 integrity constraint.
             </para>
@@ -881,22 +868,22 @@ class BugsProducts extends Zend_Db_Table_Abstract
             </para>
 
             <para>
-                <emphasis role="strong">Cascading operations in Zend_Db_Table are invoked only by
-                Zend_Db_Table.</emphasis>
+                <emphasis>Cascading operations in <classname>Zend_Db_Table</classname> are invoked only by
+                <classname>Zend_Db_Table</classname>.</emphasis>
             </para>
 
             <para>
-                Cascading deletes and updates defined in your Zend_Db_Table classes are applied if
+                Cascading deletes and updates defined in your <classname>Zend_Db_Table</classname> classes are applied if
                 you execute the <code>save()</code> or <code>delete()</code> methods on the Row
                 class. However, if you update or delete data using another interface, such as a
                 query tool or another application, the cascading operations are not applied. Even
                 when using <code>update()</code> and <code>delete()</code> methods in the
-                Zend_Db_Adapter class, cascading operations defined in your Zend_Db_Table classes
+                <classname>Zend_Db_Adapter</classname> class, cascading operations defined in your <classname>Zend_Db_Table</classname> classes
                 are not executed.
             </para>
 
             <para>
-                <emphasis role="strong">No Cascading <code>INSERT</code>.</emphasis>
+                <emphasis>No Cascading <code>INSERT</code>.</emphasis>
             </para>
 
             <para>

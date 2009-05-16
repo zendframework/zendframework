@@ -33,6 +33,7 @@
         </para>
 
         <programlisting role="sh"><![CDATA[
+
 % zf create project newproject
 ]]></programlisting>
 
@@ -41,6 +42,7 @@
         </para>
 
         <programlisting role="dos"><![CDATA[
+
 C:> zf.bat create project newproject
 ]]></programlisting>
 
@@ -49,6 +51,7 @@ C:> zf.bat create project newproject
         </para>
 
         <programlisting role="text"><![CDATA[
+
 newproject
 |-- application
 |   |-- Bootstrap.php
@@ -83,6 +86,7 @@ newproject
         </para>
 
         <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
 {
 }
@@ -95,6 +99,7 @@ class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
         </para>
 
         <programlisting role="dosini"><![CDATA[
+
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -127,6 +132,7 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php
 // Define el path al directorio de la aplicación
 defined('APPLICATION_PATH')
@@ -190,6 +196,7 @@ $application->bootstrap()
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
 {
@@ -205,6 +212,7 @@ class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
         </para>
 
         <programlisting role="dosini"><![CDATA[
+
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -231,6 +239,7 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php
 // Define el path al directorio de la aplicación
 defined('APPLICATION_PATH')
@@ -265,6 +274,7 @@ $application->bootstrap()
         </para>
 
         <programlisting role="conf"><![CDATA[
+
 SetEnv APPLICATION_ENV development
 
 RewriteEngine On
@@ -273,7 +283,6 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-
 ]]></programlisting>
 
         <para>
@@ -313,6 +322,7 @@ RewriteRule ^.*$ index.php [NC,L]
         </para>
 
         <programlisting role="dosini"><![CDATA[
+
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -344,6 +354,7 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -371,6 +382,7 @@ phpSettings.display_errors = 1
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_BootstrapAbstract
 {

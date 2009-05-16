@@ -1,4 +1,7 @@
-﻿<sect1 id="zend.acl.introduction">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.acl.introduction">
     <title>Introducción</title>
     <para>
         <classname>Zend_Acl</classname> provee la implementación de un sistema simple y
@@ -14,21 +17,21 @@
             <listitem>
                 <para>
                     Un
-                    <emphasis role="strong">recurso</emphasis>
+                    <emphasis>recurso</emphasis>
                     es un objeto al cual el acceso esta controlado.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     Un
-                    <emphasis role="strong">rol</emphasis>
+                    <emphasis>rol</emphasis>
                     es un objeto que puede solicitar acceso a un
                     recurso.
                 </para>
             </listitem>
         </itemizedlist>
         En términos generales,
-        <emphasis role="strong">
+        <emphasis>
             Los roles solicitan acceso a los recursos
         </emphasis>
         . Por ejemplo, si una persona solicita acceso a un automóvil,
@@ -169,8 +172,8 @@ $acl->add(new Zend_Acl_Resource('unRecurso'));
 $acl->deny('invitado', 'unRecurso');
 $acl->allow('miembro', 'unRecurso');
 
-echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
-            </programlisting>
+echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';
+]]></programlisting>
             <para>
                 Ya que no hay reglas específicamente definidas para
                 el rol "
@@ -244,8 +247,8 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';]]>
         <programlisting role="php"><![CDATA[
 require_once 'Zend/Acl.php';
 
-$acl = new Zend_Acl();]]>
-        </programlisting>
+$acl = new Zend_Acl();
+]]></programlisting>
 
         <note>
             <para>
@@ -348,8 +351,8 @@ $rolInvitado = $acl->addRole(new Zend_Acl_Role('personal'), 'invitado');
 $acl->addRole(new Zend_Acl_Role('editor'), 'personal');
 
 // Administrador no hereda controles de acceso
-$acl->addRole(new Zend_Acl_Role('administrador'));]]>
-        </programlisting>
+$acl->addRole(new Zend_Acl_Role('administrador'));
+]]></programlisting>
 
     </sect2>
 
@@ -403,8 +406,8 @@ $acl->allow('personal', null, array('editar', 'enviar', 'revisar'));
 $acl->allow('editor', null, array('publicar', 'archivar', 'eliminar'));
 
 // Administrador no hereda nada, pero tiene todos los privilegios permitidos
-$acl->allow('administrador');]]>
-        </programlisting>
+$acl->allow('administrador');
+]]></programlisting>
 
         <para>
             El valor
@@ -452,8 +455,8 @@ echo $acl->isAllowed('administrador') ?
      "permitido" : "denegado"; // permitido porque administrador tiene permitidos todos los privilegios
 
 echo $acl->isAllowed('administrador', null, 'actualizar') ?
-     "permitido" : "denegado"; // permitido porque administrador tiene permitidos todos los privilegios]]>
-        </programlisting>
+     "permitido" : "denegado"; // permitido porque administrador tiene permitidos todos los privilegios
+]]></programlisting>
     </sect2>
 </sect1>
 <!--

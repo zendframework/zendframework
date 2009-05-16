@@ -1,4 +1,7 @@
-﻿<sect1 id="zend.acl.advanced">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.acl.advanced">
 
     <title>Uso Avanzado</title>
 
@@ -7,14 +10,14 @@
         <title>Almacenamiento Permanente de los Datos ACL</title>
 
         <para>
-            Zend_Acl fue diseñado de tal manera que no requiere ninguna
+            <classname>Zend_Acl</classname> fue diseñado de tal manera que no requiere ninguna
             tecnología particular como bases de datos o un servidor de
             cache para el almacenamiento de datos ACL. Al poseer una
             implementación completamente construida en PHP, es posible
             contruir herramientas de administración personalizadas sobre
-            Zend_Acl con relativa facilidad y flexibilidad. En muchas
+            <classname>Zend_Acl</classname> con relativa facilidad y flexibilidad. En muchas
             situaciones se requiere alguna forma de mantenimiento
-            interactivo de una ACL, y Zend_Acl provee métodos para
+            interactivo de una ACL, y <classname>Zend_Acl</classname> provee métodos para
             configurar, y consultar, los controles de acceso de una
             aplicación.
         </para>
@@ -22,7 +25,7 @@
         <para>
             El almacenamiento de los datos ACL es una tarea que se
             delega al desarrollador, puesto que la utilización variará
-            exténsamente en distintas situaciones. Dado que Zend_Acl es
+            exténsamente en distintas situaciones. Dado que <classname>Zend_Acl</classname> es
             serializable, los objetos ACL pueden serializarse con la
             función
             <ulink url="http://php.net/serialize">
@@ -47,13 +50,13 @@
             Por ejemplo, supóngase que debe permitirse cierto acceso, pero
             únicamente entre las 8:00am y 5:00pm. Otro ejemplo sería negar el
             acceso debido a una petición que proviene de una dirección IP que se
-            ha marcado como una fuente de abusos. Zend_Acl tiene soporte para la
+            ha marcado como una fuente de abusos. <classname>Zend_Acl</classname> tiene soporte para la
             aplicación de normas basadas en cualquier condición que el
             desarrollador necesite.
         </para>
 
     <para>
-        Zend_Acl provee soporte para reglas condicionales con
+        <classname>Zend_Acl</classname> provee soporte para reglas condicionales con
         <code>Zend_Acl_Assert_Interface</code>
         . Con el fin de utilizar la regla de aserción de la interfaz,
         un desarrollador escribe una clase que implemente el método
@@ -77,8 +80,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         // ...
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Una vez la clase de aserción esta disponible, el desarrollador puede
@@ -90,8 +92,7 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
         <programlisting role="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             El código anterior crea una regla condicional que permite el acceso a

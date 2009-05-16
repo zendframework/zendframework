@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
-        <code>Zend_Config_Xml</code> permite a los desarrolladores almacenar
+        <classname>Zend_Config_Xml</classname> permite a los desarrolladores almacenar
         datos de configuración en un formato sencillo XML y leerlos a través de
         una sintáxis de propiedades de objetos anidados. El elemento raíz del
         archivo XML es irrelevante y puede ser nombrado arbitrariamente.
@@ -17,7 +20,7 @@
     <note>
         <title>Tipo devuelto</title>
         <para>
-        Los datos de configuración que se leen en <code>Zend_Config_Xml</code>
+        Los datos de configuración que se leen en <classname>Zend_Config_Xml</classname>
         son siempre devueltos como strings.
               La conversión de datos de string a otros tipos se deja en manos de los
         desarrolladores para que se ajuste a sus necesidades particulares.
@@ -26,7 +29,7 @@
     <example id="zend.config.adapters.xml.example.using">
         <title>Usando Zend_Config_Xml</title>
         <para>
-         Este ejemplo ilustra un uso básico de <code>Zend_Config_Xml</code>
+         Este ejemplo ilustra un uso básico de <classname>Zend_Config_Xml</classname>
          para cargar datos de configuración de un archivo XML. En este ejemplo
          hay datos de configuración tanto para un sistema de producción como
          para un sistema de pruebas. Debido a que los datos de configuración del
@@ -63,8 +66,7 @@
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
             Ahora, asuma que el desarrollador de aplicaciones necesita los datos
             de configuración de la fase de pruebas del archivo XML. Es una tarea
@@ -76,8 +78,7 @@ $config = new Zend_Config_Xml('/ruta/de/config.xml', 'pruebas');
 
 echo $config->database->params->host;   // muestra "dev.example.com"
 echo $config->database->params->dbname; // muestra "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <example id="zend.config.adapters.xml.example.attributes">
         <title>Usando atributos de etiqueta en Zend_Config_Xml</title>
@@ -104,8 +105,7 @@ echo $config->database->params->dbname; // muestra "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
         <para>
         La otra forma no reduce la configuración, sino que permite mantenerla de
         forma más fácil dado que no es necesario escribir el nombre de la
@@ -137,9 +137,41 @@ echo $config->database->params->dbname; // muestra "dbname"
         </database>
     </staging>
 </configdata>
-]]>
-</programlisting>
+]]></programlisting>
     </example>
+    <note>
+        <title>XML strings</title>
+        <para>
+            <classname>Zend_Config_Xml</classname> is able to load an XML string directly,
+            such as that retrieved from a database. The string is passed
+            as the first parameter to the constructor and must start with the
+            characters <code>'&lt;?xml'</code>:
+        </para>
+        <programlisting role="xml"><![CDATA[
+$string = <<<EOT
+<?xml version="1.0"?>
+<config>
+    <production>
+        <db>
+            <adapter value="pdo_mysql"/>
+            <params>
+                <host value="db.example.com"/>
+            </params>
+        </db>
+    </production>
+    <staging extends="production">
+        <db>
+            <params>
+                <host value="dev.example.com"/>
+            </params>
+        </db>
+    </staging>
+</config>
+EOT;
+
+$config = new Zend_Config_Xml($string, 'staging');
+]]></programlisting>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

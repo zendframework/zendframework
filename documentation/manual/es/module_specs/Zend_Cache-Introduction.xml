@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Introducción</title>
     <para>
-        <code>Zend_Cache</code>
+        <classname>Zend_Cache</classname>
         provee una forma genérica para cualquier caché de datos.
     </para>
     <para>
@@ -20,10 +23,10 @@
     </para>
     <para>
         El módulo principal (
-        <code>Zend_Cache_Core</code>
+        <classname>Zend_Cache_Core</classname>
         ) es genérico, flexible y configurable. Aun para sus necesidades
         específicas existen frontends de caché que extienden
-        <code>Zend_Cache_Core</code>
+        <classname>Zend_Cache_Core</classname>
         a conveniencia:
         <code>Output</code>
         ,
@@ -38,10 +41,10 @@
     <example id="zend.cache.introduction.example-1">
         <title>
             Obtener un frontend con
-            <code>Zend_Cache::factory()</code>
+            <classname>Zend_Cache::factory()</classname>
         </title>
         <para>
-            <code>Zend_Cache::factory()</code>
+            <classname>Zend_Cache::factory()</classname>
             ejemplifica objetos correctos y los une. En este primer
             ejemplo, usaremos el frontend
             <code>Core</code>
@@ -65,8 +68,7 @@ $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,
                              $backendOptions);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <note>
@@ -116,15 +118,14 @@ if(!$result = $cache->load('myresult')) {
 }
 
 print_r($result);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <example id="zend.cache.introduction.example-3">
         <title>
             El almacenamiento en caché de salida con la interfaz de
             salida
-            <code>Zend_Cache</code>
+            Zend_Cache
         </title>
         <para>
             ‘Resaltamos’ las secciones en las que deseamos almacenar en
@@ -169,8 +170,7 @@ if(!$cache->start('mypage')) {
 }
 
 echo 'Esto no estará en caché nunca ('.time().').';
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Note que delineamos el resultado de
             <code>time()</code>
@@ -189,7 +189,7 @@ echo 'Esto no estará en caché nunca ('.time().').';
     </example>
     <note>
         <para>
-            Cuando usamos Zend_Cache, ponemos atención a la importación
+            Cuando usamos <classname>Zend_Cache</classname>, ponemos atención a la importación
             del identificador caché (pasado a
             <code>save()</code>
             y

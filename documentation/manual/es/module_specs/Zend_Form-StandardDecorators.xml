@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Decoradores de Formulario (Form Decorartors) estándar contenidos en Zend Framework</title>
 
     <para>
-        <code>Zend_Form</code> se distribuye con distintos decoradores estándar. Para más
+        <classname>Zend_Form</classname> se distribuye con distintos decoradores estándar. Para más
         información sobre el uso de decoradores en general, vea <link
             linkend="zend.form.decorators">la sección sobre decoradores</link>.
     </para>
@@ -28,8 +31,7 @@ class Util
         return '<span class="label">' . $element->getLabel() . "</span>";
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Esta llamada de retorno se especificaría como <code>array('Util',
@@ -69,8 +71,8 @@ class Util
 
         <para>
             El decorador Description puede ser usado para mostrar un conjunto de descripciones
-            de un elemento <code>Zend_Form</code>, <code>Zend_Form_Element</code>, o
-            <code>Zend_Form_DisplayGroup</code>; toma la descripción usando el método
+            de un elemento <classname>Zend_Form</classname>, <code>Zend_Form_Element</code>, o
+           <classname>Zend_Form_DisplayGroup</classname>; toma la descripción usando el método
             <code>getDescription()</code> del objeto.
         </para>
 
@@ -113,8 +115,7 @@ class Util
     <legend>Información de Usuario</legend>
     ...
 </fieldset></dd>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             Este decorador reemplaza el contenido que se le provee
@@ -159,7 +160,7 @@ class Util
         <para>
             Los elementos de tipo "File" (upload de ficheros) tienen una notación especial
             cuando se usan múltiples elementos file o subformularios. El decorador
-            File es usado por <code>Zend_Form_Element_File</code> y permite fijar
+            File es usado por <classname>Zend_Form_Element_File</classname> y permite fijar
             múltiples elementos file con una única llamada al método. Se usa automáticamente
             y fija el nombre de cada elemento.
         </para>
@@ -169,7 +170,7 @@ class Util
         <title>Zend_Form_Decorator_Form</title>
 
         <para>
-            Los objetos <code>Zend_Form</code> normalmente necesitan generar una etiqueta
+            Los objetos <classname>Zend_Form</classname> normalmente necesitan generar una etiqueta
             HTML "form". El decorador Form utiliza la ayuda del view helper Form. Encapsula
             cualquier contenido provista en un elemento HTML form, usando la acción y el
             método del objeto Zend Form, y cualquier atributo como atributo HTML.
@@ -392,7 +393,7 @@ $form->setDecorators(array(
         <title>Zend_Form_Decorator_ViewHelper</title>
 
         <para>
-            La mayoría de los elementos utiliza helpers <code>Zend_View</code>
+            La mayoría de los elementos utiliza helpers <classname>Zend_View</classname>
             para generar el contenido, y esto se realiza con el decorador ViewHelper.
             Con él, se puede especificar una etiqueta 'helper' para fijar
             explicitamente el view helper que utilizar; si no se suministra ninguno,
@@ -468,27 +469,25 @@ $element->setDecorators(array(array('ViewScript', array(
 $element->viewScript = '_element.phtml';
 $element->setDecorators(array(array('ViewScript',
                                     array('class' => 'form element'))));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Un view script puede tener el siguiente aspecto:
         </para>
 
         <programlisting role="php"><![CDATA[
-<div class="<?= $this->class ?>">
-    <?= $this->formLabel($this->element->getName(),
+<div class="<?php echo  $this->class ?>">
+    <?php echo  $this->formLabel($this->element->getName(),
                          $this->element->getLabel()) ?>
-    <?= $this->{$this->element->helper}(
+    <?php echo  $this->{$this->element->helper}(
         $this->element->getName(),
         $this->element->getValue(),
         $this->element->getAttribs()
     ) ?>
-    <?= $this->formErrors($this->element->getMessages()) ?>
-    <div class="hint"><?= $this->element->getDescription() ?></div>
+    <?php echo  $this->formErrors($this->element->getMessages()) ?>
+    <div class="hint"><?php echo  $this->element->getDescription() ?></div>
 </div>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note>
             <title>Reemplazar contenido con un script de vista (view script)</title>
@@ -512,8 +511,7 @@ $element->getDecorator('ViewScript')->setOption('placement', false);
 
 // Dentro de un view script usado por un decorador:
 $this->decorator->setOption('placement', false);
-]]>
-            </programlisting>
+]]></programlisting>
         </note>
 
         <para>

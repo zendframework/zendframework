@@ -29,6 +29,7 @@
         </para>
 
         <programlisting role="ini"><![CDATA[
+
 resources.view.encoding = "UTF-8"
 resources.view.basePath = APPLICATION_PATH "/views/scripts"
 ]]></programlisting>

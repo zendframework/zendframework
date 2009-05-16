@@ -13,6 +13,7 @@
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -38,6 +39,7 @@ echo $foo->generate();
         </para>
 
             <programlisting role="php"><![CDATA[
+
 /**
  * Sample generated class
  *
@@ -64,6 +66,7 @@ class Foo
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -106,6 +109,7 @@ echo $foo->generate();
         </para>
 
         <programlisting role="php"><![CDATA[
+
 /**
  * Sample generated class
  *
@@ -140,6 +144,7 @@ class Foo
         </para>
 
             <programlisting role="php"><![CDATA[
+
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -218,6 +223,7 @@ echo $foo->generate();
         </para>
 
             <programlisting role="php"><![CDATA[
+
 /**
  * Sample generated class
  *
@@ -283,6 +289,7 @@ class Foo
         </para>
 
             <programlisting role="php"><![CDATA[
+
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes'  => array($foo);
     'docblock' => new Zend_CodeGenerator_Php_Docblock(array(
@@ -305,6 +312,7 @@ $file = new Zend_CodeGenerator_Php_File(array(
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $code = $file->generate();
 file_put_contents('Foo.php', $code);
 ]]></programlisting>
@@ -314,6 +322,7 @@ file_put_contents('Foo.php', $code);
         </para>
 
         <programlisting role="php"><![CDATA[
+
 <?php
 /**
  * Foo class file

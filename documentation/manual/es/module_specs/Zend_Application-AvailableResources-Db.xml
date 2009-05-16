@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
@@ -39,6 +39,7 @@
         </para>
 
         <programlisting role="ini"><![CDATA[
+
 [production]
 resources.db.adapter = "pdo_mysql"
 resources.db.params.host = "localhost"
@@ -64,6 +65,7 @@ resources.db.isDefaultTableAdapter = true
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $resource = $bootstrap->getPluginResource('db');
 ]]></programlisting>
 
@@ -73,6 +75,7 @@ $resource = $bootstrap->getPluginResource('db');
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $db = $resource->getDbAdapter();
 ]]></programlisting>
     </note>

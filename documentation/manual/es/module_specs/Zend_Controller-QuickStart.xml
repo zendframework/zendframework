@@ -66,8 +66,7 @@ application/
 html/
     .htaccess
     index.php
-]]>
-            </programlisting>
+]]></programlisting>
 
         </sect3>
 
@@ -98,8 +97,7 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 La regla de arriba redigirá las peticiones a recuros existentes
@@ -133,8 +131,7 @@ RewriteRule ^.*$ index.php [NC,L]
 
             <programlisting role="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Esto instanciará y hará un dispatch del front controller, que
@@ -214,8 +211,7 @@ class IndexController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Por defecto, el action helper
@@ -282,8 +278,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <h1>>¡Hola, Mundo!</h1>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.errorhandler">
@@ -309,8 +304,7 @@ class ErrorController extends Zend_Controller_Action
     {
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Asumiendo el sistema de carpetas discutido anteriormente,
@@ -335,8 +329,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     <p>Ocurrió un error; Por favor, inténtelo de nuevo más tarde.</p>
 </body>
 </html>
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.finish">

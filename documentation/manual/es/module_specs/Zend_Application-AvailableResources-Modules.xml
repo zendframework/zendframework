@@ -50,6 +50,7 @@
         </para>
 
         <programlisting role="ini"><![CDATA[
+
 [production]
 news.resources.db.adapter = "pdo_mysql"
 news.resources.db.params.host = "localhost"
@@ -60,6 +61,7 @@ news.resources.layout.layout = "news.phtml"
 ]]></programlisting>
 
         <programlisting role="xml"><![CDATA[
+
 <?xml version="1.0"?>
 <config>
     <production>
@@ -94,6 +96,7 @@ news.resources.layout.layout = "news.phtml"
         </para>
 
         <programlisting role="php"><![CDATA[
+
 $resource = $bootstrap->getPluginResource('modules');
 $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];

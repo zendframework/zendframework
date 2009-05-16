@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
 
     <title>Perfeccionamiento de los controles de acceso</title>
@@ -38,8 +41,8 @@
 
         <programlisting role="php"><![CDATA[
  // El nuevo grupo de Marketing hereda los permisos de Staff
- $acl->addRole(new Zend_Acl_Role('marketing'), 'staff'); ]]>
-        </programlisting>
+ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
+]]></programlisting>
 
         <para>
             A continuación, la nota que por encima de los controles de
@@ -60,15 +63,16 @@
  $acl->add(new Zend_Acl_Resource('latest'), 'news');
 
  // anuncio de noticias
- $acl->add(new Zend_Acl_Resource('announcement'), 'news'); ]]>
-        </programlisting>
+ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
+]]></programlisting>
 
         <para>
             Entonces es simplemente una cuestión de la definición de
             estas normas más específicas en ámbitos de la ACL:
         </para>
 
-        <programlisting role="php"><![CDATA[ //
+        <programlisting role="php"><![CDATA[
+ //
  Marketing debe ser capaz de archivar y publicar boletines informativos y
  // las últimas noticias
  $acl->allow('marketing',
@@ -81,8 +85,8 @@
 
  // Todos (incluyendo los administradores) tienen permiso denegado para
  // archivar anuncios y noticias
- $acl->deny(null, 'announcement', 'archive'); ]]>
-        </programlisting>
+ $acl->deny(null, 'announcement', 'archive');
+]]></programlisting>
 
         <para>
             Ahora podemos consultar el ACL con respecto a los últimos
@@ -121,8 +125,8 @@
  echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
  "allowed" : "denied";
  // denegado
- ]]>
-        </programlisting>
+
+]]></programlisting>
 
     </sect2>
 
@@ -161,8 +165,8 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 "allowed" : "denied";
 
 // denegado
- ]]>
-        </programlisting>
+
+]]></programlisting>
 
         <para>
             Los privilegios pueden ser modificados de manera incremental como se
@@ -186,8 +190,7 @@ echo $acl->isAllowed('marketing', 'latest', 'archive') ?
 echo $acl->isAllowed('marketing', 'latest', 'anything') ?
 "allowed" : "denied";
 // permitido
-]]>
-        </programlisting>
+]]></programlisting>
 
     </sect2>
 

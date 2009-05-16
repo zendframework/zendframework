@@ -1,8 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
     <para>
-        <code>Zend_Amf_Server</code> proporciona un servidor al estilo RPC para
+        <classname>Zend_Amf_Server</classname> proporciona un servidor al estilo RPC para
         tramitar solicitudes hechas desde Adobe Flash Player utilizando el protocolo AMF.
         Al igual que todas las clases de servidor, Zend Framework sigue la API de
         SoapServer, proporcionando una interfaz para crear servidores fácil de recordar.
@@ -23,8 +26,7 @@ $servidor = new Zend_Amf_Server();
 $servidor->setClass('Foo');
 $respuesta = $servidor->handle();
 echo $respuesta;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Alternativamente, en su lugar puede elegir agregar una función simple como
@@ -36,8 +38,7 @@ $servidor = new Zend_Amf_Server();
 $servidor->addFunction('myUberCoolFunction');
 $respuesta = $servidor->handle();
 echo $respuesta;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             También puede combinar y examinar la identidad de varias clases y funciones.
@@ -54,11 +55,10 @@ $servidor->addFunction('myUberCoolFunction', 'my')
        ->setClass('Bar', 'bar');
 $respuesta = $servidor->handle();
 echo $respuesta;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-        El <code>Zend_Amf_Server</code> también permite cargar servicios
+        El <classname>Zend_Amf_Server</classname> también permite cargar servicios
         dinámicamente, en función de una ruta de directorio ya suministrada.
         Puede añadir al servidor tantos directorios como desee.
         El orden en que se añadan los directorios al servidor será el orden en que
@@ -70,8 +70,7 @@ echo $respuesta;
         <programlisting role="php"><![CDATA[
 $servidor->addDirectory(dirname(__FILE__) .'/../services/');
 $servidor->addDirectory(dirname(__FILE__) .'/../package/');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
         Cuando se llama a servicios remotos, los nombres de los directorios que
@@ -113,8 +112,7 @@ function holaMundo($ombre, $saludo = 'Hola')
 {
     return $saludo . ', ' . $nombre;
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <programlisting role="php"><![CDATA[
 // Clase agregada
@@ -131,8 +129,7 @@ class Mundo
         return $saludo . ', ' . $nombre;
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Pueden usarse otras anotaciones, pero serán ignoradas.
@@ -143,9 +140,9 @@ class Mundo
         <title>Conectándose al Servidor desde Flex</title>
 
         <para>
-            Conectarse a <code>Zend_Amf_Server</code> desde su proyecto Flex
+            Conectarse a <classname>Zend_Amf_Server</classname> desde su proyecto Flex
             es bastante simple; solo necesita apuntar el final del URI
-            a su script <code>Zend_Amf_Server</code>.
+            a su script <classname>Zend_Amf_Server</classname>.
         </para>
 
         <para>
@@ -219,13 +216,12 @@ class Mundo
         </channel-definition>
     </channels>
 </services-config>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Hay dos puntos clave en el ejemplo.
             En primer lugar, pero último en el listado, creamos un canal AMF,
-            y especificamos el punto final como la URL a nuestro <code>Zend_Amf_Server</code>:
+            y especificamos el punto final como la URL a nuestro <classname>Zend_Amf_Server</classname>:
         </para>
 
         <programlisting role="xml"><![CDATA[
@@ -233,8 +229,7 @@ class Mundo
     <endpoint uri="http://example.com/server.php"
         class="flex.messaging.endpoints.AMFEndpoint"/>
 </channel-definition>
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Advierta que a este canal le hemos dado un identificador, "zend-endpoint".
@@ -251,24 +246,20 @@ class Mundo
 <mx:RemoteObject id="myservice"
     fault="faultHandler(event)"
     showBusyCursor="true"
-    source="RoundTrip"
     destination="zend">
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Aquí, hemos definido un nuevo objeto remoto identificado por "myservice"
             vinculado destino de servicio "zend" que hemos definido en el fichero
             <code>services-config.xml</code>. Entonces invocamos sus métodos en
             nuestro ActionScript simplemente llamando a "myservice.&lt;method&gt;".
-            (En este caso, el código original "RoundTrip" es el nombre de nuestra
-            aplicación Flex). Un ejemplo:
+            . A modo de ejemplo:
         </para>
 
         <programlisting role="ActionScript"><![CDATA[
 myservice.hello("Wade");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Cuando se usan nombres-de-espacio, puede usarse
@@ -277,8 +268,7 @@ myservice.hello("Wade");
 
         <programlisting role="ActionScript"><![CDATA[
 myservice.world.hello("Wade");
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Para más información sobre como invocar a Flex RemoteObject visite el
@@ -311,18 +301,16 @@ myservice.world.hello("Wade");
         </para>
 
         <programlisting role="php"><![CDATA[
-$servidor->setProduction(false);
-]]>
-        </programlisting>
+$server->setProduction(false);
+]]></programlisting>
 
         <para>
             Para habilitarlo nuevamente, pase el valor true en su lugar.
         </para>
 
         <programlisting role="php"><![CDATA[
-$servidor->setProduction(true);
-]]>
-        </programlisting>
+$server->setProduction(true);
+]]></programlisting>
 
         <note>
             <title>¡Deshabilite el modo de producción racionalmente!</title>
@@ -372,8 +360,7 @@ $servidor->setProduction(true);
 $respuesta = $servidor->handle();
 $respuesta->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $respuesta;
-]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -402,8 +389,7 @@ echo $respuesta;
                 <programlisting role="php"><![CDATA[
 // Mapea la clase ActionScript 'ContactVO' a la clase PHP 'Contact':
 $servidor->setClassMap('ContactVO', 'Contact');
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -418,8 +404,7 @@ class Contact
 {
     public $_explicitType = 'ContactVO';
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
 
             <listitem>
@@ -437,8 +422,7 @@ class Contact
         return 'ContactVO';
     }
 }
-]]>
-                </programlisting>
+]]></programlisting>
             </listitem>
         </itemizedlist>
 
@@ -468,8 +452,7 @@ package
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         <para>
             La clase es sintácticamente equivalente a la de PHP del mismo nombre.
             Los nombres de variables son exactamente los mismos y necesitan estar
@@ -488,8 +471,7 @@ private var myContact:ContactVO;
 private function getContactHandler(event:ResultEvent):void {
     myContact = ContactVO(event.result);
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             El siguiente resultado del evento debido a la llamada de servicio,
             se incorporó instantáneamente a ContactVO de Flex.
@@ -499,15 +481,15 @@ private function getContactHandler(event:ResultEvent):void {
     </sect2>
 
     <sect2 id="zend.amf.server.flash">
-        <title>Conectándose al servidor desde Flash</title>
+        <title>Conectándose al Servidor desde Flash</title>
 
         <para>
-            La conexión a <code>Zend_Amf_Server</code> desde su proyecto Flash
+            La conexión a <classname>Zend_Amf_Server</classname> desde su proyecto Flash
             es ligeramente distinta a la de Flex. Sin embargo una vez que la conexión
-            con Flash funcione con <code>Zend_Amf_Server</code> lo hará igual
+            con Flash funcione con <classname>Zend_Amf_Server</classname> lo hará igual
             modo que con Flex. El siguiente ejemplo también puede ser utilizado
             desde un fichero Flex AS3. Para nuestra conexión vamos a reutilizar
-            la misma configuracion <code>Zend_Amf_Server</code> junto a la clase Mundo.
+            la misma configuracion <classname>Zend_Amf_Server</classname> junto a la clase Mundo.
         </para>
         <para>
             Abra Flash CS y cree un nuevo fichero Flash (ActionScript 3).
@@ -560,8 +542,7 @@ package {
     }
   }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
 
         <para>
@@ -574,21 +555,19 @@ package {
         <programlisting role="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             En la clase necesitaremos tres variables para representar a NetConnection,
-            Responder, y la URL del gateway a nuestra instalación <code>Zend_Amf_Server</code>.
+            Responder, y la URL del gateway a nuestra instalación <classname>Zend_Amf_Server</classname>.
         </para>
         <programlisting role="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             En el constructor Main creamos un Responder(respondedor) y una nueva conexión al
-            punto final de <code>Zend_Amf_Server</code>. El respondedor define dos
+            punto final de <classname>Zend_Amf_Server</classname>. El respondedor define dos
             diferentes métodos para manejar la respuesta desde el servidor.
             Por simplicidad los hemos llamado onResult y onFault.
         </para>
@@ -596,18 +575,16 @@ private var responder:Responder;
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             La función onComplete se ejecuta tan pronto como la construcción
             ha concluido, enviando los datos al servidor.
             Necesitamos añadir una línea más que hace una llamada a la función
-            <code>Zend_Amf_Server</code> Mundo->hola.
+            <classname>Zend_Amf_Server</classname> Mundo->hola.
         </para>
         <programlisting role="as"><![CDATA[
 connection.call("Mundo.hola", responder, params);
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Cuando creamos la variable responder hemos definido las funciones onResult y onFault
             para manejar la respuesta proveniente del servidor.
@@ -620,8 +597,7 @@ private function onResult(result:Object):void {
     // Muestra los datos devueltos
     trace(String(result));
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             La función onFault, se llama si hubo una respuesta nula desde el servidor.
             Esto ocurre cuando hay un error en el servidor, la URL al servidor es inválida,
@@ -632,8 +608,7 @@ private function onResult(result:Object):void {
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             La inclusión de ActionScript para realizar la conexión remota ha finalizado.
             Al ejecutar el fichero ZendExample, se establece una conexión con Zend_Amf.

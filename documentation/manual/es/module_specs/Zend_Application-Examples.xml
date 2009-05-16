@@ -10,17 +10,18 @@
     </para>
 
     <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Con el archivo de configuración coresspondiente:
     </para>
 
     <programlisting role="ini"><![CDATA[
+
 ; APPLICATION_PATH/configs/application.ini
 [production]
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
@@ -57,6 +58,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
     </para>
 
     <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest(array $options = array())
@@ -77,8 +79,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $request;
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Nótese en este ejemplo la llamada a <code>bootstrap()</code>;
@@ -121,6 +122,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </para>
 
     <programlisting role="php"><![CDATA[
+
 class My_Bootstrap_Resource_View
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -149,8 +151,7 @@ class My_Bootstrap_Resource_View
         return $view;
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Para decirle al bootstrap que utilice éste, usted tendría que proveer
@@ -160,6 +161,7 @@ class My_Bootstrap_Resource_View
     </para>
 
     <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
@@ -178,8 +180,7 @@ $application = new Zend_Application(
         )
     )
 );
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Los recursos puede llamar a otros recursos e inicializadores accediendo
@@ -187,6 +188,7 @@ $application = new Zend_Application(
     </para>
 
     <programlisting role="php"><![CDATA[
+
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -201,8 +203,7 @@ class My_Bootstrap_Resource_Layout
         // ...
     }
 }
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         En el uso normal, usted podría instanciar la aplicación, arrancarla,
@@ -210,11 +211,11 @@ class My_Bootstrap_Resource_Layout
     </para>
 
     <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         Para un script personalizado, podría necesitar simplemente
@@ -222,14 +223,14 @@ $application->bootstrap()
     </para>
 
     <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrap('db');
 
 $service = new Zend_XmlRpc_Server();
 $service->setClass('Foo');  // uses database...
 echo $service->handle();
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         En lugar de utilizar el método <code>bootstrap()</code> para llamar
@@ -237,8 +238,8 @@ echo $service->handle();
     </para>
 
     <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
-]]>
-    </programlisting>
+]]></programlisting>
 </sect1>

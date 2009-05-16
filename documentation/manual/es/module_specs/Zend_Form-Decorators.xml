@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Creando un personalizado marcado de formulario usando Zend_Form_Decorator</title>
 
     <para>
         Representar un objeto form es completamente opcional -- no está obligado a usar
-        los métodos <code>Zend_Form</code> render() en absoluto. Sin embargo, si lo hace,
+        los métodos <classname>Zend_Form</classname> render() en absoluto. Sin embargo, si lo hace,
         los decoradores se usan para representar distintos objetos form.
     </para>
 
@@ -40,8 +43,8 @@
 
         <para>
             Para configurar un decorador, pase un array de opciones o un
-            objeto <code>Zend_Config</code> a este constructor, a un array
-            <code>setOptions()</code>, o a un objeto <code>Zend_Config</code>
+            objeto <classname>Zend_Config</classname> a este constructor, a un array
+            <code>setOptions()</code>, o a un objeto <classname>Zend_Config</classname>
             <code>setConfig()</code>.
         </para>
 
@@ -99,8 +102,8 @@
 
         <para>
             Decoradores son diseñados para interactuar con varios
-            tipos de clases <code>Zend_Form</code>: <code>Zend_Form</code>,
-            <code>Zend_Form_Element</code>, <code>Zend_Form_DisplayGroup</code>,
+            tipos de clases <classname>Zend_Form</classname>: <classname>Zend_Form</classname>,
+            <classname>Zend_Form_Element</classname>, <code>Zend_Form_DisplayGroup</code>,
             y todas las clases derivan de ellas. El método
             <code>setElement()</code> permite determinar el objeto del
             decorador que esta actualmente trabajando con, y <code>getElement()</code>
@@ -122,7 +125,7 @@
         <title>Decoradores estándar</title>
 
         <para>
-            <code>Zend_Form</code> entrega muchos decoradores estándar; ver
+            <classname>Zend_Form</classname> entrega muchos decoradores estándar; ver
             <link linkend="zend.form.standardDecorators">el capítulo Decoradores
             estándar</link> para detalles.
         </para>
@@ -138,7 +141,7 @@
 
         <para>
             Los decoradores necesitan implementar sólo
-            <code>Zend_Decorator_Interface</code>. La interface especifica lo
+           <classname>Zend_Decorator_Interface</classname>. La interface especifica lo
             siguiente:
         </para>
 
@@ -157,12 +160,11 @@ interface Zend_Decorator_Interface
     public function clearOptions();
     public function render($content);
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Para hacerlo mas simple, simplemente puede extender
-            <code>Zend_Decorator_Abstract</code>, el cual implementa todos los métodos
+            <classname>Zend_Decorator_Abstract</classname>, el cual implementa todos los métodos
             excepto <code>render()</code>.
         </para>
 
@@ -258,8 +260,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Puede entonces ubicarlo en el directorio del decorador:
@@ -275,8 +276,7 @@ $element->addPrefixPath('My_Decorator',
 $form->addElementPrefixPath('My_Decorator',
                             'My/Decorator/',
                             'decorator');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Puede especificar este decorador como compuesto (composite) y adjuntarlo a
@@ -286,8 +286,7 @@ $form->addElementPrefixPath('My_Decorator',
         <programlisting role="php"><![CDATA[
 // Sobreescribe los decoradores existentes con este otro:
 $element->setDecorators(array('Composite'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Mientras este ejemplo mostró cómo crear un decorador que genera
@@ -326,12 +325,11 @@ class My_Decorator_Errors
         }
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             En este ejemplo particular, debido al segmento del decorador final,
-            'Errors', se combina como <code>Zend_Form_Decorator_Errors</code>,
+            'Errors', se combina como <classname>Zend_Form_Decorator_Errors</classname>,
             será generado <emphasis>en lugar de</emphasis> el decorador
             -- significa que no necesitará cambiar ningún decorador para modificar la
             salida. Nombrando sus decoradores después de los decoradores existentes

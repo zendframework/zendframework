@@ -1,8 +1,11 @@
-﻿<sect1 id="zend.amf.introduction">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.amf.introduction">
     <title>Introducción</title>
 
     <para>
-        <code>Zend_Amf</code>
+        <classname>Zend_Amf</classname>
         provee apoyo para el Formato de Mensajes de ActionScript
         <ulink url="http://en.wikipedia.org/wiki/Action_Message_Format">Action
             Message Format</ulink>

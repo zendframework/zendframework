@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
     <para>
-        <code>Zend_Config_Ini</code>
+        <classname>Zend_Config_Ini</classname>
         permite a los desarrolladores almacenar datos de configuración
         en un formato de datos INI familiar, y leer de ellos en la
         aplicación usando una sintáxis de propiedades de objetos
@@ -21,14 +24,14 @@
     <note>
         <title>parse_ini_file</title>
         <para>
-            <code>Zend_Config_Ini</code>
+            <classname>Zend_Config_Ini</classname>
             utiliza la función
             <ulink url="http://php.net/parse_ini_file">
                 <code>parse_ini_file()</code>
             </ulink>
             de PHP. Por favor, revise esta documentación para observar
             sus comportamientos específicos, que se propagan a
-            <code>Zend_Config_Ini</code>
+            <classname>Zend_Config_Ini</classname>
             , tales como la forma en que los valores especiales:
             <code>true</code>
             ,
@@ -52,22 +55,21 @@
             llamada
             <code>'nestSeparator'</code>
             al construir el objeto
-            <code>Zend_Config_Ini</code>
+            <classname>Zend_Config_Ini</classname>
             . Por ejemplo:
             <programlisting role="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $config = new Zend_Config_Ini('/path/to/config.ini',
                               'pruebas',
                               $options);
-]]>
-            </programlisting>
+]]></programlisting>
         </para>
     </note>
     <example id="zend.config.adapters.ini.example.using">
         <title>Utilizando Zend_Config_Ini</title>
         <para>
             Este ejemplo muestra una forma de uso básica de
-            <code>Zend_Config_Ini</code>
+            <classname>Zend_Config_Ini</classname>
             para cargar datos de configuración de un archivo INI. En
             este ejemplo hay datos de configuración tanto para un
             sistema de producción como para un sistema en fase de
@@ -98,8 +100,7 @@ database.params.dbname   = dbname
 database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
-]]>
-        </programlisting>
+]]></programlisting>
         <para>
             Ahora, asuma que el desarrollador de aplicaciones necesita
             los datos de configuración de la etapa de pruebas del
@@ -111,8 +112,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini', 'pruebas');
 
 echo $config->database->params->host;   // muestra "dev.example.com"
 echo $config->database->params->dbname; // muestra "dbname"
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <note>
         <table id="zend.config.adapters.ini.table">

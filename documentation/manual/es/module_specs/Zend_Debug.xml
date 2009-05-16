@@ -1,10 +1,12 @@
-﻿<!-- versión 11089 -->
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
     <title>Mostrar información de variables(Dumping Variables)</title>
 
     <para>
-        El método estático <code>Zend_Debug::dump()</code> imprime o devuelve
+        El método estático <classname>Zend_Debug::dump()</classname> imprime o devuelve
         información sobre una expresión. Esta sencilla técnica de depuración es
         común, porque es fácil de utilizar en caliente y no requiere
         inicialización, herramientas especiales, o la depuración del entorno.
@@ -15,25 +17,24 @@
         <programlisting role="php"><![CDATA[
 
 Zend_Debug::dump($var, $label=null, $echo=true);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 
     <para>
         El argumento <code>$var</code> especifica la expresión o variable sobre
-        la cual el método <code>Zend_Debug::dump()</code> generará información.
+        la cual el método <classname>Zend_Debug::dump()</classname> generará información.
     </para>
 
     <para>
         El argumento boleano <code>$echo</code> especifica si la salida de
-        <code>Zend_Debug::dump()</code> es o no mostrada. Si es
+        <classname>Zend_Debug::dump()</classname> es o no mostrada. Si es
         <code>verdadera</code>, la salida es mostrada. A pesar del valor del
         argumento <code>$echo</code>, el retorno de este método contiene la
         salida.
     </para>
 
     <para>
-        Puede ser útil comprender que el método <code>Zend_Debug::dump()</code>
+        Puede ser útil comprender que el método <classname>Zend_Debug::dump()</classname>
         envuelve la función de PHP
         <ulink url="http://php.net/var_dump"><code>var_dump()</code></ulink>.
         Si el flujo de salida es detectado como una presentación de la web, la
@@ -45,7 +46,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     <tip>
         <title>Depurando con Zend_Log</title>
         <para>
-            Usar <code>Zend_Debug::dump()</code> es lo mejor para la depuración
+            Usar <classname>Zend_Debug::dump()</classname> es lo mejor para la depuración
             en caliente durante el desarrollo de software. Puede añadir el código para
             volcar una variable y después quitar el código fácilmente.
         </para>
@@ -54,7 +55,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
             Zend_Log</link> escribiendo el código de depuración más
             permanente. Por ejemplo, puede utilizar el nivel de log de
             <code>DEPURACIÓN</code> y el Stream log writer, para mostrar la
-            cadena de salida de <code>Zend_Debug::dump()</code>.
+            cadena de salida de <classname>Zend_Debug::dump()</classname>.
         </para>
     </tip>
 

@@ -149,6 +149,7 @@
         </para>
 
         <programlisting role="php"><![CDATA[
+
 interface Zend_Application_Bootstrap_Bootstrapper
 {
     public function __construct($application);
@@ -211,6 +212,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
             </para>
 
             <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initFoo()
@@ -236,6 +238,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             </para>
 
             <programlisting role="php"><![CDATA[
+
 $bootstrap->bootstrap('foo');
 ]]></programlisting>
 
@@ -245,6 +248,7 @@ $bootstrap->bootstrap('foo');
             </para>
 
             <programlisting role="php"><![CDATA[
+
 $bootstrap->bootstrap(array('foo', 'bar));
 ]]></programlisting>
 
@@ -254,6 +258,7 @@ $bootstrap->bootstrap(array('foo', 'bar));
             </para>
 
             <programlisting role="php"><![CDATA[
+
 $bootstrap->bootstrap();
 ]]></programlisting>
         </sect3>
@@ -281,6 +286,7 @@ $bootstrap->bootstrap();
             </para>
 
         <programlisting role="php"><![CDATA[
+
 interface Zend_Application_Bootstrap_ResourceBootstrapper
 {
     public function registerPluginResource($resource, $options = null);
@@ -324,6 +330,7 @@ interface Zend_Application_Bootstrap_ResourceBootstrapper
             </para>
 
             <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(APPLICATION_ENV, array(
     'resources' => array(
         'FrontController' => array(
@@ -357,6 +364,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
             </para>
 
             <programlisting role="php"><![CDATA[
+
 $application = new Zend_Application(APPLICATION_ENV, array(
     'pluginPaths' => array(
         'My_Resource' => APPLICATION_PATH . '/resources/',
@@ -383,6 +391,7 @@ $application = new Zend_Application(APPLICATION_ENV, array(
             </para>
 
             <programlisting role="php"><![CDATA[
+
 // Ejecute uno:
 $bootstrap->bootstrap('FrontController');
 
@@ -431,6 +440,7 @@ $bootstrap->bootstrap();
             </para>
 
             <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()
@@ -448,6 +458,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             </para>
 
             <programlisting role="php"><![CDATA[
+
 // Usando el par has/getResource():
 if ($bootstrap->hasResource('view')) {
     $view = $bootstrap->getResource('view');
@@ -478,6 +489,7 @@ if (isset($container->view)) {
             </para>
 
             <programlisting role="php"><![CDATA[
+
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -529,6 +541,7 @@ class FooController extends Zend_Controller_Action
             </para>
 
             <programlisting role="php"><![CDATA[
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest()
@@ -574,6 +587,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <programlisting role="php"><![CDATA[
+
 interface Zend_Application_Resource_Resource
 {
     public function __construct($options = null);
@@ -602,6 +616,7 @@ interface Zend_Application_Resource_Resource
         </para>
 
         <programlisting role="php"><![CDATA[
+
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
     protected $_view;

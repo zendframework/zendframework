@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Inicio rápido a Zend_Form</title>
 
     <para>
         Esta guía rápida pretende cubrir los fundamentos para
-        crear, validar y presentar formularios usando <code>Zend_Form</code>
+        crear, validar y presentar formularios usando <classname>Zend_Form</classname>
     </para>
 
     <sect2 id="zend.form.quickstart.create">
@@ -11,19 +14,18 @@
 
         <para>
             Crear un objeto de formulario es muy simple: solo instancíe
-            <code>Zend_Form</code>
+            <classname>Zend_Form</classname>
         </para>
 
         <programlisting role="php"><![CDATA[
 $form = new Zend_Form;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Para casos de uso avanzados, es posible desee crear una subclase de
-            <code>Zend_Form</code>, pero para formularios simples, puede
+            <classname>Zend_Form</classname>, pero para formularios simples, puede
             programar la creación de un formulario usando un objeto
-            <code>Zend_Form</code>
+            <classname>Zend_Form</classname>
         </para>
 
         <para>
@@ -35,8 +37,7 @@ $form = new Zend_Form;
         <programlisting role="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             El código de arriba establece el action del formulario a la URL
@@ -53,17 +54,16 @@ $form->setAction('/resource/process')
 
         <programlisting role="php"><![CDATA[
 $form->setAttrib('id', 'login');
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.form.quickstart.elements">
         <title>Añadir elementos al formulario</title>
 
         <para>
-            Un formulario no es nada sin sus elementos. <code>Zend_Form</code>
+            Un formulario no es nada sin sus elementos. <classname>Zend_Form</classname>
             contiene de manera predeterminada algunos elementos que generan
-            XHTML vía auxiliares <code>Zend_View</code>. Son los
+            XHTML vía auxiliares <classname>Zend_View</classname>. Son los
             siguientes:
         </para>
 
@@ -116,7 +116,7 @@ $form->setAttrib('id', 'login');
         <para>
             Tiene dos opciones para añadir elementos a un formulario; puede
             instanciar elementos concretos y pasarlos como objetos, o
-            simplemente puede pasar el tipo de elemento y <code>Zend_Form</code>
+            simplemente puede pasar el tipo de elemento y <classname>Zend_Form</classname>
             instaciará por usted un objeto del tipo correspondiente.
         </para>
 
@@ -130,8 +130,7 @@ $form->addElement(new Zend_Form_Element_Text('username'));
 
 // Pasando el tipo de elemento del formulario al objeto form:
 $form->addElement('text', 'username');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             De manera predeterminada, éstos no tienen validadores o filtros.
@@ -139,14 +138,14 @@ $form->addElement('text', 'username');
             mínimo de validadores, y potencialmente filtros. Puede hacer esto
             (a) antes de pasar el elemento al formulario, (b) vía opciones de
             configuración pasadas cuando crea un elemento a través de
-            <code>Zend_Form</code>, o (c) recuperar el elemento del objeto form
+            <classname>Zend_Form</classname>, o (c) recuperar el elemento del objeto form
             y configurándolo posteriormente.
         </para>
 
         <para>
             Veamos primero la creación de validadores para la instancia de
             un elemento concreto. Puede pasar objetos
-            <code>Zend_Validate_*</code> o el nombre de un validador para utilizar:
+            <classname>Zend_Validate_*</classname> o el nombre de un validador para utilizar:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -157,8 +156,7 @@ $username->addValidator(new Zend_Validate_Alnum());
 
 // Pasando el nombre de un validador:
 $username->addValidator('alnum');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Cuando se utiliza esta segunda opción, si el constructor del
@@ -169,8 +167,7 @@ $username->addValidator('alnum');
         <programlisting role="php"><![CDATA[
 // Pasando un patrón
 $username->addValidator('regex', false, array('/^[a-z]/i'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             (El segundo parámetro se utiliza para indicar si el fallo
@@ -187,8 +184,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <programlisting role="php"><![CDATA[
 // Hace este elemento requerido:
 $username->setRequired(true);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Cuando un elemento es requerido, un validador 'NotEmpty' (NoVacio)
@@ -204,8 +200,7 @@ $username->setRequired(true);
 
         <programlisting role="php"><![CDATA[
 $username->addFilter('StringtoLower');
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Entonces, la configuración final de nuestro elemento queda así:
@@ -223,15 +218,14 @@ $username->addValidators(array('alnum',
     ))
     ->setRequired(true)
     ->addFilters(array('StringToLower'));
-]]>
-        </programlisting>
+]]></programlisting>
 
 
         <para>
             Tan simple como esto, realizarlo para cada uno de los elementos
             del formulario puede resultar un poco tedioso. Intentemos la opción
             (b) arriba mencionada. Cuando creamos un nuevo elemento utilizando
-            <code>Zend_Form::addElement()</code> como fábrica, opcionalmente
+            <classname>Zend_Form::addElement()</classname> como fábrica, opcionalmente
             podemos pasar las opciones de configuración. Éstas pueden incluir
             validadores y los filtros que se van a utilizar. Por lo tanto, para hacer todo
             lo anterior implícitamente, intente lo siguiente:
@@ -246,13 +240,12 @@ $form->addElement('text', 'username', array(
     'required' => true,
     'filters'  => array('StringToLower'),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <note><para>
             Si encuentra que está asignando elementos con las mismas opciones en
             varios lugares, podría considerar crear su propia subclase de
-            <code>Zend_Form_Element</code> y utilizar ésta; a largo plazo le
+            <classname>Zend_Form_Element</classname> y utilizar ésta; a largo plazo le
             permitirá escribir menos.
         </para></note>
     </sect2>
@@ -262,7 +255,7 @@ $form->addElement('text', 'username', array(
 
         <para>
             Generar un formulario es simple. La mayoría de los elementos
-            utilizan un auxiliar de <code>Zend_View</code> para generarse a sí
+            utilizan un auxiliar de <classname>Zend_View</classname> para generarse a sí
             mismos, por lo tanto necesitan un objeto vista con el fin de
             generarse. Además, tiene dos opciones: usar el método render()
             del formulario, o simplemente mostrarlo con echo.
@@ -274,12 +267,11 @@ echo $form->render($view);
 
 // Suponiendo un objeto vista ha sido previamente establecido vía setView():
 echo $form;
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
-            De manera predeterminada, <code>Zend_Form</code> y
-            <code>Zend_Form_Element</code> intentarán utilizar el objeto vista
+            De manera predeterminada, <classname>Zend_Form</classname> y
+            <classname>Zend_Form_Element</classname> intentarán utilizar el objeto vista
             inicializado en el <code>ViewRenderer</code>, lo que significa que
             no tendrá que establecer la vista manualmente cuando use el MVC de
             Zend Framework. Generar un formulario en un script vista es tan
@@ -287,17 +279,16 @@ echo $form;
         </para>
 
         <programlisting role="php"><![CDATA[
-<?php echo $this->form ?>
-]]>
-        </programlisting>
+<?php echo $this->form
+]]></programlisting>
 
         <para>
-            Detrás del telón, <code>Zend_Form</code> utiliza "decoradores"
+            Detrás del telón, <classname>Zend_Form</classname> utiliza "decoradores"
             (decorators) para generar la salida. Estos decoradores pueden
             reemplazar, añadir o anteponer contenido, y tienen plena
             introspección al elemento que les es pasado. Como resultado, puede
             combinar múltiples decoradores para lograr efectos personalizados.
-            Predeterminadamente, <code>Zend_Form_Element</code> actualmente
+            Predeterminadamente, <classname>Zend_Form_Element</classname> actualmente
             combina cuatro decoradores para obtener su salida; la configuración
             sería como sigue:
         </para>
@@ -309,8 +300,7 @@ $element->addDecorators(array(
     array('HtmlTag', array('tag' => 'dd')),
     array('Label', array('tag' => 'dt')),
 ));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             (Donde &lt;HELPERNAME&gt; es el nombre de un view helper que
@@ -330,8 +320,7 @@ $element->addDecorators(array(
         <li>'123-abc' does not match against pattern '/^[a-z]/i'</li>
     </ul>
 </dd>
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             (Aunque no con el mismo formato.)
@@ -359,8 +348,7 @@ $element->addDecorators(array(
 
         <programlisting role="php"><![CDATA[
 $element->setOrder(10);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             O, cuando crea un elemento, pasándolo como una opción:
@@ -368,8 +356,7 @@ $element->setOrder(10);
 
         <programlisting role="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.form.quickstart.validate">
@@ -394,8 +381,7 @@ if ($form->isValid($_POST)) {
 } else {
     // ¡Fallo!
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Con solicitudes AJAX, a veces puede ignorar la validación de un solo
@@ -412,8 +398,7 @@ if ($form->isValidPartial($_POST)) {
 } else {
     // uno u más elementos probados no pasaron las validaciones
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Un método adicional, <code>processAjax()</code>, puede también ser
@@ -429,8 +414,7 @@ if ($form->isValidPartial($_POST)) {
 
         <programlisting role="php"><![CDATA[
 $values = $form->getValues();
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Si necesita los valores sin filtrar en algún punto, utilice:
@@ -438,8 +422,7 @@ $values = $form->getValues();
 
         <programlisting role="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
-]]>
-        </programlisting>
+]]></programlisting>
     </sect2>
 
     <sect2 id="zend.form.quickstart.errorstatus">
@@ -459,8 +442,7 @@ if (!$form->isValid($_POST)) {
     $this->view->form = $form;
     return $this->render('form');
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Si quiere inspeccionar los errores, tiene dos métodos.
@@ -499,7 +481,7 @@ if (!$form->isValid($_POST)) {
 
         <para>
             Usaremos el poder de la opciones de configuración de
-            <code>Zend_Form</code> para crear el formulario:
+            <classname>Zend_Form</classname> para crear el formulario:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -525,8 +507,7 @@ $form->addElement($username)
      ->addElement($password)
      // uso de addElement() como fábrica para crear el botón 'Login':
      ->addElement('submit', 'login', array('label' => 'Login'));
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             A continuación, vamos a crear un controlador para manejar esto:
@@ -564,8 +545,7 @@ class UserController extends Zend_Controller_Action
         // ahora intenta y autentica...
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Y un script para la vista que muestra el formulario:
@@ -573,9 +553,8 @@ class UserController extends Zend_Controller_Action
 
 <programlisting role="php"><![CDATA[
 <h2>Please login:</h2>
-<?= $this->form ?>
-]]>
-</programlisting>
+<?php echo $this->form
+]]></programlisting>
 
         <para>
             Como notará en el código del controlador, hay más trabajo por hacer:
@@ -589,8 +568,8 @@ class UserController extends Zend_Controller_Action
         <title>Usando un objeto Zend_Config</title>
 
         <para>
-            Todas las clases <code>Zend_Form</code> son configurables mediante
-            <code>Zend_Config</code>; puede incluso pasar un objeto al
+            Todas las clases <classname>Zend_Form</classname> son configurables mediante
+            <classname>Zend_Config</classname>; puede incluso pasar un objeto al
             constructor o pasarlo a través de <code>setConfig()</code>. Veamos
             cómo podemos crear el formulario anterior usando un archivo INI.
             Primero, vamos a seguir las recomendaciones, y colocaremos nuestras
@@ -625,8 +604,7 @@ user.login.elements.password.options.required = true
 
 ; elemento submit
 user.login.elements.submit.type = "submit"
-]]>
-</programlisting>
+]]></programlisting>
 
         <para>
             Entonces puede pasarlo al constructor del formulario:
@@ -635,8 +613,7 @@ user.login.elements.submit.type = "submit"
         <programlisting role="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
 $form   = new Zend_Form($config->user->login);
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             y el formulario entero será definido.
@@ -648,7 +625,7 @@ $form   = new Zend_Form($config->user->login);
 
         <para>
             Esperamos que después de este pequeño tutorial sea capaz de descubrir
-            el poder y flexibilidad de <code>Zend_Form</code>. Continúe leyendo
+            el poder y flexibilidad de <classname>Zend_Form</classname>. Continúe leyendo
             para profundizar más en el tema.
         </para>
     </sect2>

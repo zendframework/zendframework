@@ -1,8 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15103 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Introducción</title>
     <para>
 
-        <code>Zend_Config</code>
+        <classname>Zend_Config</classname>
         está diseñado para simplificar el acceso y el uso de datos de
         configuración dentro de aplicaciones. Provee una interfaz de
         usuario basada en propiedades de objetos anidadas para acceder a
@@ -10,15 +13,15 @@
         datos de configuración pueden venir de multitud de medios que
         soporten almacenamiento de datos de forma jerárquica.
         Actualmente
-        <code>Zend_Config</code>
+        <classname>Zend_Config</classname>
         provee adaptadores para datos de configuración que están
         almacenados en archivos de texto con
         <link linkend="zend.config.adapters.ini">
-            <code>Zend_Config_Ini</code>
+            <classname>Zend_Config_Ini</classname>
         </link>
         y
         <link linkend="zend.config.adapters.xml">
-            <code>Zend_Config_Xml</code>
+            <classname>Zend_Config_Xml</classname>
         </link>
         .
     </para>
@@ -28,16 +31,16 @@
             Normalmente, se espera que los usuarios usen
             una de las clases adaptadoras como
             <link linkend="zend.config.adapters.ini">
-                <code>Zend_Config_Ini</code>
+                <classname>Zend_Config_Ini</classname>
             </link>
             o
             <link linkend="zend.config.adapters.xml">
-                <code>Zend_Config_Xml</code>
+                <classname>Zend_Config_Xml</classname>
             </link>
             , pero si los datos de configuración están disponibles
             en un array PHP, se puede simplemente pasar los datos al
             constructor
-            <code>Zend_Config</code>
+            <classname>Zend_Config</classname>
             para utilizar una interfaz simple orientada a objetos:
         </para>
         <programlisting role="php"><![CDATA[
@@ -68,18 +71,17 @@ $db = Zend_Db::factory($config->database->adapter,
 // Uso alternativo: simplemente pase el objeto Zend_Config.
 // La Zend_Db factory sabe cómo interpretarlo.
 $db = Zend_Db::factory($config->database);
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
     <para>
         Como se ilustra en el ejemplo de arriba,
-        <code>Zend_Config</code>
+        <classname>Zend_Config</classname>
         provee una sintáxis de propiedades de objetos anidados para acceder a datos de configuración
         pasados a su constructor.
     </para>
     <para>
         Junto al acceso a valores de datos orientado a objetos,
-        <code>Zend_Config</code>
+        <classname>Zend_Config</classname>
         también tiene el método
         <code>get()</code>
         que devolverá el valor por defecto suministrado si el elemento
@@ -87,8 +89,7 @@ $db = Zend_Db::factory($config->database);
     </para>
     <programlisting role="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
-]]>
-    </programlisting>
+]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
         <title>Usando Zend_Config con un Archivo de Configuración PHP</title>
         <para>
@@ -110,16 +111,14 @@ return array(
         )
     )
 );
-]]>
-        </programlisting>
+]]></programlisting>
         <programlisting role="php"><![CDATA[
 // Lectura de la configuración
 $config = new Zend_Config(require 'config.php');
 
 // Muestra un dato de configuración (resultado: 'www.example.com')
 echo $config->webhost;
-]]>
-        </programlisting>
+]]></programlisting>
     </example>
 </sect1>
 <!--

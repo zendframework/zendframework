@@ -6,7 +6,7 @@
     <title>Hostname (Nombre de Host)</title>
 
     <para>
-        <classname>Zend_Validate_Hostname<classname> le permite validar un nombre de host
+        <classname>Zend_Validate_Hostname</classname> le permite validar un nombre de host
         contra una serie de especificaciones conocidas.
         Es posible comprobar por tres diferentes tipos de nombres:
         el DNS Hostname (domain.com por ejemplo), dirección IP (es decir 1.2.3.4),
@@ -44,16 +44,16 @@ if ($validator->isValid($hostname)) {
     <para>
         También se puede encontrar coincidencias de direcciones IP,
         nombres de host locales, o una combinación de todos los tipos permitidos.
-        Esto puede hacerse pasando un parámetro a <classname>Zend_Validate_Hostname<classname>
+        Esto puede hacerse pasando un parámetro a <classname>Zend_Validate_Hostname</classname>
         cuando lo instancia.
         El parámetro debe ser un entero que determina qué tipos de nombres de
         host están permitidos.
-        Se recomienda el uso de las constantes de <classname>Zend_Validate_Hostname<classname>
+        Se recomienda el uso de las constantes de <classname>Zend_Validate_Hostname</classname>
         para hacerlo.
     </para>
 
     <para>
-        Las constantes de <classname>Zend_Validate_Hostname<classname> son:
+        Las constantes de <classname>Zend_Validate_Hostname</classname> son:
         <code>ALLOW_DNS</code> para permitir sólo nombres de host DNS,
         <code>ALLOW_IP</code> para permitir direcciones IP,
         <code>ALLOW_LOCAL</code> para permitir nombres de host de la red local, y
@@ -76,7 +76,7 @@ if ($validator->isValid($hostname)) {
         Usando <code>ALLOW_ALL</code> para aceptar todos los tipos de nombres de
         host, también puede combinar estos tipos para realizar combinaciones.
         Por ejemplo, para aceptar nombres de host DNS y locales, instancie el
-        objeto <classname>Zend_Validate_Hostname<classname> como:
+        objeto <classname>Zend_Validate_Hostname</classname> como:
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);

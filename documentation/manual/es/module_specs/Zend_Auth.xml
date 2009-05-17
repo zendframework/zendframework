@@ -21,7 +21,7 @@
             La clase <classname>Zend_Auth</classname>implementa el patrón Singleton - sólo una instancia de la clase está
             disponible - a través de su método estático <code>getInstance()</code>. Esto significa que usar el operador <code>new</code>
             y la keyword <code>clone</code> no va a funcionar con la clase <classname>Zend_Auth</classname> : use
-            <classname>Zend_Auth::getInstance()<classname> en su lugar.
+            <classname>Zend_Auth::getInstance()</classname> en su lugar.
         </para>
     </note>
     <sect2 id="zend.auth.introduction.adapters">
@@ -79,7 +79,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             Como se ha indicado en su docblock, <code>authenticate()</code> debe regresar una instancia de
             <classname>Zend_Auth_Result</classname> (o de una clase derivada de <classname>Zend_Auth_Result</classname>). Si por alguna
             razón es imposible realizar una petición de autenticación, <code>authenticate()</code> debería arrojar
-            una excepción que se derive de <classname>Zend_Auth_Adapter_Exception<classname>.
+            una excepción que se derive de <classname>Zend_Auth_Adapter_Exception</classname>.
         </para>
 
     </sect2>
@@ -197,7 +197,7 @@ switch ($result->getCode()) {
             <para>
                  Por defecto, <classname>Zend_Auth</classname> provee almacenamiento persistente de la identidad desde un intento
                  de autenticación exitoso usando la sesión PHP. En un intento de autenticación exitoso,
-                 <classname>end_Auth::authenticate()<classname> almacena la identidad del resultado de autenticación en
+                 <classname>end_Auth::authenticate()</classname> almacena la identidad del resultado de autenticación en
                  almacenamiento persistente. A menos que se configure diferente, <classname>Zend_Auth</classname> usa una clase de
                  almacenamiento llamada <classname>Zend_Auth_Storage_Session</classname>, la cual, a su vez usa
                  <link linkend="zend.session"><classname>Zend_Session</classname></link>. Una clase diferente podría ser utilizada mediante
@@ -221,7 +221,7 @@ switch ($result->getCode()) {
                     Este espacio-nombre podría ser OVERRIDDEN al pasar un valor diferente al contructor de
                     <classname>Zend_Auth_Storage_Session</classname>, y este valor es pasado internamente al constructor de
                     <classname>Zend_Session_Namespace</classname>. Esto debería ocurrir antes de que se intente la autenticación, ya que
-                    <code>Zend_Auth::authenticate()</classname> realiza el almacenamiento automático de la identidad.
+                    <classname>Zend_Auth::authenticate()</classname> realiza el almacenamiento automático de la identidad.
 
                     <programlisting role="php"><![CDATA[
 // Almacena una referencia a la instancia Singleton de Zend_Auth

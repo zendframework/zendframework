@@ -26,7 +26,7 @@
             grupo 'staff' cubre las necesidades de la gran mayoría de
             usuarios, hay una necesidad de un nuevo grupo 'marketing'
             que requiere el acceso al boletín de noticias y las últimas
-            noticias en el CMS. El grupo es bastante autosuficiente y
+            noticias en el CMS. El grupo es bastante auto suficiente y
             tendrá la capacidad de publicar y de archivar los boletines
             de noticias y las últimas noticias.
         </para>

@@ -14,7 +14,7 @@
             tecnología particular como bases de datos o un servidor de
             cache para el almacenamiento de datos ACL. Al poseer una
             implementación completamente construida en PHP, es posible
-            contruir herramientas de administración personalizadas sobre
+            construir herramientas de administración personalizadas sobre
             <classname>Zend_Acl</classname> con relativa facilidad y flexibilidad. En muchas
             situaciones se requiere alguna forma de mantenimiento
             interactivo de una ACL, y <classname>Zend_Acl</classname> provee métodos para
@@ -25,7 +25,7 @@
         <para>
             El almacenamiento de los datos ACL es una tarea que se
             delega al desarrollador, puesto que la utilización variará
-            exténsamente en distintas situaciones. Dado que <classname>Zend_Acl</classname> es
+            extensamente en distintas situaciones. Dado que <classname>Zend_Acl</classname> es
             serializable, los objetos ACL pueden serializarse con la
             función
             <ulink url="http://php.net/serialize">

@@ -53,7 +53,7 @@
             En <classname>Zend_Acl</classname>, crear un recurso es muy sencillo. <classname>Zend_Acl</classname>
             proporciona el
             <classname>Zend_Acl_Resource_Interface</classname>
-            para facilitar a los desarrolladores la creacción de
+            para facilitar a los desarrolladores la creación de
             recursos. Una clase solo necesita implementar su interfaz,
             la cual consiste en un método único,
             <code>getResourceId()</code>
@@ -122,13 +122,13 @@
         </para>
         <para>
             Dado que la habilidad de herencia desde múltiples roles es
-            muy util, múltiples herencias tambien introduce cierto grado
+            muy útil, múltiples herencias también introduce cierto grado
             de complejidad. El siguiente ejemplo ilustra la condición de
             ambiguedad y como <classname>Zend_Acl</classname> soluciona esto.
         </para>
         <example
             id="zend.acl.introduction.roles.example.multiple_inheritance">
-            <title>Herencia Multiple entre Roles</title>
+            <title>Herencia Múlltiple entre Roles</title>
             <para>
                 El siguiente código define tres roles principales - "
                 <code>invitado</code>
@@ -206,11 +206,11 @@ echo $acl->isAllowed('unUsuario', 'unRecurso') ? 'permitido' : 'denegado';
                 <code>unUsuario</code>
                 " está tanto denegado como permitido para acceder a "
                 <code>unRecurso</code>
-                ", por la razon de tener un conflicto de reglas
+                ", por la razón de tener un conflicto de reglas
                 heredadas de diferentes roles padre.
             </para>
             <para>
-                <classname>Zend_Acl</classname> resuelve esta ambiguedad completando la
+                <classname>Zend_Acl</classname> resuelve esta ambigüedad completando la
                 consulta cuando encuentra la primera regla que es
                 directamente aplicable a la consulta. En este caso, dado
                 que el rol "
@@ -324,7 +324,7 @@ $acl = new Zend_Acl();
            <classname>Zend_Acl_Role</classname>
             , pero cualquier objeto que implemente
            <classname>Zend_Acl_Role_Interface</classname>
-            es admisible. Estos grupos pueden ser agragados al registro
+            es admisible. Estos grupos pueden ser agregados al registro
             de roles de la siguiente manera:
         </para>
 
@@ -426,7 +426,7 @@ $acl->allow('administrador');
         <para>
             Ahora tenemos una ACL flexible que puede ser usada para
             determinar qué solicitantes tienen permisos para realizar
-            funciones a través de la aplicacion web. Ejecutar
+            funciones a través de la aplicación web. Ejecutar
             consultas es la forma más simple de usar el método
             <code>isAllowed()</code>
             :

@@ -1,20 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="introduction.overview">
 
-    <title>Descripción general </title>
+    <title>Descripción general</title>
 
     <para>
-        Zend Framework (ZF) es un framework de código abierto para desarrollar aplicaciones web y servicios web con PHP5. ZF es una implementación que usa código 100% orientado a objetos. La estructura de los componentes de ZF es algo único; cada componente está construido con una baja dependencia de otros componentes. Esta arquitectura débilmente acoplada permite a los desarrolladores utilizar los componentes por separado. A menudo se refiere a este tipo de diseño como "use-at-will" (uso a voluntad).
+        Zend Framework (ZF) es un framework de código abierto para desarrollar
+        aplicaciones web y servicios web con PHP5.
+        ZF es una implementación que usa código 100% orientado a objetos.
+        La estructura de los componentes de ZF es algo único; cada componente
+        está construido con una baja dependencia de otros componentes.
+        Esta arquitectura débilmente acoplada permite a los desarrolladores
+        utilizar los componentes por separado.
+        A menudo se refiere a este tipo de diseño como "use-at-will"
+        (uso a voluntad).
     </para>
     <para>
-       Aunque se pueden utilizar de forma individual, los componentes de la librería estándar de Zend Framework conforman un potente y extensible framework de aplicaciones web al combinarse. ZF ofrece un gran rendimiento y una robusta implementación MVC, una abstración de base de datos fácil de usar, y un componente de formularios que implementa la prestación de formularios HTML, validación y filtado para que los desarrolladores puedan consolidar todas las operaciones usando de una manera sencilla la interfaz orientada a objetos. Otros componentes, como Zend_Auth y Zend_Acl, proveen autentificación de usuarios y autorización diferentes a las tiendas de certificados comunes (REVISAR ESTO). También existen componentes que implementan librerías de cliente para acceder de forma sencilla a los web services más populares. Cualesquiera que sean las necesidades de su solicitud, usted tiene todas las posibilidades de encontrar un componente de Zend Framework que se pueda utilizar para reducir drásticamente el tiempo de desarrollo, con una base completamente sólida.
+       Aunque se pueden utilizar de forma individual, los componentes de la
+       biblioteca estándar de Zend Framework conforman un potente y extensible
+       framework de aplicaciones web al combinarse.
+       ZF ofrece un gran rendimiento y una robusta implementación MVC,
+       una abstración de base de datos fácil de usar, y un componente de
+       formularios que implementa la prestación de formularios HTML,
+       validación y filtado para que los desarrolladores puedan consolidar
+       todas las operaciones usando de una manera sencilla la interfaz
+       orientada a objetos. Otros componentes, como Zend_Auth y Zend_Acl,
+       proveen autentificación de usuarios y autorización diferentes a las
+       tiendas de certificados comunes (REVISAR ESTO).
+       También existen componentes que implementan bibliotecas de cliente
+       para acceder de forma sencilla a los web services más populares.
+       Cualesquiera que sean las necesidades de su solicitud, usted tiene
+       todas las posibilidades de encontrar un componente de Zend Framework
+       que se pueda utilizar para reducir drásticamente el tiempo de desarrollo,
+       con una base completamente sólida.
     </para>
     <para>
         El principal patrocinador del proyecto Zend Framework es <ulink url="http://www.zend.com">
-        Zend Technologies</ulink>, pero muchas empresas han contribuido con componentes o características importantes para el marco. Empresas como Google, Microsoft y StrikeIron se han asociado con Zend para proporcionar interfaces de servicios web y otras tecnologías que desean poner a disposición de los desarrolladores de Zend Framework.
+        Zend Technologies</ulink>, pero muchas empresas han contribuido con
+        componentes o características importantes para el marco.
+        Empresas como Google, Microsoft y StrikeIron se han asociado con Zend
+        para proporcionar interfaces de servicios web y otras tecnologías que
+        desean poner a disposición de los desarrolladores de Zend Framework.
     </para>
     <para>
-        Zend Framework no podría haber proporcionado y apoyado todas estas características sin la ayuda de la vibrante comunidad de ZF. Los miembros de la comunidad, incluidos los contribuyentes, están disponibles en las , <ulink url="http://framework.zend.com/archives">listas de correo</ulink>, <ulink url="http://www.zftalk.com">
-        canales de IRC</ulink>, y en otros foros. Cualquier duda que tenga acerca de ZF, la comunidad está siempre disponible para responder.
+        Zend Framework no podría haber proporcionado y apoyado todas estas
+    características sin la ayuda de la vibrante comunidad de ZF.
+    Los miembros de la comunidad, incluidos los contribuyentes,
+    están disponibles en las , <ulink url="http://framework.zend.com/archives">listas de correo</ulink>, <ulink url="http://www.zftalk.com">
+        canales de IRC</ulink>, y en otros foros.
+        Cualquier duda que tenga acerca de ZF, la comunidad está siempre
+        disponible para responder.
     </para>
 </sect1>
 <!--

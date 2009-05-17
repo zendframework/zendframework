@@ -1,66 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <appendix id="requirements">
-
-    <title>Zend Framework Requirements</title>
-
+    <title>Requisitos de Zend Framework</title>
     <para>
-        Zend Framework requires a PHP 5 interpreter with a web server configured
-        to handle PHP scripts correctly. Some features require additional extensions or
-        web server features; in most cases the framework can be used without them, although
-        performance may suffer or ancillary features may not be fully functional. An example
-        of such a dependency is mod_rewrite in an Apache environment, which can be used to
-        implement "pretty URL's" like "http://www.example.com/user/edit". If mod_rewrite is
-        not enabled, ZF can be configured to support URL's such as "http://www.example.com?controller=user&amp;action=edit".
-        Pretty URL's may be used to shorten URL's for textual representation or search engine optimization (SEO),
-        but they do not directly affect the functionality of the application.
+        Zend Framework requiere un intérprete PHP 5 con un servidor web 
+        configurado para manejar scripts PHP correctamente. 
+        Algunas características requieren extensiones adicionales  o 
+        características de servidor web; en muchos casos el framework puede ser 
+        utilizado sin ellos, aunque el rendimiento puede sufrir o las 
+        características auxiliares pueden no ser completamente funcionales.
+        Un ejemplo de dicha dependencia es mod_rewrite en un entorno Apache, 
+        que puede ser utilizado para ejecutar "pretty URL" como 
+        "http://www.example.com/user/edit".
+        Si mod_rewrite no está habilitado, ZF puede ser configurado para apoyar 
+        las URL como. 
+        La pretty URL, puede ser utilizada para acortar las URL de 
+        representación textual o para la optimisation de los motores de 
+        búsqueda(SEO), pero no afectan directamente a la funcionalidad de la 
+        aplicación.
     </para>
 
     <sect1 id="requirements.version">
 
-        <title>PHP Version</title>
+        <title>Versión de PHP</title>
 
         <para>
-            Zend recommends PHP 5.2.3 or higher for critical security and performance enhancements, although
-            Zend Framework requires only PHP 5.1.4 or later.
+            Zend recomienda PHP 5.2.3 o superior por mejoras en la seguridad 
+            críticas y en el rendimiento, aunque Zend Framework requiere sólo 
+            PHP 5.1.4 o posterior.
         </para>
 
         <para>
-            Zend Framework has an extensive collection of unit tests, which you can run using PHPUnit 3.0 or later.
+            Zend Framework tiene una extensa colección de unidades de prueba, 
+            que puede ejecutar utilizando PHPUnit 3.0 o posterior.
         </para>
 
     </sect1>
 
     <sect1 id="requirements.extensions">
 
-        <title>PHP Extensions</title>
+        <title>Extensiones de PHP</title>
 
         <para>
-            You will find a table listing all extensions typically found in PHP
-            and how they are used in Zend Framework below. You should verify that the extensions on
-            which ZF components you'll be using in your application are available in your PHP environments.
-            Many applications will not require every extension listed below.
+            Usted encontrará un cuadro con todas las extensiones que suelen 
+            encontrarse en PHP y debajo cómo se usan en Zend Framework. 
+            Usted debe verificar que las extensiones de componentes ZF que 
+            estará usando en su aplicación están disponibles en sus entornos PHP.
+            Muchas aplicaciones no exigirán de cada extensión que figuran a 
+            continuación.
         </para>
 
         <para>
-            A dependency of type "hard" indicates that the components or classes
-            cannot function properly if the respective extension is not available,
-            while a dependency of type "soft" indicates that the component may use
-            the extension if it is available but will function properly if it is not.
-            Many components will automatically use certain extensions if they are available
-            to optimize performance but will execute code with similar functionality in the
-            component itself if the extensions are unavailable.
+            Una dependencia de tipo "hard" indica que los componentes o clases 
+            no pueden funcionar correctamente si las respectivas extensiones no 
+            están disponibles, mientras que una dependencia de tipo "soft" 
+            indica que el componente puede usar la extensión si está disponible 
+            pero funcionará correctamente si no lo está. 
+            Muchos de los componentes utilizarán automáticamente determinadas 
+            extensiones si están disponibles para optimizar el rendimiento pero 
+            ejecutarán el código con una funcionalidad similar en el propio 
+            componente si las extensiones no están disponibles.
         </para>
 
         <table frame='all' id="requirements.extensions.table-1">
-            <title>PHP Extensions Used in Zend Framework by Component</title>
+            <title>Extensiones de PHP usadas en Zend Framework por Componente</title>
             <tgroup cols='3'>
                 <!-- <colspec colwidth='1in'/>
                 <colspec colwidth='1in'/>
                 <colspec colwidth='3in'/> -->
                 <thead>
                     <row>
-                        <entry>Extension</entry>
-                        <entry>Dependency Type</entry>
-                        <entry>Used by Zend Framework Components</entry>
+                        <entry>Extensión</entry>
+                        <entry>Tipo de Dependencia</entry>
+                        <entry>Useda por Componentes de Zend Framework </entry>
                     </row>
                 </thead>
                 <tbody>
@@ -609,28 +621,30 @@
 
     <sect1 id="requirements.zendcomponents">
 
-        <title>Zend Framework Components</title>
+        <title>Componentes de Zend Framework</title>
 
         <para>
-            Below is a table that lists all available Zend Framework Components
-            and which PHP extension they need. This can help guide you
-            to know which extensions are required for your application.
-            Not all extensions used by Zend Framework are required for every
-            application.
+            Más abajo hay un cuadro que enumera todos los Componentes de 
+            Zend Framework y que extensión de PHP necesitan. Esto puede ayudar 
+            a guiarlo para saber que extensiones son necesarias para su 
+            aplicación. No todas las extensiones utilizados por Zend Framework 
+            son necesarias en cada aplicación.
         </para>
 
         <para>
-            A dependency of type "hard" indicates that the components or classes
-            cannot function properly if the respective extension is not available,
-            while a dependency of type "soft" indicates that the component may use
-            the extension if it is available but will function properly if it is not.
-            Many components will automatically use certain extensions if they are available
-            to optimize performance but will execute code with similar functionality in the
-            component itself if the extensions are unavailable.
+            Una dependencia de tipo "hard" indica que los componentes o clases 
+            no pueden funcionar correctamente si las extensiones respectivas 
+            no están disponibles, mientras que una dependencia de tipo "soft" 
+            indica que el componente puede usar la extensión si está disponible, 
+            pero funcionará correctamente si no lo está.
+            Muchos de los componentes utilizarán automáticamente determinadas 
+            extensiones si están disponibles para optimizar el rendimiento, 
+            pero ejecutará un código con una funcionalidad similar en el propio 
+            componente si las extensiones no están disponibles.
         </para>
 
         <table frame='all' id="requirements.zendcomponents.table-1">
-            <title>Zend Framework Components and the PHP Extensions they use</title>
+            <title>Componentes de Zend Framework y las extensiones que usan de PHP</title>
             <tgroup cols='4'>
                 <!-- <colspec colwidth='3in'/>
                 <colspec colwidth='1in'/>
@@ -638,10 +652,10 @@
                 <colspec colwidth='3in'/> -->
                 <thead>
                     <row>
-                        <entry>Zend Framework Components</entry>
-                        <entry>Dependency Type</entry>
-                        <entry>Subclass</entry>
-                        <entry>PHP Extension</entry>
+                        <entry>Componentes de Zend Framework</entry>
+                        <entry>Tipo de Dependencia</entry>
+                        <entry>Subclase</entry>
+                        <entry>Extensión PHP</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -1167,42 +1181,43 @@
 
     <sect1 id="requirements.dependencies">
 
-        <title>Zend Framework Dependencies</title>
+        <title>Dependencias de Zend Framework</title>
 
         <para>
-            Below you can find a table listing Zend Framework Components
-            and their dependencies to other Zend Framework Components. This
-            can help you if you need to have only single components instead
-            of the complete Zend Framework.
+            A continuación encontrará un cuadro de Componennetes de 
+            Zend Framework y sus dependencias a otros Componentes de Zend 
+            Framework. Esto puede ser de ayuda si usted necesita tener sólo 
+            componentes individuales en lugar del Zend Framework completo.
         </para>
 
         <para>
-            A dependency of type "hard" indicates that the components or classes
-            cannot function properly if the respective dependent component is not available,
-            while a dependency of type "soft" indicates that the component may need
-            the dependent component in special situations or with special adapters.
+            Una dependencia de tipo "hard" indica que los componentes o clases 
+            no funcionarán correctamente si los respectivos componentes 
+            dependientes no están disponibles, mientras que una dependencia de 
+            tipo "soft" indica que el componente puede necesitar el componente 
+            dependiente en situaciones especiales o con adaptadores especiales.
         </para>
 
         <note>
             <para>
-                Even if it's possible to seperate single components for
-                usage from the complete Zend Framework you should keep
-                in mind that this can lead to problems when files are missed
-                or components are used dynamically.
+                Incluso si es posible separar componentes indiduales para usarlo 
+                desde Zend Framework completo, usted debe tener en cuenta que esto 
+                puede conducir a problemas cuando se perdieron los ficheros o los
+                componentes se utilizan dinámicamente.
             </para>
         </note>
 
         <table frame='all' id="requirements.dependencies.table-1">
-            <title>Zend Framework Components and their dependency to other Zend Framework Components</title>
+            <title>Componenetes de Zend Framework y sus dependencias a otros Componenetes de Zend Framework</title>
             <tgroup cols='3'>
                 <colspec colwidth='2in'/>
                 <colspec colwidth='1in'/>
                 <colspec colwidth='4in'/>
                 <thead>
                     <row>
-                        <entry>Zend Framework Component</entry>
-                        <entry>Dependency Type</entry>
-                        <entry>Dependent Zend Framework Component</entry>
+                        <entry>Componente de Zend Framework</entry>
+                        <entry>Tipo de Dependencia</entry>
+                        <entry>Componente Dependiente de Zend Framework</entry>
                     </row>
                 </thead>
                 <tbody>

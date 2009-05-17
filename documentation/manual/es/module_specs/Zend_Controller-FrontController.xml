@@ -108,7 +108,7 @@ $front = Zend_Controller_Front::getInstance();
 
             <para>
                 <code>setControllerDirectory()</code> se usa para decirle a <link
-                    linkend="zend.controller.dispatcher">the dispatcher</link>
+                    linkend="zend.controller.dispatcher">el dispatcher</link>
                 dónde buscar para los archivos de clase <link
                     linkend="zend.controller.action">action controller</link>.
                 Acepta bien un único path o un array asociativo de pares 
@@ -155,9 +155,9 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
 
             <para>
                 Uno de los aspectos del front controller es que puede <link
-                    linkend="zend.controller.modular">definir una estructura 
-                    modular de directorio</link> para crear componentes 
-                    standalone; estos son llamados "módulos".
+                    linkend="zend.controller.modular"> definir una 
+                estructura modular de directorio</link> para crear 
+                componentes standalone; estos son llamados "módulos".
             </para>
 
             <para>
@@ -178,7 +178,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 Después, si quiere determinar el path a un determinado módulo 
                 o al módulo actual, puede llamar a <code>getModuleDirectory()</code>, 
-                opcionalmente pasar un nombre de módulo para conseguir el  
+                opcionalmente puede pasar un nombre de módulo para conseguir el  
                 directorio de ese módulo específico.
             </para>
         </sect3>
@@ -200,21 +200,22 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 Si no se pasa ningun objeto solicitud o respuesta,
                 <code>dispatch()</code> comprobará por objetos previamente 
-                registrados y utilizar esos o instanciar versiones por defecto 
+                registrados y utilizará esos o instanciará versiones por defecto 
                 a utilizar en su proceso (en ambos casos, el sabor de HTTP será 
                 utilizado por defecto).
             </para>
 
             <para>
-                Similarly, <code>dispatch()</code> checks for registered <link
-                    linkend="zend.controller.router">router</link> and <link
+                Similarmente, <code>dispatch()</code> 
+                comprueba los objetos registados <link
+                    linkend="zend.controller.router">router</link> y <link
                     linkend="zend.controller.dispatcher">dispatcher</link>
-                objects, instantiating the default versions of each if none is
-                found.
+                , instanciando las versiones por defecto de cada uno si ninguno 
+                de ellos se encuentra.
             </para>
 
             <para>
-                The dispatch process has three distinct events:
+                El proceso de dispatch tiene tres eventos distintos:
             </para>
 
             <itemizedlist>
@@ -224,13 +225,13 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </itemizedlist>
 
             <para>
-                Routing takes place exactly once, using the values in the
-                request object when <code>dispatch()</code> is called.
-                Dispatching takes place in a loop; a request may either indicate
-                multiple actions to dispatch, or the controller or a plugin may
-                reset the request object to force additional actions to
-                dispatch. When all is done, the front controller returns a
-                response.
+                El routing se lleva a cabo exactamente una vez, utilizando los 
+                valores del objeto solicitud cuando se llama a <code>dispatch()</code>. 
+                El dispatching se lleva a cabo en un bucle; una solicitud puede 
+                indicar, bien múltiples acciones de dispatch, o el controlador o 
+                un plugin pueden restablecer el objeto solicitud para forzar 
+                medidas adicionales para dispatch. Cuando todo está hecho, 
+                el front controller devuelve una respuesta.
             </para>
         </sect3>
 
@@ -238,309 +239,318 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>run()</title>
 
             <para>
-                <classname>Zend_Controller_Front::run($path)</classname> is a static
-                method taking simply a path to a directory containing
-                controllers. It fetches a front controller instance (via
+                <classname>Zend_Controller_Front::run($path)</classname> 
+                es un método estático que toma simplemente un path a un 
+                directorio que contiene controladores. Obtiene una instancia 
+                del front controller (via 
                 <link
                     linkend="zend.controller.front.methods.primary.getinstance">getInstance()</link>,
-                registers the path provided via <link
+                registra el path provisto via <link
                     linkend="zend.controller.front.methods.primary.setcontrollerdirectory">setControllerDirectory()</link>,
-                and finally <link
+                y finalmente <link
                     linkend="zend.controller.front.methods.primary.dispatch">dispatches</link>.
             </para>
 
             <para>
-                Basically, <code>run()</code> is a convenience method that can
-                be used for site setups that do not require customization of the
-                front controller environment.
+                Básicamente, <code>run()</code> es un método conveniente que 
+                pueden utilizarse para setups de sitios que no requieran la 
+                personalización del medio ambiente del front controller.
             </para>
 
             <programlisting role="php"><![CDATA[
-// Instantiate front controller, set controller directory, and dispatch in one
-// easy step:
+// Instanciar el front controller, establecer el directorio de controladores, 
+// y hacer el dispatch fácilmente en en un solo paso:
 Zend_Controller_Front::run('../application/controllers');
 ]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.controller.front.methods.environment">
-        <title>Environmental Accessor Methods</title>
+        <title>Métodos Accessor Ambientales</title>
 
         <para>
-            In addition to the methods listed above, there are a number of
-            accessor methods that can be used to affect the front controller
-            environment -- and thus the environment of the classes to which the
-            front controller delegates.
+            Además de los métodos enumerados anteriormente, hay una serie de 
+            métodos accessor que pueden utilizarse para afectar el entorno 
+            del front controller -- y por lo tanto el ambiente de las clases 
+            a las cuales delega el front controller.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>resetInstance()</code> can be used to clear all
-                    current settings. Its primary purpose is for testing, but it
-                    can also be used for instances where you wish to chain
-                    together multiple front controllers.
+                    <code>resetInstance()</code> puede ser utilizada para 
+                    borrar todos los settings actuales. Su objetivo principal 
+                    es para testing, pero también puede ser utilizada para 
+                    instancias donde desee encadenar múltiples front controllers.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)DefaultControllerName()</code> let you
-                    specify a different name to use for the default controller
-                    ('index' is used otherwise) and retrieve the current value.
-                    They proxy to <link
-                        linkend="zend.controller.dispatcher">the
-                        dispatcher</link>.
+                    <code>(set|get)DefaultControllerName()</code> permite 
+                    especificar un nombre diferente para usar en el controlador  
+                    por defecto (en caso coontrario, se usa 'index') y 
+                    recuperar el valor actual.
+                    Delegan a <link
+                        linkend="zend.controller.dispatcher">el dispatcher</link>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)DefaultAction()</code> let you specify a
-                    different name to use for the default action ('index' is
-                    used otherwise) and retrieve the current value. They proxy
-                    to <link linkend="zend.controller.dispatcher">the
-                        dispatcher</link>.
+                    <code>(set|get)DefaultAction()</code> le deja especificar un 
+                    nombre diferente a utilizar para la acción predeterminada 
+                    (en caso coontrario, se usa 'index') y recuperar el valor 
+                    actual.
+                    Delegan a <link
+                        linkend="zend.controller.dispatcher">el dispatcher</link>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)Request()</code> let you specify <link
-                        linkend="zend.controller.request">the request</link>
-                    class or object to use during the dispatch process and to
-                    retrieve the current object. When setting the request
-                    object, you may pass in a request class name, in which case
-                    the method will load the class file and instantiate it.
+                    <code>(set|get)Request()</code> le permite especificar la 
+                    clase u objeto <link
+                        linkend="zend.controller.request">el request</link>
+                    a usar durante el proceso de dispatch y recuperar el objeto 
+                    actual. Al setear el objeto solicitud, puede pasarlo en un 
+                    nombre de clase de solicitud, en cuyo caso el método va a 
+                    cargar el archivo clase y lo instanciará.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)Router()</code> let you specify <link
-                        linkend="zend.controller.router">the router</link>
-                    class or object to use during the dispatch process and to
-                    retrieve the current object. When setting the router
-                    object, you may pass in a router class name, in which case
-                    the method will load the class file and instantiate it.
+                    <code>(set|get)Router()</code> le permite especificar la 
+                    clase u objeto <link
+                        linkend="zend.controller.router">el router</link>
+                    a usar durante el proceso de dispatch y recuperar el objeto 
+                    actual. Al setear el objeto router, puede pasarlo en un 
+                    nombre de clase de router, en cuyo caso el método va a 
+                    cargar el archivo clase y lo instanciará.
                 </para>
 
                 <para>
-                    When retrieving the router object, it first checks to see if
-                    one is present, and if not, instantiates the default router
-                    (rewrite router).
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>(set|get)BaseUrl()</code> let you specify <link
-                        linkend="zend.controller.request.http.baseurl">the base
-                        URL</link> to strip when routing requests and to
-                    retrieve the current value. The value is provided to the
-                    request object just prior to routing.
+                    Al recuperar el objeto router, en primer lugar comprueba 
+                    para ver si hay alguno presente, y si no, instancia al 
+                    router por defecto(reescribe el router).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)Dispatcher()</code> let you specify <link
-                        linkend="zend.controller.dispatcher">the
-                        dispatcher</link> class or object to use during the
-                    dispatch process and retrieve the current object. When
-                    setting the dispatcher object, you may pass in a dispatcher
-                    class name, in which case the method will load the class
-                    file and instantiate it.
-                </para>
-
-                <para>
-                    When retrieving the dispatcher object, it first checks to see if
-                    one is present, and if not, instantiates the default
-                    dispatcher.
+                    <code>(set|get)BaseUrl()</code> le permite especificar <link
+                        linkend="zend.controller.request.http.baseurl">la URL
+                        base</link> de la cual tirar cuando se rutean peticiones 
+                        y recuperar el valor actual. El valor se provee al 
+                        objeto solicitud justo antes de rutear.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>(set|get)Response()</code> let you specify <link
-                        linkend="zend.controller.response">the response</link>
-                    class or object to use during the dispatch process and to
-                    retrieve the current object. When setting the response
-                    object, you may pass in a response class name, in which case
-                    the method will load the class file and instantiate it.
+                    <code>(set|get)Dispatcher()</code> le permite especificar la 
+                    clase u objeto <link
+                        linkend="zend.controller.dispatcher">el
+                        dispatcher</link> 
+                    a usar durante el proceso de dispatch y recuperar el objeto 
+                    actual. Al setear el objeto dispatch, puede pasarlo en un 
+                    nombre de clase de dispatcher, en cuyo caso el método va a 
+                    cargar el archivo clase y lo instanciará.
+                </para>
+
+                <para>
+                    Al recuperar el objeto dispatch, en primer lugar comprueba 
+                    para ver si hay alguno presente, y si no, instancia al  
+                    dispatcher por defecto.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>(set|get)Response()</code> le permite especificar la 
+                    clase u objeto  <link
+                        linkend="zend.controller.response">response</link>
+                    a usar durante el proceso de dispatch y recuperar el objeto 
+                    actual. Al setear el objeto response, puede pasarlo en un 
+                    nombre de clase de response, en cuyo caso el método va a 
+                    cargar el archivo clase y lo instanciará.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <code>registerPlugin(Zend_Controller_Plugin_Abstract $plugin, $stackIndex = null)</code>
-                    allows you to register <link
+                    le permite registrar <link
                         linkend="zend.controller.plugins">plugin objects</link>.
-                    By setting the optional <code>$stackIndex</code>, you can
-                    control the order in which plugins will execute.
+                    Opcionalmente, setting <code>$stackIndex</code>, puede 
+                    controlar el orden en que se ejecutarán los plugins.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>unregisterPlugin($plugin)</code> let you
-                    unregister <link
+                    <code>unregisterPlugin($plugin)</code> le permite
+                    desregistrar <link
                         linkend="zend.controller.plugins">plugin objects</link>.
-                    <code>$plugin</code> may be either a plugin object or a
-                    string denoting the class of plugin to unregister.
+                    <code>$plugin</code> puede ser tanto un objeto plugin o un  
+                    string que denota la clase de plugin a desregistrar.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>throwExceptions($flag)</code> is used to turn on/off
-                    the ability to throw exceptions during the dispatch process.
-                    By default, exceptions are caught and placed in the <link
-                        linkend="zend.controller.response">response
-                        object</link>; turning on <code>throwExceptions()</code>
-                    will override this behaviour.
+                    <code>throwExceptions($flag)</code> se utiliza para 
+                    activar/desactivar la capacidad de arrojar excepciones 
+                    durante el proceso de dispatch. Por defecto, las excepciones 
+                    son capturadas y colocadas en el <link
+                        linkend="zend.controller.response">objeto response
+                        </link>; activando <code>throwExceptions()</code>
+                    se anulará este comportamiento.
                 </para>
 
                 <para>
-                    For more information, read <xref
+                    Para más información, lea <xref
                         linkend="zend.controller.exceptions" />.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>returnResponse($flag)</code> is used to tell the front
-                    controller whether to return the response
-                    (<code>true</code>) from <code>dispatch()</code>, or if the
-                    response should be automatically emitted
-                    (<code>false</code>). By default, the response is
-                    automatically emitted (by calling
+                    <code>returnResponse($flag)</code> se usa para decirle al 
+                    front controller cuando regresar la respuesta 
+                    (<code>true</code>) desde <code>dispatch()</code>, o si la 
+                    respuesta debe ser emitida automáticamente (<code>false</code>).
+                    Por defecto, la respuesta es automáticamente emitida 
+                    (llamando a                  
                     <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);
-                    turning on <code>returnResponse()</code> will override this
-                    behaviour.
+                    activando <code>returnResponse()</code>) se anulará este 
+                    comportamiento.
                 </para>
 
                 <para>
-                    Reasons to return the response include a desire to check for
-                    exceptions prior to emitting the response, needing to log
-                    various aspects of the response (such as headers), etc.
+                    Las razones para regresar la respuesta incluyen un deseo de 
+                    comprobar las excepciones antes de emitir la respuesta, 
+                    necesidad de hacer un log de diversos aspectos de la respuesta 
+                    (tales como cabeceras), etc.
                 </para>
             </listitem>
         </itemizedlist>
     </sect2>
 
     <sect2 id="zend.controller.front.methods.params">
-        <title>Front Controller Parameters</title>
+        <title>Parámetros de Front Controller</title>
 
         <para>
-            In the introduction, we indicated that the front controller also
-            acts as a registry for the various controller components. It does so
-            through a family of "param" methods. These methods allow you to
-            register arbitrary data -- objects and variables -- with the front
-            controller to be retrieved at any time in the dispatch chain. These
-            values are passed on to the router, dispatcher, and action
-            controllers. The methods include:
+            En la introducción, se indicó que el front controller también actúa 
+            como un registro de los distintos componentes del controlador. 
+            Lo hace mediante una familia de métodos "param". Estos métodos le 
+            permiten registrar datos arbitrarios -- objetos y variables -- 
+            con el front controller, a ser devueltos en cualquier momento 
+            en la cadena de dispatch. Estos valores se transmiten al router, 
+            al dispatcher, y a los action controllers. Los métodos incluyen:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>setParam($name, $value)</code> allows you to set a
-                    single parameter of <code>$name</code> with value
+                    <code>setParam($name, $value)</code> permite establecer un 
+                    único parámetro de <code>$name</code> con el valor 
                     <code>$value</code>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>setParams(array $params)</code> allows you to set
-                    multiple parameters at once using an associative array.
+                    <code>setParams(array $params)</code> permite configurar 
+                    varios parámetros a la vez usando un array asociativo.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getParam($name)</code> allows you to retrieve a single
-                    parameter at a time, using <code>$name</code> as the
-                    identifier.
+                    <code>getParam($name)</code> permite recuperar un único 
+                    parámetro a la vez, utilizando como identificador a 
+                    <code>$name</code>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>getParams()</code> allows you to retrieve the entire
-                    list of parameters at once.
+                    <code>getParams()</code> permite recuperar toda la lista de 
+                    parámetros a la vez.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>clearParams()</code> allows you to clear a single
-                    parameter (by passing a string identifier), multiple named
-                    parameters (by passing an array of string identifiers), or the
-                    entire parameter stack (by passing nothing).
+                    <code>clearParams()</code> permite borrar un único parámetro 
+                    (pasando un string identificador), parámetros con múltiples  
+                    nombres (pasando un array de strings identificadores), 
+                    o el stack de parámetros completo (pasando nada).
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            There are several pre-defined parameters that may be set that have
-            specific uses in the dispatch chain:
+            Hay varios parámetros pre-definidos que puede ser seteados para 
+            tener usos específicos en la cadena de dispatch:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>useDefaultControllerAlways</code> is used to hint to
-                    <link linkend="zend.controller.dispatcher">the
-                        dispatcher</link> to use the default controller in the
-                    default module for any request that is not dispatchable
-                    (i.e., the module, controller, and/or action do not exist).
-                    By default, this is off.
+                    <code>useDefaultControllerAlways</code> se usa para indicar a
+                    <link linkend="zend.controller.dispatcher">el
+                        dispatcher</link> que utilice el controlador por defecto 
+                        en el módulo por defecto de cualquier solicitud que no 
+                        sea dispatchable (es decir, el módulo, el controlador 
+                        y/o la acción no existen). Por defecto, está en off.
                 </para>
 
                 <para>
-                    See <xref linkend="zend.controller.exceptions.internal" />
-                    for more detailed information on using this setting.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <code>disableOutputBuffering</code> is used to hint to <link
-                        linkend="zend.controller.dispatcher">the
-                        dispatcher</link> that it should not use output
-                    buffering to capture output generated by action controllers.
-                    By default, the dispatcher captures any output and appends
-                    it to the response object body content.
+                    Ver <xref linkend="zend.controller.exceptions.internal" />
+                    para información más detallada sobre el uso de este setting.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>noViewRenderer</code> is used to disable the <link
+                    <code>disableOutputBuffering</code> se usa para indicarle a <link
+                        linkend="zend.controller.dispatcher">el
+                        dispatcher</link> que no debe utilizar output buffering 
+                    para capturar la salida generada por los controladores 
+                    de acción. Por defecto, el dispatcher captura cualquier 
+                    salida y la añade al contenido del cuerpo del objeto 
+                    respuesta.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>noViewRenderer</code> se usa para deshabilitar el <link
                         linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>.
-                    Set this parameter to true to disable it.
+                    Poniendo este parámetro a true, lo deshabilita.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>noErrorHandler</code> is used to disable the <link
+                    <code>noErrorHandler</code> se usa para deshabilitar el <link
                         linkend="zend.controller.plugins.standard.errorhandler">Error
-                        Handler plugin</link>. Set this parameter to true to
-                    disable it.
+                        Handler plugin</link>. Poniendo este parámetro a true, 
+                        lo deshabilita.
                 </para>
             </listitem>
         </itemizedlist>
     </sect2>
 
     <sect2 id="zend.controller.front.subclassing">
-        <title>Extending the Front Controller</title>
+        <title>Extendiendo el Front Controller</title>
 
         <para>
-            To extend the Front Controller, at the very minimum you will need
-            to override the <code>getInstance()</code> method:
+            Para extender el Front Controller, como mínimo que necesitará 
+            anular el método <code>getInstance()</code>:
         </para>
 
         <programlisting role="php"><![CDATA[
@@ -558,21 +568,24 @@ class My_Controller_Front extends Zend_Controller_Front
 ]]></programlisting>
 
         <para>
-            Overriding the <code>getInstance()</code> method ensures that
-            subsequent calls to
-            <classname>Zend_Controller_Front::getInstance()</classname> will return an
-            instance of your new subclass instead of a
-            <classname>Zend_Controller_Front</classname> instance -- this is particularly
-            useful for some of the alternate routers and view helpers.
+            Anulando el método <code>getInstance()</code> asegura que las 
+            subsiguientes llamadas a
+            <classname>Zend_Controller_Front::getInstance()</classname> 
+            devolverá una instancia de su nueva subclase en lugar de una 
+            instancia 
+            <classname>Zend_Controller_Front</classname> -- esto es 
+            particularmente útil para algunos de los routers alternativos y 
+            view helpers.
         </para>
 
         <para>
-            Typically, you will not need to subclass the front controller unless
-            you need to add new functionality (for instance, a plugin
-            autoloader, or a way to specify action helper paths). Some points
-            where you may want to alter behaviour may include modifying how
-            controller directories are stored, or what default router or
-            dispatcher are used.
+            Típicamente, no necesitará una subclase del front controller 
+            a menos que necesite añadir nuevas funcionalidades 
+            (por ejemplo, un plugin autoloader, o una forma de especificar 
+            los paths de los action helpers). Algunos de los puntos donde puede 
+            querer modificar el comportamiento puede incluir modificar cómo 
+            son almacenados los directorios de controladores , o qué router 
+            predeterminado o dispatcher se utiliza.
         </para>
     </sect2>
 </sect1>

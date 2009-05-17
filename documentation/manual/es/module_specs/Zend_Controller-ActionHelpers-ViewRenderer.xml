@@ -705,7 +705,7 @@ class Foo_BarController extends Zend_Controller_Action
                 todavía el módulo por defecto, pero que, debido a la
                 existencia de un separador de paths, el controlador recibe el
                 nombre <code>Bar_BazController</code>, en
-                code>Bar/BazController.php</code>.
+                <code>Bar/BazController.php</code>.
                 El ViewRenderer imita la jerarquía del directorio del
                 controlador.
             </para>

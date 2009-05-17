@@ -6,8 +6,9 @@
     <sect2 id="zend.xmlrpc.server.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_XmlRpc_Server</classname> is intended as a fully-featured XML-RPC server,
-            following <ulink url="http://www.xmlrpc.com/spec">the specifications
+        <para><classname>Zend_XmlRpc_Server</classname> is intended as a fully-featured XML-RPC
+        server,
+        following <ulink url="http://www.xmlrpc.com/spec">the specifications
             outlined at www.xmlrpc.com</ulink>. Additionally, it implements the
             system.multicall() method, allowing boxcarring of requests.
         </para>
@@ -31,8 +32,8 @@ echo $server->handle();
         <title>Server Structure</title>
 
         <para>
-            <classname>Zend_XmlRpc_Server</classname> is composed of a variety of components, ranging
-            from the server itself to request, response, and fault objects.
+            <classname>Zend_XmlRpc_Server</classname> is composed of a variety of components,
+            ranging from the server itself to request, response, and fault objects.
         </para>
 
         <para>
@@ -182,11 +183,11 @@ $server->addFunction('somefunc', 'funcs');
         <title>Custom Request Objects</title>
 
         <para>
-            Most of the time, you'll simply use the default request type
-            included with <classname>Zend_XmlRpc_Server</classname>, <classname>Zend_XmlRpc_Request_Http</classname>. However,
-            there may be times when you need XML-RPC to be available via the CLI,
-            a GUI, or other environment, or want to log incoming requests. To do
-            so, you may create a custom request object that extends
+            Most of the time, you'll simply use the default request type included with
+            <classname>Zend_XmlRpc_Server</classname>,
+            <classname>Zend_XmlRpc_Request_Http</classname>. However, there may be times when you
+            need XML-RPC to be available via the CLI, a GUI, or other environment, or want to log
+            incoming requests. To do so, you may create a custom request object that extends
             <classname>Zend_XmlRpc_Request</classname>. The most important thing to remember is to
             ensure that the getMethod() and getParams() methods are implemented
             so that the XML-RPC server can retrieve that information in order to
@@ -199,15 +200,16 @@ $server->addFunction('somefunc', 'funcs');
 
         <para>
             Similar to request objects, <classname>Zend_XmlRpc_Server</classname> can return custom
-            response objects; by default, a <classname>Zend_XmlRpc_Response_Http</classname> object is
-            returned, which sends an appropriate Content-Type HTTP header for
+            response objects; by default, a <classname>Zend_XmlRpc_Response_Http</classname> object
+            is returned, which sends an appropriate Content-Type HTTP header for
             use with XML-RPC. Possible uses of a custom object would be to log
             responses, or to send responses back to STDOUT.
         </para>
 
         <para>
             To use a custom response class, use
-            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> prior to calling <code>handle()</code>.
+            <classname>Zend_XmlRpc_Server::setResponseClass()</classname> prior to calling
+            <code>handle()</code>.
         </para>
     </sect2>
 
@@ -254,8 +256,8 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <para>
             Attaching many classes to an XML-RPC server instance can utilize a
             lot of resources; each class must introspect using the Reflection
-            API (via <classname>Zend_Server_Reflection</classname>), which in turn generates a list of
-            all possible method signatures to provide to the server class.
+            API (via <classname>Zend_Server_Reflection</classname>), which in turn generates a list
+            of all possible method signatures to provide to the server class.
         </para>
         <para>
             To reduce this performance hit somewhat, <classname>Zend_XmlRpc_Server_Cache</classname>

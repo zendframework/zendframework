@@ -247,42 +247,58 @@ $result = $client->call('foo.bar', array(array()));
                     <tbody>
                         <row>
                             <entry>int</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
                         <row>
                             <entry>double</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
                         </row>
                         <row>
                             <entry>boolean</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Boolean</classname></entry>
                         </row>
                         <row>
                             <entry>string</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
                         </row>
                         <row>
                             <entry>base64</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Base64</classname></entry>
                         </row>
                         <row>
                             <entry>dateTime.iso8601</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_DateTime</classname></entry>
                         </row>
                         <row>
                             <entry>array</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Array</classname></entry>
                         </row>
                         <row>
                             <entry>struct</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname></entry>
+                            <entry>
+                                <classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname>
+                            </entry>
                             <entry><classname>Zend_XmlRpc_Value_Struct</classname></entry>
                         </row>
                     </tbody>
@@ -470,23 +486,26 @@ try {
         <title>Server Introspection</title>
         <para>
             Some XML-RPC servers support the de facto introspection methods under the XML-RPC
-            <code>system.</code> namespace. <classname>Zend_XmlRpc_Client</classname> provides special
-            support for servers with these capabilities.
+            <code>system.</code> namespace. <classname>Zend_XmlRpc_Client</classname> provides
+            special support for servers with these capabilities.
         </para>
 
         <para>
-            A <classname>Zend_XmlRpc_Client_ServerIntrospection</classname> instance may be retrieved by calling
-            the <code>getIntrospector()</code> method of <classname>Zend_XmlRpcClient</classname>. It can
-            then be used to perform introspection operations on the server.
+            A <classname>Zend_XmlRpc_Client_ServerIntrospection</classname> instance may be
+            retrieved by calling the <code>getIntrospector()</code> method of
+            <classname>Zend_XmlRpcClient</classname>. It can then be used to perform introspection
+            operations on the server.
         </para>
     </sect2>
 
     <sect2 id="zend.xmlrpc.client.request-to-response">
         <title>From Request to Response</title>
         <para>
-            Under the hood, the <code>call()</code> instance method of <classname>Zend_XmlRpc_Client</classname>
-            builds a request object (<classname>Zend_XmlRpc_Request</classname>) and sends it to another method,
-            <code>doRequest()</code>, that returns a response object (<classname>Zend_XmlRpc_Response</classname>).
+            Under the hood, the <code>call()</code> instance method of
+            <classname>Zend_XmlRpc_Client</classname> builds a request object
+            (<classname>Zend_XmlRpc_Request</classname>) and sends it to another method,
+            <code>doRequest()</code>, that returns a response object
+            (<classname>Zend_XmlRpc_Response</classname>).
         </para>
 
         <para>
@@ -540,9 +559,9 @@ $client->doRequest($request);
 
         <para>
             The <code>setHttpClient()</code> is particularly useful for unit testing. When combined
-            with the <classname>Zend_Http_Client_Adapter_Test</classname>, remote services can be mocked
-            out for testing. See the unit tests for <classname>Zend_XmlRpc_Client</classname> for examples
-            of how to do this.
+            with the <classname>Zend_Http_Client_Adapter_Test</classname>, remote services can be
+            mocked out for testing. See the unit tests for <classname>Zend_XmlRpc_Client</classname>
+            for examples of how to do this.
         </para>
     </sect2>
 

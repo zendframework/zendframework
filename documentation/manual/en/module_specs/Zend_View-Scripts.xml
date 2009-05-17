@@ -186,9 +186,10 @@ if ($this->books) {
             <title>Template Systems Using Zend_View_Interface</title>
 
             <para>
-                Some may find it easier to simply provide a <classname>Zend_View</classname>-compatible
-                template engine. <classname>Zend_View_Interface</classname> defines the
-                minimum interface needed for compatability:
+                Some may find it easier to simply provide a
+                <classname>Zend_View</classname>-compatible template engine.
+                <classname>Zend_View_Interface</classname> defines the minimum interface needed for
+                compatability:
             </para>
 
             <programlisting role="php"><![CDATA[
@@ -244,8 +245,8 @@ public function render($name);
 
             <para>
                 Using this interface, it becomes relatively easy to wrap a
-                third-party template engine as a <classname>Zend_View</classname>-compatible class. As
-                an example, the following is one potential wrapper for Smarty:
+                third-party template engine as a <classname>Zend_View</classname>-compatible class.
+                As an example, the following is one potential wrapper for Smarty:
             </para>
 
             <programlisting role="php"><![CDATA[

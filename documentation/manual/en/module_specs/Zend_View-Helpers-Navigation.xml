@@ -15,7 +15,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
+                    <link
+                        linkend="zend.view.helpers.initial.navigation.breadcrumbs">Breadcrumbs</link>,
                     used for rendering the path to the currently active page.
                 </para>
             </listitem>
@@ -41,7 +42,8 @@
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
+                    <link
+                        linkend="zend.view.helpers.initial.navigation.navigation">Navigation</link>,
                     used for proxying calls to other navigational helpers.
                 </para>
             </listitem>
@@ -135,8 +137,8 @@
                 <para>
                     <code>__call()</code> is used for proxying calls to the
                     container registered in the helper, which means you can
-                    call methods on a helper as if it was a container. See
-                    <link linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
+                    call methods on a helper as if it was a container. See <link
+                        linkend="zend.view.helpers.initial.navigation.proxy.example">example</link>
                     below.
                 </para>
             </listitem>
@@ -542,8 +544,9 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
             Breadcrumbs are used for indicating where in a sitemap
             a user is currently browsing, and are typically rendered
             like this: "You are here: Home > Products > FantasticProduct 1.0".
-            The breadcrumbs helper follows the guidelines from
-            <ulink url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs Pattern - Yahoo! Design Pattern Library</ulink>,
+            The breadcrumbs helper follows the guidelines from <ulink
+                url="http://developer.yahoo.com/ypatterns/pattern.php?pattern=breadcrumbs">Breadcrumbs
+                Pattern - Yahoo! Design Pattern Library</ulink>,
             and allows simple customization (minimum/maximum depth, indentation,
             separator, and whether the last element should be linked), or
             rendering using a partial view script.
@@ -745,9 +748,11 @@ Products, Foo Server, FAQ
             The links helper is used for rendering HTML <code>LINK</code>
             elements. Links are used for describing document relationships
             of the currently active page. Read more about links and link
-            types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document relationships: the LINK element (HTML4 W3C Rec.)</ulink>
-            and <ulink url="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C Rec.)</ulink>
-            in the HTML4 W3C Recommendation.
+            types at <ulink url="http://www.w3.org/TR/html4/struct/links.html#h-12.3">Document
+                relationships: the LINK element (HTML4 W3C Rec.)</ulink>
+            and <ulink
+                url="http://www.w3.org/TR/html4/types.html#h-6.12">Link types (HTML4 W3C
+                Rec.)</ulink> in the HTML4 W3C Recommendation.
         </para>
 
         <para>
@@ -888,55 +893,89 @@ Products, Foo Server, FAQ
         <para>
             <itemizedlist>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_START</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_NEXT</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_PREV</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_INDEX</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SECTION</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_HELP</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</classname>
+                    </para>
                 </listitem>
                 <listitem>
-                    <para><classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname></para>
+                    <para>
+                        <classname>Zend_View_Helper_Navigation_Link::RENDER_ALL</classname>
+                    </para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -1717,7 +1756,8 @@ foreach ($this->container as $page) {
 
         <para>
             The Sitemap helper is used for generating XML sitemaps, as
-            defined by the <ulink url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
+            defined by the <ulink
+                url="http://www.sitemaps.org/protocol.php">Sitemaps XML format</ulink>.
             Read more about <ulink url="http://en.wikipedia.org/wiki/Sitemaps">Sitemaps
             on Wikpedia</ulink>.
         </para>
@@ -1737,9 +1777,9 @@ foreach ($this->container as $page) {
         </para>
 
         <para>
-            The sitemap helper also supports
-            <ulink url="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD Schema</ulink>
-            validation of the generated sitemap. This is disabled by default,
+            The sitemap helper also supports <ulink
+                url="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">Sitemap XSD
+                Schema</ulink> validation of the generated sitemap. This is disabled by default,
             since it will require a request to the Schema file. It can be
             enabled with
             <code>$helper->setUseSchemaValidation(true)</code>.
@@ -1766,9 +1806,10 @@ foreach ($this->container as $page) {
                         <entry><code>lastmod</code></entry>
                         <entry>
                             <para>
-                                The date of last modification of the file,
-                                in <ulink url="http://www.w3.org/TR/NOTE-datetime">W3C Datetime</ulink> format.
-                                This time portion can be omitted if desired, and only use YYYY-MM-DD.
+                                The date of last modification of the file, in <ulink
+                                    url="http://www.w3.org/TR/NOTE-datetime">W3C Datetime</ulink>
+                                format. This time portion can be omitted if desired, and only use
+                                YYYY-MM-DD.
                             </para>
                             <para>
                                 The helper will try to retrieve the

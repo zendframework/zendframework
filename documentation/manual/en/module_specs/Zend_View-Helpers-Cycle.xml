@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.cycle">
+
     <title>Cycle Helper</title>
 
     <para>
@@ -8,6 +9,7 @@
     </para>
 
     <example id="zend.view.helpers.initial.cycle.basicusage">
+
         <title>Cycle Helper Basic Usage</title>
 
         <para>
@@ -42,14 +44,22 @@ $this->cycle()->prev();
    <td>Second</td>
 </tr>
 ]]></programlisting>
+
     </example>
-<example id="zend.view.helpers.initial.cycle.advanceusage">
-       <title>Working with two or more cycles</title>
-<para>To use two cycles you have to specify the names of cycles. Just set second parameter in cycle method.
-<code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>. You can also use setName($name) function.
-</para>
-</example>
-      <programlisting role="php"><![CDATA[
+
+    <example id="zend.view.helpers.initial.cycle.advanceusage">
+
+        <title>Working with two or more cycles</title>
+
+       <para>
+           To use two cycles you have to specify the names of cycles. Just set second parameter in
+           cycle method. <code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>. You can
+           also use setName($name) function.
+        </para>
+
+    </example>
+
+    <programlisting role="php"><![CDATA[
 <?php foreach ($this->books as $book):?>
   <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))
@@ -59,6 +69,7 @@ $this->cycle()->prev();
 </tr>
 <?php endforeach;?>
 ]]></programlisting>
+
 </sect3>
 <!--
 vim:se ts=4 sw=4 et:

@@ -5,10 +5,10 @@
     <title>Hostname</title>
 
     <para>
-        Zend_Validate_Hostname allows you to validate a hostname against a set of known specifications.
-        It is possible to check for three different types of hostnames: a DNS Hostname (i.e.
-        domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e. localhost). By default only
-        DNS hostnames are matched.
+        Zend_Validate_Hostname allows you to validate a hostname against a set of known
+        specifications. It is possible to check for three different types of hostnames: a DNS
+        Hostname (i.e. domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e. localhost).
+        By default only DNS hostnames are matched.
     </para>
 
     <para>
@@ -47,10 +47,10 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        The Zend_Validate_Hostname constants are: <code>ALLOW_DNS</code> to allow only DNS hostnames,
-        <code>ALLOW_IP</code> to allow IP addresses, <code>ALLOW_LOCAL</code> to allow local network
-        names, and <code>ALLOW_ALL</code> to allow all three types. To just check for IP addresses
-        you can use the example below:
+        The Zend_Validate_Hostname constants are: <code>ALLOW_DNS</code> to allow only DNS
+        hostnames, <code>ALLOW_IP</code> to allow IP addresses, <code>ALLOW_LOCAL</code> to allow
+        local network names, and <code>ALLOW_ALL</code> to allow all three types. To just check for
+        IP addresses you can use the example below:
         <programlisting role="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
@@ -81,9 +81,9 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
 
     <para>
         Some Country Code Top Level Domains (ccTLDs), such as 'de' (Germany), support international
-        characters in domain names. These are known as International Domain Names (IDN). These domains
-        can be matched by Zend_Validate_Hostname via extended characters that are used in the validation
-        process.
+        characters in domain names. These are known as International Domain Names (IDN). These
+        domains can be matched by Zend_Validate_Hostname via extended characters that are used in
+        the validation process.
     </para>
 
     <para>
@@ -119,8 +119,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     </para>
 
     <para>
-        To match an IDN domain it's as simple as just using the standard Hostname validator since IDN
-        matching is enabled by default. If you wish to disable IDN validation this can be done by
+        To match an IDN domain it's as simple as just using the standard Hostname validator since
+        IDN matching is enabled by default. If you wish to disable IDN validation this can be done
         by either passing a parameter to the Zend_Validate_Hostname constructor or via the
         <code>$validator->setValidateIdn()</code> method.
     </para>
@@ -153,9 +153,9 @@ $validator =
 
     <para>
         By default a hostname will be checked against a list of known TLDs. If this functionality
-        is not required it can be disabled in much the same way as disabling IDN support.
-        You can disable TLD validation by passing a third parameter to the Zend_Validate_Hostname constructor.
-        In the example below we are supporting IDN validation via the second parameter.
+        is not required it can be disabled in much the same way as disabling IDN support. You can
+        disable TLD validation by passing a third parameter to the Zend_Validate_Hostname
+        constructor. In the example below we are supporting IDN validation via the second parameter.
 
         <programlisting role="php"><![CDATA[
 $validator =

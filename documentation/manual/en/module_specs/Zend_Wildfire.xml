@@ -27,8 +27,9 @@
     AJAX requests that require clean JSON and XML responses is possible with this approach.
   </para>
   <para>
-    There is also a <link linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
-    component to log database profiling information to Firebug.
+    There is also a <link linkend="zend.db.profiler.profilers.firebug">
+        <classname>Zend_Db_Profiler_Firebug</classname></link> component to log database profiling
+    information to Firebug.
   </para>
 
 </sect1>

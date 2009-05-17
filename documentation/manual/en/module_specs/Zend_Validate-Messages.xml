@@ -111,7 +111,10 @@
                 <row>
                     <entry morerows="6" valign="middle">EmailAddress</entry>
                     <entry>INVALID</entry>
-                    <entry>'%value%' is not a valid email address in the basic format local-part@hostname</entry>
+                    <entry>
+                        '%value%' is not a valid email address in the basic format
+                        local-part@hostname
+                    </entry>
                 </row>
                 <row>
                     <entry>INVALID_HOSTNAME</entry>
@@ -119,7 +122,10 @@
                 </row>
                 <row>
                     <entry>INVALID_MX_RECORD</entry>
-                    <entry>'%hostname%' does not appear to have a valid MX record for the email address '%value%'</entry>
+                    <entry>
+                        '%hostname%' does not appear to have a valid MX record for the email address
+                        '%value%'
+                    </entry>
                 </row>
                 <row>
                     <entry>DOT_ATOM</entry>
@@ -131,7 +137,9 @@
                 </row>
                 <row>
                     <entry>INVALID_LOCAL_PART</entry>
-                    <entry>'%localPart%' is not a valid local part for email address '%value%'</entry>
+                    <entry>
+                        '%localPart%' is not a valid local part for email address '%value%'
+                    </entry>
                 </row>
                 <row>
                     <entry>LENGTH_EXCEEDED</entry>
@@ -140,11 +148,15 @@
                 <row>
                     <entry morerows="1" valign="middle">File_Count</entry>
                     <entry>TOO_MUCH</entry>
-                    <entry>Too much files, maximum '%max%' are allowed but '%count%' are given</entry>
+                    <entry>
+                        Too much files, maximum '%max%' are allowed but '%count%' are given
+                    </entry>
                 </row>
                 <row>
                     <entry>TOO_LESS</entry>
-                    <entry>Too less files, minimum '%min%' are expected but '%count%' are given</entry>
+                    <entry>
+                        Too less files, minimum '%min%' are expected but '%count%' are given
+                    </entry>
                 </row>
                 <row>
                     <entry morerows="2" valign="middle">File_Crc32</entry>
@@ -198,11 +210,17 @@
                 <row>
                     <entry morerows="2" valign="middle">File_FilesSize</entry>
                     <entry>TOO_BIG</entry>
-                    <entry>All files in sum should have a maximum size of '%max%' but '%size%' were detected</entry>
+                    <entry>
+                        All files in sum should have a maximum size of '%max%' but '%size%' were
+                        detected
+                    </entry>
                 </row>
                 <row>
                     <entry>TOO_SMALL</entry>
-                    <entry>All files in sum should have a minimum size of '%min%' but '%size%' were detected</entry>
+                    <entry>
+                        All files in sum should have a minimum size of '%min%' but '%size%' were
+                        detected
+                    </entry>
                 </row>
                 <row>
                     <entry>NOT_READABLE</entry>
@@ -224,19 +242,31 @@
                 <row>
                     <entry morerows="5" valign="middle">File_ImageSize</entry>
                     <entry>WIDTH_TOO_BIG</entry>
-                    <entry>Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected</entry>
+                    <entry>
+                        Maximum allowed width for image '%value%' should be '%maxwidth%' but
+                        '%width%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>WIDTH_TOO_SMALL</entry>
-                    <entry>Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected</entry>
+                    <entry>
+                        Minimum expected width for image '%value%' should be '%minwidth%' but
+                        '%width%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>HEIGHT_TOO_BIG</entry>
-                    <entry>Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected</entry>
+                    <entry>
+                        Maximum allowed height for image '%value%' should be '%maxheight%' but
+                        '%height%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>HEIGHT_TOO_SMALL</entry>
-                    <entry>Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected</entry>
+                    <entry>
+                        Minimum expected height for image '%value%' should be '%minheight%' but
+                        '%height%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>NOT_DETECTED</entry>
@@ -319,11 +349,15 @@
                 <row>
                     <entry morerows="2" valign="middle">File_Size</entry>
                     <entry>TOO_BIG</entry>
-                    <entry>Maximum allowed size for file '%value%' is '%max%' but '%size%' detected</entry>
+                    <entry>
+                        Maximum allowed size for file '%value%' is '%max%' but '%size%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>TOO_SMALL</entry>
-                    <entry>Minimum expected size for file '%value%' is '%min%' but '%size%' detected</entry>
+                    <entry>
+                        Minimum expected size for file '%value%' is '%min%' but '%size%' detected
+                    </entry>
                 </row>
                 <row>
                     <entry>NOT_FOUND</entry>
@@ -356,7 +390,9 @@
                 </row>
                 <row>
                     <entry>EXTENSION</entry>
-                    <entry>The extension returned an error while uploading the file '%value%'</entry>
+                    <entry>
+                        The extension returned an error while uploading the file '%value%'
+                    </entry>
                 </row>
                 <row>
                     <entry>ATTACK</entry>
@@ -373,11 +409,15 @@
                 <row>
                     <entry morerows="2" valign="middle">File_WordCount</entry>
                     <entry>TOO_MUCH</entry>
-                    <entry>Too much words, maximum '%max%' are allowed but '%count%' were counted</entry>
+                    <entry>
+                        Too much words, maximum '%max%' are allowed but '%count%' were counted
+                    </entry>
                 </row>
                 <row>
                     <entry>TOO_LESS</entry>
-                    <entry>Too less words, minimum '%min%' are expected but '%count%' were counted</entry>
+                    <entry>
+                        Too less words, minimum '%min%' are expected but '%count%' were counted
+                    </entry>
                 </row>
                 <row>
                     <entry>NOT_FOUND</entry>
@@ -401,27 +441,42 @@
                 <row>
                     <entry morerows="7" valign="middle">Hostname</entry>
                     <entry>IP_ADDRESS_NOT_ALLOWED</entry>
-                    <entry>'%value%' appears to be an IP address, but IP addresses are not allowed</entry>
+                    <entry>
+                        '%value%' appears to be an IP address, but IP addresses are not allowed
+                    </entry>
                 </row>
                 <row>
                     <entry>UNKNOWN_TLD</entry>
-                    <entry>'%value%' appears to be a DNS hostname but cannot match TLD against known list</entry>
+                    <entry>
+                        '%value%' appears to be a DNS hostname but cannot match TLD against known
+                        list
+                    </entry>
                 </row>
                 <row>
                     <entry>INVALID_DASH</entry>
-                    <entry>'%value%' appears to be a DNS hostname but contains a dash (-) in an invalid position</entry>
+                    <entry>
+                        '%value%' appears to be a DNS hostname but contains a dash (-) in an invalid
+                        position
+                    </entry>
                 </row>
                 <row>
                     <entry>INVALID_HOSTNAME_SCHEMA</entry>
-                    <entry>'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'</entry>
+                    <entry>
+                        '%value%' appears to be a DNS hostname but cannot match against hostname
+                        schema for TLD '%tld%'
+                    </entry>
                 </row>
                 <row>
                     <entry>UNDECIPHERABLE_TLD</entry>
-                    <entry>'%value%' appears to be a DNS hostname but cannot extract TLD part</entry>
+                    <entry>
+                        '%value%' appears to be a DNS hostname but cannot extract TLD part
+                    </entry>
                 </row>
                 <row>
                     <entry>INVALID_HOSTNAME</entry>
-                    <entry>'%value%' does not match the expected structure for a DNS hostname</entry>
+                    <entry>
+                        '%value%' does not match the expected structure for a DNS hostname
+                    </entry>
                 </row>
                 <row>
                     <entry>INVALID_LOCAL_NAME</entry>
@@ -429,7 +484,10 @@
                 </row>
                 <row>
                     <entry>LOCAL_NAME_NOT_ALLOWED</entry>
-                    <entry>'%value%' appears to be a local network name but local network names are not allowed</entry>
+                    <entry>
+                        '%value%' appears to be a local network name but local network names are not
+                        allowed
+                    </entry>
                 </row>
                 <row>
                     <entry morerows="2" valign="middle">Iban</entry>

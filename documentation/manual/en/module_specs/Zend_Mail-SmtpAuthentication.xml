@@ -12,7 +12,7 @@
   <example id="zend.mail.smtp-authentication.example-1">
     <title>Enabling authentication within Zend_Mail_Transport_Smtp</title>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
                 'username' => 'myusername',
                 'password' => 'password');

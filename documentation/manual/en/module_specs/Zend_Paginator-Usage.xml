@@ -86,7 +86,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 ]]></programlisting>
         </para>
@@ -98,7 +98,7 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($array);
 ]]></programlisting>
         </para>
@@ -118,7 +118,7 @@ $paginator = Zend_Paginator::factory($array);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($page);
 ]]></programlisting>
         </para>
@@ -136,7 +136,7 @@ $paginator->setCurrentPageNumber($page);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
@@ -152,7 +152,7 @@ routes.example.reqs.page = \d+
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($this->_getParam('page'));
 ]]></programlisting>
         </para>
@@ -170,7 +170,7 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting>
         </para>
@@ -192,7 +192,7 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <html>
 <body>
 <h1>Example</h1>
@@ -309,7 +309,7 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial(
     'my_pagination_control.phtml'
@@ -324,7 +324,7 @@ $paginator->setView($view);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php echo $this->paginator; ?>
 ]]></programlisting>
         </para>
@@ -337,7 +337,7 @@ $paginator->setView($view);
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting>
             </para>
@@ -347,7 +347,7 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 {$pages.pageCount}
 ]]></programlisting>
             </para>
@@ -364,7 +364,7 @@ $smarty->assign('pages', $paginator->getPages());
             <para>
                 Search pagination
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
@@ -407,7 +407,7 @@ See http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
             <para>
                 Item pagination
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <!--
 See http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
@@ -461,7 +461,7 @@ of <?php echo $this->totalItemCount; ?>
             <para>
                 Dropdown pagination
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>

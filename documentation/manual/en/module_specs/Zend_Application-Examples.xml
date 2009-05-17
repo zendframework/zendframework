@@ -8,7 +8,7 @@
         it will simply be an empty stub extending the base bootstrap class:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -18,7 +18,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         With a corresponding configuration file:
     </para>
 
-    <programlisting role="ini"><![CDATA[
+    <programlisting language="ini"><![CDATA[
 ; APPLICATION_PATH/configs/application.ini
 [production]
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
@@ -53,7 +53,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         returning a value to store in the bootstrap.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest(array $options = array())
@@ -114,7 +114,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         following:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_View
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -151,7 +151,7 @@ class My_Bootstrap_Resource_View
         path and the short name of the resource (e.g, "view"):
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
@@ -177,7 +177,7 @@ $application = new Zend_Application(
         parent bootstrap:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -199,7 +199,7 @@ class My_Bootstrap_Resource_Layout
         and run it:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
@@ -210,7 +210,7 @@ $application->bootstrap()
         resources:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrap('db');
 
@@ -224,7 +224,7 @@ echo $service->handle();
         internal methods or resources, you may also use overloading:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
 ]]></programlisting>

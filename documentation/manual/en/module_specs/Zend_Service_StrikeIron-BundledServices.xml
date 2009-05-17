@@ -31,7 +31,7 @@
         The service contains a <code>getZipCode()</code> method that will retrieve information
         about a United States ZIP code or Canadian postal code:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -97,7 +97,7 @@ $status = $response->serviceStatus;
         The service contains a <code>verifyAddressUSA()</code> method that will verify
         an address in the United States:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -158,7 +158,7 @@ if ($result->addressErrorNumber != 0) {
         The service contains two methods, <code>getTaxRateUSA()</code> and <code>getTaxRateCanada()</code>,
         that will retrieve sales and use tax data for the United States and Canada, respectively.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 

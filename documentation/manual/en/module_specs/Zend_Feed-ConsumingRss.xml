@@ -6,7 +6,7 @@
         Reading an RSS feed is as simple as instantiating a <classname>Zend_Feed_Rss</classname> object with the URL
         of the feed:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
 ]]></programlisting>
     <para>
@@ -17,7 +17,7 @@ $channel = new Zend_Feed_Rss('http://rss.example.com/channelName');
         Once you have a feed object, you can access any of the standard RSS "channel" properties directly
         on the object:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $channel->title();
 ]]></programlisting>
     <para>
@@ -30,7 +30,7 @@ echo $channel->title();
     <para>
         If channel properties have attributes, they are accessible using PHP's array syntax:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $channel->category['domain'];
 ]]></programlisting>
     <para>
@@ -43,7 +43,7 @@ echo $channel->category['domain'];
         <classname>Zend_Feed_Abstract</classname> implements PHP's <code>Iterator</code> interface, so printing all
         titles of articles in a channel is just a matter of:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 foreach ($channel as $item) {
     echo $item->title() . "\n";
 }
@@ -129,7 +129,7 @@ foreach ($channel as $item) {
     <para>
         In your code you can always test to see if an element is non-empty with:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 if ($item->propname()) {
     // ... proceed.
 }

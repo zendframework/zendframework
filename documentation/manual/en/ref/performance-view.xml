@@ -72,7 +72,7 @@
                 into the method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View extends Zend_View
 {
     /**
@@ -218,7 +218,7 @@ class My_View extends Zend_View
                 add a login form box to each page:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class LoginPlugin extends Zend_Controller_Plugin_Abstract
 {
     protected $_stack;
@@ -258,7 +258,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 then simply render that response segment:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->layout()->login ?>
 ]]></programlisting>
 
@@ -290,7 +290,7 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
                 script:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugController extends Zend_Controller_Action
 {
     public function listAction()
@@ -316,7 +316,7 @@ echo "</ul>\n";
                 following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->action('list', 'bug') ?>
 ]]></programlisting>
 
@@ -325,7 +325,7 @@ echo "</ul>\n";
                 following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View_Helper_BugList extends Zend_View_Helper_Abstract
 {
     public function bugList()
@@ -349,7 +349,7 @@ class My_View_Helper_BugList extends Zend_View_Helper_Abstract
                 You would then invoke the helper as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->bugList() ?>
 ]]></programlisting>
 

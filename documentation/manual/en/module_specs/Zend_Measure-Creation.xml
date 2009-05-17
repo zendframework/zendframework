@@ -31,7 +31,7 @@
 
         <example id="zend.measure.creation.number.example-1">
             <title>Creation using integer and floating values</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
                                 Zend_Measure_Length::STANDARD);
@@ -66,7 +66,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-1">
             <title>Creation using strings</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 
@@ -83,7 +83,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-2">
             <title>Arbitrary text input containing measurements</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mystring = "My house is 125m² in size";
 $unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
 echo $unit; // outputs "125 m²in size";
@@ -111,7 +111,7 @@ echo $unit; // outputs "125 m² in size";
 
         <example id="zend.measure.creation.localized.example-1">
             <title>Localized string</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "The boat is 1,234.50 long.";
 $unit = new Zend_Measure_Length($mystring,
@@ -134,7 +134,7 @@ echo $unit; // outputs "1234.50 m"
             you want to use the same locale multiple times.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);

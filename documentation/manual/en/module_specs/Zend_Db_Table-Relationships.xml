@@ -35,7 +35,7 @@
             Below are the PHP class definitions for these tables:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Accounts extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'accounts';
@@ -212,7 +212,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             from dependent tables that reference the current row. Use the method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findDependentRowset($table, [$rule]);
 ]]></programlisting>
 
@@ -237,7 +237,7 @@ $row->findDependentRowset($table, [$rule]);
                 finding the <code>Bugs</code> reported by that account.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -271,7 +271,7 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
                 <code>'Engineer'</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -298,7 +298,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
                     account, limited only to 3 rows and ordered by name.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -360,7 +360,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 specifying the table and rule as strings.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $accountsTable = new Accounts();
 $accountsRowset = $accountsTable->find(1234);
 $user1234 = $accountsRowset->current();
@@ -385,7 +385,7 @@ $bugsAssignedTo = $user1234->findBugsByEngineer();
             the row in the parent to which the dependent row refers. Use the method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findParentRow($table, [$rule]);
 ]]></programlisting>
 
@@ -410,7 +410,7 @@ $row->findParentRow($table, [$rule]);
                 <code>Accounts</code> table for the user who reported the bug.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?' => 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -443,7 +443,7 @@ $reporter = $bug1->findParentRow('Accounts');
                 <code>'Engineer'</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -500,7 +500,7 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
                 specifying the table and rule as strings.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->fetchAll(array('bug_status = ?', 'NEW'));
 $bug1 = $bugsRowset->current();
@@ -527,7 +527,7 @@ $engineer = $bug1->findParentAccountsByEngineer();
             intersection table. Use the method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $row->findManyToManyRowset($table,
                            $intersectionTable,
                            [$rule1,
@@ -567,7 +567,7 @@ $row->findManyToManyRowset($table,
                 <code>Products</code>, representing products related to that bug.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -619,7 +619,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 <code>Products</code>, representing products related to that bug.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -689,7 +689,7 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                 relationship representing products related to a given bug.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugsTable = new Bugs();
 $bugsRowset = $bugsTable->find(1234);
 $bug1234 = $bugsRowset->current();
@@ -754,7 +754,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 configured to automatically delete dependent rows in the <code>Bugs</code> table.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $productsTable = new Products();
 $productsRowset = $productsTable->find(1234);
 $product1234 = $productsRowset->current();
@@ -806,7 +806,7 @@ $product1234->delete();
                 the <code>'onUpdate'</code> entry.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BugsProducts extends Zend_Db_Table_Abstract
 {
     ...

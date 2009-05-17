@@ -320,7 +320,7 @@
             <para>
                 <code>getType($type)</code> method may be used to get mapping for a specified PHP type:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
@@ -447,7 +447,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             for SOAP Webservices (Client and Server). The following example will show how the Parser can be used:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Load WSDL into DOMDocument
 $dom = new DOMDocument();
 $dom->loadXML($wsdlString);

@@ -98,7 +98,7 @@ application/
             and the <code>default</code> key must be present. As an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setControllerDirectory(array(
     'default' => '/path/to/application/controllers',
     'blog'    => '/path/to/application/blog/controllers'
@@ -112,7 +112,7 @@ $front->setControllerDirectory(array(
             <code>default</code> namespace. As an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
 ]]></programlisting>
@@ -124,7 +124,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             <code>addModuleDirectory()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Assuming the following directory structure:
  * application/
@@ -150,7 +150,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             modules by using <code>setModuleControllerDirectoryName()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Change the controllers subdirectory to be 'con'
  * application/
@@ -213,7 +213,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>useDefaultControllerAlways</code> parameter in the front controller:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
     </sect2>

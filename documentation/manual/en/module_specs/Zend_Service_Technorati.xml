@@ -49,7 +49,7 @@
         </para>
         <example id="zend.service.technorati.making-first-query.example-1">
             <title>Sending your first query</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -63,7 +63,7 @@ $resultSet = $technorati->search('PHP');
         </para>
         <example id="zend.service.technorati.making-first-query.example-2">
             <title>Refining your query</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -83,7 +83,7 @@ $resultSet = $technorati->search('PHP', $options);
         </para>
         <example id="zend.service.technorati.making-first-query.example-3">
             <title>Sending multiple queries with the same Zend_Service_Technorati instance</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -111,7 +111,7 @@ $topTags = $technorati->topTags();
         </para>
         <example id="zend.service.technorati.consuming-results.example-1">
             <title>Consuming a result set object</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -132,7 +132,7 @@ foreach ($resultSet as $result) {
         </para>
         <example id="zend.service.technorati.consuming-results.example-2">
             <title>Seeking a specific result set object</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -160,7 +160,7 @@ $result = $resultSet->current();
         </para>
         <example id="zend.service.technorati.consuming-results.example-3">
             <title>Consuming a standalone result object</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create a new Zend_Service_Technorati
 // with a valid API_KEY
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
@@ -203,7 +203,7 @@ echo "</ol>";
         </para>
         <example id="zend.service.technorati.handling-errors.example-1">
             <title>Handling a Query Exception</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 try {
     $resultSet = $technorati->search('PHP');
@@ -229,7 +229,7 @@ try {
         </para>
         <example id="zend.service.technorati.checking-api-daily-usage.example-1">
             <title>Getting API key daily usage information</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $key = $technorati->keyInfo();
 
@@ -267,7 +267,7 @@ echo "Daily Usage: " . $key->getApiQueries() . "/" .
             </para>
             <example id="zend.service.technorati.queries.cosmos.example-1">
                 <title>Cosmos Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->cosmos('http://devzone.zend.com/');
 
@@ -294,7 +294,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.search.example-1">
                 <title>Search Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->search('zend framework');
 
@@ -321,7 +321,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.tag.example-1">
                 <title>Tag Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->tag('php');
 
@@ -348,7 +348,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.dailycounts.example-1">
                 <title>DailyCounts Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->dailyCounts('php');
 
@@ -372,7 +372,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.toptags.example-1">
                 <title>TopTags Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->topTags();
 
@@ -399,7 +399,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.bloginfo.example-1">
                 <title>BlogInfo Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $result = $technorati->blogInfo('http://devzone.zend.com/');
 
@@ -420,7 +420,7 @@ echo '<h2><a href="' . (string) $result->getWeblog()->getUrl() . '">' .
             </para>
             <example id="zend.service.technorati.queries.blogposttags.example-1">
                 <title>BlogPostTags Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->blogPostTags('http://devzone.zend.com/');
 
@@ -447,7 +447,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.queries.getinfo.example-1">
                 <title>GetInfo Query</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $result = $technorati->getInfo('weppos');
 
@@ -535,7 +535,7 @@ echo "</ol>";
             </para>
             <example id="zend.service.technorati.classes.resultset.example-1">
                 <title>Iterating result objects from a resultset collection</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // run a simple query
 $technorati = new Zend_Service_Technorati('VALID_API_KEY');
 $resultSet = $technorati->search('php');

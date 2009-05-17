@@ -71,7 +71,7 @@
             set.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $status = "";
 $auth = Zend_Auth::getInstance();

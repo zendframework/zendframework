@@ -6,7 +6,7 @@
     <example id="zend.reflection.examples.file">
         <title>Performing reflection on a file</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_File($filename);
 printf(
     "===> The %s file\n".
@@ -32,7 +32,7 @@ foreach ($functions as $function) {
     <example id="zend.reflection.examples.class">
         <title>Performing reflection on a class</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Class($class);
 
 printf(
@@ -50,7 +50,7 @@ $file = $r->getDeclaringFile();
     <example id="zend.reflection.examples.method">
         <title>Performing reflection on a method</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Method($class, $name);
 
 printf(
@@ -72,7 +72,7 @@ foreach ($r->getParameters() as $key => $param) {
     <example id="zend.reflection.examples.docblock">
         <title>Performing reflection on a docblock</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $r = new Zend_Reflection_Method($class, $name);
 $docblock = $r->getDocblock();
 

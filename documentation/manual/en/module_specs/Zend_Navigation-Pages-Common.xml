@@ -205,7 +205,7 @@
             This example shows how custom properties can be used.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $page = new Zend_Navigation_Page_Mvc();
 $page->foo = 'bar';
 $page->meaning = 42;

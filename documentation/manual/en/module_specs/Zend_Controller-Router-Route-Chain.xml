@@ -34,7 +34,7 @@
         routes chained together:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Create two routes
 $hostnameRoute = new Zend_Controller_Router_Route_Hostname(...);
 $pathRoute     = new Zend_Controller_Router_Route(...);
@@ -54,7 +54,7 @@ $chainedRoute = $hostnameRoute->chain($pathRoute);
         separator:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Create two routes
 $firstRoute  = new Zend_Controller_Router_Route('foo');
 $secondRoute = new Zend_Controller_Router_Route('bar');
@@ -81,7 +81,7 @@ echo $chainedRoute->assemble();
             like this:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Hostname">
         <route>www.example.com</route>
@@ -131,7 +131,7 @@ echo $chainedRoute->assemble();
             chain-route type directly, and also just works in the root level:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www type="Zend_Controller_Router_Route_Chain">
         <route>www.example.com</route>
@@ -163,7 +163,7 @@ echo $chainedRoute->assemble();
             of separating the routes with a comma:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <routes>
     <www-index type="Zend_Controller_Router_Route_Chain">
         <chain>www</chain>

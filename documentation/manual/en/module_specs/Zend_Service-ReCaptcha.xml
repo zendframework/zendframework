@@ -35,7 +35,7 @@
             your public and private keys:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
@@ -44,7 +44,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
 
@@ -54,7 +54,7 @@ echo $recaptcha->getHTML();
             these to the ReCaptcha object's <code>verify()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
@@ -67,7 +67,7 @@ $result = $recaptcha->verify(
             which provides an <code>isValid()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // Failed validation
 }

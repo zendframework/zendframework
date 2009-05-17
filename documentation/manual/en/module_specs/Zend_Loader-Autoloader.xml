@@ -43,7 +43,7 @@
             instance using the <code>getInstance()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autoloader = Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>
 
@@ -55,7 +55,7 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
             library code is prefixed with "My_", you could do so as follows:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autoloader->registerNamespace('My_');
 ]]></programlisting>
 
@@ -87,7 +87,7 @@ $autoloader->registerNamespace('My_');
             <code>pushAutoloader()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
 ]]></programlisting>
 
@@ -110,7 +110,7 @@ $autoloader->pushAutoloader(array('ezcBase', 'autoload'), 'ezc');
             <code>suppressNotFoundWarnings()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autoloader->suppressNotFoundWarnings(true);
 ]]></programlisting>
 
@@ -123,7 +123,7 @@ $autoloader->suppressNotFoundWarnings(true);
             act as a catch-all:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
     </sect2>
@@ -137,7 +137,7 @@ $autoloader->setFallbackAutoloader(true);
             imlement, <classname>Zend_Loader_Autoloader_Interface</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Loader_Autoloader_Interface
 {
     public function autoload($class);
@@ -150,7 +150,7 @@ interface Zend_Loader_Autoloader_Interface
             and <code>unshiftAutoloader()</code> methods:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Assume Foo_Autoloader implements Zend_Loader_Autoloader_Interface:
 $foo = new Foo_Autoloader();
 

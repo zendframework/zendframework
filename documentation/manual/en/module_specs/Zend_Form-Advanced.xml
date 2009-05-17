@@ -21,7 +21,7 @@
             for example:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Shipping Address</legend>
@@ -79,7 +79,7 @@
             solve this solution using array notation:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form>
     <fieldset>
         <legend>Shipping Address</legend>
@@ -239,7 +239,7 @@
                 within it:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     public function init()
@@ -350,7 +350,7 @@ class My_Form_Registration extends Zend_Form
                 some scaffolding to our class to provide that information:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
 {
     // ...
@@ -444,7 +444,7 @@ class My_Form_Registration extends Zend_Form
                 form instance:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     protected $_form;
@@ -469,7 +469,7 @@ class RegistrationController extends Zend_Controller_Action
                 representing each subform.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -589,7 +589,7 @@ class RegistrationController extends Zend_Controller_Action
                 session:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -636,7 +636,7 @@ class RegistrationController extends Zend_Controller_Action
                 form, and then a 'process' action for processing the form.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
 {
     // ...
@@ -692,7 +692,7 @@ class RegistrationController extends Zend_Controller_Action
                 The view scripts are very simple:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // registration/index.phtml ?>
 <h2>Registration</h2>
 <?php echo $this->form ?>

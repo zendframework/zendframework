@@ -8,7 +8,7 @@
         <classname>Zend_Captcha_Adapter</classname>, which looks like the following:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 {
     public function generate();
@@ -46,7 +46,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
         A typical use case might look like the following:
     </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Creating a Zend_View instance
 $view = new Zend_View();
 

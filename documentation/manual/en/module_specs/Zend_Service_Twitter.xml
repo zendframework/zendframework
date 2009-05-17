@@ -84,7 +84,7 @@
                 and then verify that they are correct.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 // verify your credentials with twitter
 $response = $twitter->account->verifyCredentials();
@@ -103,7 +103,7 @@ $response = $twitter->account->verifyCredentials();
 
                 <example id="zend.service.twitter.account.verifycredentails">
                     <title>Verifying credentials</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->account->verifyCredentials();
 ]]></programlisting>
@@ -117,7 +117,7 @@ $response = $twitter->account->verifyCredentials();
 
                 <example id="zend.service.twitter.account.endsession">
                     <title>Sessions ending</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->account->endSession();
 ]]></programlisting>
@@ -132,7 +132,7 @@ $response = $twitter->account->endSession();
 
                 <example id="zend.service.twitter.account.ratelimitstatus">
                     <title>Rating limit status</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->account->rateLimitStatus();
 ]]></programlisting>
@@ -153,7 +153,7 @@ $response = $twitter->account->rateLimitStatus();
 
                 <example id="zend.service.twitter.status.publictimeline">
                     <title>Retrieving public timeline</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->publicTimeline();
 ]]></programlisting>
@@ -168,7 +168,7 @@ $response = $twitter->status->publicTimeline();
 
                 <example id="zend.service.twitter.status.friendstimeline">
                     <title>Retrieving friends timeline</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->friendsTimeline();
 ]]></programlisting>
@@ -199,7 +199,7 @@ $response = $twitter->status->friendsTimeline();
 
                 <example id="zend.service.twitter.status.usertimeline">
                     <title>Retrieving user timeline</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->userTimeline();
 ]]></programlisting>
@@ -240,7 +240,7 @@ $response = $twitter->status->userTimeline();
 
                 <example id="zend.service.twitter.status.show">
                     <title>Showing user status</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->show(1234);
 ]]></programlisting>
@@ -255,7 +255,7 @@ $response = $twitter->status->show(1234);
 
                 <example id="zend.service.twitter.status.update">
                     <title>Updating user status</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->update('My Great Tweet');
 ]]></programlisting>
@@ -280,7 +280,7 @@ $response = $twitter->status->update('My Great Tweet');
 
                 <example id="zend.service.twitter.status.replies">
                     <title>Showing user replies</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->replies();
 ]]></programlisting>
@@ -315,7 +315,7 @@ $response = $twitter->status->replies();
 
                 <example id="zend.service.twitter.status.destroy">
                     <title>Deleting user status</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->status->destroy(12345);
 ]]></programlisting>
@@ -337,7 +337,7 @@ $response = $twitter->status->destroy(12345);
 
                 <example id="zend.service.twitter.user.friends">
                     <title>Retrieving user friends</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->user->friends();
 ]]></programlisting>
@@ -372,7 +372,7 @@ $response = $twitter->user->friends();
 
                 <example id="zend.service.twitter.user.followers">
                     <title>Retrieving user followers</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->user->followers();
 ]]></programlisting>
@@ -403,7 +403,7 @@ $response = $twitter->user->followers();
 
                 <example id="zend.service.twitter.user.show">
                     <title>Showing user informations</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->user->show('myfriend');
 ]]></programlisting>
@@ -426,7 +426,7 @@ $response = $twitter->user->show('myfriend');
 
                 <example id="zend.service.twitter.directmessage.messages">
                     <title>Retrieving recent direct messages received</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->directMessage->messages();
 ]]></programlisting>
@@ -462,7 +462,7 @@ $response = $twitter->directMessage->messages();
 
                 <example id="zend.service.twitter.directmessage.sent">
                     <title>Retrieving recent direct messages sent</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->directMessage->sent();
 ]]></programlisting>
@@ -498,7 +498,7 @@ $response = $twitter->directMessage->sent();
 
                 <example id="zend.service.twitter.directmessage.new">
                     <title>Sending direct message</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->directMessage->new('myfriend', 'mymessage');
 ]]></programlisting>
@@ -514,7 +514,7 @@ $response = $twitter->directMessage->new('myfriend', 'mymessage');
 
                 <example id="zend.service.twitter.directmessage.destroy">
                     <title>Deleting direct message</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->directMessage->destroy(123548);
 ]]></programlisting>
@@ -537,7 +537,7 @@ $response = $twitter->directMessage->destroy(123548);
 
                 <example id="zend.service.twitter.friendship.create">
                     <title>Creating friend</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->friendship->create('mynewfriend');
 ]]></programlisting>
@@ -551,7 +551,7 @@ $response = $twitter->friendship->create('mynewfriend');
 
                 <example id="zend.service.twitter.friendship.destroy">
                     <title>Deleting friend</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->friendship->destroy('myoldfriend');
 ]]></programlisting>
@@ -565,7 +565,7 @@ $response = $twitter->friendship->destroy('myoldfriend');
 
                 <example id="zend.service.twitter.friendship.exists">
                     <title>Checking friend existence</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->friendship->exists('myfriend');
 ]]></programlisting>
@@ -589,7 +589,7 @@ $response = $twitter->friendship->exists('myfriend');
 
                 <example id="zend.service.twitter.favorite.favorites">
                     <title>Retrieving favorites</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->favorite->favorites();
 ]]></programlisting>
@@ -617,7 +617,7 @@ $response = $twitter->favorite->favorites();
 
                 <example id="zend.service.twitter.favorite.create">
                     <title>Creating favorites</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->favorite->create(12351);
 ]]></programlisting>
@@ -631,7 +631,7 @@ $response = $twitter->favorite->create(12351);
 
                 <example id="zend.service.twitter.favorite.destroy">
                     <title>Deleting favorites</title>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $twitter = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->favorite->destroy(12351);
 ]]></programlisting>

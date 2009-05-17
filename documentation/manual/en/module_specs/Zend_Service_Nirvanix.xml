@@ -119,7 +119,7 @@
             methods for these three operations.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');
@@ -193,7 +193,7 @@ $imfs->unlink('/foo.txt');
             which does not have a convenience method in <classname>Zend_Service_Nirvanix</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');
@@ -241,7 +241,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
             built-in PHP functions like <code>print_r()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
@@ -293,7 +293,7 @@ Zend_Service_Nirvanix_Response Object
             contains a <code>ResponseCode</code> element, such as the following example:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <Response>
    <ResponseCode>0</ResponseCode>
 </Response>
@@ -313,7 +313,7 @@ Zend_Service_Nirvanix_Response Object
             error, a <classname>Zend_Service_Nirvanix_Exception</classname> will be thrown.
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $auth = array('username' => 'your-username',
               'password' => 'your-password',
               'appKey'   => 'your-app-key');

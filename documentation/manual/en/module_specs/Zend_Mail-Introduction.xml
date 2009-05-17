@@ -23,7 +23,7 @@
                 <classname>Zend_Mail_Transport_Sendmail</classname>, do the following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.');
 $mail->setFrom('somebody@example.com', 'Some Sender');
@@ -59,7 +59,7 @@ $mail->send();
             You also can use most methods of the <classname>Zend_Mail</classname> object with a convenient fluent interface.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('This is the text of the mail.')
     ->setFrom('somebody@example.com', 'Some Sender')
@@ -92,7 +92,7 @@ $mail->setBodyText('This is the text of the mail.')
                 function.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 

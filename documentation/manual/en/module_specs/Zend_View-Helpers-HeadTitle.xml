@@ -32,7 +32,7 @@
             application: site, controller, action, and potentially resource.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  // setting the controller and action name as title segments:
 $request = Zend_Controller_Front::getInstance()->getRequest();
 $this->headTitle($request->getActionName())
@@ -50,7 +50,7 @@ $this->headTitle()->setSeparator(' / ');
             script, simply echo the helper:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- renders <action> / <controller> / Zend Framework -->
 <?php echo $this->headTitle() ?>
 ]]></programlisting>

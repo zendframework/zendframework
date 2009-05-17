@@ -154,7 +154,7 @@ foreach ($results as $result) {
                 The <code>ResponseGroup</code> option is used to control the specific information that will be returned
                 in the response.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',

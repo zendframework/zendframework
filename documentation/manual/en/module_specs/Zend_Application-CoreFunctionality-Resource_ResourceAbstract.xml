@@ -116,7 +116,7 @@
             short name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $app = new Zend_Application(APPLICATION_ENV, array(
     'pluginPaths' => array(
         'My_Resource' => 'My/Resource/',
@@ -136,7 +136,7 @@ $app = new Zend_Application(APPLICATION_ENV, array(
             later using the short name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('view');
 $view = $bootstrap->getResource('view');
 ]]></programlisting>
@@ -147,7 +147,7 @@ $view = $bootstrap->getResource('view');
             using the resource's full class name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $app = new Zend_Application(APPLICATION_ENV, array(
     'resources' => array(
         // This will load the standard 'View' resource:
@@ -163,7 +163,7 @@ $app = new Zend_Application(APPLICATION_ENV, array(
             Obviously, this makes referencing the resource much more verbose:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('My_Resource_View');
 $view = $bootstrap->getResource('My_Resource_View');
 ]]></programlisting>
@@ -177,7 +177,7 @@ $view = $bootstrap->getResource('My_Resource_View');
             bootstrap. As an example, let's define our own view class:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 {
     public $_explicitType = 'My_View';
@@ -194,7 +194,7 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
             "My_View":
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('My_View');
 $view = $bootstrap->getResource('My_View');
 ]]></programlisting>

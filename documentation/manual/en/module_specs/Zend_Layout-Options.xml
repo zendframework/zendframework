@@ -101,7 +101,7 @@
             array and <code>$config</code> object:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $options = array(
     'layout'     => 'foo',
     'layoutPath' => '/path/to/layouts',
@@ -109,7 +109,7 @@ $options = array(
 );
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 [layout]
 layout = "foo"
@@ -133,7 +133,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
                 First, let's look at passing an array:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Using constructor:
 $layout = new Zend_Layout($options);
 
@@ -145,7 +145,7 @@ $layout = Zend_Layout::startMvc($options);
                 And now using a config object:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
 
 // Using constructor:
@@ -171,7 +171,7 @@ $layout = Zend_Layout::startMvc($config);
                 a quick and easy way to do so:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Using an array of options:
 $layout->setOptions($options);
 
@@ -196,7 +196,7 @@ $layout->setConfig($options);
                 interface, meaning their calls may be chained:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $layout->setLayout('foo')
        ->setLayoutPath('/path/to/layouts')
        ->setContentKey('CONTENT');

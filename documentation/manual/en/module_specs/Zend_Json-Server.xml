@@ -61,7 +61,7 @@
             'add', 'subtract', 'multiply', and 'divide':
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Calculator - sample class to expose via JSON-RPC
  */
@@ -129,7 +129,7 @@ class Calculator
             Now we'll create a script to handle the requests:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
 
 // Indicate what functionality is available:
@@ -146,7 +146,7 @@ $server->handle();
             specifying some server metadata:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
 $server->setClass('Calculator');
 
@@ -173,7 +173,7 @@ $server->handle();
             interoperate properly:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
 $server->setClass('Calculator');
 

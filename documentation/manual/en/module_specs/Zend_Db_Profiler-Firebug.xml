@@ -39,7 +39,7 @@
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
         <title>DB Profiling with Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In your bootstrap file
 
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
@@ -58,7 +58,7 @@ $db->setProfiler($profiler)
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
         <title>DB Profiling without Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
 

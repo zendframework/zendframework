@@ -18,7 +18,7 @@
         Each instance of <classname>Zend_Session_Namespace</classname> corresponds to an entry of the <code>$_SESSION</code>
         superglobal array, where the namespace is used as the key.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 
 // $myNamespace corresponds to $_SESSION['myNamespace']
@@ -45,7 +45,7 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
 
             <title>Counting Page Views</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
 
 if (isset($defaultNamespace->numberOfPageRequests)) {
@@ -79,7 +79,7 @@ echo "Page requests this session: ",
 
             <title>New Way: Namespaces Avoid Collisions</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // in the Zend_Auth component
 $authNamespace = new Zend_Session_Namespace('Zend_Auth');
 $authNamespace->user = "myusername";
@@ -100,7 +100,7 @@ $webServiceNamespace->user = "mywebusername";
 
             <title>Old Way: PHP Session Access</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "myusername";
 $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 ]]></programlisting>
@@ -123,7 +123,7 @@ $_SESSION['Some_Web_Service']['user'] = "mywebusername";
 
             <title>Session Iteration</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $aNamespace =
     new Zend_Session_Namespace('some_namespace_with_data_present');
 
@@ -152,7 +152,7 @@ foreach ($aNamespace as $index => $value) {
 
             <title>Accessing Session Data</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace(); // default namespace
 
 $namespace->foo = 100;

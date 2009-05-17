@@ -54,7 +54,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript With Conditional Comments</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headScript()->appendFile(
     '/js/prototype.js',
@@ -125,7 +125,7 @@ $this->headScript()->appendFile(
             <code>setAllowArbitraryAttributes()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
@@ -138,7 +138,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
             may be links to outside resource files or scripts themselves.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
@@ -151,7 +151,7 @@ $this->headScript()->appendFile('/js/prototype.js')
             offsetSet directives to aid in this task:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Putting scripts in order
 
 // place at a particular offset to ensure loaded last
@@ -169,7 +169,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             script, simply echo the helper:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headScript() ?>
 ]]></programlisting>
     </example>
@@ -185,7 +185,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             that, capturing it to the stack:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headScript()->captureStart() ?>
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;

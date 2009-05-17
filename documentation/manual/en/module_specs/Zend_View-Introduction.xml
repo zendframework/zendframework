@@ -38,7 +38,7 @@
             controller script might look something like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // use a model to get the data for book authors and titles.
 $data = array(
     array(
@@ -81,7 +81,7 @@ echo $view->render('booklist.php');
             look like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  if ($this->books): ?>
 
     <!-- A table of some books. -->
@@ -130,7 +130,7 @@ echo $view->render('booklist.php');
                     structure of:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 base/path/
     helpers/
     filters/
@@ -214,7 +214,7 @@ base/path/
                     Turn on short tags in your <code>.htaccess</code> file:
                 </para>
 
-                <programlisting role="apache"><![CDATA[
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
 ]]></programlisting>
 
@@ -231,7 +231,7 @@ php_value "short_open_tag" "on"
                     long tags on the fly:
                 </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

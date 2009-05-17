@@ -30,7 +30,7 @@
             it as well).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**

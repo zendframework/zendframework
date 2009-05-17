@@ -204,7 +204,7 @@
             registered in the view helper.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->navigation()->addPage(array(
     'type' => 'uri',
     'label' => 'New page'));
@@ -322,7 +322,7 @@ $this->navigation()->addPage(array(
             </itemizedlist>
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /*
  * Navigation container (config/array)
 
@@ -500,7 +500,7 @@ Zend_Registry::set('Zend_Navigation', $container);
             In addition to the container above, the following setup is assumed:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setup router (default routes and 'archive' route):
 $front = Zend_Controller_Front::getInstance();
 $router = $front->getRouter();
@@ -626,7 +626,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                 settings.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 In a view script or layout:
 <?php echo $this->navigation()->breadcrumbs(); ?>
 
@@ -650,7 +650,7 @@ Output:
                 indentation.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Rendering with 8 spaces indentation:
 <?php echo $this->navigation()->breadcrumbs()->setIndent(8);?>
 
@@ -667,7 +667,7 @@ Output:
                 specifying various options.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 In a view script or layout:
 
 <?php
@@ -714,7 +714,7 @@ Nothing, because the deepest active page is not at level 10 or deeper.
                 In a layout:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $partial = ;
 echo $this->navigation()->breadcrumbs()
                         ->setPartial(array('breadcrumbs.phtml', 'default'));
@@ -725,7 +725,7 @@ echo $this->navigation()->breadcrumbs()
                 <code>application/modules/default/views/breadcrumbs.phtml</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo implode(', ', array_map(
         create_function('$a', 'return $a->getLabel();'),
         $this->pages));
@@ -735,7 +735,7 @@ echo implode(', ', array_map(
                 Output:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Products, Foo Server, FAQ
 ]]></programlisting>
         </example>
@@ -1042,7 +1042,7 @@ Products, Foo Server, FAQ
                 This example shows how to specify relations in pages.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Relations using strings',
@@ -1092,7 +1092,7 @@ $container = new Zend_Navigation(array(
                 registered/found in the view helper.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 In a view script or layout:
 <?php echo $this->view->navigation()->links(); ?>
 
@@ -1117,7 +1117,7 @@ Output:
                 and render.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Render only start, next, and prev:
 $helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_START |
                        Zend_View_Helper_Navigation_Links::RENDER_NEXT |
@@ -1129,7 +1129,7 @@ Output:
 <link rel="prev" href="/products/server" title="Foo Server">
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Render only native link types:
 $helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
                        Zend_View_Helper_Navigation_Links::RENDER_CUSTOM);
@@ -1145,7 +1145,7 @@ Output:
 <link rev="subsection" href="/products/server" title="Foo Server">
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Render all but chapter:
 $helper->setRenderFlag(Zend_View_Helper_Navigation_Links::RENDER_ALL ^
                        Zend_View_Helper_Navigation_Links::RENDER_CHAPTER);
@@ -1313,7 +1313,7 @@ Output:
                 are filtered out based on visibility and ACL.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 In a view script or layout:
 <?php echo $this->navigation()->menu()->render() ?>
 
@@ -1402,7 +1402,7 @@ Output:
                 options.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 // render only the 'Community' menu
 $community = $this->navigation()->findOneByLabel('Community');
@@ -1448,7 +1448,7 @@ Output:
 )</code>
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1473,7 +1473,7 @@ The output will be the same if 'FAQ' or 'Foo Server' is active:
         <example id="zend.view.helpers.initial.navigation.menu.example4">
             <title>Rendering a menu with maximum depth</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1525,7 +1525,7 @@ Output:
         <example id="zend.view.helpers.initial.navigation.menu.example5">
             <title>Rendering a menu with minimum depth</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1586,7 +1586,7 @@ Output:
         <example id="zend.view.helpers.initial.navigation.menu.example6">
             <title>Rendering only the active branch of a menu</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1623,7 +1623,7 @@ Output:
                 Rendering only the active branch of a menu with minimum depth
             </title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1656,7 +1656,7 @@ Output:
                 Rendering only the active branch of a menu with maximum depth
             </title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1690,7 +1690,7 @@ Output:
             <para>
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 echo $this->navigation()
           ->menu()
@@ -1726,7 +1726,7 @@ Output:
 
             <para>In a layout:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $partial = array('menu.phtml', 'default');
 $this->navigation()->menu()->setPartial($partial);
 echo $this->navigation()->menu()->render();
@@ -1734,7 +1734,7 @@ echo $this->navigation()->menu()->render();
 
             <para>In application/modules/default/views/menu.phtml:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($this->container as $page) {
     echo $this->menu()->htmlify($page), PHP_EOL;
 }
@@ -1742,7 +1742,7 @@ foreach ($this->container as $page) {
 
             <para>Output:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <a title="Go Home" href="/">Home</a>
 <a href="/products">Products</a>
 <a title="About us" href="/company/about">Company</a>
@@ -1938,7 +1938,7 @@ foreach ($this->container as $page) {
                 on the setup we did further up.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // In a view script or layout:
 
 // format output
@@ -1961,7 +1961,7 @@ echo $this->navigation()->sitemap();
                 out:
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -2023,14 +2023,14 @@ echo $this->navigation()->sitemap();
                 /community/account):
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo $this->navigation()
           ->sitemap()
           ->setFormatOutput(true)
           ->setRole();
 ]]></programlisting>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -2088,14 +2088,14 @@ echo $this->navigation()
                 Render the sitemap using a maximum depth of 1.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo $this->navigation()
           ->sitemap()
           ->setFormatOutput(true)
           ->setMaxDepth(1);
 ]]></programlisting>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>

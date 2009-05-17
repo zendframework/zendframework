@@ -19,7 +19,7 @@
         functionality could look like:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
@@ -60,7 +60,7 @@ $router->addRoute('user', $route);
         the following key and value pairs:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'username'   => 'martel',
     'controller' => 'profile',
@@ -77,7 +77,7 @@ $values = array(
         <classname>Zend_Controller_Request::getParam()</classname> methods:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function userinfoAction()
 {
     $request = $this->getRequest();
@@ -94,7 +94,7 @@ public function userinfoAction()
         following route more-or-less mimics the Module route behavior:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
     array('module' => 'default')
@@ -112,7 +112,7 @@ $router->addRoute('default', $route);
             representing variable names and with values as desired defaults:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array('year' => 2006)
@@ -137,7 +137,7 @@ $router->addRoute('archive', $route);
             action as the route's defaults:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -167,7 +167,7 @@ $router->addRoute('archive', $route);
             expression:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -275,7 +275,7 @@ $router->addRoute('archive', $route);
             translated segment usage:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Prepare the translator
 $translator = new Zend_Translate('array', array(), 'en');
 $translator->addTranslation(array('archive' => 'archiv',
@@ -295,7 +295,7 @@ Zend_Controller_Router_Route::setDefaultTranslator($translator);
             This example demonstrates the usage of static segments:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create the route
 $route = new Zend_Controller_Router_Route(
     '@archive',
@@ -318,7 +318,7 @@ $route->assemble(array());
             translated version:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create the route
 $route = new Zend_Controller_Router_Route(
     ':@controller/:@action/*',
@@ -340,7 +340,7 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
             You can also mix static and dynamic segments:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create the route
 $route = new Zend_Controller_Router_Route(
     '@archive/:@mode/:value',

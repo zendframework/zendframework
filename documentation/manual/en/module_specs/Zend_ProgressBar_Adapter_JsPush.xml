@@ -79,14 +79,14 @@
             This example illustrates a basic setup of HTML, CSS and JavaScript
             for the JsPush adapter
         </para>
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <div id="zend-progressbar-container">
     <div id="zend-progressbar-done"></div>
 </div>
 
 <iframe src="long-running-process.php" id="long-running-process"></iframe>
 ]]></programlisting>
-        <programlisting role="css"><![CDATA[
+        <programlisting language="css"><![CDATA[
 #long-running-process {
     position: absolute;
     left: -100px;
@@ -111,7 +111,7 @@
     background-color: #000000;
 }
 ]]></programlisting>
-        <programlisting role="javascript"><![CDATA[
+        <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
     document.getElementById('zend-progressbar-done').style.width = data.percent + '%';

@@ -51,7 +51,7 @@
                     'fr' which is not in our portfolio of translated languages.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto');
@@ -62,7 +62,7 @@ $language = new Zend_Translate('gettext',
                     Simply add the option and the notices will be disabled.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/path/to/translations',
                                'auto',

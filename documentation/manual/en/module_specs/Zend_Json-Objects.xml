@@ -30,7 +30,7 @@
             associative arrays. However, if you desire an object returned, you can
             specify this:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Decode JSON objects as PHP objects
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
@@ -77,7 +77,7 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             if you have ext/json installed. You can achieve this by calling:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
     </sect2>
@@ -103,7 +103,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             in large object structures. A usage example would look like:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $data = array(
     'onClick' => new Zend_Json_Expr('function() {'
               . 'alert("I am a valid javascript callback '

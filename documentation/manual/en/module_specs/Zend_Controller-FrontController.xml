@@ -58,7 +58,7 @@
                 at any point prior to calling <code>dispatch()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Disable the ErrorHandler plugin:
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
@@ -68,7 +68,7 @@ $front->setParam('noErrorHandler', true);
                 to calling <code>dispatch()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Disable the ViewRenderer helper:
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -94,7 +94,7 @@ $front->setParam('noViewRenderer', true);
                 instantiating a front controller object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]></programlisting>
         </sect3>
@@ -115,7 +115,7 @@ $front = Zend_Controller_Front::getInstance();
                 As some examples:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Set the default controller directory:
 $front->setControllerDirectory('../application/controllers');
 
@@ -249,7 +249,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 front controller environment.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Instantiate front controller, set controller directory, and dispatch in one
 // easy step:
 Zend_Controller_Front::run('../application/controllers');
@@ -537,7 +537,7 @@ Zend_Controller_Front::run('../application/controllers');
             to override the <code>getInstance()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Controller_Front extends Zend_Controller_Front
 {
     public static function getInstance()

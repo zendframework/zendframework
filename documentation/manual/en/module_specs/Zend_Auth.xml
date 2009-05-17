@@ -53,7 +53,7 @@
             for authentication. Other details, such as how the authentication service is queried, have been
             omitted for brevity:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyAuthAdapter implements Zend_Auth_Adapter_Interface
 {
     /**
@@ -137,7 +137,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             attempted, and providing specific, customized authentication result messages to the user. The following
             result codes are available:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Auth_Result::SUCCESS
 Zend_Auth_Result::FAILURE
 Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND
@@ -151,7 +151,7 @@ Zend_Auth_Result::FAILURE_UNCATEGORIZED
         <para>
             The following example illustrates how a developer may branch on the result code:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // inside of AuthController / loginAction
 $result = $this->_auth->authenticate($adapter);
 
@@ -229,7 +229,7 @@ switch ($result->getCode()) {
                     of <classname>Zend_Session_Namespace</classname>. This should occur before authentication is attempted, since
                     <classname>Zend_Auth::authenticate()</classname> performs the automatic storage of the identity.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Save a reference to the Singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
@@ -271,7 +271,7 @@ $result = $auth->authenticate($authAdapter);
                     <classname>Zend_Auth_Storage_Session</classname>, a developer implements
                     <classname>Zend_Auth_Storage_Interface</classname>:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
     /**
@@ -342,7 +342,7 @@ class MyStorage implements Zend_Auth_Storage_Interface
                     In order to use this custom storage class, <classname>Zend_Auth::setStorage()</classname> is invoked before an
                     authentication query is attempted:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Instruct Zend_Auth to use the custom storage class
 Zend_Auth::getInstance()->setStorage(new MyStorage());
 
@@ -387,7 +387,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
             The following example illustrates how to use a <classname>Zend_Auth</classname> adapter indirectly, through the use of
             the <classname>Zend_Auth</classname> class:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Get a reference to the singleton instance of Zend_Auth
 $auth = Zend_Auth::getInstance();
 
@@ -414,7 +414,7 @@ if (!$result->isValid()) {
         <para>
             Once authentication has been attempted in a request, as in the above example, it is a simple
             matter to check whether a successfully authenticated identity exists:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $auth = Zend_Auth::getInstance();
 if ($auth->hasIdentity()) {
     // Identity exists; get it
@@ -426,7 +426,7 @@ if ($auth->hasIdentity()) {
         <para>
             To remove an identity from persistent storage, simply use the <code>clearIdentity()</code> method.
             This typically would be used for implementing an application "logout" operation:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
 ]]></programlisting>
         </para>
@@ -439,7 +439,7 @@ Zend_Auth::getInstance()->clearIdentity();
             documentation for each adapter. The following example directly utilizes
             <code>MyAuthAdapter</code>:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Set up the authentication adapter
 $authAdapter = new MyAuthAdapter($username, $password);
 

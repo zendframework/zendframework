@@ -26,7 +26,7 @@
                 <classname>Zend_Json_Expr</classname>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
@@ -51,7 +51,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         <code>sendJson()</code>:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -80,7 +80,7 @@ class FooController extends Zend_Controller_Action
             layouts enabled:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
 ]]></programlisting>
 
@@ -90,7 +90,7 @@ $this->_helper->json($data, true);
             <code>keepLayouts</code> option:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
@@ -106,7 +106,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             option:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true);
 ]]></programlisting>
 
@@ -117,7 +117,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             options are then passed to <classname>Zend_Json::encode()</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,

@@ -87,7 +87,7 @@
             abstract class <classname>Zend_Controller_Plugin_Abstract</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
@@ -120,7 +120,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             plugin may be used in the controller chain:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function routeStartup(Zend_Controller_Request_Abstract $request)
@@ -174,7 +174,7 @@ $front->dispatch();
             the following output:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <p>routeStartup() called</p>
 <p>routeShutdown() called</p>
 <p>dispatchLoopStartup() called</p>

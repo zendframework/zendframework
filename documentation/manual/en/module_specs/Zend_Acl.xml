@@ -106,7 +106,7 @@
                 the queried role inherits (herein, "guest", "member", and
                 "admin"):
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $acl->addRole(new Zend_Acl_Role('guest'))
@@ -163,7 +163,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
             of areas. To create a new ACL object, we instantiate the ACL with no parameters:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 ]]></programlisting>
 
@@ -232,7 +232,7 @@ $acl = new Zend_Acl();
             can be added to the role registry as follows:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 // Add groups to the Role registry using Zend_Acl_Role
@@ -282,7 +282,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
             code. To apply the base permissions as defined above:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $roleGuest = new Zend_Acl_Role('guest');
@@ -327,7 +327,7 @@ $acl->allow('administrator');
             quite simple using the <methodname>isAllowed()</methodname> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('guest', null, 'view') ?
      "allowed" : "denied";
 // allowed

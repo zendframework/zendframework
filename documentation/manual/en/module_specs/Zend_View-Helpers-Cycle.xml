@@ -17,7 +17,7 @@
             or use <code>assign(array $data)</code> function
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php foreach ($this->books as $book):?>
   <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))
@@ -36,7 +36,7 @@ $this->cycle()->prev();
             The output
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <tr style="background-color:'#F0F0F0'">
    <td>First</td>
 </tr>
@@ -59,7 +59,7 @@ $this->cycle()->prev();
 
     </example>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php foreach ($this->books as $book):?>
   <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))

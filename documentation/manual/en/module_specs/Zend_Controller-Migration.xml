@@ -155,7 +155,7 @@
                     the words of an action with a dash:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -189,7 +189,7 @@ $inflector->setFilterRule(':action', array(
                     flag, 'useCaseSensitiveActions':
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]></programlisting>
 
@@ -233,7 +233,7 @@ $front->setParam('useCaseSensitiveActions', true);
             front controller parameter <code>noErrorHandler</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
@@ -253,7 +253,7 @@ $front->setParam('noErrorHandler', true);
             to dispatching:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Assuming $front is an instance of Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -282,7 +282,7 @@ $front->setParam('noViewRenderer', true);
             The easiest change is to disable auto-rendering for that method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
@@ -293,7 +293,7 @@ $this->_helper->viewRenderer->setNoRender();
             methods:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // disable view script autorendering
@@ -354,7 +354,7 @@ public function preDispatch()
                     Prior to dispatching a front controller instance:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Assuming $view has already been defined
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -366,7 +366,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                     Any time during the bootstrap process:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);
@@ -442,7 +442,7 @@ $viewRenderer->setView($view);
             remains the same:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
@@ -501,7 +501,7 @@ Zend_Controller_Front::run('/path/to/controllers');
                     have changed. The signature is now:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -530,11 +530,11 @@ final protected function _forward($action,
             still do each of the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/controllers');
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* -- create a router -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user',
@@ -588,7 +588,7 @@ $ctrl->dispatch();
                             Set <code>throwExceptions()</code> in the front
                             controller:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
                     </listitem>
@@ -598,7 +598,7 @@ $front->throwExceptions(true);
                             Set <code>renderExceptions()</code> in the response
                             object:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -684,7 +684,7 @@ echo $response;
                             as follows:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Retrieve the requested controller name
 // Access used to be via: $this->_action->getControllerName().
 // The example below uses getRequest(), though you may also directly
@@ -713,7 +713,7 @@ $foo = $this->_getParam('foo', 'default');
                             action is using <code>__call()</code>:
                         </para>
 
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // If an unmatched 'Action' method was requested, pass on to the

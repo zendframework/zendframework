@@ -40,7 +40,7 @@
         At its most basic, you simply instantiate a form object:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Generic form object:
 $form = new Zend_Form();
 
@@ -53,7 +53,7 @@ $form = new My_Form()
         object state and potentially create new elements:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Passing in configuration options:
 $form = new Zend_Form($config);
 ]]></programlisting>
@@ -184,7 +184,7 @@ $form = new Zend_Form($config);
             Some examples:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Using an element instance:
 $element = new Zend_Form_Element_Text('foo');
 $form->addElement($element);
@@ -232,7 +232,7 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
             property:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getElement():
 $foo = $form->getElement('foo');
 
@@ -248,7 +248,7 @@ $foo = $form->foo;
             allows you to do so:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $username becomes a Zend_Form_Element_Text object:
 $username = $form->createElement('text', 'username');
 ]]></programlisting>
@@ -265,7 +265,7 @@ $username = $form->createElement('text', 'username');
                 element's value by element name:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Get all values:
 $values = $form->getValues();
 
@@ -280,7 +280,7 @@ $value = $form->getValue('foo');
                 methods:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setDefaults($data);
 $form->populate($data);
 ]]></programlisting>
@@ -291,7 +291,7 @@ $form->populate($data);
                 <code>reset()</code> method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->reset();
 ]]></programlisting>
         </sect3>
@@ -314,7 +314,7 @@ $form->reset();
                     a global prefix. Some examples:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Set global prefix path:
 // Creates paths for prefixes My_Foo_Filter, My_Foo_Validate,
 // and My_Foo_Decorator
@@ -349,7 +349,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
                     and a Label:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(array(
     'ViewHelper',
     'Label'
@@ -381,7 +381,7 @@ $form->setElementDecorators(array(
                     elements:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -401,7 +401,7 @@ $form->setElementDecorators(
                     the 'foo' and 'bar' elements:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setElementDecorators(
     array(
         'ViewHelper',
@@ -451,7 +451,7 @@ $form->setElementDecorators(
                     elements; a common case is to <code>trim()</code> all values:
                 </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setElementFilters(array('StringTrim'));
 ]]></programlisting>
             </example>
@@ -567,7 +567,7 @@ $form->setElementFilters(array('StringTrim'));
             'login' display group:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(array('username', 'password'), 'login');
 ]]></programlisting>
 
@@ -577,7 +577,7 @@ $form->addDisplayGroup(array('username', 'password'), 'login');
             display group's name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Using getDisplayGroup():
 $login = $form->getDisplayGroup('login');
 
@@ -595,7 +595,7 @@ $login = $form->login;
                 group:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addDisplayGroup(
     array('foo', 'bar'),
     'foobar',
@@ -628,7 +628,7 @@ $form->addDisplayGroup(
                     <code>addDisplayGroupPrefixPath()</code> method.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
 ]]></programlisting>
             </example>
@@ -646,7 +646,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
                     that the elements are iterated):
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $form->setDisplayGroupDecorators(array(
     'FormElements',
     'Fieldset'
@@ -668,7 +668,7 @@ $form->setDisplayGroupDecorators(array(
                 'displayGroupClass' key:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Use the 'My_DisplayGroup' class
 $form->addDisplayGroup(
     array('username', 'password'),
@@ -688,7 +688,7 @@ $form->addDisplayGroup(
                 object will use that class:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Use the 'My_DisplayGroup' class for all display groups:
 $form->setDefaultDisplayGroupClass('My_DisplayGroup');
 ]]></programlisting>
@@ -918,7 +918,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             it a name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addSubForm($subForm, 'subform');
 ]]></programlisting>
 
@@ -928,7 +928,7 @@ $form->addSubForm($subForm, 'subform');
             name:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Using getSubForm():
 $subForm = $form->getSubForm('subform');
 
@@ -956,7 +956,7 @@ $subForm = $form->subform;
                 needed to ensure its elements are iterated):
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->setSubFormDecorators(array(
     'FormElements',
     'Fieldset'
@@ -1023,7 +1023,7 @@ $form->setSubFormDecorators(array(
             You can set and retrieve a form's name using the name accessors:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Set the name:
 $form->setName('registration');
 
@@ -1037,7 +1037,7 @@ $name = $form->getName();
             and method accessors:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Set the action and method:
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -1053,7 +1053,7 @@ $form->setAction('/user/login')
             any arbitrary encoding type.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Set the action, method, and enctype:
 $form->setAction('/user/login')
      ->setMethod('post')
@@ -1072,7 +1072,7 @@ $form->setAction('/user/login')
             interface, allowing you to pass it as an argument to count:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $numItems = count($form);
 ]]></programlisting>
 
@@ -1083,7 +1083,7 @@ $numItems = count($form);
             accessing metadata.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Setting attributes:
 $form->setAttrib('class', 'zend-form')
      ->addAttribs(array(
@@ -1128,7 +1128,7 @@ $form->clearAttribs();
             for creating them is as follows:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'FormElements',
     array('HtmlTag', array('tag' => 'dl')),
@@ -1140,7 +1140,7 @@ $form->setDecorators(array(
             This creates output like the following:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <form action="/form/action" method="post">
 <dl>
 ...
@@ -1162,7 +1162,7 @@ $form->setDecorators(array(
                 'disableLoadDefaultDecorators' option to the constructor:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
 ]]></programlisting>
 
@@ -1191,7 +1191,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
                 name:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Alias to 'FooBar':
 $form->addDecorator(array('FooBar' => 'HtmlTag'), array('tag' => 'div'));
 
@@ -1205,7 +1205,7 @@ $form = $element->getDecorator('FooBar');
                 the 'decorator' option in the array representing the decorator:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Add two 'HtmlTag' decorators, aliasing one to 'FooBar':
 $form->addDecorators(
     array('HtmlTag', array('tag' => 'div')),
@@ -1273,7 +1273,7 @@ $fooBar  = $form->getDecorator('FooBar');
             <code>render()</code> method. As an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Render only the FormElements decorator:
 echo $form->renderFormElements();
 
@@ -1301,7 +1301,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
             To validate a full form, use the <code>isValid()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     // failed validation
 }
@@ -1317,7 +1317,7 @@ if (!$form->isValid($_POST)) {
             this, use <code>isValidPartial($data)</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValidPartial($data)) {
     // failed validation
 }
@@ -1336,7 +1336,7 @@ if (!$form->isValidPartial($data)) {
             that:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $json = $form->processAjax($data);
 ]]></programlisting>
 
@@ -1353,7 +1353,7 @@ $json = $form->processAjax($data);
             <code>getMessages()</code>, respectively:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors();
 $messages = $form->getMessages();
 ]]></programlisting>
@@ -1371,7 +1371,7 @@ $messages = $form->getMessages();
             simply passing the element name to each:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $codes = $form->getErrors('username');
 $messages = $form->getMessages('username');
 ]]></programlisting>
@@ -1719,7 +1719,7 @@ $messages = $form->getMessages('username');
             every type of configurable data:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [element]
 name = "registration"
 action = "/user/register"
@@ -1796,7 +1796,7 @@ decorators.form.decorator = "Form"
             configuration:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function init()
@@ -1848,7 +1848,7 @@ class My_Form_Login extends Zend_Form
             This form can then be instantiated with simply:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Form_Login();
 ]]></programlisting>
 
@@ -1864,7 +1864,7 @@ $form = new My_Form_Login();
             <code>loadDefaultDecorators()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Login extends Zend_Form
 {
     public function loadDefaultDecorators()

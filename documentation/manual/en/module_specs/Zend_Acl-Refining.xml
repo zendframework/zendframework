@@ -38,7 +38,7 @@
             in such a way that it inherits permissions from 'staff':
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // The new marketing group inherits permissions from staff
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
@@ -48,7 +48,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
             "newsletter", "latest news", "announcement news"). Now we add these resources:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create Resources for the rules
 
 // newsletter
@@ -69,7 +69,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
             the ACL:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Marketing must be able to publish and archive newsletters and the
 // latest news
 $acl->allow('marketing',
@@ -89,7 +89,7 @@ $acl->deny(null, 'announcement', 'archive');
             We can now query the ACL with respect to the latest changes:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
      "allowed" : "denied";
 // denied
@@ -137,7 +137,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
             resources, and/or privileges:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Remove the denial of revising latest news to staff (and marketing,
 // by inheritance)
 $acl->removeDeny('staff', 'latest', 'revise');
@@ -166,7 +166,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
             <constant>NULL</constant> value for the privileges overrides such incremental changes:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Allow marketing all permissions upon the latest news
 $acl->allow('marketing', 'latest');
 

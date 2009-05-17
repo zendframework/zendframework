@@ -9,7 +9,7 @@
     </para>
     <example id="zend.mail.boundary.example-1">
         <title>Changing the MIME Boundary</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));
 // build message...

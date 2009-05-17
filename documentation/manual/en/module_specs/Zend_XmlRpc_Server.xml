@@ -21,7 +21,7 @@
             An example of the most basic use case:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
@@ -90,7 +90,7 @@ echo $server->handle();
             An example of how to hint follows:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -120,7 +120,7 @@ function myFunc($val1, $val2, $val3)
             PhpDocumentor, using the '|' operator:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -169,7 +169,7 @@ function myFunc($val1, $val2, $val3)
             function or class:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // All public methods in My_Service_Class will be accessible as
 // myservice.METHODNAME
 $server->setClass('My_Service_Class', 'myservice');
@@ -234,7 +234,7 @@ $server->addFunction('somefunc', 'funcs');
             exception class to whitelist:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 ]]></programlisting>
 
@@ -267,7 +267,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         <para>
             An sample usage follows:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
     Zend_Loader::loadClass($class);
@@ -314,7 +314,7 @@ echo $server->handle();
                 method and handles incoming calls.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Return the MD5 sum of a value
  *
@@ -340,7 +340,7 @@ echo $server->handle();
                 as dispatchable XML-RPC methods.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 
 $server = new Zend_XmlRpc_Server();
@@ -357,7 +357,7 @@ echo $server->handle();
                 with their own namespace.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
 require_once 'Services/Pick.php';
@@ -378,7 +378,7 @@ echo $server->handle();
                 report its code and message in the fault response.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
@@ -403,7 +403,7 @@ echo $server->handle();
                 passes it to the server to handle.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
@@ -433,7 +433,7 @@ echo $server->handle($request);
                 for the returned response.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';
@@ -467,7 +467,7 @@ echo $server->handle($request);
                 between requests.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Specify a cache file
 $cacheFile = dirname(__FILE__) . '/xmlrpc.cache';
 

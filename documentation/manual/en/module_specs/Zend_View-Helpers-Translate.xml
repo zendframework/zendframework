@@ -66,7 +66,7 @@
             <classname>Zend_Translate</classname> as its key.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // our example adapter
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 Zend_Registry::set('Zend_Translate', $adapter);
@@ -94,7 +94,7 @@ echo $this->translate('simple');
             <code>setTranslator()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 $this->translate()->setTranslator($adapter)->translate('simple');
@@ -112,7 +112,7 @@ $this->translate()->setTranslator($adapter)->translate('simple');
 
         <title>Direct usage</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // our example adapter
 $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 
@@ -144,7 +144,7 @@ print $translate->translate('simple'); // this returns 'einfach'
             To use a single parameter just add it to the method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = "Monday";
 $this->translate("Today is %1\$s", $date);
@@ -168,7 +168,7 @@ $this->translate("Today is %1\$s", $date);
             Or use a list of parameters and add it to the method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = "Monday";
 $month = "April";
@@ -190,7 +190,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
             Or use an array of parameters and add it to the method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
@@ -211,7 +211,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
         <title>Change locale dynamically</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
@@ -231,7 +231,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
 
         <title>Change locale statically</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = array("Monday", "April", "11:20:55");
 $this->translate()->setLocale('it');
@@ -254,7 +254,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 
         <title>Get the currently set locale</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within your view
 $date = array("Monday", "April", "11:20:55");
 

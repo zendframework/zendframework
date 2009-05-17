@@ -301,7 +301,7 @@
                 <code>run</code> will return information about each instance
                 that is starting up.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->run(array('imageId' => 'ami-509320',
@@ -326,7 +326,7 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
             <para>
                 <code>reboot</code> returns boolean true or false
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->reboot('instanceId');
@@ -344,7 +344,7 @@ $return = $ec2_instance->reboot('instanceId');
             <para>
                 <code>terminate</code> returns boolean true or false
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->terminate('instanceId');
@@ -380,7 +380,7 @@ $return = $ec2_instance->terminate('instanceId');
                 <code>describe</code> will return an array containing information on the
                 instance.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->describe('instanceId');
@@ -405,7 +405,7 @@ $return = $ec2_instance->describe('instanceId');
                 <code>describeByImageId</code> will return an array containing information on the
                 instances thare were started by the passed in imageId
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->describeByImageId('imageId');
@@ -437,7 +437,7 @@ $return = $ec2_instance->describeByImageId('imageId');
                 <code>instanceId</code>, <code>timestamp</code> from the last output
                 and the <code>output</code> from the console.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->consoleOutput('instanceId');
@@ -457,7 +457,7 @@ $return = $ec2_instance->consoleOutput('instanceId');
                 owner of the AMI. This feature is useful when an AMI owner is providing
                 support and wants to verify whether a user's instance is eligible.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->terminate('productCode', 'instanceId');

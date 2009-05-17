@@ -34,7 +34,7 @@
         </para>
         <example id="zend.console.getopt.fetching.exceptions.example">
             <title>Catching Getopt Exceptions</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 try {
     $opts = new Zend_Console_Getopt('abp:');
     $opts->parse();
@@ -79,7 +79,7 @@ try {
         </para>
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>Using getOption()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $b = $opts->getOption('b');
 $p_parameter = $opts->getOption('p');
@@ -93,7 +93,7 @@ $p_parameter = $opts->getOption('p');
         </para>
         <example id="zend.console.getopt.fetching.byname.example.magic">
             <title>Using __get() and __isset() Magic Methods</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 if (isset($opts->b)) {
     echo "I got the b option.\n";
@@ -161,7 +161,7 @@ $p_parameter = $opts->p; // null if not set
         </para>
         <example id="zend.console.getopt.fetching.remainingargs.example">
             <title>Using getRemainingArgs()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setArguments(array('-p', 'p_parameter', 'filename'));
 $args = $opts->getRemainingArgs(); // returns array('filename')

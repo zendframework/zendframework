@@ -23,7 +23,7 @@
         Basic usage for each implementation is the same:
     </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -131,7 +131,7 @@ class FooController extends Zend_Controller_Action
             for use with such a store:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // within a controller action:
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
@@ -159,7 +159,7 @@ $this->_helper->autoCompleteDojo($data);
                 following contents:
             </para>
 
-            <programlisting role="javascript"><![CDATA[
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
     fetch:function (request) {
@@ -180,7 +180,7 @@ dojo.declare("custom.TestNameReadStore", dojox.data.QueryReadStore, {
                 AutoCompletion:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -228,7 +228,7 @@ class TestController extends Zend_Controller_Action
                 for processing AutoCompletion:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -284,7 +284,7 @@ class TestController extends Zend_Controller_Action
                 view script, which comments the steps:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // setup our data store: ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

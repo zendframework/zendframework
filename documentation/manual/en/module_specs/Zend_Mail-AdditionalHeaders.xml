@@ -9,7 +9,7 @@
     </para>
     <example id="zend.mail.additional-headers.example-1">
         <title>Adding E-Mail Message Headers</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MyCoolApplication');
 $mail->addHeader('X-greetingsTo', 'Mom', true); // multiple values

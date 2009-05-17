@@ -68,7 +68,7 @@
 
         <example id="zend.measure.edit.convert.example-1">
             <title>Convert</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
 $unit = new Zend_Measure_Weight($mystring,'POND', $locale);
@@ -100,7 +100,7 @@ print "Ton:".$unit->convertTo(Zend_Measure_Weight::TON, 3);
         <para>
             <example id="zend.measure.edit.add.example-1">
                 <title>Adding units</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Define objects
 $unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -130,7 +130,7 @@ echo $sum; // outputs "300 cm"
                 <para>
                     Subtraction of measurements works just like addition.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Define objects
 $unit = new Zend_Measure_Length(200, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -157,7 +157,7 @@ echo $sum;
         <para>
             <example id="zend.measure.edit.equal.example-1">
                 <title>Different measurements</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Define measurements
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -171,7 +171,7 @@ if ($unit->equals($unit2)) {
             </example>
             <example id="zend.measure.edit.equal.example-2">
                 <title>Identical measurements</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Define measurements
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
@@ -202,7 +202,7 @@ if ($unit->equals($unit2)) {
         <para>
             <example id="zend.measure.edit.compare.example-1">
                 <title>Difference</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::CENTIMETER);
 $unit2 = new Zend_Measure_Length(1, Zend_Measure_Length::METER);
 $unit3 = new Zend_Measure_Length(1.2, Zend_Measure_Length::METER);
@@ -228,7 +228,7 @@ print "Greater:".$unit3->compare($unit2);
         <para>
             <example id="zend.measure.edit.changevalue.example-1">
                 <title>Changing a value</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 
@@ -256,7 +256,7 @@ echo $unit;
 
         <example id="zend.measure.edit.changetype.example-1">
             <title>Changing the type</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $unit = new Zend_Measure_Length(1,Zend_Measure_Length::METER);
 echo $unit; // outputs "1 m"
 

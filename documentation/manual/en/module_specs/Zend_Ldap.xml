@@ -39,7 +39,7 @@
             If you are using OpenLDAP, a simple example looks like the following (note that the
             <code>bindRequiresDn</code> option is important if you are <emphasis>not</emphasis> using AD):
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $options = array(
     'host' => 's0.foo.net',
     'username' => 'CN=user1,DC=foo,DC=net',
@@ -59,7 +59,7 @@ echo "$acctname\n";
         <para>
             If you are using Microsoft AD a simple example is:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $options = array(
     'host' => 'dc1.w.net',
     'useStartTls' => true,
@@ -100,7 +100,7 @@ echo "$acctname\n";
                 The following example illustrates how the non-DN username '<code>abaker</code>' can be used with
                 <code>bind()</code>:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $options = array(
         'host' => 's0.foo.net',
         'username' => 'CN=user1,DC=foo,DC=net',
@@ -343,7 +343,7 @@ echo "$acctname\n";
                 Consider the following example that illustrates the technique required to implement multi-domain
                 authentication and failover:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $acctname = 'W\\user2';
 $password = 'pass2';
 

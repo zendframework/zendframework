@@ -10,7 +10,7 @@
     </para>
     <example id="zend.mail.html-mails.example-1">
         <title>Sending HTML E-Mail</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('My Nice Test Text');
 $mail->setBodyHtml('My Nice <b>Test</b> Text');

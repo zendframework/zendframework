@@ -48,7 +48,7 @@
             bootstrap:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
 $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
@@ -57,7 +57,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             And then print it out on top of your layout script:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 ]]></programlisting>
 
@@ -72,7 +72,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             invoking the helper.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
@@ -81,7 +81,7 @@ $doctype = $view->doctype()->getDoctype();
             not; for this, the <code>isXhtml()</code> method will suffice:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($view->doctype()->isXhtml()) {
     // do something differently
 }

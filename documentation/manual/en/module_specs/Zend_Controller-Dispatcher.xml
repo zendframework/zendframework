@@ -34,7 +34,7 @@
                 in either the front controller or your dispatcher:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // In your front controller:
 $front->setParam('prefixDefaultModule', true);
 
@@ -72,7 +72,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
             send to the new action:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // forward to another action in the current controller and module:
@@ -118,7 +118,7 @@ public function bazAction()
             following methods as required for any dispatcher implementation:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**

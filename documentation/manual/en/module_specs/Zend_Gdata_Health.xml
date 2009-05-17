@@ -116,7 +116,7 @@
             <para>
                 The example below shows how to create a Health service class using ClientLogin authentication:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Parameters for ClientLogin authentication
 $healthServiceName = Zend_Gdata_Health::HEALTH_SERVICE_NAME;
 //$h9ServiceName = Zend_Gdata_Health::H9_SANDBOX_SERVICE_NAME;
@@ -136,7 +136,7 @@ $service = new Zend_Gdata_Health($client);
               recommend interface to communicate with Google Health because each token is directly linked to a specific profile in
               the user's account. Unlike other Google Data APIs, it is required that all requests from your application be digitally signed.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Retrieve the current URL so that the AuthSub server knows where to
  * redirect the user after authentication is complete.
@@ -246,7 +246,7 @@ $healthService = new Zend_Gdata_Health($client,
                     To execute a query against the profile feed, invoke a new instance of an <classname>Zend_Gdata_Health_Query</classname> and
                     call the service's <code>getHealthProfileFeed()</code> method:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
 // example query for the top 10 medications with 2 items each
@@ -279,7 +279,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 To retrieve the full CCR information from an entry, make a call to the <classname>Zend_Gdata_Health_ProfileEntry</classname> class's <code>getCcr()</code> method.
                 That returns a <classname>Zend_Gdata_Health_Extension_CCR</classname>:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $entries = $profileFeed->getEntries();
 foreach ($entries as $entry) {
     $medications = $entry->getCcr()->getMedications();
@@ -302,7 +302,7 @@ foreach ($entries as $entry) {
             <para>
                To be more efficient, you can also use category queries to only return the necessary CCR from the Google Health servers. Then, iterate through those results:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Health_Query();
 $query->setDigest("true");
 $query->setCategory("condition");
@@ -334,7 +334,7 @@ foreach ($conditions as $cond) {
             <para>
                 To execute a query against the profile list feed, call the service's <code>getHealthProfileListFeed()</code> method:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient('user@gmail.com',
                                                 'pa$$word',
                                                 'health');
@@ -352,7 +352,7 @@ foreach ($entries as $entry) {
               Once you've determined which profile to use, call <code>setProfileID()</code> with the profileID as an argument.
               This will restrict subsequent API requests to be against that particular profile:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // use the first profile
 $profileID = $feed->entry[0]->getProfileID();
 $healthService->setProfileID($profileID);
@@ -377,7 +377,7 @@ echo '<p><b>Queried profileID</b>: ' . $profileID . '</p>';
           <para>
               Notices can be sent by using the <code>sendHealthNotice()</code> method for the Health service:
           </para>
-          <programlisting role="php"><![CDATA[
+          <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
 $subject = "Title of your notice goes here";

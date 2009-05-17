@@ -45,7 +45,7 @@
             so with this method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Instantiate with the API key and a URL to the application or
 // resource being used
 $akismet = new Zend_Service_Akismet($apiKey,
@@ -177,7 +177,7 @@ if ($akismet->verifyKey($apiKey) {
         <example id="zend.service.akismet.isspam.example-1">
             <title>isSpam() Usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
@@ -221,7 +221,7 @@ if ($akismet->isSpam($data)) {
         <example id="zend.service.akismet.submitspam.example-1">
             <title>submitSpam() Usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
@@ -263,7 +263,7 @@ $akismet->submitSpam($data));
         <example id="zend.service.akismet.submitham.example-1">
             <title>submitHam() Usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .

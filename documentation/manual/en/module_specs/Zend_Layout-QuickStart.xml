@@ -24,7 +24,7 @@
             As an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -61,7 +61,7 @@
             navigation, etc.:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -115,7 +115,7 @@
             MVC:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // In your bootstrap:
 Zend_Layout::startMvc();
 ]]></programlisting>
@@ -131,7 +131,7 @@ Zend_Layout::startMvc();
             an action helper:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -156,7 +156,7 @@ class FooController extends Zend_Controller_Action
             call methods on the layout object:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->layout()->setLayout('foo'); // set alternate layout ?>
 ]]></programlisting>
 
@@ -166,7 +166,7 @@ class FooController extends Zend_Controller_Action
             method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Returns null if startMvc() has not first been called
 $layout = Zend_Layout::getMvcInstance();
 ]]></programlisting>
@@ -192,7 +192,7 @@ $layout = Zend_Layout::getMvcInstance();
             render each separately:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <body>
     <!-- renders /nav/menu -->
     <div id="nav"><?php echo $this->layout()->nav ?></div>
@@ -237,7 +237,7 @@ $layout = Zend_Layout::getMvcInstance();
             object properties, and render the layout:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $layout = new Zend_Layout();
 
 // Set a layout script path:

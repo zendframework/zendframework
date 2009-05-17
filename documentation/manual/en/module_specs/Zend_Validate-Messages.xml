@@ -560,7 +560,7 @@
         with the messages a validator could return in the case of a failed validation.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Alnum();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>

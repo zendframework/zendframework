@@ -58,7 +58,7 @@
             This example illustrates the basic use of
             <classname>Zend_Config_Writer_Xml</classname> to create a new config file:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create the config object
 $config = new Zend_Config(array(), true);
 $config->production = array();
@@ -100,7 +100,7 @@ $writer->write('config.xml', $config);
         <para>
             This example demonstrates how to edit an existing config file.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Load all sections from an existing config file, while skipping the extends.
 $config = new Zend_Config_Ini('config.ini',
                               null,

@@ -11,7 +11,7 @@
 
     <example id="zend.feed.modifying-feed.example.modifying">
         <title>Modifying an Existing Feed Entry</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
 
@@ -41,7 +41,7 @@ echo $entry->saveXML();
 
     <example id="zend.feed.modifying-feed.example.creating">
         <title>Creating an Atom Entry with Elements of Custom Namespaces</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id is always assigned by the server in Atom
 $entry->title = 'my custom entry';

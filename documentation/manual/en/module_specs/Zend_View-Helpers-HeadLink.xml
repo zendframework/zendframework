@@ -76,7 +76,7 @@
             to output it.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // setting links in a view script:
 $this->headLink()->appendStylesheet('/styles/basic.css')
                  ->headLink(array('rel' => 'favicon',

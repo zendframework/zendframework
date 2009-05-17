@@ -50,7 +50,7 @@
 
         <example id="zend.date.additional.checking.example-1">
             <title>Checking Dates</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Checking dates
 $date = '01.03.2000';
 if (Zend_Date::isDate($date)) {
@@ -104,7 +104,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>Getting all Available Cities</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Output the complete list of available cities
 print_r (Zend_Date_Cities::getCityList());
 ]]></programlisting>
@@ -164,7 +164,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>Getting the Location for a City</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 // uses the effective horizon as no horizon is defined
 print_r (Zend_Date_Cities::City('Vienna'));
@@ -187,7 +187,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>Calculating Sun Information</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 $city = Zend_Date_Cities::City('Vienna');
 
@@ -240,7 +240,7 @@ foreach ($info as $sun) {
 
         <example id="zend.date.additional.timezones.example-1">
             <title>Working with Time Zones</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
 // We do this here just for having a complete example.
@@ -282,7 +282,7 @@ print $date->getIso();
 
         <example id="zend.date.additional.timezones.example-2">
             <title>Multiple Time Zones</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Set a default timezone... this has to be done within the bootstrap
 // file or php.ini.
 // We do this here just for having a complete example.

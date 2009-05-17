@@ -65,7 +65,7 @@
             the query term "domino":
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $books = new Zend_Gdata_Books();
 $query = $books->newVolumeQuery();
 
@@ -88,7 +88,7 @@ foreach ($feed as $entry) {
             following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
 ]]></programlisting>
 
@@ -177,7 +177,7 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
                 Co-Branded Search is available at the following URL:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
 ]]></programlisting>
 
@@ -186,7 +186,7 @@ http://www.google.com/books/p/PARTNER_COBRAND_ID?q=ball
                 following URL:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
 ]]></programlisting>
 
@@ -195,7 +195,7 @@ http://www.google.com/books/feeds/p/PARTNER_COBRAND_ID/volumes?q=ball+-soccer
                 provide an extra parameter to <code>newVolumeQuery</code>
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query =
     $books->newVolumeQuery('http://www.google.com/books/p/PARTNER_COBRAND_ID');
 ]]></programlisting>
@@ -229,7 +229,7 @@ $query =
                 In the example below, we start from an empty <code>VolumeEntry</code> object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
 $entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
 $entry->setRating(new Zend_Gdata_Extension_Rating(3, 1, 5, 1));
@@ -260,7 +260,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                     <code>VolumeEntry</code> object.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $annotationUrl = $entry->getAnnotationLink()->href;
 $review        = new Zend_Gdata_Books_Extension_Review();
 
@@ -281,7 +281,7 @@ $books->insertVolume($entry, $annotationUrl);
                     then you submit it to the annotation feed.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $entryUrl = $entry->getId()->getText();
 $review   = new Zend_Gdata_Books_Extension_Review();
 
@@ -315,7 +315,7 @@ $books->updateVolume($entry, $entryUrl);
                     <code>VolumeEntry</code> and post it to the annotation feed.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $annotationUrl = $entry->getAnnotationLink()->href;
 $category      = new Zend_Gdata_App_Extension_Category(
     'rated',
@@ -340,7 +340,7 @@ $books->insertVolume($entry, Zend_Gdata_Books::MY_ANNOTATION_FEED_URI);
                 authenticated user's annotations, use the value <code>me</code> as the user ID.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $books->getVolumeFeed(
             'http://www.google.com/books/feeds/users/USER_ID/volumes');
 <i>(or)</i>
@@ -375,7 +375,7 @@ foreach ($feed as $entry) {
                 by calling <code>deleteVolume</code> on that entry.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $books->deleteVolume($entry);
 ]]></programlisting>
 
@@ -424,7 +424,7 @@ $books->deleteVolume($entry);
                     user, use <code>me</code> in place of <code>USER_ID</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $feed = $books->getUserLibraryFeed();
 ]]></programlisting>
 
@@ -454,7 +454,7 @@ $feed = $books->getUserLibraryFeed();
                     your library that contain the word "bear":
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users' .
     '/USER_ID/collections/library/volumes');
@@ -469,7 +469,7 @@ $feed = $books->getVolumeFeed($query);
                     <ulink url="#zend.gdata.books.labels">labeled by the user</ulink>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = $books->newVolumeQuery(
     'http://www.google.com/books/feeds/users/' .
     'USER_ID/collections/library/volumes');
@@ -511,7 +511,7 @@ $feed = $books->getVolumeFeed($query);
                     The following example creates a new entry and adds it to the library:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $entry = new Zend_Gdata_Books_VolumeEntry();
 $entry->setId(new Zend_Gdata_App_Extension_Id(VOLUME_ID));
 $books->insertVolume(
@@ -525,7 +525,7 @@ $books->insertVolume(
                     <code>VolumeEntry</code> object to the library:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $books->insertVolume(
     $entry,
     Zend_Gdata_Books::MY_LIBRARY_FEED_URI
@@ -543,7 +543,7 @@ $books->insertVolume(
                     <code>deleteVolume</code> on the <code>VolumeEntry</code> object.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $books->deleteVolume($entry);
 ]]></programlisting>
 

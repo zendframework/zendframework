@@ -52,7 +52,7 @@
             using Java Lucene:
         </para>
 
-        <programlisting role="java"><![CDATA[
+        <programlisting language="java"><![CDATA[
 /**
 * Index creation:
 */

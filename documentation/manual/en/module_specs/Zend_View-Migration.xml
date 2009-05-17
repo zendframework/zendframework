@@ -21,7 +21,7 @@
             passed to the <code>render()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Where $_GET['foobar'] = '../../../../etc/passwd'
 echo $view->render($_GET['foobar']); // LFI inclusion
 ]]></programlisting>
@@ -43,7 +43,7 @@ echo $view->render($_GET['foobar']); // LFI inclusion
                 by explicitly calling the <code>setLfiProtection()</code> method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Disabling via constructor
 $view = new Zend_View(array('lfiProtectionOn' => false));
 

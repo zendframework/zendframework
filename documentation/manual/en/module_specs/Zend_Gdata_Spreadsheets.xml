@@ -36,7 +36,7 @@
             user.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Spreadsheets::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $spreadsheetService = new Zend_Gdata_Spreadsheets($client);
@@ -59,7 +59,7 @@ $feed = $spreadsheetService->getSpreadsheetFeed();
             containing a list of worksheets associated with that spreadsheet.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_DocumentQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $feed = $spreadsheetService->getWorksheetFeed($query);
@@ -126,7 +126,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
                 <code>getListFeed</code> method of the Spreadsheets service.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -148,7 +148,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
               row. You can extract and display this array:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowData = $listFeed->entries[1]->getCustom();
 foreach($rowData as $customEntry) {
   echo $customEntry->getColumnName() . " = " . $customEntry->getText();
@@ -161,7 +161,7 @@ foreach($rowData as $customEntry) {
               convenient when trying to access a specific header:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $customEntry = $listFeed->entries[1]->getCustomByName('my_heading');
 echo $customEntry->getColumnName() . " = " . $customEntry->getText();
 ]]></programlisting>
@@ -178,7 +178,7 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 object to true:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -208,7 +208,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 25. To do so, you would set <code>sq</code> as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_ListQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -225,7 +225,7 @@ $listFeed = $spreadsheetService->getListFeed($query);
                 <code>insertRow</code> method of the Spreadsheet service.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $insertedListEntry = $spreadsheetService->insertRow($rowData,
                                                     $spreadsheetKey,
                                                     $worksheetId);
@@ -254,7 +254,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
                 <code>updateRow</code> method of the Spreadsheet service.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                                                    $newRowData);
 ]]></programlisting>
@@ -278,7 +278,7 @@ $updatedListEntry = $spreadsheetService->updateRow($oldListEntry,
                 entry to be deleted:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $spreadsheetService->deleteRow($listEntry);
 ]]></programlisting>
 
@@ -287,7 +287,7 @@ $spreadsheetService->deleteRow($listEntry);
                 the entry itself:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $listEntry->delete();
 ]]></programlisting>
         </sect3>
@@ -313,7 +313,7 @@ $listEntry->delete();
                 <code>getCellFeed</code> method of the Spreadsheets service.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setSpreadsheetKey($spreadsheetKey);
 $query->setWorksheetId($worksheetId);
@@ -329,7 +329,7 @@ $cellFeed = $spreadsheetService->getCellFeed($query);
                 a single cell in a worksheet. You can display this information:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach($cellFeed as $cellEntry) {
   $row = $cellEntry->cell->getRow();
   $col = $cellEntry->cell->getColumn();
@@ -349,7 +349,7 @@ foreach($cellFeed as $cellEntry) {
                 this column as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Spreadsheets_CellQuery();
 $query->setMinCol(1);
 $query->setMaxCol(1);
@@ -371,7 +371,7 @@ $feed = $spreadsheetService->getCellsFeed($query);
                 and new value of the cell.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $updatedCell = $spreadsheetService->updateCell($row,
                                                $col,
                                                $inputValue,

@@ -41,7 +41,7 @@
         As an example, let's consider the following controller:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     /**
@@ -74,7 +74,7 @@ class NewsController extends Zend_Controller_Action
         can hint that it can return an XML response:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -162,7 +162,7 @@ class NewsController extends Zend_Controller_Action
                     serialization:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 ]]></programlisting>
             </listitem>
@@ -299,7 +299,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             following controller class:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function listAction()
@@ -326,7 +326,7 @@ class FooController extends Zend_Controller_Action
             the <code>init()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -344,7 +344,7 @@ class FooController extends Zend_Controller_Action
             <code>$contexts</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public $contexts = array(
@@ -444,7 +444,7 @@ class FooController extends Zend_Controller_Action
             <code>initContext()</code> in your action controller:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -461,7 +461,7 @@ class NewsController extends Zend_Controller_Action
             <code>initContext()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]></programlisting>
     </sect4>
@@ -485,7 +485,7 @@ $contextSwitch->initContext('xml');
                     <code>initContext()</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $contextSwitch->setAutoJsonSerialization(false);
 $contextSwitch->initContext();
 ]]></programlisting>
@@ -720,7 +720,7 @@ $contextSwitch->initContext();
                 latter, we'll return JSON.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class CommentController extends Zend_Controller_Action
 {
     public function init()

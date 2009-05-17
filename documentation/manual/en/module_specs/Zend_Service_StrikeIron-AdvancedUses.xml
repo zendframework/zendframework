@@ -23,7 +23,7 @@
         give the <code>wsdl</code> option to <code>getService()</code>
         instead of the <code>class</code> option:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -88,7 +88,7 @@ echo $result->listingName;
         and
         <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><code>__getLastRequest()</code></ulink>:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $strikeIron =
     new Zend_Service_StrikeIron(array('username' => 'your-username',
                                       'password' => 'your-password',

@@ -17,7 +17,7 @@
             <code>create</code> returns an array which contains the keyName,
             keyFingerprint and keyMaterial.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->create('my-new-key');
 ]]></programlisting>
@@ -33,7 +33,7 @@ $return = $ec2_kp->create('my-new-key');
         <para>
             <code>delete</code> returns boolean true or false
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->delete('my-new-key');
 ]]></programlisting>
@@ -49,7 +49,7 @@ $return = $ec2_kp->delete('my-new-key');
         <para>
             <code>describe</code> returns an array which contains keyName and keyFingerprint
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');
 ]]></programlisting>

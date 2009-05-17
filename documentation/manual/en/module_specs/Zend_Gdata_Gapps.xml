@@ -55,7 +55,7 @@
                 when instantiating the service class. For example:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 ]]></programlisting>
@@ -72,7 +72,7 @@ $gdata = new Zend_Gdata_Gapps($client, $domain);
                 the query. For example:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
 ]]></programlisting>
@@ -84,7 +84,7 @@ $query = new Zend_Gdata_Gapps_UserQuery($domain, $arg);
                 specify the domain as part of the constructor arguments.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 $query = $gdata->newUserQuery($arg);
@@ -112,7 +112,7 @@ $query = $gdata->newUserQuery($arg);
                 <code>createUser()</code> convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->createUser('foo', 'Random', 'User', '••••••••');
 ]]></programlisting>
 
@@ -123,7 +123,7 @@ $gdata->createUser('foo', 'Random', 'User', '••••••••');
                 upload the entry to the server.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $user = $gdata->newUserEntry();
 $user->login = $gdata->newLogin();
 $user->login->username = 'foo';
@@ -151,7 +151,7 @@ $user = $gdata->insertUser($user);
                 not found, <code>null</code> will be returned.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 
 echo 'Username: ' . $user->login->userName . "\n";
@@ -173,7 +173,7 @@ echo 'Has Agreed To Terms: ' .
                 service object with that query.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = $gdata->newUserQuery('foo');
 $user = $gdata->getUserEntry($query);
 
@@ -206,7 +206,7 @@ echo 'Has Agreed To Terms: ' .
                 <code>retrieveAllUsers()</code> convenience method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveAllUsers();
 
 foreach ($feed as $user) {
@@ -228,7 +228,7 @@ foreach ($feed as $user) {
                 linkend="zend.gdata.introduction.paging" />.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->getUserFeed();
 
 foreach ($feed as $user) {
@@ -249,7 +249,7 @@ foreach ($feed as $user) {
                 changes made will be propagated to the server.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->name->givenName = 'Foo';
 $user->name->familyName = 'Bar';
@@ -264,7 +264,7 @@ $user = $user->save();
                     the <code>login->password</code> property.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->login->password = '••••••••';
 $user = $user->save();
@@ -288,7 +288,7 @@ $user = $user->save();
                     <code>true</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->login->changePasswordAtNextLogin = true;
 $user = $user->save();
@@ -314,7 +314,7 @@ $user = $user->save();
                     convenience methods:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $gdata->suspendUser('foo');
 $gdata->restoreUser('foo');
 ]]></programlisting>
@@ -325,7 +325,7 @@ $gdata->restoreUser('foo');
                     <code>true</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->login->suspended = true;
 $user = $user->save();
@@ -348,7 +348,7 @@ $user = $user->save();
                     <code>true</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->login->admin = true;
 $user = $user->save();
@@ -373,7 +373,7 @@ $user = $user->save();
                 entry.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $user = $gdata->retrieveUser('foo');
 $user->delete();
 ]]></programlisting>
@@ -383,7 +383,7 @@ $user->delete();
                 account, use the <code>deleteUser()</code> convenience method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->deleteUser('foo');
 ]]></programlisting>
 
@@ -414,7 +414,7 @@ $gdata->deleteUser('foo');
                 <code>createNickname()</code> convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->createNickname('foo', 'bar');
 ]]></programlisting>
 
@@ -425,7 +425,7 @@ $gdata->createNickname('foo', 'bar');
                 the entry to the server.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $nickname = $gdata->newNicknameEntry();
 $nickname->login = $gdata->newLogin('foo');
 $nickname->nickname = $gdata->newNickname('bar');
@@ -443,7 +443,7 @@ $nickname = $gdata->insertNickname($nickname);
                 return <code>null</code> if a user is not found.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $nickname = $gdata->retrieveNickname('bar');
 
 echo 'Nickname: ' . $nickname->nickname->name . "\n";
@@ -458,7 +458,7 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 service object with that query.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = $gdata->newNicknameQuery('bar');
 $nickname = $gdata->getNicknameEntry($query);
 
@@ -484,7 +484,7 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 the convenience method <code>retrieveNicknames()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveNicknames('foo');
 
 foreach ($feed as $nickname) {
@@ -504,7 +504,7 @@ foreach ($feed as $nickname) {
                 object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = $gdata->newNicknameQuery();
 $query->setUsername('foo');
 $feed = $gdata->getNicknameFeed($query);
@@ -523,7 +523,7 @@ foreach ($feed as $nickname) {
                 convenience method <code>retrieveAllNicknames()</code>
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveAllNicknames();
 
 foreach ($feed as $nickname) {
@@ -542,7 +542,7 @@ foreach ($feed as $nickname) {
                 service object with no arguments.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->getNicknameFeed();
 
 foreach ($feed as $nickname) {
@@ -562,7 +562,7 @@ foreach ($feed as $nickname) {
                 entry.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $nickname = $gdata->retrieveNickname('bar');
 $nickname->delete();
 ]]></programlisting>
@@ -572,7 +572,7 @@ $nickname->delete();
                 the <code>deleteNickname()</code> convenience method.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->deleteNickname('bar');
 ]]></programlisting>
 
@@ -603,7 +603,7 @@ $gdata->deleteNickname('bar');
                 <code>createEmailList()</code> convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->createEmailList('friends');
 ]]></programlisting>
 
@@ -614,7 +614,7 @@ $gdata->createEmailList('friends');
                 the entry to the server.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $list = $gdata->newEmailListEntry();
 $list->emailList = $gdata->newEmailList('friends');
 $list = $gdata->insertEmailList($list);
@@ -632,7 +632,7 @@ $list = $gdata->insertEmailList($list);
                 convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveEmailLists('baz@somewhere.com');
 
 foreach ($feed as $list) {
@@ -652,7 +652,7 @@ foreach ($feed as $list) {
                 a service object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = $gdata->newEmailListQuery();
 $query->setRecipient('baz@somewhere.com');
 $feed = $gdata->getEmailListFeed($query);
@@ -672,7 +672,7 @@ foreach ($feed as $list) {
                 method <code>retrieveAllEmailLists()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveAllEmailLists();
 
 foreach ($feed as $list) {
@@ -690,7 +690,7 @@ foreach ($feed as $list) {
                 service object with no arguments.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->getEmailListFeed();
 
 foreach ($feed as $list) {
@@ -708,7 +708,7 @@ foreach ($feed as $list) {
                 convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->deleteEmailList('friends');
 ]]></programlisting>
 
@@ -734,7 +734,7 @@ $gdata->deleteEmailList('friends');
                 <code>addRecipientToEmailList()</code> convenience method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
 ]]></programlisting>
 
@@ -748,7 +748,7 @@ $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
                 can be used to retrieve the list of subscribers to an email list:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $feed = $gdata->retrieveAllRecipients('friends');
 
 foreach ($feed as $recipient) {
@@ -763,7 +763,7 @@ foreach ($feed as $recipient) {
                 object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = $gdata->newEmailListRecipientQuery();
 $query->setEmailListName('friends');
 $feed = $gdata->getEmailListRecipientFeed($query);
@@ -789,7 +789,7 @@ foreach ($feed as $recipient) {
                 method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 ]]></programlisting>
 
@@ -832,7 +832,7 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             resource doesn't exist and handle the fault gracefully:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function retrieveUser ($username) {
     $query = $gdata->newUserQuery($username);
     try {

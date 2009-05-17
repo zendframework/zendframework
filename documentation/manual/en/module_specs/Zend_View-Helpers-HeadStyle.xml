@@ -53,7 +53,7 @@
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
             <title>Headstyle With Conditional Comments</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
 ]]></programlisting>
@@ -97,7 +97,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
             You may specify a new style tag at any time:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // adding styles
 $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
@@ -109,7 +109,7 @@ $this->headStyle()->appendStyle($styles);
             to aid in this task:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Putting styles in order
 
 // place at a particular offset:
@@ -127,7 +127,7 @@ $this->headStyle()->prependStyle($firstStyles);
             layout script, simply echo the helper:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headStyle() ?>
 ]]></programlisting>
     </example>
@@ -143,7 +143,7 @@ $this->headStyle()->prependStyle($firstStyles);
             you do just that, capturing it to the stack:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headStyle()->captureStart() ?>
 body {
     background-color: <?php echo $this->bgColor ?>;

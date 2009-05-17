@@ -14,7 +14,7 @@
         To filter before all writers, you can add any number of Filters to a
         Log object using the <code>addFilter()</code> method:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer = new Zend_Log_Writer_Stream('php://output');
@@ -42,7 +42,7 @@ $logger->emerg('Emergency message');
         To filter only on a specific Writer instance, use the
         <code>addFilter</code> method of that Writer:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');

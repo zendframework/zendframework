@@ -44,7 +44,7 @@
             resources in that module.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [production]
 news.resources.db.adapter = "pdo_mysql"
 news.resources.db.params.host = "localhost"
@@ -54,7 +54,7 @@ news.resources.db.params.dbname = "news"
 news.resources.layout.layout = "news"
 ]]></programlisting>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <config>
     <production>
@@ -88,7 +88,7 @@ news.resources.layout.layout = "news"
             method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resource = $bootstrap->getPluginResource('modules');
 $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];

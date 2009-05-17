@@ -18,7 +18,7 @@
         differ. You have to select the adapter you want to use when initiating the filter.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Use the Mcrypt adapter
 $filter1 = new Zend_Filter_Encrypt(array('adapter' => 'mcrypt'));
 
@@ -31,7 +31,7 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
         method to receive the actual set adapter.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Use the Mcrypt adapter
 $filter = new Zend_Filter_Encrypt();
 $filter->setAdapter('openssl');
@@ -141,7 +141,7 @@ $filter->setAdapter('openssl');
             </para>
         </note>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
 $filter = new Zend_Filter_Encrypt('myencryptionkey');
 
@@ -189,7 +189,7 @@ print $encrypted;
             <code>getPrivateKey()</code> and <code>setPrivateKey()</code> methods.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',
@@ -216,7 +216,7 @@ $filter->setPublicKey(array(
             encrypted key.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',
@@ -245,7 +245,7 @@ $filter->setPassphrase('mypassphrase');
             So our complete example for encrypting content with <code>OpenSSL</code> look like this.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Encrypt(array(
     'adapter' => 'openssl',

@@ -44,7 +44,7 @@
                 include_path:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
@@ -57,7 +57,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 they are relative to an absolute path:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
@@ -141,7 +141,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 installation:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -170,7 +170,7 @@ library
                 here -- we're going to end up with only two paths.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
@@ -212,7 +212,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 indicates the shell prompt):
             </para>
 
-            <programlisting role="shell"><![CDATA[
+            <programlisting language="shell"><![CDATA[
 % cd path/to/ZendFramework/library
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
@@ -234,7 +234,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 following code:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>

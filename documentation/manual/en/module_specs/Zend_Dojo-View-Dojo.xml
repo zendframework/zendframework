@@ -45,7 +45,7 @@
             plugin; simply grab your view object and execute the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
@@ -56,7 +56,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
             'PairedStore' and store in our 'custom' module.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php // setup data store for FilteringSelect ?>
 <div dojoType="custom.PairedStore" jsId="stateStore"
     url="/data/autocomplete/type/state/format/ajax"
@@ -80,7 +80,7 @@ $this->dojo()->enable()
             it:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -159,7 +159,7 @@ $this->dojo()->enable()
                 <code>setUseDeclarative()</code> method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
 ]]></programlisting>
 
@@ -168,7 +168,7 @@ Zend_Dojo_View_Helper_Dojo::setUseDeclarative();
                 <code>setUseProgrammatic()</code> method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
 ]]></programlisting>
 
@@ -179,7 +179,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic();
                 will be created.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
 ]]></programlisting>
         </example>
@@ -193,7 +193,7 @@ Zend_Dojo_View_Helper_Dojo::setUseProgrammatic(-1);
             select one by passing in a module path:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->dojo()->addStylesheetModule('dijit.themes.tundra');
 ]]></programlisting>
 
@@ -211,7 +211,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             using; the most common use case is to pass it in the body:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <body class="tundra">
 ]]></programlisting>
     </sect3>
@@ -262,7 +262,7 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
             <code>addLayer()</code> method for adding paths to required layers:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 $view->dojo()->addLayer('/js/foo/foo.js');
 ]]></programlisting>
 

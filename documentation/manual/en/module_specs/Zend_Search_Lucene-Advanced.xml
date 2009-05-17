@@ -96,7 +96,7 @@
         <para>
             Static object properties (see below) are destroyed <emphasis>after</emphasis> the last line of the executed script.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 
@@ -127,7 +127,7 @@ Searcher::initIndex();
             adding or deleting document after the commit operation. But the <code>commit()</code> call guarantees that if there are no document added or deleted after the call to <code>commit()</code>, then
             the <classname>Zend_Search_Lucene</classname> destructor has nothing to do and will not throw exception:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Searcher {
     private static $_index;
 

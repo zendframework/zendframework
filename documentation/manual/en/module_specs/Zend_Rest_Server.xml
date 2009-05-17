@@ -17,7 +17,7 @@
         <example id="zend.rest.server.usage.example-1">
             <title>Basic Zend_Rest_Server Usage - Classes</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
 $server->setClass('My_Service_Class');
 $server->handle();
@@ -27,7 +27,7 @@ $server->handle();
         <example id="zend.rest.server.usage.example-2">
             <title>Basic Zend_Rest_Server Usage - Functions</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Say Hello
  *

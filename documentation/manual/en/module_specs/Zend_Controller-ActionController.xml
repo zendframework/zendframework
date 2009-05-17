@@ -27,7 +27,7 @@
             For example, let's say your class is defined as follows:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -69,7 +69,7 @@ class FooController extends Zend_Controller_Action
                 of the following methods:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -103,7 +103,7 @@ class FooController extends Zend_Controller_Action
                 flag:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -146,7 +146,7 @@ class FooController extends Zend_Controller_Action
             a database at instantiation:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -199,7 +199,7 @@ class FooController extends Zend_Controller_Action
                     calls might look like:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
 ]]></programlisting>
@@ -241,7 +241,7 @@ $this->getResponse()->appendBody($content);
                         retrieving a value:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Use default value of 1 if id is not set
 $id = $this->_getParam('id', 1);
 
@@ -298,7 +298,7 @@ if ($this->_hasParam('id') {
                 the directory structure:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 applicationOrModule/
     controllers/
         IndexController.php
@@ -328,7 +328,7 @@ applicationOrModule/
                 <code>render()</code> has the following signature:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
@@ -367,7 +367,7 @@ string render(string $action = null,
                 Some examples:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -526,7 +526,7 @@ class MyController extends Zend_Controller_Action
                 message, you might write something like this:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -551,7 +551,7 @@ class MyController extends Zend_Controller_Action
                 default controller page:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -586,7 +586,7 @@ class MyController extends Zend_Controller_Action
             <code>initView()</code> method with code resembling the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class My_Base_Controller extends Zend_Controller_Action
 {
     public function initView()

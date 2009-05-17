@@ -241,7 +241,7 @@
             for the desired class. Here's some examples:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $ss = new Zend_Gdata_Spreadsheets();
 
 // creates a Zend_Gdata_App_Spreadsheets_CellEntry
@@ -321,7 +321,7 @@ $entry->cell = $cell;
             pass configuration options to that client object.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...options... );
 
@@ -338,7 +338,7 @@ $gdata = new Zend_Gdata($client);
             server functionality.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig( ...options... );
 
@@ -458,7 +458,7 @@ $gdata->setMinorProtocolVersion(null);
             <code>set</code> function.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->setMaxResults(10);
 echo $query->getMaxResults();   // returns 10
@@ -470,7 +470,7 @@ echo $query->getMaxResults();   // returns 10
             as a virtual member of the class.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 echo $query->maxResults;        // returns 10
@@ -482,7 +482,7 @@ echo $query->maxResults;        // returns 10
             object for multiple queries.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Query();
 $query->maxResults = 10;
 // ...get feed...
@@ -504,7 +504,7 @@ $query->resetParameters();      // clears all parameters
             <classname>Zend_Gdata_Feed</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -533,7 +533,7 @@ $feed = $gdata->getFeed($query);
             retrieve the next page of a feed:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function getNextPage($feed) {
     $nextURL = $feed->getLink('next');
     if ($nextURL !== null) {
@@ -552,7 +552,7 @@ function getNextPage($feed) {
             This example shows how to use this function:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata();
 $query = new Zend_Gdata_Query(
         'http://www.blogger.com/feeds/blogID/posts/default');
@@ -577,7 +577,7 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             accessors. Here's an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -601,7 +601,7 @@ foreach ($feed as $entry) {
             changes back to the server. Here's an example:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $gdata = new Zend_Gdata($client);
 $query = new Zend_Gdata_Query(
@@ -645,7 +645,7 @@ foreach ($feed as $entry) {
             function.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 
 $entry = $gdata->newEntry();
@@ -684,7 +684,7 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
             on an entry retrieved from a Google service.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $gdata = new Zend_Gdata($authenticatedHttpClient);
 // a Google Data feed
 $feedUri = ...;

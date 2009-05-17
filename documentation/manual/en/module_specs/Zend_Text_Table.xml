@@ -133,7 +133,7 @@
             This example illustrates the basic use of <classname>Zend_Text_Table</classname>
             to create a simple table:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
 // Either simple
@@ -152,7 +152,7 @@ echo $table;
         <para>
             This will result in the following output:
         </para>
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘

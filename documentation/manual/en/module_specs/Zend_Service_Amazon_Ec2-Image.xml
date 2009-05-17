@@ -23,7 +23,7 @@
                 <code>register</code> returns the imageId for the registered Image.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $ip = $ec2_img->register('imageLocation');
 ]]></programlisting>
@@ -39,7 +39,7 @@ $ip = $ec2_img->register('imageLocation');
                 <code>deregister</code> returns boolean true or false.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $ip = $ec2_img->deregister('imageId');
 ]]></programlisting>
@@ -116,7 +116,7 @@ $ip = $ec2_img->deregister('imageId');
                 architecture, imageType, kernelId, ramdiskId and platform.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $ip = $ec2_img->describe();
 ]]></programlisting>
@@ -165,7 +165,7 @@ $ip = $ec2_img->describe();
             <para>
                 <code>modifyAttribute</code> returns boolean true or false.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 // modify the launchPermission of an AMI
 $return = $ec2_img->modifyAttribute('imageId',
@@ -191,7 +191,7 @@ $return = $ec2_img->modifyAttribute('imageId',
                 <code>resetAttribute</code> will reset the attribute of an AMI to its default value.
                 <emphasis>The productCodes attribute cannot be reset.</emphasis>
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
 ]]></programlisting>
@@ -208,7 +208,7 @@ $return = $ec2_img->resetAttribute('imageId', 'launchPermission');
                 <code>describeAttribute</code> returns an array with the value of the attribute
                 that was requested.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 $return = $ec2_img->describeAttribute('imageId', 'launchPermission');
 ]]></programlisting>

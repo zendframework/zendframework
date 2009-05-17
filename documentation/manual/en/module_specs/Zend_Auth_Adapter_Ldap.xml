@@ -33,7 +33,7 @@
             To incorporate <classname>Zend_Auth_Adapter_Ldap</classname> authentication into your application quickly, even if
             you're not using <classname>Zend_Controller</classname>, the meat of your code should look something like the
             following:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $username = $this->_request->getParam('username');
 $password = $this->_request->getParam('password');
 
@@ -81,7 +81,7 @@ if ($log_path) {
             arbitrary. For details regarding the options array, see the <emphasis>Server Options</emphasis> section
             below. Note that <classname>Zend_Config_Ini</classname> requires that any values with "equals" characters
             (<code>=</code>) will need to be quoted (like the DNs shown below).
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 [production]
 
 ldap.log_path = /tmp/ldap.log
@@ -141,7 +141,7 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             Below is <ulink url="http://php.net/print_r"><code>print_r()</code></ulink> output of an example options
             parameter containing two sets of server options for LDAP servers <code>s0.foo.net</code> and
             <code>dc1.w.net</code> (the same options as the above INI representation):
-            <programlisting role="output"><![CDATA[
+            <programlisting language="output"><![CDATA[
 Array
 (
     [server2] => Array

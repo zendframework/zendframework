@@ -17,7 +17,7 @@
             <classname>Zend_Controller_Front::throwExceptions(true)</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
 
@@ -26,7 +26,7 @@ $front->throwExceptions(true);
             <code>sendResponse()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->sendResponse();
 ]]></programlisting>
 
@@ -40,7 +40,7 @@ $response->sendResponse();
                 <classname>Zend_Controller_Front::returnResponse(true)</classname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 
@@ -56,7 +56,7 @@ $response->sendResponse();
             headers, push them to the response object:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Within an action controller action:
 // Set a header
 $this->getResponse()
@@ -94,7 +94,7 @@ $this->getResponse()
             object instead of rendering output.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // retrieve post-dispatch:
 $front->dispatch();
 $response = $front->getResponse();
@@ -118,7 +118,7 @@ $response->sendResponse();
             front controller to throwExceptions(), as shown above:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->dispatch($request, $response);
 
@@ -256,7 +256,7 @@ $front->dispatch();
             footer:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Assume that this plugin class is registered with the front controller
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
@@ -295,7 +295,7 @@ class MyController extends Zend_Controller_Action
             structure:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 array(
     'header'  => ..., // header content
     'default' => ..., // body content from MyController::fooAction()

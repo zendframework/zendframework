@@ -10,7 +10,7 @@
     </para>
     <example id="zend.mail.attachments.example-1">
         <title>E-Mail Messages with Attachments</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // build message...
 $mail->createAttachment($someBinaryString);
@@ -25,7 +25,7 @@ $mail->createAttachment($myImage,
         of <code>createAttachment()</code> to modify its attributes. The <code>createAttachment()</code> method
         returns a <classname>Zend_Mime_Part</classname> object:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = $mail->createAttachment($myImage);
@@ -39,7 +39,7 @@ $mail->send();
     <para>
         An alternative is to create an instance of <classname>Zend_Mime_Part</classname> and add it with <code>addAttachment()</code>:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = new Zend_Mime_Part($myImage);

@@ -123,7 +123,7 @@
         <example id="zend.file.transfer.filters.usage.example">
             <title>Add filters to a file transfer</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Set a new destination path
@@ -147,7 +147,7 @@ $upload->addFilter('Rename',
                 given filter.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Set a new destination path and limits it only to 'file2'
@@ -169,7 +169,7 @@ $upload->addFilter('Rename', 'C:\picture\uploads', 'file2');
                 methods provide a fluent interface you can couple the calls as shown below:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Set a filesize with 20000 bytes
@@ -211,7 +211,7 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
         <example id="zend.file.transfer.filters.decrypt.example1">
             <title>Using the Decrypt filter with Mcrypt</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to decrypt the uploaded encrypted file
@@ -225,7 +225,7 @@ $upload->addFilter('Decrypt',
         <example id="zend.file.transfer.filters.decrypt.example2">
             <title>Using the Decrypt filter with OpenSSL</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to decrypt the uploaded encrypted file
@@ -261,7 +261,7 @@ $upload->addFilter('Decrypt',
         <example id="zend.file.transfer.filters.encrypt.example1">
             <title>Using the Encrypt filter with Mcrypt</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to encrypt the uploaded file
@@ -275,7 +275,7 @@ $upload->addFilter('Encrypt',
         <example id="zend.file.transfer.filters.encrypt.example2">
             <title>Using the Encrypt filter with OpenSSL</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to encrypt the uploaded file
@@ -304,7 +304,7 @@ $upload->addFilter('Encrypt',
         <example id="zend.file.transfer.filters.lowercase.example">
             <title>Using the LowerCase filter</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('MimeType', 'text');
 
@@ -368,7 +368,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <example id="zend.file.transfer.filters.rename.example">
             <title>Using the Rename filter</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Set a new destination path for all files
@@ -475,7 +475,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         <example id="zend.file.transfer.filters.uppercase.example">
             <title>Using the UpperCase filter</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('MimeType', 'text');
 

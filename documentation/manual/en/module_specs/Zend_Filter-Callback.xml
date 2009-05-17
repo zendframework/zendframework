@@ -12,7 +12,7 @@
         Let's expect we want to create a filter which reverses a string.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback('strrev');
 
 print $filter->filter('Hello!');
@@ -24,7 +24,7 @@ print $filter->filter('Hello!');
         possible to use a method, which is defined within a class, by giving an array as callback.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Our classdefinition
 class MyClass
 {
@@ -47,7 +47,7 @@ print $filter->filter('Hello!');
         will be filtered.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
     'MyMethod',
     array('key' => 'param1', 'key2' => 'param2')
@@ -59,7 +59,7 @@ $filter->filter(array('value' => 'Hello'));
         When you would call the above method definition manually it would look like this:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $value = MyMethod('Hello', 'param1', 'param2');
 ]]></programlisting>
 

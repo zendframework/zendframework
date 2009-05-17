@@ -28,7 +28,7 @@
 
         <example id="zend.openid.provider.example-1">
             <title>The Identity</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 // Set up test identity
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-8.php"));
@@ -66,7 +66,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-2">
             <title>Simple Identity Provider</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
                                    "example-8-trust.php");
 $ret = $server->handle();
@@ -118,7 +118,7 @@ if (is_string($ret)) {
 
         <example id="zend.openid.provider.example-3">
             <title>Simple Login Screen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
 
@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 
         <example id="zend.openid.provider.example-4">
             <title>Simple Trust Screen</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
 
@@ -257,7 +257,7 @@ is your identity URL.
 
         <example id="zend.openid.provider.example-5">
             <title>Everything Together</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 
 define("TEST_ID", Zend_OpenId::absoluteURL("example-9-id.php"));
@@ -307,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
         <example id="zend.openid.provider.example-6">
             <title>Identity with Profile</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-10.php"));
 define("TEST_ID", Zend_OpenId::selfURL());
@@ -361,7 +361,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-7">
             <title>Provider with SREG</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 $sreg = new Zend_OpenId_Extension_Sreg();
 

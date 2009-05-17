@@ -75,7 +75,7 @@
         <para>
             The following example illustrates validation of an e-mail address:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
 if ($validator->isValid($email)) {
@@ -124,7 +124,7 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -145,7 +145,7 @@ if (!$validator->isValid('word')) {
             You can set multiple messages using the <code>setMessages()</code>
             method. Its argument is an array containing key/message pairs.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 $validator->setMessages( array(
@@ -167,7 +167,7 @@ $validator->setMessages( array(
             <code>isValid()</code>. Other properties may be supported on a
             case-by-case basis in each validation class.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 if (!validator->isValid('word')) {
@@ -200,7 +200,7 @@ if (!validator->isValid('word')) {
             class, creates an instance, and applies the <code>isValid()</code>
             method to the data input.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // Yes, email appears to be valid
 }
@@ -212,7 +212,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             You can also pass an array of constructor arguments, if they
             are needed for the validator.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($value, 'Between', array(1, 12))) {
     // Yes, $value is between 1 and 12
 }
@@ -255,7 +255,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             <code>getTranslator()</code> method returns the set translator instance.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 $translate = new Zend_Translate(
     'array',
@@ -274,7 +274,7 @@ $validator->setTranslator($translate);
             and simplifies your code.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -297,7 +297,7 @@ Zend_Validate::setDefaultTranslator($translate);
             to get the set value.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();

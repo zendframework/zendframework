@@ -26,7 +26,7 @@
             Let's consider the following directory structure:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 path/to/some/directory/
     acls/
         Site.php
@@ -51,7 +51,7 @@ path/to/some/directory/
             responsible for:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'  => 'path/to/some/directory',
     'namespace' => 'My',
@@ -83,7 +83,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             namespace. As an example, let's add each of our resource types.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
                ->addResourceType('form', 'forms/', 'Form')
                ->addResourceType('model', 'models/');
@@ -95,7 +95,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
             above:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceTypes(array(
     'acl' => array(
         'path'      => 'acls/',
@@ -117,7 +117,7 @@ $resourceLoader->addResourceTypes(array(
             a structure like that above:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'      => 'path/to/some/directory',
     'namespace'     => 'My',
@@ -150,7 +150,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             following mappings:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 api/         => Api
 forms/       => Form
 models/      => Model

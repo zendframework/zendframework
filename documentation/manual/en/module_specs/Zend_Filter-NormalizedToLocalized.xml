@@ -78,7 +78,7 @@
             So how does localization work in detail for numbers:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_NormalizedToLocalized();
 $filter->filter(123456.78);
@@ -127,7 +127,7 @@ $filter->filter(123456.78);
             work:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Numeric Filter
 $filter = new Zend_Filter_NormalizedToLocalized(array('precision' => 2));
 
@@ -149,7 +149,7 @@ $filter->filter(123456.78901);
             will be returned as string, with the format defined by the set locale.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_NormalizedToLocalized();
 $filter->filter(array('day' => '12', 'month' => '04', 'year' => '2009');
@@ -166,7 +166,7 @@ $filter->filter(array('day' => '12', 'month' => '04', 'year' => '2009');
             <emphasis>date_format</emphasis>, and the <emphasis>locale</emphasis> option.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Date Filter
 $filter = new Zend_Filter_LocalizedToNormalized(
     array('date_format' => 'ss:mm:HH')

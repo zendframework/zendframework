@@ -24,7 +24,7 @@
     <example id="zend.filter.inflector.camel_case_example">
         <title>Transforming MixedCase and camelCaseText to another format</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
 $inflector->setRules(array(
     ':page'  => array('Word_CamelCaseToDash', 'StringToLower'),
@@ -85,7 +85,7 @@ $filtered = $inflector->filter(array('page' => $string));
             various Word filters, simply strip off the Zend_Filter prefix:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // use Zend_Filter_Word_CamelCaseToDash as a rule
 $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 ]]></programlisting>
@@ -96,7 +96,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
             <code>addFilterPrefixPath()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
 ]]></programlisting>
 
@@ -105,7 +105,7 @@ $inflector->addFilterPrefixPath('My_Filter', 'My/Filter/');
             inflector, and interact with it directly:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $loader = $inflector->getPluginLoader();
 $loader->addPrefixPath('My_Filter', 'My/Filter/');
 ]]></programlisting>
@@ -134,7 +134,7 @@ $loader->addPrefixPath('My_Filter', 'My/Filter/');
             as the third argument to the constructor:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Via constructor:
 $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 
@@ -150,7 +150,7 @@ $inflector->setTargetReplacementIdentifier('#');
             <code>setTarget()</code> can be used for this purpose:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = $layout->getInflector();
 $inflector->setTarget('layouts/:script.phtml');
 ]]></programlisting>
@@ -163,7 +163,7 @@ $inflector->setTarget('layouts/:script.phtml');
             this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -227,7 +227,7 @@ class Foo
                 <code>setStaticRule()</code> method to set or modify the rule:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 $inflector->setStaticRule('suffix', 'phtml');
 
@@ -245,7 +245,7 @@ $inflector->setStaticRule('suffix', 'php');
                 accomplish this:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -318,7 +318,7 @@ class Foo
                 </para></listitem>
             </itemizedlist>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 
 // Set rule to use Zend_Filter_Word_CamelCaseToDash filter
@@ -366,7 +366,7 @@ $inflector->setFilterRule('script', array(
             <example id="zend.filter.inflector.rules.multiple.example">
                 <title>Setting Multiple Rules at Once</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Could also use setRules() with this notation:
 $inflector->addRules(array(
     // filter rules:
@@ -470,7 +470,7 @@ $inflector->addRules(array(
         <example id="zend.filter.inflector.config.example">
             <title>Using Zend_Config with Zend_Filter_Inflector</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // With the constructor:
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);

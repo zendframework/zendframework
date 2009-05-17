@@ -52,7 +52,7 @@
         <para>
             There are two static methods in the <classname>Zend_Search_Lucene</classname> class which allow the developer to configure these settings:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
 Zend_Search_Lucene::setDefaultSearchField('contents');
@@ -70,13 +70,13 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
             If you want to find the document entitled "The Right Way" which contains the text "don't go this way",
             you can enter:
         </para>
-        <programlisting role="querystring"><![CDATA[
+        <programlisting language="querystring"><![CDATA[
 title:"The Right Way" AND text:go
 ]]></programlisting>
         <para>
             or
         </para>
-        <programlisting role="querystring"><![CDATA[
+        <programlisting language="querystring"><![CDATA[
 title:"Do it right" AND go
 ]]></programlisting>
         <para>
@@ -86,7 +86,7 @@ title:"Do it right" AND go
         <para>
             Note: The field is only valid for the term, phrase or subquery that it directly precedes,
             so the query
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:Do it right
 ]]></programlisting>
             Will only find "Do" in the title field. It will find "it" and "right" in the default field (if the default field is set)
@@ -111,7 +111,7 @@ title:Do it right
         <para>
             The single character wildcard search looks for string that match the term with the "?" replaced by any single character.
             For example, to search for "text" or "test" you can use the search:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 te?t
 ]]></programlisting>
         </para>
@@ -119,14 +119,14 @@ te?t
         <para>
             Multiple character wildcard searches look for 0 or more characters when matching strings against terms. For example, to search for test,
             tests or tester, you can use the search:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 test*
 ]]></programlisting>
         </para>
 
         <para>
             You can use "?", "*" or both at any place of the term:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 *wr?t*
 ]]></programlisting>
             It searches for "write", "wrote", "written", "rewrite", "rewrote" and so on.
@@ -160,12 +160,12 @@ test*
         <para>
             Range queries allow the developer or user to match documents whose field(s) values are between the lower and upper bound specified by the range query.
             Range Queries can be inclusive or exclusive of the upper and lower bounds. Sorting is performed lexicographically.
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
             This will find documents whose mod_date fields have values between 20020101 and 20030101, inclusive. Note that Range Queries are not
             reserved for date fields. You could also use range queries with non-date fields:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:{Aida TO Carmen}
 ]]></programlisting>
             This will find all documents whose titles would be sorted between Aida and Carmen, but not including Aida and Carmen.
@@ -175,7 +175,7 @@ title:{Aida TO Carmen}
         </para>
         <para>
             If field is not specified then <classname>Zend_Search_Lucene</classname> searches for specified interval through all fields by default.
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
         </para>
@@ -188,7 +188,7 @@ title:{Aida TO Carmen}
             To do a fuzzy search use the tilde, "~", symbol at the end of a Single word Term. For example to search for a term similar
             in spelling to "roam" use the fuzzy search:
 
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 roam~
 ]]></programlisting>
 
@@ -197,7 +197,7 @@ roam~
             Additional (optional) parameter can specify the required similarity. The value is between 0 and 1, with a value closer to 1 only terms
             with a higher similarity will be matched. For example:
 
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 roam~0.8
 ]]></programlisting>
 
@@ -229,7 +229,7 @@ roam~0.8
             Lucene supports finding words from a phrase that are within a specified word distance in a string. To do a proximity search
             use the tilde, "~", symbol at the end of the phrase. For example to search for a "Zend" and
             "Framework" within 10 words of each other in a document use the search:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
         </para>
@@ -247,17 +247,17 @@ roam~0.8
         <para>
             Boosting allows you to control the relevance of a document by boosting individual terms. For example,
             if you are searching for
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 PHP framework
 ]]></programlisting>
             and you want the term "PHP" to be more relevant boost it using the ^ symbol along with the
             boost factor next to the term. You would type:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
             This will make documents with the term PHP appear more relevant. You can also boost phrase
             terms and subqueries as in the example:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
 ]]></programlisting>
             By default, the boost factor is 1. Although the boost factor must be positive,
@@ -291,7 +291,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that contain "PHP framework" and "Zend Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP framework" AND "Zend Framework"
 ]]></programlisting>
             </para>
@@ -304,7 +304,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that contain "PHP framework" or "Zend Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP framework" OR "Zend Framework"
 ]]></programlisting>
             </para>
@@ -318,7 +318,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP framework" AND NOT "Zend Framework"
 ]]></programlisting>
             </para>
@@ -338,7 +338,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that must contain "Zend" and may contain "Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
             </para>
@@ -351,7 +351,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 "PHP framework" -"Zend Framework"
 ]]></programlisting>
             </para>
@@ -371,7 +371,7 @@ PHP^4 framework
             </para>
             <para>
                 To search for documents that requires "PHP framework" and may contain "Zend Framework" use the query:
-                <programlisting role="querystring"><![CDATA[
+                <programlisting language="querystring"><![CDATA[
 +"PHP framework" "Zend Framework"
 ]]></programlisting>
             </para>
@@ -395,7 +395,7 @@ PHP^4 framework
         <para>
             Java Lucene and <classname>Zend_Search_Lucene</classname> support using parentheses to group clauses to form sub queries. This can be
             useful if you want to control the precedence of boolean logic operators for a query or mix different boolean query styles:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 +(framework OR library) +php
 ]]></programlisting>
             <classname>Zend_Search_Lucene</classname> supports subqueries nested to any level.
@@ -410,7 +410,7 @@ PHP^4 framework
         </para>
         <para>
             To search for a title that contains both the word "return" and the phrase "pink panther" use the query:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 title:(+return +"pink panther")
 ]]></programlisting>
         </para>
@@ -431,7 +431,7 @@ title:(+return +"pink panther")
         </para>
         <para>
             For other instances of these characters use the \ before each special character you'd like to escape. For example to search for (1+1):2 use the query:
-            <programlisting role="querystring"><![CDATA[
+            <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>
         </para>

@@ -45,7 +45,7 @@
             .
             <example id="zend.date.setdefaulttimezone.example-1">
                 <title>Setting a Default Timezone</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // timezone for an American in California
 date_default_timezone_set('America/Los_Angeles');
 // timezone for a German in Germany

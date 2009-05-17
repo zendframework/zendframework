@@ -37,7 +37,7 @@
         <example id="zend.navigation.containers.creating.example.array">
             <title>Creating a container using an array</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Create a container from an array
  *
@@ -209,7 +209,7 @@ $container = new Zend_Navigation(array(
         <example id="zend.navigation.containers.creating.example.config">
             <title>Creating a container using a config object</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /* CONTENTS OF /path/to/navigation.xml:
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
@@ -412,7 +412,7 @@ $container = new Zend_Navigation($config);
         <example id="zend.navigation.containers.adding.example">
             <title>Adding pages to a container</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // create container
 $container = new Zend_Navigation();
 
@@ -465,7 +465,7 @@ $container->setPages($pages);
         <example id="zend.navigation.containers.removing.example">
             <title>Removing pages from a container</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label'  => 'Page 1',
@@ -531,7 +531,7 @@ $container->removePages();      // removes all pages
         <example id="zend.navigation.containers.finding.example">
             <title>Finding pages in a container</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Page 1',
@@ -628,7 +628,7 @@ $found = $container->findAllByController('index'); // returns Page 2 and Page 3
         <example id="zend.navigation.containers.iterating.example">
             <title>Iterating a container</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /*
  * Create a container from an array
  */
@@ -694,7 +694,7 @@ foreach ($it as $page) {
         <example id="zend.navigation.containers.other.example.toarray">
             <title>Converting a container to an array</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $container = new Zend_Navigation(array(
     array(
         'label' => 'Page 1',

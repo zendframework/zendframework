@@ -19,7 +19,7 @@
             following code:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->setClass('Foo');
 $response = $server->handle();
@@ -31,7 +31,7 @@ echo $response;
             callback instead:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->addFunction('myUberCoolFunction');
 $response = $server->handle();
@@ -46,7 +46,7 @@ echo $response;
             <code>setClass()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_Amf_Server();
 $server->addFunction('myUberCoolFunction', 'my')
        ->setClass('Foo', 'foo')
@@ -63,7 +63,7 @@ echo $response;
             Adding directories is completed with the <code>addDirectory()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->addDirectory(dirname(__FILE__) .'/../services/');
 $server->addDirectory(dirname(__FILE__) .'/../package/');
 ]]></programlisting>
@@ -94,7 +94,7 @@ $server->addDirectory(dirname(__FILE__) .'/../package/');
             the return value. As examples:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Function to attach:
 
 /**
@@ -108,7 +108,7 @@ function helloWorld($name, $greeting = 'Hello')
 }
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Attached class
 
 class World
@@ -176,7 +176,7 @@ class World
             match that of your testing server. Make sure you save the file.
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <services-config>
     <services>
@@ -209,7 +209,7 @@ class World
             URL to our <classname>Zend_Amf_Server</classname>:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <channel-definition id="zend-endpoint"
     <endpoint uri="http://example.com/server.php"
         class="flex.messaging.endpoints.AMFEndpoint"/>
@@ -227,7 +227,7 @@ class World
             service. In MXML, this might be done as follows:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <mx:RemoteObject id="myservice"
     fault="faultHandler(event)"
     showBusyCursor="true"
@@ -242,7 +242,7 @@ class World
             As an example:
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.hello("Wade");
 ]]></programlisting>
 
@@ -251,7 +251,7 @@ myservice.hello("Wade");
             "myservice.&lt;namespace&gt;.&lt;method&gt;":
         </para>
 
-        <programlisting role="ActionScript"><![CDATA[
+        <programlisting language="ActionScript"><![CDATA[
 myservice.world.hello("Wade");
 ]]></programlisting>
 
@@ -283,7 +283,7 @@ myservice.world.hello("Wade");
             To disable production mode, do the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setProduction(false);
 ]]></programlisting>
 
@@ -291,7 +291,7 @@ $server->setProduction(false);
             To re-enable it, pass a true boolean value instead:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server->setProduction(true);
 ]]></programlisting>
 
@@ -335,7 +335,7 @@ $server->setProduction(true);
                 'bar' to the response prior to returning it.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $response = $server->handle();
 $response->addAmfHeader(new Zend_Amf_Value_MessageHeader('foo', true, 'bar'))
 echo $response;
@@ -366,7 +366,7 @@ echo $response;
                     class name it maps to:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Map the ActionScript class 'ContactVO' to the PHP class 'Contact':
 $server->setClassMap('ContactVO', 'Contact');
 ]]></programlisting>
@@ -379,7 +379,7 @@ $server->setClassMap('ContactVO', 'Contact');
                     value representing the ActionScript class to map to:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Contact
 {
     public $_explicitType = 'ContactVO';
@@ -394,7 +394,7 @@ class Contact
                     should return the appropriate ActionScript class:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 class Contact
 {
     public function getASClassName()
@@ -415,7 +415,7 @@ class Contact
             File. Name the file ContactVO and press finish to see the new file. Copy the
             following code into the file to finish creating the class.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package
 {
     [Bindable]
@@ -442,7 +442,7 @@ package
             It is mandatory that this tag the value that was set is the PHP class are strictly
             equivalent.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 [Bindable]
 private var myContact:ContactVO;
 
@@ -483,7 +483,7 @@ private function getContactHandler(event:ResultEvent):void {
             display the result. Copy the following code into your Main.as file and then we will
             walk through the code to describe what each element's role is.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 package {
   import flash.display.MovieClip;
   import flash.events.*;
@@ -523,7 +523,7 @@ package {
             the server. The second is a Responder object which handles the return values from the
             server related to the success or failure of the call.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 import flash.net.NetConnection;
 import flash.net.Responder;
 ]]></programlisting>
@@ -531,7 +531,7 @@ import flash.net.Responder;
             In the class we need three variables to represent the NetConnection, Responder, and
             the gateway URL to our <classname>Zend_Amf_Server</classname> installation.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;
 private var responder:Responder;
@@ -542,7 +542,7 @@ private var responder:Responder;
             methods for handling the response from the server. For simplicity I have called these
             onResult and onFault.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 responder = new Responder(onResult, onFault);
 connection = new NetConnection;
 connection.connect(gateway);
@@ -552,7 +552,7 @@ connection.connect(gateway);
             the data to the server. We need to add one more line that makes a call to the
             <classname>Zend_Amf_Server</classname> World->hello function.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 connection.call("World.hello", responder, params);
 ]]></programlisting>
         <para>
@@ -561,7 +561,7 @@ connection.call("World.hello", responder, params);
             from the server. A successful event handler is run every time the connection is handled
             properly to the server.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onResult(result:Object):void {
     // Display the returned data
     trace(String(result));
@@ -572,7 +572,7 @@ private function onResult(result:Object):void {
             happens when there is an error on the server, the URL to the server is invalid, the
             remote service or method does not exist, and any other connection related issues.
         </para>
-        <programlisting role="as"><![CDATA[
+        <programlisting language="as"><![CDATA[
 private function onFault(fault:Object):void {
     trace(String(fault.description));
 }

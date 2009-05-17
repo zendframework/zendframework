@@ -60,7 +60,7 @@
             <code>/file/upload</code>. So next we will create the <code>file</code> controller
             and the <code>upload</code> action.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
 $adapter->setDestination('C:\temp');
@@ -157,7 +157,7 @@ if (!$adapter->receive()) {
         <example id="zend.file.transfer.introduction.checking.example">
             <title>Checking Files</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Returns all known internal file information
@@ -244,7 +244,7 @@ $upload->receive();
         <example id="zend.file.transfer.introduction.informations.example1">
             <title>Getting the Filename</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -274,7 +274,7 @@ $names = $upload->getFileName('foo');
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
             <title>Getting the size of a file</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -298,7 +298,7 @@ $size = $upload->getFileSize();
         <example id="zend.file.transfer.introduction.informations.example2">
             <title>Getting the hash of a file</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -326,7 +326,7 @@ $names = $upload->getHash('crc32', 'foo');
         <example id="zend.file.transfer.introduction.informations.getmimetype">
             <title>Getting the mimetype of a file</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -395,7 +395,7 @@ $names = $upload->getMimeType('foo');
 
                 <title>Using the progressbar adapter to retrieve the actual state</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
 
@@ -504,7 +504,7 @@ while (!$upload['done']) {
 
                 <title>Manual usage of the file progress</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
 
 while (!$upload['done']) {

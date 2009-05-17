@@ -83,7 +83,7 @@
             keywords you wish to associate with your page:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // setting meta keywords
 $this->headMeta()->appendName('keywords', 'framework php productivity');
 ]]></programlisting>
@@ -93,7 +93,7 @@ $this->headMeta()->appendName('keywords', 'framework php productivity');
             http-equiv tags with the rules you wish to enforce:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // disabling client-side cache
 $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
@@ -106,7 +106,7 @@ $this->headMeta()->appendHttpEquiv('expires',
             character set, and language:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // setting content type and character set
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
@@ -118,7 +118,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
             before a redirect is using a "meta refresh":
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // setting a meta refresh for 3 seconds to a new url:
 $this->headMeta()->appendHttpEquiv('Refresh',
                                    '3;URL=http://www.some.org/some.html');
@@ -129,7 +129,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
             the helper:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>

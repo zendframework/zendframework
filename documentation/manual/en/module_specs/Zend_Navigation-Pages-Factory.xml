@@ -25,7 +25,7 @@
     <example id="zend.navigation.pages.factory.example.mvc">
         <title>Creating an MVC page using the page factory</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
     'label'  => 'My MVC page',
     'action' => 'index'
@@ -56,7 +56,7 @@ $page = Zend_Navigation_Page::factory(array(
     <example id="zend.navigation.pages.factory.example.uri">
         <title>Creating a URI page using the page factory</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $page = Zend_Navigation_Page::factory(array(
     'label' => 'My URI page',
     'uri'   => 'http://www.example.com/'
@@ -88,7 +88,7 @@ $page = Zend_Navigation_Page::factory(array(
          <code>type</code> to specify a class name to instantiate.
      </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Navigation_Page extends Zend_Navigation_Page
 {
     protected $_fooBar = 'ok';

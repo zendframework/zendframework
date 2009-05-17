@@ -14,7 +14,7 @@
 
         <title>Sending Multiple Mails per SMTP Connection</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create transport
 $transport = new Zend_Mail_Transport_Smtp('localhost');
 
@@ -45,7 +45,7 @@ for ($i = 0; $i > 5; $i++) {
 
         <title>Manually controlling the transport connection</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create transport
 $transport = new Zend_Mail_Transport_Smtp();
 

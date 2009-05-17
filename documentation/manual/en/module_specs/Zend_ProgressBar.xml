@@ -24,7 +24,7 @@
             you want to process a file, you would do something like:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $progressBar = new Zend_ProgressBar($adapter, 0, $fileSize);
 
 while (!feof($fp)) {

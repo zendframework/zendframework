@@ -21,7 +21,7 @@
             either manipulate or simply echo out.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->set("Some text for later") ?>
 
 <?php
@@ -76,12 +76,12 @@
             </para></listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- first view script -->
 <?php $this->placeholder('foo')->exchangeArray($this->data) ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- later view script -->
 <?php
 $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
@@ -104,7 +104,7 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
             array keys.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->placeholder('foo')->bar = $this->data ?>
 <?php echo $this->placeholder('foo')->bar ?>
 
@@ -164,7 +164,7 @@ echo $foo['bar'];
             </para></listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Default capture: append -->
 <?php $this->placeholder('foo')->captureStart();
 foreach ($this->data as $datum): ?>
@@ -178,7 +178,7 @@ foreach ($this->data as $datum): ?>
 <?php echo $this->placeholder('foo') ?>
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Capture to key -->
 <?php $this->placeholder('foo')->captureStart('SET', 'data');
 foreach ($this->data as $datum): ?>

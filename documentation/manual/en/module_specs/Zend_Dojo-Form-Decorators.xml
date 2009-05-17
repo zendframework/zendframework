@@ -48,7 +48,7 @@
         <example id="zend.dojo.form.decorators.dijitElement.usage">
             <title>DijitElement Decorator Usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
     'DijitElement',
     'Errors',
@@ -113,7 +113,7 @@ $element->setDecorators(array(
         <example id="zend.dojo.form.decorators.dijitContainer.usage">
             <title>DijitContainer Decorator Usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Use a TabContainer for your form:
 $form->setDecorators(array(
     'FormElements',

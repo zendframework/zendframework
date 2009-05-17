@@ -91,7 +91,7 @@
                         helper broker:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -105,7 +105,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                         object on demand via the helper broker:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
@@ -126,7 +126,7 @@ $viewRenderer->setView($view)
             the helper broker's <code>getStaticHelper()</code> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]></programlisting>
 
@@ -151,7 +151,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             As an example, consider the following class:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // A controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -277,7 +277,7 @@ $this->foo(); // call Foo_View_Helper_Foo::foo()
                     easily from your controller:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Render 'foo' instead of current action script
 $this->_helper->viewRenderer('foo');
 
@@ -301,7 +301,7 @@ $this->_helper->viewRenderer('form', 'html', true);
             <code>initView()</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
@@ -616,7 +616,7 @@ $viewRenderer =
                 bootstrap, and then set variables in your action methods.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // In your bootstrap:
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -695,7 +695,7 @@ class Foo_BarController extends Zend_Controller_Action
                 off for the current action (<code>setNoRender()</code>).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Baz controller class, bar module:
 class Bar_BazController extends Zend_Controller_Action
 {
@@ -741,7 +741,7 @@ class Bar_BatController extends Zend_Controller_Action
                 <code>setRender()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -784,7 +784,7 @@ class Foo_BarController extends Zend_Controller_Action
                 both are references to the same object.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module:
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -832,7 +832,7 @@ class Foo_BarController extends Zend_Controller_Action
                 want to use 'tpl' as the view script filename suffix.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * In your bootstrap:
  */
@@ -858,7 +858,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 multiple calls to <code>render()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()

@@ -15,7 +15,7 @@
                 follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Abstract
 {
     final public function __construct(Array $options = array())
@@ -68,7 +68,7 @@ abstract class Zend_CodeGenerator_Abstract
                 content. Its API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Abstract
     extends Zend_CodeGenerator_Abstract
 {
@@ -91,7 +91,7 @@ abstract class Zend_CodeGenerator_Php_Abstract
                 name of the member. Its API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Member_Abstract
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -125,7 +125,7 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
 {
     public function setContent($content)
@@ -152,7 +152,7 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
                 The API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -222,7 +222,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
                 The API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -255,7 +255,7 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
                 The class API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag
     extends Zend_CodeGenerator_Php_Abstract
 {
@@ -288,7 +288,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag
                 The class API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -319,7 +319,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 The class API is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
     extends Zend_CodeGenerator_Php_Docblock_Tag
 {
@@ -357,7 +357,7 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflectedFilePath(
@@ -398,7 +398,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
 {
     public function __construct($type = self::TYPE_PROPERTY)
@@ -430,7 +430,7 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Method
     extends Zend_CodeGenerator_Php_Member_Abstract
 {
@@ -465,7 +465,7 @@ class Zend_CodeGenerator_Php_Method
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 {
     public static function fromReflection(
@@ -500,7 +500,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
                 The API of the class is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Property
     extends Zend_CodeGenerator_Php_Member_Abstract
 {

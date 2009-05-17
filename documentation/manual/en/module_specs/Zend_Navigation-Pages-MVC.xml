@@ -104,7 +104,7 @@
             to generate URIs when calling <code>$page->getHref()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // getHref() returns /
 $page = new Zend_Navigation_Page_Mvc(array(
     'action'     => 'index',
@@ -136,7 +136,7 @@ $page = new Zend_Navigation_Page_Mvc(array(
             by using the params found in the request object.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /*
  * Dispatched request:
  * - module:     default
@@ -215,7 +215,7 @@ $page->isActive(); // returns false
             </note>
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // the following route is added to the ZF router
 Zend_Controller_Front::getInstance()->getRouter()->addRoute(
     'article_view', // route name

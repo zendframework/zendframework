@@ -23,7 +23,7 @@
         Basic usage is outlined below:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setFrom('errors@example.org')
      ->addTo('project_developers@example.org');
@@ -80,7 +80,7 @@ $log->error('unable to connect to database');
             below.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setFrom('errors@example.org')
      ->addTo('project_developers@example.org');

@@ -45,7 +45,7 @@
         To get started logging, instantiate a Writer and then pass it to a Log
         instance:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger = new Zend_Log();
 $writer = new Zend_Log_Writer_Stream('php://output');
 
@@ -61,7 +61,7 @@ $logger->addWriter($writer);
         Alternatively, you can pass a Writer directly to constructor of Log as
         a shortcut:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
 ]]></programlisting>
@@ -77,7 +77,7 @@ $logger = new Zend_Log($writer);
         To log a message, call the <code>log()</code> method of a Log instance
         and pass it the message with a corresponding priority:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 ]]></programlisting>
 
@@ -90,7 +90,7 @@ $logger->log('Informational message', Zend_Log::INFO);
       A shortcut is also available. Instead of calling the <code>log()</code> method, you can
       call a method by the same name as the priority:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Informational message', Zend_Log::INFO);
 $logger->info('Informational message');
 
@@ -108,7 +108,7 @@ $logger->emerg('Emergency message');
       <code>shutdown()</code> instance method of each attached Writer before
       the Log object is destroyed:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger = null;
 ]]></programlisting>
 
@@ -122,7 +122,7 @@ $logger = null;
     <para>
       The <classname>Zend_Log</classname> class defines the following priorities:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 EMERG   = 0;  // Emergency: system is unusable
 ALERT   = 1;  // Alert: action must be taken immediately
 CRIT    = 2;  // Critical: critical conditions
@@ -163,14 +163,14 @@ DEBUG   = 7;  // Debug: debug messages
       User-defined priorities can be added at runtime using the Log's
       <code>addPriority()</code> method:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
 ]]></programlisting>
 
       The snippet above creates a new priority, <code>FOO</code>, whose
       value is <code>8</code>. The new priority is then available for logging:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->log('Foo message', 8);
 $logger->foo('Foo Message');
 ]]></programlisting>
@@ -201,7 +201,7 @@ $logger->foo('Foo Message');
       To add a new item to every future event, call the <code>setEventItem()</code>
       method giving a key and a value:
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->setEventItem('pid', getmypid());
 ]]></programlisting>
 

@@ -29,7 +29,7 @@
             A good way to build a usable instance of a <classname>Zend_Cache</classname> Frontend is given
             in the following example :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // We choose a backend (for example 'File' or 'Sqlite'...)
 $backendName = '[...]';
 
@@ -67,7 +67,7 @@ $cache = Zend_Cache::factory($frontendName,
             method, you can set an array of tags to apply for this record. Then you will be
             able to clean all cache records tagged with a given tag (or tags):
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
         <note><para>
@@ -81,14 +81,14 @@ $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
             To remove/invalidate in particular cache id, you can use the <code>remove()</code>
             method :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
         <para>
             To remove/invalidate several cache ids in one operation, you can use the <code>clean()</code>
             method. For example to remove all cache records :
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // clean all records
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
@@ -98,7 +98,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
         <para>
             If you want to remove cache entries matching the tags 'tagA' and 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -107,7 +107,7 @@ $cache->clean(
         <para>
             If you want to remove cache entries not matching the tags 'tagA' or 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
@@ -116,7 +116,7 @@ $cache->clean(
         <para>
             If you want to remove cache entries matching the tags 'tagA' or 'tagC':
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')

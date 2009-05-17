@@ -17,7 +17,7 @@
             An example of basic usage of the validators:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //Check that the email address exists in the database
 $validator = new Zend_Validate_Db_RecordExists('users', 'emailaddress');
 if ($validator->isValid($emailaddress)) {
@@ -37,7 +37,7 @@ if ($validator->isValid($emailaddress)) {
             message is displayed.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //Check that the username is not present in the database
 $validator = new Zend_Validate_Db_NoRecordExists('users', 'username');
 if ($validator->isValid($username)) {
@@ -76,7 +76,7 @@ if ($validator->isValid($username)) {
             before altering a record (for example on a user profile form)
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //Check no other users have the username
 $user_id   = $user->getId();
 $validator = new Zend_Validate_Db_NoRecordExists(
@@ -111,7 +111,7 @@ if ($validator->isValid($username)) {
             testing against composite keys.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $post_id   = $post->getId();
 $clause    = $db->quoteInto('post_id = ?', $category_id);
 $validator = new Zend_Validate_Db_RecordExists(
@@ -148,7 +148,7 @@ if ($validator->isValid($username)) {
             set a default adapter. As in the example below:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Db_RecordExists('users', 'id', null, $dbAdapter);
 ]]></programlisting>
     </sect3>

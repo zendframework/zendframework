@@ -91,7 +91,7 @@
                 <methodname>array_walk()</methodname> to inject the values into the SQL:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $adapter is the DB adapter. In Zend_Db_Table, retrieve
 // it using $this->getAdapter().
 $sql = vsprintf(

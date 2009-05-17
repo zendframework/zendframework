@@ -151,7 +151,7 @@
 
         <example id="zend.locale.representation.example-1">
             <title>Choosing a specific locale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_DE'); // German language _ Germany
 ]]></programlisting>
         </example>
@@ -193,7 +193,7 @@ $locale = new Zend_Locale('de_DE'); // German language _ Germany
 
         <example id="zend.locale.selection.example-1">
             <title>Automatically selecting a locale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale  = new Zend_Locale();
 
 // default behavior, same as above
@@ -298,7 +298,7 @@ $locale3 = new Zend_Locale(Zend_Locale::FRAMEWORK);
 
         <example id="zend.locale.selection.automatic.example-1">
             <title>Using automatic locales</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // without automatic detection
 //$locale = new Zend_Locale(Zend_Locale::BROWSER);
 //$date = new Zend_Date($locale);
@@ -328,7 +328,7 @@ $date = new Zend_Date('auto');
 
         <example id="zend.locale.defaultlocale.example-1">
             <title>Handling locale exceptions</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // within the bootstrap file
 try {
     $locale = new Zend_Locale('auto');
@@ -357,7 +357,7 @@ $date = new Zend_Date($locale);
 
         <example id="zend.locale.defaultlocale.example-2">
             <title>Setting a default locale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // within the bootstrap file
 Zend_Locale::setDefault('de');
 
@@ -386,7 +386,7 @@ $date = new Zend_Date();
 
         <example id="zend.locale.interoperate.example-1">
             <title>Dates default to correct locale of web users</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date('2006',Zend_Date::YEAR);
 ]]></programlisting>
         </example>
@@ -399,7 +399,7 @@ $date = new Zend_Date('2006',Zend_Date::YEAR);
 
         <example id="zend.locale.interoperate.example-2">
             <title>Overriding default locale selection</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $usLocale = new Zend_Locale('en_US');
 $date = new Zend_Date('2006', Zend_Date::YEAR, $usLocale);
 $temp = new Zend_Measure_Temperature('100,10',
@@ -415,7 +415,7 @@ $temp = new Zend_Measure_Temperature('100,10',
 
         <example id="zend.locale.interoperate.example-3">
             <title>Performance optimization when using a default locale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 $date = new Zend_Date('2006', Zend_Date::YEAR, $locale);
 $temp = new Zend_Measure_Temperature('100,10',
@@ -440,7 +440,7 @@ $temp = new Zend_Measure_Temperature('100,10',
 
         <example id="zend.locale.frameworkwidelocale.example">
             <title>Usage of an application wide locale</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // within your bootstrap
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
@@ -479,7 +479,7 @@ echo $date->getDate();
 
         <example id="zend.locale.formatoptions.example-1">
             <title>Dates default to correct locale of web users</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'fix_date' => true,
                                      'format_type' => 'php'));
@@ -495,7 +495,7 @@ Zend_Locale_Format::setOptions(array('locale' => 'en_US',
 
         <example id="zend.locale.formatoptions.example-2">
             <title>Using STANDARD definitions for setOptions()</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Locale_Format::setOptions(array('locale' => 'en_US',
                                      'date_format' => 'dd.MMMM.YYYY'));
 // overriding the global set date format

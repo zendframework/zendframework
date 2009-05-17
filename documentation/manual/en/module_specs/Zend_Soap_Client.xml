@@ -121,7 +121,7 @@
                         'compression' - compression options; it's a combination of <code>SOAP_COMPRESSION_ACCEPT</code>,
                         <code>SOAP_COMPRESSION_GZIP</code> and <code>SOAP_COMPRESSION_DEFLATE</code> options which
                         may be used like this:
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Accept response compression
 $client = new Zend_Soap_Client("some.wsdl",
   array('compression' => SOAP_COMPRESSION_ACCEPT));
@@ -155,7 +155,7 @@ $client = new Zend_Soap_Client("some.wsdl",
 
         <para>
             Use it like in the following example:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 //****************************************************************
 //                Server code
 //****************************************************************

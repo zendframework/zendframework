@@ -25,7 +25,7 @@
             this file would only have to look like the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -42,7 +42,7 @@ class My_Component_HelloProvider
             like this:
         </para>
 
-        <programlisting role="sh"><![CDATA[
+        <programlisting language="sh"><![CDATA[
 % zf say hello
 Hello from my provider!
 ]]></programlisting>
@@ -69,7 +69,7 @@ Hello from my provider!
             would probably do this in OO code:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -108,7 +108,7 @@ class My_Component_HelloProvider
             sample below.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends    Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Pretendable

@@ -85,7 +85,7 @@
             So how does this normalization work in detail for numbers:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('123.456,78');
@@ -134,7 +134,7 @@ $filter->filter('123.456,78');
             work:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Numeric Filter
 $filter = new Zend_Filter_LocalizedToNormalized(array('precision' => 2));
 
@@ -156,7 +156,7 @@ $filter->filter('123.456,78901');
             will be returned as array, where each date part is given within a own key.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Initiate the filter
 $filter = new Zend_Filter_LocalizedToNormalized();
 $filter->filter('12.April.2009');
@@ -173,7 +173,7 @@ $filter->filter('12.April.2009');
             <emphasis>date_format</emphasis> and the <emphasis>locale</emphasis> option.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Date Filter
 $filter = new Zend_Filter_LocalizedToNormalized(
     array('date_format' => 'ss:mm:HH')

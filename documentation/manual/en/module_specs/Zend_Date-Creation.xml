@@ -31,7 +31,7 @@
                 most used way to get the actual date as <classname>Zend_Date</classname> instance.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
 
@@ -48,7 +48,7 @@ $date = new Zend_Date();
                 always return the actual date and can not be changed by giving optional parameters.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
 
@@ -89,7 +89,7 @@ $date = Zend_Date::now();
                 for creating a timestamp through a query is much smaller than converting it to a specified format.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
@@ -112,7 +112,7 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 for dates after 1 January 1970.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
@@ -175,7 +175,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 given the hour <emphasis>0</emphasis> is used.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006,
                    'month' => 4,
                    'day' => 18,
@@ -185,7 +185,7 @@ $datearray = array('year' => 2006,
 $date = new Zend_Date($datearray);
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>

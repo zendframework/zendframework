@@ -17,7 +17,7 @@
     <para>
         A basic example of usage is below:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 if ($validator->isValid($email)) {
     // email appears to be valid
@@ -67,7 +67,7 @@ if ($validator->isValid($email)) {
         in <classname>Zend_Validate_Hostname</classname>, though an example of how to accept both
         DNS and Local hostnames appears below:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
                     Zend_Validate_Hostname::ALLOW_DNS |
                     Zend_Validate_Hostname::ALLOW_LOCAL);
@@ -99,7 +99,7 @@ if ($validator->isValid($email)) {
         To enable MX checking you can pass a second parameter to the
         <classname>Zend_Validate_EmailAddress</classname> constructor.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
@@ -125,7 +125,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
         <classname>Zend_Validate_Hostname</classname> object that exists within
         <classname>Zend_Validate_EmailAddress</classname>.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
 
@@ -147,7 +147,7 @@ $validator->hostnameValidator->setValidateIdn(false);
         <classname>Zend_Validate_Hostname</classname> object that exists within
         <classname>Zend_Validate_EmailAddress</classname>.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
 

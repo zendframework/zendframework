@@ -16,7 +16,7 @@
             using <classname>Zend_Search_Lucene</classname> indexing API:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create index
 $index = Zend_Search_Lucene::create('/data/my-index');
 
@@ -45,7 +45,7 @@ $index->addDocument($doc);
             is that the open() method is called instead of the create() method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Open existing index
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -74,7 +74,7 @@ $index->addDocument($doc);
             from a query hit by 'id' property:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $removePath = ...;
 $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
@@ -100,7 +100,7 @@ foreach ($hits as $hit) {
              <classname>Zend_Search_Lucene::numDocs()</classname> returns the total number of non-deleted documents.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $indexSize = $index->count();
 $documents = $index->numDocs();
 ]]></programlisting>
@@ -109,7 +109,7 @@ $documents = $index->numDocs();
             <classname>Zend_Search_Lucene::isDeleted($id)</classname> method may be used to check if a document is deleted.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($count = 0; $count < $index->maxDoc(); $count++) {
     if ($index->isDeleted($count)) {
         echo "Document #$id is deleted.\n";
@@ -148,7 +148,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             Full index optimization can be trigger by calling the <classname>Zend_Search_Lucene::optimize()</classname> method. It merges all
             index segments into one new segment:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Open existing index
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -245,7 +245,7 @@ $index->optimize();
             It's possible to override this with the <classname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</classname> method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Get current default file permissions
 $currentPermissions =
     Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();

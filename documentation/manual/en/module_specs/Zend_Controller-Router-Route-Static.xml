@@ -10,7 +10,7 @@
         an overkill. The answer to this situation is to use static routes:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Static(
     'login',
     array('controller' => 'auth', 'action' => 'login')
@@ -51,7 +51,7 @@ $router->addRoute('login', $route);
             parameter to the front controller during bootstrapping:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
 

@@ -16,7 +16,7 @@
 
     <example id="zend.feed.custom-feed.example.extending">
         <title>Extending the Atom Entry Class with Custom Namespaces</title>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * The custom entry class automatically knows the feed URI (optional) and
  * can automatically add extra namespaces.
@@ -75,7 +75,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
             Then to use this class, you'd just instantiate it directly and set the <code>myUpdated</code>
             property:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entry = new MyEntry();
 $entry->myUpdated = '2005-04-19T15:30';
 

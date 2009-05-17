@@ -70,7 +70,7 @@
             first:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 {
     /**
@@ -138,7 +138,7 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
             This allows us to create a bootstrap callback like the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function appBootstrap()
@@ -168,7 +168,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             dispatch another request.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
@@ -199,7 +199,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             Now let's write tests:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...

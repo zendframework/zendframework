@@ -102,14 +102,14 @@
             This example illustrates the basic use of <classname>Zend_Text_Figlet</classname>
             to create a simple FIGlet text:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
         <para>
             Assuming you are using a monospace font, this would look as follows:
         </para>
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||

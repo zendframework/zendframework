@@ -26,7 +26,7 @@
         specific needs.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = '/path/to/bootstrap/file.php'
@@ -43,7 +43,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         class level:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = array('App', 'bootstrap');
@@ -57,7 +57,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         this in your <code>setUp()</code> method:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()

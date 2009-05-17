@@ -57,7 +57,7 @@
             In this case the validation rules are simply that the input value must be a floating
             point value.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -117,7 +117,7 @@ class MyValid_Float extends Zend_Validate_Abstract
         <para>
             These validation failure reasons are then translated to definitions in the class:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';
@@ -209,7 +209,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         <para>
             The following class implements these validation criteria:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyValid_PasswordStrength extends Zend_Validate_Abstract
 {
     const LENGTH = 'length';

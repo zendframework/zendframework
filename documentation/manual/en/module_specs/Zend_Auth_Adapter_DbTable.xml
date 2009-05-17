@@ -74,7 +74,7 @@
                 which we can perform an authentication query later. This example
                  requires the PDO SQLite extension to be available:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Create an in-memory SQLite database connection
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
                                                   ':memory:'));
@@ -103,7 +103,7 @@ $dbAdapter->query($sqlInsert);
                 constructor or deferred as parameters to setter methods after
                 instantiation:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Configure the instance with constructor parameters...
 $authAdapter = new Zend_Auth_Adapter_DbTable(
     $dbAdapter,
@@ -128,7 +128,7 @@ $authAdapter
                 the adapter prior to calling the <code>authenticate()</code>
                 method:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Set the input credential values (e.g., from a login form)
 $authAdapter
     ->setIdentity('my_username')
@@ -143,7 +143,7 @@ $authAdapter
                 object, <classname>Zend_Auth_Adapter_DbTable</classname> also supports
                 retrieving the table row upon authentication success:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Print the identity
 echo $result->getIdentity() . "\n\n";
 
@@ -179,7 +179,7 @@ Array
             <code>stdClass</code> object. The following code snippet illustrates
             its use:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // authenticate with Zend_Auth_Adapter_DbTable
 $result = $this->_auth->authenticate($adapter);
 
@@ -226,7 +226,7 @@ if ($result->isValid()) {
             leveraged for additional checks at authentication time to solve
             some common user problems.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // The status field value of an account is not equal to "compromised"
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
@@ -255,7 +255,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
         <para>
             Therefore, we need to modify our table to store our salt string:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
@@ -264,14 +264,14 @@ $sqlAlter = "ALTER TABLE [users] "
             Here’s a simple way to generate a salt string for every user at
             registration:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
 ]]></programlisting>
         <para>
             And now let’s build the adapter:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',
@@ -305,7 +305,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             method would check the status of a user, in other words to see if that
             user's account is enabled.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Continuing with the example from above
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,

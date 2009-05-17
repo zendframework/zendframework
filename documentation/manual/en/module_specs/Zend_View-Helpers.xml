@@ -132,7 +132,7 @@
                     The above is probably best summed up with some examples:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // '1' and '0' as checked/unchecked options; not checked
 echo $this->formCheckbox('foo');
 
@@ -308,7 +308,7 @@ echo $this->formCheckbox('foo',
             and instantiate themselves as they are needed.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // inside your view script, $this refers to the Zend_View instance.
 //
 // say that you have already assigned a series of select options under
@@ -332,7 +332,7 @@ echo $this->formCheckbox('foo',
             The resulting output from the view script will look something like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form action="action.php" method="post">
     <p><label>Your Email:
         <input type="text" name="email" value="you@example.com" size="32" />
@@ -383,7 +383,7 @@ echo $this->formCheckbox('foo',
             prefix is provided, 'Zend_View_Helper_' is assumed.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // Set path to /path/to/more/helpers, with prefix 'My_View_Helper'
@@ -399,7 +399,7 @@ $view->setHelperPath('/path/to/more/helpers', 'My_View_Helper');
             helpers.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 // Add /path/to/some/helpers with class prefix 'My_View_Helper'
 $view->addHelperPath('/path/to/some/helpers', 'My_View_Helper');
@@ -481,7 +481,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
             Here is an example of our <code>SpecialPurpose</code> helper code:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 {
     protected $_count = 0;
@@ -501,7 +501,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
             instance.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // remember, in a view script, $this refers to the Zend_View instance.
 echo $this->specialPurpose();
 echo $this->specialPurpose();
@@ -511,7 +511,7 @@ echo $this->specialPurpose();
         <para>
             The output would look something like this:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 I have seen 'The Jerk' 1 time(s).
 I have seen 'The Jerk' 2 time(s).
 I have seen 'The Jerk' 3 time(s).
@@ -525,7 +525,7 @@ I have seen 'The Jerk' 3 time(s).
             <code>setView($view)</code> method, like the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_View_Helper_ScriptPath
 {
     public $view;

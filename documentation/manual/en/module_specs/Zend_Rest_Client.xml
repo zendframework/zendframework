@@ -16,7 +16,7 @@
         <example id="zend.rest.client.introduction.example-1">
             <title>A basic REST request</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Connect to framework.zend.com server and retrieve a greeting
  */
@@ -37,7 +37,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
                 made via method chaining or in separate method calls:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client->sayHello('Davey', 'Day');
 echo $client->get();
 ]]></programlisting>
@@ -62,7 +62,7 @@ echo $client->get();
 
         <example id="zend.rest.client.return.example-1">
             <title>Response Status</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
 
 if ($result->isSuccess()) {
@@ -94,7 +94,7 @@ if ($result->isSuccess()) {
         <example id="zend.rest.client.return.example-2">
             <title>Using Technorati's Rest Service</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $technorati = new Zend_Rest_Client('http://api.technorati.com/bloginfo');
 $technorati->key($key);
 $technorati->url('http://pixelated-dreams.com');
@@ -105,7 +105,7 @@ echo $result->firstname() .' '. $result->lastname();
 
         <example id="zend.rest.client.return.example-3">
             <title>Example Technorati Response</title>
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="Technorati API version 1.0 /bloginfo" -->
 <!DOCTYPE tapi PUBLIC "-//Technorati, Inc.//DTD TAPI 0.02//EN"
@@ -176,7 +176,7 @@ echo $result->firstname() .' '. $result->lastname();
         <example id="zend.rest.client.args.example-1">
             <title>Setting Request Arguments</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $client = new Zend_Rest_Client('http://example.org/rest');
 
 $client->arg('value1');

@@ -19,7 +19,7 @@
             containing a number. Conversions are only possible for units of the same type (mass, area, temperature,
             velocity, etc.), not between types.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
 
@@ -45,7 +45,7 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
             <code>Length</code> class. To refer to this unit of measurement, the notation <code>Length::METER</code>
             must be used. The display unit is <code>m</code>.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // outputs 'Length::METER'
 echo Zend_Measure_Length::KILOMETER; // outputs 'Length::KILOMETER'
 

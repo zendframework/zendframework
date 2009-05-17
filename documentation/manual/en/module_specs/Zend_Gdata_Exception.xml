@@ -9,7 +9,7 @@
         thrown by <classname>Zend_Gdata</classname> by catching <classname>Zend_Gdata_App_Exception</classname>.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username, $password);
@@ -84,7 +84,7 @@ try {
         exception subclasses are thrown by which methods in <classname>Zend_Gdata</classname>.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client = Zend_Gdata_ClientLogin::getHttpClient($username,
                                                     $password,

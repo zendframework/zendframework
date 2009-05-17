@@ -35,7 +35,7 @@
 
         <example id="zend.date.basic.creation.example-1">
             <title>Creating the Current Date</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Output of the current timestamp
@@ -65,7 +65,7 @@ print $date;
 
             <example id="zend.date.simple.functions.get.example-1">
                 <title>get() - Output a Date</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Output of the desired date
@@ -86,7 +86,7 @@ print $date->get();
 
             <example id="zend.date.simple.functions.set.example-1">
                 <title>set() - Set a Date</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Setting of a new time
@@ -110,7 +110,7 @@ print $date->get(Zend_Date::W3C);
 
             <example id="zend.date.simple.functions.add.example-1">
                 <title>add() - Adding Dates</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // changes $date by adding 12 hours
@@ -138,7 +138,7 @@ echo "Date via toString() = ", $date, "\n";
 
             <example id="zend.date.simple.functions.compare.example-1">
                 <title>compare() - Compare Dates</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Comparation of both times
@@ -156,7 +156,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
 
             <example id="zend.date.simple.functions.compare.example-2">
                 <title>equals() - Identify a Date or Date Part</title>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Comparation of the two dates

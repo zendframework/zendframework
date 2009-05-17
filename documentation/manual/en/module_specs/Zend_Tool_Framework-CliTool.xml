@@ -79,7 +79,7 @@
             following places:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 /usr/bin
 /usr/local/bin
 /usr/local/ZendServer/bin/
@@ -142,7 +142,7 @@
             <code>/home/username/bin/</code> for example) you would issue a
             command similar to this: </para>
 
-        <programlisting role="sh"><![CDATA[
+        <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)
@@ -166,7 +166,7 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
             the following places:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 C:\PHP
 C:\Program Files\ZendServer\bin\
 C:\WAMP\PHP\bin

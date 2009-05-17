@@ -49,7 +49,7 @@
                     name, and a helper object is returned:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $flashMessenger->addMessage('We did something in the last request');
 ]]></programlisting>
@@ -62,7 +62,7 @@ $flashMessenger->addMessage('We did something in the last request');
                     the broker:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $flashMessenger->addMessage('We did something in the last request');
 ]]></programlisting>
@@ -77,7 +77,7 @@ $flashMessenger->addMessage('We did something in the last request');
                     <code>addMessage()</code>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->FlashMessenger('We did something in the last request');
 ]]></programlisting>
             </listitem>
@@ -108,7 +108,7 @@ $this->_helper->FlashMessenger('We did something in the last request');
             To register a helper with the broker, use <code>addHelper</code>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
 ]]></programlisting>
 
@@ -128,7 +128,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                     conventions.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Add helpers prefixed with My_Action_Helpers in My/Action/Helpers/
 Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
 ]]></programlisting>
@@ -142,7 +142,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('My_Action_Helpers');
                     you to map your own class prefixes to specific directories.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Add helpers prefixed with Helper in Plugins/Helpers/
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
                                              'Helper');
@@ -170,7 +170,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
             name of the helper (minus the prefix):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Check if 'redirector' helper is registered with the broker:
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'Redirector helper registered';
@@ -195,7 +195,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             the short name of the helper (minus the prefix).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Check if 'redirector' helper is registered with the broker, and fetch:
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     $redirector =
@@ -215,7 +215,7 @@ $redirector =
             short name of the helper (minus the prefix):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Conditionally remove the 'redirector' helper from the broker:
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
@@ -328,7 +328,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             allowing use of the helper like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Redirect to /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>

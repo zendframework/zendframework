@@ -62,7 +62,7 @@
             the ampersand (<code>&amp;</code>) and double quote
             (<code>&quot;</code>) characters:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
@@ -89,7 +89,7 @@ echo $htmlEntities->filter('"'); // &quot;
             instance, and applies the <code>filter()</code> method to the data
             input.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
 ]]></programlisting>
 
@@ -99,7 +99,7 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             You can also pass an array of constructor arguments, if they
             are needed for the filter class.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
 ]]></programlisting>
 

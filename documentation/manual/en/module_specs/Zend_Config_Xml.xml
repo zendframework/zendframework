@@ -29,7 +29,7 @@
             the case for more complex situations. Suppose, then, that the following configuration data are contained in
             <code>/path/to/config.xml</code>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -59,7 +59,7 @@
             Next, assume that the application developer needs the staging configuration data from the XML file. It is a
             simple matter to load these data by specifying the XML file and the staging section:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
 echo $config->database->params->host;   // prints "dev.example.com"
@@ -75,7 +75,7 @@ echo $config->database->params->dbname; // prints "dbname"
             making usage of attributes is to add attributes in a parent node, which then will be translated into
             children of that node:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -95,7 +95,7 @@ echo $config->database->params->dbname; // prints "dbname"
             the tag name twice. You simply create an empty tag with the value in the <code>value</code>
             attribute:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -130,7 +130,7 @@ echo $config->database->params->dbname; // prints "dbname"
             as the first parameter to the constructor and must start with the
             characters <code>'&lt;?xml'</code>:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

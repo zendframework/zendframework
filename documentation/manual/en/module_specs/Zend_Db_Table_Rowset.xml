@@ -30,7 +30,7 @@
 
             <title>Example of fetching a rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]></programlisting>
@@ -59,7 +59,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 
             <title>Counting the Rows in a Rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
@@ -82,7 +82,7 @@ if ($rowCount > 0) {
                 particularly appropriate when the Rowset contains exactly one Row.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
@@ -106,7 +106,7 @@ $row    = $rowset->current();
                 record from the table.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
@@ -142,7 +142,7 @@ foreach ($rowset as $row) {
                 results before seeking to a position.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
@@ -169,7 +169,7 @@ $row9->save();
                 object by default. If the position requested does not exist, an exception will be thrown. Here is an example :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // fetch all records from the table
@@ -204,7 +204,7 @@ $row9->save();
 
             <title>Using toArray()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -247,7 +247,7 @@ foreach ($rowsetArray as $rowArray) {
                 representation of the Rowset object argument.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -275,7 +275,7 @@ $serializedRowset = serialize($rowset);
                 tables).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // Now you can use object methods and properties, but read-only
@@ -308,7 +308,7 @@ echo $row->bug_description;
 
             <title>Reactivating a Rowset as Live Data</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
@@ -347,7 +347,7 @@ $row->save();
 
         <example id="zend.db.table.rowset.extending.example">
             <title>Specifying a custom Rowset class</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...customizations
@@ -377,7 +377,7 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
 
         <example id="zend.db.table.rowset.extending.example-aggregate">
             <title>Example of Rowset class with a new method</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**

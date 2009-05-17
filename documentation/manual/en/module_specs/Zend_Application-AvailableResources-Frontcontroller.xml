@@ -86,7 +86,7 @@
             controller resource.
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.moduleControllerDirectoryName = "actions"
@@ -110,7 +110,7 @@ resources.frontController.env = APPLICATION_ENV
             <code>frontController</code> property of your bootstrap.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>

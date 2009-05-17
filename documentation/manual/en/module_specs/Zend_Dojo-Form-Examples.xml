@@ -15,7 +15,7 @@
             in its own tab.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Test extends Zend_Dojo_Form
 {
     /**
@@ -363,7 +363,7 @@ class My_Form_Test extends Zend_Dojo_Form
             This first example shows decorating an existing form instance:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Custom_Form();
 Zend_Dojo::enableForm($form);
 $form->addElement(
@@ -390,7 +390,7 @@ array(
             initialization:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Custom_Form extends Zend_Form
 {
     public function init()

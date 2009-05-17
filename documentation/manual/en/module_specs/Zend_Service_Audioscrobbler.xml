@@ -173,7 +173,7 @@
                 to retrieve a specific user's profile information:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile information we want to retrieve
 $as->setUser('BigDaddy71');
@@ -190,7 +190,7 @@ print "Information for $profileInfo->realname "
 
             <title>Retrieving a User's Weekly Artist Chart</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the user whose profile weekly artist chart we want to retrieve
 $as->setUser('lo_fye');
@@ -265,7 +265,7 @@ foreach ($previousWeeklyArtists as $artist) {
 
             <title>Retrieving Related Artists</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $as = new Zend_Service_Audioscrobbler();
 // Set the artist for whom you would like to retrieve related artists
 $as->setArtist('LCD Soundsystem');

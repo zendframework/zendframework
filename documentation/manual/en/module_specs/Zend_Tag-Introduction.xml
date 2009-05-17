@@ -35,7 +35,7 @@
             This example illustrates how to create a list of tags and spread
             absolute weight values on them.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create the item list
 $list = new Zend_Tag_ItemList();
 

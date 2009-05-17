@@ -29,7 +29,7 @@
             <classname>Zend_Service_SlideShare</classname> object and providing these values as shown below:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -50,7 +50,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
             is provided below.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Service_SlideShare_SlideShow {
 
     /**
@@ -217,7 +217,7 @@ class Zend_Service_SlideShare_SlideShow {
             <classname>Zend_Service_SlideShare_SlideShow</classname> object as shown.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -284,7 +284,7 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
             used. An example of using each method is shown below:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create a new instance of the component
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -319,7 +319,7 @@ foreach($ss_user as $slideshow) {
             shown:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
                         'lifetime' => 7200,
                         'automatic_serialization' => true);
@@ -354,7 +354,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             other then default as shown:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig(array('timeout' => 5));
 

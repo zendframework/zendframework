@@ -19,7 +19,7 @@
     <para>
         The following example demonstrates how to write a custom filter:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyFilter implements Zend_Filter_Interface
 {
     public function filter($value)
@@ -36,7 +36,7 @@ class MyFilter implements Zend_Filter_Interface
     <para>
         To add an instance of the filter defined above to a filter chain:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>

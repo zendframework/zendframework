@@ -132,7 +132,7 @@
             There are two ways to validate IBAN numbers. As first way you can give a locale which
             represents a country. Any given IBAN number will then be validated against this country.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {
@@ -148,7 +148,7 @@ if ($validator->isValid($iban)) {
             This should be done when you want to validate IBAN numbers for a single countries. The
             simpler way of validation is not to give a locale like shown in the next example.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {

@@ -74,7 +74,7 @@
             Here is an example of common usage of the autodiscovery functionality. The <code>handle()</code>
             function generates the WSDL file and posts it to the browser.
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_SoapServer_Class {
 ...
 }
@@ -109,7 +109,7 @@ $autodiscover->handle();
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('HelloWorldService');
@@ -131,7 +131,7 @@ if(isset($_GET['wsdl'])) {
         <para>
             If class is used to provide SOAP server functionality, then the same class should be provided to
             <classname>Zend_Soap_AutoDiscover</classname> for WSDL generation:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
@@ -194,7 +194,7 @@ $autodiscover->handle();
         <para>
             If set of functions are used to provide SOAP server functionality, then the same set should be provided to
             <classname>Zend_Soap_AutoDiscovery</classname> for WSDL generation:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
@@ -323,7 +323,7 @@ $autodiscover->handle();
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 // Default is 'use' => 'encoded' and
 // 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'

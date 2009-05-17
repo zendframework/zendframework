@@ -12,7 +12,7 @@
   <example id="zend.mail.smtp-secure.example-1">
     <title>Enabling a secure connection within Zend_Mail_Transport_Smtp</title>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $config = array('ssl' => 'tls',
                 'port' => 25); // Optional port number supplied
 

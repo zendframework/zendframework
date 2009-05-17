@@ -20,7 +20,7 @@
             of the view instance:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -38,7 +38,7 @@ $view->c = "Sea";
             one-by-one property assignments.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // assign an array of key-value pairs, where the
@@ -66,7 +66,7 @@ $view->assign((array) $obj);
             variable value.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->assign('a', "Hay");
 $view->assign('b', "Bee");
@@ -87,7 +87,7 @@ $view->assign('c', "Sea");
             echo it yourself at the appropriate time.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Hay";
 $view->b = "Bee";
@@ -115,7 +115,7 @@ echo $view->render('someView.php');
             setScriptPath() method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/path/to/app/views');
 ]]></programlisting>
@@ -134,7 +134,7 @@ $view->setScriptPath('/path/to/app/views');
             some views, while leaving others alone.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->addScriptPath('/path/to/app/views');
 $view->addScriptPath('/path/to/custom/');
@@ -159,7 +159,7 @@ $view->addScriptPath('/path/to/custom/');
                 issue:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
 $view->addScriptPath($_GET['foo']);
 $view->render('passwd');

@@ -10,7 +10,7 @@
         <link linkend="zend.validate.introduction">introduction</link>, where a username must be
         between 6 and 12 alphanumeric characters:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Create a validator chain and add validators to it
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
@@ -46,7 +46,7 @@ if ($validatorChain->isValid($username)) {
         follows, then the alphanumeric validation would not occur if the string length validation
         fails:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>

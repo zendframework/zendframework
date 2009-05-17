@@ -77,7 +77,7 @@
             Http Client.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $my_calendar = 'http://www.google.com/calendar/feeds/default/private/full';
 
 if (!isset($_SESSION['cal_token'])) {
@@ -117,7 +117,7 @@ $cal = new Zend_Gdata_Calendar($client);
             some time.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Carefully construct this value to avoid application security problems.
 $php_self = htmlentities(substr($_SERVER['PHP_SELF'],
                          0,

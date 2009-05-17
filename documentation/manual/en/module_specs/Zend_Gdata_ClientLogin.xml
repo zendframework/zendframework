@@ -86,7 +86,7 @@
             <classname>Zend_Http_Client</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Enter your Google account credentials
 $email = 'johndoe@gmail.com';
 $passwd = 'xxxxxxxx';

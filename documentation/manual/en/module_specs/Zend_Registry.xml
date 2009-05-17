@@ -27,7 +27,7 @@
 
         <example id="zend.registry.using.storing.example">
             <title>Example of set() Method Usage</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 ]]></programlisting>
         </example>
@@ -56,7 +56,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.retrieving.example">
             <title>Example of get() Method Usage</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
 ]]></programlisting>
         </example>
@@ -68,7 +68,7 @@ $value = Zend_Registry::get('index');
 
         <example id="zend.registry.using.retrieving.example-iterating">
             <title>Example of Iterating over the Registry</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 foreach ($registry as $index => $value) {
@@ -106,7 +106,7 @@ foreach ($registry as $index => $value) {
 
         <example id="zend.registry.using.constructing.example">
             <title>Example of Constructing a Registry</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 ]]></programlisting>
         </example>
@@ -120,7 +120,7 @@ $registry = new Zend_Registry(array('index' => $value));
 
         <example id="zend.registry.using.constructing.example-setinstance">
             <title>Example of Initializing the Singleton Registry</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 
 Zend_Registry::setInstance($registry);
@@ -145,7 +145,7 @@ Zend_Registry::setInstance($registry);
 
         <example id="zend.registry.using.array-access.example">
             <title>Example of Array Access</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 $registry['index'] = $value;
@@ -183,7 +183,7 @@ var_dump( $registry['index'] );
 
         <example id="zend.registry.using.array-object.example">
             <title>Example of Object Access</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // in your application bootstrap:
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS)
 Zend_Registry::setInstance($registry);
@@ -217,7 +217,7 @@ var_dump($registry->index);
 
         <example id="zend.registry.using.isset.example-isregistered">
             <title>Example of isRegistered() Method Usage</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
     $value = Zend_Registry::get($index);
 }
@@ -232,7 +232,7 @@ if (Zend_Registry::isRegistered($index)) {
 
         <example id="zend.registry.using.isset.example-isset">
             <title>Example of isset() Method Usage</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
 // using array access syntax
@@ -267,7 +267,7 @@ if (isset($registry->index)) {
 
         <example id="zend.registry.using.subclassing.example">
             <title>Example of Specifying the Singleton Registry's Class Name</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('My_Registry');
 
 Zend_Registry::set('index', $value);
@@ -314,7 +314,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.unsetting.example">
             <title>Example of _unsetInstance() Method Usage</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 
 Zend_Registry::_unsetInstance();

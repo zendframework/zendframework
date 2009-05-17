@@ -16,7 +16,7 @@
             <classname>Zend_Form</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form;
 ]]></programlisting>
 
@@ -33,7 +33,7 @@ $form = new Zend_Form;
             <code>setMethod()</code> accessors:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setAction('/resource/process')
      ->setMethod('post');
 ]]></programlisting>
@@ -51,7 +51,7 @@ $form->setAction('/resource/process')
             the "id" attribute:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setAttrib('id', 'login');
 ]]></programlisting>
     </sect2>
@@ -122,7 +122,7 @@ $form->setAttrib('id', 'login');
             Some examples:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Instantiating an element and passing to the form object:
 $form->addElement(new Zend_Form_Element_Text('username'));
 
@@ -146,7 +146,7 @@ $form->addElement('text', 'username');
             objects, or the name of a validator to utilize:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username = new Zend_Form_Element_Text('username');
 
 // Passing a Zend_Validate_* object:
@@ -161,7 +161,7 @@ $username->addValidator('alnum');
             parameter if the validator can accept tem:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Pass a pattern
 $username->addValidator('regex', false, array('/^[a-z]/i'));
 ]]></programlisting>
@@ -178,7 +178,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
             the element. In the former case:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Make this element required:
 $username->setRequired(true);
 ]]></programlisting>
@@ -195,7 +195,7 @@ $username->setRequired(true);
             value:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username->addFilter('StringtoLower');
 ]]></programlisting>
 
@@ -203,7 +203,7 @@ $username->addFilter('StringtoLower');
             The final element setup might look like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $username->addValidator('alnum')
          ->addValidator('regex', false, array('/^[a-z]/'))
          ->setRequired(true)
@@ -226,7 +226,7 @@ $username->addValidators(array('alnum',
             above implicitly, try the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array(
     'validators' => array(
         'alnum',
@@ -255,7 +255,7 @@ $form->addElement('text', 'username', array(
             options: use the form's render() method, or simply echo it.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Explicitly calling render(), and passing an optional view object:
 echo $form->render($view);
 
@@ -271,7 +271,7 @@ echo $form;
             To render a form in a view, you simply have to do the following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->form ?>
 ]]></programlisting>
 
@@ -285,7 +285,7 @@ echo $form;
             looks something like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->addDecorators(array(
     'ViewHelper',
     'Errors',
@@ -303,7 +303,7 @@ $element->addDecorators(array(
             The above creates output like the following:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt><label for="username" class="required">Username</dt>
 <dd>
     <input type="text" name="username" value="123-abc" />
@@ -338,7 +338,7 @@ $element->addDecorators(array(
             order will be used. You can set an element's order using:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $element->setOrder(10);
 ]]></programlisting>
 
@@ -346,7 +346,7 @@ $element->setOrder(10);
             Or, when creating an element, by passing it as an option:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->addElement('text', 'username', array('order' => 10));
 ]]></programlisting>
     </sect2>
@@ -368,7 +368,7 @@ $form->addElement('text', 'username', array('order' => 10));
             (web service requests, for instance):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($form->isValid($_POST)) {
     // success!
 } else {
@@ -384,7 +384,7 @@ if ($form->isValid($_POST)) {
             present, it will not run validations for that particular element:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($form->isValidPartial($_POST)) {
     // elements present all passed validations
 } else {
@@ -404,7 +404,7 @@ if ($form->isValidPartial($_POST)) {
             filtered values:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $values = $form->getValues();
 ]]></programlisting>
 
@@ -412,7 +412,7 @@ $values = $form->getValues();
             If you need the unfiltered values at any point, use:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
 ]]></programlisting>
     </sect2>
@@ -426,7 +426,7 @@ $unfiltered = $form->getUnfilteredValues();
             default decorators:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$form->isValid($_POST)) {
     echo $form;
 
@@ -475,7 +475,7 @@ if (!$form->isValid($_POST)) {
             options to build the form:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new Zend_Form();
 $form->setAction('/user/login')
      ->setMethod('post');
@@ -504,7 +504,7 @@ $form->addElement($username)
             Next, we'll create a controller for handling this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserController extends Zend_Controller_Action
 {
     public function getForm()
@@ -542,7 +542,7 @@ class UserController extends Zend_Controller_Action
             And a view script for displaying the form:
         </para>
 
-<programlisting role="php"><![CDATA[
+<programlisting language="php"><![CDATA[
 <h2>Please login:</h2>
 <?php echo $this->form ?>
 ]]></programlisting>
@@ -569,7 +569,7 @@ class UserController extends Zend_Controller_Action
             ('user'), and a key for the form ('login'):
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 [development]
 ; general form metainformation
 user.login.action = "/user/login"
@@ -600,7 +600,7 @@ user.login.elements.submit.type = "submit"
             You would then pass this to the form constructor:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini($configFile, 'development');
 $form   = new Zend_Form($config->user->login);
 ]]></programlisting>

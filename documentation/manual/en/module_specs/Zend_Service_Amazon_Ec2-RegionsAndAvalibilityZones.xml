@@ -39,7 +39,7 @@
                 are available. Each array will contain regionName and regionUrl.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_region = new Zend_Service_Amazon_Ec2_Region('aws_key','aws_secret_key');
 $regions = $ec2_region->describe();
 
@@ -75,7 +75,7 @@ foreach($regions as $region) {
                 are available. Each array will contain zoneName and zoneState.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_zones = new Zend_Service_Amazon_Ec2_Availabilityzones('aws_key',
                                                            'aws_secret_key');
 $zones = $ec2_zones->describe();

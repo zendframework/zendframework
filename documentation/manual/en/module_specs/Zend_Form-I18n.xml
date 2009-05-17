@@ -53,7 +53,7 @@
                     and use it to perform translation and/or localization:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // use the 'Zend_Translate' key; $translate is a Zend_Translate object:
 Zend_Registry::set('Zend_Translate', $translate);
 ]]></programlisting>
@@ -72,7 +72,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                     <classname>Zend_Validate_Abstract</classname>:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Tell all validation classes to use a specific translate adapter:
 Zend_Validate_Abstract::setDefaultTranslator($translate);
 ]]></programlisting>
@@ -85,7 +85,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
                     translating validation error messages:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Tell all form classes to use a specific translate adapter, as well
 // as use this adapter to translate validation error messages:
 Zend_Form::setDefaultTranslator($translate);
@@ -99,7 +99,7 @@ Zend_Form::setDefaultTranslator($translate);
                     methods:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Tell *this* form instance to use a specific translate adapter; it
 // will also be used to translate validation error messages for all
 // elements:

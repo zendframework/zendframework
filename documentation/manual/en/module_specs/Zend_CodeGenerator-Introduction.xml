@@ -22,7 +22,7 @@
             simply echo the object or call its <code>generate()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Passing configuration to the constructor:
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes' => array(
@@ -61,7 +61,7 @@ file_put_contents('World.php', $file->generate());
             Both of the above samples will render the same result:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World
@@ -89,7 +89,7 @@ class World
             following:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
 );
@@ -113,7 +113,7 @@ file_put_contents('World.php', $file->generate());
             The resulting class file will now look like this:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World

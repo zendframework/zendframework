@@ -165,7 +165,7 @@
                 Any file that contains PHP code should end with the extension ".php", with the
                 notable exception of view scripts. The following examples show acceptable filenames
                 for Zend Framework classes:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -200,7 +200,7 @@ Zend/View/Helper/FormRadio.php
             <para>
                 These are examples of acceptable names for functions:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 filterInput()
 
 getElementById()
@@ -294,7 +294,7 @@ widgetFactory()
             <para>
                 PHP code must always be delimited by the full-form, standard PHP tags:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php
 
 ?>
@@ -318,7 +318,7 @@ widgetFactory()
                     When a string is literal (contains no variable substitutions), the apostrophe or
                     "single quote" should always be used to demarcate the string:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $a = 'Example String';
 ]]></programlisting>
                 </para>
@@ -332,7 +332,7 @@ $a = 'Example String';
                     the string with quotation marks or "double quotes". This is especially useful
                     for SQL statements:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
@@ -347,7 +347,7 @@ $sql = "SELECT `id`, `name` from `people` "
                 <para>
                     Variable substitution is permitted using either of these forms:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "Hello $name, welcome back!";
 
 $greeting = "Hello {$name}, welcome back!";
@@ -357,7 +357,7 @@ $greeting = "Hello {$name}, welcome back!";
                 <para>
                     For consistency, this form is not permitted:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "Hello ${name}, welcome back!";
 ]]></programlisting>
                 </para>
@@ -370,7 +370,7 @@ $greeting = "Hello ${name}, welcome back!";
                     Strings must be concatenated using the "." operator. A space must always
                     be added before and after the "." operator to improve readability:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
                 </para>
@@ -381,7 +381,7 @@ $company = 'Zend' . ' ' . 'Technologies';
                     cases, each successive line should be padded with white space such that the
                     "."; operator is aligned under the "=" operator:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
      . "ORDER BY `name` ASC ";
@@ -407,7 +407,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     When declaring indexed arrays with the <code>array</code> function, a trailing
                     space must be added after each comma delimiter to improve readability:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
                 </para>
@@ -417,7 +417,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     construct. In this case, each successive line must be padded with spaces such
                     that beginning of each line is aligned:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
@@ -433,7 +433,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                     breaking the statement into multiple lines is encouraged. In this case, each
                     successive line must be padded with white space such that both the keys and the
                     values are aligned:
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
@@ -465,7 +465,7 @@ $sampleArray = array('firstKey'  => 'firstValue',
                 </para><para>
                     The following is an example of an acceptable class declaration:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -525,7 +525,7 @@ class SampleClass
                 <para>
                     The following is an example of an acceptable function declaration in a class:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -547,7 +547,7 @@ class Foo
                     <emphasis>NOTE:</emphasis> Pass-by-reference is the only parameter passing
                     mechanism permitted in a method declaration.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -571,7 +571,7 @@ class Foo
                     readability, in additional to breaking code if a method is later changed to
                     return by reference.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
  */
@@ -606,7 +606,7 @@ class Foo
                     comma delimiter. The following is an example of an acceptable invocation of a
                     function that takes three arguments:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
                 </para>
@@ -620,7 +620,7 @@ threeArguments(1, 2, 3);
                     "array" hint and may be split into multiple lines to improve readability. In
                     such cases, the normal guidelines for writing arrays still apply:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
@@ -654,7 +654,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     closing brace is always written on its own line. Any content within the braces
                     must be indented using four spaces.
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
@@ -666,7 +666,7 @@ if ($a != 2) {
                     are similar to the "if" construct. The following examples demonstrate proper
                     formatting for "if" statements with "else" and/or "elseif" constructs:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -707,7 +707,7 @@ if ($a != 2) {
                     spaces.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 switch ($numPeople) {
     case 1:
         break;
@@ -763,7 +763,7 @@ switch ($numPeople) {
                     Every file that contains PHP code must have a docblock at the top of the file
                     that contains these phpDocumentor tags at a minimum:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Short description for file
  *
@@ -788,7 +788,7 @@ switch ($numPeople) {
                     Every class must have a docblock that contains these phpDocumentor tags at a
                     minimum:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Short description for class
  *
@@ -829,7 +829,7 @@ switch ($numPeople) {
                     If a function/method may throw an exception, use @throws for all known exception
                     classes:
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
                 </para>

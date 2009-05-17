@@ -60,7 +60,7 @@
             Both ways use the same API method to search through the index:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $index->find($query);
@@ -98,7 +98,7 @@ $index->find($query);
             <para>
                 Actually, in some cases it's the only way to search for values within untokenized fields:
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
 $pathTerm  = new Zend_Search_Lucene_Index_Term(
@@ -117,7 +117,7 @@ $hits = $index->find($query);
             <para>
                 <classname>Zend_Search_Lucene_Search_QueryParser::parse()</classname> method also takes an optional encoding parameter,
                 which can specify query string encoding:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
 ]]></programlisting>
@@ -130,7 +130,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
             <para>
                 It's also possible to specify the default query string encoding with
                 <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</classname> method:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
@@ -157,7 +157,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
             The <classname>Zend_Search_Lucene_Search_QueryHit</classname> object also exposes each field of the <classname>Zend_Search_Lucene_Document</classname> found in the search
             as a property of the hit. In the following example, a hit is returned with two fields from the corresponding document: title and author.
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $hits = $index->find($query);
@@ -181,7 +181,7 @@ foreach ($hits as $hit) {
             method of the index object and then get them by
             <code>getFieldValue()</code> method:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open('/data/my_index');
 
 $hits = $index->find($query);
@@ -223,7 +223,7 @@ foreach ($hits as $hit) {
         <para>
             <classname>Zend_Search_Lucene</classname> gives the possibility to limit result set size with <code>getResultSetLimit()</code> and
             <code>setResultSetLimit()</code> methods:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
@@ -252,7 +252,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
         <para>
             A hit's score can be retrieved by accessing the <code>score</code> property of the hit:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -277,7 +277,7 @@ foreach ($hits as $hit) {
 
         <para>
             <code>$index->find()</code> call may take several optional parameters:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
              ...);
@@ -303,13 +303,13 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             Examples:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
         </para>
@@ -329,7 +329,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
             The first one is utilizing <classname>Zend_Search_Lucene_Document_Html</classname> class
             (see <link linkend="zend.search.lucene.index-creation.html-documents">HTML documents section</link> for details)
             using the following methods:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Highlight text with specified color
  *
@@ -339,7 +339,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
  */
 public function highlight($words, $colour = '#66ffff');
 ]]></programlisting>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Highlight text using specified View helper or callback function.
  *
@@ -367,7 +367,7 @@ public function highlightExtended($words, $callback, $params = array())
         </para>
         <para>
             <link linkend="zend.view.helpers">View helpers</link> also can be used as callbacks in context of view script:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 ]]></programlisting>
         </para>
@@ -398,7 +398,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
             The second option is to use
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[, $defaultEncoding = 'UTF-8'[, Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code>
             method:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 $highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
@@ -410,7 +410,7 @@ $highlightedHTML = $query->highlightMatches($sourceHTML);
         <para>
             Optional third parameter is a highlighter object which has to implement
             <code>Zend_Search_Lucene_Search_Highlighter_Interface</code> interface:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**

@@ -30,7 +30,7 @@
             To create a project, execute the <code>zf</code> command (on *nix systems):
         </para>
 
-        <programlisting role="sh"><![CDATA[
+        <programlisting language="sh"><![CDATA[
 % zf create project newproject
 ]]></programlisting>
 
@@ -38,7 +38,7 @@
             Or the Windows <code>zf.bat</code> command:
         </para>
 
-        <programlisting role="dos"><![CDATA[
+        <programlisting language="dos"><![CDATA[
 C:> zf.bat create project newproject
 ]]></programlisting>
 
@@ -46,7 +46,7 @@ C:> zf.bat create project newproject
             Both will create a project structure that looks like the following:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 newproject
 |-- application
 |   |-- Bootstrap.php
@@ -80,7 +80,7 @@ newproject
             the following at first:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -92,7 +92,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             created. It has the following contents:
         </para>
 
-        <programlisting role="dosini"><![CDATA[
+        <programlisting language="dosini"><![CDATA[
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -123,7 +123,7 @@ phpSettings.display_errors = 1
             <classname>Zend_Application</classname> and dispatches it.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -184,7 +184,7 @@ $application->bootstrap()
             <filename>application/Bootstrap.php</filename>, with the following contents:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -198,7 +198,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             following contents:
         </para>
 
-        <programlisting role="dosini"><![CDATA[
+        <programlisting language="dosini"><![CDATA[
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -224,7 +224,7 @@ phpSettings.display_errors = 1
             it; otherwise, replace it with the following contents:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH',
@@ -264,7 +264,7 @@ $application->bootstrap()
             <filename>public/.htacces</filename> file:
         </para>
 
-        <programlisting role="conf"><![CDATA[
+        <programlisting language="conf"><![CDATA[
 SetEnv APPLICATION_ENV development
 
 RewriteEngine On
@@ -321,7 +321,7 @@ RewriteRule ^.*$ index.php [NC,L]
             To use it, all we need to do is update the configuration file.
         </para>
 
-        <programlisting role="dosini"><![CDATA[
+        <programlisting language="dosini"><![CDATA[
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -351,7 +351,7 @@ phpSettings.display_errors = 1
             next):
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -377,7 +377,7 @@ phpSettings.display_errors = 1
             <code>Bootstrap</code> class to add a method:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initView()

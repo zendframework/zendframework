@@ -26,7 +26,7 @@
         <classname>Zend_View</classname> introduction.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
 
     <!-- A table of some books. -->
@@ -70,7 +70,7 @@
             escaping for you.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // bad view-script practice:
 echo $this->variable;
 
@@ -86,7 +86,7 @@ echo $this->escape($this->variable);
             what escaping callback to use.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // create a Zend_View instance
 $view = new Zend_View();
 
@@ -133,7 +133,7 @@ echo $view->render(...);
                 this:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 include_once 'template.inc';
 $tpl = new Template();
 
@@ -160,7 +160,7 @@ if ($this->books) {
                 These would be the related template files:
             </para>
 
-            <programlisting role="html"><![CDATA[
+            <programlisting language="html"><![CDATA[
 <!-- booklist.tpl -->
 <table>
     <tr>
@@ -192,7 +192,7 @@ if ($this->books) {
                 compatability:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Return the actual template engine object
  */
@@ -249,7 +249,7 @@ public function render($name);
                 As an example, the following is one potential wrapper for Smarty:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Zend_View_Smarty implements Zend_View_Interface
 {
     /**
@@ -429,7 +429,7 @@ class Zend_View_Smarty implements Zend_View_Interface
                 fashion as <classname>Zend_View</classname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 //Example 1. In initView() of initializer.
 $view = new Zend_View_Smarty('/path/to/templates');
 $viewRenderer =

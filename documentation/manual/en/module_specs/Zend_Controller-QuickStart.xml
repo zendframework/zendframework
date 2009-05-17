@@ -43,7 +43,7 @@
                 layout is as follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -78,7 +78,7 @@ html/
                 follows:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -106,7 +106,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 configuration:
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -160,7 +160,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 the following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
 ]]></programlisting>
 
@@ -214,7 +214,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 enter the following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 class IndexController extends Zend_Controller_Action
 {
@@ -260,7 +260,7 @@ class IndexController extends Zend_Controller_Action
                 this file, and type in some HTML:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -288,7 +288,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 with an <code>errorAction</code> method:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -305,7 +305,7 @@ class ErrorController extends Zend_Controller_Action
                 content might look like:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

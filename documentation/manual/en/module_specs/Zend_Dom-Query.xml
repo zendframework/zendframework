@@ -110,7 +110,7 @@
                     the word 'One' in the listing below:
                 </para>
 
-                <programlisting role="html"><![CDATA[
+                <programlisting language="html"><![CDATA[
 <div>
 <table>
     <tr>
@@ -141,7 +141,7 @@
             that selects against the HTML above:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $dom = new Zend_Dom_Query($html);
 $results = $dom->query('.foo .bar a');
 

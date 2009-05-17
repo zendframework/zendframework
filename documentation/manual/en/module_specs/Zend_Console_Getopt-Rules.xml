@@ -36,7 +36,7 @@
         </para>
         <example id="zend.console.getopt.rules.short.example">
             <title>Using the Short Syntax</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 ]]></programlisting>
         </example>
@@ -99,7 +99,7 @@ $opts = new Zend_Console_Getopt('abp:');
         </para>
         <example id="zend.console.getopt.rules.long.example">
             <title>Using the Long Syntax</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
   array(
     'apple|a'    => 'apple option, with no parameter',

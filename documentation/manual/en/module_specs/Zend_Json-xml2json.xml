@@ -17,7 +17,7 @@
         optional input parameter is not given, then the default behavior is to ignore the XML attributes.
         This function call is made as shown below:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // fromXml function simply takes a String containing XML contents
 // as input.
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
@@ -45,7 +45,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         XML input string passed to <classname>Zend_Json::fromXml()</classname> function:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
     <book id="1">
@@ -72,7 +72,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         JSON output string returned from <classname>Zend_Json::fromXml()</classname> function:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 {
    "books" : {
       "book" : [ {

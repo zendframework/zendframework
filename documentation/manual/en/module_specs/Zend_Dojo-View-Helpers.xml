@@ -143,7 +143,7 @@
     <example id="zend.dojo.view.dijit.prefixpath">
         <title>Registering the Dojo View Helper Prefix Path</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
     </example>
@@ -178,7 +178,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     display that particular pane.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->accordionContainer(
     'foo',
     $content,
@@ -198,7 +198,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     For use within AccordionContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->accordionPane(
     'foo',
     $content,
@@ -220,7 +220,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     traditional application.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->borderContainer(
     'foo',
     $content,
@@ -240,7 +240,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     inside any container except AccordionContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->contentPane(
     'foo',
     $content,
@@ -262,7 +262,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     panes; deprecated in Dojo in favor of BorderContainer.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->splitContainer(
     'foo',
     $content,
@@ -286,7 +286,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     functionality to reveal one at a time.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->stackContainer(
     'foo',
     $content,
@@ -306,7 +306,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                     one side for switching between them.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->tabContainer(
     'foo',
     $content,
@@ -361,7 +361,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 layout effects.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $view->borderContainer()->captureStart('masterLayout',
                                        array('design' => 'headline'));
 
@@ -423,7 +423,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     form button.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->button(
     'foo',
     'Show Me!',
@@ -457,7 +457,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     are assumed.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 <?php echo $view->checkBox(
     'foo',
     'bar',
@@ -550,7 +550,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     </listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // As a select element:
 echo $view->comboBox(
     'foo',
@@ -591,7 +591,7 @@ echo $view->comboBox(
                     ValidationTextBox and TextBox.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->currencyTextBox(
     'foo',
     '$25.00',
@@ -612,7 +612,7 @@ echo $view->currencyTextBox(
                         character set to utf-8, which you can do by calling:
                     </para>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $view->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=utf-8');
 ]]></programlisting>
@@ -635,7 +635,7 @@ $view->headMeta()->appendHttpEquiv('Content-Type',
                     ValidationTextBox or TextBox.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->dateTextBox(
     'foo',
     '2008-07-11',
@@ -654,7 +654,7 @@ echo $view->dateTextBox(
                     dijit.Editor documentation</ulink> for more details.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->editor('foo');
 ]]></programlisting>
             </listitem>
@@ -777,7 +777,7 @@ echo $view->editor('foo');
                     </para></listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->horizontalSlider(
     'foo',
     1,
@@ -844,7 +844,7 @@ echo $view->horizontalSlider(
                     decrement.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->numberSpinner(
     'foo',
     5,
@@ -869,7 +869,7 @@ echo $view->numberSpinner(
                     against given constraints.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->numberTextBox(
     'foo',
     5,
@@ -893,7 +893,7 @@ echo $view->numberTextBox(
                     dijit theme, as well as allow for client-side validation.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->passwordTextBox(
     'foo',
     '',
@@ -922,7 +922,7 @@ echo $view->passwordTextBox(
                     the <code>$attribs</code> key <code>options</code>.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->radioButton(
     'foo',
     'bar',
@@ -946,7 +946,7 @@ echo $view->radioButton(
                     percentages for the width and height, instead.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->simpleTextarea(
     'foo',
     'Start writing here...',
@@ -973,7 +973,7 @@ echo $view->simpleTextarea(
                     width should be specified via a style setting.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->textarea(
     'foo',
     'Start writing here...',
@@ -1001,7 +1001,7 @@ echo $view->textarea(
                     may specifiy the parameters 'size' and 'maxLength'.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->textBox(
     'foo',
     'some text',
@@ -1027,7 +1027,7 @@ echo $view->textBox(
                     range of times available.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->timeTextBox(
     'foo',
     '',
@@ -1079,7 +1079,7 @@ echo $view->timeTextBox(
                     </para></listitem>
                 </itemizedlist>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 echo $view->validationTextBox(
     'foo',
     '',
@@ -1143,7 +1143,7 @@ echo $view->validationTextBox(
                 At its most basic, you can do the following:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php echo $this->customDijit(
     'foo',
     $content,
@@ -1161,7 +1161,7 @@ echo $view->validationTextBox(
                 the "params" argument:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php $this->customDijit()->captureStart(
     'foo',
     array(
@@ -1182,7 +1182,7 @@ This is the content of the pane
                 following helper to support it:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_View_Helper_FooContentPane
     extends Zend_Dojo_View_Helper_CustomDijit
 {

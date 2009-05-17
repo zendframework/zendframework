@@ -24,7 +24,7 @@
     <classname>Zend_Mime_Part</classname>, meta information can be set by accessing its
     attributes directly:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend_Mime::ENCODING_8BIT;
 public $id;

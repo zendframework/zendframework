@@ -13,7 +13,7 @@
     </para>
     <example id="zend.session.savehandler.dbtable.basic">
             <title>Basic Setup</title>
-            <programlisting role="SQL"><![CDATA[
+            <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
   `id` char(32),
   `modified` int,
@@ -22,7 +22,7 @@ CREATE TABLE `session` (
   PRIMARY KEY (`id`)
 );
 ]]></programlisting>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //get your database connection ready
 $db = Zend_Db::factory('Pdo_Mysql', array(
     'host'        =>'example.com',
@@ -58,7 +58,7 @@ Zend_Session::start();
     </para>
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>Using a Multi-Column Primary Key</title>
-        <programlisting role="SQL"><![CDATA[
+        <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
     `session_id` char(32) NOT NULL,
     `save_path` varchar(32) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE `session` (
     PRIMARY KEY (`Session_ID`, `save_path`, `name`)
 );
 ]]></programlisting>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //setup your DB connection like before
 //NOTE: this config is also passed to Zend_Db_Table so anything specific
 //to the table can be put in the config as well

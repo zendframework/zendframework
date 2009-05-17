@@ -7,7 +7,7 @@
         the particular page. <classname>Zend_Feed</classname> enables you to retrieve all feeds referenced by a web
         page with one simple method call:
     </para>
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
 ]]></programlisting>
     <para>

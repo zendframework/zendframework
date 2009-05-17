@@ -28,7 +28,7 @@
             <code>getHref()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Simple_Page extends Zend_Navigation_Page
 {
     public function getHref()
@@ -48,7 +48,7 @@ class My_Simple_Page extends Zend_Navigation_Page
             <code>setConfig()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Navigation_Page extends Zend_Navigation_Page
 {
     private $_foo;

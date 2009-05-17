@@ -59,7 +59,7 @@
         decorators, corresponding to the following:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $element->addDecorator('DijitElement')
         ->addDecorator('Errors')
         ->addDecorator('HtmlTag', array('tag' => 'dd'))
@@ -121,7 +121,7 @@ $element->addDecorator('DijitElement')
         <example id="zend.dojo.form.elements.button.example">
             <title>Example Button dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'Button',
     'foo',
@@ -178,7 +178,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.checkBox.example">
             <title>Example CheckBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'CheckBox',
     'foo',
@@ -291,7 +291,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.comboBox.selectExample">
             <title>ComboBox dijit element usage as select input</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'ComboBox',
     'foo',
@@ -315,7 +315,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.comboBox.datastoreExample">
             <title>ComboBox dijit element usage with datastore</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'ComboBox',
     'foo',
@@ -395,7 +395,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.currencyTextBox.example">
             <title>Example CurrencyTextBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'CurrencyTextBox',
     'foo',
@@ -470,7 +470,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.dateTextBox.example">
             <title>Example DateTextBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'DateTextBox',
     'foo',
@@ -632,7 +632,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.editor.example">
             <title>Example Editor dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement('editor', 'content', array(
     'plugins'            => array('undo', '|', 'bold', 'italic'),
     'editActionInterval' => 2,
@@ -732,7 +732,7 @@ $form->addElement('editor', 'content', array(
                 element storing the value will be updated.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'HorizontalSlider',
     'horizontal',
@@ -848,7 +848,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.numberSpinner.example">
             <title>Example NumberSpinner dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'NumberSpinner',
     'foo',
@@ -923,7 +923,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.numberTextBox.example">
             <title>Example NumberTextBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'NumberTextBox',
     'elevation',
@@ -961,7 +961,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.passwordTextBox.example">
             <title>Example PasswordTextBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'PasswordTextBox',
     'password',
@@ -1006,7 +1006,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.radioButton.example">
             <title>Example RadioButton dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'RadioButton',
     'foo',
@@ -1037,7 +1037,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.simpletextarea.example">
             <title>Example SimpleTextarea dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'SimpleTextarea',
     'simpletextarea',
@@ -1128,7 +1128,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.submitButton.example">
             <title>Example SubmitButton dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'SubmitButton',
     'foo',
@@ -1186,7 +1186,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.textBox.example">
             <title>Example TextBox dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'TextBox',
     'foo',
@@ -1215,7 +1215,7 @@ $form->addElement(
         <example id="zend.dojo.form.elements.textarea.example">
             <title>Example Textarea dijit element usage</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'Textarea',
     'textarea',
@@ -1286,7 +1286,7 @@ $form->addElement(
                 at a time, with increments of 10 minutes.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'TimeTextBox',
     'foo',
@@ -1365,7 +1365,7 @@ $form->addElement(
                 spaces, most punctuation is invalid).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'ValidationTextBox',
     'foo',
@@ -1404,7 +1404,7 @@ $form->addElement(
                 element storing the value will be updated.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'VerticalSlider',
     'foo',

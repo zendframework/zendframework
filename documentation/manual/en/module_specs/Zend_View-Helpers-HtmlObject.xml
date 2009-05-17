@@ -55,7 +55,7 @@
             The only required argument is the resource URI.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
 ]]></programlisting>
 
@@ -63,7 +63,7 @@
             This outputs the following HTML:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <object data="/path/to/flash.swf"
         type="application/x-shockwave-flash"
         classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
@@ -98,7 +98,7 @@
             content to the object. Now for an example which utilizes all arguments.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $this->htmlObject(
     '/path/to/file.ext',
     'mime/type',

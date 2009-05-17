@@ -41,7 +41,7 @@
     <example id="zend.log.writers.firebug.example.with_front_controller">
       <title>Logging with Zend_Controller_Front</title>
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 // Place this in your bootstrap file before dispatching your front controller
 $writer = new Zend_Log_Writer_Firebug();
 $logger = new Zend_Log($writer);
@@ -54,7 +54,7 @@ $logger->log('This is a log message!', Zend_Log::INFO);
     <example id="zend.log.writers.firebug.example.without_front_controller">
       <title>Logging without Zend_Controller_Front</title>
 
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Firebug();
 $logger = new Zend_Log($writer);
 
@@ -84,7 +84,7 @@ $response->sendHeaders();
       <para>
         Built-in and user-defined priorities can be styled with the <code>setPriorityStyle()</code> method.
       </para>
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
 $writer->setPriorityStyle(8, 'TRACE');
 $logger->foo('Foo Message');
@@ -92,7 +92,7 @@ $logger->foo('Foo Message');
       <para>
         The default style for user-defined priorities can be set with the <code>setDefaultPriorityStyle()</code> method.
       </para>
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer->setDefaultPriorityStyle('TRACE');
 ]]></programlisting>
       <para>
@@ -164,7 +164,7 @@ $writer->setDefaultPriorityStyle('TRACE');
         It does not matter which priority or style you have set as the exception is automatically
         recognized.
       </para>
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $exception = new Zend_Exception('Test exception');
 $logger->err($exception);
 ]]></programlisting>
@@ -178,7 +178,7 @@ $logger->err($exception);
         You can also log data and format it in a table style. Columns are automatically recognized and
         the first row of data automatically becomes the header.
       </para>
-      <programlisting role="php"><![CDATA[
+      <programlisting language="php"><![CDATA[
 $writer->setPriorityStyle(8, 'TABLE');
 $logger->addPriority('TABLE', 8);
 

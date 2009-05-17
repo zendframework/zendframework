@@ -38,7 +38,7 @@
                 and createTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
 ]]></programlisting>
@@ -55,7 +55,7 @@ $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
                 the new Volume which includes the volumeId, size, zone, status, createTime and snapshotId.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 ]]></programlisting>
@@ -72,7 +72,7 @@ $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
                 and progress.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->createSnapshot('volumeId');
 ]]></programlisting>
@@ -98,7 +98,7 @@ $return = $ec2_ebs->createSnapshot('volumeId');
                 device, status and attachTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeVolume('volumeId');
 ]]></programlisting>
@@ -115,7 +115,7 @@ $return = $ec2_ebs->describeVolume('volumeId');
                 but only for the EBS Volumes that are currently attached to the specified instanceId.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeAttachedVolumes('instanceId');
 ]]></programlisting>
@@ -135,7 +135,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
                 which includes the snapshotId, volumeId, status, startTime and progress.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->describeSnapshot('volumeId');
 ]]></programlisting>
@@ -158,7 +158,7 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
                 attachTime
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
 ]]></programlisting>
@@ -178,7 +178,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
                 the EBS Volume which includes volumeId, instanceId, device, status and attachTime.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->detachVolume('volumeId');
 ]]></programlisting>
@@ -209,7 +209,7 @@ $return = $ec2_ebs->detachVolume('volumeId');
                 <code>deleteVolume</code> will return boolean true or false.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteVolume('volumeId');
 ]]></programlisting>
@@ -224,7 +224,7 @@ $return = $ec2_ebs->deleteVolume('volumeId');
                 <code>deleteSnapshot</code> returns booleen true or false.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->deleteSnapshot('snapshotId');
 ]]></programlisting>

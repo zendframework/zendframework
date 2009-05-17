@@ -18,7 +18,7 @@
     <para>
         A basic example of usage is below:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname();
 if ($validator->isValid($hostname)) {
     // hostname appears to be valid
@@ -51,7 +51,7 @@ if ($validator->isValid($hostname)) {
         hostnames, <code>ALLOW_IP</code> to allow IP addresses, <code>ALLOW_LOCAL</code> to allow
         local network names, and <code>ALLOW_ALL</code> to allow all three types. To just check for
         IP addresses you can use the example below:
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
     // hostname appears to be valid
@@ -68,7 +68,7 @@ if ($validator->isValid($hostname)) {
         As well as using <code>ALLOW_ALL</code> to accept all hostnames types you can combine
         these types to allow for combinations. For example, to accept DNS and Local hostnames
         instantiate your Zend_Validate_Hostname object as so:
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting>
@@ -129,7 +129,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
         You can disable IDN validation by passing a second parameter to the Zend_Validate_Hostname
         constructor in the following way.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
 ]]></programlisting>
@@ -157,7 +157,7 @@ $validator =
         disable TLD validation by passing a third parameter to the Zend_Validate_Hostname
         constructor. In the example below we are supporting IDN validation via the second parameter.
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
                                true,

@@ -18,7 +18,7 @@
         server side then returns data in the following JSON format:
     </para>
 
-    <programlisting role="javascript"><![CDATA[
+    <programlisting language="javascript"><![CDATA[
 {
     identifier: '<name>',
     <label: '<label>',>
@@ -47,7 +47,7 @@
         <example id="zend.dojo.data.usage.constructor">
             <title>Zend_Dojo_Data initialization via constructor</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data('id', $items);
 ]]></programlisting>
         </example>
@@ -55,7 +55,7 @@ $data = new Zend_Dojo_Data('id', $items);
         <example id="zend.dojo.data.usage.mutators">
             <title>Zend_Dojo_Data initialization via mutators</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data();
 $data->setIdentifier('id')
      ->addItems($items);
@@ -70,7 +70,7 @@ $data->setIdentifier('id')
         <example id="zend.dojo.data.usage.append">
             <title>Appending data to Zend_Dojo_Data</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
 $data->addItem($someItem);
 
@@ -133,7 +133,7 @@ $data->addItems($someMoreItems);
         <example id="zend.dojo.data.usage.label">
             <title>Specifying a label field in Zend_Dojo_Data</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data->setLabel('name');
 ]]></programlisting>
         </example>
@@ -146,7 +146,7 @@ $data->setLabel('name');
         <example id="zend.dojo.data.usage.populate">
             <title>Populating Zend_Dojo_Data from JSON</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data->fromJson($json);
 ]]></programlisting>
         </example>
@@ -174,7 +174,7 @@ $data->fromJson($json);
             to the object. The following illustrates usage:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Set the "numRows" to 100
 $data->setMetadata('numRows', 100);
 
@@ -221,7 +221,7 @@ $data->clearMetadata();
             <code>getItem()</code> method, or via array notation.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Using getItem():
 $item = $data->getItem('foo');
 
@@ -234,7 +234,7 @@ $item = $data['foo'];
             update it, delete it, create it, or test for it:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Update or create an item:
 $data['foo'] = array('title' => 'Foo', 'email' => 'foo@foo.com');
 
@@ -251,7 +251,7 @@ if (isset($data[foo])) {
             stored as arrays.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 foreach ($data as $item) {
     echo $item['title'] . ': ' . $item['description'] . "\n";
 }
@@ -261,7 +261,7 @@ foreach ($data as $item) {
             Or even count to see how many items you have:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo count($data), " items found!";
 ]]></programlisting>
 
@@ -270,7 +270,7 @@ echo count($data), " items found!";
             also cast it to JSON simply by echoing it or casting to string:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $data; // echo as JSON string
 
 $json = (string) $data; // cast to string == cast to JSON

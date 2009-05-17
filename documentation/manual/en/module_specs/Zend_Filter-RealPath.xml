@@ -18,7 +18,7 @@
         <constant>FALSE</constant>.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath();
 $path   = '/www/var/path/../../mypath';
 $filtered = $filter->filter();
@@ -33,7 +33,7 @@ $filtered = $filter->filter();
         set it.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_RealPath(false);
 $path   = '/www/var/path/../../non/existing/path';
 $filtered = $filter->filter();

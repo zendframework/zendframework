@@ -10,7 +10,7 @@
         <classname>Zend_Filter</classname> provides a simple method by which filters may be chained together. The
         following code illustrates how to chain together two filters for the submitted username:
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <// Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())

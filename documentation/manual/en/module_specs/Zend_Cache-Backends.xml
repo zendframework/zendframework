@@ -302,7 +302,7 @@
             -- between the words 'Zend' and 'Platform' when using the
             <classname>Zend_Cache::factory()</classname> method:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
 ]]></programlisting>
         <para>

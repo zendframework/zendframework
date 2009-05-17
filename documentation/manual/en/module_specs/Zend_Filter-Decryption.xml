@@ -31,7 +31,7 @@
             As soon as you have provided all options decryption is as simple as encryption.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use the default blowfish settings
 $filter = new Zend_Filter_Decrypt('myencryptionkey');
 
@@ -86,7 +86,7 @@ print $decrypted;
             </listitem>
         </itemizedlist>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -111,7 +111,7 @@ $filter->setEnvelopeKey(array(
             using the <code>setPassphrase()</code> method.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',
@@ -131,7 +131,7 @@ $filter->setPassphrase('mypassphrase');
             content looks like this.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Use openssl and provide a private key
 $filter = new Zend_Filter_Decrypt(array(
     'adapter' => 'openssl',

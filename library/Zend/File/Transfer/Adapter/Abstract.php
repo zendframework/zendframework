@@ -1185,7 +1185,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      *
      * @param string|array $files Files to get the mimetype from
      * @throws Zend_File_Transfer_Exception When the file does not exist
-     * @return string|array Filesize
+     * @return string|array MimeType
      */
     public function getMimeType($files = null)
     {

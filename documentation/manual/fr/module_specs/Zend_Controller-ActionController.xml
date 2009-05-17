@@ -26,7 +26,7 @@
 
         <para>Par exemple, considérons une classe définie comme ceci&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -64,7 +64,7 @@ class FooController extends Zend_Controller_Action
                 contrôleurs, ainsi que du rendu de cette vue. Vous pouvez la désactiver au sein de
                 vos contrôleurs par l'une ou l'autre des actions suivantes&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -94,7 +94,7 @@ class FooController extends Zend_Controller_Action
                 Vous pouvez simplement désactiver le rendu pour une vue individuelle grâce à
                 la méthode <code>noRender()</code> du <code>ViewRenderer</code>&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -136,7 +136,7 @@ class FooController extends Zend_Controller_Action
             données à l'instanciation&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -187,7 +187,7 @@ class FooController extends Zend_Controller_Action
                     utilisé pour récupérer l'objet de réponse assemblant la réponse finale.
                     Quelques appels typiques peuvent ressembler à ceci :
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->getResponse()->setHeader('Content-Type', 'text/xml');
 $this->getResponse()->appendBody($content);
 ]]></programlisting>
@@ -221,7 +221,7 @@ $this->getResponse()->appendBody($content);
                         ou qu'il est vide. Utiliser ceci élimine la nécessité d'appeler
                         <code>_hasParam()</code> avant de récupérer une valeur&#160;:
                     </para>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Utilise une valeur par défaut de 1 si id n'est pas réglé
 $id = $this->_getParam('id', 1);
 
@@ -278,7 +278,7 @@ if ($this->_hasParam('id') {
                 La mise en oeuvre par défaut suppose la structure de répertoire suivante&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 applicationOrModule/
     controllers/
         IndexController.php
@@ -307,7 +307,7 @@ applicationOrModule/
 
             <para><code>render()</code> a la signature suivante&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 string render(string $action = null,
               string $name = null,
               bool $noController = false);
@@ -343,7 +343,7 @@ string render(string $action = null,
 
             <para>Quelques exemples :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MonController extends Zend_Controller_Action
 {
     public function fooAction()
@@ -489,7 +489,7 @@ class MonController extends Zend_Controller_Action
                 vous pouvez écrire quelque chose comme ceci&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MonController extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -512,7 +512,7 @@ class MonController extends Zend_Controller_Action
                 défaut&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -545,7 +545,7 @@ class MyController extends Zend_Controller_Action
             code comme celui-ci&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Ma_Base_Controller extends Zend_Controller_Action
 {
     public function initView()

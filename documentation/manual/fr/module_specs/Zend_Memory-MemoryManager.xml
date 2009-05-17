@@ -23,7 +23,7 @@
             les options du backend.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $backendOptions = array(
     'cache_dir' => './tmp/'
     // Dossier où les blocks de mémoire peuvent être stockés
@@ -39,7 +39,7 @@ $memoryManager = Zend_Memory::factory('File', $backendOptions);
 
         <para>
             Vous pouvez de plus utiliser le nom spécial '<code>None</code>' en tant que nom de
-            backend supplémentaire de Zend_Cache. <programlisting role="php"><![CDATA[
+            backend supplémentaire de Zend_Cache. <programlisting language="php"><![CDATA[
 $memoryManager = Zend_Memory::factory('None');
 ]]></programlisting></para>
 
@@ -66,7 +66,7 @@ $memoryManager = Zend_Memory::factory('None');
             <para>
                 Créer des objets mobiles (objets qui peuvent être mis en cache) en utilisant
                 la méthode <classname>Zend_Memory_Manager::create([$data])</classname> :
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting></para>
 
@@ -100,7 +100,7 @@ $memObject = $memoryManager->createLocked($data);
 
             <para>
                 Les objets mémoire sont automatiquement détruits et effacés de la mémoire
-                quand ils sont hors de portée : <programlisting role="php"><![CDATA[
+                quand ils sont hors de portée : <programlisting language="php"><![CDATA[
 function foo()
 {
     global $memoryManager, $memList;
@@ -150,7 +150,7 @@ function foo()
             <para>
                 Vous pouvez récupérer et régler la mémoire limite en utilisant les méthodes
                 <code>getMemoryLimit()</code> et <code>setMemoryLimit($newLimit)</code> :
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit();
 // Récupére la mémoire limite en octets
 $memoryManager->setMemoryLimit($newLimit);

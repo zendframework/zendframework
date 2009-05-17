@@ -32,7 +32,7 @@
             Cet exemple montre comment créer une liste de tags en pondérant chacun d'eux.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crée la liste
 $list = new Zend_Tag_ItemList();
 

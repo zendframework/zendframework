@@ -47,7 +47,7 @@
                 ajoutez ces paramètres au fichier INI en question:
             </para>
 
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 ; Paramètres de production
 [production]
 ; bug_compat_42
@@ -92,7 +92,7 @@ remember_me_seconds = 864000
                 tableau à <classname>Zend_Session::setOptions()</classname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('myapp.ini', 'development');
 
 require_once 'Zend/Session.php';
@@ -373,7 +373,7 @@ Zend_Session::setOptions($config->toArray());
             <example id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example">
                 <title>Vol et fixation, protections</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace();
 
 if (!isset($defaultNamespace->initialized)) {

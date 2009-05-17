@@ -16,7 +16,7 @@
         par expressions régulières&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -33,7 +33,7 @@ $router->addRoute('archive', $route);
         résultat devrait ressembler à&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     1            => '2006',
     'controller' => 'archive',
@@ -69,7 +69,7 @@ $values = array(
 
     <para>Vous pouvez retourner le contenu des sous-masques&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function showAction()
 {
     $request = $this->getRequest();
@@ -89,7 +89,7 @@ public function showAction()
         traiter ce slash, mais sans le capturer&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive(?:/(\d+))?',
     array(
@@ -108,7 +108,7 @@ $router->addRoute('archive', $route);
         tableau faisant correspondre les numéros des paramètres et leur nom respectif&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array(
@@ -124,7 +124,7 @@ $router->addRoute('archive', $route);
 
     <para>Les valeurs suivantes seront injectées dans l'objet de requête&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     'controller' => 'archive',
@@ -134,7 +134,7 @@ $values = array(
 
     <para>Il est aussi possible d'inverser les clé et valeurs du tableau&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -160,7 +160,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         pouvez évidemment mixer les comportements&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)/page/(\d+)',
     array( ... ),
@@ -173,7 +173,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         route définie ci-dessus, les paramètres trouvés seront&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'year'       => '2006',
     2            => 10,
@@ -190,7 +190,7 @@ $values = array(
         route Regex&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',
     array( ... ),
@@ -208,7 +208,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         route standard. En revanche, avec la route Regex, vous pouvez écrire&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'blog/archive/(\d+)-(.+)\.html',
     array(

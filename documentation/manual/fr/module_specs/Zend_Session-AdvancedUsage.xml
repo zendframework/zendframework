@@ -23,7 +23,7 @@
         <example id="zend.session.advanced_usage.starting_a_session.example">
             <title>Démarrer la session globale</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Session::start();
 ]]></programlisting>
         </example>
@@ -51,7 +51,7 @@ Zend_Session::start();
                     php.ini, ou que vous utilisez mod_php (ou équivalent), et que le réglage est
                     déjà activé dans le <code>php.ini</code>, alors ajoutez le code suivant à votre
                     fichier <code>.htaccess</code> (habituellement votre dossier de démarrage HTML)
-                    : <programlisting role="httpd.conf"><![CDATA[
+                    : <programlisting language="httpd.conf"><![CDATA[
 php_value session.auto_start 0
 ]]></programlisting></para>
                 </listitem>
@@ -165,7 +165,7 @@ php_value session.auto_start 0
         <example id="zend.session.advanced_usage.locking.example.basic">
             <title>Verrouillage des espaces de noms de session</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $userProfileNamespace =
     new Zend_Session_Namespace('userProfileNamespace');
 
@@ -196,7 +196,7 @@ if ($userProfileNamespace->isLocked()) {
         <example id="zend.session.advanced_usage.expiration.example">
             <title>Exemple d'expiration</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $s = new Zend_Session_Namespace('expireAll');
 $s->a = 'apple';
 $s->p = 'pear';
@@ -246,7 +246,7 @@ $s->setExpirationSeconds(60);
                 secondes pour répondre à la question affichée.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $testSpace = new Zend_Session_Namespace('testSpace');
 $testSpace->setExpirationSeconds(300, 'accept_answer');
 // expire seulement cette variable
@@ -259,7 +259,7 @@ $testSpace->accept_answer = true;
                 l'utilisateur a répondu dans le temps alloué :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // contrôleur analysant la réponse
 $testSpace = new Zend_Session_Namespace('testSpace');
 if ($testSpace->accept_answer === true) {
@@ -293,7 +293,7 @@ else {
         <example id="zend.session.advanced_usage.single_instance.example">
             <title>Limiter l'accès à un espace de noms à une instance unique</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // créer une instance d'espace
 $authSpaceAccessor1 = new Zend_Session_Namespace('Zend_Auth');
 
@@ -349,7 +349,7 @@ try {
 
             <para>Le code suivant illustre le problème qui peut être reproduit :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 $sessionNamespace->array = array();
 $sessionNamespace->array['testKey'] = 1;
@@ -367,7 +367,7 @@ echo $sessionNamespace->array['testKey'];
                 définies :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
 ]]></programlisting>
@@ -388,7 +388,7 @@ $sessionNamespace->array = array('a', 'b', 'c');
                 original.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $sessionNamespace = new Zend_Session_Namespace();
 
 // assigne le tableau initial
@@ -415,7 +415,7 @@ echo $sessionNamespace->array['fruit']; // affiche "poire"
                 accéder indirectement.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $myNamespace = new Zend_Session_Namespace('myNamespace');
 $a = array(1, 2, 3);
 $myNamespace->someArray = array( &$a );
@@ -475,7 +475,7 @@ echo $myNamespace->someArray['foo']; // affiche "bar"
         <example id="zend.session.advanced_usage.testing.example">
             <title>Utilisation de PHPUnit pour tester le code écrit avec Zend_Session*</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // tester setExpirationSeconds()
 require 'tests/Zend/Session/SessionTestHelper.php';
 // voir aussi SessionTest.php dans trunk/

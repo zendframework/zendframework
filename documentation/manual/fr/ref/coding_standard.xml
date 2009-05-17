@@ -171,7 +171,7 @@
             <para>
                 Tout fichier contenant du code PHP doit se terminer par l'extension ".php".
                 Ces exemples montrent des noms de fichiers acceptables pour contenir les noms de
-                classes issus des exemples ci-dessus : <programlisting role="php"><![CDATA[
+                classes issus des exemples ci-dessus : <programlisting language="php"><![CDATA[
 Zend/Db.php
 
 Zend/Controller/Front.php
@@ -302,7 +302,7 @@ widgetFactory()
 
             <para>
                 Les codes PHP doivent toujours être délimités dans la forme complète, par les
-                balises PHP standards : <programlisting role="php"><![CDATA[
+                balises PHP standards : <programlisting language="php"><![CDATA[
 <?php
 
 ?>
@@ -325,7 +325,7 @@ widgetFactory()
                 <para>
                     Lorsqu'une chaîne est littérale (c'est-à-dire qu'elle ne contient pas de
                     substitution de variables), l'apostrophe ou guillemet simple doit être utilisé
-                    pour démarquer la chaîne : <programlisting role="php"><![CDATA[
+                    pour démarquer la chaîne : <programlisting language="php"><![CDATA[
 $a = 'Exemple de chaîne de caractères';
 ]]></programlisting>
                 </para>
@@ -338,7 +338,7 @@ $a = 'Exemple de chaîne de caractères';
                     Lorsque qu'une chaîne littérale contient des apostrophes, il est permis de
                     les démarquer en utilisant les guillemets doubles. Ceci est particulièrement
                     conseillé pour les requêtes SQL :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` "
      . "WHERE `name`='Eric' OR `name`='Caroline'";
 ]]></programlisting>
@@ -352,7 +352,7 @@ $sql = "SELECT `id`, `name` from `people` "
 
                 <para>
                     La substitution des variables est permise en utilisant une de ces deux
-                    formes : <programlisting role="php"><![CDATA[
+                    formes : <programlisting language="php"><![CDATA[
 $greeting = "Bonjour $name, bienvenue !";
 
 $greeting = "Bonjour {$name}, bienvenue !";
@@ -361,7 +361,7 @@ $greeting = "Bonjour {$name}, bienvenue !";
 
                 <para>
                     Pour des raisons d'uniformité, cette forme n'est pas permise :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $greeting = "Bonjour ${name}, bienvenue !";
 ]]></programlisting>
                 </para>
@@ -373,7 +373,7 @@ $greeting = "Bonjour ${name}, bienvenue !";
                 <para>
                     Les chaînes peuvent êtres concaténées en utilisant l'opérateur ".". Un
                     espace doit toujours être ajouté avant, et après cet opérateur, cela permet
-                    d'améliorer la lisibilité : <programlisting role="php"><![CDATA[
+                    d'améliorer la lisibilité : <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
                 </para>
@@ -382,7 +382,7 @@ $company = 'Zend' . ' ' . 'Technologies';
                     Lors de la concaténation de chaînes avec l'opérateur ".", il est permis de
                     couper le segment en plusieurs lignes pour améliorer la lisibilité. Dans ces
                     cas, chaque nouvelle ligne doit être remplie avec des espaces, de façon à
-                    aligner le "." sous l'opérateur "=" : <programlisting role="php"><![CDATA[
+                    aligner le "." sous l'opérateur "=" : <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Caroline' "
      . "ORDER BY `name` ASC ";
@@ -408,7 +408,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                 <para>
                     Lors de la déclaration de tableaux indexés avec la construction
                     <code>array</code>, un espace doit être ajouté après chaque virgule délimitante,
-                    pour améliorer la lisibilité : <programlisting role="php"><![CDATA[
+                    pour améliorer la lisibilité : <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
                 </para>
@@ -418,7 +418,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     en utilisant la construction <code>array</code>. Dans ce cas, chaque nouvelle
                     ligne doit être remplie par des espaces jusqu'à ce que cette ligne s'aligne,
                     comme il est montré dans l'exemple suivant :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
                      56.44, $d, 500);
@@ -539,7 +539,7 @@ class SampleClass
 
                 <para>
                     Voici un exemple d'une déclaration permise d'une fonction de classe :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /*
  * Bloc de documentation
  */
@@ -559,7 +559,7 @@ class Foo
 
                 <para>
                     <emphasis>NOTE :</emphasis> Le passage par référence est permis uniquement
-                    dans la déclaration de la fonction : <programlisting role="php"><![CDATA[
+                    dans la déclaration de la fonction : <programlisting language="php"><![CDATA[
 /**
  * Bloc de documentation
  */
@@ -579,7 +579,7 @@ class Foo
                 <para>
                     La valeur de retour ne doit pas être entourée de parenthèses. Ceci peut
                     gêner à la lecture et peut aussi casser le code si une méthode est modifiée plus
-                    tard pour retourner par référence. <programlisting role="php"><![CDATA[
+                    tard pour retourner par référence. <programlisting language="php"><![CDATA[
 /**
  * Bloc de documentation
  */
@@ -611,7 +611,7 @@ class Foo
                 <para>
                     Les arguments d'une fonction sont séparés par un espace après la virgule
                     de délimitation. Voici un exemple d'un appel de fonction qui prend trois
-                    arguments : <programlisting role="php"><![CDATA[
+                    arguments : <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
                 </para>
@@ -626,7 +626,7 @@ threeArguments(1, 2, 3);
                     Pour les fonctions dont les arguments peuvent être des tableaux, l'appel à
                     la fonction doit inclure la construction "array" et peut être divisé en
                     plusieurs ligne pour améliorer la lecture. Dans ces cas, les standards
-                    d'écriture de tableaux s'appliquent aussi : <programlisting role="php"><![CDATA[
+                    d'écriture de tableaux s'appliquent aussi : <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
 
 threeArguments(array(1, 2, 3, 'Zend', 'Studio',
@@ -660,7 +660,7 @@ threeArguments(array(1, 2, 3, 'Zend', 'Studio',
                     L'accolade ouvrante est écrite sur la même ligne que la condition.
                     L'accolade fermante est toujours écrite sur sa propre ligne. Tout contenu
                     présent à l'intérieur des accolades doit être indenté par 4 espaces.
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
@@ -671,7 +671,7 @@ if ($a != 2) {
                     Pour les instruction "if" qui incluent "elseif" ou "else", les conventions
                     de formatage sont similaires à celles de la construction "if". Les exemples
                     suivants montrent le formatage approprié pour les structures "if" avec "else"
-                    et/ou les constructions "elseif" : <programlisting role="php"><![CDATA[
+                    et/ou les constructions "elseif" : <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 } else {
@@ -713,7 +713,7 @@ if ($a != 2) {
                     espaces supplémentaires.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 switch ($numPeople) {
     case 1:
         break;
@@ -769,7 +769,7 @@ switch ($numPeople) {
                 <para>
                     Chaque fichier qui contient du code PHP doit avoir un bloc d'entête en
                     haut du fichier qui contient au minimum ces balises phpDocumentor :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 /**
  * Description courte du fichier
  *
@@ -792,7 +792,7 @@ switch ($numPeople) {
 
                 <para>
                     Chaque classe doit avoir un docblock qui contient au minimum ces balises
-                    phpDocumentor : <programlisting role="php"><![CDATA[
+                    phpDocumentor : <programlisting language="php"><![CDATA[
 /**
  * Description courte de la classe
  *
@@ -837,7 +837,7 @@ switch ($numPeople) {
 
                 <para>
                     Si une fonction/méthode peut lancer une exception, utilisez "@throws" :
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]
 ]]></programlisting>
                 </para>

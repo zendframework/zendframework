@@ -52,7 +52,7 @@
                     registre à la clé "Zend_Translate"&#160;:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // utilisez la clé registre 'Zend_Translate' ;
 // $translate est un objet Zend_Translate :
 Zend_Registry::set('Zend_Translate', $translate);
@@ -72,7 +72,7 @@ Zend_Registry::set('Zend_Translate', $translate);
                     <classname>Zend_Validate_Abstract</classname>&#160;:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Indique aux classes de validation d'utiliser
 // un objet de traduction spécifique :
 Zend_Validate_Abstract::setDefaultTranslator($translate);
@@ -87,7 +87,7 @@ Zend_Validate_Abstract::setDefaultTranslator($translate);
                     validation&#160;:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Indique à toutes les classes de formulaire d'utiliser un objet de traduction
 // Indique aussi aux validateurs d'utiliser ce même objet pour traduire
 // les messages d'erreur :
@@ -102,7 +102,7 @@ Zend_Form::setDefaultTranslator($translate);
                     <code>setTranslator()</code>&#160;:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Indique à *cette* instance de formulaire, d'utiliser un objet de
 // traduction. L'objet de traduction sera aussi utilisé par tous les
 // validateurs pour traduire les messages d'erreur :

@@ -9,7 +9,7 @@
         en passant l'URL du flux&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
 ]]></programlisting>
 
@@ -23,7 +23,7 @@ $canal = new Zend_Feed_Rss('http://rss.exemple.com/nomDuCanal');
         RSS standard du canal, et ce directement à partir de l'objet&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $canal->title();
 ]]></programlisting>
 
@@ -41,7 +41,7 @@ echo $canal->title();
         l'indexage PHP&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 echo $canal->category['domain'];
 ]]></programlisting>
 
@@ -58,7 +58,7 @@ echo $canal->category['domain'];
         les articles du canal&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 foreach ($canal as $element) {
     echo $element->title() . "\n";
 }
@@ -172,7 +172,7 @@ foreach ($canal as $element) {
         test suivant&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 if ($element->nomPropriete()) {
     // ... traitement
 }

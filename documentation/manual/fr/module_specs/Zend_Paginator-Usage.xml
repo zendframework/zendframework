@@ -87,7 +87,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
 ]]></programlisting></para>
 
@@ -97,7 +97,7 @@ $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_Array($array));
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($array);
 ]]></programlisting></para>
 
@@ -115,7 +115,7 @@ $paginator = Zend_Paginator::factory($array);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($page);
 ]]></programlisting></para>
 
@@ -132,7 +132,7 @@ $paginator->setCurrentPageNumber($page);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 routes.example.route = articles/:articleName/:page
 routes.example.defaults.controller = articles
 routes.example.defaults.action = view
@@ -147,7 +147,7 @@ routes.example.reqs.page = \d+
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator->setCurrentPageNumber($this->_getParam('page'));
 ]]></programlisting></para>
 
@@ -164,7 +164,7 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
 ]]></programlisting></para>
         </sect2>
@@ -185,7 +185,7 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <html>
 <body>
 <h1>Example</h1>
@@ -291,7 +291,7 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Paginator::setDefaultScrollingStyle('Sliding');
 Zend_View_Helper_PaginationControl::setDefaultViewPartial(
     'my_pagination_control.phtml'
@@ -305,7 +305,7 @@ $paginator->setView($view);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php echo $this->paginator; ?>
 ]]></programlisting></para>
 
@@ -316,7 +316,7 @@ $paginator->setView($view);
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $smarty->assign('pages', $paginator->getPages());
 ]]></programlisting></para>
 
@@ -326,7 +326,7 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 {$pages.pageCount}
 ]]></programlisting></para>
             </note>
@@ -340,7 +340,7 @@ $smarty->assign('pages', $paginator->getPages());
             </para>
 
             <para>
-                Pagination de recherche :<programlisting role="php"><![CDATA[
+                Pagination de recherche :<programlisting language="php"><![CDATA[
 <!--
 Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 -->
@@ -380,7 +380,7 @@ Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 ]]></programlisting></para>
 
             <para>
-                Pagination d'objets :<programlisting role="php"><![CDATA[
+                Pagination d'objets :<programlisting language="php"><![CDATA[
 <!--
 Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 -->
@@ -429,7 +429,7 @@ of <?= $this->totalItemCount; ?>
 ]]></programlisting></para>
 
             <para>
-                Pagination Dropdown :<programlisting role="php"><![CDATA[
+                Pagination Dropdown :<programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
 <select id="paginationControl" size="1">
 <?php foreach ($this->pagesInRange as $page): ?>

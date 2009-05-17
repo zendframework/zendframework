@@ -38,7 +38,7 @@
             "staff".
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Le nouveau groupe Marketing hérite des permissions de Staff
 $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
@@ -49,7 +49,7 @@ $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
             ces Ressources&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Créer les Ressources pour les règles
 
 // newsletter
@@ -70,7 +70,7 @@ $acl->add(new Zend_Acl_Resource('announcement'), 'news');
             parties cibles de l'ACL&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Le Marketing doit être capable de publier
 // et d'archiver les newsletters et les dernières news
 $acl->allow('marketing',
@@ -90,7 +90,7 @@ $acl->deny(null, 'annonce', 'archive');
             On peut maintenant interroger les ACL sur base des dernières modifications&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
      "autorisé" : "refusé"; // refusé
 
@@ -128,7 +128,7 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
             et/ou privilèges.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Retire l'interdiction de relire les dernières news au Staff
 // (et au marketing, par héritage)
 $acl->removeDeny('staff', 'latest', 'relire');
@@ -155,7 +155,7 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
             incrémentielles.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // donne au groupe Marketing toutes les permissions
 // sur les dernières nouvelles
 $acl->allow('marketing', 'latest');

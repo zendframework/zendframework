@@ -16,7 +16,7 @@
     <example id="zend.mail.attachments.example-1">
         <title>Émail avec fichiers joints</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // construction du message
 $mail->createAttachment($uneChaineBinaire);
@@ -31,7 +31,7 @@ $mail->createAttachment($monImage,
         Si vous voulez contrôler la partie MIME générée pour un fichier joint, vous pouvez
         utiliser la valeur retournée de <code>createAttachment()</code> pour modifier ses attributs.
         La méthodes <code>createAttachment()</code> retourne un objet de type
-        <classname>Zend_Mime_Part</classname> : <programlisting role="php"><![CDATA[
+        <classname>Zend_Mime_Part</classname> : <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = $mail->createAttachment($monImage);
@@ -49,7 +49,7 @@ $mail->send();
         <code>addAttachment()</code> :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 
 $at = new Zend_Mime_Part($monImage);

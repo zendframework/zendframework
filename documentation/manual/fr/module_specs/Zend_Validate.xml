@@ -117,7 +117,7 @@ if ($validator->isValid($email)) {
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8);
 
 $validator->setMessage(
@@ -137,7 +137,7 @@ if (!$validator->isValid('word')) {
         <para>
             Vous pouvez régler des messages multiples en utilisant la méthode
             <code>setMessages()</code>. Son argument dans ce cas est un tableau de paires
-            clé/message. <programlisting role="php"><![CDATA[
+            clé/message. <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 
 $validator->setMessages( array(
@@ -182,7 +182,7 @@ if (!validator->isValid('word')) {
             base de la classe de validation, relativement dans l'espace de noms
             <classname>Zend_Validate</classname>. La méthode <code>is()</code> charge
             automatiquement la classe, crée une instance et applique la méthode
-            <code>isValid()</code> à la donnée d'entrée. <programlisting role="php"><![CDATA[
+            <code>isValid()</code> à la donnée d'entrée. <programlisting language="php"><![CDATA[
 if (Zend_Validate::is($email, 'EmailAddress')) {
     // l'email est valide
 }
@@ -228,7 +228,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             <code>getTranslator()</code> method returns the set translator instance.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 $translate = new Zend_Translate(
     'array',
@@ -247,7 +247,7 @@ $validator->setTranslator($translate);
             and simplifies your code.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -270,7 +270,7 @@ Zend_Validate::setDefaultTranslator($translate);
             to get the set value.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();

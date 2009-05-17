@@ -30,7 +30,7 @@
             "library" sont dans l'include_path :
         </para>
 
-        <programlisting role="txt"><![CDATA[
+        <programlisting language="txt"><![CDATA[
 application/
     modules/
         foo/
@@ -56,7 +56,7 @@ library/
             d'aides de vue :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $loader = new Zend_Loader_PluginLoader();
 $loader->addPrefixPath('Zend_View_Helper',
                        'Zend/View/Helper/')
@@ -71,7 +71,7 @@ $loader->addPrefixPath('Zend_View_Helper',
             sa classe :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // charge l'aide 'FormText' :
 $formTextClass = $loader->load('FormText');
 // 'Zend_View_Helper_FormText'
@@ -106,7 +106,7 @@ $formSubmitClass = $loader->load('FormSubmit');
                 -- plusieurs dossiers par préfixe :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $loader = new Zend_Loader_PluginLoader(array(
     'Zend_View_Helper' => 'Zend/View/Helper/',
     'Foo_View_Helper'  => 'application/modules/foo/views/helpers',
@@ -120,7 +120,7 @@ $loader = new Zend_Loader_PluginLoader(array(
             des plugins grâce au registre. Indiquez le nom du registre de cette manière :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Stocke les plugins dans le registre à l'index 'foobar':
 $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
 ]]></programlisting>
@@ -182,7 +182,7 @@ $loader = new Zend_Loader_PluginLoader(array(), 'foobar');
             conjonction avec <code>isLoaded()</code>, vous pouvez écrire par exemple ceci :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($loader->isLoaded('Adapter')) {
     $class   = $loader->getClassName('Adapter');
     $adapter = call_user_func(array($class, 'getInstance'));
@@ -220,7 +220,7 @@ if ($loader->isLoaded('Adapter')) {
                 le code suivant dans votre fichier d'initialisation :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $classFileIncCache = APPLICATION_PATH .  '/../data/pluginLoaderCache.php';
 if (file_exists($classFileIncCache)) {
     include_once $classFileIncCache;
@@ -240,7 +240,7 @@ Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
                 non si le chargeur de plugins doit mettre les informations en cache.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $classFileIncCache = APPLICATION_PATH .  '/../data/pluginLoaderCache.php';
 if (file_exists($classFileIncCache)) {
     include_once $classFileIncCache;

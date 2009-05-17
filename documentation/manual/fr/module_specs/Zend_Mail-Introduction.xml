@@ -25,7 +25,7 @@
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Ceci est le texte du message.');
 $mail->setFrom('somebody@example.com', 'un expéditeur');
@@ -66,7 +66,7 @@ $mail->send();
             <classname>Zend_Mail</classname> via une interface fluide.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Ceci est le texte du message.')
     ->setFrom('somebody@example.com', 'un expéditeur')
@@ -100,7 +100,7 @@ $mail->setBodyText('Ceci est le texte du message.')
                 url="http://php.net/mail"><code>mail()</code></ulink>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Sendmail('-freturn_to_me@example.com');
 Zend_Mail::setDefaultTransport($tr);
 

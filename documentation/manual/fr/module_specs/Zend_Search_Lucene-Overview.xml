@@ -89,7 +89,7 @@
             méthodes statiques pour créer des champs avec différentes caractéristiques :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 
 // Le champ n'est pas "tokenizé", mais il est indexé et stocké dans l'index.
@@ -124,7 +124,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
         <para>
             L'encodage peut différer par document, voire par champ au sein d'un même document
-            : <programlisting role="php"><![CDATA[
+            : <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -136,7 +136,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
 
         <para>
             Si le paramètre d'encodage est omis, la locale courante est alors utilisée pour le
-            déterminer à l'exécution. Par exemple : <programlisting role="php"><![CDATA[
+            déterminer à l'exécution. Par exemple : <programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'de_DE.iso-8859-1');
 ...
 $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
@@ -293,7 +293,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse HTML.
             Les documents peuvent être créés directement à d'un fichier ou d'une chaîne HTML :
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTMLFile($filename);
 $index->addDocument($doc);
 ...
@@ -350,7 +350,7 @@ $index->addDocument($doc);
 
         <para>
             Les documents analysés peuvent être enrichis par le programmeur avec d'autres
-            champs : <programlisting role="php"><![CDATA[
+            champs : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('created',
                                                    time()));
@@ -366,7 +366,7 @@ $index->addDocument($doc);
             peuvent être récupérés avec les méthodes
             <classname>Zend_Search_Lucene_Document_Html::getLinks()</classname> et
             <classname>Zend_Search_Lucene_Document_Html::getHeaderLinks()</classname> :
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
 $linksArray = $doc->getLinks();
 $headerLinksArray = $doc->getHeaderLinks();
@@ -392,7 +392,7 @@ $headerLinksArray = $doc->getHeaderLinks();
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse de
             documents Word 2007. On peut créer directement un document depuis un fichier Word 2007 :
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting></para>
@@ -451,7 +451,7 @@ $index->addDocument($doc);
 
         <para>
             Les documents parsés peuvent être étendus par le programmeur avec d'autres champs
-            : <programlisting role="php"><![CDATA[
+            : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Docx::loadDocxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -471,7 +471,7 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse de
             documents Powerpoint 2007. On peut créer directement un document depuis un fichier
-            Powerpoint 2007 : <programlisting role="php"><![CDATA[
+            Powerpoint 2007 : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting></para>
@@ -530,7 +530,7 @@ $index->addDocument($doc);
 
         <para>
             Les documents analysés peuvent être étendus par le programmeur avec d'autres
-            champs : <programlisting role="php"><![CDATA[
+            champs : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Pptx::loadPptxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',
@@ -548,7 +548,7 @@ $index->addDocument($doc);
         <para>
             <classname>Zend_Search_Lucene</classname> offre une fonctionnalité d'analyse de
             documents Excel 2007. On peut créer directement un document depuis un fichier Excel 2007
-            : <programlisting role="php"><![CDATA[
+            : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $index->addDocument($doc);
 ]]></programlisting></para>
@@ -607,7 +607,7 @@ $index->addDocument($doc);
 
         <para>
             Les documents analysés peuvent être étendus par le programmeur avec d'autres
-            champs : <programlisting role="php"><![CDATA[
+            champs : <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($filename);
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed(
     'indexTime',

@@ -62,7 +62,7 @@
         <example id="zend.view.helpers.initial.headstyle.conditional">
             <title>HeadStyle avec des commentaires conditionnels</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
 ]]></programlisting>
@@ -106,7 +106,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ajout de styles
 $this->headStyle()->appendStyle($styles);
 ]]></programlisting>
@@ -118,7 +118,7 @@ $this->headStyle()->appendStyle($styles);
             cette tâche :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Mettre les styles dans le bon ordre
 
 // - placer à un offset particulier
@@ -136,7 +136,7 @@ $this->headStyle()->prependStyle($stylesInitiaux);
             votre script de layout, faîtes un simple <code>echo</code> de l'aide :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headStyle() ?>
 ]]></programlisting>
     </example>
@@ -152,7 +152,7 @@ $this->headStyle()->prependStyle($stylesInitiaux);
             ainsi l'élément dans la pile :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headStyle()->captureStart() ?>
 body {
     background-color: <?php echo $this->bgColor ?>;

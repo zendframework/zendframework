@@ -24,7 +24,7 @@
 
         <para>Soit la structure de répertoires suivante&#160;:</para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 path/to/some/directory/
     acls/
         Site.php
@@ -47,7 +47,7 @@ path/to/some/directory/
             dossier de travail (base path), et le nom de l'espace de noms correspondant&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'  => 'path/to/some/directory',
     'namespace' => 'My',
@@ -74,7 +74,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             composant à rajouter à l'espace de noms général. Voici un exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
                ->addResourceType('form', 'forms/', 'Form')
                ->addResourceType('model', 'models/');
@@ -85,7 +85,7 @@ $resourceLoader->addResourceType('acl', 'acls/', 'Acl')
             <code>addResourceTypes()</code> est alors appropriée&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader->addResourceTypes(array(
     'acl' => array(
         'path'      => 'acls/',
@@ -106,7 +106,7 @@ $resourceLoader->addResourceTypes(array(
             clé doit alors être "resourceTypes"&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
     'basePath'      => 'path/to/some/directory',
     'namespace'     => 'My',
@@ -139,7 +139,7 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
             suivant&#160;:
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 api/         => Api
 forms/       => Form
 models/      => Model

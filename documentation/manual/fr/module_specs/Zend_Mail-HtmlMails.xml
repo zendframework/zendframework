@@ -15,7 +15,7 @@
     <example id="zend.mail.html-mails.example-1">
         <title>Envoyer des émail HTML</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Mon texte de test');
 $mail->setBodyHtml('Mon texte de test');

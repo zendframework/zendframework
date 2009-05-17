@@ -38,7 +38,7 @@
                 de la mémoire avec les options spécifiques du backend.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $backendOptions = array(
     'cache_dir' => './tmp/'
     // Dossier où les blocks de mémoire peuvent être stockés
@@ -110,7 +110,7 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
 
             <para>
                 Vous pouvez exploiter cet attribut <code>value</code> comme une propriété
-                d'objet : <programlisting role="php"><![CDATA[
+                d'objet : <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 echo $memObject->value;

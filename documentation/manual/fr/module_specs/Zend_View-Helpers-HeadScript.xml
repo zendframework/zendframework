@@ -93,7 +93,7 @@
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript avec des commentaires conditionnels</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headScript()->appendFile('/js/prototype.js',
                                 'text/javascript',
@@ -158,7 +158,7 @@ $this->headScript()->appendFile('/js/prototype.js',
             activer grâce à la méthode <code>setAllowArbitraryAttributes()</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->headScript()->setAllowArbitraryAttributes(true);
 ]]></programlisting>
     </note>
@@ -172,7 +172,7 @@ $this->headScript()->setAllowArbitraryAttributes(true);
             scripts eux-mêmes.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // ajout de scripts
 $this->headScript()->appendFile('/js/prototype.js')
                    ->appendScript($onloadScript);
@@ -186,7 +186,7 @@ $this->headScript()->appendFile('/js/prototype.js')
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // mettre les scripts dans l'ordre
 
 // placer celui-ci à un offset particulier pour s'assurer
@@ -207,7 +207,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             faîtes simplement un <code>echo</code> de l'aide :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headScript() ?>
 ]]></programlisting>
     </example>
@@ -223,7 +223,7 @@ $this->headScript()->prependFile('/js/prototype.js');
             l'élément dans la pile :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php $this->headScript()->captureStart() ?>
 var action = '<?php echo $this->baseUrl ?>';
 $('foo_form').action = action;

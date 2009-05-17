@@ -29,7 +29,7 @@
                 nous y reviendrons.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
         </example>
@@ -43,7 +43,7 @@ $date = new Zend_Date();
                 prendre de paramètres additionnels.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = Zend_Date::now();
 ]]></programlisting>
         </example>
@@ -83,7 +83,7 @@ $date = Zend_Date::now();
                 performant que de leur demander une date dans un format précis.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT UNIX_TIMESTAMP(my_datetime_column) FROM my_table
 $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 ]]></programlisting>
@@ -106,7 +106,7 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
                 supportent pas les dates inférieures au 1er Janvier 1970.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // SELECT datecolumn FROM my_table
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
@@ -167,7 +167,7 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
                 à une date ayant une partie heures à la valeur "<emphasis>0</emphasis>".
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006,
                    'month' => 4,
                    'day' => 18,
@@ -177,7 +177,7 @@ $datearray = array('year' => 2006,
 $date = new Zend_Date($datearray);
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $datearray = array('year' => 2006, 'month' => 4, 'day' => 18);
 $date = new Zend_Date($datearray);
 ]]></programlisting>

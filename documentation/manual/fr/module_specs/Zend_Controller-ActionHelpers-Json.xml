@@ -22,7 +22,7 @@
                 <code>Zend_Json::encode()</code>. Ce tableau d'options permet l'activation des
                 layouts et l'encodage en utilisant <code>Zend_Json_Expr</code>.
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
@@ -45,7 +45,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
         ou appelez une de ses méthodes <code>encodeJson()</code> ou <code>sendJson()</code>&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -71,7 +71,7 @@ class FooController extends Zend_Controller_Action
             booléen. A <code>true</code>, les layouts resteront activées (par défaut à
             <code>false</code>)&#160;:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
 ]]></programlisting>
 
@@ -81,7 +81,7 @@ $this->_helper->json($data, true);
             <code>keepLayouts</code> option:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
@@ -94,7 +94,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             défaut. Pour l'activer, fournissez la valeur booléenne <code>true</code> à l'option
             <code>enableJsonExprFinder</code>&#160;:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true);
 ]]></programlisting>
 
@@ -105,7 +105,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             <code>Zend_Json::encode()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,

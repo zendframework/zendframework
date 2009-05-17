@@ -21,7 +21,7 @@
     <para>
         Chaque instance de <classname>Zend_Session_Namespace</classname> correspond à une
         entrée dans le tableau de la superglobale <code>$_SESSION</code>, où l'espace de noms est
-        utilisée comme une clé. <programlisting role="php"><![CDATA[
+        utilisée comme une clé. <programlisting language="php"><![CDATA[
 $monNamespace = new Zend_Session_Namespace('monNamespace');
 
 // $monNamespace corresponds to $_SESSION['monNamespace']
@@ -50,7 +50,7 @@ $monNamespace = new Zend_Session_Namespace('monNamespace');
         <example id="zend.session.basic_usage.basic_examples.example.counting_page_views">
             <title>Compter le nombre de pages vues</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $defaultNamespace = new Zend_Session_Namespace('Default');
 
 if (isset($defaultNamespace->numberOfPageRequests)) {
@@ -87,7 +87,7 @@ echo "Page demandée lors de cette session : ",
         <example id="zend.session.basic_usage.basic_examples.example.namespaces.new">
             <title>Nouvelle méthode : les espaces de noms évitent les collisions</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Dans le composant Zend_Auth
 $authNamespace = new Zend_Session_Namespace('Zend_Auth');
 $authNamespace->user = "monusername";
@@ -107,7 +107,7 @@ $webServiceNamespace->user = "monwebusername";
         <example id="zend.session.basic_usage.basic_examples.example.namespaces.old">
             <title>Ancienne méthode : accès aux sessions PHP</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "monusername";
 $_SESSION['Un_Service_Web']['user'] = "monwebusername";
 ]]></programlisting>
@@ -127,7 +127,7 @@ $_SESSION['Un_Service_Web']['user'] = "monwebusername";
         <example id="zend.session.basic_usage.iteration.example">
             <title>Énumération des sessions</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $unNamespace =
     new Zend_Session_Namespace('un_namespace_avec_des_donnes_presentes');
 
@@ -153,7 +153,7 @@ foreach ($unNamespace as $index => $valeur) {
         <example id="zend.session.basic_usage.accessors.example">
             <title>Accéder aux données de session</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $namespace = new Zend_Session_Namespace();
 // Espace de noms par défaut
 

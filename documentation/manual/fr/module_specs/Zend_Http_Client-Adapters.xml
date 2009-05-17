@@ -148,7 +148,7 @@
         <example id="zend.http.client.adapters.socket.example-1">
             <title>Changer la couche de transport HTTPS</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Définit des paramètres de configuration
 $config = array(
     'adapter'      => 'Zend_Http_Client_Adapter_Socket',
@@ -258,7 +258,7 @@ $response = $client->request();
         <example id="zend.http.client.adapters.proxy.example-1">
             <title>Utiliser Zend_Http_Client derrière un serveur Proxy</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Paramètres de configuration
 $config = array(
     'adapter'    => 'Zend_Http_Client_Adapter_Proxy',
@@ -309,7 +309,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
         <example id="zend.http.client.adapters.test.example-1">
             <title>Tester avec un objet de réponse HTTP unique</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Création de l'adatateur et de l'objet client :
 $adapter = new Zend_Http_Client_Adapter_Test();
 $client = new Zend_Http_Client('http://www.example.com', array(
@@ -352,7 +352,7 @@ $response = $client->request('GET');
         <example id="zend.http.client.adapters.test.example-2">
             <title>Tester avec plusieurs réponses HTTP</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Création des objets adaptateur, et client
 $adapter = new Zend_Http_Client_Adapter_Test();
 $client = new Zend_Http_Client('http://www.example.com', array(
@@ -422,7 +422,7 @@ $adapter->addResponse(
         <example id="zend.http.client.adapters.curl.example-1">
             <title>Setting cURL options</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = array(
     'adapter'   => 'Zend_Http_Client_Adapter_Curl',
     'curloptions' => array(CURLOPT_FOLLOWLOCATION => true),
@@ -446,7 +446,7 @@ $client = new Zend_Http_Client($uri, $config);
                 You can use cURL to transfer very large files over HTTP by filehandle.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $putFileSize   = filesize("filepath");
 $putFileHandle = fopen("filepath", "r");
 
@@ -480,7 +480,7 @@ $client->request("PUT");
         <example id="zend.http.client.adapters.extending.example-1">
             <title>Création de votre propre adaptateur de connexion</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyApp_Http_Client_Adapter_BananaProtocol
     implements Zend_Http_Client_Adapter_Interface
 {

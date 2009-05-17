@@ -124,7 +124,7 @@ $autodiscover->handle();
             </para>
 
             <para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if(isset($_GET['wsdl'])) {
     $autodiscover = new Zend_Soap_AutoDiscover();
     $autodiscover->setClass('HelloWorldService');
@@ -145,7 +145,7 @@ if(isset($_GET['wsdl'])) {
         <para>
             Si une classe est utilisée dans un serveur SOAP, alors celle-ci devrait aussi être
             fournie à <classname>Zend_Soap_AutoDiscovery</classname> afin d'en générer le fichier
-            WSDL : <programlisting role="php"><![CDATA[
+            WSDL : <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->setClass('My_SoapServer_Class');
 $autodiscover->handle();
@@ -235,7 +235,7 @@ $autodiscover->handle();
         <para>
             Si des fonctions doivent être utilisées (partagées) via un serveur SOAP, alors
             elles doivent être passées à <classname>Zend_Soap_AutoDiscovery</classname> pour générer
-            un fichier WSDL : <programlisting role="php"><![CDATA[
+            un fichier WSDL : <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 $autodiscover->addFunction('function1');
 $autodiscover->addFunction('function2');
@@ -409,7 +409,7 @@ $autodiscover->handle();
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $autodiscover = new Zend_Soap_AutoDiscover();
 // Par défaut il s'agit de 'use' => 'encoded'
 // et 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'

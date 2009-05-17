@@ -89,7 +89,7 @@
             <classname>Zend_Controller_Plugin_Abstract</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     // ...
@@ -121,7 +121,7 @@ class MyPlugin extends Zend_Controller_Plugin_Abstract
             n'importe quand. Voici un exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class MyPlugin extends Zend_Controller_Plugin_Abstract
 {
     public function routeStartup(
@@ -178,7 +178,7 @@ $front->dispatch();
             le résultat suivant devrait s'afficher&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <p>routeStartup() appelée</p>
 
 <p>routeShutdown() appelée</p>

@@ -23,7 +23,7 @@
         <example id="zend.service.flickr.introduction.example-1">
             <title>Simple recherche de photos sur Flickr</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MA_CLE_API');
 
 $results = $flickr->tagSearch("php");
@@ -87,7 +87,7 @@ foreach ($results as $result) {
                 <code>userSearch()</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MA_CLE_API');
 
 $results = $flickr->userSearch($userEmail);
@@ -111,7 +111,7 @@ foreach ($results as $result) {
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Récupération les photos du pool d'un groupe grâce à son ID</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MA_CLE_API');
 
 $results = $flickr->groupPoolGetPhotos($groupId);
@@ -149,7 +149,7 @@ foreach ($results as $result) {
                 retrouver les informations qui lui sont associées :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MA_CLE_API');
 
 $image = $flickr->getImageDetails($imageId);

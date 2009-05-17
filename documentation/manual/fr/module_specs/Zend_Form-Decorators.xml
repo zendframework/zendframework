@@ -142,7 +142,7 @@
             suivantes&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Decorator_Interface
 {
     public function __construct($options = null);
@@ -173,7 +173,7 @@ interface Zend_Decorator_Interface
             procéder&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
@@ -263,7 +263,7 @@ class My_Decorator_Composite extends Zend_Form_Decorator_Abstract
             Vous pouvez maintenant placer ce décorateur dans les chemins des décorateurs&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // pour un élément:
 $element->addPrefixPath('My_Decorator',
                         'My/Decorator/',
@@ -281,7 +281,7 @@ $form->addElementPrefixPath('My_Decorator',
             élément&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Ecrase les éventuels décorateurs de cet élément avec le notre:
 $element->setDecorators(array('Composite'));
 ]]></programlisting>
@@ -299,7 +299,7 @@ $element->setDecorators(array('Composite'));
             'Errors'&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Decorator_Errors
 {
     public function render($content = '')
@@ -348,7 +348,7 @@ class My_Decorator_Errors
             exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // rend juste le décorateur Label de cet élément:
 echo $element->renderLabel();
 

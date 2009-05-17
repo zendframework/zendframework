@@ -34,7 +34,7 @@
             avec le backend <code>File</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200, // temps de vie du cache de 2 heures
    'automatic_serialization' => true
@@ -73,7 +73,7 @@ $cache = Zend_Cache::factory('Core',
             cache sont désérialisés.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // $cache initialisé dans l'exemple précédent
 
 // on regarde si un cache existe déjà
@@ -114,7 +114,7 @@ print_r($result);
             (si le cache est encore valide).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
     // temps de vue du cache de 30 secondes
     'lifetime' => 30,

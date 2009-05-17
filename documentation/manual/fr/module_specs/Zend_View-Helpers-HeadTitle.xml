@@ -31,7 +31,7 @@
             votre application : site, module, contrôleur, action et ressources potentielles.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Paramétrage des noms de contrôleurs et d'action
 // en tant que segment de titre :
 $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -51,7 +51,7 @@ $this->headTitle()->setSeparator(' / ');
             disposition, faîtes simplement un <code>echo</code> de l'aide :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!-- Affiche <action> / <controller> / Zend Framework -->
 <?php echo $this->headTitle() ?>
 ]]></programlisting>

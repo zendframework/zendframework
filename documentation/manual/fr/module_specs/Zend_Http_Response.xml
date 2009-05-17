@@ -22,7 +22,7 @@
                     <title>Instancier un objet Zend_Http_Response en utilisant la méthode
                     factory</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $str = '';
 $sock = fsockopen('www.exemple.com', 80);
 $req =     "GET / HTTP/1.1\r\n" .
@@ -120,7 +120,7 @@ $response = Zend_Http_Response::factory($str);
             </itemizedlist> <example id="zend.http.response.testers.example-1">
                 <title>Utiliser la méthode isError() pour valider une réponse</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($response->isError()) {
   echo "Erreur de transmission des données.\n"
   echo "Les infos Serveur sont : "
@@ -205,7 +205,7 @@ if ($response->isError()) {
             </itemizedlist> <example id="zend.http.response.acessors.example-1">
                 <title>Utiliser les méthodes accesseurs de Zend_Http_Response</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 if ($response->getStatus() == 200) {
   echo "La requête retourne les informations suivantes :<br />";
   echo $response->getBody();
@@ -227,7 +227,7 @@ if ($response->getStatus() == 200) {
             </note> <example id="zend.http.response.acessors.example-2">
                 <title>Accéder aux en-têtes de réponse</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $ctype = $response->getHeader('Content-type');
 if (is_array($ctype)) $ctype = $ctype[0];
 

@@ -43,7 +43,7 @@
             <filename>/chemin/vers/config.xml</filename>&#160;:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -76,7 +76,7 @@
             fichier XML et la section de test&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/chemin/vers/config.xml', 'test');
 
 echo $config->database->params->host;   // affiche "dev.example.com"
@@ -96,7 +96,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             seront ainsi interprétés en tant qu'enfant de ce noeud&#160;:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production webhost="www.example.com">
@@ -124,7 +124,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             <code>value</code>&#160;:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
     <production>
@@ -160,7 +160,7 @@ echo $config->database->params->dbname; // affiche "dbname"
             fournie en tant que premier paramètre du constructeur et doit commencer par les
             caractères <code>'&lt;?xml'</code>&#160;:
         </para>
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config>

@@ -51,7 +51,7 @@
     <example id="zend.log.writers.firebug.example.with_front_controller">
         <title>Journaliser avec Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Placez ceci dans votre fichier d'amorçage
 // avant de distribuer votre contrôleur frontal
 $writer = new Zend_Log_Writer_Firebug();
@@ -65,7 +65,7 @@ $logger->log('Ceci est un message de log !', Zend_Log::INFO);
     <example id="zend.log.writers.firebug.example.without_front_controller">
         <title>Journaliser sans Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Firebug();
 $logger = new Zend_Log($writer);
 
@@ -95,7 +95,7 @@ $response->sendHeaders();
             stylisées avec la méthode <code>setPriorityStyle()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $logger->addPriority('FOO', 8);
 $writer->setPriorityStyle(8, 'TRACE');
 $logger->foo('Foo Message');
@@ -106,7 +106,7 @@ $logger->foo('Foo Message');
             paramétrer avec la méthode <code>setDefaultPriorityStyle()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer->setDefaultPriorityStyle('TRACE');
 ]]></programlisting>
 
@@ -194,7 +194,7 @@ $writer->setDefaultPriorityStyle('TRACE');
             vous avez fourni puisque l'exception est automatiquement reconnue.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $exception = new Zend_Exception('Test d\'exception');
 $logger->err($exception);
 ]]></programlisting>
@@ -209,7 +209,7 @@ $logger->err($exception);
             automatiquement la ligne d'en-têtes.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $writer->setPriorityStyle(8, 'TABLE');
 $logger->addPriority('TABLE', 8);
 

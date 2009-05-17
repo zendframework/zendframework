@@ -325,7 +325,7 @@
             la manière dont une classe d'adaptateur personnalisée peut être implémentée :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 try {
     $translate = new Zend_Translate(
                         'MonEntreprise_Translate_Adapter_MonFormat',
@@ -359,7 +359,7 @@ try {
             <code>removeCache()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core',
                              'File',
                              $frontendOptions,

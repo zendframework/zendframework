@@ -72,14 +72,14 @@
             d'amorçage :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctypeHelper = new Zend_View_Helper_Doctype();
 $doctypeHelper->doctype('XHTML1_STRICT');
 ]]></programlisting>
 
         <para>Ensuite vous l'affichez en début de votre layout :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 ]]></programlisting>
     </example>
@@ -92,7 +92,7 @@ $doctypeHelper->doctype('XHTML1_STRICT');
             <code>getDoctype()</code> sur l'objet.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
@@ -101,7 +101,7 @@ $doctype = $view->doctype()->getDoctype();
             ; pour ceci, la méthode <code>isXhtml()</code> vous suffira :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if ($view->doctype()->isXhtml()) {
     // faire qqch de différent
 }

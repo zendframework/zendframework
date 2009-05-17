@@ -112,7 +112,7 @@
             <code>$config</code> suivants :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $options = array(
     'layout'     => 'foo',
     'layoutPath' => '/chemin/vers/layouts',
@@ -121,7 +121,7 @@ $options = array(
 );
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 [layout]
 layout = "foo"
@@ -141,7 +141,7 @@ $config = new Zend_Config_Ini('/chemin/vers/layout.ini', 'layout');
 
             <para>Voyons le cas du tableau :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Avec le constructeur :
 $layout = new Zend_Layout($options);
 
@@ -151,7 +151,7 @@ $layout = Zend_Layout::startMvc($options);
 
             <para>Et maintenant avec l'objet de configuration :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/chemin/vers/layout.ini', 'layout');
 
 // Cas du constructeur:
@@ -176,7 +176,7 @@ $layout = Zend_Layout::startMvc($config);
                 l'objet :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Utilisation d'un tableau d'options:
 $layout->setOptions($options);
 
@@ -200,7 +200,7 @@ $layout->setConfig($options);
                 chaînés (interface fluide):
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $layout->setLayout('foo')
        ->setLayoutPath('/chemin/vers/layouts')
        ->setContentKey('CONTENT');

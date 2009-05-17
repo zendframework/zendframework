@@ -149,7 +149,7 @@
                 des booléens), vous pouvez utiliser une construction plus compact comme&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // nous avons déjà $cache
 
 $id = 'myBigLoop'; // id de cache de "ce que l'on veut cacher"
@@ -175,7 +175,7 @@ if (!($data = $cache->load($id))) {
                 reste la même&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // on s'assure que l'on utilise des identifiant uniques
 $id1 = 'foo';
 $id2 = 'bar';
@@ -219,7 +219,7 @@ echo($data);
                 formelle l'état du cache.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // La construction compacte (ne pas utiliser si vous cachez
 // des chaînes et/ou des booléens)
 if (!($data = $cache->load($id))) {
@@ -288,7 +288,7 @@ if (!($cache->test($id))) {
                 changements mineurs&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // s'il y a un cache manquant, la bufferisation de sortie est lancée
 if (!$cache->start('mypage')) {
 
@@ -376,7 +376,7 @@ echo 'This is never cached ('.time().').';
                 <code>call_user_func_array()</code> en PHP&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $cache->call('veryExpensiveFunc', $params);
 
 // $params est dans un tableau par exemple, pour appeler
@@ -478,7 +478,7 @@ $cache->call('veryExpensiveFunc', array(1, 'foo', 'bar'));
 
             <para>Par exemple, pour mettre en cache des appels statiques&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class test {
 
     // Méthode statique
@@ -501,7 +501,7 @@ $res = $cache->foobar('1', '2');
 
             <para>Pour mettre en cache des appels classiques aux méthodes&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class test {
 
     private $_string = 'hello !';
@@ -834,7 +834,7 @@ $res = $cache->foobar2('1', '2');
                 trivial&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] // require, configuration et factory
 
 $cache->start();
@@ -850,7 +850,7 @@ $cache->start();
                 <classname>Zend_Controller</classname> par exemple)
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // vous devriez éviter de mettre trop de lignes avant la section
 // de cache par exemple, pour des performances optimales,
 // "require_once" ou "Zend_Loader::loadClass" devrait être
@@ -912,7 +912,7 @@ $cache->start();
                 frontend en particulier, la méthode <code>cancel()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // [...] require, configuration et fabrique
 
 $cache->start();

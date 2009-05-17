@@ -29,7 +29,7 @@
             afin d'utiliser une interface orientée objet simple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Fourni un tableau de configuration
 $configArray = array(
     'webhost' => 'www.example.com',
@@ -75,7 +75,7 @@ $db = Zend_Db::factory($config->database);
         pas. Par exemple&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
 
@@ -87,7 +87,7 @@ $host = $config->database->get('host', 'localhost');
             suivant illustre comment ceci peut être facilement réalisé&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // config.php
 return array(
     'webhost'  => 'www.example.com',
@@ -103,7 +103,7 @@ return array(
 );
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Lecture de la configuration
 $config = new Zend_Config(require 'config.php');
 

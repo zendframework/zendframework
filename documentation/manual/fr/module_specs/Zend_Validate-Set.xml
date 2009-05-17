@@ -151,7 +151,7 @@
             suivant ce pays.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {
@@ -170,7 +170,7 @@ if ($validator->isValid($iban)) {
             suivant.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
 if ($validator->isValid($iban)) {

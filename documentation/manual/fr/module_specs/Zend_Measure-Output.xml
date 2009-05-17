@@ -34,7 +34,7 @@
             chaînes de caractères automatiquement. <example id="zend.measure.output.auto.example-1">
                     <title>Récupération automatique</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $machaine = "1.234.567,89 Meter";
 $unite = new Zend_Measure_Length($machaine,
@@ -65,7 +65,7 @@ echo $unite; // affiche "1234567.89 m"
             <example id="zend.measure.output.value.example-1">
                     <title>Récupération d'une valeur</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $machaine = "1.234.567,89 Meter";
 $unite = new Zend_Measure_Length($machaine,
@@ -92,7 +92,7 @@ echo $unite->getValue(); // affiche "1234567.89"
                     id="zend.measure.output.unit.example-1">
                     <title>Récupérer l'unité de mesure</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $machaine = "1.234.567,89";
 $unit = new Zend_Measure_Weight($machaine,

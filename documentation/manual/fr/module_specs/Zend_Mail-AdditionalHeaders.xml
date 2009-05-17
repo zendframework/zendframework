@@ -14,7 +14,7 @@
     <example id="zend.mail.additional-headers.example-1">
         <title>Ajouter des en-têtes à l'émail</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MaSuperApplication');
 $mail->addHeader('X-greetingsTo', 'Maman', true); // plusieurs valeurs

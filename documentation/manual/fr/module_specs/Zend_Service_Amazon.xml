@@ -67,7 +67,7 @@
                 et boucler sur les résultats pour les afficher.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $response = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                       'Keywords' => 'php'));
@@ -88,7 +88,7 @@ foreach ($results as $result) {
                 Fluide.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
@@ -112,7 +112,7 @@ foreach ($results as $result) {
         <example id="zend.service.amazon.countrycodes.example.country_code">
             <title>Choisir un service Web Amazon d'un pays</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Connexion à Amazon France
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
 ]]></programlisting>
@@ -139,7 +139,7 @@ $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'FR');
         <example>
             <title>Rechercher une produit Amazon spécifique avec son ASIN</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
@@ -176,7 +176,7 @@ $item = $amazon->itemLookup('B0000A432X');
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Lancer des recherches de produits sur Amazon</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
                                      'Keywords' => 'php'));
@@ -194,7 +194,7 @@ foreach ($results as $result) {
                 informations spécifiques qui sont retournées dans la réponse.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY');
 $results = $amazon->itemSearch(array(
     'SearchIndex'   => 'Books',
@@ -257,7 +257,7 @@ foreach ($results as $result) {
                     :
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('MY_API_KEY');
 $query->Category('Books')->Keywords('PHP');
 $results = $query->search();

@@ -28,7 +28,7 @@
 
         <para>L'utilisation de base est simple :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $class    = Zend_Server_Reflection::reflectClass('Ma_Classe');
 $function = Zend_Server_Reflection::reflectFunction('ma_fonction');
 

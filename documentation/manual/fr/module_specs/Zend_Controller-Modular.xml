@@ -13,7 +13,7 @@
             Voici une illustration&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 docroot/
     index.php
 application/
@@ -90,7 +90,7 @@ application/
             la clé <code>default</code> doit être présente&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setControllerDirectory(array(
       'default' => '/path/to/application/controllers',
       'blog'    => '/path/to/application/blog/controllers'
@@ -104,7 +104,7 @@ $front->setControllerDirectory(array(
             <code>default.</code>
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->addControllerDirectory('/path/to/application/news/controllers',
                                'news');
 ]]></programlisting>
@@ -114,7 +114,7 @@ $front->addControllerDirectory('/path/to/application/news/controllers',
             grâce à <code>addModuleDirectory()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sur cet exemple :
  * application/
@@ -140,7 +140,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>setModuleControllerDirectoryName()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Le dossier des contrôleurs s'appelle désormais 'con'
  * application/
@@ -208,7 +208,7 @@ $front->addModuleDirectory('/path/to/application/modules');
             <code>true</code> dans le contrôleur frontal&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
     </sect2>

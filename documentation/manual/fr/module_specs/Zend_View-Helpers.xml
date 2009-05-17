@@ -121,7 +121,7 @@
 
                 <para>Ceci pourra sûrement être plus explicite avec quelques exemples :</para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // "1" et "0" en tant qu'options cochée/décochée ; cochée
 echo $this->formCheckbox('foo');
 
@@ -324,7 +324,7 @@ echo $this->formCheckbox('foo',
             s'instancier elle-même si besoin est.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!--
 Dans votre script de vue, $this se réfère à l'instance de Zend_View.
 Partons du principe que vous avez déjà assigné une série d'options
@@ -354,7 +354,7 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
 
         <para>La sortie résultante du script de vue ressemblera à ceci :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <form action="action.php" method="post">
     <p><label>Votre email :
         <input type="text" name="email"
@@ -410,7 +410,7 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
             préfixe n'est fourni, "Zend_View_Helper_" est utilisé.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setHelperPath('/chemin/vers/plus/de/classes/d-aides',
                      'Ma_View_Helper');
@@ -424,7 +424,7 @@ $view->setHelperPath('/chemin/vers/plus/de/classes/d-aides',
             distribution initiale des aides, avec vos propres aides personnalisées.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // Ajoute /chemin/vers/des/aides avec le préfixe
@@ -517,7 +517,7 @@ $view->addHelperPath('/autre/chemin/vers/des/aides',
 
         <para>Voici un exemple de fichier "ActionSpeciale.php" :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Ma_View_Helper_ActionSpeciale
 {
     protected $_count = 0;
@@ -537,7 +537,7 @@ class Ma_View_Helper_ActionSpeciale
             <classname>Zend_View</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // rappelez vous, $this se réfère à l'instance de Zend_View
 echo $this->actionSpeciale();
 echo $this->actionSpeciale();
@@ -546,7 +546,7 @@ echo $this->actionSpeciale();
 
         <para>La sortie pourrait alors ressembler à ceci :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 J'ai vu 'The Big Lebowsky' 1 fois.
 J'ai vu 'The Big Lebowsky' 2 fois.
 J'ai vu 'The Big Lebowsky' 3 fois.
@@ -560,7 +560,7 @@ J'ai vu 'The Big Lebowsky' 3 fois.
             comme ceci :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Ma_View_Helper_ScriptPath
 {
     public $view;

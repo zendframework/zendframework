@@ -44,7 +44,7 @@
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
         <title>Profilage de base de données avec Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Dans votre fichier d'amorçage
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
@@ -62,7 +62,7 @@ $db->setProfiler($profiler)
     <example id="zend.db.profiler.profilers.firebug.example.without_front_controller">
         <title>Profilage de base de données sans Zend_Controller_Front</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profiler = new Zend_Db_Profiler_Firebug('All DB Queries');
 $profiler->setEnabled(true);
 

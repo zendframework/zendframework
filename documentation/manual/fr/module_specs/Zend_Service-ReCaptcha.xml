@@ -32,7 +32,7 @@
             vos clés publique et privée :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
 ]]></programlisting>
 
@@ -41,7 +41,7 @@ $recaptcha = new Zend_Service_ReCaptcha($pubKey, $privKey);
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $recaptcha->getHTML();
 ]]></programlisting>
 
@@ -51,7 +51,7 @@ echo $recaptcha->getHTML();
             <code>verify()</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $result = $recaptcha->verify(
     $_POST['recaptcha_challenge_field'],
     $_POST['recaptcha_response_field']
@@ -64,7 +64,7 @@ $result = $recaptcha->verify(
             <code>isValid()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 if (!$result->isValid()) {
     // Validation échouée
 }

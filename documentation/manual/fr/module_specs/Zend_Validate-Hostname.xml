@@ -15,7 +15,7 @@
     <para><emphasis>Utilisation basique</emphasis></para>
 
     <para>
-        Exemple simple : <programlisting role="php"><![CDATA[
+        Exemple simple : <programlisting language="php"><![CDATA[
 $validateur = new Zend_Validate_Hostname();
 if ($validateur->isValid($domaine)) {
     // le nom de domaine est valide
@@ -46,7 +46,7 @@ if ($validateur->isValid($domaine)) {
         <code>ALLOW_IP</code> qui autorise les adresses IP, <code>ALLOW_LOCAL</code> qui autorise
         les domaines locaux et <code>ALLOW_ALL</code> qui autorise les trois types précédents. Pour
         vérifier uniquement les adresses IP, vous pouvez utiliser l'exemple suivant :
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validateur = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validateur->isValid($hostname)) {
     // le nom de domaine est valide
@@ -150,7 +150,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
         désactivation du support des IDNs. Vous pouvez désactiver la validation TLD en passant un
         troisième paramètre au constructeur de <classname>Zend_Validate_Hostname</classname>. Dans
         l'exemple ci-dessous, la validation IDN est supportée via le second paramètre.
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS,
                                         true,
                                         false);

@@ -67,7 +67,7 @@
         <example id="zend.pdf.pages.example-1">
             <title>Gestion des pages d'un document PDF</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // Inverse l'ordre des pages
 $pdf->pages = array_reverse($pdf->pages);
@@ -95,7 +95,7 @@ unset($pdf->pages[$id]);
         <example id="zend.pdf.pages.example-2">
             <title>Cloner une page existante</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // Stocke le modèle dans une variable séparée
 $template = $pdf->pages[$templatePageIndex];

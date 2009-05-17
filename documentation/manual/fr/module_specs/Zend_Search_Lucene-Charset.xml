@@ -78,7 +78,7 @@
 
         <para>
             N'importe quel analyseur peut être activé avec un code comme celui-ci:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Analysis_Analyzer::setDefault(
     new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
 ]]></programlisting>
@@ -110,7 +110,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             Utilisez ce code pour vérifier si le support d'UTF-8 est assuré pour PCRE :
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (@preg_match('/\pL/u', 'a') == 1) {
     echo "support UTF-8 pour PCRE activé.\n";
 } else {
@@ -152,7 +152,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored(
 
 // champ titre (unindexed, stored)
 $doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
-]]></programlisting> <programlisting role="php"><![CDATA[
+]]></programlisting> <programlisting language="php"><![CDATA[
 // Recherche
 setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 

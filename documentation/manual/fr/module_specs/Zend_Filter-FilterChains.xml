@@ -11,7 +11,7 @@
         <classname>Zend_Filter</classname> fournit un moyen simple permettant de chaîner des
         filtres. Le code suivant illustre comment chaîner deux filtres pour l'identifiant
         soumis&#160;:
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Création d'une chaine de filtrage et ajout de filtres à celle-ci
 $filtreChaine = new Zend_Filter();
 $filtreChaine->addFilter(new Zend_Filter_Alpha())

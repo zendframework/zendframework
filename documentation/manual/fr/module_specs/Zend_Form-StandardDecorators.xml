@@ -22,7 +22,7 @@
             d'options <code>$options</code>. Voici un exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Util
 {
     public static function label($content, $element, array $options)
@@ -103,7 +103,7 @@ class Util
             définition (<code>&lt;dd&gt;</code>). L'affichage ressemble alors à ceci&#160;:
         </para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt></dt>
 <dd><fieldset id="subform">
     <legend>User Information</legend>
@@ -187,7 +187,7 @@ class Util
 
         <para>Par défaut, la liste d'erreurs générée ressemble à ceci :</para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul class="form-errors>
     <li><b>[element label or name]</b><ul>
             <li>[error message]</li>
@@ -378,7 +378,7 @@ class Util
             en tant que premier décorateur de la pile.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
     'PrepareElements',
     array('ViewScript', array('viewScript' => 'form.phtml')),
@@ -448,7 +448,7 @@ $form->setDecorators(array(
 
         <para>Voici un exemple&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Affectation d'un décorateur ViewScript à un seul élément
 // en spécifiant comme option le script de vue (obligatoire) et d'autres options :
 $element->setDecorators(array(array('ViewScript', array(
@@ -464,7 +464,7 @@ $element->setDecorators(array(array('ViewScript',
 
         <para>Le script de vue pourrait alors ressembler à cela :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <div class="<?= $this->class ?>">
     <?php echo $this->formLabel($this->element->getName(),
                                 $this->element->getLabel()) ?>
@@ -487,7 +487,7 @@ $element->setDecorators(array(array('ViewScript',
                 faire&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // A la création du décorateur:
 $element->addDecorator('ViewScript', array('placement' => false));
 

@@ -89,7 +89,7 @@ unUtilisateur:Un domaine:3b17d7f3a9374666e892cbce58aa724f
             correspondent aux valeurs définies avant l'appel à <code>authenticate()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adaptateur = new Zend_Auth_Adapter_Digest($nomFichier,
                                            $domaine,
                                            $identifiant,

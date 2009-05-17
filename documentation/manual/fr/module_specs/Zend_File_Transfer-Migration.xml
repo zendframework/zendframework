@@ -63,7 +63,7 @@
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.rename.example">
                     <title>Changer le filtre rename entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Rename',
@@ -104,7 +104,7 @@ $upload->addFilter('Rename',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.count.example">
                     <title>Changer le validateur count entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Count',
@@ -146,7 +146,7 @@ $upload->addValidator('Count',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.extension.example">
                     <title>Changer le validateur extension entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Extension',
@@ -197,7 +197,7 @@ $upload->addValidator('Extension',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.filessize.example">
                     <title>Changer le validateur filessize entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize',
@@ -246,7 +246,7 @@ $upload->setUseByteSting(true); // set flag
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.hash.example">
                     <title>Changer le validateur hash entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Hash',
@@ -290,7 +290,7 @@ $upload->addValidator('Hash',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.imagesize.example">
                     <title>Changer le validateur imagesize entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('ImageSize',
@@ -335,7 +335,7 @@ $upload->addValidator('ImageSize',
                 <example id="zend.file.transfer.migration.fromonesixonetooneseven.validators.size.example">
                     <title>Changer le validateur size entre 1.6 et 1.7</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Exemple pour 1.6
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('Size',
@@ -398,7 +398,7 @@ $upload->addValidator('Size',
             <example id="zend.file.transfer.migration.fromonesixonetoonesixtwo.example">
                 <title>Changer les validateurs de fichiers de 1.6.1 vers 1.6.2</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Exemple pour 1.6.1
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('FilesSize', array('1B', '100kB'));

@@ -15,7 +15,7 @@
         <code>dispatch()</code> de TestCase :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
 {
     // ...
@@ -34,7 +34,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
         avec ces informations :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
 {
     // ...

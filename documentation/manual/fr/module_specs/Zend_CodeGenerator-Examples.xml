@@ -11,7 +11,7 @@
             L'exemple suivant génère le code d'une classe avec son bloc de commentaires PHPDoc.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -34,7 +34,7 @@ echo $foo->generate();
 
         <para>Le résultat est&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sample generated class
  *
@@ -59,7 +59,7 @@ class Foo
             classe.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -99,7 +99,7 @@ echo $foo->generate();
 
         <para>Le résultat sera&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sample generated class
  *
@@ -131,7 +131,7 @@ class Foo
             directement des objets <classname>Zend_CodeGenerator_Php_Method</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -207,7 +207,7 @@ echo $foo->generate();
 
         <para>Le résultat sera&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sample generated class
  *
@@ -266,7 +266,7 @@ class Foo
             étant le code d'une des classes des exemples précédents.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes'  => array($foo);
     'docblock' => new Zend_CodeGenerator_Php_Docblock(array(
@@ -287,14 +287,14 @@ $file = new Zend_CodeGenerator_Php_File(array(
             fichier. Pour ce faire, il faudra d'abord capturer le contenu:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $code = $file->generate();
 file_put_contents('Foo.php', $code);
 ]]></programlisting>
 
         <para>Le résultat sera&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 /**
  * Foo class file
@@ -356,7 +356,7 @@ define('APPLICATION_ENV', 'testing');
             <code>fromReflectedFileName()</code> va vous y aider
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $generator = Zend_CodeGenerator_Php_File::fromReflectedFileName($path);
 $body = $generator->getBody();
 $body .= "\n\$foo->bar();";
@@ -374,7 +374,7 @@ file_put_contents($path, $generator->generate());
             modifiée&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $generator = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class($class)
 );

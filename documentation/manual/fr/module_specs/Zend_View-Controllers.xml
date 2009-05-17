@@ -20,7 +20,7 @@
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Ha";
 $view->b = "Bé";
@@ -37,7 +37,7 @@ $view->c = "Cé";
             ou un objet. Les exemples suivants ont le même effet que celui ci-dessus.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 
 // assigne un tableau de paires clés/valeurs, où la clé
@@ -64,7 +64,7 @@ $view->assign((array) $obj);
             valeur.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->assign('a', "Ha");
 $view->assign('b', "Bé");
@@ -84,7 +84,7 @@ $view->assign('c', "Cé");
             voulu.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->a = "Ha";
 $view->b = "Bé";
@@ -110,7 +110,7 @@ echo $view->render('uneVue.php');
             <code>setScriptPath()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->setScriptPath('/chemin/des/vues');
 ]]></programlisting>
@@ -129,7 +129,7 @@ $view->setScriptPath('/chemin/des/vues');
             pendant que vous laissez les autres intactes.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new Zend_View();
 $view->addScriptPath('/chemin/des/vues');
 $view->addScriptPath('/chemin/des/vues-personnalisees');
@@ -155,7 +155,7 @@ $view->addScriptPath('/chemin/des/vues-personnalisees');
                 peut générer un problème :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // $_GET['foo'] == '../../../etc'
 $view->addScriptPath($_GET['foo']);
 $view->render('passwd');

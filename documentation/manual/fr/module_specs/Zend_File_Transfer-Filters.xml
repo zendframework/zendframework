@@ -119,7 +119,7 @@
         <example id="zend.file.transfer.filters.usage.example">
             <title>Ajouter les filtres au fichier transféré</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Paramètre un dossier de destination
@@ -141,7 +141,7 @@ $upload->addFilter('Rename', array('target' => 'C:\picture\uploads', 'overwrite'
                 fichiers sur lequel appliqué le filtre donné.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Paramètre un nouveau dossier de destination et
@@ -165,7 +165,7 @@ $upload->addFilter('Rename', 'C:\image\uploads', 'file2');
                 pouvez enchaîner les appels comme montré ci-dessous :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Renommer différemment chacun des fichiers
@@ -206,7 +206,7 @@ $upload->addFilter('Rename', 'file1', 'C:\picture\newjpg')
         <example id="zend.file.transfer.filters.decrypt.example1">
             <title>Utiliser le filtre Decrypt avec Mcrypt</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to decrypt the uploaded encrypted file
@@ -219,7 +219,7 @@ $upload->addFilter('Decrypt',
         <example id="zend.file.transfer.filters.decrypt.example2">
             <title>Utiliser le filtre Decrypt avec OpenSSL</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to decrypt the uploaded encrypted file
@@ -255,7 +255,7 @@ $upload->addFilter('Decrypt',
         <example id="zend.file.transfer.filters.encrypt.example1">
             <title>Utiliser le filtre Encrypt avec Mcrypt</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to encrypt the uploaded file
@@ -268,7 +268,7 @@ $upload->addFilter('Encrypt',
         <example id="zend.file.transfer.filters.encrypt.example2">
             <title>Utiliser le filtre Encrypt avec OpenSSL</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Adds a filter to encrypt the uploaded file
@@ -297,7 +297,7 @@ $upload->addFilter('Encrypt',
         <example id="zend.file.transfer.filters.lowercase.example">
             <title>Utiliser le filtre LowerCase</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('MimeType', 'text');
 
@@ -362,7 +362,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <example id="zend.file.transfer.filters.rename.example">
             <title>Utiliser le filtre Rename</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 
 // Paramètre un nouveau dossier pour tous les fichiers
@@ -453,7 +453,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         <example id="zend.file.transfer.filters.uppercase.example">
             <title>Utiliser le filtre UpperCase</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addValidator('MimeType', 'text');
 

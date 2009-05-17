@@ -162,7 +162,7 @@
                     <classname>Zend_Filter_Inflector</classname> ; vous pouvez modifier les règles
                     de l'inflecteur pour ne plus séparer les mots d'une action avec un tiret&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $inflector = $viewRenderer->getInflector();
@@ -192,7 +192,7 @@ $inflector->setFilterRule(':action', array(
                     distribuer les noms d'action écrits en notationCamel avec un nouveau drapeau du
                     contrôleur frontal, <code>useCaseSensitiveActions</code>&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->setParam('useCaseSensitiveActions', true);
 ]]></programlisting>
                 <para>
@@ -230,7 +230,7 @@ $front->setParam('useCaseSensitiveActions', true);
             paramètre <code>noErrorHandler</code> du contrôleur frontal&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
 
@@ -249,7 +249,7 @@ $front->setParam('noErrorHandler', true);
             d'amorçage du contrôleur frontal avant toute distribution&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // En considérant que $front est une instance de Zend_Controller_Front
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -287,7 +287,7 @@ $front->setParam('noViewRenderer', true);
             méthode&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->viewRenderer->setNoRender();
 ]]></programlisting>
 
@@ -297,7 +297,7 @@ $this->_helper->viewRenderer->setNoRender();
             <code>preDispatch()</code> ou <code>init()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function preDispatch()
 {
     // désactive l'auto-rendu des scripts de vues
@@ -355,7 +355,7 @@ public function preDispatch()
         <itemizedlist>
             <listitem>
                 <para>Avant la distribution d'une instance de contrôleur frontal&#160;:</para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // En considérant que $view a déjà été définie
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer($view);
 Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
@@ -363,7 +363,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
             </listitem>
             <listitem>
                 <para>A tout moment durant le processus d'amorçage&#160;:</para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view);
@@ -439,7 +439,7 @@ $viewRenderer->setView($view);
             même&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/chemin/vers/controleurs');
 ]]></programlisting>
 
@@ -491,7 +491,7 @@ Zend_Controller_Front::run('/chemin/vers/controleurs');
                     <classname>Zend_Controller_Action::_forward()</classname> ont changés. La
                     signature est maintenant&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 final protected function _forward($action,
                                   $controller = null,
                                   $module = null,
@@ -518,11 +518,11 @@ final protected function _forward($action,
             faire comme suit&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/chemin/vers/controleurs');
 ]]></programlisting>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* -- créer un routeur -- */
 $router = new Zend_Controller_RewriteRouter();
 $router->addRoute('user', 'user/:username', array('controller' => 'user',
@@ -574,7 +574,7 @@ $ctrl->dispatch();
                         <para>
                             Régler <code>throwExceptions()</code> dans le contrôleur frontal&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
                     </listitem>
@@ -582,7 +582,7 @@ $front->throwExceptions(true);
                         <para>
                             Régler <code>renderExceptions()</code> dans l'objet Réponse&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);
 $front->dispatch();
@@ -674,7 +674,7 @@ echo $response;
                             d'URL de la requête. Cette information est maintenant disponible dans
                             l'objet requête, et peut être interrogé comme ceci&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 // Récupère le nom de controleur de la requête
 // L'accès se fait via : $this->_action->getControllerName().
 // L'exemple ci-dessous utilise getRequest(), bien que vous pourriez
@@ -702,7 +702,7 @@ $foo = $this->_getParam('foo', 'default');
                             de gérer les méthodes d'actions non-existantes est de les router vers
                             une action par défaut en utilisant <code>__call()</code>&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 public function __call($method, $args)
 {
     // Si la méthode requetee ne correspond a aucune methode 'Action',

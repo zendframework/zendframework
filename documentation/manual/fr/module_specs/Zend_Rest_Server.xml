@@ -19,7 +19,7 @@
         <example id="zend.rest.server.usage.example-1">
             <title>Utilisation basique Zend_Rest_Server - Avec des classes</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_Rest_Server();
 $server->setClass('Mon_Service_Classe');
 $server->handle();
@@ -29,7 +29,7 @@ $server->handle();
         <example id="zend.rest.server.usage.example-2">
             <title>Utilisation basique Zend_Rest_Server - Avec des fonctions</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Dit Bonjour
  *
@@ -89,7 +89,7 @@ $server->handle();
         <example id="zend.rest.server.customstatus.example-1">
             <title>Renvoyer un statut personnalisé</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Dit Bonjour
  *
@@ -121,7 +121,7 @@ $server->handle();
         <example id="zend.rest.server.customxml.example-1">
             <title>Renvoyer une réponse XML personnalisée</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Dit Bonjour
  *

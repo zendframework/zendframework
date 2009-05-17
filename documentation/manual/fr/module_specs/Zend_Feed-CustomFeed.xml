@@ -23,7 +23,7 @@
             espace de noms personnalisé
         </title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * La classe personnalisée connaît automatiquement l'URI du flux
  * (qui est optionnelle) et elle peut ajouter automatiquement
@@ -84,7 +84,7 @@ class MonEntree extends Zend_Feed_Entry_Atom
             propriété <code>maMiseAJour</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $entree = new MonEntree();
 $entree->maMiseAJour = '2005-04-19T15:30';
 

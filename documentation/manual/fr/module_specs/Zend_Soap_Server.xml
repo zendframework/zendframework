@@ -187,7 +187,7 @@
         <para>
             La première consiste à attacher des classes à l'objet
             <classname>Zend_Soap_Server</classname>, celles-ci devront alors décrire l'API du
-            service en totalité : <programlisting role="php"><![CDATA[
+            service en totalité : <programlisting language="php"><![CDATA[
 ...
 class MyClass {
     /**
@@ -235,7 +235,7 @@ $server->handle();
         <para>
             La seconde manière de décrire l'API de votre service Web est d'utiliser des
             fonctions PHP conjointement avec les méthodes <code>addFunction()</code> ou
-            <code>loadFunctions()</code> :<programlisting role="php"><![CDATA[
+            <code>loadFunctions()</code> :<programlisting language="php"><![CDATA[
 ...
 /**
  * Cette fonction ...
@@ -337,7 +337,7 @@ $server->handle();
 
             <para>
                 La dernière requête utilisée et traitée peut être récupérée en utilisant la
-                méthode <code>getLastRequest()</code> :<programlisting role="php"><![CDATA[
+                méthode <code>getLastRequest()</code> :<programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -359,7 +359,7 @@ $request = $server->getLastRequest();
                         la méthode <code>setReturnResponse()</code> sans paramètre.
                     </para>
                 </footnote>. La réponse générée par <code>handle()</code> est alors retournée et
-            non plus émise. <programlisting role="php"><![CDATA[
+            non plus émise. <programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...
@@ -372,7 +372,7 @@ $response = $server->handle();
 
             <para>
                 Autrement, la dernière réponse peut être récupérer avec la méthode
-                <code>getLastResponse()</code> :<programlisting role="php"><![CDATA[
+                <code>getLastResponse()</code> :<programlisting language="php"><![CDATA[
 ...
 $server = new Zend_Soap_Server(...);
 ...

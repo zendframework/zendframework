@@ -29,7 +29,7 @@
         <example id="zend.measure.creation.number.example-1">
             <title>Création de mesure en utilisant des nombres entiers et décimaux</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mesure = 1234.7;
 $unite = new Zend_Measure_Length((integer)$mesure,
                                   Zend_Measure_Length::STANDARD);
@@ -64,7 +64,7 @@ echo $unite;
         <example id="zend.measure.creation.string.example-1">
             <title>Création de mesure en utilisant des chaînes</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $machaine = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($machaine, Zend_Measure_Number::BINARY);
 
@@ -83,7 +83,7 @@ echo $unit;
         <example id="zend.measure.creation.string.example-2">
             <title>Saisie de texte arbitraire contenant des mesures</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $machaine = "Ma maison a une superficie de 125m².";
 $unite = new Zend_Measure_Area($machaine, Zend_Measure_Area::STANDARD);
 echo $unite; // affiche "125 m²";
@@ -113,7 +113,7 @@ echo $unite; // affiche "125 m² in size";
         <example id="zend.measure.creation.localized.example-1">
             <title>Chaînes localisées</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $machaine = "The boat is 1,234.50 long.";
 $unite = new Zend_Measure_Length($machaine,
@@ -136,7 +136,7 @@ echo $unite; // affiche "1234.50 m"
             fois.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // in your bootstrap file
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);

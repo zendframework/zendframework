@@ -89,7 +89,7 @@
     <sect2 id="zend.mail.read-example">
         <title>Exemple simple avec Pop3</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'localhost',
                                          'user'     => 'test',
                                          'password' => 'test'));
@@ -114,14 +114,14 @@ foreach ($mail as $message) {
             constructeur de <classname>Zend_Mail_Storage_Mbox</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail =
     new Zend_Mail_Storage_Mbox(array('filename' => '/home/test/mail/inbox'));
 ]]></programlisting>
 
         <para>Maildir est très similaire mais nécessite un nom de dossier :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail =
     new Zend_Mail_Storage_Maildir(array('dirname' => '/home/test/mail/'));
 ]]></programlisting>
@@ -142,7 +142,7 @@ $mail =
             défaut celui donné dans la RFC du protocole.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // connexion à Pop3
 $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com'
                                          'user'     => 'test',
@@ -165,7 +165,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com',
             par défaut change comme indiqué dans la RFC.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // exemples pour Zend_Mail_Storage_Pop3,
 // identique à Zend_Mail_Storage_Imap
 
@@ -201,7 +201,7 @@ $mail = new Zend_Mail_Storage_Pop3(array('host'     => 'exemple.com'
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $message = $mail->getMessage($numeroDeMessage);
 ]]></programlisting>
 
@@ -212,7 +212,7 @@ $message = $mail->getMessage($numeroDeMessage);
             avec les valeurs par défaut, vous pouvez utiliser :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $message = $mail[$numeroDeMessage];
 ]]></programlisting>
 
@@ -221,7 +221,7 @@ $message = $mail[$numeroDeMessage];
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 foreach ($mail as $numeroDeMessage => $message) {
     // faire qqch ...
 }
@@ -232,7 +232,7 @@ foreach ($mail as $numeroDeMessage => $message) {
             <code>countMessages()</code> ou utiliser l'accès de type tableau :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // par méthode
 $maxMessage = $mail->countMessages();
 
@@ -245,7 +245,7 @@ $maxMessage = count($mail);
             <code>removeMessage()</code> ou l'accès de type tableau :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // méthode
 $mail->removeMessage($numeroDeMessage);
 
@@ -270,7 +270,7 @@ unset($mail[$messageNum]);
             en-tête.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // récupérer l'objet message
 $message = $mail->getMessage(1);
 
@@ -292,7 +292,7 @@ if( isset($message->cc) ) { // ou $message->headerExists('cc');
             chaîne. Ceci est possible avec la méthode <code>getHeader()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // récupérer l'en-tête comme une propriété - le résultat est toujours
 // une chaîne, avec de nouvelles lignes entre chaque occurence
 // dans le message
@@ -321,7 +321,7 @@ if (is_string($received)) {
             multiples ou une chaîne pour des en-têtes uniques.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // récupère tous les en-têtes
 foreach ($message->getHeaders() as $name => $value) {
     if (is_string($value)) {
@@ -340,7 +340,7 @@ foreach ($message->getHeaders() as $name => $value) {
             extrait en cas de besoin (alias late-fetch).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // affiche le contenu du message
 echo '<pre>';
 echo $message->getContent();
@@ -358,7 +358,7 @@ echo '</pre>';
             en-têtes.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // récupérer la première partie non-multipart
 $part = $message;
 while ($part->isMultipart()) {
@@ -378,7 +378,7 @@ echo $part->getContent();
             qui retourne le contenu.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // affiche la première partie de type text/plain=
 $foundPart = null;
 foreach (new RecursiveIteratorIterator($mail->getMessage(1)) as $part) {
@@ -412,7 +412,7 @@ if (!$foundPart) {
             existants.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // trouvé les messages non lus
 echo "Emails non lus :\n";
 foreach ($mail as $message) {
@@ -457,7 +457,7 @@ foreach ($flags as $flag) {
             chaîne et peuvent être vérifiés de la même manière avec <code>hasFlag()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Vérifie le message avec les drapeaux $EstUnSpam, $SpamTeste
 if (!$message->hasFlag('$SpamTeste')) {
     echo 'ce message n\'est pas considéré comme un spam';
@@ -496,7 +496,7 @@ if (!$message->hasFlag('$SpamTeste')) {
             défaut. Exemples pour ouvrir ces stockages :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // mbox avec dossiers
 $mail = new Zend_Mail_Storage_Folder_Mbox(
             array('dirname' => '/home/test/mail/')
@@ -575,7 +575,7 @@ $mail = new Zend_Mail_Storage_Imap(array('host'     => 'example.com',
             entier dans une vue :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $folders = new RecursiveIteratorIterator(
                     $this->mail->getFolders(),
                     RecursiveIteratorIterator::SELF_FIRST
@@ -602,7 +602,7 @@ echo '</select>';
             instance de <classname>Zend_Mail_Storage_Folder</classname> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // selon votre stockage et ses réglages $rootFolder->Archive->2005
 // est la même chose que :
 //   /Archive/2005
@@ -628,7 +628,7 @@ $mail->selectFolder($folder);
                 devoir maintenir la connexion persistante par l'intermédiaire du noop :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 foreach ($mail as $message) {
 
     // faire qqch...
@@ -661,7 +661,7 @@ foreach ($mail as $message) {
                 d'employer l'instance caché.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // il n'y a pas de gestionnaire spécifique de cache utilisé ici,
 // changer le code pour utiliser votre gestionnaire de cache
 $signal_file = '/home/test/.mail.last_change';
@@ -703,7 +703,7 @@ $cache->set($cache_id, $mail);
                 nous puissions nous relier à POP3.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Zend_Mail_Storage_Pop3');
 
 class Example_Mail_Exception extends Zend_Mail_Exception
@@ -803,7 +803,7 @@ $mail = new Example_Mail_Pop3_Knock(
                 <code>setQuota()</code> et <code>checkQuota()</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail_Storage_Writable_Maildir(
             array('dirname' => '/home/test/mail/')
         );
@@ -823,7 +823,7 @@ echo 'Vous êtes ',
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $quota = $mail->checkQuota(true);
 echo 'Vous êtes ',
      $quota['over_quota'] ? 'hors quota' : 'dans le quota',
@@ -842,7 +842,7 @@ echo $quota['size'], ' de ', $quota['quota']['size'], ' octets';
                 le faire avec <code>setQuota()</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // le nombre de messages et la taille en octet sont supportés,
 // l'ordre est important
 $quota = $mail->setQuota(array('size' => 10000, 'count' => 100));
@@ -857,7 +857,7 @@ $quota = $mail->setQuota(array('size' => 10000, 'count' => 100));
                 absent (qui peut se produire dans Maildir++) :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Exemple_Mail_Storage_Maildir extends Zend_Mail_Storage_Writable_Maildir {
     // getQuota est appelé avec $fromStorage = true
     // par la vérification de quota

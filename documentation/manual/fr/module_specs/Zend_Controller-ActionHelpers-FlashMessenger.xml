@@ -31,7 +31,7 @@
             <code>/some/my-next-request</code> le retrouvera (ainsi que le détruira).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**

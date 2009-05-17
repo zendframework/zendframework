@@ -55,13 +55,13 @@
             l'URI de la ressource.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->htmlFlash('/path/to/flash.swf'); ?>
 ]]></programlisting>
 
         <para>Ceci affichera le code HTML suivant :</para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <object data="/path/to/flash.swf" type="application/x-shockwave-flash"
     classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
     codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
@@ -91,7 +91,7 @@
             qui utilise tous le paramètres :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->htmlObject(
     '/path/to/file.ext',
     'mime/type',

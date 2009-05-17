@@ -24,7 +24,7 @@
     <example id="zend.version.reading.example">
         <title>Exemple avec la méthode <code>compareVersion()</code></title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // retourne -1, 0 or 1
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>

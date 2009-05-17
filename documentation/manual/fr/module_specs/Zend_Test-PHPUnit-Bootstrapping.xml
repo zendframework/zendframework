@@ -25,7 +25,7 @@
         seulement paramétrer celui-ci et faire tout réglage spécifique à votre application.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = '/chemin/vers/amorcage/fichier.php'
@@ -41,7 +41,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         fonction ou une méthode statique, ceci peut être paramétrer au niveau de la classe :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public $bootstrap = array('App', 'bootstrap');
@@ -55,7 +55,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         dans votre méthode <code>setUp()</code> :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function setUp()

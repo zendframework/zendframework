@@ -28,7 +28,7 @@
             <code>addHelperPath()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/',
                      'Zend_Dojo_View_Helper');
 ]]></programlisting>
@@ -38,7 +38,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper/',
             de <classname>Zend_Dojo</classname> qui le fait pour vous&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Dojo::enableView($view);
 ]]></programlisting>
 

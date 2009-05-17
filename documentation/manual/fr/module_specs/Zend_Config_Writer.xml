@@ -56,7 +56,7 @@
             configuration&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Créer l'objet de configuration
 $config = new Zend_Config(array(), true);
 $config->production = array();
@@ -102,7 +102,7 @@ $writer->write('config.xml', $config);
             existant&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Charger toutes les sections d'un fichier de configuration existant,
 // tout en évitant les sections étendues.
 $config = new Zend_Config_Ini('config.ini',

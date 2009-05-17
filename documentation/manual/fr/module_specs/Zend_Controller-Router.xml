@@ -26,14 +26,14 @@
             seule règle de réécriture Apache, dont voici des exemples&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]></programlisting>
 
         <para>ou (recommandé) :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -48,7 +48,7 @@ RewriteRule ^.*$ index.php [NC,L]
             a été installée comme une extension Isap avec la règle suivante&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
 ]]></programlisting>
 
@@ -68,7 +68,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
             comme ceci&#160;:
         </para>
 
-        <programlisting role="xml"><![CDATA[
+        <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -98,7 +98,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
 
         <para>Si vous utilisez Lighttpd, la règle de réécriture suivante est valide&#160;:</para>
 
-        <programlisting role="lighttpd"><![CDATA[
+        <programlisting language="lighttpd"><![CDATA[
 url.rewrite-once = (
     ".*\?(.*)$" => "/index.php?$1",
     ".*\.(js|ico|gif|jpg|png|css|html)$" => "$0",
@@ -115,7 +115,7 @@ url.rewrite-once = (
             routes&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /* Créer un routeur */
 $router = $frontctrl->getRouter();
 // retourne un routeur de réécriture par défaut
@@ -140,7 +140,7 @@ $router->addRoute(
             Exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]></programlisting>
@@ -189,7 +189,7 @@ $router->addRoute('user',
                 L'utilisation la plus plausible du nom de la route est illustrée dans l'aide
                 vue "url"&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <a href="<?= $this->url(array('username' => 'martel'), 'user') ?>">
 Martel
 </a>
@@ -263,7 +263,7 @@ Martel
 
         <para>Exemples avec ces routes&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Considérons :
 $ctrl->setControllerDirectory(
     array(
@@ -307,7 +307,7 @@ http://example/blog/archive/list/sort/alpha/date/desc
             "default" dans le routeur de réécriture(RewriteRouter). Il est conçu comme ceci&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
                                                   $dispatcher,
                                                   $request);
@@ -320,7 +320,7 @@ $this->addRoute('default', $compat);
             <code>removeDefaultRoutes()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Supprime les routes par défaut
 $router->removeDefaultRoutes();
 ]]></programlisting>
@@ -344,7 +344,7 @@ $router->removeDefaultRoutes();
             <xref linkend="zend.controller.request.http.baseurl" />)&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
     </sect2>
@@ -360,7 +360,7 @@ $request->setBaseUrl('/~user/application-root/');
             paramètre global. Vous pouvez régler un paramètre global de cette manière&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
 ]]></programlisting>
     </sect2>
@@ -391,7 +391,7 @@ $router->setGlobalParam('lang', 'en');
 
         <para>Par exemple, voyons un fichier INI :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 [production]
 routes.archive.route = "archive/:year/*"
 routes.archive.defaults.controller = archive
@@ -417,7 +417,7 @@ routes.archive.map.1 = "year"
             comme suit&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
@@ -452,7 +452,7 @@ $router->addConfig($config, 'routes');
             qu'une seule méthode&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
 {
   /**

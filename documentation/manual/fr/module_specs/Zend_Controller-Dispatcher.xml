@@ -30,7 +30,7 @@
                 pouvez spécifier le paramètre <code>prefixDefaultModule</code> à <code>true</code>
                 soit dans le contrôleur frontal soit dans le distributeur&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Dans le contrôleur frontal :
 $front->setParam('prefixDefaultModule', true);
 
@@ -68,7 +68,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
             souhaitez passer à la nouvelle action&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // Transférer la nouvelle action dans le contrôleur
@@ -114,7 +114,7 @@ public function bazAction()
             suivantes nécessaires pour toute implémentation d'un distributeur&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**

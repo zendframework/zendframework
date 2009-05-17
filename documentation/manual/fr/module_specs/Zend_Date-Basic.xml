@@ -37,7 +37,7 @@
         <example id="zend.date.basic.creation.example-1">
             <title>Créer la date courante</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Affiche le timestamp actuel
@@ -68,7 +68,7 @@ print $date;
             <example id="zend.date.simple.functions.get.example-1">
                 <title>get() - affiche une date</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Affiche la date désirée
@@ -89,7 +89,7 @@ print $date->get();
             <example id="zend.date.simple.functions.set.example-1">
                 <title>set() - affecte une date</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // Affecter une nouvelle date
@@ -112,7 +112,7 @@ print $date->get(Zend_Date::W3C);
             <example id="zend.date.simple.functions.add.example-1">
                 <title>add() - ajouter des dates</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
 // modifie $date en ajoutant 12 heures
@@ -139,7 +139,7 @@ echo "Date via toString() = ", $date, "\n";
             <example id="zend.date.simple.functions.compare.example-1">
                 <title>compare() - comparer des dates</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // date actuelle
 
 // Comparaison des 2 temps
@@ -159,7 +159,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
             <example id="zend.date.simple.functions.compare.example-2">
                 <title>equals() - identifie une date ou partie de date</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // date actuelle
 
 // Identification, demande d'égalité

@@ -80,7 +80,7 @@
             l'objet <classname>Zend_Http_Client</classname> fraîchement authentifié :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // identifiants de compte Google
 $email = 'johndoe@gmail.com';
 $passwd = 'xxxxxxxx';

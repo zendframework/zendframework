@@ -49,7 +49,7 @@
                     L'utilisation explicite de <code>getHelper()</code>. Passez lui
                     simplement un nom, et l'objet d'aide est retourné&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->getHelper('FlashMessenger');
 $message = 'Nous avons fait quelquechose lors de la dernière requête';
 $flashMessenger->addMessage($message);
@@ -61,7 +61,7 @@ $flashMessenger->addMessage($message);
                     d'aide et récupérez l'aide comme si elle était une propriété membre du
                     gestionnaire :
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $flashMessenger = $this->_helper->FlashMessenger;
 $message = 'Nous avons fait quelquechose lors de la dernière requête';
 $flashMessenger->addMessage($message);
@@ -74,7 +74,7 @@ $flashMessenger->addMessage($message);
                     l'aide. Dans l'exemple de <code>FlashMessenger</code>, ceci appelle
                     <code>addMessage()</code>&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $message = 'Nous avons fait quelquechose lors de la dernière requête';
 $this->_helper->FlashMessenger($message);
 ]]></programlisting>
@@ -107,7 +107,7 @@ $this->_helper->FlashMessenger($message);
             <code>addHelper</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::addHelper($helper);
 ]]></programlisting>
 
@@ -125,7 +125,7 @@ Zend_Controller_Action_HelperBroker::addHelper($helper);
                     définies. Ceci suppose que le préfixe de la classe respecte la convention de
                     nommage de Zend Framework.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Ajoute les aides préfixées Mes_Action_Helpers dans Mes/Action/Helpers/
 Zend_Controller_Action_HelperBroker::addPrefix('Mes_Action_Helpers');
 ]]></programlisting>
@@ -138,7 +138,7 @@ Zend_Controller_Action_HelperBroker::addPrefix('Mes_Action_Helpers');
                     faire correspondre vos propres préfixes de classe à vos dossiers
                     spécifiques.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Ajoute les aides préfixées avec Aide dans Plugins/Aides/
 Zend_Controller_Action_HelperBroker::addPath('./Plugins/Aides', 'Aide');
 ]]></programlisting>
@@ -164,7 +164,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Aides', 'Aide');
             (sans le préfixe)&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Vérifie si l'aide 'redirector' est enregistrée dans le gestionnaire :
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     echo 'L\'aide Redirector est enregistrée';
@@ -188,7 +188,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             nom court de l'aide (c'est-à-dire sans le préfixe).
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Vérifie si l'aide 'redirector' est enregistrée dans le gestionnaire,
 // et l'extrait :
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
@@ -209,7 +209,7 @@ $redirector =
             (sans le préfixe)&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Effacement conditionnel de l'aide 'redirector' du gestionnaire :
 if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
     Zend_Controller_Action_HelperBroker::removeHelper('redirector')
@@ -306,7 +306,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             l'aide comme ceci&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Redirige vers /blog/view/item/id/42
 $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
 ]]></programlisting>

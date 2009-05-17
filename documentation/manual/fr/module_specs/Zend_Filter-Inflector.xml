@@ -27,7 +27,7 @@
             Transformer du texteEncasseMelangée ou du texteCamelCase vers un autre format
         </title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('pages/:page.:suffix');
 $inflector->setRules(array(
     ':page'  => array('Word_CamelCaseToDash', 'StringToLower'),
@@ -87,7 +87,7 @@ $filtered = $inflector->filter(array('page' => $string));
             préfixe "<classname>Zend_Filter</classname>" tout simplement&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // utilise Zend_Filter_Word_CamelCaseToDash comme règle
 $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
 ]]></programlisting>
@@ -98,7 +98,7 @@ $inflector->addRules(array('script' => 'Word_CamelCaseToDash'));
             <code>addFilterPrefixPath()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector->addFilterPrefixPath('Mes_Filtres', 'Mes/Filtres/');
 ]]></programlisting>
 
@@ -107,7 +107,7 @@ $inflector->addFilterPrefixPath('Mes_Filtres', 'Mes/Filtres/');
             instance de manière directe&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $loader = $inflector->getPluginLoader();
 $loader->addPrefixPath('Mes_Filtres', 'Mes/Filtres/');
 ]]></programlisting>
@@ -133,7 +133,7 @@ $loader->addPrefixPath('Mes_Filtres', 'Mes/Filtres/');
             constructeur&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Via le constructeur :
 $inflector = new Zend_Filter_Inflector('#foo/#bar.#sfx', null, '#');
 
@@ -149,7 +149,7 @@ $inflector->setTargetReplacementIdentifier('#');
             <code>setTarget()</code> peut vous y aider&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $inflector = $layout->getInflector();
 $inflector->setTarget('layouts/:script.phtml');
 ]]></programlisting>
@@ -160,7 +160,7 @@ $inflector->setTarget('layouts/:script.phtml');
             ceci&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -220,7 +220,7 @@ class Foo
                 <code>setStaticRule()</code> permet de les manipuler&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 $inflector->setStaticRule('suffix', 'phtml');
 
@@ -237,7 +237,7 @@ $inflector->setStaticRule('suffix', 'php');
                 exemple. La méthode <code>setStaticRuleReference()</code> vous y aidera&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Foo
 {
     /**
@@ -313,7 +313,7 @@ class Foo
                 </listitem>
             </itemizedlist>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector(':script.:suffix');
 
 // Affecte une règle pour utiliser le filtre
@@ -361,7 +361,7 @@ $inflector->setFilterRule('script', array(
             <example id="zend.filter.inflector.rules.multiple.example">
                 <title>Paramétrer plusieurs règles en une seule fois</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // setRules() accepte la même notation :
 $inflector->addRules(array(
     // règles filtres:
@@ -474,7 +474,7 @@ $inflector->addRules(array(
         <example id="zend.filter.inflector.config.example">
             <title>Utiliser Zend_Config avec Zend_Filter_Inflector</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Par le constructeur :
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);

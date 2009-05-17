@@ -132,7 +132,7 @@
                 lors d'une redirection.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -176,7 +176,7 @@ class SomeController extends Zend_Controller_Action
                 inclut que toute redirection sera suivie d'un <code>exit()</code> immédiat.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // EXEMPLE ALTERNATIF
 class AlternativeController extends Zend_Controller_Action
 {
@@ -217,7 +217,7 @@ class AlternativeController extends Zend_Controller_Action
                 alors une redirection au lieu d'enchaîner l'action.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ForwardController extends Zend_Controller_Action
 {
     /**
@@ -259,7 +259,7 @@ class ForwardController extends Zend_Controller_Action
                 enregistrée&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'blog/:year/:month/:day/:id',
     array('controller' => 'archive',
@@ -274,7 +274,7 @@ $router->addRoute('blogArchive', $route);
                 et l'ID à 42, il construira l'URL <code>/blog/2006/4/24/42</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BlogAdminController extends Zend_Controller_Action
 {
     /**

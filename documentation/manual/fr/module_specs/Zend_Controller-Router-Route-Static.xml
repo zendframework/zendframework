@@ -12,7 +12,7 @@
         réponse à cette situation est l'utilisation de routes statiques&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Static(
     'login',
     array('controller' => 'auth', 'action' => 'login')
@@ -53,7 +53,7 @@ $router->addRoute('login', $route);
             Optionnellement, vous pouvez activer le paramètre "useDefaultControllerAlways" du
             contrôleur frontal lors de l'amorçage&#160;:
         </para>
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
         <para>

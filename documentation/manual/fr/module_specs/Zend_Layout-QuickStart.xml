@@ -23,7 +23,7 @@
 
         <para>Par exemple :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -57,7 +57,7 @@
             pour l'accès aux éléments tels que &lt;head&gt;, les scripts, les méta, etc. :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -107,7 +107,7 @@
             contexte MVC
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Dans le fichier de démarrage (bootstrap)
 Zend_Layout::startMvc();
 ]]></programlisting>
@@ -123,7 +123,7 @@ Zend_Layout::startMvc();
             l'aide d'action :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -148,7 +148,7 @@ class FooController extends Zend_Controller_Action
             enchaîner une méthode immédiatement :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->layout()->setLayout('foo'); // utilise un script de layout spécifique
 ]]></programlisting>
 
@@ -158,7 +158,7 @@ $this->layout()->setLayout('foo'); // utilise un script de layout spécifique
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Retourne null si startMvc() n'a pas été appelée auparavant
 $layout = Zend_Layout::getMvcInstance();
 ]]></programlisting>
@@ -182,7 +182,7 @@ $layout = Zend_Layout::getMvcInstance();
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <body>
     <!-- rend /nav/menu -->
     <div id="nav"><?php echo $this->layout()->nav ?></div>
@@ -229,7 +229,7 @@ $layout = Zend_Layout::getMvcInstance();
             variables comme des propriétés de l'objet, et rendez le layout :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $layout = new Zend_Layout();
 
 // Spécification du chemin des scripts layout:

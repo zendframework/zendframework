@@ -28,7 +28,7 @@
             utiliser.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync('0.pool.ntp.org');
 
 print $server->getDate()->getIso();
@@ -68,7 +68,7 @@ print $server->getDate()->getIso();
             <code>addServer()</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('0.pool.ntp.org',
                                   '1.pool.ntp.org',
                                   '2.pool.ntp.org'));
@@ -88,7 +88,7 @@ print $server->getDate()->getIso();
             du tableau de serveurs, ou en second paramètre de la méthode addServer() :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => '0.pool.ntp.org',
                                   'fallback' => '1.pool.ntp.org',
                                   'reserve'  => '2.pool.ntp.org'));
@@ -118,7 +118,7 @@ print $server->getDate()->getIso();
             sera utilisé.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org',
                                   'reserve'  => 'ntp:\\2.pool.ntp.org'));
@@ -147,7 +147,7 @@ print $server->getDate()->getIso();
             <classname>Zend_TimeSync</classname> utilisera celui par défaut.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org:200',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
@@ -181,7 +181,7 @@ print $server->getDate()->getIso();
             connues.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_TimeSync::setOptions(array('timeout' => 3, 'myoption' => 'timesync'));
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
@@ -210,7 +210,7 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             <code>getServer()</code> vous sera utile.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 $server->addServer('sntp:\\internal.myserver.com', 'additional');
@@ -229,7 +229,7 @@ $server = $server->setServer('additional');
             <code>getInfo()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_TimeSync(array('generic'  => 'ntp:\\0.pool.ntp.org',
                                   'fallback' => 'ntp:\\1.pool.ntp.org'));
 
@@ -250,7 +250,7 @@ print_r ($server->getInfo());
             que tableau. Vous pourrez ainsi itérer sur vos exceptions, voyez plutôt :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $serverlist = array(
         // invalid servers
         'invalid_a'  => 'ntp://a.foo.bar.org',

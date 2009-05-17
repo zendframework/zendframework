@@ -45,7 +45,7 @@
 
     <para>Comme exemple, prenons le contrôleur suivant&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     /**
@@ -78,7 +78,7 @@ class NewsController extends Zend_Controller_Action
         retourner du XML&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -159,7 +159,7 @@ class NewsController extends Zend_Controller_Action
                     Ce comportement peut être désactivé en passant le paramètre de
                     sérialisation à <code>false</code>&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 ]]></programlisting>
             </listitem>
@@ -303,7 +303,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
             un tableau de contextes). Par exemple, considérons la classe suivante&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function listAction()
@@ -330,7 +330,7 @@ class FooController extends Zend_Controller_Action
             <code>init()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function init()
@@ -348,7 +348,7 @@ class FooController extends Zend_Controller_Action
             <code>$contexts</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public $contexts = array(
@@ -444,7 +444,7 @@ class FooController extends Zend_Controller_Action
             appeler <code>initContext()</code> dans vos contrôleurs d'action&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class NewsController extends Zend_Controller_Action
 {
     public function init()
@@ -459,7 +459,7 @@ class NewsController extends Zend_Controller_Action
             n'autoriser que celui-ci. Passez le alors à <code>initContext()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $contextSwitch->initContext('xml');
 ]]></programlisting>
     </sect4>
@@ -480,7 +480,7 @@ $contextSwitch->initContext('xml');
                     réponse. Si vous voulez créer votre propre réponse, vous voudriez désactiver
                     cet effet. Ceci doit être fait avant l'appel à <code>initContext()</code>.
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $contextSwitch->setAutoJsonSerialization(false);
 $contextSwitch->initContext();
 ]]></programlisting>
@@ -673,7 +673,7 @@ $contextSwitch->initContext();
                 JSON.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class CommentController extends Zend_Controller_Action
 {
     public function init()

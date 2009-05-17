@@ -91,7 +91,7 @@
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 {
     /**
@@ -157,7 +157,7 @@ class Bugapp_Plugin_Initialize extends Zend_Controller_Plugin_Abstract
 
         <para>Ceci nous permet de créer un callback d'amorçage comme ce qui suit :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     public function appBootstrap()
@@ -186,7 +186,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
             qui vous permettront de distribuer une nouvelle requête.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
@@ -215,7 +215,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         <para>Écrivons maintenant les tests :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...

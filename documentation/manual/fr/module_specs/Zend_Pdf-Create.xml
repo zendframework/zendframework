@@ -24,7 +24,7 @@
     <example id="zend.pdf.create.example-1">
         <title>Créer un nouveau document PDF ou en charger un existant</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 /// Crée un nouveau document PDF.
 $pdf1 = new Zend_Pdf();
@@ -59,7 +59,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     <example id="zend.pdf.create.example-2">
         <title>Demander une version particulière d'un document PDF</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 // Charge la version précédente d'un document PDF.
 $pdf1 = Zend_Pdf::load($fileName, 1);

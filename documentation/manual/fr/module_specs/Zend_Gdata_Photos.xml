@@ -112,7 +112,7 @@
                 procédé d'authentification ClientAuth :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Paramètres pour ClientAuth authentification
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $user = "sample.user@gmail.com";
@@ -127,7 +127,7 @@ $service = new Zend_Gdata_Photos($client);
 
             <para>Au sujet du procédé AuthSub, voici la démarche :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 session_start();
 
 /**
@@ -223,7 +223,7 @@ $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 
             <para>Enfin, un client non authentifié peut aussi être crée :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Création d'une instance du service en mode non authentifié
 $service = new Zend_Gdata_Photos();
 ]]></programlisting>
@@ -264,7 +264,7 @@ $service = new Zend_Gdata_Photos();
 
         <para>Une <code>UserQuery</code> peut être construite comme suit :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -387,7 +387,7 @@ $query->setUser("sample.user");
                 <code>getUserFeed</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -401,7 +401,7 @@ try {
 
             <para>Ou alors, le flux peut être requêté directement :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -421,7 +421,7 @@ try {
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -448,7 +448,7 @@ try {
                 passant à <code>getAlbumFeed</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -472,7 +472,7 @@ try {
 
             <para>Construire une requête donne aussi accès au requêtage d'un album :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -503,7 +503,7 @@ try {
                 passant à la méthode <code>getPhotoFeed</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -522,7 +522,7 @@ try {
 
             <para>Construire une requête donne aussi accès au requêtage d'une photo :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -555,7 +555,7 @@ try {
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -594,7 +594,7 @@ try {
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -633,7 +633,7 @@ try {
 
             <para>Il est possible de créer un album, pour les clients authentifiés :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -653,7 +653,7 @@ $service->insertAlbumEntry($entry);
                 suit :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -685,7 +685,7 @@ $service->insertPhotoEntry($entry, $albumEntry);
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -711,7 +711,7 @@ $service->insertCommentEntry($entry, $photoEntry);
 
             <para>Il est possible de créer un mot-clé pour une photo, voici un exemple :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -742,7 +742,7 @@ $service->insertTagEntry($entry, $photoEntry);
 
             <para>Supprimer un album est possible si le client est authentifié :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -763,7 +763,7 @@ $service->deleteAlbumEntry($entry, true);
 
             <para>Supprimer une photo est possible si le client est authentifié :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -785,7 +785,7 @@ $service->deletePhotoEntry($entry, true);
 
             <para>Supprimer un commentaire est possible si le client est authentifié :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -809,7 +809,7 @@ $service->deleteCommentEntry($entry, true);
 
             <para>Supprimer un mot-clé est possible, si le client est authentifié :</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
@@ -852,7 +852,7 @@ $service->deleteTagEntry($tagEntry, true);
                 avec <code>deleteAlbumEntry</code>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     // $album est l'albumEntry à effacer
 try {
     $this->delete($album);

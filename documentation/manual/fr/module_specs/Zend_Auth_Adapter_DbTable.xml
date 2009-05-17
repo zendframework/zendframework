@@ -75,7 +75,7 @@
                 un schéma avec une table unique, et insère une ligne sur laquelle nous pouvons
                 réaliser une requête d'authentification plus tard. Cet exemple requiert que
                 l'extension PDO SQLite soit disponible&#160;:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Crée une connexion de base de données SQLite en mémoire
 $dbAdapter = new Zend_Db_Adapter_Pdo_Sqlite(array('dbname' =>
                                                   ':memory:'));
@@ -106,7 +106,7 @@ $dbAdapter->query($sqlInsert);
                 créée. Les valeurs d'options de configuration peuvent être fournies au
                 constructeur ou en tant que paramètres aux méthodes de réglage après
                 l'instanciation&#160;:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Configure une instance avec des paramètres de constructeur ...
 $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter,
                                              'users',
@@ -126,7 +126,7 @@ $authAdapter->setTableName('users')
                 recevoir des requêtes d'authentification. Dans le but de réaliser une requête
                 d'authentification, les valeurs des crédits requêtés sont fournies à l'adaptateur
                 avant d'appeler la méthode <code>authenticate()</code>&#160;:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Règle les valeurs d'entrées des crédits
 // (en général, à partir d'un formulaire d'enregistrement)
 $authAdapter->setIdentity('my_username')
@@ -142,7 +142,7 @@ $result = $authAdapter->authenticate();
                 récupérer l'objet du résultat d'authentification,
                 <classname>Zend_Auth_Adapter_DbTable</classname> supporte aussi la récupération de
                 la ligne de la table qui a réussi l'authentification&#160;:
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Affiche l'identité
 echo $result->getIdentity() . "\n\n";
 
@@ -178,7 +178,7 @@ Array
             informations utiles, est résolu en utilisant la méthode
             <code>getResultRowObject()</code> retournant un objet <code>stdClass</code>. Le petit
             bout de code suivant illustre cette utilisation&#160;:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // authentifie avec Zend_Auth_Adapter_DbTable
 $result = $this->_auth->authenticate($adapter);
 
@@ -226,7 +226,7 @@ if ($result->isValid()) {
             problèmes communs d'utilisateur.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // La valeur du champs "etat" d'un compte
 // ne doit pas être égal à "compromis"
 $adapter = new Zend_Auth_Adapter_DbTable($db,
@@ -258,7 +258,7 @@ $adapter = new Zend_Auth_Adapter_DbTable($db,
             "salt" aléatoire&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
@@ -271,7 +271,7 @@ $dbAdapter->query($sqlAlter);
             utilisateur à leur enregistrement&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++)
 {
     $dynamicSalt .= chr(rand(33, 126));
@@ -280,7 +280,7 @@ for ($i = 0; $i < 50; $i++)
 
         <para>Et maintenant, construisons l'adaptateur&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_DbTable(
     $db,
     'users',

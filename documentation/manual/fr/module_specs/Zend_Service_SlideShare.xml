@@ -29,7 +29,7 @@
             <classname>Zend_Service_SlideShare</classname> en lui passant vos identifiants :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crée une instance du composant
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -48,7 +48,7 @@ $ss = new Zend_Service_SlideShare('APIKEY',
             code de cette classe :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Zend_Service_SlideShare_SlideShow {
 
     /**
@@ -214,7 +214,7 @@ class Zend_Service_SlideShare_SlideShow {
             <classname>Zend_Service_SlideShare_SlideShow</classname>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Création d'une instance du composant
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -268,7 +268,7 @@ print "Nombre de diapositives : {$slideshow->getNumViews()}<br/>\n";
 
         <para>Voici un exemple utilisant les méthodes décrites ci-dessus :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crée une nouvelle instance du composant
 $ss = new Zend_Service_SlideShare('APIKEY',
                                   'SHAREDSECRET',
@@ -301,7 +301,7 @@ foreach($ss_user as $slideshow) {
             utilisant la méthode <code>setCacheObject</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $frontendOptions = array(
                         'lifetime' => 7200,
                         'automatic_serialization' => true);
@@ -334,7 +334,7 @@ $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
             toute autre chose :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client();
 $client->setConfig(array('timeout' => 5));
 

@@ -28,7 +28,7 @@
             ceci :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $progressBar = new Zend_ProgressBar(0, $fileSize, $adapter);
 
 while (!feof($fp)) {

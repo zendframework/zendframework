@@ -78,7 +78,7 @@
             <code>file</code> avec l'action <code>upload</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
 $adapter->setDestination('C:\temp');
@@ -183,7 +183,7 @@ if (!$adapter->receive()) {
         <example id="zend.file.transfer.introduction.checking.example">
             <title>Vérification de fichiers</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 
 // Retourne toutes les informations connues sur le fichier
@@ -271,7 +271,7 @@ $upload->receive();
         <example id="zend.file.transfer.introduction.informations.example1">
             <title>Récupération du nom de fichier</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -301,7 +301,7 @@ $names = $upload->getFileName('foo');
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
             <title>Récupération de la taille de fichier</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -326,7 +326,7 @@ $size = $upload->getFileSize();
         <example id="zend.file.transfer.introduction.informations.example2">
             <title>Récupération d'un hash de fichier</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -354,7 +354,7 @@ $names = $upload->getHash('crc32', 'foo');
         <example id="zend.file.transfer.introduction.informations.getmimetype">
             <title>Récupération du type MIME de fichier</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $upload = new Zend_File_Transfer();
 $upload->receive();
 
@@ -420,7 +420,7 @@ $names = $upload->getMimeType('foo');
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
                 <title>Using the progressbar adapter to retrieve the actual state</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $adapter = new Zend_ProgressBar_Adapter_Console();
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress($adapter);
 
@@ -525,7 +525,7 @@ while (!$upload['done']) {
             <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
                 <title>Manual usage of the file progress</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $upload  = Zend_File_Transfer_Adapter_Http::getProgress();
 
 while (!$upload['done']) {

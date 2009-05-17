@@ -38,7 +38,7 @@
         <example id="zend.uri.creation.example-1">
             <title>Créer un URI avec <classname>Zend_Uri::factory()</classname></title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Création d'un URI vierge
 $uri = Zend_Uri::factory('http');
 
@@ -76,7 +76,7 @@ $uri = Zend_Uri::factory('http');
             <title>Manipuler un URI existant avec
             <classname>Zend_Uri::factory()</classname></title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Passez l'URI complet à la fabrique
 $uri = Zend_Uri::factory('http://www.zend.com');
 
@@ -103,7 +103,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
         <example id="zend.uri.validation.example-1">
             <title>Validation d'URI avec <classname>Zend_Uri::check()</classname></title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Valide si l'URI passé est bien formé
 $valid = Zend_Uri::check('http://uri.en.question');
 
@@ -136,7 +136,7 @@ $valid = Zend_Uri::check('http://uri.en.question');
             <example id="zend.uri.validation.allowunwise.example-1">
                 <title>Autoriser les caractères spéciaux dans les URIs</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Normalement, ceci devrait retourner false :
 $valid = Zend_Uri::check('http://example.com/?q=this|that'); // Contient le symbole '|'
 
@@ -180,7 +180,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             <example id="zend.uri.instance-methods.getscheme.example-1">
                 <title>Récupérer le schéma d'un objet <classname>Zend_Uri_*</classname></title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $scheme = $uri->getScheme();  // "http"
@@ -197,7 +197,7 @@ $scheme = $uri->getScheme();  // "http"
                 <title>Récupérer l'URI entier depuis un objet
                 <classname>Zend_Uri_*</classname></title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 echo $uri->getUri();  // "http://www.zend.com"
@@ -222,7 +222,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             <example id="zend.uri.instance-methods.valid.example-1">
                 <title>Valider un objet <classname>Zend_Uri_*</classname></title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $isValid = $uri->valid();  // TRUE

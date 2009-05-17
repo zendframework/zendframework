@@ -307,7 +307,7 @@
             représentée sur l'ordinateur, il faut utiliser un tiret bas en début de chaîne.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $valeur_grande = '_X';
 $locale = new Zend_Locale('en');
 $unite = new Zend_Measure_Number($valeur_grande,

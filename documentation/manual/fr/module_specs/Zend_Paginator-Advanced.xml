@@ -53,7 +53,7 @@
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 return array_slice($this->_array, $offset, $itemCountPerPage);
 ]]></programlisting></para>
 
@@ -74,7 +74,7 @@ return array_slice($this->_array, $offset, $itemCountPerPage);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function getPages(Zend_Paginator $paginator, $pageRange = null);
 ]]></programlisting></para>
 
@@ -92,7 +92,7 @@ public function getPages(Zend_Paginator $paginator, $pageRange = null);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 return $paginator->getPagesInRange($lowerBound, $upperBound);
 ]]></programlisting></para>
 
@@ -109,7 +109,7 @@ return $paginator->getPagesInRange($lowerBound, $upperBound);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $prefix = 'Mon_Paginator_StyleDefilement';
 $path   = 'Mon/Paginator/StyleDefilement/';
 Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
@@ -128,7 +128,7 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $fO = array('lifetime' => 3600, 'automatic_serialization' => true);
 $bO = array('cache_dir'=>'/tmp');
@@ -144,7 +144,7 @@ Zend_Paginator::setCache($cache);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 // $cache est une instance de Zend_Cache_Core
 Zend_Paginator::setCache($cache);
@@ -162,7 +162,7 @@ $paginator->setCacheEnable(false);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 $items = $paginator->getCurrentItems();
@@ -183,7 +183,7 @@ $paginator->clearPageItemCache();
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 Zend_Paginator::setCache($cache);
 // récupérer des éléments
@@ -199,7 +199,7 @@ $paginator->setItemCountPerPage(2);
         </para>
 
         <para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paginator = Zend_Paginator::factory($someData);
 $paginator->setItemCountPerPage(3);
 Zend_Paginator::setCache($cache);

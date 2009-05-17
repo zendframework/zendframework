@@ -53,7 +53,7 @@
         <para>
             L'exemple simple ci-dessous démontre l'utilisation d'un filtre sur les caractères
             esperluette (<code>&amp;</code>, "ampersand" en anglais) et guillemet double
-            (<code>"</code>) : <programlisting role="php"><![CDATA[
+            (<code>"</code>) : <programlisting language="php"><![CDATA[
 $htmlEntities = new Zend_Filter_HtmlEntities();
 
 echo $htmlEntities->filter('&'); // &amp;
@@ -73,7 +73,7 @@ echo $htmlEntities->filter('"'); // &quot;
             base de la classe de filtre, relativement dans l'espace de nommage
             <classname>Zend_Filter</classname>. La méthode <code>get()</code> charge automatiquement
             la classe, crée une instance et applique la méthode <code>filter()</code> à la donnée
-            saisie. <programlisting role="php"><![CDATA[
+            saisie. <programlisting language="php"><![CDATA[
 echo Zend_Filter::get('&', 'HtmlEntities');
 ]]></programlisting></para>
 

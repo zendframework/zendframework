@@ -38,7 +38,7 @@
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!--partiel.phtml-->
 <ul>
     <li>De : <?php echo $this->escape($this->de) ?></li>
@@ -51,7 +51,7 @@
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->partial('partiel.phtml', array(
     'de' => 'Equipe Framework',
     'sujet' => 'vues partielles')); ?>
@@ -59,7 +59,7 @@
 
         <para>Qui vous retournerait :</para>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <ul>
     <li>De : Equipe Framework</li>
     <li>Sujet : vues partielles</li>
@@ -107,7 +107,7 @@
             faire ceci en paramétrant la propriété "objectKey" de l'aide de vue approprié :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Tell partial to pass objects as 'model' variable
 $view->partial()->setObjectKey('model');
 
@@ -146,7 +146,7 @@ $view->partialLoop()->setObjectKey('model');
 
         <para>Considérons le script partiel suivant :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <!--partialLoop.phtml-->
     <dt><?php echo $this->key ?></dt>
     <dd><?php echo $this->value ?></dd>
@@ -154,7 +154,7 @@ $view->partialLoop()->setObjectKey('model');
 
         <para>Et le "modèle" suivant :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $model = array(
     array('key' => 'Mammifère', 'value' => 'Chameau'),
     array('key' => 'Oiseau',    'value' => 'Pingouin'),
@@ -168,13 +168,13 @@ $model = array(
             <code>PartialLoop</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <dl>
 <?php echo $this->partialLoop('partialLoop.phtml', $model) ?>
 </dl>
 ]]></programlisting>
 
-        <programlisting role="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dl>
     <dt>Mammifère</dt>
     <dd>Chameau</dd>
@@ -207,7 +207,7 @@ $model = array(
             et qui est dans le module "liste", vous pourriez le saisir comme suit :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->partial('pager.phtml', 'liste', $pagerData) ?>
 ]]></programlisting>
 

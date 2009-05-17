@@ -55,7 +55,7 @@
                     traductions.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/chemin/vers/les/traductions',
                                'auto');
@@ -67,7 +67,7 @@ $language = new Zend_Translate('gettext',
                     désactivées.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $language = new Zend_Translate('gettext',
                                '/chemin/vers/les/traductions',
                                'auto',

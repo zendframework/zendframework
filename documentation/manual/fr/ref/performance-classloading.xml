@@ -44,7 +44,7 @@
                 paramétrage de votre <code>include_path</code>&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.',
@@ -57,7 +57,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 qu'ils sont relatifs à un chemin absolu&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 define('APPLICATION_PATH', realpath(dirname(__FILE__)));
 $paths = array(
     APPLICATION_PATH . '/../library'),
@@ -144,7 +144,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                     dossiers nécessaires dans notre installation PEAR&#160;:
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -175,7 +175,7 @@ library
                     avec seulement deux chemins.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
@@ -217,7 +217,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 shell)&#160;:
             </para>
 
-            <programlisting role="shell"><![CDATA[
+            <programlisting language="shell"><![CDATA[
 % cd chemin/vers/la/librarie/ZendFramework
 % find . -name '*.php' -not -wholename '*/Loader/Autoloader.php' -print0 | \
   xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
@@ -238,7 +238,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 <filename>public/index.php</filename> en ajoutant le code suivant&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 ]]></programlisting>

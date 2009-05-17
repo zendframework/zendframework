@@ -36,7 +36,7 @@
             <example id="zend.locale.migration.fromonesixtooneseven.example">
                 <title>Comment changer l'appel de isLocale() de 1.6 vers 1.7 ?</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Exemple pour ZF 1.6
 if ($locale = Zend_Locale::isLocale($locale)) {
     // faire qqch
@@ -57,7 +57,7 @@ if (Zend_Locale::isLocale($locale)) {
                     est correcte sans nécessiter de reroutage.
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Exemple pour ZF 1.6
 if ($locale = Zend_Locale::isLocale($locale, false)) {
     // do something
@@ -98,7 +98,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             <example id="zend.locale.migration.fromonesixtooneseven.getdefault.example">
                 <title>Comment changer l'appel de getDefaut() de 1.6 vers 1.7 ?</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Exemple pour ZF 1.6
 $locales = $locale->getDefault(Zend_Locale::BROWSER);
 

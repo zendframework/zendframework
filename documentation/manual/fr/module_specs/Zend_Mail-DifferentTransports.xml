@@ -14,7 +14,7 @@
     <example id="zend.mail.different-transports.example-1">
         <title>Utiliser différents transports</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // construction du message
 $tr1 = new Zend_Mail_Transport_Smtp('serveur@exemple.com');

@@ -46,7 +46,7 @@
     <example id="zend.feed.introduction.example.rss">
         <title>Manipuler des données RSS avec Zend_Feed</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // on va chercher les dernières news de Slashdot
 try {
     $rssSlashdot =

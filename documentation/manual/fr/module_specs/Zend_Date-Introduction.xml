@@ -43,7 +43,7 @@
             <example id="zend.date.setdefaulttimezone.example-1">
                 <title>Spécifier un fuseau par défaut </title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // timezone pour un américain en Californie
 date_default_timezone_set('America/Los_Angeles');
 // timezone pour un allemand en Allemagne

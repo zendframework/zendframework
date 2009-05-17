@@ -32,7 +32,7 @@
         <para>
             Par défaut, <classname>Zend_Json</classname> décodera des objets JSON comme en
             tableaux associatifs. Cependant, si vous désirez avoir un objet en retour, vous pouvez le
-            spécifier : <programlisting role="php"><![CDATA[
+            spécifier : <programlisting language="php"><![CDATA[
 // Décode des objets JSON en tant qu'objets PHP
 $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
 ]]></programlisting> Tous les objets sont ainsi décodés et retournés comme des objets de type
@@ -78,7 +78,7 @@ $phpNatif = Zend_Json::decode($valeurEncodee, Zend_Json::TYPE_OBJECT);
             if you have ext/json installed. You can achieve this by calling:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Json::$useBuiltinEncoderDecoder = true:
 ]]></programlisting>
     </sect2>
@@ -105,7 +105,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             expressions in large object structures. A usage example would look like:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $data = array(
     'onClick' => new Zend_Json_Expr('function() {'
               . 'alert("I am a valid javascript callback '

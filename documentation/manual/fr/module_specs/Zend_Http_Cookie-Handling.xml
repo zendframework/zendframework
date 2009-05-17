@@ -101,7 +101,7 @@
             </itemizedlist> <example id="zend.http.cookies.cookie.instantiating.example-1">
                 <title>Créer un objet Zend_Http_Cookie</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // D'abord, en utilisant son constructeur.
 // ce cookie expirera dans 2 heures
 $cookie = new Zend_Http_Cookie('foo',
@@ -140,7 +140,7 @@ $cookie = Zend_Http_Cookie::fromString(
                     id="zend.http.cookies.cookie.instantiating.example-2">
                     <title>Passer de l'objet Zend_Http_Cookie à la chaîne</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Création d'un nouveau cookie
 $cookie = new Zend_Http_Cookie('foo',
                                'two words',
@@ -233,7 +233,7 @@ echo $cookie;
             <example id="zend.http.cookies.cookie.accessors.example-1">
                     <title>Utilisation des méthodes getter de Zend_Http_Cookie</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Création d'un cookie
 $cookie =
     Zend_Http_Cookie::fromString('foo=two+words;'
@@ -300,7 +300,7 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
             </itemizedlist> <example id="zend.http.cookies.cookie.matching.example-1">
                 <title>Correspondance de cookies</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Création de l'objet cookie - d'abord un cookie sécurisé
 $cookie = Zend_Http_Cookie::fromString(
             'foo=two+words; domain=.example.com; path=/somedir; secure;');

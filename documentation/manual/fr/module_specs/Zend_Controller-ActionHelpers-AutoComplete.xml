@@ -20,7 +20,7 @@
 
     <para>L'utilisation basique ressemble à ceci :</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -127,7 +127,7 @@ class FooController extends Zend_Controller_Action
             structure de données Dojo :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // à l'intérieur d'une action de contrôleur :
 $this->_helper->autoCompleteDojo($data);
 ]]></programlisting>
@@ -153,7 +153,7 @@ $this->_helper->autoCompleteDojo($data);
                 suivant&#160;:
             </para>
 
-            <programlisting role="javascript"><![CDATA[
+            <programlisting language="javascript"><![CDATA[
 dojo.provide("custom.TestNameReadStore");
 dojo.declare("custom.TestNameReadStore",
              dojox.data.QueryReadStore,
@@ -175,7 +175,7 @@ dojo.declare("custom.TestNameReadStore",
                 Ensuite, créons le formulaire sur lequel nous souhaitons une auto-complétion&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     protected $_form;
@@ -224,7 +224,7 @@ class TestController extends Zend_Controller_Action
                 l'auto-complétion&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class TestController extends Zend_Controller_Action
 {
     // ...
@@ -275,7 +275,7 @@ class TestController extends Zend_Controller_Action
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <?php // configuration de l'entrepôt de données : ?>
 <div dojoType="custom.TestNameReadStore" jsId="testStore"
     url="<?php echo $this->baseUrl() ?>/unit-test/autocomplete/format/ajax"

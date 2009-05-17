@@ -9,7 +9,7 @@
     <example id="zend.translate.using.example1">
         <title>Exemple de code PHP monolingue</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 print "Exemple\n";
 print "=======\n";
 print "Ceci la ligne une\n";
@@ -35,7 +35,7 @@ print "Correction de la langue ceci est la ligne deux\n";
     <example id="zend.translate.using.example2">
         <title>Exemple de code PHP multilingue</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext',
                                 '/mon/chemin/source-de.mo',
                                 'de');
@@ -73,7 +73,7 @@ $translate = new Zend_Translate('gettext',
     <para>
         L'étape suivante est d'envelopper toutes les chaînes qui doivent être traduites.
         L'approche la plus simple est d'avoir seulement des chaînes simples ou des phrases comme
-        celle-ci : <programlisting role="php"><![CDATA[
+        celle-ci : <programlisting language="php"><![CDATA[
 print $translate->_("Exemple")."\n";
 print "=======\n";
 print $translate->_("Ceci la ligne une")."\n";
@@ -83,7 +83,7 @@ print $translate->_("Ceci la ligne une")."\n";
 
     <para>
         Avoir des valeurs de données intégrées dans une chaîne de traduction est également
-        supporté par l'utilisation des paramètres inclus. <programlisting role="php"><![CDATA[
+        supporté par l'utilisation des paramètres inclus. <programlisting language="php"><![CDATA[
 printf($translate->_("Aujourd'hui nous sommes le %1\$s") . "\n",
                      date("d/m/Y"));
 ]]></programlisting> Au lieu de <code>print()</code>, utiliser la fonction <code>printf()</code>
@@ -97,7 +97,7 @@ printf($translate->_("Aujourd'hui nous sommes le %1\$s") . "\n",
     <para>
         Chaque chaîne est identifiée dans le stockage de traduction par un identificateur de
         message. Vous pouvez employer l'identificateur de message au lieu des chaînes dans votre
-        code, comme ceci : <programlisting role="php"><![CDATA[
+        code, comme ceci : <programlisting language="php"><![CDATA[
 print $translate->_(1)."\n";
 print "=======\n";
 print $translate->_(2)."\n";
@@ -282,7 +282,7 @@ print $translate->_(2)."\n";
             pour démarrer avec des systèmes multilingues.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $english = array('message1' => 'message1',
                  'message2' => 'message2',
                  'message3' => 'message3');
@@ -301,7 +301,7 @@ $translate->addTranslation($deutsch, 'de');
             tableau. Voir l'exemple suivant pour les détails :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // montableau.php
 return array(
     'message1' => 'Nachricht1',
@@ -334,7 +334,7 @@ $translate = new Zend_Translate('array',
             outil vous aide également pour le processus de traduction lui-même.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Les fichiers mo sont créés et déjà traduits
 $translate = new Zend_Translate('gettext',
                                 'chemin/vers/english.mo',
@@ -376,7 +376,7 @@ $translate->addTranslation('chemin/vers/german.mo', 'de');
             gettext, notamment les informations des fichiers gettext ajoutés.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Informations sur l'adaptateur
 $translate = new Zend_Translate('gettext',
                                 'path/to/english.mo',
@@ -400,7 +400,7 @@ print_r $translate->getAdapterInfo();
         <example id="zend.translate.using.source.tmx.example">
             <title>Exemple de fichier TMX</title>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
@@ -419,7 +419,7 @@ print_r $translate->getAdapterInfo();
   </tu>
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('tmx',
                                 'chemin/vers/mytranslation.tmx',
                                 'en');
@@ -459,7 +459,7 @@ message1;Nachricht1
 message2;Nachricht2
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('csv',
                                 'chemin/vers/matraduction.csv',
                                 'de');
@@ -505,7 +505,7 @@ message2,"Nachricht,2"
 "message3,",Nachricht3
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('csv',
                                 'chemin/vers/matraduction.csv',
                                 'de',
@@ -537,7 +537,7 @@ Message_2="Nachricht 2 (de)"
 Message_3="Nachricht :3 (de)"
 ]]></programlisting>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('ini',
                                 'path/to/mytranslation.ini',
                                 'de');
@@ -582,7 +582,7 @@ $translate->addTranslation('path/to/other.ini',
         <example id="zend.translate.using.options.example">
             <title>Utiliser les options de traduction</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // définir ':' comme séparateur pour les fichiers sources de traduction
 $options = array('delimiter' => ':');
 $translate = new Zend_Translate('csv',
@@ -773,7 +773,7 @@ $translate->addTranslation('chemin/vers/nouveau.csv',
         <example id="zend.translate.using.languages.example">
             <title>Gestion des langues avec des adaptateurs</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // retourne la langue paramétrée actuelle
 $actual = $translate->getLocale();
@@ -818,7 +818,7 @@ if ($translate->isAvailable("fr")) {
             <example id="zend.translate.using.languages.automatic.example">
                 <title>Comment la détection automatique de la langue fonctionne-t-elle ?</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Assumons que le navigateur retourne ces valeurs
 // HTTP_ACCEPT_LANGUAGE = "de_AT=1;fr=1;en_US=0.8";
 
@@ -873,7 +873,7 @@ $translate->setLocale('it_IT');
                 traduction.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // En fichier d'amorçage (bootstrap)
 $locale = new Zend_Locale('de_AT');
 Zend_Registry::set('Zend_Locale', $locale);
@@ -911,7 +911,7 @@ $translate->getLocale();
         <example id="zend.translate.using.languages.directory.example">
             <title>Scanner un dossier à la recherche de sources de traduction</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Soit la structure suivante :
 //  /language
 //  /language/login/login.tmx
@@ -964,7 +964,7 @@ $translate = new Zend_Translate('tmx', '/language');
             <example id="zend.translate.using.detection.directory.example">
                 <title>Directory scanning for languages</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // expect we have the following structure
 //  /language
 //  /language/de/login/login.mo
@@ -1015,7 +1015,7 @@ $translate = new Zend_Translate('gettext',
             <example id="zend.translate.using.detection.filename.example">
                 <title>Filename scanning for languages</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // expect we have the following structure
 //  /language
 //  /language/login/login_en.mo
@@ -1134,7 +1134,7 @@ $translate = new Zend_Translate('gettext',
         <example id="zend.translate.using.istranslated.example">
             <title>Vérifier si une texte est traduisible</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $english = array('message1' => 'Nachricht 1',
                  'message2' => 'Nachricht 2',
                  'message3' => 'Nachricht 3');
@@ -1172,7 +1172,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
 
         <example id="zend.translate.using.logging.example">
             <title>Log translations</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
 // Create a log instance
@@ -1218,7 +1218,7 @@ $translate->translate('unknown string');
 
         <example id="zend.translate.using.logging.example2">
             <title>Self defined log messages</title>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
 // Create a log instance
@@ -1280,7 +1280,7 @@ $translate->translate('unknown string');
         <example id="zend.translate.using.sourcedata.example">
             <title>Handling languages with adapters</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // returns all known message ids
 $messageids = $translate->getMessageIds();

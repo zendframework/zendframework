@@ -41,7 +41,7 @@ if ($validateurChaine->isValid($identifiant)) {
         procédure de test s'il échoue, ce qui permet d'éviter de lancer tout autre test qui serait
         inutile ou inapproprié dans ce cas de figure. Si l'exemple précédent était écrit comme suit,
         la validation alphanumérique ne serait pas lancé si la vérification de la longueur de la
-        valeur échouait : <programlisting role="php"><![CDATA[
+        valeur échouait : <programlisting language="php"><![CDATA[
 $validateurChaine->addValidator(new Zend_Validate_StringLength(6, 12), true)
                  ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting></para>

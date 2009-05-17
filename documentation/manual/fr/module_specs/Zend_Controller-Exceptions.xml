@@ -66,7 +66,7 @@
                     rencontre. Ainsi, il ne les ajoutera pas à la réponse, et il ne fera pas
                     intervenir le plugin "<code>Error handler</code>". Exemple&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 try {
     $front->dispatch();
@@ -105,7 +105,7 @@ try {
                     exceptions, ceci grâce à <code>isException()</code> et
                     <code>getException()</code>. Voyez&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 if ($response->isException()) {
@@ -155,7 +155,7 @@ if ($response->isException()) {
                             Dans votre contrôleur frontal, ou distributeur, ajoutez la
                             directive suivante&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 $front->setParam('useDefaultControllerAlways', true);
 // ou
 $dispatcher->setParam('useDefaultControllerAlways', true);
@@ -197,7 +197,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
                             Dérivez la classe <classname>Zend_Controller_Action</classname>
                             en redéfinissant sa méthode <code>__call()</code>, voyez plutôt&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Action extends Zend_Controller_Action
 {
     public function __call($method, $args)
@@ -223,7 +223,7 @@ class My_Controller_Action extends Zend_Controller_Action
                             redéfinissez <code>getAction()</code> pour vérifier si l'action existe
                             bien&#160;:
                         </para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 {
     public function getAction($request)
@@ -278,7 +278,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             En <code>preDispatch()</code>, il agit avant ceux-ci.
                         </para>
                         <para>Par exemple :</para>
-                        <programlisting role="php"><![CDATA[
+                        <programlisting language="php"><![CDATA[
 class My_Controller_PreDispatchPlugin
       extends Zend_Controller_Plugin_Abstract
 {

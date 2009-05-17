@@ -59,7 +59,7 @@
         <para>
             L'exemple suivant démontre comment un validateur personnalisé très simple pourrait
             être écrit. Dans ce cas-ci les règles de validation sont simplement que la valeur
-            d'entrée doit être une valeur en virgule flottante. <programlisting role="php"><![CDATA[
+            d'entrée doit être une valeur en virgule flottante. <programlisting language="php"><![CDATA[
 class MonValidateur_Float extends Zend_Validate_Abstract
 {
     const FLOAT = 'float';
@@ -120,7 +120,7 @@ class MonValidateur_Float extends Zend_Validate_Abstract
 
         <para>
             Ces raisons d'échec de validation sont alors traduites dans les définitions de la
-            classe : <programlisting role="php"><![CDATA[
+            classe : <programlisting language="php"><![CDATA[
 class MonValidateur_NumericBetween extends Zend_Validate_Abstract
 {
     const MSG_NUMERIC = 'msgNumeric';

@@ -26,7 +26,7 @@
                     <title>Forcer des redirections conformes au RFC 2616 lors de la réception d'un
                     code statut 301 and 302</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Redirections strictes
 $client->setConfig(array('strictredirects' => true)
 
@@ -53,7 +53,7 @@ $client->setConfig(array('strictredirects' => false)
                     id="zend.http.client.cookies.example-1">
                     <title>Définition de cookies via setCookie()</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Simple et facile : en fournissant un nom de cookie et une valeur
 $client->setCookie('parfum', 'pépites de chocolat');
 
@@ -80,7 +80,7 @@ $client->setCookie($cookie);
                     id="zend.http.client.cookies.example-2">
                     <title>Activer la persistance des cookies</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Pour activer la persistance des cookies,
 // définissez un Magasin de cookie "Cookie Jar"
 $client->setCookieJar();
@@ -115,7 +115,7 @@ $client->request('GET');
                     id="zend.http.client.custom_headers.example-1">
                     <title>Définir un en-tête personnalisé unique</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Définition d'un en-tête unique,
 // écrasant toute valeur précédemment définie
 $client->setHeaders('Host', 'www.exemple.com');
@@ -139,7 +139,7 @@ $client->setHeaders('Cookie', array(
             paramètre unique : <example id="zend.http.client.custom_headers.example-2">
                     <title>Définition de plusieurs en-têtes personnalisés</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Définition de plusieurs en-têtes,
 // écrasant toute valeur précédemment définie
 $client->setHeaders(array(
@@ -178,7 +178,7 @@ $client->setHeaders(array(
             <example id="zend.http.client.file_uploads.example-1">
                     <title>Utilisation de setFileUpload pour envoyer des fichiers</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Envoi de données arbitraires comme fichier
 $texte = 'ceci est un texte ordinaire';
 $client->setFileUpload('du_texte.txt', 'upload', $texte, 'text/plain');
@@ -221,7 +221,7 @@ $client->request('POST');
                     id="zend.http.client.raw_post_data.example-1">
                     <title>Envoi de données brutes via POST</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $xml = '<book>' .
        '  <title>Islands in the Stream</title>' .
        '  <author>Ernest Hemingway</author>' .
@@ -262,7 +262,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
                     <title>Définir nom d'utilisateur et mot de passe pour l'authentification
                     HTTP</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Utilisation de l'authentification 'basic'
 $client->setAuth('shahar',
                  'monMotdePasse!',
@@ -333,7 +333,7 @@ $client->setAuth('shahar', 'monMotdePasse!');
         <example id="zend.http.client.multiple_requests.example-1">
             <title>Exécuter plusieurs requêtes avec un seul client</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // D'abord, instancier le client
 $client =
     new Zend_Http_Client('http://www.exemple.com/obtientdonnees.php',

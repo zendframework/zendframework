@@ -75,7 +75,7 @@
             authentifié.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $my_calendar =
     'http://www.google.com/calendar/feeds/default/private/full';
 
@@ -115,7 +115,7 @@ $cal = new Zend_Gdata_Calendar($client);
             jeton reste valide un certain temps.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // construction sécurisée de la valeur.
 $php_self = htmlentities(substr($_SERVER['PHP_SELF'],
                                 0,

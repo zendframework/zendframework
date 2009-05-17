@@ -23,7 +23,7 @@
             résumé (propriété <code>summary</code>) de chaque entrée&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $flux = new Zend_Feed_Atom('http://atom.exemple.com/flux/');
 echo 'Le flux contient ' . $flux->count() . ' entrée(s).' . "\n\n";
 foreach ($flux as $entree) {

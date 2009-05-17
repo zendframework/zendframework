@@ -29,7 +29,7 @@
         <example id="zend.db.table.rowset.fetch.example">
             <title>Exemple de récupération d'un rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_status = 'NEW'");
 ]]></programlisting>
@@ -55,7 +55,7 @@ $rowset = $bugs->fetchAll("bug_status = 'NEW'");
         <example id="zend.db.table.rowset.rows.counting.example">
             <title>Compter les Rows dans un Rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset   = $bugs->fetchAll("bug_status = 'FIXED'");
 
 $rowCount = count($rowset);
@@ -77,7 +77,7 @@ if ($rowCount > 0) {
                 Rowset ne contient qu'un résultat (Row).
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll("bug_id = 1");
 $row    = $rowset->current();
@@ -100,7 +100,7 @@ $row    = $rowset->current();
                 correspond à un enregistrement dans la table.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // récupère tous les enregistrements de la table
@@ -136,7 +136,7 @@ foreach ($rowset as $row) {
                 présents.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // récupère tous les enregistrements de la table
@@ -164,7 +164,7 @@ $row9->save();
             exception est levée :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bugs = new Bugs();
 
 // récupère tous les enregistrements de la table
@@ -197,7 +197,7 @@ $row9->save();
         <example id="zend.db.table.rowset.to-array.example">
             <title>Utiliser toArray()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -238,7 +238,7 @@ foreach ($rowsetArray as $rowArray) {
                 chaîne de caractères représentant votre objet Rowset.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $bugs   = new Bugs();
 $rowset = $bugs->fetchAll();
 
@@ -262,7 +262,7 @@ $serializedRowset = serialize($rowset);
                 changer de valeurs dans les Rows.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowsetDisconnected = unserialize($serializedRowset);
 
 // Maintenant vous pouvez utiliser l'objet, mais en lecture seule
@@ -295,7 +295,7 @@ echo $row->bug_description;
         <example id="zend.db.table.rowset.serialize.example.set-table">
             <title>Réactivation d'un Rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $rowset = unserialize($serializedRowset);
 
 $bugs = new Bugs();
@@ -331,7 +331,7 @@ $row->save();
         <example id="zend.db.table.rowset.extending.example">
             <title>Spécifier sa propre classe de Rowset</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyRowset extends Zend_Db_Table_Rowset_Abstract
 {
     // ...personnalisations
@@ -359,7 +359,7 @@ $bugs = new Bugs(array('rowsetClass' => 'MyRowset'));
         <example id="zend.db.table.rowset.extending.example-aggregate">
             <title>Exemple d'une classe Rowset personnalisée avec une nouvelle méthode</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class MyBugsRowset extends Zend_Db_Table_Rowset_Abstract
 {
     /**

@@ -112,7 +112,7 @@
             <classname>Zend_Text_Figlet</classname> pour créer une texte FIGlet simple :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
@@ -122,7 +122,7 @@ echo $figlet->render('Zend');
             quelque chose comme ceci :
         </para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
    / //    | ||__    |  ' || | |  \ ||

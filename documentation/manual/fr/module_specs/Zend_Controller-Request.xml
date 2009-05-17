@@ -175,7 +175,7 @@
                     employer la classe <classname>Zend_Controller_Request_Apache404</classname> au
                     lieu de la classe HTTP par défaut pour votre objet de requête&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $request = new Zend_Controller_Request_Apache404();
 $front->setRequest($request);
 ]]></programlisting>
@@ -231,7 +231,7 @@ $front->setRequest($request);
                 personnalisée&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Distribue la requête avec une base d'URL réglé
  * avec Zend_Controller_Front.
@@ -332,7 +332,7 @@ $response   = $controller->dispatch();
             elle définit les méthodes suivantes&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 abstract class Zend_Controller_Request_Abstract
 {
     /**

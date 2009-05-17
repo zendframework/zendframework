@@ -60,7 +60,7 @@
             <code>setView()</code> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view = new My_Custom_View();
 $layout->setView($view);
 ]]></programlisting>
@@ -95,7 +95,7 @@ $layout->setView($view);
                 clé "Zend_Layout" :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $placeholders = new Zend_View_Helper_Placeholder();
 $layoutVars   = $placeholders->placeholder('Zend_Layout')
                              ->getArrayCopy();
@@ -183,7 +183,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')
                 proposés :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Affecte une cible à l'inflecteur:
 $layout->setInflectorTarget('layouts/:script.:suffix');
 
@@ -209,7 +209,7 @@ $layout->setViewSuffix('php');
                 sous-dossier "layouts" :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $layout->getInflector()->setTarget('layouts/:script.:suffix')
                        ->setStaticRule('suffix', 'html')
                        ->setFilterRule(array('Word_CamelCaseToUnderscore'));
@@ -225,7 +225,7 @@ $layout->getInflector()->setTarget('layouts/:script.:suffix')
                 exemple, et le passer à <classname>Zend_Layout</classname>:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $inflector = new Zend_Filter_Inflector('layouts/:script.:suffix');
 $inflector->addRules(array(
     ':script' => array('Word_CamelCaseToUnderscore'),

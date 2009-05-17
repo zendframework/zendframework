@@ -52,7 +52,7 @@
         <example id="zend.date.additional.checking.example-1">
             <title>Vérifier des dates</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Vérification de dates
 $date = '01.03.2000';
 if (Zend_Date::isDate($date)) {
@@ -107,7 +107,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>Récupérer toutes les villes disponibles</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Affiche la liste complète de toutes les villes disponibles
 // dans la classe d'aide
 print_r (Zend_Date_Cities::getCityList());
@@ -182,7 +182,7 @@ print_r (Zend_Date_Cities::getCityList());
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>Trouver la localisation d'une ville</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Trouve la localisation d'une ville avec l'horizon effectif
 print_r (Zend_Date_Cities::City('Vienna'));
 
@@ -206,7 +206,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>Calculer les informations relatives au soleil</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Retrouve la localisation d'une ville
 $city = Zend_Date_Cities::City('Vienna');
 
@@ -263,7 +263,7 @@ foreach ($info as $sun) {
         <example id="zend.date.additional.timezones.example-1">
             <title>Travailler avec les fuseaux horaires (timezones)</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Règle le fuseau horaire PHP par défaut.
 // En général, celui-ci est réglé dans php.ini.
 // Ici nous le faisons pour l'exemple
@@ -308,7 +308,7 @@ print $date->getIso();
         <example id="zend.date.additional.timezones.example-2">
             <title>Plusieurs fuseaux horaires</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Règle le fuseau horaire PHP par défaut.
 // En général, celui-ci est réglé dans php.ini
 // Ici nous le faisons pour l'exemple

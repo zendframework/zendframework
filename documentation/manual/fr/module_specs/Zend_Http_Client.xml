@@ -23,7 +23,7 @@
             <code>setConfig()</code>. <example id="zend.http.client.introduction.example-1">
                     <title>Instanciation d'un objet Zend_Http_Client</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
     'maxredirects' => 0,
     'timeout'      => 30));
@@ -159,7 +159,7 @@ $client->setConfig(array(
                     id="zend.http.client.basic-requests.example-1">
                     <title>Requête GET simple</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
 $response = $client->request();
 ]]></programlisting>
@@ -181,7 +181,7 @@ $response = $client->request();
                     id="zend.http.client.basic-requests.example-2">
                     <title>Requêtes d'autres types que GET</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // requête POST
 $response = $client->request('POST');
 
@@ -204,7 +204,7 @@ $response = $client->request();
                     id="zend.http.client.parameters.example-1">
                     <title>Ajouts de paramètres GET</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // Avec la méthode setParameterGet
 $client->setParameterGet('knight', 'lancelot');
 
@@ -228,7 +228,7 @@ $client->setParameterGet(array(
             <code>setParameterGet()</code>. <example id="zend.http.client.parameters.example-2">
                     <title>Ajout de paramètres POST</title>
 
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 // passage de paramètre POST simple
 $client->setParameterPost('language', 'fr');
 

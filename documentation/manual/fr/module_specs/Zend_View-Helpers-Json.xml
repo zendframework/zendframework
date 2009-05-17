@@ -13,7 +13,7 @@
 
     <para>L'aide de vue JSON ajoute l'en-tête suivant :</para>
 
-    <programlisting role="text"><![CDATA[
+    <programlisting language="text"><![CDATA[
 Content-Type: application/json
 ]]></programlisting>
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 
     <para>L'utilisation de l'aide de vue JSON est très simple :</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data) ?>
 ]]></programlisting>
 
@@ -45,7 +45,7 @@ Content-Type: application/json
             with a value of a boolean <code>true</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Boolean true as second argument enables layouts:
 echo $this->json($this->data, true);
 
@@ -61,7 +61,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             the options array:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->json($this->data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,

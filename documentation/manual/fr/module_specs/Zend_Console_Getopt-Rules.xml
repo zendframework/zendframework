@@ -42,7 +42,7 @@
         <example id="zend.console.getopt.rules.short.example">
             <title>Utiliser la syntaxe courte</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 ]]></programlisting>
         </example>
@@ -108,7 +108,7 @@ $opts = new Zend_Console_Getopt('abp:');
         <example id="zend.console.getopt.rules.long.example">
             <title>Utiliser la syntaxe longue</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
   array(
     'abricot|a'  => 'option abricot, sans parametres',

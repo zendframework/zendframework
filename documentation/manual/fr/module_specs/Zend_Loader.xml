@@ -36,7 +36,7 @@
         <example id="zend.loader.file.example">
             <title>Exemple d'utilisation de la méthode loadFile()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
         </example>
@@ -78,7 +78,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         <example id="zend.loader.load.class.example">
             <title>Exemple d'utilisation de la méthode loadClass()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
         '/home/production/mylib',
@@ -127,7 +127,7 @@ Zend_Loader::loadClass('Container_Tree',
         <example id="zend.loader.load.isreadable.example">
             <title>Exemple d'utilisation de la méthode isReadable()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // puis manipulation avec $filename
 }
@@ -160,7 +160,7 @@ if (Zend_Loader::isReadable($filename)) {
         <example id="zend.loader.load.autoload.example">
             <title>Exemple d'inscription de la méthode de callback autoloader</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
 ]]></programlisting>
         </example>
@@ -191,7 +191,7 @@ Zend_Loader::registerAutoload();
                 de même nom dans la classe parente et non dans la sous-classe.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class Mon_Chargeur extends Zend_Loader
 {
     public static function loadClass($class, $dirs = null)

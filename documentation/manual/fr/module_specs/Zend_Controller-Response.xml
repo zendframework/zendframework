@@ -16,7 +16,7 @@
             <classname>Zend_Controller_Front::throwExceptions(true)</classname>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
 
@@ -25,7 +25,7 @@ $front->throwExceptions(true);
             <code>sendResponse()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->sendResponse();
 ]]></programlisting>
 
@@ -36,7 +36,7 @@ $response->sendResponse();
                 <classname>Zend_Controller_Front::returnResponse(true)</classname>&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front->returnResponse(true);
 $response = $front->dispatch();
 
@@ -51,7 +51,7 @@ $response->sendResponse();
             plutôt les affichages dans l'objet de réponse&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Dans une action d'un contrôleur:
 $this->getResponse()
     ->setHeader('Content-Type', 'text/html')
@@ -86,7 +86,7 @@ $this->getResponse()
             distribution.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // récupère la réponse après distribution et affichage:
 $front->dispatch();
 $response = $front->getResponse();
@@ -110,7 +110,7 @@ $response->sendResponse();
             rendu grâce à Zend_Controller_Front::throwExceptions()&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->dispatch($request, $response);
 
@@ -227,7 +227,7 @@ $front->dispatch();
             <code>postDispatch()</code> pour en ajouter un bandeau de footer&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Considérons ce plugin comme étant enregistré
 // auprès du contrôleur frontal
 class MyPlugin extends Zend_Controller_Plugin_Abstract
@@ -266,7 +266,7 @@ class MyController extends Zend_Controller_Action
             ressemblant à ceci&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 array(
     'header'  => ..., // contenu du segment header
     'default' => ..., // corps, contenu de MyController::fooAction()

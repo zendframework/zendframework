@@ -97,7 +97,7 @@ $memObject->value = substr($memObject->value, $start, $length);
         <sect3 id="zend.memory.memory-objects.api.getRef">
             <title>La méthode getRef()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function &getRef();
 ]]></programlisting>
 
@@ -123,7 +123,7 @@ public function &getRef();
                 supplémentaires. La méthode <code>getRef()</code> retourne une référence à une
                 chaîne, qui est changé directement par l'utilisateur de l'application. Ainsi, c'est
                 une bonne idée d'utiliser la méthode <code>getRef()</code> pour le traitement des
-                données : <programlisting role="php"><![CDATA[
+                données : <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 
 $value = &$memObject->getRef();
@@ -138,14 +138,14 @@ for ($count = 0; $count < strlen($value); $count++) {
             <sect3 id="zend.memory.memory-objects.api.touch">
                 <title>La méthode touch()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 public function touch();
 ]]></programlisting>
 
             <para>
                 La méthode <code>touch()</code> devrait être employée en commun avec
                 <code>getRef()</code>. Elle signale que la valeur d'objet a été changé :
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ...
 
@@ -166,7 +166,7 @@ $memObject->touch();
             <sect3 id="zend.memory.memory-objects.api.lock">
                 <title>La méthode lock()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 public function lock();
 ]]></programlisting>
 
@@ -182,7 +182,7 @@ public function lock();
             <para>
                 Le verrouillage d'objets dans la mémoire garantit aussi que la référence
                 retournée par la méthode <code>getRef()</code> est valable jusqu'à ce que vous
-                déverrouiller l'objet : <programlisting role="php"><![CDATA[
+                déverrouiller l'objet : <programlisting language="php"><![CDATA[
 $memObject1 = $memoryManager->create($data1);
 $memObject2 = $memoryManager->create($data2);
 ...
@@ -206,7 +206,7 @@ $memObject2->unlock();
             <sect3 id="zend.memory.memory-objects.api.unlock">
                 <title>La méthode unlock()</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 public function unlock();
 ]]></programlisting>
 
@@ -219,7 +219,7 @@ public function unlock();
         <sect3 id="zend.memory.memory-objects.api.isLocked">
             <title>La méthode isLocked()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 public function isLocked();
 ]]></programlisting>
 

@@ -20,7 +20,7 @@
             méthode <code>generate()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Passage de configuration au constructor:
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes' => array(
@@ -57,7 +57,7 @@ file_put_contents('World.php', $file->generate());
 
         <para>Les 2 exemples ci-dessus vont rendre le même résultat&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World
@@ -85,7 +85,7 @@ class World
             comme suit&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $class = Zend_CodeGenerator_Php_Class::fromReflection(
     new Zend_Reflection_Class('World')
 );
@@ -107,7 +107,7 @@ file_put_contents('World.php', $file->generate());
 
         <para>La nouvelle classe ressemblera à ça&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 
 class World

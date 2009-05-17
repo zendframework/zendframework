@@ -11,7 +11,7 @@
         méthode&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $tableauFlux =
     Zend_Feed::findFeeds('http://www.exemple.com/news.html');
 ]]></programlisting>

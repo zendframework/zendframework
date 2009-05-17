@@ -20,7 +20,7 @@
 
         <para>Voici un exemple d'utilisation basique :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('My_Service_Class');
 echo $server->handle();
@@ -91,7 +91,7 @@ echo $server->handle();
 
         <para>Voici un exemple d'utilisation de type particulier:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -117,7 +117,7 @@ function myFunc($val1, $val2, $val3)
             de son type de sortie. Ceci ce fait grâce au caractère '|' de PhpDocumentor
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
 * This is a sample function
 *
@@ -171,7 +171,7 @@ function myFunc($val1, $val2, $val3)
             alors comme suit :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Toutes les méthodes publiques de My_Service_Class seront accessibles
 // via myservice.METHODNAME
 $server->setClass('My_Service_Class', 'myservice');
@@ -232,7 +232,7 @@ $server->addFunction('somefunc', 'funcs');
             une classe d'exception :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 ]]></programlisting>
 
@@ -266,7 +266,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 
         <para>Un exemple d'utilisation :</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
     Zend_Loader::loadClass($class);
@@ -314,7 +314,7 @@ echo $server->handle();
 
             <para>L'exemple ci dessous attache une fonction au service XML-RPC.</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Retourne le hash MD5 d'une valeur
  *
@@ -340,7 +340,7 @@ echo $server->handle();
                 classe en tant que méthodes XML-RPC.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
@@ -355,7 +355,7 @@ echo $server->handle();
                 espaces de noms.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
 require_once 'Services/Pick.php';
@@ -380,7 +380,7 @@ echo $server->handle();
                 d'erreurs dans les réponses XML-RPC.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
 require_once 'Services/Brush.php';
@@ -408,7 +408,7 @@ echo $server->handle();
                 personnalisé.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Exception.php';
 require_once 'Services/Comb.php';
@@ -441,7 +441,7 @@ echo $server->handle($request);
                 personnalisé.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';
@@ -478,7 +478,7 @@ echo $server->handle($request);
                 inter-requêtes.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 require_once 'Services/Request.php';
 require_once 'Services/Response.php';
 require_once 'Services/Exception.php';

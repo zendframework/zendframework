@@ -10,7 +10,7 @@
         <classname>Zend_Feed::import()</classname>&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $flux = Zend_Feed::import('http://flux.example.com/nomDuFlux');
 ]]></programlisting>
 
@@ -19,7 +19,7 @@ $flux = Zend_Feed::import('http://flux.example.com/nomDuFlux');
         contenu d'un flux à partir d'un fichier ou d'une chaîne PHP&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // on importe un flux à partir d'un fichier texte
 $fluxAPartirDeFichierTexte = Zend_Feed::importFile('flux.xml');
 
@@ -54,7 +54,7 @@ $fluxAPartirDePHP = Zend_Feed::importString($chaineFlux);
         <sect3 id="zend.feed.importing.custom.importarray">
             <title>Importer un tableau personnalisé</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // on importe un flux atom à partir d'un tableau
 $atomFeedFromArray = Zend_Feed::importArray($array);
 
@@ -68,7 +68,7 @@ $rssFeedFromArray = Zend_Feed::importArray($array, 'rss');
 
             <para>Le format du tableau doit être conforme à cette structure&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 array(
     // obligatoire
     'title'       => 'titre du flux',
@@ -327,7 +327,7 @@ array(
                 <classname>Zend_Feed::importBuilder()</classname>&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // importe un flux atom à partir d'un constructeur personnalisé
 $atomFeedFromArray =
     Zend_Feed::importBuilder(new Zend_Feed_Builder($array));
@@ -353,7 +353,7 @@ $rssFeedFromArray =
                 <code>send()</code> ou <code>saveXml().</code>
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 assert($feed instanceof Zend_Feed_Abstract);
 
 // décharge le flux dans l'affichage standard

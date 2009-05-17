@@ -9,7 +9,7 @@
         toutes les exceptions envoyées par les composants Gdata.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username, $password);
@@ -81,7 +81,7 @@ try {
         <classname>Zend_Gdata</classname> envoie quel type d'exception.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 try {
     $client =
         Zend_Gdata_ClientLogin::getHttpClient($username,

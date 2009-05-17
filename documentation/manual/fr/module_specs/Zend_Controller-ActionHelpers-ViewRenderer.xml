@@ -71,7 +71,7 @@
                         Instanciez et enregistrez votre propre objet
                         <code>ViewRenderer</code> et passez le au gestionnaire d'aides&#160;:
                     </para>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
 $viewRenderer->setView($view)
              ->setViewSuffix('php');
@@ -83,7 +83,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                         Initialisez et/ou récupérez l'objet <code>ViewRenderer</code> via le
                         gestionnaire d'aides&#160;:
                     </para>
-                    <programlisting role="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $viewRenderer =
     Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 $viewRenderer->setView($view)
@@ -104,7 +104,7 @@ $viewRenderer->setView($view)
             s'occupe de tout ceci en une passe&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 ]]></programlisting>
 
@@ -123,7 +123,7 @@ Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
         <para>Voici un exemple&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Bar controller , module foo :
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -227,7 +227,7 @@ $this->foo(); // appelle Foo_View_Helper_Foo::foo()
                     <code>noController</code> en une fois. <code>direct()</code> est un alias qui
                     permet un appel rapide depuis le contrôleur&#160;:
                 </para>
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 // Rend 'foo' au lieu du script correspondant à l'action courante
 $this->_helper->viewRenderer('foo');
 
@@ -250,7 +250,7 @@ $this->_helper->viewRenderer('form', 'html', true);
             tableau d'options, de la même manière que <code>initView()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $view    = new Zend_View(array('encoding' => 'UTF-8'));
 $options = array('noController' => true, 'neverRender' => true);
 $viewRenderer =
@@ -499,7 +499,7 @@ $viewRenderer =
                 ensuite lui passer des variables dans vos contrôleurs.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Dans le fichier de démarrage :
 Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 
@@ -570,7 +570,7 @@ class Foo_BarController extends Zend_Controller_Action
                 <code>setNeverRender()</code>) et <code>setNoRender()</code>.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Baz controller class, bar module :
 class Bar_BazController extends Zend_Controller_Action
 {
@@ -613,7 +613,7 @@ class Bar_BatController extends Zend_Controller_Action
                 ViewRenderer directement&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module :
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -654,7 +654,7 @@ class Foo_BarController extends Zend_Controller_Action
                 vue depuis le <code>ViewRenderer</code>, ou dans un contrôleur.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Bar controller class, foo module :
 class Foo_BarController extends Zend_Controller_Action
 {
@@ -697,7 +697,7 @@ class Foo_BarController extends Zend_Controller_Action
                 vous désirez un suffixe en "tpl"&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /**
  * Dans le fichier de démarrage :
  */
@@ -722,7 +722,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 simplement plusieurs fois <code>render()</code>&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SearchController extends Zend_Controller_Action
 {
     public function resultsAction()

@@ -46,7 +46,7 @@
                 disposition typique est la suivante&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -77,7 +77,7 @@ html/
 
             <para>Éditez le fichier <code>html/.htaccess</code> afin de lire ceci&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -103,7 +103,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 Si vous avez IIS 7.0, utilisez ceci pour votre configuration de réécriture&#160;:
             </para>
 
-            <programlisting role="xml"><![CDATA[
+            <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
      <system.webServer>
@@ -157,7 +157,7 @@ RewriteRule ^.*$ index.php [NC,L]
                 suit&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/chemin/vers/application/controllers');
 ]]></programlisting>
 
@@ -207,7 +207,7 @@ Zend_Controller_Front::run('/chemin/vers/application/controllers');
                 :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 
 class IndexController extends Zend_Controller_Action
@@ -251,7 +251,7 @@ class IndexController extends Zend_Controller_Action
                 saisissez ce HTML :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -278,7 +278,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 module par défaut avec une méthode <code>errorAction</code> :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 
 class ErrorController extends Zend_Controller_Action
@@ -296,7 +296,7 @@ class ErrorController extends Zend_Controller_Action
                 exemple de contenu possible :
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

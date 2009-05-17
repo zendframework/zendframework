@@ -410,7 +410,7 @@
 
             <para>
                 <code>getType($type)</code> peut être utilisée pour récupérer la
-                correspondance d'un type PHP spécifié : <programlisting role="php"><![CDATA[
+                correspondance d'un type PHP spécifié : <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
@@ -579,7 +579,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             peut être utilisé :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Chargement du WSDL dans un DOMDocument
 $dom = new DOMDocument();
 $dom->loadXML($wsdlString);

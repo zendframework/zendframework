@@ -75,7 +75,7 @@
             tous les sous-formulaires pour y activer dojo pour chacun&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Custom extends Zend_Form
 {
     public function init()

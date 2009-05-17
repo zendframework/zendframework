@@ -95,7 +95,7 @@
             <classname>Zend_Controller_Action::_getParam('error_handler')</classname>:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -133,7 +133,7 @@ class ErrorController extends Zend_Controller_Action
 
         <para>Les deux premiers types pourraient mener à une erreur 404&#160;:</para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -163,7 +163,7 @@ class ErrorController extends Zend_Controller_Action
             permet&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function errorAction()
 {
         $errors = $this->_getParam('error_handler');
@@ -213,7 +213,7 @@ public function errorAction()
             la réponse afin de rendre le contrôleur d'erreurs. Procédez alors comme suit&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->getResponse()->clearBody();
 ]]></programlisting>
     </sect4>
@@ -224,7 +224,7 @@ $this->getResponse()->clearBody();
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
             <title>Utilisation standard et désactivation</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 ]]></programlisting>
@@ -236,7 +236,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
             cependant possible de le désactiver, passez un paramètre au contrôleur frontal&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->setParam('noErrorHandler',true);
 ]]></programlisting>
@@ -244,7 +244,7 @@ $front->setParam('noErrorHandler',true);
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
             <title>Paramétrage du plugin</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
     'module'     => 'mystuff',
@@ -257,7 +257,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
             <title>Utilisation des accesseurs</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
 $plugin->setErrorHandlerModule('mystuff')
        ->setErrorHandlerController('static')
@@ -277,7 +277,7 @@ $front->registerPlugin($plugin);
             requis. En voici un exemple&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()

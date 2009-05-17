@@ -21,7 +21,7 @@
         <example id="zend.console.getopt.configuration.addrules.example">
             <title>Utilisation d'addRules()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->addRules(
   array(
@@ -53,7 +53,7 @@ $opts->addRules(
         <example id="zend.console.getopt.configuration.addhelp.example">
             <title>Utiliser setHelp()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setHelp(
     array(
@@ -95,7 +95,7 @@ $opts->setHelp(
         <example id="zend.console.getopt.configuration.addaliases.example">
             <title>Utiliser setAliases()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setAliases(
     array(
@@ -138,7 +138,7 @@ $opts->setAliases(
         <example id="zend.console.getopt.configuration.addargs.example">
             <title>Utilisation de addArguments() et setArguments()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Par défaut, le constructeur utilise $_SERVER['argv']
 $opts = new Zend_Console_Getopt('abp:');
 
@@ -229,7 +229,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
         <example id="zend.console.getopt.configuration.config.example.setoption">
             <title>Utilisation de setOption()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOption('ignoreCase', true);
 ]]></programlisting>
@@ -246,7 +246,7 @@ $opts->setOption('ignoreCase', true);
         <example id="zend.console.getopt.configuration.config.example.setoptions">
             <title>Utilisation de setOptions()</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOptions(
     array(

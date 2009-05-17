@@ -111,7 +111,7 @@
             vous souhaitez associer à votre page :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // paramètrage des mots clés
 $this->headMeta()->appendName('keywords', 'framework php productivité');
 ]]></programlisting>
@@ -122,7 +122,7 @@ $this->headMeta()->appendName('keywords', 'framework php productivité');
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // désactiver la mise en cache côté client
 $this->headMeta()->appendHttpEquiv('expires',
                                    'Wed, 26 Feb 1997 08:21:57 GMT')
@@ -135,7 +135,7 @@ $this->headMeta()->appendHttpEquiv('expires',
             ("content type"), de l'encodage, et le langage :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // régler le type de contenu et l'encodage
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'fr-FR');
@@ -146,7 +146,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
             avant une redirection est d'utiliser une métadonnée "refresh" :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // paramètrer une métadonnée refresh pour 3 secondes
 // avant une nouvel URL :
 $this->headMeta()->appendHttpEquiv('Refresh',
@@ -158,7 +158,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
             réalisez un "<code>echo</code>" de l'aide :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php echo $this->headMeta() ?>
 ]]></programlisting>
     </example>

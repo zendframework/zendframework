@@ -340,7 +340,7 @@
             <classname>Zend_Cache::factory()</classname>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache = Zend_Cache::factory('Core', 'Zend Platform');
 ]]></programlisting>
 

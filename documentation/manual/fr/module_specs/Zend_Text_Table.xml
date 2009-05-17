@@ -136,7 +136,7 @@
             <classname>Zend_Text_Table</classname> pour créer une table simple :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
 // Either simple
@@ -155,7 +155,7 @@ echo $table;
 
         <para>Ceci entraînera l'affichage suivant :</para>
 
-        <programlisting role="text"><![CDATA[
+        <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
 └──────────┴────────────────────┘

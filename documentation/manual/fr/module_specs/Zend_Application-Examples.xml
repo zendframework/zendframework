@@ -9,7 +9,7 @@
         simplement d'une extension vide de la classe de bootstrap de base&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -17,7 +17,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>Avec un fichier de configuration tel que :</para>
 
-    <programlisting role="ini"><![CDATA[
+    <programlisting language="ini"><![CDATA[
 ; APPLICATION_PATH/configs/application.ini
 [production]
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
@@ -51,7 +51,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         dans le bootstrap.
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest(array $options = array())
@@ -109,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <code>init()</code>. Voici un exemple d'un bootstrap de vue&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_View
     extends Zend_Application_ResourceAbstract
 {
@@ -146,7 +146,7 @@ class My_Bootstrap_Resource_View
         loader) et le nom court de la ressource ("view")&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
@@ -169,7 +169,7 @@ $application = new Zend_Application(
 
     <para>Les ressources peuvent en appeler d'autres via le bootstrap parent&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_ResourceAbstract
 {
@@ -191,7 +191,7 @@ class My_Bootstrap_Resource_Layout
         l'application&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
@@ -202,7 +202,7 @@ $application->bootstrap()
         ressources spécifiques&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrap('db');
 
@@ -216,7 +216,7 @@ echo $service->handle();
         internes, vous pouvez surcharger&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
 ]]></programlisting>

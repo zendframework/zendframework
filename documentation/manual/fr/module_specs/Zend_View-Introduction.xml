@@ -34,7 +34,7 @@
             ressembler à ceci :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // utilise un modèle pour obtenir les données sur les livres :
 // auteurs et titres
 $data = array(
@@ -77,7 +77,7 @@ echo $view->render('booklist.php');
             ceci :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php if ($this->books): ?>
 
     <!-- La table des livres -->
@@ -125,7 +125,7 @@ echo $view->render('booklist.php');
                     dossiers de ce type :
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 chemin/vers/
     helpers/
     filters/
@@ -212,7 +212,7 @@ chemin/vers/
             <listitem>
                 <para>Activer les dans votre fichier <code>.htaccess</code> :</para>
 
-                <programlisting role="apache"><![CDATA[
+                <programlisting language="apache"><![CDATA[
 php_value "short_open_tag" "on"
 ]]></programlisting>
 
@@ -229,7 +229,7 @@ php_value "short_open_tag" "on"
                     convertir les balises courtes en balises longues à la volée :
                 </para>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $view->setUseStreamWrapper(true);
 ]]></programlisting>
 

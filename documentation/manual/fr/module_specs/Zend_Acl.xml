@@ -121,7 +121,7 @@
                 "<code>member</code>", et "<code>admin</code>")&#160;:
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $acl->addRole(new Zend_Acl_Role('guest'))
@@ -185,7 +185,7 @@ echo $acl->isAllowed('unUtilisateur', 'someResource') ? 'autorisé' : 'refusé';
             créons une nouvelle instance d'ACL sans paramètres&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 ]]></programlisting>
 
@@ -257,7 +257,7 @@ $acl = new Zend_Acl();
             acceptable. Ces groupes peuvent être ajoutés au registre des rôles comme suit&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 // Ajoute des groupes au registre des rôles en utilisant Zend_Acl_Role
@@ -305,7 +305,7 @@ $acl->addRole(new Zend_Acl_Role('administrateur'));
             minimal de code. Pour définir les permissions comme définies ci-dessus&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
 $roleinvite = new Zend_Acl_Role('invité');
@@ -350,7 +350,7 @@ $acl->allow('administrateur');
             <code>isAllowed()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 echo $acl->isAllowed('invité', null, 'voir') ?
      "autorisé" : "refusé";
 // autorisé

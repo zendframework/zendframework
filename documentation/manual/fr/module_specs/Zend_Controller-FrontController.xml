@@ -58,7 +58,7 @@
                 Pour désactiver <code>ErrorHandler</code>, exécutez l'action suivante à
                 n'importe quel point précédant l'appel à <code>dispatch()</code>&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Désactivez le plugin ErrorHandler :
 $front->setParam('noErrorHandler', true);
 ]]></programlisting>
@@ -66,7 +66,7 @@ $front->setParam('noErrorHandler', true);
                 Pour désactiver <code>ViewRenderer</code>, exécutez l'action suivante à
                 n'importe quel point précédant l'appel à <code>dispatch()</code>&#160;:
             </para>
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Désactivez l'aide ViewRenderer :
 $front->setParam('noViewRenderer', true);
 ]]></programlisting>
@@ -92,7 +92,7 @@ $front->setParam('noViewRenderer', true);
                 frontal.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 ]]></programlisting>
         </sect3>
@@ -111,7 +111,7 @@ $front = Zend_Controller_Front::getInstance();
 
             <para>Quelques exemples&#160;:</para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Régler le dossier des contrôleurs par défaut :
 $front->setControllerDirectory('../application/controllers');
 
@@ -243,7 +243,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 de l'environnement du contrôleur frontal.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Instancie le contrôleur frontal, règle les dossiers de contrôleurs,
 // et distribue en une seule étape :
 Zend_Controller_Front::run('../application/controllers');
@@ -492,7 +492,7 @@ Zend_Controller_Front::run('../application/controllers');
             <code>getInstance()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class Mon_Controleur_Frontal extends Zend_Controller_Front
 {
     public static function getInstance()

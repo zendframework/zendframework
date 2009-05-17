@@ -46,7 +46,7 @@
             <classname>Zend_Cache</classname> est donnée dans l'exemple suivant&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Nous choisissons un backend (par exemple 'File' ou 'Sqlite')
 $backendName = '[...]';
 
@@ -94,7 +94,7 @@ $cache = Zend_Cache::factory($frontendName,
             donnée&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->save($grande_donnees,
              'monIDUnique',
              array('tagA', 'tagB', 'tagC'));
@@ -118,7 +118,7 @@ $cache->save($grande_donnees,
             utiliser la méthode <code>remove()</code>&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->remove('idAEffacer');
 ]]></programlisting>
 
@@ -128,7 +128,7 @@ $cache->remove('idAEffacer');
             les caches&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // nettoie tous les enregistrements
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 
@@ -140,7 +140,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
             Si vous voulez effacer les caches correspondant aux balises "tagA" et "tagC"&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,
               array('tagA', 'tagC'));
 ]]></programlisting>
@@ -150,7 +150,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG,
             "tagC"&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
               array('tagA', 'tagC'));
 ]]></programlisting>
@@ -159,7 +159,7 @@ $cache->clean(Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
             Si vous voulez effacer les caches correspondant aux balises "tagA" ou "tagC"&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
               array('tagA', 'tagC'));
 ]]></programlisting>

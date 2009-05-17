@@ -19,7 +19,7 @@
             l'API d'indexation de <classname>Zend_Search_Lucene</classname> :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Création de l'index
 $index = Zend_Search_Lucene::create('/data/my-index');
 
@@ -49,7 +49,7 @@ $index->addDocument($doc);
             différence est l'appel de la méthode open() à la place de <code>create()</code>.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Ouverture d'un index existant
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -80,7 +80,7 @@ $index->addDocument($doc);
             demandant la propriété 'id' :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $removePath = ...;
 $hits = $index->find('path:' . $removePath);
 foreach ($hits as $hit) {
@@ -109,7 +109,7 @@ foreach ($hits as $hit) {
             total de documents non supprimés.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $indexSize = $index->count();
 $documents = $index->numDocs();
 ]]></programlisting>
@@ -119,7 +119,7 @@ $documents = $index->numDocs();
             utilisée pour vérifier si un document a été supprimé.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 for ($count = 0; $count < $index->maxDoc(); $count++) {
     if ($index->isDeleted($count)) {
         echo "Le document #$id a été supprimé.\n";
@@ -171,7 +171,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             segments de l'index en un seul nouveau segment :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Ouverture d'un index existant.
 $index = Zend_Search_Lucene::open('/data/my-index');
 
@@ -302,7 +302,7 @@ $index->optimize();
             :
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Récupération des permissions par défaut
 $currentPermissions =
     Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();

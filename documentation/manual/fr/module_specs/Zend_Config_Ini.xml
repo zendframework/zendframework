@@ -35,7 +35,7 @@
             Par défaut, le séparateur de clé est le caractère point (.), cependant cela peut
             être changé en changeant la clé de <code>$options</code> en construisant l'objet
             <classname>Zend_Config_Ini</classname>. Par exemple&#160;:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
 $options = new Zend_Config_Ini('/chemin/vers/config.ini',
                                'test',
@@ -60,7 +60,7 @@ $options = new Zend_Config_Ini('/chemin/vers/config.ini',
             <filename>/chemin/vers/config.ini</filename>&#160;:
         </para>
 
-        <programlisting role="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 ; Données de configuration du site de production
 [production]
 webhost                  = www.example.com
@@ -84,7 +84,7 @@ database.params.password = devsecret
             fichier INI et la section de test&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/chemin/vers/config.ini', 'test');
 
 echo $config->database->params->host;   // affiche "dev.example.com"

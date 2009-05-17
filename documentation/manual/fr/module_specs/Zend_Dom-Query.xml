@@ -123,7 +123,7 @@
                     trouvera le lien vers le mot "One" dans le code ci-dessous&#160;:
                 </para>
 
-                <programlisting role="html"><![CDATA[
+                <programlisting language="html"><![CDATA[
 <div>
     <table>
         <tr>
@@ -156,7 +156,7 @@
             ci-dessus&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $dom = new Zend_Dom_Query($html);
 $results = $dom->query('.foo .bar a');
 

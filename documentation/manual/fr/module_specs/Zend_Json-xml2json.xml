@@ -22,7 +22,7 @@
         :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // la fonction fromXml prend simplement une chaîne
 // contenant le XML comme entrée
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
@@ -51,7 +51,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 
     <para>Chaîne XML fournie à la fonction <classname>Zend_Json::fromXml()</classname> :</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
     <book id="1">
@@ -79,7 +79,7 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         :
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 {
    "books" : {
       "book" : [ {

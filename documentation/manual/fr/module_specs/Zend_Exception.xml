@@ -17,7 +17,7 @@
             Zend Framework&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 try {
     Zend_Loader::loadClass('classnonexistante');
 } catch (Zend_Exception $e) {

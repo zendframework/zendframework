@@ -14,7 +14,7 @@
     <example id="zend.mail.sending.example-1">
         <title>Envoyer un émail via SMTP</title>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>

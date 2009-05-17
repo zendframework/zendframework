@@ -24,7 +24,7 @@
             l'identifiant interne du document Lucene et au <link
             linkend="zend.search.lucene.searching.results-scoring">score</link> de hit. Si le
             document indexé possède les mêmes champs stockés, vous devrez utiliser la méthode
-            <code>getDocument()</code> pour y accéder :<programlisting role="php"><![CDATA[
+            <code>getDocument()</code> pour y accéder :<programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
@@ -79,7 +79,7 @@ foreach ($hits as $hit) {
 
         <para>
             L'optimisation complète de l'index peut être effectuée avec la méthode
-            <code>optimize()</code> :<programlisting role="php"><![CDATA[
+            <code>optimize()</code> :<programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->optimize();
@@ -330,7 +330,7 @@ unset($index);
 
         <para>
             Le second est d'effectuer une opération de commit avant la fin du script exécution
-            :<programlisting role="php"><![CDATA[
+            :<programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 
 $index->commit();
@@ -475,7 +475,7 @@ foreach ($docIds as $id) {
 
         <para>
             L'encodage peut être explicitement spécifié en passant un paramètre optionnel à la
-            méthode de création d'un champ :<programlisting role="php"><![CDATA[
+            méthode de création d'un champ :<programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
 $doc->addField(Zend_Search_Lucene_Field::Text('title',
                                               $title,
@@ -490,7 +490,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
         <para>
             Si le paramètre optionnel de l'encodage est omis, la locale courante est utilisée.
             La locale courante peut contenir des données d'encodage en plus des spécification de
-            langue :<programlisting role="php"><![CDATA[
+            langue :<programlisting language="php"><![CDATA[
 setlocale(LC_ALL, 'fr_FR');
 ...
 
@@ -513,7 +513,7 @@ setlocale(LC_ALL, 'ru_RU.UTF-8');
 
         <para>
             L'encodage peut être passée comme paramètre optionnel si la requête est analysée
-            explicitement avant la recherche :<programlisting role="php"><![CDATA[
+            explicitement avant la recherche :<programlisting language="php"><![CDATA[
 $query =
     Zend_Search_Lucene_Search_QueryParser::parse($queryStr, 'iso-8859-5');
 $hits = $index->find($query);
@@ -522,7 +522,7 @@ $hits = $index->find($query);
 
         <para>
             L'encodage par défaut peut également être spécifié avec la méthode
-            <code>setDefaultEncoding()</code> :<programlisting role="php"><![CDATA[
+            <code>setDefaultEncoding()</code> :<programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-1');
 $hits = $index->find($queryStr);
 ...

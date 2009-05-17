@@ -21,7 +21,7 @@
             l'adaptateur, soit en spécifiant à l'adaptateur de l'activer plus tard.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $params = array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
@@ -51,7 +51,7 @@ $db->getProfiler()->setEnabled(true);
         <para>
             Un argument booléen active le profileur si c'est une valeur <code>true</code>, ou
             le désactive si <code>false</code>. La classe de profileur est celle par défaut, par
-            exemple <classname>Zend_Db_Profiler</classname>. <programlisting role="php"><![CDATA[
+            exemple <classname>Zend_Db_Profiler</classname>. <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
@@ -60,7 +60,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         <para>
             Une instance d'un objet profileur fait que l'adaptateur utilise cet objet. L'objet
             doit être de type <classname>Zend_Db_Profiler</classname> ou une sous-classe.
-            L'activation du profileur est faite séparément. <programlisting role="php"><![CDATA[
+            L'activation du profileur est faite séparément. <programlisting language="php"><![CDATA[
 $profiler = Mon_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
@@ -91,19 +91,19 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             contenant des propriétés, qui sont traitées comme les clés de tableaux décrites
             ci-dessus. Par exemple, une fichier "config.ini" peut contenir les données
             suivantes&#160;:
-            <programlisting role="ini"><![CDATA[
+            <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "Mon_Db_Profiler"
 db.profiler.enabled = true
 ]]></programlisting>
             Cette configuration peut être appliquée par le code PHP suivant&#160;:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
             La propriété "<code>instance</code>" peut être utilisée comme ceci&#160;:
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $profiler = new Mon_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -124,7 +124,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
             méthode <code>getProfiler()</code> de l'adaptateur&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $profileur = $db->getProfiler();
 ]]></programlisting>
 
@@ -212,7 +212,7 @@ $profileur = $db->getProfiler();
             vient de s'exécuter&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $query = $profileur->getLastQueryProfile();
 echo $query->getQuery();
 ]]></programlisting>
@@ -223,7 +223,7 @@ echo $query->getQuery();
             plus longue&#160;:
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $tempsTotal       = $profileur->getTotalElapsedSecs();
 $nombreRequetes   = $profileur->getTotalNumQueries();
 $tempsLePlusLong  = 0;
@@ -272,7 +272,7 @@ echo "Requête la plus lente (SQL) : \n"
                 filtre, passez une valeur <code>null</code> à la méthode.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Seules les requêtes qui durent au moins 5 secondes sont profilées :
 $profileur->setFilterElapsedSecs(5);
 
@@ -348,7 +348,7 @@ $profileur->setFilterElapsedSecs(null);
                 filtres en passant <code>null</code> comme unique argument.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // profile uniquement les requêtes SELECT
 $profileur->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
@@ -378,7 +378,7 @@ $profileur->setFilterQueryType(null);
                 la liste des constantes de types de requête.
             </para>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // Récupère uniquement les profils des requêtes SELECT
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 

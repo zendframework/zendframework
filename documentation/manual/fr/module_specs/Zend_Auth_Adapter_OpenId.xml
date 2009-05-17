@@ -74,7 +74,7 @@
             <code>$_GET['openid_mode']</code> ou <code>$_POST['openid_mode']</code> existe.
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <?php
 $status = "";
 $auth = Zend_Auth::getInstance();

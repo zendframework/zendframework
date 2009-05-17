@@ -9,7 +9,7 @@
         ressemble à ceci&#160;:
     </para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 {
     public function generate();
@@ -45,7 +45,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
 
     <para>Un cas d'utilisation typique pourrait ressembler à ceci&#160;:</para>
 
-    <programlisting role="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Créer une instance de Zend_View
 $view = new Zend_View();
 

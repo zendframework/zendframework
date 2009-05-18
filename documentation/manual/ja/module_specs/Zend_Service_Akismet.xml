@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15157 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
 
@@ -48,7 +48,7 @@
             といった場合にこのメソッドを使用します。
         </para>
 
-        <programlisting role="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // API キー、そしてアプリケーションやリソースへの URL
 // を指定してインスタンスを作成します
 $akismet = new Zend_Service_Akismet($apiKey,
@@ -130,7 +130,7 @@ if ($akismet->verifyKey($apiKey) {
                 <para>
                     <code>comment_type</code> は、データの形式です。
                     ここで指定する値は API で定義されており、
-                    'comment'、'trackback'、'pingback' およｂ
+                    'comment'、'trackback'、'pingback' および
                     空の文字列 ('') などがあります。しかし、
                     任意の値を指定することができます。
                 </para>
@@ -178,7 +178,7 @@ if ($akismet->verifyKey($apiKey) {
         <example id="zend.service.akismet.isspam.example-1">
             <title>isSpam() の使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 ' . (Windows; U; Windows NT ' .
@@ -223,7 +223,7 @@ if ($akismet->isSpam($data)) {
         <example id="zend.service.akismet.submitspam.example-1">
             <title>submitSpam() の使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .
@@ -265,7 +265,7 @@ $akismet->submitSpam($data));
         <example id="zend.service.akismet.submitham.example-1">
             <title>submitHam() の使用法</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $data = array(
     'user_ip'              => '111.222.111.222',
     'user_agent'           => 'Mozilla/5.0 (Windows; U; Windows NT 5.2;' .

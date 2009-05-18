@@ -721,7 +721,7 @@ class Zend_Filter_Input
             $validatorList = array();
             foreach ($validatorRule as $key => $value) {
                 if (is_int($key)) {
-                    $validatorList[] = $value;
+                    $validatorList[$key] = $value;
                 }
             }
 
@@ -746,7 +746,15 @@ class Zend_Filter_Input
             } else if (!is_array($validatorRule[self::MESSAGES])) {
                 $validatorRule[self::MESSAGES] = array($validatorRule[self::MESSAGES]);
             } else if (!array_intersect_key($validatorList, $validatorRule[self::MESSAGES])) {
-                $validatorRule[self::MESSAGES] = array($validatorRule[self::MESSAGES]);
+            	// There are now corresponding numeric keys in the validation rule messages array
+            	// Treat it as a named messages list for all rule validators
+            	/** @todo Update documentation to describe this possibility */
+                $unifiedMessages = $validatorRule[self::MESSAGES];
+                $validatorRule[self::MESSAGES] = array();
+
+                foreach ($validatorList as $key => $validator) {
+                	$validatorRule[self::MESSAGES][$key] = $unifiedMessages;
+                }
             }
 
             /**
@@ -754,14 +762,13 @@ class Zend_Filter_Input
              */
             if (!isset($validatorRule[self::VALIDATOR_CHAIN])) {
                 $validatorRule[self::VALIDATOR_CHAIN] = new Zend_Validate();
-                $i = 0;
-                foreach ($validatorList as $validator) {
 
+                foreach ($validatorList as $key => $validator) {
                     if (is_string($validator) || is_array($validator)) {
                         $validator = $this->_getValidator($validator);
                     }
-                    if (isset($validatorRule[self::MESSAGES][$i])) {
-                        $value = $validatorRule[self::MESSAGES][$i];
+                    if (isset($validatorRule[self::MESSAGES][$key])) {
+                        $value = $validatorRule[self::MESSAGES][$key];
                         if (is_array($value)) {
                             $validator->setMessages($value);
                         } else {
@@ -770,9 +777,8 @@ class Zend_Filter_Input
                     }
 
                     $validatorRule[self::VALIDATOR_CHAIN]->addValidator($validator, $validatorRule[self::BREAK_CHAIN]);
-                    ++$i;
                 }
-                $validatorRule[self::VALIDATOR_CHAIN_COUNT] = $i;
+                $validatorRule[self::VALIDATOR_CHAIN_COUNT] = count($validatorList);
             }
 
             /**

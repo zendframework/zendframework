@@ -901,6 +901,28 @@ $validators = array(
                 messages, and the tokens you can use in the message templates.
             </para>
 
+            <para>
+                If you have only one validator in validation rule or all used validators
+                has the same messages set, then they can be referenced without additional
+                array construction:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array(
+    'month' => array(
+        new Zend_Validate_Between(1, 12),
+        'messages' => array(
+                        Zend_Validate_Between::NOT_BETWEEN =>
+                            'Month value %value% must be between ' .
+                            '%min% and %max%',
+                        Zend_Validate_Between::NOT_BETWEEN_STRICT =>
+                            'Month value %value% must be strictly between ' .
+                            '%min% and %max%'
+        )
+    )
+);
+]]></programlisting>
+
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.global">

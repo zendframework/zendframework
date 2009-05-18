@@ -493,7 +493,7 @@ foreach($result->types AS $type) {
 
         <para>All elements implement the interface <classname>Zend_Soap_Wsdl_Element_Interface</classname>
         that proxies a <code>getName()</code> and a <code>getDocumentation()</code> function with the
-        unique identifier of the element and its documentation respectivly. All the elements have
+        unique identifier of the element and its documentation respectively. All the elements have
         public properties that describe its state in more detail and also contain their nested
         dependencies for easy iteratable access.</para>
     </sect2>

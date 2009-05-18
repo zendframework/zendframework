@@ -1481,6 +1481,17 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         $table = $this->_table['products'];
         $this->assertType('string', serialize($table));
     }
+    
+    /**
+     * @group ZF-1343
+     */
+    public function testTableFetchallCanHandleWhereWithParameritizationCharacters()
+    {
+        $table = $this->_table['products'];
+        $where = $table->getAdapter()->quoteInto('product_name = ?', "some?product's");
+        $rows = $table->fetchAll($where);
+        $this->assertEquals(0, count($rows));
+    }
 
     /**
      * Returns a clean Zend_Cache_Core with File backend

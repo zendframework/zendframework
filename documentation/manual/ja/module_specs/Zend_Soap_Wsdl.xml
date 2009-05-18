@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15341 -->
+<!-- EN-Revision: 15617 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -76,15 +76,16 @@
                 to a corresponding complexType entry.
             </para>
             <para>
-                All standard XSD types have both 'element' and 'complexType' definitions
-                (see <ulink url="http://schemas.xmlsoap.org/soap/encoding/"/>).
+                標準XSD型のすべてで 'element' および 'complexType' 定義の両方があります。
+                (<ulink url="http://schemas.xmlsoap.org/soap/encoding/"/>参照)
             </para>
             <para>
                 All non-standard types, which may be added using <classname>Zend_Soap_Wsdl::addComplexType()</classname> method, are
                 described using 'complexType' node of '/definitions/types/schema/' section of WSDL document.
             </para>
             <para>
-                So <code>addMessage()</code> method always uses 'type' attribute to describe types.
+                そこで<code>addMessage()</code>メソッドは型を表現するために、
+                常に 'type' 属性を使います。
             </para>
         </note>
     </sect2>
@@ -99,7 +100,7 @@
             It joins a set of Web Service methods defined in terms of Zend_Soap_Server implementation.
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_porttypes"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_porttypes"/>をご覧ください。
         </para>
     </sect2>
 
@@ -138,7 +139,7 @@
             </note>
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_request-response"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_request-response"/>をご覧ください。
         </para>
     </sect2>
 
@@ -177,7 +178,7 @@
             '&lt;soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/&gt;
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_bindings"/>をご覧ください。
         </para>
     </sect2>
 
@@ -192,7 +193,7 @@
             '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the SOAP protocol format.
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_bindings"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_bindings"/>をご覧ください。
         </para>
     </sect2>
 
@@ -213,7 +214,7 @@
             Zend_Soap_Server implementation uses <code>$serviceUri . '#' . $methodName</code> for SOAP operation action name.
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_soap:operation"/>をご覧ください。
         </para>
     </sect2>
 
@@ -263,7 +264,7 @@
             script name for  the Web Service definition mode using set of functions.
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_services"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_services"/>をご覧ください。
         </para>
     </sect2>
 
@@ -274,22 +275,22 @@
 
             <itemizedlist>
                 <listitem>
-                    <para>PHP strings &lt;-&gt; <code>xsd:string</code>.</para>
+                    <para>PHP文字列 &lt;-&gt; <code>xsd:string</code></para>
                 </listitem>
                 <listitem>
-                    <para>PHP integers &lt;-&gt; <code>xsd:int</code>.</para>
+                    <para>PHP integer &lt;-&gt; <code>xsd:int</code></para>
                 </listitem>
                 <listitem>
-                    <para>PHP floats and doubles &lt;-&gt; <code>xsd:float</code>.</para>
+                    <para>PHP floatおよびdouble値 &lt;-&gt; <code>xsd:float</code></para>
                 </listitem>
                 <listitem>
-                    <para>PHP booleans &lt;-&gt; <code>xsd:boolean</code>.</para>
+                    <para>PHPブール値 &lt;-&gt; <code>xsd:boolean</code></para>
                 </listitem>
                 <listitem>
-                    <para>PHP arrays &lt;-&gt; <code>soap-enc:Array</code>.</para>
+                    <para>PHP配列 &lt;-&gt; <code>soap-enc:Array</code></para>
                 </listitem>
                 <listitem>
-                    <para>PHP object &lt;-&gt; <code>xsd:struct</code>.</para>
+                    <para>PHPオブジェクト &lt;-&gt; <code>xsd:struct</code></para>
                 </listitem>
                 <listitem>
                     <para>
@@ -307,7 +308,7 @@
                     </para>
                 </listitem>
                 <listitem>
-                    <para>PHP void &lt;-&gt; empty type.</para>
+                    <para>PHP void &lt;-&gt; 空の型</para>
                 </listitem>
                 <listitem>
                     <para>If type is not matched to any of these types by some reason, then <code>xsd:anyType</code> is used.</para>
@@ -324,7 +325,7 @@
             <para>
                 <code>getType($type)</code> method may be used to get mapping for a specified PHP type:
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 $wsdl = new Zend_Soap_Wsdl('My_Web_Service', $myWebServiceUri);
 
@@ -415,7 +416,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
             </para>
 
             <para>
-                See <ulink url="http://www.w3.org/TR/wsdl#_types"/> for the details.
+                詳しくは<ulink url="http://www.w3.org/TR/wsdl#_types"/>をご覧ください。
             </para>
 
         </sect3>
@@ -431,15 +432,15 @@ $soapMyClassType = $wsdl->getType('MyClass');
             '/definitions/binding/soap:binding' element is used to signify that the binding is bound to the SOAP protocol format.
         </para>
         <para>
-            See <ulink url="http://www.w3.org/TR/wsdl#_documentation"/> for the details.
+            詳しくは<ulink url="http://www.w3.org/TR/wsdl#_documentation"/>をご覧ください。
         </para>
     </sect2>
 
     <sect2 id="zend.soap.wsdl.retrieve">
         <title>確定したWSDL文書を取得</title>
         <para>
-            <code>toXML()</code>, <code>toDomDocument()</code> and <code>dump($filename = false)</code> methods may be used to get
-            WSDL document as an XML, DOM structure or a file.
+            <code>toXML()</code>や<code>toDomDocument()</code>および<code>dump($filename = false)</code>メソッドは、
+            WSDL文書をXMLやDOMの構造もしくはファイルとして取得するために使われるかもしれません。
         </para>
     </sect2>
 
@@ -447,23 +448,24 @@ $soapMyClassType = $wsdl->getType('MyClass');
         <title>WSDL文書をパース</title>
 
         <para>
-            Zend_Soap_Wsdl also contains a parser for WSDL documents that has its main application in unit-testing and code-generation
-            for SOAP Webservices (Client and Server). The following example will show how the Parser can be used:
+            Zend_Soap_WsdlはSOAPウェブサービス（クライアントとサーバー）をユニットテストおよびコード生成する際に、
+            その主要なアプリケーションがあるWSDL文書のためのパーサーも有します。
+            下記にどのようにパーサーを使うか例を示します:
         </para>
 
-        <programlisting role="php"><![CDATA[
-// Load WSDL into DOMDocument
+        <programlisting language="php"><![CDATA[
+// WSDLをDOMDocumentに読み込み
 $dom = new DOMDocument();
 $dom->loadXML($wsdlString);
 
-// Create parser
+// パーサ作成
 $parser = Zend_Soap_Wsdl_Parser::factory($dom);
 $result = $parser->parse();
 
-// Webservice Name
+// ウェブサービス名
 echo $result->getName();
 
-// Access Ports and inner elements
+// 接続ポートと内部要素
 foreach($result->ports AS $port) {
     echo $port->getName();
     foreach($port->bindings AS $binding) {
@@ -476,30 +478,32 @@ foreach($result->ports AS $port) {
         }
     }
 }
-// You can access bindings, messages and operations
-// and other elements directly too
+// あなたはバインディング、メッセージ、
+// 操作および他の要素に直接アクセスすることもできます。
 foreach($result->operations AS $operation) {
-    // do stuff
+    // 処理
 }
 foreach($result->bindings AS $binding {
-    // do stuff
+    // 処理
 }
 foreach($result->messages AS $message) {
-    // do stuff
+    // 処理
 }
 foreach($result->services AS $service) {
-    // do stuff
+    // 処理
 }
 foreach($result->types AS $type) {
-    // do stuff
+    // 処理
 }
 ]]></programlisting>
 
-        <para>All elements implement the interface <classname>Zend_Soap_Wsdl_Element_Interface</classname>
-        that proxies a <code>getName()</code> and a <code>getDocumentation()</code> function with the
-        unique identifier of the element and its documentation respectivly. All the elements have
-        public properties that describe its state in more detail and also contain their nested
-        dependencies for easy iteratable access.</para>
+        <para>
+            それぞれの要素および文書を一意に識別する
+            <code>getName()</code>および<code>getDocumentation()</code>関数を代理する
+            インターフェース<classname>Zend_Soap_Wsdl_Element_Interface</classname>をすべての要素は実装します。
+            すべての要素はより詳細な状態を示す public プロパティーを持ち、
+            さらに簡単に反復してアクセスできる入れ子の依存関係も有します。
+        </para>
     </sect2>
 
 </sect1>

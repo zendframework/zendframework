@@ -220,7 +220,6 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select3->joinLeft('tableB', 'tableA.id=tableB.id');
         $select3Text = $select3->__toString();
         $this->assertNotContains('zfaccounts', $select3Text);
-        echo $select3Text;
         
         $select4 = $table->select(true);
         $select4->setIntegrityCheck(false);
@@ -229,7 +228,6 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $this->assertContains('zfaccounts', $select4Text);
         $this->assertContains('tableA', $select4Text);
         $this->assertContains('tableB', $select4Text);
-        echo $select4Text;
     }
 
     // ZF-3239

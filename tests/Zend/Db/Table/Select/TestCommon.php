@@ -68,6 +68,8 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
 
     /**
      * Get a Zend_Db_Table to provide the base select()
+     * 
+     * @return Zend_Db_Table_Abstract
      */
     protected function _getSelectTable($table)
     {
@@ -195,6 +197,39 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select = $table->select();
 
         $this->assertType('Zend_Db_Table_TableProducts', $select->getTable());
+    }
+    
+    /**
+     * @group ZF-2798
+     */
+    public function testTableWillReturnSelectObjectWithFromPart()
+    {
+        $table = $this->_getSelectTable('accounts');
+        $select1 = $table->select();
+        $this->assertEquals(0, count($select1->getPart(Zend_Db_Table_Select::FROM)));
+        $this->assertEquals(0, count($select1->getPart(Zend_Db_Table_Select::COLUMNS)));
+        
+        $select2 = $table->select(true);
+        $this->assertEquals(1, count($select2->getPart(Zend_Db_Table_Select::FROM)));
+        $this->assertEquals(1, count($select2->getPart(Zend_Db_Table_Select::COLUMNS)));
+        
+        $this->assertEquals($select1->__toString(), $select2->__toString());
+        
+        $select3 = $table->select();
+        $select3->setIntegrityCheck(false);
+        $select3->joinLeft('tableB', 'tableA.id=tableB.id');
+        $select3Text = $select3->__toString();
+        $this->assertNotContains('zfaccounts', $select3Text);
+        echo $select3Text;
+        
+        $select4 = $table->select(true);
+        $select4->setIntegrityCheck(false);
+        $select4->joinLeft('tableB', 'tableA.id=tableB.id');
+        $select4Text = $select4->__toString();
+        $this->assertContains('zfaccounts', $select4Text);
+        $this->assertContains('tableA', $select4Text);
+        $this->assertContains('tableB', $select4Text);
+        echo $select4Text;
     }
 
     // ZF-3239

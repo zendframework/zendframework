@@ -34,8 +34,8 @@
                     <simpara>
                         <code>$strategy</code> - 複雑な型（オブジェクト）を検出する方策を
                         識別するために用いられるオプションのフラグです。
-                        これはバージョン1.7以前はboolean <code>$extractComplexTypes</code>でしたが、
-                        後方互換性のためにbooleanとしてまだ設定できます。
+                        これはバージョン1.7以前はブール値 <code>$extractComplexTypes</code>でしたが、
+                        後方互換性のためにまだブール値として設定できます。
                         デフォルトで、1.6の検出動作が設定されます。
                         複雑な型の検出の方策について詳しくは、この節をご覧下さい:
                         <xref linkend="zend.soap.wsdl.types.add_complex" />
@@ -48,43 +48,43 @@
     <sect2 id="zend.soap.wsdl.addmessage">
         <title>addMessage()メソッド</title>
         <para>
-            <code>addMessage($name, $parts)</code> メソッドは、新しいメッセージの説明をWSDL文書に加えます。
+            <code>addMessage($name, $parts)</code>メソッドは、新しいメッセージの説明をWSDL文書に加えます。
             (/definitions/message 要素)
         </para>
         <para>
-            Each message correspond to methods in terms of <classname>Zend_Soap_Server</classname> and
-            <classname>Zend_Soap_Client</classname> functionality.
+            <classname>Zend_Soap_Server</classname>および<classname>Zend_Soap_Client</classname>の機能に関して、
+            各々のメッセージはメソッドと対応します。
         </para>
         <para>
-           <code>$name</code> parameter represents message name.
+           <code>$name</code>パラメータはメッセージの名前を示します。
         </para>
         <para>
-           <code>$parts</code> parameter is an array of message parts which describe SOAP call parameters.
-           It's an associative array: 'part name' (SOAP call parameter name) =&gt; 'part type'.
+           <code>$parts</code>パラメータはSOAP呼び出しパラメータを表すメッセージ部分の配列です。
+           それは連想配列です: 'part name' (SOAP呼び出しパラメータ名) =&gt; 'part type'.
         </para>
         <para>
-            Type mapping management is performed using <code>addTypes()</code>, <code>addTypes()</code> and
-            <code>addComplexType()</code> methods (see below).
+            型マッピングの管理は<code>addTypes()</code>や<code>addTypes()</code>、
+            および<code>addComplexType()</code>メソッド（下記参照）を用いて実行されます。
         </para>
         <note>
             <para>
-                Messages parts can use either 'element' or 'type' attribute for typing
-                (see <ulink url="http://www.w3.org/TR/wsdl#_messages"/>).
+                メッセージ部分は 'element' または 'type' 属性を型決定のために使います。
+                (<ulink url="http://www.w3.org/TR/wsdl#_messages"/>をご覧ください).
             </para>
             <para>
-                'element' attribute must refer to a corresponding element of data type definition. 'type' attribute refers
-                to a corresponding complexType entry.
+                'element' 属性は、データ型定義の対応する要素を参照しなければなりません。
+                'type' 属性は、対応するcomplexType項目を参照します。
             </para>
             <para>
                 標準XSD型のすべてで 'element' および 'complexType' 定義の両方があります。
                 (<ulink url="http://schemas.xmlsoap.org/soap/encoding/"/>参照)
             </para>
             <para>
-                All non-standard types, which may be added using <classname>Zend_Soap_Wsdl::addComplexType()</classname> method, are
-                described using 'complexType' node of '/definitions/types/schema/' section of WSDL document.
+                <classname>Zend_Soap_Wsdl::addComplexType()</classname>メソッドを用いて追加されるであろう、
+                標準ではない型のすべてがWSDL文書の '/definitions/types/schema/' セクションの 'complexType' ノードで記述されます。
             </para>
             <para>
-                そこで<code>addMessage()</code>メソッドは型を表現するために、
+                そして<code>addMessage()</code>メソッドは型を表現するために、
                 常に 'type' 属性を使います。
             </para>
         </note>
@@ -93,11 +93,11 @@
     <sect2 id="zend.soap.wsdl.add_port_type">
         <title>addPortType()メソッド</title>
         <para>
-            <code>addPortType($name)</code> method adds new port type to the WSDL document
-            (/definitions/portType) with the specified port type name.
+            <code>addPortType($name)</code>メソッドは指定されたポートタイプ名で
+            WSDL文書 (/definitions/portType) に新規のポートタイプを追加します。
         </para>
         <para>
-            It joins a set of Web Service methods defined in terms of Zend_Soap_Server implementation.
+            Zend_Soap_Server実行に関して定義されるウェブサービスメソッドのセットと結びつきます。
         </para>
         <para>
             詳しくは<ulink url="http://www.w3.org/TR/wsdl#_porttypes"/>をご覧ください。
@@ -107,31 +107,31 @@
     <sect2 id="zend.soap.wsdl.add_port_operation">
         <title>addPortOperation()メソッド</title>
         <para>
-            <code>addPortOperation($portType, $name, $input = false, $output = false, $fault = false)</code> method
-            adds new port operation to the specified port type of the WSDL document
-            (/definitions/portType/operation).
+            <code>addPortOperation($portType, $name, $input = false, $output = false, $fault = false)</code>
+            メソッドは、新しいポート・オペレーションをWSDL文書 (/definitions/portType/operation) の
+            指定されたポート・タイプに加えます。
         </para>
         <para>
-            Each port operation corresponds to a class method (if Web Service is based on a class) or function
-            (if Web Service is based on a set of methods) in terms of Zend_Soap_Server implementation.
+            各々のポート・オペレーションはZend_Soap_Server実行に関して、
+            クラス・メソッド（ウェブサービスがクラスに基づくならば）
+            または関数（ウェブサービスがメソッドセットに基づくならば）に対応します。
         </para>
         <para>
-            It also adds corresponding port operation messages depending on specified
-            <code>$input</code>, <code>$output</code> and <code>$fault</code> parameters.
-
+            それも、指定されたパラメータ、<code>$input</code>や<code>$output</code>および<code>$fault</code>に従って、
+            対応するポート・オペレーション・メッセージを加えます。
             <note>
                 <para>
-                    Zend_Soap_Server component generates two messages for each port operation while describing service based on
-                    <classname>Zend_Soap_Server</classname> class:
+                    <classname>Zend_Soap_Server</classname>クラスに基づいてサービスを記述するために、
+                    Zend_Soap_Serverコンポーネントは各々のポート・オペレーションのために2つのメッセージを生成します:
                     <itemizedlist>
                         <listitem>
                             <para>
-                                input message with name <code>$methodName . 'Request'</code>.
+                                <code>$methodName . 'Request'</code>という名前で入力メッセージ。
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                output message with name <code>$methodName . 'Response'</code>.
+                                <code>$methodName . 'Response'</code>という名前で出力メッセージ。
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -146,26 +146,28 @@
     <sect2 id="zend.soap.wsdl.add_binding">
         <title>addBinding()メソッド</title>
         <para>
-            <code>addBinding($name, $portType)</code> method adds new binding to the WSDL document (/definitions/binding).
+            <code>addBinding($name, $portType)</code>メソッドは、新しいバインディングをWSDL文書 (/definitions/binding) に加えます。
         </para>
         <para>
-            'binding' WSDL document node defines message format and protocol details for operations and messages
-            defined by a particular portType (see <ulink url="http://www.w3.org/TR/wsdl#_bindings"/>).
+            'binding' WSDL文書ノードでは、
+            メッセージ形式と特定のportTypeによって定義されるオペレーションとメッセージに関するプロトコル詳細を定義します。
+            (<ulink url="http://www.w3.org/TR/wsdl#_bindings"/>をご覧ください)
         </para>
         <para>
-            The method creates binding node and returns it. Then it may be used to fill with actual data.
+            メソッドはバインディング・ノードをつくって、それを返します。
+            それから、実際のデータで満たすために使われるかもしれません。
         </para>
 
         <para>
-            Zend_Soap_Server implementation uses <code>$serviceName . 'Binding'</code> name for 'binding' element of WSDL document.
+            Zend_Soap_Server実行ではWSDL文書の 'binding' 要素のために<code>$serviceName . 'Binding'</code> の名前が使われます。
         </para>
     </sect2>
 
     <sect2 id="zend.soap.wsdl.add_binding_operation">
         <title>addBindingOperation()メソッド</title>
         <para>
-            <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)</code> method adds
-            an operation to a binding element (/definitions/binding/operation) with the specified name.
+            <code>addBindingOperation($binding, $name, $input = false, $output = false, $fault = false)</code>
+            メソッドはバインディング要素 (/definitions/binding/operation) に指定された名前で操作を追加します。
         </para>
         <para>
             It takes <code>XML_Tree_Node</code> object returned by <code>addBinding()</code> as an input

@@ -75,6 +75,9 @@ abstract class Zend_Db_Table_Abstract
     const DEFAULT_CLASS    = 'defaultClass';
     const DEFAULT_DB       = 'defaultDb';
 
+    const SELECT_WITH_FROM_PART    = true;
+    const SELECT_WITHOUT_FROM_PART = false;
+    
     /**
      * Default Zend_Db_Adapter_Abstract object.
      *
@@ -907,11 +910,11 @@ abstract class Zend_Db_Table_Abstract
      * @param bool $withFromPart Whether or not to include the from part of the select based on the table
      * @return Zend_Db_Table_Select
      */
-    public function select($withFromPart = false)
+    public function select($withFromPart = self::SELECT_WITHOUT_FROM_PART)
     {
         require_once 'Zend/Db/Table/Select.php';
         $select = new Zend_Db_Table_Select($this);
-        if ($withFromPart == true) {
+        if ($withFromPart == self::SELECT_WITH_FROM_PART) {
             $select->from($this->info(self::NAME), Zend_Db_Table_Select::SQL_WILDCARD, $this->info(self::SCHEMA));
         }
         return $select;

@@ -221,7 +221,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $select3Text = $select3->__toString();
         $this->assertNotContains('zfaccounts', $select3Text);
         
-        $select4 = $table->select(true);
+        $select4 = $table->select(Zend_Db_Table_Abstract::SELECT_WITH_FROM_PART);
         $select4->setIntegrityCheck(false);
         $select4->joinLeft('tableB', 'tableA.id=tableB.id');
         $select4Text = $select4->__toString();

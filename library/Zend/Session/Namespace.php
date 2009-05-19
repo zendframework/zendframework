@@ -71,6 +71,25 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
     protected static $_singleInstances = array();
 
     /**
+     * resetSingleInstance()
+     *
+     * @param string $namespaceName
+     * @return null
+     */
+    public static function resetSingleInstance($namespaceName = null)
+    {
+        if ($namespaceName != null) {
+            if (array_key_exists($namespaceName, self::$_singleInstances)) {
+                unset(self::$_singleInstances[$namespaceName]);
+            }
+            return;
+        }
+        
+        self::$_singleInstances = array();
+        return;
+    }
+    
+    /**
      * __construct() - Returns an instance object bound to a particular, isolated section
      * of the session, identified by $namespace name (defaulting to 'Default').
      * The optional argument $singleInstance will prevent construction of additional

@@ -57,6 +57,13 @@ class Zend_Session extends Zend_Session_Abstract
     public static $_unitTestEnabled = false;
 
     /**
+     * $_throwStartupException
+     *
+     * @var bool|bitset This could also be a combiniation of error codes to catch
+     */
+    protected static $_throwStartupExceptions = true;
+    
+    /**
      * Check whether or not the session was started
      *
      * @var bool
@@ -120,7 +127,8 @@ class Zend_Session extends Zend_Session_Abstract
      */
     private static $_localOptions = array(
         'strict'                => '_strict',
-        'remember_me_seconds'   => '_rememberMeSeconds'
+        'remember_me_seconds'   => '_rememberMeSeconds',
+        'throw_startup_exceptions' => '_throwStartupExceptions'
     );
 
     /**
@@ -438,6 +446,7 @@ class Zend_Session extends Zend_Session_Abstract
             throw new Zend_Session_Exception('You must explicitly start the session with Zend_Session::start() when session options are set to strict.');
         }
 
+        $filename = $linenum = null;
         if (!self::$_unitTestEnabled && headers_sent($filename, $linenum)) {
             /** @see Zend_Session_Exception */
             require_once 'Zend/Session/Exception.php';
@@ -456,17 +465,32 @@ class Zend_Session extends Zend_Session_Abstract
          * Hack to throw exceptions on start instead of php errors
          * @see http://framework.zend.com/issues/browse/ZF-1325
          */
+        
+        $errorLevel = (is_int(self::$_throwStartupExceptions)) ? self::$_throwStartupExceptions : E_ALL;
+        
         /** @see Zend_Session_Exception */
         if (!self::$_unitTestEnabled) {
-            require_once 'Zend/Session/Exception.php';
-            set_error_handler(array('Zend_Session_Exception', 'handleSessionStartError'), E_ALL);
-            session_start();
-            restore_error_handler();
-            if (Zend_Session_Exception::$sessionStartError !== null) {
-            set_error_handler(array('Zend_Session_Exception', 'handleSilentWriteClose'), E_ALL);
-            session_write_close();
-            restore_error_handler();
-            throw new Zend_Session_Exception(__CLASS__ . '::' . __FUNCTION__ . '() - ' . Zend_Session_Exception::$sessionStartError);
+            
+            if (self::$_throwStartupExceptions) {
+                require_once 'Zend/Session/Exception.php';
+                set_error_handler(array('Zend_Session_Exception', 'handleSessionStartError'), $errorLevel);
+            }
+            
+            $startedCleanly = session_start();
+            
+            if (self::$_throwStartupExceptions) {
+                restore_error_handler();
+            }
+            
+            if (!$startedCleanly || Zend_Session_Exception::$sessionStartError != null) {
+                if (self::$_throwStartupExceptions) {
+                    set_error_handler(array('Zend_Session_Exception', 'handleSilentWriteClose'), $errorLevel);
+                }
+                session_write_close();
+                if (self::$_throwStartupExceptions) {
+                    restore_error_handler();
+                    throw new Zend_Session_Exception(__CLASS__ . '::' . __FUNCTION__ . '() - ' . Zend_Session_Exception::$sessionStartError);
+                }
             }
         }
 
